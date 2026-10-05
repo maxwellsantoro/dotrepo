@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "study": "atlas-sdk-followup",
+  "frozenAt": "2026-10-05T05:24:33.699695+00:00",
+  "selectionBeforeCoverageInspection": true,
+  "consumerClass": "operator-controlled",
+  "cacheState": "warm",
+  "snapshotId": "8384e75929143cbe8a6d8fb27e375d5863eb9c591105765eba1402783336b4cd",
+  "consumerPolicy": "explicit-high-confidence-extraction",
+  "runnerSha256": "0099772a61a5242ca6d3c4c5658ff940e0db4092717f7f3d03c1ce3a6357f3aa",
+  "toolVersions": {
+    "java": "javac 21.0.12.1",
+    "zig": "0.14.0"
+  },
+  "sdkSource": {
+    "root": "/tmp/dotrepo-readiness-tools/zig-sdk-compat",
+    "libSystemSource": "/private/tmp/dotrepo-readiness-tools/zig-macos-aarch64-0.14.0/lib/libc/darwin/libSystem.tbd",
+    "libSystemSha256": "cdb2217019505764ef1c0ede11f4702e5cbc8900aae7759bd08aed08ba5e6b33",
+    "headerSource": "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include",
+    "sdkSettingsSha256": "7b93ad7e534cc4b31c6a4e39d19b5e0288acf2168c2649479a796d1cb51939fb",
+    "selectionShimSha256": "601cf90423ef16472873610e5777ab4befa7a637a521cd90ebd0093598cecd50"
+  },
+  "tasks": [
+    {
+      "id": "sha256-benchmark-atlas-build",
+      "taskClass": "build",
+      "identity": "github.com/maxwellsantoro/sha256-benchmark-atlas",
+      "revision": "866fe127542178c35515f51afed30c41616bdd77",
+      "environmentId": "operator-macos-arm64-zig-sdk-v3",
+      "acceptableInstructions": [
+        {
+          "command": "uv run sha256-atlas build",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "component": null,
+          "prerequisites": [
+            "uv sync",
+            "README quick-start compiler/toolchain prerequisites",
+            "task-local Zig 0.14 compatible SDK selection"
+          ],
+          "parameters": {},
+          "environment": {
+            "DOTREPO_STUDY_ZIG_SDK": "/tmp/dotrepo-readiness-tools/zig-sdk-compat"
+          },
+          "sourcePaths": [
+            "README.md"
+          ],
+          "purpose": "build"
+        }
+      ],
+      "setupCommands": [
+        "uv sync"
+      ],
+      "oracle": "build",
+      "timeoutSecondsPerCommand": 900,
+      "evidence": [
+        {
+          "url": "https://github.com/maxwellsantoro/sha256-benchmark-atlas/blob/866fe127542178c35515f51afed30c41616bdd77/README.md",
+          "locator": "uv run sha256-atlas build",
+          "checkedAt": "2026-10-05T05:24:33.624077+00:00",
+          "sourceRevision": "866fe127542178c35515f51afed30c41616bdd77",
+          "sha256": "8900b54f80e5daa46a356ae39d95ff8bbb142880c1462a29c6a7f778d839e33f"
+        }
+      ]
+    },
+    {
+      "id": "sha256-benchmark-atlas-correctness",
+      "taskClass": "correctness",
+      "identity": "github.com/maxwellsantoro/sha256-benchmark-atlas",
+      "revision": "866fe127542178c35515f51afed30c41616bdd77",
+      "environmentId": "operator-macos-arm64-zig-sdk-v3",
+      "acceptableInstructions": [
+        {
+          "command": "uv run sha256-atlas correctness --cases 1000 --skip-million",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "component": null,
+          "prerequisites": [
+            "uv sync",
+            "README quick-start compiler/toolchain prerequisites",
+            "uv run sha256-atlas build",
+            "task-local Zig 0.14 compatible SDK selection"
+          ],
+          "parameters": {},
+          "environment": {
+            "DOTREPO_STUDY_ZIG_SDK": "/tmp/dotrepo-readiness-tools/zig-sdk-compat"
+          },
+          "sourcePaths": [
+            "README.md"
+          ],
+          "purpose": "test"
+        }
+      ],
+      "setupCommands": [
+        "uv sync",
+        "uv run sha256-atlas build"
+      ],
+      "oracle": "correctness",
+      "timeoutSecondsPerCommand": 900,
+      "evidence": [
+        {
+          "url": "https://github.com/maxwellsantoro/sha256-benchmark-atlas/blob/866fe127542178c35515f51afed30c41616bdd77/README.md",
+          "locator": "uv run sha256-atlas correctness --cases 1000 --skip-million",
+          "checkedAt": "2026-10-05T05:24:33.699355+00:00",
+          "sourceRevision": "866fe127542178c35515f51afed30c41616bdd77",
+          "sha256": "8900b54f80e5daa46a356ae39d95ff8bbb142880c1462a29c6a7f778d839e33f"
+        }
+      ]
+    }
+  ],
+  "selection": "Targeted SDK follow-up for the two Atlas tasks that failed setup in the eight-task readiness repeat. Same source revision, commands, cohort, oracles and 900-second budget. The preceding 6/8 result stays unchanged; this two-task packet is scored separately, not a replacement denominator.",
+  "measurementBoundary": "Warm shared tool/download caches; fresh checkout and build outputs per arm. Explicit source/profile HTTP, checkout, setup, command execution and oracle are timed. Clone/bootstrap/source adjudication and package-manager network counts are outside transport totals. No modeled or net-cost claim.",
+  "repeatOfWorkloadSha256": "1f294e164109631ac7e400ab86d06b6392c4350e50f8a8ca32a85fe225d5d1fd",
+  "knownCoverage": true,
+  "followUpOfWorkloadSha256": "2fad1c907f6d9d03fc616a94748b046b37fbb582be47e1441637571595f39eb8"
+}

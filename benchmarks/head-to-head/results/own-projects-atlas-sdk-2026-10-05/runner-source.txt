@@ -133,9 +133,9 @@ SDK_ROOT = Path("/tmp/dotrepo-readiness-tools/zig-sdk-compat")
 def study_inputs(study):
     if study == "initial":
         return REVISIONS, CASES
-    if study not in {"readiness-repeat", "atlas-sdk-followup", "atlas-sdk-scoped"}:
+    if study not in {"readiness-repeat", "atlas-sdk-followup"}:
         raise ValueError("unknown fixed study")
-    if study.startswith("atlas-sdk"):
+    if study == "atlas-sdk-followup":
         cases = []
         for original in CASES[2:4]:
             case = list(original)
@@ -175,15 +175,8 @@ def sdk_shim():
     )
 
 
-def zig_shim(executable, selector_directory):
-    return (
-        f'#!/bin/sh\nPATH={shlex.quote(str(selector_directory))}:"$PATH"\nexport PATH\n'
-        f'exec {shlex.quote(str(executable))} "$@"\n'
-    )
-
-
 def study_environment(study):
-    return {"DOTREPO_STUDY_ZIG_SDK": str(SDK_ROOT)} if study.startswith("atlas-sdk") else {}
+    return {"DOTREPO_STUDY_ZIG_SDK": str(SDK_ROOT)} if study == "atlas-sdk-followup" else {}
 
 
 def sdk_source():
@@ -292,7 +285,7 @@ def freeze(output, sources, meta_path, inventory_path, study="initial"):
             "consumerPolicy": consumer.COMMAND_POLICY,
             "runnerSha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
             "toolVersions": versions,
-            "sdkSource": sdk_source() if study.startswith("atlas-sdk") else None,
+            "sdkSource": sdk_source() if study == "atlas-sdk-followup" else None,
             "tasks": tasks,
             "selection": "All four substantive other public projects; exclude dotrepo self-test and throwaway canary. Two tasks each; no post-coverage substitutions.",
             "measurementBoundary": "Warm shared tool/download caches; fresh checkout and build outputs per arm. Explicit source/profile HTTP, checkout, setup, command execution and oracle are timed. Clone/bootstrap/source adjudication and package-manager network counts are outside transport totals. No modeled or net-cost claim.",
@@ -310,7 +303,7 @@ def freeze(output, sources, meta_path, inventory_path, study="initial"):
             "No task substitutions. RamenOS uses the proposed prerequisite-fix commit; "
             "other revisions and commands are unchanged. This is not a held-out study."
         )
-        if study.startswith("atlas-sdk"):
+        if study == "atlas-sdk-followup":
             previous = parent.parent.parent / "own-projects-readiness-2026-10-05/workload.json"
             workload["followUpOfWorkloadSha256"] = hashlib.sha256(previous.read_bytes()).hexdigest()
             workload["selection"] = (
@@ -319,14 +312,6 @@ def freeze(output, sources, meta_path, inventory_path, study="initial"):
                 "oracles and 900-second budget. The preceding 6/8 result stays unchanged; "
                 "this two-task packet is scored separately, not a replacement denominator."
             )
-            workload["sdkSelectionScope"] = (
-                "zig-child-only" if study == "atlas-sdk-scoped" else "all-build-tools"
-            )
-            if study == "atlas-sdk-scoped":
-                failed = previous.parent.parent / "own-projects-atlas-sdk-2026-10-05/workload.json"
-                workload["priorSdkAttemptWorkloadSha256"] = hashlib.sha256(
-                    failed.read_bytes()
-                ).hexdigest()
         write(path, workload)
 
 
@@ -432,7 +417,7 @@ def run(output, sources):
         and workload["toolVersions"] != tool_versions()
     ):
         raise ValueError("tool versions changed after freeze")
-    if workload.get("study", "").startswith("atlas-sdk") and workload["sdkSource"] != sdk_source():
+    if workload.get("study") == "atlas-sdk-followup" and workload["sdkSource"] != sdk_source():
         raise ValueError("SDK inputs changed after freeze")
     (output / "attempts").mkdir()
     (output / "http").mkdir()
@@ -449,7 +434,6 @@ def run(output, sources):
             "pythonLaunch": "Upstream python/python3 names use uv with the project's .venv interpreter when available, otherwise the runner interpreter. Source files unchanged.",
             "toolVersions": workload.get("toolVersions"),
             "sdkSource": workload.get("sdkSource"),
-            "sdkSelectionScope": workload.get("sdkSelectionScope"),
             "transport": "Only explicit source/profile HTTP is counted; package-manager traffic is uninstrumented. Bootstrap metadata/source clones excluded and disclosed.",
             "modelUsage": "No model calls in runner. Operator preparation and this coding session are unallocated; totals remain unknown.",
         },
@@ -463,15 +447,8 @@ def run(output, sources):
             shim = shims / name
             shim.write_text(python_shim())
             shim.chmod(0o755)
-        if workload.get("study", "").startswith("atlas-sdk"):
-            selector_directory = shims
-            if workload["study"] == "atlas-sdk-scoped":
-                selector_directory = temporary / "zig-sdk-selector"
-                selector_directory.mkdir()
-                shim = shims / "zig"
-                shim.write_text(zig_shim(shutil.which("zig"), selector_directory))
-                shim.chmod(0o755)
-            shim = selector_directory / "xcrun"
+        if workload.get("study") == "atlas-sdk-followup":
+            shim = shims / "xcrun"
             shim.write_text(sdk_shim())
             shim.chmod(0o755)
         env = dict(os.environ)
@@ -666,9 +643,7 @@ def main():
     parser.add_argument("--meta", type=Path)
     parser.add_argument("--inventory", type=Path)
     parser.add_argument(
-        "--study",
-        choices=("initial", "readiness-repeat", "atlas-sdk-followup", "atlas-sdk-scoped"),
-        default="initial",
+        "--study", choices=("initial", "readiness-repeat", "atlas-sdk-followup"), default="initial"
     )
     args = parser.parse_args()
     if args.mode == "freeze":

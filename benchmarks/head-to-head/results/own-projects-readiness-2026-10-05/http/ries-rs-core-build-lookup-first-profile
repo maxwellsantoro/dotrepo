@@ -1,0 +1,141 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-05T04:12:27.402074198Z",
+    "snapshotDigest": "530438b6fd022b936a9e5882a43e465bdeb33637048ed6d4ae126b655b1d08b6",
+    "staleAfter": "2026-10-12T04:12:27.402074198Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "maxwellsantoro",
+    "repo": "ries-rs",
+    "source": "https://github.com/maxwellsantoro/ries-rs"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/maxwellsantoro/ries-rs/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/maxwellsantoro/ries-rs",
+    "generatedAt": "2026-09-16T16:31:27.131449Z",
+    "evidencePath": "repos/github.com/maxwellsantoro/ries-rs/evidence.md",
+    "freshnessStatus": "fresh",
+    "ageDays": 18,
+    "staleAfterDays": 30,
+    "sourceRevision": "0904c3ed17d2f221ea565a7b9e15929d9fe8b419"
+  },
+  "purpose": "High-performance Rust reimplementation of Robert Munafo’s RIES (RILYBOT Inverse Equation Solver). Given any target number, it discovers elegant algebraic expressions and equations that evaluate exactly to it — now with parallel search, PSLQ integer relations, Python bindings, and WebAssembly support.",
+  "name": "ries-rs",
+  "homepage": "https://maxwellsantoro.com/projects/ries-rs/app/",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Rust",
+    "HTML",
+    "Python",
+    "Shell",
+    "TypeScript",
+    "JavaScript"
+  ],
+  "topics": [
+    "equation-solver",
+    "mathematics",
+    "numerical-methods",
+    "python-bindings",
+    "rust",
+    "scientific-computing",
+    "symbolic-computation",
+    "wasm",
+    "inverse-symbolic-calculator"
+  ],
+  "execution": {
+    "build": "cargo build --release --locked",
+    "test": "cargo nextest run --tests --locked"
+  },
+  "docs": {
+    "root": "https://maxwellsantoro.com/projects/ries-rs/app/"
+  },
+  "ownership": {
+    "maintainers": [
+      "@maxwellsantoro"
+    ],
+    "securityContact": "https://github.com/maxwellsantoro/ries-rs/security/advisories/new"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "imported",
+    "confidence": "high",
+    "provenance": [
+      "imported"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "fieldEvidence": {
+    "docs.getting_started": {
+      "checkedAt": "2026-09-16T16:31:27.131449Z",
+      "confidence": "high",
+      "method": "not_found_in_inspected_sources",
+      "reason": "no getting started link detected",
+      "state": "not_found"
+    },
+    "docs.root": {
+      "checkedAt": "2026-09-16T16:31:27.131449Z",
+      "confidence": "high",
+      "method": "unspecified",
+      "reason": "docs URL present",
+      "state": "present"
+    },
+    "owners.security_contact": {
+      "checkedAt": "2026-09-16T16:31:27.131449Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "actionable security reporting URL",
+      "source": ".github/SECURITY.md",
+      "state": "present"
+    },
+    "owners.team": {
+      "checkedAt": "2026-09-16T16:31:27.131449Z",
+      "confidence": "high",
+      "method": "not_found_in_inspected_sources",
+      "reason": "no single clear team in CODEOWNERS",
+      "state": "not_found"
+    },
+    "repo.description": {
+      "checkedAt": "2026-09-16T16:31:27.131449Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "constrained by GitHub repository metadata",
+      "source": "GitHub API",
+      "state": "present"
+    },
+    "repo.homepage": {
+      "checkedAt": "2026-09-16T16:31:27.131449Z",
+      "confidence": "high",
+      "method": "unspecified",
+      "reason": "set and passes quality check",
+      "state": "present"
+    },
+    "repo.name": {
+      "checkedAt": "2026-09-16T16:31:27.131449Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "extracted from README heading with post-cleaners",
+      "source": "README.md",
+      "state": "present"
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/maxwellsantoro/ries-rs/profile.json",
+    "repository": "/v0/repos/github.com/maxwellsantoro/ries-rs/index.json",
+    "trust": "/v0/repos/github.com/maxwellsantoro/ries-rs/trust.json",
+    "queryTemplate": "/v0/repos/github.com/maxwellsantoro/ries-rs/query?path={dot_path}",
+    "indexPath": "repos/github.com/maxwellsantoro/ries-rs/"
+  }
+}

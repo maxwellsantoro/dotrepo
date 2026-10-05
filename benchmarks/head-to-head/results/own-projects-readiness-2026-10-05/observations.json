@@ -1,0 +1,856 @@
+{
+  "version": 1,
+  "workloadSha256": "2fad1c907f6d9d03fc616a94748b046b37fbb582be47e1441637571595f39eb8",
+  "runs": [
+    {
+      "taskId": "RamenOS-host-build",
+      "arm": "source-first",
+      "revision": "4faea185ccd0b5bf310f2b949ce51b31fcbe0503",
+      "environmentId": "operator-macos-arm64-readiness-v2",
+      "cacheState": "warm",
+      "startedAt": "2026-10-05T04:29:41.598882+00:00",
+      "endedAt": "2026-10-05T04:38:34.914007+00:00",
+      "elapsedMs": 533300.7587080065,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 6561,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": null,
+      "attempts": [
+        {
+          "origin": "source",
+          "instruction": {
+            "command": "just build-host",
+            "workingDirectory": ".",
+            "scope": "component",
+            "component": "host components",
+            "prerequisites": [
+              "just codegen (included by wrapper)",
+              "pinned Rust nightly and just"
+            ],
+            "parameters": {},
+            "environment": {},
+            "sourcePaths": [
+              "docs/GETTING_STARTED.md"
+            ],
+            "purpose": "build"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "log": {
+            "path": "attempts/RamenOS-host-build-source-first-0.json",
+            "sha256": "1d827fb692610d3c0c22be97a3b3cd0d16d83872a43d66fe795327d67fe3c52b"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "RamenOS-host-build",
+      "arm": "lookup-first",
+      "revision": "4faea185ccd0b5bf310f2b949ce51b31fcbe0503",
+      "environmentId": "operator-macos-arm64-readiness-v2",
+      "cacheState": "warm",
+      "startedAt": "2026-10-05T04:38:34.922236+00:00",
+      "endedAt": "2026-10-05T04:43:23.228251+00:00",
+      "elapsedMs": 288300.975791004,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 6561,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": {
+        "snapshotId": "8384e75929143cbe8a6d8fb27e375d5863eb9c591105765eba1402783336b4cd",
+        "policy": "explicit-high-confidence-extraction",
+        "valuePresent": false,
+        "accepted": false,
+        "instruction": null,
+        "fallbackReasons": [
+          "repository-not-found"
+        ]
+      },
+      "attempts": [
+        {
+          "origin": "fallback",
+          "instruction": {
+            "command": "just build-host",
+            "workingDirectory": ".",
+            "scope": "component",
+            "component": "host components",
+            "prerequisites": [
+              "just codegen (included by wrapper)",
+              "pinned Rust nightly and just"
+            ],
+            "parameters": {},
+            "environment": {},
+            "sourcePaths": [
+              "docs/GETTING_STARTED.md"
+            ],
+            "purpose": "build"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "log": {
+            "path": "attempts/RamenOS-host-build-lookup-first-0.json",
+            "sha256": "c8ab1cbd9117e0ed7bfe82fd54d06d10ecc1f352dabfebd52070c3d0069af676"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "RamenOS-host-proof",
+      "arm": "lookup-first",
+      "revision": "4faea185ccd0b5bf310f2b949ce51b31fcbe0503",
+      "environmentId": "operator-macos-arm64-readiness-v2",
+      "cacheState": "warm",
+      "startedAt": "2026-10-05T04:43:23.232082+00:00",
+      "endedAt": "2026-10-05T04:50:50.884187+00:00",
+      "elapsedMs": 447643.7247910071,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 11493,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": {
+        "snapshotId": "8384e75929143cbe8a6d8fb27e375d5863eb9c591105765eba1402783336b4cd",
+        "policy": "explicit-high-confidence-extraction",
+        "valuePresent": false,
+        "accepted": false,
+        "instruction": null,
+        "fallbackReasons": [
+          "repository-not-found"
+        ]
+      },
+      "attempts": [
+        {
+          "origin": "fallback",
+          "instruction": {
+            "command": "just foundry-agent-task-proof-rt",
+            "workingDirectory": ".",
+            "scope": "component",
+            "component": "host task proof",
+            "prerequisites": [
+              "just codegen (included by wrapper)",
+              "pinned Rust nightly and just"
+            ],
+            "parameters": {},
+            "environment": {},
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "log": {
+            "path": "attempts/RamenOS-host-proof-lookup-first-0.json",
+            "sha256": "8b88885a772b905411efc607ccaf56b862df4e5fee158cf31674587526d06888"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "RamenOS-host-proof",
+      "arm": "source-first",
+      "revision": "4faea185ccd0b5bf310f2b949ce51b31fcbe0503",
+      "environmentId": "operator-macos-arm64-readiness-v2",
+      "cacheState": "warm",
+      "startedAt": "2026-10-05T04:50:50.885363+00:00",
+      "endedAt": "2026-10-05T04:54:44.664147+00:00",
+      "elapsedMs": 233774.46720801527,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 11493,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": null,
+      "attempts": [
+        {
+          "origin": "source",
+          "instruction": {
+            "command": "just foundry-agent-task-proof-rt",
+            "workingDirectory": ".",
+            "scope": "component",
+            "component": "host task proof",
+            "prerequisites": [
+              "just codegen (included by wrapper)",
+              "pinned Rust nightly and just"
+            ],
+            "parameters": {},
+            "environment": {},
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "log": {
+            "path": "attempts/RamenOS-host-proof-source-first-0.json",
+            "sha256": "7b5a5648b623bfae984bf78b65ef57c01a242ceb4507dab2474c492bcd02e639"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "sha256-benchmark-atlas-build",
+      "arm": "source-first",
+      "revision": "866fe127542178c35515f51afed30c41616bdd77",
+      "environmentId": "operator-macos-arm64-readiness-v2",
+      "cacheState": "warm",
+      "startedAt": "2026-10-05T04:54:44.665246+00:00",
+      "endedAt": "2026-10-05T04:58:06.684011+00:00",
+      "elapsedMs": 202013.94912498654,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 5216,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": null,
+      "attempts": [
+        {
+          "origin": "source",
+          "instruction": {
+            "command": "uv run sha256-atlas build",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "prerequisites": [
+              "uv sync",
+              "README quick-start compiler/toolchain prerequisites"
+            ],
+            "parameters": {},
+            "environment": {},
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "build"
+          },
+          "exitCode": 1,
+          "oraclePassed": false,
+          "log": {
+            "path": "attempts/sha256-benchmark-atlas-build-source-first-0.json",
+            "sha256": "27e2bb59587ca410ba6b5af72cabb599c3ae2a9dffd7d58d930c92cfdba4af21"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "sha256-benchmark-atlas-build",
+      "arm": "lookup-first",
+      "revision": "866fe127542178c35515f51afed30c41616bdd77",
+      "environmentId": "operator-macos-arm64-readiness-v2",
+      "cacheState": "warm",
+      "startedAt": "2026-10-05T04:58:06.686062+00:00",
+      "endedAt": "2026-10-05T05:01:37.460669+00:00",
+      "elapsedMs": 210756.64179201704,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 5216,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": {
+        "snapshotId": "8384e75929143cbe8a6d8fb27e375d5863eb9c591105765eba1402783336b4cd",
+        "policy": "explicit-high-confidence-extraction",
+        "valuePresent": false,
+        "accepted": false,
+        "instruction": null,
+        "fallbackReasons": [
+          "repository-not-found"
+        ]
+      },
+      "attempts": [
+        {
+          "origin": "fallback",
+          "instruction": {
+            "command": "uv run sha256-atlas build",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "prerequisites": [
+              "uv sync",
+              "README quick-start compiler/toolchain prerequisites"
+            ],
+            "parameters": {},
+            "environment": {},
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "build"
+          },
+          "exitCode": 1,
+          "oraclePassed": false,
+          "log": {
+            "path": "attempts/sha256-benchmark-atlas-build-lookup-first-0.json",
+            "sha256": "ece8b405f763ed51ae33712f56f4ae15fb6bbb2777accd47272f5b797b191867"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "sha256-benchmark-atlas-correctness",
+      "arm": "lookup-first",
+      "revision": "866fe127542178c35515f51afed30c41616bdd77",
+      "environmentId": "operator-macos-arm64-readiness-v2",
+      "cacheState": "warm",
+      "startedAt": "2026-10-05T05:01:37.463488+00:00",
+      "endedAt": "2026-10-05T05:06:28.073792+00:00",
+      "elapsedMs": 290603.80283300765,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 5216,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": {
+        "snapshotId": "8384e75929143cbe8a6d8fb27e375d5863eb9c591105765eba1402783336b4cd",
+        "policy": "explicit-high-confidence-extraction",
+        "valuePresent": false,
+        "accepted": false,
+        "instruction": null,
+        "fallbackReasons": [
+          "repository-not-found"
+        ]
+      },
+      "attempts": [
+        {
+          "origin": "fallback",
+          "instruction": {
+            "command": "uv run sha256-atlas correctness --cases 1000 --skip-million",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "prerequisites": [
+              "uv sync",
+              "README quick-start compiler/toolchain prerequisites",
+              "uv run sha256-atlas build"
+            ],
+            "parameters": {},
+            "environment": {},
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 1,
+          "oraclePassed": false,
+          "log": {
+            "path": "attempts/sha256-benchmark-atlas-correctness-lookup-first-0.json",
+            "sha256": "b952ab4b8b85c0fc4d60d980798473d148ded4f3a23c5da2d65e17de25da7e36"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "sha256-benchmark-atlas-correctness",
+      "arm": "source-first",
+      "revision": "866fe127542178c35515f51afed30c41616bdd77",
+      "environmentId": "operator-macos-arm64-readiness-v2",
+      "cacheState": "warm",
+      "startedAt": "2026-10-05T05:06:28.075903+00:00",
+      "endedAt": "2026-10-05T05:10:16.861753+00:00",
+      "elapsedMs": 228780.98599999794,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 5216,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": null,
+      "attempts": [
+        {
+          "origin": "source",
+          "instruction": {
+            "command": "uv run sha256-atlas correctness --cases 1000 --skip-million",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "prerequisites": [
+              "uv sync",
+              "README quick-start compiler/toolchain prerequisites",
+              "uv run sha256-atlas build"
+            ],
+            "parameters": {},
+            "environment": {},
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 1,
+          "oraclePassed": false,
+          "log": {
+            "path": "attempts/sha256-benchmark-atlas-correctness-source-first-0.json",
+            "sha256": "d45ff4054eb0897be0af22a3b4e7b2cf00ad3e13f5c8fc686023475b5f681697"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "ries-rs-core-build",
+      "arm": "source-first",
+      "revision": "cfa959ed21a5a5e5f3d9538d9d1714c2401611e5",
+      "environmentId": "operator-macos-arm64-readiness-v2",
+      "cacheState": "warm",
+      "startedAt": "2026-10-05T05:10:16.864906+00:00",
+      "endedAt": "2026-10-05T05:10:59.908569+00:00",
+      "elapsedMs": 43043.33499999484,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 3451,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": null,
+      "attempts": [
+        {
+          "origin": "source",
+          "instruction": {
+            "command": "cargo build",
+            "workingDirectory": ".",
+            "scope": "component",
+            "component": "Rust core and CLI",
+            "prerequisites": [
+              "Rust/Cargo"
+            ],
+            "parameters": {},
+            "environment": {},
+            "sourcePaths": [
+              "CONTRIBUTING.md"
+            ],
+            "purpose": "build"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "log": {
+            "path": "attempts/ries-rs-core-build-source-first-0.json",
+            "sha256": "efc2ed4e9280f3d5f4e97ed38d13d1e4a582ca10e3eead1cf342fa82f83832b0"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "ries-rs-core-build",
+      "arm": "lookup-first",
+      "revision": "cfa959ed21a5a5e5f3d9538d9d1714c2401611e5",
+      "environmentId": "operator-macos-arm64-readiness-v2",
+      "cacheState": "warm",
+      "startedAt": "2026-10-05T05:10:59.911983+00:00",
+      "endedAt": "2026-10-05T05:11:59.451724+00:00",
+      "elapsedMs": 59538.22908399161,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 7905,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": {
+        "snapshotId": "8384e75929143cbe8a6d8fb27e375d5863eb9c591105765eba1402783336b4cd",
+        "policy": "explicit-high-confidence-extraction",
+        "valuePresent": true,
+        "accepted": false,
+        "instruction": null,
+        "fallbackReasons": [
+          "missing-command-assessment:repo.build"
+        ]
+      },
+      "attempts": [
+        {
+          "origin": "fallback",
+          "instruction": {
+            "command": "cargo build",
+            "workingDirectory": ".",
+            "scope": "component",
+            "component": "Rust core and CLI",
+            "prerequisites": [
+              "Rust/Cargo"
+            ],
+            "parameters": {},
+            "environment": {},
+            "sourcePaths": [
+              "CONTRIBUTING.md"
+            ],
+            "purpose": "build"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "log": {
+            "path": "attempts/ries-rs-core-build-lookup-first-0.json",
+            "sha256": "a684000583bbbdffba230a2cfa7cd3521ced6803e5be0c073dda0228886f086d"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "ries-rs-core-test",
+      "arm": "lookup-first",
+      "revision": "cfa959ed21a5a5e5f3d9538d9d1714c2401611e5",
+      "environmentId": "operator-macos-arm64-readiness-v2",
+      "cacheState": "warm",
+      "startedAt": "2026-10-05T05:11:59.454798+00:00",
+      "endedAt": "2026-10-05T05:15:34.385001+00:00",
+      "elapsedMs": 214860.88237498188,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 7781,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": {
+        "snapshotId": "8384e75929143cbe8a6d8fb27e375d5863eb9c591105765eba1402783336b4cd",
+        "policy": "explicit-high-confidence-extraction",
+        "valuePresent": true,
+        "accepted": false,
+        "instruction": null,
+        "fallbackReasons": [
+          "missing-command-assessment:repo.test"
+        ]
+      },
+      "attempts": [
+        {
+          "origin": "fallback",
+          "instruction": {
+            "command": "cargo test",
+            "workingDirectory": ".",
+            "scope": "component",
+            "component": "Rust core and CLI",
+            "prerequisites": [
+              "Rust/Cargo"
+            ],
+            "parameters": {},
+            "environment": {},
+            "sourcePaths": [
+              "AGENTS.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "log": {
+            "path": "attempts/ries-rs-core-test-lookup-first-0.json",
+            "sha256": "30ea24d8a6b512bb8bad253b5876cfe2289a567b52b3674ee566bd6e183d4cc0"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "ries-rs-core-test",
+      "arm": "source-first",
+      "revision": "cfa959ed21a5a5e5f3d9538d9d1714c2401611e5",
+      "environmentId": "operator-macos-arm64-readiness-v2",
+      "cacheState": "warm",
+      "startedAt": "2026-10-05T05:15:34.387166+00:00",
+      "endedAt": "2026-10-05T05:19:07.638221+00:00",
+      "elapsedMs": 213245.1086670044,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 3327,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": null,
+      "attempts": [
+        {
+          "origin": "source",
+          "instruction": {
+            "command": "cargo test",
+            "workingDirectory": ".",
+            "scope": "component",
+            "component": "Rust core and CLI",
+            "prerequisites": [
+              "Rust/Cargo"
+            ],
+            "parameters": {},
+            "environment": {},
+            "sourcePaths": [
+              "AGENTS.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "log": {
+            "path": "attempts/ries-rs-core-test-source-first-0.json",
+            "sha256": "08542acbde9b8cab173bf7a0ad395b470289452336bdc96b5ab8398dfceeda56"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "pagedigest-consumer-test",
+      "arm": "source-first",
+      "revision": "f880f813cc0df49603482dbd879ff4ef49b3a519",
+      "environmentId": "operator-macos-arm64-readiness-v2",
+      "cacheState": "warm",
+      "startedAt": "2026-10-05T05:19:07.641665+00:00",
+      "endedAt": "2026-10-05T05:19:14.327148+00:00",
+      "elapsedMs": 6685.39979099296,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 4902,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": null,
+      "attempts": [
+        {
+          "origin": "source",
+          "instruction": {
+            "command": "uv run --locked python -m unittest discover -s tests -v",
+            "workingDirectory": "implementations/python-consumer",
+            "scope": "component",
+            "component": "Python consumer",
+            "prerequisites": [
+              "uv and locked consumer environment"
+            ],
+            "parameters": {},
+            "environment": {},
+            "sourcePaths": [
+              "AGENTS.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "log": {
+            "path": "attempts/pagedigest-consumer-test-source-first-0.json",
+            "sha256": "00977682aec47092f76fcbcf4c1ea2601ca63c3403427ae423533ad5389b78d9"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "pagedigest-consumer-test",
+      "arm": "lookup-first",
+      "revision": "f880f813cc0df49603482dbd879ff4ef49b3a519",
+      "environmentId": "operator-macos-arm64-readiness-v2",
+      "cacheState": "warm",
+      "startedAt": "2026-10-05T05:19:14.332816+00:00",
+      "endedAt": "2026-10-05T05:19:22.051779+00:00",
+      "elapsedMs": 7718.921291991137,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 4902,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": {
+        "snapshotId": "8384e75929143cbe8a6d8fb27e375d5863eb9c591105765eba1402783336b4cd",
+        "policy": "explicit-high-confidence-extraction",
+        "valuePresent": false,
+        "accepted": false,
+        "instruction": null,
+        "fallbackReasons": [
+          "repository-not-found"
+        ]
+      },
+      "attempts": [
+        {
+          "origin": "fallback",
+          "instruction": {
+            "command": "uv run --locked python -m unittest discover -s tests -v",
+            "workingDirectory": "implementations/python-consumer",
+            "scope": "component",
+            "component": "Python consumer",
+            "prerequisites": [
+              "uv and locked consumer environment"
+            ],
+            "parameters": {},
+            "environment": {},
+            "sourcePaths": [
+              "AGENTS.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "log": {
+            "path": "attempts/pagedigest-consumer-test-lookup-first-0.json",
+            "sha256": "be0b8759a2670ddbbb7ff266401c6fba4720d9f8bcb0b8ae687e75ad4938646f"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "pagedigest-generator-test",
+      "arm": "lookup-first",
+      "revision": "f880f813cc0df49603482dbd879ff4ef49b3a519",
+      "environmentId": "operator-macos-arm64-readiness-v2",
+      "cacheState": "warm",
+      "startedAt": "2026-10-05T05:19:22.054096+00:00",
+      "endedAt": "2026-10-05T05:20:33.157378+00:00",
+      "elapsedMs": 71102.00591600733,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 4902,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": {
+        "snapshotId": "8384e75929143cbe8a6d8fb27e375d5863eb9c591105765eba1402783336b4cd",
+        "policy": "explicit-high-confidence-extraction",
+        "valuePresent": false,
+        "accepted": false,
+        "instruction": null,
+        "fallbackReasons": [
+          "repository-not-found"
+        ]
+      },
+      "attempts": [
+        {
+          "origin": "fallback",
+          "instruction": {
+            "command": "cargo test --locked",
+            "workingDirectory": "implementations/rust-generator",
+            "scope": "component",
+            "component": "Rust generator",
+            "prerequisites": [
+              "Rust/Cargo"
+            ],
+            "parameters": {},
+            "environment": {},
+            "sourcePaths": [
+              "AGENTS.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "log": {
+            "path": "attempts/pagedigest-generator-test-lookup-first-0.json",
+            "sha256": "688df49261d71c31d820fcfd2caf9c00797ab267389aa1f1c02e36859f33463f"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "pagedigest-generator-test",
+      "arm": "source-first",
+      "revision": "f880f813cc0df49603482dbd879ff4ef49b3a519",
+      "environmentId": "operator-macos-arm64-readiness-v2",
+      "cacheState": "warm",
+      "startedAt": "2026-10-05T05:20:33.161192+00:00",
+      "endedAt": "2026-10-05T05:21:45.988924+00:00",
+      "elapsedMs": 72826.42016699538,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 4902,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": null,
+      "attempts": [
+        {
+          "origin": "source",
+          "instruction": {
+            "command": "cargo test --locked",
+            "workingDirectory": "implementations/rust-generator",
+            "scope": "component",
+            "component": "Rust generator",
+            "prerequisites": [
+              "Rust/Cargo"
+            ],
+            "parameters": {},
+            "environment": {},
+            "sourcePaths": [
+              "AGENTS.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "log": {
+            "path": "attempts/pagedigest-generator-test-source-first-0.json",
+            "sha256": "367f5fdd9257532af0e89f6d52ecb715ab833e8cb5258dbacdf61b3787ded725"
+          }
+        }
+      ]
+    }
+  ]
+}

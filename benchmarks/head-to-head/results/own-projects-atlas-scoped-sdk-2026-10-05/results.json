@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "workloadSha256": "2dd55584ab092bf2c45c2bbe649403259546d9b72a63865c6236a8d93f33d091",
+  "consumerClass": "operator-controlled",
+  "snapshotId": "8384e75929143cbe8a6d8fb27e375d5863eb9c591105765eba1402783336b4cd",
+  "consumerPolicy": "explicit-high-confidence-extraction",
+  "cacheState": "warm",
+  "externalAdoption": false,
+  "independentlyVerifiedObservations": null,
+  "observationLimit": "Hashes bind supplied logs; this scorer does not independently witness external execution.",
+  "rows": [
+    {
+      "taskId": "sha256-benchmark-atlas-build",
+      "taskClass": "build",
+      "arm": "source-first",
+      "completedTask": true,
+      "failedAttempts": 0,
+      "acceptedWrongAnswer": 0,
+      "policyAccepted": null,
+      "valuePresent": null,
+      "fallbackAttempts": 0,
+      "correctFallback": false,
+      "elapsedMs": 389432.11308299215,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 5216,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "sha256-benchmark-atlas-build",
+      "taskClass": "build",
+      "arm": "lookup-first",
+      "completedTask": true,
+      "failedAttempts": 0,
+      "acceptedWrongAnswer": 0,
+      "policyAccepted": false,
+      "valuePresent": false,
+      "fallbackAttempts": 1,
+      "correctFallback": true,
+      "elapsedMs": 450492.77337500826,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 5216,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "sha256-benchmark-atlas-correctness",
+      "taskClass": "correctness",
+      "arm": "lookup-first",
+      "completedTask": true,
+      "failedAttempts": 0,
+      "acceptedWrongAnswer": 0,
+      "policyAccepted": false,
+      "valuePresent": false,
+      "fallbackAttempts": 1,
+      "correctFallback": true,
+      "elapsedMs": 423921.930084005,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 5216,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "sha256-benchmark-atlas-correctness",
+      "taskClass": "correctness",
+      "arm": "source-first",
+      "completedTask": true,
+      "failedAttempts": 0,
+      "acceptedWrongAnswer": 0,
+      "policyAccepted": null,
+      "valuePresent": null,
+      "fallbackAttempts": 0,
+      "correctFallback": false,
+      "elapsedMs": 261235.99662500783,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 5216,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    }
+  ],
+  "summary": {
+    "source-first": {
+      "attemptedTasks": 2,
+      "completedTask": 2,
+      "failedAttempts": 0,
+      "acceptedWrongAnswer": 0,
+      "fallbackAttempts": 0,
+      "correctFallback": 0,
+      "policyAcceptedTasks": 0,
+      "elapsedMs": 650668.109708,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 10432,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    "lookup-first": {
+      "attemptedTasks": 2,
+      "completedTask": 2,
+      "failedAttempts": 0,
+      "acceptedWrongAnswer": 0,
+      "fallbackAttempts": 2,
+      "correctFallback": 2,
+      "policyAcceptedTasks": 0,
+      "elapsedMs": 874414.7034590133,
+      "transport": {
+        "httpRequests": 4,
+        "decodedBytes": 10432,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "taskId": "sha256-benchmark-atlas-correctness",
+  "origin": "source",
+  "instruction": {
+    "command": "uv run sha256-atlas correctness --cases 1000 --skip-million",
+    "workingDirectory": ".",
+    "scope": "repository",
+    "component": null,
+    "prerequisites": [
+      "uv sync",
+      "README quick-start compiler/toolchain prerequisites",
+      "uv run sha256-atlas build"
+    ],
+    "parameters": {},
+    "environment": {},
+    "sourcePaths": [
+      "README.md"
+    ],
+    "purpose": "test"
+  },
+  "exitCode": 1,
+  "oraclePassed": false,
+  "commands": [
+    {
+      "command": "uv sync",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "Using CPython 3.12.13\nCreating virtual environment at: .venv\nResolved 12 packages in 6ms\n   Building sha256-benchmark-atlas @ file:///private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-own-project-runs-mx7ommxe/sha256-benchmark-atlas-correctness-source-first\n      Built sha256-benchmark-atlas @ file:///private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-own-project-runs-mx7ommxe/sha256-benchmark-atlas-correctness-source-first\nPrepared 1 package in 29ms\nInstalled 5 packages in 13ms\n + cffi==2.1.1\n + cryptography==50.0.1\n + pycparser==3.0\n + pyyaml==6.0.3\n + sha256-benchmark-atlas==0.1.0 (from file:///private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-own-project-runs-mx7ommxe/sha256-benchmark-atlas-correctness-source-first)\n",
+      "executionError": null
+    },
+    {
+      "command": "uv run sha256-atlas build",
+      "exitCode": 1,
+      "stdout": "[ok] c-openssl: built\n[ok] c-ref: built\n[ok] rust-sha2: built\n[ok] go-stdlib: built\n[ok] python-hashlib: no build step\n[ok] python-pure: no build step\n[ok] node-crypto: no build step\n[ok] java-jdk: built\n[ok] rust-ring: built\n[ok] rust-openssl: built\n[ok] c-libsodium: built\n[ok] c-mbedtls: built\n[ok] ruby-openssl: no build step\n[ok] php-hash: no build step\n[ok] python-cryptography: no build step\n[ok] bun-crypto: no build step\n[FAIL] zig-std: error: undefined symbol: __availability_version_check\n    note: referenced by /Users/maxwell/.cache/zig/o/9ea3626d0474e2b7db46c9e4d2705a5c/libcompiler_rt.a(libcompiler_rt.a.o):___isPlatformVersionAtLeast\nerror: undefined symbol: _abort\n    note: referenced by implementations/zig-std/.zig-cache/o/ae8e9792202fdfd76fb9d125f037d9d8/build.o:_posix.abort\nerror: undefined symbol: _arc4random_buf\n    note: referenced by implementations/zig-std/.zig-cache/o/ae8e9792202fdfd76fb9d125f037d9d8/build.o:_crypto.tlcsprng.tlsCsprngFill\nerror: undefined symbol: _bzero\n    note: referenced by implementations/zig-std/.zig-cache/o/ae8e9792202fdfd76fb9d125f037d9d8/build.o:_hash_map.HashMapUnmanaged(usize,*debug.SelfInfo.Module__struct_6950,hash_map.AutoContext(usize),80).initMetadatas\n    note: referenced by im\n[ok] rust-sodium: built\n[ok] java-bouncycastle: built\n",
+      "stderr": "",
+      "executionError": null
+    }
+  ]
+}

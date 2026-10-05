@@ -1,0 +1,42 @@
+{
+  "taskId": "sha256-benchmark-atlas-correctness",
+  "origin": "fallback",
+  "instruction": {
+    "command": "uv run sha256-atlas correctness --cases 1000 --skip-million",
+    "workingDirectory": ".",
+    "scope": "repository",
+    "component": null,
+    "prerequisites": [
+      "uv sync",
+      "README quick-start compiler/toolchain prerequisites",
+      "uv run sha256-atlas build",
+      "task-local Zig 0.14 compatible SDK selection"
+    ],
+    "parameters": {},
+    "environment": {
+      "DOTREPO_STUDY_ZIG_SDK": "/tmp/dotrepo-readiness-tools/zig-sdk-compat"
+    },
+    "sourcePaths": [
+      "README.md"
+    ],
+    "purpose": "test"
+  },
+  "exitCode": 1,
+  "oraclePassed": false,
+  "commands": [
+    {
+      "command": "uv sync",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "Using CPython 3.12.13\nCreating virtual environment at: .venv\nResolved 12 packages in 4ms\n   Building sha256-benchmark-atlas @ file:///private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-own-project-runs-_aj_4v30/sha256-benchmark-atlas-correctness-lookup-first\n      Built sha256-benchmark-atlas @ file:///private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-own-project-runs-_aj_4v30/sha256-benchmark-atlas-correctness-lookup-first\nPrepared 1 package in 40ms\nInstalled 5 packages in 22ms\n + cffi==2.1.1\n + cryptography==50.0.1\n + pycparser==3.0\n + pyyaml==6.0.3\n + sha256-benchmark-atlas==0.1.0 (from file:///private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-own-project-runs-_aj_4v30/sha256-benchmark-atlas-correctness-lookup-first)\n",
+      "executionError": null
+    },
+    {
+      "command": "uv run sha256-atlas build",
+      "exitCode": 1,
+      "stdout": "[ok] c-openssl: built\n[ok] c-ref: built\n[FAIL] rust-sha2: Compiling version_check v0.9.5\n   Compiling typenum v1.20.1\n   Compiling libc v0.2.189\n   Compiling cfg-if v1.0.4\nerror: linking with `cc` failed: exit status: 1\n  |\n  = note:  \"cc\" \"/private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-own-project-runs-_aj_4v30/sha256-benchmark-atlas-correctness-lookup-first/implementations/rust-sha2/target/release/build/libc-9bb5f65ad20d8dc0/rustcL5JjH2/symbols.o\" \"<4 object files omitted>\" \"<sysroot>/lib/rustlib/aarch64-apple-darwin/lib/{libstd-*,libpanic_unwind-*,libobject-*,libmemchr-*,libaddr2line-*,libgimli-*,libcfg_if-*,librustc_demangle-*,libstd_detect-*,libhashbrown-*,librustc_std_workspace_alloc-*,libminiz_oxide-*,libadler2-*,libunwind-*,liblibc-*,librustc_std_workspace_core-*,liballoc-*,libcore-*,libcompiler_builtins-*}.rlib\" \"-lSyst\n[ok] go-stdlib: built\n[ok] python-hashlib: no build step\n[ok] python-pure: no build step\n[ok] node-crypto: no build step\n[ok] java-jdk: built\n[FAIL] rust-ring: Compiling libc v0.2.189\n   Compiling shlex v2.0.1\n   Compiling find-msvc-tools v0.1.11\n   Compiling cfg-if v1.0.4\n   Compiling untrusted v0.9.0\n   Compiling cc v1.4.4\nerror: linking with `cc` failed: exit status: 1\n  |\n  = note:  \"cc\" \"/private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-own-project-runs-_aj_4v30/sha256-benchmark-atlas-correctness-lookup-first/implementations/rust-ring/target/release/build/libc-9bb5f65ad20d8dc0/rustcX3EmGV/symbols.o\" \"<4 object files omitted>\" \"<sysroot>/lib/rustlib/aarch64-apple-darwin/lib/{libstd-*,libpanic_unwind-*,libobject-*,libmemchr-*,libaddr2line-*,libgimli-*,libcfg_if-*,librustc_demangle-*,libstd_detect-*,libhashbrown-*,librustc_std_workspace_alloc-*,libminiz_oxide-*,libadler2-*,libunwind-*,liblibc-*,librustc_std_workspace_core-*,libal\n[FAIL] rust-openssl: Compiling find-msvc-tools v0.1.11\n   Compiling proc-macro2 v1.0.107\n   Compiling shlex v2.0.1\n   Compiling quote v1.0.47\n   Compiling pkg-config v0.3.34\n   Compiling unicode-ident v1.0.24\n   Compiling vcpkg v0.2.15\n   Compiling libc v0.2.189\n   Compiling foreign-types-shared v0.1.1\n   Compiling openssl v0.10.81\nerror: linking with `cc` failed: exit status: 1\n  |\n  = note:  \"cc\" \"/private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-own-project-runs-_aj_4v30/sha256-benchmark-atlas-correctness-lookup-first/implementations/rust-openssl/target/release/build/quote-3535b36b5b8773dc/rustckZzauO/symbols.o\" \"<2 object files omitted>\" \"<sysroot>/lib/rustlib/aarch64-apple-darwin/lib/{libstd-*,libpanic_unwind-*,libobject-*,libmemchr-*,libaddr2line-*,libgimli-*,libcfg_if-*,librustc_demangle-\n[ok] c-libsodium: built\n[ok] c-mbedtls: built\n[ok] ruby-openssl: no build step\n[ok] php-hash: no build step\n[ok] python-cryptography: no build step\n[ok] bun-crypto: no build step\n[ok] zig-std: built\n[FAIL] rust-sodium: Compiling shlex v2.0.1\n   Compiling same-file v1.0.6\n   Compiling find-msvc-tools v0.1.11\n   Compiling libc v0.2.189\n   Compiling serde_core v1.0.229\n   Compiling pkg-config v0.3.34\n   Compiling serde v1.0.229\n   Compiling signature v1.6.4\n   Compiling walkdir v2.5.0\n   Compiling ed25519 v1.5.3\n   Compiling cc v1.4.4\nerror: linking with `cc` failed: exit status: 1\n  |\n  = note:  \"cc\" \"/private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-own-project-runs-_aj_4v30/sha256-benchmark-atlas-correctness-lookup-first/implementations/rust-sodium/target/release/build/serde-6d31c97805335b7b/rustckiOmve/symbols.o\" \"<3 object files omitted>\" \"<sysroot>/lib/rustlib/aarch64-apple-darwin/lib/{libstd-*,libpanic_unwind-*,libobject-*,libmemchr-*,libaddr2line-*,libgimli-*,libcfg_if-*,librustc_dema\n[ok] java-bouncycastle: built\n",
+      "stderr": "",
+      "executionError": null
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+commit 4faea185ccd0b5bf310f2b949ce51b31fcbe0503
+Author:     maxwellsantoro <max@maxwellsantoro.com>
+AuthorDate: Mon Oct 5 00:25:41 2026 -0400
+Commit:     maxwellsantoro <max@maxwellsantoro.com>
+CommitDate: Mon Oct 5 00:25:41 2026 -0400
+
+    fix: generate bindings before host task proof
+
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 7a927f5..8bd8d04 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -3,6 +3,8 @@
+ ## [Unreleased]
+ 
+ ### Fixed
++- Made the host task-proof entrypoint generate its IDL bindings before building
++  the validator worker, so a clean checkout does not depend on an earlier gate.
+ - Applied StoreClient timeouts on initial and replacement sockets and bounded
+   complete response frames against stalled/trickled replies. Retained clients
+   reconnect after observable idle closure and discard failed transports without
+diff --git a/justfile b/justfile
+index b5d80fa..cf1ae06 100644
+--- a/justfile
++++ b/justfile
+@@ -330,7 +330,7 @@ foundry-agent-task-protocol-a1-0:
+ 	bash ./tools/ci/foundry_agent_task_protocol_a1_0.sh
+ 
+ # Opt-in host service proof; the gate enables its development features explicitly.
+-foundry-agent-task-proof-rt:
++foundry-agent-task-proof-rt: codegen
+ 	bash ./tools/ci/foundry_agent_task_proof_rt.sh
+ 
+ # Requires Linux + Docker and the locally installed pinned image; never skips.

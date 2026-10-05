@@ -1,0 +1,38 @@
+{
+  "scope": "operator readiness evidence and fixed-runner helpers; no product, Rust, index, manifest or claim changes",
+  "python": {
+    "passed": 482,
+    "focusedOwnProjectPassed": 18
+  },
+  "ruffCheck": "passed",
+  "ruffFormatCheck": "125 files formatted",
+  "releaseVersionParity": "2.0.0-alpha.0",
+  "toolchainManifestParity": "1.90.0",
+  "artifactChecks": "all three runner copies match frozen runner hashes; all retained HTTP bodies match receipts; all task packets replay through scorer",
+  "completeReleaseGate": {
+    "passed": true,
+    "includes": [
+      "release bundle",
+      "VSIX",
+      "public export and freshness",
+      "consumer policy",
+      "stdio smoke",
+      "Cloudflare Worker smoke"
+    ],
+    "logSha256": "0ff5d89fdb05f30d7dce8af9bb9d658ca3a9a97cd66361e3adc0f9fd58264cea",
+    "scopeNote": "Run before final private-Zig helper refinement; release, Rust, index and product inputs unchanged. Final protected CI validates the integrated patch."
+  },
+  "mainBranchProtection": {
+    "checks": [
+      "ci-gate"
+    ],
+    "enforceAdmins": true,
+    "strict": true
+  },
+  "externalAuthority": {
+    "ramenPullRequest": "https://github.com/maxwellsantoro/RamenOS/pull/33",
+    "ramenReview": "separate human A3 still required; all checks passed",
+    "atlasPullRequest": "https://github.com/maxwellsantoro/sha256-benchmark-atlas/pull/4",
+    "atlasState": "merged after complete campaign CI"
+  }
+}

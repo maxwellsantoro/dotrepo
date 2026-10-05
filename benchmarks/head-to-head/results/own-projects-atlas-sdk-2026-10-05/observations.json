@@ -1,0 +1,234 @@
+{
+  "version": 1,
+  "workloadSha256": "6dadb7ae0f461cb657ccf3f5df0702a2864ad252956703560d5f2cfe421bd0a1",
+  "runs": [
+    {
+      "taskId": "sha256-benchmark-atlas-build",
+      "arm": "source-first",
+      "revision": "866fe127542178c35515f51afed30c41616bdd77",
+      "environmentId": "operator-macos-arm64-zig-sdk-v3",
+      "cacheState": "warm",
+      "startedAt": "2026-10-05T05:24:34.873069+00:00",
+      "endedAt": "2026-10-05T05:26:17.194490+00:00",
+      "elapsedMs": 102320.99995901808,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 5216,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": null,
+      "attempts": [
+        {
+          "origin": "source",
+          "instruction": {
+            "command": "uv run sha256-atlas build",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "prerequisites": [
+              "uv sync",
+              "README quick-start compiler/toolchain prerequisites",
+              "task-local Zig 0.14 compatible SDK selection"
+            ],
+            "parameters": {},
+            "environment": {
+              "DOTREPO_STUDY_ZIG_SDK": "/tmp/dotrepo-readiness-tools/zig-sdk-compat"
+            },
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "build"
+          },
+          "exitCode": 1,
+          "oraclePassed": false,
+          "log": {
+            "path": "attempts/sha256-benchmark-atlas-build-source-first-0.json",
+            "sha256": "13ed8bb47941b8460d13c5c98be4ca85daaa295ba5d6a260e2dbed675e9a5f48"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "sha256-benchmark-atlas-build",
+      "arm": "lookup-first",
+      "revision": "866fe127542178c35515f51afed30c41616bdd77",
+      "environmentId": "operator-macos-arm64-zig-sdk-v3",
+      "cacheState": "warm",
+      "startedAt": "2026-10-05T05:26:17.201527+00:00",
+      "endedAt": "2026-10-05T05:27:23.597017+00:00",
+      "elapsedMs": 66401.6353750194,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 5216,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": {
+        "snapshotId": "8384e75929143cbe8a6d8fb27e375d5863eb9c591105765eba1402783336b4cd",
+        "policy": "explicit-high-confidence-extraction",
+        "valuePresent": false,
+        "accepted": false,
+        "instruction": null,
+        "fallbackReasons": [
+          "repository-not-found"
+        ]
+      },
+      "attempts": [
+        {
+          "origin": "fallback",
+          "instruction": {
+            "command": "uv run sha256-atlas build",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "prerequisites": [
+              "uv sync",
+              "README quick-start compiler/toolchain prerequisites",
+              "task-local Zig 0.14 compatible SDK selection"
+            ],
+            "parameters": {},
+            "environment": {
+              "DOTREPO_STUDY_ZIG_SDK": "/tmp/dotrepo-readiness-tools/zig-sdk-compat"
+            },
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "build"
+          },
+          "exitCode": 1,
+          "oraclePassed": false,
+          "log": {
+            "path": "attempts/sha256-benchmark-atlas-build-lookup-first-0.json",
+            "sha256": "d4851672570662856be4524e74999b37bcb218d1962ed41dfb1f8989730dbfbd"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "sha256-benchmark-atlas-correctness",
+      "arm": "lookup-first",
+      "revision": "866fe127542178c35515f51afed30c41616bdd77",
+      "environmentId": "operator-macos-arm64-zig-sdk-v3",
+      "cacheState": "warm",
+      "startedAt": "2026-10-05T05:27:23.612439+00:00",
+      "endedAt": "2026-10-05T05:29:08.614467+00:00",
+      "elapsedMs": 104998.8618750067,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 5216,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": {
+        "snapshotId": "8384e75929143cbe8a6d8fb27e375d5863eb9c591105765eba1402783336b4cd",
+        "policy": "explicit-high-confidence-extraction",
+        "valuePresent": false,
+        "accepted": false,
+        "instruction": null,
+        "fallbackReasons": [
+          "repository-not-found"
+        ]
+      },
+      "attempts": [
+        {
+          "origin": "fallback",
+          "instruction": {
+            "command": "uv run sha256-atlas correctness --cases 1000 --skip-million",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "prerequisites": [
+              "uv sync",
+              "README quick-start compiler/toolchain prerequisites",
+              "uv run sha256-atlas build",
+              "task-local Zig 0.14 compatible SDK selection"
+            ],
+            "parameters": {},
+            "environment": {
+              "DOTREPO_STUDY_ZIG_SDK": "/tmp/dotrepo-readiness-tools/zig-sdk-compat"
+            },
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 1,
+          "oraclePassed": false,
+          "log": {
+            "path": "attempts/sha256-benchmark-atlas-correctness-lookup-first-0.json",
+            "sha256": "93e8f0e34a2ebae84dd2ad9dc06eeaf6c338d0175a0c0da738c3c9b62283554b"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "sha256-benchmark-atlas-correctness",
+      "arm": "source-first",
+      "revision": "866fe127542178c35515f51afed30c41616bdd77",
+      "environmentId": "operator-macos-arm64-zig-sdk-v3",
+      "cacheState": "warm",
+      "startedAt": "2026-10-05T05:29:08.618463+00:00",
+      "endedAt": "2026-10-05T05:32:04.964618+00:00",
+      "elapsedMs": 176341.4162080153,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 5216,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": null,
+      "attempts": [
+        {
+          "origin": "source",
+          "instruction": {
+            "command": "uv run sha256-atlas correctness --cases 1000 --skip-million",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "prerequisites": [
+              "uv sync",
+              "README quick-start compiler/toolchain prerequisites",
+              "uv run sha256-atlas build",
+              "task-local Zig 0.14 compatible SDK selection"
+            ],
+            "parameters": {},
+            "environment": {
+              "DOTREPO_STUDY_ZIG_SDK": "/tmp/dotrepo-readiness-tools/zig-sdk-compat"
+            },
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 1,
+          "oraclePassed": false,
+          "log": {
+            "path": "attempts/sha256-benchmark-atlas-correctness-source-first-0.json",
+            "sha256": "d7203eb0ef9af9b38425155b8f1e1be1c7f0b5a12cf6417ba4bb56467283acae"
+          }
+        }
+      ]
+    }
+  ]
+}

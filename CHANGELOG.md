@@ -15,6 +15,12 @@ generated growth, coverage, promotion, and telemetry artifacts own live values.
 
 ### Documentation maintenance
 
+- Retain a preregistered readiness repeat on the same four maintainer projects,
+  preserving all eight tasks, changed prerequisites and time limits, and failed
+  setup attempts. Add separately frozen Atlas SDK follow-ups with explicit
+  environment adapters, exact runner copies, and regressions for SDK isolation.
+  Keep scoped completion, fallback, useful-answer coverage, and independent
+  adoption as separate outcomes.
 - Shift the immediate consumer checkpoint to a frozen operator study on the
   maintainer's four substantive other public projects; defer external recruitment.
   Retain eight paired tasks, live snapshot/source receipts, command oracles,

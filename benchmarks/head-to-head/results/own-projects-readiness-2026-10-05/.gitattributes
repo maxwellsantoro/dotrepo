@@ -1,0 +1,7 @@
+# Byte-bound evidence must survive checkout without line-ending conversion.
+* -text
+# Preserve upstream Markdown hard breaks in the original HTTP source bodies.
+http/*-source whitespace=-blank-at-eol
+*-source.txt whitespace=-blank-at-eol
+*.patch whitespace=-blank-at-eol,-space-before-tab
+*.log whitespace=-blank-at-eol

@@ -240,6 +240,12 @@ operator outcomes do not establish autonomous-agent performance or external
 adoption. Its transport boundary excludes package-manager traffic and unallocated
 preparation costs, so it cannot establish total task-cost savings.
 
+The [readiness repeat](results/own-projects-readiness-2026-10-05/README.md) preserves
+those eight tasks and the original packet. It records changed prerequisites,
+source pins, Python environments, and time limits explicitly. Coverage is known
+from the first study; its results are targeted operator follow-up rather than
+independent or held-out evidence.
+
 The `lookup-first` arm uses the generic consumer's identity, record-age, conflict,
 and required-field policy. Rejected fields trigger the GitHub baseline and include
 its work. Both arms use the same extractor setting. No returned command is run.

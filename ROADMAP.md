@@ -179,3 +179,10 @@ outcomes, and an honest disposition for each failure or fallback. It need not
 show an advantage to be informative. A product-benefit claim still requires
 improvement after fallback and maintenance costs, and independent adoption needs
 the later C3 evidence. Retain unfavorable data and revise the affected packet.
+
+Repeat the same own-project tasks after resolving their named prerequisites.
+Freeze every changed source pin, environment, timeout, and evaluated snapshot;
+keep known coverage and pending upstream review explicit. Once readiness is
+established, prioritize source-preserving answers for this demand before adding
+repositories or interfaces. Scoped commands remain scoped; successful fallback
+does not by itself satisfy the useful-answer or independent-use gates.

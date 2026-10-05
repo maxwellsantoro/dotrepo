@@ -1,0 +1,23 @@
+{
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "python": "3.12.13 (main, Apr 14 2026, 14:33:40) [Clang 22.1.3 ]",
+  "runnerRevision": "fa830e8ebb1b9bb825e08755f7da2c6c34381dbf",
+  "runnerSha256": "caaa88b7157ca30ba3ab9454cb06da09db65c1422f57ac9556d1967320893a47",
+  "cache": "Existing shared download caches; fresh project targets and venvs. Alternate order does not remove download-cache carryover.",
+  "pythonLaunch": "Upstream python/python3 names use uv with the project's .venv interpreter when available, otherwise the runner interpreter. Source files unchanged.",
+  "toolVersions": {
+    "java": "javac 21.0.12.1",
+    "zig": "0.14.0"
+  },
+  "sdkSource": {
+    "root": "/tmp/dotrepo-readiness-tools/zig-sdk-compat",
+    "libSystemSource": "/private/tmp/dotrepo-readiness-tools/zig-macos-aarch64-0.14.0/lib/libc/darwin/libSystem.tbd",
+    "libSystemSha256": "cdb2217019505764ef1c0ede11f4702e5cbc8900aae7759bd08aed08ba5e6b33",
+    "headerSource": "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include",
+    "sdkSettingsSha256": "7b93ad7e534cc4b31c6a4e39d19b5e0288acf2168c2649479a796d1cb51939fb",
+    "selectionShimSha256": "601cf90423ef16472873610e5777ab4befa7a637a521cd90ebd0093598cecd50"
+  },
+  "sdkSelectionScope": "zig-child-only",
+  "transport": "Only explicit source/profile HTTP is counted; package-manager traffic is uninstrumented. Bootstrap metadata/source clones excluded and disclosed.",
+  "modelUsage": "No model calls in runner. Operator preparation and this coding session are unallocated; totals remain unknown."
+}
