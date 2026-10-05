@@ -608,6 +608,7 @@ fn import_preview_tool_matches_core_report() {
 
 #[test]
 fn lookup_tool_fetches_hosted_summary_trust_and_query() {
+    let _env_guard = env_test_lock().lock().expect("env test lock");
     // SAFETY: test-only env flags for the local mock HTTP server.
     unsafe {
         std::env::set_var("DOTREPO_MCP_ALLOW_CUSTOM_BASE_URL", "1");
@@ -737,7 +738,7 @@ fn lookup_tool_fetches_hosted_summary_trust_and_query() {
     ];
     let (_server, base_url) = start_json_server(routes);
 
-    let response = call_tool(
+    let response = call_tool_unlocked(
         "dotrepo.lookup",
         json!({
             "repositoryUrl": "https://github.com/example/orbit",
@@ -770,6 +771,10 @@ fn lookup_tool_fetches_hosted_summary_trust_and_query() {
         structured["summary"]["repository"]["name"],
         Value::String("orbit".into())
     );
+    unsafe {
+        std::env::remove_var("DOTREPO_MCP_ALLOW_CUSTOM_BASE_URL");
+        std::env::remove_var("DOTREPO_MCP_UNSAFE_ALLOW_LOCAL_BASE_URL");
+    }
 }
 
 #[test]
@@ -792,6 +797,10 @@ fn message_framing_round_trips() {
 
 fn call_tool(name: &str, arguments: Value) -> Value {
     let _env_guard = env_test_lock().lock().expect("env test lock");
+    call_tool_unlocked(name, arguments)
+}
+
+fn call_tool_unlocked(name: &str, arguments: Value) -> Value {
     std::env::set_var("DOTREPO_MCP_ALLOW_ABSOLUTE_ROOT", "1");
     let (mut state, _) = initialized_state();
     handle_request(
@@ -854,8 +863,7 @@ fn cwd_test_lock() -> &'static Mutex<()> {
 }
 
 fn env_test_lock() -> &'static Mutex<()> {
-    static LOCK: OnceLock<Mutex<()>> = OnceLock::new();
-    LOCK.get_or_init(|| Mutex::new(()))
+    crate::test_support::mcp_env_test_lock()
 }
 
 fn temp_dir(label: &str) -> PathBuf {

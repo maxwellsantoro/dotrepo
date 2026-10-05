@@ -1,0 +1,49 @@
+{
+  "checkedAt": "2026-10-05T00:49:10.002521+00:00",
+  "baseline": "v1.0.1",
+  "candidateVersion": "1.0.2",
+  "externalLockChanges": {
+    "anyhow": {
+      "from": "1.0.102",
+      "to": "1.0.103"
+    },
+    "rustls-webpki": {
+      "from": "0.103.9",
+      "to": "0.103.14"
+    },
+    "rustls": {
+      "from": "0.23.37",
+      "to": "0.23.45"
+    },
+    "crossbeam-epoch": {
+      "from": "0.9.18",
+      "to": "0.9.20"
+    }
+  },
+  "schemaSourceChanged": false,
+  "releaseGate": {
+    "result": "passed including VSIX",
+    "log": "/tmp/dotrepo-stable-safety-release-gate.log"
+  },
+  "scope": [
+    "promotion apply guard",
+    "literal Make/Just entrypoints",
+    "non-running test mode rejection",
+    "documented cwd withholding",
+    "MCP body caps",
+    "MCP test env locking",
+    "version-parity gate and six-crate publication"
+  ],
+  "publication": "pending protected merge and CI",
+  "workspaceTests": {
+    "result": "passed",
+    "count": 454
+  },
+  "pythonTests": {
+    "result": "passed",
+    "count": 172
+  },
+  "clippy": "passed",
+  "versionParity": "workspace and v1.0.2 tag matched",
+  "formattingScope": "Rust and added Python scripts pass; the stable tree has no Ruff dependency/config. Running ambient Ruff against the whole historical tree reports pre-existing formatting differences."
+}

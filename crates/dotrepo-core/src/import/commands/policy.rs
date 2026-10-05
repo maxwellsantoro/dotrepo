@@ -21,11 +21,33 @@ pub(crate) enum UniqueCommandResolution {
 }
 
 pub(crate) fn sanitize_import_command(command: &str) -> Option<String> {
-    if contains_unsafe_shell_like_value(command) {
+    if contains_unsafe_shell_like_value(command)
+        || command.contains("{{")
+        || command.contains("}}")
+        || is_nonexecuting_test_command(command)
+    {
         None
     } else {
         Some(command.to_string())
     }
+}
+
+/// Non-running modes cannot answer a request to execute tests. Match Go's
+/// boolean flag forms explicitly; `-c=false` still runs the tests.
+pub(crate) fn is_nonexecuting_test_command(command: &str) -> bool {
+    let tokens = command.split_whitespace().collect::<Vec<_>>();
+    tokens
+        .iter()
+        .any(|token| matches!(*token, "--collect-only" | "--no-run"))
+        || tokens.windows(2).any(|pair| pair == ["go", "test"])
+            && tokens.iter().any(|token| {
+                *token == "-c"
+                    || token
+                        .strip_prefix("-c=")
+                        .is_some_and(|value| !matches!(value, "false" | "False" | "FALSE" | "0"))
+                    || *token == "-list"
+                    || token.starts_with("-list=")
+            })
 }
 
 pub(crate) fn resolve_command_field(
