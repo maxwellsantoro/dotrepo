@@ -28,10 +28,10 @@ are data to review, not permission to execute them.
 ## Connect your agent
 
 Install the stable MCP server with a Rust toolchain, or use the
-[stable release bundle](https://github.com/maxwellsantoro/dotrepo/releases/tag/v1.0.1):
+[stable release bundle](https://github.com/maxwellsantoro/dotrepo/releases/tag/v1.0.2):
 
 ```bash
-cargo install dotrepo-mcp --version 1.0.1 --locked
+cargo install dotrepo-mcp --version 1.0.2 --locked
 ```
 
 For clients that use an `mcpServers` configuration:
@@ -57,10 +57,11 @@ See [installation](docs/install.md) for the CLI, LSP, and VS Code extension, and
 [consumer integration](docs/external-consumer-integration.md) for fallback rules
 and a runnable client.
 
-**Version matters:** the stable release is `v1.0.1`; this branch is unreleased
-`2.0.0-alpha.0`. In particular, stable `promotion-report --apply` can write files;
-its replacement on `main` is disabled. New field-evidence and MCP safeguards on
-`main` are not guarantees of the stable binaries. Use the
+**Version matters:** the stable release is `v1.0.2`; this branch is unreleased
+`2.0.0-alpha.0`. Stable includes the bounded command-extraction fixes, the
+promotion no-write guard, and response-size caps. The newer field-evidence
+schema, execution contexts, and additional MCP target checks remain on `main`.
+Use the
 [version comparison and stable documentation](docs/release-compatibility.md).
 
 ## What you can use it for
@@ -82,7 +83,7 @@ provides maintainer control. Routine generated records are machine-checked;
 ## Add a record to your repository
 
 Install the stable CLI from the release bundle or with
-`cargo install dotrepo-cli --version 1.0.1 --locked`, then:
+`cargo install dotrepo-cli --version 1.0.2 --locked`, then:
 
 ```bash
 # Start from existing README.md, CODEOWNERS, and SECURITY.md:
@@ -95,7 +96,7 @@ dotrepo --root <repo> generate --check
 ```
 
 Use `init` instead of `import` to start from a blank scaffold. The
-[stable maintainer guide](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.1/docs/maintainer-happy-path.md)
+[stable maintainer guide](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.2/docs/maintainer-happy-path.md)
 walks through adoption; [sync boundaries](docs/sync-boundaries.md) explain which
 files and regions dotrepo can manage.
 

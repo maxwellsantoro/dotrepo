@@ -1,10 +1,10 @@
 # Trust model
 
-This page describes the current source branch. Stable `v1.0.1` has important
-differences: standalone promotion can write records, and the newer retained
-field-evidence checks are absent. See [release compatibility](release-compatibility.md)
+This page describes the current source branch. Stable `v1.0.2` disables standalone
+promotion writes, but the newer retained field-evidence checks remain absent.
+See [release compatibility](release-compatibility.md)
 for the comparison and
-[the stable trust document](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.1/docs/trust-model.md)
+[the stable trust document](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.2/docs/trust-model.md)
 for version-matched reference material.
 
 A `.repo` record should not imply that all facts are equally authoritative. Instead, dotrepo should communicate where a record came from, how it was derived, and how much confidence downstream consumers should place in it.
@@ -137,13 +137,13 @@ manifest values and record-wide provenance; it does not freshly inspect upstream
 sources. A stable-generated `verified` label does not establish that the newer
 per-field checks ran. Omit `--apply` for read-only analysis.
 
-**Unreleased on `main`:** `promotion-report --apply` fails before writing records
-or evidence. It cannot
+**Stable `v1.0.2` and `main`:** `promotion-report --apply` fails before writing
+records or evidence. It cannot
 establish source inspection from a standalone manifest, record-wide provenance,
-or a newly written evidence note. Read-only promotion analysis now uses retained
+or a newly written evidence note. On `main`, read-only promotion analysis uses retained
 assessments bound to the exact field value and record check time; missing or
 invalidated assessments remain unresolved. This analysis is not a fresh check.
 Use the crawler's inspection and verification path to mint `verified` overlays.
-These safeguards do not change already-installed stable binaries or retroactively
+These safeguards do not change already-installed 1.0.1 binaries or retroactively
 recheck older records. Source links and MCP guard differences are in
 [release compatibility](release-compatibility.md).

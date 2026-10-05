@@ -15,6 +15,10 @@ generated growth, coverage, promotion, and telemetry artifacts own live values.
 
 ### Documentation maintenance
 
+- Advance stable install pins and generated maintainer CI to published 1.0.2 after
+  bundle and crates.io installation checks. Retain successful public deployment,
+  restored history, enforced branch settings, and registry recovery receipts.
+  Keep the prospective independent-task rubric separate from unmeasured outcomes.
 - Replace the serial roadmap queue with dependency-ready work packets, explicit
   outcome joins, and a bounded consumer checkpoint. Add a coordinator/worker
   execution guide and project skill; consolidate repeated runbooks, correct
@@ -228,6 +232,25 @@ generated growth, coverage, promotion, and telemetry artifacts own live values.
 - Automatic deploy-coherence checks against the reviewed export's contract files
   and a deterministic `v0/files.json` hash sample; Cloudflare packaging on
   Node.js 22
+
+## 1.0.2 - 2026-10-05
+
+- Publish the bounded maintenance update from `codex/stable-1.0`, preserving the
+  stable schema and Rust API. Disable standalone promotion writes; conservatively
+  recognize Make targets, preserve Make/Just wrappers, and withhold unresolved
+  arguments, ambiguous recipes, compile-only test modes, and directory-dependent
+  contribution examples. Cap MCP JSON and diagnostic bodies. Update four external
+  dependency lock entries.
+- Publish Linux/macOS bundles, MCPB, and six workspace crates. The extension's
+  independent package version remains 1.0.0. Verify the downloaded macOS bundle's
+  checksum and all ten controlled safety checks through both bundle and crates.io
+  installation. Recover the MCP registry listing after its description-length
+  rejection; verify active latest 1.0.2 and the published MCPB hash.
+- Retain [delivery receipts](index/telemetry/command-semantics-20261004/delivery.json).
+  The stable generated-CI default was frozen at 1.0.1 before publication; select
+  1.0.2 explicitly. Development defaults now select the published safety release.
+  Installation checks are regression evidence; independent task outcomes remain
+  unmeasured.
 
 ## 1.0.1 - 2026-07-02
 

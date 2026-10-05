@@ -48,8 +48,8 @@ Tool call:
 ```
 
 Install the **stable** `dotrepo-mcp` binary from the
-[`v1.0.1` release bundle](https://github.com/maxwellsantoro/dotrepo/releases/tag/v1.0.1)
-or `cargo install dotrepo-mcp --version 1.0.1 --locked`. See
+[`v1.0.2` release bundle](https://github.com/maxwellsantoro/dotrepo/releases/tag/v1.0.2)
+or `cargo install dotrepo-mcp --version 1.0.2 --locked`. See
 [installation](./install.md) and [release compatibility](release-compatibility.md).
 Stable lookup returns summary, trust, snapshot metadata, and optional query;
 profile inclusion and newer target checks described on `main` are unreleased.

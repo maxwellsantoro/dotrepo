@@ -1,0 +1,75 @@
+{
+  "servers": [
+    {
+      "server": {
+        "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+        "name": "io.github.maxwellsantoro/dotrepo",
+        "description": "Trust-aware repository facts for agents: build, test, docs, license, and security, no scraping.",
+        "title": "dotrepo",
+        "repository": {
+          "url": "https://github.com/maxwellsantoro/dotrepo",
+          "source": "github"
+        },
+        "version": "1.0.1",
+        "websiteUrl": "https://dotrepo.org",
+        "packages": [
+          {
+            "registryType": "mcpb",
+            "identifier": "https://github.com/maxwellsantoro/dotrepo/releases/download/v1.0.1/dotrepo-mcp-1.0.1.mcpb",
+            "version": "1.0.1",
+            "fileSha256": "98903c2e86cee1715d96b8df61f1e663eb58e6f5fd4086d6da95919f09551e9a",
+            "transport": {
+              "type": "stdio"
+            }
+          }
+        ]
+      },
+      "_meta": {
+        "io.modelcontextprotocol.registry/official": {
+          "status": "active",
+          "statusChangedAt": "2026-07-02T14:05:00.196148Z",
+          "publishedAt": "2026-07-02T14:05:00.196148Z",
+          "updatedAt": "2026-07-02T14:05:00.196148Z",
+          "isLatest": false
+        }
+      }
+    },
+    {
+      "server": {
+        "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+        "name": "io.github.maxwellsantoro/dotrepo",
+        "description": "Trust-aware repository facts for agents: build, test, docs, license, and security, no scraping.",
+        "title": "dotrepo",
+        "repository": {
+          "url": "https://github.com/maxwellsantoro/dotrepo",
+          "source": "github"
+        },
+        "version": "1.0.2",
+        "websiteUrl": "https://dotrepo.org",
+        "packages": [
+          {
+            "registryType": "mcpb",
+            "identifier": "https://github.com/maxwellsantoro/dotrepo/releases/download/v1.0.2/dotrepo-mcp-1.0.2.mcpb",
+            "version": "1.0.2",
+            "fileSha256": "d664c043932f07d87259e2cf17d789ec60047823f052edeeedce86c5e39f15ff",
+            "transport": {
+              "type": "stdio"
+            }
+          }
+        ]
+      },
+      "_meta": {
+        "io.modelcontextprotocol.registry/official": {
+          "status": "active",
+          "statusChangedAt": "2026-10-05T01:05:02.579087Z",
+          "publishedAt": "2026-10-05T01:05:02.579087Z",
+          "updatedAt": "2026-10-05T01:05:02.579087Z",
+          "isLatest": true
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "count": 2
+  }
+}

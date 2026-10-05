@@ -11,7 +11,7 @@ It follows the current source branch; consult
 |---------|--------|-------|
 | Hosted public API (`https://dotrepo.org/v0/...`) | Live | Static export + Cloudflare hosted-query Worker |
 | MCP server (`dotrepo-mcp`) | Shipped | Stdio; NDJSON framing (1.0.1); registry package path documented |
-| crates.io (`dotrepo-cli`, `dotrepo-mcp`, `dotrepo-lsp`, …) | Stable package path | Pin `1.0.1` for consumers; `main` is unreleased `2.0.0-alpha.0`; the separate `dotrepo` alias was added after the stable tag |
+| crates.io (`dotrepo-cli`, `dotrepo-mcp`, `dotrepo-lsp`, …) | Stable package path | Pin `1.0.2` for consumers; `main` is unreleased `2.0.0-alpha.0`; the separate `dotrepo` alias is absent from the stable release |
 | Lookup-efficiency benchmark page | Live | `/efficiency/` on the public site |
 | pagedigest publisher | Live | `/.well-known/pagedigest.json` |
 

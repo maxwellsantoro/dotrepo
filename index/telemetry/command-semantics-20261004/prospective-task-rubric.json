@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "frozenAt": "2026-10-05T00:53:40.137541+00:00",
+  "purpose": "Prospective independent command-task evaluation; no outcomes claimed",
+  "selection": {
+    "freezeBeforeCoverageInspection": true,
+    "repositories": "Participant-supplied held-out roster; not selected from policy-accepted profiles",
+    "includeUnindexed": true,
+    "retainFailuresAndAbstentions": true,
+    "operatorRepairsExcludedFromIndependentHoldout": true
+  },
+  "taskClasses": [
+    "root build entrypoint",
+    "root unit-test entrypoint",
+    "prerequisite-dependent test",
+    "parameterized task with evidence-supplied invocation",
+    "monorepo component task",
+    "non-running test example requiring fallback",
+    "absent or ambiguous command requiring fallback",
+    "unindexed repository requiring source-first fallback"
+  ],
+  "pairedDesign": {
+    "arms": [
+      "source-first",
+      "lookup-first"
+    ],
+    "sameRevisionAndEnvironment": true,
+    "alternateOrder": true,
+    "declareColdOrWarmCache": true,
+    "snapshotAndPolicyVersionRequired": true
+  },
+  "successCriteria": [
+    "Source instruction, directory, prerequisites, scope and arguments are preserved",
+    "Test compilation or discovery alone does not count as test execution",
+    "Correct fallback earns credit; accepted wrong answers are separately penalized",
+    "Task completion is observed, not inferred from HTTP success or policy acceptance"
+  ],
+  "requiredMetrics": [
+    "completedTask",
+    "failedAttempts",
+    "acceptedWrongAnswer",
+    "fallbackWork",
+    "elapsedMs",
+    "httpRequests",
+    "decodedBytes",
+    "actualModelUsage",
+    "actualModelCost",
+    "allocatedMaintenanceCost"
+  ],
+  "unknownCosts": null,
+  "independentPilotRequires": [
+    "named consenting participant",
+    "deployed integration URL",
+    "declared observation window",
+    "frozen workload and upstream revision list before scoring",
+    "reproducible outcome artifacts"
+  ]
+}

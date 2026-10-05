@@ -28,11 +28,12 @@ publication and consumer proof requires independent outcomes.
 - Validate index structure and claim history; preserve evidence and explicit
   uncertainty when sources no longer justify a value.
 - Check release-version and root toolchain parity. A tag, every package, and
-  every release asset must identify the same version.
+  every binary/MCP release asset must identify the same version. The extension
+  owns its independent package version; report it separately.
 - Validate the stable release/backport against its immutable tag and dependency
-  graph. The 1.0.2 candidate is merged into `codex/stable-1.0`, not published;
-  use [release compatibility](release-compatibility.md) for its scope. Preserve
-  branch-only labels and published 1.0.1 install defaults until artifacts ship.
+  graph. Stable 1.0.2 ships from `codex/stable-1.0`; use
+  [release compatibility](release-compatibility.md) for its scope and retained
+  installation evidence. Keep branch-only work distinct from published artifacts.
 - After publishing a stable tag, advance workspace and standalone alias to the
   next appropriate prerelease; do not reuse the published version for new source.
 - Advance `DEFAULT_CI_RELEASE_VERSION` in `adoption.rs` and regenerate the native

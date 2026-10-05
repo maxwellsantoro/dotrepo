@@ -75,7 +75,7 @@ intentional, change `.repo` and run `generate`, then inspect the resulting diff.
 Create the starter GitHub Actions workflow with a published stable version:
 
 ```bash
-dotrepo --root <repo> ci init --version 1.0.1
+dotrepo --root <repo> ci init --version 1.0.2
 ```
 
 The native-only scaffold installs a pinned Linux release bundle on
