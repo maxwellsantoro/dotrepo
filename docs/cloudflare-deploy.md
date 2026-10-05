@@ -114,6 +114,14 @@ The workflow:
 - captures the emitted deployed URL
 - smoke-tests the live deployed Worker against the same validated export
 
+PageDigest and snapshot restoration use the same bounded HTTP reader and explicit
+`dotrepo-public-deploy/1.0` User-Agent. Transient transport failures and selected
+HTTP failures receive bounded retries; persistent authorization/policy failures
+stop immediately with a capped response diagnostic and Cloudflare request ID.
+An HTTP 403 requires inspecting the reported policy error and edge configuration.
+Restoration still validates source hashes, snapshot identity, and history before
+changing local state; do not bypass it or seed an empty history to resume deploys.
+
 The live smoke checks:
 
 - the deployed `v0/meta.json`, `v0/files.json`, and `v0/repos/index.json`

@@ -1,0 +1,135 @@
+{
+  "auditedRecords": 73,
+  "auditedFields": 103,
+  "sourceCount": 74,
+  "corrections": [
+    {
+      "identity": "github.com/OpenMined/PySyft",
+      "field": "repo.build",
+      "value": null,
+      "assessment": "removed",
+      "selectedStatus": "imported"
+    },
+    {
+      "identity": "github.com/WebKit/WebKit",
+      "field": "repo.build",
+      "value": null,
+      "assessment": "removed",
+      "selectedStatus": "inferred"
+    },
+    {
+      "identity": "github.com/cli/cli",
+      "field": "repo.test",
+      "value": "make test",
+      "assessment": "removed",
+      "selectedStatus": "inferred"
+    },
+    {
+      "identity": "github.com/etcd-io/etcd",
+      "field": "repo.test",
+      "value": "make test-unit",
+      "assessment": "removed",
+      "selectedStatus": "imported"
+    },
+    {
+      "identity": "github.com/explosion/spaCy",
+      "field": "repo.build",
+      "value": null,
+      "assessment": "removed",
+      "selectedStatus": "imported"
+    },
+    {
+      "identity": "github.com/ggml-org/llama.cpp",
+      "field": "repo.build",
+      "value": null,
+      "assessment": "removed",
+      "selectedStatus": "inferred"
+    },
+    {
+      "identity": "github.com/grpc/grpc",
+      "field": "repo.build",
+      "value": null,
+      "assessment": "removed",
+      "selectedStatus": "inferred"
+    },
+    {
+      "identity": "github.com/hashicorp/vault",
+      "field": "repo.build",
+      "value": null,
+      "assessment": "removed",
+      "selectedStatus": "imported"
+    },
+    {
+      "identity": "github.com/huggingface/datasets",
+      "field": "repo.test",
+      "value": "make test",
+      "assessment": "removed",
+      "selectedStatus": "imported"
+    },
+    {
+      "identity": "github.com/huggingface/transformers",
+      "field": "repo.test",
+      "value": "make test",
+      "assessment": "removed",
+      "selectedStatus": "imported"
+    },
+    {
+      "identity": "github.com/jesseduffield/lazygit",
+      "field": "repo.build",
+      "value": "make build",
+      "assessment": "removed",
+      "selectedStatus": "imported"
+    },
+    {
+      "identity": "github.com/jesseduffield/lazygit",
+      "field": "repo.test",
+      "value": "make unit-test",
+      "assessment": "removed",
+      "selectedStatus": "imported"
+    },
+    {
+      "identity": "github.com/juspay/hyperswitch",
+      "field": "repo.test",
+      "value": "make test",
+      "assessment": "removed",
+      "selectedStatus": "imported"
+    },
+    {
+      "identity": "github.com/luanfujun/deep-photo-styletransfer",
+      "field": "repo.build",
+      "value": "make all",
+      "assessment": "removed",
+      "selectedStatus": "imported"
+    },
+    {
+      "identity": "github.com/nitrictech/nitric",
+      "field": "repo.build",
+      "value": null,
+      "assessment": "removed",
+      "selectedStatus": "imported"
+    },
+    {
+      "identity": "github.com/openai/codex",
+      "field": "repo.test",
+      "value": null,
+      "assessment": "removed",
+      "selectedStatus": "inferred"
+    },
+    {
+      "identity": "github.com/shidenggui/easytrader",
+      "field": "repo.test",
+      "value": "make test",
+      "assessment": "removed",
+      "selectedStatus": "imported"
+    },
+    {
+      "identity": "github.com/uutils/coreutils",
+      "field": "repo.build",
+      "value": "make all",
+      "assessment": "removed",
+      "selectedStatus": "imported"
+    }
+  ],
+  "correctedRecords": 17,
+  "correctedFields": 18
+}

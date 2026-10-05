@@ -1,0 +1,48 @@
+#
+# This file is part of the Witchcraft Compiler Collection
+# Copyright 2016-2026 Jonathan Brossard
+#
+# Homepage: https://github.com/endrazine/wcc/
+#
+# This file is licensed under MIT License.
+#
+
+COMPILER_VERSION := $(shell $(CC) --version)
+ifneq '' '$(findstring clang,$(COMPILER_VERSION))'
+  ASAN   := -fsanitize=address -static-libsan
+else
+  ASAN   := -fsanitize=address -static-libasan
+endif
+
+unamem := $(shell uname -m)
+
+CUSTOM_CFLAGS := -W -Wall -Wno-discarded-qualifiers -Wno-int-conversion -Wno-unused-parameter -Wno-unused-function -Wno-unused-result -fpie -pie -fPIC -g3 -ggdb -I../../include  -I./include/sflib/ -I./include -I../../include/  -Wno-incompatible-pointer-types  -fstack-protector-all -Wl,-z,relro,-z,now -DPACKAGE -DPACKAGE_VERSION -rdynamic -D_FORTIFY_SOURCE=2 -O2 
+
+ifeq ($(unamem), x86_64)
+CFLAGS += -masm=intel
+endif
+
+all:
+	mkdir -p bin
+	cd src && make CFLAGS=" $(CUSTOM_CFLAGS) $(CFLAGS)"
+
+asan: CFLAGS += $(ASAN)
+asan: all
+
+documentation:
+	cd src && doxygen ./tex/project.cfg
+	cd doc/latex && make && cp refman.pdf ../WCC_internal_documentation.pdf
+clean:
+	cd src && make clean
+	rm -f ./bin/*
+
+clean-documentation:
+#	rm -rf ./doc/html
+	rm -rf ./doc/latex
+
+install:
+	cd src && make install
+
+uninstall:
+	cd src && make uninstall
+

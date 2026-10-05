@@ -27,6 +27,19 @@ generated growth, coverage, promotion, and telemetry artifacts own live values.
 
 ### Trust, export, and crawler correctness
 
+- Cap MCP lookup JSON bodies and streamed reads, and bound error-body reads and
+  Unicode-safe diagnostics independently of the request timeout.
+
+- Parse only conservative literal Make targets, preserve their case, and retain
+  Make/Just entrypoints instead of dropping wrapper prerequisites or settings.
+  Withhold parameterized Just recipes and non-running Go test compilation or
+  discovery modes; align the reference consumer's fallback policy. Add source
+  semantics fixtures to the import gate and audit retained task-source commands
+  at pinned revisions, removing superseded assessments without refreshing
+  unrelated facts.
+- Share bounded deployment HTTP reads with a consistent User-Agent, capped
+  diagnostics and transient retries. Persistent access failures still stop
+  restoration and publication; preserve snapshot and append-only history checks.
 - Configure Luna primary, Qwen3.8 Flash second opinion, and GLM-5.3
   Flash tail adjudication. Share model-specific reasoning, output budgets, and
   required parameter support across the sidecar and benchmark; constrain reviewed

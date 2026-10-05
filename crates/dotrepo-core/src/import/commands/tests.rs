@@ -528,8 +528,8 @@ integration-test-all:\n\
     let candidate = infer_makefile_commands(&makefile).expect("Makefile commands");
     assert_eq!(
         candidate.test.as_deref(),
-        Some("go test ./... -short"),
-        "unit-test one-liner must unwrap before composite make test"
+        Some("make unit-test"),
+        "unit-test entrypoint must preserve wrapper semantics"
     );
 }
 
@@ -678,7 +678,7 @@ fn makefile_commands_name_only_targets_that_exist() {
     };
     let candidate = infer_makefile_commands(&makefile).expect("Makefile commands");
     assert_eq!(candidate.build, None);
-    assert_eq!(candidate.test.as_deref(), Some("python -m pytest tests"));
+    assert_eq!(candidate.test.as_deref(), Some("make test"));
 
     // A Makefile whose only build-ish target is `all` publishes `make all`
     // when the recipe is project-specific rather than a canonical
@@ -963,4 +963,41 @@ fn pyproject_tox_conflicts_with_setup_py_pytest_instead_of_losing() {
         "expected conflict note, got: {:?}",
         result.notes
     );
+}
+
+#[test]
+fn nonexecuting_test_modes_are_withheld_without_rewriting_flags() {
+    use super::super::types::ImportedFile;
+    use super::extraction::{first_matching_workflow_command, infer_contributing_commands};
+    for command in [
+        "go test -v -c -count 1",
+        "go test -c=true ./...",
+        "go test -c=TRUE",
+        "go test -list . ./...",
+        "cargo test --no-run",
+        "pytest --collect-only",
+        "pytest {{target}}",
+    ] {
+        assert!(sanitize_import_command(command).is_none(), "{command}");
+        if !command.contains("{{") {
+            assert!(
+                first_matching_workflow_command(&[command.into()], false).is_none(),
+                "{command}"
+            );
+            let file = ImportedFile {
+                path: "CONTRIBUTING.md".into(),
+                contents: format!("## Tests\n```sh\n{command}\n```\n"),
+            };
+            assert!(infer_contributing_commands(&file).is_none(), "{command}");
+        }
+    }
+    for command in [
+        "go test -c=false ./...",
+        "go test -c=0 ./...",
+        "go test ./...",
+        "pytest -c pytest.ini",
+        "cargo test",
+    ] {
+        assert!(sanitize_import_command(command).is_some(), "{command}");
+    }
 }

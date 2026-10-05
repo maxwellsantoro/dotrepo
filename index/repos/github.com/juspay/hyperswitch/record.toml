@@ -11,7 +11,7 @@ confidence = "medium"
 provenance = [
     "imported",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `cypress-tests/package.json`, `Makefile`, and `Cargo.toml`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@juspay/hyperswitch-maintainers` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Imported `repo.build` from `cypress-tests/package.json`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved. 2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `cypress-tests/package.json`, `Makefile`, and `Cargo.toml`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@juspay/hyperswitch-maintainers` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Imported `repo.build` from `cypress-tests/package.json`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved. 2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged. 2026-10-04 pinned command-source audit supersedes affected extraction assessments and prior auto-promotion. Corrected commands are unassessed pending full-record verification; unrelated inspection timestamps are unchanged. See index/telemetry/command-semantics-20261004/report.json."
 
 [repo]
 name = "hyperswitch"
@@ -36,7 +36,7 @@ languages = [
     "Makefile",
     "RenderScript",
 ]
-test = "cargo test --all-features"
+test = "make test"
 topics = [
     "payments",
     "rust",
@@ -155,14 +155,6 @@ source = "README.md"
 state = "present"
 valueJson = '"hyperswitch"'
 
-[x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:25:38.497729Z"
-confidence = "high"
-method = "extracted"
-reason = "from declared repository source"
-source = "Makefile"
-state = "present"
-valueJson = '"cargo test --all-features"'
 
 [x.github]
 archived = false

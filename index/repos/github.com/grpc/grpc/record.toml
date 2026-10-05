@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `Makefile`, and `pyproject.toml`. Filled `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Makefile`. Inferred `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `Makefile`, and `pyproject.toml`. Filled `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Makefile`. Inferred `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. 2026-10-04 pinned command-source audit supersedes affected extraction assessments and prior auto-promotion. Corrected commands are unassessed pending full-record verification; unrelated inspection timestamps are unchanged. See index/telemetry/command-semantics-20261004/report.json."
 
 [repo]
 name = "gRPC"
@@ -47,7 +47,6 @@ languages = [
     "Linker Script",
     "HTML",
 ]
-build = "make all"
 test = "python -m pytest"
 topics = []
 
@@ -67,7 +66,7 @@ references = []
 [[relations.links]]
 kind = "related"
 target = "github.com/grpc/grpc-dotnet"
-notes = "Cross-link from README: C#/.NET"
+notes = "Cross-link from README: C#/.NET 2026-10-04 pinned command-source audit supersedes affected extraction assessments and prior auto-promotion. Corrected commands are unassessed pending full-record verification; unrelated inspection timestamps are unchanged. See index/telemetry/command-semantics-20261004/report.json."
 
 [relations.links.trust]
 confidence = "low"
@@ -108,14 +107,6 @@ reason = "no single clear team in CODEOWNERS"
 state = "not_found"
 valueJson = "null"
 
-[x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:24:10.098438Z"
-confidence = "high"
-method = "extracted"
-reason = "from declared repository source"
-source = "Makefile"
-state = "present"
-valueJson = '"make all"'
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-16T16:24:10.098438Z"

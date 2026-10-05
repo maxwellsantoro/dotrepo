@@ -34,13 +34,31 @@ fn command_is_incomplete(command: &str) -> bool {
         || command.trim_end().ends_with('\\')
         || command.contains('<')
         || command.contains('>')
+        || command.contains("{{")
+        || command.contains("}}")
+        || is_nonexecuting_test_command(command)
         || command
             .split_whitespace()
             .any(|token| token.contains("...") && token != "./..." && !token.starts_with("//"))
         || command.contains("test_explain_what_is_being_tested")
-        || command
-            .split_whitespace()
-            .any(|token| matches!(token, "--collect-only" | "--no-run"))
+}
+
+/// Non-running modes cannot answer a request to execute tests. Match Go's
+/// boolean flag forms explicitly; `-c=false` still runs the tests.
+pub(crate) fn is_nonexecuting_test_command(command: &str) -> bool {
+    let tokens = command.split_whitespace().collect::<Vec<_>>();
+    tokens
+        .iter()
+        .any(|token| matches!(*token, "--collect-only" | "--no-run"))
+        || tokens.windows(2).any(|pair| pair == ["go", "test"])
+            && tokens.iter().any(|token| {
+                *token == "-c"
+                    || token
+                        .strip_prefix("-c=")
+                        .is_some_and(|value| !matches!(value, "false" | "False" | "FALSE" | "0"))
+                    || *token == "-list"
+                    || token.starts_with("-list=")
+            })
 }
 
 /// A dependency install is a prerequisite, even when package names mention a

@@ -3,12 +3,16 @@ from __future__ import annotations
 import importlib.util
 import io
 import json
+import sys
 from pathlib import Path
 
 import pytest
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 SCRIPT = REPO_ROOT / "scripts/fetch_pagedigest_baseline.py"
+sys.path.insert(0, str(SCRIPT.parent))
+import public_deploy_http as http  # noqa: E402
+
 SPEC = importlib.util.spec_from_file_location("fetch_pagedigest_baseline", SCRIPT)
 assert SPEC is not None and SPEC.loader is not None
 MODULE = importlib.util.module_from_spec(SPEC)
@@ -67,7 +71,7 @@ def test_fetch_manifest_bounds_and_parses_response(monkeypatch: pytest.MonkeyPat
 
     body = json.dumps(manifest()).encode()
     monkeypatch.setattr(
-        MODULE,
+        http,
         "urlopen",
         lambda request, timeout: Response(body),
     )

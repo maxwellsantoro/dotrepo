@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run python
 """Fetch and validate the deployed PageDigest manifest used as an export baseline."""
 
 from __future__ import annotations
@@ -6,10 +6,8 @@ from __future__ import annotations
 import argparse
 import json
 import re
-import time
 from pathlib import Path
-from urllib.parse import urlparse
-from urllib.request import Request, urlopen
+from public_deploy_http import DeploymentFetchError, fetch_public_bytes
 
 MAX_MANIFEST_BYTES = 16 * 1024 * 1024
 SHA256_RE = re.compile(r"^sha256:[0-9a-f]{64}$")
@@ -68,19 +66,11 @@ def validate_manifest(payload: object) -> dict:
     return payload
 
 
-def fetch_manifest(url: str, timeout: float) -> dict:
-    request = Request(
-        url,
-        headers={
-            "Accept": "application/json",
-            "Cache-Control": "no-cache",
-            "User-Agent": "dotrepo-public-deploy/1.0",
-        },
-    )
-    with urlopen(request, timeout=timeout) as response:
-        body = response.read(MAX_MANIFEST_BYTES + 1)
-    if len(body) > MAX_MANIFEST_BYTES:
-        raise BaselineError(f"manifest exceeds the {MAX_MANIFEST_BYTES}-byte safety limit")
+def fetch_manifest(url: str, timeout: float, *, attempts: int = 1) -> dict:
+    try:
+        body = fetch_public_bytes(url, timeout, max_bytes=MAX_MANIFEST_BYTES, attempts=attempts)
+    except DeploymentFetchError as exc:
+        raise BaselineError(str(exc)) from exc
     try:
         payload = json.loads(body.decode("utf-8"))
     except (UnicodeDecodeError, json.JSONDecodeError) as exc:
@@ -89,24 +79,9 @@ def fetch_manifest(url: str, timeout: float) -> dict:
 
 
 def fetch_with_retries(url: str, timeout: float, attempts: int) -> dict:
-    parsed_url = urlparse(url)
-    if parsed_url.scheme != "https" or not parsed_url.netloc:
-        raise BaselineError("baseline URL must be an absolute HTTPS URL")
-    if attempts < 1:
-        raise BaselineError("attempts must be at least 1")
-
-    last_error: Exception | None = None
-    for attempt in range(1, attempts + 1):
-        try:
-            return fetch_manifest(url, timeout)
-        except (BaselineError, OSError) as exc:
-            last_error = exc
-            if attempt < attempts:
-                time.sleep(min(2 ** (attempt - 1), 4))
-
-    raise BaselineError(
-        f"failed to fetch a valid PageDigest baseline after {attempts} attempts: {last_error}"
-    )
+    # Only the shared HTTP helper retries transient transport failures. Invalid
+    # manifests and persistent policy failures cannot be fixed by retrying.
+    return fetch_manifest(url, timeout, attempts=attempts)
 
 
 def write_manifest(output: Path, manifest: dict) -> None:

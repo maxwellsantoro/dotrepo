@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/uutils/coreutils"
 generated_at = "2026-09-19T06:06:10.625406857Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, `GNUmakefile`, and `Cargo.toml`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `GNUmakefile`. Imported `repo.test` from `GNUmakefile`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, `GNUmakefile`, and `Cargo.toml`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `GNUmakefile`. Imported `repo.test` from `GNUmakefile`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. 2026-10-04 pinned command-source audit supersedes affected extraction assessments and prior auto-promotion. Corrected commands are unassessed pending full-record verification; unrelated inspection timestamps are unchanged. See index/telemetry/command-semantics-20261004/report.json."
 
 [repo]
 name = "uutils coreutils"
@@ -32,7 +31,7 @@ languages = [
     "Nix",
     "Dockerfile",
 ]
-build = "make build"
+build = "make all"
 test = "make test"
 topics = [
     "rust",
@@ -60,7 +59,7 @@ references = []
 [[relations.links]]
 kind = "related"
 target = "github.com/uutils/coreutils"
-notes = "Declared repository in Cargo.toml."
+notes = "Declared repository in Cargo.toml. 2026-10-04 pinned command-source audit supersedes affected extraction assessments and prior auto-promotion. Corrected commands are unassessed pending full-record verification; unrelated inspection timestamps are unchanged. See index/telemetry/command-semantics-20261004/report.json."
 
 [relations.links.trust]
 confidence = "low"
@@ -102,14 +101,6 @@ reason = "no single clear team in CODEOWNERS"
 state = "not_found"
 valueJson = "null"
 
-[x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-19T06:06:10.625406857Z"
-confidence = "high"
-method = "extracted"
-reason = "from declared repository source"
-source = "GNUmakefile"
-state = "present"
-valueJson = '"make build"'
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-19T06:06:10.625406857Z"

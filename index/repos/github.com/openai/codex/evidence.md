@@ -21,3 +21,11 @@ Prior verified authority was not inherited: this refresh must qualify using its 
 2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged.
 
 - Withheld `repo.build` previously extracted from `codex-rs/Cargo.toml` as `cargo build --workspace`. Component command lacks repository-default scope and working directory.
+
+## 2026-10-04 command semantics correction
+
+The preceding import and auto-promotion entries are historical and superseded for the fields below. Pinned sources were inspected statically; upstream task recipes were not executed. This does not establish task correctness or refresh other facts. Prior affected field assessments were removed, and verified authority was superseded where necessary.
+
+- repo.test: `just test` -> withheld (inspected `justfile`)
+
+Receipt and source hashes: [command-source audit](../../../../telemetry/command-semantics-20261004/report.json).

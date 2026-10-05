@@ -1,0 +1,16 @@
+{
+  "baseCommit": "8a923f8b23009a1de453b03abc56c8da294ee0b7",
+  "checks": {
+    "MCP tests": "38 passed including streamed HTTP body cap",
+    "Clippy workspace": "passed",
+    "complete release gate with VSIX": "passed"
+  },
+  "releaseGateLog": "/tmp/dotrepo-review-delivery-release-gate.log",
+  "MCPBodyLimits": {
+    "successBytes": 8388608,
+    "errorBytes": 4096,
+    "diagnosticCharacters": 1024
+  },
+  "protectionReceipt": "merge-enforcement.json",
+  "publication": "pending CI and protected merge"
+}

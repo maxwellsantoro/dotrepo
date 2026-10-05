@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/explosion/spaCy"
 generated_at = "2026-09-16T16:22:53.898475Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md` and `Makefile`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `Makefile`. Imported `repo.test` from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `Makefile`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `Makefile`. Imported `repo.test` from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. 2026-10-04 pinned command-source audit supersedes affected extraction assessments and prior auto-promotion. Corrected commands are unassessed pending full-record verification; unrelated inspection timestamps are unchanged. See index/telemetry/command-semantics-20261004/report.json."
 
 [repo]
 name = "spaCy"
@@ -36,7 +35,6 @@ languages = [
     "Dockerfile",
     "C++",
 ]
-build = "make package"
 test = "python -m pytest --pyargs spacy"
 topics = [
     "natural-language-processing",
@@ -94,14 +92,6 @@ reason = "no single clear team in CODEOWNERS"
 state = "not_found"
 valueJson = "null"
 
-[x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:22:53.898475Z"
-confidence = "high"
-method = "extracted"
-reason = "from declared repository source"
-source = "Makefile"
-state = "present"
-valueJson = '"make package"'
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-16T16:22:53.898475Z"

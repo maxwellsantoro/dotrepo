@@ -2,17 +2,16 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/jesseduffield/lazygit"
 generated_at = "2026-09-16T16:35:44.679571Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `Makefile`, and `go.mod`. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `Makefile`, and `go.mod`. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved. 2026-10-04 pinned command-source audit supersedes affected extraction assessments and prior auto-promotion. Corrected commands are unassessed pending full-record verification; unrelated inspection timestamps are unchanged. See index/telemetry/command-semantics-20261004/report.json."
 
 [repo]
 name = "lazygit"
@@ -28,8 +27,8 @@ languages = [
     "Makefile",
     "Dockerfile",
 ]
-build = "go build -gcflags='all=-N -l'"
-test = "go test ./... -short"
+build = "make build"
+test = "make unit-test"
 topics = [
     "cli",
     "git",
@@ -72,14 +71,6 @@ reason = "no single clear team in CODEOWNERS"
 state = "not_found"
 valueJson = "null"
 
-[x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:35:44.679571Z"
-confidence = "high"
-method = "extracted"
-reason = "from declared repository source"
-source = "Makefile"
-state = "present"
-valueJson = """"go build -gcflags='all=-N -l'""""
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-16T16:35:44.679571Z"
@@ -107,14 +98,6 @@ source = "README.md"
 state = "present"
 valueJson = '"lazygit"'
 
-[x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:35:44.679571Z"
-confidence = "high"
-method = "extracted"
-reason = "from declared repository source"
-source = "Makefile"
-state = "present"
-valueJson = '"go test ./... -short"'
 
 [x.github]
 archived = false

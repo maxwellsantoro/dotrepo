@@ -2,17 +2,16 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/OpenMined/PySyft"
 generated_at = "2026-10-04T07:50:02.340451602Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `Justfile`, `CONTRIBUTING.md`, and `pyproject.toml`. Imported `repo.build` from `Justfile`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `Justfile`, `CONTRIBUTING.md`, and `pyproject.toml`. Imported `repo.build` from `Justfile`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. 2026-10-04 pinned command-source audit supersedes affected extraction assessments and prior auto-promotion. Corrected commands are unassessed pending full-record verification; unrelated inspection timestamps are unchanged. See index/telemetry/command-semantics-20261004/report.json."
 
 [repo]
 name = "PySyft v2"
@@ -32,7 +31,6 @@ languages = [
     "Dockerfile",
     "Jinja",
 ]
-build = "just build"
 test = "pytest tests/unit/ -v"
 topics = [
     "deep-learning",
@@ -86,14 +84,6 @@ reason = "no single clear team in CODEOWNERS"
 state = "not_found"
 valueJson = "null"
 
-[x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-04T07:50:02.340451602Z"
-confidence = "high"
-method = "extracted"
-reason = "from declared repository source"
-source = "Justfile"
-state = "present"
-valueJson = '"just build"'
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-10-04T07:50:02.340451602Z"
