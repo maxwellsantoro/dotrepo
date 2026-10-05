@@ -1,0 +1,68 @@
+{
+  "checkedAt": "2026-10-05T01:03:49.382726+00:00",
+  "binary": "/private/tmp/dotrepo-published-1.0.2/dotrepo-1.0.2-aarch64-apple-darwin/bin/dotrepo",
+  "binarySha256": "5d6f6ffcf38e2e8c3f5cf6c3b1adceb53074fd72a2983d976869a3122355b86a",
+  "version": "dotrepo 1.0.2",
+  "results": [
+    {
+      "fixture": "make-diagnostic",
+      "build": null,
+      "test": null,
+      "result": "passed"
+    },
+    {
+      "fixture": "make-comment",
+      "build": null,
+      "test": null,
+      "result": "passed"
+    },
+    {
+      "fixture": "make-uppercase",
+      "build": "make BUILD",
+      "test": null,
+      "result": "passed"
+    },
+    {
+      "fixture": "make-prerequisite",
+      "build": null,
+      "test": "make test",
+      "result": "passed"
+    },
+    {
+      "fixture": "make-expressions",
+      "build": null,
+      "test": null,
+      "result": "passed"
+    },
+    {
+      "fixture": "just-required-argument",
+      "build": null,
+      "test": null,
+      "result": "passed"
+    },
+    {
+      "fixture": "just-wrapper",
+      "build": null,
+      "test": "just test",
+      "result": "passed"
+    },
+    {
+      "fixture": "go-compile-only",
+      "build": null,
+      "test": null,
+      "result": "passed"
+    },
+    {
+      "fixture": "go-compile-then-runner",
+      "build": null,
+      "test": "go test ./...",
+      "result": "passed"
+    },
+    {
+      "fixture": "promotion-no-write",
+      "result": "passed",
+      "diagnostic": "standalone promotion is disabled: run a fresh crawler verification against inspected sources; retained assessments and record-wide provenance cannot authorize --apply\n"
+    }
+  ],
+  "versionSource": "Checksum-bound published bundle README; CLI has no --version flag"
+}

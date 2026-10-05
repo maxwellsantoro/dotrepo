@@ -1,0 +1,68 @@
+{
+  "checkedAt": "2026-10-05T01:05:38.201567+00:00",
+  "binary": "/private/tmp/dotrepo-crates-1.0.2/bin/dotrepo",
+  "binarySha256": "aeaf94a0af250ab3d1f04087d6d07bda651869900bf5381697d5c5efe2c5104f",
+  "version": "dotrepo 1.0.2",
+  "results": [
+    {
+      "fixture": "make-diagnostic",
+      "build": null,
+      "test": null,
+      "result": "passed"
+    },
+    {
+      "fixture": "make-comment",
+      "build": null,
+      "test": null,
+      "result": "passed"
+    },
+    {
+      "fixture": "make-uppercase",
+      "build": "make BUILD",
+      "test": null,
+      "result": "passed"
+    },
+    {
+      "fixture": "make-prerequisite",
+      "build": null,
+      "test": "make test",
+      "result": "passed"
+    },
+    {
+      "fixture": "make-expressions",
+      "build": null,
+      "test": null,
+      "result": "passed"
+    },
+    {
+      "fixture": "just-required-argument",
+      "build": null,
+      "test": null,
+      "result": "passed"
+    },
+    {
+      "fixture": "just-wrapper",
+      "build": null,
+      "test": "just test",
+      "result": "passed"
+    },
+    {
+      "fixture": "go-compile-only",
+      "build": null,
+      "test": null,
+      "result": "passed"
+    },
+    {
+      "fixture": "go-compile-then-runner",
+      "build": null,
+      "test": "go test ./...",
+      "result": "passed"
+    },
+    {
+      "fixture": "promotion-no-write",
+      "result": "passed",
+      "diagnostic": "standalone promotion is disabled: run a fresh crawler verification against inspected sources; retained assessments and record-wide provenance cannot authorize --apply\n"
+    }
+  ],
+  "versionSource": "Version-pinned crates.io install and package metadata; CLI has no --version flag"
+}

@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: "Release tag to publish (e.g. v1.0.1)"
+        description: "Release tag to publish (e.g. v1.0.2)"
         required: true
 
 permissions:
@@ -21,6 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install uv
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
       - name: Download release MCPB asset
         env:
           GH_TOKEN: ${{ github.token }}
@@ -36,7 +38,7 @@ jobs:
           bundle="mcpb-assets/dotrepo-mcp-${version}.mcpb"
           test -f "$bundle" || { echo "missing $bundle" >&2; exit 1; }
           digest="$(sha256sum "$bundle" | cut -d' ' -f1)"
-          python3 - "$version" "$digest" <<'PY'
+          uv run python - "$version" "$digest" <<'PY'
           import json, sys
           version, digest = sys.argv[1], sys.argv[2]
           with open("server.json") as fh:

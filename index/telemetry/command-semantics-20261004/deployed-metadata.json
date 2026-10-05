@@ -1,0 +1,25 @@
+{
+  "apiVersion": "v0",
+  "generatedAt": "2026-10-05T00:56:38.426082606Z",
+  "snapshotDigest": "80c39eb3565f7d66e0ae76b417012273b84d6bbb1bdb97abc5e716bea63e7dea",
+  "staleAfter": "2026-10-12T00:56:38.426082606Z",
+  "strategy": "content_addressed_summary_trust_and_profile",
+  "validators": {
+    "snapshot": "sha256:80c39eb3565f7d66e0ae76b417012273b84d6bbb1bdb97abc5e716bea63e7dea",
+    "etag": "\"dotrepo-v0-a0d35df2a73a6face527ccf5a65399defcbae8785ebfd3f3b48917db1e130479\""
+  },
+  "snapshotId": "a0d35df2a73a6face527ccf5a65399defcbae8785ebfd3f3b48917db1e130479",
+  "retention": {
+    "edgeGuarantee": "current_and_previous_snapshot",
+    "archiveGuarantee": "all_published_snapshots_retrievable_from_archive",
+    "logGuarantee": "append_only_never_pruned"
+  },
+  "paths": {
+    "root": "/v0/snapshots/a0d35df2a73a6face527ccf5a65399defcbae8785ebfd3f3b48917db1e130479",
+    "inventory": "/v0/snapshots/a0d35df2a73a6face527ccf5a65399defcbae8785ebfd3f3b48917db1e130479/repos/index.json",
+    "files": "/v0/snapshots/a0d35df2a73a6face527ccf5a65399defcbae8785ebfd3f3b48917db1e130479/files.json",
+    "stats": "/v0/stats.json",
+    "queryInputRoot": "/v0/snapshots/a0d35df2a73a6face527ccf5a65399defcbae8785ebfd3f3b48917db1e130479/query-input/",
+    "snapshotLog": "/v0/snapshots/log.json"
+  }
+}

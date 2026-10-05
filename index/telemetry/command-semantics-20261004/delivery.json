@@ -1,0 +1,47 @@
+{
+  "checkedAt": "2026-10-05T01:06:21.179217+00:00",
+  "mainMerge": "499994bd5f2bbc12dbbad44d62f035a99aff880d",
+  "stableTag": "v1.0.2",
+  "stableMerge": "5517484a3a2efc044fa316b5bee8a609c8c9e239",
+  "mainCI": "https://github.com/maxwellsantoro/dotrepo/actions/runs/37249043779",
+  "stableCI": "https://github.com/maxwellsantoro/dotrepo/actions/runs/37249286543",
+  "deployment": {
+    "run": "https://github.com/maxwellsantoro/dotrepo/actions/runs/37249371333",
+    "conclusion": "success",
+    "historyRestored": true,
+    "publicSmoke": "core routes and 24 manifest entries matched reviewed hashes",
+    "snapshotId": "a0d35df2a73a6face527ccf5a65399defcbae8785ebfd3f3b48917db1e130479",
+    "historyFile": "deployed-history.json"
+  },
+  "release": {
+    "url": "https://github.com/maxwellsantoro/dotrepo/releases/tag/v1.0.2",
+    "run": "https://github.com/maxwellsantoro/dotrepo/actions/runs/37249646918",
+    "binaryAndCratePublication": "success",
+    "registryAttempt": "rejected description length > 100; recovered with current bounded-description template",
+    "registryRecovery": "https://github.com/maxwellsantoro/dotrepo/actions/runs/37249977993",
+    "registryState": "active, latest 1.0.2; hash matches published MCPB",
+    "extensionVersion": "1.0.0 (independent unchanged extension package)",
+    "macBundleSha256": "06315420cf4a24e8513031fe21d145b7ae6b738819a5226c53f162d3fdd5744c"
+  },
+  "installation": {
+    "downloadedBundle": "published-bundle-safety.json",
+    "cratesIoInstall": "published-crates-safety.json",
+    "command": "cargo install dotrepo-cli --version 1.0.2 --locked --root /tmp/dotrepo-crates-1.0.2",
+    "controlledChecksPerInstallation": 10,
+    "bundlePublicQuerySmoke": "passed against stable gate public tree",
+    "stdioSmoke": "published-stdio-smoke.json",
+    "versionEvidence": [
+      "bundle README identifies 1.0.2",
+      "crates.io package and cargo installation report identify 1.0.2",
+      "published MCP initialize response identifies 1.0.2"
+    ],
+    "stableSourceRevision": "5517484a3a2efc044fa316b5bee8a609c8c9e239",
+    "reproductionScript": "check_installed_safety.py"
+  },
+  "independentEvaluation": {
+    "rubric": "prospective-task-rubric.json",
+    "participant": null,
+    "outcomes": null,
+    "status": "prepared; participant and frozen repository roster outstanding"
+  }
+}
