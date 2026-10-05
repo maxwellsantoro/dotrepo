@@ -479,10 +479,11 @@ fn deepen_security_contact(
             if !path.is_file() {
                 continue;
             }
-            let contents = match std::fs::read_to_string(&path) {
-                Ok(contents) => contents,
-                Err(_) => continue,
-            };
+            let contents =
+                match crate::import::read::read_input(root, std::path::Path::new(candidate)) {
+                    Ok(contents) => contents,
+                    Err(_) => continue,
+                };
             let contact = if candidate.contains("ISSUE_TEMPLATE") {
                 parse_issue_template_security(&contents)
             } else if candidate.contains("CONTRIBUTING") {
@@ -567,7 +568,8 @@ fn deepen_owners_team(
         if !path.is_file() {
             continue;
         }
-        let contents = match std::fs::read_to_string(&path) {
+        let contents = match crate::import::read::read_input(root, std::path::Path::new(candidate))
+        {
             Ok(contents) => contents,
             Err(_) => continue,
         };

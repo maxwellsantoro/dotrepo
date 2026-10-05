@@ -213,3 +213,24 @@ def test_writing_avoids_internal_review_labels():
     rendered = public_pages.render_writing_index("")
     assert "How dotrepo works, and what we’re learning." in rendered
     assert "Local review root" not in rendered
+
+
+def test_rendered_install_command_tracks_the_install_guide(tmp_path, monkeypatch):
+    from types import SimpleNamespace
+
+    input_dir = tmp_path / "public"
+    (input_dir / "v0/repos").mkdir(parents=True)
+    (input_dir / "v0/meta.json").write_text(json.dumps({"generatedAt": "2026-10-05T00:00:00Z"}))
+    (input_dir / "v0/repos/index.json").write_text(
+        json.dumps({"repositories": [], "repositoryCount": 0})
+    )
+    monkeypatch.setattr(
+        public_pages, "parse_args", lambda: SimpleNamespace(input_dir=str(input_dir))
+    )
+    monkeypatch.setattr(public_pages, "build_public_health", lambda *args: {})
+    public_pages.main()
+    rendered = (input_dir / "index.html").read_text()
+    assert public_pages.stable_mcp_install() in rendered
+    assert "cargo install dotrepo-mcp --version 1.0.2 --locked" in rendered
+    assert "cargo install dotrepo-mcp --version 1.0.1 --locked" not in rendered
+    assert "profile output and additional safeguards on main are unreleased" in rendered

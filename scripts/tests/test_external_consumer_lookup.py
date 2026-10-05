@@ -69,10 +69,10 @@ def test_task_policy_rejects_fresh_export_with_stale_record_and_allows_explicit_
 class _FakeResponse:
     def __init__(self, status: int, body: bytes) -> None:
         self.status = status
-        self._body = body
+        self._body = io.BytesIO(body)
 
-    def read(self) -> bytes:
-        return self._body
+    def read(self, size=-1) -> bytes:
+        return self._body.read(size)
 
     def getcode(self) -> int:
         return self.status
@@ -99,6 +99,69 @@ class _FakeOpener:
 
             raise urllib.error.HTTPError(url, self.status, "err", hdrs=None, fp=io.BytesIO(body))
         return _FakeResponse(self.status, body)
+
+
+@pytest.mark.parametrize("status", [200, 503])
+def test_response_bodies_are_bounded_and_closed(status):
+    limit = consumer.MAX_PROFILE_BYTES if status == 200 else consumer.MAX_ERROR_BYTES
+
+    class Body(io.BytesIO):
+        sizes = []
+
+        def read(self, size=-1):
+            self.sizes.append(size)
+            assert 0 < size <= 65536
+            return super().read(size)
+
+    body = Body(b"x" * (limit + 1))
+
+    class Opener:
+        def open(self, request, timeout):
+            if status != 200:
+                import urllib.error
+
+                raise urllib.error.HTTPError(request.full_url, status, "err", None, body)
+            response = _FakeResponse(status, b"")
+            response._body = body
+            response.__class__ = ClosingResponse
+            return response
+
+    class ClosingResponse(_FakeResponse):
+        def __exit__(self, *args):
+            self._body.close()
+
+    result = consumer.fetch_profile("example/repo", opener=Opener())
+    assert not result.usable
+    assert "exceeds" in result.error
+    assert body.closed and sum(body.sizes) <= limit + 1
+
+
+@pytest.mark.parametrize("status", [200, 503])
+def test_failure_after_headers_is_a_closed_transport_fallback(status):
+    class Body(io.BytesIO):
+        def read(self, size=-1):
+            raise TimeoutError("body interrupted")
+
+    body = Body()
+
+    class Response(_FakeResponse):
+        def __exit__(self, *args):
+            self._body.close()
+
+    class Opener:
+        def open(self, request, timeout):
+            if status != 200:
+                import urllib.error
+
+                raise urllib.error.HTTPError(request.full_url, status, "err", None, body)
+            response = Response(status, b"")
+            response._body = body
+            return response
+
+    result = consumer.fetch_profile("example/repo", opener=Opener())
+    assert not result.usable
+    assert result.error.startswith("transport:TimeoutError:")
+    assert body.closed
 
 
 def test_parse_repository_identity_from_url_and_short_form() -> None:

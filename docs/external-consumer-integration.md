@@ -127,12 +127,34 @@ guide; its commands still pass the same incomplete-example checks. This is a
 conservative suitability screen, not proof that a root-sourced command works.
 
 The development profile can carry optional value-bound `buildContext`,
-`testContext`, and candidate `context` objects. The reference client does not
-use these additions to accept component commands. Evaluate context-aware
-consumption separately against the
-[execution-context contract](../rfcs/0021-value-bound-execution-context.md):
-check the exact command, directory, scope, prerequisites, source, and age.
-An assessment for the command string alone does not establish the context.
+`testContext`, and candidate `context` objects. The reference client's separate
+`select_instruction` API uses policy `value-bound-contextual-instruction-v1`.
+It constructs an instruction from the public record, preserving command,
+directory, scope, component, prerequisite descriptions, source paths, and
+assessment provenance. A request can constrain directory, scope, and component;
+it cannot supply a replacement command or prerequisites. Multiple qualifying
+instructions require fallback. Legacy scalar policy remains separate.
+
+For a scalar, both `repo.build`/`repo.test` and its snake_case context path need
+fresh, present, extracted, high-confidence public assessments. A candidate needs
+one such assessment for its complete indexed object, for example
+`repo.test_candidates.0`. The public exporter publishes these only when
+`valueJson` matches the current complete manifest value and `checkedAt` matches
+the record timestamp. A string-only assessment cannot establish context.
+Assessment sources must match the corresponding command/context declarations;
+command and context sources may differ and both are retained. Records without
+these assessments remain unassessed; the client never creates them.
+
+This follows the [execution-context contract](../rfcs/0021-value-bound-execution-context.md).
+Prerequisites are descriptions, never automatic setup commands. The caller must
+establish them in its prepared environment before execution. The public context
+has no parameter or environment binding; instructions needing those additions
+cannot be reconstructed by copying benchmark answers. This is development
+reference-client behavior, not a feature of stable 1.0.2 MCP.
+
+HTTP bodies are capped at 8 MiB for successful responses and 4 KiB for error
+responses. Oversized bodies and failures after headers arrive return transport
+fallback results; response resources are closed on both paths.
 
 Policy coverage is published on the efficiency page and in its linked JSON.
 It distinguishes value presence, policy acceptance, independently established

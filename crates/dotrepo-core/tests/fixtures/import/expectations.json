@@ -1004,5 +1004,120 @@
     "overlay_evidence_contains": [
       "This is an overlay record"
     ]
+  },
+  {
+    "fixture": "rake-root",
+    "repo_name": "Rake fixture",
+    "repo_description": "Conservative task declaration extraction.",
+    "repo_build": "rake build",
+    "repo_test": "rake test",
+    "imported_sources": [
+      "README.md",
+      "Rakefile"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "`README.md`",
+      "`Rakefile`"
+    ],
+    "overlay_trust_note_contains": [
+      "`README.md`",
+      "`Rakefile`"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ]
+  },
+  {
+    "fixture": "rake-namespace",
+    "repo_name": "Rake fixture",
+    "repo_description": "Conservative task declaration extraction.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ]
+  },
+  {
+    "fixture": "rake-nested-namespace",
+    "repo_name": "Rake fixture",
+    "repo_description": "Conservative task declaration extraction.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ]
+  },
+  {
+    "fixture": "rake-mixed",
+    "repo_name": "Rake fixture",
+    "repo_description": "Conservative task declaration extraction.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ]
   }
 ]

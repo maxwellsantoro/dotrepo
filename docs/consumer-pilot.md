@@ -39,6 +39,26 @@ retain the failed broad selector before the Zig-only environment succeeds with
 the complete cohort. Their two-task denominator does not replace the eight-task
 repeat, and neither arm accepts an indexed command in these follow-ups.
 
+Before the next live packet, require the controlled Rust-public-export to Python
+selection and actual execution tests in `test_contextual_instruction_path.py`.
+They cover repository and component instructions without source fallback; they
+establish plumbing, not task benefit on the public projects. The repaired runner
+constructs profile instructions independently of the expected task answer and
+executes the selected instruction only after exact comparison of every context
+field. Wrong directory, component, prerequisites, or source still requires
+fallback. Prerequisites remain descriptions; separately frozen preparation
+commands establish the environment.
+
+New freezes retain SHA-256 bindings and source copies for all benchmark modules,
+the dynamically loaded consumer, `pyproject.toml`, and `uv.lock`. Execution refuses
+dependency or retained-source changes before HTTP or task execution. Old packets
+remain replayable for scoring but cannot be executed by the changed runner. A new
+campaign must also preregister protocol-compatible component paths and separate
+operator environment preparation from record instructions: historical human
+component labels and SDK environment fields must not be silently copied into
+profile answers. Use the merged RamenOS revision and the explicitly prepared
+Atlas environment in that new packet; do not amend the readiness packet.
+
 ## Deliverables
 
 - Dependency-free HTTP client: `examples/external-consumer/lookup_before_scrape.py`.

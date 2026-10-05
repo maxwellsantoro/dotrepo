@@ -6,6 +6,7 @@ use anyhow::{anyhow, Result};
 use std::fs;
 use std::path::{Path, PathBuf};
 
+use super::read::{check_input_path, read_input};
 use super::types::{ImportSources, ImportedCommandMetadata, ImportedFile};
 
 mod extraction;
@@ -46,9 +47,8 @@ pub(super) fn load_first_existing_file(
 ) -> Result<Option<ImportedFile>> {
     for candidate in candidates {
         let path = root.join(candidate);
-        if path.exists() {
-            let contents = fs::read_to_string(&path)
-                .map_err(|err| anyhow!("failed to read {}: {}", path.display(), err))?;
+        if fs::symlink_metadata(&path).is_ok() {
+            let contents = read_input(root, Path::new(candidate))?;
             return Ok(Some(ImportedFile {
                 path: candidate.to_string(),
                 contents,
@@ -71,8 +71,7 @@ pub(super) fn load_best_cargo_toml(root: &Path) -> Result<Option<ImportedFile>> 
     });
 
     for (relative, path) in matches {
-        let contents = fs::read_to_string(&path)
-            .map_err(|err| anyhow!("failed to read {}: {}", path.display(), err))?;
+        let contents = read_input(root, path.strip_prefix(root)?)?;
         let file = ImportedFile {
             path: relative,
             contents,
@@ -126,8 +125,7 @@ pub(super) fn load_best_python_manifest(
     });
 
     for (relative, path) in matches {
-        let contents = fs::read_to_string(&path)
-            .map_err(|err| anyhow!("failed to read {}: {}", path.display(), err))?;
+        let contents = read_input(root, path.strip_prefix(root)?)?;
         let file = ImportedFile {
             path: relative.clone(),
             contents,
@@ -210,8 +208,7 @@ pub(super) fn load_best_package_json(root: &Path) -> Result<Option<ImportedFile>
     });
 
     for (relative, path) in matches {
-        let contents = fs::read_to_string(&path)
-            .map_err(|err| anyhow!("failed to read {}: {}", path.display(), err))?;
+        let contents = read_input(root, path.strip_prefix(root)?)?;
         let file = ImportedFile {
             path: relative,
             contents,
@@ -303,6 +300,7 @@ fn collect_files_named(
             {
                 continue;
             }
+            check_input_path(root, path.strip_prefix(root)?)?;
             collect_files_named(root, &path, file_name, max_depth, depth + 1, out)?;
             continue;
         }
@@ -316,6 +314,7 @@ fn collect_files_named(
         {
             continue;
         }
+        check_input_path(root, path.strip_prefix(root)?)?;
         let relative = path
             .strip_prefix(root)
             .map(|value| value.to_string_lossy().replace('\\', "/"))
@@ -346,8 +345,7 @@ pub(super) fn load_first_file_with_extension(
     let Some((relative, path)) = matches.into_iter().next() else {
         return Ok(None);
     };
-    let contents = fs::read_to_string(&path)
-        .map_err(|err| anyhow!("failed to read {}: {}", path.display(), err))?;
+    let contents = read_input(root, path.strip_prefix(root)?)?;
     Ok(Some(ImportedFile {
         path: relative,
         contents,
@@ -391,6 +389,7 @@ fn collect_files_with_extension(
             if name.starts_with('.') || name.eq_ignore_ascii_case("node_modules") {
                 continue;
             }
+            check_input_path(root, path.strip_prefix(root)?)?;
             collect_files_with_extension(root, &path, extension, max_depth, depth + 1, out)?;
             continue;
         }
@@ -404,6 +403,7 @@ fn collect_files_with_extension(
         if !matches_extension {
             continue;
         }
+        check_input_path(root, path.strip_prefix(root)?)?;
         let relative = path
             .strip_prefix(root)
             .map(|value| value.to_string_lossy().replace('\\', "/"))
@@ -420,10 +420,11 @@ fn collect_files_with_extension(
 
 pub(super) fn load_workflow_import_files(root: &Path) -> Result<Vec<ImportedFile>> {
     let workflows_root = root.join(".github").join("workflows");
-    if !workflows_root.is_dir() {
+    if fs::symlink_metadata(&workflows_root).is_err() {
         return Ok(Vec::new());
     }
 
+    check_input_path(root, Path::new(".github/workflows"))?;
     let mut files = fs::read_dir(&workflows_root)
         .map_err(|err| anyhow!("failed to read {}: {}", workflows_root.display(), err))?
         .filter_map(|entry| entry.ok())
@@ -441,8 +442,7 @@ pub(super) fn load_workflow_import_files(root: &Path) -> Result<Vec<ImportedFile
 
     let mut imported = Vec::new();
     for (file_name, path) in files {
-        let contents = fs::read_to_string(&path)
-            .map_err(|err| anyhow!("failed to read {}: {}", path.display(), err))?;
+        let contents = read_input(root, path.strip_prefix(root)?)?;
         imported.push(ImportedFile {
             path: format!(".github/workflows/{}", file_name),
             contents,
