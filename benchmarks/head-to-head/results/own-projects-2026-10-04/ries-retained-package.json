@@ -1,0 +1,55 @@
+{
+  "name": "ries-rs",
+  "version": "2.0.2",
+  "description": "Find algebraic equations given their solution - WASM build",
+  "main": "pkg-node/ries_rs.js",
+  "module": "pkg-bundler/ries_rs.js",
+  "types": "pkg/ries_rs.d.ts",
+  "exports": {
+    ".": {
+      "types": "./pkg/ries_rs.d.ts",
+      "import": "./pkg-bundler/ries_rs.js",
+      "require": "./pkg-node/ries_rs.js",
+      "default": "./pkg/ries_rs.js"
+    }
+  },
+  "files": [
+    "pkg",
+    "pkg-node",
+    "pkg-bundler"
+  ],
+  "scripts": {
+    "build": "RUSTFLAGS='-C target-feature=-reference-types' rustup run nightly wasm-pack build --target web --out-dir pkg -- --features wasm -Z build-std=panic_abort,std",
+    "build:node": "RUSTFLAGS='-C target-feature=-reference-types' rustup run nightly wasm-pack build --target nodejs --out-dir pkg-node -- --features wasm -Z build-std=panic_abort,std",
+    "build:bundler": "RUSTFLAGS='-C target-feature=-reference-types' rustup run nightly wasm-pack build --target bundler --out-dir pkg-bundler -- --features wasm -Z build-std=panic_abort,std",
+    "build:web:site": "npm run build && bash scripts/build_web_site.sh",
+    "build:all": "npm run build && npm run build:node && npm run build:bundler",
+    "build:threads": "RUSTFLAGS='-C target-feature=+atomics,+bulk-memory' rustup run nightly wasm-pack build --target web --out-dir pkg-threads -- --features wasm-threads -Z build-std=panic_abort,std",
+    "prepack": "npm run build:all",
+    "test": "wasm-pack test --node -- --features wasm",
+    "test:web:smoke": "playwright test -c playwright.config.ts tests/web-smoke.spec.ts --reporter=line --workers=1",
+    "test:web:smoke:build": "npm run build:web:site && npm run test:web:smoke"
+  },
+  "keywords": [
+    "math",
+    "equation",
+    "solver",
+    "algebraic",
+    "inverse-symbolic-calculator",
+    "wasm",
+    "webassembly"
+  ],
+  "author": "Maxwell Santoro",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maxwellsantoro/ries-rs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/maxwellsantoro/ries-rs/issues"
+  },
+  "homepage": "https://maxwellsantoro.com/projects/ries-rs",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2"
+  }
+}

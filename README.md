@@ -123,7 +123,7 @@ files and regions dotrepo can manage.
 - [Toolchain and protocol reference](docs/reference-overview.md), including MCP
   tools, validation scope, and version boundaries
 - [Hosted API examples](docs/public-export-examples.md), [public architecture](docs/public-surface.md),
-  and [consumer pilot](docs/consumer-pilot.md)
+  and [own-project study and later pilot](docs/consumer-pilot.md)
 - [Trust model](docs/trust-model.md) and [authority rules](rfcs/0004-index-and-trust-model.md)
 - [Roadmap](ROADMAP.md), [contributing](CONTRIBUTING.md), and [index operations](index/README.md)
 

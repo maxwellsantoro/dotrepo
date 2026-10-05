@@ -1,0 +1,21 @@
+{
+  "taskId": "ries-rs-core-build",
+  "origin": "profile",
+  "instruction": {
+    "command": "npm run build",
+    "workingDirectory": ".",
+    "scope": "repository",
+    "component": null,
+    "prerequisites": [],
+    "parameters": {},
+    "environment": {},
+    "sourcePaths": [
+      "package.json"
+    ],
+    "purpose": "build"
+  },
+  "exitCode": null,
+  "oraclePassed": false,
+  "executionError": "accepted scalar does not establish frozen task context; not executed",
+  "commands": []
+}

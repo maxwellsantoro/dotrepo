@@ -1,0 +1,21 @@
+{
+  "scope": "Local final-state release-gate export; not a new paired run or public publication",
+  "observations": {
+    "repo.build": {
+      "value": "cargo build --release --locked",
+      "accepted": false,
+      "fallbackReasons": [
+        "missing-command-assessment:repo.build"
+      ],
+      "assessment": null
+    },
+    "repo.test": {
+      "value": "cargo nextest run --tests --locked",
+      "accepted": false,
+      "fallbackReasons": [
+        "missing-command-assessment:repo.test"
+      ],
+      "assessment": null
+    }
+  }
+}

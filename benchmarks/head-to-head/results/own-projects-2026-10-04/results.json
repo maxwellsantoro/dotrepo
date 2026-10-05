@@ -1,0 +1,441 @@
+{
+  "version": 1,
+  "workloadSha256": "1f294e164109631ac7e400ab86d06b6392c4350e50f8a8ca32a85fe225d5d1fd",
+  "consumerClass": "operator-controlled",
+  "snapshotId": "ed6e31ffa157cd6c96e8ff907a97ce1f707e059784e417b2bbf87ffaba931488",
+  "consumerPolicy": "explicit-high-confidence-extraction",
+  "cacheState": "warm",
+  "externalAdoption": false,
+  "independentlyVerifiedObservations": null,
+  "observationLimit": "Hashes bind supplied logs; this scorer does not independently witness external execution.",
+  "rows": [
+    {
+      "taskId": "RamenOS-host-build",
+      "taskClass": "host-build",
+      "arm": "source-first",
+      "completedTask": true,
+      "failedAttempts": 0,
+      "acceptedWrongAnswer": 0,
+      "policyAccepted": null,
+      "valuePresent": null,
+      "fallbackAttempts": 0,
+      "correctFallback": false,
+      "elapsedMs": 92319.88816600642,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 6561,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "RamenOS-host-build",
+      "taskClass": "host-build",
+      "arm": "lookup-first",
+      "completedTask": true,
+      "failedAttempts": 0,
+      "acceptedWrongAnswer": 0,
+      "policyAccepted": false,
+      "valuePresent": false,
+      "fallbackAttempts": 1,
+      "correctFallback": true,
+      "elapsedMs": 113240.74179198942,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 6561,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "RamenOS-host-proof",
+      "taskClass": "host-proof",
+      "arm": "lookup-first",
+      "completedTask": false,
+      "failedAttempts": 1,
+      "acceptedWrongAnswer": 0,
+      "policyAccepted": false,
+      "valuePresent": false,
+      "fallbackAttempts": 1,
+      "correctFallback": false,
+      "elapsedMs": 51378.79300001077,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 11493,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "RamenOS-host-proof",
+      "taskClass": "host-proof",
+      "arm": "source-first",
+      "completedTask": false,
+      "failedAttempts": 1,
+      "acceptedWrongAnswer": 0,
+      "policyAccepted": null,
+      "valuePresent": null,
+      "fallbackAttempts": 0,
+      "correctFallback": false,
+      "elapsedMs": 43332.76650001062,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 11493,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "sha256-benchmark-atlas-build",
+      "taskClass": "build",
+      "arm": "source-first",
+      "completedTask": false,
+      "failedAttempts": 1,
+      "acceptedWrongAnswer": 0,
+      "policyAccepted": null,
+      "valuePresent": null,
+      "fallbackAttempts": 0,
+      "correctFallback": false,
+      "elapsedMs": 79792.87808400113,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 5216,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "sha256-benchmark-atlas-build",
+      "taskClass": "build",
+      "arm": "lookup-first",
+      "completedTask": false,
+      "failedAttempts": 1,
+      "acceptedWrongAnswer": 0,
+      "policyAccepted": false,
+      "valuePresent": false,
+      "fallbackAttempts": 1,
+      "correctFallback": false,
+      "elapsedMs": 98615.45387501246,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 5216,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "sha256-benchmark-atlas-correctness",
+      "taskClass": "correctness",
+      "arm": "lookup-first",
+      "completedTask": false,
+      "failedAttempts": 1,
+      "acceptedWrongAnswer": 0,
+      "policyAccepted": false,
+      "valuePresent": false,
+      "fallbackAttempts": 1,
+      "correctFallback": false,
+      "elapsedMs": 108373.017083999,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 5216,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "sha256-benchmark-atlas-correctness",
+      "taskClass": "correctness",
+      "arm": "source-first",
+      "completedTask": false,
+      "failedAttempts": 1,
+      "acceptedWrongAnswer": 0,
+      "policyAccepted": null,
+      "valuePresent": null,
+      "fallbackAttempts": 0,
+      "correctFallback": false,
+      "elapsedMs": 194958.11962499283,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 5216,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "ries-rs-core-build",
+      "taskClass": "core-build",
+      "arm": "source-first",
+      "completedTask": true,
+      "failedAttempts": 0,
+      "acceptedWrongAnswer": 0,
+      "policyAccepted": null,
+      "valuePresent": null,
+      "fallbackAttempts": 0,
+      "correctFallback": false,
+      "elapsedMs": 28274.14762499393,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 3451,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "ries-rs-core-build",
+      "taskClass": "core-build",
+      "arm": "lookup-first",
+      "completedTask": true,
+      "failedAttempts": 1,
+      "acceptedWrongAnswer": 1,
+      "policyAccepted": true,
+      "valuePresent": true,
+      "fallbackAttempts": 1,
+      "correctFallback": false,
+      "elapsedMs": 15066.635124996537,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 8363,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "ries-rs-core-test",
+      "taskClass": "core-test",
+      "arm": "lookup-first",
+      "completedTask": true,
+      "failedAttempts": 1,
+      "acceptedWrongAnswer": 1,
+      "policyAccepted": true,
+      "valuePresent": true,
+      "fallbackAttempts": 1,
+      "correctFallback": false,
+      "elapsedMs": 69821.36970799183,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 8239,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "ries-rs-core-test",
+      "taskClass": "core-test",
+      "arm": "source-first",
+      "completedTask": true,
+      "failedAttempts": 0,
+      "acceptedWrongAnswer": 0,
+      "policyAccepted": null,
+      "valuePresent": null,
+      "fallbackAttempts": 0,
+      "correctFallback": false,
+      "elapsedMs": 85582.2070419963,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 3327,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "pagedigest-consumer-test",
+      "taskClass": "consumer-test",
+      "arm": "source-first",
+      "completedTask": true,
+      "failedAttempts": 0,
+      "acceptedWrongAnswer": 0,
+      "policyAccepted": null,
+      "valuePresent": null,
+      "fallbackAttempts": 0,
+      "correctFallback": false,
+      "elapsedMs": 5049.582500010729,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 4902,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "pagedigest-consumer-test",
+      "taskClass": "consumer-test",
+      "arm": "lookup-first",
+      "completedTask": true,
+      "failedAttempts": 0,
+      "acceptedWrongAnswer": 0,
+      "policyAccepted": false,
+      "valuePresent": false,
+      "fallbackAttempts": 1,
+      "correctFallback": true,
+      "elapsedMs": 3418.5505000059493,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 4902,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "pagedigest-generator-test",
+      "taskClass": "generator-test",
+      "arm": "lookup-first",
+      "completedTask": true,
+      "failedAttempts": 0,
+      "acceptedWrongAnswer": 0,
+      "policyAccepted": false,
+      "valuePresent": false,
+      "fallbackAttempts": 1,
+      "correctFallback": true,
+      "elapsedMs": 20497.401667002123,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 4902,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "pagedigest-generator-test",
+      "taskClass": "generator-test",
+      "arm": "source-first",
+      "completedTask": true,
+      "failedAttempts": 0,
+      "acceptedWrongAnswer": 0,
+      "policyAccepted": null,
+      "valuePresent": null,
+      "fallbackAttempts": 0,
+      "correctFallback": false,
+      "elapsedMs": 21161.6982499836,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 4902,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    }
+  ],
+  "summary": {
+    "source-first": {
+      "attemptedTasks": 8,
+      "completedTask": 5,
+      "failedAttempts": 3,
+      "acceptedWrongAnswer": 0,
+      "fallbackAttempts": 0,
+      "correctFallback": 0,
+      "policyAcceptedTasks": 0,
+      "elapsedMs": 550471.2877919956,
+      "transport": {
+        "httpRequests": 8,
+        "decodedBytes": 45068,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    "lookup-first": {
+      "attemptedTasks": 8,
+      "completedTask": 5,
+      "failedAttempts": 5,
+      "acceptedWrongAnswer": 2,
+      "fallbackAttempts": 8,
+      "correctFallback": 3,
+      "policyAcceptedTasks": 2,
+      "elapsedMs": 480411.9627510081,
+      "transport": {
+        "httpRequests": 16,
+        "decodedBytes": 54892,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    }
+  }
+}

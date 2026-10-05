@@ -1,0 +1,21 @@
+{
+  "taskId": "ries-rs-core-test",
+  "origin": "profile",
+  "instruction": {
+    "command": "npm test",
+    "workingDirectory": ".",
+    "scope": "repository",
+    "component": null,
+    "prerequisites": [],
+    "parameters": {},
+    "environment": {},
+    "sourcePaths": [
+      "package.json"
+    ],
+    "purpose": "test"
+  },
+  "exitCode": null,
+  "oraclePassed": false,
+  "executionError": "accepted scalar does not establish frozen task context; not executed",
+  "commands": []
+}

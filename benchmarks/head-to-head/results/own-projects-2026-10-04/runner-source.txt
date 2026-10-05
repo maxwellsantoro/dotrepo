@@ -1,0 +1,496 @@
+"""Bounded operator study on eight fixed tasks in four maintainer-owned projects.
+
+Source decisions are manually preregistered, not independent agent decisions.
+Freeze precedes profile requests. Only fixed source commands run; an unfamiliar
+accepted profile is logged as an unexecuted context mismatch and falls back.
+"""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import os
+import platform
+import re
+import shlex
+import signal
+import subprocess
+import sys
+import tempfile
+import time
+from datetime import datetime, timezone
+from pathlib import Path
+from urllib.error import HTTPError
+from urllib.request import Request, urlopen
+
+from .arms.lookup_first import consumer
+from .tasks import ARMS, markdown, score
+
+REVISIONS = {
+    "RamenOS": "eba7fb7ce53807a6b9b5a85bd3caaf9f7749d917",
+    "sha256-benchmark-atlas": "866fe127542178c35515f51afed30c41616bdd77",
+    "ries-rs": "cfa959ed21a5a5e5f3d9538d9d1714c2401611e5",
+    "pagedigest": "f880f813cc0df49603482dbd879ff4ef49b3a519",
+}
+# Commands and scope were selected from pinned upstream sources, before coverage.
+CASES = [
+    (
+        "RamenOS",
+        "host-build",
+        "just build-host",
+        ".",
+        "host components",
+        "docs/GETTING_STARTED.md",
+        ["just codegen (included by wrapper)", "pinned Rust nightly and just"],
+        [],
+    ),
+    (
+        "RamenOS",
+        "host-proof",
+        "just foundry-agent-task-proof-rt",
+        ".",
+        "host task proof",
+        "README.md",
+        ["pinned Rust nightly and just"],
+        [],
+    ),
+    (
+        "sha256-benchmark-atlas",
+        "build",
+        "uv run sha256-atlas build",
+        ".",
+        None,
+        "README.md",
+        ["uv sync", "README quick-start compiler/toolchain prerequisites"],
+        ["uv sync"],
+    ),
+    (
+        "sha256-benchmark-atlas",
+        "correctness",
+        "uv run sha256-atlas correctness --cases 1000 --skip-million",
+        ".",
+        None,
+        "README.md",
+        [
+            "uv sync",
+            "README quick-start compiler/toolchain prerequisites",
+            "uv run sha256-atlas build",
+        ],
+        ["uv sync", "uv run sha256-atlas build"],
+    ),
+    (
+        "ries-rs",
+        "core-build",
+        "cargo build",
+        ".",
+        "Rust core and CLI",
+        "CONTRIBUTING.md",
+        ["Rust/Cargo"],
+        [],
+    ),
+    (
+        "ries-rs",
+        "core-test",
+        "cargo test",
+        ".",
+        "Rust core and CLI",
+        "AGENTS.md",
+        ["Rust/Cargo"],
+        [],
+    ),
+    (
+        "pagedigest",
+        "consumer-test",
+        "uv run --locked python -m unittest discover -s tests -v",
+        "implementations/python-consumer",
+        "Python consumer",
+        "AGENTS.md",
+        ["uv and locked consumer environment"],
+        [],
+    ),
+    (
+        "pagedigest",
+        "generator-test",
+        "cargo test --locked",
+        "implementations/rust-generator",
+        "Rust generator",
+        "AGENTS.md",
+        ["Rust/Cargo"],
+        [],
+    ),
+]
+TIMEOUT = 300
+MAX_BODY = 8 * 1024 * 1024
+
+
+def now():
+    return datetime.now(timezone.utc).isoformat()
+
+
+def write(path, value):
+    path.write_text(json.dumps(value, indent=2) + "\n")
+
+
+def fetch(url):
+    request = Request(url, headers={"User-Agent": "dotrepo-own-project-study/1.0"})
+    try:
+        response = urlopen(request, timeout=30)
+    except HTTPError as exc:
+        response = exc
+    with response:
+        body = response.read(MAX_BODY + 1)
+        if len(body) > MAX_BODY:
+            raise ValueError("study response exceeds byte limit")
+        return response.status, body
+
+
+def freeze(output, sources, meta_path, inventory_path):
+    if output.exists() and any(output.iterdir()):
+        raise ValueError("freeze requires an empty output directory")
+    output.mkdir(parents=True, exist_ok=True)
+    meta = json.loads(meta_path.read_bytes())
+    write(output / "meta.json", meta)
+    write(output / "inventory.json", json.loads(inventory_path.read_bytes()))
+    tasks = []
+    for repo, name, command, cwd, component, source, prerequisites, setup in CASES:
+        root = sources / repo
+        actual = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True).strip()
+        if actual != REVISIONS[repo]:
+            raise ValueError("source revision differs from selected revision")
+        evidence = root / source
+        if command not in evidence.read_text():
+            raise ValueError(f"selected command absent from source: {repo}/{source}")
+        purpose = "build" if name.endswith("build") else "test"
+        plan = {
+            "command": command,
+            "workingDirectory": cwd,
+            "scope": "component" if component else "repository",
+            "component": component,
+            "prerequisites": prerequisites,
+            "parameters": {},
+            "environment": {},
+            "sourcePaths": [source],
+            "purpose": purpose,
+        }
+        tasks.append(
+            {
+                "id": f"{repo}-{name}",
+                "taskClass": name,
+                "identity": f"github.com/maxwellsantoro/{repo}",
+                "revision": actual,
+                "environmentId": "operator-macos-arm64-uv-shims-v1",
+                "acceptableInstructions": [plan],
+                "setupCommands": setup,
+                "oracle": name,
+                "timeoutSecondsPerCommand": TIMEOUT,
+                "evidence": [
+                    {
+                        "url": f"https://github.com/maxwellsantoro/{repo}/blob/{actual}/{source}",
+                        "locator": command,
+                        "checkedAt": now(),
+                        "sourceRevision": actual,
+                        "sha256": hashlib.sha256(evidence.read_bytes()).hexdigest(),
+                    }
+                ],
+            }
+        )
+    write(
+        output / "workload.json",
+        {
+            "version": 1,
+            "frozenAt": now(),
+            "selectionBeforeCoverageInspection": True,
+            "consumerClass": "operator-controlled",
+            "cacheState": "warm",
+            "snapshotId": meta["snapshotId"],
+            "consumerPolicy": consumer.COMMAND_POLICY,
+            "tasks": tasks,
+            "selection": "All four substantive other public projects; exclude dotrepo self-test and throwaway canary. Two tasks each; no post-coverage substitutions.",
+            "measurementBoundary": "Warm shared tool/download caches; fresh checkout and build outputs per arm. Explicit source/profile HTTP, checkout, setup, command execution and oracle are timed. Clone/bootstrap/source adjudication and package-manager network counts are outside transport totals. No modeled or net-cost claim.",
+        },
+    )
+
+
+def execute(command, cwd, env):
+    with tempfile.TemporaryFile() as stdout, tempfile.TemporaryFile() as stderr:
+        process = subprocess.Popen(
+            shlex.split(command),
+            cwd=cwd,
+            env=env,
+            stdout=stdout,
+            stderr=stderr,
+            start_new_session=True,
+        )
+        error = None
+        try:
+            process.wait(timeout=TIMEOUT)
+        except subprocess.TimeoutExpired:
+            os.killpg(process.pid, signal.SIGKILL)
+            process.wait()
+            error = f"command exceeded frozen {TIMEOUT}-second limit"
+        stdout.seek(0)
+        stderr.seek(0)
+        return {
+            "command": command,
+            "exitCode": process.returncode,
+            "stdout": stdout.read().decode(errors="replace"),
+            "stderr": stderr.read().decode(errors="replace"),
+            "executionError": error,
+        }
+
+
+def oracle(name, root, result):
+    if result["exitCode"] != 0 or result["executionError"]:
+        return False
+    stdout, stderr = result["stdout"], result["stderr"]
+    if name == "host-proof":
+        report = json.loads((root / "out/agent-task-proof-rt/report.json").read_bytes())
+        return (
+            report["validation"]["outcome"] == "valid"
+            and report["candidate"]["content_id"] == report["accepted"]["content_id"]
+            and report["denied_operation"]["status"] == 1
+            and report["denied_operation"]["mapping_cap"] == 0
+            and report["receipt_replay_checked"] is True
+        )
+    if name == "host-build":
+        return (root / "target/debug/store_cli").is_file() and "CODEGEN: ok" in stdout
+    if name == "core-build":
+        return (root / "target/debug/ries-rs").is_file()
+    if name in {"core-test", "generator-test"}:
+        return bool(re.search(r"test result: ok\. [1-9][0-9]* passed", stdout))
+    if name == "consumer-test":
+        return bool(re.search(r"Ran [1-9][0-9]* tests", stderr)) and "\nOK" in stderr
+    if name == "build":
+        return len(re.findall(r"^\[ok\]", stdout, re.M)) == 19
+    if name == "correctness":
+        report = json.loads(stdout)
+        return report["passed"] is True and len(report["implementations"]) == 19
+    raise ValueError("unknown frozen oracle")
+
+
+def run(output, sources):
+    if (output / "observations.json").exists() or (output / "attempts").exists():
+        raise ValueError("observations are immutable; use a new frozen packet")
+    raw = (output / "workload.json").read_bytes()
+    workload = json.loads(raw)
+    (output / "attempts").mkdir()
+    (output / "http").mkdir()
+    write(
+        output / "environment.json",
+        {
+            "platform": platform.platform(),
+            "python": sys.version,
+            "runnerRevision": subprocess.check_output(
+                ["git", "rev-parse", "HEAD"], text=True
+            ).strip(),
+            "runnerSha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+            "cache": "Existing shared download caches; fresh project targets and venvs. Alternate order does not remove download-cache carryover.",
+            "pythonLaunch": "Upstream python/python3 names resolve to uv run --no-project with this interpreter; source files unchanged.",
+            "transport": "Only explicit source/profile HTTP is counted; package-manager traffic is uninstrumented. Bootstrap metadata/source clones excluded and disclosed.",
+            "modelUsage": "No model calls in runner. Operator preparation and this coding session are unallocated; totals remain unknown.",
+        },
+    )
+    runs = []
+    with tempfile.TemporaryDirectory(prefix="dotrepo-own-project-runs-") as temporary:
+        temporary = Path(temporary)
+        shims = temporary / "uv-shims"
+        shims.mkdir()
+        for name in ("python", "python3"):
+            shim = shims / name
+            shim.write_text(
+                f'#!/bin/sh\nexec {shlex.quote(str(Path(__import__("shutil").which("uv"))))} run --no-project {shlex.quote(sys.executable)} "$@"\n'
+            )
+            shim.chmod(0o755)
+        env = dict(os.environ)
+        env["PATH"] = str(shims) + os.pathsep + env["PATH"]
+        # Ambient build/venv overrides must not share project outputs between arms.
+        for key in (
+            "CARGO_TARGET_DIR",
+            "VIRTUAL_ENV",
+            "UV_PROJECT_ENVIRONMENT",
+            "RAMEN_TASK_EVIDENCE_DIR",
+        ):
+            env.pop(key, None)
+        for index, task in enumerate(workload["tasks"]):
+            repo = task["identity"].split("/")[-1]
+            gold = task["acceptableInstructions"][0]
+            for arm in ARMS if index % 2 == 0 else reversed(ARMS):
+                started, timer = now(), time.perf_counter()
+                transport = {"httpRequests": 0, "decodedBytes": 0, "cacheHits": 0}
+
+                def request(url, suffix):
+                    transport["httpRequests"] += 1
+                    status, body = fetch(url)
+                    transport["decodedBytes"] += len(body)
+                    filename = f"{task['id']}-{arm}-{suffix}"
+                    (output / "http" / filename).write_bytes(body)
+                    write(
+                        output / "http" / (filename + ".receipt.json"),
+                        {
+                            "url": url,
+                            "status": status,
+                            "sha256": hashlib.sha256(body).hexdigest(),
+                        },
+                    )
+                    return status, body
+
+                lookup, selected = None, None
+                if arm == "lookup-first":
+                    url = f"https://dotrepo.org/v0/snapshots/{workload['snapshotId']}/repos/{task['identity']}/profile.json"
+                    status, body = request(url, "profile")
+                    result = consumer.interpret_http_response(
+                        identity=task["identity"], status_code=status, body=body
+                    )
+                    field = "repo." + gold["purpose"]
+                    consumer.evaluate_for_task(result, required_fields=[field])
+                    value = consumer.profile_field(result.profile or {}, field)
+                    if result.usable:
+                        evidence = result.profile.get("fieldEvidence", {}).get(field, {})
+                        selected = {
+                            **gold,
+                            "command": value,
+                            "workingDirectory": ".",
+                            "scope": "repository",
+                            "component": None,
+                            "prerequisites": [],
+                            "sourcePaths": [evidence.get("source") or "unknown"],
+                        }
+                    lookup = {
+                        "snapshotId": workload["snapshotId"],
+                        "policy": workload["consumerPolicy"],
+                        "valuePresent": value is not None,
+                        "accepted": result.usable,
+                        "instruction": selected,
+                        "fallbackReasons": result.fallback_reasons,
+                    }
+                attempts = []
+                if selected and selected != gold:
+                    error = "accepted scalar does not establish frozen task context; not executed"
+                    attempts.append(
+                        {
+                            "origin": "profile",
+                            "instruction": selected,
+                            "exitCode": None,
+                            "oraclePassed": False,
+                            "executionError": error,
+                        }
+                    )
+                    selected = None
+                if selected is None:
+                    source = gold["sourcePaths"][0]
+                    url = f"https://raw.githubusercontent.com/maxwellsantoro/{repo}/{task['revision']}/{source}"
+                    status, body = request(url, "source")
+                    if (
+                        status != 200
+                        or hashlib.sha256(body).hexdigest() != task["evidence"][0]["sha256"]
+                    ):
+                        raise ValueError("upstream response differs from frozen source")
+                root = temporary / f"{task['id']}-{arm}"
+                subprocess.run(
+                    [
+                        "git",
+                        "clone",
+                        "--quiet",
+                        "--shared",
+                        "--no-hardlinks",
+                        str(sources / repo),
+                        str(root),
+                    ],
+                    check=True,
+                    env=env,
+                )
+                subprocess.run(
+                    ["git", "checkout", "--quiet", task["revision"]], cwd=root, check=True, env=env
+                )
+                commands = []
+                try:
+                    for command in [*task["setupCommands"], gold["command"]]:
+                        result = execute(command, root / gold["workingDirectory"], env)
+                        commands.append(result)
+                        if result["exitCode"] != 0 or result["executionError"]:
+                            break
+                    passed = len(commands) == len(task["setupCommands"]) + 1 and oracle(
+                        task["oracle"], root, commands[-1]
+                    )
+                    attempt = {
+                        "origin": "profile"
+                        if selected
+                        else "source"
+                        if arm == "source-first"
+                        else "fallback",
+                        "instruction": gold,
+                        "exitCode": commands[-1]["exitCode"],
+                        "oraclePassed": passed,
+                    }
+                    if commands[-1]["executionError"]:
+                        attempt["executionError"] = commands[-1]["executionError"]
+                except (OSError, ValueError, KeyError) as exc:
+                    attempt = {
+                        "origin": "fallback" if arm == "lookup-first" else "source",
+                        "instruction": gold,
+                        "exitCode": None,
+                        "oraclePassed": False,
+                        "executionError": str(exc),
+                    }
+                attempts.append(attempt)
+                for number, attempt in enumerate(attempts):
+                    path = output / "attempts" / f"{task['id']}-{arm}-{number}.json"
+                    write(
+                        path,
+                        {
+                            "taskId": task["id"],
+                            **attempt,
+                            "commands": commands if number == len(attempts) - 1 else [],
+                        },
+                    )
+                    attempt["log"] = {
+                        "path": str(path.relative_to(output)),
+                        "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+                    }
+                ended = now()
+                runs.append(
+                    {
+                        "taskId": task["id"],
+                        "arm": arm,
+                        "revision": task["revision"],
+                        "environmentId": task["environmentId"],
+                        "cacheState": workload["cacheState"],
+                        "startedAt": started,
+                        "endedAt": ended,
+                        "elapsedMs": (time.perf_counter() - timer) * 1000,
+                        "transport": transport,
+                        "modelUsage": {"inputTokens": None, "outputTokens": None, "cost": None},
+                        "allocatedMaintenanceCost": None,
+                        "lookup": lookup,
+                        "attempts": attempts,
+                    }
+                )
+                print(f"{task['id']} {arm}: completed={attempts[-1]['oraclePassed']}", flush=True)
+                write(output / "progress.json", runs)
+    write(
+        output / "observations.json",
+        {"version": 1, "workloadSha256": hashlib.sha256(raw).hexdigest(), "runs": runs},
+    )
+    report = score(output / "workload.json", output / "observations.json")
+    write(output / "results.json", report)
+    (output / "report.md").write_text(markdown(report))
+    (output / "progress.json").unlink()
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("mode", choices=("freeze", "run"))
+    parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--sources", type=Path, required=True)
+    parser.add_argument("--meta", type=Path)
+    parser.add_argument("--inventory", type=Path)
+    args = parser.parse_args()
+    if args.mode == "freeze":
+        freeze(args.out, args.sources, args.meta, args.inventory)
+    else:
+        run(args.out, args.sources)
+
+
+if __name__ == "__main__":
+    main()

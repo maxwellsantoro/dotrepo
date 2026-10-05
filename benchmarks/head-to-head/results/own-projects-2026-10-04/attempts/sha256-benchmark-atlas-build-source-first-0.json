@@ -1,0 +1,38 @@
+{
+  "taskId": "sha256-benchmark-atlas-build",
+  "origin": "source",
+  "instruction": {
+    "command": "uv run sha256-atlas build",
+    "workingDirectory": ".",
+    "scope": "repository",
+    "component": null,
+    "prerequisites": [
+      "uv sync",
+      "README quick-start compiler/toolchain prerequisites"
+    ],
+    "parameters": {},
+    "environment": {},
+    "sourcePaths": [
+      "README.md"
+    ],
+    "purpose": "build"
+  },
+  "exitCode": 1,
+  "oraclePassed": false,
+  "commands": [
+    {
+      "command": "uv sync",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "Using CPython 3.12.13\nCreating virtual environment at: .venv\nResolved 12 packages in 1ms\n   Building sha256-benchmark-atlas @ file:///private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-own-project-runs-mm4lonoq/sha256-benchmark-atlas-build-source-first\n      Built sha256-benchmark-atlas @ file:///private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-own-project-runs-mm4lonoq/sha256-benchmark-atlas-build-source-first\nPrepared 1 package in 15ms\nInstalled 5 packages in 7ms\n + cffi==2.1.1\n + cryptography==50.0.1\n + pycparser==3.0\n + pyyaml==6.0.3\n + sha256-benchmark-atlas==0.1.0 (from file:///private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-own-project-runs-mm4lonoq/sha256-benchmark-atlas-build-source-first)\n",
+      "executionError": null
+    },
+    {
+      "command": "uv run sha256-atlas build",
+      "exitCode": 1,
+      "stdout": "[ok] c-openssl: built\n[ok] c-ref: built\n[ok] rust-sha2: built\n[ok] go-stdlib: built\n[ok] python-hashlib: no build step\n[ok] python-pure: no build step\n[ok] node-crypto: no build step\n[FAIL] java-jdk: The operation couldn\u2019t be completed. Unable to locate a Java Runtime.\nPlease visit http://www.java.com for information on installing Java.\n[ok] rust-ring: built\n[ok] rust-openssl: built\n[ok] c-libsodium: built\n[ok] c-mbedtls: built\n[ok] ruby-openssl: no build step\n[ok] php-hash: no build step\n[ok] python-cryptography: no build step\n[ok] bun-crypto: no build step\n[FAIL] zig-std: implementations/zig-std/build.zig:8:10: error: no field named 'root_source_file' in struct 'Build.ExecutableOptions'\n        .root_source_file = b.path(\"main.zig\"),\n         ^~~~~~~~~~~~~~~~\n/opt/homebrew/Cellar/zig/0.16.0_1/lib/zig/std/Build.zig:770:31: note: struct declared here\npub const ExecutableOptions = struct {\n                              ^~~~~~\nreferenced by:\n    runBuild__anon_28487: /opt/homebrew/Cellar/zig/0.16.0_1/lib/zig/std/Build.zig:2264:33\n    main: /opt/homebrew/Cellar/zig/0.16.0_1/lib/zig/compiler/build_runner.zig:463:29\n    4 reference(s) hidden; use '-freference-trace=6' to see all references\n[ok] rust-sodium: built\n[FAIL] java-bouncycastle: The operation couldn\u2019t be completed. Unable to locate a Java Runtime.\nPlease visit http://www.java.com for information on installing Java.\n",
+      "stderr": "",
+      "executionError": null
+    }
+  ]
+}
