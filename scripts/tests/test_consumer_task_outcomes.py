@@ -41,6 +41,8 @@ def update_log(root, attempt, task_id):
     path = root / attempt["log"]["path"]
     data = json.loads(path.read_text())
     data.update({key: attempt[key] for key in ("instruction", "oraclePassed", "exitCode")})
+    if "executionError" in attempt:
+        data["executionError"] = attempt["executionError"]
     data["taskId"] = task_id
     path.write_text(json.dumps(data, indent=2) + "\n")
     attempt["log"]["sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
@@ -231,3 +233,15 @@ def test_score_cli_cannot_overwrite_a_retained_packet(packet, monkeypatch):
         main()
     assert failure.value.code == 2
     assert before == {path: path.read_bytes() for path in root.rglob("*") if path.is_file()}
+
+
+def test_observed_timeout_remains_a_failed_task_instead_of_disappearing(packet):
+    root, _, observations = packet
+    run = observations["runs"][0]
+    attempt = run["attempts"][0]
+    attempt.update(exitCode=None, oraclePassed=False, executionError="runner timeout")
+    update_log(root, attempt, run["taskId"])
+    report = score(*save(packet))
+    assert not report["rows"][0]["completedTask"]
+    assert report["rows"][0]["failedAttempts"] == 1
+    assert report["summary"]["source-first"]["attemptedTasks"] == 10

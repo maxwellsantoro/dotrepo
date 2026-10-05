@@ -233,15 +233,27 @@ def score(workload_path, observations_path):
                 for key in ("instruction", "exitCode", "oraclePassed", "taskId"):
                     expected = task["id"] if key == "taskId" else attempt[key]
                     require(log[key] == expected, "execution log does not match observation")
+                error = attempt.get("executionError")
+                require(error == log.get("executionError"), "execution error does not match log")
+                require(
+                    error is None or (isinstance(error, str) and bool(error.strip())),
+                    "invalid execution error",
+                )
                 require(type(attempt["oraclePassed"]) is bool, "completion oracle must be observed")
                 require(
+                    error is None or not attempt["oraclePassed"],
+                    "execution error cannot pass completion oracle",
+                )
+                require(
                     (plan is None and attempt["exitCode"] is None)
-                    or (plan is not None and type(attempt["exitCode"]) is int),
+                    or (plan is not None and type(attempt["exitCode"]) is int)
+                    or (error is not None and attempt["exitCode"] is None),
                     "missing exit status",
                 )
                 semantic = plan in gold if plan is not None else not gold
                 completed = (
                     semantic
+                    and error is None
                     and attempt["oraclePassed"]
                     and (plan is None or attempt["exitCode"] == 0)
                 )

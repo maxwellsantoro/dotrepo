@@ -67,6 +67,9 @@ The oracle must be declared and reviewed by the participant for the task; a
 command's successful exit alone is insufficient. A plan outside the frozen source
 alternatives is incorrect even if its transcript claims success. A final successful
 fallback can complete the task while earlier wrong answers and failures remain.
+For a timeout or runner failure with no exit status, bind a nonempty
+`executionError` in both attempt and transcript and set `oraclePassed` to false.
+The failed task remains in the denominator; an unexplained missing status is invalid.
 
 Hashes establish consistency with supplied logs, not the truth or independence of
 an externally asserted oracle. Independent verification and the external pilot's
