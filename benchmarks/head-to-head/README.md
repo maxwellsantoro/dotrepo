@@ -225,6 +225,13 @@ stricter reference consumer rather than treating a high-status label as acceptan
 
 ## Complete lookup-first path
 
+For execution semantics and observed task outcomes, use the separate
+[paired task scorer and controlled rehearsal](task-fixtures/README.md). It binds
+participant-supplied logs to a frozen workload and reports completion, accepted
+wrong instructions, failed attempts, fallback, and actual/unknown costs. Its
+operator controls do not establish independent task benefit. The factual-answer
+benchmark below remains unchanged and does not execute commands.
+
 The `lookup-first` arm uses the generic consumer's identity, record-age, conflict,
 and required-field policy. Rejected fields trigger the GitHub baseline and include
 its work. Both arms use the same extractor setting. No returned command is run.

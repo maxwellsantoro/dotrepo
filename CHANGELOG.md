@@ -15,6 +15,11 @@ generated growth, coverage, promotion, and telemetry artifacts own live values.
 
 ### Documentation maintenance
 
+- Add a paired task-observation scorer that binds frozen workloads to supplied
+  execution logs, preserves source context, and separates completion from policy
+  acceptance. Retain controlled reference runs with injected wrong answers and
+  fallback recovery; keep external adoption and independent outcomes unclaimed.
+  Prepare an unsent bounded-pilot invitation.
 - Advance stable install pins and generated maintainer CI to published 1.0.2 after
   bundle and crates.io installation checks. Retain successful public deployment,
   restored history, enforced branch settings, and registry recovery receipts.

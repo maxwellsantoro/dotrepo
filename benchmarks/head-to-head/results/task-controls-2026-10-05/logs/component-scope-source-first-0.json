@@ -1,0 +1,22 @@
+{
+  "taskId": "component-scope",
+  "instruction": {
+    "command": "uv run python ../../runner.py component",
+    "workingDirectory": "components/widget",
+    "scope": "component",
+    "component": "widget",
+    "parameters": {},
+    "prerequisites": [],
+    "environment": {
+      "DEMO_CONTEXT": "widget"
+    },
+    "sourcePaths": [
+      "components/widget/README.md"
+    ],
+    "purpose": "test"
+  },
+  "exitCode": 0,
+  "oraclePassed": true,
+  "stdout": "{\"mode\": \"component\", \"completed\": true}\n",
+  "stderr": ""
+}

@@ -10,6 +10,10 @@ operator evidence even when it uses this package.
 - MCP equivalent and setup: `docs/external-consumer-integration.md`.
 - Executable fallback experiment: `lookup-first` arm in `benchmarks/head-to-head`.
 - Structured outcome template: `examples/external-consumer/pilot-report.example.json`.
+- Paired task scorer and controlled rehearsal:
+  [task observation contract](../benchmarks/head-to-head/task-fixtures/README.md).
+- Reviewable [invitation draft](../examples/external-consumer/pilot-invitation.md);
+  it has not been sent and does not identify a consenting participant.
 
 ## Preparation and handoff
 
@@ -27,6 +31,12 @@ The coordinator fixes the workload and policy versions, checks adapter/harness
 compatibility, and integrates the results. Keep unfavorable tasks and unresolved
 costs visible. A blocked external handoff need not block fixture-backed adapter
 and harness work. Reference runs remain operator evidence.
+
+The task scorer validates workload/log hashes, paired order, revision/environment,
+context preservation, and observed completion separately from policy acceptance.
+Its retained controlled runs include accepted wrong instructions and fallback
+recovery. Supplied log hashes prove consistency, not independent observation;
+participant task oracles and outcomes need review before the C2/C3 gates close.
 
 For lookup and command acceptance, use the
 [integration contract](external-consumer-integration.md). Record the final task

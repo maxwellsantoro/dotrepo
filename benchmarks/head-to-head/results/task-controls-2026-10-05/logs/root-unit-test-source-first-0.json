@@ -1,0 +1,20 @@
+{
+  "taskId": "root-unit-test",
+  "instruction": {
+    "command": "make unit",
+    "workingDirectory": ".",
+    "scope": "repository",
+    "component": null,
+    "parameters": {},
+    "prerequisites": [],
+    "environment": {},
+    "sourcePaths": [
+      "README.md"
+    ],
+    "purpose": "test"
+  },
+  "exitCode": 0,
+  "oraclePassed": true,
+  "stdout": "uv run python runner.py unit\n{\"mode\": \"unit\", \"completed\": true}\n",
+  "stderr": ""
+}

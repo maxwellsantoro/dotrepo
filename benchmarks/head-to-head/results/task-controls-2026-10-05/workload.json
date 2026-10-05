@@ -1,0 +1,329 @@
+{
+  "version": 1,
+  "frozenAt": "2026-10-05T02:19:55.386475+00:00",
+  "selectionBeforeCoverageInspection": true,
+  "consumerClass": "operator-controlled",
+  "cacheState": "cold",
+  "snapshotId": "896ec89331752be0974681522fffa9dd0650af1d93f6e1e6b10afccde5bf56d6",
+  "consumerPolicy": "explicit-high-confidence-extraction",
+  "tasks": [
+    {
+      "id": "root-build",
+      "taskClass": "root-build",
+      "identity": "github.com/fixture/root-build",
+      "revision": "d85f2f5c5a51e74b464d713065758992e7c6fe31",
+      "revisionKind": "fixture-content",
+      "environmentId": "local-controlled-fixture",
+      "acceptableInstructions": [
+        {
+          "command": "make build",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "component": null,
+          "parameters": {},
+          "prerequisites": [],
+          "environment": {},
+          "sourcePaths": [
+            "README.md"
+          ],
+          "purpose": "build"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "fixture://task-fixtures/project/README.md",
+          "locator": "root-build",
+          "checkedAt": "2026-10-05T02:19:55.386475+00:00",
+          "sourceRevision": "d85f2f5c5a51e74b464d713065758992e7c6fe31"
+        }
+      ]
+    },
+    {
+      "id": "root-unit-test",
+      "taskClass": "root-unit-test",
+      "identity": "github.com/fixture/root-unit-test",
+      "revision": "d85f2f5c5a51e74b464d713065758992e7c6fe31",
+      "revisionKind": "fixture-content",
+      "environmentId": "local-controlled-fixture",
+      "acceptableInstructions": [
+        {
+          "command": "make unit",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "component": null,
+          "parameters": {},
+          "prerequisites": [],
+          "environment": {},
+          "sourcePaths": [
+            "README.md"
+          ],
+          "purpose": "test"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "fixture://task-fixtures/project/README.md",
+          "locator": "root-unit-test",
+          "checkedAt": "2026-10-05T02:19:55.386475+00:00",
+          "sourceRevision": "d85f2f5c5a51e74b464d713065758992e7c6fe31"
+        }
+      ]
+    },
+    {
+      "id": "prerequisite-test",
+      "taskClass": "prerequisite-test",
+      "identity": "github.com/fixture/prerequisite-test",
+      "revision": "d85f2f5c5a51e74b464d713065758992e7c6fe31",
+      "revisionKind": "fixture-content",
+      "environmentId": "local-controlled-fixture",
+      "acceptableInstructions": [
+        {
+          "command": "make test",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "component": null,
+          "parameters": {},
+          "prerequisites": [
+            "Make target setup"
+          ],
+          "environment": {},
+          "sourcePaths": [
+            "README.md"
+          ],
+          "purpose": "test"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "fixture://task-fixtures/project/README.md",
+          "locator": "prerequisite-test",
+          "checkedAt": "2026-10-05T02:19:55.386475+00:00",
+          "sourceRevision": "d85f2f5c5a51e74b464d713065758992e7c6fe31"
+        }
+      ]
+    },
+    {
+      "id": "required-argument",
+      "taskClass": "required-argument",
+      "identity": "github.com/fixture/required-argument",
+      "revision": "d85f2f5c5a51e74b464d713065758992e7c6fe31",
+      "revisionKind": "fixture-content",
+      "environmentId": "local-controlled-fixture",
+      "acceptableInstructions": [
+        {
+          "command": "just test unit",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "component": null,
+          "parameters": {
+            "target": "unit"
+          },
+          "prerequisites": [],
+          "environment": {},
+          "sourcePaths": [
+            "README.md"
+          ],
+          "purpose": "test"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "fixture://task-fixtures/project/README.md",
+          "locator": "required-argument",
+          "checkedAt": "2026-10-05T02:19:55.386475+00:00",
+          "sourceRevision": "d85f2f5c5a51e74b464d713065758992e7c6fe31"
+        }
+      ]
+    },
+    {
+      "id": "component-scope",
+      "taskClass": "component-scope",
+      "identity": "github.com/fixture/component-scope",
+      "revision": "d85f2f5c5a51e74b464d713065758992e7c6fe31",
+      "revisionKind": "fixture-content",
+      "environmentId": "local-controlled-fixture",
+      "acceptableInstructions": [
+        {
+          "command": "uv run python ../../runner.py component",
+          "workingDirectory": "components/widget",
+          "scope": "component",
+          "component": "widget",
+          "parameters": {},
+          "prerequisites": [],
+          "environment": {
+            "DEMO_CONTEXT": "widget"
+          },
+          "sourcePaths": [
+            "components/widget/README.md"
+          ],
+          "purpose": "test"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "fixture://task-fixtures/project/README.md",
+          "locator": "component-scope",
+          "checkedAt": "2026-10-05T02:19:55.386475+00:00",
+          "sourceRevision": "d85f2f5c5a51e74b464d713065758992e7c6fe31"
+        }
+      ]
+    },
+    {
+      "id": "compile-only-fallback",
+      "taskClass": "compile-only-fallback",
+      "identity": "github.com/fixture/compile-only-fallback",
+      "revision": "d85f2f5c5a51e74b464d713065758992e7c6fe31",
+      "revisionKind": "fixture-content",
+      "environmentId": "local-controlled-fixture",
+      "acceptableInstructions": [
+        {
+          "command": "make unit",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "component": null,
+          "parameters": {},
+          "prerequisites": [],
+          "environment": {},
+          "sourcePaths": [
+            "README.md"
+          ],
+          "purpose": "test"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "fixture://task-fixtures/project/README.md",
+          "locator": "compile-only-fallback",
+          "checkedAt": "2026-10-05T02:19:55.386475+00:00",
+          "sourceRevision": "d85f2f5c5a51e74b464d713065758992e7c6fe31"
+        }
+      ]
+    },
+    {
+      "id": "absent-command",
+      "taskClass": "absent-command",
+      "identity": "github.com/fixture/absent-command",
+      "revision": "d85f2f5c5a51e74b464d713065758992e7c6fe31",
+      "revisionKind": "fixture-content",
+      "environmentId": "local-controlled-fixture",
+      "acceptableInstructions": [
+        {
+          "command": "make unit",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "component": null,
+          "parameters": {},
+          "prerequisites": [],
+          "environment": {},
+          "sourcePaths": [
+            "README.md"
+          ],
+          "purpose": "test"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "fixture://task-fixtures/project/README.md",
+          "locator": "absent-command",
+          "checkedAt": "2026-10-05T02:19:55.386475+00:00",
+          "sourceRevision": "d85f2f5c5a51e74b464d713065758992e7c6fe31"
+        }
+      ]
+    },
+    {
+      "id": "unindexed-fallback",
+      "taskClass": "unindexed-fallback",
+      "identity": "github.com/fixture/unindexed-fallback",
+      "revision": "d85f2f5c5a51e74b464d713065758992e7c6fe31",
+      "revisionKind": "fixture-content",
+      "environmentId": "local-controlled-fixture",
+      "acceptableInstructions": [
+        {
+          "command": "make build",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "component": null,
+          "parameters": {},
+          "prerequisites": [],
+          "environment": {},
+          "sourcePaths": [
+            "README.md"
+          ],
+          "purpose": "build"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "fixture://task-fixtures/project/README.md",
+          "locator": "unindexed-fallback",
+          "checkedAt": "2026-10-05T02:19:55.386475+00:00",
+          "sourceRevision": "d85f2f5c5a51e74b464d713065758992e7c6fe31"
+        }
+      ]
+    },
+    {
+      "id": "accepted-prerequisite-loss",
+      "taskClass": "accepted-prerequisite-loss",
+      "identity": "github.com/fixture/accepted-prerequisite-loss",
+      "revision": "d85f2f5c5a51e74b464d713065758992e7c6fe31",
+      "revisionKind": "fixture-content",
+      "environmentId": "local-controlled-fixture",
+      "acceptableInstructions": [
+        {
+          "command": "make test",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "component": null,
+          "parameters": {},
+          "prerequisites": [
+            "Make target setup"
+          ],
+          "environment": {},
+          "sourcePaths": [
+            "README.md"
+          ],
+          "purpose": "test"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "fixture://task-fixtures/project/README.md",
+          "locator": "accepted-prerequisite-loss",
+          "checkedAt": "2026-10-05T02:19:55.386475+00:00",
+          "sourceRevision": "d85f2f5c5a51e74b464d713065758992e7c6fe31"
+        }
+      ]
+    },
+    {
+      "id": "accepted-non-running-command",
+      "taskClass": "accepted-non-running-command",
+      "identity": "github.com/fixture/accepted-non-running-command",
+      "revision": "d85f2f5c5a51e74b464d713065758992e7c6fe31",
+      "revisionKind": "fixture-content",
+      "environmentId": "local-controlled-fixture",
+      "acceptableInstructions": [
+        {
+          "command": "make unit",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "component": null,
+          "parameters": {},
+          "prerequisites": [],
+          "environment": {},
+          "sourcePaths": [
+            "README.md"
+          ],
+          "purpose": "test"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "fixture://task-fixtures/project/README.md",
+          "locator": "accepted-non-running-command",
+          "checkedAt": "2026-10-05T02:19:55.386475+00:00",
+          "sourceRevision": "d85f2f5c5a51e74b464d713065758992e7c6fe31"
+        }
+      ]
+    }
+  ]
+}

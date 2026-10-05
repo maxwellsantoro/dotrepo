@@ -1,0 +1,10 @@
+{
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "implementation": "CPython",
+  "tools": {
+    "uv --version": "uv 0.11.8 (0e961dd9a 2026-04-27 aarch64-apple-darwin)",
+    "uv run python --version": "Python 3.12.13",
+    "make --version": "GNU Make 3.81",
+    "just --version": "just 1.58.0"
+  }
+}
