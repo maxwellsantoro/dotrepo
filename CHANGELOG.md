@@ -119,3 +119,11 @@ First stable release of the dotrepo protocol, reference toolchain, and public in
 - Release gate that packages the hosted public tree, install bundles, and VS Code asset from one reproducible flow
 - Smoke-tested release bundles for `dotrepo`, `dotrepo-lsp`, and `dotrepo-mcp`
 - Claim-aware operator-gate artifacts and public export regression coverage
+
+## 1.0.2 safety candidate additions
+
+- Preserve declared Make/Just entrypoints and case; withhold ambiguous targets,
+  parameterized recipes, and Go test compilation/discovery instructions.
+- Withhold documented commands after a directory change within their code block.
+- Bound remote MCP JSON/error body reads and diagnostics.
+- Include source-semantics regression fixtures in the release gate.

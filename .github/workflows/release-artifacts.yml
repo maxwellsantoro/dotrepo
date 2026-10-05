@@ -10,7 +10,23 @@ permissions:
   contents: write
 
 jobs:
+  version-integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - name: Install uv
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+      - name: Verify release version integrity
+        shell: bash
+        run: |
+          if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+            uv run python scripts/check_release_version.py --tag "${GITHUB_REF_NAME}"
+          else
+            uv run python scripts/check_release_version.py
+          fi
+
   binaries:
+    needs: version-integrity
     strategy:
       fail-fast: false
       matrix:
@@ -66,6 +82,7 @@ jobs:
           retention-days: 14
 
   vscode-extension:
+    needs: version-integrity
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
@@ -159,6 +176,39 @@ jobs:
             release-assets/**/*.sha256
             release-assets/**/*.vsix
             release-assets/mcpb/*.mcpb
+
+  publish-crates:
+    if: github.ref_type == 'tag'
+    needs:
+      - release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@4be7066ada62dd38de10e7b70166bc74ed198c30 # stable
+        with:
+          toolchain: stable
+      - name: Publish crates to crates.io
+        shell: bash
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          publish_one() {
+            local crate="$1"
+            shift
+            if curl -fsS -A "dotrepo-release-workflow (github.com/maxwellsantoro/dotrepo)" \
+              "https://crates.io/api/v1/crates/${crate}/${version}" > /dev/null 2>&1; then
+              echo "${crate} ${version} already on crates.io; skipping"
+              return 0
+            fi
+            cargo publish "$@"
+          }
+          for crate in dotrepo-schema dotrepo-transport dotrepo-core dotrepo-cli dotrepo-mcp dotrepo-lsp; do
+            publish_one "$crate" -p "$crate"
+          done
 
   mcp-registry:
     if: github.ref_type == 'tag'

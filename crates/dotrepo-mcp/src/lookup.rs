@@ -4,6 +4,7 @@ use anyhow::{anyhow, bail, Result};
 use reqwest::blocking::Client;
 use reqwest::Url;
 use serde_json::Value;
+use std::io::Read;
 use std::net::{IpAddr, SocketAddr, ToSocketAddrs};
 use std::time::Duration;
 
@@ -11,6 +12,10 @@ pub(crate) const DEFAULT_PUBLIC_BASE_URL: &str = "https://dotrepo.org";
 pub(crate) const ALLOWED_LOOKUP_BASE_URLS: &[&str] =
     &["https://dotrepo.org", "https://dotrepo-org.workers.dev"];
 pub(crate) const REMOTE_LOOKUP_TIMEOUT: Duration = Duration::from_secs(15);
+
+const MAX_REMOTE_JSON_BYTES: usize = 8 * 1024 * 1024;
+const MAX_REMOTE_ERROR_BYTES: usize = 4096;
+const MAX_REMOTE_DIAGNOSTIC_CHARS: usize = 1024;
 
 fn required_string<'a>(arguments: &'a Value, field: &str) -> Result<&'a str> {
     arguments
@@ -367,19 +372,42 @@ pub(crate) fn fetch_remote_json(client: &Client, url: &str) -> Result<Value> {
         .map_err(|error| anyhow!("failed to GET {}: {}", url, error))?;
     let status = response.status();
     if !status.is_success() {
-        let body = response
-            .text()
+        let body = read_remote_body(response, MAX_REMOTE_ERROR_BYTES)
             .map_err(|error| anyhow!("failed to read error body from {}: {}", url, error))?;
         bail!(
             "remote lookup request failed {}: HTTP {} {}",
             url,
             status.as_u16(),
-            compact_error_body(&body)
+            compact_error_body(&String::from_utf8_lossy(&body))
         );
     }
-    response
-        .json::<Value>()
+    if response
+        .content_length()
+        .is_some_and(|size| size > MAX_REMOTE_JSON_BYTES as u64)
+    {
+        bail!(
+            "remote JSON from {} exceeds {} bytes",
+            url,
+            MAX_REMOTE_JSON_BYTES
+        );
+    }
+    let body = read_remote_body(response, MAX_REMOTE_JSON_BYTES)?;
+    if body.len() > MAX_REMOTE_JSON_BYTES {
+        bail!(
+            "remote JSON from {} exceeds {} bytes",
+            url,
+            MAX_REMOTE_JSON_BYTES
+        );
+    }
+    serde_json::from_slice::<Value>(&body)
         .map_err(|error| anyhow!("failed to decode JSON from {}: {}", url, error))
+}
+
+/// Read one extra byte to detect oversized responses without trusting headers.
+fn read_remote_body(reader: impl Read, limit: usize) -> std::io::Result<Vec<u8>> {
+    let mut body = Vec::new();
+    reader.take(limit as u64 + 1).read_to_end(&mut body)?;
+    Ok(body)
 }
 
 fn compact_error_body(body: &str) -> String {
@@ -387,14 +415,44 @@ fn compact_error_body(body: &str) -> String {
     if compact.is_empty() {
         "without response body".into()
     } else {
-        compact
+        let mut bounded = compact
+            .chars()
+            .take(MAX_REMOTE_DIAGNOSTIC_CHARS)
+            .collect::<String>();
+        if compact.chars().count() > MAX_REMOTE_DIAGNOSTIC_CHARS {
+            bounded.push_str(" [truncated]");
+        }
+        bounded
     }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::sync::{Mutex, MutexGuard, OnceLock};
+    use crate::test_support::mcp_env_test_lock;
+    use std::sync::MutexGuard;
+
+    #[test]
+    fn remote_body_read_stops_without_content_length() {
+        let mut reader = std::io::repeat(b'x');
+        let body = read_remote_body(&mut reader, 32).expect("bounded read");
+        assert_eq!(body.len(), 33);
+        let exact = read_remote_body(&b"{}"[..], 2).expect("small JSON");
+        assert_eq!(
+            serde_json::from_slice::<Value>(&exact).unwrap(),
+            serde_json::json!({})
+        );
+    }
+
+    #[test]
+    fn error_diagnostic_is_bounded_at_unicode_boundaries() {
+        let body = format!("  forbidden\n{}", "é".repeat(MAX_REMOTE_ERROR_BYTES));
+        let compact = compact_error_body(&body);
+        assert!(compact.starts_with("forbidden é"));
+        assert!(compact.ends_with(" [truncated]"));
+        assert_eq!(compact.chars().count(), MAX_REMOTE_DIAGNOSTIC_CHARS + 12);
+        assert_eq!(compact_error_body(" \n\t"), "without response body");
+    }
 
     struct LookupEnvGuard {
         _guard: MutexGuard<'static, ()>,
@@ -407,9 +465,7 @@ mod tests {
     }
 
     fn lock_lookup_base_url_env() -> LookupEnvGuard {
-        static ENV_LOCK: OnceLock<Mutex<()>> = OnceLock::new();
-        let guard = ENV_LOCK
-            .get_or_init(|| Mutex::new(()))
+        let guard = mcp_env_test_lock()
             .lock()
             // Test-only env cleanup should not cascade if another lookup test panics.
             .unwrap_or_else(|poisoned| poisoned.into_inner());

@@ -23,7 +23,14 @@ all non-dotrepo Cargo lock entries against the immutable tag. Package and smoke
 test the CLI, public-query, MCP, and LSP binaries before publication. Retain the
 baseline failure and candidate results in the release preparation report.
 
-All other behavior follows the 1.0.1 source. Current `main` documentation and
+The candidate also backports conservative Make/Just declaration parsing, exact
+wrapper spelling, abstention on required recipe arguments, Go compile-only and
+discovery rejection, and changed-directory withholding in contribution code
+blocks. MCP successful bodies and error diagnostics have independent byte caps.
+The import fixture gate pins these semantics without executing upstream projects.
+No development schema or public Rust API change is included.
+
+All behavior outside this bounded safety scope follows the 1.0.1 source. Current `main` documentation and
 development-only safeguards do not apply to this candidate. Release publication,
 cross-platform artifacts, and install-default promotion remain release work.
 
@@ -46,3 +53,8 @@ The candidate targets the `codex/stable-1.0` maintenance branch, leaving `main`
 on its development version. Maintenance CI pins its actions and exposes the same
 scoped `ci-gate` aggregate, with push checks enabled for this branch. Merging the
 backport does not publish a tag, change install defaults, or release artifacts.
+
+Release validation also shares the MCP test environment lock across modules,
+checks workspace/tag version parity before packaging, and publishes the six
+stable workspace crates after GitHub assets exist. Dependency checks use the
+repository's explicit license policy; no additional lock entries are changed.

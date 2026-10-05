@@ -1,0 +1,4 @@
+test: setup
+    cargo test
+setup:
+    touch ready

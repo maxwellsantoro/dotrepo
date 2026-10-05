@@ -6,7 +6,8 @@
 //! candidates lives in `policy`.
 use super::super::types::{CommandSourceTier, ImportedCommandCandidate, ImportedFile};
 use super::policy::{
-    detect_node_package_runner, is_placeholder_package_json_test_script, pick_node_script_command,
+    detect_node_package_runner, is_nonexecuting_test_command,
+    is_placeholder_package_json_test_script, pick_node_script_command,
 };
 
 pub(crate) fn infer_cargo_manifest_commands(
@@ -448,97 +449,156 @@ fn cmake_workflow_has_step(workflow: &serde_json::Value, required: &str) -> bool
 }
 
 pub(crate) fn infer_makefile_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
-    let mut has_build = false;
-    let mut has_test = false;
-    for line in file.contents.lines() {
-        // Makefile targets are defined at the start of a line (column 0).
-        // Recipe bodies are indented (tab or spaces) and may contain ":" in
-        // shell expansions like ":-" or "$(var:pat=rep)".
-        if line.starts_with(|c: char| c.is_whitespace()) {
-            continue;
-        }
-        let trimmed = line.trim();
-        // Common explicit targets (allow "target:" or "target :" forms)
-        let target_name = trimmed
-            .split_once(':')
-            .map(|(lhs, _)| lhs.trim().to_ascii_lowercase());
-        if let Some(name) = target_name {
-            if ["build", "all", "compile", "dist", "package", "ci"]
+    let targets = parse_makefile_targets(&file.contents);
+    // Preserve the entrypoint: prerequisites, variables, shell settings and
+    // directory changes belong to Make, even for a one-line recipe.
+    let pick = |names: &[&str]| {
+        names.iter().find_map(|name| {
+            targets
                 .iter()
-                .any(|t| name == *t || name.starts_with(&format!("{}-", t)))
-            {
-                has_build = true;
-            }
-            if ["test", "check", "verify", "spec"]
-                .iter()
-                .any(|t| name == *t || name.starts_with(&format!("{}-", t)))
-            {
-                has_test = true;
-            }
-        }
-    }
-    if !has_build && !has_test {
+                .find(|target| target.eq_ignore_ascii_case(name))
+                .map(|target| format!("make {target}"))
+        })
+    };
+    let build = pick(&["build", "all", "compile", "dist", "package"]);
+    let test = pick(&["unit-test", "test-unit", "test", "check", "verify", "spec"]);
+    if build.is_none() && test.is_none() {
         return None;
     }
     Some(ImportedCommandCandidate {
         source_path: file.path.clone(),
         source_tier: CommandSourceTier::TaskScript,
-        build: if has_build {
-            Some("make build".into())
-        } else {
-            None
-        },
-        test: if has_test {
-            Some("make test".into())
-        } else {
-            None
-        },
+        build,
+        test,
     })
 }
 
 pub(crate) fn infer_justfile_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
-    let mut has_build = false;
-    let mut has_test = false;
-    for line in file.contents.lines() {
-        let trimmed = line.trim();
-        // Skip ':=' assignments (variables) and '[' (settings/aliases)
-        if trimmed.contains(":=") || trimmed.starts_with('[') {
-            continue;
-        }
-        // Recipes: "name:" or "name arg:" — split on first ':' and check the lhs
-        if let Some(colon_pos) = trimmed.find(':') {
-            let lhs = trimmed[..colon_pos].trim();
-            // lhs must be a valid recipe identifier (no spaces, no '=')
-            if lhs.contains(' ') || lhs.contains('=') || lhs.is_empty() {
-                continue;
-            }
-            // The first word of lhs is the recipe name (may have args after it)
-            let name = lhs.split_whitespace().next().unwrap_or(lhs);
-            if name == "build" || name == "all" {
-                has_build = true;
-            }
-            if name == "test" || name == "check" {
-                has_test = true;
-            }
-        }
-    }
-    if !has_build && !has_test {
+    let recipes = parse_justfile_recipes(&file.contents);
+    let pick = |names: &[&str]| {
+        names.iter().find_map(|name| {
+            recipes
+                .iter()
+                .find(|recipe| recipe.eq_ignore_ascii_case(name))
+                .map(|recipe| format!("just {recipe}"))
+        })
+    };
+    let build = pick(&["build", "all"]);
+    let test = pick(&["unit-test", "test-unit", "test", "check"]);
+    if build.is_none() && test.is_none() {
         return None;
     }
     Some(ImportedCommandCandidate {
         source_path: file.path.clone(),
         source_tier: CommandSourceTier::TaskScript,
-        build: if has_build {
-            Some("just build".into())
-        } else {
-            None
-        },
-        test: if has_test {
-            Some("just test".into())
-        } else {
-            None
-        },
+        build,
+        test,
     })
+}
+
+/// Static literal declarations only. Never evaluate upstream Make expressions.
+fn parse_makefile_targets(contents: &str) -> Vec<String> {
+    let mut targets = Vec::new();
+    let mut define_depth = 0usize;
+    let mut conditional_depth = 0usize;
+    let mut continued = false;
+    for line in contents.lines() {
+        let trimmed = line.split('#').next().unwrap_or("").trim();
+        let was_continued = continued;
+        continued = trimmed.ends_with('\\');
+        if line.starts_with('\t') || trimmed.is_empty() {
+            continue;
+        }
+        let directive = trimmed.split_whitespace().next().unwrap_or("");
+        if matches!(
+            directive,
+            "define" | "override" | "export" | "private" | "unexport"
+        ) && trimmed.split_whitespace().any(|token| token == "define")
+        {
+            define_depth += 1;
+            continue;
+        }
+        if directive == "endef" {
+            define_depth = define_depth.saturating_sub(1);
+            continue;
+        }
+        if define_depth > 0 {
+            continue;
+        }
+        if matches!(directive, "ifdef" | "ifndef" | "ifeq" | "ifneq") {
+            conditional_depth += 1;
+            continue;
+        }
+        if directive == "endif" {
+            conditional_depth = conditional_depth.saturating_sub(1);
+            continue;
+        }
+        if conditional_depth > 0 || was_continued {
+            continue;
+        }
+        // A top-level diagnostic or changed recipe syntax prevents us from
+        // establishing any usable default with this conservative parser.
+        if trimmed.starts_with("$(error")
+            || trimmed.starts_with("${error")
+            || trimmed.starts_with(".RECIPEPREFIX")
+        {
+            return Vec::new();
+        }
+        if continued || line.starts_with(char::is_whitespace) {
+            continue;
+        }
+        let Some((lhs, rhs)) = trimmed.split_once(':') else {
+            continue;
+        };
+        if rhs.starts_with(['=', ':']) || rhs.contains(':') || rhs.contains('=') {
+            continue;
+        }
+        let names = lhs.split_whitespace().collect::<Vec<_>>();
+        if names.is_empty() || !names.iter().all(|name| literal_task_name(name)) {
+            continue;
+        }
+        targets.extend(names.into_iter().map(str::to_string));
+    }
+    targets
+}
+
+fn literal_task_name(name: &str) -> bool {
+    name.chars()
+        .next()
+        .is_some_and(|ch| ch.is_ascii_alphabetic() || ch == '_')
+        && name
+            .chars()
+            .all(|ch| ch.is_ascii_alphanumeric() || matches!(ch, '_' | '-'))
+}
+
+fn parse_justfile_recipes(contents: &str) -> Vec<String> {
+    let mut recipes = Vec::new();
+    let mut attributed = false;
+    for line in contents.lines() {
+        if line.starts_with(char::is_whitespace) {
+            continue;
+        }
+        let trimmed = line.trim();
+        if trimmed.is_empty() || trimmed.starts_with('#') {
+            continue;
+        }
+        if trimmed.starts_with('[') {
+            attributed = true;
+            continue;
+        }
+        let skip = std::mem::take(&mut attributed);
+        let Some((lhs, rhs)) = trimmed.split_once(':') else {
+            continue;
+        };
+        let name = lhs.trim();
+        // Parameters (including defaults and variadics) require a richer
+        // invocation contract. Withhold them rather than guessing arguments.
+        if skip || rhs.starts_with('=') || name.starts_with('_') || !literal_task_name(name) {
+            continue;
+        }
+        recipes.push(name.to_string());
+    }
+    recipes
 }
 
 pub(crate) fn infer_rakefile_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
@@ -589,13 +649,21 @@ pub(crate) fn infer_contributing_commands(file: &ImportedFile) -> Option<Importe
     let mut build: Option<String> = None;
     let mut test: Option<String> = None;
     let mut in_code_block = false;
+    let mut changed_directory = false;
     for line in file.contents.lines() {
         let trimmed = line.trim();
         if trimmed.starts_with("```") {
             in_code_block = !in_code_block;
+            changed_directory = false;
             continue;
         }
         if !in_code_block {
+            continue;
+        }
+        if trimmed == "cd" || trimmed.starts_with("cd ") {
+            changed_directory = true;
+        }
+        if changed_directory {
             continue;
         }
         let lower = trimmed.to_lowercase();
@@ -611,6 +679,7 @@ pub(crate) fn infer_contributing_commands(file: &ImportedFile) -> Option<Importe
             build = Some(trimmed.to_string());
         }
         if test.is_none()
+            && !is_nonexecuting_test_command(trimmed)
             && (lower.starts_with("cargo test")
                 || lower.starts_with("make test")
                 || lower.starts_with("make check")
@@ -695,7 +764,11 @@ pub(crate) fn first_matching_workflow_command(
 ) -> Option<String> {
     commands.iter().find_map(|command| {
         let trimmed = command.trim();
-        if trimmed.is_empty() || trimmed.starts_with('#') || looks_like_shell_assignment(trimmed) {
+        if (!select_build && is_nonexecuting_test_command(trimmed))
+            || trimmed.is_empty()
+            || trimmed.starts_with('#')
+            || looks_like_shell_assignment(trimmed)
+        {
             return None;
         }
 
