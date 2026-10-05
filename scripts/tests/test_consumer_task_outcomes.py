@@ -207,3 +207,27 @@ def test_reference_runner_preserves_partial_and_completed_packets(tmp_path):
     with pytest.raises(ValueError, match="new output directory"):
         run_controls(tmp_path)
     assert sentinel.read_text() == "partial retained run"
+
+
+def test_score_cli_cannot_overwrite_a_retained_packet(packet, monkeypatch):
+    from bench.tasks import main
+
+    root, _, _ = packet
+    before = {path: path.read_bytes() for path in root.rglob("*") if path.is_file()}
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "bench.tasks",
+            "--workload",
+            str(root / "workload.json"),
+            "--observations",
+            str(root / "observations.json"),
+            "--out",
+            str(root),
+        ],
+    )
+    with pytest.raises(SystemExit) as failure:
+        main()
+    assert failure.value.code == 2
+    assert before == {path: path.read_bytes() for path in root.rglob("*") if path.is_file()}

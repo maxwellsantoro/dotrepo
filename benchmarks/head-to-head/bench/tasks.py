@@ -350,6 +350,10 @@ def main():
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
     try:
+        require(
+            not args.out.exists() or not any(args.out.iterdir()),
+            "choose a new output directory; retained results are immutable",
+        )
         report = score(args.workload, args.observations)
     except (ValueError, KeyError, TypeError, OSError) as exc:
         parser.error(str(exc))
