@@ -1,0 +1,20 @@
+{
+  "taskId": "unindexed-fallback",
+  "instruction": {
+    "command": "make build",
+    "workingDirectory": ".",
+    "scope": "repository",
+    "component": null,
+    "parameters": {},
+    "prerequisites": [],
+    "environment": {},
+    "sourcePaths": [
+      "README.md"
+    ],
+    "purpose": "build"
+  },
+  "exitCode": 0,
+  "oraclePassed": true,
+  "stdout": "uv run python runner.py build\n{\"mode\": \"build\", \"completed\": true}\n",
+  "stderr": ""
+}

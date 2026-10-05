@@ -1,0 +1,1128 @@
+{
+  "version": 1,
+  "workloadSha256": "75262e3e3eb9a142aaee5117ba3abd9bb52c6dd503a2f10fbe457c98db8c6c4a",
+  "runs": [
+    {
+      "taskId": "root-build",
+      "arm": "source-first",
+      "revision": "d85f2f5c5a51e74b464d713065758992e7c6fe31",
+      "environmentId": "local-controlled-fixture",
+      "cacheState": "cold",
+      "startedAt": "2026-10-05T02:19:55.393887+00:00",
+      "endedAt": "2026-10-05T02:19:55.505288+00:00",
+      "elapsedMs": 111.403,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 200,
+        "cacheHits": 0
+      },
+      "lookup": null,
+      "attempts": [
+        {
+          "instruction": {
+            "command": "make build",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "parameters": {},
+            "prerequisites": [],
+            "environment": {},
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "build"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "origin": "source",
+          "log": {
+            "path": "logs/root-build-source-first-0.json",
+            "sha256": "1ab962c9fd4491c2ab416d080d9eeb5dff5b8a05d75f1eca70167af415c8fe87"
+          }
+        }
+      ],
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "root-build",
+      "arm": "lookup-first",
+      "revision": "d85f2f5c5a51e74b464d713065758992e7c6fe31",
+      "environmentId": "local-controlled-fixture",
+      "cacheState": "cold",
+      "startedAt": "2026-10-05T02:19:55.505310+00:00",
+      "endedAt": "2026-10-05T02:19:55.578864+00:00",
+      "elapsedMs": 73.564,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 371,
+        "cacheHits": 0
+      },
+      "lookup": {
+        "snapshotId": "896ec89331752be0974681522fffa9dd0650af1d93f6e1e6b10afccde5bf56d6",
+        "policy": "explicit-high-confidence-extraction",
+        "valuePresent": true,
+        "accepted": true,
+        "instruction": {
+          "command": "make build",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "component": null,
+          "parameters": {},
+          "prerequisites": [],
+          "environment": {},
+          "sourcePaths": [
+            "README.md"
+          ],
+          "purpose": "build"
+        },
+        "fallbackReasons": []
+      },
+      "attempts": [
+        {
+          "instruction": {
+            "command": "make build",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "parameters": {},
+            "prerequisites": [],
+            "environment": {},
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "build"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "origin": "profile",
+          "log": {
+            "path": "logs/root-build-lookup-first-0.json",
+            "sha256": "1ab962c9fd4491c2ab416d080d9eeb5dff5b8a05d75f1eca70167af415c8fe87"
+          }
+        }
+      ],
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "root-unit-test",
+      "arm": "lookup-first",
+      "revision": "d85f2f5c5a51e74b464d713065758992e7c6fe31",
+      "environmentId": "local-controlled-fixture",
+      "cacheState": "cold",
+      "startedAt": "2026-10-05T02:19:55.578893+00:00",
+      "endedAt": "2026-10-05T02:19:55.652628+00:00",
+      "elapsedMs": 73.744,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 372,
+        "cacheHits": 0
+      },
+      "lookup": {
+        "snapshotId": "896ec89331752be0974681522fffa9dd0650af1d93f6e1e6b10afccde5bf56d6",
+        "policy": "explicit-high-confidence-extraction",
+        "valuePresent": true,
+        "accepted": true,
+        "instruction": {
+          "command": "make unit",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "component": null,
+          "parameters": {},
+          "prerequisites": [],
+          "environment": {},
+          "sourcePaths": [
+            "README.md"
+          ],
+          "purpose": "test"
+        },
+        "fallbackReasons": []
+      },
+      "attempts": [
+        {
+          "instruction": {
+            "command": "make unit",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "parameters": {},
+            "prerequisites": [],
+            "environment": {},
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "origin": "profile",
+          "log": {
+            "path": "logs/root-unit-test-lookup-first-0.json",
+            "sha256": "63962a8466c7a2156f35e90b5b8c8bab35b73ba9edef93514d0030252ac19399"
+          }
+        }
+      ],
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "root-unit-test",
+      "arm": "source-first",
+      "revision": "d85f2f5c5a51e74b464d713065758992e7c6fe31",
+      "environmentId": "local-controlled-fixture",
+      "cacheState": "cold",
+      "startedAt": "2026-10-05T02:19:55.652648+00:00",
+      "endedAt": "2026-10-05T02:19:55.726463+00:00",
+      "elapsedMs": 73.826,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 198,
+        "cacheHits": 0
+      },
+      "lookup": null,
+      "attempts": [
+        {
+          "instruction": {
+            "command": "make unit",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "parameters": {},
+            "prerequisites": [],
+            "environment": {},
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "origin": "source",
+          "log": {
+            "path": "logs/root-unit-test-source-first-0.json",
+            "sha256": "63962a8466c7a2156f35e90b5b8c8bab35b73ba9edef93514d0030252ac19399"
+          }
+        }
+      ],
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "prerequisite-test",
+      "arm": "source-first",
+      "revision": "d85f2f5c5a51e74b464d713065758992e7c6fe31",
+      "environmentId": "local-controlled-fixture",
+      "cacheState": "cold",
+      "startedAt": "2026-10-05T02:19:55.726488+00:00",
+      "endedAt": "2026-10-05T02:19:55.854770+00:00",
+      "elapsedMs": 128.29,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 217,
+        "cacheHits": 0
+      },
+      "lookup": null,
+      "attempts": [
+        {
+          "instruction": {
+            "command": "make test",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "parameters": {},
+            "prerequisites": [
+              "Make target setup"
+            ],
+            "environment": {},
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "origin": "source",
+          "log": {
+            "path": "logs/prerequisite-test-source-first-0.json",
+            "sha256": "f6e13fe2393f4839a82dc7dd3ddbd7e48df9509e9554e5cc8003f5eeebf71ab0"
+          }
+        }
+      ],
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "prerequisite-test",
+      "arm": "lookup-first",
+      "revision": "d85f2f5c5a51e74b464d713065758992e7c6fe31",
+      "environmentId": "local-controlled-fixture",
+      "cacheState": "cold",
+      "startedAt": "2026-10-05T02:19:55.854790+00:00",
+      "endedAt": "2026-10-05T02:19:55.987451+00:00",
+      "elapsedMs": 132.669,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 374,
+        "cacheHits": 0
+      },
+      "lookup": {
+        "snapshotId": "896ec89331752be0974681522fffa9dd0650af1d93f6e1e6b10afccde5bf56d6",
+        "policy": "explicit-high-confidence-extraction",
+        "valuePresent": true,
+        "accepted": true,
+        "instruction": {
+          "command": "make test",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "component": null,
+          "parameters": {},
+          "prerequisites": [
+            "Make target setup"
+          ],
+          "environment": {},
+          "sourcePaths": [
+            "README.md"
+          ],
+          "purpose": "test"
+        },
+        "fallbackReasons": []
+      },
+      "attempts": [
+        {
+          "instruction": {
+            "command": "make test",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "parameters": {},
+            "prerequisites": [
+              "Make target setup"
+            ],
+            "environment": {},
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "origin": "profile",
+          "log": {
+            "path": "logs/prerequisite-test-lookup-first-0.json",
+            "sha256": "f6e13fe2393f4839a82dc7dd3ddbd7e48df9509e9554e5cc8003f5eeebf71ab0"
+          }
+        }
+      ],
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "required-argument",
+      "arm": "lookup-first",
+      "revision": "d85f2f5c5a51e74b464d713065758992e7c6fe31",
+      "environmentId": "local-controlled-fixture",
+      "cacheState": "cold",
+      "startedAt": "2026-10-05T02:19:55.987475+00:00",
+      "endedAt": "2026-10-05T02:19:56.075349+00:00",
+      "elapsedMs": 87.883,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 604,
+        "cacheHits": 0
+      },
+      "lookup": {
+        "snapshotId": "896ec89331752be0974681522fffa9dd0650af1d93f6e1e6b10afccde5bf56d6",
+        "policy": "explicit-high-confidence-extraction",
+        "valuePresent": true,
+        "accepted": false,
+        "instruction": null,
+        "fallbackReasons": [
+          "incomplete-command:repo.test"
+        ]
+      },
+      "attempts": [
+        {
+          "instruction": {
+            "command": "just test unit",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "parameters": {
+              "target": "unit"
+            },
+            "prerequisites": [],
+            "environment": {},
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "origin": "fallback",
+          "log": {
+            "path": "logs/required-argument-lookup-first-0.json",
+            "sha256": "897652eb2933a7ae77cfa0c1245e539dab872927a5b408c230a182bb55dedac6"
+          }
+        }
+      ],
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "required-argument",
+      "arm": "source-first",
+      "revision": "d85f2f5c5a51e74b464d713065758992e7c6fe31",
+      "environmentId": "local-controlled-fixture",
+      "cacheState": "cold",
+      "startedAt": "2026-10-05T02:19:56.075371+00:00",
+      "endedAt": "2026-10-05T02:19:56.151116+00:00",
+      "elapsedMs": 75.757,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 219,
+        "cacheHits": 0
+      },
+      "lookup": null,
+      "attempts": [
+        {
+          "instruction": {
+            "command": "just test unit",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "parameters": {
+              "target": "unit"
+            },
+            "prerequisites": [],
+            "environment": {},
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "origin": "source",
+          "log": {
+            "path": "logs/required-argument-source-first-0.json",
+            "sha256": "897652eb2933a7ae77cfa0c1245e539dab872927a5b408c230a182bb55dedac6"
+          }
+        }
+      ],
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "component-scope",
+      "arm": "source-first",
+      "revision": "d85f2f5c5a51e74b464d713065758992e7c6fe31",
+      "environmentId": "local-controlled-fixture",
+      "cacheState": "cold",
+      "startedAt": "2026-10-05T02:19:56.151143+00:00",
+      "endedAt": "2026-10-05T02:19:56.217160+00:00",
+      "elapsedMs": 66.028,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 289,
+        "cacheHits": 0
+      },
+      "lookup": null,
+      "attempts": [
+        {
+          "instruction": {
+            "command": "uv run python ../../runner.py component",
+            "workingDirectory": "components/widget",
+            "scope": "component",
+            "component": "widget",
+            "parameters": {},
+            "prerequisites": [],
+            "environment": {
+              "DEMO_CONTEXT": "widget"
+            },
+            "sourcePaths": [
+              "components/widget/README.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "origin": "source",
+          "log": {
+            "path": "logs/component-scope-source-first-0.json",
+            "sha256": "401ec1601d3455dfd2e0cb771a4643533b56c1cc560caebdaa888746adac8cfa"
+          }
+        }
+      ],
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "component-scope",
+      "arm": "lookup-first",
+      "revision": "d85f2f5c5a51e74b464d713065758992e7c6fe31",
+      "environmentId": "local-controlled-fixture",
+      "cacheState": "cold",
+      "startedAt": "2026-10-05T02:19:56.217183+00:00",
+      "endedAt": "2026-10-05T02:19:56.287255+00:00",
+      "elapsedMs": 70.084,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 704,
+        "cacheHits": 0
+      },
+      "lookup": {
+        "snapshotId": "896ec89331752be0974681522fffa9dd0650af1d93f6e1e6b10afccde5bf56d6",
+        "policy": "explicit-high-confidence-extraction",
+        "valuePresent": true,
+        "accepted": false,
+        "instruction": null,
+        "fallbackReasons": [
+          "scoped-command-source:repo.test"
+        ]
+      },
+      "attempts": [
+        {
+          "instruction": {
+            "command": "uv run python ../../runner.py component",
+            "workingDirectory": "components/widget",
+            "scope": "component",
+            "component": "widget",
+            "parameters": {},
+            "prerequisites": [],
+            "environment": {
+              "DEMO_CONTEXT": "widget"
+            },
+            "sourcePaths": [
+              "components/widget/README.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "origin": "fallback",
+          "log": {
+            "path": "logs/component-scope-lookup-first-0.json",
+            "sha256": "401ec1601d3455dfd2e0cb771a4643533b56c1cc560caebdaa888746adac8cfa"
+          }
+        }
+      ],
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "compile-only-fallback",
+      "arm": "lookup-first",
+      "revision": "d85f2f5c5a51e74b464d713065758992e7c6fe31",
+      "environmentId": "local-controlled-fixture",
+      "cacheState": "cold",
+      "startedAt": "2026-10-05T02:19:56.287280+00:00",
+      "endedAt": "2026-10-05T02:19:56.365760+00:00",
+      "elapsedMs": 78.489,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 578,
+        "cacheHits": 0
+      },
+      "lookup": {
+        "snapshotId": "896ec89331752be0974681522fffa9dd0650af1d93f6e1e6b10afccde5bf56d6",
+        "policy": "explicit-high-confidence-extraction",
+        "valuePresent": true,
+        "accepted": false,
+        "instruction": null,
+        "fallbackReasons": [
+          "incomplete-command:repo.test"
+        ]
+      },
+      "attempts": [
+        {
+          "instruction": {
+            "command": "make unit",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "parameters": {},
+            "prerequisites": [],
+            "environment": {},
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "origin": "fallback",
+          "log": {
+            "path": "logs/compile-only-fallback-lookup-first-0.json",
+            "sha256": "c451b9bb2d64b361f547401efae5aa3ed61d6b2a457d01a77e34c492736168e0"
+          }
+        }
+      ],
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "compile-only-fallback",
+      "arm": "source-first",
+      "revision": "d85f2f5c5a51e74b464d713065758992e7c6fe31",
+      "environmentId": "local-controlled-fixture",
+      "cacheState": "cold",
+      "startedAt": "2026-10-05T02:19:56.365783+00:00",
+      "endedAt": "2026-10-05T02:19:56.442699+00:00",
+      "elapsedMs": 76.923,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 198,
+        "cacheHits": 0
+      },
+      "lookup": null,
+      "attempts": [
+        {
+          "instruction": {
+            "command": "make unit",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "parameters": {},
+            "prerequisites": [],
+            "environment": {},
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "origin": "source",
+          "log": {
+            "path": "logs/compile-only-fallback-source-first-0.json",
+            "sha256": "c451b9bb2d64b361f547401efae5aa3ed61d6b2a457d01a77e34c492736168e0"
+          }
+        }
+      ],
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "absent-command",
+      "arm": "source-first",
+      "revision": "d85f2f5c5a51e74b464d713065758992e7c6fe31",
+      "environmentId": "local-controlled-fixture",
+      "cacheState": "cold",
+      "startedAt": "2026-10-05T02:19:56.442720+00:00",
+      "endedAt": "2026-10-05T02:19:56.514767+00:00",
+      "elapsedMs": 72.059,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 198,
+        "cacheHits": 0
+      },
+      "lookup": null,
+      "attempts": [
+        {
+          "instruction": {
+            "command": "make unit",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "parameters": {},
+            "prerequisites": [],
+            "environment": {},
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "origin": "source",
+          "log": {
+            "path": "logs/absent-command-source-first-0.json",
+            "sha256": "6f423df5f16cb579d8694ee11e227422b31c0654d028c92c805a3f9fcc1b96bd"
+          }
+        }
+      ],
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "absent-command",
+      "arm": "lookup-first",
+      "revision": "d85f2f5c5a51e74b464d713065758992e7c6fe31",
+      "environmentId": "local-controlled-fixture",
+      "cacheState": "cold",
+      "startedAt": "2026-10-05T02:19:56.514791+00:00",
+      "endedAt": "2026-10-05T02:19:56.589653+00:00",
+      "elapsedMs": 74.872,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 401,
+        "cacheHits": 0
+      },
+      "lookup": {
+        "snapshotId": "896ec89331752be0974681522fffa9dd0650af1d93f6e1e6b10afccde5bf56d6",
+        "policy": "explicit-high-confidence-extraction",
+        "valuePresent": false,
+        "accepted": false,
+        "instruction": null,
+        "fallbackReasons": [
+          "missing:repo.test"
+        ]
+      },
+      "attempts": [
+        {
+          "instruction": {
+            "command": "make unit",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "parameters": {},
+            "prerequisites": [],
+            "environment": {},
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "origin": "fallback",
+          "log": {
+            "path": "logs/absent-command-lookup-first-0.json",
+            "sha256": "6f423df5f16cb579d8694ee11e227422b31c0654d028c92c805a3f9fcc1b96bd"
+          }
+        }
+      ],
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "unindexed-fallback",
+      "arm": "lookup-first",
+      "revision": "d85f2f5c5a51e74b464d713065758992e7c6fe31",
+      "environmentId": "local-controlled-fixture",
+      "cacheState": "cold",
+      "startedAt": "2026-10-05T02:19:56.589680+00:00",
+      "endedAt": "2026-10-05T02:19:56.660824+00:00",
+      "elapsedMs": 71.153,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 407,
+        "cacheHits": 0
+      },
+      "lookup": {
+        "snapshotId": "896ec89331752be0974681522fffa9dd0650af1d93f6e1e6b10afccde5bf56d6",
+        "policy": "explicit-high-confidence-extraction",
+        "valuePresent": false,
+        "accepted": false,
+        "instruction": null,
+        "fallbackReasons": [
+          "repository-not-found"
+        ]
+      },
+      "attempts": [
+        {
+          "instruction": {
+            "command": "make build",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "parameters": {},
+            "prerequisites": [],
+            "environment": {},
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "build"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "origin": "fallback",
+          "log": {
+            "path": "logs/unindexed-fallback-lookup-first-0.json",
+            "sha256": "4fe11daac4cc9326fb6027a043a1fa8d7b25d3cec37126bd969cd31f7a3a0893"
+          }
+        }
+      ],
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "unindexed-fallback",
+      "arm": "source-first",
+      "revision": "d85f2f5c5a51e74b464d713065758992e7c6fe31",
+      "environmentId": "local-controlled-fixture",
+      "cacheState": "cold",
+      "startedAt": "2026-10-05T02:19:56.660846+00:00",
+      "endedAt": "2026-10-05T02:19:56.739638+00:00",
+      "elapsedMs": 78.802,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 200,
+        "cacheHits": 0
+      },
+      "lookup": null,
+      "attempts": [
+        {
+          "instruction": {
+            "command": "make build",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "parameters": {},
+            "prerequisites": [],
+            "environment": {},
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "build"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "origin": "source",
+          "log": {
+            "path": "logs/unindexed-fallback-source-first-0.json",
+            "sha256": "4fe11daac4cc9326fb6027a043a1fa8d7b25d3cec37126bd969cd31f7a3a0893"
+          }
+        }
+      ],
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "accepted-prerequisite-loss",
+      "arm": "source-first",
+      "revision": "d85f2f5c5a51e74b464d713065758992e7c6fe31",
+      "environmentId": "local-controlled-fixture",
+      "cacheState": "cold",
+      "startedAt": "2026-10-05T02:19:56.739666+00:00",
+      "endedAt": "2026-10-05T02:19:56.897234+00:00",
+      "elapsedMs": 157.579,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 217,
+        "cacheHits": 0
+      },
+      "lookup": null,
+      "attempts": [
+        {
+          "instruction": {
+            "command": "make test",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "parameters": {},
+            "prerequisites": [
+              "Make target setup"
+            ],
+            "environment": {},
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "origin": "source",
+          "log": {
+            "path": "logs/accepted-prerequisite-loss-source-first-0.json",
+            "sha256": "69a49493a1732dc13cc17f7dacd52f6d1a14f3b3f0be94075d1981788b071cec"
+          }
+        }
+      ],
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "accepted-prerequisite-loss",
+      "arm": "lookup-first",
+      "revision": "d85f2f5c5a51e74b464d713065758992e7c6fe31",
+      "environmentId": "local-controlled-fixture",
+      "cacheState": "cold",
+      "startedAt": "2026-10-05T02:19:56.897262+00:00",
+      "endedAt": "2026-10-05T02:19:57.130045+00:00",
+      "elapsedMs": 232.792,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 620,
+        "cacheHits": 0
+      },
+      "lookup": {
+        "snapshotId": "896ec89331752be0974681522fffa9dd0650af1d93f6e1e6b10afccde5bf56d6",
+        "policy": "explicit-high-confidence-extraction",
+        "valuePresent": true,
+        "accepted": true,
+        "instruction": {
+          "command": "uv run python runner.py test",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "component": null,
+          "parameters": {},
+          "prerequisites": [],
+          "environment": {},
+          "sourcePaths": [
+            "README.md"
+          ],
+          "purpose": "test"
+        },
+        "fallbackReasons": []
+      },
+      "attempts": [
+        {
+          "instruction": {
+            "command": "uv run python runner.py test",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "parameters": {},
+            "prerequisites": [],
+            "environment": {},
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 1,
+          "oraclePassed": false,
+          "origin": "profile",
+          "log": {
+            "path": "logs/accepted-prerequisite-loss-lookup-first-0.json",
+            "sha256": "2880b83c0db9154be613611a1b6dfb598f59c4a08d8e8b779f6271a7eb56bbdd"
+          }
+        },
+        {
+          "instruction": {
+            "command": "make test",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "parameters": {},
+            "prerequisites": [
+              "Make target setup"
+            ],
+            "environment": {},
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "origin": "fallback",
+          "log": {
+            "path": "logs/accepted-prerequisite-loss-lookup-first-1.json",
+            "sha256": "69a49493a1732dc13cc17f7dacd52f6d1a14f3b3f0be94075d1981788b071cec"
+          }
+        }
+      ],
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "accepted-non-running-command",
+      "arm": "lookup-first",
+      "revision": "d85f2f5c5a51e74b464d713065758992e7c6fe31",
+      "environmentId": "local-controlled-fixture",
+      "cacheState": "cold",
+      "startedAt": "2026-10-05T02:19:57.130080+00:00",
+      "endedAt": "2026-10-05T02:19:57.301804+00:00",
+      "elapsedMs": 171.737,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 606,
+        "cacheHits": 0
+      },
+      "lookup": {
+        "snapshotId": "896ec89331752be0974681522fffa9dd0650af1d93f6e1e6b10afccde5bf56d6",
+        "policy": "explicit-high-confidence-extraction",
+        "valuePresent": true,
+        "accepted": true,
+        "instruction": {
+          "command": "uv run python runner.py compile",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "component": null,
+          "parameters": {},
+          "prerequisites": [],
+          "environment": {},
+          "sourcePaths": [
+            "README.md"
+          ],
+          "purpose": "test"
+        },
+        "fallbackReasons": []
+      },
+      "attempts": [
+        {
+          "instruction": {
+            "command": "uv run python runner.py compile",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "parameters": {},
+            "prerequisites": [],
+            "environment": {},
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 0,
+          "oraclePassed": false,
+          "origin": "profile",
+          "log": {
+            "path": "logs/accepted-non-running-command-lookup-first-0.json",
+            "sha256": "90d35a589301878fc29c84a2506e6d2913f4b4e1eeb4ac75acef322b9193178c"
+          }
+        },
+        {
+          "instruction": {
+            "command": "make unit",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "parameters": {},
+            "prerequisites": [],
+            "environment": {},
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "origin": "fallback",
+          "log": {
+            "path": "logs/accepted-non-running-command-lookup-first-1.json",
+            "sha256": "abd2914ab887898ee79f8ba2aaa9c8bdfff7b0c0ee6c7b1769233e1c992e2313"
+          }
+        }
+      ],
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "accepted-non-running-command",
+      "arm": "source-first",
+      "revision": "d85f2f5c5a51e74b464d713065758992e7c6fe31",
+      "environmentId": "local-controlled-fixture",
+      "cacheState": "cold",
+      "startedAt": "2026-10-05T02:19:57.301832+00:00",
+      "endedAt": "2026-10-05T02:19:57.388437+00:00",
+      "elapsedMs": 86.615,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 198,
+        "cacheHits": 0
+      },
+      "lookup": null,
+      "attempts": [
+        {
+          "instruction": {
+            "command": "make unit",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "parameters": {},
+            "prerequisites": [],
+            "environment": {},
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "origin": "source",
+          "log": {
+            "path": "logs/accepted-non-running-command-source-first-0.json",
+            "sha256": "abd2914ab887898ee79f8ba2aaa9c8bdfff7b0c0ee6c7b1769233e1c992e2313"
+          }
+        }
+      ],
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    }
+  ]
+}

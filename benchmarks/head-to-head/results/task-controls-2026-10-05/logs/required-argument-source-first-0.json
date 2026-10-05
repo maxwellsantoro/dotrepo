@@ -1,0 +1,22 @@
+{
+  "taskId": "required-argument",
+  "instruction": {
+    "command": "just test unit",
+    "workingDirectory": ".",
+    "scope": "repository",
+    "component": null,
+    "parameters": {
+      "target": "unit"
+    },
+    "prerequisites": [],
+    "environment": {},
+    "sourcePaths": [
+      "README.md"
+    ],
+    "purpose": "test"
+  },
+  "exitCode": 0,
+  "oraclePassed": true,
+  "stdout": "{\"mode\": \"parameterized\", \"completed\": true}\n",
+  "stderr": "uv run python runner.py parameterized unit\n"
+}
