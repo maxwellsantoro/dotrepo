@@ -15,6 +15,12 @@ generated growth, coverage, promotion, and telemetry artifacts own live values.
 
 ### Documentation maintenance
 
+- Shift the immediate consumer checkpoint to a frozen operator study on the
+  maintainer's four substantive other public projects; defer external recruitment.
+  Retain eight paired tasks, live snapshot/source receipts, command oracles,
+  setup failures, and accepted context mismatches without claiming task benefit.
+  Correct the RIES overlay's WASM scalars from the maintainer's pinned native
+  defaults, remove superseded assessments, and preserve unrelated factual age.
 - Add a paired task-observation scorer that binds frozen workloads to supplied
   execution logs, preserves source context, and separates completion from policy
   acceptance. Retain controlled reference runs with injected wrong answers and

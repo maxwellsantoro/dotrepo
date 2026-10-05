@@ -1,8 +1,31 @@
-# Generic agent integration pilot
+# Own-project study and later consumer pilot
 
-This package is ready for an external team to integrate. No participating team or
-independent adoption is claimed. A deployment by the dotrepo operator remains
-operator evidence even when it uses this package.
+The current evaluation uses the maintainer's other public projects. An external
+participant is not required at this stage. Source-first and lookup-first outcomes
+remain operator evidence; repository ownership and operator familiarity prevent
+an independent adoption or generalization claim.
+
+The external integration package remains available for a later pilot. No
+participating team or independent adoption is claimed.
+
+## Current operator study
+
+Select every substantive other public project before inspecting index coverage.
+Exclude dotrepo itself and throwaway canaries by a declared rule. Pin upstream
+commits, source-grounded instructions, scope, prerequisites, and completion
+oracles before requesting profiles. Keep missing profiles and unavailable setup
+in the denominator; do not repair selected records during the frozen comparison.
+
+The [October 4 own-project packet](../benchmarks/head-to-head/results/own-projects-2026-10-04/README.md)
+retains the roster, workload, live HTTP receipts, command logs, and scored outcomes.
+The fixed runner uses manually selected source instructions. It measures a bounded
+reference workflow, not an autonomous model's repository investigation. Explicit
+HTTP counts exclude package-manager traffic; bootstrap and preparation costs are
+disclosed separately. Unknown model and maintenance costs remain null.
+
+The current checkpoint is reviewable paired outcomes and a disposition for every
+task. Later fixes receive a new dated run; preserve the first packet. Useful
+operator results can justify a later independent pilot, but do not close its gate.
 
 ## Deliverables
 
@@ -18,7 +41,7 @@ operator evidence even when it uses this package.
 ## Preparation and handoff
 
 Follow the [roadmap](../ROADMAP.md) for start conditions and priority. Prepare
-these independently owned outputs in parallel before an external team is ready:
+these outputs for the operator study; retain the external handoff for a later stage:
 
 | Package | Reviewable output | Dependency |
 | --- | --- | --- |
@@ -29,14 +52,15 @@ these independently owned outputs in parallel before an external team is ready:
 
 The coordinator fixes the workload and policy versions, checks adapter/harness
 compatibility, and integrates the results. Keep unfavorable tasks and unresolved
-costs visible. A blocked external handoff need not block fixture-backed adapter
-and harness work. Reference runs remain operator evidence.
+costs visible. The deferred external handoff does not block own-project tasks,
+adapter checks, or harness work. Reference runs remain operator evidence.
 
 The task scorer validates workload/log hashes, paired order, revision/environment,
 context preservation, and observed completion separately from policy acceptance.
 Its retained controlled runs include accepted wrong instructions and fallback
 recovery. Supplied log hashes prove consistency, not independent observation;
-participant task oracles and outcomes need review before the C2/C3 gates close.
+operator task oracles and outcomes need review for C2; independent participant
+outcomes are required for the later C3 gate.
 
 For lookup and command acceptance, use the
 [integration contract](external-consumer-integration.md). Record the final task
@@ -53,7 +77,8 @@ tasks after inspecting the results.
 Record HTTP requests, decoded response bytes, wall time, actual model token usage
 where available, and allocated index maintenance cost. Unknown costs remain null,
 not zero. Bytes divided by four is not billed model usage. The benchmark's
-`transport` counts include prefetch and fallback HTTP work; `elapsedMs` includes
+`transport` counts include explicit prefetch and fallback HTTP work; the own-project
+runner discloses excluded package-manager/bootstrap traffic; `elapsedMs` includes
 the whole arm. Legacy per-field latency excludes model inference.
 
 ## Acceptance

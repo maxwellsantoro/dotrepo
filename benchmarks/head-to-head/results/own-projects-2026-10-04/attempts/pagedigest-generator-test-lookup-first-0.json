@@ -1,0 +1,30 @@
+{
+  "taskId": "pagedigest-generator-test",
+  "origin": "fallback",
+  "instruction": {
+    "command": "cargo test --locked",
+    "workingDirectory": "implementations/rust-generator",
+    "scope": "component",
+    "component": "Rust generator",
+    "prerequisites": [
+      "Rust/Cargo"
+    ],
+    "parameters": {},
+    "environment": {},
+    "sourcePaths": [
+      "AGENTS.md"
+    ],
+    "purpose": "test"
+  },
+  "exitCode": 0,
+  "oraclePassed": true,
+  "commands": [
+    {
+      "command": "cargo test --locked",
+      "exitCode": 0,
+      "stdout": "\nrunning 11 tests\ntest tests::collect_digests_distinguishes_literal_percent_from_space ... ok\ntest tests::normalize_prefixes_validates_sorts_and_dedupes ... ok\ntest tests::rel_to_url_key_file_style_preserves_index_filename ... ok\ntest tests::rel_to_url_key_encodes_unicode_and_non_path_characters ... ok\ntest tests::collect_digests_fails_on_unreadable_subdirectory ... ok\ntest tests::collect_digests_empty_tree_is_empty ... ok\ntest tests::rel_to_url_key_percent_encodes_spaces_and_specials ... ok\ntest tests::rel_to_url_key_trailing_slash_style_maps_index_routes ... ok\ntest tests::collect_digests_ignores_well_known_directory ... ok\ntest tests::sha256_hex_is_stable ... ok\ntest tests::collect_digests_detects_url_key_collision ... ok\n\ntest result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s\n\n",
+      "stderr": "   Compiling proc-macro2 v1.0.106\n   Compiling libc v0.2.185\n   Compiling unicode-ident v1.0.24\n   Compiling quote v1.0.45\n   Compiling typenum v1.19.0\n   Compiling version_check v0.9.5\n   Compiling serde_core v1.0.228\n   Compiling autocfg v1.5.0\n   Compiling utf8parse v0.2.2\n   Compiling anstyle-parse v1.0.0\n   Compiling is_terminal_polyfill v1.70.2\n   Compiling anstyle v1.0.14\n   Compiling generic-array v0.14.7\n   Compiling rustix v1.1.4\n   Compiling num-traits v0.2.19\n   Compiling colorchoice v1.0.5\n   Compiling getrandom v0.4.2\n   Compiling cfg-if v1.0.4\n   Compiling anstyle-query v1.1.5\n   Compiling serde v1.0.228\n   Compiling zmij v1.0.21\n   Compiling anstream v1.0.0\n   Compiling bitflags v2.11.1\n   Compiling serde_json v1.0.149\n   Compiling anyhow v1.0.102\n   Compiling core-foundation-sys v0.8.7\n   Compiling clap_lex v1.1.0\n   Compiling strsim v0.11.1\n   Compiling heck v0.5.0\n   Compiling iana-time-zone v0.1.65\n   Compiling errno v0.3.14\n   Compiling cpufeatures v0.2.17\n   Compiling clap_builder v4.6.0\n   Compiling syn v2.0.117\n   Compiling itoa v1.0.18\n   Compiling memchr v2.8.0\n   Compiling once_cell v1.21.4\n   Compiling same-file v1.0.6\n   Compiling fastrand v2.4.1\n   Compiling walkdir v2.5.0\n   Compiling percent-encoding v2.3.2\n   Compiling block-buffer v0.10.4\n   Compiling crypto-common v0.1.7\n   Compiling digest v0.10.7\n   Compiling sha2 v0.10.9\n   Compiling tempfile v3.27.0\n   Compiling serde_derive v1.0.228\n   Compiling clap_derive v4.6.1\n   Compiling clap v4.6.1\n   Compiling chrono v0.4.44\n   Compiling pagedigest v0.3.0 (/private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-own-project-runs-mm4lonoq/pagedigest-generator-test-lookup-first/implementations/rust-generator)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 19.61s\n     Running unittests src/main.rs (target/debug/deps/pagedigest_generator-011ee36c65b8e642)\n",
+      "executionError": null
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "identity": "github.com/maxwellsantoro/ries-rs",
+  "sourceRevision": "0904c3ed17d2f221ea565a7b9e15929d9fe8b419",
+  "before": {
+    "status": "verified",
+    "build": "npm run build",
+    "test": "npm test"
+  },
+  "after": {
+    "status": "imported",
+    "build": "cargo build --release --locked",
+    "test": "cargo nextest run --tests --locked"
+  },
+  "recordTimestampUnchanged": true,
+  "supersededAssessmentsRemoved": [
+    "repo.build",
+    "repo.test"
+  ],
+  "claimsUnchanged": true,
+  "afterRecordSha256": "bd68f7b6bfb48ddb4efa1b1430bcd27c6bb963b038e5d3ddb9a23fad9a3b83ed",
+  "disposition": "Exact maintainer-native defaults retained; no new field assessment or verified authority minted. Complete verification remains pending. Frozen study and snapshot unchanged.",
+  "supersededRecordProvenanceRemoved": [
+    "verified"
+  ]
+}

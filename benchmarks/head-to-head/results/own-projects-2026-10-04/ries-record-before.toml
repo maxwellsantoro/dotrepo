@@ -2,7 +2,7 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/maxwellsantoro/ries-rs"
 generated_at = "2026-09-16T16:31:27.131449Z"
 
@@ -10,8 +10,9 @@ generated_at = "2026-09-16T16:31:27.131449Z"
 confidence = "high"
 provenance = [
     "imported",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `.github/SECURITY.md`, `package.json`, and `ries-py/pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. Imported `repo.toolchain.min` from `ries-py/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Prior verified command assessments superseded by the October 4 own-project study. Retained package.json commands target WASM; repository defaults now follow the maintainer .repo at the retained upstream revision. Command assessments are withheld pending complete verification; unrelated evidence and record age are retained."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `.github/SECURITY.md`, `package.json`, and `ries-py/pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. Imported `repo.toolchain.min` from `ries-py/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "ries-rs"
@@ -27,8 +28,8 @@ languages = [
     "TypeScript",
     "JavaScript",
 ]
-build = "cargo build --release --locked"
-test = "cargo nextest run --tests --locked"
+build = "npm run build"
+test = "npm test"
 topics = [
     "equation-solver",
     "mathematics",
@@ -112,6 +113,15 @@ reason = "no single clear team in CODEOWNERS"
 state = "not_found"
 valueJson = "null"
 
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:31:27.131449Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "package.json"
+state = "present"
+valueJson = '"npm run build"'
+
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-16T16:31:27.131449Z"
 confidence = "high"
@@ -137,6 +147,15 @@ reason = "extracted from README heading with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"ries-rs"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:31:27.131449Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "package.json"
+state = "present"
+valueJson = '"npm test"'
 
 [x.github]
 archived = false

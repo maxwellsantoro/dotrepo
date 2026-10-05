@@ -1,0 +1,71 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "canonical"
+
+[record.trust]
+confidence = "high"
+provenance = ["declared", "verified"]
+notes = "Maintainer-controlled source of truth."
+
+[repo]
+name = "RIES-RS"
+description = "High-performance Rust reimplementation of Robert Munafo's RIES (RILYBOT Inverse Equation Solver). Given any target number, it discovers elegant algebraic expressions and equations that evaluate exactly to it - now with parallel search, PSLQ integer relations, Python bindings, and WebAssembly support."
+homepage = "https://github.com/maxwellsantoro/ries-rs"
+license = "MIT"
+status = "active"
+visibility = "public"
+languages = ["rust"]
+build = "cargo build --release --locked"
+test = "cargo nextest run --tests --locked"
+topics = [
+    "equation-solver",
+    "inverse-symbolic-calculator",
+    "mathematics",
+    "numerical-methods",
+    "python-bindings",
+    "rust",
+    "scientific-computing",
+    "symbolic-computation",
+    "wasm",
+]
+
+[owners]
+maintainers = ["@maxwellsantoro"]
+security_contact = "https://github.com/maxwellsantoro/ries-rs/security/advisories/new"
+
+[docs]
+root = "docs/"
+getting_started = "README.md"
+architecture = "docs/ARCHITECTURE.md"
+api = "docs/README.md"
+
+[readme]
+title = "RIES-RS"
+tagline = "High-performance Rust inverse equation solver with CLI, Python, and WASM builds."
+sections = [
+    "overview",
+    "install",
+    "quickstart",
+    "documentation",
+    "citation",
+]
+
+[readme.custom_sections.install]
+content = "Install via `cargo install ries --locked` (CLI), `pip install ries-rs` (Python), or download a prebuilt archive from the GitHub releases page."
+
+[readme.custom_sections.documentation]
+content = "Full documentation lives in `docs/`. Start with the [documentation map](docs/README.md) for an index of all guides."
+
+[readme.custom_sections.citation]
+content = "Cite via `CITATION.cff` (canonical). A BibTeX entry and Zenodo DOI are in the README under *How to Cite*."
+
+[compat.github]
+codeowners = "generate"
+security = "generate"
+contributing = "skip"
+pull_request_template = "skip"
+
+[relations]
+references = []

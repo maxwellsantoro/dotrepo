@@ -1,0 +1,20 @@
+{
+  "timing": "After all paired runs, outside timed arms; command repair does not change the frozen snapshot or observations",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/maxwellsantoro/ries-rs/0904c3ed17d2f221ea565a7b9e15929d9fe8b419/.repo",
+      "status": 200,
+      "sourceRevision": "0904c3ed17d2f221ea565a7b9e15929d9fe8b419",
+      "artifact": "ries-retained-source.repo",
+      "sha256": "5a8785f17614efd144743c83facac89665cad24feec47c1eee386d9242a04a12"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/maxwellsantoro/ries-rs/0904c3ed17d2f221ea565a7b9e15929d9fe8b419/package.json",
+      "status": 200,
+      "sourceRevision": "0904c3ed17d2f221ea565a7b9e15929d9fe8b419",
+      "artifact": "ries-retained-package.json",
+      "sha256": "1d3d2b90c0728aebbf4cf1f3b8e5565b118fba6373b5a233e6d640deb1e3fc97"
+    }
+  ],
+  "recordBeforeSha256": "e4070fc7f62020bb068f874b1cf28f248d6f2db30206f6b38d82cf497209bcc1"
+}

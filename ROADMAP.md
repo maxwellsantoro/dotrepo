@@ -18,10 +18,11 @@ preparation can start together. Dispatch dependency-ready packets, land small
 compatible changes, and release a worker slot when its handoff is reviewable.
 Follow [the team execution guide](docs/agent-execution.md).
 
-The current completion target is **a release-ready, freshly evaluated index and
-one independently deployed consumer pilot with reproducible outcomes**.
-Sustained operations continue after that checkpoint. Ecosystem scale and protocol
-governance are later gates, not prerequisites for finishing this checkpoint.
+The current completion target is **a release-ready toolchain and a reproducible
+operator study on the maintainer's other public projects**. Freeze source-grounded
+tasks before checking coverage, run the paired workflows, and retain failures and
+fallbacks. This is the practical next checkpoint; external recruitment is deferred.
+Independent adoption, ecosystem scale, and protocol governance remain later gates.
 
 ### Start together
 
@@ -30,10 +31,10 @@ governance are later gates, not prerequisites for finishing this checkpoint.
 | F1 / 1: factual freshness | Inspect current overdue and risk-weighted audit queues; correct source-backed facts, preserve abstentions, add regression fixtures, and retain dated inspection evidence | Ready now. Own disjoint repository identities and audit/freshness changes; coordinate shared importer-policy edits with E1 |
 | E1 / 2: execution metadata | Extract the complete source-grounded RFC 0021 context tuple; fixture repository/component layouts, missing prerequisites, ambiguity, and stale context | Ready now: authoring/validation/export contract exists. Own execution extraction and its tests; reserve schema/shared importer changes for coordinated integration |
 | R1 / 3: delivery continuity | Maintain actual `ci-gate` enforcement, version-matched installation defaults, history restoration, and snapshot-coherent public smoke checks | Stable delivery evidence is retained in the changelog and dated receipts. Keep maintenance versions separate from main; repeat affected checks for future releases |
-| C1 / 4: consumer preparation | Freeze independent tasks and upstream answers; prepare paired source-first/lookup-first runs, usage/maintenance accounting, and external integration package | Ready now, before inspecting coverage. Own harness/client/reporting. Prepare participation requirements immediately; external contact needs authorization and participation needs consent |
+| C1 / 4: own-project study preparation | Freeze tasks and upstream answers from the maintainer's substantive public projects; prepare paired source-first/lookup-first runs and accounting | Ready now, before inspecting coverage. Exclude dotrepo self-tests and throwaway canaries from the primary roster; own harness/client/reporting. No external participant is needed |
 
 With three worker slots, start F1, E1, and R1. The coordinator prepares C1's task
-rubric and external requirements, then dispatches C1 when a slot opens. With more
+rubric and own-project roster, then dispatches C1 when a slot opens. With more
 capacity, C1 starts immediately. Split F1 by identity or ecosystem only when
 workers can avoid shared parser, policy, or record files. Keep the coordinator
 available for cross-cutting decisions and integration.
@@ -49,27 +50,26 @@ conditions, and measured task environment remain comparable.
 | Packet | Prerequisites | Completion evidence |
 | --- | --- | --- |
 | F2: factual checkpoint | F1 corrections and fresh inspections integrated | Current record-age/overdue gate; exact-value, missing-answer, incorrect-assertion, and correct-abstention results by ecosystem; disposition for every inspected audit case |
-| E2: context usefulness | E1 integrated; independent command tasks frozen by C1 | Sources support command, directory, scope, component, prerequisites, and source together; consumer selection/fallback tests pass; component commands stay candidates unless they establish a repository default |
+| E2: context usefulness | E1 integrated; command tasks frozen by C1 | Sources support command, directory, scope, component, prerequisites, and source together; consumer selection/fallback tests pass; component commands stay candidates unless they establish a repository default |
 | R2: stable delivery | R1 compatibility/release gates pass; publication authorized | Published artifacts and installation smoke tests before moving install defaults/generated maintainer CI; source merge alone is not a release |
-| C2: complete task evaluation | C1 inputs frozen; integrated F2/E2 snapshot fixed | Paired reproducible outcomes, errors/fallback work, cache state, actual model usage, elapsed time, and allocated maintenance cost; retain unfavorable results and unknown costs |
-| C3: independent pilot | C1 package/rubric frozen, consenting participant, compatible deployed surface, and declared policy/snapshot versions | Deployed integration, observation window, repeated independent use, and outcomes meeting [pilot acceptance](docs/consumer-pilot.md#acceptance) |
+| C2: operator task evaluation | C1 inputs frozen; evaluated snapshot fixed | Paired reproducible outcomes on the maintainer's projects, errors/fallback work, cache state, elapsed time, and measurement boundaries; retain unfavorable results and unknown model/maintenance costs. Operator familiarity and shared cache carryover limit conclusions |
+| C3: independent pilot (deferred) | Useful operator results justify recruitment; new workload frozen, consenting participant, compatible deployed surface, and declared policy/snapshot versions | Deployed integration, observation window, repeated independent use, and outcomes meeting [pilot acceptance](docs/consumer-pilot.md#acceptance) |
 | G1: first growth cohort | F2, E2, C2, C3 pass; operating budgets hold | A 50–100 repository cohort meets quality, freshness, reliability, and unit-cost budgets below |
 
-C2 can evaluate an immutable development export while R2 proceeds. C3 preparation,
-onboarding, and observations can overlap both once its inputs and deployment are
-fixed. Both C2 and C3 need completed acceptance evidence before G1. An unavailable
-external participant blocks C3 and growth, not parser
-fixes, release preparation, or task measurement. If evaluation reveals a defect,
+C2 can evaluate an immutable published or development export while R2 proceeds.
+An external participant is not a prerequisite for the current checkpoint. C3 is
+deferred; both useful C2 results and C3 acceptance evidence are required before
+G1 expansion. If evaluation reveals a defect,
 reopen the smallest affected packet and rerun dependent checks; preserve successful
 independent work.
 
 ### Critical path and stopping rules
 
-The implementation path is `F1 + E1 -> F2 + E2 -> C2`.
-The independent-use path is `C1 + consent + compatible deployment -> C3`.
-Join both completed paths and operating budgets before G1; C3's observation
-window does not wait for C2 to finish. Stable delivery is `R1 -> R2`.
-External participation may be the longest wait, so prepare it from the start.
+The current study path is `C1 -> fixed snapshot -> C2`; findings reopen affected
+F1/E1 work, with F2/E2 required to establish broader quality. Stable delivery is
+`R1 -> R2`. The later independent-use path is
+`useful operator results + new frozen workload + consent + compatible deployment -> C3`.
+Join broader quality, independent-use evidence, and operating budgets before G1.
 Establish the actual blocking path from evidence instead of invented dates.
 
 Close a packet only when its specified artifacts/checks exist. Distinguish
@@ -129,7 +129,7 @@ milestones describe outcome gates, not a second serial task list.
 | --- | --- |
 | M0: Working protocol/proof surface | Schema, CLI/MCP/LSP, generation, trust, hosted export exist; keep contracts and version boundaries coherent |
 | M1: Autonomous index factory | Crawl, refresh, escalation, telemetry, landing exist; sustain freshness, recovery, cadence, and operating costs |
-| M2: Useful shared semantic cache | Profiles and cache/freshness contracts exist; F2, E2, C2 establish independent factual and task usefulness |
+| M2: Useful shared semantic cache | Profiles and cache/freshness contracts exist; F2/E2 establish broader quality, C2 measures bounded operator task outcomes, and C3 supplies independent-use evidence |
 | M3: Research substrate | Search, compare, relations, optional synthesis exist; representative calibration follows consumer demand |
 | M4: Ecosystem scale | C3 and measured operating budgets gate G1 and subsequent cohorts |
 | M5: Maintainer adoption | Bootstrap, readiness, CI, claims exist; independent native use and durable handoffs remain separate from overlay coverage |
@@ -170,11 +170,12 @@ consumer use justifies them.
 Generate current values from freshness, accuracy, coverage, telemetry, policy,
 and unit-cost reports. Keep each run's snapshot, inputs, commands, costs, and
 outcome artifacts together. Use [the benchmark guide](benchmarks/head-to-head/README.md)
-for paired tasks, [the pilot](docs/consumer-pilot.md) for independent use, and
+for paired tasks, [the study and later pilot](docs/consumer-pilot.md), and
 [archived reports](docs/archive/README.md) for history. Do not duplicate live
 dashboards or completed inventories here.
 
-The checkpoint succeeds when an independent agent uses suitable dotrepo facts,
-inspects upstream material its task still needs, completes useful work, and
-shows improvement after fallback and maintenance costs. If the data does not
-support that result, retain it and revise the affected packet.
+The current checkpoint produces a frozen own-project workload, paired observed
+outcomes, and an honest disposition for each failure or fallback. It need not
+show an advantage to be informative. A product-benefit claim still requires
+improvement after fallback and maintenance costs, and independent adoption needs
+the later C3 evidence. Retain unfavorable data and revise the affected packet.

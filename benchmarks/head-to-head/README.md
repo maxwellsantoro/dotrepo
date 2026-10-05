@@ -232,6 +232,14 @@ wrong instructions, failed attempts, fallback, and actual/unknown costs. Its
 operator controls do not establish independent task benefit. The factual-answer
 benchmark below remains unchanged and does not execute commands.
 
+The current [own-project study](results/own-projects-2026-10-04/README.md) uses
+eight preregistered build/test tasks in the maintainer's four substantive other
+public projects. It requests real immutable profiles and executes fixed
+source-grounded commands in fresh checkouts. Source selection is manual;
+operator outcomes do not establish autonomous-agent performance or external
+adoption. Its transport boundary excludes package-manager traffic and unallocated
+preparation costs, so it cannot establish total task-cost savings.
+
 The `lookup-first` arm uses the generic consumer's identity, record-age, conflict,
 and required-field policy. Rejected fields trigger the GitHub baseline and include
 its work. Both arms use the same extractor setting. No returned command is run.

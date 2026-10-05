@@ -1,0 +1,25 @@
+{
+  "pythonTests": {
+    "passed": 474,
+    "log": "/tmp/dotrepo-own-project-python-tests-integrated.log"
+  },
+  "focusedStudyControls": {
+    "passed": 10
+  },
+  "ruff": "passed",
+  "versionAndToolchainParity": "passed",
+  "nativeSourceValidation": "passed",
+  "indexValidation": "passed",
+  "frozenRunnerHttpHashesAndScorerReplay": "passed",
+  "operatorGate": {
+    "passed": true,
+    "root": "/tmp/dotrepo-own-project-operator-gate-final"
+  },
+  "completeReleaseGate": {
+    "passed": true,
+    "root": "/tmp/dotrepo-own-project-release-gate-final",
+    "includesVsix": true,
+    "includesWorkerSmoke": true
+  },
+  "rustCoreChecks": "No Rust source/manifest changed; prior protected CI covers unchanged inputs. Final PR CI must pass on integrated state."
+}
