@@ -67,6 +67,10 @@ The [October 6 source checkpoint](index/telemetry/roadmap-factual-checkpoint-202
 and [risk audit](index/telemetry/roadmap-risk-audit-2026-10-06.md) supply bounded
 semantic dispositions and repairs. Whole-record verification and broader F2
 quality evidence remain open; recent record age is not semantic correctness.
+The [declared remainder](index/telemetry/roadmap-risk-remainder-2026-10-06.md)
+completes source dispositions for that frozen audit queue, preserving partial
+assessment and record-age boundaries. It does not expand the population or
+replace a coherent full-record inspection.
 The [cadence checkpoint](index/telemetry/roadmap-refresh-cadence-2026-10-06.md)
 diagnoses stale-base refusal and prepares a bounded deterministic regeneration.
 An enabled schedule and nominal capacity do not establish successful rotation;

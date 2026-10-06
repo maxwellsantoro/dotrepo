@@ -52,13 +52,6 @@ reason = "no docs detected"
 state = "not_found"
 valueJson = "null"
 
-[x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:35:21.055416Z"
-confidence = "high"
-method = "not_found_in_inspected_sources"
-reason = "no docs detected"
-state = "not_found"
-valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
 checkedAt = "2026-09-16T16:35:21.055416Z"
@@ -77,14 +70,6 @@ reason = "clear CODEOWNERS team"
 state = "present"
 valueJson = '"@openai/codex-core-agent-team"'
 
-[x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:35:21.055416Z"
-confidence = "low"
-method = "inferred"
-reason = "Component command lacks repository-default scope and working directory."
-source = "codex-rs/Cargo.toml"
-state = "unresolved"
-valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-16T16:35:21.055416Z"
@@ -121,3 +106,78 @@ fork = false
 head_sha = "da18000cae9884ab45f83b2d07fbd5a220a1de39"
 html_url = "https://github.com/openai/codex"
 stars = 124703
+
+[[repo.build_candidates]]
+command = "cargo build"
+ecosystem = "Rust"
+source = "docs/install.md"
+
+[repo.build_candidates.context]
+command = "cargo build"
+working_directory = "codex-rs"
+scope = "component"
+prerequisites = ["Use a documented supported Unix host (macOS 12+, Ubuntu 20.04+, Debian 10+, or Windows 11 via WSL2) with at least 4 GB RAM. Install the pinned Rust 1.95.0 toolchain with rustfmt, clippy, and rust-src as declared in codex-rs/rust-toolchain.toml."]
+source = "docs/install.md"
+component = "codex-rs"
+
+[[repo.test_candidates]]
+command = "just test"
+ecosystem = "Rust"
+source = "docs/install.md"
+
+[repo.test_candidates.context]
+command = "just test"
+working_directory = "codex-rs"
+scope = "component"
+prerequisites = ["Use a documented supported Unix host (macOS 12+, Ubuntu 20.04+, Debian 10+, or Windows 11 via WSL2) with at least 4 GB RAM. Install the pinned Rust 1.95.0 toolchain with rustfmt, clippy, and rust-src as declared in codex-rs/rust-toolchain.toml.", "Install just and cargo-nextest using the documented locked cargo installs; Python 3 and sh must be available for the retained root justfile shell adapter. Preserve the wrapper: it selects codex-rs and supplies RUST_MIN_STACK and NEXTEST_PROFILE."]
+source = "docs/install.md"
+component = "codex-rs"
+
+[docs]
+
+root = "https://developers.openai.com/codex"
+
+[x.dotrepo.field_evidence."repo.build_candidates.0"]
+checkedAt = "2026-10-06T05:05:26.380157Z"
+confidence = "high"
+method = "extracted"
+reason = "2026-10-06 bounded retained-revision inspection: complete source-grounded command/context tuple, wrapper and scope preserved; no upstream execution or whole-record recrawl. Supporting exact files, pins and hashes are retained in evidence.md and the remainder audit source receipt."
+source = "docs/install.md"
+state = "present"
+valueJson = "{\"command\": \"cargo build\", \"context\": {\"command\": \"cargo build\", \"component\": \"codex-rs\", \"prerequisites\": [\"Use a documented supported Unix host (macOS 12+, Ubuntu 20.04+, Debian 10+, or Windows 11 via WSL2) with at least 4 GB RAM. Install the pinned Rust 1.95.0 toolchain with rustfmt, clippy, and rust-src as declared in codex-rs/rust-toolchain.toml.\"], \"scope\": \"component\", \"source\": \"docs/install.md\", \"working_directory\": \"codex-rs\"}, \"ecosystem\": \"Rust\", \"source\": \"docs/install.md\"}"
+
+[x.dotrepo.field_evidence."repo.test_candidates.0"]
+checkedAt = "2026-10-06T05:05:26.380157Z"
+confidence = "high"
+method = "extracted"
+reason = "2026-10-06 bounded retained-revision inspection: complete source-grounded command/context tuple, wrapper and scope preserved; no upstream execution or whole-record recrawl. Supporting exact files, pins and hashes are retained in evidence.md and the remainder audit source receipt."
+source = "docs/install.md"
+state = "present"
+valueJson = "{\"command\": \"just test\", \"context\": {\"command\": \"just test\", \"component\": \"codex-rs\", \"prerequisites\": [\"Use a documented supported Unix host (macOS 12+, Ubuntu 20.04+, Debian 10+, or Windows 11 via WSL2) with at least 4 GB RAM. Install the pinned Rust 1.95.0 toolchain with rustfmt, clippy, and rust-src as declared in codex-rs/rust-toolchain.toml.\", \"Install just and cargo-nextest using the documented locked cargo installs; Python 3 and sh must be available for the retained root justfile shell adapter. Preserve the wrapper: it selects codex-rs and supplies RUST_MIN_STACK and NEXTEST_PROFILE.\"], \"scope\": \"component\", \"source\": \"docs/install.md\", \"working_directory\": \"codex-rs\"}, \"ecosystem\": \"Rust\", \"source\": \"docs/install.md\"}"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-10-06T05:05:26.380157Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "Documented Rust workspace entrypoint requires codex-rs; not a repository-wide scalar default. No supported scalar default/root found within inspected source scope; this is not universal absence. Preserve record age/status."
+source = "docs/install.md"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-10-06T05:05:26.380157Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "Documented Rust workspace entrypoint requires codex-rs; not a repository-wide scalar default. No supported scalar default/root found within inspected source scope; this is not universal absence. Preserve record age/status."
+source = "docs/install.md"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-10-06T05:05:26.380157Z"
+confidence = "high"
+method = "extracted"
+reason = "README explicitly declares Codex Documentation; no external page fetched or inferred from hostname. Source declaration at retained revision only; external page not executed or used as live semantic proof."
+source = "README.md"
+state = "present"
+valueJson = "\"https://developers.openai.com/codex\""

@@ -28,8 +28,6 @@ languages = [
     "HTML",
     "JavaScript",
 ]
-build = "npm run build"
-test = "composer run-script test"
 topics = [
     "php",
     "expenses",
@@ -49,12 +47,44 @@ topics = [
     "quotes",
 ]
 
+[[repo.build_candidates]]
+command = "npm run build"
+ecosystem = "Node.js"
+source = "package.json"
+
+[repo.build_candidates.context]
+command = "npm run build"
+working_directory = "."
+scope = "component"
+prerequisites = [
+    "Prepare Node.js 22 and install the root package.json dependencies with npm i, as declared for root assets in .github/workflows/react_release.yml.",
+]
+source = "vite.config.ts"
+component = "resources"
+
+[[repo.test_candidates]]
+command = "composer run-script test"
+ecosystem = "Composer"
+source = "composer.json"
+
+[repo.test_candidates.context]
+command = "composer run-script test"
+working_directory = "."
+scope = "component"
+prerequisites = [
+    "Prepare PHP 8.2, 8.3, 8.4 or 8.5, Composer v2 and the extensions/development dependencies declared by composer.json and .github/workflows/phpunit.yml.",
+    "Prepare the database, Redis, .env.ci-derived configuration, application key/configuration, migrations and seed data described in the PHP unit workflow, using a dedicated disposable test database.",
+    "Prepare the PDF runtime and upstream license/environment bindings declared in .github/workflows/phpunit.yml; the complete environment cannot be bound in the public execution-context protocol.",
+]
+source = "phpunit.xml"
+component = "app"
+
 [owners]
 maintainers = []
 security_contact = "contact@invoiceninja.com"
 
 [docs]
-root = "https://invoiceninja.com"
+root = "https://invoiceninja.github.io"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
 checkedAt = "2026-09-18T06:03:25.349963436Z"
@@ -65,12 +95,13 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-18T06:03:25.349963436Z"
+checkedAt = "2026-10-06T05:08:10.049774+00:00"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "2026-10-06 pinned-source audit: CONTRIBUTING explicitly labels invoiceninja.github.io Documentation; the retained invoiceninja.com value is the product homepage."
+source = "CONTRIBUTING.md"
 state = "present"
-valueJson = '"https://invoiceninja.com"'
+valueJson = '"https://invoiceninja.github.io"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
 checkedAt = "2026-09-18T06:03:25.349963436Z"
@@ -90,13 +121,13 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-18T06:03:25.349963436Z"
-confidence = "high"
-method = "extracted"
-reason = "from declared repository source"
+checkedAt = "2026-10-06T05:08:10.049774+00:00"
+confidence = "medium"
+method = "unspecified"
+reason = "2026-10-06 pinned-source audit: npm run build invokes Vite for resources assets; it is not a full Laravel application build. Preserve a resources component candidate, unassessed because locked dependency/toolchain preparation for this invocation is not declared."
 source = "package.json"
-state = "present"
-valueJson = '"npm run build"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-18T06:03:25.349963436Z"
@@ -125,13 +156,13 @@ state = "present"
 valueJson = '"invoiceninja"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-18T06:03:25.349963436Z"
-confidence = "high"
-method = "extracted"
-reason = "from declared repository source"
+checkedAt = "2026-10-06T05:08:10.049774+00:00"
+confidence = "medium"
+method = "unspecified"
+reason = "2026-10-06 pinned-source audit: Composer test is a valid PHP wrapper, but the retained scalar omits the application/services setup and backend scope. Preserve an unassessed PHP application candidate; upstream CI needs environment/license/service bindings and a different sharded wrapper."
 source = "composer.json"
-state = "present"
-valueJson = '"composer run-script test"'
+state = "unresolved"
+valueJson = "null"
 
 [x.github]
 archived = false

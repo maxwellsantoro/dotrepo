@@ -29,3 +29,28 @@ The preceding import and auto-promotion entries are historical and superseded fo
 - repo.test: `just test` -> withheld (inspected `justfile`)
 
 Receipt and source hashes: [command-source audit](../../../../telemetry/command-semantics-20261004/report.json).
+
+## 2026-10-06 bounded command/documentation source inspection
+
+Inspected retained upstream revision `da18000cae9884ab45f83b2d07fbd5a220a1de39` for `repo.build`, `repo.test`, and `docs.root`. Source instructions were treated as data. No upstream commands, model calls, or external documentation-page execution occurred. This field inspection preserves the existing record timestamp `2026-09-16T16:35:21.055416Z`, status `inferred`, and all unrelated facts. New assessments do not imply whole-record reinspection; the public timestamp-binding gate may withhold them until a coherent full recrawl.
+
+- `repo.build`: correct-default-abstention-with-supported-component-candidate. Documented Rust workspace entrypoint requires codex-rs; not a repository-wide scalar default. Action: preserve scalar null; add value-bound codex-rs component candidate.
+- `repo.test`: correct-default-abstention-with-supported-component-candidate. Documented Rust workspace entrypoint requires codex-rs; not a repository-wide scalar default. Action: preserve scalar null; add value-bound codex-rs component candidate.
+- `docs.root`: missing-supported. README explicitly declares Codex Documentation; no external page fetched or inferred from hostname. Action: set docs.root to https://developers.openai.com/codex, source README.md.
+
+Retained source files used in the bounded inspection (URLs are pinned to the recorded revision; hashes cover raw bytes):
+
+- [README.md](https://raw.githubusercontent.com/openai/codex/da18000cae9884ab45f83b2d07fbd5a220a1de39/README.md) — SHA-256 `ba4e1f69ff48386e72a9c5e1edaf76aad64a475c2d51af79ccba6d1128261ba7`.
+- [justfile](https://raw.githubusercontent.com/openai/codex/da18000cae9884ab45f83b2d07fbd5a220a1de39/justfile) — SHA-256 `69006391c914824d51d49ac7b1ec45caabb6df6a636fb59277fdbe02daf17d36`.
+- [package.json](https://raw.githubusercontent.com/openai/codex/da18000cae9884ab45f83b2d07fbd5a220a1de39/package.json) — SHA-256 `0d0a78ff2f703abad442de6e99e127076ad40f85912692a82ec21d968944b368`.
+- [docs/install.md](https://raw.githubusercontent.com/openai/codex/da18000cae9884ab45f83b2d07fbd5a220a1de39/docs/install.md) — SHA-256 `1126ec733921878a40720e139ba7be88e325ecf9fa5b113de2cc636bc71a1f5a`.
+- [docs/contributing.md](https://raw.githubusercontent.com/openai/codex/da18000cae9884ab45f83b2d07fbd5a220a1de39/docs/contributing.md) — SHA-256 `205b46a2a743aaec47ea46ef7787dfae72eaa9dee4529fba4c635109c8cada9a`.
+- [codex-rs/Cargo.toml](https://raw.githubusercontent.com/openai/codex/da18000cae9884ab45f83b2d07fbd5a220a1de39/codex-rs/Cargo.toml) — SHA-256 `fafacfe0e21232efaf578c060d88afedf3608a43c6f2cfe7ba863b5367df56ef`.
+- [codex-rs/rust-toolchain.toml](https://raw.githubusercontent.com/openai/codex/da18000cae9884ab45f83b2d07fbd5a220a1de39/codex-rs/rust-toolchain.toml) — SHA-256 `570656042681cfd8795403a455baf9a33035331a07db0645e866bbcea89a3d64`.
+- [scripts/just-shell.py](https://raw.githubusercontent.com/openai/codex/da18000cae9884ab45f83b2d07fbd5a220a1de39/scripts/just-shell.py) — SHA-256 `444d6b328d44abf6453b77b6acce2a0c881fc162ff30b20f352c85067797fbe9`.
+
+All conventional missing-file probes and pinned tree listings are retained in the dated remainder audit source receipt. Not-found describes inspected source scope, not universal absence. Codex candidates retain codex-rs scope including documented Windows 11 via WSL2 support. Candidate ordering and record status were not promoted.
+
+This is an external overlay inspection, not a maintainer-controlled canonical record.
+
+Combined source/binding receipt: [frozen remainder audit](../../../../telemetry/roadmap-risk-remainder-2026-10-06.json).
