@@ -250,6 +250,8 @@ def test_contextual_packet_replays_completions_without_rewriting_history():
     assert source["transport"] == {"httpRequests": 8, "decodedBytes": 46020, "cacheHits": 0}
     assert lookup["transport"] == {"httpRequests": 10, "decodedBytes": 49970, "cacheHits": 0}
     assert lookup["modelUsage"]["cost"] is None
+    for relative, digest in json.loads((packet / "packet-manifest.json").read_bytes()).items():
+        assert hashlib.sha256((packet / relative).read_bytes()).hexdigest() == digest
     workload = json.loads((packet / "workload.json").read_bytes())
     for relative, digest in workload["executionSources"].items():
         assert (
