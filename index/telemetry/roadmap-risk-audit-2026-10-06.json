@@ -1,0 +1,3245 @@
+{
+  "schema": "dotrepo/roadmap-risk-audit/v0.1",
+  "checkedAt": "2026-10-06T04:07:21.224082Z",
+  "baseCommit": "dde2238e951c3912de1bc7cdba05686bef90818a",
+  "plan": {
+    "schema": "dotrepo/roadmap-risk-audit-plan/v0.1",
+    "queueSeed": 20261006,
+    "queueGeneratedAt": "2026-10-06T03:59:01Z",
+    "selection": "first eight risk-ordered unique sample identities with at least one build/test/docs.root value",
+    "identities": [
+      {
+        "identity": "github.com/astral-sh/ruff",
+        "revision": "9e5ac057c9ea01e0358e79bace5249199352e528",
+        "fields": [
+          "repo.build",
+          "repo.test",
+          "docs.root"
+        ],
+        "before": {
+          "repo.build": null,
+          "repo.test": "cargo test",
+          "docs.root": "https://docs.astral.sh/ruff/"
+        },
+        "sourcePaths": [
+          "README.md",
+          "CONTRIBUTING.md",
+          "Makefile",
+          "package.json",
+          "pyproject.toml",
+          "setup.py",
+          "Cargo.toml"
+        ],
+        "queueEntry": {
+          "identity": "github.com/astral-sh/ruff",
+          "languageFamily": "Rust",
+          "status": "imported",
+          "confidence": "medium",
+          "riskWeight": 0.8242,
+          "riskFactors": [
+            "confidence:medium",
+            "missing:build",
+            "missing:security_contact",
+            "docs-evidence-or-association-needs-audit"
+          ],
+          "recordPath": "index/repos/github.com/astral-sh/ruff/record.toml",
+          "evidencePath": "index/repos/github.com/astral-sh/ruff/evidence.md"
+        },
+        "followedSourcePaths": []
+      },
+      {
+        "identity": "github.com/nitrictech/nitric",
+        "revision": "892243986918fa188e8a52bf73d40a5383581d5c",
+        "fields": [
+          "repo.build",
+          "repo.test",
+          "docs.root"
+        ],
+        "before": {
+          "repo.build": null,
+          "repo.test": "make test",
+          "docs.root": "https://nitric.io/docs"
+        },
+        "sourcePaths": [
+          "README.md",
+          "CONTRIBUTING.md",
+          "Makefile",
+          "package.json",
+          "pyproject.toml",
+          "setup.py",
+          "Cargo.toml"
+        ],
+        "queueEntry": {
+          "identity": "github.com/nitrictech/nitric",
+          "languageFamily": "Go",
+          "status": "imported",
+          "confidence": "medium",
+          "riskWeight": 0.7171,
+          "riskFactors": [
+            "confidence:medium",
+            "missing:build",
+            "missing:security_contact",
+            "docs-evidence-or-association-needs-audit"
+          ],
+          "recordPath": "index/repos/github.com/nitrictech/nitric/record.toml",
+          "evidencePath": "index/repos/github.com/nitrictech/nitric/evidence.md"
+        },
+        "followedSourcePaths": [
+          "DEVELOPERS.md",
+          "core/Makefile"
+        ]
+      },
+      {
+        "identity": "github.com/facebookresearch/pytorch3d",
+        "revision": "978cd99221b9e0a6a568f1d427854d73363265cf",
+        "fields": [
+          "repo.build",
+          "repo.test",
+          "docs.root"
+        ],
+        "before": {
+          "repo.build": null,
+          "repo.test": null,
+          "docs.root": "https://pytorch3d.readthedocs.org/"
+        },
+        "sourcePaths": [
+          "README.md",
+          "CONTRIBUTING.md",
+          "Makefile",
+          "package.json",
+          "pyproject.toml",
+          "setup.py",
+          "Cargo.toml"
+        ],
+        "queueEntry": {
+          "identity": "github.com/facebookresearch/pytorch3d",
+          "languageFamily": "Python",
+          "status": "verified",
+          "confidence": "high",
+          "riskWeight": 0.6088,
+          "riskFactors": [
+            "missing:build",
+            "missing:test",
+            "missing:security_contact",
+            "docs-evidence-or-association-needs-audit"
+          ],
+          "recordPath": "index/repos/github.com/facebookresearch/pytorch3d/record.toml",
+          "evidencePath": "index/repos/github.com/facebookresearch/pytorch3d/evidence.md"
+        },
+        "followedSourcePaths": [
+          ".github/CONTRIBUTING.md",
+          "INSTALL.md"
+        ]
+      },
+      {
+        "identity": "github.com/redis/redis-py",
+        "revision": "27225cf0dcc683ce963437495b07ad7fdc83fc83",
+        "fields": [
+          "repo.build",
+          "repo.test",
+          "docs.root"
+        ],
+        "before": {
+          "repo.build": "python -m build .",
+          "repo.test": "python -m pytest",
+          "docs.root": "https://redis.readthedocs.io/en/stable/examples.html"
+        },
+        "sourcePaths": [
+          "README.md",
+          "CONTRIBUTING.md",
+          "Makefile",
+          "package.json",
+          "pyproject.toml",
+          "setup.py",
+          "Cargo.toml"
+        ],
+        "queueEntry": {
+          "identity": "github.com/redis/redis-py",
+          "languageFamily": "Python",
+          "status": "inferred",
+          "confidence": "medium",
+          "riskWeight": 0.6088,
+          "riskFactors": [
+            "confidence:medium",
+            "near-promotion-threshold",
+            "surprising-completeness:high",
+            "docs-evidence-or-association-needs-audit"
+          ],
+          "recordPath": "index/repos/github.com/redis/redis-py/record.toml",
+          "evidencePath": "index/repos/github.com/redis/redis-py/evidence.md"
+        },
+        "followedSourcePaths": [
+          "tasks.py",
+          ".github/workflows/pypi-publish.yaml"
+        ]
+      },
+      {
+        "identity": "github.com/socketio/socket.io",
+        "revision": "b5da079228666fcabd97166486d5f6a110826bc8",
+        "fields": [
+          "repo.build",
+          "repo.test",
+          "docs.root"
+        ],
+        "before": {
+          "repo.build": null,
+          "repo.test": null,
+          "docs.root": "https://socket.io/docs/v4/"
+        },
+        "sourcePaths": [
+          "README.md",
+          "CONTRIBUTING.md",
+          "Makefile",
+          "package.json",
+          "pyproject.toml",
+          "setup.py",
+          "Cargo.toml"
+        ],
+        "queueEntry": {
+          "identity": "github.com/socketio/socket.io",
+          "languageFamily": "TypeScript / JavaScript",
+          "status": "imported",
+          "confidence": "medium",
+          "riskWeight": 0.5164,
+          "riskFactors": [
+            "confidence:medium",
+            "missing:build",
+            "missing:test",
+            "docs-evidence-or-association-needs-audit"
+          ],
+          "recordPath": "index/repos/github.com/socketio/socket.io/record.toml",
+          "evidencePath": "index/repos/github.com/socketio/socket.io/evidence.md"
+        },
+        "followedSourcePaths": [
+          "packages/socket.io/package.json"
+        ]
+      },
+      {
+        "identity": "github.com/microsoft/VibeVoice",
+        "revision": "1541f590c7099820f10ea012f48d2399282df69f",
+        "fields": [
+          "repo.build",
+          "repo.test",
+          "docs.root"
+        ],
+        "before": {
+          "repo.build": "python -m build",
+          "repo.test": "python -m pytest",
+          "docs.root": "https://microsoft.github.io/VibeVoice/"
+        },
+        "sourcePaths": [
+          "README.md",
+          "CONTRIBUTING.md",
+          "Makefile",
+          "package.json",
+          "pyproject.toml",
+          "setup.py",
+          "Cargo.toml"
+        ],
+        "queueEntry": {
+          "identity": "github.com/microsoft/VibeVoice",
+          "languageFamily": "Python",
+          "status": "inferred",
+          "confidence": "medium",
+          "riskWeight": 0.4683,
+          "riskFactors": [
+            "confidence:medium",
+            "near-promotion-threshold",
+            "docs-evidence-or-association-needs-audit"
+          ],
+          "recordPath": "index/repos/github.com/microsoft/VibeVoice/record.toml",
+          "evidencePath": "index/repos/github.com/microsoft/VibeVoice/evidence.md"
+        },
+        "followedSourcePaths": []
+      },
+      {
+        "identity": "github.com/jassics/security-study-plan",
+        "revision": "5eab1faf7e919007c7e793948a242d45a332ed4e",
+        "fields": [
+          "repo.build",
+          "repo.test",
+          "docs.root"
+        ],
+        "before": {
+          "repo.build": null,
+          "repo.test": null,
+          "docs.root": "https://cybercloud.guru/"
+        },
+        "sourcePaths": [
+          "README.md",
+          "CONTRIBUTING.md",
+          "Makefile",
+          "package.json",
+          "pyproject.toml",
+          "setup.py",
+          "Cargo.toml"
+        ],
+        "queueEntry": {
+          "identity": "github.com/jassics/security-study-plan",
+          "languageFamily": "Other",
+          "status": "verified",
+          "confidence": "high",
+          "riskWeight": 0.4481,
+          "riskFactors": [
+            "missing:build",
+            "missing:test",
+            "missing:security_contact",
+            "missing:license",
+            "docs-evidence-or-association-needs-audit"
+          ],
+          "recordPath": "index/repos/github.com/jassics/security-study-plan/record.toml",
+          "evidencePath": "index/repos/github.com/jassics/security-study-plan/evidence.md"
+        },
+        "followedSourcePaths": []
+      },
+      {
+        "identity": "github.com/andrewngu/sound-redux",
+        "revision": "c5f36935c2ab07fbbeeaf63573434fd815f503ad",
+        "fields": [
+          "repo.build",
+          "repo.test",
+          "docs.root"
+        ],
+        "before": {
+          "repo.build": "npm run build",
+          "repo.test": null,
+          "docs.root": "http://soundredux.io"
+        },
+        "sourcePaths": [
+          "README.md",
+          "CONTRIBUTING.md",
+          "Makefile",
+          "package.json",
+          "pyproject.toml",
+          "setup.py",
+          "Cargo.toml"
+        ],
+        "queueEntry": {
+          "identity": "github.com/andrewngu/sound-redux",
+          "languageFamily": "TypeScript / JavaScript",
+          "status": "verified",
+          "confidence": "high",
+          "riskWeight": 0.4303,
+          "riskFactors": [
+            "missing:test",
+            "missing:security_contact",
+            "docs-evidence-or-association-needs-audit"
+          ],
+          "recordPath": "index/repos/github.com/andrewngu/sound-redux/record.toml",
+          "evidencePath": "index/repos/github.com/andrewngu/sound-redux/evidence.md"
+        },
+        "followedSourcePaths": []
+      }
+    ],
+    "limits": [
+      "Static pinned source inspection only",
+      "No whole-record timestamps/status renewal",
+      "No arbitrary upstream commands or model calls",
+      "Small source-inspected checkpoint, not independent population evaluation"
+    ]
+  },
+  "sourceRetrievals": [
+    {
+      "identity": "github.com/astral-sh/ruff",
+      "revision": "9e5ac057c9ea01e0358e79bace5249199352e528",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/astral-sh/ruff/9e5ac057c9ea01e0358e79bace5249199352e528/README.md",
+      "exitCode": 0,
+      "bytes": 19637,
+      "sha256": "0580fcf404e8635855850a35d76c9c83c56ae5bea0d2c4ee26fc920fa10a6f20",
+      "error": null
+    },
+    {
+      "identity": "github.com/astral-sh/ruff",
+      "revision": "9e5ac057c9ea01e0358e79bace5249199352e528",
+      "path": "CONTRIBUTING.md",
+      "url": "https://raw.githubusercontent.com/astral-sh/ruff/9e5ac057c9ea01e0358e79bace5249199352e528/CONTRIBUTING.md",
+      "exitCode": 0,
+      "bytes": 50690,
+      "sha256": "c2c566af8ef8fc1c76d08f210b73df1c0c31a463afa7ca39d091149561061638",
+      "error": null
+    },
+    {
+      "identity": "github.com/astral-sh/ruff",
+      "revision": "9e5ac057c9ea01e0358e79bace5249199352e528",
+      "path": "Makefile",
+      "url": "https://raw.githubusercontent.com/astral-sh/ruff/9e5ac057c9ea01e0358e79bace5249199352e528/Makefile",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/astral-sh/ruff",
+      "revision": "9e5ac057c9ea01e0358e79bace5249199352e528",
+      "path": "package.json",
+      "url": "https://raw.githubusercontent.com/astral-sh/ruff/9e5ac057c9ea01e0358e79bace5249199352e528/package.json",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/astral-sh/ruff",
+      "revision": "9e5ac057c9ea01e0358e79bace5249199352e528",
+      "path": "pyproject.toml",
+      "url": "https://raw.githubusercontent.com/astral-sh/ruff/9e5ac057c9ea01e0358e79bace5249199352e528/pyproject.toml",
+      "exitCode": 0,
+      "bytes": 9592,
+      "sha256": "4c9442f43b634b17decf5bf7b29f163dbbcc2b6efdd568eb040cee2c4246d833",
+      "error": null
+    },
+    {
+      "identity": "github.com/astral-sh/ruff",
+      "revision": "9e5ac057c9ea01e0358e79bace5249199352e528",
+      "path": "setup.py",
+      "url": "https://raw.githubusercontent.com/astral-sh/ruff/9e5ac057c9ea01e0358e79bace5249199352e528/setup.py",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/astral-sh/ruff",
+      "revision": "9e5ac057c9ea01e0358e79bace5249199352e528",
+      "path": "Cargo.toml",
+      "url": "https://raw.githubusercontent.com/astral-sh/ruff/9e5ac057c9ea01e0358e79bace5249199352e528/Cargo.toml",
+      "exitCode": 0,
+      "bytes": 13830,
+      "sha256": "540e71a540c2e86232894d93ea73dbed007dcc077d7506b852e8020d1837d5b9",
+      "error": null
+    },
+    {
+      "identity": "github.com/nitrictech/nitric",
+      "revision": "892243986918fa188e8a52bf73d40a5383581d5c",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/nitrictech/nitric/892243986918fa188e8a52bf73d40a5383581d5c/README.md",
+      "exitCode": 0,
+      "bytes": 7926,
+      "sha256": "02aad208ff88cee01b5ba85f051da804f340f3f959438dcfb5ecfbb021ec1e89",
+      "error": null
+    },
+    {
+      "identity": "github.com/nitrictech/nitric",
+      "revision": "892243986918fa188e8a52bf73d40a5383581d5c",
+      "path": "CONTRIBUTING.md",
+      "url": "https://raw.githubusercontent.com/nitrictech/nitric/892243986918fa188e8a52bf73d40a5383581d5c/CONTRIBUTING.md",
+      "exitCode": 0,
+      "bytes": 1925,
+      "sha256": "78a27f8433ce551f48b747d3a2f8210434b1dfad2195f0bb6e0677fee1bb4329",
+      "error": null
+    },
+    {
+      "identity": "github.com/nitrictech/nitric",
+      "revision": "892243986918fa188e8a52bf73d40a5383581d5c",
+      "path": "Makefile",
+      "url": "https://raw.githubusercontent.com/nitrictech/nitric/892243986918fa188e8a52bf73d40a5383581d5c/Makefile",
+      "exitCode": 0,
+      "bytes": 1373,
+      "sha256": "561d9aa014a8f117e59735a88dcd20256b379577866b7a4f92848c452a74e17b",
+      "error": null
+    },
+    {
+      "identity": "github.com/nitrictech/nitric",
+      "revision": "892243986918fa188e8a52bf73d40a5383581d5c",
+      "path": "package.json",
+      "url": "https://raw.githubusercontent.com/nitrictech/nitric/892243986918fa188e8a52bf73d40a5383581d5c/package.json",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/nitrictech/nitric",
+      "revision": "892243986918fa188e8a52bf73d40a5383581d5c",
+      "path": "pyproject.toml",
+      "url": "https://raw.githubusercontent.com/nitrictech/nitric/892243986918fa188e8a52bf73d40a5383581d5c/pyproject.toml",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/nitrictech/nitric",
+      "revision": "892243986918fa188e8a52bf73d40a5383581d5c",
+      "path": "setup.py",
+      "url": "https://raw.githubusercontent.com/nitrictech/nitric/892243986918fa188e8a52bf73d40a5383581d5c/setup.py",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/nitrictech/nitric",
+      "revision": "892243986918fa188e8a52bf73d40a5383581d5c",
+      "path": "Cargo.toml",
+      "url": "https://raw.githubusercontent.com/nitrictech/nitric/892243986918fa188e8a52bf73d40a5383581d5c/Cargo.toml",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/facebookresearch/pytorch3d",
+      "revision": "978cd99221b9e0a6a568f1d427854d73363265cf",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/facebookresearch/pytorch3d/978cd99221b9e0a6a568f1d427854d73363265cf/README.md",
+      "exitCode": 0,
+      "bytes": 11422,
+      "sha256": "b7d9b24a8c3123f549e803c1c30126a044dd85fc8cd3f6b3c671bf8733129422",
+      "error": null
+    },
+    {
+      "identity": "github.com/facebookresearch/pytorch3d",
+      "revision": "978cd99221b9e0a6a568f1d427854d73363265cf",
+      "path": "CONTRIBUTING.md",
+      "url": "https://raw.githubusercontent.com/facebookresearch/pytorch3d/978cd99221b9e0a6a568f1d427854d73363265cf/CONTRIBUTING.md",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/facebookresearch/pytorch3d",
+      "revision": "978cd99221b9e0a6a568f1d427854d73363265cf",
+      "path": "Makefile",
+      "url": "https://raw.githubusercontent.com/facebookresearch/pytorch3d/978cd99221b9e0a6a568f1d427854d73363265cf/Makefile",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/facebookresearch/pytorch3d",
+      "revision": "978cd99221b9e0a6a568f1d427854d73363265cf",
+      "path": "package.json",
+      "url": "https://raw.githubusercontent.com/facebookresearch/pytorch3d/978cd99221b9e0a6a568f1d427854d73363265cf/package.json",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/facebookresearch/pytorch3d",
+      "revision": "978cd99221b9e0a6a568f1d427854d73363265cf",
+      "path": "pyproject.toml",
+      "url": "https://raw.githubusercontent.com/facebookresearch/pytorch3d/978cd99221b9e0a6a568f1d427854d73363265cf/pyproject.toml",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/facebookresearch/pytorch3d",
+      "revision": "978cd99221b9e0a6a568f1d427854d73363265cf",
+      "path": "setup.py",
+      "url": "https://raw.githubusercontent.com/facebookresearch/pytorch3d/978cd99221b9e0a6a568f1d427854d73363265cf/setup.py",
+      "exitCode": 0,
+      "bytes": 7689,
+      "sha256": "a174307010ec228c27672792a345360ee029f711b660568767de629ae4b7bed0",
+      "error": null
+    },
+    {
+      "identity": "github.com/facebookresearch/pytorch3d",
+      "revision": "978cd99221b9e0a6a568f1d427854d73363265cf",
+      "path": "Cargo.toml",
+      "url": "https://raw.githubusercontent.com/facebookresearch/pytorch3d/978cd99221b9e0a6a568f1d427854d73363265cf/Cargo.toml",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/redis/redis-py",
+      "revision": "27225cf0dcc683ce963437495b07ad7fdc83fc83",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/redis/redis-py/27225cf0dcc683ce963437495b07ad7fdc83fc83/README.md",
+      "exitCode": 0,
+      "bytes": 14424,
+      "sha256": "828c3c6ed2fe2918d38eb86a3a4258af06b76d1a341b45d374f76c32b04d3c62",
+      "error": null
+    },
+    {
+      "identity": "github.com/redis/redis-py",
+      "revision": "27225cf0dcc683ce963437495b07ad7fdc83fc83",
+      "path": "CONTRIBUTING.md",
+      "url": "https://raw.githubusercontent.com/redis/redis-py/27225cf0dcc683ce963437495b07ad7fdc83fc83/CONTRIBUTING.md",
+      "exitCode": 0,
+      "bytes": 6813,
+      "sha256": "5dc3aa4dc2f73db359adf03e52cdb5de322c2d62c2431154bdbb5667864f3c16",
+      "error": null
+    },
+    {
+      "identity": "github.com/redis/redis-py",
+      "revision": "27225cf0dcc683ce963437495b07ad7fdc83fc83",
+      "path": "Makefile",
+      "url": "https://raw.githubusercontent.com/redis/redis-py/27225cf0dcc683ce963437495b07ad7fdc83fc83/Makefile",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/redis/redis-py",
+      "revision": "27225cf0dcc683ce963437495b07ad7fdc83fc83",
+      "path": "package.json",
+      "url": "https://raw.githubusercontent.com/redis/redis-py/27225cf0dcc683ce963437495b07ad7fdc83fc83/package.json",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/redis/redis-py",
+      "revision": "27225cf0dcc683ce963437495b07ad7fdc83fc83",
+      "path": "pyproject.toml",
+      "url": "https://raw.githubusercontent.com/redis/redis-py/27225cf0dcc683ce963437495b07ad7fdc83fc83/pyproject.toml",
+      "exitCode": 0,
+      "bytes": 5009,
+      "sha256": "a537cda80b3b5c4486e9b8e6a88e0549b5aee528c50d561ad28462081c0990e5",
+      "error": null
+    },
+    {
+      "identity": "github.com/redis/redis-py",
+      "revision": "27225cf0dcc683ce963437495b07ad7fdc83fc83",
+      "path": "setup.py",
+      "url": "https://raw.githubusercontent.com/redis/redis-py/27225cf0dcc683ce963437495b07ad7fdc83fc83/setup.py",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/redis/redis-py",
+      "revision": "27225cf0dcc683ce963437495b07ad7fdc83fc83",
+      "path": "Cargo.toml",
+      "url": "https://raw.githubusercontent.com/redis/redis-py/27225cf0dcc683ce963437495b07ad7fdc83fc83/Cargo.toml",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/socketio/socket.io",
+      "revision": "b5da079228666fcabd97166486d5f6a110826bc8",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/socketio/socket.io/b5da079228666fcabd97166486d5f6a110826bc8/README.md",
+      "exitCode": 0,
+      "bytes": 1667,
+      "sha256": "28944681b1c33bb0e518049afeedb57cac7fb3a6fcbd4b239985abe3ff789fb6",
+      "error": null
+    },
+    {
+      "identity": "github.com/socketio/socket.io",
+      "revision": "b5da079228666fcabd97166486d5f6a110826bc8",
+      "path": "CONTRIBUTING.md",
+      "url": "https://raw.githubusercontent.com/socketio/socket.io/b5da079228666fcabd97166486d5f6a110826bc8/CONTRIBUTING.md",
+      "exitCode": 0,
+      "bytes": 7375,
+      "sha256": "4b54396e74893d2daa61862ee19d79c9b73fc6de348b71fd79ff66d814c5fa90",
+      "error": null
+    },
+    {
+      "identity": "github.com/socketio/socket.io",
+      "revision": "b5da079228666fcabd97166486d5f6a110826bc8",
+      "path": "Makefile",
+      "url": "https://raw.githubusercontent.com/socketio/socket.io/b5da079228666fcabd97166486d5f6a110826bc8/Makefile",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/socketio/socket.io",
+      "revision": "b5da079228666fcabd97166486d5f6a110826bc8",
+      "path": "package.json",
+      "url": "https://raw.githubusercontent.com/socketio/socket.io/b5da079228666fcabd97166486d5f6a110826bc8/package.json",
+      "exitCode": 0,
+      "bytes": 2652,
+      "sha256": "38bf1c797f5fffc0128106b9c65054fee859fcbb01faf982cdc2e8675e47f4db",
+      "error": null
+    },
+    {
+      "identity": "github.com/socketio/socket.io",
+      "revision": "b5da079228666fcabd97166486d5f6a110826bc8",
+      "path": "pyproject.toml",
+      "url": "https://raw.githubusercontent.com/socketio/socket.io/b5da079228666fcabd97166486d5f6a110826bc8/pyproject.toml",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/socketio/socket.io",
+      "revision": "b5da079228666fcabd97166486d5f6a110826bc8",
+      "path": "setup.py",
+      "url": "https://raw.githubusercontent.com/socketio/socket.io/b5da079228666fcabd97166486d5f6a110826bc8/setup.py",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/socketio/socket.io",
+      "revision": "b5da079228666fcabd97166486d5f6a110826bc8",
+      "path": "Cargo.toml",
+      "url": "https://raw.githubusercontent.com/socketio/socket.io/b5da079228666fcabd97166486d5f6a110826bc8/Cargo.toml",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/microsoft/VibeVoice",
+      "revision": "1541f590c7099820f10ea012f48d2399282df69f",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/microsoft/VibeVoice/1541f590c7099820f10ea012f48d2399282df69f/README.md",
+      "exitCode": 0,
+      "bytes": 13031,
+      "sha256": "b1fe27ee5b77e30b4a82b76e0f279157ffddc43f782b094ffe07f90383e62537",
+      "error": null
+    },
+    {
+      "identity": "github.com/microsoft/VibeVoice",
+      "revision": "1541f590c7099820f10ea012f48d2399282df69f",
+      "path": "CONTRIBUTING.md",
+      "url": "https://raw.githubusercontent.com/microsoft/VibeVoice/1541f590c7099820f10ea012f48d2399282df69f/CONTRIBUTING.md",
+      "exitCode": 0,
+      "bytes": 1816,
+      "sha256": "cba16108b4a4762ba1ef68533c50376ab43dabda9f2d34760ee7daea753bed8d",
+      "error": null
+    },
+    {
+      "identity": "github.com/microsoft/VibeVoice",
+      "revision": "1541f590c7099820f10ea012f48d2399282df69f",
+      "path": "Makefile",
+      "url": "https://raw.githubusercontent.com/microsoft/VibeVoice/1541f590c7099820f10ea012f48d2399282df69f/Makefile",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/microsoft/VibeVoice",
+      "revision": "1541f590c7099820f10ea012f48d2399282df69f",
+      "path": "package.json",
+      "url": "https://raw.githubusercontent.com/microsoft/VibeVoice/1541f590c7099820f10ea012f48d2399282df69f/package.json",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/microsoft/VibeVoice",
+      "revision": "1541f590c7099820f10ea012f48d2399282df69f",
+      "path": "pyproject.toml",
+      "url": "https://raw.githubusercontent.com/microsoft/VibeVoice/1541f590c7099820f10ea012f48d2399282df69f/pyproject.toml",
+      "exitCode": 0,
+      "bytes": 1195,
+      "sha256": "6887842e9e9c417541684b73b8db4d0c44fc9a7ce4cf0f49f333da1f376cd6f2",
+      "error": null
+    },
+    {
+      "identity": "github.com/microsoft/VibeVoice",
+      "revision": "1541f590c7099820f10ea012f48d2399282df69f",
+      "path": "setup.py",
+      "url": "https://raw.githubusercontent.com/microsoft/VibeVoice/1541f590c7099820f10ea012f48d2399282df69f/setup.py",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/microsoft/VibeVoice",
+      "revision": "1541f590c7099820f10ea012f48d2399282df69f",
+      "path": "Cargo.toml",
+      "url": "https://raw.githubusercontent.com/microsoft/VibeVoice/1541f590c7099820f10ea012f48d2399282df69f/Cargo.toml",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/jassics/security-study-plan",
+      "revision": "5eab1faf7e919007c7e793948a242d45a332ed4e",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/jassics/security-study-plan/5eab1faf7e919007c7e793948a242d45a332ed4e/README.md",
+      "exitCode": 0,
+      "bytes": 10014,
+      "sha256": "110324d95d98a0ceb8bbb375287cba8304e586f60833ffbbbe762817a2cf0e15",
+      "error": null
+    },
+    {
+      "identity": "github.com/jassics/security-study-plan",
+      "revision": "5eab1faf7e919007c7e793948a242d45a332ed4e",
+      "path": "CONTRIBUTING.md",
+      "url": "https://raw.githubusercontent.com/jassics/security-study-plan/5eab1faf7e919007c7e793948a242d45a332ed4e/CONTRIBUTING.md",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/jassics/security-study-plan",
+      "revision": "5eab1faf7e919007c7e793948a242d45a332ed4e",
+      "path": "Makefile",
+      "url": "https://raw.githubusercontent.com/jassics/security-study-plan/5eab1faf7e919007c7e793948a242d45a332ed4e/Makefile",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/jassics/security-study-plan",
+      "revision": "5eab1faf7e919007c7e793948a242d45a332ed4e",
+      "path": "package.json",
+      "url": "https://raw.githubusercontent.com/jassics/security-study-plan/5eab1faf7e919007c7e793948a242d45a332ed4e/package.json",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/jassics/security-study-plan",
+      "revision": "5eab1faf7e919007c7e793948a242d45a332ed4e",
+      "path": "pyproject.toml",
+      "url": "https://raw.githubusercontent.com/jassics/security-study-plan/5eab1faf7e919007c7e793948a242d45a332ed4e/pyproject.toml",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/jassics/security-study-plan",
+      "revision": "5eab1faf7e919007c7e793948a242d45a332ed4e",
+      "path": "setup.py",
+      "url": "https://raw.githubusercontent.com/jassics/security-study-plan/5eab1faf7e919007c7e793948a242d45a332ed4e/setup.py",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/jassics/security-study-plan",
+      "revision": "5eab1faf7e919007c7e793948a242d45a332ed4e",
+      "path": "Cargo.toml",
+      "url": "https://raw.githubusercontent.com/jassics/security-study-plan/5eab1faf7e919007c7e793948a242d45a332ed4e/Cargo.toml",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/andrewngu/sound-redux",
+      "revision": "c5f36935c2ab07fbbeeaf63573434fd815f503ad",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/andrewngu/sound-redux/c5f36935c2ab07fbbeeaf63573434fd815f503ad/README.md",
+      "exitCode": 0,
+      "bytes": 693,
+      "sha256": "9d63ea0b4e1b775313e50085edb866e6f022a5ddfd2829ee0790b7f2bd986121",
+      "error": null
+    },
+    {
+      "identity": "github.com/andrewngu/sound-redux",
+      "revision": "c5f36935c2ab07fbbeeaf63573434fd815f503ad",
+      "path": "CONTRIBUTING.md",
+      "url": "https://raw.githubusercontent.com/andrewngu/sound-redux/c5f36935c2ab07fbbeeaf63573434fd815f503ad/CONTRIBUTING.md",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/andrewngu/sound-redux",
+      "revision": "c5f36935c2ab07fbbeeaf63573434fd815f503ad",
+      "path": "Makefile",
+      "url": "https://raw.githubusercontent.com/andrewngu/sound-redux/c5f36935c2ab07fbbeeaf63573434fd815f503ad/Makefile",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/andrewngu/sound-redux",
+      "revision": "c5f36935c2ab07fbbeeaf63573434fd815f503ad",
+      "path": "package.json",
+      "url": "https://raw.githubusercontent.com/andrewngu/sound-redux/c5f36935c2ab07fbbeeaf63573434fd815f503ad/package.json",
+      "exitCode": 0,
+      "bytes": 2098,
+      "sha256": "0b1068a7ea110089664b85b60fe5d163e3123d19d1b861a821b636a630185990",
+      "error": null
+    },
+    {
+      "identity": "github.com/andrewngu/sound-redux",
+      "revision": "c5f36935c2ab07fbbeeaf63573434fd815f503ad",
+      "path": "pyproject.toml",
+      "url": "https://raw.githubusercontent.com/andrewngu/sound-redux/c5f36935c2ab07fbbeeaf63573434fd815f503ad/pyproject.toml",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/andrewngu/sound-redux",
+      "revision": "c5f36935c2ab07fbbeeaf63573434fd815f503ad",
+      "path": "setup.py",
+      "url": "https://raw.githubusercontent.com/andrewngu/sound-redux/c5f36935c2ab07fbbeeaf63573434fd815f503ad/setup.py",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/andrewngu/sound-redux",
+      "revision": "c5f36935c2ab07fbbeeaf63573434fd815f503ad",
+      "path": "Cargo.toml",
+      "url": "https://raw.githubusercontent.com/andrewngu/sound-redux/c5f36935c2ab07fbbeeaf63573434fd815f503ad/Cargo.toml",
+      "exitCode": 56,
+      "bytes": 0,
+      "sha256": null,
+      "error": "curl: (56) The requested URL returned error: 404\n"
+    },
+    {
+      "identity": "github.com/nitrictech/nitric",
+      "revision": "892243986918fa188e8a52bf73d40a5383581d5c",
+      "path": "DEVELOPERS.md",
+      "url": "https://raw.githubusercontent.com/nitrictech/nitric/892243986918fa188e8a52bf73d40a5383581d5c/DEVELOPERS.md",
+      "exitCode": 0,
+      "bytes": 5287,
+      "sha256": "d5ba0cf0762c7249e8ac13c8a6779b343906d77fcde975483f97f884e4f1fcfb",
+      "error": null
+    },
+    {
+      "identity": "github.com/nitrictech/nitric",
+      "revision": "892243986918fa188e8a52bf73d40a5383581d5c",
+      "path": "core/Makefile",
+      "url": "https://raw.githubusercontent.com/nitrictech/nitric/892243986918fa188e8a52bf73d40a5383581d5c/core/Makefile",
+      "exitCode": 0,
+      "bytes": 3917,
+      "sha256": "b3f338d3e9e903821314eafbc18f1c362524db75b429d21e908696cbc1d2f17f",
+      "error": null
+    },
+    {
+      "identity": "github.com/facebookresearch/pytorch3d",
+      "revision": "978cd99221b9e0a6a568f1d427854d73363265cf",
+      "path": ".github/CONTRIBUTING.md",
+      "url": "https://raw.githubusercontent.com/facebookresearch/pytorch3d/978cd99221b9e0a6a568f1d427854d73363265cf/.github/CONTRIBUTING.md",
+      "exitCode": 0,
+      "bytes": 2781,
+      "sha256": "8b14162ece9e7039f8cb5b1ffb9c469ef8a40ff2ad7d1f1a8663786aaddcc42b",
+      "error": null
+    },
+    {
+      "identity": "github.com/facebookresearch/pytorch3d",
+      "revision": "978cd99221b9e0a6a568f1d427854d73363265cf",
+      "path": "INSTALL.md",
+      "url": "https://raw.githubusercontent.com/facebookresearch/pytorch3d/978cd99221b9e0a6a568f1d427854d73363265cf/INSTALL.md",
+      "exitCode": 0,
+      "bytes": 5712,
+      "sha256": "9a7e37942f1d4d4e3d5883815487214917eca094b283a458b4b2758aaa556c54",
+      "error": null
+    },
+    {
+      "identity": "github.com/redis/redis-py",
+      "revision": "27225cf0dcc683ce963437495b07ad7fdc83fc83",
+      "path": "tasks.py",
+      "url": "https://raw.githubusercontent.com/redis/redis-py/27225cf0dcc683ce963437495b07ad7fdc83fc83/tasks.py",
+      "exitCode": 0,
+      "bytes": 9208,
+      "sha256": "793c085395b71d1a1046ccffa0350819e8e9146f62fd451baa2dbd2d9320cb2d",
+      "error": null
+    },
+    {
+      "identity": "github.com/redis/redis-py",
+      "revision": "27225cf0dcc683ce963437495b07ad7fdc83fc83",
+      "path": ".github/workflows/pypi-publish.yaml",
+      "url": "https://raw.githubusercontent.com/redis/redis-py/27225cf0dcc683ce963437495b07ad7fdc83fc83/.github/workflows/pypi-publish.yaml",
+      "exitCode": 0,
+      "bytes": 734,
+      "sha256": "c5444b75a421307f7622046896b03dfead5d362052700f6ad0fcf126cf538e9c",
+      "error": null
+    },
+    {
+      "identity": "github.com/socketio/socket.io",
+      "revision": "b5da079228666fcabd97166486d5f6a110826bc8",
+      "path": "packages/socket.io/package.json",
+      "url": "https://raw.githubusercontent.com/socketio/socket.io/b5da079228666fcabd97166486d5f6a110826bc8/packages/socket.io/package.json",
+      "exitCode": 0,
+      "bytes": 2074,
+      "sha256": "c56b36901611d0000f63f28379ca738f1bea0c8633899c0f75f9c32b23ebb0f2",
+      "error": null
+    }
+  ],
+  "semanticDefinition": "Static source-preservation and documentation-role judgments at retained source pins; no upstream execution and no claim of current HEAD, runtime completion or population accuracy. Unsupported association is insufficient evidence, not a contamination verdict.",
+  "summary": {
+    "fields": 24,
+    "beforeValuesPresent": 15,
+    "beforeScalarPolicyAccepted": 11,
+    "afterValuesPresent": 10,
+    "afterScalarPolicyAccepted": 5,
+    "beforeContextualInstructionsSelected": 0,
+    "afterContextualInstructionsSelected": 0,
+    "semanticFindings": {
+      "correct-abstention": 6,
+      "supported": 7,
+      "missing-supported-answer": 1,
+      "source-present-context-missing": 1,
+      "wrong-default": 1,
+      "wrong-documentation-root": 1,
+      "missing-supported-candidate": 2,
+      "unsupported-inference": 2,
+      "unsupported-documentation-association": 2,
+      "wrong-documentation-association": 1
+    }
+  },
+  "acceptedWrongSourceRoleBefore": [
+    {
+      "identity": "github.com/redis/redis-py",
+      "field": "docs.root",
+      "finding": "wrong-documentation-root"
+    },
+    {
+      "identity": "github.com/andrewngu/sound-redux",
+      "field": "docs.root",
+      "finding": "wrong-documentation-association"
+    }
+  ],
+  "acceptedUnsupportedBefore": [
+    {
+      "identity": "github.com/microsoft/VibeVoice",
+      "field": "docs.root",
+      "finding": "unsupported-documentation-association"
+    },
+    {
+      "identity": "github.com/jassics/security-study-plan",
+      "field": "docs.root",
+      "finding": "unsupported-documentation-association"
+    }
+  ],
+  "byEcosystemAndIntent": [
+    {
+      "ecosystem": "Rust",
+      "field": "repo.build",
+      "fields": 1,
+      "beforeValuesPresent": 0,
+      "beforeScalarPolicyAccepted": 0,
+      "afterValuesPresent": 0,
+      "afterScalarPolicyAccepted": 0,
+      "beforeContextualInstructionsSelected": 0,
+      "afterContextualInstructionsSelected": 0,
+      "semanticFindings": {
+        "correct-abstention": 1
+      }
+    },
+    {
+      "ecosystem": "Rust",
+      "field": "repo.test",
+      "fields": 1,
+      "beforeValuesPresent": 1,
+      "beforeScalarPolicyAccepted": 1,
+      "afterValuesPresent": 1,
+      "afterScalarPolicyAccepted": 0,
+      "beforeContextualInstructionsSelected": 0,
+      "afterContextualInstructionsSelected": 0,
+      "semanticFindings": {
+        "supported": 1
+      }
+    },
+    {
+      "ecosystem": "Rust",
+      "field": "docs.root",
+      "fields": 1,
+      "beforeValuesPresent": 1,
+      "beforeScalarPolicyAccepted": 1,
+      "afterValuesPresent": 1,
+      "afterScalarPolicyAccepted": 1,
+      "beforeContextualInstructionsSelected": 0,
+      "afterContextualInstructionsSelected": 0,
+      "semanticFindings": {
+        "supported": 1
+      }
+    },
+    {
+      "ecosystem": "Go",
+      "field": "repo.build",
+      "fields": 1,
+      "beforeValuesPresent": 0,
+      "beforeScalarPolicyAccepted": 0,
+      "afterValuesPresent": 0,
+      "afterScalarPolicyAccepted": 0,
+      "beforeContextualInstructionsSelected": 0,
+      "afterContextualInstructionsSelected": 0,
+      "semanticFindings": {
+        "correct-abstention": 1
+      }
+    },
+    {
+      "ecosystem": "Go",
+      "field": "repo.test",
+      "fields": 1,
+      "beforeValuesPresent": 1,
+      "beforeScalarPolicyAccepted": 1,
+      "afterValuesPresent": 1,
+      "afterScalarPolicyAccepted": 0,
+      "beforeContextualInstructionsSelected": 0,
+      "afterContextualInstructionsSelected": 0,
+      "semanticFindings": {
+        "supported": 1
+      }
+    },
+    {
+      "ecosystem": "Go",
+      "field": "docs.root",
+      "fields": 1,
+      "beforeValuesPresent": 1,
+      "beforeScalarPolicyAccepted": 1,
+      "afterValuesPresent": 1,
+      "afterScalarPolicyAccepted": 1,
+      "beforeContextualInstructionsSelected": 0,
+      "afterContextualInstructionsSelected": 0,
+      "semanticFindings": {
+        "supported": 1
+      }
+    },
+    {
+      "ecosystem": "Python",
+      "field": "repo.build",
+      "fields": 3,
+      "beforeValuesPresent": 2,
+      "beforeScalarPolicyAccepted": 0,
+      "afterValuesPresent": 0,
+      "afterScalarPolicyAccepted": 0,
+      "beforeContextualInstructionsSelected": 0,
+      "afterContextualInstructionsSelected": 0,
+      "semanticFindings": {
+        "correct-abstention": 1,
+        "source-present-context-missing": 1,
+        "unsupported-inference": 1
+      }
+    },
+    {
+      "ecosystem": "Python",
+      "field": "repo.test",
+      "fields": 3,
+      "beforeValuesPresent": 2,
+      "beforeScalarPolicyAccepted": 0,
+      "afterValuesPresent": 2,
+      "afterScalarPolicyAccepted": 0,
+      "beforeContextualInstructionsSelected": 0,
+      "afterContextualInstructionsSelected": 0,
+      "semanticFindings": {
+        "missing-supported-answer": 1,
+        "wrong-default": 1,
+        "unsupported-inference": 1
+      }
+    },
+    {
+      "ecosystem": "Python",
+      "field": "docs.root",
+      "fields": 3,
+      "beforeValuesPresent": 3,
+      "beforeScalarPolicyAccepted": 3,
+      "afterValuesPresent": 2,
+      "afterScalarPolicyAccepted": 2,
+      "beforeContextualInstructionsSelected": 0,
+      "afterContextualInstructionsSelected": 0,
+      "semanticFindings": {
+        "supported": 1,
+        "wrong-documentation-root": 1,
+        "unsupported-documentation-association": 1
+      }
+    },
+    {
+      "ecosystem": "JavaScript",
+      "field": "repo.build",
+      "fields": 2,
+      "beforeValuesPresent": 1,
+      "beforeScalarPolicyAccepted": 1,
+      "afterValuesPresent": 1,
+      "afterScalarPolicyAccepted": 0,
+      "beforeContextualInstructionsSelected": 0,
+      "afterContextualInstructionsSelected": 0,
+      "semanticFindings": {
+        "missing-supported-candidate": 1,
+        "supported": 1
+      }
+    },
+    {
+      "ecosystem": "JavaScript",
+      "field": "repo.test",
+      "fields": 2,
+      "beforeValuesPresent": 0,
+      "beforeScalarPolicyAccepted": 0,
+      "afterValuesPresent": 0,
+      "afterScalarPolicyAccepted": 0,
+      "beforeContextualInstructionsSelected": 0,
+      "afterContextualInstructionsSelected": 0,
+      "semanticFindings": {
+        "missing-supported-candidate": 1,
+        "correct-abstention": 1
+      }
+    },
+    {
+      "ecosystem": "JavaScript",
+      "field": "docs.root",
+      "fields": 2,
+      "beforeValuesPresent": 2,
+      "beforeScalarPolicyAccepted": 2,
+      "afterValuesPresent": 1,
+      "afterScalarPolicyAccepted": 1,
+      "beforeContextualInstructionsSelected": 0,
+      "afterContextualInstructionsSelected": 0,
+      "semanticFindings": {
+        "supported": 1,
+        "wrong-documentation-association": 1
+      }
+    },
+    {
+      "ecosystem": "Other",
+      "field": "repo.build",
+      "fields": 1,
+      "beforeValuesPresent": 0,
+      "beforeScalarPolicyAccepted": 0,
+      "afterValuesPresent": 0,
+      "afterScalarPolicyAccepted": 0,
+      "beforeContextualInstructionsSelected": 0,
+      "afterContextualInstructionsSelected": 0,
+      "semanticFindings": {
+        "correct-abstention": 1
+      }
+    },
+    {
+      "ecosystem": "Other",
+      "field": "repo.test",
+      "fields": 1,
+      "beforeValuesPresent": 0,
+      "beforeScalarPolicyAccepted": 0,
+      "afterValuesPresent": 0,
+      "afterScalarPolicyAccepted": 0,
+      "beforeContextualInstructionsSelected": 0,
+      "afterContextualInstructionsSelected": 0,
+      "semanticFindings": {
+        "correct-abstention": 1
+      }
+    },
+    {
+      "ecosystem": "Other",
+      "field": "docs.root",
+      "fields": 1,
+      "beforeValuesPresent": 1,
+      "beforeScalarPolicyAccepted": 1,
+      "afterValuesPresent": 0,
+      "afterScalarPolicyAccepted": 0,
+      "beforeContextualInstructionsSelected": 0,
+      "afterContextualInstructionsSelected": 0,
+      "semanticFindings": {
+        "unsupported-documentation-association": 1
+      }
+    }
+  ],
+  "dispositions": [
+    {
+      "identity": "github.com/astral-sh/ruff",
+      "revision": "9e5ac057c9ea01e0358e79bace5249199352e528",
+      "ecosystem": "Rust",
+      "field": "repo.build",
+      "sourceSemanticFinding": {
+        "action": "absent",
+        "finding": "correct-abstention",
+        "source": "CONTRIBUTING.md",
+        "reason": "Withheld playground component build does not establish a root default; the release-build example occurs in benchmarking, not a general build instruction."
+      },
+      "before": {
+        "value": null,
+        "valuePresent": false,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "missing:repo.build"
+        ],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": true
+      },
+      "after": {
+        "value": null,
+        "valuePresent": false,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "missing:repo.build"
+        ],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": false
+      }
+    },
+    {
+      "identity": "github.com/astral-sh/ruff",
+      "revision": "9e5ac057c9ea01e0358e79bace5249199352e528",
+      "ecosystem": "Rust",
+      "field": "repo.test",
+      "sourceSemanticFinding": {
+        "action": "retain",
+        "finding": "supported",
+        "source": "CONTRIBUTING.md",
+        "reason": "Guide explicitly describes cargo test and its nextest alternative for Rust tests. Root command retains the runner; this does not claim Python utility or release validation coverage.",
+        "prerequisites": [
+          "Install the Rust toolchain and uv as required by CONTRIBUTING.md."
+        ]
+      },
+      "before": {
+        "value": "cargo test",
+        "valuePresent": true,
+        "scalarPolicyAccepted": true,
+        "scalarPolicyFallbackReasons": [],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": true
+      },
+      "after": {
+        "value": "cargo test",
+        "valuePresent": true,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "missing-command-assessment:repo.test"
+        ],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": false
+      }
+    },
+    {
+      "identity": "github.com/astral-sh/ruff",
+      "revision": "9e5ac057c9ea01e0358e79bace5249199352e528",
+      "ecosystem": "Rust",
+      "field": "docs.root",
+      "sourceSemanticFinding": {
+        "action": "retain",
+        "finding": "supported",
+        "source": "README.md",
+        "reason": "README explicitly labels https://docs.astral.sh/ruff/ as Docs and documentation."
+      },
+      "before": {
+        "value": "https://docs.astral.sh/ruff/",
+        "valuePresent": true,
+        "scalarPolicyAccepted": true,
+        "scalarPolicyFallbackReasons": [],
+        "contextualSelection": null,
+        "assessmentExported": true
+      },
+      "after": {
+        "value": "https://docs.astral.sh/ruff/",
+        "valuePresent": true,
+        "scalarPolicyAccepted": true,
+        "scalarPolicyFallbackReasons": [],
+        "contextualSelection": null,
+        "assessmentExported": false
+      }
+    },
+    {
+      "identity": "github.com/nitrictech/nitric",
+      "revision": "892243986918fa188e8a52bf73d40a5383581d5c",
+      "ecosystem": "Go",
+      "field": "repo.build",
+      "sourceSemanticFinding": {
+        "action": "absent",
+        "finding": "correct-abstention",
+        "source": "Makefile",
+        "reason": "make all was an assignment false positive, already removed. DEVELOPERS.md declares make binaries for cloud providers, not a default build of every surface."
+      },
+      "before": {
+        "value": null,
+        "valuePresent": false,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "missing:repo.build"
+        ],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": false
+      },
+      "after": {
+        "value": null,
+        "valuePresent": false,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "missing:repo.build"
+        ],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": false
+      }
+    },
+    {
+      "identity": "github.com/nitrictech/nitric",
+      "revision": "892243986918fa188e8a52bf73d40a5383581d5c",
+      "ecosystem": "Go",
+      "field": "repo.test",
+      "sourceSemanticFinding": {
+        "action": "retain",
+        "finding": "supported",
+        "source": "Makefile",
+        "contextSource": "DEVELOPERS.md",
+        "reason": "Literal root test target iterates core and cloud providers; wrapper preserves child Make prerequisites. DEVELOPERS.md explicitly documents make test.",
+        "prerequisites": [
+          "Install Git, Golang 1.22, Make, Docker and protoc as declared in DEVELOPERS.md; follow its make install-tools and Go dependency preparation before testing."
+        ]
+      },
+      "before": {
+        "value": "make test",
+        "valuePresent": true,
+        "scalarPolicyAccepted": true,
+        "scalarPolicyFallbackReasons": [],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": true
+      },
+      "after": {
+        "value": "make test",
+        "valuePresent": true,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "missing-command-assessment:repo.test"
+        ],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": false
+      }
+    },
+    {
+      "identity": "github.com/nitrictech/nitric",
+      "revision": "892243986918fa188e8a52bf73d40a5383581d5c",
+      "ecosystem": "Go",
+      "field": "docs.root",
+      "sourceSemanticFinding": {
+        "action": "retain",
+        "finding": "supported",
+        "source": "README.md",
+        "reason": "README explicitly states full Nitric documentation is at nitric.io/docs."
+      },
+      "before": {
+        "value": "https://nitric.io/docs",
+        "valuePresent": true,
+        "scalarPolicyAccepted": true,
+        "scalarPolicyFallbackReasons": [],
+        "contextualSelection": null,
+        "assessmentExported": true
+      },
+      "after": {
+        "value": "https://nitric.io/docs",
+        "valuePresent": true,
+        "scalarPolicyAccepted": true,
+        "scalarPolicyFallbackReasons": [],
+        "contextualSelection": null,
+        "assessmentExported": false
+      }
+    },
+    {
+      "identity": "github.com/facebookresearch/pytorch3d",
+      "revision": "978cd99221b9e0a6a568f1d427854d73363265cf",
+      "ecosystem": "Python",
+      "field": "repo.build",
+      "sourceSemanticFinding": {
+        "action": "absent",
+        "finding": "correct-abstention",
+        "source": "INSTALL.md",
+        "reason": "INSTALL.md documents multiple installation/build environments; no selected complete scalar build procedure is established by this inspection."
+      },
+      "before": {
+        "value": null,
+        "valuePresent": false,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "missing:repo.build"
+        ],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": true
+      },
+      "after": {
+        "value": null,
+        "valuePresent": false,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "missing:repo.build"
+        ],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": false
+      }
+    },
+    {
+      "identity": "github.com/facebookresearch/pytorch3d",
+      "revision": "978cd99221b9e0a6a568f1d427854d73363265cf",
+      "ecosystem": "Python",
+      "field": "repo.test",
+      "sourceSemanticFinding": {
+        "action": "set",
+        "value": "python -m unittest discover -v -s tests -t .",
+        "finding": "missing-supported-answer",
+        "source": ".github/CONTRIBUTING.md",
+        "reason": "Linked contribution guide explicitly requires this test suite command from the project root, following INSTALL.md setup. Prior root-only discovery missed the guide.",
+        "prerequisites": [
+          "Build/install PyTorch3D from source following INSTALL.md and satisfy its Core library and Tests/Linting and Demos requirements before running the suite."
+        ]
+      },
+      "before": {
+        "value": null,
+        "valuePresent": false,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "missing:repo.test"
+        ],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": true
+      },
+      "after": {
+        "value": "python -m unittest discover -v -s tests -t .",
+        "valuePresent": true,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "missing-command-assessment:repo.test"
+        ],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": false
+      }
+    },
+    {
+      "identity": "github.com/facebookresearch/pytorch3d",
+      "revision": "978cd99221b9e0a6a568f1d427854d73363265cf",
+      "ecosystem": "Python",
+      "field": "docs.root",
+      "sourceSemanticFinding": {
+        "action": "retain",
+        "finding": "supported",
+        "source": "README.md",
+        "reason": "README explicitly links PyTorch3D documentation at this URL."
+      },
+      "before": {
+        "value": "https://pytorch3d.readthedocs.org/",
+        "valuePresent": true,
+        "scalarPolicyAccepted": true,
+        "scalarPolicyFallbackReasons": [],
+        "contextualSelection": null,
+        "assessmentExported": true
+      },
+      "after": {
+        "value": "https://pytorch3d.readthedocs.org/",
+        "valuePresent": true,
+        "scalarPolicyAccepted": true,
+        "scalarPolicyFallbackReasons": [],
+        "contextualSelection": null,
+        "assessmentExported": false
+      }
+    },
+    {
+      "identity": "github.com/redis/redis-py",
+      "revision": "27225cf0dcc683ce963437495b07ad7fdc83fc83",
+      "ecosystem": "Python",
+      "field": "repo.build",
+      "sourceSemanticFinding": {
+        "action": "candidate",
+        "finding": "source-present-context-missing",
+        "source": ".github/workflows/pypi-publish.yaml",
+        "reason": "Workflow literally builds the root distribution with this command, after Python/tool setup. Retain as a packaging candidate rather than inferred scalar default.",
+        "prerequisites": [
+          "Use Python 3.10 and install build and twine as declared before the Build package step in .github/workflows/pypi-publish.yaml."
+        ]
+      },
+      "before": {
+        "value": "python -m build .",
+        "valuePresent": true,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "scoped-command-source:repo.build",
+          "inferred-command:repo.build"
+        ],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": true
+      },
+      "after": {
+        "value": null,
+        "valuePresent": false,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "missing:repo.build"
+        ],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": false
+      }
+    },
+    {
+      "identity": "github.com/redis/redis-py",
+      "revision": "27225cf0dcc683ce963437495b07ad7fdc83fc83",
+      "ecosystem": "Python",
+      "field": "repo.test",
+      "sourceSemanticFinding": {
+        "action": "set",
+        "value": "invoke tests",
+        "finding": "wrong-default",
+        "source": "CONTRIBUTING.md",
+        "reason": "Contribution guide declares invoke tests; tasks.py runs multiple selected fixture/standalone/cluster suites with required options. A raw inferred pytest invocation does not preserve this declared instruction.",
+        "prerequisites": [
+          "Create the development virtual environment, install dev_requirements.txt and the editable JWT extra as documented in CONTRIBUTING.md.",
+          "Provide Docker with compose profiles and run invoke devenv to start the required Redis test environments before invoke tests."
+        ]
+      },
+      "before": {
+        "value": "python -m pytest",
+        "valuePresent": true,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "inferred-command:repo.test"
+        ],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": true
+      },
+      "after": {
+        "value": "invoke tests",
+        "valuePresent": true,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "missing-command-assessment:repo.test"
+        ],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": false
+      }
+    },
+    {
+      "identity": "github.com/redis/redis-py",
+      "revision": "27225cf0dcc683ce963437495b07ad7fdc83fc83",
+      "ecosystem": "Python",
+      "field": "docs.root",
+      "sourceSemanticFinding": {
+        "action": "set",
+        "value": "https://redis.readthedocs.io/en/stable/",
+        "finding": "wrong-documentation-root",
+        "source": "README.md",
+        "reason": "README documentation badge declares the root stable documentation URL; examples.html is specifically the connection examples subpage."
+      },
+      "before": {
+        "value": "https://redis.readthedocs.io/en/stable/examples.html",
+        "valuePresent": true,
+        "scalarPolicyAccepted": true,
+        "scalarPolicyFallbackReasons": [],
+        "contextualSelection": null,
+        "assessmentExported": true
+      },
+      "after": {
+        "value": "https://redis.readthedocs.io/en/stable/",
+        "valuePresent": true,
+        "scalarPolicyAccepted": true,
+        "scalarPolicyFallbackReasons": [],
+        "contextualSelection": null,
+        "assessmentExported": false
+      }
+    },
+    {
+      "identity": "github.com/socketio/socket.io",
+      "revision": "b5da079228666fcabd97166486d5f6a110826bc8",
+      "ecosystem": "JavaScript",
+      "field": "repo.build",
+      "sourceSemanticFinding": {
+        "action": "candidate-new",
+        "value": "npm run compile -ws --if-present",
+        "finding": "missing-supported-candidate",
+        "source": "CONTRIBUTING.md",
+        "reason": "Guide explicitly declares TypeScript compilation for all workspaces. This is a compilation candidate, not a promoted example-package scalar default.",
+        "prerequisites": [
+          "Install Node.js 18+ and npm 7+; run npm ci from the cloned repository root as directed in CONTRIBUTING.md."
+        ]
+      },
+      "before": {
+        "value": null,
+        "valuePresent": false,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "missing:repo.build"
+        ],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": true
+      },
+      "after": {
+        "value": null,
+        "valuePresent": false,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "missing:repo.build"
+        ],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": false
+      }
+    },
+    {
+      "identity": "github.com/socketio/socket.io",
+      "revision": "b5da079228666fcabd97166486d5f6a110826bc8",
+      "ecosystem": "JavaScript",
+      "field": "repo.test",
+      "sourceSemanticFinding": {
+        "action": "candidate-new",
+        "value": "npm test -ws",
+        "finding": "missing-supported-candidate",
+        "source": "CONTRIBUTING.md",
+        "reason": "Guide explicitly declares tests for all workspaces; keep the npm wrapper to preserve each workspace script. The inspected socket.io workspace script includes formatting, compilation and test substeps.",
+        "prerequisites": [
+          "Install Node.js 18+ and npm 7+; run npm ci from the cloned repository root as directed in CONTRIBUTING.md."
+        ]
+      },
+      "before": {
+        "value": null,
+        "valuePresent": false,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "missing:repo.test"
+        ],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": true
+      },
+      "after": {
+        "value": null,
+        "valuePresent": false,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "missing:repo.test"
+        ],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": false
+      }
+    },
+    {
+      "identity": "github.com/socketio/socket.io",
+      "revision": "b5da079228666fcabd97166486d5f6a110826bc8",
+      "ecosystem": "JavaScript",
+      "field": "docs.root",
+      "sourceSemanticFinding": {
+        "action": "retain",
+        "finding": "supported",
+        "source": "README.md",
+        "reason": "README explicitly links the Socket.IO v4 documentation at this URL."
+      },
+      "before": {
+        "value": "https://socket.io/docs/v4/",
+        "valuePresent": true,
+        "scalarPolicyAccepted": true,
+        "scalarPolicyFallbackReasons": [],
+        "contextualSelection": null,
+        "assessmentExported": true
+      },
+      "after": {
+        "value": "https://socket.io/docs/v4/",
+        "valuePresent": true,
+        "scalarPolicyAccepted": true,
+        "scalarPolicyFallbackReasons": [],
+        "contextualSelection": null,
+        "assessmentExported": false
+      }
+    },
+    {
+      "identity": "github.com/microsoft/VibeVoice",
+      "revision": "1541f590c7099820f10ea012f48d2399282df69f",
+      "ecosystem": "Python",
+      "field": "repo.build",
+      "sourceSemanticFinding": {
+        "action": "remove",
+        "finding": "unsupported-inference",
+        "source": "pyproject.toml",
+        "reason": "Setuptools build backend metadata supplies no declared python -m build repository instruction; no such entrypoint in inspected README/guide."
+      },
+      "before": {
+        "value": "python -m build",
+        "valuePresent": true,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "inferred-command:repo.build"
+        ],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": true
+      },
+      "after": {
+        "value": null,
+        "valuePresent": false,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "missing:repo.build"
+        ],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": false
+      }
+    },
+    {
+      "identity": "github.com/microsoft/VibeVoice",
+      "revision": "1541f590c7099820f10ea012f48d2399282df69f",
+      "ecosystem": "Python",
+      "field": "repo.test",
+      "sourceSemanticFinding": {
+        "action": "remove",
+        "finding": "unsupported-inference",
+        "source": "pyproject.toml",
+        "reason": "Inspected manifest and README/guide do not declare pytest as the project test entrypoint; withhold rather than infer a usable default."
+      },
+      "before": {
+        "value": "python -m pytest",
+        "valuePresent": true,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "inferred-command:repo.test"
+        ],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": true
+      },
+      "after": {
+        "value": null,
+        "valuePresent": false,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "missing:repo.test"
+        ],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": false
+      }
+    },
+    {
+      "identity": "github.com/microsoft/VibeVoice",
+      "revision": "1541f590c7099820f10ea012f48d2399282df69f",
+      "ecosystem": "Python",
+      "field": "docs.root",
+      "sourceSemanticFinding": {
+        "action": "remove",
+        "finding": "unsupported-documentation-association",
+        "source": "README.md",
+        "reason": "README calls this URL the Project Page for information, demos and examples; it labels separate repository documents as Documentation. That does not establish the project landing page as docs.root."
+      },
+      "before": {
+        "value": "https://microsoft.github.io/VibeVoice/",
+        "valuePresent": true,
+        "scalarPolicyAccepted": true,
+        "scalarPolicyFallbackReasons": [],
+        "contextualSelection": null,
+        "assessmentExported": true
+      },
+      "after": {
+        "value": null,
+        "valuePresent": false,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "missing:docs.root"
+        ],
+        "contextualSelection": null,
+        "assessmentExported": false
+      }
+    },
+    {
+      "identity": "github.com/jassics/security-study-plan",
+      "revision": "5eab1faf7e919007c7e793948a242d45a332ed4e",
+      "ecosystem": "Other",
+      "field": "repo.build",
+      "sourceSemanticFinding": {
+        "action": "absent",
+        "finding": "correct-abstention",
+        "source": "README.md",
+        "reason": "Inspected source is a prose study-plan collection, with no declared build entrypoint."
+      },
+      "before": {
+        "value": null,
+        "valuePresent": false,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "missing:repo.build"
+        ],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": true
+      },
+      "after": {
+        "value": null,
+        "valuePresent": false,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "missing:repo.build"
+        ],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": false
+      }
+    },
+    {
+      "identity": "github.com/jassics/security-study-plan",
+      "revision": "5eab1faf7e919007c7e793948a242d45a332ed4e",
+      "ecosystem": "Other",
+      "field": "repo.test",
+      "sourceSemanticFinding": {
+        "action": "absent",
+        "finding": "correct-abstention",
+        "source": "README.md",
+        "reason": "Inspected source is a prose study-plan collection, with no declared executable test suite."
+      },
+      "before": {
+        "value": null,
+        "valuePresent": false,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "missing:repo.test"
+        ],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": true
+      },
+      "after": {
+        "value": null,
+        "valuePresent": false,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "missing:repo.test"
+        ],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": false
+      }
+    },
+    {
+      "identity": "github.com/jassics/security-study-plan",
+      "revision": "5eab1faf7e919007c7e793948a242d45a332ed4e",
+      "ecosystem": "Other",
+      "field": "docs.root",
+      "sourceSemanticFinding": {
+        "action": "remove",
+        "finding": "unsupported-documentation-association",
+        "source": "README.md",
+        "reason": "README neither references cybercloud.guru nor declares that external site as this study-plan documentation. No outside-site reachability claim was used as ownership evidence."
+      },
+      "before": {
+        "value": "https://cybercloud.guru/",
+        "valuePresent": true,
+        "scalarPolicyAccepted": true,
+        "scalarPolicyFallbackReasons": [],
+        "contextualSelection": null,
+        "assessmentExported": true
+      },
+      "after": {
+        "value": null,
+        "valuePresent": false,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "missing:docs.root"
+        ],
+        "contextualSelection": null,
+        "assessmentExported": false
+      }
+    },
+    {
+      "identity": "github.com/andrewngu/sound-redux",
+      "revision": "c5f36935c2ab07fbbeeaf63573434fd815f503ad",
+      "ecosystem": "JavaScript",
+      "field": "repo.build",
+      "sourceSemanticFinding": {
+        "action": "retain",
+        "finding": "supported",
+        "source": "package.json",
+        "contextSource": "README.md",
+        "reason": "Root package.json declares build plus prebuild clean/copy hooks; preserve npm run build. README declares npm install preparation.",
+        "prerequisites": [
+          "Install Node.js/npm and run npm install as documented in README.md."
+        ]
+      },
+      "before": {
+        "value": "npm run build",
+        "valuePresent": true,
+        "scalarPolicyAccepted": true,
+        "scalarPolicyFallbackReasons": [],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": true
+      },
+      "after": {
+        "value": "npm run build",
+        "valuePresent": true,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "missing-command-assessment:repo.build"
+        ],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": false
+      }
+    },
+    {
+      "identity": "github.com/andrewngu/sound-redux",
+      "revision": "c5f36935c2ab07fbbeeaf63573434fd815f503ad",
+      "ecosystem": "JavaScript",
+      "field": "repo.test",
+      "sourceSemanticFinding": {
+        "action": "absent",
+        "finding": "correct-abstention",
+        "source": "package.json",
+        "reason": "Root package.json declares build/lint/start scripts but no test script; inspected README supplies no test instruction."
+      },
+      "before": {
+        "value": null,
+        "valuePresent": false,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "missing:repo.test"
+        ],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": true
+      },
+      "after": {
+        "value": null,
+        "valuePresent": false,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "missing:repo.test"
+        ],
+        "contextualSelection": {
+          "instruction": null,
+          "provenance": null,
+          "fallbackReasons": [
+            "no-assessed-contextual-instruction"
+          ]
+        },
+        "assessmentExported": false
+      }
+    },
+    {
+      "identity": "github.com/andrewngu/sound-redux",
+      "revision": "c5f36935c2ab07fbbeeaf63573434fd815f503ad",
+      "ecosystem": "JavaScript",
+      "field": "docs.root",
+      "sourceSemanticFinding": {
+        "action": "remove",
+        "finding": "wrong-documentation-association",
+        "source": "README.md",
+        "reason": "README identifies this URL as the live application demo (See it in action), which it also says is not working; it is not declared documentation."
+      },
+      "before": {
+        "value": "http://soundredux.io",
+        "valuePresent": true,
+        "scalarPolicyAccepted": true,
+        "scalarPolicyFallbackReasons": [],
+        "contextualSelection": null,
+        "assessmentExported": true
+      },
+      "after": {
+        "value": null,
+        "valuePresent": false,
+        "scalarPolicyAccepted": false,
+        "scalarPolicyFallbackReasons": [
+          "missing:docs.root"
+        ],
+        "contextualSelection": null,
+        "assessmentExported": false
+      }
+    }
+  ],
+  "retainedRecordEvidence": [
+    {
+      "identity": "github.com/astral-sh/ruff",
+      "sourceRevision": "9e5ac057c9ea01e0358e79bace5249199352e528",
+      "recordGeneratedAt": "2026-09-16T16:31:43.878137Z",
+      "status": "imported",
+      "fieldEvidence": {
+        "repo.build": {
+          "state": "not_found",
+          "method": "not_found_in_inspected_sources",
+          "confidence": "high",
+          "source": "CONTRIBUTING.md",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "null",
+          "reason": "Withheld playground component build does not establish a root default; the release-build example occurs in benchmarking, not a general build instruction. Pinned source inspection at 9e5ac057c9ea01e0358e79bace5249199352e528; this is source preservation, not execution or current-HEAD verification."
+        },
+        "repo.test": {
+          "state": "present",
+          "method": "extracted",
+          "confidence": "high",
+          "source": "CONTRIBUTING.md",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "\"cargo test\"",
+          "reason": "Guide explicitly describes cargo test and its nextest alternative for Rust tests. Root command retains the runner; this does not claim Python utility or release validation coverage. Pinned source inspection at 9e5ac057c9ea01e0358e79bace5249199352e528; this is source preservation, not execution or current-HEAD verification."
+        },
+        "repo.test_context": {
+          "state": "present",
+          "method": "extracted",
+          "confidence": "high",
+          "source": "CONTRIBUTING.md",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "{\"command\": \"cargo test\", \"prerequisites\": [\"Install the Rust toolchain and uv as required by CONTRIBUTING.md.\"], \"scope\": \"repository\", \"source\": \"CONTRIBUTING.md\", \"working_directory\": \".\"}",
+          "reason": "Guide explicitly describes cargo test and its nextest alternative for Rust tests. Root command retains the runner; this does not claim Python utility or release validation coverage. Pinned source inspection at 9e5ac057c9ea01e0358e79bace5249199352e528; this is source preservation, not execution or current-HEAD verification."
+        },
+        "docs.root": {
+          "state": "present",
+          "method": "extracted",
+          "confidence": "high",
+          "source": "README.md",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "\"https://docs.astral.sh/ruff/\"",
+          "reason": "README explicitly labels https://docs.astral.sh/ruff/ as Docs and documentation. Pinned source inspection at 9e5ac057c9ea01e0358e79bace5249199352e528; this is source preservation, not execution or current-HEAD verification."
+        }
+      }
+    },
+    {
+      "identity": "github.com/nitrictech/nitric",
+      "sourceRevision": "892243986918fa188e8a52bf73d40a5383581d5c",
+      "recordGeneratedAt": "2026-09-16T16:27:14.470956Z",
+      "status": "imported",
+      "fieldEvidence": {
+        "repo.build": {
+          "state": "not_found",
+          "method": "not_found_in_inspected_sources",
+          "confidence": "high",
+          "source": "Makefile",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "null",
+          "reason": "make all was an assignment false positive, already removed. DEVELOPERS.md declares make binaries for cloud providers, not a default build of every surface. Pinned source inspection at 892243986918fa188e8a52bf73d40a5383581d5c; this is source preservation, not execution or current-HEAD verification."
+        },
+        "repo.test": {
+          "state": "present",
+          "method": "extracted",
+          "confidence": "high",
+          "source": "Makefile",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "\"make test\"",
+          "reason": "Literal root test target iterates core and cloud providers; wrapper preserves child Make prerequisites. DEVELOPERS.md explicitly documents make test. Pinned source inspection at 892243986918fa188e8a52bf73d40a5383581d5c; this is source preservation, not execution or current-HEAD verification."
+        },
+        "repo.test_context": {
+          "state": "present",
+          "method": "extracted",
+          "confidence": "high",
+          "source": "DEVELOPERS.md",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "{\"command\": \"make test\", \"prerequisites\": [\"Install Git, Golang 1.22, Make, Docker and protoc as declared in DEVELOPERS.md; follow its make install-tools and Go dependency preparation before testing.\"], \"scope\": \"repository\", \"source\": \"DEVELOPERS.md\", \"working_directory\": \".\"}",
+          "reason": "Literal root test target iterates core and cloud providers; wrapper preserves child Make prerequisites. DEVELOPERS.md explicitly documents make test. Pinned source inspection at 892243986918fa188e8a52bf73d40a5383581d5c; this is source preservation, not execution or current-HEAD verification."
+        },
+        "docs.root": {
+          "state": "present",
+          "method": "extracted",
+          "confidence": "high",
+          "source": "README.md",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "\"https://nitric.io/docs\"",
+          "reason": "README explicitly states full Nitric documentation is at nitric.io/docs. Pinned source inspection at 892243986918fa188e8a52bf73d40a5383581d5c; this is source preservation, not execution or current-HEAD verification."
+        }
+      }
+    },
+    {
+      "identity": "github.com/facebookresearch/pytorch3d",
+      "sourceRevision": "978cd99221b9e0a6a568f1d427854d73363265cf",
+      "recordGeneratedAt": "2026-09-16T16:34:48.449858Z",
+      "status": "verified",
+      "fieldEvidence": {
+        "repo.build": {
+          "state": "not_found",
+          "method": "not_found_in_inspected_sources",
+          "confidence": "high",
+          "source": "INSTALL.md",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "null",
+          "reason": "INSTALL.md documents multiple installation/build environments; no selected complete scalar build procedure is established by this inspection. Pinned source inspection at 978cd99221b9e0a6a568f1d427854d73363265cf; this is source preservation, not execution or current-HEAD verification."
+        },
+        "repo.test": {
+          "state": "present",
+          "method": "extracted",
+          "confidence": "high",
+          "source": ".github/CONTRIBUTING.md",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "\"python -m unittest discover -v -s tests -t .\"",
+          "reason": "Linked contribution guide explicitly requires this test suite command from the project root, following INSTALL.md setup. Prior root-only discovery missed the guide. Pinned source inspection at 978cd99221b9e0a6a568f1d427854d73363265cf; this is source preservation, not execution or current-HEAD verification."
+        },
+        "repo.test_context": {
+          "state": "present",
+          "method": "extracted",
+          "confidence": "high",
+          "source": ".github/CONTRIBUTING.md",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "{\"command\": \"python -m unittest discover -v -s tests -t .\", \"prerequisites\": [\"Build/install PyTorch3D from source following INSTALL.md and satisfy its Core library and Tests/Linting and Demos requirements before running the suite.\"], \"scope\": \"repository\", \"source\": \".github/CONTRIBUTING.md\", \"working_directory\": \".\"}",
+          "reason": "Linked contribution guide explicitly requires this test suite command from the project root, following INSTALL.md setup. Prior root-only discovery missed the guide. Pinned source inspection at 978cd99221b9e0a6a568f1d427854d73363265cf; this is source preservation, not execution or current-HEAD verification."
+        },
+        "docs.root": {
+          "state": "present",
+          "method": "extracted",
+          "confidence": "high",
+          "source": "README.md",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "\"https://pytorch3d.readthedocs.org/\"",
+          "reason": "README explicitly links PyTorch3D documentation at this URL. Pinned source inspection at 978cd99221b9e0a6a568f1d427854d73363265cf; this is source preservation, not execution or current-HEAD verification."
+        }
+      }
+    },
+    {
+      "identity": "github.com/redis/redis-py",
+      "sourceRevision": "27225cf0dcc683ce963437495b07ad7fdc83fc83",
+      "recordGeneratedAt": "2026-09-16T16:28:26.63853Z",
+      "status": "inferred",
+      "fieldEvidence": {
+        "repo.build": {
+          "state": "unresolved",
+          "method": "extracted",
+          "confidence": "high",
+          "source": ".github/workflows/pypi-publish.yaml",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "null",
+          "reason": "Workflow literally builds the root distribution with this command, after Python/tool setup. Retain as a packaging candidate rather than inferred scalar default. Pinned source inspection at 27225cf0dcc683ce963437495b07ad7fdc83fc83; this is source preservation, not execution or current-HEAD verification."
+        },
+        "repo.build_candidates.0": {
+          "state": "present",
+          "method": "extracted",
+          "confidence": "high",
+          "source": ".github/workflows/pypi-publish.yaml",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "{\"command\": \"python -m build .\", \"context\": {\"command\": \"python -m build .\", \"prerequisites\": [\"Use Python 3.10 and install build and twine as declared before the Build package step in .github/workflows/pypi-publish.yaml.\"], \"scope\": \"repository\", \"source\": \".github/workflows/pypi-publish.yaml\", \"working_directory\": \".\"}, \"ecosystem\": \"Python\", \"source\": \".github/workflows/pypi-publish.yaml\"}",
+          "reason": "Workflow literally builds the root distribution with this command, after Python/tool setup. Retain as a packaging candidate rather than inferred scalar default. Pinned source inspection at 27225cf0dcc683ce963437495b07ad7fdc83fc83; this is source preservation, not execution or current-HEAD verification."
+        },
+        "repo.test": {
+          "state": "present",
+          "method": "extracted",
+          "confidence": "high",
+          "source": "CONTRIBUTING.md",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "\"invoke tests\"",
+          "reason": "Contribution guide declares invoke tests; tasks.py runs multiple selected fixture/standalone/cluster suites with required options. A raw inferred pytest invocation does not preserve this declared instruction. Pinned source inspection at 27225cf0dcc683ce963437495b07ad7fdc83fc83; this is source preservation, not execution or current-HEAD verification."
+        },
+        "repo.test_context": {
+          "state": "present",
+          "method": "extracted",
+          "confidence": "high",
+          "source": "CONTRIBUTING.md",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "{\"command\": \"invoke tests\", \"prerequisites\": [\"Create the development virtual environment, install dev_requirements.txt and the editable JWT extra as documented in CONTRIBUTING.md.\", \"Provide Docker with compose profiles and run invoke devenv to start the required Redis test environments before invoke tests.\"], \"scope\": \"repository\", \"source\": \"CONTRIBUTING.md\", \"working_directory\": \".\"}",
+          "reason": "Contribution guide declares invoke tests; tasks.py runs multiple selected fixture/standalone/cluster suites with required options. A raw inferred pytest invocation does not preserve this declared instruction. Pinned source inspection at 27225cf0dcc683ce963437495b07ad7fdc83fc83; this is source preservation, not execution or current-HEAD verification."
+        },
+        "docs.root": {
+          "state": "present",
+          "method": "extracted",
+          "confidence": "high",
+          "source": "README.md",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "\"https://redis.readthedocs.io/en/stable/\"",
+          "reason": "README documentation badge declares the root stable documentation URL; examples.html is specifically the connection examples subpage. Pinned source inspection at 27225cf0dcc683ce963437495b07ad7fdc83fc83; this is source preservation, not execution or current-HEAD verification."
+        }
+      }
+    },
+    {
+      "identity": "github.com/socketio/socket.io",
+      "sourceRevision": "b5da079228666fcabd97166486d5f6a110826bc8",
+      "recordGeneratedAt": "2026-09-16T16:33:26.155745Z",
+      "status": "imported",
+      "fieldEvidence": {
+        "repo.build": {
+          "state": "unresolved",
+          "method": "extracted",
+          "confidence": "high",
+          "source": "CONTRIBUTING.md",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "null",
+          "reason": "Guide explicitly declares TypeScript compilation for all workspaces. This is a compilation candidate, not a promoted example-package scalar default. Pinned source inspection at b5da079228666fcabd97166486d5f6a110826bc8; this is source preservation, not execution or current-HEAD verification."
+        },
+        "repo.build_candidates.0": {
+          "state": "present",
+          "method": "extracted",
+          "confidence": "high",
+          "source": "CONTRIBUTING.md",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "{\"command\": \"npm run compile -ws --if-present\", \"context\": {\"command\": \"npm run compile -ws --if-present\", \"prerequisites\": [\"Install Node.js 18+ and npm 7+; run npm ci from the cloned repository root as directed in CONTRIBUTING.md.\"], \"scope\": \"repository\", \"source\": \"CONTRIBUTING.md\", \"working_directory\": \".\"}, \"ecosystem\": \"JavaScript\", \"source\": \"CONTRIBUTING.md\"}",
+          "reason": "Guide explicitly declares TypeScript compilation for all workspaces. This is a compilation candidate, not a promoted example-package scalar default. Pinned source inspection at b5da079228666fcabd97166486d5f6a110826bc8; this is source preservation, not execution or current-HEAD verification."
+        },
+        "repo.test": {
+          "state": "unresolved",
+          "method": "extracted",
+          "confidence": "high",
+          "source": "CONTRIBUTING.md",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "null",
+          "reason": "Guide explicitly declares tests for all workspaces; keep the npm wrapper to preserve each workspace script. The inspected socket.io workspace script includes formatting, compilation and test substeps. Pinned source inspection at b5da079228666fcabd97166486d5f6a110826bc8; this is source preservation, not execution or current-HEAD verification."
+        },
+        "repo.test_candidates.0": {
+          "state": "present",
+          "method": "extracted",
+          "confidence": "high",
+          "source": "CONTRIBUTING.md",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "{\"command\": \"npm test -ws\", \"context\": {\"command\": \"npm test -ws\", \"prerequisites\": [\"Install Node.js 18+ and npm 7+; run npm ci from the cloned repository root as directed in CONTRIBUTING.md.\"], \"scope\": \"repository\", \"source\": \"CONTRIBUTING.md\", \"working_directory\": \".\"}, \"ecosystem\": \"JavaScript\", \"source\": \"CONTRIBUTING.md\"}",
+          "reason": "Guide explicitly declares tests for all workspaces; keep the npm wrapper to preserve each workspace script. The inspected socket.io workspace script includes formatting, compilation and test substeps. Pinned source inspection at b5da079228666fcabd97166486d5f6a110826bc8; this is source preservation, not execution or current-HEAD verification."
+        },
+        "docs.root": {
+          "state": "present",
+          "method": "extracted",
+          "confidence": "high",
+          "source": "README.md",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "\"https://socket.io/docs/v4/\"",
+          "reason": "README explicitly links the Socket.IO v4 documentation at this URL. Pinned source inspection at b5da079228666fcabd97166486d5f6a110826bc8; this is source preservation, not execution or current-HEAD verification."
+        }
+      }
+    },
+    {
+      "identity": "github.com/microsoft/VibeVoice",
+      "sourceRevision": "1541f590c7099820f10ea012f48d2399282df69f",
+      "recordGeneratedAt": "2026-09-17T06:10:48.392678021Z",
+      "status": "inferred",
+      "fieldEvidence": {
+        "repo.build": {
+          "state": "not_found",
+          "method": "not_found_in_inspected_sources",
+          "confidence": "high",
+          "source": "pyproject.toml",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "null",
+          "reason": "Setuptools build backend metadata supplies no declared python -m build repository instruction; no such entrypoint in inspected README/guide. Pinned source inspection at 1541f590c7099820f10ea012f48d2399282df69f; this is source preservation, not execution or current-HEAD verification."
+        },
+        "repo.test": {
+          "state": "not_found",
+          "method": "not_found_in_inspected_sources",
+          "confidence": "high",
+          "source": "pyproject.toml",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "null",
+          "reason": "Inspected manifest and README/guide do not declare pytest as the project test entrypoint; withhold rather than infer a usable default. Pinned source inspection at 1541f590c7099820f10ea012f48d2399282df69f; this is source preservation, not execution or current-HEAD verification."
+        },
+        "docs.root": {
+          "state": "not_found",
+          "method": "not_found_in_inspected_sources",
+          "confidence": "high",
+          "source": "README.md",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "null",
+          "reason": "README calls this URL the Project Page for information, demos and examples; it labels separate repository documents as Documentation. That does not establish the project landing page as docs.root. Pinned source inspection at 1541f590c7099820f10ea012f48d2399282df69f; this is source preservation, not execution or current-HEAD verification."
+        }
+      }
+    },
+    {
+      "identity": "github.com/jassics/security-study-plan",
+      "sourceRevision": "5eab1faf7e919007c7e793948a242d45a332ed4e",
+      "recordGeneratedAt": "2026-09-16T16:25:05.825377Z",
+      "status": "verified",
+      "fieldEvidence": {
+        "repo.build": {
+          "state": "not_found",
+          "method": "not_found_in_inspected_sources",
+          "confidence": "high",
+          "source": "README.md",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "null",
+          "reason": "Inspected source is a prose study-plan collection, with no declared build entrypoint. Pinned source inspection at 5eab1faf7e919007c7e793948a242d45a332ed4e; this is source preservation, not execution or current-HEAD verification."
+        },
+        "repo.test": {
+          "state": "not_found",
+          "method": "not_found_in_inspected_sources",
+          "confidence": "high",
+          "source": "README.md",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "null",
+          "reason": "Inspected source is a prose study-plan collection, with no declared executable test suite. Pinned source inspection at 5eab1faf7e919007c7e793948a242d45a332ed4e; this is source preservation, not execution or current-HEAD verification."
+        },
+        "docs.root": {
+          "state": "not_found",
+          "method": "not_found_in_inspected_sources",
+          "confidence": "high",
+          "source": "README.md",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "null",
+          "reason": "README neither references cybercloud.guru nor declares that external site as this study-plan documentation. No outside-site reachability claim was used as ownership evidence. Pinned source inspection at 5eab1faf7e919007c7e793948a242d45a332ed4e; this is source preservation, not execution or current-HEAD verification."
+        }
+      }
+    },
+    {
+      "identity": "github.com/andrewngu/sound-redux",
+      "sourceRevision": "c5f36935c2ab07fbbeeaf63573434fd815f503ad",
+      "recordGeneratedAt": "2026-09-16T16:20:40.89068Z",
+      "status": "verified",
+      "fieldEvidence": {
+        "repo.build": {
+          "state": "present",
+          "method": "extracted",
+          "confidence": "high",
+          "source": "package.json",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "\"npm run build\"",
+          "reason": "Root package.json declares build plus prebuild clean/copy hooks; preserve npm run build. README declares npm install preparation. Pinned source inspection at c5f36935c2ab07fbbeeaf63573434fd815f503ad; this is source preservation, not execution or current-HEAD verification."
+        },
+        "repo.build_context": {
+          "state": "present",
+          "method": "extracted",
+          "confidence": "high",
+          "source": "README.md",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "{\"command\": \"npm run build\", \"prerequisites\": [\"Install Node.js/npm and run npm install as documented in README.md.\"], \"scope\": \"repository\", \"source\": \"README.md\", \"working_directory\": \".\"}",
+          "reason": "Root package.json declares build plus prebuild clean/copy hooks; preserve npm run build. README declares npm install preparation. Pinned source inspection at c5f36935c2ab07fbbeeaf63573434fd815f503ad; this is source preservation, not execution or current-HEAD verification."
+        },
+        "repo.test": {
+          "state": "not_found",
+          "method": "not_found_in_inspected_sources",
+          "confidence": "high",
+          "source": "package.json",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "null",
+          "reason": "Root package.json declares build/lint/start scripts but no test script; inspected README supplies no test instruction. Pinned source inspection at c5f36935c2ab07fbbeeaf63573434fd815f503ad; this is source preservation, not execution or current-HEAD verification."
+        },
+        "docs.root": {
+          "state": "not_found",
+          "method": "not_found_in_inspected_sources",
+          "confidence": "high",
+          "source": "README.md",
+          "checkedAt": "2026-10-06T04:07:21.224082Z",
+          "valueJson": "null",
+          "reason": "README identifies this URL as the live application demo (See it in action), which it also says is not working; it is not declared documentation. Pinned source inspection at c5f36935c2ab07fbbeeaf63573434fd815f503ad; this is source preservation, not execution or current-HEAD verification."
+        }
+      }
+    }
+  ],
+  "checks": {
+    "indexValidation": "passed with current CLI",
+    "publicExport": "passed with current CLI",
+    "freshness": {
+      "fresh": 616,
+      "stale": 0,
+      "unknown": 0,
+      "oldestDays": 19,
+      "evaluatedAt": "2026-10-06T04:09:25.956409Z",
+      "staleAfterDays": 30,
+      "staleOrUnknownRate": 0.0,
+      "maxStaleOrUnknownRate": 0.1,
+      "maxRefreshOverdueDays": 7,
+      "oldestRefreshOverdueDays": 0.0,
+      "overdueRepositories": [],
+      "passed": true,
+      "exportGeneratedAt": "2026-10-06T04:09:17.943496Z"
+    },
+    "allFreshAssessmentValuesMatch": true,
+    "uninspectedFactsUnchanged": true,
+    "actualReferenceConsumer": "24 independent scalar policy evaluations and 16 contextual selection evaluations before and after; no commands executed",
+    "historicalPacketsChanged": false,
+    "actualCoreValueBinding": "passed, 39 actual CLI field queries across both packets; all 39 exported in coherent disposable copies",
+    "initialPythonValueNormalization": "insufficient; corrected during integration",
+    "coherentCopyContextSelection": "passed; 11 selected instructions across both packets, with missing answers still withheld"
+  },
+  "limits": [
+    "This is a risk-weighted eight-case source audit, not random population accuracy or an independent operator evaluation.",
+    "All 24 fields have explicit dispositions; nine previously missing scalar fields include correct abstentions and recoverable missing instructions/candidates, which are reported separately.",
+    "New source assessment timestamps do not rejuvenate the record; exporter drops those assessments and contextual selection withholds all instructions until coherent full-record recrawl.",
+    "Command semantic judgments assess preservation of documented wrappers/scope/setup; runtime correctness and task completion are unmeasured.",
+    "External mutable documentation contents and URL reachability were not used to establish project ownership; all judgments use pinned repository files.",
+    "Twelve risk-sample identities plus the wider documentation inspection queue remain open."
+  ],
+  "integrationBindingCorrection": {
+    "checkedAt": "2026-10-06T04:20:51.223344+00:00",
+    "initialCheck": "The earlier Python check normalized missing component to null; it did not prove equality with core serialization.",
+    "defect": "ExecutionContext omits absent component in the core query JSON. Eleven root context/candidate valueJson bindings across these two packets initially included component:null.",
+    "resolution": "Every newly assessed field was queried through the actual Rust CLI; valueJson now equals the exact core value. No ages/statuses/uninspected facts changed.",
+    "actualCoreQueryFields": [
+      {
+        "identity": "github.com/astral-sh/ruff",
+        "field": "repo.build",
+        "queryExitCode": 0,
+        "coreQueryValue": null,
+        "priorBindingMatched": true,
+        "bindingCorrected": false,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      },
+      {
+        "identity": "github.com/astral-sh/ruff",
+        "field": "repo.test",
+        "queryExitCode": 0,
+        "coreQueryValue": "cargo test",
+        "priorBindingMatched": true,
+        "bindingCorrected": false,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      },
+      {
+        "identity": "github.com/astral-sh/ruff",
+        "field": "repo.test_context",
+        "queryExitCode": 0,
+        "coreQueryValue": {
+          "command": "cargo test",
+          "prerequisites": [
+            "Install the Rust toolchain and uv as required by CONTRIBUTING.md."
+          ],
+          "scope": "repository",
+          "source": "CONTRIBUTING.md",
+          "working_directory": "."
+        },
+        "priorBindingMatched": false,
+        "bindingCorrected": true,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      },
+      {
+        "identity": "github.com/astral-sh/ruff",
+        "field": "docs.root",
+        "queryExitCode": 0,
+        "coreQueryValue": "https://docs.astral.sh/ruff/",
+        "priorBindingMatched": true,
+        "bindingCorrected": false,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      },
+      {
+        "identity": "github.com/nitrictech/nitric",
+        "field": "repo.build",
+        "queryExitCode": 0,
+        "coreQueryValue": null,
+        "priorBindingMatched": true,
+        "bindingCorrected": false,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      },
+      {
+        "identity": "github.com/nitrictech/nitric",
+        "field": "repo.test",
+        "queryExitCode": 0,
+        "coreQueryValue": "make test",
+        "priorBindingMatched": true,
+        "bindingCorrected": false,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      },
+      {
+        "identity": "github.com/nitrictech/nitric",
+        "field": "repo.test_context",
+        "queryExitCode": 0,
+        "coreQueryValue": {
+          "command": "make test",
+          "prerequisites": [
+            "Install Git, Golang 1.22, Make, Docker and protoc as declared in DEVELOPERS.md; follow its make install-tools and Go dependency preparation before testing."
+          ],
+          "scope": "repository",
+          "source": "DEVELOPERS.md",
+          "working_directory": "."
+        },
+        "priorBindingMatched": false,
+        "bindingCorrected": true,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      },
+      {
+        "identity": "github.com/nitrictech/nitric",
+        "field": "docs.root",
+        "queryExitCode": 0,
+        "coreQueryValue": "https://nitric.io/docs",
+        "priorBindingMatched": true,
+        "bindingCorrected": false,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      },
+      {
+        "identity": "github.com/facebookresearch/pytorch3d",
+        "field": "repo.build",
+        "queryExitCode": 0,
+        "coreQueryValue": null,
+        "priorBindingMatched": true,
+        "bindingCorrected": false,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      },
+      {
+        "identity": "github.com/facebookresearch/pytorch3d",
+        "field": "repo.test",
+        "queryExitCode": 0,
+        "coreQueryValue": "python -m unittest discover -v -s tests -t .",
+        "priorBindingMatched": true,
+        "bindingCorrected": false,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      },
+      {
+        "identity": "github.com/facebookresearch/pytorch3d",
+        "field": "repo.test_context",
+        "queryExitCode": 0,
+        "coreQueryValue": {
+          "command": "python -m unittest discover -v -s tests -t .",
+          "prerequisites": [
+            "Build/install PyTorch3D from source following INSTALL.md and satisfy its Core library and Tests/Linting and Demos requirements before running the suite."
+          ],
+          "scope": "repository",
+          "source": ".github/CONTRIBUTING.md",
+          "working_directory": "."
+        },
+        "priorBindingMatched": false,
+        "bindingCorrected": true,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      },
+      {
+        "identity": "github.com/facebookresearch/pytorch3d",
+        "field": "docs.root",
+        "queryExitCode": 0,
+        "coreQueryValue": "https://pytorch3d.readthedocs.org/",
+        "priorBindingMatched": true,
+        "bindingCorrected": false,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      },
+      {
+        "identity": "github.com/redis/redis-py",
+        "field": "repo.build",
+        "queryExitCode": 0,
+        "coreQueryValue": null,
+        "priorBindingMatched": true,
+        "bindingCorrected": false,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      },
+      {
+        "identity": "github.com/redis/redis-py",
+        "field": "repo.build_candidates.0",
+        "queryExitCode": 0,
+        "coreQueryValue": {
+          "command": "python -m build .",
+          "context": {
+            "command": "python -m build .",
+            "prerequisites": [
+              "Use Python 3.10 and install build and twine as declared before the Build package step in .github/workflows/pypi-publish.yaml."
+            ],
+            "scope": "repository",
+            "source": ".github/workflows/pypi-publish.yaml",
+            "working_directory": "."
+          },
+          "ecosystem": "Python",
+          "source": ".github/workflows/pypi-publish.yaml"
+        },
+        "priorBindingMatched": false,
+        "bindingCorrected": true,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      },
+      {
+        "identity": "github.com/redis/redis-py",
+        "field": "repo.test",
+        "queryExitCode": 0,
+        "coreQueryValue": "invoke tests",
+        "priorBindingMatched": true,
+        "bindingCorrected": false,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      },
+      {
+        "identity": "github.com/redis/redis-py",
+        "field": "repo.test_context",
+        "queryExitCode": 0,
+        "coreQueryValue": {
+          "command": "invoke tests",
+          "prerequisites": [
+            "Create the development virtual environment, install dev_requirements.txt and the editable JWT extra as documented in CONTRIBUTING.md.",
+            "Provide Docker with compose profiles and run invoke devenv to start the required Redis test environments before invoke tests."
+          ],
+          "scope": "repository",
+          "source": "CONTRIBUTING.md",
+          "working_directory": "."
+        },
+        "priorBindingMatched": false,
+        "bindingCorrected": true,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      },
+      {
+        "identity": "github.com/redis/redis-py",
+        "field": "docs.root",
+        "queryExitCode": 0,
+        "coreQueryValue": "https://redis.readthedocs.io/en/stable/",
+        "priorBindingMatched": true,
+        "bindingCorrected": false,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      },
+      {
+        "identity": "github.com/socketio/socket.io",
+        "field": "repo.build",
+        "queryExitCode": 0,
+        "coreQueryValue": null,
+        "priorBindingMatched": true,
+        "bindingCorrected": false,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      },
+      {
+        "identity": "github.com/socketio/socket.io",
+        "field": "repo.build_candidates.0",
+        "queryExitCode": 0,
+        "coreQueryValue": {
+          "command": "npm run compile -ws --if-present",
+          "context": {
+            "command": "npm run compile -ws --if-present",
+            "prerequisites": [
+              "Install Node.js 18+ and npm 7+; run npm ci from the cloned repository root as directed in CONTRIBUTING.md."
+            ],
+            "scope": "repository",
+            "source": "CONTRIBUTING.md",
+            "working_directory": "."
+          },
+          "ecosystem": "JavaScript",
+          "source": "CONTRIBUTING.md"
+        },
+        "priorBindingMatched": false,
+        "bindingCorrected": true,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      },
+      {
+        "identity": "github.com/socketio/socket.io",
+        "field": "repo.test",
+        "queryExitCode": 0,
+        "coreQueryValue": null,
+        "priorBindingMatched": true,
+        "bindingCorrected": false,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      },
+      {
+        "identity": "github.com/socketio/socket.io",
+        "field": "repo.test_candidates.0",
+        "queryExitCode": 0,
+        "coreQueryValue": {
+          "command": "npm test -ws",
+          "context": {
+            "command": "npm test -ws",
+            "prerequisites": [
+              "Install Node.js 18+ and npm 7+; run npm ci from the cloned repository root as directed in CONTRIBUTING.md."
+            ],
+            "scope": "repository",
+            "source": "CONTRIBUTING.md",
+            "working_directory": "."
+          },
+          "ecosystem": "JavaScript",
+          "source": "CONTRIBUTING.md"
+        },
+        "priorBindingMatched": false,
+        "bindingCorrected": true,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      },
+      {
+        "identity": "github.com/socketio/socket.io",
+        "field": "docs.root",
+        "queryExitCode": 0,
+        "coreQueryValue": "https://socket.io/docs/v4/",
+        "priorBindingMatched": true,
+        "bindingCorrected": false,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      },
+      {
+        "identity": "github.com/microsoft/VibeVoice",
+        "field": "repo.build",
+        "queryExitCode": 0,
+        "coreQueryValue": null,
+        "priorBindingMatched": true,
+        "bindingCorrected": false,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      },
+      {
+        "identity": "github.com/microsoft/VibeVoice",
+        "field": "repo.test",
+        "queryExitCode": 0,
+        "coreQueryValue": null,
+        "priorBindingMatched": true,
+        "bindingCorrected": false,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      },
+      {
+        "identity": "github.com/microsoft/VibeVoice",
+        "field": "docs.root",
+        "queryExitCode": 0,
+        "coreQueryValue": null,
+        "priorBindingMatched": true,
+        "bindingCorrected": false,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      },
+      {
+        "identity": "github.com/jassics/security-study-plan",
+        "field": "repo.build",
+        "queryExitCode": 0,
+        "coreQueryValue": null,
+        "priorBindingMatched": true,
+        "bindingCorrected": false,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      },
+      {
+        "identity": "github.com/jassics/security-study-plan",
+        "field": "repo.test",
+        "queryExitCode": 0,
+        "coreQueryValue": null,
+        "priorBindingMatched": true,
+        "bindingCorrected": false,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      },
+      {
+        "identity": "github.com/jassics/security-study-plan",
+        "field": "docs.root",
+        "queryExitCode": 0,
+        "coreQueryValue": null,
+        "priorBindingMatched": true,
+        "bindingCorrected": false,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      },
+      {
+        "identity": "github.com/andrewngu/sound-redux",
+        "field": "repo.build",
+        "queryExitCode": 0,
+        "coreQueryValue": "npm run build",
+        "priorBindingMatched": true,
+        "bindingCorrected": false,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      },
+      {
+        "identity": "github.com/andrewngu/sound-redux",
+        "field": "repo.build_context",
+        "queryExitCode": 0,
+        "coreQueryValue": {
+          "command": "npm run build",
+          "prerequisites": [
+            "Install Node.js/npm and run npm install as documented in README.md."
+          ],
+          "scope": "repository",
+          "source": "README.md",
+          "working_directory": "."
+        },
+        "priorBindingMatched": false,
+        "bindingCorrected": true,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      },
+      {
+        "identity": "github.com/andrewngu/sound-redux",
+        "field": "repo.test",
+        "queryExitCode": 0,
+        "coreQueryValue": null,
+        "priorBindingMatched": true,
+        "bindingCorrected": false,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      },
+      {
+        "identity": "github.com/andrewngu/sound-redux",
+        "field": "docs.root",
+        "queryExitCode": 0,
+        "coreQueryValue": null,
+        "priorBindingMatched": true,
+        "bindingCorrected": false,
+        "checkedAt": "2026-10-06T04:07:21.224082Z",
+        "coherentCopyExportedAssessment": true
+      }
+    ],
+    "positiveExportAndConsumerControls": [
+      {
+        "identity": "github.com/andrewngu/sound-redux",
+        "purpose": "build",
+        "expectedCommand": "npm run build",
+        "instruction": {
+          "command": "npm run build",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "component": null,
+          "prerequisites": [
+            "Install Node.js/npm and run npm install as documented in README.md."
+          ],
+          "sourcePaths": [
+            "package.json",
+            "README.md"
+          ],
+          "purpose": "build",
+          "parameters": {},
+          "environment": {}
+        },
+        "fallbackReasons": []
+      },
+      {
+        "identity": "github.com/andrewngu/sound-redux",
+        "purpose": "test",
+        "expectedCommand": null,
+        "instruction": null,
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ]
+      },
+      {
+        "identity": "github.com/astral-sh/ruff",
+        "purpose": "build",
+        "expectedCommand": null,
+        "instruction": null,
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ]
+      },
+      {
+        "identity": "github.com/astral-sh/ruff",
+        "purpose": "test",
+        "expectedCommand": "cargo test",
+        "instruction": {
+          "command": "cargo test",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "component": null,
+          "prerequisites": [
+            "Install the Rust toolchain and uv as required by CONTRIBUTING.md."
+          ],
+          "sourcePaths": [
+            "CONTRIBUTING.md"
+          ],
+          "purpose": "test",
+          "parameters": {},
+          "environment": {}
+        },
+        "fallbackReasons": []
+      },
+      {
+        "identity": "github.com/facebookresearch/pytorch3d",
+        "purpose": "build",
+        "expectedCommand": null,
+        "instruction": null,
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ]
+      },
+      {
+        "identity": "github.com/facebookresearch/pytorch3d",
+        "purpose": "test",
+        "expectedCommand": "python -m unittest discover -v -s tests -t .",
+        "instruction": {
+          "command": "python -m unittest discover -v -s tests -t .",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "component": null,
+          "prerequisites": [
+            "Build/install PyTorch3D from source following INSTALL.md and satisfy its Core library and Tests/Linting and Demos requirements before running the suite."
+          ],
+          "sourcePaths": [
+            ".github/CONTRIBUTING.md"
+          ],
+          "purpose": "test",
+          "parameters": {},
+          "environment": {}
+        },
+        "fallbackReasons": []
+      },
+      {
+        "identity": "github.com/jassics/security-study-plan",
+        "purpose": "build",
+        "expectedCommand": null,
+        "instruction": null,
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ]
+      },
+      {
+        "identity": "github.com/jassics/security-study-plan",
+        "purpose": "test",
+        "expectedCommand": null,
+        "instruction": null,
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ]
+      },
+      {
+        "identity": "github.com/microsoft/VibeVoice",
+        "purpose": "build",
+        "expectedCommand": null,
+        "instruction": null,
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ]
+      },
+      {
+        "identity": "github.com/microsoft/VibeVoice",
+        "purpose": "test",
+        "expectedCommand": null,
+        "instruction": null,
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ]
+      },
+      {
+        "identity": "github.com/nitrictech/nitric",
+        "purpose": "build",
+        "expectedCommand": null,
+        "instruction": null,
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ]
+      },
+      {
+        "identity": "github.com/nitrictech/nitric",
+        "purpose": "test",
+        "expectedCommand": "make test",
+        "instruction": {
+          "command": "make test",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "component": null,
+          "prerequisites": [
+            "Install Git, Golang 1.22, Make, Docker and protoc as declared in DEVELOPERS.md; follow its make install-tools and Go dependency preparation before testing."
+          ],
+          "sourcePaths": [
+            "Makefile",
+            "DEVELOPERS.md"
+          ],
+          "purpose": "test",
+          "parameters": {},
+          "environment": {}
+        },
+        "fallbackReasons": []
+      },
+      {
+        "identity": "github.com/redis/redis-py",
+        "purpose": "build",
+        "expectedCommand": "python -m build .",
+        "instruction": {
+          "command": "python -m build .",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "component": null,
+          "prerequisites": [
+            "Use Python 3.10 and install build and twine as declared before the Build package step in .github/workflows/pypi-publish.yaml."
+          ],
+          "sourcePaths": [
+            ".github/workflows/pypi-publish.yaml"
+          ],
+          "purpose": "build",
+          "parameters": {},
+          "environment": {}
+        },
+        "fallbackReasons": []
+      },
+      {
+        "identity": "github.com/redis/redis-py",
+        "purpose": "test",
+        "expectedCommand": "invoke tests",
+        "instruction": {
+          "command": "invoke tests",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "component": null,
+          "prerequisites": [
+            "Create the development virtual environment, install dev_requirements.txt and the editable JWT extra as documented in CONTRIBUTING.md.",
+            "Provide Docker with compose profiles and run invoke devenv to start the required Redis test environments before invoke tests."
+          ],
+          "sourcePaths": [
+            "CONTRIBUTING.md"
+          ],
+          "purpose": "test",
+          "parameters": {},
+          "environment": {}
+        },
+        "fallbackReasons": []
+      },
+      {
+        "identity": "github.com/socketio/socket.io",
+        "purpose": "build",
+        "expectedCommand": "npm run compile -ws --if-present",
+        "instruction": {
+          "command": "npm run compile -ws --if-present",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "component": null,
+          "prerequisites": [
+            "Install Node.js 18+ and npm 7+; run npm ci from the cloned repository root as directed in CONTRIBUTING.md."
+          ],
+          "sourcePaths": [
+            "CONTRIBUTING.md"
+          ],
+          "purpose": "build",
+          "parameters": {},
+          "environment": {}
+        },
+        "fallbackReasons": []
+      },
+      {
+        "identity": "github.com/socketio/socket.io",
+        "purpose": "test",
+        "expectedCommand": "npm test -ws",
+        "instruction": {
+          "command": "npm test -ws",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "component": null,
+          "prerequisites": [
+            "Install Node.js 18+ and npm 7+; run npm ci from the cloned repository root as directed in CONTRIBUTING.md."
+          ],
+          "sourcePaths": [
+            "CONTRIBUTING.md"
+          ],
+          "purpose": "test",
+          "parameters": {},
+          "environment": {}
+        },
+        "fallbackReasons": []
+      }
+    ],
+    "controlBoundary": "Only copied record timestamps were made coherent in a disposable index. Actual exporter retains matching assessments and actual consumer selects supported instructions. No upstream execution or actual record-age renewal."
+  }
+}

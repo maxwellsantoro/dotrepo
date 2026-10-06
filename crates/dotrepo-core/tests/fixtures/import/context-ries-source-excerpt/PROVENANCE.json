@@ -1,0 +1,8 @@
+{
+  "repository": "https://github.com/maxwellsantoro/ries-rs",
+  "revision": "cfa959ed21a5a5e5f3d9538d9d1714c2401611e5",
+  "path": "README.md",
+  "retainedSource": "benchmarks/head-to-head/results/own-projects-contextual-2026-10-05/source-inspection/ries-rs/README.md",
+  "excerpt": "### Python Bindings\n\n```bash\npip install ries-rs\n```\n\nFor local source development of the bindings:\n\n```bash\nuv venv\nsource .venv/bin/activate\nuv pip install maturin\ncd ries-py\nmaturin develop --release\n```\n\n",
+  "expectation": "Abstain: changing directory follows environment setup; no complete context declaration."
+}

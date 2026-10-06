@@ -63,6 +63,16 @@ operator tasks. Use it as bounded C2 evidence; keep independent use, adoption,
 population accuracy and net cost evaluation open. The next consumer milestone is
 broader task/environment evidence or a practical independent pilot, rather than
 another apparatus expansion or an automatic growth cohort.
+The [October 6 source checkpoint](index/telemetry/roadmap-factual-checkpoint-2026-10-06.md)
+and [risk audit](index/telemetry/roadmap-risk-audit-2026-10-06.md) supply bounded
+semantic dispositions and repairs. Whole-record verification and broader F2
+quality evidence remain open; recent record age is not semantic correctness.
+The [cadence checkpoint](index/telemetry/roadmap-refresh-cadence-2026-10-06.md)
+diagnoses stale-base refusal and prepares a bounded deterministic regeneration.
+An enabled schedule and nominal capacity do not establish successful rotation;
+retain actual refresh, landing and publication evidence separately.
+E1 supports explicitly declared documentation contexts as candidates; general
+nested-manifest extraction and assessed acceptance remain separate work.
 An external participant is not a prerequisite for the current checkpoint. C3 is
 deferred; both useful C2 results and C3 acceptance evidence are required before
 G1 expansion. If evaluation reveals a defect,
@@ -78,12 +88,14 @@ F1/E1 work, with F2/E2 required to establish broader quality. Stable delivery is
 Join broader quality, independent-use evidence, and operating budgets before G1.
 Establish the actual blocking path from evidence instead of invented dates.
 
-The next C2 campaign requires contextual selection and execution controls plus
-a freeze of the consumer/scorer dependency set. Preserve every historical packet.
-Preregister protocol-compatible component paths and prepared environment inputs,
-inspect source-backed instruction assessments, and fix a new public snapshot
-before running. Merged RamenOS readiness and prepared Atlas correctness close
-upstream setup questions; they do not establish useful accepted dotrepo answers.
+Future C2 campaigns must retain contextual selection/execution controls and the
+consumer/scorer/runtime freeze already exercised by the retained campaign.
+Preregister new tasks, component paths and prepared environments before inspecting
+their coverage; source-inspect assessments and fix a new immutable snapshot.
+Keep source preparation, correct fallback and direct profile contribution
+separate. Preserve all historical packets. The remaining delivery checkpoint is
+archive provisioning/backfill and actual retrieval after edge eviction, alongside
+version-matched release maintenance and enforced CI.
 
 Close a packet only when its specified artifacts/checks exist. Distinguish
 **implemented**, **validated**, **operating**, **published**, and **independently
@@ -193,9 +205,9 @@ show an advantage to be informative. A product-benefit claim still requires
 improvement after fallback and maintenance costs, and independent adoption needs
 the later C3 evidence. Retain unfavorable data and revise the affected packet.
 
-Repeat the same own-project tasks after resolving their named prerequisites.
-Freeze every changed source pin, environment, timeout, and evaluated snapshot;
-keep known coverage and pending upstream review explicit. Once readiness is
-established, prioritize source-preserving answers for this demand before adding
-repositories or interfaces. Scoped commands remain scoped; successful fallback
-does not by itself satisfy the useful-answer or independent-use gates.
+The retained repeat closes the original own-project readiness join and supplies
+bounded direct reuse evidence. Broaden source-preserving task/environment evidence
+when useful, freezing every changed input and retaining known coverage. Keep
+independent consent/use and operating-cost gates open before adding a growth
+cohort. Scoped commands remain scoped; successful fallback does not by itself
+satisfy useful-answer or independent-use gates.

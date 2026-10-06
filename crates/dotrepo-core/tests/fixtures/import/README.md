@@ -19,3 +19,33 @@ Cases:
 - `no-conventional-surfaces`: no importable conventional files, so the plan falls back entirely to inferred defaults.
 - `mixed-codeowners`: repo-wide `CODEOWNERS` ownership plus narrower team overrides, preserving a primary team signal without flattening narrower owners.
 - `team-heavy-codeowners`: broad multi-team `CODEOWNERS` patterns that should preserve owner candidates while leaving `owners.team` unset.
+
+Execution-context cases pin an intentionally small documentation subset. A
+`Repository build` / `Repository tests` heading declares repository coverage;
+`Component build: packages/ui` / `Component tests: packages/ui` declares the
+component explicitly. One shell fence must begin with `cd .` or the exact
+component directory. Preparatory install/sync lines become source-backed
+prerequisite descriptions. `Prerequisites: none.` is required to emit an empty
+list; missing setup text alone is not evidence of no prerequisites. These
+instructions remain candidates, including repository-scoped instructions; they
+are never promoted into scalar defaults by context extraction.
+
+The `context-*` cases cover root/component success, missing declarations,
+incorrect or escaping directories, unresolved parameters, incompatible setup
+claims, prose and other-section prerequisites, and ambiguous instruction
+sequences. Exact candidates and complete contexts are pinned in
+`expectations.json`. `docs-setup-dependent-test` verifies that the scalar parser
+also preserves prerequisite boundaries by abstaining. The
+`context-ries-source-excerpt` control retains the real Python-development block
+from the inspected public ries-rs source. Its `PROVENANCE.json` binds the excerpt
+to the upstream pin; environment activation and undeclared scope remain
+unsupported rather than being flattened into a complete instruction.
+
+The four `docs-source-*` cases retain complete, byte-preserved README files from
+pinned risk-audit sources, with retrieval URLs, source hashes and revisions in
+`PROVENANCE.json`. SoundRedux's live demo, jassics' absent portal declaration, and
+VibeVoice's project/demo page remain withheld as documentation roots. Redis's
+explicit linked documentation badge identifies the stable documentation root;
+its connection-options examples link remains a leaf, rather than replacing the
+root. Native import continues to omit external documentation URLs, while overlay
+import preserves the declared external target.

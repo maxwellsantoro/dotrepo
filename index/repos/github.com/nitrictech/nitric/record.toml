@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `CODEOWNERS`, and `Makefile`. Filled `repo.name` with inferred defaults. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. 2026-10-04 pinned command-source audit supersedes affected extraction assessments and prior auto-promotion. Corrected commands are unassessed pending full-record verification; unrelated inspection timestamps are unchanged. See index/telemetry/command-semantics-20261004/report.json."
+notes = "2026-10-06 risk-weighted source audit: only declared build/test/docs fields and contexts reinspected at retained revision; record age/status and unrelated facts unchanged. Fresh field assessments do not imply a full-record crawl. Bootstrapped from `README.md`, `CODEOWNERS`, and `Makefile`. Filled `repo.name` with inferred defaults. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. 2026-10-04 pinned command-source audit supersedes affected extraction assessments and prior auto-promotion. Corrected commands are unassessed pending full-record verification; unrelated inspection timestamps are unchanged. See index/telemetry/command-semantics-20261004/report.json."
 
 [repo]
 name = "nitric"
@@ -51,6 +51,13 @@ topics = [
     "typescript",
 ]
 
+[repo.test_context]
+command = "make test"
+working_directory = "."
+scope = "repository"
+prerequisites = ["Install Git, Golang 1.22, Make, Docker and protoc as declared in DEVELOPERS.md; follow its make install-tools and Go dependency preparation before testing."]
+source = "DEVELOPERS.md"
+
 [owners]
 maintainers = [
     "@jyecusch",
@@ -68,13 +75,6 @@ reason = "no getting started link detected"
 state = "not_found"
 valueJson = "null"
 
-[x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:27:14.470956Z"
-confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://nitric.io/docs"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
 checkedAt = "2026-09-16T16:27:14.470956Z"
@@ -119,14 +119,6 @@ source = "README.md"
 state = "present"
 valueJson = '"nitric"'
 
-[x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:27:14.470956Z"
-confidence = "high"
-method = "extracted"
-reason = "from declared repository source"
-source = "Makefile"
-state = "present"
-valueJson = '"make test"'
 
 [x.github]
 archived = false
@@ -136,3 +128,43 @@ fork = false
 head_sha = "892243986918fa188e8a52bf73d40a5383581d5c"
 html_url = "https://github.com/nitrictech/nitric"
 stars = 2017
+
+
+
+
+
+[x.dotrepo.field_evidence."repo.build"]
+state = "not_found"
+method = "not_found_in_inspected_sources"
+confidence = "high"
+source = "Makefile"
+checkedAt = "2026-10-06T04:07:21.224082Z"
+valueJson = "null"
+reason = "make all was an assignment false positive, already removed. DEVELOPERS.md declares make binaries for cloud providers, not a default build of every surface. Pinned source inspection at 892243986918fa188e8a52bf73d40a5383581d5c; this is source preservation, not execution or current-HEAD verification."
+
+[x.dotrepo.field_evidence."repo.test"]
+state = "present"
+method = "extracted"
+confidence = "high"
+source = "Makefile"
+checkedAt = "2026-10-06T04:07:21.224082Z"
+valueJson = "\"make test\""
+reason = "Literal root test target iterates core and cloud providers; wrapper preserves child Make prerequisites. DEVELOPERS.md explicitly documents make test. Pinned source inspection at 892243986918fa188e8a52bf73d40a5383581d5c; this is source preservation, not execution or current-HEAD verification."
+
+[x.dotrepo.field_evidence."repo.test_context"]
+state = "present"
+method = "extracted"
+confidence = "high"
+source = "DEVELOPERS.md"
+checkedAt = "2026-10-06T04:07:21.224082Z"
+valueJson = "{\"command\": \"make test\", \"prerequisites\": [\"Install Git, Golang 1.22, Make, Docker and protoc as declared in DEVELOPERS.md; follow its make install-tools and Go dependency preparation before testing.\"], \"scope\": \"repository\", \"source\": \"DEVELOPERS.md\", \"working_directory\": \".\"}"
+reason = "Literal root test target iterates core and cloud providers; wrapper preserves child Make prerequisites. DEVELOPERS.md explicitly documents make test. Pinned source inspection at 892243986918fa188e8a52bf73d40a5383581d5c; this is source preservation, not execution or current-HEAD verification."
+
+[x.dotrepo.field_evidence."docs.root"]
+state = "present"
+method = "extracted"
+confidence = "high"
+source = "README.md"
+checkedAt = "2026-10-06T04:07:21.224082Z"
+valueJson = "\"https://nitric.io/docs\""
+reason = "README explicitly states full Nitric documentation is at nitric.io/docs. Pinned source inspection at 892243986918fa188e8a52bf73d40a5383581d5c; this is source preservation, not execution or current-HEAD verification."

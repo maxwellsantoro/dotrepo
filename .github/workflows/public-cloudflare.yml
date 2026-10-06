@@ -89,6 +89,14 @@ jobs:
       - name: Install Worker dependencies
         working-directory: cloudflare/hosted-query
         run: npm ci
+      - name: Require and render snapshot archive binding
+        env:
+          DOTREPO_PUBLIC_R2_ARCHIVE_BUCKET: ${{ vars.DOTREPO_PUBLIC_R2_ARCHIVE_BUCKET }}
+        run: |
+          uv run python scripts/render_hosted_query_config.py \
+            --config cloudflare/hosted-query/wrangler.jsonc \
+            --output "$RUNNER_TEMP/dotrepo-wrangler.json" \
+            --require-archive
       - name: Resolve hosted base path
         id: base_path
         shell: bash
@@ -177,7 +185,7 @@ jobs:
           uv run python scripts/check_public_deploy_eligibility.py \
             --checkout-sha "$(git rev-parse HEAD)"
       - name: Archive immutable snapshots to R2
-        if: steps.publish_revision.outputs.eligible == 'true' && vars.DOTREPO_PUBLIC_R2_ARCHIVE_BUCKET != ''
+        if: steps.publish_revision.outputs.eligible == 'true'
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -205,7 +213,7 @@ jobs:
         run: |
           set -euo pipefail
           log_path="$RUNNER_TEMP/wrangler-deploy.log"
-          npx wrangler deploy 2>&1 | tee "$log_path"
+          npx wrangler deploy --config "$RUNNER_TEMP/dotrepo-wrangler.json" 2>&1 | tee "$log_path"
           deploy_url="$(uv run python -c 'import re, sys; from pathlib import Path; text = Path(sys.argv[1]).read_text(encoding="utf-8"); workers_matches = re.findall(r"https://[^\s]+\.workers\.dev[^\s]*", text); deploy_match = re.search(r"Deployed .*?triggers.*?\n\s*(https://\S+)", text, re.DOTALL); print(workers_matches[-1] if workers_matches else (deploy_match.group(1) if deploy_match else ""))' "$log_path")"
           if [ -z "$deploy_url" ]; then
             echo "Failed to detect deployed Worker URL from Wrangler output" >&2
@@ -240,3 +248,14 @@ jobs:
             --deploy-url "$DEPLOY_URL" \
             --base-path "${{ steps.base_path.outputs.value }}" \
             --public-root release-gate/public
+      - name: Retain reviewed publication inputs
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: public-publication-inputs-${{ needs.eligibility.outputs.source_sha }}
+          path: |
+            release-gate/public/v0/snapshots/
+            release-gate/public/v0/meta.json
+            ${{ runner.temp }}/dotrepo-wrangler.json
+          if-no-files-found: ignore
+          retention-days: 90

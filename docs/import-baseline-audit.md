@@ -46,10 +46,14 @@ Security fixtures cover:
 Execution fixtures cover repository defaults, nested manifests and CI working
 directories, component instructions, required setup, placeholders, continuations,
 and setup-only test flags. They pin withholding an unsuitable scalar command
-as well as extracting suitable commands. The additive
-[execution-context contract](../rfcs/0021-value-bound-execution-context.md) does
-not authorize restoring nested imports before complete context extraction and
-consumer evaluation.
+as well as extracting suitable commands. Explicit documentation contexts retain
+their full tuple as candidates: declared scope, matching literal directory,
+unchanged entrypoint, setup descriptions, and source. Empty prerequisites need
+an explicit source declaration. Missing or contradictory context, external setup
+prose, and unsafe paths abstain; the retained RIES source excerpt demonstrates
+that ordinary nested instructions do not acquire guessed context. See the
+[supported extraction subset](../rfcs/0021-value-bound-execution-context.md#supported-documentation-extraction).
+Candidate extraction does not establish assessed consumer acceptance.
 
 The fallback fixture contains no conventional import surfaces.
 

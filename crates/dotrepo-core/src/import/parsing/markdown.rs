@@ -137,10 +137,14 @@ pub(crate) fn parse_readme_docs_metadata(
         if is_markdown_reference_definition(line) {
             continue;
         }
-        let mut links = extract_markdown_links(line);
-        links.extend(extract_markdown_reference_links(line, &definitions));
-        links.extend(extract_html_links(line));
-        let lower_line = strip_html_tags(line)
+        // A linked documentation badge declares its outer destination, not
+        // the image endpoint. Normalize only explicit docs labels here;
+        // unrelated images and generic badge labels remain unassessed.
+        let docs_line = rewrite_documentation_badges(line);
+        let mut links = extract_markdown_links(&docs_line);
+        links.extend(extract_markdown_reference_links(&docs_line, &definitions));
+        links.extend(extract_html_links(&docs_line));
+        let lower_line = strip_html_tags(&docs_line)
             .replace("**", "")
             .replace("__", "")
             .to_ascii_lowercase();
@@ -154,7 +158,7 @@ pub(crate) fn parse_readme_docs_metadata(
             }
         }
         let single_link = links.len() == 1;
-        let mut remainder = strip_html_tags(&rewrite_markdown_links(line));
+        let mut remainder = strip_html_tags(&rewrite_markdown_links(&docs_line));
         for (label, _) in &links {
             remainder = remainder.replace(label, "");
         }
@@ -255,6 +259,37 @@ fn is_badge_asset_url(url: &str) -> bool {
             .iter()
             .any(|extension| path.ends_with(extension))
         || lower.contains("status.svg")
+}
+
+fn rewrite_documentation_badges(line: &str) -> String {
+    let mut result = String::new();
+    let mut cursor = 0;
+    while let Some(relative) = line[cursor..].find("[![") {
+        let start = cursor + relative;
+        result.push_str(&line[cursor..start]);
+        if let Some((image_end, label, image_url)) = parse_markdown_link_at(line, start + 2) {
+            if matches!(
+                label.trim().to_ascii_lowercase().as_str(),
+                "docs" | "documentation"
+            ) && is_badge_asset_url(&image_url)
+            {
+                // Reuse the balanced destination reader for the outer link;
+                // image assets never become the documentation destination.
+                if line[image_end..].starts_with("](") {
+                    if let Some((end, target)) = parse_markdown_destination_at(line, image_end + 2)
+                    {
+                        result.push_str(&format!("[{label}]({target})"));
+                        cursor = end;
+                        continue;
+                    }
+                }
+            }
+        }
+        result.push_str("[![");
+        cursor = start + 3;
+    }
+    result.push_str(&line[cursor..]);
+    result
 }
 
 fn markdown_reference_definitions(lines: &[&str]) -> HashMap<String, String> {
@@ -431,6 +466,12 @@ fn parse_markdown_link_at(line: &str, start: usize) -> Option<(usize, String, St
     }
 
     let url_start = close_label + 2;
+    let (end, url) = parse_markdown_destination_at(line, url_start)?;
+    Some((end, line[start + 1..close_label].to_string(), url))
+}
+
+fn parse_markdown_destination_at(line: &str, url_start: usize) -> Option<(usize, String)> {
+    let bytes = line.as_bytes();
     let mut idx = url_start;
     let mut depth = 1usize;
     while idx < bytes.len() {
@@ -439,9 +480,8 @@ fn parse_markdown_link_at(line: &str, start: usize) -> Option<(usize, String, St
             b')' => {
                 depth -= 1;
                 if depth == 0 {
-                    let label = line[start + 1..close_label].to_string();
                     let url = line[url_start..idx].trim().to_string();
-                    return Some((idx + 1, label, url));
+                    return Some((idx + 1, url));
                 }
             }
             _ => {}

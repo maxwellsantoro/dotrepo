@@ -11,7 +11,7 @@ confidence = "medium"
 provenance = [
     "imported",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `examples/basic-crud-application/server/package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `examples/basic-crud-application/server/package.json`. Imported `repo.test` from `examples/basic-crud-application/server/package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. 2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged."
+notes = "2026-10-06 risk-weighted source audit: only declared build/test/docs fields and contexts reinspected at retained revision; record age/status and unrelated facts unchanged. Fresh field assessments do not imply a full-record crawl. Bootstrapped from `README.md`, `SECURITY.md`, and `examples/basic-crud-application/server/package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `examples/basic-crud-application/server/package.json`. Imported `repo.test` from `examples/basic-crud-application/server/package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. 2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged."
 
 [repo]
 name = "socket.io"
@@ -33,6 +33,30 @@ topics = [
     "websocket",
 ]
 
+[[repo.build_candidates]]
+command = "npm run compile -ws --if-present"
+ecosystem = "JavaScript"
+source = "CONTRIBUTING.md"
+
+[repo.build_candidates.context]
+command = "npm run compile -ws --if-present"
+working_directory = "."
+scope = "repository"
+prerequisites = ["Install Node.js 18+ and npm 7+; run npm ci from the cloned repository root as directed in CONTRIBUTING.md."]
+source = "CONTRIBUTING.md"
+
+[[repo.test_candidates]]
+command = "npm test -ws"
+ecosystem = "JavaScript"
+source = "CONTRIBUTING.md"
+
+[repo.test_candidates.context]
+command = "npm test -ws"
+working_directory = "."
+scope = "repository"
+prerequisites = ["Install Node.js 18+ and npm 7+; run npm ci from the cloned repository root as directed in CONTRIBUTING.md."]
+source = "CONTRIBUTING.md"
+
 [owners]
 maintainers = []
 security_contact = "https://github.com/socketio/socket.io/security/advisories/GHSA-677m-j7p3-52f9"
@@ -48,13 +72,6 @@ reason = "no getting started link detected"
 state = "not_found"
 valueJson = "null"
 
-[x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:33:26.155745Z"
-confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://socket.io/docs/v4/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
 checkedAt = "2026-09-16T16:33:26.155745Z"
@@ -73,14 +90,6 @@ reason = "no single clear team in CODEOWNERS"
 state = "not_found"
 valueJson = "null"
 
-[x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:33:26.155745Z"
-confidence = "low"
-method = "extracted"
-reason = "Component command lacks repository-default scope and working directory."
-source = "examples/basic-crud-application/server/package.json"
-state = "unresolved"
-valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-16T16:33:26.155745Z"
@@ -108,14 +117,6 @@ source = "README.md"
 state = "present"
 valueJson = '"socket.io"'
 
-[x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:33:26.155745Z"
-confidence = "low"
-method = "extracted"
-reason = "Component command lacks repository-default scope and working directory."
-source = "examples/basic-crud-application/server/package.json"
-state = "unresolved"
-valueJson = "null"
 
 [x.github]
 archived = false
@@ -125,3 +126,53 @@ fork = false
 head_sha = "b5da079228666fcabd97166486d5f6a110826bc8"
 html_url = "https://github.com/socketio/socket.io"
 stars = 63197
+
+
+
+
+
+
+[x.dotrepo.field_evidence."repo.build"]
+state = "unresolved"
+method = "extracted"
+confidence = "high"
+source = "CONTRIBUTING.md"
+checkedAt = "2026-10-06T04:07:21.224082Z"
+valueJson = "null"
+reason = "Guide explicitly declares TypeScript compilation for all workspaces. This is a compilation candidate, not a promoted example-package scalar default. Pinned source inspection at b5da079228666fcabd97166486d5f6a110826bc8; this is source preservation, not execution or current-HEAD verification."
+
+[x.dotrepo.field_evidence."repo.build_candidates.0"]
+state = "present"
+method = "extracted"
+confidence = "high"
+source = "CONTRIBUTING.md"
+checkedAt = "2026-10-06T04:07:21.224082Z"
+valueJson = "{\"command\": \"npm run compile -ws --if-present\", \"context\": {\"command\": \"npm run compile -ws --if-present\", \"prerequisites\": [\"Install Node.js 18+ and npm 7+; run npm ci from the cloned repository root as directed in CONTRIBUTING.md.\"], \"scope\": \"repository\", \"source\": \"CONTRIBUTING.md\", \"working_directory\": \".\"}, \"ecosystem\": \"JavaScript\", \"source\": \"CONTRIBUTING.md\"}"
+reason = "Guide explicitly declares TypeScript compilation for all workspaces. This is a compilation candidate, not a promoted example-package scalar default. Pinned source inspection at b5da079228666fcabd97166486d5f6a110826bc8; this is source preservation, not execution or current-HEAD verification."
+
+[x.dotrepo.field_evidence."repo.test"]
+state = "unresolved"
+method = "extracted"
+confidence = "high"
+source = "CONTRIBUTING.md"
+checkedAt = "2026-10-06T04:07:21.224082Z"
+valueJson = "null"
+reason = "Guide explicitly declares tests for all workspaces; keep the npm wrapper to preserve each workspace script. The inspected socket.io workspace script includes formatting, compilation and test substeps. Pinned source inspection at b5da079228666fcabd97166486d5f6a110826bc8; this is source preservation, not execution or current-HEAD verification."
+
+[x.dotrepo.field_evidence."repo.test_candidates.0"]
+state = "present"
+method = "extracted"
+confidence = "high"
+source = "CONTRIBUTING.md"
+checkedAt = "2026-10-06T04:07:21.224082Z"
+valueJson = "{\"command\": \"npm test -ws\", \"context\": {\"command\": \"npm test -ws\", \"prerequisites\": [\"Install Node.js 18+ and npm 7+; run npm ci from the cloned repository root as directed in CONTRIBUTING.md.\"], \"scope\": \"repository\", \"source\": \"CONTRIBUTING.md\", \"working_directory\": \".\"}, \"ecosystem\": \"JavaScript\", \"source\": \"CONTRIBUTING.md\"}"
+reason = "Guide explicitly declares tests for all workspaces; keep the npm wrapper to preserve each workspace script. The inspected socket.io workspace script includes formatting, compilation and test substeps. Pinned source inspection at b5da079228666fcabd97166486d5f6a110826bc8; this is source preservation, not execution or current-HEAD verification."
+
+[x.dotrepo.field_evidence."docs.root"]
+state = "present"
+method = "extracted"
+confidence = "high"
+source = "README.md"
+checkedAt = "2026-10-06T04:07:21.224082Z"
+valueJson = "\"https://socket.io/docs/v4/\""
+reason = "README explicitly links the Socket.IO v4 documentation at this URL. Pinned source inspection at b5da079228666fcabd97166486d5f6a110826bc8; this is source preservation, not execution or current-HEAD verification."

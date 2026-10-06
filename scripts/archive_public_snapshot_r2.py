@@ -4,17 +4,90 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import re
 import shlex
 import subprocess
 import tempfile
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 from sync_cloudflare_public_snapshot import load_json, merge_log_documents
 
 
 IMMUTABLE_CACHE_CONTROL = "public, max-age=31536000, immutable"
 MUTABLE_CACHE_CONTROL = "no-cache"
+
+
+def validated_snapshot_files(public_root: Path, entry: dict) -> list[Path]:
+    """Require every public leaf before advertising a snapshot in the archive log."""
+    snapshot = entry.get("snapshotId")
+    if not isinstance(snapshot, str) or re.fullmatch(r"[A-Za-z0-9_-]+", snapshot) is None:
+        raise ValueError("snapshot log has an invalid snapshotId")
+    root = f"v0/snapshots/{snapshot}"
+    manifest_path = public_root / root / "files.json"
+    if not manifest_path.is_file():
+        raise ValueError(
+            f"snapshot {snapshot} is not archived and has no local manifest; backfill it"
+        )
+    if manifest_path.is_symlink() or not manifest_path.resolve().is_relative_to(public_root):
+        raise ValueError(f"snapshot {snapshot} manifest is not a contained file")
+    manifest = load_json(manifest_path)
+    if any(
+        manifest.get("freshness", {}).get(field) != entry.get(field)
+        for field in ["snapshotDigest", "generatedAt"]
+    ):
+        raise ValueError(f"snapshot {snapshot} manifest does not match its published log entry")
+    leaves = manifest.get("files")
+    if (
+        not isinstance(leaves, list)
+        or manifest.get("fileCount") != len(leaves)
+        or entry.get("fileCount") != len(leaves)
+    ):
+        raise ValueError(f"snapshot {snapshot} manifest has an inconsistent file count")
+    files = []
+    seen = set()
+    for leaf in leaves:
+        if not isinstance(leaf, dict):
+            raise ValueError("snapshot file manifest entries must be objects")
+        path = leaf.get("path")
+        if (
+            not isinstance(path, str)
+            or not path.startswith(f"{root}/")
+            or any(part in {"", ".", ".."} for part in path.split("/"))
+            or "\\" in path
+            or path in seen
+        ):
+            raise ValueError(
+                f"snapshot {snapshot} manifest has an unsafe or duplicate path: {path}"
+            )
+        seen.add(path)
+        if (
+            not isinstance(leaf.get("bytes"), int)
+            or isinstance(leaf["bytes"], bool)
+            or leaf["bytes"] < 0
+            or not isinstance(leaf.get("sha256"), str)
+            or re.fullmatch(r"[0-9a-f]{64}", leaf["sha256"]) is None
+        ):
+            raise ValueError(f"snapshot {snapshot} manifest has invalid validators: {path}")
+        local = public_root / path
+        # Restoration intentionally omits private runtime inputs. They are not
+        # part of the publicly retrievable archive guarantee.
+        private = PurePosixPath(path).relative_to(root).parts[0] == "query-input"
+        if private and not local.exists():
+            continue
+        if (
+            not local.is_file()
+            or local.is_symlink()
+            or not local.resolve().is_relative_to(public_root)
+        ):
+            raise ValueError(f"snapshot {snapshot} is missing a contained payload: {path}")
+        body = local.read_bytes()
+        if len(body) != leaf["bytes"] or hashlib.sha256(body).hexdigest() != leaf["sha256"]:
+            raise ValueError(f"snapshot {snapshot} payload fails manifest validation: {path}")
+        files.append(local)
+    # Manifest itself is uploaded only after all its leaves validate.
+    return [*files, manifest_path]
 
 
 def parse_args() -> argparse.Namespace:
@@ -44,6 +117,9 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Fail if the reviewed local log omits an existing archive entry",
     )
+    parser.add_argument(
+        "--upload-concurrency", type=int, default=8, help="Bounded bulk upload workers (1-20)"
+    )
     return parser.parse_args()
 
 
@@ -51,7 +127,11 @@ def snapshot_files(public_root: Path) -> list[Path]:
     snapshot_root = public_root / "v0" / "snapshots"
     if not snapshot_root.is_dir():
         raise SystemExit(f"snapshot root does not exist: {snapshot_root}")
-    files = sorted(path for path in snapshot_root.rglob("*") if path.is_file())
+    files = sorted(
+        path
+        for path in snapshot_root.rglob("*")
+        if path.is_file() and "query-input" not in path.relative_to(snapshot_root).parts
+    )
     if not files:
         raise SystemExit(f"snapshot root contains no files: {snapshot_root}")
     return files
@@ -121,9 +201,15 @@ def read_archive_log(bucket: str, wrangler_cwd: Path) -> dict:
 
 
 def archive_snapshots(
-    public_root: Path, bucket: str, wrangler_cwd: Path, *, require_complete_history: bool = False
+    public_root: Path,
+    bucket: str,
+    wrangler_cwd: Path,
+    *,
+    require_complete_history: bool = False,
+    upload_concurrency: int = 8,
 ) -> int:
-    files = snapshot_files(public_root)
+    if not 1 <= upload_concurrency <= 20:
+        raise ValueError("upload concurrency must be between 1 and 20")
     local_log = load_json(public_root / "v0/snapshots/log.json")
     if not local_log.get("entries"):
         raise ValueError("public snapshot log is missing or empty")
@@ -132,16 +218,53 @@ def archive_snapshots(
     if require_complete_history and merged_log != merge_log_documents(local_log):
         raise ValueError("reviewed snapshot log omits archive history; restore it before export")
 
-    # Upload the mutable log last so every newly advertised payload is available.
+    # Existing archive entries were committed only after payload uploads. Do not
+    # rewrite immutable objects on every deploy. New entries must all validate
+    # before any upload, including history that is no longer at the static edge.
+    archived_ids = {entry["snapshotId"] for entry in archived_log.get("entries", [])}
     payloads = [
         path
-        for path in files
-        if path.relative_to(public_root).as_posix() != "v0/snapshots/log.json"
+        for entry in merged_log["entries"]
+        if entry["snapshotId"] not in archived_ids
+        for path in validated_snapshot_files(public_root, entry)
+        if "query-input" not in path.relative_to(public_root).parts
     ]
-    for path in payloads:
-        subprocess.run(upload_command(bucket, public_root, path), cwd=wrangler_cwd, check=True)
     with tempfile.TemporaryDirectory(prefix="dotrepo-archive-merged-") as temporary:
         merged_root = Path(temporary)
+        # Wrangler is lockfile-pinned. Its bulk implementation has bounded
+        # concurrency and API rate limiting; one process avoids thousands of
+        # separate Node startup/authentication cycles. Any failure stops before
+        # the public log is committed. Private runtime inputs are never uploaded.
+        groups: dict[str, list[dict]] = {}
+        for path in payloads:
+            groups.setdefault(content_type(path), []).append(
+                {"key": path.relative_to(public_root).as_posix(), "file": str(path)}
+            )
+        for number, (mime, entries) in enumerate(groups.items()):
+            batch = merged_root / f"upload-{number}.json"
+            batch.write_text(json.dumps(entries), encoding="utf-8")
+            subprocess.run(
+                [
+                    "npx",
+                    "wrangler",
+                    "r2",
+                    "bulk",
+                    "put",
+                    bucket,
+                    "--filename",
+                    str(batch),
+                    "--remote",
+                    "--force",
+                    "--concurrency",
+                    str(upload_concurrency),
+                    "--content-type",
+                    mime,
+                    "--cache-control",
+                    IMMUTABLE_CACHE_CONTROL,
+                ],
+                cwd=wrangler_cwd,
+                check=True,
+            )
         path = merged_root / "v0/snapshots/log.json"
         path.parent.mkdir(parents=True)
         path.write_text(json.dumps(merged_log, indent=2) + "\n", encoding="utf-8")
@@ -164,7 +287,8 @@ def main() -> int:
         for path in files:
             print(shlex.join(upload_command(args.bucket, public_root, path)))
         print(
-            "Before upload, the existing archive log is read and merged; the log is uploaded last."
+            "Real uploads skip existing archive entries, validate every new public payload, "
+            "use bounded bulk batches, and commit the merged log last."
         )
         return 0
     count = archive_snapshots(
@@ -172,6 +296,7 @@ def main() -> int:
         args.bucket,
         wrangler_cwd,
         require_complete_history=args.require_complete_history,
+        upload_concurrency=args.upload_concurrency,
     )
     print(f"archived {count} snapshot object(s) to R2 bucket {args.bucket}")
     return 0

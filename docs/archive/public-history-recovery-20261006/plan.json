@@ -1,0 +1,123 @@
+{
+  "schema": "dotrepo-public-history-recovery/v0",
+  "publishedLogSha256": "0a1311ff2e78f2c9cff41f720da6f94e4030bbdebb338335c83a9147e17e7992",
+  "staleAfterHours": 168,
+  "sources": {
+    "a7e4e24a9d77699e21ef10486d17b8afd9e812b57fe9d112a4006d54677d3697": "d54d8a5292dcab9e2cf1eba0cbde71cdb6536ed4",
+    "530438b6fd022b936a9e5882a43e465bdeb33637048ed6d4ae126b655b1d08b6": "1d55012849b7d6c401af095457912e029f5e5fc1",
+    "0eca2417b8732e61f7ac23d052992546c0927fb629e5ff69e69fcbb4c355a14b": "d14d538ac19fff2b6c949575ecb8e6353b783e67",
+    "80c39eb3565f7d66e0ae76b417012273b84d6bbb1bdb97abc5e716bea63e7dea": "f00a799d63f20db15ed7b4231113f7d92f86a3a6",
+    "1b13a456c1eb33284d953a6c677a7ba935e38011d34aef76cddfc045a430f28a": "968e10878aee3301ee3cbe337b1bb69fbc1250eb"
+  },
+  "knownBodies": [
+    {
+      "snapshotId": "75707322809f36bee39edf66ce1011143b2ac62bf0cac158b7f94f8279eab35d",
+      "path": "v0/snapshots/75707322809f36bee39edf66ce1011143b2ac62bf0cac158b7f94f8279eab35d/repos/github.com/maxwellsantoro/sha256-benchmark-atlas/profile.json",
+      "sha256": "298b941d42211d1ef73ff6b9a38b60435c664185b82375a96b7e5355ed5dfc8d",
+      "receipt": "benchmarks/head-to-head/results/own-projects-contextual-2026-10-05/http/sha256-benchmark-atlas-build-lookup-first-profile.receipt.json"
+    },
+    {
+      "snapshotId": "75707322809f36bee39edf66ce1011143b2ac62bf0cac158b7f94f8279eab35d",
+      "path": "v0/snapshots/75707322809f36bee39edf66ce1011143b2ac62bf0cac158b7f94f8279eab35d/repos/github.com/maxwellsantoro/ries-rs/profile.json",
+      "sha256": "7f58fad90a1e66dc520f68f4e4efb0e18a15d4008bbff293e4103ef4914d5b3c",
+      "receipt": "benchmarks/head-to-head/results/own-projects-contextual-2026-10-05/http/ries-rs-core-build-lookup-first-profile.receipt.json"
+    },
+    {
+      "snapshotId": "75707322809f36bee39edf66ce1011143b2ac62bf0cac158b7f94f8279eab35d",
+      "path": "v0/snapshots/75707322809f36bee39edf66ce1011143b2ac62bf0cac158b7f94f8279eab35d/repos/github.com/maxwellsantoro/pagedigest/profile.json",
+      "sha256": "c0964b146055c8f53a7a0c81db8ac034e9b5b9ae0a0e08397fc49d7d7314b583",
+      "receipt": "benchmarks/head-to-head/results/own-projects-contextual-2026-10-05/http/pagedigest-generator-test-lookup-first-profile.receipt.json"
+    },
+    {
+      "snapshotId": "75707322809f36bee39edf66ce1011143b2ac62bf0cac158b7f94f8279eab35d",
+      "path": "v0/snapshots/75707322809f36bee39edf66ce1011143b2ac62bf0cac158b7f94f8279eab35d/repos/github.com/maxwellsantoro/RamenOS/profile.json",
+      "sha256": "649f53466f69a2b24eddb7d0064ec6a3a93193bd2aae4e40d462287e13ab8496",
+      "receipt": "benchmarks/head-to-head/results/own-projects-contextual-2026-10-05/http/RamenOS-host-build-lookup-first-profile.receipt.json"
+    },
+    {
+      "snapshotId": "bb0d60a0643e59a6440de4bfc129ab8e3291364cc2251e2d33cccd26f27b1fa2",
+      "path": "v0/snapshots/bb0d60a0643e59a6440de4bfc129ab8e3291364cc2251e2d33cccd26f27b1fa2/files.json",
+      "sha256": "3416f8e0064cc59ff11326fd7c386fee798ab5012236822121cb2e8b29cb65cd",
+      "receipt": "Locally retained deployed snapshot manifest; original restored tree under /tmp/dotrepo-review-20261004-restored/staging. Hash anchors all manifest leaves."
+    }
+  ],
+  "limitations": [
+    "Reconstruction binds the original successful deployment source revision, immutable index digest, timestamp, and payload manifest. Retained-body hashes independently corroborate only declared bodies.",
+    "No historical study result or published history entry is rewritten.",
+    "Runtime binary SHA is produced after building the pinned exporter source and retained in the recovery receipt."
+  ],
+  "entryExporters": {
+    "bb0d60a0643e59a6440de4bfc129ab8e3291364cc2251e2d33cccd26f27b1fa2": {
+      "commit": "cc1b4562a8943b4677122d457ad6efe7d76f9abb",
+      "runId": 37164301583,
+      "runUrl": "https://github.com/maxwellsantoro/dotrepo/actions/runs/37164301583",
+      "version": "2.0.0-alpha.0"
+    },
+    "a0d35df2a73a6face527ccf5a65399defcbae8785ebfd3f3b48917db1e130479": {
+      "commit": "499994bd5f2bbc12dbbad44d62f035a99aff880d",
+      "runId": 37249371333,
+      "runUrl": "https://github.com/maxwellsantoro/dotrepo/actions/runs/37249371333",
+      "version": "2.0.0-alpha.0"
+    },
+    "ebb5ce5750c656794c0d8c2b93837ef4cd085cb7ca74c31e6bf5eba80a49c62e": {
+      "commit": "9fee61b7bf27abccecb04cded9128e5ee11fdcce",
+      "runId": 37251029330,
+      "runUrl": "https://github.com/maxwellsantoro/dotrepo/actions/runs/37251029330",
+      "version": "2.0.0-alpha.0"
+    },
+    "ed6e31ffa157cd6c96e8ff907a97ce1f707e059784e417b2bbf87ffaba931488": {
+      "commit": "d14d538ac19fff2b6c949575ecb8e6353b783e67",
+      "runId": 37256554944,
+      "runUrl": "https://github.com/maxwellsantoro/dotrepo/actions/runs/37256554944",
+      "version": "2.0.0-alpha.0"
+    },
+    "8384e75929143cbe8a6d8fb27e375d5863eb9c591105765eba1402783336b4cd": {
+      "commit": "fa830e8ebb1b9bb825e08755f7da2c6c34381dbf",
+      "runId": 37262379570,
+      "runUrl": "https://github.com/maxwellsantoro/dotrepo/actions/runs/37262379570",
+      "version": "2.0.0-alpha.0"
+    },
+    "b45a0060153d48067ebf5634402fadf453442e375a7cbb05d55a26e1b310250a": {
+      "commit": "3c3ccd725a20cdbaf1f6502147dfda2e528ec74a",
+      "runId": 37271333931,
+      "runUrl": "https://github.com/maxwellsantoro/dotrepo/actions/runs/37271333931",
+      "version": "2.0.0-alpha.0"
+    },
+    "499901c89901a9ebacac3ea575bb33a6dabc3b724305b5cf667e6a8ac99ef4ec": {
+      "commit": "1d55012849b7d6c401af095457912e029f5e5fc1",
+      "runId": 37398536360,
+      "runUrl": "https://github.com/maxwellsantoro/dotrepo/actions/runs/37398536360",
+      "version": "2.0.0-alpha.0"
+    },
+    "75707322809f36bee39edf66ce1011143b2ac62bf0cac158b7f94f8279eab35d": {
+      "commit": "d54d8a5292dcab9e2cf1eba0cbde71cdb6536ed4",
+      "runId": 37399544615,
+      "runUrl": "https://github.com/maxwellsantoro/dotrepo/actions/runs/37399544615",
+      "version": "2.0.0-alpha.0"
+    },
+    "d178d9ab643022b5484bc439f61d8a9b190379bc1af1644ed3face66ef9512a6": {
+      "commit": "d54d8a5292dcab9e2cf1eba0cbde71cdb6536ed4",
+      "runId": 37399805515,
+      "runUrl": "https://github.com/maxwellsantoro/dotrepo/actions/runs/37399805515",
+      "version": "2.0.0-alpha.0"
+    },
+    "dbcd4783904e34b5f0a5b38a90fddf3093dd12e73ac3d9c13cc153ecd473e53e": {
+      "commit": "bd724ad1436b6dfa56494f7af033b3ab53d09b60",
+      "runId": 37404281118,
+      "runUrl": "https://github.com/maxwellsantoro/dotrepo/actions/runs/37404281118",
+      "version": "2.0.0-alpha.0"
+    },
+    "e85d22cb06ceefa82ba7a328040dc9528a708da6fc391ddabe0c0b38e9409550": {
+      "commit": "bd724ad1436b6dfa56494f7af033b3ab53d09b60",
+      "runId": 37404646898,
+      "runUrl": "https://github.com/maxwellsantoro/dotrepo/actions/runs/37404646898",
+      "version": "2.0.0-alpha.0"
+    },
+    "a4e07e9651b9a1e0d6ce291b6648894f8adcbe97e5a4ddc79b1f5b01400c249b": {
+      "commit": "dde2238e951c3912de1bc7cdba05686bef90818a",
+      "runId": 37406801959,
+      "runUrl": "https://github.com/maxwellsantoro/dotrepo/actions/runs/37406801959",
+      "version": "2.0.0-alpha.0"
+    }
+  }
+}

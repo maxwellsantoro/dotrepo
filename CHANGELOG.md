@@ -15,6 +15,26 @@ generated growth, coverage, promotion, and telemetry artifacts own live values.
 
 ### Documentation maintenance
 
+- Check the original refresh base before opening an automation PR, retain a
+  fail-closed drift receipt, and keep late exact-base landing guards. Validate
+  dispatch model-call budgets before sidecars or materialization; an explicit
+  zero disables every adjudication tier without weakening verification. Retain
+  the dated cadence diagnosis separately from a future operating refresh.
+- Require a matching production snapshot archive binding and validate every new
+  historical public payload before archive writes. Use bounded bulk uploads,
+  commit history last, exclude private runtime inputs, and retain publication
+  inputs. Prepare a frozen twelve-snapshot recovery with original deployment
+  exporters and retained byte anchors; provisioning and live retrieval require
+  separate operational evidence.
+- Preserve complete explicitly declared documentation instructions as contextual
+  import candidates and withhold setup-dependent fenced commands as scalar
+  defaults. Pin repository/component positives and missing or contradictory
+  context abstentions through the actual importer; require separate inspected
+  assessments for consumer acceptance.
+- Reinspect the pinned llama.cpp and etcd command sources, remove llama.cpp's
+  unsupported pytest default, and retain source-backed contexts without resetting
+  unrelated record ages or promoting status. Dated audit receipts distinguish
+  inspection queues, freshness, source correctness and consumer withholding.
 - Cancel superseded PR validation runs and start independent Rust, Python,
   operator and release checks after tested path classification. Keep the required
   aggregate fail-closed, make owned prose validation minimal, and retain broad
