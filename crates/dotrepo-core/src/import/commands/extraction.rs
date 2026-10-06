@@ -696,7 +696,9 @@ pub(crate) fn infer_rakefile_commands(file: &ImportedFile) -> Option<ImportedCom
             .iter()
             .any(|marker| file.contents.contains(marker))
         || file.contents.lines().any(|line| {
-            let line = line.split('#').next().unwrap_or("").trim();
+            // A # inside a Ruby string is not a comment delimiter. Scan the
+            // complete line conservatively so it cannot hide a later modifier.
+            let line = line.trim();
             // This deliberately withholds keywords even in strings/symbols.
             // Static recognition supports unconditional literal declarations;
             // statement modifiers and control-flow bodies need Ruby semantics.

@@ -137,6 +137,7 @@ fn namespaced_rake_tasks_never_become_root_commands() {
         "namespace(:component) { task :test }\n",
         "task :test if false\n",
         "task :test unless true\n",
+        "task :test => '#not-a-comment' if false\n",
         "if false\ntask :test\nend\n",
     ] {
         let f = Fixture::new();
