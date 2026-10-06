@@ -72,3 +72,27 @@ private input refusal. A locally controlled checker exists for this purpose;
 its controls are not live retrieval proof. Regenerate the bounded deterministic
 refresh only after restore and publication operate. Historical packets remain
 unchanged.
+
+## Subsequent source integration
+
+The audit remainder and verified 1.0.3 installation owners landed independently
+in [PR #142](https://github.com/maxwellsantoro/dotrepo/pull/142), merged as
+`b4dd5580416804f3c3ca46d56ff2eafd8fbac4dc`. Its source tree exactly matches
+tested head `054ebff4de544e0006cd1c483ad7ad8f1e31357a`; final-head
+[CI 37420064679](https://github.com/maxwellsantoro/dotrepo/actions/runs/37420064679)
+passed all selected jobs and `ci-gate`. The merged-tree
+[CI 37420688360](https://github.com/maxwellsantoro/dotrepo/actions/runs/37420688360)
+is retained separately. The [1.0.3 delivery packet](../../../index/telemetry/stable-1.0.3-delivery-20261006/README.md)
+binds its immutable assets, six crates, registry recovery and actual installation
+controls. Source integration does not establish hosted publication.
+
+The coordinator observed `CLOUDFLARE_PUBLIC_DEPLOY_ENABLED=true`, set it to
+`false`, and verified that setting before landing source. This reversible
+trigger change avoids repeated known-failing publication attempts while the
+account setup requirement remains. It does not bypass restoration or archive
+checks, change the archive bucket, reset history, or disable source validation.
+Restore deployment enablement after R2 account setup and before dispatching the
+recovery workflow, which requires that enablement. Then complete the recovery,
+publication and live checks listed above. Automatic source-CI completion while
+enablement is false must leave publication jobs skipped; a skipped workflow is
+not successful publication evidence.
