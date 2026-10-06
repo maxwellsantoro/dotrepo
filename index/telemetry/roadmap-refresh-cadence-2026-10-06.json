@@ -1,0 +1,420 @@
+{
+  "schema": "dotrepo/roadmap-refresh-cadence/v0.1",
+  "observedAt": "2026-10-06T04:25:09.218131+00:00",
+  "inspectedMain": "dde2238e951c3912de1bc7cdba05686bef90818a",
+  "scope": "Bounded operational diagnosis; no batch execution, PR mutation, model calls, publication, or whole-corpus correctness claim.",
+  "enablement": [
+    {
+      "name": "CLOUDFLARE_PUBLIC_DEPLOY_ENABLED",
+      "updatedAt": "2026-03-18T16:25:05Z",
+      "value": "true"
+    },
+    {
+      "name": "INDEX_AUTOMATION_ENABLED",
+      "updatedAt": "2026-09-16T21:12:38Z",
+      "value": "true"
+    }
+  ],
+  "latestScheduledRun": {
+    "id": 37270836657,
+    "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/37270836657",
+    "createdAt": "2026-10-05T06:07:26Z",
+    "checkedBase": "fa830e8ebb1b9bb825e08755f7da2c6c34381dbf",
+    "conclusion": "failure",
+    "batch": {
+      "generatedAt": "2026-10-05T06:14:26Z",
+      "batchId": "refresh-batch-01",
+      "batchSize": 50,
+      "refreshLimit": 50,
+      "crawled": 50,
+      "written": 50,
+      "promoted": 20,
+      "failed": 0,
+      "adjudicationCallBudget": 0,
+      "adjudicationCalls": 0,
+      "tokensUsed": 0
+    },
+    "plan": {
+      "stateSource": "index_records",
+      "trackedRepositories": 613,
+      "candidateCount": 50
+    },
+    "strictTelemetryIndexAndPublicGates": "passed before PR creation",
+    "mainChangedDuringBatch": {
+      "mergedPR": 134,
+      "mergedAt": "2026-10-05T06:08:21Z",
+      "newMain": "3c3ccd725a20cdbaf1f6502147dfda2e528ec74a"
+    },
+    "failure": {
+      "stage": "initial exact-base landing validation after PR creation, before CI dispatch",
+      "observedAt": "2026-10-05T06:15:18Z",
+      "error": "PR identity, head, or base differs from checked automation input"
+    }
+  },
+  "pr135": {
+    "url": "https://github.com/maxwellsantoro/dotrepo/pull/135",
+    "state": "open",
+    "head": "e960c0f979f449c2b1a6001ca734635b8df01b53",
+    "apiReportedBase": "3c3ccd725a20cdbaf1f6502147dfda2e528ec74a",
+    "headParent": "fa830e8ebb1b9bb825e08755f7da2c6c34381dbf",
+    "exactHeadCIChecks": 0,
+    "disposition": "Do not substitute live base, reuse old diff, or land; regenerate on integrated current main under unchanged gates."
+  },
+  "recentRunSample": {
+    "count": 30,
+    "conclusions": {
+      "failure": 17,
+      "success": 3,
+      "skipped": 10
+    },
+    "latestTenScheduledFailures": 10,
+    "failureStreakDays": "2026-09-19 through 2026-10-05",
+    "runs": [
+      {
+        "conclusion": "failure",
+        "createdAt": "2026-10-05T06:07:26Z",
+        "databaseId": 37270836657,
+        "event": "schedule",
+        "headSha": "fa830e8ebb1b9bb825e08755f7da2c6c34381dbf",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/37270836657"
+      },
+      {
+        "conclusion": "failure",
+        "createdAt": "2026-10-04T07:48:09Z",
+        "databaseId": 37186895617,
+        "event": "schedule",
+        "headSha": "968e10878aee3301ee3cbe337b1bb69fbc1250eb",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/37186895617"
+      },
+      {
+        "conclusion": "failure",
+        "createdAt": "2026-10-03T06:05:04Z",
+        "databaseId": 37101884807,
+        "event": "schedule",
+        "headSha": "698dc60ee36a218a250b49d6a5a6e3f77e38533d",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/37101884807"
+      },
+      {
+        "conclusion": "failure",
+        "createdAt": "2026-10-02T06:02:28Z",
+        "databaseId": 36971655427,
+        "event": "schedule",
+        "headSha": "698dc60ee36a218a250b49d6a5a6e3f77e38533d",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/36971655427"
+      },
+      {
+        "conclusion": "failure",
+        "createdAt": "2026-10-01T06:02:23Z",
+        "databaseId": 36822701487,
+        "event": "schedule",
+        "headSha": "698dc60ee36a218a250b49d6a5a6e3f77e38533d",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/36822701487"
+      },
+      {
+        "conclusion": "failure",
+        "createdAt": "2026-09-30T06:02:29Z",
+        "databaseId": 36676226960,
+        "event": "schedule",
+        "headSha": "698dc60ee36a218a250b49d6a5a6e3f77e38533d",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/36676226960"
+      },
+      {
+        "conclusion": "failure",
+        "createdAt": "2026-09-29T06:02:16Z",
+        "databaseId": 36529033838,
+        "event": "schedule",
+        "headSha": "698dc60ee36a218a250b49d6a5a6e3f77e38533d",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/36529033838"
+      },
+      {
+        "conclusion": "failure",
+        "createdAt": "2026-09-28T06:03:12Z",
+        "databaseId": 36384578370,
+        "event": "schedule",
+        "headSha": "698dc60ee36a218a250b49d6a5a6e3f77e38533d",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/36384578370"
+      },
+      {
+        "conclusion": "failure",
+        "createdAt": "2026-09-27T06:02:26Z",
+        "databaseId": 36298926423,
+        "event": "schedule",
+        "headSha": "698dc60ee36a218a250b49d6a5a6e3f77e38533d",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/36298926423"
+      },
+      {
+        "conclusion": "failure",
+        "createdAt": "2026-09-26T06:02:12Z",
+        "databaseId": 36222542523,
+        "event": "schedule",
+        "headSha": "698dc60ee36a218a250b49d6a5a6e3f77e38533d",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/36222542523"
+      },
+      {
+        "conclusion": "failure",
+        "createdAt": "2026-09-25T06:02:22Z",
+        "databaseId": 36101089458,
+        "event": "schedule",
+        "headSha": "698dc60ee36a218a250b49d6a5a6e3f77e38533d",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/36101089458"
+      },
+      {
+        "conclusion": "failure",
+        "createdAt": "2026-09-24T06:02:29Z",
+        "databaseId": 35962615588,
+        "event": "schedule",
+        "headSha": "698dc60ee36a218a250b49d6a5a6e3f77e38533d",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/35962615588"
+      },
+      {
+        "conclusion": "failure",
+        "createdAt": "2026-09-23T06:02:15Z",
+        "databaseId": 35824923114,
+        "event": "schedule",
+        "headSha": "698dc60ee36a218a250b49d6a5a6e3f77e38533d",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/35824923114"
+      },
+      {
+        "conclusion": "failure",
+        "createdAt": "2026-09-22T06:02:26Z",
+        "databaseId": 35693088033,
+        "event": "schedule",
+        "headSha": "698dc60ee36a218a250b49d6a5a6e3f77e38533d",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/35693088033"
+      },
+      {
+        "conclusion": "failure",
+        "createdAt": "2026-09-21T06:03:14Z",
+        "databaseId": 35566812378,
+        "event": "schedule",
+        "headSha": "698dc60ee36a218a250b49d6a5a6e3f77e38533d",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/35566812378"
+      },
+      {
+        "conclusion": "failure",
+        "createdAt": "2026-09-20T06:02:04Z",
+        "databaseId": 35493172434,
+        "event": "schedule",
+        "headSha": "39af19a29b5dc767ef5343edecd376604e2e4d38",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/35493172434"
+      },
+      {
+        "conclusion": "failure",
+        "createdAt": "2026-09-19T06:02:18Z",
+        "databaseId": 35425529881,
+        "event": "schedule",
+        "headSha": "b78e4a40184b75a9dde658ac48a4fd19d6d690b1",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/35425529881"
+      },
+      {
+        "conclusion": "success",
+        "createdAt": "2026-09-18T06:02:04Z",
+        "databaseId": 35313170240,
+        "event": "schedule",
+        "headSha": "3b9c6fe79bdfec4cc4ba38d7c60648a13b9afe1b",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/35313170240"
+      },
+      {
+        "conclusion": "success",
+        "createdAt": "2026-09-17T06:02:28Z",
+        "databaseId": 35188126648,
+        "event": "schedule",
+        "headSha": "9cd37b39f8183001898032cf57c944d8358f513f",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/35188126648"
+      },
+      {
+        "conclusion": "success",
+        "createdAt": "2026-09-16T21:27:00Z",
+        "databaseId": 35152443833,
+        "event": "workflow_dispatch",
+        "headSha": "101856f9a5971a636d82ea06a01c014287bd2323",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/35152443833"
+      },
+      {
+        "conclusion": "skipped",
+        "createdAt": "2026-09-14T06:32:36Z",
+        "databaseId": 34813906898,
+        "event": "schedule",
+        "headSha": "1508f70c73787b7b5fce618ae90d3d5126a72b0f",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/34813906898"
+      },
+      {
+        "conclusion": "skipped",
+        "createdAt": "2026-09-07T06:32:21Z",
+        "databaseId": 34091288289,
+        "event": "schedule",
+        "headSha": "1508f70c73787b7b5fce618ae90d3d5126a72b0f",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/34091288289"
+      },
+      {
+        "conclusion": "skipped",
+        "createdAt": "2026-08-31T06:31:45Z",
+        "databaseId": 33364561694,
+        "event": "schedule",
+        "headSha": "63cf0406c40aa01f382ba51121aea698c3f002b5",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/33364561694"
+      },
+      {
+        "conclusion": "skipped",
+        "createdAt": "2026-08-24T06:18:06Z",
+        "databaseId": 32696738979,
+        "event": "schedule",
+        "headSha": "63cf0406c40aa01f382ba51121aea698c3f002b5",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/32696738979"
+      },
+      {
+        "conclusion": "skipped",
+        "createdAt": "2026-08-17T06:15:46Z",
+        "databaseId": 32000920250,
+        "event": "schedule",
+        "headSha": "63cf0406c40aa01f382ba51121aea698c3f002b5",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/32000920250"
+      },
+      {
+        "conclusion": "skipped",
+        "createdAt": "2026-08-10T06:34:58Z",
+        "databaseId": 31362519326,
+        "event": "schedule",
+        "headSha": "63cf0406c40aa01f382ba51121aea698c3f002b5",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/31362519326"
+      },
+      {
+        "conclusion": "skipped",
+        "createdAt": "2026-08-03T07:15:56Z",
+        "databaseId": 30793012913,
+        "event": "schedule",
+        "headSha": "63cf0406c40aa01f382ba51121aea698c3f002b5",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/30793012913"
+      },
+      {
+        "conclusion": "skipped",
+        "createdAt": "2026-07-27T07:16:32Z",
+        "databaseId": 30245555299,
+        "event": "schedule",
+        "headSha": "63cf0406c40aa01f382ba51121aea698c3f002b5",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/30245555299"
+      },
+      {
+        "conclusion": "skipped",
+        "createdAt": "2026-07-20T07:12:52Z",
+        "databaseId": 29723902094,
+        "event": "schedule",
+        "headSha": "63cf0406c40aa01f382ba51121aea698c3f002b5",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/29723902094"
+      },
+      {
+        "conclusion": "skipped",
+        "createdAt": "2026-07-13T07:15:54Z",
+        "databaseId": 29231509413,
+        "event": "schedule",
+        "headSha": "63cf0406c40aa01f382ba51121aea698c3f002b5",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/29231509413"
+      }
+    ],
+    "limits": "Most recent 30 returned runs include historical skipped runs; not a homogeneous 30-day population. Failure does not imply zero writeback."
+  },
+  "distinctObservedFailureStages": [
+    {
+      "run": 37186895617,
+      "date": "2026-10-04",
+      "stage": "deployment after successful writeback",
+      "ciRun": 37187202275,
+      "testedAndPublishedCommit": "b551f27eafc1ca1a3e06ef07181bd75d6da5c248",
+      "deploymentRun": 37187312664,
+      "error": "HTTP 403 restoring public snapshot/history",
+      "limits": "Historical deployment failure; current archive repair and publication checked separately."
+    },
+    {
+      "run": 37101884807,
+      "date": "2026-10-03",
+      "stage": "pre-PR public factual accuracy gate",
+      "assertionPopulation": 123,
+      "repositories": 32
+    },
+    {
+      "run": 36971655427,
+      "date": "2026-10-02",
+      "stage": "pre-PR public factual accuracy gate",
+      "assertionPopulation": 123,
+      "repositories": 32
+    }
+  ],
+  "currentCorpusAgeSignal": {
+    "recordCount": 616,
+    "recordDates": {
+      "2026-09-16": 386,
+      "2026-09-17": 48,
+      "2026-09-18": 47,
+      "2026-09-19": 47,
+      "2026-09-21": 34,
+      "2026-10-03": 1,
+      "2026-10-04": 49,
+      "2026-10-06": 4
+    },
+    "recordsAtLeastFourteenDaysOld": 562,
+    "oldestAgeDaysApproximate": 19.498,
+    "supplementaryQualityCandidates": 554,
+    "limits": "Age-based refresh eligibility only. No current upstream HEADs fetched for this corpus-age measurement. All-fresh does not prove successful operating rotation."
+  },
+  "plannerContract": {
+    "stateSource": "index_records",
+    "membershipAndFactualAgeOwner": "record generated_at",
+    "inspectionOrder": "oldest factual timestamp then identity, truncated to explicit limit before HEAD checks",
+    "unchangedHeadRefreshDays": 14,
+    "publicAgeWindowDays": 30,
+    "nominalCapacityPerScheduledBatch": 50,
+    "nominal616RecordRotationDays": 13,
+    "limits": "Configured capacity is not observed successful daily rotation."
+  },
+  "implementation": {
+    "files": [
+      ".github/workflows/index-autonomous-refresh.yml",
+      "scripts/check_autonomous_refresh_base.py",
+      "scripts/tests/test_autonomous_refresh_base.py"
+    ],
+    "basePreflight": "Read checked default ref from GitHub, require exact github.sha before PR creation, retain failure artifact, no fallback/live SHA substitution. Existing late guards preserved.",
+    "zeroBudget": "Validate actual event input before materialization/sidecars; explicit 0 skips all sidecars and passes 0 to batch; existing crawler helper removes all adjudication endpoints at remaining budget 0.",
+    "raceLimit": "Preflight narrows the stale-PR window; it does not atomically prevent a merge after preflight. Late exact-base checks remain required."
+  },
+  "checks": {
+    "focused": "uv run pytest scripts/tests/test_autonomous_refresh_base.py -q: 17 passed",
+    "ruffCheck": "passed",
+    "ruffFormat": "passed",
+    "liveReadOnlyBaseCheck": {
+      "schema": "dotrepo/autonomous-refresh-base/v0.1",
+      "repository": "maxwellsantoro/dotrepo",
+      "defaultBranch": "main",
+      "expectedBase": "dde2238e951c3912de1bc7cdba05686bef90818a",
+      "currentBase": "dde2238e951c3912de1bc7cdba05686bef90818a",
+      "passed": true,
+      "disposition": "base-matches",
+      "checkedAt": "2026-10-06T04:25:09.218131+00:00"
+    },
+    "integratedGates": "Coordinator required; no shared Cargo build performed."
+  },
+  "preparedRegeneration": {
+    "status": "prepared, not executed",
+    "prerequisites": [
+      "Integrated tested main containing this preflight and zero-budget override",
+      "Public archive restore/publish path operating",
+      "Current default base checked and unchanged during normal late validation"
+    ],
+    "command": "gh workflow run index-autonomous-refresh.yml --ref main -f batch_id=refresh-batch-01 -f batch_size=5 -f limit=5 -f adjudication_call_budget=0",
+    "maxInspectedRepositories": 5,
+    "maxCrawledRepositories": 5,
+    "modelCallBudget": 0,
+    "discoveryEnabled": false,
+    "acceptance": [
+      "Meaningful source-inspected changes under existing fresh verification requirements",
+      "Strict telemetry, index, public-surface and exact-head CI/landing gates pass without lowering thresholds",
+      "New snapshot publication and public identity smoke pass",
+      "Retain all failed/partial artifacts; no automatic retries or old PR rebase"
+    ],
+    "limits": "One successful bounded run would prove one operating path, not full-corpus rotation, independent correctness, or consumer usefulness."
+  },
+  "retainedEvidenceHashes": {
+    "telemetry.json": "e130594507f7a97900c8d2cf94c70e75761d4c54ed8b0f3d45b475a74459fab7",
+    "refresh-plan.json": "f0437696bc87dc8c1b39caa831b4989f3c105949873e55ea26d69080e493bce7",
+    "autonomous-telemetry-gate.json": "9757f22ab59d0548b9d3d204dc0ea7125cca5d9414447ab62d8c1e0fc8c68ed8"
+  }
+}

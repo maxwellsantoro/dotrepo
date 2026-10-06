@@ -17,6 +17,10 @@ on:
         description: Maximum tracked repositories to inspect while planning
         required: false
         default: "50"
+      adjudication_call_budget:
+        description: Optional model-call budget override; 0 makes the batch deterministic
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -42,6 +46,16 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Install uv
         uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+      - name: Validate refresh adjudication budget
+        id: refresh_budget
+        env:
+          DEFAULT_ADJUDICATION_CALL_BUDGET: ${{ vars.INDEX_MAX_BATCH_ADJUDICATION_CALLS || vars.INDEX_MAX_ADJUDICATION_CALLS || '4' }}
+          PROVIDERS_ENABLED: ${{ env.OPENROUTER_API_KEY != '' }}
+        run: |
+          uv run --no-project python scripts/check_autonomous_refresh_base.py budget \
+            --event-path "$GITHUB_EVENT_PATH" --event-name "$GITHUB_EVENT_NAME" \
+            --default-budget "$DEFAULT_ADJUDICATION_CALL_BUDGET" \
+            --providers-enabled "$PROVIDERS_ENABLED" --github-output "$GITHUB_OUTPUT"
       - name: Create and sync Python environment
         run: |
           uv venv
@@ -61,7 +75,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-cargo-
       - name: Start adjudication sidecars
-        if: env.OPENROUTER_API_KEY != ''
+        if: env.OPENROUTER_API_KEY != '' && steps.refresh_budget.outputs.adjudication_enabled == 'true'
         shell: bash
         env:
           DOTREPO_ADJUDICATION_MODEL_CONFIG: ${{ vars.DOTREPO_ADJUDICATION_MODEL }}
@@ -128,13 +142,15 @@ jobs:
       - name: Run autonomous refresh batch
         id: autonomous_batch
         continue-on-error: true
+        env:
+          ADJUDICATION_CALL_BUDGET: ${{ steps.refresh_budget.outputs.adjudication_call_budget }}
         run: |
           uv run python scripts/run_autonomous_index_batch.py \
             --batch-id "${{ github.event.inputs.batch_id || 'refresh-batch-01' }}" \
             --batch-size "${{ github.event.inputs.batch_size || '50' }}" \
             --limit "${{ github.event.inputs.limit || '50' }}" \
             --disable-discovery \
-            --adjudication-call-budget "${INDEX_MAX_BATCH_ADJUDICATION_CALLS:-0}" \
+            --adjudication-call-budget "$ADJUDICATION_CALL_BUDGET" \
             --discovery-limit "${{ vars.INDEX_DISCOVERY_LIMIT || github.event.inputs.batch_size || '50' }}" \
             --output-dir index-autonomous-batch
       - name: Evaluate autonomous telemetry gate
@@ -160,6 +176,15 @@ jobs:
         id: public_surface_gate
         if: steps.telemetry_gate.outcome == 'success' && steps.validate_index.outcome == 'success'
         run: uv run python scripts/check_release_gate.py --output-root index-autonomous-batch/public-gate --skip-release-bundle --skip-vsix
+      - name: Verify checked base before creating a refresh PR
+        id: refresh_base
+        if: steps.refresh_budget.outcome == 'success' && steps.telemetry_gate.outcome == 'success' && steps.validate_index.outcome == 'success' && steps.public_surface_gate.outcome == 'success'
+        env:
+          EXPECTED_BASE: ${{ github.sha }}
+        run: |
+          uv run python scripts/check_autonomous_refresh_base.py base \
+            --repository "$GITHUB_REPOSITORY" --expected-base "$EXPECTED_BASE" \
+            --output-json index-autonomous-batch/base-preflight.json
       - name: Upload batch telemetry
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
@@ -172,7 +197,7 @@ jobs:
           retention-days: 14
       - name: Prepare pull request metadata
         id: pr_meta
-        if: always() && steps.telemetry_gate.outcome == 'success' && steps.validate_index.outcome == 'success' && steps.public_surface_gate.outcome == 'success'
+        if: always() && steps.refresh_base.outcome == 'success' && steps.telemetry_gate.outcome == 'success' && steps.validate_index.outcome == 'success' && steps.public_surface_gate.outcome == 'success'
         shell: bash
         run: |
           if [ ! -f index-autonomous-batch/telemetry.json ]; then
@@ -223,6 +248,7 @@ jobs:
         id: autonomous_pr
         if: >-
           always()
+          && steps.refresh_base.outcome == 'success'
           && steps.telemetry_gate.outcome == 'success'
           && steps.validate_index.outcome == 'success'
           && steps.public_surface_gate.outcome == 'success'

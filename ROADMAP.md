@@ -67,6 +67,10 @@ The [October 6 source checkpoint](index/telemetry/roadmap-factual-checkpoint-202
 and [risk audit](index/telemetry/roadmap-risk-audit-2026-10-06.md) supply bounded
 semantic dispositions and repairs. Whole-record verification and broader F2
 quality evidence remain open; recent record age is not semantic correctness.
+The [cadence checkpoint](index/telemetry/roadmap-refresh-cadence-2026-10-06.md)
+diagnoses stale-base refusal and prepares a bounded deterministic regeneration.
+An enabled schedule and nominal capacity do not establish successful rotation;
+retain actual refresh, landing and publication evidence separately.
 E1 supports explicitly declared documentation contexts as candidates; general
 nested-manifest extraction and assessed acceptance remain separate work.
 An external participant is not a prerequisite for the current checkpoint. C3 is

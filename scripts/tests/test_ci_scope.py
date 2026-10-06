@@ -27,6 +27,7 @@ def selected(paths):
         (["README.md"], {"minimal-gate"}),
         (["docs/agent-execution.md", "docs/archive/old-review.md"], {"minimal-gate"}),
         (["scripts/audit_index_sample.py"], {"python-gate"}),
+        (["scripts/check_autonomous_refresh_base.py"], {"python-gate"}),
         (["scripts/tests/test_external_consumer_lookup.py"], {"python-gate"}),
         (["benchmarks/head-to-head/bench/own_projects.py"], {"python-gate"}),
         (["benchmarks/head-to-head/results/packet/results.json"], {"python-gate"}),

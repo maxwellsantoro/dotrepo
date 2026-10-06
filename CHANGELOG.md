@@ -15,6 +15,11 @@ generated growth, coverage, promotion, and telemetry artifacts own live values.
 
 ### Documentation maintenance
 
+- Check the original refresh base before opening an automation PR, retain a
+  fail-closed drift receipt, and keep late exact-base landing guards. Validate
+  dispatch model-call budgets before sidecars or materialization; an explicit
+  zero disables every adjudication tier without weakening verification. Retain
+  the dated cadence diagnosis separately from a future operating refresh.
 - Require a matching production snapshot archive binding and validate every new
   historical public payload before archive writes. Use bounded bulk uploads,
   commit history last, exclude private runtime inputs, and retain publication

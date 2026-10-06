@@ -227,9 +227,17 @@ also default disabled unless explicitly opted in. The built-in `GITHUB_TOKEN`
 needs contents, pull-request, and actions write permissions; repository Actions
 must be allowed to create PRs.
 
+Dispatches can set `adjudication_call_budget=0` for a deterministic batch: the
+workflow validates the input before setup, skips model sidecars, and disables
+all crawler adjudication endpoints. An empty input retains the configured
+scheduled budget. This does not lower verification or publication requirements.
+
 The workflow retains telemetry and valid partial writes even when repositories
 fail. Strict telemetry, index validation, and the public-surface gate must pass
-before opening a non-draft automation PR. There is no routine human merge tier.
+before opening a non-draft automation PR. A checked default-branch preflight
+also requires the original checkout SHA to remain current; a mismatch or API
+failure retains a receipt and refuses PR creation. This narrows the race window;
+the late exact-base guards still apply. There is no routine human merge tier.
 [`land_autonomous_index.py`](../scripts/land_autonomous_index.py):
 
 1. Requires a same-repository, index-only PR matching expected head and base.
