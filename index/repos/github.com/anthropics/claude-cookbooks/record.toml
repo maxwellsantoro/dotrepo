@@ -2,16 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "inferred"
 source = "https://github.com/anthropics/claude-cookbooks"
-generated_at = "2026-09-16T16:20:48.801277Z"
+generated_at = "2026-10-06T06:04:41.284797318Z"
 
 [record.trust]
 confidence = "medium"
 provenance = [
     "imported",
+    "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `CONTRIBUTING.md`, `managed_agents/roadtrip_planner/package.json`, `tox.ini`, and `pyproject.toml`. `security_contact` was extracted from CONTRIBUTING.md (no SECURITY.md found). Imported `repo.build` from `managed_agents/roadtrip_planner/package.json`. Imported `repo.test` from `tox.ini`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. 2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged."
+notes = "Bootstrapped from `README.md`, `CONTRIBUTING.md`, `pyproject.toml`, and `tox.ini`. `security_contact` was extracted from CONTRIBUTING.md (no SECURITY.md found). Inferred `repo.build` from `pyproject.toml`. Imported `repo.test` from `tox.ini`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Claude Cookbooks"
@@ -24,12 +25,12 @@ languages = [
     "Python",
     "TypeScript",
     "Shell",
-    "CSS",
     "Dockerfile",
     "Makefile",
     "JavaScript",
     "C",
 ]
+build = "python -m build"
 test = "tox"
 topics = []
 
@@ -45,23 +46,24 @@ security_contact = "security@anthropic.com"
 getting_started = "https://github.com/anthropics/anthropic-cookbook/blob/main/multimodal/getting_started_with_vision.ipynb"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:20:48.801277Z"
+checkedAt = "2026-10-06T06:04:41.284797318Z"
 confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:51: - [Getting started with images](https://github.com/anthropics/anthropic-cookbook/blob/main/multimodal/getting_started_with_vision.ipynb)"
+source = "README.md"
 state = "present"
 valueJson = '"https://github.com/anthropics/anthropic-cookbook/blob/main/multimodal/getting_started_with_vision.ipynb"'
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:20:48.801277Z"
+checkedAt = "2026-10-06T06:04:41.284797318Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs site detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:20:48.801277Z"
+checkedAt = "2026-10-06T06:04:41.284797318Z"
 confidence = "high"
 method = "unspecified"
 reason = "direct email or mailing list"
@@ -69,7 +71,7 @@ state = "present"
 valueJson = '"security@anthropic.com"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:20:48.801277Z"
+checkedAt = "2026-10-06T06:04:41.284797318Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -77,16 +79,16 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:20:48.801277Z"
-confidence = "low"
-method = "extracted"
-reason = "Component command lacks repository-default scope and working directory."
-source = "managed_agents/roadtrip_planner/package.json"
-state = "unresolved"
-valueJson = "null"
+checkedAt = "2026-10-06T06:04:41.284797318Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "pyproject.toml"
+state = "present"
+valueJson = '"python -m build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:20:48.801277Z"
+checkedAt = "2026-10-06T06:04:41.284797318Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -95,7 +97,7 @@ state = "present"
 valueJson = '"A collection of notebooks/recipes showcasing some fun and effective ways of using Claude."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:20:48.801277Z"
+checkedAt = "2026-10-06T06:04:41.284797318Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -103,16 +105,16 @@ state = "present"
 valueJson = '"https://github.com/anthropics/claude-cookbooks"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:20:48.801277Z"
+checkedAt = "2026-10-06T06:04:41.284797318Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Claude Cookbooks"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:20:48.801277Z"
+checkedAt = "2026-10-06T06:04:41.284797318Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -125,6 +127,6 @@ archived = false
 clone_url = "https://github.com/anthropics/claude-cookbooks.git"
 default_branch = "main"
 fork = false
-head_sha = "a97b9a2dc300635f0c26b5e05d0b54bbe0279ee5"
+head_sha = "d7265d6ae994ccd8429db0594b000073b2f9ad43"
 html_url = "https://github.com/anthropics/claude-cookbooks"
-stars = 52742
+stars = 53220
