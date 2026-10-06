@@ -40,6 +40,11 @@ REPEAT_REVISIONS = {
     **REVISIONS,
     "RamenOS": "4faea185ccd0b5bf310f2b949ce51b31fcbe0503",
 }
+CONTEXTUAL_REVISIONS = {
+    **REVISIONS,
+    "RamenOS": "8dc5ff88ddc404528c384aead9ea77f17bf63d40",
+    "sha256-benchmark-atlas": "71eda5d6480e0b9e39f914f3641d91f98402e943",
+}
 # Commands and scope were selected from pinned upstream sources, before coverage.
 CASES = [
     (
@@ -135,6 +140,27 @@ SDK_ROOT = Path("/tmp/dotrepo-readiness-tools/zig-sdk-compat")
 def study_inputs(study):
     if study == "initial":
         return REVISIONS, CASES
+    if study == "contextual-campaign":
+        # Same commands and completion oracles; replace old human scope labels
+        # with the actual directories owning each task's requested surface.
+        components = [
+            "services",
+            "services/store_service",
+            None,
+            None,
+            "src",
+            "src",
+            "implementations/python-consumer",
+            "implementations/rust-generator",
+        ]
+        cases = []
+        for original, component in zip(CASES, components, strict=True):
+            case = list(original)
+            case[4] = component
+            if case[1] == "host-proof":
+                case[6] = ["just codegen (included by wrapper)", "pinned Rust nightly and just"]
+            cases.append(tuple(case))
+        return CONTEXTUAL_REVISIONS, cases
     if study not in {"readiness-repeat", "atlas-sdk-followup", "atlas-sdk-scoped"}:
         raise ValueError("unknown fixed study")
     if study.startswith("atlas-sdk"):
@@ -186,6 +212,29 @@ def zig_shim(executable, selector_directory):
 
 def study_environment(study):
     return {"DOTREPO_STUDY_ZIG_SDK": str(SDK_ROOT)} if study.startswith("atlas-sdk") else {}
+
+
+def preparation_environment(study, repo):
+    if study == "contextual-campaign" and repo == "sha256-benchmark-atlas":
+        return {"DOTREPO_STUDY_ZIG_SDK": str(SDK_ROOT)}
+    return {}
+
+
+def uses_sdk(study):
+    return study.startswith("atlas-sdk") or study == "contextual-campaign"
+
+
+def runtime_versions():
+    return {
+        "python": sys.version,
+        "uv": subprocess.check_output(["uv", "--version"], text=True).strip(),
+    }
+
+
+def validate_runtime(workload):
+    if workload.get("study") == "contextual-campaign":
+        if workload.get("runtimeVersions") != runtime_versions():
+            raise ValueError("Python or uv runtime changed after freeze")
 
 
 def sdk_source():
@@ -316,6 +365,10 @@ def freeze(output, sources, meta_path, inventory_path, study="initial"):
         evidence = root / source
         if command not in evidence.read_text():
             raise ValueError(f"selected command absent from source: {repo}/{source}")
+        if study == "contextual-campaign":
+            for path in (cwd, component):
+                if path and not (root / path).is_dir():
+                    raise ValueError("requested task component or directory is absent")
         purpose = "build" if name.endswith("build") else "test"
         plan = {
             "command": command,
@@ -354,6 +407,14 @@ def freeze(output, sources, meta_path, inventory_path, study="initial"):
                 ],
             }
         )
+        if study == "contextual-campaign":
+            tasks[-1]["preparationEnvironment"] = preparation_environment(study, repo)
+            tasks[-1]["instructionRequest"] = {
+                "scope": plan["scope"],
+                "component": component,
+                "workingDirectory": cwd,
+            }
+            tasks[-1]["environmentId"] = "operator-macos-arm64-contextual-v4"
     write(
         output / "workload.json",
         {
@@ -368,7 +429,8 @@ def freeze(output, sources, meta_path, inventory_path, study="initial"):
             "executionSources": retain_execution_sources(output),
             "runnerSha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
             "toolVersions": versions,
-            "sdkSource": sdk_source() if study.startswith("atlas-sdk") else None,
+            "sdkSource": sdk_source() if uses_sdk(study) else None,
+            "runtimeVersions": runtime_versions() if study == "contextual-campaign" else None,
             "tasks": tasks,
             "selection": "All four substantive other public projects; exclude dotrepo self-test and throwaway canary. Two tasks each; no post-coverage substitutions.",
             "measurementBoundary": "Warm shared tool/download caches; fresh checkout and build outputs per arm. Explicit source/profile HTTP, checkout, setup, command execution and oracle are timed. Clone/bootstrap/source adjudication and package-manager network counts are outside transport totals. No modeled or net-cost claim.",
@@ -403,6 +465,18 @@ def freeze(output, sources, meta_path, inventory_path, study="initial"):
                 workload["priorSdkAttemptWorkloadSha256"] = hashlib.sha256(
                     failed.read_bytes()
                 ).hexdigest()
+        if study == "contextual-campaign":
+            workload["selectionBeforeCoverageInspection"] = False
+            workload["selection"] = (
+                "Known-coverage contextual follow-up on the same eight commands and oracles. "
+                "Merged RamenOS main and Atlas's merged full-cohort prerequisite documentation. "
+                "Physical component paths replace historical human labels. Atlas SDK selection "
+                "belongs to preparationEnvironment, never to the profile instruction. "
+                "RamenOS's aggregate host wrappers remain source fallback cases; no single "
+                "component context is asserted for their multi-component execution. "
+                "This source-inspected operator campaign is not held out or independent adoption."
+            )
+            workload["sdkSelectionScope"] = "zig-child-only"
         write(path, workload)
 
 
@@ -469,6 +543,17 @@ def validate_fixed_tasks(workload):
         raise ValueError("workload differs from fixed source tasks")
     for task, case in zip(workload["tasks"], cases, strict=True):
         repo, name, command, cwd, component, source, prerequisites, setup = case
+        if workload.get("study") == "contextual-campaign" and (
+            task.get("preparationEnvironment")
+            != preparation_environment("contextual-campaign", repo)
+            or task.get("instructionRequest")
+            != {
+                "scope": "component" if component else "repository",
+                "component": component,
+                "workingDirectory": cwd,
+            }
+        ):
+            raise ValueError("workload differs from frozen preparation or task request")
         plans = task["acceptableInstructions"]
         if (
             task["id"] != f"{repo}-{name}"
@@ -502,6 +587,7 @@ def run(output, sources):
     workload = json.loads(raw)
     validate_fixed_tasks(workload)
     validate_execution_sources(workload, output)
+    validate_runtime(workload)
     if workload["runnerSha256"] != hashlib.sha256(Path(__file__).read_bytes()).hexdigest():
         raise ValueError("runner changed after freeze; freeze a new packet")
     if (
@@ -509,7 +595,7 @@ def run(output, sources):
         and workload["toolVersions"] != tool_versions()
     ):
         raise ValueError("tool versions changed after freeze")
-    if workload.get("study", "").startswith("atlas-sdk") and workload["sdkSource"] != sdk_source():
+    if uses_sdk(workload.get("study", "")) and workload["sdkSource"] != sdk_source():
         raise ValueError("SDK inputs changed after freeze")
     (output / "attempts").mkdir()
     (output / "http").mkdir()
@@ -518,6 +604,7 @@ def run(output, sources):
         {
             "platform": platform.platform(),
             "python": sys.version,
+            "runtimeVersions": runtime_versions(),
             "runnerRevision": subprocess.check_output(
                 ["git", "rev-parse", "HEAD"], text=True
             ).strip(),
@@ -540,9 +627,9 @@ def run(output, sources):
             shim = shims / name
             shim.write_text(python_shim())
             shim.chmod(0o755)
-        if workload.get("study", "").startswith("atlas-sdk"):
+        if uses_sdk(workload.get("study", "")):
             selector_directory = shims
-            if workload["study"] == "atlas-sdk-scoped":
+            if workload["study"] in {"atlas-sdk-scoped", "contextual-campaign"}:
                 selector_directory = temporary / "zig-sdk-selector"
                 selector_directory.mkdir()
                 shim = shims / "zig"
@@ -642,14 +729,14 @@ def run(output, sources):
                 )
                 commands = []
                 env["DOTREPO_STUDY_PROJECT_PYTHON"] = str(root / ".venv/bin/python")
-                env.update(gold["environment"])
+                task_env = {**env, **gold["environment"], **task.get("preparationEnvironment", {})}
                 try:
                     plan = selected if selected is not None else gold
                     commands, passed = execute_instruction(
                         plan,
                         task["setupCommands"],
                         root,
-                        env,
+                        task_env,
                         task["timeoutSecondsPerCommand"],
                         task["oracle"],
                     )
@@ -727,7 +814,13 @@ def main():
     parser.add_argument("--inventory", type=Path)
     parser.add_argument(
         "--study",
-        choices=("initial", "readiness-repeat", "atlas-sdk-followup", "atlas-sdk-scoped"),
+        choices=(
+            "initial",
+            "readiness-repeat",
+            "atlas-sdk-followup",
+            "atlas-sdk-scoped",
+            "contextual-campaign",
+        ),
         default="initial",
     )
     args = parser.parse_args()
