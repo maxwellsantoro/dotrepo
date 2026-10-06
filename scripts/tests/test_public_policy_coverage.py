@@ -15,6 +15,7 @@ def test_presence_acceptance_and_correctness_remain_distinct(tmp_path):
         "identity": {"host": "github.com", "owner": "example", "repo": "good"},
         "record": {"generatedAt": checked},
         "purpose": "Example project",
+        "docs": {"root": "https://example.com/docs"},
         "execution": {"build": "make build", "test": "make test"},
         "fieldEvidence": {
             f"repo.{field}": {
@@ -27,17 +28,26 @@ def test_presence_acceptance_and_correctness_remain_distinct(tmp_path):
             for field in ["build", "test"]
         },
     }
+    payload["fieldEvidence"]["docs.root"] = {
+        "state": "present",
+        "method": "extracted",
+        "confidence": "high",
+        "source": "README.md",
+        "checkedAt": checked,
+    }
     for case in ["good", "inferred", "missing", "candidates", "medium", "stale"]:
         data = copy.deepcopy(payload)
         data["identity"]["repo"] = case
         if case == "inferred":
             data["fieldEvidence"]["repo.test"]["method"] = "inferred"
+            data["fieldEvidence"]["docs.root"]["method"] = "inferred"
         elif case == "missing":
             del data["fieldEvidence"]
         elif case == "candidates":
             data["execution"] = {"buildCandidates": ["make build"], "testCandidates": ["make test"]}
         elif case == "medium":
             data["fieldEvidence"]["repo.build"]["confidence"] = "medium"
+            data["fieldEvidence"]["docs.root"]["confidence"] = "medium"
         elif case == "stale":
             data["record"]["generatedAt"] = "2026-01-01T00:00:00Z"
         path = tmp_path / "v0/repos/github.com/example" / case / "profile.json"
@@ -53,6 +63,10 @@ def test_presence_acceptance_and_correctness_remain_distinct(tmp_path):
     both = report["tasks"]["build-and-test"]
     assert (report["profileCount"], both["presentCount"], both["acceptableCount"]) == (6, 5, 1)
     assert report["commandSlots"] == {"total": 12, "present": 10, "acceptable": 4}
+    docs = report["tasks"]["documentation"]
+    assert (docs["presentCount"], docs["acceptableCount"]) == (6, 2)
+    assert docs["fallbackReasonCounts"]["insufficient-docs-assessment:docs.root"] == 4
+    assert report["documentationPolicy"] == "explicit-high-confidence-documentation-declaration"
     assert both["independentlyCorrectCount"] is None
     assert both["completedTaskCount"] is None
     assert both["fallbackReasonCounts"]["inferred-command:repo.test"] == 1

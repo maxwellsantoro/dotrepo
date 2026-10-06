@@ -1,0 +1,301 @@
+{
+  "schema": "dotrepo/scheduled-refresh-boundary/v0.1",
+  "observedAt": "2026-10-06T06:14:56.755177+00:00",
+  "scheduledRun": {
+    "databaseId": 37421585019,
+    "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/37421585019",
+    "event": "schedule",
+    "createdAt": "2026-10-06T06:02:27Z",
+    "updatedAt": "2026-10-06T06:12:48Z",
+    "status": "completed",
+    "conclusion": "cancelled",
+    "headSha": "67cff47c7f860bdefa22d77d97f15be09de6dc08"
+  },
+  "terminalReason": {
+    "observed": "cancelled during exact-head landing step; log records operation canceled at 2026-10-06T06:12:43.9735320Z",
+    "coordinatorReported": "Requested cancellation before landing because refreshed Bitcore docs.root was unsupported but reference-policy accepted; not because public publication was disabled.",
+    "limits": "GitHub run API does not independently state the human cancellation rationale."
+  },
+  "budgetsAndActualBatch": {
+    "generatedAt": "2026-10-06T06:09:35Z",
+    "batchId": "refresh-batch-01",
+    "batchSize": 50,
+    "refreshLimit": 50,
+    "crawled": 50,
+    "written": 50,
+    "promoted": 20,
+    "failed": 0,
+    "adjudicationCallBudget": 0,
+    "adjudicationCalls": 0,
+    "tokensUsed": 0,
+    "discoveryQueued": 0,
+    "qualityReprocessQueued": 0
+  },
+  "sourceIdentityAtRunEnd": {
+    "checkedSourceParent": "67cff47c7f860bdefa22d77d97f15be09de6dc08",
+    "proposedHead": "d733e3654d98c8d3b52b504d95076afc57aa8dbf",
+    "proposedHeadParents": [
+      "67cff47c7f860bdefa22d77d97f15be09de6dc08"
+    ],
+    "terminalDefaultRef": "67cff47c7f860bdefa22d77d97f15be09de6dc08",
+    "prNumber": 145,
+    "prURL": "https://github.com/maxwellsantoro/dotrepo/pull/145",
+    "prState": "OPEN",
+    "prBranch": "automation/index-autonomous/refresh-batch-01-37421585019",
+    "mergedAt": null,
+    "mergeCommit": null,
+    "landingCompleted": false,
+    "proposedWrites": 50,
+    "defaultRefChanged": false
+  },
+  "subsequentPRClosure": {
+    "closedAt": "2026-10-06T06:17:13Z",
+    "headRefOid": "d733e3654d98c8d3b52b504d95076afc57aa8dbf",
+    "state": "CLOSED",
+    "url": "https://github.com/maxwellsantoro/dotrepo/pull/145"
+  },
+  "exactHeadCI": {
+    "run": 37422301243,
+    "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/37422301243",
+    "event": "workflow_dispatch",
+    "headSha": "d733e3654d98c8d3b52b504d95076afc57aa8dbf",
+    "status": "completed",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "change-scope",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-06T06:10:37Z",
+        "completedAt": "2026-10-06T06:10:47Z"
+      },
+      {
+        "name": "public-surface-gate",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-06T06:10:49Z",
+        "completedAt": "2026-10-06T06:12:27Z"
+      },
+      {
+        "name": "operator-gate",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-10-06T06:10:47Z",
+        "completedAt": "2026-10-06T06:10:47Z"
+      },
+      {
+        "name": "python-gate",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-10-06T06:10:47Z",
+        "completedAt": "2026-10-06T06:10:47Z"
+      },
+      {
+        "name": "minimal-gate",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-10-06T06:10:47Z",
+        "completedAt": "2026-10-06T06:10:47Z"
+      },
+      {
+        "name": "release-gate",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-10-06T06:10:47Z",
+        "completedAt": "2026-10-06T06:10:47Z"
+      },
+      {
+        "name": "rust-and-index",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-10-06T06:10:47Z",
+        "completedAt": "2026-10-06T06:10:47Z"
+      },
+      {
+        "name": "ci-gate",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-06T06:12:30Z",
+        "completedAt": "2026-10-06T06:12:39Z"
+      }
+    ]
+  },
+  "publication": {
+    "enabled": false,
+    "newHeadDeploymentRunObserved": false,
+    "deploymentOrPublicSmokePerformedByThisRun": false,
+    "disposition": "not attempted; automation cancelled before source landing. Public delivery stays disabled while R2 setup is pending."
+  },
+  "counterexample": {
+    "identity": "github.com/bitpay/bitcore",
+    "priorUpstreamRevision": "ea86af5f3e1049d0ee1469fd0cd1fa34c2a579c4",
+    "refreshedUpstreamRevision": "54a8d59df31ef20e2c680c49622cb445d590d5b5",
+    "priorGeneratedAt": "2026-09-16T16:21:24.075434Z",
+    "refreshedGeneratedAt": "2026-10-06T06:05:57.139508387Z",
+    "priorStatus": "verified",
+    "refreshedStatus": "imported",
+    "sourceComparisons": [
+      {
+        "identity": "github.com/bitpay/bitcore",
+        "revision": "54a8d59df31ef20e2c680c49622cb445d590d5b5",
+        "path": "README.md",
+        "url": "https://raw.githubusercontent.com/bitpay/bitcore/54a8d59df31ef20e2c680c49622cb445d590d5b5/README.md",
+        "checkedAt": "2026-10-06T06:12:41.710560+00:00",
+        "status": 200,
+        "bytes": 3418,
+        "sha256": "c04512fc30ed129e843769c7e71a71e237051a1af0e85cffa63dee62f6d0f9d7",
+        "retainedPath": "/tmp/dotrepo-roadmap-scheduled-refresh-37421585019/refreshed-upstream/github.com/bitpay/bitcore/README.md",
+        "matchesPriorInspectedRawBytes": true
+      },
+      {
+        "identity": "github.com/bitpay/bitcore",
+        "revision": "54a8d59df31ef20e2c680c49622cb445d590d5b5",
+        "path": "CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/bitpay/bitcore/54a8d59df31ef20e2c680c49622cb445d590d5b5/CONTRIBUTING.md",
+        "checkedAt": "2026-10-06T06:12:41.710759+00:00",
+        "status": 200,
+        "bytes": 3078,
+        "sha256": "515d36c812b23b128e01d5b8018ee7f9965335df7bd2e612381fce43a8dddd41",
+        "retainedPath": "/tmp/dotrepo-roadmap-scheduled-refresh-37421585019/refreshed-upstream/github.com/bitpay/bitcore/CONTRIBUTING.md",
+        "matchesPriorInspectedRawBytes": true
+      },
+      {
+        "identity": "github.com/bitpay/bitcore",
+        "revision": "54a8d59df31ef20e2c680c49622cb445d590d5b5",
+        "path": "package.json",
+        "url": "https://raw.githubusercontent.com/bitpay/bitcore/54a8d59df31ef20e2c680c49622cb445d590d5b5/package.json",
+        "checkedAt": "2026-10-06T06:12:41.972940+00:00",
+        "status": 200,
+        "bytes": 2815,
+        "sha256": "80d1afe86351e8986bea99b04dd920c6498ab54b75da6e243f35335dddba7a1a",
+        "retainedPath": "/tmp/dotrepo-roadmap-scheduled-refresh-37421585019/refreshed-upstream/github.com/bitpay/bitcore/package.json",
+        "matchesPriorInspectedRawBytes": true
+      },
+      {
+        "identity": "github.com/bitpay/bitcore",
+        "revision": "54a8d59df31ef20e2c680c49622cb445d590d5b5",
+        "path": "Dockerfile",
+        "url": "https://raw.githubusercontent.com/bitpay/bitcore/54a8d59df31ef20e2c680c49622cb445d590d5b5/Dockerfile",
+        "checkedAt": "2026-10-06T06:12:41.994847+00:00",
+        "status": 200,
+        "bytes": 499,
+        "sha256": "a6bbc946107ed5ef80d6654e5da2c7ca19285259d4180a6c410a888bd50c3d8b",
+        "retainedPath": "/tmp/dotrepo-roadmap-scheduled-refresh-37421585019/refreshed-upstream/github.com/bitpay/bitcore/Dockerfile",
+        "matchesPriorInspectedRawBytes": true
+      },
+      {
+        "identity": "github.com/bitpay/bitcore",
+        "revision": "54a8d59df31ef20e2c680c49622cb445d590d5b5",
+        "path": "packages/bitcore-node/README.md",
+        "url": "https://raw.githubusercontent.com/bitpay/bitcore/54a8d59df31ef20e2c680c49622cb445d590d5b5/packages/bitcore-node/README.md",
+        "checkedAt": "2026-10-06T06:12:42.011236+00:00",
+        "status": 200,
+        "bytes": 3907,
+        "sha256": "5c8842b2ac5826e12e0960c464e9b9ffe0e348fa9cc2e67e10497bb7acf22ee2",
+        "retainedPath": "/tmp/dotrepo-roadmap-scheduled-refresh-37421585019/refreshed-upstream/github.com/bitpay/bitcore/packages/bitcore-node/README.md",
+        "matchesPriorInspectedRawBytes": true
+      }
+    ],
+    "lostAuditAppendix": true,
+    "disposition": "concrete unsupported documentation value reintroduced and scalar policy accepted; source-supported build scalar retained, execution context and unassessed scoped test candidate lost",
+    "priorBuildContext": {
+      "command": "npm run build",
+      "working_directory": ".",
+      "scope": "repository",
+      "prerequisites": [
+        "Install Node.js ^22 and npm to invoke the declared root package script, plus an available Docker daemon. Docker builds from the source checkout with node:22-bookworm, installs Google Chrome and runs npm ci including the retained bootstrap/compile postinstall; allow the declared registry and Debian/Chrome repository fetches."
+      ],
+      "source": "package.json"
+    },
+    "refreshedBuildContext": null,
+    "priorTestCandidates": [
+      {
+        "command": "npm run test:bitcore-node",
+        "ecosystem": "Node.js",
+        "source": "package.json",
+        "context": {
+          "command": "npm run test:bitcore-node",
+          "working_directory": ".",
+          "scope": "component",
+          "prerequisites": [
+            "Select Node 22.13.1 using the retained CI setup; install monorepo dependencies with npm ci and compile with npm run compile. Start the services through docker compose -f docker-compose.test.base.yml -f docker-compose.test.ci.yml up --detach. CI additionally binds DB_NAME, DB_PORT, and BITCORE_CONFIG_PATH; those environment bindings are required for the exact CI instruction and cannot be discarded."
+          ],
+          "source": "package.json",
+          "component": "packages/bitcore-node"
+        }
+      }
+    ],
+    "refreshedTestCandidates": null,
+    "priorDocsRoot": null,
+    "refreshedDocsRoot": "https://bitcore.io/",
+    "semanticEvidence": "Refreshed README byte-identical to pinned audited README with no bitcore.io declaration; new docs.root assessment acknowledges no retained source declaration."
+  },
+  "pinnedConsumerDecision": {
+    "identity": "github.com/bitpay/bitcore",
+    "field": "docs.root",
+    "value": "https://bitcore.io/",
+    "scalarAccepted": true,
+    "fallbackReasons": [],
+    "assessment": {
+      "checkedAt": "2026-10-06T06:05:57.139508387Z",
+      "confidence": "medium",
+      "method": "unspecified",
+      "reason": "documentation target present without a retained source declaration",
+      "state": "present"
+    },
+    "contextSelection": null,
+    "consumerSourceRevision": "67cff47c7f860bdefa22d77d97f15be09de6dc08",
+    "consumerSourceSha256": "145c218b4b71bb5275537c9b9b2e3be57a65468eed0e2b521f4c930a4062b78c"
+  },
+  "pinnedReferenceConsumer": {
+    "path": "examples/external-consumer/lookup_before_scrape.py",
+    "url": "https://raw.githubusercontent.com/maxwellsantoro/dotrepo/67cff47c7f860bdefa22d77d97f15be09de6dc08/examples/external-consumer/lookup_before_scrape.py",
+    "status": 200,
+    "bytes": 29200,
+    "sha256": "145c218b4b71bb5275537c9b9b2e3be57a65468eed0e2b521f4c930a4062b78c",
+    "retainedPath": "/tmp/dotrepo-roadmap-scheduled-refresh-37421585019/checked-source/examples/external-consumer/lookup_before_scrape.py",
+    "checkedAt": "2026-10-06T06:15:28.463318+00:00"
+  },
+  "artifactMetadata": {
+    "total_count": 1,
+    "artifacts": [
+      {
+        "id": 11393023158,
+        "node_id": "MDg6QXJ0aWZhY3QxMTM5MzAyMzE1OA==",
+        "name": "index-autonomous-batch",
+        "size_in_bytes": 11827896,
+        "url": "https://api.github.com/repos/maxwellsantoro/dotrepo/actions/artifacts/11393023158",
+        "archive_download_url": "https://api.github.com/repos/maxwellsantoro/dotrepo/actions/artifacts/11393023158/zip",
+        "expired": false,
+        "digest": "sha256:14636ee838be9e213087079b403e5c2dafa7e88b2961688d2a169722e3007665",
+        "created_at": "2026-10-06T06:10:24Z",
+        "updated_at": "2026-10-06T06:10:24Z",
+        "expires_at": "2026-10-20T06:10:19Z",
+        "workflow_run": {
+          "id": 37421585019,
+          "repository_id": 1176357105,
+          "head_repository_id": 1176357105,
+          "head_branch": "main",
+          "head_sha": "67cff47c7f860bdefa22d77d97f15be09de6dc08"
+        }
+      }
+    ]
+  },
+  "retainedFileHashes": {
+    "artifact/index-autonomous-batch/telemetry.json": "09dfb867b916e56d9d1e364fdf8403b8ab62b548d76612f1c272d139a270e1c5",
+    "artifact/index-autonomous-batch/refresh-plan.json": "c4309bf9000f86f2e694b53c024192afaabb85e1c98c1b92ce64b384cc1e6d28",
+    "artifact/index-autonomous-batch/base-preflight.json": "39f596330fee32cac5232c5d5af1a38834b82b42f3ee082bc8f58ed01f84adf2",
+    "artifact/index-autonomous-batch/autonomous-telemetry-gate.json": "7be5e51e44cbb5e9ca49fa1244745644128d250fea4ccbde903570d36cded8d5",
+    "scheduled.log": "fec3792340ea366b54339fd9b9fde7e364c5f86cc73c056500d6bb252a1410f9",
+    "child-ci.log": "2dbbeda29a044ae04c2b6ec541665f02a930af04086a41a5db71ce08d2d6b741",
+    "pr145-refresh-policy.json": "95390343a95dae60dffd978921505d1f03c0a35e13329599b12cef32cbee1ccb",
+    "pr145-refreshed-sources.json": "aea9a0c3e539b159308b451e8a2c32943e40497cd1577313e928e8df6f28a5e5",
+    "pr145-inspected-records.json": "753c91254985e4f41ac725b7bf97f07983bce8ab9957a2a4133c2cfdd01b6a27",
+    "pinned-consumer-source.json": "b52a1bca52493938087a892fde75f13a58a3247cdf5b153569761698af5a2441"
+  },
+  "limits": [
+    "Observation is one scheduled operational run and a bounded three-identity quality comparison; no population accuracy or full rotation claim.",
+    "Actual unchanged core Rust exporter and exact pinned 67cff47c Python reference consumer were exercised on immutable PR145 records. The consumer source is retained and hashed; concurrent pending fixes in the workspace are not evidence for this historical control.",
+    "Preserve PR145 patch, successful child CI, completed batch artifact, and cancelled parent as distinct outcomes."
+  ]
+}

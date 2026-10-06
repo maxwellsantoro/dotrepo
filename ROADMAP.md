@@ -75,6 +75,10 @@ The [cadence checkpoint](index/telemetry/roadmap-refresh-cadence-2026-10-06.md)
 diagnoses stale-base refusal and prepares a bounded deterministic regeneration.
 An enabled schedule and nominal capacity do not establish successful rotation;
 retain actual refresh, landing and publication evidence separately.
+The [scheduled boundary receipt](index/telemetry/roadmap-refresh-boundary-2026-10-06.md)
+retains a completed batch cancelled before landing after an unsupported docs
+answer passed the old reference policy. Future refreshes use the repaired source
+boundary; a cancelled proposal is not operating rotation or publication proof.
 E1 supports explicitly declared documentation contexts as candidates; general
 nested-manifest extraction and assessed acceptance remain separate work.
 An external participant is not a prerequisite for the current checkpoint. C3 is
