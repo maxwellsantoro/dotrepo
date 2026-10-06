@@ -77,6 +77,7 @@ def measure(public_root: Path, evaluated_at: str | None = None) -> dict:
     return {
         "schema": "dotrepo-policy-coverage/v1",
         "commandPolicy": consumer.COMMAND_POLICY,
+        "documentationPolicy": consumer.DOCUMENTATION_POLICY,
         "evaluatedAt": evaluated_at,
         "snapshotDigest": meta["snapshotDigest"],
         "profileCount": total,
@@ -91,7 +92,8 @@ def measure(public_root: Path, evaluated_at: str | None = None) -> dict:
             "Presence, policy acceptance, independent correctness, and task completion are separate. "
             "Correctness and completion are unmeasured here (null, not zero). "
             "Commands require explicit high-confidence extracted assessments with a source and "
-            "matching check time. Other tasks use the reference client's required-field policy. "
+            "matching check time. Documentation also requires a current high-confidence "
+            "extracted source declaration. Other tasks use the reference client's required-field policy. "
             "No command is executed. No maintainer-authority exemption is implemented."
         ),
     }
@@ -103,6 +105,7 @@ def markdown(report: dict) -> str:
         "",
         f"Evaluated at {report['evaluatedAt']} against {report['profileCount']} primary profiles.",
         f"Command policy: `{report['commandPolicy']}`.",
+        f"Documentation policy: `{report.get('documentationPolicy', 'unrecorded')}`.",
         "",
         "| Task | Values present | Policy acceptable | Independently correct | Task completed |",
         "| --- | ---: | ---: | --- | --- |",

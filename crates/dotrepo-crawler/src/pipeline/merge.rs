@@ -1,7 +1,7 @@
 //! GitHub snapshot merge into import manifests and identity-safe homepage handling.
 
 use crate::{CrawlDiagnostic, GitHubRepositorySnapshot, RepositoryRef};
-use dotrepo_core::{infer_docs_root_from_external_homepage, repository_identity};
+use dotrepo_core::repository_identity;
 use dotrepo_schema::Manifest;
 use toml::Value;
 
@@ -82,9 +82,9 @@ pub(crate) fn merge_snapshot_fields(
         merged_fields.push("repo.topics");
     }
 
-    if infer_docs_root_from_external_homepage(manifest) {
-        merged_fields.push("docs.root");
-    }
+    // GitHub's Website field establishes a homepage, not a documentation root.
+    // Preserve the importer's declared docs or abstention rather than replacing
+    // them with an unrelated metadata field.
 
     manifest
         .x

@@ -424,6 +424,69 @@ def test_removing_inferred_assessment_cannot_turn_rejection_into_acceptance():
 
 
 @pytest.mark.parametrize(
+    "mutation",
+    [
+        "none",
+        "homepage-fallback",
+        "missing-assessment",
+        "malformed-assessment",
+        "inferred",
+        "medium",
+        "old-check",
+        "missing-source",
+        "blank-source",
+        "invalid-source",
+        "unresolved",
+    ],
+)
+def test_documentation_lookup_requires_a_current_source_declaration(mutation):
+    payload = command_profile()
+    payload["docs"] = {"root": "https://bitcore.io/"}
+    assessment = {
+        "state": "present",
+        "method": "extracted",
+        "confidence": "high",
+        "source": "README.md",
+        "checkedAt": payload["record"]["generatedAt"],
+    }
+    payload["fieldEvidence"]["docs.root"] = assessment
+    if mutation == "homepage-fallback":
+        # The actual scheduled Bitcore refresh had these unsupported fields.
+        assessment.update(
+            method="unspecified",
+            confidence="medium",
+            reason="documentation target present without a retained source declaration",
+        )
+        del assessment["source"]
+    elif mutation == "missing-assessment":
+        del payload["fieldEvidence"]["docs.root"]
+    elif mutation == "malformed-assessment":
+        payload["fieldEvidence"]["docs.root"] = ["high"]
+    elif mutation == "inferred":
+        assessment["method"] = "inferred"
+    elif mutation == "medium":
+        assessment["confidence"] = "medium"
+    elif mutation == "old-check":
+        assessment["checkedAt"] = "2020-01-01T00:00:00Z"
+    elif mutation == "missing-source":
+        del assessment["source"]
+    elif mutation == "blank-source":
+        assessment["source"] = " "
+    elif mutation == "invalid-source":
+        assessment["source"] = ["README.md"]
+    elif mutation == "unresolved":
+        assessment["state"] = "unresolved"
+    result = consumer.fetch_profile(
+        "github.com/example/demo",
+        opener=_FakeOpener(200, payload),
+        required_fields=["docs.root"],
+    )
+    assert result.hit and result.usable == (mutation == "none")
+    if mutation != "none":
+        assert "insufficient-docs-assessment:docs.root" in result.fallback_reasons
+
+
+@pytest.mark.parametrize(
     "command",
     [
         "pytest tests/.../test_file.py::test_explain_what_is_being_tested",

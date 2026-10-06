@@ -246,6 +246,7 @@ FIELD_PATHS = {
 # Consumer compatibility and policy identifiers, not record-wide trust levels.
 SUPPORTED_API_VERSIONS = ("v0",)
 COMMAND_POLICY = "explicit-high-confidence-extraction"
+DOCUMENTATION_POLICY = "explicit-high-confidence-documentation-declaration"
 
 
 def profile_field(payload: dict[str, Any], path: str) -> Any:
@@ -337,6 +338,15 @@ def evaluate_for_task(
             assessment = assessment if isinstance(assessment, dict) else {}
             if assessment.get("state") in ("suspect", "unresolved"):
                 reasons.append("unresolved:" + path)
+            if path == "docs.root" and not (
+                assessment.get("state") == "present"
+                and assessment.get("method") == "extracted"
+                and assessment.get("confidence") == "high"
+                and isinstance(assessment.get("source"), str)
+                and assessment["source"].strip()
+                and assessment.get("checkedAt") == result.record_generated_at
+            ):
+                reasons.append("insufficient-docs-assessment:" + path)
             if path in {"repo.build", "repo.test"}:
                 if incomplete_command(value):
                     reasons.append("incomplete-command:" + path)

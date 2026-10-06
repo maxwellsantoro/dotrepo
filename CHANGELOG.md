@@ -15,6 +15,11 @@ generated growth, coverage, promotion, and telemetry artifacts own live values.
 
 ### Documentation maintenance
 
+- Preserve documentation abstentions when merging GitHub homepage metadata and
+  require source-declared, fresh high-confidence documentation assessments in
+  the reference consumer. A scheduled refresh exposed the unsupported fallback;
+  its generated patch and cancelled run remain separate operating evidence.
+
 - Advance active installation instructions and development-generated maintainer
   CI to published 1.0.3 after exact-tag, six-crate, downloaded-bundle and fresh
   locked registry installation checks. Retain the dated release and registry

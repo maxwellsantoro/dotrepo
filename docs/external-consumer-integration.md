@@ -48,9 +48,8 @@ Tool call:
 ```
 
 Install the **stable** `dotrepo-mcp` binary from the
-[`v1.0.2` release bundle](https://github.com/maxwellsantoro/dotrepo/releases/tag/v1.0.2)
-or `cargo install dotrepo-mcp --version 1.0.2 --locked`. See
-[installation](./install.md) and [release compatibility](release-compatibility.md).
+[installation guide](./install.md), which owns the current stable version and
+bundle links. See [release compatibility](release-compatibility.md).
 Stable lookup returns summary, trust, snapshot metadata, and optional query;
 profile inclusion and newer target checks described on `main` are unreleased.
 
@@ -109,6 +108,12 @@ and index maintenance and must not be advertised as total task savings.
 
 ## Positive command acceptance
 
+A requested `docs.root` also needs a fresh, present, extracted, high-confidence
+assessment with a retained source declaration. A homepage or syntactically valid
+URL does not establish a documentation root. Missing, inferred, unspecified or
+weaker documentation assessments require source fallback. The crawler retains
+GitHub's Website field as `repo.homepage` without promoting it into `docs.root`.
+
 The reference consumer accepts a requested primary build/test command only when
 it is a nonempty string with an explicit `present`, `extracted`, high-confidence
 field assessment, a nonempty source, and a check timestamp matching the record.
@@ -150,7 +155,7 @@ Prerequisites are descriptions, never automatic setup commands. The caller must
 establish them in its prepared environment before execution. The public context
 has no parameter or environment binding; instructions needing those additions
 cannot be reconstructed by copying benchmark answers. This is development
-reference-client behavior, not a feature of stable 1.0.2 MCP.
+reference-client behavior; consult the stable compatibility guide for installed MCP.
 
 HTTP bodies are capped at 8 MiB for successful responses and 4 KiB for error
 responses. Oversized bodies and failures after headers arrive return transport

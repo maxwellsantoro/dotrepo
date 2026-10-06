@@ -532,11 +532,77 @@ mod tests {
         let manifest = parse_manifest(&record_text).expect("record parses");
         assert_eq!(manifest.repo.languages, vec!["Rust", "Shell"]);
         assert_eq!(manifest.repo.topics, vec!["cli", "index"]);
+        assert!(
+            manifest
+                .docs
+                .as_ref()
+                .and_then(|docs| docs.root.as_ref())
+                .is_none(),
+            "GitHub's Website field must not become undeclared documentation"
+        );
+        let docs_evidence = &manifest.x["dotrepo"]["field_evidence"]["docs.root"];
+        assert_eq!(docs_evidence["state"].as_str(), Some("not_found"));
+        assert_eq!(docs_evidence["valueJson"].as_str(), Some("null"));
         assert!(validate_index_root(&index_root)
             .expect("index validates")
             .iter()
             .all(|finding| !finding.path.ends_with("record.toml")));
 
+        fs::remove_dir_all(materialized.temp_root).expect("materialized temp removed");
+        fs::remove_dir_all(index_root).expect("index temp removed");
+    }
+
+    #[test]
+    fn crawl_keeps_declared_documentation_distinct_from_github_homepage() {
+        let index_root = temp_dir("declared-docs-index");
+        let materialized = materialize_repository(&MaterializeRepositoryInput {
+            repository: repository(),
+            files: ConventionalRepositoryFiles {
+                readme: Some(RepositoryTextFile {
+                    relative_path: PathBuf::from("README.md"),
+                    contents: "# Orbit\n\nA CLI tool.\n\n## Documentation\n\n[Documentation](https://docs.orbit.example.dev/)\n".into(),
+                }),
+                ..Default::default()
+            },
+        })
+        .expect("materialization succeeds");
+        let request = CrawlRepositoryRequest {
+            index_root: index_root.clone(),
+            repository: repository(),
+            generated_at: Some("2026-03-17T12:00:00Z".into()),
+            source_url: None,
+            synthesize: false,
+            synthesis_model: None,
+            synthesis_provider: None,
+            prior_synthesis_failure: None,
+        };
+        let report =
+            crawl_repository_from_snapshot(&request, &snapshot(Some("A CLI tool.")), &materialized)
+                .expect("crawl succeeds");
+        let written = apply_writeback_plan(&report.writeback_plan).expect("writeback succeeds");
+        let manifest = parse_manifest(&fs::read_to_string(written.manifest_path).expect("record"))
+            .expect("manifest");
+        assert_eq!(
+            manifest.repo.homepage.as_deref(),
+            Some("https://orbit.example.dev")
+        );
+        assert_eq!(
+            manifest.docs.as_ref().and_then(|docs| docs.root.as_deref()),
+            Some("https://docs.orbit.example.dev/")
+        );
+        let evidence = &manifest.x["dotrepo"]["field_evidence"]["docs.root"];
+        assert_eq!(evidence["state"].as_str(), Some("present"));
+        assert_eq!(evidence["method"].as_str(), Some("extracted"));
+        assert_eq!(evidence["source"].as_str(), Some("README.md"));
+        assert_eq!(evidence["confidence"].as_str(), Some("high"));
+        assert_eq!(
+            evidence["checkedAt"].as_str(),
+            manifest.record.generated_at.as_deref()
+        );
+        assert_eq!(
+            evidence["valueJson"].as_str(),
+            Some(r#""https://docs.orbit.example.dev/""#)
+        );
         fs::remove_dir_all(materialized.temp_root).expect("materialized temp removed");
         fs::remove_dir_all(index_root).expect("index temp removed");
     }
