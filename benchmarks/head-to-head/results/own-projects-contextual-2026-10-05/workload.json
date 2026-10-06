@@ -1,0 +1,402 @@
+{
+  "version": 1,
+  "study": "contextual-campaign",
+  "frozenAt": "2026-10-06T01:33:45.816018+00:00",
+  "selectionBeforeCoverageInspection": false,
+  "consumerClass": "operator-controlled",
+  "cacheState": "warm",
+  "snapshotId": "75707322809f36bee39edf66ce1011143b2ac62bf0cac158b7f94f8279eab35d",
+  "consumerPolicy": "value-bound-contextual-instruction-v1",
+  "executionSources": {
+    "benchmarks/head-to-head/bench/__init__.py": "bf12f893a2eedd6e1c298b4ea2375e0337e36cd4437782257e717915a7f21ce4",
+    "benchmarks/head-to-head/bench/arms/base.py": "51131b0eea1c64d68afcfcc476b63de37c3b4b6be5ebd8a5df409c3a163244aa",
+    "benchmarks/head-to-head/bench/arms/dotrepo_arm.py": "cce6703b36672c3f81cc2d8a975fdbb94401ae5194a82551a09c457d75e4c811",
+    "benchmarks/head-to-head/bench/arms/github_arm.py": "7ae1cdc68ec0b4d78df6cbefb1998d59bf694dafdf525424273b2082a5f9d2fa",
+    "benchmarks/head-to-head/bench/arms/lookup_first.py": "cbdaf8acb6e32b4dd4558aab39ec265c98a9d920a23ac1ef2149721229ad22c7",
+    "benchmarks/head-to-head/bench/cache.py": "c56824fcf4fad098925f6a31f8ac198e82260290bd52bd0cdc569939737c91df",
+    "benchmarks/head-to-head/bench/fields.py": "77dd4cfa0ac9d1b2c217ebe434912b1c45bfe86c6557daed2acba68c1a0ef8de",
+    "benchmarks/head-to-head/bench/model.py": "8d38496870a876760915154b83b46b4f699e2968d832ae83b9fc65f86725a5b2",
+    "benchmarks/head-to-head/bench/own_projects.py": "b83d84455716cb0b698a618ec38466f0377c442af934b04a3e6b65534cc3a8f6",
+    "benchmarks/head-to-head/bench/run.py": "0ec56f4707bcdc03d1033c0288ed5509553d562c93606a665a69b490f4e91eba",
+    "benchmarks/head-to-head/bench/task_reference.py": "66f644ec494d3f48dcc7f2bd35407d57a4d830ebdf1b495b35ce2567db1a6403",
+    "benchmarks/head-to-head/bench/tasks.py": "cdf721f0318f0343151f88914e41f1b0ccc315992f5c1bde2a9a4e2f33e32a98",
+    "examples/external-consumer/lookup_before_scrape.py": "145c218b4b71bb5275537c9b9b2e3be57a65468eed0e2b521f4c930a4062b78c",
+    "pyproject.toml": "2236993d099390eb676070bba24428a9066cfaabf95f9c3f26fbf906bf21c7d7",
+    "uv.lock": "74eb395b0476f9e2bae2f3d4f3f7cb7d404803a52bfd67630d8917e209fe3e42"
+  },
+  "runnerSha256": "b83d84455716cb0b698a618ec38466f0377c442af934b04a3e6b65534cc3a8f6",
+  "toolVersions": {
+    "java": "javac 21.0.12.1",
+    "zig": "0.14.0"
+  },
+  "sdkSource": {
+    "root": "/tmp/dotrepo-readiness-tools/zig-sdk-compat",
+    "libSystemSource": "/private/tmp/dotrepo-readiness-tools/zig-macos-aarch64-0.14.0/lib/libc/darwin/libSystem.tbd",
+    "libSystemSha256": "cdb2217019505764ef1c0ede11f4702e5cbc8900aae7759bd08aed08ba5e6b33",
+    "headerSource": "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include",
+    "sdkSettingsSha256": "7b93ad7e534cc4b31c6a4e39d19b5e0288acf2168c2649479a796d1cb51939fb",
+    "selectionShimSha256": "601cf90423ef16472873610e5777ab4befa7a637a521cd90ebd0093598cecd50"
+  },
+  "runtimeVersions": {
+    "python": "3.12.13 (main, Apr 14 2026, 14:33:40) [Clang 22.1.3 ]",
+    "uv": "uv 0.11.8 (0e961dd9a 2026-04-27 aarch64-apple-darwin)"
+  },
+  "tasks": [
+    {
+      "id": "RamenOS-host-build",
+      "taskClass": "host-build",
+      "identity": "github.com/maxwellsantoro/RamenOS",
+      "revision": "8dc5ff88ddc404528c384aead9ea77f17bf63d40",
+      "environmentId": "operator-macos-arm64-contextual-v4",
+      "acceptableInstructions": [
+        {
+          "command": "just build-host",
+          "workingDirectory": ".",
+          "scope": "component",
+          "component": "services",
+          "prerequisites": [
+            "just codegen (included by wrapper)",
+            "pinned Rust nightly and just"
+          ],
+          "parameters": {},
+          "environment": {},
+          "sourcePaths": [
+            "docs/GETTING_STARTED.md"
+          ],
+          "purpose": "build"
+        }
+      ],
+      "setupCommands": [],
+      "oracle": "host-build",
+      "timeoutSecondsPerCommand": 900,
+      "evidence": [
+        {
+          "url": "https://github.com/maxwellsantoro/RamenOS/blob/8dc5ff88ddc404528c384aead9ea77f17bf63d40/docs/GETTING_STARTED.md",
+          "locator": "just build-host",
+          "checkedAt": "2026-10-06T01:33:45.478774+00:00",
+          "sourceRevision": "8dc5ff88ddc404528c384aead9ea77f17bf63d40",
+          "sha256": "2853f434aa67088bb13423112f327938bd6bb2c7b1875bac874fba039fb6b990"
+        }
+      ],
+      "preparationEnvironment": {},
+      "instructionRequest": {
+        "scope": "component",
+        "component": "services",
+        "workingDirectory": "."
+      }
+    },
+    {
+      "id": "RamenOS-host-proof",
+      "taskClass": "host-proof",
+      "identity": "github.com/maxwellsantoro/RamenOS",
+      "revision": "8dc5ff88ddc404528c384aead9ea77f17bf63d40",
+      "environmentId": "operator-macos-arm64-contextual-v4",
+      "acceptableInstructions": [
+        {
+          "command": "just foundry-agent-task-proof-rt",
+          "workingDirectory": ".",
+          "scope": "component",
+          "component": "services/store_service",
+          "prerequisites": [
+            "just codegen (included by wrapper)",
+            "pinned Rust nightly and just"
+          ],
+          "parameters": {},
+          "environment": {},
+          "sourcePaths": [
+            "README.md"
+          ],
+          "purpose": "test"
+        }
+      ],
+      "setupCommands": [],
+      "oracle": "host-proof",
+      "timeoutSecondsPerCommand": 900,
+      "evidence": [
+        {
+          "url": "https://github.com/maxwellsantoro/RamenOS/blob/8dc5ff88ddc404528c384aead9ea77f17bf63d40/README.md",
+          "locator": "just foundry-agent-task-proof-rt",
+          "checkedAt": "2026-10-06T01:33:45.579735+00:00",
+          "sourceRevision": "8dc5ff88ddc404528c384aead9ea77f17bf63d40",
+          "sha256": "f996ebfbf6a68b87ab3e7e69d97d603ce01738c8cca28b0505ec2c0fdf0dbae2"
+        }
+      ],
+      "preparationEnvironment": {},
+      "instructionRequest": {
+        "scope": "component",
+        "component": "services/store_service",
+        "workingDirectory": "."
+      }
+    },
+    {
+      "id": "sha256-benchmark-atlas-build",
+      "taskClass": "build",
+      "identity": "github.com/maxwellsantoro/sha256-benchmark-atlas",
+      "revision": "71eda5d6480e0b9e39f914f3641d91f98402e943",
+      "environmentId": "operator-macos-arm64-contextual-v4",
+      "acceptableInstructions": [
+        {
+          "command": "uv run sha256-atlas build",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "component": null,
+          "prerequisites": [
+            "uv sync",
+            "README quick-start compiler/toolchain prerequisites"
+          ],
+          "parameters": {},
+          "environment": {},
+          "sourcePaths": [
+            "README.md"
+          ],
+          "purpose": "build"
+        }
+      ],
+      "setupCommands": [
+        "uv sync"
+      ],
+      "oracle": "build",
+      "timeoutSecondsPerCommand": 900,
+      "evidence": [
+        {
+          "url": "https://github.com/maxwellsantoro/sha256-benchmark-atlas/blob/71eda5d6480e0b9e39f914f3641d91f98402e943/README.md",
+          "locator": "uv run sha256-atlas build",
+          "checkedAt": "2026-10-06T01:33:45.612860+00:00",
+          "sourceRevision": "71eda5d6480e0b9e39f914f3641d91f98402e943",
+          "sha256": "363e25b27f99f2138209bedc89ab0d3e48cc6debc5976d74e8627efd8b14d249"
+        }
+      ],
+      "preparationEnvironment": {
+        "DOTREPO_STUDY_ZIG_SDK": "/tmp/dotrepo-readiness-tools/zig-sdk-compat"
+      },
+      "instructionRequest": {
+        "scope": "repository",
+        "component": null,
+        "workingDirectory": "."
+      }
+    },
+    {
+      "id": "sha256-benchmark-atlas-correctness",
+      "taskClass": "correctness",
+      "identity": "github.com/maxwellsantoro/sha256-benchmark-atlas",
+      "revision": "71eda5d6480e0b9e39f914f3641d91f98402e943",
+      "environmentId": "operator-macos-arm64-contextual-v4",
+      "acceptableInstructions": [
+        {
+          "command": "uv run sha256-atlas correctness --cases 1000 --skip-million",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "component": null,
+          "prerequisites": [
+            "uv sync",
+            "README quick-start compiler/toolchain prerequisites",
+            "uv run sha256-atlas build"
+          ],
+          "parameters": {},
+          "environment": {},
+          "sourcePaths": [
+            "README.md"
+          ],
+          "purpose": "test"
+        }
+      ],
+      "setupCommands": [
+        "uv sync",
+        "uv run sha256-atlas build"
+      ],
+      "oracle": "correctness",
+      "timeoutSecondsPerCommand": 900,
+      "evidence": [
+        {
+          "url": "https://github.com/maxwellsantoro/sha256-benchmark-atlas/blob/71eda5d6480e0b9e39f914f3641d91f98402e943/README.md",
+          "locator": "uv run sha256-atlas correctness --cases 1000 --skip-million",
+          "checkedAt": "2026-10-06T01:33:45.652404+00:00",
+          "sourceRevision": "71eda5d6480e0b9e39f914f3641d91f98402e943",
+          "sha256": "363e25b27f99f2138209bedc89ab0d3e48cc6debc5976d74e8627efd8b14d249"
+        }
+      ],
+      "preparationEnvironment": {
+        "DOTREPO_STUDY_ZIG_SDK": "/tmp/dotrepo-readiness-tools/zig-sdk-compat"
+      },
+      "instructionRequest": {
+        "scope": "repository",
+        "component": null,
+        "workingDirectory": "."
+      }
+    },
+    {
+      "id": "ries-rs-core-build",
+      "taskClass": "core-build",
+      "identity": "github.com/maxwellsantoro/ries-rs",
+      "revision": "cfa959ed21a5a5e5f3d9538d9d1714c2401611e5",
+      "environmentId": "operator-macos-arm64-contextual-v4",
+      "acceptableInstructions": [
+        {
+          "command": "cargo build",
+          "workingDirectory": ".",
+          "scope": "component",
+          "component": "src",
+          "prerequisites": [
+            "Rust/Cargo"
+          ],
+          "parameters": {},
+          "environment": {},
+          "sourcePaths": [
+            "CONTRIBUTING.md"
+          ],
+          "purpose": "build"
+        }
+      ],
+      "setupCommands": [],
+      "oracle": "core-build",
+      "timeoutSecondsPerCommand": 900,
+      "evidence": [
+        {
+          "url": "https://github.com/maxwellsantoro/ries-rs/blob/cfa959ed21a5a5e5f3d9538d9d1714c2401611e5/CONTRIBUTING.md",
+          "locator": "cargo build",
+          "checkedAt": "2026-10-06T01:33:45.684777+00:00",
+          "sourceRevision": "cfa959ed21a5a5e5f3d9538d9d1714c2401611e5",
+          "sha256": "043dd0e848ff8ed4be6870d3072110a3dca786fa2e6e12a35743afff32816381"
+        }
+      ],
+      "preparationEnvironment": {},
+      "instructionRequest": {
+        "scope": "component",
+        "component": "src",
+        "workingDirectory": "."
+      }
+    },
+    {
+      "id": "ries-rs-core-test",
+      "taskClass": "core-test",
+      "identity": "github.com/maxwellsantoro/ries-rs",
+      "revision": "cfa959ed21a5a5e5f3d9538d9d1714c2401611e5",
+      "environmentId": "operator-macos-arm64-contextual-v4",
+      "acceptableInstructions": [
+        {
+          "command": "cargo test",
+          "workingDirectory": ".",
+          "scope": "component",
+          "component": "src",
+          "prerequisites": [
+            "Rust/Cargo"
+          ],
+          "parameters": {},
+          "environment": {},
+          "sourcePaths": [
+            "AGENTS.md"
+          ],
+          "purpose": "test"
+        }
+      ],
+      "setupCommands": [],
+      "oracle": "core-test",
+      "timeoutSecondsPerCommand": 900,
+      "evidence": [
+        {
+          "url": "https://github.com/maxwellsantoro/ries-rs/blob/cfa959ed21a5a5e5f3d9538d9d1714c2401611e5/AGENTS.md",
+          "locator": "cargo test",
+          "checkedAt": "2026-10-06T01:33:45.726390+00:00",
+          "sourceRevision": "cfa959ed21a5a5e5f3d9538d9d1714c2401611e5",
+          "sha256": "66a187844b884767690b2a25939e2a3e29ae00a90ebca23c89a9cc17d13b76e5"
+        }
+      ],
+      "preparationEnvironment": {},
+      "instructionRequest": {
+        "scope": "component",
+        "component": "src",
+        "workingDirectory": "."
+      }
+    },
+    {
+      "id": "pagedigest-consumer-test",
+      "taskClass": "consumer-test",
+      "identity": "github.com/maxwellsantoro/pagedigest",
+      "revision": "f880f813cc0df49603482dbd879ff4ef49b3a519",
+      "environmentId": "operator-macos-arm64-contextual-v4",
+      "acceptableInstructions": [
+        {
+          "command": "uv run --locked python -m unittest discover -s tests -v",
+          "workingDirectory": "implementations/python-consumer",
+          "scope": "component",
+          "component": "implementations/python-consumer",
+          "prerequisites": [
+            "uv and locked consumer environment"
+          ],
+          "parameters": {},
+          "environment": {},
+          "sourcePaths": [
+            "AGENTS.md"
+          ],
+          "purpose": "test"
+        }
+      ],
+      "setupCommands": [],
+      "oracle": "consumer-test",
+      "timeoutSecondsPerCommand": 900,
+      "evidence": [
+        {
+          "url": "https://github.com/maxwellsantoro/pagedigest/blob/f880f813cc0df49603482dbd879ff4ef49b3a519/AGENTS.md",
+          "locator": "uv run --locked python -m unittest discover -s tests -v",
+          "checkedAt": "2026-10-06T01:33:45.766315+00:00",
+          "sourceRevision": "f880f813cc0df49603482dbd879ff4ef49b3a519",
+          "sha256": "d58b9669394c449c026916863fef022450c84bfa2eed1fa4474f653ffde1f632"
+        }
+      ],
+      "preparationEnvironment": {},
+      "instructionRequest": {
+        "scope": "component",
+        "component": "implementations/python-consumer",
+        "workingDirectory": "implementations/python-consumer"
+      }
+    },
+    {
+      "id": "pagedigest-generator-test",
+      "taskClass": "generator-test",
+      "identity": "github.com/maxwellsantoro/pagedigest",
+      "revision": "f880f813cc0df49603482dbd879ff4ef49b3a519",
+      "environmentId": "operator-macos-arm64-contextual-v4",
+      "acceptableInstructions": [
+        {
+          "command": "cargo test --locked",
+          "workingDirectory": "implementations/rust-generator",
+          "scope": "component",
+          "component": "implementations/rust-generator",
+          "prerequisites": [
+            "Rust/Cargo"
+          ],
+          "parameters": {},
+          "environment": {},
+          "sourcePaths": [
+            "AGENTS.md"
+          ],
+          "purpose": "test"
+        }
+      ],
+      "setupCommands": [],
+      "oracle": "generator-test",
+      "timeoutSecondsPerCommand": 900,
+      "evidence": [
+        {
+          "url": "https://github.com/maxwellsantoro/pagedigest/blob/f880f813cc0df49603482dbd879ff4ef49b3a519/AGENTS.md",
+          "locator": "cargo test --locked",
+          "checkedAt": "2026-10-06T01:33:45.815836+00:00",
+          "sourceRevision": "f880f813cc0df49603482dbd879ff4ef49b3a519",
+          "sha256": "d58b9669394c449c026916863fef022450c84bfa2eed1fa4474f653ffde1f632"
+        }
+      ],
+      "preparationEnvironment": {},
+      "instructionRequest": {
+        "scope": "component",
+        "component": "implementations/rust-generator",
+        "workingDirectory": "implementations/rust-generator"
+      }
+    }
+  ],
+  "selection": "Known-coverage contextual follow-up on the same eight commands and oracles. Merged RamenOS main and Atlas's merged full-cohort prerequisite documentation. Physical component paths replace historical human labels. Atlas SDK selection belongs to preparationEnvironment, never to the profile instruction. RamenOS's aggregate host wrappers remain source fallback cases; no single component context is asserted for their multi-component execution. This source-inspected operator campaign is not held out or independent adoption.",
+  "measurementBoundary": "Warm shared tool/download caches; fresh checkout and build outputs per arm. Explicit source/profile HTTP, checkout, setup, command execution and oracle are timed. Clone/bootstrap/source adjudication and package-manager network counts are outside transport totals. No modeled or net-cost claim.",
+  "repeatOfWorkloadSha256": "1f294e164109631ac7e400ab86d06b6392c4350e50f8a8ca32a85fe225d5d1fd",
+  "knownCoverage": true,
+  "selectionFrozenBeforeExecution": true,
+  "sdkSelectionScope": "zig-child-only"
+}

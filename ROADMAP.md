@@ -57,6 +57,12 @@ conditions, and measured task environment remain comparable.
 | G1: first growth cohort | F2, E2, C2, C3 pass; operating budgets hold | A 50–100 repository cohort meets quality, freshness, reliability, and unit-cost budgets below |
 
 C2 can evaluate an immutable published or development export while R2 proceeds.
+The [contextual own-project packet](benchmarks/head-to-head/results/own-projects-contextual-2026-10-05/README.md)
+now demonstrates direct profile instruction reuse on prepared, source-inspected
+operator tasks. Use it as bounded C2 evidence; keep independent use, adoption,
+population accuracy and net cost evaluation open. The next consumer milestone is
+broader task/environment evidence or a practical independent pilot, rather than
+another apparatus expansion or an automatic growth cohort.
 An external participant is not a prerequisite for the current checkpoint. C3 is
 deferred; both useful C2 results and C3 acceptance evidence are required before
 G1 expansion. If evaluation reveals a defect,

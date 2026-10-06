@@ -1,0 +1,786 @@
+#!/usr/bin/env -S uv run python
+"""Reference external consumer: hosted dotrepo lookup before scrape.
+
+This is an in-repository reference client that implements the
+acceptance bullets in ``docs/external-consumer-integration.md``:
+
+1. Prefer hosted lookup before any clone/scrape fallback. Default surface is
+   ``GET /v0/repos/{host}/{owner}/{repo}/profile.json`` (agent-oriented fields);
+   ``index.json`` remains available via ``--surface index``.
+2. Surface trust / status / freshness from the response (never drop them).
+3. Missing fields stay missing — the client does not invent build/test commands.
+4. HTTP 404 is counted as a lookup miss (client-side metrics suitable for
+   feeding ``scripts/aggregate_lookup_misses.py``).
+5. This client is an integration example, not evidence of independent adoption.
+
+Live traffic against ``https://dotrepo.org`` is optional (``--base-url``).
+Unit tests exercise the real parse/decision path with fixture HTTP responses.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import time
+from datetime import datetime, timezone
+import urllib.error
+import urllib.request
+from dataclasses import asdict, dataclass, field
+from typing import Any
+from urllib.parse import urlparse
+
+
+DEFAULT_BASE_URL = "https://dotrepo.org"
+MAX_PROFILE_BYTES = 8 * 1024 * 1024
+MAX_ERROR_BYTES = 4096
+INSTRUCTION_POLICY = "value-bound-contextual-instruction-v1"
+
+
+def _setup_only_command(tokens: list[str]) -> bool:
+    if tokens[:1] == ["sudo"]:
+        tokens = tokens[1:]
+    if tokens[:3] in (["python", "-m", "pip"], ["python3", "-m", "pip"]):
+        tokens = tokens[3:]
+    elif tokens[:2] == ["uv", "pip"]:
+        tokens = tokens[2:]
+    elif tokens[:2] == ["uv", "sync"]:
+        return True
+    elif tokens[:1] and tokens[0] in {
+        "pip",
+        "pip3",
+        "pipx",
+        "npm",
+        "pnpm",
+        "yarn",
+        "bun",
+        "poetry",
+        "pdm",
+        "bundle",
+        "composer",
+    }:
+        tokens = tokens[1:]
+    else:
+        return False
+    return bool(tokens) and tokens[0] in {"install", "ci", "sync", "add"}
+
+
+@dataclass
+class LookupMiss:
+    host: str
+    owner: str
+    repo: str
+    route: str = "profile"
+    source: str = "external-consumer"
+
+
+@dataclass
+class LookupResult:
+    identity: str
+    status_code: int
+    hit: bool
+    miss: bool
+    profile: dict[str, Any] | None = None
+    trust: dict[str, Any] | None = None
+    freshness: dict[str, Any] | None = None
+    record_status: str | None = None
+    missing_fields: list[str] = field(default_factory=list)
+    error: str | None = None
+    usable: bool = False
+    fallback_reasons: list[str] = field(default_factory=list)
+    record_generated_at: str | None = None
+    record_age_days: float | None = None
+    response_bytes: int = 0
+    elapsed_ms: float = 0.0
+
+
+def parse_repository_identity(url_or_identity: str) -> tuple[str, str, str]:
+    """Parse ``host/owner/repo`` or a GitHub-style repository URL."""
+    text = url_or_identity.strip().rstrip("/")
+    if "://" in text:
+        parsed = urlparse(text)
+        host = parsed.netloc.lower()
+        parts = [p for p in parsed.path.split("/") if p]
+        if host.startswith("www."):
+            host = host[4:]
+        if len(parts) < 2:
+            raise ValueError(f"cannot parse repository identity from URL: {url_or_identity}")
+        owner, repo = parts[0], parts[1]
+        if repo.endswith(".git"):
+            repo = repo[: -len(".git")]
+        return host, owner, repo
+
+    parts = [p for p in text.split("/") if p]
+    if len(parts) == 3:
+        return parts[0], parts[1], parts[2]
+    if len(parts) == 2:
+        return "github.com", parts[0], parts[1]
+    raise ValueError(f"cannot parse repository identity: {url_or_identity}")
+
+
+def profile_url(
+    base_url: str, host: str, owner: str, repo: str, *, surface: str = "profile"
+) -> str:
+    base = base_url.rstrip("/")
+    name = "profile.json" if surface == "profile" else "index.json"
+    return f"{base}/v0/repos/{host}/{owner}/{repo}/{name}"
+
+
+def _nonempty(value: Any) -> bool:
+    if value is None:
+        return False
+    if isinstance(value, str):
+        return bool(value.strip()) and value.strip().lower() != "unknown"
+    if isinstance(value, (list, dict)):
+        return bool(value)
+    return True
+
+
+def extract_trust_and_freshness(
+    payload: dict[str, Any],
+) -> tuple[dict[str, Any], dict[str, Any], str | None]:
+    """Pull trust/status/freshness without inventing values.
+
+    Supports both the public ``profile.json`` envelope and the ``index.json``
+    selection wrapper.
+    """
+    freshness = payload.get("freshness") if isinstance(payload.get("freshness"), dict) else {}
+    trust: dict[str, Any] = {}
+    record_status: str | None = None
+
+    # profile.json: top-level trust block
+    top_trust = payload.get("trust")
+    if isinstance(top_trust, dict):
+        trust = {
+            k: top_trust[k]
+            for k in ("confidence", "provenance", "notes", "selectedStatus", "selectionReason")
+            if k in top_trust
+        }
+        if isinstance(top_trust.get("selectedStatus"), str):
+            record_status = top_trust["selectedStatus"]
+
+    # index.json: selection.record.record.{status,trust}
+    selection = payload.get("selection")
+    if isinstance(selection, dict):
+        selected = selection.get("record")
+        if isinstance(selected, dict):
+            inner = selected.get("record")
+            if isinstance(inner, dict):
+                if record_status is None and isinstance(inner.get("status"), str):
+                    record_status = inner["status"]
+                inner_trust = inner.get("trust")
+                if isinstance(inner_trust, dict) and not trust:
+                    trust = {
+                        k: inner_trust[k]
+                        for k in ("confidence", "provenance", "notes")
+                        if k in inner_trust
+                    }
+
+    # Nested record.trust fallback
+    record = payload.get("record")
+    if isinstance(record, dict) and not trust:
+        raw_trust = record.get("trust")
+        if isinstance(raw_trust, dict):
+            trust = {
+                k: raw_trust[k] for k in ("confidence", "provenance", "notes") if k in raw_trust
+            }
+        if record_status is None and isinstance(record.get("status"), str):
+            record_status = record["status"]
+
+    return trust, freshness, record_status
+
+
+def missing_high_value_fields(payload: dict[str, Any]) -> list[str]:
+    """Report high-value fields that are absent — do not invent replacements.
+
+    Understands profile.json (execution/ownership) and index.json (repository).
+    """
+    missing: list[str] = []
+
+    # profile.json shape
+    execution = payload.get("execution") if isinstance(payload.get("execution"), dict) else {}
+    ownership = payload.get("ownership") if isinstance(payload.get("ownership"), dict) else {}
+    repository = payload.get("repository") if isinstance(payload.get("repository"), dict) else {}
+    # legacy/flat repo block (tests and some wrappers)
+    repo = payload.get("repo") if isinstance(payload.get("repo"), dict) else {}
+    owners = payload.get("owners") if isinstance(payload.get("owners"), dict) else {}
+
+    build = execution.get("build") or repo.get("build")
+    test = execution.get("test") or repo.get("test")
+    homepage = payload.get("homepage") or repository.get("homepage") or repo.get("homepage")
+    description = (
+        payload.get("purpose")
+        or payload.get("description")
+        or repository.get("description")
+        or repo.get("description")
+    )
+    security = (
+        ownership.get("securityContact")
+        or repository.get("securityContact")
+        or owners.get("security_contact")
+    )
+
+    if not _nonempty(build):
+        missing.append("repo.build")
+    if not _nonempty(test):
+        missing.append("repo.test")
+    if not _nonempty(homepage):
+        missing.append("repo.homepage")
+    if not _nonempty(description):
+        missing.append("repo.description")
+    if not _nonempty(security):
+        missing.append("owners.security_contact")
+    return missing
+
+
+FIELD_PATHS = {
+    "repo.name": ("name",),
+    "repo.description": ("purpose",),
+    "repo.homepage": ("homepage",),
+    "repo.license": ("license",),
+    "repo.build": ("execution", "build"),
+    "repo.test": ("execution", "test"),
+    "docs.root": ("docs", "root"),
+    "owners.security_contact": ("ownership", "securityContact"),
+}
+
+# Consumer compatibility and policy identifiers, not record-wide trust levels.
+SUPPORTED_API_VERSIONS = ("v0",)
+COMMAND_POLICY = "explicit-high-confidence-extraction"
+
+
+def profile_field(payload: dict[str, Any], path: str) -> Any:
+    value = payload
+    for key in FIELD_PATHS[path]:
+        value = value.get(key) if isinstance(value, dict) else None
+    return value
+
+
+def incomplete_command(value: str) -> bool:
+    tokens = value.split()
+    if not tokens:
+        return True
+    return (
+        value.rstrip().endswith("\\")
+        or tokens[0] in {"cd", "echo", "printf", "chmod", "mkdir", "touch", "env"}
+        or "=" in tokens[0]
+        or _setup_only_command(tokens)
+        or any(
+            "..." in token and token != "./..." and not token.startswith("//") for token in tokens
+        )
+        or any(
+            marker in value
+            for marker in ("<", ">", "{{", "}}", "test_explain_what_is_being_tested")
+        )
+        or any(flag in tokens for flag in ("--collect-only", "--no-run"))
+        or (
+            any(tokens[i : i + 2] == ["go", "test"] for i in range(len(tokens) - 1))
+            and any(
+                token in {"-c", "-list"}
+                or (token.startswith("-c=") and token[3:] not in {"false", "False", "FALSE", "0"})
+                or token.startswith("-list=")
+                for token in tokens
+            )
+        )
+    )
+
+
+def evaluate_for_task(
+    result: LookupResult,
+    *,
+    required_fields: list[str] | None = None,
+    max_record_age_days: int = 30,
+    now: datetime | None = None,
+) -> LookupResult:
+    """A found document is not necessarily a usable task answer. Never run commands."""
+    required_fields = required_fields if required_fields is not None else ["repo.description"]
+    if max_record_age_days < 0 or any(p not in FIELD_PATHS for p in required_fields):
+        raise ValueError("invalid task policy")
+    reasons = []
+    payload = result.profile or {}
+    result.record_generated_at = None
+    result.record_age_days = None
+    if not result.hit:
+        reasons.append(result.error or "lookup-failed")
+    else:
+        if payload.get("apiVersion") not in SUPPORTED_API_VERSIONS:
+            reasons.append("unsupported-api-version")
+        identity = payload.get("identity")
+        identity = identity if isinstance(identity, dict) else {}
+        actual = "/".join(str(identity.get(k, "")) for k in ("host", "owner", "repo"))
+        if actual.lower() != result.identity.lower():
+            reasons.append("identity-mismatch-or-missing")
+        if payload.get("conflicts"):
+            reasons.append("conflicting-records")
+        record = payload.get("record")
+        record = record if isinstance(record, dict) else {}
+        result.record_generated_at = record.get("generatedAt")
+        try:
+            checked = datetime.fromisoformat(result.record_generated_at.replace("Z", "+00:00"))
+            current = now or datetime.now(timezone.utc)
+            if checked.tzinfo is None or current.tzinfo is None or checked > current:
+                raise ValueError("invalid record timestamp")
+            result.record_age_days = (current - checked).total_seconds() / 86400
+            if result.record_age_days > max_record_age_days:
+                reasons.append("stale-record")
+        except (ValueError, AttributeError, TypeError):
+            reasons.append("unknown-record-age")
+        for path in required_fields:
+            value = profile_field(payload, path)
+            if not _nonempty(value):
+                reasons.append("missing:" + path)
+                continue
+            if not isinstance(value, str):
+                reasons.append("invalid-field-type:" + path)
+                continue
+            evidence = payload.get("fieldEvidence")
+            assessment = evidence.get(path) if isinstance(evidence, dict) else None
+            assessment = assessment if isinstance(assessment, dict) else {}
+            if assessment.get("state") in ("suspect", "unresolved"):
+                reasons.append("unresolved:" + path)
+            if path in {"repo.build", "repo.test"}:
+                if incomplete_command(value):
+                    reasons.append("incomplete-command:" + path)
+                source = assessment.get("source", "")
+                if (
+                    isinstance(source, str)
+                    and "/" in source.replace("\\", "/")
+                    and source != ".github/CONTRIBUTING.md"
+                ):
+                    # Legacy scalar commands omit component scope and cwd. Even
+                    # high-confidence extraction cannot establish usability.
+                    reasons.append("scoped-command-source:" + path)
+                if assessment.get("method") == "inferred":
+                    reasons.append("inferred-command:" + path)
+                elif not assessment:
+                    reasons.append("missing-command-assessment:" + path)
+                elif not (
+                    assessment.get("state") == "present"
+                    and assessment.get("method") == "extracted"
+                    and assessment.get("confidence") == "high"
+                    and isinstance(assessment.get("source"), str)
+                    and assessment["source"].strip()
+                    and assessment.get("checkedAt") == result.record_generated_at
+                ):
+                    reasons.append("insufficient-command-assessment:" + path)
+    result.fallback_reasons = reasons
+    result.usable = not reasons
+    return result
+
+
+def repository_path(value, *, root=False):
+    if value == ".":
+        return root
+    return (
+        isinstance(value, str)
+        and bool(value)
+        and value.strip() == value
+        and not any(ch in value for ch in "\\:")
+        and not any(ord(ch) < 32 or ord(ch) == 127 for ch in value)
+        and all(part not in {"", ".", ".."} for part in value.split("/"))
+    )
+
+
+def select_instruction(result, purpose, *, request=None, now=None):
+    """Select from the public record, independently of a task's expected answer.
+
+    Request may constrain scope, component and workingDirectory, never command
+    or prerequisites. Assessments for a scalar AND its context, or the complete
+    indexed candidate object, must pass the public export's value-binding gate.
+    This returns metadata, not authorization to execute prerequisites or commands.
+    """
+    if purpose not in {"build", "test"}:
+        raise ValueError("unsupported instruction purpose")
+    request = request or {}
+    if set(request) - {"scope", "component", "workingDirectory"}:
+        raise ValueError("unsupported instruction request")
+    evaluate_for_task(result, required_fields=[], now=now)
+    if not result.usable:
+        return {"instruction": None, "provenance": None, "fallbackReasons": result.fallback_reasons}
+    payload = result.profile
+    execution = payload.get("execution", {})
+    evidence = payload.get("fieldEvidence", {})
+    if not isinstance(execution, dict) or not isinstance(evidence, dict):
+        return {"instruction": None, "provenance": None, "fallbackReasons": ["invalid-execution"]}
+
+    def assessed(path, source):
+        item = evidence.get(path)
+        return isinstance(item, dict) and (
+            item.get("state") == "present"
+            and item.get("method") == "extracted"
+            and item.get("confidence") == "high"
+            and item.get("checkedAt") == result.record_generated_at
+            and item.get("source") == source
+        )
+
+    entries = []
+    value = execution.get(purpose)
+    context = execution.get(purpose + "Context")
+    command_evidence = evidence.get(f"repo.{purpose}", {})
+    command_source = command_evidence.get("source") if isinstance(command_evidence, dict) else None
+    entries.append(
+        (value, context, command_source, [f"repo.{purpose}", f"repo.{purpose}_context"], True)
+    )
+    candidates = execution.get(purpose + "Candidates", [])
+    if not isinstance(candidates, list):
+        return {"instruction": None, "provenance": None, "fallbackReasons": ["invalid-candidates"]}
+    for index, item in enumerate(candidates):
+        if isinstance(item, dict):
+            entries.append(
+                (
+                    item.get("command"),
+                    item.get("context"),
+                    item.get("source"),
+                    [f"repo.{purpose}_candidates.{index}"],
+                    False,
+                )
+            )
+    selected = []
+    for command, context, source, paths, scalar in entries:
+        if (
+            not isinstance(command, str)
+            or incomplete_command(command)
+            or not isinstance(context, dict)
+        ):
+            continue
+        if set(context) - {
+            "command",
+            "workingDirectory",
+            "scope",
+            "component",
+            "prerequisites",
+            "source",
+        }:
+            continue
+        cwd, scope, component = (context.get(k) for k in ("workingDirectory", "scope", "component"))
+        prerequisites, declaration = context.get("prerequisites"), context.get("source")
+        if (
+            context.get("command") != command
+            or command.strip() != command
+            or not repository_path(cwd, root=True)
+            or not repository_path(declaration)
+            or scope not in ("repository", "component")
+            or (scope == "repository" and component is not None)
+            or (scope == "component" and not repository_path(component))
+            or (scalar and (scope != "repository" or cwd != "."))
+            or not repository_path(source)
+            or not isinstance(prerequisites, list)
+            or any(
+                not isinstance(x, str)
+                or not x.strip()
+                or any(ord(ch) < 32 or ord(ch) == 127 for ch in x)
+                for x in prerequisites
+            )
+            or not all(
+                assessed(path, source if scalar and index == 0 else declaration)
+                for index, path in enumerate(paths)
+            )
+        ):
+            continue
+        instruction = {
+            "command": command,
+            "workingDirectory": cwd,
+            "scope": scope,
+            "component": component,
+            "prerequisites": list(prerequisites),
+            "sourcePaths": list(dict.fromkeys([source, declaration])),
+            "purpose": purpose,
+            # The current public context has no parameter or environment bindings.
+            "parameters": {},
+            "environment": {},
+        }
+        if any(instruction[k] != v for k, v in request.items()):
+            continue
+        selected.append(
+            {
+                "instruction": instruction,
+                "provenance": {
+                    "identity": result.identity,
+                    "recordGeneratedAt": result.record_generated_at,
+                    "assessmentPaths": paths,
+                    "assessments": [evidence[p] for p in paths],
+                },
+                "fallbackReasons": [],
+            }
+        )
+    if len(selected) == 1:
+        return selected[0]
+    return {
+        "instruction": None,
+        "provenance": None,
+        "fallbackReasons": [
+            "ambiguous-instructions" if selected else "no-assessed-contextual-instruction"
+        ],
+    }
+
+
+def interpret_http_response(
+    *,
+    identity: str,
+    status_code: int,
+    body: bytes | str | None,
+) -> LookupResult:
+    """Core decision path: 200 → profile; 404 → countable miss; else error."""
+    if status_code == 404:
+        return LookupResult(
+            identity=identity,
+            status_code=status_code,
+            hit=False,
+            miss=True,
+            error="repository-not-found",
+        )
+
+    if status_code != 200:
+        return LookupResult(
+            identity=identity,
+            status_code=status_code,
+            hit=False,
+            miss=False,
+            error=f"unexpected-status:{status_code}",
+        )
+
+    if body is None:
+        return LookupResult(
+            identity=identity,
+            status_code=status_code,
+            hit=False,
+            miss=False,
+            error="empty-body",
+        )
+
+    try:
+        text = body.decode("utf-8") if isinstance(body, (bytes, bytearray)) else body
+        payload = json.loads(text)
+    except (json.JSONDecodeError, UnicodeDecodeError) as exc:
+        return LookupResult(
+            identity=identity,
+            status_code=status_code,
+            hit=False,
+            miss=False,
+            error=f"invalid-json:{exc}",
+        )
+
+    if not isinstance(payload, dict):
+        return LookupResult(
+            identity=identity,
+            status_code=status_code,
+            hit=False,
+            miss=False,
+            error="non-object-json",
+        )
+
+    trust, freshness, record_status = extract_trust_and_freshness(payload)
+    return evaluate_for_task(
+        LookupResult(
+            identity=identity,
+            status_code=status_code,
+            hit=True,
+            miss=False,
+            profile=payload,
+            trust=trust or None,
+            freshness=freshness or None,
+            record_status=record_status,
+            missing_fields=missing_high_value_fields(payload),
+            response_bytes=len(body.encode("utf-8") if isinstance(body, str) else body),
+        )
+    )
+
+
+def fetch_profile(
+    url_or_identity: str,
+    *,
+    base_url: str = DEFAULT_BASE_URL,
+    surface: str = "profile",
+    opener: Any | None = None,
+    timeout: float = 20.0,
+    required_fields: list[str] | None = None,
+    max_record_age_days: int = 30,
+) -> LookupResult:
+    """Lookup-first path. ``opener`` is injectable for tests (must have ``open``)."""
+    host, owner, repo = parse_repository_identity(url_or_identity)
+    identity = f"{host}/{owner}/{repo}"
+    url = profile_url(base_url, host, owner, repo, surface=surface)
+
+    request = urllib.request.Request(
+        url,
+        headers={
+            "Accept": "application/json",
+            "User-Agent": "dotrepo-external-consumer/0.1 (+https://github.com/maxwellsantoro/dotrepo)",
+        },
+        method="GET",
+    )
+
+    started = time.perf_counter()
+
+    def finish(result):
+        result.elapsed_ms = round((time.perf_counter() - started) * 1000, 3)
+        return evaluate_for_task(
+            result, required_fields=required_fields, max_record_age_days=max_record_age_days
+        )
+
+    open_fn = opener.open if opener is not None else urllib.request.urlopen
+    try:
+        # The outer boundary also catches failures reading an HTTPError body.
+        try:
+            with open_fn(request, timeout=timeout) as response:
+                status = getattr(response, "status", None) or response.getcode()
+                body = bounded_body(response, MAX_PROFILE_BYTES)
+        except urllib.error.HTTPError as exc:
+            with exc:
+                status = exc.code
+                if status == 404:
+                    # The status establishes a miss. Error bodies are irrelevant
+                    # to this decision and may be large or fail while reading.
+                    return finish(
+                        interpret_http_response(identity=identity, status_code=404, body=None)
+                    )
+                body = bounded_body(exc, MAX_ERROR_BYTES)
+        return finish(
+            interpret_http_response(identity=identity, status_code=int(status), body=body)
+        )
+    except Exception as exc:  # network, body read, decoding, or size limit
+        return finish(
+            LookupResult(
+                identity=identity,
+                status_code=0,
+                hit=False,
+                miss=False,
+                error=f"transport:{type(exc).__name__}:{str(exc)[:1024]}",
+            )
+        )
+
+
+def bounded_body(response, limit):
+    body = bytearray()
+    while len(body) <= limit:
+        chunk = response.read(min(65536, limit + 1 - len(body)))
+        if not chunk:
+            return bytes(body)
+        body.extend(chunk)
+    raise ValueError(f"response exceeds {limit} bytes")
+
+
+def miss_log_line(miss: LookupMiss) -> str:
+    """Emit a Worker-compatible DOTREPO_LOOKUP_MISS line for operator aggregation."""
+    payload = {
+        "host": miss.host,
+        "owner": miss.owner,
+        "repo": miss.repo,
+        "route": miss.route,
+        "source": miss.source,
+    }
+    return f"DOTREPO_LOOKUP_MISS {json.dumps(payload, separators=(',', ':'))}"
+
+
+def result_to_miss(result: LookupResult) -> LookupMiss | None:
+    if not result.miss:
+        return None
+    host, owner, repo = result.identity.split("/", 2)
+    return LookupMiss(host=host, owner=owner, repo=repo)
+
+
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "repositories",
+        nargs="+",
+        help="Repository URL or host/owner/repo identity (repeatable)",
+    )
+    parser.add_argument("--base-url", default=DEFAULT_BASE_URL)
+    parser.add_argument(
+        "--surface",
+        choices=("profile", "index"),
+        default="profile",
+        help="Hosted document to fetch (default: profile.json)",
+    )
+    parser.add_argument("--output-json")
+    parser.add_argument(
+        "--require", action="append", choices=sorted(FIELD_PATHS), dest="required_fields"
+    )
+    parser.add_argument("--max-record-age-days", type=int, default=30)
+    parser.add_argument(
+        "--miss-log",
+        help="Append DOTREPO_LOOKUP_MISS lines for 404s (aggregate with scripts/aggregate_lookup_misses.py)",
+    )
+    parser.add_argument(
+        "--allow-scrape-fallback",
+        action="store_true",
+        help="Print a scrape-fallback hint on miss (still does not scrape itself)",
+    )
+    args = parser.parse_args(argv)
+    if args.max_record_age_days < 0:
+        parser.error("--max-record-age-days must be nonnegative")
+    return args
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = parse_args(argv)
+    results: list[dict[str, Any]] = []
+    miss_lines: list[str] = []
+
+    for repo in args.repositories:
+        result = fetch_profile(
+            repo,
+            base_url=args.base_url,
+            surface=args.surface,
+            required_fields=args.required_fields,
+            max_record_age_days=args.max_record_age_days,
+        )
+        payload = asdict(result)
+        if result.hit and result.profile is not None:
+            payload["profile_keys"] = sorted(result.profile.keys())
+            payload.pop("profile", None)
+        results.append(payload)
+
+        print(f"## {result.identity}")
+        print(f"- status_code: {result.status_code}")
+        print(f"- hit: {result.hit}  miss: {result.miss}")
+        print(f"- usable_for_task: {result.usable}; fallback_reasons: {result.fallback_reasons}")
+        if result.record_status:
+            print(f"- record.status: {result.record_status}")
+        if result.trust:
+            print(f"- trust: {json.dumps(result.trust, sort_keys=True)}")
+        if result.freshness:
+            print(f"- freshness: {json.dumps(result.freshness, sort_keys=True)}")
+        if result.missing_fields:
+            print(f"- missing_fields (honest): {', '.join(result.missing_fields)}")
+        if result.error:
+            print(f"- error: {result.error}")
+        if not result.usable and args.allow_scrape_fallback:
+            print(
+                "- fallback: inspect upstream sources; this example does not execute commands or scrape"
+            )
+
+        miss = result_to_miss(result)
+        if miss is not None:
+            miss.route = args.surface
+            miss_lines.append(miss_log_line(miss))
+
+    if args.miss_log and miss_lines:
+        path = args.miss_log
+        with open(path, "a", encoding="utf-8") as handle:
+            for line in miss_lines:
+                handle.write(line + "\n")
+        print(f"\nWrote {len(miss_lines)} miss log line(s) to {path}")
+
+    if args.output_json:
+        with open(args.output_json, "w", encoding="utf-8") as handle:
+            json.dump(
+                {
+                    "results": results,
+                    "missCount": len(miss_lines),
+                    "usableTaskCount": sum(r["usable"] for r in results),
+                    "fallbackRequiredCount": sum(not r["usable"] for r in results),
+                    "consumerClass": "in-repository-reference",
+                    "externalAdoption": False,
+                },
+                handle,
+                indent=2,
+            )
+            handle.write("\n")
+
+    # Exit 0 even on misses: misses are a successful observation, not a client crash.
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

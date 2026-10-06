@@ -1,0 +1,114 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-06T01:32:23.461706176Z",
+    "snapshotDigest": "a7e4e24a9d77699e21ef10486d17b8afd9e812b57fe9d112a4006d54677d3697",
+    "staleAfter": "2026-10-13T01:32:23.461706176Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "maxwellsantoro",
+    "repo": "pagedigest",
+    "source": "https://github.com/maxwellsantoro/pagedigest"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/maxwellsantoro/pagedigest/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/maxwellsantoro/pagedigest",
+    "generatedAt": "2026-10-06T01:15:26.806051Z",
+    "evidencePath": "repos/github.com/maxwellsantoro/pagedigest/evidence.md",
+    "freshnessStatus": "fresh",
+    "ageDays": 0,
+    "staleAfterDays": 30,
+    "sourceRevision": "f880f813cc0df49603482dbd879ff4ef49b3a519"
+  },
+  "purpose": "PageDigest is a JSON change manifest for public websites.",
+  "name": "pagedigest",
+  "homepage": "https://github.com/maxwellsantoro/pagedigest",
+  "license": "MIT",
+  "execution": {
+    "testCandidates": [
+      {
+        "command": "uv run --locked python -m unittest discover -s tests -v",
+        "source": "AGENTS.md",
+        "context": {
+          "command": "uv run --locked python -m unittest discover -s tests -v",
+          "workingDirectory": "implementations/python-consumer",
+          "scope": "component",
+          "component": "implementations/python-consumer",
+          "prerequisites": [
+            "uv and locked consumer environment"
+          ],
+          "source": "AGENTS.md"
+        }
+      },
+      {
+        "command": "cargo test --locked",
+        "source": "AGENTS.md",
+        "context": {
+          "command": "cargo test --locked",
+          "workingDirectory": "implementations/rust-generator",
+          "scope": "component",
+          "component": "implementations/rust-generator",
+          "prerequisites": [
+            "Rust/Cargo"
+          ],
+          "source": "AGENTS.md"
+        }
+      }
+    ]
+  },
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "imported",
+    "confidence": "high",
+    "provenance": [
+      "imported"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "fieldEvidence": {
+    "repo.description": {
+      "checkedAt": "2026-10-06T01:15:26.806051Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "Transcribed from inspected source at f880f813cc0df49603482dbd879ff4ef49b3a519; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution.",
+      "source": "README.md",
+      "state": "present"
+    },
+    "repo.test_candidates.0": {
+      "checkedAt": "2026-10-06T01:15:26.806051Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "Transcribed from inspected source at f880f813cc0df49603482dbd879ff4ef49b3a519; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution.",
+      "source": "AGENTS.md",
+      "state": "present"
+    },
+    "repo.test_candidates.1": {
+      "checkedAt": "2026-10-06T01:15:26.806051Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "Transcribed from inspected source at f880f813cc0df49603482dbd879ff4ef49b3a519; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution.",
+      "source": "AGENTS.md",
+      "state": "present"
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/maxwellsantoro/pagedigest/profile.json",
+    "repository": "/v0/repos/github.com/maxwellsantoro/pagedigest/index.json",
+    "trust": "/v0/repos/github.com/maxwellsantoro/pagedigest/trust.json",
+    "queryTemplate": "/v0/repos/github.com/maxwellsantoro/pagedigest/query?path={dot_path}",
+    "indexPath": "repos/github.com/maxwellsantoro/pagedigest/"
+  }
+}

@@ -1,0 +1,135 @@
+[package]
+name = "ries"
+version = "2.0.2"
+edition = "2021"
+authors = ["Maxwell Santoro"]
+description = "Find algebraic equations given their solution - Rust implementation"
+license = "MIT"
+homepage = "https://maxwellsantoro.com/projects/ries-rs"
+repository = "https://github.com/maxwellsantoro/ries-rs"
+documentation = "https://docs.rs/ries"
+readme = "README.md"
+keywords = ["math", "equation", "solver", "algebraic", "ries"]
+categories = ["mathematics", "science"]
+exclude = [
+    # Local dev tooling
+    ".playwright-mcp/**",
+    ".codex-playwright/**",
+
+    # Web/WASM build artifacts and node tooling
+    "node_modules/**",
+    "pkg/**",
+    "pkg-*/*",
+    "web/**",
+    "package.json",
+    "package-lock.json",
+    "playwright.config.ts",
+    "tests/web-smoke.spec.ts",
+
+    # Separate Python wheel project
+    "ries-py/**",
+
+    # Historical docs and archived artifacts
+    "docs/plans/**",
+    "docs/archive/**",
+
+    # Output / reports / caches
+    "output/**",
+    "test-results/**",
+    "playwright-report/**",
+
+    # Local-only cargo config (e.g. target-cpu=native)
+    ".cargo/**",
+
+    # Scratch / backup files
+    "Cargo.toml.orig",
+
+    # Agent guidance docs (CLAUDE.md is a symlink to AGENTS.md)
+    "AGENTS.md",
+    "CLAUDE.md",
+]
+
+[lib]
+name = "ries_rs"
+path = "src/lib.rs"
+# cdylib is required for wasm-pack (WASM) builds. Pure Rust consumers only
+# need rlib; use `cargo build --bin ries-rs` to skip the cdylib link step.
+crate-type = ["cdylib", "rlib"]
+
+[[bin]]
+name = "ries-rs"
+path = "src/main.rs"
+
+[features]
+default = ["parallel"]
+parallel = ["rayon"]
+highprec = ["rug"]
+wasm = ["wasm-bindgen", "js-sys", "serde-wasm-bindgen", "console_error_panic_hook"]
+# Threaded WASM: requires nightly, atomics, COOP/COEP. Enables parallel search in browser.
+wasm-threads = ["wasm", "parallel", "wasm-bindgen-rayon"]
+
+[dependencies]
+# CLI
+clap = { version = "4.5", features = ["derive"] }
+
+# Directories (for profile loading)
+dirs = "5.0"
+
+# Parallelization
+rayon = { version = "1.10", optional = true }
+
+# Arbitrary precision (optional)
+rug = { version = "1.24", optional = true }
+
+
+# WASM bindings (optional)
+wasm-bindgen = { version = "0.2", optional = true }
+js-sys = { version = "0.3", optional = true }
+serde-wasm-bindgen = { version = "0.6", optional = true }
+console_error_panic_hook = { version = "0.1", optional = true }
+wasm-bindgen-rayon = { version = "1.2", optional = true }
+
+# Utilities
+ordered-float = "4.2"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+smallvec = "1.13"
+thiserror = "1.0"
+
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3"
+
+[target.'cfg(not(all(target_arch = "wasm32", target_os = "unknown")))'.dev-dependencies]
+criterion = "0.5"
+proptest = "1.4"
+
+[target.'cfg(all(target_arch = "wasm32", target_os = "unknown"))'.dev-dependencies]
+getrandom = { version = "0.3", features = ["wasm_js"] }
+
+[[bench]]
+name = "evaluation"
+harness = false
+
+[[bench]]
+name = "search"
+harness = false
+
+[[bench]]
+name = "generation"
+harness = false
+
+[profile.release]
+lto = true
+codegen-units = 1
+opt-level = 3
+panic = "abort"
+
+[profile.bench]
+inherits = "release"
+# Cargo's bench harness already forces unwinding, so an explicit `panic`
+# setting here only generates a warning during normal release checks.
+
+# Create .cargo/config.toml for native CPU optimization

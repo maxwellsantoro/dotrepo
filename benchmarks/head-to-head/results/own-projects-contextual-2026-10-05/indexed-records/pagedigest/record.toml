@@ -1,0 +1,70 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/maxwellsantoro/pagedigest"
+generated_at = "2026-10-06T01:15:26.806051Z"
+
+[record.trust]
+confidence = "high"
+provenance = ["imported"]
+notes = "Bounded manual source inspection at f880f813cc0df49603482dbd879ff4ef49b3a519. AGENTS focused runs explicitly precede each test with its component cd. The repository map confirms both physical component directories; manifests/lockfile confirm preparation requirements. Repository default build/test scalars are withheld because these are two scoped implementations, not all repository surfaces. This is an imported overlay, not pipeline verification or maintainer canonical authority."
+
+[repo]
+name = "pagedigest"
+description = "PageDigest is a JSON change manifest for public websites."
+homepage = "https://github.com/maxwellsantoro/pagedigest"
+license = "MIT"
+
+[[repo.test_candidates]]
+command = "uv run --locked python -m unittest discover -s tests -v"
+source = "AGENTS.md"
+[repo.test_candidates.context]
+command = "uv run --locked python -m unittest discover -s tests -v"
+working_directory = "implementations/python-consumer"
+scope = "component"
+prerequisites = ["uv and locked consumer environment"]
+source = "AGENTS.md"
+component = "implementations/python-consumer"
+
+[[repo.test_candidates]]
+command = "cargo test --locked"
+source = "AGENTS.md"
+[repo.test_candidates.context]
+command = "cargo test --locked"
+working_directory = "implementations/rust-generator"
+scope = "component"
+prerequisites = ["Rust/Cargo"]
+source = "AGENTS.md"
+component = "implementations/rust-generator"
+
+[x.dotrepo.field_evidence."repo.description"]
+state = "present"
+method = "extracted"
+confidence = "high"
+source = "README.md"
+checkedAt = "2026-10-06T01:15:26.806051Z"
+valueJson = "\"PageDigest is a JSON change manifest for public websites.\""
+reason = "Transcribed from inspected source at f880f813cc0df49603482dbd879ff4ef49b3a519; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution."
+
+[x.dotrepo.field_evidence."repo.test_candidates.0"]
+state = "present"
+method = "extracted"
+confidence = "high"
+source = "AGENTS.md"
+checkedAt = "2026-10-06T01:15:26.806051Z"
+valueJson = "{\"command\": \"uv run --locked python -m unittest discover -s tests -v\", \"ecosystem\": null, \"source\": \"AGENTS.md\", \"context\": {\"command\": \"uv run --locked python -m unittest discover -s tests -v\", \"working_directory\": \"implementations/python-consumer\", \"scope\": \"component\", \"prerequisites\": [\"uv and locked consumer environment\"], \"source\": \"AGENTS.md\", \"component\": \"implementations/python-consumer\"}}"
+reason = "Transcribed from inspected source at f880f813cc0df49603482dbd879ff4ef49b3a519; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution."
+
+[x.dotrepo.field_evidence."repo.test_candidates.1"]
+state = "present"
+method = "extracted"
+confidence = "high"
+source = "AGENTS.md"
+checkedAt = "2026-10-06T01:15:26.806051Z"
+valueJson = "{\"command\": \"cargo test --locked\", \"ecosystem\": null, \"source\": \"AGENTS.md\", \"context\": {\"command\": \"cargo test --locked\", \"working_directory\": \"implementations/rust-generator\", \"scope\": \"component\", \"prerequisites\": [\"Rust/Cargo\"], \"source\": \"AGENTS.md\", \"component\": \"implementations/rust-generator\"}}"
+reason = "Transcribed from inspected source at f880f813cc0df49603482dbd879ff4ef49b3a519; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution."
+
+[x.github]
+head_sha = "f880f813cc0df49603482dbd879ff4ef49b3a519"

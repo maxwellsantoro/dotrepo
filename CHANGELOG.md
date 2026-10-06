@@ -15,6 +15,14 @@ generated growth, coverage, promotion, and telemetry artifacts own live values.
 
 ### Documentation maintenance
 
+- Retain the new contextual own-project campaign separately: both arms complete
+  eight tasks, with six direct profile completions and two correct source
+  fallbacks in lookup-first. Preserve live receipts, command/proof artifacts,
+  frozen source/runtime bindings and unknown cost allocations. Keep this curated
+  operator result separate from independent adoption and net-cost claims.
+- Withhold conditional Rake declarations even when a quoted hash precedes the
+  modifier; scan full lines conservatively and add actual-import/actual-Rake
+  regressions for that case.
 - Prepare the contextual own-project campaign with physical task component paths,
   merged upstream pins, Atlas-only SDK preparation outside profile instructions,
   and Python/uv runtime freeze checks. Source-inspect the four demand identities;

@@ -1,0 +1,338 @@
+# SHA-256 Benchmark Atlas — implementation registry
+# Status: DISCOVERED | ADMITTED | EXCLUDED | BROKEN | DUPLICATE_BACKEND | UNSUPPORTED_PLATFORM
+#
+# Provenance model:
+#   language interface → library → implementation → backend → CPU path
+
+schema_version: 1
+
+message_sizes_bytes:
+  - 0
+  - 1
+  - 3
+  - 32
+  - 55
+  - 56
+  - 63
+  - 64
+  - 65
+  - 80
+  - 127
+  - 128
+  - 256
+  - 1024
+  - 4096
+  - 65536
+  - 1048576
+  - 16777216
+
+leaderboards:
+  - id: production
+    description: Fastest normal SHA-256 API a programmer would reasonably use (native libs / CPU accel allowed)
+  - id: native
+    description: Implementations belonging to the ecosystem rather than wrapping a foreign crypto library
+  - id: portable
+    description: No SHA extensions or architecture-specific assembly
+  - id: pure-language
+    description: Implemented predominantly in the named language
+  - id: reference
+    description: Straightforward pedagogical implementations of the SHA-256 algorithm
+
+implementations:
+  - id: c-openssl
+    language: c
+    project: openssl/openssl
+    package: libcrypto
+    version: system
+    source_commit: null
+    implementation_class: production
+    backend: openssl
+    hardware_acceleration: auto
+    status: admitted
+    leaderboards: [production]
+    notes: Direct OpenSSL EVP SHA-256; often the backend behind many language wrappers.
+    build: make -C implementations/c-openssl
+    binary: implementations/c-openssl/sha256_runner
+
+  - id: c-ref
+    language: c
+    project: local/reference
+    package: null
+    version: "1.0"
+    source_commit: null
+    implementation_class: reference
+    backend: reference-c
+    hardware_acceleration: none
+    status: admitted
+    leaderboards: [portable, pure-language, reference]
+    notes: Compact portable C reference (FIPS 180-4 style). No SIMD / SHA-NI.
+    build: make -C implementations/c-ref
+    binary: implementations/c-ref/sha256_runner
+
+  - id: rust-sha2
+    language: rust
+    project: RustCrypto/hashes
+    package: sha2
+    version: "0.10"
+    source_commit: null
+    implementation_class: native
+    backend: rustcrypto
+    hardware_acceleration: auto
+    status: admitted
+    leaderboards: [production, native]
+    notes: RustCrypto sha2 crate; may dispatch to SHA-NI / asm where available.
+    build: cargo build --release --manifest-path implementations/rust-sha2/Cargo.toml
+    binary: implementations/rust-sha2/target/release/sha256_runner
+
+  - id: go-stdlib
+    language: go
+    project: golang/go
+    package: crypto/sha256
+    version: go-toolchain
+    source_commit: null
+    implementation_class: native
+    backend: go-stdlib
+    hardware_acceleration: auto
+    status: admitted
+    leaderboards: [production, native]
+    notes: Go standard library crypto/sha256 with arch-specific assembly paths.
+    build: go build -C implementations/go-stdlib -o sha256_runner .
+    binary: implementations/go-stdlib/sha256_runner
+
+  - id: python-hashlib
+    language: python
+    project: python/cpython
+    package: hashlib
+    version: runtime
+    source_commit: null
+    implementation_class: production
+    backend: openssl
+    hardware_acceleration: auto
+    status: admitted
+    leaderboards: [production]
+    notes: CPython hashlib.sha256 — typically OpenSSL-backed on modern builds.
+    build: null
+    binary: implementations/python-hashlib/sha256_runner.py
+    interpreter: python
+
+  - id: python-pure
+    language: python
+    project: local/pure
+    package: null
+    version: "1.0"
+    source_commit: null
+    implementation_class: pure-language
+    backend: pure-python
+    hardware_acceleration: none
+    status: admitted
+    leaderboards: [pure-language, portable, reference]
+    notes: Pure-Python SHA-256 for abstraction-boundary contrast vs hashlib.
+    slow: true
+    build: null
+    binary: implementations/python-pure/sha256_runner.py
+    interpreter: python
+
+  - id: node-crypto
+    language: javascript
+    project: nodejs/node
+    package: node:crypto
+    version: runtime
+    source_commit: null
+    implementation_class: production
+    backend: openssl
+    hardware_acceleration: auto
+    status: admitted
+    leaderboards: [production]
+    notes: Node.js crypto.createHash('sha256') — OpenSSL wrapper.
+    build: null
+    binary: implementations/node-crypto/sha256_runner.js
+    interpreter: node
+
+  - id: java-jdk
+    language: java
+    project: openjdk
+    package: java.security.MessageDigest
+    version: runtime
+    source_commit: null
+    implementation_class: native
+    backend: jdk-provider
+    hardware_acceleration: auto
+    status: admitted
+    leaderboards: [production, native]
+    notes: JDK MessageDigest.getInstance("SHA-256") default provider.
+    build: javac -d implementations/java-jdk/out implementations/java-jdk/Sha256Runner.java
+    binary: implementations/java-jdk/out
+    interpreter: java
+    java_main: Sha256Runner
+
+  - id: rust-ring
+    language: rust
+    project: briansmith/ring
+    package: ring
+    version: "0.17"
+    source_commit: null
+    implementation_class: native
+    backend: ring
+    hardware_acceleration: auto
+    status: admitted
+    leaderboards: [production, native]
+    notes: ring crate SHA-256; distinct from RustCrypto sha2.
+    build: cargo build --release --manifest-path implementations/rust-ring/Cargo.toml
+    binary: implementations/rust-ring/target/release/sha256_runner
+
+  - id: rust-openssl
+    language: rust
+    project: sfackler/rust-openssl
+    package: openssl
+    version: "0.10"
+    source_commit: null
+    implementation_class: production
+    backend: openssl
+    hardware_acceleration: auto
+    status: admitted
+    leaderboards: [production]
+    notes: Rust openssl crate wrapping libcrypto SHA-256.
+    build: cargo build --release --manifest-path implementations/rust-openssl/Cargo.toml
+    binary: implementations/rust-openssl/target/release/sha256_runner
+
+  - id: c-libsodium
+    language: c
+    project: jedisct1/libsodium
+    package: libsodium
+    version: system
+    source_commit: null
+    implementation_class: production
+    backend: libsodium
+    hardware_acceleration: auto
+    status: admitted
+    leaderboards: [production, native]
+    notes: crypto_hash_sha256 from libsodium.
+    build: make -C implementations/c-libsodium
+    binary: implementations/c-libsodium/sha256_runner
+
+  - id: c-mbedtls
+    language: c
+    project: Mbed-TLS/mbedtls
+    package: mbedcrypto
+    version: system
+    source_commit: null
+    implementation_class: native
+    backend: mbedtls
+    hardware_acceleration: portable
+    status: admitted
+    leaderboards: [production, native, portable]
+    notes: mbedTLS software SHA-256 (no OpenSSL).
+    build: make -C implementations/c-mbedtls
+    binary: implementations/c-mbedtls/sha256_runner
+
+  - id: ruby-openssl
+    language: ruby
+    project: ruby/openssl
+    package: openssl
+    version: runtime
+    source_commit: null
+    implementation_class: production
+    backend: openssl
+    hardware_acceleration: auto
+    status: admitted
+    leaderboards: [production]
+    notes: OpenSSL::Digest SHA-256 via CRuby openssl extension.
+    build: null
+    binary: implementations/ruby-openssl/sha256_runner.rb
+    interpreter: ruby
+
+  - id: php-hash
+    language: php
+    project: php/php-src
+    package: hash
+    version: runtime
+    source_commit: null
+    implementation_class: production
+    backend: php-hash-ext
+    hardware_acceleration: auto
+    status: admitted
+    leaderboards: [production]
+    notes: PHP hash('sha256') — backend varies by build (often OpenSSL).
+    build: null
+    binary: implementations/php-hash/sha256_runner.php
+    interpreter: php
+
+  - id: python-cryptography
+    language: python
+    project: pyca/cryptography
+    package: cryptography
+    version: runtime
+    source_commit: null
+    implementation_class: production
+    backend: openssl
+    hardware_acceleration: auto
+    status: admitted
+    leaderboards: [production]
+    notes: cryptography.hazmat SHA-256 (OpenSSL-backed on typical Linux builds).
+    build: null
+    binary: implementations/python-cryptography/sha256_runner.py
+    interpreter: python
+
+  - id: bun-crypto
+    language: javascript
+    project: oven-sh/bun
+    package: bun:crypto
+    version: runtime
+    source_commit: null
+    implementation_class: production
+    backend: boringssl
+    hardware_acceleration: auto
+    status: admitted
+    leaderboards: [production]
+    notes: Bun crypto.createHash — BoringSSL-backed, distinct from Node/OpenSSL path.
+    build: null
+    binary: implementations/bun-crypto/sha256_runner.js
+    interpreter: bun
+
+  - id: zig-std
+    language: zig
+    project: ziglang/zig
+    package: std.crypto.hash.sha2
+    version: "0.14"
+    source_commit: null
+    implementation_class: native
+    backend: zig-stdlib
+    hardware_acceleration: auto
+    status: admitted
+    leaderboards: [production, native]
+    notes: Zig standard library Sha256.
+    build: zig build --build-file implementations/zig-std/build.zig -Doptimize=ReleaseFast
+    binary: implementations/zig-std/zig-out/bin/sha256_runner
+
+  - id: rust-sodium
+    language: rust
+    project: sodiumoxide/sodiumoxide
+    package: sodiumoxide
+    version: "0.2"
+    source_commit: null
+    implementation_class: production
+    backend: libsodium
+    hardware_acceleration: auto
+    status: admitted
+    leaderboards: [production]
+    notes: Rust sodiumoxide crate wrapping libsodium (same backend as c-libsodium).
+    build: cargo build --release --manifest-path implementations/rust-sodium/Cargo.toml
+    binary: implementations/rust-sodium/target/release/sha256_runner
+
+  - id: java-bouncycastle
+    language: java
+    project: bcgit/bc-java
+    package: bcprov-jdk18on
+    version: "1.78"
+    source_commit: null
+    implementation_class: native
+    backend: bouncycastle
+    hardware_acceleration: portable
+    status: admitted
+    leaderboards: [production, native, portable]
+    notes: Bouncy Castle JCE provider SHA-256 (pure Java).
+    build: bash implementations/java-bouncycastle/build.sh
+    binary: implementations/java-bouncycastle/out
+    java_cp: implementations/java-bouncycastle/bcprov.jar
+    interpreter: java
+    java_main: Sha256Runner

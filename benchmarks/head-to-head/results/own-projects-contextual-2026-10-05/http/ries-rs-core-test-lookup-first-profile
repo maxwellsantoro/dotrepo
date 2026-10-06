@@ -1,0 +1,137 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-06T01:32:23.461706176Z",
+    "snapshotDigest": "a7e4e24a9d77699e21ef10486d17b8afd9e812b57fe9d112a4006d54677d3697",
+    "staleAfter": "2026-10-13T01:32:23.461706176Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "maxwellsantoro",
+    "repo": "ries-rs",
+    "source": "https://github.com/maxwellsantoro/ries-rs"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/maxwellsantoro/ries-rs/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/maxwellsantoro/ries-rs",
+    "generatedAt": "2026-10-06T01:20:35.304229Z",
+    "evidencePath": "repos/github.com/maxwellsantoro/ries-rs/evidence.md",
+    "freshnessStatus": "fresh",
+    "ageDays": 0,
+    "staleAfterDays": 30,
+    "sourceRevision": "cfa959ed21a5a5e5f3d9538d9d1714c2401611e5"
+  },
+  "purpose": "Rust inverse equation solver for turning a target number into compact algebraic equations.",
+  "name": "ries-rs",
+  "homepage": "https://github.com/maxwellsantoro/ries-rs",
+  "license": "MIT",
+  "execution": {
+    "buildCandidates": [
+      {
+        "command": "cargo build",
+        "source": "CONTRIBUTING.md",
+        "context": {
+          "command": "cargo build",
+          "workingDirectory": ".",
+          "scope": "component",
+          "component": "src",
+          "prerequisites": [
+            "Rust/Cargo"
+          ],
+          "source": "CONTRIBUTING.md"
+        }
+      }
+    ],
+    "testCandidates": [
+      {
+        "command": "cargo test",
+        "source": "AGENTS.md",
+        "context": {
+          "command": "cargo test",
+          "workingDirectory": ".",
+          "scope": "component",
+          "component": "src",
+          "prerequisites": [
+            "Rust/Cargo"
+          ],
+          "source": "AGENTS.md"
+        }
+      }
+    ]
+  },
+  "docs": {},
+  "ownership": {
+    "maintainers": [
+      "@maxwellsantoro"
+    ],
+    "securityContact": "https://github.com/maxwellsantoro/ries-rs/security/advisories/new"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "imported",
+    "confidence": "high",
+    "provenance": [
+      "imported"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "fieldEvidence": {
+    "owners.maintainers": {
+      "checkedAt": "2026-10-06T01:20:35.304229Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "Explicit wildcard owner or reporting URL in the inspected generated source surface at the pinned revision; no new authority status is asserted.",
+      "source": ".github/CODEOWNERS",
+      "state": "present"
+    },
+    "owners.security_contact": {
+      "checkedAt": "2026-10-06T01:20:35.304229Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "Explicit wildcard owner or reporting URL in the inspected generated source surface at the pinned revision; no new authority status is asserted.",
+      "source": ".github/SECURITY.md",
+      "state": "present"
+    },
+    "repo.build_candidates.0": {
+      "checkedAt": "2026-10-06T01:20:35.304229Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "Transcribed from inspected source at cfa959ed21a5a5e5f3d9538d9d1714c2401611e5; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution.",
+      "source": "CONTRIBUTING.md",
+      "state": "present"
+    },
+    "repo.description": {
+      "checkedAt": "2026-10-06T01:20:35.304229Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "Transcribed from inspected source at cfa959ed21a5a5e5f3d9538d9d1714c2401611e5; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution.",
+      "source": "README.md",
+      "state": "present"
+    },
+    "repo.test_candidates.0": {
+      "checkedAt": "2026-10-06T01:20:35.304229Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "Transcribed from inspected source at cfa959ed21a5a5e5f3d9538d9d1714c2401611e5; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution.",
+      "source": "AGENTS.md",
+      "state": "present"
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/maxwellsantoro/ries-rs/profile.json",
+    "repository": "/v0/repos/github.com/maxwellsantoro/ries-rs/index.json",
+    "trust": "/v0/repos/github.com/maxwellsantoro/ries-rs/trust.json",
+    "queryTemplate": "/v0/repos/github.com/maxwellsantoro/ries-rs/query?path={dot_path}",
+    "indexPath": "repos/github.com/maxwellsantoro/ries-rs/"
+  }
+}

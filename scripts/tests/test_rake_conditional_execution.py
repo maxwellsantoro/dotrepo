@@ -10,7 +10,9 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 @pytest.mark.skipif(shutil.which("rake") is None, reason="Rake executable unavailable")
-@pytest.mark.parametrize("fixture", ["rake-if-modifier", "rake-unless-modifier", "rake-if-block"])
+@pytest.mark.parametrize(
+    "fixture", ["rake-if-modifier", "rake-unless-modifier", "rake-if-block", "rake-if-quoted-hash"]
+)
 def test_conditional_declarations_do_not_create_a_test_target(fixture):
     rakefile = ROOT / "crates/dotrepo-core/tests/fixtures/import" / fixture / "Rakefile"
     result = subprocess.run(

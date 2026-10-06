@@ -1,0 +1,1035 @@
+{
+  "version": 1,
+  "workloadSha256": "b56492c71a44577f0cb27332047c1ad520dd813e06e51e61ab84f8600e3fa1e2",
+  "runs": [
+    {
+      "taskId": "RamenOS-host-build",
+      "arm": "source-first",
+      "revision": "8dc5ff88ddc404528c384aead9ea77f17bf63d40",
+      "environmentId": "operator-macos-arm64-contextual-v4",
+      "cacheState": "warm",
+      "startedAt": "2026-10-06T01:33:47.286519+00:00",
+      "endedAt": "2026-10-06T01:38:13.873939+00:00",
+      "elapsedMs": 266579.2938750237,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 6561,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": null,
+      "attempts": [
+        {
+          "origin": "source",
+          "instruction": {
+            "command": "just build-host",
+            "workingDirectory": ".",
+            "scope": "component",
+            "component": "services",
+            "prerequisites": [
+              "just codegen (included by wrapper)",
+              "pinned Rust nightly and just"
+            ],
+            "parameters": {},
+            "environment": {},
+            "sourcePaths": [
+              "docs/GETTING_STARTED.md"
+            ],
+            "purpose": "build"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "log": {
+            "path": "attempts/RamenOS-host-build-source-first-0.json",
+            "sha256": "237414f42202cc90847f2f4ca5280c357724b6df5aa700309b13162e670a40e4"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "RamenOS-host-build",
+      "arm": "lookup-first",
+      "revision": "8dc5ff88ddc404528c384aead9ea77f17bf63d40",
+      "environmentId": "operator-macos-arm64-contextual-v4",
+      "cacheState": "warm",
+      "startedAt": "2026-10-06T01:38:13.875688+00:00",
+      "endedAt": "2026-10-06T01:41:25.092500+00:00",
+      "elapsedMs": 191211.3491250202,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 8946,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": {
+        "snapshotId": "75707322809f36bee39edf66ce1011143b2ac62bf0cac158b7f94f8279eab35d",
+        "policy": "value-bound-contextual-instruction-v1",
+        "valuePresent": false,
+        "accepted": false,
+        "instruction": null,
+        "provenance": null,
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ]
+      },
+      "attempts": [
+        {
+          "origin": "fallback",
+          "instruction": {
+            "command": "just build-host",
+            "workingDirectory": ".",
+            "scope": "component",
+            "component": "services",
+            "prerequisites": [
+              "just codegen (included by wrapper)",
+              "pinned Rust nightly and just"
+            ],
+            "parameters": {},
+            "environment": {},
+            "sourcePaths": [
+              "docs/GETTING_STARTED.md"
+            ],
+            "purpose": "build"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "log": {
+            "path": "attempts/RamenOS-host-build-lookup-first-0.json",
+            "sha256": "55c3c97bae3eba93e3de5043d662016d25a1c41c15c347caef818e45aae99031"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "RamenOS-host-proof",
+      "arm": "lookup-first",
+      "revision": "8dc5ff88ddc404528c384aead9ea77f17bf63d40",
+      "environmentId": "operator-macos-arm64-contextual-v4",
+      "cacheState": "warm",
+      "startedAt": "2026-10-06T01:41:25.093926+00:00",
+      "endedAt": "2026-10-06T01:44:34.619283+00:00",
+      "elapsedMs": 189518.2448749547,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 13878,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": {
+        "snapshotId": "75707322809f36bee39edf66ce1011143b2ac62bf0cac158b7f94f8279eab35d",
+        "policy": "value-bound-contextual-instruction-v1",
+        "valuePresent": false,
+        "accepted": false,
+        "instruction": null,
+        "provenance": null,
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ]
+      },
+      "attempts": [
+        {
+          "origin": "fallback",
+          "instruction": {
+            "command": "just foundry-agent-task-proof-rt",
+            "workingDirectory": ".",
+            "scope": "component",
+            "component": "services/store_service",
+            "prerequisites": [
+              "just codegen (included by wrapper)",
+              "pinned Rust nightly and just"
+            ],
+            "parameters": {},
+            "environment": {},
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "log": {
+            "path": "attempts/RamenOS-host-proof-lookup-first-0.json",
+            "sha256": "361ffe7e8fad330bf2240255e03fdf71220d55859d727381383f44c9ed9febc0"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "RamenOS-host-proof",
+      "arm": "source-first",
+      "revision": "8dc5ff88ddc404528c384aead9ea77f17bf63d40",
+      "environmentId": "operator-macos-arm64-contextual-v4",
+      "cacheState": "warm",
+      "startedAt": "2026-10-06T01:44:34.621370+00:00",
+      "endedAt": "2026-10-06T01:47:36.996133+00:00",
+      "elapsedMs": 182369.586292014,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 11493,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": null,
+      "attempts": [
+        {
+          "origin": "source",
+          "instruction": {
+            "command": "just foundry-agent-task-proof-rt",
+            "workingDirectory": ".",
+            "scope": "component",
+            "component": "services/store_service",
+            "prerequisites": [
+              "just codegen (included by wrapper)",
+              "pinned Rust nightly and just"
+            ],
+            "parameters": {},
+            "environment": {},
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "log": {
+            "path": "attempts/RamenOS-host-proof-source-first-0.json",
+            "sha256": "d7d75ab033fd7cab7ee4c2114bb5c1fb85ebb18204260de1043606c3902a1984"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "sha256-benchmark-atlas-build",
+      "arm": "source-first",
+      "revision": "71eda5d6480e0b9e39f914f3641d91f98402e943",
+      "environmentId": "operator-macos-arm64-contextual-v4",
+      "cacheState": "warm",
+      "startedAt": "2026-10-06T01:47:36.997630+00:00",
+      "endedAt": "2026-10-06T01:50:02.332150+00:00",
+      "elapsedMs": 145330.20650001708,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 5692,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": null,
+      "attempts": [
+        {
+          "origin": "source",
+          "instruction": {
+            "command": "uv run sha256-atlas build",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "prerequisites": [
+              "uv sync",
+              "README quick-start compiler/toolchain prerequisites"
+            ],
+            "parameters": {},
+            "environment": {},
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "build"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "log": {
+            "path": "attempts/sha256-benchmark-atlas-build-source-first-0.json",
+            "sha256": "cdf2ebb308a9b47ab19c0652530702a2ba7a830c00e2e0514698437a97c5db98"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "sha256-benchmark-atlas-build",
+      "arm": "lookup-first",
+      "revision": "71eda5d6480e0b9e39f914f3641d91f98402e943",
+      "environmentId": "operator-macos-arm64-contextual-v4",
+      "cacheState": "warm",
+      "startedAt": "2026-10-06T01:50:02.333807+00:00",
+      "endedAt": "2026-10-06T01:52:56.772218+00:00",
+      "elapsedMs": 174433.2312500337,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 4466,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": {
+        "snapshotId": "75707322809f36bee39edf66ce1011143b2ac62bf0cac158b7f94f8279eab35d",
+        "policy": "value-bound-contextual-instruction-v1",
+        "valuePresent": true,
+        "accepted": true,
+        "instruction": {
+          "command": "uv run sha256-atlas build",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "component": null,
+          "prerequisites": [
+            "uv sync",
+            "README quick-start compiler/toolchain prerequisites"
+          ],
+          "sourcePaths": [
+            "README.md"
+          ],
+          "purpose": "build",
+          "parameters": {},
+          "environment": {}
+        },
+        "provenance": {
+          "identity": "github.com/maxwellsantoro/sha256-benchmark-atlas",
+          "recordGeneratedAt": "2026-10-06T01:15:26.806051Z",
+          "assessmentPaths": [
+            "repo.build_candidates.0"
+          ],
+          "assessments": [
+            {
+              "checkedAt": "2026-10-06T01:15:26.806051Z",
+              "confidence": "high",
+              "method": "extracted",
+              "reason": "Transcribed from inspected source at 71eda5d6480e0b9e39f914f3641d91f98402e943; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution.",
+              "source": "README.md",
+              "state": "present"
+            }
+          ]
+        },
+        "fallbackReasons": []
+      },
+      "attempts": [
+        {
+          "origin": "profile",
+          "instruction": {
+            "command": "uv run sha256-atlas build",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "prerequisites": [
+              "uv sync",
+              "README quick-start compiler/toolchain prerequisites"
+            ],
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "build",
+            "parameters": {},
+            "environment": {}
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "log": {
+            "path": "attempts/sha256-benchmark-atlas-build-lookup-first-0.json",
+            "sha256": "7d7062cf07343d22cb5e6392582c020ea99b811fa54e6f5efe5b5d5760178a65"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "sha256-benchmark-atlas-correctness",
+      "arm": "lookup-first",
+      "revision": "71eda5d6480e0b9e39f914f3641d91f98402e943",
+      "environmentId": "operator-macos-arm64-contextual-v4",
+      "cacheState": "warm",
+      "startedAt": "2026-10-06T01:52:56.773550+00:00",
+      "endedAt": "2026-10-06T01:55:45.612999+00:00",
+      "elapsedMs": 168834.5028750482,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 4466,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": {
+        "snapshotId": "75707322809f36bee39edf66ce1011143b2ac62bf0cac158b7f94f8279eab35d",
+        "policy": "value-bound-contextual-instruction-v1",
+        "valuePresent": true,
+        "accepted": true,
+        "instruction": {
+          "command": "uv run sha256-atlas correctness --cases 1000 --skip-million",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "component": null,
+          "prerequisites": [
+            "uv sync",
+            "README quick-start compiler/toolchain prerequisites",
+            "uv run sha256-atlas build"
+          ],
+          "sourcePaths": [
+            "README.md"
+          ],
+          "purpose": "test",
+          "parameters": {},
+          "environment": {}
+        },
+        "provenance": {
+          "identity": "github.com/maxwellsantoro/sha256-benchmark-atlas",
+          "recordGeneratedAt": "2026-10-06T01:15:26.806051Z",
+          "assessmentPaths": [
+            "repo.test_candidates.0"
+          ],
+          "assessments": [
+            {
+              "checkedAt": "2026-10-06T01:15:26.806051Z",
+              "confidence": "high",
+              "method": "extracted",
+              "reason": "Transcribed from inspected source at 71eda5d6480e0b9e39f914f3641d91f98402e943; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution.",
+              "source": "README.md",
+              "state": "present"
+            }
+          ]
+        },
+        "fallbackReasons": []
+      },
+      "attempts": [
+        {
+          "origin": "profile",
+          "instruction": {
+            "command": "uv run sha256-atlas correctness --cases 1000 --skip-million",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "prerequisites": [
+              "uv sync",
+              "README quick-start compiler/toolchain prerequisites",
+              "uv run sha256-atlas build"
+            ],
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "test",
+            "parameters": {},
+            "environment": {}
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "log": {
+            "path": "attempts/sha256-benchmark-atlas-correctness-lookup-first-0.json",
+            "sha256": "f23e5dce56de35e3f48229682b6de14dd74e6f29f8818e48b209536aae064389"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "sha256-benchmark-atlas-correctness",
+      "arm": "source-first",
+      "revision": "71eda5d6480e0b9e39f914f3641d91f98402e943",
+      "environmentId": "operator-macos-arm64-contextual-v4",
+      "cacheState": "warm",
+      "startedAt": "2026-10-06T01:55:45.614911+00:00",
+      "endedAt": "2026-10-06T01:57:45.106944+00:00",
+      "elapsedMs": 119488.44979098067,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 5692,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": null,
+      "attempts": [
+        {
+          "origin": "source",
+          "instruction": {
+            "command": "uv run sha256-atlas correctness --cases 1000 --skip-million",
+            "workingDirectory": ".",
+            "scope": "repository",
+            "component": null,
+            "prerequisites": [
+              "uv sync",
+              "README quick-start compiler/toolchain prerequisites",
+              "uv run sha256-atlas build"
+            ],
+            "parameters": {},
+            "environment": {},
+            "sourcePaths": [
+              "README.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "log": {
+            "path": "attempts/sha256-benchmark-atlas-correctness-source-first-0.json",
+            "sha256": "9ecd527fe020fa9e98d8f072bee68f0ec613e6fd9e463d55abbae78860ce2019"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "ries-rs-core-build",
+      "arm": "source-first",
+      "revision": "cfa959ed21a5a5e5f3d9538d9d1714c2401611e5",
+      "environmentId": "operator-macos-arm64-contextual-v4",
+      "cacheState": "warm",
+      "startedAt": "2026-10-06T01:57:45.108041+00:00",
+      "endedAt": "2026-10-06T01:57:56.497271+00:00",
+      "elapsedMs": 11388.908583961893,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 3451,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": null,
+      "attempts": [
+        {
+          "origin": "source",
+          "instruction": {
+            "command": "cargo build",
+            "workingDirectory": ".",
+            "scope": "component",
+            "component": "src",
+            "prerequisites": [
+              "Rust/Cargo"
+            ],
+            "parameters": {},
+            "environment": {},
+            "sourcePaths": [
+              "CONTRIBUTING.md"
+            ],
+            "purpose": "build"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "log": {
+            "path": "attempts/ries-rs-core-build-source-first-0.json",
+            "sha256": "04e933a1ccade1f0b5a53c6ee325c11f612ffd09f2800e5f70b8dad8913aaf8f"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "ries-rs-core-build",
+      "arm": "lookup-first",
+      "revision": "cfa959ed21a5a5e5f3d9538d9d1714c2401611e5",
+      "environmentId": "operator-macos-arm64-contextual-v4",
+      "cacheState": "warm",
+      "startedAt": "2026-10-06T01:57:56.498153+00:00",
+      "endedAt": "2026-10-06T01:58:07.236133+00:00",
+      "elapsedMs": 10737.673333031125,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 4898,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": {
+        "snapshotId": "75707322809f36bee39edf66ce1011143b2ac62bf0cac158b7f94f8279eab35d",
+        "policy": "value-bound-contextual-instruction-v1",
+        "valuePresent": true,
+        "accepted": true,
+        "instruction": {
+          "command": "cargo build",
+          "workingDirectory": ".",
+          "scope": "component",
+          "component": "src",
+          "prerequisites": [
+            "Rust/Cargo"
+          ],
+          "sourcePaths": [
+            "CONTRIBUTING.md"
+          ],
+          "purpose": "build",
+          "parameters": {},
+          "environment": {}
+        },
+        "provenance": {
+          "identity": "github.com/maxwellsantoro/ries-rs",
+          "recordGeneratedAt": "2026-10-06T01:20:35.304229Z",
+          "assessmentPaths": [
+            "repo.build_candidates.0"
+          ],
+          "assessments": [
+            {
+              "checkedAt": "2026-10-06T01:20:35.304229Z",
+              "confidence": "high",
+              "method": "extracted",
+              "reason": "Transcribed from inspected source at cfa959ed21a5a5e5f3d9538d9d1714c2401611e5; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution.",
+              "source": "CONTRIBUTING.md",
+              "state": "present"
+            }
+          ]
+        },
+        "fallbackReasons": []
+      },
+      "attempts": [
+        {
+          "origin": "profile",
+          "instruction": {
+            "command": "cargo build",
+            "workingDirectory": ".",
+            "scope": "component",
+            "component": "src",
+            "prerequisites": [
+              "Rust/Cargo"
+            ],
+            "sourcePaths": [
+              "CONTRIBUTING.md"
+            ],
+            "purpose": "build",
+            "parameters": {},
+            "environment": {}
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "log": {
+            "path": "attempts/ries-rs-core-build-lookup-first-0.json",
+            "sha256": "8c02c59b68c558477940c5aa67d2111eecd71bc7ede5ffb59574d1dd011cd65f"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "ries-rs-core-test",
+      "arm": "lookup-first",
+      "revision": "cfa959ed21a5a5e5f3d9538d9d1714c2401611e5",
+      "environmentId": "operator-macos-arm64-contextual-v4",
+      "cacheState": "warm",
+      "startedAt": "2026-10-06T01:58:07.236859+00:00",
+      "endedAt": "2026-10-06T01:58:50.717324+00:00",
+      "elapsedMs": 43477.89391700644,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 4898,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": {
+        "snapshotId": "75707322809f36bee39edf66ce1011143b2ac62bf0cac158b7f94f8279eab35d",
+        "policy": "value-bound-contextual-instruction-v1",
+        "valuePresent": true,
+        "accepted": true,
+        "instruction": {
+          "command": "cargo test",
+          "workingDirectory": ".",
+          "scope": "component",
+          "component": "src",
+          "prerequisites": [
+            "Rust/Cargo"
+          ],
+          "sourcePaths": [
+            "AGENTS.md"
+          ],
+          "purpose": "test",
+          "parameters": {},
+          "environment": {}
+        },
+        "provenance": {
+          "identity": "github.com/maxwellsantoro/ries-rs",
+          "recordGeneratedAt": "2026-10-06T01:20:35.304229Z",
+          "assessmentPaths": [
+            "repo.test_candidates.0"
+          ],
+          "assessments": [
+            {
+              "checkedAt": "2026-10-06T01:20:35.304229Z",
+              "confidence": "high",
+              "method": "extracted",
+              "reason": "Transcribed from inspected source at cfa959ed21a5a5e5f3d9538d9d1714c2401611e5; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution.",
+              "source": "AGENTS.md",
+              "state": "present"
+            }
+          ]
+        },
+        "fallbackReasons": []
+      },
+      "attempts": [
+        {
+          "origin": "profile",
+          "instruction": {
+            "command": "cargo test",
+            "workingDirectory": ".",
+            "scope": "component",
+            "component": "src",
+            "prerequisites": [
+              "Rust/Cargo"
+            ],
+            "sourcePaths": [
+              "AGENTS.md"
+            ],
+            "purpose": "test",
+            "parameters": {},
+            "environment": {}
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "log": {
+            "path": "attempts/ries-rs-core-test-lookup-first-0.json",
+            "sha256": "4ec8f77597187f5bdae70a413e33b1b9cc059f64d6d52bec8e4b8e3976c1c58f"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "ries-rs-core-test",
+      "arm": "source-first",
+      "revision": "cfa959ed21a5a5e5f3d9538d9d1714c2401611e5",
+      "environmentId": "operator-macos-arm64-contextual-v4",
+      "cacheState": "warm",
+      "startedAt": "2026-10-06T01:58:50.718083+00:00",
+      "endedAt": "2026-10-06T01:59:34.970609+00:00",
+      "elapsedMs": 44248.14325000625,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 3327,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": null,
+      "attempts": [
+        {
+          "origin": "source",
+          "instruction": {
+            "command": "cargo test",
+            "workingDirectory": ".",
+            "scope": "component",
+            "component": "src",
+            "prerequisites": [
+              "Rust/Cargo"
+            ],
+            "parameters": {},
+            "environment": {},
+            "sourcePaths": [
+              "AGENTS.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "log": {
+            "path": "attempts/ries-rs-core-test-source-first-0.json",
+            "sha256": "9ba86b1373555dbb85836e386a34e1768541665f442707b4f3afcf660b720de4"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "pagedigest-consumer-test",
+      "arm": "source-first",
+      "revision": "f880f813cc0df49603482dbd879ff4ef49b3a519",
+      "environmentId": "operator-macos-arm64-contextual-v4",
+      "cacheState": "warm",
+      "startedAt": "2026-10-06T01:59:34.972003+00:00",
+      "endedAt": "2026-10-06T01:59:42.506362+00:00",
+      "elapsedMs": 7534.2994590173475,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 4902,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": null,
+      "attempts": [
+        {
+          "origin": "source",
+          "instruction": {
+            "command": "uv run --locked python -m unittest discover -s tests -v",
+            "workingDirectory": "implementations/python-consumer",
+            "scope": "component",
+            "component": "implementations/python-consumer",
+            "prerequisites": [
+              "uv and locked consumer environment"
+            ],
+            "parameters": {},
+            "environment": {},
+            "sourcePaths": [
+              "AGENTS.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "log": {
+            "path": "attempts/pagedigest-consumer-test-source-first-0.json",
+            "sha256": "4e161c23406b20910b4d1829d59cf4dd72dd65c304fec69de08b123a3552bf57"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "pagedigest-consumer-test",
+      "arm": "lookup-first",
+      "revision": "f880f813cc0df49603482dbd879ff4ef49b3a519",
+      "environmentId": "operator-macos-arm64-contextual-v4",
+      "cacheState": "warm",
+      "startedAt": "2026-10-06T01:59:42.507873+00:00",
+      "endedAt": "2026-10-06T01:59:49.063295+00:00",
+      "elapsedMs": 6555.222125025466,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 4209,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": {
+        "snapshotId": "75707322809f36bee39edf66ce1011143b2ac62bf0cac158b7f94f8279eab35d",
+        "policy": "value-bound-contextual-instruction-v1",
+        "valuePresent": true,
+        "accepted": true,
+        "instruction": {
+          "command": "uv run --locked python -m unittest discover -s tests -v",
+          "workingDirectory": "implementations/python-consumer",
+          "scope": "component",
+          "component": "implementations/python-consumer",
+          "prerequisites": [
+            "uv and locked consumer environment"
+          ],
+          "sourcePaths": [
+            "AGENTS.md"
+          ],
+          "purpose": "test",
+          "parameters": {},
+          "environment": {}
+        },
+        "provenance": {
+          "identity": "github.com/maxwellsantoro/pagedigest",
+          "recordGeneratedAt": "2026-10-06T01:15:26.806051Z",
+          "assessmentPaths": [
+            "repo.test_candidates.0"
+          ],
+          "assessments": [
+            {
+              "checkedAt": "2026-10-06T01:15:26.806051Z",
+              "confidence": "high",
+              "method": "extracted",
+              "reason": "Transcribed from inspected source at f880f813cc0df49603482dbd879ff4ef49b3a519; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution.",
+              "source": "AGENTS.md",
+              "state": "present"
+            }
+          ]
+        },
+        "fallbackReasons": []
+      },
+      "attempts": [
+        {
+          "origin": "profile",
+          "instruction": {
+            "command": "uv run --locked python -m unittest discover -s tests -v",
+            "workingDirectory": "implementations/python-consumer",
+            "scope": "component",
+            "component": "implementations/python-consumer",
+            "prerequisites": [
+              "uv and locked consumer environment"
+            ],
+            "sourcePaths": [
+              "AGENTS.md"
+            ],
+            "purpose": "test",
+            "parameters": {},
+            "environment": {}
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "log": {
+            "path": "attempts/pagedigest-consumer-test-lookup-first-0.json",
+            "sha256": "ef7f9151d94a88a43b7288a0b4675a4b04470279da4f21386555348f2a421b05"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "pagedigest-generator-test",
+      "arm": "lookup-first",
+      "revision": "f880f813cc0df49603482dbd879ff4ef49b3a519",
+      "environmentId": "operator-macos-arm64-contextual-v4",
+      "cacheState": "warm",
+      "startedAt": "2026-10-06T01:59:49.064535+00:00",
+      "endedAt": "2026-10-06T02:00:01.588936+00:00",
+      "elapsedMs": 12523.998333024792,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 4209,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": {
+        "snapshotId": "75707322809f36bee39edf66ce1011143b2ac62bf0cac158b7f94f8279eab35d",
+        "policy": "value-bound-contextual-instruction-v1",
+        "valuePresent": true,
+        "accepted": true,
+        "instruction": {
+          "command": "cargo test --locked",
+          "workingDirectory": "implementations/rust-generator",
+          "scope": "component",
+          "component": "implementations/rust-generator",
+          "prerequisites": [
+            "Rust/Cargo"
+          ],
+          "sourcePaths": [
+            "AGENTS.md"
+          ],
+          "purpose": "test",
+          "parameters": {},
+          "environment": {}
+        },
+        "provenance": {
+          "identity": "github.com/maxwellsantoro/pagedigest",
+          "recordGeneratedAt": "2026-10-06T01:15:26.806051Z",
+          "assessmentPaths": [
+            "repo.test_candidates.1"
+          ],
+          "assessments": [
+            {
+              "checkedAt": "2026-10-06T01:15:26.806051Z",
+              "confidence": "high",
+              "method": "extracted",
+              "reason": "Transcribed from inspected source at f880f813cc0df49603482dbd879ff4ef49b3a519; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution.",
+              "source": "AGENTS.md",
+              "state": "present"
+            }
+          ]
+        },
+        "fallbackReasons": []
+      },
+      "attempts": [
+        {
+          "origin": "profile",
+          "instruction": {
+            "command": "cargo test --locked",
+            "workingDirectory": "implementations/rust-generator",
+            "scope": "component",
+            "component": "implementations/rust-generator",
+            "prerequisites": [
+              "Rust/Cargo"
+            ],
+            "sourcePaths": [
+              "AGENTS.md"
+            ],
+            "purpose": "test",
+            "parameters": {},
+            "environment": {}
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "log": {
+            "path": "attempts/pagedigest-generator-test-lookup-first-0.json",
+            "sha256": "ce04a0ffd3142e5b5bbb734ddda355c883029a7c44a3e4b8101421c897b65271"
+          }
+        }
+      ]
+    },
+    {
+      "taskId": "pagedigest-generator-test",
+      "arm": "source-first",
+      "revision": "f880f813cc0df49603482dbd879ff4ef49b3a519",
+      "environmentId": "operator-macos-arm64-contextual-v4",
+      "cacheState": "warm",
+      "startedAt": "2026-10-06T02:00:01.590310+00:00",
+      "endedAt": "2026-10-06T02:00:13.826153+00:00",
+      "elapsedMs": 12235.467749997042,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 4902,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null,
+      "lookup": null,
+      "attempts": [
+        {
+          "origin": "source",
+          "instruction": {
+            "command": "cargo test --locked",
+            "workingDirectory": "implementations/rust-generator",
+            "scope": "component",
+            "component": "implementations/rust-generator",
+            "prerequisites": [
+              "Rust/Cargo"
+            ],
+            "parameters": {},
+            "environment": {},
+            "sourcePaths": [
+              "AGENTS.md"
+            ],
+            "purpose": "test"
+          },
+          "exitCode": 0,
+          "oraclePassed": true,
+          "log": {
+            "path": "attempts/pagedigest-generator-test-source-first-0.json",
+            "sha256": "64453cdc2430de91ea2aa0da74ef1cf804116e9e2685b65db88a1c473bf469e3"
+          }
+        }
+      ]
+    }
+  ]
+}

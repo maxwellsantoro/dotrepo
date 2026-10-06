@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pagedigest"
+version = "0.2.0"
+description = "Minimal pagedigest consumer reference implementation"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+dependencies = [
+  "requests>=2.31.0"
+]
+
+[project.urls]
+Homepage = "https://pagedigest.org"
+Repository = "https://github.com/maxwellsantoro/pagedigest"
+
+[project.scripts]
+pagedigest = "pagedigest.cli:main"
+
+[project.optional-dependencies]
+dev = [
+  "jsonschema>=4.23.0",
+  "ruff>=0.8.0"
+]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]

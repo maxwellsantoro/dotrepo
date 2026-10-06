@@ -1,0 +1,122 @@
+{
+  "selectedAt": "2026-10-06T01:14:18.313842+00:00",
+  "knownCoverage": true,
+  "heldOut": false,
+  "commandsOrOraclesChanged": false,
+  "profileAuthoringStarted": false,
+  "revisions": {
+    "RamenOS": "8dc5ff88ddc404528c384aead9ea77f17bf63d40",
+    "sha256-benchmark-atlas": "71eda5d6480e0b9e39f914f3641d91f98402e943",
+    "ries-rs": "cfa959ed21a5a5e5f3d9538d9d1714c2401611e5",
+    "pagedigest": "f880f813cc0df49603482dbd879ff4ef49b3a519"
+  },
+  "cases": [
+    [
+      "RamenOS",
+      "host-build",
+      "just build-host",
+      ".",
+      "services",
+      "docs/GETTING_STARTED.md",
+      [
+        "just codegen (included by wrapper)",
+        "pinned Rust nightly and just"
+      ],
+      []
+    ],
+    [
+      "RamenOS",
+      "host-proof",
+      "just foundry-agent-task-proof-rt",
+      ".",
+      "services/store_service",
+      "README.md",
+      [
+        "just codegen (included by wrapper)",
+        "pinned Rust nightly and just"
+      ],
+      []
+    ],
+    [
+      "sha256-benchmark-atlas",
+      "build",
+      "uv run sha256-atlas build",
+      ".",
+      null,
+      "README.md",
+      [
+        "uv sync",
+        "README quick-start compiler/toolchain prerequisites"
+      ],
+      [
+        "uv sync"
+      ]
+    ],
+    [
+      "sha256-benchmark-atlas",
+      "correctness",
+      "uv run sha256-atlas correctness --cases 1000 --skip-million",
+      ".",
+      null,
+      "README.md",
+      [
+        "uv sync",
+        "README quick-start compiler/toolchain prerequisites",
+        "uv run sha256-atlas build"
+      ],
+      [
+        "uv sync",
+        "uv run sha256-atlas build"
+      ]
+    ],
+    [
+      "ries-rs",
+      "core-build",
+      "cargo build",
+      ".",
+      "src",
+      "CONTRIBUTING.md",
+      [
+        "Rust/Cargo"
+      ],
+      []
+    ],
+    [
+      "ries-rs",
+      "core-test",
+      "cargo test",
+      ".",
+      "src",
+      "AGENTS.md",
+      [
+        "Rust/Cargo"
+      ],
+      []
+    ],
+    [
+      "pagedigest",
+      "consumer-test",
+      "uv run --locked python -m unittest discover -s tests -v",
+      "implementations/python-consumer",
+      "implementations/python-consumer",
+      "AGENTS.md",
+      [
+        "uv and locked consumer environment"
+      ],
+      []
+    ],
+    [
+      "pagedigest",
+      "generator-test",
+      "cargo test --locked",
+      "implementations/rust-generator",
+      "implementations/rust-generator",
+      "AGENTS.md",
+      [
+        "Rust/Cargo"
+      ],
+      []
+    ]
+  ],
+  "scopeDecision": "RamenOS task goals name services and store_service owning directories, but aggregate wrappers remain withheld from profiles. RIES src and PageDigest implementation directories replace human labels. Atlas SDK is separately prepared operator environment."
+}
