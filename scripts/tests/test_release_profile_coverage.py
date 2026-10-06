@@ -3,9 +3,14 @@ from __future__ import annotations
 import importlib.util
 import json
 from pathlib import Path
+import shutil
+import sys
+
+import pytest
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(REPO_ROOT / "scripts"))
 SCRIPT = REPO_ROOT / "scripts/check_release_gate.py"
 SPEC = importlib.util.spec_from_file_location("check_release_gate", SCRIPT)
 release_gate = importlib.util.module_from_spec(SPEC)
@@ -138,26 +143,56 @@ def test_release_gate_applies_index_growth_tranche_baseline(tmp_path: Path) -> N
     growth_baseline = json.loads(
         (REPO_ROOT / "scripts/fixtures/index_growth_tranche_baseline.json").read_text()
     )
-    command = release_gate.index_growth_tranche_command(REPO_ROOT, output_root)
+    # This checks command construction, not current corpus health. The real
+    # corpus is checked by the release gate; keep this unit fixture bounded.
+    fixture_root = tmp_path / "repo"
+    baselines = fixture_root / "scripts/fixtures"
+    baselines.mkdir(parents=True)
+    for name in ["index_growth_tranche_baseline.json", "public_profile_coverage_baseline.json"]:
+        shutil.copyfile(REPO_ROOT / "scripts/fixtures" / name, baselines / name)
+    record = fixture_root / "index/repos/github.com/example/one/record.toml"
+    record.parent.mkdir(parents=True)
+    record.write_text('[record]\nstatus = "verified"\n[record.trust]\nconfidence = "medium"\n')
+    command = release_gate.index_growth_tranche_command(fixture_root, output_root)
 
     assert "scripts/plan_index_growth_tranche.py" in command
     assert command[command.index("--candidate-file") + 1] == str(
-        REPO_ROOT / growth_baseline["candidateFile"]
+        fixture_root / growth_baseline["candidateFile"]
     )
     assert command[command.index("--target-count") + 1] == str(growth_baseline["targetCount"])
     assert command[command.index("--min-selected") + 1] == str(growth_baseline["minSelected"])
-    assert command[command.index("--current-high-signal") + 1] == str(
-        release_gate.current_high_signal_count(REPO_ROOT)
-    )
+    assert command[command.index("--current-high-signal") + 1] == "1"
     assert command[command.index("--milestone-high-signal-target") + 1] == str(
         growth_baseline["milestoneHighSignalTarget"]
     )
     assert command[command.index("--min-planned-high-signal-capacity") + 1] == str(
-        release_gate.current_high_signal_count(REPO_ROOT) + growth_baseline["minSelected"]
+        1 + growth_baseline["minSelected"]
     )
     assert str(output_root / "index-growth-targets.txt") in command
     assert str(output_root / "index-growth-plan.json") in command
     assert str(output_root / "index-growth-plan.md") in command
+
+
+@pytest.mark.parametrize(
+    ("status", "confidence", "expected"),
+    [
+        ("verified", "high", 1),
+        ("reviewed", "medium", 1),
+        ("canonical", "high", 1),
+        ("imported", "high", 0),
+        ("inferred", "high", 0),
+        ("verified", "low", 0),
+        ("verified", None, 0),
+    ],
+)
+def test_high_signal_count_uses_small_record_fixtures(tmp_path, status, confidence, expected):
+    record = tmp_path / "index/repos/github.com/example/one/record.toml"
+    record.parent.mkdir(parents=True)
+    text = f'[record]\nstatus = "{status}"\n'
+    if confidence is not None:
+        text += f'[record.trust]\nconfidence = "{confidence}"\n'
+    record.write_text(text)
+    assert release_gate.current_high_signal_count(tmp_path) == expected
 
 
 def test_index_growth_tranche_baseline_is_well_formed() -> None:

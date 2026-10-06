@@ -19,6 +19,8 @@ import urllib.request
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+from gate_timings import gate_timings, timed_stage
+
 DEFAULT_BASE_PATH = "/"
 
 
@@ -83,7 +85,8 @@ def run(cmd: list[str], *, cwd: Path, env: dict[str, str] | None = None) -> None
     merged_env = os.environ.copy()
     if env:
         merged_env.update(env)
-    subprocess.run(cmd, cwd=cwd, check=True, env=merged_env)
+    with timed_stage(shlex.join(cmd)):
+        subprocess.run(cmd, cwd=cwd, check=True, env=merged_env)
 
 
 def capture(cmd: list[str], *, cwd: Path) -> str:
@@ -1061,10 +1064,7 @@ def run_cloudflare_worker_smoke(
         )
 
 
-def main() -> int:
-    args = parse_args()
-    repo_root = Path(__file__).resolve().parents[1]
-    output_root = (repo_root / args.output_root).resolve()
+def run_gate(args: argparse.Namespace, repo_root: Path, output_root: Path) -> int:
     public_dir = output_root / "public"
     public_bundle_dir = output_root / "public-bundle"
     release_bundle_dir = output_root / "release-bundle"
@@ -1072,13 +1072,12 @@ def main() -> int:
     worker_dir = repo_root / "cloudflare" / "hosted-query"
     worker_snapshot_dir = worker_dir / "public-snapshot"
 
-    if output_root.exists():
-        shutil.rmtree(output_root)
     public_bundle_dir.mkdir(parents=True, exist_ok=True)
     release_bundle_dir.mkdir(parents=True, exist_ok=True)
     vsix_dir.mkdir(parents=True, exist_ok=True)
 
     run(["cargo", "run", "-p", "dotrepo-cli", "--", "validate-index"], cwd=repo_root)
+    run(["cargo", "run", "-p", "dotrepo-cli", "--", "--root", ".", "validate"], cwd=repo_root)
     run(
         [
             "cargo",
@@ -1277,7 +1276,8 @@ def main() -> int:
             cwd=repo_root / "editors" / "vscode",
         )
 
-    verify_public_meta(public_dir, args.base_path)
+    with timed_stage("verify public metadata and files"):
+        verify_public_meta(public_dir, args.base_path)
 
     public_bundle = expect_single(
         sorted(public_bundle_dir.glob("*.tar.gz")), "public export bundle"
@@ -1298,18 +1298,20 @@ def main() -> int:
     print("")
     if release_bundle is not None and target is not None:
         print("release install smoke test")
-        smoke_test_release_bundle(
-            release_bundle,
-            version,
-            target,
-            repo_root,
-            public_dir,
-            args.base_path,
-            args.generated_at,
-            args.stale_after,
-        )
+        with timed_stage("release install and stdio smoke tests"):
+            smoke_test_release_bundle(
+                release_bundle,
+                version,
+                target,
+                repo_root,
+                public_dir,
+                args.base_path,
+                args.generated_at,
+                args.stale_after,
+            )
         print("  all release binaries passed smoke test")
-    smoke_test_cloudflare_worker(worker_dir, args.base_path)
+    with timed_stage("Cloudflare Worker smoke test"):
+        smoke_test_cloudflare_worker(worker_dir, args.base_path)
     print("  Cloudflare Worker smoke test passed")
 
     print("")
@@ -1328,6 +1330,17 @@ def main() -> int:
     if vsix_path is not None:
         print(f"  vsix: {vsix_path}")
     return 0
+
+
+def main() -> int:
+    args = parse_args()
+    repo_root = Path(__file__).resolve().parents[1]
+    output_root = (repo_root / args.output_root).resolve()
+    if output_root.exists():
+        shutil.rmtree(output_root)
+    output_root.mkdir(parents=True, exist_ok=True)
+    with gate_timings(output_root):
+        return run_gate(args, repo_root, output_root)
 
 
 if __name__ == "__main__":

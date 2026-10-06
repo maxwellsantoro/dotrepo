@@ -148,11 +148,17 @@ compatibility, and regression fixture packs pin their own contracts. Update the
 relevant expectations with intentional behavior changes; never rewrite frozen
 benchmark results or source evidence to make a new implementation pass.
 
-`.github/workflows/ci.yml` classifies changes into Rust/index, operator,
-public-surface, release, or minimal gates. Docs/RFC changes route through Rust
-and full release checks; index-only changes use the lighter public gate unless
-claims also require the operator gate. Root-only metadata/docs can route to the
-minimal gate. Scoped jobs may be skipped intentionally.
+`scripts/classify_ci_scope.py`, invoked by `.github/workflows/ci.yml`, classifies
+changes into Rust/index, Python, operator, public-surface, release, or minimal
+gates. Explicit prose paths can use the minimal gate; installation/protocol docs,
+RFCs, shared dependencies, CI changes and unknown paths retain broad checks.
+Python tooling and benchmark packets use Python plus actual exporter/consumer
+controls; public helpers also require the public gate. Index-only changes use
+the lighter public gate unless claims also require the operator gate. Jobs start
+after classification; the required aggregate waits for all selected results.
+Scoped jobs may be skipped intentionally. Finish integrated local checks before
+pushing; repeat successful checks when their inputs change, not for unchanged
+inputs. Release-gate timings are retained on success or failure.
 
 Workers run focused checks, then the coordinator runs the combined required
 gates on the integrated state. Require `ci-gate` when landing and inspect actual

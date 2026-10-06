@@ -63,6 +63,11 @@ uv run pytest
 ```
 
 Start with the affected crate, fixture pack, or script tests while editing.
+Finish the integrated patch before pushing: run the selected checks once on that
+state, then reuse successful checks only while their inputs remain unchanged.
+Superseded PR CI runs cancel automatically; main validation and serialized public
+publication remain separate. Keep the actual merged-tree CI check before treating
+a main deployment as validated.
 Before integrating a toolchain change, run the core workspace checks:
 
 ```bash
@@ -76,7 +81,10 @@ uv run python scripts/check_toolchain_manifest_parity.py
 cargo test --workspace
 ```
 
-CI runs these checks plus packaging, standalone-alias checks, and stdio smoke
+CI separates Rust/workspace checks from Python validation and real
+exporter-to-consumer controls. Release and operator checks start after path
+classification, concurrently with those jobs, and keep their own required
+validation. CI also runs packaging, standalone-alias checks, and stdio smoke
 tests. Install `cargo-deny` with `cargo install cargo-deny --locked` if needed.
 Require the `ci-gate` check in repository branch protection or rulesets. It runs
 after every scoped job and requires each job selected by `change-scope` to
@@ -90,10 +98,13 @@ The integration checks follow the changed scope:
 
 | Changed scope | Additional checks |
 | --- | --- |
+| Explicitly owned prose/root documentation | Formatting, release/toolchain parity, root `.repo` validation; no workspace test rerun |
+| Python tooling, tests, or benchmark code/packets | Python suite and actual Rust-exporter/consumer controls; shared dependency changes remain full |
 | Maintainer flow or generated surfaces | Native validation, query, trust, doctor, and `generate --check` below |
 | Index records, claims, or evidence | `validate-index`; operator gate for claims or evidence semantics |
 | Index-only public output | Lightweight public gate: `--skip-release-bundle --skip-vsix` |
-| Public export, hosted surface, release packaging, docs/RFCs, or toolchain | Complete release gate; include VSIX for packaging completion |
+| Public Python helpers, hosted Worker, or external consumer | Python and lightweight public gate, including Worker tests and smoke |
+| Rust/toolchain, release packaging, installation/protocol docs or RFCs | Complete release gate; include VSIX for packaging completion |
 | Standalone alias | Locked alias check; the package is excluded from workspace checks |
 
 ```bash
@@ -118,10 +129,29 @@ cargo check --locked --manifest-path crates/dotrepo/Cargo.toml
 
 Use a task-specific output root for each concurrent export or operator gate.
 A local `--skip-vsix` run is useful during iteration; record the omission and run
-the complete gate before calling release packaging complete. The exact CI scope
-classifier in [ci.yml](.github/workflows/ci.yml) governs required merge checks;
-root-only documentation can take the minimal path, while `docs/` and `rfcs/`
-currently select Rust and full release validation.
+the complete gate before calling release packaging complete. The CI scope
+classifier in [classify_ci_scope.py](scripts/classify_ci_scope.py) governs
+required merge checks. The prose allowlist is explicit; installation, protocol
+documentation, RFCs, shared dependencies, workflow changes and unknown paths
+retain broad checks. Mixed changes take the union of requirements; the complete
+release gate includes the lightweight public checks. Renames include both old
+and new paths, and a failed Git diff fails classification.
+
+Inspect the plan for a committed patch before pushing:
+
+```bash
+uv run python scripts/classify_ci_scope.py \
+  --base "$(git merge-base HEAD origin/main)" --head "$(git rev-parse HEAD)"
+```
+
+This command inspects committed revisions, not uncommitted edits. During iteration,
+run the affected tests directly, for example `uv run pytest scripts/tests/test_ci_scope.py`
+or `cargo test -p dotrepo-core --test import_quality_gate`. A cached result for an
+older patch does not cover a changed input or a newly evaluated freshness window.
+The release gate writes `timings.json` and `timings.md` in its output root, including
+completed stages before a failure; CI retains them and includes timings in its
+job summary. Compare gate wall time and runner usage after scheduling changes;
+individual stage times do not include runner queue/setup or artifact-upload time.
 
 ## Public index contributions
 
