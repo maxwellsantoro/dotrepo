@@ -59,6 +59,17 @@ component labels and SDK environment fields must not be silently copied into
 profile answers. Use the merged RamenOS revision and the explicitly prepared
 Atlas environment in that new packet; do not amend the readiness packet.
 
+The `contextual-campaign` runner mode keeps the eight source commands and
+completion oracles. It uses merged RamenOS `main` and Atlas's merged full-cohort
+prerequisite documentation, physical component paths, and an Atlas-only
+`preparationEnvironment`. Every expected profile instruction has empty environment
+bindings. Execution refuses changes to the frozen Python and `uv` versions before
+HTTP or attempt creation. The task request constrains only directory, scope and
+component; command/prerequisites still come independently from the profile.
+The two RamenOS aggregate host wrappers remain source fallback cases because a
+single component context would misstate their multi-component execution. This is
+a known-coverage follow-up after bounded source inspection, not held-out evidence.
+
 ## Deliverables
 
 - Dependency-free HTTP client: `examples/external-consumer/lookup_before_scrape.py`.

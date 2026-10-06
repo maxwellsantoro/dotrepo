@@ -1,3 +1,25 @@
+# Source inspection, October 5, 2026
+
+Checked at `2026-10-06T01:20:35.304229Z` against upstream revision `cfa959ed21a5a5e5f3d9538d9d1714c2401611e5`.
+
+- Imported repository name/description from the pinned README and license from the license files/Cargo declaration. Homepage is the inspected repository identity.
+- Build/test selection: CONTRIBUTING labels cargo build as the core crate/CLI loop. AGENTS gives cargo test as the core Rust loop alternative to nextest and maps core/runtime ownership to src. Both run from the root Cargo package and cover the Rust core/CLI, not the Python and WASM packaging surfaces. Prior uninspected metadata and stale scalar assessments are omitted rather than rejuvenated. Claim history and canonical links are unchanged.
+- No docs.root is asserted: this bounded refresh did not inspect a complete documentation-root contract. The wildcard owner and reporting URL are transcribed from the pinned .github/CODEOWNERS and .github/SECURITY.md; no ownership or security placeholder is inferred.
+- Whole command candidates have exact JSON value and check-time bindings. Prerequisites are descriptions, not shell commands or execution authorization.
+
+- [README.md](https://github.com/maxwellsantoro/ries-rs/blob/cfa959ed21a5a5e5f3d9538d9d1714c2401611e5/README.md) SHA-256 `19b0b7d34cd0ff2644aeb15f7f9ae4044e84b0c91470c685df6a1cff751ccadd`.
+- [CONTRIBUTING.md](https://github.com/maxwellsantoro/ries-rs/blob/cfa959ed21a5a5e5f3d9538d9d1714c2401611e5/CONTRIBUTING.md) SHA-256 `043dd0e848ff8ed4be6870d3072110a3dca786fa2e6e12a35743afff32816381`.
+- [AGENTS.md](https://github.com/maxwellsantoro/ries-rs/blob/cfa959ed21a5a5e5f3d9538d9d1714c2401611e5/AGENTS.md) SHA-256 `66a187844b884767690b2a25939e2a3e29ae00a90ebca23c89a9cc17d13b76e5`.
+- [Cargo.toml](https://github.com/maxwellsantoro/ries-rs/blob/cfa959ed21a5a5e5f3d9538d9d1714c2401611e5/Cargo.toml) SHA-256 `4da2591803c192683841b15cd6be1f4e141444054a7132b938786de63668fc08`.
+- [LICENSE](https://github.com/maxwellsantoro/ries-rs/blob/cfa959ed21a5a5e5f3d9538d9d1714c2401611e5/LICENSE) SHA-256 `dc54197df320bb3ec3bfe59247fc6817fe2806ee9e9ae1780367601844e06523`.
+
+- [.github/CODEOWNERS](https://github.com/maxwellsantoro/ries-rs/blob/cfa959ed21a5a5e5f3d9538d9d1714c2401611e5/.github/CODEOWNERS) SHA-256 `27d29bb5f807f4119a157d27a485ea3cfd68938fb041019968b885a9527f7b69`.
+- [.github/SECURITY.md](https://github.com/maxwellsantoro/ries-rs/blob/cfa959ed21a5a5e5f3d9538d9d1714c2401611e5/.github/SECURITY.md) SHA-256 `2b7d3083c0c2f01b66181bb20d47786806a0007f1813cc0a584a748d2ba342e3`.
+
+This is an overlay record, not a maintainer-controlled canonical record.
+
+## Historical evidence (superseded; retained verbatim)
+
 # Evidence
 
 - Imported repository name from README.md.

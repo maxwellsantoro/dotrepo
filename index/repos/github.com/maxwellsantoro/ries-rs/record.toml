@@ -4,145 +4,89 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/maxwellsantoro/ries-rs"
-generated_at = "2026-09-16T16:31:27.131449Z"
+generated_at = "2026-10-06T01:20:35.304229Z"
 
 [record.trust]
 confidence = "high"
-provenance = [
-    "imported",
-]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `.github/SECURITY.md`, `package.json`, and `ries-py/pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. Imported `repo.toolchain.min` from `ries-py/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Prior verified command assessments superseded by the October 4 own-project study. Retained package.json commands target WASM; repository defaults now follow the maintainer .repo at the retained upstream revision. Command assessments are withheld pending complete verification; unrelated evidence and record age are retained."
+provenance = ["imported"]
+notes = "Bounded manual source inspection at cfa959ed21a5a5e5f3d9538d9d1714c2401611e5. CONTRIBUTING labels cargo build as the core crate/CLI loop. AGENTS gives cargo test as the core Rust loop alternative to nextest and maps core/runtime ownership to src. Both run from the root Cargo package and cover the Rust core/CLI, not the Python and WASM packaging surfaces. Prior uninspected metadata and stale scalar assessments are omitted rather than rejuvenated. Claim history and canonical links are unchanged. This is an imported overlay, not pipeline verification or maintainer canonical authority."
 
 [repo]
 name = "ries-rs"
-description = "High-performance Rust reimplementation of Robert Munafo’s RIES (RILYBOT Inverse Equation Solver). Given any target number, it discovers elegant algebraic expressions and equations that evaluate exactly to it — now with parallel search, PSLQ integer relations, Python bindings, and WebAssembly support."
-homepage = "https://maxwellsantoro.com/projects/ries-rs/app/"
+description = "Rust inverse equation solver for turning a target number into compact algebraic equations."
+homepage = "https://github.com/maxwellsantoro/ries-rs"
 license = "MIT"
-visibility = "public"
-languages = [
-    "Rust",
-    "HTML",
-    "Python",
-    "Shell",
-    "TypeScript",
-    "JavaScript",
-]
-build = "cargo build --release --locked"
-test = "cargo nextest run --tests --locked"
-topics = [
-    "equation-solver",
-    "mathematics",
-    "numerical-methods",
-    "python-bindings",
-    "rust",
-    "scientific-computing",
-    "symbolic-computation",
-    "wasm",
-    "inverse-symbolic-calculator",
-]
 
-[repo.toolchain]
-min = "3.8"
-ecosystem = "Python"
+[[repo.build_candidates]]
+command = "cargo build"
+source = "CONTRIBUTING.md"
+[repo.build_candidates.context]
+command = "cargo build"
+working_directory = "."
+scope = "component"
+prerequisites = ["Rust/Cargo"]
+source = "CONTRIBUTING.md"
+component = "src"
+
+[[repo.test_candidates]]
+command = "cargo test"
+source = "AGENTS.md"
+[repo.test_candidates.context]
+command = "cargo test"
+working_directory = "."
+scope = "component"
+prerequisites = ["Rust/Cargo"]
+source = "AGENTS.md"
+component = "src"
+
+[x.dotrepo.field_evidence."repo.description"]
+state = "present"
+method = "extracted"
+confidence = "high"
+source = "README.md"
+checkedAt = "2026-10-06T01:20:35.304229Z"
+valueJson = "\"Rust inverse equation solver for turning a target number into compact algebraic equations.\""
+reason = "Transcribed from inspected source at cfa959ed21a5a5e5f3d9538d9d1714c2401611e5; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution."
+
+[x.dotrepo.field_evidence."repo.build_candidates.0"]
+state = "present"
+method = "extracted"
+confidence = "high"
+source = "CONTRIBUTING.md"
+checkedAt = "2026-10-06T01:20:35.304229Z"
+valueJson = "{\"command\": \"cargo build\", \"ecosystem\": null, \"source\": \"CONTRIBUTING.md\", \"context\": {\"command\": \"cargo build\", \"working_directory\": \".\", \"scope\": \"component\", \"prerequisites\": [\"Rust/Cargo\"], \"source\": \"CONTRIBUTING.md\", \"component\": \"src\"}}"
+reason = "Transcribed from inspected source at cfa959ed21a5a5e5f3d9538d9d1714c2401611e5; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution."
+
+[x.dotrepo.field_evidence."repo.test_candidates.0"]
+state = "present"
+method = "extracted"
+confidence = "high"
+source = "AGENTS.md"
+checkedAt = "2026-10-06T01:20:35.304229Z"
+valueJson = "{\"command\": \"cargo test\", \"ecosystem\": null, \"source\": \"AGENTS.md\", \"context\": {\"command\": \"cargo test\", \"working_directory\": \".\", \"scope\": \"component\", \"prerequisites\": [\"Rust/Cargo\"], \"source\": \"AGENTS.md\", \"component\": \"src\"}}"
+reason = "Transcribed from inspected source at cfa959ed21a5a5e5f3d9538d9d1714c2401611e5; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution."
+
+[x.github]
+head_sha = "cfa959ed21a5a5e5f3d9538d9d1714c2401611e5"
 
 [owners]
 maintainers = ["@maxwellsantoro"]
 security_contact = "https://github.com/maxwellsantoro/ries-rs/security/advisories/new"
 
-[docs]
-root = "https://maxwellsantoro.com/projects/ries-rs/app/"
-
-[relations]
-references = []
-
-[[relations.links]]
-kind = "related"
-target = "github.com/maxwellsantoro/ries-rs"
-notes = "Declared repository in Cargo.toml."
-
-[relations.links.trust]
-confidence = "low"
-provenance = [
-    "declared",
-    "manifest",
-]
-
-[[relations.links]]
-kind = "related"
-target = "github.com/clsn/ries"
-notes = "Cross-link from README: clsn/ries` fork"
-
-[relations.links.trust]
-confidence = "low"
-provenance = [
-    "declared",
-    "readme",
-]
-
-[x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:31:27.131449Z"
-confidence = "high"
-method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
-state = "not_found"
-valueJson = "null"
-
-[x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:31:27.131449Z"
-confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+[x.dotrepo.field_evidence."owners.maintainers"]
 state = "present"
-valueJson = '"https://maxwellsantoro.com/projects/ries-rs/app/"'
+method = "extracted"
+confidence = "high"
+source = ".github/CODEOWNERS"
+checkedAt = "2026-10-06T01:20:35.304229Z"
+valueJson = "[\"@maxwellsantoro\"]"
+reason = "Explicit wildcard owner or reporting URL in the inspected generated source surface at the pinned revision; no new authority status is asserted."
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:31:27.131449Z"
-confidence = "high"
+state = "present"
 method = "extracted"
-reason = "actionable security reporting URL"
+confidence = "high"
 source = ".github/SECURITY.md"
-state = "present"
-valueJson = '"https://github.com/maxwellsantoro/ries-rs/security/advisories/new"'
-
-[x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:31:27.131449Z"
-confidence = "high"
-method = "not_found_in_inspected_sources"
-reason = "no single clear team in CODEOWNERS"
-state = "not_found"
-valueJson = "null"
-
-[x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:31:27.131449Z"
-confidence = "high"
-method = "extracted"
-reason = "constrained by GitHub repository metadata"
-source = "GitHub API"
-state = "present"
-valueJson = '"High-performance Rust reimplementation of Robert Munafo’s RIES (RILYBOT Inverse Equation Solver). Given any target number, it discovers elegant algebraic expressions and equations that evaluate exactly to it — now with parallel search, PSLQ integer relations, Python bindings, and WebAssembly support."'
-
-[x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:31:27.131449Z"
-confidence = "high"
-method = "unspecified"
-reason = "set and passes quality check"
-state = "present"
-valueJson = '"https://maxwellsantoro.com/projects/ries-rs/app/"'
-
-[x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:31:27.131449Z"
-confidence = "high"
-method = "extracted"
-reason = "extracted from README heading with post-cleaners"
-source = "README.md"
-state = "present"
-valueJson = '"ries-rs"'
-
-[x.github]
-archived = false
-clone_url = "https://github.com/maxwellsantoro/ries-rs.git"
-default_branch = "main"
-fork = false
-head_sha = "0904c3ed17d2f221ea565a7b9e15929d9fe8b419"
-html_url = "https://github.com/maxwellsantoro/ries-rs"
-stars = 1
+checkedAt = "2026-10-06T01:20:35.304229Z"
+valueJson = "\"https://github.com/maxwellsantoro/ries-rs/security/advisories/new\""
+reason = "Explicit wildcard owner or reporting URL in the inspected generated source surface at the pinned revision; no new authority status is asserted."

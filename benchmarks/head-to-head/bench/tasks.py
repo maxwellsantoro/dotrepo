@@ -90,6 +90,21 @@ def artifact(root, binding):
     return json.loads(raw)
 
 
+def validate_selection(workload):
+    # Known-coverage operator follow-ups can freeze a new comparison without
+    # falsely claiming held-out selection. Participant studies retain the
+    # original before-coverage requirement.
+    require(
+        workload["selectionBeforeCoverageInspection"] is True
+        or (
+            workload.get("knownCoverage") is True
+            and workload.get("selectionFrozenBeforeExecution") is True
+            and workload.get("consumerClass") == "operator-controlled"
+        ),
+        "workload selection not frozen",
+    )
+
+
 def score(workload_path, observations_path):
     workload_path, observations_path = Path(workload_path), Path(observations_path)
     raw = workload_path.read_bytes()
@@ -99,7 +114,7 @@ def score(workload_path, observations_path):
     require(workload["version"] == 1 and observations["version"] == 1, "unsupported version")
     require(observations["workloadSha256"] == digest, "workload changed after freeze")
     frozen = timestamp(workload["frozenAt"])
-    require(workload["selectionBeforeCoverageInspection"] is True, "workload selection not frozen")
+    validate_selection(workload)
     require(
         workload["consumerClass"] in {"operator-controlled", "participant-supplied"},
         "invalid consumer class",

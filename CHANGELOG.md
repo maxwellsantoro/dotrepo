@@ -15,6 +15,11 @@ generated growth, coverage, promotion, and telemetry artifacts own live values.
 
 ### Documentation maintenance
 
+- Prepare the contextual own-project campaign with physical task component paths,
+  merged upstream pins, Atlas-only SDK preparation outside profile instructions,
+  and Python/uv runtime freeze checks. Source-inspect the four demand identities;
+  retain six complete assessed candidates and withhold the RamenOS aggregate host
+  wrappers. This preparation does not establish task benefit before live execution.
 - Close import input boundaries with bounded regular-file reads, no symlink
   traversal, and Unix descriptor-relative opens. Withhold Rake namespace sources
   instead of inventing root tasks. Bound reference HTTP reads and convert body
