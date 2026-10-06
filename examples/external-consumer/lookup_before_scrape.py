@@ -627,6 +627,12 @@ def fetch_profile(
         except urllib.error.HTTPError as exc:
             with exc:
                 status = exc.code
+                if status == 404:
+                    # The status establishes a miss. Error bodies are irrelevant
+                    # to this decision and may be large or fail while reading.
+                    return finish(
+                        interpret_http_response(identity=identity, status_code=404, body=None)
+                    )
                 body = bounded_body(exc, MAX_ERROR_BYTES)
         return finish(
             interpret_http_response(identity=identity, status_code=int(status), body=body)

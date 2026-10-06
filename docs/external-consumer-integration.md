@@ -154,7 +154,9 @@ reference-client behavior, not a feature of stable 1.0.2 MCP.
 
 HTTP bodies are capped at 8 MiB for successful responses and 4 KiB for error
 responses. Oversized bodies and failures after headers arrive return transport
-fallback results; response resources are closed on both paths.
+fallback results; response resources are closed on both paths. An HTTP 404 is
+classified and closed without reading its irrelevant body, preserving countable
+misses even when that body would be oversized or fail while reading.
 
 Policy coverage is published on the efficiency page and in its linked JSON.
 It distinguishes value presence, policy acceptance, independently established

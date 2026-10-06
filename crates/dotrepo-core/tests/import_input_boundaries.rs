@@ -135,6 +135,9 @@ fn namespaced_rake_tasks_never_become_root_commands() {
         "namespace :outer do\nnamespace :inner do\ntask :test do\nend\nend\nend\n",
         "task :build do\nend\nnamespace :component do\ntask :test do\nend\nend\n",
         "namespace(:component) { task :test }\n",
+        "task :test if false\n",
+        "task :test unless true\n",
+        "if false\ntask :test\nend\n",
     ] {
         let f = Fixture::new();
         fs::write(f.root().join("Rakefile"), contents).unwrap();

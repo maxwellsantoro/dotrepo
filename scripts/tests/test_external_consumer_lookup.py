@@ -476,3 +476,29 @@ def test_consumer_abstains_from_unrepresented_component_scope(source):
     consumer.evaluate_for_task(result, required_fields=["repo.build"])
     assert not result.usable
     assert "scoped-command-source:repo.build" in result.fallback_reasons
+
+
+@pytest.mark.parametrize("body_kind", ["oversized", "read-fails"])
+def test_404_is_a_closed_countable_miss_without_reading_the_body(body_kind):
+    import urllib.error
+
+    class Body(io.BytesIO):
+        reads = 0
+
+        def read(self, size=-1):
+            self.reads += 1
+            if body_kind == "read-fails":
+                raise TimeoutError("404 body timeout")
+            return super().read(size)
+
+    body = Body(b"x" * (consumer.MAX_ERROR_BYTES + 1) if body_kind == "oversized" else b"")
+
+    class Opener:
+        def open(self, request, timeout):
+            raise urllib.error.HTTPError(request.full_url, 404, "missing", None, body)
+
+    result = consumer.fetch_profile("example/repo", opener=Opener())
+    assert result.status_code == 404 and result.miss and not result.hit and not result.usable
+    assert result.error == "repository-not-found" and body.closed
+    assert consumer.result_to_miss(result).repo == "repo"
+    assert body.reads == 0

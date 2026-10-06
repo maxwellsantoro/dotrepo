@@ -695,6 +695,28 @@ pub(crate) fn infer_rakefile_commands(file: &ImportedFile) -> Option<ImportedCom
         || ["module ", "class ", "instance_eval", "class_eval", "eval("]
             .iter()
             .any(|marker| file.contents.contains(marker))
+        || file.contents.lines().any(|line| {
+            let line = line.split('#').next().unwrap_or("").trim();
+            // This deliberately withholds keywords even in strings/symbols.
+            // Static recognition supports unconditional literal declarations;
+            // statement modifiers and control-flow bodies need Ruby semantics.
+            line.split(|ch: char| !ch.is_ascii_alphanumeric() && ch != '_')
+                .any(|word| {
+                    matches!(
+                        word,
+                        "if" | "unless"
+                            | "case"
+                            | "while"
+                            | "until"
+                            | "for"
+                            | "loop"
+                            | "begin"
+                            | "rescue"
+                            | "def"
+                    )
+                })
+                || (line.contains(" do") && !line.starts_with("task "))
+        })
     {
         return None;
     }
