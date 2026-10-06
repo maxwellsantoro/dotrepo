@@ -22,3 +22,15 @@ The preceding import and auto-promotion entries are historical and superseded fo
 - repo.build: `make build` -> withheld (inspected `Makefile`)
 
 Receipt and source hashes: [command-source audit](../../../../telemetry/command-semantics-20261004/report.json).
+
+## 2026-10-06 bounded command-source checkpoint
+
+Statically inspected pinned revision `05f2dcfdba3879c55f735efa0f124b1a56f7ed11` at `2026-10-06T04:00:48.158597Z`. Sources and hashes are retained in [the checkpoint receipt](../../../../telemetry/roadmap-factual-checkpoint-2026-10-06.json). No upstream command was executed.
+
+- `repo.build` remains unset: pinned `Makefile` contains an unconditional build-system-change error, not a build target. `docs/build.md` documents backend alternatives; no backend is silently selected as the default.
+- A CPU build candidate preserves `cmake --build build --config Release` and the preceding `cmake -B build` as an explicit prerequisite. Root working directory is established by the documented clone/cd procedure; `CMakeLists.txt` requires CMake 3.14 and C/C++ languages. Candidate scope is repository, with backend choice explicit.
+- `repo.test = "python -m pytest"` was removed. `pyproject.toml` declares pytest only as a development dependency; CMake test declarations do not establish that Python invocation as the repository test entrypoint. This is a correct abstention for the inspected sources, not a universal no-tests claim.
+
+Record `generated_at`, status and unrelated field assessments are unchanged. The new command/context assessments are newer than that factual record timestamp and do not rejuvenate the whole record; the current public exporter/reference consumer consequently withholds them until a full-record crawl produces coherent evidence. This checkpoint does not establish current upstream HEAD or runtime correctness.
+
+This is an overlay record, not a maintainer-controlled canonical record.

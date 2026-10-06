@@ -2,9 +2,9 @@
 
 ## Status
 
-Implemented: additive authoring, validation, query, and public export contract.
-Automatic context extraction and restoration of nested imported commands remain
-deferred pending source-grounded extraction and consumer evaluation.
+Implemented: additive authoring, validation, query, and public export contract,
+plus conservative extraction of explicitly scoped documentation blocks as
+candidates. General nested-manifest context extraction remains deferred.
 The October 4 Sonnet audit exercises source-inspected candidate authoring in the
 index while withholding the setup-only scalar and limiting the actual command's scope.
 
@@ -68,6 +68,25 @@ commands as scalar defaults and does not populate context by guessing.
 Changing directory, component, prerequisites, or source requires inspecting the
 new assertion even when the command text is unchanged. This contract does not
 change promotion scoring or freshness timestamps.
+
+### Supported documentation extraction
+
+Automatic extraction supports one literal shell fence under `Repository build`,
+`Repository tests`, `Component build: <path>`, or `Component tests: <path>`.
+The heading declares scope independently of directory. Its first line must be
+`cd .` for repository scope or `cd <path>` matching the component heading.
+The last line is an unchanged recognized build/test entrypoint. Supported setup
+lines between them become prerequisite descriptions. An empty prerequisite list
+requires the explicit source statement `Prerequisites: none.`; omission cannot
+establish it.
+
+Unsupported prose, other setup sections, multiple fences, unresolved parameters,
+directory disagreement, and unsafe or missing directories cause abstention.
+Context extraction preserves candidates only, including repository-scoped ones;
+it does not promote a scalar or mint a verification assessment. An imported
+candidate still needs separately inspected, value-bound evidence before the
+contextual consumer can accept it. Ordinary nested documentation and manifests
+remain unassessed when they do not establish the complete tuple.
 
 ## Public compatibility
 

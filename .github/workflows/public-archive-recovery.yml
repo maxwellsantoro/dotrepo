@@ -1,0 +1,104 @@
+name: public-archive-recovery
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Recovery and ordinary publication must not race the append-only archive log.
+concurrency:
+  group: public-cloudflare
+  cancel-in-progress: false
+  queue: max
+
+jobs:
+  recover:
+    if: >-
+      github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+      && vars.CLOUDFLARE_PUBLIC_DEPLOY_ENABLED == 'true'
+      && vars.DOTREPO_PUBLIC_R2_ARCHIVE_BUCKET != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    env:
+      ARCHIVE_BUCKET: ${{ vars.DOTREPO_PUBLIC_R2_ARCHIVE_BUCKET }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Install uv
+        uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@4be7066ada62dd38de10e7b70166bc74ed198c30 # stable
+        with:
+          toolchain: stable
+      - name: Set up Node.js 22
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 22
+      - name: Install pinned archive client
+        working-directory: cloudflare/hosted-query
+        run: npm ci
+      - name: Build each original deployment exporter
+        run: |
+          uv run --no-project python - "$RUNNER_TEMP" <<'PY'
+          import json
+          import shutil
+          import subprocess
+          import sys
+          from pathlib import Path
+          temporary = Path(sys.argv[1]).resolve()
+          plan = json.loads(Path("docs/archive/public-history-recovery-20261006/plan.json").read_text())
+          for commit in dict.fromkeys(entry["commit"] for entry in plan["entryExporters"].values()):
+              source = temporary / "dotrepo-original-exporters" / commit
+              subprocess.run(["git", "worktree", "add", "--detach", str(source), commit], check=True)
+              target = temporary / "dotrepo-exporter-build"
+              subprocess.run(["cargo", "build", "--locked", "--manifest-path", str(source / "Cargo.toml"), "--target-dir", str(target), "-p", "dotrepo-cli", "--bins"], cwd=source, check=True)
+              destination = source / "target/debug/dotrepo"
+              destination.parent.mkdir(parents=True)
+              shutil.copy2(target / "debug/dotrepo", destination)
+          PY
+      - name: Bind runtime binaries to the frozen recovery plan
+        run: |
+          uv run --no-project python - "$RUNNER_TEMP" <<'PY'
+          import hashlib
+          import json
+          import sys
+          from pathlib import Path
+          temporary = Path(sys.argv[1]).resolve()
+          plan = json.loads(Path("docs/archive/public-history-recovery-20261006/plan.json").read_text())
+          for entry in plan["entryExporters"].values():
+              binary = temporary / "dotrepo-original-exporters" / entry["commit"] / "target/debug/dotrepo"
+              entry["binarySha256"] = hashlib.sha256(binary.read_bytes()).hexdigest()
+          (temporary / "dotrepo-recovery-source-map.json").write_text(json.dumps(plan, indent=2) + "\n")
+          PY
+      - name: Reconstruct and validate every frozen published payload
+        run: |
+          uv run --no-project python scripts/recover_public_snapshot_history.py \
+            --log docs/archive/public-history-recovery-20261006/published-log.json \
+            --source-map "$RUNNER_TEMP/dotrepo-recovery-source-map.json" \
+            --exporter-root "$RUNNER_TEMP/dotrepo-original-exporters" \
+            --out-dir "$RUNNER_TEMP/dotrepo-recovered-public" \
+            --receipt "$RUNNER_TEMP/dotrepo-history-recovery.json"
+      - name: Provision the archive and backfill verified history
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          uv run --no-project python scripts/ensure_public_archive_bucket.py --bucket "$ARCHIVE_BUCKET"
+          uv run --no-project python scripts/archive_public_snapshot_r2.py \
+            --public-root "$RUNNER_TEMP/dotrepo-recovered-public" \
+            --bucket "$ARCHIVE_BUCKET" \
+            --require-complete-history
+      - name: Retain recovery evidence and verified payloads
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: public-history-recovery-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/dotrepo-history-recovery.json
+            ${{ runner.temp }}/dotrepo-recovery-source-map.json
+            ${{ runner.temp }}/dotrepo-recovered-public/v0/snapshots/
+          if-no-files-found: ignore
+          retention-days: 90

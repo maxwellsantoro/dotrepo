@@ -967,6 +967,37 @@ test("keeps returning 404 for missing archived snapshots", async () => {
   assert.equal(response.status, 404);
 });
 
+test("preserves snapshot identity after repeated current and previous edge eviction", async () => {
+  const snapshotPath = (snapshot) => `/v0/snapshots/${snapshot}/repos/index.json`;
+  const payload = (snapshot) => JSON.stringify({ snapshotId: snapshot, repositories: [] });
+  const archive = new Map();
+  const snapshots = ["first", "second", "third", "fourth"];
+  for (let index = 0; index < snapshots.length; index += 1) {
+    const current = snapshots[index];
+    archive.set(snapshotPath(current).slice(1), payload(current));
+    const edge = new Map([[snapshotPath(current), payload(current)]]);
+    if (index > 0) edge.set(snapshotPath(snapshots[index - 1]), payload(snapshots[index - 1]));
+    const env = { ASSETS: makeAssets(edge), SNAPSHOT_ARCHIVE: makeR2Archive(archive), BASE_PATH: "/" };
+    for (let previous = 0; previous <= index; previous += 1) {
+      const snapshot = snapshots[previous];
+      const response = await handleRequest(
+        new Request(`https://example.test${snapshotPath(snapshot)}`), env
+      );
+      assert.equal(response.status, 200);
+      assert.equal((await response.json()).snapshotId, snapshot);
+      assert.equal(response.headers.get("x-dotrepo-snapshot-source"), previous < index - 1 ? "archive" : null);
+      assert.equal(response.headers.get("cache-control"), "public, max-age=31536000, immutable");
+    }
+  }
+  // The archive never makes private runtime inputs publicly retrievable.
+  archive.set("v0/snapshots/first/query-input/github.com/example/repo.json", "private");
+  const response = await handleRequest(
+    new Request("https://example.test/v0/snapshots/first/query-input/github.com/example/repo.json"),
+    { ASSETS: makeAssets(new Map()), SNAPSHOT_ARCHIVE: makeR2Archive(archive), BASE_PATH: "/" }
+  );
+  assert.equal(response.status, 404);
+});
+
 test("serves the root document without redirecting through /index.html", async () => {
   const files = new Map([["/", "<html>home</html>"]]);
   const env = { ASSETS: makeAssets(files), BASE_PATH: "/" };

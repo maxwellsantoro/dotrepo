@@ -26,6 +26,22 @@ Private `query-input/` powers the runtime and is blocked from public serving.
 CI review artifacts have bounded retention; deployed immutable history belongs
 in the separately provisioned archive.
 
+Production deployment requires `DOTREPO_PUBLIC_R2_ARCHIVE_BUCKET`. The rendered
+Worker configuration binds `SNAPSHOT_ARCHIVE` to that same bucket before history
+restoration; a missing or mismatched binding stops deployment. Upload validates
+all newly advertised public payloads before writing, skips already archived
+identities, and commits the append-only log last. Private runtime inputs are
+excluded. Publication artifacts retain the reviewed snapshot inputs on success
+or failure, with bounded retention.
+
+For the original unprovisioned archive gap, the
+[dated recovery plan](archive/public-history-recovery-20261006/README.md) freezes
+the observed history and original deployment exporters. The manual recovery
+workflow prepares and validates all historical payloads before bucket creation
+or upload. Keep actual provisioning, backfill, bound deployment and post-eviction
+retrieval separate from source-level validation; a successful ordinary CI run
+does not prove those operations happened.
+
 Agents working on fixtures, runtime routes, and presentation can proceed in
 parallel with separate output roots. One coordinator runs the integrated gate
 and owns deployment after source, contract, and freshness evidence agree.

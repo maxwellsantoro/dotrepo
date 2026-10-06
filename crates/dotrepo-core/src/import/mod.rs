@@ -47,7 +47,7 @@ pub use types::{
 
 pub use write::write_import_outputs;
 
-use commands::sanitize_import_command;
+use commands::{infer_documented_context_candidates, sanitize_import_command};
 
 #[allow(unused_imports)]
 pub(crate) use commands::{infer_imported_commands, infer_pyproject_commands};
@@ -231,6 +231,8 @@ pub fn import_repository_with_options(
     let inputs = inputs::ImportInputs::load(root)?;
     let import_sources = inputs.command_sources();
     let imported_commands = infer_imported_commands(&import_sources);
+    let (build_context_candidates, test_context_candidates) =
+        infer_documented_context_candidates(root, &import_sources);
     let imported_toolchain = infer_toolchain_metadata(&import_sources);
     let inputs::ImportInputs {
         readme,
@@ -363,6 +365,12 @@ pub fn import_repository_with_options(
     if let Some(command) = imported_commands.test.as_ref() {
         note_import(&mut imported_sources, &command.source_path);
     }
+    for candidate in build_context_candidates
+        .iter()
+        .chain(&test_context_candidates)
+    {
+        note_import(&mut imported_sources, &candidate.source);
+    }
     if let Some(source_path) = imported_toolchain.source_path.as_deref() {
         note_import(&mut imported_sources, source_path);
     }
@@ -440,13 +448,12 @@ pub fn import_repository_with_options(
                 .test
                 .as_ref()
                 .and_then(|command| sanitize_import_command(&command.command)),
-            // Populated later by escalation (see
-            // apply_adjudication_to_import_plan's Absent branch) if a
-            // genuine multi-ecosystem tie is found for build or test.
             build_context: None,
             test_context: None,
-            build_candidates: Vec::new(),
-            test_candidates: Vec::new(),
+            // Explicit documented contexts remain candidates; extraction does
+            // not establish a repository-default command or verify its context.
+            build_candidates: build_context_candidates,
+            test_candidates: test_context_candidates,
             toolchain: imported_toolchain.min.as_ref().map(|min| Toolchain {
                 min: Some(min.clone()),
                 ecosystem: imported_toolchain.ecosystem.clone(),

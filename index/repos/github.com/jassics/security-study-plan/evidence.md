@@ -13,3 +13,15 @@
 ## Auto-promotion
 
 All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
+
+## 2026-10-06 bounded risk audit
+
+Statically inspected source revision `5eab1faf7e919007c7e793948a242d45a332ed4e` at `2026-10-06T04:07:21.224082Z`. Sources, hashes and all declared field dispositions are retained in [the audit receipt](../../../../telemetry/roadmap-risk-audit-2026-10-06.json).
+
+- `repo.build`: correct-abstention. Inspected source is a prose study-plan collection, with no declared build entrypoint.
+- `repo.test`: correct-abstention. Inspected source is a prose study-plan collection, with no declared executable test suite.
+- `docs.root`: unsupported-documentation-association. README neither references cybercloud.guru nor declares that external site as this study-plan documentation. No outside-site reachability claim was used as ownership evidence.
+
+Record age/status and unrelated facts/assessments remain unchanged. New source-grounded command/context assessments are newer than the record timestamp; the public exporter drops them until a coherent full-record recrawl. No upstream commands were executed, and no fresh pipeline verification or current-HEAD inspection is claimed. Absence is limited to the inspected sources.
+
+This is an overlay record, not a maintainer-controlled canonical record.

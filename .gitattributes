@@ -1,0 +1,4 @@
+# Pinned upstream source fixtures preserve their original bytes, including
+# whitespace. Do not normalize evidence to satisfy patch-style checks.
+crates/dotrepo-core/tests/fixtures/import/docs-source-*/README.md -whitespace
+crates/dotrepo-core/tests/fixtures/import/context-ries-source-excerpt/README.md -whitespace

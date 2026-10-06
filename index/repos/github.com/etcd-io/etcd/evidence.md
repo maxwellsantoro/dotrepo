@@ -25,3 +25,16 @@ The preceding import and auto-promotion entries are historical and superseded fo
 - repo.test: `go test -v -c -count 1` -> `make test-unit` (inspected `CONTRIBUTING.md`)
 
 Receipt and source hashes: [command-source audit](../../../../telemetry/command-semantics-20261004/report.json).
+
+## 2026-10-06 bounded command-source checkpoint
+
+Statically inspected pinned revision `f094b9834a5aa0ef748b91509b824e324dd65700` at `2026-10-06T04:00:48.158597Z`. Sources and hashes are retained in [the checkpoint receipt](../../../../telemetry/roadmap-factual-checkpoint-2026-10-06.json). No upstream command was executed.
+
+- `repo.build = "make build"` is retained exactly. The literal root Make target invokes `scripts/build.sh`; the contribution guide recommends this entrypoint after development setup.
+- `repo.test = "make test-unit"` is retained exactly as the documented unit-test entrypoint. The root Make target selects the unit pass, which traverses workspace modules. It is not a claim to run integration or end-to-end tests.
+- Both scalar contexts retain the repository root, repository scope and the guide's supported `linux-amd64` development setup with Go and listed build tools. Script checks require the root module. Prerequisites are descriptions, not automatically executable setup or a claim that the environment was prepared.
+- The historical `go test -v -c -count 1` is the package-specific compilation step preceding a stress invocation, not a repository test runner. The October 4 correction is confirmed without rewriting its receipt.
+
+Record `generated_at`, status and unrelated field assessments are unchanged. The new command/context assessments are newer than that factual record timestamp and do not rejuvenate the whole record; the current public exporter/reference consumer consequently withholds them until a full-record crawl produces coherent evidence. This checkpoint does not establish current upstream HEAD or runtime correctness.
+
+This is an overlay record, not a maintainer-controlled canonical record.

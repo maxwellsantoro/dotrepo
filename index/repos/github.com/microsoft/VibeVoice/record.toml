@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `pyproject.toml`. Inferred `repo.test` from `pyproject.toml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "2026-10-06 risk-weighted source audit: only declared build/test/docs fields and contexts reinspected at retained revision; record age/status and unrelated facts unchanged. Fresh field assessments do not imply a full-record crawl. Bootstrapped from `README.md`, `SECURITY.md`, and `pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `pyproject.toml`. Inferred `repo.test` from `pyproject.toml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "VibeVoice"
@@ -21,8 +21,6 @@ homepage = "https://microsoft.github.io/VibeVoice/"
 license = "MIT"
 visibility = "public"
 languages = ["Python"]
-build = "python -m build"
-test = "python -m pytest"
 topics = []
 
 [repo.toolchain]
@@ -34,7 +32,7 @@ maintainers = []
 security_contact = "https://aka.ms/SECURITY.md"
 
 [docs]
-root = "https://microsoft.github.io/VibeVoice/"
+
 
 [x.dotrepo.field_evidence."docs.getting_started"]
 checkedAt = "2026-09-17T06:10:48.392678021Z"
@@ -44,13 +42,6 @@ reason = "no getting started link detected"
 state = "not_found"
 valueJson = "null"
 
-[x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-17T06:10:48.392678021Z"
-confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://microsoft.github.io/VibeVoice/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
 checkedAt = "2026-09-17T06:10:48.392678021Z"
@@ -69,14 +60,6 @@ reason = "no single clear team in CODEOWNERS"
 state = "not_found"
 valueJson = "null"
 
-[x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-17T06:10:48.392678021Z"
-confidence = "medium"
-method = "inferred"
-reason = "inferred ecosystem default from build-tool metadata"
-source = "pyproject.toml"
-state = "present"
-valueJson = '"python -m build"'
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-17T06:10:48.392678021Z"
@@ -104,14 +87,6 @@ source = "README.md"
 state = "present"
 valueJson = '"VibeVoice"'
 
-[x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-17T06:10:48.392678021Z"
-confidence = "medium"
-method = "inferred"
-reason = "inferred ecosystem default from build-tool metadata"
-source = "pyproject.toml"
-state = "present"
-valueJson = '"python -m pytest"'
 
 [x.github]
 archived = false
@@ -121,3 +96,30 @@ fork = false
 head_sha = "1541f590c7099820f10ea012f48d2399282df69f"
 html_url = "https://github.com/microsoft/VibeVoice"
 stars = 54354
+
+[x.dotrepo.field_evidence."repo.build"]
+state = "not_found"
+method = "not_found_in_inspected_sources"
+confidence = "high"
+source = "pyproject.toml"
+checkedAt = "2026-10-06T04:07:21.224082Z"
+valueJson = "null"
+reason = "Setuptools build backend metadata supplies no declared python -m build repository instruction; no such entrypoint in inspected README/guide. Pinned source inspection at 1541f590c7099820f10ea012f48d2399282df69f; this is source preservation, not execution or current-HEAD verification."
+
+[x.dotrepo.field_evidence."repo.test"]
+state = "not_found"
+method = "not_found_in_inspected_sources"
+confidence = "high"
+source = "pyproject.toml"
+checkedAt = "2026-10-06T04:07:21.224082Z"
+valueJson = "null"
+reason = "Inspected manifest and README/guide do not declare pytest as the project test entrypoint; withhold rather than infer a usable default. Pinned source inspection at 1541f590c7099820f10ea012f48d2399282df69f; this is source preservation, not execution or current-HEAD verification."
+
+[x.dotrepo.field_evidence."docs.root"]
+state = "not_found"
+method = "not_found_in_inspected_sources"
+confidence = "high"
+source = "README.md"
+checkedAt = "2026-10-06T04:07:21.224082Z"
+valueJson = "null"
+reason = "README calls this URL the Project Page for information, demos and examples; it labels separate repository documents as Documentation. That does not establish the project landing page as docs.root. Pinned source inspection at 1541f590c7099820f10ea012f48d2399282df69f; this is source preservation, not execution or current-HEAD verification."

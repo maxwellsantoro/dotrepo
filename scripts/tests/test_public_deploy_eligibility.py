@@ -1,4 +1,5 @@
 import importlib.util
+import hashlib
 import json
 from pathlib import Path
 import subprocess
@@ -170,6 +171,56 @@ def test_late_guard_precedes_all_mutable_publication_and_smoke_steps():
         index = next(i for i, step in enumerate(steps) if step.get("name") == name)
         assert index > gate_index
         assert "steps.publish_revision.outputs.eligible == 'true'" in steps[index]["if"]
+
+
+def test_publication_requires_matching_archive_before_restoration_and_never_skips_upload():
+    workflow = yaml.safe_load((ROOT / ".github/workflows/public-cloudflare.yml").read_text())
+    steps = workflow["jobs"]["deploy"]["steps"]
+    named = {step.get("name"): step for step in steps}
+    preflight = named["Require and render snapshot archive binding"]
+    assert "--require-archive" in preflight["run"]
+    assert (
+        "vars.DOTREPO_PUBLIC_R2_ARCHIVE_BUCKET"
+        in preflight["env"]["DOTREPO_PUBLIC_R2_ARCHIVE_BUCKET"]
+    )
+    assert steps.index(preflight) < steps.index(
+        named["Restore deployed snapshot and append-only history"]
+    )
+    archive = named["Archive immutable snapshots to R2"]
+    assert archive["if"] == "steps.publish_revision.outputs.eligible == 'true'"
+    assert "--require-complete-history" in archive["run"]
+    assert '--config "$RUNNER_TEMP/dotrepo-wrangler.json"' in named["Deploy Worker"]["run"]
+    retained = named["Retain reviewed publication inputs"]
+    assert retained["if"] == "always()"
+    assert "release-gate/public/v0/snapshots/" in retained["with"]["path"]
+
+
+def test_history_recovery_binds_original_exporters_and_serializes_with_publication():
+    workflow = yaml.safe_load((ROOT / ".github/workflows/public-archive-recovery.yml").read_text())
+    public = yaml.safe_load((ROOT / ".github/workflows/public-cloudflare.yml").read_text())
+    assert workflow["permissions"] == {"contents": "read"}
+    assert workflow["concurrency"] == public["concurrency"]
+    job = workflow["jobs"]["recover"]
+    assert "github.event.repository.default_branch" in job["if"]
+    assert "vars.DOTREPO_PUBLIC_R2_ARCHIVE_BUCKET != ''" in job["if"]
+    steps = {step.get("name"): step for step in job["steps"]}
+    build = steps["Build each original deployment exporter"]["run"]
+    assert "entryExporters" in build and '"--locked"' in build
+    assert "cwd=source" in build and "Path(sys.argv[1]).resolve()" in build
+    recover = steps["Reconstruct and validate every frozen published payload"]["run"]
+    assert "--exporter-root" in recover and "--dotrepo-bin" not in recover
+    assert steps["Retain recovery evidence and verified payloads"]["if"] == "always()"
+    root = ROOT / "docs/archive/public-history-recovery-20261006"
+    plan = json.loads((root / "plan.json").read_bytes())
+    log_bytes = (root / "published-log.json").read_bytes()
+    assert hashlib.sha256(log_bytes).hexdigest() == plan["publishedLogSha256"]
+    entries = json.loads(log_bytes)["entries"]
+    assert set(plan["entryExporters"]) == {entry["snapshotId"] for entry in entries}
+    for entry in entries:
+        pin = plan["entryExporters"][entry["snapshotId"]]
+        assert len(pin["commit"]) == 40 and all(ch in "0123456789abcdef" for ch in pin["commit"])
+        assert pin["runUrl"].endswith(f"/actions/runs/{pin['runId']}")
+        assert entry["snapshotDigest"] in plan["sources"]
 
 
 @pytest.mark.parametrize("result", ["matched", "stale", "lookup-failure"])

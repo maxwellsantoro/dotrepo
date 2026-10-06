@@ -776,20 +776,40 @@ pub(crate) fn infer_readme_commands(file: &ImportedFile) -> Option<ImportedComma
 }
 
 fn infer_markdown_doc_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
-    // Look for build/test instructions in fenced code blocks. This intentionally
-    // avoids prose-only guesses and user-facing examples that are not standard
-    // development commands.
+    // A fence is one instruction sequence. Inspect it before selecting a line:
+    // setup and directory state must not disappear when publishing a scalar.
     let mut build: Option<String> = None;
     let mut test: Option<String> = None;
     let mut in_code_block = false;
     let mut current_heading = String::new();
     let mut headings: Vec<(usize, String)> = Vec::new();
-    let mut changed_directory = false;
+    let mut block_lines = Vec::new();
     for line in file.contents.lines() {
         let trimmed = line.trim();
         if trimmed.starts_with("```") || trimmed.starts_with("~~~") {
+            if in_code_block {
+                let has_context = block_lines.iter().any(|line: &String| {
+                    let unprompted = line.trim_start_matches(['$', '>', '%', '❯']).trim();
+                    unprompted == "cd"
+                        || unprompted.starts_with("cd ")
+                        || is_setup_only_command(unprompted)
+                });
+                if !has_context {
+                    for line in &block_lines {
+                        let Some(command) = normalize_documented_command_line(line) else {
+                            continue;
+                        };
+                        if build.is_none() && doc_heading_allows_command(&current_heading, true) {
+                            build = documented_build_command(&command);
+                        }
+                        if test.is_none() && doc_heading_allows_command(&current_heading, false) {
+                            test = documented_test_command(&command);
+                        }
+                    }
+                }
+                block_lines.clear();
+            }
             in_code_block = !in_code_block;
-            changed_directory = false;
             continue;
         }
         if !in_code_block {
@@ -805,22 +825,7 @@ fn infer_markdown_doc_commands(file: &ImportedFile) -> Option<ImportedCommandCan
             }
             continue;
         }
-        let unprompted = trimmed.trim_start_matches(['$', '>', '%', '❯']).trim();
-        if unprompted == "cd" || unprompted.starts_with("cd ") {
-            changed_directory = true;
-        }
-        if changed_directory {
-            continue;
-        }
-        let Some(command) = normalize_documented_command_line(trimmed) else {
-            continue;
-        };
-        if build.is_none() && doc_heading_allows_command(&current_heading, true) {
-            build = documented_build_command(&command);
-        }
-        if test.is_none() && doc_heading_allows_command(&current_heading, false) {
-            test = documented_test_command(&command);
-        }
+        block_lines.push(trimmed.to_string());
     }
     if build.is_none() && test.is_none() {
         return None;
@@ -846,6 +851,11 @@ fn doc_heading_allows_command(heading: &str, select_build: bool) -> bool {
         "benchmark",
         "single test",
         "specific test",
+        "component",
+        // Explicit context sections must pass the complete tuple extractor;
+        // incomplete declarations cannot fall back to root scalar guesses.
+        "repository tests",
+        "repository build",
     ]
     .iter()
     .any(|component| heading.contains(component))
@@ -935,7 +945,7 @@ fn without_cargo_toolchain_override(command: &str) -> Option<String> {
     Some(format!("cargo {}", tail.trim_start()))
 }
 
-fn documented_build_command(command: &str) -> Option<String> {
+pub(super) fn documented_build_command(command: &str) -> Option<String> {
     let stripped = without_cargo_toolchain_override(command);
     let matchable = stripped.as_deref().unwrap_or(command);
     for prefix in [
@@ -958,7 +968,7 @@ fn documented_build_command(command: &str) -> Option<String> {
     (command == "make").then(|| "make".to_string())
 }
 
-fn documented_test_command(command: &str) -> Option<String> {
+pub(super) fn documented_test_command(command: &str) -> Option<String> {
     if is_nonexecuting_test_command(command) {
         return None;
     }

@@ -1,0 +1,12 @@
+# Context fixture
+
+Source-preserving contextual instructions.
+
+## Repository tests
+
+Prerequisites: none.
+
+```sh
+cd .
+cargo nextest run only_this_test
+```

@@ -9,8 +9,11 @@ use std::path::{Path, PathBuf};
 use super::read::{check_input_path, read_input};
 use super::types::{ImportSources, ImportedCommandMetadata, ImportedFile};
 
+mod context;
 mod extraction;
 mod policy;
+
+pub(crate) use context::infer_documented_context_candidates;
 
 pub(crate) use policy::sanitize_import_command;
 

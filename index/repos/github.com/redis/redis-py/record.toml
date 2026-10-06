@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `CONTRIBUTING.md`, `.github/workflows/pypi-publish.yaml`, and `pyproject.toml`. `security_contact` was extracted from CONTRIBUTING.md (no SECURITY.md found). Inferred `repo.build` from `.github/workflows/pypi-publish.yaml`. Inferred `repo.test` from `pyproject.toml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "2026-10-06 risk-weighted source audit: only declared build/test/docs fields and contexts reinspected at retained revision; record age/status and unrelated facts unchanged. Fresh field assessments do not imply a full-record crawl. Bootstrapped from `README.md`, `.github/CODEOWNERS`, `CONTRIBUTING.md`, `.github/workflows/pypi-publish.yaml`, and `pyproject.toml`. `security_contact` was extracted from CONTRIBUTING.md (no SECURITY.md found). Inferred `repo.build` from `.github/workflows/pypi-publish.yaml`. Inferred `repo.test` from `pyproject.toml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "redis-py"
@@ -24,8 +24,7 @@ languages = [
     "Python",
     "Shell",
 ]
-build = "python -m build ."
-test = "python -m pytest"
+test = "invoke tests"
 topics = [
     "python",
     "redis",
@@ -33,6 +32,25 @@ topics = [
     "redis-cluster",
     "redis-py",
 ]
+
+[[repo.build_candidates]]
+command = "python -m build ."
+ecosystem = "Python"
+source = ".github/workflows/pypi-publish.yaml"
+
+[repo.build_candidates.context]
+command = "python -m build ."
+working_directory = "."
+scope = "repository"
+prerequisites = ["Use Python 3.10 and install build and twine as declared before the Build package step in .github/workflows/pypi-publish.yaml."]
+source = ".github/workflows/pypi-publish.yaml"
+
+[repo.test_context]
+command = "invoke tests"
+working_directory = "."
+scope = "repository"
+prerequisites = ["Create the development virtual environment, install dev_requirements.txt and the editable JWT extra as documented in CONTRIBUTING.md.", "Provide Docker with compose profiles and run invoke devenv to start the required Redis test environments before invoke tests."]
+source = "CONTRIBUTING.md"
 
 [repo.toolchain]
 min = "3.10"
@@ -43,7 +61,7 @@ maintainers = ["@dmaier-redislabs"]
 security_contact = "security@redis.com"
 
 [docs]
-root = "https://redis.readthedocs.io/en/stable/examples.html"
+root = "https://redis.readthedocs.io/en/stable/"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
 checkedAt = "2026-09-16T16:28:26.63853Z"
@@ -53,13 +71,6 @@ reason = "no getting started link detected"
 state = "not_found"
 valueJson = "null"
 
-[x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:28:26.63853Z"
-confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://redis.readthedocs.io/en/stable/examples.html"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
 checkedAt = "2026-09-16T16:28:26.63853Z"
@@ -77,14 +88,6 @@ reason = "no single clear team in CODEOWNERS"
 state = "not_found"
 valueJson = "null"
 
-[x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:28:26.63853Z"
-confidence = "medium"
-method = "inferred"
-reason = "from workflow fallback"
-source = ".github/workflows/pypi-publish.yaml"
-state = "present"
-valueJson = '"python -m build ."'
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-16T16:28:26.63853Z"
@@ -112,14 +115,6 @@ source = "README.md"
 state = "present"
 valueJson = '"redis-py"'
 
-[x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:28:26.63853Z"
-confidence = "medium"
-method = "inferred"
-reason = "inferred ecosystem default from build-tool metadata"
-source = "pyproject.toml"
-state = "present"
-valueJson = '"python -m pytest"'
 
 [x.github]
 archived = false
@@ -129,3 +124,53 @@ fork = false
 head_sha = "27225cf0dcc683ce963437495b07ad7fdc83fc83"
 html_url = "https://github.com/redis/redis-py"
 stars = 13642
+
+
+
+
+
+
+[x.dotrepo.field_evidence."repo.build"]
+state = "unresolved"
+method = "extracted"
+confidence = "high"
+source = ".github/workflows/pypi-publish.yaml"
+checkedAt = "2026-10-06T04:07:21.224082Z"
+valueJson = "null"
+reason = "Workflow literally builds the root distribution with this command, after Python/tool setup. Retain as a packaging candidate rather than inferred scalar default. Pinned source inspection at 27225cf0dcc683ce963437495b07ad7fdc83fc83; this is source preservation, not execution or current-HEAD verification."
+
+[x.dotrepo.field_evidence."repo.build_candidates.0"]
+state = "present"
+method = "extracted"
+confidence = "high"
+source = ".github/workflows/pypi-publish.yaml"
+checkedAt = "2026-10-06T04:07:21.224082Z"
+valueJson = "{\"command\": \"python -m build .\", \"context\": {\"command\": \"python -m build .\", \"prerequisites\": [\"Use Python 3.10 and install build and twine as declared before the Build package step in .github/workflows/pypi-publish.yaml.\"], \"scope\": \"repository\", \"source\": \".github/workflows/pypi-publish.yaml\", \"working_directory\": \".\"}, \"ecosystem\": \"Python\", \"source\": \".github/workflows/pypi-publish.yaml\"}"
+reason = "Workflow literally builds the root distribution with this command, after Python/tool setup. Retain as a packaging candidate rather than inferred scalar default. Pinned source inspection at 27225cf0dcc683ce963437495b07ad7fdc83fc83; this is source preservation, not execution or current-HEAD verification."
+
+[x.dotrepo.field_evidence."repo.test"]
+state = "present"
+method = "extracted"
+confidence = "high"
+source = "CONTRIBUTING.md"
+checkedAt = "2026-10-06T04:07:21.224082Z"
+valueJson = "\"invoke tests\""
+reason = "Contribution guide declares invoke tests; tasks.py runs multiple selected fixture/standalone/cluster suites with required options. A raw inferred pytest invocation does not preserve this declared instruction. Pinned source inspection at 27225cf0dcc683ce963437495b07ad7fdc83fc83; this is source preservation, not execution or current-HEAD verification."
+
+[x.dotrepo.field_evidence."repo.test_context"]
+state = "present"
+method = "extracted"
+confidence = "high"
+source = "CONTRIBUTING.md"
+checkedAt = "2026-10-06T04:07:21.224082Z"
+valueJson = "{\"command\": \"invoke tests\", \"prerequisites\": [\"Create the development virtual environment, install dev_requirements.txt and the editable JWT extra as documented in CONTRIBUTING.md.\", \"Provide Docker with compose profiles and run invoke devenv to start the required Redis test environments before invoke tests.\"], \"scope\": \"repository\", \"source\": \"CONTRIBUTING.md\", \"working_directory\": \".\"}"
+reason = "Contribution guide declares invoke tests; tasks.py runs multiple selected fixture/standalone/cluster suites with required options. A raw inferred pytest invocation does not preserve this declared instruction. Pinned source inspection at 27225cf0dcc683ce963437495b07ad7fdc83fc83; this is source preservation, not execution or current-HEAD verification."
+
+[x.dotrepo.field_evidence."docs.root"]
+state = "present"
+method = "extracted"
+confidence = "high"
+source = "README.md"
+checkedAt = "2026-10-06T04:07:21.224082Z"
+valueJson = "\"https://redis.readthedocs.io/en/stable/\""
+reason = "README documentation badge declares the root stable documentation URL; examples.html is specifically the connection examples subpage. Pinned source inspection at 27225cf0dcc683ce963437495b07ad7fdc83fc83; this is source preservation, not execution or current-HEAD verification."

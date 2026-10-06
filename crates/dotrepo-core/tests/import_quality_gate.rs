@@ -1,5 +1,5 @@
-use dotrepo_core::{import_repository, ImportMode, ImportPlan};
-use dotrepo_schema::RecordStatus;
+use dotrepo_core::{import_repository, validate_manifest_diagnostics, ImportMode, ImportPlan};
+use dotrepo_schema::{BuildTestCandidate, RecordStatus};
 use serde::Deserialize;
 use std::fs;
 use std::path::PathBuf;
@@ -13,6 +13,10 @@ struct FixtureExpectation {
     repo_build: Option<String>,
     #[serde(default)]
     repo_test: Option<String>,
+    #[serde(default)]
+    repo_build_candidates: Vec<BuildTestCandidate>,
+    #[serde(default)]
+    repo_test_candidates: Vec<BuildTestCandidate>,
     #[serde(default)]
     docs_root: Option<String>,
     #[serde(default)]
@@ -74,6 +78,16 @@ fn assert_common_plan_fields(
         plan.manifest.repo.test.as_deref(),
         expectation.repo_test.as_deref()
     );
+    assert_eq!(
+        plan.manifest.repo.build_candidates,
+        expectation.repo_build_candidates
+    );
+    assert_eq!(
+        plan.manifest.repo.test_candidates,
+        expectation.repo_test_candidates
+    );
+    assert!(plan.manifest.repo.build_context.is_none());
+    assert!(plan.manifest.repo.test_context.is_none());
     assert_eq!(
         plan.manifest
             .docs
@@ -192,5 +206,34 @@ fn import_quality_gate_matches_checked_in_expectations() {
             evidence,
             &expectation.overlay_evidence_contains,
         );
+    }
+}
+
+#[test]
+fn imported_context_candidates_are_valid_and_exactly_value_bound() {
+    for fixture in [
+        "context-repository-tests",
+        "context-component-tests",
+        "context-component-build",
+    ] {
+        let root = fixture_root().join(fixture);
+        for mode in [ImportMode::Native, ImportMode::Overlay] {
+            let mut plan = import_repository(&root, mode, Some("https://example.com/context"))
+                .expect("context fixture imports");
+            assert!(validate_manifest_diagnostics(&root, &plan.manifest)
+                .iter()
+                .all(|diagnostic| diagnostic.code != "invalid_execution_context"));
+            let candidates = if plan.manifest.repo.build_candidates.is_empty() {
+                &mut plan.manifest.repo.test_candidates
+            } else {
+                &mut plan.manifest.repo.build_candidates
+            };
+            assert_eq!(candidates.len(), 1);
+            candidates[0].command.push_str(" --changed");
+            assert!(validate_manifest_diagnostics(&root, &plan.manifest)
+                .iter()
+                .any(|diagnostic| diagnostic.code == "invalid_execution_context"
+                    && diagnostic.message.contains("exactly match")));
+        }
     }
 }
