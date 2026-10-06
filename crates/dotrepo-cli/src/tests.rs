@@ -1608,3 +1608,71 @@ fn temp_dir(label: &str) -> PathBuf {
     fs::create_dir_all(&path).expect("temp dir created");
     path
 }
+
+#[cfg(unix)]
+#[test]
+fn forced_import_refuses_links_and_preserves_regular_file_permissions() {
+    use std::os::unix::fs::{symlink, MetadataExt, PermissionsExt};
+    for (output, mode) in [
+        (".repo", "native"),
+        ("record.toml", "overlay"),
+        ("evidence.md", "overlay"),
+    ] {
+        for hardlink in [false, true] {
+            let root = temp_dir("force-link");
+            let repository = root.join("repository");
+            fs::create_dir(&repository).unwrap();
+            fs::write(
+                repository.join("README.md"),
+                "# Fixture\n\nContained project.\n",
+            )
+            .unwrap();
+            let external = root.join("outside.txt");
+            fs::write(&external, "outside sentinel").unwrap();
+            if hardlink {
+                fs::hard_link(&external, repository.join(output)).unwrap();
+            } else {
+                symlink(&external, repository.join(output)).unwrap();
+            }
+            if output == "evidence.md" {
+                fs::write(repository.join("record.toml"), "original manifest").unwrap();
+            }
+            let mode = if mode == "native" {
+                ImportModeArg::Native
+            } else {
+                ImportModeArg::Overlay
+            };
+            assert!(cmd_import(
+                repository.clone(),
+                mode,
+                Some("https://github.com/example/fixture".into()),
+                true
+            )
+            .is_err());
+            assert_eq!(fs::read_to_string(&external).unwrap(), "outside sentinel");
+            if output == "evidence.md" {
+                assert_eq!(
+                    fs::read_to_string(repository.join("record.toml")).unwrap(),
+                    "original manifest"
+                );
+            }
+            fs::remove_dir_all(root).unwrap();
+        }
+    }
+    let repository = temp_dir("force-regular");
+    fs::write(
+        repository.join("README.md"),
+        "# Fixture\n\nContained project.\n",
+    )
+    .unwrap();
+    let output = repository.join(".repo");
+    fs::write(&output, "old manifest").unwrap();
+    fs::set_permissions(&output, fs::Permissions::from_mode(0o640)).unwrap();
+    let before = fs::metadata(&output).unwrap();
+    cmd_import(repository.clone(), ImportModeArg::Native, None, true).unwrap();
+    let after = fs::metadata(&output).unwrap();
+    assert_eq!(before.ino(), after.ino());
+    assert_eq!(after.mode() & 0o777, 0o640);
+    assert!(fs::read_to_string(output).unwrap().contains("schema ="));
+    fs::remove_dir_all(repository).unwrap();
+}

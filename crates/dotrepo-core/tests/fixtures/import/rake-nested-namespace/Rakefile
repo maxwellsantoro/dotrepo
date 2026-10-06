@@ -1,0 +1,6 @@
+namespace :outer do
+namespace :inner do
+task :test do
+end
+end
+end

@@ -1013,3 +1013,73 @@ fn start_json_server(routes: Vec<(&'static str, Value)>) -> (TestServer, String)
         format!("http://{}", address),
     )
 }
+
+#[cfg(unix)]
+#[test]
+fn forced_import_refuses_links_and_preserves_regular_file_permissions() {
+    use std::os::unix::fs::{symlink, MetadataExt, PermissionsExt};
+    for (output, mode) in [
+        (".repo", "native"),
+        ("record.toml", "overlay"),
+        ("evidence.md", "overlay"),
+    ] {
+        for hardlink in [false, true] {
+            let root = temp_dir("force-link");
+            let repository = root.join("repository");
+            fs::create_dir(&repository).unwrap();
+            fs::write(
+                repository.join("README.md"),
+                "# Fixture\n\nContained project.\n",
+            )
+            .unwrap();
+            let external = root.join("outside.txt");
+            fs::write(&external, "outside sentinel").unwrap();
+            if hardlink {
+                fs::hard_link(&external, repository.join(output)).unwrap();
+            } else {
+                symlink(&external, repository.join(output)).unwrap();
+            }
+            if output == "evidence.md" {
+                fs::write(repository.join("record.toml"), "original manifest").unwrap();
+            }
+            let response = call_tool(
+                "dotrepo.import_write",
+                json!({
+                    "root": repository.display().to_string(), "mode": mode,
+                    "source": "https://github.com/example/fixture", "force": true
+                }),
+            );
+            assert_eq!(response["result"]["isError"], true);
+            assert_eq!(fs::read_to_string(&external).unwrap(), "outside sentinel");
+            if output == "evidence.md" {
+                assert_eq!(
+                    fs::read_to_string(repository.join("record.toml")).unwrap(),
+                    "original manifest"
+                );
+            }
+            fs::remove_dir_all(root).unwrap();
+        }
+    }
+    let repository = temp_dir("force-regular");
+    fs::write(
+        repository.join("README.md"),
+        "# Fixture\n\nContained project.\n",
+    )
+    .unwrap();
+    let output = repository.join(".repo");
+    fs::write(&output, "old manifest").unwrap();
+    fs::set_permissions(&output, fs::Permissions::from_mode(0o640)).unwrap();
+    let before = fs::metadata(&output).unwrap();
+    let response = call_tool(
+        "dotrepo.import_write",
+        json!({
+            "root": repository.display().to_string(), "mode": "native", "force": true
+        }),
+    );
+    assert_ne!(response["result"]["isError"], true);
+    let after = fs::metadata(&output).unwrap();
+    assert_eq!(before.ino(), after.ino());
+    assert_eq!(after.mode() & 0o777, 0o640);
+    assert!(fs::read_to_string(output).unwrap().contains("schema ="));
+    fs::remove_dir_all(repository).unwrap();
+}

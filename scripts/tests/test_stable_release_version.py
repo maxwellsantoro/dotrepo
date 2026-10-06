@@ -6,8 +6,8 @@ import check_release_version as versions  # noqa: E402
 
 
 def test_stable_tag_matches_workspace():
-    version, errors = versions.check(Path(__file__).resolve().parents[2], tag="v1.0.2")
-    assert version == "1.0.2"
+    version, errors = versions.check(Path(__file__).resolve().parents[2], tag="v1.0.3")
+    assert version == "1.0.3"
     assert errors == []
 
 

@@ -353,7 +353,7 @@ fn deepen_security_contact(
             if !path.is_file() {
                 continue;
             }
-            let contents = match std::fs::read_to_string(&path) {
+            let contents = match super::read::read_input(root, Path::new(candidate)) {
                 Ok(contents) => contents,
                 Err(_) => continue,
             };
@@ -441,7 +441,7 @@ fn deepen_owners_team(
         if !path.is_file() {
             continue;
         }
-        let contents = match std::fs::read_to_string(&path) {
+        let contents = match super::read::read_input(root, Path::new(candidate)) {
             Ok(contents) => contents,
             Err(_) => continue,
         };

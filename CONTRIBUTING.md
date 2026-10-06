@@ -22,6 +22,19 @@ escape risk for existing files, but it cannot eliminate time-of-check/time-of-us
 gaps for paths that do not exist yet. Treat containment as a best-effort guard,
 not a sandbox boundary, when adding write flows.
 
+Import text inputs use a stricter contract: regular files only, no symlinks
+(including contained links), and at most 2 MiB per input. Conventional files,
+workflows, relation discovery and deterministic deepening share this reader.
+Unix opens each descendant relative to a pinned directory with `O_NOFOLLOW`.
+Windows refuses reparse paths and opens the leaf without following it; concurrent
+ancestor replacement remains a best-effort limit. The caller controls the root
+and its ancestors, so this does not isolate an importer from an actor who can
+move the selected root itself.
+
+Forced import refuses existing output symlinks, nonregular files and shared
+hardlinks before truncation. This preserves the public import interface; it
+does not grant permission to overwrite unrelated repository metadata.
+
 ## Before you open a PR
 
 - Read the shortest relevant doc first instead of starting from the full RFC
