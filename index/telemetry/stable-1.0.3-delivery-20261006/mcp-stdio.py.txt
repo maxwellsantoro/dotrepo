@@ -1,0 +1,119 @@
+import json
+import subprocess
+
+proc = subprocess.Popen(
+    ['/private/tmp/dotrepo-roadmap-stable-safety-publication/run-1/extracted/dotrepo-1.0.3-aarch64-apple-darwin/bin/dotrepo-mcp'],
+    stdin=subprocess.PIPE,
+    stdout=subprocess.PIPE,
+    stderr=subprocess.PIPE,
+    text=False,
+)
+
+# The MCP stdio transport is newline-delimited JSON (one message per
+# line), matching real MCP clients; Content-Length framing is LSP.
+def send(message, expect_response=True):
+    proc.stdin.write(json.dumps(message).encode() + b"\n")
+    proc.stdin.flush()
+    if not expect_response:
+        return None
+    line = proc.stdout.readline()
+    if not line:
+        raise RuntimeError("unexpected EOF while reading MCP response")
+    return json.loads(line)
+
+init = send({
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "initialize",
+    "params": {
+        "protocolVersion": "2025-11-25",
+        "capabilities": {},
+        "clientInfo": {"name": "ci-smoke", "version": "0"}
+    }
+})
+assert init["result"]["protocolVersion"] == "2025-11-25"
+assert init["result"]["serverInfo"]["version"] == "1.0.3"
+
+send({
+    "jsonrpc": "2.0",
+    "method": "notifications/initialized",
+    "params": {}
+}, expect_response=False)
+
+tools = send({
+    "jsonrpc": "2.0",
+    "id": 2,
+    "method": "tools/list",
+    "params": {}
+})
+assert any(tool["name"] == "dotrepo.validate" for tool in tools["result"]["tools"])
+
+validate = send({
+    "jsonrpc": "2.0",
+    "id": 3,
+    "method": "tools/call",
+    "params": {
+        "name": "dotrepo.validate",
+        "arguments": {"root": "examples/native-minimal"}
+    }
+})
+structured = validate["result"]["structuredContent"]
+assert structured["valid"] is True
+assert structured["diagnostics"] == []
+
+query = send({
+    "jsonrpc": "2.0",
+    "id": 4,
+    "method": "tools/call",
+    "params": {
+        "name": "dotrepo.query",
+        "arguments": {
+            "root": "examples/native-minimal",
+            "path": "repo.name"
+        }
+    }
+})
+assert query["result"]["structuredContent"]["value"] == "orbit"
+
+trust = send({
+    "jsonrpc": "2.0",
+    "id": 5,
+    "method": "tools/call",
+    "params": {
+        "name": "dotrepo.trust",
+        "arguments": {"root": "examples/native-minimal"}
+    }
+})
+assert trust["result"]["structuredContent"]["selection"]["reason"] == "only_matching_record"
+
+preview = send({
+    "jsonrpc": "2.0",
+    "id": 6,
+    "method": "tools/call",
+    "params": {
+        "name": "dotrepo.import_preview",
+        "arguments": {
+            "root": "examples/native-minimal",
+            "mode": "native"
+        }
+    }
+})
+assert preview["result"]["structuredContent"]["record"]["status"] == "draft"
+
+import_write = send({
+    "jsonrpc": "2.0",
+    "id": 7,
+    "method": "tools/call",
+    "params": {
+        "name": "dotrepo.import_write",
+        "arguments": {
+            "root": "examples/native-minimal",
+            "mode": "native"
+        }
+    }
+})
+assert import_write["result"]["isError"] is True
+assert "already exists" in import_write["result"]["structuredContent"]["error"]
+
+proc.terminate()
+proc.wait(timeout=5)

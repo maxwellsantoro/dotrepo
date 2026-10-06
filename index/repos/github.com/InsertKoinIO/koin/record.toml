@@ -36,8 +36,37 @@ topics = [
     "library",
 ]
 
-[docs]
-root = "https://insert-koin.io"
+[[repo.build_candidates]]
+command = "./install.sh"
+ecosystem = "Gradle"
+source = "CONTRIBUTING.adoc"
+
+[repo.build_candidates.context]
+command = "./install.sh"
+working_directory = "projects"
+scope = "component"
+prerequisites = [
+    "Prepare JDK 17 as declared by .github/actions/prepare-env/action.yml and allow the checked-in Gradle 8.14.3 wrapper to obtain dependencies.",
+    "Prepare the Android SDK required by projects/android/koin-android/build.gradle.kts (compile SDK 36 in projects/gradle.properties).",
+]
+source = "CONTRIBUTING.adoc"
+component = "projects"
+
+[[repo.test_candidates]]
+command = "./test.sh"
+ecosystem = "Gradle"
+source = "CONTRIBUTING.adoc"
+
+[repo.test_candidates.context]
+command = "./test.sh"
+working_directory = "projects"
+scope = "component"
+prerequisites = [
+    "Prepare JDK 17 as declared by .github/actions/prepare-env/action.yml and allow the checked-in Gradle 8.14.3 wrapper to obtain dependencies.",
+    "Prepare the Android SDK required by projects/android/koin-android/build.gradle.kts (compile SDK 36 in projects/gradle.properties).",
+]
+source = "CONTRIBUTING.adoc"
+component = "projects"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
 checkedAt = "2026-09-16T16:34:15.122506Z"
@@ -48,12 +77,13 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:34:15.122506Z"
-confidence = "high"
+checkedAt = "2026-10-06T05:08:10.049774+00:00"
+confidence = "medium"
 method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://insert-koin.io"'
+reason = "2026-10-06 pinned-source audit: README labels this URL Official Website; its separate setup-page leaf does not establish a documentation root. Withhold the unsupported association and preserve repo.homepage."
+source = "README.md"
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
 checkedAt = "2026-09-16T16:34:15.122506Z"
@@ -72,11 +102,12 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:34:15.122506Z"
-confidence = "high"
-method = "not_found_in_inspected_sources"
-reason = "no build command sources found"
-state = "not_found"
+checkedAt = "2026-10-06T05:08:10.049774+00:00"
+confidence = "medium"
+method = "unspecified"
+reason = "2026-10-06 pinned-source audit: CONTRIBUTING.adoc declares the projects-scoped install wrapper; preserve it as a component candidate, withhold a scalar and assessment while platform prerequisites remain incomplete."
+source = "CONTRIBUTING.adoc"
+state = "unresolved"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
@@ -106,11 +137,12 @@ state = "present"
 valueJson = '"koin"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:34:15.122506Z"
-confidence = "high"
-method = "not_found_in_inspected_sources"
-reason = "no test command sources found"
-state = "not_found"
+checkedAt = "2026-10-06T05:08:10.049774+00:00"
+confidence = "medium"
+method = "unspecified"
+reason = "2026-10-06 pinned-source audit: CONTRIBUTING.adoc and CI declare the projects test wrapper covering JVM/Android/KMP JVM tests, not examples or macOS-native tests. Preserve wrapper and component scope; prerequisites remain unassessed."
+source = "CONTRIBUTING.adoc"
+state = "unresolved"
 valueJson = "null"
 
 [x.github]

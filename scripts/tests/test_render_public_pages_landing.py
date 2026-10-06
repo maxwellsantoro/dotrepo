@@ -231,6 +231,6 @@ def test_rendered_install_command_tracks_the_install_guide(tmp_path, monkeypatch
     public_pages.main()
     rendered = (input_dir / "index.html").read_text()
     assert public_pages.stable_mcp_install() in rendered
-    assert "cargo install dotrepo-mcp --version 1.0.2 --locked" in rendered
+    assert "cargo install dotrepo-mcp --version 1.0.3 --locked" in rendered
     assert "cargo install dotrepo-mcp --version 1.0.1 --locked" not in rendered
     assert "profile output and additional safeguards on main are unreleased" in rendered

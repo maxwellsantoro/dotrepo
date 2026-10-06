@@ -44,8 +44,6 @@ languages = [
     "CSS",
     "Scala",
 ]
-build = "./gradlew build"
-test = "./gradlew test"
 topics = [
     "kotlin",
     "programming-language",
@@ -62,9 +60,6 @@ topics = [
 maintainers = []
 security_contact = "https://kotlinlang.org/docs/security.html"
 
-[docs]
-root = "https://kotlinlang.org"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
 checkedAt = "2026-09-17T06:03:47.755221855Z"
 confidence = "high"
@@ -74,12 +69,13 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-17T06:03:47.755221855Z"
-confidence = "high"
+checkedAt = "2026-10-06T05:08:10.049774+00:00"
+confidence = "medium"
 method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://kotlinlang.org"'
+reason = "2026-10-06 pinned-source audit: ReadMe labels kotlinlang.org Kotlin Site, separately linking tutorial/API leaves. The website URL is not an explicit documentation-root declaration."
+source = "ReadMe.md"
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
 checkedAt = "2026-09-17T06:03:47.755221855Z"
@@ -99,13 +95,13 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-17T06:03:47.755221855Z"
+checkedAt = "2026-10-06T05:08:10.049774+00:00"
 confidence = "medium"
-method = "inferred"
-reason = "inferred ecosystem default from build-tool metadata"
+method = "unspecified"
+reason = "2026-10-06 pinned-source audit: Root applies Gradle base, check depends on a test task that always throws. Withhold the generic build; documented dist/install and scoped aggregates are examples, not a verified repository default."
 source = "build.gradle.kts"
-state = "present"
-valueJson = '"./gradlew build"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-17T06:03:47.755221855Z"
@@ -134,13 +130,13 @@ state = "present"
 valueJson = '"kotlin"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-17T06:03:47.755221855Z"
+checkedAt = "2026-10-06T05:08:10.049774+00:00"
 confidence = "medium"
-method = "inferred"
-reason = "inferred ecosystem default from build-tool metadata"
+method = "unspecified"
+reason = "2026-10-06 pinned-source audit: The exact root test task unconditionally throws and tells users to select aggregate *Test tasks. Do not manufacture an aggregate command."
 source = "build.gradle.kts"
-state = "present"
-valueJson = '"./gradlew test"'
+state = "unresolved"
+valueJson = "null"
 
 [x.github]
 archived = false

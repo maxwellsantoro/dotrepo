@@ -47,6 +47,21 @@ topics = [
     "i960",
 ]
 
+[[repo.test_candidates]]
+command = "sh tests.sh"
+ecosystem = "Shell"
+source = ".travis.yml"
+
+[repo.test_candidates.context]
+command = "sh tests.sh"
+working_directory = "."
+scope = "repository"
+prerequisites = [
+    "Use a disposable complete Git checkout with origin/master available; tests.sh deinitializes submodules and adds/removes the github-upstream remote.",
+    "Provide POSIX sh, Git, du, grep, wc, cut and standard Unix tools.",
+]
+source = ".travis.yml"
+
 [x.dotrepo.field_evidence."docs.getting_started"]
 checkedAt = "2026-09-16T16:25:57.518283Z"
 confidence = "high"
@@ -80,11 +95,12 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:25:57.518283Z"
-confidence = "high"
-method = "not_found_in_inspected_sources"
-reason = "no build command sources found"
-state = "not_found"
+checkedAt = "2026-10-06T05:08:10.049774+00:00"
+confidence = "medium"
+method = "unspecified"
+reason = "2026-10-06 pinned-source audit: The root is a collection of CPU documentation/submodules; no repository-default build is declared in inspected conventional sources."
+source = "README.md"
+state = "unresolved"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
@@ -114,11 +130,12 @@ state = "present"
 valueJson = '"awesome-cpus"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:25:57.518283Z"
-confidence = "high"
-method = "not_found_in_inspected_sources"
-reason = "no test command sources found"
-state = "not_found"
+checkedAt = "2026-10-06T05:08:10.049774+00:00"
+confidence = "medium"
+method = "unspecified"
+reason = "2026-10-06 pinned-source audit: Travis declares sh tests.sh. Preserve the wrapper as an unassessed candidate: it alters Git state and piped loops do not reliably propagate error() exit status. No test outcome or execution reliability is claimed."
+source = ".travis.yml"
+state = "unresolved"
 valueJson = "null"
 
 [x.github]

@@ -1,0 +1,93 @@
+{
+  "checkedAt": "2026-10-06T05:39:41.865265+00:00",
+  "stableTag": "v1.0.3",
+  "stableMerge": "9af41e8bda5fa30f271f9bdd5e8d19dd41e6eb2d",
+  "release": {
+    "url": "https://github.com/maxwellsantoro/dotrepo/releases/tag/v1.0.3",
+    "run": "https://github.com/maxwellsantoro/dotrepo/actions/runs/37418846952",
+    "binaryAndSixCratePublication": "success",
+    "runConclusion": "failure: tagged registry description exceeded 100 characters",
+    "registryRecovery": "https://github.com/maxwellsantoro/dotrepo/actions/runs/37419332368",
+    "registryState": "active latest 1.0.3; actual published MCPB hash matched",
+    "registryEvidence": "registry-1.0.3-check.json",
+    "extensionVersion": "1.0.0 (independent unchanged extension package)",
+    "maintenanceTemplateFix": {
+      "pr": "https://github.com/maxwellsantoro/dotrepo/pull/144",
+      "merge": "87a7872cb264b90e1d5086e003dae52e054545d6",
+      "headCI": 37419327500,
+      "mergedCI": 37419672039,
+      "conclusion": "success; tagged source/assets unchanged",
+      "pythonTests": 173
+    }
+  },
+  "validation": {
+    "stablePR": 143,
+    "correctedPRCI": 37418123981,
+    "stableMergedCI": 37418515902,
+    "localRustTests": 469,
+    "localPythonTests": 172,
+    "fullReleaseGate": "passed including VSIX",
+    "packageDryRuns": 6,
+    "formatLimitation": "47 preexisting unchanged v1.0.2 Python files fail full Ruff format; changed Python passed; retained hash proof"
+  },
+  "installation": {
+    "receipt": "receipt.json",
+    "downloadedBundle": "bundle-safety.json",
+    "cratesIoInstall": "registry-safety.json",
+    "controlledChecksPerInstallation": 27,
+    "passedPerInstallation": 27,
+    "bundleMCPAndLSPStdio": "passed; initialize version 1.0.3",
+    "bundleBinaries": {
+      "dotrepo": "824857ed50095236cb4b86c8873478b1cda205bcdfd9b333e023093416c32358",
+      "dotrepo-public-query": "8b5c8e28146947b80eb088d2f3c9d7c519c1b210f48fa8cbc0692ba0369e6281",
+      "dotrepo-mcp": "17d134f65ad6569c2f41e4004902377cf3fa17411015d651c4204d973b97ef37",
+      "dotrepo-lsp": "78daf4d8e96d06e47f1d9aa7d1f10c27f5cc6942ff92f714d1f5bee1bc19e481"
+    },
+    "registryInstallation": {
+      "identity": "dotrepo-cli 1.0.3 (registry+https://github.com/rust-lang/crates.io-index)",
+      "binarySha256": "46bdd4112991292fa230761ca895a02c372741dc33c2ca1a05c8a61aaf16e2b3",
+      "cargoTargetDir": "/private/tmp/dotrepo-roadmap-stable-safety-registry-target"
+    },
+    "runtime": {
+      "cargo": "cargo 1.95.0 (f2d3ce0bd 2026-03-21)",
+      "rustc": "rustc 1.95.0 (59807616e 2026-04-14)\nbinary: rustc\ncommit-hash: 59807616e1fa2540724bfbac14d7976d7e4a3860\ncommit-date: 2026-04-14\nhost: aarch64-apple-darwin\nrelease: 1.95.0\nLLVM version: 22.1.2",
+      "uv": "uv 0.11.8 (0e961dd9a 2026-04-27 aarch64-apple-darwin)",
+      "python": "Python 3.12.13"
+    },
+    "reproductionScript": "verify_publication.py",
+    "linux": "published asset/checksum verified; not executed on macOS host"
+  },
+  "publicContinuity": {
+    "status": "pending Cloudflare account R2 subscription enablement, original history backfill and archive-backed deployment",
+    "failedPreflightRun": 37415120845,
+    "cloudflareError": 10042,
+    "historyReset": false
+  },
+  "limits": [
+    "Controlled fixture checks and installation evidence; no independent consumer adoption or task-cost claim",
+    "No development execution-context schema/API backport",
+    "Historical 1.0.2 and study receipts unchanged",
+    "Receipt/log commands retain original local output paths; archived copies mapped by basename, frozen stdio sources add .txt to preserve executed bytes"
+  ],
+  "retainedFiles": {
+    "receipt.json": "6b761ba7f63747776fb1965f19e064e04d768c1c879a9c278dbdb4696c3deffa",
+    "bundle-safety.json": "8e555b91301c1fa9b597fa8c9c81123c3027a433545a5fc906711a508f446c31",
+    "registry-safety.json": "cbc0a0548c374b1a772c6dbb297407051fa63cc9a76dbdf87ad1f302c647448a",
+    "release.json": "a6c05f28919fb5c9a3d12edee3292ee8e75aa86507dd4107390ea58de2f8e7d5",
+    "latest-release.json": "e632ed0aa1319a5cebef0e972f116548ffa30de74710e3b779b0b47884e5cb05",
+    "tag-refs.txt": "654c82eeddb38b4924d4e758ce18a4e3af26a3d81314f62cc57f9f4734b575b6",
+    "bundle-safety.log": "f98fe2aca2ce9df5ec4b58f424d780609c89aa5d493f88c4c14fc8757d44cf4d",
+    "registry-safety.log": "d8327a10f5c7e2fa389a5be67e9c448b4a2c09d26d4be7019fff6d9ff840a928",
+    "crates-install.log": "80082bdb5ff5069d574270edbb2e2e1e082b01672cc78f50cfa4dc3dbedbe54e",
+    "mcp-stdio.log": "f700c9f1aa8cdbb944ef3506c728f3299a0e0c014e750373f4cd701f248388fa",
+    "lsp-stdio.log": "f700c9f1aa8cdbb944ef3506c728f3299a0e0c014e750373f4cd701f248388fa",
+    "verify_publication.py": "1fb3539c53c97dcd4a7e59548cb740f5a4ee156c4f25a9870139b1a44adbbd62",
+    "check_installed_safety.py": "d7c2b41713e183b91aeccc449bf291472b9c456f6ad5ca876b6a7b71611d6623",
+    "registry-1.0.3-latest.json": "1a81a5bb30eb15f0aa934f881d39389d54c93d55cea936df357d963ab88c3fa3",
+    "registry-1.0.3-check.json": "c7e13828a0e4835ead2dcf8a41d7790e9558897a7e8da374d9b136755c801b9d",
+    "release-1.0.3-registry-rejection.log": "58ed37a180dd6102f86347e47686b76baeab1a1b14174ab94bd5cfb3c29da04c",
+    "preexisting-format-baseline.json": "8e408982b860437a43dfe041f7e0eb9327bb1d7ea5e65d161e5980d889d4bcbf",
+    "mcp-stdio.py.txt": "d8f06c55ba6939c8694b71dd56422bfb964a1fb6da68710ef98061267ee9d0fe",
+    "lsp-stdio.py.txt": "9f216ba4fea1a07e0f90e6c8a34f6d07ecb5fecb9cad2497b78a0ac475bde2f9"
+  }
+}

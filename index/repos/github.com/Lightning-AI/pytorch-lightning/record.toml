@@ -25,7 +25,6 @@ languages = [
     "Shell",
     "Makefile",
 ]
-build = "python -m build"
 topics = [
     "python",
     "deep-learning",
@@ -82,14 +81,6 @@ reason = "no single clear team in CODEOWNERS"
 state = "not_found"
 valueJson = "null"
 
-[x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-17T06:08:17.919082573Z"
-confidence = "medium"
-method = "inferred"
-reason = "inferred ecosystem default from build-tool metadata"
-source = "pyproject.toml"
-state = "present"
-valueJson = '"python -m build"'
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-17T06:08:17.919082573Z"
@@ -117,14 +108,6 @@ source = "README.md"
 state = "present"
 valueJson = '"Lightning"'
 
-[x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-17T06:08:17.919082573Z"
-confidence = "low"
-method = "extracted"
-reason = "Command is an incomplete example or setup-only step."
-source = ".github/CONTRIBUTING.md"
-state = "unresolved"
-valueJson = "null"
 
 [x.github]
 archived = false
@@ -134,3 +117,54 @@ fork = false
 head_sha = "320e79704a9e921b3a11d8a1d1ba685e6b7ebc69"
 html_url = "https://github.com/Lightning-AI/pytorch-lightning"
 stars = 31348
+
+[[repo.build_candidates]]
+command = "python setup.py sdist bdist_wheel"
+ecosystem = "Python"
+source = ".github/actions/pkg-check/action.yml"
+
+[repo.build_candidates.context]
+command = "python setup.py sdist bdist_wheel"
+working_directory = "."
+scope = "repository"
+prerequisites = ["Use Python 3.x as declared in the build workflow; install requirements/ci.txt before the action. Bind PACKAGE_NAME to the selected lightning, fabric, or pytorch package as the workflow requires; preserve subsequent metadata, wheel, and source consistency checks."]
+source = ".github/actions/pkg-check/action.yml"
+
+[[repo.test_candidates]]
+command = "make test"
+ecosystem = "Python"
+source = ".github/CONTRIBUTING.md"
+
+[repo.test_candidates.context]
+command = "make test"
+working_directory = "."
+scope = "repository"
+prerequisites = ["Use a Unix host with make, Git and uv installed, and an activated Python 3.11 virtual environment as shown in the documented manual setup example. Preserve clean and setup prerequisites: setup updates the notebook submodule and installs all listed PyTorch/Fabric test requirements plus editable package/pre-commit setup; allow the declared source/package downloads. The Makefile itself retains PACKAGE_NAME=pytorch, SLURM_LOCALID=0 and SPHINX_MOCK_REQUIREMENTS=1."]
+source = ".github/CONTRIBUTING.md"
+
+[x.dotrepo.field_evidence."repo.test_candidates.0"]
+checkedAt = "2026-10-06T05:05:26.380157Z"
+confidence = "high"
+method = "extracted"
+reason = "2026-10-06 bounded retained-revision inspection: complete source-grounded command/context tuple, wrapper and scope preserved; no upstream execution or whole-record recrawl. Supporting exact files, pins and hashes are retained in evidence.md and the remainder audit source receipt."
+source = ".github/CONTRIBUTING.md"
+state = "present"
+valueJson = "{\"command\": \"make test\", \"context\": {\"command\": \"make test\", \"prerequisites\": [\"Use a Unix host with make, Git and uv installed, and an activated Python 3.11 virtual environment as shown in the documented manual setup example. Preserve clean and setup prerequisites: setup updates the notebook submodule and installs all listed PyTorch/Fabric test requirements plus editable package/pre-commit setup; allow the declared source/package downloads. The Makefile itself retains PACKAGE_NAME=pytorch, SLURM_LOCALID=0 and SPHINX_MOCK_REQUIREMENTS=1.\"], \"scope\": \"repository\", \"source\": \".github/CONTRIBUTING.md\", \"working_directory\": \".\"}, \"ecosystem\": \"Python\", \"source\": \".github/CONTRIBUTING.md\"}"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-10-06T05:05:26.380157Z"
+confidence = "medium"
+method = "unspecified"
+reason = "python -m build is conventional inference, not a declared source entrypoint in inspected files. setup.py explicitly documents setup.py sdist/bdist_wheel; CI wraps it with required package selection and checks. Do not remove flags or silently copy CI environment. Scalar default withheld; supported alternatives remain candidates where complete. This is not a claim that the repository lacks documentation or commands."
+source = "setup.py"
+state = "unresolved"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-10-06T05:05:26.380157Z"
+confidence = "medium"
+method = "unspecified"
+reason = "Contributor guide explicitly documents make test from project root on Unix. Retaining the wrapper preserves clean and setup prerequisites, PACKAGE_NAME and other exported settings, and both PyTorch/Fabric coverage invocations. Scalar default withheld; supported alternatives remain candidates where complete. This is not a claim that the repository lacks documentation or commands."
+source = ".github/CONTRIBUTING.md"
+state = "unresolved"
+valueJson = "null"
