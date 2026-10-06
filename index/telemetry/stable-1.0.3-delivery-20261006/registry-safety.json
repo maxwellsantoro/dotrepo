@@ -1,0 +1,180 @@
+{
+  "checkedAt": "2026-10-06T05:38:14.065916+00:00",
+  "binary": "/private/tmp/dotrepo-roadmap-stable-safety-publication/run-1/registry-install/bin/dotrepo",
+  "binarySha256": "46bdd4112991292fa230761ca895a02c372741dc33c2ca1a05c8a61aaf16e2b3",
+  "version": "1.0.3",
+  "versionSource": "Source owner; correlate with package/bundle receipt",
+  "sourceCommit": "9af41e8bda5fa30f271f9bdd5e8d19dd41e6eb2d",
+  "results": [
+    {
+      "fixture": "make-diagnostic",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "make-comment",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "make-uppercase",
+      "result": "passed",
+      "build": "make BUILD",
+      "test": null
+    },
+    {
+      "fixture": "make-prerequisite",
+      "result": "passed",
+      "build": null,
+      "test": "make test"
+    },
+    {
+      "fixture": "make-expressions",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "just-required-argument",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "just-wrapper",
+      "result": "passed",
+      "build": null,
+      "test": "just test"
+    },
+    {
+      "fixture": "go-compile-only",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "go-compile-then-runner",
+      "result": "passed",
+      "build": null,
+      "test": "go test ./..."
+    },
+    {
+      "fixture": "rake-root",
+      "result": "passed",
+      "build": "rake build",
+      "test": "rake test"
+    },
+    {
+      "fixture": "rake-namespace",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "rake-nested-namespace",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "rake-mixed",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "rake-if-modifier",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "rake-unless-modifier",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "rake-if-block",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "rake-if-quoted-hash",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "readme-escape",
+      "result": "passed",
+      "exitCode": 1,
+      "sentinelUnchanged": true,
+      "diagnostic": "refused import input README.md: Too many levels of symbolic links (os error 62)\n"
+    },
+    {
+      "fixture": "readme-contained-link",
+      "result": "passed",
+      "exitCode": 1,
+      "sentinelUnchanged": true,
+      "diagnostic": "refused import input README.md: Too many levels of symbolic links (os error 62)\n"
+    },
+    {
+      "fixture": "package-escape",
+      "result": "passed",
+      "exitCode": 1,
+      "sentinelUnchanged": true,
+      "diagnostic": "refused import input package.json: Too many levels of symbolic links (os error 62)\n"
+    },
+    {
+      "fixture": "workflow-directory-escape",
+      "result": "passed",
+      "exitCode": 1,
+      "sentinelUnchanged": true,
+      "diagnostic": "import input symlinks are unsupported: .github/workflows\n"
+    },
+    {
+      "fixture": "oversized-readme",
+      "result": "passed",
+      "exitCode": 1,
+      "sentinelUnchanged": true,
+      "diagnostic": "import input README.md exceeds 2097152 bytes\n"
+    },
+    {
+      "fixture": "directory-readme",
+      "result": "passed",
+      "exitCode": 1,
+      "sentinelUnchanged": true,
+      "diagnostic": "import input README.md must be a regular file\n"
+    },
+    {
+      "fixture": "fifo-readme",
+      "result": "passed",
+      "exitCode": 1,
+      "sentinelUnchanged": true,
+      "diagnostic": "import input README.md must be a regular file\n"
+    },
+    {
+      "fixture": "force-symlink",
+      "result": "passed",
+      "exitCode": 1,
+      "sentinelUnchanged": true,
+      "diagnostic": "import output /private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-installed-boundary-tdgd2ls5/repo/record.toml must be a regular file, not a symlink or directory\n"
+    },
+    {
+      "fixture": "force-hardlink",
+      "result": "passed",
+      "exitCode": 1,
+      "sentinelUnchanged": true,
+      "diagnostic": "import output /private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-installed-boundary-ibme0_k7/repo/record.toml must not be a shared hardlink\n"
+    },
+    {
+      "fixture": "promotion-no-write",
+      "result": "passed"
+    }
+  ],
+  "limits": "Controlled local fixtures only; no upstream execution."
+}

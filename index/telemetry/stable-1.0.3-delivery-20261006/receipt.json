@@ -1,0 +1,281 @@
+{
+  "startedAt": "2026-10-06T05:36:13.215050+00:00",
+  "version": "1.0.3",
+  "expectedCommit": "9af41e8bda5fa30f271f9bdd5e8d19dd41e6eb2d",
+  "status": "passed",
+  "stages": [
+    {
+      "arguments": [
+        "uv",
+        "run",
+        "python",
+        "/tmp/dotrepo-roadmap-stable-safety-publication/check_installed_safety.py",
+        "--bin",
+        "/private/tmp/dotrepo-roadmap-stable-safety-publication/run-1/extracted/dotrepo-1.0.3-aarch64-apple-darwin/bin/dotrepo",
+        "--source",
+        "/private/tmp/dotrepo-roadmap-stable-safety-publication/run-1/source",
+        "--output",
+        "/private/tmp/dotrepo-roadmap-stable-safety-publication/run-1/bundle-safety.json"
+      ],
+      "startedAt": "2026-10-06T05:36:30.198196+00:00",
+      "completedAt": "2026-10-06T05:36:31.186568+00:00",
+      "exitCode": 0,
+      "log": "/private/tmp/dotrepo-roadmap-stable-safety-publication/run-1/bundle-safety.log",
+      "logSha256": "f98fe2aca2ce9df5ec4b58f424d780609c89aa5d493f88c4c14fc8757d44cf4d"
+    },
+    {
+      "arguments": [
+        "/private/tmp/dotrepo-roadmap-stable-safety-publication/run-1/extracted/dotrepo-1.0.3-aarch64-apple-darwin/bin/dotrepo",
+        "--help"
+      ],
+      "startedAt": "2026-10-06T05:36:31.187072+00:00",
+      "completedAt": "2026-10-06T05:36:31.203350+00:00",
+      "exitCode": 0,
+      "log": "/private/tmp/dotrepo-roadmap-stable-safety-publication/run-1/dotrepo-help.log",
+      "logSha256": "5137a111b7a39b5eb817ca38a790e9a7858545d8094eb190a0dedff8c4d6642c"
+    },
+    {
+      "arguments": [
+        "/private/tmp/dotrepo-roadmap-stable-safety-publication/run-1/extracted/dotrepo-1.0.3-aarch64-apple-darwin/bin/dotrepo-public-query",
+        "--help"
+      ],
+      "startedAt": "2026-10-06T05:36:31.203663+00:00",
+      "completedAt": "2026-10-06T05:36:31.405759+00:00",
+      "exitCode": 0,
+      "log": "/private/tmp/dotrepo-roadmap-stable-safety-publication/run-1/dotrepo-public-query-help.log",
+      "logSha256": "c7f763cb51ff762c431ee8994ca90414a223dd2607e7bd05abc7b3aed3459e0b"
+    },
+    {
+      "arguments": [
+        "/private/tmp/dotrepo-roadmap-stable-safety-publication/run-1/extracted/dotrepo-1.0.3-aarch64-apple-darwin/bin/dotrepo-mcp",
+        "--help"
+      ],
+      "startedAt": "2026-10-06T05:36:31.406100+00:00",
+      "completedAt": "2026-10-06T05:36:31.618048+00:00",
+      "exitCode": 0,
+      "log": "/private/tmp/dotrepo-roadmap-stable-safety-publication/run-1/dotrepo-mcp-help.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "arguments": [
+        "/private/tmp/dotrepo-roadmap-stable-safety-publication/run-1/extracted/dotrepo-1.0.3-aarch64-apple-darwin/bin/dotrepo-lsp",
+        "--help"
+      ],
+      "startedAt": "2026-10-06T05:36:31.618339+00:00",
+      "completedAt": "2026-10-06T05:36:31.890838+00:00",
+      "exitCode": 0,
+      "log": "/private/tmp/dotrepo-roadmap-stable-safety-publication/run-1/dotrepo-lsp-help.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "arguments": [
+        "uv",
+        "run",
+        "python",
+        "/private/tmp/dotrepo-roadmap-stable-safety-publication/run-1/mcp-stdio.py"
+      ],
+      "startedAt": "2026-10-06T05:36:31.895363+00:00",
+      "completedAt": "2026-10-06T05:36:32.100259+00:00",
+      "exitCode": 0,
+      "log": "/private/tmp/dotrepo-roadmap-stable-safety-publication/run-1/mcp-stdio.log",
+      "logSha256": "f700c9f1aa8cdbb944ef3506c728f3299a0e0c014e750373f4cd701f248388fa"
+    },
+    {
+      "arguments": [
+        "uv",
+        "run",
+        "python",
+        "/private/tmp/dotrepo-roadmap-stable-safety-publication/run-1/lsp-stdio.py"
+      ],
+      "startedAt": "2026-10-06T05:36:32.102207+00:00",
+      "completedAt": "2026-10-06T05:36:32.312390+00:00",
+      "exitCode": 0,
+      "log": "/private/tmp/dotrepo-roadmap-stable-safety-publication/run-1/lsp-stdio.log",
+      "logSha256": "f700c9f1aa8cdbb944ef3506c728f3299a0e0c014e750373f4cd701f248388fa"
+    },
+    {
+      "arguments": [
+        "cargo",
+        "install",
+        "dotrepo-cli",
+        "--version",
+        "1.0.3",
+        "--locked",
+        "--root",
+        "/private/tmp/dotrepo-roadmap-stable-safety-publication/run-1/registry-install"
+      ],
+      "startedAt": "2026-10-06T05:36:32.314030+00:00",
+      "completedAt": "2026-10-06T05:38:13.172904+00:00",
+      "exitCode": 0,
+      "log": "/private/tmp/dotrepo-roadmap-stable-safety-publication/run-1/crates-install.log",
+      "logSha256": "80082bdb5ff5069d574270edbb2e2e1e082b01672cc78f50cfa4dc3dbedbe54e"
+    },
+    {
+      "arguments": [
+        "uv",
+        "run",
+        "python",
+        "/tmp/dotrepo-roadmap-stable-safety-publication/check_installed_safety.py",
+        "--bin",
+        "/private/tmp/dotrepo-roadmap-stable-safety-publication/run-1/registry-install/bin/dotrepo",
+        "--source",
+        "/private/tmp/dotrepo-roadmap-stable-safety-publication/run-1/source",
+        "--output",
+        "/private/tmp/dotrepo-roadmap-stable-safety-publication/run-1/registry-safety.json"
+      ],
+      "startedAt": "2026-10-06T05:38:13.416789+00:00",
+      "completedAt": "2026-10-06T05:38:14.150912+00:00",
+      "exitCode": 0,
+      "log": "/private/tmp/dotrepo-roadmap-stable-safety-publication/run-1/registry-safety.log",
+      "logSha256": "d8327a10f5c7e2fa389a5be67e9c448b4a2c09d26d4be7019fff6d9ff840a928"
+    }
+  ],
+  "limits": "Controlled local fixtures; no upstream commands, cloud writes, publication or independent consumer study.",
+  "source": {
+    "commit": "9af41e8bda5fa30f271f9bdd5e8d19dd41e6eb2d",
+    "version": "1.0.3",
+    "cargoTomlSha256": "2c7b1f23ea578c0acc501583d32bb3c6142f6db39dd42298b7322c7d85a600e3",
+    "cargoLockSha256": "86e38793c6daa77285acbd96172ae400be6ea0735b14efe0e6a78665d1b08ce7"
+  },
+  "assets": {
+    "dotrepo-1.0.3-aarch64-apple-darwin.sha256": {
+      "url": "https://github.com/maxwellsantoro/dotrepo/releases/download/v1.0.3/dotrepo-1.0.3-aarch64-apple-darwin.sha256",
+      "startedAt": "2026-10-06T05:36:19.395207+00:00",
+      "completedAt": "2026-10-06T05:36:19.916978+00:00",
+      "bytes": 108,
+      "sha256": "c30fdfa8ceabfba0e80fad2af68c9a07c56311d283915a9e23c3fb3f5c08d199"
+    },
+    "dotrepo-1.0.3-aarch64-apple-darwin.tar.gz": {
+      "url": "https://github.com/maxwellsantoro/dotrepo/releases/download/v1.0.3/dotrepo-1.0.3-aarch64-apple-darwin.tar.gz",
+      "startedAt": "2026-10-06T05:36:19.917121+00:00",
+      "completedAt": "2026-10-06T05:36:21.135665+00:00",
+      "bytes": 6027444,
+      "sha256": "18e6e452c50ad3e499a7badc53f4c36a5499eb968dcfc66f4b32b279c8650e79",
+      "matchingChecksum": "dotrepo-1.0.3-aarch64-apple-darwin.sha256"
+    },
+    "dotrepo-1.0.3-x86_64-unknown-linux-gnu.sha256": {
+      "url": "https://github.com/maxwellsantoro/dotrepo/releases/download/v1.0.3/dotrepo-1.0.3-x86_64-unknown-linux-gnu.sha256",
+      "startedAt": "2026-10-06T05:36:21.137385+00:00",
+      "completedAt": "2026-10-06T05:36:21.579247+00:00",
+      "bytes": 112,
+      "sha256": "b1dccd1525a82daa7d65d5504cefceb2fa6e7c167e9d00ce2e53239d8b290fd4"
+    },
+    "dotrepo-1.0.3-x86_64-unknown-linux-gnu.tar.gz": {
+      "url": "https://github.com/maxwellsantoro/dotrepo/releases/download/v1.0.3/dotrepo-1.0.3-x86_64-unknown-linux-gnu.tar.gz",
+      "startedAt": "2026-10-06T05:36:21.580372+00:00",
+      "completedAt": "2026-10-06T05:36:22.756245+00:00",
+      "bytes": 6756867,
+      "sha256": "f37eab0abce2b4a517adb2319102cf8c900763016f2e1e0d9379e48add39ff5c",
+      "matchingChecksum": "dotrepo-1.0.3-x86_64-unknown-linux-gnu.sha256"
+    },
+    "dotrepo-mcp-1.0.3.mcpb": {
+      "url": "https://github.com/maxwellsantoro/dotrepo/releases/download/v1.0.3/dotrepo-mcp-1.0.3.mcpb",
+      "startedAt": "2026-10-06T05:36:22.756431+00:00",
+      "completedAt": "2026-10-06T05:36:23.890025+00:00",
+      "bytes": 5373836,
+      "sha256": "1482189b3b9008909fc9500378277aa73ee50826aa5ed1f227fee71179b30948",
+      "matchingChecksum": "dotrepo-mcp-1.0.3.mcpb.sha256"
+    },
+    "dotrepo-mcp-1.0.3.mcpb.sha256": {
+      "url": "https://github.com/maxwellsantoro/dotrepo/releases/download/v1.0.3/dotrepo-mcp-1.0.3.mcpb.sha256",
+      "startedAt": "2026-10-06T05:36:23.890177+00:00",
+      "completedAt": "2026-10-06T05:36:24.321523+00:00",
+      "bytes": 89,
+      "sha256": "074c871b6d3365e88efdfcaf6f53571b175e04dd86aa7f1301099a664aa921ca"
+    },
+    "dotrepo-vscode-v1.0.0.vsix": {
+      "url": "https://github.com/maxwellsantoro/dotrepo/releases/download/v1.0.3/dotrepo-vscode-v1.0.0.vsix",
+      "startedAt": "2026-10-06T05:36:24.321696+00:00",
+      "completedAt": "2026-10-06T05:36:24.821560+00:00",
+      "bytes": 88434,
+      "sha256": "c04f823edd4019f675ebe912122eb2e1e0dddeb60fedf5703808093e7056ad00"
+    }
+  },
+  "packages": [
+    {
+      "package": "dotrepo-schema",
+      "version": "1.0.3",
+      "sourceCommit": "9af41e8bda5fa30f271f9bdd5e8d19dd41e6eb2d",
+      "metadataSha256": "7f4c6672def3db1b9c0f3c4e906a423cd491988f01b66053a03c4b25db2f7abc",
+      "url": "https://crates.io/api/v1/crates/dotrepo-schema/1.0.3/download",
+      "startedAt": "2026-10-06T05:36:25.099231+00:00",
+      "completedAt": "2026-10-06T05:36:25.611867+00:00",
+      "bytes": 11335,
+      "sha256": "5df7e6d028a6a0e2a2fbf6390c407955eef327868e7386b702efb116567957c7"
+    },
+    {
+      "package": "dotrepo-transport",
+      "version": "1.0.3",
+      "sourceCommit": "9af41e8bda5fa30f271f9bdd5e8d19dd41e6eb2d",
+      "metadataSha256": "aa9de0bbb448ca9b15d3cfc91d9e7a57a2620588d22aed47fecd243ec9cf39c4",
+      "url": "https://crates.io/api/v1/crates/dotrepo-transport/1.0.3/download",
+      "startedAt": "2026-10-06T05:36:25.875978+00:00",
+      "completedAt": "2026-10-06T05:36:26.473002+00:00",
+      "bytes": 9556,
+      "sha256": "a904c563fa4f33ba2c0c152fec89c264bcbc1159e45c11d3db14d2e68d4837ac"
+    },
+    {
+      "package": "dotrepo-core",
+      "version": "1.0.3",
+      "sourceCommit": "9af41e8bda5fa30f271f9bdd5e8d19dd41e6eb2d",
+      "metadataSha256": "a55e263d5ebc152d09b773ac2bd0ce31611d9659e39d3aa1d4b7829c0da9b13e",
+      "url": "https://crates.io/api/v1/crates/dotrepo-core/1.0.3/download",
+      "startedAt": "2026-10-06T05:36:26.725466+00:00",
+      "completedAt": "2026-10-06T05:36:27.497295+00:00",
+      "bytes": 218211,
+      "sha256": "086230e8b7363e701efcbd3640fa88f268c097b8891b3b8fd5cfc8bcd0b54a45"
+    },
+    {
+      "package": "dotrepo-cli",
+      "version": "1.0.3",
+      "sourceCommit": "9af41e8bda5fa30f271f9bdd5e8d19dd41e6eb2d",
+      "metadataSha256": "42277e34fe524b753aba468ecf408bce2f10cccec6bf754679f572bf520c5afe",
+      "url": "https://crates.io/api/v1/crates/dotrepo-cli/1.0.3/download",
+      "startedAt": "2026-10-06T05:36:27.796897+00:00",
+      "completedAt": "2026-10-06T05:36:28.393858+00:00",
+      "bytes": 46981,
+      "sha256": "8388f9d9584da1167a6da8b665ca0be0e03fd5c750900f67a12c147d87e368d2"
+    },
+    {
+      "package": "dotrepo-mcp",
+      "version": "1.0.3",
+      "sourceCommit": "9af41e8bda5fa30f271f9bdd5e8d19dd41e6eb2d",
+      "metadataSha256": "9892d9b2f41991b1ade5990a5de741ff9417a0470e04b82895fc551d8b6befee",
+      "url": "https://crates.io/api/v1/crates/dotrepo-mcp/1.0.3/download",
+      "startedAt": "2026-10-06T05:36:28.646420+00:00",
+      "completedAt": "2026-10-06T05:36:29.176396+00:00",
+      "bytes": 34249,
+      "sha256": "afa728ed7a14e793e7eecb3df23972b7b12b5bfd59821c084a979a55230a48a5"
+    },
+    {
+      "package": "dotrepo-lsp",
+      "version": "1.0.3",
+      "sourceCommit": "9af41e8bda5fa30f271f9bdd5e8d19dd41e6eb2d",
+      "metadataSha256": "99db5db80714b2654bd4862d7dcdc20ab81fc4298ee004333c286079aa9fcaaa",
+      "url": "https://crates.io/api/v1/crates/dotrepo-lsp/1.0.3/download",
+      "startedAt": "2026-10-06T05:36:29.470340+00:00",
+      "completedAt": "2026-10-06T05:36:29.972770+00:00",
+      "bytes": 28164,
+      "sha256": "2f0f6f9ca927b9d23350fb0e2d7d53bdb5f156f98112dd1a3baba8735d4204c8"
+    }
+  ],
+  "bundleBinaries": {
+    "dotrepo": "824857ed50095236cb4b86c8873478b1cda205bcdfd9b333e023093416c32358",
+    "dotrepo-public-query": "8b5c8e28146947b80eb088d2f3c9d7c519c1b210f48fa8cbc0692ba0369e6281",
+    "dotrepo-mcp": "17d134f65ad6569c2f41e4004902377cf3fa17411015d651c4204d973b97ef37",
+    "dotrepo-lsp": "78daf4d8e96d06e47f1d9aa7d1f10c27f5cc6942ff92f714d1f5bee1bc19e481"
+  },
+  "controlledChecksSourceSha256": "d7c2b41713e183b91aeccc449bf291472b9c456f6ad5ca876b6a7b71611d6623",
+  "runtime": {
+    "cargo": "cargo 1.95.0 (f2d3ce0bd 2026-03-21)",
+    "rustc": "rustc 1.95.0 (59807616e 2026-04-14)\nbinary: rustc\ncommit-hash: 59807616e1fa2540724bfbac14d7976d7e4a3860\ncommit-date: 2026-04-14\nhost: aarch64-apple-darwin\nrelease: 1.95.0\nLLVM version: 22.1.2",
+    "uv": "uv 0.11.8 (0e961dd9a 2026-04-27 aarch64-apple-darwin)",
+    "python": "Python 3.12.13"
+  },
+  "registryInstallation": {
+    "identity": "dotrepo-cli 1.0.3 (registry+https://github.com/rust-lang/crates.io-index)",
+    "binarySha256": "46bdd4112991292fa230761ca895a02c372741dc33c2ca1a05c8a61aaf16e2b3",
+    "cargoTargetDir": "/private/tmp/dotrepo-roadmap-stable-safety-registry-target"
+  },
+  "completedAt": "2026-10-06T05:38:14.187224+00:00"
+}

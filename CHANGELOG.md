@@ -15,6 +15,10 @@ generated growth, coverage, promotion, and telemetry artifacts own live values.
 
 ### Documentation maintenance
 
+- Advance active installation instructions and development-generated maintainer
+  CI to published 1.0.3 after exact-tag, six-crate, downloaded-bundle and fresh
+  locked registry installation checks. Retain the dated release and registry
+  recovery receipt; public archive continuity remains a separate operating gate.
 - Check the original refresh base before opening an automation PR, retain a
   fail-closed drift receipt, and keep late exact-base landing guards. Validate
   dispatch model-call budgets before sidecars or materialization; an explicit
@@ -300,6 +304,25 @@ generated growth, coverage, promotion, and telemetry artifacts own live values.
 - Automatic deploy-coherence checks against the reviewed export's contract files
   and a deterministic `v0/files.json` hash sample; Cloudflare packaging on
   Node.js 22
+
+## 1.0.3 - 2026-10-06
+
+- Publish the compatible maintenance patch from `codex/stable-1.0`: bounded
+  regular-file import reads without symlink traversal, conservative Rake root
+  declarations, and forced-import symlink/shared-hardlink overwrite refusal.
+  Stable schema and public Rust API remain unchanged.
+- Verify all six published crates against the exact tagged source and all release
+  assets against their digests. The downloaded macOS bundle and a fresh locked
+  crates.io CLI installation each pass 27 safety controls; MCP/LSP stdio checks
+  confirm 1.0.3. Linux assets are checksum-verified, not locally executed.
+- Recover MCP registry publication using the existing published MCPB after the
+  tag's older metadata description was rejected. The active latest entry matches
+  the asset checksum. Tags and assets remain immutable; historical receipts and
+  the preexisting Python formatting limitation are retained in the
+  [dated delivery packet](index/telemetry/stable-1.0.3-delivery-20261006/README.md).
+- Stable generated maintainer CI retains its prepublication 1.0.1 default; use
+  `dotrepo ci init --version 1.0.3` explicitly. Development defaults now select
+  1.0.3. Execution-context contracts remain development-only.
 
 ## 1.0.2 - 2026-10-05
 

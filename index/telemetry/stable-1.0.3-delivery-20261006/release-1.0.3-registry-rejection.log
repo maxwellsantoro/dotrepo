@@ -1,0 +1,14 @@
+mcp-registry	Publish to the MCP registry	﻿2026-10-06T05:33:34.2535242Z ##[group]Run cp mcpb-assets/server.json server.json
+mcp-registry	Publish to the MCP registry	2026-10-06T05:33:34.2537016Z ^[[36;1mcp mcpb-assets/server.json server.json^[[0m
+mcp-registry	Publish to the MCP registry	2026-10-06T05:33:34.2538588Z ^[[36;1m./mcp-publisher login github-oidc^[[0m
+mcp-registry	Publish to the MCP registry	2026-10-06T05:33:34.2540030Z ^[[36;1m./mcp-publisher publish^[[0m
+mcp-registry	Publish to the MCP registry	2026-10-06T05:33:34.2605578Z shell: /usr/bin/bash -e {0}
+mcp-registry	Publish to the MCP registry	2026-10-06T05:33:34.2606784Z ##[endgroup]
+mcp-registry	Publish to the MCP registry	2026-10-06T05:33:34.2781608Z Logging in with github-oidc...
+mcp-registry	Publish to the MCP registry	2026-10-06T05:33:34.5090391Z ✓ Successfully logged in
+mcp-registry	Publish to the MCP registry	2026-10-06T05:33:34.5091409Z Publishing to https://registry.modelcontextprotocol.io...
+mcp-registry	Publish to the MCP registry	2026-10-06T05:33:34.6289477Z Validation failed. Checking detailed validation errors...
+mcp-registry	Publish to the MCP registry	2026-10-06T05:33:34.6290640Z 
+mcp-registry	Publish to the MCP registry	2026-10-06T05:33:34.6607668Z Error: publish failed: server returned status 422: {"title":"Unprocessable Entity","status":422,"detail":"validation failed","errors":[{"message":"expected length <= 100","location":"body.description","value":"Trust-aware repository metadata: validate and query .repo records, and look up build, test, license, docs, ownership, and security facts for public repositories from the dotrepo.org index without scraping."}]}
+mcp-registry	Publish to the MCP registry	2026-10-06T05:33:34.6612825Z 
+mcp-registry	Publish to the MCP registry	2026-10-06T05:33:34.6626141Z ##[error]Process completed with exit code 1.
