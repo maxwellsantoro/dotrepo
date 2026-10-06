@@ -689,6 +689,37 @@ fn parse_justfile_recipes(contents: &str) -> Vec<String> {
 }
 
 pub(crate) fn infer_rakefile_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
+    // Ruby namespaces and dynamic evaluation can change task identity. Until
+    // those constructs have a static parser, withhold the entire Rake source.
+    if file.contents.contains("namespace")
+        || ["module ", "class ", "instance_eval", "class_eval", "eval("]
+            .iter()
+            .any(|marker| file.contents.contains(marker))
+        || file.contents.lines().any(|line| {
+            let line = line.split('#').next().unwrap_or("").trim();
+            // This deliberately withholds keywords even in strings/symbols.
+            // Static recognition supports unconditional literal declarations;
+            // statement modifiers and control-flow bodies need Ruby semantics.
+            line.split(|ch: char| !ch.is_ascii_alphanumeric() && ch != '_')
+                .any(|word| {
+                    matches!(
+                        word,
+                        "if" | "unless"
+                            | "case"
+                            | "while"
+                            | "until"
+                            | "for"
+                            | "loop"
+                            | "begin"
+                            | "rescue"
+                            | "def"
+                    )
+                })
+                || (line.contains(" do") && !line.starts_with("task "))
+        })
+    {
+        return None;
+    }
     let has_build = file
         .contents
         .lines()
@@ -710,6 +741,9 @@ pub(crate) fn infer_rakefile_commands(file: &ImportedFile) -> Option<ImportedCom
 }
 
 fn declares_rake_task(line: &str, name: &str) -> bool {
+    if line.starts_with(char::is_whitespace) {
+        return false;
+    }
     let line = line.split('#').next().unwrap_or("").trim();
     let Some(rest) = line.strip_prefix("task ").map(str::trim_start) else {
         return false;

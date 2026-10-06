@@ -31,6 +31,9 @@ from urllib.parse import urlparse
 
 
 DEFAULT_BASE_URL = "https://dotrepo.org"
+MAX_PROFILE_BYTES = 8 * 1024 * 1024
+MAX_ERROR_BYTES = 4096
+INSTRUCTION_POLICY = "value-bound-contextual-instruction-v1"
 
 
 def _setup_only_command(tokens: list[str]) -> bool:
@@ -252,6 +255,35 @@ def profile_field(payload: dict[str, Any], path: str) -> Any:
     return value
 
 
+def incomplete_command(value: str) -> bool:
+    tokens = value.split()
+    if not tokens:
+        return True
+    return (
+        value.rstrip().endswith("\\")
+        or tokens[0] in {"cd", "echo", "printf", "chmod", "mkdir", "touch", "env"}
+        or "=" in tokens[0]
+        or _setup_only_command(tokens)
+        or any(
+            "..." in token and token != "./..." and not token.startswith("//") for token in tokens
+        )
+        or any(
+            marker in value
+            for marker in ("<", ">", "{{", "}}", "test_explain_what_is_being_tested")
+        )
+        or any(flag in tokens for flag in ("--collect-only", "--no-run"))
+        or (
+            any(tokens[i : i + 2] == ["go", "test"] for i in range(len(tokens) - 1))
+            and any(
+                token in {"-c", "-list"}
+                or (token.startswith("-c=") and token[3:] not in {"false", "False", "FALSE", "0"})
+                or token.startswith("-list=")
+                for token in tokens
+            )
+        )
+    )
+
+
 def evaluate_for_task(
     result: LookupResult,
     *,
@@ -306,34 +338,7 @@ def evaluate_for_task(
             if assessment.get("state") in ("suspect", "unresolved"):
                 reasons.append("unresolved:" + path)
             if path in {"repo.build", "repo.test"}:
-                tokens = value.split()
-                if (
-                    value.rstrip().endswith("\\")
-                    or tokens[0] in {"cd", "echo", "printf", "chmod", "mkdir", "touch", "env"}
-                    or "=" in tokens[0]
-                    or _setup_only_command(tokens)
-                    or any(
-                        "..." in token and token != "./..." and not token.startswith("//")
-                        for token in tokens
-                    )
-                    or any(
-                        marker in value
-                        for marker in ("<", ">", "{{", "}}", "test_explain_what_is_being_tested")
-                    )
-                    or any(flag in tokens for flag in ("--collect-only", "--no-run"))
-                    or (
-                        any(tokens[i : i + 2] == ["go", "test"] for i in range(len(tokens) - 1))
-                        and any(
-                            token in {"-c", "-list"}
-                            or (
-                                token.startswith("-c=")
-                                and token[3:] not in {"false", "False", "FALSE", "0"}
-                            )
-                            or token.startswith("-list=")
-                            for token in tokens
-                        )
-                    )
-                ):
+                if incomplete_command(value):
                     reasons.append("incomplete-command:" + path)
                 source = assessment.get("source", "")
                 if (
@@ -360,6 +365,152 @@ def evaluate_for_task(
     result.fallback_reasons = reasons
     result.usable = not reasons
     return result
+
+
+def repository_path(value, *, root=False):
+    if value == ".":
+        return root
+    return (
+        isinstance(value, str)
+        and bool(value)
+        and value.strip() == value
+        and not any(ch in value for ch in "\\:")
+        and not any(ord(ch) < 32 or ord(ch) == 127 for ch in value)
+        and all(part not in {"", ".", ".."} for part in value.split("/"))
+    )
+
+
+def select_instruction(result, purpose, *, request=None, now=None):
+    """Select from the public record, independently of a task's expected answer.
+
+    Request may constrain scope, component and workingDirectory, never command
+    or prerequisites. Assessments for a scalar AND its context, or the complete
+    indexed candidate object, must pass the public export's value-binding gate.
+    This returns metadata, not authorization to execute prerequisites or commands.
+    """
+    if purpose not in {"build", "test"}:
+        raise ValueError("unsupported instruction purpose")
+    request = request or {}
+    if set(request) - {"scope", "component", "workingDirectory"}:
+        raise ValueError("unsupported instruction request")
+    evaluate_for_task(result, required_fields=[], now=now)
+    if not result.usable:
+        return {"instruction": None, "provenance": None, "fallbackReasons": result.fallback_reasons}
+    payload = result.profile
+    execution = payload.get("execution", {})
+    evidence = payload.get("fieldEvidence", {})
+    if not isinstance(execution, dict) or not isinstance(evidence, dict):
+        return {"instruction": None, "provenance": None, "fallbackReasons": ["invalid-execution"]}
+
+    def assessed(path, source):
+        item = evidence.get(path)
+        return isinstance(item, dict) and (
+            item.get("state") == "present"
+            and item.get("method") == "extracted"
+            and item.get("confidence") == "high"
+            and item.get("checkedAt") == result.record_generated_at
+            and item.get("source") == source
+        )
+
+    entries = []
+    value = execution.get(purpose)
+    context = execution.get(purpose + "Context")
+    command_evidence = evidence.get(f"repo.{purpose}", {})
+    command_source = command_evidence.get("source") if isinstance(command_evidence, dict) else None
+    entries.append(
+        (value, context, command_source, [f"repo.{purpose}", f"repo.{purpose}_context"], True)
+    )
+    candidates = execution.get(purpose + "Candidates", [])
+    if not isinstance(candidates, list):
+        return {"instruction": None, "provenance": None, "fallbackReasons": ["invalid-candidates"]}
+    for index, item in enumerate(candidates):
+        if isinstance(item, dict):
+            entries.append(
+                (
+                    item.get("command"),
+                    item.get("context"),
+                    item.get("source"),
+                    [f"repo.{purpose}_candidates.{index}"],
+                    False,
+                )
+            )
+    selected = []
+    for command, context, source, paths, scalar in entries:
+        if (
+            not isinstance(command, str)
+            or incomplete_command(command)
+            or not isinstance(context, dict)
+        ):
+            continue
+        if set(context) - {
+            "command",
+            "workingDirectory",
+            "scope",
+            "component",
+            "prerequisites",
+            "source",
+        }:
+            continue
+        cwd, scope, component = (context.get(k) for k in ("workingDirectory", "scope", "component"))
+        prerequisites, declaration = context.get("prerequisites"), context.get("source")
+        if (
+            context.get("command") != command
+            or command.strip() != command
+            or not repository_path(cwd, root=True)
+            or not repository_path(declaration)
+            or scope not in ("repository", "component")
+            or (scope == "repository" and component is not None)
+            or (scope == "component" and not repository_path(component))
+            or (scalar and (scope != "repository" or cwd != "."))
+            or not repository_path(source)
+            or not isinstance(prerequisites, list)
+            or any(
+                not isinstance(x, str)
+                or not x.strip()
+                or any(ord(ch) < 32 or ord(ch) == 127 for ch in x)
+                for x in prerequisites
+            )
+            or not all(
+                assessed(path, source if scalar and index == 0 else declaration)
+                for index, path in enumerate(paths)
+            )
+        ):
+            continue
+        instruction = {
+            "command": command,
+            "workingDirectory": cwd,
+            "scope": scope,
+            "component": component,
+            "prerequisites": list(prerequisites),
+            "sourcePaths": list(dict.fromkeys([source, declaration])),
+            "purpose": purpose,
+            # The current public context has no parameter or environment bindings.
+            "parameters": {},
+            "environment": {},
+        }
+        if any(instruction[k] != v for k, v in request.items()):
+            continue
+        selected.append(
+            {
+                "instruction": instruction,
+                "provenance": {
+                    "identity": result.identity,
+                    "recordGeneratedAt": result.record_generated_at,
+                    "assessmentPaths": paths,
+                    "assessments": [evidence[p] for p in paths],
+                },
+                "fallbackReasons": [],
+            }
+        )
+    if len(selected) == 1:
+        return selected[0]
+    return {
+        "instruction": None,
+        "provenance": None,
+        "fallbackReasons": [
+            "ambiguous-instructions" if selected else "no-assessed-contextual-instruction"
+        ],
+    }
 
 
 def interpret_http_response(
@@ -396,10 +547,10 @@ def interpret_http_response(
             error="empty-body",
         )
 
-    text = body.decode("utf-8") if isinstance(body, (bytes, bytearray)) else body
     try:
+        text = body.decode("utf-8") if isinstance(body, (bytes, bytearray)) else body
         payload = json.loads(text)
-    except json.JSONDecodeError as exc:
+    except (json.JSONDecodeError, UnicodeDecodeError) as exc:
         return LookupResult(
             identity=identity,
             status_code=status_code,
@@ -468,27 +619,44 @@ def fetch_profile(
 
     open_fn = opener.open if opener is not None else urllib.request.urlopen
     try:
-        with open_fn(request, timeout=timeout) as response:
-            status = getattr(response, "status", None) or response.getcode()
-            body = response.read()
-            return finish(
-                interpret_http_response(identity=identity, status_code=int(status), body=body)
-            )
-    except urllib.error.HTTPError as exc:
-        body = exc.read() if hasattr(exc, "read") else None
+        # The outer boundary also catches failures reading an HTTPError body.
+        try:
+            with open_fn(request, timeout=timeout) as response:
+                status = getattr(response, "status", None) or response.getcode()
+                body = bounded_body(response, MAX_PROFILE_BYTES)
+        except urllib.error.HTTPError as exc:
+            with exc:
+                status = exc.code
+                if status == 404:
+                    # The status establishes a miss. Error bodies are irrelevant
+                    # to this decision and may be large or fail while reading.
+                    return finish(
+                        interpret_http_response(identity=identity, status_code=404, body=None)
+                    )
+                body = bounded_body(exc, MAX_ERROR_BYTES)
         return finish(
-            interpret_http_response(identity=identity, status_code=int(exc.code), body=body)
+            interpret_http_response(identity=identity, status_code=int(status), body=body)
         )
-    except Exception as exc:  # network / DNS / timeout
+    except Exception as exc:  # network, body read, decoding, or size limit
         return finish(
             LookupResult(
                 identity=identity,
                 status_code=0,
                 hit=False,
                 miss=False,
-                error=f"transport:{type(exc).__name__}:{exc}",
+                error=f"transport:{type(exc).__name__}:{str(exc)[:1024]}",
             )
         )
+
+
+def bounded_body(response, limit):
+    body = bytearray()
+    while len(body) <= limit:
+        chunk = response.read(min(65536, limit + 1 - len(body)))
+        if not chunk:
+            return bytes(body)
+        body.extend(chunk)
+    raise ValueError(f"response exceeds {limit} bytes")
 
 
 def miss_log_line(miss: LookupMiss) -> str:

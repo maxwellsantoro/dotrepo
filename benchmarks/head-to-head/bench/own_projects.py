@@ -28,6 +28,8 @@ from urllib.request import Request, urlopen
 from .arms.lookup_first import consumer
 from .tasks import ARMS, markdown, score
 
+EXECUTION_ROOT = Path(__file__).resolve().parents[3]
+
 REVISIONS = {
     "RamenOS": "eba7fb7ce53807a6b9b5a85bd3caaf9f7749d917",
     "sha256-benchmark-atlas": "866fe127542178c35515f51afed30c41616bdd77",
@@ -221,6 +223,79 @@ def fetch(url):
         return response.status, body
 
 
+def execution_sources():
+    """Bind every local benchmark dependency, the dynamic client and lockfiles."""
+    root = EXECUTION_ROOT
+    paths = sorted((root / "benchmarks/head-to-head/bench").rglob("*.py"))
+    paths += [
+        root / "examples/external-consumer/lookup_before_scrape.py",
+        root / "pyproject.toml",
+        root / "uv.lock",
+    ]
+    return {str(p.relative_to(root)): hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}
+
+
+def retain_execution_sources(output):
+    manifest = execution_sources()
+    root = EXECUTION_ROOT
+    for relative in manifest:
+        target = output / "execution-source" / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes((root / relative).read_bytes())
+    return manifest
+
+
+def validate_execution_sources(workload, output):
+    manifest = workload.get("executionSources")
+    if not manifest or manifest != execution_sources():
+        raise ValueError("execution dependency changed after freeze; freeze a new packet")
+    for relative, digest in manifest.items():
+        raw = (output / "execution-source" / relative).read_bytes()
+        if hashlib.sha256(raw).hexdigest() != digest:
+            raise ValueError("retained execution source differs from freeze")
+    if workload["consumerPolicy"] != consumer.INSTRUCTION_POLICY:
+        raise ValueError("consumer policy differs from freeze")
+
+
+def select_profile_instruction(identity, status, body, purpose, request=None):
+    result = consumer.interpret_http_response(identity=identity, status_code=status, body=body)
+    return consumer.select_instruction(result, purpose, request=request)
+
+
+def screen_instruction_for_task(selected, expected):
+    """Equivalence is exact equality of every instruction field; no flag repair.
+
+    Record selection has already happened independently of this task oracle.
+    Unsupported or incorrect accepted answers are logged before source fallback.
+    """
+    if selected is None or selected == expected:
+        return selected, None
+    return None, {
+        "origin": "profile",
+        "instruction": selected,
+        "exitCode": None,
+        "oraclePassed": False,
+        "executionError": "accepted instruction differs from frozen task context; not executed",
+    }
+
+
+def execute_instruction(plan, setup_commands, root, env, timeout, oracle_name):
+    """Execute the selected plan; setup is a separately declared environment input.
+
+    Prerequisite descriptions are never interpreted as shell commands. The caller
+    must establish them through its frozen preparation contract first.
+    """
+    commands = []
+    command_env = {**env, **plan["environment"]}
+    for command in [*setup_commands, plan["command"]]:
+        result = execute(command, root / plan["workingDirectory"], command_env, timeout)
+        commands.append(result)
+        if result["exitCode"] != 0 or result["executionError"]:
+            break
+    passed = len(commands) == len(setup_commands) + 1 and oracle(oracle_name, root, commands[-1])
+    return commands, passed
+
+
 def freeze(output, sources, meta_path, inventory_path, study="initial"):
     if output.exists() and any(output.iterdir()):
         raise ValueError("freeze requires an empty output directory")
@@ -289,7 +364,8 @@ def freeze(output, sources, meta_path, inventory_path, study="initial"):
             "consumerClass": "operator-controlled",
             "cacheState": "warm",
             "snapshotId": meta["snapshotId"],
-            "consumerPolicy": consumer.COMMAND_POLICY,
+            "consumerPolicy": consumer.INSTRUCTION_POLICY,
+            "executionSources": retain_execution_sources(output),
             "runnerSha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
             "toolVersions": versions,
             "sdkSource": sdk_source() if study.startswith("atlas-sdk") else None,
@@ -378,7 +454,7 @@ def oracle(name, root, result):
     if name in {"core-test", "generator-test"}:
         return bool(re.search(r"test result: ok\. [1-9][0-9]* passed", stdout))
     if name == "consumer-test":
-        return bool(re.search(r"Ran [1-9][0-9]* tests", stderr)) and "\nOK" in stderr
+        return bool(re.search(r"Ran [1-9][0-9]* tests?", stderr)) and "\nOK" in stderr
     if name == "build":
         return len(re.findall(r"^\[ok\]", stdout, re.M)) == 19
     if name == "correctness":
@@ -425,6 +501,7 @@ def run(output, sources):
     raw = (output / "workload.json").read_bytes()
     workload = json.loads(raw)
     validate_fixed_tasks(workload)
+    validate_execution_sources(workload, output)
     if workload["runnerSha256"] != hashlib.sha256(Path(__file__).read_bytes()).hexdigest():
         raise ValueError("runner changed after freeze; freeze a new packet")
     if (
@@ -515,41 +592,28 @@ def run(output, sources):
                     result = consumer.interpret_http_response(
                         identity=task["identity"], status_code=status, body=body
                     )
-                    field = "repo." + gold["purpose"]
-                    consumer.evaluate_for_task(result, required_fields=[field])
-                    value = consumer.profile_field(result.profile or {}, field)
-                    if result.usable:
-                        evidence = result.profile.get("fieldEvidence", {}).get(field, {})
-                        selected = {
-                            **gold,
-                            "command": value,
-                            "workingDirectory": ".",
-                            "scope": "repository",
-                            "component": None,
-                            "prerequisites": [],
-                            "sourcePaths": [evidence.get("source") or "unknown"],
-                        }
+                    selection = consumer.select_instruction(
+                        result, gold["purpose"], request=task.get("instructionRequest")
+                    )
+                    selected = selection["instruction"]
+                    execution = (result.profile or {}).get("execution", {})
+                    value_present = isinstance(execution, dict) and bool(
+                        execution.get(gold["purpose"])
+                        or execution.get(gold["purpose"] + "Candidates")
+                    )
                     lookup = {
                         "snapshotId": workload["snapshotId"],
                         "policy": workload["consumerPolicy"],
-                        "valuePresent": value is not None,
-                        "accepted": result.usable,
+                        "valuePresent": value_present,
+                        "accepted": selected is not None,
                         "instruction": selected,
-                        "fallbackReasons": result.fallback_reasons,
+                        "provenance": selection["provenance"],
+                        "fallbackReasons": selection["fallbackReasons"],
                     }
                 attempts = []
-                if selected and selected != gold:
-                    error = "accepted scalar does not establish frozen task context; not executed"
-                    attempts.append(
-                        {
-                            "origin": "profile",
-                            "instruction": selected,
-                            "exitCode": None,
-                            "oraclePassed": False,
-                            "executionError": error,
-                        }
-                    )
-                    selected = None
+                selected, mismatch = screen_instruction_for_task(selected, gold)
+                if mismatch:
+                    attempts.append(mismatch)
                 if selected is None:
                     source = gold["sourcePaths"][0]
                     url = f"https://raw.githubusercontent.com/maxwellsantoro/{repo}/{task['revision']}/{source}"
@@ -580,18 +644,14 @@ def run(output, sources):
                 env["DOTREPO_STUDY_PROJECT_PYTHON"] = str(root / ".venv/bin/python")
                 env.update(gold["environment"])
                 try:
-                    for command in [*task["setupCommands"], gold["command"]]:
-                        result = execute(
-                            command,
-                            root / gold["workingDirectory"],
-                            env,
-                            task["timeoutSecondsPerCommand"],
-                        )
-                        commands.append(result)
-                        if result["exitCode"] != 0 or result["executionError"]:
-                            break
-                    passed = len(commands) == len(task["setupCommands"]) + 1 and oracle(
-                        task["oracle"], root, commands[-1]
+                    plan = selected if selected is not None else gold
+                    commands, passed = execute_instruction(
+                        plan,
+                        task["setupCommands"],
+                        root,
+                        env,
+                        task["timeoutSecondsPerCommand"],
+                        task["oracle"],
                     )
                     attempt = {
                         "origin": "profile"
@@ -599,7 +659,7 @@ def run(output, sources):
                         else "source"
                         if arm == "source-first"
                         else "fallback",
-                        "instruction": gold,
+                        "instruction": plan,
                         "exitCode": commands[-1]["exitCode"],
                         "oraclePassed": passed,
                     }

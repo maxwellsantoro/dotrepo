@@ -15,6 +15,17 @@ generated growth, coverage, promotion, and telemetry artifacts own live values.
 
 ### Documentation maintenance
 
+- Close import input boundaries with bounded regular-file reads, no symlink
+  traversal, and Unix descriptor-relative opens. Withhold Rake namespace sources
+  instead of inventing root tasks. Bound reference HTTP reads and convert body
+  failures into closed-resource fallback results. Derive the public landing's
+  stable MCP installation command from the installation guide.
+- Add independent contextual instruction selection, exact-context execution,
+  whole execution-source freeze bindings, and repository/component controls that
+  run through the real Rust public exporter and Python consumer without source
+  fallback. Preserve prior packets and separate these controls from an unrun
+  public-project usefulness campaign.
+
 - Retain a preregistered readiness repeat on the same four maintainer projects,
   preserving all eight tasks, changed prerequisites and time limits, and failed
   setup attempts. Add separately frozen Atlas SDK follow-ups with explicit

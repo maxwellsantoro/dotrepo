@@ -228,9 +228,55 @@ def test_retained_live_packet_separates_mismatches_failures_and_unknown_costs():
     assert lookup["transport"]["httpRequests"] == 16
     assert lookup["modelUsage"]["cost"] is None
     assert lookup["allocatedMaintenanceCost"] is None
+
     observations = json.loads((packet / "observations.json").read_text())
     for observation in observations["runs"]:
         if observation["lookup"] and observation["lookup"]["accepted"]:
             attempt = observation["attempts"][0]
             assert attempt["exitCode"] is None
             assert "not executed" in attempt["executionError"]
+
+
+@pytest.mark.parametrize(
+    "dependency",
+    [
+        "examples/external-consumer/lookup_before_scrape.py",
+        "benchmarks/head-to-head/bench/tasks.py",
+        "uv.lock",
+    ],
+)
+def test_frozen_dependency_changes_refuse_before_http_or_execution(
+    tmp_path, monkeypatch, dependency
+):
+    import bench.own_projects as runner
+    import shutil
+
+    source = tmp_path / "source"
+    for relative in runner.execution_sources():
+        target = source / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(runner.EXECUTION_ROOT / relative, target)
+    monkeypatch.setattr(runner, "EXECUTION_ROOT", source)
+    output = tmp_path / "packet"
+    output.mkdir()
+    workload = json.loads((BENCH / "results/own-projects-2026-10-04/workload.json").read_bytes())
+    workload["consumerPolicy"] = runner.consumer.INSTRUCTION_POLICY
+    workload["executionSources"] = runner.retain_execution_sources(output)
+    workload["runnerSha256"] = runner.execution_sources()[
+        "benchmarks/head-to-head/bench/own_projects.py"
+    ]
+    (output / "workload.json").write_text(json.dumps(workload))
+    # Validation succeeds for the complete frozen bundle, then fails when only
+    # an imported dependency changes (the top-level runner remains identical).
+    runner.validate_execution_sources(workload, output)
+    changed = source / dependency
+    changed.write_bytes(changed.read_bytes() + b"\n# changed after freeze\n")
+
+    def forbidden(*args, **kwargs):
+        pytest.fail("freeze mismatch reached HTTP or task execution")
+
+    monkeypatch.setattr(runner, "fetch", forbidden)
+    monkeypatch.setattr(runner, "execute", forbidden)
+    with pytest.raises(ValueError, match="execution dependency changed"):
+        runner.run(output, tmp_path)
+    assert not (output / "http").exists() and not (output / "attempts").exists()

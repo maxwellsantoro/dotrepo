@@ -72,6 +72,13 @@ F1/E1 work, with F2/E2 required to establish broader quality. Stable delivery is
 Join broader quality, independent-use evidence, and operating budgets before G1.
 Establish the actual blocking path from evidence instead of invented dates.
 
+The next C2 campaign requires contextual selection and execution controls plus
+a freeze of the consumer/scorer dependency set. Preserve every historical packet.
+Preregister protocol-compatible component paths and prepared environment inputs,
+inspect source-backed instruction assessments, and fix a new public snapshot
+before running. Merged RamenOS readiness and prepared Atlas correctness close
+upstream setup questions; they do not establish useful accepted dotrepo answers.
+
 Close a packet only when its specified artifacts/checks exist. Distinguish
 **implemented**, **validated**, **operating**, **published**, and **independently
 used**. Source merge, operator traffic, and successful HTTP responses cannot

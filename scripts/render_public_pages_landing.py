@@ -18,6 +18,23 @@ from public_product_content import (
 )
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+
+
+# Install guide owns the tested stable recommendation; main Cargo is prerelease.
+def stable_mcp_install():
+    import re
+
+    guide = (REPO_ROOT / "docs/install.md").read_text()
+    commands = re.findall(
+        r"^cargo install dotrepo-mcp --version ([0-9]+\.[0-9]+\.[0-9]+) --locked$",
+        guide,
+        re.MULTILINE,
+    )
+    if len(commands) != 1:
+        raise ValueError("install guide must declare exactly one stable MCP version")
+    return f"cargo install dotrepo-mcp --version {commands[0]} --locked"
+
+
 REPO_BLOB_PREFIX = "https://github.com/maxwellsantoro/dotrepo/blob/main/"
 
 PUBLIC_PAGE_STYLES = """<style>
@@ -2822,7 +2839,7 @@ def main() -> int:
       <pre><code>curl https://dotrepo.org/v0/repos/github.com/BurntSushi/ripgrep/profile.json</code></pre>
       <h3>Connect over MCP</h3>
       <p>With Rust installed, install the stable server:</p>
-      <pre><code>cargo install dotrepo-mcp --version 1.0.1 --locked</code></pre>
+      <pre><code>{stable_mcp_install()}</code></pre>
       <p>Add this stdio server to your MCP client’s configuration (the surrounding configuration format may vary):</p>
       <pre><code>{{"mcpServers": {{"dotrepo": {{"command": "dotrepo-mcp", "args": []}}}}}}</code></pre>
       <p>Restart the client, then ask it to call <code>dotrepo.lookup</code> with
