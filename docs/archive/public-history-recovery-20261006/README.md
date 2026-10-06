@@ -36,3 +36,6 @@ matching `SNAPSHOT_ARCHIVE` binding, and live retrieval of older logged identiti
 after edge eviction. The initial upload has tens of thousands of objects; pinned
 Wrangler rate limiting can make it take roughly two hours. That estimate comes
 from its implementation, not an observed successful cloud upload or cost study.
+
+The [operating checkpoint](operating-checkpoint.md) retains the merged validation
+and actual account-setup refusal separately from this frozen reconstruction plan.
