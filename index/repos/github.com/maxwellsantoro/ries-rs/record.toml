@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/maxwellsantoro/ries-rs"
-generated_at = "2026-10-06T01:15:26.806051Z"
+generated_at = "2026-10-06T01:20:35.304229Z"
 
 [record.trust]
 confidence = "high"
@@ -44,7 +44,7 @@ state = "present"
 method = "extracted"
 confidence = "high"
 source = "README.md"
-checkedAt = "2026-10-06T01:15:26.806051Z"
+checkedAt = "2026-10-06T01:20:35.304229Z"
 valueJson = "\"Rust inverse equation solver for turning a target number into compact algebraic equations.\""
 reason = "Transcribed from inspected source at cfa959ed21a5a5e5f3d9538d9d1714c2401611e5; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution."
 
@@ -53,7 +53,7 @@ state = "present"
 method = "extracted"
 confidence = "high"
 source = "CONTRIBUTING.md"
-checkedAt = "2026-10-06T01:15:26.806051Z"
+checkedAt = "2026-10-06T01:20:35.304229Z"
 valueJson = "{\"command\": \"cargo build\", \"ecosystem\": null, \"source\": \"CONTRIBUTING.md\", \"context\": {\"command\": \"cargo build\", \"working_directory\": \".\", \"scope\": \"component\", \"prerequisites\": [\"Rust/Cargo\"], \"source\": \"CONTRIBUTING.md\", \"component\": \"src\"}}"
 reason = "Transcribed from inspected source at cfa959ed21a5a5e5f3d9538d9d1714c2401611e5; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution."
 
@@ -62,9 +62,31 @@ state = "present"
 method = "extracted"
 confidence = "high"
 source = "AGENTS.md"
-checkedAt = "2026-10-06T01:15:26.806051Z"
+checkedAt = "2026-10-06T01:20:35.304229Z"
 valueJson = "{\"command\": \"cargo test\", \"ecosystem\": null, \"source\": \"AGENTS.md\", \"context\": {\"command\": \"cargo test\", \"working_directory\": \".\", \"scope\": \"component\", \"prerequisites\": [\"Rust/Cargo\"], \"source\": \"AGENTS.md\", \"component\": \"src\"}}"
 reason = "Transcribed from inspected source at cfa959ed21a5a5e5f3d9538d9d1714c2401611e5; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution."
 
 [x.github]
 head_sha = "cfa959ed21a5a5e5f3d9538d9d1714c2401611e5"
+
+[owners]
+maintainers = ["@maxwellsantoro"]
+security_contact = "https://github.com/maxwellsantoro/ries-rs/security/advisories/new"
+
+[x.dotrepo.field_evidence."owners.maintainers"]
+state = "present"
+method = "extracted"
+confidence = "high"
+source = ".github/CODEOWNERS"
+checkedAt = "2026-10-06T01:20:35.304229Z"
+valueJson = "[\"@maxwellsantoro\"]"
+reason = "Explicit wildcard owner or reporting URL in the inspected generated source surface at the pinned revision; no new authority status is asserted."
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+state = "present"
+method = "extracted"
+confidence = "high"
+source = ".github/SECURITY.md"
+checkedAt = "2026-10-06T01:20:35.304229Z"
+valueJson = "\"https://github.com/maxwellsantoro/ries-rs/security/advisories/new\""
+reason = "Explicit wildcard owner or reporting URL in the inspected generated source surface at the pinned revision; no new authority status is asserted."
