@@ -5,14 +5,7 @@ import json
 import os
 import sys
 
-
-SCOPED_JOBS = {
-    "rust-and-index": "run_rust_ci",
-    "operator-gate": "run_operator_gate",
-    "public-surface-gate": "run_public_surface_gate",
-    "release-gate": "run_release_gate",
-    "minimal-gate": "run_minimal_gate",
-}
+from classify_ci_scope import SCOPED_JOBS
 
 
 def check_results(needs: dict) -> list[str]:

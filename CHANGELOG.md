@@ -15,6 +15,13 @@ generated growth, coverage, promotion, and telemetry artifacts own live values.
 
 ### Documentation maintenance
 
+- Cancel superseded PR validation runs and start independent Rust, Python,
+  operator and release checks after tested path classification. Keep the required
+  aggregate fail-closed, make owned prose validation minimal, and retain broad
+  checks for shared dependencies, protocol/installation docs and unknown paths.
+  Replace repeated full-index parsing in a command-construction unit test with
+  bounded fixtures, cache pinned browser payloads, and retain release-stage
+  timing reports including failed stages. Historical study packets are unchanged.
 - Retain the new contextual own-project campaign separately: both arms complete
   eight tasks, with six direct profile completions and two correct source
   fallbacks in lookup-first. Preserve live receipts, command/proof artifacts,
