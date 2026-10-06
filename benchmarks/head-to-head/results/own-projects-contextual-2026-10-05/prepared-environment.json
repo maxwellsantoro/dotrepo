@@ -1,0 +1,97 @@
+{
+  "checkedAt": "2026-10-06T01:21:09.957069+00:00",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "reservedHost": false,
+  "warmCaches": true,
+  "tools": {
+    "java": {
+      "executable": "/opt/homebrew/opt/openjdk@21/bin/javac",
+      "exitCode": 0,
+      "stdout": "javac 21.0.12.1\n",
+      "stderr": ""
+    },
+    "zig": {
+      "executable": "/tmp/dotrepo-readiness-tools/zig-macos-aarch64-0.14.0/zig",
+      "exitCode": 0,
+      "stdout": "0.14.0\n",
+      "stderr": ""
+    },
+    "uv": {
+      "executable": "/Users/maxwell/.local/bin/uv",
+      "exitCode": 0,
+      "stdout": "uv 0.11.8 (0e961dd9a 2026-04-27 aarch64-apple-darwin)\n",
+      "stderr": ""
+    },
+    "rust": {
+      "executable": "/Users/maxwell/.cargo/bin/rustc",
+      "exitCode": 0,
+      "stdout": "rustc 1.95.0 (59807616e 2026-04-14)\n",
+      "stderr": ""
+    },
+    "cargo": {
+      "executable": "/Users/maxwell/.cargo/bin/cargo",
+      "exitCode": 0,
+      "stdout": "cargo 1.95.0 (f2d3ce0bd 2026-03-21)\n",
+      "stderr": ""
+    },
+    "just": {
+      "executable": "/opt/homebrew/bin/just",
+      "exitCode": 0,
+      "stdout": "just 1.58.0\n",
+      "stderr": ""
+    },
+    "node": {
+      "executable": "/opt/homebrew/bin/node",
+      "exitCode": 0,
+      "stdout": "v26.8.2\n",
+      "stderr": ""
+    },
+    "go": {
+      "executable": "/opt/homebrew/bin/go",
+      "exitCode": 0,
+      "stdout": "go version go1.27.1 darwin/arm64\n",
+      "stderr": ""
+    },
+    "ruby": {
+      "executable": "/usr/bin/ruby",
+      "exitCode": 0,
+      "stdout": "ruby 2.6.10p210 (2022-04-12 revision 67958) [universal.arm64e-darwin26]\n",
+      "stderr": ""
+    },
+    "php": {
+      "executable": "/opt/homebrew/bin/php",
+      "exitCode": 0,
+      "stdout": "PHP 8.5.10 (cli) (built: Aug 25 2026 21:09:32) (NTS)\nCopyright (c) The PHP Group\nBuilt by Homebrew\nZend Engine v4.5.10, Copyright (c) Zend Technologies\n    with Zend OPcache v8.5.10, Copyright (c), by Zend Technologies\n",
+      "stderr": ""
+    },
+    "bun": {
+      "executable": "/Users/maxwell/.bun/bin/bun",
+      "exitCode": 0,
+      "stdout": "1.3.13\n",
+      "stderr": ""
+    },
+    "openssl": {
+      "executable": "/opt/homebrew/bin/openssl",
+      "exitCode": 0,
+      "stdout": "OpenSSL 3.6.4 25 Aug 2026 (Library: OpenSSL 3.6.4 25 Aug 2026)\n",
+      "stderr": ""
+    },
+    "clang": {
+      "executable": "/usr/bin/clang",
+      "exitCode": 0,
+      "stdout": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+      "stderr": ""
+    },
+    "pkg-config": {
+      "executable": "/opt/homebrew/bin/pkg-config",
+      "exitCode": 0,
+      "stdout": "3.0.7\n",
+      "stderr": ""
+    }
+  },
+  "path": "/Users/maxwell/projects/agent/dotrepo/.venv/bin:/opt/homebrew/opt/openjdk@21/bin:/tmp/dotrepo-readiness-tools/zig-macos-aarch64-0.14.0:/Users/maxwell/.local/bin:/Users/maxwell/.elan/bin:/opt/homebrew/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/maxwell/.codex/tmp/arg0/codex-arg0TdszJc:/Users/maxwell/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/maxwell/.local/bin:/Users/maxwell/.grok/bin:/Users/maxwell/.atuin/bin:/Users/maxwell/.nvm/versions/node/v25.9.0/bin:/Users/maxwell/.bun/bin:/Users/maxwell/.elan/bin:/Users/maxwell/.cargo/bin:/Users/maxwell/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS",
+  "pkgConfigPath": null,
+  "environmentSetup": "Existing pinned Java 21 and Zig 0.14 tools; previously inspected composite SDK, selected only inside Zig child; uv-backed upstream Python shims. Shared download caches, fresh venvs and targets per arm. No package-manager or total preparation cost accounting.",
+  "sourceSelectionSha256": "1762164ddcf456c3d0551dad76502ac29cbe1a18b3b7619c3dae5381804aad4b",
+  "allocatedPreparationCost": null
+}

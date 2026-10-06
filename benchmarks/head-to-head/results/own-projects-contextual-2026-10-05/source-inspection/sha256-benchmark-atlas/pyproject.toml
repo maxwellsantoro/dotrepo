@@ -1,0 +1,35 @@
+[project]
+name = "sha256-benchmark-atlas"
+version = "0.1.0"
+description = "Atlas of SHA-256 implementations: correctness, provenance, and comparative benchmarks on GitHub Actions"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+    { name = "maxwellsantoro", email = "max@maxwellsantoro.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "cryptography>=42.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.9",
+    "pytest>=8.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[project.scripts]
+sha256-atlas = "sha256_benchmark_atlas.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.11.8,<0.12.0"]
+build-backend = "uv_build"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

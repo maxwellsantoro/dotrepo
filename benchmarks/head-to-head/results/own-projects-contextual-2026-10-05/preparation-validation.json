@@ -1,0 +1,27 @@
+{
+  "head": "5701716b4f88fbf616617d485651c0083613373a",
+  "pythonTests": 503,
+  "completeLocalReleaseGate": true,
+  "indexValid": true,
+  "historicalPacketsChanged": false,
+  "sourceSelectionBeforeAuthoringSha256": "1762164ddcf456c3d0551dad76502ac29cbe1a18b3b7619c3dae5381804aad4b",
+  "initialGateFailure": "hasOwnershipSignal 115 below unchanged floor116; inspected explicit pinned CODEOWNERS/security declarations; finalgate passes",
+  "logs": {
+    "/tmp/dotrepo-contextual-final-python.log": {
+      "sha256": "937bb00511f28412c245de0f23fe02cfd499175b45f7b706441c6e68faf60ec6",
+      "bytes": 581
+    },
+    "/tmp/dotrepo-contextual-release.log": {
+      "sha256": "0c588fe4a2503d09667f6fb1da9a5a765f65f467825965b2ec720e850964d1df",
+      "bytes": 936535
+    },
+    "/tmp/dotrepo-contextual-release-final.log": {
+      "sha256": "088453b1a41cb36263de49270316c1383485b3320ff7646ff641e09f9433d26c",
+      "bytes": 985331
+    },
+    "/tmp/dotrepo-contextual-index-validation.log": {
+      "sha256": "afb45179148d84481cb7fbd3cd6a98ae44cdae7068f1d780e66f13aea51f84d7",
+      "bytes": 12
+    }
+  }
+}

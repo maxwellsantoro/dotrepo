@@ -1,0 +1,67 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-06T01:32:23.461706176Z",
+    "snapshotDigest": "a7e4e24a9d77699e21ef10486d17b8afd9e812b57fe9d112a4006d54677d3697",
+    "staleAfter": "2026-10-13T01:32:23.461706176Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "maxwellsantoro",
+    "repo": "RamenOS",
+    "source": "https://github.com/maxwellsantoro/RamenOS"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/maxwellsantoro/RamenOS/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/maxwellsantoro/RamenOS",
+    "generatedAt": "2026-10-06T01:15:26.806051Z",
+    "evidencePath": "repos/github.com/maxwellsantoro/RamenOS/evidence.md",
+    "freshnessStatus": "fresh",
+    "ageDays": 0,
+    "staleAfterDays": 30,
+    "sourceRevision": "8dc5ff88ddc404528c384aead9ea77f17bf63d40"
+  },
+  "purpose": "RamenOS is a modern, post-Unix operating system being built for humans and AI agents to use efficiently and safely.",
+  "name": "RamenOS",
+  "homepage": "https://github.com/maxwellsantoro/RamenOS",
+  "license": "MIT OR Apache-2.0",
+  "execution": {},
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "imported",
+    "confidence": "high",
+    "provenance": [
+      "imported"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "fieldEvidence": {
+    "repo.description": {
+      "checkedAt": "2026-10-06T01:15:26.806051Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "Transcribed from inspected source at 8dc5ff88ddc404528c384aead9ea77f17bf63d40; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution.",
+      "source": "README.md",
+      "state": "present"
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/maxwellsantoro/RamenOS/profile.json",
+    "repository": "/v0/repos/github.com/maxwellsantoro/RamenOS/index.json",
+    "trust": "/v0/repos/github.com/maxwellsantoro/RamenOS/trust.json",
+    "queryTemplate": "/v0/repos/github.com/maxwellsantoro/RamenOS/query?path={dot_path}",
+    "indexPath": "repos/github.com/maxwellsantoro/RamenOS/"
+  }
+}

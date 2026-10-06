@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import os
 import subprocess
 import sys
@@ -24,7 +25,7 @@ from bench.own_projects import (  # noqa: E402
     validate_fixed_tasks,
     zig_shim,
 )
-from bench.tasks import score  # noqa: E402
+from bench.tasks import score, timestamp  # noqa: E402
 
 
 def result(stdout="", stderr="", *, code=0, error=None):
@@ -235,6 +236,57 @@ def test_retained_live_packet_separates_mismatches_failures_and_unknown_costs():
             attempt = observation["attempts"][0]
             assert attempt["exitCode"] is None
             assert "not executed" in attempt["executionError"]
+
+
+def test_contextual_packet_replays_completions_without_rewriting_history():
+    packet = BENCH / "results/own-projects-contextual-2026-10-05"
+    scored = score(packet / "workload.json", packet / "observations.json")
+    assert scored == json.loads((packet / "results.json").read_bytes())
+    source, lookup = (scored["summary"][arm] for arm in ("source-first", "lookup-first"))
+    assert source["completedTask"] == lookup["completedTask"] == 8
+    assert lookup["policyAcceptedTasks"] == 6 and lookup["fallbackAttempts"] == 2
+    assert source["failedAttempts"] == lookup["failedAttempts"] == 0
+    assert lookup["acceptedWrongAnswer"] == 0
+    assert source["transport"] == {"httpRequests": 8, "decodedBytes": 46020, "cacheHits": 0}
+    assert lookup["transport"] == {"httpRequests": 10, "decodedBytes": 49970, "cacheHits": 0}
+    assert lookup["modelUsage"]["cost"] is None
+    workload = json.loads((packet / "workload.json").read_bytes())
+    for relative, digest in workload["executionSources"].items():
+        assert (
+            hashlib.sha256((packet / "execution-source" / relative).read_bytes()).hexdigest()
+            == digest
+        )
+    for receipt in (packet / "http").glob("*.receipt.json"):
+        raw = (packet / "http" / receipt.name.removesuffix(".receipt.json")).read_bytes()
+        assert hashlib.sha256(raw).hexdigest() == json.loads(receipt.read_bytes())["sha256"]
+
+
+def test_retained_public_profiles_reselect_actual_instructions_at_frozen_clock():
+    from bench.own_projects import consumer
+
+    packet = BENCH / "results/own-projects-contextual-2026-10-05"
+    workload = json.loads((packet / "workload.json").read_bytes())
+    observations = json.loads((packet / "observations.json").read_bytes())
+    for task in workload["tasks"]:
+        body = (packet / "http" / (task["id"] + "-lookup-first-profile")).read_bytes()
+        result = consumer.interpret_http_response(
+            identity=task["identity"], status_code=200, body=body
+        )
+        selection = consumer.select_instruction(
+            result,
+            task["acceptableInstructions"][0]["purpose"],
+            request=task["instructionRequest"],
+            now=timestamp(workload["frozenAt"]),
+        )
+        lookup = next(
+            run["lookup"]
+            for run in observations["runs"]
+            if run["taskId"] == task["id"] and run["arm"] == "lookup-first"
+        )
+        assert selection["instruction"] == lookup["instruction"]
+        if lookup["accepted"]:
+            assert selection["instruction"] in task["acceptableInstructions"]
+            assert not (packet / "http" / (task["id"] + "-lookup-first-source")).exists()
 
 
 @pytest.mark.parametrize(

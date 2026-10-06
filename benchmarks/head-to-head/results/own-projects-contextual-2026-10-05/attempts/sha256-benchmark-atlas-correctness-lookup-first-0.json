@@ -1,0 +1,46 @@
+{
+  "taskId": "sha256-benchmark-atlas-correctness",
+  "origin": "profile",
+  "instruction": {
+    "command": "uv run sha256-atlas correctness --cases 1000 --skip-million",
+    "workingDirectory": ".",
+    "scope": "repository",
+    "component": null,
+    "prerequisites": [
+      "uv sync",
+      "README quick-start compiler/toolchain prerequisites",
+      "uv run sha256-atlas build"
+    ],
+    "sourcePaths": [
+      "README.md"
+    ],
+    "purpose": "test",
+    "parameters": {},
+    "environment": {}
+  },
+  "exitCode": 0,
+  "oraclePassed": true,
+  "commands": [
+    {
+      "command": "uv sync",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "Using CPython 3.12.13\nCreating virtual environment at: .venv\nResolved 12 packages in 1ms\n   Building sha256-benchmark-atlas @ file:///private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-own-project-runs-7mxt3rjo/sha256-benchmark-atlas-correctness-lookup-first\n      Built sha256-benchmark-atlas @ file:///private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-own-project-runs-7mxt3rjo/sha256-benchmark-atlas-correctness-lookup-first\nPrepared 1 package in 10ms\nInstalled 5 packages in 53ms\n + cffi==2.1.1\n + cryptography==50.0.1\n + pycparser==3.0\n + pyyaml==6.0.3\n + sha256-benchmark-atlas==0.1.0 (from file:///private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-own-project-runs-7mxt3rjo/sha256-benchmark-atlas-correctness-lookup-first)\n",
+      "executionError": null
+    },
+    {
+      "command": "uv run sha256-atlas build",
+      "exitCode": 0,
+      "stdout": "[ok] c-openssl: built\n[ok] c-ref: built\n[ok] rust-sha2: built\n[ok] go-stdlib: built\n[ok] python-hashlib: no build step\n[ok] python-pure: no build step\n[ok] node-crypto: no build step\n[ok] java-jdk: built\n[ok] rust-ring: built\n[ok] rust-openssl: built\n[ok] c-libsodium: built\n[ok] c-mbedtls: built\n[ok] ruby-openssl: no build step\n[ok] php-hash: no build step\n[ok] python-cryptography: no build step\n[ok] bun-crypto: no build step\n[ok] zig-std: built\n[ok] rust-sodium: built\n[ok] java-bouncycastle: built\n",
+      "stderr": "",
+      "executionError": null
+    },
+    {
+      "command": "uv run sha256-atlas correctness --cases 1000 --skip-million",
+      "exitCode": 0,
+      "stdout": "{\n  \"passed\": true,\n  \"case_count\": 1020,\n  \"implementations\": [\n    {\n      \"id\": \"c-openssl\",\n      \"checked\": 1020,\n      \"failed\": 0,\n      \"failures\": [],\n      \"ok\": true\n    },\n    {\n      \"id\": \"c-ref\",\n      \"checked\": 1020,\n      \"failed\": 0,\n      \"failures\": [],\n      \"ok\": true\n    },\n    {\n      \"id\": \"rust-sha2\",\n      \"checked\": 1020,\n      \"failed\": 0,\n      \"failures\": [],\n      \"ok\": true\n    },\n    {\n      \"id\": \"go-stdlib\",\n      \"checked\": 1020,\n      \"failed\": 0,\n      \"failures\": [],\n      \"ok\": true\n    },\n    {\n      \"id\": \"python-hashlib\",\n      \"checked\": 1020,\n      \"failed\": 0,\n      \"failures\": [],\n      \"ok\": true\n    },\n    {\n      \"id\": \"python-pure\",\n      \"checked\": 1020,\n      \"failed\": 0,\n      \"failures\": [],\n      \"ok\": true\n    },\n    {\n      \"id\": \"node-crypto\",\n      \"checked\": 1020,\n      \"failed\": 0,\n      \"failures\": [],\n      \"ok\": true\n    },\n    {\n      \"id\": \"java-jdk\",\n      \"checked\": 1020,\n      \"failed\": 0,\n      \"failures\": [],\n      \"ok\": true\n    },\n    {\n      \"id\": \"rust-ring\",\n      \"checked\": 1020,\n      \"failed\": 0,\n      \"failures\": [],\n      \"ok\": true\n    },\n    {\n      \"id\": \"rust-openssl\",\n      \"checked\": 1020,\n      \"failed\": 0,\n      \"failures\": [],\n      \"ok\": true\n    },\n    {\n      \"id\": \"c-libsodium\",\n      \"checked\": 1020,\n      \"failed\": 0,\n      \"failures\": [],\n      \"ok\": true\n    },\n    {\n      \"id\": \"c-mbedtls\",\n      \"checked\": 1020,\n      \"failed\": 0,\n      \"failures\": [],\n      \"ok\": true\n    },\n    {\n      \"id\": \"ruby-openssl\",\n      \"checked\": 1020,\n      \"failed\": 0,\n      \"failures\": [],\n      \"ok\": true\n    },\n    {\n      \"id\": \"php-hash\",\n      \"checked\": 1020,\n      \"failed\": 0,\n      \"failures\": [],\n      \"ok\": true\n    },\n    {\n      \"id\": \"python-cryptography\",\n      \"checked\": 1020,\n      \"failed\": 0,\n      \"failures\": [],\n      \"ok\": true\n    },\n    {\n      \"id\": \"bun-crypto\",\n      \"checked\": 1020,\n      \"failed\": 0,\n      \"failures\": [],\n      \"ok\": true\n    },\n    {\n      \"id\": \"zig-std\",\n      \"checked\": 1020,\n      \"failed\": 0,\n      \"failures\": [],\n      \"ok\": true\n    },\n    {\n      \"id\": \"rust-sodium\",\n      \"checked\": 1020,\n      \"failed\": 0,\n      \"failures\": [],\n      \"ok\": true\n    },\n    {\n      \"id\": \"java-bouncycastle\",\n      \"checked\": 1020,\n      \"failed\": 0,\n      \"failures\": [],\n      \"ok\": true\n    }\n  ]\n}\n",
+      "stderr": "",
+      "executionError": null
+    }
+  ]
+}

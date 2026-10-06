@@ -1,0 +1,38 @@
+{
+  "taskId": "sha256-benchmark-atlas-build",
+  "origin": "source",
+  "instruction": {
+    "command": "uv run sha256-atlas build",
+    "workingDirectory": ".",
+    "scope": "repository",
+    "component": null,
+    "prerequisites": [
+      "uv sync",
+      "README quick-start compiler/toolchain prerequisites"
+    ],
+    "parameters": {},
+    "environment": {},
+    "sourcePaths": [
+      "README.md"
+    ],
+    "purpose": "build"
+  },
+  "exitCode": 0,
+  "oraclePassed": true,
+  "commands": [
+    {
+      "command": "uv sync",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "Using CPython 3.12.13\nCreating virtual environment at: .venv\nResolved 12 packages in 2ms\n   Building sha256-benchmark-atlas @ file:///private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-own-project-runs-7mxt3rjo/sha256-benchmark-atlas-build-source-first\n      Built sha256-benchmark-atlas @ file:///private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-own-project-runs-7mxt3rjo/sha256-benchmark-atlas-build-source-first\nDownloading cryptography (3.8MiB)\n Downloaded cryptography\nPrepared 5 packages in 1.00s\nInstalled 5 packages in 10ms\n + cffi==2.1.1\n + cryptography==50.0.1\n + pycparser==3.0\n + pyyaml==6.0.3\n + sha256-benchmark-atlas==0.1.0 (from file:///private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-own-project-runs-7mxt3rjo/sha256-benchmark-atlas-build-source-first)\n",
+      "executionError": null
+    },
+    {
+      "command": "uv run sha256-atlas build",
+      "exitCode": 0,
+      "stdout": "[ok] c-openssl: built\n[ok] c-ref: built\n[ok] rust-sha2: built\n[ok] go-stdlib: built\n[ok] python-hashlib: no build step\n[ok] python-pure: no build step\n[ok] node-crypto: no build step\n[ok] java-jdk: built\n[ok] rust-ring: built\n[ok] rust-openssl: built\n[ok] c-libsodium: built\n[ok] c-mbedtls: built\n[ok] ruby-openssl: no build step\n[ok] php-hash: no build step\n[ok] python-cryptography: no build step\n[ok] bun-crypto: no build step\n[ok] zig-std: built\n[ok] rust-sodium: built\n[ok] java-bouncycastle: built\n",
+      "stderr": "",
+      "executionError": null
+    }
+  ]
+}

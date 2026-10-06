@@ -1,0 +1,34 @@
+{
+  "sourceEvaluationRevision": "d54d8a5292dcab9e2cf1eba0cbde71cdb6536ed4",
+  "postFreezeParserCommit": "6663a14e",
+  "pythonTests": 506,
+  "fullRustWorkspace": "passed serial",
+  "workspaceClippy": "passed",
+  "cargoDeny": "passed",
+  "formatting": "passed",
+  "releaseVersionParity": "2.0.0-alpha.0",
+  "toolchainManifestParity": "1.90.0",
+  "completeLocalReleaseGate": "passed includingVSIX",
+  "logs": {
+    "dotrepo-contextual-results-python.log": {
+      "sha256": "53f6369c456d061e53e3c4d56af02e3ba38383c2aa7fa72c33c030206d858c68",
+      "bytes": 660
+    },
+    "dotrepo-contextual-results-rust.log": {
+      "sha256": "9cb2e29d8b909a66220d93e5d02828e1acc6e44e0e0ebb0c071f725dc54fb0a9",
+      "bytes": 57177
+    },
+    "dotrepo-rake-quoted-hash-clippy.log": {
+      "sha256": "4a90ca62b87c0a980535afda223a75fa4503cc444114fc4c0918a77e58fa6e38",
+      "bytes": 578
+    },
+    "dotrepo-contextual-results-deny.log": {
+      "sha256": "5f99ee88f958a4b979ecef9c5b39097dfa87d4832ed61f15a1a058065cb38c7c",
+      "bytes": 39511
+    },
+    "dotrepo-contextual-results-release.log": {
+      "sha256": "d9442008ea820987ae00a14bc6a0255d08b8dc197d37ed4b99d1d22b5dfd5694",
+      "bytes": 998185
+    }
+  }
+}

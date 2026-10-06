@@ -1,0 +1,206 @@
+name: SHA-256 campaign
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      reps:
+        description: Interleaved repetitions per size
+        default: "5"
+      cases:
+        description: PRNG correctness cases
+        default: "10000"
+      max_size:
+        description: Max message size (bytes)
+        default: "1048576"
+  schedule:
+    - cron: "17 6 * * 1"
+
+concurrency:
+  group: sha256-campaign-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  campaign:
+    name: block-${{ matrix.shard }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04]
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+        include:
+          - os: ubuntu-24.04-arm
+            shard: 10
+          - os: ubuntu-24.04-arm
+            shard: 11
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: astral-sh/setup-uv@v5
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.22"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          extensions: gmp
+
+      - uses: oven-sh/setup-bun@v2
+
+      - uses: goto-bus-stop/setup-zig@v2
+        with:
+          version: 0.14.0
+
+      - name: Install native crypto libraries
+        run: sudo apt-get update && sudo apt-get install -y libssl-dev libsodium-dev libmbedtls-dev
+
+      - name: Environment fingerprint (raw)
+        run: |
+          set +e
+          echo "== uname"; uname -a
+          echo "== lscpu"; lscpu
+          echo "== cpuinfo model/flags"
+          grep -E 'model name|flags' /proc/cpuinfo | head -n 20 || true
+          echo "== free"; free -h
+          echo "== openssl"; openssl version
+          echo "== cc"; cc --version | head -n 1
+          echo "== rustc"; rustc --version
+          echo "== go"; go version
+          echo "== node"; node --version
+          echo "== java"; java -version
+          echo "== python"; python3 --version
+          echo "== ruby"; ruby --version
+          echo "== php"; php --version
+          echo "== bun"; bun --version
+          echo "== zig"; zig version
+          true
+
+      - name: Sync harness
+        run: uv sync
+
+      - name: Run campaign
+        env:
+          REPS: ${{ github.event.inputs.reps || '5' }}
+          CASES: ${{ github.event.inputs.cases || '10000' }}
+          MAX_SIZE: ${{ github.event.inputs.max_size || '1048576' }}
+        run: |
+          uv run sha256-atlas campaign \
+            --reps "$REPS" \
+            --cases "$CASES" \
+            --max-size "$MAX_SIZE" \
+            --shard "${{ matrix.shard }}" \
+            --shards 12 \
+            --output-dir "results/gha-${{ github.run_id }}-shard${{ matrix.shard }}"
+
+      - name: Upload block results
+        uses: actions/upload-artifact@v4
+        with:
+          name: results-shard-${{ matrix.shard }}-${{ matrix.os }}
+          path: results/gha-${{ github.run_id }}-shard${{ matrix.shard }}
+          retention-days: 30
+
+  aggregate:
+    name: aggregate
+    needs: campaign
+    runs-on: ubuntu-24.04
+    if: always() && (needs.campaign.result == 'success' || needs.campaign.result == 'failure')
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: astral-sh/setup-uv@v5
+
+      - name: Download all shards
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          pattern: results-shard-*
+          merge-multiple: false
+
+      - name: Sync + summarize
+        env:
+          REPS: ${{ github.event.inputs.reps || '5' }}
+          CASES: ${{ github.event.inputs.cases || '10000' }}
+          MAX_SIZE: ${{ github.event.inputs.max_size || '1048576' }}
+        run: |
+          uv sync
+          mkdir -p results/aggregate results/latest
+          find artifacts -name bench.json > /tmp/bench_list.txt || true
+          if [ -s /tmp/bench_list.txt ]; then
+            mapfile -t FILES < /tmp/bench_list.txt
+            BLOCKS=$(wc -l < /tmp/bench_list.txt | tr -d ' ')
+            uv run sha256-atlas summarize "${FILES[@]}" -o results/aggregate/summary.json
+            cp results/aggregate/summary.json results/latest/summary.json
+            printf '{"run_id":%s,"run_url":"%s","completed_at":"%s","blocks":%s,"shards":"0-11 (ubuntu-24.04 x64 + ubuntu-24.04-arm)","reps":%s,"cases":%s,"max_size_bytes":%s}\n' \
+              "${{ github.run_id }}" \
+              "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+              "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+              "$BLOCKS" \
+              "$REPS" "$CASES" "$MAX_SIZE" \
+              > results/latest/meta.json
+            {
+              echo "## Campaign aggregate"
+              echo "Blocks: $BLOCKS"
+              echo ""
+              uv run sha256-atlas summarize "${FILES[@]}" | head -c 60000
+            } >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "No bench.json artifacts found" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload aggregate
+        uses: actions/upload-artifact@v4
+        with:
+          name: aggregate-summary
+          path: |
+            results/aggregate
+            results/latest
+          retention-days: 30
+
+      # Keep the checked-in results/latest/ in sync with reality. Without this,
+      # the README table and results/latest/*.json only reflect whichever run
+      # someone happened to download and commit by hand (see PAIN.md).
+      # Skipped on PRs (forked PRs don't have write access to GITHUB_TOKEN,
+      # and PR branches shouldn't push to main anyway).
+      - name: Commit results/latest
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/latest
+          if git diff --cached --quiet; then
+            echo "results/latest unchanged; nothing to commit"
+          else
+            git commit -m "Update latest campaign aggregate (run ${{ github.run_id }}) [skip ci]"
+            git push origin HEAD:main
+          fi

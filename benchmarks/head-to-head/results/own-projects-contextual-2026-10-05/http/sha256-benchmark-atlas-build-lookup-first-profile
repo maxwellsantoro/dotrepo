@@ -1,0 +1,117 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-06T01:32:23.461706176Z",
+    "snapshotDigest": "a7e4e24a9d77699e21ef10486d17b8afd9e812b57fe9d112a4006d54677d3697",
+    "staleAfter": "2026-10-13T01:32:23.461706176Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "maxwellsantoro",
+    "repo": "sha256-benchmark-atlas",
+    "source": "https://github.com/maxwellsantoro/sha256-benchmark-atlas"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/maxwellsantoro/sha256-benchmark-atlas/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/maxwellsantoro/sha256-benchmark-atlas",
+    "generatedAt": "2026-10-06T01:15:26.806051Z",
+    "evidencePath": "repos/github.com/maxwellsantoro/sha256-benchmark-atlas/evidence.md",
+    "freshnessStatus": "fresh",
+    "ageDays": 0,
+    "staleAfterDays": 30,
+    "sourceRevision": "71eda5d6480e0b9e39f914f3641d91f98402e943"
+  },
+  "purpose": "Public atlas of SHA-256 implementations across languages and libraries: correctness first, then comparative performance with explicit provenance.",
+  "name": "sha256-benchmark-atlas",
+  "homepage": "https://github.com/maxwellsantoro/sha256-benchmark-atlas",
+  "license": "MIT",
+  "execution": {
+    "buildCandidates": [
+      {
+        "command": "uv run sha256-atlas build",
+        "source": "README.md",
+        "context": {
+          "command": "uv run sha256-atlas build",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "prerequisites": [
+            "uv sync",
+            "README quick-start compiler/toolchain prerequisites"
+          ],
+          "source": "README.md"
+        }
+      }
+    ],
+    "testCandidates": [
+      {
+        "command": "uv run sha256-atlas correctness --cases 1000 --skip-million",
+        "source": "README.md",
+        "context": {
+          "command": "uv run sha256-atlas correctness --cases 1000 --skip-million",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "prerequisites": [
+            "uv sync",
+            "README quick-start compiler/toolchain prerequisites",
+            "uv run sha256-atlas build"
+          ],
+          "source": "README.md"
+        }
+      }
+    ]
+  },
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "imported",
+    "confidence": "high",
+    "provenance": [
+      "imported"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "fieldEvidence": {
+    "repo.build_candidates.0": {
+      "checkedAt": "2026-10-06T01:15:26.806051Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "Transcribed from inspected source at 71eda5d6480e0b9e39f914f3641d91f98402e943; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution.",
+      "source": "README.md",
+      "state": "present"
+    },
+    "repo.description": {
+      "checkedAt": "2026-10-06T01:15:26.806051Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "Transcribed from inspected source at 71eda5d6480e0b9e39f914f3641d91f98402e943; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution.",
+      "source": "README.md",
+      "state": "present"
+    },
+    "repo.test_candidates.0": {
+      "checkedAt": "2026-10-06T01:15:26.806051Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "Transcribed from inspected source at 71eda5d6480e0b9e39f914f3641d91f98402e943; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution.",
+      "source": "README.md",
+      "state": "present"
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/maxwellsantoro/sha256-benchmark-atlas/profile.json",
+    "repository": "/v0/repos/github.com/maxwellsantoro/sha256-benchmark-atlas/index.json",
+    "trust": "/v0/repos/github.com/maxwellsantoro/sha256-benchmark-atlas/trust.json",
+    "queryTemplate": "/v0/repos/github.com/maxwellsantoro/sha256-benchmark-atlas/query?path={dot_path}",
+    "indexPath": "repos/github.com/maxwellsantoro/sha256-benchmark-atlas/"
+  }
+}

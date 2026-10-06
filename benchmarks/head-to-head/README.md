@@ -246,9 +246,20 @@ source pins, Python environments, and time limits explicitly. Coverage is known
 from the first study; its results are targeted operator follow-up rather than
 independent or held-out evidence.
 
-The `lookup-first` arm uses the generic consumer's identity, record-age, conflict,
+The [contextual own-project campaign](results/own-projects-contextual-2026-10-05/README.md)
+uses a frozen public snapshot and complete independently selected instructions.
+Both arms complete eight tasks; lookup-first directly executes six profile
+instructions and falls back for the two withheld RamenOS aggregates. Its retained
+sources/runtimes, live receipts, proof artifacts and exact task screens establish
+instruction reuse in a prepared operator workflow. Total explicit HTTP work is
+higher for lookup-first in this packet; independent adoption and net cost remain
+unmeasured.
+
+The per-field `lookup-first` arm below uses the generic consumer's identity, record-age, conflict,
 and required-field policy. Rejected fields trigger the GitHub baseline and include
-its work. Both arms use the same extractor setting. No returned command is run.
+its work. Both per-field arms use the same extractor setting and do not execute
+returned commands. The own-project runner above executes separately frozen,
+screened instructions and records task completion.
 
 ```bash
 uv run python -m bench.run --gold gold.independent.yaml \

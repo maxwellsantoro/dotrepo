@@ -70,6 +70,17 @@ The two RamenOS aggregate host wrappers remain source fallback cases because a
 single component context would misstate their multi-component execution. This is
 a known-coverage follow-up after bounded source inspection, not held-out evidence.
 
+The [contextual campaign packet](../benchmarks/head-to-head/results/own-projects-contextual-2026-10-05/README.md)
+retains eight paired tasks: both arms completed all eight; lookup-first completed
+six from actual profile instructions without a source-guide fetch and refused the
+two RamenOS aggregates into successful fallback. There were no accepted wrong
+answers or failed attempts in that packet. Atlas retained the complete 19-member
+cohort and 1,020 vectors per implementation in each correctness arm. This is
+observed instruction reuse on source-inspected, prepared operator tasks. Lookup
+still made more explicit HTTP requests and received more decoded bytes overall;
+warm caches, host contention, unallocated preparation and unknown total costs
+prevent a causal timing or net-cost claim. Independent adoption remains deferred.
+
 ## Deliverables
 
 - Dependency-free HTTP client: `examples/external-consumer/lookup_before_scrape.py`.

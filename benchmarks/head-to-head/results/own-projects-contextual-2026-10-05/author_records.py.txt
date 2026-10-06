@@ -1,0 +1,119 @@
+"""Manually inspected source inputs; never imports the study's expected answers."""
+import hashlib
+import json
+from pathlib import Path
+from datetime import datetime, timezone
+import subprocess
+
+REPO = Path('/Users/maxwell/projects/agent/dotrepo')
+SOURCES = Path('/tmp/dotrepo-contextual-20261005/sources')
+OUT = Path('/tmp/dotrepo-contextual-20261005/source-inspection')
+OUT.mkdir(exist_ok=True)
+CHECKED = datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')
+
+# These values are transcribed from the pinned README/agent/contribution guides.
+# Scope comes from their repository maps and adjacent cd/core headings.
+inputs = {
+    'RamenOS': {
+        'description': 'RamenOS is a modern, post-Unix operating system being built for humans and AI agents to use efficiently and safely.',
+        'license': 'MIT OR Apache-2.0',
+        'sources': ['README.md', 'docs/GETTING_STARTED.md', 'justfile', 'Cargo.toml', 'tools/ci/foundry_agent_task_proof_rt.sh', 'LICENSE-MIT', 'LICENSE-APACHE'],
+        'candidates': [],
+        'notes': 'Build/test scalars and candidates are withheld: documented host wrappers execute an aggregate of components and are not the whole operating-system default. The present context protocol cannot name this aggregate as a single component. Source fallback is required.',
+    },
+    'sha256-benchmark-atlas': {
+        'description': 'Public atlas of SHA-256 implementations across languages and libraries: correctness first, then comparative performance with explicit provenance.',
+        'license': 'MIT',
+        'sources': ['README.md', 'LICENSE', 'registry/implementations.yaml', '.github/workflows/campaign.yml', 'pyproject.toml'],
+        'candidates': [
+            ('build', 'uv run sha256-atlas build', 'README.md', '.', None, ['uv sync', 'README quick-start compiler/toolchain prerequisites']),
+            ('test', 'uv run sha256-atlas correctness --cases 1000 --skip-million', 'README.md', '.', None, ['uv sync', 'README quick-start compiler/toolchain prerequisites', 'uv run sha256-atlas build']),
+        ],
+        'notes': 'README quick start explicitly names full registry build and correctness commands, uv sync and the full compiler/toolchain cohort. Registry and workflow were inspected to check that the commands cover all admitted implementations. Operator-specific SDK selection is preparation, not record environment metadata. Commands are retained as candidates rather than claiming a single universal default correctness configuration.',
+    },
+    'ries-rs': {
+        'description': 'Rust inverse equation solver for turning a target number into compact algebraic equations.',
+        'license': 'MIT',
+        'sources': ['README.md', 'CONTRIBUTING.md', 'AGENTS.md', 'Cargo.toml', 'LICENSE'],
+        'candidates': [
+            ('build', 'cargo build', 'CONTRIBUTING.md', '.', 'src', ['Rust/Cargo']),
+            ('test', 'cargo test', 'AGENTS.md', '.', 'src', ['Rust/Cargo']),
+        ],
+        'notes': 'CONTRIBUTING labels cargo build as the core crate/CLI loop. AGENTS gives cargo test as the core Rust loop alternative to nextest and maps core/runtime ownership to src. Both run from the root Cargo package and cover the Rust core/CLI, not the Python and WASM packaging surfaces. Prior uninspected metadata and stale scalar assessments are omitted rather than rejuvenated. Claim history and canonical links are unchanged.',
+    },
+    'pagedigest': {
+        'description': 'PageDigest is a JSON change manifest for public websites.',
+        'license': 'MIT',
+        'sources': ['README.md', 'AGENTS.md', 'LICENSE', 'implementations/python-consumer/pyproject.toml', 'implementations/python-consumer/uv.lock', 'implementations/rust-generator/Cargo.toml'],
+        'candidates': [
+            ('test', 'uv run --locked python -m unittest discover -s tests -v', 'AGENTS.md', 'implementations/python-consumer', 'implementations/python-consumer', ['uv and locked consumer environment']),
+            ('test', 'cargo test --locked', 'AGENTS.md', 'implementations/rust-generator', 'implementations/rust-generator', ['Rust/Cargo']),
+        ],
+        'notes': 'AGENTS focused runs explicitly precede each test with its component cd. The repository map confirms both physical component directories; manifests/lockfile confirm preparation requirements. Repository default build/test scalars are withheld because these are two scoped implementations, not all repository surfaces.',
+    },
+}
+
+def q(value):
+    return json.dumps(value, ensure_ascii=False)
+
+receipts = {}
+for name, data in inputs.items():
+    root = SOURCES / name
+    revision = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=root, text=True).strip()
+    inspection = OUT / name
+    inspection.mkdir(exist_ok=True)
+    receipts[name] = {'sourceRevision': revision, 'checkedAt': CHECKED, 'files': {}}
+    for source in data['sources']:
+        raw = (root / source).read_bytes()
+        retained = inspection / source
+        retained.parent.mkdir(parents=True, exist_ok=True)
+        retained.write_bytes(raw)
+        receipts[name]['files'][source] = hashlib.sha256(raw).hexdigest()
+    lines = [
+        'schema = "dotrepo/v0.1"', '', '[record]', 'mode = "overlay"', 'status = "imported"',
+        'source = ' + q('https://github.com/maxwellsantoro/' + name),
+        'generated_at = ' + q(CHECKED), '', '[record.trust]', 'confidence = "high"',
+        'provenance = ["imported"]',
+        'notes = ' + q('Bounded manual source inspection at ' + revision + '. ' + data['notes'] + ' This is an imported overlay, not pipeline verification or maintainer canonical authority.'),
+        '', '[repo]', 'name = ' + q(name), 'description = ' + q(data['description']),
+        'homepage = ' + q('https://github.com/maxwellsantoro/' + name), 'license = ' + q(data['license']),
+    ]
+    assessments = [('repo.description', data['description'], 'README.md')]
+    counts = {'build': 0, 'test': 0}
+    for purpose, command, source, cwd, component, prerequisites in data['candidates']:
+        assert command in (root / source).read_text(), (name, source, command)
+        assert (root / cwd).is_dir() and (component is None or (root / component).is_dir())
+        context = {'command': command, 'working_directory': cwd, 'scope': 'component' if component else 'repository', 'prerequisites': prerequisites, 'source': source}
+        if component:
+            context['component'] = component
+        candidate = {'command': command, 'ecosystem': None, 'source': source, 'context': context}
+        lines.extend(['', f'[[repo.{purpose}_candidates]]', 'command = ' + q(command), 'source = ' + q(source), f'[repo.{purpose}_candidates.context]'])
+        lines.extend(key + ' = ' + q(value) for key, value in context.items())
+        assessments.append((f'repo.{purpose}_candidates.{counts[purpose]}', candidate, source))
+        counts[purpose] += 1
+    for field, value, source in assessments:
+        lines.extend(['', '[x.dotrepo.field_evidence.' + q(field) + ']', 'state = "present"', 'method = "extracted"', 'confidence = "high"', 'source = ' + q(source), 'checkedAt = ' + q(CHECKED), 'valueJson = ' + q(json.dumps(value, ensure_ascii=False)), 'reason = ' + q('Transcribed from inspected source at ' + revision + '; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution.')])
+    lines.extend(['', '[x.github]', 'head_sha = ' + q(revision)])
+    target = REPO / 'index/repos/github.com/maxwellsantoro' / name
+    target.mkdir(parents=True, exist_ok=True)
+    old_record = target / 'record.toml'
+    if old_record.exists():
+        (inspection / 'previous-record.toml').write_bytes(old_record.read_bytes())
+    old_record.write_text('\n'.join(lines) + '\n')
+    evidence = '# Source inspection, October 5, 2026\n\n'
+    evidence += f'Checked at `{CHECKED}` against upstream revision `{revision}`.\n\n'
+    evidence += '- Imported repository name/description from the pinned README and license from the license files/Cargo declaration. Homepage is the inspected repository identity.\n'
+    evidence += '- Build/test selection: ' + data['notes'] + '\n'
+    evidence += '- No docs.root is asserted: this bounded refresh did not inspect a complete documentation-root contract. No unknown placeholder is used for absent ownership/security fields.\n'
+    evidence += '- Whole command candidates have exact JSON value and check-time bindings. Prerequisites are descriptions, not shell commands or execution authorization.\n\n'
+    for source in data['sources']:
+        evidence += f'- [{source}](https://github.com/maxwellsantoro/{name}/blob/{revision}/{source}) SHA-256 `{receipts[name]["files"][source]}`.\n'
+    evidence += '\nThis is an overlay record, not a maintainer-controlled canonical record.\n'
+    prior = target / 'evidence.md'
+    if prior.exists():
+        old = prior.read_text()
+        (inspection / 'previous-evidence.md').write_text(old)
+        evidence += '\n## Historical evidence (superseded; retained verbatim)\n\n' + old
+    prior.write_text(evidence)
+(OUT / 'receipt.json').write_text(json.dumps(receipts, indent=2) + '\n')
+print(CHECKED)

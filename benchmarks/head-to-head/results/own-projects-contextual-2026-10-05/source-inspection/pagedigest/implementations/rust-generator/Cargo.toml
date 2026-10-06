@@ -1,0 +1,28 @@
+[package]
+name = "pagedigest"
+version = "0.3.0"
+edition = "2021"
+license = "MIT"
+description = "Minimal pagedigest manifest generator"
+homepage = "https://pagedigest.org"
+repository = "https://github.com/maxwellsantoro/pagedigest"
+readme = "README.md"
+keywords = ["crawler", "manifest", "static-site", "web"]
+categories = ["command-line-utilities", "web-programming"]
+
+[[bin]]
+name = "pagedigest-generator"
+path = "src/main.rs"
+
+[dependencies]
+anyhow = "1.0"
+chrono = { version = "0.4", features = ["serde"] }
+clap = { version = "4.5", features = ["derive"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+percent-encoding = "2.3"
+sha2 = "0.10"
+walkdir = "2.5"
+
+[dev-dependencies]
+tempfile = "3.13"
