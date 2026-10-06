@@ -26,7 +26,7 @@ from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
 from .arms.lookup_first import consumer
-from .tasks import ARMS, markdown, score
+from .tasks import ARMS, markdown, score, validate_selection
 
 EXECUTION_ROOT = Path(__file__).resolve().parents[3]
 
@@ -467,6 +467,7 @@ def freeze(output, sources, meta_path, inventory_path, study="initial"):
                 ).hexdigest()
         if study == "contextual-campaign":
             workload["selectionBeforeCoverageInspection"] = False
+            workload["selectionFrozenBeforeExecution"] = True
             workload["selection"] = (
                 "Known-coverage contextual follow-up on the same eight commands and oracles. "
                 "Merged RamenOS main and Atlas's merged full-cohort prerequisite documentation. "
@@ -586,6 +587,7 @@ def run(output, sources):
     raw = (output / "workload.json").read_bytes()
     workload = json.loads(raw)
     validate_fixed_tasks(workload)
+    validate_selection(workload)
     validate_execution_sources(workload, output)
     validate_runtime(workload)
     if workload["runnerSha256"] != hashlib.sha256(Path(__file__).read_bytes()).hexdigest():

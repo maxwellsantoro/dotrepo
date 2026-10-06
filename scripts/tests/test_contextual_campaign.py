@@ -12,6 +12,7 @@ import pytest
 BENCH = Path(__file__).resolve().parents[2] / "benchmarks/head-to-head"
 sys.path.insert(0, str(BENCH))
 from bench import own_projects as study  # noqa: E402
+from bench.tasks import validate_selection  # noqa: E402
 
 
 def workload():
@@ -53,6 +54,23 @@ def test_campaign_refuses_missing_preparation():
     value["tasks"][2]["preparationEnvironment"] = {}
     with pytest.raises(ValueError, match="frozen preparation"):
         study.validate_fixed_tasks(value)
+
+
+def test_known_coverage_operator_followup_cannot_claim_independent_selection():
+    value = {
+        "selectionBeforeCoverageInspection": False,
+        "selectionFrozenBeforeExecution": True,
+        "knownCoverage": True,
+        "consumerClass": "operator-controlled",
+    }
+    validate_selection(value)
+    for key, invalid in [
+        ("selectionFrozenBeforeExecution", False),
+        ("knownCoverage", False),
+        ("consumerClass", "participant-supplied"),
+    ]:
+        with pytest.raises(ValueError, match="selection not frozen"):
+            validate_selection({**value, key: invalid})
 
 
 @pytest.mark.parametrize("runtime", ["python", "uv"])

@@ -39,6 +39,13 @@ Git commits. Freeze tasks and ground-truth alternatives before coverage inspecti
 retain the workload's byte digest in the observations. A participant-supplied
 workload cannot use synthetic revisions.
 
+A known-coverage operator follow-up may instead declare
+`selectionBeforeCoverageInspection: false`, `knownCoverage: true`, and
+`selectionFrozenBeforeExecution: true`. It still binds the frozen workload and
+must not claim held-out or independent selection. This exception is restricted
+to `consumerClass: operator-controlled`; participant-supplied studies retain
+the before-coverage requirement.
+
 Each task declares an identity, immutable revision, shared environment ID, task
 class, and cited source evidence with locator, check time, and matching
 `sourceRevision`. Acceptable instruction alternatives preserve the exact command,
