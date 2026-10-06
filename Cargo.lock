@@ -241,7 +241,7 @@ dependencies = [
 
 [[package]]
 name = "dotrepo-cli"
-version = "1.0.2"
+version = "1.0.3"
 dependencies = [
  "anyhow",
  "clap",
@@ -256,10 +256,11 @@ dependencies = [
 
 [[package]]
 name = "dotrepo-core"
-version = "1.0.2"
+version = "1.0.3"
 dependencies = [
  "anyhow",
  "dotrepo-schema",
+ "libc",
  "rayon",
  "roxmltree",
  "serde",
@@ -267,11 +268,12 @@ dependencies = [
  "sha2",
  "time",
  "toml",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]
 name = "dotrepo-crawler"
-version = "1.0.2"
+version = "1.0.3"
 dependencies = [
  "anyhow",
  "clap",
@@ -285,7 +287,7 @@ dependencies = [
 
 [[package]]
 name = "dotrepo-lsp"
-version = "1.0.2"
+version = "1.0.3"
 dependencies = [
  "anyhow",
  "dotrepo-core",
@@ -299,7 +301,7 @@ dependencies = [
 
 [[package]]
 name = "dotrepo-mcp"
-version = "1.0.2"
+version = "1.0.3"
 dependencies = [
  "anyhow",
  "dotrepo-core",
@@ -312,7 +314,7 @@ dependencies = [
 
 [[package]]
 name = "dotrepo-schema"
-version = "1.0.2"
+version = "1.0.3"
 dependencies = [
  "serde",
  "thiserror 1.0.69",
@@ -321,7 +323,7 @@ dependencies = [
 
 [[package]]
 name = "dotrepo-transport"
-version = "1.0.2"
+version = "1.0.3"
 dependencies = [
  "anyhow",
  "serde",

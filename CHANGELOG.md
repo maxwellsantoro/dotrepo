@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.0.3 candidate — unreleased
+
+- Bound import text reads to regular repository files of at most 2 MiB and
+  refuse symlinks in input paths. Apply the same private reader to conventional
+  files, workflows, relation discovery, and deterministic deepening.
+- Withhold Rake commands when namespace or conditional Ruby context prevents
+  establishing a literal root task. Preserve ordinary root task declarations.
+- Refuse forced import writes through symlinks or files shared by hardlinks.
+- Keep the 1.0 schema, public Rust signatures, and JSON contracts unchanged.
+  Contextual profiles and development benchmark changes are excluded.
+
 ## 1.0.2 candidate — unreleased
 
 - Disable standalone `promotion-report --apply` before any record or evidence

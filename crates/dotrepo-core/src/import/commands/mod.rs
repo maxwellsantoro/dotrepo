@@ -6,6 +6,7 @@ use anyhow::{anyhow, Result};
 use std::fs;
 use std::path::Path;
 
+use super::read::{check_input_path, read_input};
 use super::types::{ImportSources, ImportedCommandMetadata, ImportedFile};
 
 mod extraction;
@@ -31,9 +32,8 @@ pub(super) fn load_first_existing_file(
 ) -> Result<Option<ImportedFile>> {
     for candidate in candidates {
         let path = root.join(candidate);
-        if path.exists() {
-            let contents = fs::read_to_string(&path)
-                .map_err(|err| anyhow!("failed to read {}: {}", path.display(), err))?;
+        if fs::symlink_metadata(&path).is_ok() {
+            let contents = read_input(root, Path::new(candidate))?;
             return Ok(Some(ImportedFile {
                 path: candidate.to_string(),
                 contents,
@@ -66,8 +66,7 @@ pub(super) fn load_first_root_file_with_extension(
     let Some((file_name, path)) = matches.into_iter().next() else {
         return Ok(None);
     };
-    let contents = fs::read_to_string(&path)
-        .map_err(|err| anyhow!("failed to read {}: {}", path.display(), err))?;
+    let contents = read_input(root, path.strip_prefix(root)?)?;
     Ok(Some(ImportedFile {
         path: file_name,
         contents,
@@ -80,6 +79,7 @@ pub(super) fn load_workflow_import_files(root: &Path) -> Result<Vec<ImportedFile
         return Ok(Vec::new());
     }
 
+    check_input_path(root, Path::new(".github/workflows"))?;
     let mut files = fs::read_dir(&workflows_root)
         .map_err(|err| anyhow!("failed to read {}: {}", workflows_root.display(), err))?
         .filter_map(|entry| entry.ok())
@@ -97,8 +97,7 @@ pub(super) fn load_workflow_import_files(root: &Path) -> Result<Vec<ImportedFile
 
     let mut imported = Vec::new();
     for (file_name, path) in files {
-        let contents = fs::read_to_string(&path)
-            .map_err(|err| anyhow!("failed to read {}: {}", path.display(), err))?;
+        let contents = read_input(root, path.strip_prefix(root)?)?;
         imported.push(ImportedFile {
             path: format!(".github/workflows/{}", file_name),
             contents,

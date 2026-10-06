@@ -2,10 +2,10 @@
 //! native GitHub-surface compat detection, evidence.md rendering, and
 //! conservative (non-fabricating) relation discovery from GitHub facts and
 //! package manifests.
+use super::read::read_input;
 use dotrepo_schema::{
     CompatMode, Docs, GitHubCompat, Manifest, Owners, RelationKind, RelationLink, Trust,
 };
-use std::fs;
 use std::path::Path;
 
 use crate::render::{
@@ -416,8 +416,8 @@ pub(crate) fn discover_relations_from_manifest_files(
     let mut notes = Vec::new();
 
     // Cargo.toml - use toml for [package] section (repository + homepage)
-    if let Ok(text) = fs::read_to_string(root.join("Cargo.toml"))
-        .or_else(|_| fs::read_to_string(root.join("cargo.toml")))
+    if let Ok(text) = read_input(root, Path::new("Cargo.toml"))
+        .or_else(|_| read_input(root, Path::new("cargo.toml")))
     {
         if let Ok(val) = toml::from_str::<toml::Value>(&text) {
             if let Some(pkg) = val.get("package") {
@@ -488,7 +488,7 @@ pub(crate) fn discover_relations_from_manifest_files(
     }
 
     // package.json - repository + homepage (object or string)
-    if let Ok(text) = fs::read_to_string(root.join("package.json")) {
+    if let Ok(text) = read_input(root, Path::new("package.json")) {
         if let Ok(val) = serde_json::from_str::<serde_json::Value>(&text) {
             for key in ["repository", "homepage"] {
                 let v = if key == "repository" {
@@ -532,8 +532,8 @@ pub(crate) fn discover_relations_from_manifest_files(
     }
 
     // README cross-links for homepage-style or "see also" / related github (using markdown extractor if available)
-    if let Ok(readme) = fs::read_to_string(root.join("README.md"))
-        .or_else(|_| fs::read_to_string(root.join("README")))
+    if let Ok(readme) =
+        read_input(root, Path::new("README.md")).or_else(|_| read_input(root, Path::new("README")))
     {
         let lowered = readme.to_ascii_lowercase();
         if lowered.contains("github.com")
