@@ -204,6 +204,20 @@ def test_history_recovery_binds_original_exporters_and_serializes_with_publicati
     assert "github.event.repository.default_branch" in job["if"]
     assert "vars.DOTREPO_PUBLIC_R2_ARCHIVE_BUCKET != ''" in job["if"]
     steps = {step.get("name"): step for step in job["steps"]}
+    access = steps["Check archive account access before reconstruction"]
+    assert access["run"] == "npx wrangler r2 bucket list"
+    assert access["working-directory"] == "cloudflare/hosted-query"
+    assert access["env"] == {
+        "CLOUDFLARE_API_TOKEN": "${{ secrets.CLOUDFLARE_API_TOKEN }}",
+        "CLOUDFLARE_ACCOUNT_ID": "${{ secrets.CLOUDFLARE_ACCOUNT_ID }}",
+    }
+    assert "if" not in access and "continue-on-error" not in access
+    ordered = job["steps"]
+    assert ordered.index(steps["Install pinned archive client"]) < ordered.index(access)
+    assert ordered.index(access) < ordered.index(steps["Build each original deployment exporter"])
+    assert ordered.index(steps["Reconstruct and validate every frozen published payload"]) < (
+        ordered.index(steps["Provision the archive and backfill verified history"])
+    )
     build = steps["Build each original deployment exporter"]["run"]
     assert "entryExporters" in build and '"--locked"' in build
     assert "cwd=source" in build and "Path(sys.argv[1]).resolve()" in build

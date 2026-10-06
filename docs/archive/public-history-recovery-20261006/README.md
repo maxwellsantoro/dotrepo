@@ -23,7 +23,8 @@ the declared anchors provide the latter. No packet, source revision or history
 entry is changed.
 
 The manual `public-archive-recovery` workflow uses this frozen plan. It runs on
-the default branch, serializes with ordinary publication, provisions only the
+the default branch, serializes with ordinary publication, checks archive account
+access before historical builds and reconstruction, provisions only the
 declared bucket after a successful account listing, uploads validated public
 payloads with bounded concurrency, and commits the merged log last. Private
 `query-input` files are excluded. Authentication failures and incomplete payloads
