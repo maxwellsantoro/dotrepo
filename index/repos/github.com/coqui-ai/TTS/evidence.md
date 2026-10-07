@@ -1,8 +1,9 @@
 # Evidence
 
-- Imported repository name and docs entry points from README.md.
+- Imported repository name from README.md.
 - Inferred repo.build from pyproject.toml as `python -m build`.
-- Imported repo.test from Makefile as `make test`.
+- Imported repo.test from CONTRIBUTING.md as `make test`.
+- Conflicting documentation declarations in README.md; abstained from docs.root.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.name` to `TTS` from `GitHub API` after deterministic escalation.
@@ -13,7 +14,3 @@
 - Augmented repo.topics from GitHub repository metadata.
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
-
-## Fresh verification
-
-Prior verified authority was not inherited: this refresh must qualify using its current field scores.
