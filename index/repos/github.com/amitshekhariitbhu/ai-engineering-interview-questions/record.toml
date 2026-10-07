@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/amitshekhariitbhu/ai-engineering-interview-questions"
-generated_at = "2026-09-16T16:20:36.367356Z"
+generated_at = "2026-10-07T06:03:42.401066184Z"
 
 [record.trust]
 confidence = "high"
@@ -36,29 +36,27 @@ topics = [
     "mcp",
     "quantization",
     "rag",
+    "llm-inference",
 ]
 
-[docs]
-root = "https://outcomeschool.com/blog/direct-preference-optimization-dpo"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:20:36.367356Z"
+checkedAt = "2026-10-07T06:03:42.401066184Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:20:36.367356Z"
+checkedAt = "2026-10-07T06:03:42.401066184Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://outcomeschool.com/blog/direct-preference-optimization-dpo"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:20:36.367356Z"
+checkedAt = "2026-10-07T06:03:42.401066184Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -66,7 +64,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:20:36.367356Z"
+checkedAt = "2026-10-07T06:03:42.401066184Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -74,7 +72,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:20:36.367356Z"
+checkedAt = "2026-10-07T06:03:42.401066184Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -82,7 +80,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:20:36.367356Z"
+checkedAt = "2026-10-07T06:03:42.401066184Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -91,7 +89,7 @@ state = "present"
 valueJson = '"Your Cheat Sheet for AI Engineering Interview – Questions and Answers."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:20:36.367356Z"
+checkedAt = "2026-10-07T06:03:42.401066184Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -99,16 +97,16 @@ state = "present"
 valueJson = '"https://outcomeschool.com/program/ai-and-machine-learning"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:20:36.367356Z"
+checkedAt = "2026-10-07T06:03:42.401066184Z"
 confidence = "high"
 method = "inferred"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"ai-engineering-interview-questions"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:20:36.367356Z"
+checkedAt = "2026-10-07T06:03:42.401066184Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -120,6 +118,6 @@ archived = false
 clone_url = "https://github.com/amitshekhariitbhu/ai-engineering-interview-questions.git"
 default_branch = "main"
 fork = false
-head_sha = "d6c27fba1cda87e9789e8b8664300d77057db6ec"
+head_sha = "ca07d800318829d543c87471a167cdc78c91e477"
 html_url = "https://github.com/amitshekhariitbhu/ai-engineering-interview-questions"
-stars = 3085
+stars = 3310
