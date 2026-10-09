@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/discourse/discourse"
-generated_at = "2026-09-16T16:22:27.72837Z"
+generated_at = "2026-10-09T06:08:12.857782262Z"
 
 [record.trust]
 confidence = "high"
@@ -53,9 +53,6 @@ maintainers = [
 ]
 security_contact = "https://github.com/discourse/discourse/blob/main/docs/SECURITY.md"
 
-[docs]
-root = "https://www.discourse.org"
-
 [relations]
 references = []
 
@@ -72,23 +69,23 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:22:27.72837Z"
+checkedAt = "2026-10-09T06:08:12.857782262Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:22:27.72837Z"
+checkedAt = "2026-10-09T06:08:12.857782262Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://www.discourse.org"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:22:27.72837Z"
+checkedAt = "2026-10-09T06:08:12.857782262Z"
 confidence = "high"
 method = "unspecified"
 reason = "actionable security reporting URL"
@@ -96,7 +93,7 @@ state = "present"
 valueJson = '"https://github.com/discourse/discourse/blob/main/docs/SECURITY.md"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:22:27.72837Z"
+checkedAt = "2026-10-09T06:08:12.857782262Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -104,7 +101,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:22:27.72837Z"
+checkedAt = "2026-10-09T06:08:12.857782262Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -113,7 +110,7 @@ state = "present"
 valueJson = '"pnpm build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:22:27.72837Z"
+checkedAt = "2026-10-09T06:08:12.857782262Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -122,7 +119,7 @@ state = "present"
 valueJson = '"A platform for community discussion. Free, open, simple."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:22:27.72837Z"
+checkedAt = "2026-10-09T06:08:12.857782262Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -130,16 +127,16 @@ state = "present"
 valueJson = '"https://www.discourse.org"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:22:27.72837Z"
+checkedAt = "2026-10-09T06:08:12.857782262Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"discourse"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:22:27.72837Z"
+checkedAt = "2026-10-09T06:08:12.857782262Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -151,6 +148,6 @@ archived = false
 clone_url = "https://github.com/discourse/discourse.git"
 default_branch = "main"
 fork = false
-head_sha = "c4ed156337c8522e3476c2b23545509102d636f2"
+head_sha = "cfc6e9200b6d1d428efcf1bf1364422bec78b329"
 html_url = "https://github.com/discourse/discourse"
-stars = 47843
+stars = 47945

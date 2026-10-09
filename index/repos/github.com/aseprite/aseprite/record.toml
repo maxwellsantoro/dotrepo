@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/aseprite/aseprite"
-generated_at = "2026-09-16T16:20:49.34043Z"
+generated_at = "2026-10-09T06:04:45.543797275Z"
 
 [record.trust]
 confidence = "high"
@@ -26,8 +26,8 @@ languages = [
     "CMake",
     "C",
     "Objective-C++",
-    "PowerShell",
     "Batchfile",
+    "PowerShell",
 ]
 topics = [
     "animation",
@@ -51,35 +51,33 @@ topics = [
 maintainers = ["@dacap"]
 security_contact = "security@aseprite.org"
 
-[docs]
-root = "https://twitter.com/aseprite/status/806889204601016325"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:20:49.34043Z"
+checkedAt = "2026-10-09T06:04:45.543797275Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:20:49.34043Z"
+checkedAt = "2026-10-09T06:04:45.543797275Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://twitter.com/aseprite/status/806889204601016325"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:20:49.34043Z"
+checkedAt = "2026-10-09T06:04:45.543797275Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "direct email or mailing list"
+source = "SECURITY.md"
 state = "present"
 valueJson = '"security@aseprite.org"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:20:49.34043Z"
+checkedAt = "2026-10-09T06:04:45.543797275Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -87,7 +85,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:20:49.34043Z"
+checkedAt = "2026-10-09T06:04:45.543797275Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -95,7 +93,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:20:49.34043Z"
+checkedAt = "2026-10-09T06:04:45.543797275Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -104,7 +102,7 @@ state = "present"
 valueJson = '"Animated sprite editor & pixel art tool (Windows, macOS, Linux)"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:20:49.34043Z"
+checkedAt = "2026-10-09T06:04:45.543797275Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -112,16 +110,16 @@ state = "present"
 valueJson = '"https://www.aseprite.org"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:20:49.34043Z"
+checkedAt = "2026-10-09T06:04:45.543797275Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Aseprite"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:20:49.34043Z"
+checkedAt = "2026-10-09T06:04:45.543797275Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -133,6 +131,6 @@ archived = false
 clone_url = "https://github.com/aseprite/aseprite.git"
 default_branch = "main"
 fork = false
-head_sha = "80079cd5c903123fdc1ba066a7c6dadb696764c2"
+head_sha = "14fe117e853bd642672e72018166239506060cd4"
 html_url = "https://github.com/aseprite/aseprite"
-stars = 39496
+stars = 39961

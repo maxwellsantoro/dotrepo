@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/bitpay/bitcore"
-generated_at = "2026-09-16T16:21:24.075434Z"
+generated_at = "2026-10-09T06:05:33.990338893Z"
 
 [record.trust]
 confidence = "high"
@@ -36,19 +36,24 @@ topics = []
 min = "22"
 ecosystem = "Node.js"
 
-[docs]
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:21:24.075434Z"
+checkedAt = "2026-10-09T06:05:33.990338893Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-10-09T06:05:33.990338893Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:21:24.075434Z"
+checkedAt = "2026-10-09T06:05:33.990338893Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -56,16 +61,24 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:21:24.075434Z"
+checkedAt = "2026-10-09T06:05:33.990338893Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
 state = "not_found"
 valueJson = "null"
 
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-10-09T06:05:33.990338893Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "package.json"
+state = "present"
+valueJson = '"npm run build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:21:24.075434Z"
+checkedAt = "2026-10-09T06:05:33.990338893Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -74,7 +87,7 @@ state = "present"
 valueJson = '"A full stack for bitcoin and blockchain-based applications"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:21:24.075434Z"
+checkedAt = "2026-10-09T06:05:33.990338893Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -82,76 +95,27 @@ state = "present"
 valueJson = '"https://bitcore.io/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:21:24.075434Z"
+checkedAt = "2026-10-09T06:05:33.990338893Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Bitcore Monorepo"'
 
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-10-09T06:05:33.990338893Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no test command sources found"
+state = "not_found"
+valueJson = "null"
 
 [x.github]
 archived = false
 clone_url = "https://github.com/bitpay/bitcore.git"
 default_branch = "master"
 fork = false
-head_sha = "ea86af5f3e1049d0ee1469fd0cd1fa34c2a579c4"
+head_sha = "630b6d2e4ac77f19db3fd5e7aa16cae4d634ac09"
 html_url = "https://github.com/bitpay/bitcore"
-stars = 4986
-
-[repo.build_context]
-command = "npm run build"
-working_directory = "."
-scope = "repository"
-prerequisites = ["Install Node.js ^22 and npm to invoke the declared root package script, plus an available Docker daemon. Docker builds from the source checkout with node:22-bookworm, installs Google Chrome and runs npm ci including the retained bootstrap/compile postinstall; allow the declared registry and Debian/Chrome repository fetches."]
-source = "package.json"
-
-[[repo.test_candidates]]
-command = "npm run test:bitcore-node"
-ecosystem = "Node.js"
-source = "package.json"
-
-[repo.test_candidates.context]
-command = "npm run test:bitcore-node"
-working_directory = "."
-scope = "component"
-prerequisites = ["Select Node 22.13.1 using the retained CI setup; install monorepo dependencies with npm ci and compile with npm run compile. Start the services through docker compose -f docker-compose.test.base.yml -f docker-compose.test.ci.yml up --detach. CI additionally binds DB_NAME, DB_PORT, and BITCORE_CONFIG_PATH; those environment bindings are required for the exact CI instruction and cannot be discarded."]
-source = "package.json"
-component = "packages/bitcore-node"
-
-[x.dotrepo.field_evidence."repo.build_context"]
-checkedAt = "2026-10-06T05:05:26.380157Z"
-confidence = "high"
-method = "extracted"
-reason = "2026-10-06 bounded retained-revision inspection: complete source-grounded command/context tuple, wrapper and scope preserved; no upstream execution or whole-record recrawl. Supporting exact files, pins and hashes are retained in evidence.md and the remainder audit source receipt."
-source = "package.json"
-state = "present"
-valueJson = "{\"command\": \"npm run build\", \"prerequisites\": [\"Install Node.js ^22 and npm to invoke the declared root package script, plus an available Docker daemon. Docker builds from the source checkout with node:22-bookworm, installs Google Chrome and runs npm ci including the retained bootstrap/compile postinstall; allow the declared registry and Debian/Chrome repository fetches.\"], \"scope\": \"repository\", \"source\": \"package.json\", \"working_directory\": \".\"}"
-
-[x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-06T05:05:26.380157Z"
-confidence = "high"
-method = "extracted"
-reason = "Root package build invokes docker build -t bitcore-node .; Dockerfile copies the monorepo and runs npm ci, whose postinstall bootstraps and compiles packages. The wrapper exists, but current accepted scalar lacks Docker/toolchain context. Inspected source wrapper retained, not flattened; prerequisites and Dockerfile effects recorded in repo.build_context. No execution or refreshed whole-record timestamp."
-source = "package.json"
-state = "present"
-valueJson = "\"npm run build\""
-
-[x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-06T05:05:26.380157Z"
-confidence = "high"
-method = "not_found_in_inspected_sources"
-reason = "No root generic test script exists. The root manifest and CI provide per-package test wrappers with Docker services and environment bindings. A package test must not become a whole-monorepo scalar. No supported scalar default/root found within inspected source scope; this is not universal absence. Preserve record age/status."
-source = "package.json"
-state = "not_found"
-valueJson = "null"
-
-[x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-06T05:05:26.380157Z"
-confidence = "high"
-method = "not_found_in_inspected_sources"
-reason = "https://bitcore.io/ is the retained homepage, but the pinned root README does not declare it as documentation. The inspected component README declares repository-local API guides instead. No mutable external page was treated as semantic proof. No supported scalar default/root found within inspected source scope; this is not universal absence. Preserve record age/status."
-source = "README.md"
-state = "not_found"
-valueJson = "null"
+stars = 4982
