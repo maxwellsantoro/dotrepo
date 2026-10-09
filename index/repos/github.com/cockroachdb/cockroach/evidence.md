@@ -6,6 +6,8 @@
 - Imported repo.build from GNUmakefile as `make build`.
 - Imported repo.test from GNUmakefile as `make test`.
 - Imported repo.toolchain.min from go.mod as `1.26.2` (Go).
+- Imported docs.root as `https://cockroachlabs.com/docs/stable/`. Explicit documentation link at README.md:36: For guidance on installation, development, deployment, and administration, see our [User Documentation](https://cockroachlabs.com/docs/stable/).
+- Imported docs.getting_started as `https://www.cockroachlabs.com/docs/cockroachcloud/quickstart.html`. Explicit documentation link at README.md:42: See our online documentation: [Quickstart with CockroachCloud](https://www.cockroachlabs.com/docs/cockroachcloud/quickstart.html)
 - Discovered related relation to github.com/cockroachdb/cockroach from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
