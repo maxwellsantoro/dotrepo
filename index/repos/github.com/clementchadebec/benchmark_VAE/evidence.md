@@ -2,6 +2,7 @@
 
 - Imported repository name and docs entry points from README.md.
 - Imported repo.test from CONTRIBUTING.md as `pytest tests/`.
+- Imported docs.root as `https://pythae.readthedocs.io/en/latest/`. Explicit documentation link at README.md:28: <a href="https://pythae.readthedocs.io/en/latest/">Documentation</a>
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.name` to `benchmark_VAE` from `GitHub API` after deterministic escalation.
