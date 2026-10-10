@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/StylishThemes/GitHub-Dark"
-generated_at = "2026-09-16T16:19:43.422017Z"
+generated_at = "2026-10-10T06:03:24.929200077Z"
 
 [record.trust]
 confidence = "high"
@@ -41,9 +41,6 @@ topics = [
     "dark",
 ]
 
-[docs]
-root = "https://raw.githubusercontent.com/StylishThemes/GitHub-Dark/master/github-dark.user.css"
-
 [relations]
 references = []
 
@@ -60,23 +57,23 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:19:43.422017Z"
+checkedAt = "2026-10-10T06:03:24.929200077Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:19:43.422017Z"
+checkedAt = "2026-10-10T06:03:24.929200077Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://raw.githubusercontent.com/StylishThemes/GitHub-Dark/master/github-dark.user.css"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:19:43.422017Z"
+checkedAt = "2026-10-10T06:03:24.929200077Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -84,7 +81,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:19:43.422017Z"
+checkedAt = "2026-10-10T06:03:24.929200077Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -92,7 +89,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:19:43.422017Z"
+checkedAt = "2026-10-10T06:03:24.929200077Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -101,7 +98,7 @@ state = "present"
 valueJson = '"make build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:19:43.422017Z"
+checkedAt = "2026-10-10T06:03:24.929200077Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -110,7 +107,7 @@ state = "present"
 valueJson = '":octocat: Dark GitHub style"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:19:43.422017Z"
+checkedAt = "2026-10-10T06:03:24.929200077Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -118,16 +115,16 @@ state = "present"
 valueJson = '"https://raw.githubusercontent.com/StylishThemes/GitHub-Dark/master/github-dark.user.css"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:19:43.422017Z"
+checkedAt = "2026-10-10T06:03:24.929200077Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"GitHub-Dark"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:19:43.422017Z"
+checkedAt = "2026-10-10T06:03:24.929200077Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -140,6 +137,6 @@ archived = false
 clone_url = "https://github.com/StylishThemes/GitHub-Dark.git"
 default_branch = "master"
 fork = false
-head_sha = "e7b074353daf16db56040c4060765f8582f467e4"
+head_sha = "7d3f3386f2e200632b70e2d8ea0ee4bc59787539"
 html_url = "https://github.com/StylishThemes/GitHub-Dark"
-stars = 9977
+stars = 9985

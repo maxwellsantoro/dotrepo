@@ -2,17 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/chi111i/BypassAIGC"
-generated_at = "2026-09-16T16:21:36.988794Z"
+generated_at = "2026-10-10T06:05:20.114274046Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
-    "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md` and `.github/workflows/build-exe.yml`. Inferred `repo.build` from `.github/workflows/build-exe.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "BypassAIGC"
@@ -28,7 +28,6 @@ languages = [
     "Shell",
     "HTML",
 ]
-build = "npm run build"
 topics = []
 
 [relations]
@@ -47,23 +46,23 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:21:36.988794Z"
+checkedAt = "2026-10-10T06:05:20.114274046Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:21:36.988794Z"
+checkedAt = "2026-10-10T06:05:20.114274046Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:21:36.988794Z"
+checkedAt = "2026-10-10T06:05:20.114274046Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -71,7 +70,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:21:36.988794Z"
+checkedAt = "2026-10-10T06:05:20.114274046Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -79,16 +78,15 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:21:36.988794Z"
-confidence = "medium"
-method = "inferred"
-reason = "from workflow fallback"
-source = ".github/workflows/build-exe.yml"
-state = "present"
-valueJson = '"npm run build"'
+checkedAt = "2026-10-10T06:05:20.114274046Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no build command sources found"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:21:36.988794Z"
+checkedAt = "2026-10-10T06:05:20.114274046Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -97,7 +95,7 @@ state = "present"
 valueJson = '"论文润色，AIGC 降重工具(gptzero等检测网站)"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:21:36.988794Z"
+checkedAt = "2026-10-10T06:05:20.114274046Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -105,16 +103,16 @@ state = "present"
 valueJson = '"https://github.com/chi111i/BypassAIGC"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:21:36.988794Z"
+checkedAt = "2026-10-10T06:05:20.114274046Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"BypassAIGC"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:21:36.988794Z"
+checkedAt = "2026-10-10T06:05:20.114274046Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -128,4 +126,4 @@ default_branch = "main"
 fork = false
 head_sha = "d9fab8193d0bfb9c53f7da0d5952fc87512f1f26"
 html_url = "https://github.com/chi111i/BypassAIGC"
-stars = 2103
+stars = 2145
