@@ -3,6 +3,8 @@
 - Imported repository docs entry points from README.md.
 - Imported the security reporting channel from SECURITY.md.
 - Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.
+- Imported docs.root as `https://ddnexus.github.io/pagy/guides/quick-start`. Explicit documentation link at README.md:53: - **New [documentation](https://ddnexus.github.io/pagy/guides/quick-start)**
+- Discovered related relation to github.com/ddnexus/pagy from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
