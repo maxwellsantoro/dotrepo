@@ -32,7 +32,7 @@ asset misclassified as documentation.
 The original regression baseline requires 20/20 exact matches, zero missing sampled
 facts, and zero mismatched sampled facts. This is sampled accuracy evidence, not
 a universal claim about every field in every profile. The active release gate
-also uses the dated [October 4 upstream recapture](../benchmarks/head-to-head/upstream-2026-10-04/)
+also uses the dated [October 27 upstream recapture](../benchmarks/head-to-head/upstream-2026-10-27/)
 with 123 independently sourced assertions across 32 preselected repositories.
 The original September capture remains historical evidence. Frozen primary-source
 extracts and identity selection live under `benchmarks/head-to-head/`. This second release

@@ -7,9 +7,9 @@
   "maxMalformedProfiles": 0,
   "minSignal": {
     "hasBuild": 328,
-    "hasDocs": 361,
+    "hasDocs": 165,
     "hasLicense": 558,
-    "hasOwnershipSignal": 116,
+    "hasOwnershipSignal": 110,
     "hasSecurityContact": 205,
     "hasTest": 323
   },
@@ -21,6 +21,15 @@
       "sunnypilot/sunnypilot": "a5f44653d7f43ad57fef2f546f3916ec4cbf3c56",
       "dotnet/maui": "1cd2e15ba4750f1cbacb629e648cd7abc9a5b5d2",
       "moby/moby": "f4fcf8597da0ff816a6daa991c3382e999894397"
+    }
+  },
+  "docsRebaseline": {
+    "checkedAt": "2026-10-27",
+    "reason": "The October source-declared documentation policy (documentation fields require a supporting declaration; URL shape alone no longer populates docs) plus the 2026-10-27 full-index catch-up refresh reduced hasDocs from 361 to an observed 172 and hasOwnershipSignal from 116 to an observed 114. Retaining inferred documentation URLs to satisfy the old count would misrepresent the current policy. Minimums are set just below observed values (165/110) so normal record churn does not flap the gate.",
+    "observed": {
+      "hasDocs": 172,
+      "hasOwnershipSignal": 114,
+      "profiles": 615
     }
   },
   "licenseRebaseline": {
