@@ -3,9 +3,12 @@
 - Imported repository name and docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
+- Ignored component-scoped commands from `eng/common/internal/Tools.csproj` as repository defaults.
 - Imported repo.build from package.json as `npm run build`.
 - Imported repo.test from package.json as `npm test`.
 - Imported repo.toolchain.min from package.json as `20.9.0` (Node.js).
+- Imported docs.root as `https://github.com/aspnet/Docs`. Explicit documentation link at README.md:40: * [Documentation](https://github.com/aspnet/Docs) - documentation sources for https://learn.microsoft.com/aspnet/core/
+- Imported docs.getting_started as `https://learn.microsoft.com/aspnet/core/getting-started`. Explicit documentation link at README.md:12: Follow the [Getting Started](https://learn.microsoft.com/aspnet/core/getting-started) instructions.
 - Discovered related relation to github.com/dotnet/aspnetcore from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

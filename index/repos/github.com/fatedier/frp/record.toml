@@ -2,16 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/fatedier/frp"
-generated_at = "2026-09-16T16:23:13.798381Z"
+generated_at = "2026-10-27T18:00:36.128796Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `web/frpc/package.json`, `Makefile`, and `go.mod`. Imported `repo.build` from `web/frpc/package.json`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. 2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged."
+notes = "Bootstrapped from `README.md`, `Makefile`, and `go.mod`. Ignored component-scoped commands from `web/frpc/package.json` as repository defaults. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "frp"
@@ -30,6 +31,7 @@ languages = [
     "JavaScript",
     "HTML",
 ]
+build = "make build"
 test = "make test"
 topics = [
     "proxy",
@@ -45,7 +47,7 @@ topics = [
 ]
 
 [repo.toolchain]
-min = "1.25.0"
+min = "1.26.0"
 ecosystem = "Go"
 
 [relations]
@@ -64,23 +66,23 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:23:13.798381Z"
+checkedAt = "2026-10-27T18:00:36.128796Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:23:13.798381Z"
+checkedAt = "2026-10-27T18:00:36.128796Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:23:13.798381Z"
+checkedAt = "2026-10-27T18:00:36.128796Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -88,7 +90,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:23:13.798381Z"
+checkedAt = "2026-10-27T18:00:36.128796Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -96,16 +98,16 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:23:13.798381Z"
-confidence = "low"
+checkedAt = "2026-10-27T18:00:36.128796Z"
+confidence = "high"
 method = "extracted"
-reason = "Component command lacks repository-default scope and working directory."
-source = "web/frpc/package.json"
-state = "unresolved"
-valueJson = "null"
+reason = "from declared repository source"
+source = "Makefile"
+state = "present"
+valueJson = '"make build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:23:13.798381Z"
+checkedAt = "2026-10-27T18:00:36.128796Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -114,7 +116,7 @@ state = "present"
 valueJson = '"A fast reverse proxy to help you expose a local server behind a NAT or firewall to the internet."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:23:13.798381Z"
+checkedAt = "2026-10-27T18:00:36.128796Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -122,16 +124,16 @@ state = "present"
 valueJson = '"https://github.com/fatedier/frp"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:23:13.798381Z"
+checkedAt = "2026-10-27T18:00:36.128796Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"frp"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:23:13.798381Z"
+checkedAt = "2026-10-27T18:00:36.128796Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -144,6 +146,6 @@ archived = false
 clone_url = "https://github.com/fatedier/frp.git"
 default_branch = "dev"
 fork = false
-head_sha = "d20a232996007dfe6ab425abc0a39a3ae9a0889b"
+head_sha = "93b52799bb7e6dad7ae1152c8b593eefcc17d595"
 html_url = "https://github.com/fatedier/frp"
-stars = 109481
+stars = 110205

@@ -2,69 +2,125 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "inferred"
 source = "https://github.com/maxwellsantoro/pagedigest"
-generated_at = "2026-10-06T01:15:26.806051Z"
+generated_at = "2026-10-27T17:53:45.417843Z"
 
 [record.trust]
-confidence = "high"
-provenance = ["imported"]
-notes = "Bounded manual source inspection at f880f813cc0df49603482dbd879ff4ef49b3a519. AGENTS focused runs explicitly precede each test with its component cd. The repository map confirms both physical component directories; manifests/lockfile confirm preparation requirements. Repository default build/test scalars are withheld because these are two scoped implementations, not all repository surfaces. This is an imported overlay, not pipeline verification or maintainer canonical authority."
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md`, `.github/workflows/publish-crate.yml`, and `implementations/python-consumer/pyproject.toml`. Ignored component-scoped commands from `packages/astro/package.json` as repository defaults. Ignored component-scoped commands from `implementations/python-consumer/pyproject.toml` as repository defaults. Inferred `repo.test` from `.github/workflows/publish-crate.yml`. Imported `repo.toolchain.min` from `implementations/python-consumer/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "pagedigest"
-description = "PageDigest is a JSON change manifest for public websites."
-homepage = "https://github.com/maxwellsantoro/pagedigest"
+description = "JSON change manifests for stateful crawlers and caches. Stable v1 wire format with publisher and consumer tooling."
+homepage = "https://pagedigest.org"
 license = "MIT"
+visibility = "public"
+languages = [
+    "Python",
+    "JavaScript",
+    "HTML",
+    "Rust",
+    "Shell",
+]
+test = "cargo test --locked --manifest-path implementations/rust-generator/Cargo.toml"
+topics = [
+    "caching",
+    "protocol",
+    "python",
+    "rust",
+    "static-site",
+    "web-crawling",
+]
 
-[[repo.test_candidates]]
-command = "uv run --locked python -m unittest discover -s tests -v"
-source = "AGENTS.md"
-[repo.test_candidates.context]
-command = "uv run --locked python -m unittest discover -s tests -v"
-working_directory = "implementations/python-consumer"
-scope = "component"
-prerequisites = ["uv and locked consumer environment"]
-source = "AGENTS.md"
-component = "implementations/python-consumer"
+[repo.toolchain]
+min = "3.9"
+ecosystem = "Python"
 
-[[repo.test_candidates]]
-command = "cargo test --locked"
-source = "AGENTS.md"
-[repo.test_candidates.context]
-command = "cargo test --locked"
-working_directory = "implementations/rust-generator"
-scope = "component"
-prerequisites = ["Rust/Cargo"]
-source = "AGENTS.md"
-component = "implementations/rust-generator"
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-10-27T17:53:45.417843Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-10-27T17:53:45.417843Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-10-27T17:53:45.417843Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-10-27T17:53:45.417843Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-10-27T17:53:45.417843Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no build command sources found"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-state = "present"
-method = "extracted"
+checkedAt = "2026-10-27T17:53:45.417843Z"
 confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"JSON change manifests for stateful crawlers and caches. Stable v1 wire format with publisher and consumer tooling."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-10-27T17:53:45.417843Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://pagedigest.org"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-10-27T17:53:45.417843Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
-checkedAt = "2026-10-06T01:15:26.806051Z"
-valueJson = "\"PageDigest is a JSON change manifest for public websites.\""
-reason = "Transcribed from inspected source at f880f813cc0df49603482dbd879ff4ef49b3a519; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution."
-
-[x.dotrepo.field_evidence."repo.test_candidates.0"]
 state = "present"
-method = "extracted"
-confidence = "high"
-source = "AGENTS.md"
-checkedAt = "2026-10-06T01:15:26.806051Z"
-valueJson = "{\"command\": \"uv run --locked python -m unittest discover -s tests -v\", \"ecosystem\": null, \"source\": \"AGENTS.md\", \"context\": {\"command\": \"uv run --locked python -m unittest discover -s tests -v\", \"working_directory\": \"implementations/python-consumer\", \"scope\": \"component\", \"prerequisites\": [\"uv and locked consumer environment\"], \"source\": \"AGENTS.md\", \"component\": \"implementations/python-consumer\"}}"
-reason = "Transcribed from inspected source at f880f813cc0df49603482dbd879ff4ef49b3a519; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution."
+valueJson = '"pagedigest"'
 
-[x.dotrepo.field_evidence."repo.test_candidates.1"]
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-10-27T17:53:45.417843Z"
+confidence = "medium"
+method = "inferred"
+reason = "from workflow fallback"
+source = ".github/workflows/publish-crate.yml"
 state = "present"
-method = "extracted"
-confidence = "high"
-source = "AGENTS.md"
-checkedAt = "2026-10-06T01:15:26.806051Z"
-valueJson = "{\"command\": \"cargo test --locked\", \"ecosystem\": null, \"source\": \"AGENTS.md\", \"context\": {\"command\": \"cargo test --locked\", \"working_directory\": \"implementations/rust-generator\", \"scope\": \"component\", \"prerequisites\": [\"Rust/Cargo\"], \"source\": \"AGENTS.md\", \"component\": \"implementations/rust-generator\"}}"
-reason = "Transcribed from inspected source at f880f813cc0df49603482dbd879ff4ef49b3a519; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution."
+valueJson = '"cargo test --locked --manifest-path implementations/rust-generator/Cargo.toml"'
 
 [x.github]
+archived = false
+clone_url = "https://github.com/maxwellsantoro/pagedigest.git"
+default_branch = "main"
+fork = false
 head_sha = "f880f813cc0df49603482dbd879ff4ef49b3a519"
+html_url = "https://github.com/maxwellsantoro/pagedigest"
+stars = 0

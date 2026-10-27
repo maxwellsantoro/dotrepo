@@ -1,8 +1,8 @@
 # Evidence
 
-- Imported repository docs entry points from README.md.
 - Imported the security reporting channel from SECURITY.md.
 - Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.
+- Discovered related relation to github.com/ddnexus/pagy from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

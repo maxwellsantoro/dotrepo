@@ -2,17 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/astral-sh/uv"
-generated_at = "2026-09-21T04:36:55.205964Z"
+generated_at = "2026-10-27T17:47:11.320667Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
-    "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, `.github/workflows/build-dev-binaries.yml`, `CONTRIBUTING.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/build-dev-binaries.yml`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, `CONTRIBUTING.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `CONTRIBUTING.md`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "uv"
@@ -24,16 +24,16 @@ languages = [
     "Rust",
     "Python",
     "Shell",
-    "PowerShell",
-    "Batchfile",
     "Dockerfile",
+    "Batchfile",
+    "PowerShell",
     "Nushell",
     "Xonsh",
     "Jupyter Notebook",
     "C",
     "RenderScript",
 ]
-build = "cargo build --profile no-debug-nightly -Z checksum-freshness"
+build = "cargo build --target x86_64-unknown-linux-musl --profile profiling"
 test = "cargo nextest run"
 topics = [
     "packaging",
@@ -43,7 +43,7 @@ topics = [
 ]
 
 [repo.toolchain]
-min = "1.96.0"
+min = "1.97.0"
 ecosystem = "Rust"
 
 [owners]
@@ -55,26 +55,25 @@ root = "https://docs.astral.sh/uv"
 getting_started = "https://docs.astral.sh/uv/getting-started/installation/"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-21T04:36:55.205964Z"
+checkedAt = "2026-10-27T17:47:11.320667Z"
 confidence = "high"
 method = "extracted"
-reason = "retain the explicitly declared uv installation documentation; inspected README.md:76 at commit a5a0b62c4912157bf5e8802453588ef6c0be5a88"
+reason = "Explicit documentation link at README.md:76: See the [installation documentation](https://docs.astral.sh/uv/getting-started/installation/) for"
 source = "README.md"
 state = "present"
-valueJson = "\"https://docs.astral.sh/uv/getting-started/installation/\""
+valueJson = '"https://docs.astral.sh/uv/getting-started/installation/"'
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-21T04:36:55.205964Z"
+checkedAt = "2026-10-27T17:47:11.320667Z"
 confidence = "high"
 method = "extracted"
-reason = "Trio benchmark caption link is not uv documentation; inspected README.md:81 at commit a5a0b62c4912157bf5e8802453588ef6c0be5a88"
+reason = "Explicit documentation link at README.md:81: uv's documentation is available at [docs.astral.sh/uv](https://docs.astral.sh/uv)."
 source = "README.md"
 state = "present"
-valueJson = "\"https://docs.astral.sh/uv\""
-rejectedValueJson = "\"https://trio.readthedocs.io/\""
+valueJson = '"https://docs.astral.sh/uv"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-18T06:06:36.392319997Z"
+checkedAt = "2026-10-27T17:47:11.320667Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -83,7 +82,7 @@ state = "present"
 valueJson = '"https://github.com/astral-sh/.github/blob/main/SECURITY.md"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-18T06:06:36.392319997Z"
+checkedAt = "2026-10-27T17:47:11.320667Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -91,16 +90,16 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-18T06:06:36.392319997Z"
-confidence = "medium"
-method = "inferred"
-reason = "from workflow fallback"
-source = ".github/workflows/build-dev-binaries.yml"
+checkedAt = "2026-10-27T17:47:11.320667Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "CONTRIBUTING.md"
 state = "present"
-valueJson = '"cargo build --profile no-debug-nightly -Z checksum-freshness"'
+valueJson = '"cargo build --target x86_64-unknown-linux-musl --profile profiling"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-18T06:06:36.392319997Z"
+checkedAt = "2026-10-27T17:47:11.320667Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -109,7 +108,7 @@ state = "present"
 valueJson = '"An extremely fast Python package and project manager, written in Rust."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-18T06:06:36.392319997Z"
+checkedAt = "2026-10-27T17:47:11.320667Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -117,16 +116,16 @@ state = "present"
 valueJson = '"https://docs.astral.sh/uv"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-18T06:06:36.392319997Z"
+checkedAt = "2026-10-27T17:47:11.320667Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"uv"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-18T06:06:36.392319997Z"
+checkedAt = "2026-10-27T17:47:11.320667Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -139,6 +138,6 @@ archived = false
 clone_url = "https://github.com/astral-sh/uv.git"
 default_branch = "main"
 fork = false
-head_sha = "a5a0b62c4912157bf5e8802453588ef6c0be5a88"
+head_sha = "7685f5331bb62fe47fb03a73b0d6422ca211cce9"
 html_url = "https://github.com/astral-sh/uv"
-stars = 89943
+stars = 91245

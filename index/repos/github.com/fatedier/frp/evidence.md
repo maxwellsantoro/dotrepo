@@ -1,9 +1,10 @@
 # Evidence
 
 - Imported repository name from README.md.
-- Imported repo.build from web/frpc/package.json as `npm run build`.
+- Ignored component-scoped commands from `web/frpc/package.json` as repository defaults.
+- Imported repo.build from Makefile as `make build`.
 - Imported repo.test from Makefile as `make test`.
-- Imported repo.toolchain.min from go.mod as `1.25.0` (Go).
+- Imported repo.toolchain.min from go.mod as `1.26.0` (Go).
 - Discovered related relation to github.com/sponsors/fatedier from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.license from GitHub repository metadata.
@@ -16,9 +17,3 @@
 ## Auto-promotion
 
 All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
-
-## Command semantic correction (2026-10-03)
-
-2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged.
-
-- Withheld `repo.build` previously extracted from `web/frpc/package.json` as `npm run build`. Component command lacks repository-default scope and working directory.

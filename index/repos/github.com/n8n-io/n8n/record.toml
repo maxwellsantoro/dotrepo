@@ -2,17 +2,14 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/n8n-io/n8n"
-generated_at = "2026-09-18T06:04:20.732743113Z"
+generated_at = "2026-10-27T18:27:29.147694Z"
 
 [record.trust]
-confidence = "high"
-provenance = [
-    "imported",
-    "verified",
-]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `package.json`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "n8n"
@@ -24,18 +21,18 @@ languages = [
     "TypeScript",
     "Vue",
     "JavaScript",
-    "SCSS",
     "Python",
+    "SCSS",
     "Handlebars",
     "Shell",
     "HTML",
     "Dockerfile",
     "MDX",
     "HCL",
-    "CSS",
     "Mermaid",
     "Just",
     "Open Policy Agent",
+    "CSS",
     "Rich Text Format",
     "Batchfile",
 ]
@@ -69,34 +66,28 @@ min = "24.0.0"
 ecosystem = "Node.js"
 
 [owners]
-maintainers = [
-    "@n8n-io/migrations-review",
-    "@n8n-io/qa-dx",
-]
+maintainers = []
 security_contact = "https://n8n.notion.site/n8n-vulnerability-disclosure-program"
 
-[docs]
-root = "https://docs.n8n.io"
-getting_started = "https://docs.n8n.io/hosting/installation/docker/"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-18T06:04:20.732743113Z"
+checkedAt = "2026-10-27T18:27:29.147694Z"
 confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
-state = "present"
-valueJson = '"https://docs.n8n.io/hosting/installation/docker/"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-18T06:04:20.732743113Z"
-confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://docs.n8n.io"'
+checkedAt = "2026-10-27T18:27:29.147694Z"
+confidence = "low"
+method = "unresolved"
+reason = "conflicting documentation declarations; no target selected"
+source = "README.md"
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-18T06:04:20.732743113Z"
+checkedAt = "2026-10-27T18:27:29.147694Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -105,7 +96,7 @@ state = "present"
 valueJson = '"https://n8n.notion.site/n8n-vulnerability-disclosure-program"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-18T06:04:20.732743113Z"
+checkedAt = "2026-10-27T18:27:29.147694Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -113,7 +104,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-18T06:04:20.732743113Z"
+checkedAt = "2026-10-27T18:27:29.147694Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -122,7 +113,7 @@ state = "present"
 valueJson = '"pnpm build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-18T06:04:20.732743113Z"
+checkedAt = "2026-10-27T18:27:29.147694Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -131,7 +122,7 @@ state = "present"
 valueJson = '"Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-18T06:04:20.732743113Z"
+checkedAt = "2026-10-27T18:27:29.147694Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -139,16 +130,16 @@ state = "present"
 valueJson = '"https://n8n.io"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-18T06:04:20.732743113Z"
+checkedAt = "2026-10-27T18:27:29.147694Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"n8n"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-18T06:04:20.732743113Z"
+checkedAt = "2026-10-27T18:27:29.147694Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -161,6 +152,6 @@ archived = false
 clone_url = "https://github.com/n8n-io/n8n.git"
 default_branch = "master"
 fork = false
-head_sha = "39ef24a169bae69b20b992a32e7a490cbc88bada"
+head_sha = "d790c1116b78a3e15669e3c438d070051bd04ee9"
 html_url = "https://github.com/n8n-io/n8n"
-stars = 205112
+stars = 208784

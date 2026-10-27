@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/psf/requests"
-generated_at = "2026-09-19T06:07:19.785207744Z"
+generated_at = "2026-10-27T17:40:57.032611Z"
 
 [record.trust]
 confidence = "medium"
@@ -49,26 +49,27 @@ maintainers = [
 security_contact = "https://github.com/psf/requests/security/advisories/new"
 
 [docs]
-root = "https://requests.readthedocs.io/en/latest/"
+root = "https://requests.readthedocs.io"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-19T06:07:19.785207744Z"
+checkedAt = "2026-10-27T17:40:57.032611Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-19T06:07:19.785207744Z"
+checkedAt = "2026-10-27T17:40:57.032611Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:7: [![Documentation](https://readthedocs.org/projects/requests/badge/?version=latest)](https://requests.readthedocs.io)"
+source = "README.md"
 state = "present"
-valueJson = '"https://requests.readthedocs.io/en/latest/"'
+valueJson = '"https://requests.readthedocs.io"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-19T06:07:19.785207744Z"
+checkedAt = "2026-10-27T17:40:57.032611Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -77,7 +78,7 @@ state = "present"
 valueJson = '"https://github.com/psf/requests/security/advisories/new"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-19T06:07:19.785207744Z"
+checkedAt = "2026-10-27T17:40:57.032611Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -85,7 +86,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-19T06:07:19.785207744Z"
+checkedAt = "2026-10-27T17:40:57.032611Z"
 confidence = "medium"
 method = "inferred"
 reason = "from workflow fallback"
@@ -94,7 +95,7 @@ state = "present"
 valueJson = '"python -m build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-19T06:07:19.785207744Z"
+checkedAt = "2026-10-27T17:40:57.032611Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -103,7 +104,7 @@ state = "present"
 valueJson = '"A simple, yet elegant, HTTP library."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-19T06:07:19.785207744Z"
+checkedAt = "2026-10-27T17:40:57.032611Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -111,16 +112,16 @@ state = "present"
 valueJson = '"https://requests.readthedocs.io/en/latest/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-19T06:07:19.785207744Z"
+checkedAt = "2026-10-27T17:40:57.032611Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Requests"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-19T06:07:19.785207744Z"
+checkedAt = "2026-10-27T17:40:57.032611Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -133,6 +134,6 @@ archived = false
 clone_url = "https://github.com/psf/requests.git"
 default_branch = "main"
 fork = false
-head_sha = "dae7ef63b4df6eded86637f251fc4e3a06c3b479"
+head_sha = "3c7baaa05ab4aa49cc819ce3a819d260de19c157"
 html_url = "https://github.com/psf/requests"
-stars = 54326
+stars = 54728

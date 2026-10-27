@@ -4,6 +4,7 @@
 - Imported repo.build from package.json as `npm run build`.
 - Imported repo.test from package.json as `npm test`.
 - Imported repo.toolchain.min from package.json as `18` (Node.js).
+- Imported docs.root as `https://sublink.works/en/`. Explicit documentation link at README.md:27: <a href="https://sublink.works/en/"><b>Documentation</b></a>
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

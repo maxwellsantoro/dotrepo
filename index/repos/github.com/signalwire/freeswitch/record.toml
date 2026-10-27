@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/signalwire/freeswitch"
-generated_at = "2026-09-16T16:29:30.737425Z"
+generated_at = "2026-10-27T18:17:56.697499Z"
 
 [record.trust]
 confidence = "medium"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, `Freeswitch.2017.sln`, and `.github/workflows/unit-test.yml`. Inferred `repo.build` from `Freeswitch.2017.sln`. Inferred `repo.test` from `.github/workflows/unit-test.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Freeswitch.2017.sln`. Inferred `repo.build` from `Freeswitch.2017.sln`. Inferred `repo.test` from `Freeswitch.2017.sln`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "FreeSWITCH"
@@ -63,7 +63,7 @@ languages = [
     "QuickBASIC",
 ]
 build = "dotnet build"
-test = "make check"
+test = "dotnet test"
 topics = [
     "freeswitch",
     "signalwire",
@@ -80,27 +80,24 @@ topics = [
 maintainers = []
 security_contact = "security@signalwire.com"
 
-[docs]
-root = "https://freeswitch.com/#getting-started"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:29:30.737425Z"
+checkedAt = "2026-10-27T18:17:56.697499Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:29:30.737425Z"
+checkedAt = "2026-10-27T18:17:56.697499Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://freeswitch.com/#getting-started"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:29:30.737425Z"
+checkedAt = "2026-10-27T18:17:56.697499Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -109,7 +106,7 @@ state = "present"
 valueJson = '"security@signalwire.com"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:29:30.737425Z"
+checkedAt = "2026-10-27T18:17:56.697499Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -117,7 +114,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:29:30.737425Z"
+checkedAt = "2026-10-27T18:17:56.697499Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -126,7 +123,7 @@ state = "present"
 valueJson = '"dotnet build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:29:30.737425Z"
+checkedAt = "2026-10-27T18:17:56.697499Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -135,7 +132,7 @@ state = "present"
 valueJson = '"FreeSWITCH is a Software Defined Telecom Stack enabling the digital transformation from proprietary telecom switches to a versatile software implementation that runs on any commodity hardware. From a Raspberry PI to a multi-core server, FreeSWITCH can unlock the telecommunications potential of any device."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:29:30.737425Z"
+checkedAt = "2026-10-27T18:17:56.697499Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -143,28 +140,28 @@ state = "present"
 valueJson = '"https://freeswitch.com/#getting-started"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:29:30.737425Z"
+checkedAt = "2026-10-27T18:17:56.697499Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"FreeSWITCH"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:29:30.737425Z"
+checkedAt = "2026-10-27T18:17:56.697499Z"
 confidence = "medium"
 method = "inferred"
-reason = "from workflow fallback"
-source = ".github/workflows/unit-test.yml"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "Freeswitch.2017.sln"
 state = "present"
-valueJson = '"make check"'
+valueJson = '"dotnet test"'
 
 [x.github]
 archived = false
 clone_url = "https://github.com/signalwire/freeswitch.git"
 default_branch = "master"
 fork = false
-head_sha = "ce8e22828c3899587bbc21caca0e1cc7e6f120bc"
+head_sha = "9ad11881cb0255d3f0f5623d90eadf373540442a"
 html_url = "https://github.com/signalwire/freeswitch"
-stars = 5154
+stars = 5257

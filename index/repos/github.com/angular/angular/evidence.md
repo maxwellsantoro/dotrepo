@@ -4,6 +4,7 @@
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
 - Imported repo.build from package.json as `pnpm build`.
 - Imported repo.test from package.json as `pnpm test`.
+- Imported docs.getting_started as `https://angular.dev/tutorials/learn-angular`. Explicit documentation link at README.md:38: - [Getting Started][quickstart]
 - Discovered related relation to github.com/angular/angular from package.json repository.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

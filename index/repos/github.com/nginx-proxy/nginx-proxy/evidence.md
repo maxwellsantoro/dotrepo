@@ -1,6 +1,6 @@
 # Evidence
 
-- Imported repository name and docs entry points from README.md.
+- Imported repository name from README.md.
 - Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.
 - Imported repo.test from Makefile as `make test`.
 - This is an overlay record, not a maintainer-controlled canonical record.

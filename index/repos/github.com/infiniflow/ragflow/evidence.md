@@ -1,13 +1,16 @@
 # Evidence
 
-- Imported repository name and docs entry points from README.md.
-- Imported SECURITY.md, but no explicit contact channel was parsed, so security_contact = "unknown" is intentional.
-- Imported repo.build from web/package.json as `npm run build`.
-- Imported repo.test from web/package.json as `npm test`.
+- Imported repository name from README.md.
+- Ignored component-scoped commands from `web/package.json` as repository defaults.
+- Inferred repo.build from go.mod as `go build ./...`.
+- Left `repo.test` unset because `pyproject.toml` and `go.mod` suggested conflicting test commands.
 - Imported repo.toolchain.min from pyproject.toml as `3.13` (Python).
+- Conflicting documentation declarations in README.md; abstained from docs.root.
+- Conflicting documentation declarations in README.md; abstained from docs.getting_started.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.name` to `ragflow` from `GitHub API` after deterministic escalation.
+- Left `repo.test` unset after deterministic escalation: no unique build/test candidate after deterministic tier walk. Preserved 2 candidate command(s) in `repo.test_candidates` instead of discarding them.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
@@ -15,14 +18,3 @@
 - Augmented repo.topics from GitHub repository metadata.
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
-
-## Auto-promotion
-
-All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
-
-## Command semantic correction (2026-10-03)
-
-2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged.
-
-- Withheld `repo.build` previously extracted from `web/package.json` as `npm run build`. Component command lacks repository-default scope and working directory.
-- Withheld `repo.test` previously extracted from `web/package.json` as `npm test`. Component command lacks repository-default scope and working directory.

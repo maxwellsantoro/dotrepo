@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/browser-use/browser-use"
-generated_at = "2026-09-17T06:09:21.354384829Z"
+generated_at = "2026-10-27T17:34:57.419145Z"
 
 [record.trust]
 confidence = "medium"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`, `.github/SECURITY.md`, `.github/workflow
 
 [repo]
 name = "browser-use"
-description = "Agents that use the browser."
+description = "Open-source Python library for AI browser agents, plus Browser Use Cloud: stealth browsers and a hosted agent API."
 homepage = "https://browser-use.com"
 license = "MIT"
 visibility = "public"
@@ -36,6 +36,16 @@ topics = [
     "python",
     "browser-use",
     "playwright",
+    "browser-agent",
+    "cdp",
+    "cloud-browser",
+    "computer-use",
+    "headless-browser",
+    "mcp",
+    "remote-browser",
+    "stealth-browser",
+    "web-automation",
+    "web-scraping",
 ]
 
 [repo.toolchain]
@@ -47,8 +57,7 @@ maintainers = []
 security_contact = "https://github.com/browser-use/browser-use/security/advisories/new"
 
 [docs]
-root = "https://browser-use.com"
-getting_started = "https://docs.browser-use.com/cloud/agent/quickstart"
+getting_started = "examples/integrations/toolsets-for-claude"
 
 [relations]
 references = []
@@ -66,23 +75,24 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-17T06:09:21.354384829Z"
+checkedAt = "2026-10-27T17:34:57.419145Z"
 confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:219: [Quickstart ↗](examples/integrations/toolsets-for-claude) · [Integration docs ↗](https://docs.browser-use.com/open-source/customize/integrations/toolsets-for-claude)"
+source = "README.md"
 state = "present"
-valueJson = '"https://docs.browser-use.com/cloud/agent/quickstart"'
+valueJson = '"examples/integrations/toolsets-for-claude"'
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-17T06:09:21.354384829Z"
+checkedAt = "2026-10-27T17:34:57.419145Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://browser-use.com"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-17T06:09:21.354384829Z"
+checkedAt = "2026-10-27T17:34:57.419145Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -91,7 +101,7 @@ state = "present"
 valueJson = '"https://github.com/browser-use/browser-use/security/advisories/new"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-17T06:09:21.354384829Z"
+checkedAt = "2026-10-27T17:34:57.419145Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -99,7 +109,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-17T06:09:21.354384829Z"
+checkedAt = "2026-10-27T17:34:57.419145Z"
 confidence = "medium"
 method = "inferred"
 reason = "from workflow fallback"
@@ -108,16 +118,16 @@ state = "present"
 valueJson = '"python -m build --wheel"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-17T06:09:21.354384829Z"
+checkedAt = "2026-10-27T17:34:57.419145Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
 source = "GitHub API"
 state = "present"
-valueJson = '"Agents that use the browser."'
+valueJson = '"Open-source Python library for AI browser agents, plus Browser Use Cloud: stealth browsers and a hosted agent API."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-17T06:09:21.354384829Z"
+checkedAt = "2026-10-27T17:34:57.419145Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -125,16 +135,16 @@ state = "present"
 valueJson = '"https://browser-use.com"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-17T06:09:21.354384829Z"
+checkedAt = "2026-10-27T17:34:57.419145Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"browser-use"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-17T06:09:21.354384829Z"
+checkedAt = "2026-10-27T17:34:57.419145Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -147,6 +157,6 @@ archived = false
 clone_url = "https://github.com/browser-use/browser-use.git"
 default_branch = "main"
 fork = false
-head_sha = "d8110c5ff87ccba887aaa726cdb780f2f84bef8d"
+head_sha = "2cc71890e65056b67fdb29d98bb407749c15bb08"
 html_url = "https://github.com/browser-use/browser-use"
-stars = 114872
+stars = 119294

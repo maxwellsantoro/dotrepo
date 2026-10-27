@@ -2,7 +2,8 @@
 
 - Imported repository name from README.md.
 - Imported the security reporting channel from SECURITY.md.
-- Imported repo.build from ui/packages/api-client/package.json as `npm run build`.
+- Ignored component-scoped commands from `ui/packages/api-client/package.json` as repository defaults.
+- Inferred repo.build from build.gradle as `./gradlew build`.
 - Inferred repo.test from build.gradle as `./gradlew test`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
@@ -14,9 +15,3 @@
 - Augmented repo.topics from GitHub repository metadata.
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
-
-## Command semantic correction (2026-10-03)
-
-2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged.
-
-- Withheld `repo.build` previously extracted from `ui/packages/api-client/package.json` as `npm run build`. Component command lacks repository-default scope and working directory.

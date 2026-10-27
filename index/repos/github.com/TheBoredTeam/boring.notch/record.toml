@@ -2,14 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/TheBoredTeam/boring.notch"
-generated_at = "2026-10-04T07:51:27.732259794Z"
+generated_at = "2026-10-27T17:51:31.483303Z"
 
 [record.trust]
-confidence = "medium"
-provenance = ["imported"]
-notes = "Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Boring Notch"
@@ -24,20 +27,14 @@ languages = [
     "Python",
     "Metal",
 ]
-topics = [
-    "boring",
-    "boringname",
-]
+topics = []
 
 [owners]
 maintainers = []
 security_contact = "https://github.com/TheBoredTeam/boring.notch/security/advisories/new"
 
-[docs]
-root = "https://theboring.name/"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-04T07:51:27.732259794Z"
+checkedAt = "2026-10-27T17:51:31.483303Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -45,15 +42,15 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-04T07:51:27.732259794Z"
-confidence = "medium"
-method = "unspecified"
-reason = "documentation target present without a retained source declaration"
-state = "present"
-valueJson = '"https://theboring.name/"'
+checkedAt = "2026-10-27T17:51:31.483303Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-04T07:51:27.732259794Z"
+checkedAt = "2026-10-27T17:51:31.483303Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -62,7 +59,7 @@ state = "present"
 valueJson = '"https://github.com/TheBoredTeam/boring.notch/security/advisories/new"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-04T07:51:27.732259794Z"
+checkedAt = "2026-10-27T17:51:31.483303Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -70,7 +67,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-04T07:51:27.732259794Z"
+checkedAt = "2026-10-27T17:51:31.483303Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -78,7 +75,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-04T07:51:27.732259794Z"
+checkedAt = "2026-10-27T17:51:31.483303Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -87,7 +84,7 @@ state = "present"
 valueJson = '"TheBoringNotch: Not so boring notch That Rocks 🎸🎶"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-04T07:51:27.732259794Z"
+checkedAt = "2026-10-27T17:51:31.483303Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -95,7 +92,7 @@ state = "present"
 valueJson = '"https://theboring.name/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-04T07:51:27.732259794Z"
+checkedAt = "2026-10-27T17:51:31.483303Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -104,7 +101,7 @@ state = "present"
 valueJson = '"Boring Notch"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-04T07:51:27.732259794Z"
+checkedAt = "2026-10-27T17:51:31.483303Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -116,6 +113,6 @@ archived = false
 clone_url = "https://github.com/TheBoredTeam/boring.notch.git"
 default_branch = "main"
 fork = false
-head_sha = "e2654ee41b0b9aee72c5a8113a11ab855896d6e6"
+head_sha = "23e7705a4ffcb5d97a54fb1d4135e180084a566d"
 html_url = "https://github.com/TheBoredTeam/boring.notch"
-stars = 10942
+stars = 11163

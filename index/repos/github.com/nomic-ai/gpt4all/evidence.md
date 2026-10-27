@@ -1,7 +1,8 @@
 # Evidence
 
-- Imported repository name and docs entry points from README.md.
-- Inferred repo.test from gpt4all-chat/pyproject.toml as `python -m pytest`.
+- Imported repository name from README.md.
+- Ignored component-scoped commands from `gpt4all-chat/pyproject.toml` as repository defaults.
+- Ignored component-scoped commands from `gpt4all-bindings/python/setup.py` as repository defaults.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
@@ -11,12 +12,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Fresh verification
+## Auto-promotion
 
-Prior verified authority was not inherited: this refresh must qualify using its current field scores.
-
-## Command semantic correction (2026-10-03)
-
-2026-10-03 semantic audit withheld repo.test pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged.
-
-- Withheld `repo.test` previously extracted from `gpt4all-chat/pyproject.toml` as `python -m pytest`. Component command lacks repository-default scope and working directory.
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

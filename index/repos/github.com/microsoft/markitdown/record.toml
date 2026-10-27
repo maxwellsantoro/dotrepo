@@ -2,17 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/microsoft/markitdown"
-generated_at = "2026-09-16T16:34:58.031987Z"
+generated_at = "2026-10-27T17:28:11.956993Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
-    "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, `packages/markitdown-mcp/pyproject.toml`, and `.github/workflows/tests.yml`. Inferred `repo.build` from `packages/markitdown-mcp/pyproject.toml`. Inferred `repo.test` from `.github/workflows/tests.yml`. Imported `repo.toolchain.min` from `packages/markitdown-mcp/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. 2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `packages/markitdown-mcp/pyproject.toml`. Ignored component-scoped commands from `packages/markitdown-mcp/pyproject.toml` as repository defaults. Imported `repo.toolchain.min` from `packages/markitdown-mcp/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "MarkItDown"
@@ -24,7 +24,6 @@ languages = [
     "Python",
     "Dockerfile",
 ]
-test = "pip install ./packages/markitdown ./packages/markitdown-ocr pytest"
 topics = [
     "langchain",
     "openai",
@@ -59,23 +58,23 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:34:58.031987Z"
+checkedAt = "2026-10-27T17:28:11.956993Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:34:58.031987Z"
+checkedAt = "2026-10-27T17:28:11.956993Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:34:58.031987Z"
+checkedAt = "2026-10-27T17:28:11.956993Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -84,7 +83,7 @@ state = "present"
 valueJson = '"secure@microsoft.com"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:34:58.031987Z"
+checkedAt = "2026-10-27T17:28:11.956993Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -92,16 +91,15 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:34:58.031987Z"
-confidence = "low"
-method = "inferred"
-reason = "Component command lacks repository-default scope and working directory."
-source = "packages/markitdown-mcp/pyproject.toml"
-state = "unresolved"
+checkedAt = "2026-10-27T17:28:11.956993Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no build command sources found"
+state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:34:58.031987Z"
+checkedAt = "2026-10-27T17:28:11.956993Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -110,7 +108,7 @@ state = "present"
 valueJson = '"Python tool for converting files and office documents to Markdown."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:34:58.031987Z"
+checkedAt = "2026-10-27T17:28:11.956993Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -118,28 +116,27 @@ state = "present"
 valueJson = '"https://github.com/microsoft/markitdown"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:34:58.031987Z"
+checkedAt = "2026-10-27T17:28:11.956993Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"MarkItDown"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:34:58.031987Z"
-confidence = "medium"
-method = "inferred"
-reason = "from workflow fallback"
-source = ".github/workflows/tests.yml"
-state = "present"
-valueJson = '"pip install ./packages/markitdown ./packages/markitdown-ocr pytest"'
+checkedAt = "2026-10-27T17:28:11.956993Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no test command sources found"
+state = "not_found"
+valueJson = "null"
 
 [x.github]
 archived = false
 clone_url = "https://github.com/microsoft/markitdown.git"
 default_branch = "main"
 fork = false
-head_sha = "eb31b5c9453628def5e6758a27a8e3a87b4ab101"
+head_sha = "7482c092d9c0074a89803c9fdb63a969e7fe17fc"
 html_url = "https://github.com/microsoft/markitdown"
-stars = 184736
+stars = 192523

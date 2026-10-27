@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/langflow-ai/langflow"
-generated_at = "2026-09-21T04:36:55.205964Z"
+generated_at = "2026-10-27T17:45:42.522881Z"
 
 [record.trust]
 confidence = "medium"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, `docs/package.json`, `.github/workflows/ci.yml`, and `pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `docs/package.json`. Inferred `repo.test` from `.github/workflows/ci.yml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. 2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, `Makefile`, `.github/workflows/ci.yml`, and `pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Ignored component-scoped commands from `docs/package.json` as repository defaults. Imported `repo.build` from `Makefile`. Inferred `repo.test` from `.github/workflows/ci.yml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
 
 [repo]
 name = "langflow"
@@ -33,6 +33,7 @@ languages = [
     "HTML",
     "Mako",
 ]
+build = "make build"
 test = "uv run pytest src/backend/tests/unit/template/test_starter_projects.py -v -n auto"
 topics = [
     "react-flow",
@@ -51,30 +52,24 @@ ecosystem = "Python"
 maintainers = []
 security_contact = "https://hackerone.com/ibm"
 
-[docs]
-root = "http://www.langflow.org"
-getting_started = "https://docs.langflow.org/get-started-installation#install-and-run-the-langflow-oss-python-package"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-21T04:36:55.205964Z"
+checkedAt = "2026-10-27T17:45:42.522881Z"
 confidence = "high"
-method = "extracted"
-reason = "uv package-manager installation is not Langflow installation documentation; inspected README.md:50 at commit 5621dcfd84e11108e4cc1ecb0c51f41053c4211c"
-source = "README.md"
-state = "present"
-valueJson = "\"https://docs.langflow.org/get-started-installation#install-and-run-the-langflow-oss-python-package\""
-rejectedValueJson = "\"https://docs.astral.sh/uv/getting-started/installation/\""
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-17T06:10:25.469535256Z"
+checkedAt = "2026-10-27T17:45:42.522881Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"http://www.langflow.org"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-17T06:10:25.469535256Z"
+checkedAt = "2026-10-27T17:45:42.522881Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -83,7 +78,7 @@ state = "present"
 valueJson = '"https://hackerone.com/ibm"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-17T06:10:25.469535256Z"
+checkedAt = "2026-10-27T17:45:42.522881Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -91,16 +86,16 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-17T06:10:25.469535256Z"
-confidence = "low"
+checkedAt = "2026-10-27T17:45:42.522881Z"
+confidence = "high"
 method = "extracted"
-reason = "Component command lacks repository-default scope and working directory."
-source = "docs/package.json"
-state = "unresolved"
-valueJson = "null"
+reason = "from declared repository source"
+source = "Makefile"
+state = "present"
+valueJson = '"make build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-17T06:10:25.469535256Z"
+checkedAt = "2026-10-27T17:45:42.522881Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -109,7 +104,7 @@ state = "present"
 valueJson = '"Langflow is a powerful tool for building and deploying AI-powered agents and workflows."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-17T06:10:25.469535256Z"
+checkedAt = "2026-10-27T17:45:42.522881Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -117,16 +112,16 @@ state = "present"
 valueJson = '"http://www.langflow.org"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-17T06:10:25.469535256Z"
+checkedAt = "2026-10-27T17:45:42.522881Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"langflow"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-17T06:10:25.469535256Z"
+checkedAt = "2026-10-27T17:45:42.522881Z"
 confidence = "medium"
 method = "inferred"
 reason = "from workflow fallback"
@@ -139,6 +134,6 @@ archived = false
 clone_url = "https://github.com/langflow-ai/langflow.git"
 default_branch = "main"
 fork = false
-head_sha = "5621dcfd84e11108e4cc1ecb0c51f41053c4211c"
+head_sha = "aeb10d96bb2ea797696613af931e91ddf51f3320"
 html_url = "https://github.com/langflow-ai/langflow"
-stars = 154906
+stars = 156066

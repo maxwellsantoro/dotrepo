@@ -6,6 +6,8 @@
 - Imported repo.build from Makefile as `make build`.
 - Imported repo.test from Makefile as `make test`.
 - Imported repo.toolchain.min from Cargo.toml as `1.95` (Rust).
+- Imported docs.root as `https://vector.dev/docs`. Explicit documentation link at README.md:63: All user documentation is available at **[vector.dev/docs](https://vector.dev/docs)**.
+- Imported docs.getting_started as `https://vector.dev/docs/setup/quickstart/`. Explicit documentation link at README.md:11: <a href="https://vector.dev/docs/setup/quickstart/">Quickstart</a>&nbsp;&nbsp;&bull;&nbsp;&nbsp;
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

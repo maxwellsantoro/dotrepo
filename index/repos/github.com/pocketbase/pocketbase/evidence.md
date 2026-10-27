@@ -3,7 +3,7 @@
 - Imported repository name from README.md.
 - Imported SECURITY.md, but no explicit contact channel was parsed, so security_contact = "unknown" is intentional.
 - Inferred repo.build from go.mod as `go build ./...`.
-- Imported repo.test from README.md as `go test ./...`.
+- Imported repo.test from CONTRIBUTING.md as `go test ./...`.
 - Imported repo.toolchain.min from go.mod as `1.27` (Go).
 - Discovered related relation to github.com/pocketbase/js-sdk from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.

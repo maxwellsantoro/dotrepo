@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/tpn/pdfs"
-generated_at = "2026-09-16T16:30:14.741432Z"
+generated_at = "2026-10-27T18:19:38.476773Z"
 
 [record.trust]
 confidence = "high"
@@ -35,27 +35,24 @@ topics = [
     "technical-documentation",
 ]
 
-[docs]
-root = "https://tpn.github.io/pdfs/"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:30:14.741432Z"
+checkedAt = "2026-10-27T18:19:38.476773Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:30:14.741432Z"
+checkedAt = "2026-10-27T18:19:38.476773Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://tpn.github.io/pdfs/"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:30:14.741432Z"
+checkedAt = "2026-10-27T18:19:38.476773Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -63,7 +60,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:30:14.741432Z"
+checkedAt = "2026-10-27T18:19:38.476773Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -71,7 +68,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:30:14.741432Z"
+checkedAt = "2026-10-27T18:19:38.476773Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -79,7 +76,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:30:14.741432Z"
+checkedAt = "2026-10-27T18:19:38.476773Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -88,7 +85,7 @@ state = "present"
 valueJson = '"Technically-oriented PDF Collection (Papers, Specs, Decks, Manuals, etc) — browse & search it at tpn.github.io/pdfs"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:30:14.741432Z"
+checkedAt = "2026-10-27T18:19:38.476773Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -96,16 +93,16 @@ state = "present"
 valueJson = '"https://tpn.github.io/pdfs/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:30:14.741432Z"
+checkedAt = "2026-10-27T18:19:38.476773Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Browse the collection: tpn.github.io/pdfs"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:30:14.741432Z"
+checkedAt = "2026-10-27T18:19:38.476773Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -117,6 +114,6 @@ archived = false
 clone_url = "https://github.com/tpn/pdfs.git"
 default_branch = "master"
 fork = false
-head_sha = "e2a95b25cb2fd3cc27d8f676e5360fa04f9ded7a"
+head_sha = "a0eca7a2d92cd21a5fc8e8dcdb7653153e6c55a8"
 html_url = "https://github.com/tpn/pdfs"
-stars = 10150
+stars = 10220

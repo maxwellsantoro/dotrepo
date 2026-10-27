@@ -1,6 +1,6 @@
 # Evidence
 
-- Imported repository name and docs entry points from README.md.
+- Imported repository name from README.md.
 - Imported maintainer candidates from CODEOWNERS.
 - Imported the security reporting channel from SECURITY.md.
 - Imported repo.build from README.md as `make all`.

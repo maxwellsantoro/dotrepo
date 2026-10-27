@@ -2,16 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/Notifuse/notifuse"
-generated_at = "2026-09-18T06:02:55.037650524Z"
+generated_at = "2026-10-27T17:36:48.878517Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, `console/package.json`, and `go.mod`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `console/package.json`. Imported `repo.test` from `console/package.json`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. 2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, `Makefile`, and `go.mod`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Ignored component-scoped commands from `console/package.json` as repository defaults. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Notifuse"
@@ -29,6 +30,8 @@ languages = [
     "Makefile",
     "Dockerfile",
 ]
+build = "make build"
+test = "make test-unit"
 topics = [
     "mailing-list",
     "newsletter",
@@ -53,15 +56,12 @@ topics = [
 ]
 
 [repo.toolchain]
-min = "1.25.4"
+min = "1.26.10"
 ecosystem = "Go"
 
 [owners]
 maintainers = []
 security_contact = "https://github.com/Notifuse/notifuse/security/advisories/new"
-
-[docs]
-root = "https://www.notifuse.com"
 
 [relations]
 references = []
@@ -79,23 +79,23 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-18T06:02:55.037650524Z"
+checkedAt = "2026-10-27T17:36:48.878517Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-18T06:02:55.037650524Z"
+checkedAt = "2026-10-27T17:36:48.878517Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://www.notifuse.com"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-18T06:02:55.037650524Z"
+checkedAt = "2026-10-27T17:36:48.878517Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -104,7 +104,7 @@ state = "present"
 valueJson = '"https://github.com/Notifuse/notifuse/security/advisories/new"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-18T06:02:55.037650524Z"
+checkedAt = "2026-10-27T17:36:48.878517Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -112,16 +112,16 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-18T06:02:55.037650524Z"
-confidence = "low"
+checkedAt = "2026-10-27T17:36:48.878517Z"
+confidence = "high"
 method = "extracted"
-reason = "Component command lacks repository-default scope and working directory."
-source = "console/package.json"
-state = "unresolved"
-valueJson = "null"
+reason = "from declared repository source"
+source = "Makefile"
+state = "present"
+valueJson = '"make build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-18T06:02:55.037650524Z"
+checkedAt = "2026-10-27T17:36:48.878517Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -130,7 +130,7 @@ state = "present"
 valueJson = '"Open-source, self-hosted newsletter, email marketing and transactional email platform. Visual MJML editor, Liquid templating, 7 sending providers."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-18T06:02:55.037650524Z"
+checkedAt = "2026-10-27T17:36:48.878517Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -138,28 +138,28 @@ state = "present"
 valueJson = '"https://www.notifuse.com"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-18T06:02:55.037650524Z"
+checkedAt = "2026-10-27T17:36:48.878517Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Notifuse"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-18T06:02:55.037650524Z"
-confidence = "low"
+checkedAt = "2026-10-27T17:36:48.878517Z"
+confidence = "high"
 method = "extracted"
-reason = "Component command lacks repository-default scope and working directory."
-source = "console/package.json"
-state = "unresolved"
-valueJson = "null"
+reason = "from declared repository source"
+source = "Makefile"
+state = "present"
+valueJson = '"make test-unit"'
 
 [x.github]
 archived = false
 clone_url = "https://github.com/Notifuse/notifuse.git"
 default_branch = "main"
 fork = false
-head_sha = "7516397cc5c1eadc2a6aa67c733261043a630a62"
+head_sha = "225b0a76c8ed10f3f7bc44bd85dba7f77fcc7d7e"
 html_url = "https://github.com/Notifuse/notifuse"
-stars = 2204
+stars = 2264

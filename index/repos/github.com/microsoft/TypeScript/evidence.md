@@ -1,10 +1,11 @@
 # Evidence
 
-- Imported repository name from README.md.
+- Imported repository name and docs entry points from README.md.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
 - Imported repo.build from package.json as `npm run build`.
 - Imported repo.test from package.json as `npm test`.
 - Imported repo.toolchain.min from package.json as `22.18` (Node.js).
+- Imported docs.root as `https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html`. Explicit documentation link at README.md:44: *  [TypeScript in 5 minutes](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
 - Discovered related relation to github.com/microsoft/TypeScript from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

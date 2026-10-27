@@ -1,12 +1,12 @@
 # Evidence
 
-- Imported repository docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from CODEOWNERS; `owners.team` is `@toeverything/blocksuite-core` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates.
 - Imported the security reporting channel from SECURITY.md.
 - Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.
 - Imported repo.build from package.json as `yarn build`.
 - Imported repo.test from package.json as `yarn test`.
 - Imported repo.toolchain.min from package.json as `22.12.0` (Node.js).
+- Conflicting documentation declarations in README.md; abstained from docs.root.
 - Discovered related relation to github.com/toeverything/AFFiNE from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
@@ -17,6 +17,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Auto-promotion
+## Fresh verification
 
-All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
+Prior verified authority was not inherited: this refresh must qualify using its current field scores.

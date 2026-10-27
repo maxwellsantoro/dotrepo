@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/gitkraken/vscode-gitlens"
-generated_at = "2026-09-16T16:23:43.368254Z"
+generated_at = "2026-10-27T18:01:54.866128Z"
 
 [record.trust]
 confidence = "high"
@@ -45,10 +45,6 @@ topics = [
 min = "24"
 ecosystem = "Node.js"
 
-[docs]
-root = "http://gitkraken.com/gitlens"
-getting_started = "https://gitkraken.dev/register?product=gitlens&source=marketing_page&redirect_uri=vscode%3A%2F%2Feamodio.gitlens%2Flogin&flow=gitlens_web&utm_source=gitlens-extension&utm_medium=readme&utm_content=getting-started"
-
 [relations]
 references = []
 
@@ -65,23 +61,23 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:23:43.368254Z"
+checkedAt = "2026-10-27T18:01:54.866128Z"
 confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
-state = "present"
-valueJson = '"https://gitkraken.dev/register?product=gitlens&source=marketing_page&redirect_uri=vscode%3A%2F%2Feamodio.gitlens%2Flogin&flow=gitlens_web&utm_source=gitlens-extension&utm_medium=readme&utm_content=getting-started"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:23:43.368254Z"
+checkedAt = "2026-10-27T18:01:54.866128Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"http://gitkraken.com/gitlens"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:23:43.368254Z"
+checkedAt = "2026-10-27T18:01:54.866128Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -89,7 +85,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:23:43.368254Z"
+checkedAt = "2026-10-27T18:01:54.866128Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -97,7 +93,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:23:43.368254Z"
+checkedAt = "2026-10-27T18:01:54.866128Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -106,7 +102,7 @@ state = "present"
 valueJson = '"pnpm build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:23:43.368254Z"
+checkedAt = "2026-10-27T18:01:54.866128Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -115,7 +111,7 @@ state = "present"
 valueJson = '"Supercharge Git inside VS Code and unlock untapped knowledge within each repository — Visualize code authorship at a glance via Git blame annotations and CodeLens, seamlessly navigate and explore Git repositories, gain valuable insights via rich visualizations and powerful comparison commands, and so much more"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:23:43.368254Z"
+checkedAt = "2026-10-27T18:01:54.866128Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -123,16 +119,16 @@ state = "present"
 valueJson = '"http://gitkraken.com/gitlens"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:23:43.368254Z"
+checkedAt = "2026-10-27T18:01:54.866128Z"
 confidence = "high"
 method = "inferred"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"vscode-gitlens"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:23:43.368254Z"
+checkedAt = "2026-10-27T18:01:54.866128Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -145,6 +141,6 @@ archived = false
 clone_url = "https://github.com/gitkraken/vscode-gitlens.git"
 default_branch = "main"
 fork = false
-head_sha = "d9de42de962a526cc1c41f673f1180f38a456458"
+head_sha = "c1f6e5f3c3097bbc03a250050b1f7009411d9d56"
 html_url = "https://github.com/gitkraken/vscode-gitlens"
-stars = 9929
+stars = 9958

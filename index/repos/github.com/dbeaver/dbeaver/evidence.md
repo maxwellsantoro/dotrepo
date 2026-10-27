@@ -1,9 +1,10 @@
 # Evidence
 
-- Imported repository name from README.md.
+- Imported repository name and docs entry points from README.md.
 - Imported the security reporting channel from SECURITY.md.
 - Inferred repo.build from pom.xml as `mvn package`.
 - Inferred repo.test from pom.xml as `mvn test`.
+- Imported docs.root as `https://dbeaver.com/docs/dbeaver/`. Explicit documentation link at README.md:35: * [Full product documentation](https://dbeaver.com/docs/dbeaver/)
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

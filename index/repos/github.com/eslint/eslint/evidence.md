@@ -1,9 +1,10 @@
 # Evidence
 
-- Imported repository name and docs entry points from README.md.
+- Imported repository name from README.md.
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@eslint/eslint-team` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates.
 - Imported repo.test from package.json as `npm test`.
 - Imported repo.toolchain.min from package.json as `20.19.0` (Node.js).
+- Conflicting documentation declarations in README.md; abstained from docs.root.
 - Discovered related relation to github.com/eslint/eslint from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
@@ -16,6 +17,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Auto-promotion
+## Fresh verification
 
-All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
+Prior verified authority was not inherited: this refresh must qualify using its current field scores.

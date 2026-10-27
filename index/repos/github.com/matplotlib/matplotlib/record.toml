@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/matplotlib/matplotlib"
-generated_at = "2026-09-17T06:10:34.473243491Z"
+generated_at = "2026-10-27T17:35:52.591068Z"
 
 [record.trust]
 confidence = "medium"
@@ -55,9 +55,6 @@ ecosystem = "Python"
 maintainers = []
 security_contact = "https://tidelift.com/security"
 
-[docs]
-root = "https://matplotlib.org/stable/"
-
 [relations]
 references = []
 
@@ -74,23 +71,23 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-17T06:10:34.473243491Z"
+checkedAt = "2026-10-27T17:35:52.591068Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-17T06:10:34.473243491Z"
+checkedAt = "2026-10-27T17:35:52.591068Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://matplotlib.org/stable/"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-17T06:10:34.473243491Z"
+checkedAt = "2026-10-27T17:35:52.591068Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -99,7 +96,7 @@ state = "present"
 valueJson = '"https://tidelift.com/security"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-17T06:10:34.473243491Z"
+checkedAt = "2026-10-27T17:35:52.591068Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -107,7 +104,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-17T06:10:34.473243491Z"
+checkedAt = "2026-10-27T17:35:52.591068Z"
 confidence = "medium"
 method = "inferred"
 reason = "from workflow fallback"
@@ -116,7 +113,7 @@ state = "present"
 valueJson = '"python -m build --sdist"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-17T06:10:34.473243491Z"
+checkedAt = "2026-10-27T17:35:52.591068Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -125,7 +122,7 @@ state = "present"
 valueJson = '"matplotlib: plotting with Python"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-17T06:10:34.473243491Z"
+checkedAt = "2026-10-27T17:35:52.591068Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -133,16 +130,16 @@ state = "present"
 valueJson = '"https://matplotlib.org/stable/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-17T06:10:34.473243491Z"
+checkedAt = "2026-10-27T17:35:52.591068Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"matplotlib"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-17T06:10:34.473243491Z"
+checkedAt = "2026-10-27T17:35:52.591068Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -155,6 +152,6 @@ archived = false
 clone_url = "https://github.com/matplotlib/matplotlib.git"
 default_branch = "main"
 fork = false
-head_sha = "cfa473e42fa41572d9acbd8d6b7be6f1489dee46"
+head_sha = "39b27ddaafe636f06776a2044b5df05d07648dc4"
 html_url = "https://github.com/matplotlib/matplotlib"
-stars = 23220
+stars = 23395

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/kortix-ai/suna"
-generated_at = "2026-09-16T16:25:54.40472Z"
+generated_at = "2026-10-27T16:55:36.842277Z"
 
 [record.trust]
 confidence = "high"
@@ -12,29 +12,32 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Ignored component-scoped commands from `apps/capture/Cargo.toml` as repository defaults. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "suna"
-description = "The open-source AI Management System"
+description = "The open-source AI Operating System"
 homepage = "https://www.kortix.com"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
     "TypeScript",
+    "Rust",
     "MDX",
     "JavaScript",
-    "Shell",
     "PLpgSQL",
-    "HCL",
     "Python",
+    "Shell",
+    "HCL",
     "CSS",
-    "Dockerfile",
-    "HTML",
-    "Go",
-    "Kotlin",
-    "Ruby",
+    "PowerShell",
     "Swift",
+    "HTML",
+    "Dockerfile",
+    "Go",
+    "Ruby",
+    "Kotlin",
+    "C++",
     "Elixir",
     "C",
 ]
@@ -44,40 +47,47 @@ topics = [
     "ai",
     "ai-agents",
     "llm",
+    "ai-operating-system",
+    "ai-os",
+    "open-source",
+    "self-hosted",
 ]
 
 [owners]
 maintainers = ["@markokraemer"]
+security_contact = "https://github.com/kortix-ai/suna/security/advisories/new"
 
 [docs]
 root = "https://kortix.com/docs"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:25:54.40472Z"
+checkedAt = "2026-10-27T16:55:36.842277Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:25:54.40472Z"
+checkedAt = "2026-10-27T16:55:36.842277Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:16: [![Docs](https://img.shields.io/badge/Docs-kortix.com%2Fdocs-111111.svg)](https://kortix.com/docs)"
+source = "README.md"
 state = "present"
 valueJson = '"https://kortix.com/docs"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:25:54.40472Z"
+checkedAt = "2026-10-27T16:55:36.842277Z"
 confidence = "high"
-method = "not_found_in_inspected_sources"
-reason = "no SECURITY.md or security contact sources found"
-state = "not_found"
-valueJson = "null"
+method = "extracted"
+reason = "actionable security reporting URL"
+source = "SECURITY.md"
+state = "present"
+valueJson = '"https://github.com/kortix-ai/suna/security/advisories/new"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:25:54.40472Z"
+checkedAt = "2026-10-27T16:55:36.842277Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -85,7 +95,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:25:54.40472Z"
+checkedAt = "2026-10-27T16:55:36.842277Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -94,16 +104,16 @@ state = "present"
 valueJson = '"pnpm build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:25:54.40472Z"
+checkedAt = "2026-10-27T16:55:36.842277Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
 source = "GitHub API"
 state = "present"
-valueJson = '"The open-source AI Management System"'
+valueJson = '"The open-source AI Operating System"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:25:54.40472Z"
+checkedAt = "2026-10-27T16:55:36.842277Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -111,16 +121,16 @@ state = "present"
 valueJson = '"https://www.kortix.com"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:25:54.40472Z"
+checkedAt = "2026-10-27T16:55:36.842277Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"suna"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:25:54.40472Z"
+checkedAt = "2026-10-27T16:55:36.842277Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -131,8 +141,8 @@ valueJson = '"pnpm test"'
 [x.github]
 archived = false
 clone_url = "https://github.com/kortix-ai/suna.git"
-default_branch = "main"
+default_branch = "dev"
 fork = false
-head_sha = "fd612fe8b7214593d9bab3227ff9499e2c41de26"
+head_sha = "219b33a0e7de87467cd35ac4f266f3eeaebf2db9"
 html_url = "https://github.com/kortix-ai/suna"
-stars = 20210
+stars = 20320

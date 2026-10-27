@@ -7,6 +7,7 @@
 - Imported repo.build from package.json as `yarn build`.
 - Imported repo.test from package.json as `yarn test`.
 - Imported repo.toolchain.min from package.json as `24.15.0` (Node.js).
+- Imported docs.root as `https://on.cypress.io`. Explicit documentation link at README.md:11: <a href="https://on.cypress.io">Documentation</a> |
 - Discovered related relation to github.com/cypress-io/cypress from package.json repository.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

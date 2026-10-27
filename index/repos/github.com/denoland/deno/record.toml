@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/denoland/deno"
-generated_at = "2026-09-18T06:03:05.696372042Z"
+generated_at = "2026-10-27T18:24:35.843121Z"
 
 [record.trust]
 confidence = "high"
@@ -40,8 +40,8 @@ languages = [
     "Vento",
     "Nunjucks",
 ]
-build = "cargo build -vv"
-test = "cargo test -vv"
+build = "cargo build --features hmr"
+test = "cargo test --features hmr integration::node_unit_tests::os_test"
 topics = [
     "deno",
     "typescript",
@@ -53,28 +53,24 @@ topics = [
 maintainers = []
 security_contact = "https://github.com/denoland/deno/security/advisories/new"
 
-[docs]
-root = "https://deno.com"
-getting_started = "https://docs.deno.com/runtime/manual/getting_started/installation"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-18T06:03:05.696372042Z"
+checkedAt = "2026-10-27T18:24:35.843121Z"
 confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
-state = "present"
-valueJson = '"https://docs.deno.com/runtime/manual/getting_started/installation"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-18T06:03:05.696372042Z"
+checkedAt = "2026-10-27T18:24:35.843121Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://deno.com"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-18T06:03:05.696372042Z"
+checkedAt = "2026-10-27T18:24:35.843121Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -83,7 +79,7 @@ state = "present"
 valueJson = '"https://github.com/denoland/deno/security/advisories/new"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-18T06:03:05.696372042Z"
+checkedAt = "2026-10-27T18:24:35.843121Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -91,16 +87,16 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-18T06:03:05.696372042Z"
+checkedAt = "2026-10-27T18:24:35.843121Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
 source = ".github/CONTRIBUTING.md"
 state = "present"
-valueJson = '"cargo build -vv"'
+valueJson = '"cargo build --features hmr"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-18T06:03:05.696372042Z"
+checkedAt = "2026-10-27T18:24:35.843121Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -109,7 +105,7 @@ state = "present"
 valueJson = '"A modern runtime for JavaScript and TypeScript."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-18T06:03:05.696372042Z"
+checkedAt = "2026-10-27T18:24:35.843121Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -117,28 +113,28 @@ state = "present"
 valueJson = '"https://deno.com"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-18T06:03:05.696372042Z"
+checkedAt = "2026-10-27T18:24:35.843121Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Deno"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-18T06:03:05.696372042Z"
+checkedAt = "2026-10-27T18:24:35.843121Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
 source = ".github/CONTRIBUTING.md"
 state = "present"
-valueJson = '"cargo test -vv"'
+valueJson = '"cargo test --features hmr integration::node_unit_tests::os_test"'
 
 [x.github]
 archived = false
 clone_url = "https://github.com/denoland/deno.git"
 default_branch = "main"
 fork = false
-head_sha = "abd22074e47c6a5cd14e9e4e84743f084aa5a575"
+head_sha = "e7b39ebd55c85aaf6a29290c1f5a99e2e21e09dd"
 html_url = "https://github.com/denoland/deno"
-stars = 108457
+stars = 108785

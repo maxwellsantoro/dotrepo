@@ -1,10 +1,9 @@
 # Evidence
 
-- Imported repository docs entry points from README.md.
 - Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.
-- Imported repo.build from CONTRIBUTING.md as `make`.
-- Imported repo.test from Makefile as `go test github.com/johnkerl/miller/v6/pkg/...`.
-- Imported repo.toolchain.min from go.mod as `1.26.0` (Go).
+- Imported repo.build from Makefile as `make build`.
+- Imported repo.test from Makefile as `make unit-test`.
+- Imported repo.toolchain.min from go.mod as `1.26.10` (Go).
 - Discovered related relation to github.com/GuilloteauQ/miller-exercises from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
@@ -18,9 +17,3 @@
 ## Auto-promotion
 
 All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
-
-## Command semantic correction (2026-10-03)
-
-2026-10-03 semantic audit withheld repo.test pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged.
-
-- Withheld `repo.test` previously extracted from `Makefile` as `go test github.com/johnkerl/miller/v6/pkg/...`. Command is an incomplete example or setup-only step.

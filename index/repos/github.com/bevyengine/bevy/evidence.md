@@ -5,7 +5,8 @@
 - Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.
 - Inferred repo.build from Cargo.toml as `cargo build --workspace`.
 - Inferred repo.test from Cargo.toml as `cargo test --workspace`.
-- Imported repo.toolchain.min from Cargo.toml as `1.96.0` (Rust).
+- Imported repo.toolchain.min from Cargo.toml as `1.97.1` (Rust).
+- Imported docs.root as `https://bevy.org/learn/quick-start/introduction`. Explicit documentation link at README.md:36: * **[Quick Start Guide](https://bevy.org/learn/quick-start/introduction):** Bevy's official Quick Start Guide. The best place to start learning Bevy.
 - Discovered related relation to github.com/bevyengine/bevy from Cargo.toml repository.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

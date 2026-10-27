@@ -5,7 +5,8 @@
 - Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.
 - Inferred repo.build from Cargo.toml as `cargo build --workspace`.
 - Imported repo.test from CONTRIBUTING.md as `cargo test`.
-- Discovered related relation to github.com/meilisearch/demos from README cross-link.
+- Imported docs.root as `https://www.meilisearch.com/docs?utm_campaign=oss&utm_source=github&utm_medium=meilisearch&utm_content=nav`. Explicit documentation link at README.md:15: <a href="https://www.meilisearch.com/docs?utm_campaign=oss&utm_source=github&utm_medium=meilisearch&utm_content=nav">Documentation</a> |
+- Discovered related relation to github.com/meilisearch/product from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

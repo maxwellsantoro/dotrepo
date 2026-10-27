@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/vectordotdev/vector"
-generated_at = "2026-09-19T06:06:18.961612116Z"
+generated_at = "2026-10-27T18:30:40.074865Z"
 
 [record.trust]
 confidence = "high"
@@ -30,10 +30,11 @@ languages = [
     "CSS",
     "Sass",
     "Dockerfile",
-    "Lua",
     "Python",
+    "Lua",
     "Go Template",
     "PowerShell",
+    "Handlebars",
     "Starlark",
     "Batchfile",
     "DIGITAL Command Language",
@@ -76,27 +77,29 @@ team = "@vectordotdev/vector"
 security_contact = "security@datadoghq.com"
 
 [docs]
-root = "https://vector.dev/docs/"
+root = "https://vector.dev/docs"
 getting_started = "https://vector.dev/docs/setup/quickstart/"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-19T06:06:18.961612116Z"
+checkedAt = "2026-10-27T18:30:40.074865Z"
 confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
+method = "extracted"
+reason = 'Explicit documentation link at README.md:11: <a href="https://vector.dev/docs/setup/quickstart/">Quickstart</a>&nbsp;&nbsp;&bull;&nbsp;&nbsp;'
+source = "README.md"
 state = "present"
 valueJson = '"https://vector.dev/docs/setup/quickstart/"'
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-19T06:06:18.961612116Z"
+checkedAt = "2026-10-27T18:30:40.074865Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:63: All user documentation is available at **[vector.dev/docs](https://vector.dev/docs)**."
+source = "README.md"
 state = "present"
-valueJson = '"https://vector.dev/docs/"'
+valueJson = '"https://vector.dev/docs"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-19T06:06:18.961612116Z"
+checkedAt = "2026-10-27T18:30:40.074865Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -105,7 +108,7 @@ state = "present"
 valueJson = '"security@datadoghq.com"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-19T06:06:18.961612116Z"
+checkedAt = "2026-10-27T18:30:40.074865Z"
 confidence = "high"
 method = "unspecified"
 reason = "clear CODEOWNERS team"
@@ -113,7 +116,7 @@ state = "present"
 valueJson = '"@vectordotdev/vector"'
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-19T06:06:18.961612116Z"
+checkedAt = "2026-10-27T18:30:40.074865Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -122,7 +125,7 @@ state = "present"
 valueJson = '"make build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-19T06:06:18.961612116Z"
+checkedAt = "2026-10-27T18:30:40.074865Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -131,7 +134,7 @@ state = "present"
 valueJson = '"A high-performance observability data pipeline."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-19T06:06:18.961612116Z"
+checkedAt = "2026-10-27T18:30:40.074865Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -139,16 +142,16 @@ state = "present"
 valueJson = '"https://vector.dev"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-19T06:06:18.961612116Z"
+checkedAt = "2026-10-27T18:30:40.074865Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Vector"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-19T06:06:18.961612116Z"
+checkedAt = "2026-10-27T18:30:40.074865Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -161,6 +164,6 @@ archived = false
 clone_url = "https://github.com/vectordotdev/vector.git"
 default_branch = "master"
 fork = false
-head_sha = "c2d37ef05ddc2351333dc5a570b4f405db23034b"
+head_sha = "b6ef75f364682653d335029df838a9cc537197d8"
 html_url = "https://github.com/vectordotdev/vector"
-stars = 22583
+stars = 22775

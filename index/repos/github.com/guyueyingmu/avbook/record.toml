@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/guyueyingmu/avbook"
-generated_at = "2026-09-16T16:24:12.557334Z"
+generated_at = "2026-10-27T18:03:09.412668Z"
 
 [record.trust]
 confidence = "high"
@@ -44,23 +44,23 @@ topics = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:24:12.557334Z"
+checkedAt = "2026-10-27T18:03:09.412668Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:24:12.557334Z"
+checkedAt = "2026-10-27T18:03:09.412668Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:24:12.557334Z"
+checkedAt = "2026-10-27T18:03:09.412668Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -68,7 +68,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:24:12.557334Z"
+checkedAt = "2026-10-27T18:03:09.412668Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -76,7 +76,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:24:12.557334Z"
+checkedAt = "2026-10-27T18:03:09.412668Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -84,7 +84,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:24:12.557334Z"
+checkedAt = "2026-10-27T18:03:09.412668Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -93,7 +93,7 @@ state = "present"
 valueJson = '"AV 电影管理系统， avmoo , javbus , javlibrary 爬虫，线上 AV 影片图书馆，AV 磁力链接数据库，Japanese Adult Video Library,Adult Video Magnet Links - Japanese Adult Video Database"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:24:12.557334Z"
+checkedAt = "2026-10-27T18:03:09.412668Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -101,16 +101,16 @@ state = "present"
 valueJson = '"https://github.com/guyueyingmu/avbook"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:24:12.557334Z"
+checkedAt = "2026-10-27T18:03:09.412668Z"
 confidence = "high"
 method = "inferred"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"avbook"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:24:12.557334Z"
+checkedAt = "2026-10-27T18:03:09.412668Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -124,4 +124,4 @@ default_branch = "master"
 fork = false
 head_sha = "d3780741288c68da826fc2bb0df542caa8d91fb5"
 html_url = "https://github.com/guyueyingmu/avbook"
-stars = 10057
+stars = 10097

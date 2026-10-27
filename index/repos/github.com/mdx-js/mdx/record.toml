@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/mdx-js/mdx"
-generated_at = "2026-09-16T16:26:28.839626Z"
+generated_at = "2026-10-27T18:09:08.261723Z"
 
 [record.trust]
 confidence = "high"
@@ -37,27 +37,27 @@ topics = [
 ]
 
 [docs]
-root = "https://mdxjs.com"
 getting_started = "https://mdxjs.com/getting-started/"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:26:28.839626Z"
+checkedAt = "2026-10-27T18:09:08.261723Z"
 confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:41: See [§ Getting started](https://mdxjs.com/getting-started/) for how to"
+source = "README.md"
 state = "present"
 valueJson = '"https://mdxjs.com/getting-started/"'
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:26:28.839626Z"
+checkedAt = "2026-10-27T18:09:08.261723Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://mdxjs.com"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:26:28.839626Z"
+checkedAt = "2026-10-27T18:09:08.261723Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -65,7 +65,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:26:28.839626Z"
+checkedAt = "2026-10-27T18:09:08.261723Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -73,7 +73,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:26:28.839626Z"
+checkedAt = "2026-10-27T18:09:08.261723Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -82,7 +82,7 @@ state = "present"
 valueJson = '"npm run build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:26:28.839626Z"
+checkedAt = "2026-10-27T18:09:08.261723Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -91,7 +91,7 @@ state = "present"
 valueJson = '"Markdown for the component era"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:26:28.839626Z"
+checkedAt = "2026-10-27T18:09:08.261723Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -99,16 +99,16 @@ state = "present"
 valueJson = '"https://mdxjs.com"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:26:28.839626Z"
+checkedAt = "2026-10-27T18:09:08.261723Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"mdx"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:26:28.839626Z"
+checkedAt = "2026-10-27T18:09:08.261723Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -121,6 +121,6 @@ archived = false
 clone_url = "https://github.com/mdx-js/mdx.git"
 default_branch = "main"
 fork = false
-head_sha = "685627a819567c0788eadb85f5f57065bcc81c2c"
+head_sha = "52285a6758fa078ec57f3d4bd8803d9cbfb12065"
 html_url = "https://github.com/mdx-js/mdx"
-stars = 19789
+stars = 19835

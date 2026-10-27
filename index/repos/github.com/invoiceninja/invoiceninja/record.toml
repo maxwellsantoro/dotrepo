@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/invoiceninja/invoiceninja"
-generated_at = "2026-09-18T06:03:25.349963436Z"
+generated_at = "2026-10-27T17:36:54.459394Z"
 
 [record.trust]
 confidence = "high"
@@ -28,6 +28,8 @@ languages = [
     "HTML",
     "JavaScript",
 ]
+build = "npm run build"
+test = "composer run-script test"
 topics = [
     "php",
     "expenses",
@@ -47,64 +49,32 @@ topics = [
     "quotes",
 ]
 
-[[repo.build_candidates]]
-command = "npm run build"
-ecosystem = "Node.js"
-source = "package.json"
-
-[repo.build_candidates.context]
-command = "npm run build"
-working_directory = "."
-scope = "component"
-prerequisites = [
-    "Prepare Node.js 22 and install the root package.json dependencies with npm i, as declared for root assets in .github/workflows/react_release.yml.",
-]
-source = "vite.config.ts"
-component = "resources"
-
-[[repo.test_candidates]]
-command = "composer run-script test"
-ecosystem = "Composer"
-source = "composer.json"
-
-[repo.test_candidates.context]
-command = "composer run-script test"
-working_directory = "."
-scope = "component"
-prerequisites = [
-    "Prepare PHP 8.2, 8.3, 8.4 or 8.5, Composer v2 and the extensions/development dependencies declared by composer.json and .github/workflows/phpunit.yml.",
-    "Prepare the database, Redis, .env.ci-derived configuration, application key/configuration, migrations and seed data described in the PHP unit workflow, using a dedicated disposable test database.",
-    "Prepare the PDF runtime and upstream license/environment bindings declared in .github/workflows/phpunit.yml; the complete environment cannot be bound in the public execution-context protocol.",
-]
-source = "phpunit.xml"
-component = "app"
-
 [owners]
 maintainers = []
 security_contact = "contact@invoiceninja.com"
 
 [docs]
-root = "https://invoiceninja.github.io"
+root = "https://api-docs.invoicing.co/"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-18T06:03:25.349963436Z"
+checkedAt = "2026-10-27T17:36:54.459394Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-06T05:08:10.049774+00:00"
+checkedAt = "2026-10-27T17:36:54.459394Z"
 confidence = "high"
 method = "extracted"
-reason = "2026-10-06 pinned-source audit: CONTRIBUTING explicitly labels invoiceninja.github.io Documentation; the retained invoiceninja.com value is the product homepage."
-source = "CONTRIBUTING.md"
+reason = "Explicit documentation link at README.md:29: * [Invoice Ninja - API](https://api-docs.invoicing.co/)"
+source = "README.md"
 state = "present"
-valueJson = '"https://invoiceninja.github.io"'
+valueJson = '"https://api-docs.invoicing.co/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-18T06:03:25.349963436Z"
+checkedAt = "2026-10-27T17:36:54.459394Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -113,7 +83,7 @@ state = "present"
 valueJson = '"contact@invoiceninja.com"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-18T06:03:25.349963436Z"
+checkedAt = "2026-10-27T17:36:54.459394Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -121,16 +91,16 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-06T05:08:10.049774+00:00"
-confidence = "medium"
-method = "unspecified"
-reason = "2026-10-06 pinned-source audit: npm run build invokes Vite for resources assets; it is not a full Laravel application build. Preserve a resources component candidate, unassessed because locked dependency/toolchain preparation for this invocation is not declared."
+checkedAt = "2026-10-27T17:36:54.459394Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
 source = "package.json"
-state = "unresolved"
-valueJson = "null"
+state = "present"
+valueJson = '"npm run build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-18T06:03:25.349963436Z"
+checkedAt = "2026-10-27T17:36:54.459394Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -139,7 +109,7 @@ state = "present"
 valueJson = '"A source-available invoice, quote, project and time-tracking app built with Laravel"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-18T06:03:25.349963436Z"
+checkedAt = "2026-10-27T17:36:54.459394Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -147,28 +117,28 @@ state = "present"
 valueJson = '"https://invoiceninja.com"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-18T06:03:25.349963436Z"
+checkedAt = "2026-10-27T17:36:54.459394Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"invoiceninja"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-06T05:08:10.049774+00:00"
-confidence = "medium"
-method = "unspecified"
-reason = "2026-10-06 pinned-source audit: Composer test is a valid PHP wrapper, but the retained scalar omits the application/services setup and backend scope. Preserve an unassessed PHP application candidate; upstream CI needs environment/license/service bindings and a different sharded wrapper."
+checkedAt = "2026-10-27T17:36:54.459394Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
 source = "composer.json"
-state = "unresolved"
-valueJson = "null"
+state = "present"
+valueJson = '"composer run-script test"'
 
 [x.github]
 archived = false
 clone_url = "https://github.com/invoiceninja/invoiceninja.git"
 default_branch = "v5-stable"
 fork = false
-head_sha = "f1ffa5f9989afbed4e7dc80b5c0cc18944335ffc"
+head_sha = "15ea35ea63f367eba33c04b7acd9ab1227853537"
 html_url = "https://github.com/invoiceninja/invoiceninja"
-stars = 10087
+stars = 10328

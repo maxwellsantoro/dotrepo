@@ -2,14 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/SnapDrop/snapdrop"
-generated_at = "2026-10-04T07:50:57.270297859Z"
+generated_at = "2026-10-27T17:51:01.817502Z"
 
 [record.trust]
-confidence = "medium"
-provenance = ["imported"]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Snapdrop"
@@ -30,11 +33,8 @@ topics = [
     "snapdrop",
 ]
 
-[docs]
-root = "https://snapdrop.net"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-04T07:50:57.270297859Z"
+checkedAt = "2026-10-27T17:51:01.817502Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -42,15 +42,15 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-04T07:50:57.270297859Z"
-confidence = "medium"
-method = "unspecified"
-reason = "documentation target present without a retained source declaration"
-state = "present"
-valueJson = '"https://snapdrop.net"'
+checkedAt = "2026-10-27T17:51:01.817502Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-04T07:50:57.270297859Z"
+checkedAt = "2026-10-27T17:51:01.817502Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -58,7 +58,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-04T07:50:57.270297859Z"
+checkedAt = "2026-10-27T17:51:01.817502Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -66,7 +66,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-04T07:50:57.270297859Z"
+checkedAt = "2026-10-27T17:51:01.817502Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -74,7 +74,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-04T07:50:57.270297859Z"
+checkedAt = "2026-10-27T17:51:01.817502Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -83,7 +83,7 @@ state = "present"
 valueJson = '"A Progressive Web App for local file sharing"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-04T07:50:57.270297859Z"
+checkedAt = "2026-10-27T17:51:01.817502Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -91,7 +91,7 @@ state = "present"
 valueJson = '"https://snapdrop.net"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-04T07:50:57.270297859Z"
+checkedAt = "2026-10-27T17:51:01.817502Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -100,7 +100,7 @@ state = "present"
 valueJson = '"Snapdrop"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-04T07:50:57.270297859Z"
+checkedAt = "2026-10-27T17:51:01.817502Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -114,4 +114,4 @@ default_branch = "master"
 fork = false
 head_sha = "b8b78cc22a672fd7c442f5a4866a8d9b0c05362e"
 html_url = "https://github.com/SnapDrop/snapdrop"
-stars = 19735
+stars = 19717

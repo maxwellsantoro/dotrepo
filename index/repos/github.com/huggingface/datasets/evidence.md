@@ -1,8 +1,8 @@
 # Evidence
 
-- Imported repository name and docs entry points from README.md.
+- Imported repository name from README.md.
 - Imported the security reporting channel from SECURITY.md.
-- Imported repo.test from Makefile as `python -m pytest -n auto --dist=loadfile -s -v ./tests/`.
+- Imported repo.test from Makefile as `make test`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
@@ -15,11 +15,3 @@
 ## Auto-promotion
 
 All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
-
-## 2026-10-04 command semantics correction
-
-The preceding import and auto-promotion entries are historical and superseded for the fields below. Pinned sources were inspected statically; upstream task recipes were not executed. This does not establish task correctness or refresh other facts. Prior affected field assessments were removed, and verified authority was superseded where necessary.
-
-- repo.test: `python -m pytest -n auto --dist=loadfile -s -v ./tests/` -> `make test` (inspected `Makefile`)
-
-Receipt and source hashes: [command-source audit](../../../../telemetry/command-semantics-20261004/report.json).

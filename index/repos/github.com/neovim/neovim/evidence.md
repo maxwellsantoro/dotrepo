@@ -5,6 +5,7 @@
 - Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.
 - Imported repo.build from Makefile as `make all`.
 - Imported repo.test from Makefile as `make test`.
+- Imported docs.root as `https://neovim.io/doc/`. Explicit documentation link at README.md:4: <a href="https://neovim.io/doc/">Documentation</a> |
 - Discovered related relation to github.com/neovim/neovim from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

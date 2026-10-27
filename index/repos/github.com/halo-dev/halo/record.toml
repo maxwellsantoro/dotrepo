@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/halo-dev/halo"
-generated_at = "2026-09-17T06:09:45.406045379Z"
+generated_at = "2026-10-27T17:35:18.876523Z"
 
 [record.trust]
 confidence = "medium"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, `ui/packages/api-client/package.json`, and `build.gradle`. Imported `repo.build` from `ui/packages/api-client/package.json`. Inferred `repo.test` from `build.gradle`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. 2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `build.gradle`. Ignored component-scoped commands from `ui/packages/api-client/package.json` as repository defaults. Inferred `repo.build` from `build.gradle`. Inferred `repo.test` from `build.gradle`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
 
 [repo]
 name = "halo"
@@ -29,12 +29,12 @@ languages = [
     "SCSS",
     "Shell",
     "CSS",
-    "Groovy",
     "MDX",
     "Dockerfile",
     "Makefile",
     "Smarty",
 ]
+build = "./gradlew build"
 test = "./gradlew test"
 topics = [
     "halo",
@@ -50,27 +50,24 @@ topics = [
 maintainers = []
 security_contact = "hi@halo.run"
 
-[docs]
-root = "https://www.halo.run"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-17T06:09:45.406045379Z"
+checkedAt = "2026-10-27T17:35:18.876523Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-17T06:09:45.406045379Z"
+checkedAt = "2026-10-27T17:35:18.876523Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://www.halo.run"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-17T06:09:45.406045379Z"
+checkedAt = "2026-10-27T17:35:18.876523Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -79,7 +76,7 @@ state = "present"
 valueJson = '"hi@halo.run"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-17T06:09:45.406045379Z"
+checkedAt = "2026-10-27T17:35:18.876523Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -87,16 +84,16 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-17T06:09:45.406045379Z"
-confidence = "low"
-method = "extracted"
-reason = "Component command lacks repository-default scope and working directory."
-source = "ui/packages/api-client/package.json"
-state = "unresolved"
-valueJson = "null"
+checkedAt = "2026-10-27T17:35:18.876523Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "build.gradle"
+state = "present"
+valueJson = '"./gradlew build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-17T06:09:45.406045379Z"
+checkedAt = "2026-10-27T17:35:18.876523Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -105,7 +102,7 @@ state = "present"
 valueJson = '"Halo 是一款强大易用的开源建站工具，从个人博客、知识库，到企业官网、在线商城，Halo 都能助您轻松实现，一站式满足您的多样化建站需求。"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-17T06:09:45.406045379Z"
+checkedAt = "2026-10-27T17:35:18.876523Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -113,16 +110,16 @@ state = "present"
 valueJson = '"https://www.halo.run"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-17T06:09:45.406045379Z"
+checkedAt = "2026-10-27T17:35:18.876523Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"halo"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-17T06:09:45.406045379Z"
+checkedAt = "2026-10-27T17:35:18.876523Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -135,6 +132,6 @@ archived = false
 clone_url = "https://github.com/halo-dev/halo.git"
 default_branch = "main"
 fork = false
-head_sha = "ea7636ab58a13e387463a75cb09618b443a2f2eb"
+head_sha = "eb351e936cca89bf7fccac67934425c639ec10cc"
 html_url = "https://github.com/halo-dev/halo"
-stars = 39769
+stars = 40055

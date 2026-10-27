@@ -2,17 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/dotnet/roslyn"
-generated_at = "2026-09-16T16:22:37.470562Z"
+generated_at = "2026-10-27T17:59:20.551572Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
-    "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `CONTRIBUTING.md`, and `eng/eng.sln`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Inferred `repo.build` from `eng/eng.sln`. Inferred `repo.test` from `eng/eng.sln`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. 2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `CONTRIBUTING.md`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Ignored component-scoped commands from `eng/eng.sln` as repository defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "roslyn"
@@ -50,43 +50,45 @@ maintainers = [
     "@dotnet/roslyn-infrastructure",
     "@dotnet/roslyn-compiler",
     "@dotnet/roslyn-ide",
-    "@dotnet/razor-tooling",
+    "@tmat",
     "@dotnet/roslyn-interactive",
+    "@dotnet/razor-compiler",
     "@dotnet/roslyn-api-owners",
     "@333fred",
-    "@dibarbet",
 ]
 security_contact = "secure@microsoft.com"
 
 [docs]
-root = "https://docs.microsoft.com/dotnet/csharp/roslyn-sdk/"
+root = "https://docs.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/compiler-api-model"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:22:37.470562Z"
+checkedAt = "2026-10-27T17:59:20.551572Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:22:37.470562Z"
+checkedAt = "2026-10-27T17:59:20.551572Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:41: Visit [Roslyn Architecture Overview](https://docs.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/compiler-api-model) to get started with Roslyn’s API’s."
+source = "README.md"
 state = "present"
-valueJson = '"https://docs.microsoft.com/dotnet/csharp/roslyn-sdk/"'
+valueJson = '"https://docs.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/compiler-api-model"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:22:37.470562Z"
+checkedAt = "2026-10-27T17:59:20.551572Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "direct email or mailing list"
+source = "SECURITY.md"
 state = "present"
 valueJson = '"secure@microsoft.com"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:22:37.470562Z"
+checkedAt = "2026-10-27T17:59:20.551572Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -94,16 +96,15 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:22:37.470562Z"
-confidence = "low"
-method = "inferred"
-reason = "Component command lacks repository-default scope and working directory."
-source = "eng/eng.sln"
-state = "unresolved"
+checkedAt = "2026-10-27T17:59:20.551572Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no build command sources found"
+state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:22:37.470562Z"
+checkedAt = "2026-10-27T17:59:20.551572Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -112,7 +113,7 @@ state = "present"
 valueJson = '"The Roslyn .NET compiler provides C# and Visual Basic languages with rich code analysis APIs."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:22:37.470562Z"
+checkedAt = "2026-10-27T17:59:20.551572Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -120,21 +121,20 @@ state = "present"
 valueJson = '"https://docs.microsoft.com/dotnet/csharp/roslyn-sdk/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:22:37.470562Z"
+checkedAt = "2026-10-27T17:59:20.551572Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"roslyn"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:22:37.470562Z"
-confidence = "low"
-method = "inferred"
-reason = "Component command lacks repository-default scope and working directory."
-source = "eng/eng.sln"
-state = "unresolved"
+checkedAt = "2026-10-27T17:59:20.551572Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no test command sources found"
+state = "not_found"
 valueJson = "null"
 
 [x.github]
@@ -142,6 +142,6 @@ archived = false
 clone_url = "https://github.com/dotnet/roslyn.git"
 default_branch = "main"
 fork = false
-head_sha = "56e8233a425fd97e32fccf0e1d3cc880d206e2e1"
+head_sha = "02fd60fc3c04bf6e1b839f6f0e0c8833474fc84a"
 html_url = "https://github.com/dotnet/roslyn"
-stars = 20667
+stars = 20757

@@ -2,14 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/TypeCellOS/BlockNote"
-generated_at = "2026-10-04T07:51:44.505578487Z"
+generated_at = "2026-10-27T17:51:51.850308Z"
 
 [record.trust]
-confidence = "medium"
-provenance = ["imported"]
-notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "BlockNote"
@@ -44,9 +47,6 @@ topics = [
     "notion-editor",
 ]
 
-[docs]
-root = "https://www.blocknotejs.org/"
-
 [relations]
 references = []
 
@@ -63,7 +63,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-04T07:51:44.505578487Z"
+checkedAt = "2026-10-27T17:51:51.850308Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -71,15 +71,15 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-04T07:51:44.505578487Z"
-confidence = "medium"
-method = "unspecified"
-reason = "documentation target present without a retained source declaration"
-state = "present"
-valueJson = '"https://www.blocknotejs.org/"'
+checkedAt = "2026-10-27T17:51:51.850308Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-04T07:51:44.505578487Z"
+checkedAt = "2026-10-27T17:51:51.850308Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -87,7 +87,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-04T07:51:44.505578487Z"
+checkedAt = "2026-10-27T17:51:51.850308Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -95,7 +95,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-04T07:51:44.505578487Z"
+checkedAt = "2026-10-27T17:51:51.850308Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -104,7 +104,7 @@ state = "present"
 valueJson = '"pnpm build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-04T07:51:44.505578487Z"
+checkedAt = "2026-10-27T17:51:51.850308Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -113,7 +113,7 @@ state = "present"
 valueJson = """"A React Rich Text Editor that's block-based (Notion style) and extensible. Built on top of Prosemirror and Tiptap.""""
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-04T07:51:44.505578487Z"
+checkedAt = "2026-10-27T17:51:51.850308Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -121,7 +121,7 @@ state = "present"
 valueJson = '"https://www.blocknotejs.org/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-04T07:51:44.505578487Z"
+checkedAt = "2026-10-27T17:51:51.850308Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -130,7 +130,7 @@ state = "present"
 valueJson = '"BlockNote"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-04T07:51:44.505578487Z"
+checkedAt = "2026-10-27T17:51:51.850308Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -143,6 +143,6 @@ archived = false
 clone_url = "https://github.com/TypeCellOS/BlockNote.git"
 default_branch = "main"
 fork = false
-head_sha = "c6f14b071e66ea6f11537dbe5d9bacf98c0b3c37"
+head_sha = "27f0b203c65e1ba2b9c1c5cb7fa50912a3ae8031"
 html_url = "https://github.com/TypeCellOS/BlockNote"
-stars = 10260
+stars = 10339

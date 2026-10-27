@@ -1,7 +1,9 @@
 # Evidence
 
 - Imported repository name and docs entry points from README.md.
-- Imported repo.build from src/Web/ClientApp-React/package.json as `npm run build`.
+- Ignored component-scoped commands from `src/Web/ClientApp-React/package.json` as repository defaults.
+- Ignored component-scoped commands from `src/AppHost/AppHost.csproj` as repository defaults.
+- Imported docs.root as `https://cleanarchitecture.jasontaylor.dev`. Explicit documentation link at README.md:110: - 📖 [Clean Architecture Solution Template documentation](https://cleanarchitecture.jasontaylor.dev)
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
@@ -14,9 +16,3 @@
 ## Auto-promotion
 
 All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
-
-## Command semantic correction (2026-10-03)
-
-2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged.
-
-- Withheld `repo.build` previously extracted from `src/Web/ClientApp-React/package.json` as `npm run build`. Component command lacks repository-default scope and working directory.

@@ -4,7 +4,8 @@
 - Imported the security reporting channel from SECURITY.md.
 - Imported repo.build from Makefile as `make build`.
 - Inferred repo.test from go.mod as `go test ./...`.
-- Imported repo.toolchain.min from pyproject.toml as `3.10` (Python).
+- Imported repo.toolchain.min from pyproject.toml as `3.12` (Python).
+- Imported docs.root as `https://docs.gitea.com/`. Explicit documentation link at README.md:34: You can find comprehensive documentation on our official [documentation website](https://docs.gitea.com/).
 - Discovered related relation to github.com/go-gitea/gitea from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

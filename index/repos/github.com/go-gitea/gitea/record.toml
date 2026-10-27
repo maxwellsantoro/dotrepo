@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/go-gitea/gitea"
-generated_at = "2026-09-17T06:07:31.364521346Z"
+generated_at = "2026-10-27T17:33:30.216342Z"
 
 [record.trust]
 confidence = "medium"
@@ -25,8 +25,8 @@ languages = [
     "Handlebars",
     "TypeScript",
     "CSS",
-    "JavaScript",
     "Vue",
+    "JavaScript",
     "Shell",
     "Makefile",
     "Jsonnet",
@@ -61,7 +61,7 @@ topics = [
 ]
 
 [repo.toolchain]
-min = "3.10"
+min = "3.12"
 ecosystem = "Python"
 
 [owners]
@@ -69,7 +69,7 @@ maintainers = []
 security_contact = "security@gitea.io"
 
 [docs]
-root = "https://gitea.com/gitea/docs"
+root = "https://docs.gitea.com/"
 
 [relations]
 references = []
@@ -87,23 +87,24 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-17T06:07:31.364521346Z"
+checkedAt = "2026-10-27T17:33:30.216342Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-17T06:07:31.364521346Z"
+checkedAt = "2026-10-27T17:33:30.216342Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:34: You can find comprehensive documentation on our official [documentation website](https://docs.gitea.com/)."
+source = "README.md"
 state = "present"
-valueJson = '"https://gitea.com/gitea/docs"'
+valueJson = '"https://docs.gitea.com/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-17T06:07:31.364521346Z"
+checkedAt = "2026-10-27T17:33:30.216342Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -112,7 +113,7 @@ state = "present"
 valueJson = '"security@gitea.io"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-17T06:07:31.364521346Z"
+checkedAt = "2026-10-27T17:33:30.216342Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -120,7 +121,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-17T06:07:31.364521346Z"
+checkedAt = "2026-10-27T17:33:30.216342Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -129,7 +130,7 @@ state = "present"
 valueJson = '"make build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-17T06:07:31.364521346Z"
+checkedAt = "2026-10-27T17:33:30.216342Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -138,7 +139,7 @@ state = "present"
 valueJson = '"Git with a cup of tea! Painless self-hosted all-in-one software development service, including Git hosting, code review, team collaboration, package registry and CI/CD"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-17T06:07:31.364521346Z"
+checkedAt = "2026-10-27T17:33:30.216342Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -146,16 +147,16 @@ state = "present"
 valueJson = '"https://gitea.com"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-17T06:07:31.364521346Z"
+checkedAt = "2026-10-27T17:33:30.216342Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Gitea"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-17T06:07:31.364521346Z"
+checkedAt = "2026-10-27T17:33:30.216342Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -168,6 +169,6 @@ archived = false
 clone_url = "https://github.com/go-gitea/gitea.git"
 default_branch = "main"
 fork = false
-head_sha = "f0d219599869d4b0971143ada3b12f9a9174bbbd"
+head_sha = "f35c67bd79b3bff9c28eb8171d53586cc800bd5c"
 html_url = "https://github.com/go-gitea/gitea"
-stars = 58035
+stars = 58732

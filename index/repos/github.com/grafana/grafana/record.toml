@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/grafana/grafana"
-generated_at = "2026-09-16T16:24:06.664579Z"
+generated_at = "2026-10-27T18:25:33.841845Z"
 
 [record.trust]
 confidence = "high"
@@ -30,15 +30,15 @@ languages = [
     "HTML",
     "MDX",
     "Shell",
-    "SCSS",
+    "CSS",
     "Makefile",
+    "SCSS",
     "Jsonnet",
     "HCL",
     "Dockerfile",
     "Go Template",
     "Python",
     "Starlark",
-    "CSS",
     "Mustache",
     "Smarty",
     "Ruby",
@@ -80,7 +80,6 @@ maintainers = [
     "@irenerl24",
     "@JohnnyK-Grafana",
     "@urbiz-grafana",
-    "@lwandz13",
     "@jtvdez",
     "@grafana/grafana-catalog",
     "@grafana/grafana-frontend-platform",
@@ -114,8 +113,9 @@ maintainers = [
     "@ryantxu",
     "@grafana/app-o11y-visualizations",
     "@zoltanbedi",
+    "@alexanderzobnin",
     "@grafana/growth-engineering",
-    "@grafana/product-design-engineering",
+    "@grafana/ui-engineering",
     "@tolzhabayev",
     "@sympatheticmoose",
     "@evictorero",
@@ -127,26 +127,26 @@ security_contact = "https://github.com/grafana/grafana/security/policy"
 
 [docs]
 root = "https://grafana.com/docs/"
-getting_started = "https://grafana.com/docs/grafana/latest/setup-grafana/installation/"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:24:06.664579Z"
+checkedAt = "2026-10-27T18:25:33.841845Z"
 confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
-state = "present"
-valueJson = '"https://grafana.com/docs/grafana/latest/setup-grafana/installation/"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:24:06.664579Z"
+checkedAt = "2026-10-27T18:25:33.841845Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:26: The Grafana documentation is available at [grafana.com/docs](https://grafana.com/docs/)."
+source = "README.md"
 state = "present"
 valueJson = '"https://grafana.com/docs/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:24:06.664579Z"
+checkedAt = "2026-10-27T18:25:33.841845Z"
 confidence = "high"
 method = "unspecified"
 reason = "actionable security reporting URL"
@@ -154,7 +154,7 @@ state = "present"
 valueJson = '"https://github.com/grafana/grafana/security/policy"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:24:06.664579Z"
+checkedAt = "2026-10-27T18:25:33.841845Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -162,7 +162,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:24:06.664579Z"
+checkedAt = "2026-10-27T18:25:33.841845Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -171,7 +171,7 @@ state = "present"
 valueJson = '"yarn build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:24:06.664579Z"
+checkedAt = "2026-10-27T18:25:33.841845Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -180,7 +180,7 @@ state = "present"
 valueJson = '"The open and composable observability and data visualization platform. Visualize metrics, logs, and traces from multiple sources like Prometheus, Loki, Elasticsearch, InfluxDB, Postgres and many more."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:24:06.664579Z"
+checkedAt = "2026-10-27T18:25:33.841845Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -188,16 +188,16 @@ state = "present"
 valueJson = '"https://grafana.com"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:24:06.664579Z"
+checkedAt = "2026-10-27T18:25:33.841845Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"grafana"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:24:06.664579Z"
+checkedAt = "2026-10-27T18:25:33.841845Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -210,6 +210,6 @@ archived = false
 clone_url = "https://github.com/grafana/grafana.git"
 default_branch = "main"
 fork = false
-head_sha = "d1228807044293faf3f55dd96c74c607e533460e"
+head_sha = "9335db0f40732a6391166a4215a4bcbc6ce6f93d"
 html_url = "https://github.com/grafana/grafana"
-stars = 76774
+stars = 77552

@@ -2,9 +2,10 @@
 
 - Imported repository name from README.md.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
-- Imported repo.build from console/package.json as `npm run build`.
-- Imported repo.test from console/package.json as `npm test`.
-- Imported repo.toolchain.min from go.mod as `1.25.4` (Go).
+- Ignored component-scoped commands from `console/package.json` as repository defaults.
+- Imported repo.build from Makefile as `make build`.
+- Imported repo.test from Makefile as `make test-unit`.
+- Imported repo.toolchain.min from go.mod as `1.26.10` (Go).
 - Discovered related relation to github.com/Notifuse/notifuse from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
@@ -18,10 +19,3 @@
 ## Auto-promotion
 
 All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
-
-## Command semantic correction (2026-10-03)
-
-2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged.
-
-- Withheld `repo.build` previously extracted from `console/package.json` as `npm run build`. Component command lacks repository-default scope and working directory.
-- Withheld `repo.test` previously extracted from `console/package.json` as `npm test`. Component command lacks repository-default scope and working directory.

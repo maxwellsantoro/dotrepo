@@ -3,12 +3,11 @@
 - Imported repository name and docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
-- Left `repo.build` unset because `python/pyproject.toml` and `dotnet/src/SemanticKernel.Abstractions/SemanticKernel.Abstractions.csproj` suggested conflicting build commands.
-- Inferred repo.test from python/pyproject.toml as `python -m pytest`.
+- Ignored component-scoped commands from `python/pyproject.toml` as repository defaults.
+- Ignored component-scoped commands from `dotnet/src/SemanticKernel.Abstractions/SemanticKernel.Abstractions.csproj` as repository defaults.
 - Imported repo.toolchain.min from python/pyproject.toml as `3.10` (Python).
+- Imported docs.root as `https://aka.ms/sk/learn`. Explicit documentation link at README.md:345: - Read the [documentation](https://aka.ms/sk/learn)
 - This is an overlay record, not a maintainer-controlled canonical record.
-
-- Left `repo.build` unset after deterministic escalation: no unique build/test candidate after deterministic tier walk. Preserved 2 candidate command(s) in `repo.build_candidates` instead of discarding them.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
@@ -17,18 +16,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Fresh verification
+## Auto-promotion
 
-Prior verified authority was not inherited: this refresh must qualify using its current field scores.
-
-## Documentation correction (2026-09-21T04:36:55.205964Z)
-
-- Withheld docs.getting_started; rejected `https://docs.trychroma.com/docs/overview/getting-started` because Chroma integration link is not Semantic Kernel getting-started documentation. Source: [README.md:32](https://github.com/microsoft/semantic-kernel/blob/ca40aa7226531d28a721d0ca0e451d0aaf86dafc/README.md#L32). No replacement was established by this correction.
-- This documentation-only correction advances the record timestamp. Older assessments for other fields retain their original check times and are invalidated by public export until fresh verification; their values were not refreshed.
-- This is an overlay record, not a maintainer-controlled canonical record.
-
-## Command semantic correction (2026-10-03)
-
-2026-10-03 semantic audit withheld repo.test pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged.
-
-- Withheld `repo.test` previously extracted from `python/pyproject.toml` as `python -m pytest`. Component command lacks repository-default scope and working directory.
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

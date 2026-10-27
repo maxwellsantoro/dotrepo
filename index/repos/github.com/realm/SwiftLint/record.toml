@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/realm/SwiftLint"
-generated_at = "2026-09-16T16:28:23.453507Z"
+generated_at = "2026-10-27T18:15:27.41844Z"
 
 [record.trust]
 confidence = "high"
@@ -42,7 +42,7 @@ topics = [
 ]
 
 [docs]
-root = "https://realm.github.io/SwiftLint"
+root = "https://megalinter.io/latest/descriptors/swift_swiftlint/"
 
 [relations]
 references = []
@@ -60,23 +60,24 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:28:23.453507Z"
+checkedAt = "2026-10-27T18:15:27.41844Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:28:23.453507Z"
+checkedAt = "2026-10-27T18:15:27.41844Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:486: [SwiftLint documentation](https://megalinter.io/latest/descriptors/swift_swiftlint/)"
+source = "README.md"
 state = "present"
-valueJson = '"https://realm.github.io/SwiftLint"'
+valueJson = '"https://megalinter.io/latest/descriptors/swift_swiftlint/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:28:23.453507Z"
+checkedAt = "2026-10-27T18:15:27.41844Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -84,7 +85,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:28:23.453507Z"
+checkedAt = "2026-10-27T18:15:27.41844Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -92,7 +93,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:28:23.453507Z"
+checkedAt = "2026-10-27T18:15:27.41844Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -101,7 +102,7 @@ state = "present"
 valueJson = '"make all"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:28:23.453507Z"
+checkedAt = "2026-10-27T18:15:27.41844Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -110,7 +111,7 @@ state = "present"
 valueJson = '"A tool to enforce Swift style and conventions."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:28:23.453507Z"
+checkedAt = "2026-10-27T18:15:27.41844Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -118,16 +119,16 @@ state = "present"
 valueJson = '"https://realm.github.io/SwiftLint"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:28:23.453507Z"
+checkedAt = "2026-10-27T18:15:27.41844Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"SwiftLint"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:28:23.453507Z"
+checkedAt = "2026-10-27T18:15:27.41844Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -140,6 +141,6 @@ archived = false
 clone_url = "https://github.com/realm/SwiftLint.git"
 default_branch = "main"
 fork = false
-head_sha = "a510662cab2b27618433e50d3e0b3b3d1c5605b7"
+head_sha = "ec4691d9e813a1d3358e82917326b56b0a71d3c9"
 html_url = "https://github.com/realm/SwiftLint"
-stars = 19735
+stars = 19777

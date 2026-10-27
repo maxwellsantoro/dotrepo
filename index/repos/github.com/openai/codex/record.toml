@@ -2,17 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/openai/codex"
-generated_at = "2026-09-16T16:35:21.055416Z"
+generated_at = "2026-10-27T17:29:29.151946Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
-    "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `codex-rs/Cargo.toml`, and `justfile`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@openai/codex-core-agent-team` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `codex-rs/Cargo.toml`. Imported `repo.test` from `justfile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. 2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged. 2026-10-04 pinned command-source audit supersedes affected extraction assessments and prior auto-promotion. Corrected commands are unassessed pending full-record verification; unrelated inspection timestamps are unchanged. See index/telemetry/command-semantics-20261004/report.json."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@openai/codex-core-agent-team` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Ignored component-scoped commands from `codex-rs/Cargo.toml` as repository defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Codex CLI splash"
@@ -44,17 +44,28 @@ maintainers = ["@openai/codex-core-agent-team"]
 team = "@openai/codex-core-agent-team"
 security_contact = "https://bugcrowd.com/engagements/openai"
 
+[docs]
+root = "https://developers.openai.com/codex"
+
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:35:21.055416Z"
+checkedAt = "2026-10-27T17:29:29.151946Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-10-27T17:29:29.151946Z"
+confidence = "high"
+method = "extracted"
+reason = "Explicit documentation link at README.md:76: - [**Codex Documentation**](https://developers.openai.com/codex)"
+source = "README.md"
+state = "present"
+valueJson = '"https://developers.openai.com/codex"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:35:21.055416Z"
+checkedAt = "2026-10-27T17:29:29.151946Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -63,16 +74,23 @@ state = "present"
 valueJson = '"https://bugcrowd.com/engagements/openai"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:35:21.055416Z"
+checkedAt = "2026-10-27T17:29:29.151946Z"
 confidence = "high"
 method = "unspecified"
 reason = "clear CODEOWNERS team"
 state = "present"
 valueJson = '"@openai/codex-core-agent-team"'
 
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-10-27T17:29:29.151946Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no build command sources found"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:35:21.055416Z"
+checkedAt = "2026-10-27T17:29:29.151946Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -81,7 +99,7 @@ state = "present"
 valueJson = '"Lightweight coding agent that runs in your terminal"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:35:21.055416Z"
+checkedAt = "2026-10-27T17:29:29.151946Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -89,95 +107,27 @@ state = "present"
 valueJson = '"https://github.com/openai/codex"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:35:21.055416Z"
+checkedAt = "2026-10-27T17:29:29.151946Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Codex CLI splash"'
 
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-10-27T17:29:29.151946Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no test command sources found"
+state = "not_found"
+valueJson = "null"
 
 [x.github]
 archived = false
 clone_url = "https://github.com/openai/codex.git"
 default_branch = "main"
 fork = false
-head_sha = "da18000cae9884ab45f83b2d07fbd5a220a1de39"
+head_sha = "19d730175f68d56aba23eae6c765b4e133299069"
 html_url = "https://github.com/openai/codex"
-stars = 124703
-
-[[repo.build_candidates]]
-command = "cargo build"
-ecosystem = "Rust"
-source = "docs/install.md"
-
-[repo.build_candidates.context]
-command = "cargo build"
-working_directory = "codex-rs"
-scope = "component"
-prerequisites = ["Use a documented supported Unix host (macOS 12+, Ubuntu 20.04+, Debian 10+, or Windows 11 via WSL2) with at least 4 GB RAM. Install the pinned Rust 1.95.0 toolchain with rustfmt, clippy, and rust-src as declared in codex-rs/rust-toolchain.toml."]
-source = "docs/install.md"
-component = "codex-rs"
-
-[[repo.test_candidates]]
-command = "just test"
-ecosystem = "Rust"
-source = "docs/install.md"
-
-[repo.test_candidates.context]
-command = "just test"
-working_directory = "codex-rs"
-scope = "component"
-prerequisites = ["Use a documented supported Unix host (macOS 12+, Ubuntu 20.04+, Debian 10+, or Windows 11 via WSL2) with at least 4 GB RAM. Install the pinned Rust 1.95.0 toolchain with rustfmt, clippy, and rust-src as declared in codex-rs/rust-toolchain.toml.", "Install just and cargo-nextest using the documented locked cargo installs; Python 3 and sh must be available for the retained root justfile shell adapter. Preserve the wrapper: it selects codex-rs and supplies RUST_MIN_STACK and NEXTEST_PROFILE."]
-source = "docs/install.md"
-component = "codex-rs"
-
-[docs]
-
-root = "https://developers.openai.com/codex"
-
-[x.dotrepo.field_evidence."repo.build_candidates.0"]
-checkedAt = "2026-10-06T05:05:26.380157Z"
-confidence = "high"
-method = "extracted"
-reason = "2026-10-06 bounded retained-revision inspection: complete source-grounded command/context tuple, wrapper and scope preserved; no upstream execution or whole-record recrawl. Supporting exact files, pins and hashes are retained in evidence.md and the remainder audit source receipt."
-source = "docs/install.md"
-state = "present"
-valueJson = "{\"command\": \"cargo build\", \"context\": {\"command\": \"cargo build\", \"component\": \"codex-rs\", \"prerequisites\": [\"Use a documented supported Unix host (macOS 12+, Ubuntu 20.04+, Debian 10+, or Windows 11 via WSL2) with at least 4 GB RAM. Install the pinned Rust 1.95.0 toolchain with rustfmt, clippy, and rust-src as declared in codex-rs/rust-toolchain.toml.\"], \"scope\": \"component\", \"source\": \"docs/install.md\", \"working_directory\": \"codex-rs\"}, \"ecosystem\": \"Rust\", \"source\": \"docs/install.md\"}"
-
-[x.dotrepo.field_evidence."repo.test_candidates.0"]
-checkedAt = "2026-10-06T05:05:26.380157Z"
-confidence = "high"
-method = "extracted"
-reason = "2026-10-06 bounded retained-revision inspection: complete source-grounded command/context tuple, wrapper and scope preserved; no upstream execution or whole-record recrawl. Supporting exact files, pins and hashes are retained in evidence.md and the remainder audit source receipt."
-source = "docs/install.md"
-state = "present"
-valueJson = "{\"command\": \"just test\", \"context\": {\"command\": \"just test\", \"component\": \"codex-rs\", \"prerequisites\": [\"Use a documented supported Unix host (macOS 12+, Ubuntu 20.04+, Debian 10+, or Windows 11 via WSL2) with at least 4 GB RAM. Install the pinned Rust 1.95.0 toolchain with rustfmt, clippy, and rust-src as declared in codex-rs/rust-toolchain.toml.\", \"Install just and cargo-nextest using the documented locked cargo installs; Python 3 and sh must be available for the retained root justfile shell adapter. Preserve the wrapper: it selects codex-rs and supplies RUST_MIN_STACK and NEXTEST_PROFILE.\"], \"scope\": \"component\", \"source\": \"docs/install.md\", \"working_directory\": \"codex-rs\"}, \"ecosystem\": \"Rust\", \"source\": \"docs/install.md\"}"
-
-[x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-06T05:05:26.380157Z"
-confidence = "high"
-method = "not_found_in_inspected_sources"
-reason = "Documented Rust workspace entrypoint requires codex-rs; not a repository-wide scalar default. No supported scalar default/root found within inspected source scope; this is not universal absence. Preserve record age/status."
-source = "docs/install.md"
-state = "not_found"
-valueJson = "null"
-
-[x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-06T05:05:26.380157Z"
-confidence = "high"
-method = "not_found_in_inspected_sources"
-reason = "Documented Rust workspace entrypoint requires codex-rs; not a repository-wide scalar default. No supported scalar default/root found within inspected source scope; this is not universal absence. Preserve record age/status."
-source = "docs/install.md"
-state = "not_found"
-valueJson = "null"
-
-[x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-06T05:05:26.380157Z"
-confidence = "high"
-method = "extracted"
-reason = "README explicitly declares Codex Documentation; no external page fetched or inferred from hostname. Source declaration at retained revision only; external page not executed or used as live semantic proof."
-source = "README.md"
-state = "present"
-valueJson = "\"https://developers.openai.com/codex\""
+stars = 131258

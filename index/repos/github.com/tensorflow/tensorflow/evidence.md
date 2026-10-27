@@ -1,9 +1,10 @@
 # Evidence
 
-- Imported repository name from README.md.
+- Imported repository name and docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
 - Imported repo.build from CONTRIBUTING.md as `bazel build --config=dbg //tensorflow/tools/pip_package:build_pip_package`.
+- Imported docs.root as `https://www.tensorflow.org/api_docs/`. Explicit documentation link at README.md:17: [![Documentation](https://img.shields.io/badge/api-reference-blue.svg)](https://www.tensorflow.org/api_docs/) |
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.name` to `tensorflow` from `GitHub API` after deterministic escalation.

@@ -2,9 +2,11 @@
 
 - Imported repository name and docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS.
-- Inferred repo.build from go.mod as `go build ./...`.
+- Imported repo.build from CONTRIBUTING.md as `go build`.
 - Imported repo.test from CONTRIBUTING.md as `go test -v ./...`.
 - Imported repo.toolchain.min from go.mod as `1.26.0` (Go).
+- Imported docs.root as `https://rclone.org/docs/`. Explicit documentation link at README.md:7: [Documentation](https://rclone.org/docs/) |
+- Imported docs.getting_started as `https://rclone.org/install/`. Explicit documentation link at README.md:11: [Installation](https://rclone.org/install/) |
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
@@ -14,6 +16,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Fresh verification
+## Auto-promotion
 
-Prior verified authority was not inherited: this refresh must qualify using its current field scores.
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

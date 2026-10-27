@@ -5,7 +5,8 @@
 - Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.
 - Imported repo.build from README.md as `make build`.
 - Imported repo.test from README.md as `make test`.
-- Imported repo.toolchain.min from go.mod as `1.27.0` (Go).
+- Imported repo.toolchain.min from go.mod as `1.27.3` (Go).
+- Imported docs.root as `https://headscale.net/stable/`. Explicit documentation link at README.md:64: Please have a look at the [`documentation`](https://headscale.net/stable/).
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.

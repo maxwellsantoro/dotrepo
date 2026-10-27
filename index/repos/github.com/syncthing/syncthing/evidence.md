@@ -5,6 +5,8 @@
 - Inferred repo.build from go.mod as `go build ./...`.
 - Inferred repo.test from go.mod as `go test ./...`.
 - Imported repo.toolchain.min from go.mod as `1.26.2` (Go).
+- Imported docs.root as `https://docs.syncthing.net/`. Explicit documentation link at README.md:93: Please see the Syncthing [documentation site][6] [[source]][17].
+- Imported docs.getting_started as `https://docs.syncthing.net/intro/getting-started.html`. Explicit documentation link at README.md:56: Take a look at the [getting started guide][2].
 - Discovered related relation to github.com/syncthing/syncthing from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 

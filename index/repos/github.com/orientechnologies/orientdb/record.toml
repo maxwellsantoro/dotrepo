@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/orientechnologies/orientdb"
-generated_at = "2026-09-16T16:32:49.235469Z"
+generated_at = "2026-10-27T17:21:08.442942Z"
 
 [record.trust]
 confidence = "medium"
@@ -52,27 +52,24 @@ topics = [
     "sql",
 ]
 
-[docs]
-root = "https://orientdb.dev"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:32:49.235469Z"
+checkedAt = "2026-10-27T17:21:08.442942Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:32:49.235469Z"
+checkedAt = "2026-10-27T17:21:08.442942Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://orientdb.dev"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:32:49.235469Z"
+checkedAt = "2026-10-27T17:21:08.442942Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -80,7 +77,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:32:49.235469Z"
+checkedAt = "2026-10-27T17:21:08.442942Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -88,7 +85,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:32:49.235469Z"
+checkedAt = "2026-10-27T17:21:08.442942Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -97,7 +94,7 @@ state = "present"
 valueJson = '"./mvnw package"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:32:49.235469Z"
+checkedAt = "2026-10-27T17:21:08.442942Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -106,7 +103,7 @@ state = "present"
 valueJson = '"OrientDB is the most versatile DBMS supporting Graph, Document, Reactive, Full-Text and Geospatial models in one Multi-Model product. OrientDB can run distributed (Multi-Master), supports SQL, ACID Transactions, Full-Text indexing and Reactive Queries."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:32:49.235469Z"
+checkedAt = "2026-10-27T17:21:08.442942Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -114,16 +111,16 @@ state = "present"
 valueJson = '"https://orientdb.dev"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:32:49.235469Z"
+checkedAt = "2026-10-27T17:21:08.442942Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"OrientDB"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:32:49.235469Z"
+checkedAt = "2026-10-27T17:21:08.442942Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -136,6 +133,6 @@ archived = false
 clone_url = "https://github.com/orientechnologies/orientdb.git"
 default_branch = "develop"
 fork = false
-head_sha = "189cc7e18192be50b520defc063e934553a549cc"
+head_sha = "3184fe1437d7158c637350134bbffd3bcb471c93"
 html_url = "https://github.com/orientechnologies/orientdb"
-stars = 4984
+stars = 4997

@@ -4,6 +4,7 @@
 - Imported repo.build from package.json as `pnpm build`.
 - Imported repo.test from package.json as `pnpm test`.
 - Imported repo.toolchain.min from package.json as `22.12.0` (Node.js).
+- Imported docs.getting_started as `https://mermaid.ai/open-source/intro/`. Explicit documentation link at README.md:18: <a href="https://mermaid.ai/open-source/">📖 Documentation</a> | <a href="https://mermaid.ai/open-source/intro/">🚀 Getting Started</a> | <a href="https://www.jsdelivr.com/package/npm/mermaid">🌐 CDN</a> | <a href="https://discord.gg/sKeNQX4Wtj" title="Discord invite">🙌 Join Us</a>
 - Discovered related relation to github.com/mermaid-js/mermaid from package.json repository.
 - Discovered related relation to github.com/mermaid-js/mermaid-cli from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.

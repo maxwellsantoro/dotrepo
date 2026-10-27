@@ -1,7 +1,7 @@
 # Evidence
 
 - Imported repository name from README.md.
-- Inferred repo.build from winPEAS/winPEASexe/winPEAS/winPEAS.csproj as `dotnet build`.
+- Ignored component-scoped commands from `winPEAS/winPEASexe/winPEAS/winPEAS.csproj` as repository defaults.
 - Discovered related relation to github.com/peass-ng/PEASS-ng from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
@@ -12,12 +12,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Fresh verification
+## Auto-promotion
 
-Prior verified authority was not inherited: this refresh must qualify using its current field scores.
-
-## Command semantic correction (2026-10-03)
-
-2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged.
-
-- Withheld `repo.build` previously extracted from `winPEAS/winPEASexe/winPEAS/winPEAS.csproj` as `dotnet build`. Component command lacks repository-default scope and working directory.
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

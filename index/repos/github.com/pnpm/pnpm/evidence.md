@@ -5,6 +5,7 @@
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
 - Imported repo.build from package.json as `pnpm run compile`.
 - Imported repo.test from package.json as `pnpm run test-all`.
+- Imported docs.getting_started as `https://pnpm.io/installation`. Explicit documentation link at README.md:252: - [Installation](https://pnpm.io/installation)
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

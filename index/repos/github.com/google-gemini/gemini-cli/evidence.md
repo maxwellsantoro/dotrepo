@@ -6,6 +6,8 @@
 - Imported repo.build from package.json as `npm run build`.
 - Imported repo.test from package.json as `npm test`.
 - Imported repo.toolchain.min from package.json as `20.0.0` (Node.js).
+- Imported docs.root as `https://geminicli.com/docs/`. Explicit documentation link at README.md:28: Learn all about Gemini CLI in our [documentation](https://geminicli.com/docs/).
+- Imported docs.getting_started as `https://www.geminicli.com/docs/get-started`. Explicit documentation link at README.md:246: - [**Quickstart Guide**](https://www.geminicli.com/docs/get-started) - Get up
 - Discovered related relation to github.com/google-gemini/gemini-cli from package.json repository.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

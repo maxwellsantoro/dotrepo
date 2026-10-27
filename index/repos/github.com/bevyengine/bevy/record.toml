@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/bevyengine/bevy"
-generated_at = "2026-09-17T06:05:37.469524358Z"
+generated_at = "2026-10-27T17:32:29.263987Z"
 
 [record.trust]
 confidence = "medium"
@@ -39,7 +39,7 @@ topics = [
 ]
 
 [repo.toolchain]
-min = "1.96.0"
+min = "1.97.1"
 ecosystem = "Rust"
 
 [owners]
@@ -47,8 +47,7 @@ maintainers = []
 security_contact = "https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/privately-reporting-a-security-vulnerability"
 
 [docs]
-root = "https://bevy.org"
-getting_started = "https://bevy.org/learn/quick-start/getting-started/setup"
+root = "https://bevy.org/learn/quick-start/introduction"
 
 [relations]
 references = []
@@ -66,23 +65,24 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-17T06:05:37.469524358Z"
+checkedAt = "2026-10-27T17:32:29.263987Z"
 confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
-state = "present"
-valueJson = '"https://bevy.org/learn/quick-start/getting-started/setup"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-17T06:05:37.469524358Z"
+checkedAt = "2026-10-27T17:32:29.263987Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:36: * **[Quick Start Guide](https://bevy.org/learn/quick-start/introduction):** Bevy's official Quick Start Guide. The best place to start learning Bevy."
+source = "README.md"
 state = "present"
-valueJson = '"https://bevy.org"'
+valueJson = '"https://bevy.org/learn/quick-start/introduction"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-17T06:05:37.469524358Z"
+checkedAt = "2026-10-27T17:32:29.263987Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -91,7 +91,7 @@ state = "present"
 valueJson = '"https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/privately-reporting-a-security-vulnerability"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-17T06:05:37.469524358Z"
+checkedAt = "2026-10-27T17:32:29.263987Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -99,7 +99,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-17T06:05:37.469524358Z"
+checkedAt = "2026-10-27T17:32:29.263987Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -108,7 +108,7 @@ state = "present"
 valueJson = '"cargo build --workspace"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-17T06:05:37.469524358Z"
+checkedAt = "2026-10-27T17:32:29.263987Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -117,7 +117,7 @@ state = "present"
 valueJson = '"A refreshingly simple data-driven game engine built in Rust"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-17T06:05:37.469524358Z"
+checkedAt = "2026-10-27T17:32:29.263987Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -125,16 +125,16 @@ state = "present"
 valueJson = '"https://bevy.org"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-17T06:05:37.469524358Z"
+checkedAt = "2026-10-27T17:32:29.263987Z"
 confidence = "high"
 method = "inferred"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"bevy"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-17T06:05:37.469524358Z"
+checkedAt = "2026-10-27T17:32:29.263987Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -147,6 +147,6 @@ archived = false
 clone_url = "https://github.com/bevyengine/bevy.git"
 default_branch = "main"
 fork = false
-head_sha = "f3b53464513111374089cfcc724ab448e8479dd1"
+head_sha = "db44e0b0513d16db529c3435b4dccb7aead567a7"
 html_url = "https://github.com/bevyengine/bevy"
-stars = 48218
+stars = 49320

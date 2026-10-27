@@ -1,9 +1,10 @@
 # Evidence
 
-- Imported repository name from README.md.
+- Imported repository name and docs entry points from README.md.
 - Imported repo.build from CONTRIBUTING.md as `cargo build`.
 - Imported repo.test from CONTRIBUTING.md as `cargo test --workspace --verbose`.
-- Imported repo.toolchain.min from Cargo.toml as `1.95.0` (Rust).
+- Imported repo.toolchain.min from Cargo.toml as `1.99.0` (Rust).
+- Imported docs.root as `https://yazi-rs.github.io/docs/installation`. Explicit documentation link at README.md:40: - Usage: https://yazi-rs.github.io/docs/installation
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

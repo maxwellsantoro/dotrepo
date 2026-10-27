@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/krishnadey30/LeetCode-Questions-CompanyWise"
-generated_at = "2026-09-16T16:25:54.047523Z"
+generated_at = "2026-10-27T18:07:35.297639Z"
 
 [record.trust]
 confidence = "low"
@@ -20,23 +20,23 @@ languages = []
 topics = []
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:25:54.047523Z"
+checkedAt = "2026-10-27T18:07:35.297639Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:25:54.047523Z"
+checkedAt = "2026-10-27T18:07:35.297639Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:25:54.047523Z"
+checkedAt = "2026-10-27T18:07:35.297639Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -44,7 +44,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:25:54.047523Z"
+checkedAt = "2026-10-27T18:07:35.297639Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -52,7 +52,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:25:54.047523Z"
+checkedAt = "2026-10-27T18:07:35.297639Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -60,7 +60,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:25:54.047523Z"
+checkedAt = "2026-10-27T18:07:35.297639Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -69,7 +69,7 @@ state = "present"
 valueJson = '"Contains Company Wise Questions sorted based on Frequency and all time"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:25:54.047523Z"
+checkedAt = "2026-10-27T18:07:35.297639Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -77,7 +77,7 @@ state = "present"
 valueJson = '"https://github.com/krishnadey30/LeetCode-Questions-CompanyWise"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:25:54.047523Z"
+checkedAt = "2026-10-27T18:07:35.297639Z"
 confidence = "medium"
 method = "inferred"
 reason = "fell back to directory name or GitHub API"
@@ -85,7 +85,7 @@ state = "present"
 valueJson = '"LeetCode-Questions-CompanyWise"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:25:54.047523Z"
+checkedAt = "2026-10-27T18:07:35.297639Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -99,4 +99,4 @@ default_branch = "master"
 fork = false
 head_sha = "fb5f78b55eead7f948aada8459c5bfd31ae8abbc"
 html_url = "https://github.com/krishnadey30/LeetCode-Questions-CompanyWise"
-stars = 20212
+stars = 20297

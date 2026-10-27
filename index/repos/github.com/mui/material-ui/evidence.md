@@ -4,7 +4,8 @@
 - Imported the security reporting channel from SECURITY.md.
 - Imported repo.build from package.json as `pnpm build`.
 - Imported repo.test from package.json as `pnpm test`.
-- Imported repo.toolchain.min from package.json as `22.23.2` (Node.js).
+- Imported repo.toolchain.min from package.json as `22.23.4` (Node.js).
+- Imported docs.root as `https://next.mui.com/material-ui/getting-started/`. Explicit documentation link at README.md:33: Get started in the [Material UI documentation](https://next.mui.com/material-ui/getting-started/).
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

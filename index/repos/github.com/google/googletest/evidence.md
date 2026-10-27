@@ -1,6 +1,7 @@
 # Evidence
 
 - Imported repository name from README.md.
+- Imported repo.build from CONTRIBUTING.md as `make`.
 - Imported repo.test from CONTRIBUTING.md as `make test`.
 - Discovered related relation to github.com/google/googletest from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.

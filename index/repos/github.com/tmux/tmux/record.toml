@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/tmux/tmux"
-generated_at = "2026-09-16T16:30:13.736699Z"
+generated_at = "2026-10-27T18:19:33.790704Z"
 
 [record.trust]
 confidence = "medium"
@@ -26,54 +26,37 @@ languages = [
     "Roff",
     "Yacc",
     "M4",
+    "Python",
     "Awk",
+    "BitBake",
     "Makefile",
-    "Pawn",
     "Perl",
+    "NASL",
 ]
 topics = []
-
-[[repo.test_candidates]]
-command = "make"
-ecosystem = "Make"
-source = ".github/workflows/regress.yml"
-
-[repo.test_candidates.context]
-command = "make"
-working_directory = "regress"
-scope = "repository"
-prerequisites = [
-    "Prepare an Ubuntu 24.04 checkout with autoconf, automake, bison, build-essential, libevent-dev, libncurses-dev, libutf8proc-dev and pkg-config as in the upstream regression workflow.",
-    "Before entering regress, build this checkout at the root using sh autogen.sh, then ./configure --enable-utf8proc --enable-asan, then make; regression scripts use the resulting ../tmux binary.",
-]
-source = ".github/workflows/regress.yml"
-
-[docs]
-root = "https://github.com/tmux/tmux/wiki"
 
 [owners]
 maintainers = []
 security_contact = "nicholas.marriott@gmail.com"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:30:13.736699Z"
+checkedAt = "2026-10-27T18:19:33.790704Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-06T05:08:10.049774+00:00"
+checkedAt = "2026-10-27T18:19:33.790704Z"
 confidence = "high"
-method = "extracted"
-reason = "2026-10-06 pinned-source audit: README explicitly declares other documentation in the project wiki."
-source = "README"
-state = "present"
-valueJson = '"https://github.com/tmux/tmux/wiki"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:30:13.736699Z"
+checkedAt = "2026-10-27T18:19:33.790704Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -82,7 +65,7 @@ state = "present"
 valueJson = '"nicholas.marriott@gmail.com"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:30:13.736699Z"
+checkedAt = "2026-10-27T18:19:33.790704Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -90,16 +73,15 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-06T05:08:10.049774+00:00"
-confidence = "medium"
-method = "unspecified"
-reason = "2026-10-06 pinned-source audit: Checkout build requires sh autogen.sh followed by ./configure && make, with source-declared native dependencies. The compound source instruction is unsupported as a scalar; do not split it into a manufactured default."
-source = "README"
-state = "unresolved"
+checkedAt = "2026-10-27T18:19:33.790704Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no build command sources found"
+state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:30:13.736699Z"
+checkedAt = "2026-10-27T18:19:33.790704Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -108,7 +90,7 @@ state = "present"
 valueJson = '"tmux source code"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:30:13.736699Z"
+checkedAt = "2026-10-27T18:19:33.790704Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -116,7 +98,7 @@ state = "present"
 valueJson = '"https://github.com/tmux/tmux"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:30:13.736699Z"
+checkedAt = "2026-10-27T18:19:33.790704Z"
 confidence = "medium"
 method = "inferred"
 reason = "fell back to directory name or GitHub API"
@@ -125,12 +107,11 @@ state = "present"
 valueJson = '"tmux"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-06T05:08:10.049774+00:00"
-confidence = "medium"
-method = "unspecified"
-reason = "2026-10-06 pinned-source audit: Regression workflow runs make from regress after a prepared build; publish a repository-scoped nested-cwd candidate, preserving the Linux build preparation rather than a root scalar."
-source = ".github/workflows/regress.yml"
-state = "unresolved"
+checkedAt = "2026-10-27T18:19:33.790704Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no test command sources found"
+state = "not_found"
 valueJson = "null"
 
 [x.github]
@@ -138,15 +119,6 @@ archived = false
 clone_url = "https://github.com/tmux/tmux.git"
 default_branch = "master"
 fork = false
-head_sha = "e880cf63e0a9fe095d7c5d313761520fb1a8653c"
+head_sha = "523ac69601e1ea51a8ba718d32df6a00e4d0f6d4"
 html_url = "https://github.com/tmux/tmux"
-stars = 49294
-
-[x.dotrepo.field_evidence."repo.test_candidates.0"]
-checkedAt = "2026-10-06T05:08:10.049774+00:00"
-confidence = "high"
-method = "extracted"
-reason = "2026-10-06 source-inspected Ubuntu 24.04 regression tuple from pinned workflow: repository coverage, regress cwd and required native build preparation. No execution is claimed."
-source = ".github/workflows/regress.yml"
-state = "present"
-valueJson = '{"command":"make","context":{"command":"make","prerequisites":["Prepare an Ubuntu 24.04 checkout with autoconf, automake, bison, build-essential, libevent-dev, libncurses-dev, libutf8proc-dev and pkg-config as in the upstream regression workflow.","Before entering regress, build this checkout at the root using sh autogen.sh, then ./configure --enable-utf8proc --enable-asan, then make; regression scripts use the resulting ../tmux binary."],"scope":"repository","source":".github/workflows/regress.yml","working_directory":"regress"},"ecosystem":"Make","source":".github/workflows/regress.yml"}'
+stars = 50029

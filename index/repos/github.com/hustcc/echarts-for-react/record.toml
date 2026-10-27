@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/hustcc/echarts-for-react"
-generated_at = "2026-09-16T16:24:43.522269Z"
+generated_at = "2026-10-27T18:04:26.879705Z"
 
 [record.trust]
 confidence = "high"
@@ -35,9 +35,6 @@ topics = [
     "visualization",
 ]
 
-[docs]
-root = "https://git.hust.cc/echarts-for-react"
-
 [relations]
 references = []
 
@@ -54,23 +51,23 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:24:43.522269Z"
+checkedAt = "2026-10-27T18:04:26.879705Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:24:43.522269Z"
+checkedAt = "2026-10-27T18:04:26.879705Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://git.hust.cc/echarts-for-react"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:24:43.522269Z"
+checkedAt = "2026-10-27T18:04:26.879705Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -78,7 +75,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:24:43.522269Z"
+checkedAt = "2026-10-27T18:04:26.879705Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -86,7 +83,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:24:43.522269Z"
+checkedAt = "2026-10-27T18:04:26.879705Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -95,7 +92,7 @@ state = "present"
 valueJson = '"npm run build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:24:43.522269Z"
+checkedAt = "2026-10-27T18:04:26.879705Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -104,7 +101,7 @@ state = "present"
 valueJson = '"⛳️  Apache ECharts components for React wrapper. 一个简单的 Apache echarts 的 React 封装。"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:24:43.522269Z"
+checkedAt = "2026-10-27T18:04:26.879705Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -112,16 +109,16 @@ state = "present"
 valueJson = '"https://git.hust.cc/echarts-for-react"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:24:43.522269Z"
+checkedAt = "2026-10-27T18:04:26.879705Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"echarts-for-react"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:24:43.522269Z"
+checkedAt = "2026-10-27T18:04:26.879705Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -136,4 +133,4 @@ default_branch = "master"
 fork = false
 head_sha = "2346edc962ac9c0de0a988d08dc6e4c38ad43cb0"
 html_url = "https://github.com/hustcc/echarts-for-react"
-stars = 5006
+stars = 5012

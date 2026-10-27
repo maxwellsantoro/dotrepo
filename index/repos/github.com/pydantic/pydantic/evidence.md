@@ -1,9 +1,11 @@
 # Evidence
 
 - Imported repository name and docs entry points from README.md.
+- Ignored component-scoped commands from `pydantic-core/Cargo.toml` as repository defaults.
 - Imported repo.build from Makefile as `make all`.
 - Imported repo.test from Makefile as `make test`.
 - Imported repo.toolchain.min from pydantic-core/Cargo.toml as `1.88` (Rust).
+- Imported docs.root as `https://pydantic.dev/docs/validation/latest/get-started/`. Explicit documentation link at README.md:33: See [documentation](https://pydantic.dev/docs/validation/latest/get-started/) for more details.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Deepened `owners.security_contact` from `README.md` during deterministic escalation.

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/moby/moby"
-generated_at = "2026-09-18T06:04:03.296191962Z"
+generated_at = "2026-10-27T18:27:04.756818Z"
 
 [record.trust]
 confidence = "high"
@@ -43,34 +43,31 @@ topics = [
 ]
 
 [repo.toolchain]
-min = "1.26.6"
+min = "1.26.8"
 ecosystem = "Go"
 
 [owners]
 maintainers = []
 security_contact = "security@docker.com"
 
-[docs]
-root = "https://mobyproject.org/"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-18T06:04:03.296191962Z"
+checkedAt = "2026-10-27T18:27:04.756818Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-18T06:04:03.296191962Z"
+checkedAt = "2026-10-27T18:27:04.756818Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://mobyproject.org/"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-18T06:04:03.296191962Z"
+checkedAt = "2026-10-27T18:27:04.756818Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -79,7 +76,7 @@ state = "present"
 valueJson = '"security@docker.com"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-18T06:04:03.296191962Z"
+checkedAt = "2026-10-27T18:27:04.756818Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -87,7 +84,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-18T06:04:03.296191962Z"
+checkedAt = "2026-10-27T18:27:04.756818Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -96,7 +93,7 @@ state = "present"
 valueJson = '"make build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-18T06:04:03.296191962Z"
+checkedAt = "2026-10-27T18:27:04.756818Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -105,7 +102,7 @@ state = "present"
 valueJson = '"The Moby Project - a collaborative project for the container ecosystem to assemble container-based systems"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-18T06:04:03.296191962Z"
+checkedAt = "2026-10-27T18:27:04.756818Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -113,16 +110,16 @@ state = "present"
 valueJson = '"https://mobyproject.org/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-18T06:04:03.296191962Z"
+checkedAt = "2026-10-27T18:27:04.756818Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"The Moby Project"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-18T06:04:03.296191962Z"
+checkedAt = "2026-10-27T18:27:04.756818Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -135,6 +132,6 @@ archived = false
 clone_url = "https://github.com/moby/moby.git"
 default_branch = "master"
 fork = false
-head_sha = "a107266eefe66d015e0be9b79b38436e2af982f9"
+head_sha = "9cad7b0b9f45c27bf6a961006392acff63817931"
 html_url = "https://github.com/moby/moby"
-stars = 72111
+stars = 72212

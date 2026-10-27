@@ -2,9 +2,11 @@
 
 - Imported repository name and docs entry points from README.md.
 - Imported the security reporting channel from SECURITY.md.
-- Inferred repo.build from .github/workflows/test.yaml as `npm run build`.
-- Inferred repo.test from .github/workflows/test.yaml as `npm test`.
-- Imported repo.toolchain.min from go.mod as `1.26.0` (Go).
+- Inferred repo.build from go.mod as `go build ./...`.
+- Inferred repo.test from go.mod as `go test ./...`.
+- Imported repo.toolchain.min from go.mod as `1.26.10` (Go).
+- Imported docs.root as `https://docs.ollama.com/cli`. Explicit documentation link at README.md:147: - [CLI reference](https://docs.ollama.com/cli)
+- Imported docs.getting_started as `https://docs.ollama.com/quickstart`. Explicit documentation link at README.md:88: See the [quickstart guide](https://docs.ollama.com/quickstart) for more details.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
