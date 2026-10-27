@@ -3,7 +3,8 @@
 Use documentation for the binary you installed. The latest stable release is
 [`v1.0.3`](https://github.com/maxwellsantoro/dotrepo/releases/tag/v1.0.3), built from
 the `codex/stable-1.0` maintenance line. The current `main` source identifies itself
-as `2.0.0-alpha.0`; it includes unreleased public Rust API changes. Source merges
+as `2.0.0-rc.1`, published as a prerelease; it includes public Rust API changes
+not in stable. A final 2.0.0 has not been published. Source merges
 do not change an existing release bundle or installed crate.
 
 ## Version-matched documentation

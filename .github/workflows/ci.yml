@@ -34,21 +34,19 @@ jobs:
     needs: [change-scope, rust-and-index, python-gate, operator-gate, public-surface-gate, release-gate, minimal-gate]
     if: always()
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Install uv
         uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
-      - name: Create and sync Python environment
-        run: |
-          uv venv
-          uv sync --dev --locked
       - name: Require all selected validation jobs
         env:
           CI_NEEDS: ${{ toJSON(needs) }}
-        run: uv run python scripts/check_ci_gate.py
+        run: uv run --no-project python scripts/check_ci_gate.py
 
   change-scope:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     outputs:
       run_rust_ci: ${{ steps.scope.outputs.run_rust_ci }}
       run_python_gate: ${{ steps.scope.outputs.run_python_gate }}
@@ -72,6 +70,7 @@ jobs:
     needs: change-scope
     if: needs.change-scope.outputs.run_rust_ci == 'true'
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Install uv
@@ -94,7 +93,14 @@ jobs:
           else
             echo "mold unavailable; using default linker"
           fi
+      - name: Cache cargo-deny binary
+        id: cargo-deny-cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.cargo/bin/cargo-deny
+          key: ${{ runner.os }}-${{ runner.arch }}-cargo-deny-0.19.9
       - name: Install cargo-deny
+        if: steps.cargo-deny-cache.outputs.cache-hit != 'true'
         run: cargo install cargo-deny --version 0.19.9 --locked
       - name: Check Rust formatting, linting, tests, and seeded flows
         run: |
@@ -351,6 +357,7 @@ jobs:
     needs: change-scope
     if: needs.change-scope.outputs.run_operator_gate == 'true'
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Install uv
@@ -394,6 +401,7 @@ jobs:
     needs: change-scope
     if: needs.change-scope.outputs.run_public_surface_gate == 'true'
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Install uv
@@ -453,6 +461,7 @@ jobs:
     needs: change-scope
     if: needs.change-scope.outputs.run_python_gate == 'true'
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Install uv
@@ -489,6 +498,7 @@ jobs:
     needs: change-scope
     if: needs.change-scope.outputs.run_minimal_gate == 'true'
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Install uv
@@ -525,6 +535,7 @@ jobs:
     needs: change-scope
     if: needs.change-scope.outputs.run_release_gate == 'true'
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Install uv
@@ -561,18 +572,27 @@ jobs:
       - name: Run explicit release-surface gate
         run: uv run python scripts/check_release_gate.py --output-root release-gate
       - name: Cache pinned Playwright browsers
+        id: playwright-cache
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-${{ runner.arch }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
       - name: Install pinned browser test tools
+        # --with-deps runs apt on every invocation; on a browser cache hit the
+        # system dependencies are already installed by the run that populated
+        # the cache, so skip them (this was ~367s of a ~9m job on cache miss
+        # days and a recurring apt cost on hit days).
         run: |
           npm install --prefix "$RUNNER_TEMP/dotrepo-browser" --no-save "playwright@$PLAYWRIGHT_VERSION"
-          "$RUNNER_TEMP/dotrepo-browser/node_modules/.bin/playwright" install --with-deps chromium
+          if [ "${{ steps.playwright-cache.outputs.cache-hit }}" = "true" ]; then
+            "$RUNNER_TEMP/dotrepo-browser/node_modules/.bin/playwright" install chromium
+          else
+            "$RUNNER_TEMP/dotrepo-browser/node_modules/.bin/playwright" install --with-deps chromium
+          fi
       - name: Verify desktop and mobile public presentation
         run: NODE_PATH="$RUNNER_TEMP/dotrepo-browser/node_modules" node scripts/check_public_presentation.cjs release-gate/public release-gate/browser-qa
       - name: Upload browser screenshots and results
-        if: always()
+        if: failure()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: public-presentation-browser-qa

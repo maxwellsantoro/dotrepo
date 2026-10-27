@@ -18,6 +18,36 @@ preparation can start together. Dispatch dependency-ready packets, land small
 compatible changes, and release a worker slot when its handoff is reviewable.
 Follow [the team execution guide](docs/agent-execution.md).
 
+### Fast team execution (from 2026-10-27)
+
+The index is fresh (615/615 after the October 27 catch-up, #161), the landing
+deadlock is fixed (#160, #164), `v2.0.0-rc.1` is published, and autonomous
+refresh has landed unattended (#166). Optimize elapsed time, not agent count:
+
+- **Calendar work starts first and never waits for code.** Two gates are
+  elapsed-time or external-action bound: seven consecutive green scheduled
+  refresh runs (one per day from October 28) and Cloudflare R2 enablement
+  (operator dashboard action, issue #167). Assign them to the coordinator on
+  day zero; no worker can accelerate them later.
+- **Three concurrent worker lanes, disjoint by path:** (A) reliability —
+  `crates/`, `scripts/`, and tests for F1/E1; (B) evidence — `benchmarks/`
+  packets and frozen C1/C2 inputs; (C) surface/release — `docs/`, install and
+  release surfaces for the 2.0 final promotion. Workflows and the shared
+  fixtures (`scripts/fixtures/`, `crates/dotrepo-core/tests/`) are
+  coordinator-owned and land in one integration PR per wave, not per worker.
+- **Batch by CI scope.** Each wave lands as at most three PRs ordered
+  docs/prose (minimal gate) → Python/workflows → Rust (full gate once on the
+  combined tree). Workers run only focused checks; the coordinator runs the
+  full gate once per wave on the integrated result (see CONTRIBUTING).
+- **Twice-daily integration checkpoints.** Coordinator reviews handoffs,
+  resolves contract conflicts the same checkpoint, and either lands the wave
+  or returns it with the smallest missing evidence named. A packet idle for
+  two checkpoints is re-scoped smaller or reassigned.
+- **Stop conditions:** F2 closes when its checkpoint evidence exists; 2.0
+  final ships after a clean RC window (no rc-blocking defect and successful
+  scheduled runs), not after a fixed soak duration; C3 starts when one
+  consenting participant is named in issue #170.
+
 The current completion target is **a release-ready toolchain and a reproducible
 operator study on the maintainer's other public projects**. Freeze source-grounded
 tasks before checking coverage, run the paired workflows, and retain failures and

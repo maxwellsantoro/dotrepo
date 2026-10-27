@@ -77,4 +77,4 @@ def test_workflow_gate_always_runs_and_covers_every_scoped_job():
     assert set(gate["needs"]) == {"change-scope", *SCOPED_JOBS}
     step = next(step for step in gate["steps"] if "check_ci_gate.py" in step.get("run", ""))
     assert step["env"]["CI_NEEDS"] == "${{ toJSON(needs) }}"
-    assert step["run"].startswith("uv run python ")
+    assert step["run"].startswith("uv run --no-project python ")

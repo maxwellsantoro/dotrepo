@@ -127,6 +127,6 @@ visible when checks cannot resolve it. See the [trust model](trust-model.md) and
 The [head-to-head benchmark](../benchmarks/head-to-head/) measures accuracy,
 abstention, confidently wrong answers, latency, and transferred bytes against a
 GitHub API + README baseline. It is allowed to show losses.
-[AI interviews](ai-tool-interviews.md) are dated product research, and the
+[AI interviews](archive/ai-tool-interviews.md) are dated product research, and the
 [consumer pilot](consumer-pilot.md) defines evidence needed before claiming
 independent adoption or end-to-end savings.

@@ -1,12 +1,13 @@
 # Changelog
 
-## 2.0.0-rc.1 (unreleased)
+## 2.0.0-rc.1 — 2026-10-27
 
 The post-1.0 tree includes public Rust API changes, including the new
-`FieldConfidence::Suspect` variant. Development therefore continues on a 2.0
-prerelease line so the source at `main` cannot be confused with the immutable
-`v1.0.1` release and crates.io packages. Production installs should stay on
-stable `1.0.x` — see [`docs/install.md`](./docs/install.md).
+`FieldConfidence::Suspect` variant. `2.0.0-rc.1` is published on crates.io,
+GitHub Releases (as a prerelease), and the MCP registry so the source at
+`main` cannot be confused with the immutable `v1.0.1` release. Production
+installs should stay on stable `1.0.x` until 2.0.0 final — see
+[`docs/install.md`](./docs/install.md).
 
 Post-1.0 growth, hardening, and operational-proof work toward the roadmap
 milestones. Direction and gates live in [`ROADMAP.md`](./ROADMAP.md). Counts

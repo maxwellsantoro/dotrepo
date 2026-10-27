@@ -19,6 +19,12 @@ and dependency checks with one agent.
   Use roadmap priority to allocate contested resources and order integration;
   do not serialize independent preparation behind an outcome gate. Before
   dispatch, settle shared contract changes and assign disjoint writable paths.
+  Start elapsed-time/external gates (scheduled-run streaks, operator actions,
+  recruitment) on day zero; they cannot be accelerated later. In one shared
+  checkout, only the coordinator switches branches — workers use worktrees or
+  hand back diffs for the coordinator to apply (see the execution guide).
+  Batch waves by CI scope (prose → Python/workflows → Rust) and run the full
+  gate once per integrated wave, not once per worker.
 - Worker: follow the assigned scope, produce the acceptance evidence, and hand
   back a focused diff plus checks and remaining dependencies using the execution
   guide. Ask the coordinator to resolve ownership overlap before editing it.

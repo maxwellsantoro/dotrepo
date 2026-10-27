@@ -56,9 +56,9 @@ and independent adoption are separate evidence levels.
 - [RFC index](../rfcs/README.md): design records and deferred proposals;
   RFC acceptance and implementation completion are separate
 - [Changelog](../CHANGELOG.md): release and completed implementation history
-- [Archived reviews](archive/README.md), [AI interviews](ai-tool-interviews.md),
-  [edge canary history](public-edge-canary-history.md): historical evidence with
-  their original scope and dates
+- [Archived reviews and history](archive/README.md) (including the archived
+  AI interviews and edge canary history): historical evidence with their
+  original scope and dates
 
 Code and tested contracts outrank prose. Keep active sequencing in the roadmap,
 current measurements in generated reports, and historical evidence immutable.
