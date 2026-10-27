@@ -110,6 +110,16 @@ independent second opinion, then stronger remote adjudicator. Provider/model
 identity is runtime configuration, not a protocol constant. Most repositories
 should require no model. Failed/timed-out attempts count against call budgets.
 
+**Operating decision (2026-10-27): deterministic-only.** Across 36 retained
+autonomous runs (1,779 repositories crawled), adjudication calls are 0 and the
+zero-model rate is 1.0; the Actions secret is unset, so the escalation tiers
+have never run live. Until a dated canary (see
+[m1-escalation-canary](m1-escalation-canary.md)) demonstrates a measured
+quality delta over deterministic resolution on the same fields, scheduled
+operation stays deterministic-only and the sidecar wiring is canary apparatus,
+not an operating tier. Enabling it is an operator decision with a recurring
+cost, recorded here so the absence of model calls is a choice, not drift.
+
 The scheduled workflow starts OpenRouter sidecars when `OPENROUTER_API_KEY` and
 tier-specific model variables exist:
 
