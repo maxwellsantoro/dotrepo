@@ -73,10 +73,7 @@ def test_refresh_landing_is_not_gated_on_public_freshness() -> None:
 
 def test_publication_is_freshness_gated_in_cloudflare_deploy() -> None:
     workflow = (
-        Path(__file__).resolve().parents[2]
-        / ".github"
-        / "workflows"
-        / "public-cloudflare.yml"
+        Path(__file__).resolve().parents[2] / ".github" / "workflows" / "public-cloudflare.yml"
     ).read_text()
     build = workflow.index("- name: Build reviewed public tree for Cloudflare")
     gate = workflow.index("check_public_record_freshness.py")
