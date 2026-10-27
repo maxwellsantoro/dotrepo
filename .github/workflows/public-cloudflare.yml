@@ -151,6 +151,12 @@ jobs:
             --base-path "${{ steps.base_path.outputs.value }}" \
             --stale-after-hours 168 \
             --pagedigest-previous "$RUNNER_TEMP/pagedigest-previous.json"
+      - name: Gate public record freshness before publication
+        run: |
+          uv run python scripts/check_public_record_freshness.py \
+            --public-root release-gate/public \
+            --max-stale-or-unknown-rate 0.1 \
+            --output-json "$RUNNER_TEMP/public-record-freshness.json"
       - name: Render landing page
         run: uv run python scripts/render_public_pages_landing.py --input release-gate/public
       - name: Measure lookup efficiency and render benchmark page

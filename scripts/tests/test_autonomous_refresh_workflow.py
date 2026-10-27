@@ -54,10 +54,48 @@ def test_gate_report_is_created_before_batch_artifact_upload() -> None:
     assert "autonomous-telemetry-gate.md" in workflow[gate:upload]
 
 
+def test_refresh_landing_is_not_gated_on_public_freshness() -> None:
+    # Regression: gating refresh landing on the public freshness gate deadlocked
+    # the index (refresh could not land because the index was stale; the index
+    # stayed stale because refresh could not land). Freshness gates publication
+    # (public-cloudflare), not landing.
+    workflow = WORKFLOW.read_text()
+    advisory = workflow.index("- name: Check public surface (advisory, non-blocking)")
+    pr_meta = workflow.index("- name: Prepare pull request metadata")
+    create_pr = workflow.index("- name: Create pull request for index updates")
+
+    assert "continue-on-error: true" in workflow[advisory:pr_meta]
+    landing = workflow[pr_meta:create_pr] + workflow[create_pr:]
+    assert "steps.public_surface_gate.outcome" not in landing
+    assert "steps.telemetry_gate.outcome == 'success'" in landing
+    assert "steps.validate_index.outcome == 'success'" in landing
+
+
+def test_publication_is_freshness_gated_in_cloudflare_deploy() -> None:
+    workflow = (
+        Path(__file__).resolve().parents[2]
+        / ".github"
+        / "workflows"
+        / "public-cloudflare.yml"
+    ).read_text()
+    build = workflow.index("- name: Build reviewed public tree for Cloudflare")
+    gate = workflow.index("check_public_record_freshness.py")
+    deploy = workflow.index("- name: Deploy Worker")
+
+    assert build < gate < deploy
+    assert "--max-stale-or-unknown-rate" in workflow[gate:deploy]
+
+
+def test_scheduled_refresh_plans_over_the_full_index() -> None:
+    workflow = WORKFLOW.read_text()
+    assert 'limit="1000"' in workflow
+    assert "autonomous-refresh failing" in workflow
+
+
 def test_daily_capacity_and_automatic_landing_do_not_require_routine_human_review():
     workflow = WORKFLOW.read_text()
     assert 'cron: "0 6 * * *"' in workflow
-    assert "github.event.inputs.batch_size || '50'" in workflow
+    assert "steps.refresh_params.outputs.batch_size" in workflow
     assert "--disable-discovery" in workflow
     assert "scripts/land_autonomous_index.py" in workflow
     assert "actions: write" in workflow
