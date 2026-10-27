@@ -1,0 +1,52 @@
+name: autonomous-status
+
+# Weekly operating-status report from retained telemetry. Artifact-only:
+# it never commits, so a stale report cannot masquerade as landed state.
+on:
+  schedule:
+    - cron: "45 7 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: autonomous-status
+  cancel-in-progress: true
+
+jobs:
+  status:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install uv
+        uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+      - name: Create and sync Python environment
+        run: |
+          uv venv
+          uv sync --dev --locked
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@4be7066ada62dd38de10e7b70166bc74ed198c30 # stable
+      - name: Export public tree and check freshness
+        run: |
+          cargo run -q -p dotrepo-cli -- public export \
+            --index-root index --out-dir "$RUNNER_TEMP/public" --base-path /
+          uv run python scripts/check_public_record_freshness.py \
+            --public-root "$RUNNER_TEMP/public" \
+            --max-stale-or-unknown-rate 0.1 \
+            --output-json "$RUNNER_TEMP/freshness.json" || true
+      - name: Render status report
+        run: |
+          mkdir -p autonomous-status
+          uv run python scripts/render_autonomous_status.py \
+            --freshness-json "$RUNNER_TEMP/freshness.json" \
+            --output autonomous-status/status.md
+      - name: Upload status report
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: autonomous-status
+          path: autonomous-status/
+          retention-days: 90
+      - name: Publish step summary
+        if: always()
+        run: cat autonomous-status/status.md >> "$GITHUB_STEP_SUMMARY"
