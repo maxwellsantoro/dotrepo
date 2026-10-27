@@ -431,6 +431,14 @@ fn regression_fixture_stubs_materialize_cleanly() {
     }
 
     for stub in stubs {
+        // Candidate stubs (fixtureEligible != true, status
+        // needs_materialization) are telemetry records written by the
+        // autonomous batch runner; materialize_regression_fixture.py
+        // refuses them by design. Only eligible stubs must materialize.
+        let metadata = fs::read_to_string(stub.join("metadata.json")).unwrap_or_default();
+        if !metadata.contains("\"fixtureEligible\": true") {
+            continue;
+        }
         let output = Command::new("uv")
             .current_dir(&repo_root)
             .args([
