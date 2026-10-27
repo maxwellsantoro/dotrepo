@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/PhilJay/MPAndroidChart"
-generated_at = "2026-10-27T17:18:56.460694Z"
+generated_at = "2026-10-27T19:59:52.273456802Z"
 
 [record.trust]
 confidence = "medium"
@@ -35,7 +35,7 @@ topics = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T17:18:56.460694Z"
+checkedAt = "2026-10-27T19:59:52.273456802Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -43,7 +43,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T17:18:56.460694Z"
+checkedAt = "2026-10-27T19:59:52.273456802Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -51,7 +51,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T17:18:56.460694Z"
+checkedAt = "2026-10-27T19:59:52.273456802Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -59,7 +59,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T17:18:56.460694Z"
+checkedAt = "2026-10-27T19:59:52.273456802Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -67,7 +67,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T17:18:56.460694Z"
+checkedAt = "2026-10-27T19:59:52.273456802Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -76,7 +76,7 @@ state = "present"
 valueJson = '"./gradlew build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T17:18:56.460694Z"
+checkedAt = "2026-10-27T19:59:52.273456802Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -85,7 +85,7 @@ state = "present"
 valueJson = '"A powerful 🚀 Android chart view / graph view library, supporting line- bar- pie- radar- bubble- and candlestick charts as well as scaling, panning and animations."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T17:18:56.460694Z"
+checkedAt = "2026-10-27T19:59:52.273456802Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -93,7 +93,7 @@ state = "present"
 valueJson = '"https://philjay.cc/mpandroidchart"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T17:18:56.460694Z"
+checkedAt = "2026-10-27T19:59:52.273456802Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -102,7 +102,7 @@ state = "present"
 valueJson = '"MPAndroidChart"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T17:18:56.460694Z"
+checkedAt = "2026-10-27T19:59:52.273456802Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"

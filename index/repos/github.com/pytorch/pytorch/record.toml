@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/pytorch/pytorch"
-generated_at = "2026-10-27T18:28:46.393456Z"
+generated_at = "2026-10-27T19:55:30.66956914Z"
 
 [record.trust]
 confidence = "medium"
@@ -150,7 +150,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T18:28:46.393456Z"
+checkedAt = "2026-10-27T19:55:30.66956914Z"
 confidence = "low"
 method = "unresolved"
 reason = "conflicting documentation declarations; no target selected"
@@ -159,7 +159,7 @@ state = "unresolved"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T18:28:46.393456Z"
+checkedAt = "2026-10-27T19:55:30.66956914Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -167,7 +167,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T18:28:46.393456Z"
+checkedAt = "2026-10-27T19:55:30.66956914Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -176,7 +176,7 @@ state = "present"
 valueJson = '"https://github.com/pytorch/pytorch/security/advisories/new"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T18:28:46.393456Z"
+checkedAt = "2026-10-27T19:55:30.66956914Z"
 confidence = "high"
 method = "extracted"
 reason = "clear CODEOWNERS team"
@@ -185,7 +185,7 @@ state = "present"
 valueJson = '"@pytorch/pytorch-dev-infra"'
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T18:28:46.393456Z"
+checkedAt = "2026-10-27T19:55:30.66956914Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -194,7 +194,7 @@ state = "present"
 valueJson = '"make all"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T18:28:46.393456Z"
+checkedAt = "2026-10-27T19:55:30.66956914Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -203,7 +203,7 @@ state = "present"
 valueJson = '"Tensors and Dynamic neural networks in Python with strong GPU acceleration"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T18:28:46.393456Z"
+checkedAt = "2026-10-27T19:55:30.66956914Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -211,7 +211,7 @@ state = "present"
 valueJson = '"https://pytorch.org"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T18:28:46.393456Z"
+checkedAt = "2026-10-27T19:55:30.66956914Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -220,7 +220,7 @@ state = "present"
 valueJson = '"More About PyTorch"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T18:28:46.393456Z"
+checkedAt = "2026-10-27T19:55:30.66956914Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -233,6 +233,6 @@ archived = false
 clone_url = "https://github.com/pytorch/pytorch.git"
 default_branch = "main"
 fork = false
-head_sha = "3188a453872fa989fbb7bdee5018dbbe95134873"
+head_sha = "6ce2d3101ac63a4778b4ac00a811fb4cfd4ed42d"
 html_url = "https://github.com/pytorch/pytorch"
-stars = 105118
+stars = 105120

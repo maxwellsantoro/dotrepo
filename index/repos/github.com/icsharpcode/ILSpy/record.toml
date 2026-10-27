@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/icsharpcode/ILSpy"
-generated_at = "2026-10-27T18:04:49.887629Z"
+generated_at = "2026-10-27T19:53:32.847322784Z"
 
 [record.trust]
 confidence = "medium"
@@ -70,7 +70,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T18:04:49.887629Z"
+checkedAt = "2026-10-27T19:53:32.847322784Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -78,7 +78,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T18:04:49.887629Z"
+checkedAt = "2026-10-27T19:53:32.847322784Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -86,7 +86,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T18:04:49.887629Z"
+checkedAt = "2026-10-27T19:53:32.847322784Z"
 confidence = "high"
 method = "unspecified"
 reason = "explicitly unknown"
@@ -94,7 +94,7 @@ state = "not_found"
 valueJson = '"unknown"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T18:04:49.887629Z"
+checkedAt = "2026-10-27T19:53:32.847322784Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -102,7 +102,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T18:04:49.887629Z"
+checkedAt = "2026-10-27T19:53:32.847322784Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -111,7 +111,7 @@ state = "present"
 valueJson = '"dotnet build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T18:04:49.887629Z"
+checkedAt = "2026-10-27T19:53:32.847322784Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -120,7 +120,7 @@ state = "present"
 valueJson = '".NET Decompiler with support for PDB generation, ReadyToRun, Metadata (&more) - cross-platform!"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T18:04:49.887629Z"
+checkedAt = "2026-10-27T19:53:32.847322784Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -128,7 +128,7 @@ state = "present"
 valueJson = '"https://github.com/icsharpcode/ILSpy"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T18:04:49.887629Z"
+checkedAt = "2026-10-27T19:53:32.847322784Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -137,7 +137,7 @@ state = "present"
 valueJson = '"ILSpy"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T18:04:49.887629Z"
+checkedAt = "2026-10-27T19:53:32.847322784Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -150,6 +150,6 @@ archived = false
 clone_url = "https://github.com/icsharpcode/ILSpy.git"
 default_branch = "master"
 fork = false
-head_sha = "c86190ef4e24f3137c13a9275316042842d2fada"
+head_sha = "b42d3fb43c0890aa5c661da4e0c3c36541812da6"
 html_url = "https://github.com/icsharpcode/ILSpy"
-stars = 26832
+stars = 26834

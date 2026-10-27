@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/vectordotdev/vector"
-generated_at = "2026-10-27T18:30:40.074865Z"
+generated_at = "2026-10-27T19:58:20.456579526Z"
 
 [record.trust]
 confidence = "high"
@@ -81,7 +81,7 @@ root = "https://vector.dev/docs"
 getting_started = "https://vector.dev/docs/setup/quickstart/"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T18:30:40.074865Z"
+checkedAt = "2026-10-27T19:58:20.456579526Z"
 confidence = "high"
 method = "extracted"
 reason = 'Explicit documentation link at README.md:11: <a href="https://vector.dev/docs/setup/quickstart/">Quickstart</a>&nbsp;&nbsp;&bull;&nbsp;&nbsp;'
@@ -90,7 +90,7 @@ state = "present"
 valueJson = '"https://vector.dev/docs/setup/quickstart/"'
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T18:30:40.074865Z"
+checkedAt = "2026-10-27T19:58:20.456579526Z"
 confidence = "high"
 method = "extracted"
 reason = "Explicit documentation link at README.md:63: All user documentation is available at **[vector.dev/docs](https://vector.dev/docs)**."
@@ -99,7 +99,7 @@ state = "present"
 valueJson = '"https://vector.dev/docs"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T18:30:40.074865Z"
+checkedAt = "2026-10-27T19:58:20.456579526Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -108,7 +108,7 @@ state = "present"
 valueJson = '"security@datadoghq.com"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T18:30:40.074865Z"
+checkedAt = "2026-10-27T19:58:20.456579526Z"
 confidence = "high"
 method = "unspecified"
 reason = "clear CODEOWNERS team"
@@ -116,7 +116,7 @@ state = "present"
 valueJson = '"@vectordotdev/vector"'
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T18:30:40.074865Z"
+checkedAt = "2026-10-27T19:58:20.456579526Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -125,7 +125,7 @@ state = "present"
 valueJson = '"make build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T18:30:40.074865Z"
+checkedAt = "2026-10-27T19:58:20.456579526Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -134,7 +134,7 @@ state = "present"
 valueJson = '"A high-performance observability data pipeline."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T18:30:40.074865Z"
+checkedAt = "2026-10-27T19:58:20.456579526Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -142,7 +142,7 @@ state = "present"
 valueJson = '"https://vector.dev"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T18:30:40.074865Z"
+checkedAt = "2026-10-27T19:58:20.456579526Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -151,7 +151,7 @@ state = "present"
 valueJson = '"Vector"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T18:30:40.074865Z"
+checkedAt = "2026-10-27T19:58:20.456579526Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -164,6 +164,6 @@ archived = false
 clone_url = "https://github.com/vectordotdev/vector.git"
 default_branch = "master"
 fork = false
-head_sha = "b6ef75f364682653d335029df838a9cc537197d8"
+head_sha = "a0ae5b99f21b363606b4e5415ab4ec272ab68ea0"
 html_url = "https://github.com/vectordotdev/vector"
-stars = 22775
+stars = 22776

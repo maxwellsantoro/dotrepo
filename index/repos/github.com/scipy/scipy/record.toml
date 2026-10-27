@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/scipy/scipy"
-generated_at = "2026-10-27T18:17:13.527816Z"
+generated_at = "2026-10-27T19:56:30.577724647Z"
 
 [record.trust]
 confidence = "medium"
@@ -66,7 +66,7 @@ maintainers = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T18:17:13.527816Z"
+checkedAt = "2026-10-27T19:56:30.577724647Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -74,7 +74,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T18:17:13.527816Z"
+checkedAt = "2026-10-27T19:56:30.577724647Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -82,7 +82,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T18:17:13.527816Z"
+checkedAt = "2026-10-27T19:56:30.577724647Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -90,7 +90,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T18:17:13.527816Z"
+checkedAt = "2026-10-27T19:56:30.577724647Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -98,7 +98,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T18:17:13.527816Z"
+checkedAt = "2026-10-27T19:56:30.577724647Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -107,7 +107,7 @@ state = "present"
 valueJson = '"python -m build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T18:17:13.527816Z"
+checkedAt = "2026-10-27T19:56:30.577724647Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -116,7 +116,7 @@ state = "present"
 valueJson = '"SciPy library main repository"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T18:17:13.527816Z"
+checkedAt = "2026-10-27T19:56:30.577724647Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -124,7 +124,7 @@ state = "present"
 valueJson = '"https://scipy.org"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T18:17:13.527816Z"
+checkedAt = "2026-10-27T19:56:30.577724647Z"
 confidence = "medium"
 method = "inferred"
 reason = "fell back to directory name or GitHub API"
@@ -133,7 +133,7 @@ state = "present"
 valueJson = '"scipy"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T18:17:13.527816Z"
+checkedAt = "2026-10-27T19:56:30.577724647Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -146,6 +146,6 @@ archived = false
 clone_url = "https://github.com/scipy/scipy.git"
 default_branch = "main"
 fork = false
-head_sha = "dbda90ba1f831dc7ed25de14fdd7bc8cf3b7a66f"
+head_sha = "dc994e98b2a72182732fe369f8ed3b3dd61bb755"
 html_url = "https://github.com/scipy/scipy"
-stars = 15155
+stars = 15157

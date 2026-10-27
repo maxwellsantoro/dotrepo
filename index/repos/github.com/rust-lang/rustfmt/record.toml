@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/rust-lang/rustfmt"
-generated_at = "2026-10-27T18:16:28.291627Z"
+generated_at = "2026-10-27T19:56:21.806739686Z"
 
 [record.trust]
 confidence = "medium"
@@ -50,7 +50,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T18:16:28.291627Z"
+checkedAt = "2026-10-27T19:56:21.806739686Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -58,7 +58,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T18:16:28.291627Z"
+checkedAt = "2026-10-27T19:56:21.806739686Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -66,7 +66,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T18:16:28.291627Z"
+checkedAt = "2026-10-27T19:56:21.806739686Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -74,7 +74,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T18:16:28.291627Z"
+checkedAt = "2026-10-27T19:56:21.806739686Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -82,7 +82,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T18:16:28.291627Z"
+checkedAt = "2026-10-27T19:56:21.806739686Z"
 confidence = "medium"
 method = "inferred"
 reason = "from workflow fallback"
@@ -91,7 +91,7 @@ state = "present"
 valueJson = '"cargo build --release --locked"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T18:16:28.291627Z"
+checkedAt = "2026-10-27T19:56:21.806739686Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -100,7 +100,7 @@ state = "present"
 valueJson = '"Format Rust code"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T18:16:28.291627Z"
+checkedAt = "2026-10-27T19:56:21.806739686Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -108,7 +108,7 @@ state = "present"
 valueJson = '"https://rust-lang.github.io/rustfmt/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T18:16:28.291627Z"
+checkedAt = "2026-10-27T19:56:21.806739686Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -117,7 +117,7 @@ state = "present"
 valueJson = '"rustfmt"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T18:16:28.291627Z"
+checkedAt = "2026-10-27T19:56:21.806739686Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -130,6 +130,6 @@ archived = false
 clone_url = "https://github.com/rust-lang/rustfmt.git"
 default_branch = "main"
 fork = false
-head_sha = "a78eda90b023ed006e8cf53340ee5b57977e4b31"
+head_sha = "2a5a11b9e23e84caaccde2ee346d53919f0fc426"
 html_url = "https://github.com/rust-lang/rustfmt"
 stars = 7005

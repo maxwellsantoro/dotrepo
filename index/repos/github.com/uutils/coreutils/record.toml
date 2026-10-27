@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/uutils/coreutils"
-generated_at = "2026-10-27T17:40:39.49072Z"
+generated_at = "2026-10-27T19:58:05.356632829Z"
 
 [record.trust]
 confidence = "high"
@@ -67,7 +67,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T17:40:39.49072Z"
+checkedAt = "2026-10-27T19:58:05.356632829Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -75,7 +75,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T17:40:39.49072Z"
+checkedAt = "2026-10-27T19:58:05.356632829Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -83,7 +83,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T17:40:39.49072Z"
+checkedAt = "2026-10-27T19:58:05.356632829Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -92,7 +92,7 @@ state = "present"
 valueJson = '"Sylvestre@debian.org"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T17:40:39.49072Z"
+checkedAt = "2026-10-27T19:58:05.356632829Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -100,7 +100,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T17:40:39.49072Z"
+checkedAt = "2026-10-27T19:58:05.356632829Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -109,7 +109,7 @@ state = "present"
 valueJson = '"cargo build --release"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T17:40:39.49072Z"
+checkedAt = "2026-10-27T19:58:05.356632829Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -118,7 +118,7 @@ state = "present"
 valueJson = '"Cross-platform Rust rewrite of the GNU coreutils"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T17:40:39.49072Z"
+checkedAt = "2026-10-27T19:58:05.356632829Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -126,7 +126,7 @@ state = "present"
 valueJson = '"https://uutils.org"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T17:40:39.49072Z"
+checkedAt = "2026-10-27T19:58:05.356632829Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -135,7 +135,7 @@ state = "present"
 valueJson = '"uutils coreutils"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T17:40:39.49072Z"
+checkedAt = "2026-10-27T19:58:05.356632829Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -148,6 +148,6 @@ archived = false
 clone_url = "https://github.com/uutils/coreutils.git"
 default_branch = "main"
 fork = false
-head_sha = "e2caa72e30322f5ee8d927824b0f9eddbee37e5c"
+head_sha = "5fc0d3b566f557cb5f675238f8409baa4d7b6da7"
 html_url = "https://github.com/uutils/coreutils"
 stars = 24298

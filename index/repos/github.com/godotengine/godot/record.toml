@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/godotengine/godot"
-generated_at = "2026-10-27T17:20:08.356363Z"
+generated_at = "2026-10-27T19:53:10.347876215Z"
 
 [record.trust]
 confidence = "high"
@@ -98,7 +98,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T17:20:08.356363Z"
+checkedAt = "2026-10-27T19:53:10.347876215Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -106,7 +106,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T17:20:08.356363Z"
+checkedAt = "2026-10-27T19:53:10.347876215Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -114,7 +114,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T17:20:08.356363Z"
+checkedAt = "2026-10-27T19:53:10.347876215Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -122,7 +122,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T17:20:08.356363Z"
+checkedAt = "2026-10-27T19:53:10.347876215Z"
 confidence = "high"
 method = "unspecified"
 reason = "clear CODEOWNERS team"
@@ -130,7 +130,7 @@ state = "present"
 valueJson = '"@godotengine/buildsystem"'
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T17:20:08.356363Z"
+checkedAt = "2026-10-27T19:53:10.347876215Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -138,7 +138,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T17:20:08.356363Z"
+checkedAt = "2026-10-27T19:53:10.347876215Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -147,7 +147,7 @@ state = "present"
 valueJson = '"Godot Engine – Multi-platform 2D and 3D game engine"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T17:20:08.356363Z"
+checkedAt = "2026-10-27T19:53:10.347876215Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -155,7 +155,7 @@ state = "present"
 valueJson = '"https://godotengine.org"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T17:20:08.356363Z"
+checkedAt = "2026-10-27T19:53:10.347876215Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -164,7 +164,7 @@ state = "present"
 valueJson = '"Godot Engine"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T17:20:08.356363Z"
+checkedAt = "2026-10-27T19:53:10.347876215Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -176,6 +176,6 @@ archived = false
 clone_url = "https://github.com/godotengine/godot.git"
 default_branch = "master"
 fork = false
-head_sha = "e810f3f7af27a7d3915b0f6f04d89d3c6f195a0b"
+head_sha = "d40e9472f6fb96a7caaf7321f5f24b8ac8f8478b"
 html_url = "https://github.com/godotengine/godot"
 stars = 119164

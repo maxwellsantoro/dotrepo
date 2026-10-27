@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/BurntSushi/toml"
-generated_at = "2026-10-27T17:18:25.215245Z"
+generated_at = "2026-10-27T19:58:59.109744136Z"
 
 [record.trust]
 confidence = "medium"
@@ -33,7 +33,7 @@ ecosystem = "Go"
 root = "https://pkg.go.dev/github.com/BurntSushi/toml"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T17:18:25.215245Z"
+checkedAt = "2026-10-27T19:58:59.109744136Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -41,7 +41,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T17:18:25.215245Z"
+checkedAt = "2026-10-27T19:58:59.109744136Z"
 confidence = "high"
 method = "extracted"
 reason = "Explicit documentation link at README.md:6: Documentation: https://pkg.go.dev/github.com/BurntSushi/toml"
@@ -50,7 +50,7 @@ state = "present"
 valueJson = '"https://pkg.go.dev/github.com/BurntSushi/toml"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T17:18:25.215245Z"
+checkedAt = "2026-10-27T19:58:59.109744136Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -58,7 +58,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T17:18:25.215245Z"
+checkedAt = "2026-10-27T19:58:59.109744136Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -66,7 +66,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T17:18:25.215245Z"
+checkedAt = "2026-10-27T19:58:59.109744136Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -75,7 +75,7 @@ state = "present"
 valueJson = '"go build ./..."'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T17:18:25.215245Z"
+checkedAt = "2026-10-27T19:58:59.109744136Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -84,7 +84,7 @@ state = "present"
 valueJson = '"TOML parser for Golang with reflection."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T17:18:25.215245Z"
+checkedAt = "2026-10-27T19:58:59.109744136Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -92,7 +92,7 @@ state = "present"
 valueJson = '"https://github.com/BurntSushi/toml"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T17:18:25.215245Z"
+checkedAt = "2026-10-27T19:58:59.109744136Z"
 confidence = "high"
 method = "inferred"
 reason = "extracted from README title with post-cleaners"
@@ -101,7 +101,7 @@ state = "present"
 valueJson = '"toml"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T17:18:25.215245Z"
+checkedAt = "2026-10-27T19:58:59.109744136Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"

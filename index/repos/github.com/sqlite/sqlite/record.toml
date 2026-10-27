@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/sqlite/sqlite"
-generated_at = "2026-10-27T18:18:18.894606Z"
+generated_at = "2026-10-27T19:56:38.611818342Z"
 
 [record.trust]
 confidence = "high"
@@ -39,7 +39,7 @@ languages = [
 topics = []
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T18:18:18.894606Z"
+checkedAt = "2026-10-27T19:56:38.611818342Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -47,7 +47,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T18:18:18.894606Z"
+checkedAt = "2026-10-27T19:56:38.611818342Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -55,7 +55,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T18:18:18.894606Z"
+checkedAt = "2026-10-27T19:56:38.611818342Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -63,7 +63,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T18:18:18.894606Z"
+checkedAt = "2026-10-27T19:56:38.611818342Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -71,7 +71,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T18:18:18.894606Z"
+checkedAt = "2026-10-27T19:56:38.611818342Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -79,7 +79,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T18:18:18.894606Z"
+checkedAt = "2026-10-27T19:56:38.611818342Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -88,7 +88,7 @@ state = "present"
 valueJson = '"Official Git mirror of the SQLite source tree"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T18:18:18.894606Z"
+checkedAt = "2026-10-27T19:56:38.611818342Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -96,7 +96,7 @@ state = "present"
 valueJson = '"https://github.com/sqlite/sqlite"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T18:18:18.894606Z"
+checkedAt = "2026-10-27T19:56:38.611818342Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -105,7 +105,7 @@ state = "present"
 valueJson = '"SQLite Source Repository"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T18:18:18.894606Z"
+checkedAt = "2026-10-27T19:56:38.611818342Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -117,6 +117,6 @@ archived = false
 clone_url = "https://github.com/sqlite/sqlite.git"
 default_branch = "master"
 fork = false
-head_sha = "ab6b5f2290332707244e90cd4719a4e1b8ed8220"
+head_sha = "e5796f671ab939a8fcd0b3667931665ca40b030c"
 html_url = "https://github.com/sqlite/sqlite"
-stars = 10826
+stars = 10828
