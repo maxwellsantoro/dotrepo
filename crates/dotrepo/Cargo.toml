@@ -9,7 +9,7 @@
 # package last so the matching dotrepo-cli is already on the registry.
 [package]
 name = "dotrepo"
-version = "2.0.0-alpha.0"
+version = "2.0.0-rc.1"
 edition = "2021"
 rust-version = "1.90.0"
 license = "MIT"
@@ -26,4 +26,4 @@ name = "dotrepo"
 path = "src/main.rs"
 
 [dependencies]
-dotrepo-cli = { version = "2.0.0-alpha.0", path = "../dotrepo-cli" }
+dotrepo-cli = { version = "2.0.0-rc.1", path = "../dotrepo-cli" }
