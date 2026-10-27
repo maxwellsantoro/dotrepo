@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/tokio-rs/tracing"
-generated_at = "2026-09-21T04:36:55.205964Z"
+generated_at = "2026-10-27T17:47:32.006655Z"
 
 [record.trust]
 confidence = "medium"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `Cargo.toml`, and `.github/workflows/CI.yml`. Filled `repo.description` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@tokio-rs/tracing` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Inferred `repo.build` from `Cargo.toml`. Inferred `repo.test` from `.github/workflows/CI.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `Cargo.toml`. Filled `repo.description` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@tokio-rs/tracing` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Inferred `repo.build` from `Cargo.toml`. Inferred `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
 
 [repo]
 name = "tracing"
@@ -25,7 +25,7 @@ languages = [
     "Shell",
 ]
 build = "cargo build --workspace"
-test = "cargo test"
+test = "cargo test --workspace"
 topics = [
     "rust",
     "rust-lang",
@@ -48,9 +48,6 @@ maintainers = [
 team = "@tokio-rs/tracing"
 security_contact = "security@tokio.rs"
 
-[docs]
-root = "https://docs.rs/tracing"
-
 [relations]
 references = []
 
@@ -67,25 +64,24 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-18T06:06:18.249404328Z"
+checkedAt = "2026-10-27T17:47:32.006655Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-21T04:36:55.205964Z"
-confidence = "high"
-method = "extracted"
-reason = "tracing-futures subcrate reference is not the main tracing crate documentation; inspected README.md:15 at commit d9d4c542de10f5d3a711b7a45ffe450fd0666437"
+checkedAt = "2026-10-27T17:47:32.006655Z"
+confidence = "low"
+method = "unresolved"
+reason = "conflicting documentation declarations; no target selected"
 source = "README.md"
-state = "present"
-valueJson = "\"https://docs.rs/tracing\""
-rejectedValueJson = "\"https://docs.rs/tracing-futures\""
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-18T06:06:18.249404328Z"
+checkedAt = "2026-10-27T17:47:32.006655Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -94,7 +90,7 @@ state = "present"
 valueJson = '"security@tokio.rs"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-18T06:06:18.249404328Z"
+checkedAt = "2026-10-27T17:47:32.006655Z"
 confidence = "high"
 method = "unspecified"
 reason = "clear CODEOWNERS team"
@@ -102,7 +98,7 @@ state = "present"
 valueJson = '"@tokio-rs/tracing"'
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-18T06:06:18.249404328Z"
+checkedAt = "2026-10-27T17:47:32.006655Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -111,7 +107,7 @@ state = "present"
 valueJson = '"cargo build --workspace"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-18T06:06:18.249404328Z"
+checkedAt = "2026-10-27T17:47:32.006655Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -120,7 +116,7 @@ state = "present"
 valueJson = '"Application level tracing for Rust."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-18T06:06:18.249404328Z"
+checkedAt = "2026-10-27T17:47:32.006655Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -128,28 +124,28 @@ state = "present"
 valueJson = '"https://tracing.rs"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-18T06:06:18.249404328Z"
+checkedAt = "2026-10-27T17:47:32.006655Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"tracing"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-18T06:06:18.249404328Z"
+checkedAt = "2026-10-27T17:47:32.006655Z"
 confidence = "medium"
 method = "inferred"
-reason = "from workflow fallback"
-source = ".github/workflows/CI.yml"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "Cargo.toml"
 state = "present"
-valueJson = '"cargo test"'
+valueJson = '"cargo test --workspace"'
 
 [x.github]
 archived = false
 clone_url = "https://github.com/tokio-rs/tracing.git"
 default_branch = "main"
 fork = false
-head_sha = "d9d4c542de10f5d3a711b7a45ffe450fd0666437"
+head_sha = "9d0e557728ecb91e467fc29dfe738b9f28cf6684"
 html_url = "https://github.com/tokio-rs/tracing"
-stars = 6877
+stars = 6942

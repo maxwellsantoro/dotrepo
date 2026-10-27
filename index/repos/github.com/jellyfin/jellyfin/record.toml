@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/jellyfin/jellyfin"
-generated_at = "2026-09-16T16:33:59.856071Z"
+generated_at = "2026-10-27T17:25:36.523271Z"
 
 [record.trust]
 confidence = "medium"
@@ -42,10 +42,6 @@ maintainers = [
 ]
 team = "@jellyfin/core"
 
-[docs]
-root = "https://jellyfin.org/docs/"
-getting_started = "https://jellyfin.org/docs/general/installation/"
-
 [relations]
 references = []
 
@@ -62,23 +58,23 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:33:59.856071Z"
+checkedAt = "2026-10-27T17:25:36.523271Z"
 confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
-state = "present"
-valueJson = '"https://jellyfin.org/docs/general/installation/"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:33:59.856071Z"
+checkedAt = "2026-10-27T17:25:36.523271Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://jellyfin.org/docs/"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:33:59.856071Z"
+checkedAt = "2026-10-27T17:25:36.523271Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -86,7 +82,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:33:59.856071Z"
+checkedAt = "2026-10-27T17:25:36.523271Z"
 confidence = "high"
 method = "unspecified"
 reason = "clear CODEOWNERS team"
@@ -94,7 +90,7 @@ state = "present"
 valueJson = '"@jellyfin/core"'
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:33:59.856071Z"
+checkedAt = "2026-10-27T17:25:36.523271Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -103,7 +99,7 @@ state = "present"
 valueJson = '"dotnet build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:33:59.856071Z"
+checkedAt = "2026-10-27T17:25:36.523271Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -112,7 +108,7 @@ state = "present"
 valueJson = '"The Free Software Media System - Server Backend & API"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:33:59.856071Z"
+checkedAt = "2026-10-27T17:25:36.523271Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -120,16 +116,16 @@ state = "present"
 valueJson = '"https://jellyfin.org"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:33:59.856071Z"
+checkedAt = "2026-10-27T17:25:36.523271Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Jellyfin"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:33:59.856071Z"
+checkedAt = "2026-10-27T17:25:36.523271Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -142,6 +138,6 @@ archived = false
 clone_url = "https://github.com/jellyfin/jellyfin.git"
 default_branch = "master"
 fork = false
-head_sha = "50866380c95758244f79bd4fbb01b9474e80bd81"
+head_sha = "02c2951eb72d7282ff9e1c7610489edb924898c3"
 html_url = "https://github.com/jellyfin/jellyfin"
-stars = 57203
+stars = 58701

@@ -1,10 +1,11 @@
 # Evidence
 
-- Imported repository name from README.md.
+- Imported repository name and docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@FuelLabs/leads` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
-- Imported repo.build from README.md as `cargo build`.
-- Inferred repo.test from .github/workflows/ci.yml as `cargo test --locked --release --manifest-path ./test/src/sdk-harness/Cargo.toml -- --skip can_get_predicate_address --nocapture`.
+- Inferred repo.build from Cargo.toml as `cargo build --workspace`.
+- Inferred repo.test from Cargo.toml as `cargo test --workspace`.
+- Imported docs.root as `https://fuellabs.github.io/sway/latest/>.`. Explicit documentation link at README.md:13: For user documentation, including installing release builds, see the latest released Sway Book: <https://fuellabs.github.io/sway/latest/>.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/ethereum/go-ethereum"
-generated_at = "2026-09-17T06:07:15.512829523Z"
+generated_at = "2026-10-27T18:24:56.148751Z"
 
 [record.trust]
 confidence = "high"
@@ -64,10 +64,6 @@ maintainers = [
 ]
 security_contact = "bounty@ethereum.org"
 
-[docs]
-root = "https://geth.ethereum.org"
-getting_started = "https://geth.ethereum.org/docs/getting-started/installing-geth"
-
 [relations]
 references = []
 
@@ -84,23 +80,23 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-17T06:07:15.512829523Z"
+checkedAt = "2026-10-27T18:24:56.148751Z"
 confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
-state = "present"
-valueJson = '"https://geth.ethereum.org/docs/getting-started/installing-geth"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-17T06:07:15.512829523Z"
+checkedAt = "2026-10-27T18:24:56.148751Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://geth.ethereum.org"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-17T06:07:15.512829523Z"
+checkedAt = "2026-10-27T18:24:56.148751Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -109,7 +105,7 @@ state = "present"
 valueJson = '"bounty@ethereum.org"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-17T06:07:15.512829523Z"
+checkedAt = "2026-10-27T18:24:56.148751Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -117,7 +113,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-17T06:07:15.512829523Z"
+checkedAt = "2026-10-27T18:24:56.148751Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -126,7 +122,7 @@ state = "present"
 valueJson = '"make all"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-17T06:07:15.512829523Z"
+checkedAt = "2026-10-27T18:24:56.148751Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -135,7 +131,7 @@ state = "present"
 valueJson = '"Go implementation of the Ethereum protocol"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-17T06:07:15.512829523Z"
+checkedAt = "2026-10-27T18:24:56.148751Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -143,16 +139,16 @@ state = "present"
 valueJson = '"https://geth.ethereum.org"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-17T06:07:15.512829523Z"
+checkedAt = "2026-10-27T18:24:56.148751Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Go Ethereum"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-17T06:07:15.512829523Z"
+checkedAt = "2026-10-27T18:24:56.148751Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -165,6 +161,6 @@ archived = false
 clone_url = "https://github.com/ethereum/go-ethereum.git"
 default_branch = "master"
 fork = false
-head_sha = "af4e64e5f86cfccc230c019081bb64bb630b3929"
+head_sha = "8817f99f92852f8ac53e596de6202dd9e3494065"
 html_url = "https://github.com/ethereum/go-ethereum"
-stars = 51346
+stars = 51451

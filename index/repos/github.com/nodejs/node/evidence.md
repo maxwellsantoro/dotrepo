@@ -3,8 +3,9 @@
 - Imported repository name from README.md.
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates.
 - Imported the security reporting channel from SECURITY.md.
-- Imported repo.build from deps/amaro/package.json as `npm run build`.
-- Imported repo.test from deps/amaro/package.json as `npm test`.
+- Ignored component-scoped commands from `deps/amaro/package.json` as repository defaults.
+- Ignored component-scoped commands from `tools/gyp/pyproject.toml` as repository defaults.
+- Imported repo.test from Makefile as `make test`.
 - Imported repo.toolchain.min from tools/gyp/pyproject.toml as `3.9` (Python).
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
@@ -18,10 +19,3 @@
 ## Auto-promotion
 
 All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
-
-## Command semantic correction (2026-10-03)
-
-2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged.
-
-- Withheld `repo.build` previously extracted from `deps/amaro/package.json` as `npm run build`. Component command lacks repository-default scope and working directory.
-- Withheld `repo.test` previously extracted from `deps/amaro/package.json` as `npm test`. Component command lacks repository-default scope and working directory.

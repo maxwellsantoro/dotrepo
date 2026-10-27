@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/PhilJay/MPAndroidChart"
-generated_at = "2026-09-16T16:32:02.581778Z"
+generated_at = "2026-10-27T17:18:56.460694Z"
 
 [record.trust]
 confidence = "medium"
@@ -12,15 +12,18 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md` and `build.gradle`. Inferred `repo.build` from `build.gradle`. Inferred `repo.test` from `build.gradle`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
+notes = "Bootstrapped from `README.md` and `build.gradle.kts`. Inferred `repo.build` from `build.gradle.kts`. Inferred `repo.test` from `build.gradle.kts`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
 
 [repo]
 name = "MPAndroidChart"
 description = "A powerful 🚀 Android chart view / graph view library, supporting line- bar- pie- radar- bubble- and candlestick charts as well as scaling, panning and animations."
-homepage = "https://philippjahoda.com"
-license = "NOASSERTION"
+homepage = "https://philjay.cc/mpandroidchart"
+license = "Apache-2.0"
 visibility = "public"
-languages = ["Java"]
+languages = [
+    "Kotlin",
+    "Java",
+]
 build = "./gradlew build"
 test = "./gradlew test"
 topics = [
@@ -31,27 +34,24 @@ topics = [
     "mpandroidchart",
 ]
 
-[docs]
-root = "https://philippjahoda.com"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:32:02.581778Z"
+checkedAt = "2026-10-27T17:18:56.460694Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:32:02.581778Z"
+checkedAt = "2026-10-27T17:18:56.460694Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://philippjahoda.com"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:32:02.581778Z"
+checkedAt = "2026-10-27T17:18:56.460694Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -59,7 +59,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:32:02.581778Z"
+checkedAt = "2026-10-27T17:18:56.460694Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -67,16 +67,16 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:32:02.581778Z"
+checkedAt = "2026-10-27T17:18:56.460694Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
-source = "build.gradle"
+source = "build.gradle.kts"
 state = "present"
 valueJson = '"./gradlew build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:32:02.581778Z"
+checkedAt = "2026-10-27T17:18:56.460694Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -85,28 +85,28 @@ state = "present"
 valueJson = '"A powerful 🚀 Android chart view / graph view library, supporting line- bar- pie- radar- bubble- and candlestick charts as well as scaling, panning and animations."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:32:02.581778Z"
+checkedAt = "2026-10-27T17:18:56.460694Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
 state = "present"
-valueJson = '"https://philippjahoda.com"'
+valueJson = '"https://philjay.cc/mpandroidchart"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:32:02.581778Z"
+checkedAt = "2026-10-27T17:18:56.460694Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"MPAndroidChart"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:32:02.581778Z"
+checkedAt = "2026-10-27T17:18:56.460694Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
-source = "build.gradle"
+source = "build.gradle.kts"
 state = "present"
 valueJson = '"./gradlew test"'
 
@@ -115,6 +115,6 @@ archived = false
 clone_url = "https://github.com/PhilJay/MPAndroidChart.git"
 default_branch = "master"
 fork = false
-head_sha = "9c7275a0596a7ac0e50ca566e680f7f9d73607af"
+head_sha = "fae4ad798564ea9ad494eaf037dca0e745400723"
 html_url = "https://github.com/PhilJay/MPAndroidChart"
-stars = 38174
+stars = 38189

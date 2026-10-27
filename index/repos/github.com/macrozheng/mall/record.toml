@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/macrozheng/mall"
-generated_at = "2026-09-16T16:32:39.505067Z"
+generated_at = "2026-10-27T17:20:25.257885Z"
 
 [record.trust]
 confidence = "medium"
@@ -46,27 +46,24 @@ topics = [
     "springboot",
 ]
 
-[docs]
-root = "https://www.macrozheng.com/admin/"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:32:39.505067Z"
+checkedAt = "2026-10-27T17:20:25.257885Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:32:39.505067Z"
+checkedAt = "2026-10-27T17:20:25.257885Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://www.macrozheng.com/admin/"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:32:39.505067Z"
+checkedAt = "2026-10-27T17:20:25.257885Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -74,7 +71,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:32:39.505067Z"
+checkedAt = "2026-10-27T17:20:25.257885Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -82,7 +79,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:32:39.505067Z"
+checkedAt = "2026-10-27T17:20:25.257885Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -91,7 +88,7 @@ state = "present"
 valueJson = '"mvn package"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:32:39.505067Z"
+checkedAt = "2026-10-27T17:20:25.257885Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -100,7 +97,7 @@ state = "present"
 valueJson = '"mall项目是一套电商系统，包括前台商城系统及后台管理系统，基于Spring Boot+MyBatis实现，采用Docker容器化部署。 前台商城系统包含首页门户、商品推荐、商品搜索、商品展示、购物车、订单流程、会员中心、客户服务、帮助中心等模块。 后台管理系统包含商品管理、订单管理、会员管理、促销管理、运营管理、内容管理、统计报表、财务管理、权限管理、设置等模块。"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:32:39.505067Z"
+checkedAt = "2026-10-27T17:20:25.257885Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -108,16 +105,16 @@ state = "present"
 valueJson = '"https://www.macrozheng.com/admin/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:32:39.505067Z"
+checkedAt = "2026-10-27T17:20:25.257885Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"mall"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:32:39.505067Z"
+checkedAt = "2026-10-27T17:20:25.257885Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -132,4 +129,4 @@ default_branch = "master"
 fork = false
 head_sha = "dcaa93b3150352e5044708d7211b5bed0af4509f"
 html_url = "https://github.com/macrozheng/mall"
-stars = 84780
+stars = 84973

@@ -3,9 +3,10 @@
 - Imported repository name and docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
-- Imported repo.build from clients/apps/web/package.json as `npm run build`.
-- Imported repo.test from clients/apps/web/package.json as `npm test`.
+- Ignored component-scoped commands from `clients/apps/web/package.json` as repository defaults.
+- Ignored component-scoped commands from `server/pyproject.toml` as repository defaults.
 - Imported repo.toolchain.min from server/pyproject.toml as `3.14` (Python).
+- Imported docs.root as `https://polar.sh/docs`. Explicit documentation link at README.md:20: <a href="https://polar.sh/docs">Docs</a>
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
@@ -18,10 +19,3 @@
 ## Auto-promotion
 
 All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
-
-## Command semantic correction (2026-10-03)
-
-2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged.
-
-- Withheld `repo.build` previously extracted from `clients/apps/web/package.json` as `npm run build`. Component command lacks repository-default scope and working directory.
-- Withheld `repo.test` previously extracted from `clients/apps/web/package.json` as `npm test`. Component command lacks repository-default scope and working directory.

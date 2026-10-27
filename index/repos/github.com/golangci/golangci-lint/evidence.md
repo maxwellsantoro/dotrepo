@@ -1,9 +1,10 @@
 # Evidence
 
-- Imported repository name from README.md.
+- Imported repository name and docs entry points from README.md.
 - Imported repo.build from Makefile as `make build`.
 - Imported repo.test from Makefile as `make test`.
 - Imported repo.toolchain.min from go.mod as `1.26.0` (Go).
+- Imported docs.root as `https://golangci-lint.run.`. Explicit documentation link at README.md:21: Documentation is hosted at https://golangci-lint.run.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

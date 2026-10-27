@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/fastapi/fastapi"
-generated_at = "2026-09-21T04:36:55.205964Z"
+generated_at = "2026-10-27T17:46:27.139061Z"
 
 [record.trust]
 confidence = "medium"
@@ -58,29 +58,28 @@ ecosystem = "Python"
 
 [docs]
 root = "https://fastapi.tiangolo.com"
+getting_started = "tutorial/#install-fastapi"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-21T04:36:55.205964Z"
-confidence = "low"
-method = "rejected"
-reason = "uv package-manager installation is not FastAPI installation documentation; inspected README.md:131 at commit 50113da16fec53b66b80d75e80a89296de4fa5a5"
-source = "README.md"
-state = "unresolved"
-valueJson = "null"
-rejectedValueJson = "\"https://docs.astral.sh/uv/getting-started/installation/\""
-
-[x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-21T04:36:55.205964Z"
+checkedAt = "2026-10-27T17:46:27.139061Z"
 confidence = "high"
 method = "extracted"
-reason = "Pydantic dependency link is not FastAPI documentation; inspected README.md:24 at commit 50113da16fec53b66b80d75e80a89296de4fa5a5"
+reason = "Explicit documentation link at README.md:143: If you prefer to use `pip`, install `fastapi[standard]` inside a virtual environment. See the [installation guide](tutorial/#install-fastapi) for the alternative steps."
 source = "README.md"
 state = "present"
-valueJson = "\"https://fastapi.tiangolo.com\""
-rejectedValueJson = "\"https://pydantic.dev/docs/\""
+valueJson = '"tutorial/#install-fastapi"'
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-10-27T17:46:27.139061Z"
+confidence = "high"
+method = "extracted"
+reason = "Explicit documentation link at README.md:24: **Documentation**: [https://fastapi.tiangolo.com](https://fastapi.tiangolo.com)"
+source = "README.md"
+state = "present"
+valueJson = '"https://fastapi.tiangolo.com"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:23:14.751141Z"
+checkedAt = "2026-10-27T17:46:27.139061Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -88,7 +87,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:23:14.751141Z"
+checkedAt = "2026-10-27T17:46:27.139061Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -96,7 +95,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:23:14.751141Z"
+checkedAt = "2026-10-27T17:46:27.139061Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -105,7 +104,7 @@ state = "present"
 valueJson = '"python -m build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:23:14.751141Z"
+checkedAt = "2026-10-27T17:46:27.139061Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -114,7 +113,7 @@ state = "present"
 valueJson = '"FastAPI framework, high performance, easy to learn, fast to code, ready for production"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:23:14.751141Z"
+checkedAt = "2026-10-27T17:46:27.139061Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -122,16 +121,16 @@ state = "present"
 valueJson = '"https://fastapi.tiangolo.com/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:23:14.751141Z"
+checkedAt = "2026-10-27T17:46:27.139061Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"FastAPI"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:23:14.751141Z"
+checkedAt = "2026-10-27T17:46:27.139061Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -144,6 +143,6 @@ archived = false
 clone_url = "https://github.com/fastapi/fastapi.git"
 default_branch = "master"
 fork = false
-head_sha = "50113da16fec53b66b80d75e80a89296de4fa5a5"
+head_sha = "79cab5bed28b24d92c185d236feb33f5783dfeb3"
 html_url = "https://github.com/fastapi/fastapi"
-stars = 102366
+stars = 104277

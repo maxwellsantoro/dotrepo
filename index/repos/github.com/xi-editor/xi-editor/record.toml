@@ -2,17 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/xi-editor/xi-editor"
-generated_at = "2026-09-16T16:35:10.568386Z"
+generated_at = "2026-10-27T17:29:00.11204Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
-    "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md` and `rust/Cargo.toml`. Imported `repo.build` from `README.md`. Inferred `repo.test` from `rust/Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. 2026-10-03 semantic audit withheld repo.test pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged."
+notes = "Bootstrapped from `README.md`. Ignored component-scoped commands from `rust/Cargo.toml` as repository defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Xi editor"
@@ -27,11 +27,7 @@ languages = [
     "Makefile",
     "Shell",
 ]
-build = "cargo build"
 topics = []
-
-[docs]
-root = "https://xi-editor.io"
 
 [relations]
 references = []
@@ -49,23 +45,23 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:35:10.568386Z"
+checkedAt = "2026-10-27T17:29:00.11204Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:35:10.568386Z"
+checkedAt = "2026-10-27T17:29:00.11204Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://xi-editor.io"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:35:10.568386Z"
+checkedAt = "2026-10-27T17:29:00.11204Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -73,7 +69,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:35:10.568386Z"
+checkedAt = "2026-10-27T17:29:00.11204Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -81,16 +77,15 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:35:10.568386Z"
+checkedAt = "2026-10-27T17:29:00.11204Z"
 confidence = "high"
-method = "extracted"
-reason = "from declared repository source"
-source = "README.md"
-state = "present"
-valueJson = '"cargo build"'
+method = "not_found_in_inspected_sources"
+reason = "no build command sources found"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:35:10.568386Z"
+checkedAt = "2026-10-27T17:29:00.11204Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -99,7 +94,7 @@ state = "present"
 valueJson = '"A modern editor with a backend written in Rust."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:35:10.568386Z"
+checkedAt = "2026-10-27T17:29:00.11204Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -107,21 +102,20 @@ state = "present"
 valueJson = '"https://xi-editor.io"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:35:10.568386Z"
+checkedAt = "2026-10-27T17:29:00.11204Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Xi editor"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:35:10.568386Z"
-confidence = "low"
-method = "inferred"
-reason = "Component command lacks repository-default scope and working directory."
-source = "rust/Cargo.toml"
-state = "unresolved"
+checkedAt = "2026-10-27T17:29:00.11204Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no test command sources found"
+state = "not_found"
 valueJson = "null"
 
 [x.github]
@@ -131,4 +125,4 @@ default_branch = "master"
 fork = false
 head_sha = "a2dea3059312795c77caadc639df49bf8a7008eb"
 html_url = "https://github.com/xi-editor/xi-editor"
-stars = 19819
+stars = 19804

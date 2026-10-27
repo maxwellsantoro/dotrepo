@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/roboflow/supervision"
-generated_at = "2026-09-16T16:28:32.945445Z"
+generated_at = "2026-10-27T18:15:53.647795Z"
 
 [record.trust]
 confidence = "medium"
@@ -59,23 +59,24 @@ maintainers = [
 root = "https://supervision.roboflow.com/"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:28:32.945445Z"
+checkedAt = "2026-10-27T18:15:53.647795Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:28:32.945445Z"
+checkedAt = "2026-10-27T18:15:53.647795Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:265: Visit our [documentation](https://supervision.roboflow.com/) page to learn how supervision can help you build computer vision applications faster and more reliably."
+source = "README.md"
 state = "present"
 valueJson = '"https://supervision.roboflow.com/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:28:32.945445Z"
+checkedAt = "2026-10-27T18:15:53.647795Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -83,7 +84,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:28:32.945445Z"
+checkedAt = "2026-10-27T18:15:53.647795Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -91,7 +92,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:28:32.945445Z"
+checkedAt = "2026-10-27T18:15:53.647795Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -100,7 +101,7 @@ state = "present"
 valueJson = '"python -m build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:28:32.945445Z"
+checkedAt = "2026-10-27T18:15:53.647795Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -109,7 +110,7 @@ state = "present"
 valueJson = '"We write your reusable computer vision tools. 💜"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:28:32.945445Z"
+checkedAt = "2026-10-27T18:15:53.647795Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -117,16 +118,16 @@ state = "present"
 valueJson = '"https://supervision.roboflow.com"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:28:32.945445Z"
+checkedAt = "2026-10-27T18:15:53.647795Z"
 confidence = "high"
 method = "inferred"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"supervision"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:28:32.945445Z"
+checkedAt = "2026-10-27T18:15:53.647795Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -139,6 +140,6 @@ archived = false
 clone_url = "https://github.com/roboflow/supervision.git"
 default_branch = "develop"
 fork = false
-head_sha = "560efc91081066b750a1b6cb1604ff7a6666f477"
+head_sha = "6d14ba10ee6613fadb8b048dea0a6c79485f547e"
 html_url = "https://github.com/roboflow/supervision"
-stars = 50493
+stars = 51389

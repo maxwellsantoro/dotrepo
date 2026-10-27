@@ -6,6 +6,7 @@
 - Inferred repo.build from pyproject.toml as `python -m build`.
 - Inferred repo.test from pyproject.toml as `python -m pytest`.
 - Imported repo.toolchain.min from pyproject.toml as `3.12.3` (Python).
+- Imported docs.root as `https://docs.sunnypilot.ai/`. Explicit documentation link at README.md:11: https://docs.sunnypilot.ai/ is your one stop shop for everything from features to installation to FAQ about the sunnypilot
 - Discovered related relation to github.com/sunnyhaibin/sunnypilot from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/spring-projects/spring-framework"
-generated_at = "2026-09-18T06:05:38.785339972Z"
+generated_at = "2026-10-27T17:38:13.449994Z"
 
 [record.trust]
 confidence = "medium"
@@ -27,9 +27,9 @@ languages = [
     "FreeMarker",
     "Groovy",
     "XSLT",
+    "CSS",
     "HTML",
     "Ruby",
-    "CSS",
     "Go Template",
     "JavaScript",
     "Python",
@@ -47,27 +47,24 @@ topics = [
 maintainers = []
 security_contact = "https://github.com/spring-projects/security-advisories/security/advisories/new"
 
-[docs]
-root = "https://docs.spring.io/spring-framework/docs/current/javadoc-api/"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-18T06:05:38.785339972Z"
+checkedAt = "2026-10-27T17:38:13.449994Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-18T06:05:38.785339972Z"
+checkedAt = "2026-10-27T17:38:13.449994Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://docs.spring.io/spring-framework/docs/current/javadoc-api/"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-18T06:05:38.785339972Z"
+checkedAt = "2026-10-27T17:38:13.449994Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -76,7 +73,7 @@ state = "present"
 valueJson = '"https://github.com/spring-projects/security-advisories/security/advisories/new"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-18T06:05:38.785339972Z"
+checkedAt = "2026-10-27T17:38:13.449994Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -84,7 +81,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-18T06:05:38.785339972Z"
+checkedAt = "2026-10-27T17:38:13.449994Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -93,7 +90,7 @@ state = "present"
 valueJson = '"./gradlew build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-18T06:05:38.785339972Z"
+checkedAt = "2026-10-27T17:38:13.449994Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -102,7 +99,7 @@ state = "present"
 valueJson = '"Spring Framework"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-18T06:05:38.785339972Z"
+checkedAt = "2026-10-27T17:38:13.449994Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -110,16 +107,16 @@ state = "present"
 valueJson = '"https://spring.io/projects/spring-framework"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-18T06:05:38.785339972Z"
+checkedAt = "2026-10-27T17:38:13.449994Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Spring Framework"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-18T06:05:38.785339972Z"
+checkedAt = "2026-10-27T17:38:13.449994Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -132,6 +129,6 @@ archived = false
 clone_url = "https://github.com/spring-projects/spring-framework.git"
 default_branch = "main"
 fork = false
-head_sha = "e8eb2b6751ca6efa2a6b8a8eb930ed3469ebafb9"
+head_sha = "62c0f6f59e6be8cd4f20046cceceb5b31f56f63c"
 html_url = "https://github.com/spring-projects/spring-framework"
-stars = 60246
+stars = 60299

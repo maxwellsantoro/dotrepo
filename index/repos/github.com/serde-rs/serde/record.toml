@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/serde-rs/serde"
-generated_at = "2026-09-16T16:31:49.12318Z"
+generated_at = "2026-10-27T17:18:19.36852Z"
 
 [record.trust]
 confidence = "medium"
@@ -22,7 +22,7 @@ license = "Apache-2.0"
 visibility = "public"
 languages = ["Rust"]
 build = "cargo build --workspace"
-test = "cargo +nightly test --features unstable"
+test = "cargo test"
 topics = [
     "rust",
     "serde",
@@ -30,27 +30,24 @@ topics = [
     "no-std",
 ]
 
-[docs]
-root = "https://serde.rs/"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:31:49.12318Z"
+checkedAt = "2026-10-27T17:18:19.36852Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:31:49.12318Z"
+checkedAt = "2026-10-27T17:18:19.36852Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://serde.rs/"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:31:49.12318Z"
+checkedAt = "2026-10-27T17:18:19.36852Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -58,7 +55,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:31:49.12318Z"
+checkedAt = "2026-10-27T17:18:19.36852Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -66,7 +63,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:31:49.12318Z"
+checkedAt = "2026-10-27T17:18:19.36852Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -75,7 +72,7 @@ state = "present"
 valueJson = '"cargo build --workspace"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:31:49.12318Z"
+checkedAt = "2026-10-27T17:18:19.36852Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -84,7 +81,7 @@ state = "present"
 valueJson = '"Serialization framework for Rust"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:31:49.12318Z"
+checkedAt = "2026-10-27T17:18:19.36852Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -92,28 +89,28 @@ state = "present"
 valueJson = '"https://serde.rs/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:31:49.12318Z"
+checkedAt = "2026-10-27T17:18:19.36852Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Serde"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:31:49.12318Z"
+checkedAt = "2026-10-27T17:18:19.36852Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
 source = "CONTRIBUTING.md"
 state = "present"
-valueJson = '"cargo +nightly test --features unstable"'
+valueJson = '"cargo test"'
 
 [x.github]
 archived = false
 clone_url = "https://github.com/serde-rs/serde.git"
 default_branch = "master"
 fork = false
-head_sha = "a874a1b1bb1cc16cf5ee3b1b7b527af5705742bb"
+head_sha = "0db9b3b504bcb0a7fa9cf001429869519afd3e9a"
 html_url = "https://github.com/serde-rs/serde"
-stars = 10827
+stars = 10918

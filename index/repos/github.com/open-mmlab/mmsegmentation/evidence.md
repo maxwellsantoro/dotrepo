@@ -2,6 +2,7 @@
 
 - Imported repository docs entry points from README.md.
 - Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.
+- Imported docs.root as `https://mmsegmentation.readthedocs.io/en/latest/`. Explicit documentation link at README.md:31: Documentation: <https://mmsegmentation.readthedocs.io/en/latest/>
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

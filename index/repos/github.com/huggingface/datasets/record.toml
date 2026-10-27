@@ -2,16 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/huggingface/datasets"
-generated_at = "2026-09-16T16:24:41.436874Z"
+generated_at = "2026-10-27T18:04:16.421813Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. 2026-10-04 pinned command-source audit supersedes affected extraction assessments and prior auto-promotion. Corrected commands are unassessed pending full-record verification; unrelated inspection timestamps are unchanged. See index/telemetry/command-semantics-20261004/report.json."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Hugging Face Datasets Library"
@@ -47,36 +48,33 @@ topics = [
 maintainers = []
 security_contact = "security@huggingface.co"
 
-[docs]
-root = "https://huggingface.co/docs/datasets"
-getting_started = "https://huggingface.co/docs/datasets/installation"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:24:41.436874Z"
+checkedAt = "2026-10-27T18:04:16.421813Z"
 confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
-state = "present"
-valueJson = '"https://huggingface.co/docs/datasets/installation"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:24:41.436874Z"
+checkedAt = "2026-10-27T18:04:16.421813Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://huggingface.co/docs/datasets"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:24:41.436874Z"
+checkedAt = "2026-10-27T18:04:16.421813Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "direct email or mailing list"
+source = "SECURITY.md"
 state = "present"
 valueJson = '"security@huggingface.co"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:24:41.436874Z"
+checkedAt = "2026-10-27T18:04:16.421813Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -84,7 +82,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:24:41.436874Z"
+checkedAt = "2026-10-27T18:04:16.421813Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -92,7 +90,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:24:41.436874Z"
+checkedAt = "2026-10-27T18:04:16.421813Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -101,7 +99,7 @@ state = "present"
 valueJson = '"🤗 The largest hub of ready-to-use datasets for AI models with fast, easy-to-use and efficient data manipulation tools"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:24:41.436874Z"
+checkedAt = "2026-10-27T18:04:16.421813Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -109,20 +107,28 @@ state = "present"
 valueJson = '"https://huggingface.co/docs/datasets"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:24:41.436874Z"
+checkedAt = "2026-10-27T18:04:16.421813Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Hugging Face Datasets Library"'
 
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-10-27T18:04:16.421813Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "Makefile"
+state = "present"
+valueJson = '"make test"'
 
 [x.github]
 archived = false
 clone_url = "https://github.com/huggingface/datasets.git"
 default_branch = "main"
 fork = false
-head_sha = "d336dcb84cdd6647a685cf4c9e0e8c26cc105b06"
+head_sha = "ef61228a5756dcebfff8ee245d89c72822fb6ae6"
 html_url = "https://github.com/huggingface/datasets"
-stars = 21979
+stars = 22090

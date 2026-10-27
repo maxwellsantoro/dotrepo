@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/ggml-org/llama.cpp"
-generated_at = "2026-09-17T06:07:23.285877758Z"
+generated_at = "2026-10-27T17:33:22.293987Z"
 
 [record.trust]
 confidence = "medium"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "2026-10-06 bounded command-source checkpoint: unsupported Python test scalar removed; CPU CMake build retained as contextual candidate, scalar defaults withheld. Only command sources inspected; factual record age/status and unrelated facts unchanged. Fresh assessments do not imply full-record recrawl. Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, `Makefile`, and `pyproject.toml`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Makefile`. Inferred `repo.test` from `pyproject.toml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. 2026-10-04 pinned command-source audit supersedes affected extraction assessments and prior auto-promotion. Corrected commands are unassessed pending full-record verification; unrelated inspection timestamps are unchanged. See index/telemetry/command-semantics-20261004/report.json."
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, `.github/workflows/build-and-test-snapdragon.yml`, and `pyproject.toml`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/build-and-test-snapdragon.yml`. Inferred `repo.test` from `pyproject.toml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "llama.cpp"
@@ -38,8 +38,8 @@ languages = [
     "Objective-C",
     "Dockerfile",
     "JavaScript",
-    "Nix",
     "CSS",
+    "Nix",
     "PowerShell",
     "Linker Script",
     "MDX",
@@ -48,19 +48,9 @@ languages = [
     "SCSS",
     "Assembly",
 ]
+build = "cmake --preset arm64-android-snapdragon-release -B build"
+test = "python -m pytest"
 topics = ["ggml"]
-
-[[repo.build_candidates]]
-command = "cmake --build build --config Release"
-ecosystem = "CMake"
-source = "docs/build.md"
-
-[repo.build_candidates.context]
-command = "cmake --build build --config Release"
-working_directory = "."
-scope = "repository"
-prerequisites = ["Install CMake 3.14 or newer and a C/C++ compiler; select the documented CPU build configuration. Run cmake -B build from the repository root before this build command."]
-source = "docs/build.md"
 
 [repo.toolchain]
 min = "3.10"
@@ -82,6 +72,7 @@ maintainers = [
     "@hanyin-arm",
     "@naco-siren",
     "@ggml-org/ggml-cann",
+    "@jbooth",
     "@bartowski1182",
     "@alex-spacemit",
     "@ggml-org/ggml-cuda",
@@ -101,35 +92,31 @@ maintainers = [
     "@AlekseiNikiforovIBM",
     "@avinashcpandey",
     "@Jiten1parmar",
-    "@z-vishal",
     "@Green-Sky",
-    "@ggml-org/llama-mtmd",
     "@ggml-org/llama-server",
+    "@ggml-org/llama-mtmd",
     "@ggml-org/llama-ui",
 ]
 security_contact = "https://github.com/ggml-org/llama.cpp/security/advisories/new"
 
-[docs]
-root = "https://llama.app"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-17T06:07:23.285877758Z"
+checkedAt = "2026-10-27T17:33:22.293987Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-17T06:07:23.285877758Z"
+checkedAt = "2026-10-27T17:33:22.293987Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://llama.app"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-17T06:07:23.285877758Z"
+checkedAt = "2026-10-27T17:33:22.293987Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -138,16 +125,24 @@ state = "present"
 valueJson = '"https://github.com/ggml-org/llama.cpp/security/advisories/new"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-17T06:07:23.285877758Z"
+checkedAt = "2026-10-27T17:33:22.293987Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
 state = "not_found"
 valueJson = "null"
 
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-10-27T17:33:22.293987Z"
+confidence = "medium"
+method = "inferred"
+reason = "from workflow fallback"
+source = ".github/workflows/build-and-test-snapdragon.yml"
+state = "present"
+valueJson = '"cmake --preset arm64-android-snapdragon-release -B build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-17T06:07:23.285877758Z"
+checkedAt = "2026-10-27T17:33:22.293987Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -156,7 +151,7 @@ state = "present"
 valueJson = '"LLM inference in C/C++"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-17T06:07:23.285877758Z"
+checkedAt = "2026-10-27T17:33:22.293987Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -164,47 +159,28 @@ state = "present"
 valueJson = '"https://llama.app"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-17T06:07:23.285877758Z"
+checkedAt = "2026-10-27T17:33:22.293987Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"llama.cpp"'
 
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-10-27T17:33:22.293987Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "pyproject.toml"
+state = "present"
+valueJson = '"python -m pytest"'
 
 [x.github]
 archived = false
 clone_url = "https://github.com/ggml-org/llama.cpp.git"
 default_branch = "master"
 fork = false
-head_sha = "05f2dcfdba3879c55f735efa0f124b1a56f7ed11"
+head_sha = "6c44591049aa921ddf98360f526326dc34ca3ff6"
 html_url = "https://github.com/ggml-org/llama.cpp"
-stars = 128495
-
-[x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-06T04:00:48.158597Z"
-confidence = "high"
-method = "not_found_in_inspected_sources"
-reason = "Pinned Makefile unconditionally errors and declares no build target. docs/build.md offers CPU and other backend procedures; preserve a CPU candidate without choosing a scalar repository default."
-source = "Makefile"
-state = "not_found"
-valueJson = "null"
-
-[x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-06T04:00:48.158597Z"
-confidence = "high"
-method = "not_found_in_inspected_sources"
-reason = "pytest is a development dependency, not a declared repository test invocation. Inspected CMake test declarations do not establish a complete repository test instruction. Removed unsupported inferred scalar; absence is limited to inspected sources."
-source = "pyproject.toml"
-state = "not_found"
-valueJson = "null"
-
-[x.dotrepo.field_evidence."repo.build_candidates.0"]
-checkedAt = "2026-10-06T04:00:48.158597Z"
-confidence = "high"
-method = "extracted"
-reason = "CPU Build code block declares configuration then Release build at repository root; CMakeLists.txt requires CMake 3.14 and C/C++ languages. Backend selection stays explicit. Configuration is retained as an explicit prerequisite; statically inspected at 05f2dcfdba3879c55f735efa0f124b1a56f7ed11, not executed."
-source = "docs/build.md"
-state = "present"
-valueJson = "{\"command\": \"cmake --build build --config Release\", \"context\": {\"command\": \"cmake --build build --config Release\", \"prerequisites\": [\"Install CMake 3.14 or newer and a C/C++ compiler; select the documented CPU build configuration. Run cmake -B build from the repository root before this build command.\"], \"scope\": \"repository\", \"source\": \"docs/build.md\", \"working_directory\": \".\"}, \"ecosystem\": \"CMake\", \"source\": \"docs/build.md\"}"
+stars = 132546

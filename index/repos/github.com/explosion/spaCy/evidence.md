@@ -2,8 +2,10 @@
 
 - Imported repository name and docs entry points from README.md.
 - Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.
-- Imported repo.build from Makefile as `make package`.
-- Imported repo.test from README.md as `python -m pytest --pyargs spacy`.
+- Inferred repo.build from .github/workflows/tests.yml as `python -m build --sdist`.
+- Imported repo.test from Makefile as `make test`.
+- Imported docs.root as `https://spacy.io/usage`. Explicit documentation link at README.md:116: [documentation](https://spacy.io/usage).
+- Imported docs.getting_started as `https://spacy.io/usage#section-quickstart`. Explicit documentation link at README.md:255: [quickstart widget](https://spacy.io/usage#section-quickstart) to get the right
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
@@ -12,15 +14,3 @@
 - Augmented repo.topics from GitHub repository metadata.
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
-
-## Auto-promotion
-
-All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
-
-## 2026-10-04 command semantics correction
-
-The preceding import and auto-promotion entries are historical and superseded for the fields below. Pinned sources were inspected statically; upstream task recipes were not executed. This does not establish task correctness or refresh other facts. Prior affected field assessments were removed, and verified authority was superseded where necessary.
-
-- repo.build: `make package` -> withheld (inspected `Makefile`)
-
-Receipt and source hashes: [command-source audit](../../../../telemetry/command-semantics-20261004/report.json).

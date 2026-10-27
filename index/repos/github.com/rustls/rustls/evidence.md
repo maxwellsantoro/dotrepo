@@ -1,9 +1,10 @@
 # Evidence
 
-- Imported repository name from README.md.
+- Imported repository name and docs entry points from README.md.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
-- Inferred repo.build from .github/workflows/build.yml as `cargo build --locked`.
-- Inferred repo.test from .github/workflows/build.yml as `cargo test --locked`.
+- Inferred repo.build from Cargo.toml as `cargo build --workspace`.
+- Inferred repo.test from Cargo.toml as `cargo test --workspace`.
+- Imported docs.root as `https://docs.rs/rustls/`. Explicit documentation link at README.md:36: https://docs.rs/rustls/
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.name` to `rustls` from `GitHub API` after deterministic escalation.

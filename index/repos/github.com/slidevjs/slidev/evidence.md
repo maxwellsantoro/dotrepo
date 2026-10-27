@@ -4,6 +4,7 @@
 - Imported repo.build from package.json as `pnpm build`.
 - Imported repo.test from package.json as `pnpm test`.
 - Imported repo.toolchain.min from package.json as `22.12.0` (Node.js).
+- Imported docs.root as `https://sli.dev`. Explicit documentation link at README.md:22: <a href="https://x.com/antfu7/status/1389604687502995457">Video Preview</a> | <a href="https://sli.dev">Documentation</a>
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

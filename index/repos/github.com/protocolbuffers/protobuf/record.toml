@@ -2,17 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/protocolbuffers/protobuf"
-generated_at = "2026-09-16T16:28:06.53977Z"
+generated_at = "2026-10-27T18:14:52.902273Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
-    "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `csharp/src/AddressBook/AddressBook.csproj`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `csharp/src/AddressBook/AddressBook.csproj`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. 2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Ignored component-scoped commands from `csharp/src/AddressBook/AddressBook.csproj` as repository defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "protobuf"
@@ -22,14 +22,14 @@ license = "NOASSERTION"
 visibility = "public"
 languages = [
     "C++",
+    "Java",
     "C#",
     "C",
-    "Java",
     "Objective-C",
     "Python",
     "Starlark",
-    "PHP",
     "Rust",
+    "PHP",
     "Ruby",
     "CMake",
     "Kotlin",
@@ -39,15 +39,14 @@ languages = [
     "Swift",
     "Pawn",
     "Emacs Lisp",
-    "Vim Script",
     "Batchfile",
+    "Vim Script",
     "Objective-C++",
+    "Makefile",
     "PowerShell",
     "Awk",
-    "Makefile",
     "M4",
     "Linker Script",
-    "RenderScript",
 ]
 topics = [
     "protobuf",
@@ -62,7 +61,6 @@ topics = [
 
 [owners]
 maintainers = [
-    "@protocolbuffers/protobuf-csharp",
     "@protocolbuffers/protobuf-docs",
     "@protocolbuffers/protobuf-java",
     "@protocolbuffers/protobuf-kotlin",
@@ -74,26 +72,27 @@ maintainers = [
 security_contact = "https://bughunters.google.com/report"
 
 [docs]
-root = "http://protobuf.dev"
+root = "https://protobuf.dev"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:28:06.53977Z"
+checkedAt = "2026-10-27T18:14:52.902273Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:28:06.53977Z"
+checkedAt = "2026-10-27T18:14:52.902273Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:143: The complete documentation is available at the [Protocol Buffers doc site](https://protobuf.dev)."
+source = "README.md"
 state = "present"
-valueJson = '"http://protobuf.dev"'
+valueJson = '"https://protobuf.dev"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:28:06.53977Z"
+checkedAt = "2026-10-27T18:14:52.902273Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -102,7 +101,7 @@ state = "present"
 valueJson = '"https://bughunters.google.com/report"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:28:06.53977Z"
+checkedAt = "2026-10-27T18:14:52.902273Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -110,16 +109,15 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:28:06.53977Z"
-confidence = "low"
-method = "inferred"
-reason = "Component command lacks repository-default scope and working directory."
-source = "csharp/src/AddressBook/AddressBook.csproj"
-state = "unresolved"
+checkedAt = "2026-10-27T18:14:52.902273Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no build command sources found"
+state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:28:06.53977Z"
+checkedAt = "2026-10-27T18:14:52.902273Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -128,7 +126,7 @@ state = "present"
 valueJson = """"Protocol Buffers - Google's data interchange format""""
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:28:06.53977Z"
+checkedAt = "2026-10-27T18:14:52.902273Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -136,16 +134,16 @@ state = "present"
 valueJson = '"http://protobuf.dev"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:28:06.53977Z"
+checkedAt = "2026-10-27T18:14:52.902273Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"protobuf"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:28:06.53977Z"
+checkedAt = "2026-10-27T18:14:52.902273Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -157,6 +155,6 @@ archived = false
 clone_url = "https://github.com/protocolbuffers/protobuf.git"
 default_branch = "main"
 fork = false
-head_sha = "fa153cf32201dc5156b320591f2cd9153a7b40b8"
+head_sha = "9d7f67966a98088973f1cf3fa5ec6280d4a12a44"
 html_url = "https://github.com/protocolbuffers/protobuf"
-stars = 72036
+stars = 72131

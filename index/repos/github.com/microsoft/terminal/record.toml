@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/microsoft/terminal"
-generated_at = "2026-09-16T16:26:43.874756Z"
+generated_at = "2026-10-27T18:09:41.460685Z"
 
 [record.trust]
 confidence = "medium"
@@ -54,6 +54,9 @@ topics = [
 maintainers = []
 security_contact = "secure@microsoft.com"
 
+[docs]
+root = "https://aka.ms/terminal-docs"
+
 [relations]
 references = []
 
@@ -70,23 +73,24 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:26:43.874756Z"
+checkedAt = "2026-10-27T18:09:41.460685Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:26:43.874756Z"
+checkedAt = "2026-10-27T18:09:41.460685Z"
 confidence = "high"
-method = "not_found_in_inspected_sources"
-reason = "no docs detected"
-state = "not_found"
-valueJson = "null"
+method = "extracted"
+reason = "Explicit documentation link at README.md:299: All project documentation is located at [aka.ms/terminal-docs](https://aka.ms/terminal-docs). If you would like"
+source = "README.md"
+state = "present"
+valueJson = '"https://aka.ms/terminal-docs"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:26:43.874756Z"
+checkedAt = "2026-10-27T18:09:41.460685Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -95,7 +99,7 @@ state = "present"
 valueJson = '"secure@microsoft.com"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:26:43.874756Z"
+checkedAt = "2026-10-27T18:09:41.460685Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -103,7 +107,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:26:43.874756Z"
+checkedAt = "2026-10-27T18:09:41.460685Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -112,7 +116,7 @@ state = "present"
 valueJson = '"dotnet build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:26:43.874756Z"
+checkedAt = "2026-10-27T18:09:41.460685Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -121,7 +125,7 @@ state = "present"
 valueJson = '"The new Windows Terminal and the original Windows console host, all in the same place!"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:26:43.874756Z"
+checkedAt = "2026-10-27T18:09:41.460685Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -129,16 +133,16 @@ state = "present"
 valueJson = '"https://github.com/microsoft/terminal"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:26:43.874756Z"
+checkedAt = "2026-10-27T18:09:41.460685Z"
 confidence = "high"
 method = "inferred"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"terminal"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:26:43.874756Z"
+checkedAt = "2026-10-27T18:09:41.460685Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -151,6 +155,6 @@ archived = false
 clone_url = "https://github.com/microsoft/terminal.git"
 default_branch = "main"
 fork = false
-head_sha = "9694946ae22420a30691b7610c31f5723d9a5ff8"
+head_sha = "b69f4c623bf5406774ffe51515dcb1190ca5fb70"
 html_url = "https://github.com/microsoft/terminal"
-stars = 104908
+stars = 105253

@@ -6,6 +6,7 @@
 - Imported repo.build from package.json as `pnpm build`.
 - Imported repo.test from package.json as `pnpm test`.
 - Imported repo.toolchain.min from package.json as `24` (Node.js).
+- Imported docs.root as `https://www.prisma.io/docs/orm`. Explicit documentation link at README.md:8: <a href="https://www.prisma.io/docs/orm">Docs</a>  |  <a href="https://pris.ly/discord">Discord</a>  |  <a href="https://twitter.com/prisma">X</a>  |  <a href="https://pris.ly/pn-announcement">Blog Post</a>  |  <a href="./ARCHITECTURE.md">Architecture</a>
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.name` to `orm` from `GitHub API` after deterministic escalation.

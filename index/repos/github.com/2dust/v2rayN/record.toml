@@ -2,17 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/2dust/v2rayN"
-generated_at = "2026-09-16T16:34:06.065866Z"
+generated_at = "2026-10-27T17:25:43.699074Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
-    "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md` and `v2rayN/v2rayN.sln`. Inferred `repo.build` from `v2rayN/v2rayN.sln`. Inferred `repo.test` from `v2rayN/v2rayN.sln`. This is an overlay bootstrap, not a maintainer-controlled canonical record. 2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged."
+notes = "Bootstrapped from `README.md`. Ignored component-scoped commands from `v2rayN/AmazTool/AmazTool.csproj` as repository defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "v2rayN"
@@ -23,6 +23,9 @@ visibility = "public"
 languages = [
     "C#",
     "Shell",
+    "Python",
+    "PowerShell",
+    "Dockerfile",
 ]
 topics = [
     "windows",
@@ -38,27 +41,24 @@ topics = [
     "xtls",
 ]
 
-[docs]
-root = "https://v2rayn.2dust.link"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:34:06.065866Z"
+checkedAt = "2026-10-27T17:25:43.699074Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:34:06.065866Z"
+checkedAt = "2026-10-27T17:25:43.699074Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://v2rayn.2dust.link"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:34:06.065866Z"
+checkedAt = "2026-10-27T17:25:43.699074Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -66,7 +66,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:34:06.065866Z"
+checkedAt = "2026-10-27T17:25:43.699074Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -74,16 +74,15 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:34:06.065866Z"
-confidence = "low"
-method = "inferred"
-reason = "Component command lacks repository-default scope and working directory."
-source = "v2rayN/v2rayN.sln"
-state = "unresolved"
+checkedAt = "2026-10-27T17:25:43.699074Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no build command sources found"
+state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:34:06.065866Z"
+checkedAt = "2026-10-27T17:25:43.699074Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -92,7 +91,7 @@ state = "present"
 valueJson = '"A GUI client for Windows, Linux and macOS, support Xray and sing-box and others"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:34:06.065866Z"
+checkedAt = "2026-10-27T17:25:43.699074Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -100,21 +99,20 @@ state = "present"
 valueJson = '"https://v2rayn.2dust.link"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:34:06.065866Z"
+checkedAt = "2026-10-27T17:25:43.699074Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"v2rayN"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:34:06.065866Z"
-confidence = "low"
-method = "inferred"
-reason = "Component command lacks repository-default scope and working directory."
-source = "v2rayN/v2rayN.sln"
-state = "unresolved"
+checkedAt = "2026-10-27T17:25:43.699074Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no test command sources found"
+state = "not_found"
 valueJson = "null"
 
 [x.github]
@@ -122,6 +120,6 @@ archived = false
 clone_url = "https://github.com/2dust/v2rayN.git"
 default_branch = "master"
 fork = false
-head_sha = "cef40d38eec545dbe5a736602549d2b72c4f64bc"
+head_sha = "57f17d5939e88c8e643ab49b90869d637765e75a"
 html_url = "https://github.com/2dust/v2rayN"
-stars = 116300
+stars = 119247

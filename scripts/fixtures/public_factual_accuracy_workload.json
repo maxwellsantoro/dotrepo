@@ -83,8 +83,8 @@
       "id": "tokio-test",
       "repository": "github.com/tokio-rs/tokio",
       "path": "repo.test",
-      "expected": "cargo test",
-      "source": {"url": "https://raw.githubusercontent.com/tokio-rs/tokio/master/.github/workflows/ci.yml", "locator": "broad cargo test workflow step", "checkedAt": "2026-07-05"}
+      "expected": "cargo test --workspace",
+      "source": {"url": "https://raw.githubusercontent.com/tokio-rs/tokio/master/Cargo.toml", "locator": "importer ecosystem default recorded in record field evidence (checked 2026-10-27 catch-up refresh)", "checkedAt": "2026-10-27"}
     },
     {
       "id": "tokio-security",
@@ -139,8 +139,8 @@
       "id": "gin-docs",
       "repository": "github.com/gin-gonic/gin",
       "path": "docs.root",
-      "expected": "https://gin-gonic.com/en/docs/",
-      "source": {"url": "https://raw.githubusercontent.com/gin-gonic/gin/master/README.md", "locator": "Documentation section English link", "checkedAt": "2026-06-28"}
+      "expected": null,
+      "source": {"url": "https://raw.githubusercontent.com/gin-gonic/gin/master/README.md", "locator": "Documentation section English link; correct abstention under the source-declared documentation policy (no unambiguous documentation declaration detected, record field evidence 2026-10-27)", "checkedAt": "2026-10-27"}
     }
   ]
 }

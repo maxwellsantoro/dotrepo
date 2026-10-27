@@ -6,6 +6,7 @@
 - Imported repo.build from package.json as `bun run build`.
 - Imported repo.test from package.json as `bun run test`.
 - Imported repo.toolchain.min from package.json as `22` (Node.js).
+- Imported docs.root as `https://www.metabase.com/docs/latest/`. Explicit documentation link at README.md:45: The [Metabase handbook](https://www.metabase.com/docs/latest/).
 - Discovered related relation to github.com/metabase/metabase from package.json repository.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

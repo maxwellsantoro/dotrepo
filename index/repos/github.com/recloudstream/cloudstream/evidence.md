@@ -3,6 +3,7 @@
 - Imported repository name and docs entry points from README.md.
 - Inferred repo.build from build.gradle.kts as `./gradlew build`.
 - Inferred repo.test from build.gradle.kts as `./gradlew test`.
+- Imported docs.getting_started as `https://recloudstream.github.io/csdocs/`. Explicit documentation link at README.md:59: [Getting Started With CloudStream:](https://recloudstream.github.io/csdocs/)
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
@@ -10,7 +11,3 @@
 - Augmented repo.topics from GitHub repository metadata.
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
-
-## Fresh verification
-
-Prior verified authority was not inherited: this refresh must qualify using its current field scores.

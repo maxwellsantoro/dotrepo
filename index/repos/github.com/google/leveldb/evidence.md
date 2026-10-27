@@ -1,6 +1,7 @@
 # Evidence
 
-- Imported repository name from README.md.
+- Imported repository name and docs entry points from README.md.
+- Imported docs.root as `https://github.com/google/leveldb/blob/main/doc/index.md`. Explicit documentation link at README.md:26: [LevelDB library documentation](https://github.com/google/leveldb/blob/main/doc/index.md) is online and bundled with the source code.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.name` to `leveldb` from `GitHub API` after deterministic escalation.

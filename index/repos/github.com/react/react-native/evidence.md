@@ -4,6 +4,8 @@
 - Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.
 - Imported repo.build from package.json as `yarn build`.
 - Imported repo.test from package.json as `yarn test`.
+- Imported docs.root as `https://reactnative.dev/docs/getting-started`. Explicit documentation link at README.md:70: The full documentation for React Native can be found on our [website](https://reactnative.dev/docs/getting-started).
+- Conflicting documentation declarations in README.md; abstained from docs.getting_started.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.name` to `react-native` from `GitHub API` after deterministic escalation.
@@ -14,7 +16,3 @@
 - Augmented repo.topics from GitHub repository metadata.
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
-
-## Auto-promotion
-
-All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

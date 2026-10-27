@@ -3,7 +3,7 @@
 - Imported the security reporting channel from SECURITY.md.
 - Inferred fallback values for `repo.name` and `repo.description` because the imported files did not provide enough structured metadata.
 - Imported repo.build from Makefile as `make all`.
-- Inferred repo.test from .github/workflows/cuda-ci.yml as `SCIPY_ARRAY_API=1 pytest --doctest-modules modules/array_api.rst`.
+- Inferred repo.test from pyproject.toml as `python -m pytest`.
 - Imported repo.toolchain.min from pyproject.toml as `3.12` (Python).
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

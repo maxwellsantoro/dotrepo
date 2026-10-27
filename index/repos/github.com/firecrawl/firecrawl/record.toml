@@ -2,20 +2,21 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/firecrawl/firecrawl"
-generated_at = "2026-09-16T16:34:29.837338Z"
+generated_at = "2026-10-27T17:26:51.577108Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `apps/api/package.json`. Imported `repo.build` from `apps/api/package.json`. Imported `repo.test` from `apps/api/package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved. 2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged."
+notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Ignored component-scoped commands from `apps/rust-sdk/Cargo.toml` as repository defaults. Ignored component-scoped commands from `apps/api/package.json` as repository defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "firecrawl"
-description = "The context API to search, scrape, and interact with the web at scale. 🔥"
+description = "Supercharge your AI agents with data from the web and beyond. Building the library for superintelligence. 🔥"
 homepage = "https://firecrawl.dev"
 license = "AGPL-3.0"
 visibility = "public"
@@ -25,15 +26,15 @@ languages = [
     "Rust",
     "Java",
     "PHP",
-    "Go",
     "Elixir",
+    "Go",
     "C#",
     "Ruby",
     "Astro",
     "PLpgSQL",
-    "JavaScript",
     "Jupyter Notebook",
     "Shell",
+    "JavaScript",
     "Dockerfile",
     "Rich Text Format",
     "CSS",
@@ -77,23 +78,24 @@ maintainers = [
 root = "https://docs.firecrawl.dev"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:34:29.837338Z"
+checkedAt = "2026-10-27T17:26:51.577108Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:34:29.837338Z"
+checkedAt = "2026-10-27T17:26:51.577108Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:881: - [Documentation](https://docs.firecrawl.dev)"
+source = "README.md"
 state = "present"
 valueJson = '"https://docs.firecrawl.dev"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:34:29.837338Z"
+checkedAt = "2026-10-27T17:26:51.577108Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -101,7 +103,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:34:29.837338Z"
+checkedAt = "2026-10-27T17:26:51.577108Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -109,25 +111,24 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:34:29.837338Z"
-confidence = "low"
-method = "extracted"
-reason = "Component command lacks repository-default scope and working directory."
-source = "apps/api/package.json"
-state = "unresolved"
+checkedAt = "2026-10-27T17:26:51.577108Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no build command sources found"
+state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:34:29.837338Z"
+checkedAt = "2026-10-27T17:26:51.577108Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
 source = "GitHub API"
 state = "present"
-valueJson = '"The context API to search, scrape, and interact with the web at scale. 🔥"'
+valueJson = '"Supercharge your AI agents with data from the web and beyond. Building the library for superintelligence. 🔥"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:34:29.837338Z"
+checkedAt = "2026-10-27T17:26:51.577108Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -135,21 +136,20 @@ state = "present"
 valueJson = '"https://firecrawl.dev"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:34:29.837338Z"
+checkedAt = "2026-10-27T17:26:51.577108Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"firecrawl"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:34:29.837338Z"
-confidence = "low"
-method = "extracted"
-reason = "Component command lacks repository-default scope and working directory."
-source = "apps/api/package.json"
-state = "unresolved"
+checkedAt = "2026-10-27T17:26:51.577108Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no test command sources found"
+state = "not_found"
 valueJson = "null"
 
 [x.github]
@@ -157,6 +157,6 @@ archived = false
 clone_url = "https://github.com/firecrawl/firecrawl.git"
 default_branch = "main"
 fork = false
-head_sha = "ad3188385c71439376658a940efc1068626f80f9"
+head_sha = "2b68c4c56efc54ab10229cd2f992d1f1e71961f9"
 html_url = "https://github.com/firecrawl/firecrawl"
-stars = 181174
+stars = 195982

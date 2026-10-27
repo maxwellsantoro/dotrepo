@@ -2,29 +2,147 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "inferred"
 source = "https://github.com/maxwellsantoro/RamenOS"
-generated_at = "2026-10-06T01:15:26.806051Z"
+generated_at = "2026-10-27T17:53:37.827628Z"
 
 [record.trust]
-confidence = "high"
-provenance = ["imported"]
-notes = "Bounded manual source inspection at 8dc5ff88ddc404528c384aead9ea77f17bf63d40. Build/test scalars and candidates are withheld: documented host wrappers execute an aggregate of components and are not the whole operating-system default. The present context protocol cannot name this aggregate as a single component. Source fallback is required. This is an imported overlay, not pipeline verification or maintainer canonical authority."
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = 'Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Inferred `repo.build` from `Cargo.toml`. Inferred `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record.'
 
 [repo]
 name = "RamenOS"
-description = "RamenOS is a modern, post-Unix operating system being built for humans and AI agents to use efficiently and safely."
+description = "An experimental Rust OS for agents: typed capabilities, machine-readable system state, and evidence-gated hardware support."
 homepage = "https://github.com/maxwellsantoro/RamenOS"
-license = "MIT OR Apache-2.0"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Rust",
+    "Python",
+    "Shell",
+    "C",
+    "Just",
+    "WebAssembly",
+    "Linker Script",
+]
+build = "cargo build --workspace"
+test = "cargo test --workspace"
+topics = [
+    "ai-agents",
+    "capabilities",
+    "driver-development",
+    "idl",
+    "kernel",
+    "operating-system",
+    "qemu",
+    "rust",
+    "systems-programming",
+]
+
+[owners]
+maintainers = []
+security_contact = "unknown"
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/maxwellsantoro/RamenOS"
+notes = "Cross-link from README: ![ci"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-10-27T17:53:37.827628Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-10-27T17:53:37.827628Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-10-27T17:53:37.827628Z"
+confidence = "high"
+method = "unspecified"
+reason = "explicitly unknown"
+state = "not_found"
+valueJson = '"unknown"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-10-27T17:53:37.827628Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-10-27T17:53:37.827628Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "Cargo.toml"
+state = "present"
+valueJson = '"cargo build --workspace"'
 
 [x.dotrepo.field_evidence."repo.description"]
-state = "present"
-method = "extracted"
+checkedAt = "2026-10-27T17:53:37.827628Z"
 confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"An experimental Rust OS for agents: typed capabilities, machine-readable system state, and evidence-gated hardware support."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-10-27T17:53:37.827628Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://github.com/maxwellsantoro/RamenOS"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-10-27T17:53:37.827628Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
-checkedAt = "2026-10-06T01:15:26.806051Z"
-valueJson = "\"RamenOS is a modern, post-Unix operating system being built for humans and AI agents to use efficiently and safely.\""
-reason = "Transcribed from inspected source at 8dc5ff88ddc404528c384aead9ea77f17bf63d40; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution."
+state = "present"
+valueJson = '"RamenOS"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-10-27T17:53:37.827628Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "Cargo.toml"
+state = "present"
+valueJson = '"cargo test --workspace"'
 
 [x.github]
-head_sha = "8dc5ff88ddc404528c384aead9ea77f17bf63d40"
+archived = false
+clone_url = "https://github.com/maxwellsantoro/RamenOS.git"
+default_branch = "main"
+fork = false
+head_sha = "958a6f1713129930b217c16b1a21140e8fab9ed0"
+html_url = "https://github.com/maxwellsantoro/RamenOS"
+stars = 1

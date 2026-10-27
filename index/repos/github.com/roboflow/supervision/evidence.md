@@ -6,6 +6,7 @@
 - Inferred repo.build from pyproject.toml as `python -m build`.
 - Imported repo.test from tox.ini as `tox`.
 - Imported repo.toolchain.min from pyproject.toml as `3.10` (Python).
+- Imported docs.root as `https://supervision.roboflow.com/`. Explicit documentation link at README.md:265: Visit our [documentation](https://supervision.roboflow.com/) page to learn how supervision can help you build computer vision applications faster and more reliably.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
@@ -14,7 +15,3 @@
 - Augmented repo.topics from GitHub repository metadata.
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
-
-## Fresh verification
-
-Prior verified authority was not inherited: this refresh must qualify using its current field scores.

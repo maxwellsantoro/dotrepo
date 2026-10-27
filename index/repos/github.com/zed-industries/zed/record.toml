@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/zed-industries/zed"
-generated_at = "2026-09-16T16:31:17.582319Z"
+generated_at = "2026-10-27T18:21:53.738055Z"
 
 [record.trust]
 confidence = "medium"
@@ -27,18 +27,16 @@ languages = [
     "Tree-sitter Query",
     "Shell",
     "WGSL",
-    "Nix",
+    "JavaScript",
     "Rich Text Format",
     "Metal",
     "HLSL",
-    "JavaScript",
+    "Nix",
     "Handlebars",
     "PowerShell",
     "TypeScript",
     "HTML",
     "Dockerfile",
-    "Julia",
-    "Objective-C",
     "Procfile",
 ]
 build = "cargo build --workspace"
@@ -50,28 +48,24 @@ topics = [
     "rust-lang",
 ]
 
-[docs]
-root = "https://zed.dev"
-getting_started = "https://zed.dev/docs/installation#macos"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:31:17.582319Z"
+checkedAt = "2026-10-27T18:21:53.738055Z"
 confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
-state = "present"
-valueJson = '"https://zed.dev/docs/installation#macos"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:31:17.582319Z"
+checkedAt = "2026-10-27T18:21:53.738055Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://zed.dev"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:31:17.582319Z"
+checkedAt = "2026-10-27T18:21:53.738055Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -79,7 +73,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:31:17.582319Z"
+checkedAt = "2026-10-27T18:21:53.738055Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -87,7 +81,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:31:17.582319Z"
+checkedAt = "2026-10-27T18:21:53.738055Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -96,7 +90,7 @@ state = "present"
 valueJson = '"cargo build --workspace"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:31:17.582319Z"
+checkedAt = "2026-10-27T18:21:53.738055Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -105,7 +99,7 @@ state = "present"
 valueJson = '"Code at the speed of thought – Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sitter."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:31:17.582319Z"
+checkedAt = "2026-10-27T18:21:53.738055Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -113,16 +107,16 @@ state = "present"
 valueJson = '"https://zed.dev"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:31:17.582319Z"
+checkedAt = "2026-10-27T18:21:53.738055Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Zed"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:31:17.582319Z"
+checkedAt = "2026-10-27T18:21:53.738055Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -135,6 +129,6 @@ archived = false
 clone_url = "https://github.com/zed-industries/zed.git"
 default_branch = "main"
 fork = false
-head_sha = "0dea8c63d9a5d747b3d0903adb110a9def1d1020"
+head_sha = "37faef81f74fc1bb08be9939c4cffc8ede6ced2f"
 html_url = "https://github.com/zed-industries/zed"
-stars = 90314
+stars = 92286

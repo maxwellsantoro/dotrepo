@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/fastapi/typer"
-generated_at = "2026-09-21T04:36:55.205964Z"
+generated_at = "2026-10-27T17:46:34.077271Z"
 
 [record.trust]
 confidence = "medium"
@@ -46,27 +46,24 @@ ecosystem = "Python"
 root = "https://typer.tiangolo.com"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-21T04:36:55.205964Z"
-confidence = "low"
-method = "rejected"
-reason = "uv package-manager installation is not Typer installation documentation; inspected README.md:46 at commit a80f6e5ecd74f32b983cca336a2f3cba98d9853a"
-source = "README.md"
-state = "unresolved"
+checkedAt = "2026-10-27T17:46:34.077271Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
 valueJson = "null"
-rejectedValueJson = "\"https://docs.astral.sh/uv/getting-started/installation/\""
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-21T04:36:55.205964Z"
+checkedAt = "2026-10-27T17:46:34.077271Z"
 confidence = "high"
 method = "extracted"
-reason = "Rich dependency link is not Typer documentation; inspected README.md:21 at commit a80f6e5ecd74f32b983cca336a2f3cba98d9853a"
+reason = "Explicit documentation link at README.md:21: **Documentation**: [https://typer.tiangolo.com](https://typer.tiangolo.com)"
 source = "README.md"
 state = "present"
-valueJson = "\"https://typer.tiangolo.com\""
-rejectedValueJson = "\"https://rich.readthedocs.io/en/stable/index.html\""
+valueJson = '"https://typer.tiangolo.com"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:23:12.228709Z"
+checkedAt = "2026-10-27T17:46:34.077271Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -74,7 +71,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:23:12.228709Z"
+checkedAt = "2026-10-27T17:46:34.077271Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -82,7 +79,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:23:12.228709Z"
+checkedAt = "2026-10-27T17:46:34.077271Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -91,7 +88,7 @@ state = "present"
 valueJson = '"python -m build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:23:12.228709Z"
+checkedAt = "2026-10-27T17:46:34.077271Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -100,7 +97,7 @@ state = "present"
 valueJson = '"Typer, build great CLIs. Easy to code. Based on Python type hints."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:23:12.228709Z"
+checkedAt = "2026-10-27T17:46:34.077271Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -108,16 +105,16 @@ state = "present"
 valueJson = '"https://typer.tiangolo.com/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:23:12.228709Z"
+checkedAt = "2026-10-27T17:46:34.077271Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Typer"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:23:12.228709Z"
+checkedAt = "2026-10-27T17:46:34.077271Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -130,6 +127,6 @@ archived = false
 clone_url = "https://github.com/fastapi/typer.git"
 default_branch = "master"
 fork = false
-head_sha = "a80f6e5ecd74f32b983cca336a2f3cba98d9853a"
+head_sha = "a5882dedf0bc7a46cd861fdfca020f88519e0f21"
 html_url = "https://github.com/fastapi/typer"
-stars = 19991
+stars = 20228

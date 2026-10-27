@@ -2,8 +2,8 @@
 
 - Imported repository name from README.md.
 - Imported repo.build from Makefile as `make build`.
-- Imported repo.test from Makefile as `make test`.
-- Imported repo.toolchain.min from go.mod as `1.26.6` (Go).
+- Imported repo.test from CONTRIBUTING.md as `make check`.
+- Imported repo.toolchain.min from go.mod as `1.27.0` (Go).
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Deepened `owners.security_contact` from `README.md` during deterministic escalation.

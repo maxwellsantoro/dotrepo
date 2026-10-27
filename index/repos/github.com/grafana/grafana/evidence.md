@@ -5,6 +5,7 @@
 - Imported repo.build from package.json as `yarn build`.
 - Imported repo.test from package.json as `yarn test`.
 - Imported repo.toolchain.min from package.json as `22` (Node.js).
+- Imported docs.root as `https://grafana.com/docs/`. Explicit documentation link at README.md:26: The Grafana documentation is available at [grafana.com/docs](https://grafana.com/docs/).
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.name` to `grafana` from `GitHub API` after deterministic escalation.

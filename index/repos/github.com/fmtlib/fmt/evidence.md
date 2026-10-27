@@ -4,6 +4,7 @@
 - Imported maintainer candidates from CODEOWNERS.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
 - Inferred repo.build from .github/workflows/codeql.yml as `cmake -B build -DFMT_DOC=OFF -DFMT_TEST=OFF`.
+- Imported docs.root as `https://fmt.dev`. Explicit documentation link at README.md:23: [Documentation](https://fmt.dev)
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
@@ -12,7 +13,3 @@
 - Augmented repo.topics from GitHub repository metadata.
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
-
-## Fresh verification
-
-Prior verified authority was not inherited: this refresh must qualify using its current field scores.

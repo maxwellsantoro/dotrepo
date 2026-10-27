@@ -2,7 +2,9 @@
 
 - Imported repository docs entry points from README.md.
 - Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.
+- Imported docs.root as `https://docs.nvm-windows.com`. Explicit documentation link at README.md:46: - [Documentation](https://docs.nvm-windows.com)
 - This is an overlay record, not a maintainer-controlled canonical record.
+- Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.

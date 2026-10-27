@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/yipianfengye/android-zxingLibrary"
-generated_at = "2026-09-16T16:33:04.445878Z"
+generated_at = "2026-10-27T17:21:54.053777Z"
 
 [record.trust]
 confidence = "medium"
@@ -25,23 +25,23 @@ test = "./gradlew test"
 topics = []
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:33:04.445878Z"
+checkedAt = "2026-10-27T17:21:54.053777Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:33:04.445878Z"
+checkedAt = "2026-10-27T17:21:54.053777Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:33:04.445878Z"
+checkedAt = "2026-10-27T17:21:54.053777Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -49,7 +49,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:33:04.445878Z"
+checkedAt = "2026-10-27T17:21:54.053777Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -57,7 +57,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:33:04.445878Z"
+checkedAt = "2026-10-27T17:21:54.053777Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -66,7 +66,7 @@ state = "present"
 valueJson = '"./gradlew build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:33:04.445878Z"
+checkedAt = "2026-10-27T17:21:54.053777Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -75,7 +75,7 @@ state = "present"
 valueJson = '"几行代码快速集成二维码扫描功能"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:33:04.445878Z"
+checkedAt = "2026-10-27T17:21:54.053777Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -83,16 +83,16 @@ state = "present"
 valueJson = '"https://github.com/yipianfengye/android-zxingLibrary"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:33:04.445878Z"
+checkedAt = "2026-10-27T17:21:54.053777Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"android-zxingLibrary"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:33:04.445878Z"
+checkedAt = "2026-10-27T17:21:54.053777Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -107,4 +107,4 @@ default_branch = "master"
 fork = false
 head_sha = "fe7b868f8d232031ddcd099c8fc79a562a758bd2"
 html_url = "https://github.com/yipianfengye/android-zxingLibrary"
-stars = 4992
+stars = 4988

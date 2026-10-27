@@ -2,9 +2,10 @@
 
 - Imported repository name and docs entry points from README.md.
 - Imported the security reporting channel from SECURITY.md.
-- Imported repo.build from package.json as `yarn build`.
-- Imported repo.test from package.json as `yarn test`.
+- Imported repo.build from package.json as `pnpm build`.
+- Imported repo.test from package.json as `pnpm test`.
 - Imported repo.toolchain.min from package.json as `22.12.0` (Node.js).
+- Imported docs.root as `https://tldraw.dev/quick-start`. Explicit documentation link at README.md:20: <a href="https://tldraw.dev/quick-start">Docs</a> · <a href="https://tldraw.dev/examples">Examples</a> · <a href="https://tldraw.dev/starter-kits/overview">Starter kits</a>
 - Discovered related relation to github.com/tldraw/tldraw from package.json repository.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

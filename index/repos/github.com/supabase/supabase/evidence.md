@@ -3,8 +3,9 @@
 - Imported repository name and docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates.
 - Imported repo.build from package.json as `pnpm build`.
-- Inferred repo.test from .github/workflows/ai-tests.yml as `pnpm run test`.
 - Imported repo.toolchain.min from package.json as `22.13` (Node.js).
+- Imported docs.root as `https://supabase.com/docs`. Explicit documentation link at README.md:31: For full documentation, visit [supabase.com/docs](https://supabase.com/docs)
+- Imported docs.getting_started as `./DEVELOPERS.md`. Explicit documentation link at README.md:33: To see how to Contribute, visit [Getting Started](./DEVELOPERS.md)
 - Discovered related relation to github.com/supabase/supabase from package.json repository.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
@@ -15,6 +16,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Fresh verification
+## Auto-promotion
 
-Prior verified authority was not inherited: this refresh must qualify using its current field scores.
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

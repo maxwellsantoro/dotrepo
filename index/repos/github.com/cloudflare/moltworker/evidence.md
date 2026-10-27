@@ -1,6 +1,6 @@
 # Evidence
 
-- Imported repository name and docs entry points from README.md.
+- Imported repository name from README.md.
 - Imported repo.build from package.json as `npm run build`.
 - Imported repo.test from package.json as `npm test`.
 - This is an overlay record, not a maintainer-controlled canonical record.

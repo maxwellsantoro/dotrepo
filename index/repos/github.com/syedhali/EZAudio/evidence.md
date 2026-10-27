@@ -1,6 +1,7 @@
 # Evidence
 
-- Imported repository name from README.md.
+- Imported repository name and docs entry points from README.md.
+- Imported docs.root as `http://cocoadocs.org/docsets/EZAudio/1.1.4/`. Explicit documentation link at README.md:111: The official documentation for EZAudio can be found here: http://cocoadocs.org/docsets/EZAudio/1.1.4/
 - Discovered related relation to github.com/audiokit/AudioKit from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 

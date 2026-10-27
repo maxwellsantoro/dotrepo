@@ -1,6 +1,6 @@
 # Evidence
 
-- Imported repository name and docs entry points from README.md.
+- Imported repository name from README.md.
 - Imported repo.test from tox.ini as `tox`.
 - Discovered related relation to github.com/skycocker/chromebrew from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.

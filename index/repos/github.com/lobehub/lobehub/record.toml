@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/lobehub/lobehub"
-generated_at = "2026-09-18T06:03:40.603942784Z"
+generated_at = "2026-10-27T18:26:12.828709Z"
 
 [record.trust]
 confidence = "high"
@@ -26,15 +26,15 @@ languages = [
     "Shell",
     "HTML",
     "PLpgSQL",
+    "Python",
+    "Objective-C++",
     "Gherkin",
     "Dockerfile",
     "MDX",
-    "Objective-C++",
-    "Python",
+    "CSS",
     "Jupyter Notebook",
     "Roff",
     "TeX",
-    "CSS",
     "Jinja",
 ]
 build = "pnpm build"
@@ -68,9 +68,6 @@ maintainers = [
 ]
 security_contact = "https://github.com/lobehub/lobehub/security/advisories/new"
 
-[docs]
-root = "https://lobehub.com"
-
 [relations]
 references = []
 
@@ -87,23 +84,23 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-18T06:03:40.603942784Z"
+checkedAt = "2026-10-27T18:26:12.828709Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-18T06:03:40.603942784Z"
+checkedAt = "2026-10-27T18:26:12.828709Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://lobehub.com"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-18T06:03:40.603942784Z"
+checkedAt = "2026-10-27T18:26:12.828709Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -112,7 +109,7 @@ state = "present"
 valueJson = '"https://github.com/lobehub/lobehub/security/advisories/new"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-18T06:03:40.603942784Z"
+checkedAt = "2026-10-27T18:26:12.828709Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -120,7 +117,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-18T06:03:40.603942784Z"
+checkedAt = "2026-10-27T18:26:12.828709Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -129,7 +126,7 @@ state = "present"
 valueJson = '"pnpm build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-18T06:03:40.603942784Z"
+checkedAt = "2026-10-27T18:26:12.828709Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -138,7 +135,7 @@ state = "present"
 valueJson = '"🤯 LobeHub is your Chief Agent Operator, organizing your agents into 7×24 operations by hiring, scheduling, and reporting on your entire AI team."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-18T06:03:40.603942784Z"
+checkedAt = "2026-10-27T18:26:12.828709Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -146,16 +143,16 @@ state = "present"
 valueJson = '"https://lobehub.com"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-18T06:03:40.603942784Z"
+checkedAt = "2026-10-27T18:26:12.828709Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"LobeHub"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-18T06:03:40.603942784Z"
+checkedAt = "2026-10-27T18:26:12.828709Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -168,6 +165,6 @@ archived = false
 clone_url = "https://github.com/lobehub/lobehub.git"
 default_branch = "canary"
 fork = false
-head_sha = "b0ef4b2ef15d61b0be43bfa6f39d3524405ce374"
+head_sha = "1a4a19e0e811e55a162a249b732de372ed601e88"
 html_url = "https://github.com/lobehub/lobehub"
-stars = 82577
+stars = 83530

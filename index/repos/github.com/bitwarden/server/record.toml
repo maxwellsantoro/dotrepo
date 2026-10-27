@@ -2,17 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/bitwarden/server"
-generated_at = "2026-09-16T16:33:15.447982Z"
+generated_at = "2026-10-27T17:22:29.838878Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
-    "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `.github/workflows/build.yml`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/build.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Ignored component-scoped commands from `AppHost/AppHost.csproj` as repository defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "server"
@@ -34,7 +34,6 @@ languages = [
     "SCSS",
     "CSS",
 ]
-build = "npm run build"
 topics = [
     "aspnetcore",
     "aspnet",
@@ -63,6 +62,7 @@ maintainers = [
     "@bitwarden/team-data-insights-and-reporting-dev",
     "@bitwarden/team-vault-dev",
     "@bitwarden/team-admin-console-dev",
+    "@bitwarden/team-provider-business-unit-portals-dev",
     "@bitwarden/team-billing-dev",
     "@bitwarden/dept-architecture",
     "@bitwarden/team-pam-dev",
@@ -72,28 +72,24 @@ maintainers = [
 ]
 security_contact = "https://hackerone.com/bitwarden/"
 
-[docs]
-root = "https://bitwarden.com"
-getting_started = "https://contributing.bitwarden.com/getting-started/server/guide"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:33:15.447982Z"
+checkedAt = "2026-10-27T17:22:29.838878Z"
 confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
-state = "present"
-valueJson = '"https://contributing.bitwarden.com/getting-started/server/guide"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:33:15.447982Z"
+checkedAt = "2026-10-27T17:22:29.838878Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://bitwarden.com"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:33:15.447982Z"
+checkedAt = "2026-10-27T17:22:29.838878Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -102,7 +98,7 @@ state = "present"
 valueJson = '"https://hackerone.com/bitwarden/"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:33:15.447982Z"
+checkedAt = "2026-10-27T17:22:29.838878Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -110,16 +106,15 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:33:15.447982Z"
-confidence = "medium"
-method = "inferred"
-reason = "from workflow fallback"
-source = ".github/workflows/build.yml"
-state = "present"
-valueJson = '"npm run build"'
+checkedAt = "2026-10-27T17:22:29.838878Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no build command sources found"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:33:15.447982Z"
+checkedAt = "2026-10-27T17:22:29.838878Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -128,7 +123,7 @@ state = "present"
 valueJson = '"Bitwarden infrastructure/backend (API, database, Docker, etc)."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:33:15.447982Z"
+checkedAt = "2026-10-27T17:22:29.838878Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -136,16 +131,16 @@ state = "present"
 valueJson = '"https://bitwarden.com"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:33:15.447982Z"
+checkedAt = "2026-10-27T17:22:29.838878Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"server"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:33:15.447982Z"
+checkedAt = "2026-10-27T17:22:29.838878Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -157,6 +152,6 @@ archived = false
 clone_url = "https://github.com/bitwarden/server.git"
 default_branch = "main"
 fork = false
-head_sha = "d5a0ae9fe76745cc455a476e1faac3bc91603c4d"
+head_sha = "272ccaa369551d44bac13c54c2ce8123c375c341"
 html_url = "https://github.com/bitwarden/server"
-stars = 20153
+stars = 20493

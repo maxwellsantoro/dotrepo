@@ -5,7 +5,8 @@
 - Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.
 - Inferred repo.build from go.mod as `go build ./...`.
 - Inferred repo.test from .github/workflows/test.yml as `make test`.
-- Imported repo.toolchain.min from go.mod as `1.26.0` (Go).
+- Imported repo.toolchain.min from go.mod as `1.27.0` (Go).
+- Imported docs.root as `https://mediamtx.org/docs/kickoff/introduction`. Explicit documentation link at README.md:24: | [Install](https://mediamtx.org/docs/kickoff/install) | [Documentation](https://mediamtx.org/docs/kickoff/introduction) |
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

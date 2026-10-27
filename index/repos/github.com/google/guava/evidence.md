@@ -1,6 +1,6 @@
 # Evidence
 
-- Imported repository name and docs entry points from README.md.
+- Imported repository name from README.md.
 - Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.
 - Inferred repo.build from pom.xml as `./mvnw package`.
 - Inferred repo.test from pom.xml as `./mvnw test`.
@@ -12,7 +12,3 @@
 - Augmented repo.topics from GitHub repository metadata.
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
-
-## Fresh verification
-
-Prior verified authority was not inherited: this refresh must qualify using its current field scores.

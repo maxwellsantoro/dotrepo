@@ -1,7 +1,7 @@
 # Evidence
 
 - Imported repository name from README.md.
-- Imported repo.build from main/manager-mobile/package.json as `pnpm build`.
+- Ignored component-scoped commands from `main/manager-mobile/package.json` as repository defaults.
 - Imported repo.test from Makefile as `make test`.
 - Imported repo.toolchain.min from main/manager-mobile/package.json as `18` (Node.js).
 - This is an overlay record, not a maintainer-controlled canonical record.
@@ -16,9 +16,3 @@
 ## Auto-promotion
 
 All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
-
-## Command semantic correction (2026-10-03)
-
-2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged.
-
-- Withheld `repo.build` previously extracted from `main/manager-mobile/package.json` as `pnpm build`. Component command lacks repository-default scope and working directory.

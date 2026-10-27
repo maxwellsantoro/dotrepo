@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/lukas-reineke/indent-blankline.nvim"
-generated_at = "2026-09-16T16:26:17.343719Z"
+generated_at = "2026-10-27T18:08:37.892001Z"
 
 [record.trust]
 confidence = "high"
@@ -35,23 +35,23 @@ topics = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:26:17.343719Z"
+checkedAt = "2026-10-27T18:08:37.892001Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:26:17.343719Z"
+checkedAt = "2026-10-27T18:08:37.892001Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:26:17.343719Z"
+checkedAt = "2026-10-27T18:08:37.892001Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -59,7 +59,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:26:17.343719Z"
+checkedAt = "2026-10-27T18:08:37.892001Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -67,7 +67,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:26:17.343719Z"
+checkedAt = "2026-10-27T18:08:37.892001Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -75,7 +75,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:26:17.343719Z"
+checkedAt = "2026-10-27T18:08:37.892001Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -84,7 +84,7 @@ state = "present"
 valueJson = '"Indent guides  for Neovim"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:26:17.343719Z"
+checkedAt = "2026-10-27T18:08:37.892001Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -92,16 +92,16 @@ state = "present"
 valueJson = '"https://github.com/lukas-reineke/indent-blankline.nvim"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:26:17.343719Z"
+checkedAt = "2026-10-27T18:08:37.892001Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Indent Blankline"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:26:17.343719Z"
+checkedAt = "2026-10-27T18:08:37.892001Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -116,4 +116,4 @@ default_branch = "master"
 fork = false
 head_sha = "f1e186e44d3b7f9ae918008e2c28ce37c6023d2d"
 html_url = "https://github.com/lukas-reineke/indent-blankline.nvim"
-stars = 4995
+stars = 4997

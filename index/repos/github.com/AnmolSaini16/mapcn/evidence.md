@@ -2,6 +2,7 @@
 
 - Imported repository name and docs entry points from README.md.
 - Imported repo.build from package.json as `npm run build`.
+- Imported docs.getting_started as `https://mapcn.dev/docs/installation`. Explicit documentation link at README.md:10: <a href="https://mapcn.dev/docs/installation">Installation</a> ·
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

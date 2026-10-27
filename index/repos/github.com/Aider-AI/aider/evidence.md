@@ -1,9 +1,11 @@
 # Evidence
 
+- Imported repository docs entry points from README.md.
 - Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.
 - Inferred repo.build from pyproject.toml as `python -m build`.
 - Imported repo.test from CONTRIBUTING.md as `pytest`.
 - Imported repo.toolchain.min from pyproject.toml as `3.10` (Python).
+- Imported docs.getting_started as `https://aider.chat/docs/install.html`. Explicit documentation link at README.md:127: - [Installation Guide](https://aider.chat/docs/install.html)
 - Discovered related relation to github.com/Aider-AI/aider from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

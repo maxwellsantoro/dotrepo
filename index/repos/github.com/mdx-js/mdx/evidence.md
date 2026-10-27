@@ -3,6 +3,7 @@
 - Imported repository name and docs entry points from README.md.
 - Imported repo.build from package.json as `npm run build`.
 - Imported repo.test from package.json as `npm test`.
+- Imported docs.getting_started as `https://mdxjs.com/getting-started/`. Explicit documentation link at README.md:41: See [§ Getting started](https://mdxjs.com/getting-started/) for how to
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.name` to `mdx` from `GitHub API` after deterministic escalation.

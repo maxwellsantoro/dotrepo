@@ -2,9 +2,11 @@
 
 - Imported repository name and docs entry points from README.md.
 - Imported the security reporting channel from SECURITY.md.
-- Imported repo.build from web/package.json as `yarn build`.
-- Imported repo.test from web/package.json as `yarn test`.
+- Ignored component-scoped commands from `web/package.json` as repository defaults.
+- Imported repo.build from Makefile as `make build`.
+- Imported repo.test from CONTRIBUTING.md as `make test`.
 - Imported repo.toolchain.min from web/package.json as `20` (Node.js).
+- Imported docs.getting_started as `https://docs.tilt.dev/install.html`. Explicit documentation link at README.md:41: [Installation Guide](https://docs.tilt.dev/install.html).
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
@@ -17,10 +19,3 @@
 ## Auto-promotion
 
 All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
-
-## Command semantic correction (2026-10-03)
-
-2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged.
-
-- Withheld `repo.build` previously extracted from `web/package.json` as `yarn build`. Component command lacks repository-default scope and working directory.
-- Withheld `repo.test` previously extracted from `web/package.json` as `yarn test`. Component command lacks repository-default scope and working directory.

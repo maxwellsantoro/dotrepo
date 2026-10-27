@@ -5,7 +5,8 @@
 - Imported the security reporting channel from SECURITY.md.
 - Imported repo.build from Makefile as `make all`.
 - Imported repo.test from Makefile as `make test`.
-- Imported repo.toolchain.min from go.mod as `1.25.12` (Go).
+- Imported repo.toolchain.min from go.mod as `1.27.3` (Go).
+- Imported docs.root as `https://docs.pingcap.com/tidb/stable/tidb-architecture?utm_source=github&utm_medium=tidb`. Explicit documentation link at README.md:74: Learn more details about TiDB architecture in our [Docs](https://docs.pingcap.com/tidb/stable/tidb-architecture?utm_source=github&utm_medium=tidb).
 - Discovered related relation to github.com/pingcap/tidb from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

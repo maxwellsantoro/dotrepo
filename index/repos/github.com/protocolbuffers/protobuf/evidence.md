@@ -1,9 +1,10 @@
 # Evidence
 
-- Imported repository name from README.md.
+- Imported repository name and docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
-- Inferred repo.build from csharp/src/AddressBook/AddressBook.csproj as `dotnet build`.
+- Ignored component-scoped commands from `csharp/src/AddressBook/AddressBook.csproj` as repository defaults.
+- Imported docs.root as `https://protobuf.dev`. Explicit documentation link at README.md:143: The complete documentation is available at the [Protocol Buffers doc site](https://protobuf.dev).
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.name` to `protobuf` from `GitHub API` after deterministic escalation.
@@ -15,12 +16,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Fresh verification
+## Auto-promotion
 
-Prior verified authority was not inherited: this refresh must qualify using its current field scores.
-
-## Command semantic correction (2026-10-03)
-
-2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged.
-
-- Withheld `repo.build` previously extracted from `csharp/src/AddressBook/AddressBook.csproj` as `dotnet build`. Component command lacks repository-default scope and working directory.
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

@@ -1,7 +1,9 @@
 # Evidence
 
-- Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.
+- Imported repository name from README.md.
 - This is an overlay record, not a maintainer-controlled canonical record.
+
+- Set `repo.name` to `design-patterns-for-humans` from `GitHub API` after deterministic escalation.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.topics from GitHub repository metadata.

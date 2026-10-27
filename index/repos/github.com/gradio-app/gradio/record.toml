@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/gradio-app/gradio"
-generated_at = "2026-09-17T06:07:40.212467351Z"
+generated_at = "2026-10-27T17:33:38.892891Z"
 
 [record.trust]
 confidence = "medium"
@@ -60,10 +60,6 @@ command = "python -m pytest"
 ecosystem = "Python"
 source = "pyproject.toml"
 
-[[repo.test_candidates]]
-command = 'PERF_RESULTS_FILE=/tmp/bench_base.json pnpm exec playwright test \'
-source = ".github/workflows/frontend_profiling.yml"
-
 [repo.toolchain]
 min = "3.10"
 ecosystem = "Python"
@@ -92,23 +88,25 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-17T06:07:40.212467351Z"
+checkedAt = "2026-10-27T17:33:38.892891Z"
 confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:25: | [Getting Started](https://gradio.app/getting_started/)"
+source = "README.md"
 state = "present"
 valueJson = '"https://gradio.app/getting_started/"'
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-17T06:07:40.212467351Z"
+checkedAt = "2026-10-27T17:33:38.892891Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:23: | [Documentation](https://gradio.app/docs/)"
+source = "README.md"
 state = "present"
 valueJson = '"https://gradio.app/docs/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-17T06:07:40.212467351Z"
+checkedAt = "2026-10-27T17:33:38.892891Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -117,7 +115,7 @@ state = "present"
 valueJson = '"security@huggingface.co"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-17T06:07:40.212467351Z"
+checkedAt = "2026-10-27T17:33:38.892891Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -125,7 +123,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-17T06:07:40.212467351Z"
+checkedAt = "2026-10-27T17:33:38.892891Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -134,7 +132,7 @@ state = "present"
 valueJson = '"pnpm build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-17T06:07:40.212467351Z"
+checkedAt = "2026-10-27T17:33:38.892891Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -143,7 +141,7 @@ state = "present"
 valueJson = '"Build and share delightful machine learning apps, all in Python. 🌟 Star to support our work!"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-17T06:07:40.212467351Z"
+checkedAt = "2026-10-27T17:33:38.892891Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -151,18 +149,18 @@ state = "present"
 valueJson = '"http://www.gradio.app"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-17T06:07:40.212467351Z"
+checkedAt = "2026-10-27T17:33:38.892891Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"gradio"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-17T06:07:40.212467351Z"
+checkedAt = "2026-10-27T17:33:38.892891Z"
 confidence = "low"
-method = "not_found_in_inspected_sources"
+method = "unresolved"
 reason = "intra-tier conflict left field unset during import"
 state = "unresolved"
 valueJson = "null"
@@ -172,6 +170,6 @@ archived = false
 clone_url = "https://github.com/gradio-app/gradio.git"
 default_branch = "main"
 fork = false
-head_sha = "0293306f3f25bf4cda44b6e819060edd5fcbd09e"
+head_sha = "b3c050c7d445a9d3d9ae5fd76adef8d5e6052874"
 html_url = "https://github.com/gradio-app/gradio"
-stars = 43554
+stars = 43913

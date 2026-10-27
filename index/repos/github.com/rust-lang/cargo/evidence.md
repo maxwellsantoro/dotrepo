@@ -2,8 +2,8 @@
 
 - Imported repository name from README.md.
 - Inferred repo.build from Cargo.toml as `cargo build --workspace`.
-- Inferred repo.test from .github/workflows/main.yml as `cargo test --workspace --exclude cargo --exclude benchsuite --exclude resolver-tests`.
-- Imported repo.toolchain.min from Cargo.toml as `1.98` (Rust).
+- Inferred repo.test from Cargo.toml as `cargo test --workspace`.
+- Imported repo.toolchain.min from Cargo.toml as `1.99` (Rust).
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
@@ -12,7 +12,3 @@
 - Augmented repo.topics from GitHub repository metadata.
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
-
-## Fresh verification
-
-Prior verified authority was not inherited: this refresh must qualify using its current field scores.

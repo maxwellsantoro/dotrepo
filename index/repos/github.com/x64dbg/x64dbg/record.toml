@@ -2,17 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/x64dbg/x64dbg"
-generated_at = "2026-09-16T16:31:04.079468Z"
+generated_at = "2026-10-27T18:21:19.018426Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
-    "inferred",
+    "verified",
 ]
-notes = 'Bootstrapped from `README.md`, `.github/SECURITY.md`, and `.github/workflows/cross.yml`. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Inferred `repo.build` from `.github/workflows/cross.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record.'
+notes = 'Bootstrapped from `README.md` and `.github/SECURITY.md`. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved.'
 
 [repo]
 name = "x64dbg"
@@ -31,7 +31,6 @@ languages = [
     "Dockerfile",
     "Batchfile",
 ]
-build = "cmake -B build -G Ninja -DCMAKE_UNITY_BUILD=ON"
 topics = [
     "debugger",
     "windows",
@@ -59,27 +58,24 @@ topics = [
 maintainers = []
 security_contact = "unknown"
 
-[docs]
-root = "http://x64dbg.com"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:31:04.079468Z"
+checkedAt = "2026-10-27T18:21:19.018426Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:31:04.079468Z"
+checkedAt = "2026-10-27T18:21:19.018426Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"http://x64dbg.com"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:31:04.079468Z"
+checkedAt = "2026-10-27T18:21:19.018426Z"
 confidence = "high"
 method = "unspecified"
 reason = "explicitly unknown"
@@ -87,7 +83,7 @@ state = "not_found"
 valueJson = '"unknown"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:31:04.079468Z"
+checkedAt = "2026-10-27T18:21:19.018426Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -95,16 +91,15 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:31:04.079468Z"
-confidence = "medium"
-method = "inferred"
-reason = "from workflow fallback"
-source = ".github/workflows/cross.yml"
-state = "present"
-valueJson = '"cmake -B build -G Ninja -DCMAKE_UNITY_BUILD=ON"'
+checkedAt = "2026-10-27T18:21:19.018426Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no build command sources found"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:31:04.079468Z"
+checkedAt = "2026-10-27T18:21:19.018426Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -113,7 +108,7 @@ state = "present"
 valueJson = '"An open-source user mode debugger for Windows. Optimized for reverse engineering and malware analysis."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:31:04.079468Z"
+checkedAt = "2026-10-27T18:21:19.018426Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -121,16 +116,16 @@ state = "present"
 valueJson = '"http://x64dbg.com"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:31:04.079468Z"
+checkedAt = "2026-10-27T18:21:19.018426Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"x64dbg"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:31:04.079468Z"
+checkedAt = "2026-10-27T18:21:19.018426Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -142,6 +137,6 @@ archived = false
 clone_url = "https://github.com/x64dbg/x64dbg.git"
 default_branch = "development"
 fork = false
-head_sha = "1ca06d129a1fa60abc5daf1f45ccfa79b7ff04b8"
+head_sha = "957464ad1ed829d67366821fd065ce86832d26ac"
 html_url = "https://github.com/x64dbg/x64dbg"
-stars = 49525
+stars = 50046

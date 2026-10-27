@@ -4,15 +4,12 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/ocornut/imgui"
-generated_at = "2026-09-16T16:27:31.385893Z"
+generated_at = "2026-10-27T18:13:23.35772Z"
 
 [record.trust]
-confidence = "medium"
-provenance = [
-    "imported",
-    "inferred",
-]
-notes = "Bootstrapped from `.github/workflows/build.yml`. Filled `repo.name` and `repo.description` with inferred defaults. Inferred `repo.build` from `.github/workflows/build.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+confidence = "low"
+provenance = ["inferred"]
+notes = "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "imgui"
@@ -30,7 +27,6 @@ languages = [
     "GDB",
     "Shell",
 ]
-build = "emcmake cmake -B build -DCMAKE_BUILD_TYPE=Release examples/example_glfw_wgpu"
 topics = [
     "gui",
     "gamedev",
@@ -50,23 +46,23 @@ topics = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:27:31.385893Z"
+checkedAt = "2026-10-27T18:13:23.35772Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:27:31.385893Z"
+checkedAt = "2026-10-27T18:13:23.35772Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:27:31.385893Z"
+checkedAt = "2026-10-27T18:13:23.35772Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -74,7 +70,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:27:31.385893Z"
+checkedAt = "2026-10-27T18:13:23.35772Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -82,16 +78,15 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:27:31.385893Z"
-confidence = "medium"
-method = "inferred"
-reason = "from workflow fallback"
-source = ".github/workflows/build.yml"
-state = "present"
-valueJson = '"emcmake cmake -B build -DCMAKE_BUILD_TYPE=Release examples/example_glfw_wgpu"'
+checkedAt = "2026-10-27T18:13:23.35772Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no build command sources found"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:27:31.385893Z"
+checkedAt = "2026-10-27T18:13:23.35772Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -100,7 +95,7 @@ state = "present"
 valueJson = '"Dear ImGui: Bloat-free Graphical User interface for C++ with minimal dependencies"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:27:31.385893Z"
+checkedAt = "2026-10-27T18:13:23.35772Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -108,16 +103,15 @@ state = "present"
 valueJson = '"https://github.com/ocornut/imgui"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:27:31.385893Z"
+checkedAt = "2026-10-27T18:13:23.35772Z"
 confidence = "medium"
 method = "inferred"
 reason = "fell back to directory name or GitHub API"
-source = ".github/workflows/build.yml"
 state = "present"
 valueJson = '"imgui"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:27:31.385893Z"
+checkedAt = "2026-10-27T18:13:23.35772Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -129,6 +123,6 @@ archived = false
 clone_url = "https://github.com/ocornut/imgui.git"
 default_branch = "master"
 fork = false
-head_sha = "b00dd14a347c7c5ca59a1e4dd50346d67a29cb0a"
+head_sha = "80d572ce359e2a9ca0c4386ab9cf220d5c15ce0f"
 html_url = "https://github.com/ocornut/imgui"
-stars = 76214
+stars = 76841

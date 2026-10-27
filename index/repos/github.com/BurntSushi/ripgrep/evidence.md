@@ -2,7 +2,7 @@
 
 - Imported repository name from README.md.
 - Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.
-- Imported repo.build from README.md as `cargo build --release`.
+- Imported repo.build from README.md as `cargo build --release --features 'pcre2'`.
 - Imported repo.test from README.md as `cargo test --all`.
 - Imported repo.toolchain.min from Cargo.toml as `1.96` (Rust).
 - Discovered related relation to github.com/BurntSushi/ripgrep from Cargo.toml repository.

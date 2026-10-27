@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/PowerShell/PowerShell"
-generated_at = "2026-10-04T07:50:08.605568538Z"
+generated_at = "2026-10-27T17:48:56.216569Z"
 
 [record.trust]
 confidence = "medium"
@@ -56,7 +56,6 @@ team = "@PowerShell/powershell-maintainers"
 security_contact = "https://msrc.microsoft.com/create-report"
 
 [docs]
-root = "https://microsoft.com/PowerShell"
 getting_started = "https://learn.microsoft.com/powershell/scripting/learn/more-powershell-learning"
 
 [relations]
@@ -75,7 +74,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-04T07:50:08.605568538Z"
+checkedAt = "2026-10-27T17:48:56.216569Z"
 confidence = "high"
 method = "extracted"
 reason = "Explicit documentation link at README.md:21: If you are new to PowerShell and want to learn more, we recommend reviewing the [getting started][] documentation."
@@ -84,15 +83,15 @@ state = "present"
 valueJson = '"https://learn.microsoft.com/powershell/scripting/learn/more-powershell-learning"'
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-04T07:50:08.605568538Z"
-confidence = "medium"
-method = "unspecified"
-reason = "documentation target present without a retained source declaration"
-state = "present"
-valueJson = '"https://microsoft.com/PowerShell"'
+checkedAt = "2026-10-27T17:48:56.216569Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-04T07:50:08.605568538Z"
+checkedAt = "2026-10-27T17:48:56.216569Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -101,7 +100,7 @@ state = "present"
 valueJson = '"https://msrc.microsoft.com/create-report"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-04T07:50:08.605568538Z"
+checkedAt = "2026-10-27T17:48:56.216569Z"
 confidence = "high"
 method = "unspecified"
 reason = "clear CODEOWNERS team"
@@ -109,7 +108,7 @@ state = "present"
 valueJson = '"@PowerShell/powershell-maintainers"'
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-04T07:50:08.605568538Z"
+checkedAt = "2026-10-27T17:48:56.216569Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -118,7 +117,7 @@ state = "present"
 valueJson = '"dotnet build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-04T07:50:08.605568538Z"
+checkedAt = "2026-10-27T17:48:56.216569Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -127,7 +126,7 @@ state = "present"
 valueJson = '"PowerShell for every system!"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-04T07:50:08.605568538Z"
+checkedAt = "2026-10-27T17:48:56.216569Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -135,7 +134,7 @@ state = "present"
 valueJson = '"https://microsoft.com/PowerShell"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-04T07:50:08.605568538Z"
+checkedAt = "2026-10-27T17:48:56.216569Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -144,7 +143,7 @@ state = "present"
 valueJson = '"logo][] PowerShell"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-04T07:50:08.605568538Z"
+checkedAt = "2026-10-27T17:48:56.216569Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -157,6 +156,6 @@ archived = false
 clone_url = "https://github.com/PowerShell/PowerShell.git"
 default_branch = "master"
 fork = false
-head_sha = "caeff5e8a57953a414a50fe014a6670797b6770b"
+head_sha = "46f6096946114d24187743c5c78bd33e9dc88ec3"
 html_url = "https://github.com/PowerShell/PowerShell"
-stars = 55589
+stars = 56004

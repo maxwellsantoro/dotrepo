@@ -1,7 +1,7 @@
 # Evidence
 
 - Imported repository name from README.md.
-- Imported repo.test from README.md as `pytest`.
+- Imported repo.test from Makefile as `make test`.
 - Discovered related relation to github.com/karpathy/nanoGPT from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.license from GitHub repository metadata.

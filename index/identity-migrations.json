@@ -34,6 +34,13 @@
       "githubRepositoryId": 684776900,
       "checkedAt": "2026-10-03T19:39:52Z",
       "evidence": "The old GitHub endpoint redirects to numeric repository 684776900, which matches bendlang/bend. Destination freshly crawled at 2026-10-03T19:36:40.49116326Z before removing the old overlay; generated record and evidence retained from https://github.com/maxwellsantoro/dotrepo/actions/runs/37148475397."
+    },
+    {
+      "previousIdentity": "github.com/SolaceLabs/solace-agent-mesh",
+      "currentIdentity": "github.com/SolaceProducts/solace-agent-mesh",
+      "githubRepositoryId": 914964527,
+      "checkedAt": "2026-10-27T18:45:00.000000+00:00",
+      "evidence": "GitHub API for the previous identity redirects to SolaceProducts/solace-agent-mesh with the same numeric repository ID. Destination was freshly crawled before removing the old overlay."
     }
   ]
 }

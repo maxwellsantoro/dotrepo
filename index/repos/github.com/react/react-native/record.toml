@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/react/react-native"
-generated_at = "2026-09-16T16:31:39.533554Z"
+generated_at = "2026-10-27T18:22:36.893611Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md` and `package.json`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `package.json`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
 
 [repo]
 name = "react-native"
@@ -35,7 +34,6 @@ languages = [
     "TypeScript",
     "Shell",
     "Swift",
-    "Assembly",
     "HTML",
     "Smarty",
 ]
@@ -53,27 +51,28 @@ topics = [
 ]
 
 [docs]
-root = "https://reactnative.dev"
-getting_started = "https://reactnative.dev/docs/environment-setup"
+root = "https://reactnative.dev/docs/getting-started"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:31:39.533554Z"
-confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
-state = "present"
-valueJson = '"https://reactnative.dev/docs/environment-setup"'
+checkedAt = "2026-10-27T18:22:36.893611Z"
+confidence = "low"
+method = "unresolved"
+reason = "conflicting documentation declarations; no target selected"
+source = "README.md"
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:31:39.533554Z"
+checkedAt = "2026-10-27T18:22:36.893611Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:70: The full documentation for React Native can be found on our [website](https://reactnative.dev/docs/getting-started)."
+source = "README.md"
 state = "present"
-valueJson = '"https://reactnative.dev"'
+valueJson = '"https://reactnative.dev/docs/getting-started"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:31:39.533554Z"
+checkedAt = "2026-10-27T18:22:36.893611Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -81,7 +80,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:31:39.533554Z"
+checkedAt = "2026-10-27T18:22:36.893611Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -89,7 +88,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:31:39.533554Z"
+checkedAt = "2026-10-27T18:22:36.893611Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -98,7 +97,7 @@ state = "present"
 valueJson = '"yarn build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:31:39.533554Z"
+checkedAt = "2026-10-27T18:22:36.893611Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -107,7 +106,7 @@ state = "present"
 valueJson = '"A framework for building native applications using React"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:31:39.533554Z"
+checkedAt = "2026-10-27T18:22:36.893611Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -115,16 +114,16 @@ state = "present"
 valueJson = '"https://reactnative.dev"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:31:39.533554Z"
+checkedAt = "2026-10-27T18:22:36.893611Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"react-native"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:31:39.533554Z"
+checkedAt = "2026-10-27T18:22:36.893611Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -137,6 +136,6 @@ archived = false
 clone_url = "https://github.com/react/react-native.git"
 default_branch = "main"
 fork = false
-head_sha = "0d47e122aebc7d619122ee8fbc9144d6c45cb1a7"
+head_sha = "01d55273bcf17b6b3b59eab7e9ea7da060d46491"
 html_url = "https://github.com/react/react-native"
-stars = 126626
+stars = 126802

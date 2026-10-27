@@ -2,14 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/LunarVim/LunarVim"
-generated_at = "2026-10-04T07:49:33.117433397Z"
+generated_at = "2026-10-27T17:48:18.459631Z"
 
 [record.trust]
-confidence = "medium"
-provenance = ["imported"]
-notes = "Bootstrapped from `README.md` and `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "LunarVim"
@@ -44,11 +47,8 @@ topics = [
     "hacktoberfest",
 ]
 
-[docs]
-root = "https://www.lunarvim.org"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-04T07:49:33.117433397Z"
+checkedAt = "2026-10-27T17:48:18.459631Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -56,15 +56,15 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-04T07:49:33.117433397Z"
-confidence = "medium"
-method = "unspecified"
-reason = "documentation target present without a retained source declaration"
-state = "present"
-valueJson = '"https://www.lunarvim.org"'
+checkedAt = "2026-10-27T17:48:18.459631Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-04T07:49:33.117433397Z"
+checkedAt = "2026-10-27T17:48:18.459631Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -72,7 +72,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-04T07:49:33.117433397Z"
+checkedAt = "2026-10-27T17:48:18.459631Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -80,7 +80,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-04T07:49:33.117433397Z"
+checkedAt = "2026-10-27T17:48:18.459631Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -88,7 +88,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-04T07:49:33.117433397Z"
+checkedAt = "2026-10-27T17:48:18.459631Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -97,7 +97,7 @@ state = "present"
 valueJson = '"🌙 LunarVim is an IDE layer for Neovim. Completely free and community driven."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-04T07:49:33.117433397Z"
+checkedAt = "2026-10-27T17:48:18.459631Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -105,7 +105,7 @@ state = "present"
 valueJson = '"https://www.lunarvim.org"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-04T07:49:33.117433397Z"
+checkedAt = "2026-10-27T17:48:18.459631Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -114,7 +114,7 @@ state = "present"
 valueJson = '"LunarVim"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-04T07:49:33.117433397Z"
+checkedAt = "2026-10-27T17:48:18.459631Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -129,4 +129,4 @@ default_branch = "master"
 fork = false
 head_sha = "aa51c20f3404cb482e9c6fd6e5e4a4bf5b1612aa"
 html_url = "https://github.com/LunarVim/LunarVim"
-stars = 19266
+stars = 19253

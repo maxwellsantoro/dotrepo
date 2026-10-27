@@ -2,17 +2,14 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/nlohmann/json"
-generated_at = "2026-09-17T06:11:38.950339716Z"
+generated_at = "2026-10-27T17:36:32.095903Z"
 
 [record.trust]
-confidence = "high"
-provenance = [
-    "imported",
-    "verified",
-]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `.github/SECURITY.md`, `.github/CONTRIBUTING.md`, and `Makefile`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `.github/SECURITY.md`, and `.github/CONTRIBUTING.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `.github/CONTRIBUTING.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
 
 [repo]
 name = "json"
@@ -25,14 +22,13 @@ languages = [
     "CMake",
     "Python",
     "Makefile",
+    "Meson",
     "Starlark",
     "Jinja",
     "Cuda",
-    "HTML",
-    "Meson",
     "Swift",
 ]
-build = "make all"
+build = "make build -C docs/mkdocs"
 topics = [
     "json",
     "json-pointer",
@@ -59,9 +55,6 @@ topics = [
 maintainers = ["@nlohmann"]
 security_contact = "https://github.com/nlohmann/json/security/advisories/new"
 
-[docs]
-root = "https://json.nlohmann.me"
-
 [relations]
 references = []
 
@@ -78,23 +71,24 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-17T06:11:38.950339716Z"
+checkedAt = "2026-10-27T17:36:32.095903Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-17T06:11:38.950339716Z"
-confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://json.nlohmann.me"'
+checkedAt = "2026-10-27T17:36:32.095903Z"
+confidence = "low"
+method = "unresolved"
+reason = "conflicting documentation declarations; no target selected"
+source = "README.md"
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-17T06:11:38.950339716Z"
+checkedAt = "2026-10-27T17:36:32.095903Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -103,7 +97,7 @@ state = "present"
 valueJson = '"https://github.com/nlohmann/json/security/advisories/new"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-17T06:11:38.950339716Z"
+checkedAt = "2026-10-27T17:36:32.095903Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -111,16 +105,16 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-17T06:11:38.950339716Z"
+checkedAt = "2026-10-27T17:36:32.095903Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
-source = "Makefile"
+source = ".github/CONTRIBUTING.md"
 state = "present"
-valueJson = '"make all"'
+valueJson = '"make build -C docs/mkdocs"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-17T06:11:38.950339716Z"
+checkedAt = "2026-10-27T17:36:32.095903Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -129,7 +123,7 @@ state = "present"
 valueJson = '"JSON for Modern C++"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-17T06:11:38.950339716Z"
+checkedAt = "2026-10-27T17:36:32.095903Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -137,16 +131,16 @@ state = "present"
 valueJson = '"https://json.nlohmann.me"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-17T06:11:38.950339716Z"
+checkedAt = "2026-10-27T17:36:32.095903Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"json"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-17T06:11:38.950339716Z"
+checkedAt = "2026-10-27T17:36:32.095903Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -158,6 +152,6 @@ archived = false
 clone_url = "https://github.com/nlohmann/json.git"
 default_branch = "develop"
 fork = false
-head_sha = "c41152e62092c16cf4fc4625becacc3eb9d9319f"
+head_sha = "8617d9c94cc9f72ded869ac9c2e5cfda540a69da"
 html_url = "https://github.com/nlohmann/json"
-stars = 50621
+stars = 50812

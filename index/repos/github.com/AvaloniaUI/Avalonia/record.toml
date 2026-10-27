@@ -2,17 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/AvaloniaUI/Avalonia"
-generated_at = "2026-09-16T16:33:58.083598Z"
+generated_at = "2026-10-27T17:25:24.494492Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
-    "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `nukebuild/_build.csproj`. Inferred `repo.build` from `nukebuild/_build.csproj`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. 2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged."
+notes = "Bootstrapped from `README.md` and `SECURITY.md`. Ignored component-scoped commands from `nukebuild/_build.csproj` as repository defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Avalonia"
@@ -27,9 +27,9 @@ languages = [
     "Objective-C",
     "C++",
     "HTML",
+    "C",
     "PowerShell",
     "Shell",
-    "C",
     "F#",
     "JavaScript",
     "CSS",
@@ -63,26 +63,27 @@ maintainers = []
 security_contact = "security@avaloniaui.net"
 
 [docs]
-root = "https://avaloniaui.net"
+root = "https://docs.avaloniaui.net."
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:33:58.083598Z"
+checkedAt = "2026-10-27T17:25:24.494492Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:33:58.083598Z"
+checkedAt = "2026-10-27T17:25:24.494492Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:61: Documentation can be found at https://docs.avaloniaui.net."
+source = "README.md"
 state = "present"
-valueJson = '"https://avaloniaui.net"'
+valueJson = '"https://docs.avaloniaui.net."'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:33:58.083598Z"
+checkedAt = "2026-10-27T17:25:24.494492Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -91,7 +92,7 @@ state = "present"
 valueJson = '"security@avaloniaui.net"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:33:58.083598Z"
+checkedAt = "2026-10-27T17:25:24.494492Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -99,16 +100,15 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:33:58.083598Z"
-confidence = "low"
-method = "inferred"
-reason = "Component command lacks repository-default scope and working directory."
-source = "nukebuild/_build.csproj"
-state = "unresolved"
+checkedAt = "2026-10-27T17:25:24.494492Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no build command sources found"
+state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:33:58.083598Z"
+checkedAt = "2026-10-27T17:25:24.494492Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -117,7 +117,7 @@ state = "present"
 valueJson = '"Develop Desktop, Embedded, Mobile and WebAssembly apps with C# and XAML. The future of .NET UI"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:33:58.083598Z"
+checkedAt = "2026-10-27T17:25:24.494492Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -125,16 +125,16 @@ state = "present"
 valueJson = '"https://avaloniaui.net"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:33:58.083598Z"
+checkedAt = "2026-10-27T17:25:24.494492Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Avalonia"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:33:58.083598Z"
+checkedAt = "2026-10-27T17:25:24.494492Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -146,6 +146,6 @@ archived = false
 clone_url = "https://github.com/AvaloniaUI/Avalonia.git"
 default_branch = "main"
 fork = false
-head_sha = "88a8bbf8edadf7cf2c5191a83ae00eb09c72330f"
+head_sha = "b6fa4b12eab4efb0f1aecee690c08553b0b32fde"
 html_url = "https://github.com/AvaloniaUI/Avalonia"
-stars = 31515
+stars = 31722

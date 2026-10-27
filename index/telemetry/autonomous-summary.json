@@ -1,88 +1,120 @@
 {
   "budgetExhaustedRuns": 0,
   "failureClasses": {
-    "infrastructure": 2,
+    "infrastructure": 8,
     "parser": 1
   },
   "failureClassesByEcosystem": {
-    "infrastructure/unknown": 2,
+    "infrastructure/unknown": 8,
     "parser/rust": 1
   },
   "failureEcosystems": {
     "rust": 1,
-    "unknown": 2
+    "unknown": 8
   },
   "firstRunAt": "2026-06-29T00:55:19Z",
-  "generatedAt": "2026-10-04T07:53:40Z",
-  "lastRunAt": "2026-10-04T07:53:40Z",
+  "generatedAt": "2026-10-27T18:22:46Z",
+  "lastRunAt": "2026-10-27T18:22:46Z",
   "previousWindowCosts": {
     "adjudicationBudgetUseRate": 0.0,
     "adjudicationCallBudget": 0,
     "adjudicationCalls": 0,
-    "crawled": 531,
+    "crawled": 370,
     "tokensPerCrawled": 0.0,
     "tokensUsed": 0
   },
   "previousWindowRates": {
     "adjudicationRate": 0.0,
     "apiEscalationRate": 0.0,
-    "failureRate": 0.0,
+    "failureRate": 0.005405,
     "secondOpinionRate": 0.0,
     "zeroModelRate": 1.0
   },
   "previousWindowRepositoriesByAdjudicationTier": {
-    "deterministic": 136
+    "deterministic": 84
   },
   "previousWindowRunCount": 3,
   "rates": {
     "adjudicationRate": 0.0,
-    "failureRate": 0.0034924330616996507,
-    "promotionRate": 0.7811408614668219,
-    "writeRate": 0.9965075669383003,
+    "failureRate": 0.005360333531864205,
+    "promotionRate": 0.6920786182251341,
+    "writeRate": 0.9946396664681358,
     "zeroModelRate": 1.0
   },
   "recentWindowCosts": {
     "adjudicationBudgetUseRate": 0.0,
     "adjudicationCallBudget": 0,
     "adjudicationCalls": 0,
-    "crawled": 150,
+    "crawled": 500,
     "tokensPerCrawled": 0.0,
     "tokensUsed": 0
   },
   "recentWindowRates": {
     "adjudicationRate": 0.0,
     "apiEscalationRate": 0.0,
-    "failureRate": 0.013333,
+    "failureRate": 0.01,
     "secondOpinionRate": 0.0,
     "zeroModelRate": 1.0
   },
   "recentWindowRepositoriesByAdjudicationTier": {
-    "deterministic": 34
+    "deterministic": 110
   },
   "recentWindowRunCount": 3,
-  "recurringFailures": [],
-  "regressionFixtureCandidates": [],
+  "recurringFailures": [
+    {
+      "count": 4,
+      "fingerprint": "failed to decode GitHub response https://api.github.com/repos/segment-boneyard/nightmare"
+    },
+    {
+      "count": 2,
+      "fingerprint": "upstream repository identity changed to https://github.com/SolaceProducts/solace-agent-mesh; refusing writeback under..."
+    }
+  ],
+  "regressionFixtureCandidates": [
+    {
+      "count": 4,
+      "ecosystem": "unknown",
+      "failureClass": "infrastructure",
+      "fingerprint": "failed to decode GitHub response https://api.github.com/repos/segment-boneyard/nightmare",
+      "fixtureEligible": false,
+      "repositories": [
+        "github.com/segment-boneyard/nightmare"
+      ],
+      "suggestedFixture": "failed-to-decode-github-response-https-api-github-com-repos-segment-boneyard-nig"
+    },
+    {
+      "count": 2,
+      "ecosystem": "unknown",
+      "failureClass": "infrastructure",
+      "fingerprint": "upstream repository identity changed to https://github.com/SolaceProducts/solace-agent-mesh; refusing writeback under...",
+      "fixtureEligible": false,
+      "repositories": [
+        "github.com/SolaceLabs/solace-agent-mesh"
+      ],
+      "suggestedFixture": "upstream-repository-identity-changed-to-https-github-com-solaceproducts-solace-a"
+    }
+  ],
   "repositoriesByAdjudicationTier": {
-    "deterministic": 187
+    "deterministic": 369
   },
-  "runCount": 29,
+  "runCount": 34,
   "schema": "dotrepo/autonomous-telemetry-summary/v0.1",
   "synthesisFailureClasses": {},
   "totals": {
     "adjudicationCallBudget": 68,
     "adjudicationCalls": 0,
-    "crawled": 859,
+    "crawled": 1679,
     "discoveryQueued": 0,
-    "failed": 3,
-    "promoted": 671,
-    "qualityReprocessQueued": 709,
+    "failed": 9,
+    "promoted": 1162,
+    "qualityReprocessQueued": 1529,
     "skipped": 0,
     "synthesisFailed": 0,
     "synthesisRequested": 0,
     "synthesisSucceeded": 0,
     "tokensUsed": 0,
-    "written": 856,
-    "zeroModelRuns": 859
+    "written": 1670,
+    "zeroModelRuns": 1679
   },
   "worstRunRates": {
     "adjudicationRate": 0.0,

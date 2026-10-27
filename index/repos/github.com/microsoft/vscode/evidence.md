@@ -3,8 +3,9 @@
 - Imported repository name and docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
+- Ignored component-scoped commands from `cli/Cargo.toml` as repository defaults.
 - Imported repo.build from package.json as `npm run compile`.
-- Imported repo.test from package.json as `npm test`.
+- Imported docs.root as `https://github.com/microsoft/vscode-docs`. Explicit documentation link at README.md:27: * Review the [documentation](https://github.com/microsoft/vscode-docs) and make pull requests for anything from typos to new content.
 - Discovered related relation to github.com/microsoft/vscode from package.json repository.
 - Discovered related relation to github.com/microsoft/vscode-docs from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.

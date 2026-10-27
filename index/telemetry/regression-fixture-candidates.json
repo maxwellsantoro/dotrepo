@@ -1,7 +1,30 @@
 {
-  "candidateCount": 0,
-  "candidates": [],
-  "generatedAt": "2026-10-04T07:53:40Z",
+  "candidateCount": 2,
+  "candidates": [
+    {
+      "count": 4,
+      "ecosystem": "unknown",
+      "failureClass": "infrastructure",
+      "fingerprint": "failed to decode GitHub response https://api.github.com/repos/segment-boneyard/nightmare",
+      "fixtureEligible": false,
+      "repositories": [
+        "github.com/segment-boneyard/nightmare"
+      ],
+      "suggestedFixture": "failed-to-decode-github-response-https-api-github-com-repos-segment-boneyard-nig"
+    },
+    {
+      "count": 2,
+      "ecosystem": "unknown",
+      "failureClass": "infrastructure",
+      "fingerprint": "upstream repository identity changed to https://github.com/SolaceProducts/solace-agent-mesh; refusing writeback under...",
+      "fixtureEligible": false,
+      "repositories": [
+        "github.com/SolaceLabs/solace-agent-mesh"
+      ],
+      "suggestedFixture": "upstream-repository-identity-changed-to-https-github-com-solaceproducts-solace-a"
+    }
+  ],
+  "generatedAt": "2026-10-27T18:22:46Z",
   "schema": "dotrepo/regression-fixture-candidates/v0.1",
   "sourceSummary": "dotrepo/autonomous-telemetry-summary/v0.1"
 }

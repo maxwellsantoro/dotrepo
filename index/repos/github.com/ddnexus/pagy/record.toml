@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/ddnexus/pagy"
-generated_at = "2026-09-16T16:22:16.569456Z"
+generated_at = "2026-10-27T17:58:28.766164Z"
 
 [record.trust]
 confidence = "high"
@@ -23,8 +23,8 @@ license = "MIT"
 visibility = "public"
 languages = [
     "Ruby",
-    "JavaScript",
     "TypeScript",
+    "JavaScript",
     "CSS",
     "HTML",
     "Shell",
@@ -48,35 +48,48 @@ topics = [
 maintainers = []
 security_contact = "dd.nexus@gmail.com"
 
-[docs]
-root = "https://ddnexus.github.io/pagy/toolbox/configuration/initializer"
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/ddnexus/pagy"
+notes = "Cross-link from README: ![API Test"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:22:16.569456Z"
+checkedAt = "2026-10-27T17:58:28.766164Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:22:16.569456Z"
+checkedAt = "2026-10-27T17:58:28.766164Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://ddnexus.github.io/pagy/toolbox/configuration/initializer"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:22:16.569456Z"
+checkedAt = "2026-10-27T17:58:28.766164Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "direct email or mailing list"
+source = ".github/SECURITY.md"
 state = "present"
 valueJson = '"dd.nexus@gmail.com"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:22:16.569456Z"
+checkedAt = "2026-10-27T17:58:28.766164Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -84,7 +97,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:22:16.569456Z"
+checkedAt = "2026-10-27T17:58:28.766164Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -92,7 +105,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:22:16.569456Z"
+checkedAt = "2026-10-27T17:58:28.766164Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -101,7 +114,7 @@ state = "present"
 valueJson = '"Agnostic pagination in plain ruby"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:22:16.569456Z"
+checkedAt = "2026-10-27T17:58:28.766164Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -109,16 +122,16 @@ state = "present"
 valueJson = '"https://ddnexus.github.io/pagy/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:22:16.569456Z"
+checkedAt = "2026-10-27T17:58:28.766164Z"
 confidence = "high"
 method = "inferred"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"pagy"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:22:16.569456Z"
+checkedAt = "2026-10-27T17:58:28.766164Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -130,6 +143,6 @@ archived = false
 clone_url = "https://github.com/ddnexus/pagy.git"
 default_branch = "master"
 fork = false
-head_sha = "e85430530be38b76d4329c2fea7d870dee60e94f"
+head_sha = "b48c906e31847cc2564b1e8da2995e2b1b8e3e9a"
 html_url = "https://github.com/ddnexus/pagy"
-stars = 4992
+stars = 4996

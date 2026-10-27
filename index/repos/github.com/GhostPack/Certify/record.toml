@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/GhostPack/Certify"
-generated_at = "2026-09-16T16:33:59.122169Z"
+generated_at = "2026-10-27T17:25:30.161722Z"
 
 [record.trust]
 confidence = "medium"
@@ -26,23 +26,23 @@ test = "dotnet test"
 topics = []
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:33:59.122169Z"
+checkedAt = "2026-10-27T17:25:30.161722Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:33:59.122169Z"
+checkedAt = "2026-10-27T17:25:30.161722Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:33:59.122169Z"
+checkedAt = "2026-10-27T17:25:30.161722Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -50,7 +50,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:33:59.122169Z"
+checkedAt = "2026-10-27T17:25:30.161722Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -58,7 +58,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:33:59.122169Z"
+checkedAt = "2026-10-27T17:25:30.161722Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -67,7 +67,7 @@ state = "present"
 valueJson = '"dotnet build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:33:59.122169Z"
+checkedAt = "2026-10-27T17:25:30.161722Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -76,7 +76,7 @@ state = "present"
 valueJson = '"Active Directory certificate abuse."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:33:59.122169Z"
+checkedAt = "2026-10-27T17:25:30.161722Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -84,16 +84,16 @@ state = "present"
 valueJson = '"https://github.com/GhostPack/Certify"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:33:59.122169Z"
+checkedAt = "2026-10-27T17:25:30.161722Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Certify"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:33:59.122169Z"
+checkedAt = "2026-10-27T17:25:30.161722Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -106,6 +106,6 @@ archived = false
 clone_url = "https://github.com/GhostPack/Certify.git"
 default_branch = "main"
 fork = false
-head_sha = "0a6ed66b543698daf87f6a4ac44792e9148290b5"
+head_sha = "ce9a4d27d2f18d391c141ebdc8cb82fa5f6b88e3"
 html_url = "https://github.com/GhostPack/Certify"
-stars = 2035
+stars = 2044

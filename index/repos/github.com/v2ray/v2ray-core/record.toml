@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/v2ray/v2ray-core"
-generated_at = "2026-09-18T06:06:27.763885761Z"
+generated_at = "2026-10-27T17:39:29.387509Z"
 
 [record.trust]
 confidence = "medium"
@@ -48,27 +48,24 @@ ecosystem = "Go"
 maintainers = []
 security_contact = "dev@v2fly.org"
 
-[docs]
-root = "https://www.v2ray.com/"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-18T06:06:27.763885761Z"
+checkedAt = "2026-10-27T17:39:29.387509Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-18T06:06:27.763885761Z"
+checkedAt = "2026-10-27T17:39:29.387509Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://www.v2ray.com/"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-18T06:06:27.763885761Z"
+checkedAt = "2026-10-27T17:39:29.387509Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -77,7 +74,7 @@ state = "present"
 valueJson = '"dev@v2fly.org"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-18T06:06:27.763885761Z"
+checkedAt = "2026-10-27T17:39:29.387509Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -85,7 +82,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-18T06:06:27.763885761Z"
+checkedAt = "2026-10-27T17:39:29.387509Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -94,7 +91,7 @@ state = "present"
 valueJson = '"go build ./..."'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-18T06:06:27.763885761Z"
+checkedAt = "2026-10-27T17:39:29.387509Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -103,7 +100,7 @@ state = "present"
 valueJson = '"A platform for building proxies to bypass network restrictions."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-18T06:06:27.763885761Z"
+checkedAt = "2026-10-27T17:39:29.387509Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -111,16 +108,16 @@ state = "present"
 valueJson = '"https://www.v2ray.com/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-18T06:06:27.763885761Z"
+checkedAt = "2026-10-27T17:39:29.387509Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Move To https://github.com/v2fly/v2ray-core"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-18T06:06:27.763885761Z"
+checkedAt = "2026-10-27T17:39:29.387509Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -135,4 +132,4 @@ default_branch = "master"
 fork = false
 head_sha = "d80440f3d57b45c829dbf513306f7adf9a0f3f76"
 html_url = "https://github.com/v2ray/v2ray-core"
-stars = 46934
+stars = 46908

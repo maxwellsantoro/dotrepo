@@ -1,11 +1,11 @@
 # Evidence
 
-- Imported repository name from README.md.
-- Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@tauri-apps/wg-tauri` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates.
+- Imported repository name and docs entry points from README.md.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
 - Imported repo.build from package.json as `pnpm build`.
 - Imported repo.test from package.json as `pnpm test`.
 - Imported repo.toolchain.min from Cargo.toml as `1.90` (Rust).
+- Imported docs.root as `https://github.com/tauri-apps/tauri-docs`. Explicit documentation link at README.md:64: Documentation in a polyglot system is a tricky proposition. To this end, we prefer to use inline documentation in the Rust & JS source code as much as possible. Check out the hosting repository for the documentation site for further information: <https://github.com/tauri-apps/tauri-docs>
 - Discovered related relation to github.com/tauri-apps/tauri from package.json repository.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

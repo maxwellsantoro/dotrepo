@@ -1,6 +1,5 @@
 # Evidence
 
-- Imported repository docs entry points from README.md.
 - Imported the security reporting channel from SECURITY.md.
 - Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.
 - Imported repo.build from README.md as `make`.

@@ -1,7 +1,7 @@
 # Evidence
 
 - Imported repository name from README.md.
-- Inferred repo.build from .github/workflows/check_diff.yml as `cargo build --release --locked`.
+- Inferred repo.build from .github/workflows/upload-assets.yml as `cargo build --release --locked`.
 - Inferred repo.test from Cargo.toml as `cargo test`.
 - Discovered related relation to github.com/rust-lang/rustfmt from Cargo.toml repository.
 - This is an overlay record, not a maintainer-controlled canonical record.
@@ -12,7 +12,3 @@
 - Augmented repo.topics from GitHub repository metadata.
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
-
-## Fresh verification
-
-Prior verified authority was not inherited: this refresh must qualify using its current field scores.

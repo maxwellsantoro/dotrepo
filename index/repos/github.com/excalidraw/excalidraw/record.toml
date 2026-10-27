@@ -2,17 +2,14 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/excalidraw/excalidraw"
-generated_at = "2026-09-16T16:22:48.636663Z"
+generated_at = "2026-10-27T17:59:40.598292Z"
 
 [record.trust]
-confidence = "high"
-provenance = [
-    "imported",
-    "verified",
-]
-notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Excalidraw"
@@ -46,28 +43,25 @@ topics = [
 min = "18.0.0"
 ecosystem = "Node.js"
 
-[docs]
-root = "https://docs.excalidraw.com"
-getting_started = "https://docs.excalidraw.com/docs/@excalidraw/excalidraw/installation"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:22:48.636663Z"
+checkedAt = "2026-10-27T17:59:40.598292Z"
 confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
-state = "present"
-valueJson = '"https://docs.excalidraw.com/docs/@excalidraw/excalidraw/installation"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:22:48.636663Z"
-confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://docs.excalidraw.com"'
+checkedAt = "2026-10-27T17:59:40.598292Z"
+confidence = "low"
+method = "unresolved"
+reason = "conflicting documentation declarations; no target selected"
+source = "README.md"
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:22:48.636663Z"
+checkedAt = "2026-10-27T17:59:40.598292Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -75,7 +69,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:22:48.636663Z"
+checkedAt = "2026-10-27T17:59:40.598292Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -83,7 +77,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:22:48.636663Z"
+checkedAt = "2026-10-27T17:59:40.598292Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -92,7 +86,7 @@ state = "present"
 valueJson = '"yarn build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:22:48.636663Z"
+checkedAt = "2026-10-27T17:59:40.598292Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -101,7 +95,7 @@ state = "present"
 valueJson = '"Virtual whiteboard for sketching hand-drawn like diagrams"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:22:48.636663Z"
+checkedAt = "2026-10-27T17:59:40.598292Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -109,16 +103,16 @@ state = "present"
 valueJson = '"https://excalidraw.com"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:22:48.636663Z"
+checkedAt = "2026-10-27T17:59:40.598292Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Excalidraw"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:22:48.636663Z"
+checkedAt = "2026-10-27T17:59:40.598292Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -131,6 +125,6 @@ archived = false
 clone_url = "https://github.com/excalidraw/excalidraw.git"
 default_branch = "master"
 fork = false
-head_sha = "a9186480121afc16ccdec789fc533e6a9ee68c10"
+head_sha = "14bb42edee3d6fee6be264e3ee78670b3b9cee79"
 html_url = "https://github.com/excalidraw/excalidraw"
-stars = 132117
+stars = 134659

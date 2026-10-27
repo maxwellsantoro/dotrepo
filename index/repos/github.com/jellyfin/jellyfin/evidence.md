@@ -1,6 +1,6 @@
 # Evidence
 
-- Imported repository name and docs entry points from README.md.
+- Imported repository name from README.md.
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from CODEOWNERS; `owners.team` is `@jellyfin/core` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates.
 - Inferred repo.build from Jellyfin.sln as `dotnet build`.
 - Inferred repo.test from Jellyfin.sln as `dotnet test`.
@@ -13,7 +13,3 @@
 - Augmented repo.topics from GitHub repository metadata.
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
-
-## Fresh verification
-
-Prior verified authority was not inherited: this refresh must qualify using its current field scores.
