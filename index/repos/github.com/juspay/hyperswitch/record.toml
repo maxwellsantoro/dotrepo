@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/juspay/hyperswitch"
-generated_at = "2026-10-27T18:07:03.763801Z"
+generated_at = "2026-10-27T19:26:26.489169514Z"
 
 [record.trust]
 confidence = "high"
@@ -89,7 +89,7 @@ maintainers = [
 team = "@juspay/hyperswitch-maintainers"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T18:07:03.763801Z"
+checkedAt = "2026-10-27T19:26:26.489169514Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -97,7 +97,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T18:07:03.763801Z"
+checkedAt = "2026-10-27T19:26:26.489169514Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -105,7 +105,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T18:07:03.763801Z"
+checkedAt = "2026-10-27T19:26:26.489169514Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -113,7 +113,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T18:07:03.763801Z"
+checkedAt = "2026-10-27T19:26:26.489169514Z"
 confidence = "high"
 method = "unspecified"
 reason = "clear CODEOWNERS team"
@@ -121,7 +121,7 @@ state = "present"
 valueJson = '"@juspay/hyperswitch-maintainers"'
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T18:07:03.763801Z"
+checkedAt = "2026-10-27T19:26:26.489169514Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -130,7 +130,7 @@ state = "present"
 valueJson = '"make build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T18:07:03.763801Z"
+checkedAt = "2026-10-27T19:26:26.489169514Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -139,7 +139,7 @@ state = "present"
 valueJson = '"Open source, composable payments platform | PCI compliant | SaaS and Self-host options | Enables connectivity to multiple payment, payout, fraud, vault and tokenization providers | Uplifts authorization with intelligent routing and revenue recovery | Reduce payment processing costs with cost observability | Reduces payment ops with reconciliation"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T18:07:03.763801Z"
+checkedAt = "2026-10-27T19:26:26.489169514Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -147,7 +147,7 @@ state = "present"
 valueJson = '"https://hyperswitch.io/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T18:07:03.763801Z"
+checkedAt = "2026-10-27T19:26:26.489169514Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -156,7 +156,7 @@ state = "present"
 valueJson = '"hyperswitch"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T18:07:03.763801Z"
+checkedAt = "2026-10-27T19:26:26.489169514Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -169,6 +169,6 @@ archived = false
 clone_url = "https://github.com/juspay/hyperswitch.git"
 default_branch = "main"
 fork = false
-head_sha = "e835a7a8f2e7abc994908d9dfdb2aaeae2418817"
+head_sha = "cbd19bc2bd419b7609d861e63338c778cce6ebf2"
 html_url = "https://github.com/juspay/hyperswitch"
 stars = 45421

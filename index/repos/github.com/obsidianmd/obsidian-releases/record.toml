@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/obsidianmd/obsidian-releases"
-generated_at = "2026-10-27T18:13:17.282476Z"
+generated_at = "2026-10-27T19:28:41.674736438Z"
 
 [record.trust]
 confidence = "high"
@@ -31,7 +31,7 @@ topics = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T18:13:17.282476Z"
+checkedAt = "2026-10-27T19:28:41.674736438Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -39,7 +39,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T18:13:17.282476Z"
+checkedAt = "2026-10-27T19:28:41.674736438Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -47,7 +47,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T18:13:17.282476Z"
+checkedAt = "2026-10-27T19:28:41.674736438Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -55,7 +55,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T18:13:17.282476Z"
+checkedAt = "2026-10-27T19:28:41.674736438Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -63,7 +63,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T18:13:17.282476Z"
+checkedAt = "2026-10-27T19:28:41.674736438Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -71,7 +71,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T18:13:17.282476Z"
+checkedAt = "2026-10-27T19:28:41.674736438Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -80,7 +80,7 @@ state = "present"
 valueJson = '"Community plugins list, theme list, and releases of Obsidian."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T18:13:17.282476Z"
+checkedAt = "2026-10-27T19:28:41.674736438Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -88,7 +88,7 @@ state = "present"
 valueJson = '"https://obsidian.md"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T18:13:17.282476Z"
+checkedAt = "2026-10-27T19:28:41.674736438Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -97,7 +97,7 @@ state = "present"
 valueJson = '"obsidian-releases"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T18:13:17.282476Z"
+checkedAt = "2026-10-27T19:28:41.674736438Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -109,6 +109,6 @@ archived = false
 clone_url = "https://github.com/obsidianmd/obsidian-releases.git"
 default_branch = "master"
 fork = false
-head_sha = "ca8849a9e521fcfcdf1d0878aeed2198a8f8aca6"
+head_sha = "2661bd53ace8327cfd6d745b67758400ac8870f0"
 html_url = "https://github.com/obsidianmd/obsidian-releases"
-stars = 22667
+stars = 22668
