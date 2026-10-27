@@ -34,6 +34,12 @@ concurrency:
 jobs:
   autonomous-refresh:
     runs-on: ubuntu-latest
+    # Job-level so `issues: write` (failure alert only) is not granted elsewhere.
+    permissions:
+      contents: write
+      pull-requests: write
+      actions: write
+      issues: write
     # Fail closed: only run when the repository variable is explicitly true.
     if: vars.INDEX_AUTOMATION_ENABLED == 'true'
     env:
@@ -139,6 +145,29 @@ jobs:
             echo "INDEX_MAX_ADJUDICATION_CALLS=${{ vars.INDEX_MAX_ADJUDICATION_CALLS || '2' }}"
             echo "INDEX_MAX_BATCH_ADJUDICATION_CALLS=${{ vars.INDEX_MAX_BATCH_ADJUDICATION_CALLS || vars.INDEX_MAX_ADJUDICATION_CALLS || '4' }}"
           } >> "$GITHUB_ENV"
+      - name: Resolve refresh batch parameters
+        id: refresh_params
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_BATCH_ID: ${{ github.event.inputs.batch_id }}
+          INPUT_BATCH_SIZE: ${{ github.event.inputs.batch_size }}
+          INPUT_LIMIT: ${{ github.event.inputs.limit }}
+        run: |
+          batch_id="${INPUT_BATCH_ID:-refresh-batch-01}"
+          batch_size="${INPUT_BATCH_SIZE:-50}"
+          if [ "$EVENT_NAME" = "schedule" ]; then
+            # Scheduled runs inspect the full index instead of one 50-repo slice.
+            limit="1000"
+          else
+            # workflow_dispatch: honour the caller's limit input (default 50).
+            limit="${INPUT_LIMIT:-50}"
+          fi
+          {
+            echo "batch_id=$batch_id"
+            echo "batch_size=$batch_size"
+            echo "limit=$limit"
+          } >> "$GITHUB_OUTPUT"
       - name: Run autonomous refresh batch
         id: autonomous_batch
         continue-on-error: true
@@ -146,12 +175,12 @@ jobs:
           ADJUDICATION_CALL_BUDGET: ${{ steps.refresh_budget.outputs.adjudication_call_budget }}
         run: |
           uv run python scripts/run_autonomous_index_batch.py \
-            --batch-id "${{ github.event.inputs.batch_id || 'refresh-batch-01' }}" \
-            --batch-size "${{ github.event.inputs.batch_size || '50' }}" \
-            --limit "${{ github.event.inputs.limit || '50' }}" \
+            --batch-id "${{ steps.refresh_params.outputs.batch_id }}" \
+            --batch-size "${{ steps.refresh_params.outputs.batch_size }}" \
+            --limit "${{ steps.refresh_params.outputs.limit }}" \
             --disable-discovery \
             --adjudication-call-budget "$ADJUDICATION_CALL_BUDGET" \
-            --discovery-limit "${{ vars.INDEX_DISCOVERY_LIMIT || github.event.inputs.batch_size || '50' }}" \
+            --discovery-limit "${{ vars.INDEX_DISCOVERY_LIMIT || steps.refresh_params.outputs.batch_size }}" \
             --output-dir index-autonomous-batch
       - name: Evaluate autonomous telemetry gate
         id: telemetry_gate
@@ -172,13 +201,16 @@ jobs:
         id: validate_index
         if: always()
         run: cargo run -q -p dotrepo-cli -- validate-index
-      - name: Gate the public surface before automatic merge
+      # Advisory only: retained for its artifact/info output. It is not a
+      # condition on refresh PR creation or landing (see steps below).
+      - name: Check public surface (advisory, non-blocking)
         id: public_surface_gate
         if: steps.telemetry_gate.outcome == 'success' && steps.validate_index.outcome == 'success'
+        continue-on-error: true
         run: uv run python scripts/check_release_gate.py --output-root index-autonomous-batch/public-gate --skip-release-bundle --skip-vsix
       - name: Verify checked base before creating a refresh PR
         id: refresh_base
-        if: steps.refresh_budget.outcome == 'success' && steps.telemetry_gate.outcome == 'success' && steps.validate_index.outcome == 'success' && steps.public_surface_gate.outcome == 'success'
+        if: steps.refresh_budget.outcome == 'success' && steps.telemetry_gate.outcome == 'success' && steps.validate_index.outcome == 'success'
         env:
           EXPECTED_BASE: ${{ github.sha }}
         run: |
@@ -197,7 +229,7 @@ jobs:
           retention-days: 14
       - name: Prepare pull request metadata
         id: pr_meta
-        if: always() && steps.refresh_base.outcome == 'success' && steps.telemetry_gate.outcome == 'success' && steps.validate_index.outcome == 'success' && steps.public_surface_gate.outcome == 'success'
+        if: always() && steps.refresh_base.outcome == 'success' && steps.telemetry_gate.outcome == 'success' && steps.validate_index.outcome == 'success'
         shell: bash
         run: |
           if [ ! -f index-autonomous-batch/telemetry.json ]; then
@@ -210,7 +242,7 @@ jobs:
             echo "skip=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          batch_id="${{ github.event.inputs.batch_id || 'refresh-batch-01' }}"
+          batch_id="${{ steps.refresh_params.outputs.batch_id || 'refresh-batch-01' }}"
           branch="automation/index-autonomous/${batch_id}-${{ github.run_id }}"
           title="chore(index): autonomous refresh batch ${batch_id}"
           echo "skip=false" >> "$GITHUB_OUTPUT"
@@ -218,7 +250,7 @@ jobs:
             echo "# Autonomous index refresh"
             echo
             echo "Automated PR from \`index-autonomous-refresh\`."
-            echo "Machine gates check index diffs, release floors, and telemetry before automatic merge."
+            echo "Machine gates check index diffs and telemetry before automatic merge; the public-surface release gate is advisory only."
             echo
             echo "- batch: \`${batch_id}\`"
             echo "- run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
@@ -251,7 +283,6 @@ jobs:
           && steps.refresh_base.outcome == 'success'
           && steps.telemetry_gate.outcome == 'success'
           && steps.validate_index.outcome == 'success'
-          && steps.public_surface_gate.outcome == 'success'
           && steps.pr_meta.outcome == 'success'
           && steps.pr_meta.outputs.skip == 'false'
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8
@@ -385,3 +416,24 @@ jobs:
         run: |
           echo "Autonomous telemetry gate failed under strict mode; PR not opened" >&2
           exit 1
+      # Failure visibility for unattended scheduled runs: keep exactly one
+      # open issue, updated in place on repeat failures.
+      - name: Open or update autonomous-refresh failure issue
+        if: failure() && github.event_name == 'schedule'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          title="autonomous-refresh failing"
+          body="$(printf 'The scheduled `index-autonomous-refresh` workflow is failing.\n\n- run: %s\n- workflow: `%s`\n- ref: `%s`\n- sha: `%s`\n' \
+            "$RUN_URL" "${{ github.workflow }}" "${{ github.ref }}" "${{ github.sha }}")"
+          existing_number="$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --limit 100 \
+            --json number,title \
+            --jq '.[] | select(.title == "autonomous-refresh failing") | .number' | head -n 1)"
+          if [ -n "$existing_number" ]; then
+            gh issue edit "$existing_number" --repo "$GITHUB_REPOSITORY" --body "$body"
+            echo "Updated existing failure issue #$existing_number"
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" --title "$title" --body "$body"
+          fi

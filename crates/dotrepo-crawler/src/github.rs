@@ -135,8 +135,22 @@ fn refresh_candidates_from_state_with_client<C: GitHubClient>(
             ));
         }
 
-        let head =
-            client.fetch_repository_head(&record.repository, record.default_branch.as_deref())?;
+        // A single unfetchable repository (deleted, renamed without a
+        // redirect, or a transient API failure) must not abort planning for
+        // the whole index. Skip it with a warning; it stays stale and is
+        // retried on the next planning pass.
+        let head = match client
+            .fetch_repository_head(&record.repository, record.default_branch.as_deref())
+        {
+            Ok(head) => head,
+            Err(error) => {
+                eprintln!(
+                    "dotrepo-crawler: skipping {}/{}/{} in refresh planning: {error:#}",
+                    record.repository.host, record.repository.owner, record.repository.repo
+                );
+                continue;
+            }
+        };
         candidates.push(RefreshCandidate {
             repository: record.repository.clone(),
             default_branch: Some(head.default_branch),
@@ -1527,6 +1541,9 @@ mod tests {
             repository: &RepositoryRef,
             _default_branch: Option<&str>,
         ) -> Result<RepositoryHeadSnapshot> {
+            if repository.repo == "gone" {
+                anyhow::bail!("simulated unfetchable repository");
+            }
             Ok(RepositoryHeadSnapshot {
                 default_branch: "main".into(),
                 head_sha: Some(format!("{}-sha", repository.repo)),
@@ -1592,5 +1609,34 @@ mod tests {
         assert_eq!(candidates[0].head_sha.as_deref(), Some("tokio-sha"));
         assert_eq!(candidates[1].repository.repo, "fastapi");
         assert_eq!(candidates[1].head_sha.as_deref(), Some("fastapi-sha"));
+    }
+
+    #[test]
+    fn refresh_candidates_from_state_skips_unfetchable_repositories() {
+        // Regression: one deleted repository (segment-boneyard/nightmare)
+        // aborted refresh planning for the entire index.
+        let record = |repo: &str| crate::CrawlStateRecord {
+            repository: RepositoryRef {
+                host: "github.com".into(),
+                owner: "acme".into(),
+                repo: repo.into(),
+            },
+            default_branch: Some("master".into()),
+            head_sha: Some("old".into()),
+            last_factual_crawl_at: Some("2026-03-20T00:00:00Z".into()),
+            last_synthesis_success_at: None,
+            last_synthesis_failure: None,
+            synthesis_model: None,
+        };
+        let state = CrawlerStateSnapshot {
+            repositories: vec![record("tokio"), record("gone"), record("fastapi")],
+        };
+
+        let candidates =
+            refresh_candidates_from_state_with_client(&state, &FakeGitHubClient).expect("plans");
+
+        assert_eq!(candidates.len(), 2);
+        assert_eq!(candidates[0].repository.repo, "tokio");
+        assert_eq!(candidates[1].repository.repo, "fastapi");
     }
 }
