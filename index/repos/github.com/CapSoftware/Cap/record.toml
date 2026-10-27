@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/CapSoftware/Cap"
-generated_at = "2026-10-27T17:39:57.289124Z"
+generated_at = "2026-10-27T19:22:02.637752547Z"
 
 [record.trust]
 confidence = "high"
@@ -73,7 +73,7 @@ ecosystem = "Node.js"
 root = "https://cap.so/docs"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T17:39:57.289124Z"
+checkedAt = "2026-10-27T19:22:02.637752547Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -81,7 +81,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T17:39:57.289124Z"
+checkedAt = "2026-10-27T19:22:02.637752547Z"
 confidence = "high"
 method = "extracted"
 reason = 'Explicit documentation link at README.md:16: <a href="https://cap.so/docs">Docs</a>'
@@ -90,7 +90,7 @@ state = "present"
 valueJson = '"https://cap.so/docs"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T17:39:57.289124Z"
+checkedAt = "2026-10-27T19:22:02.637752547Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -98,7 +98,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T17:39:57.289124Z"
+checkedAt = "2026-10-27T19:22:02.637752547Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -106,7 +106,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T17:39:57.289124Z"
+checkedAt = "2026-10-27T19:22:02.637752547Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -115,7 +115,7 @@ state = "present"
 valueJson = '"bun run build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T17:39:57.289124Z"
+checkedAt = "2026-10-27T19:22:02.637752547Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -124,7 +124,7 @@ state = "present"
 valueJson = '"Open source Loom alternative. Beautiful, shareable screen recordings."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T17:39:57.289124Z"
+checkedAt = "2026-10-27T19:22:02.637752547Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -132,7 +132,7 @@ state = "present"
 valueJson = '"https://cap.so"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T17:39:57.289124Z"
+checkedAt = "2026-10-27T19:22:02.637752547Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -141,7 +141,7 @@ state = "present"
 valueJson = '"Cap"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T17:39:57.289124Z"
+checkedAt = "2026-10-27T19:22:02.637752547Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -154,6 +154,6 @@ archived = false
 clone_url = "https://github.com/CapSoftware/Cap.git"
 default_branch = "main"
 fork = false
-head_sha = "0a35a8840a4924cd6bbbd5e82900018221e158cf"
+head_sha = "dab56e431440156070bb55e3e0e92cf3400bd1f9"
 html_url = "https://github.com/CapSoftware/Cap"
-stars = 23913
+stars = 23923

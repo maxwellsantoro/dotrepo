@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/golang/go"
-generated_at = "2026-10-27T18:02:01.778917Z"
+generated_at = "2026-10-27T19:25:22.804760834Z"
 
 [record.trust]
 confidence = "high"
@@ -46,7 +46,7 @@ maintainers = []
 security_contact = "https://go.dev/security/policy"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T18:02:01.778917Z"
+checkedAt = "2026-10-27T19:25:22.804760834Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -54,7 +54,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T18:02:01.778917Z"
+checkedAt = "2026-10-27T19:25:22.804760834Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -62,7 +62,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T18:02:01.778917Z"
+checkedAt = "2026-10-27T19:25:22.804760834Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -71,7 +71,7 @@ state = "present"
 valueJson = '"https://go.dev/security/policy"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T18:02:01.778917Z"
+checkedAt = "2026-10-27T19:25:22.804760834Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -79,7 +79,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T18:02:01.778917Z"
+checkedAt = "2026-10-27T19:25:22.804760834Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -87,7 +87,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T18:02:01.778917Z"
+checkedAt = "2026-10-27T19:25:22.804760834Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -96,7 +96,7 @@ state = "present"
 valueJson = '"The Go programming language"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T18:02:01.778917Z"
+checkedAt = "2026-10-27T19:25:22.804760834Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -104,7 +104,7 @@ state = "present"
 valueJson = '"https://go.dev"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T18:02:01.778917Z"
+checkedAt = "2026-10-27T19:25:22.804760834Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -113,7 +113,7 @@ state = "present"
 valueJson = '"The Go Programming Language"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T18:02:01.778917Z"
+checkedAt = "2026-10-27T19:25:22.804760834Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -125,6 +125,6 @@ archived = false
 clone_url = "https://github.com/golang/go.git"
 default_branch = "master"
 fork = false
-head_sha = "e9a2cefe3670ea20947e71fe535f7e5accc71f9b"
+head_sha = "1956448f5e23f63dbd1bcd318ce1edf3f3745472"
 html_url = "https://github.com/golang/go"
-stars = 139634
+stars = 139507

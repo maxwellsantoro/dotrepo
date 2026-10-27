@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/google-gemini/gemini-cli"
-generated_at = "2026-10-27T18:25:23.739243Z"
+generated_at = "2026-10-27T19:25:33.636598407Z"
 
 [record.trust]
 confidence = "high"
@@ -76,7 +76,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T18:25:23.739243Z"
+checkedAt = "2026-10-27T19:25:33.636598407Z"
 confidence = "high"
 method = "extracted"
 reason = "Explicit documentation link at README.md:246: - [**Quickstart Guide**](https://www.geminicli.com/docs/get-started) - Get up"
@@ -85,7 +85,7 @@ state = "present"
 valueJson = '"https://www.geminicli.com/docs/get-started"'
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T18:25:23.739243Z"
+checkedAt = "2026-10-27T19:25:33.636598407Z"
 confidence = "high"
 method = "extracted"
 reason = "Explicit documentation link at README.md:28: Learn all about Gemini CLI in our [documentation](https://geminicli.com/docs/)."
@@ -94,7 +94,7 @@ state = "present"
 valueJson = '"https://geminicli.com/docs/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T18:25:23.739243Z"
+checkedAt = "2026-10-27T19:25:33.636598407Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -103,7 +103,7 @@ state = "present"
 valueJson = '"https://g.co/vulnz"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T18:25:23.739243Z"
+checkedAt = "2026-10-27T19:25:33.636598407Z"
 confidence = "high"
 method = "unspecified"
 reason = "clear CODEOWNERS team"
@@ -111,7 +111,7 @@ state = "present"
 valueJson = '"@google-gemini/gemini-cli-maintainers"'
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T18:25:23.739243Z"
+checkedAt = "2026-10-27T19:25:33.636598407Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -120,7 +120,7 @@ state = "present"
 valueJson = '"npm run build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T18:25:23.739243Z"
+checkedAt = "2026-10-27T19:25:33.636598407Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -129,7 +129,7 @@ state = "present"
 valueJson = '"An open-source AI agent that brings the power of Gemini directly into your terminal."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T18:25:23.739243Z"
+checkedAt = "2026-10-27T19:25:33.636598407Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -137,7 +137,7 @@ state = "present"
 valueJson = '"https://geminicli.com"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T18:25:23.739243Z"
+checkedAt = "2026-10-27T19:25:33.636598407Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -146,7 +146,7 @@ state = "present"
 valueJson = '"Gemini CLI"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T18:25:23.739243Z"
+checkedAt = "2026-10-27T19:25:33.636598407Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -159,6 +159,6 @@ archived = false
 clone_url = "https://github.com/google-gemini/gemini-cli.git"
 default_branch = "main"
 fork = false
-head_sha = "ee180f937608482b5f7fd29e01239a431350e387"
+head_sha = "8080ea70a54cda947b6c4f38293f195241e45968"
 html_url = "https://github.com/google-gemini/gemini-cli"
-stars = 108571
+stars = 108572

@@ -13,51 +13,51 @@
     "unknown": 8
   },
   "firstRunAt": "2026-06-29T00:55:19Z",
-  "generatedAt": "2026-10-27T18:22:46Z",
-  "lastRunAt": "2026-10-27T18:22:46Z",
+  "generatedAt": "2026-10-27T19:29:17Z",
+  "lastRunAt": "2026-10-27T19:29:17Z",
   "previousWindowCosts": {
     "adjudicationBudgetUseRate": 0.0,
     "adjudicationCallBudget": 0,
     "adjudicationCalls": 0,
-    "crawled": 370,
+    "crawled": 520,
     "tokensPerCrawled": 0.0,
     "tokensUsed": 0
   },
   "previousWindowRates": {
     "adjudicationRate": 0.0,
     "apiEscalationRate": 0.0,
-    "failureRate": 0.005405,
+    "failureRate": 0.003846,
     "secondOpinionRate": 0.0,
     "zeroModelRate": 1.0
   },
   "previousWindowRepositoriesByAdjudicationTier": {
-    "deterministic": 84
+    "deterministic": 117
   },
   "previousWindowRunCount": 3,
   "rates": {
     "adjudicationRate": 0.0,
-    "failureRate": 0.005360333531864205,
-    "promotionRate": 0.6920786182251341,
-    "writeRate": 0.9946396664681358,
+    "failureRate": 0.005205320994794679,
+    "promotionRate": 0.6899942163100058,
+    "writeRate": 0.9947946790052054,
     "zeroModelRate": 1.0
   },
   "recentWindowCosts": {
     "adjudicationBudgetUseRate": 0.0,
     "adjudicationCallBudget": 0,
     "adjudicationCalls": 0,
-    "crawled": 500,
+    "crawled": 350,
     "tokensPerCrawled": 0.0,
     "tokensUsed": 0
   },
   "recentWindowRates": {
     "adjudicationRate": 0.0,
     "apiEscalationRate": 0.0,
-    "failureRate": 0.01,
+    "failureRate": 0.011429,
     "secondOpinionRate": 0.0,
     "zeroModelRate": 1.0
   },
   "recentWindowRepositoriesByAdjudicationTier": {
-    "deterministic": 110
+    "deterministic": 79
   },
   "recentWindowRunCount": 3,
   "recurringFailures": [
@@ -95,26 +95,26 @@
     }
   ],
   "repositoriesByAdjudicationTier": {
-    "deterministic": 369
+    "deterministic": 383
   },
-  "runCount": 34,
+  "runCount": 35,
   "schema": "dotrepo/autonomous-telemetry-summary/v0.1",
   "synthesisFailureClasses": {},
   "totals": {
     "adjudicationCallBudget": 68,
     "adjudicationCalls": 0,
-    "crawled": 1679,
+    "crawled": 1729,
     "discoveryQueued": 0,
     "failed": 9,
-    "promoted": 1162,
+    "promoted": 1193,
     "qualityReprocessQueued": 1529,
     "skipped": 0,
     "synthesisFailed": 0,
     "synthesisRequested": 0,
     "synthesisSucceeded": 0,
     "tokensUsed": 0,
-    "written": 1670,
-    "zeroModelRuns": 1679
+    "written": 1720,
+    "zeroModelRuns": 1729
   },
   "worstRunRates": {
     "adjudicationRate": 0.0,

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/openai/codex"
-generated_at = "2026-10-27T17:29:29.151946Z"
+generated_at = "2026-10-27T19:28:51.684801326Z"
 
 [record.trust]
 confidence = "high"
@@ -48,7 +48,7 @@ security_contact = "https://bugcrowd.com/engagements/openai"
 root = "https://developers.openai.com/codex"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T17:29:29.151946Z"
+checkedAt = "2026-10-27T19:28:51.684801326Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -56,7 +56,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T17:29:29.151946Z"
+checkedAt = "2026-10-27T19:28:51.684801326Z"
 confidence = "high"
 method = "extracted"
 reason = "Explicit documentation link at README.md:76: - [**Codex Documentation**](https://developers.openai.com/codex)"
@@ -65,7 +65,7 @@ state = "present"
 valueJson = '"https://developers.openai.com/codex"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T17:29:29.151946Z"
+checkedAt = "2026-10-27T19:28:51.684801326Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -74,7 +74,7 @@ state = "present"
 valueJson = '"https://bugcrowd.com/engagements/openai"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T17:29:29.151946Z"
+checkedAt = "2026-10-27T19:28:51.684801326Z"
 confidence = "high"
 method = "unspecified"
 reason = "clear CODEOWNERS team"
@@ -82,7 +82,7 @@ state = "present"
 valueJson = '"@openai/codex-core-agent-team"'
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T17:29:29.151946Z"
+checkedAt = "2026-10-27T19:28:51.684801326Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -90,7 +90,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T17:29:29.151946Z"
+checkedAt = "2026-10-27T19:28:51.684801326Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -99,7 +99,7 @@ state = "present"
 valueJson = '"Lightweight coding agent that runs in your terminal"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T17:29:29.151946Z"
+checkedAt = "2026-10-27T19:28:51.684801326Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -107,7 +107,7 @@ state = "present"
 valueJson = '"https://github.com/openai/codex"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T17:29:29.151946Z"
+checkedAt = "2026-10-27T19:28:51.684801326Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -116,7 +116,7 @@ state = "present"
 valueJson = '"Codex CLI splash"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T17:29:29.151946Z"
+checkedAt = "2026-10-27T19:28:51.684801326Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -128,6 +128,6 @@ archived = false
 clone_url = "https://github.com/openai/codex.git"
 default_branch = "main"
 fork = false
-head_sha = "19d730175f68d56aba23eae6c765b4e133299069"
+head_sha = "aa854dabf54e1dd6c2bda80653944b4f2c0672d7"
 html_url = "https://github.com/openai/codex"
-stars = 131258
+stars = 131259

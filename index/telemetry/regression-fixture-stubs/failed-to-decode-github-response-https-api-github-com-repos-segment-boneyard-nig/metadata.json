@@ -1,0 +1,13 @@
+{
+  "ecosystem": "unknown",
+  "failureClass": "infrastructure",
+  "fingerprint": "failed to decode GitHub response https://api.github.com/repos/segment-boneyard/nightmare",
+  "fixture": "failed-to-decode-github-response-https-api-github-com-repos-segment-boneyard-nig",
+  "fixtureEligible": false,
+  "observedRuns": 4,
+  "repositories": [
+    "github.com/segment-boneyard/nightmare"
+  ],
+  "schema": "dotrepo/regression-fixture-stub/v0.1",
+  "status": "needs_materialization"
+}

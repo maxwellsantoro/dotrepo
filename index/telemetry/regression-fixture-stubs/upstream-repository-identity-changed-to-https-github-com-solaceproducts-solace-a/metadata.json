@@ -1,0 +1,13 @@
+{
+  "ecosystem": "unknown",
+  "failureClass": "infrastructure",
+  "fingerprint": "upstream repository identity changed to https://github.com/SolaceProducts/solace-agent-mesh; refusing writeback under...",
+  "fixture": "upstream-repository-identity-changed-to-https-github-com-solaceproducts-solace-a",
+  "fixtureEligible": false,
+  "observedRuns": 2,
+  "repositories": [
+    "github.com/SolaceLabs/solace-agent-mesh"
+  ],
+  "schema": "dotrepo/regression-fixture-stub/v0.1",
+  "status": "needs_materialization"
+}
