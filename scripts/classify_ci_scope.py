@@ -127,6 +127,13 @@ def jobs_for_path(path: str) -> set[str]:
     if path.startswith("examples/external-consumer/"):
         return PUBLIC.copy()
     if path.startswith("benchmarks/head-to-head/"):
+        # The dated upstream accuracy workload is consumed by
+        # check_release_gate.py, not only by Python tests; changing it must
+        # run the gate that reads it. Other benchmark data is evidence or
+        # Python tooling input.
+        parts = PurePosixPath(path).parts
+        if len(parts) == 4 and parts[2].startswith("upstream-") and parts[3] == "workload.json":
+            return RELEASE.copy()
         return PYTHON.copy()
     # Remaining docs own executable/protocol contracts; examples can change
     # generated/native fixtures. Do not infer safety from a Markdown suffix.

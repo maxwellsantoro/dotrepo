@@ -57,6 +57,13 @@ return branch/commit plus patch dependencies. Use `codex/` branches and preserve
 user changes. Isolation does not resolve incompatible contract decisions; agree
 on those before implementation. Never copy generated outputs between release lines.
 
+One checkout has one branch: in a shared workspace, only the coordinator runs
+`git checkout`/branch switches, and workers either state their target branch in
+the handoff for the coordinator to apply or work in their own worktree. Two
+agents switching branches in one checkout will silently move each other's
+commits (observed 2026-10-27); treat any unexpected branch change as a stop
+signal and report it before committing.
+
 ## Worker handoff
 
 Return a concise, reproducible handoff:

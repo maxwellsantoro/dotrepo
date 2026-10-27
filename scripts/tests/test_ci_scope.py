@@ -32,6 +32,10 @@ def selected(paths):
         (["benchmarks/head-to-head/bench/own_projects.py"], {"python-gate"}),
         (["benchmarks/head-to-head/results/packet/results.json"], {"python-gate"}),
         (
+            ["benchmarks/head-to-head/upstream-2026-10-27/workload.json"],
+            {"python-gate", "release-gate"},
+        ),
+        (
             ["examples/external-consumer/lookup_before_scrape.py"],
             {"python-gate", "public-surface-gate"},
         ),

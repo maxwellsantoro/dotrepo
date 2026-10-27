@@ -24,6 +24,12 @@ and automated as
 
 ## Current provider integration (October 4, 2026)
 
+> Superseded as an operating plan by the 2026-10-27 deterministic-only
+> decision in [factual crawl automation](factual-crawl-automation.md):
+> scheduled adjudication stays off until a dated canary run under that
+> decision shows a measured quality delta. This procedure remains the
+> canary method when that run is authorized.
+
 The active local sample selects Luna primary, Qwen3.8 Flash second opinion, and
 GLM5.3 Flash tail. Hosted scheduled tiers still require explicit repository
 variables and credentials; sample configuration does not enable them.

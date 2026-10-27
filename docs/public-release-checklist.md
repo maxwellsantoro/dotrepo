@@ -31,7 +31,7 @@ publication and consumer proof requires independent outcomes.
   every binary/MCP release asset must identify the same version. The extension
   owns its independent package version; report it separately.
 - Validate the stable release/backport against its immutable tag and dependency
-  graph. Stable 1.0.2 ships from `codex/stable-1.0`; use
+  graph. Stable 1.0.3 ships from `codex/stable-1.0`; use
   [release compatibility](release-compatibility.md) for its scope and retained
   installation evidence. Keep branch-only work distinct from published artifacts.
 - After publishing a stable tag, advance workspace and standalone alias to the
