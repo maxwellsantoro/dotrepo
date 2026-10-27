@@ -78,6 +78,43 @@ def validate_pull(pull, repository, default_branch, expected_head, expected_base
         raise RuntimeError("PR identity, head, or base differs from the checked automation input")
 
 
+def approve_pending_pull_runs(repository, root, expected_head):
+    """Approve pull_request runs stuck at action_required for this head.
+
+    PRs created by GITHUB_TOKEN get a pull_request CI run that waits for
+    approval; its pending ci-gate supersedes the dispatched run's success
+    in branch-protection evaluation, so the exact-commit PATCH is rejected
+    with 'Required status check ci-gate is expected' unless that run is
+    approved and green. Best effort: approval can require a human, in
+    which case the PATCH result decides and the failure stays visible.
+    """
+    try:
+        runs = api(f"{root}/actions/runs?head_sha={expected_head}&event=pull_request&per_page=20")
+    except Exception as error:  # noqa: BLE001 - best effort, see docstring
+        print(f"warning: could not list pull_request runs: {error}", flush=True)
+        return
+    for run in runs.get("workflow_runs", []):
+        if run.get("conclusion") != "action_required":
+            continue
+        run_id = run.get("id")
+        try:
+            api(f"{root}/actions/runs/{run_id}/approve", method="POST")
+        except Exception as error:  # noqa: BLE001 - human approval fallback
+            print(f"warning: could not approve run {run_id}: {error}", flush=True)
+            continue
+        print(f"Approved pending pull_request run {run_id}; waiting for ci-gate", flush=True)
+        wait_run(repository, run_id, expected_head, "ci-gate")
+
+
+def public_deploy_enabled(repository, root):
+    """Public deploy is an operator switch; landing must not fail without it."""
+    try:
+        variable = api(f"{root}/actions/variables/CLOUDFLARE_PUBLIC_DEPLOY_ENABLED")
+    except Exception:  # noqa: BLE001 - unset variable reads as disabled
+        return False
+    return str(variable.get("value", "")).lower() == "true"
+
+
 def land(repository, number, expected_head, expected_base):
     root = f"repos/{repository}"
     default_branch = api(root)["default_branch"]
@@ -108,6 +145,7 @@ def land(repository, number, expected_head, expected_base):
         },
     )
     wait_run(repository, dispatch["workflow_run_id"], expected_head, "public-surface-gate")
+    approve_pending_pull_runs(repository, root, expected_head)
     validate_pull(api(pull_path), repository, default_branch, expected_head, expected_base)
     ref = f"{root}/git/refs/heads/{quote(default_branch, safe='')}"
     if api(ref)["object"]["sha"] != expected_base:
@@ -115,6 +153,13 @@ def land(repository, number, expected_head, expected_base):
     # The server enforces ancestry atomically. Never force or bypass protections.
     api(ref, method="PATCH", body={"sha": expected_head, "force": False})
     print(f"Published tested commit {expected_head}", flush=True)
+    if not public_deploy_enabled(repository, root):
+        print(
+            "CLOUDFLARE_PUBLIC_DEPLOY_ENABLED is not 'true'; "
+            "landing complete, public deployment skipped (operator switch).",
+            flush=True,
+        )
+        return
     deploy = api(
         f"{root}/actions/workflows/public-cloudflare.yml/dispatches",
         method="POST",

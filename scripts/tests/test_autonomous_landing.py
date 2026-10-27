@@ -57,6 +57,10 @@ def test_only_successful_exact_commit_checks_allow_fast_forward(monkeypatch, fai
             if failure == "renamed-from-code":
                 return [{"filename": "index/tool.py", "previous_filename": "scripts/tool.py"}]
             return [{"filename": "index/repos/github.com/example/demo/record.toml"}]
+        if "/actions/runs?" in path:
+            return {"workflow_runs": []}
+        if "/actions/variables/" in path:
+            return {"value": "true"}
         if path.endswith("/dispatches"):
             return {"workflow_run_id": 10 if "ci.yml" in path else 20}
         if method == "GET" and "/git/refs/" in path:
@@ -84,6 +88,48 @@ def test_only_successful_exact_commit_checks_allow_fast_forward(monkeypatch, fai
         patches = [body for _, method, body in calls if method == "PATCH"]
         assert patches == [{"sha": HEAD, "force": False}]
         assert waits == [(10, HEAD, "public-surface-gate"), (20, HEAD, "deploy")]
+
+
+def test_landing_skips_deploy_when_public_deploy_disabled(monkeypatch):
+    def api(path, *, method="GET", body=None):
+        if path == "repos/example/index":
+            return {"default_branch": "main"}
+        if path.endswith("/pulls/1"):
+            return pull()
+        if "/files?" in path:
+            return [{"filename": "index/repos/github.com/example/demo/record.toml"}]
+        if "/actions/runs?" in path:
+            return {"workflow_runs": []}
+        if "/actions/variables/" in path:
+            return {"value": "false"}
+        if path.endswith("/dispatches"):
+            return {"workflow_run_id": 10}
+        if method == "GET" and "/git/refs/" in path:
+            return {"object": {"sha": BASE}}
+        if method == "PATCH":
+            return {"object": {"sha": body["sha"]}}
+        raise AssertionError(path)
+
+    waits = []
+    monkeypatch.setattr(landing, "api", api)
+    monkeypatch.setattr(landing, "wait_run", lambda *a: waits.append(a))
+    landing.land(REPOSITORY, 1, HEAD, BASE)
+    assert waits == [(REPOSITORY, 10, HEAD, "public-surface-gate")]
+
+
+def test_pending_pull_request_run_is_approved_and_awaited(monkeypatch):
+    calls = []
+
+    def api(path, *, method="GET", body=None):
+        calls.append((path, method))
+        return {"workflow_runs": [{"id": 77, "conclusion": "action_required"}]}
+
+    waits = []
+    monkeypatch.setattr(landing, "api", api)
+    monkeypatch.setattr(landing, "wait_run", lambda *a: waits.append(a))
+    landing.approve_pending_pull_runs(REPOSITORY, "repos/example/index", HEAD)
+    assert ("repos/example/index/actions/runs/77/approve", "POST") in calls
+    assert waits == [(REPOSITORY, 77, HEAD, "ci-gate")]
 
 
 @pytest.mark.parametrize("head,job_conclusion", [(BASE, "success"), (HEAD, "skipped")])
