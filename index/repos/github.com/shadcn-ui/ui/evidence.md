@@ -1,9 +1,10 @@
 # Evidence
 
-- Imported repository name from README.md.
+- Imported repository name and docs entry points from README.md.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
 - Imported repo.build from package.json as `pnpm build`.
 - Imported repo.test from package.json as `pnpm test`.
+- Imported docs.root as `https://ui.shadcn.com/docs`. Explicit documentation link at README.md:9: Visit https://ui.shadcn.com/docs to view the documentation.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

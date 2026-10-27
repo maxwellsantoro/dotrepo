@@ -1,9 +1,7 @@
 # Evidence
 
-- Inferred fallback values for `repo.name` and `repo.description` because the imported files did not provide enough structured metadata.
-- Imported repo.test from package.json as `npm test`.
-- Imported repo.toolchain.min from package.json as `4.0.0` (Node.js).
-- Discovered related relation to github.com/segmentio/nightmare from package.json repository.
+- Imported repository name from README.md.
+- Imported the security reporting channel from SECURITY.md.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
@@ -13,6 +11,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Fresh verification
+## Auto-promotion
 
-Prior verified authority was not inherited: this refresh must qualify using its current field scores.
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

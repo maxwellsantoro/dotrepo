@@ -4,6 +4,7 @@
 - Imported maintainer candidates from CODEOWNERS.
 - Imported SECURITY.md, but no explicit contact channel was parsed, so security_contact = "unknown" is intentional.
 - Imported repo.test from package.json as `yarn test`.
+- Imported docs.root as `https://storybook.js.org/docs?ref=readme`. Explicit documentation link at README.md:81: Documentation can be found on [Storybook's docs site](https://storybook.js.org/docs?ref=readme).
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

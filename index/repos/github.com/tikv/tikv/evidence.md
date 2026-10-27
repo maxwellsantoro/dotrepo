@@ -1,6 +1,6 @@
 # Evidence
 
-- Imported repository name and docs entry points from README.md.
+- Imported repository name from README.md.
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from CODEOWNERS; `owners.team` is `@tikv/tikv-configuration-reviewer` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates.
 - Imported the security reporting channel from SECURITY.md.
 - Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.

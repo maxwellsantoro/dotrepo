@@ -1,6 +1,5 @@
 # Evidence
 
-- Imported repository docs entry points from README.md.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
 - Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.
 - Inferred repo.build from .github/workflows/validate.yml as `pnpm build:back`.

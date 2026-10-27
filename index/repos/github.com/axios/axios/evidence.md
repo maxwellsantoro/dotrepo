@@ -5,6 +5,7 @@
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
 - Imported repo.build from package.json as `npm run build`.
 - Imported repo.test from package.json as `npm test`.
+- Imported docs.root as `https://axios.rest/pages/getting-started/first-steps.html`. Explicit documentation link at README.md:370: <a href="https://axios.rest/pages/getting-started/first-steps.html"><b>Documentation</b></a>
 - Discovered related relation to github.com/axios/axios from package.json repository.
 - Discovered related relation to github.com/tc39/proposal-cancelable-promises from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.

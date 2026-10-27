@@ -1,9 +1,13 @@
 # Evidence
 
 - Imported repository name and docs entry points from README.md.
-- Imported repo.build from apps/screenpipe-app-tauri/package.json as `bun run build`.
-- Imported repo.test from apps/screenpipe-app-tauri/package.json as `bun run test`.
+- Ignored component-scoped commands from `apps/screenpipe-app-tauri/package.json` as repository defaults.
+- Imported repo.build from CONTRIBUTING.md as `cargo build --release --features metal`.
+- Imported repo.test from CONTRIBUTING.md as `cargo test`.
+- Imported docs.root as `https://docs.screenpi.pe`. Explicit documentation link at README.md:135: <a href="https://docs.screenpi.pe">docs</a> ·
 - This is an overlay record, not a maintainer-controlled canonical record.
+
+- Deepened `owners.security_contact` from `README.md` during deterministic escalation.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
@@ -15,10 +19,3 @@
 ## Auto-promotion
 
 All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
-
-## Command semantic correction (2026-10-03)
-
-2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged.
-
-- Withheld `repo.build` previously extracted from `apps/screenpipe-app-tauri/package.json` as `bun run build`. Component command lacks repository-default scope and working directory.
-- Withheld `repo.test` previously extracted from `apps/screenpipe-app-tauri/package.json` as `bun run test`. Component command lacks repository-default scope and working directory.

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Significant-Gravitas/AutoGPT"
-generated_at = "2026-10-04T07:50:52.275051207Z"
+generated_at = "2026-10-27T17:50:55.289195Z"
 
 [record.trust]
 confidence = "high"
@@ -23,17 +23,18 @@ visibility = "public"
 languages = [
     "Python",
     "TypeScript",
-    "Shell",
     "JavaScript",
+    "Shell",
     "PLpgSQL",
     "Jinja",
+    "PowerShell",
     "Dockerfile",
     "CSS",
     "Batchfile",
     "C",
     "Makefile",
-    "Elixir",
     "HCL",
+    "HTML",
 ]
 topics = [
     "ai",
@@ -61,11 +62,8 @@ maintainers = [
 team = "@Significant-Gravitas/maintainers"
 security_contact = "security@agpt.co"
 
-[docs]
-root = "https://docs.agpt.co"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-04T07:50:52.275051207Z"
+checkedAt = "2026-10-27T17:50:55.289195Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -73,16 +71,15 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-04T07:50:52.275051207Z"
+checkedAt = "2026-10-27T17:50:55.289195Z"
 confidence = "high"
-method = "extracted"
-reason = 'Explicit documentation link at README.md:21: <a href="https://docs.agpt.co">Docs</a>'
-source = "README.md"
-state = "present"
-valueJson = '"https://docs.agpt.co"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-04T07:50:52.275051207Z"
+checkedAt = "2026-10-27T17:50:55.289195Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -91,7 +88,7 @@ state = "present"
 valueJson = '"security@agpt.co"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-04T07:50:52.275051207Z"
+checkedAt = "2026-10-27T17:50:55.289195Z"
 confidence = "high"
 method = "unspecified"
 reason = "clear CODEOWNERS team"
@@ -99,7 +96,7 @@ state = "present"
 valueJson = '"@Significant-Gravitas/maintainers"'
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-04T07:50:52.275051207Z"
+checkedAt = "2026-10-27T17:50:55.289195Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -107,7 +104,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-04T07:50:52.275051207Z"
+checkedAt = "2026-10-27T17:50:55.289195Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -116,7 +113,7 @@ state = "present"
 valueJson = '"AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-04T07:50:52.275051207Z"
+checkedAt = "2026-10-27T17:50:55.289195Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -124,7 +121,7 @@ state = "present"
 valueJson = '"https://agpt.co"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-04T07:50:52.275051207Z"
+checkedAt = "2026-10-27T17:50:55.289195Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -133,7 +130,7 @@ state = "present"
 valueJson = '"AutoGPT"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-04T07:50:52.275051207Z"
+checkedAt = "2026-10-27T17:50:55.289195Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -145,6 +142,6 @@ archived = false
 clone_url = "https://github.com/Significant-Gravitas/AutoGPT.git"
 default_branch = "master"
 fork = false
-head_sha = "f8b0e0a87c38b67f6e6cb21f3ee03ff5584c3588"
+head_sha = "e2316d032883070a2e9aded36d2eb38b8e3a03df"
 html_url = "https://github.com/Significant-Gravitas/AutoGPT"
-stars = 187644
+stars = 187788

@@ -4,6 +4,8 @@
 - Imported maintainer candidates from CODEOWNERS.
 - Imported repo.build from package.json as `npm run build`.
 - Imported repo.test from package.json as `npm test`.
+- Imported docs.root as `https://docs.stoplight.io/docs/prism/674b27b261c3c-prism-overview`. Explicit documentation link at README.md:75: - [Documentation](https://docs.stoplight.io/docs/prism/674b27b261c3c-prism-overview)
+- Imported docs.getting_started as `./docs/getting-started/01-installation.md`. Explicit documentation link at README.md:51: For more installation options, see our [installation documentation](./docs/getting-started/01-installation.md).
 - Discovered related relation to github.com/stoplightio/prism from package.json repository.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

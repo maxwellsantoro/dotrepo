@@ -2,21 +2,18 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/Comfy-Org/ComfyUI"
-generated_at = "2026-09-16T16:35:36.817025Z"
+generated_at = "2026-10-27T17:30:19.742436Z"
 
 [record.trust]
-confidence = "high"
-provenance = [
-    "imported",
-    "verified",
-]
-notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "ComfyUI"
-description = "The most powerful and modular diffusion model GUI, api and backend with a graph/nodes interface."
+description = "The most powerful and modular diffusion model GUI, api and backend with a graph/nodes interface. The fastest local inference engine in the world."
 homepage = "https://www.comfy.org/"
 license = "GPL-3.0"
 visibility = "public"
@@ -42,17 +39,12 @@ ecosystem = "Python"
 [owners]
 maintainers = [
     "@comfyanonymous",
-    "@kosinkadink",
     "@guill",
     "@alexisrolland",
     "@rattus128",
     "@kijai",
 ]
 security_contact = "https://github.com/comfyanonymous/ComfyUI/security/advisories/new"
-
-[docs]
-root = "https://www.comfy.org/"
-getting_started = "https://docs.comfy.org/comfy-cli/getting-started"
 
 [relations]
 references = []
@@ -70,23 +62,24 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:35:36.817025Z"
-confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
-state = "present"
-valueJson = '"https://docs.comfy.org/comfy-cli/getting-started"'
+checkedAt = "2026-10-27T17:30:19.742436Z"
+confidence = "low"
+method = "unresolved"
+reason = "conflicting documentation declarations; no target selected"
+source = "README.md"
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:35:36.817025Z"
+checkedAt = "2026-10-27T17:30:19.742436Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://www.comfy.org/"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:35:36.817025Z"
+checkedAt = "2026-10-27T17:30:19.742436Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -95,7 +88,7 @@ state = "present"
 valueJson = '"https://github.com/comfyanonymous/ComfyUI/security/advisories/new"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:35:36.817025Z"
+checkedAt = "2026-10-27T17:30:19.742436Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -103,7 +96,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:35:36.817025Z"
+checkedAt = "2026-10-27T17:30:19.742436Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -111,16 +104,16 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:35:36.817025Z"
+checkedAt = "2026-10-27T17:30:19.742436Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
 source = "GitHub API"
 state = "present"
-valueJson = '"The most powerful and modular diffusion model GUI, api and backend with a graph/nodes interface."'
+valueJson = '"The most powerful and modular diffusion model GUI, api and backend with a graph/nodes interface. The fastest local inference engine in the world."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:35:36.817025Z"
+checkedAt = "2026-10-27T17:30:19.742436Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -128,16 +121,16 @@ state = "present"
 valueJson = '"https://www.comfy.org/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:35:36.817025Z"
+checkedAt = "2026-10-27T17:30:19.742436Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"ComfyUI"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:35:36.817025Z"
+checkedAt = "2026-10-27T17:30:19.742436Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -149,6 +142,6 @@ archived = false
 clone_url = "https://github.com/Comfy-Org/ComfyUI.git"
 default_branch = "master"
 fork = false
-head_sha = "7a0b5eede3f9721c8faab290689893f36edc6d66"
+head_sha = "426f5eea52a7ece1dd599fff4cb6cd1f352ddd24"
 html_url = "https://github.com/Comfy-Org/ComfyUI"
-stars = 133507
+stars = 143514

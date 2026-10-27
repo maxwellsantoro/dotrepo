@@ -1,10 +1,10 @@
 # Evidence
 
-- Imported repository name and docs entry points from README.md.
+- Imported repository name from README.md.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
 - Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.
-- Imported repo.build from .github/CONTRIBUTING.md as `cargo build -vv`.
-- Imported repo.test from .github/CONTRIBUTING.md as `cargo test -vv`.
+- Imported repo.build from .github/CONTRIBUTING.md as `cargo build --features hmr`.
+- Imported repo.test from .github/CONTRIBUTING.md as `cargo test --features hmr integration::node_unit_tests::os_test`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

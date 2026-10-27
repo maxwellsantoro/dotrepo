@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/google/leveldb"
-generated_at = "2026-09-16T16:23:55.799845Z"
+generated_at = "2026-10-27T18:02:28.096738Z"
 
 [record.trust]
 confidence = "high"
@@ -27,24 +27,28 @@ languages = [
 ]
 topics = []
 
+[docs]
+root = "https://github.com/google/leveldb/blob/main/doc/index.md"
+
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:23:55.799845Z"
+checkedAt = "2026-10-27T18:02:28.096738Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:23:55.799845Z"
+checkedAt = "2026-10-27T18:02:28.096738Z"
 confidence = "high"
-method = "not_found_in_inspected_sources"
-reason = "no docs detected"
-state = "not_found"
-valueJson = "null"
+method = "extracted"
+reason = "Explicit documentation link at README.md:26: [LevelDB library documentation](https://github.com/google/leveldb/blob/main/doc/index.md) is online and bundled with the source code."
+source = "README.md"
+state = "present"
+valueJson = '"https://github.com/google/leveldb/blob/main/doc/index.md"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:23:55.799845Z"
+checkedAt = "2026-10-27T18:02:28.096738Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -52,7 +56,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:23:55.799845Z"
+checkedAt = "2026-10-27T18:02:28.096738Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -60,7 +64,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:23:55.799845Z"
+checkedAt = "2026-10-27T18:02:28.096738Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -68,7 +72,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:23:55.799845Z"
+checkedAt = "2026-10-27T18:02:28.096738Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -77,7 +81,7 @@ state = "present"
 valueJson = '"LevelDB is a fast key-value storage library written at Google that provides an ordered mapping from string keys to string values."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:23:55.799845Z"
+checkedAt = "2026-10-27T18:02:28.096738Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -85,16 +89,16 @@ state = "present"
 valueJson = '"https://github.com/google/leveldb"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:23:55.799845Z"
+checkedAt = "2026-10-27T18:02:28.096738Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"leveldb"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:23:55.799845Z"
+checkedAt = "2026-10-27T18:02:28.096738Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -106,6 +110,6 @@ archived = false
 clone_url = "https://github.com/google/leveldb.git"
 default_branch = "main"
 fork = false
-head_sha = "7ee830d02b623e8ffe0b95d59a74db1e58da04c5"
+head_sha = "bb74ef739973a70ca9f0d90788a1da89b788c0ad"
 html_url = "https://github.com/google/leveldb"
-stars = 39420
+stars = 39513

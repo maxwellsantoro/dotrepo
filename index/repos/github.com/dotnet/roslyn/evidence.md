@@ -1,10 +1,10 @@
 # Evidence
 
-- Imported repository name from README.md.
+- Imported repository name and docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates.
 - Imported the security reporting channel from SECURITY.md.
-- Inferred repo.build from eng/eng.sln as `dotnet build`.
-- Inferred repo.test from eng/eng.sln as `dotnet test`.
+- Ignored component-scoped commands from `eng/eng.sln` as repository defaults.
+- Imported docs.root as `https://docs.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/compiler-api-model`. Explicit documentation link at README.md:41: Visit [Roslyn Architecture Overview](https://docs.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/compiler-api-model) to get started with Roslyn’s API’s.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.name` to `roslyn` from `GitHub API` after deterministic escalation.
@@ -16,13 +16,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Fresh verification
+## Auto-promotion
 
-Prior verified authority was not inherited: this refresh must qualify using its current field scores.
-
-## Command semantic correction (2026-10-03)
-
-2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged.
-
-- Withheld `repo.build` previously extracted from `eng/eng.sln` as `dotnet build`. Component command lacks repository-default scope and working directory.
-- Withheld `repo.test` previously extracted from `eng/eng.sln` as `dotnet test`. Component command lacks repository-default scope and working directory.
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

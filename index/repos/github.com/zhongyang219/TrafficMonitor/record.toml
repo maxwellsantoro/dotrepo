@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/zhongyang219/TrafficMonitor"
-generated_at = "2026-09-16T16:31:19.266006Z"
+generated_at = "2026-10-27T18:21:58.930168Z"
 
 [record.trust]
 confidence = "high"
@@ -28,23 +28,23 @@ languages = [
 topics = []
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:31:19.266006Z"
+checkedAt = "2026-10-27T18:21:58.930168Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:31:19.266006Z"
+checkedAt = "2026-10-27T18:21:58.930168Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:31:19.266006Z"
+checkedAt = "2026-10-27T18:21:58.930168Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -52,7 +52,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:31:19.266006Z"
+checkedAt = "2026-10-27T18:21:58.930168Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -60,7 +60,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:31:19.266006Z"
+checkedAt = "2026-10-27T18:21:58.930168Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -68,7 +68,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:31:19.266006Z"
+checkedAt = "2026-10-27T18:21:58.930168Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -77,7 +77,7 @@ state = "present"
 valueJson = '"这是一个用于显示当前网速、CPU及内存利用率的桌面悬浮窗软件，并支持任务栏显示，支持更换皮肤。"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:31:19.266006Z"
+checkedAt = "2026-10-27T18:21:58.930168Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -85,16 +85,16 @@ state = "present"
 valueJson = '"https://github.com/zhongyang219/TrafficMonitor"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:31:19.266006Z"
+checkedAt = "2026-10-27T18:21:58.930168Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"TrafficMonitor"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:31:19.266006Z"
+checkedAt = "2026-10-27T18:21:58.930168Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -106,6 +106,6 @@ archived = false
 clone_url = "https://github.com/zhongyang219/TrafficMonitor.git"
 default_branch = "master"
 fork = false
-head_sha = "188b8773b959733bfc0e4f506c762d9a255883d4"
+head_sha = "930f17533d6098989ebad62f210aa97d75ef174b"
 html_url = "https://github.com/zhongyang219/TrafficMonitor"
-stars = 46191
+stars = 46691

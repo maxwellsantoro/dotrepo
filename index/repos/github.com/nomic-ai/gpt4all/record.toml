@@ -2,17 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/nomic-ai/gpt4all"
-generated_at = "2026-09-16T16:27:20.243643Z"
+generated_at = "2026-10-27T18:12:41.617689Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
-    "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md` and `gpt4all-chat/pyproject.toml`. Inferred `repo.test` from `gpt4all-chat/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. 2026-10-03 semantic audit withheld repo.test pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged."
+notes = "Bootstrapped from `README.md`. Ignored component-scoped commands from `gpt4all-chat/pyproject.toml` as repository defaults. Ignored component-scoped commands from `gpt4all-bindings/python/setup.py` as repository defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "GPT4All"
@@ -40,28 +40,24 @@ topics = [
     "ai-chat",
 ]
 
-[docs]
-root = "https://docs.gpt4all.io"
-getting_started = "https://docs.gpt4all.io/gpt4all_desktop/quickstart.html#quickstart"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:27:20.243643Z"
+checkedAt = "2026-10-27T18:12:41.617689Z"
 confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
-state = "present"
-valueJson = '"https://docs.gpt4all.io/gpt4all_desktop/quickstart.html#quickstart"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:27:20.243643Z"
+checkedAt = "2026-10-27T18:12:41.617689Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://docs.gpt4all.io"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:27:20.243643Z"
+checkedAt = "2026-10-27T18:12:41.617689Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -69,7 +65,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:27:20.243643Z"
+checkedAt = "2026-10-27T18:12:41.617689Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -77,7 +73,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:27:20.243643Z"
+checkedAt = "2026-10-27T18:12:41.617689Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -85,7 +81,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:27:20.243643Z"
+checkedAt = "2026-10-27T18:12:41.617689Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -94,7 +90,7 @@ state = "present"
 valueJson = '"GPT4All: Run Local LLMs on Any Device. Open-source and available for commercial use."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:27:20.243643Z"
+checkedAt = "2026-10-27T18:12:41.617689Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -102,21 +98,20 @@ state = "present"
 valueJson = '"https://nomic.ai/gpt4all"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:27:20.243643Z"
+checkedAt = "2026-10-27T18:12:41.617689Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"GPT4All"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:27:20.243643Z"
-confidence = "low"
-method = "inferred"
-reason = "Component command lacks repository-default scope and working directory."
-source = "gpt4all-chat/pyproject.toml"
-state = "unresolved"
+checkedAt = "2026-10-27T18:12:41.617689Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no test command sources found"
+state = "not_found"
 valueJson = "null"
 
 [x.github]
@@ -126,4 +121,4 @@ default_branch = "main"
 fork = false
 head_sha = "b666d16db5aeab8b91aaf7963adcee9c643734d7"
 html_url = "https://github.com/nomic-ai/gpt4all"
-stars = 77397
+stars = 77356

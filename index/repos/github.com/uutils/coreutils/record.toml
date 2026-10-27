@@ -2,17 +2,18 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/uutils/coreutils"
-generated_at = "2026-09-19T06:06:10.625406857Z"
+generated_at = "2026-10-27T17:40:39.49072Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
     "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, `GNUmakefile`, and `Cargo.toml`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `GNUmakefile`. Imported `repo.test` from `GNUmakefile`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. 2026-10-04 pinned command-source audit supersedes affected extraction assessments and prior auto-promotion. Corrected commands are unassessed pending full-record verification; unrelated inspection timestamps are unchanged. See index/telemetry/command-semantics-20261004/report.json."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, `GNUmakefile`, and `Cargo.toml`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `README.md`. Imported `repo.test` from `GNUmakefile`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "uutils coreutils"
@@ -31,7 +32,7 @@ languages = [
     "Nix",
     "Dockerfile",
 ]
-build = "make all"
+build = "cargo build --release"
 test = "make test"
 topics = [
     "rust",
@@ -50,16 +51,13 @@ ecosystem = "Rust"
 maintainers = []
 security_contact = "Sylvestre@debian.org"
 
-[docs]
-root = "https://uutils.org/coreutils/docs/"
-
 [relations]
 references = []
 
 [[relations.links]]
 kind = "related"
 target = "github.com/uutils/coreutils"
-notes = "Declared repository in Cargo.toml. 2026-10-04 pinned command-source audit supersedes affected extraction assessments and prior auto-promotion. Corrected commands are unassessed pending full-record verification; unrelated inspection timestamps are unchanged. See index/telemetry/command-semantics-20261004/report.json."
+notes = "Declared repository in Cargo.toml."
 
 [relations.links.trust]
 confidence = "low"
@@ -69,23 +67,23 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-19T06:06:10.625406857Z"
+checkedAt = "2026-10-27T17:40:39.49072Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-19T06:06:10.625406857Z"
+checkedAt = "2026-10-27T17:40:39.49072Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://uutils.org/coreutils/docs/"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-19T06:06:10.625406857Z"
+checkedAt = "2026-10-27T17:40:39.49072Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -94,16 +92,24 @@ state = "present"
 valueJson = '"Sylvestre@debian.org"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-19T06:06:10.625406857Z"
+checkedAt = "2026-10-27T17:40:39.49072Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
 state = "not_found"
 valueJson = "null"
 
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-10-27T17:40:39.49072Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "README.md"
+state = "present"
+valueJson = '"cargo build --release"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-19T06:06:10.625406857Z"
+checkedAt = "2026-10-27T17:40:39.49072Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -112,7 +118,7 @@ state = "present"
 valueJson = '"Cross-platform Rust rewrite of the GNU coreutils"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-19T06:06:10.625406857Z"
+checkedAt = "2026-10-27T17:40:39.49072Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -120,16 +126,16 @@ state = "present"
 valueJson = '"https://uutils.org"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-19T06:06:10.625406857Z"
+checkedAt = "2026-10-27T17:40:39.49072Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"uutils coreutils"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-19T06:06:10.625406857Z"
+checkedAt = "2026-10-27T17:40:39.49072Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -142,6 +148,6 @@ archived = false
 clone_url = "https://github.com/uutils/coreutils.git"
 default_branch = "main"
 fork = false
-head_sha = "d3673cea67cd99c534236090ca19828754b39584"
+head_sha = "e2caa72e30322f5ee8d927824b0f9eddbee37e5c"
 html_url = "https://github.com/uutils/coreutils"
-stars = 24132
+stars = 24298

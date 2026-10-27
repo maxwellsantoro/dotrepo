@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/facebookresearch/pytorch3d"
-generated_at = "2026-09-16T16:34:48.449858Z"
+generated_at = "2026-10-27T17:27:51.193602Z"
 
 [record.trust]
 confidence = "high"
@@ -12,10 +12,9 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "2026-10-06 risk-weighted source audit: only declared build/test/docs fields and contexts reinspected at retained revision; record age/status and unrelated facts unchanged. Fresh field assessments do not imply a full-record crawl. Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-test = "python -m unittest discover -v -s tests -t ."
 name = "pytorch3d"
 description = "PyTorch3D is FAIR's library of reusable components for deep learning with 3D data"
 homepage = "https://pytorch3d.org/"
@@ -33,27 +32,28 @@ languages = [
 ]
 topics = []
 
-[repo.test_context]
-command = "python -m unittest discover -v -s tests -t ."
-working_directory = "."
-scope = "repository"
-prerequisites = ["Build/install PyTorch3D from source following INSTALL.md and satisfy its Core library and Tests/Linting and Demos requirements before running the suite."]
-source = ".github/CONTRIBUTING.md"
-
 [docs]
 root = "https://pytorch3d.readthedocs.org/"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:34:48.449858Z"
+checkedAt = "2026-10-27T17:27:51.193602Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-10-27T17:27:51.193602Z"
+confidence = "high"
+method = "extracted"
+reason = "Explicit documentation link at README.md:71: Learn more about the API by reading the PyTorch3D [documentation](https://pytorch3d.readthedocs.org/)."
+source = "README.md"
+state = "present"
+valueJson = '"https://pytorch3d.readthedocs.org/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:34:48.449858Z"
+checkedAt = "2026-10-27T17:27:51.193602Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -61,16 +61,23 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:34:48.449858Z"
+checkedAt = "2026-10-27T17:27:51.193602Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
 state = "not_found"
 valueJson = "null"
 
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-10-27T17:27:51.193602Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no build command sources found"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:34:48.449858Z"
+checkedAt = "2026-10-27T17:27:51.193602Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -79,7 +86,7 @@ state = "present"
 valueJson = """"PyTorch3D is FAIR's library of reusable components for deep learning with 3D data""""
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:34:48.449858Z"
+checkedAt = "2026-10-27T17:27:51.193602Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -87,60 +94,27 @@ state = "present"
 valueJson = '"https://pytorch3d.org/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:34:48.449858Z"
+checkedAt = "2026-10-27T17:27:51.193602Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"pytorch3d"'
 
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-10-27T17:27:51.193602Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no test command sources found"
+state = "not_found"
+valueJson = "null"
 
 [x.github]
 archived = false
 clone_url = "https://github.com/facebookresearch/pytorch3d.git"
 default_branch = "main"
 fork = false
-head_sha = "978cd99221b9e0a6a568f1d427854d73363265cf"
+head_sha = "204fe5831b3a5bbe079f09d72afb4515178f8892"
 html_url = "https://github.com/facebookresearch/pytorch3d"
-stars = 9968
-
-
-
-
-
-[x.dotrepo.field_evidence."repo.build"]
-state = "not_found"
-method = "not_found_in_inspected_sources"
-confidence = "high"
-source = "INSTALL.md"
-checkedAt = "2026-10-06T04:07:21.224082Z"
-valueJson = "null"
-reason = "INSTALL.md documents multiple installation/build environments; no selected complete scalar build procedure is established by this inspection. Pinned source inspection at 978cd99221b9e0a6a568f1d427854d73363265cf; this is source preservation, not execution or current-HEAD verification."
-
-[x.dotrepo.field_evidence."repo.test"]
-state = "present"
-method = "extracted"
-confidence = "high"
-source = ".github/CONTRIBUTING.md"
-checkedAt = "2026-10-06T04:07:21.224082Z"
-valueJson = "\"python -m unittest discover -v -s tests -t .\""
-reason = "Linked contribution guide explicitly requires this test suite command from the project root, following INSTALL.md setup. Prior root-only discovery missed the guide. Pinned source inspection at 978cd99221b9e0a6a568f1d427854d73363265cf; this is source preservation, not execution or current-HEAD verification."
-
-[x.dotrepo.field_evidence."repo.test_context"]
-state = "present"
-method = "extracted"
-confidence = "high"
-source = ".github/CONTRIBUTING.md"
-checkedAt = "2026-10-06T04:07:21.224082Z"
-valueJson = "{\"command\": \"python -m unittest discover -v -s tests -t .\", \"prerequisites\": [\"Build/install PyTorch3D from source following INSTALL.md and satisfy its Core library and Tests/Linting and Demos requirements before running the suite.\"], \"scope\": \"repository\", \"source\": \".github/CONTRIBUTING.md\", \"working_directory\": \".\"}"
-reason = "Linked contribution guide explicitly requires this test suite command from the project root, following INSTALL.md setup. Prior root-only discovery missed the guide. Pinned source inspection at 978cd99221b9e0a6a568f1d427854d73363265cf; this is source preservation, not execution or current-HEAD verification."
-
-[x.dotrepo.field_evidence."docs.root"]
-state = "present"
-method = "extracted"
-confidence = "high"
-source = "README.md"
-checkedAt = "2026-10-06T04:07:21.224082Z"
-valueJson = "\"https://pytorch3d.readthedocs.org/\""
-reason = "README explicitly links PyTorch3D documentation at this URL. Pinned source inspection at 978cd99221b9e0a6a568f1d427854d73363265cf; this is source preservation, not execution or current-HEAD verification."
+stars = 9991

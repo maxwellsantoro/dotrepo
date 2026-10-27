@@ -2,13 +2,12 @@
 
 - Imported repository name and docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS.
-- Inferred repo.build from libs/core/pyproject.toml as `python -m build`.
-- Left `repo.test` unset because `.github/workflows/_compile_integration_test.yml`, `.github/workflows/_test.yml`, and `.github/workflows/_test_pydantic.yml` suggested conflicting test commands.
+- Ignored component-scoped commands from `libs/core/pyproject.toml` as repository defaults.
 - Imported repo.toolchain.min from libs/core/pyproject.toml as `3.10.0` (Python).
+- Imported docs.root as `https://docs.langchain.com/oss/python/langchain/overview`. Explicit documentation link at README.md:74: - [Documentation](https://docs.langchain.com/oss/python/langchain/overview) — conceptual overviews and guides
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.name` to `langchain` from `GitHub API` after deterministic escalation.
-- Set `repo.test` to `python -m pytest` from `libs/core/pyproject.toml` after deterministic escalation.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
@@ -17,13 +16,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Fresh verification
+## Auto-promotion
 
-Prior verified authority was not inherited: this refresh must qualify using its current field scores.
-
-## Command semantic correction (2026-10-03)
-
-2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged.
-
-- Withheld `repo.build` previously extracted from `libs/core/pyproject.toml` as `python -m build`. Component command lacks repository-default scope and working directory.
-- Withheld `repo.test` previously extracted from `libs/core/pyproject.toml` as `python -m pytest`. Component command lacks repository-default scope and working directory.
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

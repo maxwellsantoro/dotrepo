@@ -1,7 +1,7 @@
 # Evidence
 
-- Imported repository name and docs entry points from README.md.
-- Inferred repo.build from .github/workflows/build-pull-request.yml as `make -C build demo_diversity_result_handler`.
+- Imported repository name from README.md.
+- Inferred repo.build from pyproject.toml as `python -m build`.
 - Inferred repo.test from pyproject.toml as `python -m pytest`.
 - Imported repo.toolchain.min from pyproject.toml as `3.10` (Python).
 - This is an overlay record, not a maintainer-controlled canonical record.
@@ -11,7 +11,3 @@
 - Augmented repo.languages from GitHub repository metadata.
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
-
-## Fresh verification
-
-Prior verified authority was not inherited: this refresh must qualify using its current field scores.

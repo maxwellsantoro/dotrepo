@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/emqx/MQTTX"
-generated_at = "2026-09-16T16:33:47.951912Z"
+generated_at = "2026-10-27T17:23:45.208133Z"
 
 [record.trust]
 confidence = "medium"
@@ -12,10 +12,10 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `package.json`, and `.github/workflows/units_test_cli.yaml`. Imported `repo.build` from `package.json`. Inferred `repo.test` from `.github/workflows/units_test_cli.yaml`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
+notes = "Bootstrapped from `README.md`, `package.json`, and `.github/workflows/units_test_desktop.yaml`. Imported `repo.build` from `package.json`. Inferred `repo.test` from `.github/workflows/units_test_desktop.yaml`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
-name = "MQTTX"
+name = "MQTTX Desktop"
 description = "A Powerful and All-in-One MQTT 5.0 client toolbox for Desktop, CLI and WebSocket."
 homepage = "https://mqttx.app"
 license = "Apache-2.0"
@@ -30,7 +30,7 @@ languages = [
     "Dockerfile",
 ]
 build = "npm run build"
-test = "yarn test:coverage"
+test = "yarn test:unit"
 topics = [
     "mqtt-tool",
     "mqtt",
@@ -58,10 +58,6 @@ topics = [
 min = "18"
 ecosystem = "Node.js"
 
-[docs]
-root = "https://mqttx.app/docs"
-getting_started = "https://www.emqx.com/en/blog/the-easiest-guide-to-getting-started-with-mqtt"
-
 [relations]
 references = []
 
@@ -78,23 +74,23 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:33:47.951912Z"
+checkedAt = "2026-10-27T17:23:45.208133Z"
 confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
-state = "present"
-valueJson = '"https://www.emqx.com/en/blog/the-easiest-guide-to-getting-started-with-mqtt"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:33:47.951912Z"
+checkedAt = "2026-10-27T17:23:45.208133Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://mqttx.app/docs"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:33:47.951912Z"
+checkedAt = "2026-10-27T17:23:45.208133Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -102,7 +98,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:33:47.951912Z"
+checkedAt = "2026-10-27T17:23:45.208133Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -110,7 +106,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:33:47.951912Z"
+checkedAt = "2026-10-27T17:23:45.208133Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -119,7 +115,7 @@ state = "present"
 valueJson = '"npm run build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:33:47.951912Z"
+checkedAt = "2026-10-27T17:23:45.208133Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -128,7 +124,7 @@ state = "present"
 valueJson = '"A Powerful and All-in-One MQTT 5.0 client toolbox for Desktop, CLI and WebSocket."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:33:47.951912Z"
+checkedAt = "2026-10-27T17:23:45.208133Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -136,28 +132,28 @@ state = "present"
 valueJson = '"https://mqttx.app"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:33:47.951912Z"
+checkedAt = "2026-10-27T17:23:45.208133Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
-valueJson = '"MQTTX"'
+valueJson = '"MQTTX Desktop"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:33:47.951912Z"
+checkedAt = "2026-10-27T17:23:45.208133Z"
 confidence = "medium"
 method = "inferred"
 reason = "from workflow fallback"
-source = ".github/workflows/units_test_cli.yaml"
+source = ".github/workflows/units_test_desktop.yaml"
 state = "present"
-valueJson = '"yarn test:coverage"'
+valueJson = '"yarn test:unit"'
 
 [x.github]
 archived = false
 clone_url = "https://github.com/emqx/MQTTX.git"
 default_branch = "main"
 fork = false
-head_sha = "adac756302a9b75be052d12329a82a64d0a04749"
+head_sha = "0a325df08bd55032a0fbd7da32e346d673262ae2"
 html_url = "https://github.com/emqx/MQTTX"
-stars = 5059
+stars = 5086

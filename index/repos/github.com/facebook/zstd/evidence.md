@@ -3,7 +3,7 @@
 - Imported repository name from README.md.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
 - Imported repo.build from Makefile as `make all`.
-- Imported repo.test from Makefile as `make test`.
+- Imported repo.test from CONTRIBUTING.md as `make check`.
 - Discovered related relation to github.com/Cyan4973/FiniteStateEntropy from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 

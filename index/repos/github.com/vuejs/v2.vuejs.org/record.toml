@@ -2,17 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/vuejs/v2.vuejs.org"
-generated_at = "2026-09-21T04:36:55.205964Z"
+generated_at = "2026-10-27T17:45:01.666042Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
-    "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved. Documentation correction withheld an unresolved docs field; prior verified authority is no longer asserted."
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "v2.vuejs.org"
@@ -51,25 +51,23 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:30:46.909005Z"
+checkedAt = "2026-10-27T17:45:01.666042Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-21T04:36:55.205964Z"
-confidence = "low"
-method = "rejected"
-reason = "Indonesian translation repository link is not the main documentation entry point; inspected README.md:121 at commit e468cc04e4da67ea758682609fc85e721916e7cf"
-source = "README.md"
-state = "unresolved"
+checkedAt = "2026-10-27T17:45:01.666042Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
 valueJson = "null"
-rejectedValueJson = "\"https://github.com/vuejs-id/docs\""
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:30:46.909005Z"
+checkedAt = "2026-10-27T17:45:01.666042Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -77,7 +75,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:30:46.909005Z"
+checkedAt = "2026-10-27T17:45:01.666042Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -85,7 +83,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:30:46.909005Z"
+checkedAt = "2026-10-27T17:45:01.666042Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -94,7 +92,7 @@ state = "present"
 valueJson = '"npm run build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:30:46.909005Z"
+checkedAt = "2026-10-27T17:45:01.666042Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -103,7 +101,7 @@ state = "present"
 valueJson = '"📄 Documentation for Vue 2"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:30:46.909005Z"
+checkedAt = "2026-10-27T17:45:01.666042Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -111,16 +109,16 @@ state = "present"
 valueJson = '"https://v2.vuejs.org"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:30:46.909005Z"
+checkedAt = "2026-10-27T17:45:01.666042Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"v2.vuejs.org"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:30:46.909005Z"
+checkedAt = "2026-10-27T17:45:01.666042Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -134,4 +132,4 @@ default_branch = "master"
 fork = false
 head_sha = "e468cc04e4da67ea758682609fc85e721916e7cf"
 html_url = "https://github.com/vuejs/v2.vuejs.org"
-stars = 4974
+stars = 4975

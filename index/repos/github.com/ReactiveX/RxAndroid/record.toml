@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/ReactiveX/RxAndroid"
-generated_at = "2026-09-16T16:32:06.55913Z"
+generated_at = "2026-10-27T17:19:12.008951Z"
 
 [record.trust]
 confidence = "medium"
@@ -29,23 +29,24 @@ topics = []
 getting_started = "https://github.com/ReactiveX/RxJava/wiki/Getting-Started"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:32:06.55913Z"
+checkedAt = "2026-10-27T17:19:12.008951Z"
 confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:68: Further details on building can be found on the RxJava [Getting Started][start] page of the wiki."
+source = "README.md"
 state = "present"
 valueJson = '"https://github.com/ReactiveX/RxJava/wiki/Getting-Started"'
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:32:06.55913Z"
+checkedAt = "2026-10-27T17:19:12.008951Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs site detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:32:06.55913Z"
+checkedAt = "2026-10-27T17:19:12.008951Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -53,7 +54,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:32:06.55913Z"
+checkedAt = "2026-10-27T17:19:12.008951Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -61,7 +62,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:32:06.55913Z"
+checkedAt = "2026-10-27T17:19:12.008951Z"
 confidence = "medium"
 method = "inferred"
 reason = "from workflow fallback"
@@ -70,7 +71,7 @@ state = "present"
 valueJson = '"./gradlew build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:32:06.55913Z"
+checkedAt = "2026-10-27T17:19:12.008951Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -79,7 +80,7 @@ state = "present"
 valueJson = '"RxJava bindings for Android"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:32:06.55913Z"
+checkedAt = "2026-10-27T17:19:12.008951Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -87,16 +88,16 @@ state = "present"
 valueJson = '"https://github.com/ReactiveX/RxAndroid"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:32:06.55913Z"
+checkedAt = "2026-10-27T17:19:12.008951Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"RxAndroid"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:32:06.55913Z"
+checkedAt = "2026-10-27T17:19:12.008951Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -109,6 +110,6 @@ archived = false
 clone_url = "https://github.com/ReactiveX/RxAndroid.git"
 default_branch = "3.x"
 fork = false
-head_sha = "20139bfd6f3db1d3e2642738ff953d8fb13637f2"
+head_sha = "2ce80fd37b8c3d2bfcdf97023c4e99710638fec1"
 html_url = "https://github.com/ReactiveX/RxAndroid"
-stars = 19924
+stars = 19900

@@ -4,7 +4,8 @@
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@hashicorp/terraform-core` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates.
 - Inferred repo.build from go.mod as `go build ./...`.
 - Imported repo.test from .github/CONTRIBUTING.md as `go test ./...`.
-- Imported repo.toolchain.min from go.mod as `1.26.8` (Go).
+- Imported repo.toolchain.min from go.mod as `1.26.10` (Go).
+- Imported docs.root as `https://developer.hashicorp.com/terraform/docs`. Explicit documentation link at README.md:30: - [Documentation](https://developer.hashicorp.com/terraform/docs)
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
@@ -13,7 +14,3 @@
 - Augmented repo.topics from GitHub repository metadata.
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
-
-## Fresh verification
-
-Prior verified authority was not inherited: this refresh must qualify using its current field scores.

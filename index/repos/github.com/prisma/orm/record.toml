@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/prisma/orm"
-generated_at = "2026-09-16T20:50:14.421496Z"
+generated_at = "2026-10-27T18:28:19.876484Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and
 
 [repo]
 name = "orm"
-description = "Next-generation ORM for Node.js & TypeScript | PostgreSQL, MySQL, MariaDB, SQL Server, SQLite, MongoDB and CockroachDB"
+description = "The Prisma ORM: write your application in TypeScript with human-readable queries instead of SQL. Host your database on Prisma Postgres and your app on Prisma Compute."
 homepage = "https://www.prisma.io"
 license = "Apache-2.0"
 visibility = "public"
@@ -61,26 +61,26 @@ security_contact = "security@prisma.io"
 
 [docs]
 root = "https://www.prisma.io/docs/orm"
-getting_started = "https://www.prisma.io/docs/prisma-orm/quickstart/postgresql"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T20:50:14.421496Z"
+checkedAt = "2026-10-27T18:28:19.876484Z"
 confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
-state = "present"
-valueJson = '"https://www.prisma.io/docs/prisma-orm/quickstart/postgresql"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T20:50:14.421496Z"
+checkedAt = "2026-10-27T18:28:19.876484Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = 'Explicit documentation link at README.md:8: <a href="https://www.prisma.io/docs/orm">Docs</a>  |  <a href="https://pris.ly/discord">Discord</a>  |  <a href="https://twitter.com/prisma">X</a>  |  <a href="https://pris.ly/pn-announcement">Blog Post</a>  |  <a href="./ARCHITECTURE.md">Architecture</a>'
+source = "README.md"
 state = "present"
 valueJson = '"https://www.prisma.io/docs/orm"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T20:50:14.421496Z"
+checkedAt = "2026-10-27T18:28:19.876484Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -89,7 +89,7 @@ state = "present"
 valueJson = '"security@prisma.io"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T20:50:14.421496Z"
+checkedAt = "2026-10-27T18:28:19.876484Z"
 confidence = "high"
 method = "unspecified"
 reason = "clear CODEOWNERS team"
@@ -97,7 +97,7 @@ state = "present"
 valueJson = '"@prisma/ORM-TS-Maintain"'
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T20:50:14.421496Z"
+checkedAt = "2026-10-27T18:28:19.876484Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -106,16 +106,16 @@ state = "present"
 valueJson = '"pnpm build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T20:50:14.421496Z"
+checkedAt = "2026-10-27T18:28:19.876484Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
 source = "GitHub API"
 state = "present"
-valueJson = '"Next-generation ORM for Node.js & TypeScript | PostgreSQL, MySQL, MariaDB, SQL Server, SQLite, MongoDB and CockroachDB"'
+valueJson = '"The Prisma ORM: write your application in TypeScript with human-readable queries instead of SQL. Host your database on Prisma Postgres and your app on Prisma Compute."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T20:50:14.421496Z"
+checkedAt = "2026-10-27T18:28:19.876484Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -123,16 +123,16 @@ state = "present"
 valueJson = '"https://www.prisma.io"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T20:50:14.421496Z"
+checkedAt = "2026-10-27T18:28:19.876484Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"orm"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T20:50:14.421496Z"
+checkedAt = "2026-10-27T18:28:19.876484Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -145,6 +145,6 @@ archived = false
 clone_url = "https://github.com/prisma/orm.git"
 default_branch = "main"
 fork = false
-head_sha = "7d2bc1a1b34fbbe147a149aa9fc5796eed9d716b"
+head_sha = "02796bd2204cd6b4a5602380857cf4f12ff66ad7"
 html_url = "https://github.com/prisma/orm"
-stars = 47612
+stars = 47669

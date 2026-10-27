@@ -3,8 +3,6 @@
 - Imported repository name from README.md.
 - Discovered related relation to github.com/karpathy/autoresearch from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
-
-- Set `repo.name` to `atlas-gic` from `GitHub API` after deterministic escalation.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.

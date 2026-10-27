@@ -3,7 +3,7 @@
 - Inferred fallback values for `repo.name` and `repo.description` because the imported files did not provide enough structured metadata.
 - Inferred repo.build from Cargo.toml as `cargo build --workspace`.
 - Imported repo.test from justfile as `just test`.
-- Imported repo.toolchain.min from Cargo.toml as `1.88` (Rust).
+- Imported repo.toolchain.min from Cargo.toml as `1.89` (Rust).
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

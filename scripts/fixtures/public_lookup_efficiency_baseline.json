@@ -4,13 +4,22 @@
   "limit": 0,
   "minTasks": 2452,
   "minRepositories": 613,
-  "minTaskHitRate": 0.525,
-  "minFieldHitRate": 0.734,
+  "minTaskHitRate": 0.47,
+  "minFieldHitRate": 0.71,
   "maxDotrepoToScrapeProxyRatio": 2.43,
   "minIntentHitRate": {
-    "documentation": 0.543,
+    "documentation": 0.24,
     "execution": 0.466,
     "overview": 0.74,
     "security": 0.35
+  },
+  "docsAbstentionRebaseline": {
+    "checkedAt": "2026-10-27",
+    "reason": "The October source-declared documentation policy trades documentation coverage for evidence: documentation lookups now abstain unless docs are source-declared. After the 2026-10-27 full-index catch-up refresh, observed rates were minTaskHitRate 0.476, minFieldHitRate 0.7196, documentation intent 0.2455 (baselines were 0.525/0.734/0.543 under the pre-policy inferred-docs population). This is a real consumer-facing coverage reduction, accepted by the trust model (correct abstention over inferred URLs), not a measurement error. Thresholds are set just below observed values. Revisit if documentation extraction regains declared-source coverage.",
+    "observed": {
+      "minTaskHitRate": 0.476,
+      "minFieldHitRate": 0.7196,
+      "documentationIntentHitRate": 0.2455
+    }
   }
 }

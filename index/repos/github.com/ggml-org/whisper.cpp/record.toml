@@ -2,17 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/ggml-org/whisper.cpp"
-generated_at = "2026-09-21T04:36:55.205964Z"
+generated_at = "2026-10-27T17:46:40.438614Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
-    "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `Makefile`, and `.github/workflows/bindings-go.yml`. Imported `repo.build` from `Makefile`. Inferred `repo.test` from `.github/workflows/bindings-go.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md` and `Makefile`. Imported `repo.build` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "whisper.cpp"
@@ -28,8 +28,8 @@ languages = [
     "GLSL",
     "CMake",
     "WGSL",
-    "Shell",
     "Go Template",
+    "Shell",
     "Python",
     "Objective-C",
     "Ruby",
@@ -45,7 +45,6 @@ languages = [
     "Assembly",
 ]
 build = "make build"
-test = "make test"
 topics = [
     "openai",
     "speech-to-text",
@@ -71,25 +70,23 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-21T04:36:55.205964Z"
-confidence = "low"
-method = "rejected"
-reason = "SDL2 dependency installation is not whisper.cpp installation documentation; inspected README.md:610 at commit da54572229bcf64ba367d96c7ef15770376c4280"
-source = "README.md"
-state = "unresolved"
-valueJson = "null"
-rejectedValueJson = "\"https://wiki.libsdl.org/SDL2/Installation\""
-
-[x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:32:24.483666Z"
+checkedAt = "2026-10-27T17:46:40.438614Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs site detected"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-10-27T17:46:40.438614Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:32:24.483666Z"
+checkedAt = "2026-10-27T17:46:40.438614Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -97,7 +94,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:32:24.483666Z"
+checkedAt = "2026-10-27T17:46:40.438614Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -105,7 +102,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:32:24.483666Z"
+checkedAt = "2026-10-27T17:46:40.438614Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -114,7 +111,7 @@ state = "present"
 valueJson = '"make build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:32:24.483666Z"
+checkedAt = "2026-10-27T17:46:40.438614Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -123,7 +120,7 @@ state = "present"
 valueJson = """"Port of OpenAI's Whisper model in C/C++""""
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:32:24.483666Z"
+checkedAt = "2026-10-27T17:46:40.438614Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -131,28 +128,27 @@ state = "present"
 valueJson = '"https://github.com/ggml-org/whisper.cpp"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:32:24.483666Z"
+checkedAt = "2026-10-27T17:46:40.438614Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"whisper.cpp"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:32:24.483666Z"
-confidence = "medium"
-method = "inferred"
-reason = "from workflow fallback"
-source = ".github/workflows/bindings-go.yml"
-state = "present"
-valueJson = '"make test"'
+checkedAt = "2026-10-27T17:46:40.438614Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no test command sources found"
+state = "not_found"
+valueJson = "null"
 
 [x.github]
 archived = false
 clone_url = "https://github.com/ggml-org/whisper.cpp.git"
 default_branch = "master"
 fork = false
-head_sha = "da54572229bcf64ba367d96c7ef15770376c4280"
+head_sha = "21ba6d269a02c14309355cb96822db6058d4cf48"
 html_url = "https://github.com/ggml-org/whisper.cpp"
-stars = 53702
+stars = 54703

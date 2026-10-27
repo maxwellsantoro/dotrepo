@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/storybookjs/storybook"
-generated_at = "2026-09-16T16:33:27.162574Z"
+generated_at = "2026-10-27T17:23:05.884147Z"
 
 [record.trust]
 confidence = "high"
@@ -23,16 +23,16 @@ visibility = "public"
 languages = [
     "TypeScript",
     "JavaScript",
-    "MDX",
     "Svelte",
+    "MDX",
     "Vue",
     "CSS",
     "HTML",
-    "EJS",
+    "Python",
     "Shell",
+    "EJS",
     "Pug",
     "AppleScript",
-    "Handlebars",
     "SCSS",
 ]
 test = "yarn test"
@@ -70,23 +70,24 @@ security_contact = "unknown"
 root = "https://storybook.js.org/docs?ref=readme"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:33:27.162574Z"
+checkedAt = "2026-10-27T17:23:05.884147Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:33:27.162574Z"
+checkedAt = "2026-10-27T17:23:05.884147Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:81: Documentation can be found on [Storybook's docs site](https://storybook.js.org/docs?ref=readme)."
+source = "README.md"
 state = "present"
 valueJson = '"https://storybook.js.org/docs?ref=readme"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:33:27.162574Z"
+checkedAt = "2026-10-27T17:23:05.884147Z"
 confidence = "high"
 method = "unspecified"
 reason = "explicitly unknown"
@@ -94,7 +95,7 @@ state = "not_found"
 valueJson = '"unknown"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:33:27.162574Z"
+checkedAt = "2026-10-27T17:23:05.884147Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -102,7 +103,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:33:27.162574Z"
+checkedAt = "2026-10-27T17:23:05.884147Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -110,7 +111,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:33:27.162574Z"
+checkedAt = "2026-10-27T17:23:05.884147Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -119,7 +120,7 @@ state = "present"
 valueJson = '"Storybook is the industry standard workshop for building, documenting, and testing UI components in isolation"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:33:27.162574Z"
+checkedAt = "2026-10-27T17:23:05.884147Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -127,16 +128,16 @@ state = "present"
 valueJson = '"https://storybook.js.org"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:33:27.162574Z"
+checkedAt = "2026-10-27T17:23:05.884147Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Storybook"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:33:27.162574Z"
+checkedAt = "2026-10-27T17:23:05.884147Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -149,6 +150,6 @@ archived = false
 clone_url = "https://github.com/storybookjs/storybook.git"
 default_branch = "next"
 fork = false
-head_sha = "4f66ceeb2410de4bcefe3ba3919267495cc40f37"
+head_sha = "1a6afa1dd655b2a8de6235426a505e908740e593"
 html_url = "https://github.com/storybookjs/storybook"
-stars = 91076
+stars = 91394

@@ -2,16 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/etcd-io/etcd"
-generated_at = "2026-09-17T06:07:06.536766108Z"
+generated_at = "2026-10-27T17:33:08.663389Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
+    "verified",
 ]
-notes = "2026-10-06 bounded command-source checkpoint: source-preserving Make entrypoints carry root execution contexts and documented preparation requirements. Only command sources inspected; factual record age/status and unrelated facts unchanged. Fresh assessments do not imply full-record recrawl. Bootstrapped from `README.md`, `.github/SECURITY.md`, `Makefile`, `CONTRIBUTING.md`, and `go.mod`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Makefile`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. 2026-10-04 pinned command-source audit supersedes affected extraction assessments and prior auto-promotion. Corrected commands are unassessed pending full-record verification; unrelated inspection timestamps are unchanged. See index/telemetry/command-semantics-20261004/report.json."
+notes = "Bootstrapped from `README.md`, `.github/SECURITY.md`, `Makefile`, and `go.mod`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "etcd"
@@ -42,20 +43,6 @@ topics = [
     "cncf",
 ]
 
-[repo.build_context]
-command = "make build"
-working_directory = "."
-scope = "repository"
-prerequisites = ["Use the supported linux-amd64 development environment.", "Install Go meeting go.mod and make, protoc v3.20.3, yamllint, jq and xz as documented in CONTRIBUTING.md."]
-source = "CONTRIBUTING.md"
-
-[repo.test_context]
-command = "make test-unit"
-working_directory = "."
-scope = "repository"
-prerequisites = ["Use the supported linux-amd64 development environment.", "Install Go meeting go.mod and make, protoc v3.20.3, yamllint, jq and xz as documented in CONTRIBUTING.md."]
-source = "CONTRIBUTING.md"
-
 [repo.toolchain]
 min = "1.27"
 ecosystem = "Go"
@@ -65,26 +52,27 @@ maintainers = []
 security_contact = "https://github.com/etcd-io/etcd/blob/main/security/README.md"
 
 [docs]
-root = "https://etcd.io"
+root = "https://etcd.io/docs"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-17T06:07:06.536766108Z"
+checkedAt = "2026-10-27T17:33:08.663389Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-17T06:07:06.536766108Z"
+checkedAt = "2026-10-27T17:33:08.663389Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:7: [![Docs](https://img.shields.io/badge/docs-latest-green.svg)](https://etcd.io/docs)"
+source = "README.md"
 state = "present"
-valueJson = '"https://etcd.io"'
+valueJson = '"https://etcd.io/docs"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-17T06:07:06.536766108Z"
+checkedAt = "2026-10-27T17:33:08.663389Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -93,16 +81,24 @@ state = "present"
 valueJson = '"https://github.com/etcd-io/etcd/blob/main/security/README.md"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-17T06:07:06.536766108Z"
+checkedAt = "2026-10-27T17:33:08.663389Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
 state = "not_found"
 valueJson = "null"
 
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-10-27T17:33:08.663389Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "Makefile"
+state = "present"
+valueJson = '"make build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-17T06:07:06.536766108Z"
+checkedAt = "2026-10-27T17:33:08.663389Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -111,7 +107,7 @@ state = "present"
 valueJson = '"Distributed reliable key-value store for the most critical data of a distributed system"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-17T06:07:06.536766108Z"
+checkedAt = "2026-10-27T17:33:08.663389Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -119,56 +115,28 @@ state = "present"
 valueJson = '"https://etcd.io"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-17T06:07:06.536766108Z"
+checkedAt = "2026-10-27T17:33:08.663389Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"etcd"'
 
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-10-27T17:33:08.663389Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "Makefile"
+state = "present"
+valueJson = '"make test-unit"'
 
 [x.github]
 archived = false
 clone_url = "https://github.com/etcd-io/etcd.git"
 default_branch = "main"
 fork = false
-head_sha = "f094b9834a5aa0ef748b91509b824e324dd65700"
+head_sha = "e0ccf652e3e31c9adbc03b8d94d83501f467e537"
 html_url = "https://github.com/etcd-io/etcd"
-stars = 52267
-
-[x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-06T04:00:48.158597Z"
-confidence = "high"
-method = "extracted"
-reason = "Declared wrapper preserves script behavior. Inspected at f094b9834a5aa0ef748b91509b824e324dd65700; unit tests traverse workspace modules, build produces etcd binaries. Test command runs tests rather than the package-specific compile-only stress example. Source preservation, not execution verification."
-source = "Makefile"
-state = "present"
-valueJson = "\"make build\""
-
-[x.dotrepo.field_evidence."repo.build_context"]
-checkedAt = "2026-10-06T04:00:48.158597Z"
-confidence = "high"
-method = "extracted"
-reason = "CONTRIBUTING.md declares supported linux-amd64 setup, Go/tool prerequisites and root Make invocations. scripts/test_lib.sh enforces root module and traverses workspace modules. Prerequisites are requirements, not a setup script or a claim of satisfaction. Statically inspected at f094b9834a5aa0ef748b91509b824e324dd65700."
-source = "CONTRIBUTING.md"
-state = "present"
-valueJson = "{\"command\": \"make build\", \"prerequisites\": [\"Use the supported linux-amd64 development environment.\", \"Install Go meeting go.mod and make, protoc v3.20.3, yamllint, jq and xz as documented in CONTRIBUTING.md.\"], \"scope\": \"repository\", \"source\": \"CONTRIBUTING.md\", \"working_directory\": \".\"}"
-
-[x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-06T04:00:48.158597Z"
-confidence = "high"
-method = "extracted"
-reason = "Declared wrapper preserves script behavior. Inspected at f094b9834a5aa0ef748b91509b824e324dd65700; unit tests traverse workspace modules, build produces etcd binaries. Test command runs tests rather than the package-specific compile-only stress example. Source preservation, not execution verification."
-source = "CONTRIBUTING.md"
-state = "present"
-valueJson = "\"make test-unit\""
-
-[x.dotrepo.field_evidence."repo.test_context"]
-checkedAt = "2026-10-06T04:00:48.158597Z"
-confidence = "high"
-method = "extracted"
-reason = "CONTRIBUTING.md declares supported linux-amd64 setup, Go/tool prerequisites and root Make invocations. scripts/test_lib.sh enforces root module and traverses workspace modules. Prerequisites are requirements, not a setup script or a claim of satisfaction. Statically inspected at f094b9834a5aa0ef748b91509b824e324dd65700."
-source = "CONTRIBUTING.md"
-state = "present"
-valueJson = "{\"command\": \"make test-unit\", \"prerequisites\": [\"Use the supported linux-amd64 development environment.\", \"Install Go meeting go.mod and make, protoc v3.20.3, yamllint, jq and xz as documented in CONTRIBUTING.md.\"], \"scope\": \"repository\", \"source\": \"CONTRIBUTING.md\", \"working_directory\": \".\"}"
+stars = 52430

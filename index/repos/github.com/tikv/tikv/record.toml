@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/tikv/tikv"
-generated_at = "2026-09-19T06:05:22.198189122Z"
+generated_at = "2026-10-27T18:30:00.664066Z"
 
 [record.trust]
 confidence = "high"
@@ -50,9 +50,6 @@ maintainers = ["@tikv/tikv-configuration-reviewer"]
 team = "@tikv/tikv-configuration-reviewer"
 security_contact = "tikv-security@lists.cncf.io"
 
-[docs]
-root = "https://tikv.org/docs/latest/concepts/overview/"
-
 [relations]
 references = []
 
@@ -69,23 +66,23 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-19T06:05:22.198189122Z"
+checkedAt = "2026-10-27T18:30:00.664066Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-19T06:05:22.198189122Z"
+checkedAt = "2026-10-27T18:30:00.664066Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://tikv.org/docs/latest/concepts/overview/"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-19T06:05:22.198189122Z"
+checkedAt = "2026-10-27T18:30:00.664066Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -94,7 +91,7 @@ state = "present"
 valueJson = '"tikv-security@lists.cncf.io"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-19T06:05:22.198189122Z"
+checkedAt = "2026-10-27T18:30:00.664066Z"
 confidence = "high"
 method = "unspecified"
 reason = "clear CODEOWNERS team"
@@ -102,7 +99,7 @@ state = "present"
 valueJson = '"@tikv/tikv-configuration-reviewer"'
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-19T06:05:22.198189122Z"
+checkedAt = "2026-10-27T18:30:00.664066Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -111,7 +108,7 @@ state = "present"
 valueJson = '"make build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-19T06:05:22.198189122Z"
+checkedAt = "2026-10-27T18:30:00.664066Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -120,7 +117,7 @@ state = "present"
 valueJson = '"Distributed transactional key-value database, originally created to complement TiDB"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-19T06:05:22.198189122Z"
+checkedAt = "2026-10-27T18:30:00.664066Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -128,16 +125,16 @@ state = "present"
 valueJson = '"https://tikv.org"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-19T06:05:22.198189122Z"
+checkedAt = "2026-10-27T18:30:00.664066Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"tikv"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-19T06:05:22.198189122Z"
+checkedAt = "2026-10-27T18:30:00.664066Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -150,6 +147,6 @@ archived = false
 clone_url = "https://github.com/tikv/tikv.git"
 default_branch = "master"
 fork = false
-head_sha = "51b411a728f7c5b12f919fd4dac00a664145b751"
+head_sha = "2be7aafd3d04a128100c5df69cb43fc99ad14b04"
 html_url = "https://github.com/tikv/tikv"
-stars = 16868
+stars = 16928

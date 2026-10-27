@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/scikit-learn/scikit-learn"
-generated_at = "2026-09-18T06:05:29.240348197Z"
+generated_at = "2026-10-27T17:38:06.530222Z"
 
 [record.trust]
 confidence = "medium"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `SECURITY.md`, `Makefile`, `.github/workflows/cuda-ci.yml`, and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.build` from `Makefile`. Inferred `repo.test` from `.github/workflows/cuda-ci.yml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `SECURITY.md`, `Makefile`, and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.build` from `Makefile`. Inferred `repo.test` from `pyproject.toml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "scikit-learn"
@@ -32,7 +32,7 @@ languages = [
     "Makefile",
 ]
 build = "make all"
-test = "SCIPY_ARRAY_API=1 pytest --doctest-modules modules/array_api.rst"
+test = "python -m pytest"
 topics = [
     "machine-learning",
     "python",
@@ -49,27 +49,24 @@ ecosystem = "Python"
 maintainers = []
 security_contact = "security@scikit-learn.org"
 
-[docs]
-root = "https://scikit-learn.org"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-18T06:05:29.240348197Z"
+checkedAt = "2026-10-27T17:38:06.530222Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-18T06:05:29.240348197Z"
+checkedAt = "2026-10-27T17:38:06.530222Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://scikit-learn.org"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-18T06:05:29.240348197Z"
+checkedAt = "2026-10-27T17:38:06.530222Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -78,7 +75,7 @@ state = "present"
 valueJson = '"security@scikit-learn.org"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-18T06:05:29.240348197Z"
+checkedAt = "2026-10-27T17:38:06.530222Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -86,7 +83,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-18T06:05:29.240348197Z"
+checkedAt = "2026-10-27T17:38:06.530222Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -95,7 +92,7 @@ state = "present"
 valueJson = '"make all"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-18T06:05:29.240348197Z"
+checkedAt = "2026-10-27T17:38:06.530222Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -104,7 +101,7 @@ state = "present"
 valueJson = '"scikit-learn: machine learning in Python"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-18T06:05:29.240348197Z"
+checkedAt = "2026-10-27T17:38:06.530222Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -112,7 +109,7 @@ state = "present"
 valueJson = '"https://scikit-learn.org"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-18T06:05:29.240348197Z"
+checkedAt = "2026-10-27T17:38:06.530222Z"
 confidence = "medium"
 method = "inferred"
 reason = "fell back to directory name or GitHub API"
@@ -121,19 +118,19 @@ state = "present"
 valueJson = '"scikit-learn"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-18T06:05:29.240348197Z"
+checkedAt = "2026-10-27T17:38:06.530222Z"
 confidence = "medium"
 method = "inferred"
-reason = "from workflow fallback"
-source = ".github/workflows/cuda-ci.yml"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "pyproject.toml"
 state = "present"
-valueJson = '"SCIPY_ARRAY_API=1 pytest --doctest-modules modules/array_api.rst"'
+valueJson = '"python -m pytest"'
 
 [x.github]
 archived = false
 clone_url = "https://github.com/scikit-learn/scikit-learn.git"
 default_branch = "main"
 fork = false
-head_sha = "914346f574cddd99904513dec5a5d655b954dc91"
+head_sha = "42981ef2fd9154420e96ca36d90bfddb6f4ff8af"
 html_url = "https://github.com/scikit-learn/scikit-learn"
-stars = 67288
+stars = 67961

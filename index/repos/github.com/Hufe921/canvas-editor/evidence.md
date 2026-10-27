@@ -3,6 +3,7 @@
 - Imported repository name and docs entry points from README.md.
 - Imported repo.build from package.json as `npm run build`.
 - Imported repo.toolchain.min from package.json as `24.13.1` (Node.js).
+- Imported docs.root as `https://hufe.club/canvas-editor-docs`. Explicit documentation link at README.md:29: <a href="https://hufe.club/canvas-editor-docs" target="_blank"><strong>Documentation</strong></a> ·
 - Discovered related relation to github.com/Hufe921/canvas-editor from package.json repository.
 - Discovered related relation to github.com/Hufe921/canvas-editor-plugin from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.

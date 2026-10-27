@@ -2,17 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/rclone/rclone"
-generated_at = "2026-09-16T16:28:18.410437Z"
+generated_at = "2026-10-27T18:15:19.831667Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
-    "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `go.mod`, and `CONTRIBUTING.md`. Inferred `repo.build` from `go.mod`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `CONTRIBUTING.md`, and `go.mod`. Imported `repo.build` from `CONTRIBUTING.md`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Rclone"
@@ -33,7 +33,7 @@ languages = [
     "PHP",
     "Batchfile",
 ]
-build = "go build ./..."
+build = "go build"
 test = "go test -v ./..."
 topics = [
     "golang",
@@ -90,23 +90,25 @@ root = "https://rclone.org/docs/"
 getting_started = "https://rclone.org/install/"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:28:18.410437Z"
+checkedAt = "2026-10-27T18:15:19.831667Z"
 confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:11: [Installation](https://rclone.org/install/) |"
+source = "README.md"
 state = "present"
 valueJson = '"https://rclone.org/install/"'
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:28:18.410437Z"
+checkedAt = "2026-10-27T18:15:19.831667Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:7: [Documentation](https://rclone.org/docs/) |"
+source = "README.md"
 state = "present"
 valueJson = '"https://rclone.org/docs/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:28:18.410437Z"
+checkedAt = "2026-10-27T18:15:19.831667Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -114,7 +116,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:28:18.410437Z"
+checkedAt = "2026-10-27T18:15:19.831667Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -122,16 +124,16 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:28:18.410437Z"
-confidence = "medium"
-method = "inferred"
-reason = "inferred ecosystem default from build-tool metadata"
-source = "go.mod"
+checkedAt = "2026-10-27T18:15:19.831667Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "CONTRIBUTING.md"
 state = "present"
-valueJson = '"go build ./..."'
+valueJson = '"go build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:28:18.410437Z"
+checkedAt = "2026-10-27T18:15:19.831667Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -140,7 +142,7 @@ state = "present"
 valueJson = '"\"rsync for cloud storage\" - Google Drive, S3, Dropbox, Backblaze B2, One Drive, Swift, Hubic, Wasabi, Google Cloud Storage, Azure Blob, Azure Files, Yandex Files"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:28:18.410437Z"
+checkedAt = "2026-10-27T18:15:19.831667Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -148,16 +150,16 @@ state = "present"
 valueJson = '"https://rclone.org"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:28:18.410437Z"
+checkedAt = "2026-10-27T18:15:19.831667Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Rclone"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:28:18.410437Z"
+checkedAt = "2026-10-27T18:15:19.831667Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -170,6 +172,6 @@ archived = false
 clone_url = "https://github.com/rclone/rclone.git"
 default_branch = "master"
 fork = false
-head_sha = "c8d60a67fc5326d5b2fb811cc9036d0103fd5e37"
+head_sha = "545b142ad484d53fa05732640fc29164af7fda61"
 html_url = "https://github.com/rclone/rclone"
-stars = 59788
+stars = 60575

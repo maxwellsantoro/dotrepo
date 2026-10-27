@@ -2,67 +2,126 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "inferred"
 source = "https://github.com/maxwellsantoro/sha256-benchmark-atlas"
-generated_at = "2026-10-06T01:15:26.806051Z"
+generated_at = "2026-10-27T17:53:52.482429Z"
 
 [record.trust]
-confidence = "high"
-provenance = ["imported"]
-notes = "Bounded manual source inspection at 71eda5d6480e0b9e39f914f3641d91f98402e943. README quick start explicitly names full registry build and correctness commands, uv sync and the full compiler/toolchain cohort. Registry and workflow were inspected to check that the commands cover all admitted implementations. Operator-specific SDK selection is preparation, not record environment metadata. Commands are retained as candidates rather than claiming a single universal default correctness configuration. This is an imported overlay, not pipeline verification or maintainer canonical authority."
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md` and `pyproject.toml`. Ignored component-scoped commands from `implementations/rust-openssl/Cargo.toml` as repository defaults. Inferred `repo.build` from `pyproject.toml`. Inferred `repo.test` from `pyproject.toml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
-name = "sha256-benchmark-atlas"
-description = "Public atlas of SHA-256 implementations across languages and libraries: correctness first, then comparative performance with explicit provenance."
+name = "SHA-256 Benchmark Atlas"
+description = "Atlas of SHA-256 implementations: correctness, provenance, and comparative benchmarks on GitHub Actions"
 homepage = "https://github.com/maxwellsantoro/sha256-benchmark-atlas"
 license = "MIT"
+visibility = "public"
+languages = [
+    "Python",
+    "C",
+    "Rust",
+    "Java",
+    "Zig",
+    "JavaScript",
+    "PHP",
+    "Go",
+    "Ruby",
+    "Makefile",
+    "Shell",
+]
+build = "python -m build"
+test = "python -m pytest"
+topics = []
 
-[[repo.build_candidates]]
-command = "uv run sha256-atlas build"
-source = "README.md"
-[repo.build_candidates.context]
-command = "uv run sha256-atlas build"
-working_directory = "."
-scope = "repository"
-prerequisites = ["uv sync", "README quick-start compiler/toolchain prerequisites"]
-source = "README.md"
+[repo.toolchain]
+min = "3.11"
+ecosystem = "Python"
 
-[[repo.test_candidates]]
-command = "uv run sha256-atlas correctness --cases 1000 --skip-million"
-source = "README.md"
-[repo.test_candidates.context]
-command = "uv run sha256-atlas correctness --cases 1000 --skip-million"
-working_directory = "."
-scope = "repository"
-prerequisites = ["uv sync", "README quick-start compiler/toolchain prerequisites", "uv run sha256-atlas build"]
-source = "README.md"
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-10-27T17:53:52.482429Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-10-27T17:53:52.482429Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-10-27T17:53:52.482429Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-10-27T17:53:52.482429Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-10-27T17:53:52.482429Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "pyproject.toml"
+state = "present"
+valueJson = '"python -m build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-state = "present"
-method = "extracted"
+checkedAt = "2026-10-27T17:53:52.482429Z"
 confidence = "high"
-source = "README.md"
-checkedAt = "2026-10-06T01:15:26.806051Z"
-valueJson = "\"Public atlas of SHA-256 implementations across languages and libraries: correctness first, then comparative performance with explicit provenance.\""
-reason = "Transcribed from inspected source at 71eda5d6480e0b9e39f914f3641d91f98402e943; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution."
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Atlas of SHA-256 implementations: correctness, provenance, and comparative benchmarks on GitHub Actions"'
 
-[x.dotrepo.field_evidence."repo.build_candidates.0"]
-state = "present"
-method = "extracted"
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-10-27T17:53:52.482429Z"
 confidence = "high"
-source = "README.md"
-checkedAt = "2026-10-06T01:15:26.806051Z"
-valueJson = "{\"command\": \"uv run sha256-atlas build\", \"ecosystem\": null, \"source\": \"README.md\", \"context\": {\"command\": \"uv run sha256-atlas build\", \"working_directory\": \".\", \"scope\": \"repository\", \"prerequisites\": [\"uv sync\", \"README quick-start compiler/toolchain prerequisites\"], \"source\": \"README.md\"}}"
-reason = "Transcribed from inspected source at 71eda5d6480e0b9e39f914f3641d91f98402e943; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution."
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://github.com/maxwellsantoro/sha256-benchmark-atlas"'
 
-[x.dotrepo.field_evidence."repo.test_candidates.0"]
-state = "present"
-method = "extracted"
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-10-27T17:53:52.482429Z"
 confidence = "high"
+method = "extracted"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
-checkedAt = "2026-10-06T01:15:26.806051Z"
-valueJson = "{\"command\": \"uv run sha256-atlas correctness --cases 1000 --skip-million\", \"ecosystem\": null, \"source\": \"README.md\", \"context\": {\"command\": \"uv run sha256-atlas correctness --cases 1000 --skip-million\", \"working_directory\": \".\", \"scope\": \"repository\", \"prerequisites\": [\"uv sync\", \"README quick-start compiler/toolchain prerequisites\", \"uv run sha256-atlas build\"], \"source\": \"README.md\"}}"
-reason = "Transcribed from inspected source at 71eda5d6480e0b9e39f914f3641d91f98402e943; exact command, directory, component ownership and prerequisite declarations retained. This assessment is source preservation, not proof of execution."
+state = "present"
+valueJson = '"SHA-256 Benchmark Atlas"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-10-27T17:53:52.482429Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "pyproject.toml"
+state = "present"
+valueJson = '"python -m pytest"'
 
 [x.github]
-head_sha = "71eda5d6480e0b9e39f914f3641d91f98402e943"
+archived = false
+clone_url = "https://github.com/maxwellsantoro/sha256-benchmark-atlas.git"
+default_branch = "main"
+fork = false
+head_sha = "8247daeda281cca076bfb355bc71bd34f08de320"
+html_url = "https://github.com/maxwellsantoro/sha256-benchmark-atlas"
+stars = 0

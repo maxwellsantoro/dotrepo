@@ -1,6 +1,5 @@
 # Evidence
 
-- Imported repository docs entry points from README.md.
 - Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.
 - Imported repo.build from package.json as `pnpm build`.
 - Imported repo.test from package.json as `pnpm test`.

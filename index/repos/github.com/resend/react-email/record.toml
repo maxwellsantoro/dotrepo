@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/resend/react-email"
-generated_at = "2026-09-18T06:05:20.558381871Z"
+generated_at = "2026-10-27T18:29:21.022839Z"
 
 [record.trust]
 confidence = "high"
@@ -38,27 +38,24 @@ topics = [
 maintainers = []
 security_contact = "security@resend.com"
 
-[docs]
-root = "https://react.email"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-18T06:05:20.558381871Z"
+checkedAt = "2026-10-27T18:29:21.022839Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-18T06:05:20.558381871Z"
+checkedAt = "2026-10-27T18:29:21.022839Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://react.email"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-18T06:05:20.558381871Z"
+checkedAt = "2026-10-27T18:29:21.022839Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -67,7 +64,7 @@ state = "present"
 valueJson = '"security@resend.com"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-18T06:05:20.558381871Z"
+checkedAt = "2026-10-27T18:29:21.022839Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -75,7 +72,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-18T06:05:20.558381871Z"
+checkedAt = "2026-10-27T18:29:21.022839Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -84,7 +81,7 @@ state = "present"
 valueJson = '"pnpm build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-18T06:05:20.558381871Z"
+checkedAt = "2026-10-27T18:29:21.022839Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -93,7 +90,7 @@ state = "present"
 valueJson = '"💌 Build and send emails using React"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-18T06:05:20.558381871Z"
+checkedAt = "2026-10-27T18:29:21.022839Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -101,16 +98,16 @@ state = "present"
 valueJson = '"https://react.email"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-18T06:05:20.558381871Z"
+checkedAt = "2026-10-27T18:29:21.022839Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"react-email"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-18T06:05:20.558381871Z"
+checkedAt = "2026-10-27T18:29:21.022839Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -123,6 +120,6 @@ archived = false
 clone_url = "https://github.com/resend/react-email.git"
 default_branch = "canary"
 fork = false
-head_sha = "255ec740a9e8652b516e9a39e276f3e4964e2344"
+head_sha = "2e3c28c89a4ee18bd302325f51d5cf4f93c7ea06"
 html_url = "https://github.com/resend/react-email"
-stars = 19752
+stars = 19881

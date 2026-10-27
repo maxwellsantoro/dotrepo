@@ -2,17 +2,14 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/react/react"
-generated_at = "2026-09-16T16:28:23.344114Z"
+generated_at = "2026-10-27T18:28:58.492354Z"
 
 [record.trust]
-confidence = "high"
-provenance = [
-    "imported",
-    "verified",
-]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, `package.json`, and `compiler/Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. Imported `repo.toolchain.min` from `compiler/Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, `package.json`, and `compiler/Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Ignored component-scoped commands from `compiler/Cargo.toml` as repository defaults. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. Imported `repo.toolchain.min` from `compiler/Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "React &middot;"
@@ -49,27 +46,28 @@ maintainers = []
 security_contact = "https://www.facebook.com/whitehat"
 
 [docs]
-root = "https://react.dev/reference/react"
-getting_started = "https://react.dev/learn"
+root = "https://react.dev/"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:28:23.344114Z"
-confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
-state = "present"
-valueJson = '"https://react.dev/learn"'
+checkedAt = "2026-10-27T18:28:58.492354Z"
+confidence = "low"
+method = "unresolved"
+reason = "conflicting documentation declarations; no target selected"
+source = "README.md"
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:28:23.344114Z"
+checkedAt = "2026-10-27T18:28:58.492354Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:21: You can find the React documentation [on the website](https://react.dev/)."
+source = "README.md"
 state = "present"
-valueJson = '"https://react.dev/reference/react"'
+valueJson = '"https://react.dev/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:28:23.344114Z"
+checkedAt = "2026-10-27T18:28:58.492354Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -78,7 +76,7 @@ state = "present"
 valueJson = '"https://www.facebook.com/whitehat"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:28:23.344114Z"
+checkedAt = "2026-10-27T18:28:58.492354Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -86,7 +84,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:28:23.344114Z"
+checkedAt = "2026-10-27T18:28:58.492354Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -95,7 +93,7 @@ state = "present"
 valueJson = '"yarn build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:28:23.344114Z"
+checkedAt = "2026-10-27T18:28:58.492354Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -104,7 +102,7 @@ state = "present"
 valueJson = '"The library for web and native user interfaces."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:28:23.344114Z"
+checkedAt = "2026-10-27T18:28:58.492354Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -112,16 +110,16 @@ state = "present"
 valueJson = '"https://react.dev"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:28:23.344114Z"
+checkedAt = "2026-10-27T18:28:58.492354Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"React &middot;"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:28:23.344114Z"
+checkedAt = "2026-10-27T18:28:58.492354Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -134,6 +132,6 @@ archived = false
 clone_url = "https://github.com/react/react.git"
 default_branch = "main"
 fork = false
-head_sha = "2b19aecd0e9111b774fad0fad9862e50bcb5bc8a"
+head_sha = "dc9aed364252a34966f4f2c4a98272317fdddb60"
 html_url = "https://github.com/react/react"
-stars = 250490
+stars = 251782

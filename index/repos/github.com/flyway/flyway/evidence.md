@@ -3,6 +3,7 @@
 - Imported repository name and docs entry points from README.md.
 - Inferred repo.build from pom.xml as `./mvnw package`.
 - Inferred repo.test from pom.xml as `./mvnw test`.
+- Imported docs.getting_started as `https://documentation.red-gate.com/flyway/getting-started-with-flyway`. Explicit documentation link at README.md:32: - [Getting started guides](https://documentation.red-gate.com/flyway/getting-started-with-flyway)
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.name` to `flyway` from `GitHub API` after deterministic escalation.
@@ -13,7 +14,3 @@
 - Augmented repo.topics from GitHub repository metadata.
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
-
-## Fresh verification
-
-Prior verified authority was not inherited: this refresh must qualify using its current field scores.

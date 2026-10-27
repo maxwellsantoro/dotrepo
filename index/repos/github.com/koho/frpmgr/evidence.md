@@ -3,7 +3,8 @@
 - Imported repository name and docs entry points from README.md.
 - Inferred repo.build from go.mod as `go build ./...`.
 - Inferred repo.test from go.mod as `go test ./...`.
-- Imported repo.toolchain.min from go.mod as `1.25.0` (Go).
+- Imported repo.toolchain.min from go.mod as `1.26.0` (Go).
+- Imported docs.root as `https://github.com/koho/frpmgr/wiki/Configuration`. Explicit documentation link at README.md:31: - **[Configuration](https://github.com/koho/frpmgr/wiki/Configuration):** Explore configuration, proxy, visitor, and log.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.name` to `frpmgr` from `GitHub API` after deterministic escalation.
@@ -13,7 +14,3 @@
 - Augmented repo.topics from GitHub repository metadata.
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
-
-## Fresh verification
-
-Prior verified authority was not inherited: this refresh must qualify using its current field scores.

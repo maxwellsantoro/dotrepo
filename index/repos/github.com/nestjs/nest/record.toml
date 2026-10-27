@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/nestjs/nest"
-generated_at = "2026-09-17T06:11:30.153890755Z"
+generated_at = "2026-10-27T17:36:25.981286Z"
 
 [record.trust]
 confidence = "medium"
@@ -24,6 +24,7 @@ languages = [
     "TypeScript",
     "JavaScript",
     "Shell",
+    "Go Template",
 ]
 build = "npm run build"
 test = "npm test"
@@ -51,9 +52,6 @@ ecosystem = "Node.js"
 maintainers = []
 security_contact = "support@nestjs.com"
 
-[docs]
-root = "https://nestjs.com"
-
 [relations]
 references = []
 
@@ -70,23 +68,23 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-17T06:11:30.153890755Z"
+checkedAt = "2026-10-27T17:36:25.981286Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-17T06:11:30.153890755Z"
+checkedAt = "2026-10-27T17:36:25.981286Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://nestjs.com"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-17T06:11:30.153890755Z"
+checkedAt = "2026-10-27T17:36:25.981286Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -95,7 +93,7 @@ state = "present"
 valueJson = '"support@nestjs.com"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-17T06:11:30.153890755Z"
+checkedAt = "2026-10-27T17:36:25.981286Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -103,7 +101,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-17T06:11:30.153890755Z"
+checkedAt = "2026-10-27T17:36:25.981286Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -112,7 +110,7 @@ state = "present"
 valueJson = '"npm run build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-17T06:11:30.153890755Z"
+checkedAt = "2026-10-27T17:36:25.981286Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -121,7 +119,7 @@ state = "present"
 valueJson = '"A progressive Node.js framework for building efficient, scalable, and enterprise-grade server-side applications with TypeScript/JavaScript 🚀"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-17T06:11:30.153890755Z"
+checkedAt = "2026-10-27T17:36:25.981286Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -129,7 +127,7 @@ state = "present"
 valueJson = '"https://nestjs.com"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-17T06:11:30.153890755Z"
+checkedAt = "2026-10-27T17:36:25.981286Z"
 confidence = "medium"
 method = "inferred"
 reason = "fell back to directory name or GitHub API"
@@ -138,7 +136,7 @@ state = "present"
 valueJson = '"nest"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-17T06:11:30.153890755Z"
+checkedAt = "2026-10-27T17:36:25.981286Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -151,6 +149,6 @@ archived = false
 clone_url = "https://github.com/nestjs/nest.git"
 default_branch = "master"
 fork = false
-head_sha = "8e03a7dee8e5438d84b243557eda89bb36492fe7"
+head_sha = "a415cff0cf26da0b3e2f317255934d926d8f634f"
 html_url = "https://github.com/nestjs/nest"
-stars = 76732
+stars = 76920

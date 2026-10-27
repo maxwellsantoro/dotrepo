@@ -4,7 +4,8 @@
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
 - Imported repo.build from Makefile as `make build`.
 - Imported repo.test from Makefile as `make test-unit`.
-- Imported repo.toolchain.min from go.mod as `1.26.0` (Go).
+- Imported repo.toolchain.min from go.mod as `1.27.0` (Go).
+- Imported docs.getting_started as `https://helm.sh/docs/intro/install/`. Explicit documentation link at README.md:56: See the [installation guide](https://helm.sh/docs/intro/install/) for more options,
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

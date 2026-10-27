@@ -1,8 +1,6 @@
 # Evidence
 
 - Imported repository name from README.md.
-- Imported repo.build from Makefile as `make build`.
-- Imported repo.test from Makefile as `make test`.
 - Discovered related relation to github.com/settings/appearance from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 

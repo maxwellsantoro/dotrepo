@@ -2,17 +2,18 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/KeygraphHQ/shannon"
-generated_at = "2026-10-04T07:49:06.941281151Z"
+generated_at = "2026-10-27T17:47:47.974716Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
     "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md` and `package.json`. Filled `repo.name` with inferred defaults. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md` and `package.json`. Filled `repo.name` with inferred defaults. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "shannon"
@@ -51,11 +52,8 @@ topics = [
     "ci-cd",
 ]
 
-[docs]
-root = "https://keygraph.io/"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-04T07:49:06.941281151Z"
+checkedAt = "2026-10-27T17:47:47.974716Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -63,15 +61,15 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-04T07:49:06.941281151Z"
-confidence = "medium"
-method = "unspecified"
-reason = "documentation target present without a retained source declaration"
-state = "present"
-valueJson = '"https://keygraph.io/"'
+checkedAt = "2026-10-27T17:47:47.974716Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-04T07:49:06.941281151Z"
+checkedAt = "2026-10-27T17:47:47.974716Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -79,7 +77,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-04T07:49:06.941281151Z"
+checkedAt = "2026-10-27T17:47:47.974716Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -87,7 +85,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-04T07:49:06.941281151Z"
+checkedAt = "2026-10-27T17:47:47.974716Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -96,7 +94,7 @@ state = "present"
 valueJson = '"pnpm build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-04T07:49:06.941281151Z"
+checkedAt = "2026-10-27T17:47:47.974716Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -105,7 +103,7 @@ state = "present"
 valueJson = '"Shannon is an AI pentester for web applications and APIs. It analyzes your source code, identifies attack vectors, and executes real exploits to prove vulnerabilities before they reach production."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-04T07:49:06.941281151Z"
+checkedAt = "2026-10-27T17:47:47.974716Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -113,7 +111,7 @@ state = "present"
 valueJson = '"https://keygraph.io/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-04T07:49:06.941281151Z"
+checkedAt = "2026-10-27T17:47:47.974716Z"
 confidence = "high"
 method = "inferred"
 reason = "extracted from README title with post-cleaners"
@@ -122,7 +120,7 @@ state = "present"
 valueJson = '"shannon"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-04T07:49:06.941281151Z"
+checkedAt = "2026-10-27T17:47:47.974716Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -134,6 +132,6 @@ archived = false
 clone_url = "https://github.com/KeygraphHQ/shannon.git"
 default_branch = "main"
 fork = false
-head_sha = "a14c7944d87b30ed7bfecd4bad06562e24002b01"
+head_sha = "b9744f6cecc5429333873b86a6762f1d70c54fc2"
 html_url = "https://github.com/KeygraphHQ/shannon"
-stars = 48563
+stars = 49564

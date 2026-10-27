@@ -1,10 +1,12 @@
 # Evidence
 
-- Imported repository name from README.md.
+- Imported repository name and docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates.
-- Imported repo.build from ui/packages/consul-ui/package.json as `npm run build`.
-- Imported repo.test from ui/packages/consul-ui/package.json as `npm test`.
+- Ignored component-scoped commands from `ui/packages/consul-ui/package.json` as repository defaults.
+- Imported repo.build from Makefile as `make all`.
+- Imported repo.test from Makefile as `make test`.
 - Imported repo.toolchain.min from ui/packages/consul-ui/package.json as `24` (Node.js).
+- Imported docs.root as `https://developer.hashicorp.com/consul/docs`. Explicit documentation link at README.md:62: Full, comprehensive documentation is available on the Consul website: https://developer.hashicorp.com/consul/docs
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
@@ -17,10 +19,3 @@
 ## Auto-promotion
 
 All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
-
-## Command semantic correction (2026-10-03)
-
-2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged.
-
-- Withheld `repo.build` previously extracted from `ui/packages/consul-ui/package.json` as `npm run build`. Component command lacks repository-default scope and working directory.
-- Withheld `repo.test` previously extracted from `ui/packages/consul-ui/package.json` as `npm test`. Component command lacks repository-default scope and working directory.

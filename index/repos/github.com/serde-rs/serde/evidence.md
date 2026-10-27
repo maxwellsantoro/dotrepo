@@ -2,7 +2,7 @@
 
 - Imported repository name from README.md.
 - Inferred repo.build from Cargo.toml as `cargo build --workspace`.
-- Imported repo.test from CONTRIBUTING.md as `cargo +nightly test --features unstable`.
+- Imported repo.test from CONTRIBUTING.md as `cargo test`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
@@ -11,7 +11,3 @@
 - Augmented repo.topics from GitHub repository metadata.
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
-
-## Fresh verification
-
-Prior verified authority was not inherited: this refresh must qualify using its current field scores.

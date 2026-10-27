@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/metabase/metabase"
-generated_at = "2026-09-18T06:03:46.497754825Z"
+generated_at = "2026-10-27T18:26:29.036499Z"
 
 [record.trust]
 confidence = "high"
@@ -25,8 +25,8 @@ languages = [
     "TypeScript",
     "JavaScript",
     "CSS",
-    "Shell",
     "HTML",
+    "Shell",
     "Python",
     "Handlebars",
     "MDX",
@@ -63,20 +63,17 @@ ecosystem = "Node.js"
 
 [owners]
 maintainers = [
-    "@metabase/core-backend-querying-platform",
-    "@metabase/graphy",
     "@metabase/embedding",
     "@metabase/tech-writers",
-    "@metabase/devexp",
     "@metabase/cloud-ops",
     "@metabase/metabot-frontend",
-    "@metabase/core-frontend-gadget",
+    "@metabase/metabot-backend",
+    "@metabase/data-apps",
 ]
 security_contact = "security@metabase.com"
 
 [docs]
-root = "https://metabase.com"
-getting_started = "https://www.metabase.com/docs/latest/installation-and-operation/installing-metabase"
+root = "https://www.metabase.com/docs/latest/"
 
 [relations]
 references = []
@@ -94,23 +91,24 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-18T06:03:46.497754825Z"
+checkedAt = "2026-10-27T18:26:29.036499Z"
 confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
-state = "present"
-valueJson = '"https://www.metabase.com/docs/latest/installation-and-operation/installing-metabase"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-18T06:03:46.497754825Z"
+checkedAt = "2026-10-27T18:26:29.036499Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:45: The [Metabase handbook](https://www.metabase.com/docs/latest/)."
+source = "README.md"
 state = "present"
-valueJson = '"https://metabase.com"'
+valueJson = '"https://www.metabase.com/docs/latest/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-18T06:03:46.497754825Z"
+checkedAt = "2026-10-27T18:26:29.036499Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -119,7 +117,7 @@ state = "present"
 valueJson = '"security@metabase.com"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-18T06:03:46.497754825Z"
+checkedAt = "2026-10-27T18:26:29.036499Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -127,7 +125,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-18T06:03:46.497754825Z"
+checkedAt = "2026-10-27T18:26:29.036499Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -136,7 +134,7 @@ state = "present"
 valueJson = '"bun run build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-18T06:03:46.497754825Z"
+checkedAt = "2026-10-27T18:26:29.036499Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -145,7 +143,7 @@ state = "present"
 valueJson = '"The easy-to-use open source Business Intelligence and Embedded Analytics tool that lets everyone work with data :bar_chart:"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-18T06:03:46.497754825Z"
+checkedAt = "2026-10-27T18:26:29.036499Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -153,16 +151,16 @@ state = "present"
 valueJson = '"https://metabase.com"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-18T06:03:46.497754825Z"
+checkedAt = "2026-10-27T18:26:29.036499Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Metabase"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-18T06:03:46.497754825Z"
+checkedAt = "2026-10-27T18:26:29.036499Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -175,6 +173,6 @@ archived = false
 clone_url = "https://github.com/metabase/metabase.git"
 default_branch = "master"
 fork = false
-head_sha = "188c8f412f704ab446728524fe810d869cd8bc73"
+head_sha = "df6b38c87a6513718cdd0000266af2773901769e"
 html_url = "https://github.com/metabase/metabase"
-stars = 49324
+stars = 49872

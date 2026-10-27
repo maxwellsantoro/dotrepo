@@ -1,9 +1,10 @@
 # Evidence
 
-- Imported repository name from README.md.
+- Imported repository name and docs entry points from README.md.
 - Imported repo.build from package.json as `yarn build`.
 - Imported repo.test from package.json as `yarn test`.
 - Imported repo.toolchain.min from package.json as `18` (Node.js).
+- Imported docs.root as `https://testing-library.com/react`. Explicit documentation link at README.md:417: [**Read The Docs**](https://testing-library.com/react) |
 - Discovered related relation to github.com/testing-library/react-testing-library from package.json repository.
 - Discovered related relation to github.com/testing-library/testing-library-docs from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.

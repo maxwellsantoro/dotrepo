@@ -5,6 +5,7 @@
 - Imported the security reporting channel from SECURITY.md.
 - Imported repo.build from package.json as `pnpm build`.
 - Imported repo.test from package.json as `pnpm test`.
+- Imported docs.root as `https://momentjs.com/docs/`. Explicit documentation link at README.md:23: - [Documentation](https://momentjs.com/docs/)
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.name` to `moment` from `GitHub API` after deterministic escalation.

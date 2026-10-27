@@ -5,6 +5,7 @@
 - Imported the security reporting channel from SECURITY.md.
 - Imported repo.test from package.json as `npm test`.
 - Imported repo.toolchain.min from package.json as `22.22.2` (Node.js).
+- Imported docs.root as `https://docs.npmjs.com/`. Explicit documentation link at README.md:31: * [**Documentation**](https://docs.npmjs.com/) - Official docs & how-tos for all things **npm**
 - Discovered related relation to github.com/npm/cli from package.json repository.
 - This is an overlay record, not a maintainer-controlled canonical record.
 

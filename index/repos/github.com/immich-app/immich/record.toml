@@ -2,16 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/immich-app/immich"
-generated_at = "2026-09-16T16:34:25.842092Z"
+generated_at = "2026-10-27T17:26:34.561476Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `CODEOWNERS`, and `server/package.json`. Imported `repo.build` from `server/package.json`. Imported `repo.test` from `server/package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved. 2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged."
+notes = "Bootstrapped from `README.md` and `CODEOWNERS`. Ignored component-scoped commands from `server/package.json` as repository defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "immich"
@@ -26,19 +27,17 @@ languages = [
     "Python",
     "Kotlin",
     "Swift",
-    "JavaScript",
+    "Rust",
     "Shell",
+    "JavaScript",
     "Ruby",
     "Dockerfile",
     "C++",
-    "C",
-    "Java",
     "HCL",
     "HTML",
     "CSS",
-    "CMake",
-    "Go Template",
     "Objective-C",
+    "Go Template",
 ]
 topics = [
     "backup-tool",
@@ -74,23 +73,25 @@ root = "https://docs.immich.app/"
 getting_started = "https://docs.immich.app/install/requirements"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:34:25.842092Z"
+checkedAt = "2026-10-27T17:26:34.561476Z"
 confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:58: - [Installation](https://docs.immich.app/install/requirements)"
+source = "README.md"
 state = "present"
 valueJson = '"https://docs.immich.app/install/requirements"'
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:34:25.842092Z"
+checkedAt = "2026-10-27T17:26:34.561476Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:56: - [Documentation](https://docs.immich.app/)"
+source = "README.md"
 state = "present"
 valueJson = '"https://docs.immich.app/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:34:25.842092Z"
+checkedAt = "2026-10-27T17:26:34.561476Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -98,7 +99,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:34:25.842092Z"
+checkedAt = "2026-10-27T17:26:34.561476Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -106,16 +107,15 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:34:25.842092Z"
-confidence = "low"
-method = "extracted"
-reason = "Component command lacks repository-default scope and working directory."
-source = "server/package.json"
-state = "unresolved"
+checkedAt = "2026-10-27T17:26:34.561476Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no build command sources found"
+state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:34:25.842092Z"
+checkedAt = "2026-10-27T17:26:34.561476Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -124,7 +124,7 @@ state = "present"
 valueJson = '"High performance self-hosted photo and video management solution."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:34:25.842092Z"
+checkedAt = "2026-10-27T17:26:34.561476Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -132,21 +132,20 @@ state = "present"
 valueJson = '"https://immich.app"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:34:25.842092Z"
+checkedAt = "2026-10-27T17:26:34.561476Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"immich"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:34:25.842092Z"
-confidence = "low"
-method = "extracted"
-reason = "Component command lacks repository-default scope and working directory."
-source = "server/package.json"
-state = "unresolved"
+checkedAt = "2026-10-27T17:26:34.561476Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no test command sources found"
+state = "not_found"
 valueJson = "null"
 
 [x.github]
@@ -154,6 +153,6 @@ archived = false
 clone_url = "https://github.com/immich-app/immich.git"
 default_branch = "main"
 fork = false
-head_sha = "c6b363e6251206061b610bd6b4bdee94912c0352"
+head_sha = "02a5d4b2060dad6f5779c196b7bb2b43f871ffb2"
 html_url = "https://github.com/immich-app/immich"
-stars = 114424
+stars = 117394

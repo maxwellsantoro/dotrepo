@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/zhimaAi/chatwiki"
-generated_at = "2026-09-16T16:31:21.518903Z"
+generated_at = "2026-10-27T18:22:12.750295Z"
 
 [record.trust]
 confidence = "medium"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `front-end/chat-ai-admin-vue/package.json`, and `go.mod`. Imported `repo.build` from `front-end/chat-ai-admin-vue/package.json`. Inferred `repo.test` from `go.mod`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. 2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged."
+notes = "Bootstrapped from `README.md` and `go.mod`. Ignored component-scoped commands from `front-end/chat-ai-admin-vue/package.json` as repository defaults. Inferred `repo.build` from `go.mod`. Inferred `repo.test` from `go.mod`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
 
 [repo]
 name = "chatwiki"
@@ -34,6 +34,7 @@ languages = [
     "Shell",
     "Batchfile",
 ]
+build = "go build ./..."
 test = "go test ./..."
 topics = [
     "llm",
@@ -48,27 +49,24 @@ topics = [
 min = "1.25.0"
 ecosystem = "Go"
 
-[docs]
-root = "https://chatwiki.ai"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:31:21.518903Z"
+checkedAt = "2026-10-27T18:22:12.750295Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:31:21.518903Z"
+checkedAt = "2026-10-27T18:22:12.750295Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://chatwiki.ai"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:31:21.518903Z"
+checkedAt = "2026-10-27T18:22:12.750295Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -76,7 +74,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:31:21.518903Z"
+checkedAt = "2026-10-27T18:22:12.750295Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -84,16 +82,16 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:31:21.518903Z"
-confidence = "low"
-method = "extracted"
-reason = "Component command lacks repository-default scope and working directory."
-source = "front-end/chat-ai-admin-vue/package.json"
-state = "unresolved"
-valueJson = "null"
+checkedAt = "2026-10-27T18:22:12.750295Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "go.mod"
+state = "present"
+valueJson = '"go build ./..."'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:31:21.518903Z"
+checkedAt = "2026-10-27T18:22:12.750295Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -102,7 +100,7 @@ state = "present"
 valueJson = '"ChatWiki 微信公众号的AI知识库工作流Agent平台，RAG大模型AI客服机器人，致力于成为垂直领域的coze、n8n。"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:31:21.518903Z"
+checkedAt = "2026-10-27T18:22:12.750295Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -110,16 +108,16 @@ state = "present"
 valueJson = '"https://chatwiki.ai"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:31:21.518903Z"
+checkedAt = "2026-10-27T18:22:12.750295Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"chatwiki"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:31:21.518903Z"
+checkedAt = "2026-10-27T18:22:12.750295Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -132,6 +130,6 @@ archived = false
 clone_url = "https://github.com/zhimaAi/chatwiki.git"
 default_branch = "main"
 fork = false
-head_sha = "521616a9fe4b55d28f42e0d708277e33e68b3893"
+head_sha = "15e1fa2bd85ac3fd6da0e74e3c70494284317a64"
 html_url = "https://github.com/zhimaAi/chatwiki"
-stars = 2078
+stars = 2096

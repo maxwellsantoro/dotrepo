@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/npm/cli"
-generated_at = "2026-09-16T16:27:24.738797Z"
+generated_at = "2026-10-27T18:13:06.06356Z"
 
 [record.trust]
 confidence = "high"
@@ -67,23 +67,24 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:27:24.738797Z"
+checkedAt = "2026-10-27T18:13:06.06356Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:27:24.738797Z"
+checkedAt = "2026-10-27T18:13:06.06356Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:31: * [**Documentation**](https://docs.npmjs.com/) - Official docs & how-tos for all things **npm**"
+source = "README.md"
 state = "present"
 valueJson = '"https://docs.npmjs.com/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:27:24.738797Z"
+checkedAt = "2026-10-27T18:13:06.06356Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -92,7 +93,7 @@ state = "present"
 valueJson = '"opensource-security@github.com"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:27:24.738797Z"
+checkedAt = "2026-10-27T18:13:06.06356Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -100,7 +101,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:27:24.738797Z"
+checkedAt = "2026-10-27T18:13:06.06356Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -108,7 +109,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:27:24.738797Z"
+checkedAt = "2026-10-27T18:13:06.06356Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -117,7 +118,7 @@ state = "present"
 valueJson = '"the package manager for JavaScript"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:27:24.738797Z"
+checkedAt = "2026-10-27T18:13:06.06356Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -125,16 +126,16 @@ state = "present"
 valueJson = '"https://docs.npmjs.com/cli/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:27:24.738797Z"
+checkedAt = "2026-10-27T18:13:06.06356Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"cli"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:27:24.738797Z"
+checkedAt = "2026-10-27T18:13:06.06356Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -147,6 +148,6 @@ archived = false
 clone_url = "https://github.com/npm/cli.git"
 default_branch = "latest"
 fork = false
-head_sha = "c9876d7ea7150b0702e4151210b9fa1a8dbc7fbf"
+head_sha = "311ff5effbb1f96181c89a1ce6ebfe0c369e1ec1"
 html_url = "https://github.com/npm/cli"
-stars = 10118
+stars = 10220

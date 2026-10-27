@@ -5,6 +5,7 @@
 - Imported repo.build from package.json as `npm run build`.
 - Imported repo.test from package.json as `npm test`.
 - Imported repo.toolchain.min from package.json as `20` (Node.js).
+- Imported docs.root as `https://playwright.dev`. Explicit documentation link at README.md:311: * [Documentation](https://playwright.dev)
 - Discovered related relation to github.com/microsoft/playwright from package.json repository.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

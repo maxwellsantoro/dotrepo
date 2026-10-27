@@ -5,6 +5,7 @@
 - Imported repo.build from package.json as `yarn build`.
 - Imported repo.test from package.json as `yarn test`.
 - Imported repo.toolchain.min from package.json as `22` (Node.js).
+- Imported docs.root as `https://prettier.io/docs/`. Explicit documentation link at README.md:83: **[Documentation](https://prettier.io/docs/)**
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.name` to `prettier` from `GitHub API` after deterministic escalation.

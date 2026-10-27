@@ -4,7 +4,9 @@
 - Imported maintainer candidates from CODEOWNERS.
 - Imported SECURITY.md, but no explicit contact channel was parsed, so security_contact = "unknown" is intentional.
 - Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.
-- Inferred repo.build from optimizerDuck/optimizerDuck.csproj as `dotnet build`.
+- Ignored component-scoped commands from `optimizerDuck/optimizerDuck.csproj` as repository defaults.
+- Imported docs.root as `https://optimizerduck.vercel.app/docs/guides/getting-started`. Explicit documentation link at README.md:325: - 📖 [Documentation](https://optimizerduck.vercel.app/docs/guides/getting-started)
+- Imported docs.getting_started as `https://optimizerduck.vercel.app/docs/guides/getting-started`. Explicit documentation link at README.md:23: **[Getting Started](https://optimizerduck.vercel.app/docs/guides/getting-started) | [How It Works](https://optimizerduck.vercel.app/docs/guides/how-it-works) | [FAQ](https://optimizerduck.vercel.app/docs/faq/general)**
 - Discovered related relation to github.com/itsfatduck/optimizerDuck from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
@@ -15,12 +17,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Fresh verification
+## Auto-promotion
 
-Prior verified authority was not inherited: this refresh must qualify using its current field scores.
-
-## Command semantic correction (2026-10-03)
-
-2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged.
-
-- Withheld `repo.build` previously extracted from `optimizerDuck/optimizerDuck.csproj` as `dotnet build`. Component command lacks repository-default scope and working directory.
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

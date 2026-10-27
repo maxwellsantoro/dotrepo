@@ -1,6 +1,6 @@
 # Evidence
 
-- Imported repository name and docs entry points from README.md.
+- Imported repository name from README.md.
 - Imported repo.build from package.json as `pnpm build`.
 - Imported repo.test from package.json as `pnpm test`.
 - Discovered related relation to github.com/solidjs/solid from package.json repository.

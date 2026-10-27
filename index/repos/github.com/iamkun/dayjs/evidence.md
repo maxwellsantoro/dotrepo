@@ -3,6 +3,8 @@
 - Imported repository name and docs entry points from README.md.
 - Imported repo.build from package.json as `npm run build`.
 - Imported repo.test from package.json as `npm test`.
+- Imported docs.root as `https://day.js.org/`. Explicit documentation link at README.md:44: You can find more details, API, and other docs on [day.js.org](https://day.js.org/) website.
+- Imported docs.getting_started as `https://day.js.org/docs/en/installation/installation`. Explicit documentation link at README.md:52: 📚[Installation Guide](https://day.js.org/docs/en/installation/installation)
 - Discovered related relation to github.com/iamkun/dayjs from package.json repository.
 - This is an overlay record, not a maintainer-controlled canonical record.
 

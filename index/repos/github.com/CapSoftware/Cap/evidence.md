@@ -3,7 +3,8 @@
 - Imported repository name and docs entry points from README.md.
 - Imported repo.build from package.json as `bun run build`.
 - Imported repo.test from package.json as `bun run test`.
-- Imported repo.toolchain.min from package.json as `20` (Node.js).
+- Imported repo.toolchain.min from package.json as `24` (Node.js).
+- Imported docs.root as `https://cap.so/docs`. Explicit documentation link at README.md:16: <a href="https://cap.so/docs">Docs</a>
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

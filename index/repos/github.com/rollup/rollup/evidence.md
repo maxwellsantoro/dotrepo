@@ -2,6 +2,7 @@
 
 - Imported repository name from README.md.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
+- Ignored component-scoped commands from `rust/Cargo.toml` as repository defaults.
 - Imported repo.build from package.json as `npm run build`.
 - Imported repo.test from package.json as `npm test`.
 - Imported repo.toolchain.min from package.json as `18.0.0` (Node.js).

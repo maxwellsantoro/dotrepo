@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/InsertKoinIO/koin"
-generated_at = "2026-09-16T16:34:15.122506Z"
+generated_at = "2026-10-27T17:26:09.499103Z"
 
 [record.trust]
 confidence = "high"
@@ -17,7 +17,7 @@ notes = "Bootstrapped from `README.md`. Filled `repo.name` with inferred default
 
 [repo]
 name = "koin"
-description = "Koin - a pragmatic lightweight dependency injection framework for Kotlin & Kotlin Multiplatform"
+description = "Koin - pragmatic dependency injection for Kotlin & Kotlin Multiplatform. Koin DSL or Koin Annotations (JSR-330), compile safe with the Koin Compiler Plugin."
 homepage = "https://insert-koin.io"
 license = "Apache-2.0"
 visibility = "public"
@@ -34,59 +34,30 @@ topics = [
     "kotlin-multiplatform",
     "kotlin-multiplatform-library",
     "library",
+    "compose-multiplatform",
+    "jsr-330",
+    "koin",
+    "ktor",
 ]
-
-[[repo.build_candidates]]
-command = "./install.sh"
-ecosystem = "Gradle"
-source = "CONTRIBUTING.adoc"
-
-[repo.build_candidates.context]
-command = "./install.sh"
-working_directory = "projects"
-scope = "component"
-prerequisites = [
-    "Prepare JDK 17 as declared by .github/actions/prepare-env/action.yml and allow the checked-in Gradle 8.14.3 wrapper to obtain dependencies.",
-    "Prepare the Android SDK required by projects/android/koin-android/build.gradle.kts (compile SDK 36 in projects/gradle.properties).",
-]
-source = "CONTRIBUTING.adoc"
-component = "projects"
-
-[[repo.test_candidates]]
-command = "./test.sh"
-ecosystem = "Gradle"
-source = "CONTRIBUTING.adoc"
-
-[repo.test_candidates.context]
-command = "./test.sh"
-working_directory = "projects"
-scope = "component"
-prerequisites = [
-    "Prepare JDK 17 as declared by .github/actions/prepare-env/action.yml and allow the checked-in Gradle 8.14.3 wrapper to obtain dependencies.",
-    "Prepare the Android SDK required by projects/android/koin-android/build.gradle.kts (compile SDK 36 in projects/gradle.properties).",
-]
-source = "CONTRIBUTING.adoc"
-component = "projects"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:34:15.122506Z"
+checkedAt = "2026-10-27T17:26:09.499103Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-06T05:08:10.049774+00:00"
-confidence = "medium"
-method = "unspecified"
-reason = "2026-10-06 pinned-source audit: README labels this URL Official Website; its separate setup-page leaf does not establish a documentation root. Withhold the unsupported association and preserve repo.homepage."
-source = "README.md"
-state = "unresolved"
+checkedAt = "2026-10-27T17:26:09.499103Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:34:15.122506Z"
+checkedAt = "2026-10-27T17:26:09.499103Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -94,7 +65,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:34:15.122506Z"
+checkedAt = "2026-10-27T17:26:09.499103Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -102,25 +73,24 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-06T05:08:10.049774+00:00"
-confidence = "medium"
-method = "unspecified"
-reason = "2026-10-06 pinned-source audit: CONTRIBUTING.adoc declares the projects-scoped install wrapper; preserve it as a component candidate, withhold a scalar and assessment while platform prerequisites remain incomplete."
-source = "CONTRIBUTING.adoc"
-state = "unresolved"
+checkedAt = "2026-10-27T17:26:09.499103Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no build command sources found"
+state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:34:15.122506Z"
+checkedAt = "2026-10-27T17:26:09.499103Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
 source = "GitHub API"
 state = "present"
-valueJson = '"Koin - a pragmatic lightweight dependency injection framework for Kotlin & Kotlin Multiplatform"'
+valueJson = '"Koin - pragmatic dependency injection for Kotlin & Kotlin Multiplatform. Koin DSL or Koin Annotations (JSR-330), compile safe with the Koin Compiler Plugin."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:34:15.122506Z"
+checkedAt = "2026-10-27T17:26:09.499103Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -128,21 +98,20 @@ state = "present"
 valueJson = '"https://insert-koin.io"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:34:15.122506Z"
+checkedAt = "2026-10-27T17:26:09.499103Z"
 confidence = "high"
 method = "inferred"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"koin"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-06T05:08:10.049774+00:00"
-confidence = "medium"
-method = "unspecified"
-reason = "2026-10-06 pinned-source audit: CONTRIBUTING.adoc and CI declare the projects test wrapper covering JVM/Android/KMP JVM tests, not examples or macOS-native tests. Preserve wrapper and component scope; prerequisites remain unassessed."
-source = "CONTRIBUTING.adoc"
-state = "unresolved"
+checkedAt = "2026-10-27T17:26:09.499103Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no test command sources found"
+state = "not_found"
 valueJson = "null"
 
 [x.github]
@@ -150,6 +119,6 @@ archived = false
 clone_url = "https://github.com/InsertKoinIO/koin.git"
 default_branch = "main"
 fork = false
-head_sha = "dc86ef8dd8fbe8564fb7453c03f5b738da3450bb"
+head_sha = "d39a4f8ecfc82920e5ff4ee1555d73af7db3b1ef"
 html_url = "https://github.com/InsertKoinIO/koin"
-stars = 10022
+stars = 10024

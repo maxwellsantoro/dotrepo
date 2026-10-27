@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/LizardByte/Sunshine"
-generated_at = "2026-09-16T16:31:27.280727Z"
+generated_at = "2026-10-27T18:22:19.813639Z"
 
 [record.trust]
 confidence = "medium"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `package.json`, and `pyproject.toml`. Imported `repo.build` from `package.json`. Inferred `repo.test` from `pyproject.toml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`, `package.json`, and `pyproject.toml`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `package.json`. Left `repo.test` unset because `package.json` and `pyproject.toml` suggested conflicting test commands. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Sunshine icon"
@@ -25,10 +25,10 @@ languages = [
     "Vue",
     "CMake",
     "Objective-C++",
+    "JavaScript",
     "CSS",
     "Shell",
     "PowerShell",
-    "JavaScript",
     "Ruby",
     "Objective-C",
     "HTML",
@@ -42,7 +42,6 @@ languages = [
     "C",
 ]
 build = "npm run build"
-test = "python -m pytest"
 topics = [
     "game-streaming-server",
     "game-stream",
@@ -62,31 +61,53 @@ topics = [
     "cpm",
 ]
 
+[[repo.test_candidates]]
+command = "npm test"
+ecosystem = "Node.js"
+source = "package.json"
+
+[[repo.test_candidates]]
+command = "python -m pytest"
+ecosystem = "Python"
+source = "pyproject.toml"
+
 [repo.toolchain]
 min = "3.14"
 ecosystem = "Python"
 
-[docs]
-root = "http://app.lizardbyte.dev/Sunshine/"
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/LizardByte/Sunshine"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:31:27.280727Z"
+checkedAt = "2026-10-27T18:22:19.813639Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:31:27.280727Z"
+checkedAt = "2026-10-27T18:22:19.813639Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"http://app.lizardbyte.dev/Sunshine/"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:31:27.280727Z"
+checkedAt = "2026-10-27T18:22:19.813639Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -94,7 +115,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:31:27.280727Z"
+checkedAt = "2026-10-27T18:22:19.813639Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -102,7 +123,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:31:27.280727Z"
+checkedAt = "2026-10-27T18:22:19.813639Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -111,16 +132,16 @@ state = "present"
 valueJson = '"npm run build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:31:27.280727Z"
+checkedAt = "2026-10-27T18:22:19.813639Z"
 confidence = "high"
-method = "extracted"
+method = "inferred"
 reason = "constrained by GitHub repository metadata"
 source = "GitHub API"
 state = "present"
 valueJson = '"Self-hosted game stream host for Moonlight."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:31:27.280727Z"
+checkedAt = "2026-10-27T18:22:19.813639Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -128,28 +149,27 @@ state = "present"
 valueJson = '"http://app.lizardbyte.dev/Sunshine/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:31:27.280727Z"
+checkedAt = "2026-10-27T18:22:19.813639Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Sunshine icon"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:31:27.280727Z"
-confidence = "medium"
-method = "inferred"
-reason = "inferred ecosystem default from build-tool metadata"
-source = "pyproject.toml"
-state = "present"
-valueJson = '"python -m pytest"'
+checkedAt = "2026-10-27T18:22:19.813639Z"
+confidence = "low"
+method = "unresolved"
+reason = "intra-tier conflict left field unset during import"
+state = "unresolved"
+valueJson = "null"
 
 [x.github]
 archived = false
 clone_url = "https://github.com/LizardByte/Sunshine.git"
 default_branch = "master"
 fork = false
-head_sha = "d23336dc4ddcae025252e550d59d0f50ad500b97"
+head_sha = "d0b4a88ef727f8dabf80cc970a14739b55c885de"
 html_url = "https://github.com/LizardByte/Sunshine"
-stars = 41272
+stars = 42708

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/postgres/postgres"
-generated_at = "2026-09-16T16:27:56.925594Z"
+generated_at = "2026-10-27T18:28:03.519586Z"
 
 [record.trust]
 confidence = "high"
@@ -39,6 +39,7 @@ languages = [
     "Emacs Lisp",
     "DTrace",
     "PowerShell",
+    "Dockerfile",
     "sed",
 ]
 build = "make all"
@@ -49,27 +50,24 @@ topics = []
 maintainers = []
 security_contact = "https://www.postgresql.org/support/security/"
 
-[docs]
-root = "https://www.postgresql.org/"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:27:56.925594Z"
+checkedAt = "2026-10-27T18:28:03.519586Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:27:56.925594Z"
+checkedAt = "2026-10-27T18:28:03.519586Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://www.postgresql.org/"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:27:56.925594Z"
+checkedAt = "2026-10-27T18:28:03.519586Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -78,7 +76,7 @@ state = "present"
 valueJson = '"https://www.postgresql.org/support/security/"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:27:56.925594Z"
+checkedAt = "2026-10-27T18:28:03.519586Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -86,7 +84,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:27:56.925594Z"
+checkedAt = "2026-10-27T18:28:03.519586Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -95,7 +93,7 @@ state = "present"
 valueJson = '"make all"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:27:56.925594Z"
+checkedAt = "2026-10-27T18:28:03.519586Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -104,7 +102,7 @@ state = "present"
 valueJson = """"Mirror of the official PostgreSQL GIT repository. Note that this is just a *mirror* - we don't work with pull requests on github. To contribute, please see https://wiki.postgresql.org/wiki/Submitting_a_Patch""""
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:27:56.925594Z"
+checkedAt = "2026-10-27T18:28:03.519586Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -112,16 +110,16 @@ state = "present"
 valueJson = '"https://www.postgresql.org/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:27:56.925594Z"
+checkedAt = "2026-10-27T18:28:03.519586Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"PostgreSQL Database Management System"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:27:56.925594Z"
+checkedAt = "2026-10-27T18:28:03.519586Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -134,6 +132,6 @@ archived = false
 clone_url = "https://github.com/postgres/postgres.git"
 default_branch = "master"
 fork = false
-head_sha = "fcc0e27f45e2d8dc6046435908a48626c91d3d84"
+head_sha = "b936425002c54abab86dab151efdbb6952314388"
 html_url = "https://github.com/postgres/postgres"
-stars = 22121
+stars = 22600

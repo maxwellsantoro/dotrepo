@@ -1,10 +1,9 @@
 # Evidence
 
-- Imported repository name and docs entry points from README.md.
+- Imported repository name from README.md.
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@Significant-Gravitas/maintainers` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates.
 - Imported the security reporting channel from SECURITY.md.
 - Ignored component-scoped commands from `autogpt_platform/autogpt_libs/pyproject.toml` as repository defaults.
-- Imported docs.root as `https://docs.agpt.co`. Explicit documentation link at README.md:21: <a href="https://docs.agpt.co">Docs</a>
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

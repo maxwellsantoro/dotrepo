@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/microsoft/TypeScript"
-generated_at = "2026-09-18T06:03:52.871925562Z"
+generated_at = "2026-10-27T18:26:39.233036Z"
 
 [record.trust]
 confidence = "high"
@@ -45,7 +45,7 @@ maintainers = []
 security_contact = "https://msrc.microsoft.com/create-report"
 
 [docs]
-root = "https://www.typescriptlang.org"
+root = "https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html"
 
 [relations]
 references = []
@@ -63,23 +63,24 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-18T06:03:52.871925562Z"
+checkedAt = "2026-10-27T18:26:39.233036Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-18T06:03:52.871925562Z"
+checkedAt = "2026-10-27T18:26:39.233036Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:44: *  [TypeScript in 5 minutes](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)"
+source = "README.md"
 state = "present"
-valueJson = '"https://www.typescriptlang.org"'
+valueJson = '"https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-18T06:03:52.871925562Z"
+checkedAt = "2026-10-27T18:26:39.233036Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -88,7 +89,7 @@ state = "present"
 valueJson = '"https://msrc.microsoft.com/create-report"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-18T06:03:52.871925562Z"
+checkedAt = "2026-10-27T18:26:39.233036Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -96,7 +97,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-18T06:03:52.871925562Z"
+checkedAt = "2026-10-27T18:26:39.233036Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -105,7 +106,7 @@ state = "present"
 valueJson = '"npm run build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-18T06:03:52.871925562Z"
+checkedAt = "2026-10-27T18:26:39.233036Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -114,7 +115,7 @@ state = "present"
 valueJson = '"TypeScript is a superset of JavaScript that compiles to clean JavaScript output."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-18T06:03:52.871925562Z"
+checkedAt = "2026-10-27T18:26:39.233036Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -122,16 +123,16 @@ state = "present"
 valueJson = '"https://www.typescriptlang.org"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-18T06:03:52.871925562Z"
+checkedAt = "2026-10-27T18:26:39.233036Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"TypeScript"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-18T06:03:52.871925562Z"
+checkedAt = "2026-10-27T18:26:39.233036Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -144,6 +145,6 @@ archived = false
 clone_url = "https://github.com/microsoft/TypeScript.git"
 default_branch = "main"
 fork = false
-head_sha = "c975de5011fb7dfb32a491cf3fcf02d4f811f50e"
+head_sha = "ab8f7140088efc49f8bea22f00f43ae87b885b20"
 html_url = "https://github.com/microsoft/TypeScript"
-stars = 111095
+stars = 111630

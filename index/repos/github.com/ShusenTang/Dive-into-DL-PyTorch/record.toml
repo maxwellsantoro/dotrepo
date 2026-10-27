@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/ShusenTang/Dive-into-DL-PyTorch"
-generated_at = "2026-10-04T07:50:44.627995652Z"
+generated_at = "2026-10-27T17:50:46.596911Z"
 
 [record.trust]
 confidence = "low"
@@ -32,11 +32,8 @@ topics = [
     "d2l",
 ]
 
-[docs]
-root = "http://tangshusen.me/Dive-into-DL-PyTorch"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-04T07:50:44.627995652Z"
+checkedAt = "2026-10-27T17:50:46.596911Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -44,15 +41,15 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-04T07:50:44.627995652Z"
-confidence = "medium"
-method = "unspecified"
-reason = "documentation target present without a retained source declaration"
-state = "present"
-valueJson = '"http://tangshusen.me/Dive-into-DL-PyTorch"'
+checkedAt = "2026-10-27T17:50:46.596911Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-04T07:50:44.627995652Z"
+checkedAt = "2026-10-27T17:50:46.596911Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -60,7 +57,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-04T07:50:44.627995652Z"
+checkedAt = "2026-10-27T17:50:46.596911Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -68,7 +65,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-04T07:50:44.627995652Z"
+checkedAt = "2026-10-27T17:50:46.596911Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -76,7 +73,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-04T07:50:44.627995652Z"
+checkedAt = "2026-10-27T17:50:46.596911Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -85,7 +82,7 @@ state = "present"
 valueJson = '"本项目将《动手学深度学习》(Dive into Deep Learning)原书中的MXNet实现改为PyTorch实现。"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-04T07:50:44.627995652Z"
+checkedAt = "2026-10-27T17:50:46.596911Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -93,7 +90,7 @@ state = "present"
 valueJson = '"http://tangshusen.me/Dive-into-DL-PyTorch"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-04T07:50:44.627995652Z"
+checkedAt = "2026-10-27T17:50:46.596911Z"
 confidence = "medium"
 method = "inferred"
 reason = "fell back to directory name or GitHub API"
@@ -101,7 +98,7 @@ state = "present"
 valueJson = '"Dive-into-DL-PyTorch"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-04T07:50:44.627995652Z"
+checkedAt = "2026-10-27T17:50:46.596911Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"

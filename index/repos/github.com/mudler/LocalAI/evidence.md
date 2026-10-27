@@ -2,9 +2,13 @@
 
 - Imported repository name and docs entry points from README.md.
 - Imported the security reporting channel from SECURITY.md.
-- Imported repo.build from core/http/react-ui/package.json as `npm run build`.
+- Ignored component-scoped commands from `addons/face/ui/package.json` as repository defaults.
+- Imported repo.build from CONTRIBUTING.md as `make build`.
 - Imported repo.test from CONTRIBUTING.md as `make test`.
 - Imported repo.toolchain.min from go.mod as `1.26.0` (Go).
+- Imported docs.root as `https://localai.io/`. Explicit documentation link at README.md:270: - [Documentation](https://localai.io/)
+- Imported docs.getting_started as `https://localai.io/basics/getting_started/`. Explicit documentation link at README.md:58: > [:book: Documentation](https://localai.io/) | [:speech_balloon: Discord](https://discord.gg/uJAeKSAGDy) | [💻 Quickstart](https://localai.io/basics/getting_started/) | [🖼️ Models](https://models.localai.io/) | [❓FAQ](https://localai.io/faq/)
+- Discovered related relation to github.com/mudler/LocalAI from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
@@ -17,9 +21,3 @@
 ## Auto-promotion
 
 All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
-
-## Command semantic correction (2026-10-03)
-
-2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged.
-
-- Withheld `repo.build` previously extracted from `core/http/react-ui/package.json` as `npm run build`. Component command lacks repository-default scope and working directory.

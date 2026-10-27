@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/mermaid-js/mermaid"
-generated_at = "2026-09-16T16:26:36.176548Z"
+generated_at = "2026-10-27T18:09:27.638022Z"
 
 [record.trust]
 confidence = "high"
@@ -50,7 +50,6 @@ min = "22.12.0"
 ecosystem = "Node.js"
 
 [docs]
-root = "https://mermaid.js.org/config/usage.html"
 getting_started = "https://mermaid.ai/open-source/intro/"
 
 [relations]
@@ -81,23 +80,24 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:26:36.176548Z"
+checkedAt = "2026-10-27T18:09:27.638022Z"
 confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
+method = "extracted"
+reason = 'Explicit documentation link at README.md:18: <a href="https://mermaid.ai/open-source/">📖 Documentation</a> | <a href="https://mermaid.ai/open-source/intro/">🚀 Getting Started</a> | <a href="https://www.jsdelivr.com/package/npm/mermaid">🌐 CDN</a> | <a href="https://discord.gg/sKeNQX4Wtj" title="Discord invite">🙌 Join Us</a>'
+source = "README.md"
 state = "present"
 valueJson = '"https://mermaid.ai/open-source/intro/"'
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:26:36.176548Z"
+checkedAt = "2026-10-27T18:09:27.638022Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://mermaid.js.org/config/usage.html"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:26:36.176548Z"
+checkedAt = "2026-10-27T18:09:27.638022Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -105,7 +105,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:26:36.176548Z"
+checkedAt = "2026-10-27T18:09:27.638022Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -113,7 +113,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:26:36.176548Z"
+checkedAt = "2026-10-27T18:09:27.638022Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -122,7 +122,7 @@ state = "present"
 valueJson = '"pnpm build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:26:36.176548Z"
+checkedAt = "2026-10-27T18:09:27.638022Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -131,7 +131,7 @@ state = "present"
 valueJson = '"Generation of diagrams like flowcharts or sequence diagrams from text in a similar manner as markdown"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:26:36.176548Z"
+checkedAt = "2026-10-27T18:09:27.638022Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -139,16 +139,16 @@ state = "present"
 valueJson = '"https://mermaid.ai/open-source/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:26:36.176548Z"
+checkedAt = "2026-10-27T18:09:27.638022Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Mermaid"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:26:36.176548Z"
+checkedAt = "2026-10-27T18:09:27.638022Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -161,6 +161,6 @@ archived = false
 clone_url = "https://github.com/mermaid-js/mermaid.git"
 default_branch = "develop"
 fork = false
-head_sha = "cf8344105a850804c2addd98a1dc235f7de07bfc"
+head_sha = "7b981f640c63cacd06742a95a55c1351c5440582"
 html_url = "https://github.com/mermaid-js/mermaid"
-stars = 90268
+stars = 90898

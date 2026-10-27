@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/usememos/memos"
-generated_at = "2026-09-18T06:06:23.768525891Z"
+generated_at = "2026-10-27T17:39:22.609929Z"
 
 [record.trust]
 confidence = "medium"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, `.github/workflows/frontend-tests.yml`, and `go.mod`. Inferred `repo.build` from `.github/workflows/frontend-tests.yml`. Inferred `repo.test` from `.github/workflows/frontend-tests.yml`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `go.mod`. Inferred `repo.build` from `go.mod`. Inferred `repo.test` from `go.mod`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Memos"
-description = "Open-source, self-hosted note-taking tool built for quick capture. Markdown-native, lightweight, and fully yours."
+description = "Memos is an open-source, self-hosted note-taking app that brings your everyday thoughts together in a personal timeline. Your data stays yours, and you choose what to keep private or share."
 homepage = "https://usememos.com"
 license = "MIT"
 visibility = "public"
@@ -29,8 +29,8 @@ languages = [
     "Dockerfile",
     "HTML",
 ]
-build = "pnpm build"
-test = "pnpm test"
+build = "go build ./..."
+test = "go test ./..."
 topics = [
     "react",
     "go",
@@ -41,14 +41,15 @@ topics = [
     "memo",
     "docker",
     "microblog",
-    "social-network",
-    "notecard",
     "foss",
     "own-your-data",
+    "notes",
+    "open-source",
+    "timeline",
 ]
 
 [repo.toolchain]
-min = "1.27.0"
+min = "1.27.2"
 ecosystem = "Go"
 
 [owners]
@@ -59,24 +60,40 @@ security_contact = "dev@usememos.com"
 [docs]
 root = "https://usememos.com/docs"
 
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/usememos/memos"
+notes = "Cross-link from README: v0.31.0"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-18T06:06:23.768525891Z"
+checkedAt = "2026-10-27T17:39:22.609929Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-18T06:06:23.768525891Z"
+checkedAt = "2026-10-27T17:39:22.609929Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:14: [Demo](https://demo.usememos.com) · [Install](#quick-start) · [Docs](https://usememos.com/docs) · [Discord](https://discord.gg/tfPJa4UmAv)"
+source = "README.md"
 state = "present"
 valueJson = '"https://usememos.com/docs"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-18T06:06:23.768525891Z"
+checkedAt = "2026-10-27T17:39:22.609929Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -85,7 +102,7 @@ state = "present"
 valueJson = '"dev@usememos.com"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-18T06:06:23.768525891Z"
+checkedAt = "2026-10-27T17:39:22.609929Z"
 confidence = "high"
 method = "extracted"
 reason = "clear CODEOWNERS team"
@@ -94,25 +111,25 @@ state = "present"
 valueJson = '"@usememos/moderators"'
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-18T06:06:23.768525891Z"
+checkedAt = "2026-10-27T17:39:22.609929Z"
 confidence = "medium"
 method = "inferred"
-reason = "from workflow fallback"
-source = ".github/workflows/frontend-tests.yml"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "go.mod"
 state = "present"
-valueJson = '"pnpm build"'
+valueJson = '"go build ./..."'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-18T06:06:23.768525891Z"
+checkedAt = "2026-10-27T17:39:22.609929Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
 source = "GitHub API"
 state = "present"
-valueJson = '"Open-source, self-hosted note-taking tool built for quick capture. Markdown-native, lightweight, and fully yours."'
+valueJson = '"Memos is an open-source, self-hosted note-taking app that brings your everyday thoughts together in a personal timeline. Your data stays yours, and you choose what to keep private or share."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-18T06:06:23.768525891Z"
+checkedAt = "2026-10-27T17:39:22.609929Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -120,28 +137,28 @@ state = "present"
 valueJson = '"https://usememos.com"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-18T06:06:23.768525891Z"
+checkedAt = "2026-10-27T17:39:22.609929Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Memos"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-18T06:06:23.768525891Z"
+checkedAt = "2026-10-27T17:39:22.609929Z"
 confidence = "medium"
 method = "inferred"
-reason = "from workflow fallback"
-source = ".github/workflows/frontend-tests.yml"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "go.mod"
 state = "present"
-valueJson = '"pnpm test"'
+valueJson = '"go test ./..."'
 
 [x.github]
 archived = false
 clone_url = "https://github.com/usememos/memos.git"
 default_branch = "main"
 fork = false
-head_sha = "619eb8d6b8abf52056b3863b9bccdb58d414fc5d"
+head_sha = "dcf08b5911a4faefc41664779713956b21980081"
 html_url = "https://github.com/usememos/memos"
-stars = 63139
+stars = 64119

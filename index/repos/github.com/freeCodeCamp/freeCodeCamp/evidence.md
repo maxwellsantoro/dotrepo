@@ -1,7 +1,7 @@
 # Evidence
 
 - Imported repository name from README.md.
-- Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates.
+- Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@freecodecamp/dev-team` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates.
 - Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.
 - Imported repo.build from package.json as `pnpm build`.
 - Imported repo.test from package.json as `pnpm test`.

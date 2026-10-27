@@ -2,17 +2,18 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/mocheng/react-and-redux"
-generated_at = "2026-09-16T16:26:56.764537Z"
+generated_at = "2026-10-27T18:10:24.736381Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
     "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md` and `chapter-01/first_react_app/package.json`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `chapter-01/first_react_app/package.json`. Imported `repo.test` from `chapter-01/first_react_app/package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. 2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged."
+notes = "Bootstrapped from `README.md`. Filled `repo.description` with inferred defaults. Ignored component-scoped commands from `chapter-01/first_react_app/package.json` as repository defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "react-and-redux"
@@ -27,23 +28,23 @@ languages = [
 topics = []
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:26:56.764537Z"
+checkedAt = "2026-10-27T18:10:24.736381Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:26:56.764537Z"
+checkedAt = "2026-10-27T18:10:24.736381Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:26:56.764537Z"
+checkedAt = "2026-10-27T18:10:24.736381Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -51,7 +52,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:26:56.764537Z"
+checkedAt = "2026-10-27T18:10:24.736381Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -59,16 +60,15 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:26:56.764537Z"
-confidence = "low"
-method = "extracted"
-reason = "Component command lacks repository-default scope and working directory."
-source = "chapter-01/first_react_app/package.json"
-state = "unresolved"
+checkedAt = "2026-10-27T18:10:24.736381Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no build command sources found"
+state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:26:56.764537Z"
+checkedAt = "2026-10-27T18:10:24.736381Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -77,7 +77,7 @@ state = "present"
 valueJson = '"《深入浅出React和Redux》代码"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:26:56.764537Z"
+checkedAt = "2026-10-27T18:10:24.736381Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -85,21 +85,20 @@ state = "present"
 valueJson = '"https://github.com/mocheng/react-and-redux"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:26:56.764537Z"
+checkedAt = "2026-10-27T18:10:24.736381Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"react-and-redux"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:26:56.764537Z"
-confidence = "low"
-method = "extracted"
-reason = "Component command lacks repository-default scope and working directory."
-source = "chapter-01/first_react_app/package.json"
-state = "unresolved"
+checkedAt = "2026-10-27T18:10:24.736381Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no test command sources found"
+state = "not_found"
 valueJson = "null"
 
 [x.github]
@@ -109,4 +108,4 @@ default_branch = "master"
 fork = false
 head_sha = "9cbeab9e82f0089767583e7a5da496256a437605"
 html_url = "https://github.com/mocheng/react-and-redux"
-stars = 1992
+stars = 1991

@@ -5,6 +5,7 @@
 - Inferred repo.build from Cargo.toml as `cargo build`.
 - Inferred repo.test from Cargo.toml as `cargo test`.
 - Imported repo.toolchain.min from Cargo.toml as `1.95` (Rust).
+- Imported docs.root as `https://starship.rs/config/`. Explicit documentation link at README.md:23: <a href="https://starship.rs/config/">Configuration</a>
 - Discovered related relation to github.com/starship/starship from Cargo.toml repository.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

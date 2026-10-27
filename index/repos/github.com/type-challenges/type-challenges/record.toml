@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/type-challenges/type-challenges"
-generated_at = "2026-09-16T16:30:23.859004Z"
+generated_at = "2026-10-27T18:20:03.237737Z"
 
 [record.trust]
 confidence = "high"
@@ -36,9 +36,6 @@ topics = [
     "challenges",
 ]
 
-[docs]
-root = "https://tsch.js.org/"
-
 [relations]
 references = []
 
@@ -55,23 +52,23 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:30:23.859004Z"
+checkedAt = "2026-10-27T18:20:03.237737Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:30:23.859004Z"
+checkedAt = "2026-10-27T18:20:03.237737Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://tsch.js.org/"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:30:23.859004Z"
+checkedAt = "2026-10-27T18:20:03.237737Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -79,7 +76,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:30:23.859004Z"
+checkedAt = "2026-10-27T18:20:03.237737Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -87,7 +84,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:30:23.859004Z"
+checkedAt = "2026-10-27T18:20:03.237737Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -96,7 +93,7 @@ state = "present"
 valueJson = '"pnpm build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:30:23.859004Z"
+checkedAt = "2026-10-27T18:20:03.237737Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -105,7 +102,7 @@ state = "present"
 valueJson = '"Collection of TypeScript type challenges with online judge"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:30:23.859004Z"
+checkedAt = "2026-10-27T18:20:03.237737Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -113,16 +110,16 @@ state = "present"
 valueJson = '"https://tsch.js.org/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:30:23.859004Z"
+checkedAt = "2026-10-27T18:20:03.237737Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"type-challenges"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:30:23.859004Z"
+checkedAt = "2026-10-27T18:20:03.237737Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -134,6 +131,6 @@ archived = false
 clone_url = "https://github.com/type-challenges/type-challenges.git"
 default_branch = "main"
 fork = false
-head_sha = "0b0b0b18bcb7ac42dc22ce26ffb438231d4754b1"
+head_sha = "91220864b0cbb84106c3b97e8d116316db2856e7"
 html_url = "https://github.com/type-challenges/type-challenges"
-stars = 48508
+stars = 48545

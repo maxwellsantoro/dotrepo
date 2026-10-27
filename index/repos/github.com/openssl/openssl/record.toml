@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/openssl/openssl"
-generated_at = "2026-09-16T16:27:46.077215Z"
+generated_at = "2026-10-27T18:13:54.294712Z"
 
 [record.trust]
 confidence = "medium"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `.github/workflows/ci.yml`. Filled `repo.name` with inferred defaults. Inferred `repo.test` from `.github/workflows/ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `.github/workflows/ci-nightly.yml`. Filled `repo.name` with inferred defaults. Inferred `repo.test` from `.github/workflows/ci-nightly.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "openssl"
@@ -38,7 +38,7 @@ languages = [
     "Ruby",
     "sed",
 ]
-test = '! make test TESTS="test_external_gost_engine"'
+test = 'make test V=1 TESTS="test_lhash test_threads test_internal_provider test_provfetch test_provider test_pbe test_evp_kdf test_pkcs12 test_store test_evp test_quic* test_dtls_listener_races"'
 topics = [
     "cryptography",
     "openssl",
@@ -50,9 +50,6 @@ topics = [
 
 [owners]
 maintainers = ["@quarckster"]
-
-[docs]
-root = "https://openssl-library.org/"
 
 [relations]
 references = []
@@ -70,23 +67,23 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:27:46.077215Z"
+checkedAt = "2026-10-27T18:13:54.294712Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:27:46.077215Z"
+checkedAt = "2026-10-27T18:13:54.294712Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://openssl-library.org/"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:27:46.077215Z"
+checkedAt = "2026-10-27T18:13:54.294712Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -94,7 +91,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:27:46.077215Z"
+checkedAt = "2026-10-27T18:13:54.294712Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -102,7 +99,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:27:46.077215Z"
+checkedAt = "2026-10-27T18:13:54.294712Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -110,7 +107,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:27:46.077215Z"
+checkedAt = "2026-10-27T18:13:54.294712Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -119,7 +116,7 @@ state = "present"
 valueJson = '"General purpose TLS and crypto library"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:27:46.077215Z"
+checkedAt = "2026-10-27T18:13:54.294712Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -127,28 +124,28 @@ state = "present"
 valueJson = '"https://openssl-library.org/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:27:46.077215Z"
+checkedAt = "2026-10-27T18:13:54.294712Z"
 confidence = "high"
 method = "inferred"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"openssl"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:27:46.077215Z"
+checkedAt = "2026-10-27T18:13:54.294712Z"
 confidence = "medium"
 method = "inferred"
 reason = "from workflow fallback"
-source = ".github/workflows/ci.yml"
+source = ".github/workflows/ci-nightly.yml"
 state = "present"
-valueJson = '"! make test TESTS=\"test_external_gost_engine\""'
+valueJson = '"make test V=1 TESTS=\"test_lhash test_threads test_internal_provider test_provfetch test_provider test_pbe test_evp_kdf test_pkcs12 test_store test_evp test_quic* test_dtls_listener_races\""'
 
 [x.github]
 archived = false
 clone_url = "https://github.com/openssl/openssl.git"
 default_branch = "master"
 fork = false
-head_sha = "9138c69ceec002dac9d2e435afd8e626b6e33486"
+head_sha = "1a97d4178935b7d9ef4b905f889cdee412f8109a"
 html_url = "https://github.com/openssl/openssl"
-stars = 30787
+stars = 31093

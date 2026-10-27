@@ -1,10 +1,10 @@
 # Evidence
 
-- Imported repository name and docs entry points from README.md.
+- Imported repository name from README.md.
 - Imported maintainer candidates from CODEOWNERS.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
 - Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.
-- Imported repo.build from Makefile as `make all`.
+- Inferred repo.build from pyproject.toml as `python -m build`.
 - Inferred repo.test from pyproject.toml as `python -m pytest`.
 - Discovered related relation to github.com/grpc/grpc-dotnet from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
@@ -14,15 +14,3 @@
 - Augmented repo.languages from GitHub repository metadata.
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
-
-## Fresh verification
-
-Prior verified authority was not inherited: this refresh must qualify using its current field scores.
-
-## 2026-10-04 command semantics correction
-
-The preceding import and auto-promotion entries are historical and superseded for the fields below. Pinned sources were inspected statically; upstream task recipes were not executed. This does not establish task correctness or refresh other facts. Prior affected field assessments were removed, and verified authority was superseded where necessary.
-
-- repo.build: `make all` -> withheld (inspected `Makefile`)
-
-Receipt and source hashes: [command-source audit](../../../../telemetry/command-semantics-20261004/report.json).

@@ -1,7 +1,8 @@
 # Evidence
 
-- Imported repository name from README.md.
+- Imported repository name and docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates.
+- Imported docs.root as `https://docs.flutter.dev/get-started`. Explicit documentation link at README.md:25: * [Install Flutter](https://docs.flutter.dev/get-started)
 - Discovered related relation to github.com/flutter/flutter from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/nginx/nginx"
-generated_at = "2026-09-16T16:27:06.055861Z"
+generated_at = "2026-10-27T18:10:56.764655Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = 'Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved.'
+notes = 'Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Imported `repo.build` from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved.'
 
 [repo]
 name = "NGINX Banner"
@@ -30,6 +30,7 @@ languages = [
     "Shell",
     "C++",
 ]
+build = "make"
 topics = [
     "content-cache",
     "load-balancer",
@@ -52,9 +53,6 @@ topics = [
 maintainers = []
 security_contact = "unknown"
 
-[docs]
-root = "https://nginx.org/en/docs/"
-
 [relations]
 references = []
 
@@ -71,23 +69,23 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:27:06.055861Z"
+checkedAt = "2026-10-27T18:10:56.764655Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:27:06.055861Z"
+checkedAt = "2026-10-27T18:10:56.764655Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://nginx.org/en/docs/"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:27:06.055861Z"
+checkedAt = "2026-10-27T18:10:56.764655Z"
 confidence = "high"
 method = "unspecified"
 reason = "explicitly unknown"
@@ -95,7 +93,7 @@ state = "not_found"
 valueJson = '"unknown"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:27:06.055861Z"
+checkedAt = "2026-10-27T18:10:56.764655Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -103,15 +101,16 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:27:06.055861Z"
+checkedAt = "2026-10-27T18:10:56.764655Z"
 confidence = "high"
-method = "not_found_in_inspected_sources"
-reason = "no build command sources found"
-state = "not_found"
-valueJson = "null"
+method = "extracted"
+reason = "from declared repository source"
+source = "README.md"
+state = "present"
+valueJson = '"make"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:27:06.055861Z"
+checkedAt = "2026-10-27T18:10:56.764655Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -120,7 +119,7 @@ state = "present"
 valueJson = '"The official NGINX Open Source repository."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:27:06.055861Z"
+checkedAt = "2026-10-27T18:10:56.764655Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -128,16 +127,16 @@ state = "present"
 valueJson = '"https://nginx.org/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:27:06.055861Z"
+checkedAt = "2026-10-27T18:10:56.764655Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"NGINX Banner"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:27:06.055861Z"
+checkedAt = "2026-10-27T18:10:56.764655Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -149,6 +148,6 @@ archived = false
 clone_url = "https://github.com/nginx/nginx.git"
 default_branch = "master"
 fork = false
-head_sha = "ef0aa967dce9d30b824d4c839d3579d2a17e0666"
+head_sha = "797c039a9884f69aae96286dcdf1ba633e5ebf81"
 html_url = "https://github.com/nginx/nginx"
-stars = 31657
+stars = 31983

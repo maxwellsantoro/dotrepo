@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/hyperium/hyper"
-generated_at = "2026-09-18T06:06:39.758645451Z"
+generated_at = "2026-10-27T17:39:42.461409Z"
 
 [record.trust]
 confidence = "medium"
@@ -42,9 +42,6 @@ ecosystem = "Rust"
 maintainers = []
 security_contact = "https://github.com/hyperium/hyper/security/advisories/new"
 
-[docs]
-root = "https://hyper.rs"
-
 [relations]
 references = []
 
@@ -61,23 +58,23 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-18T06:06:39.758645451Z"
+checkedAt = "2026-10-27T17:39:42.461409Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-18T06:06:39.758645451Z"
+checkedAt = "2026-10-27T17:39:42.461409Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://hyper.rs"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-18T06:06:39.758645451Z"
+checkedAt = "2026-10-27T17:39:42.461409Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -86,7 +83,7 @@ state = "present"
 valueJson = '"https://github.com/hyperium/hyper/security/advisories/new"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-18T06:06:39.758645451Z"
+checkedAt = "2026-10-27T17:39:42.461409Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -94,7 +91,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-18T06:06:39.758645451Z"
+checkedAt = "2026-10-27T17:39:42.461409Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -103,7 +100,7 @@ state = "present"
 valueJson = '"cargo build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-18T06:06:39.758645451Z"
+checkedAt = "2026-10-27T17:39:42.461409Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -112,7 +109,7 @@ state = "present"
 valueJson = '"An HTTP library for Rust"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-18T06:06:39.758645451Z"
+checkedAt = "2026-10-27T17:39:42.461409Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -120,16 +117,16 @@ state = "present"
 valueJson = '"https://hyper.rs"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-18T06:06:39.758645451Z"
+checkedAt = "2026-10-27T17:39:42.461409Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"hyper"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-18T06:06:39.758645451Z"
+checkedAt = "2026-10-27T17:39:42.461409Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -142,6 +139,6 @@ archived = false
 clone_url = "https://github.com/hyperium/hyper.git"
 default_branch = "master"
 fork = false
-head_sha = "74a39081ff1496970fb75da75c5282b23a9b69e5"
+head_sha = "b07337878fe57b34b2065335ae8cae9ce5a780a0"
 html_url = "https://github.com/hyperium/hyper"
-stars = 16325
+stars = 16381

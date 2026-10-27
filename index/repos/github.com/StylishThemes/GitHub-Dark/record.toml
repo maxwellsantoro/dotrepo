@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/StylishThemes/GitHub-Dark"
-generated_at = "2026-09-16T16:19:43.422017Z"
+generated_at = "2026-10-27T17:54:05.244651Z"
 
 [record.trust]
 confidence = "high"
@@ -12,24 +12,19 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `Makefile`. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "GitHub-Dark"
-description = ":octocat: Dark GitHub style"
+description = ":octocat: Dark GitHub style with custom syntax themes for code, editors and notebooks"
 homepage = "https://raw.githubusercontent.com/StylishThemes/GitHub-Dark/master/github-dark.user.css"
 license = "BSD-2-Clause"
 visibility = "public"
 languages = [
     "CSS",
-    "HTML",
-    "JavaScript",
     "Makefile",
-    "Shell",
     "TypeScript",
 ]
-build = "make build"
-test = "make test"
 topics = [
     "theme",
     "css",
@@ -40,9 +35,6 @@ topics = [
     "usercss",
     "dark",
 ]
-
-[docs]
-root = "https://raw.githubusercontent.com/StylishThemes/GitHub-Dark/master/github-dark.user.css"
 
 [relations]
 references = []
@@ -60,23 +52,23 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:19:43.422017Z"
+checkedAt = "2026-10-27T17:54:05.244651Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:19:43.422017Z"
+checkedAt = "2026-10-27T17:54:05.244651Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://raw.githubusercontent.com/StylishThemes/GitHub-Dark/master/github-dark.user.css"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:19:43.422017Z"
+checkedAt = "2026-10-27T17:54:05.244651Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -84,7 +76,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:19:43.422017Z"
+checkedAt = "2026-10-27T17:54:05.244651Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -92,25 +84,24 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:19:43.422017Z"
+checkedAt = "2026-10-27T17:54:05.244651Z"
 confidence = "high"
-method = "extracted"
-reason = "from declared repository source"
-source = "Makefile"
-state = "present"
-valueJson = '"make build"'
+method = "not_found_in_inspected_sources"
+reason = "no build command sources found"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:19:43.422017Z"
+checkedAt = "2026-10-27T17:54:05.244651Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
 source = "GitHub API"
 state = "present"
-valueJson = '":octocat: Dark GitHub style"'
+valueJson = '":octocat: Dark GitHub style with custom syntax themes for code, editors and notebooks"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:19:43.422017Z"
+checkedAt = "2026-10-27T17:54:05.244651Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -118,28 +109,27 @@ state = "present"
 valueJson = '"https://raw.githubusercontent.com/StylishThemes/GitHub-Dark/master/github-dark.user.css"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:19:43.422017Z"
+checkedAt = "2026-10-27T17:54:05.244651Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"GitHub-Dark"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:19:43.422017Z"
+checkedAt = "2026-10-27T17:54:05.244651Z"
 confidence = "high"
-method = "extracted"
-reason = "from declared repository source"
-source = "Makefile"
-state = "present"
-valueJson = '"make test"'
+method = "not_found_in_inspected_sources"
+reason = "no test command sources found"
+state = "not_found"
+valueJson = "null"
 
 [x.github]
 archived = false
 clone_url = "https://github.com/StylishThemes/GitHub-Dark.git"
 default_branch = "master"
 fork = false
-head_sha = "e7b074353daf16db56040c4060765f8582f467e4"
+head_sha = "ee4ad4717a3d4e7e6ee2efea7b1f0a58987d13ae"
 html_url = "https://github.com/StylishThemes/GitHub-Dark"
-stars = 9977
+stars = 9999

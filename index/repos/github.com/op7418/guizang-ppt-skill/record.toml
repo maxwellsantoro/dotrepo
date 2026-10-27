@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/op7418/guizang-ppt-skill"
-generated_at = "2026-09-16T16:27:32.601293Z"
+generated_at = "2026-10-27T18:13:28.888306Z"
 
 [record.trust]
 confidence = "high"
@@ -39,27 +39,24 @@ topics = [
     "skills",
 ]
 
-[docs]
-root = "./references/presenter-mode.md"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:27:32.601293Z"
+checkedAt = "2026-10-27T18:13:28.888306Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:27:32.601293Z"
+checkedAt = "2026-10-27T18:13:28.888306Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"./references/presenter-mode.md"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:27:32.601293Z"
+checkedAt = "2026-10-27T18:13:28.888306Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -67,7 +64,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:27:32.601293Z"
+checkedAt = "2026-10-27T18:13:28.888306Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -75,7 +72,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:27:32.601293Z"
+checkedAt = "2026-10-27T18:13:28.888306Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -83,7 +80,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:27:32.601293Z"
+checkedAt = "2026-10-27T18:13:28.888306Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -92,7 +89,7 @@ state = "present"
 valueJson = '"AI-agent Skill for generating polished HTML slide decks: editorial magazine and Swiss layouts, image prompts, social covers, and a WebGL/low-power presentation runtime."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:27:32.601293Z"
+checkedAt = "2026-10-27T18:13:28.888306Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -100,16 +97,16 @@ state = "present"
 valueJson = '"https://github.com/op7418/guizang-ppt-skill"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:27:32.601293Z"
+checkedAt = "2026-10-27T18:13:28.888306Z"
 confidence = "high"
 method = "inferred"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"guizang-ppt-skill"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:27:32.601293Z"
+checkedAt = "2026-10-27T18:13:28.888306Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -123,4 +120,4 @@ default_branch = "main"
 fork = false
 head_sha = "c91369c449d34755d320a8b81d0734000d99d1ab"
 html_url = "https://github.com/op7418/guizang-ppt-skill"
-stars = 26429
+stars = 28776

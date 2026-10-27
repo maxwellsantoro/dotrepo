@@ -2,9 +2,12 @@
 
 - Imported repository name and docs entry points from README.md.
 - Imported the security reporting channel from SECURITY.md.
-- Imported repo.build from web/package.json as `npm run build`.
-- Inferred repo.test from .github/workflows/api-testing.yml as `rye run pytest --ignore=tests/regression --ignore=tests/query_agent --ignore=tests/vortex --junitxml=junit-integration.xml`.
+- Ignored component-scoped commands from `web/package.json` as repository defaults.
+- Imported repo.build from CONTRIBUTING.md as `cargo build --release`.
+- Inferred repo.test from Cargo.toml as `cargo test --workspace`.
 - Imported repo.toolchain.min from web/package.json as `20` (Node.js).
+- Conflicting documentation declarations in README.md; abstained from docs.root.
+- Imported docs.getting_started as `https://openobserve.ai/docs/quickstart/`. Explicit documentation link at README.md:32: <a href="https://openobserve.ai/docs/quickstart/">Quickstart</a>
 - Discovered related relation to github.com/openobserve/openobserve from Cargo.toml repository.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
@@ -14,9 +17,3 @@
 - Augmented repo.topics from GitHub repository metadata.
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
-
-## Command semantic correction (2026-10-03)
-
-2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged.
-
-- Withheld `repo.build` previously extracted from `web/package.json` as `npm run build`. Component command lacks repository-default scope and working directory.

@@ -4,6 +4,7 @@
 - Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.
 - Imported repo.build from package.json as `npm run build`.
 - Imported repo.test from package.json as `npm test`.
+- Imported docs.root as `https://jupyterlab-lsp.readthedocs.io/en/latest/Installation.html`. Explicit documentation link at README.md:102: > For more extensive installation instructions, see the [documentation][installation-documentation].
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

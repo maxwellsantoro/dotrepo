@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/jupyter-lsp/jupyterlab-lsp"
-generated_at = "2026-09-16T16:25:34.792189Z"
+generated_at = "2026-10-27T18:06:54.167691Z"
 
 [record.trust]
 confidence = "high"
@@ -56,26 +56,27 @@ topics = [
 ]
 
 [docs]
-root = "https://jupyterlab-lsp.readthedocs.io/en/latest/Language%20Servers.html"
+root = "https://jupyterlab-lsp.readthedocs.io/en/latest/Installation.html"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:25:34.792189Z"
+checkedAt = "2026-10-27T18:06:54.167691Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:25:34.792189Z"
+checkedAt = "2026-10-27T18:06:54.167691Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:102: > For more extensive installation instructions, see the [documentation][installation-documentation]."
+source = "README.md"
 state = "present"
-valueJson = '"https://jupyterlab-lsp.readthedocs.io/en/latest/Language%20Servers.html"'
+valueJson = '"https://jupyterlab-lsp.readthedocs.io/en/latest/Installation.html"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:25:34.792189Z"
+checkedAt = "2026-10-27T18:06:54.167691Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -83,7 +84,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:25:34.792189Z"
+checkedAt = "2026-10-27T18:06:54.167691Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -91,7 +92,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:25:34.792189Z"
+checkedAt = "2026-10-27T18:06:54.167691Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -100,7 +101,7 @@ state = "present"
 valueJson = '"npm run build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:25:34.792189Z"
+checkedAt = "2026-10-27T18:06:54.167691Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -109,7 +110,7 @@ state = "present"
 valueJson = '"Coding assistance for JupyterLab (code navigation + hover suggestions + linters + autocompletion + rename) using Language Server Protocol"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:25:34.792189Z"
+checkedAt = "2026-10-27T18:06:54.167691Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -117,16 +118,16 @@ state = "present"
 valueJson = '"https://jupyterlab-lsp.readthedocs.io"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:25:34.792189Z"
+checkedAt = "2026-10-27T18:06:54.167691Z"
 confidence = "high"
 method = "inferred"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"jupyterlab-lsp"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:25:34.792189Z"
+checkedAt = "2026-10-27T18:06:54.167691Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -141,4 +142,4 @@ default_branch = "main"
 fork = false
 head_sha = "e2e569321bc45702718030fabfe7dd38d0457f25"
 html_url = "https://github.com/jupyter-lsp/jupyterlab-lsp"
-stars = 2001
+stars = 2002

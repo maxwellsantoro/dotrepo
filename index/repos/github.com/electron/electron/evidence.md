@@ -1,8 +1,9 @@
 # Evidence
 
-- Imported repository name and docs entry points from README.md.
+- Imported repository name from README.md.
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates.
 - Imported the security reporting channel from SECURITY.md.
+- Imported repo.build from package.json as `yarn bundle`.
 - Imported repo.test from package.json as `yarn test`.
 - Discovered related relation to github.com/electron/electron from package.json repository.
 - This is an overlay record, not a maintainer-controlled canonical record.

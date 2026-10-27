@@ -4,7 +4,7 @@
 - Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.
 - Imported repo.build from Makefile as `make all`.
 - Imported repo.test from Makefile as `make test`.
-- Imported repo.toolchain.min from pyproject.toml as `3.10` (Python).
+- Imported repo.toolchain.min from pyproject.toml as `3.11` (Python).
 - Discovered related relation to github.com/ytdl-org/youtube-dl from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 

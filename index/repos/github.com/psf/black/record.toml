@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/psf/black"
-generated_at = "2026-09-18T06:05:46.766276677Z"
+generated_at = "2026-10-27T17:38:30.007847Z"
 
 [record.trust]
 confidence = "medium"
@@ -48,27 +48,24 @@ ecosystem = "Python"
 maintainers = []
 security_contact = "https://tidelift.com/security"
 
-[docs]
-root = "https://black.readthedocs.io/en/stable"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-18T06:05:46.766276677Z"
+checkedAt = "2026-10-27T17:38:30.007847Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-18T06:05:46.766276677Z"
+checkedAt = "2026-10-27T17:38:30.007847Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://black.readthedocs.io/en/stable"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-18T06:05:46.766276677Z"
+checkedAt = "2026-10-27T17:38:30.007847Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -77,7 +74,7 @@ state = "present"
 valueJson = '"https://tidelift.com/security"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-18T06:05:46.766276677Z"
+checkedAt = "2026-10-27T17:38:30.007847Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -85,7 +82,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-18T06:05:46.766276677Z"
+checkedAt = "2026-10-27T17:38:30.007847Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -94,7 +91,7 @@ state = "present"
 valueJson = '"python -m build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-18T06:05:46.766276677Z"
+checkedAt = "2026-10-27T17:38:30.007847Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -103,7 +100,7 @@ state = "present"
 valueJson = '"The uncompromising Python code formatter"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-18T06:05:46.766276677Z"
+checkedAt = "2026-10-27T17:38:30.007847Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -111,16 +108,16 @@ state = "present"
 valueJson = '"https://black.readthedocs.io/en/stable/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-18T06:05:46.766276677Z"
+checkedAt = "2026-10-27T17:38:30.007847Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"black"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-18T06:05:46.766276677Z"
+checkedAt = "2026-10-27T17:38:30.007847Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -133,6 +130,6 @@ archived = false
 clone_url = "https://github.com/psf/black.git"
 default_branch = "main"
 fork = false
-head_sha = "acd6198877ced2d8126b9b3958bb17f4a65ef0d1"
+head_sha = "6f8e43f74528206d8749b092a20755d5da7b6d3e"
 html_url = "https://github.com/psf/black"
-stars = 41845
+stars = 42062

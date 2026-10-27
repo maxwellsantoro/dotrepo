@@ -2,17 +2,14 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/pytorch/pytorch"
-generated_at = "2026-09-16T16:28:09.860477Z"
+generated_at = "2026-10-27T18:28:46.393456Z"
 
 [record.trust]
-confidence = "high"
-provenance = [
-    "imported",
-    "verified",
-]
-notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, `Makefile`, `CONTRIBUTING.md`, and `pyproject.toml`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@pytorch/pytorch-dev-infra` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Makefile`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, `Makefile`, `CONTRIBUTING.md`, and `pyproject.toml`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@pytorch/pytorch-dev-infra` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Makefile`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "More About PyTorch"
@@ -43,6 +40,7 @@ languages = [
     "Makefile",
     "Thrift",
     "PowerShell",
+    "Mermaid",
     "GDB",
     "Linker Script",
     "HTML",
@@ -74,11 +72,12 @@ maintainers = [
     "@Chillee",
     "@bdhirsh",
     "@aorenste",
+    "@hameerabbasi",
+    "@amjames",
     "@lezcano",
     "@nikitaved",
     "@drisspg",
     "@slayton58",
-    "@amjames",
     "@pearu",
     "@salilsdesai",
     "@digantdesai",
@@ -86,13 +85,14 @@ maintainers = [
     "@janeyx99",
     "@albanD",
     "@soulitzer",
-    "@bohnstingl",
     "@larryliu0820",
+    "@bohnstingl",
     "@egienvalue",
     "@eqy",
     "@syed-ahmed",
     "@Aidyn-A",
     "@malfet",
+    "@Isalia20",
     "@EikanWang",
     "@gujinghui",
     "@jeffdaily",
@@ -115,13 +115,13 @@ maintainers = [
     "@eellison",
     "@jataylo",
     "@pruthvistony",
+    "@weifengpy",
     "@jiayisuse",
     "@lw",
     "@d4l3k",
     "@fduwjj",
     "@kapilsh",
     "@kwen2501",
-    "@weifengpy",
     "@tugsbayasgalan",
     "@ydwu4",
     "@avikchaudhuri",
@@ -133,9 +133,6 @@ maintainers = [
 ]
 team = "@pytorch/pytorch-dev-infra"
 security_contact = "https://github.com/pytorch/pytorch/security/advisories/new"
-
-[docs]
-root = "https://pytorch.org/docs/"
 
 [relations]
 references = []
@@ -153,23 +150,24 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:28:09.860477Z"
-confidence = "high"
-method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
-state = "not_found"
+checkedAt = "2026-10-27T18:28:46.393456Z"
+confidence = "low"
+method = "unresolved"
+reason = "conflicting documentation declarations; no target selected"
+source = "README.md"
+state = "unresolved"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:28:09.860477Z"
+checkedAt = "2026-10-27T18:28:46.393456Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://pytorch.org/docs/"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:28:09.860477Z"
+checkedAt = "2026-10-27T18:28:46.393456Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -178,7 +176,7 @@ state = "present"
 valueJson = '"https://github.com/pytorch/pytorch/security/advisories/new"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:28:09.860477Z"
+checkedAt = "2026-10-27T18:28:46.393456Z"
 confidence = "high"
 method = "extracted"
 reason = "clear CODEOWNERS team"
@@ -187,7 +185,7 @@ state = "present"
 valueJson = '"@pytorch/pytorch-dev-infra"'
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:28:09.860477Z"
+checkedAt = "2026-10-27T18:28:46.393456Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -196,7 +194,7 @@ state = "present"
 valueJson = '"make all"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:28:09.860477Z"
+checkedAt = "2026-10-27T18:28:46.393456Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -205,7 +203,7 @@ state = "present"
 valueJson = '"Tensors and Dynamic neural networks in Python with strong GPU acceleration"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:28:09.860477Z"
+checkedAt = "2026-10-27T18:28:46.393456Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -213,16 +211,16 @@ state = "present"
 valueJson = '"https://pytorch.org"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:28:09.860477Z"
+checkedAt = "2026-10-27T18:28:46.393456Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"More About PyTorch"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:28:09.860477Z"
+checkedAt = "2026-10-27T18:28:46.393456Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -235,6 +233,6 @@ archived = false
 clone_url = "https://github.com/pytorch/pytorch.git"
 default_branch = "main"
 fork = false
-head_sha = "a9be55373f650e3be4f1133792f2265841d39901"
+head_sha = "3188a453872fa989fbb7bdee5018dbbe95134873"
 html_url = "https://github.com/pytorch/pytorch"
-stars = 103057
+stars = 105118

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/ReactiveX/RxJava"
-generated_at = "2026-09-17T06:08:30.336440845Z"
+generated_at = "2026-10-27T17:34:21.78633Z"
 
 [record.trust]
 confidence = "medium"
@@ -39,27 +39,27 @@ maintainers = []
 security_contact = "https://github.com/ReactiveX/RxJava/security/advisories/new"
 
 [docs]
-root = "https://dsc.gg/rxjava"
 getting_started = "https://github.com/ReactiveX/RxJava/wiki/Getting-Started"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-17T06:08:30.336440845Z"
+checkedAt = "2026-10-27T17:34:21.78633Z"
 confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:623: Further details on building can be found on the [Getting Started](https://github.com/ReactiveX/RxJava/wiki/Getting-Started) page of the wiki."
+source = "README.md"
 state = "present"
 valueJson = '"https://github.com/ReactiveX/RxJava/wiki/Getting-Started"'
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-17T06:08:30.336440845Z"
+checkedAt = "2026-10-27T17:34:21.78633Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://dsc.gg/rxjava"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-17T06:08:30.336440845Z"
+checkedAt = "2026-10-27T17:34:21.78633Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -68,7 +68,7 @@ state = "present"
 valueJson = '"https://github.com/ReactiveX/RxJava/security/advisories/new"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-17T06:08:30.336440845Z"
+checkedAt = "2026-10-27T17:34:21.78633Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -76,7 +76,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-17T06:08:30.336440845Z"
+checkedAt = "2026-10-27T17:34:21.78633Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -85,7 +85,7 @@ state = "present"
 valueJson = '"./gradlew build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-17T06:08:30.336440845Z"
+checkedAt = "2026-10-27T17:34:21.78633Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -94,7 +94,7 @@ state = "present"
 valueJson = '"RxJava – Reactive Extensions for the JVM – a library for composing asynchronous and event-based programs using observable sequences for the Java VM."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-17T06:08:30.336440845Z"
+checkedAt = "2026-10-27T17:34:21.78633Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -102,16 +102,16 @@ state = "present"
 valueJson = '"https://dsc.gg/rxjava"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-17T06:08:30.336440845Z"
+checkedAt = "2026-10-27T17:34:21.78633Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"RxJava"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-17T06:08:30.336440845Z"
+checkedAt = "2026-10-27T17:34:21.78633Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -124,6 +124,6 @@ archived = false
 clone_url = "https://github.com/ReactiveX/RxJava.git"
 default_branch = "4.x"
 fork = false
-head_sha = "ec327a2fef842e80bfdefb42de81a08a14027b6a"
+head_sha = "b0e8737b956f05cebca961899193c80104c94941"
 html_url = "https://github.com/ReactiveX/RxJava"
-stars = 48201
+stars = 48159

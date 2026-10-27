@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/google-deepmind/sonnet"
-generated_at = "2026-09-16T16:23:58.236304Z"
+generated_at = "2026-10-27T18:02:34.058933Z"
 
 [record.trust]
 confidence = "medium"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md` and `.github/workflows/ci.yml`. A scoped October 4 source check withheld the erroneous setup-only repo.test and retained the actual CI invocation as a component candidate with prerequisites. Other facts retain their original inspection age. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md` and `.github/workflows/ci.yml`. Inferred `repo.test` from `.github/workflows/ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Sonnet"
@@ -25,6 +25,7 @@ languages = [
     "Starlark",
     "Shell",
 ]
+test = "pytest -n auto sonnet --ignore=sonnet/src/conformance/"
 topics = [
     "machine-learning",
     "artificial-intelligence",
@@ -33,44 +34,28 @@ topics = [
     "tensorflow",
 ]
 
-[[repo.test_candidates]]
-command = "pytest -n auto sonnet --ignore=sonnet/src/conformance/"
-ecosystem = "Python"
-source = ".github/workflows/ci.yml"
-
-[repo.test_candidates.context]
-command = "pytest -n auto sonnet --ignore=sonnet/src/conformance/"
-working_directory = "."
-scope = "component"
-component = "sonnet"
-prerequisites = [
-    "The inspected CI job uses Ubuntu and Python 3.9, 3.10, or 3.11.",
-    "Install the dependencies declared by requirements.txt, requirements-tf.txt, and requirements-test.txt, then install the repository package, as the CI dependency step specifies.",
-    "Install pytest and pytest-xdist before invoking the test runner, as the CI test step specifies.",
-]
-source = ".github/workflows/ci.yml"
-
 [docs]
 root = "https://sonnet.readthedocs.io/"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:23:58.236304Z"
+checkedAt = "2026-10-27T18:02:34.058933Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:23:58.236304Z"
+checkedAt = "2026-10-27T18:02:34.058933Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:5: [**Documentation**](https://sonnet.readthedocs.io/) | [**Examples**](#examples)"
+source = "README.md"
 state = "present"
 valueJson = '"https://sonnet.readthedocs.io/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:23:58.236304Z"
+checkedAt = "2026-10-27T18:02:34.058933Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -78,7 +63,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:23:58.236304Z"
+checkedAt = "2026-10-27T18:02:34.058933Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -86,7 +71,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:23:58.236304Z"
+checkedAt = "2026-10-27T18:02:34.058933Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -94,7 +79,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:23:58.236304Z"
+checkedAt = "2026-10-27T18:02:34.058933Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -103,7 +88,7 @@ state = "present"
 valueJson = '"TensorFlow-based neural network library"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:23:58.236304Z"
+checkedAt = "2026-10-27T18:02:34.058933Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -111,19 +96,28 @@ state = "present"
 valueJson = '"https://sonnet.dev/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:23:58.236304Z"
+checkedAt = "2026-10-27T18:02:34.058933Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Sonnet"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-10-27T18:02:34.058933Z"
+confidence = "medium"
+method = "inferred"
+reason = "from workflow fallback"
+source = ".github/workflows/ci.yml"
+state = "present"
+valueJson = '"pytest -n auto sonnet --ignore=sonnet/src/conformance/"'
 
 [x.github]
 archived = false
 clone_url = "https://github.com/google-deepmind/sonnet.git"
 default_branch = "v2"
 fork = false
-head_sha = "4a3bae0fe2837f68ef74025952ded3074e20592a"
+head_sha = "6127d8094471345ae874ff2014f59a1d1e83612e"
 html_url = "https://github.com/google-deepmind/sonnet"
-stars = 9970
+stars = 9976

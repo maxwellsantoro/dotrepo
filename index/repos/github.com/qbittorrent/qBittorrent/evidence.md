@@ -2,8 +2,6 @@
 
 - Imported repository name from README.md.
 - Imported the security reporting channel from SECURITY.md.
-- Inferred repo.build from .github/workflows/ci_macos.yaml as `cmake --build build`.
-- Inferred repo.test from .github/workflows/ci_ubuntu.yaml as `cmake --build build --target check`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
@@ -13,6 +11,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Fresh verification
+## Auto-promotion
 
-Prior verified authority was not inherited: this refresh must qualify using its current field scores.
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

@@ -4,6 +4,7 @@
 - Inferred repo.build from go.mod as `go build ./...`.
 - Inferred repo.test from go.mod as `go test ./...`.
 - Imported repo.toolchain.min from go.mod as `1.22` (Go).
+- Imported docs.getting_started as `https://github.com/jesseduffield/lazydocker#installation`. Explicit documentation link at README.md:77: - [Installation](https://github.com/jesseduffield/lazydocker#installation)
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.name` to `lazydocker` from `GitHub API` after deterministic escalation.
@@ -12,7 +13,3 @@
 - Augmented repo.languages from GitHub repository metadata.
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
-
-## Fresh verification
-
-Prior verified authority was not inherited: this refresh must qualify using its current field scores.

@@ -4,7 +4,8 @@
 - Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.
 - Inferred repo.build from pyproject.toml as `python -m build`.
 - Inferred repo.test from pyproject.toml as `python -m pytest`.
-- Imported repo.toolchain.min from pyproject.toml as `3.10` (Python).
+- Imported repo.toolchain.min from pyproject.toml as `3.11` (Python).
+- Imported docs.root as `https://starlette.dev/`. Explicit documentation link at README.md:22: **Documentation**: <a href="https://starlette.dev/" target="_blank">https://starlette.dev</a>
 - Discovered related relation to github.com/Kludex/starlette from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
@@ -14,13 +15,3 @@
 - Augmented repo.topics from GitHub repository metadata.
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
-
-## Fresh verification
-
-Prior verified authority was not inherited: this refresh must qualify using its current field scores.
-
-## Documentation correction (2026-09-21T04:36:55.205964Z)
-
-- Corrected evidence for docs.root as `https://starlette.dev/`: ASGI specification documentation is not Starlette documentation. Source: [README.md:22](https://github.com/Kludex/starlette/blob/03f12b7fcf0a3e21a8da648ca0900c79472e9efe/README.md#L22).
-- This documentation-only correction advances the record timestamp. Older assessments for other fields retain their original check times and are invalidated by public export until fresh verification; their values were not refreshed.
-- This is an overlay record, not a maintainer-controlled canonical record.
