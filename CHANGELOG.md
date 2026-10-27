@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased (`2.0.0-alpha.0` development line)
+## 2.0.0-rc.1 (unreleased)
 
 The post-1.0 tree includes public Rust API changes, including the new
 `FieldConfidence::Suspect` variant. Development therefore continues on a 2.0
