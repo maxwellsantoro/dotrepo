@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Bound archive uploads into paced batches and retry explicit transient API or
+  transport failures without repeating earlier successful batches in the run.
+  Keep permanent failures fatal and commit the archive log only after every
+  payload succeeds. A live backfill exposed an HTTP 500 midway through upload.
 - Allow manual public archive recovery on the default branch while ordinary
   Cloudflare deployment remains disabled. Preserve account-access preflight,
   validated historical reconstruction, and serialized archive writes; document
