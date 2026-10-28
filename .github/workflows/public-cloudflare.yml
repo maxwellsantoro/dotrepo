@@ -175,6 +175,8 @@ jobs:
           uv run python scripts/render_public_efficiency_page.py \
             --input release-gate/public \
             --benchmark "$RUNNER_TEMP/lookup-efficiency.json"
+      - name: Check generated public links against Worker routing
+        run: node scripts/check_public_links.mjs release-gate/public
       - name: Stage Worker snapshot
         run: |
           uv run python scripts/sync_cloudflare_public_snapshot.py \

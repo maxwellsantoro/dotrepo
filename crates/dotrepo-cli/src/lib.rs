@@ -22,6 +22,23 @@ use std::process;
 /// `dotrepo` alias package. Both binaries must call this so subcommand dispatch
 /// cannot drift.
 pub fn run() -> Result<()> {
+    #[cfg(windows)]
+    {
+        // The debug clap parser exceeds Windows' 1 MiB main-thread stack.
+        // Keep both install entrypoints usable with an explicit bounded stack,
+        // preserving command errors and panics from the shared dispatcher.
+        std::thread::Builder::new()
+            .name("dotrepo-cli".into())
+            .stack_size(8 * 1024 * 1024)
+            .spawn(run_command)?
+            .join()
+            .unwrap_or_else(|panic| std::panic::resume_unwind(panic))
+    }
+    #[cfg(not(windows))]
+    run_command()
+}
+
+fn run_command() -> Result<()> {
     let cli = Cli::parse();
     match cli.command {
         Command::Init { force } => cmd_init(cli.root, force),

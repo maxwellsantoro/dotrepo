@@ -80,3 +80,98 @@ def test_presence_acceptance_and_correctness_remain_distinct(tmp_path):
     # The evaluation time is explicit; later measurements cannot rejuvenate records.
     later = measure(tmp_path, "2026-11-01T00:00:00Z")
     assert later["tasks"]["build-and-test"]["acceptableCount"] == 0
+
+
+def test_command_scope_shared_with_importer_and_contexts_remain_distinct(tmp_path):
+    from measure_public_policy_coverage import consumer
+
+    root = Path(__file__).resolve().parents[2]
+    cases = json.loads(
+        (root / "crates/dotrepo-core/tests/fixtures/command-scope-cases.json").read_text()
+    )
+    for case in cases:
+        assert consumer.cargo_component_selector(case["command"]) == case["componentScoped"]
+    checked = "2026-10-28T00:00:00Z"
+    assessment = {
+        "state": "present",
+        "method": "extracted",
+        "confidence": "high",
+        "source": "README.md",
+        "checkedAt": checked,
+    }
+    payload = {
+        "apiVersion": "v0",
+        "identity": {"host": "github.com", "owner": "example", "repo": "context"},
+        "record": {"generatedAt": checked},
+        "languages": ["Rust", "Python"],
+        "purpose": "Context fixture",
+        "execution": {},
+        "fieldEvidence": {},
+    }
+    for purpose, command in [
+        ("build", "cargo build --workspace"),
+        ("test", "cargo test --workspace"),
+    ]:
+        payload["execution"][purpose] = command
+        payload["execution"][purpose + "Context"] = {
+            "command": command,
+            "workingDirectory": ".",
+            "scope": "repository",
+            "prerequisites": ["Install Rust 1.90"],
+            "source": "README.md",
+        }
+        payload["fieldEvidence"]["repo." + purpose] = dict(assessment)
+        payload["fieldEvidence"]["repo." + purpose + "_context"] = dict(assessment)
+    for name in ("complete", "scalar-only", "component-selector"):
+        data = copy.deepcopy(payload)
+        data["identity"]["repo"] = name
+        if name == "scalar-only":
+            del data["execution"]["testContext"]
+        if name == "component-selector":
+            data["execution"]["test"] = "cargo test --manifest-path crates/tool/Cargo.toml"
+            del data["execution"]["testContext"]
+        path = tmp_path / "v0/repos/github.com/example" / name / "profile.json"
+        path.parent.mkdir(parents=True)
+        path.write_text(json.dumps(data))
+    (tmp_path / "v0/meta.json").write_text(
+        json.dumps({"generatedAt": checked, "snapshotDigest": "test"})
+    )
+    report = measure(tmp_path)
+    rust = report["ecosystems"]["Rust"]
+    assert rust["profileCount"] == 3
+    assert rust["tasks"]["build-and-test"]["acceptableCount"] == 2
+    assert rust["instructions"]["build-and-test"]["acceptableCount"] == 1
+    assert (
+        rust["tasks"]["test"]["fallbackReasonCounts"]["component-command-selector:repo.test"] == 1
+    )
+    assert (
+        rust["instructions"]["test"]["fallbackReasonCounts"]["no-assessed-contextual-instruction"]
+        == 2
+    )
+    assert rust["instructions"]["test"]["independentlyCorrectCount"] is None
+    assert "Accepted contextual pairs" in render_policy_coverage(report, "")
+
+
+def test_invalid_execution_is_counted_as_fallback(tmp_path):
+    checked = "2026-10-28T00:00:00Z"
+    for name, execution in [("null", None), ("list", []), ("string", "cargo test")]:
+        path = tmp_path / "v0/repos/github.com/example" / name / "profile.json"
+        path.parent.mkdir(parents=True)
+        path.write_text(
+            json.dumps(
+                {
+                    "apiVersion": "v0",
+                    "identity": {"host": "github.com", "owner": "example", "repo": name},
+                    "record": {"generatedAt": checked},
+                    "execution": execution,
+                }
+            )
+        )
+    (tmp_path / "v0/meta.json").write_text(
+        json.dumps({"generatedAt": checked, "snapshotDigest": "test"})
+    )
+    report = measure(tmp_path)
+    pairs = report["instructionCoverage"]["tasks"]["build-and-test"]
+    assert pairs["profileCount"] == 3
+    assert pairs["presentCount"] == pairs["acceptableCount"] == 0
+    assert pairs["fallbackReasonCounts"] == {"invalid-execution": 3}

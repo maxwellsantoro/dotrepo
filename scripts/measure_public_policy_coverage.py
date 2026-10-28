@@ -12,6 +12,7 @@ import importlib.util
 import json
 from pathlib import Path
 import sys
+from language_family import inferred_language_family
 
 CLIENT = Path(__file__).resolve().parents[1] / "examples/external-consumer/lookup_before_scrape.py"
 SPEC = importlib.util.spec_from_file_location("policy_coverage_consumer", CLIENT)
@@ -59,7 +60,47 @@ def measure(public_root: Path, evaluated_at: str | None = None) -> dict:
                 "acceptable": result.usable,
                 "fallbackReasons": list(result.fallback_reasons),
             }
-        rows.append({"identity": identity, "tasks": decisions})
+        instructions = {}
+        execution = (result.profile or {}).get("execution", {})
+        if not isinstance(execution, dict):
+            execution = {}
+        for purpose in ("build", "test"):
+            selected = consumer.select_instruction(
+                result, purpose, request={"scope": "repository", "workingDirectory": "."}, now=now
+            )
+            contexts = [execution.get(purpose + "Context")]
+            candidates = execution.get(purpose + "Candidates", [])
+            if isinstance(candidates, list):
+                contexts += [item.get("context") for item in candidates if isinstance(item, dict)]
+            present = any(
+                isinstance(context, dict)
+                and context.get("scope") == "repository"
+                and context.get("workingDirectory") == "."
+                for context in contexts
+            )
+            instructions[purpose] = {
+                "present": present,
+                "acceptable": selected["instruction"] is not None,
+                "fallbackReasons": selected["fallbackReasons"],
+            }
+        instructions["build-and-test"] = {
+            "present": all(item["present"] for item in instructions.values()),
+            "acceptable": all(item["acceptable"] for item in instructions.values()),
+            "fallbackReasons": sorted(
+                {reason for item in instructions.values() for reason in item["fallbackReasons"]}
+            ),
+        }
+        ecosystem = inferred_language_family(
+            {"repo": {"languages": (result.profile or {}).get("languages", [])}}
+        )
+        rows.append(
+            {
+                "identity": identity,
+                "ecosystem": ecosystem,
+                "tasks": decisions,
+                "instructions": instructions,
+            }
+        )
     total = len(rows)
     tasks = {}
     for task, required in TASKS.items():
@@ -87,6 +128,20 @@ def measure(public_root: Path, evaluated_at: str | None = None) -> dict:
             "acceptable": sum(counts[t]["acceptable"] for t in ("build", "test")),
         },
         "tasks": tasks,
+        "instructionCoverage": {
+            "policy": consumer.INSTRUCTION_POLICY,
+            "request": {"scope": "repository", "workingDirectory": "."},
+            "tasks": summarize(rows, "instructions"),
+        },
+        "ecosystems": {
+            family: {
+                "profileCount": len(subset),
+                "tasks": summarize(subset, "tasks"),
+                "instructions": summarize(subset, "instructions"),
+            }
+            for family in sorted({row["ecosystem"] for row in rows})
+            if (subset := [row for row in rows if row["ecosystem"] == family])
+        },
         "profiles": rows,
         "limitations": (
             "Presence, policy acceptance, independent correctness, and task completion are separate. "
@@ -95,8 +150,30 @@ def measure(public_root: Path, evaluated_at: str | None = None) -> dict:
             "matching check time. Documentation also requires a current high-confidence "
             "extracted source declaration. Other tasks use the reference client's required-field policy. "
             "No command is executed. No maintainer-authority exemption is implemented."
+            " Contextual instruction coverage additionally requires an assessed command, root directory, "
+            "repository scope, explicit prerequisites, and source. Ecosystems use dominant language."
         ),
     }
+
+
+def summarize(rows: list[dict], key: str) -> dict:
+    output = {}
+    for task in rows[0][key] if rows else {}:
+        decisions = [row[key][task] for row in rows]
+        reasons = Counter(reason for item in decisions for reason in set(item["fallbackReasons"]))
+        present = sum(item["present"] for item in decisions)
+        accepted = sum(item["acceptable"] for item in decisions)
+        output[task] = {
+            "profileCount": len(rows),
+            "presentCount": present,
+            "acceptableCount": accepted,
+            "presenceRate": present / len(rows),
+            "acceptableRate": accepted / len(rows),
+            "fallbackReasonCounts": dict(sorted(reasons.items())),
+            "independentlyCorrectCount": None,
+            "completedTaskCount": None,
+        }
+    return output
 
 
 def markdown(report: dict) -> str:
@@ -115,6 +192,15 @@ def markdown(report: dict) -> str:
             f"| {task} | {values['presentCount']} ({values['presenceRate']:.1%}) "
             f"| {values['acceptableCount']} ({values['acceptableRate']:.1%}) "
             "| Not measured | Not measured |"
+        )
+    lines += [
+        "",
+        "| Dominant ecosystem | Profiles | Accepted scalar pair | Accepted contextual pair |",
+        "| --- | ---: | ---: | ---: |",
+    ]
+    for family, group in report["ecosystems"].items():
+        lines.append(
+            f"| {family} | {group['profileCount']} | {group['tasks']['build-and-test']['acceptableCount']} | {group['instructions']['build-and-test']['acceptableCount']} |"
         )
     lines += ["", report["limitations"], ""]
     return "\n".join(lines)

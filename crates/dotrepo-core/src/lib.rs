@@ -11,6 +11,7 @@ mod claims;
 mod execution;
 mod generation;
 mod import;
+mod output;
 mod promotion;
 mod public;
 mod query;
@@ -22,6 +23,7 @@ mod util;
 mod validation;
 
 pub use generation::{generate_check_repository, github_outputs, managed_outputs};
+pub use output::{write_repository_outputs, RepositoryOutput, RepositoryWriter};
 
 pub use adoption::{
     adoption_status_repository, canonical_mirror_path_for_claim_path, native_repository_identity,

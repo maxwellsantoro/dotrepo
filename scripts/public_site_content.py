@@ -79,7 +79,7 @@ ARTICLES = [
   <li><strong>Inferred</strong>: use it as a hypothesis and verify before execution.</li>
   <li><strong>Low confidence</strong>: warn the user and avoid silent action.</li>
 </ul>
-<p>That is exactly the behavior dotrepo is trying to induce, and it is already visible on the live public surface at <a href="/v0/repos/index.json">/v0/repos/index.json</a> and in trust-aware query inputs such as <a href="/query-input/github.com/BurntSushi/ripgrep.json">this repository query-input record</a>.</p>
+<p>That is exactly the behavior dotrepo is trying to induce, and it is already visible on the live public surface at <a href="/v0/repos/index.json">/v0/repos/index.json</a> and in trust-aware profiles such as <a href="/v0/repos/github.com/BurntSushi/ripgrep/profile.json">this repository profile</a>.</p>
 
 <h3>4. Stale metadata is the most dangerous failure mode</h3>
 <p>This was also unanimous. Every model made some version of the same argument: stale trusted metadata is worse than no metadata, because it suppresses the skepticism that would otherwise push an agent back toward the source materials.</p>

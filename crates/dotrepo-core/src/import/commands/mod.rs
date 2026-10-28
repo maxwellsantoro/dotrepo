@@ -12,6 +12,7 @@ use super::types::{ImportSources, ImportedCommandMetadata, ImportedFile};
 mod context;
 mod extraction;
 mod policy;
+mod scope;
 
 pub(crate) use context::infer_documented_context_candidates;
 
@@ -554,6 +555,26 @@ pub(crate) fn infer_imported_commands(sources: &ImportSources) -> ImportedComman
         }
         root_scoped
     });
+
+    // A root workflow/README can still explicitly target a nested Cargo
+    // manifest or one package. Withhold only that field; independent root
+    // commands from the same source remain eligible.
+    for candidate in &mut candidates {
+        for (field, value) in [
+            ("repo.build", &mut candidate.build),
+            ("repo.test", &mut candidate.test),
+        ] {
+            if value
+                .as_deref()
+                .is_some_and(scope::cargo_component_selector)
+            {
+                *value = None;
+                let note = format!("Withheld `{field}` from `{}` because its Cargo selector describes a component, not the repository default.", candidate.source_path);
+                metadata.notes.push(note.clone());
+                metadata.evidence_bullets.push(note);
+            }
+        }
+    }
 
     metadata.build = resolve_command_field(
         &candidates,

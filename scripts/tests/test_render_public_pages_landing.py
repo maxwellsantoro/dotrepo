@@ -74,7 +74,7 @@ class PublicPageRendererTests(unittest.TestCase):
         self.assertEqual(rendered.count('class="repo-card"'), 8)
         self.assertIn("repo-7", rendered)
         self.assertNotIn("repo-8", rendered)
-        self.assertIn("Query input", rendered)
+        self.assertIn("Query description", rendered)
         self.assertIn('aria-label="Open github.com/example/repo-0 summary"', rendered)
 
     def test_repository_catalog_is_searchable(self) -> None:
@@ -92,7 +92,7 @@ class PublicPageRendererTests(unittest.TestCase):
         self.assertIn("const RESULT_PAGE = 60", rendered)
         self.assertIn("repository-load-more", rendered)
         self.assertIn('searchParams.get("q")', rendered)
-        self.assertIn("queryInputHref(item)", rendered)
+        self.assertIn("repositoryQueryHref(item)", rendered)
         self.assertNotIn('data-search-index="', rendered)
 
     def test_pagedigest_dashboard_renders_export_economics(self) -> None:

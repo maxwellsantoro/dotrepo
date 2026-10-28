@@ -97,6 +97,11 @@ def check(root: Path, *, tag: str | None = None) -> tuple[str | None, list[str]]
     if tag is not None and tag != f"v{version}":
         errors.append(f"release tag ({tag}) does not match workspace version (v{version})")
 
+    if (root / "docs/install.md").is_file():
+        from check_release_guidance import check as check_guidance
+
+        errors.extend(check_guidance(root))
+
     return version, errors
 
 

@@ -29,6 +29,13 @@ fields rather than inferring server behavior from your client version.
 
 ## Safety-relevant differences
 
+Source changes after `v2.0.0-rc.1` add the shared contained output writer used by
+generation, initialization, adoption, CI setup, claims, export, and MCP import.
+They refuse descendant links and shared-hardlink targets while preserving
+ordinary file identity and permissions. These changes require a new binary
+release; the published RC and stable bundles are unchanged. See
+[path containment limits](../CONTRIBUTING.md#path-containment-limits).
+
 | Behavior | Stable `v1.0.3` | Unreleased `main` |
 | --- | --- | --- |
 | `promotion-report --apply` | Fails before writing records or evidence | Same no-write guard |

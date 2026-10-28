@@ -2,6 +2,35 @@
 
 ## Unreleased
 
+- Contain repository-derived CLI and MCP import writes beneath an explicitly
+  selected root. Refuse descendant symlinks/reparse points, nonregular targets,
+  and shared hardlinks before truncation; preserve ordinary file identity,
+  permissions and ACLs. Keep large exports within bounded descriptor use.
+- Require native write-boundary tests on Linux and Windows. Give the Windows
+  CLI dispatcher a bounded stack so ordinary debug commands do not overflow the
+  smaller main-thread stack; refusals must return command errors, not crashes.
+- Replace public links to private query inputs with supported query/profile
+  routes, including the writing page. Check generated links and dynamic card
+  routes against the production Worker while preserving private-input denial.
+- Add optional, exact-value and timestamp-bound field assessments to single
+  and batch query results, with shared Rust/Worker parity cases. Record-wide
+  trust does not supply a missing field assessment. The Worker withholds unsafe
+  integer and rounded-number bindings, including nested extension values.
+- Generate canonical/social metadata and content-addressed sitemaps; check
+  desktop/mobile layout, keyboard focus, and homepage health digests after render.
+- Align stable/prerelease installation guidance and recapture counts with their
+  owning data and check them during release validation. Stable defaults remain
+  separate from the release candidate.
+- Withhold explicit Cargo component selectors from repository-default scalars
+  and the scalar consumer policy. Retain a source-pinned PageDigest regression
+  and correct that record without refreshing unrelated evidence. Report scalar
+  and contextual acceptance separately by ecosystem and fallback reason; neither
+  measure establishes independent correctness or completed tasks.
+- Retain refresh publication and budget receipts after landing and check the
+  seven-day operating window against actual scheduled runs and linked deploy
+  smoke steps. Skipped publication, retries, gaps and missing receipts cannot
+  qualify. This implements the check; future operating history remains required.
+
 - Restore archive-backed public deployment after R2 activation, validated
   historical backfill, and live retrieval after edge eviction. Retain the
   [October 28 operating receipt](docs/archive/public-history-recovery-20261006/operating-checkpoint-20261028.md)

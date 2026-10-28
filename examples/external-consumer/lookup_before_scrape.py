@@ -285,6 +285,29 @@ def incomplete_command(value: str) -> bool:
     )
 
 
+def cargo_component_selector(value: str) -> bool:
+    """A selected Cargo package/manifest is not a repository-default scalar."""
+    tokens = [word.strip("\"'") for word in value.split()]
+    if "cargo" not in tokens:
+        return False
+    for index, token in enumerate(tokens):
+        if (
+            token in {"--package", "-p"}
+            or token.startswith("--package=")
+            or (token.startswith("-p") and len(token) > 2 and not token.startswith("--"))
+        ):
+            return True
+        if token == "--manifest-path":
+            path = tokens[index + 1] if index + 1 < len(tokens) else None
+        elif token.startswith("--manifest-path="):
+            path = token.partition("=")[2].strip("\"'")
+        else:
+            continue
+        if path not in {"Cargo.toml", "./Cargo.toml"}:
+            return True
+    return False
+
+
 def evaluate_for_task(
     result: LookupResult,
     *,
@@ -350,6 +373,8 @@ def evaluate_for_task(
             if path in {"repo.build", "repo.test"}:
                 if incomplete_command(value):
                     reasons.append("incomplete-command:" + path)
+                if cargo_component_selector(value):
+                    reasons.append("component-command-selector:" + path)
                 source = assessment.get("source", "")
                 if (
                     isinstance(source, str)

@@ -161,6 +161,11 @@ def test_workflow_scheduling_cache_and_narrow_jobs_preserve_required_checks():
         "uv run pytest --durations=15" in python and "cargo build --locked -p dotrepo-cli" in python
     )
     assert "uv run pytest" not in rust and "cargo test --workspace" in rust
+    runtime = jobs["write-boundary-runtime"]
+    assert set(runtime["strategy"]["matrix"]["os"]) == {"ubuntu-latest", "windows-latest"}
+    assert runtime["strategy"]["fail-fast"] is False
+    checks = "\n".join(step.get("run", "") for step in runtime["steps"])
+    assert "--lib output::tests" in checks and "--test write_safety_contract" in checks
     release = jobs["release-gate"]
     cache = next(
         step for step in release["steps"] if step.get("name") == "Cache pinned Playwright browsers"

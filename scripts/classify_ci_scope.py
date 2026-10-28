@@ -12,14 +12,15 @@ import subprocess
 
 SCOPED_JOBS = {
     "rust-and-index": "run_rust_ci",
+    "write-boundary-runtime": "run_write_boundary_runtime",
     "python-gate": "run_python_gate",
     "operator-gate": "run_operator_gate",
     "public-surface-gate": "run_public_surface_gate",
     "release-gate": "run_release_gate",
     "minimal-gate": "run_minimal_gate",
 }
-FULL = {"rust-and-index", "python-gate", "operator-gate", "release-gate"}
-RUST = {"rust-and-index", "python-gate", "release-gate"}
+FULL = {"rust-and-index", "write-boundary-runtime", "python-gate", "operator-gate", "release-gate"}
+RUST = {"rust-and-index", "write-boundary-runtime", "python-gate", "release-gate"}
 PYTHON = {"python-gate"}
 PUBLIC = {"python-gate", "public-surface-gate"}
 RELEASE = {"python-gate", "release-gate"}
@@ -42,6 +43,7 @@ PROSE = {
 }
 SHARED = {"Cargo.toml", "Cargo.lock", "pyproject.toml", "uv.lock", ".python-version"}
 PUBLIC_SCRIPTS = {
+    "public_site_discovery.py",
     "public_site_content.py",
     "public_product_content.py",
     "language_family.py",
@@ -60,6 +62,7 @@ PUBLIC_SCRIPTS = {
     "render_index_growth_status.py",
 }
 RELEASE_SCRIPTS = {
+    "check_release_guidance.py",
     "check_release_gate.py",
     "gate_timings.py",
     "check_release_version.py",
@@ -120,6 +123,8 @@ def jobs_for_path(path: str) -> set[str]:
         }:
             return FULL.copy()
         return PYTHON.copy()
+    if path == "scripts/check_public_links.mjs":
+        return PUBLIC.copy()
     if path == "scripts/check_public_presentation.cjs" or path.startswith("editors/"):
         return RELEASE.copy()
     if path.startswith("cloudflare/"):

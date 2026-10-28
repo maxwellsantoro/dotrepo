@@ -525,6 +525,7 @@ pub fn public_repository_query_with_base(
         identity: public_identity(host, owner, repo, selected),
         path: path.to_string(),
         value,
+        field_evidence: super::evidence::query_field_evidence(&selected.manifest, path),
         selection: PublicSelectionReport {
             reason,
             record: public_selected_record(index_root, selected),
@@ -740,6 +741,7 @@ pub fn public_repository_query_from_input_with_base(
         identity: identity.clone(),
         path: path.to_string(),
         value,
+        field_evidence: super::evidence::query_field_evidence(&snapshot.selection.manifest, path),
         selection: PublicSelectionReport {
             reason: snapshot.selection.reason,
             record: snapshot.selection.record.clone(),

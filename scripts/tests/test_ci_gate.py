@@ -43,6 +43,13 @@ def test_selected_job_must_succeed(result):
     assert check_results(needs)
 
 
+@pytest.mark.parametrize("result", ["failure", "cancelled", "skipped", None])
+def test_selected_platform_runtime_matrix_must_succeed(result):
+    needs = needs_for("rust-and-index", "write-boundary-runtime")
+    needs["write-boundary-runtime"]["result"] = result
+    assert check_results(needs)
+
+
 def test_classifier_failure_missing_outputs_and_empty_scope_fail_closed():
     needs = needs_for("minimal-gate")
     variants = []

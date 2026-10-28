@@ -11,6 +11,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from public_site_content import ARTICLES
+from public_site_discovery import publish_discovery
 from public_product_content import (
     render_record_freshness,
     render_profile_example,
@@ -427,11 +428,14 @@ def site_href(base_path: str, path: str) -> str:
     return normalized
 
 
-def query_input_href(base_path: str, entry: dict) -> str:
+def repository_query_href(base_path: str, entry: dict) -> str:
+    template = entry.get("links", {}).get("queryTemplate")
+    if isinstance(template, str) and "{dot_path}" in template:
+        return template.replace("{dot_path}", "repo.description")
     host, owner, repo = repository_segments(entry)
     if not all((host, owner, repo)):
         return "#"
-    return site_href(base_path, f"/query-input/{host}/{owner}/{repo}.json")
+    return site_href(base_path, f"/v0/repos/{host}/{owner}/{repo}/query?path=repo.description")
 
 
 def detect_site_base_path(inventory: dict) -> str:
@@ -541,7 +545,9 @@ def build_query_example(input_dir: Path, inventory: dict) -> tuple[str, str, str
     query_url = (
         summary.get("links", {}).get("queryTemplate", "#").replace("{dot_path}", "repo.description")
     )
-    query_input_url = query_input_href(detect_site_base_path(inventory), repositories[0])
+    profile_url = summary.get("links", {}).get(
+        "profile", query_url.split("/query?")[0] + "/profile.json"
+    )
     example = {
         "path": "repo.description",
         "value": compact_text(
@@ -559,7 +565,7 @@ def build_query_example(input_dir: Path, inventory: dict) -> tuple[str, str, str
         },
         "conflicts": summary.get("conflicts", []),
     }
-    return query_url, query_input_url, html.escape(json.dumps(example, indent=2))
+    return query_url, profile_url, html.escape(json.dumps(example, indent=2))
 
 
 def build_featured_trust_example(input_dir: Path, inventory: dict) -> dict:
@@ -597,7 +603,7 @@ def build_featured_trust_example(input_dir: Path, inventory: dict) -> dict:
     artifacts = selected_record.get("artifacts", {})
     identity = trust.get("identity", {})
     links = trust.get("links", {})
-    query_url = query_input_href(detect_site_base_path(inventory), entry)
+    query_url = repository_query_href(detect_site_base_path(inventory), entry)
     proof = {
         "identity": {
             "host": identity.get("host"),
@@ -862,7 +868,7 @@ def render_repository_cards(
         links = entry.get("links", {})
         summary = links.get("self", "#")
         trust = links.get("trust", "#")
-        query = query_input_href(base_path, entry)
+        query = repository_query_href(base_path, entry)
         aria_label = html.escape(label or str(name), quote=True)
         cards.append(
             """
@@ -876,7 +882,7 @@ def render_repository_cards(
               <div class="repo-card__links">
                 <a href="{summary}" aria-label="Open {aria_label} summary">Summary</a>
                 <a href="{trust}" aria-label="Open {aria_label} trust report">Trust</a>
-                <a href="{query}" aria-label="Open {aria_label} query input data">Query input</a>
+                <a href="{query}" aria-label="Open {aria_label} description query">Query description</a>
               </div>
             </article>
             """.format(
@@ -1333,12 +1339,16 @@ def render_repositories_index(inventory: dict, base_path: str) -> str:
         return encodeURIComponent(value);
       }}
 
-      function queryInputHref(item) {{
+      function repositoryQueryHref(item) {{
+        const template = item.links.queryTemplate;
+        if (typeof template === "string" && template.includes("{{dot_path}}")) {{
+          return template.replace("{{dot_path}}", "repo.description");
+        }}
         const identity = item.identity;
         if (!identity.host || !identity.owner || !identity.repo) {{
           return "#";
         }}
-        return `{base_path}/query-input/${{pathSegment(identity.host)}}/${{pathSegment(identity.owner)}}/${{pathSegment(identity.repo)}}.json`;
+        return `{base_path}/v0/repos/${{pathSegment(identity.host)}}/${{pathSegment(identity.owner)}}/${{pathSegment(identity.repo)}}/query?path=repo.description`;
       }}
 
       function makeLink(href, text, label) {{
@@ -1378,7 +1388,7 @@ def render_repositories_index(inventory: dict, base_path: str) -> str:
         links.append(
           makeLink(item.links.self, "Summary", `Open ${{item.label}} summary`),
           makeLink(item.links.trust, "Trust", `Open ${{item.label}} trust report`),
-          makeLink(queryInputHref(item), "Query input", `Open ${{item.label}} query input data`)
+          makeLink(repositoryQueryHref(item), "Query description", `Open ${{item.label}} description query`)
         );
 
         article.append(head, description, links);
@@ -2266,7 +2276,7 @@ def main() -> int:
     generated_at_human = format_timestamp_for_humans(generated_at)
     stale_after = meta.get("staleAfter")
     repository_count = inventory.get("repositoryCount", 0)
-    first_query, first_query_input, query_example = build_query_example(input_dir, inventory)
+    first_query, first_profile, query_example = build_query_example(input_dir, inventory)
     featured_trust = build_featured_trust_example(input_dir, inventory)
     homepage_snapshot_state = build_homepage_snapshot_state(meta, inventory)
     stale_line = (
@@ -2895,7 +2905,7 @@ def main() -> int:
           <div class="repo-card__links">
             <a href="{html.escape(featured_trust["summaryUrl"])}" aria-label="Open {html.escape(featured_trust["label"], quote=True)} summary">Summary</a>
             <a href="{html.escape(featured_trust["trustUrl"])}" aria-label="Open {html.escape(featured_trust["label"], quote=True)} trust report">Trust</a>
-            <a href="{html.escape(featured_trust["queryUrl"])}" aria-label="Open {html.escape(featured_trust["label"], quote=True)} query input data">Query input</a>
+            <a href="{html.escape(featured_trust["queryUrl"])}" aria-label="Open {html.escape(featured_trust["label"], quote=True)} description query">Query description</a>
           </div>
         </article>
         <article class="api-card">
@@ -2953,7 +2963,7 @@ def main() -> int:
           <p>The query route returns the selected value together with selection, trust, and conflict context. This truncated example is derived from the current exported snapshot.</p>
           <div class="endpoint endpoint--query">
             <code>{html.escape(first_query)}</code>
-            <span>Hosted query route for <code>repo.description</code>; static preview data: <a href="{html.escape(first_query_input)}"><code>query-input JSON</code></a>.</span>
+            <span>Hosted query route for <code>repo.description</code>; full value-bound assessments: <a href="{html.escape(first_profile)}"><code>profile JSON</code></a>.</span>
           </div>
           <details><summary>Inspect the example query response</summary><pre><code>{query_example}</code></pre></details>
           <p class="api-card__caption">Full responses also include freshness, repository identity, and navigation links.</p>
@@ -2999,6 +3009,7 @@ def main() -> int:
             input_dir / "writing" / article["slug"] / "index.html",
             render_article_page(article, base_path),
         )
+    publish_discovery(input_dir, base_path)
     write_text(
         input_dir / "v0" / "health.json",
         json.dumps(build_public_health(input_dir, meta, inventory, stats), indent=2) + "\n",

@@ -108,6 +108,20 @@ and index maintenance and must not be advertised as total task savings.
 
 ## Positive command acceptance
 
+The quick query and batch-query wrappers include optional `fieldEvidence` for
+the exact requested value, using the full profile's value/time binding rules.
+An absent assessment means unassessed, even when the selected record says
+`verified` or has high confidence. Apply the same positive acceptance policy;
+do not infer command correctness from record trust. For execution, fetch the
+full profile and select an assessed contextual instruction as described below.
+
+Explicit Cargo package selectors and nested `--manifest-path` selectors cannot
+establish a repository-default scalar, even when quoted in a root README.
+They require an appropriate separately assessed contextual candidate. The
+coverage report splits scalar and root-contextual acceptance by dominant
+ecosystem and fallback reason; independent correctness and task completion
+remain unmeasured unless a separate outcome packet supplies that evidence.
+
 A requested `docs.root` also needs a fresh, present, extracted, high-confidence
 assessment with a retained source declaration. A homepage or syntactically valid
 URL does not establish a documentation root. Missing, inferred, unspecified or
