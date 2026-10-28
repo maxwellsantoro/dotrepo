@@ -168,6 +168,120 @@ def test_failed_bulk_upload_never_commits_the_archive_log(tmp_path: Path, monkey
     assert calls[0][3:5] == ["bulk", "put"]
 
 
+@pytest.fixture
+def upload_clock(monkeypatch):
+    now = [0.0]
+    sleeps = []
+
+    def sleep(seconds):
+        sleeps.append(seconds)
+        now[0] += seconds
+
+    monkeypatch.setattr(archive.time, "monotonic", lambda: now[0])
+    monkeypatch.setattr(archive.time, "sleep", sleep)
+    return now, sleeps
+
+
+def test_transient_later_batch_failure_retries_only_that_batch_before_committing_log(
+    tmp_path, monkeypatch, upload_clock
+):
+    public_root = tmp_path / "public"
+    entry = write_snapshot(public_root)
+    (public_root / "v0/snapshots/log.json").write_text(json.dumps({"entries": [entry]}))
+    monkeypatch.setattr(archive, "read_archive_log", lambda *_: {})
+    monkeypatch.setattr(archive, "BULK_BATCH_SIZE", 1)
+    now, sleeps = upload_clock
+    calls = []
+
+    def upload(command, **kwargs):
+        if command[3] != "bulk":
+            calls.append(("log", now[0]))
+            assert json.loads(Path(command[command.index("--file") + 1]).read_text())[
+                "entries"
+            ] == [entry]
+            return
+        batch = json.loads(Path(command[command.index("--filename") + 1]).read_text())
+        assert len(batch) == 1
+        assert "query-input" not in batch[0]["key"]
+        calls.append((batch[0]["key"], now[0]))
+        if len(calls) == 2:
+            raise subprocess.CalledProcessError(
+                1,
+                command,
+                stderr="APIError: Failed to fetch /objects/key - 500: Internal Server Error;",
+            )
+
+    monkeypatch.setattr(archive.subprocess, "run", upload)
+    assert archive.archive_snapshots(public_root, "archive", tmp_path) == 3
+    assert calls == [
+        ("v0/snapshots/current/repos/index.json", 0),
+        ("v0/snapshots/current/files.json", 300),
+        ("v0/snapshots/current/files.json", 600),
+        ("log", 600),
+    ]
+    assert sleeps and max(sleeps) <= 60
+
+
+@pytest.mark.parametrize(
+    "diagnostic,attempts",
+    [
+        ("APIError: Failed to fetch /objects/key - 500: Internal Server Error;", 3),
+        ("APIError: Failed to fetch /objects/key - 429: Too Many Requests;", 3),
+        ("ETIMEDOUT", 3),
+        ("APIError: Failed to fetch /objects/key - 403: Forbidden;", 1),
+        ("Authentication error", 1),
+        ("Invalid upload filename", 1),
+    ],
+)
+def test_exhausted_or_permanent_failure_never_commits_log(
+    tmp_path, monkeypatch, upload_clock, diagnostic, attempts
+):
+    public_root = tmp_path / "public"
+    entry = write_snapshot(public_root)
+    (public_root / "v0/snapshots/log.json").write_text(json.dumps({"entries": [entry]}))
+    monkeypatch.setattr(archive, "read_archive_log", lambda *_: {})
+    now, _ = upload_clock
+    calls = []
+
+    def fail(command, **kwargs):
+        assert command[3:5] == ["bulk", "put"]
+        calls.append(now[0])
+        raise subprocess.CalledProcessError(1, command, stderr=diagnostic)
+
+    monkeypatch.setattr(archive.subprocess, "run", fail)
+    with pytest.raises(subprocess.CalledProcessError):
+        archive.archive_snapshots(public_root, "archive", tmp_path)
+    assert calls == [300 * attempt for attempt in range(attempts)]
+
+
+def test_transient_log_commit_failure_retries_identical_log_without_reuploading_payloads(
+    tmp_path, monkeypatch, upload_clock
+):
+    public_root = tmp_path / "public"
+    entry = write_snapshot(public_root)
+    (public_root / "v0/snapshots/log.json").write_text(json.dumps({"entries": [entry]}))
+    monkeypatch.setattr(archive, "read_archive_log", lambda *_: {})
+    now, _ = upload_clock
+    uploads = []
+    logs = []
+
+    def upload(command, **kwargs):
+        if command[3] == "bulk":
+            uploads.append(command)
+            return
+        body = Path(command[command.index("--file") + 1]).read_bytes()
+        logs.append((body, now[0]))
+        assert len(uploads) == 1
+        if len(logs) == 1:
+            raise subprocess.CalledProcessError(1, command, stderr="503: Service Unavailable")
+
+    monkeypatch.setattr(archive.subprocess, "run", upload)
+    assert archive.archive_snapshots(public_root, "archive", tmp_path) == 3
+    assert len(uploads) == 1
+    assert len(logs) == 2 and logs[0][0] == logs[1][0]
+    assert [when for _, when in logs] == [0, 300]
+
+
 @pytest.mark.parametrize(
     "failure", ["missing", "hash", "traversal", "count", "identity", "symlink"]
 )

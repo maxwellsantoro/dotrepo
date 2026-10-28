@@ -9,7 +9,9 @@ import json
 import re
 import shlex
 import subprocess
+import sys
 import tempfile
+import time
 from pathlib import Path, PurePosixPath
 
 from sync_cloudflare_public_snapshot import load_json, merge_log_documents
@@ -17,6 +19,42 @@ from sync_cloudflare_public_snapshot import load_json, merge_log_documents
 
 IMMUTABLE_CACHE_CONTROL = "public, max-age=31536000, immutable"
 MUTABLE_CACHE_CONTROL = "no-cache"
+BULK_BATCH_SIZE = 1000
+BULK_COOLDOWN_SECONDS = 300
+BULK_MAX_ATTEMPTS = 3
+
+
+def retryable_upload_failure(error: subprocess.CalledProcessError) -> bool:
+    diagnostic = re.sub(r"\x1b\[[0-9;]*m", "", error.stderr or "")
+    # Retry only explicit transient API/transport failures, never authentication,
+    # malformed inputs, or an unclassified nonzero exit from the archive client.
+    return bool(
+        re.search(r"\b(?:429|500|502|503|504):", diagnostic)
+        or re.search(r"\b(?:ECONNRESET|ETIMEDOUT|EAI_AGAIN)\b", diagnostic)
+    )
+
+
+def run_archive_upload(command: list[str], cwd: Path, not_before: float) -> float:
+    for attempt in range(1, BULK_MAX_ATTEMPTS + 1):
+        remaining = not_before - time.monotonic()
+        if remaining > 0:
+            print(f"Archive upload cooldown: {remaining:.0f}s", flush=True)
+            while remaining > 0:
+                time.sleep(min(remaining, 60))
+                remaining = not_before - time.monotonic()
+        try:
+            subprocess.run(command, cwd=cwd, check=True, stderr=subprocess.PIPE, text=True)
+        except subprocess.CalledProcessError as error:
+            print((error.stderr or "")[-12000:], file=sys.stderr, flush=True)
+            if attempt == BULK_MAX_ATTEMPTS or not retryable_upload_failure(error):
+                raise
+            print(f"Retrying transient archive upload failure ({attempt}/{BULK_MAX_ATTEMPTS})")
+        else:
+            return time.monotonic() + BULK_COOLDOWN_SECONDS
+        # Every process has a fresh Wrangler rate limiter. A full cooldown after
+        # each attempt also covers partial writes before a failed batch retries.
+        not_before = time.monotonic() + BULK_COOLDOWN_SECONDS
+    raise AssertionError("archive upload attempts exhausted")
 
 
 def validated_snapshot_files(public_root: Path, entry: dict) -> list[Path]:
@@ -231,20 +269,22 @@ def archive_snapshots(
     ]
     with tempfile.TemporaryDirectory(prefix="dotrepo-archive-merged-") as temporary:
         merged_root = Path(temporary)
-        # Wrangler is lockfile-pinned. Its bulk implementation has bounded
-        # concurrency and API rate limiting; one process avoids thousands of
-        # separate Node startup/authentication cycles. Any failure stops before
-        # the public log is committed. Private runtime inputs are never uploaded.
+        # Validate all payloads before writing, then bound each retry to one
+        # small batch. Completed batches survive a transient failure in a later
+        # batch within this run. The public log is still committed only last.
         groups: dict[str, list[dict]] = {}
         for path in payloads:
             groups.setdefault(content_type(path), []).append(
                 {"key": path.relative_to(public_root).as_posix(), "file": str(path)}
             )
+        not_before = 0.0
         for number, (mime, entries) in enumerate(groups.items()):
-            batch = merged_root / f"upload-{number}.json"
-            batch.write_text(json.dumps(entries), encoding="utf-8")
-            subprocess.run(
-                [
+            for offset in range(0, len(entries), BULK_BATCH_SIZE):
+                batch = merged_root / f"upload-{number}-{offset}.json"
+                batch.write_text(
+                    json.dumps(entries[offset : offset + BULK_BATCH_SIZE]), encoding="utf-8"
+                )
+                command = [
                     "npx",
                     "wrangler",
                     "r2",
@@ -261,14 +301,14 @@ def archive_snapshots(
                     mime,
                     "--cache-control",
                     IMMUTABLE_CACHE_CONTROL,
-                ],
-                cwd=wrangler_cwd,
-                check=True,
-            )
+                ]
+                not_before = run_archive_upload(command, wrangler_cwd, not_before)
         path = merged_root / "v0/snapshots/log.json"
         path.parent.mkdir(parents=True)
         path.write_text(json.dumps(merged_log, indent=2) + "\n", encoding="utf-8")
-        subprocess.run(upload_command(bucket, merged_root, path), cwd=wrangler_cwd, check=True)
+        # The batch cap reserves headroom for this final small write. Retrying
+        # the exact same merged log is safe after every payload has succeeded.
+        run_archive_upload(upload_command(bucket, merged_root, path), wrangler_cwd, 0)
     return len(payloads) + 1
 
 
