@@ -74,6 +74,11 @@ Set these in GitHub repository settings under Variables:
 
 - `CLOUDFLARE_PUBLIC_DEPLOY_ENABLED=true`
 - `DOTREPO_PUBLIC_BASE_PATH=/`
+- `DOTREPO_PUBLIC_R2_ARCHIVE_BUCKET=dotrepo-public-snapshot-archive`
+
+Production deployment requires the archive bucket and a matching
+`SNAPSHOT_ARCHIVE` binding. During archive repair, keep deployment enablement
+`false` and follow the recovery sequence below before switching it to `true`.
 
 `DOTREPO_PUBLIC_BASE_PATH` defaults to `/`; configured custom domains require `/`.
 `DOTREPO_PUBLIC_STATE_BASE_URL` optionally selects the currently deployed HTTPS
@@ -202,6 +207,38 @@ uv run python scripts/archive_public_snapshot_r2.py \
   --public-root release-gate/public \
   --bucket "$DOTREPO_PUBLIC_R2_ARCHIVE_BUCKET"
 ```
+
+### Recovering an archive before resuming publication
+
+Cloudflare error `10042` means the account is not entitled to R2. The account
+owner must complete the R2 subscription setup in **Storage & databases → R2 →
+Overview**, including reviewing the terms and pricing. API permissions and
+bucket configuration cannot replace that setup. See Cloudflare's
+[error reference](https://developers.cloudflare.com/r2/api/error-codes/) and
+[getting started guide](https://developers.cloudflare.com/r2/get-started/).
+
+Keep `CLOUDFLARE_PUBLIC_DEPLOY_ENABLED=false` while repairing archive history:
+
+1. Complete the account setup and set `DOTREPO_PUBLIC_R2_ARCHIVE_BUCKET` to the
+   declared archive bucket.
+2. Manually dispatch `public-archive-recovery` on the default branch. Recovery
+   checks account access before rebuilding the frozen original exporters,
+   provisions the bucket, validates the recovered payloads, and uploads them
+   with `--require-complete-history`. It can run while ordinary deployment is
+   disabled; it never deploys the Worker or changes the enablement variable.
+3. Require successful reconstruction, upload, and archive-log commit. Retain the
+   workflow receipt and payload artifacts. The
+   [frozen recovery plan](archive/public-history-recovery-20261006/README.md)
+   describes the historical inputs and byte anchors.
+4. Set `CLOUDFLARE_PUBLIC_DEPLOY_ENABLED=true` and dispatch `public-cloudflare`
+   on validated default-branch source. Require the matching archive binding,
+   successful deployment and live smoke, and current public metadata.
+5. Verify an older logged snapshot after it has left the current/previous static
+   bundle, then enable `DOTREPO_PUBLIC_ARCHIVE_CANARY_ENABLED=true`.
+
+Recovery and publication share one concurrency group so they cannot race the
+append-only archive log. A successful recovery upload establishes archive state;
+retrieval through the public Worker still requires the deployment and live check.
 
 Use `--dry-run` locally to inspect the `wrangler r2 object put` commands before
 uploading. Real uploads first read and merge the existing archive log, reject
