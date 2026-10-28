@@ -201,8 +201,12 @@ def test_history_recovery_binds_original_exporters_and_serializes_with_publicati
     assert workflow["permissions"] == {"contents": "read"}
     assert workflow["concurrency"] == public["concurrency"]
     job = workflow["jobs"]["recover"]
+    assert "github.event_name == 'workflow_dispatch'" in job["if"]
     assert "github.event.repository.default_branch" in job["if"]
     assert "vars.DOTREPO_PUBLIC_R2_ARCHIVE_BUCKET != ''" in job["if"]
+    assert "CLOUDFLARE_PUBLIC_DEPLOY_ENABLED" not in job["if"]
+    assert "wrangler deploy" not in str(job)
+    assert "gh variable set" not in str(job)
     steps = {step.get("name"): step for step in job["steps"]}
     access = steps["Check archive account access before reconstruction"]
     assert access["run"] == "npx wrangler r2 bucket list"

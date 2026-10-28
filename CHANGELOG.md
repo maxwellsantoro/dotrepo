@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+- Allow manual public archive recovery on the default branch while ordinary
+  Cloudflare deployment remains disabled. Preserve account-access preflight,
+  validated historical reconstruction, and serialized archive writes; document
+  the R2 subscription and recovery sequence before publication resumes.
+- Refresh the compatible Wrangler lockfile to clear reported development-tool
+  dependency advisories.
+
 ## 2.0.0-rc.1 — 2026-10-27
 
 The post-1.0 tree includes public Rust API changes, including the new
