@@ -24,11 +24,10 @@ The index is fresh (615/615 after the October 27 catch-up, #161), the landing
 deadlock is fixed (#160, #164), `v2.0.0-rc.1` is published, and autonomous
 refresh has landed unattended (#166). Optimize elapsed time, not agent count:
 
-- **Calendar work starts first and never waits for code.** Two gates are
-  elapsed-time or external-action bound: seven consecutive green scheduled
-  refresh runs (one per day from October 28) and Cloudflare R2 enablement
-  (operator dashboard action, issue #167). Assign them to the coordinator on
-  day zero; no worker can accelerate them later.
+- **Calendar work starts first and never waits for code.** The elapsed-time
+  gate is seven consecutive green scheduled refresh runs (one per day from
+  October 28). Assign it to the coordinator on day zero; no worker can
+  accelerate the observation window later.
 - **Three concurrent worker lanes, disjoint by path:** (A) reliability —
   `crates/`, `scripts/`, and tests for F1/E1; (B) evidence — `benchmarks/`
   packets and frozen C1/C2 inputs; (C) surface/release — `docs/`, install and
@@ -131,9 +130,9 @@ consumer/scorer/runtime freeze already exercised by the retained campaign.
 Preregister new tasks, component paths and prepared environments before inspecting
 their coverage; source-inspect assessments and fix a new immutable snapshot.
 Keep source preparation, correct fallback and direct profile contribution
-separate. Preserve all historical packets. The remaining delivery checkpoint is
-archive provisioning/backfill and actual retrieval after edge eviction, alongside
-version-matched release maintenance and enforced CI.
+separate. Preserve all historical packets. Delivery maintenance must keep archive
+retrieval after edge eviction, version-matched releases, and enforced CI working
+across subsequent publications.
 
 Close a packet only when its specified artifacts/checks exist. Distinguish
 **implemented**, **validated**, **operating**, **published**, and **independently

@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Restore archive-backed public deployment after R2 activation, validated
+  historical backfill, and live retrieval after edge eviction. Retain the
+  [October 28 operating receipt](docs/archive/public-history-recovery-20261006/operating-checkpoint-20261028.md)
+  with recovery/deploy runs, metadata, manifest hashes, and evidence limits;
+  freshness and archive availability remain ongoing operating obligations.
 - Bound archive uploads into paced batches and retry explicit transient API or
   transport failures without repeating earlier successful batches in the run.
   Keep permanent failures fatal and commit the archive log only after every
