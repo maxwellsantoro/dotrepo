@@ -1,5 +1,8 @@
 # Public export examples
 
+> Supporting doc: routes and CLI equivalents for the public JSON tree.
+> [Public architecture](public-surface.md) owns capabilities and bounds; read it first.
+
 These examples show how to consume the dotrepo public JSON tree. The hosted
 deployment at `https://dotrepo.org/` is the current primary consumption path;
 the same tree can also be inspected locally, from CI artifacts, through the

@@ -1,5 +1,8 @@
 # Conflict surfacing examples
 
+> Supporting doc (non-normative): illustrations only.
+> [Maintainer happy path](maintainer-happy-path.md) owns the normal flow; read it first.
+
 These examples are non-normative. They illustrate the query and trust response
 contract described in [`RFC 0003`](../rfcs/0003-cli-and-query-contract.md) and
 [`RFC 0006`](../rfcs/0006-mcp-server-contract.md).

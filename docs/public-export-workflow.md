@@ -1,5 +1,8 @@
 # Public export workflow
 
+> Supporting doc: the operator/reviewer loop for the public tree.
+> [Public architecture](public-surface.md) owns capabilities and bounds; read it first.
+
 This doc covers the operator and reviewer loop for the read-only public JSON
 tree and its hosted deployment.
 

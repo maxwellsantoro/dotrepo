@@ -1,5 +1,8 @@
 # Authority handoff examples
 
+> Supporting doc (non-normative): illustrations only.
+> [Maintainer happy path](maintainer-happy-path.md) owns the normal flow; read it first.
+
 These examples are non-normative. They illustrate the claim, supersede, and conflict
 rules from [`RFC 0004`](../rfcs/0004-index-and-trust-model.md).
 Use [the trust model](trust-model.md#selection-tie-breaking) for current precedence
