@@ -1,0 +1,46 @@
+[
+  {
+    "command": "cargo test --locked --manifest-path implementations/rust-generator/Cargo.toml",
+    "componentScoped": true
+  },
+  {
+    "command": "cargo build --manifest-path=crates/cli/Cargo.toml",
+    "componentScoped": true
+  },
+  {
+    "command": "cargo +nightly test --manifest-path \"crates/tool/Cargo.toml\"",
+    "componentScoped": true
+  },
+  {
+    "command": "cargo test -p tool",
+    "componentScoped": true
+  },
+  {
+    "command": "cargo test -ptool",
+    "componentScoped": true
+  },
+  {
+    "command": "cargo test --package=tool",
+    "componentScoped": true
+  },
+  {
+    "command": "cargo test --manifest-path",
+    "componentScoped": true
+  },
+  {
+    "command": "cargo test --manifest-path Cargo.toml",
+    "componentScoped": false
+  },
+  {
+    "command": "cargo test --manifest-path=./Cargo.toml",
+    "componentScoped": false
+  },
+  {
+    "command": "cargo test --workspace",
+    "componentScoped": false
+  },
+  {
+    "command": "npm test",
+    "componentScoped": false
+  }
+]

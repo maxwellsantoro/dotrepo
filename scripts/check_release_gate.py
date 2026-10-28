@@ -342,6 +342,13 @@ def public_factual_accuracy_command(
 def public_upstream_accuracy_command(public_dir: Path, output_root: Path) -> list[str]:
     # Reuse the independently selected cohort with a new dated upstream capture.
     # Previous captures/results remain frozen; exact-value requirements hold.
+    baseline = json.loads(
+        (
+            Path(__file__).resolve().parent / "fixtures/public_upstream_accuracy_baseline.json"
+        ).read_text()
+    )
+    if baseline.get("schema") != "dotrepo-upstream-accuracy-baseline/v1":
+        raise SystemExit("invalid upstream accuracy baseline")
     return [
         "uv",
         "run",
@@ -350,11 +357,11 @@ def public_upstream_accuracy_command(public_dir: Path, output_root: Path) -> lis
         "--public-root",
         str(public_dir),
         "--workload",
-        "benchmarks/head-to-head/upstream-2026-10-27/workload.json",
+        baseline["workload"],
         "--min-assertions",
-        "119",
+        str(baseline["minAssertions"]),
         "--min-repositories",
-        "31",
+        str(baseline["minRepositories"]),
         "--min-accuracy-rate",
         "1.0",
         "--max-missing-rate",
@@ -1191,6 +1198,8 @@ def run_gate(args: argparse.Namespace, repo_root: Path, output_root: Path) -> in
         cwd=repo_root,
     )
     run(public_upstream_accuracy_command(public_dir, output_root), cwd=repo_root)
+    run(["uv", "run", "python", "scripts/check_release_guidance.py"], cwd=repo_root)
+    run(["node", "scripts/check_public_links.mjs", str(public_dir)], cwd=repo_root)
     run(
         [
             "uv",

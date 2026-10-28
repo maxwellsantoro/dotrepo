@@ -255,13 +255,34 @@ the late exact-base guards still apply. There is no routine human merge tier.
    succeed for that exact commit.
 3. Rechecks the PR/default branch and fast-forwards with `force: false`.
    Divergence or branch protection rejects landing; it does not bypass settings.
-4. Dispatches deployment and waits for the deploy job and smoke check.
+4. When `CLOUDFLARE_PUBLIC_DEPLOY_ENABLED=true`, dispatches deployment and waits
+   for the exact-commit deploy job, actual publication step, and smoke check.
+   A disabled switch is recorded as `landed-deployment-disabled`; landing alone
+   cannot qualify as publication.
 
 Explicit dispatch is necessary because ordinary `GITHUB_TOKEN` pushes do not
 start downstream push workflows. A successful crawl is not publication proof.
 If the base advanced, regenerate the batch. If landing succeeded but deployment
 failed, rerun deployment. The workflow restores the failed batch result after
 retaining evidence; partial progress does not silently turn a failure green.
+
+The workflow uploads `refresh-receipt` **after** landing, with the run identity,
+required step outcomes, actual adjudication budget/calls/tokens, and the deployment
+run ID. `check_refresh_streak.py` independently checks completed GitHub run
+conclusions and the linked publication/smoke steps. It requires seven consecutive
+UTC calendar days of scheduled first attempts. Retries, skipped deployment,
+missing or expired receipts, missing days, failures, and unknown budgets cannot
+pass. A no-change run without a verified publication receipt remains unqualified.
+The in-progress run is omitted until GitHub records its final conclusion.
+
+```bash
+uv run python scripts/check_refresh_streak.py report \
+  --repository maxwellsantoro/dotrepo \
+  --output /tmp/dotrepo-refresh-streak.json --require-pass
+```
+
+This command only reads GitHub. Enabling a schedule or replaying historical
+receipts cannot manufacture a new seven-day operating window.
 
 A nominal 50-record daily capacity is not proof of successful rotation.
 Monitor actual cadence and backlog. Release freshness fails when over 10% of

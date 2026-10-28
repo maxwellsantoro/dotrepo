@@ -31,7 +31,7 @@ jobs:
   # Require this stable check in branch protection/rulesets. Scoped jobs may
   # skip intentionally; the aggregate requires every planned job to succeed.
   ci-gate:
-    needs: [change-scope, rust-and-index, python-gate, operator-gate, public-surface-gate, release-gate, minimal-gate]
+    needs: [change-scope, rust-and-index, write-boundary-runtime, python-gate, operator-gate, public-surface-gate, release-gate, minimal-gate]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -49,6 +49,7 @@ jobs:
     timeout-minutes: 5
     outputs:
       run_rust_ci: ${{ steps.scope.outputs.run_rust_ci }}
+      run_write_boundary_runtime: ${{ steps.scope.outputs.run_write_boundary_runtime }}
       run_python_gate: ${{ steps.scope.outputs.run_python_gate }}
       run_operator_gate: ${{ steps.scope.outputs.run_operator_gate }}
       run_public_surface_gate: ${{ steps.scope.outputs.run_public_surface_gate }}
@@ -65,6 +66,28 @@ jobs:
         env:
           DISPATCH_BASE_SHA: ${{ inputs.base_sha }}
         run: uv run --no-project python scripts/classify_ci_scope.py --github
+
+  write-boundary-runtime:
+    needs: change-scope
+    if: needs.change-scope.outputs.run_write_boundary_runtime == 'true'
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@4be7066ada62dd38de10e7b70166bc74ed198c30 # stable
+        with:
+          toolchain: stable
+      - name: Cache cargo artifacts
+        uses: Swatinem/rust-cache@f0d9c3887740aee45f6153b24b3a6b815192ec16 # v2
+      - name: Exercise native core write boundaries
+        run: cargo test --locked -p dotrepo-core --lib output::tests -- --nocapture
+      - name: Exercise native CLI write boundaries
+        run: cargo test --locked -p dotrepo-cli --test write_safety_contract -- --nocapture
 
   rust-and-index:
     needs: change-scope

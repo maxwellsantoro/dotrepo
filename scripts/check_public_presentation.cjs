@@ -13,6 +13,9 @@ const { chromium } = require('playwright');
   const repositoryCount = JSON.parse(fs.readFileSync(path.join(root, 'v0/repos/index.json'), 'utf8')).repositoryCount;
   const server = http.createServer((req, res) => {
     const pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
+    // Chrome requests an implicit favicon on raw JSON navigation. This local
+    // static harness serves no optional icon there; page assets remain checked.
+    if (pathname === '/favicon.ico') { res.writeHead(204).end(); return; }
     const file = path.resolve(root, `.${pathname}`, pathname.endsWith('/') ? 'index.html' : '');
     if (!file.startsWith(root + path.sep)) { res.writeHead(403).end(); return; }
     try {
@@ -25,13 +28,15 @@ const { chromium } = require('playwright');
   let browser;
   const results = [];
   try {
-    browser = await chromium.launch();
+    // Local QA can use an installed browser without changing project dependencies.
+    browser = await chromium.launch(process.env.PLAYWRIGHT_CHROMIUM_CHANNEL
+      ? { channel: process.env.PLAYWRIGHT_CHROMIUM_CHANNEL } : {});
     for (const [device, width, height] of [['desktop', 1440, 1000], ['mobile', 390, 844]]) {
       const page = await browser.newPage({ viewport: { width, height } });
       page.setDefaultTimeout(10_000);
       const errors = [];
       page.on('pageerror', e => errors.push(e.message));
-      page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
+      page.on('console', m => { if (m.type() === 'error') errors.push(`${m.text()} ${m.location().url}`); });
       for (const route of ['/', '/docs/', '/writing/', '/writing/what-the-ais-think-about-dotrepo/', '/repositories/', '/efficiency/']) {
         await page.goto(origin + route);
         await page.waitForLoadState('networkidle');
@@ -41,6 +46,9 @@ const { chromium } = require('playwright');
         assert.match(await page.title(), /dotrepo/i);
         assert.ok((await page.locator('h1').textContent()).trim());
         assert.equal(await page.locator('vite-error-overlay, nextjs-portal').count(), 0);
+        assert.equal(await page.locator('link[rel="canonical"]').count(), 1);
+        assert.equal(await page.locator('meta[property="og:title"]').count(), 1);
+        assert.equal(await page.locator('meta[name="twitter:card"]').getAttribute('content'), 'summary');
         assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, `Horizontal overflow: ${device} ${route}`);
         if (route === '/docs/') {
           assert.equal(await page.locator('.start-paths a').count(), 3);
@@ -84,6 +92,10 @@ const { chromium } = require('playwright');
           await page.locator('#repo-lookup-input').fill('bad');
           await page.locator('#repo-lookup-trust').click();
           assert.equal(await page.locator('#repo-lookup-feedback').getAttribute('data-state'), 'error');
+          await page.locator('#repo-lookup-input').focus();
+          await page.keyboard.press('Tab');
+          assert.equal(await page.evaluate(() => document.activeElement.textContent.trim()), 'Open profile');
+          assert.notEqual(await page.evaluate(() => getComputedStyle(document.activeElement).outlineStyle), 'none');
           await page.locator('#repo-lookup-input').fill('BurntSushi/ripgrep');
           await page.getByRole('button', { name: 'Open profile', exact: true }).click();
           await page.waitForURL('**/BurntSushi/ripgrep/profile.json');

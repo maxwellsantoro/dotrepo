@@ -29,7 +29,7 @@ pub fn query_manifest(manifest: &Manifest, key: &str) -> Result<String> {
     )?)?)
 }
 
-fn normalize_query_path(key: &str) -> String {
+pub(crate) fn normalize_query_path(key: &str) -> String {
     match key {
         "" | "." => ".".into(),
         "trust" => "record.trust".into(),

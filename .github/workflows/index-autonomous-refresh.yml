@@ -297,6 +297,7 @@ jobs:
           add-paths: |
             index/**
       - name: Check, land, and deploy the exact automation commit
+        id: landing
         if: >-
           steps.autonomous_pr.outcome == 'success'
           && steps.autonomous_pr.outputs.pull-request-number != ''
@@ -308,7 +309,34 @@ jobs:
         run: |
           uv run python scripts/land_autonomous_index.py \
             --repository "$GITHUB_REPOSITORY" --pr-number "$PR_NUMBER" \
-            --expected-head "$EXPECTED_HEAD" --expected-base "$EXPECTED_BASE"
+            --expected-head "$EXPECTED_HEAD" --expected-base "$EXPECTED_BASE" \
+            --output-json index-autonomous-batch/landing.json
+      - name: Retain refresh publication and budget receipt
+        if: always()
+        run: |
+          uv run python scripts/check_refresh_streak.py record \
+            --repository "$GITHUB_REPOSITORY" --run-id "$GITHUB_RUN_ID" \
+            --batch-dir index-autonomous-batch \
+            --check batch=${{ steps.autonomous_batch.outcome }} \
+            --check telemetry=${{ steps.telemetry_gate.outcome }} \
+            --check index=${{ steps.validate_index.outcome }} \
+            --check base=${{ steps.refresh_base.outcome }} \
+            --check landing=${{ steps.landing.outcome }} \
+            --output index-autonomous-batch/refresh-receipt.json
+      - name: Upload refresh receipt after landing
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: refresh-receipt
+          path: index-autonomous-batch/refresh-receipt.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Report completed scheduled publication streak
+        if: always()
+        run: |
+          uv run python scripts/check_refresh_streak.py report \
+            --repository "$GITHUB_REPOSITORY" --output index-autonomous-batch/refresh-streak.json
+          cat index-autonomous-batch/refresh-streak.json >> "$GITHUB_STEP_SUMMARY"
       - name: Publish step summary
         if: always()
         shell: bash

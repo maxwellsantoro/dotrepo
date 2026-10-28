@@ -98,6 +98,7 @@
   },
   "query": {
     "requiredKeys": ["apiVersion", "freshness", "identity", "path", "value", "selection", "conflicts", "links"],
+    "optionalKeys": ["fieldEvidence"],
     "linkKeys": ["self", "repository", "trust", "profile", "queryTemplate", "indexPath"]
   },
   "errors": {

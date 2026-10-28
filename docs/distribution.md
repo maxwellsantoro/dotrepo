@@ -5,13 +5,18 @@ concrete surfaces that make agents and tools check dotrepo before scraping.
 It follows the current source branch; consult
 [release compatibility](release-compatibility.md) for stable binary behavior.
 
+<!-- dotrepo:release-status:start -->
+Stable installs use `1.0.3`; current source is `2.0.0-rc.1` (release candidate).
+Use the matching tagged documentation for installed binaries.
+<!-- dotrepo:release-status:end -->
+
 ## Shipped surfaces
 
 | Surface | Status | Notes |
 |---------|--------|-------|
 | Hosted public API (`https://dotrepo.org/v0/...`) | Live | Static export + Cloudflare hosted-query Worker |
 | MCP server (`dotrepo-mcp`) | Shipped | Stdio; NDJSON framing (1.0.1); registry package path documented |
-| crates.io (`dotrepo-cli`, `dotrepo-mcp`, `dotrepo-lsp`, …) | Stable package path | Pin `1.0.2` for consumers; `main` is unreleased `2.0.0-alpha.0`; the separate `dotrepo` alias is absent from the stable release |
+| crates.io (`dotrepo-cli`, `dotrepo-mcp`, `dotrepo-lsp`, …) | Stable package path | Use the stable version in [install guidance](install.md); source follows the release status above; the separate `dotrepo` alias is absent from the stable release |
 | Lookup-efficiency benchmark page | Live | `/efficiency/` on the public site |
 | pagedigest publisher | Live | `/.well-known/pagedigest.json` |
 
@@ -57,7 +62,7 @@ It follows the current source branch; consult
    client: [`docs/external-consumer-integration.md`](./external-consumer-integration.md)
    and [`examples/external-consumer/`](../examples/external-consumer/).
 5. **Version clarity** — public install docs must send production users to
-   stable `1.0.x`, not the `2.0.0-alpha` development line on `main`
+   the current stable release; prerelease installation is an explicit opt-in
    ([`docs/install.md`](./install.md)).
 
 ## Fixture and reference path (offline-proof)

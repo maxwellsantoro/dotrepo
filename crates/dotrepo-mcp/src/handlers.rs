@@ -17,7 +17,7 @@ use dotrepo_core::{
     adoption_status_repository, current_timestamp_rfc3339, display_path, generate_check_repository,
     import_preview_repository, import_repository_with_options, inspect_claim_directory,
     query_repository, record_summary, resolve_claim_directory, resolve_workspace_repository_root,
-    trust_repository, validate_repository, write_import_outputs, ImportMode, ImportOptions,
+    trust_repository, validate_repository, write_repository_outputs, ImportMode, ImportOptions,
 };
 use serde_json::{json, to_value, Value};
 use std::path::{Path, PathBuf};
@@ -263,7 +263,7 @@ pub(crate) fn write_import_plan(
         .iter()
         .map(|(path, _)| display_path(root, path))
         .collect::<Result<Vec<_>, _>>()?;
-    write_import_outputs(outputs, force, "force=true")?;
+    write_repository_outputs(root, outputs, force, "force=true")?;
 
     Ok(written_paths)
 }

@@ -1,0 +1,1060 @@
+[
+  {
+    "name": "exact-command",
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/example/query",
+        "generated_at": "2026-10-27T10:20:30Z",
+        "trust": {
+          "confidence": "high"
+        }
+      },
+      "repo": {
+        "name": "query",
+        "description": "Query evidence fixture.",
+        "test": "cargo test --all",
+        "languages": [
+          "Rust"
+        ]
+      },
+      "x": {
+        "dotrepo": {
+          "field_evidence": {
+            "repo.test": {
+              "state": "present",
+              "method": "extracted",
+              "confidence": "high",
+              "source": "README.md",
+              "checkedAt": "2026-10-27T10:20:30Z",
+              "valueJson": "\"cargo test --all\""
+            }
+          }
+        }
+      }
+    },
+    "path": "repo.test",
+    "expectedEvidence": {
+      "state": "present",
+      "method": "extracted",
+      "confidence": "high",
+      "source": "README.md",
+      "checkedAt": "2026-10-27T10:20:30Z"
+    }
+  },
+  {
+    "name": "changed-value",
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/example/query",
+        "generated_at": "2026-10-27T10:20:30Z",
+        "trust": {
+          "confidence": "high"
+        }
+      },
+      "repo": {
+        "name": "query",
+        "description": "Query evidence fixture.",
+        "test": "cargo test --all",
+        "languages": [
+          "Rust"
+        ]
+      },
+      "x": {
+        "dotrepo": {
+          "field_evidence": {
+            "repo.test": {
+              "state": "present",
+              "method": "extracted",
+              "confidence": "high",
+              "source": "README.md",
+              "checkedAt": "2026-10-27T10:20:30Z",
+              "valueJson": "\"cargo test\""
+            }
+          }
+        }
+      }
+    },
+    "path": "repo.test",
+    "expectedEvidence": null
+  },
+  {
+    "name": "stale-check",
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/example/query",
+        "generated_at": "2026-10-27T10:20:30Z",
+        "trust": {
+          "confidence": "high"
+        }
+      },
+      "repo": {
+        "name": "query",
+        "description": "Query evidence fixture.",
+        "test": "cargo test --all",
+        "languages": [
+          "Rust"
+        ]
+      },
+      "x": {
+        "dotrepo": {
+          "field_evidence": {
+            "repo.test": {
+              "state": "present",
+              "method": "extracted",
+              "confidence": "high",
+              "source": "README.md",
+              "checkedAt": "2026-10-26T10:20:30Z",
+              "valueJson": "\"cargo test --all\""
+            }
+          }
+        }
+      }
+    },
+    "path": "repo.test",
+    "expectedEvidence": null
+  },
+  {
+    "name": "invalid-binding",
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/example/query",
+        "generated_at": "2026-10-27T10:20:30Z",
+        "trust": {
+          "confidence": "high"
+        }
+      },
+      "repo": {
+        "name": "query",
+        "description": "Query evidence fixture.",
+        "test": "cargo test --all",
+        "languages": [
+          "Rust"
+        ]
+      },
+      "x": {
+        "dotrepo": {
+          "field_evidence": {
+            "repo.test": {
+              "state": "present",
+              "method": "extracted",
+              "confidence": "high",
+              "source": "README.md",
+              "checkedAt": "2026-10-27T10:20:30Z",
+              "valueJson": "invalid"
+            }
+          }
+        }
+      }
+    },
+    "path": "repo.test",
+    "expectedEvidence": null
+  },
+  {
+    "name": "record-trust-does-not-assess-field",
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/example/query",
+        "generated_at": "2026-10-27T10:20:30Z",
+        "trust": {
+          "confidence": "high"
+        }
+      },
+      "repo": {
+        "name": "query",
+        "description": "Query evidence fixture.",
+        "test": "cargo test --all",
+        "languages": [
+          "Rust"
+        ]
+      },
+      "x": {}
+    },
+    "path": "repo.test",
+    "expectedEvidence": null
+  },
+  {
+    "name": "2026-02-30T00:00:00Z",
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/example/query",
+        "generated_at": "2026-02-30T00:00:00Z",
+        "trust": {
+          "confidence": "high"
+        }
+      },
+      "repo": {
+        "name": "query",
+        "description": "Query evidence fixture.",
+        "test": "cargo test --all",
+        "languages": [
+          "Rust"
+        ]
+      },
+      "x": {
+        "dotrepo": {
+          "field_evidence": {
+            "repo.test": {
+              "state": "present",
+              "method": "extracted",
+              "confidence": "high",
+              "source": "README.md",
+              "checkedAt": "2026-02-30T00:00:00Z",
+              "valueJson": "\"cargo test --all\""
+            }
+          }
+        }
+      }
+    },
+    "path": "repo.test",
+    "expectedEvidence": null
+  },
+  {
+    "name": "2026-10-27T24:00:00Z",
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/example/query",
+        "generated_at": "2026-10-27T24:00:00Z",
+        "trust": {
+          "confidence": "high"
+        }
+      },
+      "repo": {
+        "name": "query",
+        "description": "Query evidence fixture.",
+        "test": "cargo test --all",
+        "languages": [
+          "Rust"
+        ]
+      },
+      "x": {
+        "dotrepo": {
+          "field_evidence": {
+            "repo.test": {
+              "state": "present",
+              "method": "extracted",
+              "confidence": "high",
+              "source": "README.md",
+              "checkedAt": "2026-10-27T24:00:00Z",
+              "valueJson": "\"cargo test --all\""
+            }
+          }
+        }
+      }
+    },
+    "path": "repo.test",
+    "expectedEvidence": null
+  },
+  {
+    "name": "2026-10-27t10:20:30z",
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/example/query",
+        "generated_at": "2026-10-27t10:20:30z",
+        "trust": {
+          "confidence": "high"
+        }
+      },
+      "repo": {
+        "name": "query",
+        "description": "Query evidence fixture.",
+        "test": "cargo test --all",
+        "languages": [
+          "Rust"
+        ]
+      },
+      "x": {
+        "dotrepo": {
+          "field_evidence": {
+            "repo.test": {
+              "state": "present",
+              "method": "extracted",
+              "confidence": "high",
+              "source": "README.md",
+              "checkedAt": "2026-10-27t10:20:30z",
+              "valueJson": "\"cargo test --all\""
+            }
+          }
+        }
+      }
+    },
+    "path": "repo.test",
+    "expectedEvidence": {
+      "state": "present",
+      "method": "extracted",
+      "confidence": "high",
+      "source": "README.md",
+      "checkedAt": "2026-10-27t10:20:30z"
+    }
+  },
+  {
+    "name": "2026-10-27T10:20:30.123456789+05:30",
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/example/query",
+        "generated_at": "2026-10-27T10:20:30.123456789+05:30",
+        "trust": {
+          "confidence": "high"
+        }
+      },
+      "repo": {
+        "name": "query",
+        "description": "Query evidence fixture.",
+        "test": "cargo test --all",
+        "languages": [
+          "Rust"
+        ]
+      },
+      "x": {
+        "dotrepo": {
+          "field_evidence": {
+            "repo.test": {
+              "state": "present",
+              "method": "extracted",
+              "confidence": "high",
+              "source": "README.md",
+              "checkedAt": "2026-10-27T10:20:30.123456789+05:30",
+              "valueJson": "\"cargo test --all\""
+            }
+          }
+        }
+      }
+    },
+    "path": "repo.test",
+    "expectedEvidence": {
+      "state": "present",
+      "method": "extracted",
+      "confidence": "high",
+      "source": "README.md",
+      "checkedAt": "2026-10-27T10:20:30.123456789+05:30"
+    }
+  },
+  {
+    "name": "2024-02-29T00:00:00Z",
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/example/query",
+        "generated_at": "2024-02-29T00:00:00Z",
+        "trust": {
+          "confidence": "high"
+        }
+      },
+      "repo": {
+        "name": "query",
+        "description": "Query evidence fixture.",
+        "test": "cargo test --all",
+        "languages": [
+          "Rust"
+        ]
+      },
+      "x": {
+        "dotrepo": {
+          "field_evidence": {
+            "repo.test": {
+              "state": "present",
+              "method": "extracted",
+              "confidence": "high",
+              "source": "README.md",
+              "checkedAt": "2024-02-29T00:00:00Z",
+              "valueJson": "\"cargo test --all\""
+            }
+          }
+        }
+      }
+    },
+    "path": "repo.test",
+    "expectedEvidence": {
+      "state": "present",
+      "method": "extracted",
+      "confidence": "high",
+      "source": "README.md",
+      "checkedAt": "2024-02-29T00:00:00Z"
+    }
+  },
+  {
+    "name": "canonical-alias",
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/example/query",
+        "generated_at": "2026-10-27T10:20:30Z",
+        "trust": {
+          "confidence": "high"
+        }
+      },
+      "repo": {
+        "name": "query",
+        "description": "Query evidence fixture.",
+        "test": "cargo test --all",
+        "languages": [
+          "Rust"
+        ]
+      },
+      "x": {
+        "dotrepo": {
+          "field_evidence": {
+            "repo.test": {
+              "state": "present",
+              "method": "extracted",
+              "confidence": "high",
+              "source": "README.md",
+              "checkedAt": "2026-10-27T10:20:30Z",
+              "valueJson": "\"cargo test --all\""
+            },
+            "repo.languages.0": {
+              "state": "present",
+              "method": "extracted",
+              "confidence": "high",
+              "source": "README.md",
+              "checkedAt": "2026-10-27T10:20:30Z",
+              "valueJson": "\"Rust\""
+            }
+          }
+        }
+      }
+    },
+    "path": "repo.language",
+    "expectedEvidence": {
+      "state": "present",
+      "method": "extracted",
+      "confidence": "high",
+      "source": "README.md",
+      "checkedAt": "2026-10-27T10:20:30Z"
+    }
+  },
+  {
+    "name": "false-is-assessed",
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/example/query",
+        "generated_at": "2026-10-27T10:20:30Z",
+        "trust": {
+          "confidence": "high"
+        }
+      },
+      "repo": {
+        "name": "query",
+        "description": "Query evidence fixture.",
+        "test": "cargo test --all",
+        "languages": [
+          "Rust"
+        ]
+      },
+      "x": {
+        "dotrepo": {
+          "field_evidence": {
+            "repo.test": {
+              "state": "present",
+              "method": "extracted",
+              "confidence": "high",
+              "source": "README.md",
+              "checkedAt": "2026-10-27T10:20:30Z",
+              "valueJson": "\"cargo test --all\""
+            },
+            "x.github.archived": {
+              "state": "present",
+              "method": "extracted",
+              "confidence": "high",
+              "source": "README.md",
+              "checkedAt": "2026-10-27T10:20:30Z",
+              "valueJson": "false"
+            }
+          }
+        },
+        "github": {
+          "archived": false
+        }
+      }
+    },
+    "path": "repo.archived",
+    "expectedEvidence": {
+      "state": "present",
+      "method": "extracted",
+      "confidence": "high",
+      "source": "README.md",
+      "checkedAt": "2026-10-27T10:20:30Z"
+    }
+  },
+  {
+    "name": "legacy-security-source",
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/example/query",
+        "generated_at": "2026-10-27T10:20:30Z",
+        "trust": {
+          "confidence": "high"
+        }
+      },
+      "repo": {
+        "name": "query",
+        "description": "Query evidence fixture.",
+        "test": "cargo test --all",
+        "languages": [
+          "Rust"
+        ]
+      },
+      "x": {
+        "dotrepo": {
+          "field_evidence": {
+            "repo.test": {
+              "state": "present",
+              "method": "extracted",
+              "confidence": "high",
+              "source": "README.md",
+              "checkedAt": "2026-10-27T10:20:30Z",
+              "valueJson": "\"cargo test --all\""
+            },
+            "owners.security_contact": {
+              "state": "present",
+              "method": "extracted",
+              "confidence": "high",
+              "source": "README.md",
+              "checkedAt": "2026-10-27T10:20:30Z",
+              "valueJson": "\"security@example.com\""
+            }
+          }
+        }
+      },
+      "owners": {
+        "security_contact": "security@example.com"
+      }
+    },
+    "path": "owners.security_contact",
+    "expectedEvidence": {
+      "state": "present",
+      "method": "unspecified",
+      "confidence": "high",
+      "checkedAt": "2026-10-27T10:20:30Z"
+    }
+  },
+  {
+    "name": "object-key-order",
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/example/query",
+        "generated_at": "2026-10-27T10:20:30Z",
+        "trust": {
+          "confidence": "high"
+        }
+      },
+      "repo": {
+        "name": "query",
+        "description": "Query evidence fixture.",
+        "test": "cargo test --all",
+        "languages": [
+          "Rust"
+        ]
+      },
+      "x": {
+        "dotrepo": {
+          "field_evidence": {
+            "repo.test": {
+              "state": "present",
+              "method": "extracted",
+              "confidence": "high",
+              "source": "README.md",
+              "checkedAt": "2026-10-27T10:20:30Z",
+              "valueJson": "\"cargo test --all\""
+            },
+            "x.tool": {
+              "state": "present",
+              "method": "extracted",
+              "confidence": "high",
+              "source": "README.md",
+              "checkedAt": "2026-10-27T10:20:30Z",
+              "valueJson": "{\"b\":\"text\",\"a\":1}"
+            }
+          }
+        },
+        "tool": {
+          "a": 1,
+          "b": "text"
+        }
+      }
+    },
+    "path": "x.tool",
+    "expectedEvidence": {
+      "state": "present",
+      "method": "extracted",
+      "confidence": "high",
+      "source": "README.md",
+      "checkedAt": "2026-10-27T10:20:30Z"
+    }
+  },
+  {
+    "name": "assessment-stored-under-alias",
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/example/query",
+        "generated_at": "2026-10-27T10:20:30Z",
+        "trust": {
+          "confidence": "high"
+        }
+      },
+      "repo": {
+        "name": "query",
+        "description": "Query evidence fixture.",
+        "test": "cargo test --all",
+        "languages": [
+          "Rust"
+        ]
+      },
+      "x": {
+        "dotrepo": {
+          "field_evidence": {
+            "repo.test": {
+              "state": "present",
+              "method": "extracted",
+              "confidence": "high",
+              "source": "README.md",
+              "checkedAt": "2026-10-27T10:20:30Z",
+              "valueJson": "\"cargo test --all\""
+            },
+            "repo.language": {
+              "state": "present",
+              "method": "extracted",
+              "confidence": "high",
+              "source": "README.md",
+              "checkedAt": "2026-10-27T10:20:30Z",
+              "valueJson": "\"Rust\""
+            }
+          }
+        }
+      }
+    },
+    "path": "repo.language",
+    "expectedEvidence": {
+      "state": "present",
+      "method": "extracted",
+      "confidence": "high",
+      "source": "README.md",
+      "checkedAt": "2026-10-27T10:20:30Z"
+    }
+  },
+  {
+    "name": "invalid-canonical-does-not-hide-valid-alias",
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/example/query",
+        "generated_at": "2026-10-27T10:20:30Z",
+        "trust": {
+          "confidence": "high"
+        }
+      },
+      "repo": {
+        "name": "query",
+        "description": "Query evidence fixture.",
+        "test": "cargo test --all",
+        "languages": [
+          "Rust"
+        ]
+      },
+      "x": {
+        "dotrepo": {
+          "field_evidence": {
+            "repo.test": {
+              "state": "present",
+              "method": "extracted",
+              "confidence": "high",
+              "source": "README.md",
+              "checkedAt": "2026-10-27T10:20:30Z",
+              "valueJson": "\"cargo test --all\""
+            },
+            "repo.language": {
+              "state": "present",
+              "method": "extracted",
+              "confidence": "high",
+              "source": "README.md",
+              "checkedAt": "2026-10-27T10:20:30Z",
+              "valueJson": "\"Rust\""
+            },
+            "repo.languages.0": {
+              "state": "present",
+              "method": "extracted",
+              "confidence": "high",
+              "source": "README.md",
+              "checkedAt": "2026-10-27T10:20:30Z",
+              "valueJson": "\"Go\""
+            }
+          }
+        }
+      }
+    },
+    "path": "repo.language",
+    "expectedEvidence": {
+      "state": "present",
+      "method": "extracted",
+      "confidence": "high",
+      "source": "README.md",
+      "checkedAt": "2026-10-27T10:20:30Z"
+    }
+  },
+  {
+    "name": "large-integer-rounding-collision",
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/example/query",
+        "generated_at": "2026-10-27T10:20:30Z",
+        "trust": {
+          "confidence": "high"
+        }
+      },
+      "repo": {
+        "name": "query",
+        "description": "Query evidence fixture.",
+        "test": "cargo test --all",
+        "languages": [
+          "Rust"
+        ]
+      },
+      "x": {
+        "dotrepo": {
+          "field_evidence": {
+            "x.example.value": {
+              "state": "present",
+              "method": "extracted",
+              "confidence": "high",
+              "source": "README.md",
+              "checkedAt": "2026-10-27T10:20:30Z",
+              "valueJson": "9007199254740993"
+            }
+          }
+        },
+        "example": {
+          "value": 9007199254740992
+        }
+      }
+    },
+    "path": "x.example.value",
+    "expectedEvidence": null
+  },
+  {
+    "name": "negative-large-integer-rounding-collision",
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/example/query",
+        "generated_at": "2026-10-27T10:20:30Z",
+        "trust": {
+          "confidence": "high"
+        }
+      },
+      "repo": {
+        "name": "query",
+        "description": "Query evidence fixture.",
+        "test": "cargo test --all",
+        "languages": [
+          "Rust"
+        ]
+      },
+      "x": {
+        "dotrepo": {
+          "field_evidence": {
+            "x.example.value": {
+              "state": "present",
+              "method": "extracted",
+              "confidence": "high",
+              "source": "README.md",
+              "checkedAt": "2026-10-27T10:20:30Z",
+              "valueJson": "-9007199254740993"
+            }
+          }
+        },
+        "example": {
+          "value": -9007199254740992
+        }
+      }
+    },
+    "path": "x.example.value",
+    "expectedEvidence": null
+  },
+  {
+    "name": "nested-large-integer-rounding-collision",
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/example/query",
+        "generated_at": "2026-10-27T10:20:30Z",
+        "trust": {
+          "confidence": "high"
+        }
+      },
+      "repo": {
+        "name": "query",
+        "description": "Query evidence fixture.",
+        "test": "cargo test --all",
+        "languages": [
+          "Rust"
+        ]
+      },
+      "x": {
+        "dotrepo": {
+          "field_evidence": {
+            "x.example.value": {
+              "state": "present",
+              "method": "extracted",
+              "confidence": "high",
+              "source": "README.md",
+              "checkedAt": "2026-10-27T10:20:30Z",
+              "valueJson": "{\"counts\":[9007199254740993]}"
+            }
+          }
+        },
+        "example": {
+          "value": {
+            "counts": [
+              9007199254740992
+            ]
+          }
+        }
+      }
+    },
+    "path": "x.example.value",
+    "expectedEvidence": null
+  },
+  {
+    "name": "maximum-safe-integer",
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/example/query",
+        "generated_at": "2026-10-27T10:20:30Z",
+        "trust": {
+          "confidence": "high"
+        }
+      },
+      "repo": {
+        "name": "query",
+        "description": "Query evidence fixture.",
+        "test": "cargo test --all",
+        "languages": [
+          "Rust"
+        ]
+      },
+      "x": {
+        "dotrepo": {
+          "field_evidence": {
+            "x.example.value": {
+              "state": "present",
+              "method": "extracted",
+              "confidence": "high",
+              "source": "README.md",
+              "checkedAt": "2026-10-27T10:20:30Z",
+              "valueJson": "9007199254740991"
+            }
+          }
+        },
+        "example": {
+          "value": 9007199254740991
+        }
+      }
+    },
+    "path": "x.example.value",
+    "expectedEvidence": {
+      "state": "present",
+      "method": "extracted",
+      "confidence": "high",
+      "source": "README.md",
+      "checkedAt": "2026-10-27T10:20:30Z"
+    }
+  },
+  {
+    "name": "minimum-safe-integer",
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/example/query",
+        "generated_at": "2026-10-27T10:20:30Z",
+        "trust": {
+          "confidence": "high"
+        }
+      },
+      "repo": {
+        "name": "query",
+        "description": "Query evidence fixture.",
+        "test": "cargo test --all",
+        "languages": [
+          "Rust"
+        ]
+      },
+      "x": {
+        "dotrepo": {
+          "field_evidence": {
+            "x.example.value": {
+              "state": "present",
+              "method": "extracted",
+              "confidence": "high",
+              "source": "README.md",
+              "checkedAt": "2026-10-27T10:20:30Z",
+              "valueJson": "-9007199254740991"
+            }
+          }
+        },
+        "example": {
+          "value": -9007199254740991
+        }
+      }
+    },
+    "path": "x.example.value",
+    "expectedEvidence": {
+      "state": "present",
+      "method": "extracted",
+      "confidence": "high",
+      "source": "README.md",
+      "checkedAt": "2026-10-27T10:20:30Z"
+    }
+  },
+  {
+    "name": "fractional-number",
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/example/query",
+        "generated_at": "2026-10-27T10:20:30Z",
+        "trust": {
+          "confidence": "high"
+        }
+      },
+      "repo": {
+        "name": "query",
+        "description": "Query evidence fixture.",
+        "test": "cargo test --all",
+        "languages": [
+          "Rust"
+        ]
+      },
+      "x": {
+        "dotrepo": {
+          "field_evidence": {
+            "x.example.value": {
+              "state": "present",
+              "method": "extracted",
+              "confidence": "high",
+              "source": "README.md",
+              "checkedAt": "2026-10-27T10:20:30Z",
+              "valueJson": "1.5"
+            }
+          }
+        },
+        "example": {
+          "value": 1.5
+        }
+      }
+    },
+    "path": "x.example.value",
+    "expectedEvidence": {
+      "state": "present",
+      "method": "extracted",
+      "confidence": "high",
+      "source": "README.md",
+      "checkedAt": "2026-10-27T10:20:30Z"
+    }
+  },
+  {
+    "name": "large-integer-string",
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/example/query",
+        "generated_at": "2026-10-27T10:20:30Z",
+        "trust": {
+          "confidence": "high"
+        }
+      },
+      "repo": {
+        "name": "query",
+        "description": "Query evidence fixture.",
+        "test": "cargo test --all",
+        "languages": [
+          "Rust"
+        ]
+      },
+      "x": {
+        "dotrepo": {
+          "field_evidence": {
+            "x.example.value": {
+              "state": "present",
+              "method": "extracted",
+              "confidence": "high",
+              "source": "README.md",
+              "checkedAt": "2026-10-27T10:20:30Z",
+              "valueJson": "\"9007199254740993\""
+            }
+          }
+        },
+        "example": {
+          "value": "9007199254740993"
+        }
+      }
+    },
+    "path": "x.example.value",
+    "expectedEvidence": {
+      "state": "present",
+      "method": "extracted",
+      "confidence": "high",
+      "source": "README.md",
+      "checkedAt": "2026-10-27T10:20:30Z"
+    }
+  }
+]

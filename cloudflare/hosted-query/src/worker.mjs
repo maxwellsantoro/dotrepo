@@ -961,6 +961,67 @@ async function buildRelationsResponse(env, request, identity, freshness, basePat
   };
 }
 
+function sameJsonValue(left, right) {
+  // Unsafe integers can already have lost precision when the snapshot is read.
+  if (typeof left === "number" || typeof right === "number") {
+    return Number.isFinite(left) && Number.isFinite(right) &&
+      (!Number.isInteger(left) || Number.isSafeInteger(left)) &&
+      (!Number.isInteger(right) || Number.isSafeInteger(right)) && left === right;
+  }
+  if (left === right) return true;
+  if (left === null || right === null || typeof left !== "object" || typeof right !== "object") return false;
+  if (Array.isArray(left) !== Array.isArray(right)) return false;
+  const keys = Object.keys(left);
+  return keys.length === Object.keys(right).length && keys.every((key) =>
+    Object.hasOwn(right, key) && sameJsonValue(left[key], right[key]));
+}
+
+function validAssessmentTime(value) {
+  const match = /^(\d{4})-(\d{2})-(\d{2})[Tt](\d{2}):(\d{2}):(\d{2})(?:\.\d+)?(?:[Zz]|([+-])(\d{2}):(\d{2}))$/.exec(value);
+  if (!match) return false;
+  const [, year, month, day, hour, minute, second, , offsetHour = "0", offsetMinute = "0"] = match;
+  const leap = +year % 4 === 0 && (+year % 100 !== 0 || +year % 400 === 0);
+  const days = [31, leap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  return +month >= 1 && +month <= 12 && +day >= 1 && +day <= days[+month - 1] &&
+    +hour <= 23 && +minute <= 59 && +second <= 60 && +offsetHour <= 23 && +offsetMinute <= 59;
+}
+
+// Mirror public/evidence.rs: never turn record-wide trust into a field check.
+export function queryFieldEvidence(manifest, path, value) {
+  const evidence = manifest.x?.dotrepo?.field_evidence;
+  for (const key of new Set([normalizeQueryPath(path), path])) {
+    if (!evidence || !Object.hasOwn(evidence, key)) continue;
+    const assessment = filterFieldEvidence(manifest, key, value, evidence[key]);
+    if (assessment !== undefined) return assessment;
+  }
+  return undefined;
+}
+
+function filterFieldEvidence(manifest, path, value, metadata) {
+  if (!metadata || typeof metadata !== "object" || Array.isArray(metadata)) return undefined;
+  const { valueJson, ...assessment } = metadata;
+  if (typeof valueJson !== "string" || typeof assessment.checkedAt !== "string" ||
+      assessment.checkedAt !== manifest.record?.generated_at ||
+      !validAssessmentTime(assessment.checkedAt)) return undefined;
+  try {
+    let exactNumbers = true;
+    const bound = JSON.parse(valueJson, (_key, item, context) => {
+      // Compare the original number token with its returned JSON representation.
+      // This also rejects fractional rounding/underflow and fails closed on a
+      // runtime without JSON source text, including numbers nested in objects.
+      if (typeof item === "number" && context?.source !== JSON.stringify(item)) exactNumbers = false;
+      return item;
+    });
+    if (!exactNumbers || !sameJsonValue(bound, value)) return undefined;
+  } catch { return undefined; }
+  if (normalizeQueryPath(path) === "owners.security_contact" &&
+      typeof assessment.source === "string" && !assessment.source.toLowerCase().endsWith("security.md")) {
+    delete assessment.source;
+    assessment.method = "unspecified";
+  }
+  return assessment;
+}
+
 function buildQueryResponse(snapshot, path, basePath) {
   if (snapshot.apiVersion !== PUBLIC_API_VERSION) {
     throw new Error(`unsupported public query input apiVersion: ${snapshot.apiVersion}`);
@@ -968,6 +1029,7 @@ function buildQueryResponse(snapshot, path, basePath) {
 
   const normalizedPath = normalizeQueryPath(path);
   const value = queryValue(snapshot.selection.manifest, normalizedPath);
+  const fieldEvidence = queryFieldEvidence(snapshot.selection.manifest, path, value);
   const conflicts = snapshot.conflicts.map((conflict) => {
     let competingValue;
     try {
@@ -989,6 +1051,7 @@ function buildQueryResponse(snapshot, path, basePath) {
     identity: snapshot.identity,
     path,
     value,
+    ...(fieldEvidence === undefined ? {} : { fieldEvidence }),
     selection: {
       reason: snapshot.selection.reason,
       record: snapshot.selection.record

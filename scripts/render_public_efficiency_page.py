@@ -11,6 +11,7 @@ import argparse
 import html
 import json
 from pathlib import Path
+from public_site_discovery import publish_discovery
 
 from measure_public_lookup_efficiency import (
     MAX_BATCH_PATHS,
@@ -137,6 +138,22 @@ def render_policy_coverage(report: dict | None, base_path: str) -> str:
         format_timestamp_for_humans(str(report.get("evaluatedAt", "unknown")))
     )
     raw = site_href(base_path, "/benchmarks/policy-coverage.json")
+    ecosystem_rows = "".join(
+        f"<tr><th scope='row'>{html.escape(family)}</th><td>{group['profileCount']}</td>"
+        f"<td>{group['tasks']['build-and-test']['acceptableCount']}</td>"
+        f"<td>{group['instructions']['build-and-test']['acceptableCount']}</td></tr>"
+        for family, group in report.get("ecosystems", {}).items()
+    )
+    contextual = ""
+    if ecosystem_rows:
+        contextual = f"""<h3>Complete instructions by ecosystem</h3>
+      <p>Contextual acceptance additionally requires assessed directory, scope,
+      prerequisites, and source. This comparison requests repository scope at the
+      root; component instructions remain separate. It is still not a correctness
+      or execution-success measurement.</p>
+      <div class="table-scroll" role="region" aria-label="Execution coverage by ecosystem" tabindex="0">
+      <table><thead><tr><th>Dominant ecosystem</th><th>Profiles</th><th>Accepted scalar pairs</th>
+      <th>Accepted contextual pairs</th></tr></thead><tbody>{ecosystem_rows}</tbody></table></div>"""
     return f"""<section class="section coverage" aria-labelledby="coverage-heading">
       <h2 id="coverage-heading">Fields present vs. policy acceptable</h2>
       {takeaway}
@@ -154,6 +171,7 @@ def render_policy_coverage(report: dict | None, base_path: str) -> str:
       <p><strong>Independent correctness and task completion: Not measured.</strong>
       Policy acceptance is metadata for planning, not permission to execute commands.</p>
       <p><a href="{raw}">Policy, per-repository decisions, and fallback reasons (JSON)</a></p>
+      {contextual}
       <details class="data-details"><summary>View coverage as a data table</summary>
       <div class="table-scroll" role="region" aria-label="Consumer policy coverage" tabindex="0">
       <table><caption>Coverage out of {profile_count:,} primary profiles</caption>
@@ -479,6 +497,7 @@ def main() -> int:
         json.dumps(report, indent=2, sort_keys=True) + "\n",
     )
     print(input_dir / "efficiency" / "index.html")
+    publish_discovery(input_dir, base_path)
     return 0
 
 

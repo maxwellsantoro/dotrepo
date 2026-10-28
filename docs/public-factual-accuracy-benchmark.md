@@ -33,7 +33,9 @@ The original regression baseline requires 20/20 exact matches, zero missing samp
 facts, and zero mismatched sampled facts. This is sampled accuracy evidence, not
 a universal claim about every field in every profile. The active release gate
 also uses the dated [October 27 upstream recapture](../benchmarks/head-to-head/upstream-2026-10-27/)
-with 123 independently sourced assertions across 32 preselected repositories.
+with 119 independently sourced assertions across 31 preselected repositories.
+The packet records the excluded moved identity; the release documentation check
+computes these counts from its workload to prevent drift.
 The original September capture remains historical evidence. Frozen primary-source
 extracts and identity selection live under `benchmarks/head-to-head/`. This second release
 gate requires exact matches for structured metadata; it does not substitute for

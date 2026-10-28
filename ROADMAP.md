@@ -20,13 +20,24 @@ Follow [the team execution guide](docs/agent-execution.md).
 
 ### Fast team execution (from 2026-10-27)
 
+The October 28 review makes contained writes, supported public links, consistent
+release guidance, and value-bound query assessments prerequisites for 2.0 final.
+The [unreleased changelog](CHANGELOG.md#unreleased) records implementation;
+complete release/operator checks and the original overwrite reproductions must
+pass on the candidate being promoted. Source changes do not update installed RC
+binaries or production by themselves.
+
 The index is fresh (615/615 after the October 27 catch-up, #161), the landing
 deadlock is fixed (#160, #164), `v2.0.0-rc.1` is published, and autonomous
 refresh has landed unattended (#166). Optimize elapsed time, not agent count:
 
 - **Calendar work starts first and never waits for code.** The elapsed-time
-  gate is seven consecutive green scheduled refresh runs (one per day from
-  October 28). Assign it to the coordinator on day zero; no worker can
+  gate is seven consecutive qualified scheduled refresh days, with retained
+  budgets and exact-commit publication/smoke receipts. Run
+  `scripts/check_refresh_streak.py report --require-pass` as documented in the
+  [operating guide](docs/factual-crawl-automation.md#scheduled-enablement-and-landing).
+  A green landing that skipped public deployment does not qualify. The window
+  starts with the first qualifying receipt. Assign it on day zero; no worker can
   accelerate the observation window later.
 - **Three concurrent worker lanes, disjoint by path:** (A) reliability —
   `crates/`, `scripts/`, and tests for F1/E1; (B) evidence — `benchmarks/`

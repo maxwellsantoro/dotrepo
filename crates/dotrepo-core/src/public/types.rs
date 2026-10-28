@@ -284,6 +284,10 @@ pub struct PublicQueryResponse {
     pub identity: PublicRepositoryIdentity,
     pub path: String,
     pub value: Value,
+    /// Assessment of this exact requested value at the selected record's check time.
+    /// Absent for unassessed/legacy values; record trust is not a substitute.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub field_evidence: Option<Value>,
     pub selection: PublicSelectionReport,
     pub conflicts: Vec<PublicConflictReport>,
     pub links: PublicRepositoryLinks,

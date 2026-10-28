@@ -3,7 +3,10 @@
 For a stable installation, use the
 [`v1.0.3` release](https://github.com/maxwellsantoro/dotrepo/releases/tag/v1.0.3).
 It provides `dotrepo`, `dotrepo-public-query`, `dotrepo-lsp`, and `dotrepo-mcp`.
-The current `main` source is the unreleased `2.0.0-alpha.0` development line.
+<!-- dotrepo:release-status:start -->
+Stable installs use `1.0.3`; current source is `2.0.0-rc.1` (release candidate).
+Use the matching tagged documentation for installed binaries.
+<!-- dotrepo:release-status:end -->
 
 Read [release compatibility](release-compatibility.md) for the bounded stable
 safety update and remaining development-only contracts. Stable rejects
@@ -12,7 +15,7 @@ or non-running commands, and caps MCP response bodies. Import reads require
 bounded regular files without symlink traversal, forced imports refuse
 symlink/shared-hardlink overwrites, and dynamic Rake sources are withheld.
 Retained per-field assessments, execution contexts, and newer MCP target checks
-remain unreleased.
+are available in the release candidate, outside the stable contract.
 
 ## Download a stable bundle
 
@@ -67,7 +70,7 @@ cargo build --locked -p dotrepo-cli --bins -p dotrepo-lsp -p dotrepo-mcp
 export PATH="$PWD/target/debug:$PATH"
 ```
 
-Building `main` opts into unreleased behavior and breaking Rust API changes,
+Building `main` opts into prerelease behavior and breaking Rust API changes,
 including `FieldConfidence::Suspect`. Passing `--release` changes optimization;
 it does not turn development source into a published stable release.
 

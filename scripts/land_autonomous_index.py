@@ -10,6 +10,7 @@ import argparse
 import json
 import re
 import subprocess
+from pathlib import Path
 from urllib.parse import quote
 
 
@@ -115,7 +116,16 @@ def public_deploy_enabled(repository, root):
     return str(variable.get("value", "")).lower() == "true"
 
 
-def land(repository, number, expected_head, expected_base):
+def land(repository, number, expected_head, expected_base, *, receipt=None):
+    receipt = receipt if receipt is not None else {}
+    receipt.update(
+        repository=repository,
+        pullRequest=number,
+        headSha=expected_head,
+        baseSha=expected_base,
+        status="checking",
+        publicationVerified=False,
+    )
     root = f"repos/{repository}"
     default_branch = api(root)["default_branch"]
     pull_path = f"{root}/pulls/{number}"
@@ -145,6 +155,7 @@ def land(repository, number, expected_head, expected_base):
         },
     )
     wait_run(repository, dispatch["workflow_run_id"], expected_head, "public-surface-gate")
+    receipt["ciRunId"] = dispatch["workflow_run_id"]
     approve_pending_pull_runs(repository, root, expected_head)
     validate_pull(api(pull_path), repository, default_branch, expected_head, expected_base)
     ref = f"{root}/git/refs/heads/{quote(default_branch, safe='')}"
@@ -152,6 +163,7 @@ def land(repository, number, expected_head, expected_base):
         raise RuntimeError("Default branch advanced during CI; regenerate the batch")
     # The server enforces ancestry atomically. Never force or bypass protections.
     api(ref, method="PATCH", body={"sha": expected_head, "force": False})
+    receipt["status"] = "landed"
     print(f"Published tested commit {expected_head}", flush=True)
     if not public_deploy_enabled(repository, root):
         print(
@@ -159,13 +171,18 @@ def land(repository, number, expected_head, expected_base):
             "landing complete, public deployment skipped (operator switch).",
             flush=True,
         )
-        return
+        receipt["status"] = "landed-deployment-disabled"
+        return receipt
     deploy = api(
         f"{root}/actions/workflows/public-cloudflare.yml/dispatches",
         method="POST",
         body={"ref": default_branch, "return_run_details": True},
     )
     wait_run(repository, deploy["workflow_run_id"], expected_head, "deploy")
+    receipt.update(
+        status="published", deployRunId=deploy["workflow_run_id"], publicationVerified=True
+    )
+    return receipt
 
 
 def main():
@@ -174,6 +191,7 @@ def main():
     parser.add_argument("--pr-number", required=True, type=int)
     parser.add_argument("--expected-head", required=True)
     parser.add_argument("--expected-base", required=True)
+    parser.add_argument("--output-json", type=Path)
     args = parser.parse_args()
     if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", args.repository):
         parser.error("invalid repository")
@@ -181,7 +199,15 @@ def main():
         not re.fullmatch(r"[0-9a-f]{40}", sha) for sha in (args.expected_head, args.expected_base)
     ):
         parser.error("invalid PR number or commit")
-    land(args.repository, args.pr_number, args.expected_head, args.expected_base)
+    receipt = {}
+    try:
+        land(
+            args.repository, args.pr_number, args.expected_head, args.expected_base, receipt=receipt
+        )
+    finally:
+        if args.output_json:
+            args.output_json.parent.mkdir(parents=True, exist_ok=True)
+            args.output_json.write_text(json.dumps(receipt, indent=2) + "\n")
 
 
 if __name__ == "__main__":

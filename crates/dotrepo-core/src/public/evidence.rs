@@ -67,9 +67,45 @@ pub(crate) fn field_evidence(manifest: &Manifest) -> BTreeMap<String, Value> {
         .collect()
 }
 
+pub(super) fn query_field_evidence(manifest: &Manifest, path: &str) -> Option<Value> {
+    // Query aliases must use the same canonical path as profile assessments.
+    let canonical = crate::query::normalize_query_path(path);
+    let mut fields = field_evidence(manifest);
+    fields.remove(&canonical).or_else(|| fields.remove(path))
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn query_evidence_matches_shared_worker_contract_and_profile() {
+        let cases: Value = serde_json::from_str(include_str!(
+            "../../tests/fixtures/query-evidence-cases.json"
+        ))
+        .unwrap();
+        for case in cases.as_array().unwrap() {
+            let manifest: Manifest = serde_json::from_value(case["manifest"].clone()).unwrap();
+            let path = case["path"].as_str().unwrap();
+            let evidence = query_field_evidence(&manifest, path);
+            assert_eq!(
+                evidence.clone().unwrap_or(Value::Null),
+                case["expectedEvidence"],
+                "{}",
+                case["name"]
+            );
+            let canonical = crate::query::normalize_query_path(path);
+            let profile_fields = field_evidence(&manifest);
+            assert_eq!(
+                evidence.as_ref(),
+                profile_fields
+                    .get(&canonical)
+                    .or_else(|| profile_fields.get(path)),
+                "{}",
+                case["name"]
+            );
+        }
+    }
 
     #[test]
     fn changing_a_fact_or_check_time_invalidates_its_assessment() {

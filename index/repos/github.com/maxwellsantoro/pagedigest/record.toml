@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `.github/workflows/publish-crate.yml`, and `implementations/python-consumer/pyproject.toml`. Ignored component-scoped commands from `packages/astro/package.json` as repository defaults. Ignored component-scoped commands from `implementations/python-consumer/pyproject.toml` as repository defaults. Inferred `repo.test` from `.github/workflows/publish-crate.yml`. Imported `repo.toolchain.min` from `implementations/python-consumer/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`, `.github/workflows/publish-crate.yml`, and `implementations/python-consumer/pyproject.toml`. Ignored component-scoped commands from `packages/astro/package.json` as repository defaults. Ignored component-scoped commands from `implementations/python-consumer/pyproject.toml` as repository defaults. October 28 source inspection withheld the component-specific Cargo test from `.github/workflows/publish-crate.yml` as a repository default. Imported `repo.toolchain.min` from `implementations/python-consumer/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "pagedigest"
@@ -27,7 +27,6 @@ languages = [
     "Rust",
     "Shell",
 ]
-test = "cargo test --locked --manifest-path implementations/rust-generator/Cargo.toml"
 topics = [
     "caching",
     "protocol",
@@ -106,15 +105,6 @@ reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"pagedigest"'
-
-[x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T17:53:45.417843Z"
-confidence = "medium"
-method = "inferred"
-reason = "from workflow fallback"
-source = ".github/workflows/publish-crate.yml"
-state = "present"
-valueJson = '"cargo test --locked --manifest-path implementations/rust-generator/Cargo.toml"'
 
 [x.github]
 archived = false

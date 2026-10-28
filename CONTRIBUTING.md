@@ -16,11 +16,23 @@ tested changes rather than speculative surface area.
 
 ## Path containment limits
 
-Repository-local tooling resolves paths relative to a declared root and rejects
-paths that escape that root after canonicalization. The check reduces symlink
-escape risk for existing files, but it cannot eliminate time-of-check/time-of-use
-gaps for paths that do not exist yet. Treat containment as a best-effort guard,
-not a sandbox boundary, when adding write flows.
+User-facing CLI writes and MCP imports use the shared root-aware output writer.
+The explicitly selected root may be an alias; descendant symlinks/reparse points,
+nonregular files, and shared-hardlink outputs are refused. Unix traverses and
+creates descendants relative to pinned directory descriptors with no-follow
+opens. Windows retains ancestor handles without delete sharing and rejects
+reparse points. Every destination is opened without truncation and checked
+before existing files change. Existing inodes, ownership, permissions, and ACLs
+are preserved, including write-only files and traverse-only directories.
+
+Use `write_repository_outputs` or `RepositoryWriter` for repository-derived
+destinations; the legacy `write_import_outputs` API has caller-selected paths and
+does not establish containment beneath a separately selected repository root.
+Reads elsewhere may still use canonicalization with time-of-check/time-of-use
+limits. Neither read nor write containment is a filesystem sandbox against an
+active same-user actor moving already-open directories or adding a hardlink
+after the final metadata check. Batch preflight prevents partial writes on unsafe
+destinations; later I/O failures are not a multi-file transaction.
 
 Import text inputs have a stricter contract: regular files only, no symlinks
 (including contained links), and at most 2 MiB per input. Conventional files,
@@ -84,7 +96,9 @@ cargo test --workspace
 CI separates Rust/workspace checks from Python validation and real
 exporter-to-consumer controls. Release and operator checks start after path
 classification, concurrently with those jobs, and keep their own required
-validation. CI also runs packaging, standalone-alias checks, and stdio smoke
+validation. Rust scopes also require native write-boundary regression tests on
+Linux and Windows; the aggregate gate requires both matrix entries to succeed.
+CI also runs packaging, standalone-alias checks, and stdio smoke
 tests. Install `cargo-deny` with `cargo install cargo-deny --locked` if needed.
 Require the `ci-gate` check in repository branch protection or rulesets. It runs
 after every scoped job and requires each job selected by `change-scope` to

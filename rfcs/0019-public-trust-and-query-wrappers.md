@@ -158,6 +158,28 @@ The public wrapper should not:
 
 ### Required compatibility rules
 
+Single-field responses and each batch-query result may include `fieldEvidence`,
+the assessment object for the requested value. It uses the same filtering as the
+full profile: `valueJson` must equal the selected value, and a valid `checkedAt`
+must exactly match the selected record's `generated_at`. The internal
+`valueJson` binding is omitted from the public assessment. Query aliases select
+the canonical field assessment. Missing, stale, mismatched, or legacy assessments
+leave this optional member absent; record-wide trust never supplies a substitute.
+Assessments of neighboring fields are not attached to a requested parent object.
+
+The hosted JavaScript Worker additionally withholds numeric assessments when
+either value contains an integer outside the safe-integer range, or a binding's
+original JSON number token differs from the parsed number's serialized form.
+The check applies recursively to arrays and objects and fails closed when source
+tokens are unavailable. A Rust profile can therefore retain an assessment that
+the Worker cannot compare exactly; omission never asserts that a value is wrong.
+
+Command consumers still apply their acceptance policy to state, method,
+confidence, source, and check time. A checked scalar command does not establish
+its working directory, component, prerequisites, or execution success. Use the
+full profile's assessed execution context when selecting a complete instruction.
+This is an additive `v0` member; older responses without it remain valid.
+
 The public query wrapper should:
 - preserve the existing dot-path query model
 - preserve the same `selection` / `conflicts` reasoning
