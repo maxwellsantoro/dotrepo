@@ -1,5 +1,8 @@
 # Public Freshness
 
+> Supporting doc: snapshot vs record freshness semantics.
+> [Public architecture](public-surface.md) owns the surface; read it first.
+
 This is the canonical reference for freshness metadata on dotrepo's public
 read-only surface.
 

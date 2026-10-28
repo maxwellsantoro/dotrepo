@@ -18,6 +18,20 @@ The hosted export can advance independently of client releases.
 | Find active work and gates | [Roadmap](../ROADMAP.md#active-execution-order) |
 | Coordinate concurrent implementation | [Agent execution](agent-execution.md), [project coordination skill](../.agents/skills/roadmap-coordination/SKILL.md) |
 
+## Reading paths (owner first, supporting only as needed)
+
+Most worker time in a cluster is spent deciding what to read. Read the owner
+first; open a supporting doc only for the question in its row. RFCs link into
+several of these files and are immutable, so cluster files keep stable paths
+even where their content overlaps.
+
+| Cluster | Owner (read first) | Supporting (open on demand) |
+| --- | --- | --- |
+| Public surface | [Public architecture](public-surface.md) — capabilities, bounds, wire shape | [Export examples](public-export-examples.md) for routes/CLI equivalents; [export workflow](public-export-workflow.md) for the operator/reviewer loop; [freshness](public-freshness.md) for snapshot vs record age; [API compatibility](public-api-compatibility.md) as the executable contract annex |
+| Maintainer & claims | [Maintainer happy path](maintainer-happy-path.md) — the normal flow | [Claim review workflow](maintainer-claim-review-workflow.md) for executable claim steps (RFCs link here; path is stable); [handoff examples](authority-handoff-examples.md) and [conflict examples](conflict-surfacing-examples.md) are non-normative illustrations |
+| Installation & versions | [Installation](install.md) — commands and pins | [Release compatibility](release-compatibility.md) — which binary a doc set describes; one version fact, owned here |
+| Evaluation | Each benchmark doc owns its metric (lookup, accuracy, search) | [Consumer pilot](consumer-pilot.md) owns adoption evidence levels; do not cite presence metrics as correctness |
+
 ## Develop and operate
 
 | Area | Reference |
