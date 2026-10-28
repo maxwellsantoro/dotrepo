@@ -56,6 +56,11 @@ fn run(root: &Path, args: &[&str]) -> Output {
         .unwrap();
     if !output.status.success() {
         eprintln!("{args:?}: {}", String::from_utf8_lossy(&output.stderr));
+        assert_eq!(
+            output.status.code(),
+            Some(1),
+            "refusals must not be crashes"
+        );
     }
     output
 }

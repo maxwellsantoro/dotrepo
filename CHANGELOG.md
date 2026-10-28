@@ -6,6 +6,9 @@
   selected root. Refuse descendant symlinks/reparse points, nonregular targets,
   and shared hardlinks before truncation; preserve ordinary file identity,
   permissions and ACLs. Keep large exports within bounded descriptor use.
+- Require native write-boundary tests on Linux and Windows. Give the Windows
+  CLI dispatcher a bounded stack so ordinary debug commands do not overflow the
+  smaller main-thread stack; refusals must return command errors, not crashes.
 - Replace public links to private query inputs with supported query/profile
   routes, including the writing page. Check generated links and dynamic card
   routes against the production Worker while preserving private-input denial.
