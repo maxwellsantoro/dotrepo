@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/etcd-io/etcd"
-generated_at = "2026-10-27T17:33:08.663389Z"
+generated_at = "2026-10-28T06:10:17.848859143Z"
 
 [record.trust]
 confidence = "high"
@@ -55,7 +55,7 @@ security_contact = "https://github.com/etcd-io/etcd/blob/main/security/README.md
 root = "https://etcd.io/docs"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T17:33:08.663389Z"
+checkedAt = "2026-10-28T06:10:17.848859143Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -63,7 +63,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T17:33:08.663389Z"
+checkedAt = "2026-10-28T06:10:17.848859143Z"
 confidence = "high"
 method = "extracted"
 reason = "Explicit documentation link at README.md:7: [![Docs](https://img.shields.io/badge/docs-latest-green.svg)](https://etcd.io/docs)"
@@ -72,7 +72,7 @@ state = "present"
 valueJson = '"https://etcd.io/docs"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T17:33:08.663389Z"
+checkedAt = "2026-10-28T06:10:17.848859143Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -81,7 +81,7 @@ state = "present"
 valueJson = '"https://github.com/etcd-io/etcd/blob/main/security/README.md"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T17:33:08.663389Z"
+checkedAt = "2026-10-28T06:10:17.848859143Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -89,7 +89,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T17:33:08.663389Z"
+checkedAt = "2026-10-28T06:10:17.848859143Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -98,7 +98,7 @@ state = "present"
 valueJson = '"make build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T17:33:08.663389Z"
+checkedAt = "2026-10-28T06:10:17.848859143Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -107,7 +107,7 @@ state = "present"
 valueJson = '"Distributed reliable key-value store for the most critical data of a distributed system"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T17:33:08.663389Z"
+checkedAt = "2026-10-28T06:10:17.848859143Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -115,7 +115,7 @@ state = "present"
 valueJson = '"https://etcd.io"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T17:33:08.663389Z"
+checkedAt = "2026-10-28T06:10:17.848859143Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -124,7 +124,7 @@ state = "present"
 valueJson = '"etcd"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T17:33:08.663389Z"
+checkedAt = "2026-10-28T06:10:17.848859143Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -137,6 +137,6 @@ archived = false
 clone_url = "https://github.com/etcd-io/etcd.git"
 default_branch = "main"
 fork = false
-head_sha = "e0ccf652e3e31c9adbc03b8d94d83501f467e537"
+head_sha = "f164b70fdf458a17aba05dfefc685d7de4c9ca37"
 html_url = "https://github.com/etcd-io/etcd"
-stars = 52430
+stars = 52433

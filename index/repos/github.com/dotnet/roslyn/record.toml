@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/dotnet/roslyn"
-generated_at = "2026-10-27T17:59:20.551572Z"
+generated_at = "2026-10-28T06:09:48.630599653Z"
 
 [record.trust]
 confidence = "high"
@@ -62,7 +62,7 @@ security_contact = "secure@microsoft.com"
 root = "https://docs.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/compiler-api-model"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T17:59:20.551572Z"
+checkedAt = "2026-10-28T06:09:48.630599653Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -70,7 +70,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T17:59:20.551572Z"
+checkedAt = "2026-10-28T06:09:48.630599653Z"
 confidence = "high"
 method = "extracted"
 reason = "Explicit documentation link at README.md:41: Visit [Roslyn Architecture Overview](https://docs.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/compiler-api-model) to get started with Roslyn’s API’s."
@@ -79,7 +79,7 @@ state = "present"
 valueJson = '"https://docs.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/compiler-api-model"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T17:59:20.551572Z"
+checkedAt = "2026-10-28T06:09:48.630599653Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -88,7 +88,7 @@ state = "present"
 valueJson = '"secure@microsoft.com"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T17:59:20.551572Z"
+checkedAt = "2026-10-28T06:09:48.630599653Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -96,7 +96,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T17:59:20.551572Z"
+checkedAt = "2026-10-28T06:09:48.630599653Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -104,7 +104,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T17:59:20.551572Z"
+checkedAt = "2026-10-28T06:09:48.630599653Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -113,7 +113,7 @@ state = "present"
 valueJson = '"The Roslyn .NET compiler provides C# and Visual Basic languages with rich code analysis APIs."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T17:59:20.551572Z"
+checkedAt = "2026-10-28T06:09:48.630599653Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -121,7 +121,7 @@ state = "present"
 valueJson = '"https://docs.microsoft.com/dotnet/csharp/roslyn-sdk/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T17:59:20.551572Z"
+checkedAt = "2026-10-28T06:09:48.630599653Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -130,7 +130,7 @@ state = "present"
 valueJson = '"roslyn"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T17:59:20.551572Z"
+checkedAt = "2026-10-28T06:09:48.630599653Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -142,6 +142,6 @@ archived = false
 clone_url = "https://github.com/dotnet/roslyn.git"
 default_branch = "main"
 fork = false
-head_sha = "02fd60fc3c04bf6e1b839f6f0e0c8833474fc84a"
+head_sha = "406deba91f42e16246259a90e94a9b410c626b30"
 html_url = "https://github.com/dotnet/roslyn"
 stars = 20757

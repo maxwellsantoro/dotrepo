@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/AvaloniaUI/Avalonia"
-generated_at = "2026-10-27T19:21:45.58389516Z"
+generated_at = "2026-10-28T06:05:26.483078443Z"
 
 [record.trust]
 confidence = "high"
@@ -66,7 +66,7 @@ security_contact = "security@avaloniaui.net"
 root = "https://docs.avaloniaui.net."
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T19:21:45.58389516Z"
+checkedAt = "2026-10-28T06:05:26.483078443Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -74,7 +74,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T19:21:45.58389516Z"
+checkedAt = "2026-10-28T06:05:26.483078443Z"
 confidence = "high"
 method = "extracted"
 reason = "Explicit documentation link at readme.md:61: Documentation can be found at https://docs.avaloniaui.net."
@@ -83,7 +83,7 @@ state = "present"
 valueJson = '"https://docs.avaloniaui.net."'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T19:21:45.58389516Z"
+checkedAt = "2026-10-28T06:05:26.483078443Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -92,7 +92,7 @@ state = "present"
 valueJson = '"security@avaloniaui.net"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T19:21:45.58389516Z"
+checkedAt = "2026-10-28T06:05:26.483078443Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -100,7 +100,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T19:21:45.58389516Z"
+checkedAt = "2026-10-28T06:05:26.483078443Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -108,7 +108,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T19:21:45.58389516Z"
+checkedAt = "2026-10-28T06:05:26.483078443Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -117,7 +117,7 @@ state = "present"
 valueJson = '"Develop Desktop, Embedded, Mobile and WebAssembly apps with C# and XAML. The future of .NET UI"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T19:21:45.58389516Z"
+checkedAt = "2026-10-28T06:05:26.483078443Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -125,7 +125,7 @@ state = "present"
 valueJson = '"https://avaloniaui.net"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T19:21:45.58389516Z"
+checkedAt = "2026-10-28T06:05:26.483078443Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -134,7 +134,7 @@ state = "present"
 valueJson = '"Avalonia"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T19:21:45.58389516Z"
+checkedAt = "2026-10-28T06:05:26.483078443Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -146,6 +146,6 @@ archived = false
 clone_url = "https://github.com/AvaloniaUI/Avalonia.git"
 default_branch = "main"
 fork = false
-head_sha = "7e8b76db3c6a9392347e85f51197dd2e3b4cb66c"
+head_sha = "a9d935b5c73bb62fbe4d04f8a00b8f1f3786c39d"
 html_url = "https://github.com/AvaloniaUI/Avalonia"
-stars = 31723
+stars = 31725

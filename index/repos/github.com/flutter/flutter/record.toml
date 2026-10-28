@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/flutter/flutter"
-generated_at = "2026-10-27T19:25:08.294468514Z"
+generated_at = "2026-10-28T06:11:01.21081383Z"
 
 [record.trust]
 confidence = "high"
@@ -100,7 +100,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T19:25:08.294468514Z"
+checkedAt = "2026-10-28T06:11:01.21081383Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -108,7 +108,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T19:25:08.294468514Z"
+checkedAt = "2026-10-28T06:11:01.21081383Z"
 confidence = "high"
 method = "extracted"
 reason = "Explicit documentation link at README.md:25: * [Install Flutter](https://docs.flutter.dev/get-started)"
@@ -117,7 +117,7 @@ state = "present"
 valueJson = '"https://docs.flutter.dev/get-started"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T19:25:08.294468514Z"
+checkedAt = "2026-10-28T06:11:01.21081383Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -125,7 +125,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T19:25:08.294468514Z"
+checkedAt = "2026-10-28T06:11:01.21081383Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -133,7 +133,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T19:25:08.294468514Z"
+checkedAt = "2026-10-28T06:11:01.21081383Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -141,7 +141,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T19:25:08.294468514Z"
+checkedAt = "2026-10-28T06:11:01.21081383Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -150,7 +150,7 @@ state = "present"
 valueJson = '"Flutter makes it easy and fast to build beautiful apps for mobile and beyond"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T19:25:08.294468514Z"
+checkedAt = "2026-10-28T06:11:01.21081383Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -158,7 +158,7 @@ state = "present"
 valueJson = '"https://flutter.dev"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T19:25:08.294468514Z"
+checkedAt = "2026-10-28T06:11:01.21081383Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -167,7 +167,7 @@ state = "present"
 valueJson = '"Flutter"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T19:25:08.294468514Z"
+checkedAt = "2026-10-28T06:11:01.21081383Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -179,6 +179,6 @@ archived = false
 clone_url = "https://github.com/flutter/flutter.git"
 default_branch = "master"
 fork = false
-head_sha = "aebd23e2d4d345c1b2fecccccd9df91daea1c17f"
+head_sha = "710263041fe6f956e7a328756c63d751cd27f98a"
 html_url = "https://github.com/flutter/flutter"
-stars = 180435
+stars = 180492

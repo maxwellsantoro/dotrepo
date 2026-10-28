@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/git-bug/git-bug"
-generated_at = "2026-10-27T18:01:46.850638Z"
+generated_at = "2026-10-28T06:11:24.081199833Z"
 
 [record.trust]
 confidence = "high"
@@ -46,7 +46,7 @@ ecosystem = "Go"
 root = "/doc"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T18:01:46.850638Z"
+checkedAt = "2026-10-28T06:11:24.081199833Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -54,7 +54,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T18:01:46.850638Z"
+checkedAt = "2026-10-28T06:11:24.081199833Z"
 confidence = "high"
 method = "extracted"
 reason = "Explicit documentation link at README.md:14: [Issues] - [Documentation][doc] - [Discussions][discuss]"
@@ -63,7 +63,7 @@ state = "present"
 valueJson = '"/doc"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T18:01:46.850638Z"
+checkedAt = "2026-10-28T06:11:24.081199833Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -71,7 +71,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T18:01:46.850638Z"
+checkedAt = "2026-10-28T06:11:24.081199833Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -79,7 +79,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T18:01:46.850638Z"
+checkedAt = "2026-10-28T06:11:24.081199833Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -88,7 +88,7 @@ state = "present"
 valueJson = '"make"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T18:01:46.850638Z"
+checkedAt = "2026-10-28T06:11:24.081199833Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -97,7 +97,7 @@ state = "present"
 valueJson = '"Distributed, offline-first bug tracker integrated in git"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T18:01:46.850638Z"
+checkedAt = "2026-10-28T06:11:24.081199833Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -105,7 +105,7 @@ state = "present"
 valueJson = '"https://github.com/git-bug/git-bug"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T18:01:46.850638Z"
+checkedAt = "2026-10-28T06:11:24.081199833Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -114,7 +114,7 @@ state = "present"
 valueJson = '"git-bug"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T18:01:46.850638Z"
+checkedAt = "2026-10-28T06:11:24.081199833Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -127,6 +127,6 @@ archived = false
 clone_url = "https://github.com/git-bug/git-bug.git"
 default_branch = "trunk"
 fork = false
-head_sha = "3bd05c1c9c5f1529962ffc1cd83b19135b5e4e3f"
+head_sha = "9a127941bde4e689fd78ce6c9bab984ff06433c3"
 html_url = "https://github.com/git-bug/git-bug"
-stars = 10807
+stars = 10810

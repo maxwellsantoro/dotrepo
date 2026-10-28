@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/Tyrrrz/CliWrap"
-generated_at = "2026-10-27T17:24:07.77187Z"
+generated_at = "2026-10-28T06:06:48.729831468Z"
 
 [record.trust]
 confidence = "low"
@@ -40,7 +40,7 @@ topics = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T17:24:07.77187Z"
+checkedAt = "2026-10-28T06:06:48.729831468Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -48,7 +48,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T17:24:07.77187Z"
+checkedAt = "2026-10-28T06:06:48.729831468Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -56,7 +56,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T17:24:07.77187Z"
+checkedAt = "2026-10-28T06:06:48.729831468Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -64,7 +64,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T17:24:07.77187Z"
+checkedAt = "2026-10-28T06:06:48.729831468Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -72,7 +72,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T17:24:07.77187Z"
+checkedAt = "2026-10-28T06:06:48.729831468Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -80,7 +80,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T17:24:07.77187Z"
+checkedAt = "2026-10-28T06:06:48.729831468Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -89,7 +89,7 @@ state = "present"
 valueJson = '"Library for interacting with command-line interfaces"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T17:24:07.77187Z"
+checkedAt = "2026-10-28T06:06:48.729831468Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -97,7 +97,7 @@ state = "present"
 valueJson = '"https://nuget.org/packages/CliWrap"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T17:24:07.77187Z"
+checkedAt = "2026-10-28T06:06:48.729831468Z"
 confidence = "medium"
 method = "inferred"
 reason = "fell back to directory name or GitHub API"
@@ -105,7 +105,7 @@ state = "present"
 valueJson = '"CliWrap"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T17:24:07.77187Z"
+checkedAt = "2026-10-28T06:06:48.729831468Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -117,6 +117,6 @@ archived = false
 clone_url = "https://github.com/Tyrrrz/CliWrap.git"
 default_branch = "prime"
 fork = false
-head_sha = "a6be8484d91731cb6429becfbd37e8a4b2eccb78"
+head_sha = "e87106f04909b1c59d7660f397016d97e1f06e02"
 html_url = "https://github.com/Tyrrrz/CliWrap"
-stars = 5010
+stars = 5011

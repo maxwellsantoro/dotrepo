@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/elastic/elasticsearch"
-generated_at = "2026-10-27T19:52:36.833012858Z"
+generated_at = "2026-10-28T06:10:03.18759707Z"
 
 [record.trust]
 confidence = "medium"
@@ -72,7 +72,7 @@ maintainers = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T19:52:36.833012858Z"
+checkedAt = "2026-10-28T06:10:03.18759707Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -80,7 +80,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T19:52:36.833012858Z"
+checkedAt = "2026-10-28T06:10:03.18759707Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -88,7 +88,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T19:52:36.833012858Z"
+checkedAt = "2026-10-28T06:10:03.18759707Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -96,7 +96,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T19:52:36.833012858Z"
+checkedAt = "2026-10-28T06:10:03.18759707Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -104,7 +104,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T19:52:36.833012858Z"
+checkedAt = "2026-10-28T06:10:03.18759707Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -113,7 +113,7 @@ state = "present"
 valueJson = '"./gradlew build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T19:52:36.833012858Z"
+checkedAt = "2026-10-28T06:10:03.18759707Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -122,7 +122,7 @@ state = "present"
 valueJson = '"Free and Open Source, Distributed, RESTful Search Engine"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T19:52:36.833012858Z"
+checkedAt = "2026-10-28T06:10:03.18759707Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -130,7 +130,7 @@ state = "present"
 valueJson = '"https://www.elastic.co/products/elasticsearch"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T19:52:36.833012858Z"
+checkedAt = "2026-10-28T06:10:03.18759707Z"
 confidence = "medium"
 method = "inferred"
 reason = "fell back to directory name or GitHub API"
@@ -139,7 +139,7 @@ state = "present"
 valueJson = '"elasticsearch"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T19:52:36.833012858Z"
+checkedAt = "2026-10-28T06:10:03.18759707Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -152,6 +152,6 @@ archived = false
 clone_url = "https://github.com/elastic/elasticsearch.git"
 default_branch = "main"
 fork = false
-head_sha = "ed1a9b12396d5e3cf0160e06d383246ef5bfdb0f"
+head_sha = "3e6ce2c8b3416780985db1729d1cb29de70c70bf"
 html_url = "https://github.com/elastic/elasticsearch"
-stars = 78406
+stars = 78421

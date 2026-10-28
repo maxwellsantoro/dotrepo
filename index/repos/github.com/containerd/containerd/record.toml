@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/containerd/containerd"
-generated_at = "2026-10-27T18:24:13.349775Z"
+generated_at = "2026-10-28T06:09:10.445852695Z"
 
 [record.trust]
 confidence = "high"
@@ -50,7 +50,7 @@ maintainers = []
 security_contact = "https://github.com/containerd/project/blob/main/SECURITY.md#reporting-a-vulnerability"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T18:24:13.349775Z"
+checkedAt = "2026-10-28T06:09:10.445852695Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -58,7 +58,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T18:24:13.349775Z"
+checkedAt = "2026-10-28T06:09:10.445852695Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -66,7 +66,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T18:24:13.349775Z"
+checkedAt = "2026-10-28T06:09:10.445852695Z"
 confidence = "high"
 method = "unspecified"
 reason = "actionable security reporting URL"
@@ -74,7 +74,7 @@ state = "present"
 valueJson = '"https://github.com/containerd/project/blob/main/SECURITY.md#reporting-a-vulnerability"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T18:24:13.349775Z"
+checkedAt = "2026-10-28T06:09:10.445852695Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -82,7 +82,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T18:24:13.349775Z"
+checkedAt = "2026-10-28T06:09:10.445852695Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -91,7 +91,7 @@ state = "present"
 valueJson = '"make build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T18:24:13.349775Z"
+checkedAt = "2026-10-28T06:09:10.445852695Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -100,7 +100,7 @@ state = "present"
 valueJson = '"An open and reliable container runtime"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T18:24:13.349775Z"
+checkedAt = "2026-10-28T06:09:10.445852695Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -108,7 +108,7 @@ state = "present"
 valueJson = '"https://containerd.io"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T18:24:13.349775Z"
+checkedAt = "2026-10-28T06:09:10.445852695Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -117,7 +117,7 @@ state = "present"
 valueJson = '"containerd"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T18:24:13.349775Z"
+checkedAt = "2026-10-28T06:09:10.445852695Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -130,6 +130,6 @@ archived = false
 clone_url = "https://github.com/containerd/containerd.git"
 default_branch = "main"
 fork = false
-head_sha = "c2b0636c68f62247994c50554a18f9c7f7fba5e5"
+head_sha = "43aa4ea134f3e50791b8537c48a18303f0fcc775"
 html_url = "https://github.com/containerd/containerd"
-stars = 21443
+stars = 21444

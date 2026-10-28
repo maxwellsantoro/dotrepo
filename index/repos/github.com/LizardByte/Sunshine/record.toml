@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/LizardByte/Sunshine"
-generated_at = "2026-10-27T18:22:19.813639Z"
+generated_at = "2026-10-28T06:06:20.681499288Z"
 
 [record.trust]
 confidence = "medium"
@@ -91,7 +91,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T18:22:19.813639Z"
+checkedAt = "2026-10-28T06:06:20.681499288Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -99,7 +99,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T18:22:19.813639Z"
+checkedAt = "2026-10-28T06:06:20.681499288Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -107,7 +107,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T18:22:19.813639Z"
+checkedAt = "2026-10-28T06:06:20.681499288Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -115,7 +115,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T18:22:19.813639Z"
+checkedAt = "2026-10-28T06:06:20.681499288Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -123,7 +123,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T18:22:19.813639Z"
+checkedAt = "2026-10-28T06:06:20.681499288Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -132,7 +132,7 @@ state = "present"
 valueJson = '"npm run build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T18:22:19.813639Z"
+checkedAt = "2026-10-28T06:06:20.681499288Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -141,7 +141,7 @@ state = "present"
 valueJson = '"Self-hosted game stream host for Moonlight."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T18:22:19.813639Z"
+checkedAt = "2026-10-28T06:06:20.681499288Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -149,7 +149,7 @@ state = "present"
 valueJson = '"http://app.lizardbyte.dev/Sunshine/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T18:22:19.813639Z"
+checkedAt = "2026-10-28T06:06:20.681499288Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -158,7 +158,7 @@ state = "present"
 valueJson = '"Sunshine icon"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T18:22:19.813639Z"
+checkedAt = "2026-10-28T06:06:20.681499288Z"
 confidence = "low"
 method = "unresolved"
 reason = "intra-tier conflict left field unset during import"
@@ -170,6 +170,6 @@ archived = false
 clone_url = "https://github.com/LizardByte/Sunshine.git"
 default_branch = "master"
 fork = false
-head_sha = "d0b4a88ef727f8dabf80cc970a14739b55c885de"
+head_sha = "7974a409bb82f2e52a45dad901acdd10fd1d61c1"
 html_url = "https://github.com/LizardByte/Sunshine"
-stars = 42708
+stars = 42724

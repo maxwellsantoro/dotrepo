@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/coder/code-server"
-generated_at = "2026-10-27T17:57:26.622499Z"
+generated_at = "2026-10-28T06:09:04.871322747Z"
 
 [record.trust]
 confidence = "medium"
@@ -74,7 +74,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T17:57:26.622499Z"
+checkedAt = "2026-10-28T06:09:04.871322747Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -82,7 +82,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T17:57:26.622499Z"
+checkedAt = "2026-10-28T06:09:04.871322747Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -90,7 +90,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T17:57:26.622499Z"
+checkedAt = "2026-10-28T06:09:04.871322747Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -98,7 +98,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T17:57:26.622499Z"
+checkedAt = "2026-10-28T06:09:04.871322747Z"
 confidence = "high"
 method = "unspecified"
 reason = "clear CODEOWNERS team"
@@ -106,7 +106,7 @@ state = "present"
 valueJson = '"@coder/code-server"'
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T17:57:26.622499Z"
+checkedAt = "2026-10-28T06:09:04.871322747Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -115,7 +115,7 @@ state = "present"
 valueJson = '"npm run build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T17:57:26.622499Z"
+checkedAt = "2026-10-28T06:09:04.871322747Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -124,7 +124,7 @@ state = "present"
 valueJson = '"VS Code in the browser"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T17:57:26.622499Z"
+checkedAt = "2026-10-28T06:09:04.871322747Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -132,7 +132,7 @@ state = "present"
 valueJson = '"https://coder.com"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T17:57:26.622499Z"
+checkedAt = "2026-10-28T06:09:04.871322747Z"
 confidence = "medium"
 method = "inferred"
 reason = "fell back to directory name or GitHub API"
@@ -141,7 +141,7 @@ state = "present"
 valueJson = '"code-server"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T17:57:26.622499Z"
+checkedAt = "2026-10-28T06:09:04.871322747Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -154,6 +154,6 @@ archived = false
 clone_url = "https://github.com/coder/code-server.git"
 default_branch = "main"
 fork = false
-head_sha = "9d0eee156eede611730aea224ce7d4b2e459a8c7"
+head_sha = "761b0d2a1911bd03c7129cf689ed8874bdb1b09b"
 html_url = "https://github.com/coder/code-server"
-stars = 79716
+stars = 79720
