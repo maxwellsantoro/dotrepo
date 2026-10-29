@@ -1,0 +1,14 @@
+{
+  "actualAdmission": false,
+  "observations": [
+    {
+      "control": "portability initial relocated copy",
+      "correction": "ignore only top-level author FREEZE and temporary-copy directory; retain nested source evidence byte-exact",
+      "outcome": "failed-before-verification",
+      "reason": "control copy ignored all filenames FREEZE.json including nested retained source-decision freeze; required bound snapshot missing",
+      "subsequentResult": "8 portability controls passed"
+    }
+  ],
+  "sourceOrNativeExecution": false,
+  "state": "owned-author-control-development-not-task-execution"
+}

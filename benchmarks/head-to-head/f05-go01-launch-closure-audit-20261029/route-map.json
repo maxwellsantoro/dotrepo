@@ -1,0 +1,57 @@
+{
+  "knownConditionalRoutes": [
+    {
+      "established": "Exact image wrapper bodies call PATH-resolved node, npm11.19.1 npx rewrites argv into exec. Fixed readonly image bytes are available and inventory/hash bound.",
+      "route": "Image shell\u2192npm/npx",
+      "witnessNeeded": "Actual inherited PATH + resolved wrapper and node chain after prior agent actions; no writable shadow. Image hash alone does not resolve PATH."
+    },
+    {
+      "established": "Config loads builtin/CLI/env/project/user/global sources, set-envs writes INIT_CWD/HOME/npm exports/NODE_OPTIONS/NODE/npm_node_execpath; npm also sets COLOR/npm_command.",
+      "route": "npm config\u2192child env",
+      "witnessNeeded": "Actual config paths/bytes or absences, npm_config_* and NODE_OPTIONS/NODE_PATH, user/global prefix/home and chosen script-shell. No complete effective values observed here."
+    },
+    {
+      "established": "Root manifest has no hereby bin; expected local route searches ancestor .bin and runs npx synthetic script with binPaths. Missing local candidate permits different global/cache/install route.",
+      "route": "npm exec\u2192local Hereby",
+      "witnessNeeded": "First matching local .bin/hereby target/content/mode plus upstream ancestor search-path observations. Refuse unbound global/cache fallback rather than assuming cache means expected Hereby."
+    },
+    {
+      "established": "Hereby1.15.2 reexecs resolved local package if necessary, chdirs to Herebyfile directory, imports it and local static graph before selecting test. test aliases full test:tsc.",
+      "route": "Hereby\u2192selected full task",
+      "witnessNeeded": "Actual Herebyfile/package resolution and all required imported inputs, especially ast.json read during static schema initialization. This does not require executing unused generator functions."
+    },
+    {
+      "established": "utils merges current parent env with options; tinyexec1.3.1 prepends cwd and every ancestor .bin plus process.execPath directory. go install uses tools cwd while gotestsum absolute path runs tests from tsc.",
+      "route": "Hereby utils\u2192tinyexec\u2192producer",
+      "witnessNeeded": "Actual cwd-specific go/node/compiler resolution chains and relevant values after npm/Hereby; source generator helperCGO0 is not testCGO1."
+    },
+    {
+      "established": "Frozen lock has exactly3hasInstallScript packages: vsce-sign2.1.0,dprint0.57.4,esbuild0.28.2. Hook bodies perform platform/optional payload copy/link/rewrites and may fallback install/download or validate binary.",
+      "route": "Normal npm hooks",
+      "witnessNeeded": "Same-epoch setup raw process/hooks plus installed optional payload/bin chain hashes. Child hooks affect filesystem and child processes; they are not a direct parent-env write channel. A banner/parent exit0 alone does not identify selected branch."
+    },
+    {
+      "established": "Exact Hereby createCachedTool hashes sorted absolute tools/go.mod+go.sum paths plus bytes, awaits install only if binary/hash invalid, then writes lowercase digest+LF.",
+      "route": "gotestsum source cache",
+      "witnessNeeded": "Fresh binary/hash absence preferred, same-task build branch/provenance and before/after modules/tool/config source/context. Matching hash text alone remains insufficient."
+    }
+  ],
+  "uninspectedFrontier": [
+    {
+      "pathOrPackage": "npm transitive command/config loader helpers (including nopt/ini/definition flattening, resolveAllowScripts collaborators, Arborist reify/build lifecycle dispatch)",
+      "status": "Selected entrypoints retained; complete dependency body closure not inspected. No claim all top-level imported code lacks relevant side effects."
+    },
+    {
+      "pathOrPackage": "Herebyfile top-level published adm-zip0.6.1/chokidar5.0.0/tar7.5.22 and their loaded dependencies",
+      "status": "Static imports established; complete published initialization sources not inspected. Node built-ins are within frozen image/tool trust; imported package state is not a whole-world absence proof."
+    },
+    {
+      "pathOrPackage": "Dynamic runtime module imports inside unused generator bodies and fetched LSP/Unicode input branches",
+      "status": "Not executed by source inspection; no requirement to run every generator. Any branch actually selected needs its own source-backed disposition."
+    },
+    {
+      "pathOrPackage": "Installed node_modules and current workspace/home/tmp state in future producer session",
+      "status": "No actual installed/current state observed by this audit. SRI-verified cached bytes do not prove installed copies or earlier agent modifications."
+    }
+  ]
+}

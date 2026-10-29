@@ -1,0 +1,46 @@
+{
+  "actualAdmission": false,
+  "actualDaemonCalls": 0,
+  "artifacts": {
+    "README.md": {
+      "bytes": 1307,
+      "sha256": "e3a5e4421ae3c523ffd02774e80266b4e16fdbce1ab64596929ea74bb3926714"
+    },
+    "author-replay.json": {
+      "bytes": 3138,
+      "sha256": "3adc985d102d1c56f8c0b7735a77af1354fc18ddada177c6bacb430ac7342a64"
+    },
+    "challenge.json": {
+      "bytes": 7901,
+      "sha256": "ce629997b171ef6c2f0e1ee2b8781863fe70c201f23da4ceb60717e3e42ca1c3"
+    },
+    "challenge.py": {
+      "bytes": 7163,
+      "sha256": "385025ddac7b7db25155c3b1a01ea37c81b34ec6dc988464473d537211977fd5"
+    },
+    "focused-checks.json": {
+      "bytes": 1401,
+      "sha256": "0a997a42f93c604885cb09b9cc43fe6152b4e01960aafb9ea9b91ce3e19429ce"
+    },
+    "integrity-and-checks.json": {
+      "bytes": 1111,
+      "sha256": "47fdc10f6b03152d165cea878ca1f2d8a8e299bf18a4a2b79df00b82600cb703"
+    },
+    "review.json": {
+      "bytes": 3214,
+      "sha256": "458231c6ad1dcf0f56a9f20e98f9adf822346e6a6c9377e2f134039d80b7cf5e"
+    }
+  },
+  "campaignAdmitted": false,
+  "executionAuthorized": false,
+  "findings": [],
+  "nativeTaskAdmitted": false,
+  "oracleQualified": false,
+  "state": "independent-image-environment-compatibility-review-frozen",
+  "subject": {
+    "authorFreezeSha256": "d1b7e310c20b1a09f2999a1203fe7653a54981a62493ffc62d194121d0fbd408",
+    "imageInspectSha256": "4c6fa72b8b05b95a719110e0f7fa705758c224e253cf8c7cdf881218ea4f1913",
+    "runtimeSha256": "a0f355e2438ebac9dea36a62bd263c1451a51787da840ec64c138d29dddb8473",
+    "testsSha256": "4219b659e65570fbc6a7ad54ab136bcf193f59418b036d08ed37c7237e41cdde"
+  }
+}

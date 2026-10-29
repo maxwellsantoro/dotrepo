@@ -1,0 +1,372 @@
+{
+  "actualAdmission": false,
+  "artifactCount": 90,
+  "artifacts": {
+    "README.md": {
+      "bytes": 2256,
+      "sha256": "bb6019021ccd3b7d209230db622285133882f5c09f97e4cf72b2f4cedcda4294"
+    },
+    "additional-sources.json": {
+      "bytes": 16291,
+      "sha256": "3df43bb570cca0c00c6b0bdaf0ea8cc89816e5d62099f3f8e847533a9fd28b55"
+    },
+    "bindings.json": {
+      "bytes": 3243,
+      "sha256": "c552fce4a0d231ef493572ae3af1f4e9ca04883888221da220e6f81322d9c788"
+    },
+    "frontier-sources.json": {
+      "bytes": 6387,
+      "sha256": "0e4892e70f37769122ba03b6ffbf74de3dffb0eb4a18e2f06c6205ab4c32a229"
+    },
+    "image-source/usr/local/bin/npm": {
+      "bytes": 72,
+      "sha256": "de0074a6bf7a9f22fc0081ec0b941ef336acc1109c2e45d2ddddb601b3188b63"
+    },
+    "image-source/usr/local/bin/npx": {
+      "bytes": 72,
+      "sha256": "8ef0a506c1aea4a30c46d8a1b2874caa0670ea52b35954cc60709cf22117e07f"
+    },
+    "image-source/usr/local/lib/node_modules/npm/bin/npm-cli.js": {
+      "bytes": 54,
+      "sha256": "8e5f6f3429f8cdbe693cdc29904e9d5a7b127a494bd15c804bd54c7403bfcbe7"
+    },
+    "image-source/usr/local/lib/node_modules/npm/bin/npx-cli.js": {
+      "bytes": 2921,
+      "sha256": "237adf8f3747cad8b9b62fcfd0d9c8d509a64e550337707f55100afcb79e8900"
+    },
+    "image-source/usr/local/lib/node_modules/npm/lib/cli.js": {
+      "bytes": 407,
+      "sha256": "67666f06479f9b0bbc01412c198caadd4287d34d5ed74a02871ea78f186451e7"
+    },
+    "image-source/usr/local/lib/node_modules/npm/lib/cli/entry.js": {
+      "bytes": 2991,
+      "sha256": "667a44c1fa8795fdbba8ad843736ca7f8f24e64511985e9a7060b002123560c6"
+    },
+    "image-source/usr/local/lib/node_modules/npm/lib/cli/validate-engines.js": {
+      "bytes": 1915,
+      "sha256": "eb2770f8aef0656afa06b7512961b30a25636dfaed29cd0d842def07b95eeed7"
+    },
+    "image-source/usr/local/lib/node_modules/npm/lib/commands/ci.js": {
+      "bytes": 4851,
+      "sha256": "fb9ed5eb26d841dfcdf8cffaa3c33be3edda6ee27797b5db5ccbfbaba86e4315"
+    },
+    "image-source/usr/local/lib/node_modules/npm/lib/commands/exec.js": {
+      "bytes": 3989,
+      "sha256": "f341403051a805d7f970d3c0d19d5d374d20c859aef73330ada18e4f0402949d"
+    },
+    "image-source/usr/local/lib/node_modules/npm/lib/npm.js": {
+      "bytes": 17009,
+      "sha256": "dd258b095bff5a0a16636bcc4cb457330624999485f64e1944d57424cbebebea"
+    },
+    "image-source/usr/local/lib/node_modules/npm/lib/utils/resolve-allow-scripts.js": {
+      "bytes": 6637,
+      "sha256": "ed578216aa03fe4579885c567c488354a7ea7590441b1cb0ecd2b1353dd3f6d0"
+    },
+    "image-source/usr/local/lib/node_modules/npm/node_modules/@npmcli/config/lib/definitions/definitions.js": {
+      "bytes": 91720,
+      "sha256": "f9cffb281460dfc5aa98f4f2e91a47052b814faece72fc9a80eaf3fff2ceb8eb"
+    },
+    "image-source/usr/local/lib/node_modules/npm/node_modules/@npmcli/config/lib/definitions/index.js": {
+      "bytes": 2747,
+      "sha256": "8b5b0eb773ffad839fc9c6489dcf2222fd22d38e189ed7224e3427fb75fdb254"
+    },
+    "image-source/usr/local/lib/node_modules/npm/node_modules/@npmcli/config/lib/env-replace.js": {
+      "bytes": 616,
+      "sha256": "6c7cd1f825e7f4b6aea247140a381705b6d12231dc63f0ce94b781256eccd45c"
+    },
+    "image-source/usr/local/lib/node_modules/npm/node_modules/@npmcli/config/lib/index.js": {
+      "bytes": 32085,
+      "sha256": "938b85a17fde9f2355497fd4befc9bac45d406fb4afacd8af63322796697ff06"
+    },
+    "image-source/usr/local/lib/node_modules/npm/node_modules/@npmcli/config/lib/set-envs.js": {
+      "bytes": 3761,
+      "sha256": "c44cbecae83242cb8e422fb0915c15489764647829f8008bbd2ea89bb0c94975"
+    },
+    "image-source/usr/local/lib/node_modules/npm/node_modules/@npmcli/config/package.json": {
+      "bytes": 1439,
+      "sha256": "17e999d89f983a3cc9f8149cffbf4c5e3dec7f4f505b81d072398286c39deaad"
+    },
+    "image-source/usr/local/lib/node_modules/npm/node_modules/@npmcli/promise-spawn/lib/index.js": {
+      "bytes": 6192,
+      "sha256": "9e220f7040270955627603056ae02f0348b671962892001c3cf5f574b08cfc84"
+    },
+    "image-source/usr/local/lib/node_modules/npm/node_modules/@npmcli/promise-spawn/package.json": {
+      "bytes": 1240,
+      "sha256": "31fd2768440dfe550bb894ab55e326fffe4ac63b2f83e798e2cbb6edff1373e4"
+    },
+    "image-source/usr/local/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/make-spawn-args.js": {
+      "bytes": 1130,
+      "sha256": "d1647624f0ce227e5cff1c4570f3e754e0eaaf08041db354102ec2bdbbd721df"
+    },
+    "image-source/usr/local/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/package-envs.js": {
+      "bytes": 826,
+      "sha256": "ff502d71d89b640fb42d643060dcfefb2b499c355e86aeb77e5486e29dd16880"
+    },
+    "image-source/usr/local/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/run-script-pkg.js": {
+      "bytes": 2977,
+      "sha256": "94dea9ff50028869f4f88c4ec5e520d56fa7c2f6cc03422a9f06c44d291a0c34"
+    },
+    "image-source/usr/local/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/run-script.js": {
+      "bytes": 520,
+      "sha256": "daceffb5ae860499cc8e0696c8c33ef5d705f62f597974858b6472fcd1215f79"
+    },
+    "image-source/usr/local/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/set-path.js": {
+      "bytes": 1856,
+      "sha256": "bc023d0c2d0840074c9e81ac0bda0fed0ef75e64623fa670437a7706d05d3542"
+    },
+    "image-source/usr/local/lib/node_modules/npm/node_modules/@npmcli/run-script/package.json": {
+      "bytes": 1334,
+      "sha256": "dad6d6954819d62761c3e197117a55d0445c04e292e8ff057e7c3ac318bdfb1c"
+    },
+    "image-source/usr/local/lib/node_modules/npm/node_modules/libnpmexec/lib/file-exists.js": {
+      "bytes": 663,
+      "sha256": "17a996193ff819d4f46efa4802e111120eb1058bbf8d73a8de12c36073ac3008"
+    },
+    "image-source/usr/local/lib/node_modules/npm/node_modules/libnpmexec/lib/index.js": {
+      "bytes": 11277,
+      "sha256": "d3a229153f10a94127933adbd958c4b650a7c225442c21806fee729bd4784254"
+    },
+    "image-source/usr/local/lib/node_modules/npm/node_modules/libnpmexec/lib/run-script.js": {
+      "bytes": 1873,
+      "sha256": "cf0a7c6462fab3a4818556eedbacd1a6773f924744afb14908bb62a14015ba02"
+    },
+    "image-source/usr/local/lib/node_modules/npm/node_modules/libnpmexec/package.json": {
+      "bytes": 1938,
+      "sha256": "91f435badbb7532ac8d5569ae1665bbdea4500d9b74221ad26e7c4c7112cfdba"
+    },
+    "image-source/usr/local/lib/node_modules/npm/package.json": {
+      "bytes": 6597,
+      "sha256": "f6478d5600180a23f73e4217610c7709a71cedb4ae13f6c3e15ecb457f5d4fd6"
+    },
+    "initial-image-sources.json": {
+      "bytes": 6363,
+      "sha256": "ec9c57bee3884cd74eceffbfe7b28c241ba683a7fb124f01decfa7c0e170a10b"
+    },
+    "last-frontier-sources.json": {
+      "bytes": 1331,
+      "sha256": "6839566516dc050fd6c13a43fe16142d1e6974914b61320d86e7a414ffd530f3"
+    },
+    "member-integrity.json": {
+      "bytes": 3356,
+      "sha256": "5aeb3c7ae85bf3eff3a23a9577c007440be8c1fed630f1d04385f5188f413868"
+    },
+    "npm-source/@vscode/vsce-sign/package/package.json": {
+      "bytes": 1035,
+      "sha256": "094ee1688ec4c49bbea8762f4f3da35da8fcabd7c416ec9c275359d1700858ee"
+    },
+    "npm-source/@vscode/vsce-sign/package/src/main.js": {
+      "bytes": 11318,
+      "sha256": "0c9307a30aa7dee8aae701cd798dab43cb8801255a91817296f16b6a60d72449"
+    },
+    "npm-source/@vscode/vsce-sign/package/src/permissions.js": {
+      "bytes": 1191,
+      "sha256": "ee98958a5cfd1e7153c11518332c086a0200f178ef644e99e566865bf39dc8e8"
+    },
+    "npm-source/@vscode/vsce-sign/package/src/postinstall.js": {
+      "bytes": 7356,
+      "sha256": "77a408796da2c0b48ad1c9cee6cdb3dd70662f7b2a8c353a61a617106bd0c762"
+    },
+    "npm-source/@vscode/vsce-sign/package/src/target.js": {
+      "bytes": 3061,
+      "sha256": "4b03b6f1342d16b473596f727bae8bb63a68d8fc9b172f0bbe45aa724cad4178"
+    },
+    "npm-source/dprint/package/bin.cjs": {
+      "bytes": 1066,
+      "sha256": "f937afc1e9c45d4fb3e26a9900a96681a8d048e03466648d0ce38c7db4cf4198"
+    },
+    "npm-source/dprint/package/install.cjs": {
+      "bytes": 197,
+      "sha256": "30c93a4ac2fbb7e35b01c6322c1d64941b847d61ee510ef2ed43962a491a79d8"
+    },
+    "npm-source/dprint/package/install_api.cjs": {
+      "bytes": 15235,
+      "sha256": "89da3973a6a467f5b395adfbfeaecb2fe3226c54e17c0b7f54dda71135347328"
+    },
+    "npm-source/dprint/package/package.json": {
+      "bytes": 1202,
+      "sha256": "ebd6fca3cc17f074848ed33a0be58fbf3bcda62ec6d6e21e73244d4245b9896a"
+    },
+    "npm-source/esbuild/package/bin/esbuild": {
+      "bytes": 9350,
+      "sha256": "183d6ead2dbc3af51aec767d5395f86fe54fbbc2d2aa8e54feb4e31d76a62f7e"
+    },
+    "npm-source/esbuild/package/install.js": {
+      "bytes": 11773,
+      "sha256": "612294e278914443bdcf81cb17f54afec34dbdd2ebd999a6ee187912320cc315"
+    },
+    "npm-source/esbuild/package/lib/main.js": {
+      "bytes": 97463,
+      "sha256": "61ec0ba144ff93f4bf0e96ad6fab6f430ede0aa13e27ace8063ed63ba416b3cd"
+    },
+    "npm-source/esbuild/package/package.json": {
+      "bytes": 3980,
+      "sha256": "9d0bc453f4e791553c4cc2298ba023b409241fd9801e494741666eb0f6051490"
+    },
+    "npm-source/hereby/package/bin/hereby.js": {
+      "bytes": 45,
+      "sha256": "10004a6810ccd94b53c6415e0def30cd99b959a96e7cd779e2436349b4811a83"
+    },
+    "npm-source/hereby/package/dist/cli.js": {
+      "bytes": 305,
+      "sha256": "2db010ee65d343b91cdbc5244e806d108d1ae35488aeae37f2112ff1663edb86"
+    },
+    "npm-source/hereby/package/dist/cli/index.js": {
+      "bytes": 3383,
+      "sha256": "d3effe31543c89079186a62d10c318d8a913543024dca88aac54318e451bca54"
+    },
+    "npm-source/hereby/package/dist/cli/loadHerebyfile.js": {
+      "bytes": 3382,
+      "sha256": "e51e3f887f8da9df3cd15b3aa764cf879c95f43e04ecfe26ef523fa47ecd12b0"
+    },
+    "npm-source/hereby/package/dist/cli/parseArgs.js": {
+      "bytes": 2319,
+      "sha256": "bdfdd528af2d6e780913956bd6d69ce925bed87c055b7eda14f7cb69d149abf3"
+    },
+    "npm-source/hereby/package/dist/cli/reexec.js": {
+      "bytes": 2824,
+      "sha256": "eb0ae263dfa7f8bedc66207ee200056b128df05c831510c5c152b2ba84e684a1"
+    },
+    "npm-source/hereby/package/dist/cli/runner.js": {
+      "bytes": 1962,
+      "sha256": "860bb1305702095e8dcbf750e6c7f7225abb8dd5a97db576ffdc768f9ebeece2"
+    },
+    "npm-source/hereby/package/dist/cli/style.js": {
+      "bytes": 1300,
+      "sha256": "07238d7e7784c0be9655a42d0371a53c624e1b85b7676b0a6cf1f6c383700760"
+    },
+    "npm-source/hereby/package/dist/cli/utils.js": {
+      "bytes": 3507,
+      "sha256": "2c0cc6c0f2f5b1bd4fe3699a4ce3c9dc679baa44b59605910282d1277cb464ff"
+    },
+    "npm-source/hereby/package/dist/index.js": {
+      "bytes": 1853,
+      "sha256": "bdd91091a228ea8d6becc077d13311602be5bd36be09a33e9f09100113daf2b1"
+    },
+    "npm-source/hereby/package/package.json": {
+      "bytes": 2074,
+      "sha256": "e10955435b10c8c4fb87b89d8f6404446e655a94370c137845277630e062d717"
+    },
+    "npm-source/tinyexec/package/dist/main.mjs": {
+      "bytes": 12796,
+      "sha256": "3f370502361a75be7a50f915a123d965f6ef9c648a56bf1d5b9e3ae95c20b2f1"
+    },
+    "npm-source/tinyexec/package/package.json": {
+      "bytes": 1511,
+      "sha256": "f6d914909fee06059ce78f6f3390e12b163d900eb109cbbe6482cfddcbca8be7"
+    },
+    "package-files-@vscode_vsce-sign.json": {
+      "bytes": 276,
+      "sha256": "12c141911ca3bace9ce958cd0d7f11ed9127deb9996dfecf78aac0f95e6988ac"
+    },
+    "package-files-dprint.json": {
+      "bytes": 173,
+      "sha256": "65542a6004adc250cf50341eb2656f9361946e9f0df3eade8aa34a3027ef2560"
+    },
+    "package-files-esbuild.json": {
+      "bytes": 177,
+      "sha256": "1a5a830d471288d8c85a1f578d94ff668302aa8127d9bc93a55ebb3fcf58a912"
+    },
+    "package-files-hereby.json": {
+      "bytes": 450,
+      "sha256": "114f42c1e09982c3bf0e8b67cfc858a7b019fc4d72635df5f6c215d1594af9c3"
+    },
+    "package-files-tinyexec.json": {
+      "bytes": 129,
+      "sha256": "69d4bed67d6810b79ab38858a80f2d466484d836d8ddf3ede1fbaa947700f687"
+    },
+    "read_frontier.py": {
+      "bytes": 2648,
+      "sha256": "357d19f71f6b532138b101de9cc818156fe8966ef56ae04cc6bcb49fd6bebaf3"
+    },
+    "read_selected.py": {
+      "bytes": 5903,
+      "sha256": "f832182e159af84b5d4b134cc679392034a8260e15cd559e11187167e6e10612"
+    },
+    "report.json": {
+      "bytes": 5043,
+      "sha256": "d20f22053c507e81b8cc9f0e1f992add327011865329dafbc103286f952df1fa"
+    },
+    "repository-source/Herebyfile.mjs": {
+      "bytes": 125368,
+      "sha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421"
+    },
+    "repository-source/package-lock.json": {
+      "bytes": 143844,
+      "sha256": "52b6c9bd0a26ef1b0fc27dfbfaa00df6a047cdddd587d07c4f6c1c3345faf5cf"
+    },
+    "repository-source/package.json": {
+      "bytes": 1838,
+      "sha256": "2828c1d269bd9c80d634131ec107ac69f1cfc3bf1f98d24c112c825c8acd7902"
+    },
+    "repository-source/tools/scripts/gen/generatedFile.mts": {
+      "bytes": 2901,
+      "sha256": "13340b8675f336f9ef342c8a2f57b3fc3d77f0dcefe064accaf2d5514c5b4215"
+    },
+    "repository-source/tools/scripts/gen/utils.mts": {
+      "bytes": 4587,
+      "sha256": "5d0c46a19d38bfc283f378a8f3498510af40d68b2994c20c41f1976e4870bd15"
+    },
+    "repository-source/tools/scripts/lsp/fetchModel.mts": {
+      "bytes": 2736,
+      "sha256": "4fb702769440e1574981a62b1c1fd205c2a3cee4f992de9b89442f8ea4aa7b26"
+    },
+    "repository-source/tools/scripts/tsc/ast.json": {
+      "bytes": 175469,
+      "sha256": "e811cdb061e7e4bcefbdd982eb08babb2916f4982c3e0fca8d266fbacb2977bb"
+    },
+    "repository-source/tools/scripts/tsc/generate-encoder.ts": {
+      "bytes": 88725,
+      "sha256": "a613cc4fcfbf030621b71dfe903b2505a6a0c6882b5224363429336dc892ef32"
+    },
+    "repository-source/tools/scripts/tsc/generate-enums.ts": {
+      "bytes": 24506,
+      "sha256": "6ba666c251486b116c234873e667cd19e68aebb621b3004856c05c81d8e2686d"
+    },
+    "repository-source/tools/scripts/tsc/generate-go-ast.ts": {
+      "bytes": 58291,
+      "sha256": "95d942098d0619fe1c8d60d963dc215aa5acd53183306ca81bb8355a2dbbbea0"
+    },
+    "repository-source/tools/scripts/tsc/generate-options.ts": {
+      "bytes": 40452,
+      "sha256": "5462d60c90ead72086372712b91b9fd1397015e705a974f290eb8546d48de42a"
+    },
+    "repository-source/tools/scripts/tsc/generate-ts-ast.ts": {
+      "bytes": 82211,
+      "sha256": "c2413184b6b9d979fa85b994f6e3fd63e7b2509d95675cf94c129257d9e4fd4d"
+    },
+    "repository-source/tools/scripts/tsc/options-model.ts": {
+      "bytes": 5882,
+      "sha256": "9a4a193b3d829e012f00222af10591ececef031022ba94d174839bcd8ca43e75"
+    },
+    "repository-source/tools/scripts/tsc/options-schema.ts": {
+      "bytes": 11283,
+      "sha256": "49deb0daf2fa85ce42f6af360e84e7f5d184e9bcb5cce54c30b62deb179e175e"
+    },
+    "repository-source/tools/scripts/tsc/options.ts": {
+      "bytes": 100896,
+      "sha256": "9bfa4f217b3b957647f42ccb242f6cf08e6d99ab19eabef6dafad6b175ecbf01"
+    },
+    "repository-source/tools/scripts/tsc/schema.ts": {
+      "bytes": 45363,
+      "sha256": "d7eba663a9da2389bd4762723b5b73974892d93a7a4f0448039f6cfab3d8c30a"
+    },
+    "repository-source/tsc/internal/stringutil/_scripts/generate-unicode-data.mts": {
+      "bytes": 11170,
+      "sha256": "84576ceb47abd55cb4e090763f6e857bdcb76529fc84b348d3e7f91844c3931c"
+    },
+    "route-map.json": {
+      "bytes": 4664,
+      "sha256": "cd84f9317a23b4ed3376f29409ba15484a6369ee3ea94d0dc1c6d9353c09359a"
+    },
+    "source-spans.json": {
+      "bytes": 46051,
+      "sha256": "148eb090af21eb61988c908616fc08ce91f55ebdea22dbaca656cb8265ac5531"
+    }
+  },
+  "campaignAdmitted": false,
+  "executionAuthorized": false,
+  "oracleQualified": false,
+  "prospectivePlanFreezeSha256": "961c3135dd3fc7751774fce9822f9afd4e72f6103001eafdaac2143e5a7915e1",
+  "state": "frozen-bounded-read-only-source-audit-no-admission",
+  "taskOutcomeObserved": false
+}

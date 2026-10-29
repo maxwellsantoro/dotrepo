@@ -104,6 +104,8 @@ ENV_KEYS = {
     "GIT_CONFIG_GLOBAL",
     "GIT_CONFIG_NOSYSTEM",
 }
+# These are inherited image defaults only, never caller override permissions.
+IMAGE_ENV_DEFAULTS = {"GOTOOLCHAIN": "local", "GOENV": "off"}
 QUALIFICATIONS = {
     "taskEnvironmentFrozen",
     "imageAuditedWithoutGoldProfilesOrCredentials",
@@ -624,6 +626,26 @@ def live_ready(config):
     )
 
 
+def _validate_image_environment(entries):
+    """Admit bounded image defaults without widening session environment keys."""
+    require(entries is None or isinstance(entries, list), "invalid image environment list")
+    seen = set()
+    for entry in entries or []:
+        require(isinstance(entry, str) and "=" in entry, "malformed image environment entry")
+        name, value = entry.split("=", 1)
+        require(
+            re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", name) is not None
+            and not any(ord(c) < 32 or ord(c) == 127 for c in value),
+            "malformed image environment entry",
+        )
+        require(name not in seen, "duplicate image environment key")
+        seen.add(name)
+        require(
+            name in ENV_KEYS or name in IMAGE_ENV_DEFAULTS and value == IMAGE_ENV_DEFAULTS[name],
+            "image contains nonallowlisted environment",
+        )
+
+
 def tool_schemas(arm):
     specs = {
         "shell": {"command": {"type": "string"}},
@@ -875,11 +897,7 @@ class DockerBackend:
         image_config = metadata.get("Config") or {}
         require(not image_config.get("Volumes"), "image-declared volumes are forbidden")
         require(not image_config.get("OnBuild"), "image has unqualified on-build directives")
-        image_env = image_config.get("Env") or []
-        require(
-            all(item.split("=", 1)[0] in ENV_KEYS for item in image_env),
-            "image contains nonallowlisted environment",
-        )
+        _validate_image_environment(image_config.get("Env"))
         resources = config["resources"]
         uid, gid = config["containerUser"].split(":")
         flags = [

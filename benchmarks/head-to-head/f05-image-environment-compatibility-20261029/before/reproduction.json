@@ -1,0 +1,28 @@
+{
+  "actualAdmission": false,
+  "actualDaemonCalls": 0,
+  "commands": [
+    [
+      "docker",
+      "image",
+      "inspect",
+      "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092"
+    ]
+  ],
+  "containerCreated": false,
+  "imageEnvironment": [
+    "PATH=/usr/local/cargo/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+    "RUSTUP_HOME=/usr/local/rustup",
+    "CARGO_HOME=/usr/local/cargo",
+    "GOTOOLCHAIN=local",
+    "GOENV=off"
+  ],
+  "imageInspectSource": {
+    "bytes": 2222,
+    "path": "benchmarks/head-to-head/f05-dependency-preparation-20261029/image-attempt-3/logs/image-inspect/stdout.txt",
+    "sha256": "4c6fa72b8b05b95a719110e0f7fa705758c224e253cf8c7cdf881218ea4f1913"
+  },
+  "reason": "image contains nonallowlisted environment",
+  "runtimeSha256": "dc585e08f24e1a20da9d9ccdafac4af3f4e10cb8451de7ca3a74c05ecc985fa0",
+  "state": "owned-daemon-mock-before-image-rejected"
+}

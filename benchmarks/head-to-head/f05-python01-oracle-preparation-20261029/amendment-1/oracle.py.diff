@@ -1,0 +1,14 @@
+--- original/oracle.py
++++ amendment-1/oracle.py
+@@ -359,7 +359,11 @@
+             elif kind == "phase-result":
+                 require(
+                     set(row) == {"seq", "kind", "suite", "id", "phase", "outcome", "exception"}
++                    and case["activePhase"] is not None
++                    and row["phase"] in phases
+                     and case["activePhase"] == row["phase"]
++                    and case["phaseIndex"] < len(phases)
++                    and row["phase"] == phases[case["phaseIndex"]]
+                     and row["outcome"] in OUTCOMES
+                     and not case["activeSubtests"],
+                     "phase-result order/schema/unfinished-subtest",

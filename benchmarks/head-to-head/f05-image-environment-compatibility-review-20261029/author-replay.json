@@ -1,0 +1,104 @@
+{
+  "actualAdmission": false,
+  "after": {
+    "actualAdmission": false,
+    "actualDaemonCalls": 0,
+    "cleanupMockExitCode": 0,
+    "createdFlagAfterProvision": true,
+    "error": null,
+    "mockCommands": [
+      [
+        "docker",
+        "image",
+        "inspect",
+        "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092"
+      ],
+      [
+        "docker",
+        "create",
+        "--name",
+        "dotrepo-f05-26badcae61524dae9658bf9d5c40a255",
+        "--pull=never",
+        "--read-only",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--network=none",
+        "--ipc=private",
+        "--cgroupns=private",
+        "--user",
+        "1000:1000",
+        "--workdir=/workspace",
+        "--memory",
+        "4294967296",
+        "--memory-swap",
+        "4294967296",
+        "--cpus",
+        "3",
+        "--pids-limit",
+        "256",
+        "--ulimit",
+        "nofile=1024:1024",
+        "--log-driver=none",
+        "--no-healthcheck",
+        "--tmpfs",
+        "/workspace:rw,exec,nosuid,nodev,size=8589934592,uid=1000,gid=1000,mode=0700",
+        "--tmpfs",
+        "/tmp:rw,exec,nosuid,nodev,size=536870912,uid=1000,gid=1000,mode=0700",
+        "--label",
+        "dotrepo.session=owned-fixture/image-environment/replay",
+        "--env",
+        "HOME=/workspace/.home",
+        "--entrypoint=/bin/sh",
+        "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+        "-c",
+        "while :; do sleep 3600; done"
+      ],
+      [
+        "docker",
+        "start",
+        "dotrepo-f05-26badcae61524dae9658bf9d5c40a255"
+      ],
+      [
+        "docker",
+        "rm",
+        "--force",
+        "--volumes",
+        "dotrepo-f05-26badcae61524dae9658bf9d5c40a255"
+      ]
+    ],
+    "qualificationsNote": "Synthetic qualification flags only unlock owned mock preflight.",
+    "result": {
+      "containerName": "dotrepo-f05-26badcae61524dae9658bf9d5c40a255",
+      "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+      "mounts": [],
+      "network": "none",
+      "readonlyRoot": true
+    },
+    "runtimeSha256": "a0f355e2438ebac9dea36a62bd263c1451a51787da840ec64c138d29dddb8473"
+  },
+  "before": {
+    "actualAdmission": false,
+    "actualDaemonCalls": 0,
+    "cleanupMockExitCode": 0,
+    "createdFlagAfterProvision": false,
+    "error": "image contains nonallowlisted environment",
+    "mockCommands": [
+      [
+        "docker",
+        "image",
+        "inspect",
+        "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092"
+      ]
+    ],
+    "qualificationsNote": "Synthetic qualification flags only unlock owned mock preflight.",
+    "result": null,
+    "runtimeSha256": "dc585e08f24e1a20da9d9ccdafac4af3f4e10cb8451de7ca3a74c05ecc985fa0"
+  },
+  "campaignAdmitted": false,
+  "costUsd": null,
+  "executionAuthorized": false,
+  "imageMetadataSha256": "4c6fa72b8b05b95a719110e0f7fa705758c224e253cf8c7cdf881218ea4f1913",
+  "oracleQualified": false,
+  "scope": "Offline owned mock replay; no daemon/provider/upstream code execution",
+  "taskOutcomeObserved": false
+}

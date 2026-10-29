@@ -1,0 +1,39 @@
+{
+  "actualAdmission": false,
+  "artifacts": {
+    "README.md": {
+      "bytes": 1962,
+      "sha256": "3d7493fa874ede4527b28e65c825dc6c3978c968fed1836f6189014ddf2e447f"
+    },
+    "reference-controls.json": {
+      "bytes": 2936,
+      "sha256": "b1dd5a6417eef8fd29e9e48fc948ec14135a1bf9e57f8abc85e17df2b844c85a"
+    },
+    "review.json": {
+      "bytes": 9128,
+      "sha256": "a413d4b2babcc808074afb7011e58725e068fced39341422d2b2c1475a16b632"
+    },
+    "verification.json": {
+      "bytes": 2662,
+      "sha256": "c98a2156e9ea666f39a7a4abe04bba7b88126b2dea40bba751b7127432d1d66d"
+    }
+  },
+  "beforeReviewFreezeSha256": "218ca8151f490e514a4a5fdd96bc15d288616f68dec69c7f2f7026c383bfd715",
+  "campaignAdmitted": false,
+  "decision": "bounded-preparation-recommended-with-P1-prerequisite-and-explicit-open-qualification-gates",
+  "executionAuthorized": false,
+  "mustFixPrerequisites": [
+    "P1"
+  ],
+  "nativeTaskAdmitted": false,
+  "newRuntimeActions": 0,
+  "oracleQualified": false,
+  "state": "independent-prospective-producer-contract-review-frozen",
+  "subject": {
+    "bindingsSha256": "c89eea0e8ca57cdcd6ecb722b0ac58015ffee162456f9764be8a8de2883048fe",
+    "contractSha256": "fb2abb271d208ca4854e4f02bb143d803a20c75eb9c1960694cb201d9b15d2a8",
+    "freezeSha256": "6d7effae1a7c9253c2bb6d3c892182a684b33b63c81146e8d734c02dc55371f7",
+    "identity": "go01-next-producer-contract-amendment-1",
+    "sourceFilesSha256": "1aa9a9b376e1249cd7f0a26e80e18b2d4eba449d2deca7cb653bb3353677e6fc"
+  }
+}

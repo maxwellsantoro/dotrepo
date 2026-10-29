@@ -244,6 +244,13 @@ post-run join. The [post-run adapter preparation](benchmarks/head-to-head/f05-go
 and its [corrected review](benchmarks/head-to-head/f05-go01-capture-adapter-review-20261029/amendment-1/README.md)
 check raw association and intended isolation while preserving those refusals;
 consistent artifact hashes alone cannot establish the required conditions.
+The [producer-witness contract](benchmarks/head-to-head/f05-go01-next-producer-plan-20261029/amendment-1/README.md)
+and [independent review](benchmarks/head-to-head/f05-go01-next-producer-plan-review-20261029/amendment-1/README.md)
+define bounded source/configuration/tree observations for that join while retaining
+unclosed launch, setup and effective-context evidence. The
+[image-environment correction](benchmarks/head-to-head/f05-image-environment-compatibility-20261029/README.md)
+admits the common image's exact inherited safe Go defaults without widening caller
+overrides; mocked provisioning controls do not qualify a real task environment.
 Source enumeration and capture controls do not establish
 successful execution or close C1. The
 [Python-03 source assessment](benchmarks/head-to-head/f05-python03-oracle-preparation-20261029/README.md)
@@ -257,6 +264,11 @@ supports a prospective union of root and backend assertion suites, preserving th
 unresolved maintainer default and treating print-only format diagnostics
 separately. Native collection, dependency setup and an execution oracle remain
 open; static candidate counts are not observed test coverage. The
+[phase-scorer preparation](benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/amendment-1/README.md)
+retains the original null-phase false acceptance and corrects it with explicit
+phase-start requirements. Its portable input verification separates historical
+Git bytes from observed working-tree snapshots. Synthetic coverage cannot close
+the missing native collection, dependency and trusted observer/capture joins. The
 [CI-evidence pilot](benchmarks/ci-evidence/pilot-20261029/README.md) retains
 workflow/job observations without promoting them to independent execution or
 consumer applicability.

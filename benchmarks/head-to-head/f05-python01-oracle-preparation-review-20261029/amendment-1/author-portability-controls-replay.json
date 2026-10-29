@@ -1,0 +1,156 @@
+{
+  "actualAdmission": false,
+  "allPassed": true,
+  "cases": [
+    {
+      "name": "relocated-derivation-exact",
+      "sha256": "e141c87f452f021a3a9e7ced5c3bb1b2efc8691a06d925cde0cebdabddf09339"
+    },
+    {
+      "name": "relocated-without-repository-or-archive",
+      "result": {
+        "actualAdmission": false,
+        "allPassed": true,
+        "artifacts": 61,
+        "fullArchiveAudit": {
+          "performed": false,
+          "reason": "no --archive supplied; current external archive not audited"
+        },
+        "historicalGitRecheckPerformed": false,
+        "observedWorkingTreeSnapshots": [
+          {
+            "attributedToBase": false,
+            "path": "ROADMAP.md",
+            "sha256": "2a9450e1ea830faec182c719c151ffc765c5fb1d7ffd03ff66052305a26f6463"
+          },
+          {
+            "attributedToBase": false,
+            "path": "benchmarks/head-to-head/bench/agent_runtime.py",
+            "sha256": "a0f355e2438ebac9dea36a62bd263c1451a51787da840ec64c138d29dddb8473"
+          }
+        ],
+        "originalParentArtifactAudit": {
+          "artifacts": 41,
+          "performed": true
+        },
+        "retainedHistoricalInputs": 12
+      }
+    },
+    {
+      "name": "mutated-current-ROADMAP-and-runtime-with-historical-Git",
+      "result": {
+        "actualAdmission": false,
+        "allPassed": true,
+        "artifacts": 61,
+        "fullArchiveAudit": {
+          "performed": false,
+          "reason": "no --archive supplied; current external archive not audited"
+        },
+        "historicalGitRecheckPerformed": true,
+        "observedWorkingTreeSnapshots": [
+          {
+            "attributedToBase": false,
+            "path": "ROADMAP.md",
+            "sha256": "2a9450e1ea830faec182c719c151ffc765c5fb1d7ffd03ff66052305a26f6463"
+          },
+          {
+            "attributedToBase": false,
+            "path": "benchmarks/head-to-head/bench/agent_runtime.py",
+            "sha256": "a0f355e2438ebac9dea36a62bd263c1451a51787da840ec64c138d29dddb8473"
+          }
+        ],
+        "originalParentArtifactAudit": {
+          "performed": false,
+          "reason": "original freeze retained; current parent files not requested"
+        },
+        "retainedHistoricalInputs": 12
+      }
+    },
+    {
+      "name": "discover-Git-root-from-owned-working-tree",
+      "result": {
+        "actualAdmission": false,
+        "allPassed": true,
+        "artifacts": 61,
+        "fullArchiveAudit": {
+          "performed": false,
+          "reason": "no --archive supplied; current external archive not audited"
+        },
+        "historicalGitRecheckPerformed": true,
+        "observedWorkingTreeSnapshots": [
+          {
+            "attributedToBase": false,
+            "path": "ROADMAP.md",
+            "sha256": "2a9450e1ea830faec182c719c151ffc765c5fb1d7ffd03ff66052305a26f6463"
+          },
+          {
+            "attributedToBase": false,
+            "path": "benchmarks/head-to-head/bench/agent_runtime.py",
+            "sha256": "a0f355e2438ebac9dea36a62bd263c1451a51787da840ec64c138d29dddb8473"
+          }
+        ],
+        "originalParentArtifactAudit": {
+          "performed": false,
+          "reason": "original freeze retained; current parent files not requested"
+        },
+        "retainedHistoricalInputs": 12
+      }
+    },
+    {
+      "name": "explicit-wrong-archive-rejected",
+      "result": {
+        "rejected": true
+      }
+    },
+    {
+      "name": "explicit-exact-archive-audit",
+      "result": {
+        "actualAdmission": false,
+        "allPassed": true,
+        "artifacts": 61,
+        "fullArchiveAudit": {
+          "files": 128,
+          "performed": true,
+          "sha256": "fc70acea794785b5c6bfd06f5e0c83cb328fc5c4e05e36dab8f182fea5bd0d70",
+          "sourceCodeExecuted": false
+        },
+        "historicalGitRecheckPerformed": false,
+        "observedWorkingTreeSnapshots": [
+          {
+            "attributedToBase": false,
+            "path": "ROADMAP.md",
+            "sha256": "2a9450e1ea830faec182c719c151ffc765c5fb1d7ffd03ff66052305a26f6463"
+          },
+          {
+            "attributedToBase": false,
+            "path": "benchmarks/head-to-head/bench/agent_runtime.py",
+            "sha256": "a0f355e2438ebac9dea36a62bd263c1451a51787da840ec64c138d29dddb8473"
+          }
+        ],
+        "originalParentArtifactAudit": {
+          "performed": false,
+          "reason": "original freeze retained; current parent files not requested"
+        },
+        "retainedHistoricalInputs": 12
+      }
+    },
+    {
+      "name": "relocated-original-73-controls",
+      "result": {
+        "actualAdmission": false,
+        "allPassed": true,
+        "count": 73
+      }
+    },
+    {
+      "name": "changed-retained-inventory-rejected",
+      "result": {
+        "rejected": true
+      }
+    }
+  ],
+  "count": 8,
+  "originalRepositoryFilesWritten": false,
+  "sourceCodeExecuted": false,
+  "temporaryFreezeIsControlOnly": true
+}

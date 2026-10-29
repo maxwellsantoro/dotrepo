@@ -1,0 +1,10 @@
+{
+  "state": "source-only-authoring-history",
+  "intermediateReports": [
+    "controls.json:68ownedcontrols before explicit partial-case retention refinement",
+    "controls-phase-preservation.json:68ownedcontrols after preserving missing-call and later cases",
+    "controls-final.json:73ownedcontrols finalsubject"
+  ],
+  "noReportedFailedNativeAttempts": "No workload/native/import/setup run occurred; these are owned synthetic checks only.",
+  "refinement": "Before freeze the scorer was extended to retain missing phase/case information and later observations on otherwise readable failure traces. This does not accept incomplete coverage. No original source, gold or decision was changed."
+}

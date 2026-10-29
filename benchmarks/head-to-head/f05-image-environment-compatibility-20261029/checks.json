@@ -1,0 +1,52 @@
+{
+  "actualAdmission": false,
+  "actualDaemonCalls": 0,
+  "checks": [
+    {
+      "argv": [
+        "uv",
+        "run",
+        "pytest",
+        "scripts/tests/test_agent_runtime.py",
+        "-q"
+      ],
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "........................................................................ [ 43%]\n........................................................................ [ 86%]\n.......................                                                  [100%]\n167 passed in 1.52s\n"
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "ruff",
+        "check",
+        "--no-cache",
+        "benchmarks/head-to-head/bench/agent_runtime.py",
+        "scripts/tests/test_agent_runtime.py",
+        "benchmarks/head-to-head/f05-image-environment-compatibility-20261029"
+      ],
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "All checks passed!\n"
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "ruff",
+        "format",
+        "--check",
+        "--no-cache",
+        "benchmarks/head-to-head/bench/agent_runtime.py",
+        "scripts/tests/test_agent_runtime.py",
+        "benchmarks/head-to-head/f05-image-environment-compatibility-20261029"
+      ],
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "5 files already formatted\n"
+    }
+  ],
+  "initialFormattingObservation": "Initial focused format --check requested runtime reformat; formatter applied before final tests/checks. Initial167tests and Ruffcheck passed.",
+  "runtimeSha256": "a0f355e2438ebac9dea36a62bd263c1451a51787da840ec64c138d29dddb8473",
+  "testsSha256": "4219b659e65570fbc6a7ad54ab136bcf193f59418b036d08ed37c7237e41cdde"
+}

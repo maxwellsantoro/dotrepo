@@ -1,0 +1,29 @@
+{
+  "sources": [
+    {
+      "path": "tools/scripts/tsc/options-model.ts",
+      "container": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar",
+      "sha256": "9a4a193b3d829e012f00222af10591ececef031022ba94d174839bcd8ca43e75",
+      "bytes": 5882
+    },
+    {
+      "path": "tools/scripts/tsc/options-schema.ts",
+      "container": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar",
+      "sha256": "49deb0daf2fa85ce42f6af360e84e7f5d184e9bcb5cce54c30b62deb179e175e",
+      "bytes": 11283
+    },
+    {
+      "path": "tools/scripts/tsc/ast.json",
+      "container": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar",
+      "sha256": "e811cdb061e7e4bcefbdd982eb08babb2916f4982c3e0fca8d266fbacb2977bb",
+      "bytes": 175469
+    },
+    {
+      "path": "package/install_api.cjs",
+      "container": "/private/tmp/dotrepo-go01-dependency-download-cache-20261029-1/cache.tar::npm-cache/_cacache/content-v2/sha512/8a/2a/2b81f26bad5ec30dfed2f4007f779641e7d267e6274c0d0a14ee8e87f66e80bc655a2c03eb19302c9664f0ca491fb7d0986d6cea52b2a398a4fcd0a5a600",
+      "sha256": "89da3973a6a467f5b395adfbfeaecb2fe3226c54e17c0b7f54dda71135347328",
+      "bytes": 15235
+    }
+  ],
+  "scope": "Last bounded local import/data and normal-hook helper frontier"
+}

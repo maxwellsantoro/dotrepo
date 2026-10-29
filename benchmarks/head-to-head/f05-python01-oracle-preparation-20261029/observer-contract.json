@@ -1,0 +1,58 @@
+{
+  "allAdmissionFlagsFalse": true,
+  "backendPytestObserver": {
+    "required": "Bind plugin code/versions and native collection reports; capture logstart/logreport.when setup/call/teardown, exception class/diagnostic, wasxfail/skip/deselection, session/internal/collection errors and terminal exit. Fixture teardown failures may attach to final case and must remain noncompletion. No hidden filtering, xfail acceptance or injected fake app/SDK package."
+  },
+  "eventContract": {
+    "api": "oracle.evaluate(raw_jsonl_bytes, execution_fixture, synthetic=True). Actual synthetic=False always refuses until separate reviewed native/observer/host capture adapter exists. Full closed event keys and types are defined in oracle.py, not a public protocol.",
+    "budgetLimit": "These are scorer intake caps below existing capture ceilings, not increases to actual frozen per-session limits. Actual lower configured cap/deadline exhaustion remains incomplete; no retry/cleanup allowance invented.",
+    "caps": {
+      "cases": 10000,
+      "events": 100000,
+      "exceptionMessageBytes": 4096,
+      "observedSubtests": 10000,
+      "rawBytes": 8388608
+    },
+    "casePhaseKinds": [
+      "case-start",
+      "phase-start",
+      "phase-result",
+      "subtest-start",
+      "subtest-result",
+      "case-end"
+    ],
+    "exception": "Failure fields exact type,message,errno; AssertionError acceptance requires builtins.AssertionError in call/observed subtest only. Complete other call exceptions retain phase/type and unresolved semantic-error class; no broad exception-as-assertion policy.",
+    "frameworkKinds": [
+      "run-start",
+      "suite-start",
+      "collection",
+      "framework-error",
+      "suite-end",
+      "run-end"
+    ],
+    "order": "run-start; root suite-start/collection/case phase lifecycle/suite-end; backend counterpart; run-end. Per-case phases ordered; missing phases retained as noncompletion. Both suites must finish even after complete assertion failure; fail-fast/missing cases is noncompletion.",
+    "phaseOutcomes": [
+      "passed",
+      "assertion-failed",
+      "error",
+      "skipped",
+      "xfail",
+      "xpass"
+    ]
+  },
+  "nativeCollection": {
+    "missing": "No such native collection or executable observer exists yet. Current manifest is a clearly prefixed owned synthetic fixture only.",
+    "required": "Freeze exact interpreter/platform, pytest+plugins, dependency lock/install/cache, both import roots/cwd and source/environment before collecting all20files. Retain actual loader/pytest native IDs and parameter IDs mapped to declaration/file/bodyhash; reconcile all static declarations/cardinalities and extras/omissions before acceptance. Static157 is neither native ID set nor a forced native cardinality. No test import is authorized here."
+  },
+  "rootUnittestObserver": {
+    "phaseRule": "Report actual phases; never fabricate a call report when setup prevented it. Missing call phase remains noncompletion, while later cases/suites can still be recorded. Root cleanup must finish even when no registered cleanup executes; observer semantics must be verified against exact pinned stdlib before use.",
+    "required": "Observe native loader/result plus actual setup/call/teardown/doCleanups and class/module/import/session fixture failures. Distinguish AssertionError in test call from setup/teardown/cleanup failure. Preserve addSubTest result semantics: a caught failed subTest may coexist with normally returned method call and must still fail suite. Pair observed child start/end with unique ordinal; no dynamic-child cardinality claim. Nested subtests are explicitly unsupported in this bounded scorer and would remain unqualified."
+  },
+  "scope": "The exact2root unittest files plus18backend assertion-bearing pytest files; separate format diagnostic is not a mandatory semantic case. No Cloud manual-validation invocation, root-only/backend-only/frontend-build substitution.",
+  "setupAndEnvironment": "Python>=3.11,<3.13, exact pytest/asyncio plugin+SDK lock closure and both namespace import roots must be qualified. Bind root/backend dotenv and credential absence/sentinels; no real provider key is assumed necessary. Loopback/thread/tempfs/child interpreter capability must be preserved or honestly fail. No setup attempted.",
+  "state": "prospective-minimal-internal-observer-and-join-contract-not-implemented",
+  "trustedCaptureJoin": {
+    "missing": "Existing generic event_capture transports arbitrary raw event files but does not establish a Python native-phase observer or native-collection/dependency provenance. Supplied JSONL, JUnit/summary counts or caller eventsComplete/setupComplete/trusted=true flags cannot fill this. No new executor/tracer proposed.",
+    "required": "Use existing host-owned same-tool-call raw process/event export boundary after choosing actual phase invocation/cwd/environment. Join exact source+observer+native manifest+dependency/setup identities, same session/container/toolcall/process argv/raw receipts/budgets/time and before/after source/context/installed-state. Export raw regular bytes before returning control. Source closures must include new selected files and data additions, not only old test hashes. Posthoc scorer checks scope; agent permissions never consult gold/commands."
+  }
+}

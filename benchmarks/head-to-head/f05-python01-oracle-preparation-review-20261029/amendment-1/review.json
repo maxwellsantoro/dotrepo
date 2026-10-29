@@ -1,0 +1,66 @@
+{
+  "actualNativeTestsExecuted": false,
+  "beforeReviewFreezeSha256": "493079b480bbcb96601dab5f076859071cb3e6d4a2870c48759b97a69d61b9d0",
+  "campaignAdmitted": false,
+  "checks": {
+    "authorOriginalSyntheticControlsReplayed": 73,
+    "authorPhaseStateControlsReplayed": 45,
+    "authorPortabilityControlsReplayed": 8,
+    "beforeReviewArtifactsUnchanged": 12,
+    "exactBeforeRawFixtureMatches": 3,
+    "independentPhaseControlsPassed": 37,
+    "independentPortabilityControlsPassed": 8,
+    "oracleASTOnlyPhaseGuardChanged": true,
+    "originalArtifactsUnchanged": 41,
+    "ruffCheck": true,
+    "ruffFormatCheck": true,
+    "successorArtifactsVerified": 61
+  },
+  "costUsd": null,
+  "executionAuthorized": false,
+  "findings": [],
+  "independentEvidence": [
+    "Original two missing setup starts/null results and all-phase-starts removed/null results nowrefuse coverage/completion.",
+    "Full157source-fixture pass and complete root/backend/subTest assertion-failed outcomes remain valid synthetic candidates; invalid/out-of-order/missing/duplicate phases, fixture/import/cleanup/resource/skip/xfail and missingbackend remain unqualified.",
+    "Every independentphase case with spoofedtrusted/native/phaseCapture flags still actual-mode refuses missingjoin.",
+    "Relocatedpacket derive+verify ran with Path.read_bytes constrained to only relocatedpacket: no implicit archive/checkout reads; same e141c87f fixture, nativeIdsEstablishedfalse.",
+    "Owned changed-current ROADMAP/runtime with same immutableGit database passes12historical/2observedWT checks; no current repo files changed.",
+    "Changedretainedsnapshot, observedROADMAP falselyattributed to base, wronginventory and explicitwrong/missingarchive refuse. Explicitcorrectarchive audit128 and originalparent41 pass.",
+    "Authorportability tests ran only in ownedcopy because helper creates scratch insideitsHERE. Originalauthorpacket never written."
+  ],
+  "limits": [
+    "Independent implementation review with disclosed priorPython01source-decision/F05context, not blind workloadtrial.",
+    "Only trusted local Python synthetic data/AST/source and read-only Git object queries. No workload imports/tests, install, daemon, native/upstream, network, provider or model actions.",
+    "No runtime executor or gold/expected-command permissiongate added. Native context/source closure/performance remain unqualified.",
+    "No green baseline needed for honest noncompletion; successful synthetics do not establish actual taskcompletion, usefulness or cost savings."
+  ],
+  "nativeCollectionOccurred": false,
+  "oracleQualified": false,
+  "remainingActualJoins": [
+    "Native collection and static/dynamic ID reconciliation;157source candidates are not nativeIDs or a forcednativecount.",
+    "Exact qualified interpreter, pytest/plugins, dependency/install/cache and both importroots.",
+    "Reviewed native unittest phase/subTest/fixture/cleanup and pytest report observer.",
+    "Trusted same-call rawprocess/event/source/setup/context/budget association; arbitraryJSONL/summary/flags never substitute."
+  ],
+  "resolvedFindings": [
+    {
+      "disposition": "Exact3before rawfixtures nowreject. Valid nonnull activephase, membership, active/currentindex match required before result; all other scorer AST unchanged.",
+      "id": "F1"
+    },
+    {
+      "disposition": "Retained20sourcefiles+14inputs allow portable derivation/verification.12actualbase-matching historical rows checked optionally via Git;2observedWT snapshots explicitly not attributed to base. Externalarchive/parent checks explicit optional and reported performedfalse when omitted.",
+      "id": "F2"
+    }
+  ],
+  "sourceCodeExecuted": false,
+  "state": "independent-python01-oracle-preparation-after-review-passed",
+  "subject": {
+    "authorFreezeSha256": "994f8d9b6196252b763dbb56756dcb96b5c82b61c000164c71bbad23bdcef893",
+    "deriveSha256": "a7cd940be9c036ec0d44ed50df17f14b51787d91ebafe70e5a2427a84ddf4445",
+    "identity": "python01-oracle-preparation-amendment-1",
+    "oracleSha256": "d8c7c0772a4cd88b0490aea863cabc8fdc7e2e00293572bb403cfbc0c50f0114",
+    "planSha256": "a1326fd1b56cec4ed86940df9cd5a47b1c892abac434b7ee2fd2e6abb5d1af10",
+    "verifySha256": "bc9bb4bb51d61cd854da126b0c0c510bd9b497d56c1b0cda4053aca2a36f1a17"
+  },
+  "taskOutcomeObserved": false
+}

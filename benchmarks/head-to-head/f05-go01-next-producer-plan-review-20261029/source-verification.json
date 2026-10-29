@@ -1,0 +1,161 @@
+{
+  "campaignAdmitted": false,
+  "checked": [
+    {
+      "path": "benchmarks/head-to-head/bench/agent_runtime.py",
+      "sha256": "dc585e08f24e1a20da9d9ccdafac4af3f4e10cb8451de7ca3a74c05ecc985fa0",
+      "type": "repository-subject"
+    },
+    {
+      "path": "benchmarks/head-to-head/bench/event_capture.py",
+      "sha256": "ffe5b5e27aaca28bceae83aac15bfeb5e83963eef63a3b2f41c97833787b4a12",
+      "type": "repository-subject"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-3/amendment-1/FREEZE.json",
+      "sha256": "bad0a161c9d84d923e0431dfac39d20dcd03a0d5fe916ce19e56c96e89c8768f",
+      "type": "repository-subject"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-3/amendment-1/adapter.py",
+      "sha256": "30e3e3cecb357d5f903f42e0532c2f86a5cb16cf6714ddc9c643bcf86e5b70a4",
+      "type": "repository-subject"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-3/amendment-1/plan.json",
+      "sha256": "35e7ebee7e26f687bacc8727d9c474bc6fa83dac9887970f8f8fc01b3ad078c2",
+      "type": "repository-subject"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-3/remaining-joins.json",
+      "sha256": "963822380b332d79ec531b63b024a1f6d53d31858b5e16bb07c104438e4576ae",
+      "type": "repository-subject"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-source-oracle-decision-20261029/FREEZE.json",
+      "sha256": "22e72402f3cadf7f5ea214a546a3dcaf18b968c67da81e9e03427436c4d10ed5",
+      "type": "repository-subject"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-source-registry-result-20261029/FREEZE.json",
+      "sha256": "3a9e3bb1df382a45109dd0a38327c333188cf6faf12d6caf9ecf4bb83689cc8a",
+      "type": "repository-subject"
+    },
+    {
+      "container": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar",
+      "npmIntegrityVerified": false,
+      "path": "Herebyfile.mjs",
+      "sha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421",
+      "spanCount": 6,
+      "type": "source-reference"
+    },
+    {
+      "container": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar",
+      "npmIntegrityVerified": false,
+      "path": "tools/scripts/gen/utils.mts",
+      "sha256": "5d0c46a19d38bfc283f378a8f3498510af40d68b2994c20c41f1976e4870bd15",
+      "spanCount": 1,
+      "type": "source-reference"
+    },
+    {
+      "container": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar",
+      "npmIntegrityVerified": false,
+      "path": "package.json",
+      "sha256": "2828c1d269bd9c80d634131ec107ac69f1cfc3bf1f98d24c112c825c8acd7902",
+      "spanCount": 1,
+      "type": "source-reference"
+    },
+    {
+      "container": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar",
+      "npmIntegrityVerified": false,
+      "path": "go.work",
+      "sha256": "d6c5314b1f983eb6de36253c903ac00aa8e6fecd9512d2adba882b5701ce7d29",
+      "spanCount": 1,
+      "type": "source-reference"
+    },
+    {
+      "container": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar",
+      "npmIntegrityVerified": false,
+      "path": "tools/go.mod",
+      "sha256": "968e2374d845585e30ffb1c3b32fbf4b2924dab702cddd91ae33327609d5625b",
+      "spanCount": 1,
+      "type": "source-reference"
+    },
+    {
+      "container": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar",
+      "npmIntegrityVerified": false,
+      "path": "tsc/go.mod",
+      "sha256": "1e0963224f3096e3e8215acea83c033392c8135e7453b8a9680261baa5c18b25",
+      "spanCount": 1,
+      "type": "source-reference"
+    },
+    {
+      "container": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar",
+      "npmIntegrityVerified": false,
+      "path": "package-lock.json",
+      "sha256": "52b6c9bd0a26ef1b0fc27dfbfaa00df6a047cdddd587d07c4f6c1c3345faf5cf",
+      "spanCount": 0,
+      "type": "source-reference"
+    },
+    {
+      "container": "/private/tmp/dotrepo-go01-dependency-download-cache-20261029-1/cache.tar",
+      "npmIntegrityVerified": false,
+      "path": "go/pkg/mod/gotest.tools/gotestsum@v1.13.0/cmd/main.go",
+      "sha256": "e9dfe9a55bda5917c7a80951e6f56f0d1b55ad5a8439d51f210e56c0e8f41f49",
+      "spanCount": 4,
+      "type": "source-reference"
+    },
+    {
+      "container": "/private/tmp/dotrepo-go01-dependency-download-cache-20261029-1/cache.tar :: npm-cache/_cacache/content-v2/sha512/18/2b/c1ddaa32b3de88b8314131c4c1e3a24e47a99d32d013a2ac225bc2655a1b288759a11e2ff19fdb2cfc383b379e791a227212ddaace81bf3470b033a87510",
+      "npmIntegrityVerified": true,
+      "path": "package/dist/main.mjs",
+      "sha256": "3f370502361a75be7a50f915a123d965f6ef9c648a56bf1d5b9e3ae95c20b2f1",
+      "spanCount": 3,
+      "type": "source-reference"
+    },
+    {
+      "container": "/private/tmp/dotrepo-go01-dependency-download-cache-20261029-1/cache.tar :: npm-cache/_cacache/content-v2/sha512/b5/90/95e36bb3a2a6d773992f7ecf7eeb19196bea6087602d091ac5d675dec8ec21c3e9818d7611c975f8b68905a50ecd545d8307535b13a66fb50f57df9c2904",
+      "npmIntegrityVerified": true,
+      "path": "package/bin/hereby.js",
+      "sha256": "10004a6810ccd94b53c6415e0def30cd99b959a96e7cd779e2436349b4811a83",
+      "spanCount": 1,
+      "type": "source-reference"
+    },
+    {
+      "container": "/private/tmp/dotrepo-go01-dependency-download-cache-20261029-1/cache.tar :: npm-cache/_cacache/content-v2/sha512/b5/90/95e36bb3a2a6d773992f7ecf7eeb19196bea6087602d091ac5d675dec8ec21c3e9818d7611c975f8b68905a50ecd545d8307535b13a66fb50f57df9c2904",
+      "npmIntegrityVerified": true,
+      "path": "package/dist/cli/index.js",
+      "sha256": "d3effe31543c89079186a62d10c318d8a913543024dca88aac54318e451bca54",
+      "spanCount": 1,
+      "type": "source-reference"
+    },
+    {
+      "container": "/private/tmp/dotrepo-go01-dependency-download-cache-20261029-1/cache.tar :: npm-cache/_cacache/content-v2/sha512/b5/90/95e36bb3a2a6d773992f7ecf7eeb19196bea6087602d091ac5d675dec8ec21c3e9818d7611c975f8b68905a50ecd545d8307535b13a66fb50f57df9c2904",
+      "npmIntegrityVerified": true,
+      "path": "package/dist/cli/reexec.js",
+      "sha256": "eb0ae263dfa7f8bedc66207ee200056b128df05c831510c5c152b2ba84e684a1",
+      "spanCount": 1,
+      "type": "source-reference"
+    },
+    {
+      "container": null,
+      "npmIntegrityVerified": null,
+      "path": "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/sources/usr/local/go/src/cmd/go/internal/cfg/cfg.go",
+      "sha256": "8eb038ac6df168fe5af971cd768d99dd3c64224273072a4160dcc5f51eacae9d",
+      "spanCount": 2,
+      "type": "source-reference"
+    }
+  ],
+  "excerptComparison": "Line endings and terminal newline normalized; content and declared line spans checked.",
+  "executionAuthorized": false,
+  "newNativeDaemonNetworkProviderActions": 0,
+  "oracleQualified": false,
+  "planSha256": "0f84cfe0d90985e5e5fe235b880a9c4d4cc23c8081ee3f25d17f1cf99b5e9192",
+  "repositorySubjects": 8,
+  "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+  "sourceReferences": 13,
+  "sourceSpans": 23,
+  "sourcesSha256": "6398b89ba8ba043fd2875acfa11130662dc55517428eaef1fc9b69f992c34472",
+  "state": "independent-local-source-binding-verification-passed",
+  "subjectFreezeSha256": "961c3135dd3fc7751774fce9822f9afd4e72f6103001eafdaac2143e5a7915e1"
+}

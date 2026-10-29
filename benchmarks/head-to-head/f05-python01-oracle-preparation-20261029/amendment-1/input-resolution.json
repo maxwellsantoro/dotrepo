@@ -1,0 +1,156 @@
+{
+  "baseCommit": "5d31296dce2d692c34d05dd2bfcd637e8a7e74ce",
+  "observedWorkingTreeNote": "ROADMAP2a9450 and runtimea0f355 both differ from5d Git bytes; retained as actual observed working-tree snapshots, never attributed to that base. Ordinary verification does not require current files to remain unchanged.",
+  "rows": [
+    {
+      "bytes": 10336,
+      "gitBlob": "605f917e11d8802a2116496553ab489fe988ae1e",
+      "gitCommit": "5d31296dce2d692c34d05dd2bfcd637e8a7e74ce",
+      "path": "AGENTS.md",
+      "resolution": "retained-snapshot-and-matching-git-base",
+      "role": "Repository contracts",
+      "sha256": "ac777fb15c3f3de96538d0449acb2aea0d0a61f5364a99c87db6e2be1dff633d",
+      "snapshot": "bound-inputs/AGENTS.md"
+    },
+    {
+      "baseFileSha256": "629928162aa5775775800eb042684e43b1e4323c7997a536f2402f54f66350d1",
+      "bytes": 31768,
+      "currentTreeWasDirty": true,
+      "observedAtBaseHead": "5d31296dce2d692c34d05dd2bfcd637e8a7e74ce",
+      "path": "ROADMAP.md",
+      "resolution": "retained-observed-working-tree-snapshot-not-git-base",
+      "role": "C1 completion/error oracle/no-green-baseline authority at observed base",
+      "sha256": "2a9450e1ea830faec182c719c151ffc765c5fb1d7ffd03ff66052305a26f6463",
+      "snapshot": "bound-inputs/ROADMAP.md"
+    },
+    {
+      "bytes": 11755,
+      "gitBlob": "18a9b7a9f12dbf52f8b2d95a1eca47014ec6315f",
+      "gitCommit": "5d31296dce2d692c34d05dd2bfcd637e8a7e74ce",
+      "path": "benchmarks/head-to-head/experiments/applicability-2026-10-29/f05.md",
+      "resolution": "retained-snapshot-and-matching-git-base",
+      "role": "Full experiment/task accounting and independent post-run scorer contract",
+      "sha256": "d9d5dc153b9cc91a21ac048c210e33b99f3fd09a34305d5a9869c56e630f0b2b",
+      "snapshot": "bound-inputs/benchmarks/head-to-head/experiments/applicability-2026-10-29/f05.md"
+    },
+    {
+      "bytes": 1031,
+      "gitBlob": "0d8c8da86730a5332182c1927638b184e5c634ca",
+      "gitCommit": "5d31296dce2d692c34d05dd2bfcd637e8a7e74ce",
+      "path": "benchmarks/head-to-head/f05-python01-oracle-decision-20261029/FREEZE.json",
+      "resolution": "retained-snapshot-and-matching-git-base",
+      "role": "Accepted prospective source-union decision owner",
+      "sha256": "944f76c7eec2978b07023521e4998f39652031e606792e598cbb51785242fa2a",
+      "snapshot": "bound-inputs/benchmarks/head-to-head/f05-python01-oracle-decision-20261029/FREEZE.json"
+    },
+    {
+      "bytes": 9323,
+      "gitBlob": "52882dd1d930ba8b4ddb457f52a6ba69c7439f83",
+      "gitCommit": "5d31296dce2d692c34d05dd2bfcd637e8a7e74ce",
+      "path": "benchmarks/head-to-head/f05-python01-oracle-decision-20261029/decision.json",
+      "resolution": "retained-snapshot-and-matching-git-base",
+      "role": "Source-supported semantic union and unresolved environment/collection",
+      "sha256": "b9ff7b34a7d881d8a2c1130585b3fa6727ae0407face8d2f480428a280d9239f",
+      "snapshot": "bound-inputs/benchmarks/head-to-head/f05-python01-oracle-decision-20261029/decision.json"
+    },
+    {
+      "bytes": 8063,
+      "gitBlob": "0c70865954961401de0e029153646cfddbc3cf22",
+      "gitCommit": "5d31296dce2d692c34d05dd2bfcd637e8a7e74ce",
+      "path": "benchmarks/head-to-head/f05-python01-oracle-decision-20261029/static-test-inventory.json",
+      "resolution": "retained-snapshot-and-matching-git-base",
+      "role": "Static20files28root110backend/129expanded candidates; not native IDs",
+      "sha256": "9043b7bf969b82da21b30d606e64727fe1d469ea15846604a23c50dc8abecb60",
+      "snapshot": "bound-inputs/benchmarks/head-to-head/f05-python01-oracle-decision-20261029/static-test-inventory.json"
+    },
+    {
+      "bytes": 5000,
+      "gitBlob": "6cf8ece08c02ff27fed6ef0cadf545f1ef89dbdb",
+      "gitCommit": "5d31296dce2d692c34d05dd2bfcd637e8a7e74ce",
+      "path": "benchmarks/head-to-head/f05-python01-oracle-decision-20261029/source-bindings.json",
+      "resolution": "retained-snapshot-and-matching-git-base",
+      "role": "Exact original source setup/import/diagnostic owners",
+      "sha256": "6ae2bc9a41fc9b41cb827dcb0ce97c0f5571fb991aba288bf329357f279dc364",
+      "snapshot": "bound-inputs/benchmarks/head-to-head/f05-python01-oracle-decision-20261029/source-bindings.json"
+    },
+    {
+      "bytes": 447,
+      "gitBlob": "a6a87d5f75ba9f02d75f48d28eb7d18fca82ac89",
+      "gitCommit": "5d31296dce2d692c34d05dd2bfcd637e8a7e74ce",
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/requests/python-01.md",
+      "resolution": "retained-snapshot-and-matching-git-base",
+      "role": "Unchanged task request",
+      "sha256": "0d4f17d1fd158230bf1b47d975fa94899c3eb50d922b94cddda62be122ee8466",
+      "snapshot": "bound-inputs/benchmarks/head-to-head/f05-agent-tasks-20261029/requests/python-01.md"
+    },
+    {
+      "bytes": 779,
+      "gitBlob": "db90a2a512a261eebda6d1813502915164565749",
+      "gitCommit": "5d31296dce2d692c34d05dd2bfcd637e8a7e74ce",
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/gold/python-01.json",
+      "resolution": "retained-snapshot-and-matching-git-base",
+      "role": "Original required-abstention gold remains unchanged",
+      "sha256": "5c36d2500082e41c5a88f50df37b55608540f9b12381a70b5dd95cf0fd784873",
+      "snapshot": "bound-inputs/benchmarks/head-to-head/f05-agent-tasks-20261029/curator/gold/python-01.json"
+    },
+    {
+      "bytes": 1388,
+      "gitBlob": "63a152fe7481fa05ba3be2a1d288d706d8a10ee0",
+      "gitCommit": "5d31296dce2d692c34d05dd2bfcd637e8a7e74ce",
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/oracles/python-01.json",
+      "resolution": "retained-snapshot-and-matching-git-base",
+      "role": "Original unresolved oracle remains unchanged",
+      "sha256": "13593a0416f65d3e6006252c2e7e6d21c05d2837d060e3aeb952a36fbe801971",
+      "snapshot": "bound-inputs/benchmarks/head-to-head/f05-agent-tasks-20261029/curator/oracles/python-01.json"
+    },
+    {
+      "bytes": 14260,
+      "gitBlob": "7eff9fec2e32dcd7cbf061278df033dbdbfb1a9a",
+      "gitCommit": "5d31296dce2d692c34d05dd2bfcd637e8a7e74ce",
+      "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/python-01/inventory.json",
+      "resolution": "retained-snapshot-and-matching-git-base",
+      "role": "128-file source inventory",
+      "sha256": "f3b3c78e90a89434ed77bbf7dc79c9397f9c0b27dc10c5eb0a60296d5b6c89e1",
+      "snapshot": "bound-inputs/benchmarks/head-to-head/f05-qualification-next8-20261029/python-01/inventory.json"
+    },
+    {
+      "bytes": 508,
+      "gitBlob": "958480a39b6f89784153e8e62b42ca8b9db9a9ec",
+      "gitCommit": "5d31296dce2d692c34d05dd2bfcd637e8a7e74ce",
+      "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/python-01/provenance.json",
+      "resolution": "retained-snapshot-and-matching-git-base",
+      "role": "Exact source revision and full tar binding",
+      "sha256": "d640c1b1db3333892865bb4d8097cb90e1fc9c490678221c83af35a778652721",
+      "snapshot": "bound-inputs/benchmarks/head-to-head/f05-qualification-next8-20261029/python-01/provenance.json"
+    },
+    {
+      "bytes": 21684,
+      "gitBlob": "6f8072b7baafb89d064f051872a7a2f819c1df71",
+      "gitCommit": "5d31296dce2d692c34d05dd2bfcd637e8a7e74ce",
+      "path": "benchmarks/head-to-head/bench/event_capture.py",
+      "resolution": "retained-snapshot-and-matching-git-base",
+      "role": "Available reviewed raw same-shell export transport; not Python observer",
+      "sha256": "ffe5b5e27aaca28bceae83aac15bfeb5e83963eef63a3b2f41c97833787b4a12",
+      "snapshot": "bound-inputs/benchmarks/head-to-head/bench/event_capture.py"
+    },
+    {
+      "baseFileSha256": "dc585e08f24e1a20da9d9ccdafac4af3f4e10cb8451de7ca3a74c05ecc985fa0",
+      "bytes": 68158,
+      "currentTreeWasDirty": true,
+      "observedAtBaseHead": "5d31296dce2d692c34d05dd2bfcd637e8a7e74ce",
+      "path": "benchmarks/head-to-head/bench/agent_runtime.py",
+      "resolution": "retained-observed-working-tree-snapshot-not-git-base",
+      "role": "Available runtime raw/process/deadline boundary; no Python-specific qualification",
+      "sha256": "a0f355e2438ebac9dea36a62bd263c1451a51787da840ec64c138d29dddb8473",
+      "snapshot": "bound-inputs/benchmarks/head-to-head/bench/agent_runtime.py"
+    },
+    {
+      "bytes": 9175040,
+      "originalLocator": "/tmp/dotrepo-f05-qualification-next8-20261029/python-01/source.tar",
+      "resolution": "optional-explicit-full-archive",
+      "role": "Original full inert source archive",
+      "sha256": "fc70acea794785b5c6bfd06f5e0c83cb328fc5c4e05e36dab8f182fea5bd0d70"
+    }
+  ],
+  "state": "portable-retained-inputs-with-exact-original-byte-hashes"
+}

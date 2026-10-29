@@ -1,0 +1,20 @@
+{
+  "baseCommit": "5d31296dce2d692c34d05dd2bfcd637e8a7e74ce",
+  "beforeRuntimeSha256": "dc585e08f24e1a20da9d9ccdafac4af3f4e10cb8451de7ca3a74c05ecc985fa0",
+  "beforeTestsSha256": "7e1fb8f1e149bfe180c40248effecef1709a6c7da1398cb208b4445fb426c339",
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "sources": {
+    "benchmarks/head-to-head/bench/agent_runtime.py": {
+      "bytes": 68158,
+      "sha256": "a0f355e2438ebac9dea36a62bd263c1451a51787da840ec64c138d29dddb8473"
+    },
+    "benchmarks/head-to-head/f05-dependency-preparation-20261029/image-attempt-3/logs/image-inspect/stdout.txt": {
+      "bytes": 2222,
+      "sha256": "4c6fa72b8b05b95a719110e0f7fa705758c224e253cf8c7cdf881218ea4f1913"
+    },
+    "scripts/tests/test_agent_runtime.py": {
+      "bytes": 65801,
+      "sha256": "4219b659e65570fbc6a7ad54ab136bcf193f59418b036d08ed37c7237e41cdde"
+    }
+  }
+}

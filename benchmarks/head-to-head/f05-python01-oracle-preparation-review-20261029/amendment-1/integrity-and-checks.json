@@ -1,0 +1,59 @@
+{
+  "actualAdmission": false,
+  "exactBeforeRawFixtureMatches": 3,
+  "oracleASTUnchangedExceptStrengthenedPhaseResultGuard": true,
+  "ruffChecks": [
+    {
+      "argv": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-sync",
+        "ruff",
+        "check",
+        "--no-cache",
+        "/tmp/dotrepo-f05-python01-oracle-preparation-review-20261029/amendment-1/challenge.py",
+        "/tmp/dotrepo-f05-python01-oracle-preparation-review-20261029/amendment-1/portability_challenge.py"
+      ],
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "All checks passed!\n"
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-sync",
+        "ruff",
+        "format",
+        "--check",
+        "--no-cache",
+        "/tmp/dotrepo-f05-python01-oracle-preparation-review-20261029/amendment-1/challenge.py",
+        "/tmp/dotrepo-f05-python01-oracle-preparation-review-20261029/amendment-1/portability_challenge.py"
+      ],
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "2 files already formatted\n"
+    }
+  ],
+  "sourceCodeExecuted": false,
+  "state": "independent-successor-integrity-and-source-delta-verified",
+  "verified": [
+    {
+      "artifacts": 41,
+      "path": "/tmp/dotrepo-f05-python01-oracle-preparation-20261029/FREEZE.json",
+      "sha256": "83d915e7c465d0291fe72d3178826bd91b26d18c299823273d2e0cc11ca98e9f"
+    },
+    {
+      "artifacts": 61,
+      "path": "/tmp/dotrepo-f05-python01-oracle-preparation-20261029/amendment-1/FREEZE.json",
+      "sha256": "994f8d9b6196252b763dbb56756dcb96b5c82b61c000164c71bbad23bdcef893"
+    },
+    {
+      "artifacts": 12,
+      "path": "/tmp/dotrepo-f05-python01-oracle-preparation-review-20261029/FREEZE.json",
+      "sha256": "493079b480bbcb96601dab5f076859071cb3e6d4a2870c48759b97a69d61b9d0"
+    }
+  ]
+}

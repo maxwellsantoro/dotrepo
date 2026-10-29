@@ -1,0 +1,1035 @@
+{
+  "actualAdmission": false,
+  "cases": [
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": true,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "complete-assertion-outcome",
+      "frameworkErrors": [],
+      "name": "complete-full157-source-fixture-pass",
+      "observedCaseCount": 157,
+      "reason": "complete full semantic-union assertion outcome",
+      "testsPassed": true
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": true,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "complete-assertion-outcome",
+      "frameworkErrors": [],
+      "name": "complete-root-assertion-failure-still-runs-backend",
+      "observedCaseCount": 157,
+      "reason": "complete full semantic-union assertion outcome",
+      "testsPassed": false
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": true,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "complete-assertion-outcome",
+      "frameworkErrors": [],
+      "name": "complete-backend-assertion-failure",
+      "observedCaseCount": 157,
+      "reason": "complete full semantic-union assertion outcome",
+      "testsPassed": false
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": true,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "complete-assertion-outcome",
+      "frameworkErrors": [],
+      "name": "complete-both-suite-assertion-failures",
+      "observedCaseCount": 157,
+      "reason": "complete full semantic-union assertion outcome",
+      "testsPassed": false
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": true,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "complete-assertion-outcome",
+      "frameworkErrors": [],
+      "name": "observed-subtest-pass",
+      "observedCaseCount": 157,
+      "reason": "complete full semantic-union assertion outcome",
+      "testsPassed": true
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": true,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "complete-assertion-outcome",
+      "frameworkErrors": [],
+      "name": "subtest-failure-parent-call-returns-normally",
+      "observedCaseCount": 157,
+      "reason": "complete full semantic-union assertion outcome",
+      "testsPassed": false
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "unfinished-subtest",
+      "observedCaseCount": 0,
+      "reason": "phase-result order/schema/unfinished-subtest",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [
+        {
+          "errorClass": "semantic-call-exception-unresolved",
+          "exception": {
+            "errno": null,
+            "message": "owned child",
+            "type": "builtins.ValueError"
+          },
+          "id": "owned-synthetic::tests/test_local_star_count_fetch.py::FetchStarCountTests.test_fetcher_is_standalone_stdlib_only_and_has_fixed_api::slot-1",
+          "ordinal": 1,
+          "outcome": "error",
+          "phase": "subtest",
+          "suite": "root-unittest"
+        }
+      ],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "noncompletion-or-unresolved",
+      "frameworkErrors": [],
+      "name": "subtest-exception-unresolved",
+      "observedCaseCount": 157,
+      "reason": "complete-call-exception-unresolved",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "noncompletion-or-unresolved",
+      "frameworkErrors": [],
+      "name": "realistic-setup-error-omits-call-but-preserves-later-cases",
+      "observedCaseCount": 157,
+      "reason": "missing phase report(s): owned-synthetic::tests/test_local_star_count_fetch.py::FetchStarCountTests.test_fetcher_is_standalone_stdlib_only_and_has_fixed_api::slot-1",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "noncompletion-or-unresolved",
+      "frameworkErrors": [],
+      "name": "assertion-plus-cleanup-error-is-incomplete",
+      "observedCaseCount": 157,
+      "reason": "incomplete-setup-teardown-or-cleanup",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "duplicate-subtest-result",
+      "observedCaseCount": 0,
+      "reason": "subtest-result schema/order",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "boolean-subtest-ordinal",
+      "observedCaseCount": 0,
+      "reason": "subtest-result schema/order",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "subtest-after-call-result",
+      "observedCaseCount": 0,
+      "reason": "subtest-result schema/order",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "noncompletion-or-unresolved",
+      "frameworkErrors": [],
+      "name": "unittest-setup-assertion-is-not-semantic-pass",
+      "observedCaseCount": 157,
+      "reason": "incomplete-setup-teardown-or-cleanup",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "noncompletion-or-unresolved",
+      "frameworkErrors": [],
+      "name": "unittest-teardown-assertion-is-not-semantic-pass",
+      "observedCaseCount": 157,
+      "reason": "incomplete-setup-teardown-or-cleanup",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "noncompletion-or-unresolved",
+      "frameworkErrors": [],
+      "name": "unittest-cleanup-assertion-is-not-semantic-pass",
+      "observedCaseCount": 157,
+      "reason": "incomplete-setup-teardown-or-cleanup",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "noncompletion-or-unresolved",
+      "frameworkErrors": [],
+      "name": "pytest-setup-error",
+      "observedCaseCount": 157,
+      "reason": "incomplete-setup-teardown-or-cleanup",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "noncompletion-or-unresolved",
+      "frameworkErrors": [],
+      "name": "pytest-teardown-error",
+      "observedCaseCount": 157,
+      "reason": "incomplete-setup-teardown-or-cleanup",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [
+        {
+          "errorClass": "semantic-call-exception-unresolved",
+          "exception": {
+            "errno": null,
+            "message": "owned synthetic diagnostic",
+            "type": "builtins.ValueError"
+          },
+          "id": "owned-synthetic::tests/test_local_star_count_fetch.py::FetchStarCountTests.test_fetcher_is_standalone_stdlib_only_and_has_fixed_api::slot-1",
+          "outcome": "error",
+          "phase": "call",
+          "suite": "root-unittest"
+        }
+      ],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "noncompletion-or-unresolved",
+      "frameworkErrors": [],
+      "name": "call-exception-builtins.ValueError",
+      "observedCaseCount": 157,
+      "reason": "complete-call-exception-unresolved",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [
+        {
+          "errorClass": "call-import-error-unresolved",
+          "exception": {
+            "errno": null,
+            "message": "owned synthetic diagnostic",
+            "type": "builtins.ModuleNotFoundError"
+          },
+          "id": "owned-synthetic::tests/test_local_star_count_fetch.py::FetchStarCountTests.test_fetcher_is_standalone_stdlib_only_and_has_fixed_api::slot-1",
+          "outcome": "error",
+          "phase": "call",
+          "suite": "root-unittest"
+        }
+      ],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "noncompletion-or-unresolved",
+      "frameworkErrors": [],
+      "name": "call-exception-builtins.ModuleNotFoundError",
+      "observedCaseCount": 157,
+      "reason": "complete-call-exception-unresolved",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [
+        {
+          "errorClass": "call-import-error-unresolved",
+          "exception": {
+            "errno": null,
+            "message": "owned synthetic diagnostic",
+            "type": "builtins.ImportError"
+          },
+          "id": "owned-synthetic::tests/test_local_star_count_fetch.py::FetchStarCountTests.test_fetcher_is_standalone_stdlib_only_and_has_fixed_api::slot-1",
+          "outcome": "error",
+          "phase": "call",
+          "suite": "root-unittest"
+        }
+      ],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "noncompletion-or-unresolved",
+      "frameworkErrors": [],
+      "name": "call-exception-builtins.ImportError",
+      "observedCaseCount": 157,
+      "reason": "complete-call-exception-unresolved",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [
+        {
+          "errorClass": "semantic-call-exception-unresolved",
+          "exception": {
+            "errno": 2,
+            "message": "owned synthetic diagnostic",
+            "type": "builtins.FileNotFoundError"
+          },
+          "id": "owned-synthetic::tests/test_local_star_count_fetch.py::FetchStarCountTests.test_fetcher_is_standalone_stdlib_only_and_has_fixed_api::slot-1",
+          "outcome": "error",
+          "phase": "call",
+          "suite": "root-unittest"
+        }
+      ],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "noncompletion-or-unresolved",
+      "frameworkErrors": [],
+      "name": "call-exception-builtins.FileNotFoundError",
+      "observedCaseCount": 157,
+      "reason": "complete-call-exception-unresolved",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [
+        {
+          "errorClass": "semantic-call-exception-unresolved",
+          "exception": {
+            "errno": 13,
+            "message": "owned synthetic diagnostic",
+            "type": "builtins.PermissionError"
+          },
+          "id": "owned-synthetic::tests/test_local_star_count_fetch.py::FetchStarCountTests.test_fetcher_is_standalone_stdlib_only_and_has_fixed_api::slot-1",
+          "outcome": "error",
+          "phase": "call",
+          "suite": "root-unittest"
+        }
+      ],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "noncompletion-or-unresolved",
+      "frameworkErrors": [],
+      "name": "call-exception-builtins.PermissionError",
+      "observedCaseCount": 157,
+      "reason": "complete-call-exception-unresolved",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [
+        {
+          "errorClass": "call-resource-or-interruption-class-unresolved",
+          "exception": {
+            "errno": null,
+            "message": "owned synthetic diagnostic",
+            "type": "builtins.MemoryError"
+          },
+          "id": "owned-synthetic::tests/test_local_star_count_fetch.py::FetchStarCountTests.test_fetcher_is_standalone_stdlib_only_and_has_fixed_api::slot-1",
+          "outcome": "error",
+          "phase": "call",
+          "suite": "root-unittest"
+        }
+      ],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "noncompletion-or-unresolved",
+      "frameworkErrors": [],
+      "name": "call-exception-builtins.MemoryError",
+      "observedCaseCount": 157,
+      "reason": "complete-call-exception-unresolved",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [
+        {
+          "errorClass": "call-resource-or-interruption-class-unresolved",
+          "exception": {
+            "errno": 28,
+            "message": "owned synthetic diagnostic",
+            "type": "builtins.OSError"
+          },
+          "id": "owned-synthetic::tests/test_local_star_count_fetch.py::FetchStarCountTests.test_fetcher_is_standalone_stdlib_only_and_has_fixed_api::slot-1",
+          "outcome": "error",
+          "phase": "call",
+          "suite": "root-unittest"
+        }
+      ],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "noncompletion-or-unresolved",
+      "frameworkErrors": [],
+      "name": "call-exception-builtins.OSError",
+      "observedCaseCount": 157,
+      "reason": "complete-call-exception-unresolved",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [
+        {
+          "errorClass": "call-resource-or-interruption-class-unresolved",
+          "exception": {
+            "errno": null,
+            "message": "owned synthetic diagnostic",
+            "type": "builtins.KeyboardInterrupt"
+          },
+          "id": "owned-synthetic::tests/test_local_star_count_fetch.py::FetchStarCountTests.test_fetcher_is_standalone_stdlib_only_and_has_fixed_api::slot-1",
+          "outcome": "error",
+          "phase": "call",
+          "suite": "root-unittest"
+        }
+      ],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "noncompletion-or-unresolved",
+      "frameworkErrors": [],
+      "name": "call-exception-builtins.KeyboardInterrupt",
+      "observedCaseCount": 157,
+      "reason": "complete-call-exception-unresolved",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "noncompletion-or-unresolved",
+      "frameworkErrors": [],
+      "name": "unadjudicated-skipped",
+      "observedCaseCount": 157,
+      "reason": "unadjudicated-skip-xfail-or-xpass",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "noncompletion-or-unresolved",
+      "frameworkErrors": [],
+      "name": "unadjudicated-xfail",
+      "observedCaseCount": 157,
+      "reason": "unadjudicated-skip-xfail-or-xpass",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "noncompletion-or-unresolved",
+      "frameworkErrors": [],
+      "name": "unadjudicated-xpass",
+      "observedCaseCount": 157,
+      "reason": "unadjudicated-skip-xfail-or-xpass",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "noncompletion-or-unresolved",
+      "frameworkErrors": [
+        {
+          "exception": {
+            "errno": null,
+            "message": "owned",
+            "type": "builtins.RuntimeError"
+          },
+          "fixture": "owned fixture",
+          "kind": "framework-error",
+          "seq": 4,
+          "suite": "root-unittest",
+          "where": "import"
+        }
+      ],
+      "name": "framework-import",
+      "observedCaseCount": 157,
+      "reason": "incomplete-framework-import",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "noncompletion-or-unresolved",
+      "frameworkErrors": [
+        {
+          "exception": {
+            "errno": null,
+            "message": "owned",
+            "type": "builtins.RuntimeError"
+          },
+          "fixture": "owned fixture",
+          "kind": "framework-error",
+          "seq": 4,
+          "suite": "root-unittest",
+          "where": "collection"
+        }
+      ],
+      "name": "framework-collection",
+      "observedCaseCount": 157,
+      "reason": "incomplete-framework-collection",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "noncompletion-or-unresolved",
+      "frameworkErrors": [
+        {
+          "exception": {
+            "errno": null,
+            "message": "owned",
+            "type": "builtins.RuntimeError"
+          },
+          "fixture": "owned fixture",
+          "kind": "framework-error",
+          "seq": 4,
+          "suite": "root-unittest",
+          "where": "setup"
+        }
+      ],
+      "name": "framework-setup",
+      "observedCaseCount": 157,
+      "reason": "incomplete-framework-setup",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "noncompletion-or-unresolved",
+      "frameworkErrors": [
+        {
+          "exception": {
+            "errno": null,
+            "message": "owned",
+            "type": "builtins.RuntimeError"
+          },
+          "fixture": "owned fixture",
+          "kind": "framework-error",
+          "seq": 4,
+          "suite": "root-unittest",
+          "where": "teardown"
+        }
+      ],
+      "name": "framework-teardown",
+      "observedCaseCount": 157,
+      "reason": "incomplete-framework-teardown",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "noncompletion-or-unresolved",
+      "frameworkErrors": [
+        {
+          "exception": {
+            "errno": null,
+            "message": "owned",
+            "type": "builtins.RuntimeError"
+          },
+          "fixture": "owned fixture",
+          "kind": "framework-error",
+          "seq": 4,
+          "suite": "root-unittest",
+          "where": "cleanup"
+        }
+      ],
+      "name": "framework-cleanup",
+      "observedCaseCount": 157,
+      "reason": "incomplete-framework-cleanup",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "noncompletion-or-unresolved",
+      "frameworkErrors": [
+        {
+          "exception": {
+            "errno": null,
+            "message": "owned",
+            "type": "builtins.RuntimeError"
+          },
+          "fixture": "owned fixture",
+          "kind": "framework-error",
+          "seq": 4,
+          "suite": "root-unittest",
+          "where": "internal"
+        }
+      ],
+      "name": "framework-internal",
+      "observedCaseCount": 157,
+      "reason": "incomplete-framework-internal",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "noncompletion-or-unresolved",
+      "frameworkErrors": [
+        {
+          "exception": {
+            "errno": null,
+            "message": "owned",
+            "type": "builtins.RuntimeError"
+          },
+          "fixture": "owned fixture",
+          "kind": "framework-error",
+          "seq": 4,
+          "suite": "root-unittest",
+          "where": "resource"
+        }
+      ],
+      "name": "framework-resource",
+      "observedCaseCount": 157,
+      "reason": "incomplete-framework-resource",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "noncompletion-or-unresolved",
+      "frameworkErrors": [
+        {
+          "exception": {
+            "errno": null,
+            "message": "owned",
+            "type": "builtins.RuntimeError"
+          },
+          "fixture": "owned fixture",
+          "kind": "framework-error",
+          "seq": 4,
+          "suite": "root-unittest",
+          "where": "interrupted"
+        }
+      ],
+      "name": "framework-interrupted",
+      "observedCaseCount": 157,
+      "reason": "incomplete-framework-interrupted",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "actual-mode-cannot-use-owned-fixture",
+      "observedCaseCount": 0,
+      "reason": "actual-native-collection-observer-and-capture-join-unavailable",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "self-authored-origin-flag-cannot-admit-actual",
+      "observedCaseCount": 0,
+      "reason": "actual-native-collection-observer-and-capture-join-unavailable",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "summary-only-is-not-events",
+      "observedCaseCount": 0,
+      "reason": "Expecting value: line 1 column 1 (char 0)",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "diagnostic-print-only-is-not-events",
+      "observedCaseCount": 0,
+      "reason": "Expecting value: line 1 column 1 (char 0)",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "noncompletion-or-unresolved",
+      "frameworkErrors": [],
+      "name": "native-collection-only-no-case-run",
+      "observedCaseCount": 0,
+      "reason": "missing case terminal coverage",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "root-only-subset",
+      "observedCaseCount": 28,
+      "reason": "run ended before both suites",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "backend-only-subset",
+      "observedCaseCount": 0,
+      "reason": "suite-start schema/order/runner",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "noncompletion-or-unresolved",
+      "frameworkErrors": [],
+      "name": "missing-case-terminal",
+      "observedCaseCount": 156,
+      "reason": "missing case terminal coverage",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "missing-cleanup",
+      "observedCaseCount": 0,
+      "reason": "case ended before all phases/subtests",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "duplicate-case-start",
+      "observedCaseCount": 0,
+      "reason": "duplicate/invalid case start",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "duplicate-phase-result",
+      "observedCaseCount": 0,
+      "reason": "phase-result order/schema/unfinished-subtest",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "wrong-order-call-before-setup",
+      "observedCaseCount": 0,
+      "reason": "phase-result order/schema/unfinished-subtest",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "event-after-case-terminal",
+      "observedCaseCount": 1,
+      "reason": "case event outside lifecycle",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "assertion-type-spoof",
+      "observedCaseCount": 0,
+      "reason": "assertion classification/type mismatch",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "exception-schema-number-message",
+      "observedCaseCount": 0,
+      "reason": "failure exception fields",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "exception-boolean-errno",
+      "observedCaseCount": 0,
+      "reason": "failure exception fields",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "changed-source-archive",
+      "observedCaseCount": 0,
+      "reason": "execution fixture/source/event binding",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "changed-environment-subject",
+      "observedCaseCount": 0,
+      "reason": "synthetic context mismatch",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "missing-source-check",
+      "observedCaseCount": 0,
+      "reason": "execution fixture schema",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "transport-timeout",
+      "observedCaseCount": 0,
+      "reason": "incomplete/error process transport",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "signal-kill",
+      "observedCaseCount": 0,
+      "reason": "incomplete/error process transport",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "output-cap",
+      "observedCaseCount": 0,
+      "reason": "incomplete/error process transport",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "boolean-exitcode",
+      "observedCaseCount": 0,
+      "reason": "incomplete/error process transport",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "suite-process-exit-mismatch",
+      "observedCaseCount": 28,
+      "reason": "suite/process exit disagreement",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "process-overlap-time",
+      "observedCaseCount": 0,
+      "reason": "suite process chronology",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": true,
+      "classification": "noncompletion-or-unresolved",
+      "frameworkErrors": [],
+      "name": "pytest-collection-exit2-not-complete",
+      "observedCaseCount": 157,
+      "reason": "incomplete-runner-exit-2",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "deselection",
+      "observedCaseCount": 0,
+      "reason": "collection mismatch/deselection",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "empty-collection",
+      "observedCaseCount": 0,
+      "reason": "collection mismatch/deselection",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "duplicate-collection-id",
+      "observedCaseCount": 0,
+      "reason": "collection identity types/duplicates",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "diagnostic-injected-as-semantic-case",
+      "observedCaseCount": 0,
+      "reason": "case outside intended scope",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "unfinished-full-run",
+      "observedCaseCount": 157,
+      "reason": "incomplete run/suite lifecycle",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "strict-json-or-framing-refusal",
+      "observedCaseCount": 0,
+      "reason": "duplicate JSON key",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "strict-json-or-framing-refusal",
+      "observedCaseCount": 0,
+      "reason": "nonfinite JSON: NaN",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "strict-json-or-framing-refusal",
+      "observedCaseCount": 0,
+      "reason": "'utf-8' codec can't decode byte 0xff in position 0: invalid start byte",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "strict-json-or-framing-refusal",
+      "observedCaseCount": 0,
+      "reason": "unterminated event stream",
+      "testsPassed": null
+    },
+    {
+      "callErrors": [],
+      "candidateOutcomeObserved": false,
+      "casePhaseReportCoverageComplete": false,
+      "classification": "incomplete-or-unqualified",
+      "frameworkErrors": [],
+      "name": "strict-json-or-framing-refusal",
+      "observedCaseCount": 0,
+      "reason": "event count/blank line",
+      "testsPassed": null
+    }
+  ],
+  "count": 73,
+  "nativeCasesEstablished": false,
+  "newSourceImportsTestsDaemonNetworkProviderActions": 0,
+  "state": "owned-synthetic-phase-controls-passed",
+  "staticCandidateFixtureCases": 157
+}

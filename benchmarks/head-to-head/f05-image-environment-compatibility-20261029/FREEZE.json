@@ -1,0 +1,59 @@
+{
+  "actualAdmission": false,
+  "actualDaemonCalls": 0,
+  "artifacts": {
+    "README.md": {
+      "bytes": 1822,
+      "sha256": "1788f06fe02673b24ce1e0982420047eb9f4c545bcb0680cf5c60a86bb820953"
+    },
+    "before/agent_runtime.py": {
+      "bytes": 67272,
+      "sha256": "dc585e08f24e1a20da9d9ccdafac4af3f4e10cb8451de7ca3a74c05ecc985fa0"
+    },
+    "before/reproduction.json": {
+      "bytes": 951,
+      "sha256": "a22d34c0f7d154213805b6f6b59f8b6f0b066ab2bbd8b7964a0a1e82863569db"
+    },
+    "before/test_agent_runtime.py": {
+      "bytes": 61440,
+      "sha256": "7e1fb8f1e149bfe180c40248effecef1709a6c7da1398cb208b4445fb426c339"
+    },
+    "checks.json": {
+      "bytes": 1694,
+      "sha256": "2e35cfef1d74fe6b7c3a7cc9105b442f56d87c9583f46ae80d460ebf1074390e"
+    },
+    "controls.py": {
+      "bytes": 3791,
+      "sha256": "39675facf3e09ed00018cd2eb9f92295cde350d116fc94fe8bc0e1ea8f5a7dc1"
+    },
+    "patch.diff": {
+      "bytes": 7405,
+      "sha256": "98a167d303a704dabb2fe18f04a2dfe874ea4fbf32be68c6caa4d8ea6461dc3e"
+    },
+    "replay.json": {
+      "bytes": 3138,
+      "sha256": "eeef7e9fef308357e43e07c4f1710923f2fdece59ee5038fe2887b66ba187c84"
+    },
+    "report.json": {
+      "bytes": 2092,
+      "sha256": "4ee8c2fc8773e6f654d3ddb21c54f18f8f5602c33a86dd6bfbf1e3bdff8e896f"
+    },
+    "source-bindings.json": {
+      "bytes": 905,
+      "sha256": "36f09c1cb27491c930952318450ac9aace82b57c7192e785b76e72a43c9561b8"
+    },
+    "verify.py": {
+      "bytes": 912,
+      "sha256": "d0b0fcfaa1c63a594b9aab3e8ebbea91710f4465ac153a12118e7d602bc55a44"
+    }
+  },
+  "baseCommit": "5d31296dce2d692c34d05dd2bfcd637e8a7e74ce",
+  "campaignAdmitted": false,
+  "costUsd": null,
+  "executionAuthorized": false,
+  "identity": "f05-image-environment-compatibility-20261029",
+  "nativeTaskAdmitted": false,
+  "oracleQualified": false,
+  "state": "focused-offline-mock-tested-awaiting-independent-review",
+  "taskOutcomeObserved": false
+}

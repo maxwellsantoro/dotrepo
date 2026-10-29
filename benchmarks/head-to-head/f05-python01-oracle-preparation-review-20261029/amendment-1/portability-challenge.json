@@ -1,0 +1,127 @@
+{
+  "actualAdmission": false,
+  "cases": [
+    {
+      "case": "relocated-no-external-reads",
+      "derivedFixtureByteExact": true,
+      "readCount": 100,
+      "verification": {
+        "actualAdmission": false,
+        "allPassed": true,
+        "artifacts": 61,
+        "fullArchiveAudit": {
+          "performed": false,
+          "reason": "no --archive supplied; current external archive not audited"
+        },
+        "historicalGitRecheckPerformed": false,
+        "observedWorkingTreeSnapshots": [
+          {
+            "attributedToBase": false,
+            "path": "ROADMAP.md",
+            "sha256": "2a9450e1ea830faec182c719c151ffc765c5fb1d7ffd03ff66052305a26f6463"
+          },
+          {
+            "attributedToBase": false,
+            "path": "benchmarks/head-to-head/bench/agent_runtime.py",
+            "sha256": "a0f355e2438ebac9dea36a62bd263c1451a51787da840ec64c138d29dddb8473"
+          }
+        ],
+        "originalParentArtifactAudit": {
+          "performed": false,
+          "reason": "original freeze retained; current parent files not requested"
+        },
+        "retainedHistoricalInputs": 12
+      }
+    },
+    {
+      "case": "changed-current-roadmap-and-runtime",
+      "verification": {
+        "actualAdmission": false,
+        "allPassed": true,
+        "artifacts": 61,
+        "fullArchiveAudit": {
+          "performed": false,
+          "reason": "no --archive supplied; current external archive not audited"
+        },
+        "historicalGitRecheckPerformed": true,
+        "observedWorkingTreeSnapshots": [
+          {
+            "attributedToBase": false,
+            "path": "ROADMAP.md",
+            "sha256": "2a9450e1ea830faec182c719c151ffc765c5fb1d7ffd03ff66052305a26f6463"
+          },
+          {
+            "attributedToBase": false,
+            "path": "benchmarks/head-to-head/bench/agent_runtime.py",
+            "sha256": "a0f355e2438ebac9dea36a62bd263c1451a51787da840ec64c138d29dddb8473"
+          }
+        ],
+        "originalParentArtifactAudit": {
+          "performed": false,
+          "reason": "original freeze retained; current parent files not requested"
+        },
+        "retainedHistoricalInputs": 12
+      }
+    },
+    {
+      "case": "changed-observed-snapshot",
+      "error": "changed retained input: /private/tmp/dotrepo-f05-python01-oracle-preparation-review-20261029/amendment-1/independent-relocation-nyro4b1w/packet/bound-inputs/ROADMAP.md",
+      "errorType": "ValueError"
+    },
+    {
+      "case": "observed-roadmap-falsely-attributed-to-base",
+      "error": "historical bytes mismatch",
+      "errorType": "ValueError"
+    },
+    {
+      "case": "explicit-wrong-archive",
+      "error": "changed retained input: /private/tmp/dotrepo-f05-python01-oracle-preparation-review-20261029/amendment-1/independent-relocation-nyro4b1w/wrong.tar",
+      "errorType": "ValueError"
+    },
+    {
+      "case": "explicit-missing-archive",
+      "error": "[Errno 2] No such file or directory: '/private/tmp/dotrepo-f05-python01-oracle-preparation-review-20261029/amendment-1/independent-relocation-nyro4b1w/missing'",
+      "errorType": "FileNotFoundError"
+    },
+    {
+      "case": "explicit-wrong-inventory",
+      "error": "changed source inventory",
+      "errorType": "AssertionError"
+    },
+    {
+      "case": "explicit-exact-archive-and-parent",
+      "verification": {
+        "actualAdmission": false,
+        "allPassed": true,
+        "artifacts": 61,
+        "fullArchiveAudit": {
+          "files": 128,
+          "performed": true,
+          "sha256": "fc70acea794785b5c6bfd06f5e0c83cb328fc5c4e05e36dab8f182fea5bd0d70",
+          "sourceCodeExecuted": false
+        },
+        "historicalGitRecheckPerformed": false,
+        "observedWorkingTreeSnapshots": [
+          {
+            "attributedToBase": false,
+            "path": "ROADMAP.md",
+            "sha256": "2a9450e1ea830faec182c719c151ffc765c5fb1d7ffd03ff66052305a26f6463"
+          },
+          {
+            "attributedToBase": false,
+            "path": "benchmarks/head-to-head/bench/agent_runtime.py",
+            "sha256": "a0f355e2438ebac9dea36a62bd263c1451a51787da840ec64c138d29dddb8473"
+          }
+        ],
+        "originalParentArtifactAudit": {
+          "artifacts": 41,
+          "performed": true
+        },
+        "retainedHistoricalInputs": 12
+      }
+    }
+  ],
+  "count": 8,
+  "newNativeDaemonNetworkProviderActions": 0,
+  "state": "independent-portability-controls-passed"
+}
