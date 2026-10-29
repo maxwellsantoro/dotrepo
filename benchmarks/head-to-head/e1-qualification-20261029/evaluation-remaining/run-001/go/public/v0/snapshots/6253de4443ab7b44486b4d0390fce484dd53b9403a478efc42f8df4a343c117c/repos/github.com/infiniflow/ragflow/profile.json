@@ -1,0 +1,76 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T05:22:03.084683Z",
+    "snapshotDigest": "58df1d91f78cfee36282fd1a54ebe2aadf70b6341968d19d3ab417b5fe5c3604",
+    "staleAfter": "2026-10-30T05:22:03.084683Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "infiniflow",
+    "repo": "ragflow",
+    "source": "https://github.com/infiniflow/ragflow"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/infiniflow/ragflow/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/infiniflow/ragflow",
+    "generatedAt": "2026-10-29T05:22:04.780057Z",
+    "evidencePath": "repos/github.com/infiniflow/ragflow/evidence.md",
+    "freshnessStatus": "unknown",
+    "staleAfterDays": 30
+  },
+  "purpose": "RAGFlow is a leading open-source Retrieval-Augmented Generation (RAG) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs.",
+  "name": "README in English",
+  "homepage": "https://github.com/infiniflow/ragflow",
+  "execution": {
+    "build": "go build ./...",
+    "test": "go test ./..."
+  },
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": false,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "medium",
+    "provenance": [
+      "imported",
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "fieldEvidence": {
+    "docs.getting_started": {
+      "checkedAt": "2026-10-29T05:22:04.780057Z",
+      "confidence": "low",
+      "method": "ambiguous",
+      "reason": "Conflicting documentation declarations in README.md; abstained from docs.getting_started.",
+      "source": "README.md",
+      "state": "unresolved"
+    },
+    "docs.root": {
+      "checkedAt": "2026-10-29T05:22:04.780057Z",
+      "confidence": "low",
+      "method": "ambiguous",
+      "reason": "Conflicting documentation declarations in README.md; abstained from docs.root.",
+      "source": "README.md",
+      "state": "unresolved"
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/infiniflow/ragflow/profile.json",
+    "repository": "/v0/repos/github.com/infiniflow/ragflow/index.json",
+    "trust": "/v0/repos/github.com/infiniflow/ragflow/trust.json",
+    "queryTemplate": "/v0/repos/github.com/infiniflow/ragflow/query?path={dot_path}",
+    "indexPath": "repos/github.com/infiniflow/ragflow/"
+  }
+}

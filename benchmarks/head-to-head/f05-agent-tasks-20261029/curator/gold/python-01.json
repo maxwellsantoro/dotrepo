@@ -1,0 +1,15 @@
+{
+  "taskId": "python-01",
+  "status": "required-abstention",
+  "supportedCompleteAlternatives": [],
+  "reason": "Root scripts provide deployment/setup and build commands, but no source-declared repository-default aggregate test command or complete test prerequisite tuple joins root and backend tests. Deployment API-key requirements must not be assumed to be test requirements.",
+  "sourceLocators": [
+    "sources/github.com/666ghj/MiroFish/backend/pyproject.toml:1-56",
+    "sources/github.com/666ghj/MiroFish/README.md:98-122",
+    "sources/github.com/666ghj/MiroFish/package.json:1-21",
+    "sources/github.com/666ghj/MiroFish/tests/test_local_star_count_fetch.py:18-42"
+  ],
+  "executionObserved": false,
+  "independentReview": "pending",
+  "sourceAssessmentOnly": true
+}

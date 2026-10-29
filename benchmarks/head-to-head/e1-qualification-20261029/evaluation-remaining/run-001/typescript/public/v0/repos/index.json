@@ -1,0 +1,62 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T05:22:03.084683Z",
+    "snapshotDigest": "44ea70f9e178d7537a1317d49fb3f55ca219f442c467268c933ae494a299b42d",
+    "staleAfter": "2026-10-30T05:22:03.084683Z"
+  },
+  "repositoryCount": 3,
+  "repositories": [
+    {
+      "identity": {
+        "host": "github.com",
+        "owner": "Eugeny",
+        "repo": "tabby",
+        "source": "https://github.com/Eugeny/tabby"
+      },
+      "name": "GitHub All Releases",
+      "description": "This README is also available in: :es: Spanish · :ru: Русский · :kr: 한국어 · :cn: 简体中文 · :it: Italiano · :de: Deutsch · :jp: 日本語 · :id: Bahasa Indonesia · :brazil: Português · :poland: Polski",
+      "links": {
+        "self": "/v0/repos/github.com/Eugeny/tabby/index.json",
+        "trust": "/v0/repos/github.com/Eugeny/tabby/trust.json",
+        "profile": "/v0/repos/github.com/Eugeny/tabby/profile.json",
+        "queryTemplate": "/v0/repos/github.com/Eugeny/tabby/query?path={dot_path}",
+        "indexPath": "repos/github.com/Eugeny/tabby/"
+      }
+    },
+    {
+      "identity": {
+        "host": "github.com",
+        "owner": "agalwood",
+        "repo": "Motrix",
+        "source": "https://github.com/agalwood/Motrix"
+      },
+      "name": "Motrix",
+      "description": "A modern, full-featured download manager that stays simple to use",
+      "links": {
+        "self": "/v0/repos/github.com/agalwood/Motrix/index.json",
+        "trust": "/v0/repos/github.com/agalwood/Motrix/trust.json",
+        "profile": "/v0/repos/github.com/agalwood/Motrix/profile.json",
+        "queryTemplate": "/v0/repos/github.com/agalwood/Motrix/query?path={dot_path}",
+        "indexPath": "repos/github.com/agalwood/Motrix/"
+      }
+    },
+    {
+      "identity": {
+        "host": "github.com",
+        "owner": "pixijs",
+        "repo": "pixijs",
+        "source": "https://github.com/pixijs/pixijs"
+      },
+      "name": "npm downloads",
+      "description": "Next-Generation, Fastest HTML5 Creation Engine for the Web",
+      "links": {
+        "self": "/v0/repos/github.com/pixijs/pixijs/index.json",
+        "trust": "/v0/repos/github.com/pixijs/pixijs/trust.json",
+        "profile": "/v0/repos/github.com/pixijs/pixijs/profile.json",
+        "queryTemplate": "/v0/repos/github.com/pixijs/pixijs/query?path={dot_path}",
+        "indexPath": "repos/github.com/pixijs/pixijs/"
+      }
+    }
+  ]
+}

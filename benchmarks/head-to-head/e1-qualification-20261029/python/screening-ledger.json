@@ -1,0 +1,74 @@
+{
+  "schema": "dotrepo-e1-screening-ledger/v1",
+  "screened": [
+    {
+      "queuePosition": 0,
+      "repository": "github.com/ComposioHQ/awesome-claude-skills",
+      "revision": "be2a406907dbc61b73e6827ded415c96139d13a2",
+      "decision": "excluded",
+      "reason": "README self-describes a curated skills/plugin list, meeting the fixed list/collection exclusion; this is not based on command completeness or index coverage.",
+      "evidence": [
+        {
+          "path": "python/sources/github.com/ComposioHQ/awesome-claude-skills/README.md",
+          "startLine": 36,
+          "endLine": 40,
+          "excerpt": "A comprehensive and curated list of 1000+ production ready and practical Claude Skills and Plugins for enhancing productivity across usecases on not just Claude.ai, Claude Code, but also across coding agents like Codex, Cursor, Gemini CLI, Antigravity and more.\n\n## Give your skills real-world actions\n\nSkills tell your agent **how** to work. An MCP Gateway gives it secure access to the tools it needs.",
+          "sha256": "e693f2701840f26fb04c3058d55215f2c6575fff7f1c197ada5b64e2f7ee0c12"
+        }
+      ],
+      "reservedQueue": "Python/e1Qualification",
+      "sourceCheckedAt": "2026-10-29T05:06:18.524354+00:00",
+      "indexOrImporterConsulted": false
+    },
+    {
+      "queuePosition": 1,
+      "repository": "github.com/ultralytics/ultralytics",
+      "revision": "922563eab42b778445e55a2edbabb6974eed8e4b",
+      "decision": "enrolled",
+      "reason": "Active public non-fork Python code repository with owned physical package and test intent. Setup/command completeness did not determine eligibility.",
+      "componentPath": "ultralytics",
+      "componentSelection": "Setuptools discovery explicitly includes ultralytics and ultralytics.*. Physical ultralytics/__init__.py and package-doctest guidance establish owned package and test intent; no earlier separate package path is named.",
+      "taskIds": [
+        "e1-python-01-repository-tests",
+        "e1-python-01-component-tests"
+      ],
+      "reservedQueue": "Python/e1Qualification",
+      "sourceCheckedAt": "2026-10-29T05:06:18.524354+00:00",
+      "indexOrImporterConsulted": false
+    },
+    {
+      "queuePosition": 2,
+      "repository": "github.com/docling-project/docling",
+      "revision": "9051777f9e420fa3a37df77425b08f22d0bf5981",
+      "decision": "enrolled",
+      "reason": "Active public non-fork Python code repository with owned physical package and test intent. Setup/command completeness did not determine eligibility.",
+      "componentPath": "docling",
+      "componentSelection": "Hatch wheel/sdist declarations identify docling as the primary code package; it sorts before uv members packages/docling and packages/docling-client. Tests and maintainer test-data guidance establish test intent.",
+      "taskIds": [
+        "e1-python-02-repository-tests",
+        "e1-python-02-component-tests"
+      ],
+      "reservedQueue": "Python/e1Qualification",
+      "sourceCheckedAt": "2026-10-29T05:06:18.524354+00:00",
+      "indexOrImporterConsulted": false
+    },
+    {
+      "queuePosition": 3,
+      "repository": "github.com/keras-team/keras",
+      "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+      "decision": "enrolled",
+      "reason": "Active public non-fork Python code repository with owned physical package and test intent. Setup/command completeness did not determine eligibility.",
+      "componentPath": "keras/src",
+      "componentSelection": "Package-dir mappings identify keras/api and keras/src. API wrapper source has no separately established test intent; implementation keras/src has explicit test examples and retained test source. This avoids choosing only the easier losses example.",
+      "taskIds": [
+        "e1-python-03-repository-tests",
+        "e1-python-03-component-tests"
+      ],
+      "reservedQueue": "Python/e1Qualification",
+      "sourceCheckedAt": "2026-10-29T05:06:18.524354+00:00",
+      "indexOrImporterConsulted": false
+    }
+  ],
+  "state": "partial-cohort: Python first three source-eligible reservations enrolled",
+  "indexConsulted": false
+}

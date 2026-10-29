@@ -1,0 +1,23 @@
+{
+  "taskId": "typescript-01",
+  "state": "source-grounded draft; not launch-ready",
+  "sourceLocators": [
+    "sources/github.com/deepseek-ai/deepseek-harness/docs/development.md:9-55",
+    "sources/github.com/deepseek-ai/deepseek-harness/package.json:1-310",
+    "sources/github.com/deepseek-ai/deepseek-harness/native/system/scripts/build.ts:1-92",
+    "sources/github.com/deepseek-ai/deepseek-harness/vitest.config.ts:1-439"
+  ],
+  "criteria": [
+    "Verify exact upstream revision and intended scope.",
+    "Require retained actual test execution and result; a plausible command, compilation-only, listing-only or unrelated narrowed suite does not qualify.",
+    "Require the default root test script coverage and preserve its native-build prerequisite; invoking bare Vitest to bypass that wrapper is a separate incorrect-prerequisite action.",
+    "Record source-defined platform exclusions and unavailable runtime-dependent suites; do not convert those exclusions into a claim of all-platform success.",
+    "Classify lost prerequisites, wrong cwd/scope, accepted unsupported instruction and recovered errors independently of final completion."
+  ],
+  "pending": [
+    "Independent gold/coverage review and executable completion oracle.",
+    "Pinned environment/image, toolchain and dependency/cache state.",
+    "Test skip and platform rules with positive/negative oracle controls.",
+    "Equal tool/network permissions, enforced resource budgets and complete usage/cost receipts."
+  ]
+}

@@ -1,0 +1,231 @@
+{
+  "acceptedInstructions": 0,
+  "byScope": {
+    "component": {
+      "supported-miss": 2,
+      "unresolved-gold": 1
+    },
+    "repository": {
+      "supported-miss": 3
+    }
+  },
+  "consumerBenefitMeasured": false,
+  "evaluatedTasks": 6,
+  "executionFreezeSha256": "b195d21792a17b268b4bc7bdcef849d0d9dad844423cb01d03a4606f08c12e10",
+  "finishedAt": "2026-10-29T05:22:05.217313+00:00",
+  "fullQualificationPassed": false,
+  "modelCalls": 0,
+  "plannedTasks": 24,
+  "repositoryCount": 3,
+  "rows": [
+    {
+      "applicabilityDisposition": "supported-miss",
+      "component": null,
+      "consumerSelection": {
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ],
+        "instruction": null,
+        "provenance": null
+      },
+      "ecosystem": "go",
+      "exportExitCode": 0,
+      "goldState": "supported",
+      "id": "e1-go-01-repository-tests",
+      "importExitCode": 0,
+      "profilePath": "public/v0/repos/github.com/infiniflow/ragflow/profile.json",
+      "profileSha256": "eb0619bc7be39f2431d0d768de17f3666443f5d921c85e2647146508449e00e2",
+      "recoveredInstructions": [
+        {
+          "command": "go test ./...",
+          "context": null,
+          "origin": "scalar",
+          "structurallyComplete": false
+        }
+      ],
+      "repository": "github.com/infiniflow/ragflow",
+      "request": {
+        "scope": "repository"
+      },
+      "revision": "9a71c10b090eaca9930df186dd0f9c15ee34a2ce",
+      "scope": "repository"
+    },
+    {
+      "applicabilityDisposition": "supported-miss",
+      "component": "internal/admin",
+      "consumerSelection": {
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ],
+        "instruction": null,
+        "provenance": null
+      },
+      "ecosystem": "go",
+      "exportExitCode": 0,
+      "goldState": "supported",
+      "id": "e1-go-01-component-tests",
+      "importExitCode": 0,
+      "profilePath": "public/v0/repos/github.com/infiniflow/ragflow/profile.json",
+      "profileSha256": "eb0619bc7be39f2431d0d768de17f3666443f5d921c85e2647146508449e00e2",
+      "recoveredInstructions": [
+        {
+          "command": "go test ./...",
+          "context": null,
+          "origin": "scalar",
+          "structurallyComplete": false
+        }
+      ],
+      "repository": "github.com/infiniflow/ragflow",
+      "request": {
+        "component": "internal/admin",
+        "scope": "component"
+      },
+      "revision": "9a71c10b090eaca9930df186dd0f9c15ee34a2ce",
+      "scope": "component"
+    },
+    {
+      "applicabilityDisposition": "supported-miss",
+      "component": null,
+      "consumerSelection": {
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ],
+        "instruction": null,
+        "provenance": null
+      },
+      "ecosystem": "go",
+      "exportExitCode": 0,
+      "goldState": "supported",
+      "id": "e1-go-02-repository-tests",
+      "importExitCode": 0,
+      "profilePath": "public/v0/repos/github.com/golang/go/profile.json",
+      "profileSha256": "076fca50ffcbc805b5e85a2e5b56ab1ff3f9811b42539050b2bd56242f93113b",
+      "recoveredInstructions": [],
+      "repository": "github.com/golang/go",
+      "request": {
+        "scope": "repository"
+      },
+      "revision": "430d19f07a57ee5ed4e3b1a04b0ab54dd5a24487",
+      "scope": "repository"
+    },
+    {
+      "applicabilityDisposition": "unresolved-gold",
+      "component": "src/cmd/compile",
+      "consumerSelection": {
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ],
+        "instruction": null,
+        "provenance": null
+      },
+      "ecosystem": "go",
+      "exportExitCode": 0,
+      "goldState": "unresolved",
+      "id": "e1-go-02-component-tests",
+      "importExitCode": 0,
+      "profilePath": "public/v0/repos/github.com/golang/go/profile.json",
+      "profileSha256": "076fca50ffcbc805b5e85a2e5b56ab1ff3f9811b42539050b2bd56242f93113b",
+      "recoveredInstructions": [],
+      "repository": "github.com/golang/go",
+      "request": {
+        "component": "src/cmd/compile",
+        "scope": "component"
+      },
+      "revision": "430d19f07a57ee5ed4e3b1a04b0ab54dd5a24487",
+      "scope": "component"
+    },
+    {
+      "applicabilityDisposition": "supported-miss",
+      "component": null,
+      "consumerSelection": {
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ],
+        "instruction": null,
+        "provenance": null
+      },
+      "ecosystem": "go",
+      "exportExitCode": 0,
+      "goldState": "supported",
+      "id": "e1-go-03-repository-tests",
+      "importExitCode": 0,
+      "profilePath": "public/v0/repos/github.com/docker/compose/profile.json",
+      "profileSha256": "4527f0ba4b6cfb27c0e8c631d4549c533f5924053f07f6c787ec9c347788f298",
+      "recoveredInstructions": [
+        {
+          "command": "make test",
+          "context": null,
+          "origin": "scalar",
+          "structurallyComplete": false
+        }
+      ],
+      "repository": "github.com/docker/compose",
+      "request": {
+        "scope": "repository"
+      },
+      "revision": "343bb382d2192b88d84af49971bb5cb99bee268c",
+      "scope": "repository"
+    },
+    {
+      "applicabilityDisposition": "supported-miss",
+      "component": "pkg/compose",
+      "consumerSelection": {
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ],
+        "instruction": null,
+        "provenance": null
+      },
+      "ecosystem": "go",
+      "exportExitCode": 0,
+      "goldState": "supported",
+      "id": "e1-go-03-component-tests",
+      "importExitCode": 0,
+      "profilePath": "public/v0/repos/github.com/docker/compose/profile.json",
+      "profileSha256": "4527f0ba4b6cfb27c0e8c631d4549c533f5924053f07f6c787ec9c347788f298",
+      "recoveredInstructions": [
+        {
+          "command": "make test",
+          "context": null,
+          "origin": "scalar",
+          "structurallyComplete": false
+        }
+      ],
+      "repository": "github.com/docker/compose",
+      "request": {
+        "component": "pkg/compose",
+        "scope": "component"
+      },
+      "revision": "343bb382d2192b88d84af49971bb5cb99bee268c",
+      "scope": "component"
+    }
+  ],
+  "schema": "dotrepo-e1-slice-evaluation/v1",
+  "scoringMethod": {
+    "acceptedTuple": "Compare command, working_directory, scope, component and prerequisite list with each frozen alternative after selection. Exact tuple match supports applicable acceptance. Otherwise retain accepted-unresolved-requires-source-adjudication; unlisted or paraphrased alternatives are not automatically wrong.",
+    "candidateRecovery": "Retain raw repo.test, test_context and every test_candidates item. A structurally complete candidate has matching context.command, directory, scope, explicit prerequisite list, source and component iff component scope; this does not establish applicability or consumer acceptance.",
+    "consumerPolicy": "value-bound-contextual-instruction-v1",
+    "executionBoundary": "Only our Git inspection, import and public export binaries run. No upstream command, bootstrap, build, test, network request, model call, execution-success or consumer-benefit observation.",
+    "importFailure": "Retain failed import/export receipts and absent profiles. Missing selection against supported source gold remains a supported miss, with infrastructure failure separately visible.",
+    "limits": {
+      "exportTimeoutSeconds": 120,
+      "importTimeoutSeconds": 60,
+      "perSourceBytes": 2097152,
+      "totalSourceBytes": 10485760
+    },
+    "originalRustResults": "Reuse immutable Rust consumer observations and dispositions; do not rerun or rewrite its packet.",
+    "requiredAbstentionMissingSelection": "correct-abstention against frozen source-gold; no fallback execution is observed.",
+    "scopeAggregation": "Report all assigned remaining tasks by slice/scope and combine with the immutable six-task Rust report. Full observation coverage does not imply full source-gold resolution or a passed qualification gate.",
+    "selection": "Reference own_projects.select_profile_instruction called with identity, actual exported profile bytes, test purpose and task scope/component only; no gold command/prerequisite filtering or repairs.",
+    "sourceMaterialization": "Only frozen sources/ files are copied, byte-identically, to new temporary repository roots. This is not a full checkout and absence of unretained files limits extraction completeness.",
+    "supportedMissingSelection": "supported-miss regardless of missing record assessment or upstream fallback availability; source gold establishes an instruction exists.",
+    "timestampLimit": "CLI import uses its actual timestamp; a replay may have different record timestamps. Export timestamps are fixed to this execution freeze.",
+    "unresolvedGold": "unresolved-gold; retained in full task denominator and separate unresolved count, never scored as correct abstention or error."
+  },
+  "slice": "go",
+  "summary": {
+    "supported-miss": 5,
+    "unresolved-gold": 1
+  },
+  "upstreamCommandsExecuted": false
+}

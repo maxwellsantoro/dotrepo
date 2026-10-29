@@ -1,0 +1,20 @@
+{
+  "taskId": "go-03",
+  "status": "unresolved",
+  "supportedCompleteAlternatives": [],
+  "reason": "Root make test supports package selection but disables the Go workspace and runs generation prerequisites; api is a distinct module. Do not assume make test TEST=./api works or strip the prep chain. A source-supported complete API-module instruction and its Docker/generation requirements need independent review.",
+  "sourceLocators": [
+    "sources/github.com/hashicorp/vault/go.work:1-19",
+    "sources/github.com/hashicorp/vault/api/go.mod:1-41",
+    "sources/github.com/hashicorp/vault/api/README.md:1-9",
+    "sources/github.com/hashicorp/vault/README.md:110-127",
+    "sources/github.com/hashicorp/vault/Makefile:87-96",
+    "sources/github.com/hashicorp/vault/Makefile:178-198",
+    "sources/github.com/hashicorp/vault/api/api_test.go:1-28",
+    "sources/github.com/hashicorp/vault/api/client_test.go:1-1546",
+    "sources/github.com/hashicorp/vault/.go-version:1-1"
+  ],
+  "executionObserved": false,
+  "independentReview": "pending",
+  "sourceAssessmentOnly": true
+}

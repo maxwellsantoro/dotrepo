@@ -131,6 +131,14 @@ answer passed the old reference policy. Future refreshes use the repaired source
 boundary; a cancelled proposal is not operating rotation or publication proof.
 E1 supports explicitly declared documentation contexts as candidates; general
 nested-manifest extraction and assessed acceptance remain separate work.
+The [October 29 E1 observations](benchmarks/head-to-head/e1-qualification-20261029/evaluation-remaining/README.md)
+retain a negative qualification result and unresolved source gold at a frozen
+implementation. Those exposed cases are known workloads for later development;
+future generalization claims need fresh holdouts. The disjoint
+[F-05 source packet](benchmarks/head-to-head/f05-agent-tasks-20261029/README.md)
+and its [review addendum](benchmarks/head-to-head/f05-agent-tasks-review-20261029/README.md)
+establish source enrollment, while executable oracles, qualified environments,
+provider settings/budgets and a complete campaign freeze still gate C2.
 An external participant is not a prerequisite for E1 qualification or F-05. C3
 preparation is independent; both useful C2 results and C3 acceptance evidence are
 required before G1 expansion. A complete negative C2 report closes its measurement

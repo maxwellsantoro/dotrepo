@@ -1,0 +1,70 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T05:05:17.00058Z",
+    "snapshotDigest": "24cdb33243b74ab13719093d3c53c642e471b2a9fda4454f3a10926157fba671",
+    "staleAfter": "2026-10-30T05:05:17.00058Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "storytold",
+    "repo": "photocraft",
+    "source": "https://github.com/storytold/photocraft"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/storytold/photocraft/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/storytold/photocraft",
+    "generatedAt": "2026-10-29T05:05:20.079815Z",
+    "evidencePath": "repos/github.com/storytold/photocraft/evidence.md",
+    "freshnessStatus": "unknown",
+    "staleAfterDays": 30
+  },
+  "purpose": "Image editing; an open-source, clean-room reimplementation of Adobe Photoshop, rebuilt in pure Rust.",
+  "name": "ArtCraft",
+  "homepage": "https://github.com/storytold/photocraft",
+  "execution": {
+    "build": "cargo build --workspace",
+    "test": "cargo test --workspace"
+  },
+  "docs": {
+    "root": "book/"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": false,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "medium",
+    "provenance": [
+      "imported",
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "fieldEvidence": {
+    "docs.root": {
+      "checkedAt": "2026-10-29T05:05:20.079815Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "Explicit documentation link at README.md:327: Developer, architecture, automation, format, and security documentation is maintained in the [PhotoCraft documentation book](book/).",
+      "source": "README.md",
+      "state": "present"
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/storytold/photocraft/profile.json",
+    "repository": "/v0/repos/github.com/storytold/photocraft/index.json",
+    "trust": "/v0/repos/github.com/storytold/photocraft/trust.json",
+    "queryTemplate": "/v0/repos/github.com/storytold/photocraft/query?path={dot_path}",
+    "indexPath": "repos/github.com/storytold/photocraft/"
+  }
+}

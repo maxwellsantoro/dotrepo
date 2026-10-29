@@ -1,0 +1,126 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T05:22:03.084683Z",
+    "snapshotDigest": "58df1d91f78cfee36282fd1a54ebe2aadf70b6341968d19d3ab417b5fe5c3604",
+    "staleAfter": "2026-10-30T05:22:03.084683Z"
+  },
+  "profiles": [
+    {
+      "completeness": {
+        "conflictCount": 0,
+        "hasBuild": true,
+        "hasDocs": false,
+        "hasLicense": false,
+        "hasOwnershipSignal": false,
+        "hasSecurityContact": true,
+        "hasTest": true
+      },
+      "homepage": "https://github.com/docker/compose",
+      "identity": {
+        "host": "github.com",
+        "owner": "docker",
+        "repo": "compose",
+        "source": "https://github.com/docker/compose"
+      },
+      "languages": [],
+      "license": null,
+      "links": {
+        "indexPath": "repos/github.com/docker/compose/",
+        "queryTemplate": "/v0/repos/github.com/docker/compose/query?path={dot_path}",
+        "repository": "/v0/repos/github.com/docker/compose/index.json",
+        "self": "/v0/repos/github.com/docker/compose/profile.json",
+        "trust": "/v0/repos/github.com/docker/compose/trust.json"
+      },
+      "name": "Docker Compose",
+      "purpose": "Docker Compose is a tool for running multi-container applications on Docker defined using the Compose file format.",
+      "topics": [],
+      "trust": {
+        "confidence": "medium",
+        "provenance": [
+          "imported"
+        ],
+        "selectedStatus": "imported",
+        "selectionReason": "only_matching_record"
+      }
+    },
+    {
+      "completeness": {
+        "conflictCount": 0,
+        "hasBuild": false,
+        "hasDocs": false,
+        "hasLicense": false,
+        "hasOwnershipSignal": false,
+        "hasSecurityContact": false,
+        "hasTest": false
+      },
+      "homepage": "https://github.com/golang/go",
+      "identity": {
+        "host": "github.com",
+        "owner": "golang",
+        "repo": "go",
+        "source": "https://github.com/golang/go"
+      },
+      "languages": [],
+      "license": null,
+      "links": {
+        "indexPath": "repos/github.com/golang/go/",
+        "queryTemplate": "/v0/repos/github.com/golang/go/query?path={dot_path}",
+        "repository": "/v0/repos/github.com/golang/go/index.json",
+        "self": "/v0/repos/github.com/golang/go/profile.json",
+        "trust": "/v0/repos/github.com/golang/go/trust.json"
+      },
+      "name": "The Go Programming Language",
+      "purpose": "Go is an open source programming language that makes it easy to build simple, reliable, and efficient software.",
+      "topics": [],
+      "trust": {
+        "confidence": "medium",
+        "provenance": [
+          "imported"
+        ],
+        "selectedStatus": "imported",
+        "selectionReason": "only_matching_record"
+      }
+    },
+    {
+      "completeness": {
+        "conflictCount": 0,
+        "hasBuild": true,
+        "hasDocs": false,
+        "hasLicense": false,
+        "hasOwnershipSignal": false,
+        "hasSecurityContact": false,
+        "hasTest": true
+      },
+      "homepage": "https://github.com/infiniflow/ragflow",
+      "identity": {
+        "host": "github.com",
+        "owner": "infiniflow",
+        "repo": "ragflow",
+        "source": "https://github.com/infiniflow/ragflow"
+      },
+      "languages": [],
+      "license": null,
+      "links": {
+        "indexPath": "repos/github.com/infiniflow/ragflow/",
+        "queryTemplate": "/v0/repos/github.com/infiniflow/ragflow/query?path={dot_path}",
+        "repository": "/v0/repos/github.com/infiniflow/ragflow/index.json",
+        "self": "/v0/repos/github.com/infiniflow/ragflow/profile.json",
+        "trust": "/v0/repos/github.com/infiniflow/ragflow/trust.json"
+      },
+      "name": "README in English",
+      "purpose": "RAGFlow is a leading open-source Retrieval-Augmented Generation (RAG) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs.",
+      "topics": [],
+      "trust": {
+        "confidence": "medium",
+        "provenance": [
+          "imported",
+          "inferred"
+        ],
+        "selectedStatus": "inferred",
+        "selectionReason": "only_matching_record"
+      }
+    }
+  ],
+  "repositoryCount": 3
+}

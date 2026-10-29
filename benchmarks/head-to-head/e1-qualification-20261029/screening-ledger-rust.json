@@ -1,0 +1,64 @@
+{
+  "schema": "dotrepo-e1-screening-ledger/v1",
+  "fixedRule": "../experiments/applicability-2026-10-29/screening-rules.md",
+  "screened": [
+    {
+      "reservedQueue": "Rust/e1Qualification",
+      "queuePosition": 0,
+      "repository": "github.com/zellij-org/zellij",
+      "revision": "1f3df933978e00c246553070310175c392fcfe4f",
+      "decision": "enrolled",
+      "reason": "Public active non-fork Rust code workspace with an owned physical component and source test intent. Commands/setup completeness did not determine eligibility.",
+      "componentPath": "default-plugins/about",
+      "componentSelection": "Lexically first non-root member of root Cargo workspace: default-plugins/about. Its onboarding.rs contains unit tests, and xtask explicitly includes plugins in testing.",
+      "sourceCheckAt": "2026-10-29T05:00:38.413571+00:00",
+      "indexOrImporterConsulted": false,
+      "taskIds": [
+        "e1-rust-01-repository-tests",
+        "e1-rust-01-component-tests"
+      ],
+      "sourceProvenance": "sources.json"
+    },
+    {
+      "reservedQueue": "Rust/e1Qualification",
+      "queuePosition": 1,
+      "repository": "github.com/warpdotdev/warp",
+      "revision": "5a55a2aca77339ad75637bed650352369ee7fcb9",
+      "decision": "enrolled",
+      "reason": "Public active non-fork Rust code workspace with an owned physical component and source test intent. Commands/setup completeness did not determine eligibility.",
+      "componentPath": "app",
+      "componentSelection": "Root workspace explicitly includes app, lexically before crates/*; app/Cargo.toml declares warp library/dev test dependencies and maintainer package-test guidance applies.",
+      "sourceCheckAt": "2026-10-29T05:00:38.413571+00:00",
+      "indexOrImporterConsulted": false,
+      "taskIds": [
+        "e1-rust-02-repository-tests",
+        "e1-rust-02-component-tests"
+      ],
+      "sourceProvenance": "sources.json"
+    },
+    {
+      "reservedQueue": "Rust/e1Qualification",
+      "queuePosition": 2,
+      "repository": "github.com/storytold/photocraft",
+      "revision": "5f9b4391874aabc9deb2fcb905267613e4d93ec8",
+      "decision": "enrolled",
+      "reason": "Public active non-fork Rust code workspace with an owned physical component and source test intent. Commands/setup completeness did not determine eligibility.",
+      "componentPath": "apps/photocraft",
+      "componentSelection": "Root workspace members apps/* expands to retained immutable apps listing; apps/photocraft sorts before apps/photocraft-cli and all crates/*; app main.rs has unit tests.",
+      "sourceCheckAt": "2026-10-29T05:00:38.413571+00:00",
+      "indexOrImporterConsulted": false,
+      "taskIds": [
+        "e1-rust-03-repository-tests",
+        "e1-rust-03-component-tests"
+      ],
+      "sourceProvenance": "sources.json"
+    }
+  ],
+  "exclusions": [],
+  "remainingEcosystems": [
+    "Python",
+    "TypeScript",
+    "Go"
+  ],
+  "state": "partial: Rust first three enrolled; other ecosystems not yet screened"
+}

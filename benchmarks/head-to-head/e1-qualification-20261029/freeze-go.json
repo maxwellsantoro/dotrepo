@@ -1,0 +1,262 @@
+{
+  "schema": "dotrepo-e1-source-freeze/v1",
+  "slice": "go-6-tasks-3-repositories",
+  "frozenAt": "2026-10-29T05:16:51.743028+00:00",
+  "status": "source-gold-frozen;extraction-not-requested",
+  "selectionInputs": [
+    {
+      "path": "benchmarks/head-to-head/experiments/applicability-2026-10-29/README.md",
+      "sha256": "c606c428cb3c3d78a669b68416848cec7fe4de81c8b07aa6083850c6835a978a"
+    },
+    {
+      "path": "benchmarks/head-to-head/experiments/applicability-2026-10-29/e1.md",
+      "sha256": "9ec156e06ba21105b68f51998d04168ca14f8d5f03e3d6c0ef115f1cb2515de8"
+    },
+    {
+      "path": "benchmarks/head-to-head/experiments/applicability-2026-10-29/screening-rules.md",
+      "sha256": "d3c59940aaac5a7e86ead77814111f07a59a536affea861ca0fd60af4edce6f7"
+    },
+    {
+      "path": "benchmarks/head-to-head/experiments/applicability-2026-10-29/source-frame.json",
+      "sha256": "ea9bb8138a5e1c3eb8a5bfc698ace15d39194b080ed68492ce3e9d9c1c7666e7"
+    },
+    {
+      "path": "benchmarks/head-to-head/experiments/applicability-2026-10-29/screening-reservations.json",
+      "sha256": "cd91fb903108d426c87fba86704f7e9dc219b54314445a22eeffa618df090850"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "go/.gitattributes",
+      "sha256": "e071cf03675c56e21580ea85f22ad32ef69d591f15ce1dbaabbd1fb204825df0"
+    },
+    {
+      "path": "go/README.md",
+      "sha256": "2361d08fd4d7a3d7e27c58d798774bfeb8b8adfdb7038df83a9b412557c093e9"
+    },
+    {
+      "path": "go/gold.json",
+      "sha256": "46eaad4ff9b80ae377e872b2da0a4dd6ceca101390e3a2b0d4bc55159ca0ef9f"
+    },
+    {
+      "path": "go/receipts/github.com/docker/compose/enrollment.json",
+      "sha256": "d24b290b93f9b62a31c4a066158fac565c6c4cc17bd088c2a5fd5327e96ba7fb"
+    },
+    {
+      "path": "go/receipts/github.com/docker/compose/listing-pkg-compose.json",
+      "sha256": "603b57fd60bd34f4a5f885aa5b2d665a9d209d55803b02d53a752332da4341a6"
+    },
+    {
+      "path": "go/receipts/github.com/docker/compose/listing-pkg.json",
+      "sha256": "0413710b30432d8cd133c9813733cf97c4008ffcf0bd162364b7bdef6a015ac5"
+    },
+    {
+      "path": "go/receipts/github.com/docker/compose/repository-metadata.json",
+      "sha256": "d88e4f4f5d2776f1db855b7bc8330877d56448227b2f07aa74db137848302c5f"
+    },
+    {
+      "path": "go/receipts/github.com/golang/go/Makefile.error.json",
+      "sha256": "aaa29267724a0af530513adf5a7893b5f3ab5b77bb07396affe33d1d2f1df8ea"
+    },
+    {
+      "path": "go/receipts/github.com/golang/go/enrollment.json",
+      "sha256": "5126bb5b41028cf5855c0c932c9380667d52d8fae641a589de2ff39db59de2ac"
+    },
+    {
+      "path": "go/receipts/github.com/golang/go/go.mod.error.json",
+      "sha256": "aaa29267724a0af530513adf5a7893b5f3ab5b77bb07396affe33d1d2f1df8ea"
+    },
+    {
+      "path": "go/receipts/github.com/golang/go/listing-doc.json",
+      "sha256": "d8361419393f3c84ecdb39ccef9e41e3fa28f589c6e1e4f9bfe28f940fb206ae"
+    },
+    {
+      "path": "go/receipts/github.com/golang/go/listing-src-cmd-compile.json",
+      "sha256": "3e9941222aba7787b668410aa19aee9e7ef8ea445d1c9d5ad6d9a22374f894fa"
+    },
+    {
+      "path": "go/receipts/github.com/golang/go/repository-metadata.json",
+      "sha256": "fea05cd9c48d7fcb7b76b2650bb4f608e67362201a2fa5c1d45df2e3e9b5d823"
+    },
+    {
+      "path": "go/receipts/github.com/golang/website/enrollment-prerequisite-docs.json",
+      "sha256": "ea74fa61abbcd2bd89b2ce54e1af8d28a1c22af26f1214098040d72006255117"
+    },
+    {
+      "path": "go/receipts/github.com/infiniflow/ragflow/CONTRIBUTING.md.error.json",
+      "sha256": "aaa29267724a0af530513adf5a7893b5f3ab5b77bb07396affe33d1d2f1df8ea"
+    },
+    {
+      "path": "go/receipts/github.com/infiniflow/ragflow/Makefile.error.json",
+      "sha256": "aaa29267724a0af530513adf5a7893b5f3ab5b77bb07396affe33d1d2f1df8ea"
+    },
+    {
+      "path": "go/receipts/github.com/infiniflow/ragflow/docs/develop/contributing.mdx.error.json",
+      "sha256": "aaa29267724a0af530513adf5a7893b5f3ab5b77bb07396affe33d1d2f1df8ea"
+    },
+    {
+      "path": "go/receipts/github.com/infiniflow/ragflow/docs/develop/testing.mdx.error.json",
+      "sha256": "aaa29267724a0af530513adf5a7893b5f3ab5b77bb07396affe33d1d2f1df8ea"
+    },
+    {
+      "path": "go/receipts/github.com/infiniflow/ragflow/enrollment.json",
+      "sha256": "99a7c9229aef224eb1de3cc4dd4a3434d3d43eb9b2a4d50fb69f6984b704378c"
+    },
+    {
+      "path": "go/receipts/github.com/infiniflow/ragflow/listing-docs-develop.json",
+      "sha256": "bf6445b944b5ce383d49ffaa990a5924ad88232444d4b971db170774ef66d18d"
+    },
+    {
+      "path": "go/receipts/github.com/infiniflow/ragflow/listing-internal-admin.json",
+      "sha256": "21cf32bcda7499647edb2bd4a88a228d3bcf8e3608303abda0a80d8b5282de49"
+    },
+    {
+      "path": "go/receipts/github.com/infiniflow/ragflow/repository-metadata.json",
+      "sha256": "781369360928fe91bc1a9b5107e061cf839f461456aee4ba5e7478fcd03bad54"
+    },
+    {
+      "path": "go/screening-ledger.json",
+      "sha256": "7793b68192a848463af77b9df81f8f72199284ddab9ede1846e04f17d997b52b"
+    },
+    {
+      "path": "go/sources/github.com/docker/compose/AGENTS.md",
+      "sha256": "2c3364f66a30ea054f3ec3610fa4be37a98e5fc3dbd9654b44f26805c75a236e"
+    },
+    {
+      "path": "go/sources/github.com/docker/compose/BUILDING.md",
+      "sha256": "68694744374f7b98c6dd284aea8d657267a6f6383e9bd5580f725a3e723a7cd4"
+    },
+    {
+      "path": "go/sources/github.com/docker/compose/CONTRIBUTING.md",
+      "sha256": "9dfbe9648dbc5a31677bda175a0eb5e577b32d499d6dfaf2fbb09b4a5bd63d1a"
+    },
+    {
+      "path": "go/sources/github.com/docker/compose/Dockerfile",
+      "sha256": "5f35a0fce55a645e2497f861aba1414f237d532493b4f2bda138c609b28ef44f"
+    },
+    {
+      "path": "go/sources/github.com/docker/compose/Makefile",
+      "sha256": "927856982fcd81c94dd843743000b8a828baf5af02503d64f7a4c4cc477ac4cc"
+    },
+    {
+      "path": "go/sources/github.com/docker/compose/README.md",
+      "sha256": "02d853bbccd7d847c65eaea8c07bb14135b3f7904a48abf5898de90d5c75cb8e"
+    },
+    {
+      "path": "go/sources/github.com/docker/compose/docker-bake.hcl",
+      "sha256": "d8e460f357e8913b41a81458d2c3280f5494368c2f20eaca7ebcb1bdeaeebce5"
+    },
+    {
+      "path": "go/sources/github.com/docker/compose/go.mod",
+      "sha256": "add1d3fc58082dc40ea0ebcc3d2c80b1f4bf99a5452aab2026e8997b511cfb09"
+    },
+    {
+      "path": "go/sources/github.com/docker/compose/pkg/api/api.go",
+      "sha256": "317a2470d843493b2c1ed17c7b8140ab35203f5415c224df3a2154b3f3c6603a"
+    },
+    {
+      "path": "go/sources/github.com/docker/compose/pkg/compose/apiSocket_test.go",
+      "sha256": "59f26ee95d04a855a27047089929d4cfd77cf52b68f547e3fdb38b139dc1b501"
+    },
+    {
+      "path": "go/sources/github.com/docker/compose/relay/README.md",
+      "sha256": "e405fceee8f08bc24d7c9a05cef1d7af9b7f5ab9f3d559fedada46d69f2513d0"
+    },
+    {
+      "path": "go/sources/github.com/docker/compose/relay/go.mod",
+      "sha256": "d19203608de73a4b66a822559f9a8460d07a29b2b92c2f4e7665d5ddda9595f9"
+    },
+    {
+      "path": "go/sources/github.com/golang/go/CONTRIBUTING.md",
+      "sha256": "1244fcb5fbb7f0629bc134e99a90c18e63097a66d034acee0f18eabdd4fb32d9"
+    },
+    {
+      "path": "go/sources/github.com/golang/go/README.md",
+      "sha256": "8247b7c5de1e74854aac1a08aa5894444d1d33b4045c70d5cc3367ad0e25c3f3"
+    },
+    {
+      "path": "go/sources/github.com/golang/go/doc/README.md",
+      "sha256": "c1bf000e7a873b3afed329c5b9f9c07f7692b1d7fb2bfca2d7600cec8b1d1407"
+    },
+    {
+      "path": "go/sources/github.com/golang/go/src/README.vendor",
+      "sha256": "609edcc5e89225798babf6672c3097d950824487756a04725d3c3e9aeaae5edc"
+    },
+    {
+      "path": "go/sources/github.com/golang/go/src/all.bash",
+      "sha256": "bbb4df362ad3c52b39e4be6ad82be5c476d360d27faed7d7695e703d7988607e"
+    },
+    {
+      "path": "go/sources/github.com/golang/go/src/cmd/compile/README.md",
+      "sha256": "019dfb6331c2cac982b9d6695cf59f59b7164e841f69fac200bacf50724d3b2c"
+    },
+    {
+      "path": "go/sources/github.com/golang/go/src/cmd/go.mod",
+      "sha256": "4ecc040748718e9b44cb0a3458149280d46d5b751329fd732761363161f8f59c"
+    },
+    {
+      "path": "go/sources/github.com/golang/go/src/go.mod",
+      "sha256": "7963a76869b68d61117808d4bc74f6d5869d49eb576960a85bc6c27c267a7d7f"
+    },
+    {
+      "path": "go/sources/github.com/golang/go/src/make.bash",
+      "sha256": "d0da612ae94f9d92d8c0302070eaaa1eb2e2a32709aa567f21737c1f7d01c1ea"
+    },
+    {
+      "path": "go/sources/github.com/golang/go/src/run.bash",
+      "sha256": "a62f852277fa572067fd0cf1ef4c045474129312f9a4ff589700ff2e156439db"
+    },
+    {
+      "path": "go/sources/github.com/golang/website/_content/doc/contribute.html",
+      "sha256": "0d36ad35675a6c0256db43154619a60b6609661061713a5930767a40db1388fd"
+    },
+    {
+      "path": "go/sources/github.com/golang/website/_content/doc/install/source.html",
+      "sha256": "351bf756f31073cc2ccf7f1ee0eb076572dbc6090b729debce59db3b39a861b7"
+    },
+    {
+      "path": "go/sources/github.com/infiniflow/ragflow/AGENTS.md",
+      "sha256": "ca9570c71572f9d0fa7e5a3b1f963456fa9bef8df5a0910e8cce884cb1b24dc1"
+    },
+    {
+      "path": "go/sources/github.com/infiniflow/ragflow/README.md",
+      "sha256": "665333bd40c1f7e32d8ee76d1fafdc574973ecdbc69ccd8ada35af1e3546fde0"
+    },
+    {
+      "path": "go/sources/github.com/infiniflow/ragflow/build.sh",
+      "sha256": "ed84e588f484d4756c05f4ded5c02e164750c6c99cc60173a8d58b7088090b6f"
+    },
+    {
+      "path": "go/sources/github.com/infiniflow/ragflow/docs/develop/contributing.md",
+      "sha256": "096013d638358bac219bb0bf4b8886ada18cb3358626ae1f723211744a852b7b"
+    },
+    {
+      "path": "go/sources/github.com/infiniflow/ragflow/go.mod",
+      "sha256": "2ccf720125223a7acfd3a2f45873b5a0aad5ffd5dd0d8ac877579ab0ac2aa5a2"
+    },
+    {
+      "path": "go/sources/github.com/infiniflow/ragflow/internal/admin/default_admin_password_test.go",
+      "sha256": "c2401faeafb3fc302ea84e205f554863195e0bdf37de78bca315e712c40633f8"
+    },
+    {
+      "path": "go/sources/github.com/infiniflow/ragflow/internal/development.md",
+      "sha256": "8431e8199ff5255b90942800b4f6db826b44883576ada3da807df66507514670"
+    },
+    {
+      "path": "go/sources/github.com/infiniflow/ragflow/tools/scripts/download_dev_deps.py",
+      "sha256": "8d98f21c143c2550ddfa896c888015141b491bd1d37e15839dbe17ac1ee138c6"
+    },
+    {
+      "path": "go/sources.json",
+      "sha256": "0d74faeaf22efbff3c0cc75da6ef403f1d7ea2906ebbd5c418627bdfe06d2fef"
+    }
+  ],
+  "taskCount": 6,
+  "repositoryCount": 3,
+  "goldCounts": {
+    "supported": 5,
+    "unresolved": 1
+  },
+  "prohibitedInputsConsulted": false,
+  "upstreamCodeExecuted": false
+}

@@ -1,0 +1,21 @@
+{
+  "taskId": "python-03",
+  "status": "unresolved",
+  "supportedCompleteAlternatives": [],
+  "reason": "The manifest establishes the physical owned package youtube_dl, but retained guidance describes aggregate product tests. The package path alone does not establish distinct component coverage, an equivalent component-only command, or a complete applicable tuple. Preserve this task and unresolved applicability; do not silently retarget to the previously inspected narrower youtube_dl/downloader scope.",
+  "sourceLocators": [
+    "sources/github.com/ytdl-org/youtube-dl/setup.py:113-137",
+    "sources/github.com/ytdl-org/youtube-dl/README.md:989-1019",
+    "sources/github.com/ytdl-org/youtube-dl/test/test_downloader_http.py:73-100",
+    "sources/github.com/ytdl-org/youtube-dl/test/test_downloader_external.py:74-81",
+    "sources/github.com/ytdl-org/youtube-dl/youtube_dl/downloader/__init__.py:1-73",
+    "sources/github.com/ytdl-org/youtube-dl/youtube_dl/__init__.py:1-30"
+  ],
+  "executionObserved": false,
+  "independentReview": "pending",
+  "sourceAssessmentOnly": true,
+  "provisionalNarrowerSourceObservations": {
+    "component": "youtube_dl/downloader",
+    "disposition": "Not the selected task component; retained observations must not narrow the final task or supply its completion oracle."
+  }
+}

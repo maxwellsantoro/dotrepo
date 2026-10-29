@@ -1,0 +1,19 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/golang/go"
+generated_at = "2026-10-29T05:22:04.927576Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "The Go Programming Language"
+description = "Go is an open source programming language that makes it easy to build simple, reliable, and efficient software."
+homepage = "https://github.com/golang/go"
+languages = []
+topics = []

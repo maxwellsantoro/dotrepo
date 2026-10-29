@@ -1,0 +1,245 @@
+{
+  "acceptedInstructions": 0,
+  "byScope": {
+    "component": {
+      "unresolved-gold": 3
+    },
+    "repository": {
+      "supported-miss": 2,
+      "unresolved-gold": 1
+    }
+  },
+  "consumerBenefitMeasured": false,
+  "evaluatedTasks": 6,
+  "executionFreezeSha256": "b195d21792a17b268b4bc7bdcef849d0d9dad844423cb01d03a4606f08c12e10",
+  "finishedAt": "2026-10-29T05:22:04.064703+00:00",
+  "fullQualificationPassed": false,
+  "modelCalls": 0,
+  "plannedTasks": 24,
+  "repositoryCount": 3,
+  "rows": [
+    {
+      "applicabilityDisposition": "supported-miss",
+      "component": null,
+      "consumerSelection": {
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ],
+        "instruction": null,
+        "provenance": null
+      },
+      "ecosystem": "python",
+      "exportExitCode": 0,
+      "goldState": "supported",
+      "id": "e1-python-01-repository-tests",
+      "importExitCode": 0,
+      "profilePath": "public/v0/repos/github.com/ultralytics/ultralytics/profile.json",
+      "profileSha256": "b147d533fd54673f20cfe070b03713d21800b117e7a65c41d02bb2fb41ebeb95",
+      "recoveredInstructions": [
+        {
+          "command": "pytest $xdist --cov=ultralytics/ --cov-report=xml tests/ --export-env base",
+          "context": null,
+          "origin": "scalar",
+          "structurallyComplete": false
+        }
+      ],
+      "repository": "github.com/ultralytics/ultralytics",
+      "request": {
+        "scope": "repository"
+      },
+      "revision": "922563eab42b778445e55a2edbabb6974eed8e4b",
+      "scope": "repository"
+    },
+    {
+      "applicabilityDisposition": "unresolved-gold",
+      "component": "ultralytics",
+      "consumerSelection": {
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ],
+        "instruction": null,
+        "provenance": null
+      },
+      "ecosystem": "python",
+      "exportExitCode": 0,
+      "goldState": "unresolved",
+      "id": "e1-python-01-component-tests",
+      "importExitCode": 0,
+      "profilePath": "public/v0/repos/github.com/ultralytics/ultralytics/profile.json",
+      "profileSha256": "b147d533fd54673f20cfe070b03713d21800b117e7a65c41d02bb2fb41ebeb95",
+      "recoveredInstructions": [
+        {
+          "command": "pytest $xdist --cov=ultralytics/ --cov-report=xml tests/ --export-env base",
+          "context": null,
+          "origin": "scalar",
+          "structurallyComplete": false
+        }
+      ],
+      "repository": "github.com/ultralytics/ultralytics",
+      "request": {
+        "component": "ultralytics",
+        "scope": "component"
+      },
+      "revision": "922563eab42b778445e55a2edbabb6974eed8e4b",
+      "scope": "component"
+    },
+    {
+      "applicabilityDisposition": "unresolved-gold",
+      "component": null,
+      "consumerSelection": {
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ],
+        "instruction": null,
+        "provenance": null
+      },
+      "ecosystem": "python",
+      "exportExitCode": 0,
+      "goldState": "unresolved",
+      "id": "e1-python-02-repository-tests",
+      "importExitCode": 0,
+      "profilePath": "public/v0/repos/github.com/docling-project/docling/profile.json",
+      "profileSha256": "5dfc4048f17b1303f915cda9819afde92a3165c05f04108670967e09b6bda37d",
+      "recoveredInstructions": [
+        {
+          "command": "make test",
+          "context": null,
+          "origin": "scalar",
+          "structurallyComplete": false
+        }
+      ],
+      "repository": "github.com/docling-project/docling",
+      "request": {
+        "scope": "repository"
+      },
+      "revision": "9051777f9e420fa3a37df77425b08f22d0bf5981",
+      "scope": "repository"
+    },
+    {
+      "applicabilityDisposition": "unresolved-gold",
+      "component": "docling",
+      "consumerSelection": {
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ],
+        "instruction": null,
+        "provenance": null
+      },
+      "ecosystem": "python",
+      "exportExitCode": 0,
+      "goldState": "unresolved",
+      "id": "e1-python-02-component-tests",
+      "importExitCode": 0,
+      "profilePath": "public/v0/repos/github.com/docling-project/docling/profile.json",
+      "profileSha256": "5dfc4048f17b1303f915cda9819afde92a3165c05f04108670967e09b6bda37d",
+      "recoveredInstructions": [
+        {
+          "command": "make test",
+          "context": null,
+          "origin": "scalar",
+          "structurallyComplete": false
+        }
+      ],
+      "repository": "github.com/docling-project/docling",
+      "request": {
+        "component": "docling",
+        "scope": "component"
+      },
+      "revision": "9051777f9e420fa3a37df77425b08f22d0bf5981",
+      "scope": "component"
+    },
+    {
+      "applicabilityDisposition": "supported-miss",
+      "component": null,
+      "consumerSelection": {
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ],
+        "instruction": null,
+        "provenance": null
+      },
+      "ecosystem": "python",
+      "exportExitCode": 0,
+      "goldState": "supported",
+      "id": "e1-python-03-repository-tests",
+      "importExitCode": 0,
+      "profilePath": "public/v0/repos/github.com/keras-team/keras/profile.json",
+      "profileSha256": "5c55a4c8e3c227d59e3a778f3a90b4b7a8d5229d9b69f542a5c8a4f17fedbab6",
+      "recoveredInstructions": [
+        {
+          "command": "python -m pytest",
+          "context": null,
+          "origin": "scalar",
+          "structurallyComplete": false
+        }
+      ],
+      "repository": "github.com/keras-team/keras",
+      "request": {
+        "scope": "repository"
+      },
+      "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+      "scope": "repository"
+    },
+    {
+      "applicabilityDisposition": "unresolved-gold",
+      "component": "keras/src",
+      "consumerSelection": {
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ],
+        "instruction": null,
+        "provenance": null
+      },
+      "ecosystem": "python",
+      "exportExitCode": 0,
+      "goldState": "unresolved",
+      "id": "e1-python-03-component-tests",
+      "importExitCode": 0,
+      "profilePath": "public/v0/repos/github.com/keras-team/keras/profile.json",
+      "profileSha256": "5c55a4c8e3c227d59e3a778f3a90b4b7a8d5229d9b69f542a5c8a4f17fedbab6",
+      "recoveredInstructions": [
+        {
+          "command": "python -m pytest",
+          "context": null,
+          "origin": "scalar",
+          "structurallyComplete": false
+        }
+      ],
+      "repository": "github.com/keras-team/keras",
+      "request": {
+        "component": "keras/src",
+        "scope": "component"
+      },
+      "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+      "scope": "component"
+    }
+  ],
+  "schema": "dotrepo-e1-slice-evaluation/v1",
+  "scoringMethod": {
+    "acceptedTuple": "Compare command, working_directory, scope, component and prerequisite list with each frozen alternative after selection. Exact tuple match supports applicable acceptance. Otherwise retain accepted-unresolved-requires-source-adjudication; unlisted or paraphrased alternatives are not automatically wrong.",
+    "candidateRecovery": "Retain raw repo.test, test_context and every test_candidates item. A structurally complete candidate has matching context.command, directory, scope, explicit prerequisite list, source and component iff component scope; this does not establish applicability or consumer acceptance.",
+    "consumerPolicy": "value-bound-contextual-instruction-v1",
+    "executionBoundary": "Only our Git inspection, import and public export binaries run. No upstream command, bootstrap, build, test, network request, model call, execution-success or consumer-benefit observation.",
+    "importFailure": "Retain failed import/export receipts and absent profiles. Missing selection against supported source gold remains a supported miss, with infrastructure failure separately visible.",
+    "limits": {
+      "exportTimeoutSeconds": 120,
+      "importTimeoutSeconds": 60,
+      "perSourceBytes": 2097152,
+      "totalSourceBytes": 10485760
+    },
+    "originalRustResults": "Reuse immutable Rust consumer observations and dispositions; do not rerun or rewrite its packet.",
+    "requiredAbstentionMissingSelection": "correct-abstention against frozen source-gold; no fallback execution is observed.",
+    "scopeAggregation": "Report all assigned remaining tasks by slice/scope and combine with the immutable six-task Rust report. Full observation coverage does not imply full source-gold resolution or a passed qualification gate.",
+    "selection": "Reference own_projects.select_profile_instruction called with identity, actual exported profile bytes, test purpose and task scope/component only; no gold command/prerequisite filtering or repairs.",
+    "sourceMaterialization": "Only frozen sources/ files are copied, byte-identically, to new temporary repository roots. This is not a full checkout and absence of unretained files limits extraction completeness.",
+    "supportedMissingSelection": "supported-miss regardless of missing record assessment or upstream fallback availability; source gold establishes an instruction exists.",
+    "timestampLimit": "CLI import uses its actual timestamp; a replay may have different record timestamps. Export timestamps are fixed to this execution freeze.",
+    "unresolvedGold": "unresolved-gold; retained in full task denominator and separate unresolved count, never scored as correct abstention or error."
+  },
+  "slice": "python",
+  "summary": {
+    "supported-miss": 2,
+    "unresolved-gold": 4
+  },
+  "upstreamCommandsExecuted": false
+}

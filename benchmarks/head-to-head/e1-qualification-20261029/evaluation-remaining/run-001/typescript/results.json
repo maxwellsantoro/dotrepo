@@ -1,0 +1,233 @@
+{
+  "acceptedInstructions": 0,
+  "byScope": {
+    "component": {
+      "supported-miss": 2,
+      "unresolved-gold": 1
+    },
+    "repository": {
+      "correct-abstention": 1,
+      "supported-miss": 2
+    }
+  },
+  "consumerBenefitMeasured": false,
+  "evaluatedTasks": 6,
+  "executionFreezeSha256": "b195d21792a17b268b4bc7bdcef849d0d9dad844423cb01d03a4606f08c12e10",
+  "finishedAt": "2026-10-29T05:22:04.639880+00:00",
+  "fullQualificationPassed": false,
+  "modelCalls": 0,
+  "plannedTasks": 24,
+  "repositoryCount": 3,
+  "rows": [
+    {
+      "applicabilityDisposition": "supported-miss",
+      "component": null,
+      "consumerSelection": {
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ],
+        "instruction": null,
+        "provenance": null
+      },
+      "ecosystem": "javascript-typescript",
+      "exportExitCode": 0,
+      "goldState": "supported",
+      "id": "e1-typescript-01-repository-tests",
+      "importExitCode": 0,
+      "profilePath": "public/v0/repos/github.com/pixijs/pixijs/profile.json",
+      "profileSha256": "afcc72f252871975606545c7fb02909d7df28e80c1d978b332a4d112139aafa3",
+      "recoveredInstructions": [
+        {
+          "command": "npm test",
+          "context": null,
+          "origin": "scalar",
+          "structurallyComplete": false
+        }
+      ],
+      "repository": "github.com/pixijs/pixijs",
+      "request": {
+        "scope": "repository"
+      },
+      "revision": "2e8cacbe1ed4ed0fc31d5b59b9895c811ac0e003",
+      "scope": "repository"
+    },
+    {
+      "applicabilityDisposition": "supported-miss",
+      "component": "tests/visual/scenes",
+      "consumerSelection": {
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ],
+        "instruction": null,
+        "provenance": null
+      },
+      "ecosystem": "javascript-typescript",
+      "exportExitCode": 0,
+      "goldState": "supported",
+      "id": "e1-typescript-01-component-tests",
+      "importExitCode": 0,
+      "profilePath": "public/v0/repos/github.com/pixijs/pixijs/profile.json",
+      "profileSha256": "afcc72f252871975606545c7fb02909d7df28e80c1d978b332a4d112139aafa3",
+      "recoveredInstructions": [
+        {
+          "command": "npm test",
+          "context": null,
+          "origin": "scalar",
+          "structurallyComplete": false
+        }
+      ],
+      "repository": "github.com/pixijs/pixijs",
+      "request": {
+        "component": "tests/visual/scenes",
+        "scope": "component"
+      },
+      "revision": "2e8cacbe1ed4ed0fc31d5b59b9895c811ac0e003",
+      "scope": "component"
+    },
+    {
+      "applicabilityDisposition": "supported-miss",
+      "component": null,
+      "consumerSelection": {
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ],
+        "instruction": null,
+        "provenance": null
+      },
+      "ecosystem": "javascript-typescript",
+      "exportExitCode": 0,
+      "goldState": "supported",
+      "id": "e1-typescript-02-repository-tests",
+      "importExitCode": 0,
+      "profilePath": "public/v0/repos/github.com/agalwood/Motrix/profile.json",
+      "profileSha256": "55c9383f303752dfdfc50787cea5b24c3d11705494c4478e7fa89110ddf968ef",
+      "recoveredInstructions": [
+        {
+          "command": "pnpm test",
+          "context": null,
+          "origin": "scalar",
+          "structurallyComplete": false
+        }
+      ],
+      "repository": "github.com/agalwood/Motrix",
+      "request": {
+        "scope": "repository"
+      },
+      "revision": "6aae74432187f689ffa0c8019f942ee2cb2cf91a",
+      "scope": "repository"
+    },
+    {
+      "applicabilityDisposition": "supported-miss",
+      "component": "src/core",
+      "consumerSelection": {
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ],
+        "instruction": null,
+        "provenance": null
+      },
+      "ecosystem": "javascript-typescript",
+      "exportExitCode": 0,
+      "goldState": "supported",
+      "id": "e1-typescript-02-component-tests",
+      "importExitCode": 0,
+      "profilePath": "public/v0/repos/github.com/agalwood/Motrix/profile.json",
+      "profileSha256": "55c9383f303752dfdfc50787cea5b24c3d11705494c4478e7fa89110ddf968ef",
+      "recoveredInstructions": [
+        {
+          "command": "pnpm test",
+          "context": null,
+          "origin": "scalar",
+          "structurallyComplete": false
+        }
+      ],
+      "repository": "github.com/agalwood/Motrix",
+      "request": {
+        "component": "src/core",
+        "scope": "component"
+      },
+      "revision": "6aae74432187f689ffa0c8019f942ee2cb2cf91a",
+      "scope": "component"
+    },
+    {
+      "applicabilityDisposition": "correct-abstention",
+      "component": null,
+      "consumerSelection": {
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ],
+        "instruction": null,
+        "provenance": null
+      },
+      "ecosystem": "javascript-typescript",
+      "exportExitCode": 0,
+      "goldState": "required-abstention",
+      "id": "e1-typescript-03-repository-tests",
+      "importExitCode": 0,
+      "profilePath": "public/v0/repos/github.com/Eugeny/tabby/profile.json",
+      "profileSha256": "7bec519a1ef00a8e4b7dac4ab8bcdccf4f8fe9d1a4e29d60dc510c8bb271448b",
+      "recoveredInstructions": [],
+      "repository": "github.com/Eugeny/tabby",
+      "request": {
+        "scope": "repository"
+      },
+      "revision": "467ce8ebfa467fb88cf6d154c9a5891e3d3647f0",
+      "scope": "repository"
+    },
+    {
+      "applicabilityDisposition": "unresolved-gold",
+      "component": "tabby-electron",
+      "consumerSelection": {
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ],
+        "instruction": null,
+        "provenance": null
+      },
+      "ecosystem": "javascript-typescript",
+      "exportExitCode": 0,
+      "goldState": "unresolved",
+      "id": "e1-typescript-03-component-tests",
+      "importExitCode": 0,
+      "profilePath": "public/v0/repos/github.com/Eugeny/tabby/profile.json",
+      "profileSha256": "7bec519a1ef00a8e4b7dac4ab8bcdccf4f8fe9d1a4e29d60dc510c8bb271448b",
+      "recoveredInstructions": [],
+      "repository": "github.com/Eugeny/tabby",
+      "request": {
+        "component": "tabby-electron",
+        "scope": "component"
+      },
+      "revision": "467ce8ebfa467fb88cf6d154c9a5891e3d3647f0",
+      "scope": "component"
+    }
+  ],
+  "schema": "dotrepo-e1-slice-evaluation/v1",
+  "scoringMethod": {
+    "acceptedTuple": "Compare command, working_directory, scope, component and prerequisite list with each frozen alternative after selection. Exact tuple match supports applicable acceptance. Otherwise retain accepted-unresolved-requires-source-adjudication; unlisted or paraphrased alternatives are not automatically wrong.",
+    "candidateRecovery": "Retain raw repo.test, test_context and every test_candidates item. A structurally complete candidate has matching context.command, directory, scope, explicit prerequisite list, source and component iff component scope; this does not establish applicability or consumer acceptance.",
+    "consumerPolicy": "value-bound-contextual-instruction-v1",
+    "executionBoundary": "Only our Git inspection, import and public export binaries run. No upstream command, bootstrap, build, test, network request, model call, execution-success or consumer-benefit observation.",
+    "importFailure": "Retain failed import/export receipts and absent profiles. Missing selection against supported source gold remains a supported miss, with infrastructure failure separately visible.",
+    "limits": {
+      "exportTimeoutSeconds": 120,
+      "importTimeoutSeconds": 60,
+      "perSourceBytes": 2097152,
+      "totalSourceBytes": 10485760
+    },
+    "originalRustResults": "Reuse immutable Rust consumer observations and dispositions; do not rerun or rewrite its packet.",
+    "requiredAbstentionMissingSelection": "correct-abstention against frozen source-gold; no fallback execution is observed.",
+    "scopeAggregation": "Report all assigned remaining tasks by slice/scope and combine with the immutable six-task Rust report. Full observation coverage does not imply full source-gold resolution or a passed qualification gate.",
+    "selection": "Reference own_projects.select_profile_instruction called with identity, actual exported profile bytes, test purpose and task scope/component only; no gold command/prerequisite filtering or repairs.",
+    "sourceMaterialization": "Only frozen sources/ files are copied, byte-identically, to new temporary repository roots. This is not a full checkout and absence of unretained files limits extraction completeness.",
+    "supportedMissingSelection": "supported-miss regardless of missing record assessment or upstream fallback availability; source gold establishes an instruction exists.",
+    "timestampLimit": "CLI import uses its actual timestamp; a replay may have different record timestamps. Export timestamps are fixed to this execution freeze.",
+    "unresolvedGold": "unresolved-gold; retained in full task denominator and separate unresolved count, never scored as correct abstention or error."
+  },
+  "slice": "typescript",
+  "summary": {
+    "correct-abstention": 1,
+    "supported-miss": 4,
+    "unresolved-gold": 1
+  },
+  "upstreamCommandsExecuted": false
+}

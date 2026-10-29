@@ -1,0 +1,25 @@
+{
+  "taskId": "python-03",
+  "state": "source-grounded draft; not launch-ready",
+  "sourceLocators": [
+    "sources/github.com/ytdl-org/youtube-dl/setup.py:113-137",
+    "sources/github.com/ytdl-org/youtube-dl/README.md:989-1019",
+    "sources/github.com/ytdl-org/youtube-dl/test/test_downloader_http.py:73-100",
+    "sources/github.com/ytdl-org/youtube-dl/test/test_downloader_external.py:74-81",
+    "sources/github.com/ytdl-org/youtube-dl/youtube_dl/downloader/__init__.py:1-73",
+    "sources/github.com/ytdl-org/youtube-dl/youtube_dl/__init__.py:1-30"
+  ],
+  "criteria": [
+    "Verify exact upstream revision and the selected manifest-established youtube_dl package scope.",
+    "The physical primary-package path does not by itself distinguish component from aggregate product test coverage.",
+    "Independently establish and freeze the required test coverage before launch; successful tests for only youtube_dl/downloader cannot stand in for this task.",
+    "Retain actual test execution, skips and prerequisite failures; compilation, listing and proposed commands do not qualify.",
+    "If source cannot establish distinct applicable coverage, retain unresolved/noncompletion rather than inventing an equivalent aggregate instruction."
+  ],
+  "pending": [
+    "Independent gold/coverage review and executable completion oracle.",
+    "Pinned environment/image, toolchain and dependency/cache state.",
+    "Test skip and platform rules with positive/negative oracle controls.",
+    "Equal tool/network permissions, enforced resource budgets and complete usage/cost receipts."
+  ]
+}

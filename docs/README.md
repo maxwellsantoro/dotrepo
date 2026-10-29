@@ -64,6 +64,13 @@ and independent adoption are separate evidence levels.
 - [E1 and F-05 specifications](../benchmarks/head-to-head/experiments/applicability-2026-10-29/README.md):
   disjoint development/holdouts, task applicability and a frozen autonomous agent
   comparison; prospective design, with no new measured outcome claimed
+- [E1 qualification observations](../benchmarks/head-to-head/e1-qualification-20261029/evaluation-remaining/README.md):
+  retained extraction/consumer-policy results with supported misses and unresolved
+  gold; qualification did not pass and task completion was not measured
+- [F-05 source enrollment](../benchmarks/head-to-head/f05-agent-tasks-20261029/README.md)
+  and [review](../benchmarks/head-to-head/f05-agent-tasks-review-20261029/README.md):
+  frozen source-only task roster; runtime/oracle/environment/provider launch gates
+  remain open
 - [Own-project study and later pilot](consumer-pilot.md): retained operator task
   outcomes and separate independent external-use acceptance requirements
 

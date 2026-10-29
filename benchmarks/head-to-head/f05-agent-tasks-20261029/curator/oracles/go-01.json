@@ -1,0 +1,24 @@
+{
+  "taskId": "go-01",
+  "state": "source-grounded draft; not launch-ready",
+  "sourceLocators": [
+    "sources/github.com/microsoft/TypeScript/CONTRIBUTING.md:76-115",
+    "sources/github.com/microsoft/TypeScript/go.work:1-6",
+    "sources/github.com/microsoft/TypeScript/tsc/go.mod:1-30",
+    "sources/github.com/microsoft/TypeScript/package.json:1-57",
+    "sources/github.com/microsoft/TypeScript/Herebyfile.mjs:1046-1066"
+  ],
+  "criteria": [
+    "Verify exact upstream revision and intended scope.",
+    "Require retained actual test execution and result; a plausible command, compilation-only, listing-only or unrelated narrowed suite does not qualify.",
+    "Require the source-owned default test:tsc outcome, covering compiler and language-service tests; compilation, test listing or a filtered compiler example does not suffice.",
+    "Do not require the distinct test:all benchmark/tools/API task as though it were the documented default; disclose broader optional work separately.",
+    "Classify lost prerequisites, wrong cwd/scope, accepted unsupported instruction and recovered errors independently of final completion."
+  ],
+  "pending": [
+    "Independent gold/coverage review and executable completion oracle.",
+    "Pinned environment/image, toolchain and dependency/cache state.",
+    "Test skip and platform rules with positive/negative oracle controls.",
+    "Equal tool/network permissions, enforced resource budgets and complete usage/cost receipts."
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "taskId": "typescript-01",
+  "status": "unresolved",
+  "supportedCompleteAlternatives": [],
+  "reason": "The preserved default pnpm test wrapper builds the native addon before Vitest; setup specifies Node/type stripping, Corepack pnpm, Git and typecheck. Native compiler/headers, platform-specific test selection, PowerShell and other suite prerequisites still require an environment-specific complete assessment.",
+  "sourceLocators": [
+    "sources/github.com/deepseek-ai/deepseek-harness/docs/development.md:9-55",
+    "sources/github.com/deepseek-ai/deepseek-harness/package.json:1-310",
+    "sources/github.com/deepseek-ai/deepseek-harness/native/system/scripts/build.ts:1-92",
+    "sources/github.com/deepseek-ai/deepseek-harness/vitest.config.ts:1-439"
+  ],
+  "executionObserved": false,
+  "independentReview": "pending",
+  "sourceAssessmentOnly": true
+}

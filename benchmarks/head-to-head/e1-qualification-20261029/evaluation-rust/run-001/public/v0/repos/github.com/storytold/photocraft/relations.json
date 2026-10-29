@@ -1,0 +1,47 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T05:05:17.00058Z",
+    "snapshotDigest": "24cdb33243b74ab13719093d3c53c642e471b2a9fda4454f3a10926157fba671",
+    "staleAfter": "2026-10-30T05:05:17.00058Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "storytold",
+    "repo": "photocraft",
+    "source": "https://github.com/storytold/photocraft"
+  },
+  "relationCount": 1,
+  "references": [
+    {
+      "relationship": "related",
+      "direction": "outgoing",
+      "target": "github.com/storytold/craft-fonts",
+      "notes": "Cross-link from README: craft-fonts",
+      "trust": {
+        "confidence": "low",
+        "provenance": [
+          "declared",
+          "readme"
+        ]
+      },
+      "identity": {
+        "host": "github.com",
+        "owner": "storytold",
+        "repo": "craft-fonts"
+      },
+      "error": {
+        "code": "repository_not_found",
+        "message": "repository not found in index: repos/github.com/storytold/craft-fonts/record.toml"
+      }
+    }
+  ],
+  "links": {
+    "self": "/v0/repos/github.com/storytold/photocraft/relations",
+    "repository": "/v0/repos/github.com/storytold/photocraft/index.json",
+    "trust": "/v0/repos/github.com/storytold/photocraft/trust.json",
+    "profile": "/v0/repos/github.com/storytold/photocraft/profile.json",
+    "queryTemplate": "/v0/repos/github.com/storytold/photocraft/query?path={dot_path}",
+    "indexPath": "repos/github.com/storytold/photocraft/"
+  }
+}

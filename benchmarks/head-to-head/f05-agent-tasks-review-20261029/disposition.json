@@ -1,0 +1,94 @@
+{
+  "schema": "dotrepo-f05-source-review-addendum/v1",
+  "identity": "f05-source-review-20261029-go01-platform-prerequisite",
+  "date": "2026-10-29",
+  "kind": "append-only review disposition; no campaign run or new source freeze",
+  "originalFreeze": {
+    "path": "../f05-agent-tasks-20261029/SOURCE_FREEZE.json",
+    "sha256": "fc756e0d5f8a25cddc9f19ece651b21078a68a1f601febdb8d772208c0a66d41",
+    "boundFilesPreserved": true
+  },
+  "reviewBasis": {
+    "origin": "Independent reviewer finding relayed by the delivery coordinator in this session, followed by static inspection of the retained source bytes.",
+    "dispositionAuthor": "Original source curator, Codex worker /root/e1_establishment. This addendum is not itself an independently authored review.",
+    "limitations": [
+      "The reviewer report does not establish external participant independence or absence of prior model exposure.",
+      "Static source inspection only: no upstream code, CI run result, environment setup or agent campaign was executed.",
+      "Source support does not establish prerequisite availability, portability beyond the reviewed qualification, successful execution or consumer benefit."
+    ]
+  },
+  "findings": [
+    {
+      "taskId": "go-01",
+      "originalGold": {
+        "path": "../f05-agent-tasks-20261029/curator/gold/go-01.json",
+        "sha256": "f9e861f9f091042d82626890b5bd10445226c5f30eaf3563b99f0134e7d8c071",
+        "bytes": 1619
+      },
+      "originalProvisionalStatus": "supported-source-alternative; independent review pending",
+      "originalProvisionalStatusPreserved": true,
+      "disposition": "Correction required before future campaign gold may treat this tuple as complete for an unrestricted platform.",
+      "problem": "The original prerequisites retain Git but omit the maintainer-declared Windows long-path requirement, while the tuple contains no platform restriction.",
+      "exactSource": {
+        "path": "../f05-agent-tasks-20261029/sources/github.com/microsoft/TypeScript/CONTRIBUTING.md",
+        "sha256": "b45301bb6687e1dfadc253640ee20766aa02a16d9578e92eee8c530b808d4112",
+        "bytes": 9195,
+        "repository": "github.com/microsoft/TypeScript",
+        "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+        "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/CONTRIBUTING.md#L83-L86",
+        "startLine": 83,
+        "endLine": 86,
+        "gitBlobSha": "8a405113a8e1f2725f147647b99b51fa2f0ec373"
+      },
+      "supportedRemainder": {
+        "command": "npx hereby test",
+        "workingDirectory": ".",
+        "scope": "repository-default compiler/language-service test:tsc; not broader test:all",
+        "sourceBindings": [
+          {
+            "path": "../f05-agent-tasks-20261029/sources/github.com/microsoft/TypeScript/Herebyfile.mjs",
+            "sha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421",
+            "bytes": 125368
+          }
+        ]
+      },
+      "requiredFutureCampaignCorrection": [
+        {
+          "option": "retain-conditional-prerequisite",
+          "requirement": "Preserve the source condition: on Windows, enable Git long paths. The maintainer source supplies git config --global core.longpaths true at line86. Include this conditional requirement and its evidence in the future reviewed tuple; this addendum does not execute it or authorize a global configuration change."
+        },
+        {
+          "option": "restrict-reviewed-platform",
+          "requirement": "Alternatively restrict the future reviewed instruction and campaign environment explicitly to a source-reviewed platform for which the Windows condition does not apply. Review that platform and its other prerequisites before declaring the tuple complete; do not assume unrestricted portability."
+        }
+      ],
+      "historicalInterpretation": "The original provisional classification remains in the frozen record as historical curation evidence. It cannot be cited as a completed unrestricted-platform tuple or as a passed independent qualification."
+    }
+  ],
+  "otherReviewObservation": {
+    "taskId": "typescript-02",
+    "originalGold": {
+      "path": "../f05-agent-tasks-20261029/curator/gold/typescript-02.json",
+      "sha256": "82c1ff84914b608d97df146d2905042e47f5059a069a434608be097a17307b7e",
+      "bytes": 1927
+    },
+    "disposition": "The OpenHands bin-suite instruction is source-supported as the disclosed suite-selection derivation. This observation does not establish successful execution, runtime completeness or campaign readiness."
+  },
+  "unresolvedLaunchGates": [
+    "Incorporate this platform/prerequisite correction in separately versioned, independently reviewed future campaign gold without rewriting the original source packet.",
+    "Resolve task-specific intended coverage and executable completion oracles, including primary-package versus aggregate-product applicability.",
+    "Validate positive/negative oracle controls and preserve unsuccessful or unavailable-setup outcomes.",
+    "Freeze runtime image, toolchains, dependencies, caches and symmetric tool/network permissions.",
+    "Freeze exact model/provider/inference settings, numeric budgets, cost rates and enforced stopping.",
+    "Bind immutable evaluated snapshot, integration/consumer/scorer revisions and policy after source-roster selection.",
+    "Prepare randomized 72-session assignments and independently enforce workspace/cache/gold isolation with usage and cost receipts."
+  ],
+  "integrityCheckScope": {
+    "method": "Verify original SOURCE_FREEZE SHA-256 and each declared file SHA-256/size, then run its unmodified whole-directory source verifier.",
+    "location": "This addendum lives in a sibling directory, outside the historical source inventory. No file in the original packet is modified or added."
+  },
+  "campaignExecuted": false,
+  "upstreamCodeExecuted": false,
+  "indexConsulted": false,
+  "sourcePacket": "../f05-agent-tasks-20261029/"
+}

@@ -1,0 +1,30 @@
+{
+  "taskId": "python-02",
+  "state": "source-grounded draft; not launch-ready",
+  "sourceLocators": [
+    "sources/github.com/home-assistant/core/homeassistant/components/3_day_blinds/manifest.json:1-6",
+    "sources/github.com/home-assistant/core/homeassistant/components/abode/manifest.json:1-15",
+    "sources/github.com/home-assistant/core/tests/components/abode/test_init.py:22-46",
+    "sources/github.com/home-assistant/core/AGENTS.md:14-38",
+    "sources/github.com/home-assistant/core/AGENTS.md:27-51",
+    "sources/github.com/home-assistant/core/.vscode/tasks.json:90-114",
+    "sources/github.com/home-assistant/core/script/setup:1-51",
+    "sources/github.com/home-assistant/core/script/bootstrap:1-24",
+    "sources/github.com/home-assistant/core/.python-version:1-1",
+    "sources/github.com/home-assistant/core/pyproject.toml:102-106",
+    "sources/github.com/home-assistant/core/homeassistant/__init__.py:1-1"
+  ],
+  "criteria": [
+    "Verify exact upstream revision and the selected manifest-established homeassistant package scope.",
+    "The physical primary-package path does not by itself distinguish component from aggregate product test coverage.",
+    "Independently establish and freeze the required test coverage before launch; successful tests for only homeassistant/components/abode cannot stand in for this task.",
+    "Retain actual test execution, skips and prerequisite failures; compilation, listing and proposed commands do not qualify.",
+    "If source cannot establish distinct applicable coverage, retain unresolved/noncompletion rather than inventing an equivalent aggregate instruction."
+  ],
+  "pending": [
+    "Independent gold/coverage review and executable completion oracle.",
+    "Pinned environment/image, toolchain and dependency/cache state.",
+    "Test skip and platform rules with positive/negative oracle controls.",
+    "Equal tool/network permissions, enforced resource budgets and complete usage/cost receipts."
+  ]
+}

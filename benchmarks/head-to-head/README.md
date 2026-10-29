@@ -15,6 +15,17 @@ consumer benefit. They specify disjoint development/qualification/task sets and
 a frozen randomized agent comparison. They do not change the historical factual
 benchmark or turn fixed operator runs into autonomous or independent-use evidence.
 
+The [October 29 E1 qualification observations](e1-qualification-20261029/evaluation-remaining/README.md)
+retain a negative extraction/consumer-policy result against a fixed implementation.
+The [separate F-05 source enrollment](f05-agent-tasks-20261029/README.md) freezes
+task identities and provisional source gold; it is not a runnable campaign.
+Its [independent review addendum](f05-agent-tasks-review-20261029/README.md)
+records a conditional prerequisite that must be resolved in later campaign gold.
+The internal [session runtime](bench/agent_runtime.py) has synthetic isolation,
+accounting and stop controls; actual environment/provider qualification and a
+complete launch freeze remain required. These artifacts preserve distinct
+establishment and consumer-benefit decisions.
+
 ## What it measures
 
 Two arms answer the same fixed question set over the same repos:

@@ -1,0 +1,50 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/zellij-org/zellij"
+generated_at = "2026-10-29T05:05:19.818881Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md` and `Cargo.toml`. Inferred `repo.build` from `Cargo.toml`. Inferred `repo.test` from `Cargo.toml`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Zellij"
+description = "[Screencasts & Tutorials]"
+homepage = "https://github.com/zellij-org/zellij"
+languages = []
+build = "cargo build --workspace"
+test = "cargo test --workspace"
+topics = []
+
+[repo.toolchain]
+min = "1.95"
+ecosystem = "Rust"
+
+[docs]
+root = "https://zellij.dev/documentation/configuration"
+getting_started = "https://zellij.dev/documentation/installation"
+
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-10-29T05:05:19.818881Z"
+confidence = "high"
+method = "extracted"
+reason = 'Explicit documentation link at README.md:14: [<a href="https://zellij.dev/documentation/installation">Installation</a>]'
+source = "README.md"
+state = "present"
+valueJson = '"https://zellij.dev/documentation/installation"'
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-10-29T05:05:19.818881Z"
+confidence = "high"
+method = "extracted"
+reason = 'Explicit documentation link at README.md:16: [<a href="https://zellij.dev/documentation/configuration">Configuration</a>]'
+source = "README.md"
+state = "present"
+valueJson = '"https://zellij.dev/documentation/configuration"'

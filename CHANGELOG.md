@@ -12,12 +12,16 @@
   separate intention-to-treat scorer. Bind usage/runtime receipts, retain unknown
   costs and flag campaign budget overruns. Retain a source-only command-withdrawal
   diagnostic; no new consumer-benefit or independent-use result is claimed.
+- Retain disjoint source-only qualification/task packets and the first negative
+  E1 extraction/consumer-policy observations without tuning or replacing the
+  frozen cases. Add an internal isolated-session adapter with tested access,
+  accounting and stop controls. Actual task environments, provider qualification,
+  campaign scoring and consumer-benefit evaluation remain pending.
 
-## 2.0.0-rc.2 — Unreleased candidate
+## 2.0.0-rc.2 — Preview
 
-This source candidate includes the post-RC1 changes below. It has not been
-published or verified through registry installation; published `2.0.0-rc.1`
-artifacts remain unchanged. Production installs continue to use stable `1.0.4`.
+This preview includes the post-RC1 source changes below. Production guidance
+remains pinned to stable `1.0.4`; the 2.0 line includes public Rust API changes.
 
 - Correct source-scoped build/test answers after a pinned documentation audit;
   preserve record age and unrelated assessments, and withdraw verification after

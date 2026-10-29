@@ -1,0 +1,171 @@
+[
+  {
+    "component": null,
+    "consumerSelection": {
+      "fallbackReasons": [
+        "no-assessed-contextual-instruction"
+      ],
+      "instruction": null,
+      "provenance": null
+    },
+    "ecosystem": "go",
+    "exportExitCode": 0,
+    "id": "e1-go-01-repository-tests",
+    "importExitCode": 0,
+    "profilePath": "public/v0/repos/github.com/infiniflow/ragflow/profile.json",
+    "profileSha256": "eb0619bc7be39f2431d0d768de17f3666443f5d921c85e2647146508449e00e2",
+    "recoveredInstructions": [
+      {
+        "command": "go test ./...",
+        "context": null,
+        "origin": "scalar",
+        "structurallyComplete": false
+      }
+    ],
+    "repository": "github.com/infiniflow/ragflow",
+    "request": {
+      "scope": "repository"
+    },
+    "revision": "9a71c10b090eaca9930df186dd0f9c15ee34a2ce",
+    "scope": "repository"
+  },
+  {
+    "component": "internal/admin",
+    "consumerSelection": {
+      "fallbackReasons": [
+        "no-assessed-contextual-instruction"
+      ],
+      "instruction": null,
+      "provenance": null
+    },
+    "ecosystem": "go",
+    "exportExitCode": 0,
+    "id": "e1-go-01-component-tests",
+    "importExitCode": 0,
+    "profilePath": "public/v0/repos/github.com/infiniflow/ragflow/profile.json",
+    "profileSha256": "eb0619bc7be39f2431d0d768de17f3666443f5d921c85e2647146508449e00e2",
+    "recoveredInstructions": [
+      {
+        "command": "go test ./...",
+        "context": null,
+        "origin": "scalar",
+        "structurallyComplete": false
+      }
+    ],
+    "repository": "github.com/infiniflow/ragflow",
+    "request": {
+      "component": "internal/admin",
+      "scope": "component"
+    },
+    "revision": "9a71c10b090eaca9930df186dd0f9c15ee34a2ce",
+    "scope": "component"
+  },
+  {
+    "component": null,
+    "consumerSelection": {
+      "fallbackReasons": [
+        "no-assessed-contextual-instruction"
+      ],
+      "instruction": null,
+      "provenance": null
+    },
+    "ecosystem": "go",
+    "exportExitCode": 0,
+    "id": "e1-go-02-repository-tests",
+    "importExitCode": 0,
+    "profilePath": "public/v0/repos/github.com/golang/go/profile.json",
+    "profileSha256": "076fca50ffcbc805b5e85a2e5b56ab1ff3f9811b42539050b2bd56242f93113b",
+    "recoveredInstructions": [],
+    "repository": "github.com/golang/go",
+    "request": {
+      "scope": "repository"
+    },
+    "revision": "430d19f07a57ee5ed4e3b1a04b0ab54dd5a24487",
+    "scope": "repository"
+  },
+  {
+    "component": "src/cmd/compile",
+    "consumerSelection": {
+      "fallbackReasons": [
+        "no-assessed-contextual-instruction"
+      ],
+      "instruction": null,
+      "provenance": null
+    },
+    "ecosystem": "go",
+    "exportExitCode": 0,
+    "id": "e1-go-02-component-tests",
+    "importExitCode": 0,
+    "profilePath": "public/v0/repos/github.com/golang/go/profile.json",
+    "profileSha256": "076fca50ffcbc805b5e85a2e5b56ab1ff3f9811b42539050b2bd56242f93113b",
+    "recoveredInstructions": [],
+    "repository": "github.com/golang/go",
+    "request": {
+      "component": "src/cmd/compile",
+      "scope": "component"
+    },
+    "revision": "430d19f07a57ee5ed4e3b1a04b0ab54dd5a24487",
+    "scope": "component"
+  },
+  {
+    "component": null,
+    "consumerSelection": {
+      "fallbackReasons": [
+        "no-assessed-contextual-instruction"
+      ],
+      "instruction": null,
+      "provenance": null
+    },
+    "ecosystem": "go",
+    "exportExitCode": 0,
+    "id": "e1-go-03-repository-tests",
+    "importExitCode": 0,
+    "profilePath": "public/v0/repos/github.com/docker/compose/profile.json",
+    "profileSha256": "4527f0ba4b6cfb27c0e8c631d4549c533f5924053f07f6c787ec9c347788f298",
+    "recoveredInstructions": [
+      {
+        "command": "make test",
+        "context": null,
+        "origin": "scalar",
+        "structurallyComplete": false
+      }
+    ],
+    "repository": "github.com/docker/compose",
+    "request": {
+      "scope": "repository"
+    },
+    "revision": "343bb382d2192b88d84af49971bb5cb99bee268c",
+    "scope": "repository"
+  },
+  {
+    "component": "pkg/compose",
+    "consumerSelection": {
+      "fallbackReasons": [
+        "no-assessed-contextual-instruction"
+      ],
+      "instruction": null,
+      "provenance": null
+    },
+    "ecosystem": "go",
+    "exportExitCode": 0,
+    "id": "e1-go-03-component-tests",
+    "importExitCode": 0,
+    "profilePath": "public/v0/repos/github.com/docker/compose/profile.json",
+    "profileSha256": "4527f0ba4b6cfb27c0e8c631d4549c533f5924053f07f6c787ec9c347788f298",
+    "recoveredInstructions": [
+      {
+        "command": "make test",
+        "context": null,
+        "origin": "scalar",
+        "structurallyComplete": false
+      }
+    ],
+    "repository": "github.com/docker/compose",
+    "request": {
+      "component": "pkg/compose",
+      "scope": "component"
+    },
+    "revision": "343bb382d2192b88d84af49971bb5cb99bee268c",
+    "scope": "component"
+  }
+]

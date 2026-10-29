@@ -1,0 +1,1108 @@
+{
+  "schema": "dotrepo-f05-source-freeze/v1",
+  "identity": "f05-agent-tasks-20261029-source-v1",
+  "state": "source roster and source assessments retained; independent review and campaign launch freeze incomplete",
+  "frozenAt": "2026-10-29T05:20:39.143666+00:00",
+  "campaignExecuted": false,
+  "indexConsulted": false,
+  "upstreamCodeExecuted": false,
+  "tasks": 12,
+  "repositories": 12,
+  "quotas": {
+    "Rust": 3,
+    "Python": 3,
+    "JavaScript/TypeScript": 3,
+    "Go": 3,
+    "repositoryScope": 6,
+    "componentScope": 6,
+    "preClone": 6,
+    "localCheckout": 6
+  },
+  "curationContext": "Codex worker /root/e1_establishment; previously E1 development author. F05 source curation is subsequent and no extractor code was changed/tuned from these sources. Curator history/gold must be excluded from future agent contexts.",
+  "pending": [
+    "Independent source-gold review and coverage/oracle resolution, including primary-package component scope.",
+    "Executable completion oracles and positive/negative controls.",
+    "Pinned runtime/dependencies/toolchain/cache conditions and environment image digest.",
+    "Exact provider/model/inference settings and symmetric tool/network permissions.",
+    "Numeric session/campaign budgets, usage/cost rates and enforced stop behavior.",
+    "Immutable evaluated export/profile snapshot, integration revision and consumer policy, selected after roster freeze.",
+    "Randomized 72-session assignments and independently enforced workspace/cache/gold isolation."
+  ],
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "65464cae64c942943ea94858c5002080ffdef6c32b4eede4df803c0a7b8458e4",
+      "bytes": 3861
+    },
+    {
+      "path": "curator/gold/go-01.json",
+      "sha256": "f9e861f9f091042d82626890b5bd10445226c5f30eaf3563b99f0134e7d8c071",
+      "bytes": 1619
+    },
+    {
+      "path": "curator/gold/go-02.json",
+      "sha256": "ad4946653db0aeabbde5a9948e20cf8a93157b9442e82581e6eb4fce99ea1476",
+      "bytes": 1194
+    },
+    {
+      "path": "curator/gold/go-03.json",
+      "sha256": "fc35b27503118ae9a6d50de80855fdf223f5946b35adbe64031fc4b6f383073d",
+      "bytes": 1078
+    },
+    {
+      "path": "curator/gold/python-01.json",
+      "sha256": "5c36d2500082e41c5a88f50df37b55608540f9b12381a70b5dd95cf0fd784873",
+      "bytes": 779
+    },
+    {
+      "path": "curator/gold/python-02.json",
+      "sha256": "408796293ba750d3ae45bcd8f1117fdbf87dc4565ade485de45bba14fd9d4e8c",
+      "bytes": 1710
+    },
+    {
+      "path": "curator/gold/python-03.json",
+      "sha256": "ed2c6203a4c0d9e92293467590cf121bf4780c45784d8f6f94cc7981ffcc82c1",
+      "bytes": 1318
+    },
+    {
+      "path": "curator/gold/rust-01.json",
+      "sha256": "e0227b4be1fe5577cc9987dcad614bcfd6e49b545a16f10e46cb4ab77a433386",
+      "bytes": 614
+    },
+    {
+      "path": "curator/gold/rust-02.json",
+      "sha256": "79ce4bcefc9ac1b5388f8c2197f64dc662dd40c483ae2f6a4143844293ec259b",
+      "bytes": 828
+    },
+    {
+      "path": "curator/gold/rust-03.json",
+      "sha256": "8394306eacfc72066fdbe07b060ca6fa3a3297380ece8e5ee0e9e2e2763505fa",
+      "bytes": 1380
+    },
+    {
+      "path": "curator/gold/typescript-01.json",
+      "sha256": "fe21580008ed159a3cbd51fe8307d9015b30a94a6ecf468edd9df1f3ed901d42",
+      "bytes": 866
+    },
+    {
+      "path": "curator/gold/typescript-02.json",
+      "sha256": "82c1ff84914b608d97df146d2905042e47f5059a069a434608be097a17307b7e",
+      "bytes": 1927
+    },
+    {
+      "path": "curator/gold/typescript-03.json",
+      "sha256": "94008a8ff3178c74b83f272808648f33b2fab26afcea4808a4d01347141b6be5",
+      "bytes": 830
+    },
+    {
+      "path": "curator/oracles/go-01.json",
+      "sha256": "cdbfd8c5d133706e7da1eb958a428ab6e1572eec9450d9ed1ea4895cff0bc6b0",
+      "bytes": 1481
+    },
+    {
+      "path": "curator/oracles/go-02.json",
+      "sha256": "01f3d1f3602ea237a0b36b936d8fdfabeeef36c6eb0969eaa492f8524e2b39d1",
+      "bytes": 1808
+    },
+    {
+      "path": "curator/oracles/go-03.json",
+      "sha256": "902298820f3ac29af16228ba82421575ca01ca1a72ebdc937c2958151154d85a",
+      "bytes": 1660
+    },
+    {
+      "path": "curator/oracles/python-01.json",
+      "sha256": "13593a0416f65d3e6006252c2e7e6d21c05d2837d060e3aeb952a36fbe801971",
+      "bytes": 1388
+    },
+    {
+      "path": "curator/oracles/python-02.json",
+      "sha256": "bb9a5a746c7de7e11bbce7014e674053f154c38dee4fdd4f801d942a2621939f",
+      "bytes": 1973
+    },
+    {
+      "path": "curator/oracles/python-03.json",
+      "sha256": "6020d335c55837e085b4e7a16584721dd428783947d0f711b353f78760dc32c1",
+      "bytes": 1590
+    },
+    {
+      "path": "curator/oracles/rust-01.json",
+      "sha256": "2868ea7c8cf7b6b6d527542537073da2716660783ffd5ac6270cfdf1ef571c03",
+      "bytes": 1217
+    },
+    {
+      "path": "curator/oracles/rust-02.json",
+      "sha256": "6df575f13e956ac564395eb5d2a55a444844df7dd62f87986782c41c5477d778",
+      "bytes": 1389
+    },
+    {
+      "path": "curator/oracles/rust-03.json",
+      "sha256": "a2acff4938ac5be85ce50323f2801b8ad5494a35406ec1c2a9d8b1901ed38e15",
+      "bytes": 1131
+    },
+    {
+      "path": "curator/oracles/typescript-01.json",
+      "sha256": "dd9c6435023e2dc7c6cec96c9bd473f92280cf997fc3c3ffbb1bb9bedc298e33",
+      "bytes": 1497
+    },
+    {
+      "path": "curator/oracles/typescript-02.json",
+      "sha256": "04eb63f2de1bc4dd97fba1514d5c80948147d19035b62d42bb480ea483c286d5",
+      "bytes": 1582
+    },
+    {
+      "path": "curator/oracles/typescript-03.json",
+      "sha256": "7d822e0e20679ea923a8738746c2b2fcf9b0e77e15beaa770ff6271673022c68",
+      "bytes": 1376
+    },
+    {
+      "path": "curator/selection-clarification.json",
+      "sha256": "ca461fe5c9c4a3e5c4bcad012878fd98587a6c3da4e77ea150086bd8e7ca979b",
+      "bytes": 911
+    },
+    {
+      "path": "requests/go-01.md",
+      "sha256": "b177f75b4a308966c31dcbc4fda35d97da8bc61b76d315ee0995294963ad7898",
+      "bytes": 452
+    },
+    {
+      "path": "requests/go-02.md",
+      "sha256": "8c03e7ceabf511a92f0f404fb2828524328a0da2d7055d0aebb2824ded921eae",
+      "bytes": 463
+    },
+    {
+      "path": "requests/go-03.md",
+      "sha256": "aa8a4894a3bd76206306de011c213e3915d065acf55544d1027b75d7897563bb",
+      "bytes": 458
+    },
+    {
+      "path": "requests/python-01.md",
+      "sha256": "0d4f17d1fd158230bf1b47d975fa94899c3eb50d922b94cddda62be122ee8466",
+      "bytes": 447
+    },
+    {
+      "path": "requests/python-02.md",
+      "sha256": "6fbdd735a2e4d1bc926a00fc4d2152c4dfc5d0c327075f369962876dd3e6109e",
+      "bytes": 472
+    },
+    {
+      "path": "requests/python-03.md",
+      "sha256": "e63de128929a4af76bf6901b48a6b9e2f64a69b153209cb6e9bda718c6f100ba",
+      "bytes": 469
+    },
+    {
+      "path": "requests/rust-01.md",
+      "sha256": "a1bfce584dfaa8127d46ab75b3ffa6120c8d7961eb90a965a43cb93ba617f1ff",
+      "bytes": 448
+    },
+    {
+      "path": "requests/rust-02.md",
+      "sha256": "a59aad6359985d60882c86f0320b37be43a78b1ea8bbd17227c356c2347ab438",
+      "bytes": 483
+    },
+    {
+      "path": "requests/rust-03.md",
+      "sha256": "88f2b1a21895ac722309f6336133f5a8d81bd5739f1658d4b7ffe3b7e3181260",
+      "bytes": 444
+    },
+    {
+      "path": "requests/typescript-01.md",
+      "sha256": "b9fa9432d9da686e345530e616707df77e623dcf08a08491aaa83fb5b05f0077",
+      "bytes": 460
+    },
+    {
+      "path": "requests/typescript-02.md",
+      "sha256": "c654b2e9d6136983eddcd0d9159c9810f85da3d7dfc99acb9b7cc4168923e201",
+      "bytes": 462
+    },
+    {
+      "path": "requests/typescript-03.md",
+      "sha256": "f24fbb3870c1e319f5292e72ba0d3cdfce62bf0d81745505531307a40884be9a",
+      "bytes": 442
+    },
+    {
+      "path": "rules/README.md",
+      "sha256": "c606c428cb3c3d78a669b68416848cec7fe4de81c8b07aa6083850c6835a978a",
+      "bytes": 7146
+    },
+    {
+      "path": "rules/f05-screening-rules.md",
+      "sha256": "e362d87f86cc353b577a17edb5e62c42846a07822f3fa50e74087807c499e431",
+      "bytes": 2693
+    },
+    {
+      "path": "rules/f05.md",
+      "sha256": "d9d5dc153b9cc91a21ac048c210e33b99f3fd09a34305d5a9869c56e630f0b2b",
+      "bytes": 11755
+    },
+    {
+      "path": "rules/screening-reservations.json",
+      "sha256": "cd91fb903108d426c87fba86704f7e9dc219b54314445a22eeffa618df090850",
+      "bytes": 51922
+    },
+    {
+      "path": "rules/screening-rules.md",
+      "sha256": "d3c59940aaac5a7e86ead77814111f07a59a536affea861ca0fd60af4edce6f7",
+      "bytes": 3113
+    },
+    {
+      "path": "screening.json",
+      "sha256": "8ccdb8c60d08b16c91a48a5908a8900524fce5fe2a4bb4efff90cbb77f467387",
+      "bytes": 9716
+    },
+    {
+      "path": "source-catalog.json",
+      "sha256": "60dae232a1d5a69b69f81dab5dffc8b69cb6d812bac6d2496423732978d2111c",
+      "bytes": 103653
+    },
+    {
+      "path": "sources/github.com/666ghj/MiroFish/.env.example",
+      "sha256": "18a0153f70a5f29ca0608b3796054b275631a5bfd899fc477a33a369ca7b398e",
+      "bytes": 715
+    },
+    {
+      "path": "sources/github.com/666ghj/MiroFish/README.md",
+      "sha256": "5109feef87d494dd77c0eb225486d4278fe3eb61b303574600bcf8c3c339d034",
+      "bytes": 8958
+    },
+    {
+      "path": "sources/github.com/666ghj/MiroFish/_commit.json",
+      "sha256": "5d5544cc2a0ca4b64d403e0a2a28f725bbf50691353c9e7dcde094c709612811",
+      "bytes": 88936
+    },
+    {
+      "path": "sources/github.com/666ghj/MiroFish/_directory-backend.json",
+      "sha256": "69246f901eb4827e70fbc3d5c185bda9f47d4260271c931c727249d789ae4b73",
+      "bytes": 6250
+    },
+    {
+      "path": "sources/github.com/666ghj/MiroFish/_directory-backend_tests.json",
+      "sha256": "3bbf5b5980bffbc4356a67b66a432e3bf3543c6c976ad0c23c532e7d8ed6fd19",
+      "bytes": 20138
+    },
+    {
+      "path": "sources/github.com/666ghj/MiroFish/_directory-tests.json",
+      "sha256": "bce0b716eb3e36e5b6a29794617aeb50ab5a30cde2501c402740345a349f3218",
+      "bytes": 2131
+    },
+    {
+      "path": "sources/github.com/666ghj/MiroFish/_repository.json",
+      "sha256": "58025c37404a774146f8865577ffb1112e8dd3e2197ec2c05e0eeb559cc44b19",
+      "bytes": 5430
+    },
+    {
+      "path": "sources/github.com/666ghj/MiroFish/_root-directory.json",
+      "sha256": "2a116dca4b924d688a60385f6794fb48c7ca9df66440f985095c9252b25f7148",
+      "bytes": 14612
+    },
+    {
+      "path": "sources/github.com/666ghj/MiroFish/backend/pyproject.toml",
+      "sha256": "e923fa98056d1b6085ab789993a1d05f31bfc1e8cbbb6b9aa17d49663253c1a2",
+      "bytes": 1080
+    },
+    {
+      "path": "sources/github.com/666ghj/MiroFish/package.json",
+      "sha256": "f2b8cc90bc21b0b4990d5192b5e7c09161982760dede52cb743862d908526715",
+      "bytes": 702
+    },
+    {
+      "path": "sources/github.com/666ghj/MiroFish/tests/test_local_star_count_fetch.py",
+      "sha256": "f9368e145018b644f28104f15012ccbe99d124647966ee225bd4153f52dbb173",
+      "bytes": 13843
+    },
+    {
+      "path": "sources/github.com/GyulyVGC/sniffnet/.github/workflows/rust.yml",
+      "sha256": "86ebf0128d5409254c3c131f4f42d028b0f5a48589277734a1d58c39f539da81",
+      "bytes": 2645
+    },
+    {
+      "path": "sources/github.com/GyulyVGC/sniffnet/CONTRIBUTING.md",
+      "sha256": "d18e36057c949d113b008663b6e50049372cbd79874f36910458b397a24ee2b8",
+      "bytes": 2965
+    },
+    {
+      "path": "sources/github.com/GyulyVGC/sniffnet/Cargo.toml",
+      "sha256": "407defabb487f3e15b0f10ca650a78b39557f296e6c03b0c7b140c64aa09f5a8",
+      "bytes": 13850
+    },
+    {
+      "path": "sources/github.com/GyulyVGC/sniffnet/README.md",
+      "sha256": "1398d3965ace11e083a2dd7cb4e7aad12c5d4d13a988ac81eecfdbda3a14fc45",
+      "bytes": 13303
+    },
+    {
+      "path": "sources/github.com/GyulyVGC/sniffnet/_commit.json",
+      "sha256": "7b61868a6639feb85c8d3d2bb80a978851a75be6f81477e2ca93263cf996ebed",
+      "bytes": 22058
+    },
+    {
+      "path": "sources/github.com/GyulyVGC/sniffnet/_directory-.github_workflows.json",
+      "sha256": "cc69cda482de3cebd8b6fb58b3ff40f5f2e3305085d280e83425b75e516d3c9b",
+      "bytes": 6117
+    },
+    {
+      "path": "sources/github.com/GyulyVGC/sniffnet/_directory-lib_sniffnet-packet-parser_src.json",
+      "sha256": "dccdd61c728ce15b1dbe2e45a24aa2dd6330036e4707a7f3681a5fda62f21d41",
+      "bytes": 8837
+    },
+    {
+      "path": "sources/github.com/GyulyVGC/sniffnet/_directory.json",
+      "sha256": "dad80c9101e8314c3c4ea9e12c0b243cb4004e6434fa9c058549897212e01eb7",
+      "bytes": 27170
+    },
+    {
+      "path": "sources/github.com/GyulyVGC/sniffnet/_repository.json",
+      "sha256": "48cc8970cd7a65b758c861b5d6573eb19da3b69900b4edb3d5cd962354201270",
+      "bytes": 5493
+    },
+    {
+      "path": "sources/github.com/GyulyVGC/sniffnet/lib/sniffnet-packet-parser/Cargo.toml",
+      "sha256": "3b0a80798ac6377085087cf17efeaad377288ffc20d663e42729d75455f4c921",
+      "bytes": 764
+    },
+    {
+      "path": "sources/github.com/GyulyVGC/sniffnet/lib/sniffnet-packet-parser/README.md",
+      "sha256": "eb5c07622519eb01c5a879cb8393635a9f37343b6e4164d4a2c83c597b1adde0",
+      "bytes": 326
+    },
+    {
+      "path": "sources/github.com/GyulyVGC/sniffnet/lib/sniffnet-packet-parser/src/arp_type.rs",
+      "sha256": "40c632390c9beb01ac44dbbbc71884756898d89593f87598e931ced18d930fd4",
+      "bytes": 823
+    },
+    {
+      "path": "sources/github.com/GyulyVGC/sniffnet/lib/sniffnet-packet-parser/src/headers.rs",
+      "sha256": "911b90d0a5269996637260f8b08af237c567b18f841ffd04a078f297271a24e3",
+      "bytes": 3675
+    },
+    {
+      "path": "sources/github.com/GyulyVGC/sniffnet/lib/sniffnet-packet-parser/src/icmp_type.rs",
+      "sha256": "5cfc14b72b52a4ad392a373b115aa72d50bf193b8e6cea999a739527281c96ee",
+      "bytes": 12702
+    },
+    {
+      "path": "sources/github.com/GyulyVGC/sniffnet/lib/sniffnet-packet-parser/src/igmp_type.rs",
+      "sha256": "909a354e97054dad7cc87b5b7c0cbbeaf9d92e3dbe9533b8a61860d2d4108cd9",
+      "bytes": 2807
+    },
+    {
+      "path": "sources/github.com/GyulyVGC/sniffnet/lib/sniffnet-packet-parser/src/lib.rs",
+      "sha256": "6acb52f1e14787180eda62a6ea4bb32901109634b2fb6fb739d94e35cc711b6d",
+      "bytes": 690
+    },
+    {
+      "path": "sources/github.com/GyulyVGC/sniffnet/lib/sniffnet-packet-parser/src/link_type.rs",
+      "sha256": "e9904642a7b23d63f7b3e265868a2f26ca766e74af3883640d59824418b20ec3",
+      "bytes": 3051
+    },
+    {
+      "path": "sources/github.com/GyulyVGC/sniffnet/lib/sniffnet-packet-parser/src/packet.rs",
+      "sha256": "25477d31995ab889ffd3e35fcb807ec5050aa99a5b1322888096a5ce86516675",
+      "bytes": 8783
+    },
+    {
+      "path": "sources/github.com/GyulyVGC/sniffnet/lib/sniffnet-packet-parser/src/protocol.rs",
+      "sha256": "4facc04e89f425fe6b3fa8f5e6b95b793c56716c913ab4af8cc68b9b72a2f8b3",
+      "bytes": 1984
+    },
+    {
+      "path": "sources/github.com/OpenHands/OpenHands/README.md",
+      "sha256": "7e286c5b311d5d6160949f786f336cea4f01b4bee82f62689a146d38160009b8",
+      "bytes": 13268
+    },
+    {
+      "path": "sources/github.com/OpenHands/OpenHands/__tests__/bin/agent-canvas.test.ts",
+      "sha256": "4d164cdc40913310baadb76a3fc04031a80bfb6de8cb4698fbefaed2b7c01b10",
+      "bytes": 3922
+    },
+    {
+      "path": "sources/github.com/OpenHands/OpenHands/_commit.json",
+      "sha256": "b47e0e66903c2eb6f4c8c79a90f76c4ccfddfc1f22306867ff59e30f06a76cb2",
+      "bytes": 31328
+    },
+    {
+      "path": "sources/github.com/OpenHands/OpenHands/_directory-__tests__.json",
+      "sha256": "038fe6203f938fdf097609c21b5e41a0780990f2f5a694b6d42421cc845f0fdd",
+      "bytes": 32475
+    },
+    {
+      "path": "sources/github.com/OpenHands/OpenHands/_directory-__tests___bin.json",
+      "sha256": "44bda1150fc8eae46ab85a650443bd97afa3b49888652c498b6aa4844f463ff8",
+      "bytes": 1085
+    },
+    {
+      "path": "sources/github.com/OpenHands/OpenHands/_directory-bin.json",
+      "sha256": "d9d53ac9d9cab73861aece66155d7b8060243e1888a776d08c0433aa1308e0c6",
+      "bytes": 997
+    },
+    {
+      "path": "sources/github.com/OpenHands/OpenHands/_directory-docs.json",
+      "sha256": "cab6d03cad61b84eea443943b86554ded1a0ae4e135c8db0998f677c417ba9de",
+      "bytes": 8871
+    },
+    {
+      "path": "sources/github.com/OpenHands/OpenHands/_directory-src.json",
+      "sha256": "3b7f1bb591ab63f304b05db577e4fdd7c51fd24f1756221e87587a7b580f6ccf",
+      "bytes": 30378
+    },
+    {
+      "path": "sources/github.com/OpenHands/OpenHands/_repository.json",
+      "sha256": "8d990f7ace1f901c0ccae8d8a787dd692bd94ccf100d09f3319071bbd65404b6",
+      "bytes": 6432
+    },
+    {
+      "path": "sources/github.com/OpenHands/OpenHands/_root-directory.json",
+      "sha256": "0c285ce15c3941f458d1b84a2cba7937da9fcfcdf555173b0457913e37f015d3",
+      "bytes": 49252
+    },
+    {
+      "path": "sources/github.com/OpenHands/OpenHands/bin/agent-canvas.mjs",
+      "sha256": "a56c5e00c3b4a6cf0cb5698a7a2939be294221fb02bca61bc95040f610a2dee8",
+      "bytes": 6146
+    },
+    {
+      "path": "sources/github.com/OpenHands/OpenHands/docs/CANVAS_EXTENSIONS_TESTING.md",
+      "sha256": "8cf6de592ec77ac8492b573abd9dcfacd60de8f0bc43e64cfec280e27d8fbce8",
+      "bytes": 3692
+    },
+    {
+      "path": "sources/github.com/OpenHands/OpenHands/docs/DEVELOPMENT.md",
+      "sha256": "6d20ab80fec02ae10297f3bf40c369e32c41496e70f4b76770f45164b896a794",
+      "bytes": 26106
+    },
+    {
+      "path": "sources/github.com/OpenHands/OpenHands/docs/TESTING_MATRIX.md",
+      "sha256": "5a606144c7a85548ddb3692b4d4d05e72224745effc8653089bbcb8ce45a2efb",
+      "bytes": 3316
+    },
+    {
+      "path": "sources/github.com/OpenHands/OpenHands/docs/architecture.md",
+      "sha256": "9f806944e4b13f4cc714da3f86f335b5f5bfcdeb49b9cf68ccaced2aaff3f84c",
+      "bytes": 4404
+    },
+    {
+      "path": "sources/github.com/OpenHands/OpenHands/package.json",
+      "sha256": "c2c66e43c1fb5e9b089586f9fd2014bf2c83d829d5419e458b954176666c3d48",
+      "bytes": 9778
+    },
+    {
+      "path": "sources/github.com/OpenHands/OpenHands/vite.config.ts",
+      "sha256": "5678c862cca55087c477eccd609396c644a2c181d33a4feb7d542c4803d9190d",
+      "bytes": 21271
+    },
+    {
+      "path": "sources/github.com/beego/beego/.github/workflows/test.yml",
+      "sha256": "fd10fbbb296fe567bf5887aed18c79df69f5292c9e82e3e8eba9ec203074733b",
+      "bytes": 5401
+    },
+    {
+      "path": "sources/github.com/beego/beego/CONTRIBUTING.md",
+      "sha256": "7ef643a2a57ff10ac192c07804f361ecac617531f0449a0f43522d65c70b6dc7",
+      "bytes": 3276
+    },
+    {
+      "path": "sources/github.com/beego/beego/Makefile",
+      "sha256": "3509262c5f353d2e976612ab4d1be8079be6d3ba6b387868be992e816b35c368",
+      "bytes": 2920
+    },
+    {
+      "path": "sources/github.com/beego/beego/README.md",
+      "sha256": "7d725a39b579fdce22974f2493f3c075f919698f7d03f3d580d6d18d0f195b73",
+      "bytes": 3414
+    },
+    {
+      "path": "sources/github.com/beego/beego/_commit.json",
+      "sha256": "9b7713b827864754f0db762288988635beff47f8cbfc32e1632cff07617a790a",
+      "bytes": 4244
+    },
+    {
+      "path": "sources/github.com/beego/beego/_directory-client.json",
+      "sha256": "5a6d36e97085afdfeb06054ec81d3adcda120873338a2582dcde66b47440cc78",
+      "bytes": 2341
+    },
+    {
+      "path": "sources/github.com/beego/beego/_directory-client_cache.json",
+      "sha256": "a418eaed99ec82ad21c0cc4b88e1b0c42ffe5109c2552f85ef13932689df610b",
+      "bytes": 25255
+    },
+    {
+      "path": "sources/github.com/beego/beego/_directory-client_cache_memcache.json",
+      "sha256": "4a56e46d07910801a63bc60cf06628047446f751de83c1dc295aaae88586ac20",
+      "bytes": 2062
+    },
+    {
+      "path": "sources/github.com/beego/beego/_directory-client_cache_redis.json",
+      "sha256": "f1465df030ff1d6d19a47f605251b946b91ac1bdd3aefcf979d3fb9622290965",
+      "bytes": 1984
+    },
+    {
+      "path": "sources/github.com/beego/beego/_directory-client_cache_ssdb.json",
+      "sha256": "a614b7085adeb67139b5650c982701352647eede9517e5a922fa4bd867dacf63",
+      "bytes": 1958
+    },
+    {
+      "path": "sources/github.com/beego/beego/_repository.json",
+      "sha256": "829fa2c7bba172b5276c2c45e43a2812163bad72e4c64438f13cd7f03326002c",
+      "bytes": 5935
+    },
+    {
+      "path": "sources/github.com/beego/beego/_root-directory.json",
+      "sha256": "f0e38d6bd10cc290bde23ac17165984b35c6481dfbf5b72ddbf7e02fc0369393",
+      "bytes": 16758
+    },
+    {
+      "path": "sources/github.com/beego/beego/client/cache/cache.go",
+      "sha256": "e08a32a7359457a83dd319390ab2187d2b61a8b50398fdad4786890abd880eb2",
+      "bytes": 3505
+    },
+    {
+      "path": "sources/github.com/beego/beego/client/cache/cache_test.go",
+      "sha256": "0a5daec014a6bc74798ac22b9abbd5d69f9746c4c540ac14bbadc585693a9fc2",
+      "bytes": 6264
+    },
+    {
+      "path": "sources/github.com/beego/beego/client/cache/memcache/memcache_test.go",
+      "sha256": "350cc2a54c36ee3bc47c430aba6829a5ab2e14ac1c530aad46fee6c4d8ff9494",
+      "bytes": 6184
+    },
+    {
+      "path": "sources/github.com/beego/beego/client/cache/redis/redis_test.go",
+      "sha256": "d6b03f7dc86785f51a5de7abbd3475582d13dbc185649ba1133ce4321363ddbe",
+      "bytes": 8865
+    },
+    {
+      "path": "sources/github.com/beego/beego/client/cache/ssdb/ssdb_test.go",
+      "sha256": "96bd026e81fa21ef810f7d5be1bb4d609b8340faaa5f0486e1431bb9363f6925",
+      "bytes": 5491
+    },
+    {
+      "path": "sources/github.com/beego/beego/go.mod",
+      "sha256": "b14e12e9c56e852c25c207692da52d116fd06bc22f62e6df131188f547ed2ac2",
+      "bytes": 3919
+    },
+    {
+      "path": "sources/github.com/beego/beego/scripts/test_docker_compose.yaml",
+      "sha256": "6cab9365f57eecdcbc6c42ea7bcce382a7ffe149ee1feff399a5e085bad1157d",
+      "bytes": 1250
+    },
+    {
+      "path": "sources/github.com/deepseek-ai/deepseek-harness/CONTRIBUTING.md",
+      "sha256": "9cd02c5b784b4a616cff9421defd688e420b35b7bf466f8908cecd0282a2aab6",
+      "bytes": 1574
+    },
+    {
+      "path": "sources/github.com/deepseek-ai/deepseek-harness/Makefile",
+      "sha256": "31d3c908181c6034eb955aad3ba25b50d16d941924f767c6d1be6b46b8201a04",
+      "bytes": 1198
+    },
+    {
+      "path": "sources/github.com/deepseek-ai/deepseek-harness/README.md",
+      "sha256": "0f5516be2acde776f05572cbc8c3093c90549afe04ce118e11157d073d5d15f4",
+      "bytes": 2673
+    },
+    {
+      "path": "sources/github.com/deepseek-ai/deepseek-harness/_commit.json",
+      "sha256": "70f1419ff8f277279fa150fc4646ae08ae97cab164e0b1f576aa55933948380d",
+      "bytes": 305120
+    },
+    {
+      "path": "sources/github.com/deepseek-ai/deepseek-harness/_repository.json",
+      "sha256": "ac639a950ae74e34d835e31de623cbeb91383f6f0af7c9c5b90b27f0405ce840",
+      "bytes": 6829
+    },
+    {
+      "path": "sources/github.com/deepseek-ai/deepseek-harness/_root-directory.json",
+      "sha256": "3bd1a74ebce1623895692870c9830813b282b1d18b296462a33dfcf76ad64ad1",
+      "bytes": 60735
+    },
+    {
+      "path": "sources/github.com/deepseek-ai/deepseek-harness/docs/development.md",
+      "sha256": "bb06597dfeaf30de75b9d8a9220a4be401e79a71aadc21bc2766bd77eabe3cde",
+      "bytes": 25159
+    },
+    {
+      "path": "sources/github.com/deepseek-ai/deepseek-harness/native/system/scripts/build.ts",
+      "sha256": "e2c2a93788dc81e7a0748c121b732faf7c2291aefe15d843e858135dc42e9637",
+      "bytes": 4298
+    },
+    {
+      "path": "sources/github.com/deepseek-ai/deepseek-harness/package.json",
+      "sha256": "d0fd7a2084d455b1651815bfbf9034e8b7dfb6571513727bec5d6cbc175a0b45",
+      "bytes": 19936
+    },
+    {
+      "path": "sources/github.com/deepseek-ai/deepseek-harness/pnpm-workspace.yaml",
+      "sha256": "eb42731b8f509dd4ee3ae880eae1cde5381a1875a3598fd2fa83d1c1e5e1ef1a",
+      "bytes": 6380
+    },
+    {
+      "path": "sources/github.com/deepseek-ai/deepseek-harness/vitest.config.ts",
+      "sha256": "9f83941a2ed74ad903ffef043d65e848b1aa1fb48caf2833ba612f632af7b5ab",
+      "bytes": 25321
+    },
+    {
+      "path": "sources/github.com/hashicorp/vault/.go-version",
+      "sha256": "55a45ba2851dc159876cb8854f80bf67b9eae781e67ce179708ea2e4f990fcd8",
+      "bytes": 7
+    },
+    {
+      "path": "sources/github.com/hashicorp/vault/CONTRIBUTING.md",
+      "sha256": "4a6e1e4036c2cdc23362c787b9a8a3e69247aaf17805ede0feceb70dd3bf18c7",
+      "bytes": 6429
+    },
+    {
+      "path": "sources/github.com/hashicorp/vault/Makefile",
+      "sha256": "2ad7ca2f19e0c840fa455e96b80ed5d243dfcbe2e2bde91bb23b4a5cfc709f02",
+      "bytes": 16270
+    },
+    {
+      "path": "sources/github.com/hashicorp/vault/README.md",
+      "sha256": "808839850953617c1cfada54bc3e1ce3b9fd12cffeff8d1d73d3eb2220aca815",
+      "bytes": 12557
+    },
+    {
+      "path": "sources/github.com/hashicorp/vault/_commit.json",
+      "sha256": "ffef2bf668323b0508859ac16d94231aa44cb74332781f5fdd3fca40313dfbcc",
+      "bytes": 211410
+    },
+    {
+      "path": "sources/github.com/hashicorp/vault/_directory-api.json",
+      "sha256": "4e30835e42dfa21dafe488896c40bdedcf7606479ed849e6272bd7021cfb9e9a",
+      "bytes": 77899
+    },
+    {
+      "path": "sources/github.com/hashicorp/vault/_repository.json",
+      "sha256": "8b18102f8d773d1d23f08d0ff13ca1724f661332d05f1610dc89a739be8929a5",
+      "bytes": 6753
+    },
+    {
+      "path": "sources/github.com/hashicorp/vault/_root-directory.json",
+      "sha256": "d5348b2f18ad2037b37f29954d58a5ec7a611b478e48096935687bbf523a6c5b",
+      "bytes": 49013
+    },
+    {
+      "path": "sources/github.com/hashicorp/vault/api/README.md",
+      "sha256": "c57d8b8f1e63912323dcc5224d9b468b62c111e390918a3baf546cedc076f1e5",
+      "bytes": 556
+    },
+    {
+      "path": "sources/github.com/hashicorp/vault/api/api_test.go",
+      "sha256": "7437c6bbbe6af95c0bd931e2d272b8366e861b5f2ae0c9d497ff2b2f6d9f12b1",
+      "bytes": 584
+    },
+    {
+      "path": "sources/github.com/hashicorp/vault/api/client_test.go",
+      "sha256": "1d47e9a9c667bd3cda413b62d72ac9b51af9af7c58b57800b957d0b4f833e17e",
+      "bytes": 37819
+    },
+    {
+      "path": "sources/github.com/hashicorp/vault/api/go.mod",
+      "sha256": "9f90773089010bf2aa3671fdafe82c6e5857e050635a0f4e9c3de0bd8e3ea51b",
+      "bytes": 1610
+    },
+    {
+      "path": "sources/github.com/hashicorp/vault/go.mod",
+      "sha256": "2bfc37c13acc700fbf418e2eed3c48fd43843724df40e6f61bd784bc45a76262",
+      "bytes": 32390
+    },
+    {
+      "path": "sources/github.com/hashicorp/vault/go.work",
+      "sha256": "06faac3c4d9787f7cf7ba5b3ffec2e72babd01146b11103294323d95925daa3a",
+      "bytes": 247
+    },
+    {
+      "path": "sources/github.com/home-assistant/core/.python-version",
+      "sha256": "4f4c88910b6d485ae689143880e5e81b595a48a51ecb391b2f14feaec106d180",
+      "bytes": 8
+    },
+    {
+      "path": "sources/github.com/home-assistant/core/.vscode/tasks.json",
+      "sha256": "721d3e38f179b1c0c542e285bb6339c5870bec29f87970f69802672ab5d7fcbb",
+      "bytes": 6410
+    },
+    {
+      "path": "sources/github.com/home-assistant/core/AGENTS.md",
+      "sha256": "2067e1d10c6da85df9856da6e5cbe1346d7d01949ccfbea96ff1b73394a643fa",
+      "bytes": 5708
+    },
+    {
+      "path": "sources/github.com/home-assistant/core/CONTRIBUTING.md",
+      "sha256": "83972119569e0704d4af93a09af0db4803f3dfc1e669abe34a8aae30eb843175",
+      "bytes": 1699
+    },
+    {
+      "path": "sources/github.com/home-assistant/core/README.rst",
+      "sha256": "7cd3c381536b6d26371f921d730242c6162fc3fa840bf8e9418409f8b482e7cb",
+      "bytes": 1964
+    },
+    {
+      "path": "sources/github.com/home-assistant/core/_commit.json",
+      "sha256": "9974dc7e3c0ea7d3e69ce342af2857d8f3be125e7ad150ab433c72748bfe9acb",
+      "bytes": 9127
+    },
+    {
+      "path": "sources/github.com/home-assistant/core/_directory-homeassistant_components.json",
+      "sha256": "3d133df2185610c2c5e35c9a12e443f874ee6888c73e9691c91a4c502d98caad",
+      "bytes": 944245
+    },
+    {
+      "path": "sources/github.com/home-assistant/core/_directory-homeassistant_components_3_day_blinds.json",
+      "sha256": "dd83e61522cb5ca96f3a44567f2d6550c915fb3dd0d77214385b5bc1051524f9",
+      "bytes": 1179
+    },
+    {
+      "path": "sources/github.com/home-assistant/core/_directory-tests_components_abode.json",
+      "sha256": "a0234ddabb1e827359ff4393ca72231e02d4fc144b57ce1390ba807f120628d9",
+      "bytes": 16159
+    },
+    {
+      "path": "sources/github.com/home-assistant/core/_repository.json",
+      "sha256": "3567f9b3f495b5fd32650ce91a15b5b9bfb975bb76eca85e4b9653f718a621aa",
+      "bytes": 6690
+    },
+    {
+      "path": "sources/github.com/home-assistant/core/_root-directory.json",
+      "sha256": "5321f2cd790ab9b16c01e37bb341ba82ac3791e075edd2aacaea6e6b03f615de",
+      "bytes": 41863
+    },
+    {
+      "path": "sources/github.com/home-assistant/core/homeassistant/__init__.py",
+      "sha256": "39665f5ad111591082b1ce76acd905aad19e73ba8cca1d7521ed7babd5b6f884",
+      "bytes": 1766
+    },
+    {
+      "path": "sources/github.com/home-assistant/core/homeassistant/components/3_day_blinds/manifest.json",
+      "sha256": "e6f9b0606e6c29e9f747527eba3fee3d216af070d82833d3b61ca1d2cd3b4bfd",
+      "bytes": 125
+    },
+    {
+      "path": "sources/github.com/home-assistant/core/homeassistant/components/abode/__init__.py",
+      "sha256": "c6ffa08ddbbf404a206f88e13cb0e6a667953b8061ef450ec48e7931c6aa8014",
+      "bytes": 5883
+    },
+    {
+      "path": "sources/github.com/home-assistant/core/homeassistant/components/abode/manifest.json",
+      "sha256": "200a78d650aad202f9ff81f490d29ad90b11fe4127ffbcf6853d8c0cb31e60a8",
+      "bytes": 414
+    },
+    {
+      "path": "sources/github.com/home-assistant/core/pyproject.toml",
+      "sha256": "60bc823ebd5fbab24c44b1b7aeed13db1a9d51378f2ddb13bf9d0af2c77c78c7",
+      "bytes": 42457
+    },
+    {
+      "path": "sources/github.com/home-assistant/core/requirements_all.txt",
+      "sha256": "3ac7bbc0b4fdcf20c7b178c4fcebf14dbe9cb6b700426ee8930fa8322f8a234b",
+      "bytes": 72158
+    },
+    {
+      "path": "sources/github.com/home-assistant/core/requirements_test.txt",
+      "sha256": "cbca7d43b49f697bd18825b412170c10f479fbdab63db99cfbdf63918f44d0aa",
+      "bytes": 1548
+    },
+    {
+      "path": "sources/github.com/home-assistant/core/script/bootstrap",
+      "sha256": "c920c9b8347b46abd7dbb12833fb125d393e3a637317405b4c7c2bdf7e2789c4",
+      "bytes": 511
+    },
+    {
+      "path": "sources/github.com/home-assistant/core/script/setup",
+      "sha256": "b56bbc608ab81944b3f6507b4cf52dfdac470b9f5312fb3c0bfd9f70810765f0",
+      "bytes": 1012
+    },
+    {
+      "path": "sources/github.com/home-assistant/core/tests/components/abode/test_init.py",
+      "sha256": "bbf2aa7213d003efab7566f95a1880405082a52049690261c2b81e65bfedfa04",
+      "bytes": 4254
+    },
+    {
+      "path": "sources/github.com/iced-rs/iced/.github/workflows/test.yml",
+      "sha256": "425009e311909cfa967a2f8f57819e9e03b9d68d9789d929261e9c60a72a7ec9",
+      "bytes": 828
+    },
+    {
+      "path": "sources/github.com/iced-rs/iced/CONTRIBUTING.md",
+      "sha256": "802768711c4c144040ff62dd60d8a3557c12d512442b15a5ddc710b0d4439010",
+      "bytes": 1726
+    },
+    {
+      "path": "sources/github.com/iced-rs/iced/Cargo.toml",
+      "sha256": "f83d488a8b5bbe72605fc550519b25a4de2b812258e0d3d969dbaad216fbc82a",
+      "bytes": 9253
+    },
+    {
+      "path": "sources/github.com/iced-rs/iced/README.md",
+      "sha256": "58c0921d4adfa3ec01c0600007e02772599d6efa671320263792f3fe26c6d71d",
+      "bytes": 7212
+    },
+    {
+      "path": "sources/github.com/iced-rs/iced/_commit.json",
+      "sha256": "42d7ec6199fbec6905e3528a0e3ce599229a29523c1824c130a9ede5d581d90f",
+      "bytes": 4718
+    },
+    {
+      "path": "sources/github.com/iced-rs/iced/_repository.json",
+      "sha256": "f19e08a750a9879698b31f61a16189ce7cf086409113f40659789e1068cac427",
+      "bytes": 6144
+    },
+    {
+      "path": "sources/github.com/microsoft/TypeScript/CONTRIBUTING.md",
+      "sha256": "b45301bb6687e1dfadc253640ee20766aa02a16d9578e92eee8c530b808d4112",
+      "bytes": 9195
+    },
+    {
+      "path": "sources/github.com/microsoft/TypeScript/Herebyfile.mjs",
+      "sha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421",
+      "bytes": 125368
+    },
+    {
+      "path": "sources/github.com/microsoft/TypeScript/README.md",
+      "sha256": "b43867a1a978a0a3d881b91e50e9807f1f56e3f1dd54d65cad43f471c84e0036",
+      "bytes": 2741
+    },
+    {
+      "path": "sources/github.com/microsoft/TypeScript/_commit.json",
+      "sha256": "873ad8ed7259aef76aeeba5980c5e9a7ffbe647240020ec47440d2f9488ef5a6",
+      "bytes": 6104
+    },
+    {
+      "path": "sources/github.com/microsoft/TypeScript/_repository.json",
+      "sha256": "cc355de7d9ea5b7891a9c4afbaf2af5394679ea9467ce2da1d1ea5ce370cb343",
+      "bytes": 6738
+    },
+    {
+      "path": "sources/github.com/microsoft/TypeScript/_root-directory.json",
+      "sha256": "eff16ff4284ed4e1813c51f75eaaef0ff255e1374858326f745f998f40c52c45",
+      "bytes": 21157
+    },
+    {
+      "path": "sources/github.com/microsoft/TypeScript/go.work",
+      "sha256": "d6c5314b1f983eb6de36253c903ac00aa8e6fecd9512d2adba882b5701ce7d29",
+      "bytes": 33
+    },
+    {
+      "path": "sources/github.com/microsoft/TypeScript/package.json",
+      "sha256": "2828c1d269bd9c80d634131ec107ac69f1cfc3bf1f98d24c112c825c8acd7902",
+      "bytes": 1838
+    },
+    {
+      "path": "sources/github.com/microsoft/TypeScript/tsc/go.mod",
+      "sha256": "1e0963224f3096e3e8215acea83c033392c8135e7453b8a9680261baa5c18b25",
+      "bytes": 748
+    },
+    {
+      "path": "sources/github.com/openinterpreter/openinterpreter/README.md",
+      "sha256": "8f6c33487eca77769798677d32bce15335d0439f129c9a0413e12e0d9e70ab7a",
+      "bytes": 8364
+    },
+    {
+      "path": "sources/github.com/openinterpreter/openinterpreter/_commit.json",
+      "sha256": "1a0755fb8964411019a582e28f71f7c33666ea355ac9e9b3448978133c91c0e5",
+      "bytes": 8962
+    },
+    {
+      "path": "sources/github.com/openinterpreter/openinterpreter/_directory.json",
+      "sha256": "7203732cc9399d32e391a913ca00aa36ba8a06ce160678a45f6eecc7f6548913",
+      "bytes": 55741
+    },
+    {
+      "path": "sources/github.com/openinterpreter/openinterpreter/_repository.json",
+      "sha256": "df8f16a3118eaa7756a10bb365a33b59171301e88164f13897053c7df02b43ae",
+      "bytes": 7100
+    },
+    {
+      "path": "sources/github.com/tauri-apps/tauri/.github/CONTRIBUTING.md",
+      "sha256": "28fc0f28ee0642a903bd62e283429a40f7337891d75ff6d7e7739675400d6123",
+      "bytes": 8196
+    },
+    {
+      "path": "sources/github.com/tauri-apps/tauri/.github/workflows/test-core.yml",
+      "sha256": "37c4f7098d4285a3393c1788c704d9ced6eaddaaa4fdcbf77669b3dbc53db4b7",
+      "bytes": 5301
+    },
+    {
+      "path": "sources/github.com/tauri-apps/tauri/Cargo.toml",
+      "sha256": "6e04a4e37699cf7d44d35d14fa4f0626bbaea7cde433b81ad8a9adeefe211bc1",
+      "bytes": 2953
+    },
+    {
+      "path": "sources/github.com/tauri-apps/tauri/README.md",
+      "sha256": "3aaaf7be9a2f740b105e86a6c569a76968eb982a28a228fbc1f014627c7a10ec",
+      "bytes": 6055
+    },
+    {
+      "path": "sources/github.com/tauri-apps/tauri/_commit.json",
+      "sha256": "79db1602ad075e96249aaf5e9c311d13fbfab4a9563db74f79f61df4d9bff9d0",
+      "bytes": 6230
+    },
+    {
+      "path": "sources/github.com/tauri-apps/tauri/_directory-.github.json",
+      "sha256": "204fc4980275bc0f14b2afdc3e79d76cd0257220c4d41aee2682d582e2153ce0",
+      "bytes": 10393
+    },
+    {
+      "path": "sources/github.com/tauri-apps/tauri/_directory-.github_workflows.json",
+      "sha256": "5d07b4ea3923fcd466db533f3146f5f0f68ecde1c34edc4f00080f4783533eed",
+      "bytes": 25631
+    },
+    {
+      "path": "sources/github.com/tauri-apps/tauri/_repository.json",
+      "sha256": "076980a26e214bc14fa981caa8938514e17f312a94c4654a710fc8e909c8c9b4",
+      "bytes": 6441
+    },
+    {
+      "path": "sources/github.com/tauri-apps/tauri/_root-directory.json",
+      "sha256": "0b2a0c9a6d27108e819f8f136da06a0ff1cfd04479dffde8583aac79d2bf736d",
+      "bytes": 27933
+    },
+    {
+      "path": "sources/github.com/vuejs/core/.github/contributing.md",
+      "sha256": "433673810dc21f66c83884a108a45ec5d1192d1964e6f2cefe840bfeb6de9843",
+      "bytes": 19541
+    },
+    {
+      "path": "sources/github.com/vuejs/core/.node-version",
+      "sha256": "a784a891ee985530f25d616fa372d1b360fc9d4ef38932ab8dc2f45edfa5b01d",
+      "bytes": 5
+    },
+    {
+      "path": "sources/github.com/vuejs/core/README.md",
+      "sha256": "ee86575a4126eb9e9e40f94679f85b9b2f090230924cf984153e1a15563e7ffd",
+      "bytes": 2741
+    },
+    {
+      "path": "sources/github.com/vuejs/core/_commit.json",
+      "sha256": "3db7a0adfeb7eea3369902a4c1aba8f6d675a78bfd9112714979ef72f668f912",
+      "bytes": 18770
+    },
+    {
+      "path": "sources/github.com/vuejs/core/_directory-packages-private.json",
+      "sha256": "7367be0afa55519011961804b95facfb379b37560073b9469c2a40efb73d4c34",
+      "bytes": 6313
+    },
+    {
+      "path": "sources/github.com/vuejs/core/_directory-packages.json",
+      "sha256": "acdec0bed29cce36eb197afe6f708e70f549dbd0c781045d8e39019179839f07",
+      "bytes": 10745
+    },
+    {
+      "path": "sources/github.com/vuejs/core/_repository.json",
+      "sha256": "ea70cc5f8fd2bceec4694047ff671903810a7257a967266ec28121d9dcebd573",
+      "bytes": 5953
+    },
+    {
+      "path": "sources/github.com/vuejs/core/_root-directory.json",
+      "sha256": "14d4449c8a42370c54460ff0386d25bbe0e6d5e0477eba62e968688ace192dd2",
+      "bytes": 24109
+    },
+    {
+      "path": "sources/github.com/vuejs/core/package.json",
+      "sha256": "e55e3b7b508c74dc88e9fae8f445ebfb95052b4c50f8503d9cb17594f802e4d1",
+      "bytes": 5155
+    },
+    {
+      "path": "sources/github.com/vuejs/core/pnpm-lock.yaml",
+      "sha256": "13d0f6c58ac31f229387442e42a35a66a700386349ee1b99bdb7e6a2fbc3aadd",
+      "bytes": 201228
+    },
+    {
+      "path": "sources/github.com/vuejs/core/pnpm-workspace.yaml",
+      "sha256": "54d0a86d1828707bbfe24214ee584167ce08dc70f6bfccb2fcea748e6f1c8401",
+      "bytes": 862
+    },
+    {
+      "path": "sources/github.com/vuejs/core/vitest.config.ts",
+      "sha256": "98db4cc683fa725ef5beb3b19f215d07ffb972cf80650b404221a73aaa03a361",
+      "bytes": 3321
+    },
+    {
+      "path": "sources/github.com/ytdl-org/youtube-dl/CONTRIBUTING.md",
+      "sha256": "b7f4dd2ac304c224b671d4830813bd6b2b8799da8d78f13cf927d4379ebac247",
+      "bytes": 22864
+    },
+    {
+      "path": "sources/github.com/ytdl-org/youtube-dl/Makefile",
+      "sha256": "5335edf29074bb04a286c62f93e9cb8505b789982700ca14fb22dafb42986aa4",
+      "bytes": 6235
+    },
+    {
+      "path": "sources/github.com/ytdl-org/youtube-dl/README.md",
+      "sha256": "dc249af3a7587ad18dce6d22f6e486ac0af6f91fe1172e7e866bae584e0c73cb",
+      "bytes": 101042
+    },
+    {
+      "path": "sources/github.com/ytdl-org/youtube-dl/_commit.json",
+      "sha256": "d18f69e85192667e2e88c6ccc7b07402a78e1e3a4aa17af5aaf1462d27711c8e",
+      "bytes": 4362
+    },
+    {
+      "path": "sources/github.com/ytdl-org/youtube-dl/_directory-test.json",
+      "sha256": "caf2ccfef41d9f532bf4830c1fae7f28e2f0c67b85391a0f4ddc46126d3a7108",
+      "bytes": 37160
+    },
+    {
+      "path": "sources/github.com/ytdl-org/youtube-dl/_directory-youtube_dl_downloader.json",
+      "sha256": "5b630a680999f5904168798e159c7b1da652157d8ebb90f63f1249f59438b9b6",
+      "bytes": 12605
+    },
+    {
+      "path": "sources/github.com/ytdl-org/youtube-dl/_repository.json",
+      "sha256": "043bb273f417422ec6bac6aab5704034d932f9a88df69608b66a1477b1fa2d04",
+      "bytes": 6438
+    },
+    {
+      "path": "sources/github.com/ytdl-org/youtube-dl/_root-directory.json",
+      "sha256": "97673f9407e4a2fc3f8f0f95abde9a3daa1b15573932f642c83d18e3937d3665",
+      "bytes": 15975
+    },
+    {
+      "path": "sources/github.com/ytdl-org/youtube-dl/setup.cfg",
+      "sha256": "31163434a5ecc554c09cbc8ee56a12e81af3da6360ccf73a88667c8be456b69f",
+      "bytes": 230
+    },
+    {
+      "path": "sources/github.com/ytdl-org/youtube-dl/setup.py",
+      "sha256": "b22fbdb4f23e480976e1a5a20b95848c26680b04b796838756241191bd8dfb4d",
+      "bytes": 4621
+    },
+    {
+      "path": "sources/github.com/ytdl-org/youtube-dl/test/helper.py",
+      "sha256": "1a71eb39bc2628ef9d6c1fb87c521914d5dd3ccbb17d1cf164be892f789bb055",
+      "bytes": 10843
+    },
+    {
+      "path": "sources/github.com/ytdl-org/youtube-dl/test/test_downloader_external.py",
+      "sha256": "4629150db82a4c166a3f3fb2ec5da914de1e97499715941465be4f8d48f89711",
+      "bytes": 9094
+    },
+    {
+      "path": "sources/github.com/ytdl-org/youtube-dl/test/test_downloader_http.py",
+      "sha256": "b0b6863e5ef58a5e386a7a1769e04e4e957cd60eb878ed3bffeeb26f61119dad",
+      "bytes": 3383
+    },
+    {
+      "path": "sources/github.com/ytdl-org/youtube-dl/tox.ini",
+      "sha256": "75c47b0f9ed2b6ac528d34c6f0579e09de1a4f0809d18397120827a67dde2274",
+      "bytes": 614
+    },
+    {
+      "path": "sources/github.com/ytdl-org/youtube-dl/youtube_dl/__init__.py",
+      "sha256": "8ce61cad6c8d3f0e1c3c4c86b672c087dff7eb18395e2e45fc04945f7303832b",
+      "bytes": 20684
+    },
+    {
+      "path": "sources/github.com/ytdl-org/youtube-dl/youtube_dl/downloader/__init__.py",
+      "sha256": "5293fc4a269afa201181a3d24eb69977ca6649b0d0eaa433fa7846049277b53a",
+      "bytes": 2031
+    },
+    {
+      "path": "tasks.json",
+      "sha256": "0294921cfc3584b8534c0718608f43cdd9a5cd3d3733c2efd024d324b4e31978",
+      "bytes": 7751
+    },
+    {
+      "path": "verify_source_freeze.py",
+      "sha256": "2c0ad3750fbc06b7722801cb050208d2ccce090861a40f0b72a1a04ba8a0fee5",
+      "bytes": 6893
+    }
+  ]
+}

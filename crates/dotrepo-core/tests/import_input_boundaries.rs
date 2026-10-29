@@ -1,16 +1,21 @@
 use dotrepo_core::{import_repository, ImportMode};
 use std::fs;
 use std::path::{Path, PathBuf};
+use std::sync::atomic::{AtomicU64, Ordering};
 
 struct Fixture(PathBuf);
 impl Fixture {
     fn new() -> Self {
+        static COUNTER: AtomicU64 = AtomicU64::new(0);
+        let sequence = COUNTER.fetch_add(1, Ordering::Relaxed);
         let id = std::time::SystemTime::now()
             .duration_since(std::time::UNIX_EPOCH)
             .unwrap()
             .as_nanos();
-        let path =
-            std::env::temp_dir().join(format!("dotrepo-import-input-{}-{id}", std::process::id()));
+        let path = std::env::temp_dir().join(format!(
+            "dotrepo-import-input-{}-{id}-{sequence}",
+            std::process::id()
+        ));
         fs::create_dir_all(path.join("repo")).unwrap();
         Self(path)
     }

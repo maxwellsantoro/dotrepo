@@ -1,0 +1,140 @@
+{
+  "github.com/storytold/photocraft": [
+    {
+      "path": ".cargo/config.toml",
+      "sha256": "c185a2b859850d94af015a9672c1568e1ef73b12612d820f596ef967b835f637"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "849dcb393d4b20779e0c0f71141fc5b505a181b71f35b497531dbd2e05a6c62a"
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "9e08a93ebf39236315f8aa86a1e129b77c30a17049c1bcbb62a08c19776a85e3"
+    },
+    {
+      "path": "README.md",
+      "sha256": "620731e78f824f535e75fa39bfb2fef1bb290ac74579f02b58e4c425d1d65377"
+    },
+    {
+      "path": "apps/photocraft/Cargo.toml",
+      "sha256": "e489011fd26b5855ef9167454b321f3e951e2ecc8ac3751eba2320d90f83363b"
+    },
+    {
+      "path": "apps/photocraft/src/main.rs",
+      "sha256": "8fb06954e2f6db6983cc7167a6874ba407c5ecc9796d1f6e9596dca081ee9efc"
+    },
+    {
+      "path": "docs/development.md",
+      "sha256": "ad37558a84aa2f84928eb8b2554988fbed73ca3ac989034fe06bed9603446873"
+    }
+  ],
+  "github.com/warpdotdev/warp": [
+    {
+      "path": ".cargo/config.toml",
+      "sha256": "28433f6ab539cdad8e18d6905ba1609e9414f238ad3ac1f732339196b94c6fd8"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "c547e10474dc98c4e301e8790e5da9258fd3453874f9f11312b88ca59ac11b2f"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "sha256": "72f64aa3d8d6202c26c789557306e2ad341185df3ac3eb9024547e40b382e953"
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "98a7696ced9fc1bafd76be0fa99d217d642d71894e5b48984d22b6d2d77ac7f0"
+    },
+    {
+      "path": "README.md",
+      "sha256": "9fad485973685dd86187fafd517b02121695a9cf6729c1bb96ad45b19a94b09b"
+    },
+    {
+      "path": "app/Cargo.toml",
+      "sha256": "240691ed0fcfe4f86933061c0a938e0d1b63cba94e5783b1c405a2275b538706"
+    },
+    {
+      "path": "rust-toolchain.toml",
+      "sha256": "8008c4269290b7fb62f8d4cc8b5638cb86298f336721ba9f839110474756e85e"
+    },
+    {
+      "path": "script/bootstrap",
+      "sha256": "9ce2067212b456441afc8803b4b944f3067a5654c1e540e5845122b8d16d6127"
+    },
+    {
+      "path": "script/install_cargo_build_deps",
+      "sha256": "202900424979302dfab23e0dca2d6cbec7d552b76f5c6675398542003bc503b0"
+    },
+    {
+      "path": "script/install_cargo_test_deps",
+      "sha256": "0a727672a05329b7f9c11c6ea9f9a0426d53442373a6d754dbca48f2293db2b4"
+    },
+    {
+      "path": "script/linux/bootstrap",
+      "sha256": "53b2fd3b7228f24821484a9ff7006214d52cb75114a16f2f76a53291cc969de9"
+    },
+    {
+      "path": "script/macos/bootstrap",
+      "sha256": "223fbbf61115efdcfe5dc572a04d3c57492553786552c6aa3ac283f2beebf07f"
+    },
+    {
+      "path": "script/presubmit",
+      "sha256": "5295a3577535a66a3258ae3370e9b970ac836111584616254a00790f2e20164a"
+    },
+    {
+      "path": "script/windows/bootstrap.ps1",
+      "sha256": "7f93ee7cdeb72a1d74a1e17eee4f5ec9c3e19dee6287c703862639941905f5fd"
+    }
+  ],
+  "github.com/zellij-org/zellij": [
+    {
+      "path": ".cargo/config.toml",
+      "sha256": "d42813632ce542b468c718473de1a4a6c8f6d302c534717a2f19b7aef10dbc3e"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "sha256": "2c4575e7a3575609fdde406b8c87f3df53802460dbfb03b4253f4330ab37f63a"
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "c02efc9801eefadf579135c968cafe27d2d5e12b86ac5e020ec39fe2130829a2"
+    },
+    {
+      "path": "README.md",
+      "sha256": "b069efb98ef8cec100cc5b32debc1dc4a912f9d57ef11279a261a8a3c9548583"
+    },
+    {
+      "path": "default-plugins/about/Cargo.toml",
+      "sha256": "fb8e9751be70f93df895d6f37cf0f23c6ad55d696c1f82723789dddec467ff8f"
+    },
+    {
+      "path": "default-plugins/about/src/keybindings.rs",
+      "sha256": "a3508e89632ddd6e472acc903c96033fe93a1bc3875b19ea7dd2eaf47f5287f3"
+    },
+    {
+      "path": "default-plugins/about/src/main.rs",
+      "sha256": "be43bccfffe92e0a5843128174ca16b10cb04e4745496c6c69906242e2cd4670"
+    },
+    {
+      "path": "default-plugins/about/src/onboarding.rs",
+      "sha256": "968b57113792fdd3bee06e9ffec88afe4714347a40a90c0474684b653ed93852"
+    },
+    {
+      "path": "rust-toolchain.toml",
+      "sha256": "733cf0884a5f62e74d4362b290704b572061e71e9f7989096aef165f99de0fdf"
+    },
+    {
+      "path": "xtask/src/build.rs",
+      "sha256": "ae5fcc92076183ff7e1fea0555576ea660933721600af3d00ba7e824a46cc378"
+    },
+    {
+      "path": "xtask/src/main.rs",
+      "sha256": "5e213118f58efae8bd039ff4436dc6fc4e8b4aeaa44472dba764101643b30df3"
+    },
+    {
+      "path": "xtask/src/test.rs",
+      "sha256": "561daa9a37efaf44ba285aa88669fb9228de402696bb25e310340238b021e0cb"
+    }
+  ]
+}

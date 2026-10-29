@@ -1,0 +1,299 @@
+{
+  "schema": "dotrepo-e1-source-freeze/v1",
+  "slice": "typescript-6-tasks-3-repositories",
+  "frozenAt": "2026-10-29T05:13:48.337959+00:00",
+  "status": "source-gold-frozen;extraction-not-requested",
+  "selectionInputs": [
+    {
+      "path": "benchmarks/head-to-head/experiments/applicability-2026-10-29/README.md",
+      "sha256": "c606c428cb3c3d78a669b68416848cec7fe4de81c8b07aa6083850c6835a978a"
+    },
+    {
+      "path": "benchmarks/head-to-head/experiments/applicability-2026-10-29/e1.md",
+      "sha256": "9ec156e06ba21105b68f51998d04168ca14f8d5f03e3d6c0ef115f1cb2515de8"
+    },
+    {
+      "path": "benchmarks/head-to-head/experiments/applicability-2026-10-29/screening-rules.md",
+      "sha256": "d3c59940aaac5a7e86ead77814111f07a59a536affea861ca0fd60af4edce6f7"
+    },
+    {
+      "path": "benchmarks/head-to-head/experiments/applicability-2026-10-29/source-frame.json",
+      "sha256": "ea9bb8138a5e1c3eb8a5bfc698ace15d39194b080ed68492ce3e9d9c1c7666e7"
+    },
+    {
+      "path": "benchmarks/head-to-head/experiments/applicability-2026-10-29/screening-reservations.json",
+      "sha256": "cd91fb903108d426c87fba86704f7e9dc219b54314445a22eeffa618df090850"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "typescript/.gitattributes",
+      "sha256": "e071cf03675c56e21580ea85f22ad32ef69d591f15ce1dbaabbd1fb204825df0"
+    },
+    {
+      "path": "typescript/README.md",
+      "sha256": "859507204fd8f26598a58329d4017ff75cabfd1df8befa880f33e703450c417a"
+    },
+    {
+      "path": "typescript/gold.json",
+      "sha256": "2a9b2814df95f49d71e9d8e5294644221f369e774b633a52206d4a5fe0ef4c7a"
+    },
+    {
+      "path": "typescript/receipts/github.com/Eugeny/tabby/AGENTS.md.error.json",
+      "sha256": "aaa29267724a0af530513adf5a7893b5f3ab5b77bb07396affe33d1d2f1df8ea"
+    },
+    {
+      "path": "typescript/receipts/github.com/Eugeny/tabby/CONTRIBUTING.md.error.json",
+      "sha256": "aaa29267724a0af530513adf5a7893b5f3ab5b77bb07396affe33d1d2f1df8ea"
+    },
+    {
+      "path": "typescript/receipts/github.com/Eugeny/tabby/enrollment.json",
+      "sha256": "a3fa56fad05c060aefe158502bb8a1ddd7aad111f974b9a43d01cc14b8527466"
+    },
+    {
+      "path": "typescript/receipts/github.com/Eugeny/tabby/listing-tabby-electron-test.error.json",
+      "sha256": "aaa29267724a0af530513adf5a7893b5f3ab5b77bb07396affe33d1d2f1df8ea"
+    },
+    {
+      "path": "typescript/receipts/github.com/Eugeny/tabby/repository-metadata.json",
+      "sha256": "51abce32912e71149ee78685ba4dacd2b82174378632199f271eb1ce12cffb00"
+    },
+    {
+      "path": "typescript/receipts/github.com/Eugeny/tabby/tabby-electron/src/tabby-core-tests.ts.error.json",
+      "sha256": "aaa29267724a0af530513adf5a7893b5f3ab5b77bb07396affe33d1d2f1df8ea"
+    },
+    {
+      "path": "typescript/receipts/github.com/Eugeny/tabby/tabby-electron/test/process.test.ts.error.json",
+      "sha256": "aaa29267724a0af530513adf5a7893b5f3ab5b77bb07396affe33d1d2f1df8ea"
+    },
+    {
+      "path": "typescript/receipts/github.com/RocketChat/Rocket.Chat/CONTRIBUTING.md.error.json",
+      "sha256": "aaa29267724a0af530513adf5a7893b5f3ab5b77bb07396affe33d1d2f1df8ea"
+    },
+    {
+      "path": "typescript/receipts/github.com/RocketChat/Rocket.Chat/enrollment.json",
+      "sha256": "c1e191b41c993d974a0b9dda25bfd75b01a600f5622da48dfb43e546f51655a4"
+    },
+    {
+      "path": "typescript/receipts/github.com/RocketChat/Rocket.Chat/repository-metadata.json",
+      "sha256": "bd7c8993b0d59d8e97be5f184f6dc6f649e2844bf06c2a1f8d4a0928d300a8eb"
+    },
+    {
+      "path": "typescript/receipts/github.com/agalwood/Motrix/enrollment.json",
+      "sha256": "9e3b975948be676a7baabf70836a7ad746384b4124c141edce922623332cf0b3"
+    },
+    {
+      "path": "typescript/receipts/github.com/agalwood/Motrix/listing-packages.json",
+      "sha256": "65de51477026616906a7cb21fd67a099cb7d5358b70f87386a202e52270dd44b"
+    },
+    {
+      "path": "typescript/receipts/github.com/agalwood/Motrix/listing-src-core.json",
+      "sha256": "5a109304d34daa014c7d2d2d28b06d0cf369482df9a148eb6413de257b44a0bc"
+    },
+    {
+      "path": "typescript/receipts/github.com/agalwood/Motrix/packages/finalize-fs/package.json.error.json",
+      "sha256": "aaa29267724a0af530513adf5a7893b5f3ab5b77bb07396affe33d1d2f1df8ea"
+    },
+    {
+      "path": "typescript/receipts/github.com/agalwood/Motrix/repository-metadata.json",
+      "sha256": "dc6e07323755b3e0c0f03b56490c166ee9a26bef4fcaa13cf48c87f6ba1e80e4"
+    },
+    {
+      "path": "typescript/receipts/github.com/pixijs/pixijs/CONTRIBUTING.md.error.json",
+      "sha256": "aaa29267724a0af530513adf5a7893b5f3ab5b77bb07396affe33d1d2f1df8ea"
+    },
+    {
+      "path": "typescript/receipts/github.com/pixijs/pixijs/enrollment.json",
+      "sha256": "236889d2411721404181693682e3dc41b2aaecea0911450ef3d0daaf43f5ba3d"
+    },
+    {
+      "path": "typescript/receipts/github.com/pixijs/pixijs/listing-examples.json",
+      "sha256": "70b1d241c05fccb6dd97572623ba19d65dddf4b44591f48d75d48c81bfc04edf"
+    },
+    {
+      "path": "typescript/receipts/github.com/pixijs/pixijs/listing-tests-visual-scenes.json",
+      "sha256": "abbf196ca6092208e169aa0477a216333a78afc3c315211b25a51fc6eb7ba45c"
+    },
+    {
+      "path": "typescript/receipts/github.com/pixijs/pixijs/repository-metadata.json",
+      "sha256": "9187f0f08b21902993f6af08a4a8dff508e31bd7f2740fd3660ab503ed1982eb"
+    },
+    {
+      "path": "typescript/receipts/github.com/pixijs/pixijs/src/accessibility/README.md.error.json",
+      "sha256": "aaa29267724a0af530513adf5a7893b5f3ab5b77bb07396affe33d1d2f1df8ea"
+    },
+    {
+      "path": "typescript/receipts/github.com/pixijs/pixijs/tests/README.md.error.json",
+      "sha256": "aaa29267724a0af530513adf5a7893b5f3ab5b77bb07396affe33d1d2f1df8ea"
+    },
+    {
+      "path": "typescript/receipts/github.com/pixijs/pixijs/tests/visual/README.md.error.json",
+      "sha256": "aaa29267724a0af530513adf5a7893b5f3ab5b77bb07396affe33d1d2f1df8ea"
+    },
+    {
+      "path": "typescript/receipts/github.com/yangshun/tech-interview-handbook/enrollment.json",
+      "sha256": "ac332782f2b3f096ab5936741d5a6a84b3434141b516ba2c6023dcc97f64ae98"
+    },
+    {
+      "path": "typescript/receipts/github.com/yangshun/tech-interview-handbook/repository-metadata.json",
+      "sha256": "b0dc9730fe51635af6b7be1e69ad3991fe715d472a349d97d1de3fbb300e4b0c"
+    },
+    {
+      "path": "typescript/screening-ledger.json",
+      "sha256": "713584a6ea32a4cae0d9c5acb7a386fdb13d988e8953033e9d2b5adf8907f3c9"
+    },
+    {
+      "path": "typescript/selection-clarification.json",
+      "sha256": "bb32b1fba230699e8c1408c3dabbfd41c00d9e389a4e6795ebe1bfa90bcd99c2"
+    },
+    {
+      "path": "typescript/sources/github.com/Eugeny/tabby/HACKING.md",
+      "sha256": "8244eec69145ca5e2915e8bc51186e0c125ff9e317563043ed7b82cd78c847bd"
+    },
+    {
+      "path": "typescript/sources/github.com/Eugeny/tabby/README.md",
+      "sha256": "afda31192ba70317f3a167ef9cb7efcd53226e127c503ddd9f6b6d248133a834"
+    },
+    {
+      "path": "typescript/sources/github.com/Eugeny/tabby/package.json",
+      "sha256": "4dec36936e3de66ba0ee3caf78ac5da509704db84e35c835de2c8418be39cc7e"
+    },
+    {
+      "path": "typescript/sources/github.com/Eugeny/tabby/scripts/test-register.mjs",
+      "sha256": "bff57326a660a42540d755520fddf9623abfb3adfe4baae7f47a2738031c00af"
+    },
+    {
+      "path": "typescript/sources/github.com/Eugeny/tabby/tabby-electron/package.json",
+      "sha256": "14dffa3f6ab3964acbec3b7fa2297ef8409226be20dd5feef23247f8159c4f56"
+    },
+    {
+      "path": "typescript/sources/github.com/Eugeny/tabby/tabby-electron/src/index.ts",
+      "sha256": "8e654fd6f5edbde0ea0cb71782d83fbcf843e27e29eddea34e43f214c387d429"
+    },
+    {
+      "path": "typescript/sources/github.com/RocketChat/Rocket.Chat/README.md",
+      "sha256": "f2846b7430368be25cc9fc1103cf59e82402ff48c1a205b796a7b8ddd60947e3"
+    },
+    {
+      "path": "typescript/sources/github.com/RocketChat/Rocket.Chat/package.json",
+      "sha256": "93e020db15ace951b7b58a948849b12d4875d1d6b0d2b68309c8df5a807fe307"
+    },
+    {
+      "path": "typescript/sources/github.com/agalwood/Motrix/AGENTS.md",
+      "sha256": "929cc503e2686806d6f72cc7e88ef46480f2203cb886b2263c1f576ce1391985"
+    },
+    {
+      "path": "typescript/sources/github.com/agalwood/Motrix/CLAUDE.md",
+      "sha256": "d101f23fe120744d650994a725b7233396ca8af87ce15317debc63d6d82c48f0"
+    },
+    {
+      "path": "typescript/sources/github.com/agalwood/Motrix/CONTRIBUTING.md",
+      "sha256": "3d44d6983920981a4de26a943c64c76517da635d028ced9fe3d6edc22622244e"
+    },
+    {
+      "path": "typescript/sources/github.com/agalwood/Motrix/README.md",
+      "sha256": "369f356f974b4cc998fe6efee13ae4ebaa00f716808834a9832251819f94bf7e"
+    },
+    {
+      "path": "typescript/sources/github.com/agalwood/Motrix/package.json",
+      "sha256": "31793e4b5760930e664fb2b9a300f2afc356dd61bd7d015fb96e0760fd8b8af6"
+    },
+    {
+      "path": "typescript/sources/github.com/agalwood/Motrix/packages/finalize-fs/Cargo.toml",
+      "sha256": "7afb18a80e067624d04f6452356327c7eda9773b0419efc0c2087d22523b6cee"
+    },
+    {
+      "path": "typescript/sources/github.com/agalwood/Motrix/packages/native-host/Cargo.toml",
+      "sha256": "8c1fa5b14a24f9bb73e4f97c9007ce3b1c0a7e29057532fa403adec98e8340b0"
+    },
+    {
+      "path": "typescript/sources/github.com/agalwood/Motrix/packages/native-host/package.json",
+      "sha256": "d4f55d1a16eaed509c01ffd0fcaf2c07915da6344588f780ed7d44ebd50b5524"
+    },
+    {
+      "path": "typescript/sources/github.com/agalwood/Motrix/packages/safari-bootstrap/Package.swift",
+      "sha256": "c42af614af3cd6e9b7af4a71c109df3752051ea25c57ceee6d91c8b324a229ce"
+    },
+    {
+      "path": "typescript/sources/github.com/agalwood/Motrix/pnpm-workspace.yaml",
+      "sha256": "37a2d1dae6b3cf9fb774b5042ca8e025b4ddb22d6329bbcac0558ba7ca0b0c0d"
+    },
+    {
+      "path": "typescript/sources/github.com/agalwood/Motrix/scripts/ensure-native-abi.mjs",
+      "sha256": "9d1d93b1f8b07665eee0f86b5defe924a3cbea73cd3cc2fd4b39d9cc7775b575"
+    },
+    {
+      "path": "typescript/sources/github.com/agalwood/Motrix/src/core/log-redact.test.ts",
+      "sha256": "f78ca797164723d3377d193b23f49ae1de16f82f20df5468e53aa63843f979c6"
+    },
+    {
+      "path": "typescript/sources/github.com/agalwood/Motrix/tests/setup/build-worker.ts",
+      "sha256": "7eef0608c00024a7fda941f35064d80253b16881de501b5abdbe24b47d5bf2f7"
+    },
+    {
+      "path": "typescript/sources/github.com/agalwood/Motrix/vitest.config.ts",
+      "sha256": "cd37580a83b2a57f651a626670858c3712b2309bab7484081a76edd1a05d8cf1"
+    },
+    {
+      "path": "typescript/sources/github.com/pixijs/pixijs/.configs/jest.config.js",
+      "sha256": "b8fa97316d2cf32578b106ebd7467a717ca9b780c227d9ded35b8fb1df7ef177"
+    },
+    {
+      "path": "typescript/sources/github.com/pixijs/pixijs/.github/CONTRIBUTING.md",
+      "sha256": "0c174f4aa2eae635f24137871297ac6f2b5a3268c67daed80b33591b65c0b897"
+    },
+    {
+      "path": "typescript/sources/github.com/pixijs/pixijs/README.md",
+      "sha256": "b3cb23be81679ac800387f85ed094131addf9226136a2133dbdd7c8922e6e088"
+    },
+    {
+      "path": "typescript/sources/github.com/pixijs/pixijs/examples/package.json",
+      "sha256": "1119028e6be9da2b735f401c3db58623ef22329218da6da24f139813571bc23e"
+    },
+    {
+      "path": "typescript/sources/github.com/pixijs/pixijs/package.json",
+      "sha256": "2bb6b7570ca5f4a062609b34fd16fecfa2a76e8c3599c67a5b996a276eabaa32"
+    },
+    {
+      "path": "typescript/sources/github.com/pixijs/pixijs/playground/package.json",
+      "sha256": "6f52ef792a217f5714e38e48706b7c2075b0308e672075e06ed504a8b59c345e"
+    },
+    {
+      "path": "typescript/sources/github.com/pixijs/pixijs/scripts/README.md",
+      "sha256": "42edd71adf3f04eed49fe665d1e3c2d73d59d4c25fe7f76f491f619116c2c475"
+    },
+    {
+      "path": "typescript/sources/github.com/pixijs/pixijs/scripts/jest/jest-global-setup.ts",
+      "sha256": "b637d04e4830a80cad7d7a93d5ff54cfc4d1506a42364c4cd27eec4413bd2828"
+    },
+    {
+      "path": "typescript/sources/github.com/pixijs/pixijs/scripts/test.mts",
+      "sha256": "f93cd1f44b5e172e695c25e413620bf653ded7aefec206e93de63a80aecc51d2"
+    },
+    {
+      "path": "typescript/sources/github.com/yangshun/tech-interview-handbook/CONTRIBUTING.md",
+      "sha256": "5e0bfb974e13f9f5c29e6eb6c2e92ca0bda0e30943bc594d61504826a5ec57ce"
+    },
+    {
+      "path": "typescript/sources/github.com/yangshun/tech-interview-handbook/README.md",
+      "sha256": "31b808a2c614995c40005621825f395c8fe822018bc2944194077e2d84db792d"
+    },
+    {
+      "path": "typescript/sources/github.com/yangshun/tech-interview-handbook/package.json",
+      "sha256": "26e66890735b1c86df7fe99c7b257e32cad9676a7821c044b364e1002c170a9c"
+    },
+    {
+      "path": "typescript/sources.json",
+      "sha256": "cd7e528f4312ff8198eea094d40c9786b802c869f48c4772ed45ec1b22f5b8ac"
+    }
+  ],
+  "taskCount": 6,
+  "repositoryCount": 3,
+  "goldCounts": {
+    "supported": 4,
+    "required-abstention": 1,
+    "unresolved": 1
+  },
+  "prohibitedInputsConsulted": false,
+  "upstreamCodeExecuted": false
+}

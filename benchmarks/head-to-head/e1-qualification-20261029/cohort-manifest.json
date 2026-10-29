@@ -1,0 +1,325 @@
+{
+  "schema": "dotrepo-e1-cohort-source-manifest/v1",
+  "createdAt": "2026-10-29T05:17:47.620699+00:00",
+  "state": "source-roster-complete;source-gold-partly-unresolved;not-evaluated-by-assessor",
+  "sliceFreezes": [
+    {
+      "path": "freeze-rust.json",
+      "sha256": "de16bbd397558679033140543e24cf7ad45d0804552b2a0c2efe5356dd182205"
+    },
+    {
+      "path": "freeze-python.json",
+      "sha256": "42318a013268c4af3b6c4e0ad991a0b16747a852e3232ed60063bc003d37011d"
+    },
+    {
+      "path": "freeze-typescript.json",
+      "sha256": "755d3a3f42311708c7f00651861aced522167e9f5233b18b614ca9b7d6b63b1a"
+    },
+    {
+      "path": "freeze-go.json",
+      "sha256": "71c80721b68f9210429cecf7b4535415389ba8eea2022ad7f9c79c24495863b7"
+    }
+  ],
+  "taskCount": 24,
+  "repositoryCount": 12,
+  "taskCountsByEcosystem": {
+    "rust": 6,
+    "python": 6,
+    "javascript-typescript": 6,
+    "go": 6
+  },
+  "taskCountsByScope": {
+    "repository": 12,
+    "component": 12
+  },
+  "goldCounts": {
+    "supported": 14,
+    "required-abstention": 2,
+    "unresolved": 8
+  },
+  "screeningCounts": {
+    "enrolled": 12,
+    "excluded": 2,
+    "deferred-not-enrolled-after-quota": 1
+  },
+  "tasks": [
+    {
+      "id": "e1-rust-01-repository-tests",
+      "repository": "github.com/zellij-org/zellij",
+      "revision": "1f3df933978e00c246553070310175c392fcfe4f",
+      "ecosystem": "rust",
+      "scope": "repository",
+      "component": null,
+      "taskIntent": "Establish the maintainer-documented repository-default automated test instruction with complete applicability context; preserve separately documented optional/e2e/ignored-suite limitations.",
+      "goldState": "supported"
+    },
+    {
+      "id": "e1-rust-01-component-tests",
+      "repository": "github.com/zellij-org/zellij",
+      "revision": "1f3df933978e00c246553070310175c392fcfe4f",
+      "ecosystem": "rust",
+      "scope": "component",
+      "component": "default-plugins/about",
+      "taskIntent": "Establish a source-supported test instruction for the owned component default-plugins/about, preserving component coverage and all documented setup.",
+      "goldState": "required-abstention"
+    },
+    {
+      "id": "e1-rust-02-repository-tests",
+      "repository": "github.com/warpdotdev/warp",
+      "revision": "5a55a2aca77339ad75637bed650352369ee7fcb9",
+      "ecosystem": "rust",
+      "scope": "repository",
+      "component": null,
+      "taskIntent": "Establish the maintainer-documented repository-default automated test instruction with complete applicability context; preserve separately documented optional/e2e/ignored-suite limitations.",
+      "goldState": "unresolved"
+    },
+    {
+      "id": "e1-rust-02-component-tests",
+      "repository": "github.com/warpdotdev/warp",
+      "revision": "5a55a2aca77339ad75637bed650352369ee7fcb9",
+      "ecosystem": "rust",
+      "scope": "component",
+      "component": "app",
+      "taskIntent": "Establish a source-supported test instruction for the owned component app, preserving component coverage and all documented setup.",
+      "goldState": "unresolved"
+    },
+    {
+      "id": "e1-rust-03-repository-tests",
+      "repository": "github.com/storytold/photocraft",
+      "revision": "5f9b4391874aabc9deb2fcb905267613e4d93ec8",
+      "ecosystem": "rust",
+      "scope": "repository",
+      "component": null,
+      "taskIntent": "Establish the maintainer-documented repository-default automated test instruction with complete applicability context; preserve separately documented optional/e2e/ignored-suite limitations.",
+      "goldState": "supported"
+    },
+    {
+      "id": "e1-rust-03-component-tests",
+      "repository": "github.com/storytold/photocraft",
+      "revision": "5f9b4391874aabc9deb2fcb905267613e4d93ec8",
+      "ecosystem": "rust",
+      "scope": "component",
+      "component": "apps/photocraft",
+      "taskIntent": "Establish a source-supported test instruction for the owned component apps/photocraft, preserving component coverage and all documented setup.",
+      "goldState": "supported"
+    },
+    {
+      "id": "e1-python-01-repository-tests",
+      "repository": "github.com/ultralytics/ultralytics",
+      "revision": "922563eab42b778445e55a2edbabb6974eed8e4b",
+      "ecosystem": "python",
+      "scope": "repository",
+      "component": null,
+      "taskIntent": "Establish the documented repository-default automated test instruction and complete applicability context, preserving explicit default skips and backend/platform scope.",
+      "goldState": "supported"
+    },
+    {
+      "id": "e1-python-01-component-tests",
+      "repository": "github.com/ultralytics/ultralytics",
+      "revision": "922563eab42b778445e55a2edbabb6974eed8e4b",
+      "ecosystem": "python",
+      "scope": "component",
+      "component": "ultralytics",
+      "taskIntent": "Establish a complete source-supported test instruction for the owned component ultralytics; retain any gap in component-wide coverage or setup.",
+      "goldState": "unresolved"
+    },
+    {
+      "id": "e1-python-02-repository-tests",
+      "repository": "github.com/docling-project/docling",
+      "revision": "9051777f9e420fa3a37df77425b08f22d0bf5981",
+      "ecosystem": "python",
+      "scope": "repository",
+      "component": null,
+      "taskIntent": "Establish the documented repository-default automated test instruction and complete applicability context, preserving explicit default skips and backend/platform scope.",
+      "goldState": "unresolved"
+    },
+    {
+      "id": "e1-python-02-component-tests",
+      "repository": "github.com/docling-project/docling",
+      "revision": "9051777f9e420fa3a37df77425b08f22d0bf5981",
+      "ecosystem": "python",
+      "scope": "component",
+      "component": "docling",
+      "taskIntent": "Establish a complete source-supported test instruction for the owned component docling; retain any gap in component-wide coverage or setup.",
+      "goldState": "unresolved"
+    },
+    {
+      "id": "e1-python-03-repository-tests",
+      "repository": "github.com/keras-team/keras",
+      "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+      "ecosystem": "python",
+      "scope": "repository",
+      "component": null,
+      "taskIntent": "Establish the documented repository-default automated test instruction and complete applicability context, preserving explicit default skips and backend/platform scope.",
+      "goldState": "supported"
+    },
+    {
+      "id": "e1-python-03-component-tests",
+      "repository": "github.com/keras-team/keras",
+      "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+      "ecosystem": "python",
+      "scope": "component",
+      "component": "keras/src",
+      "taskIntent": "Establish a complete source-supported test instruction for the owned component keras/src; retain any gap in component-wide coverage or setup.",
+      "goldState": "unresolved"
+    },
+    {
+      "id": "e1-typescript-01-repository-tests",
+      "repository": "github.com/pixijs/pixijs",
+      "revision": "2e8cacbe1ed4ed0fc31d5b59b9895c811ac0e003",
+      "ecosystem": "javascript-typescript",
+      "scope": "repository",
+      "component": null,
+      "taskIntent": "Establish the maintainer repository-default automated test instruction with complete setup and scope.",
+      "goldState": "supported"
+    },
+    {
+      "id": "e1-typescript-01-component-tests",
+      "repository": "github.com/pixijs/pixijs",
+      "revision": "2e8cacbe1ed4ed0fc31d5b59b9895c811ac0e003",
+      "ecosystem": "javascript-typescript",
+      "scope": "component",
+      "component": "tests/visual/scenes",
+      "taskIntent": "Run the maintainer visual regression suite covering owned scenes under tests/visual/scenes.",
+      "goldState": "supported"
+    },
+    {
+      "id": "e1-typescript-02-repository-tests",
+      "repository": "github.com/agalwood/Motrix",
+      "revision": "6aae74432187f689ffa0c8019f942ee2cb2cf91a",
+      "ecosystem": "javascript-typescript",
+      "scope": "repository",
+      "component": null,
+      "taskIntent": "Establish the maintainer repository-default automated test instruction with complete setup and scope.",
+      "goldState": "supported"
+    },
+    {
+      "id": "e1-typescript-02-component-tests",
+      "repository": "github.com/agalwood/Motrix",
+      "revision": "6aae74432187f689ffa0c8019f942ee2cb2cf91a",
+      "ecosystem": "javascript-typescript",
+      "scope": "component",
+      "component": "src/core",
+      "taskIntent": "Establish the source-supported co-located component tests for src/core, preserving shared setup.",
+      "goldState": "supported"
+    },
+    {
+      "id": "e1-typescript-03-repository-tests",
+      "repository": "github.com/Eugeny/tabby",
+      "revision": "467ce8ebfa467fb88cf6d154c9a5891e3d3647f0",
+      "ecosystem": "javascript-typescript",
+      "scope": "repository",
+      "component": null,
+      "taskIntent": "Establish the maintainer repository-default automated test instruction with complete setup and scope.",
+      "goldState": "required-abstention"
+    },
+    {
+      "id": "e1-typescript-03-component-tests",
+      "repository": "github.com/Eugeny/tabby",
+      "revision": "467ce8ebfa467fb88cf6d154c9a5891e3d3647f0",
+      "ecosystem": "javascript-typescript",
+      "scope": "component",
+      "component": "tabby-electron",
+      "taskIntent": "Establish the source-supported co-located component tests for tabby-electron, preserving shared setup.",
+      "goldState": "unresolved"
+    },
+    {
+      "id": "e1-go-01-repository-tests",
+      "repository": "github.com/infiniflow/ragflow",
+      "revision": "9a71c10b090eaca9930df186dd0f9c15ee34a2ce",
+      "ecosystem": "go",
+      "scope": "repository",
+      "component": null,
+      "taskIntent": "Establish the maintainer repository-default automated test instruction and complete applicability context, distinguishing separate e2e/manual/modules.",
+      "goldState": "supported"
+    },
+    {
+      "id": "e1-go-01-component-tests",
+      "repository": "github.com/infiniflow/ragflow",
+      "revision": "9a71c10b090eaca9930df186dd0f9c15ee34a2ce",
+      "ecosystem": "go",
+      "scope": "component",
+      "component": "internal/admin",
+      "taskIntent": "Establish the source-supported unit tests for the named Go component/package internal/admin; preserve coverage and setup constraints.",
+      "goldState": "supported"
+    },
+    {
+      "id": "e1-go-02-repository-tests",
+      "repository": "github.com/golang/go",
+      "revision": "430d19f07a57ee5ed4e3b1a04b0ab54dd5a24487",
+      "ecosystem": "go",
+      "scope": "repository",
+      "component": null,
+      "taskIntent": "Establish the maintainer repository-default automated test instruction and complete applicability context, distinguishing separate e2e/manual/modules.",
+      "goldState": "supported"
+    },
+    {
+      "id": "e1-go-02-component-tests",
+      "repository": "github.com/golang/go",
+      "revision": "430d19f07a57ee5ed4e3b1a04b0ab54dd5a24487",
+      "ecosystem": "go",
+      "scope": "component",
+      "component": "src/cmd/compile",
+      "taskIntent": "Establish the source-supported unit tests for the named Go component/package src/cmd/compile; preserve coverage and setup constraints.",
+      "goldState": "unresolved"
+    },
+    {
+      "id": "e1-go-03-repository-tests",
+      "repository": "github.com/docker/compose",
+      "revision": "343bb382d2192b88d84af49971bb5cb99bee268c",
+      "ecosystem": "go",
+      "scope": "repository",
+      "component": null,
+      "taskIntent": "Establish the maintainer repository-default automated test instruction and complete applicability context, distinguishing separate e2e/manual/modules.",
+      "goldState": "supported"
+    },
+    {
+      "id": "e1-go-03-component-tests",
+      "repository": "github.com/docker/compose",
+      "revision": "343bb382d2192b88d84af49971bb5cb99bee268c",
+      "ecosystem": "go",
+      "scope": "component",
+      "component": "pkg/compose",
+      "taskIntent": "Establish the source-supported unit tests for the named Go component/package pkg/compose; preserve coverage and setup constraints.",
+      "goldState": "supported"
+    }
+  ],
+  "integrityChecks": [
+    {
+      "slice": "rust",
+      "artifactHashCount": 50,
+      "sourceReceiptCount": 42,
+      "gitBlobHashCount": 33,
+      "passed": true
+    },
+    {
+      "slice": "python",
+      "artifactHashCount": 48,
+      "sourceReceiptCount": 43,
+      "gitBlobHashCount": 27,
+      "passed": true
+    },
+    {
+      "slice": "typescript",
+      "artifactHashCount": 65,
+      "sourceReceiptCount": 59,
+      "gitBlobHashCount": 34,
+      "passed": true
+    },
+    {
+      "slice": "go",
+      "artifactHashCount": 56,
+      "sourceReceiptCount": 51,
+      "gitBlobHashCount": 32,
+      "passed": true
+    }
+  ],
+  "prohibitedInputsConsulted": false,
+  "thirdPartyCodeExecuted": false,
+  "limitations": [
+    "Task/source roster completion does not resolve 8 unresolved source-gold cases or close full qualification.",
+    "Separate extractor/dependency/consumer-policy freeze and observed extraction/adjudication remain coordinator responsibilities.",
+    "Source task identities are held outside implementation tuning for this wave; source selection does not establish absence of model pretraining exposure, independent participation or consumer benefit.",
+    "The source assessor previously reviewed E1 extraction grammar, but did not author that implementation, consult extraction outputs or tailor enrollment to coverage; fixed queues and source-based exclusions govern this roster."
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T05:22:03.084683Z",
+    "snapshotDigest": "fe3651ef5762490b41439a34654734da82a0e4891174ed6223806a46ccd53a1b",
+    "staleAfter": "2026-10-30T05:22:03.084683Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "docling-project",
+    "repo": "docling",
+    "source": "https://github.com/docling-project/docling"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/docling-project/docling/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/docling-project/docling",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md`, `pyproject.toml`, and `Makefile`. Inferred `repo.build` from `pyproject.toml`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/docling-project/docling/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/docling-project/docling/trust.json",
+    "repository": "/v0/repos/github.com/docling-project/docling/index.json",
+    "profile": "/v0/repos/github.com/docling-project/docling/profile.json",
+    "queryTemplate": "/v0/repos/github.com/docling-project/docling/query?path={dot_path}",
+    "indexPath": "repos/github.com/docling-project/docling/"
+  }
+}

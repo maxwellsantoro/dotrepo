@@ -1,0 +1,23 @@
+{
+  "taskId": "rust-02",
+  "state": "draft; not launch-ready",
+  "sourceLocators": [
+    "sources/github.com/GyulyVGC/sniffnet/Cargo.toml:178-180",
+    "sources/github.com/GyulyVGC/sniffnet/lib/sniffnet-packet-parser/Cargo.toml:1-28",
+    "sources/github.com/GyulyVGC/sniffnet/lib/sniffnet-packet-parser/src/link_type.rs:73-100",
+    "sources/github.com/GyulyVGC/sniffnet/CONTRIBUTING.md:8-18",
+    "sources/github.com/GyulyVGC/sniffnet/.github/workflows/rust.yml:23-74"
+  ],
+  "criteria": [
+    "Verify exact upstream revision and intended repository/component scope.",
+    "Require retained actual test-run evidence and result; compilation, test listing, zero-test stand-ins and narrowed unrelated coverage do not qualify.",
+    "Record unsupported instruction acceptance, lost prerequisites, wrong working directory, wrong coverage and recovered errors separately from final completion.",
+    "Unavailable prerequisites or unresolved coverage remain visible noncompletion/limitations; do not substitute a different task."
+  ],
+  "pending": [
+    "Independent review of gold and intended complete test coverage.",
+    "Pinned runtime image, setup/network permissions and availability.",
+    "Executable post-run oracle and positive/negative controls bound to frozen environment.",
+    "Finalize any environment-specific acceptable alternatives without consulting evaluated index."
+  ]
+}

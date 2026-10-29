@@ -1,0 +1,51 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T05:05:17.00058Z",
+    "snapshotDigest": "24cdb33243b74ab13719093d3c53c642e471b2a9fda4454f3a10926157fba671",
+    "staleAfter": "2026-10-30T05:05:17.00058Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "zellij-org",
+    "repo": "zellij",
+    "source": "https://github.com/zellij-org/zellij"
+  },
+  "repository": {
+    "name": "Zellij",
+    "description": "[Screencasts & Tutorials]",
+    "homepage": "https://github.com/zellij-org/zellij",
+    "docsRoot": "https://zellij.dev/documentation/configuration",
+    "gettingStarted": "https://zellij.dev/documentation/installation"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/zellij-org/zellij/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/zellij-org/zellij",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md` and `Cargo.toml`. Inferred `repo.build` from `Cargo.toml`. Inferred `repo.test` from `Cargo.toml`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/zellij-org/zellij/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/zellij-org/zellij/index.json",
+    "trust": "/v0/repos/github.com/zellij-org/zellij/trust.json",
+    "profile": "/v0/repos/github.com/zellij-org/zellij/profile.json",
+    "queryTemplate": "/v0/repos/github.com/zellij-org/zellij/query?path={dot_path}",
+    "indexPath": "repos/github.com/zellij-org/zellij/"
+  }
+}

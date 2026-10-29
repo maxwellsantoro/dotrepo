@@ -1,0 +1,48 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T05:22:03.084683Z",
+    "snapshotDigest": "44ea70f9e178d7537a1317d49fb3f55ca219f442c467268c933ae494a299b42d",
+    "staleAfter": "2026-10-30T05:22:03.084683Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "Eugeny",
+    "repo": "tabby",
+    "source": "https://github.com/Eugeny/tabby"
+  },
+  "repository": {
+    "name": "GitHub All Releases",
+    "description": "This README is also available in: :es: Spanish · :ru: Русский · :kr: 한국어 · :cn: 简体中文 · :it: Italiano · :de: Deutsch · :jp: 日本語 · :id: Bahasa Indonesia · :brazil: Português · :poland: Polski",
+    "homepage": "https://github.com/Eugeny/tabby"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/Eugeny/tabby/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "imported",
+        "source": "https://github.com/Eugeny/tabby",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported"
+          ],
+          "notes": "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/Eugeny/tabby/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/Eugeny/tabby/index.json",
+    "trust": "/v0/repos/github.com/Eugeny/tabby/trust.json",
+    "profile": "/v0/repos/github.com/Eugeny/tabby/profile.json",
+    "queryTemplate": "/v0/repos/github.com/Eugeny/tabby/query?path={dot_path}",
+    "indexPath": "repos/github.com/Eugeny/tabby/"
+  }
+}

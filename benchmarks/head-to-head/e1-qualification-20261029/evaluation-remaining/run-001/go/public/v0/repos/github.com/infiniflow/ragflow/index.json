@@ -1,0 +1,49 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T05:22:03.084683Z",
+    "snapshotDigest": "58df1d91f78cfee36282fd1a54ebe2aadf70b6341968d19d3ab417b5fe5c3604",
+    "staleAfter": "2026-10-30T05:22:03.084683Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "infiniflow",
+    "repo": "ragflow",
+    "source": "https://github.com/infiniflow/ragflow"
+  },
+  "repository": {
+    "name": "README in English",
+    "description": "RAGFlow is a leading open-source Retrieval-Augmented Generation (RAG) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs.",
+    "homepage": "https://github.com/infiniflow/ragflow"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/infiniflow/ragflow/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/infiniflow/ragflow",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md` and `go.mod`. Inferred `repo.build` from `go.mod`. Inferred `repo.test` from `go.mod`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/infiniflow/ragflow/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/infiniflow/ragflow/index.json",
+    "trust": "/v0/repos/github.com/infiniflow/ragflow/trust.json",
+    "profile": "/v0/repos/github.com/infiniflow/ragflow/profile.json",
+    "queryTemplate": "/v0/repos/github.com/infiniflow/ragflow/query?path={dot_path}",
+    "indexPath": "repos/github.com/infiniflow/ragflow/"
+  }
+}

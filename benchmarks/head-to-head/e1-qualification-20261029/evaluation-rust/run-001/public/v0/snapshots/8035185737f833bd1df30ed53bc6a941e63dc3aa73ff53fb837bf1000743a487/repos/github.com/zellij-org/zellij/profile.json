@@ -1,0 +1,79 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T05:05:17.00058Z",
+    "snapshotDigest": "24cdb33243b74ab13719093d3c53c642e471b2a9fda4454f3a10926157fba671",
+    "staleAfter": "2026-10-30T05:05:17.00058Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "zellij-org",
+    "repo": "zellij",
+    "source": "https://github.com/zellij-org/zellij"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/zellij-org/zellij/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/zellij-org/zellij",
+    "generatedAt": "2026-10-29T05:05:19.818881Z",
+    "evidencePath": "repos/github.com/zellij-org/zellij/evidence.md",
+    "freshnessStatus": "unknown",
+    "staleAfterDays": 30
+  },
+  "purpose": "[Screencasts & Tutorials]",
+  "name": "Zellij",
+  "homepage": "https://github.com/zellij-org/zellij",
+  "execution": {
+    "build": "cargo build --workspace",
+    "test": "cargo test --workspace"
+  },
+  "docs": {
+    "root": "https://zellij.dev/documentation/configuration",
+    "gettingStarted": "https://zellij.dev/documentation/installation"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": false,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "medium",
+    "provenance": [
+      "imported",
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "fieldEvidence": {
+    "docs.getting_started": {
+      "checkedAt": "2026-10-29T05:05:19.818881Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "Explicit documentation link at README.md:14: [<a href=\"https://zellij.dev/documentation/installation\">Installation</a>]",
+      "source": "README.md",
+      "state": "present"
+    },
+    "docs.root": {
+      "checkedAt": "2026-10-29T05:05:19.818881Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "Explicit documentation link at README.md:16: [<a href=\"https://zellij.dev/documentation/configuration\">Configuration</a>]",
+      "source": "README.md",
+      "state": "present"
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/zellij-org/zellij/profile.json",
+    "repository": "/v0/repos/github.com/zellij-org/zellij/index.json",
+    "trust": "/v0/repos/github.com/zellij-org/zellij/trust.json",
+    "queryTemplate": "/v0/repos/github.com/zellij-org/zellij/query?path={dot_path}",
+    "indexPath": "repos/github.com/zellij-org/zellij/"
+  }
+}

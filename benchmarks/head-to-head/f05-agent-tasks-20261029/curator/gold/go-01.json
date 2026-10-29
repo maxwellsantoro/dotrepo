@@ -1,0 +1,33 @@
+{
+  "taskId": "go-01",
+  "status": "supported-source-alternative; independent review pending",
+  "supportedCompleteAlternatives": [
+    {
+      "command": "npx hereby test",
+      "working_directory": ".",
+      "scope": "repository",
+      "component": null,
+      "prerequisites": [
+        "Go 1.27",
+        "Node.js 24",
+        "npm version pinned by packageManager: npm@11.19.1+sha512.cedb312b1b7f92421a02cfb68b4194e88f8346651dacd6acc5364a25ef5309d4a32b19616a1ff8aff865e7280c0fa5c0835a99f5cd93368991e2a80ec9da75d2",
+        "Git",
+        "Clone and check out the frozen revision; run npm ci from the repository root."
+      ],
+      "source": "CONTRIBUTING.md",
+      "coverage": "Source-owned default compiler and language-service test:tsc task, not broader test:all.",
+      "qualification": "Documented applicability only; independent gold review and runtime verification pending."
+    }
+  ],
+  "reason": "The documented npx hereby test entrypoint preserves the source-owned default task, prerequisites and root npm-ci setup. Hereby identifies it as test:tsc; test:all has deliberately broader coverage and is not substituted for the repository default.",
+  "sourceLocators": [
+    "sources/github.com/microsoft/TypeScript/CONTRIBUTING.md:76-115",
+    "sources/github.com/microsoft/TypeScript/go.work:1-6",
+    "sources/github.com/microsoft/TypeScript/tsc/go.mod:1-30",
+    "sources/github.com/microsoft/TypeScript/package.json:1-57",
+    "sources/github.com/microsoft/TypeScript/Herebyfile.mjs:1046-1066"
+  ],
+  "executionObserved": false,
+  "independentReview": "pending",
+  "sourceAssessmentOnly": true
+}

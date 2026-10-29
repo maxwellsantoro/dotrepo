@@ -1,0 +1,3 @@
+# TypeScript source-gold slice
+
+Six tasks retain four supported source alternatives, one required abstention and one unresolved component case. Selection follows one tutorial/handbook exclusion, then PixiJS, Motrix and Tabby. Rocket.Chat sources were prefetched and retained without enrollment once the earlier eligible quota filled. A timestamped coordinator clarification, recorded before this freeze, admits explicitly identified visual-test components and filters mismatched implementation ecosystems in mixed repositories. No prior frozen rule or slice was changed; no extraction/index/profile output was consulted. Native ABI, runtime, local server, artifact/cache and graphics restrictions remain in gold instead of being erased. No third-party code was executed.

@@ -1,0 +1,37 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/warpdotdev/warp"
+generated_at = "2026-10-29T05:05:19.949417Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md`, `Cargo.toml`, and `rust-toolchain.toml`. Filled `repo.name` with inferred defaults. Inferred `repo.build` from `Cargo.toml`. Inferred `repo.test` from `Cargo.toml`. Imported `repo.toolchain.min` from `rust-toolchain.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "warp"
+description = "Warp is an agentic development environment, born out of the terminal."
+homepage = "https://github.com/warpdotdev/warp"
+languages = []
+build = "cargo build --workspace"
+test = "cargo test --workspace"
+topics = []
+
+[repo.toolchain]
+min = "1.92.0"
+ecosystem = "Rust"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-10-29T05:05:19.949417Z"
+confidence = "low"
+method = "ambiguous"
+reason = "Conflicting documentation declarations in README.md; abstained from docs.root."
+source = "README.md"
+state = "unresolved"
+valueJson = "null"

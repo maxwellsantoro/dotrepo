@@ -1,0 +1,20 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/Eugeny/tabby"
+generated_at = "2026-10-29T05:22:04.472911Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "GitHub All Releases"
+description = "This README is also available in: :es: Spanish · :ru: Русский · :kr: 한국어 · :cn: 简体中文 · :it: Italiano · :de: Deutsch · :jp: 日本語 · :id: Bahasa Indonesia · :brazil: Português · :poland: Polski"
+homepage = "https://github.com/Eugeny/tabby"
+languages = []
+build = "npm run build"
+topics = []

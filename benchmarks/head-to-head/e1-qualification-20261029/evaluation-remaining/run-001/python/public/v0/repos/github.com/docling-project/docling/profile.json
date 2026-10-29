@@ -1,0 +1,70 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T05:22:03.084683Z",
+    "snapshotDigest": "fe3651ef5762490b41439a34654734da82a0e4891174ed6223806a46ccd53a1b",
+    "staleAfter": "2026-10-30T05:22:03.084683Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "docling-project",
+    "repo": "docling",
+    "source": "https://github.com/docling-project/docling"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/docling-project/docling/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/docling-project/docling",
+    "generatedAt": "2026-10-29T05:22:03.780179Z",
+    "evidencePath": "repos/github.com/docling-project/docling/evidence.md",
+    "freshnessStatus": "unknown",
+    "staleAfterDays": 30
+  },
+  "purpose": "Docling simplifies document processing by parsing diverse formats — including advanced PDF understanding — and providing seamless integrations with the generative AI ecosystem.",
+  "name": "Docling",
+  "homepage": "https://github.com/docling-project/docling",
+  "execution": {
+    "build": "python -m build",
+    "test": "make test"
+  },
+  "docs": {
+    "root": "https://docling-project.github.io/docling/"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": false,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "medium",
+    "provenance": [
+      "imported",
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "fieldEvidence": {
+    "docs.root": {
+      "checkedAt": "2026-10-29T05:22:03.780179Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "Explicit documentation link at README.md:108: Check out Docling's [documentation](https://docling-project.github.io/docling/) for details on",
+      "source": "README.md",
+      "state": "present"
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/docling-project/docling/profile.json",
+    "repository": "/v0/repos/github.com/docling-project/docling/index.json",
+    "trust": "/v0/repos/github.com/docling-project/docling/trust.json",
+    "queryTemplate": "/v0/repos/github.com/docling-project/docling/query?path={dot_path}",
+    "indexPath": "repos/github.com/docling-project/docling/"
+  }
+}
