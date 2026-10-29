@@ -1,0 +1,247 @@
+{
+  "observedAt": "2026-10-29T05:55:44.515015+00:00",
+  "endpoint": "repos/maxwellsantoro/dotrepo/actions/runs/40641402409/jobs?per_page=100",
+  "exitCode": 0,
+  "response": {
+    "total_count": 1,
+    "jobs": [
+      {
+        "id": 122660145315,
+        "run_id": 40641402409,
+        "workflow_name": "index-autonomous-refresh",
+        "head_branch": "main",
+        "run_url": "https://api.github.com/repos/maxwellsantoro/dotrepo/actions/runs/40641402409",
+        "run_attempt": 1,
+        "node_id": "CR_kwDORh3I8c8AAAAcjx1Iow",
+        "head_sha": "954de4f8ca4021ef414f78629d1113c492cd58f7",
+        "url": "https://api.github.com/repos/maxwellsantoro/dotrepo/actions/jobs/122660145315",
+        "html_url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/40641402409/job/122660145315",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-10-28T06:01:57Z",
+        "started_at": "2026-10-28T06:01:59Z",
+        "completed_at": "2026-10-28T06:15:52Z",
+        "name": "autonomous-refresh",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-28T06:01:59Z",
+            "completed_at": "2026-10-28T06:02:02Z"
+          },
+          {
+            "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-28T06:02:02Z",
+            "completed_at": "2026-10-28T06:02:03Z"
+          },
+          {
+            "name": "Install uv",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-28T06:02:03Z",
+            "completed_at": "2026-10-28T06:02:06Z"
+          },
+          {
+            "name": "Validate refresh adjudication budget",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-28T06:02:06Z",
+            "completed_at": "2026-10-28T06:02:06Z"
+          },
+          {
+            "name": "Create and sync Python environment",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5,
+            "started_at": "2026-10-28T06:02:06Z",
+            "completed_at": "2026-10-28T06:02:06Z"
+          },
+          {
+            "name": "Install Rust",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6,
+            "started_at": "2026-10-28T06:02:06Z",
+            "completed_at": "2026-10-28T06:02:15Z"
+          },
+          {
+            "name": "Cache cargo artifacts",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7,
+            "started_at": "2026-10-28T06:02:15Z",
+            "completed_at": "2026-10-28T06:02:32Z"
+          },
+          {
+            "name": "Start adjudication sidecars",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 8,
+            "started_at": "2026-10-28T06:02:32Z",
+            "completed_at": "2026-10-28T06:02:32Z"
+          },
+          {
+            "name": "Resolve refresh batch parameters",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9,
+            "started_at": "2026-10-28T06:02:32Z",
+            "completed_at": "2026-10-28T06:02:33Z"
+          },
+          {
+            "name": "Run autonomous refresh batch",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10,
+            "started_at": "2026-10-28T06:02:33Z",
+            "completed_at": "2026-10-28T06:11:28Z"
+          },
+          {
+            "name": "Evaluate autonomous telemetry gate",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11,
+            "started_at": "2026-10-28T06:11:28Z",
+            "completed_at": "2026-10-28T06:11:28Z"
+          },
+          {
+            "name": "Validate autonomous index state",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12,
+            "started_at": "2026-10-28T06:11:28Z",
+            "completed_at": "2026-10-28T06:11:29Z"
+          },
+          {
+            "name": "Check public surface (advisory, non-blocking)",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13,
+            "started_at": "2026-10-28T06:11:29Z",
+            "completed_at": "2026-10-28T06:11:52Z"
+          },
+          {
+            "name": "Verify checked base before creating a refresh PR",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 14,
+            "started_at": "2026-10-28T06:11:52Z",
+            "completed_at": "2026-10-28T06:11:53Z"
+          },
+          {
+            "name": "Upload batch telemetry",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 15,
+            "started_at": "2026-10-28T06:11:53Z",
+            "completed_at": "2026-10-28T06:11:57Z"
+          },
+          {
+            "name": "Prepare pull request metadata",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 16,
+            "started_at": "2026-10-28T06:11:57Z",
+            "completed_at": "2026-10-28T06:11:58Z"
+          },
+          {
+            "name": "Create pull request for index updates",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 17,
+            "started_at": "2026-10-28T06:11:58Z",
+            "completed_at": "2026-10-28T06:12:02Z"
+          },
+          {
+            "name": "Check, land, and deploy the exact automation commit",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 18,
+            "started_at": "2026-10-28T06:12:02Z",
+            "completed_at": "2026-10-28T06:15:40Z"
+          },
+          {
+            "name": "Publish step summary",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 19,
+            "started_at": "2026-10-28T06:15:40Z",
+            "completed_at": "2026-10-28T06:15:40Z"
+          },
+          {
+            "name": "Preserve autonomous batch failure result",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 20,
+            "started_at": "2026-10-28T06:15:40Z",
+            "completed_at": "2026-10-28T06:15:40Z"
+          },
+          {
+            "name": "Fail closed on strict telemetry gate",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 21,
+            "started_at": "2026-10-28T06:15:40Z",
+            "completed_at": "2026-10-28T06:15:40Z"
+          },
+          {
+            "name": "Open or update autonomous-refresh failure issue",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 22,
+            "started_at": "2026-10-28T06:15:40Z",
+            "completed_at": "2026-10-28T06:15:40Z"
+          },
+          {
+            "name": "Post Cache cargo artifacts",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 42,
+            "started_at": "2026-10-28T06:15:40Z",
+            "completed_at": "2026-10-28T06:15:50Z"
+          },
+          {
+            "name": "Post Install uv",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 43,
+            "started_at": "2026-10-28T06:15:50Z",
+            "completed_at": "2026-10-28T06:15:50Z"
+          },
+          {
+            "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 44,
+            "started_at": "2026-10-28T06:15:50Z",
+            "completed_at": "2026-10-28T06:15:50Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 45,
+            "started_at": "2026-10-28T06:15:50Z",
+            "completed_at": "2026-10-28T06:15:50Z"
+          }
+        ],
+        "check_run_url": "https://api.github.com/repos/maxwellsantoro/dotrepo/check-runs/122660145315",
+        "labels": [
+          "ubuntu-latest"
+        ],
+        "runner_id": 1000044097,
+        "runner_name": "GitHub Actions 1000044097",
+        "runner_group_id": 0,
+        "runner_group_name": "GitHub Actions"
+      }
+    ]
+  },
+  "error": null
+}

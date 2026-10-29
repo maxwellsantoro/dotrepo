@@ -1,0 +1,54 @@
+{
+  "observedAt": "2026-10-29T05:57:55.419250+00:00",
+  "baseCommit": "eb43ab20ac0368c4926660ae060347305197f936",
+  "sourceBindings": {
+    ".github/workflows/index-autonomous-refresh.yml": "0b19cac333c88aff10143d9879d14ec91e1ef7e7281cc3407d2fc96878b098db",
+    ".github/workflows/public-cloudflare.yml": "cd951e11f808d0dec21dc7e31e9a8eb52066edb33f30812f216b73a5501cdc49",
+    "scripts/check_refresh_streak.py": "6b7842a548238b1eb419407224ca8477a076e578a90adc0df34974067da3f4eb",
+    "scripts/land_autonomous_index.py": "668b5954e6a99841c39f455245df1c433217f8cca0200a14c0e93659451f35b3",
+    "scripts/check_public_deploy_eligibility.py": "c44d1a691d79457e2cef9448b4fe91b283c37b28be24f5ca2795d200f11b9b71",
+    "scripts/check_autonomous_refresh_base.py": "7f10213f4a4aab6cac32bdbec21e22a4bb5a240df5c28664faca5b5800131f83",
+    "scripts/tests/test_refresh_streak.py": "05096a1a926a0e6242b965cc8c286018ca65888dc0f0c2d4fc52e59304b86f3d"
+  },
+  "checks": {
+    "refreshReceiptTests": "14 passed in 0.09s",
+    "exactReport": "streak-before-0600.json; exit1 expected because no retained refresh receipt",
+    "freshness": "current-record-freshness.json; pass; evaluated from existing05:46export, not a new live deployment"
+  },
+  "configuration": {
+    "refreshWorkflow": "active",
+    "publicWorkflow": "active",
+    "automationEnabled": true,
+    "publicDeployEnabled": true,
+    "optionalBudgetVariables": "Both named budget variables404; budget resolver falls back to4 when provider key exists, otherwise0. No credential values queried.",
+    "workflowDefaultPermissions": "read; job requests explicit write permissions and repository allows Actions PR creation/approval."
+  },
+  "sourceBoundaryAssessment": {
+    "receipt": "Record/upload/report steps use always(); job-level disablement still skips all steps. Final failure restoration prevents batch errors becoming green.",
+    "landing": "PR/base/CI/exact-commit guards apply; protected or diverged branch fails closed. No-change run with no publication receipt is unqualified.",
+    "deployment": "Current flagtrue; dispatch/CI source must match live main at eligibility and immediately before publication; actual Deploy Worker and Smoke deployed Worker steps required.",
+    "knownPotentialBlock": "Advancing main during batch or before publication invalidates exact-source eligibility. No current source/config blocker established; future network/provider/budget/run failures remain unobserved.",
+    "noSettingsChanges": true
+  },
+  "latestCompletedSchedule": {
+    "runId": 40641402409,
+    "conclusion": "success",
+    "receipt": "unavailable",
+    "qualifiedDays": 0,
+    "batch": {
+      "crawled": 50,
+      "written": 50,
+      "failed": 0,
+      "adjudicationCallBudget": 0,
+      "adjudicationCalls": 0,
+      "tokensUsed": 0
+    }
+  },
+  "nextSchedule": "06:00UTC intent only; actual run handle not yet observed",
+  "limits": [
+    "No seven-day replay or simulated operation.",
+    "No model/provider or third-party code execution by assessor.",
+    "No index-record or enablement changes.",
+    "F1 cohort is declared in f1-cohort-plan.json; source findings remain unassessed."
+  ]
+}

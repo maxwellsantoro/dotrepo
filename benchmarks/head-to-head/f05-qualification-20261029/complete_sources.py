@@ -1,0 +1,215 @@
+"""Append full Git-object sources when codeload/tree API omit tracked bytes; uv only."""
+
+from datetime import datetime, timezone
+import hashlib
+import io
+import json
+import os
+import subprocess
+import tarfile
+import time
+
+from acquire import FROZEN, HERE, SCRATCH, sha, write
+
+
+def run(label, argv, cwd, env):
+    folder = HERE / label
+    if folder.exists():
+        receipt = json.loads((folder / "receipt.json").read_text())
+        assert (
+            receipt["exitCode"] == 0
+            and sha((folder / "stdout.bin").read_bytes()) == receipt["stdoutSha256"]
+        )
+        return (folder / "stdout.bin").read_bytes()
+    started = time.monotonic()
+    result = subprocess.run(argv, cwd=cwd, env=env, capture_output=True, timeout=600, check=False)
+    folder = HERE / label
+    folder.mkdir()
+    (folder / "stdout.bin").write_bytes(result.stdout)
+    (folder / "stderr.bin").write_bytes(result.stderr)
+    write(
+        folder / "receipt.json",
+        {
+            "argv": argv,
+            "cwd": str(cwd),
+            "environment": env,
+            "exitCode": result.returncode,
+            "elapsedSeconds": time.monotonic() - started,
+            "stdoutSha256": sha(result.stdout),
+            "stderrSha256": sha(result.stderr),
+        },
+    )
+    assert result.returncode == 0, label
+    return result.stdout
+
+
+for task in json.loads((FROZEN / "tasks.json").read_text())["tasks"]:
+    if task["id"] not in ("rust-02", "go-01"):
+        continue
+    task_id, revision = task["id"], task["revision"]
+    folder = HERE / (task_id + "-full")
+    folder.mkdir(exist_ok=True)
+    scratch = SCRATCH / (task_id + "-full")
+    scratch.mkdir(exist_ok=True)
+    home = scratch / "empty-home"
+    home.mkdir(exist_ok=True)
+    env = {
+        "PATH": os.environ["PATH"],
+        "HOME": str(home),
+        "GIT_CONFIG_GLOBAL": "/dev/null",
+        "GIT_CONFIG_NOSYSTEM": "1",
+        "GIT_TERMINAL_PROMPT": "0",
+    }
+    args = [
+        "git",
+        "-c",
+        "core.hooksPath=/dev/null",
+        "-c",
+        "credential.helper=",
+        "-c",
+        "protocol.allow=never",
+        "-c",
+        "protocol.https.allow=always",
+    ]
+    run(task_id + "-git-init", [*args, "init", "--bare", "objects.git"], scratch, env)
+    repo = scratch / "objects.git"
+    url = "https://" + task["repository"] + ".git"
+    run(
+        task_id + "-git-fetch",
+        [*args, "fetch", "--depth=1", "--no-tags", "--no-recurse-submodules", url, revision],
+        repo,
+        env,
+    )
+    actual = (
+        run(task_id + "-git-revision", [*args, "rev-parse", "FETCH_HEAD"], repo, env)
+        .decode()
+        .strip()
+    )
+    assert actual == revision
+    tree_sha = (
+        run(task_id + "-git-tree", [*args, "rev-parse", "FETCH_HEAD^{tree}"], repo, env)
+        .decode()
+        .strip()
+    )
+    expected_tree = json.loads(
+        (FROZEN / "sources" / task["repository"] / "_commit.json").read_text()
+    )["commit"]["tree"]["sha"]
+    assert tree_sha == expected_tree
+    listing = run(task_id + "-git-files", [*args, "ls-tree", "-r", "-z", "FETCH_HEAD"], repo, env)
+    entries = []
+    for item in listing.split(b"\0"):
+        if not item:
+            continue
+        fields, raw_name = item.split(b"\t", 1)
+        mode, kind, blob = fields.decode().split()
+        name = raw_name.decode()
+        assert not name.startswith("/") and ".." not in name.split("/")
+        entries.append((mode, kind, blob, name))
+    assert len(entries) <= 200000, "file count limit"
+    files, links, lfs, submodules = {}, {}, [], []
+    expanded = 0
+    runtime = scratch / "runtime-source.tar"
+    process = subprocess.Popen(
+        [*args, "cat-file", "--batch"],
+        cwd=repo,
+        env=env,
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    with tarfile.open(runtime, "w") as output:
+        for mode, kind, blob, name in entries:
+            if kind == "commit":
+                submodules.append(name)
+                continue
+            process.stdin.write(blob.encode() + b"\n")
+            process.stdin.flush()
+            header = process.stdout.readline().decode().split()
+            assert header[:2] == [blob, "blob"]
+            size = int(header[2])
+            assert size <= 128 * 1024**2, "file size limit"
+            expanded += size
+            assert expanded <= 1024**3, "expanded per-source size limit"
+            raw = process.stdout.read(size)
+            assert process.stdout.read(1) == b"\n"
+            assert hashlib.sha1(f"blob {len(raw)}\0".encode() + raw).hexdigest() == blob
+            if mode == "120000":
+                links[name] = {"target": raw.decode(), "gitBlobSha": blob}
+                continue
+            assert mode in ("100644", "100755")
+            files[name] = {"sha256": sha(raw), "bytes": len(raw), "gitBlobSha": blob, "mode": mode}
+            if raw.startswith(b"version https://git-lfs.github.com/spec/v1\n"):
+                lfs.append(name)
+            member = tarfile.TarInfo(name)
+            member.size, member.mode = len(raw), (0o755 if mode == "100755" else 0o644)
+            output.addfile(member, io.BytesIO(raw))
+    process.stdin.close()
+    assert process.wait(timeout=10) == 0
+    process.stdout.close()
+    process.stderr.close()
+    total = sum(row["bytes"] for row in files.values())
+    assert total <= 1024**3, "full source exceeds declared one GiB limit"
+    matched = []
+    for row in json.loads((FROZEN / "source-catalog.json").read_text()):
+        if row["repository"] == task["repository"] and row["kind"] == "source":
+            assert files[row["path"]]["sha256"] == row["sha256"]
+            assert files[row["path"]]["gitBlobSha"] == row["gitBlobSha"]
+            matched.append(row["path"])
+    inventory = {
+        "revision": revision,
+        "files": {name: row["sha256"] for name, row in files.items()},
+        "missingSubmodules": submodules,
+        "missingLfsObjects": lfs,
+        "limitations": ["Upstream symlinks retained as metadata and omitted from runtime archive."]
+        if links
+        else [],
+    }
+    write(folder / "inventory.json", inventory)
+    write(folder / "file-details.json", {"files": files, "symlinks": links, "gitlinks": submodules})
+    write(
+        folder / "provenance.json",
+        {
+            "revision": revision,
+            "archiveSha256": sha(runtime.read_bytes()),
+            "url": url,
+            "checkedAt": datetime.now(timezone.utc).isoformat(),
+            "gitTreeSha": tree_sha,
+            "gitObjectBlobValidation": True,
+            "archiveIsGitCheckout": False,
+            "generatedGitMetadata": False,
+        },
+    )
+    write(
+        folder / "acquisition.json",
+        {
+            "task": task,
+            "status": "source-acquired",
+            "sourceFiles": len(files),
+            "sourceBytes": total,
+            "frozenSourceFilesMatched": matched,
+            "missingSubmodules": submodules,
+            "missingLfsObjects": lfs,
+            "symlinks": links,
+            "runtimeArchivePath": str(runtime),
+            "runtimeArchiveSha256": sha(runtime.read_bytes()),
+            "runtimeArchiveBytes": runtime.stat().st_size,
+            "sourceBundleReady": not (submodules or lfs or links),
+            "sourceCostUsd": None,
+            "costExclusions": ["No metered infrastructure/download dollar receipt is available."],
+            "indexConsulted": False,
+            "upstreamCodeExecuted": False,
+            "appendOnlyDisposition": "Completes the initial codeload/truncated-tree limitation using exact Git objects; original failure retained.",
+        },
+    )
+    print(
+        task_id,
+        len(files),
+        total,
+        "links",
+        len(links),
+        "submodules",
+        submodules,
+        "LFS",
+        lfs,
+        flush=True,
+    )

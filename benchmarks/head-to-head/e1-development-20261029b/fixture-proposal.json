@@ -1,0 +1,65 @@
+[
+  {
+    "fixture": "context-python-natural-local",
+    "destination": "crates/dotrepo-core/tests/fixtures/import/context-python-natural-local",
+    "copyFilesFrom": "crates/dotrepo-core/src/import/commands/context/python_recipe/testdata",
+    "copyFiles": [
+      "CONTRIBUTING.md",
+      "README.md",
+      "pyproject.toml",
+      "requirements-common.txt",
+      "requirements.txt"
+    ],
+    "emptyFiles": [
+      "keras/api/.gitkeep"
+    ],
+    "mutations": [],
+    "note": "Proposal only: destination and shared expectations were not edited. Source files are exact retained upstream bytes except listed intentional regression mutations."
+  },
+  {
+    "fixture": "context-python-natural-missing-requirement",
+    "destination": "crates/dotrepo-core/tests/fixtures/import/context-python-natural-missing-requirement",
+    "copyFilesFrom": "crates/dotrepo-core/src/import/commands/context/python_recipe/testdata",
+    "copyFiles": [
+      "CONTRIBUTING.md",
+      "README.md",
+      "pyproject.toml",
+      "requirements-common.txt",
+      "requirements.txt"
+    ],
+    "emptyFiles": [
+      "keras/api/.gitkeep"
+    ],
+    "mutations": [
+      {
+        "path": "requirements.txt",
+        "before": "-r requirements-common.txt",
+        "after": "-r missing.txt"
+      }
+    ],
+    "note": "Proposal only: destination and shared expectations were not edited. Source files are exact retained upstream bytes except listed intentional regression mutations."
+  },
+  {
+    "fixture": "context-python-natural-conditional",
+    "destination": "crates/dotrepo-core/tests/fixtures/import/context-python-natural-conditional",
+    "copyFilesFrom": "crates/dotrepo-core/src/import/commands/context/python_recipe/testdata",
+    "copyFiles": [
+      "CONTRIBUTING.md",
+      "README.md",
+      "pyproject.toml",
+      "requirements-common.txt",
+      "requirements.txt"
+    ],
+    "emptyFiles": [
+      "keras/api/.gitkeep"
+    ],
+    "mutations": [
+      {
+        "path": "CONTRIBUTING.md",
+        "before": "## Run tests",
+        "after": "## Windows only"
+      }
+    ],
+    "note": "Proposal only: destination and shared expectations were not edited. Source files are exact retained upstream bytes except listed intentional regression mutations."
+  }
+]

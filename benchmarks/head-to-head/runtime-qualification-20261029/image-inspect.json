@@ -1,0 +1,44 @@
+[
+    {
+        "Id": "sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4",
+        "RepoTags": [
+            "dotrepo-f05-runtime-control:20261029"
+        ],
+        "RepoDigests": [
+            "dotrepo-f05-runtime-control@sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4"
+        ],
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-10-29T06:01:37.380505627Z",
+        "Config": {
+            "Env": [
+                "PATH=/usr/local/bin:/usr/bin:/bin"
+            ],
+            "WorkingDir": "/"
+        },
+        "Architecture": "arm64",
+        "Os": "linux",
+        "Size": 199290736,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:20ab9113af1fc91eb309fc6add9741a83a591ef1632786575dad9316549fb811"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-10-29T06:01:42.113770005Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.index.v1+json",
+            "digest": "sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4",
+            "size": 855
+        },
+        "Identity": {
+            "Build": [
+                {
+                    "Ref": "v10rqzfmladlc674hwjtyj1ak",
+                    "CreatedAt": "2026-10-29T06:01:44.956521923Z"
+                }
+            ]
+        }
+    }
+]

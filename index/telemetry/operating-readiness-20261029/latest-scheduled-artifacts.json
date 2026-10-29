@@ -1,0 +1,31 @@
+{
+  "observedAt": "2026-10-29T05:55:44.906891+00:00",
+  "endpoint": "repos/maxwellsantoro/dotrepo/actions/runs/40641402409/artifacts?per_page=100",
+  "exitCode": 0,
+  "response": {
+    "total_count": 1,
+    "artifacts": [
+      {
+        "id": 12796370641,
+        "node_id": "MDg6QXJ0aWZhY3QxMjc5NjM3MDY0MQ==",
+        "name": "index-autonomous-batch",
+        "size_in_bytes": 11710542,
+        "url": "https://api.github.com/repos/maxwellsantoro/dotrepo/actions/artifacts/12796370641",
+        "archive_download_url": "https://api.github.com/repos/maxwellsantoro/dotrepo/actions/artifacts/12796370641/zip",
+        "expired": false,
+        "digest": "sha256:bf505e43f912da41e6f266713943f560e2148d5d3597ae61a1448c64ffef777b",
+        "created_at": "2026-10-28T06:11:57Z",
+        "updated_at": "2026-10-28T06:11:57Z",
+        "expires_at": "2026-11-11T06:11:54Z",
+        "workflow_run": {
+          "id": 40641402409,
+          "repository_id": 1176357105,
+          "head_repository_id": 1176357105,
+          "head_branch": "main",
+          "head_sha": "954de4f8ca4021ef414f78629d1113c492cd58f7"
+        }
+      }
+    ]
+  },
+  "error": null
+}

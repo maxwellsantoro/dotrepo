@@ -1,0 +1,125 @@
+{
+  "classification": "exposed-development; no qualification or consumer-benefit claim",
+  "baseCommit": "eb43ab20ac0368c4926660ae060347305197f936",
+  "baselineRun": "baseline-001",
+  "automaticRun": "automatic-002",
+  "results": [
+    {
+      "repository": "github.com/storytold/photocraft",
+      "revision": "5f9b4391874aabc9deb2fcb905267613e4d93ec8",
+      "classification": "exposed-development",
+      "baselineContextCandidates": 0,
+      "automaticContextCandidates": 0,
+      "automaticConsumerAcceptedTasks": 0,
+      "consumerTaskCount": 2,
+      "scalarBuildTestUnchanged": true,
+      "recordStatus": "inferred",
+      "candidateSourceBindings": []
+    },
+    {
+      "repository": "github.com/docker/compose",
+      "revision": "343bb382d2192b88d84af49971bb5cb99bee268c",
+      "classification": "exposed-development",
+      "baselineContextCandidates": 0,
+      "automaticContextCandidates": 0,
+      "automaticConsumerAcceptedTasks": 0,
+      "consumerTaskCount": 2,
+      "scalarBuildTestUnchanged": true,
+      "recordStatus": "imported",
+      "candidateSourceBindings": []
+    },
+    {
+      "repository": "github.com/keras-team/keras",
+      "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+      "classification": "exposed-development",
+      "baselineContextCandidates": 0,
+      "automaticContextCandidates": 1,
+      "automaticConsumerAcceptedTasks": 0,
+      "consumerTaskCount": 2,
+      "scalarBuildTestUnchanged": true,
+      "recordStatus": "inferred",
+      "candidateSourceBindings": [
+        {
+          "endLine": 224,
+          "path": "CONTRIBUTING.md",
+          "sha256": "eff1a6349d222979e24b860c88e9577f603300af7658a1ac6fca3140992d0d3d",
+          "startLine": 202
+        },
+        {
+          "endLine": 112,
+          "path": "CONTRIBUTING.md",
+          "sha256": "eff1a6349d222979e24b860c88e9577f603300af7658a1ac6fca3140992d0d3d",
+          "startLine": 81
+        },
+        {
+          "endLine": 65,
+          "path": "README.md",
+          "sha256": "6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8",
+          "startLine": 43
+        },
+        {
+          "endLine": 114,
+          "path": "README.md",
+          "sha256": "6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8",
+          "startLine": 91
+        },
+        {
+          "endLine": 90,
+          "path": "README.md",
+          "sha256": "6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8",
+          "startLine": 77
+        },
+        {
+          "endLine": 119,
+          "path": "pyproject.toml",
+          "sha256": "51ac5db60612a4c92123980826c1010a6d087c7a64b11a580ebc33c21058d326",
+          "startLine": 1
+        },
+        {
+          "endLine": 26,
+          "path": "requirements.txt",
+          "sha256": "f34e2fa7d9bb205afe36e7cb8a0d53f6e3be39d0dc51b38de0619529e4e919b8",
+          "startLine": 1
+        },
+        {
+          "endLine": 37,
+          "path": "requirements-common.txt",
+          "sha256": "3df3a2a15e645bc03082648aec06570a4329fdad189e4b326df0be80d6a7615e",
+          "startLine": 1
+        }
+      ]
+    },
+    {
+      "repository": "github.com/pixijs/pixijs",
+      "revision": "2e8cacbe1ed4ed0fc31d5b59b9895c811ac0e003",
+      "classification": "exposed-development",
+      "baselineContextCandidates": 0,
+      "automaticContextCandidates": 0,
+      "automaticConsumerAcceptedTasks": 0,
+      "consumerTaskCount": 2,
+      "scalarBuildTestUnchanged": true,
+      "recordStatus": "imported",
+      "candidateSourceBindings": []
+    }
+  ],
+  "sourceBindingCheck": {
+    "passed": true,
+    "consultedSourceFilesUnchanged": 37,
+    "automaticCandidateBindingsVerified": 8,
+    "publicMetadataPreserved": true,
+    "allScalarBuildTestValuesUnchanged": true
+  },
+  "limits": [
+    "The 546-line rule is intentionally Keras-shaped: it depends on named natural sections, exact root/all-tests prose, KERAS_BACKEND and a specific local installation recipe. It is not general Python context coverage.",
+    "Source passages and prerequisites are recovered automatically, with medium confidence. Grammar and a retained source include chain do not establish high confidence or complete applicability.",
+    "All eight current consumer requests still abstain. The supported root recipe is recovered but not independently qualified for direct consumer acceptance; no component instruction is synthesized.",
+    "Separate source/completeness verification is required before any high assessment. Source binding integrity alone cannot supply that verification.",
+    "Only the four declared previously exposed identities were inspected. Existing frozen source/gold/results and F-05 inputs remain unchanged.",
+    "No upstream command was executed, no environment was provisioned and no task-benefit measurement was made.",
+    "HTML comments and indented selected passages are conservatively refused. Test-scoped unconsumed setup detection is lexical and bounded; it is not proof of arbitrary natural-language prerequisite completeness."
+  ],
+  "reviewedBoundaryControls": "reviewed-boundaries-001/receipt.json",
+  "reviewedBoundaryControlsPassed": 6,
+  "implementationHeadObserved": "eb43ab20ac0368c4926660ae060347305197f936",
+  "currentCheckoutAfterIndexOnlyFastForward": "53ed7c41baab8d82b1b686143148a2e3c5e6f243"
+}

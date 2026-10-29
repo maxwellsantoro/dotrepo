@@ -1,0 +1,56 @@
+{
+  "reviewedAt": "2026-10-29T06:27:53.011214+00:00",
+  "boundArtifacts": 454,
+  "commandOutputBindings": 128,
+  "controls": {
+    "positive": 3,
+    "negative": 10,
+    "passed": true
+  },
+  "actualNativeOutcomes": {
+    "rust-02": 2,
+    "typescript-02": 2,
+    "go-03": 93,
+    "go-01": null
+  },
+  "checks": [
+    {
+      "task": "rust-02",
+      "trackedByteHashesMatched": 605,
+      "sourceProvisionArchiveBinding": true,
+      "actualCommandEqualsFreeze": true,
+      "offlineNetworkAndNoHostMounts": true,
+      "exactImageMatched": true
+    },
+    {
+      "task": "typescript-02",
+      "trackedByteHashesMatched": 2784,
+      "sourceProvisionArchiveBinding": true,
+      "actualCommandEqualsFreeze": true,
+      "offlineNetworkAndNoHostMounts": true,
+      "exactImageMatched": true
+    },
+    {
+      "task": "go-03",
+      "trackedByteHashesMatched": 9658,
+      "sourceProvisionArchiveBinding": true,
+      "actualCommandEqualsFreeze": true,
+      "offlineNetworkAndNoHostMounts": true,
+      "exactImageMatched": true
+    }
+  ],
+  "findings": [
+    {
+      "path": "oracle.py",
+      "function": "go_outcome",
+      "issue": "Nested subtest skip events are ignored, allowing a parentpass/packagepass trace containing skipped subtests to qualify. Actual retained Vault trace has zero skip events, so no actualoutcome is invalidated. Append new control/oracle/freeze for future reuse; preserve this frozenpacket."
+    }
+  ],
+  "limits": [
+    "npm lifecycle-hook equivalence remains unresolved; passing exact launcher tests does not qualify all dependency installation paths.",
+    "Vault coverage is standalone api module3packages; api/auth/* are separatemodules expresslyexcluded beforeexecution.",
+    "go01 remainsunknown afteractualOOMthenENOSPC, no narrowedpass.",
+    "SourceMerkle corrections are append-only andoriginalprovenance preserved.",
+    "No upstream/network/provider execution performed during review."
+  ]
+}

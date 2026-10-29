@@ -1,0 +1,23 @@
+rm: cannot remove '/var/cache/apt/archives/partial/*.deb': Permission denied
+W: chmod 0700 of directory /var/cache/apt/archives/partial failed - SetupAPTPartialDirectory (1: Operation not permitted)
+W: Problem unlinking the file /var/cache/apt/archives/partial/sgml-base_1.31_all.deb - PrepareFiles (13: Permission denied)
+W: Problem unlinking the file /var/cache/apt/archives/partial/libasound2-data_1.2.8-1_all.deb - PrepareFiles (13: Permission denied)
+W: Problem unlinking the file /var/cache/apt/archives/partial/libasound2_1.2.8-1+b1_arm64.deb - PrepareFiles (13: Permission denied)
+W: Problem unlinking the file /var/cache/apt/archives/partial/libasound2-dev_1.2.8-1+b1_arm64.deb - PrepareFiles (13: Permission denied)
+W: Problem unlinking the file /var/cache/apt/archives/partial/libdbus-1-3_1.14.10-1~deb12u1_arm64.deb - PrepareFiles (13: Permission denied)
+W: Problem unlinking the file /var/cache/apt/archives/partial/xml-core_0.18+nmu1_all.deb - PrepareFiles (13: Permission denied)
+W: Problem unlinking the file /var/cache/apt/archives/partial/libdbus-1-dev_1.14.10-1~deb12u1_arm64.deb - PrepareFiles (13: Permission denied)
+W: Problem unlinking the file /var/cache/apt/archives/partial/libpcap0.8_1.10.3-1_arm64.deb - PrepareFiles (13: Permission denied)
+W: Problem unlinking the file /var/cache/apt/archives/partial/libpcap0.8-dev_1.10.3-1_arm64.deb - PrepareFiles (13: Permission denied)
+W: Problem unlinking the file /var/cache/apt/archives/partial/libpcap-dev_1.10.3-1_arm64.deb - PrepareFiles (13: Permission denied)
+E: Failed to fetch http://deb.debian.org/debian/pool/main/s/sgml-base/sgml-base_1.31_all.deb  Could not open file /var/cache/apt/archives/partial/sgml-base_1.31_all.deb - open (13: Permission denied) [IP: 151.101.66.132 80]
+E: Failed to fetch http://deb.debian.org/debian/pool/main/a/alsa-lib/libasound2-data_1.2.8-1_all.deb  Could not open file /var/cache/apt/archives/partial/libasound2-data_1.2.8-1_all.deb - open (13: Permission denied) [IP: 151.101.194.132 80]
+E: Failed to fetch http://deb.debian.org/debian/pool/main/a/alsa-lib/libasound2_1.2.8-1%2bb1_arm64.deb  Could not open file /var/cache/apt/archives/partial/libasound2_1.2.8-1+b1_arm64.deb - open (13: Permission denied) [IP: 151.101.2.132 80]
+E: Failed to fetch http://deb.debian.org/debian/pool/main/a/alsa-lib/libasound2-dev_1.2.8-1%2bb1_arm64.deb  Could not open file /var/cache/apt/archives/partial/libasound2-dev_1.2.8-1+b1_arm64.deb - open (13: Permission denied) [IP: 151.101.130.132 80]
+E: Failed to fetch http://deb.debian.org/debian/pool/main/d/dbus/libdbus-1-3_1.14.10-1%7edeb12u1_arm64.deb  Could not open file /var/cache/apt/archives/partial/libdbus-1-3_1.14.10-1~deb12u1_arm64.deb - open (13: Permission denied) [IP: 151.101.66.132 80]
+E: Failed to fetch http://deb.debian.org/debian/pool/main/x/xml-core/xml-core_0.18%2bnmu1_all.deb  Could not open file /var/cache/apt/archives/partial/xml-core_0.18+nmu1_all.deb - open (13: Permission denied) [IP: 151.101.194.132 80]
+E: Failed to fetch http://deb.debian.org/debian/pool/main/d/dbus/libdbus-1-dev_1.14.10-1%7edeb12u1_arm64.deb  Could not open file /var/cache/apt/archives/partial/libdbus-1-dev_1.14.10-1~deb12u1_arm64.deb - open (13: Permission denied) [IP: 151.101.2.132 80]
+E: Failed to fetch http://deb.debian.org/debian/pool/main/libp/libpcap/libpcap0.8_1.10.3-1_arm64.deb  Could not open file /var/cache/apt/archives/partial/libpcap0.8_1.10.3-1_arm64.deb - open (13: Permission denied) [IP: 151.101.130.132 80]
+E: Failed to fetch http://deb.debian.org/debian/pool/main/libp/libpcap/libpcap0.8-dev_1.10.3-1_arm64.deb  Could not open file /var/cache/apt/archives/partial/libpcap0.8-dev_1.10.3-1_arm64.deb - open (13: Permission denied) [IP: 151.101.66.132 80]
+E: Failed to fetch http://deb.debian.org/debian/pool/main/libp/libpcap/libpcap-dev_1.10.3-1_arm64.deb  Could not open file /var/cache/apt/archives/partial/libpcap-dev_1.10.3-1_arm64.deb - open (13: Permission denied) [IP: 151.101.194.132 80]
+E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?

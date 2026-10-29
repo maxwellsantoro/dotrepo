@@ -1,0 +1,26 @@
+{
+  "checkedAt": "2026-10-29T06:25:37.723467+00:00",
+  "result": "passed",
+  "checks": [
+    "all three retained run artifact manifests unchanged",
+    "declaration ledger unchanged against every run freeze",
+    "latest executable/dependency/helper source hashes match current bytes",
+    "corrected replay binary identity matches all six actual boundary controls",
+    "all37 original source-file and four original gold hashes unchanged",
+    "independent source-boundary review bound to first replay binary",
+    "six corrected actual CLI controls passed",
+    "all three expectation additions already integrated exactly by coordinator"
+  ],
+  "focusedChecks": {
+    "contextUnitTests": 12,
+    "crawlerAttachmentTests": 1,
+    "coreCrawlerLibraryClippy": "passed",
+    "ownedPythonRuff": "passed",
+    "ownedRustfmt": "passed",
+    "consumerAcceptedTasks": 0,
+    "consumerRequests": 8
+  },
+  "cargoSlot": "released",
+  "evaluatedBinaryRetention": "Observed SHA256 identities retained; executable bytes are not archived here. Shared target/debug path was subsequently replaced after slot release.",
+  "remainingVerifierGate": "Independent source/completeness verification before high-confidence acceptance; no generalization or consumer-benefit claim."
+}

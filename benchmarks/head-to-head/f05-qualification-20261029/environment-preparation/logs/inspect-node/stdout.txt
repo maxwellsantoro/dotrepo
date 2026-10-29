@@ -1,0 +1,58 @@
+[
+    {
+        "Id": "sha256:e7add2a490bb17d97b485b8641bd88455fff7839ade0f5eba493c3508124d413",
+        "RepoTags": [
+            "node:24-bookworm"
+        ],
+        "RepoDigests": [
+            "node@sha256:e7add2a490bb17d97b485b8641bd88455fff7839ade0f5eba493c3508124d413"
+        ],
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-10-28T20:56:15.062915363Z",
+        "Config": {
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "NODE_VERSION=24.22.2",
+                "YARN_VERSION=1.22.22"
+            ],
+            "Entrypoint": [
+                "docker-entrypoint.sh"
+            ],
+            "Cmd": [
+                "node"
+            ]
+        },
+        "Architecture": "arm64",
+        "Variant": "v8",
+        "Os": "linux",
+        "Size": 1620373895,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:64527348293e401e7043a7f07864ad79a5b41b8a68554f511d16c3a476da7634",
+                "sha256:00b4b9cc764fa0294dcaf935e48b6d89979619840ba559100bb8dadd2b4f9ff0",
+                "sha256:2eb0780af133d13901cc73bb85f369347895175f13036c00ba5876b9ec20d499",
+                "sha256:74a9cd0a5d4e1ee68487ab8f22709b6d71270cd9f15afb34a46e4541dd219adf",
+                "sha256:c120a6b4bf09dd6e6db80f20109d11ee0d493b28e7446b5ff85e13ac91d28de3",
+                "sha256:2edef1a0aac54f0f60554a3d0ffb0b39309baeb35dc0bd336b74366b3bfe094f",
+                "sha256:5c7a772d8c3ede02d67d54d386f11a9ac388e2bb7b038975f3dd069074555909",
+                "sha256:1c541867a93273d31b337571d56058c5e322f07ad3e4aef433e72d3a72be31f7"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-10-29T05:58:26.552138637Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.index.v1+json",
+            "digest": "sha256:e7add2a490bb17d97b485b8641bd88455fff7839ade0f5eba493c3508124d413",
+            "size": 3881
+        },
+        "Identity": {
+            "Pull": [
+                {
+                    "Repository": "docker.io/library/node"
+                }
+            ]
+        }
+    }
+]

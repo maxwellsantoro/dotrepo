@@ -1,0 +1,41 @@
+{
+  "schema": "dotrepo-operating-boundary-finding/v1",
+  "observedAt": "2026-10-29T06:23:01.166690+00:00",
+  "actualScheduledRunId": 40826758533,
+  "actualConclusion": "success",
+  "actualHeadSha": "53ed7c41baab8d82b1b686143148a2e3c5e6f243",
+  "actualCiRunId": 40828059561,
+  "actualLandingDisposition": "landed-deployment-disabled",
+  "publicationVerified": false,
+  "qualifiedDays": 0,
+  "receiptPath": "run-40826758533-refresh-receipt.json",
+  "receiptSha256": "362d4132ab34b7be243fba902302efa35179529cac571765349c6996cd086c90",
+  "receiptArtifactId": 12877731921,
+  "receiptZipSha256": "db9ff1b56ffeafcf909e374d3235adffbf30c587baf42c9e9308607b1b53745c",
+  "jobLogPath": "run-40826758533-job.log",
+  "jobLogBytes": 1800023,
+  "jobLogSha256": "2ef671188be386af5c41f7391c8d21743c5c033ed946060426fdbb737959ca56",
+  "actualFlagBeforeAndAfter": "true; unchanged updated_at2026-10-28T07:02:25Z",
+  "sourceBindings": {
+    "scripts/land_autonomous_index.py": "668b5954e6a99841c39f455245df1c433217f8cca0200a14c0e93659451f35b3",
+    ".github/workflows/index-autonomous-refresh.yml": "0b19cac333c88aff10143d9879d14ec91e1ef7e7281cc3407d2fc96878b098db",
+    "scripts/check_refresh_streak.py": "6b7842a548238b1eb419407224ca8477a076e578a90adc0df34974067da3f4eb"
+  },
+  "concreteBug": "public_deploy_enabled catches every API error and converts it into operator-disabled. The workflow does not pass its vars value, so landing rereads the variables REST endpoint with the workflow token.",
+  "offlineCounterexample": {
+    "apiException": "simulated CalledProcessError carrying HTTP403",
+    "functionReturned": false,
+    "result": "read failure indistinguishable from disabled flag"
+  },
+  "inference": "Workflow-token Variables permission mismatch is likely cause: endpoint requires Variables repository read; configured token permissions have no Variables. Underlying actual API status was swallowed and is not recoverable from retained logs. Do not claim an observedHTTP403.",
+  "primaryReference": "https://docs.github.com/en/rest/actions/variables#get-a-repository-variable",
+  "proposedOwnedPaths": [
+    ".github/workflows/index-autonomous-refresh.yml",
+    "scripts/land_autonomous_index.py",
+    "scripts/tests/test_autonomous_landing.py",
+    "scripts/tests/test_autonomous_refresh_workflow.py"
+  ],
+  "smallestFix": "Pass vars.CLOUDFLARE_PUBLIC_DEPLOY_ENABLED explicitly to landing step; use that declared value and retain its decision source. Distinguish omitted/false from API read errors; do not enlarge token permissions or silently relabel operational failures.",
+  "changesMade": false,
+  "scheduledQualificationSubstitute": false
+}

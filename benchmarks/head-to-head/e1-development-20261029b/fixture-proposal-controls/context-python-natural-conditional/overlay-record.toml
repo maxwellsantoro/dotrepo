@@ -1,0 +1,28 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://example.com/fixtures/context-python-natural-conditional"
+generated_at = "2026-10-29T06:17:41.656072Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md` and `pyproject.toml`. Filled `repo.name` with inferred defaults. Inferred `repo.build` from `pyproject.toml`. Inferred `repo.test` from `pyproject.toml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "context-python-natural-conditional"
+description = "Keras 3 is a multi-backend deep learning framework, with support for JAX, TensorFlow, PyTorch, and OpenVINO (for inference-only)."
+homepage = "https://example.com/fixtures/context-python-natural-conditional"
+languages = []
+build = "python -m build"
+test = "python -m pytest"
+topics = []
+
+[repo.toolchain]
+min = "3.11"
+ecosystem = "Python"

@@ -1,0 +1,26 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "-i",
+    "dotrepo-f05-qualification-go-03-b4331d1484",
+    "tar",
+    "--extract",
+    "--no-same-owner",
+    "--no-same-permissions",
+    "-C",
+    "/workspace/repository"
+  ],
+  "startedAt": "2026-10-29T06:09:56.165805+00:00",
+  "elapsedSeconds": 0.7506919999141246,
+  "exitCode": 2,
+  "error": null,
+  "stdinBytes": 52541440,
+  "stdinSha256": "cc7b18c67ce11698d79bfee35fe7afa7f7c8f0ea0dccbdaefd8836cde49f3ba2",
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "3914812b09dca97eb43b98b5d367dc8d1906d73e18cd5452620cc90f04e1441b",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

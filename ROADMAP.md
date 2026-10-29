@@ -139,6 +139,15 @@ future generalization claims need fresh holdouts. The disjoint
 and its [review addendum](benchmarks/head-to-head/f05-agent-tasks-review-20261029/README.md)
 establish source enrollment, while executable oracles, qualified environments,
 provider settings/budgets and a complete campaign freeze still gate C2.
+The [next E1 development replay](benchmarks/head-to-head/e1-development-20261029b/README.md)
+recovers an attributed multi-file candidate while retaining consumer abstention;
+independent source-completeness review remains distinct from syntax recovery.
+The [bounded task execution qualification](benchmarks/head-to-head/f05-qualification-20261029/README.md)
+retains real native outcomes and resource failures without narrowing the frozen
+tasks. The [published response capture](benchmarks/head-to-head/f05-snapshot-20261029/README.md)
+retains every enrolled task, including absent profiles. Complete environment,
+dependency-cache and oracle qualification still precedes the causal campaign;
+no development replay, apparatus control or operator test result closes C2.
 An external participant is not a prerequisite for E1 qualification or F-05. C3
 preparation is independent; both useful C2 results and C3 acceptance evidence are
 required before G1 expansion. A complete negative C2 report closes its measurement

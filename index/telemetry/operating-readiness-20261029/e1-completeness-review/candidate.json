@@ -1,0 +1,82 @@
+{
+  "candidate": {
+    "command": "pytest keras",
+    "ecosystem": "Python",
+    "source": "CONTRIBUTING.md",
+    "context": {
+      "command": "pytest keras",
+      "working_directory": ".",
+      "scope": "repository",
+      "prerequisites": [
+        "Use Python >=3.11 as declared by pyproject.toml; the local setup guide states the weaker minimum 3.10. No runtime was inspected.",
+        "Use the documented local setup route (CONTRIBUTING.md:81-112): To set up your local dev environment, you will need the following tools. 1. [git](https://github.com/) for code repository management. 2. [python](https://www.python.org/) to build and code in Keras. The following commands check the tools above are successfully installed. Note that Keras requires at least Python 3.10 to run. ```shell git --version python --version ``` Clone your forked repo to your local machine. Go to the cloned directory to install the dependencies. ```shell git clone https://github.com/YOUR_GITHUB_USERNAME/keras.git cd keras pip install -r requirements.txt ``` You then need to configure the backend to use, see the [Configuring your backend](https://github.com/keras-team/keras/blob/master/README.md#configuring-your-backend) section of the README. You can also add GPU support to your environment, see the [Adding GPU support](https://github.com/keras-team/keras/blob/master/README.md#adding-gpu-support) section of the README.",
+        "Retain the local installation and platform conditions (README.md:43-65): Keras 3 is compatible with Linux and macOS systems. For Windows users, we recommend using WSL2 to run Keras. To install a local development version: 1. Install dependencies: ``` pip install -r requirements.txt ``` 2. Run installation command from the root directory. ``` python pip_build.py --install ``` 3. Run API generation script when creating PRs that update `keras_export` public APIs: ``` ./shell/api_gen.sh ```",
+        "Configure a backend before imports and retain backend limitations (README.md:91-114): You can export the environment variable `KERAS_BACKEND` or you can edit your local config file at `~/.keras/keras.json` to configure your backend. Available backend options are: `\"tensorflow\"`, `\"jax\"`, `\"torch\"`, `\"openvino\"`. Example: ``` export KERAS_BACKEND=\"jax\" ``` In Colab, you can do: ```python import os os.environ[\"KERAS_BACKEND\"] = \"jax\" import keras ``` **Note:** The backend must be configured before importing `keras`, and the backend cannot be changed after the package has been imported. **Note:** The OpenVINO backend is an inference-only backend, meaning it is designed only for running model predictions using `model.predict()` method.",
+        "Use the documented CPU requirements route; GPU setup is not established by this candidate: The `requirements.txt` file will install a CPU-only version of TensorFlow, JAX, and PyTorch.",
+        "Retain default test coverage and the separately documented optional skip/backend variants (CONTRIBUTING.md:202-224): You can run all the tests locally by running the following command in the repo root directory. ```shell pytest keras ``` Note that you can skip the Keras applications tests using the `SKIP_APPLICATIONS_TESTS` environment variable. This will cut down the testing time significantly. ```shell SKIP_APPLICATIONS_TESTS=True pytest keras ``` To run all tests using a different backend, you can simply specify it on the command line. ```shell KERAS_BACKEND=jax SKIP_APPLICATIONS_TESTS=True pytest keras ```",
+        "Install the complete retained requirements include chain: requirements.txt, requirements-common.txt. Environment markers and index declarations remain source data, not evidence of installed dependencies."
+      ],
+      "source": "CONTRIBUTING.md"
+    }
+  },
+  "assessment": {
+    "checkedAt": "2026-10-29T06:21:29.129142Z",
+    "confidence": "medium",
+    "method": "extracted",
+    "reason": "Natural local-test recipe joined with owning package, documented setup/platform/backend conditions and retained requirements closure. Independent completeness verification remains unresolved; grammar and source closure do not establish high confidence, environment readiness or execution success.",
+    "source": "CONTRIBUTING.md",
+    "sourceBindingsJson": "[{\"endLine\":224,\"path\":\"CONTRIBUTING.md\",\"sha256\":\"eff1a6349d222979e24b860c88e9577f603300af7658a1ac6fca3140992d0d3d\",\"startLine\":202},{\"endLine\":112,\"path\":\"CONTRIBUTING.md\",\"sha256\":\"eff1a6349d222979e24b860c88e9577f603300af7658a1ac6fca3140992d0d3d\",\"startLine\":81},{\"endLine\":65,\"path\":\"README.md\",\"sha256\":\"6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8\",\"startLine\":43},{\"endLine\":114,\"path\":\"README.md\",\"sha256\":\"6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8\",\"startLine\":91},{\"endLine\":90,\"path\":\"README.md\",\"sha256\":\"6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8\",\"startLine\":77},{\"endLine\":119,\"path\":\"pyproject.toml\",\"sha256\":\"51ac5db60612a4c92123980826c1010a6d087c7a64b11a580ebc33c21058d326\",\"startLine\":1},{\"endLine\":26,\"path\":\"requirements.txt\",\"sha256\":\"f34e2fa7d9bb205afe36e7cb8a0d53f6e3be39d0dc51b38de0619529e4e919b8\",\"startLine\":1},{\"endLine\":37,\"path\":\"requirements-common.txt\",\"sha256\":\"3df3a2a15e645bc03082648aec06570a4329fdad189e4b326df0be80d6a7615e\",\"startLine\":1}]",
+    "state": "present",
+    "valueJson": "{\"command\":\"pytest keras\",\"ecosystem\":\"Python\",\"source\":\"CONTRIBUTING.md\",\"context\":{\"command\":\"pytest keras\",\"working_directory\":\".\",\"scope\":\"repository\",\"prerequisites\":[\"Use Python >=3.11 as declared by pyproject.toml; the local setup guide states the weaker minimum 3.10. No runtime was inspected.\",\"Use the documented local setup route (CONTRIBUTING.md:81-112): To set up your local dev environment, you will need the following tools. 1. [git](https://github.com/) for code repository management. 2. [python](https://www.python.org/) to build and code in Keras. The following commands check the tools above are successfully installed. Note that Keras requires at least Python 3.10 to run. ```shell git --version python --version ``` Clone your forked repo to your local machine. Go to the cloned directory to install the dependencies. ```shell git clone https://github.com/YOUR_GITHUB_USERNAME/keras.git cd keras pip install -r requirements.txt ``` You then need to configure the backend to use, see the [Configuring your backend](https://github.com/keras-team/keras/blob/master/README.md#configuring-your-backend) section of the README. You can also add GPU support to your environment, see the [Adding GPU support](https://github.com/keras-team/keras/blob/master/README.md#adding-gpu-support) section of the README.\",\"Retain the local installation and platform conditions (README.md:43-65): Keras 3 is compatible with Linux and macOS systems. For Windows users, we recommend using WSL2 to run Keras. To install a local development version: 1. Install dependencies: ``` pip install -r requirements.txt ``` 2. Run installation command from the root directory. ``` python pip_build.py --install ``` 3. Run API generation script when creating PRs that update `keras_export` public APIs: ``` ./shell/api_gen.sh ```\",\"Configure a backend before imports and retain backend limitations (README.md:91-114): You can export the environment variable `KERAS_BACKEND` or you can edit your local config file at `~/.keras/keras.json` to configure your backend. Available backend options are: `\\\"tensorflow\\\"`, `\\\"jax\\\"`, `\\\"torch\\\"`, `\\\"openvino\\\"`. Example: ``` export KERAS_BACKEND=\\\"jax\\\" ``` In Colab, you can do: ```python import os os.environ[\\\"KERAS_BACKEND\\\"] = \\\"jax\\\" import keras ``` **Note:** The backend must be configured before importing `keras`, and the backend cannot be changed after the package has been imported. **Note:** The OpenVINO backend is an inference-only backend, meaning it is designed only for running model predictions using `model.predict()` method.\",\"Use the documented CPU requirements route; GPU setup is not established by this candidate: The `requirements.txt` file will install a CPU-only version of TensorFlow, JAX, and PyTorch.\",\"Retain default test coverage and the separately documented optional skip/backend variants (CONTRIBUTING.md:202-224): You can run all the tests locally by running the following command in the repo root directory. ```shell pytest keras ``` Note that you can skip the Keras applications tests using the `SKIP_APPLICATIONS_TESTS` environment variable. This will cut down the testing time significantly. ```shell SKIP_APPLICATIONS_TESTS=True pytest keras ``` To run all tests using a different backend, you can simply specify it on the command line. ```shell KERAS_BACKEND=jax SKIP_APPLICATIONS_TESTS=True pytest keras ```\",\"Install the complete retained requirements include chain: requirements.txt, requirements-common.txt. Environment markers and index declarations remain source data, not evidence of installed dependencies.\"],\"source\":\"CONTRIBUTING.md\"}}"
+  },
+  "sourceBindings": [
+    {
+      "endLine": 224,
+      "path": "CONTRIBUTING.md",
+      "sha256": "eff1a6349d222979e24b860c88e9577f603300af7658a1ac6fca3140992d0d3d",
+      "startLine": 202
+    },
+    {
+      "endLine": 112,
+      "path": "CONTRIBUTING.md",
+      "sha256": "eff1a6349d222979e24b860c88e9577f603300af7658a1ac6fca3140992d0d3d",
+      "startLine": 81
+    },
+    {
+      "endLine": 65,
+      "path": "README.md",
+      "sha256": "6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8",
+      "startLine": 43
+    },
+    {
+      "endLine": 114,
+      "path": "README.md",
+      "sha256": "6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8",
+      "startLine": 91
+    },
+    {
+      "endLine": 90,
+      "path": "README.md",
+      "sha256": "6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8",
+      "startLine": 77
+    },
+    {
+      "endLine": 119,
+      "path": "pyproject.toml",
+      "sha256": "51ac5db60612a4c92123980826c1010a6d087c7a64b11a580ebc33c21058d326",
+      "startLine": 1
+    },
+    {
+      "endLine": 26,
+      "path": "requirements.txt",
+      "sha256": "f34e2fa7d9bb205afe36e7cb8a0d53f6e3be39d0dc51b38de0619529e4e919b8",
+      "startLine": 1
+    },
+    {
+      "endLine": 37,
+      "path": "requirements-common.txt",
+      "sha256": "3df3a2a15e645bc03082648aec06570a4329fdad189e4b326df0be80d6a7615e",
+      "startLine": 1
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "taskId": "go-01",
+  "sourceRevision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+  "indexConsulted": false,
+  "modelCalls": 0,
+  "costUsd": null,
+  "costExclusions": [
+    "No metered host/container dollar receipt."
+  ],
+  "cacheCondition": "Fresh empty per-task cache, populated by recorded download-only setup; offline execution uses that explicit warm state.",
+  "sourceSupportedInstructionGold": "Original source-only classification unchanged; execution qualification is separately reviewed.",
+  "status": "incomplete",
+  "startedAt": "2026-10-29T06:17:07.518538+00:00",
+  "setupSeconds": 14.058167499955744,
+  "setupNetworkBytes": {
+    "received": 170878761,
+    "sent": 1038129,
+    "basis": "Container interface counters; includes headers and incidental traffic."
+  },
+  "failure": "AssertionError: native-test-list",
+  "totalSeconds": 86.39713912480511,
+  "cleanup": 0
+}

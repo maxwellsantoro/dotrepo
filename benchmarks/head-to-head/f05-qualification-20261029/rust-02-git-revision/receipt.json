@@ -1,0 +1,27 @@
+{
+  "argv": [
+    "git",
+    "-c",
+    "core.hooksPath=/dev/null",
+    "-c",
+    "credential.helper=",
+    "-c",
+    "protocol.allow=never",
+    "-c",
+    "protocol.https.allow=always",
+    "rev-parse",
+    "FETCH_HEAD"
+  ],
+  "cwd": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/rust-02-full/objects.git",
+  "environment": {
+    "PATH": "/Users/maxwell/projects/agent/dotrepo/.venv/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/maxwell/.local/bin:/Users/maxwell/.grok/bin:/Users/maxwell/.nvm/versions/node/v25.9.0/bin:/Users/maxwell/.bun/bin:/Users/maxwell/.local/bin:/Users/maxwell/.local/bin:/Users/maxwell/.elan/bin:/opt/homebrew/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/opt/homebrew/bin:/Users/maxwell/.codex/tmp/arg0-macos/codex-arg0VIm78J:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/maxwell/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/maxwell/.local/bin:/Users/maxwell/.grok/bin:/Users/maxwell/.atuin/bin:/Users/maxwell/.nvm/versions/node/v25.9.0/bin:/Users/maxwell/.bun/bin:/Users/maxwell/.elan/bin:/Users/maxwell/.cargo/bin:/Users/maxwell/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS",
+    "HOME": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/rust-02-full/empty-home",
+    "GIT_CONFIG_GLOBAL": "/dev/null",
+    "GIT_CONFIG_NOSYSTEM": "1",
+    "GIT_TERMINAL_PROMPT": "0"
+  },
+  "exitCode": 0,
+  "elapsedSeconds": 0.03157991706393659,
+  "stdoutSha256": "e6767d4b8f03b1e7510cfa7abd0f0fcd5a46755752d124656421cfadc70ca215",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

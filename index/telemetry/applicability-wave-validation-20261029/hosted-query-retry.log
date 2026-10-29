@@ -1,0 +1,31 @@
+   Compiling dotrepo-cli v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-cli)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.26s
+     Running tests/hosted_query_server_contract.rs (target/debug/deps/hosted_query_server_contract-e38f12ffbc0abee8)
+
+running 4 tests
+test hosted_query_server_serves_batch_profile_and_query_routes ... ok
+test hosted_query_server_serves_static_export_and_resolves_emitted_query_template ... ok
+test hosted_query_server_matches_checked_in_query_fixtures ... FAILED
+test hosted_query_server_honors_base_path_and_preserves_equal_authority_conflicts ... FAILED
+
+failures:
+
+---- hosted_query_server_matches_checked_in_query_fixtures stdout ----
+
+thread 'hosted_query_server_matches_checked_in_query_fixtures' (41376557) panicked at crates/dotrepo-cli/tests/hosted_query_server_contract.rs:113:9:
+server did not become ready
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- hosted_query_server_honors_base_path_and_preserves_equal_authority_conflicts stdout ----
+
+thread 'hosted_query_server_honors_base_path_and_preserves_equal_authority_conflicts' (41376556) panicked at crates/dotrepo-cli/tests/hosted_query_server_contract.rs:113:9:
+server did not become ready
+
+
+failures:
+    hosted_query_server_honors_base_path_and_preserves_equal_authority_conflicts
+    hosted_query_server_matches_checked_in_query_fixtures
+
+test result: FAILED. 2 passed; 2 failed; 0 ignored; 0 measured; 0 filtered out; finished in 30.02s
+
+error: test failed, to rerun pass `-p dotrepo-cli --test hosted_query_server_contract`

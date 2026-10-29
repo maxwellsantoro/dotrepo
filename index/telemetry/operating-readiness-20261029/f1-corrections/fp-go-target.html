@@ -1,0 +1,4240 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-layout="responsive" data-local="" data-version="prod-frontend-00275-2gh">
+  <head>
+    
+    <script>
+      window.addEventListener('error', window.__err=function f(e){f.p=f.p||[];f.p.push(e)});
+    </script>
+    <script>
+      (function() {
+        const theme = document.cookie.match(/prefers-color-scheme=(light|dark|auto)/)?.[1]
+        if (theme) {
+          document.querySelector('html').setAttribute('data-theme', theme);
+        }
+      }())
+    </script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Description" content="Package main contains the entry point for the code generator">
+    
+    <meta class="js-gtmID" data-gtmid="GTM-W8MVQXG">
+    <link rel="shortcut icon" href="/static/shared/icon/favicon.ico">
+    
+  
+    <link rel="canonical" href="https://pkg.go.dev/github.com/IBM/fp-go">
+  
+
+    <link href="/static/frontend/frontend.min.css?version=prod-frontend-00275-2gh" rel="stylesheet">
+    
+    <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Go Packages">
+    
+    
+  <title>fp-go command - github.com/IBM/fp-go - Go Packages</title>
+
+    
+  <link href="/static/frontend/unit/unit.min.css?version=prod-frontend-00275-2gh" rel="stylesheet">
+  
+  <link href="/static/frontend/unit/main/main.min.css?version=prod-frontend-00275-2gh" rel="stylesheet">
+
+
+  </head>
+  <body>
+    
+    <script>
+      function loadScript(src, mod = true) {
+        let s = document.createElement('script');
+        let v = document.documentElement.dataset.version;
+        if (v && src.startsWith('/static/')) {
+          src += '?version=' + encodeURIComponent(v);
+        }
+        s.src = src;
+        if (mod) {
+          s.type = 'module';
+          s.async = true;
+          s.defer = true
+        }
+        document.head.appendChild(s);
+      }
+      loadScript("/third_party/dialog-polyfill/dialog-polyfill.js", false)
+      loadScript("/static/frontend/frontend.js");
+    </script>
+    
+  
+    <section class="go-SurveyBanner js-surveyBanner" role="region" aria-label="2026 Go Developer Survey" data-survey-id="go-survey-2026">
+      <img class="go-SurveyBanner-gopher" src="/static/shared/survey/gopher-announcement.png" width="108" height="80" alt="" aria-hidden="true">
+      <img class="go-SurveyBanner-bullhornMobile" src="/static/shared/survey/bullhorn-mobile.svg" width="22" height="23" alt="" aria-hidden="true">
+      <img class="go-SurveyBanner-bullhornDesktop" src="/static/shared/survey/bullhorn-desktop.svg" width="28" height="28" alt="" aria-hidden="true">
+      <div class="go-SurveyBanner-content">
+        <span class="go-SurveyBanner-lead">Help us shape the future of Go!</span>
+        <a class="go-SurveyBanner-link js-surveyBannerLink" href="https://blink.qualtrics.com/jfe/form/SV_ba8fa1ZcSQQdTRs?s=p" target="_blank" rel="noopener"><span class="go-SurveyBanner-linkPrefix">Take the </span>2026 Go Developer Survey</a>
+      </div>
+      <button class="go-SurveyBanner-close js-surveyBannerClose" type="button" aria-label="Minimize the survey banner">
+        <img class="go-SurveyBanner-minimizeIcon" src="/static/shared/survey/minimize.svg" width="20" height="20" alt="" aria-hidden="true">
+      </button>
+    </section>
+  
+
+    
+  <header class="go-Header go-Header--full js-siteHeader">
+    <div class="go-Header-inner go-Header-inner--dark">
+      <nav class="go-Header-nav">
+        <a href="https://go.dev/" class="js-headerLogo" data-gtmc="nav link"
+            data-test-id="go-header-logo-link" role="heading" aria-level="1">
+          <img class="go-Header-logo" src="/static/shared/logo/go-white.svg" alt="Go">
+        </a>
+         <div class="skip-navigation-wrapper">
+            <a class="skip-to-content-link" aria-label="Skip to main content" href="#main-content"> Skip to Main Content </a>
+          </div>
+        <div class="go-Header-rightContent">
+          
+<div class="go-SearchForm js-searchForm">
+  <form
+    class="go-InputGroup go-ShortcutKey go-SearchForm-form"
+    action="/search"
+    data-shortcut="/"
+    data-shortcut-alt="search"
+    data-gtmc="search form"
+    aria-label="Search for a package"
+    role="search"
+  >
+    <input name="q" class="go-Input js-searchFocus" aria-label="Search for a package" type="search"
+        autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false"
+        placeholder="Search packages or symbols"
+        value="" />
+    <input name="m" value="" hidden>
+    <button class="go-Button go-Button--inverted" aria-label="Submit search">
+      <img
+        class="go-Icon"
+        height="24"
+        width="24"
+        src="/static/shared/icon/search_gm_grey_24dp.svg"
+        alt=""
+      />
+    </button>
+  </form>
+  <button class="go-SearchForm-expandSearch js-expandSearch" data-gtmc="nav button"
+      aria-label="Open search" data-test-id="expand-search">
+    <img class="go-Icon go-Icon--inverted" height="24" width="24"
+        src="/static/shared/icon/search_gm_grey_24dp.svg" alt="">
+
+  </button>
+</div>
+
+          <ul class="go-Header-menu">
+            <li class="go-Header-menuItem">
+              <a class="js-desktop-menu-hover" href="#" data-gtmc="nav link">
+                Why Go
+                <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_drop_down_gm_grey_24dp.svg" alt="submenu dropdown icon">
+              </a>
+              <ul class="go-Header-submenu go-Header-submenu--why js-desktop-submenu-hover" aria-label="submenu">
+                  <li class="go-Header-submenuItem">
+                    <div>
+                      <a href="https://go.dev/solutions/case-studies">
+                        <span>Case Studies</span>
+                      </a>
+                    </div>
+                    <p>Common problems companies solve with Go</p>
+                  </li>
+                  <li class="go-Header-submenuItem">
+                    <div>
+                      <a href="https://go.dev/solutions/use-cases">
+                        <span>Use Cases</span>
+                      </a>
+                    </div>
+                    <p>Stories about how and why companies use Go</p>
+                  </li>
+                  <li class="go-Header-submenuItem">
+                    <div>
+                      <a href="https://go.dev/security/">
+                        <span>Security</span>
+                      </a>
+                    </div>
+                    <p>How Go can help keep you secure by default</p>
+                  </li>
+              </ul>
+            </li>
+            <li class="go-Header-menuItem">
+              <a href="https://go.dev/learn/" data-gtmc="nav link">Learn</a>
+            </li>
+            <li class="go-Header-menuItem">
+              <a class="js-desktop-menu-hover" href="#" data-gtmc="nav link">
+                Docs
+                <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_drop_down_gm_grey_24dp.svg" alt="submenu dropdown icon">
+              </a>
+              <ul class="go-Header-submenu go-Header-submenu--docs js-desktop-submenu-hover" aria-label="submenu">
+                <li class="go-Header-submenuItem">
+                  <div>
+                    <a href="https://go.dev/doc/effective_go">
+                      <span>Effective Go</span>
+                    </a>
+                  </div>
+                  <p>Tips for writing clear, performant, and idiomatic Go code</p>
+                </li>
+                <li class="go-Header-submenuItem">
+                  <div>
+                    <a href="https://go.dev/doc/">
+                      <span>Go User Manual</span>
+                    </a>
+                  </div>
+                  <p>A complete introduction to building software with Go</p>
+                </li>
+                <li class="go-Header-submenuItem">
+                  <div>
+                    <a href="https://pkg.go.dev/std">
+                      <span>Standard library</span>
+                    </a>
+                  </div>
+                  <p>Reference documentation for Go's standard library</p>
+                </li>
+                <li class="go-Header-submenuItem">
+                  <div>
+                    <a href="https://go.dev/doc/devel/release">
+                      <span>Release Notes</span>
+                    </a>
+                  </div>
+                  <p>Learn what's new in each Go release</p>
+                </li>
+                <li class="go-Header-submenuItem">
+                  <div>
+                    <a href="/api">
+                      <span>API</span>
+                    </a>
+                  </div>
+                  <p>Reference documentation for the pkg.go.dev API</p>
+                </li>
+              </ul>
+            </li>
+            <li class="go-Header-menuItem go-Header-menuItem--active">
+              <a href="/" data-gtmc="nav link">Packages</a>
+            </li>
+            <li class="go-Header-menuItem">
+              <a class="js-desktop-menu-hover" href="#" data-gtmc="nav link">
+                Community
+                <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_drop_down_gm_grey_24dp.svg" alt="submenu dropdown icon">
+              </a>
+              <ul class="go-Header-submenu go-Header-submenu--community js-desktop-submenu-hover" aria-label="submenu">
+                <li class="go-Header-submenuItem">
+                  <div>
+                    <a href="https://go.dev/talks/">
+                      <span>Recorded Talks</span>
+                    </a>
+                  </div>
+                  <p>Videos from prior events</p>
+                </li>
+                <li class="go-Header-submenuItem">
+                  <div>
+                    <a href="https://www.meetup.com/pro/go">
+                      <span>Meetups</span>
+                      <i class="material-icons">
+                        <img class="go-Icon" height="24" width="24"
+                            src="/static/shared/icon/launch_gm_grey_24dp.svg" alt="">
+                      </i>
+                    </a>
+                  </div>
+                  <p>Meet other local Go developers</p>
+                </li>
+                <li class="go-Header-submenuItem">
+                  <div>
+                    <a href="https://github.com/golang/go/wiki/Conferences">
+                      <span>Conferences</span>
+                      <i class="material-icons">
+                        <img class="go-Icon" height="24" width="24"
+                            src="/static/shared/icon/launch_gm_grey_24dp.svg" alt="">
+                      </i>
+                    </a>
+                  </div>
+                  <p>Learn and network with Go developers from around the world</p>
+                </li>
+                <li class="go-Header-submenuItem">
+                  <div>
+                    <a href="https://go.dev/blog">
+                      <span>Go blog</span>
+                    </a>
+                  </div>
+                  <p>The Go project's official blog.</p>
+                </li>
+                <li class="go-Header-submenuItem">
+                  <div>
+                    <a href="https://go.dev/help">
+                      <span>Go project</span>
+                    </a>
+                  </div>
+                  <p>Get help and stay informed from Go</p>
+                </li>
+                <li class="go-Header-submenuItem">
+                  <div>
+                    Get connected
+                  </div>
+                  <p></p>
+                  <div class="go-Header-socialIcons">
+                      <a
+                        class="go-Header-socialIcon"
+                        aria-label="Get connected with google-groups (Opens in new window)"
+                        title="Get connected with google-groups (Opens in new window)"
+                        href="https://groups.google.com/g/golang-nuts">
+                        <img src="/static/shared/logo/social/google-groups.svg" />
+                      </a>
+                      <a
+                        class="go-Header-socialIcon"
+                        aria-label="Get connected with github (Opens in new window)"
+                        title="Get connected with github (Opens in new window)"
+                        href="https://github.com/golang">
+                        <img src="/static/shared/logo/social/github.svg" />
+                      </a>
+                      <a
+                        class="go-Header-socialIcon"
+                        aria-label="Get connected with twitter (Opens in new window)"
+                        title="Get connected with twitter (Opens in new window)"
+                        href="https://twitter.com/golang">
+                        <img src="/static/shared/logo/social/twitter.svg" />
+                      </a>
+                      <a
+                        class="go-Header-socialIcon"
+                        aria-label="Get connected with reddit (Opens in new window)"
+                        title="Get connected with reddit (Opens in new window)"
+                        href="https://www.reddit.com/r/golang/">
+                        <img src="/static/shared/logo/social/reddit.svg" />
+                      </a>
+                      <a
+                        class="go-Header-socialIcon"
+                        aria-label="Get connected with slack (Opens in new window)"
+                        title="Get connected with slack (Opens in new window)"
+                        href="https://invite.slack.golangbridge.org/">
+                        <img src="/static/shared/logo/social/slack.svg" />
+                      </a>
+                      <a
+                        class="go-Header-socialIcon"
+                        aria-label="Get connected with stack-overflow (Opens in new window)"
+                        title=""
+                        href="https://stackoverflow.com/collectives/go">
+                        <img src="/static/shared/logo/social/stack-overflow.svg" />
+                      </a>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <button class="go-Header-navOpen js-headerMenuButton go-Header-navOpen--white" data-gtmc="nav button" aria-label="Open navigation">
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <aside class="go-NavigationDrawer js-header">
+    <nav class="go-NavigationDrawer-nav">
+      <div class="go-NavigationDrawer-header">
+        <a href="https://go.dev/">
+          <img class="go-NavigationDrawer-logo" src="/static/shared/logo/go-blue.svg" alt="Go.">
+        </a>
+      </div>
+      <ul class="go-NavigationDrawer-list">
+          <li class="go-NavigationDrawer-listItem js-mobile-subnav-trigger go-NavigationDrawer-hasSubnav">
+            <a href="#">
+              <span>Why Go</span>
+              <i class="material-icons">
+                <img class="go-Icon" height="24" width="24"
+                  src="/static/shared/icon/navigate_next_gm_grey_24dp.svg" alt="">
+              </i>
+            </a>
+
+            <div class="go-NavigationDrawer go-NavigationDrawer-submenuItem">
+              <div class="go-NavigationDrawer-nav">
+                <div class="go-NavigationDrawer-header">
+                  <a href="#">
+                    <i class="material-icons">
+                      <img class="go-Icon" height="24" width="24"
+                        src="/static/shared/icon/navigate_before_gm_grey_24dp.svg" alt="">
+                      </i>
+                      Why Go
+                  </a>
+                </div>
+                <ul class="go-NavigationDrawer-list">
+                  <li class="go-NavigationDrawer-listItem">
+                    <a href="https://go.dev/solutions/case-studies">
+                      Case Studies
+                    </a>
+                  </li>
+                  <li class="go-NavigationDrawer-listItem">
+                    <a href="https://go.dev/solutions/use-cases">
+                      Use Cases
+                    </a>
+                  </li>
+                  <li class="go-NavigationDrawer-listItem">
+                    <a href="https://go.dev/security/">
+                      Security
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li class="go-NavigationDrawer-listItem">
+            <a href="https://go.dev/learn/">Learn</a>
+          </li>
+          <li class="go-NavigationDrawer-listItem js-mobile-subnav-trigger go-NavigationDrawer-hasSubnav">
+            <a href="#">
+              <span>Docs</span>
+              <i class="material-icons">
+                <img class="go-Icon" height="24" width="24"
+                  src="/static/shared/icon/navigate_next_gm_grey_24dp.svg" alt="">
+              </i>
+            </a>
+
+            <div class="go-NavigationDrawer go-NavigationDrawer-submenuItem">
+              <div class="go-NavigationDrawer-nav">
+                <div class="go-NavigationDrawer-header">
+                  <a href="#"><i class="material-icons">
+                    <img class="go-Icon" height="24" width="24"
+                      src="/static/shared/icon/navigate_before_gm_grey_24dp.svg" alt="">
+                    </i>
+                    Docs
+                  </a>
+                </div>
+                <ul class="go-NavigationDrawer-list">
+                  <li class="go-NavigationDrawer-listItem">
+                    <a href="https://go.dev/doc/effective_go">
+                      Effective Go
+                    </a>
+                  </li>
+                  <li class="go-NavigationDrawer-listItem">
+                    <a href="https://go.dev/doc/">
+                      Go User Manual
+                    </a>
+                  </li>
+                  <li class="go-NavigationDrawer-listItem">
+                    <a href="https://pkg.go.dev/std">
+                      Standard library
+                    </a>
+                  </li>
+                  <li class="go-NavigationDrawer-listItem">
+                    <a href="https://go.dev/doc/devel/release">
+                      Release Notes
+                    </a>
+                  </li>
+                  <li class="go-NavigationDrawer-listItem">
+                    <a href="/api">
+                      API
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li class="go-NavigationDrawer-listItem go-NavigationDrawer-listItem--active">
+            <a href="/">Packages</a>
+          </li>
+          <li class="go-NavigationDrawer-listItem js-mobile-subnav-trigger go-NavigationDrawer-hasSubnav">
+            <a href="#">
+              <span>Community</span>
+              <i class="material-icons">
+                <img class="go-Icon" height="24" width="24"
+                  src="/static/shared/icon/navigate_next_gm_grey_24dp.svg" alt="">
+              </i>
+            </a>
+            <div class="go-NavigationDrawer go-NavigationDrawer-submenuItem">
+              <div class="go-NavigationDrawer-nav">
+                <div class="go-NavigationDrawer-header">
+                  <a href="#">
+                    <i class="material-icons">
+                      <img class="go-Icon" height="24" width="24"
+                        src="/static/shared/icon/navigate_before_gm_grey_24dp.svg" alt="">
+                    </i>
+                    Community
+                  </a>
+                </div>
+                <ul class="go-NavigationDrawer-list">
+                  <li class="go-NavigationDrawer-listItem">
+                    <a href="https://go.dev/talks/">
+                      Recorded Talks
+                    </a>
+                  </li>
+                  <li class="go-NavigationDrawer-listItem">
+                    <a href="https://www.meetup.com/pro/go">
+                      Meetups
+                      <i class="material-icons">
+                      <img class="go-Icon" height="24" width="24"
+                          src="/static/shared/icon/launch_gm_grey_24dp.svg" alt="">
+                      </i>
+                    </a>
+                  </li>
+                  <li class="go-NavigationDrawer-listItem">
+                    <a href="https://github.com/golang/go/wiki/Conferences">
+                      Conferences
+                      <i class="material-icons">
+                        <img class="go-Icon" height="24" width="24" src="/static/shared/icon/launch_gm_grey_24dp.svg" alt="">
+                      </i>
+                    </a>
+                  </li>
+                  <li class="go-NavigationDrawer-listItem">
+                    <a href="https://go.dev/blog">
+                      Go blog
+                    </a>
+                  </li>
+                  <li class="go-NavigationDrawer-listItem">
+                    <a href="https://go.dev/help">
+                      Go project
+                    </a>
+                  </li>
+                  <li class="go-NavigationDrawer-listItem">
+                    <div>Get connected</div>
+                    <div class="go-Header-socialIcons">
+                        <a class="go-Header-socialIcon" href="https://groups.google.com/g/golang-nuts"><img src="/static/shared/logo/social/google-groups.svg" /></a>
+                        <a class="go-Header-socialIcon" href="https://github.com/golang"><img src="/static/shared/logo/social/github.svg" /></a>
+                        <a class="go-Header-socialIcon" href="https://twitter.com/golang"><img src="/static/shared/logo/social/twitter.svg" /></a>
+                        <a class="go-Header-socialIcon" href="https://www.reddit.com/r/golang/"><img src="/static/shared/logo/social/reddit.svg" /></a>
+                        <a class="go-Header-socialIcon" href="https://invite.slack.golangbridge.org/"><img src="/static/shared/logo/social/slack.svg" /></a>
+                        <a class="go-Header-socialIcon" href="https://stackoverflow.com/collectives/go"><img src="/static/shared/logo/social/stack-overflow.svg" /></a>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+      </ul>
+    </nav>
+  </aside>
+  <div class="go-NavigationDrawer-scrim js-scrim" role="presentation"></div>
+
+    
+  <main class="go-Main" id="main-content">
+    <div class="go-Main-banner" role="alert"><div class="go-Message go-Message--notice" data-test-id="UnitHeader-majorVersionBanner">
+      <img
+        class="go-Icon"
+        height="24"
+        width="24"
+        src="/static/shared/icon/info_gm_grey_24dp.svg"
+        alt="Notice"
+      />&nbsp; The highest tagged major version is
+      <a href="/github.com/IBM/fp-go/v2" data-gtmc="banner link" aria-label="Go to Latest Major Version">v2</a>.
+    </div></div>
+    <header class="go-Main-header js-mainHeader">
+  
+  
+  <nav class="go-Main-headerBreadcrumb go-Breadcrumb" aria-label="Breadcrumb" data-test-id="UnitHeader-breadcrumb">
+    <ol>
+      
+        
+          <li data-test-id="UnitHeader-breadcrumbItem">
+            <a href="/" data-gtmc="breadcrumb link">Discover Packages</a>
+          </li>
+        
+        <li>
+          <a href="/github.com/IBM/fp-go@v1.1.84" data-gtmc="breadcrumb link" aria-current="location"
+              data-test-id="UnitHeader-breadcrumbCurrent">
+            github.com/IBM/fp-go
+          </a>
+          
+            <button
+              class="go-Button go-Button--inline go-Clipboard js-clipboard"
+              title="Copy path to clipboard.&#10;&#10;github.com/IBM/fp-go"
+              aria-label="Copy Path to Clipboard"
+              data-to-copy="github.com/IBM/fp-go"
+              data-gtmc="breadcrumbs button"
+            >
+              <img
+                class="go-Icon go-Icon--accented"
+                height="24"
+                width="24"
+                src="/static/shared/icon/content_copy_gm_grey_24dp.svg"
+                alt=""
+              >
+            </button>
+          
+        
+      </li>
+    </ol>
+  </nav>
+
+  <div class="go-Main-headerContent">
+    
+  <div class="go-Main-headerTitle js-stickyHeader">
+    <a class="go-Main-headerLogo" href="https://go.dev/" aria-hidden="true" tabindex="-1" data-gtmc="header link" aria-label="Link to Go Homepage">
+      <img height="78" width="207" src="/static/shared/logo/go-blue.svg" alt="Go">
+    </a>
+    <h1 class="UnitHeader-titleHeading" data-test-id="UnitHeader-title">fp-go</h1>
+    
+      <span class="go-Chip go-Chip--inverted">command</span>
+    
+      <span class="go-Chip go-Chip--inverted">module</span>
+    
+    
+      
+        <button
+          class="go-Button go-Button--inline go-Clipboard js-clipboard"
+          title="Copy path to clipboard.&#10;&#10;github.com/IBM/fp-go"
+          aria-label="Copy Path to Clipboard"
+          data-to-copy="github.com/IBM/fp-go"
+          data-gtmc="title button"
+          tabindex="-1"
+        >
+          <img
+            class="go-Icon go-Icon--accented"
+            height="24"
+            width="24"
+            src="/static/shared/icon/content_copy_gm_grey_24dp.svg"
+            alt=""
+          />
+        </button>
+      
+    
+  </div>
+
+    
+      
+  <div class="go-Main-headerDetails">
+    
+      
+  <span class="go-Main-headerDetailItem" data-test-id="UnitHeader-version">
+    <a href="?tab=versions" aria-label="Version: v1.1.84" 
+    data-gtmc="header link" aria-describedby="version-description">
+      <span class="go-textSubtle" aria-hidden="true">Version: </span>
+        v1.1.84
+    </a>
+    <div class="screen-reader-only" id="version-description" hidden>
+      Opens a new window with list of versions in this module.
+    </div>
+    
+    <span class="DetailsHeader-badge--latest" data-test-id="UnitHeader-minorVersionBanner">
+      <span class="go-Chip DetailsHeader-span--latest">Latest</span>
+      <span class="go-Chip DetailsHeader-span--notAtLatest">
+        Latest
+        
+  <details class="go-Tooltip js-tooltip" data-gtmc="tooltip">
+    <summary>
+      <img class="go-Icon go-Icon--inverted" height="24" width="24" src="/static/shared/icon/alert_gm_grey_24dp.svg" alt="Warning">
+    </summary>
+    <p>This package is not in the latest version of its module.</p>
+  </details>
+
+      </span>
+      <a href="/github.com/IBM/fp-go" aria-label="Go to Latest Version" data-gtmc="header link">
+        <span class="go-Chip go-Chip--alert DetailsHeader-span--goToLatest">Go to latest</span>
+      </a>
+    </span>
+  </span>
+
+      
+  <span class="go-Main-headerDetailItem" data-test-id="UnitHeader-commitTime">
+    Published: Dec 18, 2025
+  </span>
+
+      
+  <span class="go-Main-headerDetailItem" data-test-id="UnitHeader-licenses">
+    License: <a href="/github.com/IBM/fp-go?tab=licenses" data-test-id="UnitHeader-license" 
+        data-gtmc="header link" aria-describedby="license-description">Apache-2.0</a>
+      
+    
+  </span>
+  <div class="screen-reader-only" id="license-description" hidden>
+    Opens a new window with license information.
+  </div>
+
+      
+        
+  <span class="go-Main-headerDetailItem" data-test-id="UnitHeader-imports">
+    <a href="/github.com/IBM/fp-go?tab=imports" aria-label="Imports: 4"
+        data-gtmc="header link" aria-describedby="imports-description">
+      <span class="go-textSubtle">Imports: </span>4
+    </a>
+  </span>
+  <div class="screen-reader-only" id="imports-description" hidden>
+    Opens a new window with list of imports.
+  </div>
+
+        
+  <span class="go-Main-headerDetailItem" data-test-id="UnitHeader-importedby">
+    <a href="/github.com/IBM/fp-go?tab=importedby" aria-label="Imported By: 1"
+        data-gtmc="header link" aria-describedby="importedby-description">
+       <span class="go-textSubtle">Imported by: </span>1
+    </a>
+  </span>
+  <div class="screen-reader-only" id="importedby-description" hidden>
+    Opens a new window with list of known importers.
+  </div>
+
+      
+    
+  </div>
+  
+  <div class="UnitHeader-overflowContainer">
+    <svg class="UnitHeader-overflowImage" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+      <path d="M0 0h24v24H0z" fill="none"/>
+      <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+    </svg>
+    <select class="UnitHeader-overflowSelect js-selectNav" tabindex="-1">
+      <option value="/">Main</option>
+      <option value="/github.com/IBM/fp-go?tab=versions">
+        Versions
+      </option>
+      <option value="/github.com/IBM/fp-go?tab=licenses">
+        Licenses
+      </option>
+      
+        <option value="/github.com/IBM/fp-go?tab=imports">
+          Imports
+        </option>
+        <option value="/github.com/IBM/fp-go?tab=importedby">
+          Imported By
+        </option>
+      
+    </select>
+  </div>
+
+
+    
+  </div>
+
+</header>
+    
+      <aside class="go-Main-aside  js-mainAside">
+  
+  <div class="UnitMeta">
+    <h2 class="go-textLabel">Details</h2>
+    
+  <ul class="UnitMeta-details">
+    <li>
+      <details class="go-Tooltip js-tooltip" data-gtmc="tooltip">
+        <summary class="go-textSubtle">
+          
+  <img class="go-Icon go-Icon--accented"
+    tabindex="0"
+    role="button"src="/static/shared/icon/check_circle_gm_grey_24dp.svg" alt="checked" aria-label="Valid file, toggle tooltip"height="24" width="24">
+
+          Valid <a href="https://github.com/IBM/fp-go/tree/v1.1.84/go.mod" target="_blank" rel="noopener">go.mod</a> file
+          <img class="go-Icon" role="button" tabindex="0" src="/static/shared/icon/help_gm_grey_24dp.svg" alt="" aria-label="Toggle go.mod validity tooltip" height="24" width="24">
+        </summary>
+        <p aria-live="polite" role="tooltip">
+          The Go module system was introduced in Go 1.11 and is the official dependency management
+          solution for Go.
+        </p>
+      </details>
+    </li>
+    <li>
+      <details class="go-Tooltip js-tooltip" data-gtmc="tooltip">
+        <summary class="go-textSubtle">
+          
+  <img class="go-Icon go-Icon--accented"
+    tabindex="0"
+    role="button"src="/static/shared/icon/check_circle_gm_grey_24dp.svg" alt="checked" aria-label="Valid file, toggle tooltip"height="24" width="24">
+
+          Redistributable license
+          <img class="go-Icon" role="button" tabindex="0" src="/static/shared/icon/help_gm_grey_24dp.svg" alt="" aria-label="Toggle redistributable help tooltip" height="24" width="24">
+        </summary>
+        <p aria-live="polite" role="tooltip">
+          Redistributable licenses place minimal restrictions on how software can be used,
+          modified, and redistributed.
+        </p>
+      </details>
+    </li>
+    <li>
+      <details class="go-Tooltip js-tooltip" data-gtmc="tooltip">
+        <summary class="go-textSubtle">
+          
+  <img class="go-Icon go-Icon--accented"
+    tabindex="0"
+    role="button"src="/static/shared/icon/check_circle_gm_grey_24dp.svg" alt="checked" aria-label="Valid file, toggle tooltip"height="24" width="24">
+
+          Tagged version
+          <img class="go-Icon" role="button" tabindex="0" src="/static/shared/icon/help_gm_grey_24dp.svg" alt="" aria-label="Toggle tagged version tooltip" height="24" width="24">
+        </summary>
+        <p aria-live="polite" role="tooltip">Modules with tagged versions give importers more predictable builds.</p>
+      </details>
+    </li>
+    <li>
+      <details class="go-Tooltip js-tooltip" data-gtmc="tooltip">
+        <summary class="go-textSubtle">
+          
+  <img class="go-Icon go-Icon--accented"
+    tabindex="0"
+    role="button"src="/static/shared/icon/check_circle_gm_grey_24dp.svg" alt="checked" aria-label="Valid file, toggle tooltip"height="24" width="24">
+
+          Stable version
+          <img class="go-Icon" role="button" tabindex="0" aria-label="Toggle stable version tooltip" src="/static/shared/icon/help_gm_grey_24dp.svg" alt="" height="24" width="24">
+        </summary>
+        <p aria-live="polite" role="tooltip">When a project reaches major version v1 it is considered stable.</p>
+      </details>
+    </li>
+    <li class="UnitMeta-detailsLearn">
+      <a href="/about#best-practices" data-gtmc="meta link">Learn more about best practices</a>
+    </li>
+  </ul>
+
+    <h2 class="go-textLabel">Repository</h2>
+    <div class="UnitMeta-repo">
+      
+        <a href="https://github.com/IBM/fp-go" title="https://github.com/IBM/fp-go" target="_blank" rel="noopener">
+          github.com/IBM/fp-go
+        </a>
+      
+    </div>
+    
+      <h2 class="go-textLabel" data-test-id="links-heading">Links</h2>
+      <ul class="UnitMeta-links">
+        
+        
+          <li>
+            <a href="https://deps.dev/go/github.com%2FIBM%2Ffp-go/v1.1.84" title="View this module on Open Source Insights"
+              target="_blank" rel="noopener" data-test-id="meta-link-depsdev">
+              <img class="link-Icon" src="/static/shared/icon/depsdev-logo.svg"
+                alt="Open Source Insights Logo" />
+              Open Source Insights
+            </a>
+          </li>
+        
+        
+  
+
+        
+  
+
+        
+  
+
+      </ul>
+    
+  </div>
+
+</aside>
+    
+    <nav class="go-Main-nav go-Main-nav--sticky js-mainNav" aria-label="Outline">
+  <div class="go-Main-navDesktop">
+    
+  <div class="UnitOutline-jumpTo">
+    <button class="UnitOutline-jumpToInput go-ShortcutKey js-jumpToInput"
+        aria-controls="jump-to-modal"
+        aria-label="Open Jump to Identifier"
+        data-shortcut="f"
+        data-shortcut-alt="find"
+        data-test-id="jump-to-button" data-gtmc="outline button">
+      Jump to ...
+    </button>
+  </div>
+  <ul class="go-Tree js-tree" role="tree" aria-label="Outline">
+    
+      <li class="js-readmeOutline">
+        <a href="#section-readme" data-gtmc="outline link">
+          README
+        </a>
+        
+  <ul id="readme-outline">
+    
+      <li>
+        <a href="#readme-table-of-contents" data-gtmc="readme outline link">
+          📚 Table of Contents
+        </a>
+         
+      </li>
+    
+      <li>
+        <a href="#readme-getting-started" data-gtmc="readme outline link">
+          🚀 Getting Started
+        </a>
+        
+          <ul>
+            
+              <li>
+                <a href="#readme-installation" data-gtmc="readme outline link">
+                  Installation
+                </a>
+                 
+              </li>
+            
+              <li>
+                <a href="#readme-quick-example" data-gtmc="readme outline link">
+                  Quick Example
+                </a>
+                 
+              </li>
+            
+              <li>
+                <a href="#readme-resources" data-gtmc="readme outline link">
+                  Resources
+                </a>
+                 
+              </li>
+             
+          </ul>
+         
+      </li>
+    
+      <li>
+        <a href="#readme-design-goals" data-gtmc="readme outline link">
+          🎯 Design Goals
+        </a>
+        
+          <ul>
+            
+              <li>
+                <a href="#readme-core-principles" data-gtmc="readme outline link">
+                  Core Principles
+                </a>
+                 
+              </li>
+            
+              <li>
+                <a href="#readme-alignment-with-the-zen-of-go" data-gtmc="readme outline link">
+                  🧘🏽 Alignment with the Zen of Go
+                </a>
+                 
+              </li>
+             
+          </ul>
+         
+      </li>
+    
+      <li>
+        <a href="#readme-core-concepts" data-gtmc="readme outline link">
+          💡 Core Concepts
+        </a>
+        
+          <ul>
+            
+              <li>
+                <a href="#readme-data-types" data-gtmc="readme outline link">
+                  Data Types
+                </a>
+                 
+              </li>
+            
+              <li>
+                <a href="#readme-monadic-operations" data-gtmc="readme outline link">
+                  Monadic Operations
+                </a>
+                 
+              </li>
+             
+          </ul>
+         
+      </li>
+    
+      <li>
+        <a href="#readme-comparison-to-idiomatic-go" data-gtmc="readme outline link">
+          Comparison to Idiomatic Go
+        </a>
+        
+          <ul>
+            
+              <li>
+                <a href="#readme-pure-functions" data-gtmc="readme outline link">
+                  Pure Functions
+                </a>
+                
+                  <ul>
+                    
+                      <li>
+                        <a href="#readme-without-errors" data-gtmc="readme outline link">
+                          Without Errors
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="#readme-with-errors" data-gtmc="readme outline link">
+                          With Errors
+                        </a>
+                      </li>
+                     
+                  </ul>
+                 
+              </li>
+            
+              <li>
+                <a href="#readme-effectful-functions" data-gtmc="readme outline link">
+                  Effectful Functions
+                </a>
+                
+                  <ul>
+                    
+                      <li>
+                        <a href="#readme-without-errors-1" data-gtmc="readme outline link">
+                          Without Errors
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="#readme-with-errors-1" data-gtmc="readme outline link">
+                          With Errors
+                        </a>
+                      </li>
+                     
+                  </ul>
+                 
+              </li>
+            
+              <li>
+                <a href="#readme-go-context" data-gtmc="readme outline link">
+                  Go Context
+                </a>
+                 
+              </li>
+             
+          </ul>
+         
+      </li>
+    
+      <li>
+        <a href="#readme-implementation-notes" data-gtmc="readme outline link">
+          Implementation Notes
+        </a>
+        
+          <ul>
+            
+              <li>
+                <a href="#readme-generics" data-gtmc="readme outline link">
+                  Generics
+                </a>
+                 
+              </li>
+            
+              <li>
+                <a href="#readme-ordering-of-generic-type-parameters" data-gtmc="readme outline link">
+                  Ordering of Generic Type Parameters
+                </a>
+                 
+              </li>
+            
+              <li>
+                <a href="#readme-use-of-the-operator" data-gtmc="readme outline link">
+                  Use of the ~ Operator
+                </a>
+                 
+              </li>
+            
+              <li>
+                <a href="#readme-higher-kinded-types-hkt" data-gtmc="readme outline link">
+                  Higher Kinded Types (HKT)
+                </a>
+                 
+              </li>
+             
+          </ul>
+         
+      </li>
+    
+      <li>
+        <a href="#readme-common-operations" data-gtmc="readme outline link">
+          Common Operations
+        </a>
+        
+          <ul>
+            
+              <li>
+                <a href="#readme-map-chain-ap-flap" data-gtmc="readme outline link">
+                  Map/Chain/Ap/Flap
+                </a>
+                 
+              </li>
+            
+              <li>
+                <a href="#readme-example-chaining-operations" data-gtmc="readme outline link">
+                  Example: Chaining Operations
+                </a>
+                 
+              </li>
+             
+          </ul>
+         
+      </li>
+    
+      <li>
+        <a href="#readme-resources-1" data-gtmc="readme outline link">
+          📚 Resources
+        </a>
+         
+      </li>
+    
+      <li>
+        <a href="#readme-contributing" data-gtmc="readme outline link">
+          🤝 Contributing
+        </a>
+         
+      </li>
+    
+      <li>
+        <a href="#readme-license" data-gtmc="readme outline link">
+          📄 License
+        </a>
+         
+      </li>
+     
+  </ul>
+
+      </li>
+    
+    
+      <li>
+        <a href="#section-documentation" data-gtmc="outline link">
+          Documentation
+        </a>
+        
+<ul>
+  
+    <li>
+      <a href="#pkg-overview" data-gtmc="doc outline link">Overview</a>
+    </li>
+  
+  
+</ul>
+
+      </li>
+    
+    
+      <li>
+        <a href="#section-sourcefiles" data-gtmc="outline link">
+          Source Files
+        </a>
+      </li>
+    
+    
+      <li>
+        <a href="#section-directories" data-gtmc="outline link">
+          Directories
+        </a>
+      </li>
+    
+  </ul>
+
+  </div>
+  <div class="go-Main-navMobile js-mainNavMobile">
+    <label class="go-Label">
+      <select class="go-Select">
+        
+          <option selected disabled>README</option>
+        
+      </select>
+    </label>
+  </div>
+</nav>
+    <article class="go-Main-article js-mainContent">
+  <div class="UnitDetails" data-test-id="UnitDetails" style="display: block;">
+    <div class="UnitDetails-content js-unitDetailsContent" data-test-id="UnitDetails-content">
+      
+        
+  <div class="UnitReadme UnitReadme--expanded js-readme">
+    <h2 class="UnitReadme-title" id="section-readme">
+      <img class="go-Icon" height="24" width="24" src="/static/shared/icon/chrome_reader_mode_gm_grey_24dp.svg" alt="">
+      README
+      <a class="UnitReadme-idLink" href="#section-readme" title="Go to Readme" aria-label="Go to Readme">¶</a>
+    </h2>
+    
+      <div class="UnitReadme-content" data-test-id="Unit-readmeContent">
+        <div class="Overview-readmeContent js-readmeContent"><h3 class="h1" id="readme-fp-go-functional-programming-library-for-go">fp-go: Functional Programming Library for Go</h3>
+<p><a href="https://pkg.go.dev/github.com/IBM/fp-go" rel="nofollow"><img src="https://pkg.go.dev/badge/github.com/IBM/fp-go.svg" alt="Go Reference"/></a>
+<a href="https://coveralls.io/github/IBM/fp-go?branch=main" rel="nofollow"><img src="https://coveralls.io/repos/github/IBM/fp-go/badge.svg?branch=main" alt="Coverage Status"/></a></p>
+<p><strong>🚧 Work in progress! 🚧</strong> Despite major version 1 (due to <a href="https://github.com/semantic-release/semantic-release/issues/1507" rel="nofollow">semantic-release limitations</a>), we&#39;re working to minimize breaking changes.</p>
+<p><img src="https://github.com/IBM/fp-go/raw/v1.1.84/resources/images/logo.png" alt="logo"/></p>
+<p>A comprehensive functional programming library for Go, strongly influenced by the excellent <a href="https://github.com/gcanti/fp-ts" rel="nofollow">fp-ts</a> library for TypeScript.</p>
+<h4 class="h2" id="readme-table-of-contents">📚 Table of Contents</h4>
+<ul>
+<li><a href="#readme--getting-started" rel="nofollow">Getting Started</a></li>
+<li><a href="#readme--design-goals" rel="nofollow">Design Goals</a></li>
+<li><a href="#readme--core-concepts" rel="nofollow">Core Concepts</a></li>
+<li><a href="#readme-comparison-to-idiomatic-go" rel="nofollow">Comparison to Idiomatic Go</a></li>
+<li><a href="#readme-implementation-notes" rel="nofollow">Implementation Notes</a></li>
+<li><a href="#readme-common-operations" rel="nofollow">Common Operations</a></li>
+<li><a href="#readme--resources" rel="nofollow">Resources</a></li>
+</ul>
+<h4 class="h2" id="readme-getting-started">🚀 Getting Started</h4>
+<h5 class="h3" id="readme-installation">Installation</h5>
+<pre><code>go get github.com/IBM/fp-go
+</code></pre>
+<h5 class="h3" id="readme-quick-example">Quick Example</h5>
+<pre><code>import (
+    &#34;errors&#34;
+    &#34;github.com/IBM/fp-go/either&#34;
+    &#34;github.com/IBM/fp-go/function&#34;
+)
+
+// Pure function that can fail
+func divide(a, b int) either.Either[error, int] {
+    if b == 0 {
+        return either.Left[int](errors.New(&#34;division by zero&#34;))
+    }
+    return either.Right[error](a / b)
+}
+
+// Compose operations safely
+result := function.Pipe2(
+    divide(10, 2),
+    either.Map(func(x int) int { return x * 2 }),
+    either.GetOrElse(func() int { return 0 }),
+)
+// result = 10
+</code></pre>
+<h5 class="h3" id="readme-resources">Resources</h5>
+<ul>
+<li>📖 <a href="https://pkg.go.dev/github.com/IBM/fp-go" rel="nofollow">API Documentation</a></li>
+<li>💡 <a href="https://github.com/IBM/fp-go/blob/v1.1.84/samples" rel="nofollow">Code Samples</a></li>
+<li>🆕 <a href="https://github.com/IBM/fp-go/blob/v1.1.84/v2/README.md" rel="nofollow">V2 Documentation</a> (requires Go 1.24+)</li>
+</ul>
+<h4 class="h2" id="readme-design-goals">🎯 Design Goals</h4>
+<p>This library aims to provide a set of data types and functions that make it easy and fun to write maintainable and testable code in Go. It encourages the following patterns:</p>
+<h5 class="h3" id="readme-core-principles">Core Principles</h5>
+<ul>
+<li><strong>Pure Functions</strong>: Write many small, testable, and pure functions that produce output only depending on their input and execute no side effects</li>
+<li><strong>Side Effect Isolation</strong>: Isolate side effects into lazily executed functions using the <code>IO</code> monad</li>
+<li><strong>Consistent Composition</strong>: Expose a consistent set of composition functions across all data types
+<ul>
+<li>Each data type has a small set of composition functions</li>
+<li>Functions are named consistently across all data types</li>
+<li>Semantics of same-named functions are consistent across data types</li>
+</ul>
+</li>
+</ul>
+<h5 class="h3" id="readme-alignment-with-the-zen-of-go">🧘🏽 Alignment with the Zen of Go</h5>
+<p>This library respects and aligns with <a href="https://the-zen-of-go.netlify.app/" rel="nofollow">The Zen of Go</a>:</p>
+<table>
+<thead>
+<tr>
+<th>Principle</th>
+<th>Alignment</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🧘🏽 Each package fulfills a single purpose</td>
+<td>✔️</td>
+<td>Each top-level package (Option, Either, ReaderIOEither, etc.) defines one data type and its operations</td>
+</tr>
+<tr>
+<td>🧘🏽 Handle errors explicitly</td>
+<td>✔️</td>
+<td>Clear distinction between operations that can/cannot fail; failures represented via <code>Either</code> type</td>
+</tr>
+<tr>
+<td>🧘🏽 Return early rather than nesting deeply</td>
+<td>✔️</td>
+<td>Small, focused functions composed together; <code>Either</code> monad handles error paths automatically</td>
+</tr>
+<tr>
+<td>🧘🏽 Leave concurrency to the caller</td>
+<td>✔️</td>
+<td>Pure functions are synchronous; I/O operations are asynchronous by default</td>
+</tr>
+<tr>
+<td>🧘🏽 Before you launch a goroutine, know when it will stop</td>
+<td>🤷🏽</td>
+<td>Library doesn&#39;t start goroutines; Task monad supports cancellation via context</td>
+</tr>
+<tr>
+<td>🧘🏽 Avoid package level state</td>
+<td>✔️</td>
+<td>No package-level state anywhere</td>
+</tr>
+<tr>
+<td>🧘🏽 Simplicity matters</td>
+<td>✔️</td>
+<td>Small, consistent interface across data types; focus on business logic</td>
+</tr>
+<tr>
+<td>🧘🏽 Write tests to lock in behaviour</td>
+<td>🟡</td>
+<td>Programming pattern encourages testing; library has growing test coverage</td>
+</tr>
+<tr>
+<td>🧘🏽 If you think it&#39;s slow, first prove it with a benchmark</td>
+<td>✔️</td>
+<td>Performance claims should be backed by benchmarks</td>
+</tr>
+<tr>
+<td>🧘🏽 Moderation is a virtue</td>
+<td>✔️</td>
+<td>No custom goroutines or expensive synchronization; atomic counters for coordination</td>
+</tr>
+<tr>
+<td>🧘🏽 Maintainability counts</td>
+<td>✔️</td>
+<td>Small, concise operations; pure functions with clear type signatures</td>
+</tr>
+</tbody>
+</table>
+<h4 class="h2" id="readme-core-concepts">💡 Core Concepts</h4>
+<h5 class="h3" id="readme-data-types">Data Types</h5>
+<p>The library provides several key functional data types:</p>
+<ul>
+<li><strong><code>Option[A]</code></strong>: Represents an optional value (Some or None)</li>
+<li><strong><code>Either[E, A]</code></strong>: Represents a value that can be one of two types (Left for errors, Right for success)</li>
+<li><strong><code>IO[A]</code></strong>: Represents a lazy computation that produces a value</li>
+<li><strong><code>IOEither[E, A]</code></strong>: Represents a lazy computation that can fail</li>
+<li><strong><code>Reader[R, A]</code></strong>: Represents a computation that depends on an environment</li>
+<li><strong><code>ReaderIOEither[R, E, A]</code></strong>: Combines Reader, IO, and Either for effectful computations with dependencies</li>
+<li><strong><code>Task[A]</code></strong>: Represents an asynchronous computation</li>
+<li><strong><code>State[S, A]</code></strong>: Represents a stateful computation</li>
+</ul>
+<h5 class="h3" id="readme-monadic-operations">Monadic Operations</h5>
+<p>All data types support common monadic operations:</p>
+<ul>
+<li><strong><code>Map</code></strong>: Transform the value inside a context</li>
+<li><strong><code>Chain</code></strong> (FlatMap): Transform and flatten nested contexts</li>
+<li><strong><code>Ap</code></strong>: Apply a function in a context to a value in a context</li>
+<li><strong><code>Of</code></strong>: Wrap a value in a context</li>
+<li><strong><code>Fold</code></strong>: Extract a value from a context</li>
+</ul>
+<h4 class="h2" id="readme-comparison-to-idiomatic-go">Comparison to Idiomatic Go</h4>
+<p>This section explains how functional APIs differ from idiomatic Go and how to convert between them.</p>
+<h5 class="h3" id="readme-pure-functions">Pure Functions</h5>
+<p>Pure functions take input parameters and compute output without changing global state or mutating inputs. They always return the same output for the same input.</p>
+<h6 class="h4" id="readme-without-errors">Without Errors</h6>
+<p>If your pure function doesn&#39;t return an error, the idiomatic signature works as-is:</p>
+<pre><code>func add(a, b int) int {
+    return a + b
+}
+</code></pre>
+<h6 class="h4" id="readme-with-errors">With Errors</h6>
+<p><strong>Idiomatic Go:</strong></p>
+<pre><code>func divide(a, b int) (int, error) {
+    if b == 0 {
+        return 0, errors.New(&#34;division by zero&#34;)
+    }
+    return a / b, nil
+}
+</code></pre>
+<p><strong>Functional Style:</strong></p>
+<pre><code>func divide(a, b int) either.Either[error, int] {
+    if b == 0 {
+        return either.Left[int](errors.New(&#34;division by zero&#34;))
+    }
+    return either.Right[error](a / b)
+}
+</code></pre>
+<p><strong>Conversion:</strong></p>
+<ul>
+<li>Use <code>either.EitherizeXXX</code> to convert from idiomatic to functional style</li>
+<li>Use <code>either.UneitherizeXXX</code> to convert from functional to idiomatic style</li>
+</ul>
+<h5 class="h3" id="readme-effectful-functions">Effectful Functions</h5>
+<p>An effectful function changes data outside its scope or doesn&#39;t always produce the same output for the same input.</p>
+<h6 class="h4" id="readme-without-errors-1">Without Errors</h6>
+<p><strong>Functional signature:</strong> <code>IO[T]</code></p>
+<pre><code>func getCurrentTime() io.IO[time.Time] {
+    return func() time.Time {
+        return time.Now()
+    }
+}
+</code></pre>
+<h6 class="h4" id="readme-with-errors-1">With Errors</h6>
+<p><strong>Functional signature:</strong> <code>IOEither[error, T]</code></p>
+<pre><code>func readFile(path string) ioeither.IOEither[error, []byte] {
+    return func() either.Either[error, []byte] {
+        data, err := os.ReadFile(path)
+        if err != nil {
+            return either.Left[[]byte](err)
+        }
+        return either.Right[error](data)
+    }
+}
+</code></pre>
+<p><strong>Conversion:</strong></p>
+<ul>
+<li>Use <code>ioeither.EitherizeXXX</code> to convert idiomatic Go functions to functional style</li>
+</ul>
+<h5 class="h3" id="readme-go-context">Go Context</h5>
+<p>Functions that take a <code>context.Context</code> are effectful because they depend on mutable context.</p>
+<p><strong>Idiomatic Go:</strong></p>
+<pre><code>func fetchData(ctx context.Context, url string) ([]byte, error) {
+    // implementation
+}
+</code></pre>
+<p><strong>Functional Style:</strong></p>
+<pre><code>func fetchData(url string) readerioeither.ReaderIOEither[context.Context, error, []byte] {
+    return func(ctx context.Context) ioeither.IOEither[error, []byte] {
+        return func() either.Either[error, []byte] {
+            // implementation
+        }
+    }
+}
+</code></pre>
+<p><strong>Conversion:</strong></p>
+<ul>
+<li>Use <code>readerioeither.EitherizeXXX</code> to convert idiomatic Go functions with context to functional style</li>
+</ul>
+<h4 class="h2" id="readme-implementation-notes">Implementation Notes</h4>
+<h5 class="h3" id="readme-generics">Generics</h5>
+<p>All monadic operations use Go generics for type safety:</p>
+<ul>
+<li>✅ <strong>Pros</strong>: Type-safe composition, IDE support, compile-time correctness</li>
+<li>⚠️ <strong>Cons</strong>: May result in larger binaries (different versions per type)</li>
+<li>💡 <strong>Tip</strong>: For binary size concerns, use type erasure with <code>any</code> type</li>
+</ul>
+<h5 class="h3" id="readme-ordering-of-generic-type-parameters">Ordering of Generic Type Parameters</h5>
+<p>Go requires all type parameters on the global function definition. Parameters that cannot be auto-detected come first:</p>
+<pre><code>// Map: B cannot be auto-detected, so it comes first
+func Map[R, E, A, B any](f func(A) B) func(ReaderIOEither[R, E, A]) ReaderIOEither[R, E, B]
+
+// Ap: B cannot be auto-detected from the argument
+func Ap[B, R, E, A any](fa ReaderIOEither[R, E, A]) func(ReaderIOEither[R, E, func(A) B]) ReaderIOEither[R, E, B]
+</code></pre>
+<p>This ordering maximizes type inference where possible.</p>
+<h5 class="h3" id="readme-use-of-the-operator">Use of the ~ Operator</h5>
+<p>Go doesn&#39;t support generic type aliases (until Go 1.24), only type definitions. The <code>~</code> operator allows generic implementations to work with compatible types:</p>
+<pre><code>type ReaderIOEither[R, E, A any] RD.Reader[R, IOE.IOEither[E, A]]
+</code></pre>
+<p><strong>Generic Subpackages:</strong></p>
+<ul>
+<li>Each higher-level type has a <code>generic</code> subpackage with fully generic implementations</li>
+<li>These are for library extensions, not end-users</li>
+<li>Main packages specialize generic implementations for convenience</li>
+</ul>
+<h5 class="h3" id="readme-higher-kinded-types-hkt">Higher Kinded Types (HKT)</h5>
+<p>Go doesn&#39;t support HKT natively. This library addresses this by:</p>
+<ul>
+<li>Introducing HKTs as individual types (e.g., <code>HKTA</code> for <code>HKT[A]</code>)</li>
+<li>Implementing generic algorithms in the <code>internal</code> package</li>
+<li>Keeping complexity hidden from end-users</li>
+</ul>
+<h4 class="h2" id="readme-common-operations">Common Operations</h4>
+<h5 class="h3" id="readme-map-chain-ap-flap">Map/Chain/Ap/Flap</h5>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Parameter</th>
+<th>Monad</th>
+<th>Result</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Map</td>
+<td><code>func(A) B</code></td>
+<td><code>HKT[A]</code></td>
+<td><code>HKT[B]</code></td>
+<td>Transform value in context</td>
+</tr>
+<tr>
+<td>Chain</td>
+<td><code>func(A) HKT[B]</code></td>
+<td><code>HKT[A]</code></td>
+<td><code>HKT[B]</code></td>
+<td>Transform and flatten</td>
+</tr>
+<tr>
+<td>Ap</td>
+<td><code>HKT[A]</code></td>
+<td><code>HKT[func(A)B]</code></td>
+<td><code>HKT[B]</code></td>
+<td>Apply function in context</td>
+</tr>
+<tr>
+<td>Flap</td>
+<td><code>A</code></td>
+<td><code>HKT[func(A)B]</code></td>
+<td><code>HKT[B]</code></td>
+<td>Apply value to function in context</td>
+</tr>
+</tbody>
+</table>
+<h5 class="h3" id="readme-example-chaining-operations">Example: Chaining Operations</h5>
+<pre><code>import (
+    &#34;github.com/IBM/fp-go/either&#34;
+    &#34;github.com/IBM/fp-go/function&#34;
+)
+
+result := function.Pipe3(
+    either.Right[error](10),
+    either.Map(func(x int) int { return x * 2 }),
+    either.Chain(func(x int) either.Either[error, int] {
+        if x &gt; 15 {
+            return either.Right[error](x)
+        }
+        return either.Left[int](errors.New(&#34;too small&#34;))
+    }),
+    either.GetOrElse(func() int { return 0 }),
+)
+</code></pre>
+<h4 class="h2" id="readme-resources-1">📚 Resources</h4>
+<ul>
+<li><a href="https://pkg.go.dev/github.com/IBM/fp-go" rel="nofollow">API Documentation</a></li>
+<li><a href="https://github.com/IBM/fp-go/blob/v1.1.84/samples" rel="nofollow">Code Samples</a></li>
+<li><a href="https://github.com/IBM/fp-go/blob/v1.1.84/v2/README.md" rel="nofollow">V2 Documentation</a> - New features in Go 1.24+</li>
+<li><a href="https://github.com/gcanti/fp-ts" rel="nofollow">fp-ts</a> - Original TypeScript inspiration</li>
+</ul>
+<h4 class="h2" id="readme-contributing">🤝 Contributing</h4>
+<p>Contributions are welcome! Please feel free to submit issues or pull requests.</p>
+<h4 class="h2" id="readme-license">📄 License</h4>
+<p>This project is licensed under the Apache License 2.0 - see the LICENSE file for details.</p>
+</div>
+      </div>
+      <button class="UnitReadme-expandLink js-readmeExpand"
+          data-test-id="readme-expand" data-gtmc="readme button"
+          aria-label="Expand Readme">Expand ▾</button>
+      <button class="UnitReadme-collapseLink js-readmeCollapse"
+          data-test-id="readme-collapse" data-gtmc="readme button"
+          aria-label="Expand Readme">Collapse ▴</button>
+    
+  </div>
+
+      
+      
+        
+          
+  <div class="UnitDoc">
+    <h2 class="UnitDoc-title" id="section-documentation">
+      <img class="go-Icon" height="24" width="24" src="/static/shared/icon/code_gm_grey_24dp.svg" alt="">
+      Documentation
+      <a class="UnitDoc-idLink" href="#section-documentation" title="Go to Documentation" aria-label="Go to Documentation">¶</a>
+    </h2>
+    
+  
+    
+  
+
+    <div class="Documentation js-documentation">
+      
+        
+
+<div class="Documentation-content js-docContent"> <section class="Documentation-overview">
+    <h3 tabindex="-1" id="pkg-overview" class="Documentation-overviewHeader">Overview <a href="#pkg-overview" title="Go to Overview" aria-label="Go to Overview">¶</a></h3>
+
+<p>Package main contains the entry point for the code generator
+</p>
+</section></div> 
+
+
+
+
+
+
+
+      
+    </div>
+  </div>
+
+        
+      
+      
+        
+  <div class="UnitFiles js-unitFiles">
+    <h2 class="UnitFiles-title" id="section-sourcefiles">
+      <img class="go-Icon" height="24" width="24" src="/static/shared/icon/insert_drive_file_gm_grey_24dp.svg" alt="">
+      Source Files
+      <a class="UnitFiles-idLink" href="#section-sourcefiles" title="Go to Source Files" aria-label="Go to Source Files">¶</a>
+    </h2><div class="UnitFiles-titleLink">
+      <a href="https://github.com/IBM/fp-go/tree/v1.1.84" target="_blank" rel="noopener">View all Source files</a>
+    </div><div>
+      <ul class="UnitFiles-fileList"><li><a href="https://github.com/IBM/fp-go/blob/v1.1.84/main.go" target="_blank" rel="noopener" title="main.go">main.go</a></li></ul>
+    </div>
+  </div>
+
+      
+      
+        
+  <div class="UnitDirectories js-unitDirectories">
+    <h2 class="UnitDirectories-title" id="section-directories">
+      <img class="go-Icon" height="24" width="24" src="/static/shared/icon/folder_gm_grey_24dp.svg" alt="">
+      Directories
+      <a class="UnitDirectories-idLink" href="#section-directories" title="Go to Directories" aria-label="Go to Directories">¶</a>
+    </h2>
+    <div class="UnitDirectories-toggles">
+      <div class="UnitDirectories-toggleButtons">
+        <button class="js-showInternalDirectories" data-test-id="internal-directories-toggle"
+            data-gtmc="directories button" aria-label="Show Internal Directories">
+          Show internal
+        </button>
+        <button class="js-expandAllDirectories" data-test-id="directories-toggle"
+            data-gtmc="directories button" aria-label="Expand All Directories">
+          Expand all
+        </button>
+      </div>
+    </div>
+    <table class="UnitDirectories-table UnitDirectories-table--tree js-expandableTable"
+          data-test-id="UnitDirectories-table">
+      <tr class="UnitDirectories-tableHeader UnitDirectories-tableHeader--tree">
+        <th>Path</th>
+        <th class="UnitDirectories-desktopSynopsis">Synopsis</th>
+      </tr>
+      
+          
+  
+  <tr data-aria-controls="array-generic array-nonempty array-testing "
+      class="">
+    <td data-id="array" data-aria-owns="array-generic array-nonempty array-testing ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="3 more from"
+                data-aria-controls="array-generic array-nonempty array-testing "
+                data-aria-labelledby="array-button array"
+                data-id="array-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><a href="/github.com/IBM/fp-go@v1.1.84/array">array</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr><tr data-id="array-generic" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/array/generic">generic</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="array-nonempty" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/array/nonempty">nonempty</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="array-testing" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/array/testing">testing</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+          
+  
+  <tr
+      class="">
+    <td data-id="boolean" data-aria-owns="">
+      <div class="UnitDirectories-pathCell">
+        <div><a href="/github.com/IBM/fp-go@v1.1.84/boolean">boolean</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr></tr>
+
+      
+          
+  
+  <tr
+      class="">
+    <td data-id="bounded" data-aria-owns="">
+      <div class="UnitDirectories-pathCell">
+        <div><a href="/github.com/IBM/fp-go@v1.1.84/bounded">bounded</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr></tr>
+
+      
+          
+  
+  <tr
+      class="">
+    <td data-id="bytes" data-aria-owns="">
+      <div class="UnitDirectories-pathCell">
+        <div><a href="/github.com/IBM/fp-go@v1.1.84/bytes">bytes</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr></tr>
+
+      
+          
+  
+  <tr data-aria-controls="cli-templates "
+      class="">
+    <td data-id="cli" data-aria-owns="cli-templates ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="1 more from"
+                data-aria-controls="cli-templates "
+                data-aria-labelledby="cli-button cli"
+                data-id="cli-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><a href="/github.com/IBM/fp-go@v1.1.84/cli">cli</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr><tr data-id="cli-templates" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/cli/templates">templates</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+          
+  
+  <tr
+      class="">
+    <td data-id="constant" data-aria-owns="">
+      <div class="UnitDirectories-pathCell">
+        <div><a href="/github.com/IBM/fp-go@v1.1.84/constant">constant</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr></tr>
+
+      
+          
+  
+  <tr
+      class="">
+    <td data-id="constraints" data-aria-owns="">
+      <div class="UnitDirectories-pathCell">
+        <div><a href="/github.com/IBM/fp-go@v1.1.84/constraints">constraints</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr></tr>
+
+      
+          
+  
+  <tr data-aria-controls="context-ioeither context-ioeither/generic context-readereither context-readereither/exec context-readerioeither context-readerioeither/exec context-readerioeither/file context-readerioeither/generic context-readerioeither/http context-readerioeither/http/builder "
+      class="">
+    <td data-id="context" data-aria-owns="context-ioeither context-ioeither/generic context-readereither context-readereither/exec context-readerioeither context-readerioeither/exec context-readerioeither/file context-readerioeither/generic context-readerioeither/http context-readerioeither/http/builder ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="10 more from"
+                data-aria-controls="context-ioeither context-ioeither/generic context-readereither context-readereither/exec context-readerioeither context-readerioeither/exec context-readerioeither/file context-readerioeither/generic context-readerioeither/http context-readerioeither/http/builder "
+                data-aria-labelledby="context-button context"
+                data-id="context-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><a href="/github.com/IBM/fp-go@v1.1.84/context">context</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis">Package context contains versions of reader IO monads that work with a golang context.Context</div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis">Package context contains versions of reader IO monads that work with a golang context.Context</td></tr><tr data-id="context-ioeither" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/context/ioeither">ioeither</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="context-ioeither/generic" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/context/ioeither/generic">ioeither/generic</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="context-readereither" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/context/readereither">readereither</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis">Package readereither implements a specialization of the Reader monad assuming a golang context as the context of the monad and a standard golang error</div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis">Package readereither implements a specialization of the Reader monad assuming a golang context as the context of the monad and a standard golang error</td><tr data-id="context-readereither/exec" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/context/readereither/exec">readereither/exec</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="context-readerioeither" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/context/readerioeither">readerioeither</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis">Package readerioeither contains a version of ReaderIOEither that takes a golang context.Context as its context and that assumes the standard go error</div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis">Package readerioeither contains a version of ReaderIOEither that takes a golang context.Context as its context and that assumes the standard go error</td><tr data-id="context-readerioeither/exec" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/context/readerioeither/exec">readerioeither/exec</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="context-readerioeither/file" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/context/readerioeither/file">readerioeither/file</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="context-readerioeither/generic" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/context/readerioeither/generic">readerioeither/generic</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="context-readerioeither/http" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/context/readerioeither/http">readerioeither/http</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="context-readerioeither/http/builder" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/context/readerioeither/http/builder">readerioeither/http/builder</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+          
+  
+  <tr data-aria-controls="di-erasure "
+      class="">
+    <td data-id="di" data-aria-owns="di-erasure ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="1 more from"
+                data-aria-controls="di-erasure "
+                data-aria-labelledby="di-button di"
+                data-id="di-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><a href="/github.com/IBM/fp-go@v1.1.84/di">di</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis">Package di implements functions and data types supporting dependency injection patterns</div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis">Package di implements functions and data types supporting dependency injection patterns</td></tr><tr data-id="di-erasure" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/di/erasure">erasure</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+          
+  
+  <tr data-aria-controls="either-exec either-http either-testing "
+      class="">
+    <td data-id="either" data-aria-owns="either-exec either-http either-testing ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="3 more from"
+                data-aria-controls="either-exec either-http either-testing "
+                data-aria-labelledby="either-button either"
+                data-id="either-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><a href="/github.com/IBM/fp-go@v1.1.84/either">either</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis">Package option defines the Either datastructure and its monadic operations</div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis">Package option defines the Either datastructure and its monadic operations</td></tr><tr data-id="either-exec" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/either/exec">exec</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="either-http" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/either/http">http</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="either-testing" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/either/testing">testing</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+          
+  
+  <tr data-aria-controls="endomorphism-generic "
+      class="">
+    <td data-id="endomorphism" data-aria-owns="endomorphism-generic ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="1 more from"
+                data-aria-controls="endomorphism-generic "
+                data-aria-labelledby="endomorphism-button endomorphism"
+                data-id="endomorphism-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><a href="/github.com/IBM/fp-go@v1.1.84/endomorphism">endomorphism</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr><tr data-id="endomorphism-generic" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/endomorphism/generic">generic</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+          
+  
+  <tr data-aria-controls="eq-testing "
+      class="">
+    <td data-id="eq" data-aria-owns="eq-testing ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="1 more from"
+                data-aria-controls="eq-testing "
+                data-aria-labelledby="eq-button eq"
+                data-id="eq-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><a href="/github.com/IBM/fp-go@v1.1.84/eq">eq</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr><tr data-id="eq-testing" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/eq/testing">testing</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+          
+  
+  <tr
+      class="">
+    <td data-id="erasure" data-aria-owns="">
+      <div class="UnitDirectories-pathCell">
+        <div><a href="/github.com/IBM/fp-go@v1.1.84/erasure">erasure</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr></tr>
+
+      
+          
+  
+  <tr
+      class="">
+    <td data-id="errors" data-aria-owns="">
+      <div class="UnitDirectories-pathCell">
+        <div><a href="/github.com/IBM/fp-go@v1.1.84/errors">errors</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr></tr>
+
+      
+          
+  
+  <tr
+      class="">
+    <td data-id="exec" data-aria-owns="">
+      <div class="UnitDirectories-pathCell">
+        <div><a href="/github.com/IBM/fp-go@v1.1.84/exec">exec</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr></tr>
+
+      
+          
+  
+  <tr
+      class="">
+    <td data-id="file" data-aria-owns="">
+      <div class="UnitDirectories-pathCell">
+        <div><a href="/github.com/IBM/fp-go@v1.1.84/file">file</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr></tr>
+
+      
+          
+  
+  <tr data-aria-controls="function-generic "
+      class="">
+    <td data-id="function" data-aria-owns="function-generic ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="1 more from"
+                data-aria-controls="function-generic "
+                data-aria-labelledby="function-button function"
+                data-id="function-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><a href="/github.com/IBM/fp-go@v1.1.84/function">function</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis">Package function implements function composition primitives, most prominently Pipe2 and Flow2</div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis">Package function implements function composition primitives, most prominently Pipe2 and Flow2</td></tr><tr data-id="function-generic" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/function/generic">generic</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+          
+  
+  <tr
+      class="">
+    <td data-id="gen" data-aria-owns="">
+      <div class="UnitDirectories-pathCell">
+        <div><a href="/github.com/IBM/fp-go/gen/v2">gen</a>
+            <span class="go-Chip go-Chip--inverted">module</span>
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr></tr>
+
+      
+          
+  
+  <tr data-aria-controls="http-builder http-content http-form http-headers "
+      class="">
+    <td data-id="http" data-aria-owns="http-builder http-content http-form http-headers ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="4 more from"
+                data-aria-controls="http-builder http-content http-form http-headers "
+                data-aria-labelledby="http-button http"
+                data-id="http-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><a href="/github.com/IBM/fp-go@v1.1.84/http">http</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr><tr data-id="http-builder" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/http/builder">builder</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="http-content" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/http/content">content</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="http-form" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/http/form">form</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="http-headers" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/http/headers">headers</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+          
+  
+  <tr data-aria-controls="identity-generic "
+      class="">
+    <td data-id="identity" data-aria-owns="identity-generic ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="1 more from"
+                data-aria-controls="identity-generic "
+                data-aria-labelledby="identity-button identity"
+                data-id="identity-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><a href="/github.com/IBM/fp-go@v1.1.84/identity">identity</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr><tr data-id="identity-generic" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/identity/generic">generic</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+          
+  
+  <tr data-aria-controls="internal-applicative internal-applicative/testing internal-apply internal-apply/testing internal-array internal-bracket internal-chain internal-chain/testing internal-eithert internal-eq internal-exec internal-file internal-foldable internal-fromeither internal-fromio internal-fromioeither internal-fromreader internal-functor internal-functor/testing internal-lazy internal-monad internal-monad/testing internal-optiont internal-pointed internal-readert internal-record internal-statet internal-testing internal-utils "
+      class="UnitDirectories-internal">
+    <td data-id="internal" data-aria-owns="internal-applicative internal-applicative/testing internal-apply internal-apply/testing internal-array internal-bracket internal-chain internal-chain/testing internal-eithert internal-eq internal-exec internal-file internal-foldable internal-fromeither internal-fromio internal-fromioeither internal-fromreader internal-functor internal-functor/testing internal-lazy internal-monad internal-monad/testing internal-optiont internal-pointed internal-readert internal-record internal-statet internal-testing internal-utils ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton UnitDirectories-internal"
+                aria-expanded="false"
+                aria-label="29 more from"
+                data-aria-controls="internal-applicative internal-applicative/testing internal-apply internal-apply/testing internal-array internal-bracket internal-chain internal-chain/testing internal-eithert internal-eq internal-exec internal-file internal-foldable internal-fromeither internal-fromio internal-fromioeither internal-fromreader internal-functor internal-functor/testing internal-lazy internal-monad internal-monad/testing internal-optiont internal-pointed internal-readert internal-record internal-statet internal-testing internal-utils "
+                data-aria-labelledby="internal-button internal"
+                data-id="internal-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><span>internal</span>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr><tr data-id="internal-applicative" class="UnitDirectories-internal">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/internal/applicative">applicative</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="internal-applicative/testing" class="UnitDirectories-internal">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/internal/applicative/testing">applicative/testing</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="internal-apply" class="UnitDirectories-internal">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/internal/apply">apply</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="internal-apply/testing" class="UnitDirectories-internal">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/internal/apply/testing">apply/testing</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="internal-array" class="UnitDirectories-internal">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/internal/array">array</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="internal-bracket" class="UnitDirectories-internal">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/internal/bracket">bracket</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="internal-chain" class="UnitDirectories-internal">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/internal/chain">chain</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="internal-chain/testing" class="UnitDirectories-internal">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/internal/chain/testing">chain/testing</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="internal-eithert" class="UnitDirectories-internal">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/internal/eithert">eithert</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="internal-eq" class="UnitDirectories-internal">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/internal/eq">eq</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="internal-exec" class="UnitDirectories-internal">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/internal/exec">exec</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="internal-file" class="UnitDirectories-internal">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/internal/file">file</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="internal-foldable" class="UnitDirectories-internal">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/internal/foldable">foldable</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="internal-fromeither" class="UnitDirectories-internal">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/internal/fromeither">fromeither</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="internal-fromio" class="UnitDirectories-internal">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/internal/fromio">fromio</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="internal-fromioeither" class="UnitDirectories-internal">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/internal/fromioeither">fromioeither</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="internal-fromreader" class="UnitDirectories-internal">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/internal/fromreader">fromreader</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="internal-functor" class="UnitDirectories-internal">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/internal/functor">functor</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="internal-functor/testing" class="UnitDirectories-internal">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/internal/functor/testing">functor/testing</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="internal-lazy" class="UnitDirectories-internal">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/internal/lazy">lazy</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="internal-monad" class="UnitDirectories-internal">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/internal/monad">monad</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="internal-monad/testing" class="UnitDirectories-internal">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/internal/monad/testing">monad/testing</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="internal-optiont" class="UnitDirectories-internal">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/internal/optiont">optiont</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="internal-pointed" class="UnitDirectories-internal">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/internal/pointed">pointed</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="internal-readert" class="UnitDirectories-internal">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/internal/readert">readert</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="internal-record" class="UnitDirectories-internal">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/internal/record">record</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="internal-statet" class="UnitDirectories-internal">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/internal/statet">statet</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="internal-testing" class="UnitDirectories-internal">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/internal/testing">testing</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="internal-utils" class="UnitDirectories-internal">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/internal/utils">utils</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+          
+  
+  <tr data-aria-controls="io-file io-generic io-testing "
+      class="">
+    <td data-id="io" data-aria-owns="io-file io-generic io-testing ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="3 more from"
+                data-aria-controls="io-file io-generic io-testing "
+                data-aria-labelledby="io-button io"
+                data-id="io-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><a href="/github.com/IBM/fp-go@v1.1.84/io">io</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr><tr data-id="io-file" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/io/file">file</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="io-generic" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/io/generic">generic</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis">Code generated by go generate; DO NOT EDIT.</div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis">Code generated by go generate; DO NOT EDIT.</td><tr data-id="io-testing" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/io/testing">testing</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+          
+  
+  <tr data-aria-controls="ioeither-exec ioeither-file ioeither-generic ioeither-http ioeither-http/builder ioeither-http/di ioeither-testing "
+      class="">
+    <td data-id="ioeither" data-aria-owns="ioeither-exec ioeither-file ioeither-generic ioeither-http ioeither-http/builder ioeither-http/di ioeither-testing ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="7 more from"
+                data-aria-controls="ioeither-exec ioeither-file ioeither-generic ioeither-http ioeither-http/builder ioeither-http/di ioeither-testing "
+                data-aria-labelledby="ioeither-button ioeither"
+                data-id="ioeither-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><a href="/github.com/IBM/fp-go@v1.1.84/ioeither">ioeither</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr><tr data-id="ioeither-exec" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/ioeither/exec">exec</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="ioeither-file" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/ioeither/file">file</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="ioeither-generic" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/ioeither/generic">generic</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis">Code generated by go generate; DO NOT EDIT.</div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis">Code generated by go generate; DO NOT EDIT.</td><tr data-id="ioeither-http" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/ioeither/http">http</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="ioeither-http/builder" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/ioeither/http/builder">http/builder</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="ioeither-http/di" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/ioeither/http/di">http/di</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="ioeither-testing" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/ioeither/testing">testing</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+          
+  
+  <tr data-aria-controls="iooption-generic iooption-testing "
+      class="">
+    <td data-id="iooption" data-aria-owns="iooption-generic iooption-testing ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="2 more from"
+                data-aria-controls="iooption-generic iooption-testing "
+                data-aria-labelledby="iooption-button iooption"
+                data-id="iooption-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><a href="/github.com/IBM/fp-go@v1.1.84/iooption">iooption</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr><tr data-id="iooption-generic" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/iooption/generic">generic</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis">Code generated by go generate; DO NOT EDIT.</div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis">Code generated by go generate; DO NOT EDIT.</td><tr data-id="iooption-testing" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/iooption/testing">testing</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+          
+  
+  <tr data-aria-controls="iterator-stateless iterator-stateless/generic "
+      class="">
+    <td data-id="iterator" data-aria-owns="iterator-stateless iterator-stateless/generic ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="2 more from"
+                data-aria-controls="iterator-stateless iterator-stateless/generic "
+                data-aria-labelledby="iterator-button iterator"
+                data-id="iterator-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><span>iterator</span>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr><tr data-id="iterator-stateless" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/iterator/stateless">stateless</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis">Package stateless defines a stateless (pure) iterator, i.e.</div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis">Package stateless defines a stateless (pure) iterator, i.e.</td><tr data-id="iterator-stateless/generic" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/iterator/stateless/generic">stateless/generic</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+          
+  
+  <tr
+      class="">
+    <td data-id="json" data-aria-owns="">
+      <div class="UnitDirectories-pathCell">
+        <div><a href="/github.com/IBM/fp-go@v1.1.84/json">json</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr></tr>
+
+      
+          
+  
+  <tr
+      class="">
+    <td data-id="lambda" data-aria-owns="">
+      <div class="UnitDirectories-pathCell">
+        <div><a href="/github.com/IBM/fp-go@v1.1.84/lambda">lambda</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr></tr>
+
+      
+          
+  
+  <tr data-aria-controls="lazy-testing "
+      class="">
+    <td data-id="lazy" data-aria-owns="lazy-testing ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="1 more from"
+                data-aria-controls="lazy-testing "
+                data-aria-labelledby="lazy-button lazy"
+                data-id="lazy-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><a href="/github.com/IBM/fp-go@v1.1.84/lazy">lazy</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr><tr data-id="lazy-testing" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/lazy/testing">testing</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+          
+  
+  <tr
+      class="">
+    <td data-id="logging" data-aria-owns="">
+      <div class="UnitDirectories-pathCell">
+        <div><a href="/github.com/IBM/fp-go@v1.1.84/logging">logging</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr></tr>
+
+      
+          
+  
+  <tr
+      class="">
+    <td data-id="magma" data-aria-owns="">
+      <div class="UnitDirectories-pathCell">
+        <div><a href="/github.com/IBM/fp-go@v1.1.84/magma">magma</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr></tr>
+
+      
+          
+  
+  <tr data-aria-controls="monoid-testing "
+      class="">
+    <td data-id="monoid" data-aria-owns="monoid-testing ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="1 more from"
+                data-aria-controls="monoid-testing "
+                data-aria-labelledby="monoid-button monoid"
+                data-id="monoid-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><a href="/github.com/IBM/fp-go@v1.1.84/monoid">monoid</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr><tr data-id="monoid-testing" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/monoid/testing">testing</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+          
+  
+  <tr data-aria-controls="number-integer "
+      class="">
+    <td data-id="number" data-aria-owns="number-integer ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="1 more from"
+                data-aria-controls="number-integer "
+                data-aria-labelledby="number-button number"
+                data-id="number-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><a href="/github.com/IBM/fp-go@v1.1.84/number">number</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr><tr data-id="number-integer" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/number/integer">integer</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+          
+  
+  <tr data-aria-controls="optics-iso optics-iso/lens optics-lens optics-lens/array optics-lens/array/generic optics-lens/either optics-lens/generic optics-lens/iso optics-lens/option optics-lens/optional optics-lens/record optics-lens/record/generic optics-lens/testing optics-optional optics-optional/lens optics-optional/prism optics-optional/record optics-optional/record/generic optics-prism optics-traversal optics-traversal/array optics-traversal/array/const optics-traversal/array/generic optics-traversal/array/generic/const optics-traversal/array/generic/identity optics-traversal/array/identity optics-traversal/either optics-traversal/generic optics-traversal/option optics-traversal/record optics-traversal/record/const optics-traversal/record/generic optics-traversal/record/generic/const optics-traversal/record/generic/identity optics-traversal/record/identity "
+      class="">
+    <td data-id="optics" data-aria-owns="optics-iso optics-iso/lens optics-lens optics-lens/array optics-lens/array/generic optics-lens/either optics-lens/generic optics-lens/iso optics-lens/option optics-lens/optional optics-lens/record optics-lens/record/generic optics-lens/testing optics-optional optics-optional/lens optics-optional/prism optics-optional/record optics-optional/record/generic optics-prism optics-traversal optics-traversal/array optics-traversal/array/const optics-traversal/array/generic optics-traversal/array/generic/const optics-traversal/array/generic/identity optics-traversal/array/identity optics-traversal/either optics-traversal/generic optics-traversal/option optics-traversal/record optics-traversal/record/const optics-traversal/record/generic optics-traversal/record/generic/const optics-traversal/record/generic/identity optics-traversal/record/identity ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="35 more from"
+                data-aria-controls="optics-iso optics-iso/lens optics-lens optics-lens/array optics-lens/array/generic optics-lens/either optics-lens/generic optics-lens/iso optics-lens/option optics-lens/optional optics-lens/record optics-lens/record/generic optics-lens/testing optics-optional optics-optional/lens optics-optional/prism optics-optional/record optics-optional/record/generic optics-prism optics-traversal optics-traversal/array optics-traversal/array/const optics-traversal/array/generic optics-traversal/array/generic/const optics-traversal/array/generic/identity optics-traversal/array/identity optics-traversal/either optics-traversal/generic optics-traversal/option optics-traversal/record optics-traversal/record/const optics-traversal/record/generic optics-traversal/record/generic/const optics-traversal/record/generic/identity optics-traversal/record/identity "
+                data-aria-labelledby="optics-button optics"
+                data-id="optics-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><span>optics</span>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr><tr data-id="optics-iso" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/iso">iso</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis">Iso is an optic which converts elements of type `S` into elements of type `A` without loss.</div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis">Iso is an optic which converts elements of type `S` into elements of type `A` without loss.</td><tr data-id="optics-iso/lens" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/iso/lens">iso/lens</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="optics-lens" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/lens">lens</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis">Lens is an optic used to zoom inside a product.</div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis">Lens is an optic used to zoom inside a product.</td><tr data-id="optics-lens/array" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/lens/array">lens/array</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="optics-lens/array/generic" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/lens/array/generic">lens/array/generic</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="optics-lens/either" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/lens/either">lens/either</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="optics-lens/generic" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/lens/generic">lens/generic</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="optics-lens/iso" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/lens/iso">lens/iso</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="optics-lens/option" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/lens/option">lens/option</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="optics-lens/optional" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/lens/optional">lens/optional</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="optics-lens/record" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/lens/record">lens/record</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="optics-lens/record/generic" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/lens/record/generic">lens/record/generic</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="optics-lens/testing" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/lens/testing">lens/testing</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="optics-optional" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/optional">optional</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis">Optional is an optic used to zoom inside a product.</div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis">Optional is an optic used to zoom inside a product.</td><tr data-id="optics-optional/lens" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/optional/lens">optional/lens</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="optics-optional/prism" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/optional/prism">optional/prism</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="optics-optional/record" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/optional/record">optional/record</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="optics-optional/record/generic" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/optional/record/generic">optional/record/generic</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="optics-prism" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/prism">prism</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis">Prism is an optic used to select part of a sum type.</div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis">Prism is an optic used to select part of a sum type.</td><tr data-id="optics-traversal" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/traversal">traversal</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="optics-traversal/array" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/traversal/array">traversal/array</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="optics-traversal/array/const" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/traversal/array/const">traversal/array/const</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="optics-traversal/array/generic" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/traversal/array/generic">traversal/array/generic</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="optics-traversal/array/generic/const" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/traversal/array/generic/const">traversal/array/generic/const</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="optics-traversal/array/generic/identity" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/traversal/array/generic/identity">traversal/array/generic/identity</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="optics-traversal/array/identity" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/traversal/array/identity">traversal/array/identity</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="optics-traversal/either" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/traversal/either">traversal/either</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="optics-traversal/generic" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/traversal/generic">traversal/generic</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="optics-traversal/option" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/traversal/option">traversal/option</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="optics-traversal/record" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/traversal/record">traversal/record</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="optics-traversal/record/const" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/traversal/record/const">traversal/record/const</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="optics-traversal/record/generic" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/traversal/record/generic">traversal/record/generic</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="optics-traversal/record/generic/const" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/traversal/record/generic/const">traversal/record/generic/const</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="optics-traversal/record/generic/identity" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/traversal/record/generic/identity">traversal/record/generic/identity</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="optics-traversal/record/identity" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/optics/traversal/record/identity">traversal/record/identity</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+          
+  
+  <tr data-aria-controls="option-number option-testing "
+      class="">
+    <td data-id="option" data-aria-owns="option-number option-testing ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="2 more from"
+                data-aria-controls="option-number option-testing "
+                data-aria-labelledby="option-button option"
+                data-id="option-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><a href="/github.com/IBM/fp-go@v1.1.84/option">option</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis">Package option defines the Option datastructure and its monadic operations</div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis">Package option defines the Option datastructure and its monadic operations</td></tr><tr data-id="option-number" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/option/number">number</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="option-testing" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/option/testing">testing</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+          
+  
+  <tr
+      class="">
+    <td data-id="ord" data-aria-owns="">
+      <div class="UnitDirectories-pathCell">
+        <div><a href="/github.com/IBM/fp-go@v1.1.84/ord">ord</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr></tr>
+
+      
+          
+  
+  <tr data-aria-controls="pair-generic pair-testing "
+      class="">
+    <td data-id="pair" data-aria-owns="pair-generic pair-testing ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="2 more from"
+                data-aria-controls="pair-generic pair-testing "
+                data-aria-labelledby="pair-button pair"
+                data-id="pair-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><a href="/github.com/IBM/fp-go@v1.1.84/pair">pair</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr><tr data-id="pair-generic" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/pair/generic">generic</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="pair-testing" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/pair/testing">testing</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+          
+  
+  <tr
+      class="">
+    <td data-id="predicate" data-aria-owns="">
+      <div class="UnitDirectories-pathCell">
+        <div><a href="/github.com/IBM/fp-go@v1.1.84/predicate">predicate</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr></tr>
+
+      
+          
+  
+  <tr data-aria-controls="reader-generic "
+      class="">
+    <td data-id="reader" data-aria-owns="reader-generic ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="1 more from"
+                data-aria-controls="reader-generic "
+                data-aria-labelledby="reader-button reader"
+                data-id="reader-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><a href="/github.com/IBM/fp-go@v1.1.84/reader">reader</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr><tr data-id="reader-generic" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/reader/generic">generic</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis">Code generated by go generate; DO NOT EDIT.</div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis">Code generated by go generate; DO NOT EDIT.</td></tr>
+
+      
+          
+  
+  <tr data-aria-controls="readereither-generic "
+      class="">
+    <td data-id="readereither" data-aria-owns="readereither-generic ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="1 more from"
+                data-aria-controls="readereither-generic "
+                data-aria-labelledby="readereither-button readereither"
+                data-id="readereither-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><a href="/github.com/IBM/fp-go@v1.1.84/readereither">readereither</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr><tr data-id="readereither-generic" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/readereither/generic">generic</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+          
+  
+  <tr data-aria-controls="readerio-generic "
+      class="">
+    <td data-id="readerio" data-aria-owns="readerio-generic ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="1 more from"
+                data-aria-controls="readerio-generic "
+                data-aria-labelledby="readerio-button readerio"
+                data-id="readerio-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><a href="/github.com/IBM/fp-go@v1.1.84/readerio">readerio</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr><tr data-id="readerio-generic" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/readerio/generic">generic</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+          
+  
+  <tr data-aria-controls="readerioeither-generic "
+      class="">
+    <td data-id="readerioeither" data-aria-owns="readerioeither-generic ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="1 more from"
+                data-aria-controls="readerioeither-generic "
+                data-aria-labelledby="readerioeither-button readerioeither"
+                data-id="readerioeither-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><a href="/github.com/IBM/fp-go@v1.1.84/readerioeither">readerioeither</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr><tr data-id="readerioeither-generic" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/readerioeither/generic">generic</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis">Code generated by go generate; DO NOT EDIT.</div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis">Code generated by go generate; DO NOT EDIT.</td></tr>
+
+      
+          
+  
+  <tr data-aria-controls="record-generic "
+      class="">
+    <td data-id="record" data-aria-owns="record-generic ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="1 more from"
+                data-aria-controls="record-generic "
+                data-aria-labelledby="record-button record"
+                data-id="record-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><a href="/github.com/IBM/fp-go@v1.1.84/record">record</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis">Package record contains monadic operations for maps as well as a rich set of utility functions</div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis">Package record contains monadic operations for maps as well as a rich set of utility functions</td></tr><tr data-id="record-generic" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/record/generic">generic</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+          
+  
+  <tr data-aria-controls="reflect-generic "
+      class="">
+    <td data-id="reflect" data-aria-owns="reflect-generic ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="1 more from"
+                data-aria-controls="reflect-generic "
+                data-aria-labelledby="reflect-button reflect"
+                data-id="reflect-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><a href="/github.com/IBM/fp-go@v1.1.84/reflect">reflect</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr><tr data-id="reflect-generic" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/reflect/generic">generic</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+          
+  
+  <tr data-aria-controls="retry-generic "
+      class="">
+    <td data-id="retry" data-aria-owns="retry-generic ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="1 more from"
+                data-aria-controls="retry-generic "
+                data-aria-labelledby="retry-button retry"
+                data-id="retry-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><a href="/github.com/IBM/fp-go@v1.1.84/retry">retry</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr><tr data-id="retry-generic" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/retry/generic">generic</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+          
+  
+  <tr data-aria-controls="semigroup-ord "
+      class="">
+    <td data-id="semigroup" data-aria-owns="semigroup-ord ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="1 more from"
+                data-aria-controls="semigroup-ord "
+                data-aria-labelledby="semigroup-button semigroup"
+                data-id="semigroup-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><a href="/github.com/IBM/fp-go@v1.1.84/semigroup">semigroup</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr><tr data-id="semigroup-ord" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/semigroup/ord">ord</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+          
+  
+  <tr data-aria-controls="state-generic state-testing "
+      class="">
+    <td data-id="state" data-aria-owns="state-generic state-testing ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="2 more from"
+                data-aria-controls="state-generic state-testing "
+                data-aria-labelledby="state-button state"
+                data-id="state-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><a href="/github.com/IBM/fp-go@v1.1.84/state">state</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr><tr data-id="state-generic" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/state/generic">generic</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="state-testing" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/state/testing">testing</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+          
+  
+  <tr data-aria-controls="statereaderioeither-generic statereaderioeither-testing "
+      class="">
+    <td data-id="statereaderioeither" data-aria-owns="statereaderioeither-generic statereaderioeither-testing ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="2 more from"
+                data-aria-controls="statereaderioeither-generic statereaderioeither-testing "
+                data-aria-labelledby="statereaderioeither-button statereaderioeither"
+                data-id="statereaderioeither-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><a href="/github.com/IBM/fp-go@v1.1.84/statereaderioeither">statereaderioeither</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr><tr data-id="statereaderioeither-generic" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/statereaderioeither/generic">generic</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="statereaderioeither-testing" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/statereaderioeither/testing">testing</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+          
+  
+  <tr data-aria-controls="string-generic "
+      class="">
+    <td data-id="string" data-aria-owns="string-generic ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="1 more from"
+                data-aria-controls="string-generic "
+                data-aria-labelledby="string-button string"
+                data-id="string-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><a href="/github.com/IBM/fp-go@v1.1.84/string">string</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr><tr data-id="string-generic" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/string/generic">generic</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+          
+  
+  <tr
+      class="">
+    <td data-id="tuple" data-aria-owns="">
+      <div class="UnitDirectories-pathCell">
+        <div><a href="/github.com/IBM/fp-go@v1.1.84/tuple">tuple</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis">Package tuple contains type definitions and functions for data structures for tuples of heterogenous types.</div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis">Package tuple contains type definitions and functions for data structures for tuples of heterogenous types.</td></tr></tr>
+
+      
+          
+  
+  <tr data-aria-controls="v2-gen "
+      class="">
+    <td data-id="v2" data-aria-owns="v2-gen ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="1 more from"
+                data-aria-controls="v2-gen "
+                data-aria-labelledby="v2-button v2"
+                data-id="v2-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><span>v2</span>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr><tr data-id="v2-gen" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go/v2/gen">gen</a>
+            <span class="go-Chip go-Chip--inverted">module</span>
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+          
+  
+  <tr data-aria-controls="writer-generic writer-testing "
+      class="">
+    <td data-id="writer" data-aria-owns="writer-generic writer-testing ">
+      <div class="UnitDirectories-pathCell">
+        <div><button type="button" class="go-Button go-Button--inline UnitDirectories-toggleButton"
+                aria-expanded="false"
+                aria-label="2 more from"
+                data-aria-controls="writer-generic writer-testing "
+                data-aria-labelledby="writer-button writer"
+                data-id="writer-button">
+              <img class="go-Icon" height="24" width="24" src="/static/shared/icon/arrow_right_gm_grey_24dp.svg"
+                  alt="">
+            </button><a href="/github.com/IBM/fp-go@v1.1.84/writer">writer</a>
+            
+          </div>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr><tr data-id="writer-generic" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/writer/generic">generic</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td><tr data-id="writer-testing" class="">
+      <td>
+        <div class="UnitDirectories-subdirectory">
+          <span>
+            <a href="/github.com/IBM/fp-go@v1.1.84/writer/testing">testing</a>
+            
+            
+          </span>
+          <div class="UnitDirectories-mobileSynopsis"></div>
+        </div>
+      </td>
+      <td class="UnitDirectories-desktopSynopsis"></td></tr>
+
+      
+    </table>
+  </div>
+
+      
+    </div>
+  </div>
+  <div id="showInternal-description" hidden> Click to show internal directories. </div>
+  <div id="hideInternal-description" hidden> Click to hide internal directories. </div>
+</article>
+    <footer class="go-Main-footer"></footer>
+  </main>
+
+    
+  <footer class="go-Footer">
+    
+    <div class="go-Footer-links">
+      <div class="go-Footer-linkColumn">
+        <a href="https://go.dev/solutions" class="go-Footer-link go-Footer-link--primary"
+            data-gtmc="footer link">
+          Why Go
+        </a>
+        <a href="https://go.dev/solutions/use-cases" class="go-Footer-link"
+            data-gtmc="footer link">
+          Use Cases
+        </a>
+        <a href="https://go.dev/solutions/case-studies" class="go-Footer-link"
+            data-gtmc="footer link">
+          Case Studies
+        </a>
+      </div>
+      <div class="go-Footer-linkColumn">
+        <a href="https://learn.go.dev/" class="go-Footer-link go-Footer-link--primary"
+            data-gtmc="footer link">
+          Get Started
+        </a>
+        <a href="https://play.golang.org" class="go-Footer-link" data-gtmc="footer link">
+          Playground
+        </a>
+        <a href="https://tour.golang.org" class="go-Footer-link" data-gtmc="footer link">
+          Tour
+        </a>
+        <a href="https://stackoverflow.com/questions/tagged/go?tab=Newest" class="go-Footer-link"
+            data-gtmc="footer link">
+          Stack Overflow
+        </a>
+        <a href="https://go.dev/help" class="go-Footer-link"
+            data-gtmc="footer link">
+          Help
+        </a>
+      </div>
+      <div class="go-Footer-linkColumn">
+        <a href="https://pkg.go.dev" class="go-Footer-link go-Footer-link--primary"
+            data-gtmc="footer link">
+          Packages
+        </a>
+        <a href="/std" class="go-Footer-link" data-gtmc="footer link">
+          Standard Library
+        </a>
+        <a href="/golang.org/x" class="go-Footer-link" data-gtmc="footer link">
+          Sub-repositories
+        </a>
+        <a href="https://pkg.go.dev/about" class="go-Footer-link" data-gtmc="footer link">
+          About Go Packages
+        </a>
+         <a href="/api" class="go-Footer-link" data-gtmc="footer link">
+          pkg.go.dev API
+        </a>
+      </div>
+      <div class="go-Footer-linkColumn">
+        <a href="https://go.dev/project" class="go-Footer-link go-Footer-link--primary"
+            data-gtmc="footer link">
+          About
+        </a>
+        <a href="https://go.dev/dl/" class="go-Footer-link" data-gtmc="footer link">Download</a>
+        <a href="https://go.dev/blog" class="go-Footer-link" data-gtmc="footer link">Blog</a>
+        <a href="https://github.com/golang/go/issues" class="go-Footer-link" data-gtmc="footer link">
+          Issue Tracker
+        </a>
+        <a href="https://go.dev/doc/devel/release.html" class="go-Footer-link"
+            data-gtmc="footer link">
+          Release Notes
+        </a>
+        <a href="https://go.dev/brand" class="go-Footer-link" data-gtmc="footer link">
+          Brand Guidelines
+        </a>
+        <a href="https://go.dev/conduct" class="go-Footer-link" data-gtmc="footer link">
+          Code of Conduct
+        </a>
+      </div>
+      <div class="go-Footer-linkColumn">
+        <a href="https://www.twitter.com/golang" class="go-Footer-link go-Footer-link--primary"
+            data-gtmc="footer link">
+          Connect
+        </a>
+        <a href="https://www.twitter.com/golang" class="go-Footer-link" data-gtmc="footer link">
+          Twitter
+        </a>
+        <a href="https://github.com/golang" class="go-Footer-link" data-gtmc="footer link">GitHub</a>
+        <a href="https://invite.slack.golangbridge.org/" class="go-Footer-link"
+            data-gtmc="footer link">
+          Slack
+        </a>
+        <a href="https://reddit.com/r/golang" class="go-Footer-link" data-gtmc="footer link">
+          r/golang
+        </a>
+        <a href="https://www.meetup.com/pro/go" class="go-Footer-link" data-gtmc="footer link">
+          Meetup
+        </a>
+        <a href="https://golangweekly.com/" class="go-Footer-link" data-gtmc="footer link">
+          Golang Weekly
+        </a>
+      </div>
+    </div>
+    <div class="go-Footer-bottom">
+      <img class="go-Footer-gopher"  width="1431" height="901"
+          src="/static/shared/gopher/pilot-bust-1431x901.svg" alt="Gopher in flight goggles">
+      <ul class="go-Footer-listRow">
+        <li class="go-Footer-listItem">
+          <a href="https://go.dev/copyright" data-gtmc="footer link">Copyright</a>
+        </li>
+        <li class="go-Footer-listItem">
+          <a href="https://go.dev/tos" data-gtmc="footer link">Terms of Service</a>
+        </li>
+        <li class="go-Footer-listItem">
+          <a href="http://www.google.com/intl/en/policies/privacy/" data-gtmc="footer link"
+              target="_blank" rel="noopener">
+            Privacy Policy
+          </a>
+        </li>
+        <li class="go-Footer-listItem">
+          <a href="https://go.dev/s/pkgsite-feedback" target="_blank" rel="noopener"
+              data-gtmc="footer link">
+            Report an Issue
+          </a>
+        </li>
+        <li class="go-Footer-listItem">
+          <button class="go-Button go-Button--text go-Footer-toggleTheme js-toggleTheme" aria-label="Theme Toggle">
+            <img data-value="auto" class="go-Icon go-Icon--inverted" height="24" width="24" src="/static/shared/icon/brightness_6_gm_grey_24dp.svg" alt="System theme">
+            <img data-value="dark" class="go-Icon go-Icon--inverted" height="24" width="24" src="/static/shared/icon/brightness_2_gm_grey_24dp.svg" alt="Dark theme">
+            <img data-value="light" class="go-Icon go-Icon--inverted" height="24" width="24" src="/static/shared/icon/light_mode_gm_grey_24dp.svg" alt="Light theme">
+            <p> Theme Toggle </p>
+          </button>
+        </li>
+        <li class="go-Footer-listItem">
+          <button class="go-Button go-Button--text go-Footer-keyboard js-openShortcuts" aria-label="Shorcuts Modal">
+            <img class="go-Icon go-Icon--inverted" height="24" width="24" src="/static/shared/icon/keyboard_grey_24dp.svg" alt="">
+            <p> Shortcuts Modal </p>
+          </button>
+        </li>
+      </ul>
+      <a class="go-Footer-googleLogo" href="https://google.com" target="_blank"rel="noopener"
+          data-gtmc="footer link">
+        <img class="go-Footer-googleLogoImg" height="24" width="72"
+            src="/static/shared/logo/google-white.svg" alt="Google logo">
+      </a>
+    </div>
+  </footer>
+
+    
+  <dialog id="jump-to-modal" class="JumpDialog go-Modal go-Modal--md js-modal">
+    <form method="dialog" data-gmtc="jump to form" aria-label="Jump to Identifier">
+      <div class="Dialog-title go-Modal-header">
+        <h2>Jump to</h2>
+        <button
+          class="go-Button go-Button--inline"
+          type="button"
+          data-modal-close
+          data-gtmc="modal button"
+          aria-label="Close"
+        >
+          <img
+            class="go-Icon"
+            height="24"
+            width="24"
+            src="/static/shared/icon/close_gm_grey_24dp.svg"
+            alt=""
+          />
+        </button>
+      </div>
+      <div class="JumpDialog-filter">
+        <input class="JumpDialog-input go-Input" autocomplete="off" type="text">
+      </div>
+      <div class="JumpDialog-body go-Modal-body">
+        <div class="JumpDialog-list"></div>
+      </div>
+      <div class="go-Modal-actions">
+        <button class="go-Button" data-test-id="close-dialog">Close</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="ShortcutsDialog go-Modal go-Modal--sm js-modal">
+    <form method="dialog">
+      <div class="go-Modal-header">
+        <h2>Keyboard shortcuts</h2>
+        <button
+          class="go-Button go-Button--inline"
+          type="button"
+          data-modal-close
+          data-gtmc="modal button"
+          aria-label="Close"
+        >
+          <img
+            class="go-Icon"
+            height="24"
+            width="24"
+            src="/static/shared/icon/close_gm_grey_24dp.svg"
+            alt=""
+          />
+        </button>
+      </div>
+      <div class="go-Modal-body">
+        <table>
+          <tbody>
+            <tr><td class="ShortcutsDialog-key">
+              <strong>?</strong></td><td> : This menu</td>
+            </tr>
+            <tr><td class="ShortcutsDialog-key">
+              <strong>/</strong></td><td> : Search site</td>
+            </tr>
+            <tr><td class="ShortcutsDialog-key">
+              <strong>f</strong> or <strong>F</strong></td><td> : Jump to</td>
+            </tr>
+            <tr>
+              <td class="ShortcutsDialog-key"><strong>y</strong> or <strong>Y</strong></td>
+              <td> : Canonical URL</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="go-Modal-actions">
+        <button class="go-Button" data-test-id="close-dialog">Close</button>
+      </div>
+    </form>
+  </dialog>
+
+    
+      <section class="Cookie-notice js-cookieNotice">
+        <div>go.dev uses cookies from Google to deliver and enhance the quality of its services and to
+        analyze traffic. <a target=_blank href="https://policies.google.com/technologies/cookies">Learn more.</a></div>
+        <div><button class="go-Button">Okay</button></div>
+      </section>
+    
+    
+      <script>
+        // this will throw if the querySelector can’t find the element
+        const gtmId = document.querySelector('.js-gtmID').dataset.gtmid;
+        if (!gtmId) {
+          throw new Error('Google Tag Manager ID not found');
+        }
+        loadScript(`https://www.googletagmanager.com/gtm.js?id=${gtmId}`);
+      </script>
+      <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W8MVQXG"
+                height="0" width="0" style="display:none;visibility:hidden">
+        </iframe>
+      </noscript>
+    
+    
+  
+  <div class="js-canonicalURLPath" data-canonical-url-path="/github.com/IBM/fp-go@v1.1.84" hidden></div>
+  <div class="js-playgroundVars" data-modulepath="github.com/IBM/fp-go" data-version="v1.1.84" hidden></div>
+  <script>
+    loadScript('/static/frontend/unit/main/main.js')
+  </script>
+
+  <script>
+    loadScript('/static/frontend/unit/unit.js')
+  </script>
+
+  </body>
+</html>

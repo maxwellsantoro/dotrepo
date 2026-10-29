@@ -1,0 +1,27 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-f05-qualification-rust-02-cba0008c42",
+    "mkdir",
+    "-p",
+    "/workspace/repository",
+    "/workspace/home",
+    "/workspace/cargo",
+    "/workspace/go",
+    "/workspace/go-build",
+    "/workspace/npm-cache"
+  ],
+  "startedAt": "2026-10-29T06:12:33.600287+00:00",
+  "elapsedSeconds": 0.08526041684672236,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

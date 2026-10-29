@@ -1,0 +1,27 @@
+{
+  "observedAt": "2026-10-29T06:13:45.412494+00:00",
+  "requestedUrl": "https://pkg.go.dev/github.com/gomodule/redigo/redis",
+  "requestUserAgent": "dotrepo-source-audit/1.0",
+  "redirects": [],
+  "maximumBodyBytes": 2000000,
+  "status": 200,
+  "finalUrl": "https://pkg.go.dev/github.com/gomodule/redigo/redis",
+  "headers": {
+    "content-security-policy": "object-src 'none'; base-uri 'none'; script-src 'unsafe-inline' 'strict-dynamic' https: http: 'sha256-DVdvl49HC0iGx/YKQq/kVNATnEdzGfExbJVTHqT95l8=' 'sha256-CoGrkqEM1Kjjf5b1bpcnDLl8ZZLAsVX+BoAzZ5+AOmc=' 'sha256-BsQe1u7Z3VQYCzlgwD/5tfhFoqVHDlGJh2ZNZxBHP8I=' 'sha256-karKh1IrXOF1g+uoSxK+k9BuciCwYY/ytGuQVUiRzcM=' 'sha256-mxm3e8M0u3nPPBmLIBgGuMvGUIL5LGv+HzV3bLAIBgw=' 'sha256-+iS8jRq15Ez/Kzz0/G+SNc0geLNvTyf2NZC7MyJgpRE=' 'sha256-UiVwSVJIK9udADqG5GZe+nRUXWK9wEot2vrxL4D2pQs=' 'sha256-cB+y/oSfWGFf7lHk8KX+ZX2CZQz/dPamIICuPvHcB6w=' 'sha256-7mi5SPcD1cogj2+ju8J/+/qJG99F6Qo+3pO4xQkRf6Q=' 'sha256-rEbn/zvLCsDDvDrVWQuUkKGEQsjQjFvIvJK4NVIMqZ4='",
+    "x-content-type-options": "nosniff",
+    "x-frame-options": "deny",
+    "content-type": "text/html; charset=utf-8",
+    "date": "Thu, 29 Oct 2026 06:13:45 GMT",
+    "server": "Google Frontend",
+    "Via": "1.1 google",
+    "Alt-Svc": "h3=\":443\"; ma=2592000",
+    "Connection": "close",
+    "Transfer-Encoding": "chunked"
+  },
+  "bodyTruncated": false,
+  "bodyPath": "redigo-target.html",
+  "bodyBytes": 230477,
+  "bodySha256": "52d2b53e205fe6425a2f4d0b35ecea2606a034980fc5f053f187f139ff47d35a",
+  "contentObservation": "Go Packages redis overview says Package redis is a client for the Redis database and includes connections, commands, concurrency and API reference.",
+  "limitations": "Current package page content and version are mutable; repository-source revision parity was not established."
+}

@@ -1,0 +1,280 @@
+{
+  "identity": "f05-qualification-20261029-four-task-handoff",
+  "status": "bounded tranche complete; C1 and twelve-task qualification remain incomplete",
+  "tasksWithCompleteNativeOutcome": 3,
+  "tasksAttempted": 4,
+  "frozenTasksTotal": 12,
+  "campaignSessionsRun": 0,
+  "modelCalls": 0,
+  "sourceFreezeSha256": "fc756e0d5f8a25cddc9f19ece651b21078a68a1f601febdb8d772208c0a66d41",
+  "sources": [
+    {
+      "taskId": "rust-02",
+      "revision": "ab4bf739d46448436cb68933bb8260ee264449d5",
+      "files": 605,
+      "bytes": 114376664,
+      "archivePath": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/rust-02-full/runtime-source.tar",
+      "archiveSha256": "862b159c55ee7693faed80c2546aa203cc370e867cf5a206cff5356ab66766d6",
+      "inventorySha256": "e04bbccfff19d356f66981ec9ae7074fe26b44a4d6a76591b70cd8c1c816865c",
+      "actualGitTreeSha": "b3f1fa0590f411c398cdc7d7f0df5c8cedbba753"
+    },
+    {
+      "taskId": "typescript-02",
+      "revision": "2875056f93d6eebcd887f64ae557258a7b0b0108",
+      "files": 2784,
+      "bytes": 31428303,
+      "archivePath": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/typescript-02/runtime-source.tar",
+      "archiveSha256": "818bf33ece0979d198ed6a11daa3e6b838cc4aefba8c3a381c86e8ce2e706f41",
+      "inventorySha256": "ba57c4fe3c2ae83ae10005b4ff3ed3998d1f94d75d2778163167da69637f78d7",
+      "actualGitTreeSha": "66f6b617831b9733ea5710ad0d17a78fe0b80907"
+    },
+    {
+      "taskId": "go-01",
+      "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+      "files": 68062,
+      "bytes": 218783760,
+      "archivePath": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar",
+      "archiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+      "inventorySha256": "96c935c31228fa8e05bb836a93257beeb87ac524e5eb30cdde3c546a1ea4be0e",
+      "actualGitTreeSha": "0e8e44749de9c275750a56bbca5cde84985fd3d0"
+    },
+    {
+      "taskId": "go-03",
+      "revision": "352089582444ea84feb03bc97eda97b35729e8ec",
+      "files": 9658,
+      "bytes": 44735288,
+      "archivePath": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-03/runtime-source.tar",
+      "archiveSha256": "cc7b18c67ce11698d79bfee35fe7afa7f7c8f0ea0dccbdaefd8836cde49f3ba2",
+      "inventorySha256": "0dde9a80e14165d1675227db0842f3c88bda2828dd20506e75d6b4ff5d9fcd74",
+      "actualGitTreeSha": "0d5c1623042deec3332fb9bdd3304248e0705c60"
+    }
+  ],
+  "tasks": [
+    {
+      "taskId": "rust-02",
+      "resultPath": "runs/rust-02/attempt-1/result.json",
+      "latestResult": {
+        "taskId": "rust-02",
+        "sourceRevision": "ab4bf739d46448436cb68933bb8260ee264449d5",
+        "indexConsulted": false,
+        "modelCalls": 0,
+        "costUsd": null,
+        "costExclusions": [
+          "No metered host/container dollar receipt."
+        ],
+        "cacheCondition": "Fresh empty per-task cache, populated by recorded download-only setup; offline execution uses that explicit warm state.",
+        "sourceSupportedInstructionGold": "Original source-only classification unchanged; execution qualification is separately reviewed.",
+        "status": "execution-qualified-pending-independent-review",
+        "startedAt": "2026-10-29T06:12:33.154207+00:00",
+        "setupSeconds": 10.324307624949142,
+        "setupNetworkBytes": {
+          "received": 160022741,
+          "sent": 664685,
+          "basis": "Container interface counters; includes headers and incidental traffic."
+        },
+        "executionSeconds": 6.761224166955799,
+        "testExitCode": 0,
+        "executionError": null,
+        "changedTrackedFiles": [],
+        "trackedSourceIntact": true,
+        "oracle": {
+          "qualified": true,
+          "reason": "complete component native tests",
+          "expectedTests": [
+            "test_link_type_from_pcap_supported",
+            "test_link_type_from_pcap_unsupported"
+          ],
+          "observedTests": [
+            "test_link_type_from_pcap_supported",
+            "test_link_type_from_pcap_unsupported"
+          ]
+        },
+        "taskOutcomeObserved": true,
+        "testsPassed": true,
+        "totalSeconds": 28.02760145906359,
+        "cleanup": 0
+      },
+      "originalInstructionGold": "required-abstention",
+      "instructionGoldUnchanged": true,
+      "executionFreeze": {
+        "path": "execution-freeze.v3.json",
+        "sha256": "2171b6a73234e1b5704b9469df5633a97e66363bdaabd93786766dcb9e03bf2f"
+      }
+    },
+    {
+      "taskId": "typescript-02",
+      "resultPath": "runs/typescript-02/attempt-1/result.json",
+      "latestResult": {
+        "taskId": "typescript-02",
+        "sourceRevision": "2875056f93d6eebcd887f64ae557258a7b0b0108",
+        "indexConsulted": false,
+        "modelCalls": 0,
+        "costUsd": null,
+        "costExclusions": [
+          "No metered host/container dollar receipt."
+        ],
+        "cacheCondition": "Fresh empty per-task cache, populated by recorded download-only setup; offline execution uses that explicit warm state.",
+        "sourceSupportedInstructionGold": "Original source-only classification unchanged; execution qualification is separately reviewed.",
+        "status": "execution-qualified-pending-independent-review",
+        "startedAt": "2026-10-29T06:13:48.335063+00:00",
+        "setupSeconds": 43.6928957500495,
+        "setupNetworkBytes": {
+          "received": 202012788,
+          "sent": 1257410,
+          "basis": "Container interface counters; includes headers and incidental traffic."
+        },
+        "executionSeconds": 3.5659274170175195,
+        "testExitCode": 0,
+        "executionError": null,
+        "changedTrackedFiles": [],
+        "trackedSourceIntact": true,
+        "oracle": {
+          "qualified": true,
+          "reason": "entire launcher suite executed",
+          "expectedTests": [
+            "does not require build/ in --backend-only mode",
+            "shows usage info in --help output"
+          ],
+          "observedTests": [
+            "does not require build/ in --backend-only mode",
+            "shows usage info in --help output"
+          ]
+        },
+        "taskOutcomeObserved": true,
+        "testsPassed": true,
+        "totalSeconds": 53.070152041036636,
+        "cleanup": 0
+      },
+      "originalInstructionGold": "supported-source-alternative; independent review pending",
+      "instructionGoldUnchanged": true,
+      "executionFreeze": {
+        "path": "execution-freeze.v3.json",
+        "sha256": "2171b6a73234e1b5704b9469df5633a97e66363bdaabd93786766dcb9e03bf2f"
+      }
+    },
+    {
+      "taskId": "go-01",
+      "resultPath": "runs/go-01/attempt-2/result.json",
+      "latestResult": {
+        "taskId": "go-01",
+        "sourceRevision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+        "indexConsulted": false,
+        "modelCalls": 0,
+        "costUsd": null,
+        "costExclusions": [
+          "No metered host/container dollar receipt."
+        ],
+        "cacheCondition": "Fresh empty per-task cache, populated by recorded download-only setup; offline execution uses that explicit warm state.",
+        "sourceSupportedInstructionGold": "Original source-only classification unchanged; execution qualification is separately reviewed.",
+        "status": "incomplete",
+        "startedAt": "2026-10-29T06:17:07.518538+00:00",
+        "setupSeconds": 14.058167499955744,
+        "setupNetworkBytes": {
+          "received": 170878761,
+          "sent": 1038129,
+          "basis": "Container interface counters; includes headers and incidental traffic."
+        },
+        "failure": "AssertionError: native-test-list",
+        "totalSeconds": 86.39713912480511,
+        "cleanup": 0
+      },
+      "originalInstructionGold": "supported-source-alternative; independent review pending",
+      "instructionGoldUnchanged": true,
+      "executionFreeze": {
+        "path": "execution-freeze.v4.json",
+        "sha256": "fb93320b4258850137f58ca9c9bb1a1b88601f0fc84398c624f8c882d766eb4b"
+      }
+    },
+    {
+      "taskId": "go-03",
+      "resultPath": "runs/go-03/attempt-2/result.json",
+      "latestResult": {
+        "taskId": "go-03",
+        "sourceRevision": "352089582444ea84feb03bc97eda97b35729e8ec",
+        "indexConsulted": false,
+        "modelCalls": 0,
+        "costUsd": null,
+        "costExclusions": [
+          "No metered host/container dollar receipt."
+        ],
+        "cacheCondition": "Fresh empty per-task cache, populated by recorded download-only setup; offline execution uses that explicit warm state.",
+        "sourceSupportedInstructionGold": "Original source-only classification unchanged; execution qualification is separately reviewed.",
+        "status": "execution-qualified-pending-independent-review",
+        "startedAt": "2026-10-29T06:11:24.897526+00:00",
+        "setupSeconds": 1.8865797920152545,
+        "setupNetworkBytes": {
+          "received": 12887737,
+          "sent": 90804,
+          "basis": "Container interface counters; includes headers and incidental traffic."
+        },
+        "executionSeconds": 98.5260395410005,
+        "testExitCode": 0,
+        "executionError": null,
+        "changedTrackedFiles": [],
+        "trackedSourceIntact": true,
+        "oracle": {
+          "qualified": true,
+          "reason": "complete native events",
+          "expectedTopLevelTests": 93,
+          "ranTopLevelTests": 93,
+          "missingTests": [],
+          "skippedTests": [],
+          "packages": [
+            "github.com/hashicorp/vault/api",
+            "github.com/hashicorp/vault/api/cliconfig",
+            "github.com/hashicorp/vault/api/tokenhelper"
+          ],
+          "endedPackages": [
+            "github.com/hashicorp/vault/api",
+            "github.com/hashicorp/vault/api/cliconfig",
+            "github.com/hashicorp/vault/api/tokenhelper"
+          ]
+        },
+        "taskOutcomeObserved": true,
+        "testsPassed": true,
+        "totalSeconds": 105.68248399998993,
+        "cleanup": 0
+      },
+      "originalInstructionGold": "unresolved",
+      "instructionGoldUnchanged": true,
+      "executionFreeze": {
+        "path": "execution-freeze.v3.json",
+        "sha256": "2171b6a73234e1b5704b9469df5633a97e66363bdaabd93786766dcb9e03bf2f"
+      }
+    }
+  ],
+  "retainedQualificationAttempts": 6,
+  "setupNetworkBytesAcrossSuccessfulAndFailedAttempts": {
+    "received": 717382483,
+    "sent": 4079961,
+    "basis": "Per-container interface counters; includes protocol headers/incidental traffic; source/image acquisition excluded and separately retained."
+  },
+  "costUsd": null,
+  "costExclusions": [
+    "No metered host/container dollar receipt.",
+    "First Node/Go image-pull complete transfer timing/bytes unavailable; do not infer zero.",
+    "Some source Git transfer byte totals unavailable; object/archive bytes retained separately."
+  ],
+  "oracleControls": {
+    "positiveControls": 3,
+    "negativeControls": 10,
+    "status": "passed",
+    "limits": "Synthetic native-format controls establish rejection behavior; actual source/environment execution is separately required."
+  },
+  "verifiedCommandReceipts": 128,
+  "remainingGates": [
+    "Independent oracle/environment review, including npm install-hook equivalence and API-generation adjudication.",
+    "go-01 full default outcome: original OOM, then512MiB temporary-filesystem exhaustion; no further retry authorized in this packet.",
+    "Remaining8 task source/scope/environment qualification under next-eight-plan.json after resource review.",
+    "Reusable immutable dependency caches and one common source-free image not qualified.",
+    "Full campaign model/settings/budgets/costs/assignment/isolation and72 actual independent sessions."
+  ],
+  "limits": [
+    "Three passing operator execution qualifications, not consumer benefit or instruction-population accuracy.",
+    "Original source-gold states preserved; unresolved instruction establishment is not correct task abstention.",
+    "Linux ARM64 Docker Desktop on macOS; not native Linux host or all-platform proof.",
+    "No evaluated index/profile consulted; only exact upstream source and prospective task/oracle packet inspected.",
+    "Full source archives/Git objects remain in declared /tmp scratch; committed evidence contains inventories/provenance rather than whole repositories.",
+    "Qualification runs overlapped in pairs; timings are observed operator preparation/execution, not a controlled causal comparison."
+  ]
+}

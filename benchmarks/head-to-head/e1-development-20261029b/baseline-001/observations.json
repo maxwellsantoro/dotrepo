@@ -1,0 +1,238 @@
+[
+  {
+    "id": "e1-rust-03-repository-tests",
+    "repository": "github.com/storytold/photocraft",
+    "revision": "5f9b4391874aabc9deb2fcb905267613e4d93ec8",
+    "request": {
+      "scope": "repository"
+    },
+    "rawRepo": {
+      "name": "ArtCraft",
+      "description": "Image editing; an open-source, clean-room reimplementation of Adobe Photoshop, rebuilt in pure Rust.",
+      "homepage": "https://github.com/storytold/photocraft",
+      "languages": [],
+      "build": "cargo build --workspace",
+      "test": "cargo test --workspace",
+      "topics": [],
+      "toolchain": {
+        "min": "1.95",
+        "ecosystem": "Rust"
+      }
+    },
+    "consumerSelection": {
+      "instruction": null,
+      "provenance": null,
+      "fallbackReasons": [
+        "no-assessed-contextual-instruction"
+      ]
+    },
+    "importExitCode": 0,
+    "profileExitCode": 0
+  },
+  {
+    "id": "e1-rust-03-component-tests",
+    "repository": "github.com/storytold/photocraft",
+    "revision": "5f9b4391874aabc9deb2fcb905267613e4d93ec8",
+    "request": {
+      "scope": "component",
+      "component": "apps/photocraft"
+    },
+    "rawRepo": {
+      "name": "ArtCraft",
+      "description": "Image editing; an open-source, clean-room reimplementation of Adobe Photoshop, rebuilt in pure Rust.",
+      "homepage": "https://github.com/storytold/photocraft",
+      "languages": [],
+      "build": "cargo build --workspace",
+      "test": "cargo test --workspace",
+      "topics": [],
+      "toolchain": {
+        "min": "1.95",
+        "ecosystem": "Rust"
+      }
+    },
+    "consumerSelection": {
+      "instruction": null,
+      "provenance": null,
+      "fallbackReasons": [
+        "no-assessed-contextual-instruction"
+      ]
+    },
+    "importExitCode": 0,
+    "profileExitCode": 0
+  },
+  {
+    "id": "e1-go-03-repository-tests",
+    "repository": "github.com/docker/compose",
+    "revision": "343bb382d2192b88d84af49971bb5cb99bee268c",
+    "request": {
+      "scope": "repository"
+    },
+    "rawRepo": {
+      "name": "Docker Compose",
+      "description": "Docker Compose is a tool for running multi-container applications on Docker defined using the Compose file format.",
+      "homepage": "https://github.com/docker/compose",
+      "languages": [],
+      "build": "make build",
+      "test": "make test",
+      "topics": [],
+      "toolchain": {
+        "min": "1.26.10",
+        "ecosystem": "Go"
+      }
+    },
+    "consumerSelection": {
+      "instruction": null,
+      "provenance": null,
+      "fallbackReasons": [
+        "no-assessed-contextual-instruction"
+      ]
+    },
+    "importExitCode": 0,
+    "profileExitCode": 0
+  },
+  {
+    "id": "e1-go-03-component-tests",
+    "repository": "github.com/docker/compose",
+    "revision": "343bb382d2192b88d84af49971bb5cb99bee268c",
+    "request": {
+      "scope": "component",
+      "component": "pkg/compose"
+    },
+    "rawRepo": {
+      "name": "Docker Compose",
+      "description": "Docker Compose is a tool for running multi-container applications on Docker defined using the Compose file format.",
+      "homepage": "https://github.com/docker/compose",
+      "languages": [],
+      "build": "make build",
+      "test": "make test",
+      "topics": [],
+      "toolchain": {
+        "min": "1.26.10",
+        "ecosystem": "Go"
+      }
+    },
+    "consumerSelection": {
+      "instruction": null,
+      "provenance": null,
+      "fallbackReasons": [
+        "no-assessed-contextual-instruction"
+      ]
+    },
+    "importExitCode": 0,
+    "profileExitCode": 0
+  },
+  {
+    "id": "e1-python-03-repository-tests",
+    "repository": "github.com/keras-team/keras",
+    "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+    "request": {
+      "scope": "repository"
+    },
+    "rawRepo": {
+      "name": "keras",
+      "description": "Keras 3 is a multi-backend deep learning framework, with support for JAX, TensorFlow, PyTorch, and OpenVINO (for inference-only).",
+      "homepage": "https://github.com/keras-team/keras",
+      "languages": [],
+      "build": "python -m build",
+      "test": "python -m pytest",
+      "topics": [],
+      "toolchain": {
+        "min": "3.11",
+        "ecosystem": "Python"
+      }
+    },
+    "consumerSelection": {
+      "instruction": null,
+      "provenance": null,
+      "fallbackReasons": [
+        "no-assessed-contextual-instruction"
+      ]
+    },
+    "importExitCode": 0,
+    "profileExitCode": 0
+  },
+  {
+    "id": "e1-python-03-component-tests",
+    "repository": "github.com/keras-team/keras",
+    "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+    "request": {
+      "scope": "component",
+      "component": "keras/src"
+    },
+    "rawRepo": {
+      "name": "keras",
+      "description": "Keras 3 is a multi-backend deep learning framework, with support for JAX, TensorFlow, PyTorch, and OpenVINO (for inference-only).",
+      "homepage": "https://github.com/keras-team/keras",
+      "languages": [],
+      "build": "python -m build",
+      "test": "python -m pytest",
+      "topics": [],
+      "toolchain": {
+        "min": "3.11",
+        "ecosystem": "Python"
+      }
+    },
+    "consumerSelection": {
+      "instruction": null,
+      "provenance": null,
+      "fallbackReasons": [
+        "no-assessed-contextual-instruction"
+      ]
+    },
+    "importExitCode": 0,
+    "profileExitCode": 0
+  },
+  {
+    "id": "e1-typescript-01-repository-tests",
+    "repository": "github.com/pixijs/pixijs",
+    "revision": "2e8cacbe1ed4ed0fc31d5b59b9895c811ac0e003",
+    "request": {
+      "scope": "repository"
+    },
+    "rawRepo": {
+      "name": "npm downloads",
+      "description": "Next-Generation, Fastest HTML5 Creation Engine for the Web",
+      "homepage": "https://github.com/pixijs/pixijs",
+      "languages": [],
+      "build": "npm run build",
+      "test": "npm test",
+      "topics": []
+    },
+    "consumerSelection": {
+      "instruction": null,
+      "provenance": null,
+      "fallbackReasons": [
+        "no-assessed-contextual-instruction"
+      ]
+    },
+    "importExitCode": 0,
+    "profileExitCode": 0
+  },
+  {
+    "id": "e1-typescript-01-component-tests",
+    "repository": "github.com/pixijs/pixijs",
+    "revision": "2e8cacbe1ed4ed0fc31d5b59b9895c811ac0e003",
+    "request": {
+      "scope": "component",
+      "component": "tests/visual/scenes"
+    },
+    "rawRepo": {
+      "name": "npm downloads",
+      "description": "Next-Generation, Fastest HTML5 Creation Engine for the Web",
+      "homepage": "https://github.com/pixijs/pixijs",
+      "languages": [],
+      "build": "npm run build",
+      "test": "npm test",
+      "topics": []
+    },
+    "consumerSelection": {
+      "instruction": null,
+      "provenance": null,
+      "fallbackReasons": [
+        "no-assessed-contextual-instruction"
+      ]
+    },
+    "importExitCode": 0,
+    "profileExitCode": 0
+  }
+]

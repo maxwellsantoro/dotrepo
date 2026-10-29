@@ -1,0 +1,141 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T05:38:16.128053678Z",
+    "snapshotDigest": "e45b6ec2719c2b5d59d4acdfa1aa7e61e749810bbfdd3add2fcda1eb0bf97b33",
+    "staleAfter": "2026-11-05T05:38:16.128053678Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "vuejs",
+    "repo": "core",
+    "source": "https://github.com/vuejs/core"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/vuejs/core/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/vuejs/core",
+    "generatedAt": "2026-10-27T18:31:05.489548Z",
+    "evidencePath": "repos/github.com/vuejs/core/evidence.md",
+    "freshnessStatus": "fresh",
+    "ageDays": 1,
+    "staleAfterDays": 30,
+    "sourceRevision": "ca034820b8288ab6da3a033626a7857401ee64a5"
+  },
+  "purpose": "🖖 Vue.js is a progressive, incrementally-adoptable JavaScript framework for building UI on the web.",
+  "name": "vuejs/core",
+  "homepage": "https://vuejs.org/",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "TypeScript",
+    "JavaScript",
+    "HTML",
+    "Vue",
+    "CSS"
+  ],
+  "execution": {
+    "build": "pnpm build",
+    "test": "pnpm test"
+  },
+  "docs": {},
+  "ownership": {
+    "securityContact": "jeetpal2007@gmail.com"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "fieldEvidence": {
+    "docs.getting_started": {
+      "checkedAt": "2026-10-27T18:31:05.489548Z",
+      "confidence": "high",
+      "method": "not_found_in_inspected_sources",
+      "reason": "no unambiguous documentation declaration detected",
+      "state": "not_found"
+    },
+    "docs.root": {
+      "checkedAt": "2026-10-27T18:31:05.489548Z",
+      "confidence": "high",
+      "method": "not_found_in_inspected_sources",
+      "reason": "no unambiguous documentation declaration detected",
+      "state": "not_found"
+    },
+    "owners.security_contact": {
+      "checkedAt": "2026-10-27T18:31:05.489548Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "direct email or mailing list",
+      "source": "SECURITY.md",
+      "state": "present"
+    },
+    "owners.team": {
+      "checkedAt": "2026-10-27T18:31:05.489548Z",
+      "confidence": "high",
+      "method": "not_found_in_inspected_sources",
+      "reason": "no single clear team in CODEOWNERS",
+      "state": "not_found"
+    },
+    "repo.build": {
+      "checkedAt": "2026-10-27T18:31:05.489548Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "from declared repository source",
+      "source": "package.json",
+      "state": "present"
+    },
+    "repo.description": {
+      "checkedAt": "2026-10-27T18:31:05.489548Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "constrained by GitHub repository metadata",
+      "source": "GitHub API",
+      "state": "present"
+    },
+    "repo.homepage": {
+      "checkedAt": "2026-10-27T18:31:05.489548Z",
+      "confidence": "high",
+      "method": "unspecified",
+      "reason": "set and passes quality check",
+      "state": "present"
+    },
+    "repo.name": {
+      "checkedAt": "2026-10-27T18:31:05.489548Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "extracted from README title with post-cleaners",
+      "source": "README.md",
+      "state": "present"
+    },
+    "repo.test": {
+      "checkedAt": "2026-10-27T18:31:05.489548Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "from declared repository source",
+      "source": "package.json",
+      "state": "present"
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/vuejs/core/profile.json",
+    "repository": "/v0/repos/github.com/vuejs/core/index.json",
+    "trust": "/v0/repos/github.com/vuejs/core/trust.json",
+    "queryTemplate": "/v0/repos/github.com/vuejs/core/query?path={dot_path}",
+    "indexPath": "repos/github.com/vuejs/core/"
+  }
+}

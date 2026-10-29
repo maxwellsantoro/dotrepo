@@ -1,0 +1,41 @@
+{
+  "taskId": "typescript-02",
+  "sourceRevision": "2875056f93d6eebcd887f64ae557258a7b0b0108",
+  "indexConsulted": false,
+  "modelCalls": 0,
+  "costUsd": null,
+  "costExclusions": [
+    "No metered host/container dollar receipt."
+  ],
+  "cacheCondition": "Fresh empty per-task cache, populated by recorded download-only setup; offline execution uses that explicit warm state.",
+  "sourceSupportedInstructionGold": "Original source-only classification unchanged; execution qualification is separately reviewed.",
+  "status": "execution-qualified-pending-independent-review",
+  "startedAt": "2026-10-29T06:13:48.335063+00:00",
+  "setupSeconds": 43.6928957500495,
+  "setupNetworkBytes": {
+    "received": 202012788,
+    "sent": 1257410,
+    "basis": "Container interface counters; includes headers and incidental traffic."
+  },
+  "executionSeconds": 3.5659274170175195,
+  "testExitCode": 0,
+  "executionError": null,
+  "changedTrackedFiles": [],
+  "trackedSourceIntact": true,
+  "oracle": {
+    "qualified": true,
+    "reason": "entire launcher suite executed",
+    "expectedTests": [
+      "does not require build/ in --backend-only mode",
+      "shows usage info in --help output"
+    ],
+    "observedTests": [
+      "does not require build/ in --backend-only mode",
+      "shows usage info in --help output"
+    ]
+  },
+  "taskOutcomeObserved": true,
+  "testsPassed": true,
+  "totalSeconds": 53.070152041036636,
+  "cleanup": 0
+}

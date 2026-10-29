@@ -1,0 +1,166 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T05:38:16.128053678Z",
+    "snapshotDigest": "e45b6ec2719c2b5d59d4acdfa1aa7e61e749810bbfdd3add2fcda1eb0bf97b33",
+    "staleAfter": "2026-11-05T05:38:16.128053678Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "tauri-apps",
+    "repo": "tauri",
+    "source": "https://github.com/tauri-apps/tauri"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/tauri-apps/tauri/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/tauri-apps/tauri",
+    "generatedAt": "2026-10-27T18:29:53.407193Z",
+    "evidencePath": "repos/github.com/tauri-apps/tauri/evidence.md",
+    "freshnessStatus": "fresh",
+    "ageDays": 1,
+    "staleAfterDays": 30,
+    "sourceRevision": "7e39750cf6a4e05234a781088ff5fb8cb890370a"
+  },
+  "purpose": "Build smaller, faster, and more secure desktop and mobile applications with a web frontend.",
+  "name": "Tauri",
+  "homepage": "https://tauri.app",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Rust",
+    "TypeScript",
+    "NSIS",
+    "JavaScript",
+    "Kotlin",
+    "Shell",
+    "Swift",
+    "Dockerfile",
+    "HTML",
+    "PowerShell",
+    "AppleScript",
+    "Svelte",
+    "CSS",
+    "Standard ML",
+    "Ruby",
+    "Objective-C",
+    "Objective-C++",
+    "C++"
+  ],
+  "topics": [
+    "rust",
+    "webview",
+    "high-performance",
+    "desktop-app",
+    "mobile-app",
+    "native-app",
+    "web-frontend"
+  ],
+  "execution": {
+    "build": "pnpm build",
+    "test": "pnpm test"
+  },
+  "docs": {
+    "root": "https://github.com/tauri-apps/tauri-docs"
+  },
+  "ownership": {
+    "securityContact": "https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing/privately-reporting-a-security-vulnerability#privately-reporting-a-security-vulnerability"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "fieldEvidence": {
+    "docs.getting_started": {
+      "checkedAt": "2026-10-27T18:29:53.407193Z",
+      "confidence": "high",
+      "method": "not_found_in_inspected_sources",
+      "reason": "no unambiguous documentation declaration detected",
+      "state": "not_found"
+    },
+    "docs.root": {
+      "checkedAt": "2026-10-27T18:29:53.407193Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "Explicit documentation link at README.md:64: Documentation in a polyglot system is a tricky proposition. To this end, we prefer to use inline documentation in the Rust & JS source code as much as possible. Check out the hosting repository for the documentation site for further information: <https://github.com/tauri-apps/tauri-docs>",
+      "source": "README.md",
+      "state": "present"
+    },
+    "owners.security_contact": {
+      "checkedAt": "2026-10-27T18:29:53.407193Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "actionable security reporting URL",
+      "source": "SECURITY.md",
+      "state": "present"
+    },
+    "owners.team": {
+      "checkedAt": "2026-10-27T18:29:53.407193Z",
+      "confidence": "high",
+      "method": "not_found_in_inspected_sources",
+      "reason": "no single clear team in CODEOWNERS",
+      "state": "not_found"
+    },
+    "repo.build": {
+      "checkedAt": "2026-10-27T18:29:53.407193Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "from declared repository source",
+      "source": "package.json",
+      "state": "present"
+    },
+    "repo.description": {
+      "checkedAt": "2026-10-27T18:29:53.407193Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "constrained by GitHub repository metadata",
+      "source": "GitHub API",
+      "state": "present"
+    },
+    "repo.homepage": {
+      "checkedAt": "2026-10-27T18:29:53.407193Z",
+      "confidence": "high",
+      "method": "unspecified",
+      "reason": "set and passes quality check",
+      "state": "present"
+    },
+    "repo.name": {
+      "checkedAt": "2026-10-27T18:29:53.407193Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "extracted from README title with post-cleaners",
+      "source": "README.md",
+      "state": "present"
+    },
+    "repo.test": {
+      "checkedAt": "2026-10-27T18:29:53.407193Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "from declared repository source",
+      "source": "package.json",
+      "state": "present"
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/tauri-apps/tauri/profile.json",
+    "repository": "/v0/repos/github.com/tauri-apps/tauri/index.json",
+    "trust": "/v0/repos/github.com/tauri-apps/tauri/trust.json",
+    "queryTemplate": "/v0/repos/github.com/tauri-apps/tauri/query?path={dot_path}",
+    "indexPath": "repos/github.com/tauri-apps/tauri/"
+  }
+}

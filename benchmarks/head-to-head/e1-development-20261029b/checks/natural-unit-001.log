@@ -1,0 +1,45 @@
+   Compiling dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)
+error[E0277]: the trait bound `Array<u8, UInt<UInt<UInt<UInt<_, B0>, B0>, B0>, B0>>: LowerHex` is not satisfied
+   --> crates/dotrepo-core/src/import/commands/context/python_recipe/tests.rs:106:55
+    |
+106 |         assert_eq!(binding["sha256"], format!("{:x}", Sha256::digest(&text)));
+    |                                                ----   ^^^^^^^^^^^^^^^^^^^^^ the trait `LowerHex` is not implemented for `Array<u8, UInt<UInt<UInt<UInt<UInt<_, B0>, B0>, B0>, B0>, B0>>`
+    |                                                |
+    |                                                required by this formatting parameter
+    |
+    = help: the following other types implement trait `LowerHex`:
+              &T
+              &mut T
+              Saturating<T>
+              Wrapping<T>
+              compiler_builtins::math::libm_math::support::big::i256
+              compiler_builtins::math::libm_math::support::big::u256
+              compiler_builtins::math::libm_math::support::hex_float::hex_fmt::Hex<T>
+              deranged::RangedI128<MIN, MAX>
+            and 25 others
+    = note: the full name for the type has been written to '/Users/maxwell/projects/agent/dotrepo/target/debug/deps/dotrepo_core-6af6d15045c80b2a.long-type-4231722514124601204.txt'
+    = note: consider using `--verbose` to print the full type name to the console
+
+error[E0277]: the trait bound `Array<u8, UInt<UInt<UInt<UInt<_, B0>, B0>, B0>, B0>>: LowerHex` is not satisfied
+   --> crates/dotrepo-core/src/import/commands/context/python_recipe.rs:141:35
+    |
+141 |         "sha256": format!("{:x}", Sha256::digest(file.contents.as_bytes())),
+    |                            ----   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `LowerHex` is not implemented for `Array<u8, UInt<UInt<UInt<UInt<UInt<_, B0>, B0>, B0>, B0>, B0>>`
+    |                            |
+    |                            required by this formatting parameter
+    |
+    = help: the following other types implement trait `LowerHex`:
+              &T
+              &mut T
+              Saturating<T>
+              Wrapping<T>
+              compiler_builtins::math::libm_math::support::big::i256
+              compiler_builtins::math::libm_math::support::big::u256
+              compiler_builtins::math::libm_math::support::hex_float::hex_fmt::Hex<T>
+              deranged::RangedI128<MIN, MAX>
+            and 25 others
+    = note: the full name for the type has been written to '/Users/maxwell/projects/agent/dotrepo/target/debug/deps/dotrepo_core-6af6d15045c80b2a.long-type-4231722514124601204.txt'
+    = note: consider using `--verbose` to print the full type name to the console
+
+For more information about this error, try `rustc --explain E0277`.
+error: could not compile `dotrepo-core` (lib test) due to 2 previous errors

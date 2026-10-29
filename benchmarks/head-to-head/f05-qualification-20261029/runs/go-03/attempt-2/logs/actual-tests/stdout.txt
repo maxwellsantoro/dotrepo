@@ -1,0 +1,996 @@
+{"Time":"2026-10-29T06:11:51.403485301Z","Action":"start","Package":"github.com/hashicorp/vault/api"}
+{"Time":"2026-10-29T06:11:51.403756134Z","Action":"start","Package":"github.com/hashicorp/vault/api/cliconfig"}
+{"Time":"2026-10-29T06:11:51.403778176Z","Action":"start","Package":"github.com/hashicorp/vault/api/tokenhelper"}
+{"Time":"2026-10-29T06:11:51.407356842Z","Action":"run","Package":"github.com/hashicorp/vault/api/cliconfig","Test":"TestLoadConfig"}
+{"Time":"2026-10-29T06:11:51.407406842Z","Action":"output","Package":"github.com/hashicorp/vault/api/cliconfig","Test":"TestLoadConfig","Output":"=== RUN   TestLoadConfig\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.407422426Z","Action":"output","Package":"github.com/hashicorp/vault/api/cliconfig","Test":"TestLoadConfig","Output":"--- PASS: TestLoadConfig (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.407424301Z","Action":"pass","Package":"github.com/hashicorp/vault/api/cliconfig","Test":"TestLoadConfig","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.407436342Z","Action":"run","Package":"github.com/hashicorp/vault/api/cliconfig","Test":"TestLoadConfig_noExist"}
+{"Time":"2026-10-29T06:11:51.407438551Z","Action":"output","Package":"github.com/hashicorp/vault/api/cliconfig","Test":"TestLoadConfig_noExist","Output":"=== RUN   TestLoadConfig_noExist\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.407442551Z","Action":"output","Package":"github.com/hashicorp/vault/api/cliconfig","Test":"TestLoadConfig_noExist","Output":"--- PASS: TestLoadConfig_noExist (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.407443967Z","Action":"pass","Package":"github.com/hashicorp/vault/api/cliconfig","Test":"TestLoadConfig_noExist","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.407445759Z","Action":"run","Package":"github.com/hashicorp/vault/api/cliconfig","Test":"TestParseConfig_badKeys"}
+{"Time":"2026-10-29T06:11:51.407446801Z","Action":"output","Package":"github.com/hashicorp/vault/api/cliconfig","Test":"TestParseConfig_badKeys","Output":"=== RUN   TestParseConfig_badKeys\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.407448467Z","Action":"output","Package":"github.com/hashicorp/vault/api/cliconfig","Test":"TestParseConfig_badKeys","Output":"--- PASS: TestParseConfig_badKeys (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.407450551Z","Action":"pass","Package":"github.com/hashicorp/vault/api/cliconfig","Test":"TestParseConfig_badKeys","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.407451842Z","Action":"run","Package":"github.com/hashicorp/vault/api/cliconfig","Test":"TestParseConfig_HclDuplicateKey"}
+{"Time":"2026-10-29T06:11:51.407453259Z","Action":"output","Package":"github.com/hashicorp/vault/api/cliconfig","Test":"TestParseConfig_HclDuplicateKey","Output":"=== RUN   TestParseConfig_HclDuplicateKey\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.407456551Z","Action":"output","Package":"github.com/hashicorp/vault/api/cliconfig","Test":"TestParseConfig_HclDuplicateKey","Output":"--- PASS: TestParseConfig_HclDuplicateKey (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.407458342Z","Action":"pass","Package":"github.com/hashicorp/vault/api/cliconfig","Test":"TestParseConfig_HclDuplicateKey","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.407460342Z","Action":"output","Package":"github.com/hashicorp/vault/api/cliconfig","Output":"PASS\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.407489634Z","Action":"output","Package":"github.com/hashicorp/vault/api/cliconfig","Output":"ok  \tgithub.com/hashicorp/vault/api/cliconfig\t0.004s\n"}
+{"Time":"2026-10-29T06:11:51.407503967Z","Action":"pass","Package":"github.com/hashicorp/vault/api/cliconfig","Elapsed":0.004}
+{"Time":"2026-10-29T06:11:51.408299842Z","Action":"run","Package":"github.com/hashicorp/vault/api/tokenhelper","Test":"TestExternalTokenHelperPath"}
+{"Time":"2026-10-29T06:11:51.408319717Z","Action":"output","Package":"github.com/hashicorp/vault/api/tokenhelper","Test":"TestExternalTokenHelperPath","Output":"=== RUN   TestExternalTokenHelperPath\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.408324884Z","Action":"output","Package":"github.com/hashicorp/vault/api/tokenhelper","Test":"TestExternalTokenHelperPath","Output":"--- PASS: TestExternalTokenHelperPath (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.408326884Z","Action":"pass","Package":"github.com/hashicorp/vault/api/tokenhelper","Test":"TestExternalTokenHelperPath","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.408329176Z","Action":"run","Package":"github.com/hashicorp/vault/api/tokenhelper","Test":"TestExternalTokenHelper"}
+{"Time":"2026-10-29T06:11:51.408331717Z","Action":"output","Package":"github.com/hashicorp/vault/api/tokenhelper","Test":"TestExternalTokenHelper","Output":"=== RUN   TestExternalTokenHelper\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.410156467Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestAuth_Login"}
+{"Time":"2026-10-29T06:11:51.410253551Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestAuth_Login","Output":"=== RUN   TestAuth_Login\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.410271259Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestAuth_Login/Login_should_set_token_on_success"}
+{"Time":"2026-10-29T06:11:51.410273551Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestAuth_Login/Login_should_set_token_on_success","Output":"=== RUN   TestAuth_Login/Login_should_set_token_on_success\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.410281842Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestAuth_Login/Login_should_set_token_on_success","Output":"--- PASS: TestAuth_Login/Login_should_set_token_on_success (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.410285301Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestAuth_Login/Login_should_set_token_on_success","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.410289051Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestAuth_Login","Output":"--- PASS: TestAuth_Login (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.410291051Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestAuth_Login","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.410293176Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestAuth_MFALoginSinglePhase"}
+{"Time":"2026-10-29T06:11:51.410294384Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestAuth_MFALoginSinglePhase","Output":"=== RUN   TestAuth_MFALoginSinglePhase\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.410296301Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestAuth_MFALoginSinglePhase/MFALogin()_should_succeed_if_credentials_are_passed_in"}
+{"Time":"2026-10-29T06:11:51.410297842Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestAuth_MFALoginSinglePhase/MFALogin()_should_succeed_if_credentials_are_passed_in","Output":"=== RUN   TestAuth_MFALoginSinglePhase/MFALogin()_should_succeed_if_credentials_are_passed_in\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.410302759Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestAuth_MFALoginSinglePhase/MFALogin()_should_succeed_if_credentials_are_passed_in","Output":"--- PASS: TestAuth_MFALoginSinglePhase/MFALogin()_should_succeed_if_credentials_are_passed_in (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.410304342Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestAuth_MFALoginSinglePhase/MFALogin()_should_succeed_if_credentials_are_passed_in","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.410308384Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestAuth_MFALoginSinglePhase","Output":"--- PASS: TestAuth_MFALoginSinglePhase (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.410309759Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestAuth_MFALoginSinglePhase","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.410313634Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestAuth_MFALoginTwoPhase"}
+{"Time":"2026-10-29T06:11:51.410314717Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestAuth_MFALoginTwoPhase","Output":"=== RUN   TestAuth_MFALoginTwoPhase\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.410316134Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestAuth_MFALoginTwoPhase/return_MFARequirements"}
+{"Time":"2026-10-29T06:11:51.410317634Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestAuth_MFALoginTwoPhase/return_MFARequirements","Output":"=== RUN   TestAuth_MFALoginTwoPhase/return_MFARequirements\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.410319551Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestAuth_MFALoginTwoPhase/return_MFARequirements","Output":"--- PASS: TestAuth_MFALoginTwoPhase/return_MFARequirements (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.410321176Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestAuth_MFALoginTwoPhase/return_MFARequirements","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.410322676Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestAuth_MFALoginTwoPhase/error_if_no_MFARequirements"}
+{"Time":"2026-10-29T06:11:51.410323801Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestAuth_MFALoginTwoPhase/error_if_no_MFARequirements","Output":"=== RUN   TestAuth_MFALoginTwoPhase/error_if_no_MFARequirements\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.410326051Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestAuth_MFALoginTwoPhase/error_if_no_MFARequirements","Output":"--- PASS: TestAuth_MFALoginTwoPhase/error_if_no_MFARequirements (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.410327467Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestAuth_MFALoginTwoPhase/error_if_no_MFARequirements","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.410329467Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestAuth_MFALoginTwoPhase","Output":"--- PASS: TestAuth_MFALoginTwoPhase (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.410330801Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestAuth_MFALoginTwoPhase","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.410332217Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestDefaultConfig_envvar"}
+{"Time":"2026-10-29T06:11:51.410333342Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestDefaultConfig_envvar","Output":"=== RUN   TestDefaultConfig_envvar\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.410500092Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestDefaultConfig_envvar","Output":"--- PASS: TestDefaultConfig_envvar (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.410509884Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestDefaultConfig_envvar","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.410511926Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClientDefaultHttpClient"}
+{"Time":"2026-10-29T06:11:51.410513176Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientDefaultHttpClient","Output":"=== RUN   TestClientDefaultHttpClient\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.410515009Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientDefaultHttpClient","Output":"--- PASS: TestClientDefaultHttpClient (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.410520217Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClientDefaultHttpClient","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.410522426Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClientNilConfig"}
+{"Time":"2026-10-29T06:11:51.410523884Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientNilConfig","Output":"=== RUN   TestClientNilConfig\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.410525634Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientNilConfig","Output":"--- PASS: TestClientNilConfig (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.410527176Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClientNilConfig","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.410528342Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClientDefaultHttpClient_unixSocket"}
+{"Time":"2026-10-29T06:11:51.410529467Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientDefaultHttpClient_unixSocket","Output":"=== RUN   TestClientDefaultHttpClient_unixSocket\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.410531551Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientDefaultHttpClient_unixSocket","Output":"--- PASS: TestClientDefaultHttpClient_unixSocket (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.410533009Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClientDefaultHttpClient_unixSocket","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.410535342Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClientSetAddress"}
+{"Time":"2026-10-29T06:11:51.410536467Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientSetAddress","Output":"=== RUN   TestClientSetAddress\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.410538509Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientSetAddress","Output":"--- PASS: TestClientSetAddress (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.410539926Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClientSetAddress","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.410541134Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClientToken"}
+{"Time":"2026-10-29T06:11:51.410542426Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientToken","Output":"=== RUN   TestClientToken\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.413438592Z","Action":"output","Package":"github.com/hashicorp/vault/api/tokenhelper","Test":"TestExternalTokenHelper","Output":"--- PASS: TestExternalTokenHelper (0.01s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.413462509Z","Action":"pass","Package":"github.com/hashicorp/vault/api/tokenhelper","Test":"TestExternalTokenHelper","Elapsed":0.01}
+{"Time":"2026-10-29T06:11:51.413472092Z","Action":"run","Package":"github.com/hashicorp/vault/api/tokenhelper","Test":"TestExternalTokenHelperProcess"}
+{"Time":"2026-10-29T06:11:51.413473426Z","Action":"output","Package":"github.com/hashicorp/vault/api/tokenhelper","Test":"TestExternalTokenHelperProcess","Output":"=== RUN   TestExternalTokenHelperProcess\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.413476426Z","Action":"output","Package":"github.com/hashicorp/vault/api/tokenhelper","Test":"TestExternalTokenHelperProcess","Output":"--- PASS: TestExternalTokenHelperProcess (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.413477759Z","Action":"pass","Package":"github.com/hashicorp/vault/api/tokenhelper","Test":"TestExternalTokenHelperProcess","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.413480134Z","Action":"run","Package":"github.com/hashicorp/vault/api/tokenhelper","Test":"TestCommand"}
+{"Time":"2026-10-29T06:11:51.413482009Z","Action":"output","Package":"github.com/hashicorp/vault/api/tokenhelper","Test":"TestCommand","Output":"=== RUN   TestCommand\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.413536926Z","Action":"output","Package":"github.com/hashicorp/vault/api/tokenhelper","Test":"TestCommand","Output":"--- PASS: TestCommand (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.413585592Z","Action":"pass","Package":"github.com/hashicorp/vault/api/tokenhelper","Test":"TestCommand","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.413591967Z","Action":"run","Package":"github.com/hashicorp/vault/api/tokenhelper","Test":"TestInternalHelperFilePerms"}
+{"Time":"2026-10-29T06:11:51.413593217Z","Action":"output","Package":"github.com/hashicorp/vault/api/tokenhelper","Test":"TestInternalHelperFilePerms","Output":"=== RUN   TestInternalHelperFilePerms\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.413994509Z","Action":"output","Package":"github.com/hashicorp/vault/api/tokenhelper","Test":"TestInternalHelperFilePerms","Output":"--- PASS: TestInternalHelperFilePerms (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.414002592Z","Action":"pass","Package":"github.com/hashicorp/vault/api/tokenhelper","Test":"TestInternalHelperFilePerms","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.414004842Z","Action":"output","Package":"github.com/hashicorp/vault/api/tokenhelper","Output":"PASS\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.414407301Z","Action":"output","Package":"github.com/hashicorp/vault/api/tokenhelper","Output":"ok  \tgithub.com/hashicorp/vault/api/tokenhelper\t0.010s\n"}
+{"Time":"2026-10-29T06:11:51.414426717Z","Action":"pass","Package":"github.com/hashicorp/vault/api/tokenhelper","Elapsed":0.011}
+{"Time":"2026-10-29T06:11:51.427331384Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientToken","Output":"--- PASS: TestClientToken (0.02s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.427360884Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClientToken","Elapsed":0.02}
+{"Time":"2026-10-29T06:11:51.427366176Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClientHostHeader"}
+{"Time":"2026-10-29T06:11:51.427367676Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientHostHeader","Output":"=== RUN   TestClientHostHeader\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.430290301Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientHostHeader","Output":"--- PASS: TestClientHostHeader (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.430322342Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClientHostHeader","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.430327509Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClientBadToken"}
+{"Time":"2026-10-29T06:11:51.430329176Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientBadToken","Output":"=== RUN   TestClientBadToken\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.431741342Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientBadToken","Output":"--- PASS: TestClientBadToken (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.431792134Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClientBadToken","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.431799926Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects"}
+{"Time":"2026-10-29T06:11:51.431802551Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects","Output":"=== RUN   TestClientDisableRedirects\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.431815134Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Disabled_redirects:_Moved_permanently"}
+{"Time":"2026-10-29T06:11:51.431834967Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Disabled_redirects:_Moved_permanently","Output":"=== RUN   TestClientDisableRedirects/Disabled_redirects:_Moved_permanently\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.431848217Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Disabled_redirects:_Moved_permanently","Output":"=== PAUSE TestClientDisableRedirects/Disabled_redirects:_Moved_permanently\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.431851051Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Disabled_redirects:_Moved_permanently"}
+{"Time":"2026-10-29T06:11:51.431857592Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Disabled_redirects:_Found"}
+{"Time":"2026-10-29T06:11:51.431860134Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Disabled_redirects:_Found","Output":"=== RUN   TestClientDisableRedirects/Disabled_redirects:_Found\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.431863884Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Disabled_redirects:_Found","Output":"=== PAUSE TestClientDisableRedirects/Disabled_redirects:_Found\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.431866759Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Disabled_redirects:_Found"}
+{"Time":"2026-10-29T06:11:51.431870342Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Disabled_redirects:_Temporary_Redirect"}
+{"Time":"2026-10-29T06:11:51.431873426Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Disabled_redirects:_Temporary_Redirect","Output":"=== RUN   TestClientDisableRedirects/Disabled_redirects:_Temporary_Redirect\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.431878009Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Disabled_redirects:_Temporary_Redirect","Output":"=== PAUSE TestClientDisableRedirects/Disabled_redirects:_Temporary_Redirect\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.431892634Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Disabled_redirects:_Temporary_Redirect"}
+{"Time":"2026-10-29T06:11:51.431903551Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Enable_redirects:_Moved_permanently"}
+{"Time":"2026-10-29T06:11:51.431907301Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Enable_redirects:_Moved_permanently","Output":"=== RUN   TestClientDisableRedirects/Enable_redirects:_Moved_permanently\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.431911801Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Enable_redirects:_Moved_permanently","Output":"=== PAUSE TestClientDisableRedirects/Enable_redirects:_Moved_permanently\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.431914426Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Enable_redirects:_Moved_permanently"}
+{"Time":"2026-10-29T06:11:51.431917384Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Disabled_redirects:_Moved_permanently"}
+{"Time":"2026-10-29T06:11:51.431920009Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Disabled_redirects:_Moved_permanently","Output":"=== CONT  TestClientDisableRedirects/Disabled_redirects:_Moved_permanently\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.431945842Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Disabled_redirects:_Temporary_Redirect"}
+{"Time":"2026-10-29T06:11:51.431952426Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Disabled_redirects:_Temporary_Redirect","Output":"=== CONT  TestClientDisableRedirects/Disabled_redirects:_Temporary_Redirect\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.431959092Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Disabled_redirects:_Found"}
+{"Time":"2026-10-29T06:11:51.431961509Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Disabled_redirects:_Found","Output":"=== CONT  TestClientDisableRedirects/Disabled_redirects:_Found\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.433167884Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Disabled_redirects:_Moved_permanently","Output":"--- PASS: TestClientDisableRedirects/Disabled_redirects:_Moved_permanently (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.433230301Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Disabled_redirects:_Moved_permanently","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.433241676Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Enable_redirects:_Moved_permanently"}
+{"Time":"2026-10-29T06:11:51.433245676Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Enable_redirects:_Moved_permanently","Output":"=== CONT  TestClientDisableRedirects/Enable_redirects:_Moved_permanently\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.433252759Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Disabled_redirects:_Temporary_Redirect","Output":"--- PASS: TestClientDisableRedirects/Disabled_redirects:_Temporary_Redirect (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.433508176Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Disabled_redirects:_Temporary_Redirect","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.433547676Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Disabled_redirects:_Found","Output":"--- PASS: TestClientDisableRedirects/Disabled_redirects:_Found (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.434386551Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Disabled_redirects:_Found","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.434404551Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Enable_redirects:_Moved_permanently","Output":"--- PASS: TestClientDisableRedirects/Enable_redirects:_Moved_permanently (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.434408926Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects/Enable_redirects:_Moved_permanently","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.434410551Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects","Output":"--- PASS: TestClientDisableRedirects (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.434412301Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClientDisableRedirects","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.434415467Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClientRedirect"}
+{"Time":"2026-10-29T06:11:51.434417342Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientRedirect","Output":"=== RUN   TestClientRedirect\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.436639426Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientRedirect","Output":"--- PASS: TestClientRedirect (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.436686134Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClientRedirect","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.436694176Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy"}
+{"Time":"2026-10-29T06:11:51.436696759Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy","Output":"=== RUN   TestDefaulRetryPolicy\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.436700217Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy/don't_retry_on_200"}
+{"Time":"2026-10-29T06:11:51.436703592Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy/don't_retry_on_200","Output":"=== RUN   TestDefaulRetryPolicy/don't_retry_on_200\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.436714301Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy/don't_retry_on_200","Output":"--- PASS: TestDefaulRetryPolicy/don't_retry_on_200 (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.436718134Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy/don't_retry_on_200","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.436721259Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy/don't_retry_on_4xx"}
+{"Time":"2026-10-29T06:11:51.436723551Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy/don't_retry_on_4xx","Output":"=== RUN   TestDefaulRetryPolicy/don't_retry_on_4xx\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.436727342Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy/don't_retry_on_4xx","Output":"--- PASS: TestDefaulRetryPolicy/don't_retry_on_4xx (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.436730342Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy/don't_retry_on_4xx","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.436733134Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy/don't_retry_on_501"}
+{"Time":"2026-10-29T06:11:51.436735551Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy/don't_retry_on_501","Output":"=== RUN   TestDefaulRetryPolicy/don't_retry_on_501\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.436739134Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy/don't_retry_on_501","Output":"--- PASS: TestDefaulRetryPolicy/don't_retry_on_501 (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.436742134Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy/don't_retry_on_501","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.436744801Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy/retry_on_500"}
+{"Time":"2026-10-29T06:11:51.436747217Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy/retry_on_500","Output":"=== RUN   TestDefaulRetryPolicy/retry_on_500\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.436750759Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy/retry_on_500","Output":"--- PASS: TestDefaulRetryPolicy/retry_on_500 (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.436753634Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy/retry_on_500","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.436756134Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy/retry_on_5xx"}
+{"Time":"2026-10-29T06:11:51.436758384Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy/retry_on_5xx","Output":"=== RUN   TestDefaulRetryPolicy/retry_on_5xx\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.436765342Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy/retry_on_5xx","Output":"--- PASS: TestDefaulRetryPolicy/retry_on_5xx (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.436768551Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy/retry_on_5xx","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.436771301Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy/retry_on_error"}
+{"Time":"2026-10-29T06:11:51.436773634Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy/retry_on_error","Output":"=== RUN   TestDefaulRetryPolicy/retry_on_error\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.436776967Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy/retry_on_error","Output":"--- PASS: TestDefaulRetryPolicy/retry_on_error (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.436779926Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy/retry_on_error","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.436782634Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy/don't_retry_connection_failures"}
+{"Time":"2026-10-29T06:11:51.436785051Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy/don't_retry_connection_failures","Output":"=== RUN   TestDefaulRetryPolicy/don't_retry_connection_failures\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.436790301Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy/don't_retry_connection_failures","Output":"--- PASS: TestDefaulRetryPolicy/don't_retry_connection_failures (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.436793342Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy/don't_retry_connection_failures","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.436796551Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy","Output":"--- PASS: TestDefaulRetryPolicy (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.436799426Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestDefaulRetryPolicy","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.436822384Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClientEnvHeaders"}
+{"Time":"2026-10-29T06:11:51.436826759Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientEnvHeaders","Output":"=== RUN   TestClientEnvHeaders\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.436835092Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientEnvHeaders","Output":"--- PASS: TestClientEnvHeaders (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.436838217Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClientEnvHeaders","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.436841301Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClientEnvSettings"}
+{"Time":"2026-10-29T06:11:51.436844009Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientEnvSettings","Output":"=== RUN   TestClientEnvSettings\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.437995551Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientEnvSettings","Output":"--- PASS: TestClientEnvSettings (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.438046259Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClientEnvSettings","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.438053717Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClientDeprecatedEnvSettings"}
+{"Time":"2026-10-29T06:11:51.438056384Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientDeprecatedEnvSettings","Output":"=== RUN   TestClientDeprecatedEnvSettings\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.438061342Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientDeprecatedEnvSettings","Output":"--- PASS: TestClientDeprecatedEnvSettings (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.438064759Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClientDeprecatedEnvSettings","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.438069592Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClientEnvNamespace"}
+{"Time":"2026-10-29T06:11:51.438071884Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientEnvNamespace","Output":"=== RUN   TestClientEnvNamespace\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.439083051Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientEnvNamespace","Output":"--- PASS: TestClientEnvNamespace (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.439123217Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClientEnvNamespace","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.439131676Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestParsingRateAndBurst"}
+{"Time":"2026-10-29T06:11:51.439134342Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestParsingRateAndBurst","Output":"=== RUN   TestParsingRateAndBurst\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.439138884Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestParsingRateAndBurst","Output":"--- PASS: TestParsingRateAndBurst (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.439141842Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestParsingRateAndBurst","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.439147634Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestParsingRateOnly"}
+{"Time":"2026-10-29T06:11:51.439151342Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestParsingRateOnly","Output":"=== RUN   TestParsingRateOnly\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.439155176Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestParsingRateOnly","Output":"--- PASS: TestParsingRateOnly (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.439158051Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestParsingRateOnly","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.439160884Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestParsingErrorCase"}
+{"Time":"2026-10-29T06:11:51.439163217Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestParsingErrorCase","Output":"=== RUN   TestParsingErrorCase\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.439166759Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestParsingErrorCase","Output":"--- PASS: TestParsingErrorCase (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.439169551Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestParsingErrorCase","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.439172134Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClientTimeoutSetting"}
+{"Time":"2026-10-29T06:11:51.439174301Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientTimeoutSetting","Output":"=== RUN   TestClientTimeoutSetting\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.439177801Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientTimeoutSetting","Output":"--- PASS: TestClientTimeoutSetting (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.439180592Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClientTimeoutSetting","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.439183259Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClientNonTransportRoundTripper"}
+{"Time":"2026-10-29T06:11:51.439185551Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientNonTransportRoundTripper","Output":"=== RUN   TestClientNonTransportRoundTripper\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.439190217Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientNonTransportRoundTripper","Output":"--- PASS: TestClientNonTransportRoundTripper (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.439209301Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClientNonTransportRoundTripper","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.439213217Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClientNonTransportRoundTripperUnixAddress"}
+{"Time":"2026-10-29T06:11:51.439215676Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientNonTransportRoundTripperUnixAddress","Output":"=== RUN   TestClientNonTransportRoundTripperUnixAddress\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.439302759Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientNonTransportRoundTripperUnixAddress","Output":"--- PASS: TestClientNonTransportRoundTripperUnixAddress (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.439331384Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClientNonTransportRoundTripperUnixAddress","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.439338467Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClone"}
+{"Time":"2026-10-29T06:11:51.439341009Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClone","Output":"=== RUN   TestClone\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.439347217Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClone/default"}
+{"Time":"2026-10-29T06:11:51.439349509Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClone/default","Output":"=== RUN   TestClone/default\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.439545592Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClone/default","Output":"--- PASS: TestClone/default (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.439562134Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClone/default","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.439564884Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClone/cloneHeaders"}
+{"Time":"2026-10-29T06:11:51.439566259Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClone/cloneHeaders","Output":"=== RUN   TestClone/cloneHeaders\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.439587384Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClone/cloneHeaders","Output":"--- PASS: TestClone/cloneHeaders (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.439696759Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClone/cloneHeaders","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.439705884Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClone/preventStaleReads"}
+{"Time":"2026-10-29T06:11:51.439707426Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClone/preventStaleReads","Output":"=== RUN   TestClone/preventStaleReads\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.439710009Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClone/preventStaleReads","Output":"--- PASS: TestClone/preventStaleReads (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.439711301Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClone/preventStaleReads","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.439712842Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClone/cloneToken"}
+{"Time":"2026-10-29T06:11:51.439713884Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClone/cloneToken","Output":"=== RUN   TestClone/cloneToken\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.439719009Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClone/cloneToken","Output":"--- PASS: TestClone/cloneToken (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.439720384Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClone/cloneToken","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.439733717Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClone/cloneTLSConfig-enabled"}
+{"Time":"2026-10-29T06:11:51.439735051Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClone/cloneTLSConfig-enabled","Output":"=== RUN   TestClone/cloneTLSConfig-enabled\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.439791092Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClone/cloneTLSConfig-enabled","Output":"--- PASS: TestClone/cloneTLSConfig-enabled (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.439798134Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClone/cloneTLSConfig-enabled","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.439800342Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClone/cloneTLSConfig-disabled"}
+{"Time":"2026-10-29T06:11:51.439801801Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClone/cloneTLSConfig-disabled","Output":"=== RUN   TestClone/cloneTLSConfig-disabled\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.439854259Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClone/cloneTLSConfig-disabled","Output":"--- PASS: TestClone/cloneTLSConfig-disabled (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.439859259Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClone/cloneTLSConfig-disabled","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.439861467Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClone","Output":"--- PASS: TestClone (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.439863842Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClone","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.439865176Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestCloneWithHeadersNoDeadlock"}
+{"Time":"2026-10-29T06:11:51.439866384Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestCloneWithHeadersNoDeadlock","Output":"=== RUN   TestCloneWithHeadersNoDeadlock\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.451701217Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestCloneWithHeadersNoDeadlock","Output":"--- PASS: TestCloneWithHeadersNoDeadlock (0.01s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.451760759Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestCloneWithHeadersNoDeadlock","Elapsed":0.01}
+{"Time":"2026-10-29T06:11:51.451771801Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestCloneNoDeadlock"}
+{"Time":"2026-10-29T06:11:51.451778384Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestCloneNoDeadlock","Output":"=== RUN   TestCloneNoDeadlock\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.457867926Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestCloneNoDeadlock","Output":"--- PASS: TestCloneNoDeadlock (0.01s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.457922467Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestCloneNoDeadlock","Elapsed":0.01}
+{"Time":"2026-10-29T06:11:51.457933592Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestSetHeadersRaceSafe"}
+{"Time":"2026-10-29T06:11:51.457936259Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestSetHeadersRaceSafe","Output":"=== RUN   TestSetHeadersRaceSafe\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.457949134Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestSetHeadersRaceSafe","Output":"--- PASS: TestSetHeadersRaceSafe (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.457953134Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestSetHeadersRaceSafe","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.457956259Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates"}
+{"Time":"2026-10-29T06:11:51.457958676Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates","Output":"=== RUN   TestMergeReplicationStates\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.457961717Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates/empty-old"}
+{"Time":"2026-10-29T06:11:51.457965134Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates/empty-old","Output":"=== RUN   TestMergeReplicationStates/empty-old\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.457977051Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates/empty-old","Output":"--- PASS: TestMergeReplicationStates/empty-old (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.457980509Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates/empty-old","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.457983301Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates/old-smaller"}
+{"Time":"2026-10-29T06:11:51.457985759Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates/old-smaller","Output":"=== RUN   TestMergeReplicationStates/old-smaller\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.457989967Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates/old-smaller","Output":"--- PASS: TestMergeReplicationStates/old-smaller (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.457993384Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates/old-smaller","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.457999884Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates/old-bigger"}
+{"Time":"2026-10-29T06:11:51.458002467Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates/old-bigger","Output":"=== RUN   TestMergeReplicationStates/old-bigger\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.458006342Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates/old-bigger","Output":"--- PASS: TestMergeReplicationStates/old-bigger (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.458009676Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates/old-bigger","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.458015301Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates/mixed-single"}
+{"Time":"2026-10-29T06:11:51.458020134Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates/mixed-single","Output":"=== RUN   TestMergeReplicationStates/mixed-single\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.458025301Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates/mixed-single","Output":"--- PASS: TestMergeReplicationStates/mixed-single (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.458028676Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates/mixed-single","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.458032301Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates/mixed-single-alt"}
+{"Time":"2026-10-29T06:11:51.458035259Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates/mixed-single-alt","Output":"=== RUN   TestMergeReplicationStates/mixed-single-alt\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.458039759Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates/mixed-single-alt","Output":"--- PASS: TestMergeReplicationStates/mixed-single-alt (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.458055426Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates/mixed-single-alt","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.458059342Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates/mixed-double"}
+{"Time":"2026-10-29T06:11:51.458061926Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates/mixed-double","Output":"=== RUN   TestMergeReplicationStates/mixed-double\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.458066134Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates/mixed-double","Output":"--- PASS: TestMergeReplicationStates/mixed-double (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.458069092Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates/mixed-double","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.458071759Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates/newer-both"}
+{"Time":"2026-10-29T06:11:51.458074217Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates/newer-both","Output":"=== RUN   TestMergeReplicationStates/newer-both\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.458082509Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates/newer-both","Output":"--- PASS: TestMergeReplicationStates/newer-both (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.458089551Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates/newer-both","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.458097134Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates","Output":"--- PASS: TestMergeReplicationStates (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.458113384Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestMergeReplicationStates","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.458117009Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_recordState"}
+{"Time":"2026-10-29T06:11:51.458119342Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_recordState","Output":"=== RUN   TestReplicationStateStore_recordState\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.458122842Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_recordState/single"}
+{"Time":"2026-10-29T06:11:51.458125176Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_recordState/single","Output":"=== RUN   TestReplicationStateStore_recordState/single\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.458129134Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_recordState/single","Output":"--- PASS: TestReplicationStateStore_recordState/single (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.458132384Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_recordState/single","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.458136676Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_recordState/empty"}
+{"Time":"2026-10-29T06:11:51.458139092Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_recordState/empty","Output":"=== RUN   TestReplicationStateStore_recordState/empty\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.458142926Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_recordState/empty","Output":"--- PASS: TestReplicationStateStore_recordState/empty (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.458146134Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_recordState/empty","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.458148676Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_recordState/multiple"}
+{"Time":"2026-10-29T06:11:51.458150967Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_recordState/multiple","Output":"=== RUN   TestReplicationStateStore_recordState/multiple\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.458154801Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_recordState/multiple","Output":"--- PASS: TestReplicationStateStore_recordState/multiple (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.458158259Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_recordState/multiple","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.458163051Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_recordState/duplicates"}
+{"Time":"2026-10-29T06:11:51.458166384Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_recordState/duplicates","Output":"=== RUN   TestReplicationStateStore_recordState/duplicates\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.458170426Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_recordState/duplicates","Output":"--- PASS: TestReplicationStateStore_recordState/duplicates (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.458182092Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_recordState/duplicates","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.458186301Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_recordState","Output":"--- PASS: TestReplicationStateStore_recordState (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.458189801Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_recordState","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.458192426Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_requireState"}
+{"Time":"2026-10-29T06:11:51.458194676Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_requireState","Output":"=== RUN   TestReplicationStateStore_requireState\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.458197842Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_requireState/empty"}
+{"Time":"2026-10-29T06:11:51.458200342Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_requireState/empty","Output":"=== RUN   TestReplicationStateStore_requireState/empty\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.458204842Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_requireState/empty","Output":"--- PASS: TestReplicationStateStore_requireState/empty (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.458212884Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_requireState/empty","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.458229051Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_requireState/basic"}
+{"Time":"2026-10-29T06:11:51.458233384Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_requireState/basic","Output":"=== RUN   TestReplicationStateStore_requireState/basic\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.458238551Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_requireState/basic","Output":"--- PASS: TestReplicationStateStore_requireState/basic (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.458252801Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_requireState/basic","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.458257884Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_requireState","Output":"--- PASS: TestReplicationStateStore_requireState (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.458261592Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestReplicationStateStore_requireState","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.458264842Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClient_ReadYourWrites"}
+{"Time":"2026-10-29T06:11:51.458267467Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClient_ReadYourWrites","Output":"=== RUN   TestClient_ReadYourWrites\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.458270634Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClient_ReadYourWrites/multiple_duplicates"}
+{"Time":"2026-10-29T06:11:51.458277592Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClient_ReadYourWrites/multiple_duplicates","Output":"=== RUN   TestClient_ReadYourWrites/multiple_duplicates\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.459925426Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClient_ReadYourWrites/multiple_duplicates","Output":"--- PASS: TestClient_ReadYourWrites/multiple_duplicates (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.459995467Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClient_ReadYourWrites/multiple_duplicates","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.460004384Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClient_ReadYourWrites/basic_clone"}
+{"Time":"2026-10-29T06:11:51.460006301Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClient_ReadYourWrites/basic_clone","Output":"=== RUN   TestClient_ReadYourWrites/basic_clone\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.460780509Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClient_ReadYourWrites/basic_clone","Output":"--- PASS: TestClient_ReadYourWrites/basic_clone (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.460795176Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClient_ReadYourWrites/basic_clone","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.460797801Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClient_ReadYourWrites/multiple_clone"}
+{"Time":"2026-10-29T06:11:51.460799092Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClient_ReadYourWrites/multiple_clone","Output":"=== RUN   TestClient_ReadYourWrites/multiple_clone\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.461305259Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClient_ReadYourWrites/multiple_clone","Output":"--- PASS: TestClient_ReadYourWrites/multiple_clone (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.461325342Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClient_ReadYourWrites/multiple_clone","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.461328842Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClient_ReadYourWrites/multiple_duplicates_clone"}
+{"Time":"2026-10-29T06:11:51.461330842Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClient_ReadYourWrites/multiple_duplicates_clone","Output":"=== RUN   TestClient_ReadYourWrites/multiple_duplicates_clone\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.462194051Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClient_ReadYourWrites/multiple_duplicates_clone","Output":"--- PASS: TestClient_ReadYourWrites/multiple_duplicates_clone (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.462211426Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClient_ReadYourWrites/multiple_duplicates_clone","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.462214967Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClient_ReadYourWrites","Output":"--- PASS: TestClient_ReadYourWrites (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.462217717Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClient_ReadYourWrites","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.462219259Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetReadYourWrites"}
+{"Time":"2026-10-29T06:11:51.462221051Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetReadYourWrites","Output":"=== RUN   TestClient_SetReadYourWrites\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.462222634Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetReadYourWrites/false"}
+{"Time":"2026-10-29T06:11:51.462224009Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetReadYourWrites/false","Output":"=== RUN   TestClient_SetReadYourWrites/false\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.462226384Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetReadYourWrites/false","Output":"--- PASS: TestClient_SetReadYourWrites/false (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.462227884Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetReadYourWrites/false","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.462229134Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetReadYourWrites/true"}
+{"Time":"2026-10-29T06:11:51.462230217Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetReadYourWrites/true","Output":"=== RUN   TestClient_SetReadYourWrites/true\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.462231759Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetReadYourWrites/true","Output":"--- PASS: TestClient_SetReadYourWrites/true (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.462233009Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetReadYourWrites/true","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.462234259Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetReadYourWrites/multi-false"}
+{"Time":"2026-10-29T06:11:51.462235342Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetReadYourWrites/multi-false","Output":"=== RUN   TestClient_SetReadYourWrites/multi-false\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.462248634Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetReadYourWrites/multi-false","Output":"--- PASS: TestClient_SetReadYourWrites/multi-false (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.462250467Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetReadYourWrites/multi-false","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.462251926Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetReadYourWrites/multi-true"}
+{"Time":"2026-10-29T06:11:51.462253009Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetReadYourWrites/multi-true","Output":"=== RUN   TestClient_SetReadYourWrites/multi-true\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.462254592Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetReadYourWrites/multi-true","Output":"--- PASS: TestClient_SetReadYourWrites/multi-true (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.462256384Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetReadYourWrites/multi-true","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.462257509Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetReadYourWrites/multi-mix"}
+{"Time":"2026-10-29T06:11:51.462261134Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetReadYourWrites/multi-mix","Output":"=== RUN   TestClient_SetReadYourWrites/multi-mix\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.462262801Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetReadYourWrites/multi-mix","Output":"--- PASS: TestClient_SetReadYourWrites/multi-mix (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.462264134Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetReadYourWrites/multi-mix","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.462266176Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetReadYourWrites","Output":"--- PASS: TestClient_SetReadYourWrites (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.462267426Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetReadYourWrites","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.462268676Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetCloneToken"}
+{"Time":"2026-10-29T06:11:51.462269676Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetCloneToken","Output":"=== RUN   TestClient_SetCloneToken\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.462271384Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetCloneToken/false"}
+{"Time":"2026-10-29T06:11:51.462272426Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetCloneToken/false","Output":"=== RUN   TestClient_SetCloneToken/false\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.462273967Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetCloneToken/false","Output":"--- PASS: TestClient_SetCloneToken/false (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.462275301Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetCloneToken/false","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.462276426Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetCloneToken/true"}
+{"Time":"2026-10-29T06:11:51.462277467Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetCloneToken/true","Output":"=== RUN   TestClient_SetCloneToken/true\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.462281967Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetCloneToken/true","Output":"--- PASS: TestClient_SetCloneToken/true (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.462283426Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetCloneToken/true","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.462284551Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetCloneToken/multi"}
+{"Time":"2026-10-29T06:11:51.462285592Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetCloneToken/multi","Output":"=== RUN   TestClient_SetCloneToken/multi\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.462287051Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetCloneToken/multi","Output":"--- PASS: TestClient_SetCloneToken/multi (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.462288301Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetCloneToken/multi","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.462290426Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetCloneToken","Output":"--- PASS: TestClient_SetCloneToken (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.462291801Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClient_SetCloneToken","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.462292967Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestClientWithNamespace"}
+{"Time":"2026-10-29T06:11:51.462294009Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientWithNamespace","Output":"=== RUN   TestClientWithNamespace\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.462652759Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestClientWithNamespace","Output":"--- PASS: TestClientWithNamespace (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.462664634Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestClientWithNamespace","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.462667384Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestVaultProxy"}
+{"Time":"2026-10-29T06:11:51.462669134Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestVaultProxy","Output":"=== RUN   TestVaultProxy\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.462671342Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestVaultProxy/VAULT_HTTP_PROXY_used_when_NO_PROXY_env_var_doesn't_include_request_host"}
+{"Time":"2026-10-29T06:11:51.462673301Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestVaultProxy/VAULT_HTTP_PROXY_used_when_NO_PROXY_env_var_doesn't_include_request_host","Output":"=== RUN   TestVaultProxy/VAULT_HTTP_PROXY_used_when_NO_PROXY_env_var_doesn't_include_request_host\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.462676384Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestVaultProxy/VAULT_HTTP_PROXY_used_when_NO_PROXY_env_var_doesn't_include_request_host","Output":"--- PASS: TestVaultProxy/VAULT_HTTP_PROXY_used_when_NO_PROXY_env_var_doesn't_include_request_host (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.462678217Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestVaultProxy/VAULT_HTTP_PROXY_used_when_NO_PROXY_env_var_doesn't_include_request_host","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.462679509Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestVaultProxy/VAULT_HTTP_PROXY_used_when_NO_PROXY_env_var_includes_request_host"}
+{"Time":"2026-10-29T06:11:51.462680842Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestVaultProxy/VAULT_HTTP_PROXY_used_when_NO_PROXY_env_var_includes_request_host","Output":"=== RUN   TestVaultProxy/VAULT_HTTP_PROXY_used_when_NO_PROXY_env_var_includes_request_host\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.462889509Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestVaultProxy/VAULT_HTTP_PROXY_used_when_NO_PROXY_env_var_includes_request_host","Output":"--- PASS: TestVaultProxy/VAULT_HTTP_PROXY_used_when_NO_PROXY_env_var_includes_request_host (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.463039217Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestVaultProxy/VAULT_HTTP_PROXY_used_when_NO_PROXY_env_var_includes_request_host","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.463045634Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestVaultProxy/VAULT_PROXY_ADDR_used_when_NO_PROXY_env_var_doesn't_include_request_host"}
+{"Time":"2026-10-29T06:11:51.463047259Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestVaultProxy/VAULT_PROXY_ADDR_used_when_NO_PROXY_env_var_doesn't_include_request_host","Output":"=== RUN   TestVaultProxy/VAULT_PROXY_ADDR_used_when_NO_PROXY_env_var_doesn't_include_request_host\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.463050634Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestVaultProxy/VAULT_PROXY_ADDR_used_when_NO_PROXY_env_var_doesn't_include_request_host","Output":"--- PASS: TestVaultProxy/VAULT_PROXY_ADDR_used_when_NO_PROXY_env_var_doesn't_include_request_host (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.463052176Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestVaultProxy/VAULT_PROXY_ADDR_used_when_NO_PROXY_env_var_doesn't_include_request_host","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.463053759Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestVaultProxy/VAULT_PROXY_ADDR_used_when_NO_PROXY_env_var_includes_request_host"}
+{"Time":"2026-10-29T06:11:51.463054967Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestVaultProxy/VAULT_PROXY_ADDR_used_when_NO_PROXY_env_var_includes_request_host","Output":"=== RUN   TestVaultProxy/VAULT_PROXY_ADDR_used_when_NO_PROXY_env_var_includes_request_host\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.463056926Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestVaultProxy/VAULT_PROXY_ADDR_used_when_NO_PROXY_env_var_includes_request_host","Output":"--- PASS: TestVaultProxy/VAULT_PROXY_ADDR_used_when_NO_PROXY_env_var_includes_request_host (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.463058342Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestVaultProxy/VAULT_PROXY_ADDR_used_when_NO_PROXY_env_var_includes_request_host","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.463059551Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestVaultProxy/VAULT_PROXY_ADDR_used_when_VAULT_HTTP_PROXY_env_var_also_supplied"}
+{"Time":"2026-10-29T06:11:51.463060717Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestVaultProxy/VAULT_PROXY_ADDR_used_when_VAULT_HTTP_PROXY_env_var_also_supplied","Output":"=== RUN   TestVaultProxy/VAULT_PROXY_ADDR_used_when_VAULT_HTTP_PROXY_env_var_also_supplied\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.463702926Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestVaultProxy/VAULT_PROXY_ADDR_used_when_VAULT_HTTP_PROXY_env_var_also_supplied","Output":"--- PASS: TestVaultProxy/VAULT_PROXY_ADDR_used_when_VAULT_HTTP_PROXY_env_var_also_supplied (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.463753801Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestVaultProxy/VAULT_PROXY_ADDR_used_when_VAULT_HTTP_PROXY_env_var_also_supplied","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.463762176Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestVaultProxy","Output":"--- PASS: TestVaultProxy (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.463764134Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestVaultProxy","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.463775092Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestParseAddressWithUnixSocket"}
+{"Time":"2026-10-29T06:11:51.463776426Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestParseAddressWithUnixSocket","Output":"=== RUN   TestParseAddressWithUnixSocket\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.463778551Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestParseAddressWithUnixSocket","Output":"--- PASS: TestParseAddressWithUnixSocket (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.463781884Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestParseAddressWithUnixSocket","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.463783259Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestExtractVersionMetadata"}
+{"Time":"2026-10-29T06:11:51.463784301Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestExtractVersionMetadata","Output":"=== RUN   TestExtractVersionMetadata\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.463786051Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestExtractVersionMetadata","Output":"=== PAUSE TestExtractVersionMetadata\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.463787092Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"TestExtractVersionMetadata"}
+{"Time":"2026-10-29T06:11:51.463788301Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestExtractDataAndVersionMetadata"}
+{"Time":"2026-10-29T06:11:51.463789384Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestExtractDataAndVersionMetadata","Output":"=== RUN   TestExtractDataAndVersionMetadata\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.463790842Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestExtractDataAndVersionMetadata","Output":"=== PAUSE TestExtractDataAndVersionMetadata\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.463791926Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"TestExtractDataAndVersionMetadata"}
+{"Time":"2026-10-29T06:11:51.463827926Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestExtractFullMetadata"}
+{"Time":"2026-10-29T06:11:51.463830259Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestExtractFullMetadata","Output":"=== RUN   TestExtractFullMetadata\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.463834551Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestExtractFullMetadata","Output":"--- PASS: TestExtractFullMetadata (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464032009Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestExtractFullMetadata","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.464040551Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestExtractCustomMetadata"}
+{"Time":"2026-10-29T06:11:51.464042217Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestExtractCustomMetadata","Output":"=== RUN   TestExtractCustomMetadata\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464044884Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestExtractCustomMetadata","Output":"--- PASS: TestExtractCustomMetadata (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464253551Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestExtractCustomMetadata","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.464264092Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher_SignalsReReadOfAgedLease"}
+{"Time":"2026-10-29T06:11:51.464265592Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher_SignalsReReadOfAgedLease","Output":"=== RUN   TestLifetimeWatcher_SignalsReReadOfAgedLease\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464268051Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher_SignalsReReadOfAgedLease","Output":"=== PAUSE TestLifetimeWatcher_SignalsReReadOfAgedLease\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464275759Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher_SignalsReReadOfAgedLease"}
+{"Time":"2026-10-29T06:11:51.464277384Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher_DoesNotRenewExpiredLease"}
+{"Time":"2026-10-29T06:11:51.464278467Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher_DoesNotRenewExpiredLease","Output":"=== RUN   TestLifetimeWatcher_DoesNotRenewExpiredLease\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464280301Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher_DoesNotRenewExpiredLease","Output":"=== PAUSE TestLifetimeWatcher_DoesNotRenewExpiredLease\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464281634Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher_DoesNotRenewExpiredLease"}
+{"Time":"2026-10-29T06:11:51.464282842Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease"}
+{"Time":"2026-10-29T06:11:51.464284217Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease","Output":"=== RUN   TestRemainingLease\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464287926Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease","Output":"=== PAUSE TestRemainingLease\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464308092Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease"}
+{"Time":"2026-10-29T06:11:51.464310884Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"Test_newLogicalRequest"}
+{"Time":"2026-10-29T06:11:51.464312134Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"Test_newLogicalRequest","Output":"=== RUN   Test_newLogicalRequest\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464314092Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"Test_newLogicalRequest","Output":"=== PAUSE Test_newLogicalRequest\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464315884Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"Test_newLogicalRequest"}
+{"Time":"2026-10-29T06:11:51.464317551Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"Test_defaultLogicalRequest"}
+{"Time":"2026-10-29T06:11:51.464319009Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"Test_defaultLogicalRequest","Output":"=== RUN   Test_defaultLogicalRequest\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464322467Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"Test_defaultLogicalRequest","Output":"=== PAUSE Test_defaultLogicalRequest\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464324176Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"Test_defaultLogicalRequest"}
+{"Time":"2026-10-29T06:11:51.464325467Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalReadRequest"}
+{"Time":"2026-10-29T06:11:51.464327259Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalReadRequest","Output":"=== RUN   TestNewLogicalReadRequest\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464329842Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalReadRequest","Output":"=== PAUSE TestNewLogicalReadRequest\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464331426Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalReadRequest"}
+{"Time":"2026-10-29T06:11:51.464333092Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalWriteRequest"}
+{"Time":"2026-10-29T06:11:51.464334551Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalWriteRequest","Output":"=== RUN   TestNewLogicalWriteRequest\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464361467Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalWriteRequest","Output":"=== PAUSE TestNewLogicalWriteRequest\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464364176Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalWriteRequest"}
+{"Time":"2026-10-29T06:11:51.464365592Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders"}
+{"Time":"2026-10-29T06:11:51.464366676Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders","Output":"=== RUN   TestLogical_addExtraHeaders\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464368092Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders","Output":"=== PAUSE TestLogical_addExtraHeaders\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464369092Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders"}
+{"Time":"2026-10-29T06:11:51.464370301Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestBuildSamplePolicy"}
+{"Time":"2026-10-29T06:11:51.464371342Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestBuildSamplePolicy","Output":"=== RUN   TestBuildSamplePolicy\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464372801Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestBuildSamplePolicy","Output":"=== PAUSE TestBuildSamplePolicy\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464373842Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"TestBuildSamplePolicy"}
+{"Time":"2026-10-29T06:11:51.464374967Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONRoundTrip"}
+{"Time":"2026-10-29T06:11:51.464375967Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONRoundTrip","Output":"=== RUN   TestPluginTypeJSONRoundTrip\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464379176Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONRoundTrip","Output":"--- PASS: TestPluginTypeJSONRoundTrip (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464380884Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONRoundTrip","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.464383467Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal"}
+{"Time":"2026-10-29T06:11:51.464384467Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal","Output":"=== RUN   TestPluginTypeJSONUnmarshal\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464385634Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/out_of_range"}
+{"Time":"2026-10-29T06:11:51.464460301Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/out_of_range","Output":"=== RUN   TestPluginTypeJSONUnmarshal/out_of_range\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464475884Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/out_of_range","Output":"--- PASS: TestPluginTypeJSONUnmarshal/out_of_range (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464480259Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/out_of_range","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.464485051Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/unsupported"}
+{"Time":"2026-10-29T06:11:51.464487592Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/unsupported","Output":"=== RUN   TestPluginTypeJSONUnmarshal/unsupported\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464491676Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/unsupported","Output":"--- PASS: TestPluginTypeJSONUnmarshal/unsupported (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464495009Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/unsupported","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.464497842Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/random_string"}
+{"Time":"2026-10-29T06:11:51.464500176Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/random_string","Output":"=== RUN   TestPluginTypeJSONUnmarshal/random_string\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464504301Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/random_string","Output":"--- PASS: TestPluginTypeJSONUnmarshal/random_string (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464507717Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/random_string","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.464510509Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/boolean"}
+{"Time":"2026-10-29T06:11:51.464514176Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/boolean","Output":"=== RUN   TestPluginTypeJSONUnmarshal/boolean\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464521842Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/boolean","Output":"--- PASS: TestPluginTypeJSONUnmarshal/boolean (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464525217Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/boolean","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.464527842Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/empty"}
+{"Time":"2026-10-29T06:11:51.464530134Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/empty","Output":"=== RUN   TestPluginTypeJSONUnmarshal/empty\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464534176Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/empty","Output":"--- PASS: TestPluginTypeJSONUnmarshal/empty (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464537259Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/empty","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.464544009Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/negative"}
+{"Time":"2026-10-29T06:11:51.464554676Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/negative","Output":"=== RUN   TestPluginTypeJSONUnmarshal/negative\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464559509Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/negative","Output":"--- PASS: TestPluginTypeJSONUnmarshal/negative (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464562592Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/negative","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.464571092Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/unknown"}
+{"Time":"2026-10-29T06:11:51.464583301Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/unknown","Output":"=== RUN   TestPluginTypeJSONUnmarshal/unknown\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464587967Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/unknown","Output":"--- PASS: TestPluginTypeJSONUnmarshal/unknown (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464594342Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/unknown","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.464597259Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/auth"}
+{"Time":"2026-10-29T06:11:51.464599676Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/auth","Output":"=== RUN   TestPluginTypeJSONUnmarshal/auth\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464603217Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/auth","Output":"--- PASS: TestPluginTypeJSONUnmarshal/auth (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464606134Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/auth","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.464608676Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/secret"}
+{"Time":"2026-10-29T06:11:51.464610884Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/secret","Output":"=== RUN   TestPluginTypeJSONUnmarshal/secret\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464614717Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/secret","Output":"--- PASS: TestPluginTypeJSONUnmarshal/secret (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464617676Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/secret","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.464620301Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/integer_auth"}
+{"Time":"2026-10-29T06:11:51.464622926Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/integer_auth","Output":"=== RUN   TestPluginTypeJSONUnmarshal/integer_auth\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464626676Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/integer_auth","Output":"--- PASS: TestPluginTypeJSONUnmarshal/integer_auth (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464630051Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/integer_auth","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.464632884Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/integer_secret"}
+{"Time":"2026-10-29T06:11:51.464638467Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/integer_secret","Output":"=== RUN   TestPluginTypeJSONUnmarshal/integer_secret\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464642301Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/integer_secret","Output":"--- PASS: TestPluginTypeJSONUnmarshal/integer_secret (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464645509Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/integer_secret","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.464648217Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/database"}
+{"Time":"2026-10-29T06:11:51.464650676Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/database","Output":"=== RUN   TestPluginTypeJSONUnmarshal/database\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464654259Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/database","Output":"--- PASS: TestPluginTypeJSONUnmarshal/database (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464695926Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/database","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.464705384Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/absent"}
+{"Time":"2026-10-29T06:11:51.464708467Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/absent","Output":"=== RUN   TestPluginTypeJSONUnmarshal/absent\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464714467Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/absent","Output":"--- PASS: TestPluginTypeJSONUnmarshal/absent (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464717884Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/absent","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.464720801Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/integer_unknown"}
+{"Time":"2026-10-29T06:11:51.464723467Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/integer_unknown","Output":"=== RUN   TestPluginTypeJSONUnmarshal/integer_unknown\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464727426Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/integer_unknown","Output":"--- PASS: TestPluginTypeJSONUnmarshal/integer_unknown (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464769176Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/integer_unknown","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.464774134Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/integer_db"}
+{"Time":"2026-10-29T06:11:51.464776884Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/integer_db","Output":"=== RUN   TestPluginTypeJSONUnmarshal/integer_db\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464780926Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/integer_db","Output":"--- PASS: TestPluginTypeJSONUnmarshal/integer_db (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464786759Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal/integer_db","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.464790801Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal","Output":"--- PASS: TestPluginTypeJSONUnmarshal (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464794092Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestPluginTypeJSONUnmarshal","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.464796884Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestUnknownTypeExcludedWithOmitEmpty"}
+{"Time":"2026-10-29T06:11:51.464799134Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUnknownTypeExcludedWithOmitEmpty","Output":"=== RUN   TestUnknownTypeExcludedWithOmitEmpty\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464803009Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUnknownTypeExcludedWithOmitEmpty","Output":"--- PASS: TestUnknownTypeExcludedWithOmitEmpty (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464806009Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestUnknownTypeExcludedWithOmitEmpty","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.464809009Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestRenewer_NewRenewer"}
+{"Time":"2026-10-29T06:11:51.464811259Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRenewer_NewRenewer","Output":"=== RUN   TestRenewer_NewRenewer\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464814509Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRenewer_NewRenewer","Output":"=== PAUSE TestRenewer_NewRenewer\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464817009Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"TestRenewer_NewRenewer"}
+{"Time":"2026-10-29T06:11:51.464819551Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher"}
+{"Time":"2026-10-29T06:11:51.464822259Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher","Output":"=== RUN   TestLifetimeWatcher\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464825301Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher","Output":"=== PAUSE TestLifetimeWatcher\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.464827634Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher"}
+{"Time":"2026-10-29T06:11:51.464834426Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestCalcSleepPeriod"}
+{"Time":"2026-10-29T06:11:51.464837801Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestCalcSleepPeriod","Output":"=== RUN   TestCalcSleepPeriod\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.472832967Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestCalcSleepPeriod","Output":"--- PASS: TestCalcSleepPeriod (0.01s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.472923301Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestCalcSleepPeriod","Elapsed":0.01}
+{"Time":"2026-10-29T06:11:51.472937176Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestRequestSetJSONBody"}
+{"Time":"2026-10-29T06:11:51.472940134Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRequestSetJSONBody","Output":"=== RUN   TestRequestSetJSONBody\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.472945967Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRequestSetJSONBody","Output":"--- PASS: TestRequestSetJSONBody (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.472949592Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestRequestSetJSONBody","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.472953384Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestRequestResetJSONBody"}
+{"Time":"2026-10-29T06:11:51.472955801Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRequestResetJSONBody","Output":"=== RUN   TestRequestResetJSONBody\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.472959634Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRequestResetJSONBody","Output":"--- PASS: TestRequestResetJSONBody (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.472962634Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestRequestResetJSONBody","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.472967717Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestSysRenew_PopulatesAgeFromCachedResponse"}
+{"Time":"2026-10-29T06:11:51.472970134Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestSysRenew_PopulatesAgeFromCachedResponse","Output":"=== RUN   TestSysRenew_PopulatesAgeFromCachedResponse\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.472974217Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestSysRenew_PopulatesAgeFromCachedResponse","Output":"=== PAUSE TestSysRenew_PopulatesAgeFromCachedResponse\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.472977051Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"TestSysRenew_PopulatesAgeFromCachedResponse"}
+{"Time":"2026-10-29T06:11:51.472980009Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestSysRenew_UncachedResponseHasNoAge"}
+{"Time":"2026-10-29T06:11:51.472982426Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestSysRenew_UncachedResponseHasNoAge","Output":"=== RUN   TestSysRenew_UncachedResponseHasNoAge\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.472986051Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestSysRenew_UncachedResponseHasNoAge","Output":"=== PAUSE TestSysRenew_UncachedResponseHasNoAge\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.472988592Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"TestSysRenew_UncachedResponseHasNoAge"}
+{"Time":"2026-10-29T06:11:51.472992426Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestTokenPolicies"}
+{"Time":"2026-10-29T06:11:51.472995217Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestTokenPolicies","Output":"=== RUN   TestTokenPolicies\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.472998926Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestTokenPolicies","Output":"--- PASS: TestTokenPolicies (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.473001926Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestTokenPolicies","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.473011301Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestSSH_CannotLoadDuplicateKeys"}
+{"Time":"2026-10-29T06:11:51.473013926Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestSSH_CannotLoadDuplicateKeys","Output":"=== RUN   TestSSH_CannotLoadDuplicateKeys\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.473021717Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestSSH_CannotLoadDuplicateKeys","Output":"--- PASS: TestSSH_CannotLoadDuplicateKeys (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.473033842Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestSSH_CannotLoadDuplicateKeys","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.473037551Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestSSH_CreateTLSClient"}
+{"Time":"2026-10-29T06:11:51.473039884Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestSSH_CreateTLSClient","Output":"=== RUN   TestSSH_CreateTLSClient\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.473343342Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestSSH_CreateTLSClient","Output":"--- PASS: TestSSH_CreateTLSClient (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.473367009Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestSSH_CreateTLSClient","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.473372634Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestSSH_CreateTLSClient_tlsServerName"}
+{"Time":"2026-10-29T06:11:51.473475926Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestSSH_CreateTLSClient_tlsServerName","Output":"=== RUN   TestSSH_CreateTLSClient_tlsServerName\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.473486592Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestSSH_CreateTLSClient_tlsServerName","Output":"--- PASS: TestSSH_CreateTLSClient_tlsServerName (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.473490342Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestSSH_CreateTLSClient_tlsServerName","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.473493842Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestParseSSHHelperConfig"}
+{"Time":"2026-10-29T06:11:51.473496342Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestParseSSHHelperConfig","Output":"=== RUN   TestParseSSHHelperConfig\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.473500301Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestParseSSHHelperConfig","Output":"--- PASS: TestParseSSHHelperConfig (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.473503467Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestParseSSHHelperConfig","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.473506884Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestParseSSHHelperConfig_missingVaultAddr"}
+{"Time":"2026-10-29T06:11:51.473509384Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestParseSSHHelperConfig_missingVaultAddr","Output":"=== RUN   TestParseSSHHelperConfig_missingVaultAddr\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.473514342Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestParseSSHHelperConfig_missingVaultAddr","Output":"--- PASS: TestParseSSHHelperConfig_missingVaultAddr (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.473517759Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestParseSSHHelperConfig_missingVaultAddr","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.473521884Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestParseSSHHelperConfig_badKeys"}
+{"Time":"2026-10-29T06:11:51.473524342Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestParseSSHHelperConfig_badKeys","Output":"=== RUN   TestParseSSHHelperConfig_badKeys\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.473674509Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestParseSSHHelperConfig_badKeys","Output":"--- PASS: TestParseSSHHelperConfig_badKeys (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.473697717Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestParseSSHHelperConfig_badKeys","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.473706592Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestParseSSHHelperConfig_tlsServerName"}
+{"Time":"2026-10-29T06:11:51.473709676Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestParseSSHHelperConfig_tlsServerName","Output":"=== RUN   TestParseSSHHelperConfig_tlsServerName\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.473719634Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestParseSSHHelperConfig_tlsServerName","Output":"--- PASS: TestParseSSHHelperConfig_tlsServerName (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.473729342Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestParseSSHHelperConfig_tlsServerName","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.473740634Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestIsSudoPath"}
+{"Time":"2026-10-29T06:11:51.473746384Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestIsSudoPath","Output":"=== RUN   TestIsSudoPath\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.473760926Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestIsSudoPath","Output":"=== PAUSE TestIsSudoPath\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.473768634Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"TestIsSudoPath"}
+{"Time":"2026-10-29T06:11:51.473772009Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestSys_BillingOverview"}
+{"Time":"2026-10-29T06:11:51.473774509Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestSys_BillingOverview","Output":"=== RUN   TestSys_BillingOverview\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.475612342Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestSys_BillingOverview","Output":"--- PASS: TestSys_BillingOverview (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.475671717Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestSys_BillingOverview","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.475725384Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestSys_BillingConfig"}
+{"Time":"2026-10-29T06:11:51.475732842Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestSys_BillingConfig","Output":"=== RUN   TestSys_BillingConfig\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.477468509Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestSys_BillingConfig","Output":"--- PASS: TestSys_BillingConfig (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.477565967Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestSys_BillingConfig","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.477612217Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestListMounts"}
+{"Time":"2026-10-29T06:11:51.477617967Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestListMounts","Output":"=== RUN   TestListMounts\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.478527592Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestListMounts","Output":"--- PASS: TestListMounts (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.478554551Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestListMounts","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.478559842Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestMountUpdateConfigStructFields"}
+{"Time":"2026-10-29T06:11:51.478561342Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestMountUpdateConfigStructFields","Output":"=== RUN   TestMountUpdateConfigStructFields\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.478564051Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestMountUpdateConfigStructFields","Output":"--- PASS: TestMountUpdateConfigStructFields (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.478566051Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestMountUpdateConfigStructFields","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.479912426Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestSys_OAuthResourceServerAuthorizationDetailsTypes"}
+{"Time":"2026-10-29T06:11:51.479964342Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestSys_OAuthResourceServerAuthorizationDetailsTypes","Output":"=== RUN   TestSys_OAuthResourceServerAuthorizationDetailsTypes\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.479977134Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestSys_OAuthResourceServerAuthorizationDetailsTypes","Output":"=== PAUSE TestSys_OAuthResourceServerAuthorizationDetailsTypes\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.479980217Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"TestSys_OAuthResourceServerAuthorizationDetailsTypes"}
+{"Time":"2026-10-29T06:11:51.479984759Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestRegisterPluginRuntime"}
+{"Time":"2026-10-29T06:11:51.479987926Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRegisterPluginRuntime","Output":"=== RUN   TestRegisterPluginRuntime\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.481115426Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRegisterPluginRuntime","Output":"--- PASS: TestRegisterPluginRuntime (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.481208051Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestRegisterPluginRuntime","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.481453176Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestGetPluginRuntime"}
+{"Time":"2026-10-29T06:11:51.481466009Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestGetPluginRuntime","Output":"=== RUN   TestGetPluginRuntime\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.481469092Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestGetPluginRuntime/gvisor"}
+{"Time":"2026-10-29T06:11:51.481470467Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestGetPluginRuntime/gvisor","Output":"=== RUN   TestGetPluginRuntime/gvisor\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.482330176Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestGetPluginRuntime/gvisor","Output":"--- PASS: TestGetPluginRuntime/gvisor (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.482344217Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestGetPluginRuntime/gvisor","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.482348217Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestGetPluginRuntime","Output":"--- PASS: TestGetPluginRuntime (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.482349926Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestGetPluginRuntime","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.482356009Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestListPluginRuntimeTyped"}
+{"Time":"2026-10-29T06:11:51.482357217Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestListPluginRuntimeTyped","Output":"=== RUN   TestListPluginRuntimeTyped\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.482358592Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestListPluginRuntimeTyped/container"}
+{"Time":"2026-10-29T06:11:51.482359884Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestListPluginRuntimeTyped/container","Output":"=== RUN   TestListPluginRuntimeTyped/container\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.482764384Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestListPluginRuntimeTyped/container","Output":"--- PASS: TestListPluginRuntimeTyped/container (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.482911092Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestListPluginRuntimeTyped/container","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.482918342Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestListPluginRuntimeTyped/unsupported"}
+{"Time":"2026-10-29T06:11:51.482921259Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestListPluginRuntimeTyped/unsupported","Output":"=== RUN   TestListPluginRuntimeTyped/unsupported\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.482929467Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestListPluginRuntimeTyped/unsupported","Output":"--- PASS: TestListPluginRuntimeTyped/unsupported (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.482933967Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestListPluginRuntimeTyped/unsupported","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.482942676Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestListPluginRuntimeTyped","Output":"--- PASS: TestListPluginRuntimeTyped (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.482946342Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestListPluginRuntimeTyped","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.482949217Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestListPluginRuntimeUntyped"}
+{"Time":"2026-10-29T06:11:51.482951759Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestListPluginRuntimeUntyped","Output":"=== RUN   TestListPluginRuntimeUntyped\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.482955009Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestListPluginRuntimeUntyped/#00"}
+{"Time":"2026-10-29T06:11:51.482961592Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestListPluginRuntimeUntyped/#00","Output":"=== RUN   TestListPluginRuntimeUntyped/#00\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.483284801Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestListPluginRuntimeUntyped/#00","Output":"--- PASS: TestListPluginRuntimeUntyped/#00 (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.483308342Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestListPluginRuntimeUntyped/#00","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.483314176Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestListPluginRuntimeUntyped","Output":"--- PASS: TestListPluginRuntimeUntyped (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.483318092Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestListPluginRuntimeUntyped","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.483321467Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestRegisterPlugin"}
+{"Time":"2026-10-29T06:11:51.483324676Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRegisterPlugin","Output":"=== RUN   TestRegisterPlugin\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.484102551Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRegisterPlugin","Output":"--- PASS: TestRegisterPlugin (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.484119301Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestRegisterPlugin","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.484122801Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestListPlugins"}
+{"Time":"2026-10-29T06:11:51.484124426Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestListPlugins","Output":"=== RUN   TestListPlugins\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.484125842Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestListPlugins/no_type_specified"}
+{"Time":"2026-10-29T06:11:51.484127301Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestListPlugins/no_type_specified","Output":"=== RUN   TestListPlugins/no_type_specified\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.484685301Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestListPlugins/no_type_specified","Output":"--- PASS: TestListPlugins/no_type_specified (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.484711009Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestListPlugins/no_type_specified","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.484719467Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestListPlugins/only_auth_plugins"}
+{"Time":"2026-10-29T06:11:51.484723009Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestListPlugins/only_auth_plugins","Output":"=== RUN   TestListPlugins/only_auth_plugins\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.484916759Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestListPlugins/only_auth_plugins","Output":"--- PASS: TestListPlugins/only_auth_plugins (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.484930134Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestListPlugins/only_auth_plugins","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.484960009Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestListPlugins/only_database_plugins"}
+{"Time":"2026-10-29T06:11:51.484962259Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestListPlugins/only_database_plugins","Output":"=== RUN   TestListPlugins/only_database_plugins\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.485451759Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestListPlugins/only_database_plugins","Output":"--- PASS: TestListPlugins/only_database_plugins (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.485488051Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestListPlugins/only_database_plugins","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.485494009Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestListPlugins/only_secret_plugins"}
+{"Time":"2026-10-29T06:11:51.485496009Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestListPlugins/only_secret_plugins","Output":"=== RUN   TestListPlugins/only_secret_plugins\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.485949509Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestListPlugins/only_secret_plugins","Output":"--- PASS: TestListPlugins/only_secret_plugins (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.485959134Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestListPlugins/only_secret_plugins","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.485962134Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestListPlugins","Output":"--- PASS: TestListPlugins (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.485964092Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestListPlugins","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.485965467Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestGetPlugin"}
+{"Time":"2026-10-29T06:11:51.485966967Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestGetPlugin","Output":"=== RUN   TestGetPlugin\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.485968426Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestGetPlugin/builtin"}
+{"Time":"2026-10-29T06:11:51.485969592Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestGetPlugin/builtin","Output":"=== RUN   TestGetPlugin/builtin\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.486361967Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestGetPlugin/builtin","Output":"--- PASS: TestGetPlugin/builtin (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.486387509Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestGetPlugin/builtin","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.486392884Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestGetPlugin/old_server"}
+{"Time":"2026-10-29T06:11:51.486395384Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestGetPlugin/old_server","Output":"=== RUN   TestGetPlugin/old_server\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.487053551Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestGetPlugin/old_server","Output":"--- PASS: TestGetPlugin/old_server (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.487083217Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestGetPlugin/old_server","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.487098092Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestGetPlugin/external"}
+{"Time":"2026-10-29T06:11:51.487100926Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestGetPlugin/external","Output":"=== RUN   TestGetPlugin/external\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.487293009Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestGetPlugin/external","Output":"--- PASS: TestGetPlugin/external (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.487314467Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestGetPlugin/external","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.487319801Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestGetPlugin/oci_image"}
+{"Time":"2026-10-29T06:11:51.487322259Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestGetPlugin/oci_image","Output":"=== RUN   TestGetPlugin/oci_image\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.487477009Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestGetPlugin/oci_image","Output":"--- PASS: TestGetPlugin/oci_image (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.487526551Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestGetPlugin/oci_image","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.487533551Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestGetPlugin","Output":"--- PASS: TestGetPlugin (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.487536801Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestGetPlugin","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.487576717Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling"}
+{"Time":"2026-10-29T06:11:51.487586759Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling","Output":"=== RUN   TestUICustomMessageJsonMarshalling\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.487880259Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/no-link-no-options"}
+{"Time":"2026-10-29T06:11:51.487890051Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/no-link-no-options","Output":"=== RUN   TestUICustomMessageJsonMarshalling/no-link-no-options\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.487892926Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/no-link-no-options","Output":"=== PAUSE TestUICustomMessageJsonMarshalling/no-link-no-options\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.487894259Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/no-link-no-options"}
+{"Time":"2026-10-29T06:11:51.487896051Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/link-no-options"}
+{"Time":"2026-10-29T06:11:51.487897426Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/link-no-options","Output":"=== RUN   TestUICustomMessageJsonMarshalling/link-no-options\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.487899092Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/link-no-options","Output":"=== PAUSE TestUICustomMessageJsonMarshalling/link-no-options\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.487900176Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/link-no-options"}
+{"Time":"2026-10-29T06:11:51.487901551Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/no-link-options"}
+{"Time":"2026-10-29T06:11:51.487903009Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/no-link-options","Output":"=== RUN   TestUICustomMessageJsonMarshalling/no-link-options\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.487904676Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/no-link-options","Output":"=== PAUSE TestUICustomMessageJsonMarshalling/no-link-options\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.487906051Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/no-link-options"}
+{"Time":"2026-10-29T06:11:51.487907384Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/link-and-options"}
+{"Time":"2026-10-29T06:11:51.487931134Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/link-and-options","Output":"=== RUN   TestUICustomMessageJsonMarshalling/link-and-options\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.487946842Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/link-and-options","Output":"=== PAUSE TestUICustomMessageJsonMarshalling/link-and-options\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.487949634Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/link-and-options"}
+{"Time":"2026-10-29T06:11:51.487953592Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/no-link-no-options"}
+{"Time":"2026-10-29T06:11:51.487956301Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/no-link-no-options","Output":"=== CONT  TestUICustomMessageJsonMarshalling/no-link-no-options\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.487972217Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/no-link-options"}
+{"Time":"2026-10-29T06:11:51.487990051Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/no-link-options","Output":"=== CONT  TestUICustomMessageJsonMarshalling/no-link-options\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.487996634Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/link-and-options"}
+{"Time":"2026-10-29T06:11:51.487999592Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/link-and-options","Output":"=== CONT  TestUICustomMessageJsonMarshalling/link-and-options\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488115384Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/no-link-no-options","Output":"--- PASS: TestUICustomMessageJsonMarshalling/no-link-no-options (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488128634Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/no-link-no-options","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.488130926Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/no-link-options","Output":"--- PASS: TestUICustomMessageJsonMarshalling/no-link-options (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488132842Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/no-link-options","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.488133967Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/link-no-options"}
+{"Time":"2026-10-29T06:11:51.488135801Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/link-no-options","Output":"=== CONT  TestUICustomMessageJsonMarshalling/link-no-options\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488137801Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/link-and-options","Output":"--- PASS: TestUICustomMessageJsonMarshalling/link-and-options (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488179551Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/link-and-options","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.488184176Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/link-no-options","Output":"--- PASS: TestUICustomMessageJsonMarshalling/link-no-options (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488187676Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling/link-no-options","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.488189176Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling","Output":"--- PASS: TestUICustomMessageJsonMarshalling (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488191134Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonMarshalling","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.488214801Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal"}
+{"Time":"2026-10-29T06:11:51.488227384Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal","Output":"=== RUN   TestUICustomMessageJsonUnmarshal\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488510884Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/no-link-no-options"}
+{"Time":"2026-10-29T06:11:51.488516426Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/no-link-no-options","Output":"=== RUN   TestUICustomMessageJsonUnmarshal/no-link-no-options\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488519176Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/no-link-no-options","Output":"=== PAUSE TestUICustomMessageJsonUnmarshal/no-link-no-options\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488520301Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/no-link-no-options"}
+{"Time":"2026-10-29T06:11:51.488521842Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/link-no-options"}
+{"Time":"2026-10-29T06:11:51.488523051Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/link-no-options","Output":"=== RUN   TestUICustomMessageJsonUnmarshal/link-no-options\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488524884Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/link-no-options","Output":"=== PAUSE TestUICustomMessageJsonUnmarshal/link-no-options\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488526051Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/link-no-options"}
+{"Time":"2026-10-29T06:11:51.488527384Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/no-link-options"}
+{"Time":"2026-10-29T06:11:51.488528426Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/no-link-options","Output":"=== RUN   TestUICustomMessageJsonUnmarshal/no-link-options\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488529884Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/no-link-options","Output":"=== PAUSE TestUICustomMessageJsonUnmarshal/no-link-options\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488530926Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/no-link-options"}
+{"Time":"2026-10-29T06:11:51.488532384Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/link-and-options"}
+{"Time":"2026-10-29T06:11:51.488534967Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/link-and-options","Output":"=== RUN   TestUICustomMessageJsonUnmarshal/link-and-options\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488536509Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/link-and-options","Output":"=== PAUSE TestUICustomMessageJsonUnmarshal/link-and-options\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488538467Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/link-and-options"}
+{"Time":"2026-10-29T06:11:51.488540092Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/no-link-no-options"}
+{"Time":"2026-10-29T06:11:51.488541217Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/no-link-no-options","Output":"=== CONT  TestUICustomMessageJsonUnmarshal/no-link-no-options\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488543384Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/no-link-no-options","Output":"--- PASS: TestUICustomMessageJsonUnmarshal/no-link-no-options (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488547134Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/no-link-no-options","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.488548759Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/link-no-options"}
+{"Time":"2026-10-29T06:11:51.488549842Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/link-no-options","Output":"=== CONT  TestUICustomMessageJsonUnmarshal/link-no-options\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488551676Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/link-no-options","Output":"--- PASS: TestUICustomMessageJsonUnmarshal/link-no-options (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488553051Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/link-no-options","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.488554051Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/link-and-options"}
+{"Time":"2026-10-29T06:11:51.488555134Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/link-and-options","Output":"=== CONT  TestUICustomMessageJsonUnmarshal/link-and-options\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488556509Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/no-link-options"}
+{"Time":"2026-10-29T06:11:51.488557551Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/no-link-options","Output":"=== CONT  TestUICustomMessageJsonUnmarshal/no-link-options\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488559134Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/no-link-options","Output":"--- PASS: TestUICustomMessageJsonUnmarshal/no-link-options (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488562342Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/no-link-options","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.488563634Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/link-and-options","Output":"--- PASS: TestUICustomMessageJsonUnmarshal/link-and-options (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488565092Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal/link-and-options","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.488566384Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal","Output":"--- PASS: TestUICustomMessageJsonUnmarshal (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488567967Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageJsonUnmarshal","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.488569176Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageListRequestOptions"}
+{"Time":"2026-10-29T06:11:51.488570467Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageListRequestOptions","Output":"=== RUN   TestUICustomMessageListRequestOptions\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488596301Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageListRequestOptions","Output":"--- PASS: TestUICustomMessageListRequestOptions (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488599092Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestUICustomMessageListRequestOptions","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.488601801Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"TestExtractVersionMetadata"}
+{"Time":"2026-10-29T06:11:51.488603051Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestExtractVersionMetadata","Output":"=== CONT  TestExtractVersionMetadata\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488606259Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders"}
+{"Time":"2026-10-29T06:11:51.488607384Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders","Output":"=== CONT  TestLogical_addExtraHeaders\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488609092Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"Test_newLogicalRequest"}
+{"Time":"2026-10-29T06:11:51.488610092Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"Test_newLogicalRequest","Output":"=== CONT  Test_newLogicalRequest\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488612676Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders/nil_headers"}
+{"Time":"2026-10-29T06:11:51.488613759Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders/nil_headers","Output":"=== RUN   TestLogical_addExtraHeaders/nil_headers\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488618259Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"Test_newLogicalRequest/read_request"}
+{"Time":"2026-10-29T06:11:51.488619384Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"Test_newLogicalRequest/read_request","Output":"=== RUN   Test_newLogicalRequest/read_request\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488621259Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestExtractVersionMetadata","Output":"--- PASS: TestExtractVersionMetadata (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488622634Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestExtractVersionMetadata","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.488623634Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease"}
+{"Time":"2026-10-29T06:11:51.488625217Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease","Output":"=== CONT  TestRemainingLease\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488627509Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"Test_newLogicalRequest/read_request","Output":"--- PASS: Test_newLogicalRequest/read_request (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488638342Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"Test_newLogicalRequest/read_request","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.488639801Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease/uncached_response_is_unaffected"}
+{"Time":"2026-10-29T06:11:51.488642967Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease/uncached_response_is_unaffected","Output":"=== RUN   TestRemainingLease/uncached_response_is_unaffected\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488646426Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"Test_newLogicalRequest","Output":"--- PASS: Test_newLogicalRequest (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488650009Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"Test_newLogicalRequest","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.488665092Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalWriteRequest"}
+{"Time":"2026-10-29T06:11:51.488666509Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalWriteRequest","Output":"=== CONT  TestNewLogicalWriteRequest\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488671259Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease/uncached_response_is_unaffected","Output":"=== PAUSE TestRemainingLease/uncached_response_is_unaffected\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488672509Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease/uncached_response_is_unaffected"}
+{"Time":"2026-10-29T06:11:51.488674134Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease/cached_response_discounts_time_spent_in_cache"}
+{"Time":"2026-10-29T06:11:51.488675301Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease/cached_response_discounts_time_spent_in_cache","Output":"=== RUN   TestRemainingLease/cached_response_discounts_time_spent_in_cache\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488677009Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease/cached_response_discounts_time_spent_in_cache","Output":"=== PAUSE TestRemainingLease/cached_response_discounts_time_spent_in_cache\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488678134Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease/cached_response_discounts_time_spent_in_cache"}
+{"Time":"2026-10-29T06:11:51.488680092Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease/age_beyond_the_lease_duration_clamps_to_zero"}
+{"Time":"2026-10-29T06:11:51.488681259Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease/age_beyond_the_lease_duration_clamps_to_zero","Output":"=== RUN   TestRemainingLease/age_beyond_the_lease_duration_clamps_to_zero\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488682926Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalWriteRequest/basic_read_request"}
+{"Time":"2026-10-29T06:11:51.488684051Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalWriteRequest/basic_read_request","Output":"=== RUN   TestNewLogicalWriteRequest/basic_read_request\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488686134Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease/age_beyond_the_lease_duration_clamps_to_zero","Output":"=== PAUSE TestRemainingLease/age_beyond_the_lease_duration_clamps_to_zero\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488687759Z","Action":"pause","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease/age_beyond_the_lease_duration_clamps_to_zero"}
+{"Time":"2026-10-29T06:11:51.488689509Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalReadRequest"}
+{"Time":"2026-10-29T06:11:51.488690926Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalReadRequest","Output":"=== CONT  TestNewLogicalReadRequest\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488692884Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalWriteRequest/basic_read_request","Output":"--- PASS: TestNewLogicalWriteRequest/basic_read_request (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488694676Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalWriteRequest/basic_read_request","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.488699426Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalWriteRequest/read_request_with_data"}
+{"Time":"2026-10-29T06:11:51.488706426Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalWriteRequest/read_request_with_data","Output":"=== RUN   TestNewLogicalWriteRequest/read_request_with_data\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488725509Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders/nil_headers","Output":"--- PASS: TestLogical_addExtraHeaders/nil_headers (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488737676Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders/nil_headers","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.488742009Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalReadRequest/basic_read_request"}
+{"Time":"2026-10-29T06:11:51.488743759Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalReadRequest/basic_read_request","Output":"=== RUN   TestNewLogicalReadRequest/basic_read_request\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488748467Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders/empty_headers"}
+{"Time":"2026-10-29T06:11:51.488750759Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders/empty_headers","Output":"=== RUN   TestLogical_addExtraHeaders/empty_headers\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488753176Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalReadRequest/basic_read_request","Output":"--- PASS: TestNewLogicalReadRequest/basic_read_request (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488755176Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalReadRequest/basic_read_request","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.488756926Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalReadRequest/read_request_with_values"}
+{"Time":"2026-10-29T06:11:51.488758509Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalReadRequest/read_request_with_values","Output":"=== RUN   TestNewLogicalReadRequest/read_request_with_values\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488760926Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders/empty_headers","Output":"--- PASS: TestLogical_addExtraHeaders/empty_headers (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488763676Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders/empty_headers","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.488765717Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalWriteRequest/read_request_with_data","Output":"--- PASS: TestNewLogicalWriteRequest/read_request_with_data (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488767717Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalWriteRequest/read_request_with_data","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.488769509Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalReadRequest/read_request_with_values","Output":"--- PASS: TestNewLogicalReadRequest/read_request_with_values (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488771842Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalReadRequest/read_request_with_values","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.488773551Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalWriteRequest/read_request_with_headers"}
+{"Time":"2026-10-29T06:11:51.488774717Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalWriteRequest/read_request_with_headers","Output":"=== RUN   TestNewLogicalWriteRequest/read_request_with_headers\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488779301Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalReadRequest/read_request_with_headers"}
+{"Time":"2026-10-29T06:11:51.488780926Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalReadRequest/read_request_with_headers","Output":"=== RUN   TestNewLogicalReadRequest/read_request_with_headers\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488783801Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalReadRequest/read_request_with_headers","Output":"--- PASS: TestNewLogicalReadRequest/read_request_with_headers (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488786426Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalReadRequest/read_request_with_headers","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.488790676Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalReadRequest/read_request_with_values_and_headers"}
+{"Time":"2026-10-29T06:11:51.488792176Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalReadRequest/read_request_with_values_and_headers","Output":"=== RUN   TestNewLogicalReadRequest/read_request_with_values_and_headers\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488795342Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalReadRequest/read_request_with_values_and_headers","Output":"--- PASS: TestNewLogicalReadRequest/read_request_with_values_and_headers (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488797301Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalReadRequest/read_request_with_values_and_headers","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.488799467Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalReadRequest","Output":"--- PASS: TestNewLogicalReadRequest (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488801676Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalReadRequest","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.488803426Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"Test_defaultLogicalRequest"}
+{"Time":"2026-10-29T06:11:51.488804884Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"Test_defaultLogicalRequest","Output":"=== CONT  Test_defaultLogicalRequest\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488808176Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"Test_defaultLogicalRequest/all"}
+{"Time":"2026-10-29T06:11:51.488811926Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"Test_defaultLogicalRequest/all","Output":"=== RUN   Test_defaultLogicalRequest/all\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488885842Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"Test_defaultLogicalRequest/all","Output":"--- PASS: Test_defaultLogicalRequest/all (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488917342Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"Test_defaultLogicalRequest/all","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.488924301Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"Test_defaultLogicalRequest/empty"}
+{"Time":"2026-10-29T06:11:51.488932551Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"Test_defaultLogicalRequest/empty","Output":"=== RUN   Test_defaultLogicalRequest/empty\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488941884Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"Test_defaultLogicalRequest/empty","Output":"--- PASS: Test_defaultLogicalRequest/empty (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488946384Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"Test_defaultLogicalRequest/empty","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.488954051Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"Test_defaultLogicalRequest","Output":"--- PASS: Test_defaultLogicalRequest (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488957467Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"Test_defaultLogicalRequest","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.488959509Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher_SignalsReReadOfAgedLease"}
+{"Time":"2026-10-29T06:11:51.488961884Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher_SignalsReReadOfAgedLease","Output":"=== CONT  TestLifetimeWatcher_SignalsReReadOfAgedLease\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488970592Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalWriteRequest/read_request_with_headers","Output":"--- PASS: TestNewLogicalWriteRequest/read_request_with_headers (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488974926Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalWriteRequest/read_request_with_headers","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.488978842Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalWriteRequest/read_request_with_data_and_headers"}
+{"Time":"2026-10-29T06:11:51.488981634Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalWriteRequest/read_request_with_data_and_headers","Output":"=== RUN   TestNewLogicalWriteRequest/read_request_with_data_and_headers\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488985551Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders/no_headers"}
+{"Time":"2026-10-29T06:11:51.488987884Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders/no_headers","Output":"=== RUN   TestLogical_addExtraHeaders/no_headers\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488991842Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalWriteRequest/read_request_with_data_and_headers","Output":"--- PASS: TestNewLogicalWriteRequest/read_request_with_data_and_headers (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.488995676Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalWriteRequest/read_request_with_data_and_headers","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.488999551Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalWriteRequest","Output":"--- PASS: TestNewLogicalWriteRequest (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.489002801Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestNewLogicalWriteRequest","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.489005009Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher_DoesNotRenewExpiredLease"}
+{"Time":"2026-10-29T06:11:51.489007717Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher_DoesNotRenewExpiredLease","Output":"=== CONT  TestLifetimeWatcher_DoesNotRenewExpiredLease\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.489011717Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders/no_headers","Output":"--- PASS: TestLogical_addExtraHeaders/no_headers (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.489018259Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders/no_headers","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.489021717Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders/nil_request"}
+{"Time":"2026-10-29T06:11:51.489024217Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders/nil_request","Output":"=== RUN   TestLogical_addExtraHeaders/nil_request\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.489029592Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders/nil_request","Output":"--- PASS: TestLogical_addExtraHeaders/nil_request (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.489041926Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders/nil_request","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.489046176Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders/extra_headers"}
+{"Time":"2026-10-29T06:11:51.489048676Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders/extra_headers","Output":"=== RUN   TestLogical_addExtraHeaders/extra_headers\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.489053342Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders/extra_headers","Output":"--- PASS: TestLogical_addExtraHeaders/extra_headers (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.489062051Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders/extra_headers","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.489066676Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders/reserved_header"}
+{"Time":"2026-10-29T06:11:51.489075092Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders/reserved_header","Output":"=== RUN   TestLogical_addExtraHeaders/reserved_header\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.489081301Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders/reserved_header","Output":"--- PASS: TestLogical_addExtraHeaders/reserved_header (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.489091676Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders/reserved_header","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.489097134Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders","Output":"--- PASS: TestLogical_addExtraHeaders (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.489100676Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestLogical_addExtraHeaders","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.489102676Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"TestExtractDataAndVersionMetadata"}
+{"Time":"2026-10-29T06:11:51.489105259Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestExtractDataAndVersionMetadata","Output":"=== CONT  TestExtractDataAndVersionMetadata\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.489170926Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestExtractDataAndVersionMetadata","Output":"--- PASS: TestExtractDataAndVersionMetadata (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.489192301Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestExtractDataAndVersionMetadata","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.489196634Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"TestSysRenew_PopulatesAgeFromCachedResponse"}
+{"Time":"2026-10-29T06:11:51.489199467Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestSysRenew_PopulatesAgeFromCachedResponse","Output":"=== CONT  TestSysRenew_PopulatesAgeFromCachedResponse\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.490030467Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher_DoesNotRenewExpiredLease","Output":"--- PASS: TestLifetimeWatcher_DoesNotRenewExpiredLease (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.490045926Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher_DoesNotRenewExpiredLease","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.490048759Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"TestSys_OAuthResourceServerAuthorizationDetailsTypes"}
+{"Time":"2026-10-29T06:11:51.490050009Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestSys_OAuthResourceServerAuthorizationDetailsTypes","Output":"=== CONT  TestSys_OAuthResourceServerAuthorizationDetailsTypes\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.490630301Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher_SignalsReReadOfAgedLease","Output":"--- PASS: TestLifetimeWatcher_SignalsReReadOfAgedLease (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.490662342Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher_SignalsReReadOfAgedLease","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.490668051Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"TestIsSudoPath"}
+{"Time":"2026-10-29T06:11:51.490671217Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestIsSudoPath","Output":"=== CONT  TestIsSudoPath\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.490684217Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestSysRenew_PopulatesAgeFromCachedResponse","Output":"--- PASS: TestSysRenew_PopulatesAgeFromCachedResponse (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.490689301Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestSysRenew_PopulatesAgeFromCachedResponse","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.490691842Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"TestSysRenew_UncachedResponseHasNoAge"}
+{"Time":"2026-10-29T06:11:51.490694801Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestSysRenew_UncachedResponseHasNoAge","Output":"=== CONT  TestSysRenew_UncachedResponseHasNoAge\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.490699842Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestIsSudoPath","Output":"--- PASS: TestIsSudoPath (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.490703259Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestIsSudoPath","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.490705801Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"TestRenewer_NewRenewer"}
+{"Time":"2026-10-29T06:11:51.490707926Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRenewer_NewRenewer","Output":"=== CONT  TestRenewer_NewRenewer\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.490713842Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestRenewer_NewRenewer/nil"}
+{"Time":"2026-10-29T06:11:51.490716467Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRenewer_NewRenewer/nil","Output":"=== RUN   TestRenewer_NewRenewer/nil\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.490721509Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRenewer_NewRenewer/nil","Output":"--- PASS: TestRenewer_NewRenewer/nil (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.490724842Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestRenewer_NewRenewer/nil","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.490733634Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestRenewer_NewRenewer/missing_secret"}
+{"Time":"2026-10-29T06:11:51.490737426Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRenewer_NewRenewer/missing_secret","Output":"=== RUN   TestRenewer_NewRenewer/missing_secret\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.491003259Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRenewer_NewRenewer/missing_secret","Output":"--- PASS: TestRenewer_NewRenewer/missing_secret (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.491023801Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestRenewer_NewRenewer/missing_secret","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.491028634Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestRenewer_NewRenewer/default_grace"}
+{"Time":"2026-10-29T06:11:51.491031551Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRenewer_NewRenewer/default_grace","Output":"=== RUN   TestRenewer_NewRenewer/default_grace\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.491143842Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRenewer_NewRenewer/default_grace","Output":"--- PASS: TestRenewer_NewRenewer/default_grace (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.491262634Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestRenewer_NewRenewer/default_grace","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.491275884Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRenewer_NewRenewer","Output":"--- PASS: TestRenewer_NewRenewer (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.491280967Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestRenewer_NewRenewer","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.491284342Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher"}
+{"Time":"2026-10-29T06:11:51.491286676Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher","Output":"=== CONT  TestLifetimeWatcher\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.491650717Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher/no_error"}
+{"Time":"2026-10-29T06:11:51.491675092Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher/no_error","Output":"=== RUN   TestLifetimeWatcher/no_error\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.491744759Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher/no_error","Output":"--- PASS: TestLifetimeWatcher/no_error (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.491827426Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher/no_error","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.491848717Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher/short_increment_duration"}
+{"Time":"2026-10-29T06:11:51.491862592Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher/short_increment_duration","Output":"=== RUN   TestLifetimeWatcher/short_increment_duration\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.491878717Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher/short_increment_duration","Output":"--- PASS: TestLifetimeWatcher/short_increment_duration (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.491892592Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher/short_increment_duration","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.491897217Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher/one_error"}
+{"Time":"2026-10-29T06:11:51.491899676Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher/one_error","Output":"=== RUN   TestLifetimeWatcher/one_error\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.491904967Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestSysRenew_UncachedResponseHasNoAge","Output":"--- PASS: TestSysRenew_UncachedResponseHasNoAge (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.491914967Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestSysRenew_UncachedResponseHasNoAge","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.491917301Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"TestBuildSamplePolicy"}
+{"Time":"2026-10-29T06:11:51.491919676Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestBuildSamplePolicy","Output":"=== CONT  TestBuildSamplePolicy\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.491922717Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestBuildSamplePolicy/happy_path"}
+{"Time":"2026-10-29T06:11:51.491924967Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestBuildSamplePolicy/happy_path","Output":"=== RUN   TestBuildSamplePolicy/happy_path\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.491929926Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestBuildSamplePolicy/happy_path","Output":"--- PASS: TestBuildSamplePolicy/happy_path (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.491933342Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestBuildSamplePolicy/happy_path","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.491936592Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestBuildSamplePolicy/demonstrate_that_this_function_does_not_format_fully"}
+{"Time":"2026-10-29T06:11:51.491939592Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestBuildSamplePolicy/demonstrate_that_this_function_does_not_format_fully","Output":"=== RUN   TestBuildSamplePolicy/demonstrate_that_this_function_does_not_format_fully\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.491955842Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestBuildSamplePolicy/demonstrate_that_this_function_does_not_format_fully","Output":"--- PASS: TestBuildSamplePolicy/demonstrate_that_this_function_does_not_format_fully (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.491965842Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestBuildSamplePolicy/demonstrate_that_this_function_does_not_format_fully","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.491969134Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestBuildSamplePolicy/list_over_read_returned"}
+{"Time":"2026-10-29T06:11:51.491971592Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestBuildSamplePolicy/list_over_read_returned","Output":"=== RUN   TestBuildSamplePolicy/list_over_read_returned\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.491975509Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestBuildSamplePolicy/list_over_read_returned","Output":"--- PASS: TestBuildSamplePolicy/list_over_read_returned (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.491980717Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestBuildSamplePolicy/list_over_read_returned","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.491983342Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestBuildSamplePolicy/valid_protected_path"}
+{"Time":"2026-10-29T06:11:51.491985676Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestBuildSamplePolicy/valid_protected_path","Output":"=== RUN   TestBuildSamplePolicy/valid_protected_path\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.491989467Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestBuildSamplePolicy/valid_protected_path","Output":"--- PASS: TestBuildSamplePolicy/valid_protected_path (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.491992467Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestBuildSamplePolicy/valid_protected_path","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.491995551Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestBuildSamplePolicy/valid_protected_path_no_trailing_/"}
+{"Time":"2026-10-29T06:11:51.491998051Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestBuildSamplePolicy/valid_protected_path_no_trailing_/","Output":"=== RUN   TestBuildSamplePolicy/valid_protected_path_no_trailing_/\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.492002801Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestBuildSamplePolicy/valid_protected_path_no_trailing_/","Output":"--- PASS: TestBuildSamplePolicy/valid_protected_path_no_trailing_/ (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.492005967Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestBuildSamplePolicy/valid_protected_path_no_trailing_/","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.492009176Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestBuildSamplePolicy","Output":"--- PASS: TestBuildSamplePolicy (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.492012384Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestBuildSamplePolicy","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.492014467Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease/uncached_response_is_unaffected"}
+{"Time":"2026-10-29T06:11:51.492017259Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease/uncached_response_is_unaffected","Output":"=== CONT  TestRemainingLease/uncached_response_is_unaffected\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.492021051Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease/uncached_response_is_unaffected","Output":"--- PASS: TestRemainingLease/uncached_response_is_unaffected (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.492024426Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease/uncached_response_is_unaffected","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.492027092Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease/age_beyond_the_lease_duration_clamps_to_zero"}
+{"Time":"2026-10-29T06:11:51.492029551Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease/age_beyond_the_lease_duration_clamps_to_zero","Output":"=== CONT  TestRemainingLease/age_beyond_the_lease_duration_clamps_to_zero\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.492040384Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease/age_beyond_the_lease_duration_clamps_to_zero","Output":"--- PASS: TestRemainingLease/age_beyond_the_lease_duration_clamps_to_zero (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.492050259Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease/age_beyond_the_lease_duration_clamps_to_zero","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.492056051Z","Action":"cont","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease/cached_response_discounts_time_spent_in_cache"}
+{"Time":"2026-10-29T06:11:51.492058717Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease/cached_response_discounts_time_spent_in_cache","Output":"=== CONT  TestRemainingLease/cached_response_discounts_time_spent_in_cache\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.492062801Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease/cached_response_discounts_time_spent_in_cache","Output":"--- PASS: TestRemainingLease/cached_response_discounts_time_spent_in_cache (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.492082301Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease/cached_response_discounts_time_spent_in_cache","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.492085426Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease","Output":"--- PASS: TestRemainingLease (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:51.492373134Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestRemainingLease","Elapsed":0}
+{"Time":"2026-10-29T06:11:51.492388301Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestSys_OAuthResourceServerAuthorizationDetailsTypes","Output":"--- PASS: TestSys_OAuthResourceServerAuthorizationDetailsTypes (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:52.586408759Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestSys_OAuthResourceServerAuthorizationDetailsTypes","Elapsed":0}
+{"Time":"2026-10-29T06:11:52.586484384Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher/one_error","Output":"--- PASS: TestLifetimeWatcher/one_error (1.09s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:11:52.586515009Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher/one_error","Elapsed":1.09}
+{"Time":"2026-10-29T06:11:52.586543884Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher/many_errors"}
+{"Time":"2026-10-29T06:11:52.586560384Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher/many_errors","Output":"=== RUN   TestLifetimeWatcher/many_errors\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:12:00.254029263Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher/many_errors","Output":"--- PASS: TestLifetimeWatcher/many_errors (7.67s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:12:00.254217471Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher/many_errors","Elapsed":7.67}
+{"Time":"2026-10-29T06:12:00.254262596Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher/only_errors"}
+{"Time":"2026-10-29T06:12:00.25428443Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher/only_errors","Output":"=== RUN   TestLifetimeWatcher/only_errors\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:12:13.717874672Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher/only_errors","Output":"--- PASS: TestLifetimeWatcher/only_errors (13.46s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:12:13.718396839Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher/only_errors","Elapsed":13.46}
+{"Time":"2026-10-29T06:12:13.718605755Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher/negative_lease_duration"}
+{"Time":"2026-10-29T06:12:13.718610922Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher/negative_lease_duration","Output":"=== RUN   TestLifetimeWatcher/negative_lease_duration\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:12:13.718628505Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher/negative_lease_duration","Output":"--- PASS: TestLifetimeWatcher/negative_lease_duration (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:12:13.71863413Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher/negative_lease_duration","Elapsed":0}
+{"Time":"2026-10-29T06:12:13.718651797Z","Action":"run","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher/permission_denied_error"}
+{"Time":"2026-10-29T06:12:13.71865463Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher/permission_denied_error","Output":"=== RUN   TestLifetimeWatcher/permission_denied_error\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:13:07.988828211Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher/permission_denied_error","Output":"--- PASS: TestLifetimeWatcher/permission_denied_error (54.18s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:13:07.990171627Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher/permission_denied_error","Elapsed":54.18}
+{"Time":"2026-10-29T06:13:07.990608461Z","Action":"output","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher","Output":"--- PASS: TestLifetimeWatcher (76.48s)\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:13:07.990733336Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Test":"TestLifetimeWatcher","Elapsed":76.48}
+{"Time":"2026-10-29T06:13:07.990836961Z","Action":"output","Package":"github.com/hashicorp/vault/api","Output":"PASS\n","OutputType":"frame"}
+{"Time":"2026-10-29T06:13:08.096893169Z","Action":"output","Package":"github.com/hashicorp/vault/api","Output":"ok  \tgithub.com/hashicorp/vault/api\t76.691s\n"}
+{"Time":"2026-10-29T06:13:08.097808419Z","Action":"pass","Package":"github.com/hashicorp/vault/api","Elapsed":76.693}

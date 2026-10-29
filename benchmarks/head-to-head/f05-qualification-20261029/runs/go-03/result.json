@@ -1,0 +1,17 @@
+{
+  "taskId": "go-03",
+  "sourceRevision": "352089582444ea84feb03bc97eda97b35729e8ec",
+  "indexConsulted": false,
+  "modelCalls": 0,
+  "costUsd": null,
+  "costExclusions": [
+    "No metered host/container dollar receipt."
+  ],
+  "cacheCondition": "Fresh empty per-task cache, populated by recorded download-only setup; offline execution uses that explicit warm state.",
+  "sourceSupportedInstructionGold": "Original source-only classification unchanged; execution qualification is separately reviewed.",
+  "status": "incomplete",
+  "startedAt": "2026-10-29T06:09:55.216017+00:00",
+  "failure": "AssertionError: source-provision",
+  "totalSeconds": 1.7264749580062926,
+  "cleanup": 0
+}

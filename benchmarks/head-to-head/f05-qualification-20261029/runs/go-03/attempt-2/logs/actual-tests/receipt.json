@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-f05-qualification-go-03-f3b1c8cd59",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "cd /workspace/repository; cd api && GOWORK=off go test -json -count=1 ./..."
+  ],
+  "startedAt": "2026-10-29T06:11:50.872514+00:00",
+  "elapsedSeconds": 77.71238650009036,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "141225c0f519287a19f375892092a235162b57b3383f29a9b1bb512187515cfc",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

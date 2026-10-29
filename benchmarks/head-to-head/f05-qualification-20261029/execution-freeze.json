@@ -1,0 +1,149 @@
+{
+  "identity": "f05-qualification-20261029-four-task-v1",
+  "frozenAt": "2026-10-29T06:09:01.455462+00:00",
+  "sourceFreezeSha256": "fc756e0d5f8a25cddc9f19ece651b21078a68a1f601febdb8d772208c0a66d41",
+  "runnerSha256": "4039716c54d2a0e4a897ebfa5e83be8dce41e56afe1fcf38e9cfa37743053739",
+  "oracleSha256": "1e4f0f3b640df88f315fcbcddf66e9aae179d68e69db7f5da0f4bc948adcb0ab",
+  "controlSha256": "cc8580d52f74c482ef98d75b740ec77bf6ed3a4900705ea0b67c42450620fa87",
+  "tasks": {
+    "rust-02": {
+      "sourceFolder": "rust-02-full",
+      "sourceRevision": "ab4bf739d46448436cb68933bb8260ee264449d5",
+      "archiveSha256": "862b159c55ee7693faed80c2546aa203cc370e867cf5a206cff5356ab66766d6",
+      "inventorySha256": "e04bbccfff19d356f66981ec9ae7074fe26b44a4d6a76591b70cd8c1c816865c",
+      "taskIdentity": {
+        "id": "rust-02",
+        "repository": "github.com/GyulyVGC/sniffnet",
+        "revision": "ab4bf739d46448436cb68933bb8260ee264449d5",
+        "ecosystem": "Rust",
+        "scope": "component",
+        "startingState": "local-checkout",
+        "component": "lib/sniffnet-packet-parser",
+        "request": "requests/rust-02.md",
+        "gold": "curator/gold/rust-02.json",
+        "oracle": "curator/oracles/rust-02.json",
+        "enrollmentRationale": "The only non-root workspace member is an owned library with retained unit tests; it is the lexically first eligible component."
+      },
+      "imageId": "sha256:6d94650b0063dbbe7921114ee693dcf24c4c279d0e15781ae1713c88e69e167d",
+      "kind": "rust",
+      "toolchainProbe": "rustc -vV; cargo --version; dpkg-query -W libpcap-dev libpcap0.8-dev libasound2-dev",
+      "downloadOnlySetup": [
+        "cargo fetch --locked --manifest-path lib/sniffnet-packet-parser/Cargo.toml"
+      ],
+      "testCommand": "cargo test --locked --manifest-path lib/sniffnet-packet-parser/Cargo.toml -- --nocapture",
+      "expectedTests": [
+        "test_link_type_from_pcap_supported",
+        "test_link_type_from_pcap_unsupported"
+      ]
+    },
+    "typescript-02": {
+      "sourceFolder": "typescript-02",
+      "sourceRevision": "2875056f93d6eebcd887f64ae557258a7b0b0108",
+      "archiveSha256": "818bf33ece0979d198ed6a11daa3e6b838cc4aefba8c3a381c86e8ce2e706f41",
+      "inventorySha256": "ba57c4fe3c2ae83ae10005b4ff3ed3998d1f94d75d2778163167da69637f78d7",
+      "taskIdentity": {
+        "id": "typescript-02",
+        "repository": "github.com/OpenHands/OpenHands",
+        "revision": "2875056f93d6eebcd887f64ae557258a7b0b0108",
+        "ecosystem": "JavaScript/TypeScript",
+        "scope": "component",
+        "startingState": "local-checkout",
+        "component": "bin",
+        "request": "requests/typescript-02.md",
+        "gold": "curator/gold/typescript-02.json",
+        "oracle": "curator/oracles/typescript-02.json",
+        "enrollmentRationale": "Maintainer architecture names bin/ as the CLI launcher component; it precedes scripts/ and src/ lexically and has one source launcher and a dedicated bin test suite."
+      },
+      "imageId": "sha256:9f07b849c4603e3ad6b52c00c2dccaaf2054f8b3ec0f4add866ffdd537073c76",
+      "registryResolvedInputs": "All external locked npm resolutions use https://registry.npmjs.org; three go-01 internal workspace links retained.",
+      "kind": "vitest",
+      "toolchainProbe": "node --version; npm --version; uv --version",
+      "downloadOnlySetup": [
+        "npm install --prefix /workspace/npm-tooling --ignore-scripts npm@11.12.1",
+        "/workspace/npm-tooling/node_modules/.bin/npm ci --ignore-scripts"
+      ],
+      "afterSetupProbe": "test \"$(/workspace/npm-tooling/node_modules/.bin/npm --version)\" = 11.12.1; /workspace/npm-tooling/node_modules/.bin/npm --version",
+      "testCommand": "PATH=/workspace/npm-tooling/node_modules/.bin:$PATH npm run test -- __tests__/bin/agent-canvas.test.ts --reporter=json --outputFile=/workspace/vitest.json",
+      "expectedTests": [
+        "shows usage info in --help output",
+        "does not require build/ in --backend-only mode"
+      ],
+      "suite": "__tests__/bin/agent-canvas.test.ts",
+      "setupQualification": "npm ci dependency bytes retained; install hooks disabled during network stage. Test wrapper including make-i18n executes offline unchanged. Hook equivalence requires independent review before campaign environment acceptance."
+    },
+    "go-01": {
+      "sourceFolder": "go-01-full",
+      "sourceRevision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+      "archiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+      "inventorySha256": "96c935c31228fa8e05bb836a93257beeb87ac524e5eb30cdde3c546a1ea4be0e",
+      "taskIdentity": {
+        "id": "go-01",
+        "repository": "github.com/microsoft/TypeScript",
+        "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+        "ecosystem": "Go",
+        "scope": "repository",
+        "startingState": "pre-clone",
+        "component": null,
+        "request": "requests/go-01.md",
+        "gold": "curator/gold/go-01.json",
+        "oracle": "curator/oracles/go-01.json",
+        "enrollmentRationale": "Source has Go workspace modules tsc/tools and maintainer guide explicitly names the default compiler/language-service Go test task."
+      },
+      "imageId": "sha256:9f07b849c4603e3ad6b52c00c2dccaaf2054f8b3ec0f4add866ffdd537073c76",
+      "registryResolvedInputs": "All external locked npm resolutions use https://registry.npmjs.org; three go-01 internal workspace links retained.",
+      "kind": "go",
+      "toolchainProbe": "node --version; npm --version; go version; git --version",
+      "downloadOnlySetup": [
+        "npm ci --ignore-scripts",
+        "cd tsc && go mod download",
+        "cd tools && go mod download"
+      ],
+      "afterSetupProbe": "test \"$(npm --version)\" = 11.19.1; test \"$(uname -s)\" = Linux; npm --version; go version",
+      "listCommand": "cd tsc && go test -json -list . ./...",
+      "testCommand": "GOTESTSUM_JSONFILE=/workspace/go-test-events.jsonl GOFLAGS=-count=1 npx hereby test",
+      "packagePrefix": "github.com/microsoft/TypeScript/tsc",
+      "platformQualification": "Linux ARM64 only. The documented Windows Git-long-path condition does not apply; no global Git configuration changed. Default test:tsc retained, not test:all.",
+      "setupQualification": "npm ci install hooks disabled during network stage; no narrower test selection. Full compiler/language-service default wrapper remains unchanged. Hook equivalence requires independent review."
+    },
+    "go-03": {
+      "sourceFolder": "go-03",
+      "sourceRevision": "352089582444ea84feb03bc97eda97b35729e8ec",
+      "archiveSha256": "cc7b18c67ce11698d79bfee35fe7afa7f7c8f0ea0dccbdaefd8836cde49f3ba2",
+      "inventorySha256": "0dde9a80e14165d1675227db0842f3c88bda2828dd20506e75d6b4ff5d9fcd74",
+      "taskIdentity": {
+        "id": "go-03",
+        "repository": "github.com/hashicorp/vault",
+        "revision": "352089582444ea84feb03bc97eda97b35729e8ec",
+        "ecosystem": "Go",
+        "scope": "component",
+        "startingState": "pre-clone",
+        "component": "api",
+        "request": "requests/go-03.md",
+        "gold": "curator/gold/go-03.json",
+        "oracle": "curator/oracles/go-03.json",
+        "enrollmentRationale": "go.work declares api as the lexical first non-root module; api/go.mod, API README and retained API tests establish an owned component with test intent."
+      },
+      "imageId": "sha256:d9b6a1beb9474adc2a1ce842573639b44b2a0dd49b6669f51d3821baf9ec37c9",
+      "kind": "go",
+      "toolchainProbe": "go version; git --version",
+      "downloadOnlySetup": [
+        "cd api && GOWORK=off go mod download"
+      ],
+      "listCommand": "cd api && GOWORK=off go test -json -list . ./...",
+      "testCommand": "cd api && GOWORK=off go test -json -count=1 ./...",
+      "packagePrefix": "github.com/hashicorp/vault/api",
+      "generationAdjudication": "API module contains committed enumer-generated renewbehavior_enumer.go/pluginruntimetype_enumer.go and local API tests. Root make prep also generates root/sdk code outside this component. This observed standalone API module alternative does not claim root make test equivalence; source-gold remains unresolved pending independent review.",
+      "dockerAdjudication": "No Docker socket/daemon is provisioned. Source API-module test files contain no Docker dependency. Nested api/auth/* modules remain distinct and excluded by Go module ./... rules; actual coverage is verified after execution."
+    }
+  },
+  "networkPolicy": "Trusted download-only package managers with lifecycle scripts disabled before network disconnect. All upstream source execution is offline with no host mounts/credentials/socket.",
+  "modelCalls": 0,
+  "goldUsedToGateCommands": false,
+  "goldOriginalsUnchanged": true,
+  "campaignExecuted": false,
+  "limits": [
+    "Four-task qualification tranche only, not all12 or72campaign sessions.",
+    "No evaluated index/profile consulted.",
+    "Independent review and frozen reusable dependency caches still pending."
+  ]
+}

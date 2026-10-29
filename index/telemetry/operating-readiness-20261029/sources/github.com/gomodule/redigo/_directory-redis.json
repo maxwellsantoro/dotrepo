@@ -1,0 +1,408 @@
+{
+  "observedAt": "2026-10-29T06:00:49.009708+00:00",
+  "endpoint": "repos/gomodule/redigo/contents/redis?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+  "exitCode": 0,
+  "response": [
+    {
+      "name": "commandinfo.go",
+      "path": "redis/commandinfo.go",
+      "sha": "b6df6a25aa3c802606065f146d8aaf85347d7349",
+      "size": 1558,
+      "url": "https://api.github.com/repos/gomodule/redigo/contents/redis/commandinfo.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "html_url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/commandinfo.go",
+      "git_url": "https://api.github.com/repos/gomodule/redigo/git/blobs/b6df6a25aa3c802606065f146d8aaf85347d7349",
+      "download_url": "https://raw.githubusercontent.com/gomodule/redigo/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/commandinfo.go",
+      "type": "file",
+      "_links": {
+        "self": "https://api.github.com/repos/gomodule/redigo/contents/redis/commandinfo.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+        "git": "https://api.github.com/repos/gomodule/redigo/git/blobs/b6df6a25aa3c802606065f146d8aaf85347d7349",
+        "html": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/commandinfo.go"
+      }
+    },
+    {
+      "name": "commandinfo_test.go",
+      "path": "redis/commandinfo_test.go",
+      "sha": "799b92928c8f6cb5f5b4f50898dd6d090c19799b",
+      "size": 689,
+      "url": "https://api.github.com/repos/gomodule/redigo/contents/redis/commandinfo_test.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "html_url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/commandinfo_test.go",
+      "git_url": "https://api.github.com/repos/gomodule/redigo/git/blobs/799b92928c8f6cb5f5b4f50898dd6d090c19799b",
+      "download_url": "https://raw.githubusercontent.com/gomodule/redigo/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/commandinfo_test.go",
+      "type": "file",
+      "_links": {
+        "self": "https://api.github.com/repos/gomodule/redigo/contents/redis/commandinfo_test.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+        "git": "https://api.github.com/repos/gomodule/redigo/git/blobs/799b92928c8f6cb5f5b4f50898dd6d090c19799b",
+        "html": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/commandinfo_test.go"
+      }
+    },
+    {
+      "name": "conn.go",
+      "path": "redis/conn.go",
+      "sha": "dc445a0669b449395456a143bdce4527b0b9e139",
+      "size": 21727,
+      "url": "https://api.github.com/repos/gomodule/redigo/contents/redis/conn.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "html_url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/conn.go",
+      "git_url": "https://api.github.com/repos/gomodule/redigo/git/blobs/dc445a0669b449395456a143bdce4527b0b9e139",
+      "download_url": "https://raw.githubusercontent.com/gomodule/redigo/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/conn.go",
+      "type": "file",
+      "_links": {
+        "self": "https://api.github.com/repos/gomodule/redigo/contents/redis/conn.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+        "git": "https://api.github.com/repos/gomodule/redigo/git/blobs/dc445a0669b449395456a143bdce4527b0b9e139",
+        "html": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/conn.go"
+      }
+    },
+    {
+      "name": "conn_test.go",
+      "path": "redis/conn_test.go",
+      "sha": "414b7ef34f2e6fd0d83e463c72ed2b6bd5f8b115",
+      "size": 28054,
+      "url": "https://api.github.com/repos/gomodule/redigo/contents/redis/conn_test.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "html_url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/conn_test.go",
+      "git_url": "https://api.github.com/repos/gomodule/redigo/git/blobs/414b7ef34f2e6fd0d83e463c72ed2b6bd5f8b115",
+      "download_url": "https://raw.githubusercontent.com/gomodule/redigo/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/conn_test.go",
+      "type": "file",
+      "_links": {
+        "self": "https://api.github.com/repos/gomodule/redigo/contents/redis/conn_test.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+        "git": "https://api.github.com/repos/gomodule/redigo/git/blobs/414b7ef34f2e6fd0d83e463c72ed2b6bd5f8b115",
+        "html": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/conn_test.go"
+      }
+    },
+    {
+      "name": "doc.go",
+      "path": "redis/doc.go",
+      "sha": "a539219087736f244baf2c5b8a26c49588e9936a",
+      "size": 7701,
+      "url": "https://api.github.com/repos/gomodule/redigo/contents/redis/doc.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "html_url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/doc.go",
+      "git_url": "https://api.github.com/repos/gomodule/redigo/git/blobs/a539219087736f244baf2c5b8a26c49588e9936a",
+      "download_url": "https://raw.githubusercontent.com/gomodule/redigo/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/doc.go",
+      "type": "file",
+      "_links": {
+        "self": "https://api.github.com/repos/gomodule/redigo/contents/redis/doc.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+        "git": "https://api.github.com/repos/gomodule/redigo/git/blobs/a539219087736f244baf2c5b8a26c49588e9936a",
+        "html": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/doc.go"
+      }
+    },
+    {
+      "name": "list_test.go",
+      "path": "redis/list_test.go",
+      "sha": "9c34bede544c760314159cb5580925c8b22c68ad",
+      "size": 1822,
+      "url": "https://api.github.com/repos/gomodule/redigo/contents/redis/list_test.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "html_url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/list_test.go",
+      "git_url": "https://api.github.com/repos/gomodule/redigo/git/blobs/9c34bede544c760314159cb5580925c8b22c68ad",
+      "download_url": "https://raw.githubusercontent.com/gomodule/redigo/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/list_test.go",
+      "type": "file",
+      "_links": {
+        "self": "https://api.github.com/repos/gomodule/redigo/contents/redis/list_test.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+        "git": "https://api.github.com/repos/gomodule/redigo/git/blobs/9c34bede544c760314159cb5580925c8b22c68ad",
+        "html": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/list_test.go"
+      }
+    },
+    {
+      "name": "log.go",
+      "path": "redis/log.go",
+      "sha": "72e054f0d172c1412d127d5cf48138db7f53520b",
+      "size": 4255,
+      "url": "https://api.github.com/repos/gomodule/redigo/contents/redis/log.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "html_url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/log.go",
+      "git_url": "https://api.github.com/repos/gomodule/redigo/git/blobs/72e054f0d172c1412d127d5cf48138db7f53520b",
+      "download_url": "https://raw.githubusercontent.com/gomodule/redigo/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/log.go",
+      "type": "file",
+      "_links": {
+        "self": "https://api.github.com/repos/gomodule/redigo/contents/redis/log.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+        "git": "https://api.github.com/repos/gomodule/redigo/git/blobs/72e054f0d172c1412d127d5cf48138db7f53520b",
+        "html": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/log.go"
+      }
+    },
+    {
+      "name": "pool.go",
+      "path": "redis/pool.go",
+      "sha": "82400e395bca76bbe1df2c5da6ba7f9f67063ad6",
+      "size": 18419,
+      "url": "https://api.github.com/repos/gomodule/redigo/contents/redis/pool.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "html_url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/pool.go",
+      "git_url": "https://api.github.com/repos/gomodule/redigo/git/blobs/82400e395bca76bbe1df2c5da6ba7f9f67063ad6",
+      "download_url": "https://raw.githubusercontent.com/gomodule/redigo/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/pool.go",
+      "type": "file",
+      "_links": {
+        "self": "https://api.github.com/repos/gomodule/redigo/contents/redis/pool.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+        "git": "https://api.github.com/repos/gomodule/redigo/git/blobs/82400e395bca76bbe1df2c5da6ba7f9f67063ad6",
+        "html": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/pool.go"
+      }
+    },
+    {
+      "name": "pool_test.go",
+      "path": "redis/pool_test.go",
+      "sha": "2748d977be71e7a4b9cc41c2da585c9afe91ec80",
+      "size": 25581,
+      "url": "https://api.github.com/repos/gomodule/redigo/contents/redis/pool_test.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "html_url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/pool_test.go",
+      "git_url": "https://api.github.com/repos/gomodule/redigo/git/blobs/2748d977be71e7a4b9cc41c2da585c9afe91ec80",
+      "download_url": "https://raw.githubusercontent.com/gomodule/redigo/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/pool_test.go",
+      "type": "file",
+      "_links": {
+        "self": "https://api.github.com/repos/gomodule/redigo/contents/redis/pool_test.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+        "git": "https://api.github.com/repos/gomodule/redigo/git/blobs/2748d977be71e7a4b9cc41c2da585c9afe91ec80",
+        "html": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/pool_test.go"
+      }
+    },
+    {
+      "name": "pubsub.go",
+      "path": "redis/pubsub.go",
+      "sha": "67b885b9d2afad0928818919b9ed995070562d04",
+      "size": 4510,
+      "url": "https://api.github.com/repos/gomodule/redigo/contents/redis/pubsub.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "html_url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/pubsub.go",
+      "git_url": "https://api.github.com/repos/gomodule/redigo/git/blobs/67b885b9d2afad0928818919b9ed995070562d04",
+      "download_url": "https://raw.githubusercontent.com/gomodule/redigo/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/pubsub.go",
+      "type": "file",
+      "_links": {
+        "self": "https://api.github.com/repos/gomodule/redigo/contents/redis/pubsub.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+        "git": "https://api.github.com/repos/gomodule/redigo/git/blobs/67b885b9d2afad0928818919b9ed995070562d04",
+        "html": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/pubsub.go"
+      }
+    },
+    {
+      "name": "pubsub_example_test.go",
+      "path": "redis/pubsub_example_test.go",
+      "sha": "4a5ec91a407e25b590914a6b13a99669145d79b8",
+      "size": 4321,
+      "url": "https://api.github.com/repos/gomodule/redigo/contents/redis/pubsub_example_test.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "html_url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/pubsub_example_test.go",
+      "git_url": "https://api.github.com/repos/gomodule/redigo/git/blobs/4a5ec91a407e25b590914a6b13a99669145d79b8",
+      "download_url": "https://raw.githubusercontent.com/gomodule/redigo/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/pubsub_example_test.go",
+      "type": "file",
+      "_links": {
+        "self": "https://api.github.com/repos/gomodule/redigo/contents/redis/pubsub_example_test.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+        "git": "https://api.github.com/repos/gomodule/redigo/git/blobs/4a5ec91a407e25b590914a6b13a99669145d79b8",
+        "html": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/pubsub_example_test.go"
+      }
+    },
+    {
+      "name": "pubsub_test.go",
+      "path": "redis/pubsub_test.go",
+      "sha": "1119910c67ac406c3a4de6e38a2b742cdfab8943",
+      "size": 3224,
+      "url": "https://api.github.com/repos/gomodule/redigo/contents/redis/pubsub_test.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "html_url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/pubsub_test.go",
+      "git_url": "https://api.github.com/repos/gomodule/redigo/git/blobs/1119910c67ac406c3a4de6e38a2b742cdfab8943",
+      "download_url": "https://raw.githubusercontent.com/gomodule/redigo/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/pubsub_test.go",
+      "type": "file",
+      "_links": {
+        "self": "https://api.github.com/repos/gomodule/redigo/contents/redis/pubsub_test.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+        "git": "https://api.github.com/repos/gomodule/redigo/git/blobs/1119910c67ac406c3a4de6e38a2b742cdfab8943",
+        "html": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/pubsub_test.go"
+      }
+    },
+    {
+      "name": "redis.go",
+      "path": "redis/redis.go",
+      "sha": "e3a3968c20263ecefa89c305bcce3e91210bf225",
+      "size": 8162,
+      "url": "https://api.github.com/repos/gomodule/redigo/contents/redis/redis.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "html_url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/redis.go",
+      "git_url": "https://api.github.com/repos/gomodule/redigo/git/blobs/e3a3968c20263ecefa89c305bcce3e91210bf225",
+      "download_url": "https://raw.githubusercontent.com/gomodule/redigo/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/redis.go",
+      "type": "file",
+      "_links": {
+        "self": "https://api.github.com/repos/gomodule/redigo/contents/redis/redis.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+        "git": "https://api.github.com/repos/gomodule/redigo/git/blobs/e3a3968c20263ecefa89c305bcce3e91210bf225",
+        "html": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/redis.go"
+      }
+    },
+    {
+      "name": "redis_test.go",
+      "path": "redis/redis_test.go",
+      "sha": "e0f4538d1459b2c0b9715cb4464e533f1f4abe55",
+      "size": 4009,
+      "url": "https://api.github.com/repos/gomodule/redigo/contents/redis/redis_test.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "html_url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/redis_test.go",
+      "git_url": "https://api.github.com/repos/gomodule/redigo/git/blobs/e0f4538d1459b2c0b9715cb4464e533f1f4abe55",
+      "download_url": "https://raw.githubusercontent.com/gomodule/redigo/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/redis_test.go",
+      "type": "file",
+      "_links": {
+        "self": "https://api.github.com/repos/gomodule/redigo/contents/redis/redis_test.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+        "git": "https://api.github.com/repos/gomodule/redigo/git/blobs/e0f4538d1459b2c0b9715cb4464e533f1f4abe55",
+        "html": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/redis_test.go"
+      }
+    },
+    {
+      "name": "reflect.go",
+      "path": "redis/reflect.go",
+      "sha": "e135aed709a1e9fefa72ceff9bfacac1e5818258",
+      "size": 1050,
+      "url": "https://api.github.com/repos/gomodule/redigo/contents/redis/reflect.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "html_url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/reflect.go",
+      "git_url": "https://api.github.com/repos/gomodule/redigo/git/blobs/e135aed709a1e9fefa72ceff9bfacac1e5818258",
+      "download_url": "https://raw.githubusercontent.com/gomodule/redigo/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/reflect.go",
+      "type": "file",
+      "_links": {
+        "self": "https://api.github.com/repos/gomodule/redigo/contents/redis/reflect.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+        "git": "https://api.github.com/repos/gomodule/redigo/git/blobs/e135aed709a1e9fefa72ceff9bfacac1e5818258",
+        "html": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/reflect.go"
+      }
+    },
+    {
+      "name": "reflect_go117.go",
+      "path": "redis/reflect_go117.go",
+      "sha": "e985192ab8880834754352cd2106e8fec3e2ad67",
+      "size": 804,
+      "url": "https://api.github.com/repos/gomodule/redigo/contents/redis/reflect_go117.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "html_url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/reflect_go117.go",
+      "git_url": "https://api.github.com/repos/gomodule/redigo/git/blobs/e985192ab8880834754352cd2106e8fec3e2ad67",
+      "download_url": "https://raw.githubusercontent.com/gomodule/redigo/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/reflect_go117.go",
+      "type": "file",
+      "_links": {
+        "self": "https://api.github.com/repos/gomodule/redigo/contents/redis/reflect_go117.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+        "git": "https://api.github.com/repos/gomodule/redigo/git/blobs/e985192ab8880834754352cd2106e8fec3e2ad67",
+        "html": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/reflect_go117.go"
+      }
+    },
+    {
+      "name": "reflect_go118.go",
+      "path": "redis/reflect_go118.go",
+      "sha": "3356e76f3a8cb862b810c387daf75bf28efe8569",
+      "size": 402,
+      "url": "https://api.github.com/repos/gomodule/redigo/contents/redis/reflect_go118.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "html_url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/reflect_go118.go",
+      "git_url": "https://api.github.com/repos/gomodule/redigo/git/blobs/3356e76f3a8cb862b810c387daf75bf28efe8569",
+      "download_url": "https://raw.githubusercontent.com/gomodule/redigo/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/reflect_go118.go",
+      "type": "file",
+      "_links": {
+        "self": "https://api.github.com/repos/gomodule/redigo/contents/redis/reflect_go118.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+        "git": "https://api.github.com/repos/gomodule/redigo/git/blobs/3356e76f3a8cb862b810c387daf75bf28efe8569",
+        "html": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/reflect_go118.go"
+      }
+    },
+    {
+      "name": "reply.go",
+      "path": "redis/reply.go",
+      "sha": "aabf59892cea7d1182761bb089ffae1bb2111bc6",
+      "size": 20628,
+      "url": "https://api.github.com/repos/gomodule/redigo/contents/redis/reply.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "html_url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/reply.go",
+      "git_url": "https://api.github.com/repos/gomodule/redigo/git/blobs/aabf59892cea7d1182761bb089ffae1bb2111bc6",
+      "download_url": "https://raw.githubusercontent.com/gomodule/redigo/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/reply.go",
+      "type": "file",
+      "_links": {
+        "self": "https://api.github.com/repos/gomodule/redigo/contents/redis/reply.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+        "git": "https://api.github.com/repos/gomodule/redigo/git/blobs/aabf59892cea7d1182761bb089ffae1bb2111bc6",
+        "html": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/reply.go"
+      }
+    },
+    {
+      "name": "reply_test.go",
+      "path": "redis/reply_test.go",
+      "sha": "3f1705ba89108e714df4ea5676fa6bc25b4a95e1",
+      "size": 11290,
+      "url": "https://api.github.com/repos/gomodule/redigo/contents/redis/reply_test.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "html_url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/reply_test.go",
+      "git_url": "https://api.github.com/repos/gomodule/redigo/git/blobs/3f1705ba89108e714df4ea5676fa6bc25b4a95e1",
+      "download_url": "https://raw.githubusercontent.com/gomodule/redigo/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/reply_test.go",
+      "type": "file",
+      "_links": {
+        "self": "https://api.github.com/repos/gomodule/redigo/contents/redis/reply_test.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+        "git": "https://api.github.com/repos/gomodule/redigo/git/blobs/3f1705ba89108e714df4ea5676fa6bc25b4a95e1",
+        "html": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/reply_test.go"
+      }
+    },
+    {
+      "name": "scan.go",
+      "path": "redis/scan.go",
+      "sha": "c1fb800d1a9b3e3feebae892518ed7be7da07f15",
+      "size": 17625,
+      "url": "https://api.github.com/repos/gomodule/redigo/contents/redis/scan.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "html_url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/scan.go",
+      "git_url": "https://api.github.com/repos/gomodule/redigo/git/blobs/c1fb800d1a9b3e3feebae892518ed7be7da07f15",
+      "download_url": "https://raw.githubusercontent.com/gomodule/redigo/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/scan.go",
+      "type": "file",
+      "_links": {
+        "self": "https://api.github.com/repos/gomodule/redigo/contents/redis/scan.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+        "git": "https://api.github.com/repos/gomodule/redigo/git/blobs/c1fb800d1a9b3e3feebae892518ed7be7da07f15",
+        "html": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/scan.go"
+      }
+    },
+    {
+      "name": "scan_test.go",
+      "path": "redis/scan_test.go",
+      "sha": "a2a5d6728bf55519a56cba0f6920b23d29a42c9d",
+      "size": 17971,
+      "url": "https://api.github.com/repos/gomodule/redigo/contents/redis/scan_test.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "html_url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/scan_test.go",
+      "git_url": "https://api.github.com/repos/gomodule/redigo/git/blobs/a2a5d6728bf55519a56cba0f6920b23d29a42c9d",
+      "download_url": "https://raw.githubusercontent.com/gomodule/redigo/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/scan_test.go",
+      "type": "file",
+      "_links": {
+        "self": "https://api.github.com/repos/gomodule/redigo/contents/redis/scan_test.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+        "git": "https://api.github.com/repos/gomodule/redigo/git/blobs/a2a5d6728bf55519a56cba0f6920b23d29a42c9d",
+        "html": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/scan_test.go"
+      }
+    },
+    {
+      "name": "script.go",
+      "path": "redis/script.go",
+      "sha": "c585518ba8b19e0a029c3bd2dc4c5cb062b1f8fa",
+      "size": 3498,
+      "url": "https://api.github.com/repos/gomodule/redigo/contents/redis/script.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "html_url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/script.go",
+      "git_url": "https://api.github.com/repos/gomodule/redigo/git/blobs/c585518ba8b19e0a029c3bd2dc4c5cb062b1f8fa",
+      "download_url": "https://raw.githubusercontent.com/gomodule/redigo/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/script.go",
+      "type": "file",
+      "_links": {
+        "self": "https://api.github.com/repos/gomodule/redigo/contents/redis/script.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+        "git": "https://api.github.com/repos/gomodule/redigo/git/blobs/c585518ba8b19e0a029c3bd2dc4c5cb062b1f8fa",
+        "html": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/script.go"
+      }
+    },
+    {
+      "name": "script_test.go",
+      "path": "redis/script_test.go",
+      "sha": "71424c3035536e93f270b72ebd26ab2dcbce08c6",
+      "size": 2790,
+      "url": "https://api.github.com/repos/gomodule/redigo/contents/redis/script_test.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "html_url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/script_test.go",
+      "git_url": "https://api.github.com/repos/gomodule/redigo/git/blobs/71424c3035536e93f270b72ebd26ab2dcbce08c6",
+      "download_url": "https://raw.githubusercontent.com/gomodule/redigo/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/script_test.go",
+      "type": "file",
+      "_links": {
+        "self": "https://api.github.com/repos/gomodule/redigo/contents/redis/script_test.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+        "git": "https://api.github.com/repos/gomodule/redigo/git/blobs/71424c3035536e93f270b72ebd26ab2dcbce08c6",
+        "html": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/script_test.go"
+      }
+    },
+    {
+      "name": "test_test.go",
+      "path": "redis/test_test.go",
+      "sha": "ba2a62641e2ea9cfb615d5634b6cc50f999f0a45",
+      "size": 5792,
+      "url": "https://api.github.com/repos/gomodule/redigo/contents/redis/test_test.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "html_url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/test_test.go",
+      "git_url": "https://api.github.com/repos/gomodule/redigo/git/blobs/ba2a62641e2ea9cfb615d5634b6cc50f999f0a45",
+      "download_url": "https://raw.githubusercontent.com/gomodule/redigo/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/test_test.go",
+      "type": "file",
+      "_links": {
+        "self": "https://api.github.com/repos/gomodule/redigo/contents/redis/test_test.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+        "git": "https://api.github.com/repos/gomodule/redigo/git/blobs/ba2a62641e2ea9cfb615d5634b6cc50f999f0a45",
+        "html": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/test_test.go"
+      }
+    },
+    {
+      "name": "zpop_example_test.go",
+      "path": "redis/zpop_example_test.go",
+      "sha": "3d1af52176b1d5379a0f615b01d0c391cac618e9",
+      "size": 2523,
+      "url": "https://api.github.com/repos/gomodule/redigo/contents/redis/zpop_example_test.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "html_url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/zpop_example_test.go",
+      "git_url": "https://api.github.com/repos/gomodule/redigo/git/blobs/3d1af52176b1d5379a0f615b01d0c391cac618e9",
+      "download_url": "https://raw.githubusercontent.com/gomodule/redigo/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/zpop_example_test.go",
+      "type": "file",
+      "_links": {
+        "self": "https://api.github.com/repos/gomodule/redigo/contents/redis/zpop_example_test.go?ref=57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+        "git": "https://api.github.com/repos/gomodule/redigo/git/blobs/3d1af52176b1d5379a0f615b01d0c391cac618e9",
+        "html": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/zpop_example_test.go"
+      }
+    }
+  ],
+  "error": null
+}

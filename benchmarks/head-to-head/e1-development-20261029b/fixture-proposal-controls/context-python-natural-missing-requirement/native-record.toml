@@ -1,0 +1,39 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "draft"
+generated_at = "2026-10-29T06:17:41.584419Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md` and `pyproject.toml`. Filled `repo.name` with inferred defaults. Inferred `repo.build` from `pyproject.toml`. Inferred `repo.test` from `pyproject.toml`. Imported `repo.toolchain.min` from `pyproject.toml`."
+
+[repo]
+name = "context-python-natural-missing-requirement"
+description = "Keras 3 is a multi-backend deep learning framework, with support for JAX, TensorFlow, PyTorch, and OpenVINO (for inference-only)."
+languages = []
+build = "python -m build"
+test = "python -m pytest"
+topics = []
+
+[repo.toolchain]
+min = "3.11"
+ecosystem = "Python"
+
+[readme]
+title = "context-python-natural-missing-requirement"
+sections = [
+    "overview",
+    "security",
+]
+
+[compat.github]
+codeowners = "skip"
+security = "skip"
+contributing = "skip"
+pull_request_template = "skip"

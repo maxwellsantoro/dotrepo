@@ -87,22 +87,25 @@ impl ServerHandle {
         }
         let child = command
             .stdout(Stdio::null())
-            .stderr(Stdio::null())
+            .stderr(Stdio::inherit())
             .spawn()
             .expect("server process spawns");
 
-        let handle = Self { child, addr };
+        let mut handle = Self { child, addr };
         handle.wait_until_ready();
         handle
     }
 
-    fn wait_until_ready(&self) {
+    fn wait_until_ready(&mut self) {
         // Allow significantly more time for CI environments where process startup
         // and TCP listener bind can be slow.
         let deadline = Instant::now() + Duration::from_secs(30);
         // Give the child a moment to exec and bind before first probe.
         thread::sleep(Duration::from_millis(100));
         while Instant::now() < deadline {
+            if let Some(status) = self.child.try_wait().expect("server status readable") {
+                panic!("server exited before readiness: {status}");
+            }
             if let Some((status, body)) = http_get(&self.addr, "/healthz") {
                 if status == 200 && body.trim() == "ok" {
                     return;

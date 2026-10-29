@@ -1,0 +1,41 @@
+   Compiling dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.99s
+     Running unittests src/lib.rs (target/debug/deps/dotrepo_core-6af6d15045c80b2a)
+
+running 12 tests
+test import::commands::context::tests::explicit_runtime_list_cannot_override_external_setup_contracts ... ok
+test import::commands::context::tests::explicit_runtime_prerequisites_can_establish_runtime_only_setup ... ok
+test import::commands::context::tests::explicit_runtime_prerequisites_preserve_complete_component_tuple ... ok
+test import::commands::context::tests::explicit_runtime_list_cannot_supply_missing_or_conflicting_context ... ok
+test import::commands::context::tests::missing_prerequisites_and_contradictory_none_still_abstain ... ok
+test import::commands::context::tests::prerequisite_lists_abstain_on_incomplete_or_ambiguous_declarations ... ok
+test import::commands::context::tests::scoped_sections_cannot_discard_ancestor_restrictions ... ok
+test import::commands::context::python_recipe::tests::natural_python_recipe_rejects_even_contained_requirement_symlinks ... ok
+test import::commands::context::python_recipe::tests::natural_python_recipe_recovers_real_source_tuple_with_medium_bound_evidence ... FAILED
+test import::commands::context::python_recipe::tests::natural_python_recipe_import_preserves_candidate_assessment_without_scalar_promotion ... FAILED
+test import::commands::context::python_recipe::tests::natural_python_recipe_rejects_hidden_indented_and_external_pretest_setup ... ok
+test import::commands::context::python_recipe::tests::natural_python_recipe_rejects_wrong_scope_directory_conditions_and_missing_chain ... ok
+
+failures:
+
+---- import::commands::context::python_recipe::tests::natural_python_recipe_recovers_real_source_tuple_with_medium_bound_evidence stdout ----
+
+thread 'import::commands::context::python_recipe::tests::natural_python_recipe_recovers_real_source_tuple_with_medium_bound_evidence' (41355776) panicked at crates/dotrepo-core/src/import/commands/context/python_recipe/tests.rs:73:46:
+retained Keras recipe
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- import::commands::context::python_recipe::tests::natural_python_recipe_import_preserves_candidate_assessment_without_scalar_promotion stdout ----
+
+thread 'import::commands::context::python_recipe::tests::natural_python_recipe_import_preserves_candidate_assessment_without_scalar_promotion' (41355775) panicked at crates/dotrepo-core/src/import/commands/context/python_recipe/tests.rs:125:5:
+assertion `left == right` failed
+  left: 0
+ right: 1
+
+
+failures:
+    import::commands::context::python_recipe::tests::natural_python_recipe_import_preserves_candidate_assessment_without_scalar_promotion
+    import::commands::context::python_recipe::tests::natural_python_recipe_recovers_real_source_tuple_with_medium_bound_evidence
+
+test result: FAILED. 10 passed; 2 failed; 0 ignored; 0 measured; 241 filtered out; finished in 0.11s
+
+error: test failed, to rerun pass `-p dotrepo-core --lib`

@@ -1,0 +1,45 @@
+[
+    {
+        "Id": "sha256:e89d508aefaecfc8d0163f99be59a3da8785493684393f7a1bf4e659b1043587",
+        "RepoTags": [
+            "dotrepo-f05-node-go:20261029"
+        ],
+        "RepoDigests": [
+            "dotrepo-f05-node-go@sha256:e89d508aefaecfc8d0163f99be59a3da8785493684393f7a1bf4e659b1043587"
+        ],
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-10-29T06:02:55.860043011Z",
+        "Config": {
+            "Env": [
+                "PATH=/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "WorkingDir": "/"
+        },
+        "Architecture": "arm64",
+        "Os": "linux",
+        "Size": 1971173670,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:b072adc33b83109c75cd1aba471476d53e1348ffd59bcf64ccb58a0df445855c",
+                "sha256:d4109bcf2740cf58b3f3f0c439e77e0be57a2b108c6e55ac7aa47bf53e7150e8"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-10-29T06:04:01.578424666Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.index.v1+json",
+            "digest": "sha256:e89d508aefaecfc8d0163f99be59a3da8785493684393f7a1bf4e659b1043587",
+            "size": 855
+        },
+        "Identity": {
+            "Build": [
+                {
+                    "Ref": "coo67mtkp4ry2ez3hackpgsvp",
+                    "CreatedAt": "2026-10-29T06:04:27.061628637Z"
+                }
+            ]
+        }
+    }
+]

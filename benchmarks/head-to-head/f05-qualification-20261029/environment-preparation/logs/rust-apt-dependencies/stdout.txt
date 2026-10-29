@@ -1,0 +1,44 @@
+Get:1 http://deb.debian.org/debian bookworm InRelease [151 kB]
+Get:2 http://deb.debian.org/debian bookworm-updates InRelease [55.4 kB]
+Get:3 http://deb.debian.org/debian-security bookworm-security InRelease [34.8 kB]
+Get:4 http://deb.debian.org/debian bookworm/main arm64 Packages [8689 kB]
+Get:5 http://deb.debian.org/debian bookworm-updates/main arm64 Packages [6936 B]
+Get:6 http://deb.debian.org/debian-security bookworm-security/main arm64 Packages [361 kB]
+Fetched 9299 kB in 2s (4563 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  libasound2 libasound2-data libdbus-1-3 libdbus-1-dev libpcap0.8
+  libpcap0.8-dev sgml-base xml-core
+Suggested packages:
+  libasound2-plugins alsa-utils libasound2-doc sgml-base-doc debhelper
+Recommended packages:
+  alsa-ucm-conf alsa-topology-conf dbus
+The following NEW packages will be installed:
+  libasound2 libasound2-data libasound2-dev libdbus-1-3 libdbus-1-dev
+  libpcap-dev libpcap0.8 libpcap0.8-dev sgml-base xml-core
+0 upgraded, 10 newly installed, 0 to remove and 31 not upgraded.
+Need to get 1377 kB of archives.
+After this operation, 5143 kB of additional disk space will be used.
+Err:1 http://deb.debian.org/debian bookworm/main arm64 sgml-base all 1.31
+  Could not open file /var/cache/apt/archives/partial/sgml-base_1.31_all.deb - open (13: Permission denied) [IP: 151.101.66.132 80]
+Err:2 http://deb.debian.org/debian bookworm/main arm64 libasound2-data all 1.2.8-1
+  Could not open file /var/cache/apt/archives/partial/libasound2-data_1.2.8-1_all.deb - open (13: Permission denied) [IP: 151.101.194.132 80]
+Err:3 http://deb.debian.org/debian bookworm/main arm64 libasound2 arm64 1.2.8-1+b1
+  Could not open file /var/cache/apt/archives/partial/libasound2_1.2.8-1+b1_arm64.deb - open (13: Permission denied) [IP: 151.101.2.132 80]
+Err:4 http://deb.debian.org/debian bookworm/main arm64 libasound2-dev arm64 1.2.8-1+b1
+  Could not open file /var/cache/apt/archives/partial/libasound2-dev_1.2.8-1+b1_arm64.deb - open (13: Permission denied) [IP: 151.101.130.132 80]
+Err:5 http://deb.debian.org/debian bookworm/main arm64 libdbus-1-3 arm64 1.14.10-1~deb12u1
+  Could not open file /var/cache/apt/archives/partial/libdbus-1-3_1.14.10-1~deb12u1_arm64.deb - open (13: Permission denied) [IP: 151.101.66.132 80]
+Err:6 http://deb.debian.org/debian bookworm/main arm64 xml-core all 0.18+nmu1
+  Could not open file /var/cache/apt/archives/partial/xml-core_0.18+nmu1_all.deb - open (13: Permission denied) [IP: 151.101.194.132 80]
+Err:7 http://deb.debian.org/debian bookworm/main arm64 libdbus-1-dev arm64 1.14.10-1~deb12u1
+  Could not open file /var/cache/apt/archives/partial/libdbus-1-dev_1.14.10-1~deb12u1_arm64.deb - open (13: Permission denied) [IP: 151.101.2.132 80]
+Err:8 http://deb.debian.org/debian bookworm/main arm64 libpcap0.8 arm64 1.10.3-1
+  Could not open file /var/cache/apt/archives/partial/libpcap0.8_1.10.3-1_arm64.deb - open (13: Permission denied) [IP: 151.101.130.132 80]
+Err:9 http://deb.debian.org/debian bookworm/main arm64 libpcap0.8-dev arm64 1.10.3-1
+  Could not open file /var/cache/apt/archives/partial/libpcap0.8-dev_1.10.3-1_arm64.deb - open (13: Permission denied) [IP: 151.101.66.132 80]
+Err:10 http://deb.debian.org/debian bookworm/main arm64 libpcap-dev arm64 1.10.3-1
+  Could not open file /var/cache/apt/archives/partial/libpcap-dev_1.10.3-1_arm64.deb - open (13: Permission denied) [IP: 151.101.194.132 80]

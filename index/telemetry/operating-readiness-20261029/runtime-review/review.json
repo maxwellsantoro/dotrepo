@@ -1,0 +1,39 @@
+{
+  "reviewedAt": "2026-10-29T06:15:26.745941+00:00",
+  "scope": "PID flag removal and explicit executable nosuid/nodev tmpfs backend patch plus retained real synthetic backend controls",
+  "findingCount": 0,
+  "freezePath": "benchmarks/head-to-head/runtime-qualification-20261029/FREEZE.json",
+  "freezeSha256": "80e124c1005c00485c9d09cdd5e5d8b925a79c0c7dd6568fe8bc137d7b804b33",
+  "all12BoundFilesChecked": true,
+  "currentRuntimeEqualsFixedSnapshot": true,
+  "focusedTests": {
+    "command": [
+      "uv",
+      "run",
+      "pytest",
+      "-q",
+      "scripts/tests/test_agent_runtime.py",
+      "scripts/tests/test_agent_experiment.py"
+    ],
+    "passed": 106,
+    "seconds": 6.53
+  },
+  "reviewedControls": [
+    "failed unsupported PID argument retained",
+    "intermediate expected ELF permission failure retained",
+    "final workspace and tmp ELF execution successful",
+    "non-root UID1000",
+    "read-only root write denied",
+    "network mode none and no host bind/volume sources in inspect",
+    "configured memory/CPU/PID/nofile limits",
+    "1024-byte output bound",
+    "command timeout",
+    "cleanup command and independent absence of all three named containers"
+  ],
+  "limits": [
+    "Synthetic backend flags do not qualify provider/task/cache/oracle/campaign readiness.",
+    "Network and resource isolation principally inspected configuration, not network or resource-exhaustion probes.",
+    "Timeout kills the local Docker command; controls do not prove immediate in-container process termination before final container cleanup.",
+    "No new Docker, provider or upstream execution was performed by this reviewer."
+  ]
+}

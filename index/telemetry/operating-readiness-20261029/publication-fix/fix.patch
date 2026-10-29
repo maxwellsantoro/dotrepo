@@ -1,0 +1,300 @@
+diff --git a/.github/workflows/index-autonomous-refresh.yml b/.github/workflows/index-autonomous-refresh.yml
+index 35909bd4..bbe44f17 100644
+--- a/.github/workflows/index-autonomous-refresh.yml
++++ b/.github/workflows/index-autonomous-refresh.yml
+@@ -306,10 +306,12 @@ jobs:
+           PR_NUMBER: ${{ steps.autonomous_pr.outputs.pull-request-number }}
+           EXPECTED_HEAD: ${{ steps.autonomous_pr.outputs.pull-request-head-sha }}
+           EXPECTED_BASE: ${{ github.sha }}
++          PUBLIC_DEPLOY_ENABLED: ${{ vars.CLOUDFLARE_PUBLIC_DEPLOY_ENABLED == 'true' && 'true' || 'false' }}
+         run: |
+           uv run python scripts/land_autonomous_index.py \
+             --repository "$GITHUB_REPOSITORY" --pr-number "$PR_NUMBER" \
+             --expected-head "$EXPECTED_HEAD" --expected-base "$EXPECTED_BASE" \
++            --public-deploy-enabled "$PUBLIC_DEPLOY_ENABLED" \
+             --output-json index-autonomous-batch/landing.json
+       - name: Retain refresh publication and budget receipt
+         if: always()
+diff --git a/docs/factual-crawl-automation.md b/docs/factual-crawl-automation.md
+index 3bc63299..6f562921 100644
+--- a/docs/factual-crawl-automation.md
++++ b/docs/factual-crawl-automation.md
+@@ -251,6 +251,10 @@ the late exact-base guards still apply. There is no routine human merge tier.
+ [`land_autonomous_index.py`](../scripts/land_autonomous_index.py):
+ 
+ 1. Requires a same-repository, index-only PR matching expected head and base.
++   Resolves public deployment enablement before landing and retains its boolean,
++   source and reason in `landing.publicDeployment`. The scheduled workflow passes
++   its evaluated repository variable through `--public-deploy-enabled true|false`;
++   it does not require the workflow token to read the variables REST API.
+ 2. Dispatches CI explicitly, waits for its run, and requires the public gate to
+    succeed for that exact commit.
+ 3. Rechecks the PR/default branch and fast-forwards with `force: false`.
+@@ -260,6 +264,13 @@ the late exact-base guards still apply. There is no routine human merge tier.
+    A disabled switch is recorded as `landed-deployment-disabled`; landing alone
+    cannot qualify as publication.
+ 
++Manual invocations that omit `--public-deploy-enabled` retain the repository
++variables API lookup. A missing variable (HTTP 404) is explicitly recorded as
++unset/disabled. Permission, network, malformed-response and invalid-value errors
++refuse landing before the fast-forward; they are never treated as an operator's
++decision to disable deployment. No additional token permission is required by
++the scheduled path.
++
+ Explicit dispatch is necessary because ordinary `GITHUB_TOKEN` pushes do not
+ start downstream push workflows. A successful crawl is not publication proof.
+ If the base advanced, regenerate the batch. If landing succeeded but deployment
+diff --git a/scripts/land_autonomous_index.py b/scripts/land_autonomous_index.py
+index b9c7cec9..695e0213 100644
+--- a/scripts/land_autonomous_index.py
++++ b/scripts/land_autonomous_index.py
+@@ -107,16 +107,49 @@ def approve_pending_pull_runs(repository, root, expected_head):
+         wait_run(repository, run_id, expected_head, "ci-gate")
+ 
+ 
+-def public_deploy_enabled(repository, root):
+-    """Public deploy is an operator switch; landing must not fail without it."""
++def public_deploy_enabled(repository, root, *, explicit=None, decision=None):
++    """Resolve the switch before landing; a failed read is not a disabled switch."""
++    decision = decision if decision is not None else {}
++    decision.update(
++        enabled=None, source="explicit-cli" if explicit is not None else "repository-variable-api"
++    )
++    if explicit is not None:
++        if type(explicit) is not bool:
++            raise ValueError("Explicit public deployment switch must be boolean")
++        decision.update(enabled=explicit, reason="explicit-true" if explicit else "explicit-false")
++        return explicit
+     try:
+         variable = api(f"{root}/actions/variables/CLOUDFLARE_PUBLIC_DEPLOY_ENABLED")
+-    except Exception:  # noqa: BLE001 - unset variable reads as disabled
+-        return False
+-    return str(variable.get("value", "")).lower() == "true"
++    except Exception as error:  # noqa: BLE001 - retain config-read failure before landing
++        not_found = False
++        if isinstance(error, subprocess.CalledProcessError):
++            try:
++                response = json.loads(error.stdout or "null")
++            except (ValueError, TypeError):
++                response = None
++            not_found = (
++                isinstance(response, dict) and response.get("status") in (404, "404")
++            ) or "(HTTP 404)" in (error.stderr or "")
++        if not_found:
++            decision.update(enabled=False, reason="repository-variable-unset", httpStatus=404)
++            return False
++        decision.update(reason="variable-read-error", errorType=type(error).__name__)
++        raise RuntimeError("Could not read public deployment switch; refusing to land") from error
++    if not isinstance(variable, dict) or not isinstance(variable.get("value"), str):
++        decision.update(reason="invalid-variable-response")
++        raise RuntimeError("Invalid public deployment switch response; refusing to land")
++    value = variable["value"].lower()
++    if value not in {"true", "false", ""}:
++        decision.update(reason="invalid-variable-value")
++        raise RuntimeError("Public deployment switch must be true or false; refusing to land")
++    enabled = value == "true"
++    decision.update(enabled=enabled, reason="variable-true" if enabled else "variable-not-true")
++    return enabled
+ 
+ 
+-def land(repository, number, expected_head, expected_base, *, receipt=None):
++def land(
++    repository, number, expected_head, expected_base, *, receipt=None, deployment_enabled=None
++):
+     receipt = receipt if receipt is not None else {}
+     receipt.update(
+         repository=repository,
+@@ -131,6 +164,11 @@ def land(repository, number, expected_head, expected_base, *, receipt=None):
+     pull_path = f"{root}/pulls/{number}"
+     pull = api(pull_path)
+     validate_pull(pull, repository, default_branch, expected_head, expected_base)
++    deployment_decision = {}
++    receipt["publicDeployment"] = deployment_decision
++    deploy_enabled = public_deploy_enabled(
++        repository, root, explicit=deployment_enabled, decision=deployment_decision
++    )
+     files = []
+     for page in range(1, 32):
+         batch = api(f"{pull_path}/files?per_page=100&page={page}")
+@@ -165,7 +203,7 @@ def land(repository, number, expected_head, expected_base, *, receipt=None):
+     api(ref, method="PATCH", body={"sha": expected_head, "force": False})
+     receipt["status"] = "landed"
+     print(f"Published tested commit {expected_head}", flush=True)
+-    if not public_deploy_enabled(repository, root):
++    if not deploy_enabled:
+         print(
+             "CLOUDFLARE_PUBLIC_DEPLOY_ENABLED is not 'true'; "
+             "landing complete, public deployment skipped (operator switch).",
+@@ -191,6 +229,11 @@ def main():
+     parser.add_argument("--pr-number", required=True, type=int)
+     parser.add_argument("--expected-head", required=True)
+     parser.add_argument("--expected-base", required=True)
++    parser.add_argument(
++        "--public-deploy-enabled",
++        choices=("true", "false"),
++        help="Explicit workflow switch; omitted manual calls read the repository variable",
++    )
+     parser.add_argument("--output-json", type=Path)
+     args = parser.parse_args()
+     if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", args.repository):
+@@ -202,7 +245,14 @@ def main():
+     receipt = {}
+     try:
+         land(
+-            args.repository, args.pr_number, args.expected_head, args.expected_base, receipt=receipt
++            args.repository,
++            args.pr_number,
++            args.expected_head,
++            args.expected_base,
++            receipt=receipt,
++            deployment_enabled=None
++            if args.public_deploy_enabled is None
++            else args.public_deploy_enabled == "true",
+         )
+     finally:
+         if args.output_json:
+diff --git a/scripts/tests/test_autonomous_landing.py b/scripts/tests/test_autonomous_landing.py
+index eea1864e..4c8e989d 100644
+--- a/scripts/tests/test_autonomous_landing.py
++++ b/scripts/tests/test_autonomous_landing.py
+@@ -1,6 +1,7 @@
+ import copy
+ import importlib.util
+ from pathlib import Path
++import subprocess
+ 
+ import pytest
+ 
+@@ -117,6 +118,111 @@ def test_landing_skips_deploy_when_public_deploy_disabled(monkeypatch):
+     assert waits == [(REPOSITORY, 10, HEAD, "public-surface-gate")]
+ 
+ 
++@pytest.mark.parametrize("enabled", [True, False])
++def test_explicit_workflow_switch_bypasses_variable_api_and_controls_deploy(monkeypatch, enabled):
++    calls = []
++
++    def api(path, *, method="GET", body=None):
++        calls.append((path, method))
++        assert "/actions/variables/" not in path
++        if path == "repos/example/index":
++            return {"default_branch": "main"}
++        if path.endswith("/pulls/1"):
++            return pull()
++        if "/files?" in path:
++            return [{"filename": "index/repos/github.com/example/demo/record.toml"}]
++        if "/actions/runs?" in path:
++            return {"workflow_runs": []}
++        if path.endswith("/dispatches"):
++            return {"workflow_run_id": 10 if "ci.yml" in path else 20}
++        if "/git/refs/" in path:
++            return {"object": {"sha": HEAD if method == "PATCH" else BASE}}
++        raise AssertionError(path)
++
++    waits = []
++    monkeypatch.setattr(landing, "api", api)
++    monkeypatch.setattr(landing, "wait_run", lambda *args: waits.append(args))
++    receipt = {}
++    landing.land(REPOSITORY, 1, HEAD, BASE, receipt=receipt, deployment_enabled=enabled)
++    assert receipt["publicDeployment"] == {
++        "enabled": enabled,
++        "source": "explicit-cli",
++        "reason": "explicit-true" if enabled else "explicit-false",
++    }
++    assert receipt["status"] == ("published" if enabled else "landed-deployment-disabled")
++    assert receipt["publicationVerified"] is enabled
++    assert any("public-cloudflare" in path for path, _ in calls) is enabled
++    assert len(waits) == (2 if enabled else 1)
++
++
++@pytest.mark.parametrize("value,enabled", [("true", True), ("false", False), ("", False)])
++def test_manual_switch_fallback_retains_variable_decision(monkeypatch, value, enabled):
++    monkeypatch.setattr(landing, "api", lambda path: {"value": value})
++    decision = {}
++    assert (
++        landing.public_deploy_enabled(REPOSITORY, "repos/example/index", decision=decision)
++        is enabled
++    )
++    assert decision["enabled"] is enabled
++    assert decision["source"] == "repository-variable-api"
++    assert decision["reason"] == ("variable-true" if enabled else "variable-not-true")
++
++
++@pytest.mark.parametrize("failure", ["404", "403", "network", "malformed", "invalid-value"])
++def test_manual_switch_resolution_distinguishes_unset_from_error_before_merge(monkeypatch, failure):
++    calls = []
++
++    def api(path, *, method="GET", body=None):
++        calls.append((path, method))
++        if path == "repos/example/index":
++            return {"default_branch": "main"}
++        if path.endswith("/pulls/1"):
++            return pull()
++        if "/actions/variables/" in path:
++            if failure in {"404", "403"}:
++                raise subprocess.CalledProcessError(
++                    1,
++                    ["gh", "api", path],
++                    output='{"status":"' + failure + '"}',
++                    stderr="gh: fixture (HTTP " + failure + ")",
++                )
++            if failure == "network":
++                raise OSError("fixture connection unavailable")
++            return {} if failure == "malformed" else {"value": "perhaps"}
++        if "/files?" in path:
++            return [{"filename": "index/repos/github.com/example/demo/record.toml"}]
++        if path.endswith("/dispatches"):
++            return {"workflow_run_id": 10}
++        if "/actions/runs?" in path:
++            return {"workflow_runs": []}
++        if "/git/refs/" in path:
++            return {"object": {"sha": BASE}}
++        raise AssertionError(path)
++
++    monkeypatch.setattr(landing, "api", api)
++    monkeypatch.setattr(landing, "wait_run", lambda *args: None)
++    receipt = {}
++    if failure == "404":
++        landing.land(REPOSITORY, 1, HEAD, BASE, receipt=receipt)
++        assert receipt["status"] == "landed-deployment-disabled"
++        assert receipt["publicDeployment"] == {
++            "enabled": False,
++            "source": "repository-variable-api",
++            "reason": "repository-variable-unset",
++            "httpStatus": 404,
++        }
++    else:
++        with pytest.raises(RuntimeError, match="refusing to land"):
++            landing.land(REPOSITORY, 1, HEAD, BASE, receipt=receipt)
++        assert not any(method == "PATCH" or path.endswith("/dispatches") for path, method in calls)
++        assert receipt["publicDeployment"]["enabled"] is None
++        assert receipt["publicDeployment"]["reason"] in {
++            "variable-read-error",
++            "invalid-variable-response",
++            "invalid-variable-value",
++        }
++
++
+ def test_pending_pull_request_run_is_approved_and_awaited(monkeypatch):
+     calls = []
+ 
+diff --git a/scripts/tests/test_autonomous_refresh_workflow.py b/scripts/tests/test_autonomous_refresh_workflow.py
+index cbe10c8f..03b48a3e 100644
+--- a/scripts/tests/test_autonomous_refresh_workflow.py
++++ b/scripts/tests/test_autonomous_refresh_workflow.py
+@@ -99,3 +99,16 @@ def test_daily_capacity_and_automatic_landing_do_not_require_routine_human_revie
+     assert "secrets.GITHUB_TOKEN" in workflow
+     assert "INDEX_AUTOMATION_TOKEN" not in workflow
+     assert "steps.autonomous_pr.outputs.pull-request-head-sha" in workflow
++
++
++def test_landing_receives_explicit_public_deployment_switch_without_variable_api_permission():
++    workflow = WORKFLOW.read_text()
++    start = workflow.index("- name: Check, land, and deploy the exact automation commit")
++    end = workflow.index("- name: Retain refresh publication and budget receipt")
++    step = workflow[start:end]
++    assert (
++        "PUBLIC_DEPLOY_ENABLED: ${{ vars.CLOUDFLARE_PUBLIC_DEPLOY_ENABLED == 'true' && 'true' || 'false' }}"
++        in step
++    )
++    assert '--public-deploy-enabled "$PUBLIC_DEPLOY_ENABLED"' in step
++    assert "variables: write" not in workflow and "variables: read" not in workflow

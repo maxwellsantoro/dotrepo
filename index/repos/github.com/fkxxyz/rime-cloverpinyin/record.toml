@@ -2,17 +2,16 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/fkxxyz/rime-cloverpinyin"
 generated_at = "2026-10-27T18:00:41.654823Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Partial source correction on 2026-10-29; whole-record verification withdrawn pending complete pipeline inspection. Existing record age is retained."
 
 [repo]
 name = "rime-cloverpinyin"
@@ -46,6 +45,9 @@ provenance = [
     "readme",
 ]
 
+[docs]
+root = "https://github.com/fkxxyz/rime-cloverpinyin/wiki/Home"
+
 [x.dotrepo.field_evidence."docs.getting_started"]
 checkedAt = "2026-10-27T18:00:41.654823Z"
 confidence = "high"
@@ -55,13 +57,17 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T18:00:41.654823Z"
+checkedAt = "2026-10-29T06:14:39.417434Z"
 confidence = "high"
-method = "not_found_in_inspected_sources"
-reason = "no unambiguous documentation declaration detected"
-state = "not_found"
-valueJson = "null"
-
+method = "source_inspection"
+reason = "README explicitly says installation instructions moved to this repository wiki, linking Home and platform pages. This is an owned documentation declaration. Exact source-declared URL retained; bounded live target status/redirect/content observations are retained separately in index/telemetry/operating-readiness-20261029/f1-corrections. Target content is mutable and does not establish source-version parity."
+source = "https://github.com/fkxxyz/rime-cloverpinyin/blob/efdfb69688e832d875aad13679fa34ab235cbf54/README.md"
+sourceRevision = "efdfb69688e832d875aad13679fa34ab235cbf54"
+sourceSha256 = "5eb4dcf87e480ad4ad2ad829176b90eec8d1de71a15f2f1a316a7d85a20336c1"
+audit = "index/telemetry/operating-readiness-20261029/f1-source-assessments.json"
+disposition = "missing-source-supported-answer"
+state = "present"
+valueJson = "\"https://github.com/fkxxyz/rime-cloverpinyin/wiki/Home\""
 [x.dotrepo.field_evidence."owners.security_contact"]
 checkedAt = "2026-10-27T18:00:41.654823Z"
 confidence = "high"

@@ -1,0 +1,47 @@
+{
+  "taskId": "go-03",
+  "sourceRevision": "352089582444ea84feb03bc97eda97b35729e8ec",
+  "indexConsulted": false,
+  "modelCalls": 0,
+  "costUsd": null,
+  "costExclusions": [
+    "No metered host/container dollar receipt."
+  ],
+  "cacheCondition": "Fresh empty per-task cache, populated by recorded download-only setup; offline execution uses that explicit warm state.",
+  "sourceSupportedInstructionGold": "Original source-only classification unchanged; execution qualification is separately reviewed.",
+  "status": "execution-qualified-pending-independent-review",
+  "startedAt": "2026-10-29T06:11:24.897526+00:00",
+  "setupSeconds": 1.8865797920152545,
+  "setupNetworkBytes": {
+    "received": 12887737,
+    "sent": 90804,
+    "basis": "Container interface counters; includes headers and incidental traffic."
+  },
+  "executionSeconds": 98.5260395410005,
+  "testExitCode": 0,
+  "executionError": null,
+  "changedTrackedFiles": [],
+  "trackedSourceIntact": true,
+  "oracle": {
+    "qualified": true,
+    "reason": "complete native events",
+    "expectedTopLevelTests": 93,
+    "ranTopLevelTests": 93,
+    "missingTests": [],
+    "skippedTests": [],
+    "packages": [
+      "github.com/hashicorp/vault/api",
+      "github.com/hashicorp/vault/api/cliconfig",
+      "github.com/hashicorp/vault/api/tokenhelper"
+    ],
+    "endedPackages": [
+      "github.com/hashicorp/vault/api",
+      "github.com/hashicorp/vault/api/cliconfig",
+      "github.com/hashicorp/vault/api/tokenhelper"
+    ]
+  },
+  "taskOutcomeObserved": true,
+  "testsPassed": true,
+  "totalSeconds": 105.68248399998993,
+  "cleanup": 0
+}

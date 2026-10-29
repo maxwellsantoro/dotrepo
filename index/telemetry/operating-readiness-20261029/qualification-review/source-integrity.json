@@ -1,0 +1,57 @@
+{
+  "reviewedAt": "2026-10-29T06:27:10.582545+00:00",
+  "sources": [
+    {
+      "folder": "rust-02-full",
+      "files": 605,
+      "bytes": 114376664,
+      "archiveSha256": "862b159c55ee7693faed80c2546aa203cc370e867cf5a206cff5356ab66766d6",
+      "modeAndBlobAndInventoryMatch": true,
+      "merkleTreeSha": "b3f1fa0590f411c398cdc7d7f0df5c8cedbba753"
+    },
+    {
+      "folder": "typescript-02",
+      "files": 2784,
+      "bytes": 31428303,
+      "archiveSha256": "818bf33ece0979d198ed6a11daa3e6b838cc4aefba8c3a381c86e8ce2e706f41",
+      "modeAndBlobAndInventoryMatch": true,
+      "merkleTreeSha": "66f6b617831b9733ea5710ad0d17a78fe0b80907"
+    },
+    {
+      "folder": "go-01-full",
+      "files": 68062,
+      "bytes": 218783760,
+      "archiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+      "modeAndBlobAndInventoryMatch": true,
+      "merkleTreeSha": "0e8e44749de9c275750a56bbca5cde84985fd3d0"
+    },
+    {
+      "folder": "go-03",
+      "files": 9658,
+      "bytes": 44735288,
+      "archiveSha256": "cc7b18c67ce11698d79bfee35fe7afa7f7c8f0ea0dccbdaefd8836cde49f3ba2",
+      "modeAndBlobAndInventoryMatch": true,
+      "merkleTreeSha": "0d5c1623042deec3332fb9bdd3304248e0705c60"
+    }
+  ],
+  "oracleNestedSkipCounterexample": {
+    "listing": "{\"Package\": \"example/api\", \"Action\": \"output\", \"Output\": \"TestOne\\n\"}",
+    "actual": "{\"Package\": \"example/api\", \"Action\": \"run\", \"Test\": \"TestOne\"}\n{\"Package\": \"example/api\", \"Action\": \"run\", \"Test\": \"TestOne/sub\"}\n{\"Package\": \"example/api\", \"Action\": \"skip\", \"Test\": \"TestOne/sub\"}\n{\"Package\": \"example/api\", \"Action\": \"pass\", \"Test\": \"TestOne\"}\n{\"Package\": \"example/api\", \"Action\": \"pass\"}",
+    "verdict": {
+      "qualified": true,
+      "reason": "complete native events",
+      "expectedTopLevelTests": 1,
+      "ranTopLevelTests": 1,
+      "missingTests": [],
+      "skippedTests": [],
+      "packages": [
+        "example/api"
+      ],
+      "endedPackages": [
+        "example/api"
+      ]
+    }
+  },
+  "actualVaultSkipEvents": 0,
+  "upstreamExecution": false
+}

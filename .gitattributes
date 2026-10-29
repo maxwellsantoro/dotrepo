@@ -12,3 +12,16 @@ benchmarks/head-to-head/f05-agent-tasks-20261029/** -text
 index/telemetry/rc2-delivery-20261029/** -text -whitespace
 index/telemetry/rc2-linux-verification-20261029/** -text -whitespace
 index/telemetry/rc2-publication-20261029/** -text -whitespace
+# New development, runtime, source qualification and public-capture receipts bind
+# exact bytes; preserve failed observations alongside successful ones.
+benchmarks/head-to-head/e1-development-20261029b/** -text -whitespace
+benchmarks/head-to-head/f05-qualification-20261029/** -text -whitespace
+benchmarks/head-to-head/f05-snapshot-20261029/** -text -whitespace
+benchmarks/head-to-head/runtime-qualification-20261029/** -text -whitespace
+benchmarks/head-to-head/runtime-cache-qualification-20261029/** -text -whitespace
+index/telemetry/operating-readiness-20261029/** -text -whitespace
+crates/dotrepo-core/src/import/commands/context/python_recipe/testdata/** -text -whitespace
+crates/dotrepo-core/tests/fixtures/import/context-python-natural-*/** -text -whitespace
+benchmarks/head-to-head/f05-qualification-next8-20261029/** -text -whitespace
+benchmarks/ci-evidence/pilot-20261029/** -text -whitespace
+index/telemetry/applicability-wave-validation-20261029/** -text -whitespace

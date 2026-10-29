@@ -231,7 +231,7 @@ pub fn import_repository_with_options(
     let inputs = inputs::ImportInputs::load(root)?;
     let import_sources = inputs.command_sources();
     let imported_commands = infer_imported_commands(&import_sources);
-    let (build_context_candidates, test_context_candidates) =
+    let (build_context_candidates, test_context_candidates, context_assessments) =
         infer_documented_context_candidates(root, &import_sources);
     let imported_toolchain = infer_toolchain_metadata(&import_sources);
     let inputs::ImportInputs {
@@ -370,6 +370,19 @@ pub fn import_repository_with_options(
         .chain(&test_context_candidates)
     {
         note_import(&mut imported_sources, &candidate.source);
+    }
+    for (_, assessment) in &context_assessments {
+        if let Some(bindings) = assessment
+            .get("sourceBindingsJson")
+            .and_then(toml::Value::as_str)
+            .and_then(|value| serde_json::from_str::<serde_json::Value>(value).ok())
+        {
+            for binding in bindings.as_array().into_iter().flatten() {
+                if let Some(path) = binding.get("path").and_then(serde_json::Value::as_str) {
+                    note_import(&mut imported_sources, path);
+                }
+            }
+        }
     }
     if let Some(source_path) = imported_toolchain.source_path.as_deref() {
         note_import(&mut imported_sources, source_path);
@@ -538,6 +551,26 @@ pub fn import_repository_with_options(
 
     let docs_evidence =
         retain_imported_docs_evidence(&mut manifest, readme.as_ref(), &readme_metadata);
+    for (field, mut assessment) in context_assessments {
+        if let (Some(entry), Some(checked_at)) = (
+            assessment.as_table_mut(),
+            manifest.record.generated_at.as_ref(),
+        ) {
+            entry.insert("checkedAt".into(), toml::Value::String(checked_at.clone()));
+        }
+        let extension = manifest
+            .x
+            .entry("dotrepo".into())
+            .or_insert_with(|| toml::Value::Table(toml::map::Map::new()));
+        if let Some(extension) = extension.as_table_mut() {
+            let fields = extension
+                .entry("field_evidence".to_string())
+                .or_insert_with(|| toml::Value::Table(toml::map::Map::new()));
+            if let Some(fields) = fields.as_table_mut() {
+                fields.insert(field, assessment);
+            }
+        }
+    }
     validate_manifest(root, &manifest)?;
     let manifest_text = render_manifest(&manifest)?;
     let mut evidence_bullets = combined_import_notes(

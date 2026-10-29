@@ -1,0 +1,33 @@
+{
+  "checkedAt": "2026-10-29T06:25:28.226677+00:00",
+  "sourceFiles": {
+    ".github/workflows/index-autonomous-refresh.yml": "90f47ee18707dc7dd589d92c7fde812a6a233fad9e35fd6130b812f5bf45f711",
+    "scripts/land_autonomous_index.py": "9b442e5fabcd2a00617e6384acad0b2110843440dc406c9139adc8817fb18416",
+    "scripts/tests/test_autonomous_landing.py": "385d7776f4e6d360298502ed12d27cae452a1bd559e6d080b0f99ac3b13f2f4e",
+    "scripts/tests/test_autonomous_refresh_workflow.py": "a6e8556f26d02eed023a452bdc7710b2f17a74fc273953ca0dfe55a80fbfc5d1",
+    "docs/factual-crawl-automation.md": "7ca413359539224968e7d928107ed3214c316ed6cbc66cda1bfbe662569b82a6"
+  },
+  "patchSha256": "4a7f24f2b26ac9c294a6b60a87a9b90141cc03828c7ad16fd6f1ba2872ca2aed",
+  "focusedTests": {
+    "command": [
+      "uv",
+      "run",
+      "pytest",
+      "-q",
+      "scripts/tests/test_autonomous_landing.py",
+      "scripts/tests/test_autonomous_refresh_workflow.py",
+      "scripts/tests/test_refresh_streak.py",
+      "scripts/tests/test_public_deploy_eligibility.py"
+    ],
+    "passed": 71,
+    "seconds": 0.17
+  },
+  "ruffCheck": "passed for3changedPythonfiles",
+  "ruffFormatCheck": "passed for3changedPythonfiles",
+  "scopedGitDiffCheck": "passed",
+  "runtimeBehavior": "Workflow passes explicitboolean. Legacy omittedargument readsAPI. Decisionboolean/source/reason resolvedandretainedbeforeCI/fastforward. OnlyHTTP404retainedasunset;403/network/malformed/invalidvaluerefusebeforemerge.",
+  "permissionsExpanded": false,
+  "settingsChanged": false,
+  "actualScheduledQualificationAfterFix": 0,
+  "limitations": "Source/unit/workflow-controls only; not yet exercised by a future scheduled run. Actual prior successful landing stillhaspublicationVerifiedfalse and isnotreclassified."
+}

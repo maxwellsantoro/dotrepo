@@ -1,0 +1,335 @@
+{
+  "checkSummary": {
+    "failed": 0,
+    "failedLabels": [],
+    "passed": 34,
+    "total": 34
+  },
+  "checks": [
+    {
+      "actual": "dotrepo/autonomous-telemetry-summary/v0.1",
+      "expected": "dotrepo/autonomous-telemetry-summary/v0.1",
+      "label": "retained summary schema",
+      "passed": true
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "label": "retained proof fields",
+      "passed": true
+    },
+    {
+      "actual": 37,
+      "expected": ">= 3",
+      "label": "retained repeated runs",
+      "passed": true
+    },
+    {
+      "actual": 1829,
+      "expected": ">= 10",
+      "label": "processed repository volume",
+      "passed": true
+    },
+    {
+      "actual": 1820,
+      "expected": ">= 1",
+      "label": "direct writeback activity",
+      "passed": true
+    },
+    {
+      "actual": 1240,
+      "expected": ">= 1",
+      "label": "verified promotion activity",
+      "passed": true
+    },
+    {
+      "actual": 0.004921,
+      "expected": "<= 0.05",
+      "label": "failure rate",
+      "passed": true
+    },
+    {
+      "actual": 0.02,
+      "expected": "<= 0.05",
+      "label": "worst-run failure rate",
+      "passed": true
+    },
+    {
+      "actual": 0.0,
+      "expected": "<= 0.05",
+      "label": "recent-window failure rate",
+      "passed": true
+    },
+    {
+      "actual": -0.01,
+      "expected": "<= 0.02",
+      "label": "recent-window failure drift",
+      "passed": true
+    },
+    {
+      "actual": 0.0,
+      "expected": "<= 0.25",
+      "label": "model adjudication rate",
+      "passed": true
+    },
+    {
+      "actual": 0.0,
+      "expected": "<= 0.25",
+      "label": "worst-run model adjudication rate",
+      "passed": true
+    },
+    {
+      "actual": 0.0,
+      "expected": "<= 0.25",
+      "label": "recent-window model adjudication rate",
+      "passed": true
+    },
+    {
+      "actual": 0.0,
+      "expected": "<= 0.1",
+      "label": "recent-window model adjudication drift",
+      "passed": true
+    },
+    {
+      "actual": 0.0,
+      "expected": "<= 0.1",
+      "label": "second-opinion adjudication rate",
+      "passed": true
+    },
+    {
+      "actual": 0.0,
+      "expected": "<= 0.1",
+      "label": "worst-run second-opinion adjudication rate",
+      "passed": true
+    },
+    {
+      "actual": 0.0,
+      "expected": "<= 0.1",
+      "label": "recent-window second-opinion adjudication rate",
+      "passed": true
+    },
+    {
+      "actual": 0.0,
+      "expected": "<= 0.05",
+      "label": "recent-window second-opinion adjudication drift",
+      "passed": true
+    },
+    {
+      "actual": 0.0,
+      "expected": "<= 0.05",
+      "label": "strong remote escalation rate",
+      "passed": true
+    },
+    {
+      "actual": 0.0,
+      "expected": "<= 0.05",
+      "label": "worst-run strong remote escalation rate",
+      "passed": true
+    },
+    {
+      "actual": 0.0,
+      "expected": "<= 0.05",
+      "label": "recent-window strong remote escalation rate",
+      "passed": true
+    },
+    {
+      "actual": 0.0,
+      "expected": "<= 0.02",
+      "label": "recent-window strong remote escalation drift",
+      "passed": true
+    },
+    {
+      "actual": 0.0,
+      "expected": "<= 0.1",
+      "label": "recent-window zero-model deterministic rate drop",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "expected": "0 exhausted runs",
+      "label": "adjudication budget exhaustion",
+      "passed": true
+    },
+    {
+      "actual": 0.0,
+      "expected": "<= 1.0",
+      "label": "adjudication call budget usage",
+      "passed": true
+    },
+    {
+      "actual": 0.0,
+      "expected": "<= 5000.0",
+      "label": "tokens per crawled repository",
+      "passed": true
+    },
+    {
+      "actual": 0.0,
+      "expected": "<= 1.0",
+      "label": "recent-window adjudication call budget usage",
+      "passed": true
+    },
+    {
+      "actual": 0.0,
+      "expected": "<= 0.25",
+      "label": "recent-window adjudication budget usage drift",
+      "passed": true
+    },
+    {
+      "actual": 0.0,
+      "expected": "<= 5000.0",
+      "label": "recent-window tokens per crawled repository",
+      "passed": true
+    },
+    {
+      "actual": 0.0,
+      "expected": "<= 1000.0",
+      "label": "recent-window token intensity drift",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "expected": "<= 0",
+      "label": "fixture-eligible recurring failures",
+      "passed": true
+    },
+    {
+      "actual": 1.0,
+      "expected": ">= 0.75",
+      "label": "zero-model deterministic rate",
+      "passed": true
+    },
+    {
+      "actual": 1.0,
+      "expected": ">= 0.75",
+      "label": "worst-run zero-model deterministic rate",
+      "passed": true
+    },
+    {
+      "actual": 1.0,
+      "expected": ">= 0.75",
+      "label": "recent-window zero-model deterministic rate",
+      "passed": true
+    }
+  ],
+  "inputs": {
+    "adjudicationBudgetUseRate": 0.0,
+    "adjudicationCallBudget": 68,
+    "adjudicationCalls": 0,
+    "apiEscalationRate": 0.0,
+    "budgetExhaustedRuns": 0,
+    "driftReference": "previous-window",
+    "fixtureEligibleRecurringFailures": [],
+    "previousWindowCosts": {
+      "adjudicationBudgetUseRate": 0.0,
+      "adjudicationCallBudget": 0,
+      "adjudicationCalls": 0,
+      "crawled": 500,
+      "tokensPerCrawled": 0.0,
+      "tokensUsed": 0
+    },
+    "previousWindowRates": {
+      "adjudicationRate": 0.0,
+      "apiEscalationRate": 0.0,
+      "failureRate": 0.01,
+      "secondOpinionRate": 0.0,
+      "zeroModelRate": 1.0
+    },
+    "previousWindowRepositoriesByAdjudicationTier": {
+      "deterministic": 110
+    },
+    "previousWindowRunCount": 3,
+    "promotionRate": 0.6779661016949152,
+    "rates": {
+      "adjudicationRate": 0.0,
+      "failureRate": 0.004920721705850191,
+      "promotionRate": 0.6779661016949152,
+      "writeRate": 0.9950792782941498,
+      "zeroModelRate": 1.0
+    },
+    "recentAdjudicationBudgetUseRate": 0.0,
+    "recentAdjudicationBudgetUseRateDelta": 0.0,
+    "recentAdjudicationRateDelta": 0.0,
+    "recentApiEscalationRateDelta": 0.0,
+    "recentFailureRateDelta": -0.01,
+    "recentSecondOpinionRateDelta": 0.0,
+    "recentTokensPerCrawled": 0.0,
+    "recentTokensPerCrawledDelta": 0.0,
+    "recentWindowCosts": {
+      "adjudicationBudgetUseRate": 0.0,
+      "adjudicationCallBudget": 0,
+      "adjudicationCalls": 0,
+      "crawled": 150,
+      "tokensPerCrawled": 0.0,
+      "tokensUsed": 0
+    },
+    "recentWindowRates": {
+      "adjudicationRate": 0.0,
+      "apiEscalationRate": 0.0,
+      "failureRate": 0.0,
+      "secondOpinionRate": 0.0,
+      "zeroModelRate": 1.0
+    },
+    "recentWindowRepositoriesByAdjudicationTier": {
+      "deterministic": 39
+    },
+    "recentWindowRunCount": 3,
+    "recentZeroModelRateDrop": 0.0,
+    "repositoriesByAdjudicationTier": {
+      "deterministic": 408
+    },
+    "runCount": 37,
+    "schema": "dotrepo/autonomous-telemetry-summary/v0.1",
+    "secondOpinionRate": 0.0,
+    "tokensPerCrawled": 0.0,
+    "tokensUsed": 0,
+    "totals": {
+      "adjudicationCallBudget": 68,
+      "adjudicationCalls": 0,
+      "crawled": 1829,
+      "discoveryQueued": 0,
+      "failed": 9,
+      "promoted": 1240,
+      "qualityReprocessQueued": 1538,
+      "skipped": 0,
+      "synthesisFailed": 0,
+      "synthesisRequested": 0,
+      "synthesisSucceeded": 0,
+      "tokensUsed": 0,
+      "written": 1820,
+      "zeroModelRuns": 1829
+    },
+    "worstRunRates": {
+      "adjudicationRate": 0.0,
+      "apiEscalationRate": 0.0,
+      "failureRate": 0.02,
+      "secondOpinionRate": 0.0,
+      "zeroModelRate": 1.0
+    },
+    "worstRunWindowRunCount": 10,
+    "worstRunWindowSize": 10
+  },
+  "passed": true,
+  "schema": "dotrepo/autonomous-telemetry-gate/v0.1",
+  "summaryGeneratedAt": "2026-10-28T06:11:24Z",
+  "thresholds": {
+    "maxAdjudicationBudgetUseRate": 1.0,
+    "maxAdjudicationRate": 0.25,
+    "maxApiEscalationRate": 0.05,
+    "maxFailureRate": 0.05,
+    "maxFixtureEligibleRecurringFailures": 0,
+    "maxRecentAdjudicationBudgetUseRateDelta": 0.25,
+    "maxRecentAdjudicationRateDelta": 0.1,
+    "maxRecentApiEscalationRateDelta": 0.02,
+    "maxRecentFailureRateDelta": 0.02,
+    "maxRecentSecondOpinionRateDelta": 0.05,
+    "maxRecentTokensPerCrawledDelta": 1000.0,
+    "maxRecentZeroModelRateDrop": 0.1,
+    "maxSecondOpinionRate": 0.1,
+    "maxTokensPerCrawled": 5000.0,
+    "minCrawled": 10,
+    "minPromoted": 1,
+    "minRuns": 3,
+    "minWritten": 1,
+    "minZeroModelRate": 0.75
+  }
+}

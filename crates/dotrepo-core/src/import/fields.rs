@@ -435,6 +435,56 @@ pub fn score_import_fields(
         scores.push(score_docs_field(plan, field, value));
     }
 
+    // Natural multi-file context recovery is distinct from independent source
+    // verification. Score the complete, exactly bound candidate, never reuse
+    // its scalar command assessment or infer high confidence from its grammar.
+    for (purpose, candidates) in [
+        ("build", &plan.manifest.repo.build_candidates),
+        ("test", &plan.manifest.repo.test_candidates),
+    ] {
+        for (index, candidate) in candidates.iter().enumerate() {
+            let field = format!("repo.{purpose}_candidates.{index}");
+            let Some(evidence) = plan
+                .manifest
+                .x
+                .get("dotrepo")
+                .and_then(|extension| extension.get("field_evidence"))
+                .and_then(|fields| fields.get(&field))
+                .filter(|entry| entry.get("sourceBindingsJson").is_some())
+            else {
+                continue;
+            };
+            let recorded = evidence
+                .get("valueJson")
+                .and_then(toml::Value::as_str)
+                .and_then(|value| serde_json::from_str::<serde_json::Value>(value).ok());
+            let current = serde_json::to_value(candidate).ok();
+            let source = candidate.context.as_ref().map(|value| value.source.clone());
+            let bound = current.is_some()
+                && recorded == current
+                && plan.manifest.record.generated_at.is_some()
+                && source.as_deref() == evidence.get("source").and_then(toml::Value::as_str)
+                && evidence.get("checkedAt").and_then(toml::Value::as_str)
+                    == plan.manifest.record.generated_at.as_deref();
+            scores.push(FieldScore {
+                field,
+                confidence: if bound {
+                    FieldConfidence::MediumConfidencePresent
+                } else {
+                    FieldConfidence::Unresolved
+                },
+                source,
+                value: current.map(|value| value.to_string()),
+                reason: if bound {
+                    "Source-bound natural instruction candidate recovered; independent prerequisite completeness verification remains unresolved."
+                } else {
+                    "Natural instruction candidate changed after source binding; source establishment must be repeated."
+                }
+                .into(),
+            });
+        }
+    }
+
     let high_confidence_present: Vec<_> = scores
         .iter()
         .filter(|s| s.confidence == FieldConfidence::HighConfidencePresent)

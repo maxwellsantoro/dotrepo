@@ -1,0 +1,26 @@
+{
+  "argv": [
+    "docker",
+    "events",
+    "--since",
+    "2026-10-29T06:17:00Z",
+    "--until",
+    "2026-10-29T06:20:09Z",
+    "--filter",
+    "container=dotrepo-f05-qualification-go-01-665c15951f",
+    "--format",
+    "{{json .}}"
+  ],
+  "startedAt": "2026-10-29T06:20:09.520092+00:00",
+  "elapsedSeconds": 0.03502070903778076,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "7ce057b35ec127885c5d9deb0bb603cfadcd323ceff6e8a184d6aa5f21388cd7",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

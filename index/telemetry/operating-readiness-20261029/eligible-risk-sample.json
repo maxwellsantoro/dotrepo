@@ -1,0 +1,367 @@
+{
+  "schema": "dotrepo/audit-sample/v0.1",
+  "generatedAt": "2026-10-29T05:56:55.252081Z",
+  "indexRoot": "index",
+  "seed": 20261029,
+  "populationSize": 423,
+  "sampleSize": 20,
+  "requestedSampleSize": 20,
+  "docsAudit": {
+    "recordsScanned": 423,
+    "recordsFlagged": 7,
+    "findings": [
+      {
+        "identity": "github.com/HugoBlox/hugo-theme-academic-cv",
+        "field": "docs.root",
+        "value": "https://docs.ownable.dev/?utm_source=github&utm_medium=readme&utm_content=community_academic-cv",
+        "signals": [
+          "url-identity-unconfirmed"
+        ]
+      },
+      {
+        "identity": "github.com/fruitcake/laravel-debugbar",
+        "field": "docs.root",
+        "value": "https://php-debugbar.com/docs",
+        "signals": [
+          "url-identity-unconfirmed"
+        ]
+      },
+      {
+        "identity": "github.com/invoiceninja/invoiceninja",
+        "field": "docs.root",
+        "value": "https://api-docs.invoicing.co/",
+        "signals": [
+          "url-identity-unconfirmed"
+        ]
+      },
+      {
+        "identity": "github.com/kortix-ai/suna",
+        "field": "docs.root",
+        "value": "https://kortix.com/docs",
+        "signals": [
+          "url-identity-unconfirmed"
+        ]
+      },
+      {
+        "identity": "github.com/microsoft/terminal",
+        "field": "docs.root",
+        "value": "https://aka.ms/terminal-docs",
+        "signals": [
+          "url-identity-unconfirmed"
+        ]
+      },
+      {
+        "identity": "github.com/minio/minio",
+        "field": "docs.getting_started",
+        "value": "https://docs.min.io/community/minio-object-store/reference/minio-mc.html#quickstart",
+        "signals": [
+          "url-identity-unconfirmed"
+        ]
+      },
+      {
+        "identity": "github.com/realm/SwiftLint",
+        "field": "docs.root",
+        "value": "https://megalinter.io/latest/descriptors/swift_swiftlint/",
+        "signals": [
+          "url-identity-unconfirmed"
+        ]
+      }
+    ]
+  },
+  "sample": [
+    {
+      "identity": "github.com/xi-editor/xi-editor",
+      "languageFamily": "Rust",
+      "status": "verified",
+      "confidence": "high",
+      "riskWeight": 1.9415,
+      "riskFactors": [
+        "missing:build",
+        "missing:test",
+        "missing:security_contact",
+        "missing:docs",
+        "surprising-completeness:low"
+      ],
+      "recordPath": "index/repos/github.com/xi-editor/xi-editor/record.toml",
+      "evidencePath": "index/repos/github.com/xi-editor/xi-editor/evidence.md"
+    },
+    {
+      "identity": "github.com/WebKit/WebKit",
+      "languageFamily": "TypeScript / JavaScript",
+      "status": "inferred",
+      "confidence": "medium",
+      "riskWeight": 0.9166,
+      "riskFactors": [
+        "confidence:medium",
+        "missing:build",
+        "missing:test",
+        "missing:security_contact",
+        "missing:license",
+        "missing:docs",
+        "surprising-completeness:low"
+      ],
+      "recordPath": "index/repos/github.com/WebKit/WebKit/record.toml",
+      "evidencePath": "index/repos/github.com/WebKit/WebKit/evidence.md"
+    },
+    {
+      "identity": "github.com/IBM/fp-go",
+      "languageFamily": "Go",
+      "status": "inferred",
+      "confidence": "medium",
+      "riskWeight": 0.7462,
+      "riskFactors": [
+        "confidence:medium",
+        "missing:security_contact",
+        "missing:docs"
+      ],
+      "recordPath": "index/repos/github.com/IBM/fp-go/record.toml",
+      "evidencePath": "index/repos/github.com/IBM/fp-go/evidence.md"
+    },
+    {
+      "identity": "github.com/gomodule/redigo",
+      "languageFamily": "Go",
+      "status": "inferred",
+      "confidence": "medium",
+      "riskWeight": 0.6396,
+      "riskFactors": [
+        "confidence:medium",
+        "missing:security_contact"
+      ],
+      "recordPath": "index/repos/github.com/gomodule/redigo/record.toml",
+      "evidencePath": "index/repos/github.com/gomodule/redigo/evidence.md"
+    },
+    {
+      "identity": "github.com/RunaCapital/awesome-oss-alternatives",
+      "languageFamily": "Python",
+      "status": "verified",
+      "confidence": "high",
+      "riskWeight": 0.6268,
+      "riskFactors": [
+        "missing:build",
+        "missing:test",
+        "missing:security_contact",
+        "missing:docs"
+      ],
+      "recordPath": "index/repos/github.com/RunaCapital/awesome-oss-alternatives/record.toml",
+      "evidencePath": "index/repos/github.com/RunaCapital/awesome-oss-alternatives/evidence.md"
+    },
+    {
+      "identity": "github.com/fkxxyz/rime-cloverpinyin",
+      "languageFamily": "Python",
+      "status": "verified",
+      "confidence": "high",
+      "riskWeight": 0.6268,
+      "riskFactors": [
+        "missing:build",
+        "missing:test",
+        "missing:security_contact",
+        "missing:docs"
+      ],
+      "recordPath": "index/repos/github.com/fkxxyz/rime-cloverpinyin/record.toml",
+      "evidencePath": "index/repos/github.com/fkxxyz/rime-cloverpinyin/evidence.md"
+    },
+    {
+      "identity": "github.com/titanwings/distilly",
+      "languageFamily": "Python",
+      "status": "verified",
+      "confidence": "high",
+      "riskWeight": 0.6268,
+      "riskFactors": [
+        "missing:build",
+        "missing:test",
+        "missing:security_contact",
+        "missing:docs"
+      ],
+      "recordPath": "index/repos/github.com/titanwings/distilly/record.toml",
+      "evidencePath": "index/repos/github.com/titanwings/distilly/evidence.md"
+    },
+    {
+      "identity": "github.com/alirezarezvani/claude-skills",
+      "languageFamily": "Python",
+      "status": "inferred",
+      "confidence": "medium",
+      "riskWeight": 0.5698,
+      "riskFactors": [
+        "confidence:medium",
+        "missing:build",
+        "missing:security_contact",
+        "missing:docs"
+      ],
+      "recordPath": "index/repos/github.com/alirezarezvani/claude-skills/record.toml",
+      "evidencePath": "index/repos/github.com/alirezarezvani/claude-skills/evidence.md"
+    },
+    {
+      "identity": "github.com/Visualize-ML/Book4_Power-of-Matrix",
+      "languageFamily": "Other",
+      "status": "inferred",
+      "confidence": "low",
+      "riskWeight": 0.5667,
+      "riskFactors": [
+        "confidence:low",
+        "missing:build",
+        "missing:test",
+        "missing:security_contact",
+        "missing:license",
+        "missing:docs"
+      ],
+      "recordPath": "index/repos/github.com/Visualize-ML/Book4_Power-of-Matrix/record.toml",
+      "evidencePath": "index/repos/github.com/Visualize-ML/Book4_Power-of-Matrix/evidence.md"
+    },
+    {
+      "identity": "github.com/fengdu78/lihang-code",
+      "languageFamily": "Other",
+      "status": "verified",
+      "confidence": "high",
+      "riskWeight": 0.5,
+      "riskFactors": [
+        "missing:build",
+        "missing:test",
+        "missing:security_contact",
+        "missing:license",
+        "missing:docs",
+        "surprising-completeness:low"
+      ],
+      "recordPath": "index/repos/github.com/fengdu78/lihang-code/record.toml",
+      "evidencePath": "index/repos/github.com/fengdu78/lihang-code/evidence.md"
+    },
+    {
+      "identity": "github.com/kkndmetianya/kkndme_tianya",
+      "languageFamily": "Other",
+      "status": "verified",
+      "confidence": "high",
+      "riskWeight": 0.5,
+      "riskFactors": [
+        "missing:build",
+        "missing:test",
+        "missing:security_contact",
+        "missing:license",
+        "missing:docs",
+        "surprising-completeness:low"
+      ],
+      "recordPath": "index/repos/github.com/kkndmetianya/kkndme_tianya/record.toml",
+      "evidencePath": "index/repos/github.com/kkndmetianya/kkndme_tianya/evidence.md"
+    },
+    {
+      "identity": "github.com/nari-labs/dia",
+      "languageFamily": "Python",
+      "status": "inferred",
+      "confidence": "medium",
+      "riskWeight": 0.3989,
+      "riskFactors": [
+        "confidence:medium",
+        "missing:security_contact",
+        "missing:docs"
+      ],
+      "recordPath": "index/repos/github.com/nari-labs/dia/record.toml",
+      "evidencePath": "index/repos/github.com/nari-labs/dia/evidence.md"
+    },
+    {
+      "identity": "github.com/jasontaylordev/CleanArchitecture",
+      "languageFamily": "Other",
+      "status": "verified",
+      "confidence": "high",
+      "riskWeight": 0.3333,
+      "riskFactors": [
+        "missing:build",
+        "missing:test",
+        "missing:security_contact"
+      ],
+      "recordPath": "index/repos/github.com/jasontaylordev/CleanArchitecture/record.toml",
+      "evidencePath": "index/repos/github.com/jasontaylordev/CleanArchitecture/evidence.md"
+    },
+    {
+      "identity": "github.com/sintaxi/harp",
+      "languageFamily": "TypeScript / JavaScript",
+      "status": "verified",
+      "confidence": "high",
+      "riskWeight": 0.3235,
+      "riskFactors": [
+        "missing:build",
+        "missing:license",
+        "missing:docs"
+      ],
+      "recordPath": "index/repos/github.com/sintaxi/harp/record.toml",
+      "evidencePath": "index/repos/github.com/sintaxi/harp/evidence.md"
+    },
+    {
+      "identity": "github.com/JetBrains/kotlin",
+      "languageFamily": "Other",
+      "status": "inferred",
+      "confidence": "medium",
+      "riskWeight": 0.3,
+      "riskFactors": [
+        "confidence:medium",
+        "missing:license",
+        "missing:docs",
+        "near-promotion-threshold"
+      ],
+      "recordPath": "index/repos/github.com/JetBrains/kotlin/record.toml",
+      "evidencePath": "index/repos/github.com/JetBrains/kotlin/evidence.md"
+    },
+    {
+      "identity": "github.com/huggingface/datasets",
+      "languageFamily": "Python",
+      "status": "verified",
+      "confidence": "high",
+      "riskWeight": 0.2849,
+      "riskFactors": [
+        "missing:build",
+        "missing:docs"
+      ],
+      "recordPath": "index/repos/github.com/huggingface/datasets/record.toml",
+      "evidencePath": "index/repos/github.com/huggingface/datasets/evidence.md"
+    },
+    {
+      "identity": "github.com/algorithm-visualizer/algorithm-visualizer",
+      "languageFamily": "TypeScript / JavaScript",
+      "status": "verified",
+      "confidence": "high",
+      "riskWeight": 0.2696,
+      "riskFactors": [
+        "missing:security_contact",
+        "missing:docs"
+      ],
+      "recordPath": "index/repos/github.com/algorithm-visualizer/algorithm-visualizer/record.toml",
+      "evidencePath": "index/repos/github.com/algorithm-visualizer/algorithm-visualizer/evidence.md"
+    },
+    {
+      "identity": "github.com/wulkano/Kap",
+      "languageFamily": "TypeScript / JavaScript",
+      "status": "verified",
+      "confidence": "high",
+      "riskWeight": 0.2696,
+      "riskFactors": [
+        "missing:security_contact",
+        "missing:docs"
+      ],
+      "recordPath": "index/repos/github.com/wulkano/Kap/record.toml",
+      "evidencePath": "index/repos/github.com/wulkano/Kap/evidence.md"
+    },
+    {
+      "identity": "github.com/anthropics/claude-cookbooks",
+      "languageFamily": "Other",
+      "status": "inferred",
+      "confidence": "medium",
+      "riskWeight": 0.2667,
+      "riskFactors": [
+        "confidence:medium",
+        "missing:docs",
+        "near-promotion-threshold"
+      ],
+      "recordPath": "index/repos/github.com/anthropics/claude-cookbooks/record.toml",
+      "evidencePath": "index/repos/github.com/anthropics/claude-cookbooks/evidence.md"
+    },
+    {
+      "identity": "github.com/streamlit/streamlit",
+      "languageFamily": "Python",
+      "status": "verified",
+      "confidence": "high",
+      "riskWeight": 0.2279,
+      "riskFactors": [
+        "surprising-completeness:high"
+      ],
+      "recordPath": "index/repos/github.com/streamlit/streamlit/record.toml",
+      "evidencePath": "index/repos/github.com/streamlit/streamlit/evidence.md"
+    }
+  ]
+}

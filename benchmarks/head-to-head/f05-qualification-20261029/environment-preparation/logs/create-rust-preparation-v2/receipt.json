@@ -1,0 +1,35 @@
+{
+  "argv": [
+    "docker",
+    "create",
+    "--name",
+    "dotrepo-f05-prepare-rust2-3a2e8dba75",
+    "--pull=never",
+    "--cap-drop=ALL",
+    "--cap-add=CHOWN",
+    "--cap-add=DAC_OVERRIDE",
+    "--cap-add=FOWNER",
+    "--security-opt=no-new-privileges",
+    "--network=bridge",
+    "--memory=1g",
+    "--memory-swap=1g",
+    "--cpus=2",
+    "--pids-limit=128",
+    "--entrypoint=/bin/sh",
+    "sha256:114c7a4425406451c2866b6aafe69fe29b1b298832db1277d411ac73c82d04d6",
+    "-c",
+    "while :; do sleep 3600; done"
+  ],
+  "startedAt": "2026-10-29T06:03:16.685284+00:00",
+  "elapsedSeconds": 0.2683922089636326,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "4261554ce798aabb2b8a2c03e43898b90074ad1ae06a46867d3fea7ce491c2a1",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

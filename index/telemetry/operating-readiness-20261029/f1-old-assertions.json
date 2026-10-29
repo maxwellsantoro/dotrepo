@@ -1,0 +1,90 @@
+[
+  {
+    "identity": "github.com/xi-editor/xi-editor",
+    "recordSha256": "f657a38532c23f3ade50164f327bf764bad68f77e332f4ebfa4651c89bf1165c",
+    "recordGeneratedAt": "2026-10-27T17:29:00.11204Z",
+    "status": "verified",
+    "assertions": {
+      "repo.build": null,
+      "repo.test": null,
+      "docs.root": null
+    }
+  },
+  {
+    "identity": "github.com/WebKit/WebKit",
+    "recordSha256": "a2a06f604c154a19a3f77681e45e5e74093868c6b149101b265be21fbba4cbaa",
+    "recordGeneratedAt": "2026-10-28T06:06:57.73170918Z",
+    "status": "inferred",
+    "assertions": {
+      "repo.build": null,
+      "repo.test": null,
+      "docs.root": null
+    }
+  },
+  {
+    "identity": "github.com/IBM/fp-go",
+    "recordSha256": "b282484109501ee0f9e0300b2f76683c935318ee5cc35d8dca137bb2161d9bfb",
+    "recordGeneratedAt": "2026-10-27T19:59:34.172486338Z",
+    "status": "inferred",
+    "assertions": {
+      "repo.build": "go build ./...",
+      "repo.test": "go test ./...",
+      "docs.root": null
+    }
+  },
+  {
+    "identity": "github.com/gomodule/redigo",
+    "recordSha256": "562717d09d0fcf6ee7707cbb4afc4e19ed9652e662aee58af63d83acc8538151",
+    "recordGeneratedAt": "2026-10-27T17:20:14.16903Z",
+    "status": "inferred",
+    "assertions": {
+      "repo.build": "go build ./...",
+      "repo.test": "go test ./...",
+      "docs.root": "https://pkg.go.dev/github.com/gomodule/redigo/redis"
+    }
+  },
+  {
+    "identity": "github.com/RunaCapital/awesome-oss-alternatives",
+    "recordSha256": "171cca4a8ea91d4cd8d08057edbddf5e625ff7138ae73715a5f64dd39a3729a4",
+    "recordGeneratedAt": "2026-10-27T17:43:51.105644Z",
+    "status": "verified",
+    "assertions": {
+      "repo.build": null,
+      "repo.test": null,
+      "docs.root": null
+    }
+  },
+  {
+    "identity": "github.com/fkxxyz/rime-cloverpinyin",
+    "recordSha256": "431522b62d931a9198e343d41e3552c4ebb586fcd46cc55e2b0596c970a8ffd9",
+    "recordGeneratedAt": "2026-10-27T18:00:41.654823Z",
+    "status": "verified",
+    "assertions": {
+      "repo.build": null,
+      "repo.test": null,
+      "docs.root": null
+    }
+  },
+  {
+    "identity": "github.com/Visualize-ML/Book4_Power-of-Matrix",
+    "recordSha256": "aaac94417355dfc31cc01b333aff6237ef841bc7dbecd3f3f98163ae33976713",
+    "recordGeneratedAt": "2026-10-27T17:52:06.636781Z",
+    "status": "inferred",
+    "assertions": {
+      "repo.build": null,
+      "repo.test": null,
+      "docs.root": null
+    }
+  },
+  {
+    "identity": "github.com/fengdu78/lihang-code",
+    "recordSha256": "f38cdba7e3263bbced5b5f0adfdb2de0213a65b96e0428616b8f5dbcd65d0a1a",
+    "recordGeneratedAt": "2026-10-27T18:00:28.873123Z",
+    "status": "verified",
+    "assertions": {
+      "repo.build": null,
+      "repo.test": null,
+      "docs.root": null
+    }
+  }
+]

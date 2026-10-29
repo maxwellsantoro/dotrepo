@@ -1,0 +1,858 @@
+{
+  "schema": "dotrepo-f1-source-assessment/v1",
+  "assessedAt": "2026-10-29T06:07:29.483598+00:00",
+  "cohortPlan": "f1-cohort-plan.json",
+  "fieldCount": 24,
+  "repositoryCount": 8,
+  "oldPresentAssertions": 5,
+  "oldAbsentFields": 19,
+  "classificationCounts": {
+    "correct-scalar-abstention": 10,
+    "missing-source-supported-answer": 3,
+    "unresolved": 3,
+    "potentially-applicable-insufficient-evidence": 3,
+    "contradicted-or-wrong-scope": 1,
+    "supported-existing-answer": 1,
+    "correct-docs-abstention": 3
+  },
+  "assessments": [
+    {
+      "identity": "github.com/xi-editor/xi-editor",
+      "revision": "a2dea3059312795c77caadc639df49bf8a7008eb",
+      "field": "repo.build",
+      "oldValue": null,
+      "oldRecordSha256": "f657a38532c23f3ade50164f327bf764bad68f77e332f4ebfa4651c89bf1165c",
+      "disposition": "correct-scalar-abstention",
+      "reason": "README calls this the core repository and changes to rust/ before cargo build. Preserve directory/core scope; do not publish a root cargo build scalar.",
+      "sources": [
+        {
+          "path": "sources/github.com/xi-editor/xi-editor/README.md",
+          "lines": [
+            38,
+            51
+          ],
+          "excerpt": "This repository is the core only. You'll also need a front-end, from the list\nbelow.\n\n\n### Building the core\n\nXi-editor targets 'recent stable Rust'. We recommend installing via [rustup](https://www.rustup.rs).\nThe current minimum supported version is 1.40.\n\nTo build the xi-editor core from the root directory of this repo:\n\n```\n> cd rust\n> cargo build",
+          "sha256": "6681f1c1d56642f12480da7e3c68d97fb7e530793be9c56dd07f0a7da168c746",
+          "url": "https://github.com/xi-editor/xi-editor/blob/a2dea3059312795c77caadc639df49bf8a7008eb/README.md"
+        },
+        {
+          "path": "sources/github.com/xi-editor/xi-editor/.cirrus.yml",
+          "lines": [
+            35,
+            40
+          ],
+          "excerpt": "\n  cargo_cache:\n    folder: $CARGO_HOME/registry\n    fingerprint_script: cat rust/Cargo.lock\n  build_script: cd rust && cargo build --verbose --all --jobs 4\n  test_script:",
+          "sha256": "fc9f6633b30cc23b38d67845e9b5b3aa0149aca8eee5bf64305a794d51025a47",
+          "url": "https://github.com/xi-editor/xi-editor/blob/a2dea3059312795c77caadc639df49bf8a7008eb/.cirrus.yml"
+        }
+      ],
+      "correctionProposal": {
+        "action": "retain-null-scalar",
+        "qualifiedObservation": {
+          "command": "cargo build",
+          "workingDirectory": "rust",
+          "scope": "core",
+          "prerequisites": [
+            "recent stable Rust; documented minimum1.40",
+            "CI Linux/macOS CMake setup"
+          ],
+          "completePortableTupleEstablished": false
+        }
+      }
+    },
+    {
+      "identity": "github.com/xi-editor/xi-editor",
+      "revision": "a2dea3059312795c77caadc639df49bf8a7008eb",
+      "field": "repo.test",
+      "oldValue": null,
+      "oldRecordSha256": "f657a38532c23f3ade50164f327bf764bad68f77e332f4ebfa4651c89bf1165c",
+      "disposition": "correct-scalar-abstention",
+      "reason": "CI changes to rust/ before cargo test --all. The all-checks wrapper also performs formatting/lint and nightly benchmarks; its full prerequisite chain is not a root test scalar.",
+      "sources": [
+        {
+          "path": "sources/github.com/xi-editor/xi-editor/.travis.yml",
+          "lines": [
+            39,
+            46
+          ],
+          "excerpt": "script:\n  - cd rust\n  - export CARGO_TARGET_DIR=/tmp/target\n  - export RUST_BACKTRACE=1\n  - RUSTFLAGS=\"-D warnings\" cargo check --all || exit\n  - cargo test --all || exit\n  - if [ \"$TRAVIS_RUST_VERSION\" = 'stable' ]; then cargo fmt --all -- --check; fi\n  - if [ \"$TRAVIS_RUST_VERSION\" = 'stable' ]; then cargo clippy --all -- -D warnings; fi",
+          "sha256": "d59cdd28e53db9af556113c48ce62ee9d267d5fe8c6ded37edfc433eb2115f20",
+          "url": "https://github.com/xi-editor/xi-editor/blob/a2dea3059312795c77caadc639df49bf8a7008eb/.travis.yml"
+        },
+        {
+          "path": "sources/github.com/xi-editor/xi-editor/rust/run_all_checks",
+          "lines": [
+            43,
+            60
+          ],
+          "excerpt": "printf 'Running \"cargo test --all\"\\n'\n\nif ! (cargo test --all); then\n    exit $?\nfi\n\nprintf 'Tests passed!\\n'\nprintf 'Running benchmarks (\"rustup run nightly cargo bench --all\"):\\n'\n\nif !(rustup run nightly cargo --version); then\n    printf 'Running benchmarks requires a nightly compiler. Try `rustup install nightly`?\\n'\n    exit 1\nfi\n\nif !(rustup run nightly cargo bench --all); then\n    printf 'Running benchmarks failed.\\n'\n    exit $?\nfi",
+          "sha256": "01e0a20bfe97ed2621a09209dbf7ca1f25a26756bc68fa58ef4063e36e487997",
+          "url": "https://github.com/xi-editor/xi-editor/blob/a2dea3059312795c77caadc639df49bf8a7008eb/rust/run_all_checks"
+        }
+      ],
+      "correctionProposal": {
+        "action": "retain-null-scalar",
+        "qualifiedObservation": {
+          "command": "cargo test --all",
+          "workingDirectory": "rust",
+          "scope": "Rust workspace/core",
+          "completePortableTupleEstablished": false
+        }
+      }
+    },
+    {
+      "identity": "github.com/xi-editor/xi-editor",
+      "revision": "a2dea3059312795c77caadc639df49bf8a7008eb",
+      "field": "docs.root",
+      "oldValue": null,
+      "oldRecordSha256": "f657a38532c23f3ade50164f327bf764bad68f77e332f4ebfa4651c89bf1165c",
+      "disposition": "missing-source-supported-answer",
+      "reason": "Contributor guide explicitly declares a project documentation index; README independently links this GitHub Pages site. docs/_config.yml has an older abishov.com URL, so preserve that source discrepancy rather than deriving the root from config.",
+      "sources": [
+        {
+          "path": "sources/github.com/xi-editor/xi-editor/.github/CONTRIBUTING.md",
+          "lines": [
+            23,
+            27
+          ],
+          "excerpt": "### Very first steps\n\nNot sure where to start? If you haven't already, take a look at the\n[docs](http://xi-editor.github.io/xi-editor/docs.html) to get a better sense of\nthe project. Read through some issues and some open PRs, to get a sense for the",
+          "sha256": "1b6f389dcb8fa4085418ea05a7a6124b81c44a340b2ca292ebac462d3a6617ab",
+          "url": "https://github.com/xi-editor/xi-editor/blob/a2dea3059312795c77caadc639df49bf8a7008eb/.github/CONTRIBUTING.md"
+        },
+        {
+          "path": "sources/github.com/xi-editor/xi-editor/README.md",
+          "lines": [
+            87,
+            90
+          ],
+          "excerpt": "There are notes (I wouldn’t call it\ndocumentation at this point) on the protocol at\n[frontend.md](https://xi-editor.github.io/xi-editor/docs/frontend-protocol.html). If you're working on a front-end, feel free to\nsend a PR to add it to the above list.",
+          "sha256": "6681f1c1d56642f12480da7e3c68d97fb7e530793be9c56dd07f0a7da168c746",
+          "url": "https://github.com/xi-editor/xi-editor/blob/a2dea3059312795c77caadc639df49bf8a7008eb/README.md"
+        },
+        {
+          "path": "sources/github.com/xi-editor/xi-editor/docs/_config.yml",
+          "lines": [
+            1,
+            6
+          ],
+          "excerpt": "title: Xi-Editor\ndescription: >\n  A modern editor with a backend written in Rust.\n\nbaseurl: \"/xi-editor\"\nurl: \"http://abishov.com\"",
+          "sha256": "e158c2656123af4baef1b8d7cc2f4f9472724e02545f76c9ea77ab02c28c7711",
+          "url": "https://github.com/xi-editor/xi-editor/blob/a2dea3059312795c77caadc639df49bf8a7008eb/docs/_config.yml"
+        }
+      ],
+      "correctionProposal": {
+        "action": "propose-add-source-declared-url",
+        "value": "http://xi-editor.github.io/xi-editor/docs.html",
+        "liveTargetVerified": false,
+        "limitations": "Exact HTTP declaration retained; live reachability, redirects, canonical HTTPS spelling and target content not inspected."
+      }
+    },
+    {
+      "identity": "github.com/WebKit/WebKit",
+      "revision": "854a2da6e1e1e721631ae1bd4ba554d746b7b577",
+      "field": "repo.build",
+      "oldValue": null,
+      "oldRecordSha256": "a2a06f604c154a19a3f77681e45e5e74093868c6b149101b265be21fbba4cbaa",
+      "disposition": "correct-scalar-abstention",
+      "reason": "README separates Apple, GTK, WPE and Windows builds with distinct setup; root Makefile is conditional. No universal complete default build scalar is established.",
+      "sources": [
+        {
+          "path": "sources/github.com/WebKit/WebKit/ReadMe.md",
+          "lines": [
+            29,
+            42
+          ],
+          "excerpt": "### Building for Apple platforms\n\nInstall Xcode and its command line tools if you haven't done so already:\n\n1. **Install Xcode**\n2. **Install the Xcode Command Line Tools** In Terminal, run the command: `xcode-select --install`\n3. **Install the Metal toolchain** In Terminal, run the command: `xcodebuild -downloadComponent MetalToolchain`\n\nRun the following command to build a macOS debug build with debugging symbols and assertions:\n\n```\nTools/Scripts/build-webkit --debug\n```\n",
+          "sha256": "2f3bafa6fc925e8b415533c23f38e930f02dc0b0b94aedeff8c78c41b9640d0f",
+          "url": "https://github.com/WebKit/WebKit/blob/854a2da6e1e1e721631ae1bd4ba554d746b7b577/ReadMe.md"
+        },
+        {
+          "path": "sources/github.com/WebKit/WebKit/ReadMe.md",
+          "lines": [
+            82,
+            100
+          ],
+          "excerpt": "\nFor production builds:\n\n```\ncmake -DPORT=GTK -DCMAKE_BUILD_TYPE=RelWithDebInfo -GNinja\nninja\nsudo ninja install\n```\n\nFor development builds:\n\n```\nTools/gtk/install-dependencies\nTools/Scripts/update-webkitgtk-libs\nTools/Scripts/build-webkit --gtk --debug\n```\n\nFor more information on building WebKitGTK, see the [wiki page](https://trac.webkit.org/wiki/BuildingGtk).\n",
+          "sha256": "2f3bafa6fc925e8b415533c23f38e930f02dc0b0b94aedeff8c78c41b9640d0f",
+          "url": "https://github.com/WebKit/WebKit/blob/854a2da6e1e1e721631ae1bd4ba554d746b7b577/ReadMe.md"
+        },
+        {
+          "path": "sources/github.com/WebKit/WebKit/Makefile",
+          "lines": [
+            1,
+            19
+          ],
+          "excerpt": "ifneq ($(USE_WORKSPACE),NO)\n\nSCHEME = Everything up to WebKit + Tools\nSCRIPTS_PATH = Tools/Scripts\n\nanalyze: SCHEME = Everything up to WebKit\n\ninclude Makefile.shared\n\nelse\n\nMODULES = Source Tools\n\ndefine build_target_for_each_module\n\tfor dir in $(MODULES); do \\\n\t\t${MAKE} $@ -C $$dir PATH_FROM_ROOT=$(PATH_FROM_ROOT)/$${dir}; \\\n\t\texit_status=$$?; \\\n\t\t[ $$exit_status -ne 0 ] && exit $$exit_status; \\\n\tdone; true",
+          "sha256": "9c82af3da7ed02aada5c438f785520c989f6ca9b9934456bf2d59623985725f9",
+          "url": "https://github.com/WebKit/WebKit/blob/854a2da6e1e1e721631ae1bd4ba554d746b7b577/Makefile"
+        }
+      ],
+      "correctionProposal": {
+        "action": "retain-null-scalar"
+      }
+    },
+    {
+      "identity": "github.com/WebKit/WebKit",
+      "revision": "854a2da6e1e1e721631ae1bd4ba554d746b7b577",
+      "field": "repo.test",
+      "oldValue": null,
+      "oldRecordSha256": "a2a06f604c154a19a3f77681e45e5e74093868c6b149101b265be21fbba4cbaa",
+      "disposition": "unresolved",
+      "reason": "Introduction names JavaScriptCore, layout, API, bindings, Python and Perl suites separately. No complete repository-default aggregate instruction is established; no one suite substitutes for the rest.",
+      "sources": [
+        {
+          "path": "sources/github.com/WebKit/WebKit/Introduction.md",
+          "lines": [
+            209,
+            235
+          ],
+          "excerpt": "## Correctness Testing in WebKit\n\nWebKit is really big on test driven development, we have many types of tests.\n\n* **JavaScript tests** - Resides in top-level [JSTests](https://github.com/WebKit/WebKit/tree/main/JSTests) directory.\n    This is the primary method of testing JavaScriptCore. Use `Tools/Scripts/run-javascriptcore-tests` to run these tests.\n* **Layout tests** - Resides in top-level [LayoutTests](https://github.com/WebKit/WebKit/tree/main/LayoutTests) directory.\n    This is the primary method of testing WebCore.\n    If you’re making code changes to WebCore, you typically run these tests. Use `Tools/Scripts/run-webkit-tests` to run these.\n    Pass `-1` to run tests using WebKitLegacy (a.k.a. WebKit1).\n    [WebKitTestRunner](https://github.com/WebKit/WebKit/tree/main/Tools/WebKitTestRunner) is used to run these tests for WebKit2,\n    and [DumpRenderTree](https://github.com/WebKit/WebKit/tree/main/Tools/DumpRenderTree) is used to these tests for WebKit1.\n    There are a few styles of layout tests but all of them have a test file and expected result (ends with -expected.txt),\n    and the test passes if the test file’s output matches that of the expected result.\n* **API tests** - Reside in [Tools/TestWebKitAPI](https://github.com/WebKit/WebKit/tree/main/Tools/TestWebKitAPI),\n    these are [GTests](https://en.wikipedia.org/wiki/Google_Test) that test APIs exposed by JavaScriptCore,\n    WebKitLegacy, and WebKit layers as well as unit tests for selected WTF classes.\n    WebKit does not use [XCTests](https://developer.apple.com/documentation/xctest).\n    Use `Tools/Scripts/run-api-tests` to run these tests.\n    Because these API tests are sequentially, it’s preferable to write layout tests when possible.\n* **Bindings tests** - Reside in [Source/WebCore/bindings/scripts/test](https://github.com/WebKit/WebKit/tree/main/Source/WebCore/bindings/scripts/test),\n    these are tests for WebCore’s binding code generator.\n    Use `Tools/Scripts/run-bindings-tests` to run these tests.\n* **webkitpy tests** - Tests for WebKit’s various Python scripts in [Tools/Scripts/webkitpy](https://github.com/WebKit/WebKit/tree/main/Tools/Scripts/webkitpy).\n    Use `Tools/Scripts/test-webkitpy` to run these tests.\n* **webkitperl tests** - Tests for WebKit’s various Perl scripts in [Tools/Scripts/webkitperl](https://github.com/WebKit/WebKit/tree/main/Tools/Scripts/webkitperl).\n    Use `Tools/Scripts/test-webkitperl` to run these tests.",
+          "sha256": "5c17fa560c55e960e34f702fcfb3dbef96b89a43078bc430416b90c8e0176462",
+          "url": "https://github.com/WebKit/WebKit/blob/854a2da6e1e1e721631ae1bd4ba554d746b7b577/Introduction.md"
+        }
+      ],
+      "correctionProposal": {
+        "action": "retain-null; establish aggregate coverage before addition"
+      }
+    },
+    {
+      "identity": "github.com/WebKit/WebKit",
+      "revision": "854a2da6e1e1e721631ae1bd4ba554d746b7b577",
+      "field": "docs.root",
+      "oldValue": null,
+      "oldRecordSha256": "a2a06f604c154a19a3f77681e45e5e74093868c6b149101b265be21fbba4cbaa",
+      "disposition": "unresolved",
+      "reason": "Retained sources declare a project homepage and port-specific docs. Those do not establish the exact general docs root; do not promote the Windows page or infer a root by URL shape.",
+      "sources": [
+        {
+          "path": "sources/github.com/WebKit/WebKit/ReadMe.md",
+          "lines": [
+            1,
+            4
+          ],
+          "excerpt": "# WebKit\n\nWebKit is a cross-platform web browser engine. On iOS and macOS, it powers Safari, Mail, Apple Books, and many other applications. For more information about WebKit, see the [WebKit project website](https://webkit.org/).\n",
+          "sha256": "2f3bafa6fc925e8b415533c23f38e930f02dc0b0b94aedeff8c78c41b9640d0f",
+          "url": "https://github.com/WebKit/WebKit/blob/854a2da6e1e1e721631ae1bd4ba554d746b7b577/ReadMe.md"
+        },
+        {
+          "path": "sources/github.com/WebKit/WebKit/ReadMe.md",
+          "lines": [
+            116,
+            119
+          ],
+          "excerpt": "Tools/Scripts/build-webkit --wpe --debug\n```\n\n### Building Windows Port",
+          "sha256": "2f3bafa6fc925e8b415533c23f38e930f02dc0b0b94aedeff8c78c41b9640d0f",
+          "url": "https://github.com/WebKit/WebKit/blob/854a2da6e1e1e721631ae1bd4ba554d746b7b577/ReadMe.md"
+        }
+      ],
+      "correctionProposal": {
+        "action": "retain-null pending owned root declaration/target inspection"
+      }
+    },
+    {
+      "identity": "github.com/IBM/fp-go",
+      "revision": "42e25c64425e2291bd5b281aa852b7a790526204",
+      "field": "repo.build",
+      "oldValue": "go build ./...",
+      "oldRecordSha256": "b282484109501ee0f9e0300b2f76683c935318ee5cc35d8dca137bb2161d9bfb",
+      "disposition": "potentially-applicable-insufficient-evidence",
+      "reason": "go build ./... may build root v1, but retained docs/workflows do not declare it as repository-default build. CI separately handles v1/v2/gen-v2; conventional syntax does not establish an aggregate source-owned default.",
+      "sources": [
+        {
+          "path": "sources/github.com/IBM/fp-go/go.mod",
+          "lines": [
+            1,
+            5
+          ],
+          "excerpt": "module github.com/IBM/fp-go\n\ngo 1.20\n\nrequire (",
+          "sha256": "d99a7fedebc0034b3ee99bb1e820f0e93660d2e44e6e3b7a5de8252afab23544",
+          "url": "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/go.mod"
+        },
+        {
+          "path": "sources/github.com/IBM/fp-go/v2/go.mod",
+          "lines": [
+            1,
+            5
+          ],
+          "excerpt": "module github.com/IBM/fp-go/v2\n\ngo 1.24.0\n\nrequire (",
+          "sha256": "592f7929f786535e9ce99626ba3caef64d209a32d103886819b6006da7c4e254",
+          "url": "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/v2/go.mod"
+        },
+        {
+          "path": "sources/github.com/IBM/fp-go/gen/v2/go.mod",
+          "lines": [
+            1,
+            5
+          ],
+          "excerpt": "module github.com/IBM/fp-go/gen/v2\n\ngo 1.26.0\n\nrequire (",
+          "sha256": "f570b0499adf862d968f0ecac7a550da39ca66438e6a4fe71352fc44525409d6",
+          "url": "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/gen/v2/go.mod"
+        },
+        {
+          "path": "sources/github.com/IBM/fp-go/.github/workflows/build.yml",
+          "lines": [
+            133,
+            151
+          ],
+          "excerpt": "    needs:\n      - build-v1\n      - build-v2\n      - build-gen\n    runs-on: ubuntu-latest\n    steps:\n      - name: Coveralls Finished\n        continue-on-error: true\n        uses: coverallsapp/github-action@v2\n        with:\n          github-token: ${{ secrets.GITHUB_TOKEN }}\n          parallel-finished: true\n\n  release:\n    name: Release\n    needs:\n      - build-v1\n      - build-v2\n      - build-gen",
+          "sha256": "1931d37e0f552e7451472cbc4e75f119a09fc6d8d70819aa29e0481173e4a25c",
+          "url": "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/.github/workflows/build.yml"
+        }
+      ],
+      "correctionProposal": {
+        "action": "propose-withhold-scalar",
+        "replacement": null,
+        "limitations": "Not a claim the command fails; it may apply to root-module-only work."
+      }
+    },
+    {
+      "identity": "github.com/IBM/fp-go",
+      "revision": "42e25c64425e2291bd5b281aa852b7a790526204",
+      "field": "repo.test",
+      "oldValue": "go test ./...",
+      "oldRecordSha256": "b282484109501ee0f9e0300b2f76683c935318ee5cc35d8dca137bb2161d9bfb",
+      "disposition": "contradicted-or-wrong-scope",
+      "reason": "Root go test ./... covers root v1 but omits separate v2 and gen/v2 modules. CI requires distinct module jobs, Go matrices, go mod tidy preparation and race/coverage invocations.",
+      "sources": [
+        {
+          "path": "sources/github.com/IBM/fp-go/.github/workflows/build.yml",
+          "lines": [
+            21,
+            44
+          ],
+          "excerpt": "jobs:\n  build-v1:\n    name: Build v1 (Go ${{ matrix.go-version }})\n    runs-on: ubuntu-latest\n    permissions:\n      contents: read\n    strategy:\n      matrix:\n        go-version: ['1.20.x', '1.21.x', '1.22.x', '1.23.x', '1.24.x', '1.25.x', '1.26.x', '1.27.x']\n      fail-fast: false  # Continue with other versions if one fails\n    steps:\n      # full checkout for semantic-release\n      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1\n        with:\n          fetch-depth: 0\n      - name: Set up Go ${{ matrix.go-version }}\n        uses: actions/setup-go@v7\n        with:\n          go-version: ${{ matrix.go-version }}\n          cache: true  # Enable Go module caching\n      - name: Run tests\n        run: |\n          go mod tidy\n          go test -race -coverprofile=coverage.txt -covermode=atomic -coverpkg=./... ./...",
+          "sha256": "1931d37e0f552e7451472cbc4e75f119a09fc6d8d70819aa29e0481173e4a25c",
+          "url": "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/.github/workflows/build.yml"
+        },
+        {
+          "path": "sources/github.com/IBM/fp-go/.github/workflows/build.yml",
+          "lines": [
+            65,
+            86
+          ],
+          "excerpt": "  build-v2:\n    name: Build v2 (Go ${{ matrix.go-version }})\n    runs-on: ubuntu-latest\n    permissions:\n      contents: read\n    strategy:\n      matrix:\n        go-version: ['1.24.x', '1.25.x', '1.26.x', '1.27.x']\n    steps:\n      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1\n        with:\n          fetch-depth: 0\n      - name: Set up Go ${{ matrix.go-version }}\n        uses: actions/setup-go@v7\n        with:\n          go-version: ${{ matrix.go-version }}\n          cache: true  # Enable Go module caching\n      - name: Run tests\n        run: |\n          cd v2\n          go mod tidy\n          go test -race -coverprofile=coverage.txt -covermode=atomic -coverpkg=./... ./...",
+          "sha256": "1931d37e0f552e7451472cbc4e75f119a09fc6d8d70819aa29e0481173e4a25c",
+          "url": "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/.github/workflows/build.yml"
+        },
+        {
+          "path": "sources/github.com/IBM/fp-go/.github/workflows/build.yml",
+          "lines": [
+            107,
+            128
+          ],
+          "excerpt": "  build-gen:\n    name: Build gen/v2 (Go ${{ matrix.go-version }})\n    runs-on: ubuntu-latest\n    permissions:\n      contents: read\n    strategy:\n      matrix:\n        go-version: ['1.26.x', '1.27.x']\n    steps:\n      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1\n        with:\n          fetch-depth: 0\n      - name: Set up Go ${{ matrix.go-version }}\n        uses: actions/setup-go@v7\n        with:\n          go-version: ${{ matrix.go-version }}\n          cache: true\n      - name: Run tests\n        run: |\n          cd gen/v2\n          go mod tidy\n          go test -race -coverprofile=coverage.txt -covermode=atomic -coverpkg=./... ./...",
+          "sha256": "1931d37e0f552e7451472cbc4e75f119a09fc6d8d70819aa29e0481173e4a25c",
+          "url": "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/.github/workflows/build.yml"
+        },
+        {
+          "path": "sources/github.com/IBM/fp-go/v2/go.mod",
+          "lines": [
+            1,
+            5
+          ],
+          "excerpt": "module github.com/IBM/fp-go/v2\n\ngo 1.24.0\n\nrequire (",
+          "sha256": "592f7929f786535e9ce99626ba3caef64d209a32d103886819b6006da7c4e254",
+          "url": "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/v2/go.mod"
+        },
+        {
+          "path": "sources/github.com/IBM/fp-go/gen/v2/go.mod",
+          "lines": [
+            1,
+            5
+          ],
+          "excerpt": "module github.com/IBM/fp-go/gen/v2\n\ngo 1.26.0\n\nrequire (",
+          "sha256": "f570b0499adf862d968f0ecac7a550da39ca66438e6a4fe71352fc44525409d6",
+          "url": "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/gen/v2/go.mod"
+        }
+      ],
+      "correctionProposal": {
+        "action": "propose-withhold-scalar",
+        "replacement": null,
+        "limitations": "The original command can remain valid for v1-only testing; no equivalent aggregate wrapper invented or executed."
+      }
+    },
+    {
+      "identity": "github.com/IBM/fp-go",
+      "revision": "42e25c64425e2291bd5b281aa852b7a790526204",
+      "field": "docs.root",
+      "oldValue": null,
+      "oldRecordSha256": "b282484109501ee0f9e0300b2f76683c935318ee5cc35d8dca137bb2161d9bfb",
+      "disposition": "missing-source-supported-answer",
+      "reason": "README explicitly labels pkg.go.dev root-module page API Documentation, with separate V2 documentation. Retain the declared entrypoint without implying v1 command coverage of every module.",
+      "sources": [
+        {
+          "path": "sources/github.com/IBM/fp-go/README.md",
+          "lines": [
+            56,
+            60
+          ],
+          "excerpt": "### Resources\n\n- 📖 [API Documentation](https://pkg.go.dev/github.com/IBM/fp-go)\n- 💡 [Code Samples](./samples/)\n- 🆕 [V2 Documentation](./v2/README.md) (requires Go 1.24+)",
+          "sha256": "f92d9a6e245607599eedee3a941ffcaf0aadef007d3cbbf6b26a04ee653a433a",
+          "url": "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/README.md"
+        }
+      ],
+      "correctionProposal": {
+        "action": "propose-add-source-declared-url",
+        "value": "https://pkg.go.dev/github.com/IBM/fp-go",
+        "liveTargetVerified": false,
+        "limitations": "Source association only; live response and all-module docs completeness unverified."
+      }
+    },
+    {
+      "identity": "github.com/gomodule/redigo",
+      "revision": "57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "field": "repo.build",
+      "oldValue": "go build ./...",
+      "oldRecordSha256": "562717d09d0fcf6ee7707cbb4afc4e19ed9652e662aee58af63d83acc8538151",
+      "disposition": "potentially-applicable-insufficient-evidence",
+      "reason": "README declares go get installation, not a repository-default go build ./... step. Release workflow uses GoReleaser. The original command may build the library but its claimed default is not source-established.",
+      "sources": [
+        {
+          "path": "sources/github.com/gomodule/redigo/README.markdown",
+          "lines": [
+            25,
+            32
+          ],
+          "excerpt": "Installation\n------------\n\nInstall Redigo using the \"go get\" command:\n\n    go get github.com/gomodule/redigo/redis\n\nThe Go distribution is Redigo's only dependency.",
+          "sha256": "9fade03f42daf7476a14204e80bb2dd64593bf81f4bedf332d00625a3b6f522d",
+          "url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/README.markdown"
+        },
+        {
+          "path": "sources/github.com/gomodule/redigo/.github/workflows/release-build.yml",
+          "lines": [
+            20,
+            32
+          ],
+          "excerpt": "      - name: Set up Go\n        uses: actions/setup-go@v5\n        with:\n          go-version: '1.22'\n\n      - name: Run GoReleaser\n        uses: goreleaser/goreleaser-action@v5\n        with:\n          distribution: goreleaser\n          version: latest\n          args: release --clean\n        env:\n          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}",
+          "sha256": "1e4c7c2dae8bc6b2286ee87e5055900ef4d08c53608d95213bb4d8b484dd06b8",
+          "url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/.github/workflows/release-build.yml"
+        }
+      ],
+      "correctionProposal": {
+        "action": "propose-withhold-scalar",
+        "replacement": null,
+        "limitations": "No build failure observed; no upstream code executed."
+      }
+    },
+    {
+      "identity": "github.com/gomodule/redigo",
+      "revision": "57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "field": "repo.test",
+      "oldValue": "go test ./...",
+      "oldRecordSha256": "562717d09d0fcf6ee7707cbb4afc4e19ed9652e662aee58af63d83acc8538151",
+      "disposition": "potentially-applicable-insufficient-evidence",
+      "reason": "CI installs Redis before go test -race ./.... Test helper executes redis-server --version and starts the binary. The bare old scalar can run the same packages with setup, but drops Redis prerequisites and the source-owned race flag.",
+      "sources": [
+        {
+          "path": "sources/github.com/gomodule/redigo/.github/workflows/go-test.yml",
+          "lines": [
+            11,
+            38
+          ],
+          "excerpt": "    runs-on: ${{ matrix.os }}\n    strategy:\n      matrix:\n        go-version:\n        - '1.21'\n        - '1.22'\n        os:\n        - 'ubuntu-latest'\n        redis:\n        - '7.2'\n        - '7.0'\n        - '6.2'\n        - '6.0'\n    name: Test go ${{ matrix.go-version }} redis ${{ matrix.redis }} on ${{ matrix.os }}\n    steps:\n      - name: Setup redis\n        uses: shogo82148/actions-setup-redis@v1\n        with:\n          redis-version: ${{ matrix.redis }}\n\n      - name: Checkout code\n        uses: actions/checkout@v4\n\n      - name: Install Go\n        uses: actions/setup-go@v5\n        with:\n          go-version: ${{ matrix.go-version }}\n",
+          "sha256": "f6e5dca75defdea9f22c29c189a2ca46b398bc19018be5f41e43055e329fa84d",
+          "url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/.github/workflows/go-test.yml"
+        },
+        {
+          "path": "sources/github.com/gomodule/redigo/redis/test_test.go",
+          "lines": [
+            40,
+            65
+          ],
+          "excerpt": "\tErrNegativeInt = errNegativeInt\n\n\tserverPath     = flag.String(\"redis-server\", \"redis-server\", \"Path to redis server binary\")\n\tserverAddress  = flag.String(\"redis-address\", \"127.0.0.1\", \"The address of the server\")\n\tserverBasePort = flag.Int(\"redis-port\", 16379, \"Beginning of port range for test servers\")\n\tserverLogName  = flag.String(\"redis-log\", \"\", \"Write Redis server logs to `filename`\")\n\tserverLog      = ioutil.Discard\n\n\tdefaultServerMu  sync.Mutex\n\tdefaultServer    *Server\n\tdefaultServerErr error\n)\n\ntype Server struct {\n\tname string\n\tcmd  *exec.Cmd\n\tdone chan struct{}\n}\n\ntype version struct {\n\tmajor int\n\tminor int\n\tpatch int\n}\n\nfunc redisServerVersion() (*version, error) {",
+          "sha256": "91e3066bd8b8eb32a5b778c6cbff27e08cd31b690d0a8424368cbd49e96cf17b",
+          "url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/test_test.go"
+        },
+        {
+          "path": "sources/github.com/gomodule/redigo/redis/test_test.go",
+          "lines": [
+            95,
+            123
+          ],
+          "excerpt": "\tversion, err := redisServerVersion()\n\tif err != nil {\n\t\treturn nil, err\n\t}\n\n\tif version.major >= 7 {\n\t\targs = append(args, \"--enable-debug-command\", \"local\")\n\t}\n\n\ts := &Server{\n\t\tname: name,\n\t\tcmd:  exec.Command(*serverPath, args...),\n\t\tdone: make(chan struct{}),\n\t}\n\n\tr, err := s.cmd.StdoutPipe()\n\tif err != nil {\n\t\treturn nil, err\n\t}\n\n\terr = s.cmd.Start()\n\tif err != nil {\n\t\treturn nil, err\n\t}\n\n\tready := make(chan error, 1)\n\tgo s.watch(r, ready)\n\n\tselect {",
+          "sha256": "91e3066bd8b8eb32a5b778c6cbff27e08cd31b690d0a8424368cbd49e96cf17b",
+          "url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/test_test.go"
+        }
+      ],
+      "correctionProposal": {
+        "action": "propose-withhold-bare-scalar; retain qualified source candidate separately",
+        "replacement": null,
+        "qualifiedObservation": {
+          "command": "go test -race ./...",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "prerequisites": [
+            "ubuntu-latest CI",
+            "Go1.21/1.22 CI matrix",
+            "redis-server installed; Redis6.0/6.2/7.0/7.2 CI matrix",
+            "local server processes/ports allowed"
+          ],
+          "executionObserved": false,
+          "portableRuntimeVerified": false
+        }
+      }
+    },
+    {
+      "identity": "github.com/gomodule/redigo",
+      "revision": "57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "field": "docs.root",
+      "oldValue": "https://pkg.go.dev/github.com/gomodule/redigo/redis",
+      "oldRecordSha256": "562717d09d0fcf6ee7707cbb4afc4e19ed9652e662aee58af63d83acc8538151",
+      "disposition": "supported-existing-answer",
+      "reason": "README explicitly labels the existing pkg.go.dev value API Reference and uses the same path for its GoDoc badge and features.",
+      "sources": [
+        {
+          "path": "sources/github.com/gomodule/redigo/README.markdown",
+          "lines": [
+            18,
+            23
+          ],
+          "excerpt": "Documentation\n-------------\n\n- [API Reference](https://pkg.go.dev/github.com/gomodule/redigo/redis)\n- [FAQ](https://github.com/gomodule/redigo/wiki/FAQ)\n- [Examples](https://pkg.go.dev/github.com/gomodule/redigo/redis#pkg-examples)",
+          "sha256": "9fade03f42daf7476a14204e80bb2dd64593bf81f4bedf332d00625a3b6f522d",
+          "url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/README.markdown"
+        }
+      ],
+      "correctionProposal": {
+        "action": "retain-value; add pinned supporting evidence",
+        "liveTargetVerified": false
+      }
+    },
+    {
+      "identity": "github.com/RunaCapital/awesome-oss-alternatives",
+      "revision": "e5a1bd6153c602404c6f25a97b178228b755aebb",
+      "field": "repo.build",
+      "oldValue": null,
+      "oldRecordSha256": "171cca4a8ea91d4cd8d08057edbddf5e625ff7138ae73715a5f64dd39a3729a4",
+      "disposition": "correct-scalar-abstention",
+      "reason": "Root README/listing describes catalogue or educational chapter resources and declares no repository-default build/test. Keep this selected repository in denominator; do not promote chapter/example/maintenance commands.",
+      "sources": [
+        {
+          "path": "sources/github.com/RunaCapital/awesome-oss-alternatives/README.md",
+          "lines": [
+            1,
+            1
+          ],
+          "excerpt": "# Awesome open-source alternatives to SaaS",
+          "sha256": "33c9d9a94e2583c23c6e37c1f80543cb29d4a7be533f97061385ff7ea73b329e",
+          "url": "https://github.com/RunaCapital/awesome-oss-alternatives/blob/e5a1bd6153c602404c6f25a97b178228b755aebb/README.md"
+        }
+      ],
+      "correctionProposal": {
+        "action": "retain-null-scalar",
+        "limitations": "Bounded source inspection, not proof no script exists anywhere."
+      }
+    },
+    {
+      "identity": "github.com/RunaCapital/awesome-oss-alternatives",
+      "revision": "e5a1bd6153c602404c6f25a97b178228b755aebb",
+      "field": "repo.test",
+      "oldValue": null,
+      "oldRecordSha256": "171cca4a8ea91d4cd8d08057edbddf5e625ff7138ae73715a5f64dd39a3729a4",
+      "disposition": "correct-scalar-abstention",
+      "reason": "Root README/listing describes catalogue or educational chapter resources and declares no repository-default build/test. Keep this selected repository in denominator; do not promote chapter/example/maintenance commands.",
+      "sources": [
+        {
+          "path": "sources/github.com/RunaCapital/awesome-oss-alternatives/README.md",
+          "lines": [
+            1,
+            1
+          ],
+          "excerpt": "# Awesome open-source alternatives to SaaS",
+          "sha256": "33c9d9a94e2583c23c6e37c1f80543cb29d4a7be533f97061385ff7ea73b329e",
+          "url": "https://github.com/RunaCapital/awesome-oss-alternatives/blob/e5a1bd6153c602404c6f25a97b178228b755aebb/README.md"
+        }
+      ],
+      "correctionProposal": {
+        "action": "retain-null-scalar",
+        "limitations": "Bounded source inspection, not proof no script exists anywhere."
+      }
+    },
+    {
+      "identity": "github.com/RunaCapital/awesome-oss-alternatives",
+      "revision": "e5a1bd6153c602404c6f25a97b178228b755aebb",
+      "field": "docs.root",
+      "oldValue": null,
+      "oldRecordSha256": "171cca4a8ea91d4cd8d08057edbddf5e625ff7138ae73715a5f64dd39a3729a4",
+      "disposition": "correct-docs-abstention",
+      "reason": "README has catalogue entries, book-resource links or other-project references, without a separate owned documentation-root declaration. Do not substitute product/dependency/reference URLs.",
+      "sources": [
+        {
+          "path": "sources/github.com/RunaCapital/awesome-oss-alternatives/README.md",
+          "lines": [
+            1,
+            1
+          ],
+          "excerpt": "# Awesome open-source alternatives to SaaS",
+          "sha256": "33c9d9a94e2583c23c6e37c1f80543cb29d4a7be533f97061385ff7ea73b329e",
+          "url": "https://github.com/RunaCapital/awesome-oss-alternatives/blob/e5a1bd6153c602404c6f25a97b178228b755aebb/README.md"
+        }
+      ],
+      "correctionProposal": {
+        "action": "retain-null",
+        "limitations": "Bounded source declarations, not proof documentation cannot exist."
+      }
+    },
+    {
+      "identity": "github.com/Visualize-ML/Book4_Power-of-Matrix",
+      "revision": "a8050eab6fd561e7c0fbffa1d9fa4db90cb63ba7",
+      "field": "repo.build",
+      "oldValue": null,
+      "oldRecordSha256": "aaac94417355dfc31cc01b333aff6237ef841bc7dbecd3f3f98163ae33976713",
+      "disposition": "correct-scalar-abstention",
+      "reason": "Root README/listing describes catalogue or educational chapter resources and declares no repository-default build/test. Keep this selected repository in denominator; do not promote chapter/example/maintenance commands.",
+      "sources": [
+        {
+          "path": "sources/github.com/Visualize-ML/Book4_Power-of-Matrix/README.md",
+          "lines": [
+            1,
+            12
+          ],
+          "excerpt": "《统计至简》五折入口：\nhttps://zhuanlan.zhihu.com/p/634253719\n<br>\n《数学要素》五折入口：\nhttps://zhuanlan.zhihu.com/p/620243026\n<br>\n《矩阵力量》五折入口：\nhttps://zhuanlan.zhihu.com/p/634253719\n\n看个人情况，开源资源，永久有效哈。\n\n纠错多的同学会得到赠书，以示感谢。",
+          "sha256": "add8cc9510108db6eae1619358f70390f9255d278c0ca25ddbc5f105dcf18226",
+          "url": "https://github.com/Visualize-ML/Book4_Power-of-Matrix/blob/a8050eab6fd561e7c0fbffa1d9fa4db90cb63ba7/README.md"
+        }
+      ],
+      "correctionProposal": {
+        "action": "retain-null-scalar",
+        "limitations": "Bounded source inspection, not proof no script exists anywhere."
+      }
+    },
+    {
+      "identity": "github.com/Visualize-ML/Book4_Power-of-Matrix",
+      "revision": "a8050eab6fd561e7c0fbffa1d9fa4db90cb63ba7",
+      "field": "repo.test",
+      "oldValue": null,
+      "oldRecordSha256": "aaac94417355dfc31cc01b333aff6237ef841bc7dbecd3f3f98163ae33976713",
+      "disposition": "correct-scalar-abstention",
+      "reason": "Root README/listing describes catalogue or educational chapter resources and declares no repository-default build/test. Keep this selected repository in denominator; do not promote chapter/example/maintenance commands.",
+      "sources": [
+        {
+          "path": "sources/github.com/Visualize-ML/Book4_Power-of-Matrix/README.md",
+          "lines": [
+            1,
+            12
+          ],
+          "excerpt": "《统计至简》五折入口：\nhttps://zhuanlan.zhihu.com/p/634253719\n<br>\n《数学要素》五折入口：\nhttps://zhuanlan.zhihu.com/p/620243026\n<br>\n《矩阵力量》五折入口：\nhttps://zhuanlan.zhihu.com/p/634253719\n\n看个人情况，开源资源，永久有效哈。\n\n纠错多的同学会得到赠书，以示感谢。",
+          "sha256": "add8cc9510108db6eae1619358f70390f9255d278c0ca25ddbc5f105dcf18226",
+          "url": "https://github.com/Visualize-ML/Book4_Power-of-Matrix/blob/a8050eab6fd561e7c0fbffa1d9fa4db90cb63ba7/README.md"
+        }
+      ],
+      "correctionProposal": {
+        "action": "retain-null-scalar",
+        "limitations": "Bounded source inspection, not proof no script exists anywhere."
+      }
+    },
+    {
+      "identity": "github.com/Visualize-ML/Book4_Power-of-Matrix",
+      "revision": "a8050eab6fd561e7c0fbffa1d9fa4db90cb63ba7",
+      "field": "docs.root",
+      "oldValue": null,
+      "oldRecordSha256": "aaac94417355dfc31cc01b333aff6237ef841bc7dbecd3f3f98163ae33976713",
+      "disposition": "correct-docs-abstention",
+      "reason": "README has catalogue entries, book-resource links or other-project references, without a separate owned documentation-root declaration. Do not substitute product/dependency/reference URLs.",
+      "sources": [
+        {
+          "path": "sources/github.com/Visualize-ML/Book4_Power-of-Matrix/README.md",
+          "lines": [
+            1,
+            12
+          ],
+          "excerpt": "《统计至简》五折入口：\nhttps://zhuanlan.zhihu.com/p/634253719\n<br>\n《数学要素》五折入口：\nhttps://zhuanlan.zhihu.com/p/620243026\n<br>\n《矩阵力量》五折入口：\nhttps://zhuanlan.zhihu.com/p/634253719\n\n看个人情况，开源资源，永久有效哈。\n\n纠错多的同学会得到赠书，以示感谢。",
+          "sha256": "add8cc9510108db6eae1619358f70390f9255d278c0ca25ddbc5f105dcf18226",
+          "url": "https://github.com/Visualize-ML/Book4_Power-of-Matrix/blob/a8050eab6fd561e7c0fbffa1d9fa4db90cb63ba7/README.md"
+        }
+      ],
+      "correctionProposal": {
+        "action": "retain-null",
+        "limitations": "Bounded source declarations, not proof documentation cannot exist."
+      }
+    },
+    {
+      "identity": "github.com/fengdu78/lihang-code",
+      "revision": "672c2ee98f7ffe2521baee5b6119d13d2956ac0c",
+      "field": "repo.build",
+      "oldValue": null,
+      "oldRecordSha256": "f38cdba7e3263bbced5b5f0adfdb2de0213a65b96e0428616b8f5dbcd65d0a1a",
+      "disposition": "correct-scalar-abstention",
+      "reason": "Root README/listing describes catalogue or educational chapter resources and declares no repository-default build/test. Keep this selected repository in denominator; do not promote chapter/example/maintenance commands.",
+      "sources": [
+        {
+          "path": "sources/github.com/fengdu78/lihang-code/readme.md",
+          "lines": [
+            1,
+            13
+          ],
+          "excerpt": "# 《统计学习方法》第二版的代码实现\n\n李航老师编写的《统计学习方法》全面系统地介绍了统计学习的主要方法，特别是监督学习方法，包括感知机、k近邻法、朴素贝叶斯法、决策树、逻辑斯谛回归与支持向量机、提升方法、em算法、隐马尔可夫模型和条件随机场等。除第1章概论和最后一章总结外，每章介绍一种方法。叙述从具体问题或实例入手，由浅入深，阐明思路，给出必要的数学推导，便于读者掌握统计学习方法的实质，学会运用。\n\n《统计学习方法》可以说是机器学习的入门宝典，许多机器学习培训班、互联网企业的面试、笔试题目，很多都参考这本书。 \n\n今天我们将李航老师的《统计学习方法》第二版的代码进行了整理，并提供下载。\n\n非常感谢各位朋友贡献的自己的笔记、代码！\n\n2020年6月7日\n\n## 代码目录 ",
+          "sha256": "c7286cc400ae25b2842fe1c75e2fd789a7a80134ad1d2c420e8ff20569bf9e31",
+          "url": "https://github.com/fengdu78/lihang-code/blob/672c2ee98f7ffe2521baee5b6119d13d2956ac0c/readme.md"
+        }
+      ],
+      "correctionProposal": {
+        "action": "retain-null-scalar",
+        "limitations": "Bounded source inspection, not proof no script exists anywhere."
+      }
+    },
+    {
+      "identity": "github.com/fengdu78/lihang-code",
+      "revision": "672c2ee98f7ffe2521baee5b6119d13d2956ac0c",
+      "field": "repo.test",
+      "oldValue": null,
+      "oldRecordSha256": "f38cdba7e3263bbced5b5f0adfdb2de0213a65b96e0428616b8f5dbcd65d0a1a",
+      "disposition": "correct-scalar-abstention",
+      "reason": "Root README/listing describes catalogue or educational chapter resources and declares no repository-default build/test. Keep this selected repository in denominator; do not promote chapter/example/maintenance commands.",
+      "sources": [
+        {
+          "path": "sources/github.com/fengdu78/lihang-code/readme.md",
+          "lines": [
+            1,
+            13
+          ],
+          "excerpt": "# 《统计学习方法》第二版的代码实现\n\n李航老师编写的《统计学习方法》全面系统地介绍了统计学习的主要方法，特别是监督学习方法，包括感知机、k近邻法、朴素贝叶斯法、决策树、逻辑斯谛回归与支持向量机、提升方法、em算法、隐马尔可夫模型和条件随机场等。除第1章概论和最后一章总结外，每章介绍一种方法。叙述从具体问题或实例入手，由浅入深，阐明思路，给出必要的数学推导，便于读者掌握统计学习方法的实质，学会运用。\n\n《统计学习方法》可以说是机器学习的入门宝典，许多机器学习培训班、互联网企业的面试、笔试题目，很多都参考这本书。 \n\n今天我们将李航老师的《统计学习方法》第二版的代码进行了整理，并提供下载。\n\n非常感谢各位朋友贡献的自己的笔记、代码！\n\n2020年6月7日\n\n## 代码目录 ",
+          "sha256": "c7286cc400ae25b2842fe1c75e2fd789a7a80134ad1d2c420e8ff20569bf9e31",
+          "url": "https://github.com/fengdu78/lihang-code/blob/672c2ee98f7ffe2521baee5b6119d13d2956ac0c/readme.md"
+        }
+      ],
+      "correctionProposal": {
+        "action": "retain-null-scalar",
+        "limitations": "Bounded source inspection, not proof no script exists anywhere."
+      }
+    },
+    {
+      "identity": "github.com/fengdu78/lihang-code",
+      "revision": "672c2ee98f7ffe2521baee5b6119d13d2956ac0c",
+      "field": "docs.root",
+      "oldValue": null,
+      "oldRecordSha256": "f38cdba7e3263bbced5b5f0adfdb2de0213a65b96e0428616b8f5dbcd65d0a1a",
+      "disposition": "correct-docs-abstention",
+      "reason": "README has catalogue entries, book-resource links or other-project references, without a separate owned documentation-root declaration. Do not substitute product/dependency/reference URLs.",
+      "sources": [
+        {
+          "path": "sources/github.com/fengdu78/lihang-code/readme.md",
+          "lines": [
+            1,
+            13
+          ],
+          "excerpt": "# 《统计学习方法》第二版的代码实现\n\n李航老师编写的《统计学习方法》全面系统地介绍了统计学习的主要方法，特别是监督学习方法，包括感知机、k近邻法、朴素贝叶斯法、决策树、逻辑斯谛回归与支持向量机、提升方法、em算法、隐马尔可夫模型和条件随机场等。除第1章概论和最后一章总结外，每章介绍一种方法。叙述从具体问题或实例入手，由浅入深，阐明思路，给出必要的数学推导，便于读者掌握统计学习方法的实质，学会运用。\n\n《统计学习方法》可以说是机器学习的入门宝典，许多机器学习培训班、互联网企业的面试、笔试题目，很多都参考这本书。 \n\n今天我们将李航老师的《统计学习方法》第二版的代码进行了整理，并提供下载。\n\n非常感谢各位朋友贡献的自己的笔记、代码！\n\n2020年6月7日\n\n## 代码目录 ",
+          "sha256": "c7286cc400ae25b2842fe1c75e2fd789a7a80134ad1d2c420e8ff20569bf9e31",
+          "url": "https://github.com/fengdu78/lihang-code/blob/672c2ee98f7ffe2521baee5b6119d13d2956ac0c/readme.md"
+        }
+      ],
+      "correctionProposal": {
+        "action": "retain-null",
+        "limitations": "Bounded source declarations, not proof documentation cannot exist."
+      }
+    },
+    {
+      "identity": "github.com/fkxxyz/rime-cloverpinyin",
+      "revision": "efdfb69688e832d875aad13679fa34ab235cbf54",
+      "field": "repo.build",
+      "oldValue": null,
+      "oldRecordSha256": "431522b62d931a9198e343d41e3552c4ebb586fcd46cc55e2b0596c970a8ffd9",
+      "disposition": "correct-scalar-abstention",
+      "reason": "README owns ./build.sh but only after Linux/Python libraries, downloader/unpacker, librime/prelude, submodules and dictionary Git LFS preparation. Bare scalar would discard that context.",
+      "sources": [
+        {
+          "path": "sources/github.com/fkxxyz/rime-cloverpinyin/README.md",
+          "lines": [
+            69,
+            105
+          ],
+          "excerpt": "该仓库的内容只包含构建四叶草输入法方案的脚本，构建需要以下环境\n\n操作系统： linux\n\npython版本： 3\n\npython依赖的库： [jieba](https://github.com/fxsjy/jieba)、[pypinyin](https://github.com/mozillazg/python-pinyin)、[opencc](https://github.com/BYVoid/OpenCC)、requests\n\n如果是 archlinux 用户，可用下面命令快速安装这些依赖\n\n```shell\npacman -S python-jieba pypinyin opencc python-requests\n```\n\n下载工具（三者任意一个均可）： [aria2](http://aria2.sourceforge.net/)、[wget](https://www.gnu.org/software/wget/wget.html)、[curl](https://curl.haxx.se/)\n\n解压工具（三者任意一个均可）： [unzip](https://www.info-zip.org/UnZip.html)、[bsdtar](https://libarchive.org/)、[7z](http://p7zip.sourceforge.net/)\n\nrime基础库： [librime](https://github.com/rime/librime)\n\nrime基础配置： [librime-prelude](https://github.com/rime/rime-prelude)\n\n克隆此仓库，并下载所有 submodule、拉取字典的 lfs 对象\n\n```shell\ngit clone https://github.com/fkxxyz/rime-cloverpinyin.git\ncd rime-cloverpinyin\ngit submodule update --init\ngit -C chinese-dictionary-3.6million lfs install\ngit -C chinese-dictionary-3.6million lfs pull\n```\n\n然后直接执行构建即可\n\n```shell\n./build.sh\n```",
+          "sha256": "5eb4dcf87e480ad4ad2ad829176b90eec8d1de71a15f2f1a316a7d85a20336c1",
+          "url": "https://github.com/fkxxyz/rime-cloverpinyin/blob/efdfb69688e832d875aad13679fa34ab235cbf54/README.md"
+        },
+        {
+          "path": "sources/github.com/fkxxyz/rime-cloverpinyin/build.sh",
+          "lines": [
+            1,
+            15
+          ],
+          "excerpt": "#!/usr/bin/env bash\nset -e\n\nSHELLDIR=\"$(dirname \"$(readlink -f \"$0\")\")\"\n\n\nminfreq=\"${1:-100}\"\n\nmkdir -p \"$SHELLDIR/cache\"\ncd \"$SHELLDIR/cache\"\n\n# 生成符号列表\nmkdir -p opencc\n(\n  cd opencc",
+          "sha256": "31f36f236e0a551f0fc298c4fc6fd4d224485222b2c696b9028d35f99d2d0914",
+          "url": "https://github.com/fkxxyz/rime-cloverpinyin/blob/efdfb69688e832d875aad13679fa34ab235cbf54/build.sh"
+        }
+      ],
+      "correctionProposal": {
+        "action": "retain-null-bare-scalar; consider exact value-bound qualified tuple separately",
+        "qualifiedObservation": {
+          "command": "./build.sh",
+          "workingDirectory": ".",
+          "scope": "repository Clover Pinyin source build",
+          "platform": "Linux",
+          "prerequisites": [
+            "Python3",
+            "jieba,pypinyin,opencc,requests",
+            "one of aria2/wget/curl",
+            "one of unzip/bsdtar/7z",
+            "librime and librime-prelude",
+            "git submodule update --init",
+            "Git LFS install/pull in chinese-dictionary-3.6million"
+          ],
+          "defaultArgument": "minfreq defaults100; [minfreq] is an optional placeholder, not a literal argument",
+          "executionObserved": false,
+          "limitations": "Source requirements established; installed tools, portability and successful execution not verified."
+        }
+      }
+    },
+    {
+      "identity": "github.com/fkxxyz/rime-cloverpinyin",
+      "revision": "efdfb69688e832d875aad13679fa34ab235cbf54",
+      "field": "repo.test",
+      "oldValue": null,
+      "oldRecordSha256": "431522b62d931a9198e343d41e3552c4ebb586fcd46cc55e2b0596c970a8ffd9",
+      "disposition": "unresolved",
+      "reason": "README documents building and packaging, without a source-owned default test outcome. Build success must not be relabeled test completion.",
+      "sources": [
+        {
+          "path": "sources/github.com/fkxxyz/rime-cloverpinyin/README.md",
+          "lines": [
+            101,
+            128
+          ],
+          "excerpt": "然后直接执行构建即可\n\n```shell\n./build.sh\n```\n\n完成后，会生成 cache 目录和 data 目录\n\n- data 是最终生成的目录\n- cache 是生成过程中下载和生成的中间文件\n\n\n\n其中，执行 build 时，可以有个参数\n\n```shell\n./build.sh [minfreq]\n```\n\nminfreq 代表360万词里面指定的最小词频，频率低于该值的词语会被筛选掉，达到精简词库的目的，默认是100，该值越小，最终生成的词库越大，为 0 表示不精简词库（会生成大约 100 兆左右的词库）。\n\n构建完成后，可以打包，在 data 目录生成发布用的压缩包\n\n```\n./pack.sh [ver]\n```\n\nver 表示版本号，例如 1.1.2",
+          "sha256": "5eb4dcf87e480ad4ad2ad829176b90eec8d1de71a15f2f1a316a7d85a20336c1",
+          "url": "https://github.com/fkxxyz/rime-cloverpinyin/blob/efdfb69688e832d875aad13679fa34ab235cbf54/README.md"
+        }
+      ],
+      "correctionProposal": {
+        "action": "retain-null pending test contract"
+      }
+    },
+    {
+      "identity": "github.com/fkxxyz/rime-cloverpinyin",
+      "revision": "efdfb69688e832d875aad13679fa34ab235cbf54",
+      "field": "docs.root",
+      "oldValue": null,
+      "oldRecordSha256": "431522b62d931a9198e343d41e3552c4ebb586fcd46cc55e2b0596c970a8ffd9",
+      "disposition": "missing-source-supported-answer",
+      "reason": "README explicitly says installation instructions moved to this repository wiki, linking Home and platform pages. This is an owned documentation declaration.",
+      "sources": [
+        {
+          "path": "sources/github.com/fkxxyz/rime-cloverpinyin/README.md",
+          "lines": [
+            53,
+            61
+          ],
+          "excerpt": "\n## 安装\n\n安装说明已迁移到本项目的 wiki，详见：\n\n[安装说明](https://github.com/fkxxyz/rime-cloverpinyin/wiki/Home)\n\n- [在 Windows 下使用](https://github.com/fkxxyz/rime-cloverpinyin/wiki/windows)\n- [在 Linux 下使用](https://github.com/fkxxyz/rime-cloverpinyin/wiki/linux)",
+          "sha256": "5eb4dcf87e480ad4ad2ad829176b90eec8d1de71a15f2f1a316a7d85a20336c1",
+          "url": "https://github.com/fkxxyz/rime-cloverpinyin/blob/efdfb69688e832d875aad13679fa34ab235cbf54/README.md"
+        }
+      ],
+      "correctionProposal": {
+        "action": "propose-add-source-declared-url",
+        "value": "https://github.com/fkxxyz/rime-cloverpinyin/wiki/Home",
+        "liveTargetVerified": false,
+        "limitations": "Wiki target content, reachability and redirects not inspected."
+      }
+    }
+  ],
+  "writesPerformed": false,
+  "executionObserved": false,
+  "reviewerLimitations": [
+    "Single source assessor; independent review before correction writeback.",
+    "All command findings concern source support and claimed task scope, not actual execution success/failure.",
+    "Documentation proposals bind exact source declarations, not live URL availability.",
+    "Recheck every oldRecordSha256 before future writes; scheduled refresh can change records. Preserve unrelated values/assessment timestamps.",
+    "These are now known audit/development cases, never held-out qualification or consumer-benefit evidence."
+  ]
+}

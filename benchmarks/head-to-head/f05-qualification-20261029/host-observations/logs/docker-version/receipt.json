@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "docker",
+    "version",
+    "--format",
+    "{{json .}}"
+  ],
+  "startedAt": "2026-10-29T06:24:13.244447+00:00",
+  "elapsedSeconds": 0.2694545420818031,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "108de8598b9d8aef34e3a3aa543ba3f384e9bda8b4728f60d6a2967fdd09e5ac",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

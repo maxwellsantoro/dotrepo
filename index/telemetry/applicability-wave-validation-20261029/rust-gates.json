@@ -1,0 +1,56 @@
+[
+  {
+    "step": "rustfmt",
+    "argv": [
+      "cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exitCode": 0,
+    "elapsedSeconds": 0.808532333932817,
+    "completedAt": "2026-10-29T06:23:58.458969+00:00"
+  },
+  {
+    "step": "clippy",
+    "argv": [
+      "cargo",
+      "clippy",
+      "--workspace",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exitCode": 0,
+    "elapsedSeconds": 11.207893334096298,
+    "completedAt": "2026-10-29T06:24:09.668503+00:00"
+  },
+  {
+    "step": "deny",
+    "argv": [
+      "cargo",
+      "deny",
+      "check",
+      "advisories",
+      "licenses",
+      "bans",
+      "sources"
+    ],
+    "exitCode": 0,
+    "elapsedSeconds": 0.8303943751379848,
+    "completedAt": "2026-10-29T06:24:10.499745+00:00"
+  },
+  {
+    "step": "workspace-tests",
+    "argv": [
+      "cargo",
+      "test",
+      "--workspace"
+    ],
+    "exitCode": 101,
+    "elapsedSeconds": 59.04556016693823,
+    "completedAt": "2026-10-29T06:25:09.547599+00:00"
+  }
+]

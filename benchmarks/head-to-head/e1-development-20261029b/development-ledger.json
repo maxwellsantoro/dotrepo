@@ -1,0 +1,347 @@
+{
+  "schema": "dotrepo-e1-development-ledger/v1",
+  "declaredAt": "2026-10-29T05:58:02.752451+00:00",
+  "baseCommit": "eb43ab20ac0368c4926660ae060347305197f936",
+  "identityDeclaration": "Declared to coordinator before creating this packet or editing extraction source. All four identities and their former gold/results are exposed development cases.",
+  "boundaries": {
+    "freshHoldout": false,
+    "consumerBenefitMeasured": false,
+    "upstreamCodeExecuted": false,
+    "f05SourcesConsulted": false,
+    "priorFrozenPacketsEdited": false
+  },
+  "repositories": [
+    {
+      "repository": "github.com/storytold/photocraft",
+      "revision": "5f9b4391874aabc9deb2fcb905267613e4d93ec8",
+      "classification": "exposed-development",
+      "sourceRoot": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/storytold/photocraft",
+      "retainedSources": [
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/storytold/photocraft/.cargo/config.toml",
+          "upstreamPath": ".cargo/config.toml",
+          "bytes": 34,
+          "sha256": "c185a2b859850d94af015a9672c1568e1ef73b12612d820f596ef967b835f637",
+          "url": "https://github.com/storytold/photocraft/blob/5f9b4391874aabc9deb2fcb905267613e4d93ec8/.cargo/config.toml"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/storytold/photocraft/AGENTS.md",
+          "upstreamPath": "AGENTS.md",
+          "bytes": 19338,
+          "sha256": "849dcb393d4b20779e0c0f71141fc5b505a181b71f35b497531dbd2e05a6c62a",
+          "url": "https://github.com/storytold/photocraft/blob/5f9b4391874aabc9deb2fcb905267613e4d93ec8/AGENTS.md"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/storytold/photocraft/Cargo.toml",
+          "upstreamPath": "Cargo.toml",
+          "bytes": 9648,
+          "sha256": "9e08a93ebf39236315f8aa86a1e129b77c30a17049c1bcbb62a08c19776a85e3",
+          "url": "https://github.com/storytold/photocraft/blob/5f9b4391874aabc9deb2fcb905267613e4d93ec8/Cargo.toml"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/storytold/photocraft/README.md",
+          "upstreamPath": "README.md",
+          "bytes": 33536,
+          "sha256": "620731e78f824f535e75fa39bfb2fef1bb290ac74579f02b58e4c425d1d65377",
+          "url": "https://github.com/storytold/photocraft/blob/5f9b4391874aabc9deb2fcb905267613e4d93ec8/README.md"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/storytold/photocraft/apps/photocraft/Cargo.toml",
+          "upstreamPath": "apps/photocraft/Cargo.toml",
+          "bytes": 6043,
+          "sha256": "e489011fd26b5855ef9167454b321f3e951e2ecc8ac3751eba2320d90f83363b",
+          "url": "https://github.com/storytold/photocraft/blob/5f9b4391874aabc9deb2fcb905267613e4d93ec8/apps/photocraft/Cargo.toml"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/storytold/photocraft/apps/photocraft/src/main.rs",
+          "upstreamPath": "apps/photocraft/src/main.rs",
+          "bytes": 55780,
+          "sha256": "8fb06954e2f6db6983cc7167a6874ba407c5ecc9796d1f6e9596dca081ee9efc",
+          "url": "https://github.com/storytold/photocraft/blob/5f9b4391874aabc9deb2fcb905267613e4d93ec8/apps/photocraft/src/main.rs"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/storytold/photocraft/docs/development.md",
+          "upstreamPath": "docs/development.md",
+          "bytes": 72260,
+          "sha256": "ad37558a84aa2f84928eb8b2554988fbed73ca3ac989034fe06bed9603446873",
+          "url": "https://github.com/storytold/photocraft/blob/5f9b4391874aabc9deb2fcb905267613e4d93ec8/docs/development.md"
+        }
+      ],
+      "priorGold": {
+        "path": "benchmarks/head-to-head/e1-qualification-20261029/gold-rust.json",
+        "sha256": "192b055297b9a81f3632b6fbcd87b555123a2af905cc86ed810200a1c6435407",
+        "taskIds": [
+          "e1-rust-03-repository-tests",
+          "e1-rust-03-component-tests"
+        ]
+      },
+      "developmentStatus": "source-inspected; automatic change proposal pending coordinator scope decision"
+    },
+    {
+      "repository": "github.com/docker/compose",
+      "revision": "343bb382d2192b88d84af49971bb5cb99bee268c",
+      "classification": "exposed-development",
+      "sourceRoot": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose",
+      "retainedSources": [
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/AGENTS.md",
+          "upstreamPath": "AGENTS.md",
+          "bytes": 3091,
+          "sha256": "2c3364f66a30ea054f3ec3610fa4be37a98e5fc3dbd9654b44f26805c75a236e",
+          "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/AGENTS.md"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/BUILDING.md",
+          "upstreamPath": "BUILDING.md",
+          "bytes": 2206,
+          "sha256": "68694744374f7b98c6dd284aea8d657267a6f6383e9bd5580f725a3e723a7cd4",
+          "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/BUILDING.md"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/CONTRIBUTING.md",
+          "upstreamPath": "CONTRIBUTING.md",
+          "bytes": 18017,
+          "sha256": "9dfbe9648dbc5a31677bda175a0eb5e577b32d499d6dfaf2fbb09b4a5bd63d1a",
+          "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/CONTRIBUTING.md"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/Dockerfile",
+          "upstreamPath": "Dockerfile",
+          "bytes": 7870,
+          "sha256": "5f35a0fce55a645e2497f861aba1414f237d532493b4f2bda138c609b28ef44f",
+          "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/Dockerfile"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/Makefile",
+          "upstreamPath": "Makefile",
+          "bytes": 7050,
+          "sha256": "927856982fcd81c94dd843743000b8a828baf5af02503d64f7a4c4cc477ac4cc",
+          "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/Makefile"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/README.md",
+          "upstreamPath": "README.md",
+          "bytes": 3532,
+          "sha256": "02d853bbccd7d847c65eaea8c07bb14135b3f7904a48abf5898de90d5c75cb8e",
+          "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/README.md"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/docker-bake.hcl",
+          "upstreamPath": "docker-bake.hcl",
+          "bytes": 4836,
+          "sha256": "d8e460f357e8913b41a81458d2c3280f5494368c2f20eaca7ebcb1bdeaeebce5",
+          "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/docker-bake.hcl"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/go.mod",
+          "upstreamPath": "go.mod",
+          "bytes": 6691,
+          "sha256": "add1d3fc58082dc40ea0ebcc3d2c80b1f4bf99a5452aab2026e8997b511cfb09",
+          "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/go.mod"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/pkg/api/api.go",
+          "upstreamPath": "pkg/api/api.go",
+          "bytes": 32081,
+          "sha256": "317a2470d843493b2c1ed17c7b8140ab35203f5415c224df3a2154b3f3c6603a",
+          "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/pkg/api/api.go"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/pkg/compose/apiSocket_test.go",
+          "upstreamPath": "pkg/compose/apiSocket_test.go",
+          "bytes": 2145,
+          "sha256": "59f26ee95d04a855a27047089929d4cfd77cf52b68f547e3fdb38b139dc1b501",
+          "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/pkg/compose/apiSocket_test.go"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/relay/README.md",
+          "upstreamPath": "relay/README.md",
+          "bytes": 2624,
+          "sha256": "e405fceee8f08bc24d7c9a05cef1d7af9b7f5ab9f3d559fedada46d69f2513d0",
+          "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/relay/README.md"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/relay/go.mod",
+          "upstreamPath": "relay/go.mod",
+          "bytes": 48,
+          "sha256": "d19203608de73a4b66a822559f9a8460d07a29b2b92c2f4e7665d5ddda9595f9",
+          "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/relay/go.mod"
+        }
+      ],
+      "priorGold": {
+        "path": "benchmarks/head-to-head/e1-qualification-20261029/go/gold.json",
+        "sha256": "46eaad4ff9b80ae377e872b2da0a4dd6ceca101390e3a2b0d4bc55159ca0ef9f",
+        "taskIds": [
+          "e1-go-03-repository-tests",
+          "e1-go-03-component-tests"
+        ]
+      },
+      "developmentStatus": "source-inspected; automatic change proposal pending coordinator scope decision"
+    },
+    {
+      "repository": "github.com/keras-team/keras",
+      "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+      "classification": "exposed-development",
+      "sourceRoot": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras",
+      "retainedSources": [
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/CONTRIBUTING.md",
+          "upstreamPath": "CONTRIBUTING.md",
+          "bytes": 13606,
+          "sha256": "eff1a6349d222979e24b860c88e9577f603300af7658a1ac6fca3140992d0d3d",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/CONTRIBUTING.md"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/README.md",
+          "upstreamPath": "README.md",
+          "bytes": 5547,
+          "sha256": "6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/README.md"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/conftest.py",
+          "upstreamPath": "conftest.py",
+          "bytes": 4230,
+          "sha256": "36df082dea9e45f405a2b915e16800d7885c700f1580cb97914a6412542b0ba9",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/conftest.py"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/keras/api/__init__.py",
+          "upstreamPath": "keras/api/__init__.py",
+          "bytes": 2951,
+          "sha256": "3e0df362a6b9bb3e5253858af4ca306107334be94addbee75a14f3c9f9ea7429",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/api/__init__.py"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/keras/src/__init__.py",
+          "upstreamPath": "keras/src/__init__.py",
+          "bytes": 684,
+          "sha256": "1a2e12ec4882324134dcf6dd18da4575a518c92583b3f15c009f136b3f58d411",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/src/__init__.py"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/keras/src/losses/losses_test.py",
+          "upstreamPath": "keras/src/losses/losses_test.py",
+          "bytes": 114961,
+          "sha256": "3c8c4fe48d626eb6985b13c41f427836f70c3fb4155087324af1b638a8764547",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/src/losses/losses_test.py"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/pyproject.toml",
+          "upstreamPath": "pyproject.toml",
+          "bytes": 2883,
+          "sha256": "51ac5db60612a4c92123980826c1010a6d087c7a64b11a580ebc33c21058d326",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/pyproject.toml"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/requirements-common.txt",
+          "upstreamPath": "requirements-common.txt",
+          "bytes": 498,
+          "sha256": "3df3a2a15e645bc03082648aec06570a4329fdad189e4b326df0be80d6a7615e",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/requirements-common.txt"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/requirements.txt",
+          "upstreamPath": "requirements.txt",
+          "bytes": 619,
+          "sha256": "f34e2fa7d9bb205afe36e7cb8a0d53f6e3be39d0dc51b38de0619529e4e919b8",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/requirements.txt"
+        }
+      ],
+      "priorGold": {
+        "path": "benchmarks/head-to-head/e1-qualification-20261029/python/gold.json",
+        "sha256": "20fece28e338a4badfd5f1867886e18e0aaecb9b34a6c6f51b788122c76b32b1",
+        "taskIds": [
+          "e1-python-03-repository-tests",
+          "e1-python-03-component-tests"
+        ]
+      },
+      "developmentStatus": "source-inspected; automatic change proposal pending coordinator scope decision"
+    },
+    {
+      "repository": "github.com/pixijs/pixijs",
+      "revision": "2e8cacbe1ed4ed0fc31d5b59b9895c811ac0e003",
+      "classification": "exposed-development",
+      "sourceRoot": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/pixijs/pixijs",
+      "retainedSources": [
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/pixijs/pixijs/.configs/jest.config.js",
+          "upstreamPath": ".configs/jest.config.js",
+          "bytes": 1434,
+          "sha256": "b8fa97316d2cf32578b106ebd7467a717ca9b780c227d9ded35b8fb1df7ef177",
+          "url": "https://github.com/pixijs/pixijs/blob/2e8cacbe1ed4ed0fc31d5b59b9895c811ac0e003/.configs/jest.config.js"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/pixijs/pixijs/.github/CONTRIBUTING.md",
+          "upstreamPath": ".github/CONTRIBUTING.md",
+          "bytes": 6441,
+          "sha256": "0c174f4aa2eae635f24137871297ac6f2b5a3268c67daed80b33591b65c0b897",
+          "url": "https://github.com/pixijs/pixijs/blob/2e8cacbe1ed4ed0fc31d5b59b9895c811ac0e003/.github/CONTRIBUTING.md"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/pixijs/pixijs/README.md",
+          "upstreamPath": "README.md",
+          "bytes": 5008,
+          "sha256": "b3cb23be81679ac800387f85ed094131addf9226136a2133dbdd7c8922e6e088",
+          "url": "https://github.com/pixijs/pixijs/blob/2e8cacbe1ed4ed0fc31d5b59b9895c811ac0e003/README.md"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/pixijs/pixijs/examples/package.json",
+          "upstreamPath": "examples/package.json",
+          "bytes": 195,
+          "sha256": "1119028e6be9da2b735f401c3db58623ef22329218da6da24f139813571bc23e",
+          "url": "https://github.com/pixijs/pixijs/blob/2e8cacbe1ed4ed0fc31d5b59b9895c811ac0e003/examples/package.json"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/pixijs/pixijs/package.json",
+          "upstreamPath": "package.json",
+          "bytes": 12404,
+          "sha256": "2bb6b7570ca5f4a062609b34fd16fecfa2a76e8c3599c67a5b996a276eabaa32",
+          "url": "https://github.com/pixijs/pixijs/blob/2e8cacbe1ed4ed0fc31d5b59b9895c811ac0e003/package.json"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/pixijs/pixijs/playground/package.json",
+          "upstreamPath": "playground/package.json",
+          "bytes": 329,
+          "sha256": "6f52ef792a217f5714e38e48706b7c2075b0308e672075e06ed504a8b59c345e",
+          "url": "https://github.com/pixijs/pixijs/blob/2e8cacbe1ed4ed0fc31d5b59b9895c811ac0e003/playground/package.json"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/pixijs/pixijs/scripts/README.md",
+          "upstreamPath": "scripts/README.md",
+          "bytes": 3496,
+          "sha256": "42edd71adf3f04eed49fe665d1e3c2d73d59d4c25fe7f76f491f619116c2c475",
+          "url": "https://github.com/pixijs/pixijs/blob/2e8cacbe1ed4ed0fc31d5b59b9895c811ac0e003/scripts/README.md"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/pixijs/pixijs/scripts/jest/jest-global-setup.ts",
+          "upstreamPath": "scripts/jest/jest-global-setup.ts",
+          "bytes": 1222,
+          "sha256": "b637d04e4830a80cad7d7a93d5ff54cfc4d1506a42364c4cd27eec4413bd2828",
+          "url": "https://github.com/pixijs/pixijs/blob/2e8cacbe1ed4ed0fc31d5b59b9895c811ac0e003/scripts/jest/jest-global-setup.ts"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/pixijs/pixijs/scripts/test.mts",
+          "upstreamPath": "scripts/test.mts",
+          "bytes": 4128,
+          "sha256": "f93cd1f44b5e172e695c25e413620bf653ded7aefec206e93de63a80aecc51d2",
+          "url": "https://github.com/pixijs/pixijs/blob/2e8cacbe1ed4ed0fc31d5b59b9895c811ac0e003/scripts/test.mts"
+        }
+      ],
+      "priorGold": {
+        "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/gold.json",
+        "sha256": "2a9b2814df95f49d71e9d8e5294644221f369e774b633a52206d4a5fe0ef4c7a",
+        "taskIds": [
+          "e1-typescript-01-repository-tests",
+          "e1-typescript-01-component-tests"
+        ]
+      },
+      "developmentStatus": "source-inspected; automatic change proposal pending coordinator scope decision"
+    }
+  ],
+  "initialFindings": {
+    "representation": "Existing candidate/context and value-bound field evidence can represent all supported inspected tuples.",
+    "establishment": "Real prerequisites cross documentation, manifest and runner files. Existing prescribed-heading extraction yields no complete tuples for these recipes.",
+    "consumerPath": "score_import_fields does not currently score candidate/context fields; crawler retain_field_evidence only serializes scored fields. Extraction alone does not establish consumer acceptance."
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "jobId": 123291456115,
+  "observedAt": "2026-10-29T06:10:38Z",
+  "result": {
+    "error": "GitHub API error 404: \ufeff<?xml version=\"1.0\" encoding=\"utf-8\"?><Error><Code>BlobNotFound</Code><Message>The specified blob does not exist.\nRequestId:6461eae4-801e-0058-156c-67e927000000\nTime:2026-10-29T06:10:38.9556085Z</Message></Error>",
+    "error_code": "NOT_FOUND",
+    "error_data": {
+      "error_str": "GitHub API error 404: \ufeff<?xml version=\"1.0\" encoding=\"utf-8\"?><Error><Code>BlobNotFound</Code><Message>The specified blob does not exist.\nRequestId:6461eae4-801e-0058-156c-67e927000000\nTime:2026-10-29T06:10:38.9556085Z</Message></Error>"
+    }
+  },
+  "interpretation": "Active job log blob not yet available; not evidence that the scheduled job failed."
+}

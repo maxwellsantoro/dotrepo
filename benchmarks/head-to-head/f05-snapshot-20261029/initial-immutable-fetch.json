@@ -1,0 +1,54 @@
+{
+  "attempt": 2,
+  "priorAttempt": "one files request raised HTTP403 before receipt capture; no body/headers retained",
+  "receipts": [
+    {
+      "observedAt": "2026-10-29T06:10:09.335735+00:00",
+      "url": "https://dotrepo.org/v0/snapshots/bb01b134d0a2d7d913ccf3f0f54327a239d9bce24ac7735259a62bb5630cf976/files.json",
+      "status": 403,
+      "headers": {
+        "Date": "Thu, 29 Oct 2026 06:10:09 GMT",
+        "Content-Type": "text/plain; charset=UTF-8",
+        "Content-Length": "17",
+        "Connection": "close",
+        "Cache-Control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+        "Expires": "Thu, 01 Jan 1970 00:00:01 GMT",
+        "Referrer-Policy": "same-origin",
+        "Server-Timing": "cfEdge;dur=23,cfOrigin;dur=0",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=46KWbvTXiYbI6LMERIKpK20LyGl%2BLgaNV%2FZp9sPlSzZbG39uAj8qmiIKhzZnb0tjE65sq5ll0c6bMNykFOuNB22dY2u9%2BReR8BXFgwDbbWGnnb4qRAY%2BokuVmgnrlw%3D%3D\"}]}",
+        "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "Server": "cloudflare",
+        "CF-RAY": "a52003f828e1eeee-EWR",
+        "alt-svc": "h3=\":443\"; ma=86400"
+      },
+      "body": "files-error.json",
+      "sha256": "2938e9f1284180959e33ab1718d0793a72ff6e4cdb8108c34dcd14e69446de5c",
+      "decodedBytes": 17
+    },
+    {
+      "observedAt": "2026-10-29T06:10:09.375859+00:00",
+      "url": "https://dotrepo.org/v0/snapshots/bb01b134d0a2d7d913ccf3f0f54327a239d9bce24ac7735259a62bb5630cf976/repos/index.json",
+      "status": 403,
+      "headers": {
+        "Date": "Thu, 29 Oct 2026 06:10:09 GMT",
+        "Content-Type": "text/plain; charset=UTF-8",
+        "Content-Length": "17",
+        "Connection": "close",
+        "Cache-Control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+        "Expires": "Thu, 01 Jan 1970 00:00:01 GMT",
+        "Referrer-Policy": "same-origin",
+        "Server-Timing": "cfEdge;dur=9,cfOrigin;dur=0",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=L55ISck%2Fq%2FzXUQDO3865DMyw2SmMm4kyvWMsqGHNbSxpgjAsbuQV3nn8XoTWbb3odymy5xgdZYBbNP8iHJu%2Berpfv5%2BCG9%2BsCfcVC4W2NjU4mvFbxRGh8o4WErr0KQ%3D%3D\"}]}",
+        "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "Server": "cloudflare",
+        "CF-RAY": "a52003f88ed0d15b-EWR",
+        "alt-svc": "h3=\":443\"; ma=86400"
+      },
+      "body": "inventory-error.json",
+      "sha256": "2938e9f1284180959e33ab1718d0793a72ff6e4cdb8108c34dcd14e69446de5c",
+      "decodedBytes": 17
+    }
+  ]
+}

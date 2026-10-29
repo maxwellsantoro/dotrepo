@@ -1,0 +1,54 @@
+{
+  "reviewedAt": "2026-10-29T06:22:19.181042+00:00",
+  "runtimeSourceSha256": "4858337653c455506081f6c869d6123e4146b234c263ac995fae8488dbda713c",
+  "binarySha256": "cbcf2969d4999f634e2b885e164981f21d8c04badd60c1ff8e62f66c4a512617",
+  "result": "Both independently reproduced findings closed on these source-bound cases; no broader completeness claim.",
+  "results": [
+    {
+      "case": "baseline",
+      "contextualCandidateCount": 1,
+      "expected": 1,
+      "passed": true,
+      "contributingSha256": "eff1a6349d222979e24b860c88e9577f603300af7658a1ac6fca3140992d0d3d",
+      "stdout": "imported /var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-retest-lugmgevh/record.toml\nimported /var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-retest-lugmgevh/evidence.md\n- imported from: README.md, pyproject.toml, CONTRIBUTING.md, requirements.txt, requirements-common.txt\n- inferred defaults: repo.name, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": ""
+    },
+    {
+      "case": "commented-tests",
+      "contextualCandidateCount": 0,
+      "expected": 0,
+      "passed": true,
+      "contributingSha256": "462520291325d5d10ee64fa0df65db3256aca2877b881d4930819054d57976e6",
+      "stdout": "imported /var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-retest-12v84xm9/record.toml\nimported /var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-retest-12v84xm9/evidence.md\n- imported from: README.md, pyproject.toml\n- inferred defaults: repo.name, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": ""
+    },
+    {
+      "case": "indented-tests",
+      "contextualCandidateCount": 0,
+      "expected": 0,
+      "passed": true,
+      "contributingSha256": "3611fe981e2f38bf7afe460160a92b74fa8623be843c96a6218f897c8c7ff6d9",
+      "stdout": "imported /var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-retest-5dtqdm2d/record.toml\nimported /var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-retest-5dtqdm2d/evidence.md\n- imported from: README.md, pyproject.toml\n- inferred defaults: repo.name, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": ""
+    },
+    {
+      "case": "fenced-guide",
+      "contextualCandidateCount": 0,
+      "expected": 0,
+      "passed": true,
+      "contributingSha256": "fc8bbef939203368502360c9a2cb031c3de53c5679672daaee04c2c1d7329b00",
+      "stdout": "imported /var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-retest-_o16vwpr/record.toml\nimported /var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-retest-_o16vwpr/evidence.md\n- imported from: README.md, pyproject.toml\n- inferred defaults: repo.name, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": ""
+    },
+    {
+      "case": "external-install-note",
+      "contextualCandidateCount": 0,
+      "expected": 0,
+      "passed": true,
+      "contributingSha256": "cc14df227444ff7a38c68b4c0a71536b8c0b3948603c9326d32fa55a2c9b253d",
+      "stdout": "imported /var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-retest-g_scaxtw/record.toml\nimported /var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-retest-g_scaxtw/evidence.md\n- imported from: README.md, pyproject.toml\n- inferred defaults: repo.name, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": ""
+    }
+  ],
+  "upstreamExecuted": false
+}

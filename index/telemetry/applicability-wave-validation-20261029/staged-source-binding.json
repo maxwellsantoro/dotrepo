@@ -1,0 +1,12 @@
+{
+  "observedAt": "2026-10-29T06:40:01.764907+00:00",
+  "baseCommit": "53ed7c41baab8d82b1b686143148a2e3c5e6f243",
+  "stagedRawDiffSha256": "1789e82f28b30c60266ed92363219a7769a7da503e6acf5dc86d70f6999595b6",
+  "meaning": "Binds staged file identities before adding validation receipt; final exact-head CI remains required.",
+  "pythonTests": 797,
+  "runtimeAndPreparationControls": 122,
+  "rustGate": "Retry002 passes workspace/clippy/rustfmt/alias; deny earlier unchanged dependency inputs pass",
+  "releaseGate": "Full release including VSIX passes; public subset repeated after final partial-record trust amendment; operator passes",
+  "consumerBenefit": "No autonomous campaign; no causal usefulness result",
+  "hostedStartupFailure": "Initial workspace and targeted retry failed readiness; stderr/early-exit diagnostic added; ten full hosted-target repeats (40 cases), then full workspace passed. Exact original cause unobserved; failed logs retained."
+}

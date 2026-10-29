@@ -1,0 +1,25 @@
+{
+  "artifactId": 12796370641,
+  "runId": 40641402409,
+  "archiveSha256": "bf505e43f912da41e6f266713943f560e2148d5d3597ae61a1448c64ffef777b",
+  "bytes": 11710542,
+  "localArchive": "/tmp/dotrepo-operating-readiness-20261029/batch-40641402409.zip",
+  "retainedMembers": [
+    {
+      "member": "index-autonomous-batch/autonomous-telemetry-gate.json",
+      "retainedPath": "index/telemetry/operating-readiness-20261029/run-40641402409-autonomous-telemetry-gate.json",
+      "sha256": "8f7d09afca20c184e1e9653661aef3a9fa4a425f26b2b7f8e9bdf7641bceab9f"
+    },
+    {
+      "member": "index-autonomous-batch/base-preflight.json",
+      "retainedPath": "index/telemetry/operating-readiness-20261029/run-40641402409-base-preflight.json",
+      "sha256": "9891b1762a7f11a367437cc74b58b71fa02a0cb3fbd35d7c3ef8281baad4ea4e"
+    },
+    {
+      "member": "index-autonomous-batch/telemetry.json",
+      "retainedPath": "index/telemetry/operating-readiness-20261029/run-40641402409-telemetry.json",
+      "sha256": "72b1e97d99f53ee6a26103a2de9070be6dff8d2922f1716526a7550a0d085b0b"
+    }
+  ],
+  "artifactTimingLimit": "Batch artifact uploads before landing; no landing.json or refresh-receipt.json is present."
+}

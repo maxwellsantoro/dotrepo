@@ -1,0 +1,53 @@
+{
+  "schema": "dotrepo-retained-packet/v1",
+  "files": {
+    "Dockerfile": {
+      "sha256": "95af4f4ffd742440d1b66ad81bcf7438e5c4298a46ff939417d9b977c27be4f3",
+      "bytes": 339
+    },
+    "README.md": {
+      "sha256": "d182b9e66f099a163e96d2db40e4a38debd18d81531cc9e883afa06a82aa2740",
+      "bytes": 2498
+    },
+    "baseline-invalid-pid-receipt.json": {
+      "sha256": "0a84da48cbce460a5f649fce8a69b6cb1bfd71113e31b1200c62b2b6185f86fe",
+      "bytes": 5093
+    },
+    "baseline-runtime.py.txt": {
+      "sha256": "d9547b452da2d0151f4c0f5163af484be7358cce44bcd7d248cdbd5c04a0dc16",
+      "bytes": 42113
+    },
+    "check_backend.py": {
+      "sha256": "bbc9f8cb2423c6d0043e189844cab16b43f0e6b62ac3b90f691b089a53a1a3c5",
+      "bytes": 6027
+    },
+    "cleanup-verification.json": {
+      "sha256": "6442ab8b70e2ff0c7f1deba3dd3ca3fd04b013fa77208f276242727c742748f3",
+      "bytes": 1003
+    },
+    "fixed-exec-receipt.json": {
+      "sha256": "1460796a104ee5618e0f8a4a84eab77a2c4860f4bdd830a7b8518f32fcd2afae",
+      "bytes": 19072
+    },
+    "fixed-runtime.py.txt": {
+      "sha256": "c2a04ee52aec23d79b29c75ef2db80e7ddc7abfd672c1d028ed1be9dce4e0f40",
+      "bytes": 42251
+    },
+    "image-build.log": {
+      "sha256": "674f9d577312e4daa3095c8a10778bc67538735570209254f23b95b23c54f6dd",
+      "bytes": 2459
+    },
+    "image-inspect.json": {
+      "sha256": "7667be2cc9e4550a0cb533ee5bda25aacbda578896e931fe6262fbcbfb8fc7e3",
+      "bytes": 1402
+    },
+    "pid-corrected-noexec-receipt.json": {
+      "sha256": "0b37a05ecef9d78c7ecf5039f59965d259c27da65be084b45b334fbaf7239270",
+      "bytes": 19249
+    },
+    "pid-corrected-runtime.py.txt": {
+      "sha256": "adc395aee083b6b0b6846c2ea54946977ff41e53ba82090d7eb81fa62d7a01c6",
+      "bytes": 42241
+    }
+  }
+}

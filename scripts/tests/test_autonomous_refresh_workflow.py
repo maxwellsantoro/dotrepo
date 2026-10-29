@@ -99,3 +99,16 @@ def test_daily_capacity_and_automatic_landing_do_not_require_routine_human_revie
     assert "secrets.GITHUB_TOKEN" in workflow
     assert "INDEX_AUTOMATION_TOKEN" not in workflow
     assert "steps.autonomous_pr.outputs.pull-request-head-sha" in workflow
+
+
+def test_landing_receives_explicit_public_deployment_switch_without_variable_api_permission():
+    workflow = WORKFLOW.read_text()
+    start = workflow.index("- name: Check, land, and deploy the exact automation commit")
+    end = workflow.index("- name: Retain refresh publication and budget receipt")
+    step = workflow[start:end]
+    assert (
+        "PUBLIC_DEPLOY_ENABLED: ${{ vars.CLOUDFLARE_PUBLIC_DEPLOY_ENABLED == 'true' && 'true' || 'false' }}"
+        in step
+    )
+    assert '--public-deploy-enabled "$PUBLIC_DEPLOY_ENABLED"' in step
+    assert "variables: write" not in workflow and "variables: read" not in workflow

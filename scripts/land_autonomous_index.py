@@ -107,16 +107,49 @@ def approve_pending_pull_runs(repository, root, expected_head):
         wait_run(repository, run_id, expected_head, "ci-gate")
 
 
-def public_deploy_enabled(repository, root):
-    """Public deploy is an operator switch; landing must not fail without it."""
+def public_deploy_enabled(repository, root, *, explicit=None, decision=None):
+    """Resolve the switch before landing; a failed read is not a disabled switch."""
+    decision = decision if decision is not None else {}
+    decision.update(
+        enabled=None, source="explicit-cli" if explicit is not None else "repository-variable-api"
+    )
+    if explicit is not None:
+        if type(explicit) is not bool:
+            raise ValueError("Explicit public deployment switch must be boolean")
+        decision.update(enabled=explicit, reason="explicit-true" if explicit else "explicit-false")
+        return explicit
     try:
         variable = api(f"{root}/actions/variables/CLOUDFLARE_PUBLIC_DEPLOY_ENABLED")
-    except Exception:  # noqa: BLE001 - unset variable reads as disabled
-        return False
-    return str(variable.get("value", "")).lower() == "true"
+    except Exception as error:  # noqa: BLE001 - retain config-read failure before landing
+        not_found = False
+        if isinstance(error, subprocess.CalledProcessError):
+            try:
+                response = json.loads(error.stdout or "null")
+            except (ValueError, TypeError):
+                response = None
+            not_found = (
+                isinstance(response, dict) and response.get("status") in (404, "404")
+            ) or "(HTTP 404)" in (error.stderr or "")
+        if not_found:
+            decision.update(enabled=False, reason="repository-variable-unset", httpStatus=404)
+            return False
+        decision.update(reason="variable-read-error", errorType=type(error).__name__)
+        raise RuntimeError("Could not read public deployment switch; refusing to land") from error
+    if not isinstance(variable, dict) or not isinstance(variable.get("value"), str):
+        decision.update(reason="invalid-variable-response")
+        raise RuntimeError("Invalid public deployment switch response; refusing to land")
+    value = variable["value"].lower()
+    if value not in {"true", "false", ""}:
+        decision.update(reason="invalid-variable-value")
+        raise RuntimeError("Public deployment switch must be true or false; refusing to land")
+    enabled = value == "true"
+    decision.update(enabled=enabled, reason="variable-true" if enabled else "variable-not-true")
+    return enabled
 
 
-def land(repository, number, expected_head, expected_base, *, receipt=None):
+def land(
+    repository, number, expected_head, expected_base, *, receipt=None, deployment_enabled=None
+):
     receipt = receipt if receipt is not None else {}
     receipt.update(
         repository=repository,
@@ -131,6 +164,11 @@ def land(repository, number, expected_head, expected_base, *, receipt=None):
     pull_path = f"{root}/pulls/{number}"
     pull = api(pull_path)
     validate_pull(pull, repository, default_branch, expected_head, expected_base)
+    deployment_decision = {}
+    receipt["publicDeployment"] = deployment_decision
+    deploy_enabled = public_deploy_enabled(
+        repository, root, explicit=deployment_enabled, decision=deployment_decision
+    )
     files = []
     for page in range(1, 32):
         batch = api(f"{pull_path}/files?per_page=100&page={page}")
@@ -165,7 +203,7 @@ def land(repository, number, expected_head, expected_base, *, receipt=None):
     api(ref, method="PATCH", body={"sha": expected_head, "force": False})
     receipt["status"] = "landed"
     print(f"Published tested commit {expected_head}", flush=True)
-    if not public_deploy_enabled(repository, root):
+    if not deploy_enabled:
         print(
             "CLOUDFLARE_PUBLIC_DEPLOY_ENABLED is not 'true'; "
             "landing complete, public deployment skipped (operator switch).",
@@ -191,6 +229,11 @@ def main():
     parser.add_argument("--pr-number", required=True, type=int)
     parser.add_argument("--expected-head", required=True)
     parser.add_argument("--expected-base", required=True)
+    parser.add_argument(
+        "--public-deploy-enabled",
+        choices=("true", "false"),
+        help="Explicit workflow switch; omitted manual calls read the repository variable",
+    )
     parser.add_argument("--output-json", type=Path)
     args = parser.parse_args()
     if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", args.repository):
@@ -202,7 +245,14 @@ def main():
     receipt = {}
     try:
         land(
-            args.repository, args.pr_number, args.expected_head, args.expected_base, receipt=receipt
+            args.repository,
+            args.pr_number,
+            args.expected_head,
+            args.expected_base,
+            receipt=receipt,
+            deployment_enabled=None
+            if args.public_deploy_enabled is None
+            else args.public_deploy_enabled == "true",
         )
     finally:
         if args.output_json:

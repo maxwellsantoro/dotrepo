@@ -1,0 +1,59 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T06:14:00.695877Z",
+    "snapshotDigest": "49d52889f60be24ad0b83b08be98e744258716e496df6cbb5d8f66d8d0276623"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "docker",
+    "repo": "compose",
+    "source": "https://github.com/docker/compose"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/docker/compose/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/docker/compose",
+    "generatedAt": "2026-10-29T06:14:00.670515Z",
+    "evidencePath": "repos/github.com/docker/compose/evidence.md",
+    "freshnessStatus": "fresh",
+    "ageDays": 0,
+    "staleAfterDays": 30
+  },
+  "purpose": "Docker Compose is a tool for running multi-container applications on Docker defined using the Compose file format.",
+  "name": "Docker Compose",
+  "homepage": "https://github.com/docker/compose",
+  "execution": {
+    "build": "make build",
+    "test": "make test"
+  },
+  "docs": {},
+  "ownership": {
+    "securityContact": "security@docker.com"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": false,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "imported",
+    "confidence": "medium",
+    "provenance": [
+      "imported"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/docker/compose/profile.json",
+    "repository": "/v0/repos/github.com/docker/compose/index.json",
+    "trust": "/v0/repos/github.com/docker/compose/trust.json",
+    "queryTemplate": "/v0/repos/github.com/docker/compose/query?path={dot_path}",
+    "indexPath": "repos/github.com/docker/compose/"
+  }
+}

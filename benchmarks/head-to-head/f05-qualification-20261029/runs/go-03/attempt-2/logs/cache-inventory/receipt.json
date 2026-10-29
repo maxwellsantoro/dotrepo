@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-f05-qualification-go-03-f3b1c8cd59",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "cd /workspace/repository; find /workspace/cargo /workspace/go /workspace/npm-cache /workspace/go-build -type f -exec sha256sum '{}' +"
+  ],
+  "startedAt": "2026-10-29T06:13:09.303605+00:00",
+  "elapsedSeconds": 1.2788848329801112,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "1a1eb2209260ada66d9aef1c3496f13f5b9f1c0bcf75fb4f23a439d31e8e00e1",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

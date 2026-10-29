@@ -1,0 +1,259 @@
+"""One bounded four-task qualification backend; no models or evaluated profiles."""
+
+import argparse
+from datetime import datetime, timezone
+import json
+from pathlib import Path
+import time
+import uuid
+
+from acquire import HERE
+from control import checked, command, sha, write
+from oracle import go_outcome, rust_outcome, vitest_outcome
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--task", choices=("rust-02", "typescript-02", "go-01", "go-03"), required=True)
+args = parser.parse_args()
+freeze = json.loads((HERE / "execution-freeze.v2.json").read_text())
+assert freeze["oracleSha256"] == sha((HERE / "oracle.py").read_bytes())
+assert freeze["runnerSha256"] == sha(Path(__file__).read_bytes())
+assert freeze["controlSha256"] == sha((HERE / "control.py").read_bytes())
+assert freeze["captureSha256"] == sha((HERE / "capture.py").read_bytes())
+spec = freeze["tasks"][args.task]
+source_folder = HERE / spec["sourceFolder"]
+source = json.loads((source_folder / "acquisition.json").read_text())
+assert source["task"] == spec["taskIdentity"]
+assert source["task"]["revision"] == spec["sourceRevision"]
+assert sha((source_folder / "inventory.json").read_bytes()) == spec["inventorySha256"]
+archive = Path(source["runtimeArchivePath"])
+assert sha(archive.read_bytes()) == spec["archiveSha256"]
+assert source["sourceBundleReady"]
+folder = HERE / "runs" / args.task
+folder.mkdir(parents=True)
+name = "dotrepo-f05-qualification-" + args.task + "-" + uuid.uuid4().hex[:10]
+result = {
+    "taskId": args.task,
+    "sourceRevision": source["task"]["revision"],
+    "indexConsulted": False,
+    "modelCalls": 0,
+    "costUsd": None,
+    "costExclusions": ["No metered host/container dollar receipt."],
+    "cacheCondition": "Fresh empty per-task cache, populated by recorded download-only setup; offline execution uses that explicit warm state.",
+    "sourceSupportedInstructionGold": "Original source-only classification unchanged; execution qualification is separately reviewed.",
+    "status": "incomplete",
+    "startedAt": datetime.now(timezone.utc).isoformat(),
+}
+create = [
+    "docker",
+    "create",
+    "--name",
+    name,
+    "--pull=never",
+    "--platform=linux/arm64",
+    "--init",
+    "--read-only",
+    "--cap-drop=ALL",
+    "--security-opt=no-new-privileges",
+    "--network=bridge",
+    "--ipc=private",
+    "--cgroupns=private",
+    "--user=1000:1000",
+    "--workdir=/workspace/repository",
+    "--memory=4g",
+    "--memory-swap=4g",
+    "--cpus=3",
+    "--pids-limit=256",
+    "--ulimit",
+    "nofile=4096:4096",
+    "--tmpfs",
+    "/workspace:rw,exec,nosuid,nodev,size=8g,uid=1000,gid=1000,mode=0700",
+    "--tmpfs",
+    "/tmp:rw,exec,nosuid,nodev,size=512m,uid=1000,gid=1000,mode=0700",
+]
+environment = {
+    "HOME": "/workspace/home",
+    "TMPDIR": "/tmp",
+    "CARGO_HOME": "/workspace/cargo",
+    "CARGO_TARGET_DIR": "/workspace/cargo-target",
+    "CARGO_BUILD_JOBS": "3",
+    "GOPATH": "/workspace/go",
+    "GOCACHE": "/workspace/go-build",
+    "GOTOOLCHAIN": "local",
+    "GOENV": "off",
+    "GOMAXPROCS": "3",
+    "GOPROXY": "https://proxy.golang.org",
+    "GOSUMDB": "sum.golang.org",
+    "GIT_CONFIG_GLOBAL": "/dev/null",
+    "GIT_CONFIG_NOSYSTEM": "1",
+    "GIT_TERMINAL_PROMPT": "0",
+    "NPM_CONFIG_CACHE": "/workspace/npm-cache",
+    "NPM_CONFIG_USERCONFIG": "/dev/null",
+    "NPM_CONFIG_REGISTRY": "https://registry.npmjs.org",
+    "NPM_CONFIG_AUDIT": "false",
+    "NPM_CONFIG_FUND": "false",
+    "LANG": "C.UTF-8",
+}
+for key, value in environment.items():
+    create += ["--env", key + "=" + value]
+create += ["--entrypoint=/bin/sh", spec["imageId"], "-c", "while :; do sleep 3600; done"]
+write(
+    folder / "container-handle.json",
+    {
+        "name": name,
+        "imageId": spec["imageId"],
+        "environment": environment,
+        "sourceArchiveSha256": spec["archiveSha256"],
+        "sourceIsGitCheckout": False,
+        "generatedGitMetadata": False,
+    },
+)
+started = time.monotonic()
+
+
+def call(label, argv, *, timeout=60, data=b"", allow_failure=False):
+    row = command(
+        folder,
+        label,
+        ["docker", "exec", *(["-i"] if data else []), name, *argv],
+        timeout=timeout,
+        data=data,
+    )
+    if not allow_failure:
+        assert row["exitCode"] == 0 and not row["error"], label
+    return row
+
+
+def shell(label, text, **kwargs):
+    return call(label, ["/bin/sh", "-eu", "-c", text], **kwargs)
+
+
+try:
+    image = checked(folder, "image-inspect", ["docker", "image", "inspect", spec["imageId"]])
+    image = json.loads(image["stdout"])[0]
+    assert image["Id"] == spec["imageId"]
+    assert not image["Config"].get("Volumes") and not image["Config"].get("OnBuild")
+    checked(folder, "create", create)
+    checked(folder, "start", ["docker", "start", name])
+    startup = checked(folder, "startup-inspect", ["docker", "inspect", name])
+    startup = json.loads(startup["stdout"])[0]
+    expected_env = dict(item.split("=", 1) for item in image["Config"]["Env"])
+    expected_env.update(environment)
+    assert dict(item.split("=", 1) for item in startup["Config"]["Env"]) == expected_env
+    assert not startup["Mounts"] and not startup["HostConfig"]["Privileged"]
+    assert startup["HostConfig"]["PidMode"] != "host"
+    shell(
+        "initialize",
+        "mkdir -p /workspace/repository /workspace/home /workspace/cargo /workspace/go /workspace/go-build /workspace/npm-cache",
+    )
+    call(
+        "source-provision",
+        [
+            "tar",
+            "--extract",
+            "--no-same-owner",
+            "--no-same-permissions",
+            "-C",
+            "/workspace/repository",
+        ],
+        data=archive.read_bytes(),
+        timeout=180,
+    )
+    shell("toolchain-identity", spec["toolchainProbe"])
+    shell(
+        "network-before",
+        "cat /sys/class/net/eth0/statistics/rx_bytes /sys/class/net/eth0/statistics/tx_bytes",
+    )
+    setup_started = time.monotonic()
+    for number, text in enumerate(spec["downloadOnlySetup"]):
+        remaining = 900 - (time.monotonic() - setup_started)
+        assert remaining > 0, "setup budget exhausted"
+        shell("download-only-" + str(number), text, timeout=remaining)
+    result["setupSeconds"] = time.monotonic() - setup_started
+    if spec.get("afterSetupProbe"):
+        shell("after-setup-probe", spec["afterSetupProbe"])
+    shell(
+        "network-after",
+        "cat /sys/class/net/eth0/statistics/rx_bytes /sys/class/net/eth0/statistics/tx_bytes",
+    )
+    before = [int(x) for x in (folder / "logs/network-before/stdout.txt").read_text().split()]
+    after = [int(x) for x in (folder / "logs/network-after/stdout.txt").read_text().split()]
+    result["setupNetworkBytes"] = {
+        "received": after[0] - before[0],
+        "sent": after[1] - before[1],
+        "basis": "Container interface counters; includes headers and incidental traffic.",
+    }
+    checked(folder, "disconnect-network", ["docker", "network", "disconnect", "bridge", name])
+    observed = checked(folder, "container-inspect", ["docker", "inspect", name])
+    inspect = json.loads(observed["stdout"])[0]
+    assert not inspect["Mounts"] and not inspect["NetworkSettings"]["Networks"]
+    assert inspect["HostConfig"]["ReadonlyRootfs"] and inspect["HostConfig"]["CapDrop"] == ["ALL"]
+    run_started = time.monotonic()
+    listing = None
+    if spec.get("listCommand"):
+        listing = shell("native-test-list", spec["listCommand"], timeout=1200)
+    remaining = 1200 - (time.monotonic() - run_started)
+    assert remaining > 0, "execution budget exhausted"
+    actual = shell("actual-tests", spec["testCommand"], timeout=remaining, allow_failure=True)
+    result["executionSeconds"] = time.monotonic() - run_started
+    result["testExitCode"], result["executionError"] = actual["exitCode"], actual["error"]
+    inventory = json.loads((source_folder / "inventory.json").read_text())["files"]
+    source_check = call(
+        "tracked-source-after-tests",
+        ["xargs", "-0", "sha256sum", "--"],
+        data=b"".join(("/workspace/repository/" + path).encode() + b"\0" for path in inventory),
+        timeout=180,
+        allow_failure=True,
+    )
+    changed = []
+    observed_files = set()
+    for line in source_check["stdout"].splitlines():
+        digest, path = line.split("  ", 1)
+        path = path.removeprefix("/workspace/repository/")
+        observed_files.add(path)
+        if inventory.get(path) != digest:
+            changed.append(path)
+    changed += sorted(set(inventory) - observed_files)
+    result["changedTrackedFiles"] = changed
+    result["trackedSourceIntact"] = source_check["exitCode"] == 0 and not changed
+    if spec["kind"] == "go":
+        raw = actual["stdout"]
+        if args.task == "go-01":
+            events = call(
+                "native-events", ["cat", "/workspace/go-test-events.jsonl"], allow_failure=True
+            )
+            raw = events["stdout"] if events["exitCode"] == 0 else ""
+        verdict = go_outcome(listing["stdout"], raw, spec["packagePrefix"])
+    elif spec["kind"] == "rust":
+        verdict = rust_outcome(actual["stdout"], spec["expectedTests"])
+    else:
+        report = call("native-report", ["cat", "/workspace/vitest.json"], allow_failure=True)
+        verdict = vitest_outcome(
+            json.loads(report["stdout"]) if report["exitCode"] == 0 else {},
+            spec["expectedTests"],
+            spec["suite"],
+        )
+    result["oracle"] = verdict
+    result["taskOutcomeObserved"] = (
+        verdict["qualified"] and not actual["error"] and result["trackedSourceIntact"]
+    )
+    result["testsPassed"] = actual["exitCode"] == 0 if result["taskOutcomeObserved"] else None
+    result["status"] = (
+        "execution-qualified-pending-independent-review"
+        if result["taskOutcomeObserved"]
+        else "execution-not-qualified"
+    )
+    # Freeze task/dependency state separately before any campaign image/cache claim.
+    shell(
+        "cache-inventory",
+        "find /workspace/cargo /workspace/go /workspace/npm-cache /workspace/go-build -type f -exec sha256sum '{}' +",
+        timeout=180,
+    )
+except Exception as error:
+    result["failure"] = f"{type(error).__name__}: {error}"
+finally:
+    result["totalSeconds"] = time.monotonic() - started
+    result["cleanup"] = command(folder, "cleanup", ["docker", "rm", "--force", "--volumes", name])[
+        "exitCode"
+    ]
+    write(folder / "result.json", result)
+print(json.dumps(result, indent=2))

@@ -1,0 +1,1527 @@
+{
+  "state": "Read-only inventory diagnostic; no cache archive built or reusable cache qualified.",
+  "candidateArchiveLayout": [
+    "cargo/",
+    "go/pkg/mod/",
+    "npm-cache/"
+  ],
+  "excluded": [
+    "go-build/",
+    "cargo-target/",
+    "source checkout node_modules/"
+  ],
+  "tasks": [
+    {
+      "taskId": "rust-02",
+      "candidateDownloadCacheFiles": 38654,
+      "sourceContentAliasCount": 64,
+      "aliases": [
+        {
+          "cacheFile": "/workspace/cargo/.package-cache-mutate",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/harfrust-0.3.2/rustfmt.toml",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/libc-0.2.191/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "matchingFrozenSourceFiles": [
+            "rust-02-full/LICENSE-APACHE"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-ui-kit-0.2.2/src/gesture",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/semver-1.0.28/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "matchingFrozenSourceFiles": [
+            "rust-02-full/LICENSE-APACHE"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro2-diagnostics-0.10.1/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "matchingFrozenSourceFiles": [
+            "rust-02-full/LICENSE-APACHE"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glow-0.16.0/rustfmt.toml",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glow-0.16.0/clippy.toml",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xdg-3.0.0/test_files/user/runtime/user_runtime.file",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xdg-3.0.0/test_files/user/data/user_data.file",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xdg-3.0.0/test_files/user/data/everywhere",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xdg-3.0.0/test_files/user/config/user_config.file",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xdg-3.0.0/test_files/user/config/myapp/user_config.file",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xdg-3.0.0/test_files/user/config/myapp/default_profile/user_config.file",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xdg-3.0.0/test_files/user/config/everywhere",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xdg-3.0.0/test_files/user/cache/user_cache.file",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xdg-3.0.0/test_files/user/cache/everywhere",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xdg-3.0.0/test_files/system2/data/system2_data.file",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xdg-3.0.0/test_files/system2/data/everywhere",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xdg-3.0.0/test_files/system2/data/both_system_data.file",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xdg-3.0.0/test_files/system2/config/system2_config.file",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xdg-3.0.0/test_files/system2/config/everywhere",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xdg-3.0.0/test_files/system2/config/both_system_config.file",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xdg-3.0.0/test_files/system1/data/system1_data.file",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xdg-3.0.0/test_files/system1/data/everywhere",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xdg-3.0.0/test_files/system1/data/both_system_data.file",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xdg-3.0.0/test_files/system1/config/system1_config.file",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xdg-3.0.0/test_files/system1/config/myapp/system1_config.file",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xdg-3.0.0/test_files/system1/config/myapp/default_profile/system1_config.file",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xdg-3.0.0/test_files/system1/config/everywhere",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xdg-3.0.0/test_files/system1/config/both_system_config.file",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xdg-3.0.0/test_files/symlinks/config/.gitkeep",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xdg-3.0.0/test_files/runtime-bad/runtime.file",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xdg-3.0.0/test_files/runtime-bad/everywhere",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/litrs-1.0.1/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "matchingFrozenSourceFiles": [
+            "rust-02-full/LICENSE-APACHE"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "matchingFrozenSourceFiles": [
+            "rust-02-full/LICENSE-APACHE"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/etcetera-0.10.0/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "matchingFrozenSourceFiles": [
+            "rust-02-full/LICENSE-APACHE"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_repr-0.1.21/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "matchingFrozenSourceFiles": [
+            "rust-02-full/LICENSE-APACHE"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wayland-protocols-plasma-0.3.12/plasma-wayland-protocols/autotests/CMakeListst.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/syn-3.0.9/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "matchingFrozenSourceFiles": [
+            "rust-02-full/LICENSE-APACHE"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/itoa-1.0.18/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "matchingFrozenSourceFiles": [
+            "rust-02-full/LICENSE-APACHE"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "matchingFrozenSourceFiles": [
+            "rust-02-full/LICENSE-APACHE"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mach2-0.6.0/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "matchingFrozenSourceFiles": [
+            "rust-02-full/LICENSE-APACHE"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/finl_unicode-1.5.0/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "matchingFrozenSourceFiles": [
+            "rust-02-full/LICENSE-APACHE"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-impl-1.0.69/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "matchingFrozenSourceFiles": [
+            "rust-02-full/LICENSE-APACHE"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-1.0.69/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "matchingFrozenSourceFiles": [
+            "rust-02-full/LICENSE-APACHE"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/async-trait-0.1.92/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "matchingFrozenSourceFiles": [
+            "rust-02-full/LICENSE-APACHE"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/utf8parse-0.2.2/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "matchingFrozenSourceFiles": [
+            "rust-02-full/LICENSE-APACHE"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/anyhow-1.0.104/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "matchingFrozenSourceFiles": [
+            "rust-02-full/LICENSE-APACHE"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "matchingFrozenSourceFiles": [
+            "rust-02-full/LICENSE-APACHE"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/paste-1.0.15/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "matchingFrozenSourceFiles": [
+            "rust-02-full/LICENSE-APACHE"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num_enum_derive-0.7.6/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "matchingFrozenSourceFiles": [
+            "rust-02-full/LICENSE-APACHE"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num_enum-0.7.6/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "matchingFrozenSourceFiles": [
+            "rust-02-full/LICENSE-APACHE"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_test-1.0.177/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "matchingFrozenSourceFiles": [
+            "rust-02-full/LICENSE-APACHE"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro2-1.0.107/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "matchingFrozenSourceFiles": [
+            "rust-02-full/LICENSE-APACHE"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "matchingFrozenSourceFiles": [
+            "rust-02-full/LICENSE-APACHE"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_derive-1.0.229/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "matchingFrozenSourceFiles": [
+            "rust-02-full/LICENSE-APACHE"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-impl-2.0.21/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "matchingFrozenSourceFiles": [
+            "rust-02-full/LICENSE-APACHE"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rustversion-1.0.23/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "matchingFrozenSourceFiles": [
+            "rust-02-full/LICENSE-APACHE"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/unicode-ident-1.0.27/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "matchingFrozenSourceFiles": [
+            "rust-02-full/LICENSE-APACHE"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pastey-0.1.1/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "matchingFrozenSourceFiles": [
+            "rust-02-full/LICENSE-APACHE"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.47/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "matchingFrozenSourceFiles": [
+            "rust-02-full/LICENSE-APACHE"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.21/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "matchingFrozenSourceFiles": [
+            "rust-02-full/LICENSE-APACHE"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/cargo/.package-cache",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "typescript-02",
+      "candidateDownloadCacheFiles": 2567,
+      "sourceContentAliasCount": 1,
+      "aliases": [
+        {
+          "cacheFile": "/workspace/npm-cache/_update-notifier-last-checked",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "go-03",
+      "candidateDownloadCacheFiles": 2832,
+      "sourceContentAliasCount": 33,
+      "aliases": [
+        {
+          "cacheFile": "/workspace/go/pkg/mod/github.com/go-jose/go-jose/v4@v4.1.5/go.sum",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/github.com/hashicorp/hcl@v1.0.1-vault-7/hcl/test-fixtures/empty.hcl",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/github.com/hashicorp/hcl@v1.0.1-vault-7/hcl/parser/test-fixtures/empty.hcl",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/github.com/hashicorp/hcl@v1.0.1-vault-7/hcl/fmtcmd/test-fixtures/good.hcl",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/github.com/hashicorp/hcl@v1.0.1-vault-7/hcl/fmtcmd/test-fixtures/dir.ignore",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/github.com/go-test/deep@v1.1.1/go.sum",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/cache/download/golang.org/x/time/@v/v0.16.0.lock",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/cache/download/golang.org/x/text/@v/v0.43.0.lock",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/cache/download/golang.org/x/net/@v/v0.61.0.lock",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/cache/download/golang.org/x/sys/@v/v0.49.0.lock",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/cache/download/go.yaml.in/yaml/v3/@v/v3.0.5.lock",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/cache/download/github.com/stretchr/testify/@v/v1.12.1.lock",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/cache/download/github.com/ryanuber/go-glob/@v/v1.0.0.lock",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/cache/download/github.com/natefinch/atomic/@v/v1.0.1.lock",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/cache/download/github.com/mitchellh/mapstructure/@v/v1.5.1-0.20231216201459-8508981c8b6c.lock",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/cache/download/github.com/mitchellh/go-homedir/@v/v1.1.0.lock",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/cache/download/github.com/mattn/go-isatty/@v/v0.0.24.lock",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/cache/download/github.com/mattn/go-colorable/@v/v0.1.15.lock",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/cache/download/github.com/go-test/deep/@v/v1.1.1.lock",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/cache/download/github.com/hashicorp/go-sockaddr/@v/v1.0.7.lock",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/cache/download/github.com/hashicorp/hcl/@v/v1.0.1-vault-7.lock",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/cache/download/github.com/hashicorp/go-secure-stdlib/strutil/@v/v0.1.2.lock",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/cache/download/github.com/hashicorp/go-secure-stdlib/parseutil/@v/v0.2.0.lock",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/cache/download/github.com/hashicorp/go-rootcerts/@v/v1.0.2.lock",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/cache/download/github.com/hashicorp/go-retryablehttp/@v/v0.7.8.lock",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/cache/download/github.com/hashicorp/go-hclog/@v/v1.6.3.lock",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/cache/download/github.com/hashicorp/go-multierror/@v/v1.1.1.lock",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/cache/download/github.com/hashicorp/go-cleanhttp/@v/v0.5.2.lock",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/cache/download/github.com/hashicorp/errwrap/@v/v1.1.0.lock",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/cache/download/github.com/go-jose/go-jose/v4/@v/v4.1.5.lock",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/cache/download/github.com/cenkalti/backoff/v4/@v/v4.3.0.lock",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/cache/download/github.com/davecgh/go-spew/@v/v1.1.2-0.20180830191138-d8f796af33cc.lock",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        },
+        {
+          "cacheFile": "/workspace/go/pkg/mod/cache/download/github.com/fatih/color/@v/v1.19.0.lock",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchingFrozenSourceFiles": [
+            "typescript-02/.github/scripts/tests/__init__.py",
+            "go-03/.release/linux/package/etc/vault.d/vault.env",
+            "go-03/helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "go-03/http/web_ui/.gitkeep",
+            "go-03/tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "go-03/ui/app/components/.gitkeep",
+            "go-03/ui/app/controllers/.gitkeep",
+            "go-03/ui/app/helpers/.gitkeep",
+            "go-03/ui/app/models/.gitkeep",
+            "go-03/ui/app/routes/.gitkeep",
+            "go-03/ui/tests/integration/.gitkeep",
+            "go-03/ui/tests/unit/.gitkeep",
+            "go-03/ui/vendor/.gitkeep"
+          ]
+        }
+      ]
+    }
+  ],
+  "limitation": "Exact content equality may include empty lock files and shared license text; no alias exception is authorized here. Root decides fail-closed cache content policy and filters under a separate freeze."
+}

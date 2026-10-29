@@ -17,6 +17,27 @@
   frozen cases. Add an internal isolated-session adapter with tested access,
   accounting and stop controls. Actual task environments, provider qualification,
   campaign scoring and consumer-benefit evaluation remain pending.
+- Join one bounded Python local-test recipe with its owning package, setup,
+  platform/backend conditions and requirements include chain. Preserve exact
+  tuple/source bindings through scoring and public evidence at medium confidence.
+  Refuse hidden or indented declarations and unresolved external setup notes.
+  This Keras-shaped development rule does not qualify general extraction or
+  supply an accepted instruction under the frozen consumer policy.
+- Correct the internal experiment backend's Docker PID option and executable
+  temporary filesystems. Add per-session copies of explicitly frozen download
+  caches with image/source/preparation bindings and protected-artifact checks.
+  Retain real container controls, source-frozen public responses and bounded
+  upstream task qualifications separately from agent-campaign outcomes; audit
+  claims and unknown preparation costs remain explicit.
+- Withdraw unsupported repository-default build/test scalars after a bounded
+  source audit, add exact maintainer-declared documentation entrypoints, and
+  preserve record age and unrelated assessments. Withdraw whole-record
+  verification after partial corrections. Retain source dispositions and target
+  observations in the dated operating-readiness packet.
+- Pass the deployment switch explicitly from scheduled refresh to landing and
+  record its decision source. Refuse configuration-read errors before landing;
+  distinguish them from a deliberately disabled or unset switch. Preserve the
+  actual publication-skipped scheduled receipt as an unqualified operating day.
 
 ## 2.0.0-rc.2 — 2026-10-29
 

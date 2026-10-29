@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "-i",
+    "dotrepo-f05-qualification-rust-02-cba0008c42",
+    "xargs",
+    "-0",
+    "sha256sum",
+    "--"
+  ],
+  "startedAt": "2026-10-29T06:12:53.319571+00:00",
+  "elapsedSeconds": 0.7137687089852989,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 36499,
+  "stdinSha256": "f14e64ba0ccffa4ba881c71c1ecd96e832d3261fc62cd02697d42bea38decd8a",
+  "stdoutSha256": "6977458a4c2b92c682aea27276d6dbde9932c2172b57619a9366499d9ec0c477",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

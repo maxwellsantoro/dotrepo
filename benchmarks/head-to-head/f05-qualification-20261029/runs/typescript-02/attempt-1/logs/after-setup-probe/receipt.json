@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-f05-qualification-typescript-02-994c0fe1ce",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "cd /workspace/repository; test \"$(/workspace/npm-tooling/node_modules/.bin/npm --version)\" = 11.12.1; /workspace/npm-tooling/node_modules/.bin/npm --version"
+  ],
+  "startedAt": "2026-10-29T06:14:34.540657+00:00",
+  "elapsedSeconds": 0.4796607089228928,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "608c86d3f47c084a7a0de5d4eb4bc18724c96c456f3fe6842d17f04004338c3f",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

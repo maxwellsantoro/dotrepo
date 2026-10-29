@@ -1,0 +1,29 @@
+{
+  "observedAt": "2026-10-29T06:16:07.306759+00:00",
+  "artifactId": 12877417394,
+  "runId": 40826758533,
+  "zipPath": "/tmp/dotrepo-operating-readiness-20261029/batch-40826758533.zip",
+  "zipBytes": 11775280,
+  "zipSha256": "f2cf157505e7eba3ede9792f39d6e10d6c356a886d7fcdb085a4b092f6389c0e",
+  "memberCount": 6204,
+  "retainedMembers": [
+    {
+      "member": "index-autonomous-batch/autonomous-telemetry-gate.json",
+      "retainedPath": "run-40826758533-autonomous-telemetry-gate.json",
+      "sha256": "352070a631aff714bb8301d2a04f3d3e90cd7391a7591b001c9111c155dff751",
+      "bytes": 8450
+    },
+    {
+      "member": "index-autonomous-batch/base-preflight.json",
+      "retainedPath": "run-40826758533-base-preflight.json",
+      "sha256": "da9152d8880245979b7138dc67f3fc55419b6baaf5bfe019d566af7f1affd08c",
+      "bytes": 349
+    },
+    {
+      "member": "index-autonomous-batch/telemetry.json",
+      "retainedPath": "run-40826758533-telemetry.json",
+      "sha256": "ca5bf4067f0e2ad3f44e089788f91d3181efb154d32122bc9b977b502d833c0e",
+      "bytes": 164459
+    }
+  ]
+}

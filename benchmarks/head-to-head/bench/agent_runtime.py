@@ -1,7 +1,7 @@
 """Internal F-05 single-session runtime; no model/task is selected by this module.
 
 The frozen runtime artifact uses backend=docker-ephemeral-v1 and runnerSha256;
-networkPolicy=none, cacheState=cold; explicit resources, environment, containerUser,
+networkPolicy=none, cacheState=cold or frozen-warm; explicit resources, environment, containerUser,
 maxToolOutputBytes and maxProviderCalls; sourceBundles maps canonical repositories
 onto {revision, archive, inventory, provenance} content bindings. Inventory is
 {revision, files:{relativePath:sha256}, missingSubmodules:[], missingLfsObjects:[],
@@ -32,6 +32,19 @@ expected version after drift; model is null if no version was observed. Requeste
 routing identity/settings are retained separately in run.json and raw requests.
 Drift/unknown-identity receipts require an explicit campaign abort/disposition;
 they must not be rewritten to pass the preparation summarizer's equality checks.
+
+Frozen-warm sessions additionally bind per-task dependencyCaches entries with
+{bundle, preparation, script, trace}. Bundle uses the same bounded regular-file
+archive/inventory/provenance contract as sources. Preparation binds imageDigest,
+revision, sourceArchiveSha256, cacheArchiveSha256, scriptSha256, traceSha256;
+downloadOnly/buildOutputsExcluded/taskSourceExcluded/credentialsExcluded audit
+claims; toolVersions, limitations, and explicit nullable preparationCostUsd.
+Only download-cache roots are admitted; build caches and node_modules are not.
+Each session gets a fresh copy under /workspace/dependency-cache before the
+first provider call. No mutable cache is shared. Admission checks bindings, not
+the truth of audit claims or equivalence of lifecycle-disabled installation.
+Task qualification must establish that separately. Preparation/maintenance
+charges remain unallocated nulls in session effort until campaign accounting.
 
 Primary API references used for the adapter/backend:
 https://openrouter.ai/docs/api/api-reference/chat/create-a-chat-completion
@@ -139,6 +152,79 @@ class SourceBundle:
     files: dict[str, bytes]
     inventory: dict
     provenance_sha256: str
+    dependency_cache: SourceBundle | None = None
+    preparation_sha256: str | None = None
+
+
+def dependency_cache(root, spec, request, source, hidden, max_bytes):
+    """Check frozen download-cache bindings, not authenticity of an audit claim."""
+    hidden = hidden | content_digests(source.archive)
+    require(set(spec) == {"bundle", "preparation", "script", "trace"}, "invalid dependency cache")
+    for role in ("script", "trace"):
+        raw = experiment.artifact(root, spec[role])
+        require(
+            not content_digests(raw) & hidden,
+            "dependency preparation aliases hidden/protected artifact",
+        )
+    preparation_raw = experiment.artifact(root, spec["preparation"])
+    require(
+        not content_digests(preparation_raw) & hidden,
+        "dependency preparation aliases hidden/protected artifact",
+    )
+    preparation = json.loads(preparation_raw)
+    require(
+        preparation["imageDigest"] == request["environment"]["imageDigest"]
+        and preparation["revision"] == request["task"]["revision"]
+        and preparation["sourceArchiveSha256"] == experiment.digest(source.archive)
+        and preparation["cacheArchiveSha256"] == spec["bundle"]["archive"]["sha256"]
+        and preparation["scriptSha256"] == spec["script"]["sha256"]
+        and preparation["traceSha256"] == spec["trace"]["sha256"],
+        "dependency preparation image/source/cache binding mismatch",
+    )
+    require(
+        all(
+            preparation.get(key) is True
+            for key in (
+                "downloadOnly",
+                "buildOutputsExcluded",
+                "taskSourceExcluded",
+                "credentialsExcluded",
+            )
+        ),
+        "dependency cache audit incomplete",
+    )
+    require(
+        "preparationCostUsd" in preparation
+        and (
+            preparation["preparationCostUsd"] is None or numeric(preparation["preparationCostUsd"])
+        ),
+        "invalid dependency preparation cost",
+    )
+    require(
+        isinstance(preparation.get("toolVersions"), dict)
+        and preparation["toolVersions"]
+        and all(
+            isinstance(key, str) and isinstance(value, str) and value
+            for key, value in preparation["toolVersions"].items()
+        )
+        and isinstance(preparation.get("limitations"), list)
+        and all(isinstance(item, str) for item in preparation["limitations"]),
+        "dependency preparation must retain tools and limitations",
+    )
+    cache = source_bundle(root, spec["bundle"], request["task"]["revision"], hidden, max_bytes)
+    prefixes = ("cargo/registry/", "cargo/git/", "go/pkg/mod/", "npm-cache/_cacache/", "uv-cache/")
+    require(
+        all(path.startswith(prefixes) for path in cache.files),
+        "dependency cache contains paths outside download-cache roots",
+    )
+    require(
+        sum(len(raw) for raw in source.files.values())
+        + sum(len(raw) for raw in cache.files.values())
+        <= max_bytes,
+        "source and dependency cache exceed workspace byte limit",
+    )
+    cache.preparation_sha256 = spec["preparation"]["sha256"]
+    return cache
 
 
 def source_bundle(root, spec, revision, hidden_hashes, max_bytes):
@@ -245,6 +331,15 @@ def load_session(manifest_path, assignment_path, session_id):
     bundle = source_bundle(
         root, spec, request["task"]["revision"], hidden, config["resources"]["workspaceBytes"]
     )
+    if request["cacheState"] == "frozen-warm":
+        bundle.dependency_cache = dependency_cache(
+            root,
+            config["dependencyCaches"][request["task"]["repository"]],
+            request,
+            bundle,
+            hidden,
+            config["resources"]["workspaceBytes"],
+        )
     common = experiment.artifact(root, request["artifacts"]["commonPrompt"]).decode()
     task_prompt = experiment.artifact(root, request["task"]["prompt"]).decode()
     access = (
@@ -272,7 +367,15 @@ def validate_runtime(config, request):
         "runtime code changed",
     )
     require(config["networkPolicy"] == "none", "this backend requires explicit network=none")
-    require(request["cacheState"] == "cold", "this backend supports fresh cold caches only")
+    require(request["cacheState"] in {"cold", "frozen-warm"}, "unsupported cache state")
+    if request["cacheState"] == "cold":
+        require(not config.get("dependencyCaches"), "cold sessions cannot seed dependency caches")
+    else:
+        require(
+            isinstance(config.get("dependencyCaches"), dict)
+            and set(config["dependencyCaches"]) == set(config["sourceBundles"]),
+            "frozen-warm sessions require per-task dependency cache bindings",
+        )
     require(
         request["workspaceKey"] == request["cacheKey"], "workspace/cache session identity differs"
     )
@@ -458,7 +561,8 @@ class DockerBackend:
             "--security-opt=no-new-privileges",
             "--network=none",
             "--ipc=private",
-            "--pid=private",
+            # Docker's default PID namespace is private; its --pid flag accepts
+            # host/container sharing modes, not the literal value "private".
             "--cgroupns=private",
             "--user",
             config["containerUser"],
@@ -476,9 +580,9 @@ class DockerBackend:
             "--log-driver=none",
             "--no-healthcheck",
             "--tmpfs",
-            f"/workspace:rw,nosuid,nodev,size={resources['workspaceBytes']},uid={uid},gid={gid},mode=0700",
+            f"/workspace:rw,exec,nosuid,nodev,size={resources['workspaceBytes']},uid={uid},gid={gid},mode=0700",
             "--tmpfs",
-            f"/tmp:rw,nosuid,nodev,size={resources['tmpBytes']},uid={uid},gid={gid},mode=0700",
+            f"/tmp:rw,exec,nosuid,nodev,size={resources['tmpBytes']},uid={uid},gid={gid},mode=0700",
             "--label",
             "dotrepo.session=" + request["workspaceKey"],
         ]
@@ -499,11 +603,9 @@ class DockerBackend:
             "readonlyRoot": True,
         }
 
-    def checkout(self, bundle, timeout):
+    def _extract(self, bundle, directory, timeout):
         deadline = time.monotonic() + timeout
-        result = self._call(
-            ["exec", self.name, "/bin/mkdir", "-p", "/workspace/repository"], timeout
-        )
+        result = self._call(["exec", self.name, "/bin/mkdir", "-p", directory], timeout)
         if result["exitCode"] != 0:
             return result
         left = deadline - time.monotonic()
@@ -518,11 +620,17 @@ class DockerBackend:
                 "--extract",
                 "--no-same-owner",
                 "--no-same-permissions",
-                "--directory=/workspace/repository",
+                "--directory=" + directory,
             ],
             left,
             data=bundle.archive,
         )
+
+    def checkout(self, bundle, timeout):
+        return self._extract(bundle, "/workspace/repository", timeout)
+
+    def seed_dependencies(self, bundle, timeout):
+        return self._extract(bundle, "/workspace/dependency-cache", timeout)
 
     def shell(self, command, timeout, output_limit):
         return self._call(
@@ -744,6 +852,27 @@ def run_session(
 
     try:
         emit("provision", {"result": backend.provision(request, config, remaining())})
+        if request["cacheState"] == "frozen-warm":
+            cache = bundle.dependency_cache
+            require(cache is not None, "validated dependency cache unavailable")
+            seeded = backend.seed_dependencies(cache, remaining())
+            emit(
+                "dependency-cache",
+                {
+                    "result": seeded,
+                    "archiveBytes": len(cache.archive),
+                    "inventory": cache.inventory,
+                    "provenanceSha256": cache.provenance_sha256,
+                    "preparationSha256": cache.preparation_sha256,
+                    "condition": "frozen-warm; fresh private copy; preparation cost unallocated",
+                },
+            )
+            if effort["decodedBytes"] is not None:
+                effort["decodedBytes"] += len(cache.archive)
+            require(
+                seeded["exitCode"] == 0 and not seeded.get("error"),
+                "dependency cache provisioning failed",
+            )
         if request["task"]["startingState"] == "local-checkout":
             require(provision_source()["exitCode"] == 0 and checked_out, "initial checkout failed")
         for _ in range(config["maxProviderCalls"]):

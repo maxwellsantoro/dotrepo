@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-f05-qualification-typescript-02-994c0fe1ce",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "cd /workspace/repository; node --version; npm --version; uv --version"
+  ],
+  "startedAt": "2026-10-29T06:13:49.945076+00:00",
+  "elapsedSeconds": 0.7482350000645965,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "60021d3c2fbd6513a37fe1536925f4dff3e21749bddd1b49fd6f81e3e307a268",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

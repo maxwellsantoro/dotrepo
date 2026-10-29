@@ -1,0 +1,45 @@
+{
+  "observedAt": "2026-10-29T06:13:45.412115+00:00",
+  "requestedUrl": "http://xi-editor.github.io/xi-editor/docs.html",
+  "requestUserAgent": "dotrepo-source-audit/1.0",
+  "redirects": [
+    {
+      "status": 301,
+      "from": "http://xi-editor.github.io/xi-editor/docs.html",
+      "to": "https://xi-editor.io/xi-editor/docs.html"
+    }
+  ],
+  "maximumBodyBytes": 2000000,
+  "status": 200,
+  "finalUrl": "https://xi-editor.io/xi-editor/docs.html",
+  "headers": {
+    "Connection": "close",
+    "Content-Length": "20051",
+    "Server": "GitHub.com",
+    "Content-Type": "text/html; charset=utf-8",
+    "Last-Modified": "Mon, 14 Aug 2023 16:34:30 GMT",
+    "Access-Control-Allow-Origin": "*",
+    "ETag": "\"64da5796-4e53\"",
+    "expires": "Thu, 29 Oct 2026 06:23:45 GMT",
+    "Cache-Control": "max-age=600",
+    "x-proxy-cache": "MISS",
+    "X-GitHub-Request-Id": "28F4:230248:304DC2B:34B7B0A:6AE2E419",
+    "x-github-edge-region": "iad",
+    "Accept-Ranges": "bytes",
+    "Date": "Thu, 29 Oct 2026 06:13:45 GMT",
+    "Via": "1.1 varnish",
+    "Age": "0",
+    "X-Served-By": "cache-lga-kjfk8660023-LGA",
+    "X-Cache": "MISS",
+    "X-Cache-Hits": "0",
+    "X-Timer": "S1793254426.649447,VS0,VE38",
+    "Vary": "Accept-Encoding",
+    "X-Fastly-Request-ID": "18178dc0a59354b391ae02e3fcdf0548b378c88f"
+  },
+  "bodyTruncated": false,
+  "bodyPath": "xi-editor-target.html",
+  "bodyBytes": 20051,
+  "bodySha256": "eb5c7e330957b2c183c206f8c5b061f528a8e3d2a91c43e4aab63970b3fda318",
+  "contentObservation": "Xi-Editor Docs index lists proposal template, frontend protocol, plugin architecture, configuration system and CRDT notes.",
+  "limitations": "Exact source HTTP URL preserved despite 301 to current xi-editor.io HTTPS path. Historical docs/_config.yml declares an older abishov.com URL. Current target content is not revision-bound."
+}

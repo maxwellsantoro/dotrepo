@@ -1,0 +1,56 @@
+{
+  "receipts": [
+    {
+      "observedAt": "2026-10-29T06:10:23.865806+00:00",
+      "url": "https://dotrepo.org/v0/snapshots/bb01b134d0a2d7d913ccf3f0f54327a239d9bce24ac7735259a62bb5630cf976/files.json",
+      "requestHeaders": {
+        "User-agent": "dotrepo-f05-snapshot/1.0",
+        "Accept": "application/json"
+      },
+      "status": 200,
+      "headers": {
+        "Date": "Thu, 29 Oct 2026 06:10:23 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "804725",
+        "Connection": "close",
+        "CF-Cache-Status": "HIT",
+        "Cache-Control": "public, max-age=31536000, immutable",
+        "ETag": "\"98c8e9f88aa14341a5cabec31b9f157e\"",
+        "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=fbSmRKDU16pMlUaNKFG9x17iPOs3oX%2BCQ%2B3ArwDUOtjBQDk414xCJ3dzzWTc2KR6dhCKL9pQ4tU%2B8Nu9UiNwvCptbVjQPKa7icsw8f3Hhs4ThO8jzReKQJ8atSvDJw%3D%3D\"}]}",
+        "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "Server": "cloudflare",
+        "CF-RAY": "a52004525cdc32b1-EWR",
+        "alt-svc": "h3=\":443\"; ma=86400"
+      },
+      "body": "files-identified.json",
+      "sha256": "01c577870b852aae36b2556ec5df8e66f58f6a21f32c7f0e972ed5eafbaf2c41",
+      "decodedBytes": 804725
+    },
+    {
+      "observedAt": "2026-10-29T06:10:23.955458+00:00",
+      "url": "https://dotrepo.org/v0/snapshots/bb01b134d0a2d7d913ccf3f0f54327a239d9bce24ac7735259a62bb5630cf976/repos/index.json",
+      "requestHeaders": {
+        "User-agent": "dotrepo-f05-snapshot/1.0",
+        "Accept": "application/json"
+      },
+      "status": 200,
+      "headers": {
+        "Date": "Thu, 29 Oct 2026 06:10:23 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "448577",
+        "Connection": "close",
+        "CF-Cache-Status": "HIT",
+        "Cache-Control": "public, max-age=31536000, immutable",
+        "ETag": "\"82e7572466e9ad9feb43db55a077ed36\"",
+        "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=wopJc8r2rNVLvThpuKFk4awGJaAowkphJdbv6ugW7%2FsRqEVoGPsVSLTvItfOsRnFGMeQVc7iQdXt8u00b3KORA4Ei2iGgFjOlPwHrhUzR4qZUyOG2YR91DwExWJXcA%3D%3D\"}]}",
+        "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "Server": "cloudflare",
+        "CF-RAY": "a52004535bdb3eb4-EWR",
+        "alt-svc": "h3=\":443\"; ma=86400"
+      },
+      "body": "inventory-identified.json",
+      "sha256": "f2a092c72eab8ac67f7316f3171428c33399a8aef19a3d4c45138caa9b697d31",
+      "decodedBytes": 448577
+    }
+  ]
+}

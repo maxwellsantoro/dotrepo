@@ -1,0 +1,78 @@
+{
+  "baseCommit": "eb43ab20ac0368c4926660ae060347305197f936",
+  "taskIds": [
+    "rust-02",
+    "typescript-02",
+    "go-01",
+    "go-03"
+  ],
+  "tasks": [
+    {
+      "id": "rust-02",
+      "repository": "github.com/GyulyVGC/sniffnet",
+      "revision": "ab4bf739d46448436cb68933bb8260ee264449d5",
+      "ecosystem": "Rust",
+      "scope": "component",
+      "startingState": "local-checkout",
+      "component": "lib/sniffnet-packet-parser",
+      "request": "requests/rust-02.md",
+      "gold": "curator/gold/rust-02.json",
+      "oracle": "curator/oracles/rust-02.json",
+      "enrollmentRationale": "The only non-root workspace member is an owned library with retained unit tests; it is the lexically first eligible component."
+    },
+    {
+      "id": "typescript-02",
+      "repository": "github.com/OpenHands/OpenHands",
+      "revision": "2875056f93d6eebcd887f64ae557258a7b0b0108",
+      "ecosystem": "JavaScript/TypeScript",
+      "scope": "component",
+      "startingState": "local-checkout",
+      "component": "bin",
+      "request": "requests/typescript-02.md",
+      "gold": "curator/gold/typescript-02.json",
+      "oracle": "curator/oracles/typescript-02.json",
+      "enrollmentRationale": "Maintainer architecture names bin/ as the CLI launcher component; it precedes scripts/ and src/ lexically and has one source launcher and a dedicated bin test suite."
+    },
+    {
+      "id": "go-01",
+      "repository": "github.com/microsoft/TypeScript",
+      "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+      "ecosystem": "Go",
+      "scope": "repository",
+      "startingState": "pre-clone",
+      "component": null,
+      "request": "requests/go-01.md",
+      "gold": "curator/gold/go-01.json",
+      "oracle": "curator/oracles/go-01.json",
+      "enrollmentRationale": "Source has Go workspace modules tsc/tools and maintainer guide explicitly names the default compiler/language-service Go test task."
+    },
+    {
+      "id": "go-03",
+      "repository": "github.com/hashicorp/vault",
+      "revision": "352089582444ea84feb03bc97eda97b35729e8ec",
+      "ecosystem": "Go",
+      "scope": "component",
+      "startingState": "pre-clone",
+      "component": "api",
+      "request": "requests/go-03.md",
+      "gold": "curator/gold/go-03.json",
+      "oracle": "curator/oracles/go-03.json",
+      "enrollmentRationale": "go.work declares api as the lexical first non-root module; api/go.mod, API README and retained API tests establish an owned component with test intent."
+    }
+  ],
+  "frozenSourceSha256": "fc756e0d5f8a25cddc9f19ece651b21078a68a1f601febdb8d772208c0a66d41",
+  "sourceOnly": true,
+  "indexConsulted": false,
+  "maximumCompressedSourceBytesPerTask": 536870912,
+  "maximumUncompressedSourceBytesPerTask": 1073741824,
+  "maximumFetchSeconds": 600,
+  "setupSecondsPerTask": 900,
+  "executionSecondsPerTask": 1200,
+  "cpuLimit": 3,
+  "memoryBytes": 4294967296,
+  "pidsLimit": 256,
+  "costUsd": null,
+  "costExclusions": [
+    "No metered host/container dollar receipt; no zero-cost inference."
+  ]
+}
