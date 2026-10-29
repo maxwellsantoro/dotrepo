@@ -2,10 +2,12 @@
 
 Use documentation for the binary you installed. The latest stable release is
 [`v1.0.4`](https://github.com/maxwellsantoro/dotrepo/releases/tag/v1.0.4), built from
-the `codex/stable-1.0` maintenance line. The current `main` source identifies itself
-as `2.0.0-rc.1`, published as a prerelease; it includes public Rust API changes
-not in stable. A final 2.0.0 has not been published. Source merges
-do not change an existing release bundle or installed crate.
+the `codex/stable-1.0` maintenance line. The current source candidate identifies
+itself as `2.0.0-rc.2` and remains unpublished. Published prerelease
+`2.0.0-rc.1` includes public Rust API changes not in stable, but its immutable
+artifacts do not receive later source fixes. Neither this RC2 candidate nor a
+final 2.0.0 has been published. Source merges do not change an existing release
+bundle or installed crate.
 
 ## Version-matched documentation
 
@@ -36,10 +38,11 @@ Stable `v1.0.4` backports the shared contained output writer used by
 generation, initialization, adoption, CI setup, claims, export, and MCP import.
 They refuse descendant links and shared-hardlink targets while preserving
 ordinary file identity and permissions. The published `v2.0.0-rc.1` predates this
-change; it is present in stable 1.0.4 and current source. See
+change; it is present in stable 1.0.4 and the unpublished RC2 source candidate.
+Do not infer RC2 registry or release-bundle availability from this source. See
 [path containment limits](../CONTRIBUTING.md#path-containment-limits).
 
-| Behavior | Stable `v1.0.4` | Unreleased `main` |
+| Behavior | Stable `v1.0.4` | Unpublished RC2 source |
 | --- | --- | --- |
 | `promotion-report --apply` | Fails before writing records or evidence | Same no-write guard |
 | Read-only promotion analysis | Uses manifest values and record-wide provenance; does not inspect upstream | Uses retained value- and timestamp-bound field assessments; still not fresh inspection |

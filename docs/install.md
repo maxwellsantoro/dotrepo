@@ -4,7 +4,7 @@ For a stable installation, use the
 [`v1.0.4` release](https://github.com/maxwellsantoro/dotrepo/releases/tag/v1.0.4).
 It provides `dotrepo`, `dotrepo-public-query`, `dotrepo-lsp`, and `dotrepo-mcp`.
 <!-- dotrepo:release-status:start -->
-Stable installs use `1.0.4`; current source is `2.0.0-rc.1` (release candidate).
+Stable installs use `1.0.4`; current source is `2.0.0-rc.2` (release candidate).
 Use the matching tagged documentation for installed binaries.
 <!-- dotrepo:release-status:end -->
 
@@ -16,8 +16,9 @@ bounded regular files without symlink traversal, forced imports refuse
 symlink/shared-hardlink overwrites, and dynamic Rake sources are withheld.
 Stable 1.0.4 also uses the shared contained writer for repository-derived CLI
 outputs and MCP import; see the compatibility guide for the precise limits.
-Retained per-field assessments, execution contexts, and newer MCP target checks
-are available in the release candidate, outside the stable contract.
+The 2.0 line adds retained per-field assessments, execution contexts, and newer
+MCP target checks outside the stable contract. Current source `2.0.0-rc.2` is
+unpublished; building it does not update published RC1 packages or bundles.
 
 ## Download a stable bundle
 
@@ -92,8 +93,10 @@ release at runtime.
 
 The MCP Registry's latest-version view may select `2.0.0-rc.1` because it is a
 higher version than stable. Choose **1.0.4** explicitly for production, or use
-the pinned crates.io command above. The RC is an explicit preview opt-in and
-predates the contained-write backport in stable 1.0.4.
+the pinned crates.io command above. Published `2.0.0-rc.1` is an explicit
+preview opt-in and predates the contained-write backport in stable 1.0.4. The
+unpublished `2.0.0-rc.2` source candidate includes that change; publication and
+registry installation still need separate verification.
 
 After installing `dotrepo-mcp`, configure it as a stdio server. See the
 [consumer integration guide](external-consumer-integration.md) for a configuration

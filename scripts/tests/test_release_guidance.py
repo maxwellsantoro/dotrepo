@@ -5,7 +5,7 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from check_release_guidance import check
+from check_release_guidance import check, versions
 
 
 def test_release_guidance_detects_and_repairs_prose_drift(tmp_path):
@@ -27,7 +27,8 @@ def test_release_guidance_detects_and_repairs_prose_drift(tmp_path):
         shutil.copyfile(root / relative, target)
     assert check(tmp_path) == []
     install = tmp_path / "docs/install.md"
-    install.write_text(install.read_text().replace("2.0.0-rc.1", "2.0.0-alpha.0"))
+    _, source_version = versions(tmp_path)
+    install.write_text(install.read_text().replace(source_version, "2.0.0-alpha.0"))
     benchmark = tmp_path / "docs/public-factual-accuracy-benchmark.md"
     benchmark.write_text(benchmark.read_text().replace("119 independently", "123 independently"))
     assert len(check(tmp_path)) == 2
