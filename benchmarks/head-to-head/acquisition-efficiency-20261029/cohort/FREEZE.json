@@ -1,0 +1,38 @@
+{
+  "state": "acquisition100-cohort-frozen-before-implementation-comparison",
+  "declaredBasePrefix": "9fe76b4d",
+  "artifactBindings": {
+    "README.md": {
+      "bytes": 3972,
+      "sha256": "d5bd0bfc0bff86b926490cc0f615cdeb5ae9fa86801e654e0ae283274152a5e8"
+    },
+    "cohort.json": {
+      "bytes": 68284,
+      "sha256": "30299636a76494a8a27f1f64621e49977fa1e09a7c7dbedc0e2ae7adb2e61c61"
+    },
+    "inputs.json": {
+      "bytes": 351668,
+      "sha256": "d3129ed976f57fb0de3f6187609bb91c085949f345be114c0899eaa661b4a124"
+    }
+  },
+  "inputRecordsRechecked": 615,
+  "selected": 100,
+  "selectedByGroup": {
+    "Rust": 25,
+    "Python": 25,
+    "JS-TS": 25,
+    "Go": 25
+  },
+  "eligiblePools": {
+    "Rust": 53,
+    "Python": 116,
+    "JS-TS": 125,
+    "Go": 66
+  },
+  "excludedIdentityUnion": 24,
+  "indexedExcluded": 8,
+  "noNewSourceFetchOrInspection": true,
+  "comparisonResultsExist": false,
+  "experimentRunAuthorized": false,
+  "providerCalls": 0
+}

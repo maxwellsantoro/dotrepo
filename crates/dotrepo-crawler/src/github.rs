@@ -353,6 +353,22 @@ impl HttpGitHubClient {
             }))
     }
 
+    /// Reuse only decoded success within one materialization fetch. A missing
+    /// tree is not an absence proof: a later selector still gets its own GET.
+    fn repository_tree<'a>(
+        &self,
+        repository: &RepositoryRef,
+        reference: &str,
+        cache: &'a mut Option<GitTreeResponse>,
+    ) -> Result<Option<&'a GitTreeResponse>> {
+        if cache.is_none() {
+            let mut url = self.api_url(repository, &["git", "trees", reference])?;
+            url.query_pairs_mut().append_pair("recursive", "1");
+            *cache = self.get_optional_json::<GitTreeResponse>(url)?;
+        }
+        Ok(cache.as_ref())
+    }
+
     fn fetch_workflow_files(
         &self,
         repository: &RepositoryRef,
@@ -395,6 +411,7 @@ impl HttpGitHubClient {
         repository: &RepositoryRef,
         default_branch: &str,
         languages: &[String],
+        tree_cache: &mut Option<GitTreeResponse>,
     ) -> Result<Vec<RepositoryTextFile>> {
         if !rust_is_primary_language(languages) {
             return Ok(Vec::new());
@@ -407,11 +424,9 @@ impl HttpGitHubClient {
             return Ok(Vec::new());
         }
 
-        let mut tree_url = self.api_url(repository, &["git", "trees", default_branch])?;
-        tree_url.query_pairs_mut().append_pair("recursive", "1");
-        let tree = self
-            .get_optional_json::<GitTreeResponse>(tree_url)?
-            .unwrap_or(GitTreeResponse { tree: Vec::new() });
+        let Some(tree) = self.repository_tree(repository, default_branch, tree_cache)? else {
+            return Ok(Vec::new());
+        };
 
         let mut paths: Vec<String> = tree
             .tree
@@ -455,17 +470,16 @@ impl HttpGitHubClient {
         repository: &RepositoryRef,
         default_branch: &str,
         languages: &[String],
+        tree_cache: &mut Option<GitTreeResponse>,
     ) -> Result<Vec<RepositoryTextFile>> {
         if !python_is_primary_language(languages) {
             return Ok(Vec::new());
         }
 
         // Root pyproject/setup/tox already in SUPPLEMENTAL_ROOT_FILES.
-        let mut tree_url = self.api_url(repository, &["git", "trees", default_branch])?;
-        tree_url.query_pairs_mut().append_pair("recursive", "1");
-        let tree = self
-            .get_optional_json::<GitTreeResponse>(tree_url)?
-            .unwrap_or(GitTreeResponse { tree: Vec::new() });
+        let Some(tree) = self.repository_tree(repository, default_branch, tree_cache)? else {
+            return Ok(Vec::new());
+        };
 
         let mut paths: Vec<String> = tree
             .tree
@@ -524,6 +538,7 @@ impl HttpGitHubClient {
         repository: &RepositoryRef,
         default_branch: &str,
         languages: &[String],
+        tree_cache: &mut Option<GitTreeResponse>,
     ) -> Result<Vec<RepositoryTextFile>> {
         if !js_ts_is_primary_language(languages) {
             return Ok(Vec::new());
@@ -550,11 +565,9 @@ impl HttpGitHubClient {
             }
         }
 
-        let mut tree_url = self.api_url(repository, &["git", "trees", default_branch])?;
-        tree_url.query_pairs_mut().append_pair("recursive", "1");
-        let tree = self
-            .get_optional_json::<GitTreeResponse>(tree_url)?
-            .unwrap_or(GitTreeResponse { tree: Vec::new() });
+        let Some(tree) = self.repository_tree(repository, default_branch, tree_cache)? else {
+            return Ok(Vec::new());
+        };
         let package_paths: Vec<String> = tree
             .tree
             .iter()
@@ -601,6 +614,7 @@ impl HttpGitHubClient {
         repository: &RepositoryRef,
         default_branch: &str,
         languages: &[String],
+        tree_cache: &mut Option<GitTreeResponse>,
     ) -> Result<Vec<RepositoryTextFile>> {
         if !dotnet_language_signal(languages) {
             return Ok(Vec::new());
@@ -635,11 +649,9 @@ impl HttpGitHubClient {
             return Ok(files);
         }
 
-        let mut tree_url = self.api_url(repository, &["git", "trees", default_branch])?;
-        tree_url.query_pairs_mut().append_pair("recursive", "1");
-        let tree = self
-            .get_optional_json::<GitTreeResponse>(tree_url)?
-            .unwrap_or(GitTreeResponse { tree: Vec::new() });
+        let Some(tree) = self.repository_tree(repository, default_branch, tree_cache)? else {
+            return Ok(files);
+        };
         for path in select_dotnet_paths_from_tree(&tree.tree, 4) {
             if let Some(file) =
                 self.fetch_optional_repository_file(repository, default_branch, &path)?
@@ -795,6 +807,7 @@ impl GitHubClient for HttpGitHubClient {
         languages: &[String],
     ) -> Result<ConventionalRepositoryFiles> {
         let mut extra_files = Vec::new();
+        let mut tree_cache = None;
         for relative_path in SUPPLEMENTAL_ROOT_FILES {
             if let Some(file) =
                 self.fetch_optional_repository_file(repository, default_branch, relative_path)?
@@ -807,21 +820,25 @@ impl GitHubClient for HttpGitHubClient {
             repository,
             default_branch,
             languages,
+            &mut tree_cache,
         )?);
         extra_files.extend(self.fetch_python_manifest_files(
             repository,
             default_branch,
             languages,
+            &mut tree_cache,
         )?);
         extra_files.extend(self.fetch_rust_manifest_files(
             repository,
             default_branch,
             languages,
+            &mut tree_cache,
         )?);
         extra_files.extend(self.fetch_dotnet_manifest_files(
             repository,
             default_branch,
             languages,
+            &mut tree_cache,
         )?);
 
         Ok(ConventionalRepositoryFiles {
@@ -1640,3 +1657,7 @@ mod tests {
         assert_eq!(candidates[1].repository.repo, "fastapi");
     }
 }
+
+#[cfg(test)]
+#[path = "github/tree_reuse_tests.rs"]
+mod tree_reuse_tests;

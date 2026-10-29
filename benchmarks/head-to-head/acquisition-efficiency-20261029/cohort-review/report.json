@@ -1,0 +1,35 @@
+{
+  "state": "independent-cohort-data-audit-passed",
+  "findings": [],
+  "subjectFreezeSha256": "e91743d1f238f91f70c1637609effb1e172449091897a304b1345ab94990572b",
+  "cohortSha256": "30299636a76494a8a27f1f64621e49977fa1e09a7c7dbedc0e2ae7adb2e61c61",
+  "inputRecordsHashTomlIdentityRevisionLanguageRechecked": 615,
+  "allInputRecordsUnchangedFromBase": "9fe76b4d08e44db3b4563281b82054674101dacc",
+  "sourceSchemes": {
+    "https": 615
+  },
+  "duplicateCanonicalIdentities": 0,
+  "exclusionUnion": 24,
+  "indexedExclusions": 8,
+  "ineligibleReasons": {
+    "primary-language-outside-declared-groups": 247,
+    "frozen-or-development-exclusion": 8
+  },
+  "eligiblePools": {
+    "Rust": 53,
+    "JS-TS": 125,
+    "Python": 116,
+    "Go": 66
+  },
+  "selected": 100,
+  "selectedByGroup": {
+    "Rust": 25,
+    "Python": 25,
+    "JS-TS": 25,
+    "Go": 25
+  },
+  "all100RankingOrderAndRevisionBindingsMatch": true,
+  "notFreshHoldoutOrConsumerEvidence": true,
+  "experimentRunAuthorized": false,
+  "reviewerContext": "Known E1/F05 source curator and tree-reuse implementation author; did not select this cohort. No upstream source bodies, acquisition results or field-quality outputs consulted for the audit."
+}

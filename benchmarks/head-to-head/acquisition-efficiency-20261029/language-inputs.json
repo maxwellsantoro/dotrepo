@@ -1,0 +1,1628 @@
+{
+  "identity": "acquisition100-frozen-recorded-language-inputs-v1",
+  "frozenAt": "2026-10-29T15:28:07.743163+00:00",
+  "cohortSha256": "30299636a76494a8a27f1f64621e49977fa1e09a7c7dbedc0e2ae7adb2e61c61",
+  "source": "Exact repo.languages arrays from cohort-bound index records; reused identically in both variants. These are recorded language hints, not freshly measured GitHub language bytes or new source inspection. No metadata/head lookup is needed to construct this input.",
+  "plannedSourceRevisions": "Use selected exact revision, never current branch HEAD.",
+  "rows": [
+    {
+      "opportunityId": "acq100-001",
+      "identity": "github.com/meilisearch/meilisearch",
+      "revision": "9bbe2813f55fb856d1d710470a8020240c292e32",
+      "recordPath": "index/repos/github.com/meilisearch/meilisearch/record.toml",
+      "recordSha256": "f4f244674b0a5747406ed89ca18c502b1b1f3f3e461a149111259290985ea9a8",
+      "languages": [
+        "Rust",
+        "Shell",
+        "Dockerfile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-002",
+      "identity": "github.com/tokio-rs/axum",
+      "revision": "ff653461168d8fd292bce78d9488d1e30cf9cfa0",
+      "recordPath": "index/repos/github.com/tokio-rs/axum/record.toml",
+      "recordSha256": "a4ff806c85333fa0ec8df196eff0a0a459591105c15eed9ccf4bd2c6385a40f5",
+      "languages": [
+        "Rust",
+        "HTML",
+        "JavaScript"
+      ]
+    },
+    {
+      "opportunityId": "acq100-003",
+      "identity": "github.com/pnpm/pnpm",
+      "revision": "38e9755f6686cbd297dafce9dfdad59b14983636",
+      "recordPath": "index/repos/github.com/pnpm/pnpm/record.toml",
+      "recordSha256": "41dd620ad87a3448344e4fdf466b7b05b1e1b3cbb81bf81d2967db88bd30b31d",
+      "languages": [
+        "Rust",
+        "TypeScript",
+        "JavaScript",
+        "C++",
+        "Shell",
+        "Python",
+        "Just",
+        "NASL",
+        "MDX",
+        "HTML",
+        "PowerShell",
+        "Dockerfile",
+        "C",
+        "Batchfile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-004",
+      "identity": "github.com/typst/typst",
+      "revision": "fe537181def05ba2760e305befd4fe8d245f06ce",
+      "recordPath": "index/repos/github.com/typst/typst/record.toml",
+      "recordSha256": "49aa58d272722ed7492dfc9e441849ffd7fae40a812fad5a77dfda26c8f60946",
+      "languages": [
+        "Rust",
+        "Typst",
+        "JavaScript",
+        "TypeScript",
+        "CSS",
+        "Dockerfile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-005",
+      "identity": "github.com/xi-editor/xi-editor",
+      "revision": "a2dea3059312795c77caadc639df49bf8a7008eb",
+      "recordPath": "index/repos/github.com/xi-editor/xi-editor/record.toml",
+      "recordSha256": "f1c1d3df3c744de5a8365d8890026daaac1063e6ae8a3cd934cafe478c7b0bf5",
+      "languages": [
+        "Rust",
+        "Python",
+        "C++",
+        "Makefile",
+        "Shell"
+      ]
+    },
+    {
+      "opportunityId": "acq100-006",
+      "identity": "github.com/astral-sh/ruff",
+      "revision": "7cb935d94e5ccdaefd4efee86ba454e8673a3fa6",
+      "recordPath": "index/repos/github.com/astral-sh/ruff/record.toml",
+      "recordSha256": "24383b0b488cdc88e8a2f67bf5c76f26f4241ed39013e1dbaf4a11728661de48",
+      "languages": [
+        "Rust",
+        "Python",
+        "TypeScript",
+        "Shell",
+        "HTML",
+        "CSS",
+        "Jinja",
+        "Dockerfile",
+        "RenderScript"
+      ]
+    },
+    {
+      "opportunityId": "acq100-007",
+      "identity": "github.com/maxwellsantoro/ramenos",
+      "revision": "958a6f1713129930b217c16b1a21140e8fab9ed0",
+      "recordPath": "index/repos/github.com/maxwellsantoro/RamenOS/record.toml",
+      "recordSha256": "ee33e21ed7904dbbfe383eee48a8823d7555d1ac2a0cb0852bde6ca29ac7232b",
+      "languages": [
+        "Rust",
+        "Python",
+        "Shell",
+        "C",
+        "Just",
+        "WebAssembly",
+        "Linker Script"
+      ]
+    },
+    {
+      "opportunityId": "acq100-008",
+      "identity": "github.com/tokio-rs/tracing",
+      "revision": "9d0e557728ecb91e467fc29dfe738b9f28cf6684",
+      "recordPath": "index/repos/github.com/tokio-rs/tracing/record.toml",
+      "recordSha256": "9be88c3efedfa3f151b29c339cf6cb942e461a9872ca03330582fbfe5ffb7157",
+      "languages": [
+        "Rust",
+        "Shell"
+      ]
+    },
+    {
+      "opportunityId": "acq100-009",
+      "identity": "github.com/dani-garcia/vaultwarden",
+      "revision": "0f44744ef86a2a7bea615af1c024044ce5736187",
+      "recordPath": "index/repos/github.com/dani-garcia/vaultwarden/record.toml",
+      "recordSha256": "1ed4d0f65e982a2c3145cbed35e92e0ba68f873730afa817f75bb638ee183590",
+      "languages": [
+        "Rust",
+        "Handlebars",
+        "TypeScript",
+        "Shell",
+        "Jinja",
+        "HCL",
+        "Python",
+        "Dockerfile",
+        "Makefile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-010",
+      "identity": "github.com/denoland/deno",
+      "revision": "e7b39ebd55c85aaf6a29290c1f5a99e2e21e09dd",
+      "recordPath": "index/repos/github.com/denoland/deno/record.toml",
+      "recordSha256": "83cc75c8ed298c420bfeebbd1b24f72d4abac25aa89cdd1d0a7c4d6b8aa5b66a",
+      "languages": [
+        "Rust",
+        "TypeScript",
+        "JavaScript",
+        "C",
+        "HTML",
+        "CSS",
+        "Nix",
+        "Shell",
+        "WebAssembly",
+        "C++",
+        "Svelte",
+        "Mustache",
+        "Dockerfile",
+        "Python",
+        "Astro",
+        "Vento",
+        "Nunjucks"
+      ]
+    },
+    {
+      "opportunityId": "acq100-011",
+      "identity": "github.com/bevyengine/bevy",
+      "revision": "54f38f332aa3dc0a8d8f9a790fc40f613022837d",
+      "recordPath": "index/repos/github.com/bevyengine/bevy/record.toml",
+      "recordSha256": "c1ab9df3335b4e248ff577667f40578817a42e002f9fbebb492fff4bfef1ed31",
+      "languages": [
+        "Rust",
+        "WGSL",
+        "Go Template",
+        "HTML",
+        "Mermaid"
+      ]
+    },
+    {
+      "opportunityId": "acq100-012",
+      "identity": "github.com/rigellute/spotify-tui",
+      "revision": "c4dcf6b9fd8318017acbdd7ec005955e26cf2794",
+      "recordPath": "index/repos/github.com/Rigellute/spotify-tui/record.toml",
+      "recordSha256": "260450fcbe91acaa3a8aac2ee2ae31621a5f099abea379ac9c42d96231dc32bf",
+      "languages": [
+        "Rust",
+        "HTML"
+      ]
+    },
+    {
+      "opportunityId": "acq100-013",
+      "identity": "github.com/tokio-rs/tokio",
+      "revision": "0d38f8349f4d0af50a30d046630c08dd513ebaa7",
+      "recordPath": "index/repos/github.com/tokio-rs/tokio/record.toml",
+      "recordSha256": "078aebffa661d237a43e33d28511e2d2a0e571f483d3632892a34f461a6a80ec",
+      "languages": [
+        "Rust"
+      ]
+    },
+    {
+      "opportunityId": "acq100-014",
+      "identity": "github.com/alacritty/alacritty",
+      "revision": "bbb2cbf9470a6707b1205fbddbdb25109b14e2fd",
+      "recordPath": "index/repos/github.com/alacritty/alacritty/record.toml",
+      "recordSha256": "a88668b777a2b06f5026978f2cff5ab9e9e57a82a299dec210a6a061b7bc774b",
+      "languages": [
+        "Rust",
+        "Shell",
+        "GLSL",
+        "Makefile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-015",
+      "identity": "github.com/rayon-rs/rayon",
+      "revision": "599425d4a4c64714632817f48496dbc53f656a90",
+      "recordPath": "index/repos/github.com/rayon-rs/rayon/record.toml",
+      "recordSha256": "c7b37c39d82c3fd9e042706775d5de4dfb83806ca9d8d298ab22e968c688995c",
+      "languages": [
+        "Rust",
+        "Shell"
+      ]
+    },
+    {
+      "opportunityId": "acq100-016",
+      "identity": "github.com/sxyazi/yazi",
+      "revision": "40a91421893bfd1ae02ef7a55afd41f886558d8c",
+      "recordPath": "index/repos/github.com/sxyazi/yazi/record.toml",
+      "recordSha256": "a2530f5eca975bc34c4c46333dc107a2a11e0e2a73ac84f0cfe059e9c690ab28",
+      "languages": [
+        "Rust",
+        "Lua",
+        "Nix",
+        "Shell",
+        "RenderScript"
+      ]
+    },
+    {
+      "opportunityId": "acq100-017",
+      "identity": "github.com/astral-sh/uv",
+      "revision": "85b7a374a2f6bda197915f89d32f746143beb315",
+      "recordPath": "index/repos/github.com/astral-sh/uv/record.toml",
+      "recordSha256": "90bebd3811107d66f16ac64ae2a0b4b0719b64a9a23600d256f780d03b1d583f",
+      "languages": [
+        "Rust",
+        "Python",
+        "Shell",
+        "Dockerfile",
+        "Batchfile",
+        "PowerShell",
+        "Nushell",
+        "Xonsh",
+        "Jupyter Notebook",
+        "C",
+        "RenderScript"
+      ]
+    },
+    {
+      "opportunityId": "acq100-018",
+      "identity": "github.com/vectordotdev/vector",
+      "revision": "a0ae5b99f21b363606b4e5415ab4ec272ab68ea0",
+      "recordPath": "index/repos/github.com/vectordotdev/vector/record.toml",
+      "recordSha256": "07d382de3d675ee760484737b085c1a68c22156a89bc41906f978e044c49547e",
+      "languages": [
+        "Rust",
+        "CUE",
+        "HTML",
+        "TypeScript",
+        "JavaScript",
+        "Shell",
+        "CSS",
+        "Sass",
+        "Dockerfile",
+        "Python",
+        "Lua",
+        "Go Template",
+        "PowerShell",
+        "Handlebars",
+        "Starlark",
+        "Batchfile",
+        "DIGITAL Command Language",
+        "PureBasic"
+      ]
+    },
+    {
+      "opportunityId": "acq100-019",
+      "identity": "github.com/screenpipe/screenpipe",
+      "revision": "38059f4f75b82641da2999bc0bb2a03552876f08",
+      "recordPath": "index/repos/github.com/screenpipe/screenpipe/record.toml",
+      "recordSha256": "d08a7c3c0618675449ea17b2f5c49160c36fe3638054280fa6d1c1ce86caf5a5",
+      "languages": [
+        "Rust",
+        "TypeScript",
+        "JavaScript",
+        "Swift",
+        "Shell",
+        "CSS",
+        "Python",
+        "PowerShell",
+        "NSIS",
+        "HTML",
+        "Bicep",
+        "Objective-C++",
+        "Dockerfile",
+        "C",
+        "C#"
+      ]
+    },
+    {
+      "opportunityId": "acq100-020",
+      "identity": "github.com/sharkdp/bat",
+      "revision": "a9aa73d215455a479f072da75dd39f19826acfea",
+      "recordPath": "index/repos/github.com/sharkdp/bat/record.toml",
+      "recordSha256": "133e9a79ff2df7bd84b7c158f72936dcf346882ebde416e6c70ae7d4f77f5c1a",
+      "languages": [
+        "Rust",
+        "Python",
+        "Shell",
+        "Nix",
+        "Batchfile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-021",
+      "identity": "github.com/nushell/nushell",
+      "revision": "99705528485da55059f4b32d010226ed64a9c97a",
+      "recordPath": "index/repos/github.com/nushell/nushell/record.toml",
+      "recordSha256": "2045d498c82de77ca234d7c527cdbe49513953c36c5f3666e18ee22a4291b98a",
+      "languages": [
+        "Rust",
+        "Nushell",
+        "Nix",
+        "Python",
+        "JavaScript",
+        "Dockerfile",
+        "Shell",
+        "PowerShell",
+        "Batchfile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-022",
+      "identity": "github.com/rustdesk/rustdesk-server",
+      "revision": "873230e35a8805de7fd057e7eb763c46f7a174ef",
+      "recordPath": "index/repos/github.com/rustdesk/rustdesk-server/record.toml",
+      "recordSha256": "61cf50dc788e61c6df1e63fe5919e112ed7db4228b32209b676054f8e9bf7fc2",
+      "languages": [
+        "Rust",
+        "NSIS",
+        "JavaScript",
+        "Shell",
+        "Dockerfile",
+        "HTML",
+        "CSS",
+        "Batchfile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-023",
+      "identity": "github.com/tikv/tikv",
+      "revision": "2be7aafd3d04a128100c5df69cb43fc99ad14b04",
+      "recordPath": "index/repos/github.com/tikv/tikv/record.toml",
+      "recordSha256": "98abe52e11b5353bfdd4aa661555d3d91d3cc1b8607f7093a22ab85f30e3689a",
+      "languages": [
+        "Rust",
+        "Python",
+        "Perl",
+        "Shell",
+        "Makefile",
+        "C",
+        "Dockerfile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-024",
+      "identity": "github.com/rustdesk/rustdesk",
+      "revision": "eb239024503160707cca87ba6cef5fbfb8fa3f0d",
+      "recordPath": "index/repos/github.com/rustdesk/rustdesk/record.toml",
+      "recordSha256": "75394c54c6f1d4e07cfafdfcdfe627a8d7d4e529fb371fb223e40525f031365a",
+      "languages": [
+        "Rust",
+        "Dart",
+        "Python",
+        "C++",
+        "C",
+        "Kotlin",
+        "CMake",
+        "Objective-C++",
+        "CSS",
+        "Shell",
+        "Swift",
+        "AppleScript",
+        "HTML",
+        "Ruby",
+        "Dockerfile",
+        "Objective-C"
+      ]
+    },
+    {
+      "opportunityId": "acq100-025",
+      "identity": "github.com/fuellabs/sway",
+      "revision": "7dafb1c7ae52ae8247e41e8e7b36a6f444b40b71",
+      "recordPath": "index/repos/github.com/FuelLabs/sway/record.toml",
+      "recordSha256": "0f6b52d7d501fc30eff955de6a80ad1949c41cfc48596f6404423982da8d009d",
+      "languages": [
+        "Rust",
+        "Sway",
+        "Shell",
+        "LLVM",
+        "CSS",
+        "JavaScript",
+        "Just",
+        "Dockerfile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-026",
+      "identity": "github.com/hiroi-sora/umi-ocr",
+      "revision": "83173efc4f4453b41223ea96d63d44534bf0505c",
+      "recordPath": "index/repos/github.com/hiroi-sora/Umi-OCR/record.toml",
+      "recordSha256": "24fb81765aac237db31446039b9e84af26e55451921f46be9128d03dd12f225f",
+      "languages": [
+        "Python",
+        "QML"
+      ]
+    },
+    {
+      "opportunityId": "acq100-027",
+      "identity": "github.com/fkxxyz/rime-cloverpinyin",
+      "revision": "efdfb69688e832d875aad13679fa34ab235cbf54",
+      "recordPath": "index/repos/github.com/fkxxyz/rime-cloverpinyin/record.toml",
+      "recordSha256": "7ec8bebc395ae7807b3ccf367ef9da822f82b19b09db40e83080c1d3089cf1d6",
+      "languages": [
+        "Python",
+        "Shell"
+      ]
+    },
+    {
+      "opportunityId": "acq100-028",
+      "identity": "github.com/explosion/spacy",
+      "revision": "7ff14d4da84817f84c32b980882178ddacc066a1",
+      "recordPath": "index/repos/github.com/explosion/spaCy/record.toml",
+      "recordSha256": "7cff2b48e9a1fedbffd27e152cd7f71a7c6343d0d25ee9cf5d3f2d26304363c6",
+      "languages": [
+        "Python",
+        "MDX",
+        "Cython",
+        "JavaScript",
+        "Sass",
+        "TypeScript",
+        "Jinja",
+        "C",
+        "HTML",
+        "Makefile",
+        "Shell",
+        "Dockerfile",
+        "C++"
+      ]
+    },
+    {
+      "opportunityId": "acq100-029",
+      "identity": "github.com/celery/celery",
+      "revision": "2ef8265b0a1dd977abdbcb087d3208b6575842c1",
+      "recordPath": "index/repos/github.com/celery/celery/record.toml",
+      "recordSha256": "cda281cbcb5b37a519cb5053b2b221d4b045309d5086caca3b43b3372fd9c15a",
+      "languages": [
+        "Python",
+        "Shell",
+        "Makefile",
+        "Dockerfile",
+        "Batchfile",
+        "Go Template"
+      ]
+    },
+    {
+      "opportunityId": "acq100-030",
+      "identity": "github.com/exo-explore/exo",
+      "revision": "bc412e2230f395e652c23426a5eb88dfa515769b",
+      "recordPath": "index/repos/github.com/exo-explore/exo/record.toml",
+      "recordSha256": "06879ff7f02f2033c4030a24f5ca7a4d1b445378d6d1a37c06f830dc7ac23d79",
+      "languages": [
+        "Python",
+        "Svelte",
+        "Swift",
+        "TypeScript",
+        "Rust",
+        "Nix",
+        "Shell",
+        "CSS",
+        "Just",
+        "JavaScript",
+        "HTML"
+      ]
+    },
+    {
+      "opportunityId": "acq100-031",
+      "identity": "github.com/breakthrough/pyscenedetect",
+      "revision": "36ca0229a898d6a25965f5f0b94c109c674833df",
+      "recordPath": "index/repos/github.com/Breakthrough/PySceneDetect/record.toml",
+      "recordSha256": "8830792227ce95620cdf144a39e7122e6f3ab64e35020081ccff56a182ea202d",
+      "languages": [
+        "Python",
+        "Shell",
+        "CSS",
+        "HTML",
+        "Dockerfile",
+        "JavaScript"
+      ]
+    },
+    {
+      "opportunityId": "acq100-032",
+      "identity": "github.com/haitongli/knowledge-distillation-pytorch",
+      "revision": "9937528f0be0efa979c745174fbcbe9621cea8b7",
+      "recordPath": "index/repos/github.com/haitongli/knowledge-distillation-pytorch/record.toml",
+      "recordSha256": "58f2563ad964fcb543d677ec16724615685ec4d815210076cdbfdedd5cffdfa0",
+      "languages": [
+        "Python"
+      ]
+    },
+    {
+      "opportunityId": "acq100-033",
+      "identity": "github.com/jdai-cv/facex-zoo",
+      "revision": "16b793a7564a4b9308cf94e62bdb2ffacb3a725a",
+      "recordPath": "index/repos/github.com/JDAI-CV/FaceX-Zoo/record.toml",
+      "recordSha256": "604993415e789c64d31382a253e3bf4cd8a214e84615f768ba043e3406ec890d",
+      "languages": [
+        "Python",
+        "Shell",
+        "Cython",
+        "Dockerfile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-034",
+      "identity": "github.com/sqlalchemy/sqlalchemy",
+      "revision": "5c2970e9e5cb233ed530c274d96c73ebdbdbfc8a",
+      "recordPath": "index/repos/github.com/sqlalchemy/sqlalchemy/record.toml",
+      "recordSha256": "46b1df19e8a963fb42f926d3f1be06aea7b270d7b97a9977e97f8400763af2d0",
+      "languages": [
+        "Python",
+        "Cython"
+      ]
+    },
+    {
+      "opportunityId": "acq100-035",
+      "identity": "github.com/clementchadebec/benchmark_vae",
+      "revision": "6419e21558f2a6abc2da99944bddda846ded30f4",
+      "recordPath": "index/repos/github.com/clementchadebec/benchmark_VAE/record.toml",
+      "recordSha256": "0923ef397d21ab1654d2304fd239cb157f99d7266ae9bf35efbdbd6133b139cb",
+      "languages": [
+        "Python"
+      ]
+    },
+    {
+      "opportunityId": "acq100-036",
+      "identity": "github.com/langchain-ai/langchain",
+      "revision": "4b80abeadd6faf7f321ac5d690602812f82a3baf",
+      "recordPath": "index/repos/github.com/langchain-ai/langchain/record.toml",
+      "recordSha256": "8bbb1064da52c08ec933923e3ec694dd8e564a6981f3cc658e3559de15bf8064",
+      "languages": [
+        "Python",
+        "Makefile",
+        "Shell",
+        "XSLT",
+        "HTML",
+        "Dockerfile",
+        "JavaScript"
+      ]
+    },
+    {
+      "opportunityId": "acq100-037",
+      "identity": "github.com/aider-ai/aider",
+      "revision": "5dc9490bb35f9729ef2c95d00a19ccd30c26339c",
+      "recordPath": "index/repos/github.com/Aider-AI/aider/record.toml",
+      "recordSha256": "515a6820b768fb07bb6670ed27b479ed480834a41bbd02e438bb5701a5c441a7",
+      "languages": [
+        "Python",
+        "CSS",
+        "Shell",
+        "Tree-sitter Query",
+        "JavaScript",
+        "HTML",
+        "PowerShell",
+        "Dockerfile",
+        "SCSS",
+        "Ruby"
+      ]
+    },
+    {
+      "opportunityId": "acq100-038",
+      "identity": "github.com/pytorch/pytorch",
+      "revision": "6ce2d3101ac63a4778b4ac00a811fb4cfd4ed42d",
+      "recordPath": "index/repos/github.com/pytorch/pytorch/record.toml",
+      "recordSha256": "e82c325ac2562058735faa51e3de1ccfc12c797a60095ded2d4441249d552328",
+      "languages": [
+        "Python",
+        "C++",
+        "Cuda",
+        "C",
+        "Objective-C++",
+        "Metal",
+        "CMake",
+        "Shell",
+        "Assembly",
+        "HIP",
+        "Starlark",
+        "JavaScript",
+        "GLSL",
+        "Jupyter Notebook",
+        "Jinja",
+        "Java",
+        "Batchfile",
+        "Dockerfile",
+        "Objective-C",
+        "Makefile",
+        "Thrift",
+        "PowerShell",
+        "Mermaid",
+        "GDB",
+        "Linker Script",
+        "HTML",
+        "Vim Script"
+      ]
+    },
+    {
+      "opportunityId": "acq100-039",
+      "identity": "github.com/hydraponique/roscomvpn-routing",
+      "revision": "f8eab4e486f2985bb51782b6db2c3e087f12e603",
+      "recordPath": "index/repos/github.com/hydraponique/roscomvpn-routing/record.toml",
+      "recordSha256": "409abd494affaba4bfad6c3f49495916004787dbf6aa129f11c726419ef1dd36",
+      "languages": [
+        "Python"
+      ]
+    },
+    {
+      "opportunityId": "acq100-040",
+      "identity": "github.com/hacksider/deep-live-cam",
+      "revision": "0bae1a549014d86457548b05a01a3f7682cdda65",
+      "recordPath": "index/repos/github.com/hacksider/Deep-Live-Cam/record.toml",
+      "recordSha256": "9841950b5362463921be3f5fb1a83eb1ec73259e37874f458a835f453abca137",
+      "languages": [
+        "Python",
+        "Batchfile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-041",
+      "identity": "github.com/scikit-learn/scikit-learn",
+      "revision": "42981ef2fd9154420e96ca36d90bfddb6f4ff8af",
+      "recordPath": "index/repos/github.com/scikit-learn/scikit-learn/record.toml",
+      "recordSha256": "61d861aa6c5ece8afa7b04677959793e9faed3cf9a6af1ae69f9760bd887eb56",
+      "languages": [
+        "Python",
+        "Cython",
+        "C++",
+        "C",
+        "Shell",
+        "Meson",
+        "CSS",
+        "JavaScript",
+        "Makefile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-042",
+      "identity": "github.com/quantopian/zipline",
+      "revision": "014f1fc339dc8b7671d29be2d85ce57d3daec343",
+      "recordPath": "index/repos/github.com/quantopian/zipline/record.toml",
+      "recordSha256": "d1251febc0be9c67aa014dfdf98ba3bdad7013cb40e8b01b68658ae28fe5726c",
+      "languages": [
+        "Python",
+        "Jupyter Notebook",
+        "Shell",
+        "Batchfile",
+        "PowerShell",
+        "Dockerfile",
+        "Emacs Lisp"
+      ]
+    },
+    {
+      "opportunityId": "acq100-043",
+      "identity": "github.com/apache/superset",
+      "revision": "2d2e557190f94b4f1d7b826c37797c7be900f9c0",
+      "recordPath": "index/repos/github.com/apache/superset/record.toml",
+      "recordSha256": "3c7adc6662e31035a6aad93435b30355d7756cf44967e7a7cc8f24e6562a3fae",
+      "languages": [
+        "Python",
+        "TypeScript",
+        "HTML",
+        "Jupyter Notebook",
+        "JavaScript",
+        "Shell",
+        "Go Template",
+        "Dockerfile",
+        "Jinja",
+        "Makefile",
+        "CSS",
+        "Pug",
+        "Mako"
+      ]
+    },
+    {
+      "opportunityId": "acq100-044",
+      "identity": "github.com/a2aproject/a2a-python",
+      "revision": "43d1eff1b726af7a42874e212683396f62fbcaa3",
+      "recordPath": "index/repos/github.com/a2aproject/a2a-python/record.toml",
+      "recordSha256": "0e78384ec63bc840b5416b443df10b29a8cdc6a7f6a703bd7c791433e35e3894",
+      "languages": [
+        "Python",
+        "Shell",
+        "Mako"
+      ]
+    },
+    {
+      "opportunityId": "acq100-045",
+      "identity": "github.com/rubik/radon",
+      "revision": "54b88e5878b2724bf4d77f97349588b811abdff2",
+      "recordPath": "index/repos/github.com/rubik/radon/record.toml",
+      "recordSha256": "6db619c4d2496895fe480f3f24300b97a09ee9735fbb3f9a38886e318f894eec",
+      "languages": [
+        "Python",
+        "Makefile",
+        "Dockerfile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-046",
+      "identity": "github.com/kaixindelele/chatpaper",
+      "revision": "f19b3a4510c24d49a14549a41de4ad4dd32dc6c1",
+      "recordPath": "index/repos/github.com/kaixindelele/ChatPaper/record.toml",
+      "recordSha256": "ae5a37d38e9a3b88d8486da03d7fce37d38301879ee985b23816185035d9a180",
+      "languages": [
+        "Python",
+        "Jupyter Notebook",
+        "TeX",
+        "Dockerfile",
+        "Shell",
+        "Batchfile",
+        "Makefile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-047",
+      "identity": "github.com/chrisworsey55/atlas-gic",
+      "revision": "cf4349f15c9d68a67042f792973372f2e0231088",
+      "recordPath": "index/repos/github.com/chrisworsey55/atlas-gic/record.toml",
+      "recordSha256": "4a1b69be30034ca97c422ffb1fd259e40d24d3c4dc658893171602643f871474",
+      "languages": [
+        "Python"
+      ]
+    },
+    {
+      "opportunityId": "acq100-048",
+      "identity": "github.com/jack-cherish/python-spider",
+      "revision": "60b7ed839713ccf00bb30fe2b203a6b45d7459aa",
+      "recordPath": "index/repos/github.com/Jack-Cherish/python-spider/record.toml",
+      "recordSha256": "00067158418fdb80ca64ec4d98e2a7ca61d5b0660033e8b30ae1fd8dca6034f0",
+      "languages": [
+        "Python",
+        "JavaScript",
+        "HTML"
+      ]
+    },
+    {
+      "opportunityId": "acq100-049",
+      "identity": "github.com/pandas-dev/pandas",
+      "revision": "cb74e4956264b2c7c19994927e27d9c090270e72",
+      "recordPath": "index/repos/github.com/pandas-dev/pandas/record.toml",
+      "recordSha256": "9921db712827154f36341ebb68d2eacaf113a6e394809a84de6c396ba209d68b",
+      "languages": [
+        "Python",
+        "Cython",
+        "C",
+        "HTML",
+        "C++",
+        "Meson",
+        "CSS",
+        "Go Template",
+        "Shell",
+        "XSLT",
+        "Smarty"
+      ]
+    },
+    {
+      "opportunityId": "acq100-050",
+      "identity": "github.com/nginx-proxy/nginx-proxy",
+      "revision": "bff2cddfece8e4f2c6d00b62ba45b8214c4727c5",
+      "recordPath": "index/repos/github.com/nginx-proxy/nginx-proxy/record.toml",
+      "recordSha256": "4e0a8dc9f46ce8a4cfeeb5e89655ad6800c246fa77daef2cd32a3d9adef8c3d0",
+      "languages": [
+        "Python",
+        "Go Template",
+        "Shell",
+        "Makefile",
+        "HTML",
+        "Dockerfile",
+        "Procfile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-051",
+      "identity": "github.com/upscayl/upscayl",
+      "revision": "a00d55fee90e0f9435d5eaa86e76700df8199af8",
+      "recordPath": "index/repos/github.com/upscayl/upscayl/record.toml",
+      "recordSha256": "e51297c3316ac37106e45411e09e91a00e5dd46b719ee786f1c65ff0b4886055",
+      "languages": [
+        "TypeScript",
+        "JavaScript",
+        "CSS",
+        "Python",
+        "Shell"
+      ]
+    },
+    {
+      "opportunityId": "acq100-052",
+      "identity": "github.com/usebruno/bruno",
+      "revision": "874ac540a14eb1883ab359b4438487add41b8b03",
+      "recordPath": "index/repos/github.com/usebruno/bruno/record.toml",
+      "recordSha256": "6c036aafa0228528da982f6dba2b7c0918787c23fb9e88a8612b26f0a1d7634d",
+      "languages": [
+        "JavaScript",
+        "TypeScript",
+        "Bru",
+        "HTML",
+        "CSS",
+        "Shell",
+        "Dockerfile",
+        "MDX",
+        "NSIS"
+      ]
+    },
+    {
+      "opportunityId": "acq100-053",
+      "identity": "github.com/storybookjs/storybook",
+      "revision": "58001f538ae5b3328d601a4725fd443f77ea9d64",
+      "recordPath": "index/repos/github.com/storybookjs/storybook/record.toml",
+      "recordSha256": "05a663c7ad092a2e795d18ad415350ed24e7f87dcaf63984e3eea7dcfdd116c2",
+      "languages": [
+        "TypeScript",
+        "JavaScript",
+        "Svelte",
+        "MDX",
+        "Vue",
+        "CSS",
+        "HTML",
+        "Python",
+        "Shell",
+        "EJS",
+        "Pug",
+        "AppleScript",
+        "SCSS"
+      ]
+    },
+    {
+      "opportunityId": "acq100-054",
+      "identity": "github.com/cypress-io/cypress",
+      "revision": "519d66d80b0ae1bd3f9581665ce69473b82af59b",
+      "recordPath": "index/repos/github.com/cypress-io/cypress/record.toml",
+      "recordSha256": "e3eb1b94f07b08079d976306723741dd127dcb9ba0e97d0835dee1d7e530e042",
+      "languages": [
+        "TypeScript",
+        "JavaScript",
+        "Vue",
+        "HTML",
+        "SCSS",
+        "Shell",
+        "CSS",
+        "Svelte",
+        "Dockerfile",
+        "EJS"
+      ]
+    },
+    {
+      "opportunityId": "acq100-055",
+      "identity": "github.com/dailydotdev/daily",
+      "revision": "f26eebc917e80d6ca6f37e0fabb04bc755c510bc",
+      "recordPath": "index/repos/github.com/dailydotdev/daily/record.toml",
+      "recordSha256": "ef1de5bdfecab22555fb80dffd8698d3b860ba6d841c675d827e6fdf3c41f9bd",
+      "languages": [
+        "JavaScript",
+        "TypeScript"
+      ]
+    },
+    {
+      "opportunityId": "acq100-056",
+      "identity": "github.com/nestjs/nest",
+      "revision": "6ce26bc66641c27d1a17d04d91b269e7feb2502a",
+      "recordPath": "index/repos/github.com/nestjs/nest/record.toml",
+      "recordSha256": "0791f9f492397723020077989560202c65dcaf5639df99979f5ff38e3035be0d",
+      "languages": [
+        "TypeScript",
+        "JavaScript",
+        "Shell",
+        "Go Template"
+      ]
+    },
+    {
+      "opportunityId": "acq100-057",
+      "identity": "github.com/npm/cli",
+      "revision": "b34bba52a4cf068ef695eef2d698e8e01b08b841",
+      "recordPath": "index/repos/github.com/npm/cli/record.toml",
+      "recordSha256": "92dfb59adddbc05a34030dd173e2747aa6d1cc9846b6c1a8dd00f189363850a8",
+      "languages": [
+        "JavaScript",
+        "Handlebars",
+        "Shell",
+        "PowerShell",
+        "Batchfile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-058",
+      "identity": "github.com/grafana/grafana",
+      "revision": "133ef39df7deb87737150a620acf31549f378717",
+      "recordPath": "index/repos/github.com/grafana/grafana/record.toml",
+      "recordSha256": "bb542f7a3381d68b982848fef6eec5fc834e28b3bbd73b0e8f594651b68c8718",
+      "languages": [
+        "TypeScript",
+        "Go",
+        "PLpgSQL",
+        "CUE",
+        "JavaScript",
+        "Rich Text Format",
+        "HTML",
+        "MDX",
+        "Shell",
+        "CSS",
+        "Makefile",
+        "SCSS",
+        "Jsonnet",
+        "HCL",
+        "Dockerfile",
+        "Go Template",
+        "Python",
+        "Starlark",
+        "Mustache",
+        "Smarty",
+        "Ruby",
+        "PowerShell",
+        "Assembly"
+      ]
+    },
+    {
+      "opportunityId": "acq100-059",
+      "identity": "github.com/firecrawl/firecrawl",
+      "revision": "3fdaeb5b016f6195e5aba7ab389cb45cb5e8ee0d",
+      "recordPath": "index/repos/github.com/firecrawl/firecrawl/record.toml",
+      "recordSha256": "641548238112164821e806945363a6c56acd2a9fe10306944357c65ed97a4b76",
+      "languages": [
+        "TypeScript",
+        "Python",
+        "Rust",
+        "Java",
+        "PHP",
+        "Elixir",
+        "Go",
+        "C#",
+        "Ruby",
+        "Astro",
+        "PLpgSQL",
+        "Jupyter Notebook",
+        "Shell",
+        "JavaScript",
+        "Dockerfile",
+        "Rich Text Format",
+        "CSS",
+        "Makefile",
+        "HTML",
+        "Procfile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-060",
+      "identity": "github.com/lobehub/lobehub",
+      "revision": "c83244a37e8e5ff82b9f881bc51831777e69bb3a",
+      "recordPath": "index/repos/github.com/lobehub/lobehub/record.toml",
+      "recordSha256": "d1cd1fb88425094ab51acfac21c92f1c66116655e33612a747e3db195ba76fa9",
+      "languages": [
+        "TypeScript",
+        "JavaScript",
+        "Shell",
+        "HTML",
+        "PLpgSQL",
+        "Python",
+        "Objective-C++",
+        "Gherkin",
+        "Dockerfile",
+        "MDX",
+        "CSS",
+        "Jupyter Notebook",
+        "Roff",
+        "TeX",
+        "Jinja"
+      ]
+    },
+    {
+      "opportunityId": "acq100-061",
+      "identity": "github.com/microsoft/monaco-editor",
+      "revision": "fdf1ee75a63b85433a591db4e1184022cad8483b",
+      "recordPath": "index/repos/github.com/microsoft/monaco-editor/record.toml",
+      "recordSha256": "61996eb7cde91209c24c09aa9837b43e38262128703203cdbcdd6f888d347c17",
+      "languages": [
+        "JavaScript",
+        "TypeScript",
+        "HTML",
+        "CSS",
+        "SCSS",
+        "Shell"
+      ]
+    },
+    {
+      "opportunityId": "acq100-062",
+      "identity": "github.com/purifycss/purifycss",
+      "revision": "be52c1c6b1b6e287b6989428c57f05a79aa135dc",
+      "recordPath": "index/repos/github.com/purifycss/purifycss/record.toml",
+      "recordSha256": "88c4ccb575859150490184cefe2ed2203bf5c571155d4f75c5e42e0a70b30976",
+      "languages": [
+        "JavaScript",
+        "CSS",
+        "HTML"
+      ]
+    },
+    {
+      "opportunityId": "acq100-063",
+      "identity": "github.com/algorithm-visualizer/algorithm-visualizer",
+      "revision": "18de2edf6b629e843ee4bcedfa2208d22b253f0f",
+      "recordPath": "index/repos/github.com/algorithm-visualizer/algorithm-visualizer/record.toml",
+      "recordSha256": "27b9acef38a162f3f650e86323f605e37baa67c6348d77c236ab5c79c28da754",
+      "languages": [
+        "JavaScript",
+        "SCSS",
+        "HTML",
+        "Java",
+        "C++"
+      ]
+    },
+    {
+      "opportunityId": "acq100-064",
+      "identity": "github.com/ezshine/awesomesites",
+      "revision": "71bb1c7bdf5b1ea952ea9821f2b47dca7b2fa836",
+      "recordPath": "index/repos/github.com/ezshine/AwesomeSites/record.toml",
+      "recordSha256": "f8367be3b437060e5ae044ad5dc08f9bf8134f97b71dc162f0ab1bc9af64c287",
+      "languages": [
+        "JavaScript"
+      ]
+    },
+    {
+      "opportunityId": "acq100-065",
+      "identity": "github.com/xinnan-tech/xiaozhi-esp32-server",
+      "revision": "d9c2e8c5d92627b670dec57d72a07a4226a410a3",
+      "recordPath": "index/repos/github.com/xinnan-tech/xiaozhi-esp32-server/record.toml",
+      "recordSha256": "533e894095c130fdd7baf2a733e6ca37628483d814b03f3854159089c6622e9e",
+      "languages": [
+        "JavaScript",
+        "Java",
+        "Vue",
+        "Python",
+        "TypeScript",
+        "HTML",
+        "CSS",
+        "Shell",
+        "SCSS",
+        "Makefile",
+        "Lua"
+      ]
+    },
+    {
+      "opportunityId": "acq100-066",
+      "identity": "github.com/jaz303/tipsy",
+      "revision": "3545aa6ae2cfdf10f3636d2754b792524ee2bc7a",
+      "recordPath": "index/repos/github.com/jaz303/tipsy/record.toml",
+      "recordSha256": "0354fb56150dc93c5929c7102a7789ae03c37baa25562596d0a248880e22ded4",
+      "languages": [
+        "JavaScript",
+        "Ruby"
+      ]
+    },
+    {
+      "opportunityId": "acq100-067",
+      "identity": "github.com/cloudflare/moltworker",
+      "revision": "7b00c1d7292190f2327e93bdcc7a0eabb0a26123",
+      "recordPath": "index/repos/github.com/cloudflare/moltworker/record.toml",
+      "recordSha256": "456d8d0bd086bda3d1a4a7bc8894546ceb620a2481b14fdfebf9559663430842",
+      "languages": [
+        "TypeScript",
+        "Shell",
+        "JavaScript",
+        "HTML",
+        "CSS",
+        "HCL",
+        "Dockerfile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-068",
+      "identity": "github.com/strapi/strapi",
+      "revision": "378fb73ea50d7a28e3b5f03d050e2f88dffdf905",
+      "recordPath": "index/repos/github.com/strapi/strapi/record.toml",
+      "recordSha256": "37063fc6fa9334d3562655ea3cbe333f7b8f11280f239057ad6008daaaa82f8d",
+      "languages": [
+        "TypeScript",
+        "JavaScript",
+        "Handlebars",
+        "Shell",
+        "MDX",
+        "HTML",
+        "CSS"
+      ]
+    },
+    {
+      "opportunityId": "acq100-069",
+      "identity": "github.com/moment/moment",
+      "revision": "c2a703a4d84aa57ee2722ff8fb4a8016279fb3c4",
+      "recordPath": "index/repos/github.com/moment/moment/record.toml",
+      "recordSha256": "3ead5e6db6a3a0696194b7e025f9b8e1b7b6284f2ba57132229a60c62443e9b4",
+      "languages": [
+        "JavaScript",
+        "TypeScript",
+        "Shell"
+      ]
+    },
+    {
+      "opportunityId": "acq100-070",
+      "identity": "github.com/typeorm/typeorm",
+      "revision": "5bdc67882dee5a02d975d5ed140c9c3f91661116",
+      "recordPath": "index/repos/github.com/typeorm/typeorm/record.toml",
+      "recordSha256": "03fe5f65ecde1b70152d1ee921f6fee04344f09a1be6616e6afc1569e6e7d90d",
+      "languages": [
+        "TypeScript",
+        "JavaScript",
+        "Shell"
+      ]
+    },
+    {
+      "opportunityId": "acq100-071",
+      "identity": "github.com/tencent/wujie",
+      "revision": "c45932998c0602f34454df8d3e29f4d33a38446a",
+      "recordPath": "index/repos/github.com/Tencent/wujie/record.toml",
+      "recordSha256": "a2a23836d0fcf416d3789a14b216760a16cb39a3fb26c9d89225c67d9d0bf20e",
+      "languages": [
+        "TypeScript",
+        "JavaScript",
+        "Shell"
+      ]
+    },
+    {
+      "opportunityId": "acq100-072",
+      "identity": "github.com/chaitin/pandawiki",
+      "revision": "0b26db72ceb2f0f053a5c48b44546d7a342caacb",
+      "recordPath": "index/repos/github.com/chaitin/PandaWiki/record.toml",
+      "recordSha256": "2e88da8233a9c7caa709946bf5c391d636de619293cc1950fc2be1c4e9b1f5bb",
+      "languages": [
+        "TypeScript",
+        "Go",
+        "CSS",
+        "JavaScript",
+        "EJS",
+        "Makefile",
+        "HTML",
+        "Dockerfile",
+        "Shell"
+      ]
+    },
+    {
+      "opportunityId": "acq100-073",
+      "identity": "github.com/vercel/next.js",
+      "revision": "7812b0316419a63c0d22cbed2f0c3d499ad376e5",
+      "recordPath": "index/repos/github.com/vercel/next.js/record.toml",
+      "recordSha256": "1940049d8698cbf7e37838e0fadd4b73039cc4a1c7b1e138024feb8c9ad1eb83",
+      "languages": [
+        "JavaScript",
+        "TypeScript",
+        "Rust",
+        "MDX",
+        "CSS",
+        "Shell",
+        "Python",
+        "SCSS",
+        "Dockerfile",
+        "C++",
+        "HTML",
+        "Batchfile",
+        "WebAssembly",
+        "Sass",
+        "Pug"
+      ]
+    },
+    {
+      "opportunityId": "acq100-074",
+      "identity": "github.com/prisma/orm",
+      "revision": "02796bd2204cd6b4a5602380857cf4f12ff66ad7",
+      "recordPath": "index/repos/github.com/prisma/orm/record.toml",
+      "recordSha256": "1e2881ae2553a57c7f5d9ecbd9121245e1657ed26ea879caa10b5eefc2d99e92",
+      "languages": [
+        "TypeScript",
+        "JavaScript",
+        "HTML"
+      ]
+    },
+    {
+      "opportunityId": "acq100-075",
+      "identity": "github.com/typecellos/blocknote",
+      "revision": "736e9eada54005567a64739e36ca6e38515cc1bd",
+      "recordPath": "index/repos/github.com/TypeCellOS/BlockNote/record.toml",
+      "recordSha256": "e5ffc67d8992a711178a1bea8ea18964044bd2398e4c4ec0a0f84e276ca5435b",
+      "languages": [
+        "TypeScript",
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Shell",
+        "Typst",
+        "Rust",
+        "Dockerfile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-076",
+      "identity": "github.com/gcla/termshark",
+      "revision": "e8a1ec6e4f2d517f646d3bba35a2ec4926e0202c",
+      "recordPath": "index/repos/github.com/gcla/termshark/record.toml",
+      "recordSha256": "03009e8cfe070f729d01f7764807ead8acdf42c083d959d51873917909b8dac8",
+      "languages": [
+        "Go",
+        "Shell"
+      ]
+    },
+    {
+      "opportunityId": "acq100-077",
+      "identity": "github.com/alistgo/alist",
+      "revision": "92e745360766cce32564f94a468cb576f577d27e",
+      "recordPath": "index/repos/github.com/AlistGo/alist/record.toml",
+      "recordSha256": "089b53bd3fbcac3f0d1b5627c8fe7e8c2ce5ec276f8f2e44c759f937a6020b06",
+      "languages": [
+        "Go",
+        "Shell",
+        "Dockerfile",
+        "Makefile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-078",
+      "identity": "github.com/syncthing/syncthing",
+      "revision": "ed38528d7fba3dd6a42c9c9fc6780af432dc15d2",
+      "recordPath": "index/repos/github.com/syncthing/syncthing/record.toml",
+      "recordSha256": "20e8529847c628fb27c928ac805601ff1a04bbcd5f07f06d687771ebf1c087ab",
+      "languages": [
+        "Go",
+        "HTML",
+        "JavaScript",
+        "Shell",
+        "CSS",
+        "Dockerfile",
+        "Ruby",
+        "PowerShell",
+        "Batchfile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-079",
+      "identity": "github.com/ollama/ollama",
+      "revision": "f067033f9126993b6172bdfffa71a74ad693fda4",
+      "recordPath": "index/repos/github.com/ollama/ollama/record.toml",
+      "recordSha256": "caf9870c65a8dcd1bbcaeef8d5ec979b88e83d748de77d954b90e4e2c5fb87fa",
+      "languages": [
+        "Go",
+        "C",
+        "TypeScript",
+        "C++",
+        "Objective-C",
+        "CMake",
+        "PowerShell",
+        "Shell",
+        "Dockerfile",
+        "Inno Setup",
+        "Go Template",
+        "HTML",
+        "CSS",
+        "AppleScript",
+        "JavaScript"
+      ]
+    },
+    {
+      "opportunityId": "acq100-080",
+      "identity": "github.com/golangci/golangci-lint",
+      "revision": "7ecd7409d12a4ab0d3f02f6b1e6efa5121b4a39f",
+      "recordPath": "index/repos/github.com/golangci/golangci-lint/record.toml",
+      "recordSha256": "793940a9896d608480f287b707d95198527d3741444a32c80608129cdea2159d",
+      "languages": [
+        "Go",
+        "Shell",
+        "Makefile",
+        "Dockerfile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-081",
+      "identity": "github.com/gohugoio/hugo",
+      "revision": "de8237b618957f78af787a945226169be00743fe",
+      "recordPath": "index/repos/github.com/gohugoio/hugo/record.toml",
+      "recordSha256": "13ef1bdf60b8371070bb123b6f3e86d476ec51828c467aefbf325359a441a4a8",
+      "languages": [
+        "Go",
+        "C",
+        "JavaScript",
+        "HTML",
+        "Makefile",
+        "Shell",
+        "Dockerfile",
+        "Go Template",
+        "CSS"
+      ]
+    },
+    {
+      "opportunityId": "acq100-082",
+      "identity": "github.com/gogs/gogs",
+      "revision": "dbbd717e923694c36f41b0360515b4374bbe6ee0",
+      "recordPath": "index/repos/github.com/gogs/gogs/record.toml",
+      "recordSha256": "69b2a9e7c25d0d18ad74f758c2018e74473c2f5c0bce7bb281cfd6e91bc52e07",
+      "languages": [
+        "Go",
+        "Go Template",
+        "TypeScript",
+        "Less",
+        "JavaScript",
+        "Shell",
+        "CSS",
+        "Dockerfile",
+        "HTML",
+        "Batchfile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-083",
+      "identity": "github.com/filosottile/mkcert",
+      "revision": "1c1dc4ed27ed5936046b6398d39cab4d657a2d8e",
+      "recordPath": "index/repos/github.com/FiloSottile/mkcert/record.toml",
+      "recordSha256": "23c149ea86b4057a0610606fc0a06f1177da395a2c506dd481e1e61bfab03a2f",
+      "languages": [
+        "Go"
+      ]
+    },
+    {
+      "opportunityId": "acq100-084",
+      "identity": "github.com/google/cadvisor",
+      "revision": "c57813afc32715351dff34ab76a6164bcb0e5c9d",
+      "recordPath": "index/repos/github.com/google/cadvisor/record.toml",
+      "recordSha256": "5ef7c6999ed34e20eebe7c122f568d8093d2a7ca820d14a0dd4f13400eda3b7f",
+      "languages": [
+        "Go",
+        "Shell",
+        "JavaScript",
+        "HTML",
+        "Python",
+        "Makefile",
+        "Dockerfile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-085",
+      "identity": "github.com/cli/cli",
+      "revision": "f7a06a18a91eef5c0b218b549dab64b86f36f8b9",
+      "recordPath": "index/repos/github.com/cli/cli/record.toml",
+      "recordSha256": "a2445e50ccc69a363de70286628230d3b3665c895ddcc89f3b38846e8a4aab1b",
+      "languages": [
+        "Go",
+        "Shell",
+        "Makefile",
+        "PowerShell",
+        "Batchfile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-086",
+      "identity": "github.com/johnkerl/miller",
+      "revision": "d035f6f56e4321ef0a07636614f4168c19bfe558",
+      "recordPath": "index/repos/github.com/johnkerl/miller/record.toml",
+      "recordSha256": "56f7820a67b8106f9b317f0e34e609e654733ba17f85d3df4ebadd477e552517",
+      "languages": [
+        "Go",
+        "Shell",
+        "Python",
+        "Ruby",
+        "Zig",
+        "C",
+        "Rust",
+        "C++",
+        "Vim Script",
+        "Makefile",
+        "Nim",
+        "D",
+        "Batchfile",
+        "ASL"
+      ]
+    },
+    {
+      "opportunityId": "acq100-087",
+      "identity": "github.com/notifuse/notifuse",
+      "revision": "f635aa09c1050c2df1e8f7b7a0dd6e516019b146",
+      "recordPath": "index/repos/github.com/Notifuse/notifuse/record.toml",
+      "recordSha256": "b505aaeb529123d8f8e9f0bd95797df8cb551bf468f8a40c97b87d22c64b3ba4",
+      "languages": [
+        "Go",
+        "TypeScript",
+        "HTML",
+        "CSS",
+        "Shell",
+        "JavaScript",
+        "Makefile",
+        "Dockerfile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-088",
+      "identity": "github.com/cockroachdb/cockroach",
+      "revision": "d30c905fff79ef825adc96bcc647f1872a90f2ff",
+      "recordPath": "index/repos/github.com/cockroachdb/cockroach/record.toml",
+      "recordSha256": "85dbb1abe1251a46c713e3652a43ef88bf52bcd3d7eb7555f9f1513867798d51",
+      "languages": [
+        "Go",
+        "TypeScript",
+        "Starlark",
+        "Shell",
+        "Yacc",
+        "SCSS",
+        "Tcl",
+        "Python",
+        "C",
+        "HTML",
+        "C++",
+        "JavaScript",
+        "HCL",
+        "Go Template",
+        "Ruby",
+        "Dockerfile",
+        "Vim Script",
+        "Awk",
+        "Makefile",
+        "Assembly",
+        "CSS"
+      ]
+    },
+    {
+      "opportunityId": "acq100-089",
+      "identity": "github.com/lc/gau",
+      "revision": "4eabace309877abb231def9eeb27b96c07ed3635",
+      "recordPath": "index/repos/github.com/lc/gau/record.toml",
+      "recordSha256": "43b5c828b35ff5c65c335990461fd3659fa59721552dd274eab7be7e6c6a10f6",
+      "languages": [
+        "Go",
+        "Dockerfile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-090",
+      "identity": "github.com/livekit/livekit",
+      "revision": "6db4a7ab8c6a66bc2033e45934917948fb0bf54e",
+      "recordPath": "index/repos/github.com/livekit/livekit/record.toml",
+      "recordSha256": "a9c85995edb378f63cd0935c9f955419441e74abb07d70f5152704ede6f60ed9",
+      "languages": [
+        "Go",
+        "Dockerfile",
+        "Shell"
+      ]
+    },
+    {
+      "opportunityId": "acq100-091",
+      "identity": "github.com/gin-gonic/gin",
+      "revision": "0f09c3a9b4626d9fe9979cf4d0521d6ae32ab646",
+      "recordPath": "index/repos/github.com/gin-gonic/gin/record.toml",
+      "recordSha256": "9a393cc730b6dd3ba908e9fd5984f23e2acc40a398cbd6607d483177ecd5f70a",
+      "languages": [
+        "Go",
+        "Makefile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-092",
+      "identity": "github.com/containerd/containerd",
+      "revision": "43aa4ea134f3e50791b8537c48a18303f0fcc775",
+      "recordPath": "index/repos/github.com/containerd/containerd/record.toml",
+      "recordSha256": "894fbc5748ca0e62c4370522f342ff5fd5fdd507d6ae49d17fd532e230113b67",
+      "languages": [
+        "Go",
+        "Shell",
+        "Makefile",
+        "PowerShell",
+        "jq",
+        "Dockerfile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-093",
+      "identity": "github.com/francoismichel/ssh3",
+      "revision": "5b4b242db02a5cfbb9ebf9dfc5aad2c32e10f245",
+      "recordPath": "index/repos/github.com/francoismichel/ssh3/record.toml",
+      "recordSha256": "63fdc901a9f9e81023de5a53577e303d3f6554a04a947517ae6b858a5442c07b",
+      "languages": [
+        "Go",
+        "Makefile",
+        "Shell"
+      ]
+    },
+    {
+      "opportunityId": "acq100-094",
+      "identity": "github.com/jesseduffield/lazygit",
+      "revision": "4e1eebe278790f257a875da6633234391a5a85b3",
+      "recordPath": "index/repos/github.com/jesseduffield/lazygit/record.toml",
+      "recordSha256": "ec2723454250bb937f9944831f7d2178817703ac0a83aba54a5f723c0d0e0522",
+      "languages": [
+        "Go",
+        "Shell",
+        "Nix",
+        "Just",
+        "Makefile",
+        "Dockerfile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-095",
+      "identity": "github.com/milvus-io/milvus",
+      "revision": "0a849c840f599c0c5a7f6066db805c232ebac19b",
+      "recordPath": "index/repos/github.com/milvus-io/milvus/record.toml",
+      "recordSha256": "986c81960f7ac8d2804df7238a1aabdc8c84e6a65ec0350cdffb9ff2de94a5b1",
+      "languages": [
+        "Go",
+        "C++",
+        "Python",
+        "Shell",
+        "Groovy",
+        "C",
+        "HTML",
+        "CMake",
+        "Dockerfile",
+        "Makefile",
+        "ANTLR",
+        "Batchfile",
+        "Assembly"
+      ]
+    },
+    {
+      "opportunityId": "acq100-096",
+      "identity": "github.com/ibm/fp-go",
+      "revision": "42e25c64425e2291bd5b281aa852b7a790526204",
+      "recordPath": "index/repos/github.com/IBM/fp-go/record.toml",
+      "recordSha256": "38c6f9763d2b4da5f9e6d8fcbdc1e78a54ae31d059fb14c75c192dcb892e7f54",
+      "languages": [
+        "Go",
+        "Batchfile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-097",
+      "identity": "github.com/hashicorp/terraform",
+      "revision": "ae75cbe434a7dbcca310b11f6b5d9bc5dfdb3380",
+      "recordPath": "index/repos/github.com/hashicorp/terraform/record.toml",
+      "recordSha256": "647bfe47ce9e7407144ebcac1e5a9db66e80a3460d5c58efba5916f1c1995e3c",
+      "languages": [
+        "Go",
+        "HCL",
+        "Shell",
+        "Dockerfile",
+        "Makefile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-098",
+      "identity": "github.com/nektos/act",
+      "revision": "4f411281417e88660bea1c1a1749aa71ae0bd60f",
+      "recordPath": "index/repos/github.com/nektos/act/record.toml",
+      "recordSha256": "a6fe109719cb0fcbca4baad18997bcfb7a3b9811610508ea555435e667f951b8",
+      "languages": [
+        "Go",
+        "JavaScript",
+        "Shell",
+        "Makefile"
+      ]
+    },
+    {
+      "opportunityId": "acq100-099",
+      "identity": "github.com/tilt-dev/tilt",
+      "revision": "f3acf27d8459924249776d72a82e1d5d99139c33",
+      "recordPath": "index/repos/github.com/tilt-dev/tilt/record.toml",
+      "recordSha256": "b395c8d44068315531e15397d1cf88b33aaa81f239399b92bd21ea0bbf6a98db",
+      "languages": [
+        "Go",
+        "TypeScript",
+        "Python",
+        "Shell",
+        "SCSS",
+        "Dockerfile",
+        "Makefile",
+        "Starlark",
+        "PowerShell",
+        "HTML",
+        "JavaScript"
+      ]
+    },
+    {
+      "opportunityId": "acq100-100",
+      "identity": "github.com/moby/moby",
+      "revision": "9cad7b0b9f45c27bf6a961006392acff63817931",
+      "recordPath": "index/repos/github.com/moby/moby/record.toml",
+      "recordSha256": "9b9acc0916203367ae6d2044ab42f6b6df188624a9b07be74eab7fc6cb723429",
+      "languages": [
+        "Go",
+        "Shell",
+        "Dockerfile",
+        "PowerShell",
+        "Lua",
+        "Go Template",
+        "Makefile",
+        "Python",
+        "C",
+        "HCL",
+        "Assembly"
+      ]
+    }
+  ]
+}

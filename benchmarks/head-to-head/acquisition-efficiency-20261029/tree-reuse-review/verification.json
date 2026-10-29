@@ -1,0 +1,38 @@
+{
+  "state": "independent-bounded-tree-reuse-checks-pass",
+  "base": "9fe76b4d08e44db3b4563281b82054674101dacc",
+  "baseGithubSha256": "98dc36c7daed98e03fc33fa0ddf80919bb360b383320d4e9ecfdac40b45a0b08",
+  "authorFreezeSha256": "0b719e2fc41d3560f23e1c82ad46fe69d3c5d4d4ca76a496de75789366dbf654",
+  "authorArtifacts": 10,
+  "currentFiles": [
+    {
+      "path": "crates/dotrepo-crawler/src/github.rs",
+      "bytes": 56185,
+      "sha256": "b5a8dd3ea5c8c7217268aed3b6a27ee4034d87fe1a629a0cb87d307b4a5cd3bb"
+    },
+    {
+      "path": "crates/dotrepo-crawler/src/github/tree_reuse_tests.rs",
+      "bytes": 12632,
+      "sha256": "9cb13bd8a6cfc8b7056c833912e9d4aab77c224e3d710a999f9e42fc2c1d361e"
+    }
+  ],
+  "focusedCommand": [
+    "cargo",
+    "test",
+    "--locked",
+    "--offline",
+    "-p",
+    "dotrepo-crawler",
+    "github::",
+    "--",
+    "--nocapture"
+  ],
+  "focusedTestsPassed": 19,
+  "newLocalhostTests": 7,
+  "focusedLogSha256": "87584e95f6173f4b5ae8f5a2ed5779bb2eb19c379282e235e51897900ad4e2b0",
+  "sourceChecks": "One local empty cache per fetch_repository_files; same immutable invocation repository/reference; Some decodedsuccess reused; None404 and propagatedErr not memoized. All selector/rank/limit/root/raw/workflow order logic remains unchanged in source diff.",
+  "externalGitHubProviderUpstreamNativeOrWritebackActions": 0,
+  "ownedLocalhostHttpFixtures": true,
+  "live100ComparisonPerformed": false,
+  "reviewerMetadataCorrection": "Initial one-off checker assumed artifacts map; author freeze uses files list. Corrected schema inspection; no author-integrity failure."
+}

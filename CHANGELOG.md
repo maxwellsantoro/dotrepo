@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- Reuse a successfully decoded recursive Git tree across language-specific
+  discovery within one repository-file fetch. Preserve lazy requests, uncached
+  404 fallback opportunities, selection and invocation boundaries; retain owned
+  HTTP parity controls and the separately frozen 100-repository comparison
+  inputs. The full empirical efficiency comparison remains open.
+- Clarify unit-cost report attribution: status advancement is a proxy,
+  refresh-planning/head costs are excluded, and advertised Content-Length bytes
+  are not complete transfer measurements. Preserve existing numeric telemetry.
 - Record a C1 launch-feasibility no-go with an independently reviewed twelve-task
   readiness matrix and six deduplicated shared gate groups. Retain the fixed
   captured-profile diagnostic: five hits, seven misses and zero established

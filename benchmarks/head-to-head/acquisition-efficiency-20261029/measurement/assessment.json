@@ -1,0 +1,97 @@
+{
+  "identity": "acquisition100-read-only-measurement-assessment-v1",
+  "assessedAt": "2026-10-29T15:25:15.785849+00:00",
+  "base": "9fe76b4d08e44db3b4563281b82054674101dacc",
+  "cohort": {
+    "freezePath": "/tmp/dotrepo-acquisition100-cohort-20261029/FREEZE.json",
+    "freezeSha256": "e91743d1f238f91f70c1637609effb1e172449091897a304b1345ab94990572b",
+    "cohortPath": "/tmp/dotrepo-acquisition100-cohort-20261029/cohort.json",
+    "cohortSha256": "30299636a76494a8a27f1f64621e49977fa1e09a7c7dbedc0e2ae7adb2e61c61",
+    "count": 100,
+    "revisions": "frozen recorded40hexSHAs; not freshly resolved; do not replace failures"
+  },
+  "existingMethod": {
+    "exactRevisionSeam": "GitHubClient::fetch_repository_files(&RepositoryRef, &str /* recorded SHA */, &languages)",
+    "exampleCallOwner": "pipeline/mod.rs83-94",
+    "visibility": "pub(crate) trait/client/file acquisition, confirmed by assigned github.rs owner; usable from one first-party in-crate ignored test/helper, not external crate",
+    "publicCliForFrozenRevisions": false,
+    "productionRevisionFlagNeeded": false,
+    "whole100HelperExistsOrExecuted": false,
+    "closestCurrentHeadCli": [
+      "<frozen prebuilt dotrepo-crawler>",
+      "crawl",
+      "--index-root",
+      "<fresh empty scratch index>",
+      "--host",
+      "github.com",
+      "--owner",
+      "<owner>",
+      "--repo",
+      "<repo>",
+      "--generated-at",
+      "<fixedRFC3339>",
+      "--json"
+    ],
+    "cliLimits": "No --write/--synthesize. This captures current HEAD, not the cohort revision; --source-url is not a revision selector. seed --targets-file --limit100 --dry-run is no-write but also current-head and loses individual cost fields.",
+    "disabledModelEnvironment": {
+      "INDEX_MAX_ADJUDICATION_CALLS": "0",
+      "DOTREPO_ADJUDICATION_URL": "absent",
+      "DOTREPO_ADJUDICATION_SECOND_OPINION_URL": "absent",
+      "DOTREPO_ADJUDICATION_API_URL": "absent",
+      "DOTREPO_SYNTHESIS_URL": "absent"
+    },
+    "doNotUse": [
+      "run_autonomous_index_batch.py: invokes --write and retained telemetry/regression outputs",
+      "refresh_stale_index.py: invokes --write",
+      "recrawl-batch.sh: invokes --write"
+    ]
+  },
+  "minimalExperimentPath": [
+    "ONE experiment-only in-crate helper invokes the existing explicit-SHA file-acquisition API for all100 frozen identities on baseline and revised sources; no production CLI/API extension or separate acquisition platform.",
+    "Use the same frozen language-map input for both variants. Cohort currently records primary language, not a demonstrated full languages map. If no retained map exists, capture the metadata/language prelude once under separate authorization, retain it, charge its requests/bytes/time, and replay identical inputs to both variants. Do not silently fetch current HEAD files or invent language-byte counts.",
+    "Keep client source selection/file acquisition unchanged apart from the reviewed successful-tree reuse delta. No importer/writeback/model/native project execution is needed for the acquisition-only comparison.",
+    "Use a prebuilt baseline/revised helper with exact source/binary hashes; exclude compilation from acquisition timings and retain it separately. Retain each requested identity, exactSHA, variant, status/error/budget-stop, fetched paths/content hashes and metrics; all100 stay in denominator.",
+    "Record paired per-repository results and full100 totals; retained failures/timeouts/403/404/absent files are outcomes, not reasons to replace cohort rows. An incomplete bounded attempt leaves the full100 empirical goal pending."
+  ],
+  "existingMeasurements": {
+    "http": "Crawl report NetworkUsage supplies received-response count and advertised Content-Length u64 according to owning contract; it is not full attempted HTTP/body/wire accounting. Code-owner confirms missing header becomes0 and transport failures are not counted as received responses.",
+    "wall": "cmd_crawl wallTimeMs covers crawl internals; totalWallTimeMs covers command logic up to report construction, before JSON serialization/CLI teardown. Python commandWallTimeMs includes process startup/cargo when used. Use outer prebuilt-helper elapsed for batch totals and per-phase clocks for attribution.",
+    "cpu": "process_resources RUSAGE_CHILDREN delta is suitable for serialized child measurements, not overlapping children in one orchestrator. Sampler ps subprocess costs can also enter those global child deltas; disclose instrumentation overhead.",
+    "memory": "best-effort process-group RSS via ps every0.2s, can miss short peaks and returns null when unavailable; not exact peak/cgroup maximum. Existing helper has no hard deadline/output cap.",
+    "planning": "refresh-plan reports aggregate totalWallTimeMs but no network/CPU/RSS. Autonomous unchanged rows zero only downstream crawl cost after live head/planning work; unit report excludes that phase.",
+    "coldWarm": "No existing controlled cold/warm measurement protocol. Fresh HttpGitHubClient per repository invocation resets an invocation-local tree cache; reused successful tree within that invocation is the delta. A second whole process is not a warmed version of that map. OS/DNS/TLS/CDN state remains external/uncontrolled unless explicitly observed."
+  },
+  "minimumMeasurementGap": [
+    "Durable per-attempt HTTP ledger covering successes, non-successes, transport failures and retries; distinguish attempted requests from received responses, and actual decoded body bytes from Content-Length/unknown wire bytes. Account partial/capped bodies and failures before abort.",
+    "Expose acquisition-phase wall/accounting and flush totals on errors, plus metadata/planning prelude totals. Current crawl success-only network report and zero-skip aggregates cannot reconstruct missing costs.",
+    "Enforce declared request/body/time/output stop budgets around the existing API and retain partial100 ledger; do not treat posthoc totals as enforced bounds."
+  ],
+  "proposedBoundsBeforeAnyLiveAuthorization": {
+    "scope": "all100 identities, baseline+revised =200 planned repository acquisitions, no replacement; one measured pair each initially, no automatic warm-repeat campaign",
+    "concurrency": 1,
+    "wallSecondsTotal": 1800,
+    "wallSecondsPerRepositoryInvocation": 90,
+    "httpAttemptCeilingTotal": 10000,
+    "httpAttemptCeilingPerInvocation": 128,
+    "quotaRule": "actual total also <=observed available readonly GitHub quota minus500 reserved requests; quota check itself charged. If below required work, stop and retain incomplete, no credential/rate-limit escalation.",
+    "decodedBodyBytesTotal": 1073741824,
+    "decodedBodyBytesPerInvocation": 16777216,
+    "retainedLedgerAndDisplayBytes": 67108864,
+    "existingHttpBehavior": "owner reports30s request/10s connect and3rate-limit retries; all retries count; no new retry/backoff policy; outer absolute deadline must stop the experiment even if existing retry behavior would wait longer.",
+    "enforcedToday": false,
+    "sufficiencyToComplete100Established": false,
+    "interpretation": "These are prospective finite stop ceilings, not a10\u201315request target or a claim all100 fit. Root decides authorization/bounds before live acquisition; reaching a cap retains noncompletion and leaves full100 comparison required."
+  },
+  "deltaInterpretation": "Successful per-invocation tree reuse may remove duplicate successful tree HTTP fetches only.404 is not cached. Leaf/body fetches, failures, metadata/language work and parsing remain; owned unit cases cannot establish10\u201315requests/repository or full100 costs.",
+  "unitCostInterpretationCorrectionSupported": true,
+  "limits": [
+    "Read-only source/metadata assessment; no github.rs implementation inspection duplicated. Its API visibility/counter/timeout facts are attributed to the assigned owner confirmation.",
+    "No live requests, source acquisition, model/provider calls, records/writeback, upstream native workloads or code changes.",
+    "Current frozen100 recordedSHAs are not claimed freshly valid or fetchable.",
+    "No F05 environment task, new platform, general protocol, model selection or implementation authorization."
+  ],
+  "liveBaselineAuthorized": false,
+  "implementationAuthorizedByThisAssessment": false,
+  "providerCalls": 0,
+  "upstreamExecution": false
+}

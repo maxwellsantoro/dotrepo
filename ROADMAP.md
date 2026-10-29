@@ -427,6 +427,12 @@ failures and fallback. The proposed 10–15 requests and roughly two seconds per
 recrawl are targets to test, not achieved values; establish the measured baseline
 first. Accept an optimization only without extraction/evidence regressions.
 This experiment does not gate F-05 and authorizes no larger indexing cohort.
+The [bounded acquisition packet](benchmarks/head-to-head/acquisition-efficiency-20261029/README.md)
+freezes that 100-repository population and recorded language inputs, and retains
+an independently reviewed invocation-local tree-reuse change. Owned controls
+are not the full empirical comparison: exact-SHA execution, bounded actual-byte
+and failure accounting, planning cost, cache conditions and extraction parity
+still need their measured results. The current-head CLI is not a substitute.
 
 Keep production inference pinned while evaluating alternatives. Separate schema
 compatibility, grounded task quality and production eligibility. A recurring,
