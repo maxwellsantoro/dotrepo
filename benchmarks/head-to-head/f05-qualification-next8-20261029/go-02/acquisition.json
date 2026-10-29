@@ -1,0 +1,60 @@
+{
+  "task": {
+    "id": "go-02",
+    "repository": "github.com/beego/beego",
+    "revision": "939cfde380bb9f15844ad633b84f037f7da21584",
+    "ecosystem": "Go",
+    "scope": "component",
+    "startingState": "local-checkout",
+    "component": "client/cache",
+    "request": "requests/go-02.md",
+    "gold": "curator/gold/go-02.json",
+    "oracle": "curator/oracles/go-02.json",
+    "enrollmentRationale": "Maintainer README names cache as an owned module; package documentation fixes its physical client/cache path and tests exist in it and its memcache/redis/ssdb backends. It is lexical before other client modules and core/server/task paths."
+  },
+  "state": "source-acquired",
+  "indexConsulted": false,
+  "modelCalls": 0,
+  "upstreamProjectCodeExecuted": false,
+  "costUsd": null,
+  "sourceAcquisitionLimits": {
+    "compressedBytes": 536870912,
+    "expandedSourceBytes": 1073741824,
+    "expandedTrancheBytes": 2147483648,
+    "fileBytes": 134217728,
+    "filesTranche": 200000
+  },
+  "costExclusions": [
+    "No metered host/container/download charge source."
+  ],
+  "scratch": "/tmp/dotrepo-f05-qualification-next8-20261029/go-02",
+  "partialExpandedBytes": 2084097,
+  "compressedGitObjectBytes": 626234,
+  "completeGitObjectsAcquired": true,
+  "sourceFiles": 401,
+  "sourceBytes": 2084097,
+  "symlinks": {},
+  "missingSubmodules": {},
+  "missingLfsObjects": [],
+  "frozenInspectedFilesMatched": [
+    "README.md",
+    "CONTRIBUTING.md",
+    "go.mod",
+    "Makefile",
+    "client/cache/cache.go",
+    "scripts/test_docker_compose.yaml",
+    "client/cache/cache_test.go",
+    ".github/workflows/test.yml",
+    "client/cache/memcache/memcache_test.go",
+    "client/cache/redis/redis_test.go",
+    "client/cache/ssdb/ssdb_test.go"
+  ],
+  "archivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/go-02/source.tar",
+  "archiveSha256": "7704106da11aef67bad7e0a9a4964f1d2e9a3f072511e585e677aa48f5016220",
+  "archiveBytes": 2406400,
+  "compressedArchivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/go-02/source.tar.gz",
+  "compressedArchiveSha256": "96305b276335bc85a94f0d2d7e2d346aa57c91c6e668d82bbdc0511bd8614358",
+  "compressedArchiveBytes": 431479,
+  "sourceBundleReady": true,
+  "elapsedSeconds": 1.1542424170766026
+}

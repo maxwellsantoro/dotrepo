@@ -1,0 +1,24 @@
+{
+  "result": "passed",
+  "cacheAudit": "bounded structural/package-origin/recorded-command/protected-alias audit passed; no descriptor promotion",
+  "imageAbsence": "construction provenance + visible runtime path controls, not exhaustive layer/credential audit",
+  "nativeReceiptBindings": 90,
+  "runtimeAmendmentSha256": "43fa2f0a18802564934646db5fa80e75c0ced3856b07df8b72d5a27fda2b84c3",
+  "syntheticAliasCasesAfter": 8,
+  "runtimeFocusedOutputSha256": "f640dc2ec06f41f45b2253e7bf290d078fc85eda1fc226d6a7bbf0c4ebc8ab3c",
+  "ruffCheck": "passed for4review scripts",
+  "ruffFormatCheck": "passed for4review scripts",
+  "diffCheck": "passed",
+  "descriptorFlagsChanged": false,
+  "all12EnvironmentEquivalence": false,
+  "offlineCompletenessQualified": false,
+  "paidOrProviderCalls": 0,
+  "networkOrDockerCalls": 0,
+  "limitations": [
+    "No exhaustive image-rootfs inventory or credential semantic proof.",
+    "Future access/policy/consumer/scorer artifacts not yet in protected digest-only set.",
+    "npm lock @babel/runtime7.29.7 lacks source integrity.",
+    "Source overlaps include legitimate license/empty/distributed dependency assets.",
+    "Original fixture failure from root is not used as valid reproduction evidence."
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "result": "pass",
+  "qualificationFilesVerified": 16,
+  "runtimeSha256": "f2f43560d85d2d1934b6f84bba26951d1cee81d8fe08e291c600a89754f850ab",
+  "controls": [
+    {
+      "case": "nested-dir-chain",
+      "result": "accepted",
+      "resolved": {
+        "path": "a/deep/file",
+        "type": "regular"
+      }
+    },
+    {
+      "case": "sibling-dir-alias",
+      "result": "accepted",
+      "resolved": {
+        "path": "b",
+        "type": "directory"
+      }
+    },
+    {
+      "case": "regular-trailing-slash",
+      "result": "rejected",
+      "reason": "source link traverses regular file"
+    },
+    {
+      "case": "regular-dot",
+      "result": "rejected",
+      "reason": "source link traverses regular file"
+    },
+    {
+      "case": "regular-dotdot",
+      "result": "rejected",
+      "reason": "source link traverses regular file"
+    },
+    {
+      "case": "root-dir-alias",
+      "result": "rejected",
+      "reason": "source directory link cycle"
+    },
+    {
+      "case": "nested-ancestor-alias",
+      "result": "rejected",
+      "reason": "source directory link cycle"
+    },
+    {
+      "case": "three-dir-cycle",
+      "result": "rejected",
+      "reason": "source directory link cycle"
+    },
+    {
+      "case": "link-chain-root-escape",
+      "result": "rejected",
+      "reason": "source link escapes repository"
+    },
+    {
+      "case": "regular-under-link",
+      "result": "rejected",
+      "reason": "source member under non-directory"
+    },
+    {
+      "case": "duplicate-directory",
+      "result": "rejected",
+      "reason": "duplicate source member"
+    },
+    {
+      "case": "transport-failure-0",
+      "submittedBytes": 0,
+      "phases": 0,
+      "exitCode": 1
+    },
+    {
+      "case": "transport-failure-1",
+      "submittedBytes": 10240,
+      "phases": 1,
+      "exitCode": 1
+    },
+    {
+      "case": "transport-failure-2",
+      "submittedBytes": 20480,
+      "phases": 2,
+      "exitCode": 1
+    },
+    {
+      "case": "transport-failure-None",
+      "submittedBytes": 20480,
+      "phases": 2,
+      "exitCode": 0
+    }
+  ],
+  "actualStaticAdmission": [
+    {
+      "task": "python-02",
+      "archiveSha256": "6fe6c3084bc31e1f782696dc588cc55d61d1dd93bda8daffcba85971159ce61b",
+      "regularFiles": 30200,
+      "symlinks": 3,
+      "structuralOnlyEmptyProtectedSet": true
+    },
+    {
+      "task": "typescript-01",
+      "archiveSha256": "c3287a2e874e9053fa07468897835e63895e49e3851bf8d8708337e6fbdec193",
+      "regularFiles": 19863,
+      "symlinks": 14,
+      "structuralOnlyEmptyProtectedSet": true
+    }
+  ],
+  "retainedOwnedDockerReceipts": [
+    {
+      "container": "dotrepo-f05-3043675198bf4fac8b816de82ee91d68",
+      "sourceCopyBytes": 20480,
+      "nonrootReadonlyNetworkNoneNoHostMounts": true,
+      "freshRefusal": true,
+      "cleanupRetained": true
+    },
+    {
+      "container": "dotrepo-f05-d09d2543dcb2475982d8370dbca60d19",
+      "sourceCopyBytes": 20480,
+      "nonrootReadonlyNetworkNoneNoHostMounts": true,
+      "freshRefusal": true,
+      "cleanupRetained": true
+    }
+  ],
+  "newNetworkRequests": 0,
+  "upstreamExecution": false,
+  "dockerDaemonCalls": 0,
+  "providerCalls": 0
+}

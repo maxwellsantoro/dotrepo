@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-f05-cache-go-03-83cbe9d0fb",
+    "tar",
+    "-C",
+    "/workspace/dependency-cache",
+    "-cf",
+    "-",
+    "go/pkg/mod"
+  ],
+  "startedAt": "2026-10-29T06:57:02.513067+00:00",
+  "elapsedSeconds": 0.7265297910198569,
+  "exitCode": 0,
+  "error": null,
+  "archivePath": "/tmp/dotrepo-f05-dependency-preparation-20261029/go-03/cache-export.tar",
+  "archiveBytes": 66017280,
+  "archiveSha256": "6ae843dc52b5afd643a87eb565e2b1d54302388c017699df8bb4f8f6e50455a7",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null
+}

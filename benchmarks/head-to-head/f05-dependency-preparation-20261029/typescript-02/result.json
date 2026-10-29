@@ -1,0 +1,28 @@
+{
+  "taskId": "typescript-02",
+  "state": "download-cache-retained-unqualified",
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "sourceArchiveSha256": "818bf33ece0979d198ed6a11daa3e6b838cc4aefba8c3a381c86e8ce2e706f41",
+  "sourceRevision": "2875056f93d6eebcd887f64ae557258a7b0b0108",
+  "startedAt": "2026-10-29T06:56:15.960179+00:00",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host/download charge source."
+  ],
+  "upstreamScriptsOrTestsExecuted": false,
+  "indexConsulted": false,
+  "modelCalls": 0,
+  "cacheAuditQualified": false,
+  "setupSeconds": 27.978533416055143,
+  "networkBytes": {
+    "received": 200795248,
+    "sent": 1300540,
+    "basis": "container interface counters including headers/incidental traffic"
+  },
+  "archivePath": "/tmp/dotrepo-f05-dependency-preparation-20261029/typescript-02/cache.tar",
+  "archiveSha256": "84cfa62ad220509ff1027f2a4e97b88885dbcb4c28bdfe59b620a70224d530dc",
+  "cacheExpandedBytes": 213726697,
+  "cacheArchiveBytes": 217098240,
+  "cacheFiles": 2562,
+  "elapsedSeconds": 34.00114958384074
+}

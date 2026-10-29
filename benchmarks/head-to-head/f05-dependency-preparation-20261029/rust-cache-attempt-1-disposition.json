@@ -1,0 +1,10 @@
+{
+  "state": "download-only-failed-hard-cache-quota",
+  "result": "rust-02/result.json",
+  "cause": "All-target Cargo workspace fetch exceeded hard1GiB cache tmpfs, ENOSPC exit101; no native compilation/test/build script ran.",
+  "newPlanSha256": "1ba47bcc517bd240763d036249cd29b33bcfb990ed575a10135a64ceb7216a99",
+  "increasedResources": false,
+  "remainingSetupSeconds": 888.2064855420031,
+  "earlierEvidenceImmutable": true,
+  "costUsd": null
+}

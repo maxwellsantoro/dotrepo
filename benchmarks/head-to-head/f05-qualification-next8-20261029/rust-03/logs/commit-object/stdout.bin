@@ -1,0 +1,14 @@
+tree dbf8740c335b5b3578f10cba374acdcb4e9079cd
+parent 7aacbcfc500a382e5afd6deba281c60c89c168a3
+author Héctor Ramón Jiménez <hector@hecrj.dev> 1792607694 +0200
+committer Héctor Ramón Jiménez <hector@hecrj.dev> 1792607694 +0200
+gpgsig -----BEGIN SSH SIGNATURE-----
+ U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgQpIBfVw8pLOpekUa/7/j8gjZ9X
+ mQFyRFf6qhcQIQv7IAAAADZ2l0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5
+ AAAAQA952kzeA0Lt2oVRiWI67De3tb+6lBjkBklEzclxCUmEB0gja6SCUrHnK9XxTxWGaZ
+ wfrMb0HHFj8BPV429vLwE=
+ -----END SSH SIGNATURE-----
+
+Keep `Font` on `Editor::overwrite`
+
+Fixes #3519.

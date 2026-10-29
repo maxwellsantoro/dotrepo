@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-f05-common-control-8aa58c7cfb",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "test ! -e /root/.aws; test ! -e /root/.config/gcloud; test ! -e /root/.cargo/credentials; test ! -e /usr/local/cargo/credentials; test ! -e /var/run/docker.sock; test ! -e /workspace/repository; test -z \"$(find /workspace/dependency-cache -mindepth 1 -print -quit)\""
+  ],
+  "startedAt": "2026-10-29T06:54:37.855197+00:00",
+  "elapsedSeconds": 0.06441254098899662,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

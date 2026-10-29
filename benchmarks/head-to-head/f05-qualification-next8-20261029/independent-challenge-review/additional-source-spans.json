@@ -1,0 +1,35 @@
+{
+  "purpose": "Append preciseCLItestscript/fullthreeSOCKScases/networkreturnspans without rewriting precomparisonjudgments.",
+  "spans": [
+    {
+      "task": "rust-01",
+      "path": "packages/cli/package.json",
+      "revision": "548a3692f59405aeb239c5b63fa589824eee51e8",
+      "sha256": "d9b292bd391da3c43a1a392341ef34eae9fd4bfbd8d089b39c17551bff8911d1",
+      "startLine": 55,
+      "endLine": 65,
+      "excerpt": "  \"scripts\": {\n    \"artifacts\": \"napi artifacts\",\n    \"build\": \"cross-env TARGET=node napi build --platform --profile release-size-optimized\",\n    \"postbuild\": \"node append-headers.js\",\n    \"build:debug\": \"cross-env TARGET=node napi build --platform\",\n    \"postbuild:debug\": \"node append-headers.js\",\n    \"prepublishOnly\": \"napi prepublish -t npm --gh-release-id $RELEASE_ID\",\n    \"prepack\": \"cp ../../crates/tauri-schema-generator/schemas/config.schema.json .\",\n    \"version\": \"napi version\",\n    \"test\": \"vitest run\",\n    \"tauri\": \"node ./tauri.js\"",
+      "url": "https://github.com/tauri-apps/tauri/blob/548a3692f59405aeb239c5b63fa589824eee51e8/packages/cli/package.json"
+    },
+    {
+      "task": "python-03",
+      "path": "test/test_socks.py",
+      "revision": "956b8c585591b401a543e409accb163eeaaa1193",
+      "sha256": "c63a0ccc3396850e82fafc14627f8d7cb2fbdef45cba5254726eeaf129812555",
+      "startLine": 78,
+      "endLine": 114,
+      "excerpt": "\nclass TestSocks(unittest.TestCase):\n    _SKIP_SOCKS_TEST = True\n\n    def setUp(self):\n        if self._SKIP_SOCKS_TEST:\n            return\n\n        self.port = random.randint(20000, 30000)\n        self.server_process = subprocess.Popen([\n            'srelay', '-f', '-i', '127.0.0.1:%d' % self.port],\n            stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)\n\n    def tearDown(self):\n        if self._SKIP_SOCKS_TEST:\n            return\n\n        self.server_process.terminate()\n        self.server_process.communicate()\n\n    def _get_ip(self, protocol):\n        if self._SKIP_SOCKS_TEST:\n            return '127.0.0.1'\n\n        ydl = FakeYDL({\n            'proxy': '%s://127.0.0.1:%d' % (protocol, self.port),\n        })\n        return ydl.urlopen('http://yt-dl.org/ip').read().decode('utf-8')\n\n    def test_socks4(self):\n        self.assertTrue(isinstance(self._get_ip('socks4'), compat_str))\n\n    def test_socks4a(self):\n        self.assertTrue(isinstance(self._get_ip('socks4a'), compat_str))\n\n    def test_socks5(self):\n        self.assertTrue(isinstance(self._get_ip('socks5'), compat_str))",
+      "url": "https://github.com/ytdl-org/youtube-dl/blob/956b8c585591b401a543e409accb163eeaaa1193/test/test_socks.py"
+    },
+    {
+      "task": "python-03",
+      "path": "test/test_download.py",
+      "revision": "956b8c585591b401a543e409accb163eeaaa1193",
+      "sha256": "1c96c9d0727cbf8c01a449bb2bf94f659293040590a6ed7b3c8b6edc825b3fe5",
+      "startLine": 163,
+      "endLine": 188,
+      "excerpt": "        try:\n            try_num = 1\n            while True:\n                try:\n                    # We're not using .download here since that is just a shim\n                    # for outside error handling, and returns the exit code\n                    # instead of the result dict.\n                    res_dict = ydl.extract_info(\n                        test_case['url'],\n                        force_generic_extractor=params.get('force_generic_extractor', False))\n                except (DownloadError, ExtractorError) as err:\n                    # Check if the exception is not a network related one\n                    if not err.exc_info[0] in (compat_urllib_error.URLError, socket.timeout, UnavailableVideoError, compat_http_client.BadStatusLine) or (err.exc_info[0] == compat_HTTPError and err.exc_info[1].code == 503):\n                        msg = getattr(err, 'msg', error_to_compat_str(err))\n                        err.msg = '%s (%s)' % (msg, tname, )\n                        raise err\n\n                    if try_num == RETRIES:\n                        report_warning('%s failed due to network errors, skipping...' % tname)\n                        return\n\n                    print('Retrying: {0} failed tries\\n\\n##########\\n\\n'.format(try_num))\n\n                    try_num += 1\n                else:\n                    break",
+      "url": "https://github.com/ytdl-org/youtube-dl/blob/956b8c585591b401a543e409accb163eeaaa1193/test/test_download.py"
+    }
+  ]
+}

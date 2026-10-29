@@ -1,0 +1,26 @@
+[
+  {
+    "repository": "keras-team/keras",
+    "runId": 40602464413,
+    "jobId": 122533746952,
+    "rationale": "CPU jax has explicit main Run Tests success; NNX main step skipped and retained separately."
+  },
+  {
+    "repository": "keras-team/keras",
+    "runId": 40602464523,
+    "jobId": 122533747223,
+    "rationale": "Lowest-ID GPU test job: tensorflow."
+  },
+  {
+    "repository": "docker/compose",
+    "runId": 40716799996,
+    "jobId": 122916578760,
+    "rationale": "Unit test job maps to bake targettest; E2E observations kept separately."
+  },
+  {
+    "repository": "storytold/photocraft",
+    "runId": 40800573488,
+    "jobId": 123207582566,
+    "rationale": "Windows unit job has source-mapped test and doctest steps; Linux shared gate dependency remains qualified separately."
+  }
+]

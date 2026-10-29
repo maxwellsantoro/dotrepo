@@ -1,0 +1,60 @@
+{
+  "task": {
+    "id": "python-03",
+    "repository": "github.com/ytdl-org/youtube-dl",
+    "revision": "956b8c585591b401a543e409accb163eeaaa1193",
+    "ecosystem": "Python",
+    "scope": "component",
+    "startingState": "pre-clone",
+    "component": "youtube_dl",
+    "request": "requests/python-03.md",
+    "gold": "curator/gold/python-03.json",
+    "oracle": "curator/oracles/python-03.json",
+    "enrollmentRationale": "Literal lexical non-root package-path selection: the root manifest establishes the owned primary package youtube_dl before narrower subpackages. Package location does not establish a separate component test instruction or component-only coverage."
+  },
+  "state": "source-acquired",
+  "indexConsulted": false,
+  "modelCalls": 0,
+  "upstreamProjectCodeExecuted": false,
+  "costUsd": null,
+  "sourceAcquisitionLimits": {
+    "compressedBytes": 536870912,
+    "expandedSourceBytes": 1073741824,
+    "expandedTrancheBytes": 2147483648,
+    "fileBytes": 134217728,
+    "filesTranche": 200000
+  },
+  "costExclusions": [
+    "No metered host/container/download charge source."
+  ],
+  "scratch": "/tmp/dotrepo-f05-qualification-next8-20261029/python-03",
+  "partialExpandedBytes": 6945071,
+  "compressedGitObjectBytes": 2156285,
+  "completeGitObjectsAcquired": true,
+  "sourceFiles": 981,
+  "sourceBytes": 6945071,
+  "symlinks": {},
+  "missingSubmodules": {},
+  "missingLfsObjects": [],
+  "frozenInspectedFilesMatched": [
+    "README.md",
+    "CONTRIBUTING.md",
+    "setup.py",
+    "setup.cfg",
+    "Makefile",
+    "tox.ini",
+    "youtube_dl/downloader/__init__.py",
+    "test/test_downloader_external.py",
+    "test/test_downloader_http.py",
+    "test/helper.py",
+    "youtube_dl/__init__.py"
+  ],
+  "archivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/python-03/source.tar",
+  "archiveSha256": "836cb208ff4ff481e5b9879fc3c10de793e7f8bca247e645661de1e233f63aa6",
+  "archiveBytes": 7710720,
+  "compressedArchivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/python-03/source.tar.gz",
+  "compressedArchiveSha256": "ed10ef982e821070579494d5f6e5bf675534d255048915c2ddb2ab1db94c1182",
+  "compressedArchiveBytes": 1694964,
+  "sourceBundleReady": true,
+  "elapsedSeconds": 2.002692125039175
+}

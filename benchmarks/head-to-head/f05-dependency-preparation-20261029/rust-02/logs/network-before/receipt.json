@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-f05-cache-rust-02-8f93c1a77a",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "cat /sys/class/net/eth0/statistics/rx_bytes /sys/class/net/eth0/statistics/tx_bytes"
+  ],
+  "startedAt": "2026-10-29T06:55:21.395887+00:00",
+  "elapsedSeconds": 0.07162629114463925,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "58c4e728e7ec905bff91ea482825f76cc37f5567e42eb53d5c7099f3f27609fb",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

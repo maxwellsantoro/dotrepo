@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-f05-cache-typescript-02-c986e3cb17",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "cd /workspace/repository; npm install --prefix /workspace/npm-tooling --ignore-scripts npm@11.12.1"
+  ],
+  "startedAt": "2026-10-29T06:56:17.153340+00:00",
+  "elapsedSeconds": 3.611271624919027,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "84b3615a2b55669c4069410770606e7290261ae70a9db72789bff656c372ce48",
+  "stderrSha256": "66b052a3fb08c0a91f1da0c77bc87888b8271466430e294241b2b89e8fa91dd4",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

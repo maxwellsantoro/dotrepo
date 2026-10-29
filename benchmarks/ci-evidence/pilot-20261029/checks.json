@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "checks": [
+    "Pre-API plan+retained source freeze unchanged.",
+    "22 raw response bodies match hash/bytes; all within frozen limits, no authentication/redirects/overlimits.",
+    "All source hashes and selected workflow Git blob identities match exact fetched bytes.",
+    "Three fixed revisions; max2 runs percase; all54 job headSHAs/attempts match.",
+    "All command locators within source bounds and mapped multi-job step conclusions match raw observations.",
+    "Ruff check and format check pass for owned collector; original executed code retained separately."
+  ],
+  "requests": 22,
+  "bytesRetained": 1659744,
+  "jobs": 54,
+  "upstreamExecution": false,
+  "consumerMeasurement": false
+}

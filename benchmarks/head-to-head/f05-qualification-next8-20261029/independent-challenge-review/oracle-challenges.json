@@ -1,0 +1,68 @@
+{
+  "kind": "Hypothetical oracle counterexamples and positive distinctions, not executed upstream/runtime controls.",
+  "examples": [
+    {
+      "id": "miro-backend-only",
+      "native": "Allbackend/tests pass; root unittest roots nevercollected",
+      "taskComplete": false,
+      "reason": "Missing intended group."
+    },
+    {
+      "id": "miro-complete-assertion-failure",
+      "native": "Prequalified fullunion collection allactivecases reachterminal; several assertionfailures",
+      "taskComplete": true,
+      "testSuccess": false,
+      "condition": "Only afterrootapprovedfullunion/intendedset/import/setup/oraclefreeze."
+    },
+    {
+      "id": "miro-collection-error",
+      "native": "ImportError duringbackendcollection;0calls executed;exit2",
+      "taskComplete": false
+    },
+    {
+      "id": "miro-print-only",
+      "native": "Profilediagnosticprints missingfieldserrorandexit0",
+      "taskComplete": false,
+      "reason": "Not semantic assertion proof; no substitute for automatedtestroots."
+    },
+    {
+      "id": "ha-one-bucket",
+      "native": "OnecompleteCIbucketpass;othersnotrun",
+      "taskComplete": false
+    },
+    {
+      "id": "ha-complete-fail",
+      "native": "Entireprequalifiedconfiguredrootproductselectionterminalwithassertionfailures",
+      "taskComplete": true,
+      "testSuccess": false
+    },
+    {
+      "id": "ytdl-missingproxy-green",
+      "native": "Fullrunnergreen;Missingprimary_proxy.Skipping.;testreturns",
+      "taskComplete": false
+    },
+    {
+      "id": "ytdl-static-socks-green",
+      "native": "3SOCKScasespassbecause_SKIP_SOCKS_TEST=True and_get_ip returns127.0.0.1",
+      "fullSocksBehaviorEstablished": false,
+      "defaultSuiteCompletion": "Conditionalonly ifthese exactsource-disabledcases werepreadjudicated excludedcoverage andallactiveintendedtestsexecuted."
+    },
+    {
+      "id": "ytdl-exhaustednetwork-green",
+      "native": "Downloadtest exhaustednetworkretry thenreturnednormal;fullrunnerexit0",
+      "taskComplete": false
+    },
+    {
+      "id": "tauri-pnpm-green",
+      "native": "OnlyNodeCLItemplateVitestpassunderrootpnpmtest",
+      "taskComplete": false
+    },
+    {
+      "id": "tauri-mobile-build",
+      "native": "Mobilecargo build/testscompileexit0; no nativecasesran",
+      "taskComplete": false
+    }
+  ],
+  "modelCalls": 0,
+  "upstreamExecution": false
+}

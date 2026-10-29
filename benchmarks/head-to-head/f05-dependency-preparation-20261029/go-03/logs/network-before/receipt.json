@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-f05-cache-go-03-83cbe9d0fb",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "cat /sys/class/net/eth0/statistics/rx_bytes /sys/class/net/eth0/statistics/tx_bytes"
+  ],
+  "startedAt": "2026-10-29T06:57:00.230411+00:00",
+  "elapsedSeconds": 0.13956341589801013,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "16ee168a0e6b17bdd2893dc9d31b7f7f26c51a64a16f9eab7d94a3025fe81a52",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

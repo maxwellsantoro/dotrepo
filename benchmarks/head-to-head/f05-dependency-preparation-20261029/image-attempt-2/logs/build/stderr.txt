@@ -1,0 +1,77 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 744B 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/dotrepo-f05-prep-rust:6d94650b0063
+#2 DONE 0.1s
+
+#3 [internal] load metadata for docker.io/library/dotrepo-f05-prep-tools:9f07b849c460
+#3 DONE 0.1s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [tools 1/1] FROM docker.io/library/dotrepo-f05-prep-tools:9f07b849c460@sha256:9f07b849c4603e3ad6b52c00c2dccaaf2054f8b3ec0f4add866ffdd537073c76
+#5 resolve docker.io/library/dotrepo-f05-prep-tools:9f07b849c460@sha256:9f07b849c4603e3ad6b52c00c2dccaaf2054f8b3ec0f4add866ffdd537073c76 0.0s done
+#5 DONE 0.0s
+
+#6 [rust 1/1] FROM docker.io/library/dotrepo-f05-prep-rust:6d94650b0063@sha256:6d94650b0063dbbe7921114ee693dcf24c4c279d0e15781ae1713c88e69e167d
+#6 resolve docker.io/library/dotrepo-f05-prep-rust:6d94650b0063@sha256:6d94650b0063dbbe7921114ee693dcf24c4c279d0e15781ae1713c88e69e167d done
+#6 extracting sha256:2a02c40189e361a19e7cb07374fe9925f5c4f7db254ae2b9196348c27c286b03
+#6 extracting sha256:2a02c40189e361a19e7cb07374fe9925f5c4f7db254ae2b9196348c27c286b03 2.7s done
+#6 DONE 2.8s
+
+#6 [rust 1/1] FROM docker.io/library/dotrepo-f05-prep-rust:6d94650b0063@sha256:6d94650b0063dbbe7921114ee693dcf24c4c279d0e15781ae1713c88e69e167d
+#6 extracting sha256:bdc7363672c63abfefdedaf5e03be8e39cb662841d4f31237c4b7d7e3729f65c
+#6 extracting sha256:bdc7363672c63abfefdedaf5e03be8e39cb662841d4f31237c4b7d7e3729f65c 0.8s done
+#6 DONE 3.6s
+
+#6 [rust 1/1] FROM docker.io/library/dotrepo-f05-prep-rust:6d94650b0063@sha256:6d94650b0063dbbe7921114ee693dcf24c4c279d0e15781ae1713c88e69e167d
+#6 extracting sha256:99713dbe79ee22ead7509cd8c7c37d309206e5ddd834ba41611459b49e6ddc06
+#6 extracting sha256:99713dbe79ee22ead7509cd8c7c37d309206e5ddd834ba41611459b49e6ddc06 2.8s done
+#6 DONE 6.4s
+
+#6 [rust 1/1] FROM docker.io/library/dotrepo-f05-prep-rust:6d94650b0063@sha256:6d94650b0063dbbe7921114ee693dcf24c4c279d0e15781ae1713c88e69e167d
+#6 extracting sha256:4562cb873c99b9446ba4daee7180b2d40bbac13aefcf459f2e516776c1ed0458
+#6 extracting sha256:4562cb873c99b9446ba4daee7180b2d40bbac13aefcf459f2e516776c1ed0458 7.3s done
+#6 DONE 13.7s
+
+#6 [rust 1/1] FROM docker.io/library/dotrepo-f05-prep-rust:6d94650b0063@sha256:6d94650b0063dbbe7921114ee693dcf24c4c279d0e15781ae1713c88e69e167d
+#6 extracting sha256:e15eaf310247f4ef58be3d467855ac40c5c0a2b71d6c5bce585051acf8336c72
+#6 extracting sha256:e15eaf310247f4ef58be3d467855ac40c5c0a2b71d6c5bce585051acf8336c72 3.1s done
+#6 DONE 16.8s
+
+#6 [rust 1/1] FROM docker.io/library/dotrepo-f05-prep-rust:6d94650b0063@sha256:6d94650b0063dbbe7921114ee693dcf24c4c279d0e15781ae1713c88e69e167d
+#6 extracting sha256:1362b39d788d5c482398712baf867001d98726027084a9ac54f97012fac6ebf0
+#6 extracting sha256:1362b39d788d5c482398712baf867001d98726027084a9ac54f97012fac6ebf0 0.3s done
+#6 DONE 17.1s
+
+#7 [stage-2 1/6] COPY --from=rust / /
+#7 DONE 11.6s
+
+#8 [stage-2 2/6] COPY --from=tools /usr/local/go /usr/local/go
+#8 DONE 12.3s
+
+#9 [stage-2 3/6] COPY --from=tools /usr/local/bin/node /usr/local/bin/uv /usr/local/bin/uvx /usr/local/bin/
+#9 DONE 1.3s
+
+#10 [stage-2 4/6] COPY --from=tools /usr/local/lib/node_modules /usr/local/lib/node_modules
+#10 DONE 1.3s
+
+#11 [stage-2 5/6] COPY --from=tools /usr/local/bin/npm /usr/local/bin/npx /usr/local/bin/
+#11 DONE 0.0s
+
+#12 exporting to image
+#12 exporting layers
+#12 exporting layers 46.4s done
+#12 exporting manifest sha256:3ec75f68ab4f0e69deb8b6a798b0180dede5bdeaebb1086a21eb36b60d2946da 0.0s done
+#12 exporting config sha256:e6ab877dca4d3120114c19cd24dbd7e417ab1cf6ade2e0b3ad4f88b861515229 0.0s done
+#12 exporting attestation manifest sha256:51966be331560026867763f74c31ae41e476563f652f8832186fa9fdc4dbd6c0 0.0s done
+#12 exporting manifest list sha256:ac1ef011a116232ea9fb6d0b534649a0cd298bbffeba25a5b124b37940568d75 0.0s done
+#12 naming to docker.io/library/dotrepo-f05-common:20261029 done
+#12 unpacking to docker.io/library/dotrepo-f05-common:20261029
+#12 unpacking to docker.io/library/dotrepo-f05-common:20261029 19.2s done
+#12 DONE 65.7s

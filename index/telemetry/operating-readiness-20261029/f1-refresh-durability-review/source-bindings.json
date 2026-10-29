@@ -1,0 +1,594 @@
+{
+  "head": "91643102c6083fda66827f68e43a06e7cdc8cec8",
+  "mode": "read-only current-Rust source-path proof; no binary rebuilt or executed",
+  "originalF1FreezeSha256": "779bf4cea196f16ff3f16526e71321367f351fe0a2f5eaeea166099fe8b10d98",
+  "originalCorrectionsSha256": "1ae142ce9fa8813a7e0038f253efca5b21ff197c0fe6db287579eafc4997f12b",
+  "sources": [
+    {
+      "repository": "IBM/fp-go",
+      "revision": "42e25c64425e2291bd5b281aa852b7a790526204",
+      "originalPath": "index/telemetry/operating-readiness-20261029/sources/github.com/IBM/fp-go/README.md",
+      "fixturePath": "proposed-fixtures/go-multimodule-ci-scope/README.md",
+      "sha256": "f92d9a6e245607599eedee3a941ffcaf0aadef007d3cbbf6b26a04ee653a433a",
+      "bytes": 10836,
+      "url": "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/README.md"
+    },
+    {
+      "repository": "IBM/fp-go",
+      "revision": "42e25c64425e2291bd5b281aa852b7a790526204",
+      "originalPath": "index/telemetry/operating-readiness-20261029/sources/github.com/IBM/fp-go/coverage.bat",
+      "fixturePath": "proposed-fixtures/go-multimodule-ci-scope/coverage.bat",
+      "sha256": "5a7f9e30c619d18c2059d8b3b0383e1b401445c91ffaec79f2de6b731a9b78bc",
+      "bytes": 134,
+      "url": "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/coverage.bat"
+    },
+    {
+      "repository": "IBM/fp-go",
+      "revision": "42e25c64425e2291bd5b281aa852b7a790526204",
+      "originalPath": "index/telemetry/operating-readiness-20261029/sources/github.com/IBM/fp-go/go.mod",
+      "fixturePath": "proposed-fixtures/go-multimodule-ci-scope/go.mod",
+      "sha256": "d99a7fedebc0034b3ee99bb1e820f0e93660d2e44e6e3b7a5de8252afab23544",
+      "bytes": 489,
+      "url": "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/go.mod"
+    },
+    {
+      "repository": "IBM/fp-go",
+      "revision": "42e25c64425e2291bd5b281aa852b7a790526204",
+      "originalPath": "index/telemetry/operating-readiness-20261029/sources/github.com/IBM/fp-go/test.bat",
+      "fixturePath": "proposed-fixtures/go-multimodule-ci-scope/test.bat",
+      "sha256": "729496f826754baa4b38d77e7391c02f782e6adc8aa55186bebc5d1a1c6fdb07",
+      "bytes": 153,
+      "url": "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/test.bat"
+    },
+    {
+      "repository": "IBM/fp-go",
+      "revision": "42e25c64425e2291bd5b281aa852b7a790526204",
+      "originalPath": "index/telemetry/operating-readiness-20261029/sources/github.com/IBM/fp-go/.github/workflows/build.yml",
+      "fixturePath": "proposed-fixtures/go-multimodule-ci-scope/.github/workflows/build.yml",
+      "sha256": "1931d37e0f552e7451472cbc4e75f119a09fc6d8d70819aa29e0481173e4a25c",
+      "bytes": 6616,
+      "url": "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/.github/workflows/build.yml"
+    },
+    {
+      "repository": "IBM/fp-go",
+      "revision": "42e25c64425e2291bd5b281aa852b7a790526204",
+      "originalPath": "index/telemetry/operating-readiness-20261029/sources/github.com/IBM/fp-go/v2/go.mod",
+      "fixturePath": "proposed-fixtures/go-multimodule-ci-scope/v2/go.mod",
+      "sha256": "592f7929f786535e9ce99626ba3caef64d209a32d103886819b6006da7c4e254",
+      "bytes": 173,
+      "url": "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/v2/go.mod"
+    },
+    {
+      "repository": "IBM/fp-go",
+      "revision": "42e25c64425e2291bd5b281aa852b7a790526204",
+      "originalPath": "index/telemetry/operating-readiness-20261029/sources/github.com/IBM/fp-go/v2/README.md",
+      "fixturePath": "proposed-fixtures/go-multimodule-ci-scope/v2/README.md",
+      "sha256": "3e186f4a758b4057d060f96033ca3f17c44310749b1618c1cad813c8f8bb68a0",
+      "bytes": 16487,
+      "url": "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/v2/README.md"
+    },
+    {
+      "repository": "IBM/fp-go",
+      "revision": "42e25c64425e2291bd5b281aa852b7a790526204",
+      "originalPath": "index/telemetry/operating-readiness-20261029/sources/github.com/IBM/fp-go/gen/v2/go.mod",
+      "fixturePath": "proposed-fixtures/go-multimodule-ci-scope/gen/v2/go.mod",
+      "sha256": "f570b0499adf862d968f0ecac7a550da39ca66438e6a4fe71352fc44525409d6",
+      "bytes": 1344,
+      "url": "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/gen/v2/go.mod"
+    },
+    {
+      "repository": "gomodule/redigo",
+      "revision": "57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "originalPath": "index/telemetry/operating-readiness-20261029/sources/github.com/gomodule/redigo/.travis.yml",
+      "fixturePath": "proposed-fixtures/go-redis-prepared-ci/.travis.yml",
+      "sha256": "b86d18f702a8fb303b33436326613dcde21600b29480d43bad344ebfad45fde7",
+      "bytes": 265,
+      "url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/.travis.yml"
+    },
+    {
+      "repository": "gomodule/redigo",
+      "revision": "57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "originalPath": "index/telemetry/operating-readiness-20261029/sources/github.com/gomodule/redigo/README.markdown",
+      "fixturePath": "proposed-fixtures/go-redis-prepared-ci/README.markdown",
+      "sha256": "9fade03f42daf7476a14204e80bb2dd64593bf81f4bedf332d00625a3b6f522d",
+      "bytes": 2294,
+      "url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/README.markdown"
+    },
+    {
+      "repository": "gomodule/redigo",
+      "revision": "57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "originalPath": "index/telemetry/operating-readiness-20261029/sources/github.com/gomodule/redigo/go.mod",
+      "fixturePath": "proposed-fixtures/go-redis-prepared-ci/go.mod",
+      "sha256": "f3e99bdde7f6debc48f93a63e4aea3ab921066267fe0fc0780bf888aa4a82b4d",
+      "bytes": 441,
+      "url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/go.mod"
+    },
+    {
+      "repository": "gomodule/redigo",
+      "revision": "57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "originalPath": "index/telemetry/operating-readiness-20261029/sources/github.com/gomodule/redigo/.github/CONTRIBUTING.md",
+      "fixturePath": "proposed-fixtures/go-redis-prepared-ci/.github/CONTRIBUTING.md",
+      "sha256": "05cf85c5dacd641824dce40ad4c48b26fb91e52dfb35e5f6d0567912759170d3",
+      "bytes": 208,
+      "url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/.github/CONTRIBUTING.md"
+    },
+    {
+      "repository": "gomodule/redigo",
+      "revision": "57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "originalPath": "index/telemetry/operating-readiness-20261029/sources/github.com/gomodule/redigo/.github/workflows/go-test.yml",
+      "fixturePath": "proposed-fixtures/go-redis-prepared-ci/.github/workflows/go-test.yml",
+      "sha256": "f6e5dca75defdea9f22c29c189a2ca46b398bc19018be5f41e43055e329fa84d",
+      "bytes": 809,
+      "url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/.github/workflows/go-test.yml"
+    },
+    {
+      "repository": "gomodule/redigo",
+      "revision": "57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "originalPath": "index/telemetry/operating-readiness-20261029/sources/github.com/gomodule/redigo/.github/workflows/release-build.yml",
+      "fixturePath": "proposed-fixtures/go-redis-prepared-ci/.github/workflows/release-build.yml",
+      "sha256": "1e4c7c2dae8bc6b2286ee87e5055900ef4d08c53608d95213bb4d8b484dd06b8",
+      "bytes": 640,
+      "url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/.github/workflows/release-build.yml"
+    },
+    {
+      "repository": "gomodule/redigo",
+      "revision": "57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "originalPath": "index/telemetry/operating-readiness-20261029/sources/github.com/gomodule/redigo/redis/test_test.go",
+      "fixturePath": "proposed-fixtures/go-redis-prepared-ci/redis/test_test.go",
+      "sha256": "91e3066bd8b8eb32a5b778c6cbff27e08cd31b690d0a8424368cbd49e96cf17b",
+      "bytes": 5792,
+      "url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/test_test.go"
+    }
+  ],
+  "code": [
+    {
+      "path": "crates/dotrepo-core/src/import/inputs.rs",
+      "sha256": "e995b20bcf53598c8f29b30c309cff47d8e2241bdf819519fa929d0399c0f09f",
+      "lineCount": 156,
+      "passages": [
+        {
+          "startLine": 55,
+          "endLine": 88,
+          "text": "        let setup_py = load_best_python_manifest(root, \"setup.py\")?;\n        let setup_cfg = load_best_python_manifest(root, \"setup.cfg\")?;\n        let tox_ini = load_first_existing_file(root, &[\"tox.ini\"])?;\n        let go_mod = load_first_existing_file(root, &[\"go.mod\"])?;\n        let pom_xml = load_first_existing_file(root, &[\"pom.xml\"])?;\n        let maven_wrapper = root.join(\"mvnw\").is_file();\n        let build_gradle = load_first_existing_file(root, &[\"build.gradle\", \"build.gradle.kts\"])?;\n        let gradle_wrapper = root.join(\"gradlew\").is_file();\n        let composer_json = load_first_existing_file(root, &[\"composer.json\"])?;\n        // Prefer root .csproj, then shallow monorepo layout (src/**/*.csproj).\n        let csproj = load_first_file_with_extension(root, \"csproj\", 4)?;\n        let solution = load_first_file_with_extension(root, \"sln\", 2)?;\n        let mix_exs = load_first_existing_file(root, &[\"mix.exs\"])?;\n        let rebar_config = load_first_existing_file(root, &[\"rebar.config\"])?;\n        let cmake_presets_json = load_first_existing_file(root, &[\"CMakePresets.json\"])?;\n        let workflow_files = load_workflow_import_files(root)?;\n        let contributing =\n            load_first_existing_file(root, &[\"CONTRIBUTING.md\", \".github/CONTRIBUTING.md\"])?;\n        let makefile = load_first_existing_file(root, &[\"GNUmakefile\", \"Makefile\", \"makefile\"])?;\n        let justfile = load_first_existing_file(root, &[\"justfile\", \"Justfile\"])?;\n        let rakefile = load_first_existing_file(root, &[\"Rakefile\", \"rakefile\"])?;\n        let security_issue_template = load_first_existing_file(\n            root,\n            &[\n                \".github/ISSUE_TEMPLATE/security.md\",\n                \".github/ISSUE_TEMPLATE/SECURITY.md\",\n                \".github/ISSUE_TEMPLATE/security.yml\",\n            ],\n        )?;\n        let pull_request_template = load_first_existing_file(\n            root,\n            &[\n                \".github/pull_request_template.md\",\n                \".github/PULL_REQUEST_TEMPLATE.md\","
+        }
+      ]
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/commands/extraction.rs",
+      "sha256": "f58a0ff064a974d014c2bca5b8a1e766ee5479043e0d699e3f72d7c4d0d1f005",
+      "lineCount": 1441,
+      "passages": [
+        {
+          "startLine": 256,
+          "endLine": 273,
+          "text": "pub(crate) fn infer_go_module_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {\n    let has_module = file\n        .contents\n        .lines()\n        .map(str::trim)\n        .filter(|line| !line.is_empty())\n        .any(|line| line.starts_with(\"module \"));\n    if !has_module {\n        return None;\n    }\n\n    Some(ImportedCommandCandidate {\n        source_path: file.path.clone(),\n        source_tier: CommandSourceTier::EcosystemDefault,\n        build: Some(\"go build ./...\".into()),\n        test: Some(\"go test ./...\".into()),\n    })\n}"
+        },
+        {
+          "startLine": 1072,
+          "endLine": 1101,
+          "text": "pub(crate) fn infer_workflow_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {\n    if workflow_file_is_specialized_noncanonical(&file.path) {\n        return None;\n    }\n    // Until working directory and prerequisites have an explicit contract,\n    // component CI steps cannot be promoted to repository defaults.\n    if file.contents.lines().any(|line| {\n        let line = line.trim().strip_prefix(\"- \").unwrap_or(line.trim());\n        line.strip_prefix(\"working-directory:\")\n            .is_some_and(|value| !matches!(strip_matching_yaml_quotes(value.trim()), \".\" | \"./\"))\n            || line.starts_with(\"cd \")\n    }) {\n        return None;\n    }\n    let run_commands = extract_workflow_run_commands(&file.contents);\n    let build = first_matching_workflow_command(&run_commands, true);\n    let test = first_matching_workflow_command(&run_commands, false);\n    if build.is_none() && test.is_none() {\n        return None;\n    }\n\n    Some(ImportedCommandCandidate {\n        source_path: file.path.clone(),\n        source_tier: CommandSourceTier::Workflow,\n        build,\n        test,\n    })\n}\n\nfn workflow_file_is_specialized_noncanonical(path: &str) -> bool {"
+        },
+        {
+          "startLine": 1344,
+          "endLine": 1368,
+          "text": "/// CI-only go test lines (coverage dirs, -args passthrough, etc.) are not\n/// developer-facing repo.test values.\nfn is_specialized_go_workflow_test_command(command: &str) -> bool {\n    let lower = command.to_ascii_lowercase();\n    if !lower.contains(\"go test\") {\n        return false;\n    }\n    lower.split_whitespace().any(|token| {\n        matches!(\n            token,\n            \"-args\"\n                | \"-coverprofile\"\n                | \"-covermode\"\n                | \"-bench\"\n                | \"-benchmem\"\n                | \"-fuzz\"\n                | \"-fuzztime\"\n        ) || token.starts_with(\"-coverprofile=\")\n            || token.starts_with(\"-covermode=\")\n            || token.contains(\"gocoverdir\")\n            || token.starts_with(\"-test.gocoverdir\")\n    })\n}\n\n/// `apt-get install \u2026 make build-essential` is a host dependency install, not"
+        }
+      ]
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/commands/mod.rs",
+      "sha256": "5bf65fdf60db8fe9f3f0eb7a587baf4f956089f4dbc67010a78bb7d4d5e27122",
+      "lineCount": 600,
+      "passages": [
+        {
+          "startLine": 478,
+          "endLine": 483,
+          "text": "        candidates.push(candidate);\n    }\n    if let Some(candidate) = sources.go_mod.and_then(infer_go_module_commands) {\n        candidates.push(candidate);\n    }\n    if let Some(candidate) = sources"
+        },
+        {
+          "startLine": 535,
+          "endLine": 600,
+          "text": "        sources\n            .workflow_files\n            .iter()\n            .filter_map(infer_workflow_commands),\n    );\n\n    let mut metadata = ImportedCommandMetadata::default();\n    // Legacy scalar fields describe commands from the repository root. A nested\n    // manifest only describes its own component; ranking cannot establish that\n    // it is the repository's primary entrypoint.\n    candidates.retain(|candidate| {\n        let path = candidate.source_path.replace('\\\\', \"/\");\n        let root_scoped = !path.contains('/')\n            || path.starts_with(\".github/workflows/\")\n            || path == \".github/CONTRIBUTING.md\";\n        if !root_scoped {\n            let note =\n                format!(\"Ignored component-scoped commands from `{path}` as repository defaults.\");\n            metadata.notes.push(note.clone());\n            metadata.evidence_bullets.push(note);\n        }\n        root_scoped\n    });\n\n    // A root workflow/README can still explicitly target a nested Cargo\n    // manifest or one package. Withhold only that field; independent root\n    // commands from the same source remain eligible.\n    for candidate in &mut candidates {\n        for (field, value) in [\n            (\"repo.build\", &mut candidate.build),\n            (\"repo.test\", &mut candidate.test),\n        ] {\n            if value\n                .as_deref()\n                .is_some_and(scope::cargo_component_selector)\n            {\n                *value = None;\n                let note = format!(\"Withheld `{field}` from `{}` because its Cargo selector describes a component, not the repository default.\", candidate.source_path);\n                metadata.notes.push(note.clone());\n                metadata.evidence_bullets.push(note);\n            }\n        }\n    }\n\n    metadata.build = resolve_command_field(\n        &candidates,\n        \"repo.build\",\n        true,\n        &mut metadata.notes,\n        &mut metadata.evidence_bullets,\n        &mut metadata.inferred_fields,\n    );\n    metadata.test = resolve_command_field(\n        &candidates,\n        \"repo.test\",\n        false,\n        &mut metadata.notes,\n        &mut metadata.evidence_bullets,\n        &mut metadata.inferred_fields,\n    );\n    metadata.candidates = candidates;\n    metadata\n}\n\n#[cfg(test)]\nmod tests;"
+        }
+      ]
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/commands/policy.rs",
+      "sha256": "e724f6ba741f593760b720ddf541080e758efa32cabf3ade19aed2b4382143f9",
+      "lineCount": 719,
+      "passages": [
+        {
+          "startLine": 93,
+          "endLine": 120,
+          "text": "    // Resolution goes top-down by tier:\n    // Declared manifest scripts > contribution docs > task scripts > observed\n    // workflows > ecosystem defaults. A build-tool file proves the ecosystem,\n    // but it does not prove that its conventional command works in this repo.\n    // Within a tier, conflicts are genuine and block the field.\n    // If a higher tier resolves, lower tiers are ignored.\n    if !select_build {\n        if let Some(source_paths) = conflicting_cross_ecosystem_test_sources(candidates) {\n            let note = format!(\n                \"Left `{}` unset because {} suggested conflicting test commands.\",\n                field,\n                human_join(&source_paths)\n            );\n            notes.push(note.clone());\n            evidence_bullets.push(note);\n            return None;\n        }\n    }\n\n    let tiers = [\n        CommandSourceTier::GitHubApi,\n        CommandSourceTier::Manifest,\n        CommandSourceTier::ContribDoc,\n        CommandSourceTier::TaskScript,\n        CommandSourceTier::Workflow,\n        CommandSourceTier::EcosystemDefault,\n    ];\n"
+        },
+        {
+          "startLine": 133,
+          "endLine": 179,
+          "text": "        match &resolution {\n            UniqueCommandResolution::Unique {\n                command,\n                source_path,\n            } => {\n                let (command, source_path, tier) = if *tier == CommandSourceTier::Workflow {\n                    preferred_ecosystem_default_for_workflow_command(\n                        candidates,\n                        command,\n                        select_build,\n                    )\n                    .unwrap_or_else(|| (command.clone(), source_path.clone(), *tier))\n                } else {\n                    (command.clone(), source_path.clone(), *tier)\n                };\n                let Some(command) = sanitize_import_command(&command) else {\n                    let note = format!(\n                        \"Left `{}` unset because `{}` suggested an unsafe shell-like command.\",\n                        field, source_path\n                    );\n                    notes.push(note.clone());\n                    evidence_bullets.push(note);\n                    return None;\n                };\n                let is_declared_tier = tier == CommandSourceTier::Manifest\n                    || tier == CommandSourceTier::ContribDoc\n                    || tier == CommandSourceTier::TaskScript;\n                let selection = ImportedCommandSelection {\n                    command,\n                    source_path,\n                    source_tier: tier,\n                    provenance: if is_declared_tier {\n                        ImportedCommandProvenance::Imported\n                    } else {\n                        ImportedCommandProvenance::Inferred\n                    },\n                };\n                if !is_declared_tier {\n                    inferred_fields.push(field.into());\n                }\n                note_selected_command(field, &selection, notes, evidence_bullets);\n                return Some(selection);\n            }\n            UniqueCommandResolution::Conflict { source_paths } => {\n                let kind = if select_build { \"build\" } else { \"test\" };\n                let note = format!(\n                    \"Left `{}` unset because {} suggested conflicting {} commands.\","
+        },
+        {
+          "startLine": 309,
+          "endLine": 366,
+          "text": "fn preferred_go_module_default_for_workflow_command(\n    candidates: &[ImportedCommandCandidate],\n    workflow_command: &str,\n    select_build: bool,\n) -> Option<(String, String, CommandSourceTier)> {\n    if !is_less_canonical_go_workflow_command(workflow_command, select_build) {\n        return None;\n    }\n    let expected = if select_build {\n        \"go build ./...\"\n    } else {\n        \"go test ./...\"\n    };\n    ecosystem_default_candidate(candidates, \"go.mod\", expected, select_build)\n}\n\nfn ecosystem_default_candidate(\n    candidates: &[ImportedCommandCandidate],\n    manifest_path: &str,\n    expected: &str,\n    select_build: bool,\n) -> Option<(String, String, CommandSourceTier)> {\n    candidates.iter().find_map(|candidate| {\n        (candidate.source_tier == CommandSourceTier::EcosystemDefault\n            && candidate.source_path == manifest_path\n            && if select_build {\n                candidate.build.as_deref() == Some(expected)\n            } else {\n                candidate.test.as_deref() == Some(expected)\n            })\n        .then(|| {\n            (\n                expected.to_string(),\n                candidate.source_path.clone(),\n                candidate.source_tier,\n            )\n        })\n    })\n}\n\nfn is_less_canonical_go_workflow_command(command: &str, select_build: bool) -> bool {\n    let normalized = command.trim().trim_matches('\\'').trim_matches('\"');\n    let (runner, canonical) = if select_build {\n        (\"go build\", \"go build ./...\")\n    } else {\n        (\"go test\", \"go test ./...\")\n    };\n    if normalized == canonical || normalized == runner {\n        return false;\n    }\n    // Any flagged invocation (-race, -coverprofile, -tags, ...) is a\n    // CI-specialized variant of the module default, not the canonical\n    // developer command.\n    normalized.strip_prefix(runner).is_some_and(|rest| {\n        rest.starts_with(char::is_whitespace)\n            && rest.split_whitespace().any(|token| token.starts_with('-'))\n    })\n}"
+        }
+      ]
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/commands/tests.rs",
+      "sha256": "c1fa7d764571a0d22c39618fde9da95ccbd0ba9964149e01daa9482c1e9aa0d8",
+      "lineCount": 1072,
+      "passages": [
+        {
+          "startLine": 390,
+          "endLine": 423,
+          "text": "fn workflow_go_selectors_do_not_outrank_module_defaults() {\n    use super::super::types::{CommandSourceTier, ImportedCommandCandidate};\n    use super::policy::resolve_command_field;\n\n    let candidates = [\n        ImportedCommandCandidate {\n            source_path: \"go.mod\".into(),\n            source_tier: CommandSourceTier::EcosystemDefault,\n            build: Some(\"go build ./...\".into()),\n            test: Some(\"go test ./...\".into()),\n        },\n        ImportedCommandCandidate {\n            source_path: \".github/workflows/ci.yml\".into(),\n            source_tier: CommandSourceTier::Workflow,\n            build: None,\n            test: Some(\"go test -race -coverprofile=coverage.txt -covermode=atomic ./...\".into()),\n        },\n    ];\n    let mut notes = Vec::new();\n    let mut evidence = Vec::new();\n    let mut inferred = Vec::new();\n\n    let test = resolve_command_field(\n        &candidates,\n        \"repo.test\",\n        false,\n        &mut notes,\n        &mut evidence,\n        &mut inferred,\n    )\n    .expect(\"test resolves\");\n    assert_eq!(test.command, \"go test ./...\");\n    assert_eq!(test.source_path, \"go.mod\");\n}"
+        }
+      ]
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/mod.rs",
+      "sha256": "a1ec6ed2e358411331f7715847e78f06e9ededb48894e77a09de9367225097f9",
+      "lineCount": 880,
+      "passages": [
+        {
+          "startLine": 357,
+          "endLine": 370,
+          "text": "            if let Some(file) = &security_issue_template {\n                note_import(&mut imported_sources, &file.path);\n            }\n        }\n    }\n    if let Some(command) = imported_commands.build.as_ref() {\n        note_import(&mut imported_sources, &command.source_path);\n    }\n    if let Some(command) = imported_commands.test.as_ref() {\n        note_import(&mut imported_sources, &command.source_path);\n    }\n    for candidate in build_context_candidates\n        .iter()\n        .chain(&test_context_candidates)"
+        },
+        {
+          "startLine": 719,
+          "endLine": 739,
+          "text": "    // are ignored for unresolved scoring so escalation cannot re-apply them.\n    if plan.manifest.repo.build.is_none() {\n        if command_field_has_safe_candidates(&plan.command_candidates.candidates, true) {\n            unresolved_fields.push(\"repo.build\".into());\n        } else {\n            absent_fields.push(\"repo.build\".into());\n        }\n    }\n    if plan.manifest.repo.test.is_none() {\n        if command_field_has_safe_candidates(&plan.command_candidates.candidates, false) {\n            unresolved_fields.push(\"repo.test\".into());\n        } else {\n            absent_fields.push(\"repo.test\".into());\n        }\n    }\n\n    // URL quality checks\n    if let Some(ref homepage) = plan.manifest.repo.homepage {\n        if !is_quality_url(homepage) {\n            checks.push(VerificationCheck {\n                check_id: \"url-quality/homepage\".into(),"
+        }
+      ]
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/fields.rs",
+      "sha256": "a61c840eb9a73fab3d29354dd5cd1e81a069cf92883e40a7b2daca2686a61d02",
+      "lineCount": 818,
+      "passages": [
+        {
+          "startLine": 191,
+          "endLine": 224,
+          "text": "    if let Some(ref build) = plan.manifest.repo.build {\n        let is_ecosystem_default = plan\n            .command_candidates\n            .selected_build\n            .as_ref()\n            .map(|s| {\n                matches!(\n                    s.source_tier,\n                    super::types::CommandSourceTier::EcosystemDefault\n                )\n            })\n            .unwrap_or(false);\n        scores.push(FieldScore {\n            field: \"repo.build\".into(),\n            confidence: if is_ecosystem_default {\n                FieldConfidence::MediumConfidencePresent\n            } else if plan\n                .command_candidates\n                .selected_build\n                .as_ref()\n                .is_some_and(|s| matches!(s.provenance, ImportedCommandProvenance::Imported))\n            {\n                FieldConfidence::HighConfidencePresent\n            } else {\n                FieldConfidence::MediumConfidencePresent\n            },\n            source: plan\n                .command_candidates\n                .selected_build\n                .as_ref()\n                .map(|s| s.source_path.clone()),\n            value: Some(build.clone()),\n            reason: if is_ecosystem_default {\n                \"inferred ecosystem default from build-tool metadata\".into()"
+        },
+        {
+          "startLine": 269,
+          "endLine": 303,
+          "text": "    if let Some(ref test) = plan.manifest.repo.test {\n        let is_ecosystem_default = plan\n            .command_candidates\n            .selected_test\n            .as_ref()\n            .map(|s| {\n                matches!(\n                    s.source_tier,\n                    super::types::CommandSourceTier::EcosystemDefault\n                )\n            })\n            .unwrap_or(false);\n        scores.push(FieldScore {\n            field: \"repo.test\".into(),\n            confidence: if is_ecosystem_default {\n                FieldConfidence::MediumConfidencePresent\n            } else if plan\n                .command_candidates\n                .selected_test\n                .as_ref()\n                .is_some_and(|s| matches!(s.provenance, ImportedCommandProvenance::Imported))\n            {\n                FieldConfidence::HighConfidencePresent\n            } else {\n                FieldConfidence::MediumConfidencePresent\n            },\n            source: plan\n                .command_candidates\n                .selected_test\n                .as_ref()\n                .map(|s| s.source_path.clone()),\n            value: Some(test.clone()),\n            reason: if is_ecosystem_default {\n                \"inferred ecosystem default from build-tool metadata\".into()\n            } else if plan"
+        }
+      ]
+    },
+    {
+      "path": "crates/dotrepo-crawler/src/pipeline/mod.rs",
+      "sha256": "52ce9631da2e421650ed8d40a5e1e4960da5601a5f5cdc7c482dd3c6467d9ab8",
+      "lineCount": 1261,
+      "passages": [
+        {
+          "startLine": 140,
+          "endLine": 149,
+          "text": "    let previous_manifest = read_previous_manifest(&record_root);\n    if previous_manifest.as_ref().is_some_and(|manifest| {\n        manifest.record.mode == dotrepo_schema::RecordMode::Native\n            || matches!(\n                manifest.record.status,\n                dotrepo_schema::RecordStatus::Canonical | dotrepo_schema::RecordStatus::Reviewed\n            )\n    }) {\n        bail!(\"autonomous refresh cannot replace maintainer-owned or human-reviewed records\");\n    }"
+        },
+        {
+          "startLine": 165,
+          "endLine": 181,
+          "text": "        Some(&source_url),\n        &ImportOptions {\n            generated_at: Some(generated_at.clone()),\n            github: Some(GitHubSnapshotFacts {\n                fork: snapshot.fork,\n                parent: snapshot.parent.clone(),\n                repo_name: Some(request.repository.repo.clone()),\n                description: snapshot.description.clone(),\n                topics: snapshot.topics.clone(),\n            }),\n        },\n    )?;\n\n    let verification = verify_import_plan(&materialized.repository_root, &import_plan, &source_url);\n    import_plan.manifest_path = record_root.join(\"record.toml\");\n    import_plan.evidence_path = Some(record_root.join(\"evidence.md\"));\n"
+        },
+        {
+          "startLine": 235,
+          "endLine": 257,
+          "text": "                escalation.remaining_unresolved\n            ),\n        ));\n    }\n\n    let verification = verify_import_plan(&materialized.repository_root, &import_plan, &source_url);\n    field_scores = score_import_fields(&import_plan, &verification);\n\n    validate_manifest(&record_root, &import_plan.manifest)?;\n    import_plan.manifest_text = render_manifest(&import_plan.manifest)?;\n    import_plan.evidence_text =\n        append_github_evidence(import_plan.evidence_text, &import_plan.manifest, snapshot);\n\n    apply_promotion_and_downgrade_guard(\n        &mut import_plan,\n        &field_scores,\n        previous_manifest.as_ref(),\n        &mut diagnostics,\n    )?;\n\n    evidence::retain_field_evidence(&mut import_plan, &field_scores);\n    import_plan.manifest_text = render_manifest(&import_plan.manifest)?;\n"
+        },
+        {
+          "startLine": 322,
+          "endLine": 329,
+          "text": "/// Best-effort read of the on-disk `record.toml` at `record_root`, if any, so\n/// a fresh crawl can be checked against it for unjustified downgrades. A\n/// missing or unparseable prior record simply means there is nothing to\n/// protect; this never fails the crawl.\nfn read_previous_manifest(record_root: &Path) -> Option<Manifest> {\n    let contents = fs::read_to_string(record_root.join(\"record.toml\")).ok()?;\n    dotrepo_schema::parse_manifest(&contents).ok()\n}"
+        }
+      ]
+    },
+    {
+      "path": "crates/dotrepo-crawler/src/pipeline/evidence.rs",
+      "sha256": "d14431d192b1f262b9ae2c21d3bbf0d6f8f4d5d0ebc7bf7fafcb5877205cd8ce",
+      "lineCount": 196,
+      "passages": [
+        {
+          "startLine": 5,
+          "endLine": 26,
+          "text": "pub(super) fn retain_field_evidence(plan: &mut ImportPlan, scores: &FieldScoreReport) {\n    let mut fields = Map::new();\n    for score in &scores.scores {\n        let value = query_manifest_value(&plan.manifest, &score.field).unwrap_or_default();\n        let (state, confidence) = match score.confidence {\n            FieldConfidence::HighConfidencePresent => (\"present\", \"high\"),\n            FieldConfidence::MediumConfidencePresent => (\"present\", \"medium\"),\n            FieldConfidence::HighConfidenceAbsent => (\"not_found\", \"high\"),\n            FieldConfidence::Suspect => (\"suspect\", \"low\"),\n            FieldConfidence::Unresolved => (\"unresolved\", \"low\"),\n        };\n        let method = if value.is_null() && score.confidence == FieldConfidence::Unresolved {\n            \"unresolved\"\n        } else if value.is_null() {\n            \"not_found_in_inspected_sources\"\n        } else if plan.inferred_fields.contains(&score.field) {\n            \"inferred\"\n        } else if score.source.is_some() {\n            \"extracted\"\n        } else {\n            \"unspecified\"\n        };"
+        },
+        {
+          "startLine": 43,
+          "endLine": 76,
+          "text": "        // Preserve a source-closure attachment only while its exact candidate,\n        // context source and assessment time remain bound. The new field score\n        // above still replaces confidence; retained grammar cannot mint high.\n        if let Some(previous) = plan\n            .manifest\n            .x\n            .get(\"dotrepo\")\n            .and_then(|extension| extension.get(\"field_evidence\"))\n            .and_then(|fields| fields.get(&score.field))\n        {\n            let same_value = previous\n                .get(\"valueJson\")\n                .and_then(Value::as_str)\n                .and_then(|raw| serde_json::from_str::<serde_json::Value>(raw).ok())\n                .as_ref()\n                == Some(&value);\n            let same_source = previous.get(\"source\") == metadata.get(\"source\");\n            let same_time = previous.get(\"checkedAt\") == metadata.get(\"checkedAt\");\n            if same_value && same_source && same_time {\n                if let Some(bindings) = previous.get(\"sourceBindingsJson\").and_then(Value::as_str) {\n                    metadata.insert(\"sourceBindingsJson\".into(), Value::String(bindings.into()));\n                }\n            }\n        }\n        fields.insert(score.field.clone(), Value::Table(metadata));\n    }\n    let extension = plan\n        .manifest\n        .x\n        .entry(\"dotrepo\".into())\n        .or_insert_with(|| Value::Table(Map::new()));\n    if let Some(extension) = extension.as_table_mut() {\n        extension.insert(\"field_evidence\".into(), Value::Table(fields));\n    }"
+        }
+      ]
+    },
+    {
+      "path": "crates/dotrepo-crawler/src/pipeline/writeback_gate.rs",
+      "sha256": "6659fc9162da43c415429e42efc113f395df424a9e5450b98f81fe0b0e659eb1",
+      "lineCount": 48,
+      "passages": [
+        {
+          "startLine": 15,
+          "endLine": 48,
+          "text": "    previous_manifest: Option<&Manifest>,\n    diagnostics: &mut Vec<CrawlDiagnostic>,\n) -> Result<()> {\n    let promotion = promote_to_verified(&mut import_plan.manifest, field_scores);\n    if promotion.promoted {\n        diagnostics.push(CrawlDiagnostic::info(\n            \"pipeline.auto_promoted\",\n            format!(\n                \"auto-promoted record from {} to verified: {}\",\n                promotion.previous_status, promotion.reason,\n            ),\n        ));\n        import_plan.manifest_text = render_manifest(&import_plan.manifest)?;\n        if let Some(ref mut evidence) = import_plan.evidence_text {\n            evidence.push_str(\"\\n## Auto-promotion\\n\\nAll fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.\\n\");\n        }\n    }\n\n    if let Some(outcome) =\n        guard_against_unjustified_downgrade(previous_manifest, &mut import_plan.manifest)\n    {\n        diagnostics.push(CrawlDiagnostic::info(\n            \"pipeline.downgrade_guard_allowed\",\n            format!(\n                \"fresh field scores do not justify verified status; {} factual fields changed\",\n                outcome.regressed_fields.len()\n            ),\n        ));\n        if let Some(evidence) = &mut import_plan.evidence_text {\n            evidence.push_str(\"\\n## Fresh verification\\n\\nPrior verified authority was not inherited: this refresh must qualify using its current field scores.\\n\");\n        }\n    }\n    Ok(())\n}"
+        }
+      ]
+    },
+    {
+      "path": "crates/dotrepo-core/src/promotion.rs",
+      "sha256": "65925c408a7a1d7c93756ce66c5cf86941b5f6d1056962e8d144a91f60c16db3",
+      "lineCount": 368,
+      "passages": [
+        {
+          "startLine": 75,
+          "endLine": 119,
+          "text": "pub fn guard_against_unjustified_downgrade(\n    previous: Option<&Manifest>,\n    fresh: &mut Manifest,\n) -> Option<DowngradeGuardOutcome> {\n    let previous = previous?;\n    if previous.record.status != RecordStatus::Verified\n        || status_rank(&fresh.record.status) >= status_rank(&previous.record.status)\n    {\n        return None;\n    }\n    fn changes(\n        path: &str,\n        old: &serde_json::Value,\n        new: &serde_json::Value,\n        out: &mut Vec<String>,\n    ) {\n        if old == new {\n            return;\n        }\n        if let (Some(old), Some(new)) = (old.as_object(), new.as_object()) {\n            let keys: std::collections::BTreeSet<_> = old.keys().chain(new.keys()).collect();\n            for key in keys {\n                changes(\n                    &format!(\"{path}.{key}\"),\n                    &old.get(key).cloned().unwrap_or_default(),\n                    &new.get(key).cloned().unwrap_or_default(),\n                    out,\n                );\n            }\n        } else {\n            out.push(path.to_string());\n        }\n    }\n    let old = serde_json::to_value(previous).expect(\"manifest is serializable\");\n    let new = serde_json::to_value(&*fresh).expect(\"manifest is serializable\");\n    let mut regressed_fields = Vec::new();\n    for field in [\"repo\", \"owners\", \"docs\", \"readme\", \"compat\", \"relations\"] {\n        changes(field, &old[field], &new[field], &mut regressed_fields);\n    }\n    Some(DowngradeGuardOutcome {\n        preserved: false,\n        regressed_fields,\n    })\n}\n"
+        },
+        {
+          "startLine": 120,
+          "endLine": 160,
+          "text": "pub fn promote_to_verified(manifest: &mut Manifest, report: &FieldScoreReport) -> PromotionOutcome {\n    let previous_status = match manifest.record.status {\n        RecordStatus::Draft => \"draft\",\n        RecordStatus::Imported => \"imported\",\n        RecordStatus::Inferred => \"inferred\",\n        RecordStatus::Reviewed => \"reviewed\",\n        RecordStatus::Verified => \"verified\",\n        RecordStatus::Canonical => \"canonical\",\n    }\n    .to_string();\n\n    // Never downgrade from reviewed or canonical\n    if matches!(\n        manifest.record.status,\n        RecordStatus::Reviewed | RecordStatus::Canonical\n    ) {\n        return PromotionOutcome {\n            promoted: false,\n            previous_status,\n            reason: \"record already at reviewed or canonical; will not downgrade\".to_string(),\n        };\n    }\n\n    if !report.summary.eligible_for_auto_publish {\n        return PromotionOutcome {\n            promoted: false,\n            previous_status,\n            reason: format!(\n                \"not all fields are honestly resolved: {} unresolved, {} medium-confidence\",\n                report.summary.unresolved.len(),\n                report.summary.medium_confidence_present.len(),\n            ),\n        };\n    }\n\n    manifest.record.status = RecordStatus::Verified;\n\n    // Update trust provenance and confidence\n    if let Some(ref mut trust) = manifest.record.trust {\n        trust.confidence = Some(\"high\".into());\n        if !trust.provenance.contains(&\"verified\".to_string()) {"
+        }
+      ]
+    },
+    {
+      "path": "crates/dotrepo-crawler/src/github.rs",
+      "sha256": "98dc36c7daed98e03fc33fa0ddf80919bb360b383320d4e9ecfdac40b45a0b08",
+      "lineCount": 1642,
+      "passages": [
+        {
+          "startLine": 26,
+          "endLine": 66,
+          "text": "// Every entry here must have a matching deterministic parser in\n// dotrepo-core (see crates/dotrepo-core/src/import/mod.rs's\n// `load_first_existing_file` calls) \u2014 otherwise the crawler fetches bytes\n// that are never used. Historically this list only covered\n// Cargo.toml/package.json/pyproject.toml/go.mod, so every other ecosystem\n// dotrepo-core already knows how to parse (Maven, Gradle, Composer, Mix,\n// Rebar, CMake presets, Makefile, justfile, Rakefile, setup.py/setup.cfg)\n// was silently starved of the one file it needed. CONTRIBUTING files feed\n// doc-declared command extraction. `.csproj` / `.sln` are handled in\n// `fetch_dotnet_manifest_files` because their filenames are not fixed.\nconst SUPPLEMENTAL_ROOT_FILES: &[&str] = &[\n    \"Cargo.toml\",\n    \"CONTRIBUTING.md\",\n    \".github/CONTRIBUTING.md\",\n    \"package.json\",\n    \"pyproject.toml\",\n    \"go.mod\",\n    \"setup.py\",\n    \"setup.cfg\",\n    \"tox.ini\",\n    \"pom.xml\",\n    \"build.gradle\",\n    \"build.gradle.kts\",\n    \"composer.json\",\n    \"mix.exs\",\n    \"rebar.config\",\n    \"CMakePresets.json\",\n    \"GNUmakefile\",\n    \"Makefile\",\n    \"makefile\",\n    \"justfile\",\n    \"Justfile\",\n    \"Rakefile\",\n    \"rakefile\",\n    // Wrapper marker files: import command inference only checks their\n    // presence, but without materializing them the Maven/Gradle manifest\n    // tiers emit bare `mvn`/`gradle` for repositories that ship a wrapper.\n    \"gradlew\",\n    \"mvnw\",\n];\nconst MAX_WORKFLOW_FILES: usize = 8;"
+        },
+        {
+          "startLine": 791,
+          "endLine": 825,
+          "text": "    fn fetch_repository_files(\n        &self,\n        repository: &RepositoryRef,\n        default_branch: &str,\n        languages: &[String],\n    ) -> Result<ConventionalRepositoryFiles> {\n        let mut extra_files = Vec::new();\n        for relative_path in SUPPLEMENTAL_ROOT_FILES {\n            if let Some(file) =\n                self.fetch_optional_repository_file(repository, default_branch, relative_path)?\n            {\n                extra_files.push(file);\n            }\n        }\n        extra_files.extend(self.fetch_workflow_files(repository, default_branch)?);\n        extra_files.extend(self.fetch_node_manifest_files(\n            repository,\n            default_branch,\n            languages,\n        )?);\n        extra_files.extend(self.fetch_python_manifest_files(\n            repository,\n            default_branch,\n            languages,\n        )?);\n        extra_files.extend(self.fetch_rust_manifest_files(\n            repository,\n            default_branch,\n            languages,\n        )?);\n        extra_files.extend(self.fetch_dotnet_manifest_files(\n            repository,\n            default_branch,\n            languages,\n        )?);"
+        }
+      ]
+    }
+  ],
+  "originalCorrections": [
+    {
+      "identity": "github.com/IBM/fp-go",
+      "recordPath": "index/repos/github.com/IBM/fp-go/record.toml",
+      "oldRecordSha256": "b282484109501ee0f9e0300b2f76683c935318ee5cc35d8dca137bb2161d9bfb",
+      "newRecordSha256": "38c6f9763d2b4da5f9e6d8fcbdc1e78a54ae31d059fb14c75c192dcb892e7f54",
+      "preservedUnrelatedParsedValuesAndEvidence": true,
+      "changes": [
+        {
+          "field": "docs.root",
+          "oldValue": null,
+          "newValue": "https://pkg.go.dev/github.com/IBM/fp-go",
+          "disposition": "missing-source-supported-answer",
+          "revision": "42e25c64425e2291bd5b281aa852b7a790526204",
+          "sources": [
+            {
+              "path": "sources/github.com/IBM/fp-go/README.md",
+              "lines": [
+                56,
+                60
+              ],
+              "excerpt": "### Resources\n\n- \ud83d\udcd6 [API Documentation](https://pkg.go.dev/github.com/IBM/fp-go)\n- \ud83d\udca1 [Code Samples](./samples/)\n- \ud83c\udd95 [V2 Documentation](./v2/README.md) (requires Go 1.24+)",
+              "sha256": "f92d9a6e245607599eedee3a941ffcaf0aadef007d3cbbf6b26a04ee653a433a",
+              "url": "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/README.md"
+            }
+          ],
+          "reason": "README explicitly labels pkg.go.dev root-module page API Documentation, with separate V2 documentation. Retain the declared entrypoint without implying v1 command coverage of every module. Exact source-declared URL retained; bounded live target status/redirect/content observations are retained separately in index/telemetry/operating-readiness-20261029/f1-corrections. Target content is mutable and does not establish source-version parity."
+        },
+        {
+          "field": "repo.build",
+          "oldValue": "go build ./...",
+          "newValue": null,
+          "disposition": "potentially-applicable-insufficient-evidence",
+          "revision": "42e25c64425e2291bd5b281aa852b7a790526204",
+          "sources": [
+            {
+              "path": "sources/github.com/IBM/fp-go/go.mod",
+              "lines": [
+                1,
+                5
+              ],
+              "excerpt": "module github.com/IBM/fp-go\n\ngo 1.20\n\nrequire (",
+              "sha256": "d99a7fedebc0034b3ee99bb1e820f0e93660d2e44e6e3b7a5de8252afab23544",
+              "url": "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/go.mod"
+            },
+            {
+              "path": "sources/github.com/IBM/fp-go/v2/go.mod",
+              "lines": [
+                1,
+                5
+              ],
+              "excerpt": "module github.com/IBM/fp-go/v2\n\ngo 1.24.0\n\nrequire (",
+              "sha256": "592f7929f786535e9ce99626ba3caef64d209a32d103886819b6006da7c4e254",
+              "url": "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/v2/go.mod"
+            },
+            {
+              "path": "sources/github.com/IBM/fp-go/gen/v2/go.mod",
+              "lines": [
+                1,
+                5
+              ],
+              "excerpt": "module github.com/IBM/fp-go/gen/v2\n\ngo 1.26.0\n\nrequire (",
+              "sha256": "f570b0499adf862d968f0ecac7a550da39ca66438e6a4fe71352fc44525409d6",
+              "url": "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/gen/v2/go.mod"
+            },
+            {
+              "path": "sources/github.com/IBM/fp-go/.github/workflows/build.yml",
+              "lines": [
+                133,
+                151
+              ],
+              "excerpt": "    needs:\n      - build-v1\n      - build-v2\n      - build-gen\n    runs-on: ubuntu-latest\n    steps:\n      - name: Coveralls Finished\n        continue-on-error: true\n        uses: coverallsapp/github-action@v2\n        with:\n          github-token: ${{ secrets.GITHUB_TOKEN }}\n          parallel-finished: true\n\n  release:\n    name: Release\n    needs:\n      - build-v1\n      - build-v2\n      - build-gen",
+              "sha256": "1931d37e0f552e7451472cbc4e75f119a09fc6d8d70819aa29e0481173e4a25c",
+              "url": "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/.github/workflows/build.yml"
+            }
+          ],
+          "reason": "go build ./... may build root v1, but retained docs/workflows do not declare it as repository-default build. CI separately handles v1/v2/gen-v2; conventional syntax does not establish an aggregate source-owned default. Withheld repository-default scalar; narrower/prepared execution may remain valid. No upstream execution observed."
+        },
+        {
+          "field": "repo.test",
+          "oldValue": "go test ./...",
+          "newValue": null,
+          "disposition": "contradicted-or-wrong-scope",
+          "revision": "42e25c64425e2291bd5b281aa852b7a790526204",
+          "sources": [
+            {
+              "path": "sources/github.com/IBM/fp-go/.github/workflows/build.yml",
+              "lines": [
+                21,
+                44
+              ],
+              "excerpt": "jobs:\n  build-v1:\n    name: Build v1 (Go ${{ matrix.go-version }})\n    runs-on: ubuntu-latest\n    permissions:\n      contents: read\n    strategy:\n      matrix:\n        go-version: ['1.20.x', '1.21.x', '1.22.x', '1.23.x', '1.24.x', '1.25.x', '1.26.x', '1.27.x']\n      fail-fast: false  # Continue with other versions if one fails\n    steps:\n      # full checkout for semantic-release\n      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1\n        with:\n          fetch-depth: 0\n      - name: Set up Go ${{ matrix.go-version }}\n        uses: actions/setup-go@v7\n        with:\n          go-version: ${{ matrix.go-version }}\n          cache: true  # Enable Go module caching\n      - name: Run tests\n        run: |\n          go mod tidy\n          go test -race -coverprofile=coverage.txt -covermode=atomic -coverpkg=./... ./...",
+              "sha256": "1931d37e0f552e7451472cbc4e75f119a09fc6d8d70819aa29e0481173e4a25c",
+              "url": "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/.github/workflows/build.yml"
+            },
+            {
+              "path": "sources/github.com/IBM/fp-go/.github/workflows/build.yml",
+              "lines": [
+                65,
+                86
+              ],
+              "excerpt": "  build-v2:\n    name: Build v2 (Go ${{ matrix.go-version }})\n    runs-on: ubuntu-latest\n    permissions:\n      contents: read\n    strategy:\n      matrix:\n        go-version: ['1.24.x', '1.25.x', '1.26.x', '1.27.x']\n    steps:\n      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1\n        with:\n          fetch-depth: 0\n      - name: Set up Go ${{ matrix.go-version }}\n        uses: actions/setup-go@v7\n        with:\n          go-version: ${{ matrix.go-version }}\n          cache: true  # Enable Go module caching\n      - name: Run tests\n        run: |\n          cd v2\n          go mod tidy\n          go test -race -coverprofile=coverage.txt -covermode=atomic -coverpkg=./... ./...",
+              "sha256": "1931d37e0f552e7451472cbc4e75f119a09fc6d8d70819aa29e0481173e4a25c",
+              "url": "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/.github/workflows/build.yml"
+            },
+            {
+              "path": "sources/github.com/IBM/fp-go/.github/workflows/build.yml",
+              "lines": [
+                107,
+                128
+              ],
+              "excerpt": "  build-gen:\n    name: Build gen/v2 (Go ${{ matrix.go-version }})\n    runs-on: ubuntu-latest\n    permissions:\n      contents: read\n    strategy:\n      matrix:\n        go-version: ['1.26.x', '1.27.x']\n    steps:\n      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1\n        with:\n          fetch-depth: 0\n      - name: Set up Go ${{ matrix.go-version }}\n        uses: actions/setup-go@v7\n        with:\n          go-version: ${{ matrix.go-version }}\n          cache: true\n      - name: Run tests\n        run: |\n          cd gen/v2\n          go mod tidy\n          go test -race -coverprofile=coverage.txt -covermode=atomic -coverpkg=./... ./...",
+              "sha256": "1931d37e0f552e7451472cbc4e75f119a09fc6d8d70819aa29e0481173e4a25c",
+              "url": "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/.github/workflows/build.yml"
+            },
+            {
+              "path": "sources/github.com/IBM/fp-go/v2/go.mod",
+              "lines": [
+                1,
+                5
+              ],
+              "excerpt": "module github.com/IBM/fp-go/v2\n\ngo 1.24.0\n\nrequire (",
+              "sha256": "592f7929f786535e9ce99626ba3caef64d209a32d103886819b6006da7c4e254",
+              "url": "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/v2/go.mod"
+            },
+            {
+              "path": "sources/github.com/IBM/fp-go/gen/v2/go.mod",
+              "lines": [
+                1,
+                5
+              ],
+              "excerpt": "module github.com/IBM/fp-go/gen/v2\n\ngo 1.26.0\n\nrequire (",
+              "sha256": "f570b0499adf862d968f0ecac7a550da39ca66438e6a4fe71352fc44525409d6",
+              "url": "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/gen/v2/go.mod"
+            }
+          ],
+          "reason": "Root go test ./... covers root v1 but omits separate v2 and gen/v2 modules. CI requires distinct module jobs, Go matrices, go mod tidy preparation and race/coverage invocations. Withheld repository-default scalar; narrower/prepared execution may remain valid. No upstream execution observed."
+        }
+      ]
+    },
+    {
+      "identity": "github.com/gomodule/redigo",
+      "recordPath": "index/repos/github.com/gomodule/redigo/record.toml",
+      "oldRecordSha256": "562717d09d0fcf6ee7707cbb4afc4e19ed9652e662aee58af63d83acc8538151",
+      "newRecordSha256": "05024b63327cb2a542a9864d73db5f5ab95fdbc1e31cc039d5ac6c3526656029",
+      "preservedUnrelatedParsedValuesAndEvidence": true,
+      "changes": [
+        {
+          "field": "docs.root",
+          "oldValue": "https://pkg.go.dev/github.com/gomodule/redigo/redis",
+          "newValue": "https://pkg.go.dev/github.com/gomodule/redigo/redis",
+          "disposition": "supported-existing-answer",
+          "revision": "57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+          "sources": [
+            {
+              "path": "sources/github.com/gomodule/redigo/README.markdown",
+              "lines": [
+                18,
+                23
+              ],
+              "excerpt": "Documentation\n-------------\n\n- [API Reference](https://pkg.go.dev/github.com/gomodule/redigo/redis)\n- [FAQ](https://github.com/gomodule/redigo/wiki/FAQ)\n- [Examples](https://pkg.go.dev/github.com/gomodule/redigo/redis#pkg-examples)",
+              "sha256": "9fade03f42daf7476a14204e80bb2dd64593bf81f4bedf332d00625a3b6f522d",
+              "url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/README.markdown"
+            }
+          ],
+          "reason": "README explicitly labels the existing pkg.go.dev value API Reference and uses the same path for its GoDoc badge and features. Exact source-declared URL retained; bounded live target status/redirect/content observations are retained separately in index/telemetry/operating-readiness-20261029/f1-corrections. Target content is mutable and does not establish source-version parity."
+        },
+        {
+          "field": "repo.build",
+          "oldValue": "go build ./...",
+          "newValue": null,
+          "disposition": "potentially-applicable-insufficient-evidence",
+          "revision": "57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+          "sources": [
+            {
+              "path": "sources/github.com/gomodule/redigo/README.markdown",
+              "lines": [
+                25,
+                32
+              ],
+              "excerpt": "Installation\n------------\n\nInstall Redigo using the \"go get\" command:\n\n    go get github.com/gomodule/redigo/redis\n\nThe Go distribution is Redigo's only dependency.",
+              "sha256": "9fade03f42daf7476a14204e80bb2dd64593bf81f4bedf332d00625a3b6f522d",
+              "url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/README.markdown"
+            },
+            {
+              "path": "sources/github.com/gomodule/redigo/.github/workflows/release-build.yml",
+              "lines": [
+                20,
+                32
+              ],
+              "excerpt": "      - name: Set up Go\n        uses: actions/setup-go@v5\n        with:\n          go-version: '1.22'\n\n      - name: Run GoReleaser\n        uses: goreleaser/goreleaser-action@v5\n        with:\n          distribution: goreleaser\n          version: latest\n          args: release --clean\n        env:\n          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}",
+              "sha256": "1e4c7c2dae8bc6b2286ee87e5055900ef4d08c53608d95213bb4d8b484dd06b8",
+              "url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/.github/workflows/release-build.yml"
+            }
+          ],
+          "reason": "README declares go get installation, not a repository-default go build ./... step. Release workflow uses GoReleaser. The original command may build the library but its claimed default is not source-established. Withheld repository-default scalar; narrower/prepared execution may remain valid. No upstream execution observed."
+        },
+        {
+          "field": "repo.test",
+          "oldValue": "go test ./...",
+          "newValue": null,
+          "disposition": "potentially-applicable-insufficient-evidence",
+          "revision": "57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+          "sources": [
+            {
+              "path": "sources/github.com/gomodule/redigo/.github/workflows/go-test.yml",
+              "lines": [
+                11,
+                38
+              ],
+              "excerpt": "    runs-on: ${{ matrix.os }}\n    strategy:\n      matrix:\n        go-version:\n        - '1.21'\n        - '1.22'\n        os:\n        - 'ubuntu-latest'\n        redis:\n        - '7.2'\n        - '7.0'\n        - '6.2'\n        - '6.0'\n    name: Test go ${{ matrix.go-version }} redis ${{ matrix.redis }} on ${{ matrix.os }}\n    steps:\n      - name: Setup redis\n        uses: shogo82148/actions-setup-redis@v1\n        with:\n          redis-version: ${{ matrix.redis }}\n\n      - name: Checkout code\n        uses: actions/checkout@v4\n\n      - name: Install Go\n        uses: actions/setup-go@v5\n        with:\n          go-version: ${{ matrix.go-version }}\n",
+              "sha256": "f6e5dca75defdea9f22c29c189a2ca46b398bc19018be5f41e43055e329fa84d",
+              "url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/.github/workflows/go-test.yml"
+            },
+            {
+              "path": "sources/github.com/gomodule/redigo/redis/test_test.go",
+              "lines": [
+                40,
+                65
+              ],
+              "excerpt": "\tErrNegativeInt = errNegativeInt\n\n\tserverPath     = flag.String(\"redis-server\", \"redis-server\", \"Path to redis server binary\")\n\tserverAddress  = flag.String(\"redis-address\", \"127.0.0.1\", \"The address of the server\")\n\tserverBasePort = flag.Int(\"redis-port\", 16379, \"Beginning of port range for test servers\")\n\tserverLogName  = flag.String(\"redis-log\", \"\", \"Write Redis server logs to `filename`\")\n\tserverLog      = ioutil.Discard\n\n\tdefaultServerMu  sync.Mutex\n\tdefaultServer    *Server\n\tdefaultServerErr error\n)\n\ntype Server struct {\n\tname string\n\tcmd  *exec.Cmd\n\tdone chan struct{}\n}\n\ntype version struct {\n\tmajor int\n\tminor int\n\tpatch int\n}\n\nfunc redisServerVersion() (*version, error) {",
+              "sha256": "91e3066bd8b8eb32a5b778c6cbff27e08cd31b690d0a8424368cbd49e96cf17b",
+              "url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/test_test.go"
+            },
+            {
+              "path": "sources/github.com/gomodule/redigo/redis/test_test.go",
+              "lines": [
+                95,
+                123
+              ],
+              "excerpt": "\tversion, err := redisServerVersion()\n\tif err != nil {\n\t\treturn nil, err\n\t}\n\n\tif version.major >= 7 {\n\t\targs = append(args, \"--enable-debug-command\", \"local\")\n\t}\n\n\ts := &Server{\n\t\tname: name,\n\t\tcmd:  exec.Command(*serverPath, args...),\n\t\tdone: make(chan struct{}),\n\t}\n\n\tr, err := s.cmd.StdoutPipe()\n\tif err != nil {\n\t\treturn nil, err\n\t}\n\n\terr = s.cmd.Start()\n\tif err != nil {\n\t\treturn nil, err\n\t}\n\n\tready := make(chan error, 1)\n\tgo s.watch(r, ready)\n\n\tselect {",
+              "sha256": "91e3066bd8b8eb32a5b778c6cbff27e08cd31b690d0a8424368cbd49e96cf17b",
+              "url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/redis/test_test.go"
+            }
+          ],
+          "reason": "CI installs Redis before go test -race ./.... Test helper executes redis-server --version and starts the binary. The bare old scalar can run the same packages with setup, but drops Redis prerequisites and the source-owned race flag. Withheld repository-default scalar; narrower/prepared execution may remain valid. No upstream execution observed."
+        }
+      ]
+    }
+  ]
+}

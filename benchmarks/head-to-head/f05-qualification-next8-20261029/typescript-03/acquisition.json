@@ -1,0 +1,56 @@
+{
+  "task": {
+    "id": "typescript-03",
+    "repository": "github.com/vuejs/core",
+    "revision": "05db7e807be841e6f343d0237669669b18c89d4d",
+    "ecosystem": "JavaScript/TypeScript",
+    "scope": "repository",
+    "startingState": "local-checkout",
+    "component": null,
+    "request": "requests/typescript-03.md",
+    "gold": "curator/gold/typescript-03.json",
+    "oracle": "curator/oracles/typescript-03.json",
+    "enrollmentRationale": "Root package scripts, contributor test guide and Vitest configuration establish a TypeScript workspace with repository-default tests."
+  },
+  "state": "source-acquired",
+  "indexConsulted": false,
+  "modelCalls": 0,
+  "upstreamProjectCodeExecuted": false,
+  "costUsd": null,
+  "sourceAcquisitionLimits": {
+    "compressedBytes": 536870912,
+    "expandedSourceBytes": 1073741824,
+    "expandedTrancheBytes": 2147483648,
+    "fileBytes": 134217728,
+    "filesTranche": 200000
+  },
+  "costExclusions": [
+    "No metered host/container/download charge source."
+  ],
+  "scratch": "/tmp/dotrepo-f05-qualification-next8-20261029/typescript-03",
+  "partialExpandedBytes": 6521634,
+  "compressedGitObjectBytes": 1818587,
+  "completeGitObjectsAcquired": true,
+  "sourceFiles": 703,
+  "sourceBytes": 6521634,
+  "symlinks": {},
+  "missingSubmodules": {},
+  "missingLfsObjects": [],
+  "frozenInspectedFilesMatched": [
+    "README.md",
+    "package.json",
+    "pnpm-workspace.yaml",
+    ".github/contributing.md",
+    ".node-version",
+    "vitest.config.ts",
+    "pnpm-lock.yaml"
+  ],
+  "archivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/typescript-03/source.tar",
+  "archiveSha256": "51249848d90d269ca4f03504257661e172bcc2e644bb2cc32cc37513ac60b93c",
+  "archiveBytes": 7086080,
+  "compressedArchivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/typescript-03/source.tar.gz",
+  "compressedArchiveSha256": "6a147c49bfb27f2871b6e557a8714de40de122dc688f15f363c6baab0683a6cd",
+  "compressedArchiveBytes": 1610372,
+  "sourceBundleReady": true,
+  "elapsedSeconds": 1.7106437091715634
+}

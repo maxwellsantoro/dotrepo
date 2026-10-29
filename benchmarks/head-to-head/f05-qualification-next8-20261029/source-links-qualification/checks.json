@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "focusedTests": {
+    "command": "uv run pytest scripts/tests/test_agent_runtime.py -q",
+    "passed": 116,
+    "observedSeconds": 1.89
+  },
+  "ruffCheck": "passed for runtime/tests/qualification driver",
+  "ruffFormatCheck": "passed for all3ownedPythonfiles",
+  "diffCheck": "passed",
+  "finalRuntimeSha256": "f2f43560d85d2d1934b6f84bba26951d1cee81d8fe08e291c600a89754f850ab",
+  "testsSha256": "544dfa82ee219c2b01332eb7de11ac0c241384dc4de6ab522b957c79afbc82df",
+  "driverSha256": "0b92ff202be0ff477a46f22e5cb8991d1e176c9518cdc63455703d12d64effdf",
+  "patchSha256": "133c4a292e32a260b6800c95c9bc4de732d5ba2a45e3a8ec902622f642b06330",
+  "baseBefore": "30722751bb2b3aed8cfb43b019ef06f3d34ec6ef",
+  "headAtHandoff": "91643102c6083fda66827f68e43a06e7cdc8cec8",
+  "oldMotivatingInventoryAndProposalUnchanged": true,
+  "actualLinks": 17,
+  "actualFullArchives": 2,
+  "ownedFinalDockerContainersPassedAndAbsent": 2,
+  "providerCalls": 0,
+  "upstreamCodeExecuted": false,
+  "limitations": [
+    "Provenance validators establish consistency, not authenticity.",
+    "Only exactUTF8contained existingtarget topologies; not arbitraryPOSIX/Windows links.",
+    "Full-source Docker campaign/task/environment/cache/oracle qualification remains separate."
+  ]
+}

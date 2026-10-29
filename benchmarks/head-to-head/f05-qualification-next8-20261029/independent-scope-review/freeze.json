@@ -1,0 +1,283 @@
+{
+  "identity": "f05-curator-scope-followup-20261029-v1",
+  "originalSourceFreezeSha256": "fc756e0d5f8a25cddc9f19ece651b21078a68a1f601febdb8d772208c0a66d41",
+  "role": "original-curator-followup; independent second review pending",
+  "sourceOnly": true,
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "141a97e98ed3d9bba256e592f032a58ce90647aa8efbdbae34546add1bd8aa08",
+      "bytes": 4949
+    },
+    {
+      "path": "checks.json",
+      "sha256": "3ac113a0cb73982d771d87ec7af1e852dd1315539b0364e9ce7e349a58d09906",
+      "bytes": 837
+    },
+    {
+      "path": "dispositions.json",
+      "sha256": "3d24e49557b2e2b86ac0cf11a046ce14e6fe746bebc3838108ec284db0bbb1af",
+      "bytes": 26004
+    },
+    {
+      "path": "source-bindings.json",
+      "sha256": "d91801c067b1a4ee4fa52ecd4631c01627f535577be7c5cbdad43d897bef4c61",
+      "bytes": 35652
+    },
+    {
+      "path": "sources/python-01/.github/workflows/update-star-history.yml",
+      "sha256": "cd63f857c71823963a3d9ef678328478870e2750c3c1f41ac708b1fa7ecec70e",
+      "bytes": 18211
+    },
+    {
+      "path": "sources/python-01/README.md",
+      "sha256": "5109feef87d494dd77c0eb225486d4278fe3eb61b303574600bcf8c3c339d034",
+      "bytes": 8958
+    },
+    {
+      "path": "sources/python-01/backend/pyproject.toml",
+      "sha256": "e923fa98056d1b6085ab789993a1d05f31bfc1e8cbbb6b9aa17d49663253c1a2",
+      "bytes": 1080
+    },
+    {
+      "path": "sources/python-01/backend/scripts/test_profile_format.py",
+      "sha256": "c60feaff8d5727c7c473d9879742c85c352151b208ec8ff72d48ad9ff9e88f17",
+      "bytes": 5856
+    },
+    {
+      "path": "sources/python-01/backend/tests/test_ontology_generator.py",
+      "sha256": "ca17fe3d212cc7bb6a650dc131f3e30f918a153d32561cfd6165041c9504a590",
+      "bytes": 2457
+    },
+    {
+      "path": "sources/python-01/backend/tests/test_simulation_prepare_failure.py",
+      "sha256": "9afbfcfafb390c0216064e7bdb45e326039f0a37549987c4bd596773747d10c5",
+      "bytes": 3462
+    },
+    {
+      "path": "sources/python-01/frontend/package.json",
+      "sha256": "f972113d3cca752acc44f7e63d97fec138b2a34388b173f85f847bf7108fe852",
+      "bytes": 419
+    },
+    {
+      "path": "sources/python-01/package.json",
+      "sha256": "f2b8cc90bc21b0b4990d5192b5e7c09161982760dede52cb743862d908526715",
+      "bytes": 702
+    },
+    {
+      "path": "sources/python-01/tests/test_local_star_count_fetch.py",
+      "sha256": "f9368e145018b644f28104f15012ccbe99d124647966ee225bd4153f52dbb173",
+      "bytes": 13843
+    },
+    {
+      "path": "sources/python-01/tests/test_local_star_history.py",
+      "sha256": "5d9fb5466b5d121432d9e82869edf91fe41cb1f02b8a6fe704372fb167368d55",
+      "bytes": 35557
+    },
+    {
+      "path": "sources/python-02/.github/actions/restore-or-build-venv/action.yml",
+      "sha256": "db8dc6fe6b4fca8e545fdb7d62e67587900fba00bbdc58fb53a1918647ee08fe",
+      "bytes": 5104
+    },
+    {
+      "path": "sources/python-02/.github/workflows/ci.yaml",
+      "sha256": "ea64635b1138a135028789032291fec4fbb57a6ede34c4a132d243137c3c75b5",
+      "bytes": 67496
+    },
+    {
+      "path": "sources/python-02/.python-version",
+      "sha256": "4f4c88910b6d485ae689143880e5e81b595a48a51ecb391b2f14feaec106d180",
+      "bytes": 8
+    },
+    {
+      "path": "sources/python-02/AGENTS.md",
+      "sha256": "2067e1d10c6da85df9856da6e5cbe1346d7d01949ccfbea96ff1b73394a643fa",
+      "bytes": 5708
+    },
+    {
+      "path": "sources/python-02/packages/pytest-home-assistant/pyproject.toml",
+      "sha256": "2baf0f2f02b1af463cd525f82386133734cc87819d3d46cc70fd893e467a839e",
+      "bytes": 1431
+    },
+    {
+      "path": "sources/python-02/packages/pytest-home-assistant/pytest_homeassistant/bootstrap.py",
+      "sha256": "21b652e6ebd699692ed5ac8218a625fda8dfb6c1c43c2b45caca42fdfa488928",
+      "bytes": 337
+    },
+    {
+      "path": "sources/python-02/packages/pytest-home-assistant/pytest_homeassistant/plugins.py",
+      "sha256": "ba567c653a3ffeb0448f1b6d89b8b3d5a2c6113ae40340d4c00d818646474992",
+      "bytes": 83632
+    },
+    {
+      "path": "sources/python-02/pyproject.toml",
+      "sha256": "60bc823ebd5fbab24c44b1b7aeed13db1a9d51378f2ddb13bf9d0af2c77c78c7",
+      "bytes": 42457
+    },
+    {
+      "path": "sources/python-02/requirements_test.txt",
+      "sha256": "cbca7d43b49f697bd18825b412170c10f479fbdab63db99cfbdf63918f44d0aa",
+      "bytes": 1548
+    },
+    {
+      "path": "sources/python-02/script/bootstrap",
+      "sha256": "c920c9b8347b46abd7dbb12833fb125d393e3a637317405b4c7c2bdf7e2789c4",
+      "bytes": 511
+    },
+    {
+      "path": "sources/python-02/script/setup",
+      "sha256": "b56bbc608ab81944b3f6507b4cf52dfdac470b9f5312fb3c0bfd9f70810765f0",
+      "bytes": 1012
+    },
+    {
+      "path": "sources/python-02/tests/__init__.py",
+      "sha256": "aeaf1eb6f0778915de3377af758757af9a2a3e289c80f6113dfff915ec081e1f",
+      "bytes": 305
+    },
+    {
+      "path": "sources/python-02/tests/test_core.py",
+      "sha256": "c2031802fc71595f384e10151026540c9f2b17f9f5480d087da7adfe36eb950d",
+      "bytes": 115021
+    },
+    {
+      "path": "sources/python-03/.github/workflows/ci.yml",
+      "sha256": "10d0709634aca656e9ff0ed55a7586dee6545d8fa780ef43938550dc94da4455",
+      "bytes": 20832
+    },
+    {
+      "path": "sources/python-03/CONTRIBUTING.md",
+      "sha256": "b7f4dd2ac304c224b671d4830813bd6b2b8799da8d78f13cf927d4379ebac247",
+      "bytes": 22864
+    },
+    {
+      "path": "sources/python-03/Makefile",
+      "sha256": "5335edf29074bb04a286c62f93e9cb8505b789982700ca14fb22dafb42986aa4",
+      "bytes": 6235
+    },
+    {
+      "path": "sources/python-03/devscripts/run_tests.sh",
+      "sha256": "957a422ea5da44d12a69addcc6a27f66c7e68963601c6a299e419e6c8f32cc11",
+      "bytes": 562
+    },
+    {
+      "path": "sources/python-03/setup.py",
+      "sha256": "b22fbdb4f23e480976e1a5a20b95848c26680b04b796838756241191bd8dfb4d",
+      "bytes": 4621
+    },
+    {
+      "path": "sources/python-03/test/helper.py",
+      "sha256": "1a71eb39bc2628ef9d6c1fb87c521914d5dd3ccbb17d1cf164be892f789bb055",
+      "bytes": 10843
+    },
+    {
+      "path": "sources/python-03/test/parameters.json",
+      "sha256": "859ff098d3ea4ade2188afc09d6efab96be479a8c3a6a576f451ccaf55edc685",
+      "bytes": 1052
+    },
+    {
+      "path": "sources/python-03/test/test_YoutubeDL.py",
+      "sha256": "07f9b1b9506b67b123121c9f9630dfaa90d127354f7135fd6914ddb7cfa79dd6",
+      "bytes": 49179
+    },
+    {
+      "path": "sources/python-03/test/test_download.py",
+      "sha256": "1c96c9d0727cbf8c01a449bb2bf94f659293040590a6ed7b3c8b6edc825b3fe5",
+      "bytes": 11526
+    },
+    {
+      "path": "sources/python-03/test/test_downloader_http.py",
+      "sha256": "b0b6863e5ef58a5e386a7a1769e04e4e957cd60eb878ed3bffeeb26f61119dad",
+      "bytes": 3383
+    },
+    {
+      "path": "sources/python-03/test/test_socks.py",
+      "sha256": "c63a0ccc3396850e82fafc14627f8d7cb2fbdef45cba5254726eeaf129812555",
+      "bytes": 3500
+    },
+    {
+      "path": "sources/python-03/test/test_utils.py",
+      "sha256": "6c74527100dc8b1d9077e9fdcc6fa6b79c12b4eaf1779420fb097ec22f404d2d",
+      "bytes": 80951
+    },
+    {
+      "path": "sources/python-03/tox.ini",
+      "sha256": "75c47b0f9ed2b6ac528d34c6f0579e09de1a4f0809d18397120827a67dde2274",
+      "bytes": 614
+    },
+    {
+      "path": "sources/rust-01/.github/CONTRIBUTING.md",
+      "sha256": "28fc0f28ee0642a903bd62e283429a40f7337891d75ff6d7e7739675400d6123",
+      "bytes": 8196
+    },
+    {
+      "path": "sources/rust-01/.github/workflows/test-cli-js.yml",
+      "sha256": "796a4cbaeea61fccd5f79a164bf0cc42a9250631466b3de34508ec40c0dec7c2",
+      "bytes": 2004
+    },
+    {
+      "path": "sources/rust-01/.github/workflows/test-cli-rs.yml",
+      "sha256": "06b72994865724d61c5d45065fdb0705ed78d377fbe982126a04335ace4e6dca",
+      "bytes": 2705
+    },
+    {
+      "path": "sources/rust-01/.github/workflows/test-core.yml",
+      "sha256": "37c4f7098d4285a3393c1788c704d9ced6eaddaaa4fdcbf77669b3dbc53db4b7",
+      "bytes": 5301
+    },
+    {
+      "path": "sources/rust-01/Cargo.toml",
+      "sha256": "6e04a4e37699cf7d44d35d14fa4f0626bbaea7cde433b81ad8a9adeefe211bc1",
+      "bytes": 2953
+    },
+    {
+      "path": "sources/rust-01/crates/tauri-schema-worker/package.json",
+      "sha256": "af8bd2de383f9169bda138031912a17ff7174635b5c072662c675ba8875267b8",
+      "bytes": 247
+    },
+    {
+      "path": "sources/rust-01/examples/api/package.json",
+      "sha256": "bb459d5225d42cbaa05c9fd927db4c4eea06562331c811f0146070b19f304341",
+      "bytes": 627
+    },
+    {
+      "path": "sources/rust-01/examples/file-associations/package.json",
+      "sha256": "97dd1852ccce1fecaf6bcdc0880ecba0cf34b34b58dc02251786f1d5119bd85c",
+      "bytes": 204
+    },
+    {
+      "path": "sources/rust-01/examples/resources/package.json",
+      "sha256": "a631bbe4e3c045c42acbb1f302dd58a0d4a23e3277945efa2c5519707d282369",
+      "bytes": 116
+    },
+    {
+      "path": "sources/rust-01/package.json",
+      "sha256": "2d5725b499d90f9360dafa4a7204b95d48caae0f7268dbc1dbf99c22056a1e0d",
+      "bytes": 1333
+    },
+    {
+      "path": "sources/rust-01/packages/api/package.json",
+      "sha256": "25e4d15f311d5c7f875f7d56afcc08f6a77483b5ebd3a314c32a30f015c86fa8",
+      "bytes": 1760
+    },
+    {
+      "path": "sources/rust-01/packages/api-e2e/package.json",
+      "sha256": "b839c202c824ad58b1af3cc7357f821378122d2f7fa44a442bceccaa1adf5b40",
+      "bytes": 1112
+    },
+    {
+      "path": "sources/rust-01/packages/cli/__tests__/template.spec.ts",
+      "sha256": "86ab8db90bd91c8591116303ac9c9bc38e32557d3b18ee7cf79d356e5e7d8f15",
+      "bytes": 2405
+    },
+    {
+      "path": "sources/rust-01/packages/cli/package.json",
+      "sha256": "d9b292bd391da3c43a1a392341ef34eae9fd4bfbd8d089b39c17551bff8911d1",
+      "bytes": 1889
+    },
+    {
+      "path": "sources/rust-01/pnpm-workspace.yaml",
+      "sha256": "3a9cb62cca5274f755558a9831624b57ef54c7c9dbe428f5795844137d8ff90a",
+      "bytes": 832
+    }
+  ]
+}

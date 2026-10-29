@@ -1,0 +1,9 @@
+{
+  "state": "built-image-tool-control-failed",
+  "planSha256": "24997edeee805dfaa52e12a0e535d912bca700519c7752930fadc7052d275687",
+  "imageId": "sha256:ac1ef011a116232ea9fb6d0b534649a0cd298bbffeba25a5b124b37940568d75",
+  "receipt": "image-attempt-2/logs/tools/receipt.json",
+  "cause": "COPY individual source symlink dereferenced npm launcher; relative require path fails. Rust/cargo/node identity succeeded before npm error; no cache/source task execution occurred.",
+  "followupPlanSha256": "ac4ed276976b182bc565043779ea7bd1ebbcaf9c441d46f81b3ad569737237a1",
+  "costUsd": null
+}

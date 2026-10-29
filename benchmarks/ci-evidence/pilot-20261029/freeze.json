@@ -1,0 +1,326 @@
+{
+  "identity": "ci-evidence-pilot-20261029-final",
+  "preApiFreezeSha256": "c8c0ecb870483a649674a9cd0199d5f580b51e80d1e9266d2b5fc9787c5546b4",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "d6c3555875ccc70502fd6ded75781bcb6ee156a40139e6e6af61247f0f35a6f5",
+      "bytes": 7090
+    },
+    {
+      "path": "__pycache__/collect.cpython-312.pyc",
+      "sha256": "56bb86a41844f7603c47a6505387105c0607b01ac700baf80315e9b45c3442d8",
+      "bytes": 6555
+    },
+    {
+      "path": "additional-workflow-sources.json",
+      "sha256": "adffb301a9ea64326ea7e8337d6d1ee66db51f687df6fea85c1e3ce50ccec7e7",
+      "bytes": 2400
+    },
+    {
+      "path": "checks.json",
+      "sha256": "73a7449dbec5bab1d2a97b3d16524a150a781fea6cc7d3ca61014ffeea5b835c",
+      "bytes": 727
+    },
+    {
+      "path": "collect.py",
+      "sha256": "baa8c27ccf38c25f601acac40ea2ba0b45e6f33c53ef29ded73b2921eb391ab5",
+      "bytes": 4048
+    },
+    {
+      "path": "log-selection.json",
+      "sha256": "4cf5cbc67e31892018afb855b43d5679ba81b2f9fe5e48bcc956a0121d350157",
+      "bytes": 800
+    },
+    {
+      "path": "observations.json",
+      "sha256": "f9a9b15d28281dea186d2d634e89eccba60c3d9b6d84326bed985455fb31f3b3",
+      "bytes": 285895
+    },
+    {
+      "path": "plan.json",
+      "sha256": "78124e531e2ff828bc13cc3b49b44c6978ebce64da1c40c82470d0e1c8ad8452",
+      "bytes": 9208
+    },
+    {
+      "path": "pre-api-freeze.json",
+      "sha256": "c8c0ecb870483a649674a9cd0199d5f580b51e80d1e9266d2b5fc9787c5546b4",
+      "bytes": 3062
+    },
+    {
+      "path": "pre-api-source-assertions.json",
+      "sha256": "47150cf8b678abaf7b88ae93976f3bd9df8812e84fe0b7dfe91f0f43365e1f93",
+      "bytes": 2129
+    },
+    {
+      "path": "raw/collector-executed.py.txt",
+      "sha256": "dda1f1f304d655082e1c9cf7c9fb89dcdc525eddb04b2bd4a17bd7883179f9d7",
+      "bytes": 3781
+    },
+    {
+      "path": "raw/docker--compose--122916578760--log.log",
+      "sha256": "eb33485d28599807605118a29221fdfd58c48e041a1ad2aba74ae9c70646e289",
+      "bytes": 176
+    },
+    {
+      "path": "raw/docker--compose--40716799996--jobs.json",
+      "sha256": "c2e8a7b4b84a1a2a9308490a66902cb4ecfb531e10d53ca529de7896d4be3761",
+      "bytes": 119767
+    },
+    {
+      "path": "raw/docker--compose--40716799996--workflow.json",
+      "sha256": "5b48d688904fb607bd66725fe071d369556760ccec711b7634a0ed2cfff14d91",
+      "bytes": 20650
+    },
+    {
+      "path": "raw/docker--compose--runs.json",
+      "sha256": "867a682a7f1852792d90cf8ba0743f376c6796caea4b102afddf5eaf7dd17e35",
+      "bytes": 321107
+    },
+    {
+      "path": "raw/keras-team--keras--.github--workflows--config--jax--keras.json.json",
+      "sha256": "df85b1572874ed8f31b15a6d1ace3ddf27ac2d1c9f5b860539c92928b418c642",
+      "bytes": 1310
+    },
+    {
+      "path": "raw/keras-team--keras--.github--workflows--config--tensorflow--keras.json.json",
+      "sha256": "aab43a5eae83bc9f7d107641a4b1f816548f868bdf3430442e85dccd8f4a186a",
+      "bytes": 1326
+    },
+    {
+      "path": "raw/keras-team--keras--.github--workflows--config--torch--keras.json.json",
+      "sha256": "c5272ed62327950132231d6f088e687579e820f9e2a45a51d4e226e0203d577a",
+      "bytes": 1288
+    },
+    {
+      "path": "raw/keras-team--keras--.github--workflows--cpu_tests.yml.json",
+      "sha256": "cc5534689b50d3d61473c71d60a14806091e2c0fdb3613f44d4b4318f6edab6a",
+      "bytes": 10606
+    },
+    {
+      "path": "raw/keras-team--keras--122533746952--log.log",
+      "sha256": "eb33485d28599807605118a29221fdfd58c48e041a1ad2aba74ae9c70646e289",
+      "bytes": 176
+    },
+    {
+      "path": "raw/keras-team--keras--122533747223--log.log",
+      "sha256": "eb33485d28599807605118a29221fdfd58c48e041a1ad2aba74ae9c70646e289",
+      "bytes": 176
+    },
+    {
+      "path": "raw/keras-team--keras--40602464413--jobs.json",
+      "sha256": "267c607c2ad0c2341ab104e97f64302ae4d3da4730656a3fad1d840c3fe1e1a5",
+      "bytes": 27163
+    },
+    {
+      "path": "raw/keras-team--keras--40602464413--workflow.json",
+      "sha256": "539ef14f3f97fef0674f792e2a0fea7e14301fb5edea106e9c497cde051f359a",
+      "bytes": 3330
+    },
+    {
+      "path": "raw/keras-team--keras--40602464523--jobs.json",
+      "sha256": "144dcbd6281b2d26a3c4f6fb121aef3ab1c90e8178abf3ab6b3134c49d3f7290",
+      "bytes": 10905
+    },
+    {
+      "path": "raw/keras-team--keras--40602464523--workflow.json",
+      "sha256": "57984a5994ddfee3e5a43157739cd4f38e57eb31efb3a7e747d8405e121bcbfb",
+      "bytes": 6680
+    },
+    {
+      "path": "raw/keras-team--keras--requirements-jax-cuda.txt.json",
+      "sha256": "e92bdfb6e9da74934c1cd67358a517082df7a93c5c7ead1d67cd30ca906f67c6",
+      "bytes": 1389
+    },
+    {
+      "path": "raw/keras-team--keras--requirements-tensorflow-cuda.txt.json",
+      "sha256": "2b70cfd2b5a6b50470ebe1965c40037aa61e1bcec118bad66e98d1723160c59c",
+      "bytes": 1466
+    },
+    {
+      "path": "raw/keras-team--keras--requirements-torch-cuda.txt.json",
+      "sha256": "11d04ddbda05e4162c31ce1cc0afca6d93330f0e03a312589839685957cfaf6f",
+      "bytes": 1601
+    },
+    {
+      "path": "raw/keras-team--keras--runs.json",
+      "sha256": "8846fa60b4d4e1f8ec6694bfbc1fd3055ab5dd8d21dc3c0d350a83f530fc08f4",
+      "bytes": 996683
+    },
+    {
+      "path": "raw/storytold--photocraft--123207582566--log.log",
+      "sha256": "eb33485d28599807605118a29221fdfd58c48e041a1ad2aba74ae9c70646e289",
+      "bytes": 176
+    },
+    {
+      "path": "raw/storytold--photocraft--40800573488--jobs.json",
+      "sha256": "fc1e2dc288bbf950b58fe8e5c14eca6b9b5585c9ee6a4d98dd79f38edc313d99",
+      "bytes": 24650
+    },
+    {
+      "path": "raw/storytold--photocraft--40800573488--workflow.json",
+      "sha256": "3c22011c31aac80183ab1f90c43da4f8c110ad8b8748d8599de84d6bd1dbffa7",
+      "bytes": 31808
+    },
+    {
+      "path": "raw/storytold--photocraft--runs.json",
+      "sha256": "5754258c4a6715c66ef95285cf52154ca727f8845c006fdf764b7aadca5ef34e",
+      "bytes": 77311
+    },
+    {
+      "path": "request-ledger.json",
+      "sha256": "3382a29778e5bb85cdc2df8e0f2f1b0b8a5e270ca2c8cd17573aa1b171cc28ad",
+      "bytes": 18099
+    },
+    {
+      "path": "run-selection.json",
+      "sha256": "4f12692ea198911b7238c012883d50cd83d560b9aff271344f64af77fb3f5a6b",
+      "bytes": 4721
+    },
+    {
+      "path": "source-bindings.json",
+      "sha256": "dfd855afdea5471023195dc38edd3b782b01c427b566ee3d279939749d8ab1ac",
+      "bytes": 6782
+    },
+    {
+      "path": "sources/github.com/docker/compose/.github/workflows/ci.yml",
+      "sha256": "c59e73dbf1e328c785d8e6de589358d622f6c1964ad223c149f856681fd606b1",
+      "bytes": 14256
+    },
+    {
+      "path": "sources/github.com/docker/compose/AGENTS.md",
+      "sha256": "2c3364f66a30ea054f3ec3610fa4be37a98e5fc3dbd9654b44f26805c75a236e",
+      "bytes": 3091
+    },
+    {
+      "path": "sources/github.com/docker/compose/BUILDING.md",
+      "sha256": "68694744374f7b98c6dd284aea8d657267a6f6383e9bd5580f725a3e723a7cd4",
+      "bytes": 2206
+    },
+    {
+      "path": "sources/github.com/docker/compose/CONTRIBUTING.md",
+      "sha256": "9dfbe9648dbc5a31677bda175a0eb5e577b32d499d6dfaf2fbb09b4a5bd63d1a",
+      "bytes": 18017
+    },
+    {
+      "path": "sources/github.com/docker/compose/Dockerfile",
+      "sha256": "5f35a0fce55a645e2497f861aba1414f237d532493b4f2bda138c609b28ef44f",
+      "bytes": 7870
+    },
+    {
+      "path": "sources/github.com/docker/compose/Makefile",
+      "sha256": "927856982fcd81c94dd843743000b8a828baf5af02503d64f7a4c4cc477ac4cc",
+      "bytes": 7050
+    },
+    {
+      "path": "sources/github.com/docker/compose/README.md",
+      "sha256": "02d853bbccd7d847c65eaea8c07bb14135b3f7904a48abf5898de90d5c75cb8e",
+      "bytes": 3532
+    },
+    {
+      "path": "sources/github.com/docker/compose/docker-bake.hcl",
+      "sha256": "d8e460f357e8913b41a81458d2c3280f5494368c2f20eaca7ebcb1bdeaeebce5",
+      "bytes": 4836
+    },
+    {
+      "path": "sources/github.com/keras-team/keras/.github/workflows/actions.yml",
+      "sha256": "ad84280818c4d276d6427a295d48d7547e792994dc28114e352ff4417f357806",
+      "bytes": 1650
+    },
+    {
+      "path": "sources/github.com/keras-team/keras/.github/workflows/config/jax/keras.json",
+      "sha256": "868f7cc0bfe7494b548ee9b6d0aebb2255528a840f7f1b94723c4d930416d6e4",
+      "bytes": 140
+    },
+    {
+      "path": "sources/github.com/keras-team/keras/.github/workflows/config/tensorflow/keras.json",
+      "sha256": "15097ddedccd607f99a46bdafe23417e8e82e580ae4e492ad128c7d127cbfd50",
+      "bytes": 121
+    },
+    {
+      "path": "sources/github.com/keras-team/keras/.github/workflows/config/torch/keras.json",
+      "sha256": "b3c81d0bf76f72bce58df703813c8a87063b8f01e29a4c10cd65a30038ba2352",
+      "bytes": 117
+    },
+    {
+      "path": "sources/github.com/keras-team/keras/.github/workflows/cpu_tests.yml",
+      "sha256": "c29ad40475b8e8ed2bc144b230fe0d4f2736bfafe1dd2488261cbfc74397fef2",
+      "bytes": 6919
+    },
+    {
+      "path": "sources/github.com/keras-team/keras/.github/workflows/gpu_tests.yml",
+      "sha256": "6fc16346d13a3e77648fe97b555e499ed04d7e553d598f02d775f7c56561945c",
+      "bytes": 4069
+    },
+    {
+      "path": "sources/github.com/keras-team/keras/CONTRIBUTING.md",
+      "sha256": "eff1a6349d222979e24b860c88e9577f603300af7658a1ac6fca3140992d0d3d",
+      "bytes": 13606
+    },
+    {
+      "path": "sources/github.com/keras-team/keras/README.md",
+      "sha256": "6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8",
+      "bytes": 5547
+    },
+    {
+      "path": "sources/github.com/keras-team/keras/pyproject.toml",
+      "sha256": "51ac5db60612a4c92123980826c1010a6d087c7a64b11a580ebc33c21058d326",
+      "bytes": 2883
+    },
+    {
+      "path": "sources/github.com/keras-team/keras/requirements-common.txt",
+      "sha256": "3df3a2a15e645bc03082648aec06570a4329fdad189e4b326df0be80d6a7615e",
+      "bytes": 498
+    },
+    {
+      "path": "sources/github.com/keras-team/keras/requirements-jax-cuda.txt",
+      "sha256": "9e3dd6feb5fbc931c2b60b659421359089bcff75cc0348cace2181843df3c610",
+      "bytes": 247
+    },
+    {
+      "path": "sources/github.com/keras-team/keras/requirements-tensorflow-cuda.txt",
+      "sha256": "b04883dbf25931c7c2700fd0f0c0d2f7be8c9f28689da680a39f53fcad4d0ab1",
+      "bytes": 268
+    },
+    {
+      "path": "sources/github.com/keras-team/keras/requirements-torch-cuda.txt",
+      "sha256": "395058aa4facf050ce8c71e2b56e40930871b12966121529a17935ffc2491337",
+      "bytes": 391
+    },
+    {
+      "path": "sources/github.com/keras-team/keras/requirements.txt",
+      "sha256": "f34e2fa7d9bb205afe36e7cb8a0d53f6e3be39d0dc51b38de0619529e4e919b8",
+      "bytes": 619
+    },
+    {
+      "path": "sources/github.com/storytold/photocraft/.cargo/config.toml",
+      "sha256": "c185a2b859850d94af015a9672c1568e1ef73b12612d820f596ef967b835f637",
+      "bytes": 34
+    },
+    {
+      "path": "sources/github.com/storytold/photocraft/.github/workflows/ci.yml",
+      "sha256": "6e2193555b1a3b99caeb673a48703e8c220b17320497b1ca90ed6e1c69973922",
+      "bytes": 22321
+    },
+    {
+      "path": "sources/github.com/storytold/photocraft/AGENTS.md",
+      "sha256": "849dcb393d4b20779e0c0f71141fc5b505a181b71f35b497531dbd2e05a6c62a",
+      "bytes": 19338
+    },
+    {
+      "path": "sources/github.com/storytold/photocraft/Cargo.toml",
+      "sha256": "9e08a93ebf39236315f8aa86a1e129b77c30a17049c1bcbb62a08c19776a85e3",
+      "bytes": 9648
+    },
+    {
+      "path": "sources/github.com/storytold/photocraft/README.md",
+      "sha256": "620731e78f824f535e75fa39bfb2fef1bb290ac74579f02b58e4c425d1d65377",
+      "bytes": 33536
+    },
+    {
+      "path": "sources/github.com/storytold/photocraft/docs/development.md",
+      "sha256": "ad37558a84aa2f84928eb8b2554988fbed73ca3ac989034fe06bed9603446873",
+      "bytes": 72260
+    }
+  ]
+}

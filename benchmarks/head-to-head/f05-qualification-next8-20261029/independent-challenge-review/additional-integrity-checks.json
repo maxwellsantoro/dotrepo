@@ -1,0 +1,149 @@
+{
+  "curatorFreezeSha256": "23c4ac12f76d6c8bdb5e788ed22d88efa87a24b460cd790719ed2c46871892a3",
+  "curatorFilesVerified": 55,
+  "oracleControls": {
+    "positiveControls": 3,
+    "negativeControls": 11,
+    "status": "passed",
+    "limits": "Synthetic native-format controls establish rejection behavior; actual source/environment execution is separately required."
+  },
+  "ownNestedSkipRepro": {
+    "originalQualified": true,
+    "revisedQualified": false
+  },
+  "upstreamExecution": false,
+  "sourceArchiveBindings": [
+    {
+      "task": "rust-01",
+      "archiveSha256Matched": true,
+      "acquisitionSha256": "78c1db6cfc1a183f29c3b58eb05d4e00e7454eadede4bd2159cb5692aefae70b",
+      "inventorySha256": "081dcf170054432adbb68b80421078584336cfe4a62f2071638ee7cceb7df544",
+      "fileDetailsSha256": "b12ed6dce6283ecce1187775f94c0ddfe03eaec31fed4dd66ce1a0cf7270d59e"
+    },
+    {
+      "task": "python-01",
+      "archiveSha256Matched": true,
+      "acquisitionSha256": "02bd55b821ec5ea7181e9ec24abbedd85a389477cb3b8be58c3092791bb7497a",
+      "inventorySha256": "f3b3c78e90a89434ed77bbf7dc79c9397f9c0b27dc10c5eb0a60296d5b6c89e1",
+      "fileDetailsSha256": "94d2e803e996857381387f052bf9541d3b15ff1c67ff40d6cb2c2f6dfc968541"
+    },
+    {
+      "task": "python-02",
+      "archiveSha256Matched": true,
+      "acquisitionSha256": "343755c978210339025f9454660e89d95b4dcf7b7b685b9c474eff1e19dca4a9",
+      "inventorySha256": "5da96e82f8e234d7d75d339e89e11381c5bf38115488f2381f445029562fce99",
+      "fileDetailsSha256": "9cda47539764532c77d9a5d107fdbbe02dd363d89d3a5e3661532e7cbdafb64b"
+    },
+    {
+      "task": "python-03",
+      "archiveSha256Matched": true,
+      "acquisitionSha256": "2723ec26ff9a1f85f5e2d5449e9d4358333cd3fba02da045e20a29db751d5409",
+      "inventorySha256": "db7f542988b53bb874e6bbc0c59fb861b079991f84dfe2b0758ebdaf313fc821",
+      "fileDetailsSha256": "a58271f82fa95e7e68fd23ef365a42066c50b5d7709b69706705265a3cf8a17e"
+    }
+  ],
+  "actualSymlinkTarHeaderChecks": [
+    {
+      "task": "python-02",
+      "path": ".agents/skills",
+      "actualTarType": "symlink",
+      "exactTargetMatched": true
+    },
+    {
+      "task": "python-02",
+      "path": ".gemini/skills",
+      "actualTarType": "symlink",
+      "exactTargetMatched": true
+    },
+    {
+      "task": "python-02",
+      "path": "CLAUDE.md",
+      "actualTarType": "symlink",
+      "exactTargetMatched": true
+    },
+    {
+      "task": "typescript-01",
+      "path": ".agents/notes/implemented/CLAUDE.md",
+      "actualTarType": "symlink",
+      "exactTargetMatched": true
+    },
+    {
+      "task": "typescript-01",
+      "path": ".agents/skills/agent-experience/SKILL.md",
+      "actualTarType": "symlink",
+      "exactTargetMatched": true
+    },
+    {
+      "task": "typescript-01",
+      "path": ".claude/skills",
+      "actualTarType": "symlink",
+      "exactTargetMatched": true
+    },
+    {
+      "task": "typescript-01",
+      "path": "CLAUDE.md",
+      "actualTarType": "symlink",
+      "exactTargetMatched": true
+    },
+    {
+      "task": "typescript-01",
+      "path": "apps/cli/tests/profiles/acp/cordis.yml",
+      "actualTarType": "symlink",
+      "exactTargetMatched": true
+    },
+    {
+      "task": "typescript-01",
+      "path": "packages/CLAUDE.md",
+      "actualTarType": "symlink",
+      "exactTargetMatched": true
+    },
+    {
+      "task": "typescript-01",
+      "path": "snapshots/acp/escalation-approved/system-prompt.expected.md",
+      "actualTarType": "symlink",
+      "exactTargetMatched": true
+    },
+    {
+      "task": "typescript-01",
+      "path": "snapshots/acp/escalation-approved/tool-schemas.expected.json",
+      "actualTarType": "symlink",
+      "exactTargetMatched": true
+    },
+    {
+      "task": "typescript-01",
+      "path": "snapshots/acp/image-compaction/system-prompt.expected.md",
+      "actualTarType": "symlink",
+      "exactTargetMatched": true
+    },
+    {
+      "task": "typescript-01",
+      "path": "snapshots/sdk/account-provider-signout/system-prompt.expected.md",
+      "actualTarType": "symlink",
+      "exactTargetMatched": true
+    },
+    {
+      "task": "typescript-01",
+      "path": "snapshots/sdk/account-provider-signout/tool-schemas.expected.json",
+      "actualTarType": "symlink",
+      "exactTargetMatched": true
+    },
+    {
+      "task": "typescript-01",
+      "path": "snapshots/session/agent-instructions/workspace/AGENTS.md",
+      "actualTarType": "symlink",
+      "exactTargetMatched": true
+    },
+    {
+      "task": "typescript-01",
+      "path": "snapshots/session/agent-instructions/workspace/nested/AGENTS.md",
+      "actualTarType": "symlink",
+      "exactTargetMatched": true
+    },
+    {
+      "task": "typescript-01",
+      "path": "vendor/CLAUDE.md",
+      "actualTarType": "symlink",
+      "exactTargetMatched": true
+    }
+  ]
+}

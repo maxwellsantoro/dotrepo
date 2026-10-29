@@ -1,0 +1,396 @@
+[
+    {
+        "Architecture": "arm64",
+        "Config": {
+            "Cmd": [
+                "-c",
+                "while :; do sleep 3600; done"
+            ],
+            "Entrypoint": [
+                "/bin/sh"
+            ],
+            "Env": [
+                "PATH=/usr/local/cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "RUSTUP_HOME=/usr/local/rustup",
+                "CARGO_HOME=/usr/local/cargo",
+                "RUST_VERSION=1.99.0"
+            ],
+            "Labels": {
+                "desktop.docker.io/ports.scheme": "v2",
+                "org.opencontainers.image.source": "https://github.com/rust-lang/docker-rust"
+            }
+        },
+        "Created": "2026-10-29T06:03:48.665982716Z",
+        "Descriptor": {
+            "digest": "sha256:6d94650b0063dbbe7921114ee693dcf24c4c279d0e15781ae1713c88e69e167d",
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "size": 1629
+        },
+        "Id": "sha256:6d94650b0063dbbe7921114ee693dcf24c4c279d0e15781ae1713c88e69e167d",
+        "Identity": {
+            "Pull": [
+                {
+                    "Repository": "docker.io/library/dotrepo-f05-prep-rust"
+                }
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-10-29T06:50:09.451853836Z"
+        },
+        "Os": "linux",
+        "Parent": "sha256:114c7a4425406451c2866b6aafe69fe29b1b298832db1277d411ac73c82d04d6",
+        "RepoDigests": [
+            "dotrepo-f05-prep-rust@sha256:6d94650b0063dbbe7921114ee693dcf24c4c279d0e15781ae1713c88e69e167d",
+            "dotrepo-f05-rust-deps@sha256:6d94650b0063dbbe7921114ee693dcf24c4c279d0e15781ae1713c88e69e167d"
+        ],
+        "RepoTags": [
+            "dotrepo-f05-prep-rust:6d94650b0063",
+            "dotrepo-f05-rust-deps:20261029"
+        ],
+        "RootFS": {
+            "Layers": [
+                "sha256:dc51344534bbef928c25f87c724daca6fd7a58522a0f2bc4d0de42899b94bd42",
+                "sha256:06b20ab917ae7fb7d9ad62f1495d6e69f44462215df657bd5f8aa34228f3ba84",
+                "sha256:f3ea0fdbfef7e10eceded81946e8d6a7d853a730fc4debc2313de180c5789c54",
+                "sha256:424eda943bfc22b4ca641896a614763d5dabe8b0112c9eb2376a43db74114305",
+                "sha256:151f3b9553a5ba22ed6bfc363763514ac573c6937d867c789db0325394ebfc45",
+                "sha256:2ca3875e3cd8574494e2e259391a99ca542d83b2a333a843399c14ed4067a09b"
+            ],
+            "Type": "layers"
+        },
+        "Size": 2124649167
+    },
+    {
+        "Id": "sha256:9f07b849c4603e3ad6b52c00c2dccaaf2054f8b3ec0f4add866ffdd537073c76",
+        "RepoTags": [
+            "dotrepo-f05-node-go-uv:20261029",
+            "dotrepo-f05-prep-tools:9f07b849c460"
+        ],
+        "RepoDigests": [
+            "dotrepo-f05-node-go-uv@sha256:9f07b849c4603e3ad6b52c00c2dccaaf2054f8b3ec0f4add866ffdd537073c76",
+            "dotrepo-f05-prep-tools@sha256:9f07b849c4603e3ad6b52c00c2dccaaf2054f8b3ec0f4add866ffdd537073c76"
+        ],
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-10-29T06:07:40.907667129Z",
+        "Config": {
+            "Env": [
+                "PATH=/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "WorkingDir": "/"
+        },
+        "Architecture": "arm64",
+        "Os": "linux",
+        "Size": 2024510229,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:b072adc33b83109c75cd1aba471476d53e1348ffd59bcf64ccb58a0df445855c",
+                "sha256:d4109bcf2740cf58b3f3f0c439e77e0be57a2b108c6e55ac7aa47bf53e7150e8",
+                "sha256:f4e3441c0cd27664aa34c4c57b6c5b55c2df6495de2a3da632a6f179bac065f5"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-10-29T06:50:09.608025544Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.index.v1+json",
+            "digest": "sha256:9f07b849c4603e3ad6b52c00c2dccaaf2054f8b3ec0f4add866ffdd537073c76",
+            "size": 855
+        },
+        "Identity": {
+            "Pull": [
+                {
+                    "Repository": "docker.io/library/dotrepo-f05-prep-tools"
+                }
+            ],
+            "Build": [
+                {
+                    "Ref": "tf3tg0qkicnx3ke04a2i8dexn",
+                    "CreatedAt": "2026-10-29T06:07:42.365937338Z"
+                }
+            ]
+        }
+    },
+    {
+        "Id": "sha256:d9b6a1beb9474adc2a1ce842573639b44b2a0dd49b6669f51d3821baf9ec37c9",
+        "RepoTags": [
+            "golang:1.27.3-bookworm"
+        ],
+        "RepoDigests": [
+            "golang@sha256:d9b6a1beb9474adc2a1ce842573639b44b2a0dd49b6669f51d3821baf9ec37c9"
+        ],
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-10-28T03:18:20.118799974Z",
+        "Config": {
+            "Env": [
+                "PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "GOLANG_VERSION=1.27.3",
+                "GOTOOLCHAIN=local",
+                "GOPATH=/go"
+            ],
+            "Cmd": [
+                "bash"
+            ],
+            "WorkingDir": "/go"
+        },
+        "Architecture": "arm64",
+        "Variant": "v8",
+        "Os": "linux",
+        "Size": 1237249465,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:64527348293e401e7043a7f07864ad79a5b41b8a68554f511d16c3a476da7634",
+                "sha256:00b4b9cc764fa0294dcaf935e48b6d89979619840ba559100bb8dadd2b4f9ff0",
+                "sha256:2eb0780af133d13901cc73bb85f369347895175f13036c00ba5876b9ec20d499",
+                "sha256:3f41a027c437b436240990150f7ac637f741bc7611bf46fdaa1ffd80ab2f4bce",
+                "sha256:dfa545828da5427130ff9728d83d8b090e07789a24a910b26b5a12b7e158debb",
+                "sha256:5c2a119b938520dc4168106cd0710cc5f2496039544d5f5955460c327e6faa03",
+                "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-10-29T05:58:23.43563201Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.index.v1+json",
+            "digest": "sha256:d9b6a1beb9474adc2a1ce842573639b44b2a0dd49b6669f51d3821baf9ec37c9",
+            "size": 6526
+        },
+        "Identity": {
+            "Pull": [
+                {
+                    "Repository": "docker.io/library/golang"
+                }
+            ]
+        }
+    },
+    {
+        "Id": "sha256:114c7a4425406451c2866b6aafe69fe29b1b298832db1277d411ac73c82d04d6",
+        "RepoTags": [
+            "rust:1-bookworm"
+        ],
+        "RepoDigests": [
+            "rust@sha256:114c7a4425406451c2866b6aafe69fe29b1b298832db1277d411ac73c82d04d6"
+        ],
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-10-06T04:47:00.957388304Z",
+        "Config": {
+            "Env": [
+                "PATH=/usr/local/cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "RUSTUP_HOME=/usr/local/rustup",
+                "CARGO_HOME=/usr/local/cargo",
+                "RUST_VERSION=1.99.0"
+            ],
+            "Cmd": [
+                "bash"
+            ],
+            "Labels": {
+                "org.opencontainers.image.source": "https://github.com/rust-lang/docker-rust"
+            }
+        },
+        "Architecture": "arm64",
+        "Variant": "v8",
+        "Os": "linux",
+        "Size": 2080485469,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:dc51344534bbef928c25f87c724daca6fd7a58522a0f2bc4d0de42899b94bd42",
+                "sha256:06b20ab917ae7fb7d9ad62f1495d6e69f44462215df657bd5f8aa34228f3ba84",
+                "sha256:f3ea0fdbfef7e10eceded81946e8d6a7d853a730fc4debc2313de180c5789c54",
+                "sha256:424eda943bfc22b4ca641896a614763d5dabe8b0112c9eb2376a43db74114305",
+                "sha256:151f3b9553a5ba22ed6bfc363763514ac573c6937d867c789db0325394ebfc45"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-10-13T22:57:01.641032676Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.index.v1+json",
+            "digest": "sha256:114c7a4425406451c2866b6aafe69fe29b1b298832db1277d411ac73c82d04d6",
+            "size": 6481
+        },
+        "Identity": {
+            "Pull": [
+                {
+                    "Repository": "docker.io/library/rust"
+                }
+            ]
+        }
+    },
+    {
+        "Id": "sha256:e7add2a490bb17d97b485b8641bd88455fff7839ade0f5eba493c3508124d413",
+        "RepoTags": [
+            "node:24-bookworm"
+        ],
+        "RepoDigests": [
+            "node@sha256:e7add2a490bb17d97b485b8641bd88455fff7839ade0f5eba493c3508124d413"
+        ],
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-10-28T20:56:15.062915363Z",
+        "Config": {
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "NODE_VERSION=24.22.2",
+                "YARN_VERSION=1.22.22"
+            ],
+            "Entrypoint": [
+                "docker-entrypoint.sh"
+            ],
+            "Cmd": [
+                "node"
+            ]
+        },
+        "Architecture": "arm64",
+        "Variant": "v8",
+        "Os": "linux",
+        "Size": 1620373895,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:64527348293e401e7043a7f07864ad79a5b41b8a68554f511d16c3a476da7634",
+                "sha256:00b4b9cc764fa0294dcaf935e48b6d89979619840ba559100bb8dadd2b4f9ff0",
+                "sha256:2eb0780af133d13901cc73bb85f369347895175f13036c00ba5876b9ec20d499",
+                "sha256:74a9cd0a5d4e1ee68487ab8f22709b6d71270cd9f15afb34a46e4541dd219adf",
+                "sha256:c120a6b4bf09dd6e6db80f20109d11ee0d493b28e7446b5ff85e13ac91d28de3",
+                "sha256:2edef1a0aac54f0f60554a3d0ffb0b39309baeb35dc0bd336b74366b3bfe094f",
+                "sha256:5c7a772d8c3ede02d67d54d386f11a9ac388e2bb7b038975f3dd069074555909",
+                "sha256:1c541867a93273d31b337571d56058c5e322f07ad3e4aef433e72d3a72be31f7"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-10-29T05:58:26.552138637Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.index.v1+json",
+            "digest": "sha256:e7add2a490bb17d97b485b8641bd88455fff7839ade0f5eba493c3508124d413",
+            "size": 3881
+        },
+        "Identity": {
+            "Pull": [
+                {
+                    "Repository": "docker.io/library/node"
+                }
+            ]
+        }
+    },
+    {
+        "Id": "sha256:ac1ef011a116232ea9fb6d0b534649a0cd298bbffeba25a5b124b37940568d75",
+        "RepoTags": [
+            "dotrepo-f05-common-failed:20261029"
+        ],
+        "RepoDigests": [
+            "dotrepo-f05-common-failed@sha256:ac1ef011a116232ea9fb6d0b534649a0cd298bbffeba25a5b124b37940568d75"
+        ],
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-10-29T06:51:02.69663418Z",
+        "Config": {
+            "User": "1000:1000",
+            "Env": [
+                "PATH=/usr/local/cargo/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "RUSTUP_HOME=/usr/local/rustup",
+                "CARGO_HOME=/usr/local/cargo",
+                "GOTOOLCHAIN=local",
+                "GOENV=off"
+            ],
+            "Entrypoint": [
+                "/bin/sh"
+            ],
+            "Cmd": [
+                "-c",
+                "while :; do sleep 3600; done"
+            ],
+            "WorkingDir": "/",
+            "ArgsEscaped": true
+        },
+        "Architecture": "arm64",
+        "Os": "linux",
+        "Size": 2707779316,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:83e93a43964f3c8392e01f7eadfd080c625d2b73b7e31fa471e8ab303ab4db84",
+                "sha256:99e0878542a4a014427aaf531fc24affd3a7a06e97292d699b33a9decab68ea3",
+                "sha256:3c7716308d3e831a59a3d803b722b8ae8622cc7523894e12a10c97d00fb23c54",
+                "sha256:b2ab582c3a53caa84d4c4c7702ec145820285f7afae6ceaaa212a359290f02e0",
+                "sha256:77a4d233f4295a77941fa3f2a79ea2c7cce651928d9757d66b46dcff858a9e76"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-10-29T06:53:19.002354424Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.index.v1+json",
+            "digest": "sha256:ac1ef011a116232ea9fb6d0b534649a0cd298bbffeba25a5b124b37940568d75",
+            "size": 856
+        },
+        "Identity": {
+            "Build": [
+                {
+                    "Ref": "1yio9zxd0469c7vjd91kqvgg8",
+                    "CreatedAt": "2026-10-29T06:52:08.379698419Z"
+                }
+            ]
+        }
+    },
+    {
+        "Id": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+        "RepoTags": [
+            "dotrepo-f05-common:20261029"
+        ],
+        "RepoDigests": [
+            "dotrepo-f05-common@sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092"
+        ],
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-10-29T06:53:43.718682838Z",
+        "Config": {
+            "User": "1000:1000",
+            "Env": [
+                "PATH=/usr/local/cargo/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "RUSTUP_HOME=/usr/local/rustup",
+                "CARGO_HOME=/usr/local/cargo",
+                "GOTOOLCHAIN=local",
+                "GOENV=off"
+            ],
+            "Entrypoint": [
+                "/bin/sh"
+            ],
+            "Cmd": [
+                "-c",
+                "while :; do sleep 3600; done"
+            ],
+            "WorkingDir": "/",
+            "ArgsEscaped": true
+        },
+        "Architecture": "arm64",
+        "Os": "linux",
+        "Size": 2707778175,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:83e93a43964f3c8392e01f7eadfd080c625d2b73b7e31fa471e8ab303ab4db84",
+                "sha256:a69427f086ccc411ac57d1205bd64fd660ca4f986571352d7b35c414edc644ad",
+                "sha256:df9347fd633033a5da81ddd35ab566b5c4aeb268e2142e2214a628f90c017deb",
+                "sha256:a9e29cb5b57b68bd85f202186daeb1dbb34d5a93908f7ea417957b4b8b85764f",
+                "sha256:0b7e69daacaeef71d3bd93ee45b27b8969063c97ede39f80a8ec11532f0f949d"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-10-29T06:54:31.056241179Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.index.v1+json",
+            "digest": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+            "size": 856
+        },
+        "Identity": {
+            "Build": [
+                {
+                    "Ref": "ofax6cf3alwbldzdy77of707o",
+                    "CreatedAt": "2026-10-29T06:54:34.779868084Z"
+                }
+            ]
+        }
+    }
+]

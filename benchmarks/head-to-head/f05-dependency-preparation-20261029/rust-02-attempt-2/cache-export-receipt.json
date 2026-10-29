@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-f05-cache-rust-02-769a3ea0a3",
+    "tar",
+    "-C",
+    "/workspace/dependency-cache",
+    "-cf",
+    "-",
+    "cargo/registry"
+  ],
+  "startedAt": "2026-10-29T06:57:30.470249+00:00",
+  "elapsedSeconds": 8.43748416705057,
+  "exitCode": 0,
+  "error": null,
+  "archivePath": "/tmp/dotrepo-f05-dependency-preparation-20261029/rust-02-attempt-2/cache-export.tar",
+  "archiveBytes": 465786880,
+  "archiveSha256": "a199ddee5c168128e26a1ae153ad404471339982a97a7b5ce7c9a27f52be2161",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null
+}

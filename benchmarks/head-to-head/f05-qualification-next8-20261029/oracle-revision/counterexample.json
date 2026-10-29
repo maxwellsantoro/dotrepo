@@ -1,0 +1,40 @@
+{
+  "kind": "Synthetic native-format regression; no upstream execution.",
+  "listing": "{\"Package\": \"example/api\", \"Action\": \"output\", \"Output\": \"TestOne\\n\"}",
+  "actualEvents": "{\"Package\": \"example/api\", \"Action\": \"run\", \"Test\": \"TestOne\"}\n{\"Package\": \"example/api\", \"Action\": \"run\", \"Test\": \"TestOne/child\"}\n{\"Package\": \"example/api\", \"Action\": \"skip\", \"Test\": \"TestOne/child\"}\n{\"Package\": \"example/api\", \"Action\": \"pass\", \"Test\": \"TestOne\"}\n{\"Package\": \"example/api\", \"Action\": \"pass\"}",
+  "originalFalsePositiveRetained": {
+    "qualified": true,
+    "reason": "complete native events",
+    "expectedTopLevelTests": 1,
+    "ranTopLevelTests": 1,
+    "missingTests": [],
+    "skippedTests": [],
+    "packages": [
+      "example/api"
+    ],
+    "endedPackages": [
+      "example/api"
+    ]
+  },
+  "correctedRejection": {
+    "qualified": false,
+    "reason": "missing/listed-only/skipped/incomplete events",
+    "expectedTopLevelTests": 1,
+    "ranTopLevelTests": 1,
+    "missingTests": [],
+    "skippedTests": [
+      [
+        "example/api",
+        "TestOne/child"
+      ]
+    ],
+    "packages": [
+      "example/api"
+    ],
+    "endedPackages": [
+      "example/api"
+    ]
+  },
+  "actualPriorRunsReexecuted": false,
+  "priorVaultEvidence": "Independent reviewer observed no skipped tests at any depth; prior93-test result unchanged."
+}

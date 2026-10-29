@@ -1,0 +1,64 @@
+{
+  "phase": "frozen before first public API request",
+  "workflowSourceAvailability": "No workflow files for these three identities were retained in the E1 ledger. This is source absence in retained packet, not proof repository has no CI.",
+  "cases": [
+    {
+      "repository": "github.com/keras-team/keras",
+      "passages": {
+        "CONTRIBUTING.md": [
+          "81-112",
+          "202-224"
+        ],
+        "README.md": [
+          "43-65",
+          "91-114"
+        ],
+        "requirements.txt": [
+          "1-24"
+        ],
+        "requirements-common.txt": [
+          "1-30"
+        ]
+      },
+      "documented": "pytest keras from root; optional SKIP_APPLICATIONS_TESTS and backend variants are distinct reduced coverage. Python>=3.10, install requirements/local package, configure backend before import, Linux/macOS or Windows WSL2; GPU optional conditions retained."
+    },
+    {
+      "repository": "github.com/docker/compose",
+      "passages": {
+        "BUILDING.md": [
+          "2-15",
+          "31-57"
+        ],
+        "Makefile": [
+          "123-125"
+        ],
+        "docker-bake.hcl": [
+          "15-21",
+          "43-48",
+          "93-97"
+        ],
+        "Dockerfile": [
+          "18-24",
+          "38-55",
+          "123-141"
+        ]
+      },
+      "documented": "make test is unit suite, delegates buildx bake test then test-coverage Docker stage. Go/cgo gcc+musl, build tags e2e, race/coverage and Go/build caches retained; end-to-end suite and local Docker daemon documented separately."
+    },
+    {
+      "repository": "github.com/storytold/photocraft",
+      "passages": {
+        "docs/development.md": [
+          "1-17",
+          "37-65",
+          "98-112",
+          "641-669"
+        ],
+        "AGENTS.md": [
+          "90-111"
+        ]
+      },
+      "documented": "cargo test --workspace source default, nextest+doctest alternate, CI profile fail-fast/10min and quarter-daily sweeps vs full sweep beforePR, optional GPU/font/corpus conditions; corpus feature requires fetched pinned data. CI passing would not prove full-sweep/GPU/font coverage."
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "matches": [
+    {
+      "cachePath": "npm-cache/_cacache/content-v2/sha512/fc/33/e56cad51584a40e7af29f550b630b169ac538a4d7102e2ad20bd7d271eacbc1a7d125e59240552dfff39dc84c76cfd3de3bef21cb722f0bc355797ba1026",
+      "package": {
+        "name": "@openhands/extensions",
+        "version": "0.36.0"
+      },
+      "matches": [
+        {
+          "path": "package/apps/kanban-manager/LICENSE",
+          "sourcePaths": [
+            "LICENSE"
+          ],
+          "sha256": "e1d1fa9f3a8d7bef24449d488fcd8f00f8f272cac297bb9bed161eb6175b876a",
+          "bytes": 1096
+        },
+        {
+          "path": "package/.github/release.yml",
+          "sourcePaths": [
+            ".github/release.yml"
+          ],
+          "sha256": "c5e53bd02e3881a94ac4a878b145ce44024f16289cf341287981a14e39897d34",
+          "bytes": 429
+        }
+      ]
+    },
+    {
+      "cachePath": "npm-cache/_cacache/content-v2/sha512/db/04/0098a9102b146e5ef609c5584f186d3064d050c83d3aa09bf1ab0f745ea2efa6d76ac5d947ac551f12d78a92968d3915f75f373e1ed125fead277e6376c1",
+      "package": {
+        "name": "msw",
+        "version": "2.15.0"
+      },
+      "matches": [
+        {
+          "path": "package/lib/mockServiceWorker.js",
+          "sourcePaths": [
+            "public/mockServiceWorker.js"
+          ],
+          "sha256": "26171599d94d5445297303f3a1f1cedec26835ea3d0057dcfa92ec520cb35cca",
+          "bytes": 9666
+        }
+      ]
+    }
+  ],
+  "disposition": "Retained registry-distributed dependency bytes; not evidence of copying task checkout. Distributed mock service worker asset and release/license boilerplate overlap source files; do not use all-source digest blanket denial."
+}

@@ -1,0 +1,78 @@
+{
+  "reviewedAt": "2026-10-29T06:45:12.015606+00:00",
+  "pilotFreezeSha256": "9b936d71ccb748bd46a69bf482ae942cde23de28c936bc6a2f77e6b9e35de8bc",
+  "boundFilesVerified": 64,
+  "requests": 22,
+  "budget": 30,
+  "bytes": 1659744,
+  "capsAndUnauthenticatedAndNoOverlimit": true,
+  "runs": 4,
+  "jobs": 54,
+  "successfulJobs": 47,
+  "skippedJobs": 7,
+  "stepEntriesComparedToRawJobs": 829,
+  "sourceApiGitBlobsVerified": 11,
+  "sourceWorkflowHeadBindingsVerified": true,
+  "commandSpansAndStepMappingsVerified": true,
+  "mappings": [
+    {
+      "repository": "github.com/keras-team/keras",
+      "workflow": ".github/workflows/cpu_tests.yml",
+      "lines": "135-145",
+      "spansValid": true
+    },
+    {
+      "repository": "github.com/keras-team/keras",
+      "workflow": ".github/workflows/cpu_tests.yml",
+      "lines": "72-101",
+      "spansValid": true
+    },
+    {
+      "repository": "github.com/keras-team/keras",
+      "workflow": ".github/workflows/gpu_tests.yml",
+      "lines": "95-96",
+      "spansValid": true
+    },
+    {
+      "repository": "github.com/docker/compose",
+      "workflow": ".github/workflows/ci.yml",
+      "lines": "159-185",
+      "spansValid": true
+    },
+    {
+      "repository": "github.com/docker/compose",
+      "workflow": ".github/workflows/ci.yml",
+      "lines": "295-316",
+      "spansValid": true
+    },
+    {
+      "repository": "github.com/storytold/photocraft",
+      "workflow": ".github/workflows/ci.yml",
+      "lines": "148-171,224-244",
+      "spansValid": true
+    },
+    {
+      "repository": "github.com/storytold/photocraft",
+      "workflow": ".github/workflows/ci.yml",
+      "lines": "250-286",
+      "spansValid": true
+    },
+    {
+      "repository": "github.com/storytold/photocraft",
+      "workflow": ".github/workflows/ci.yml",
+      "lines": "288-322",
+      "spansValid": true
+    },
+    {
+      "repository": "github.com/storytold/photocraft",
+      "workflow": ".github/workflows/ci.yml",
+      "lines": "120-141",
+      "spansValid": true
+    }
+  ],
+  "log403Bodies": 4,
+  "newHttpRequests": 0,
+  "upstreamExecution": false,
+  "modelCalls": 0,
+  "reviewerControlLimitation": "Initial local checker compared camelCase observationtimestamps to rawsnake_case fields; correctedmapping, no source/datachange."
+}
