@@ -1,0 +1,28 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "-i",
+    "dotrepo-go01-collection-d14643e92d35",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "cd /workspace/repository; sha256sum --check --status -"
+  ],
+  "startedAt": "2026-10-29T10:31:16.610814+00:00",
+  "elapsedSeconds": 1.1187178750988096,
+  "exitCode": 0,
+  "error": null,
+  "cancelled": false,
+  "stdinBytes": 10223478,
+  "stdinSha256": "a8064c9ae318dc9de1b4395d009c01b02f0fbe2e7c0bfe20358b189936f71aea",
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "binaryPath": null,
+  "binaryBytes": null,
+  "binarySha256": null,
+  "costUsd": null,
+  "costExclusions": [
+    "No metered host/container/download dollar receipt; no provider calls."
+  ]
+}

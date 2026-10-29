@@ -1,0 +1,84 @@
+{
+  "state": "incomplete",
+  "stage": "go-list",
+  "startedAt": "2026-10-29T10:38:43.961391+00:00",
+  "synthetic": false,
+  "taskId": "go-01",
+  "nativeCollectionOccurred": false,
+  "taskOutcomeObserved": false,
+  "modelCalls": 0,
+  "costUsd": null,
+  "costExclusions": [
+    "No metered host/container setup dollar receipt."
+  ],
+  "daemonCalls": 16,
+  "containerCreateAttempted": true,
+  "containerAbsent": true,
+  "collectionObserved": false,
+  "nativeCollectionAttempted": false,
+  "nativeTaskAdmitted": false,
+  "campaignAdmitted": false,
+  "cacheGloballyQualified": false,
+  "ownedContainer": "dotrepo-go01-collection-87ad4b908b37",
+  "planSha256": "c7dbacdf6c3966f66fd0ef805a85db452ce72180d3db22347a5c8a06f941d4a0",
+  "authorizationSha256": "7c494c24d6adce75d8ee7845a44061fa0bd01740d27ff78a82d3ed10692eb601",
+  "collectionAcceptance": {
+    "authorization": {
+      "state": "coordinator-authorized-single-go01-collection-attempt",
+      "synthetic": false,
+      "planSha256": "c7dbacdf6c3966f66fd0ef805a85db452ce72180d3db22347a5c8a06f941d4a0",
+      "authorFreezeSha256": "a922cea56e81f471b1a6cd69ec576abcde7b9dd67aed246cb745e3432531196e",
+      "output": "/private/tmp/dotrepo-go01-native-collection-result-20261029-3",
+      "scratch": "/private/tmp/dotrepo-go01-native-collection-scratch-20261029-3",
+      "commands": [
+        "go env -json GOOS GOARCH GOVERSION GOTOOLCHAIN GOENV GOWORK GOFLAGS CGO_ENABLED CC CXX",
+        "go list -json ./...",
+        "go test -json -list . ./..."
+      ],
+      "limits": {
+        "cleanupSeconds": 60,
+        "combinedStdoutStderrPerCommandBytes": 2097152,
+        "cpus": 3,
+        "dependencyTmpfsBytes": 1073741824,
+        "memoryBytes": 4294967296,
+        "memorySwapBytes": 4294967296,
+        "pids": 256,
+        "sourcePlusSeedExpandedBytes": 2147483648,
+        "tmpTmpfsBytes": 536870912,
+        "transportBytesPerArchive": 536870912,
+        "workSecondsIncludingPreflight": 900,
+        "workspaceTmpfsBytes": 8589934592
+      },
+      "maxAttempts": 1,
+      "collectionAcceptance": {
+        "path": "/tmp/dotrepo-go01-native-collection-authorization-20261029-2/acceptance.json",
+        "sha256": "b17f2c697ff83bbb60c09fe6976f743617ec1f42a3f3f964af660b7622941414"
+      },
+      "priorResult": {
+        "path": "/tmp/dotrepo-go01-native-collection-result-20261029-2/result.json",
+        "sha256": "67cc8497d9b26919907719374016a3fa3f2c6327a020e881586fc2ed6bdd2a2a",
+        "state": "incomplete at prior GOENV preflight; no collection attempted; retained unchanged"
+      }
+    },
+    "collectionAcceptanceSha256": "b17f2c697ff83bbb60c09fe6976f743617ec1f42a3f3f964af660b7622941414",
+    "driverSubject": {
+      "driverPlanSha256": "c7dbacdf6c3966f66fd0ef805a85db452ce72180d3db22347a5c8a06f941d4a0",
+      "authorFreezeSha256": "a922cea56e81f471b1a6cd69ec576abcde7b9dd67aed246cb745e3432531196e",
+      "packetIdentity": "go01-collection-driver-amendment-2"
+    },
+    "scope": "collection only; init/TestMain allowed, no test-body/task outcome admission"
+  },
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+  "cacheArchiveSha256": "76ea2bfa6725335b889d44fed07f40f6eeb804d124d683ad4f2c0a6a2607bcfd",
+  "environmentSha256": "3649e45b9b1c1f62faeb2c3a168d93d91a7be7a62e7e2905c07d9ba69ddb65fe",
+  "preflightSeconds": 6.208805541973561,
+  "error": "ValueError: package has no selected Go source",
+  "cancelled": false,
+  "workElapsedSeconds": 17.498209125129506,
+  "collectionSeconds": 1.6191114999819547,
+  "cleanupExitCode": 0,
+  "cleanupSeconds": 0.4137901668436825,
+  "elapsedSeconds": 17.91199929197319,
+  "workBudgetExceeded": false
+}

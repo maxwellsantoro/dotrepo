@@ -1,0 +1,66 @@
+{
+  "all4371SelectedFilesBound": true,
+  "controls": [
+    "positive-TestGoFiles",
+    "positive-XTestGoFiles",
+    "reject-empty",
+    "reject-ignored-only",
+    "reject-unsafe-test",
+    "reject-missing-test",
+    "reject-cross-field-duplicate",
+    "actual-old-amendment2-review-rejected"
+  ],
+  "minimalCollectionAstDelta": true,
+  "minimalListingAstDelta": true,
+  "newGoDaemonNodePackageNetworkNativeCalls": 0,
+  "rawFixtureOnlyNotNativeCollection": true,
+  "rawFixturePackageObjects": 104,
+  "rawTestOnlySelectedFileCounts": {
+    "CgoFiles": 0,
+    "GoFiles": 0,
+    "TestGoFiles": 3,
+    "XTestGoFiles": 4368
+  },
+  "sameContextFields": [
+    "commands",
+    "cwd",
+    "limits",
+    "environment",
+    "environmentSha256",
+    "expectedGoEnv",
+    "imageId",
+    "sourceArchiveSha256",
+    "projection",
+    "treeObservation",
+    "toolProbe",
+    "expectedToolOutput"
+  ],
+  "sourceDeclarationsBound": 2,
+  "state": "independent-source-and-testonly-controls-passed",
+  "toolSpans": [
+    {
+      "bound": true,
+      "endLine": 895,
+      "path": "usr/local/go/src/cmd/go/alldocs.go",
+      "startLine": 877
+    },
+    {
+      "bound": true,
+      "endLine": 1153,
+      "path": "usr/local/go/src/cmd/go/internal/test/test.go",
+      "startLine": 1143
+    },
+    {
+      "bound": true,
+      "endLine": 480,
+      "path": "usr/local/go/src/go/build/build.go",
+      "startLine": 454
+    },
+    {
+      "bound": true,
+      "endLine": 1082,
+      "path": "usr/local/go/src/go/build/build.go",
+      "startLine": 1075
+    }
+  ]
+}

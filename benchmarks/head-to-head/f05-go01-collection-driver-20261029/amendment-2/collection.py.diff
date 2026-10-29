@@ -1,0 +1,37 @@
+--- amendment-1/collection.py
++++ amendment-2/collection.py
+@@ -32,8 +32,15 @@
+     "transport_controls.py",
+     "observer_controls.py",
+     "amendment_controls.py",
++    "goenv_controls.py",
+ }
+-LOCAL_NAMES = {"compiler-context-decision.json", "tmpfs-retrospective.json"}
++LOCAL_NAMES = {
++    "compiler-context-decision.json",
++    "tmpfs-retrospective.json",
++    "goenv-source-semantics.json",
++    "actual-go-env-stdout.bin",
++    "actual-go-env-receipt.json",
++}
+ COMMANDS = [
+     "go env -json GOOS GOARCH GOVERSION GOTOOLCHAIN GOENV GOWORK GOFLAGS CGO_ENABLED CC CXX",
+     "go list -json ./...",
+@@ -80,7 +87,7 @@
+     require(file_sha(NEXT / "plan.json") == NEXT_PLAN_SHA, "changed parent collection plan")
+     parent = json.loads((NEXT / "plan.json").read_text())
+     require(
+-        plan.get("identity") == "go01-collection-driver-amendment-1",
++        plan.get("identity") == "go01-collection-driver-amendment-2",
+         "changed driver packet identity",
+     )
+     require(
+@@ -112,7 +119,7 @@
+             "GOARCH": "arm64",
+             "GOVERSION": "go1.27.3",
+             "GOTOOLCHAIN": "local",
+-            "GOENV": "off",
++            "GOENV": "",
+             "GOWORK": "/workspace/repository/go.work",
+             "GOFLAGS": "-p=1 -count=1",
+             "CGO_ENABLED": "1",

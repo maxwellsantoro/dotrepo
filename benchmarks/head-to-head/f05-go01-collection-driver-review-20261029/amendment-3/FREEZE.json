@@ -1,0 +1,77 @@
+{
+  "artifacts": {
+    "README.md": {
+      "bytes": 2961,
+      "sha256": "a334e7e005c3cac48558795ac96c3efcbf26a19a8b2e0a4bac2b805dac3f27d0"
+    },
+    "acceptance-reuse.json": {
+      "bytes": 3600,
+      "sha256": "1c894ede095fad2ec1a193c664d606bff2d90f876b6d30b2f7a621834b1222d4"
+    },
+    "acceptance_reuse.py": {
+      "bytes": 4014,
+      "sha256": "5fcaa4267bb838fe3491d19ad30a8f59bc3a596655dbd2761195b08055b5919c"
+    },
+    "author-binding.json": {
+      "bytes": 344,
+      "sha256": "b4545ccf63efb91501ecb0cb907745ef1d4cd642776d857b5f4fb18759c8e335"
+    },
+    "challenge-results.json": {
+      "bytes": 3270,
+      "sha256": "ca95aeef37eab2107bb6f962da5783863a702d42a1bfe7cabc19932459713527"
+    },
+    "challenge.py": {
+      "bytes": 4989,
+      "sha256": "2a875350e32dd12c3cd280c3b1c43a8253a3bad4f82eca3d9c4853510f68115d"
+    },
+    "independent-controls.json": {
+      "bytes": 22186,
+      "sha256": "5bfe5d7eeecbc6f5e75c0ef4516f574672fd22935aed671c15857e8f63741955"
+    },
+    "independent_controls.py": {
+      "bytes": 11732,
+      "sha256": "35c607999e194d8519e566dbe28d6c81112308bda09721d8a8a4a4b58bb102ce"
+    },
+    "integrity.json": {
+      "bytes": 1560,
+      "sha256": "5c60c257fb65d8444a791d37da688080816625ec8452e715891784a5e4234eb0"
+    },
+    "passed-review.json": {
+      "bytes": 777,
+      "sha256": "4a84a6ed17d489a8904bc2aa0f369b1a36d8b1cf461690662b672489cb342864"
+    },
+    "replay-amendment-controls.json": {
+      "bytes": 4616,
+      "sha256": "a8b4869b9147d19c09b90d8bd0b04cae19fbe105cd607e86be971e66bc019ab6"
+    },
+    "replay-controls.json": {
+      "bytes": 85301,
+      "sha256": "0a3917c47244261189aeccb9babc1ca2b1f7c8b9e38797bacd49edf1a998e3ce"
+    },
+    "replay-goenv-controls.json": {
+      "bytes": 4336,
+      "sha256": "c020e8f9e0b379c14fae0a53d628e138efa06fe609aeaf5a1a1b4dd25c5b4898"
+    },
+    "replay-testonly-controls.json": {
+      "bytes": 3664,
+      "sha256": "e40d9acb696268d64091d48f3bdb0a8532e30ea4324d8853b11bfb868395fc72"
+    },
+    "replay-transport-controls.json": {
+      "bytes": 1965,
+      "sha256": "146e0c0edfa32277a8ba9ee2aec48557f6e3e1b86829c46056e9f7fd15c4f62f"
+    },
+    "review.json": {
+      "bytes": 2972,
+      "sha256": "25cbeada2f55640f6bb1c9b97e8ce6141f24853c8c0e8841e4264957651dadf7"
+    },
+    "source-and-testonly.json": {
+      "bytes": 1539,
+      "sha256": "1c005a03dbdb1853989f0c1156dbbaa538207e7be3c7ca31b492b91c488b32ef"
+    },
+    "source_and_testonly.py": {
+      "bytes": 11151,
+      "sha256": "1e71c4c0ee261fcfac9a0ed4b5b7adc570e8844c8b7754909923c0e113cc0740"
+    }
+  },
+  "state": "bounded independent test-only amendment review passed; no execution admission"
+}

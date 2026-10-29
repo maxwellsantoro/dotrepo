@@ -1,0 +1,50 @@
+--- amendment-1/make_plan.py
++++ amendment-2/make_plan.py
+@@ -43,6 +43,9 @@
+     assert all(inventory[path]["type"] == "0" for path in tools)
+     paths = [
+         HERE.parent / "FREEZE.json",
++        HERE.parent / "amendment-1/FREEZE.json",
++        BASE / "f05-go01-collection-driver-review-20261029/amendment-1/FREEZE.json",
++        *sorted((HERE / "sources").rglob("*.go")),
+         BASE / "f05-go01-collection-driver-review-20261029/FREEZE.json",
+         BASE / "f05-go01-offline-setup-result-20261029/evidence/logs/container-inspect/stdout.bin",
+         BASE
+@@ -63,9 +66,9 @@
+     bindings = {str(path): sha(path) for path in paths}
+     bindings.update(json.loads((NEXT / "input-bindings.json").read_text()))
+     plan = {
+-        "identity": "go01-collection-driver-amendment-1",
+-        "amendsAuthorFreezeSha256": "b176a6c3dfff4965a53e601a05eccab03257f9b3cfe78b5846317d29b2302eaa",
+-        "beforeReviewFreezeSha256": "2329a7941142c543ea6450972f5b1041f78f02aad36d7b232b3059a0d773a7e1",
++        "identity": "go01-collection-driver-amendment-2",
++        "amendsAuthorFreezeSha256": "0bdbd19da1a1607bb4a104156c008a05b934736556465d632364e634daeaa8e3",
++        "beforeReviewFreezeSha256": "7ad27fa44da993c1619abef1881355e7f94eade3c12e5783e8b8d21bb119e032",
+         "state": "source-only-driver-proposal-not-admitted",
+         "parentPlanSha256": sha(NEXT / "plan.json"),
+         "parentFreezeSha256": sha(NEXT / "freeze.json"),
+@@ -84,7 +87,7 @@
+             "GOARCH": "arm64",
+             "GOVERSION": "go1.27.3",
+             "GOTOOLCHAIN": "local",
+-            "GOENV": "off",
++            "GOENV": "",
+             "GOWORK": "/workspace/repository/go.work",
+             "GOFLAGS": "-p=1 -count=1",
+             "CGO_ENABLED": "1",
+@@ -133,11 +136,15 @@
+                 "transport_controls.py",
+                 "observer_controls.py",
+                 "amendment_controls.py",
++                "goenv_controls.py",
+             ]
+         },
+         "localFiles": {
+             "compiler-context-decision.json": sha(decision),
+             "tmpfs-retrospective.json": sha(retrospective),
++            "goenv-source-semantics.json": sha(HERE / "goenv-source-semantics.json"),
++            "actual-go-env-stdout.bin": sha(HERE / "actual-go-env-stdout.bin"),
++            "actual-go-env-receipt.json": sha(HERE / "actual-go-env-receipt.json"),
+         },
+         "bindings": bindings,
+     }

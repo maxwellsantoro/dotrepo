@@ -1,0 +1,28 @@
+{
+  "acceptedExclusions": [],
+  "collectionGate": [
+    "Freeze source archive/inventory, Python implementation/version, runner/version/settings, parameters and complete environment before native collection.",
+    "Collect full suite in an independently authorized contained environment; record imports/collection failures, exact case IDs, source locations and dynamic TestDownload mapping to extractor definition and generated suffix order. Collection itself executes imports and is not authorized by this source-only packet.",
+    "Derive exact proposed skips from source-defined broken/skip flags and frozen environment capabilities; independently accept identities+conditions before tests. No wildcard reason, count-only or post-run expansion.",
+    "Freeze manifest separately from run; empty/unavailable manifest rejects completion. Keep hidden oracle/scoring criteria outside future agent environment."
+  ],
+  "completeOutcomeRule": "Only a fully reconciled full-suite run with terminal applicable test outcomes, exact prospectively accepted exclusions/skips and no unresolved setup/network/phase/coverage gap may establish task outcome. testsPassed is a separate value; actual outcome can be failing. Does not prove all product behaviors, all proxies/platforms/interpreters, or dotrepo benefit.",
+  "executionAndObservationGate": [
+    "Run one frozen full-suite alternative with no subset selectors, excludes, fail-fast, arbitrary test edits or disabled prerequisites. Source/config mutation invalidates binding.",
+    "Retain raw per-test identity/start/terminal status, suite/phase completion, stdout/stderr, exit/error, actual source revision and environment, usage/timing and null unavailable cost. Reconcile all expected active tests and exact accepted exclusions; unknown/missing/duplicate/truncated lifecycle evidence is unresolved.",
+    "Distinguish successful test assertions, actual test-body failures/errors, accepted source-default behavior exclusions, accepted source-defined skips and prerequisite/collection/setup/teardown/infrastructure failures. Complete failed tests can obtain a task outcome, but ambiguous failure phase or incomplete suite cannot.",
+    "Observe and bind entry into test_download.py:180-182 to the active dynamic ID; its unittest pass is not sufficient. Network-exhaustion return is noncompletion, never retroactively accepted as a skip. Record known source-default proxy return/stand-in witnesses separately, not as exercised proxy behavior.",
+    "A green exit/summary, CI continue-on-error, plain JUnit skip counts, or no warning substring alone cannot establish all required observations. Runner/observer strategy must prove source-site and test-ID attribution without modifying upstream test bytes or gating agent decisions with hidden gold.",
+    "Classify external-resource/network exhaustion or unavailability separately from a product assertion failure; a terminal error caused by an unmet live-network prerequisite does not establish the intended test outcome. Unknown causation remains unresolved rather than becoming a passing exclusion."
+  ],
+  "kind": "task-specific source requirements, not executable runner/scorer",
+  "nativeCaseCount": null,
+  "nativeManifest": null,
+  "scope": "full maintained aggregate product suite for youtube_dl",
+  "taskId": "python-03",
+  "taskOutcomeObserved": false,
+  "unresolvedObserverWork": [
+    "No executable adapter is supplied. Exact compatibility with chosen interpreter/runner, lifecycle hooks and reliable early-return source-site observation remains to be designed/tested before live attempts.",
+    "Static AST scan is not native collection and does not exhaust all conditional runtime returns/skips; audit those against frozen source and collection before claiming observation completeness."
+  ]
+}

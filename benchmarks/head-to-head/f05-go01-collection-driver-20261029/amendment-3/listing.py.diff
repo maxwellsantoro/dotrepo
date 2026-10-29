@@ -1,0 +1,13 @@
+--- amendment-2/listing.py
++++ amendment-3/listing.py
+@@ -116,9 +116,7 @@
+                     ),
+                     "selected Go file absent from validated source inventory",
+                 )
+-        require(
+-            bool(row.get("GoFiles") or row.get("CgoFiles")), "package has no selected Go source"
+-        )
++        require(bool(selected), "package has no selected Go source")
+         result[name] = row
+     require(set(REQUIRED) <= set(result), "missing required package observation")
+     return result

@@ -1,0 +1,110 @@
+[
+  {
+    "endLine": 1013,
+    "excerpt": "To run the test, simply invoke your favorite test runner, or execute a test file directly; any of the following work:\n\n    python -m unittest discover\n    python test/test_download.py\n    nosetests\n\nFor Python versions 3.6 and later, you can use [pynose](https://pypi.org/project/pynose/) to implement `nosetests`. The original [nose](https://pypi.org/project/nose/) has not been upgraded for 3.10 and later.\n\nSee item 6 of [new extractor tutorial](#adding-support-for-a-new-site) for how to run extractor specific test cases.\n\nIf you want to create a build of youtube-dl yourself, you'll need\n\n* python\n* make (only GNU make is supported)\n* pandoc\n* zip\n* nosetests\n",
+    "interpretation": "Maintainer names aggregate unittest/nose routes and separate direct-file route; following pandoc/zip list belongs to build instructions, not direct-test prerequisite proof.",
+    "path": "README.md",
+    "revision": "956b8c585591b401a543e409accb163eeaaa1193",
+    "sha256": "dc249af3a7587ad18dce6d22f6e486ac0af6f91fe1172e7e866bae584e0c73cb",
+    "startLine": 997
+  },
+  {
+    "endLine": 52,
+    "excerpt": "codetest:\n\tflake8 .\n\ntest:\n\t#nosetests --with-coverage --cover-package=youtube_dl --cover-html --verbose --processes 4 test\n\tnosetests --verbose test\n\t$(MAKE) codetest\n\not: offlinetest\n\n# Keep this list in sync with devscripts/run_tests.sh\nofflinetest: codetest\n\t$(PYTHON) -m nose --verbose test \\\n\t\t--exclude test_age_restriction.py \\\n\t\t--exclude test_download.py \\\n\t\t--exclude test_iqiyi_sdk_interpreter.py \\\n\t\t--exclude test_socks.py \\\n\t\t--exclude test_subtitles.py \\\n\t\t--exclude test_write_annotations.py \\\n\t\t--exclude test_youtube_lists.py \\\n\t\t--exclude test_youtube_signature.py\n",
+    "interpretation": "test runs full nosetests test then flake8; offlinetest explicitly excludes product files and is not equivalent.",
+    "path": "Makefile",
+    "revision": "956b8c585591b401a543e409accb163eeaaa1193",
+    "sha256": "5335edf29074bb04a286c62f93e9cb8505b789982700ca14fb22dafb42986aa4",
+    "startLine": 32
+  },
+  {
+    "endLine": 116,
+    "excerpt": "    maintainer_email='dstftw@gmail.com',\n    license='Unlicense',\n    packages=[\n        'youtube_dl',\n        'youtube_dl.extractor', 'youtube_dl.downloader',\n        'youtube_dl.postprocessor'],\n",
+    "interpretation": "Selected primary package includes extractor/downloader/postprocessor subpackages.",
+    "path": "setup.py",
+    "revision": "956b8c585591b401a543e409accb163eeaaa1193",
+    "sha256": "b22fbdb4f23e480976e1a5a20b95848c26680b04b796838756241191bd8dfb4d",
+    "startLine": 111
+  },
+  {
+    "endLine": 39,
+    "excerpt": "def get_params(override=None):\n    PARAMETERS_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),\n                                   \"parameters.json\")\n    LOCAL_PARAMETERS_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),\n                                         \"local_parameters.json\")\n    with open(PARAMETERS_FILE, encoding='utf-8') as pf:\n        parameters = json.load(pf)\n    if os.path.exists(LOCAL_PARAMETERS_FILE):\n        with open(LOCAL_PARAMETERS_FILE, encoding='utf-8') as pf:\n            parameters.update(json.load(pf))\n    if override:\n        parameters.update(override)\n    return parameters\n",
+    "interpretation": "Committed parameter file is merged with optional local file and explicit overrides. Source-default absence must be frozen, not presumed after config changes.",
+    "path": "test/helper.py",
+    "revision": "956b8c585591b401a543e409accb163eeaaa1193",
+    "sha256": "1a71eb39bc2628ef9d6c1fb87c521914d5dd3ccbb17d1cf164be892f789bb055",
+    "startLine": 27
+  },
+  {
+    "endLine": 109,
+    "excerpt": "def gettestcases(include_onlymatching=False):\n    for ie in youtube_dl.extractor.gen_extractors():\n        for tc in ie.get_testcases(include_onlymatching):\n            yield tc\n",
+    "interpretation": "Download cases come from extractor definitions; source AST class count is not native case count.",
+    "path": "test/helper.py",
+    "revision": "956b8c585591b401a543e409accb163eeaaa1193",
+    "sha256": "1a71eb39bc2628ef9d6c1fb87c521914d5dd3ccbb17d1cf164be892f789bb055",
+    "startLine": 106
+  },
+  {
+    "endLine": 76,
+    "excerpt": "class TestMultipleSocks(unittest.TestCase):\n    @staticmethod\n    def _check_params(attrs):\n        params = get_params()\n        for attr in attrs:\n            if attr not in params:\n                print('Missing %s. Skipping.' % attr)\n                return\n        return params\n\n    def test_proxy_http(self):\n        params = self._check_params(['primary_proxy', 'primary_server_ip'])\n        if params is None:\n            return\n        ydl = FakeYDL({\n            'proxy': params['primary_proxy']\n        })\n        self.assertEqual(\n            ydl.urlopen('http://yt-dl.org/ip').read().decode('utf-8'),\n            params['primary_server_ip'])\n\n    def test_proxy_https(self):\n        params = self._check_params(['primary_proxy', 'primary_server_ip'])\n        if params is None:\n            return\n        ydl = FakeYDL({\n            'proxy': params['primary_proxy']\n        })\n        self.assertEqual(\n            ydl.urlopen('https://yt-dl.org/ip').read().decode('utf-8'),\n            params['primary_server_ip'])\n\n    def test_secondary_proxy_http(self):\n        params = self._check_params(['secondary_proxy', 'secondary_server_ip'])\n        if params is None:\n            return\n        ydl = FakeYDL()\n        req = compat_urllib_request.Request('http://yt-dl.org/ip')\n        req.add_header('Ytdl-request-proxy', params['secondary_proxy'])\n        self.assertEqual(\n            ydl.urlopen(req).read().decode('utf-8'),\n            params['secondary_server_ip'])\n\n    def test_secondary_proxy_https(self):\n        params = self._check_params(['secondary_proxy', 'secondary_server_ip'])\n        if params is None:\n            return\n        ydl = FakeYDL()\n        req = compat_urllib_request.Request('https://yt-dl.org/ip')\n        req.add_header('Ytdl-request-proxy', params['secondary_proxy'])\n        self.assertEqual(\n            ydl.urlopen(req).read().decode('utf-8'),\n            params['secondary_server_ip'])\n",
+    "interpretation": "Four optional-proxy methods return before behavior under missing-key defaults; configuring them changes proposed exclusion conditions.",
+    "path": "test/test_socks.py",
+    "revision": "956b8c585591b401a543e409accb163eeaaa1193",
+    "sha256": "c63a0ccc3396850e82fafc14627f8d7cb2fbdef45cba5254726eeaf129812555",
+    "startLine": 24
+  },
+  {
+    "endLine": 114,
+    "excerpt": "class TestSocks(unittest.TestCase):\n    _SKIP_SOCKS_TEST = True\n\n    def setUp(self):\n        if self._SKIP_SOCKS_TEST:\n            return\n\n        self.port = random.randint(20000, 30000)\n        self.server_process = subprocess.Popen([\n            'srelay', '-f', '-i', '127.0.0.1:%d' % self.port],\n            stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)\n\n    def tearDown(self):\n        if self._SKIP_SOCKS_TEST:\n            return\n\n        self.server_process.terminate()\n        self.server_process.communicate()\n\n    def _get_ip(self, protocol):\n        if self._SKIP_SOCKS_TEST:\n            return '127.0.0.1'\n\n        ydl = FakeYDL({\n            'proxy': '%s://127.0.0.1:%d' % (protocol, self.port),\n        })\n        return ydl.urlopen('http://yt-dl.org/ip').read().decode('utf-8')\n\n    def test_socks4(self):\n        self.assertTrue(isinstance(self._get_ip('socks4'), compat_str))\n\n    def test_socks4a(self):\n        self.assertTrue(isinstance(self._get_ip('socks4a'), compat_str))\n\n    def test_socks5(self):\n        self.assertTrue(isinstance(self._get_ip('socks5'), compat_str))\n",
+    "interpretation": "Three SOCKS methods assert a string stand-in under literal True, while actual proxy setup/teardown is disabled. Passing statuses cannot prove proxy behavior.",
+    "path": "test/test_socks.py",
+    "revision": "956b8c585591b401a543e409accb163eeaaa1193",
+    "sha256": "c63a0ccc3396850e82fafc14627f8d7cb2fbdef45cba5254726eeaf129812555",
+    "startLine": 79
+  },
+  {
+    "endLine": 126,
+    "excerpt": "        def print_skipping(reason):\n            print('Skipping %s: %s' % (test_case['name'], reason))\n            self.skipTest(_encode_str(reason))\n\n        if not ie.working():\n            print_skipping('IE marked as not _WORKING')\n\n        for tc in test_cases:\n            info_dict = tc.get('info_dict', {})\n            if not (info_dict.get('id') and info_dict.get('ext')):\n                raise Exception('Test definition (%s) requires both \\'id\\' and \\'ext\\' keys present to define the output file' % (tname, ))\n\n        if 'skip' in test_case:\n            print_skipping(test_case['skip'])\n\n        for other_ie in other_ies:\n            if not other_ie.working():\n                print_skipping('test depends on %sIE, marked as not WORKING' % other_ie.ie_key())\n",
+    "interpretation": "Extractor working/test skip/additional-extractor flags can generate dynamic skips; exact prospective identities/conditions remain necessary.",
+    "path": "test/test_download.py",
+    "revision": "956b8c585591b401a543e409accb163eeaaa1193",
+    "sha256": "1c96c9d0727cbf8c01a449bb2bf94f659293040590a6ed7b3c8b6edc825b3fe5",
+    "startLine": 109
+  },
+  {
+    "endLine": 182,
+    "excerpt": "                    res_dict = ydl.extract_info(\n                        test_case['url'],\n                        force_generic_extractor=params.get('force_generic_extractor', False))\n                except (DownloadError, ExtractorError) as err:\n                    # Check if the exception is not a network related one\n                    if not err.exc_info[0] in (compat_urllib_error.URLError, socket.timeout, UnavailableVideoError, compat_http_client.BadStatusLine) or (err.exc_info[0] == compat_HTTPError and err.exc_info[1].code == 503):\n                        msg = getattr(err, 'msg', error_to_compat_str(err))\n                        err.msg = '%s (%s)' % (msg, tname, )\n                        raise err\n\n                    if try_num == RETRIES:\n                        report_warning('%s failed due to network errors, skipping...' % tname)\n                        return\n",
+    "interpretation": "Network-related exhausted retries return without intended download outcome; an ordinary unittest pass is insufficient.",
+    "path": "test/test_download.py",
+    "revision": "956b8c585591b401a543e409accb163eeaaa1193",
+    "sha256": "1c96c9d0727cbf8c01a449bb2bf94f659293040590a6ed7b3c8b6edc825b3fe5",
+    "startLine": 170
+  },
+  {
+    "endLine": 289,
+    "excerpt": "# And add them to TestDownload\nfor n, test_case in enumerate(defs):\n    tname = 'test_' + str(test_case['name'])\n    i = 1\n    while hasattr(TestDownload, tname):\n        tname = 'test_%s_%d' % (test_case['name'], i)\n        i += 1\n    test_method = generator(test_case, tname)\n    test_method.__name__ = str(tname)\n    ie_list = test_case.get('add_ie')\n    test_method.add_ie = ie_list and ','.join(ie_list)\n    setattr(TestDownload, test_method.__name__, test_method)\n",
+    "interpretation": "Dynamic method identity suffixes depend on generated extractor definitions; native full manifest must retain mappings.",
+    "path": "test/test_download.py",
+    "revision": "956b8c585591b401a543e409accb163eeaaa1193",
+    "sha256": "1c96c9d0727cbf8c01a449bb2bf94f659293040590a6ed7b3c8b6edc825b3fe5",
+    "startLine": 278
+  },
+  {
+    "endLine": 468,
+    "excerpt": "    - name: Run tests\n      if: ${{ contains(needs.select.outputs.test-set, matrix.ytdl-test-set ) }}\n      continue-on-error: ${{ matrix.ytdl-test-set == 'download' || matrix.python-impl == 'jython' }}\n      env:\n        YTDL_TEST_SET: ${{ matrix.ytdl-test-set }}\n      run: |\n        ./devscripts/run_tests.${{ matrix.run-tests-ext }}\n",
+    "interpretation": "Download continue-on-error affects CI policy and does not establish completed outcome.",
+    "path": ".github/workflows/ci.yml",
+    "revision": "956b8c585591b401a543e409accb163eeaaa1193",
+    "sha256": "10d0709634aca656e9ff0ed55a7586dee6545d8fa780ef43938550dc94da4455",
+    "startLine": 462
+  },
+  {
+    "endLine": 13,
+    "excerpt": "defaultargs = test --exclude test_download.py --exclude test_age_restriction.py\n    --exclude test_subtitles.py --exclude test_write_annotations.py\n    --exclude test_youtube_lists.py --exclude test_iqiyi_sdk_interpreter.py\n    --exclude test_socks.py\ncommands = nosetests --verbose {posargs:{[testenv]defaultargs}}  # --with-coverage --cover-package=youtube_dl --cover-html\n",
+    "interpretation": "Default tox explicitly excludes product and SOCKS test files; cannot replace full suite.",
+    "path": "tox.ini",
+    "revision": "956b8c585591b401a543e409accb163eeaaa1193",
+    "sha256": "75c47b0f9ed2b6ac528d34c6f0579e09de1a4f0809d18397120827a67dde2274",
+    "startLine": 9
+  }
+]

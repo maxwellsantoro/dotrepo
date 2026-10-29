@@ -1,0 +1,29 @@
+{
+  "state": "verified-retained-incomplete-outcome",
+  "attempts": 2,
+  "daemonCalls": 15,
+  "environmentMismatch": {
+    "GOENV": {
+      "expected": "off",
+      "observed": ""
+    }
+  },
+  "stdinBytes": 585257959,
+  "rawOutputBytes": 11171,
+  "elapsedSecondsBothAttempts": 16.591300040949136,
+  "absenceEvidence": "same-attempt driver receipts only; no independent daemon observation",
+  "sourceTreeBefore": {
+    "sha256": "2b5ae67b67d8cd5a352a9255731c855181a732f8121ff16ca650accf82109f19",
+    "entries": 68786,
+    "bytes": 218783760
+  },
+  "sourceAndToolsAfterObserved": false,
+  "nativeCollectionOccurred": false,
+  "taskOutcomeObserved": false,
+  "costUsd": null,
+  "inputArchives": {
+    "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+    "projectionArchiveSha256": "76ea2bfa6725335b889d44fed07f40f6eeb804d124d683ad4f2c0a6a2607bcfd",
+    "sourceTreeBeforeMatchesArchive": true
+  }
+}

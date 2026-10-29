@@ -1,0 +1,80 @@
+{
+  "passed": 6,
+  "controls": [
+    {
+      "case": "ordinary-binary-bytes-and-Unicode-BMP-astral",
+      "passed": true,
+      "observed": {
+        "sha256": "3529008d075bfccd452e95adc93000c4f80e22b62f14ba1c079dc856d83e7f97",
+        "entries": 7,
+        "bytes": 16
+      },
+      "rowsSha256": "3529008d075bfccd452e95adc93000c4f80e22b62f14ba1c079dc856d83e7f97"
+    },
+    {
+      "case": "addition",
+      "passed": true,
+      "observed": {
+        "sha256": "2fe45843fd5b89763cff735a243abd102575e42d00a3254763360e955be57dd3",
+        "entries": 8,
+        "bytes": 16
+      },
+      "rowsSha256": "2fe45843fd5b89763cff735a243abd102575e42d00a3254763360e955be57dd3"
+    },
+    {
+      "case": "deletion",
+      "passed": true,
+      "observed": {
+        "sha256": "e6146d5bc6c1ffaf4cae0fc2385b75e157e0b016ea418701d73ceadb6d195be1",
+        "entries": 7,
+        "bytes": 9
+      },
+      "rowsSha256": "e6146d5bc6c1ffaf4cae0fc2385b75e157e0b016ea418701d73ceadb6d195be1"
+    },
+    {
+      "case": "file-to-directory",
+      "passed": true,
+      "observed": {
+        "sha256": "5e3a0557fd4c143e53e391848df91b1649dd3fc139fa464f4398515a8207be01",
+        "entries": 7,
+        "bytes": 9
+      },
+      "rowsSha256": "5e3a0557fd4c143e53e391848df91b1649dd3fc139fa464f4398515a8207be01"
+    },
+    {
+      "case": "file-to-symlink-no-follow",
+      "passed": true,
+      "observed": {
+        "sha256": "0144cc5835e66ca28d5881b6394a897738394626d262d1c50a35f5d31b07bae9",
+        "entries": 7,
+        "bytes": 9
+      },
+      "rowsSha256": "0144cc5835e66ca28d5881b6394a897738394626d262d1c50a35f5d31b07bae9"
+    },
+    {
+      "case": "regular-byte-change",
+      "passed": true,
+      "observed": {
+        "sha256": "e005777184f9c4cc785ee332acbc9470a22b2bcd56549311df0d352868c7bab1",
+        "entries": 7,
+        "bytes": 13
+      },
+      "rowsSha256": "e005777184f9c4cc785ee332acbc9470a22b2bcd56549311df0d352868c7bab1"
+    }
+  ],
+  "node": {
+    "resolvedPath": "/Users/maxwell/.nvm/versions/node/v25.9.0/bin/node",
+    "sha256": "4b3fe8b384e30ee917e28a9f5b79a3ca64b72b13b70d9ab2273e6e9a823f4cbf",
+    "version": "v25.9.0",
+    "runtimeRole": "host owned data-observer validation, not frozen image/upstream execution"
+  },
+  "algorithmSha256": "951e92037d41f19e471f5cb3fb4e42c675cb4a8bf5f510268df05cb10296056f",
+  "utf8VsUtf16OrderingDiffersOnFixture": true,
+  "nodeBuiltinImportsOnly": [
+    "node:fs",
+    "node:path",
+    "node:crypto"
+  ],
+  "upstreamNativeCollectionOrTaskRan": false,
+  "networkDaemonPackageGoCargoProviderCalls": 0
+}

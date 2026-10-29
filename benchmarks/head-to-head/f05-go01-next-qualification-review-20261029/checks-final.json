@@ -1,0 +1,63 @@
+{
+  "derivedArchive": {
+    "allRegularMemberPathsBytesModesEqual": true,
+    "expandedBytes": 278162103,
+    "files": 14922,
+    "normalizedMetadataAndOrder": true
+  },
+  "elapsedSeconds": 5.588062583003193,
+  "execution": "Local stdlib reads/hashes only; no source extraction/execution or daemon/network calls",
+  "inputs": {
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-dependency-download-result-20261029/evidence/inventory.json": {
+      "bytes": 5752508,
+      "sha256": "900550d8e44827f96a9e7db46f3b4551db734938564c8921473fe56a6257415c"
+    },
+    "/private/tmp/dotrepo-go01-dependency-download-cache-20261029-1/cache.tar": {
+      "bytes": 366622720,
+      "sha256": "583fad501fa7b1a1a6d85ab8fe4b890786e39c1e016f785d6d3fb9d060383284"
+    },
+    "/private/tmp/dotrepo-go01-go-cache-projection-20261029-1/cache-go-only.tar": {
+      "bytes": 292392960,
+      "sha256": "76ea2bfa6725335b889d44fed07f40f6eeb804d124d683ad4f2c0a6a2607bcfd"
+    },
+    "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar": {
+      "bytes": 280422400,
+      "sha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f"
+    }
+  },
+  "ordinaryGoPackageJsAssets": [
+    "go/pkg/mod/github.com/google/pprof@v0.0.0-20251213031049-b05bdaca462f/internal/driver/html/common.js",
+    "go/pkg/mod/github.com/google/pprof@v0.0.0-20251213031049-b05bdaca462f/internal/driver/html/stacks.js",
+    "go/pkg/mod/github.com/google/pprof@v0.0.0-20251213031049-b05bdaca462f/third_party/svgpan/svgpan.js",
+    "go/pkg/mod/golang.org/x/telemetry@v0.0.0-20260908163034-4bcc4b2ee518/internal/content/gotelemetryview/static/index.min.js",
+    "go/pkg/mod/golang.org/x/telemetry@v0.0.0-20260908163034-4bcc4b2ee518/internal/content/gotelemetryview/static/storage.min.js",
+    "go/pkg/mod/golang.org/x/telemetry@v0.0.0-20260908163034-4bcc4b2ee518/internal/content/shared/static/base.min.js",
+    "go/pkg/mod/golang.org/x/telemetry@v0.0.0-20260908163034-4bcc4b2ee518/internal/content/shared/static/treenav.min.js",
+    "go/pkg/mod/golang.org/x/telemetry@v0.0.0-20260908163034-4bcc4b2ee518/internal/content/telemetrygodev/static/charts.min.js",
+    "go/pkg/mod/golang.org/x/telemetry@v0.0.0-20260908163034-4bcc4b2ee518/package.json",
+    "go/pkg/mod/golang.org/x/tools@v0.50.0/cmd/present/static/dir.js",
+    "go/pkg/mod/golang.org/x/tools@v0.50.0/cmd/present/static/jquery-ui.js",
+    "go/pkg/mod/golang.org/x/tools@v0.50.0/cmd/present/static/jquery.js",
+    "go/pkg/mod/golang.org/x/tools@v0.50.0/cmd/present/static/notes.js",
+    "go/pkg/mod/golang.org/x/tools@v0.50.0/cmd/present/static/play.js",
+    "go/pkg/mod/golang.org/x/tools@v0.50.0/cmd/present/static/playground.js",
+    "go/pkg/mod/golang.org/x/tools@v0.50.0/cmd/present/static/slides.js"
+  ],
+  "parentArchive": {
+    "allRegularMemberPathsBytesModesEqual": true,
+    "expandedBytes": 351962210,
+    "files": 15246,
+    "normalizedMetadataAndOrder": false
+  },
+  "projectionArtifacts": 9,
+  "proposalArtifacts": 12,
+  "selectedMemberMapSha256": "bf5aefaa56222f9337752edebddd50d2cfc4759ed8954f7f9f74bf3d70765131",
+  "selectionInterpretation": "All and only go/pkg/mod/ regular members; no npm subtree/build-cache root. Ordinary Go-package JS/package.json assets retained; no universal no-JavaScript claim.",
+  "sourceChecks": {
+    "exactGoToolSourcesFromFrozenImageExport": 3,
+    "exactRawTextAndShaMembers": 37,
+    "lineAndHashBoundDisplaySpans": 15,
+    "spanDisplayNewlines": "LF; checked against raw source splitlines, not a claim of raw excerpt bytes"
+  },
+  "state": "passed-independent-source-and-projection-byte-check"
+}

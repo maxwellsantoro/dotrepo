@@ -1,0 +1,84 @@
+{
+  "identity": "go01-collection-result-amendment-1",
+  "state": "incomplete-at-go-list-parser",
+  "synthetic": false,
+  "parentFreezeSha256": "3d88c025332c325a17d3fe95a3b55aebcd9e67e75992950525727d84f1d7eca6",
+  "repository": "github.com/microsoft/TypeScript",
+  "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+  "driverPlanSha256": "c7dbacdf6c3966f66fd0ef805a85db452ce72180d3db22347a5c8a06f941d4a0",
+  "driverAuthorFreezeSha256": "a922cea56e81f471b1a6cd69ec576abcde7b9dd67aed246cb745e3432531196e",
+  "prospectiveAmendment": "New reviewed plan expected Go-env query GOENV empty; actual container input GOENV stays off. Source/image/cache/environment/commands/cwd/limits unchanged from earlier plan. Original failure remains unchanged.",
+  "authorization": "authorization/authorization.json",
+  "rawResult": "evidence/result.json",
+  "outcome": {
+    "stage": "go-list",
+    "error": "ValueError: package has no selected Go source",
+    "goEnvCheckPassed": true,
+    "goListExitCode": 0,
+    "goListStderrBytes": 0,
+    "rawPackageObjectCount": 104,
+    "rawTestOnlyPackage": {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+      "GoFiles": 0,
+      "CgoFiles": 0,
+      "TestGoFiles": 3,
+      "XTestGoFiles": 4368
+    },
+    "frozenParserRejectionReproduced": true,
+    "inventoryAccepted": false,
+    "goTestListExecuted": false,
+    "nativeCollectionAttempted": false,
+    "nativeCollectionOccurred": false,
+    "testInitializationOrTestMainExecutionObserved": false,
+    "taskOutcomeObserved": false,
+    "nativeTaskAdmitted": false,
+    "campaignAdmitted": false,
+    "cacheGloballyQualified": false
+  },
+  "rawObservationLimits": [
+    "The 104 objects are JSON-decoded raw observations, not an accepted package inventory or validated complete scope.",
+    "The frozen parser disallows a test-only package; this packet preserves that rejection and makes no parser change or retry.",
+    "No test-list command or upstream initialization/TestMain/test-body execution observed.",
+    "Initial source/tools verified; early stop skipped after observations.",
+    "Same-attempt cleanup receipts only, no independent absence observation."
+  ],
+  "effort": {
+    "daemonCalls": 16,
+    "elapsedSeconds": 17.91199929197319,
+    "stdinBytes": 585257959,
+    "rawOutputBytes": 742463,
+    "modelCallsLaunchedByDriver": 0,
+    "costUsd": null,
+    "allThreeInvocations": {
+      "daemonCalls": 31,
+      "sumDriverElapsedSeconds": 34.503299332922325,
+      "stdinBytes": 1170515918,
+      "rawOutputBytes": 753634,
+      "note": "Preparation accounting across separately authorized plans, including first admission refusal; no consumer comparison."
+    },
+    "unmeasured": "Host/container preparation, coordination/curation/review/model effort and dollar costs remain unmeasured."
+  },
+  "cleanup": {
+    "forceRemovalExitCode": 0,
+    "containerAbsentReported": true,
+    "sameAttemptInspectAbsence": true,
+    "sameAttemptResponsiveNameListEmpty": true,
+    "independentAbsenceObservation": false
+  },
+  "preservation": {
+    "filesCopied": 78,
+    "originalBytesCopied": 1655999,
+    "originLedger": "origin-ledger.json",
+    "parent91ArtifactsUnchanged": true,
+    "outerExitCodeFromCoordinator": 1,
+    "originalOuterInvocationArgvReceiptAvailable": false,
+    "noSourceCacheBuildArtifactExports": true
+  },
+  "checks": {
+    "sourceOnlyVerifier": "verification.json",
+    "syntheticControls": "controls.json",
+    "controlCount": 8,
+    "newLiveActionsByPackager": 0
+  },
+  "authorDisclosure": "Same author as prior driver/result packet. Static packaging and parser replay are not independent result review, held-out qualification or consumer benefit."
+}

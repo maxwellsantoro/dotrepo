@@ -1,0 +1,107 @@
+[
+  {
+    "endLine": 36,
+    "excerpt": "// @ts-check\n\nimport AdmZip from \"adm-zip\";\nimport chokidar from \"chokidar\";\nimport { task as herebyTask } from \"hereby\";\nimport assert from \"node:assert\";\nimport crypto from \"node:crypto\";\nimport fs from \"node:fs\";\nimport { createRequire } from \"node:module\";\nimport os from \"node:os\";\nimport path from \"node:path\";\nimport url from \"node:url\";\nimport {\n    parseArgs,\n    styleText,\n} from \"node:util\";\nimport * as tar from \"tar\";\nimport {\n    x,\n    xSync,\n} from \"tinyexec\";\nimport {\n    enableFileFingerprintCache,\n    invalidateFileFingerprints,\n    run,\n} from \"./tools/scripts/gen/utils.mts\";\nimport {\n    ensureModel as ensureLSPModel,\n    outputs as lspModelOutputs,\n} from \"./tools/scripts/lsp/fetchModel.mts\";\nimport { outputs as encoderOutputs } from \"./tools/scripts/tsc/generate-encoder.ts\";\nimport { outputs as enumOutputs } from \"./tools/scripts/tsc/generate-enums.ts\";\nimport { outputs as goASTOutputs } from \"./tools/scripts/tsc/generate-go-ast.ts\";\nimport { outputs as tsASTOutputs } from \"./tools/scripts/tsc/generate-ts-ast.ts\";\nimport generateUnicodeData, { outputs as unicodeOutputs } from \"./tsc/internal/stringutil/_scripts/generate-unicode-data.mts\";\n\n",
+    "source": "Herebyfile.mjs",
+    "sourceSha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421",
+    "startLine": 1
+  },
+  {
+    "endLine": 183,
+    "excerpt": "const defaultGoBuildTags = [\n    ...(options.noembed ? [\"noembed\"] : []),\n];\n\n/**\n * @param  {...string} extra\n * @returns {string[]}\n */\nfunction goBuildTags(...extra) {\n    const tags = new Set(defaultGoBuildTags.concat(extra));\n    return tags.size ? [`-tags=${[...tags].join(\",\")}`] : [];\n}\n\nconst goBuildFlags = [\n    ...(options.race ? [\"-race\"] : []),\n    // https://github.com/go-delve/delve/blob/62cd2d423c6a85991e49d6a70cc5cb3e97d6ceef/Documentation/usage/dlv_exec.md?plain=1#L12\n    ...(options.debug ? [\"-gcflags=all=-N -l\"] : []),\n];\n\nconst goBuildEnv = {\n    ...(options.race ? {} : { CGO_ENABLED: \"0\" }),\n};\n\n/**\n",
+    "source": "Herebyfile.mjs",
+    "sourceSha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421",
+    "startLine": 160
+  },
+  {
+    "endLine": 910,
+    "excerpt": "function goTestFlags(taskName) {\n    ensureCoverageDirExists();\n    return [\n        ...goBuildFlags,\n        ...goBuildTags(),\n        ...(options.tests ? [`-run=${options.tests}`] : []),\n        // Go 1.27 duplicates promoted AST wrappers, exhausting CI disk under coverage.\n        // Tests strip DWARF when linking; omit it earlier to shrink temporary and cached archives.\n        ...(options.coverage && !options.debug ? [\"-gcflags=all=-dwarf=false\"] : []),\n        ...(options.coverage ? [`-coverprofile=${path.join(coverageDir, \"coverage.\" + taskName + \".out\")}`, \"-coverpkg=./...\"] : []),\n    ];\n}\n\nfunction getGODEBUG() {\n    const key = \"tracebackancestors\";\n    const setting = `${key}=10`;\n    const existing = process.env.GODEBUG ?? \"\";\n    if (!existing) return setting;\n    if (existing.includes(`${key}=`)) return existing;\n    return `${existing},${setting}`;\n}\n\nconst goTestEnv = {\n    GODEBUG: getGODEBUG(),\n    ...(options.concurrentTestPrograms ? { TS_TEST_PROGRAM_SINGLE_THREADED: \"false\" } : {}),\n    // Go test caching takes a long time on Windows.\n    // https://github.com/golang/go/issues/72992\n    ...(process.platform === \"win32\" ? { GOFLAGS: \"-count=1\" } : {}),\n};\n\nconst baselineTrackingEnabled = false && ![\n    options.tests,\n    options.noembed,\n    options.concurrentTestPrograms,\n    options.race,\n",
+    "source": "Herebyfile.mjs",
+    "sourceSha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421",
+    "startLine": 876
+  },
+  {
+    "endLine": 1009,
+    "excerpt": "async function runTests() {\n    if (!options.dirty) {\n        await rimraf(localBaseline);\n        await fs.promises.mkdir(localBaseline, { recursive: true });\n    }\n\n    // Create a tmp directory for baseline tracking if enabled\n    /** @type {string | undefined} */\n    let trackingDir;\n    /** @type {(() => Promise<void>) | undefined} */\n    let cleanupTracking;\n\n    if (baselineTrackingEnabled) {\n        const tempTrackingDir = fs.mkdtempSync(path.join(os.tmpdir(), \"tsgo-baseline-tracking-\"));\n        trackingDir = tempTrackingDir;\n        cleanupTracking = () => rimraf(tempTrackingDir);\n    }\n\n    try {\n        const testEnv = {\n            ...goTestEnv,\n            ...(trackingDir ? { TSGO_BASELINE_TRACKING_DIR: trackingDir } : {}),\n        };\n        await gotestsumTool.run([...gotestsumArgs(\"tests\"), \"./...\", ...(isCI ? [\"--timeout=45m\"] : [])], {\n            env: testEnv,\n            cwd: \"./tsc\",\n        });\n",
+    "source": "Herebyfile.mjs",
+    "sourceSha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421",
+    "startLine": 983
+  },
+  {
+    "endLine": 1062,
+    "excerpt": "export const testTsc = task({\n    name: \"test:tsc\",\n    description: \"Runs all tests in the tsc module.\",\n    run: runTests,\n});\n\nexport const testExtension = task({\n    name: \"test:extension\",\n    description: \"Runs the VS Code extension tests.\",\n    run: runTestExtension,\n});\n\nexport const test = task({\n    name: \"test\",\n    description: \"Alias for test:tsc.\",\n    dependencies: [testTsc],\n});\n",
+    "source": "Herebyfile.mjs",
+    "sourceSha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421",
+    "startLine": 1046
+  },
+  {
+    "endLine": 1218,
+    "excerpt": "function createCachedTool({ toolPath, globs, build, exclude }) {\n    toolPath = path.resolve(toolPath);\n    const hashPath = toolPath + \".hash\";\n    const files = fs.globSync(globs, { exclude }).filter(file => fs.statSync(file).isFile()).map(file => path.resolve(file));\n    files.sort();\n\n    const ensure = memoize(async () => {\n        const hash = crypto.createHash(\"sha256\");\n        for (const file of files) {\n            hash.update(file);\n            hash.update(fs.readFileSync(file));\n        }\n        const digest = hash.digest(\"hex\") + \"\\n\";\n        if (\n            fs.existsSync(toolPath)\n            && fs.existsSync(hashPath)\n            && fs.readFileSync(hashPath, \"utf8\") === digest\n        ) {\n            return;\n        }\n\n        await build(toolPath);\n        fs.writeFileSync(hashPath, digest);\n    });\n\n    return {\n        ensure,\n        /** @param {string[]} args @param {RunOptions} [options] */\n        run: async (args, options) => {\n            await ensure();\n            return run(toolPath, args, options);\n        },\n    };\n}\n\nconst gotestsumTool = createCachedTool({\n    toolPath: `./tools/gotestsum${process.platform === \"win32\" ? \".exe\" : \"\"}`,\n    globs: [\"./tools/go.mod\", \"./tools/go.sum\"],\n    build: async () => {\n        await run(\"go\", [\"install\", \"gotest.tools/gotestsum\"], {\n            cwd: \"./tools\",\n            env: { GOBIN: path.resolve(\"./tools\") },\n        });\n    },\n});\n\n",
+    "source": "Herebyfile.mjs",
+    "sourceSha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421",
+    "startLine": 1173
+  },
+  {
+    "endLine": 2860,
+    "excerpt": "\nconst getPublishedTypeScriptPackageDir = memoize(() => {\n    const candidates = [\n        path.join(extensionDir, \"node_modules\", publishedTypeScriptAliasPackageName),\n        path.join(__dirname, \"node_modules\", publishedTypeScriptAliasPackageName),\n    ];\n\n    for (const candidate of candidates) {\n        if (fs.existsSync(path.join(candidate, \"package.json\"))) {\n            return candidate;\n        }\n    }\n\n    throw new Error(`Could not find ${publishedTypeScriptAliasPackageName}; run npm install first.`);\n});\n\nconst getPublishedTypeScriptPackageJson = memoize(() => {\n    const packageJson = JSON.parse(fs.readFileSync(path.join(getPublishedTypeScriptPackageDir(), \"package.json\"), \"utf8\"));\n    if (packageJson.name !== \"typescript\") {\n        throw new Error(`${publishedTypeScriptAliasPackageName} should alias the typescript package, but found ${packageJson.name}.`);\n    }\n    if (!packageJson.version || typeof packageJson.version !== \"string\") {\n        throw new Error(`${publishedTypeScriptAliasPackageName} package.json did not contain a version.`);\n    }\n    if (!packageJson.optionalDependencies || typeof packageJson.optionalDependencies !== \"object\") {\n        throw new Error(`${publishedTypeScriptAliasPackageName} package.json did not contain platform optionalDependencies.`);\n    }\n",
+    "source": "Herebyfile.mjs",
+    "sourceSha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421",
+    "startLine": 2834
+  },
+  {
+    "endLine": 50,
+    "excerpt": "var getNodeExeOnce = sync.OnceValue(func() string {\n\tconst exeName = \"node\"\n\texe, err := exec.LookPath(exeName)\n\tif err != nil {\n\t\treturn \"\"\n\t}\n\treturn exe\n})\n\n// EvalNodeScript imports a Node.js script that default-exports a single function,\n// calls it with the provided arguments, and unmarshals the JSON-stringified\n// awaited return value into T.\nfunc EvalNodeScript[T any](t testing.TB, script string, dir string, args ...string) (result T, err error) {\n\treturn evalNodeScript[T](t, script, loaderScript, dir, args...)\n}\n\n// EvalNodeScriptWithTS is like EvalNodeScript, but provides the TypeScript\n// library to the script as the first argument.\nfunc EvalNodeScriptWithTS[T any](t testing.TB, script string, dir string, args ...string) (result T, err error) {\n\tif dir == \"\" {\n\t\tdir = t.TempDir()\n\t}\n\ttsSrc := tspath.NormalizePath(filepath.Join(repo.RootPath(), \"..\", \"node_modules/typescript/lib/typescript.js\"))\n\tif tsSrc[0] == '/' {\n\t\ttsSrc = \"file://\" + tsSrc\n\t} else {\n\t\ttsSrc = \"file:///\" + tsSrc\n\t}\n\ttsLoaderScript := fmt.Sprintf(`import script from \"./script.mjs\";\nimport * as ts from \"%s\";\nprocess.stdout.write(JSON.stringify(await script(ts, ...process.argv.slice(2))));`, tsSrc)\n\treturn evalNodeScript[T](t, script, tsLoaderScript, dir, args...)\n",
+    "source": "tsc/internal/testutil/jstest/node.go",
+    "sourceSha256": "daca63240ff6e26420e9f9fa9fdaf23477d09333cecdb202ad78353dbd9e1472",
+    "startLine": 19
+  },
+  {
+    "endLine": 14,
+    "excerpt": "package testrunner\n\nimport (\n\t\"testing\"\n\n\t\"github.com/microsoft/TypeScript/tsc/internal/core\"\n\t\"github.com/microsoft/TypeScript/tsc/internal/testutil/baseline\"\n)\n\nfunc TestMain(m *testing.M) {\n\tcore.ApplyDebugStackLimit()\n\tdefer baseline.Track()()\n\tm.Run()\n}\n",
+    "source": "tsc/internal/testrunner/testmain_test.go",
+    "sourceSha256": "10cf6068edfc411bee2904fca73b9b32507a836760d7c9bbcd20e9fd2d745ff7",
+    "startLine": 1
+  },
+  {
+    "endLine": 29,
+    "excerpt": "// helperEnv, when set, makes the test binary act as the mapper subprocess instead of running tests. This\n// lets the out-of-process test spawn a real subprocess (itself) that speaks the mapper protocol over\n// stdio, exercising the same handler code that the in-process spawner runs over a pipe.\nconst helperEnv = \"TSGO_CONTENT_MAPPER_HELPER\"\n\nfunc TestMain(m *testing.M) {\n\tif os.Getenv(helperEnv) == \"1\" {\n\t\t_ = contentmappertest.Serve(context.Background(), stdio{})\n\t\tos.Exit(0)\n\t}\n\tos.Exit(m.Run())\n}\n",
+    "source": "tsc/internal/testutil/contentmappertest/mapper_test.go",
+    "sourceSha256": "e4c66085faa84e87096e833571383d67ecfc3bd1dcbffaec8daded73be427403",
+    "startLine": 18
+  },
+  {
+    "endLine": 40,
+    "excerpt": "var (\n\t// recordedBaselines tracks all baseline file paths that were written during the test run.\n\trecordedBaselines collections.SyncSet[string]\n\n\t// trackingInitialized is set to true when Track() is called.\n\ttrackingInitialized bool\n\n\t// trackingDir is the directory where tracking files should be written.\n\t// If non-empty, baseline tracking is enabled.\n\t// Set by Herebyfile.mjs when running full test suites with tracking enabled.\n\ttrackingDir = os.Getenv(\"TSGO_BASELINE_TRACKING_DIR\")\n)\n\n// Track sets up baseline tracking and returns a cleanup function that writes the tracking file.\n// It should be called from TestMain using defer:\n//\n//\tfunc TestMain(m *testing.M) {\n//\t    defer baseline.Track()()\n//\t    m.Run()\n//\t}\nfunc Track() func() {\n\ttrackingInitialized = true\n\n\tif trackingDir == \"\" {\n\t\treturn func() {}\n\t}\n",
+    "source": "tsc/internal/testutil/baseline/testmain.go",
+    "sourceSha256": "0f6f5b354b79049a49fbac991e6de4f7cd48198b9993f38464c0f3844f725f21",
+    "startLine": 15
+  },
+  {
+    "endLine": 88,
+    "excerpt": "// availableWatchers is populated at init time from whichever backends\n// are available on the current platform, plus any test-only watcher\n// variants registered in additionalTestWatchers (see e.g.\n// fanotify_linux_test.go).\nvar availableWatchers []Watcher\n\n// additionalTestWatchers is appended to by platform-specific *_test.go\n// init() functions to register test-only watcher variants (e.g. the\n// fanotify-no-rename backend that exercises the FAN_MOVED_FROM/_TO\n// fallback path). Producers' init() must run before this file's init();\n// since Go runs file inits in lexicographic file-name order and this\n// file is watcher_test.go, that ordering is satisfied for every other\n// *_test.go file in the package.\nvar additionalTestWatchers []Watcher\n\nfunc init() {\n\tfor _, b := range AllWatchers() {\n\t\tif b.Available() {\n\t\t\tavailableWatchers = append(availableWatchers, b)\n\t\t}\n\t}\n\tfor _, b := range additionalTestWatchers {\n\t\tif b.Available() {\n\t\t\tavailableWatchers = append(availableWatchers, b)\n\t\t}\n\t}\n}\n",
+    "source": "tsc/internal/fswatch/watcher_test.go",
+    "sourceSha256": "5fd665b6d785c72d123408afffe7a7449c8cf3b5e17f0ba1b67b4669f539c8e2",
+    "startLine": 62
+  },
+  {
+    "endLine": 2460,
+    "excerpt": "//\tGOFLAGS\n//\t\tA space-separated list of -flag=value settings to apply\n//\t\tto go commands by default, when the given flag is known by\n//\t\tthe current command. Each entry must be a standalone flag.\n//\t\tBecause the entries are space-separated, flag values must\n//\t\tnot contain spaces. Flags listed on the command line\n//\t\tare applied after this list and therefore override it.\n",
+    "source": "usr/local/go/src/cmd/go/alldocs.go",
+    "sourceSha256": "09b0d7570c1695acc0ccad5593e3f5c2f888548cfc7f80a49933a19f3514aa69",
+    "startLine": 2454
+  },
+  {
+    "endLine": 3466,
+    "excerpt": "//\t-list regexp\n//\t    List tests, benchmarks, fuzz tests, or examples matching the regular\n//\t    expression. No tests, benchmarks, fuzz tests, or examples will be run.\n//\t    This will only list top-level tests. No subtest or subbenchmarks will be\n//\t    shown.\n",
+    "source": "usr/local/go/src/cmd/go/alldocs.go",
+    "sourceSha256": "09b0d7570c1695acc0ccad5593e3f5c2f888548cfc7f80a49933a19f3514aa69",
+    "startLine": 3462
+  },
+  {
+    "endLine": 2570,
+    "excerpt": "\tif *matchList != \"\" {\n\t\tlistTests(m.deps.MatchString, m.tests, m.benchmarks, m.fuzzTargets, m.examples)\n\t\tm.exitCode = 0\n\t\treturn\n\t}\n",
+    "source": "usr/local/go/src/testing/testing.go",
+    "sourceSha256": "27c59df1832eae458ab8d2d4b6a6252bbd1ea2a3001734910d1ce2decff16f81",
+    "startLine": 2566
+  }
+]

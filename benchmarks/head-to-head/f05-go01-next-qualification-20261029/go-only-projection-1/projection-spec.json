@@ -1,0 +1,33 @@
+{
+  "archive": {
+    "bytes": 292392960,
+    "path": "/private/tmp/dotrepo-go01-go-cache-projection-20261029-1/cache-go-only.tar",
+    "sha256": "76ea2bfa6725335b889d44fed07f40f6eeb804d124d683ad4f2c0a6a2607bcfd"
+  },
+  "cacheGloballyQualified": false,
+  "campaignAdmitted": false,
+  "derivation": {
+    "beforeSha256": "eda9c0d7b8193172cfcdef7658de5c35f64dc02120eb39d0e2c6707253f55f84",
+    "parentArchiveSha256": "583fad501fa7b1a1a6d85ab8fe4b890786e39c1e016f785d6d3fb9d060383284",
+    "parentInventorySha256": "900550d8e44827f96a9e7db46f3b4551db734938564c8921473fe56a6257415c",
+    "receiptSha256": "69d4c7d529c24096e8dafd3574d4f6f3679b48f93733fdc493c40fe9b4560468",
+    "scriptSha256": "a7833d5b0cde6ac946dc99cc5ba4f0e962c7b9746464ca7c31e977774798533b",
+    "selectedMemberMapSha256": "bf5aefaa56222f9337752edebddd50d2cfc4759ed8954f7f9f74bf3d70765131"
+  },
+  "expandedBytes": 278162103,
+  "files": 14922,
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "inventory": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-next-qualification-20261029/go-only-projection-1/inventory.json",
+    "sha256": "139a8d27f296449ab54aba5ab89c4b0e863f278d68575ebd80ebabd3c08c61db"
+  },
+  "nativeTaskAdmitted": false,
+  "provenance": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-next-qualification-20261029/go-only-projection-1/provenance.json",
+    "sha256": "940c99375c9365f0c9d67701c1366c16a610714cd5bee077d2f071026afe36e1"
+  },
+  "purpose": "Proposed future direct-Go native collection seed only; no npm subtree/readable published npm compiler payload provided by this archive.",
+  "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+  "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+  "state": "scoped-go-module-download-projection-unadmitted"
+}

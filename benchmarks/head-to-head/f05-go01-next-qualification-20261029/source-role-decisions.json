@@ -1,0 +1,40 @@
+{
+  "collectionNoNpmChoice": {
+    "gate": "Explicit derived input and independent source review needed. Failure requiring npm is not permission to repair variant after run.",
+    "role": "Propose only Go-module download bytes available in collection filesystem. Leaving full cache readable would not establish absence of published npm compiler bytes."
+  },
+  "gotestsumHelper": {
+    "futureSourceCommand": "cd /workspace/repository/tools; GOBIN=/workspace/repository/tools go install gotest.tools/gotestsum",
+    "gate": "Separate offline helper/whole-wrapper execution authorization; no manually supplied/prebuilt helper/cache.",
+    "role": "Source-owned createCachedTool compiles/installs gotest.tools/gotestsum from tools module before default test wrapper runs. Not needed for direct go list/go test-list collection.",
+    "version": "v1.13.0"
+  },
+  "herebyModuleLoad": {
+    "gate": "Full-wrapper/module-loading outcome remains unobserved and separate; do not use static alias alone to prove irrelevant dependencies.",
+    "role": "Whole test alias loads Herebyfile and imported generator helpers before selecting source-owned gotestsum wrapper. Selected literal imports/definitions and packaging helpers are retained, but exhaustive eager transitive-module execution is not proven by setup success."
+  },
+  "noRequiredSourceFetch": "Full exact source archive is retained. No physical source acquisition is missing for this bounded proposal; native Go selection/provenance and semantic review remain future gates.",
+  "oracle": {
+    "role": "Host-side raw Go JSON scorer and frozen manifest/policy validation; does not import npm/compiler packages. Hidden oracle/gold must not enter proposed container.",
+    "source": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-1/oracle.py"
+  },
+  "publishedNative7": {
+    "currentAcceptance": "Only prior normal offline npm setup observation; no native/task/campaign/global cache admission.",
+    "role": "Source-lock-declared published native compiler payload via @typescript/bundled-typescript alias, and release/VSIX helpers. Distinct from JS6 reference. Same project family alone does not prove actual task-answer use.",
+    "source": "Herebyfile.mjs:1715;2834-2860",
+    "version": "7.0.2"
+  },
+  "state": "source-grounded-role-decisions-proposed",
+  "typescript6Reference": {
+    "lockPath": "node_modules/typescript",
+    "role": "Declared reference JS library explicitly supplied by jstest.EvalNodeScriptWithTS to comparison scripts. Not automatically task-answer contamination. Full default task must retain intended normal npm setup; no blanket npm exclusion.",
+    "source": "tsc/internal/testutil/jstest/node.go:35-50",
+    "version": "6.0.3"
+  },
+  "unresolved": [
+    "Existing380source exclusions remain proposal-unaccepted; no new skip allowlist.",
+    "Native top-level collection remains missing; dynamic nested/compiler-option/output/fuzz-seed/capability conditions remain unresolved.",
+    "Go init/TestMain can have side effects. Lexical catalog is diagnostic, not full Go AST/tag resolution or universal call-graph proof.",
+    "Full-wrapper task correctness and source-compiled target outcome remain unobserved."
+  ]
+}

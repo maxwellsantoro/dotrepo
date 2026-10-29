@@ -1,0 +1,61 @@
+{
+  "state": "focused read-only checks passed",
+  "commands": [
+    {
+      "argv": [
+        "uv",
+        "run",
+        "python",
+        "-B",
+        "benchmarks/head-to-head/f05-go01-collection-result-20261029/amendment-2/verify.py",
+        "--input-archives"
+      ],
+      "exitCode": 0,
+      "stdout": "verification.json"
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "python",
+        "-B",
+        "benchmarks/head-to-head/f05-go01-collection-result-20261029/amendment-2/controls.py"
+      ],
+      "exitCode": 0,
+      "stdout": "controls.json",
+      "syntheticCases": 9
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "ruff",
+        "check",
+        "--no-cache",
+        "benchmarks/head-to-head/f05-go01-collection-result-20261029/amendment-2"
+      ],
+      "exitCode": 0,
+      "summary": "All checks passed"
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "ruff",
+        "format",
+        "--check",
+        "--no-cache",
+        "benchmarks/head-to-head/f05-go01-collection-result-20261029/amendment-2"
+      ],
+      "exitCode": 0,
+      "summary": "12 files already formatted"
+    }
+  ],
+  "additionalDaemonGoTaskPackageNetworkProviderActions": 0,
+  "packagingFailures": [
+    "Exploratory source-section substring lookup failed after raw diagnostic summaries were printed; corrected to line-bound source reading. No runtime or source change occurred."
+  ],
+  "parent91AndPreviousChild87Unchanged": true,
+  "original86CopiedFilesUnchanged": true,
+  "independentReviewPending": true
+}

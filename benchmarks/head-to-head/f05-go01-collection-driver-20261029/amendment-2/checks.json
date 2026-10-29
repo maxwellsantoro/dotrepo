@@ -1,0 +1,52 @@
+{
+  "state": "source-only GOENV amendment2 fake controls passed; independent review pending",
+  "driverIdentity": "go01-collection-driver-amendment-2",
+  "driverPlanSha256": "c7dbacdf6c3966f66fd0ef805a85db452ce72180d3db22347a5c8a06f941d4a0",
+  "driverSha256": "84bf7361f435e253c6f06a7d2209bcb5cc340b0fd2b69b7eec5ab0b510e7d29e",
+  "environmentSha256": "3649e45b9b1c1f62faeb2c3a168d93d91a7be7a62e7e2905c07d9ba69ddb65fe",
+  "inputGOENV": "off",
+  "expectedQueryGOENV": "",
+  "allOtherExpectedGoEnvFieldsUnchanged": true,
+  "resourceCommandsSourceImageCachePolicyUnchanged": true,
+  "sourceSemantics": "GOENV=off disables user configuration file; query exposes empty filename. GOROOT/go.env defaults remain separate.",
+  "historicalFailedAttemptPreserved": {
+    "resultPath": "/tmp/dotrepo-go01-native-collection-result-20261029-2/result.json",
+    "resultSha256": "67cc8497d9b26919907719374016a3fa3f2c6327a020e881586fc2ed6bdd2a2a",
+    "stdoutSha256": "bfa88e9ed8bc5888d6bd3376082142b1e8e743cbbb971fb9794a89d7b5cd266b",
+    "receiptSha256": "a9cff7b1e6a837abe7b7b65131f57637a3a4f31c10080e3bb87b33891c49664f",
+    "inspectPath": "/tmp/dotrepo-go01-native-collection-result-20261029-2/logs/container-inspect/stdout.bin",
+    "inspectSha256": "3700b176ddbc1f324a2d7a3ca7ada809aa93953d4f7186f228fbbbb127f43819",
+    "observedContainerInputGOENV": "off",
+    "observedQueriedGOENV": "",
+    "qualification": "Historical failed go-env attempt only; native collection did not occur."
+  },
+  "priorPacketsUnchanged": {
+    "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-1": {
+      "freezeSha256": "0bdbd19da1a1607bb4a104156c008a05b934736556465d632364e634daeaa8e3",
+      "unchangedArtifacts": 29
+    },
+    "benchmarks/head-to-head/f05-go01-collection-driver-20261029": {
+      "freezeSha256": "b176a6c3dfff4965a53e601a05eccab03257f9b3cfe78b5846317d29b2302eaa",
+      "unchangedArtifacts": 33
+    },
+    "benchmarks/head-to-head/f05-go01-collection-driver-review-20261029/amendment-1": {
+      "freezeSha256": "7ad27fa44da993c1619abef1881355e7f94eade3c12e5783e8b8d21bb119e032",
+      "unchangedArtifacts": 14
+    }
+  },
+  "priorFakeDriverControlsPassed": 59,
+  "priorAmendmentControlsPassed": 40,
+  "fakeTransportControlsPassed": 2,
+  "newGOENVControlsPassed": 22,
+  "NodeControlsReusedFromUnchangedInputs": 6,
+  "localMetadataIntegrityPassed": true,
+  "ruffCheckFormatPassed": true,
+  "freshDaemonGoNodeNetworkPackageProviderCalls": 0,
+  "realAcceptanceOrAuthorizationCreated": false,
+  "nativeCollectionOccurred": false,
+  "taskOutcomeObserved": false,
+  "nativeTaskAdmitted": false,
+  "campaignAdmitted": false,
+  "cacheGloballyQualified": false,
+  "costUsd": null
+}

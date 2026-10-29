@@ -1,0 +1,732 @@
+{"ImportPath":"github.com/microsoft/TypeScript/tsc/internal/compiler [github.com/microsoft/TypeScript/tsc/cmd/tsc]","Action":"build-output","Output":"github.com/microsoft/TypeScript/tsc/internal/compiler: /usr/local/go/pkg/tool/linux_arm64/compile: signal: killed\n"}
+{"ImportPath":"github.com/microsoft/TypeScript/tsc/internal/compiler [github.com/microsoft/TypeScript/tsc/cmd/tsc]","Action":"build-fail"}
+{"Time":"2026-10-29T10:50:55.550888173Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/cmd/tsc"}
+{"Time":"2026-10-29T10:50:55.551043381Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/cmd/tsc","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/cmd/tsc [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:50:55.551059381Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/cmd/tsc","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/compiler [github.com/microsoft/TypeScript/tsc/cmd/tsc]"}
+{"ImportPath":"github.com/microsoft/TypeScript/tsc/internal/ast","Action":"build-output","Output":"github.com/microsoft/TypeScript/tsc/internal/ast: /usr/local/go/pkg/tool/linux_arm64/compile: signal: killed\n"}
+{"ImportPath":"github.com/microsoft/TypeScript/tsc/internal/ast","Action":"build-fail"}
+{"Time":"2026-10-29T10:51:13.600350709Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/api"}
+{"Time":"2026-10-29T10:51:13.600394501Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/api","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/api [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:13.600402709Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/api","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:13.600517959Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/api/encoder"}
+{"Time":"2026-10-29T10:51:13.600522959Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/api/encoder","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/api/encoder [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:13.600526959Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/api/encoder","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:13.661069167Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/api/requestfilesystem"}
+{"Time":"2026-10-29T10:51:13.661089084Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/api/requestfilesystem","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/api/requestfilesystem [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:13.661095792Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/api/requestfilesystem","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:13.702921709Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:13.702940917Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/ast","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/ast [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:13.702948126Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/ast","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:13.744088626Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/astnav"}
+{"Time":"2026-10-29T10:51:13.744118292Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/astnav","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/astnav [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:13.744126292Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/astnav","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:13.744213042Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/binder"}
+{"Time":"2026-10-29T10:51:13.744226001Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/binder","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/binder [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:13.744233876Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/binder","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:13.942841084Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/bundled"}
+{"Time":"2026-10-29T10:51:13.945825709Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/bundled","Output":"TestTestingLibPath\n"}
+{"Time":"2026-10-29T10:51:13.945921668Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/bundled","Output":"TestEmbeddedLibs\n"}
+{"Time":"2026-10-29T10:51:13.946068918Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/bundled","Output":"ok  \tgithub.com/microsoft/TypeScript/tsc/internal/bundled\t0.003s\n"}
+{"Time":"2026-10-29T10:51:13.946082168Z","Action":"pass","Package":"github.com/microsoft/TypeScript/tsc/internal/bundled","Elapsed":0.003}
+{"Time":"2026-10-29T10:51:13.946669084Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/checker"}
+{"Time":"2026-10-29T10:51:13.946678626Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/checker","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/checker [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:13.946681543Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/checker","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:14.225996126Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/collections"}
+{"Time":"2026-10-29T10:51:14.228180709Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/collections","Output":"TestOrderedMapEqualFunc\n"}
+{"Time":"2026-10-29T10:51:14.228215168Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/collections","Output":"TestOrderedMap\n"}
+{"Time":"2026-10-29T10:51:14.228217709Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/collections","Output":"TestOrderedMapClone\n"}
+{"Time":"2026-10-29T10:51:14.228219376Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/collections","Output":"TestOrderedMapClear\n"}
+{"Time":"2026-10-29T10:51:14.228220668Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/collections","Output":"TestOrderedMapWithSizeHint\n"}
+{"Time":"2026-10-29T10:51:14.228222834Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/collections","Output":"TestOrderedMapUnmarshalJSON\n"}
+{"Time":"2026-10-29T10:51:14.228224001Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/collections","Output":"TestOrderedSet\n"}
+{"Time":"2026-10-29T10:51:14.228225418Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/collections","Output":"TestOrderedSetWithSizeHint\n"}
+{"Time":"2026-10-29T10:51:14.228226584Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/collections","Output":"TestSyncMapWithNil\n"}
+{"Time":"2026-10-29T10:51:14.228501209Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/collections","Output":"ok  \tgithub.com/microsoft/TypeScript/tsc/internal/collections\t0.002s\n"}
+{"Time":"2026-10-29T10:51:14.228515376Z","Action":"pass","Package":"github.com/microsoft/TypeScript/tsc/internal/collections","Elapsed":0.003}
+{"Time":"2026-10-29T10:51:14.229100918Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/compiler"}
+{"Time":"2026-10-29T10:51:14.229114043Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/compiler","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/compiler [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:14.229117459Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/compiler","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:14.229168209Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/contentmapper"}
+{"Time":"2026-10-29T10:51:14.229179543Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/contentmapper","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/contentmapper [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:14.229182876Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/contentmapper","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:14.582400085Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/core"}
+{"Time":"2026-10-29T10:51:14.58460071Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/core","Output":"TestPatternOverlappingMatch\n"}
+{"Time":"2026-10-29T10:51:14.584631751Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/core","Output":"TestArenaBoundsSingleValueRetention\n"}
+{"Time":"2026-10-29T10:51:14.584634043Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/core","Output":"TestArenaMixedSingleValuesAndSlices\n"}
+{"Time":"2026-10-29T10:51:14.584636751Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/core","Output":"TestArenaZeroSizedValues\n"}
+{"Time":"2026-10-29T10:51:14.584638376Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/core","Output":"TestBreadthFirstSearchParallel\n"}
+{"Time":"2026-10-29T10:51:14.58485096Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/core","Output":"ok  \tgithub.com/microsoft/TypeScript/tsc/internal/core\t0.002s\n"}
+{"Time":"2026-10-29T10:51:14.584863585Z","Action":"pass","Package":"github.com/microsoft/TypeScript/tsc/internal/core","Elapsed":0.002}
+{"Time":"2026-10-29T10:51:14.706569626Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/debug"}
+{"Time":"2026-10-29T10:51:14.708524376Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/debug","Output":"TestFailEmptyReason\n"}
+{"Time":"2026-10-29T10:51:14.70855246Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/debug","Output":"TestFailWithReason\n"}
+{"Time":"2026-10-29T10:51:14.70855446Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/debug","Output":"TestFailBadSyntaxKindNoMessage\n"}
+{"Time":"2026-10-29T10:51:14.708556376Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/debug","Output":"TestFailBadSyntaxKindWithMessage\n"}
+{"Time":"2026-10-29T10:51:14.708557668Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/debug","Output":"TestAssertNeverDefaultMessageKindString\n"}
+{"Time":"2026-10-29T10:51:14.708559001Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/debug","Output":"TestAssertNeverCustomMessageKindString\n"}
+{"Time":"2026-10-29T10:51:14.708560835Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/debug","Output":"TestAssertNeverStringer\n"}
+{"Time":"2026-10-29T10:51:14.708562043Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/debug","Output":"TestAssertNeverFallback\n"}
+{"Time":"2026-10-29T10:51:14.708563126Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/debug","Output":"TestAssertTrue\n"}
+{"Time":"2026-10-29T10:51:14.708564376Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/debug","Output":"TestAssertTrueWithMessage\n"}
+{"Time":"2026-10-29T10:51:14.708565543Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/debug","Output":"TestAssertFalseNoMessage\n"}
+{"Time":"2026-10-29T10:51:14.708567168Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/debug","Output":"TestAssertFalseWithMessage\n"}
+{"Time":"2026-10-29T10:51:14.708846668Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/debug","Output":"ok  \tgithub.com/microsoft/TypeScript/tsc/internal/debug\t0.002s\n"}
+{"Time":"2026-10-29T10:51:14.708859501Z","Action":"pass","Package":"github.com/microsoft/TypeScript/tsc/internal/debug","Elapsed":0.002}
+{"Time":"2026-10-29T10:51:15.094044668Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/diagnostics"}
+{"Time":"2026-10-29T10:51:15.09669196Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/diagnostics","Output":"TestLocalize\n"}
+{"Time":"2026-10-29T10:51:15.096723043Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/diagnostics","Output":"TestLocalize_ByKey\n"}
+{"Time":"2026-10-29T10:51:15.096725918Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/diagnostics","Output":"TestLocaleFiles\n"}
+{"Time":"2026-10-29T10:51:15.096727335Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/diagnostics","Output":"TestLocaleFilesIgnoreStaleDiagnostics\n"}
+{"Time":"2026-10-29T10:51:15.09672971Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/diagnostics","Output":"TestGenerateLocalizations\n"}
+{"Time":"2026-10-29T10:51:15.096984335Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/diagnostics","Output":"ok  \tgithub.com/microsoft/TypeScript/tsc/internal/diagnostics\t0.003s\n"}
+{"Time":"2026-10-29T10:51:15.096999251Z","Action":"pass","Package":"github.com/microsoft/TypeScript/tsc/internal/diagnostics","Elapsed":0.003}
+{"Time":"2026-10-29T10:51:15.097729751Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/diagnosticwriter"}
+{"Time":"2026-10-29T10:51:15.097741293Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/diagnosticwriter","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/diagnosticwriter [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:15.097746293Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/diagnosticwriter","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:15.097755335Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/evaluator"}
+{"Time":"2026-10-29T10:51:15.097760668Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/evaluator","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/evaluator [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:15.097763543Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/evaluator","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:15.097773751Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/execute"}
+{"Time":"2026-10-29T10:51:15.097782335Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/execute","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/execute [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:15.097784918Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/execute","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:15.207472793Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/execute/build"}
+{"Time":"2026-10-29T10:51:15.207493293Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/execute/build","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/execute/build [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:15.207498502Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/execute/build","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:15.207555668Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/execute/incremental"}
+{"Time":"2026-10-29T10:51:15.207566418Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/execute/incremental","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/execute/incremental [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:15.207569668Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/execute/incremental","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:15.207620252Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/execute/tsc"}
+{"Time":"2026-10-29T10:51:15.207624877Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/execute/tsc","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/execute/tsc [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:15.207639627Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/execute/tsc","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:15.207691377Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/execute/tsctests"}
+{"Time":"2026-10-29T10:51:15.207704293Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/execute/tsctests","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/execute/tsctests [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:15.207706918Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/execute/tsctests","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:15.395984085Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/execute/watchmanager"}
+{"Time":"2026-10-29T10:51:15.398269002Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/execute/watchmanager","Output":"TestDirWatchSetCoverage\n"}
+{"Time":"2026-10-29T10:51:15.398299168Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/execute/watchmanager","Output":"TestDirWatchSetCaseSensitive\n"}
+{"Time":"2026-10-29T10:51:15.39830346Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/execute/watchmanager","Output":"TestDirWatchSetCaseInsensitive\n"}
+{"Time":"2026-10-29T10:51:15.398305252Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/execute/watchmanager","Output":"TestDirWatchSetCanonicalDedup\n"}
+{"Time":"2026-10-29T10:51:15.398306752Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/execute/watchmanager","Output":"TestDirWatchSetUpgradeToRecursive\n"}
+{"Time":"2026-10-29T10:51:15.398308043Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/execute/watchmanager","Output":"TestDirWatchSetNeverDowngrades\n"}
+{"Time":"2026-10-29T10:51:15.398309252Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/execute/watchmanager","Output":"TestDirWatchSetDirs\n"}
+{"Time":"2026-10-29T10:51:15.398310668Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/execute/watchmanager","Output":"TestResolveDesiredDirsShallowProject\n"}
+{"Time":"2026-10-29T10:51:15.39831196Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/execute/watchmanager","Output":"TestResolveDesiredDirsAncestorFallback\n"}
+{"Time":"2026-10-29T10:51:15.398313377Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/execute/watchmanager","Output":"TestResolveDesiredDirsSkipsNonDiskPaths\n"}
+{"Time":"2026-10-29T10:51:15.398314752Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/execute/watchmanager","Output":"TestResolveDesiredDirsDeduplicatesCaseInsensitiveAncestors\n"}
+{"Time":"2026-10-29T10:51:15.398316543Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/execute/watchmanager","Output":"TestReconcileWatchesIgnoresCaseOnlySpellingChanges\n"}
+{"Time":"2026-10-29T10:51:15.398555168Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/execute/watchmanager","Output":"ok  \tgithub.com/microsoft/TypeScript/tsc/internal/execute/watchmanager\t0.003s\n"}
+{"Time":"2026-10-29T10:51:15.398571168Z","Action":"pass","Package":"github.com/microsoft/TypeScript/tsc/internal/execute/watchmanager","Elapsed":0.003}
+{"Time":"2026-10-29T10:51:15.39916721Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/format"}
+{"Time":"2026-10-29T10:51:15.399177002Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/format","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/format [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:15.39917971Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/format","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:15.437634668Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/fourslash"}
+{"Time":"2026-10-29T10:51:15.43765596Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fourslash","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/fourslash [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:15.43766196Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/fourslash","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:15.437674877Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/fourslash/tests"}
+{"Time":"2026-10-29T10:51:15.437678335Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fourslash/tests","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/fourslash/tests [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:15.43768171Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/fourslash/tests","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:15.438001877Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/fourslash/tests/util"}
+{"Time":"2026-10-29T10:51:15.438018335Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fourslash/tests/util","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/fourslash/tests/util [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:15.438024668Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/fourslash/tests/util","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:15.975239127Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch"}
+{"Time":"2026-10-29T10:51:15.977546252Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestEventListCreateThenDelete\n"}
+{"Time":"2026-10-29T10:51:15.977733335Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestEventListDeleteThenCreate\n"}
+{"Time":"2026-10-29T10:51:15.977738585Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestEventListCreateDeleteCreate\n"}
+{"Time":"2026-10-29T10:51:15.977740627Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestEventListErrorIsLatchedAndCleared\n"}
+{"Time":"2026-10-29T10:51:15.97774196Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestEventListDrainIsAtomic\n"}
+{"Time":"2026-10-29T10:51:15.977743294Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestEventListDrainReturnsErrorWithEvents\n"}
+{"Time":"2026-10-29T10:51:15.97774871Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestEventListDrainForSequences\n"}
+{"Time":"2026-10-29T10:51:15.977750127Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestFallbackWatcherRoutesUnsupportedDirectories\n"}
+{"Time":"2026-10-29T10:51:15.97775146Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestFallbackWatcherDoesNotFallbackForUnrelatedError\n"}
+{"Time":"2026-10-29T10:51:15.977752919Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestFallbackWatcherDoesNotUseSecondaryOnHappyPath\n"}
+{"Time":"2026-10-29T10:51:15.977754669Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestFallbackWatcherRollsBackRoutedWatchesOnFailure\n"}
+{"Time":"2026-10-29T10:51:15.977756085Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestFanotifyUsesInternalInotifyFallback\n"}
+{"Time":"2026-10-29T10:51:15.977757544Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestLinuxFanotifyShutdownBeforeStart\n"}
+{"Time":"2026-10-29T10:51:15.977758794Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestLinuxFanotifyBackendSelection\n"}
+{"Time":"2026-10-29T10:51:15.977760085Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestLinuxFanotifySubscribeCleansUpAfterMarkFailure\n"}
+{"Time":"2026-10-29T10:51:15.977761294Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestLinuxFanotifyParseDfidNameRoundTrip\n"}
+{"Time":"2026-10-29T10:51:15.977762502Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestFanotifyCrossWatcherSameFs\n"}
+{"Time":"2026-10-29T10:51:15.977768669Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestLinuxFanotifyMaybeWrapUnsupportedFilesystem\n"}
+{"Time":"2026-10-29T10:51:15.97776996Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestLinuxFanotifyMarkENODEVTagged\n"}
+{"Time":"2026-10-29T10:51:15.977771252Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestLinuxFanotifyUnsupportedTagSurvivesDirWatchError\n"}
+{"Time":"2026-10-29T10:51:15.977772502Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestWalkDirDoesNotFollowSymlinkedDir\n"}
+{"Time":"2026-10-29T10:51:15.977773669Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestWalkDirDoesNotFollowRootSymlinkedDir\n"}
+{"Time":"2026-10-29T10:51:15.977775169Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestWalkDirIgnoresUnreadableSubdir\n"}
+{"Time":"2026-10-29T10:51:15.977776335Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestWalkDirMissingDir\n"}
+{"Time":"2026-10-29T10:51:15.977782085Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestWalkDirNotADir\n"}
+{"Time":"2026-10-29T10:51:15.97778346Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestWalkDirEntries\n"}
+{"Time":"2026-10-29T10:51:15.977784627Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestWalkDirCallback\n"}
+{"Time":"2026-10-29T10:51:15.977849794Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestWalkDirCallbackError\n"}
+{"Time":"2026-10-29T10:51:15.977863002Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestPathComparer\n"}
+{"Time":"2026-10-29T10:51:15.977866835Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestPathComparerUnicodeAlignment\n"}
+{"Time":"2026-10-29T10:51:15.977869835Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestFileCallbackCaseSensitivity\n"}
+{"Time":"2026-10-29T10:51:15.97787271Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestPathComparerExactKeys\n"}
+{"Time":"2026-10-29T10:51:15.977875335Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestRebasePath\n"}
+{"Time":"2026-10-29T10:51:15.977880544Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestPhysicalDirForResolvesSymlinkAncestor\n"}
+{"Time":"2026-10-29T10:51:15.97788396Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestIsInDirectoryOrSelf\n"}
+{"Time":"2026-10-29T10:51:15.977889044Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestWatchFileCreate\n"}
+{"Time":"2026-10-29T10:51:15.977892794Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestWatchFileUpdate\n"}
+{"Time":"2026-10-29T10:51:15.97789571Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestWatchFileRename\n"}
+{"Time":"2026-10-29T10:51:15.977899627Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestWatchFileRenameExisting\n"}
+{"Time":"2026-10-29T10:51:15.977902502Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestWatchFileDelete\n"}
+{"Time":"2026-10-29T10:51:15.977905169Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeDirCreate\n"}
+{"Time":"2026-10-29T10:51:15.977908127Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeNonASCIIPath\n"}
+{"Time":"2026-10-29T10:51:15.97791096Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeDirRename\n"}
+{"Time":"2026-10-29T10:51:15.977913752Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeDirDelete\n"}
+{"Time":"2026-10-29T10:51:15.97791696Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeWatchedDirDeleted\n"}
+{"Time":"2026-10-29T10:51:15.977932919Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeSubfileCreate\n"}
+{"Time":"2026-10-29T10:51:15.977937335Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeSubfileUpdate\n"}
+{"Time":"2026-10-29T10:51:15.977940294Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeSubfileRename\n"}
+{"Time":"2026-10-29T10:51:15.97794321Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeSubfileDelete\n"}
+{"Time":"2026-10-29T10:51:15.97794621Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeSubdirCreate\n"}
+{"Time":"2026-10-29T10:51:15.977949502Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeSubdirDeleteWithFiles\n"}
+{"Time":"2026-10-29T10:51:15.977952252Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeSymlinkCreate\n"}
+{"Time":"2026-10-29T10:51:15.977955294Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeSymlinkDelete\n"}
+{"Time":"2026-10-29T10:51:15.977958794Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeSymlinkedDirectoryRebasesTargetEvents\n"}
+{"Time":"2026-10-29T10:51:15.977969044Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestRecursiveSubscribeSymlinkedDirectoryDoesNotFollowDescendantSymlink\n"}
+{"Time":"2026-10-29T10:51:15.977980335Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeCoalesceCreateUpdate\n"}
+{"Time":"2026-10-29T10:51:15.97798396Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeCoalesceDeleteCreateAsUpdate\n"}
+{"Time":"2026-10-29T10:51:15.97798921Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeCoalesceCreateThenDelete\n"}
+{"Time":"2026-10-29T10:51:15.977999627Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeCoalesceMultipleUpdates\n"}
+{"Time":"2026-10-29T10:51:15.978010169Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeCoalesceUpdateDelete\n"}
+{"Time":"2026-10-29T10:51:15.97801796Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeMultipleSameDir\n"}
+{"Time":"2026-10-29T10:51:15.978037919Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeMultipleDifferentDirs\n"}
+{"Time":"2026-10-29T10:51:15.978047502Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestWatchDirectoriesBatch\n"}
+{"Time":"2026-10-29T10:51:15.978050169Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestWatchRejectsNetworkPaths\n"}
+{"Time":"2026-10-29T10:51:15.978052085Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestFastRecursiveWatcherConsolidatesSiblingDirectories\n"}
+{"Time":"2026-10-29T10:51:15.978055877Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestFastRecursiveWatcherDoesNotConsolidateSymlinkOutsideRoot\n"}
+{"Time":"2026-10-29T10:51:15.978057669Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestConsolidatedSymlinkChildMapsSharedLogicalPath\n"}
+{"Time":"2026-10-29T10:51:15.978059585Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestConsolidatedSymlinkChildTerminatesFromSharedLogicalPath\n"}
+{"Time":"2026-10-29T10:51:15.978061335Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestConsolidatedChildWatchFiltersAgainstRequestedDir\n"}
+{"Time":"2026-10-29T10:51:15.978063085Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestConsolidatedChildWatchIgnoresEventsBeforeSubscribe\n"}
+{"Time":"2026-10-29T10:51:15.978065252Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestRecursiveWatchWithIgnoreDoesNotFilterByLogicalRoot\n"}
+{"Time":"2026-10-29T10:51:15.978066835Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeMissingDirError\n"}
+{"Time":"2026-10-29T10:51:15.978068335Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeNotADirError\n"}
+{"Time":"2026-10-29T10:51:15.978069669Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeRejectsNilCallback\n"}
+{"Time":"2026-10-29T10:51:15.978071002Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeRejectsRelativePath\n"}
+{"Time":"2026-10-29T10:51:15.97807221Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeUnsubscribeIdempotent\n"}
+{"Time":"2026-10-29T10:51:15.97807346Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeCloseThenReSubscribe\n"}
+{"Time":"2026-10-29T10:51:15.978074669Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeNoGoroutineLeak\n"}
+{"Time":"2026-10-29T10:51:15.978077669Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeDeepNestedCreate\n"}
+{"Time":"2026-10-29T10:51:15.978078919Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeManyFilesAtOnce\n"}
+{"Time":"2026-10-29T10:51:15.978080085Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeTruncateFile\n"}
+{"Time":"2026-10-29T10:51:15.978081252Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeConcurrentSubscribeUnsubscribe\n"}
+{"Time":"2026-10-29T10:51:15.978082544Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeRenameDir\n"}
+{"Time":"2026-10-29T10:51:15.978084252Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeReplaceFileWithDir\n"}
+{"Time":"2026-10-29T10:51:15.97808546Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeAppendToFile\n"}
+{"Time":"2026-10-29T10:51:15.978086627Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeNoEventsAfterUnsubscribe\n"}
+{"Time":"2026-10-29T10:51:15.978087877Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestBackendRunReturnsStartError\n"}
+{"Time":"2026-10-29T10:51:15.978089085Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestDirWatchErrorImplementsError\n"}
+{"Time":"2026-10-29T10:51:15.978090544Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestFileCallbackForwardsErrAlongsideEvents\n"}
+{"Time":"2026-10-29T10:51:15.978091877Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestRenameDirOutOfTreeNoStaleEvents\n"}
+{"Time":"2026-10-29T10:51:15.978093085Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestDefaultBackendMatchesPlatform\n"}
+{"Time":"2026-10-29T10:51:15.97809446Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestUnavailableBackendReturnsError\n"}
+{"Time":"2026-10-29T10:51:15.978095752Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestSubscribeNestedDirDeletionCleansDescendants\n"}
+{"Time":"2026-10-29T10:51:15.97809721Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestNonRecursiveFileCreate\n"}
+{"Time":"2026-10-29T10:51:15.978098502Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestNonRecursiveFileUpdate\n"}
+{"Time":"2026-10-29T10:51:15.978101335Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestNonRecursiveFileDelete\n"}
+{"Time":"2026-10-29T10:51:15.978105127Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestNonRecursiveDirCreate\n"}
+{"Time":"2026-10-29T10:51:15.978106252Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestNonRecursiveGrandchildIgnored\n"}
+{"Time":"2026-10-29T10:51:15.978109335Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestNonRecursiveNewSubdirContentIgnored\n"}
+{"Time":"2026-10-29T10:51:15.97811871Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestNonRecursiveAndRecursiveSameDir\n"}
+{"Time":"2026-10-29T10:51:15.978120335Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestNonRecursiveWithDeniedSubdir\n"}
+{"Time":"2026-10-29T10:51:15.97812146Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestFileWatchCreate\n"}
+{"Time":"2026-10-29T10:51:15.978122627Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestFileWatchUpdate\n"}
+{"Time":"2026-10-29T10:51:15.978123752Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestFileWatchDelete\n"}
+{"Time":"2026-10-29T10:51:15.978124919Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestFileWatchIgnoresSiblings\n"}
+{"Time":"2026-10-29T10:51:15.978126252Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestFileWatchMultipleSameDir\n"}
+{"Time":"2026-10-29T10:51:15.97812746Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestFileWatchDeleteAndRecreate\n"}
+{"Time":"2026-10-29T10:51:15.978128877Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestFileWatchNonExistentTarget\n"}
+{"Time":"2026-10-29T10:51:15.97813021Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestRecursiveMoveInPrePopulated\n"}
+{"Time":"2026-10-29T10:51:15.978131585Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestAtomicSave\n"}
+{"Time":"2026-10-29T10:51:15.978135335Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestAtomicSaveFileWatch\n"}
+{"Time":"2026-10-29T10:51:15.978145419Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestReplaceDirWithFile\n"}
+{"Time":"2026-10-29T10:51:15.978149169Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestRecreateSubdirAndModify\n"}
+{"Time":"2026-10-29T10:51:15.978152252Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestReplaceParentDirWithDifferent\n"}
+{"Time":"2026-10-29T10:51:15.97815596Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestRoundTripRename\n"}
+{"Time":"2026-10-29T10:51:15.978157294Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"TestRecursiveWithDeniedSubdir\n"}
+{"Time":"2026-10-29T10:51:15.978220377Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Output":"ok  \tgithub.com/microsoft/TypeScript/tsc/internal/fswatch\t0.003s\n"}
+{"Time":"2026-10-29T10:51:15.978236127Z","Action":"pass","Package":"github.com/microsoft/TypeScript/tsc/internal/fswatch","Elapsed":0.003}
+{"Time":"2026-10-29T10:51:15.978687544Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/glob"}
+{"Time":"2026-10-29T10:51:15.978699377Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/glob","Output":"?   \tgithub.com/microsoft/TypeScript/tsc/internal/glob\t[no test files]\n"}
+{"Time":"2026-10-29T10:51:15.978702127Z","Action":"skip","Package":"github.com/microsoft/TypeScript/tsc/internal/glob","Elapsed":0}
+{"Time":"2026-10-29T10:51:16.287153752Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/ipc"}
+{"Time":"2026-10-29T10:51:16.290378127Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/ipc","Output":"TestTimingCollector\n"}
+{"Time":"2026-10-29T10:51:16.290413419Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/ipc","Output":"TestServerTimingSnapshotDisabled\n"}
+{"Time":"2026-10-29T10:51:16.29041571Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/ipc","Output":"TestTimingCollectorReset\n"}
+{"Time":"2026-10-29T10:51:16.290417044Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/ipc","Output":"TestDurationToMillis\n"}
+{"Time":"2026-10-29T10:51:16.290418335Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/ipc","Output":"TestPipeTransportClosePreservesReplacement\n"}
+{"Time":"2026-10-29T10:51:16.290421002Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/ipc","Output":"TestPipeTransportPermissions\n"}
+{"Time":"2026-10-29T10:51:16.29042221Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/ipc","Output":"TestAsyncConnRunWaitsForHandlers\n"}
+{"Time":"2026-10-29T10:51:16.290423419Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/ipc","Output":"TestAsyncConnRunCancelsHandlersOnEOF\n"}
+{"Time":"2026-10-29T10:51:16.290424794Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/ipc","Output":"TestAsyncConnResponseWriteFailureWithNilTransport\n"}
+{"Time":"2026-10-29T10:51:16.290427669Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/ipc","Output":"TestAsyncConnCallReturnsWhenPeerCloses\n"}
+{"Time":"2026-10-29T10:51:16.290429002Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/ipc","Output":"TestAsyncConnCallAfterReadLoopFailureReturnsImmediately\n"}
+{"Time":"2026-10-29T10:51:16.290430335Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/ipc","Output":"TestAsyncConnTerminalErrorIncludesResponseWriteFailure\n"}
+{"Time":"2026-10-29T10:51:16.290431585Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/ipc","Output":"TestAsyncConnRunWaitsForRequestAfterPeerCloses\n"}
+{"Time":"2026-10-29T10:51:16.290432835Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/ipc","Output":"TestSyncConnRunReturnsResponseWriteFailure\n"}
+{"Time":"2026-10-29T10:51:16.29043421Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/ipc","Output":"TestSyncConnRunReturnsPanicResponseWriteFailure\n"}
+{"Time":"2026-10-29T10:51:16.290435419Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/ipc","Output":"TestSyncConnAnswersNestedRequestsInStackOrder\n"}
+{"Time":"2026-10-29T10:51:16.29043671Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/ipc","Output":"TestSyncConnNotificationHandlerCanCall\n"}
+{"Time":"2026-10-29T10:51:16.290522877Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/ipc","Output":"ok  \tgithub.com/microsoft/TypeScript/tsc/internal/ipc\t0.003s\n"}
+{"Time":"2026-10-29T10:51:16.290537752Z","Action":"pass","Package":"github.com/microsoft/TypeScript/tsc/internal/ipc","Elapsed":0.003}
+{"Time":"2026-10-29T10:51:16.518907044Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/jsnum"}
+{"Time":"2026-10-29T10:51:16.521102919Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/jsnum","Output":"TestToInt32\n"}
+{"Time":"2026-10-29T10:51:16.521137669Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/jsnum","Output":"TestBitwiseNOT\n"}
+{"Time":"2026-10-29T10:51:16.521139919Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/jsnum","Output":"TestBitwiseAND\n"}
+{"Time":"2026-10-29T10:51:16.521141127Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/jsnum","Output":"TestBitwiseOR\n"}
+{"Time":"2026-10-29T10:51:16.52114221Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/jsnum","Output":"TestBitwiseXOR\n"}
+{"Time":"2026-10-29T10:51:16.521143377Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/jsnum","Output":"TestSignedRightShift\n"}
+{"Time":"2026-10-29T10:51:16.521145419Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/jsnum","Output":"TestUnsignedRightShift\n"}
+{"Time":"2026-10-29T10:51:16.521146585Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/jsnum","Output":"TestLeftShift\n"}
+{"Time":"2026-10-29T10:51:16.521147669Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/jsnum","Output":"TestRemainder\n"}
+{"Time":"2026-10-29T10:51:16.521148752Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/jsnum","Output":"TestExponentiate\n"}
+{"Time":"2026-10-29T10:51:16.521149919Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/jsnum","Output":"TestParsePseudoBigInt\n"}
+{"Time":"2026-10-29T10:51:16.521151044Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/jsnum","Output":"TestString\n"}
+{"Time":"2026-10-29T10:51:16.521152669Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/jsnum","Output":"TestFromString\n"}
+{"Time":"2026-10-29T10:51:16.521153794Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/jsnum","Output":"TestStringRoundtrip\n"}
+{"Time":"2026-10-29T10:51:16.52115496Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/jsnum","Output":"TestStringJS\n"}
+{"Time":"2026-10-29T10:51:16.521156085Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/jsnum","Output":"BenchmarkToInt32\n"}
+{"Time":"2026-10-29T10:51:16.521157169Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/jsnum","Output":"BenchmarkExponentiate\n"}
+{"Time":"2026-10-29T10:51:16.521158252Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/jsnum","Output":"FuzzStringJS\n"}
+{"Time":"2026-10-29T10:51:16.521159294Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/jsnum","Output":"FuzzFromStringJS\n"}
+{"Time":"2026-10-29T10:51:16.521453835Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/jsnum","Output":"ok  \tgithub.com/microsoft/TypeScript/tsc/internal/jsnum\t0.003s\n"}
+{"Time":"2026-10-29T10:51:16.521468252Z","Action":"pass","Package":"github.com/microsoft/TypeScript/tsc/internal/jsnum","Elapsed":0.003}
+{"Time":"2026-10-29T10:51:16.522019502Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/json"}
+{"Time":"2026-10-29T10:51:16.522027877Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/json","Output":"?   \tgithub.com/microsoft/TypeScript/tsc/internal/json\t[no test files]\n"}
+{"Time":"2026-10-29T10:51:16.522030502Z","Action":"skip","Package":"github.com/microsoft/TypeScript/tsc/internal/json","Elapsed":0}
+{"Time":"2026-10-29T10:51:16.522036044Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/jsonrpc"}
+{"Time":"2026-10-29T10:51:16.522037835Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/jsonrpc","Output":"?   \tgithub.com/microsoft/TypeScript/tsc/internal/jsonrpc\t[no test files]\n"}
+{"Time":"2026-10-29T10:51:16.522040669Z","Action":"skip","Package":"github.com/microsoft/TypeScript/tsc/internal/jsonrpc","Elapsed":0}
+{"Time":"2026-10-29T10:51:16.522044835Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/locale"}
+{"Time":"2026-10-29T10:51:16.522046669Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/locale","Output":"?   \tgithub.com/microsoft/TypeScript/tsc/internal/locale\t[no test files]\n"}
+{"Time":"2026-10-29T10:51:16.522048002Z","Action":"skip","Package":"github.com/microsoft/TypeScript/tsc/internal/locale","Elapsed":0}
+{"Time":"2026-10-29T10:51:16.522056085Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/ls"}
+{"Time":"2026-10-29T10:51:16.522058252Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/ls","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/ls [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:16.522059669Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/ls","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:16.522518835Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/ls/autoimport"}
+{"Time":"2026-10-29T10:51:16.522528127Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/ls/autoimport","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/ls/autoimport [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:16.52253096Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/ls/autoimport","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:16.522573127Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/ls/change"}
+{"Time":"2026-10-29T10:51:16.522583877Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/ls/change","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/ls/change [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:16.522587044Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/ls/change","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:16.522632127Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/ls/lsconv"}
+{"Time":"2026-10-29T10:51:16.522654002Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/ls/lsconv","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/ls/lsconv [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:16.522661585Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/ls/lsconv","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:16.522732794Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/ls/lsutil"}
+{"Time":"2026-10-29T10:51:16.522744669Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/ls/lsutil","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/ls/lsutil [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:16.522747502Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/ls/lsutil","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:16.522850294Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp"}
+{"Time":"2026-10-29T10:51:16.522861752Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/lsp [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:16.52286821Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:17.597081794Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto"}
+{"Time":"2026-10-29T10:51:17.599476503Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"TestUnmarshalRejectsNullForOptionalNonNullableFields\n"}
+{"Time":"2026-10-29T10:51:17.599514044Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"TestUnmarshalAcceptsNullForNullableFields\n"}
+{"Time":"2026-10-29T10:51:17.599516544Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"TestUnmarshalAcceptsOmittedOptionalFields\n"}
+{"Time":"2026-10-29T10:51:17.599518086Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"TestUnmarshalRejectsIncompleteObjects\n"}
+{"Time":"2026-10-29T10:51:17.599519503Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"TestMarshalUnmarshalRoundTrip\n"}
+{"Time":"2026-10-29T10:51:17.599520961Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"TestUnmarshalUnionTypes\n"}
+{"Time":"2026-10-29T10:51:17.599522669Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"TestMarshalUnionTypes\n"}
+{"Time":"2026-10-29T10:51:17.599523836Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"TestUnmarshalIgnoresUnknownFields\n"}
+{"Time":"2026-10-29T10:51:17.599525211Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"TestUnmarshalRejectsWrongTypes\n"}
+{"Time":"2026-10-29T10:51:17.599526461Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"TestUnmarshalUnionTypeWrongKind\n"}
+{"Time":"2026-10-29T10:51:17.599527794Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"TestUnmarshalBooleanUnionTypes\n"}
+{"Time":"2026-10-29T10:51:17.599529003Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"TestUnmarshalDiscriminatorUnion\n"}
+{"Time":"2026-10-29T10:51:17.599530253Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"TestUnmarshalPresenceDiscriminatorUnion\n"}
+{"Time":"2026-10-29T10:51:17.599531544Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"TestUnmarshalStringOrArrayUnion\n"}
+{"Time":"2026-10-29T10:51:17.599532711Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"TestUnmarshalDocumentEditUnion\n"}
+{"Time":"2026-10-29T10:51:17.599533878Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"TestUnmarshalFieldOrdering\n"}
+{"Time":"2026-10-29T10:51:17.599535044Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"TestUnmarshalCompletionItemDataFileName\n"}
+{"Time":"2026-10-29T10:51:17.599536586Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"TestUnmarshalEmptyObject\n"}
+{"Time":"2026-10-29T10:51:17.599537794Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"TestMarshalOmitsZeroOptionalFields\n"}
+{"Time":"2026-10-29T10:51:17.599539461Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"TestLiteralTypes\n"}
+{"Time":"2026-10-29T10:51:17.599540836Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"TestEnumStringValues\n"}
+{"Time":"2026-10-29T10:51:17.599541961Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"TestRoundTrip\n"}
+{"Time":"2026-10-29T10:51:17.599543253Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"TestStrictnessMissingRequired\n"}
+{"Time":"2026-10-29T10:51:17.599544503Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"TestStrictnessNotObject\n"}
+{"Time":"2026-10-29T10:51:17.599545711Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"TestUnmarshalParamsRequiresParams\n"}
+{"Time":"2026-10-29T10:51:17.599555044Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"TestUnmarshalCompletionItem\n"}
+{"Time":"2026-10-29T10:51:17.599560711Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"TestTryDynamicFileNameToDocumentUri\n"}
+{"Time":"2026-10-29T10:51:17.599562211Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"TestBaseReader\n"}
+{"Time":"2026-10-29T10:51:17.599563419Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"TestBaseReaderMultipleReads\n"}
+{"Time":"2026-10-29T10:51:17.599564503Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"TestBaseWriter\n"}
+{"Time":"2026-10-29T10:51:17.599565669Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"TestBaseWriterWriteError\n"}
+{"Time":"2026-10-29T10:51:17.599566961Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"BenchmarkUnmarshalDiscriminatedUnion\n"}
+{"Time":"2026-10-29T10:51:17.599760044Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Output":"ok  \tgithub.com/microsoft/TypeScript/tsc/internal/lsp/lsproto\t0.003s\n"}
+{"Time":"2026-10-29T10:51:17.599775628Z","Action":"pass","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto","Elapsed":0.003}
+{"Time":"2026-10-29T10:51:17.600405961Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lspwatcher"}
+{"Time":"2026-10-29T10:51:17.600416128Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lspwatcher","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/lsp/lspwatcher [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:17.600419128Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/lsp/lspwatcher","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:17.600458544Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/module"}
+{"Time":"2026-10-29T10:51:17.600468503Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/module","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/module [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:17.600472169Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/module","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:17.600514586Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/modulespecifiers"}
+{"Time":"2026-10-29T10:51:17.600523669Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/modulespecifiers","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/modulespecifiers [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:17.600527711Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/modulespecifiers","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:17.753574628Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/nativepath"}
+{"Time":"2026-10-29T10:51:17.755489628Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/nativepath","Output":"TestIsNetworkPath\n"}
+{"Time":"2026-10-29T10:51:17.755713336Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/nativepath","Output":"ok  \tgithub.com/microsoft/TypeScript/tsc/internal/nativepath\t0.002s\n"}
+{"Time":"2026-10-29T10:51:17.755727753Z","Action":"pass","Package":"github.com/microsoft/TypeScript/tsc/internal/nativepath","Elapsed":0.002}
+{"Time":"2026-10-29T10:51:17.756187753Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/nodebuilder"}
+{"Time":"2026-10-29T10:51:17.756202378Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/nodebuilder","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/nodebuilder [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:17.756207169Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/nodebuilder","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:17.756211544Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/osutil"}
+{"Time":"2026-10-29T10:51:17.756213836Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/osutil","Output":"?   \tgithub.com/microsoft/TypeScript/tsc/internal/osutil\t[no test files]\n"}
+{"Time":"2026-10-29T10:51:17.756215628Z","Action":"skip","Package":"github.com/microsoft/TypeScript/tsc/internal/osutil","Elapsed":0}
+{"Time":"2026-10-29T10:51:17.756222419Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/outputpaths"}
+{"Time":"2026-10-29T10:51:17.756223919Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/outputpaths","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/outputpaths [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:17.756225378Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/outputpaths","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:17.756279461Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/packagejson"}
+{"Time":"2026-10-29T10:51:17.756289253Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/packagejson","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/packagejson [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:17.756291961Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/packagejson","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:17.756334294Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/parser"}
+{"Time":"2026-10-29T10:51:17.756347919Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/parser","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/parser [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:17.756351628Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/parser","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:17.756399711Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/pprof"}
+{"Time":"2026-10-29T10:51:17.756409711Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/pprof","Output":"?   \tgithub.com/microsoft/TypeScript/tsc/internal/pprof\t[no test files]\n"}
+{"Time":"2026-10-29T10:51:17.756412253Z","Action":"skip","Package":"github.com/microsoft/TypeScript/tsc/internal/pprof","Elapsed":0}
+{"Time":"2026-10-29T10:51:17.756424544Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/printer"}
+{"Time":"2026-10-29T10:51:17.756427794Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/printer","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/printer [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:17.756429419Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/printer","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:17.756490669Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/project"}
+{"Time":"2026-10-29T10:51:17.756499919Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/project","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/project [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:17.756502253Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/project","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:17.756551586Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/project/ata"}
+{"Time":"2026-10-29T10:51:17.756564628Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/project/ata","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/project/ata [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:17.756567336Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/project/ata","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:17.884926169Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/project/background"}
+{"Time":"2026-10-29T10:51:17.886925461Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/project/background","Output":"TestQueue\n"}
+{"Time":"2026-10-29T10:51:17.887181086Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/project/background","Output":"ok  \tgithub.com/microsoft/TypeScript/tsc/internal/project/background\t0.002s\n"}
+{"Time":"2026-10-29T10:51:17.887196378Z","Action":"pass","Package":"github.com/microsoft/TypeScript/tsc/internal/project/background","Elapsed":0.002}
+{"Time":"2026-10-29T10:51:18.161214295Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/project/dirty"}
+{"Time":"2026-10-29T10:51:18.163502378Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/project/dirty","Output":"TestSyncMapProxyFor\n"}
+{"Time":"2026-10-29T10:51:18.16377917Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/project/dirty","Output":"ok  \tgithub.com/microsoft/TypeScript/tsc/internal/project/dirty\t0.003s\n"}
+{"Time":"2026-10-29T10:51:18.163794836Z","Action":"pass","Package":"github.com/microsoft/TypeScript/tsc/internal/project/dirty","Elapsed":0.003}
+{"Time":"2026-10-29T10:51:18.285903961Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/project/logging"}
+{"Time":"2026-10-29T10:51:18.287276795Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/project/logging","Output":"TestLogTreeImplementsLogger\n"}
+{"Time":"2026-10-29T10:51:18.287305128Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/project/logging","Output":"TestLogTree\n"}
+{"Time":"2026-10-29T10:51:18.287455795Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/project/logging","Output":"ok  \tgithub.com/microsoft/TypeScript/tsc/internal/project/logging\t0.002s\n"}
+{"Time":"2026-10-29T10:51:18.287469211Z","Action":"pass","Package":"github.com/microsoft/TypeScript/tsc/internal/project/logging","Elapsed":0.002}
+{"Time":"2026-10-29T10:51:18.28779942Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/pseudochecker"}
+{"Time":"2026-10-29T10:51:18.287810211Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/pseudochecker","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/pseudochecker [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:18.287813545Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/pseudochecker","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:18.28781717Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/repo"}
+{"Time":"2026-10-29T10:51:18.287819295Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/repo","Output":"?   \tgithub.com/microsoft/TypeScript/tsc/internal/repo\t[no test files]\n"}
+{"Time":"2026-10-29T10:51:18.287820753Z","Action":"skip","Package":"github.com/microsoft/TypeScript/tsc/internal/repo","Elapsed":0}
+{"Time":"2026-10-29T10:51:18.287829336Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/scanner"}
+{"Time":"2026-10-29T10:51:18.287830961Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/scanner","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/scanner [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:18.287832961Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/scanner","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:18.477235586Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/semver"}
+{"Time":"2026-10-29T10:51:18.479580253Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/semver","Output":"TestWildcardsHaveSameString\n"}
+{"Time":"2026-10-29T10:51:18.47960967Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/semver","Output":"TestVersionRanges\n"}
+{"Time":"2026-10-29T10:51:18.479612378Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/semver","Output":"TestComparatorsOfVersionRanges\n"}
+{"Time":"2026-10-29T10:51:18.479613836Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/semver","Output":"TestConjunctionsOfVersionRanges\n"}
+{"Time":"2026-10-29T10:51:18.479615211Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/semver","Output":"TestDisjunctionsOfVersionRanges\n"}
+{"Time":"2026-10-29T10:51:18.479616461Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/semver","Output":"TestHyphensOfVersionRanges\n"}
+{"Time":"2026-10-29T10:51:18.47961767Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/semver","Output":"TestTildesOfVersionRanges\n"}
+{"Time":"2026-10-29T10:51:18.479618795Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/semver","Output":"TestCaretsOfVersionRanges\n"}
+{"Time":"2026-10-29T10:51:18.47961992Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/semver","Output":"TestTryParseSemver\n"}
+{"Time":"2026-10-29T10:51:18.479621253Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/semver","Output":"TestVersionString\n"}
+{"Time":"2026-10-29T10:51:18.479622503Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/semver","Output":"TestVersionCompare\n"}
+{"Time":"2026-10-29T10:51:18.479876336Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/semver","Output":"ok  \tgithub.com/microsoft/TypeScript/tsc/internal/semver\t0.003s\n"}
+{"Time":"2026-10-29T10:51:18.479890253Z","Action":"pass","Package":"github.com/microsoft/TypeScript/tsc/internal/semver","Elapsed":0.003}
+{"Time":"2026-10-29T10:51:18.480472711Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/sourcemap"}
+{"Time":"2026-10-29T10:51:18.480482628Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/sourcemap","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/sourcemap [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:18.480486086Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/sourcemap","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:18.654342336Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap"}
+{"Time":"2026-10-29T10:51:18.657533378Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"TestVirtualToOriginalSpanVerbatim\n"}
+{"Time":"2026-10-29T10:51:18.657563711Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"TestVirtualToOriginalSpanAtom\n"}
+{"Time":"2026-10-29T10:51:18.657565836Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"TestVirtualAlias\n"}
+{"Time":"2026-10-29T10:51:18.657567586Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"TestVirtualToOriginalSpanSynthesizedGap\n"}
+{"Time":"2026-10-29T10:51:18.657569211Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"TestOriginalToVirtualIntersectingSpansAllowsUncoveredEndpoints\n"}
+{"Time":"2026-10-29T10:51:18.657570836Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"TestVirtualToOriginalSpanEmptyIsSynthesized\n"}
+{"Time":"2026-10-29T10:51:18.657572336Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"TestVirtualToOriginalSpanCrossingSegments\n"}
+{"Time":"2026-10-29T10:51:18.657573586Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"TestVirtualToOriginalSpanNilIdentity\n"}
+{"Time":"2026-10-29T10:51:18.657574836Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"TestVirtualToOriginalPosition\n"}
+{"Time":"2026-10-29T10:51:18.657576045Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"TestVirtualToOriginalPositionExact\n"}
+{"Time":"2026-10-29T10:51:18.657577295Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"TestVirtualToOriginalPositionExactRejectsDiscontinuousBoundary\n"}
+{"Time":"2026-10-29T10:51:18.65757867Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"TestZeroLengthSpansAtSegmentEnds\n"}
+{"Time":"2026-10-29T10:51:18.657582628Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"TestMapPositionNilIdentity\n"}
+{"Time":"2026-10-29T10:51:18.65758392Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"TestOriginalToVirtualSpanVerbatim\n"}
+{"Time":"2026-10-29T10:51:18.65758517Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"TestOriginalToVirtualSpanAtom\n"}
+{"Time":"2026-10-29T10:51:18.657586336Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"TestOriginalToVirtualSpanGap\n"}
+{"Time":"2026-10-29T10:51:18.657587586Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"TestOriginalToVirtualSpanNilIdentity\n"}
+{"Time":"2026-10-29T10:51:18.65758892Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"TestOriginalToVirtualPositions\n"}
+{"Time":"2026-10-29T10:51:18.657590253Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"TestOriginalToVirtualPositionsAtEndpoint\n"}
+{"Time":"2026-10-29T10:51:18.657591586Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"TestOriginalToVirtualDuplicateGroup\n"}
+{"Time":"2026-10-29T10:51:18.657592961Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"TestOriginalToVirtualOverlappingSpans\n"}
+{"Time":"2026-10-29T10:51:18.657594295Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"TestOriginalToVirtualPositionFindsEarlyCoveringSegment\n"}
+{"Time":"2026-10-29T10:51:18.657596461Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"TestOriginalToVirtualOverlapFallsBackFromDisabledContainer\n"}
+{"Time":"2026-10-29T10:51:18.657598045Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"TestOriginalToVirtualCrossGroupProjections\n"}
+{"Time":"2026-10-29T10:51:18.657599711Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"TestOriginalToVirtualExplicitZeroFeatures\n"}
+{"Time":"2026-10-29T10:51:18.657601253Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"TestFeatureParticipationOriginalAndVirtual\n"}
+{"Time":"2026-10-29T10:51:18.657602545Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"TestOriginalToVirtualSpanRoundTrip\n"}
+{"Time":"2026-10-29T10:51:18.657603795Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"TestMarshalRoundTrip\n"}
+{"Time":"2026-10-29T10:51:18.657605211Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"TestValidate\n"}
+{"Time":"2026-10-29T10:51:18.657606545Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"TestValidateOriginalOverlapAndFeatures\n"}
+{"Time":"2026-10-29T10:51:18.657608211Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"TestValidateNilIsValid\n"}
+{"Time":"2026-10-29T10:51:18.657610253Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"BenchmarkOriginalToVirtualPositionNearEnd\n"}
+{"Time":"2026-10-29T10:51:18.657829503Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Output":"ok  \tgithub.com/microsoft/TypeScript/tsc/internal/spanmap\t0.003s\n"}
+{"Time":"2026-10-29T10:51:18.657839336Z","Action":"pass","Package":"github.com/microsoft/TypeScript/tsc/internal/spanmap","Elapsed":0.004}
+{"Time":"2026-10-29T10:51:18.847910295Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/stringutil"}
+{"Time":"2026-10-29T10:51:18.849450962Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/stringutil","Output":"TestJSCasing\n"}
+{"Time":"2026-10-29T10:51:18.849481628Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/stringutil","Output":"TestEncodeURI\n"}
+{"Time":"2026-10-29T10:51:18.84968092Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/stringutil","Output":"ok  \tgithub.com/microsoft/TypeScript/tsc/internal/stringutil\t0.002s\n"}
+{"Time":"2026-10-29T10:51:18.849694962Z","Action":"pass","Package":"github.com/microsoft/TypeScript/tsc/internal/stringutil","Elapsed":0.002}
+{"Time":"2026-10-29T10:51:18.850094503Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/symlinks"}
+{"Time":"2026-10-29T10:51:18.850104503Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/symlinks","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/symlinks [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:18.850108545Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/symlinks","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:18.850154837Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/testrunner"}
+{"Time":"2026-10-29T10:51:18.850164128Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/testrunner","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/testrunner [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:18.85016692Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/testrunner","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:18.850191795Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil"}
+{"Time":"2026-10-29T10:51:18.850196003Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil","Output":"?   \tgithub.com/microsoft/TypeScript/tsc/internal/testutil\t[no test files]\n"}
+{"Time":"2026-10-29T10:51:18.85019842Z","Action":"skip","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil","Elapsed":0}
+{"Time":"2026-10-29T10:51:18.850203087Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/autoimporttestutil"}
+{"Time":"2026-10-29T10:51:18.850204837Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/autoimporttestutil","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/testutil/autoimporttestutil [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:18.850209087Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/autoimporttestutil","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:18.850213003Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/baseline"}
+{"Time":"2026-10-29T10:51:18.850214753Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/baseline","Output":"?   \tgithub.com/microsoft/TypeScript/tsc/internal/testutil/baseline\t[no test files]\n"}
+{"Time":"2026-10-29T10:51:18.850216337Z","Action":"skip","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/baseline","Elapsed":0}
+{"Time":"2026-10-29T10:51:18.850223045Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/contentmappertest"}
+{"Time":"2026-10-29T10:51:18.85023192Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/contentmappertest","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/testutil/contentmappertest [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:18.85023467Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/contentmappertest","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:18.85028917Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/emittestutil"}
+{"Time":"2026-10-29T10:51:18.850308837Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/emittestutil","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/testutil/emittestutil [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:18.850315337Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/emittestutil","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:18.850319503Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/filefixture"}
+{"Time":"2026-10-29T10:51:18.85032242Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/filefixture","Output":"?   \tgithub.com/microsoft/TypeScript/tsc/internal/testutil/filefixture\t[no test files]\n"}
+{"Time":"2026-10-29T10:51:18.850327087Z","Action":"skip","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/filefixture","Elapsed":0}
+{"Time":"2026-10-29T10:51:18.850331337Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/fixtures"}
+{"Time":"2026-10-29T10:51:18.85033317Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/fixtures","Output":"?   \tgithub.com/microsoft/TypeScript/tsc/internal/testutil/fixtures\t[no test files]\n"}
+{"Time":"2026-10-29T10:51:18.850336045Z","Action":"skip","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/fixtures","Elapsed":0}
+{"Time":"2026-10-29T10:51:18.850338753Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/fsbaselineutil"}
+{"Time":"2026-10-29T10:51:18.85034042Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/fsbaselineutil","Output":"?   \tgithub.com/microsoft/TypeScript/tsc/internal/testutil/fsbaselineutil\t[no test files]\n"}
+{"Time":"2026-10-29T10:51:18.850342087Z","Action":"skip","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/fsbaselineutil","Elapsed":0}
+{"Time":"2026-10-29T10:51:18.850347462Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/harnessutil"}
+{"Time":"2026-10-29T10:51:18.850351962Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/harnessutil","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/testutil/harnessutil [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:18.850354212Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/harnessutil","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:18.85038317Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/jstest"}
+{"Time":"2026-10-29T10:51:18.850390337Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/jstest","Output":"?   \tgithub.com/microsoft/TypeScript/tsc/internal/testutil/jstest\t[no test files]\n"}
+{"Time":"2026-10-29T10:51:18.85039292Z","Action":"skip","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/jstest","Elapsed":0}
+{"Time":"2026-10-29T10:51:18.85039692Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/lsptestutil"}
+{"Time":"2026-10-29T10:51:18.850398503Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/lsptestutil","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/testutil/lsptestutil [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:18.850399962Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/lsptestutil","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:18.850402545Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/parsetestutil"}
+{"Time":"2026-10-29T10:51:18.850404045Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/parsetestutil","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/testutil/parsetestutil [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:18.850410712Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/parsetestutil","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:18.850416837Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/projecttestutil"}
+{"Time":"2026-10-29T10:51:18.850418712Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/projecttestutil","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/testutil/projecttestutil [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:18.850420503Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/projecttestutil","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:18.850424503Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/race"}
+{"Time":"2026-10-29T10:51:18.850426378Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/race","Output":"?   \tgithub.com/microsoft/TypeScript/tsc/internal/testutil/race\t[no test files]\n"}
+{"Time":"2026-10-29T10:51:18.85042792Z","Action":"skip","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/race","Elapsed":0}
+{"Time":"2026-10-29T10:51:18.85043117Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/stringtestutil"}
+{"Time":"2026-10-29T10:51:18.850436753Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/stringtestutil","Output":"?   \tgithub.com/microsoft/TypeScript/tsc/internal/testutil/stringtestutil\t[no test files]\n"}
+{"Time":"2026-10-29T10:51:18.850439545Z","Action":"skip","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/stringtestutil","Elapsed":0}
+{"Time":"2026-10-29T10:51:18.850446045Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/tsbaseline"}
+{"Time":"2026-10-29T10:51:18.850453628Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/tsbaseline","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/testutil/tsbaseline [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:18.850456337Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/testutil/tsbaseline","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:18.850469628Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/tracing"}
+{"Time":"2026-10-29T10:51:18.850471962Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tracing","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/tracing [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:18.850473587Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/tracing","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:18.85050967Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/transformers"}
+{"Time":"2026-10-29T10:51:18.85052342Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/transformers","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/transformers [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:18.850531128Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/transformers","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:18.850537462Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/transformers/declarations"}
+{"Time":"2026-10-29T10:51:18.850539462Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/transformers/declarations","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/transformers/declarations [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:18.850541253Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/transformers/declarations","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:18.850544295Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/transformers/estransforms"}
+{"Time":"2026-10-29T10:51:18.850551503Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/transformers/estransforms","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/transformers/estransforms [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:18.85055867Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/transformers/estransforms","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:18.850567087Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/transformers/inliners"}
+{"Time":"2026-10-29T10:51:18.85057642Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/transformers/inliners","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/transformers/inliners [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:18.850583545Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/transformers/inliners","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:18.850592378Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/transformers/jsxtransforms"}
+{"Time":"2026-10-29T10:51:18.850692712Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/transformers/jsxtransforms","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/transformers/jsxtransforms [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:18.850704337Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/transformers/jsxtransforms","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:18.850711295Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/transformers/moduletransforms"}
+{"Time":"2026-10-29T10:51:18.850713587Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/transformers/moduletransforms","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/transformers/moduletransforms [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:18.850715295Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/transformers/moduletransforms","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:18.850721462Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/transformers/tstransforms"}
+{"Time":"2026-10-29T10:51:18.850723462Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/transformers/tstransforms","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/transformers/tstransforms [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:18.85072492Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/transformers/tstransforms","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:18.850780587Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/transpile"}
+{"Time":"2026-10-29T10:51:18.85079517Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/transpile","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/transpile [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:18.850798128Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/transpile","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:18.850844212Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/tsoptions"}
+{"Time":"2026-10-29T10:51:18.85085017Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tsoptions","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/tsoptions [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:18.850852545Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/tsoptions","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:18.850977462Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/tsoptions/tsoptionstest"}
+{"Time":"2026-10-29T10:51:18.85099067Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tsoptions/tsoptionstest","Output":"FAIL\tgithub.com/microsoft/TypeScript/tsc/internal/tsoptions/tsoptionstest [build failed]\n","OutputType":"frame"}
+{"Time":"2026-10-29T10:51:18.850993378Z","Action":"fail","Package":"github.com/microsoft/TypeScript/tsc/internal/tsoptions/tsoptionstest","Elapsed":0,"FailedBuild":"github.com/microsoft/TypeScript/tsc/internal/ast"}
+{"Time":"2026-10-29T10:51:19.293978545Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath"}
+{"Time":"2026-10-29T10:51:19.296187628Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestContainsIgnoredPath\n"}
+{"Time":"2026-10-29T10:51:19.29622117Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestIgnoredPathsPatterns\n"}
+{"Time":"2026-10-29T10:51:19.296223295Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestIgnoredPathsEdgeCases\n"}
+{"Time":"2026-10-29T10:51:19.296225503Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestNormalizeSlashes\n"}
+{"Time":"2026-10-29T10:51:19.296226753Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestGetRootLength\n"}
+{"Time":"2026-10-29T10:51:19.296228003Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestPathIsAbsolute\n"}
+{"Time":"2026-10-29T10:51:19.296229128Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestIsUrl\n"}
+{"Time":"2026-10-29T10:51:19.296230378Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestIsRootedDiskPath\n"}
+{"Time":"2026-10-29T10:51:19.29623142Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestGetDirectoryPath\n"}
+{"Time":"2026-10-29T10:51:19.296232628Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestGetLongestExtensionFromPath\n"}
+{"Time":"2026-10-29T10:51:19.296234045Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestRemoveAnyFileExtension\n"}
+{"Time":"2026-10-29T10:51:19.296235295Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestGetPathComponents\n"}
+{"Time":"2026-10-29T10:51:19.296236503Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestReducePathComponents\n"}
+{"Time":"2026-10-29T10:51:19.296237628Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestCombinePaths\n"}
+{"Time":"2026-10-29T10:51:19.296238837Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestResolvePath\n"}
+{"Time":"2026-10-29T10:51:19.296240087Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestResolvePathWithoutTrailingDirectorySeparator\n"}
+{"Time":"2026-10-29T10:51:19.296251628Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestNormalizePathDriveRoot\n"}
+{"Time":"2026-10-29T10:51:19.29625467Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestGetNormalizedAbsolutePath\n"}
+{"Time":"2026-10-29T10:51:19.296255878Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestGetRelativePathToDirectoryOrUrl\n"}
+{"Time":"2026-10-29T10:51:19.296257212Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestToFileNameLowerCase\n"}
+{"Time":"2026-10-29T10:51:19.29625867Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestCaseSensitivityTrimPrefix\n"}
+{"Time":"2026-10-29T10:51:19.296259837Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestPathIsRelative\n"}
+{"Time":"2026-10-29T10:51:19.296260962Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestGetCommonParents\n"}
+{"Time":"2026-10-29T10:51:19.296262212Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestStartsWithDirectory\n"}
+{"Time":"2026-10-29T10:51:19.296263587Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestStartsWithDirectoryEdgeCases\n"}
+{"Time":"2026-10-29T10:51:19.296264878Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestToRootedFilePath\n"}
+{"Time":"2026-10-29T10:51:19.296266253Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestEncodedDynamicPathsPreserveOpaqueIdentity\n"}
+{"Time":"2026-10-29T10:51:19.296267753Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestPathKeyFromCanonicalRejectsURLSuffix\n"}
+{"Time":"2026-10-29T10:51:19.29626942Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestDynamicPathKeyCaseInsensitiveKeyPreservesIdentity\n"}
+{"Time":"2026-10-29T10:51:19.29627092Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestExtensionMutationsPreserveNormalizedInvariant\n"}
+{"Time":"2026-10-29T10:51:19.296272253Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestFileNameStemsPreserveFilenamePrefixes\n"}
+{"Time":"2026-10-29T10:51:19.296273753Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestCompareFileNameStemsKeepsLiteralDotComponentsAndCasingPolicy\n"}
+{"Time":"2026-10-29T10:51:19.296279003Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestSplitAtRootLevelComponentKeepsRoot\n"}
+{"Time":"2026-10-29T10:51:19.296280462Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestToRootedFilePathRequiresRoot\n"}
+{"Time":"2026-10-29T10:51:19.296284295Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestRootedFilePathFromAbsolute\n"}
+{"Time":"2026-10-29T10:51:19.29628992Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestRootedFilePathFromNormalized\n"}
+{"Time":"2026-10-29T10:51:19.296297628Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestTypedPathConstructorsAndDecoders\n"}
+{"Time":"2026-10-29T10:51:19.296298878Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestRelativePath\n"}
+{"Time":"2026-10-29T10:51:19.296300295Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestTypedPathComponents\n"}
+{"Time":"2026-10-29T10:51:19.296301587Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestTryRelativePathBetweenFilePaths\n"}
+{"Time":"2026-10-29T10:51:19.296302962Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestRootedFilePathDirectory\n"}
+{"Time":"2026-10-29T10:51:19.296304253Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestRootedFilePathWithoutRoot\n"}
+{"Time":"2026-10-29T10:51:19.296305587Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestRootedFilePathRootAndRelativePath\n"}
+{"Time":"2026-10-29T10:51:19.29630992Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestCommonDirectoryOfFiles\n"}
+{"Time":"2026-10-29T10:51:19.296316295Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestRelativePathsFromTypedPaths\n"}
+{"Time":"2026-10-29T10:51:19.296317628Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestContainsFilePath\n"}
+{"Time":"2026-10-29T10:51:19.296318962Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestSourceMapLocation\n"}
+{"Time":"2026-10-29T10:51:19.29632017Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestRootedPath\n"}
+{"Time":"2026-10-29T10:51:19.296321337Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestRootedPathCompare\n"}
+{"Time":"2026-10-29T10:51:19.296322712Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestPathOperationsSeparateRooting\n"}
+{"Time":"2026-10-29T10:51:19.296324128Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestRootedFilePathExtensionOperationsPreserveInvariants\n"}
+{"Time":"2026-10-29T10:51:19.296329878Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestForEachAncestorDirectoryPath\n"}
+{"Time":"2026-10-29T10:51:19.296333295Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestRootedFilePathComponents\n"}
+{"Time":"2026-10-29T10:51:19.29633967Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestCaseSensitivityKey\n"}
+{"Time":"2026-10-29T10:51:19.296341087Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestPathKeyConstructionMethods\n"}
+{"Time":"2026-10-29T10:51:19.296342503Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestRootedDirectoryPathResolutionMatchesGeneralRooting\n"}
+{"Time":"2026-10-29T10:51:19.296343795Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestRewriteExtension\n"}
+{"Time":"2026-10-29T10:51:19.296344962Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestRootedFilePathRewriteExtension\n"}
+{"Time":"2026-10-29T10:51:19.29634617Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestModuleSpecifierShouldRewriteExtension\n"}
+{"Time":"2026-10-29T10:51:19.296347378Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestUntitledPathHandling\n"}
+{"Time":"2026-10-29T10:51:19.296348503Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"TestUntitledPathEdgeCases\n"}
+{"Time":"2026-10-29T10:51:19.296349628Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"BenchmarkCombinePaths\n"}
+{"Time":"2026-10-29T10:51:19.296350795Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"BenchmarkGetNormalizedAbsolutePath\n"}
+{"Time":"2026-10-29T10:51:19.296352003Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"BenchmarkToFileNameLowerCase\n"}
+{"Time":"2026-10-29T10:51:19.296353295Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"BenchmarkHasRelativePathSegment\n"}
+{"Time":"2026-10-29T10:51:19.296354503Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"BenchmarkPathIsRelative\n"}
+{"Time":"2026-10-29T10:51:19.296355837Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"BenchmarkRootedDirectoryPathResolveFile\n"}
+{"Time":"2026-10-29T10:51:19.296363337Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"BenchmarkRootedFilePathToPathKey\n"}
+{"Time":"2026-10-29T10:51:19.296373628Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"FuzzGetNormalizedAbsolutePath\n"}
+{"Time":"2026-10-29T10:51:19.296379795Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"FuzzToFileNameLowerCase\n"}
+{"Time":"2026-10-29T10:51:19.296381462Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"FuzzHasRelativePathSegment\n"}
+{"Time":"2026-10-29T10:51:19.296511212Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Output":"ok  \tgithub.com/microsoft/TypeScript/tsc/internal/tspath\t0.002s\n"}
+{"Time":"2026-10-29T10:51:19.296525628Z","Action":"pass","Package":"github.com/microsoft/TypeScript/tsc/internal/tspath","Elapsed":0.003}
+{"Time":"2026-10-29T10:51:19.47881492Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs"}
+{"Time":"2026-10-29T10:51:19.481159087Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs","Output":"TestWalkDir\n"}
+{"Time":"2026-10-29T10:51:19.481188129Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs","Output":"TestWalkDirDoesNotFollowRootSymlink\n"}
+{"Time":"2026-10-29T10:51:19.481190712Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs","Output":"TestWalkDirReportsRootFileSymlink\n"}
+{"Time":"2026-10-29T10:51:19.481194129Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs","Output":"TestWalkDirSkipDir\n"}
+{"Time":"2026-10-29T10:51:19.481195545Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs","Output":"TestWalkDirSkipAll\n"}
+{"Time":"2026-10-29T10:51:19.481196837Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs","Output":"TestWalkDirConsumesSkipDirForRootFile\n"}
+{"Time":"2026-10-29T10:51:19.481198087Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs","Output":"TestWalkDirConsumesSkipForMissingRoot\n"}
+{"Time":"2026-10-29T10:51:19.481199295Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs","Output":"TestWalkDirUsesSymlinkMetadataWithoutRealpathCalls\n"}
+{"Time":"2026-10-29T10:51:19.48120117Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs","Output":"BenchmarkReadFile\n"}
+{"Time":"2026-10-29T10:51:19.481443629Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs","Output":"ok  \tgithub.com/microsoft/TypeScript/tsc/internal/vfs\t0.003s\n"}
+{"Time":"2026-10-29T10:51:19.481457212Z","Action":"pass","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs","Elapsed":0.003}
+{"Time":"2026-10-29T10:51:19.722845129Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/cachedvfs"}
+{"Time":"2026-10-29T10:51:19.724992629Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/cachedvfs","Output":"TestDirectoryExists\n"}
+{"Time":"2026-10-29T10:51:19.725026004Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/cachedvfs","Output":"TestFileExists\n"}
+{"Time":"2026-10-29T10:51:19.72502842Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/cachedvfs","Output":"TestGetAccessibleEntries\n"}
+{"Time":"2026-10-29T10:51:19.725029879Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/cachedvfs","Output":"TestRealpath\n"}
+{"Time":"2026-10-29T10:51:19.725031212Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/cachedvfs","Output":"TestStat\n"}
+{"Time":"2026-10-29T10:51:19.725034379Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/cachedvfs","Output":"TestReadFile\n"}
+{"Time":"2026-10-29T10:51:19.725037254Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/cachedvfs","Output":"TestCaseSensitivity\n"}
+{"Time":"2026-10-29T10:51:19.725038462Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/cachedvfs","Output":"TestRemove\n"}
+{"Time":"2026-10-29T10:51:19.725039587Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/cachedvfs","Output":"TestWriteFile\n"}
+{"Time":"2026-10-29T10:51:19.725252795Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/cachedvfs","Output":"ok  \tgithub.com/microsoft/TypeScript/tsc/internal/vfs/cachedvfs\t0.002s\n"}
+{"Time":"2026-10-29T10:51:19.725265129Z","Action":"pass","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/cachedvfs","Elapsed":0.002}
+{"Time":"2026-10-29T10:51:19.72588167Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/internal"}
+{"Time":"2026-10-29T10:51:19.725892545Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/internal","Output":"?   \tgithub.com/microsoft/TypeScript/tsc/internal/vfs/internal\t[no test files]\n"}
+{"Time":"2026-10-29T10:51:19.725900004Z","Action":"skip","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/internal","Elapsed":0}
+{"Time":"2026-10-29T10:51:19.865570795Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/iovfs"}
+{"Time":"2026-10-29T10:51:19.86816892Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/iovfs","Output":"TestIOFS\n"}
+{"Time":"2026-10-29T10:51:19.868404879Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/iovfs","Output":"ok  \tgithub.com/microsoft/TypeScript/tsc/internal/vfs/iovfs\t0.003s\n"}
+{"Time":"2026-10-29T10:51:19.868416462Z","Action":"pass","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/iovfs","Elapsed":0.003}
+{"Time":"2026-10-29T10:51:20.081378962Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/osvfs"}
+{"Time":"2026-10-29T10:51:20.083642545Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/osvfs","Output":"TestSymlinkRealpath\n"}
+{"Time":"2026-10-29T10:51:20.08367167Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/osvfs","Output":"TestGetAccessibleEntries\n"}
+{"Time":"2026-10-29T10:51:20.083674004Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/osvfs","Output":"TestGetGlobalTypingsCacheLocation\n"}
+{"Time":"2026-10-29T10:51:20.08367542Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/osvfs","Output":"TestOS\n"}
+{"Time":"2026-10-29T10:51:20.083676712Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/osvfs","Output":"BenchmarkRealpath\n"}
+{"Time":"2026-10-29T10:51:20.083932212Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/osvfs","Output":"ok  \tgithub.com/microsoft/TypeScript/tsc/internal/vfs/osvfs\t0.003s\n"}
+{"Time":"2026-10-29T10:51:20.083943587Z","Action":"pass","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/osvfs","Elapsed":0.003}
+{"Time":"2026-10-29T10:51:20.084576045Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/trackingvfs"}
+{"Time":"2026-10-29T10:51:20.084585337Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/trackingvfs","Output":"?   \tgithub.com/microsoft/TypeScript/tsc/internal/vfs/trackingvfs\t[no test files]\n"}
+{"Time":"2026-10-29T10:51:20.084588379Z","Action":"skip","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/trackingvfs","Elapsed":0}
+{"Time":"2026-10-29T10:51:20.500492587Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmatch"}
+{"Time":"2026-10-29T10:51:20.503090254Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmatch","Output":"TestReadDirectory\n"}
+{"Time":"2026-10-29T10:51:20.503129421Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmatch","Output":"TestIsImplicitGlob\n"}
+{"Time":"2026-10-29T10:51:20.503131796Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmatch","Output":"TestReadDirectoryEdgeCases\n"}
+{"Time":"2026-10-29T10:51:20.503133212Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmatch","Output":"TestReadDirectoryEmptyIncludes\n"}
+{"Time":"2026-10-29T10:51:20.503134462Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmatch","Output":"TestReadDirectorySymlinkCycle\n"}
+{"Time":"2026-10-29T10:51:20.503135837Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmatch","Output":"TestReadDirectoryMatchesTypeScriptBaselines\n"}
+{"Time":"2026-10-29T10:51:20.503137962Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmatch","Output":"TestReadDirectoryWithExtendedDynamicRoot\n"}
+{"Time":"2026-10-29T10:51:20.503139379Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmatch","Output":"TestReadDirectoryDynamicRootUsesCaseSensitivePatterns\n"}
+{"Time":"2026-10-29T10:51:20.503141004Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmatch","Output":"TestDynamicAbsoluteGlobUsesCaseSensitivePattern\n"}
+{"Time":"2026-10-29T10:51:20.503142254Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmatch","Output":"TestSpecMatcher\n"}
+{"Time":"2026-10-29T10:51:20.503143462Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmatch","Output":"TestSpecMatcher_MatchString\n"}
+{"Time":"2026-10-29T10:51:20.503146671Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmatch","Output":"TestSingleSpecMatcher_MatchString\n"}
+{"Time":"2026-10-29T10:51:20.503148379Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmatch","Output":"TestSpecMatchers_MatchIndex\n"}
+{"Time":"2026-10-29T10:51:20.503149546Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmatch","Output":"TestSingleSpecMatcher\n"}
+{"Time":"2026-10-29T10:51:20.503150671Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmatch","Output":"TestSpecMatchers\n"}
+{"Time":"2026-10-29T10:51:20.503151921Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmatch","Output":"TestGlobPatternInternals\n"}
+{"Time":"2026-10-29T10:51:20.503153087Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmatch","Output":"TestMatchSegmentsEdgeCases\n"}
+{"Time":"2026-10-29T10:51:20.503154379Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmatch","Output":"TestReadDirectoryConsecutiveSlashes\n"}
+{"Time":"2026-10-29T10:51:20.503155671Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmatch","Output":"TestGlobPatternLiteralWithPackageFolders\n"}
+{"Time":"2026-10-29T10:51:20.503156879Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmatch","Output":"TestGetBasePathsCaseSensitivity\n"}
+{"Time":"2026-10-29T10:51:20.503158212Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmatch","Output":"BenchmarkReadDirectory\n"}
+{"Time":"2026-10-29T10:51:20.503159546Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmatch","Output":"BenchmarkPatternCompilation\n"}
+{"Time":"2026-10-29T10:51:20.503160921Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmatch","Output":"BenchmarkPatternMatching\n"}
+{"Time":"2026-10-29T10:51:20.503429796Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmatch","Output":"ok  \tgithub.com/microsoft/TypeScript/tsc/internal/vfs/vfsmatch\t0.003s\n"}
+{"Time":"2026-10-29T10:51:20.503447212Z","Action":"pass","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmatch","Elapsed":0.003}
+{"Time":"2026-10-29T10:51:20.662251129Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmock"}
+{"Time":"2026-10-29T10:51:20.664724837Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmock","Output":"TestWrap\n"}
+{"Time":"2026-10-29T10:51:20.665011421Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmock","Output":"ok  \tgithub.com/microsoft/TypeScript/tsc/internal/vfs/vfsmock\t0.003s\n"}
+{"Time":"2026-10-29T10:51:20.665024379Z","Action":"pass","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmock","Elapsed":0.003}
+{"Time":"2026-10-29T10:51:20.945079588Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfstest"}
+{"Time":"2026-10-29T10:51:20.947488046Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfstest","Output":"TestInsensitive\n"}
+{"Time":"2026-10-29T10:51:20.947517671Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfstest","Output":"TestInsensitiveUpper\n"}
+{"Time":"2026-10-29T10:51:20.947520463Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfstest","Output":"TestSensitive\n"}
+{"Time":"2026-10-29T10:51:20.947522046Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfstest","Output":"TestSensitiveDuplicatePath\n"}
+{"Time":"2026-10-29T10:51:20.947523296Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfstest","Output":"TestInsensitiveDuplicatePath\n"}
+{"Time":"2026-10-29T10:51:20.947524463Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfstest","Output":"TestWritableFS\n"}
+{"Time":"2026-10-29T10:51:20.947526088Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfstest","Output":"TestWritableFSDelete\n"}
+{"Time":"2026-10-29T10:51:20.947527254Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfstest","Output":"TestStress\n"}
+{"Time":"2026-10-29T10:51:20.947528671Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfstest","Output":"TestParentDirFile\n"}
+{"Time":"2026-10-29T10:51:20.947529796Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfstest","Output":"TestFromMap\n"}
+{"Time":"2026-10-29T10:51:20.947530963Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfstest","Output":"TestVFSTestMapFS\n"}
+{"Time":"2026-10-29T10:51:20.947532129Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfstest","Output":"TestVFSTestMapFSWindows\n"}
+{"Time":"2026-10-29T10:51:20.947533296Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfstest","Output":"TestBOM\n"}
+{"Time":"2026-10-29T10:51:20.947534421Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfstest","Output":"TestSymlink\n"}
+{"Time":"2026-10-29T10:51:20.947535546Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfstest","Output":"TestWritableFSSymlink\n"}
+{"Time":"2026-10-29T10:51:20.947536671Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfstest","Output":"TestWritableFSSymlinkChain\n"}
+{"Time":"2026-10-29T10:51:20.947537921Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfstest","Output":"TestWritableFSSymlinkChainNotDir\n"}
+{"Time":"2026-10-29T10:51:20.947539129Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfstest","Output":"TestWritableFSSymlinkDelete\n"}
+{"Time":"2026-10-29T10:51:20.947764838Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfstest","Output":"ok  \tgithub.com/microsoft/TypeScript/tsc/internal/vfs/vfstest\t0.003s\n"}
+{"Time":"2026-10-29T10:51:20.947785379Z","Action":"pass","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/vfstest","Elapsed":0.003}
+{"Time":"2026-10-29T10:51:20.948417296Z","Action":"start","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/wrapvfs"}
+{"Time":"2026-10-29T10:51:20.948431713Z","Action":"output","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/wrapvfs","Output":"?   \tgithub.com/microsoft/TypeScript/tsc/internal/vfs/wrapvfs\t[no test files]\n"}
+{"Time":"2026-10-29T10:51:20.948435838Z","Action":"skip","Package":"github.com/microsoft/TypeScript/tsc/internal/vfs/wrapvfs","Elapsed":0}

@@ -1,0 +1,74 @@
+{
+  "cacheGloballyQualified": false,
+  "campaignAdmitted": false,
+  "checks": {
+    "actions": "Only local uv/Python stdlib tar/hash/file reads; no extraction or daemon/network/Go/Cargo/package/upstream/provider/model actions.",
+    "byteVerifier": "passed; checks-final.json",
+    "interpreter": "3.12.15",
+    "localCostUsd": null,
+    "ruffCheck": "passed --no-cache",
+    "ruffFormat": "passed --check --no-cache"
+  },
+  "disposition": {
+    "projection": "Exact all-and-only go/pkg/mod/ regular parent members are preserved in the proposed archive, including content, paths and modes. No newly synthesized dependency/package content. This is a scoped data input, not global cache admission.",
+    "readiness": "Not executable/runnable/authorized/native-qualified: frozen proposal has no driver, authorization or controls. Future context and input/script/protected-set bindings must be frozen and independently reviewed before any attempt.",
+    "sourceCandidate": "No concrete eager npm prerequisite identified in the reviewed project init/TestMain/helper paths. Direct Go env/list/test-list without npm-tree/npm-cache seed is a defensible fail-closed collection candidate. This is not universal source-callgraph proof or observed native success.",
+    "wholeTask": "Unchanged Hereby test alias -> test:tsc -> source-owned gotestsum -> tsc ./... remains the full task. Collection is preparation, not task outcome. Full normal npm setup and JS6 reference dependency remain intended prerequisites."
+  },
+  "executionAuthorized": false,
+  "findings": [],
+  "minimumFutureGates": [
+    "Freeze successor context including explicit CC/CXX, unchanged source/image/projection hashes, full protected input set and unique authorization.",
+    "Implement/review bounded one-attempt driver with actual namespace/network/mount/resource/stop/output/cleanup/source-immutability controls and preflight/timing/failure receipts.",
+    "Retain complete go env/package inventory/listing outputs; reject mismatch,error,timeout/OOM/truncation/missing package/no listing. Do not repair no-npm variant,filter scope or infer nested identities after failure.",
+    "Independently bind native manifest and source-supported exclusion policy before eventual full source-owned Hereby/default run. Collection alone cannot close those gates."
+  ],
+  "nativeCollectionOccurred": false,
+  "projectionFreeze": {
+    "path": "benchmarks/head-to-head/f05-go01-next-qualification-20261029/go-only-projection-1/freeze.json",
+    "sha256": "424d9381ba042a60ba562cae5236279225d27c984a17636a8fa7e8d1d7e256ad"
+  },
+  "proposalFreeze": {
+    "path": "benchmarks/head-to-head/f05-go01-next-qualification-20261029/freeze.json",
+    "sha256": "c2f6160768d023eee42f62e51511a5af53d448fff0d7f1edc807bc4a9623a09d"
+  },
+  "qualifiers": [
+    "The projection retains16 ordinary Go-package .js/package.json assets. No universal no-JavaScript/no-npm-readable-text claim; no pruning of these legitimate dependency files.",
+    "Projection subset integrity inherits only bounded parent audit findings: direct source go.sum, transitive pins and captured Go sumdb/tool observations remain different assurance tiers. No external authenticity/secret absence/general task-source exclusion proof is minted.",
+    "Parent plan CC/CXX expected values were unspecified. Prospective coordinator decision4a695081 chooses /usr/bin/gcc and /usr/bin/g++ from retained image chains; it is a future context amendment, not observed defaults or success. A successor plan/environment hash/driver must bind it.",
+    "Explicit env must exclude helper/inherited controls, including unintended TS_GO_DEBUG_STACK_LIMIT; matching source/platform/tags/Go context and any initialization-affecting differences are prerequisites to reusing collection.",
+    "Successful listing cannot establish dynamic nested coverage,380 exclusion acceptance,slash/hierarchy/capability mapping,full wrapper outcome,consumer benefit,or campaign readiness.",
+    "Old OOM/ENOSPC outcomes, global cache false flags, source gold/oracle and prior frozen packets remain unchanged."
+  ],
+  "repository": "github.com/microsoft/TypeScript",
+  "reviewControlCorrection": "Initial inline check and first saved checker incorrectly searched project archive for retained Go-image source spans. Saved initial failure identifies missing cross-provenance paths, not altered upstream bytes. Corrected checker verifies project texts against source archive and3 Go-tool texts against exact frozen image export; initial failure receipts retained.",
+  "reviewedAt": "2026-10-29T09:59:07.549011+00:00",
+  "reviewerContext": "Same development reviewer, aware of prior qualification/cache/setup packets; not fresh blind gold or unfamiliar paid agent exposure.",
+  "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+  "sourceReasoning": [
+    "Verified all37 retained raw source text strings against exact archive bytes, including CRLF.15 display spans use LF and were independently checked at claimed raw-SHA/line locations.",
+    "Common TestMain methods apply a stack limit, defer baseline.Track and call M.Run. baseline tracking is env-gated; content mapper TestMain becomes an IPC service only under explicitly excluded helper env. Watcher init performs capability probes; it is native behavior and cannot be inferred from source listing alone.",
+    "Node lookup in jstest is inside sync.OnceValue closure; Node process launch and JS6 import are helper calls used by actual test bodies. No reviewed init/TestMain path calls that npm-dependent behavior eagerly. Package/global initializer/transitive dependency analysis is not complete.",
+    "Frozen Go tool source M.Run listing branch returns before normal body-running branch, but package init/TestMain remain active. Native top-level Test/Example/Fuzz collection, benchmark diagnostics and zero-test packages must be separated; dynamic nested/capability/fuzz-seed behavior remains unknown.",
+    "Source lock root TypeScript6.0.3 reference is separate from extension alias published TypeScript7.0.2/native package. Full-task npm removal would change prerequisites. Packaging alias role does not itself prove all transitive Hereby load effects are absent.",
+    "go:generate is a source directive, not an automatically executed go-list/test-list command. Source-owned gotestsum compilation belongs to eventual full wrapper, not direct collection."
+  ],
+  "state": "bounded-independent-source-and-projection-review-complete-no-new-blocking-finding",
+  "taskOutcomeObserved": false,
+  "validated": {
+    "allAuthoredAdmissionFlagsRemainFalse": true,
+    "fullParentArchiveMembers": 15246,
+    "fullParentExpandedBytes": 351962210,
+    "goToolSourceRawImageBindings": 3,
+    "parentAndSourceUnchangedAfterChecks": true,
+    "pathByteModeComparison": "Every parent regular member vs original inventory; every derived member vs exact selected parent map; metadata normalization and sorted order checked.",
+    "projectionArtifacts": 9,
+    "projectionExpandedBytes": 278162103,
+    "projectionMembers": 14922,
+    "projectionTarBytes": 292392960,
+    "retainedSourceRawTextHashBindings": 37,
+    "selectedMemberMapSha256": "bf5aefaa56222f9337752edebddd50d2cfc4759ed8954f7f9f74bf3d70765131",
+    "sourceDisplayLineHashSpans": 15,
+    "sourceProposalArtifacts": 12
+  }
+}

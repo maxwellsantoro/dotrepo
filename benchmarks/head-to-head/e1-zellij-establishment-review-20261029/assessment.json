@@ -1,0 +1,468 @@
+{
+  "date": "2026-10-29",
+  "reviewer": "/root/e1_establishment",
+  "reviewerContext": "Original proposal/followup author and existing E1/F05 curator; this is further source adjudication independent of extractor/index outputs, NOT an independent second curator or blind review",
+  "repository": "github.com/zellij-org/zellij",
+  "revision": "1f3df933978e00c246553070310175c392fcfe4f",
+  "taskId": "e1-rust-01-repository-tests",
+  "command": "cargo xtask test",
+  "workingDirectory": ".",
+  "scope": "repository",
+  "taskIdentityAndCommandUnchanged": true,
+  "documentedMaintainerRecipeEstablished": true,
+  "universalPrerequisiteCompletenessEstablished": false,
+  "highConfidencePromotion": false,
+  "consumerAcceptance": false,
+  "consumerBenefitEvidence": false,
+  "assertions": [
+    {
+      "id": "command-root",
+      "status": "established-documented",
+      "assertion": "Maintainer lists cargo xtask test; alias invokes package xtask, dispatcher selects test, and test changes directory to the root derived from the xtask manifest. Repository root is an appropriate invocation directory, not proof arbitrary cwd works.",
+      "support": [
+        {
+          "path": "CONTRIBUTING.md",
+          "startLine": 23,
+          "endLine": 51,
+          "wholeFileSha256": "2c4575e7a3575609fdde406b8c87f3df53802460dbfb03b4253f4330ab37f63a",
+          "passageSha256": "eddd497fcef919407b607bdb3955a0de97cc3ef3f206acbc0afd0c1b3837fb22"
+        },
+        {
+          "path": ".cargo/config.toml",
+          "startLine": 3,
+          "endLine": 7,
+          "wholeFileSha256": "d42813632ce542b468c718473de1a4a6c8f6d302c534717a2f19b7aef10dbc3e",
+          "passageSha256": "86ce554ef3d71274fdd3a848f898517cfabf91e9cbc2fb7c9734896c4ff1071e"
+        },
+        {
+          "path": "xtask/src/main.rs",
+          "startLine": 137,
+          "endLine": 174,
+          "wholeFileSha256": "5e213118f58efae8bd039ff4436dc6fc4e8b4aeaa44472dba764101643b30df3",
+          "passageSha256": "d983c2ed78236a5e4077f4fe78573a0d2e84b41bf906810964e00f45594c9ae7"
+        },
+        {
+          "path": "xtask/src/test.rs",
+          "startLine": 6,
+          "endLine": 23,
+          "wholeFileSha256": "561daa9a37efaf44ba285aa88669fb9228de402696bb25e310340238b021e0cb",
+          "passageSha256": "0b2ed2f4fd1faf3418ff0df726d845c64fe1dc372b023fc430034b297bf34828"
+        }
+      ]
+    },
+    {
+      "id": "maintained-default-scope",
+      "status": "established-source-route",
+      "assertion": "Default means the maintained application-test route, not every Cargo workspace member: the hardcoded19-entry list feeds12plugin package tests together at host triple and7nonplugin iterations with all-features; the last7 include root. build flags do not filter test membership.",
+      "support": [
+        {
+          "path": "xtask/src/main.rs",
+          "startLine": 28,
+          "endLine": 135,
+          "wholeFileSha256": "5e213118f58efae8bd039ff4436dc6fc4e8b4aeaa44472dba764101643b30df3",
+          "passageSha256": "ea1145a17bb29532321aab3a24b5ecb91e0621e57f7b3bf8108ee290d9f63630"
+        },
+        {
+          "path": "xtask/src/test.rs",
+          "startLine": 25,
+          "endLine": 105,
+          "wholeFileSha256": "561daa9a37efaf44ba285aa88669fb9228de402696bb25e310340238b021e0cb",
+          "passageSha256": "d60f992b194defa2eba43eff77bf8c46ca4ed2b4f3f60882a32d193b356a6f16"
+        },
+        {
+          "path": "Cargo.toml",
+          "startLine": 50,
+          "endLine": 73,
+          "wholeFileSha256": "c02efc9801eefadf579135c968cafe27d2d5e12b86ac5e020ec39fe2130829a2",
+          "passageSha256": "d5dc016d1621516c649c502abf00a0e29da59ecde1818bb08360e488097043ee"
+        }
+      ]
+    },
+    {
+      "id": "all21-workspace-members",
+      "status": "contradicted",
+      "assertion": "The statement that this command tests all21 Cargo workspace members is false as an explicit selection claim: xtask and zellij-integration-tests are omitted from the hardcoded list. Dependency compilation would not establish their test coverage.",
+      "support": [
+        {
+          "path": "xtask/src/main.rs",
+          "startLine": 34,
+          "endLine": 135,
+          "wholeFileSha256": "5e213118f58efae8bd039ff4436dc6fc4e8b4aeaa44472dba764101643b30df3",
+          "passageSha256": "4f307753e0b6a3a093ac6cbbf963e610b6c35956731e5e08018c2f22eb283191"
+        },
+        {
+          "path": "Cargo.toml",
+          "startLine": 50,
+          "endLine": 73,
+          "wholeFileSha256": "c02efc9801eefadf579135c968cafe27d2d5e12b86ac5e020ec39fe2130829a2",
+          "passageSha256": "d5dc016d1621516c649c502abf00a0e29da59ecde1818bb08360e488097043ee"
+        }
+      ]
+    },
+    {
+      "id": "default-flags-and-extra-suites",
+      "status": "established-declared-default",
+      "assertion": "The DSL declares optional no-web/no-terminal and repeated test arguments. Unchanged command supplies neither opt-out nor filter. Integration-test and ci e2e are separate commands; their Docker/SSH/macOS zig setup must not be imported into this route without another call edge. Actual external xflags macro parser was not compiled/expanded.",
+      "support": [
+        {
+          "path": "xtask/src/flags.rs",
+          "startLine": 15,
+          "endLine": 25,
+          "wholeFileSha256": "ab0542ae1bad28ee9f56386868e2f1a8eda897c1dc05e0425b8d0933ca3abf78",
+          "passageSha256": "36d953601e58604694adba67c55260f45266bfdd53d8385cbb6b6a761fb01e61"
+        },
+        {
+          "path": "xtask/src/flags.rs",
+          "startLine": 103,
+          "endLine": 121,
+          "wholeFileSha256": "ab0542ae1bad28ee9f56386868e2f1a8eda897c1dc05e0425b8d0933ca3abf78",
+          "passageSha256": "27702a89cb331b369e952c36881732d747c6794341a35591e98582ebc7547ce7"
+        },
+        {
+          "path": "CONTRIBUTING.md",
+          "startLine": 104,
+          "endLine": 125,
+          "wholeFileSha256": "2c4575e7a3575609fdde406b8c87f3df53802460dbfb03b4253f4330ab37f63a",
+          "passageSha256": "e364cfadf0ec3ec54f939f550b2d3cabb1d3ca0813bf339a5b2aaa683c938319"
+        },
+        {
+          "path": "xtask/src/main.rs",
+          "startLine": 143,
+          "endLine": 157,
+          "wholeFileSha256": "5e213118f58efae8bd039ff4436dc6fc4e8b4aeaa44472dba764101643b30df3",
+          "passageSha256": "1ee8799b7c3b994c9dcebdadd8e8694b47cef26a52a5660891c32b5426c65e82"
+        }
+      ]
+    },
+    {
+      "id": "optional-feature-checks",
+      "status": "established-source-route",
+      "assertion": "After successful test iterations the default route additionally checks root without terminal and without web. These are cargo checks with source-derived feature subsets, not claims tests omit terminal/web; an earlier error short-circuits later phases.",
+      "support": [
+        {
+          "path": "xtask/src/test.rs",
+          "startLine": 91,
+          "endLine": 140,
+          "wholeFileSha256": "561daa9a37efaf44ba285aa88669fb9228de402696bb25e310340238b021e0cb",
+          "passageSha256": "8eeeb4103325c5219d22fd5b1e54cd4434f6de6234f923cfa9bf2cb151df2b9e"
+        },
+        {
+          "path": "xtask/src/metadata.rs",
+          "startLine": 16,
+          "endLine": 32,
+          "wholeFileSha256": "861f4974828c70422a0098676cddab2f3446e5c84241297270d8d9766e998154",
+          "passageSha256": "2d023bb572c5b8381f7fc0850d5ce0ed7974ad27d947fa221bd763e30c57ea43"
+        },
+        {
+          "path": "xtask/src/metadata.rs",
+          "startLine": 34,
+          "endLine": 114,
+          "wholeFileSha256": "861f4974828c70422a0098676cddab2f3446e5c84241297270d8d9766e998154",
+          "passageSha256": "5e8cbdea631d656a1c6ecf4fbfeab1b0c8ec24399a7d1edddee9ec6a16d52cbe"
+        }
+      ]
+    },
+    {
+      "id": "plugin-build-state",
+      "status": "conditional-source-route",
+      "assertion": "Plugin debug build is requested before tests but actual wasm building is conditional on release/force/source timestamps versus stamp. ZELLIJ_FORCE_PLUGINS presence forces rebuilding; absence of stamp rebuilds. Do not claim every invocation rebuilds plugins or silently add force to the unchanged command.",
+      "support": [
+        {
+          "path": "xtask/src/test.rs",
+          "startLine": 13,
+          "endLine": 23,
+          "wholeFileSha256": "561daa9a37efaf44ba285aa88669fb9228de402696bb25e310340238b021e0cb",
+          "passageSha256": "5cd4839526c3f51918f38e5ec06a3e5fe6ec5de4c3e6f990ce4ec3f42d62c69a"
+        },
+        {
+          "path": "xtask/src/build.rs",
+          "startLine": 24,
+          "endLine": 62,
+          "wholeFileSha256": "ae5fcc92076183ff7e1fea0555576ea660933721600af3d00ba7e824a46cc378",
+          "passageSha256": "4afa708e0c80a24a5c72d0dddcd8938eb59d6dcad338454c66fc9b0807b358dc"
+        },
+        {
+          "path": "xtask/src/build.rs",
+          "startLine": 109,
+          "endLine": 111,
+          "wholeFileSha256": "ae5fcc92076183ff7e1fea0555576ea660933721600af3d00ba7e824a46cc378",
+          "passageSha256": "d6b8b55714d09da87c5c89205f07c9616a45ebc7120c00eff680a84e3ad23c91"
+        },
+        {
+          "path": "xtask/src/build.rs",
+          "startLine": 227,
+          "endLine": 243,
+          "wholeFileSha256": "ae5fcc92076183ff7e1fea0555576ea660933721600af3d00ba7e824a46cc378",
+          "passageSha256": "e37c7c046c1ce248cf03a3dfbb43c57a727822db193d9f67520d05a7caa50d07"
+        }
+      ]
+    },
+    {
+      "id": "toolchain",
+      "status": "established-declared-config",
+      "assertion": "Development Rust is pinned1.95.0 with rustfmt/clippy components and wasm32-wasip1 plus x86_64-unknown-linux-musl targets. Components/targets are declared environment contract, not proof every component/target is invoked by this test route or installed on a consumer host.",
+      "support": [
+        {
+          "path": "rust-toolchain.toml",
+          "startLine": 1,
+          "endLine": 7,
+          "wholeFileSha256": "733cf0884a5f62e74d4362b290704b572061e71e9f7989096aef165f99de0fdf",
+          "passageSha256": "733cf0884a5f62e74d4362b290704b572061e71e9f7989096aef165f99de0fdf"
+        },
+        {
+          "path": "CONTRIBUTING.md",
+          "startLine": 140,
+          "endLine": 157,
+          "wholeFileSha256": "2c4575e7a3575609fdde406b8c87f3df53802460dbfb03b4253f4330ab37f63a",
+          "passageSha256": "d08c38d886539080c283a1ca2dfe7cd824757d425d3b5fe189b42bcf73d31675"
+        }
+      ]
+    },
+    {
+      "id": "documented-native-prerequisites",
+      "status": "established-documented",
+      "assertion": "Build documentation explicitly requires protoc; test explicitly requires pkg-config and a version of OpenSSL. xtask build may regenerate protobufs. No minimum/version interval, installation command, complete per-platform library/header list or observed compatibility is established.",
+      "support": [
+        {
+          "path": "CONTRIBUTING.md",
+          "startLine": 23,
+          "endLine": 51,
+          "wholeFileSha256": "2c4575e7a3575609fdde406b8c87f3df53802460dbfb03b4253f4330ab37f63a",
+          "passageSha256": "eddd497fcef919407b607bdb3955a0de97cc3ef3f206acbc0afd0c1b3837fb22"
+        },
+        {
+          "path": "xtask/src/build.rs",
+          "startLine": 24,
+          "endLine": 29,
+          "wholeFileSha256": "ae5fcc92076183ff7e1fea0555576ea660933721600af3d00ba7e824a46cc378",
+          "passageSha256": "9efa43791c88e183ac203e4c8207840abf09705af8cb8baa7d987a8923f38c27"
+        },
+        {
+          "path": "xtask/src/build.rs",
+          "startLine": 255,
+          "endLine": 315,
+          "wholeFileSha256": "ae5fcc92076183ff7e1fea0555576ea660933721600af3d00ba7e824a46cc378",
+          "passageSha256": "9008e8dc0551cb17ea647b601773c856a71182f565792f1ffada77b6c4397bdb"
+        }
+      ]
+    },
+    {
+      "id": "target-dir",
+      "status": "established-restriction",
+      "assertion": "Preserve build.target-dir=target and the documented repository target/wasm32-wasip1/debug plugin location; CARGO_TARGET_DIR precedence is explicitly warned to break debug builds. A target-directory symlink is documented as the alternative. Do not assert all target overrides are safe or manufacture an upstream absence proof from selected files.",
+      "support": [
+        {
+          "path": "CONTRIBUTING.md",
+          "startLine": 53,
+          "endLine": 70,
+          "wholeFileSha256": "2c4575e7a3575609fdde406b8c87f3df53802460dbfb03b4253f4330ab37f63a",
+          "passageSha256": "209d8a2f857d446f717cda28d6c1321cd774f2b5ff46c09a945d96581b750d9c"
+        },
+        {
+          "path": ".cargo/config.toml",
+          "startLine": 9,
+          "endLine": 16,
+          "wholeFileSha256": "d42813632ce542b468c718473de1a4a6c8f6d302c534717a2f19b7aef10dbc3e",
+          "passageSha256": "319ad524add38f92ce76f463fd0f748f5d5d34bac4ae033f2b4a66559dc1b16a"
+        },
+        {
+          "path": "xtask/src/main.rs",
+          "startLine": 176,
+          "endLine": 185,
+          "wholeFileSha256": "5e213118f58efae8bd039ff4436dc6fc4e8b4aeaa44472dba764101643b30df3",
+          "passageSha256": "78448e4843e668e275c714067b957cb304c0d088e4bc67e38f713c3875157a76"
+        }
+      ]
+    },
+    {
+      "id": "environment-route",
+      "status": "conditional-source-route",
+      "assertion": "project_root reads CARGO_MANIFEST_DIR before compile-time fallback; cargo() reads CARGO before PATH lookup, while host_target_triple invokes rustc from its command environment. Applicability assumes intended Cargo/Rust toolchain and manifest-root resolution. Consumer override state is unobserved; source-backed condition is not evidence overrides are absent.",
+      "support": [
+        {
+          "path": "xtask/src/main.rs",
+          "startLine": 166,
+          "endLine": 190,
+          "wholeFileSha256": "5e213118f58efae8bd039ff4436dc6fc4e8b4aeaa44472dba764101643b30df3",
+          "passageSha256": "70bace6c3095427f5352f0b350aaf1278e8e93e4ccd4ac057deab77cf785abc6"
+        },
+        {
+          "path": "xtask/src/test.rs",
+          "startLine": 143,
+          "endLine": 168,
+          "wholeFileSha256": "561daa9a37efaf44ba285aa88669fb9228de402696bb25e310340238b021e0cb",
+          "passageSha256": "9a996b9180740beb352bc4be5b5e3e503482cecf913216782c8812e677863487"
+        }
+      ]
+    },
+    {
+      "id": "windows-gnu",
+      "status": "conditional-config",
+      "assertion": "Only target x86_64-pc-windows-gnu names x86_64-w64-mingw32-gcc as linker. Preserve that target condition. It neither requires MinGW for every host/Windows target nor establishes complete Windows setup/test support.",
+      "support": [
+        {
+          "path": ".cargo/config.toml",
+          "startLine": 9,
+          "endLine": 10,
+          "wholeFileSha256": "d42813632ce542b468c718473de1a4a6c8f6d302c534717a2f19b7aef10dbc3e",
+          "passageSha256": "0fc30f27f20cc08c09e3b3107a7b79b0beac992fe66969a744b15900ed5322ab"
+        },
+        {
+          "path": "Cargo.toml",
+          "startLine": 40,
+          "endLine": 41,
+          "wholeFileSha256": "c02efc9801eefadf579135c968cafe27d2d5e12b86ac5e020ec39fe2130829a2",
+          "passageSha256": "8ec1ab0d06e0b06d1579f2a88ef3a29ad87e6ea11806c35ac073d6a7a2ce82a5"
+        }
+      ]
+    },
+    {
+      "id": "complete-native-platform-closure",
+      "status": "unresolved-guarantee-not-applicability-conflict",
+      "assertion": "The documented maintainer applicability/setup contract is supported. This selected set does not guarantee exhaustive native/platform prerequisites or dependency success: root Cargo names uninspected src/build.rs and component manifests/build hooks are outside the set. Those files could add an external tool/library, generated-asset prerequisite or platform restriction; no such additional requirement/conflict was discovered here. Missing bodies limit a universal sufficiency guarantee, not the supported documented task or source gold.",
+      "support": [
+        {
+          "path": "Cargo.toml",
+          "startLine": 1,
+          "endLine": 4,
+          "wholeFileSha256": "c02efc9801eefadf579135c968cafe27d2d5e12b86ac5e020ec39fe2130829a2",
+          "passageSha256": "00fc54617d895455ddcf945a2ced0432c7fdf8fb31b29c2276de4c5d1e6d3434"
+        },
+        {
+          "path": "Cargo.toml",
+          "startLine": 23,
+          "endLine": 48,
+          "wholeFileSha256": "c02efc9801eefadf579135c968cafe27d2d5e12b86ac5e020ec39fe2130829a2",
+          "passageSha256": "3ca6b0028b777d6a48a1c1d1182d37844712244bd41ef5f62dd72343891b14a4"
+        },
+        {
+          "path": "Cargo.toml",
+          "startLine": 84,
+          "endLine": 103,
+          "wholeFileSha256": "c02efc9801eefadf579135c968cafe27d2d5e12b86ac5e020ec39fe2130829a2",
+          "passageSha256": "a6dfc7e96eaa432e490a13ce44cde8682cfc8a96ba9a68aca681530334ab2e18"
+        },
+        {
+          "path": "Cargo.toml",
+          "startLine": 186,
+          "endLine": 194,
+          "wholeFileSha256": "c02efc9801eefadf579135c968cafe27d2d5e12b86ac5e020ec39fe2130829a2",
+          "passageSha256": "17ccd0c6648b8c9ba51f3869652c623eebf168e733d61e061d25c7ce066e19f8"
+        },
+        {
+          "path": "xtask/src/test.rs",
+          "startLine": 59,
+          "endLine": 93,
+          "wholeFileSha256": "561daa9a37efaf44ba285aa88669fb9228de402696bb25e310340238b021e0cb",
+          "passageSha256": "08632cf117d7213d545dfee10badf4f9c6770f75f06f0239726ffeb6d8adee74"
+        }
+      ]
+    }
+  ],
+  "memberComparison": {
+    "maintainedMembers": [
+      "default-plugins/bars",
+      "default-plugins/strider",
+      "default-plugins/fixture-plugin-for-tests",
+      "default-plugins/session-manager",
+      "default-plugins/configuration",
+      "default-plugins/plugin-manager",
+      "default-plugins/about",
+      "default-plugins/multiple-select",
+      "default-plugins/share",
+      "default-plugins/layout-manager",
+      "default-plugins/prompt",
+      "default-plugins/context-menu",
+      "zellij-utils",
+      "zellij-tile-utils",
+      "zellij-tile",
+      "zellij-client",
+      "zellij-server",
+      "zellij-terminal",
+      "."
+    ],
+    "workspaceMembers": [
+      "default-plugins/bars",
+      "default-plugins/strider",
+      "default-plugins/fixture-plugin-for-tests",
+      "default-plugins/session-manager",
+      "default-plugins/configuration",
+      "default-plugins/plugin-manager",
+      "default-plugins/about",
+      "default-plugins/share",
+      "default-plugins/multiple-select",
+      "default-plugins/layout-manager",
+      "default-plugins/prompt",
+      "default-plugins/context-menu",
+      "zellij-client",
+      "zellij-integration-tests",
+      "zellij-server",
+      "zellij-utils",
+      "zellij-tile",
+      "zellij-tile-utils",
+      "zellij-terminal",
+      "xtask",
+      "."
+    ],
+    "maintainedCount": 19,
+    "workspaceCount": 21,
+    "pluginCount": 12,
+    "nonpluginCount": 7,
+    "omitted": [
+      "xtask",
+      "zellij-integration-tests"
+    ]
+  },
+  "missingSourceConditions": [
+    "No additional source condition is demonstrated as necessary to accept the unchanged maintainer-documented applicability contract with explicit environment assumptions. Universal native/platform prerequisite sufficiency remains unproven, not contradicted.",
+    "Root src/build.rs and relevant component manifests/build hooks are concrete uninspected paths that could affect external tool/library/generated-asset prerequisites or platform restrictions if exhaustive sufficiency were claimed. Their absence from selected inputs is not evidence of an actual missing prerequisite. No fetch proposed.",
+    "Selected files do not prove upstream config/build files absent. Consumer tool installation, Cargo/Rust/config/target environment, dependency availability and success are unobserved. Execution is not required for this source-gold judgment."
+  ],
+  "interpretationCounterexamples": [
+    {
+      "assertion": "all21 workspace member tests",
+      "expected": "reject;19explicit entries only"
+    },
+    {
+      "assertion": "bare cargo test is an equivalent request",
+      "expected": "reject;Cargo default-members only root and orchestration differs"
+    },
+    {
+      "assertion": "add --no-web/--no-terminal or filter to make it feasible",
+      "expected": "reject as a changed task"
+    },
+    {
+      "assertion": "Docker/SSH/zig mandatory for this command",
+      "expected": "unsupported;documented for separate e2e route"
+    },
+    {
+      "assertion": "MinGW required on every host",
+      "expected": "reject;GNU Windows target condition only"
+    },
+    {
+      "assertion": "every invocation always rebuilds all plugins",
+      "expected": "reject;stamp/timestamp/force condition"
+    },
+    {
+      "assertion": "no dependencies from xtask sentence means no protoc/pkg-config/OpenSSL",
+      "expected": "reject;subsequent explicit requirements govern"
+    },
+    {
+      "assertion": "retained hashes prove source completeness or tools installed",
+      "expected": "reject;integrity and environment/completeness distinct"
+    }
+  ],
+  "actions": {
+    "network": 0,
+    "daemon": 0,
+    "packages": 0,
+    "upstreamNativeTasks": 0,
+    "providersModels": 0,
+    "Cargo": 0,
+    "productionOrIndexWrites": 0
+  },
+  "scopeInterpretation": "maintainer-documented19-entry default application-test route, not all21 workspace members",
+  "documentedApplicabilityEstablished": true,
+  "documentedPrerequisiteContractEstablished": true,
+  "noConcreteSourceConflictWithDocumentedApplicability": true
+}

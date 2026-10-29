@@ -1,0 +1,38 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-sync",
+        "ruff",
+        "check",
+        "--no-cache",
+        "benchmarks/head-to-head/f05-go01-next-qualification-review-20261029/verify.py"
+      ],
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "All checks passed!\n"
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-sync",
+        "ruff",
+        "format",
+        "--check",
+        "--no-cache",
+        "benchmarks/head-to-head/f05-go01-next-qualification-review-20261029/verify.py"
+      ],
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "1 file already formatted\n"
+    }
+  ],
+  "jsonFilesParse": true,
+  "originalInputsUnchanged": "Rechecked by final verifier both before and after streamed archive scans",
+  "state": "passed"
+}

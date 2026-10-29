@@ -1,0 +1,33 @@
+{
+  "state": "coordinator-accepted-go01-no-npm-go-projection-collection",
+  "synthetic": false,
+  "driverSubject": {
+    "driverPlanSha256": "847c5e161f75f7d141f5dd59bc0df670d7261f1fad687184cafa4c1a64407000",
+    "authorFreezeSha256": "bca1522ad5b9d29a52cce68ce2d8b1d14a176511286f97761662337f17a3ecd7",
+    "packetIdentity": "go01-collection-driver-amendment-3"
+  },
+  "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "environmentSha256": "3649e45b9b1c1f62faeb2c3a168d93d91a7be7a62e7e2905c07d9ba69ddb65fe",
+  "projectionSha256": "76ea2bfa6725335b889d44fed07f40f6eeb804d124d683ad4f2c0a6a2607bcfd",
+  "projectionSpecSha256": "d6eac9285a5cb14967352d978fe7983fbb54498c1382ededbfa8d0c8b1dfeda0",
+  "initAndTestMainExecutionAccepted": true,
+  "noNpmProvisioning": true,
+  "nativeTaskAdmitted": false,
+  "campaignAdmitted": false,
+  "cacheGloballyQualified": false,
+  "sourceScopeReviewFreeze": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-next-qualification-review-20261029/FREEZE.json",
+    "sha256": "46211cce106432c48f87f5d47882810d39e32d81742aee8ed7f66038ca88915c"
+  },
+  "projectionReviewFreeze": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-next-qualification-review-20261029/FREEZE.json",
+    "sha256": "46211cce106432c48f87f5d47882810d39e32d81742aee8ed7f66038ca88915c"
+  },
+  "driverReviewFreeze": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-collection-driver-review-20261029/amendment-3/passed-review.json",
+    "sha256": "4a84a6ed17d489a8904bc2aa0f369b1a36d8b1cf461690662b672489cb342864"
+  },
+  "decision": "One collection-only attempt; reviewed source init/TestMain roles, Go-only byte projection and exact amended driver accepted. Source observations retain declared limits. No task-body execution or task/campaign/global cache admission.",
+  "prospectiveAmendment": "Source-established valid test-only package admission through existing validated four-list union. No omissions or task/resource/environment change. Earlier stopped attempt remains incomplete. New reviewed plan and run identity."
+}

@@ -1,0 +1,31 @@
+{
+  "state": "passed-local-source-only-review-checks",
+  "verifyExitCode": 0,
+  "sourceFilesChecked": 9,
+  "passagesChecked": 37,
+  "oldPacketManifestsUnchanged": true,
+  "originalGoldAndResultHashesUnchanged": true,
+  "memberComparison": {
+    "maintained": 19,
+    "workspace": 21,
+    "plugins": 12,
+    "nonplugins": 7,
+    "omitted": [
+      "xtask",
+      "zellij-integration-tests"
+    ]
+  },
+  "ruffCheckExitCode": 0,
+  "ruffFormatCheckExitCode": 0,
+  "developmentCheckCorrections": [
+    "Initial verifier lint E731 replaced assigned lambda with function; subsequent format-check adjustment applied before final passing checks."
+  ],
+  "actions": {
+    "network": 0,
+    "daemon": 0,
+    "nativeUpstream": 0,
+    "packages": 0,
+    "Cargo": 0,
+    "providersModels": 0
+  }
+}

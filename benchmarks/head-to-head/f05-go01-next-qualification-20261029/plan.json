@@ -1,0 +1,103 @@
+{
+  "cacheInput": "Proposed new Go-only regular-byte projection, with exact declaration in go-cache-projection-proposal.json. Full original cache must not be provisioned, because uninstalled npm payloads would still be readable. Derived archive/hash/admission not yet present.",
+  "collectionCwd": "/workspace/repository/tsc",
+  "commandsInOrder": [
+    {
+      "command": "go env -json GOOS GOARCH GOVERSION GOTOOLCHAIN GOENV GOWORK GOFLAGS CGO_ENABLED CC CXX",
+      "gate": "Exact Linux/arm64/Go1.27.3/local/off/source-go.work/-p1-count1/CGO1 must match preregistered context before further commands; no adjustment from mismatched output.",
+      "output": "go-environment.json"
+    },
+    {
+      "command": "go list -json ./...",
+      "gate": "Exit0/no error/full untruncated module-prefix package inventory including zero-test packages; actual build-selected files/imports retained.",
+      "output": "packages.jsonstream"
+    },
+    {
+      "command": "go test -json -list . ./...",
+      "gate": "Exit0/no error/full listing for every intended package. Compile/init/TestMain are native preparation, not test-body execution or task completion.",
+      "output": "collection-events.jsonl"
+    }
+  ],
+  "currentQualification": {
+    "cacheGloballyQualified": false,
+    "campaignAdmitted": false,
+    "modelCalls": 0,
+    "nativeCollectionOccurred": false,
+    "taskOutcomeObserved": false,
+    "wholeWrapperQualified": false
+  },
+  "environment": {
+    "CGO_ENABLED": "1",
+    "GOCACHE": "/workspace/go-build",
+    "GODEBUG": "tracebackancestors=10",
+    "GOENV": "off",
+    "GOFLAGS": "-p=1 -count=1",
+    "GOGC": "50",
+    "GOMAXPROCS": "3",
+    "GOPATH": "/workspace/dependency-cache/go",
+    "GOPROXY": "off",
+    "GOSUMDB": "off",
+    "GOTOOLCHAIN": "local",
+    "GOWORK": "/workspace/repository/go.work",
+    "HOME": "/workspace/home",
+    "LANG": "C.UTF-8",
+    "TMPDIR": "/workspace/tmp"
+  },
+  "environmentSha256": "14b4d04cb6655c081cdb7c1bb74388e22d754230d86e2269e99e8d69dbf95ed3",
+  "executionAuthorized": false,
+  "explicitlyAbsentEnvironment": [
+    "CI",
+    "TF_BUILD",
+    "RACE",
+    "NOEMBED",
+    "COVERAGE",
+    "CONCURRENT_TEST_PROGRAMS",
+    "FORCE",
+    "TSGO_CONTENT_MAPPER_HELPER",
+    "TSGO_BASELINE_TRACKING_DIR",
+    "TS_TEST_PROGRAM_SINGLE_THREADED",
+    "TSGO_HEREBY_TESTS",
+    "TSGO_HEREBY_NOEMBED",
+    "TSGO_HEREBY_RACE"
+  ],
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "limits": {
+    "cleanupSeconds": 60,
+    "combinedStdoutStderrPerCommandBytes": 2097152,
+    "cpus": 3,
+    "dependencyTmpfsBytes": 1073741824,
+    "memoryBytes": 4294967296,
+    "memorySwapBytes": 4294967296,
+    "pids": 256,
+    "sourcePlusSeedExpandedBytes": 2147483648,
+    "tmpTmpfsBytes": 536870912,
+    "transportBytesPerArchive": 536870912,
+    "workSecondsIncludingPreflight": 900,
+    "workspaceTmpfsBytes": 8589934592
+  },
+  "manifestProductionRules": [
+    "Build actual package-to-top-level Test/Example/Fuzz identities from retained native outputs, with unique full package names; retain benchmark names separately as diagnostics.",
+    "Do not infer package/case counts from lexical source scan; keep zero-test packages and errors.",
+    "No test bodies or subtests are listed; no native nested/fuzz-seed/capability identities invented.",
+    "Freeze collection receipt/raw events/package inventory hashes and timestamps before later task execution. Existing logical target-command binding is distinct from actual collection commands.",
+    "Before reuse, freeze matching source/platform/tags/Go environment and independently decide any target input differences; changes affecting selection/initialization require new collection epoch."
+  ],
+  "repository": "github.com/microsoft/TypeScript",
+  "requiredBeforeAuthorization": [
+    "Independent acceptance of collection-only no-npm boundary and exact Go projection/derived archive hash; no global cache admission.",
+    "Complete source/image/archive/seed/script/protected-gold/oracle hash freeze and unique one-attempt authorization, bounded driver and synthetic/isolation review.",
+    "Accept exact Go environment, including explicit CGO1 matching native toolchain default/target; current proposal has no observed go env receipt.",
+    "Independent review of source-role and init/TestMain evidence; an eager npm requirement may block no-npm variant. Missing evidence is retained, not silently seeded/repaired."
+  ],
+  "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+  "sandbox": "Same reviewed private/default namespace, nonroot1000, readonlyroot, dropALL/no added caps/exact no-new-privileges, no host mounts/socket/credentials, networknone fromcreation. All compilation/source init only inside fresh sandbox.",
+  "smallestRemainingNativePrerequisite": "A successful source-compiled package/top-level Test/Example/Fuzz listing frozen before any task execution. No npm setup or gotestsum tool is required by these direct Go collection commands. Package init/TestMain still run; independent source review of no eager npm requirement remains mandatory.",
+  "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+  "state": "source-only-collection-proposal-unaccepted",
+  "stopRules": [
+    "One proposed attempt only; any timeout/OOM/compilation/init/setup error, missing package, output cap/truncation or source mutation remains incomplete.",
+    "No retries, task replacement, package/-run filters, new exclusions, network fallback, source generation or resource increase.",
+    "No task compiler or test helper may be credited from a prebuilt published binary; no build/test artifacts exported as campaign dependencies."
+  ],
+  "targetTaskCommand": "GOTESTSUM_JSONFILE=/workspace/go-test-events.jsonl GOFLAGS=\"-p=1 -count=1\" npx hereby test"
+}

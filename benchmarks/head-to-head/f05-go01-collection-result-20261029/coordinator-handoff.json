@@ -1,0 +1,20 @@
+{
+  "kind": "coordinator-message-transcription-not-original-process-receipt",
+  "date": "2026-10-29",
+  "outerInvocations": [
+    {
+      "attempt": 1,
+      "exitCode": 1,
+      "session": "immediate exit; no retained session identity supplied"
+    },
+    {
+      "attempt": 2,
+      "exitCode": 1,
+      "session": 47261
+    }
+  ],
+  "independentAbsenceReceiptExists": false,
+  "rootMessage": "No separate independent daemon-absence receipt exists. Cleanup absence is same-attempt driver evidence only. Both shell invocations completed exit 1. No fresh daemon calls requested.",
+  "originalOuterArgvReceiptAvailable": false,
+  "additionalActionsByPackager": "Local byte copies/hash/source-only verifier; no daemon/native/network/model actions."
+}

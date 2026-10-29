@@ -1,0 +1,87 @@
+{
+  "state": "prospective-collection-context-selected-no-execution-authorization",
+  "parentPlanSha256": "5eff74e73198becf50a55d3145f704a9eff29e4f6107d95826a54aa58d486f69",
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "sourceAuditFreeze": {
+    "path": "benchmarks/head-to-head/f05-common-image-audit-20261029/freeze.json",
+    "sha256": "da4564e3b72bf7dba9cb469d51b9b1e88664ba7c9fa4bbd2b1d35bfb256e509c"
+  },
+  "sourceInventory": {
+    "path": "benchmarks/head-to-head/f05-common-image-audit-20261029/inventory.json",
+    "sha256": "f096a4b8a2346c0332082e2b88b093cc4fb78b2cbaed0b5b5af05d071695f647"
+  },
+  "prospectiveEnvironmentOverrides": {
+    "CC": "/usr/bin/gcc",
+    "CXX": "/usr/bin/g++"
+  },
+  "expectedGoEnv": {
+    "CC": "/usr/bin/gcc",
+    "CXX": "/usr/bin/g++"
+  },
+  "retainedImageSymlinkAndRegularFileChains": {
+    "/usr/bin/gcc": [
+      {
+        "path": "usr/bin/gcc",
+        "gid": 0,
+        "linkTarget": "gcc-12",
+        "mode": "0o777",
+        "size": 0,
+        "type": "2",
+        "uid": 0
+      },
+      {
+        "path": "usr/bin/gcc-12",
+        "gid": 0,
+        "linkTarget": "aarch64-linux-gnu-gcc-12",
+        "mode": "0o777",
+        "size": 0,
+        "type": "2",
+        "uid": 0
+      },
+      {
+        "path": "usr/bin/aarch64-linux-gnu-gcc-12",
+        "gid": 0,
+        "mode": "0o755",
+        "sha256": "dc53dbc5a583d03ae8ed6272ca9afc0f58873f9f9b86dd7d448b17fb3f88a8d0",
+        "size": 1319624,
+        "type": "0",
+        "uid": 0
+      }
+    ],
+    "/usr/bin/g++": [
+      {
+        "path": "usr/bin/g++",
+        "gid": 0,
+        "linkTarget": "g++-12",
+        "mode": "0o777",
+        "size": 0,
+        "type": "2",
+        "uid": 0
+      },
+      {
+        "path": "usr/bin/g++-12",
+        "gid": 0,
+        "linkTarget": "aarch64-linux-gnu-g++-12",
+        "mode": "0o777",
+        "size": 0,
+        "type": "2",
+        "uid": 0
+      },
+      {
+        "path": "usr/bin/aarch64-linux-gnu-g++-12",
+        "gid": 0,
+        "mode": "0o755",
+        "sha256": "22084e38d464db4299003c899eae3f1cb563ed6a75b3179e3e2a2d593d640528",
+        "size": 1319624,
+        "type": "0",
+        "uid": 0
+      }
+    ]
+  },
+  "rationale": "Select explicit contained GNU tool paths from the already audited frozen image. Parent proposal left expected CC/CXX unspecified. This is a prospective context amendment, not an observation of Go defaults or successful tool execution. All other environment/resource/input/command bounds remain parent proposal; successor environment hash and context epoch must be frozen before collection, and later qualification must use a matching declared context.",
+  "nativeCollectionOccurred": false,
+  "taskOutcomeObserved": false,
+  "campaignAdmitted": false,
+  "cacheGloballyQualified": false,
+  "executionAuthorized": false
+}

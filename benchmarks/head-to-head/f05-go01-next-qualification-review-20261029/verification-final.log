@@ -1,0 +1,45 @@
+{
+  "state": "passed-independent-source-and-projection-byte-check",
+  "execution": "Local stdlib reads/hashes only; no source extraction/execution or daemon/network calls",
+  "proposalArtifacts": 12,
+  "projectionArtifacts": 9,
+  "sourceChecks": {
+    "exactRawTextAndShaMembers": 37,
+    "lineAndHashBoundDisplaySpans": 15,
+    "exactGoToolSourcesFromFrozenImageExport": 3,
+    "spanDisplayNewlines": "LF; checked against raw source splitlines, not a claim of raw excerpt bytes"
+  },
+  "parentArchive": {
+    "files": 15246,
+    "expandedBytes": 351962210,
+    "allRegularMemberPathsBytesModesEqual": true,
+    "normalizedMetadataAndOrder": false
+  },
+  "derivedArchive": {
+    "files": 14922,
+    "expandedBytes": 278162103,
+    "allRegularMemberPathsBytesModesEqual": true,
+    "normalizedMetadataAndOrder": true
+  },
+  "selectedMemberMapSha256": "bf5aefaa56222f9337752edebddd50d2cfc4759ed8954f7f9f74bf3d70765131",
+  "ordinaryGoPackageJsAssets": [
+    "go/pkg/mod/github.com/google/pprof@v0.0.0-20251213031049-b05bdaca462f/internal/driver/html/common.js",
+    "go/pkg/mod/github.com/google/pprof@v0.0.0-20251213031049-b05bdaca462f/internal/driver/html/stacks.js",
+    "go/pkg/mod/github.com/google/pprof@v0.0.0-20251213031049-b05bdaca462f/third_party/svgpan/svgpan.js",
+    "go/pkg/mod/golang.org/x/telemetry@v0.0.0-20260908163034-4bcc4b2ee518/internal/content/gotelemetryview/static/index.min.js",
+    "go/pkg/mod/golang.org/x/telemetry@v0.0.0-20260908163034-4bcc4b2ee518/internal/content/gotelemetryview/static/storage.min.js",
+    "go/pkg/mod/golang.org/x/telemetry@v0.0.0-20260908163034-4bcc4b2ee518/internal/content/shared/static/base.min.js",
+    "go/pkg/mod/golang.org/x/telemetry@v0.0.0-20260908163034-4bcc4b2ee518/internal/content/shared/static/treenav.min.js",
+    "go/pkg/mod/golang.org/x/telemetry@v0.0.0-20260908163034-4bcc4b2ee518/internal/content/telemetrygodev/static/charts.min.js",
+    "go/pkg/mod/golang.org/x/telemetry@v0.0.0-20260908163034-4bcc4b2ee518/package.json",
+    "go/pkg/mod/golang.org/x/tools@v0.50.0/cmd/present/static/dir.js",
+    "go/pkg/mod/golang.org/x/tools@v0.50.0/cmd/present/static/jquery-ui.js",
+    "go/pkg/mod/golang.org/x/tools@v0.50.0/cmd/present/static/jquery.js",
+    "go/pkg/mod/golang.org/x/tools@v0.50.0/cmd/present/static/notes.js",
+    "go/pkg/mod/golang.org/x/tools@v0.50.0/cmd/present/static/play.js",
+    "go/pkg/mod/golang.org/x/tools@v0.50.0/cmd/present/static/playground.js",
+    "go/pkg/mod/golang.org/x/tools@v0.50.0/cmd/present/static/slides.js"
+  ],
+  "selectionInterpretation": "All and only go/pkg/mod/ regular members; no npm subtree/build-cache root. Ordinary Go-package JS/package.json assets retained; no universal no-JavaScript claim.",
+  "elapsedSeconds": 5.588062583003193
+}

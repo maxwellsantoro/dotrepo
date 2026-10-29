@@ -1,0 +1,15 @@
+{
+  "canonicalEncoding": "JSON selected members object, sort_keys=true,separators=(comma,colon),trailing newline",
+  "expandedBytes": 278162103,
+  "materialized": false,
+  "meaning": "Explicit proposed collection-only seed projection, not pruning/replacing original cache or changing full-task npm setup. Requires independent source/cache-scope acceptance before materialization.",
+  "nativeTaskOrCampaignAdmitted": false,
+  "originalCacheModified": false,
+  "parentCacheArchiveSha256": "583fad501fa7b1a1a6d85ab8fe4b890786e39c1e016f785d6d3fb9d060383284",
+  "parentInventoryPath": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-dependency-download-result-20261029/evidence/inventory.json",
+  "parentInventorySha256": "900550d8e44827f96a9e7db46f3b4551db734938564c8921473fe56a6257415c",
+  "selectedFiles": 14922,
+  "selectedMembersCanonicalSha256": "bf5aefaa56222f9337752edebddd50d2cfc4759ed8954f7f9f74bf3d70765131",
+  "selection": "Every regular member whose exact path starts go/pkg/mod/; preserve path, bytes, mode. No npm root is provisioned for the proposed collection-only scope.",
+  "state": "proposal-only-not-materialized"
+}

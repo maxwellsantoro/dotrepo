@@ -1,0 +1,59 @@
+{
+  "state": "source-only-reused-boundary-provenance",
+  "reusedIsolationSource": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-offline-setup-plan-20261029/amendment-1/setup.py",
+    "sha256": "06e3eb82f695812f96816c820f61fef1cceb242c636de5980284824948604de0",
+    "authorFreezeSha256": "eff3d9798e00f55009fe1ae754b04a20ee9bd1d75f1ed5264c99d797df54e032",
+    "independentReviewFreezeSha256": "dcb92ced1ba3cb55259a37992a1cd2fcff0d489abe9299685a566f8e99b6c74e",
+    "reuse": "Pinned import of exact inspect/create flags and bounded safe-source/archive helpers; no edits to old files"
+  },
+  "copiedRunBoundary": "Source-copy of reviewed lifecycle: attempt precedes verification, fresh output/scratch, image/create/inspect, stdin provisioning/checks, deadline, forced cleanup+inspect/list, trace/result; npm-specific phases replaced with only declaredGo collection and builtin data observers. New semantic/output handling needs independent review.",
+  "transport": {
+    "source": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-dependency-preparation-20261029/process_io.py",
+    "sourceSha256": "54fafcbeefb9c7516f65e4a1eae2959dd2934c9359b316ef2e0cf79fe0207ede",
+    "copySha256": "2b312dad157e536a21733ed05c54b9715b3e6d2d60e50e62249c96da13dd2b6b",
+    "changes": [
+      "Catch BaseException so client cancellation kills/retains receipt",
+      "Explicit cancelled receipt boolean",
+      "Formatting only otherwise; raw2MiB/deadline/stdin boundaries preserved"
+    ],
+    "validation": "2entirely fake client controls; no actual Docker client/native process executed"
+  },
+  "prospectiveCompilerDecision": {
+    "sha256": "4a69508169da7432b0cac04cb1717d91d388ff755f47bf8f8f925e3516242e91",
+    "selected": {
+      "CC": "/usr/bin/gcc",
+      "CXX": "/usr/bin/g++"
+    },
+    "observedGoDefaults": false
+  },
+  "projectionAndScope": {
+    "sourceProjectionReviewFreezeSha256": "46211cce106432c48f87f5d47882810d39e32d81742aee8ed7f66038ca88915c",
+    "projectionFreezeSha256": "424d9381ba042a60ba562cae5236279225d27c984a17636a8fa7e8d1d7e256ad",
+    "projectionArchiveSha256": "76ea2bfa6725335b889d44fed07f40f6eeb804d124d683ad4f2c0a6a2607bcfd",
+    "role": "Explicit collection-only Go modules; ordinary JS assets may remain; no npm tree, task/globalcache admission or artifact export"
+  },
+  "requiredPackageObservationProvenance": {
+    "module": "github.com/microsoft/TypeScript/tsc",
+    "sources": [
+      "tsc/internal/parser/parser_test.go",
+      "tsc/internal/lsp/replay_test.go",
+      "tsc/internal/jsnum/string_test.go",
+      "tsc/internal/fswatch/fanotify_linux_test.go",
+      "tsc/internal/fourslash/tests/autoImportPackageRootPathTypeModule_test.go"
+    ],
+    "meaning": "Source-exposed lower-bound expected package observations only; actual package/case inventory comes from native commands, not lexical total counts. Source/fullarchive and scope review bound; no package filters introduced."
+  },
+  "realOwnedToolingValidation": {
+    "observerControls": 6,
+    "nodeVersionProbes": 1,
+    "role": "Coordinator-authorized builtin fs/path/crypto on temporary synthetic trees only",
+    "upstreamNativeGoOrTask": false
+  },
+  "remainingGates": [
+    "Independent driver review",
+    "Real collection-only acceptance and fresh one-attempt root authorization",
+    "Actual environment/source/cache/isolation/native collection outcomes unobserved",
+    "Future task/wrapper/skip/campaign gates remain separate"
+  ]
+}

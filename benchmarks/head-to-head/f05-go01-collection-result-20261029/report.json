@@ -1,0 +1,101 @@
+{
+  "identity": "go01-collection-result-20261029",
+  "state": "incomplete-at-go-environment-preflight",
+  "synthetic": false,
+  "repository": "github.com/microsoft/TypeScript",
+  "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+  "driverPlanSha256": "235244044e794fe26ba7f241b2abdaf37387546cae93a60cb956e2059fe07cbd",
+  "driverAuthorFreezeSha256": "0bdbd19da1a1607bb4a104156c008a05b934736556465d632364e634daeaa8e3",
+  "driverPassedReviewSha256": "34d26aeffa12a24eaddbbcbc304f1a92b28eb1feaab4a983941f4555543bd0dd",
+  "driverReviewFreezeSha256": "7ad27fa44da993c1619abef1881355e7f94eade3c12e5783e8b8d21bb119e032",
+  "attempts": [
+    {
+      "identity": "attempt-1",
+      "stage": "authorization",
+      "reason": "Coordinator used /tmp output/scratch strings rather than the canonical /private/tmp identities expected by driver. Rejected before daemon.",
+      "daemonCalls": 0,
+      "containerCreated": false,
+      "elapsedSeconds": 0.03448283299803734,
+      "rawDirectory": "attempt-1",
+      "outerExitCodeFromCoordinator": 1
+    },
+    {
+      "identity": "attempt-2",
+      "stage": "go-env",
+      "reason": "Frozen expected Go JSON GOENV value off did not equal observed empty string. Container inspection still carried GOENV=off. No semantics repair or retry performed.",
+      "freshAuthorization": "authorization/path-amendment-1/authorization.json",
+      "daemonCalls": 15,
+      "containerCreated": true,
+      "elapsedSeconds": 16.5568172079511,
+      "goEnvExitCode": 0,
+      "goEnvElapsedSeconds": 0.05801566690206528,
+      "goEnvStderrBytes": 0,
+      "rawDirectory": "attempt-2",
+      "outerExitCodeFromCoordinator": 1
+    }
+  ],
+  "collectionCommandsExecuted": [
+    "go env -json GOOS GOARCH GOVERSION GOTOOLCHAIN GOENV GOWORK GOFLAGS CGO_ENABLED CC CXX"
+  ],
+  "collectionCommandsNotExecuted": [
+    "go list -json ./...",
+    "go test -json -list . ./..."
+  ],
+  "nativeGoEnvironmentObserved": true,
+  "nativeCollectionAttempted": false,
+  "nativeCollectionOccurred": false,
+  "packageInventoryObserved": false,
+  "testListObserved": false,
+  "upstreamTestOrInitExecutionObserved": false,
+  "taskOutcomeObserved": false,
+  "nativeTaskAdmitted": false,
+  "campaignAdmitted": false,
+  "cacheGloballyQualified": false,
+  "preservation": {
+    "originalFilesCopied": 82,
+    "originalBytesCopied": 221300,
+    "ledger": "origin-ledger.json",
+    "noSourceCacheBuildExports": true,
+    "originalOuterArgvReceiptAvailable": false,
+    "outerExitInformation": "coordinator-handoff.json; coordinator message transcription, not independent process receipt"
+  },
+  "effort": {
+    "sumDriverElapsedSeconds": 16.591300040949136,
+    "daemonCalls": 15,
+    "stdinBytes": 585257959,
+    "rawOutputBytes": 11171,
+    "modelCallsLaunchedByDriver": 0,
+    "costUsd": null,
+    "excludedUnknownCosts": [
+      "No dollar receipt for host/container preparation or root coordination.",
+      "No measurement of total curator/reviewer/model effort; this is no consumer-cost comparison."
+    ]
+  },
+  "integrityAndIsolation": {
+    "initialToolHashesMatched": true,
+    "initialSourceChecksumManifestMatchedFixedArchive": true,
+    "initialCacheChecksumManifestMatchedFixedInventory": true,
+    "completeSourceTreeBeforeMatchedFixedArchive": true,
+    "initialInspectMatchedFrozenNoneNetworkAndResourcePolicy": true,
+    "sourceAndToolAfterChecksObserved": false,
+    "afterIntegrity": "Unresolved: early preflight stop skipped after checks; do not claim entire-run immutability."
+  },
+  "cleanup": {
+    "forceRemovalExitCode": 0,
+    "sameAttemptInspectAbsence": true,
+    "sameAttemptResponsiveNameListEmpty": true,
+    "containerAbsentReported": true,
+    "independentAbsenceObservation": false,
+    "noNewCleanupOrDaemonActionByPackager": true
+  },
+  "verifier": "verify.py --input-archives performs only local reads, raw hashes, JSON/policy checks and tar data hashing; no imports or invocation of retained drivers or upstream code.",
+  "limits": [
+    "Known exposed development workload; not holdout qualification.",
+    "This is environment preflight evidence, not package discovery, test collection, task completion, agent adoption or causal benefit.",
+    "GOENV discrepancy remains unresolved in this packet.",
+    "Collection-only acceptance is scoped to this plan and input role; all historical and global admission flags stay false.",
+    "No independent cleanup absence receipt exists.",
+    "Raw outer stdout log preserved; complete outer invocation argv/receipt was not supplied."
+  ],
+  "authorDisclosure": "This packet author previously authored this collection driver and source curation; result packaging/static verification is not independent result review."
+}

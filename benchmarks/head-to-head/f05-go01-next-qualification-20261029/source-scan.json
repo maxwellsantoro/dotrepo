@@ -1,0 +1,424 @@
+{
+  "executionOccurred": false,
+  "goFilesRead": 5171,
+  "nativeCollectionOccurred": false,
+  "omitted": [
+    {
+      "bytes": 4029319,
+      "path": "tsc/internal/fourslash/tests/codeFixClassImplementInterfaceNoTruncation_test.go"
+    }
+  ],
+  "rows": [
+    {
+      "embeds": [],
+      "importsOsExec": false,
+      "initOrTestMain": [
+        {
+          "line": 7,
+          "text": "func init() {"
+        }
+      ],
+      "path": "tsc/cmd/tsc/enablevtprocessing_windows.go",
+      "sha256": "ee8252e2e3f956af26fcd3e3ebb6ec714d2ff136ad17a112c269dd49a838bec0"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": true,
+      "initOrTestMain": [],
+      "path": "tsc/cmd/tsc/lsp.go",
+      "sha256": "3dc7774210e7a8ad09adc49f60ce14e85e82a11d2774fe041652a8fc02b5697d"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": true,
+      "initOrTestMain": [],
+      "path": "tsc/cmd/tsc/sys.go",
+      "sha256": "41e7c4d7905a465314f4a541a902de5b84bcfae86dfc24c877f26fcff08caa0b"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": true,
+      "initOrTestMain": [],
+      "path": "tsc/cmd/tsc/sys_unix_test.go",
+      "sha256": "0997a6f1083254726e9790b2c7cb336feb80b65cb0ec7e0df71d1a0519e5fb69"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": false,
+      "initOrTestMain": [
+        {
+          "line": 16,
+          "text": "func init() {"
+        }
+      ],
+      "path": "tsc/internal/api/encoder/encoder.go",
+      "sha256": "3b7f8a53b19c25737588bb227da22b3aa4d5401c3cc608fd51e03d01abe82ee3"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": false,
+      "initOrTestMain": [
+        {
+          "line": 10,
+          "text": "func TestMain(m *testing.M) {"
+        }
+      ],
+      "path": "tsc/internal/api/encoder/testmain_test.go",
+      "sha256": "5bf5df48064d9b6714bc7a486b35f934c590fe4379a99a80fe35684ae4320c27"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": false,
+      "initOrTestMain": [
+        {
+          "line": 10,
+          "text": "func TestMain(m *testing.M) {"
+        }
+      ],
+      "path": "tsc/internal/astnav/testmain_test.go",
+      "sha256": "557cee1b3fe7e324f03bb600103f4c5deea85f678f9f8fce7bfa6ea24224dcb7"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": true,
+      "initOrTestMain": [],
+      "path": "tsc/internal/diagnostics/diagnostics_test.go",
+      "sha256": "e33fec5905592e95ee901d589cd23c92dbfb3466e2ecbbc73a95b04fe0d88d02"
+    },
+    {
+      "embeds": [
+        {
+          "line": 62,
+          "text": "//go:embed loc/zh-CN.json.gz"
+        },
+        {
+          "line": 69,
+          "text": "//go:embed loc/zh-TW.json.gz"
+        },
+        {
+          "line": 76,
+          "text": "//go:embed loc/cs-CZ.json.gz"
+        },
+        {
+          "line": 83,
+          "text": "//go:embed loc/de-DE.json.gz"
+        },
+        {
+          "line": 90,
+          "text": "//go:embed loc/es-ES.json.gz"
+        },
+        {
+          "line": 97,
+          "text": "//go:embed loc/fr-FR.json.gz"
+        },
+        {
+          "line": 104,
+          "text": "//go:embed loc/it-IT.json.gz"
+        },
+        {
+          "line": 111,
+          "text": "//go:embed loc/ja-JP.json.gz"
+        },
+        {
+          "line": 118,
+          "text": "//go:embed loc/ko-KR.json.gz"
+        },
+        {
+          "line": 125,
+          "text": "//go:embed loc/pl-PL.json.gz"
+        },
+        {
+          "line": 132,
+          "text": "//go:embed loc/pt-BR.json.gz"
+        },
+        {
+          "line": 139,
+          "text": "//go:embed loc/ru-RU.json.gz"
+        },
+        {
+          "line": 146,
+          "text": "//go:embed loc/tr-TR.json.gz"
+        }
+      ],
+      "importsOsExec": false,
+      "initOrTestMain": [],
+      "path": "tsc/internal/diagnostics/loc_generated.go",
+      "sha256": "330fa076a7589381a8151b25db3157daac51d0174e2903a8f4e6b5ce33f8e7c9"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": false,
+      "initOrTestMain": [
+        {
+          "line": 10,
+          "text": "func TestMain(m *testing.M) {"
+        }
+      ],
+      "path": "tsc/internal/execute/tsctests/testmain_test.go",
+      "sha256": "694444dc408d736fc316a6a182b44b1c2b37c51582e6dd6088d7e72f12c78800"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": false,
+      "initOrTestMain": [
+        {
+          "line": 10,
+          "text": "func TestMain(m *testing.M) {"
+        }
+      ],
+      "path": "tsc/internal/fourslash/tests/testmain_test.go",
+      "sha256": "f766968d58a47ea2ea7338d5024b0e4e71ee0fa6c262ed4d94284fe45dbff258"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": false,
+      "initOrTestMain": [
+        {
+          "line": 182,
+          "text": "func init() {"
+        }
+      ],
+      "path": "tsc/internal/fswatch/fanotify_linux.go",
+      "sha256": "d18a8d35e63ccc0d4dd2929c1e02bde7c6178619542f29d2a4e7701d76a1e568"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": false,
+      "initOrTestMain": [
+        {
+          "line": 23,
+          "text": "func init() {"
+        }
+      ],
+      "path": "tsc/internal/fswatch/fanotify_linux_test.go",
+      "sha256": "f5e1b08aad68b1e9538f14f1d442bf09bc2aee362706d66a5a492024120cb6a9"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": false,
+      "initOrTestMain": [
+        {
+          "line": 182,
+          "text": "func init() {"
+        }
+      ],
+      "path": "tsc/internal/fswatch/fsevents_darwin.go",
+      "sha256": "269e46dedf508789651c33f16dcbcdf4171e79fe09f0ddda4b0e6ac23913fc82"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": true,
+      "initOrTestMain": [],
+      "path": "tsc/internal/fswatch/fsevents_darwin_ffi_arm64_test.go",
+      "sha256": "89e915d7560cccaca3776d5e05f9b1adbc0bde6a76949297eb228dc5ba0e2cf3"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": false,
+      "initOrTestMain": [
+        {
+          "line": 117,
+          "text": "func init() {"
+        }
+      ],
+      "path": "tsc/internal/fswatch/inotify_linux.go",
+      "sha256": "c4c78f2c8fafe27838c2bf9f70931ada42f9f8308489165313643d4f3d1943bd"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": false,
+      "initOrTestMain": [
+        {
+          "line": 133,
+          "text": "func init() {"
+        }
+      ],
+      "path": "tsc/internal/fswatch/kqueue.go",
+      "sha256": "46147acc026b9dd7787d09587b9f57518b08ad93e443d1a8474c6190f685f3b6"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": true,
+      "initOrTestMain": [
+        {
+          "line": 77,
+          "text": "func init() {"
+        }
+      ],
+      "path": "tsc/internal/fswatch/watcher_test.go",
+      "sha256": "5fd665b6d785c72d123408afffe7a7449c8cf3b5e17f0ba1b67b4669f539c8e2"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": false,
+      "initOrTestMain": [
+        {
+          "line": 127,
+          "text": "func init() {"
+        }
+      ],
+      "path": "tsc/internal/fswatch/windows.go",
+      "sha256": "cfd354e78de1f87ae93f918825e40255069338f65465b30a0d7bdbb8018f4fa8"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": true,
+      "initOrTestMain": [],
+      "path": "tsc/internal/ipc/transport_unix_test.go",
+      "sha256": "9e3b2d95760f1a4093703609af03f7a5e62910847ec34e0f13fd194e5dc9f6b0"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": false,
+      "initOrTestMain": [
+        {
+          "line": 10,
+          "text": "func TestMain(m *testing.M) {"
+        }
+      ],
+      "path": "tsc/internal/ls/autoimport/testmain_test.go",
+      "sha256": "eae1d8ec794c65083010cf42ceb255ef6bc13ad98a6a43b5da19b7397bc1cdb7"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": true,
+      "initOrTestMain": [],
+      "path": "tsc/internal/ls/lsconv/converters_test.go",
+      "sha256": "afe925f592e9446a7830f21a3e8cffc5c86cd875c143f1fe8743b81b2c75aeef"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": true,
+      "initOrTestMain": [],
+      "path": "tsc/internal/lsp/replay_test.go",
+      "sha256": "5425fdbb311e388761c33100d343576168a76e41ccc8817a039483569d6902bb"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": false,
+      "initOrTestMain": [
+        {
+          "line": 10,
+          "text": "func TestMain(m *testing.M) {"
+        }
+      ],
+      "path": "tsc/internal/lsp/testmain_test.go",
+      "sha256": "8a0af3a1f295beeae02ec91666c336b1188179aa9f04cfddda08899ae53df1f9"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": true,
+      "initOrTestMain": [],
+      "path": "tsc/internal/nativepath/symlink_windows_test.go",
+      "sha256": "1b3aa01cd9a4dc25da57e1232f05030a8ed227a59ead2923dff51fca5a51eef8"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": false,
+      "initOrTestMain": [
+        {
+          "line": 13,
+          "text": "func init() {"
+        }
+      ],
+      "path": "tsc/internal/parser/jsdoc.go",
+      "sha256": "02d23ecd8435148c3b69634739a75a1a5d9a1fcd5c683dcac131efe97699f51c"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": false,
+      "initOrTestMain": [
+        {
+          "line": 10,
+          "text": "func TestMain(m *testing.M) {"
+        }
+      ],
+      "path": "tsc/internal/project/ata/testmain_test.go",
+      "sha256": "33fd4bc3648fc78ecab8779655309f2bb28d95bc998122cf6794666647e5d67b"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": false,
+      "initOrTestMain": [
+        {
+          "line": 10,
+          "text": "func TestMain(m *testing.M) {"
+        }
+      ],
+      "path": "tsc/internal/project/testmain_test.go",
+      "sha256": "4186bc87f8f7d2d838ba6befb44f07a336406658c4afc5a16df2d1dd8d4c159d"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": false,
+      "initOrTestMain": [
+        {
+          "line": 10,
+          "text": "func TestMain(m *testing.M) {"
+        }
+      ],
+      "path": "tsc/internal/testrunner/testmain_test.go",
+      "sha256": "10cf6068edfc411bee2904fca73b9b32507a836760d7c9bbcd20e9fd2d745ff7"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": true,
+      "initOrTestMain": [
+        {
+          "line": 23,
+          "text": "func TestMain(m *testing.M) {"
+        }
+      ],
+      "path": "tsc/internal/testutil/contentmappertest/mapper_test.go",
+      "sha256": "e4c66085faa84e87096e833571383d67ecfc3bd1dcbffaec8daded73be427403"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": true,
+      "initOrTestMain": [],
+      "path": "tsc/internal/testutil/jstest/node.go",
+      "sha256": "daca63240ff6e26420e9f9fa9fdaf23477d09333cecdb202ad78353dbd9e1472"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": false,
+      "initOrTestMain": [
+        {
+          "line": 10,
+          "text": "func TestMain(m *testing.M) {"
+        }
+      ],
+      "path": "tsc/internal/tsoptions/testmain_test.go",
+      "sha256": "96524ffe66ca6908f19027198e54080fa1b7fb17bb44ade343e19af1a2ccf869"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": false,
+      "initOrTestMain": [
+        {
+          "line": 728,
+          "text": "func init() {"
+        }
+      ],
+      "path": "tsc/internal/tspath/path_test.go",
+      "sha256": "2e2887bf57821b8f923792d810171b48c31f82b0282e7a8f3cb80bebea941c8a"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": true,
+      "initOrTestMain": [],
+      "path": "tsc/internal/vfs/osvfs/helpers_test.go",
+      "sha256": "32d73f629fafc0e7bfc9d84ce08b30dd2238fffc919383b17e6375f2621ad971"
+    },
+    {
+      "embeds": [],
+      "importsOsExec": true,
+      "initOrTestMain": [],
+      "path": "tsc/internal/vfs/osvfs/realpath_test.go",
+      "sha256": "0f1715d1bdf1ce20114d66425c58e3e01d7f3e6d115c07212f85703bd6ee26f6"
+    }
+  ],
+  "selectedBytesRead": 24691074,
+  "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+  "state": "lexical source diagnostics only, not Go build-tag resolution or native collection"
+}

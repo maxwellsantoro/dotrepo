@@ -1,0 +1,588 @@
+{
+  "passed": 45,
+  "checks": [
+    {
+      "case": "actual-complete-author-subject",
+      "passed": true,
+      "accepted": true,
+      "reason": null
+    },
+    {
+      "case": "closure-missing-plan-artifact",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: author freeze does not bind complete current script/local closure"
+    },
+    {
+      "case": "closure-missing-current-script",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: author freeze does not bind complete current script/local closure"
+    },
+    {
+      "case": "closure-wrong-current-script-hash",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: author freeze does not bind complete current script/local closure"
+    },
+    {
+      "case": "closure-missing-local-decision",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: author freeze does not bind complete current script/local closure"
+    },
+    {
+      "case": "closure-old-plan-top-level",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: author freeze subject mismatch"
+    },
+    {
+      "case": "closure-wrong-packet-identity",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: author freeze subject mismatch"
+    },
+    {
+      "case": "changed-byte-listing.py",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: author freeze does not bind complete current script/local closure"
+    },
+    {
+      "case": "changed-byte-compiler-context-decision.json",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: author freeze does not bind complete current script/local closure"
+    },
+    {
+      "case": "incomplete-provided-plan",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: provided plan differs from current plan bytes"
+    },
+    {
+      "case": "review-current",
+      "passed": true,
+      "accepted": true,
+      "reason": null
+    },
+    {
+      "case": "review-old-review-plan",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: driver review is not a passed current-subject collection-only review"
+    },
+    {
+      "case": "review-old-review-freeze",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: driver review is not a passed current-subject collection-only review"
+    },
+    {
+      "case": "review-old-review-packet",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: driver review is not a passed current-subject collection-only review"
+    },
+    {
+      "case": "review-wrong-state",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: driver review is not a passed current-subject collection-only review"
+    },
+    {
+      "case": "review-wrong-scope",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: driver review is not a passed current-subject collection-only review"
+    },
+    {
+      "case": "review-findings-present",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: driver review is not a passed current-subject collection-only review"
+    },
+    {
+      "case": "review-findings-missing",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: driver review is not a passed current-subject collection-only review"
+    },
+    {
+      "case": "review-findings-wrong-type",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: driver review is not a passed current-subject collection-only review"
+    },
+    {
+      "case": "review-synthetic-review",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: driver review is not a passed current-subject collection-only review"
+    },
+    {
+      "case": "review-native-admission",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: driver review is not a passed current-subject collection-only review"
+    },
+    {
+      "case": "review-campaign-admission",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: driver review is not a passed current-subject collection-only review"
+    },
+    {
+      "case": "review-global-cache-admission",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: driver review is not a passed current-subject collection-only review"
+    },
+    {
+      "case": "review-execution-admission",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: driver review is not a passed current-subject collection-only review"
+    },
+    {
+      "case": "review-missing-false-flag",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: driver review is not a passed current-subject collection-only review"
+    },
+    {
+      "case": "review-arbitrary",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: driver review is not a passed current-subject collection-only review"
+    },
+    {
+      "case": "review-actual-before-review",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: driver review is not a passed current-subject collection-only review"
+    },
+    {
+      "case": "acceptance-driverPlanSha256",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: acceptance subject is not current driver plan/author freeze"
+    },
+    {
+      "case": "acceptance-authorFreezeSha256",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: acceptance subject is not current driver plan/author freeze"
+    },
+    {
+      "case": "acceptance-packetIdentity",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: acceptance subject is not current driver plan/author freeze"
+    },
+    {
+      "case": "auth-old-freeze",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: authorization author-freeze mismatch"
+    },
+    {
+      "case": "full-current",
+      "passed": true,
+      "result": {
+        "state": "native-top-level-collection-observed",
+        "stage": "offline-final-inspect",
+        "startedAt": "2026-10-29T10:37:03.925958+00:00",
+        "synthetic": true,
+        "taskId": "go-01",
+        "nativeCollectionOccurred": false,
+        "taskOutcomeObserved": false,
+        "modelCalls": 0,
+        "costUsd": null,
+        "costExclusions": [
+          "No metered host/container setup dollar receipt."
+        ],
+        "daemonCalls": 21,
+        "containerCreateAttempted": true,
+        "containerAbsent": true,
+        "collectionObserved": true,
+        "nativeCollectionAttempted": true,
+        "nativeTaskAdmitted": false,
+        "campaignAdmitted": false,
+        "cacheGloballyQualified": false,
+        "ownedContainer": "dotrepo-go01-collection-c38efea0d298",
+        "planSha256": "c7dbacdf6c3966f66fd0ef805a85db452ce72180d3db22347a5c8a06f941d4a0",
+        "authorizationSha256": "215e48ab7e5e782505ce9e241ba67f021c6194a2213ecfa7c5748f5be9e24926",
+        "collectionAcceptance": {
+          "authorization": {
+            "state": "coordinator-authorized-single-go01-collection-attempt",
+            "synthetic": false,
+            "planSha256": "c7dbacdf6c3966f66fd0ef805a85db452ce72180d3db22347a5c8a06f941d4a0",
+            "authorFreezeSha256": "a922cea56e81f471b1a6cd69ec576abcde7b9dd67aed246cb745e3432531196e",
+            "commands": [
+              "go env -json GOOS GOARCH GOVERSION GOTOOLCHAIN GOENV GOWORK GOFLAGS CGO_ENABLED CC CXX",
+              "go list -json ./...",
+              "go test -json -list . ./..."
+            ],
+            "limits": {
+              "cleanupSeconds": 60,
+              "combinedStdoutStderrPerCommandBytes": 2097152,
+              "cpus": 3,
+              "dependencyTmpfsBytes": 1073741824,
+              "memoryBytes": 4294967296,
+              "memorySwapBytes": 4294967296,
+              "pids": 256,
+              "sourcePlusSeedExpandedBytes": 2147483648,
+              "tmpTmpfsBytes": 536870912,
+              "transportBytesPerArchive": 536870912,
+              "workSecondsIncludingPreflight": 900,
+              "workspaceTmpfsBytes": 8589934592
+            },
+            "maxAttempts": 1,
+            "output": "/private/tmp/dotrepo-go01-amendment-independent-i5rwpu2u/full-current-output",
+            "scratch": "/private/tmp/dotrepo-go01-amendment-independent-i5rwpu2u/full-current-scratch",
+            "collectionAcceptance": {
+              "path": "/private/tmp/dotrepo-go01-amendment-independent-i5rwpu2u/full-current-acceptance.json",
+              "sha256": "94185829b6cf0da13d0421f53286f60fad4729fbabf61ac05900db9169b93357"
+            }
+          },
+          "collectionAcceptanceSha256": "94185829b6cf0da13d0421f53286f60fad4729fbabf61ac05900db9169b93357",
+          "driverSubject": {
+            "driverPlanSha256": "c7dbacdf6c3966f66fd0ef805a85db452ce72180d3db22347a5c8a06f941d4a0",
+            "authorFreezeSha256": "a922cea56e81f471b1a6cd69ec576abcde7b9dd67aed246cb745e3432531196e",
+            "packetIdentity": "go01-collection-driver-amendment-2"
+          },
+          "scope": "collection only; init/TestMain allowed, no test-body/task outcome admission"
+        },
+        "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+        "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+        "cacheArchiveSha256": "76ea2bfa6725335b889d44fed07f40f6eeb804d124d683ad4f2c0a6a2607bcfd",
+        "environmentSha256": "3649e45b9b1c1f62faeb2c3a168d93d91a7be7a62e7e2905c07d9ba69ddb65fe",
+        "preflightSeconds": 0,
+        "collectionSeconds": 0,
+        "workElapsedSeconds": 0,
+        "cleanupExitCode": 0,
+        "cleanupSeconds": 0,
+        "elapsedSeconds": 0,
+        "workBudgetExceeded": false
+      },
+      "labels": [
+        "image-inspect",
+        "create",
+        "start",
+        "container-inspect",
+        "initialize",
+        "source-provision",
+        "cache-provision",
+        "initial-source-check",
+        "initial-cache-check",
+        "tools-before",
+        "source-tree-before",
+        "go-env",
+        "go-list",
+        "go-test-list",
+        "source-tree-after",
+        "tools-after",
+        "tracked-source-check",
+        "offline-final-inspect",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ]
+    },
+    {
+      "case": "full-unrelated",
+      "passed": true,
+      "result": {
+        "state": "incomplete",
+        "stage": "authorization",
+        "startedAt": "2026-10-29T10:37:03.951877+00:00",
+        "synthetic": true,
+        "taskId": "go-01",
+        "nativeCollectionOccurred": false,
+        "taskOutcomeObserved": false,
+        "modelCalls": 0,
+        "costUsd": null,
+        "costExclusions": [
+          "No metered host/container setup dollar receipt."
+        ],
+        "daemonCalls": 0,
+        "containerCreateAttempted": false,
+        "containerAbsent": null,
+        "collectionObserved": false,
+        "nativeCollectionAttempted": false,
+        "nativeTaskAdmitted": false,
+        "campaignAdmitted": false,
+        "cacheGloballyQualified": false,
+        "ownedContainer": "dotrepo-go01-collection-8f8692352f6c",
+        "error": "ValueError: driver review is not a passed current-subject collection-only review",
+        "cancelled": false,
+        "workElapsedSeconds": 0,
+        "elapsedSeconds": 0,
+        "workBudgetExceeded": false
+      },
+      "labels": []
+    },
+    {
+      "case": "full-create-failure",
+      "passed": true,
+      "result": {
+        "state": "incomplete",
+        "stage": "create",
+        "startedAt": "2026-10-29T10:37:03.954705+00:00",
+        "synthetic": true,
+        "taskId": "go-01",
+        "nativeCollectionOccurred": false,
+        "taskOutcomeObserved": false,
+        "modelCalls": 0,
+        "costUsd": null,
+        "costExclusions": [
+          "No metered host/container setup dollar receipt."
+        ],
+        "daemonCalls": 5,
+        "containerCreateAttempted": true,
+        "containerAbsent": true,
+        "collectionObserved": false,
+        "nativeCollectionAttempted": false,
+        "nativeTaskAdmitted": false,
+        "campaignAdmitted": false,
+        "cacheGloballyQualified": false,
+        "ownedContainer": "dotrepo-go01-collection-8bbffa436268",
+        "planSha256": "c7dbacdf6c3966f66fd0ef805a85db452ce72180d3db22347a5c8a06f941d4a0",
+        "authorizationSha256": "06cb8c9178a118090326ab4ee6e6912e793c505e4ea814b9537bad36c3c55a76",
+        "collectionAcceptance": {
+          "authorization": {
+            "state": "coordinator-authorized-single-go01-collection-attempt",
+            "synthetic": false,
+            "planSha256": "c7dbacdf6c3966f66fd0ef805a85db452ce72180d3db22347a5c8a06f941d4a0",
+            "authorFreezeSha256": "a922cea56e81f471b1a6cd69ec576abcde7b9dd67aed246cb745e3432531196e",
+            "commands": [
+              "go env -json GOOS GOARCH GOVERSION GOTOOLCHAIN GOENV GOWORK GOFLAGS CGO_ENABLED CC CXX",
+              "go list -json ./...",
+              "go test -json -list . ./..."
+            ],
+            "limits": {
+              "cleanupSeconds": 60,
+              "combinedStdoutStderrPerCommandBytes": 2097152,
+              "cpus": 3,
+              "dependencyTmpfsBytes": 1073741824,
+              "memoryBytes": 4294967296,
+              "memorySwapBytes": 4294967296,
+              "pids": 256,
+              "sourcePlusSeedExpandedBytes": 2147483648,
+              "tmpTmpfsBytes": 536870912,
+              "transportBytesPerArchive": 536870912,
+              "workSecondsIncludingPreflight": 900,
+              "workspaceTmpfsBytes": 8589934592
+            },
+            "maxAttempts": 1,
+            "output": "/private/tmp/dotrepo-go01-amendment-independent-i5rwpu2u/full-create-failure-output",
+            "scratch": "/private/tmp/dotrepo-go01-amendment-independent-i5rwpu2u/full-create-failure-scratch",
+            "collectionAcceptance": {
+              "path": "/private/tmp/dotrepo-go01-amendment-independent-i5rwpu2u/full-create-failure-acceptance.json",
+              "sha256": "6121a8eebae5ce668b62182564f9120cf88aba893652948655fa3f0ba537895f"
+            }
+          },
+          "collectionAcceptanceSha256": "6121a8eebae5ce668b62182564f9120cf88aba893652948655fa3f0ba537895f",
+          "driverSubject": {
+            "driverPlanSha256": "c7dbacdf6c3966f66fd0ef805a85db452ce72180d3db22347a5c8a06f941d4a0",
+            "authorFreezeSha256": "a922cea56e81f471b1a6cd69ec576abcde7b9dd67aed246cb745e3432531196e",
+            "packetIdentity": "go01-collection-driver-amendment-2"
+          },
+          "scope": "collection only; init/TestMain allowed, no test-body/task outcome admission"
+        },
+        "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+        "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+        "cacheArchiveSha256": "76ea2bfa6725335b889d44fed07f40f6eeb804d124d683ad4f2c0a6a2607bcfd",
+        "environmentSha256": "3649e45b9b1c1f62faeb2c3a168d93d91a7be7a62e7e2905c07d9ba69ddb65fe",
+        "preflightSeconds": 0,
+        "error": "ValueError: create failed: None",
+        "cancelled": false,
+        "workElapsedSeconds": 0,
+        "cleanupExitCode": 0,
+        "cleanupSeconds": 0,
+        "elapsedSeconds": 0,
+        "workBudgetExceeded": false
+      },
+      "labels": [
+        "image-inspect",
+        "create",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ]
+    },
+    {
+      "case": "full-cleanup-failure",
+      "passed": true,
+      "result": {
+        "state": "incomplete-cleanup-or-absence-unresolved",
+        "stage": "offline-final-inspect",
+        "startedAt": "2026-10-29T10:37:03.960620+00:00",
+        "synthetic": true,
+        "taskId": "go-01",
+        "nativeCollectionOccurred": false,
+        "taskOutcomeObserved": false,
+        "modelCalls": 0,
+        "costUsd": null,
+        "costExclusions": [
+          "No metered host/container setup dollar receipt."
+        ],
+        "daemonCalls": 21,
+        "containerCreateAttempted": true,
+        "containerAbsent": false,
+        "collectionObserved": true,
+        "nativeCollectionAttempted": true,
+        "nativeTaskAdmitted": false,
+        "campaignAdmitted": false,
+        "cacheGloballyQualified": false,
+        "ownedContainer": "dotrepo-go01-collection-a48c02f9f60f",
+        "planSha256": "c7dbacdf6c3966f66fd0ef805a85db452ce72180d3db22347a5c8a06f941d4a0",
+        "authorizationSha256": "b086eedca3856a2412ec7b5d92dc2cb3095d46f55518af2f664dfd588c4afbc6",
+        "collectionAcceptance": {
+          "authorization": {
+            "state": "coordinator-authorized-single-go01-collection-attempt",
+            "synthetic": false,
+            "planSha256": "c7dbacdf6c3966f66fd0ef805a85db452ce72180d3db22347a5c8a06f941d4a0",
+            "authorFreezeSha256": "a922cea56e81f471b1a6cd69ec576abcde7b9dd67aed246cb745e3432531196e",
+            "commands": [
+              "go env -json GOOS GOARCH GOVERSION GOTOOLCHAIN GOENV GOWORK GOFLAGS CGO_ENABLED CC CXX",
+              "go list -json ./...",
+              "go test -json -list . ./..."
+            ],
+            "limits": {
+              "cleanupSeconds": 60,
+              "combinedStdoutStderrPerCommandBytes": 2097152,
+              "cpus": 3,
+              "dependencyTmpfsBytes": 1073741824,
+              "memoryBytes": 4294967296,
+              "memorySwapBytes": 4294967296,
+              "pids": 256,
+              "sourcePlusSeedExpandedBytes": 2147483648,
+              "tmpTmpfsBytes": 536870912,
+              "transportBytesPerArchive": 536870912,
+              "workSecondsIncludingPreflight": 900,
+              "workspaceTmpfsBytes": 8589934592
+            },
+            "maxAttempts": 1,
+            "output": "/private/tmp/dotrepo-go01-amendment-independent-i5rwpu2u/full-cleanup-failure-output",
+            "scratch": "/private/tmp/dotrepo-go01-amendment-independent-i5rwpu2u/full-cleanup-failure-scratch",
+            "collectionAcceptance": {
+              "path": "/private/tmp/dotrepo-go01-amendment-independent-i5rwpu2u/full-cleanup-failure-acceptance.json",
+              "sha256": "9208be70e62e3e2228dd9a87ca8cd8169e0626a5bf4f5262cd3eb80637d5570f"
+            }
+          },
+          "collectionAcceptanceSha256": "9208be70e62e3e2228dd9a87ca8cd8169e0626a5bf4f5262cd3eb80637d5570f",
+          "driverSubject": {
+            "driverPlanSha256": "c7dbacdf6c3966f66fd0ef805a85db452ce72180d3db22347a5c8a06f941d4a0",
+            "authorFreezeSha256": "a922cea56e81f471b1a6cd69ec576abcde7b9dd67aed246cb745e3432531196e",
+            "packetIdentity": "go01-collection-driver-amendment-2"
+          },
+          "scope": "collection only; init/TestMain allowed, no test-body/task outcome admission"
+        },
+        "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+        "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+        "cacheArchiveSha256": "76ea2bfa6725335b889d44fed07f40f6eeb804d124d683ad4f2c0a6a2607bcfd",
+        "environmentSha256": "3649e45b9b1c1f62faeb2c3a168d93d91a7be7a62e7e2905c07d9ba69ddb65fe",
+        "preflightSeconds": 0,
+        "collectionSeconds": 0,
+        "workElapsedSeconds": 0,
+        "cleanupExitCode": 1,
+        "cleanupSeconds": 0,
+        "elapsedSeconds": 0,
+        "workBudgetExceeded": false
+      },
+      "labels": [
+        "image-inspect",
+        "create",
+        "start",
+        "container-inspect",
+        "initialize",
+        "source-provision",
+        "cache-provision",
+        "initial-source-check",
+        "initial-cache-check",
+        "tools-before",
+        "source-tree-before",
+        "go-env",
+        "go-list",
+        "go-test-list",
+        "source-tree-after",
+        "tools-after",
+        "tracked-source-check",
+        "offline-final-inspect",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ]
+    },
+    {
+      "case": "source-membership-positive",
+      "passed": true,
+      "accepted": true,
+      "reason": null
+    },
+    {
+      "case": "source-membership-missing-file",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: selected Go file absent from validated source inventory"
+    },
+    {
+      "case": "source-membership-cross-field-duplicate",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: invalid selected file list"
+    },
+    {
+      "case": "source-membership-control-character",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: invalid selected file list"
+    },
+    {
+      "case": "source-membership-absolute-file",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: invalid selected file list"
+    },
+    {
+      "case": "strict-tmpfs-positive",
+      "passed": true,
+      "accepted": true,
+      "reason": null
+    },
+    {
+      "case": "strict-tmpfs-extra-root",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: unexpected tmpfs mount set"
+    },
+    {
+      "case": "strict-tmpfs-duplicate-size",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: duplicate/conflicting/unknown tmpfs options"
+    },
+    {
+      "case": "strict-tmpfs-conflicting-size",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: duplicate/conflicting/unknown tmpfs options"
+    },
+    {
+      "case": "strict-tmpfs-security-override",
+      "passed": true,
+      "accepted": false,
+      "reason": "ValueError: duplicate/conflicting/unknown tmpfs options"
+    }
+  ],
+  "subject": {
+    "driverPlanSha256": "c7dbacdf6c3966f66fd0ef805a85db452ce72180d3db22347a5c8a06f941d4a0",
+    "authorFreezeSha256": "a922cea56e81f471b1a6cd69ec576abcde7b9dd67aed246cb745e3432531196e",
+    "packetIdentity": "go01-collection-driver-amendment-2"
+  },
+  "fixtureDisclosure": "Owned synthetic review/auth shapes only. They do not authorize native action.",
+  "realDaemonGoCargoPackageUpstreamNativeProviderNetworkCalls": 0
+}

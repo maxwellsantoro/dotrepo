@@ -1,0 +1,85 @@
+{
+  "state": "source-supported-test-only-package-admission-correction-not-authorized",
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "imageInventory": {
+    "path": "benchmarks/head-to-head/f05-common-image-audit-20261029/inventory.json",
+    "sha256": "f096a4b8a2346c0332082e2b88b093cc4fb78b2cbaed0b5b5af05d071695f647"
+  },
+  "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+  "sourceInventory": {
+    "path": "benchmarks/head-to-head/f05-qualification-20261029/go-01-full/inventory.json",
+    "sha256": "96c935c31228fa8e05bb836a93257beeb87ac524e5eb30cdde3c546a1ea4be0e"
+  },
+  "toolSourceSpans": [
+    {
+      "path": "usr/local/go/src/cmd/go/alldocs.go",
+      "sha256": "09b0d7570c1695acc0ccad5593e3f5c2f888548cfc7f80a49933a19f3514aa69",
+      "startLine": 877,
+      "endLine": 895,
+      "excerpt": "//\n//\t    // Source files\n//\t    GoFiles           []string   // .go source files (excluding CgoFiles, TestGoFiles, XTestGoFiles)\n//\t    CgoFiles          []string   // .go source files that import \"C\"\n//\t    CompiledGoFiles   []string   // .go files presented to compiler (when using -compiled)\n//\t    IgnoredGoFiles    []string   // .go source files ignored due to build constraints\n//\t    IgnoredOtherFiles []string // non-.go source files ignored due to build constraints\n//\t    CFiles            []string   // .c source files\n//\t    CXXFiles          []string   // .cc, .cxx and .cpp source files\n//\t    MFiles            []string   // .m source files\n//\t    HFiles            []string   // .h, .hh, .hpp and .hxx source files\n//\t    FFiles            []string   // .f, .F, .for and .f90 Fortran source files\n//\t    SFiles            []string   // .s source files\n//\t    SwigFiles         []string   // .swig files\n//\t    SwigCXXFiles      []string   // .swigcxx files\n//\t    SysoFiles         []string   // .syso object files to add to archive\n//\t    TestGoFiles       []string   // _test.go files in package\n//\t    XTestGoFiles      []string   // _test.go files outside package\n//\n",
+      "retainedPath": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/sources/usr/local/go/src/cmd/go/alldocs.go"
+    },
+    {
+      "path": "usr/local/go/src/cmd/go/internal/test/test.go",
+      "sha256": "ce0bfdd1686ff4d58fd013848066a27b509d76ada665712fbb2746d101537172",
+      "startLine": 1143,
+      "endLine": 1153,
+      "excerpt": "func builderTest(ld *modload.Loader, b *work.Builder, ctx context.Context, pkgOpts load.PackageOpts, p *load.Package, imported bool, writeCoverMetaAct *work.Action) (buildAction, runAction, printAction *work.Action, perr *load.Package, err error) {\n\tif len(p.TestGoFiles)+len(p.XTestGoFiles) == 0 {\n\t\tbuild := b.CompileAction(work.ModeBuild, work.ModeBuild, p)\n\t\trun := &work.Action{\n\t\t\tMode:       \"test run\",\n\t\t\tActor:      new(runTestActor),\n\t\t\tDeps:       []*work.Action{build},\n\t\t\tObjdir:     b.NewObjdir(),\n\t\t\tPackage:    p,\n\t\t\tIgnoreFail: true, // run (prepare output) even if build failed\n\t\t}\n",
+      "retainedPath": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/sources/usr/local/go/src/cmd/go/internal/test/test.go"
+    },
+    {
+      "path": "usr/local/go/src/go/build/build.go",
+      "sha256": "a8b066521d73f2b1c1f01d65588483e416deeab9b2139991645da0dc89dd7d49",
+      "startLine": 454,
+      "endLine": 480,
+      "excerpt": "\t// Source files\n\tGoFiles           []string // .go source files (excluding CgoFiles, TestGoFiles, XTestGoFiles)\n\tCgoFiles          []string // .go source files that import \"C\"\n\tIgnoredGoFiles    []string // .go source files ignored for this build (including ignored _test.go files)\n\tInvalidGoFiles    []string // .go source files with detected problems (parse error, wrong package name, and so on)\n\tIgnoredOtherFiles []string // non-.go source files ignored for this build\n\tCFiles            []string // .c source files\n\tCXXFiles          []string // .cc, .cpp and .cxx source files\n\tMFiles            []string // .m (Objective-C) source files\n\tHFiles            []string // .h, .hh, .hpp and .hxx source files\n\tFFiles            []string // .f, .F, .for and .f90 Fortran source files\n\tSFiles            []string // .s source files\n\tSwigFiles         []string // .swig files\n\tSwigCXXFiles      []string // .swigcxx files\n\tSysoFiles         []string // .syso system object files to add to archive\n\n\t// Cgo directives\n\tCgoCFLAGS    []string // Cgo CFLAGS directives\n\tCgoCPPFLAGS  []string // Cgo CPPFLAGS directives\n\tCgoCXXFLAGS  []string // Cgo CXXFLAGS directives\n\tCgoFFLAGS    []string // Cgo FFLAGS directives\n\tCgoLDFLAGS   []string // Cgo LDFLAGS directives\n\tCgoPkgConfig []string // Cgo pkg-config directives\n\n\t// Test information\n\tTestGoFiles  []string // _test.go files in package\n\tXTestGoFiles []string // _test.go files outside package\n",
+      "retainedPath": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/sources/usr/local/go/src/go/build/build.go"
+    },
+    {
+      "path": "usr/local/go/src/go/build/build.go",
+      "sha256": "a8b066521d73f2b1c1f01d65588483e416deeab9b2139991645da0dc89dd7d49",
+      "startLine": 1075,
+      "endLine": 1082,
+      "excerpt": "\n\tif badGoError != nil {\n\t\treturn p, badGoError\n\t}\n\tif len(p.GoFiles)+len(p.CgoFiles)+len(p.TestGoFiles)+len(p.XTestGoFiles) == 0 {\n\t\treturn p, &NoGoError{p.Dir}\n\t}\n\treturn p, pkgerr\n",
+      "retainedPath": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/sources/usr/local/go/src/go/build/build.go"
+    }
+  ],
+  "sourceRule": "NoGoError in go/build uses empty union of GoFiles+CgoFiles+TestGoFiles+XTestGoFiles. Test-only packages are valid selected-source packages. IgnoredGoFiles does not contribute.",
+  "actualFailedAttempt": {
+    "resultPath": "/tmp/dotrepo-go01-native-collection-result-20261029-3/result.json",
+    "resultSha256": "1ebce3bc9670ce1cbb02e4a0160b00c9dd421a75329a5f2bc87c5c6d91448fa2",
+    "queryStdoutSha256": "b4ef7caa0fafcffea826f91d0123143b6ed83e8f01f060e339975675d4597db8",
+    "queryReceiptSha256": "0a6131a5aee7fe052c1a50c362d7eb03dcd7687a0fafb51b62adf75a97592cef",
+    "jsonPackageObjects": 104,
+    "selectedPackage": {
+      "ImportPath": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+      "Dir": "/workspace/repository/tsc/internal/fourslash/tests",
+      "Name": "fourslash",
+      "GoFilesCount": 0,
+      "CgoFilesCount": 0,
+      "TestGoFilesCount": 3,
+      "XTestGoFilesCount": 4368,
+      "IgnoredGoFilesCount": 13,
+      "all4371SelectedFilesInFrozenInventory": true
+    },
+    "sourceDeclarations": [
+      {
+        "path": "tsc/internal/fourslash/tests/NavigationBarJsDoc_test.go",
+        "sha256": "8e84c972e920ae27921e88ad31666f7f289c49d5aecf6cdea486ae0281a8f60e",
+        "line": 1,
+        "excerpt": "package fourslash_test\n"
+      },
+      {
+        "path": "tsc/internal/fourslash/tests/autoCloseFragment_test.go",
+        "sha256": "b4ace2fd9eee186535396632a2fa683bea0dd44ef786d9bad3df9a1bc564f70e",
+        "line": 1,
+        "excerpt": "package fourslash\n"
+      }
+    ],
+    "qualification": "Historical incomplete go-list parser attempt, no go-test-list native collection occurred."
+  },
+  "freshDaemonGoNodeNetworkProviderCalls": 0,
+  "executionAuthorized": false,
+  "nativeCollectionOccurred": false,
+  "taskOutcomeObserved": false
+}
