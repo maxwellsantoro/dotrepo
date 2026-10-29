@@ -224,12 +224,28 @@ source-derived declarations and partial native-list comparisons cannot establish
 upstream compile validity or replace the current oracle's collection gate. The
 [owned-helper result](benchmarks/head-to-head/f05-go01-source-registry-result-20261029/README.md)
 retains actual tool observations separately. The
+[prospective source-oracle decision](benchmarks/head-to-head/f05-go01-source-oracle-decision-20261029/README.md)
+uses the retained source registry to define required top-level names while keeping
+all package lifecycles and observed descendants in scope. Its
+[implementation review](benchmarks/head-to-head/f05-go01-source-oracle-implementation-review-20261029/README.md)
+accepts preparation controls only. The
+[same-call capture implementation](benchmarks/head-to-head/f05-go01-event-capture-implementation-20261029/README.md)
+and its [corrected independent review](benchmarks/head-to-head/f05-go01-event-capture-review-20261029/amendment-1/README.md)
+retain raw events and process receipts before returning tool control. Actual
+completion still refuses pending the full setup/source/tool/effective-context
+post-run join. Source enumeration and capture controls do not establish
+successful execution or close C1. The
 [Python-03 source assessment](benchmarks/head-to-head/f05-python03-oracle-preparation-20261029/README.md)
 and [independent review](benchmarks/head-to-head/f05-python03-oracle-review-20261029/README.md)
 support prospective aggregate-suite coverage of the selected primary package,
 while preserving the original unresolved gold. Interpreter/network conditions,
 native collection, exclusion acceptance and a reliable execution observer remain
 open; a green framework summary alone cannot establish the required outcome. The
+[Python-01 source decision](benchmarks/head-to-head/f05-python01-oracle-decision-20261029/README.md)
+supports a prospective union of root and backend assertion suites, preserving the
+unresolved maintainer default and treating print-only format diagnostics
+separately. Native collection, dependency setup and an execution oracle remain
+open; static candidate counts are not observed test coverage. The
 [CI-evidence pilot](benchmarks/ci-evidence/pilot-20261029/README.md) retains
 workflow/job observations without promoting them to independent execution or
 consumer applicability.

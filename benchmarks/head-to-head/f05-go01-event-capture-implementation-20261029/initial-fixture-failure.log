@@ -1,0 +1,82 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_____ test_session_host_only_capture_receipt_accounting_and_cleanup[False] _____
+
+session = ({'arm': 'source-first', 'artifacts': {'runtime': {'path': 'runtime.json', 'sha256': 'cccccccccccccccccccccccccccccccc...d8e8199bc2de6557569250b8f56301a07ab9', dependency_cache=None, preparation_sha256=None, symlinks={}, resolved_links={}))
+tmp_path = PosixPath('/private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/pytest-of-maxwell/pytest-282/test_session_host_only_capture0')
+stale = False
+
+    @pytest.mark.parametrize("stale", [False, True])
+    def test_session_host_only_capture_receipt_accounting_and_cleanup(session, tmp_path, stale):
+        from test_agent_runtime import FakeProvider, response
+    
+        request, config, bundle = session
+        config["eventCaptures"] = {request["task"]["repository"]: spec(bundle)}
+    
+        class Docker(runtime.DockerBackend):
+            simulation = True
+    
+            def __init__(self):
+                super().__init__(self.invoke_fixture)
+                self.cleaned = False
+    
+            def provision(self, request, config, timeout):
+                context = {
+                    "imageDigest": request["environment"]["imageDigest"],
+                    "containerUser": "1000:1000",
+                }
+                self.boundary = Boundary(
+                    spec(bundle), bundle, context, failure="stale" if stale else None
+                )
+                self.boundary_container = self.name
+                return {"fixture": "no daemon"}
+    
+            def checkout(self, bundle, timeout):
+                return {"exitCode": 0, "error": None}
+    
+            def cleanup(self):
+                self.cleaned = True
+                return {"exitCode": 0, "error": None}
+    
+            def invoke_fixture(self, argv, *, data, timeout, output_limit, raw=False):
+                assert raw and argv[0] == "docker"
+                if "--workdir=/workspace/repository" in argv:
+                    self.boundary.executed = True
+                    return {"stdout": b"\xffchosen raw", "stderr": b"", "exitCode": 0, "error": None}
+                actual_name = self.name
+                argv = ["owned-container" if part == actual_name else part for part in argv[1:]]
+                return self.boundary.call(argv, timeout, data=data, limit=output_limit, raw=True)
+    
+        backend = Docker()
+        provider = FakeProvider(
+            response(("checkout_source", {})),
+            response(("shell", {"command": "arbitrary-not-gold-command"})),
+            response(text="done"),
+        )
+        result = runtime.run_session(
+            request, config, bundle, "system", "task", None, provider, backend, tmp_path / "run"
+        )
+        assert backend.cleaned and result["status"] == "agent-finished"
+        accounting = result["eventCaptureAccounting"]
+        assert accounting["requests"] == 8 and accounting["transportBytes"] > len(PAYLOAD)
+        assert result["effort"]["decodedBytes"] >= accounting["transportBytes"] + len(b"\xffchosen raw")
+        trace = json.loads((tmp_path / "run/trace.json").read_bytes())
+        descriptor = next(
+            event["descriptor"] for event in trace["events"] if event["kind"] == "event-capture"
+        )
+        assert descriptor["command"] == "arbitrary-not-gold-command"
+        assert descriptor["context"]["requestSha256"] == trace["requestSha256"]
+>       assert descriptor["state"] == (
+            "incomplete-unqualified-event-capture"
+            if stale
+            else "captured-unqualified-event-association"
+        )
+E       AssertionError: assert 'incomplete-u...event-capture' == 'captured-unq...t-association'
+E         
+E         - captured-unqualified-event-association
+E         + incomplete-unqualified-event-capture
+
+scripts/tests/test_agent_event_capture.py:308: AssertionError
+=========================== short test summary info ============================
+FAILED scripts/tests/test_agent_event_capture.py::test_session_host_only_capture_receipt_accounting_and_cleanup[False]
+1 failed in 0.05s

@@ -51,6 +51,14 @@ the truth of audit claims or equivalence of lifecycle-disabled installation.
 Task qualification must establish that separately. Preparation/maintenance
 charges remain unallocated nulls in session effort until campaign accounting.
 
+Optional eventCaptures maps repositories to a frozen event_capture helper hash,
+fixed workspace-child event path, explicit retained source subset/tool observations
+and byte/request ceilings. The host observes and exports within the same shell
+operation before returning control, sharing its single deadline. Raw artifacts
+and the unqualified descriptor stay host-only; shell permissions and display
+responses never consult a gold command or scorer. Observed subset consistency is
+not whole-revision integrity, effective child-environment proof or task success.
+
 Primary API references used for the adapter/backend:
 https://openrouter.ai/docs/api/api-reference/chat/create-a-chat-completion
 https://docs.docker.com/reference/cli/docker/container/create/
@@ -62,6 +70,7 @@ from __future__ import annotations
 import argparse
 from collections import deque
 from dataclasses import dataclass, field
+from datetime import datetime, timezone
 import hashlib
 import io
 import json
@@ -591,6 +600,21 @@ def validate_runtime(config, request):
         "invalid starting state",
     )
     require(isinstance(config["sourceBundles"], dict), "source bundles must be frozen")
+    captures = config.get("eventCaptures", {})
+    require(
+        isinstance(captures, dict) and set(captures) <= set(config["sourceBundles"]),
+        "event captures must select frozen repositories",
+    )
+    for spec in captures.values():
+        capture_helper().validate(spec)
+
+
+def capture_helper():
+    # Disabled sessions retain the original import/runtime path. Enabled freezes
+    # bind the optional helper's exact source before using any of its behavior.
+    from . import event_capture
+
+    return event_capture
 
 
 def live_ready(config):
@@ -631,9 +655,10 @@ def tool_schemas(arm):
     ]
 
 
-def limited_process(argv, *, data=b"", timeout, output_limit):
+def limited_process(argv, *, data=b"", timeout, output_limit, raw=False):
     """Bound host capture even when an untrusted container writes indefinitely."""
     host_env = {key: os.environ[key] for key in ("PATH", "HOME") if key in os.environ}
+    entered = time.monotonic()
     with tempfile.TemporaryFile() as incoming:
         incoming.write(data)
         incoming.seek(0)
@@ -645,7 +670,8 @@ def limited_process(argv, *, data=b"", timeout, output_limit):
         for stream in streams:
             os.set_blocking(stream.fileno(), False)
             selector.register(stream, selectors.EVENT_READ)
-        deadline, error = time.monotonic() + timeout, None
+        deadline = (entered if raw else time.monotonic()) + timeout
+        error, cancelled = None, False
         try:
             while selector.get_map():
                 remaining = deadline - time.monotonic()
@@ -664,19 +690,43 @@ def limited_process(argv, *, data=b"", timeout, output_limit):
                         break
                 if error:
                     break
+        except BaseException as exc:
+            # Cancellation must stop the client before waiting; callers retain
+            # the partial raw stream and then perform their normal cleanup.
+            error, cancelled = type(exc).__name__, isinstance(exc, (KeyboardInterrupt, SystemExit))
+            process.kill()
         finally:
             if error:
                 process.kill()
-            process.wait(timeout=max(1, deadline - time.monotonic()))
-            selector.close()
-            for stream in streams:
-                stream.close()
-        return {
-            "stdout": bytes(streams[process.stdout]).decode(errors="replace"),
-            "stderr": bytes(streams[process.stderr]).decode(errors="replace"),
+            try:
+                # Pipe EOF need not mean process exit. Keep the original
+                # deadline and retain a receipt even when the client stays alive.
+                process.wait(timeout=max(0, deadline - time.monotonic()))
+            except subprocess.TimeoutExpired:
+                error = error or "timeout"
+                process.kill()
+                process.wait()
+            except BaseException as exc:
+                error = error or type(exc).__name__
+                cancelled = cancelled or isinstance(exc, (KeyboardInterrupt, SystemExit))
+                process.kill()
+                process.wait()
+            finally:
+                selector.close()
+                for stream in streams:
+                    stream.close()
+        value = {
+            "stdout": bytes(streams[process.stdout]),
+            "stderr": bytes(streams[process.stderr]),
             "exitCode": process.returncode,
             "error": error,
         }
+        if cancelled:
+            value["cancelled"] = True
+        if not raw:
+            for role in ("stdout", "stderr"):
+                value[role] = value[role].decode(errors="replace")
+        return value
 
 
 class DockerBackend:
@@ -690,12 +740,122 @@ class DockerBackend:
         self.created = False
         self.operations = []
 
-    def _call(self, args, timeout, *, data=b"", limit=65536):
-        result = self.invoke(["docker", *args], data=data, timeout=timeout, output_limit=limit)
+    def _call(self, args, timeout, *, data=b"", limit=65536, raw=False):
+        options = {"raw": True} if raw else {}
+        result = self.invoke(
+            ["docker", *args], data=data, timeout=timeout, output_limit=limit, **options
+        )
+        recorded = result
+        if raw:
+            recorded = {
+                **{k: v for k, v in result.items() if k not in {"stdout", "stderr"}},
+                **{
+                    role: {"bytes": len(result[role]), "sha256": experiment.digest(result[role])}
+                    for role in ("stdout", "stderr")
+                },
+            }
         self.operations.append(
-            {"argv": ["docker", *args], "stdinBytes": len(data), "result": result}
+            {"argv": ["docker", *args], "stdinBytes": len(data), "result": recorded}
         )
         return result
+
+    def configure_event_capture(self, request, config, bundle, output, request_hash):
+        spec = config.get("eventCaptures", {}).get(request["task"]["repository"])
+        self.event_capture = None
+        self.capture_number = 0
+        if spec is not None:
+            capture_helper().validate(spec)
+            require(
+                all(p in bundle.files for p in spec["sourceFiles"]), "capture source not retained"
+            )
+            self.event_capture = (
+                spec,
+                bundle,
+                Path(output),
+                {
+                    "sessionId": request["sessionId"],
+                    "requestSha256": request_hash,
+                    "repository": request["task"]["repository"],
+                    "revision": request["task"]["revision"],
+                    "imageDigest": request["environment"]["imageDigest"],
+                    "sourceArchiveSha256": experiment.digest(bundle.archive),
+                    "sourceInventorySha256": experiment.digest(experiment.encode(bundle.inventory)),
+                    "sourceProvenanceSha256": bundle.provenance_sha256,
+                    "runtimeArtifactSha256": request["artifacts"]["runtime"]["sha256"],
+                    "runtimeConfigurationSha256": experiment.digest(experiment.encode(config)),
+                    "runnerSha256": config["runnerSha256"],
+                    "environment": config["environment"],
+                    "resources": config["resources"],
+                    "containerUser": config["containerUser"],
+                    "cacheState": request["cacheState"],
+                    "cachePreparationSha256": bundle.dependency_cache.preparation_sha256
+                    if bundle.dependency_cache is not None
+                    else None,
+                    "cacheArchiveSha256": experiment.digest(bundle.dependency_cache.archive)
+                    if bundle.dependency_cache is not None
+                    else None,
+                },
+            )
+
+    def shell_with_capture(self, command, timeout, output_limit, tool_call_id):
+        method_started = time.monotonic()
+        method_stamp = datetime.now(timezone.utc).isoformat()
+        deadline = method_started + timeout
+        require(self.event_capture is not None, "event capture not configured")
+        spec, bundle, output, context = self.event_capture
+        self.capture_number += 1
+        folder = output / "event-captures" / f"{self.capture_number:04d}"
+        capture = capture_helper().Capture(
+            spec,
+            bundle,
+            {
+                **context,
+                "toolCallId": tool_call_id,
+                "toolCallOrdinal": self.capture_number,
+            },
+            folder,
+            self._call,
+        )
+        capture.record["startedAt"] = method_stamp
+
+        def execute(remaining):
+            argv = ["exec", "--workdir=/workspace/repository", self.name, "/bin/sh", "-c", command]
+            started = time.monotonic()
+            stamp = datetime.now(timezone.utc).isoformat()
+            result = self._call(argv, remaining, limit=output_limit, raw=True)
+            for role in ("stdout", "stderr"):
+                (folder / f"process-{role}.bin").write_bytes(result[role])
+            capture.record["processReceipt"] = {
+                "argv": ["docker", *argv],
+                "elapsedSeconds": time.monotonic() - started,
+                "startedAt": stamp,
+                "completedAt": datetime.now(timezone.utc).isoformat(),
+                "exitCode": result["exitCode"],
+                "error": result.get("error"),
+                **{
+                    role: {
+                        "path": f"process-{role}.bin",
+                        "bytes": len(result[role]),
+                        "sha256": experiment.digest(result[role]),
+                    }
+                    for role in ("stdout", "stderr")
+                },
+            }
+            capture.record["processTransportBytes"] = len(result["stdout"]) + len(result["stderr"])
+            capture.record["processTransportBytesComplete"] = True
+            return {
+                **result,
+                **{role: result[role].decode(errors="replace") for role in ("stdout", "stderr")},
+            }
+
+        result, descriptor = capture.run(
+            self.name, command, timeout, execute, deadline=deadline, started=method_started
+        )
+        return result, {
+            **descriptor,
+            "descriptorPath": str((folder / "descriptor.json").relative_to(output)),
+            "descriptorSha256": experiment.digest((folder / "descriptor.json").read_bytes()),
+        }
 
     def provision(self, request, config, timeout):
         live_ready(config)
@@ -1031,6 +1191,13 @@ def run_session(
     effort.update(preparationCostUsd=None, maintenanceCostUsd=None)
     status, final, checked_out, calls = "infrastructure-failure", None, False, 0
     model_observations, deviations = [], []
+    capture_accounting = {
+        "requests": 0,
+        "transportBytes": 0,
+        "elapsedSeconds": 0.0,
+        "costUsd": None,
+    }
+    capture_enabled = request["task"]["repository"] in config.get("eventCaptures", {})
 
     def remaining():
         result = budget["wallTimeSeconds"] - (clock() - started)
@@ -1065,6 +1232,11 @@ def run_session(
         return result
 
     try:
+        if capture_enabled:
+            require(
+                hasattr(backend, "configure_event_capture"), "backend lacks frozen event capture"
+            )
+            backend.configure_event_capture(request, config, bundle, output, request_hash)
         emit("provision", {"result": backend.provision(request, config, remaining())})
         if request["cacheState"] == "frozen-warm":
             cache = bundle.dependency_cache
@@ -1217,10 +1389,36 @@ def run_session(
                             "invalid shell request",
                         )
                         require(checked_out, "checkout_source is required before shell")
-                        result = backend.shell(
-                            arguments["command"], remaining(), config["maxToolOutputBytes"]
-                        )
+                        if capture_enabled:
+                            result, capture = backend.shell_with_capture(
+                                arguments["command"],
+                                remaining(),
+                                config["maxToolOutputBytes"],
+                                call["id"],
+                            )
+                            emit("event-capture", {"descriptor": capture})
+                            for key in ("requests", "elapsedSeconds"):
+                                capture_accounting[key] += capture.get(key, 0)
+                            complete_bytes = capture.get(
+                                "transportBytesComplete", False
+                            ) and capture.get("processTransportBytesComplete", False)
+                            if complete_bytes and capture_accounting["transportBytes"] is not None:
+                                capture_accounting["transportBytes"] += capture["transportBytes"]
+                            else:
+                                capture_accounting["transportBytes"] = None
+                            if effort["decodedBytes"] is not None and complete_bytes:
+                                effort["decodedBytes"] += capture.get(
+                                    "transportBytes", 0
+                                ) + capture.get("processTransportBytes", 0)
+                            else:
+                                effort["decodedBytes"] = None
+                        else:
+                            result = backend.shell(
+                                arguments["command"], remaining(), config["maxToolOutputBytes"]
+                            )
                         if result.get("error") in {"timeout", "output-limit"}:
+                            status = "budget-exhausted"
+                        if result.get("cancelled"):
                             status = "budget-exhausted"
                     elif name == "checkout_source":
                         require(arguments == {}, "checkout_source takes no arguments")
@@ -1320,6 +1518,8 @@ def run_session(
             "correctCompletion": None,
             "scoringPerformed": False,
         }
+        if capture_enabled:
+            result["eventCaptureAccounting"] = capture_accounting
         (output / "run.json").write_bytes(experiment.encode(result))
     return result
 

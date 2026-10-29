@@ -1,0 +1,60 @@
+{
+  "state": "source-bindings-only-no-admission",
+  "files": [
+    {
+      "path": "benchmarks/head-to-head/f05-go01-source-registry-result-20261029/FREEZE.json",
+      "sha256": "3a9e3bb1df382a45109dd0a38327c333188cf6faf12d6caf9ecf4bb83689cc8a",
+      "bytes": 11167
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-source-registry-result-20261029/verify.py",
+      "sha256": "30dd48db03724e7ef04ef1c1d0299071ae581b62117e1e7359a91cf410fdedc6",
+      "bytes": 17576
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-source-registry-result-20261029/evidence/registry.gz",
+      "sha256": "f32b1a5f3c3e6a83f250e4940bc3d01e3cef425b5d1764d6d5fdcf65528c152c",
+      "bytes": 526407
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-source-registry-result-20261029/bindings/native/package-inventory.json",
+      "sha256": "764fa272f1c461f4ecc2d6e2b58d641cc65c8e64da23f55981fa12b70c75bc21",
+      "bytes": 825987
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-source-registry-result-20261029/bindings/input-provenance.json",
+      "sha256": "1ee964532a3c2ec5554150ef374676891b16299e9f364c314127b8dc58ad9290",
+      "bytes": 865172
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-source-registry-result-review-20261029/FREEZE.json",
+      "sha256": "d8cbb48df07c0b1524de1b70b19144428effb9f1d25e6ff7a8d14e70145eced9",
+      "bytes": 2546
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-source-registry-result-review-20261029/review.json",
+      "sha256": "d0025dc20509e55b5360eb1bd6d84e241f92ea63ffb3a09130742901885d1e46",
+      "bytes": 5385
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-source-oracle-decision-20261029/FREEZE.json",
+      "sha256": "22e72402f3cadf7f5ea214a546a3dcaf18b968c67da81e9e03427436c4d10ed5",
+      "bytes": 662
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-source-oracle-decision-review-20261029/FREEZE.json",
+      "sha256": "f1e7ff04f0e8d6c385727bb5280f187bb71038dfeb72cf7d8aea8220fa9c9cc9",
+      "bytes": 1082
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-1/oracle.py",
+      "sha256": "059ac111da3e00605b06e8afcea92467bc294b7cec05d35203bfd402fccaa726",
+      "bytes": 16895
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/policy-proposal.json",
+      "sha256": "009c116c3dce44d97c4b3b870ed6f6a46bd72ad697ecdbd05ea2806857b524ff",
+      "bytes": 319621
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "argv": [
+    "/bin/sh",
+    "-c",
+    "printf \"%s\" \"$$\" > \"$1\"; exec 1>&- 2>&-; exec sleep 8",
+    "owned-review",
+    "/tmp/dotrepo-event-capture-review-do6t2rh4/pid"
+  ],
+  "case": "owned child closes stdout/stderr before sleeping past deadline",
+  "elapsedSeconds": 0.05642941617406905,
+  "exception": null,
+  "newDockerGoNodeProviderNetworkCalls": 0,
+  "ownedChildPid": 90214,
+  "ownedChildStillAliveAfterFunction": false,
+  "returnValue": {
+    "error": "timeout",
+    "exitCode": -9,
+    "stderr": {
+      "bytes": 0,
+      "hex": ""
+    },
+    "stdout": {
+      "bytes": 0,
+      "hex": ""
+    }
+  },
+  "reviewerCleanupOfOwnedChild": "already reaped by transport",
+  "runtimeSha256": "dc585e08f24e1a20da9d9ccdafac4af3f4e10cb8451de7ca3a74c05ecc985fa0",
+  "timeoutSeconds": 0.05
+}

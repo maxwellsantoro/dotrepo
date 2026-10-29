@@ -1,0 +1,49 @@
+{
+  "actualOracleUsable": false,
+  "campaignAdmitted": false,
+  "continuedReviewScope": "Static other capture invariants inspected. After-review must independently test successor timeout/cancellation/raw-retention and bounded mocks before any pass. No passed-review object issued here.",
+  "controls": {
+    "actualOwnedLocalPosixCounterexamples": 1,
+    "authorRetainedFocusedControls": "214 passed per frozen author packet; not independently rerun against original runtime after coordinator took fix ownership.",
+    "daemonUpstreamProviderNetworkActions": 0,
+    "reproducerRuffCheckFormat": "passed --no-cache"
+  },
+  "executionAuthorized": false,
+  "findings": [
+    {
+      "file": "benchmarks/head-to-head/bench/agent_runtime.py",
+      "function": "limited_process final wait",
+      "id": "F1",
+      "impact": "Timeout is not returned as a retained raw result; cleanup/descriptor code sees an exception/unknown transfer and the client is left alive until an external cleanup or natural exit. Mandatory minimum1second wait also extends the remaining deadline. Capture depends on this raw transport.",
+      "observed": {
+        "elapsedSeconds": 1.0081746249925345,
+        "exception": "TimeoutExpired",
+        "ownedChildStillAlive": true,
+        "requestedSeconds": 0.05,
+        "returnValue": null,
+        "reviewerKilledAndReaped": true
+      },
+      "priority": 2,
+      "repro": "reproduce_eof.py --output FRESH.json via uv run --offline --no-sync python; --prefix adds byte-retention observation for successor retest.",
+      "scope": "Pattern predates this patch (same final wait in baseline8a8); it remains material to current new capture deadline/cleanup guarantees. This is not an isolation escape, actual upstream failure or evidence of unauthorized execution.",
+      "smallestFix": "Catch final wait TimeoutExpired, kill and reap the owned process/client, preserve buffered stdout/stderr and return error=timeout; use remaining deadline rather than mandatory1second extension. Apply equivalent cancellation-before-wait cleanup. Add owned early-EOF regression with raw/text modes and retained byte prefix.",
+      "subjectSha256": "d4581245001b9f7710e04a50818ab73b802e7a7a156167eea19ad46abb6a6c2c",
+      "title": "Final wait after pipe EOF leaks a still-live client and drops timeout receipt",
+      "trigger": "Owned child closes both stdout/stderr while continuing to run past the deadline. Selector finishes with error=None, then process.wait(timeout=max(1,deadline-now)) raises subprocess.TimeoutExpired."
+    }
+  ],
+  "oracleQualified": false,
+  "reviewerContext": "Reviewer authored earlier F05/runtime/source/oracle work and multiple reviewed packets, but not this optional capture implementation or its owned tests. Independent implementation review with context, not a blind trial.",
+  "state": "independent-capture-before-review-findings-present",
+  "subject": {
+    "codeSha256": {
+      "benchmarks/head-to-head/bench/agent_runtime.py": "d4581245001b9f7710e04a50818ab73b802e7a7a156167eea19ad46abb6a6c2c",
+      "benchmarks/head-to-head/bench/event_capture.py": "ffe5b5e27aaca28bceae83aac15bfeb5e83963eef63a3b2f41c97833787b4a12",
+      "scripts/tests/test_agent_event_capture.py": "ff5393313566aba40a7a883ea99b1640889af43e67d0b26b3fac54753af49756",
+      "scripts/tests/test_agent_runtime.py": "6a52a74cee0a16b52163b3651f52138cc58b6f65ff1ff9e7d72a0f1161645654"
+    },
+    "implementationFreezeSha256": "f9748188f66b9facf40983844bab33f2b1a6a72c5d07a3f2885d990ebb4f199d",
+    "planSha256": "13d8ee8024a55ee5e89153019e5c07ac38ab0aac5885d7732e47bb8c5bc88f77"
+  },
+  "taskOutcomeObserved": false
+}

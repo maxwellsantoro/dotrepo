@@ -1,0 +1,69 @@
+{
+  "cases": [
+    {
+      "cancelled": false,
+      "case": "positive",
+      "executed": true,
+      "passed": true,
+      "state": "captured-unqualified-event-association"
+    },
+    {
+      "cancelled": false,
+      "case": "changed-container-id",
+      "executed": true,
+      "passed": true,
+      "state": "incomplete-unqualified-event-capture"
+    },
+    {
+      "cancelled": false,
+      "case": "changed-env",
+      "executed": true,
+      "passed": true,
+      "state": "incomplete-unqualified-event-capture"
+    },
+    {
+      "cancelled": false,
+      "case": "source-link",
+      "executed": true,
+      "passed": true,
+      "state": "incomplete-unqualified-event-capture"
+    },
+    {
+      "cancelled": false,
+      "case": "nonbyte-transport",
+      "executed": true,
+      "passed": true,
+      "state": "incomplete-unqualified-event-capture"
+    },
+    {
+      "cancelled": false,
+      "case": "process-receipt-mismatch",
+      "executed": true,
+      "passed": true,
+      "state": "incomplete-unqualified-event-capture"
+    },
+    {
+      "cancelled": true,
+      "case": "before-cancellation",
+      "executed": false,
+      "passed": true,
+      "state": "incomplete-unqualified-event-capture"
+    },
+    {
+      "cancelled": true,
+      "case": "after-cancellation",
+      "executed": true,
+      "passed": true,
+      "state": "incomplete-unqualified-event-capture"
+    },
+    {
+      "cancelled": false,
+      "case": "generated-tool-observation",
+      "executed": true,
+      "passed": true,
+      "state": "captured-unqualified-event-association"
+    }
+  ],
+  "newDockerGoNodeUpstreamNetworkProviderActions": 0,
+  "state": "independent-owned-fake-capture-controls-passed"
+}

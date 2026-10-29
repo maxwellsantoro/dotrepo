@@ -1,0 +1,15 @@
+{
+  "state": "concrete capture join unavailable; source-only preparation",
+  "files": [
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-event-capture-join-20261029/FREEZE.json",
+      "sha256": "5cdae83d1f32a34d17f69f960fb68c2759a21636f8d5d66e203b2fc02b023016"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-event-capture-join-20261029/assessment.json",
+      "sha256": "84c8d1eccd089065bd5417ec1d418401e6171e987f444ac0e5d7310389e2d470"
+    }
+  ],
+  "minimumNextPacket": "Existing host shell operation atomically captures event-file bytes/stat/hash before returning tool control; freeze exact full-wrapper/setup/source/tool/effective-context and time/resource/nontruncation/after-check association. No hidden-command gating/new executor.",
+  "actualEvaluationStillBlocked": true
+}

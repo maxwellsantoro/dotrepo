@@ -1,0 +1,20 @@
+{
+  "scope": "Owned source-only development; frozen old packets unchanged",
+  "failures": [
+    {
+      "stage": "first derivation",
+      "error": "FileNotFoundError due ROOT=HERE.parents[4]",
+      "resolution": "Corrected repository ancestor to parents[3]; successful full rederivation."
+    },
+    {
+      "stage": "isolated source-mutation control",
+      "error": "source binding path refusal caused by /tmp versus canonical /private/tmp root",
+      "resolution": "Compare resolved candidate with resolved synthetic root; source changed/deleted controls pass."
+    },
+    {
+      "stage": "lifecycle delta verifier",
+      "error": "format-sensitive text equality failed after Ruff reformatted the narrowed boolean",
+      "resolution": "Compare AST with exactly one specific source-evidence condition removed; policy and assertion/process sections remain exact."
+    }
+  ]
+}

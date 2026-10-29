@@ -1,0 +1,22 @@
+{
+  "predecessorFreezeSha256": "f9748188f66b9facf40983844bab33f2b1a6a72c5d07a3f2885d990ebb4f199d",
+  "originalImplementationDiffSha256": "27c6fd329d27225daf9c3d2fd8eaca781ca1d020a99749f948eb06e6989eab06",
+  "originalSourceReconstruction": "exact Git8a8 baseline plus frozen implementation.diff hunks; reconstructed hashes matched predecessor codeSha256",
+  "code": [
+    {
+      "path": "benchmarks/head-to-head/bench/agent_runtime.py",
+      "beforeSha256": "d4581245001b9f7710e04a50818ab73b802e7a7a156167eea19ad46abb6a6c2c",
+      "afterSha256": "dc585e08f24e1a20da9d9ccdafac4af3f4e10cb8451de7ca3a74c05ecc985fa0"
+    },
+    {
+      "path": "scripts/tests/test_agent_runtime.py",
+      "beforeSha256": "6a52a74cee0a16b52163b3651f52138cc58b6f65ff1ff9e7d72a0f1161645654",
+      "afterSha256": "7e1fb8f1e149bfe180c40248effecef1709a6c7da1398cb208b4445fb426c339"
+    }
+  ],
+  "helperUnchangedSha256": "ffe5b5e27aaca28bceae83aac15bfeb5e83963eef63a3b2f41c97833787b4a12",
+  "independentCounterexample": {
+    "path": "benchmarks/head-to-head/f05-go01-event-capture-review-20261029/pipe-eof-timeout-counterexample.json",
+    "sha256": "385827d6a0359e0a7388cbf5aac091bb7746821f57167ac192a37a8a454f370c"
+  }
+}

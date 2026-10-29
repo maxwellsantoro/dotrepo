@@ -1,0 +1,49 @@
+{
+  "cases": [
+    {
+      "case": "missing package",
+      "passed": true
+    },
+    {
+      "case": "duplicate package",
+      "passed": true
+    },
+    {
+      "case": "unresolved registry",
+      "passed": true
+    },
+    {
+      "case": "diagnostic package",
+      "passed": true
+    },
+    {
+      "case": "duplicate runtime name",
+      "passed": true
+    },
+    {
+      "case": "benchmarks and wrapper metadata excluded from required runtime case names",
+      "passed": true
+    },
+    {
+      "case": "all empty-name packages preserved for package-level coverage",
+      "passed": true
+    },
+    {
+      "case": "source input carries no native collection or task outcome",
+      "passed": true
+    }
+  ],
+  "currentGateChanged": false,
+  "emptyNamePackages": 40,
+  "fullMapRetainedAsAcceptedManifest": false,
+  "mapBytes": 242536,
+  "mapSha256": "768482aa2dcec46151e529a1126a8d74fbaba56f168d86c915002aa70d869e4a",
+  "newGoNodeDockerNativeNetworkProviderActions": 0,
+  "oracleQualified": false,
+  "packages": 104,
+  "perPackageHashesReproduced": 104,
+  "proposalFreezeSha256": "22e72402f3cadf7f5ea214a546a3dcaf18b968c67da81e9e03427436c4d10ed5",
+  "requiredNames": 5972,
+  "sourceBindingsVerified": 14,
+  "state": "prospective-recipe-reproduced-not-admitted"
+}

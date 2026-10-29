@@ -1,0 +1,41 @@
+{
+  "baselineCommit": "8a8da06d8ffa1de8ad08027f79140fca6403cb78",
+  "code": [
+    {
+      "baselineCommit": "8a8da06d8ffa1de8ad08027f79140fca6403cb78",
+      "baselineGitBlob": "15b45a3935764feac65b36bc7962ed69f773f6a1",
+      "baselineSha256": "43fa2f0a18802564934646db5fa80e75c0ced3856b07df8b72d5a27fda2b84c3",
+      "bytes": 66667,
+      "path": "benchmarks/head-to-head/bench/agent_runtime.py",
+      "sha256": "d4581245001b9f7710e04a50818ab73b802e7a7a156167eea19ad46abb6a6c2c"
+    },
+    {
+      "baselineCommit": "8a8da06d8ffa1de8ad08027f79140fca6403cb78",
+      "baselineGitBlob": null,
+      "baselineSha256": null,
+      "bytes": 21684,
+      "path": "benchmarks/head-to-head/bench/event_capture.py",
+      "sha256": "ffe5b5e27aaca28bceae83aac15bfeb5e83963eef63a3b2f41c97833787b4a12"
+    },
+    {
+      "baselineCommit": "8a8da06d8ffa1de8ad08027f79140fca6403cb78",
+      "baselineGitBlob": "f9cb1e9eba15643c380c8a543c540ba5619c0238",
+      "baselineSha256": "b4dd1ae04e39a7c27210765c709f8b807f96bd848d9803b873f24451a8bd8286",
+      "bytes": 60105,
+      "path": "scripts/tests/test_agent_runtime.py",
+      "sha256": "6a52a74cee0a16b52163b3651f52138cc58b6f65ff1ff9e7d72a0f1161645654"
+    },
+    {
+      "baselineCommit": "8a8da06d8ffa1de8ad08027f79140fca6403cb78",
+      "baselineGitBlob": null,
+      "baselineSha256": null,
+      "bytes": 16310,
+      "path": "scripts/tests/test_agent_event_capture.py",
+      "sha256": "ff5393313566aba40a7a883ea99b1640889af43e67d0b26b3fac54753af49756"
+    }
+  ],
+  "historicalBindingLimit": "Old frozen source decision/assessment binds runtime43fa at base8a8. Resolve historical source via git show8a8:path, not the intentionally changed current file. No old packet rehash/rewrite.",
+  "historicalCaptureAssessmentFreezeSha256": "5cdae83d1f32a34d17f69f960fb68c2759a21636f8d5d66e203b2fc02b023016",
+  "historicalRuntimeGitBlob": "15b45a3935764feac65b36bc7962ed69f773f6a1",
+  "historicalRuntimeSha256": "43fa2f0a18802564934646db5fa80e75c0ced3856b07df8b72d5a27fda2b84c3"
+}

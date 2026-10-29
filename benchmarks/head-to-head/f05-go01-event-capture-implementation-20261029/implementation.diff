@@ -1,0 +1,1294 @@
+--- baseline/benchmarks/head-to-head/bench/agent_runtime.py
++++ implementation/benchmarks/head-to-head/bench/agent_runtime.py
+@@ -51,6 +51,14 @@
+ Task qualification must establish that separately. Preparation/maintenance
+ charges remain unallocated nulls in session effort until campaign accounting.
+ 
++Optional eventCaptures maps repositories to a frozen event_capture helper hash,
++fixed workspace-child event path, explicit retained source subset/tool observations
++and byte/request ceilings. The host observes and exports within the same shell
++operation before returning control, sharing its single deadline. Raw artifacts
++and the unqualified descriptor stay host-only; shell permissions and display
++responses never consult a gold command or scorer. Observed subset consistency is
++not whole-revision integrity, effective child-environment proof or task success.
++
+ Primary API references used for the adapter/backend:
+ https://openrouter.ai/docs/api/api-reference/chat/create-a-chat-completion
+ https://docs.docker.com/reference/cli/docker/container/create/
+@@ -62,6 +70,7 @@
+ import argparse
+ from collections import deque
+ from dataclasses import dataclass, field
++from datetime import datetime, timezone
+ import hashlib
+ import io
+ import json
+@@ -591,6 +600,21 @@
+         "invalid starting state",
+     )
+     require(isinstance(config["sourceBundles"], dict), "source bundles must be frozen")
++    captures = config.get("eventCaptures", {})
++    require(
++        isinstance(captures, dict) and set(captures) <= set(config["sourceBundles"]),
++        "event captures must select frozen repositories",
++    )
++    for spec in captures.values():
++        capture_helper().validate(spec)
++
++
++def capture_helper():
++    # Disabled sessions retain the original import/runtime path. Enabled freezes
++    # bind the optional helper's exact source before using any of its behavior.
++    from . import event_capture
++
++    return event_capture
+ 
+ 
+ def live_ready(config):
+@@ -631,9 +655,10 @@
+     ]
+ 
+ 
+-def limited_process(argv, *, data=b"", timeout, output_limit):
++def limited_process(argv, *, data=b"", timeout, output_limit, raw=False):
+     """Bound host capture even when an untrusted container writes indefinitely."""
+     host_env = {key: os.environ[key] for key in ("PATH", "HOME") if key in os.environ}
++    entered = time.monotonic()
+     with tempfile.TemporaryFile() as incoming:
+         incoming.write(data)
+         incoming.seek(0)
+@@ -645,7 +670,8 @@
+         for stream in streams:
+             os.set_blocking(stream.fileno(), False)
+             selector.register(stream, selectors.EVENT_READ)
+-        deadline, error = time.monotonic() + timeout, None
++        deadline = (entered if raw else time.monotonic()) + timeout
++        error, cancelled = None, False
+         try:
+             while selector.get_map():
+                 remaining = deadline - time.monotonic()
+@@ -664,6 +690,11 @@
+                         break
+                 if error:
+                     break
++        except BaseException as exc:
++            # Cancellation must stop the client before waiting; callers retain
++            # the partial raw stream and then perform their normal cleanup.
++            error, cancelled = type(exc).__name__, isinstance(exc, (KeyboardInterrupt, SystemExit))
++            process.kill()
+         finally:
+             if error:
+                 process.kill()
+@@ -671,12 +702,18 @@
+             selector.close()
+             for stream in streams:
+                 stream.close()
+-        return {
+-            "stdout": bytes(streams[process.stdout]).decode(errors="replace"),
+-            "stderr": bytes(streams[process.stderr]).decode(errors="replace"),
++        value = {
++            "stdout": bytes(streams[process.stdout]),
++            "stderr": bytes(streams[process.stderr]),
+             "exitCode": process.returncode,
+             "error": error,
+         }
++        if cancelled:
++            value["cancelled"] = True
++        if not raw:
++            for role in ("stdout", "stderr"):
++                value[role] = value[role].decode(errors="replace")
++        return value
+ 
+ 
+ class DockerBackend:
+@@ -690,12 +727,122 @@
+         self.created = False
+         self.operations = []
+ 
+-    def _call(self, args, timeout, *, data=b"", limit=65536):
+-        result = self.invoke(["docker", *args], data=data, timeout=timeout, output_limit=limit)
++    def _call(self, args, timeout, *, data=b"", limit=65536, raw=False):
++        options = {"raw": True} if raw else {}
++        result = self.invoke(
++            ["docker", *args], data=data, timeout=timeout, output_limit=limit, **options
++        )
++        recorded = result
++        if raw:
++            recorded = {
++                **{k: v for k, v in result.items() if k not in {"stdout", "stderr"}},
++                **{
++                    role: {"bytes": len(result[role]), "sha256": experiment.digest(result[role])}
++                    for role in ("stdout", "stderr")
++                },
++            }
+         self.operations.append(
+-            {"argv": ["docker", *args], "stdinBytes": len(data), "result": result}
++            {"argv": ["docker", *args], "stdinBytes": len(data), "result": recorded}
+         )
+         return result
++
++    def configure_event_capture(self, request, config, bundle, output, request_hash):
++        spec = config.get("eventCaptures", {}).get(request["task"]["repository"])
++        self.event_capture = None
++        self.capture_number = 0
++        if spec is not None:
++            capture_helper().validate(spec)
++            require(
++                all(p in bundle.files for p in spec["sourceFiles"]), "capture source not retained"
++            )
++            self.event_capture = (
++                spec,
++                bundle,
++                Path(output),
++                {
++                    "sessionId": request["sessionId"],
++                    "requestSha256": request_hash,
++                    "repository": request["task"]["repository"],
++                    "revision": request["task"]["revision"],
++                    "imageDigest": request["environment"]["imageDigest"],
++                    "sourceArchiveSha256": experiment.digest(bundle.archive),
++                    "sourceInventorySha256": experiment.digest(experiment.encode(bundle.inventory)),
++                    "sourceProvenanceSha256": bundle.provenance_sha256,
++                    "runtimeArtifactSha256": request["artifacts"]["runtime"]["sha256"],
++                    "runtimeConfigurationSha256": experiment.digest(experiment.encode(config)),
++                    "runnerSha256": config["runnerSha256"],
++                    "environment": config["environment"],
++                    "resources": config["resources"],
++                    "containerUser": config["containerUser"],
++                    "cacheState": request["cacheState"],
++                    "cachePreparationSha256": bundle.dependency_cache.preparation_sha256
++                    if bundle.dependency_cache is not None
++                    else None,
++                    "cacheArchiveSha256": experiment.digest(bundle.dependency_cache.archive)
++                    if bundle.dependency_cache is not None
++                    else None,
++                },
++            )
++
++    def shell_with_capture(self, command, timeout, output_limit, tool_call_id):
++        method_started = time.monotonic()
++        method_stamp = datetime.now(timezone.utc).isoformat()
++        deadline = method_started + timeout
++        require(self.event_capture is not None, "event capture not configured")
++        spec, bundle, output, context = self.event_capture
++        self.capture_number += 1
++        folder = output / "event-captures" / f"{self.capture_number:04d}"
++        capture = capture_helper().Capture(
++            spec,
++            bundle,
++            {
++                **context,
++                "toolCallId": tool_call_id,
++                "toolCallOrdinal": self.capture_number,
++            },
++            folder,
++            self._call,
++        )
++        capture.record["startedAt"] = method_stamp
++
++        def execute(remaining):
++            argv = ["exec", "--workdir=/workspace/repository", self.name, "/bin/sh", "-c", command]
++            started = time.monotonic()
++            stamp = datetime.now(timezone.utc).isoformat()
++            result = self._call(argv, remaining, limit=output_limit, raw=True)
++            for role in ("stdout", "stderr"):
++                (folder / f"process-{role}.bin").write_bytes(result[role])
++            capture.record["processReceipt"] = {
++                "argv": ["docker", *argv],
++                "elapsedSeconds": time.monotonic() - started,
++                "startedAt": stamp,
++                "completedAt": datetime.now(timezone.utc).isoformat(),
++                "exitCode": result["exitCode"],
++                "error": result.get("error"),
++                **{
++                    role: {
++                        "path": f"process-{role}.bin",
++                        "bytes": len(result[role]),
++                        "sha256": experiment.digest(result[role]),
++                    }
++                    for role in ("stdout", "stderr")
++                },
++            }
++            capture.record["processTransportBytes"] = len(result["stdout"]) + len(result["stderr"])
++            capture.record["processTransportBytesComplete"] = True
++            return {
++                **result,
++                **{role: result[role].decode(errors="replace") for role in ("stdout", "stderr")},
++            }
++
++        result, descriptor = capture.run(
++            self.name, command, timeout, execute, deadline=deadline, started=method_started
++        )
++        return result, {
++            **descriptor,
++            "descriptorPath": str((folder / "descriptor.json").relative_to(output)),
++            "descriptorSha256": experiment.digest((folder / "descriptor.json").read_bytes()),
++        }
+ 
+     def provision(self, request, config, timeout):
+         live_ready(config)
+@@ -1031,6 +1178,13 @@
+     effort.update(preparationCostUsd=None, maintenanceCostUsd=None)
+     status, final, checked_out, calls = "infrastructure-failure", None, False, 0
+     model_observations, deviations = [], []
++    capture_accounting = {
++        "requests": 0,
++        "transportBytes": 0,
++        "elapsedSeconds": 0.0,
++        "costUsd": None,
++    }
++    capture_enabled = request["task"]["repository"] in config.get("eventCaptures", {})
+ 
+     def remaining():
+         result = budget["wallTimeSeconds"] - (clock() - started)
+@@ -1065,6 +1219,11 @@
+         return result
+ 
+     try:
++        if capture_enabled:
++            require(
++                hasattr(backend, "configure_event_capture"), "backend lacks frozen event capture"
++            )
++            backend.configure_event_capture(request, config, bundle, output, request_hash)
+         emit("provision", {"result": backend.provision(request, config, remaining())})
+         if request["cacheState"] == "frozen-warm":
+             cache = bundle.dependency_cache
+@@ -1217,10 +1376,36 @@
+                             "invalid shell request",
+                         )
+                         require(checked_out, "checkout_source is required before shell")
+-                        result = backend.shell(
+-                            arguments["command"], remaining(), config["maxToolOutputBytes"]
+-                        )
++                        if capture_enabled:
++                            result, capture = backend.shell_with_capture(
++                                arguments["command"],
++                                remaining(),
++                                config["maxToolOutputBytes"],
++                                call["id"],
++                            )
++                            emit("event-capture", {"descriptor": capture})
++                            for key in ("requests", "elapsedSeconds"):
++                                capture_accounting[key] += capture.get(key, 0)
++                            complete_bytes = capture.get(
++                                "transportBytesComplete", False
++                            ) and capture.get("processTransportBytesComplete", False)
++                            if complete_bytes and capture_accounting["transportBytes"] is not None:
++                                capture_accounting["transportBytes"] += capture["transportBytes"]
++                            else:
++                                capture_accounting["transportBytes"] = None
++                            if effort["decodedBytes"] is not None and complete_bytes:
++                                effort["decodedBytes"] += capture.get(
++                                    "transportBytes", 0
++                                ) + capture.get("processTransportBytes", 0)
++                            else:
++                                effort["decodedBytes"] = None
++                        else:
++                            result = backend.shell(
++                                arguments["command"], remaining(), config["maxToolOutputBytes"]
++                            )
+                         if result.get("error") in {"timeout", "output-limit"}:
++                            status = "budget-exhausted"
++                        if result.get("cancelled"):
+                             status = "budget-exhausted"
+                     elif name == "checkout_source":
+                         require(arguments == {}, "checkout_source takes no arguments")
+@@ -1320,6 +1505,8 @@
+             "correctCompletion": None,
+             "scoringPerformed": False,
+         }
++        if capture_enabled:
++            result["eventCaptureAccounting"] = capture_accounting
+         (output / "run.json").write_bytes(experiment.encode(result))
+     return result
+ 
+--- baseline/benchmarks/head-to-head/bench/event_capture.py
++++ implementation/benchmarks/head-to-head/bench/event_capture.py
+@@ -0,0 +1,513 @@
++"""Optional host-owned same-shell-call event capture; no scorer or process launcher.
++
++This module observes a frozen source/tool subset and exports a regular event file
++before the shell operation returns. It does not establish whole-tree integrity,
++source-owned tool-build provenance, command scope, or a completed task. Those are
++post-run checks. The normal producer may write the event file; active same-UID
++adversarial writer authentication is outside this operator-consistency boundary.
++"""
++
++from __future__ import annotations
++
++import hashlib
++import io
++import json
++from datetime import datetime, timezone
++from pathlib import Path
++import re
++import shlex
++import tarfile
++import time
++
++HEX = re.compile(r"[0-9a-f]{64}")
++MAX_EVENT = 256 * 1024**2
++MAX_METADATA = 2 * 1024**2
++MAX_TOTAL = 512 * 1024**2
++KEYS = {
++    "helperSha256",
++    "path",
++    "sourceFiles",
++    "toolPaths",
++    "maxEventBytes",
++    "maxMetadataBytes",
++    "maxCaptureBytes",
++    "maxRequests",
++}
++
++
++def require(value, message):
++    if not value:
++        raise ValueError(message)
++
++
++def digest(raw):
++    return hashlib.sha256(raw).hexdigest()
++
++
++def encode(value):
++    return (json.dumps(value, sort_keys=True, allow_nan=False) + "\n").encode()
++
++
++def reject_constant(value):
++    raise ValueError("nonfinite inspect JSON")
++
++
++def literal_path(value):
++    return (
++        isinstance(value, str)
++        and 0 < len(value) <= 1024
++        and not any(ord(c) < 32 or ord(c) == 127 for c in value)
++        and "\\" not in value
++        and "\x00" not in value
++        and all(part not in ("", ".", "..") for part in value.lstrip("/").split("/"))
++    )
++
++
++def validate(spec):
++    require(isinstance(spec, dict) and set(spec) == KEYS, "event capture config keys")
++    require(
++        spec["helperSha256"] == digest(Path(__file__).read_bytes()), "event capture helper changed"
++    )
++    path = spec["path"]
++    require(
++        isinstance(path, str)
++        and re.fullmatch(r"/workspace/[A-Za-z0-9][A-Za-z0-9_.-]{0,99}", path)
++        and path != "/workspace/repository",
++        "event path must be a fixed workspace child",
++    )
++    sources = spec["sourceFiles"]
++    require(
++        isinstance(sources, list)
++        and 0 < len(sources) <= 10000
++        and all(literal_path(p) and not p.startswith("/") for p in sources)
++        and sources == sorted(set(sources)),
++        "event capture source subset",
++    )
++    tools = spec["toolPaths"]
++    require(
++        isinstance(tools, dict)
++        and 0 < len(tools) <= 32
++        and all(literal_path(p) and p.startswith("/") and p != path for p in tools)
++        and all(h is None or isinstance(h, str) and HEX.fullmatch(h) for h in tools.values()),
++        "event capture tool observations",
++    )
++    for key, maximum in [
++        ("maxEventBytes", MAX_EVENT),
++        ("maxMetadataBytes", MAX_METADATA),
++        ("maxCaptureBytes", MAX_TOTAL),
++        ("maxRequests", 16),
++    ]:
++        require(type(spec[key]) is int and 0 < spec[key] <= maximum, "event capture bound: " + key)
++
++
++def witnesses(raw, paths):
++    parts = raw.split(b"\0")
++    require(parts[-1] == b"" and len(parts) == len(paths) * 2 + 1, "witness framing/count")
++    result = {}
++    for i in range(0, len(parts) - 1, 2):
++        kind = parts[i].decode("ascii")
++        value = parts[i + 1].decode("utf-8", errors="strict")
++        require(kind in {"file", "link", "absent", "special"}, "witness kind")
++        if kind in {"file", "link"}:
++            checksum, name = value.split("  ", 1)
++            require(HEX.fullmatch(checksum), "witness checksum")
++        else:
++            checksum, name = None, value
++        require(name in paths and name not in result, "witness path")
++        result[name] = {"kind": kind, "sha256": checksum}
++    require(set(result) == set(paths), "missing witness")
++    return result
++
++
++WITNESS = """for p do
++if test -f "$p"; then
++  if test -L "$p"; then printf 'link\\0'; else printf 'file\\0'; fi
++  sha256sum --zero -- "$p" || exit
++elif test -L "$p" || test -e "$p"; then printf 'special\\0%s\\0' "$p"
++else printf 'absent\\0%s\\0' "$p"; fi
++done"""
++
++
++def event_metadata(command_path, maximum):
++    p = shlex.quote(command_path)
++    return (
++        f"if test -L {p}; then printf 'symlink\\n'; "
++        f"elif test ! -e {p}; then printf 'absent\\n'; "
++        f"elif test ! -f {p}; then printf 'special\\n'; "
++        f"elif test \"$(stat -c %s -- {p})\" -gt {maximum}; then printf 'oversize\\n'; "
++        f"else stat -c 'regular|%s|%h|%i|%Y|%Z|%a' -- {p}; sha256sum --zero -- {p}; fi"
++    )
++
++
++def parse_event_metadata(raw, path, maximum):
++    if raw in (b"absent\n", b"special\n", b"symlink\n", b"oversize\n"):
++        return {"kind": raw.decode().strip()}
++    first, rest = raw.split(b"\n", 1)
++    values = first.decode("ascii").split("|")
++    require(len(values) == 7 and values[0] == "regular", "event stat framing")
++    size, links, inode, mtime, ctime = [int(v) for v in values[1:6]]
++    mode = int(values[6], 8)
++    require(0 <= size <= maximum and links == 1 and mode & ~0o777 == 0, "unsafe event stat")
++    checksum, name = rest.removesuffix(b"\0").decode("utf-8", errors="strict").split("  ", 1)
++    require(rest.endswith(b"\0") and name == path and HEX.fullmatch(checksum), "event stat hash")
++    return {
++        "kind": "regular",
++        "bytes": size,
++        "links": links,
++        "inode": inode,
++        "mtime": mtime,
++        "ctime": ctime,
++        "mode": mode,
++        "sha256": checksum,
++    }
++
++
++def event_bytes(raw, path, maximum):
++    require(len(raw) <= maximum + 10240, "event archive cap")
++    with tarfile.open(fileobj=io.BytesIO(raw), mode="r:") as archive:
++        item = archive.next()
++        require(item is not None, "event archive member count")
++        require(
++            item.name == path.removeprefix("/workspace/")
++            and item.type in {tarfile.REGTYPE, tarfile.AREGTYPE}
++            and not item.sparse
++            and item.mode & ~0o777 == 0
++            and item.size <= maximum
++            and item.offset == 0
++            and item.offset_data == 512
++            and not item.pax_headers,
++            "unsafe event archive member",
++        )
++        value = archive.extractfile(item).read(maximum + 1)
++        require(len(value) == item.size, "short event file")
++        require(archive.next() is None, "event archive member count")
++        end = 512 + ((item.size + 511) // 512) * 512
++        require(
++            len(raw) >= end + 1024 and not raw[end:].strip(b"\0"), "event archive trailing data"
++        )
++        return value
++
++
++class Capture:
++    def __init__(self, spec, bundle, context, folder, call, *, clock=time.monotonic):
++        validate(spec)
++        require(all(p in bundle.files for p in spec["sourceFiles"]), "capture source not retained")
++        self.spec, self.folder, self.call, self.clock = spec, Path(folder), call, clock
++        self.folder.mkdir(parents=True, exist_ok=False)
++        self.sources = {
++            "/workspace/repository/" + p: digest(bundle.files[p]) for p in spec["sourceFiles"]
++        }
++        require(not self.sources.keys() & spec["toolPaths"].keys(), "source/tool witness overlap")
++        self.paths = sorted([*self.sources, *spec["toolPaths"]])
++        self.record = {
++            "state": "incomplete-unqualified-event-capture",
++            "context": context,
++            "configuration": spec,
++            "configurationSha256": digest(encode(spec)),
++            "observedSourceSubset": self.sources,
++            "operations": [],
++            "errors": [],
++            "transportBytes": 0,
++            "transportBytesComplete": True,
++            "processTransportBytes": 0,
++            "processTransportBytesComplete": True,
++            "requests": 0,
++            "taskOutcomeObserved": False,
++            "oracleQualified": False,
++            "wholeSourceTreeIntegrityEstablished": False,
++            "costUsd": None,
++            "costExclusions": [
++                "Host/container instrumentation cost has no metered dollar receipt."
++            ],
++            "limitation": "Observed source/tool subset and operator process/export association only; post-run scope/context/tool-provenance checks remain required.",
++        }
++
++    def raw(self, label, args, *, maximum, data=b""):
++        require(self.record["transportBytesComplete"], "capture transport accounting unknown")
++        require(self.clock() < self.deadline, "capture shared deadline exhausted")
++        require(self.record["requests"] < self.spec["maxRequests"], "capture request bound")
++        available = self.spec["maxCaptureBytes"] - self.record["transportBytes"] - len(data)
++        require(available > 0, "capture transport budget exhausted")
++        limit = min(maximum, available)
++        self.record["requests"] += 1
++        stamp = datetime.now(timezone.utc).isoformat()
++        try:
++            result = self.call(args, self.deadline - self.clock(), data=data, limit=limit, raw=True)
++        except BaseException as exc:
++            self.record["transportBytesComplete"] = False
++            self.record["operations"].append(
++                {
++                    "label": label,
++                    "argv": args,
++                    "stdinBytesPrepared": len(data),
++                    "stdinSha256": digest(data),
++                    "errorType": type(exc).__name__,
++                    "transportBytes": None,
++                    "startedAt": stamp,
++                    "completedAt": datetime.now(timezone.utc).isoformat(),
++                }
++            )
++            raise
++        out, err = result["stdout"], result["stderr"]
++        if not isinstance(out, bytes) or not isinstance(err, bytes):
++            self.record["transportBytesComplete"] = False
++        require(isinstance(out, bytes) and isinstance(err, bytes), "capture transport must be raw")
++        self.record["transportBytes"] += len(data) + len(out) + len(err)
++        leaf = self.folder / label
++        leaf.mkdir()
++        stored_out, stored_err = out[:limit], err[: max(0, limit - len(out))]
++        (leaf / "stdout.bin").write_bytes(stored_out)
++        (leaf / "stderr.bin").write_bytes(stored_err)
++        receipt = {k: v for k, v in result.items() if k not in {"stdout", "stderr"}}
++        receipt.update(
++            label=label,
++            argv=args,
++            stdinBytes=len(data),
++            stdinSha256=digest(data),
++            stdoutBytes=len(stored_out),
++            stdoutSha256=digest(stored_out),
++            stderrBytes=len(stored_err),
++            stderrSha256=digest(stored_err),
++            observedTransportBytes=len(data) + len(out) + len(err),
++            remainingSeconds=self.deadline - self.clock(),
++            startedAt=stamp,
++            completedAt=datetime.now(timezone.utc).isoformat(),
++        )
++        self.record["operations"].append(receipt)
++        if result.get("cancelled"):
++            raise KeyboardInterrupt("capture transport cancelled")
++        require(len(out) + len(err) <= limit, "capture raw output cap")
++        require(not result.get("error") and result["exitCode"] == 0, label + " failed")
++        require(self.clock() < self.deadline, "capture shared deadline exhausted")
++        return out
++
++    def probe(self, label):
++        raw = self.raw(
++            label,
++            [
++                "exec",
++                "-i",
++                self.container,
++                "xargs",
++                "-0",
++                "/bin/sh",
++                "-c",
++                WITNESS,
++                "capture-witness",
++            ],
++            maximum=self.spec["maxMetadataBytes"],
++            data=b"".join(p.encode() + b"\0" for p in self.paths),
++        )
++        value = witnesses(raw, self.paths)
++        require(
++            all(value[p] == {"kind": "file", "sha256": h} for p, h in self.sources.items()),
++            "observed source subset changed",
++        )
++        for path, expected in self.spec["toolPaths"].items():
++            if expected is not None:
++                require(
++                    value[path]["kind"] in {"file", "link"} and value[path]["sha256"] == expected,
++                    "observed tool changed",
++                )
++        return value
++
++    def inspect(self, label):
++        raw = self.raw(label, ["inspect", self.container], maximum=self.spec["maxMetadataBytes"])
++        rows = json.loads(raw, parse_constant=reject_constant)
++        require(
++            isinstance(rows, list) and len(rows) == 1 and isinstance(rows[0], dict),
++            "capture inspect shape",
++        )
++        row = rows[0]
++        require(isinstance(row.get("Id"), str) and HEX.fullmatch(row["Id"]), "capture container ID")
++        require(row["Name"] == "/" + self.container, "capture container association")
++        context = self.record["context"]
++        require(row["Image"] == context["imageDigest"], "capture image association")
++        require(
++            not row["Mounts"]
++            and row["HostConfig"]["ReadonlyRootfs"] is True
++            and row["HostConfig"]["NetworkMode"] == "none"
++            and row["Config"]["User"] == context["containerUser"],
++            "capture isolation observation",
++        )
++        return row
++
++    def observe(self, label, operation, *, retain=True):
++        try:
++            value = operation()
++            if retain:
++                self.record[label] = value
++            return value
++        except (ValueError, KeyError, TypeError, OSError, tarfile.TarError, UnicodeError) as exc:
++            self.record["errors"].append(
++                {"stage": label, "type": type(exc).__name__, "reason": str(exc)}
++            )
++            return None
++
++    def run(self, container, command, timeout, execute, *, deadline=None, started=None):
++        started = self.clock() if started is None else started
++        self.container = container
++        self.deadline = started + timeout if deadline is None else deadline
++        self.record.update(
++            command=command, commandSha256=digest(command.encode()), containerName=container
++        )
++        self.record.setdefault("startedAt", datetime.now(timezone.utc).isoformat())
++        result = None
++        try:
++            self.observe("inspect-before", lambda: self.inspect("inspect-before"))
++            self.observe("witness-before", lambda: self.probe("witness-before"))
++            baseline = self.observe(
++                "event-baseline",
++                lambda: self.raw(
++                    "event-baseline",
++                    [
++                        "exec",
++                        container,
++                        "/bin/sh",
++                        "-c",
++                        f"if test -e {shlex.quote(self.spec['path'])} || test -L {shlex.quote(self.spec['path'])}; then printf 'present\\n'; else printf 'absent\\n'; fi",
++                    ],
++                    maximum=self.spec["maxMetadataBytes"],
++                ).decode("ascii"),
++            )
++            if baseline != "absent\n":
++                self.record["errors"].append(
++                    {"stage": "event-baseline", "reason": "event path not witnessed fresh"}
++                )
++            require(self.clock() < self.deadline, "shared deadline exhausted before chosen command")
++            # No command matching, scorer or gold consultation; baseline errors never deny a command.
++            self.record["processTransportBytesComplete"] = False
++            result = execute(self.deadline - self.clock())
++            self.record["processResult"] = result
++            receipt = self.record.get("processReceipt", {})
++            if not (
++                self.record["processTransportBytesComplete"]
++                and receipt.get("argv")
++                == [
++                    "docker",
++                    "exec",
++                    "--workdir=/workspace/repository",
++                    container,
++                    "/bin/sh",
++                    "-c",
++                    command,
++                ]
++                and receipt.get("exitCode") == result.get("exitCode")
++                and receipt.get("error") == result.get("error")
++            ):
++                self.record["errors"].append(
++                    {
++                        "stage": "chosen-process",
++                        "reason": "raw process receipt unavailable/inconsistent",
++                    }
++                )
++            if result.get("error") or result.get("cancelled"):
++                self.record["errors"].append(
++                    {"stage": "chosen-process", "reason": "process failed/cancelled transport"}
++                )
++            if result.get("cancelled"):
++                return result, self.record
++            self.observe("inspect-after", lambda: self.inspect("inspect-after"))
++            self.observe("witness-after", lambda: self.probe("witness-after"))
++            path, maximum = self.spec["path"], self.spec["maxEventBytes"]
++
++            def metadata(label):
++                raw = self.raw(
++                    label,
++                    ["exec", container, "/bin/sh", "-c", event_metadata(path, maximum)],
++                    maximum=self.spec["maxMetadataBytes"],
++                )
++                return parse_event_metadata(raw, path, maximum)
++
++            before = self.observe("event-before-export", lambda: metadata("event-before-export"))
++            if before is not None and before["kind"] == "regular":
++                raw_tar = self.observe(
++                    "export",
++                    lambda: self.raw(
++                        "export",
++                        [
++                            "exec",
++                            container,
++                            "tar",
++                            "--create",
++                            "--format=ustar",
++                            "--no-recursion",
++                            "-C",
++                            "/workspace",
++                            "--",
++                            path.removeprefix("/workspace/"),
++                        ],
++                        maximum=maximum + 10240,
++                    ),
++                    retain=False,
++                )
++                if raw_tar is not None:
++                    # Store raw tar as an artifact, not inside JSON/provider messages.
++                    exported = self.observe(
++                        "event-file",
++                        lambda: event_bytes(raw_tar, path, maximum),
++                        retain=False,
++                    )
++                    if exported is not None:
++                        (self.folder / "events.bin").write_bytes(exported)
++                        self.record["event-file"] = {
++                            "path": "events.bin",
++                            "bytes": len(exported),
++                            "sha256": digest(exported),
++                        }
++                after = self.observe("event-after-export", lambda: metadata("event-after-export"))
++                exported = self.record.get("event-file")
++                if not (
++                    before == after
++                    and isinstance(exported, dict)
++                    and exported["sha256"] == before["sha256"]
++                    and exported["bytes"] == before["bytes"]
++                ):
++                    self.record["errors"].append(
++                        {
++                            "stage": "export-association",
++                            "reason": "event stat/hash changed or export incomplete",
++                        }
++                    )
++            else:
++                self.record["errors"].append(
++                    {"stage": "export-association", "reason": "event file absent/unsafe/oversize"}
++                )
++            if self.record.get("inspect-before") != self.record.get("inspect-after"):
++                # Volatile Docker State fields differ normally; compare stable source/tool context only below.
++                before_context = self.record.get("inspect-before", {})
++                after_context = self.record.get("inspect-after", {})
++                for key in ["Id", "Image", "Config", "HostConfig", "Mounts", "NetworkSettings"]:
++                    if before_context.get(key) != after_context.get(key):
++                        self.record["errors"].append(
++                            {
++                                "stage": "container-context",
++                                "reason": "container context changed: " + key,
++                            }
++                        )
++            require(self.clock() < self.deadline, "capture shared deadline exhausted")
++            if not self.record["errors"]:
++                self.record["state"] = "captured-unqualified-event-association"
++        except BaseException as exc:
++            self.record["errors"].append(
++                {"stage": "capture", "type": type(exc).__name__, "reason": str(exc)}
++            )
++            if result is None:
++                result = {
++                    "stdout": "",
++                    "stderr": "",
++                    "exitCode": None,
++                    "error": "timeout"
++                    if isinstance(exc, TimeoutError) or self.clock() >= self.deadline
++                    else type(exc).__name__,
++                    "cancelled": isinstance(exc, (KeyboardInterrupt, SystemExit)),
++                }
++            elif isinstance(exc, (KeyboardInterrupt, SystemExit)):
++                result = {**result, "error": type(exc).__name__, "cancelled": True}
++            elif self.clock() >= self.deadline:
++                result = {**result, "error": "timeout"}
++        finally:
++            self.record["elapsedSeconds"] = self.clock() - started
++            self.record["completedAt"] = datetime.now(timezone.utc).isoformat()
++            (self.folder / "descriptor.json").write_bytes(encode(self.record))
++        return result, self.record
+--- baseline/scripts/tests/test_agent_runtime.py
++++ implementation/scripts/tests/test_agent_runtime.py
+@@ -1332,3 +1332,77 @@
+     spec["inventory"] = write(tmp_path, "source-inventory.json", inventory)
+     with pytest.raises(ValueError, match="conflicting|links/devices|archive mismatch"):
+         runtime.source_bundle(tmp_path, spec, "a" * 40, set(), 1000000)
++
++
++@pytest.mark.parametrize("raw,cancelled", [(False, False), (True, False), (True, True)])
++def test_limited_process_optional_raw_and_cancelled_prefix_are_retained(
++    monkeypatch, raw, cancelled
++):
++    """Fake pipes only: no subprocess, daemon, provider or upstream invocation."""
++    from types import SimpleNamespace
++
++    class Pipe:
++        def __init__(self, number, data):
++            self.number, self.chunks = number, [data, b""]
++
++        def fileno(self):
++            return self.number
++
++        def close(self):
++            pass
++
++    class Process:
++        def __init__(self):
++            self.stdout, self.stderr = Pipe(90001, b"\xffowned"), Pipe(90002, b"\x80")
++            self.returncode, self.killed = None, False
++
++        def kill(self):
++            self.returncode, self.killed = -9, True
++
++        def wait(self, **kwargs):
++            if cancelled:
++                assert self.killed, "cancellation waited before killing client"
++            if self.returncode is None:
++                self.returncode = 0
++            return self.returncode
++
++    class Selector:
++        def __init__(self):
++            self.keys, self.turn = {}, 0
++
++        def register(self, stream, events):
++            self.keys[stream.fileno()] = SimpleNamespace(fileobj=stream)
++
++        def unregister(self, stream):
++            del self.keys[stream.fileno()]
++
++        def get_map(self):
++            return self.keys
++
++        def select(self, timeout):
++            self.turn += 1
++            if cancelled and self.turn == 2:
++                raise KeyboardInterrupt("owned fake cancellation")
++            return [(key, None) for key in list(self.keys.values())]
++
++        def close(self):
++            pass
++
++    process = Process()
++    monkeypatch.setattr(runtime.subprocess, "Popen", lambda *args, **kwargs: process)
++    monkeypatch.setattr(runtime.selectors, "DefaultSelector", Selector)
++    monkeypatch.setattr(runtime.os, "set_blocking", lambda *args: None)
++    monkeypatch.setattr(
++        runtime.os,
++        "read",
++        lambda fd, size: (process.stdout if fd == 90001 else process.stderr).chunks.pop(0),
++    )
++    result = runtime.limited_process(["NEVER_EXECUTED"], timeout=10, output_limit=100, raw=raw)
++    assert result["stdout"] == (b"\xffowned" if raw else "\ufffdowned")
++    assert result["stderr"] == (b"\x80" if raw else "\ufffd")
++    if cancelled:
++        assert process.killed and result["exitCode"] == -9
++        assert result["cancelled"] is True and result["error"] == "KeyboardInterrupt"
++    else:
++        assert result["exitCode"] == 0 and result["error"] is None
++        assert set(result) == {"stdout", "stderr", "exitCode", "error"}
+--- baseline/scripts/tests/test_agent_event_capture.py
++++ implementation/scripts/tests/test_agent_event_capture.py
+@@ -0,0 +1,391 @@
++"""Mocked optional same-tool-call capture; no daemon/upstream/provider calls."""
++
++from copy import deepcopy
++import io
++import json
++from pathlib import Path
++import sys
++import tarfile
++
++import pytest
++
++BENCH = Path(__file__).resolve().parents[2] / "benchmarks/head-to-head"
++sys.path.insert(0, str(BENCH))
++from bench import event_capture as capture  # noqa: E402
++from bench import agent_runtime as runtime  # noqa: E402
++from test_agent_runtime import session as session_fixture  # noqa: E402
++
++
++@pytest.fixture
++def session(tmp_path):
++    return session_fixture.__wrapped__(tmp_path)
++
++
++PAYLOAD = b'{"owned":"raw bytes"}\n\xff\x80'
++TOOL = "/usr/bin/owned-tool"
++
++
++def spec(bundle):
++    return {
++        "helperSha256": capture.digest(Path(capture.__file__).read_bytes()),
++        "path": "/workspace/go-test-events.jsonl",
++        "sourceFiles": sorted(bundle.files),
++        "toolPaths": {TOOL: capture.digest(b"owned tool")},
++        "maxEventBytes": 4096,
++        "maxMetadataBytes": 8192,
++        "maxCaptureBytes": 65536,
++        "maxRequests": 8,
++    }
++
++
++def tar_payload(value, *, kind=None, name="go-test-events.jsonl"):
++    out = io.BytesIO()
++    with tarfile.open(fileobj=out, mode="w", format=tarfile.USTAR_FORMAT) as stream:
++        row = tarfile.TarInfo(name)
++        row.mode = 0o644
++        if kind is not None:
++            row.type, row.linkname = kind, "target"
++        else:
++            row.size = len(value)
++        stream.addfile(row, io.BytesIO(value) if kind is None else None)
++    return out.getvalue()
++
++
++class Boundary:
++    def __init__(self, spec, bundle, context, *, failure=None, clock=None):
++        self.spec, self.bundle, self.context = spec, bundle, context
++        self.failure, self.labels, self.executed, self.clock = failure, [], False, clock
++        self.metadata_count = self.inspect_count = 0
++
++    def call(self, argv, timeout, *, data=b"", limit, raw):
++        assert raw is True and timeout > 0
++        error, out, err = None, b"", b""
++        if argv[0] == "inspect":
++            self.inspect_count += 1
++            row = {
++                "Id": "a" * 64,
++                "Name": "/owned-container",
++                "Image": self.context["imageDigest"],
++                "Config": {"User": "1000:1000", "Env": ["HOME=/workspace/.home"]},
++                "HostConfig": {"ReadonlyRootfs": True, "NetworkMode": "none"},
++                "Mounts": [],
++                "NetworkSettings": {},
++                "State": {"Running": True, "counter": self.inspect_count},
++            }
++            if self.failure == "context-after" and self.executed:
++                row["HostConfig"]["NetworkMode"] = "bridge"
++            out = json.dumps([row]).encode()
++            label = "inspect-after" if self.executed else "inspect-before"
++        elif argv[0] == "exec" and "xargs" in argv:
++            if self.failure == "unknown-transport" and not self.executed:
++                raise OSError("owned fake transport failed without raw receipt")
++            values = []
++            for path in data.decode().split("\x00")[:-1]:
++                if path == TOOL:
++                    if self.failure == "tool-generated" and not self.executed:
++                        values.extend([b"absent", path.encode()])
++                        continue
++                    checksum = capture.digest(b"owned tool")
++                    if self.failure == "tool-after" and self.executed:
++                        checksum = "0" * 64
++                else:
++                    relative = path.removeprefix("/workspace/repository/")
++                    checksum = capture.digest(self.bundle.files[relative])
++                if self.failure == "source-after" and self.executed and path != TOOL:
++                    checksum = "0" * 64
++                values.extend([b"file", (checksum + "  " + path).encode()])
++            out = b"\x00".join(values) + b"\x00"
++            label = "witness-after" if self.executed else "witness-before"
++        elif argv[0] == "exec" and "tar" in argv:
++            out = tar_payload(PAYLOAD)
++            if self.failure == "export-link":
++                out = tar_payload(b"", kind=tarfile.SYMTYPE)
++            if self.failure == "export-hardlink":
++                out = tar_payload(b"", kind=tarfile.LNKTYPE)
++            if self.failure == "export-path":
++                out = tar_payload(PAYLOAD, name="../elsewhere")
++            if self.failure == "cap":
++                out = b"x" * (limit + 1)
++            label = "export"
++        else:
++            script = argv[-1]
++            if "printf 'present" in script:
++                out = b"present\n" if self.failure == "stale" else b"absent\n"
++                label = "baseline"
++            else:
++                self.metadata_count += 1
++                checksum = capture.digest(PAYLOAD)
++                if self.failure == "changed-event" and self.metadata_count == 2:
++                    checksum = "0" * 64
++                out = (
++                    f"regular|{len(PAYLOAD)}|1|123|1|1|644\n{checksum}  {self.spec['path']}"
++                ).encode() + b"\0"
++                if self.failure in {"absent", "special", "symlink", "oversize"}:
++                    out = (self.failure + "\n").encode()
++                if self.failure == "hardlinked":
++                    out = out.replace(b"|1|123|", b"|2|123|")
++                label = "event-metadata"
++        self.labels.append(label)
++        if self.failure == "pre-deadline" and label == "baseline":
++            self.clock[0] = 11
++        result = {"stdout": out, "stderr": err, "exitCode": 0, "error": error}
++        if self.failure == "cancelled-export" and label == "export":
++            result.update(error="KeyboardInterrupt", cancelled=True)
++        return result
++
++    def execute(self, timeout):
++        assert timeout > 0
++        self.executed = True
++        self.labels.append("chosen-command")
++        if self.failure == "main-deadline":
++            self.clock[0] = 11
++        return {
++            "stdout": "chosen output",
++            "stderr": "",
++            "exitCode": 1 if self.failure == "assertion-exit" else 0,
++            "error": "timeout" if self.failure == "main-deadline" else None,
++            "cancelled": self.failure == "cancelled",
++        }
++
++
++def run_capture(session, tmp_path, failure=None, *, changes=None):
++    request, _, bundle = session
++    config = spec(bundle)
++    if changes:
++        config.update(changes)
++    context = {"imageDigest": request["environment"]["imageDigest"], "containerUser": "1000:1000"}
++    clock = [0]
++    backend = Boundary(config, bundle, context, failure=failure, clock=clock)
++    observer = capture.Capture(
++        config, bundle, context, tmp_path / "capture", backend.call, clock=lambda: clock[0]
++    )
++
++    def execute(timeout):
++        result = backend.execute(timeout)
++        observer.record["processTransportBytesComplete"] = True
++        observer.record["processReceipt"] = {
++            "argv": [
++                "docker",
++                "exec",
++                "--workdir=/workspace/repository",
++                "owned-container",
++                "/bin/sh",
++                "-c",
++                "arbitrary chosen command",
++            ],
++            "exitCode": result["exitCode"],
++            "error": result["error"],
++        }
++        return result
++
++    result, record = observer.run("owned-container", "arbitrary chosen command", 10, execute)
++    return result, record, backend
++
++
++def test_byte_exact_export_and_same_call_order(session, tmp_path):
++    result, record, backend = run_capture(session, tmp_path)
++    assert result["exitCode"] == 0 and record["state"] == "captured-unqualified-event-association"
++    assert (tmp_path / "capture/events.bin").read_bytes() == PAYLOAD
++    assert record["event-file"]["sha256"] == capture.digest(PAYLOAD)
++    assert record["requests"] == 8 and record["transportBytes"] > len(PAYLOAD)
++    assert backend.labels.index("chosen-command") > backend.labels.index("baseline")
++    assert backend.labels[-2:] == ["export", "event-metadata"]
++    assert record["oracleQualified"] is False and record["taskOutcomeObserved"] is False
++    assert record["wholeSourceTreeIntegrityEstablished"] is False
++    assert (
++        json.loads((tmp_path / "capture/descriptor.json").read_bytes())["event-file"]
++        == record["event-file"]
++    )
++
++
++@pytest.mark.parametrize(
++    "failure",
++    [
++        "stale",
++        "absent",
++        "special",
++        "symlink",
++        "oversize",
++        "hardlinked",
++        "export-link",
++        "export-hardlink",
++        "export-path",
++        "source-after",
++        "tool-after",
++        "unknown-transport",
++        "context-after",
++        "changed-event",
++        "cap",
++        "cancelled",
++    ],
++)
++def test_unsafe_missing_changed_or_failed_capture_never_blocks_command(session, tmp_path, failure):
++    result, record, backend = run_capture(session, tmp_path, failure)
++    assert backend.executed and result["stdout"] == "chosen output"
++    assert record["state"] == "incomplete-unqualified-event-capture" and record["errors"]
++    assert record["taskOutcomeObserved"] is False
++
++
++def test_complete_capture_after_nonzero_exit_is_not_task_success(session, tmp_path):
++    result, record, _ = run_capture(session, tmp_path, "assertion-exit")
++    assert result["exitCode"] == 1 and record["state"] == "captured-unqualified-event-association"
++    assert record["taskOutcomeObserved"] is False
++
++
++@pytest.mark.parametrize("failure", ["pre-deadline", "main-deadline"])
++def test_one_shared_deadline_no_fresh_export_budget(session, tmp_path, failure):
++    result, record, backend = run_capture(session, tmp_path, failure)
++    assert record["state"] == "incomplete-unqualified-event-capture"
++    assert backend.executed is (failure == "main-deadline")
++    assert "export" not in backend.labels
++    if failure == "pre-deadline":
++        assert result["error"] == "timeout"
++
++
++@pytest.mark.parametrize("changes", [{"maxRequests": 1}, {"maxCaptureBytes": 16}])
++def test_capture_instrumentation_budget_does_not_deny_chosen_command(session, tmp_path, changes):
++    result, record, backend = run_capture(session, tmp_path, changes=changes)
++    assert backend.executed and result["exitCode"] == 0
++    assert record["state"] == "incomplete-unqualified-event-capture"
++    assert record["requests"] <= changes.get("maxRequests", 8)
++
++
++@pytest.mark.parametrize(
++    "key,value",
++    [
++        ("path", "/workspace/repository/answer"),
++        ("path", "/tmp/events"),
++        ("sourceFiles", ["../answer"]),
++        ("maxEventBytes", True),
++        ("maxRequests", 17),
++        ("helperSha256", "0" * 64),
++    ],
++)
++def test_capture_frozen_config_rejects_unsafe_or_unbound_values(session, key, value):
++    config = spec(session[2])
++    config[key] = value
++    with pytest.raises(ValueError):
++        capture.validate(config)
++
++
++def test_capture_config_does_not_read_gold_and_is_arm_independent(session):
++    request, config, bundle = session
++    config["eventCaptures"] = {request["task"]["repository"]: spec(bundle)}
++    runtime.validate_runtime(config, request)
++    other = deepcopy(request)
++    other["arm"] = "dotrepo-access"
++    runtime.validate_runtime(config, other)
++    config["eventCaptures"]["unknown/repo"] = spec(bundle)
++    with pytest.raises(ValueError, match="frozen repositories"):
++        runtime.validate_runtime(config, request)
++
++
++@pytest.mark.parametrize("failure", [None, "stale", "unknown-transport", "cancelled-export"])
++def test_session_host_only_capture_receipt_accounting_and_cleanup(session, tmp_path, failure):
++    from test_agent_runtime import FakeProvider, response
++
++    request, config, bundle = session
++    config["eventCaptures"] = {request["task"]["repository"]: spec(bundle)}
++
++    class Docker(runtime.DockerBackend):
++        simulation = True
++
++        def __init__(self):
++            super().__init__(self.invoke_fixture)
++            self.cleaned = False
++
++        def provision(self, request, config, timeout):
++            context = {
++                "imageDigest": request["environment"]["imageDigest"],
++                "containerUser": "1000:1000",
++            }
++            self.boundary = Boundary(spec(bundle), bundle, context, failure=failure)
++            self.boundary_container = self.name
++            return {"fixture": "no daemon"}
++
++        def checkout(self, bundle, timeout):
++            return {"exitCode": 0, "error": None}
++
++        def cleanup(self):
++            self.cleaned = True
++            return {"exitCode": 0, "error": None}
++
++        def invoke_fixture(self, argv, *, data, timeout, output_limit, raw=False):
++            assert raw and argv[0] == "docker"
++            if "--workdir=/workspace/repository" in argv:
++                self.boundary.executed = True
++                return {"stdout": b"\xffchosen raw", "stderr": b"", "exitCode": 0, "error": None}
++            actual_name = self.name
++            argv = ["owned-container" if part == actual_name else part for part in argv[1:]]
++            result = self.boundary.call(argv, timeout, data=data, limit=output_limit, raw=True)
++            if argv[0] == "inspect":
++                result["stdout"] = result["stdout"].replace(
++                    b"/owned-container", ("/" + actual_name).encode()
++                )
++            return result
++
++    backend = Docker()
++    provider = FakeProvider(
++        response(("checkout_source", {})),
++        response(("shell", {"command": "arbitrary-not-gold-command"})),
++        response(text="done"),
++    )
++    result = runtime.run_session(
++        request, config, bundle, "system", "task", None, provider, backend, tmp_path / "run"
++    )
++    assert backend.cleaned
++    assert result["status"] == (
++        "budget-exhausted" if failure == "cancelled-export" else "agent-finished"
++    )
++    accounting = result["eventCaptureAccounting"]
++    if failure == "unknown-transport":
++        assert accounting["requests"] == 2 and accounting["transportBytes"] is None
++        assert result["effort"]["decodedBytes"] is None
++    else:
++        assert accounting["requests"] == (7 if failure == "cancelled-export" else 8)
++        assert accounting["transportBytes"] > len(PAYLOAD)
++        assert result["effort"]["decodedBytes"] >= accounting["transportBytes"] + len(
++            b"\xffchosen raw"
++        )
++    trace = json.loads((tmp_path / "run/trace.json").read_bytes())
++    descriptor = next(
++        event["descriptor"] for event in trace["events"] if event["kind"] == "event-capture"
++    )
++    assert descriptor["command"] == "arbitrary-not-gold-command"
++    assert descriptor["context"]["requestSha256"] == trace["requestSha256"]
++    assert descriptor["state"] == (
++        "incomplete-unqualified-event-capture"
++        if failure is not None
++        else "captured-unqualified-event-association"
++    )
++    process = tmp_path / "run/event-captures/0001/process-stdout.bin"
++    assert process.read_bytes() == b"\xffchosen raw"
++    assert descriptor["processReceipt"]["stdout"]["sha256"] == capture.digest(process.read_bytes())
++    assert descriptor["processReceipt"]["argv"][-1] == descriptor["command"]
++    response_row = next(
++        event
++        for event in trace["events"]
++        if event["kind"] == "tool-response" and event["result"].get("stdout")
++    )
++    assert "descriptorPath" not in json.dumps(response_row["result"])
++    assert "event-file" not in json.dumps(response_row["result"])
++    assert response_row["result"]["stdout"] == "\ufffdchosen raw"
++    assert result["correctCompletion"] is None and result["scoringPerformed"] is False
++
++
++@pytest.mark.parametrize(
++    "wire", [tar_payload(PAYLOAD) + b"trailing", tar_payload(PAYLOAD) + tar_payload(PAYLOAD)]
++)
++def test_ambiguous_event_archive_rejected(wire):
++    with pytest.raises(ValueError):
++        capture.event_bytes(wire, "/workspace/go-test-events.jsonl", 4096)
++
++
++def test_source_owned_generated_tool_is_observed_not_implicitly_qualified(session, tmp_path):
++    result, record, _ = run_capture(
++        session, tmp_path, "tool-generated", changes={"toolPaths": {TOOL: None}}
++    )
++    assert result["exitCode"] == 0 and record["state"] == "captured-unqualified-event-association"
++    assert record["witness-before"][TOOL] == {"kind": "absent", "sha256": None}
++    assert record["witness-after"][TOOL]["sha256"] == capture.digest(b"owned tool")
++    assert record["oracleQualified"] is False and record["taskOutcomeObserved"] is False

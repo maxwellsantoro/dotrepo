@@ -1,0 +1,33 @@
+{
+  "identity": "go01-source-expectation-oracle-preparation-amendment-2",
+  "state": "source-adapter and synthetic scorer preparation; actual capture join OPEN",
+  "acceptedProspectiveDecisionFreezeSha256": "22e72402f3cadf7f5ea214a546a3dcaf18b968c67da81e9e03427436c4d10ed5",
+  "independentDecisionReviewFreezeSha256": "f1e7ff04f0e8d6c385727bb5280f187bb71038dfeb72cf7d8aea8220fa9c9cc9",
+  "captureAssessmentFreezeSha256": "5cdae83d1f32a34d17f69f960fb68c2759a21636f8d5d66e203b2fc02b023016",
+  "artifactSha256": {
+    "README.md": "926fa998326f08009d1d072449dc07e887b02de8d3ef037d41a54c6bde8fa66d",
+    "capture-dependency.json": "f1ebdded7c1482ef1dd2544b5c149fdb1b795d98c1437426f920ab5e52321b02",
+    "checks.json": "d8c94fefb09c76994e7f486b195e7a26349d235285fcb51a12c49ffb18f7e579",
+    "controls.json": "6f4d5d0d2649ca21bde877a8c912650b178484483c1fb0f1d58a4d59f3fd7884",
+    "controls.py": "921f59eda2fbceb3c633dc69c89179ac2e39317cf2caa9b0e03e5d496378d4a5",
+    "derive.py": "9b58061af3b1205637becea668544cc6f7b4dbb0d68a51cf1fc05601370dcde2",
+    "development-observations.json": "34fb97656ab95f1b2f2c3f97bcca880f2653c7c18ea64a91e7e2926610015fbe",
+    "expectation.json": "65d861a2c8d082fceb00fc77f1befce47b463aa272b69a71248a1f9973f3700b",
+    "expected-map.json": "768482aa2dcec46151e529a1126a8d74fbaba56f168d86c915002aa70d869e4a",
+    "oracle.diff": "5f1234a8dbe0d1fab9a9b73e5ad11207eef4049ce0a68b4c119c2465d70f3aca",
+    "oracle.py": "d969170818e80124a0eb99947aa584b82ae9c9f50e8b32ba6dc62fe17fd3b1c9",
+    "plan.json": "feb7dc297a3d73e94c0bb6412ad5baefcdd2c4de6004a7163d19a2f5387edd7c",
+    "source-bindings.json": "25ad36a65f53431ded8afd7f171c539805f1de9619b95c3ed1e67654b0ced795",
+    "verification.json": "f4432eaf4cb83c2c12b3cb495fc9cd11205195376de2159331293c4cbb18e906",
+    "verify.py": "2690c72cd0b7c1a2507f762e23f7873c71179efd54324f035950f67d9696cbb0"
+  },
+  "artifactCount": 15,
+  "artifactBytes": 337303,
+  "currentGateChanged": false,
+  "oracleQualified": false,
+  "campaignAdmitted": false,
+  "executionAuthorized": false,
+  "nativeCollectionOccurred": false,
+  "nativeActions": false,
+  "costUsd": null
+}

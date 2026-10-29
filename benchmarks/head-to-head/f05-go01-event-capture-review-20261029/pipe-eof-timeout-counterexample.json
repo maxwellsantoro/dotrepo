@@ -1,0 +1,25 @@
+{
+  "case": "owned child closes stdout/stderr before sleeping past deadline",
+  "argv": [
+    "/bin/sh",
+    "-c",
+    "printf \"%s\" \"$$\" > \"$1\"; exec 1>&- 2>&-; exec sleep 8",
+    "owned-review",
+    "/tmp/dotrepo-event-capture-review-6n_h503u/pid"
+  ],
+  "timeoutSeconds": 0.05,
+  "elapsedSeconds": 1.0081746249925345,
+  "returnValue": null,
+  "exception": {
+    "type": "TimeoutExpired",
+    "text": "Command '['/bin/sh', '-c', 'printf \"%s\" \"$$\" > \"$1\"; exec 1>&- 2>&-; exec sleep 8', 'owned-review', '/tmp/dotrepo-event-capture-review-6n_h503u/pid']' timed out after 1 seconds"
+  },
+  "ownedChildPid": 88273,
+  "ownedChildStillAliveAfterFunction": true,
+  "reviewerKilledAndReapedOwnedChild": [
+    88273,
+    9
+  ],
+  "runtimeSha256": "d4581245001b9f7710e04a50818ab73b802e7a7a156167eea19ad46abb6a6c2c",
+  "newDockerGoNodeProviderNetworkCalls": 0
+}

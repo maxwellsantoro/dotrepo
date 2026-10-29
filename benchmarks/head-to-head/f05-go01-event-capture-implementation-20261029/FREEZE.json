@@ -1,0 +1,32 @@
+{
+  "artifactSha256": {
+    "README.md": "7e8d09bcc8355e5fb01fe6cd48d3effb48fe44d0b24c25b8a7ac17fddcc4d154",
+    "check-1.stdout": "12a4453daa4f794f8ab415061ade0d05284386200f9da3edf87eb018cde304fd",
+    "check-2.stdout": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "check-3.stdout": "177f260a5645724013185e4b140c7045cc39e56c0c97b120f5cb23599f85f0de",
+    "check-4.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "checks.json": "1dcf333d40af96724bd9fc34a4f14322ef78c44089f1036bc334ff702043b5ac",
+    "implementation.diff": "27c6fd329d27225daf9c3d2fd8eaca781ca1d020a99749f948eb06e6989eab06",
+    "initial-fixture-failure.json": "ea79a0d7b6a304261c77fc6315a898fc3ec6b2e5b046b2cf0e846e5c3deec341",
+    "initial-fixture-failure.log": "ae6c249854217ee256fa57ff598d867e7f59a6c55f6caa059bae48371a0837fe",
+    "lint-initial.json": "79243ab770bdb1754dc75357575ef708375c3722a6b0414212fd75d59b6b1710",
+    "plan.json": "13d8ee8024a55ee5e89153019e5c07ac38ab0aac5885d7732e47bb8c5bc88f77",
+    "report.json": "001824e15b8b29279217451781e1958319f3684993ec880676ce0c1e7e902c5e",
+    "source-bindings.json": "750a88d823d798965c346439709d85a256f0ac228fd9d6417e4906c521bd3b90"
+  },
+  "campaignAdmitted": false,
+  "codeSha256": {
+    "benchmarks/head-to-head/bench/agent_runtime.py": "d4581245001b9f7710e04a50818ab73b802e7a7a156167eea19ad46abb6a6c2c",
+    "benchmarks/head-to-head/bench/event_capture.py": "ffe5b5e27aaca28bceae83aac15bfeb5e83963eef63a3b2f41c97833787b4a12",
+    "scripts/tests/test_agent_event_capture.py": "ff5393313566aba40a7a883ea99b1640889af43e67d0b26b3fac54753af49756",
+    "scripts/tests/test_agent_runtime.py": "6a52a74cee0a16b52163b3651f52138cc58b6f65ff1ff9e7d72a0f1161645654"
+  },
+  "createdAt": "2026-10-29T12:37:37.993686+00:00",
+  "executionAuthorized": false,
+  "identity": "go01-optional-event-capture-implementation-v1",
+  "nativeCollectionOccurred": false,
+  "oracleQualified": false,
+  "planSha256": "13d8ee8024a55ee5e89153019e5c07ac38ab0aac5885d7732e47bb8c5bc88f77",
+  "state": "frozen-preparation-only-independent-review-pending",
+  "taskOutcomeObserved": false
+}

@@ -1,0 +1,66 @@
+{
+  "state": "passed-focused-checks",
+  "commands": [
+    {
+      "argv": [
+        "uv",
+        "run",
+        "pytest",
+        "-q",
+        "scripts/tests/test_agent_event_capture.py",
+        "scripts/tests/test_agent_runtime.py",
+        "scripts/tests/test_agent_experiment.py"
+      ],
+      "exitCode": 0,
+      "output": "check-1.stdout"
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "ruff",
+        "check",
+        "--no-cache",
+        "benchmarks/head-to-head/bench/agent_runtime.py",
+        "benchmarks/head-to-head/bench/event_capture.py",
+        "scripts/tests/test_agent_runtime.py",
+        "scripts/tests/test_agent_event_capture.py"
+      ],
+      "exitCode": 0,
+      "output": "check-2.stdout"
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "ruff",
+        "format",
+        "--check",
+        "--no-cache",
+        "benchmarks/head-to-head/bench/agent_runtime.py",
+        "benchmarks/head-to-head/bench/event_capture.py",
+        "scripts/tests/test_agent_runtime.py",
+        "scripts/tests/test_agent_event_capture.py"
+      ],
+      "exitCode": 0,
+      "output": "check-3.stdout"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "--",
+        "benchmarks/head-to-head/bench/agent_runtime.py",
+        "benchmarks/head-to-head/bench/event_capture.py",
+        "scripts/tests/test_agent_runtime.py",
+        "scripts/tests/test_agent_event_capture.py"
+      ],
+      "exitCode": 0,
+      "output": "check-4.stdout"
+    }
+  ],
+  "testsPassed": 214,
+  "newGoNodeDockerUpstreamNetworkProviderActions": 0,
+  "note": "Existing trusted Python process boundary controls run via uv; no upstream/native task code or daemon/provider used."
+}

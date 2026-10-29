@@ -1,0 +1,71 @@
+{
+  "actualOracleUsable": false,
+  "campaignAdmitted": false,
+  "controls": {
+    "authorSyntheticDataReplay": 44,
+    "finalReviewerSourceReplay": "Retained25case output reproduced exactly from final lint-clean source into fresh /tmp outputs",
+    "independentSyntheticAndTamperControls": 25,
+    "pureDerivationAndVerifierReplay": "passed, exact metadata/full-map rederived",
+    "ruffCheck": "passed --no-cache",
+    "ruffFormat": "passed --check --no-cache"
+  },
+  "currentGateChanged": false,
+  "executionAuthorized": false,
+  "findings": [],
+  "independentCoverage": [
+    "Full104/5972 synthetic pass and complete assertion-failure positive, actual flags alwaysfalse.",
+    "Retained parent-after-child temporal/childfail-parentpass negatives, deep failure propagation, valid parallel/pause/cont prefix-distinct siblings.",
+    "Unknown top-level, missing Fuzz, missing empty package, binder false no-test skip, unaccepted new skip exclusion, setup/wrapper/context/origin changes.",
+    "Actual or nonliteral synthetic selector; fake actual capture fields; edited frozen map and metadata in isolated copies."
+  ],
+  "nativeCollectionOccurred": false,
+  "newGoNodeDockerNativeNetworkProviderActions": 0,
+  "oracleQualified": false,
+  "remainingGates": [
+    "Concrete host-owned same-tool-call full-wrapper event capture/export association remains missing. Extend the existing boundary narrowly, freeze and independently review it; preserve chosen commands and keep hidden gold out of tool admission.",
+    "Join actual full command/normal setup/source-owned gotestsum tool/effective target context and package/file selection with bounded raw bytes, time/resource/nontruncation and afterchecks before agent control resumes. No supplied boolean alone establishes provenance.",
+    "Prospective skip-policy acceptance/conditions, shared C1 model/environment/budget/cost/randomization and independent review remain; current380proposal not accepted.",
+    "Any future actual-oracle enabling patch and execution attempt require separate assignment/review/authorization. No new run/retry/resource/cache/protocol is authorized by this packet."
+  ],
+  "reviewerDisclosure": "Reviewer authored earlier source/oracle/projection and decision/helper-result reviews, but not this amendment implementation. Independent code/data review with prior context, not a blind trial or consumer evaluation.",
+  "scope": "Frozen source expectation derivation and synthetic post-run scorer preparation only. No usable actual oracle/capture join, task qualification or execution admission.",
+  "semanticReview": [
+    "Source-derived origin is explicitly different from complete-native-collection; full fixed map, source/result/review/context and image bindings are checked. No map/package/name subset can qualify.",
+    "Original event parsing, lifecycle/ancestor/failure propagation, exact380-source-proposal policy validation and assertion/package/wrapper/error rules are retained. The sole lifecycle acceptance change is a documented narrowing: no-test-files skip is refused for source-empty binder which still has selected test source.",
+    "All104 packages retain runtime coverage requirements;40 source-empty names,39 no-selected-test-source packages and18 previously observed no-test diagnostics are distinct facts. New synthetic39 no-test terminals are fixtures, not39 observed or approved runtime skips.",
+    "Physical IDs are source provenance only;48 benchmarks and11 wrapper declarations are not required test-case identities. Dynamic descendants remain observed-event obligations, not invented exhaustive enumeration.",
+    "Actual evaluation refuses reviewed-full-task-capture-join-unavailable unconditionally with literal synthetic=False. Fabricated true setup/capture booleans, real-shaped capture assertions or a valid raw hash cannot promote an actual outcome.",
+    "Known build/resource/setup failures remain noncompletion; source expectations do not prove target compile validity or make the prior failed run complete. No new native green baseline is required merely for honest failure classification."
+  ],
+  "skipPolicyAccepted": false,
+  "state": "independent-source-oracle-preparation-implementation-review-passed",
+  "staticPreparationReviewPassed": true,
+  "subject": {
+    "authorFreezeSha256": "cc12c2fe8ca12e8f2eb15b2ceffc130aa4094b281a3b9057e60749ab09e510b5",
+    "derivationSha256": "9b58061af3b1205637becea668544cc6f7b4dbb0d68a51cf1fc05601370dcde2",
+    "oracleSha256": "d969170818e80124a0eb99947aa584b82ae9c9f50e8b32ba6dc62fe17fd3b1c9",
+    "packetIdentity": "go01-source-expectation-oracle-preparation-amendment-2",
+    "planSha256": "feb7dc297a3d73e94c0bb6412ad5baefcdd2c4de6004a7163d19a2f5387edd7c"
+  },
+  "taskOutcomeObserved": false,
+  "verified": {
+    "authorArtifactsUnchanged": 15,
+    "benchmarksExcluded": 48,
+    "completeDiffVerified": true,
+    "emptyRequiredNamePackages": 40,
+    "fullMapBytes": 242536,
+    "fullMapPackages": 104,
+    "fullMapRequiredNames": 5972,
+    "fullMapSha256": "768482aa2dcec46151e529a1126a8d74fbaba56f168d86c915002aa70d869e4a",
+    "originalHelpersAndConstantsAstUnchanged": true,
+    "previousObservedNoTestDiagnostics": 18,
+    "requiredKinds": {
+      "examples": 0,
+      "fuzzTargets": 6,
+      "tests": 5966
+    },
+    "sourceBindings": 11,
+    "sourcePackagesWithoutSelectedTestFiles": 39,
+    "testMainWrappersExcluded": 11
+  }
+}
