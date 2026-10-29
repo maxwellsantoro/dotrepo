@@ -1,0 +1,26 @@
+{
+  "actualAdmission": false,
+  "campaignAdmitted": false,
+  "costUsd": null,
+  "delta": [
+    "Privileged must be literalFalse; CapAdd must be present null/emptylist",
+    "Reject added device/cgroup-device grants or bind/volume sources; accept present null/emptylist representations only",
+    "Match existing explicit nonrootUID:GID,nofile1024,log-driver-none,no-healthcheck options",
+    "No new namespace policy; existing IPC/PID/cgroup checks unchanged",
+    "Path roots adjusted one level for append-only successor; full map/scorer/runtime unchanged"
+  ],
+  "executionAuthorized": false,
+  "nativeCollectionOccurred": false,
+  "oracleQualified": false,
+  "scope": "Only successor association-level inspect comparisons and owned mocks; original16artifacts unchanged",
+  "subject": {
+    "adapterSha256": "30e3e3cecb357d5f903f42e0532c2f86a5cb16cf6714ddc9c643bcf86e5b70a4",
+    "beforeReviewFreezeSha256": "46a75d99bdf078f6018cca216e2b708fc266a619ef294fe8cd87ad996955a4e8",
+    "controlsSha256": "6375c2f824ea5a7b3a095e04fbacbb5459a460277998edb3dac56eb38b58bd8e",
+    "identity": "go01-post-run-capture-adapter-amendment-3-isolation-amendment-1",
+    "isolationControlsSha256": "d5957a95b6445fe668f8e4b1662d41688b5ac83df2da42f4ad99a500519d145e",
+    "parentAuthorFreezeSha256": "d7cd2ced83cc27cde9070e457d9fcad2185316b14ac698e83d98f189293f5cbc",
+    "sourceBindingsSha256": "43a0ce5ecf6e37601ae0b6b5962a70b7ad0c7721be206dd2923da1420014af3b"
+  },
+  "taskOutcomeObserved": false
+}

@@ -1,0 +1,7 @@
+{
+  "state": "retained-local-control-assumption-correction",
+  "observation": "Initial controls reached final config reserialization case; it incorrectly expected rejection for added insignificant JSON whitespace. Runtime binds configuration via canonical experiment.encode, so this unchanged semantic configuration correctly passed. No production/upstream action occurred; revised positive explicitly expects acceptance, distinct semantic mutation remains negative.",
+  "initialFailure": "AssertionError config-mutated: candidateOutcomeObserved true; captureAssociationValidated true; taskOutcomeObserved/oracleQualified/campaignAdmitted false",
+  "secondLocalFixtureError": "The added empty-event fixture attempted tuple item assignment; original fixture is a tuple containing mutable rows. Corrected to mutate row list in place. No scorer change and no native action.",
+  "finalBindingCorrection": "Further owning-contract inspection confirms load_session experiment.artifact validates runtime config raw SHA as well as a canonical configuration SHA in descriptor. Added exact config_raw SHA equality to request runtime artifact. Thus same-semantic config reserialization is now an intentional refusal for raw artifact mismatch; earlier description of canonical-only sufficiency is superseded, preserved above. Controls distinguish both hashes."
+}

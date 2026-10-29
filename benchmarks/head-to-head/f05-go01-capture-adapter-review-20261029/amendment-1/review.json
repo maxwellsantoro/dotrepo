@@ -1,0 +1,45 @@
+{
+  "beforeReviewFreezeSha256": "46a75d99bdf078f6018cca216e2b708fc266a619ef294fe8cd87ad996955a4e8",
+  "campaignAdmitted": false,
+  "checks": {
+    "adapterASTUnchangedExceptPathRelocationAndIsolationHelperCall": true,
+    "allActualEvaluationsRemainRefused": true,
+    "artifactHashesVerified": 54,
+    "authoredAdapterControlsReplayed": 40,
+    "authoredCoherentIsolationControlsReplayed": 46,
+    "diffCheck": true,
+    "independentCoherentInspectCases": 20,
+    "ruffCheck": true,
+    "ruffFormatCheck": true,
+    "sourceBindingsVerified": 13,
+    "unchangedParentScorerControlsReused": 44
+  },
+  "costUsd": null,
+  "executionAuthorized": false,
+  "findings": [],
+  "limits": [
+    "Reviewer has prior F05/source/capture/oracle context but did not author adapter; not a blind task trial.",
+    "Only Python data/mocked transports; safe null/empty shapes are accepted fixture representations, not new real Docker-version qualification. Unknown missing forms refuse conservatively.",
+    "Capture artifact consistency is an operator-bound association check, not authentication against arbitrary submitted directories or same-UID alteration.",
+    "Configured source subset and base Config.Env do not establish whole source closure, normal npm setup, source-owned gotestsum build/cache provenance or effective child Go context.",
+    "Actual evaluation remains failclosed on those remaining joins; source oracle/lifecycle/map/policy are unchanged.",
+    "No actual unsafe container, native task outcome, cost savings, campaign result or admission established."
+  ],
+  "newDaemonNativeGoNodeNetworkProviderActions": 0,
+  "oracleQualified": false,
+  "originalFinding": {
+    "description": "Original coherent Privilegedtrue/CapAddSYS_ADMIN observations accepted as capture association; original actual evaluator still refused.",
+    "id": "F1",
+    "originalSubjectSha256": "175a15d7406909778fb0d965c4f3cf690998106f1b672ae71feaf7831a6b10ae",
+    "resolution": "Successor explicitly requires Privileged literal false and present null/empty additive grants. Exact two mutations now reject.",
+    "state": "resolved-in-successor"
+  },
+  "state": "independent-capture-adapter-preparation-review-passed",
+  "subject": {
+    "adapterSha256": "30e3e3cecb357d5f903f42e0532c2f86a5cb16cf6714ddc9c643bcf86e5b70a4",
+    "authorFreezeSha256": "bad0a161c9d84d923e0431dfac39d20dcd03a0d5fe916ce19e56c96e89c8768f",
+    "packetIdentity": "go01-post-run-capture-adapter-amendment-3-isolation-amendment-1",
+    "planSha256": "35e7ebee7e26f687bacc8727d9c474bc6fa83dac9887970f8f8fc01b3ad078c2"
+  },
+  "taskOutcomeObserved": false
+}

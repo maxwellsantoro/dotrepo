@@ -1,0 +1,1009 @@
+{
+  "actualAdmission": false,
+  "beforeSubjectSha256": "175a15d7406909778fb0d965c4f3cf690998106f1b672ae71feaf7831a6b10ae",
+  "cases": [
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": false,
+        "captureAssociationValidated": false,
+        "nativeCollectionOccurred": false,
+        "oracleQualified": false,
+        "reason": "added/missing grant: CapAdd",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false
+      },
+      "before": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": true,
+        "captureAssociationValidated": true,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required",
+        "excludedBehavior": [],
+        "expectedTopLevelTests": 5972,
+        "failedTests": [],
+        "nativeCollectionOccurred": false,
+        "observedNestedTests": 0,
+        "oracleQualified": false,
+        "packages": 104,
+        "rawEventsSha256": "7aedc279ec0dc18c4bf442e5f2a34721d9f26adb7b004622e6bfe8b4a9bd6613",
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false,
+        "testsPassed": true
+      },
+      "expectedAssociation": false,
+      "name": "exact-independent-extra-capability"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": false,
+        "captureAssociationValidated": false,
+        "nativeCollectionOccurred": false,
+        "oracleQualified": false,
+        "reason": "privileged container",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false
+      },
+      "before": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": true,
+        "captureAssociationValidated": true,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required",
+        "excludedBehavior": [],
+        "expectedTopLevelTests": 5972,
+        "failedTests": [],
+        "nativeCollectionOccurred": false,
+        "observedNestedTests": 0,
+        "oracleQualified": false,
+        "packages": 104,
+        "rawEventsSha256": "7aedc279ec0dc18c4bf442e5f2a34721d9f26adb7b004622e6bfe8b4a9bd6613",
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false,
+        "testsPassed": true
+      },
+      "expectedAssociation": false,
+      "name": "exact-independent-privileged"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": true,
+        "captureAssociationValidated": true,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required",
+        "excludedBehavior": [],
+        "expectedTopLevelTests": 5972,
+        "failedTests": [],
+        "nativeCollectionOccurred": false,
+        "observedNestedTests": 0,
+        "oracleQualified": false,
+        "packages": 104,
+        "rawEventsSha256": "7aedc279ec0dc18c4bf442e5f2a34721d9f26adb7b004622e6bfe8b4a9bd6613",
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false,
+        "testsPassed": true
+      },
+      "expectedAssociation": true,
+      "name": "CapAdd-legitimate-null"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": true,
+        "captureAssociationValidated": true,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required",
+        "excludedBehavior": [],
+        "expectedTopLevelTests": 5972,
+        "failedTests": [],
+        "nativeCollectionOccurred": false,
+        "observedNestedTests": 0,
+        "oracleQualified": false,
+        "packages": 104,
+        "rawEventsSha256": "7aedc279ec0dc18c4bf442e5f2a34721d9f26adb7b004622e6bfe8b4a9bd6613",
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false,
+        "testsPassed": true
+      },
+      "expectedAssociation": true,
+      "name": "CapAdd-legitimate-empty"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": true,
+        "captureAssociationValidated": true,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required",
+        "excludedBehavior": [],
+        "expectedTopLevelTests": 5972,
+        "failedTests": [],
+        "nativeCollectionOccurred": false,
+        "observedNestedTests": 0,
+        "oracleQualified": false,
+        "packages": 104,
+        "rawEventsSha256": "7aedc279ec0dc18c4bf442e5f2a34721d9f26adb7b004622e6bfe8b4a9bd6613",
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false,
+        "testsPassed": true
+      },
+      "expectedAssociation": true,
+      "name": "Devices-legitimate-null"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": true,
+        "captureAssociationValidated": true,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required",
+        "excludedBehavior": [],
+        "expectedTopLevelTests": 5972,
+        "failedTests": [],
+        "nativeCollectionOccurred": false,
+        "observedNestedTests": 0,
+        "oracleQualified": false,
+        "packages": 104,
+        "rawEventsSha256": "7aedc279ec0dc18c4bf442e5f2a34721d9f26adb7b004622e6bfe8b4a9bd6613",
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false,
+        "testsPassed": true
+      },
+      "expectedAssociation": true,
+      "name": "Devices-legitimate-empty"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": true,
+        "captureAssociationValidated": true,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required",
+        "excludedBehavior": [],
+        "expectedTopLevelTests": 5972,
+        "failedTests": [],
+        "nativeCollectionOccurred": false,
+        "observedNestedTests": 0,
+        "oracleQualified": false,
+        "packages": 104,
+        "rawEventsSha256": "7aedc279ec0dc18c4bf442e5f2a34721d9f26adb7b004622e6bfe8b4a9bd6613",
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false,
+        "testsPassed": true
+      },
+      "expectedAssociation": true,
+      "name": "DeviceRequests-legitimate-null"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": true,
+        "captureAssociationValidated": true,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required",
+        "excludedBehavior": [],
+        "expectedTopLevelTests": 5972,
+        "failedTests": [],
+        "nativeCollectionOccurred": false,
+        "observedNestedTests": 0,
+        "oracleQualified": false,
+        "packages": 104,
+        "rawEventsSha256": "7aedc279ec0dc18c4bf442e5f2a34721d9f26adb7b004622e6bfe8b4a9bd6613",
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false,
+        "testsPassed": true
+      },
+      "expectedAssociation": true,
+      "name": "DeviceRequests-legitimate-empty"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": true,
+        "captureAssociationValidated": true,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required",
+        "excludedBehavior": [],
+        "expectedTopLevelTests": 5972,
+        "failedTests": [],
+        "nativeCollectionOccurred": false,
+        "observedNestedTests": 0,
+        "oracleQualified": false,
+        "packages": 104,
+        "rawEventsSha256": "7aedc279ec0dc18c4bf442e5f2a34721d9f26adb7b004622e6bfe8b4a9bd6613",
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false,
+        "testsPassed": true
+      },
+      "expectedAssociation": true,
+      "name": "DeviceCgroupRules-legitimate-null"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": true,
+        "captureAssociationValidated": true,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required",
+        "excludedBehavior": [],
+        "expectedTopLevelTests": 5972,
+        "failedTests": [],
+        "nativeCollectionOccurred": false,
+        "observedNestedTests": 0,
+        "oracleQualified": false,
+        "packages": 104,
+        "rawEventsSha256": "7aedc279ec0dc18c4bf442e5f2a34721d9f26adb7b004622e6bfe8b4a9bd6613",
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false,
+        "testsPassed": true
+      },
+      "expectedAssociation": true,
+      "name": "DeviceCgroupRules-legitimate-empty"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": true,
+        "captureAssociationValidated": true,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required",
+        "excludedBehavior": [],
+        "expectedTopLevelTests": 5972,
+        "failedTests": [],
+        "nativeCollectionOccurred": false,
+        "observedNestedTests": 0,
+        "oracleQualified": false,
+        "packages": 104,
+        "rawEventsSha256": "7aedc279ec0dc18c4bf442e5f2a34721d9f26adb7b004622e6bfe8b4a9bd6613",
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false,
+        "testsPassed": true
+      },
+      "expectedAssociation": true,
+      "name": "Binds-legitimate-null"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": true,
+        "captureAssociationValidated": true,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required",
+        "excludedBehavior": [],
+        "expectedTopLevelTests": 5972,
+        "failedTests": [],
+        "nativeCollectionOccurred": false,
+        "observedNestedTests": 0,
+        "oracleQualified": false,
+        "packages": 104,
+        "rawEventsSha256": "7aedc279ec0dc18c4bf442e5f2a34721d9f26adb7b004622e6bfe8b4a9bd6613",
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false,
+        "testsPassed": true
+      },
+      "expectedAssociation": true,
+      "name": "Binds-legitimate-empty"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": true,
+        "captureAssociationValidated": true,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required",
+        "excludedBehavior": [],
+        "expectedTopLevelTests": 5972,
+        "failedTests": [],
+        "nativeCollectionOccurred": false,
+        "observedNestedTests": 0,
+        "oracleQualified": false,
+        "packages": 104,
+        "rawEventsSha256": "7aedc279ec0dc18c4bf442e5f2a34721d9f26adb7b004622e6bfe8b4a9bd6613",
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false,
+        "testsPassed": true
+      },
+      "expectedAssociation": true,
+      "name": "VolumesFrom-legitimate-null"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": true,
+        "captureAssociationValidated": true,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required",
+        "excludedBehavior": [],
+        "expectedTopLevelTests": 5972,
+        "failedTests": [],
+        "nativeCollectionOccurred": false,
+        "observedNestedTests": 0,
+        "oracleQualified": false,
+        "packages": 104,
+        "rawEventsSha256": "7aedc279ec0dc18c4bf442e5f2a34721d9f26adb7b004622e6bfe8b4a9bd6613",
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false,
+        "testsPassed": true
+      },
+      "expectedAssociation": true,
+      "name": "VolumesFrom-legitimate-empty"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": false,
+        "captureAssociationValidated": false,
+        "nativeCollectionOccurred": false,
+        "oracleQualified": false,
+        "reason": "privileged container",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false
+      },
+      "expectedAssociation": false,
+      "name": "privileged-null"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": false,
+        "captureAssociationValidated": false,
+        "nativeCollectionOccurred": false,
+        "oracleQualified": false,
+        "reason": "privileged container",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false
+      },
+      "expectedAssociation": false,
+      "name": "privileged-zero"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": false,
+        "captureAssociationValidated": false,
+        "nativeCollectionOccurred": false,
+        "oracleQualified": false,
+        "reason": "added/missing grant: CapAdd",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false
+      },
+      "expectedAssociation": false,
+      "name": "capadd-false"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": false,
+        "captureAssociationValidated": false,
+        "nativeCollectionOccurred": false,
+        "oracleQualified": false,
+        "reason": "added/missing grant: CapAdd",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false
+      },
+      "expectedAssociation": false,
+      "name": "capadd-object"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": false,
+        "captureAssociationValidated": false,
+        "nativeCollectionOccurred": false,
+        "oracleQualified": false,
+        "reason": "added/missing grant: Devices",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false
+      },
+      "expectedAssociation": false,
+      "name": "device"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": false,
+        "captureAssociationValidated": false,
+        "nativeCollectionOccurred": false,
+        "oracleQualified": false,
+        "reason": "added/missing grant: DeviceRequests",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false
+      },
+      "expectedAssociation": false,
+      "name": "device-request"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": false,
+        "captureAssociationValidated": false,
+        "nativeCollectionOccurred": false,
+        "oracleQualified": false,
+        "reason": "added/missing grant: DeviceCgroupRules",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false
+      },
+      "expectedAssociation": false,
+      "name": "device-cgroup-grant"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": false,
+        "captureAssociationValidated": false,
+        "nativeCollectionOccurred": false,
+        "oracleQualified": false,
+        "reason": "added/missing grant: Binds",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false
+      },
+      "expectedAssociation": false,
+      "name": "host-bind"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": false,
+        "captureAssociationValidated": false,
+        "nativeCollectionOccurred": false,
+        "oracleQualified": false,
+        "reason": "added/missing grant: VolumesFrom",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false
+      },
+      "expectedAssociation": false,
+      "name": "volume-source"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": false,
+        "captureAssociationValidated": false,
+        "nativeCollectionOccurred": false,
+        "oracleQualified": false,
+        "reason": "nofile limit mismatch",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false
+      },
+      "expectedAssociation": false,
+      "name": "wrong-nofile"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": false,
+        "captureAssociationValidated": false,
+        "nativeCollectionOccurred": false,
+        "oracleQualified": false,
+        "reason": "log-driver/options mismatch",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false
+      },
+      "expectedAssociation": false,
+      "name": "log-driver"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": false,
+        "captureAssociationValidated": false,
+        "nativeCollectionOccurred": false,
+        "oracleQualified": false,
+        "reason": "log-driver/options mismatch",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false
+      },
+      "expectedAssociation": false,
+      "name": "log-options"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": false,
+        "captureAssociationValidated": false,
+        "nativeCollectionOccurred": false,
+        "oracleQualified": false,
+        "reason": "'Privileged'",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false
+      },
+      "expectedAssociation": false,
+      "name": "missing-Privileged"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": false,
+        "captureAssociationValidated": false,
+        "nativeCollectionOccurred": false,
+        "oracleQualified": false,
+        "reason": "added/missing grant: CapAdd",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false
+      },
+      "expectedAssociation": false,
+      "name": "missing-CapAdd"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": false,
+        "captureAssociationValidated": false,
+        "nativeCollectionOccurred": false,
+        "oracleQualified": false,
+        "reason": "added/missing grant: Devices",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false
+      },
+      "expectedAssociation": false,
+      "name": "missing-Devices"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": false,
+        "captureAssociationValidated": false,
+        "nativeCollectionOccurred": false,
+        "oracleQualified": false,
+        "reason": "added/missing grant: DeviceRequests",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false
+      },
+      "expectedAssociation": false,
+      "name": "missing-DeviceRequests"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": false,
+        "captureAssociationValidated": false,
+        "nativeCollectionOccurred": false,
+        "oracleQualified": false,
+        "reason": "added/missing grant: DeviceCgroupRules",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false
+      },
+      "expectedAssociation": false,
+      "name": "missing-DeviceCgroupRules"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": false,
+        "captureAssociationValidated": false,
+        "nativeCollectionOccurred": false,
+        "oracleQualified": false,
+        "reason": "added/missing grant: Binds",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false
+      },
+      "expectedAssociation": false,
+      "name": "missing-Binds"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": false,
+        "captureAssociationValidated": false,
+        "nativeCollectionOccurred": false,
+        "oracleQualified": false,
+        "reason": "added/missing grant: VolumesFrom",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false
+      },
+      "expectedAssociation": false,
+      "name": "missing-VolumesFrom"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": false,
+        "captureAssociationValidated": false,
+        "nativeCollectionOccurred": false,
+        "oracleQualified": false,
+        "reason": "'Ulimits'",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false
+      },
+      "expectedAssociation": false,
+      "name": "missing-Ulimits"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": false,
+        "captureAssociationValidated": false,
+        "nativeCollectionOccurred": false,
+        "oracleQualified": false,
+        "reason": "'LogConfig'",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false
+      },
+      "expectedAssociation": false,
+      "name": "missing-LogConfig"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": true,
+        "captureAssociationValidated": true,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required",
+        "excludedBehavior": [],
+        "expectedTopLevelTests": 5972,
+        "failedTests": [],
+        "nativeCollectionOccurred": false,
+        "observedNestedTests": 0,
+        "oracleQualified": false,
+        "packages": 104,
+        "rawEventsSha256": "7aedc279ec0dc18c4bf442e5f2a34721d9f26adb7b004622e6bfe8b4a9bd6613",
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false,
+        "testsPassed": true
+      },
+      "expectedAssociation": true,
+      "name": "legitimate-null-log-options"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": true,
+        "captureAssociationValidated": true,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required",
+        "excludedBehavior": [],
+        "expectedTopLevelTests": 5972,
+        "failedTests": [],
+        "nativeCollectionOccurred": false,
+        "observedNestedTests": 0,
+        "oracleQualified": false,
+        "packages": 104,
+        "rawEventsSha256": "7aedc279ec0dc18c4bf442e5f2a34721d9f26adb7b004622e6bfe8b4a9bd6613",
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false,
+        "testsPassed": true
+      },
+      "expectedAssociation": true,
+      "name": "legitimate-zero-health-options"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": false,
+        "captureAssociationValidated": false,
+        "nativeCollectionOccurred": false,
+        "oracleQualified": false,
+        "reason": "healthcheck not disabled",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false
+      },
+      "expectedAssociation": false,
+      "name": "healthcheck-enabled"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": false,
+        "captureAssociationValidated": false,
+        "nativeCollectionOccurred": false,
+        "oracleQualified": false,
+        "reason": "'Healthcheck'",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false
+      },
+      "expectedAssociation": false,
+      "name": "healthcheck-missing"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": false,
+        "captureAssociationValidated": false,
+        "nativeCollectionOccurred": false,
+        "oracleQualified": false,
+        "reason": "disabled healthcheck option mismatch",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false
+      },
+      "expectedAssociation": false,
+      "name": "healthcheck-boolean-zero"
+    },
+    {
+      "after": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": false,
+        "captureAssociationValidated": false,
+        "nativeCollectionOccurred": false,
+        "oracleQualified": false,
+        "reason": "disabled healthcheck option mismatch",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false
+      },
+      "expectedAssociation": false,
+      "name": "healthcheck-positive-interval"
+    },
+    {
+      "name": "nonroot-config-0:0",
+      "refused": true
+    },
+    {
+      "name": "nonroot-config-0:1000",
+      "refused": true
+    },
+    {
+      "name": "nonroot-config-1000:0",
+      "refused": true
+    },
+    {
+      "name": "nonroot-config-root",
+      "refused": true
+    },
+    {
+      "name": "nonroot-config-1000",
+      "refused": true
+    }
+  ],
+  "count": 46,
+  "newDaemonNativeNetworkProviderActions": 0,
+  "state": "coherent-owned-isolation-controls-passed"
+}

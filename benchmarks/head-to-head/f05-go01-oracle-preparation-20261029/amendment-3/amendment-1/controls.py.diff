@@ -1,0 +1,31 @@
+--- original/controls.py
++++ successor/controls.py
+@@ -103,6 +103,15 @@
+         "NanoCpus": 3000000000,
+         "PidsLimit": 256,
+         "CapDrop": ["ALL"],
++        "Privileged": False,
++        "CapAdd": None,
++        "Devices": [],
++        "DeviceRequests": None,
++        "DeviceCgroupRules": None,
++        "Binds": None,
++        "VolumesFrom": None,
++        "Ulimits": [{"Name": "nofile", "Soft": 1024, "Hard": 1024}],
++        "LogConfig": {"Type": "none", "Config": {}},
+         "SecurityOpt": ["no-new-privileges"],
+         "IpcMode": "private",
+         "PidMode": "",
+@@ -129,7 +138,11 @@
+                         "Image": context["imageDigest"],
+                         "Mounts": [],
+                         "HostConfig": host,
+-                        "Config": {"User": "1000:1000", "Env": ["HOME=/workspace/.home"]},
++                        "Config": {
++                            "User": "1000:1000",
++                            "Env": ["HOME=/workspace/.home"],
++                            "Healthcheck": {"Test": ["NONE"]},
++                        },
+                         "NetworkSettings": {},
+                         "State": {"Running": True},
+                     }

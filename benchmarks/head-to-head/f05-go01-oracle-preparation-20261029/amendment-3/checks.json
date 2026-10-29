@@ -1,0 +1,19 @@
+{
+  "allPassed": true,
+  "checks": [
+    "uv run python -B benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-3/controls.py --output <fresh-unused-path>",
+    "uv run python -B benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-2/controls.py --output <fresh-unused-path>",
+    "uv run python -B benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-2/verify.py",
+    "uv run ruff check --no-cache benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-3/",
+    "uv run ruff format --check --no-cache benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-3/"
+  ],
+  "costUsd": null,
+  "emptyNamePackagesRetained": 40,
+  "finalAdapterControls": 40,
+  "finalControlReport": "controls-final3.json",
+  "inheritedUnchangedOracleControls": 44,
+  "intermediateReports": "controls.json,controls-final.json,controls-final2.json retained as superseded local preparation; final subject uses controls-final3.json. Development observations retain local fixture/control corrections.",
+  "newDaemonGoNodePackageProviderNetworkActions": 0,
+  "sourceMapPackages": 104,
+  "sourceMapTopLevelNames": 5972
+}

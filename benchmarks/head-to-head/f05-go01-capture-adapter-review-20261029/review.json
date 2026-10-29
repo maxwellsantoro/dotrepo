@@ -1,0 +1,42 @@
+{
+  "actualOracleUsable": false,
+  "campaignAdmitted": false,
+  "controls": {
+    "authorImmutableVerifier": "passed20inputs/16artifacts",
+    "authorMockedAdapterControlsReplayed": 40,
+    "independentCoherentInspectCounterexamples": 2,
+    "ruff": "passed check/format --no-cache",
+    "unchangedParentScorerControlsReplayed": 44
+  },
+  "executionAuthorized": false,
+  "findings": [
+    {
+      "calibration": "Every transport call is mocked; this is an association-validation defect, not evidence an actual unsafe container ran. Actual-mode scoring still refuses the missing setup/tool/effective-child joins.",
+      "file": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-3/adapter.py",
+      "function": "association observed isolation options",
+      "id": "F1",
+      "observed": "Both captureAssociationValidated and synthetic candidateOutcomeObserved become true despite intended no-added-capability/unprivileged policy.",
+      "priority": 2,
+      "smallestFix": "Validate explicit intended inspect values Privileged is literalFalse and CapAdd is a documented empty/null representation; reject positive/unknown values. Update legitimate fixture with these actual Docker fields and add coherent raw+descriptor+trace negative controls. Keep scope to existing create/isolation policy; do not add a generic hardening platform.",
+      "subjectSha256": "175a15d7406909778fb0d965c4f3cf690998106f1b672ae71feaf7831a6b10ae",
+      "title": "Association accepts inspect evidence with added capability or privileged mode",
+      "trigger": "Coherently change both inspect-before/after raw HostConfig, descriptor copies, operation byte/hash/transport totals and trace descriptor digest to CapAdd=[SYS_ADMIN] or Privileged=true."
+    }
+  ],
+  "newGoNodeDockerNativeNetworkProviderActions": 0,
+  "oracleQualified": false,
+  "reviewerContext": "Prior source/oracle/capture reviewer and earlier F05 tooling author; did not author this adapter. Independent implementation review with context, not a blind task trial.",
+  "state": "independent-capture-adapter-before-review-findings-present",
+  "subject": {
+    "adapterSha256": "175a15d7406909778fb0d965c4f3cf690998106f1b672ae71feaf7831a6b10ae",
+    "authorFreezeSha256": "d7cd2ced83cc27cde9070e457d9fcad2185316b14ac698e83d98f189293f5cbc",
+    "planSha256": "cd77ba6d665ca1d7275fa9e090ded4664a43112672f10e0b1b662475f3e28bb8"
+  },
+  "taskOutcomeObserved": false,
+  "unchangedUnknowns": [
+    "Normal npmsetup in sameactualcontainer/session not joined.",
+    "Source-owned gotestsum build/cache provenance not joined; nullabletoolhash only observesbytes.",
+    "Effective child Go selection not observed; baseConfig.Env is insufficient.",
+    "Required source closure coverage is separate from anyconfigured subset; completecaptureconsistency does notprove actualtaskscope."
+  ]
+}

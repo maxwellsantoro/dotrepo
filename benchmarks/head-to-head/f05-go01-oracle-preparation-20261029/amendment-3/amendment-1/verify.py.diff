@@ -1,0 +1,11 @@
+--- original/verify.py
++++ successor/verify.py
+@@ -5,7 +5,7 @@
+ from pathlib import Path
+ 
+ HERE = Path(__file__).resolve().parent
+-ROOT = HERE.parents[3]
++ROOT = HERE.parents[4]
+ 
+ 
+ def verify():

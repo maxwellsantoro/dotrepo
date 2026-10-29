@@ -1,0 +1,33 @@
+{
+  "adapterASTUnchangedExceptPathRelocationAndIsolationHelperCall": true,
+  "boundInputs": 13,
+  "campaignAdmitted": false,
+  "executionAuthorized": false,
+  "newRuntimeActions": 0,
+  "oracleQualified": false,
+  "parentScorerControlsReused": 44,
+  "reuseReason": "Exact scorer/map/policy and original retained success bytes unchanged; isolation-only successor.",
+  "state": "independent-source-and-frozen-artifact-verification-passed",
+  "verified": [
+    {
+      "artifacts": 16,
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-3/FREEZE.json",
+      "sha256": "d7cd2ced83cc27cde9070e457d9fcad2185316b14ac698e83d98f189293f5cbc"
+    },
+    {
+      "artifacts": 15,
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-3/amendment-1/FREEZE.json",
+      "sha256": "bad0a161c9d84d923e0431dfac39d20dcd03a0d5fe916ce19e56c96e89c8768f"
+    },
+    {
+      "artifacts": 8,
+      "path": "benchmarks/head-to-head/f05-go01-capture-adapter-review-20261029/FREEZE.json",
+      "sha256": "46a75d99bdf078f6018cca216e2b708fc266a619ef294fe8cd87ad996955a4e8"
+    },
+    {
+      "artifacts": 15,
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-2/FREEZE.json",
+      "sha256": "cc12c2fe8ca12e8f2eb15b2ceffc130aa4094b281a3b9057e60749ab09e510b5"
+    }
+  ]
+}

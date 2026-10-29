@@ -1,0 +1,74 @@
+{
+  "cases": [
+    {
+      "actualAssociationAccepted": true,
+      "case": "extra-capability",
+      "expectedAssociationAccepted": false,
+      "inspectHostConfigMutation": {
+        "CapAdd": [
+          "SYS_ADMIN"
+        ],
+        "Privileged": false
+      },
+      "result": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": true,
+        "captureAssociationValidated": true,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required",
+        "excludedBehavior": [],
+        "expectedTopLevelTests": 5972,
+        "failedTests": [],
+        "nativeCollectionOccurred": false,
+        "observedNestedTests": 0,
+        "oracleQualified": false,
+        "packages": 104,
+        "rawEventsSha256": "7aedc279ec0dc18c4bf442e5f2a34721d9f26adb7b004622e6bfe8b4a9bd6613",
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false,
+        "testsPassed": true
+      }
+    },
+    {
+      "actualAssociationAccepted": true,
+      "case": "privileged",
+      "expectedAssociationAccepted": false,
+      "inspectHostConfigMutation": {
+        "CapAdd": null,
+        "Privileged": true
+      },
+      "result": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": true,
+        "captureAssociationValidated": true,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required",
+        "excludedBehavior": [],
+        "expectedTopLevelTests": 5972,
+        "failedTests": [],
+        "nativeCollectionOccurred": false,
+        "observedNestedTests": 0,
+        "oracleQualified": false,
+        "packages": 104,
+        "rawEventsSha256": "7aedc279ec0dc18c4bf442e5f2a34721d9f26adb7b004622e6bfe8b4a9bd6613",
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "remainingJoins": [
+          "normal-npm-setup-process-and-package/hook-observations-not-joined",
+          "source-owned-gotestsum-build-or-validated-cache-provenance-not-joined",
+          "effective-child-Go-selection-context-not-observed-by-capture"
+        ],
+        "synthetic": true,
+        "taskId": "go-01",
+        "taskOutcomeObserved": false,
+        "testsPassed": true
+      }
+    }
+  ],
+  "newDockerGoNodeNativeNetworkProviderActions": 0,
+  "state": "independent-synthetic-isolation-counterexamples"
+}
