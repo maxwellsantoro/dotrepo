@@ -1,0 +1,705 @@
+{
+  "summary": {
+    "inputFreezeSha256": "e0286bb486ead69935ca3fbcfda526c505573eb0d026a92b12ad437994c4ec6f",
+    "policyRevision": "b8b7cd0cd76108937db29e965a780d8738757a6d",
+    "newDiagnosticPolicyNotFrozenCampaignPolicy": true,
+    "tasks": 12,
+    "hits": 5,
+    "misses": 7,
+    "scalarPolicyAccepted": 4,
+    "contextPolicySelected": 0,
+    "taskSupportedDirectCompleteInstructions": 0,
+    "profileTaskRevisionMatches": 1,
+    "profileTaskRevisionMismatches": 4,
+    "controlledPolicyCases": 7,
+    "actualFallbackAttempts": 0,
+    "agentSessions": 0,
+    "finalCompletionMeasured": false,
+    "causalBenefitMeasured": false
+  },
+  "rows": [
+    {
+      "taskId": "rust-01",
+      "repository": "github.com/tauri-apps/tauri",
+      "ecosystem": "Rust",
+      "scope": "repository",
+      "component": null,
+      "startingState": "pre-clone",
+      "taskRevision": "548a3692f59405aeb239c5b63fa589824eee51e8",
+      "captureObservedAt": "2026-10-29T06:10:44.851338+00:00",
+      "httpStatus": 200,
+      "capturedBodySha256": "966d78080b2a08b6cef9e7797e7157c890c52b1708a3df50328a3d21c9e62c5d",
+      "recordRevision": "7e39750cf6a4e05234a781088ff5fb8cb890370a",
+      "recordRevisionMatchesTask": false,
+      "recordGeneratedAt": "2026-10-27T18:29:53.407193Z",
+      "recordAgeDaysAtCapture": 1.4867065294560184,
+      "profileConflicts": [],
+      "scalarTest": "pnpm test",
+      "scalarAssessment": {
+        "checkedAt": "2026-10-27T18:29:53.407193Z",
+        "confidence": "high",
+        "method": "extracted",
+        "reason": "from declared repository source",
+        "source": "package.json",
+        "state": "present"
+      },
+      "scalarPolicy": {
+        "accepted": true,
+        "fallbackReasons": []
+      },
+      "testContextPresent": false,
+      "testCandidatesCount": 0,
+      "contextRequest": {
+        "scope": "repository",
+        "component": null
+      },
+      "contextualPolicy": {
+        "instruction": null,
+        "provenance": null,
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ]
+      },
+      "originalGoldStatus": "required-abstention",
+      "originalGoldReason": "No complete source-supported repository-default command/context/prerequisite tuple. External Tauri prerequisite guide and per-package coverage remain unresolved.",
+      "originalGoldCompleteAlternatives": [],
+      "originalOracleState": "draft; not launch-ready",
+      "taskSupportedDirectCompleteInstruction": false,
+      "finalTaskCompletion": null,
+      "fallbackAttempted": false
+    },
+    {
+      "taskId": "rust-02",
+      "repository": "github.com/GyulyVGC/sniffnet",
+      "ecosystem": "Rust",
+      "scope": "component",
+      "component": "lib/sniffnet-packet-parser",
+      "startingState": "local-checkout",
+      "taskRevision": "ab4bf739d46448436cb68933bb8260ee264449d5",
+      "captureObservedAt": "2026-10-29T06:10:44.995362+00:00",
+      "httpStatus": 200,
+      "capturedBodySha256": "42789822f572979ceebea5fe170b0125007b8097981d5bb0f8cca205731547c8",
+      "recordRevision": "ab4bf739d46448436cb68933bb8260ee264449d5",
+      "recordRevisionMatchesTask": true,
+      "recordGeneratedAt": "2026-10-27T17:33:52.903987Z",
+      "recordAgeDaysAtCapture": 1.5256029094328702,
+      "profileConflicts": [],
+      "scalarTest": "cargo test --verbose -- --nocapture",
+      "scalarAssessment": {
+        "checkedAt": "2026-10-27T17:33:52.903987Z",
+        "confidence": "medium",
+        "method": "inferred",
+        "reason": "from workflow fallback",
+        "source": ".github/workflows/rust.yml",
+        "state": "present"
+      },
+      "scalarPolicy": {
+        "accepted": false,
+        "fallbackReasons": [
+          "scoped-command-source:repo.test",
+          "inferred-command:repo.test"
+        ]
+      },
+      "testContextPresent": false,
+      "testCandidatesCount": 0,
+      "contextRequest": {
+        "scope": "component",
+        "component": "lib/sniffnet-packet-parser"
+      },
+      "contextualPolicy": {
+        "instruction": null,
+        "provenance": null,
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ]
+      },
+      "originalGoldStatus": "required-abstention",
+      "originalGoldReason": "Root cargo test is documented, but no separately documented component-only invocation or complete component prerequisite tuple is established. Do not invent a one-package equivalent of the root workflow.",
+      "originalGoldCompleteAlternatives": [],
+      "originalOracleState": "draft; not launch-ready",
+      "taskSupportedDirectCompleteInstruction": false,
+      "finalTaskCompletion": null,
+      "fallbackAttempted": false
+    },
+    {
+      "taskId": "rust-03",
+      "repository": "github.com/iced-rs/iced",
+      "ecosystem": "Rust",
+      "scope": "repository",
+      "component": null,
+      "startingState": "local-checkout",
+      "taskRevision": "cd04b74ca7073766f654535d6e72c452ef749d07",
+      "captureObservedAt": "2026-10-29T06:10:45.146773+00:00",
+      "httpStatus": 404,
+      "capturedBodySha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "recordRevision": null,
+      "recordRevisionMatchesTask": null,
+      "recordGeneratedAt": null,
+      "recordAgeDaysAtCapture": null,
+      "profileConflicts": null,
+      "scalarTest": null,
+      "scalarAssessment": null,
+      "scalarPolicy": {
+        "accepted": false,
+        "fallbackReasons": [
+          "repository-not-found"
+        ]
+      },
+      "testContextPresent": false,
+      "testCandidatesCount": 0,
+      "contextRequest": {
+        "scope": "repository",
+        "component": null
+      },
+      "contextualPolicy": {
+        "instruction": null,
+        "provenance": null,
+        "fallbackReasons": [
+          "repository-not-found"
+        ]
+      },
+      "originalGoldStatus": "unresolved",
+      "originalGoldReason": "Workflow documents three workspace test stages, runner matrix, environment and Linux packages. A portable consumer tuple and environment-specific completion oracle require independent review; implicit workflow cwd and prerequisite sufficiency are not independently established.",
+      "originalGoldCompleteAlternatives": [],
+      "originalOracleState": "draft; not launch-ready",
+      "taskSupportedDirectCompleteInstruction": false,
+      "finalTaskCompletion": null,
+      "fallbackAttempted": false
+    },
+    {
+      "taskId": "python-01",
+      "repository": "github.com/666ghj/MiroFish",
+      "ecosystem": "Python",
+      "scope": "repository",
+      "component": null,
+      "startingState": "pre-clone",
+      "taskRevision": "7657031ac01184afe2cb220f5ee3545573b5e843",
+      "captureObservedAt": "2026-10-29T06:10:45.367690+00:00",
+      "httpStatus": 404,
+      "capturedBodySha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "recordRevision": null,
+      "recordRevisionMatchesTask": null,
+      "recordGeneratedAt": null,
+      "recordAgeDaysAtCapture": null,
+      "profileConflicts": null,
+      "scalarTest": null,
+      "scalarAssessment": null,
+      "scalarPolicy": {
+        "accepted": false,
+        "fallbackReasons": [
+          "repository-not-found"
+        ]
+      },
+      "testContextPresent": false,
+      "testCandidatesCount": 0,
+      "contextRequest": {
+        "scope": "repository",
+        "component": null
+      },
+      "contextualPolicy": {
+        "instruction": null,
+        "provenance": null,
+        "fallbackReasons": [
+          "repository-not-found"
+        ]
+      },
+      "originalGoldStatus": "required-abstention",
+      "originalGoldReason": "Root scripts provide deployment/setup and build commands, but no source-declared repository-default aggregate test command or complete test prerequisite tuple joins root and backend tests. Deployment API-key requirements must not be assumed to be test requirements.",
+      "originalGoldCompleteAlternatives": [],
+      "originalOracleState": "source-grounded draft; not launch-ready",
+      "taskSupportedDirectCompleteInstruction": false,
+      "finalTaskCompletion": null,
+      "fallbackAttempted": false
+    },
+    {
+      "taskId": "python-02",
+      "repository": "github.com/home-assistant/core",
+      "ecosystem": "Python",
+      "scope": "component",
+      "component": "homeassistant",
+      "startingState": "local-checkout",
+      "taskRevision": "cde3969919b9bd540b2dd75b7aa84a908acbdbfe",
+      "captureObservedAt": "2026-10-29T06:10:45.526007+00:00",
+      "httpStatus": 404,
+      "capturedBodySha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "recordRevision": null,
+      "recordRevisionMatchesTask": null,
+      "recordGeneratedAt": null,
+      "recordAgeDaysAtCapture": null,
+      "profileConflicts": null,
+      "scalarTest": null,
+      "scalarAssessment": null,
+      "scalarPolicy": {
+        "accepted": false,
+        "fallbackReasons": [
+          "repository-not-found"
+        ]
+      },
+      "testContextPresent": false,
+      "testCandidatesCount": 0,
+      "contextRequest": {
+        "scope": "component",
+        "component": "homeassistant"
+      },
+      "contextualPolicy": {
+        "instruction": null,
+        "provenance": null,
+        "fallbackReasons": [
+          "repository-not-found"
+        ]
+      },
+      "originalGoldStatus": "unresolved",
+      "originalGoldReason": "The manifest establishes the physical owned package homeassistant, but retained guidance describes aggregate product tests. The package path alone does not establish distinct component coverage, an equivalent component-only command, or a complete applicable tuple. Preserve this task and unresolved applicability; do not silently retarget to the previously inspected narrower homeassistant/components/abode scope.",
+      "originalGoldCompleteAlternatives": [],
+      "originalOracleState": "source-grounded draft; not launch-ready",
+      "taskSupportedDirectCompleteInstruction": false,
+      "finalTaskCompletion": null,
+      "fallbackAttempted": false
+    },
+    {
+      "taskId": "python-03",
+      "repository": "github.com/ytdl-org/youtube-dl",
+      "ecosystem": "Python",
+      "scope": "component",
+      "component": "youtube_dl",
+      "startingState": "pre-clone",
+      "taskRevision": "956b8c585591b401a543e409accb163eeaaa1193",
+      "captureObservedAt": "2026-10-29T06:10:45.689036+00:00",
+      "httpStatus": 404,
+      "capturedBodySha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "recordRevision": null,
+      "recordRevisionMatchesTask": null,
+      "recordGeneratedAt": null,
+      "recordAgeDaysAtCapture": null,
+      "profileConflicts": null,
+      "scalarTest": null,
+      "scalarAssessment": null,
+      "scalarPolicy": {
+        "accepted": false,
+        "fallbackReasons": [
+          "repository-not-found"
+        ]
+      },
+      "testContextPresent": false,
+      "testCandidatesCount": 0,
+      "contextRequest": {
+        "scope": "component",
+        "component": "youtube_dl"
+      },
+      "contextualPolicy": {
+        "instruction": null,
+        "provenance": null,
+        "fallbackReasons": [
+          "repository-not-found"
+        ]
+      },
+      "originalGoldStatus": "unresolved",
+      "originalGoldReason": "The manifest establishes the physical owned package youtube_dl, but retained guidance describes aggregate product tests. The package path alone does not establish distinct component coverage, an equivalent component-only command, or a complete applicable tuple. Preserve this task and unresolved applicability; do not silently retarget to the previously inspected narrower youtube_dl/downloader scope.",
+      "originalGoldCompleteAlternatives": [],
+      "originalOracleState": "source-grounded draft; not launch-ready",
+      "taskSupportedDirectCompleteInstruction": false,
+      "finalTaskCompletion": null,
+      "fallbackAttempted": false
+    },
+    {
+      "taskId": "typescript-01",
+      "repository": "github.com/deepseek-ai/deepseek-harness",
+      "ecosystem": "JavaScript/TypeScript",
+      "scope": "repository",
+      "component": null,
+      "startingState": "pre-clone",
+      "taskRevision": "f3803c96974ad4a94195fb97e5c637e9c2a3afe3",
+      "captureObservedAt": "2026-10-29T06:10:45.828510+00:00",
+      "httpStatus": 404,
+      "capturedBodySha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "recordRevision": null,
+      "recordRevisionMatchesTask": null,
+      "recordGeneratedAt": null,
+      "recordAgeDaysAtCapture": null,
+      "profileConflicts": null,
+      "scalarTest": null,
+      "scalarAssessment": null,
+      "scalarPolicy": {
+        "accepted": false,
+        "fallbackReasons": [
+          "repository-not-found"
+        ]
+      },
+      "testContextPresent": false,
+      "testCandidatesCount": 0,
+      "contextRequest": {
+        "scope": "repository",
+        "component": null
+      },
+      "contextualPolicy": {
+        "instruction": null,
+        "provenance": null,
+        "fallbackReasons": [
+          "repository-not-found"
+        ]
+      },
+      "originalGoldStatus": "unresolved",
+      "originalGoldReason": "The preserved default pnpm test wrapper builds the native addon before Vitest; setup specifies Node/type stripping, Corepack pnpm, Git and typecheck. Native compiler/headers, platform-specific test selection, PowerShell and other suite prerequisites still require an environment-specific complete assessment.",
+      "originalGoldCompleteAlternatives": [],
+      "originalOracleState": "source-grounded draft; not launch-ready",
+      "taskSupportedDirectCompleteInstruction": false,
+      "finalTaskCompletion": null,
+      "fallbackAttempted": false
+    },
+    {
+      "taskId": "typescript-02",
+      "repository": "github.com/OpenHands/OpenHands",
+      "ecosystem": "JavaScript/TypeScript",
+      "scope": "component",
+      "component": "bin",
+      "startingState": "local-checkout",
+      "taskRevision": "2875056f93d6eebcd887f64ae557258a7b0b0108",
+      "captureObservedAt": "2026-10-29T06:10:45.984287+00:00",
+      "httpStatus": 404,
+      "capturedBodySha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "recordRevision": null,
+      "recordRevisionMatchesTask": null,
+      "recordGeneratedAt": null,
+      "recordAgeDaysAtCapture": null,
+      "profileConflicts": null,
+      "scalarTest": null,
+      "scalarAssessment": null,
+      "scalarPolicy": {
+        "accepted": false,
+        "fallbackReasons": [
+          "repository-not-found"
+        ]
+      },
+      "testContextPresent": false,
+      "testCandidatesCount": 0,
+      "contextRequest": {
+        "scope": "component",
+        "component": "bin"
+      },
+      "contextualPolicy": {
+        "instruction": null,
+        "provenance": null,
+        "fallbackReasons": [
+          "repository-not-found"
+        ]
+      },
+      "originalGoldStatus": "supported-source-alternative; independent review pending",
+      "originalGoldReason": "Source guidance explicitly demonstrates selecting Vitest suite paths through npm run test, and the bin directory has a dedicated launcher suite. The alternative retains the npm wrapper and documented contributor setup; it is a source assessment, not execution evidence.",
+      "originalGoldCompleteAlternatives": [
+        {
+          "command": "npm run test -- __tests__/bin/agent-canvas.test.ts",
+          "working_directory": ".",
+          "scope": "component",
+          "component": "bin",
+          "prerequisites": [
+            "Node.js 24 or later",
+            "npm 11.12.1",
+            "uv (documented contributor source setup)",
+            "Run npm ci from the repository root at the frozen revision."
+          ],
+          "source": "docs/DEVELOPMENT.md",
+          "coverage": "All tests in the dedicated bin launcher suite; preserve the npm test wrapper and its make-i18n stage.",
+          "derivation": "Developer guide demonstrates suite-path arguments to npm run test; bind that documented selection mechanism to the dedicated bin suite retained in source.",
+          "qualification": "Source-supported selector binding, not a verbatim single upstream line; independent review and runtime verification pending."
+        }
+      ],
+      "originalOracleState": "source-grounded draft; not launch-ready",
+      "taskSupportedDirectCompleteInstruction": false,
+      "finalTaskCompletion": null,
+      "fallbackAttempted": false
+    },
+    {
+      "taskId": "typescript-03",
+      "repository": "github.com/vuejs/core",
+      "ecosystem": "JavaScript/TypeScript",
+      "scope": "repository",
+      "component": null,
+      "startingState": "local-checkout",
+      "taskRevision": "05db7e807be841e6f343d0237669669b18c89d4d",
+      "captureObservedAt": "2026-10-29T06:10:46.073642+00:00",
+      "httpStatus": 200,
+      "capturedBodySha256": "d6feb2ca575f8f6faf64a55d207b7d099616bd117cf16704221be0cc077a0321",
+      "recordRevision": "ca034820b8288ab6da3a033626a7857401ee64a5",
+      "recordRevisionMatchesTask": false,
+      "recordGeneratedAt": "2026-10-27T18:31:05.489548Z",
+      "recordAgeDaysAtCapture": 1.485886389976852,
+      "profileConflicts": [],
+      "scalarTest": "pnpm test",
+      "scalarAssessment": {
+        "checkedAt": "2026-10-27T18:31:05.489548Z",
+        "confidence": "high",
+        "method": "extracted",
+        "reason": "from declared repository source",
+        "source": "package.json",
+        "state": "present"
+      },
+      "scalarPolicy": {
+        "accepted": true,
+        "fallbackReasons": []
+      },
+      "testContextPresent": false,
+      "testCandidatesCount": 0,
+      "contextRequest": {
+        "scope": "repository",
+        "component": null
+      },
+      "contextualPolicy": {
+        "instruction": null,
+        "provenance": null,
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ]
+      },
+      "originalGoldStatus": "unresolved",
+      "originalGoldReason": "The guide declares run-once testing and dependency setup, but the default Vitest project set includes source tests and browser/built-file tests. Complete browser installation and build prerequisites for that default set, plus an immutable choice for lts/*, need environment/oracle review.",
+      "originalGoldCompleteAlternatives": [],
+      "originalOracleState": "source-grounded draft; not launch-ready",
+      "taskSupportedDirectCompleteInstruction": false,
+      "finalTaskCompletion": null,
+      "fallbackAttempted": false
+    },
+    {
+      "taskId": "go-01",
+      "repository": "github.com/microsoft/TypeScript",
+      "ecosystem": "Go",
+      "scope": "repository",
+      "component": null,
+      "startingState": "pre-clone",
+      "taskRevision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+      "captureObservedAt": "2026-10-29T06:10:46.177071+00:00",
+      "httpStatus": 200,
+      "capturedBodySha256": "a9cc0f244be39614b83d2c77ee2b3b2d122d0712dc9c6f6aae21ea647f14794c",
+      "recordRevision": "ab8f7140088efc49f8bea22f00f43ae87b885b20",
+      "recordRevisionMatchesTask": false,
+      "recordGeneratedAt": "2026-10-27T18:26:39.233036Z",
+      "recordAgeDaysAtCapture": 1.4889692596643518,
+      "profileConflicts": [],
+      "scalarTest": "npm test",
+      "scalarAssessment": {
+        "checkedAt": "2026-10-27T18:26:39.233036Z",
+        "confidence": "high",
+        "method": "extracted",
+        "reason": "from declared repository source",
+        "source": "package.json",
+        "state": "present"
+      },
+      "scalarPolicy": {
+        "accepted": true,
+        "fallbackReasons": []
+      },
+      "testContextPresent": false,
+      "testCandidatesCount": 0,
+      "contextRequest": {
+        "scope": "repository",
+        "component": null
+      },
+      "contextualPolicy": {
+        "instruction": null,
+        "provenance": null,
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ]
+      },
+      "originalGoldStatus": "supported-source-alternative; independent review pending",
+      "originalGoldReason": "The documented npx hereby test entrypoint preserves the source-owned default task, prerequisites and root npm-ci setup. Hereby identifies it as test:tsc; test:all has deliberately broader coverage and is not substituted for the repository default.",
+      "originalGoldCompleteAlternatives": [
+        {
+          "command": "npx hereby test",
+          "working_directory": ".",
+          "scope": "repository",
+          "component": null,
+          "prerequisites": [
+            "Go 1.27",
+            "Node.js 24",
+            "npm version pinned by packageManager: npm@11.19.1+sha512.cedb312b1b7f92421a02cfb68b4194e88f8346651dacd6acc5364a25ef5309d4a32b19616a1ff8aff865e7280c0fa5c0835a99f5cd93368991e2a80ec9da75d2",
+            "Git",
+            "Clone and check out the frozen revision; run npm ci from the repository root."
+          ],
+          "source": "CONTRIBUTING.md",
+          "coverage": "Source-owned default compiler and language-service test:tsc task, not broader test:all.",
+          "qualification": "Documented applicability only; independent gold review and runtime verification pending."
+        }
+      ],
+      "originalOracleState": "source-grounded draft; not launch-ready",
+      "taskSupportedDirectCompleteInstruction": false,
+      "finalTaskCompletion": null,
+      "fallbackAttempted": false
+    },
+    {
+      "taskId": "go-02",
+      "repository": "github.com/beego/beego",
+      "ecosystem": "Go",
+      "scope": "component",
+      "component": "client/cache",
+      "startingState": "local-checkout",
+      "taskRevision": "939cfde380bb9f15844ad633b84f037f7da21584",
+      "captureObservedAt": "2026-10-29T06:10:46.290306+00:00",
+      "httpStatus": 404,
+      "capturedBodySha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "recordRevision": null,
+      "recordRevisionMatchesTask": null,
+      "recordGeneratedAt": null,
+      "recordAgeDaysAtCapture": null,
+      "profileConflicts": null,
+      "scalarTest": null,
+      "scalarAssessment": null,
+      "scalarPolicy": {
+        "accepted": false,
+        "fallbackReasons": [
+          "repository-not-found"
+        ]
+      },
+      "testContextPresent": false,
+      "testCandidatesCount": 0,
+      "contextRequest": {
+        "scope": "component",
+        "component": "client/cache"
+      },
+      "contextualPolicy": {
+        "instruction": null,
+        "provenance": null,
+        "fallbackReasons": [
+          "repository-not-found"
+        ]
+      },
+      "originalGoldStatus": "required-abstention",
+      "originalGoldReason": "Source documents middleware services and root CI tests, but does not declare a complete isolated cache-component command/context/prerequisite tuple. A root-only cache package invocation would omit the backend subpackages; do not invent an equivalent to the aggregate workflow.",
+      "originalGoldCompleteAlternatives": [],
+      "originalOracleState": "source-grounded draft; not launch-ready",
+      "taskSupportedDirectCompleteInstruction": false,
+      "finalTaskCompletion": null,
+      "fallbackAttempted": false
+    },
+    {
+      "taskId": "go-03",
+      "repository": "github.com/hashicorp/vault",
+      "ecosystem": "Go",
+      "scope": "component",
+      "component": "api",
+      "startingState": "pre-clone",
+      "taskRevision": "352089582444ea84feb03bc97eda97b35729e8ec",
+      "captureObservedAt": "2026-10-29T06:10:46.372870+00:00",
+      "httpStatus": 200,
+      "capturedBodySha256": "7263c8007a87fab3a46bb4e2780da4277a950bab125070611bd147fb04b7c941",
+      "recordRevision": "2f372078b7ef27bd9832ce6650d0e35ca324579b",
+      "recordRevisionMatchesTask": false,
+      "recordGeneratedAt": "2026-10-27T18:03:49.460842Z",
+      "recordAgeDaysAtCapture": 1.5048253706944446,
+      "profileConflicts": [],
+      "scalarTest": "make test",
+      "scalarAssessment": {
+        "checkedAt": "2026-10-27T18:03:49.460842Z",
+        "confidence": "high",
+        "method": "extracted",
+        "reason": "from declared repository source",
+        "source": "Makefile",
+        "state": "present"
+      },
+      "scalarPolicy": {
+        "accepted": true,
+        "fallbackReasons": []
+      },
+      "testContextPresent": false,
+      "testCandidatesCount": 0,
+      "contextRequest": {
+        "scope": "component",
+        "component": "api"
+      },
+      "contextualPolicy": {
+        "instruction": null,
+        "provenance": null,
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ]
+      },
+      "originalGoldStatus": "unresolved",
+      "originalGoldReason": "Root make test supports package selection but disables the Go workspace and runs generation prerequisites; api is a distinct module. Do not assume make test TEST=./api works or strip the prep chain. A source-supported complete API-module instruction and its Docker/generation requirements need independent review.",
+      "originalGoldCompleteAlternatives": [],
+      "originalOracleState": "source-grounded draft; not launch-ready",
+      "taskSupportedDirectCompleteInstruction": false,
+      "finalTaskCompletion": null,
+      "fallbackAttempted": false
+    }
+  ],
+  "controls": [
+    {
+      "name": "complete-high-repository-tuple-accepted",
+      "synthetic": true,
+      "scalarAccepted": true,
+      "scalarReasons": [],
+      "contextSelected": true,
+      "contextReasons": [],
+      "actualTaskAdmission": false
+    },
+    {
+      "name": "same-root-scalar-does-not-answer-component-context-request",
+      "synthetic": true,
+      "scalarAccepted": true,
+      "scalarReasons": [],
+      "contextSelected": false,
+      "contextReasons": [
+        "no-assessed-contextual-instruction"
+      ],
+      "actualTaskAdmission": false
+    },
+    {
+      "name": "missing-prerequisite-member-abstains-context",
+      "synthetic": true,
+      "scalarAccepted": true,
+      "scalarReasons": [],
+      "contextSelected": false,
+      "contextReasons": [
+        "no-assessed-contextual-instruction"
+      ],
+      "actualTaskAdmission": false
+    },
+    {
+      "name": "medium-assessment-abstains-both",
+      "synthetic": true,
+      "scalarAccepted": false,
+      "scalarReasons": [
+        "insufficient-command-assessment:repo.test"
+      ],
+      "contextSelected": false,
+      "contextReasons": [
+        "no-assessed-contextual-instruction"
+      ],
+      "actualTaskAdmission": false
+    },
+    {
+      "name": "record-conflict-abstains-both",
+      "synthetic": true,
+      "scalarAccepted": false,
+      "scalarReasons": [
+        "conflicting-records"
+      ],
+      "contextSelected": false,
+      "contextReasons": [
+        "conflicting-records"
+      ],
+      "actualTaskAdmission": false
+    },
+    {
+      "name": "candidate-command-context-mismatch-abstains",
+      "synthetic": true,
+      "scalarAccepted": true,
+      "scalarReasons": [],
+      "contextSelected": false,
+      "contextReasons": [
+        "no-assessed-contextual-instruction"
+      ],
+      "actualTaskAdmission": false
+    },
+    {
+      "name": "missing-context-legacy-scalar-still-accepted",
+      "synthetic": true,
+      "scalarAccepted": true,
+      "scalarReasons": [],
+      "contextSelected": false,
+      "contextReasons": [
+        "no-assessed-contextual-instruction"
+      ],
+      "actualTaskAdmission": false
+    }
+  ]
+}

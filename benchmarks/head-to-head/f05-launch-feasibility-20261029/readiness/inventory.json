@@ -1,0 +1,745 @@
+{
+  "identity": "f05-twelve-task-launch-readiness-evidence-inventory-v1",
+  "observedAt": "2026-10-29T15:07:00.470686+00:00",
+  "observedHead": "b8b7cd0cd76108937db29e965a780d8738757a6d",
+  "decision": "C1-NO-GO-current-evidence",
+  "decisionReason": "Nine unchanged task scopes lack bounded environment/native-outcome qualification, and all six shared launch gate groups remain unmet. No paid launch or further infrastructure work is authorized.",
+  "noGreenBaselineRequirement": "A complete assertion-failed outcome can qualify a usable completion/error oracle. A known bounded unavailable/setup failure can remain in denominator with sound scoring. Missing capture/oracle evidence and harness defects are not upstream unavailability.",
+  "sourceAdmissionCriterion": "Full-source retention/hash/Merkle consistency is not runtime/source admission. Historical static checks and operator provision evidence are reported without promoting them to exact current campaign load_session/protected-content/source provision qualification.",
+  "counts": {
+    "tasks": 12,
+    "repositories": 12,
+    "fullExactSourceArchivesRetainedAndHashRechecked": 12,
+    "exactCampaignSourceAdmissionsEstablished": 0,
+    "exactCampaignSourceAdmissionsUnverified": 12,
+    "boundedNativeEnvironmentScopesQualified": 3,
+    "boundedNativeOutcomeOraclesQualified": 3,
+    "tasksWithoutBoundedNativeEnvironmentAndOutcomeQualification": 9,
+    "taskEvidenceUnit": "one task has both bounded native environment and outcome qualification;3met/9unmet of12. Environment/oracle columns overlap; do not add as18distincttasks.",
+    "agentSessionCaptureOrProviderLiveQualifiedTasks": 0,
+    "agentSessionsRun": 0,
+    "sharedLaunchGateGroupsUnmet": 6,
+    "sharedLaunchGateGroupsTotal": 6,
+    "countingRule": "Six explicitly grouped shared gates counted once, not12times. Source retention/admission and bounded operator/session qualification are separate facts. Unknown/unverified is unmet, not unavailable."
+  },
+  "tasks": [
+    {
+      "id": "rust-01",
+      "repository": "github.com/tauri-apps/tauri",
+      "revision": "548a3692f59405aeb239c5b63fa589824eee51e8",
+      "ecosystem": "Rust",
+      "scope": "repository",
+      "component": null,
+      "startingState": "pre-clone",
+      "source": {
+        "state": "full-exact-archive-retained-and-hash-rechecked",
+        "archive": {
+          "taskId": "rust-01",
+          "archivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/rust-01/source.tar",
+          "retainedExpectedSha256": "43cf6ded6def92347692da1746fb6e132be6d5e142154c6bf2b97c2fae41fe02",
+          "currentlyPresent": true,
+          "observedSha256": "43cf6ded6def92347692da1746fb6e132be6d5e142154c6bf2b97c2fae41fe02",
+          "bytes": 23367680,
+          "hashMatched": true
+        },
+        "historicalProvisioningEvidence": "Full Git/tar acquisition integrity retained; no campaign source admission established.",
+        "exactCampaignAdmissionQualified": null,
+        "criterion": "Exact frozen campaign source bundle passes actual reviewed loader/protected-artifact policy and provision semantics; complete archive/hash alone is insufficient."
+      },
+      "intendedCoverage": "Full Rust repository target remains source-unresolved; JS root test/selected Rust CI lanes cannot silently replace it.",
+      "environment": {
+        "state": "qualification-unestablished",
+        "boundedNativeScopeQualified": false,
+        "fullAgentSessionEnvironmentQualified": null
+      },
+      "nativeOutcomeOracle": {
+        "state": "prospective-or-unresolved-no-qualified-native-outcome",
+        "boundedNativeOutcomeQualified": false,
+        "agentSessionCaptureScoringIntegrationQualified": false
+      },
+      "agentRuntime": {
+        "state": "shared-synthetic-and-owned-backend-controls-only",
+        "providerLiveQualified": false,
+        "assignedAgentSessionsRun": 0
+      },
+      "smallestCurrentObstruction": "No bounded native environment/outcome qualification; prerequisite and whole-workspace completion/error contract unestablished.",
+      "evidenceRefs": [
+        "roster",
+        "source-freeze",
+        "next-eight",
+        "prelaunch",
+        "scope-followup",
+        "scope-challenge"
+      ],
+      "reopeningEvidenceRequirement": "Evidence closing the named obstruction under unchanged task/scope/frozen limits, plus shared launch gates; this statement authorizes no new work and requires no green baseline."
+    },
+    {
+      "id": "rust-02",
+      "repository": "github.com/GyulyVGC/sniffnet",
+      "revision": "ab4bf739d46448436cb68933bb8260ee264449d5",
+      "ecosystem": "Rust",
+      "scope": "component",
+      "component": "lib/sniffnet-packet-parser",
+      "startingState": "local-checkout",
+      "source": {
+        "state": "full-exact-archive-retained-and-hash-rechecked",
+        "archive": {
+          "taskId": "rust-02",
+          "archivePath": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/rust-02-full/runtime-source.tar",
+          "retainedExpectedSha256": "862b159c55ee7693faed80c2546aa203cc370e867cf5a206cff5356ab66766d6",
+          "currentlyPresent": true,
+          "observedSha256": "862b159c55ee7693faed80c2546aa203cc370e867cf5a206cff5356ab66766d6",
+          "bytes": 114851840,
+          "hashMatched": true
+        },
+        "historicalProvisioningEvidence": "Actual operator qualification provisioned this exact archive; this is not current campaign loader admission.",
+        "exactCampaignAdmissionQualified": null,
+        "criterion": "Exact frozen campaign source bundle passes actual reviewed loader/protected-artifact policy and provision semantics; complete archive/hash alone is insufficient."
+      },
+      "intendedCoverage": "Both exact component unit IDs plus terminal zero-case doc phase independently reviewed.",
+      "environment": {
+        "state": "bounded-known-native-scope-qualified",
+        "boundedNativeScopeQualified": true,
+        "fullAgentSessionEnvironmentQualified": null
+      },
+      "nativeOutcomeOracle": {
+        "state": "independently-reviewed-native-outcome-for-known-scope",
+        "boundedNativeOutcomeQualified": true,
+        "agentSessionCaptureScoringIntegrationQualified": false
+      },
+      "agentRuntime": {
+        "state": "shared-synthetic-and-owned-backend-controls-only",
+        "providerLiveQualified": false,
+        "assignedAgentSessionsRun": 0
+      },
+      "smallestCurrentObstruction": "Bounded common-image/frozen-cache native scope qualified; exact agent-session capture/scoring/config remains shared-unqualified.",
+      "evidenceRefs": [
+        "roster",
+        "source-freeze",
+        "first-four",
+        "offline-results",
+        "offline-review"
+      ],
+      "reopeningEvidenceRequirement": "Evidence closing the named obstruction under unchanged task/scope/frozen limits, plus shared launch gates; this statement authorizes no new work and requires no green baseline."
+    },
+    {
+      "id": "rust-03",
+      "repository": "github.com/iced-rs/iced",
+      "revision": "cd04b74ca7073766f654535d6e72c452ef749d07",
+      "ecosystem": "Rust",
+      "scope": "repository",
+      "component": null,
+      "startingState": "local-checkout",
+      "source": {
+        "state": "full-exact-archive-retained-and-hash-rechecked",
+        "archive": {
+          "taskId": "rust-03",
+          "archivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/rust-03/source.tar",
+          "retainedExpectedSha256": "19551665ef078b5392bb3640e98df32f99791320dd7afd4ca12cc081a772eb0c",
+          "currentlyPresent": true,
+          "observedSha256": "19551665ef078b5392bb3640e98df32f99791320dd7afd4ca12cc081a772eb0c",
+          "bytes": 9267200,
+          "hashMatched": true
+        },
+        "historicalProvisioningEvidence": "Full Git/tar acquisition integrity retained; no campaign source admission established.",
+        "exactCampaignAdmissionQualified": null,
+        "criterion": "Exact frozen campaign source bundle passes actual reviewed loader/protected-artifact policy and provision semantics; complete archive/hash alone is insufficient."
+      },
+      "intendedCoverage": "Source describes three workspace stages including ignored/all-features and backend/env/Linux prerequisites.",
+      "environment": {
+        "state": "qualification-unestablished",
+        "boundedNativeScopeQualified": false,
+        "fullAgentSessionEnvironmentQualified": null
+      },
+      "nativeOutcomeOracle": {
+        "state": "prospective-or-unresolved-no-qualified-native-outcome",
+        "boundedNativeOutcomeQualified": false,
+        "agentSessionCaptureScoringIntegrationQualified": false
+      },
+      "agentRuntime": {
+        "state": "shared-synthetic-and-owned-backend-controls-only",
+        "providerLiveQualified": false,
+        "assignedAgentSessionsRun": 0
+      },
+      "smallestCurrentObstruction": "No retained qualified environment or native case/phase outcome/error oracle for this unchanged full repository task.",
+      "evidenceRefs": [
+        "roster",
+        "source-freeze",
+        "next-eight",
+        "roster",
+        "next-eight"
+      ],
+      "reopeningEvidenceRequirement": "Evidence closing the named obstruction under unchanged task/scope/frozen limits, plus shared launch gates; this statement authorizes no new work and requires no green baseline."
+    },
+    {
+      "id": "python-01",
+      "repository": "github.com/666ghj/MiroFish",
+      "revision": "7657031ac01184afe2cb220f5ee3545573b5e843",
+      "ecosystem": "Python",
+      "scope": "repository",
+      "component": null,
+      "startingState": "pre-clone",
+      "source": {
+        "state": "full-exact-archive-retained-and-hash-rechecked",
+        "archive": {
+          "taskId": "python-01",
+          "archivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/python-01/source.tar",
+          "retainedExpectedSha256": "fc70acea794785b5c6bfd06f5e0c83cb328fc5c4e05e36dab8f182fea5bd0d70",
+          "currentlyPresent": true,
+          "observedSha256": "fc70acea794785b5c6bfd06f5e0c83cb328fc5c4e05e36dab8f182fea5bd0d70",
+          "bytes": 9175040,
+          "hashMatched": true
+        },
+        "historicalProvisioningEvidence": "Full Git/tar acquisition integrity retained; no campaign source admission established.",
+        "exactCampaignAdmissionQualified": null,
+        "criterion": "Exact frozen campaign source bundle passes actual reviewed loader/protected-artifact policy and provision semantics; complete archive/hash alone is insufficient."
+      },
+      "intendedCoverage": "Root unittest + all18 backend assertion-bearing pytest files is accepted prospective union; maintainer-default instruction remains unresolved.",
+      "environment": {
+        "state": "qualification-unestablished",
+        "boundedNativeScopeQualified": false,
+        "fullAgentSessionEnvironmentQualified": null
+      },
+      "nativeOutcomeOracle": {
+        "state": "prospective-or-unresolved-no-qualified-native-outcome",
+        "boundedNativeOutcomeQualified": false,
+        "agentSessionCaptureScoringIntegrationQualified": false
+      },
+      "agentRuntime": {
+        "state": "shared-synthetic-and-owned-backend-controls-only",
+        "providerLiveQualified": false,
+        "assignedAgentSessionsRun": 0
+      },
+      "smallestCurrentObstruction": "Only source-free Python3.11.2/uv probe actual; wheel driver static-only. Locked setup/cache/native collection and trusted phase/capture joins absent.",
+      "evidenceRefs": [
+        "roster",
+        "source-freeze",
+        "next-eight",
+        "python01-decision",
+        "python01-scorer",
+        "python01-scorer-review",
+        "python01-probe",
+        "python01-wheel",
+        "python01-wheel-review"
+      ],
+      "reopeningEvidenceRequirement": "Evidence closing the named obstruction under unchanged task/scope/frozen limits, plus shared launch gates; this statement authorizes no new work and requires no green baseline."
+    },
+    {
+      "id": "python-02",
+      "repository": "github.com/home-assistant/core",
+      "revision": "cde3969919b9bd540b2dd75b7aa84a908acbdbfe",
+      "ecosystem": "Python",
+      "scope": "component",
+      "component": "homeassistant",
+      "startingState": "local-checkout",
+      "source": {
+        "state": "full-exact-archive-retained-and-hash-rechecked",
+        "archive": {
+          "taskId": "python-02",
+          "archivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/python-02/source.tar",
+          "retainedExpectedSha256": "6fe6c3084bc31e1f782696dc588cc55d61d1dd93bda8daffcba85971159ce61b",
+          "currentlyPresent": true,
+          "observedSha256": "6fe6c3084bc31e1f782696dc588cc55d61d1dd93bda8daffcba85971159ce61b",
+          "bytes": 246251520,
+          "hashMatched": true
+        },
+        "historicalProvisioningEvidence": "Historical f2f loader structurally admitted full archive/17combined links with EMPTY protected digest set; no task/cache/session qualification.",
+        "exactCampaignAdmissionQualified": null,
+        "criterion": "Exact frozen campaign source bundle passes actual reviewed loader/protected-artifact policy and provision semantics; complete archive/hash alone is insufficient."
+      },
+      "intendedCoverage": "Full product pytest suite is accepted explicit superset of selected primary homeassistant; do not narrow to abode.",
+      "environment": {
+        "state": "qualification-unestablished",
+        "boundedNativeScopeQualified": false,
+        "fullAgentSessionEnvironmentQualified": null
+      },
+      "nativeOutcomeOracle": {
+        "state": "prospective-or-unresolved-no-qualified-native-outcome",
+        "boundedNativeOutcomeQualified": false,
+        "agentSessionCaptureScoringIntegrationQualified": false
+      },
+      "agentRuntime": {
+        "state": "shared-synthetic-and-owned-backend-controls-only",
+        "providerLiveQualified": false,
+        "assignedAgentSessionsRun": 0
+      },
+      "smallestCurrentObstruction": "Source-link structure reviewed; full-suite interpreter/setup/dependencies/native collection/skip policy and observer remain unqualified.",
+      "evidenceRefs": [
+        "roster",
+        "source-freeze",
+        "next-eight",
+        "prelaunch",
+        "scope-followup",
+        "link-review"
+      ],
+      "reopeningEvidenceRequirement": "Evidence closing the named obstruction under unchanged task/scope/frozen limits, plus shared launch gates; this statement authorizes no new work and requires no green baseline."
+    },
+    {
+      "id": "python-03",
+      "repository": "github.com/ytdl-org/youtube-dl",
+      "revision": "956b8c585591b401a543e409accb163eeaaa1193",
+      "ecosystem": "Python",
+      "scope": "component",
+      "component": "youtube_dl",
+      "startingState": "pre-clone",
+      "source": {
+        "state": "full-exact-archive-retained-and-hash-rechecked",
+        "archive": {
+          "taskId": "python-03",
+          "archivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/python-03/source.tar",
+          "retainedExpectedSha256": "836cb208ff4ff481e5b9879fc3c10de793e7f8bca247e645661de1e233f63aa6",
+          "currentlyPresent": true,
+          "observedSha256": "836cb208ff4ff481e5b9879fc3c10de793e7f8bca247e645661de1e233f63aa6",
+          "bytes": 7710720,
+          "hashMatched": true
+        },
+        "historicalProvisioningEvidence": "Full Git/tar acquisition integrity retained; no campaign source admission established.",
+        "exactCampaignAdmissionQualified": null,
+        "criterion": "Exact frozen campaign source bundle passes actual reviewed loader/protected-artifact policy and provision semantics; complete archive/hash alone is insufficient."
+      },
+      "intendedCoverage": "Maintained full aggregate covers selected youtube_dl; seven stand-in/proxy exclusions remain proposed, not arbitrary skip permission.",
+      "environment": {
+        "state": "qualification-unestablished",
+        "boundedNativeScopeQualified": false,
+        "fullAgentSessionEnvironmentQualified": null
+      },
+      "nativeOutcomeOracle": {
+        "state": "prospective-or-unresolved-no-qualified-native-outcome",
+        "boundedNativeOutcomeQualified": false,
+        "agentSessionCaptureScoringIntegrationQualified": false
+      },
+      "agentRuntime": {
+        "state": "shared-synthetic-and-owned-backend-controls-only",
+        "providerLiveQualified": false,
+        "assignedAgentSessionsRun": 0
+      },
+      "smallestCurrentObstruction": "Environment/interpreter/network/parameter conditions, native IDs, exact exclusion acceptance and silent-return-aware execution observer remain open.",
+      "evidenceRefs": [
+        "roster",
+        "source-freeze",
+        "next-eight",
+        "python03",
+        "prelaunch"
+      ],
+      "reopeningEvidenceRequirement": "Evidence closing the named obstruction under unchanged task/scope/frozen limits, plus shared launch gates; this statement authorizes no new work and requires no green baseline."
+    },
+    {
+      "id": "typescript-01",
+      "repository": "github.com/deepseek-ai/deepseek-harness",
+      "revision": "f3803c96974ad4a94195fb97e5c637e9c2a3afe3",
+      "ecosystem": "JavaScript/TypeScript",
+      "scope": "repository",
+      "component": null,
+      "startingState": "pre-clone",
+      "source": {
+        "state": "full-exact-archive-retained-and-hash-rechecked",
+        "archive": {
+          "taskId": "typescript-01",
+          "archivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/typescript-01/source.tar",
+          "retainedExpectedSha256": "c3287a2e874e9053fa07468897835e63895e49e3851bf8d8708337e6fbdec193",
+          "currentlyPresent": true,
+          "observedSha256": "c3287a2e874e9053fa07468897835e63895e49e3851bf8d8708337e6fbdec193",
+          "bytes": 153876480,
+          "hashMatched": true
+        },
+        "historicalProvisioningEvidence": "Historical f2f loader structurally admitted full archive/17combined links with EMPTY protected digest set; no task/cache/session qualification.",
+        "exactCampaignAdmissionQualified": null,
+        "criterion": "Exact frozen campaign source bundle passes actual reviewed loader/protected-artifact policy and provision semantics; complete archive/hash alone is insufficient."
+      },
+      "intendedCoverage": "Preserve full root pnpm wrapper and native-build prerequisite; bare Vitest is a scope/setup substitution.",
+      "environment": {
+        "state": "qualification-unestablished",
+        "boundedNativeScopeQualified": false,
+        "fullAgentSessionEnvironmentQualified": null
+      },
+      "nativeOutcomeOracle": {
+        "state": "prospective-or-unresolved-no-qualified-native-outcome",
+        "boundedNativeOutcomeQualified": false,
+        "agentSessionCaptureScoringIntegrationQualified": false
+      },
+      "agentRuntime": {
+        "state": "shared-synthetic-and-owned-backend-controls-only",
+        "providerLiveQualified": false,
+        "assignedAgentSessionsRun": 0
+      },
+      "smallestCurrentObstruction": "Source links structurally admitted historically; full setup/native-build/collection/environment and executable outcome oracle not qualified.",
+      "evidenceRefs": [
+        "roster",
+        "source-freeze",
+        "next-eight",
+        "roster",
+        "next-eight",
+        "link-review"
+      ],
+      "reopeningEvidenceRequirement": "Evidence closing the named obstruction under unchanged task/scope/frozen limits, plus shared launch gates; this statement authorizes no new work and requires no green baseline."
+    },
+    {
+      "id": "typescript-02",
+      "repository": "github.com/OpenHands/OpenHands",
+      "revision": "2875056f93d6eebcd887f64ae557258a7b0b0108",
+      "ecosystem": "JavaScript/TypeScript",
+      "scope": "component",
+      "component": "bin",
+      "startingState": "local-checkout",
+      "source": {
+        "state": "full-exact-archive-retained-and-hash-rechecked",
+        "archive": {
+          "taskId": "typescript-02",
+          "archivePath": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/typescript-02/runtime-source.tar",
+          "retainedExpectedSha256": "818bf33ece0979d198ed6a11daa3e6b838cc4aefba8c3a381c86e8ce2e706f41",
+          "currentlyPresent": true,
+          "observedSha256": "818bf33ece0979d198ed6a11daa3e6b838cc4aefba8c3a381c86e8ce2e706f41",
+          "bytes": 33597440,
+          "hashMatched": true
+        },
+        "historicalProvisioningEvidence": "Actual operator qualification provisioned this exact archive; this is not current campaign loader admission.",
+        "exactCampaignAdmissionQualified": null,
+        "criterion": "Exact frozen campaign source bundle passes actual reviewed loader/protected-artifact policy and provision semantics; complete archive/hash alone is insufficient."
+      },
+      "intendedCoverage": "Both launcher cases through npm test and make-i18n independently reviewed.",
+      "environment": {
+        "state": "bounded-known-native-scope-qualified",
+        "boundedNativeScopeQualified": true,
+        "fullAgentSessionEnvironmentQualified": null
+      },
+      "nativeOutcomeOracle": {
+        "state": "independently-reviewed-native-outcome-for-known-scope",
+        "boundedNativeOutcomeQualified": true,
+        "agentSessionCaptureScoringIntegrationQualified": false
+      },
+      "agentRuntime": {
+        "state": "shared-synthetic-and-owned-backend-controls-only",
+        "providerLiveQualified": false,
+        "assignedAgentSessionsRun": 0
+      },
+      "smallestCurrentObstruction": "Bounded image/cache native scope qualified using offline ignore-scripts bootstrap; ordinary npm-ci/hook equivalence and full agent-session join remain unestablished.",
+      "evidenceRefs": [
+        "roster",
+        "source-freeze",
+        "first-four",
+        "offline-results",
+        "offline-review"
+      ],
+      "reopeningEvidenceRequirement": "Evidence closing the named obstruction under unchanged task/scope/frozen limits, plus shared launch gates; this statement authorizes no new work and requires no green baseline."
+    },
+    {
+      "id": "typescript-03",
+      "repository": "github.com/vuejs/core",
+      "revision": "05db7e807be841e6f343d0237669669b18c89d4d",
+      "ecosystem": "JavaScript/TypeScript",
+      "scope": "repository",
+      "component": null,
+      "startingState": "local-checkout",
+      "source": {
+        "state": "full-exact-archive-retained-and-hash-rechecked",
+        "archive": {
+          "taskId": "typescript-03",
+          "archivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/typescript-03/source.tar",
+          "retainedExpectedSha256": "51249848d90d269ca4f03504257661e172bcc2e644bb2cc32cc37513ac60b93c",
+          "currentlyPresent": true,
+          "observedSha256": "51249848d90d269ca4f03504257661e172bcc2e644bb2cc32cc37513ac60b93c",
+          "bytes": 7086080,
+          "hashMatched": true
+        },
+        "historicalProvisioningEvidence": "Full Git/tar acquisition integrity retained; no campaign source admission established.",
+        "exactCampaignAdmissionQualified": null,
+        "criterion": "Exact frozen campaign source bundle passes actual reviewed loader/protected-artifact policy and provision semantics; complete archive/hash alone is insufficient."
+      },
+      "intendedCoverage": "All five projects: unit,unit-gc,unit-jsdom,e2e,e2e-browser, retaining required development build.",
+      "environment": {
+        "state": "qualification-unestablished",
+        "boundedNativeScopeQualified": false,
+        "fullAgentSessionEnvironmentQualified": null
+      },
+      "nativeOutcomeOracle": {
+        "state": "prospective-or-unresolved-no-qualified-native-outcome",
+        "boundedNativeOutcomeQualified": false,
+        "agentSessionCaptureScoringIntegrationQualified": false
+      },
+      "agentRuntime": {
+        "state": "shared-synthetic-and-owned-backend-controls-only",
+        "providerLiveQualified": false,
+        "assignedAgentSessionsRun": 0
+      },
+      "smallestCurrentObstruction": "Pinned pnpm/platform archives acquired as inert data only. Bootstrap/normal hooks incl mutable only-allow, browsers/builds/cache and full collection/oracle unqualified.",
+      "evidenceRefs": [
+        "roster",
+        "source-freeze",
+        "next-eight",
+        "vue-plan",
+        "vue-tool-result"
+      ],
+      "reopeningEvidenceRequirement": "Evidence closing the named obstruction under unchanged task/scope/frozen limits, plus shared launch gates; this statement authorizes no new work and requires no green baseline."
+    },
+    {
+      "id": "go-01",
+      "repository": "github.com/microsoft/TypeScript",
+      "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+      "ecosystem": "Go",
+      "scope": "repository",
+      "component": null,
+      "startingState": "pre-clone",
+      "source": {
+        "state": "full-exact-archive-retained-and-hash-rechecked",
+        "archive": {
+          "taskId": "go-01",
+          "archivePath": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar",
+          "retainedExpectedSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+          "currentlyPresent": true,
+          "observedSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+          "bytes": 280422400,
+          "hashMatched": true
+        },
+        "historicalProvisioningEvidence": "Actual operator qualification provisioned this exact archive; this is not current campaign loader admission.",
+        "exactCampaignAdmissionQualified": null,
+        "criterion": "Exact frozen campaign source bundle passes actual reviewed loader/protected-artifact policy and provision semantics; complete archive/hash alone is insufficient."
+      },
+      "intendedCoverage": "Unchanged full Hereby default test:tsc; source-expectation successor can assess failures without green baseline/list success, but is not actual-qualified.",
+      "environment": {
+        "state": "qualification-unestablished",
+        "boundedNativeScopeQualified": false,
+        "fullAgentSessionEnvironmentQualified": null
+      },
+      "nativeOutcomeOracle": {
+        "state": "prospective-or-unresolved-no-qualified-native-outcome",
+        "boundedNativeOutcomeQualified": false,
+        "agentSessionCaptureScoringIntegrationQualified": false
+      },
+      "agentRuntime": {
+        "state": "shared-synthetic-and-owned-backend-controls-only",
+        "providerLiveQualified": false,
+        "assignedAgentSessionsRun": 0
+      },
+      "smallestCurrentObstruction": "Most recent concrete obstruction is normal setup/tool-build/source/effective-child-context capture join; actual oracle refuses. Original OOM and ENOSPC differ from later unknown-cause compiler kills.",
+      "evidenceRefs": [
+        "roster",
+        "source-freeze",
+        "first-four",
+        "go01-current-oracle",
+        "go01-adapter-review",
+        "go01-source-oracle",
+        "go01-latest-collection",
+        "go01-collection-review",
+        "go01-setup",
+        "go01-producer",
+        "go01-init",
+        "old-failures"
+      ],
+      "reopeningEvidenceRequirement": "Evidence closing the named obstruction under unchanged task/scope/frozen limits, plus shared launch gates; this statement authorizes no new work and requires no green baseline."
+    },
+    {
+      "id": "go-02",
+      "repository": "github.com/beego/beego",
+      "revision": "939cfde380bb9f15844ad633b84f037f7da21584",
+      "ecosystem": "Go",
+      "scope": "component",
+      "component": "client/cache",
+      "startingState": "local-checkout",
+      "source": {
+        "state": "full-exact-archive-retained-and-hash-rechecked",
+        "archive": {
+          "taskId": "go-02",
+          "archivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/go-02/source.tar",
+          "retainedExpectedSha256": "7704106da11aef67bad7e0a9a4964f1d2e9a3f072511e585e677aa48f5016220",
+          "currentlyPresent": true,
+          "observedSha256": "7704106da11aef67bad7e0a9a4964f1d2e9a3f072511e585e677aa48f5016220",
+          "bytes": 2406400,
+          "hashMatched": true
+        },
+        "historicalProvisioningEvidence": "Full Git/tar acquisition integrity retained; no campaign source admission established.",
+        "exactCampaignAdmissionQualified": null,
+        "criterion": "Exact frozen campaign source bundle passes actual reviewed loader/protected-artifact policy and provision semantics; complete archive/hash alone is insufficient."
+      },
+      "intendedCoverage": "Entire client/cache includes backend subpackages; memory-only tests cannot replace it.",
+      "environment": {
+        "state": "qualification-unestablished",
+        "boundedNativeScopeQualified": false,
+        "fullAgentSessionEnvironmentQualified": null
+      },
+      "nativeOutcomeOracle": {
+        "state": "prospective-or-unresolved-no-qualified-native-outcome",
+        "boundedNativeOutcomeQualified": false,
+        "agentSessionCaptureScoringIntegrationQualified": false
+      },
+      "agentRuntime": {
+        "state": "shared-synthetic-and-owned-backend-controls-only",
+        "providerLiveQualified": false,
+        "assignedAgentSessionsRun": 0
+      },
+      "smallestCurrentObstruction": "Middleware/service/setup and full cache-component native IDs/coverage/error oracle not qualified; no impossibility is inferred.",
+      "evidenceRefs": [
+        "roster",
+        "source-freeze",
+        "next-eight",
+        "roster",
+        "next-eight"
+      ],
+      "reopeningEvidenceRequirement": "Evidence closing the named obstruction under unchanged task/scope/frozen limits, plus shared launch gates; this statement authorizes no new work and requires no green baseline."
+    },
+    {
+      "id": "go-03",
+      "repository": "github.com/hashicorp/vault",
+      "revision": "352089582444ea84feb03bc97eda97b35729e8ec",
+      "ecosystem": "Go",
+      "scope": "component",
+      "component": "api",
+      "startingState": "pre-clone",
+      "source": {
+        "state": "full-exact-archive-retained-and-hash-rechecked",
+        "archive": {
+          "taskId": "go-03",
+          "archivePath": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-03/runtime-source.tar",
+          "retainedExpectedSha256": "cc7b18c67ce11698d79bfee35fe7afa7f7c8f0ea0dccbdaefd8836cde49f3ba2",
+          "currentlyPresent": true,
+          "observedSha256": "cc7b18c67ce11698d79bfee35fe7afa7f7c8f0ea0dccbdaefd8836cde49f3ba2",
+          "bytes": 52541440,
+          "hashMatched": true
+        },
+        "historicalProvisioningEvidence": "Actual operator qualification provisioned this exact archive; this is not current campaign loader admission.",
+        "exactCampaignAdmissionQualified": null,
+        "criterion": "Exact frozen campaign source bundle passes actual reviewed loader/protected-artifact policy and provision semantics; complete archive/hash alone is insufficient."
+      },
+      "intendedCoverage": "API module api,cliconfig,tokenhelper:93top-level+121nested terminal/pass; separate api/auth modules excluded by module boundary.",
+      "environment": {
+        "state": "bounded-known-native-scope-qualified",
+        "boundedNativeScopeQualified": true,
+        "fullAgentSessionEnvironmentQualified": null
+      },
+      "nativeOutcomeOracle": {
+        "state": "independently-reviewed-native-outcome-for-known-scope",
+        "boundedNativeOutcomeQualified": true,
+        "agentSessionCaptureScoringIntegrationQualified": false
+      },
+      "agentRuntime": {
+        "state": "shared-synthetic-and-owned-backend-controls-only",
+        "providerLiveQualified": false,
+        "assignedAgentSessionsRun": 0
+      },
+      "smallestCurrentObstruction": "Bounded common-image/cache native outcome qualified, not root make-test equivalence or live agent-session scoring integration.",
+      "evidenceRefs": [
+        "roster",
+        "source-freeze",
+        "first-four",
+        "offline-results",
+        "offline-review"
+      ],
+      "reopeningEvidenceRequirement": "Evidence closing the named obstruction under unchanged task/scope/frozen limits, plus shared launch gates; this statement authorizes no new work and requires no green baseline."
+    }
+  ],
+  "sharedLaunchGates": [
+    {
+      "id": "G1",
+      "state": "unmet",
+      "gate": "Exact provider/model/settings/prompts and live token/usage/price-bound adapter qualification",
+      "evidenceRefs": [
+        "runtime-current",
+        "f05-spec",
+        "synthetic"
+      ],
+      "reopen": "A separately reviewed exact provider/configuration closure and required real evidence; not a new implementation/run authorization."
+    },
+    {
+      "id": "G2",
+      "state": "unmet",
+      "gate": "Campaign/session numeric time/tool/token/USD ceilings, rates/date, campaign-wide budget, retry/outage and maintenance allocation freeze",
+      "evidenceRefs": [
+        "f05-spec",
+        "synthetic"
+      ],
+      "reopen": "One prospective shared budget/accounting/stop policy bound to the campaign; known operator caps do not supply it."
+    },
+    {
+      "id": "G3",
+      "state": "unmet",
+      "gate": "Final arm instructions/consumer applicability-age-conflict policy and exact snapshot/access controls",
+      "evidenceRefs": [
+        "snapshot",
+        "snapshot-freeze",
+        "applicability",
+        "applicability-root-review",
+        "f05-spec"
+      ],
+      "reopen": "Freeze symmetric consumer/source-first permissions and instruction difference against retained snapshot; diagnostic reference policy is not final campaign policy."
+    },
+    {
+      "id": "G4",
+      "state": "unmet",
+      "gate": "Task-specific native evidence to actual agent-session trace/setup/source/tool/context/usage and post-run scorer join",
+      "evidenceRefs": [
+        "offline-review",
+        "go01-adapter-review",
+        "python01-scorer",
+        "python03",
+        "synthetic"
+      ],
+      "reopen": "Usable reviewed completion/error scoring and trusted capture join for the assigned task; toy scorer and operator outcomes do not provide this integration."
+    },
+    {
+      "id": "G5",
+      "state": "unmet",
+      "gate": "Complete exact campaign manifest/runtime/image/cache/source-admission/assignment/scorer freeze for72fresh independent sessions",
+      "evidenceRefs": [
+        "roster",
+        "next-eight",
+        "offline-review",
+        "link-review",
+        "runtime-current",
+        "synthetic",
+        "f05-spec"
+      ],
+      "reopen": "Bind all12 unchanged tasks and exact prepared conditions with seed/order/request artifacts and actual source/cache/arm isolation qualifications; no data-only declaration substitutes for admission."
+    },
+    {
+      "id": "G6",
+      "state": "unmet",
+      "gate": "Campaign execution/paid-launch authorization",
+      "evidenceRefs": [
+        "f05-spec",
+        "prelaunch"
+      ],
+      "reopen": "Separate explicit authorization after a concrete reviewable campaign meets prerequisites. Current user steering is feasibility/no paid launch."
+    }
+  ],
+  "sharedFacts": {
+    "applicabilityDiagnostic": {
+      "inputFreezeSha256": "e0286bb486ead69935ca3fbcfda526c505573eb0d026a92b12ad437994c4ec6f",
+      "policyRevision": "b8b7cd0cd76108937db29e965a780d8738757a6d",
+      "newDiagnosticPolicyNotFrozenCampaignPolicy": true,
+      "tasks": 12,
+      "hits": 5,
+      "misses": 7,
+      "scalarPolicyAccepted": 4,
+      "contextPolicySelected": 0,
+      "taskSupportedDirectCompleteInstructions": 0,
+      "profileTaskRevisionMatches": 1,
+      "profileTaskRevisionMismatches": 4,
+      "controlledPolicyCases": 7,
+      "actualFallbackAttempts": 0,
+      "agentSessions": 0,
+      "finalCompletionMeasured": false,
+      "causalBenefitMeasured": false
+    },
+    "applicabilityLimits": "Frozen current-reference-policy replay;0direct supported complete instructions/0contextselected,4scalar accepts,5hits7misses;0fallback/agent sessions. Not campaign policy, user benefit or failure of autonomous fallback; partial investigation-lead value and effort remain unmeasured.",
+    "syntheticAPIPath": {
+      "ownedSessions": 72,
+      "testsPassed": 223,
+      "seconds": 5.57,
+      "status": "owned source-only/mocked/zero-clock API composition passes",
+      "liveQualification": false
+    },
+    "operatorResources": "Retain exact existing per-packet limits/cache conditions; common native image b47 LinuxARM64,3CPU/4GiB/256PID. Distinct preparation900s with separate cleanup and offline-native1800s are not yet campaign numeric ceilings.",
+    "failureDistinctions": "Original Go01 firstattempt: Docker oom+exit137. Serialized retry:512MiB/tmp ENOSPC with no observed OOM. Later collection: two signal-killed compilers, killcause unknown;104package inventory established, full task notrun."
+  },
+  "reviewContext": "Author has extensive prior F05/source/harness/oracle context and authored several preparation packets. This is a known-evidence readiness audit, not blind curation/consumer evaluation. Independent review requested.",
+  "limits": [
+    "No new daemon/network/package/upstream/provider/native/Go/Node/Cargo execution, acquisition, source admission replay, or experiment.",
+    "All12 local archive hashes rechecked (940554240bytes), while full Git/tree/member proof is reused from retained source packets rather than rebuilt.",
+    "Evidence pointers bind compact existing owners/reports/freezes; fullartifact trees are not duplicated.",
+    "Current working-tree runtime binding is time-specific. Historical frozen evidence remains valid only for its exact subjects.",
+    "Unverified is not infeasible; no resource raise/task substitution/green baseline or automatic followup is required or authorized."
+  ],
+  "executionAuthorized": false,
+  "paidLaunchAuthorized": false,
+  "consumerBenefitEstablished": false,
+  "costUsd": null
+}

@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- Record a C1 launch-feasibility no-go with an independently reviewed twelve-task
+  readiness matrix and six deduplicated shared gate groups. Retain the fixed
+  captured-profile diagnostic: five hits, seven misses and zero established
+  complete contextual task instructions; partial investigation value remains
+  unmeasured.
+- Exercise the existing assignment/session/trace/usage/post-run-scoring path
+  across 72 owned simulated sessions, retaining recovery errors and nonuse in
+  intention-to-treat analysis. Independent controls pass without qualifying a
+  real provider, upstream task, oracle or paid campaign.
 - Retain exact-source Compose package-membership evidence and independent reviews
   with portable local checks and an explicit external-archive mode. Preserve
   conditional applicability and the unresolved execution/context joins; no

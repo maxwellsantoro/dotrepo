@@ -1,0 +1,45 @@
+{
+  "identity": "f05-twelve-task-launch-readiness-evidence-inventory-v1",
+  "frozenAt": "2026-10-29T15:07:00.575144+00:00",
+  "artifacts": {
+    "README.md": {
+      "sha256": "5d5fd4ff575bcd9005d080d95eba960bac4fb452ab4ca6a2c915d6167aa4f534",
+      "bytes": 6040
+    },
+    "assemble_inventory.py": {
+      "sha256": "ec44611bafe7b3ab819e9814d85b0e947949dd3ae3ee942a12583cfe1b9ee42c",
+      "bytes": 30127
+    },
+    "construction.json": {
+      "sha256": "55e51fe5cace92a51097c89e86dd38aa0bfac73ed501e01689499bfbd7f2759f",
+      "bytes": 995
+    },
+    "evidence-bindings.json": {
+      "sha256": "9712baf78960dcb99cd8b7aeab64fb573a990544863f4f3e18ed38b91e1f4161",
+      "bytes": 15251
+    },
+    "inventory.json": {
+      "sha256": "a4637c6305e846db969772c425cbee69a8861d56b57e6ba36df8b8b892875509",
+      "bytes": 37902
+    },
+    "ruff-check.log": {
+      "sha256": "3577f8cda0eb4e1553076bbf3acc3f783a7ecd831b24a7c3eece848d27b64468",
+      "bytes": 501
+    },
+    "ruff-format.log": {
+      "sha256": "fd2299c9f1c6dc869070883e281051bfe93aacf66c1a3b0069f45b4aa410ca50",
+      "bytes": 25
+    },
+    "source-archive-checks.json": {
+      "sha256": "5a5a0c05b0b1e5671dbac1519421f7f2920a513a23706ffa19c9142549e28b93",
+      "bytes": 5140
+    },
+    "verification.json": {
+      "sha256": "579a75b3c4219302244387f64daf95af45551c68053cd9ae5a55e2c1b9b10cf6",
+      "bytes": 445
+    }
+  },
+  "executionAuthorized": false,
+  "paidLaunchAuthorized": false,
+  "consumerBenefitEstablished": false
+}

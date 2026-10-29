@@ -1,0 +1,43 @@
+{
+  "schema": "f05-owned-synthetic-path-review-v1",
+  "frozenAt": "2026-10-29T14:59:25.469280+00:00",
+  "state": "passed-owned-synthetic-api-control-gate-only",
+  "findings": [],
+  "actualCampaignTaskProviderDaemonAdmission": false,
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "54453c157b14efc34c488be3090e7d3ab8b94e21750d5fea6231cb4065b43125",
+      "bytes": 6338
+    },
+    {
+      "path": "source-bindings.json",
+      "sha256": "85763634ec824a290f893fd03cfcedf1b79fcd74aca9cd1ab489a878b31d28b1",
+      "bytes": 842
+    },
+    {
+      "path": "check.py",
+      "sha256": "cb0b7bd4257e3b1e9d5aff2ceed18637365622c6bc991c9355d9d5f5c8ef7763",
+      "bytes": 3489
+    },
+    {
+      "path": "checks.json",
+      "sha256": "f1377ee33dd729e9ebe61f905c4a2ae77fdfef6fba13f176df4408d509f73d41",
+      "bytes": 172575
+    },
+    {
+      "path": "pytest.log",
+      "sha256": "a3cfae966c800f984fda197f02558b55e32d331bf5645bfd42036ce6ed264a8d",
+      "bytes": 340
+    },
+    {
+      "path": "ruff.log",
+      "sha256": "1ed610df522f9ce219a8c20239c83f4ec069bf9eeb7d737b83d9aa7eeeaad176",
+      "bytes": 102
+    }
+  ],
+  "excludedGeneratedDirectories": [
+    "test-work",
+    "owned-replay"
+  ]
+}

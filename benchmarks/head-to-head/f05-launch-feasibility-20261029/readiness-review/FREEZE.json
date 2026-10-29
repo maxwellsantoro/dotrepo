@@ -1,0 +1,30 @@
+{
+  "state": "independent-C1-readiness-checkpoint-review-frozen",
+  "subject": {
+    "authorFreezeSha256": "378233aabf128c2acd919a589d604c2b972d918518f8d7f7188000cf61f8cb87",
+    "inventorySha256": "a4637c6305e846db969772c425cbee69a8861d56b57e6ba36df8b8b892875509",
+    "evidenceBindingsSha256": "9712baf78960dcb99cd8b7aeab64fb573a990544863f4f3e18ed38b91e1f4161"
+  },
+  "artifacts": {
+    "README.md": {
+      "bytes": 2281,
+      "sha256": "81bea8b391d9fe5fd05a315e6389e029b72a060ffddeab9e105c2dd712e132ad"
+    },
+    "report.json": {
+      "bytes": 6008,
+      "sha256": "c9d564b3b3f863209d974460055729865b6deda00ed9194a59bb36035ec029a3"
+    },
+    "verification.json": {
+      "bytes": 2528,
+      "sha256": "8508cf5fad7fe5c1a000fd002c95a941c8ac62f84da3120e4aec16ddf80bd48e"
+    },
+    "verify.py": {
+      "bytes": 6061,
+      "sha256": "fcec4d17b140cfe8f89194aeadef6d0a48a16d82ea16c4f1fd624754354de59b"
+    }
+  },
+  "decision": "C1-NO-GO-current-evidence",
+  "executionAuthorized": false,
+  "paidLaunchAuthorized": false,
+  "newInfrastructureAuthorized": false
+}

@@ -1,0 +1,54 @@
+{
+  "identity": "f05-launch-feasibility-20261029",
+  "decision": "C1-NO-GO-current-evidence",
+  "baselineCommit": "b8b7cd0cd76108937db29e965a780d8738757a6d",
+  "reason": "No qualified real agent-session path or complete campaign freeze; six grouped shared launch conditions remain unmet. Nine task scopes also lack bounded native environment/outcome qualification.",
+  "taskCount": 12,
+  "taskIdentitiesScopesRevisionsAndResourceLimitsChanged": false,
+  "firstValidPair": {
+    "currentlyRunnable": false,
+    "unmetSharedGateGroups": 6,
+    "countUnit": "evidence gate group, not atomic engineering fix; counted once across tasks; groups can overlap",
+    "gates": [
+      "G1 provider/model/inference/prompt and live adapter/usage bounds",
+      "G2 numeric session and campaign budgets, rates, retry/outage/maintenance accounting",
+      "G3 final arm/consumer policy and snapshot/access controls",
+      "G4 actual task/native-to-session capture and post-run scorer join",
+      "G5 exact manifest/runtime/image/cache/source-admission/assignment/scorer freeze",
+      "G6 explicit paid campaign launch authorization"
+    ]
+  },
+  "fullCohortQualification": {
+    "boundedNativeScopesQualified": 3,
+    "withoutThatEvidence": 9,
+    "greenBaselineRequiredForEveryTask": false
+  },
+  "profileDiagnostic": {
+    "profileHits": 5,
+    "profileMisses": 7,
+    "scalarAcceptances": 4,
+    "completeContextSelections": 0,
+    "establishedTaskSupportedDirectCompleteInstructions": 0,
+    "partialKnowledgeBenefitMeasured": false,
+    "campaignConsumerPolicyFrozen": false
+  },
+  "syntheticControl": {
+    "simulatedSessions": 72,
+    "liveSessions": 0,
+    "independentFocusedTestsPassed": 223,
+    "qualifiesRealProviderTaskOrOracle": false
+  },
+  "noFurtherAutomaticPreparation": true,
+  "paidLaunchAuthorized": false,
+  "consumerBenefitEstablished": false,
+  "reopening": "A separately bounded decision must identify which unmet gates can be closed under the unchanged tasks/limits and how to score unavailable/failed tasks honestly. Evidence requirements do not authorize another preparation chain.",
+  "independentReadinessReview": {
+    "state": "passed-no-inventory-finding",
+    "path": "readiness-review/report.json",
+    "freezeSha256": "943d1d24849d8c9ca6d0e3c6178a9bb4a5bd2a9126bea147d98db0211c3e81ab",
+    "lintErratum": {
+      "path": "readiness-review/lint-erratum/FREEZE.json",
+      "sha256": "d501de7414b401fcbaf4ed8b2991c482fed03d9f0236d5acb774541a0e3bfccc"
+    }
+  }
+}

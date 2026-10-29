@@ -1,0 +1,303 @@
+{
+  "roster": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-agent-tasks-20261029/tasks.json",
+    "sha256": "0294921cfc3584b8534c0718608f43cdd9a5cd3d3733c2efd024d324b4e31978",
+    "bytes": 7751,
+    "locator": "tasks[0:12]",
+    "role": "unchanged cohort/scopes/revisions"
+  },
+  "source-freeze": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-agent-tasks-20261029/SOURCE_FREEZE.json",
+    "sha256": "fc756e0d5f8a25cddc9f19ece651b21078a68a1f601febdb8d772208c0a66d41",
+    "bytes": 41366,
+    "locator": "whole freeze",
+    "role": "pre-index source enrollment"
+  },
+  "first-four": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-20261029/report.json",
+    "sha256": "8a2f0c1c66f4b73a279031f5b99227576ac9d3c615af84ecd56e5ec1204c03bd",
+    "bytes": 12448,
+    "locator": "sources/tasks/remainingGates",
+    "role": "4fullsources and original native tranche"
+  },
+  "old-failures": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-20261029/README.md",
+    "sha256": "557af584dbd3173df90cbc5f61d8dbb7af28bde22858566f2ff1bfa383c90bcd",
+    "bytes": 8783,
+    "locator": "lines15-27",
+    "role": "original Go01 OOM event+137 and later/tmp ENOSPC distinction"
+  },
+  "next-eight": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-next8-20261029/report.json",
+    "sha256": "ec8b7e43d431db47b1536a61855c319605b79aa6c029dfef6e1faa4fd0ce6204",
+    "bytes": 12810,
+    "locator": "tasks/checks.tasks",
+    "role": "8full sources not environment proof"
+  },
+  "next-eight-freeze": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-next8-20261029/source-acquisition-freeze.json",
+    "sha256": "00c08946e5e748211bba0c5265b50d34cf8d492276d334dcea44742be1d76035",
+    "bytes": 5585,
+    "locator": "whole freeze",
+    "role": "source-acquisition closure"
+  },
+  "link-review": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-next8-20261029/source-links-review/controls.json",
+    "sha256": "3619db1d650cab1b03f8acc6c04d846f8c96f470b423e4f4ac6818e87ff010c9",
+    "bytes": 3169,
+    "locator": "actualStaticAdmission",
+    "role": "historical structural admission only for HA/Deepseek; empty protected set"
+  },
+  "link-review-limits": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-next8-20261029/source-links-review/README.md",
+    "sha256": "f47a3fa0f920c32caf199ebec55d49d9a64b8a7913b8b7f01cf82ba6d3a7fe4e",
+    "bytes": 6055,
+    "locator": "Executed independent checks and limits",
+    "role": "source-link review not native task qualification"
+  },
+  "prelaunch": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-prelaunch-decisions-20261029/decision.json",
+    "sha256": "98fe7f62a140a80716008777cb11caf631e164bae705393d638583195020c0af",
+    "bytes": 1725,
+    "locator": "scopeDisposition/laterFreezeRequired",
+    "role": "coverage interpretation not native completion"
+  },
+  "scope-followup": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/dispositions.json",
+    "sha256": "3d24e49557b2e2b86ac0cf11a046ce14e6fe746bebc3838108ec284db0bbb1af",
+    "bytes": 26004,
+    "locator": "four dispositions",
+    "role": "Tauri/MiroFish unresolved defaults; primary-package aggregate coverage"
+  },
+  "scope-challenge": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-next8-20261029/independent-challenge-review/README.md",
+    "sha256": "34c276fd6ff51f8e513cdc93df4fda34d91129ecce8d65153c2992c63dd940f8",
+    "bytes": 5111,
+    "locator": "review dispositions",
+    "role": "independent contextual challenge and uncertainty"
+  },
+  "offline-results": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-results-20261029/report.json",
+    "sha256": "a0a431ae442235d1b7dde642a884cc539aa7d36c1dbc2172aafb9255a9bc758c",
+    "bytes": 8836,
+    "locator": "tasks[0:3]",
+    "role": "actual same-image frozen-cache native outcomes"
+  },
+  "offline-review": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-results-review-20261029/README.md",
+    "sha256": "aff201c65baccdce7931c35bda698c2bfca215acf7d9339d84492eecb219ffc6",
+    "bytes": 8194,
+    "locator": "Results/Exact inputs/remaining limits",
+    "role": "independent reconstruction of3known native scopes"
+  },
+  "offline-review-data": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-results-review-20261029/verification.json",
+    "sha256": "a61ae4453544772f00492d9853d49be966fe95787b40b0f7833d7f014717be10",
+    "bytes": 9041,
+    "locator": "whole verification",
+    "role": "qualified3known-scopes evidence"
+  },
+  "snapshot": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-snapshot-20261029/README.md",
+    "sha256": "5c83358a38ae43e2f0bbcdf976858211657001f481571e587df7b5677af6666f",
+    "bytes": 3189,
+    "locator": "snapshotID/5present7absent/remaining gates",
+    "role": "frozen response presence, not applicability"
+  },
+  "snapshot-freeze": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-snapshot-20261029/FREEZE.json",
+    "sha256": "890ab009d95d31d0f6010571f9e3154572c2f5cab77d0eb3d99d672a1a27d01d",
+    "bytes": 3566,
+    "locator": "whole freeze",
+    "role": "retained response bindings"
+  },
+  "runtime-controls": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/runtime-qualification-20261029/README.md",
+    "sha256": "d182b9e66f099a163e96d2db40e4a38debd18d81531cc9e883afa06a82aa2740",
+    "bytes": 2498,
+    "locator": "Real container backend controls",
+    "role": "owned backend controls, not upstream/provider qualification"
+  },
+  "common-image": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-common-image-audit-20261029/README.md",
+    "sha256": "42cddea0b41cc89b306321f1235fdf3e4cc8080ad5a153d8e5dd3ec2a46702af",
+    "bytes": 6546,
+    "locator": "audit disposition/limits",
+    "role": "bounded source/profile/credential filesystem audit"
+  },
+  "cache-audit": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-review-20261029/README.md",
+    "sha256": "a4f7a584e593b47ed7419eb485aaad6e47cb6b3693d6190f6fecc74d3723fccb",
+    "bytes": 10621,
+    "locator": "audit dispositions/limits",
+    "role": "bounded three-cache audit, not universal absence proof"
+  },
+  "go01-current-oracle": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-3/amendment-1/report.json",
+    "sha256": "9a55f4657e7ea2ef2538735828d86a50d7b5b0614ed63f418cfcc34cfe2cd5ec",
+    "bytes": 2536,
+    "locator": "limits/actualAdmission/oracleQualified",
+    "role": "actual mode still closed pending concrete joins"
+  },
+  "go01-adapter-review": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-capture-adapter-review-20261029/amendment-1/README.md",
+    "sha256": "5a4f5c7064b9d8aea63789a2ba2bfc1e80402490cbbe271c6e39330b39828099",
+    "bytes": 1781,
+    "locator": "final paragraph",
+    "role": "normal setup/gotestsum/effective-child/required-source closure open"
+  },
+  "go01-source-oracle": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-oracle-decision-20261029/README.md",
+    "sha256": "b2f078e98274c573b31ea134aaa6bea89a98c64985cfdc21ad9e918c4c2a9e95",
+    "bytes": 8858,
+    "locator": "Concrete requirements/known failed baseline",
+    "role": "source-expectation alternative; no complete-list prerequisite by logical necessity/no green baseline"
+  },
+  "go01-latest-collection": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-collection-result-20261029/amendment-2/report.json",
+    "sha256": "2c04d3d17924b9e1d0fbd66ceef75046e02e7c27edf7baf952466b99199d0c83",
+    "bytes": 4410,
+    "locator": "goTestList/compilerDiagnostics/terminationCause",
+    "role": "104packages;25listingpass18skip61fail; kill cause unknown"
+  },
+  "go01-collection-review": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-collection-result-review-20261029/amendment-2/review.json",
+    "sha256": "b8a1d186785663162e3e678e91d77b1c604d39c77a86032841d2f78b1d37b98b",
+    "bytes": 4080,
+    "locator": "whole review",
+    "role": "independent latest collection result review"
+  },
+  "go01-setup": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-offline-setup-result-20261029/README.md",
+    "sha256": "6ce08cf805f968af969641d08b4fe5621f446d61ab39903ba066fcca321c0b59",
+    "bytes": 3952,
+    "locator": "observed setup and limits",
+    "role": "successful normal npm setup only, no full task"
+  },
+  "go01-producer": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-next-producer-plan-20261029/amendment-1/README.md",
+    "sha256": "b539aa88c09313df09ba020da9f60848c8e977ace850ee25607c7a727113fcab",
+    "bytes": 2572,
+    "locator": "unclosed evidence/contract",
+    "role": "prospective witness, not qualified producer"
+  },
+  "go01-init": {
+    "path": "/tmp/dotrepo-go01-initializer-source-audit-20261029/report.json",
+    "sha256": "5ff6c81963981126549bc8a7721bbf291e60f73fff5319853f53a9c1ca933a72",
+    "bytes": 7594,
+    "locator": "finite adm-zip disposition",
+    "role": "one eager initializer frontier closed, not full launch chain"
+  },
+  "python01-decision": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-python01-oracle-decision-20261029/decision.json",
+    "sha256": "b9ff7b34a7d881d8a2c1130585b3fa6727ae0407face8d2f480428a280d9239f",
+    "bytes": 9323,
+    "locator": "accepted alternative and limits",
+    "role": "prospective root unittest+backend pytest union"
+  },
+  "python01-scorer": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/amendment-1/README.md",
+    "sha256": "839a33c9103073877d61696e288ffdbee2718b8e9ed5b14e848db34f45319c74",
+    "bytes": 2844,
+    "locator": "all actual flags false",
+    "role": "source/synthetic scorer only"
+  },
+  "python01-scorer-review": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-python01-oracle-preparation-review-20261029/amendment-1/review.json",
+    "sha256": "155eeb4e5a9e4fe8702462a9cde3df746dc7c2949f209b1f79e3b34e287f61f9",
+    "bytes": 4318,
+    "locator": "state/findings/limits",
+    "role": "corrected phase scorer static review"
+  },
+  "python01-probe": {
+    "path": "/tmp/dotrepo-f05-python01-probe-result-review-20261029/report.json",
+    "sha256": "ba684119539a058fc03b7da8a348533198295beb6d5008fedf072203499c6d99",
+    "bytes": 5805,
+    "locator": "nextPlanInputs/remainingGates",
+    "role": "actual source-free interpreter observation, no dependencies"
+  },
+  "python01-wheel": {
+    "path": "/tmp/dotrepo-f05-python01-wheel-preparation-20261029/amendment-1/FREEZE.json",
+    "sha256": "1179acac1f2098af1afd92488662f69e204a9fd8225cc82e85df080013170d53",
+    "bytes": 4607,
+    "locator": "whole freeze",
+    "role": "corrected wheel-stage preparation only"
+  },
+  "python01-wheel-review": {
+    "path": "/tmp/dotrepo-f05-python01-wheel-preparation-review-20261029/amendment-1/lint-finalization/passed-review.json",
+    "sha256": "fce05b933b71ed815d0b0c4e2142c4912319955097a74a3abee686cec6af51ee",
+    "bytes": 1082,
+    "locator": "subject/state/scope",
+    "role": "static driver review, no actual install"
+  },
+  "python03": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-python03-oracle-review-20261029/README.md",
+    "sha256": "f634586ed9c609dc5832d92fe52d1d5953aa425f3f13e2e3bed953c13d995a60",
+    "bytes": 3898,
+    "locator": "7proposed exclusions and return-site/observer gates",
+    "role": "aggregate coverage supported, executable observer/environment unqualified"
+  },
+  "vue-plan": {
+    "path": "/tmp/dotrepo-f05-typescript03-environment-plan-20261029/README.md",
+    "sha256": "68c3f5d2c857f5f5b2e776e9ed3c79d4f830644f74e6fac1859addeee3faf0fc",
+    "bytes": 3531,
+    "locator": "fiveprojects/hook/browser/cache/oracle limits",
+    "role": "source-only environment plan"
+  },
+  "vue-tool-result": {
+    "path": "/tmp/dotrepo-f05-typescript03-pnpm-acquisition-result-review-20261029/report.json",
+    "sha256": "3c62814702ece5824138b7a877b6fe332f764c0f7b276c497ac03532778cf609",
+    "bytes": 2402,
+    "locator": "claimsSupported/unresolved/flags",
+    "role": "inert tool archive acquisition, no bootstrap/native/cache qualification"
+  },
+  "applicability": {
+    "path": "/tmp/dotrepo-f05-applicability-diagnostic-20261029/replay.json",
+    "sha256": "81dcf7c7721af4ff56a73690ac4ea396244daf8d3a0157be398e0f56b4200c35",
+    "bytes": 27391,
+    "locator": "summary",
+    "role": "current reference-policy diagnostic, not campaign policy/outcome"
+  },
+  "applicability-freeze": {
+    "path": "/tmp/dotrepo-f05-applicability-diagnostic-20261029/FREEZE.json",
+    "sha256": "f65daf29b2658ce1021eae712b6dda9eaf61246b8cd5d96777a215b45f4ed069",
+    "bytes": 1425,
+    "locator": "whole freeze",
+    "role": "diagnostic closure"
+  },
+  "applicability-root-review": {
+    "path": "/tmp/dotrepo-f05-launch-feasibility-validation-20261029/applicability-review.json",
+    "sha256": "558e8e84fb9b6c01cd73acabba7e934d9c97b323338f2b7a1a87c0456a7848df",
+    "bytes": 789,
+    "locator": "whole data review",
+    "role": "coordinator independent replay"
+  },
+  "synthetic": {
+    "path": "/tmp/dotrepo-f05-feasibility-synthetic-review-20261029/README.md",
+    "sha256": "54453c157b14efc34c488be3090e7d3ab8b94e21750d5fea6231cb4065b43125",
+    "bytes": 6338,
+    "locator": "Independent checks/What remains open",
+    "role": "223tests and72owned simulated sessions, not live task proof"
+  },
+  "synthetic-freeze": {
+    "path": "/tmp/dotrepo-f05-feasibility-synthetic-review-20261029/FREEZE.json",
+    "sha256": "b3ae64a6953c6dd19587439c128ded72f1a78dd0e2f04d6790fe6eb6387f3dd9",
+    "bytes": 1203,
+    "locator": "whole freeze",
+    "role": "synthetic review closure"
+  },
+  "runtime-current": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/bench/agent_runtime.py",
+    "sha256": "a0f355e2438ebac9dea36a62bd263c1451a51787da840ec64c138d29dddb8473",
+    "bytes": 68158,
+    "locator": "QUALIFICATIONS lines108-116/live_ready lines622-626/liveCLI lines1554-1557",
+    "role": "observed working-tree source; live CLI explicitly closed"
+  },
+  "f05-spec": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/experiments/applicability-2026-10-29/f05.md",
+    "sha256": "d9d5dc153b9cc91a21ac048c210e33b99f3fd09a34305d5a9869c56e630f0b2b",
+    "bytes": 11755,
+    "locator": "Required freeze/Observation/Decision",
+    "role": "authoritative launch requirements, not implementation authorization"
+  }
+}

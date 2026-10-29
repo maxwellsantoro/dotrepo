@@ -1,0 +1,41 @@
+{
+  "state": "already-authorized-bounded-preparations-stopped-at-retained-limit",
+  "python01": {
+    "result": "remaining aggregate binary cap corrected; independent static driver review passed with append-only lint erratum",
+    "authorAmendment": {
+      "path": "/tmp/dotrepo-f05-python01-wheel-preparation-20261029/amendment-1/FREEZE.json",
+      "sha256": "1179acac1f2098af1afd92488662f69e204a9fd8225cc82e85df080013170d53",
+      "bytes": 4607
+    },
+    "canonicalReview": {
+      "path": "/tmp/dotrepo-f05-python01-wheel-preparation-review-20261029/amendment-1/lint-finalization/passed-review.json",
+      "sha256": "fce05b933b71ed815d0b0c4e2142c4912319955097a74a3abee686cec6af51ee",
+      "bytes": 1082
+    },
+    "reviewFinalization": {
+      "path": "/tmp/dotrepo-f05-python01-wheel-preparation-review-20261029/amendment-1/lint-finalization/FREEZE.json",
+      "sha256": "6d0b98e910455850801119ab25a4d393c56ab99c3f872e40aa89849437a90b1b",
+      "bytes": 1272
+    },
+    "liveDependencyInstallation": false,
+    "nativeOracleQualified": false
+  },
+  "typescript03": {
+    "result": "two source-pinned pnpm archives acquired and independently checked as inert data; no package execution",
+    "resultFreeze": {
+      "path": "/tmp/dotrepo-f05-typescript03-pnpm-acquisition-result-20261029/FREEZE.json",
+      "sha256": "9629078eb03d2297d6ddde547ca64b169c2259687840d4c2fc9e7f82955edfcc",
+      "bytes": 1985
+    },
+    "reviewFreeze": {
+      "path": "/tmp/dotrepo-f05-typescript03-pnpm-acquisition-result-review-20261029/FREEZE.json",
+      "sha256": "824f7f82c0fda34db7016ec34d807b887478155d110ce1540f2c07f5c0cdb3ff",
+      "bytes": 1437
+    },
+    "packageExecuted": false,
+    "toolOrTaskQualified": false,
+    "retention": "Raw archives and transient HTTP headers remain outside Git; no signed URLs or cookie values are copied into this packet."
+  },
+  "retentionBoundary": "These locators bind retained local artifacts. They are not a durable remote retrieval service or a portable reproduction guarantee. Existing committed evidence stays in its owning packets.",
+  "newEnvironmentOrProviderActionsAuthorized": false
+}

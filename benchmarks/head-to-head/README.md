@@ -26,6 +26,13 @@ accounting and stop controls; actual environment/provider qualification and a
 complete launch freeze remain required. These artifacts preserve distinct
 establishment and consumer-benefit decisions.
 
+The [launch-feasibility checkpoint](f05-launch-feasibility-20261029/README.md)
+records C1 no-go on current evidence, the independently reviewed twelve-task
+readiness matrix, fixed captured-profile applicability diagnostic and complete
+owned synthetic session-to-scoring control. It ends the current preparation
+chain without changing task identities or implying zero value from partial
+investigation leads.
+
 ## What it measures
 
 Two arms answer the same fixed question set over the same repos:
