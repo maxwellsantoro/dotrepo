@@ -1,0 +1,5 @@
+{
+  "syntheticOnly": true,
+  "realNativeProcessCalls": 0,
+  "failures": [{"case": "transport cancellation", "observed": "error KeyboardInterrupt retained but fake child returned0 before outer cancellation handler; prior loop waited in finally before killing live child", "correction": "Owned copied transport kills live client on loop BaseException before finally wait; original frozen source unchanged."}]
+}

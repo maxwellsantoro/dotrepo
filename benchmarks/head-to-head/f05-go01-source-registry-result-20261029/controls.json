@@ -1,0 +1,60 @@
+{
+  "synthetic": true,
+  "nativeActions": false,
+  "cases": [
+    {
+      "case": "original-actual-observation",
+      "accepted": true,
+      "expectedAccepted": true,
+      "error": null
+    },
+    {
+      "case": "fabricated-native-collection",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "target admission overclaim"
+    },
+    {
+      "case": "missing-owned-child-unit",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "parent before child terminal"
+    },
+    {
+      "case": "gzip-crc-changed-with-receipt-hash",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "Error -3 while decompressing data: incorrect data check"
+    },
+    {
+      "case": "lost-failed-native-package",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "partial observations differ from full raw native events"
+    },
+    {
+      "case": "lost-full-diagnostics-package",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "full diagnostics changed"
+    },
+    {
+      "case": "report-target-compile-overclaim",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "derived report admission overclaim"
+    },
+    {
+      "case": "bridge-network-with-receipt-hash",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "offline network mismatch"
+    },
+    {
+      "case": "independent-absence-overclaim",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "derived evidence overclaim"
+    }
+  ]
+}

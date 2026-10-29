@@ -1,0 +1,184 @@
+{
+  "actualSizing": {
+    "archiveMembers": 68062,
+    "inputBytes": 21446036,
+    "largestSelectedFileBytes": 4029319,
+    "selectedBytes": 15262944,
+    "selectedFiles": 4589
+  },
+  "campaignAdmitted": false,
+  "checksAlreadyRun": {
+    "GoCLI": false,
+    "GoFmt": "host-owned-source-only; not targetGo1.27validation",
+    "GoHelperBuild": false,
+    "GoUnitTests": false,
+    "PythonConstructorControls": 22,
+    "PythonInputRebuildExact": true,
+    "PythonReceiverComparatorControls": 26,
+    "PythonReceiverSchemaControls": 38,
+    "nativeTask": false
+  },
+  "collectionGateChanged": false,
+  "futurePartialCrosscheck": {
+    "failedPackagesSourceOnlyUnvalidatedLive": 61,
+    "failedWithTestFiles": 40,
+    "failedWithoutTestFiles": 21,
+    "implementedComparatorUnrunAgainstGoOutput": true,
+    "noTestDiagnosticPackages": 18,
+    "observationFixtureSha256": "4561ceba23a09eefbc1f0b0ec84f9888b188bde84738813834d8b3015d758301",
+    "positiveNativeListingPackages": 25,
+    "rawEventsSha256": "3e35220c5d834daec10a374f21b7855e57da27d7788f1b83af123f6e5e55f202",
+    "rule": "Compare ordered Test/Benchmark/Fuzz/Example names only for25pass and empty registry for18 no-test diagnostics. Retain all61failed source-only. Diagnostics/collisions/differences unresolved; printed lines alone do not authenticate an observer."
+  },
+  "helperBuildContextProspective": {
+    "CLIstdin": "Exact input object bytes+hash above, outside module, no file paths opened by helper",
+    "cacheCondition": "Initially empty owned roots; no npm,task source tree or shared/dependency/build/result cache supplied.",
+    "copyOnly": [
+      "go.mod",
+      "registry.go",
+      "registry_test.go"
+    ],
+    "dataOutsideBuiltModule": true,
+    "environment": {
+      "CGO_ENABLED": "0",
+      "GOARCH": "arm64",
+      "GOCACHE": "/workspace/owned-go-build",
+      "GOENV": "off",
+      "GOFLAGS": "-p=1",
+      "GOGC": "50",
+      "GOMAXPROCS": "3",
+      "GOMODCACHE": "/workspace/owned-go-mod",
+      "GOOS": "linux",
+      "GOPATH": "/workspace/owned-go-path",
+      "GOPROXY": "off",
+      "GOSUMDB": "off",
+      "GOTOOLCHAIN": "local",
+      "GOWORK": "off",
+      "HOME": "/workspace/home",
+      "TMPDIR": "/workspace/tmp"
+    },
+    "executionAuthorized": false,
+    "expectedGoVersion": "go1.27.3",
+    "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+    "limits": {
+      "cleanupSeconds": 60,
+      "combinedStdoutStderrPerCommandBytes": 2097152,
+      "cpus": 3,
+      "memoryBytes": 4294967296,
+      "memorySwapBytes": 4294967296,
+      "pids": 256,
+      "workSecondsIncludingPreflight": 900
+    },
+    "moduleCwd": "/workspace/owned-module",
+    "ownedBuildCommand": "go build -o /workspace/owned-bin/registry .",
+    "ownedCLICommand": "/workspace/owned-bin/registry",
+    "ownedUnitCommand": "go test -json -count=1 -timeout=60s .",
+    "sandbox": "Same audited exact image; root reuses existing nonroot/read-only/no-mount/no-network isolation boundary, fresh owned container, source/tool/cleanup receipts. No executor supplied by this packet.",
+    "selectionContextSeparation": "Original target CGO1/GOWORKrepo context remains sourceContext data only and cannot set helper environment."
+  },
+  "helperSourceBindings": {
+    "go.mod": {
+      "path": "benchmarks/head-to-head/f05-go01-source-registry-20261029/go.mod",
+      "sha256": "4bd31b11bbe7741e848df8d65dc9562d6485b1e5ebb6dc2c9025a73a3a7f0919"
+    },
+    "registry.go": {
+      "path": "benchmarks/head-to-head/f05-go01-source-registry-20261029/registry.go",
+      "sha256": "4fb307747f1a87573afba8a920b90eef7eb3424558ed890d5fd6ddfbdeaaad8a"
+    },
+    "registry_test.go": {
+      "path": "benchmarks/head-to-head/f05-go01-source-registry-20261029/registry_test.go",
+      "sha256": "45444e3adadbd27c0c6620aa54d1f7cb73e0040711d2fb9c4b5ad96a9f0bac13"
+    }
+  },
+  "identity": "go01-source-registry-experiment-v1-amendment-1",
+  "input": {
+    "bytes": 21446036,
+    "encoding": "UTF8 compact sorted-key JSON plus LF, source byte payloads base64; exact ordered Test/XTest selection",
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-20261029/local-input.json",
+    "sha256": "0acd95252e7acfc23ce616d59125ebc98c0a7e4b079a789057e44a4479c88015"
+  },
+  "inputBounds": {
+    "archiveExpandedBytes": 268435456,
+    "archiveMembers": 70000,
+    "archiveTransportBytes": 536870912,
+    "inputBytes": 33554432,
+    "packages": 104,
+    "perFileBytes": 8388608,
+    "selectedBytes": 25165824,
+    "selectedFiles": 6000
+  },
+  "nativeCollectionOccurred": false,
+  "oracleQualified": false,
+  "output": {
+    "beforeEmission": "Marshal/canonicalize/size/compress/cap before stdout write; failure is nonzero.",
+    "compressedBytes": 2097152,
+    "declarations": 10000,
+    "encoding": "one deterministic gzip member; sorted-key compact Go JSON with LF; exact ordered arrays; default Go JSON escaping",
+    "expandedBytes": 8388608,
+    "headerHex": "1f8b08000000000002ff",
+    "rawCapture": "Existing rawstdout.bin lossless byte capture only; never decode binary as UTF8 or print it. No new export executor.",
+    "receiver": "Bounded inflate max+1; CRC/eof/single-member/trailing/header checks; uniqueJSONkeys/sourcecontext/packages/declIDs/counts/positions validated. Amendment1 also validates diagnostic objects/string fields/source membership and optional declaration string/literal bool types, rejecting nonfinite JSON."
+  },
+  "parent": {
+    "beforeReviewFreezePath": "benchmarks/head-to-head/f05-go01-source-registry-review-20261029/FREEZE.json",
+    "beforeReviewFreezeSha256": "df6d752afd787928917416664c879a5422edf632750ba3e2d52cb37f2edce074",
+    "freezePath": "benchmarks/head-to-head/f05-go01-source-registry-20261029/FREEZE.json",
+    "freezeSha256": "b2fd2550fd9ca1b5dc20774badfb77863e28236cc0535f11c6012a5aa6a0ab8d",
+    "planSha256": "49637b49865d50faf365833ea4d6ea986bf6dffd7de0a33687d9687db752d5c0"
+  },
+  "receiverAmendment": {
+    "builder": "benchmarks/head-to-head/f05-go01-source-registry-20261029/amendment-1/build_input.py",
+    "builderSha256": "7bd50e99c2adc6bb2dd8cc8c6038d9bfec99fc753f01288506d80604fe977b1e",
+    "changes": [
+      "Strict JSON rejects NaN, Infinity, -Infinity and overflow to nonfinite floats; encoder rejects nonfinite values.",
+      "Diagnostic entries require closed object keys, nonempty string code/message and any sourcePath bound to selected source membership in the reported package.",
+      "Optional declaration output must be a string; emptyOutput/unordered must be literal booleans.",
+      "Root/package/declaration objects checked before field access."
+    ],
+    "crosscheck": "benchmarks/head-to-head/f05-go01-source-registry-20261029/amendment-1/crosscheck_registry.py",
+    "crosscheckSha256": "cd8edd14d484cb66f1b640a5f442f7de4342b6e860217c7266c51d75a856ab0e",
+    "limits": "Typed schema consistency only; no authentication of helper execution or semantic completeness. No diagnostic text interpretation or outcome promotion.",
+    "localCopyRelocations": [
+      "build_input parent/root discovery source references adjusted for amendment subdirectory only.",
+      "crosscheck retained input-provenance/partial observations read from unchanged parent packet; imports resolve local amended builder/receiver."
+    ],
+    "receiver": "benchmarks/head-to-head/f05-go01-source-registry-20261029/amendment-1/read_registry.py",
+    "receiverSha256": "8db78d07712a763a61dc5ef38b0feec62af68f8cf20ce80ec977caa5d1bf2a4d",
+    "schema": "go01-source-registry-output-v1"
+  },
+  "remainingGates": [
+    "Independent STATIC review of exact amendment1 plan/freeze/source closure before any Go command.",
+    "Separate root authorization for bounded owned helper build/unit tests and CLI; retain compiler/parser/cap/failure receipts.",
+    "Independent output/partial crosscheck review;61 failed packages stay source-only.",
+    "Current oracle collection gate remains unchanged; any future replacement is separate prospective design/review."
+  ],
+  "repository": "github.com/microsoft/TypeScript",
+  "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+  "sourceContext": {
+    "discoverySourcesSha256": "4ff48c80f3ab60084de6e73563a5eae55227be5db1b34aa04e3e5a5ceba3efcb",
+    "environmentSha256": "3649e45b9b1c1f62faeb2c3a168d93d91a7be7a62e7e2905c07d9ba69ddb65fe",
+    "goVersion": "go1.27.3",
+    "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+    "packageInventorySha256": "764fa272f1c461f4ecc2d6e2b58d641cc65c8e64da23f55981fa12b70c75bc21",
+    "repository": "github.com/microsoft/TypeScript",
+    "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+    "selectionSha256": "3991848e78c757487dbe9146e7888db3dabe180bd5a9d353269855177266e308",
+    "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+    "sourceInventorySha256": "96c935c31228fa8e05bb836a93257beeb87ac524e5eb30cdde3c546a1ea4be0e"
+  },
+  "sourceRegistrySemantics": {
+    "discovery": "Frozen Go parser AST declaration predicates plus go/doc.Examples(file); no importer,typechecker,generator or test body execution.",
+    "duplicates": "Retain distinct physical declaration IDs; runtime name collisions and multiple TestMain wrappers yield unresolved diagnostics.",
+    "dynamicLimits": [
+      "No dynamic t.Run children/branch coverage",
+      "No fuzz seed arguments or runtime skip/capability outcomes",
+      "No proof TestMain calls m.Run",
+      "No full native manifest or oracle acceptance",
+      "No Go source selected for61failed packages validated live"
+    ],
+    "selectedInput": "All and only accepted inventory TestGoFiles then XTestGoFiles in original per-list order.104package set exact. Ignored files excluded; generated/missing sources not invented.",
+    "validity": "Every package and root explicitly retains compile validity unestablished. Source registration may include signatures which later fail typing/compilation."
+  },
+  "state": "source-only-receiver-amendment-static-review-pending-no-tool-execution-authorization",
+  "taskOutcomeObserved": false
+}

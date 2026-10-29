@@ -1,0 +1,141 @@
+{
+  "identity": "go01-owned-source-registry-runtime-v1",
+  "state": "source-only-runtime-proposal-not-authorized",
+  "helperSubject": {
+    "planSha256": "49637b49865d50faf365833ea4d6ea986bf6dffd7de0a33687d9687db752d5c0",
+    "authorFreezeSha256": "b2fd2550fd9ca1b5dc20774badfb77863e28236cc0535f11c6012a5aa6a0ab8d",
+    "packetIdentity": "go01-source-registry-experiment-v1"
+  },
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "moduleCwd": "/workspace/owned-module",
+  "commands": [
+    "go test -json -count=1 -timeout=60s .",
+    "go build -o /workspace/owned-bin/registry .",
+    "/workspace/owned-bin/registry"
+  ],
+  "commandPathAmendment": "Final runtime reuses helper proposal paths exactly; initial root-declared /workspace/registry development alternative was superseded before freeze.",
+  "moduleFiles": {
+    "go.mod": {
+      "sha256": "4bd31b11bbe7741e848df8d65dc9562d6485b1e5ebb6dc2c9025a73a3a7f0919",
+      "bytes": 64
+    },
+    "registry.go": {
+      "sha256": "4fb307747f1a87573afba8a920b90eef7eb3424558ed890d5fd6ddfbdeaaad8a",
+      "bytes": 17767
+    },
+    "registry_test.go": {
+      "sha256": "45444e3adadbd27c0c6620aa54d1f7cb73e0040711d2fb9c4b5ad96a9f0bac13",
+      "bytes": 8673
+    }
+  },
+  "input": {
+    "bytes": 21446036,
+    "encoding": "UTF8 compact sorted-key JSON plus LF, source byte payloads base64; exact ordered Test/XTest selection",
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-20261029/local-input.json",
+    "sha256": "0acd95252e7acfc23ce616d59125ebc98c0a7e4b079a789057e44a4479c88015"
+  },
+  "sourceContext": {
+    "discoverySourcesSha256": "4ff48c80f3ab60084de6e73563a5eae55227be5db1b34aa04e3e5a5ceba3efcb",
+    "environmentSha256": "3649e45b9b1c1f62faeb2c3a168d93d91a7be7a62e7e2905c07d9ba69ddb65fe",
+    "goVersion": "go1.27.3",
+    "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+    "packageInventorySha256": "764fa272f1c461f4ecc2d6e2b58d641cc65c8e64da23f55981fa12b70c75bc21",
+    "repository": "github.com/microsoft/TypeScript",
+    "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+    "selectionSha256": "3991848e78c757487dbe9146e7888db3dabe180bd5a9d353269855177266e308",
+    "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+    "sourceInventorySha256": "96c935c31228fa8e05bb836a93257beeb87ac524e5eb30cdde3c546a1ea4be0e"
+  },
+  "environment": {
+    "CGO_ENABLED": "0",
+    "GOARCH": "arm64",
+    "GOCACHE": "/workspace/owned-go-build",
+    "GOENV": "off",
+    "GOFLAGS": "-p=1",
+    "GOGC": "50",
+    "GOMAXPROCS": "3",
+    "GOMODCACHE": "/workspace/owned-go-mod",
+    "GOOS": "linux",
+    "GOPATH": "/workspace/owned-go-path",
+    "GOPROXY": "off",
+    "GOSUMDB": "off",
+    "GOTOOLCHAIN": "local",
+    "GOWORK": "off",
+    "HOME": "/workspace/home",
+    "TMPDIR": "/workspace/tmp"
+  },
+  "contextRule": "Helper CGO0/GOWORKoff/offline environment is distinct from retained target selection context, which is input data only; no Go env query.",
+  "expectedTestIds": [
+    "TestDiscoveryNamesAndSignatures",
+    "TestExamplesUseOutputAndSourceOrder",
+    "TestDuplicatesRetainDistinctStableDeclarations",
+    "TestExternalPackageClauseAndEmptyRegistry",
+    "TestPhysicalLocationIgnoresLineDirective",
+    "TestBodylessExampleAndMethodAreNotRegistered",
+    "TestJSONStructureRefusesAmbiguity",
+    "TestDeterministicBoundedGzipEncoding",
+    "TestDiscoveryNamesAndSignatures/bare-prefix",
+    "TestDiscoveryNamesAndSignatures/uppercase",
+    "TestDiscoveryNamesAndSignatures/dot-import-shape",
+    "TestDiscoveryNamesAndSignatures/underscore",
+    "TestDiscoveryNamesAndSignatures/unicode-title",
+    "TestDiscoveryNamesAndSignatures/unicode-lower",
+    "TestDiscoveryNamesAndSignatures/lower-prefix",
+    "TestDiscoveryNamesAndSignatures/receiver",
+    "TestDiscoveryNamesAndSignatures/string-and-comment",
+    "TestDiscoveryNamesAndSignatures/result",
+    "TestDiscoveryNamesAndSignatures/nonpointer",
+    "TestDiscoveryNamesAndSignatures/wrongtype",
+    "TestDiscoveryNamesAndSignatures/two-params",
+    "TestDiscoveryNamesAndSignatures/generics",
+    "TestDiscoveryNamesAndSignatures/benchmark",
+    "TestDiscoveryNamesAndSignatures/fuzz",
+    "TestDiscoveryNamesAndSignatures/main-as-test",
+    "TestDiscoveryNamesAndSignatures/main-as-test-discovery-quirk",
+    "TestDiscoveryNamesAndSignatures/main-wrapper",
+    "TestDiscoveryNamesAndSignatures/bad-main",
+    "TestDiscoveryNamesAndSignatures/parse-error"
+  ],
+  "receiverClosure": {
+    "build_input.py": "ee37dbefe64e65f61e4866dd2e01fa4b89f1f43bace807879708eacc3a36d893",
+    "read_registry.py": "105cafdc7fd49051e00e8b6c0eb296a09cd2f2af7a6dd10f321b6a16d9dd9a9d"
+  },
+  "receiverInputs": {
+    "input-provenance.json": "1ee964532a3c2ec5554150ef374676891b16299e9f364c314127b8dc58ad9290"
+  },
+  "limits": {
+    "workSecondsIncludingPreflight": 900,
+    "cleanupSeconds": 60,
+    "cpus": 3,
+    "memoryBytes": 4294967296,
+    "memorySwapBytes": 4294967296,
+    "pids": 256,
+    "workspaceTmpfsBytes": 8589934592,
+    "dependencyTmpfsBytes": 1073741824,
+    "tmpTmpfsBytes": 536870912,
+    "combinedStdoutStderrPerCommandBytes": 2097152,
+    "compressedRegistryBytes": 2097152,
+    "expandedRegistryBytes": 8388608
+  },
+  "scripts": {
+    "runtime.py": "b3b71aec378cf02db003336afb0c4dce84e4b83b641de3fba9dd49e27ac45ff6",
+    "process_io.py": "3e9a076282ffd3ea74fa956fde17d566d8851e291a2d437ceed4b2e15cbc2b54",
+    "make_plan.py": "dfc25fbda23971fc55c9ac6164da09f97313e471ee6502cf4e4a92777d91d54b",
+    "controls.py": "c62e4c98fcf67e0f01fe1e0661f24dcdf907738e7c1694f60637158d2c3d304f",
+    "transport_controls.py": "2e5bc7827f2fbd41b9a36074180d2a4c908c935717a0fd04824e55e75896eadc"
+  },
+  "reusedBindings": {
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-offline-setup-plan-20261029/amendment-1/setup.py": "06e3eb82f695812f96816c820f61fef1cceb242c636de5980284824948604de0",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-dependency-preparation-20261029/boundaries.py": "7b03c7ab687043ab23061efde9d6328a21bb6ca94176085c87a50df8265de9e6",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/collection.py": "6db7f294c3158129fc75fee991ec436c1838ab0119bd7f7df9026df3d297b3d8"
+  },
+  "transportSourceSha256": "2b312dad157e536a21733ed05c54b9715b3e6d2d60e50e62249c96da13dd2b6b",
+  "transportAmendment": "Only binary/text combined accounting tightened; binary wire has absolute8MiB transport ceiling and2MiB combined stream ceiling. Receiver unchanged at2MiB compressed/8MiB expanded. Binary stdout never UTF8-decoded.",
+  "positiveReviewBindings": "PENDING independent helper and runtime static pass objects; external to author plan/freezes, required by fresh root authorization.",
+  "executionAuthorized": false,
+  "nativeCollectionOccurred": false,
+  "taskOutcomeObserved": false,
+  "campaignAdmitted": false,
+  "oracleQualified": false,
+  "cacheGloballyQualified": false
+}

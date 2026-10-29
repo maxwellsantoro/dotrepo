@@ -1,0 +1,113 @@
+{
+  "state": "passed-python-owned-receiver-controls",
+  "passed": 26,
+  "controls": [
+    {
+      "case": "owned single deterministic member",
+      "passed": true
+    },
+    {
+      "case": "reject truncated member",
+      "passed": true
+    },
+    {
+      "case": "reject bad CRC",
+      "passed": true
+    },
+    {
+      "case": "reject multiple members",
+      "passed": true
+    },
+    {
+      "case": "reject trailing bytes",
+      "passed": true
+    },
+    {
+      "case": "reject timestamp header",
+      "passed": true
+    },
+    {
+      "case": "reject filename flag",
+      "passed": true
+    },
+    {
+      "case": "reject compressed cap",
+      "passed": true
+    },
+    {
+      "case": "reject expanded cap",
+      "passed": true
+    },
+    {
+      "case": "reject duplicate expanded JSON key",
+      "passed": true
+    },
+    {
+      "case": "owned synthetic schema/ID validation only, not corpus output",
+      "passed": true
+    },
+    {
+      "case": "reject duplicate declaration ID",
+      "passed": true
+    },
+    {
+      "case": "reject wrong source hash",
+      "passed": true
+    },
+    {
+      "case": "reject wrong ID",
+      "passed": true
+    },
+    {
+      "case": "reject missing package",
+      "passed": true
+    },
+    {
+      "case": "reject unknown field",
+      "passed": true
+    },
+    {
+      "case": "reject native claim",
+      "passed": true
+    },
+    {
+      "case": "reject compile claim",
+      "passed": true
+    },
+    {
+      "case": "reject helper version",
+      "passed": true
+    },
+    {
+      "case": "reject source context",
+      "passed": true
+    },
+    {
+      "case": "reject invalid location",
+      "passed": true
+    },
+    {
+      "case": "owned comparator retains61 unvalidated packages, no native qualification",
+      "passed": true
+    },
+    {
+      "case": "comparator rejects missing name",
+      "passed": true
+    },
+    {
+      "case": "comparator rejects extra name",
+      "passed": true
+    },
+    {
+      "case": "comparator rejects name order",
+      "passed": true
+    },
+    {
+      "case": "comparator rejects nonempty no-test package",
+      "passed": true
+    }
+  ],
+  "GoHelperBuiltOrRun": false,
+  "nativeCollectionOccurred": false,
+  "syntheticFixturesNotCorpusRegistry": true
+}

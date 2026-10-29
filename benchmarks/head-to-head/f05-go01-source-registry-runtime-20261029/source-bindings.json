@@ -1,0 +1,41 @@
+{
+  "state": "frozen existing sources reused; runtime execution not authorized",
+  "baseCommit": "3fa37f686e086cad85477f86095fdaa00cbaeeb0",
+  "helperSubject": {
+    "planSha256": "74258ec831c551ad1b39a497ed09320c3824aa0be9a836fb3d076684f5703482",
+    "authorFreezeSha256": "e569edd4888a092aa46745d950614964ca86fc755637827fd9723fad0413da4d",
+    "packetIdentity": "go01-source-registry-experiment-v1-amendment-1"
+  },
+  "helperAmendmentSubjectSha256": "49dd2f3fd30cb3cfa3447489fb43f6cdb373e6960efe6350618679b9d7cb8fe2",
+  "moduleFilesSource": "Original helper root, exactly go.mod,registry.go,registry_test.go; no upstream files copied into module.",
+  "input": {
+    "bytes": 21446036,
+    "encoding": "UTF8 compact sorted-key JSON plus LF, source byte payloads base64; exact ordered Test/XTest selection",
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-20261029/local-input.json",
+    "sha256": "0acd95252e7acfc23ce616d59125ebc98c0a7e4b079a789057e44a4479c88015"
+  },
+  "receiverSource": "Immutable helper/amendment-1 receiver and builder; base input-provenance and package inventory remain separate.",
+  "reusedBindings": {
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-offline-setup-plan-20261029/amendment-1/setup.py": "06e3eb82f695812f96816c820f61fef1cceb242c636de5980284824948604de0",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-dependency-preparation-20261029/boundaries.py": "7b03c7ab687043ab23061efde9d6328a21bb6ca94176085c87a50df8265de9e6",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/collection.py": "6db7f294c3158129fc75fee991ec436c1838ab0119bd7f7df9026df3d297b3d8"
+  },
+  "transportBeforeSha256": "2b312dad157e536a21733ed05c54b9715b3e6d2d60e50e62249c96da13dd2b6b",
+  "transportAfterSha256": "f4f162e7465d0e6d2142bba6f898b01beec19bed1e1461ac7633a0f88cc8d1f0",
+  "transportChanges": [
+    "Apply2MiB combined binary stdout+text stderr accounting; binary stdout captured separately withoutUTF8decode.",
+    "On loop BaseException, kill live client before finally wait; preserve cancellation instead of delaying/masking it."
+  ],
+  "strictInspectReuse": "Only pure flags/inspect AST functions extracted from exact reviewed collection.py, delegating hash-bound setup.py; no collection run invoked.",
+  "binaryReceiverLimits": {
+    "combinedTransportBytes": 2097152,
+    "compressedRegistryBytes": 2097152,
+    "expandedRegistryBytes": 8388608
+  },
+  "externalReviews": "PENDING real helper/runtime pass objects in fresh one-attempt root authorization; not part of plan hash or assumed passed.",
+  "claimsNotEstablished": [
+    "No owned Go helper tests/build/CLI executed.",
+    "No target source compilation, collection, task or oracle acceptance.",
+    "No source registry semantic completeness established by synthetic output fixtures."
+  ]
+}

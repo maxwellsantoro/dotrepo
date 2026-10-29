@@ -1,0 +1,63 @@
+{
+  "GoCompilationExecuted": false,
+  "campaignAdmitted": false,
+  "executionAuthorized": false,
+  "findings": [
+    {
+      "evidence": "receiver_challenge.py + receiver-challenge.json",
+      "id": "F1",
+      "impact": "The receiver can label type-invalid or non-JSON data as received source-registry evidence. Typed Go producer is unlikely to emit this normally, and no bad actual helper output is asserted; helper remains unrun. But runtime observation validity requires strict current schema, separate from semantic correctness/authenticity.",
+      "locators": [
+        "read_registry.py:validate diagnostics and optional declaration fields",
+        "build_input.py:load"
+      ],
+      "minimumFix": "In an append-only successor, validate diagnostic object keys and field types; validate output string and emptyOutput/unordered literal bool types when present; reject JSON nonfinite constants at load. Preserve valid source-derived/unresolved outputs and diagnostic retention. Do not edit this frozen base.",
+      "observed": "All seven malformed shapes are accepted by frozen receiver.validate. Valid source-derived/unresolved states accept, and inconsistent state hiding diagnostics rejects.",
+      "priority": 2,
+      "state": "requires append-only receiver amendment before a full-schema-valid observation claim",
+      "trigger": "Python-only synthetic output shapes with diagnostics=[42], [{}], or wrong code/sourcePath/message types; output=[]/emptyOutput=1/unordered=\"yes\"; non-JSON NaN accepted by builder.load and then as optional output."
+    }
+  ],
+  "helperCLIExecuted": false,
+  "limits": [
+    "Target Go1.27.3 compilation, owned unit fixtures and CLI remain unrun. Author host gofmt Go1.27.1 supplies formatting/syntax evidence for owned source only; it does not qualify target Go1.27.3 behavior.",
+    "Receiver consistency doesnotauthenticatehelperexecution orsemanticcompleteness; futuretool/rawinput/output receipts mustbindreviewedclosure.",
+    "No newGo/Node/daemon/native/network/provideraction by staticreview. OnlyPythontrustedsource/data/hash andsyntheticcontrols ran.",
+    "Base has no passedreviewobject. Separatefixreview androotboundedownedtooltest/runtimeauthorization remainrequired."
+  ],
+  "nativeCollectionOccurred": false,
+  "nativeTaskAdmitted": false,
+  "oracleQualified": false,
+  "ownedGoTestsExecuted": false,
+  "roleDisclosure": "Reviewer authored prior source proposal/projection and driver/result reviews, not this source-registry implementation. Source/history context disclosed; not a blind trial. No Go build/test/helper execution by reviewer.",
+  "scope": "owned-source-registry-only",
+  "state": "independent-static-helper-review-findings",
+  "staticAssessment": [
+    "Go helper imports only listed stdlib packages; only host-facing I/O is bounded stdin/stdout/stderr. Explicit source bytes feed parser.ParseFile, never opened project paths/imported packages. No command/net/unsafe/eval/typechecker/generator access found. Unit module build is restricted to3owned files and no dependencies.",
+    "Mirrored isTest/isTestFunc/checkTestFunc, Unicode next-rune, TestMain*Tordinary vs*Mwrapper and special generic branch agree with retained Go loader. Examples use matching go/doc API/order/output rules; receivers/invalid signatures/parse/package problems and duplicate collisions retain unresolved diagnostics. Compilation/type validity alwaysunestablished.",
+    "Full33-artifact closure+ignoredlocalinput verified. Independently reconstructed input exactSHA0acd...,104packages4589files15,262,944bytes, with every embedded byte hash/size checked. Two primary discovery sources match frozen image inventory.",
+    "Input/selection/context/digests/size/order bounds pin the corpus. TargetCGO1/repositorywork context is data, distinct from proposed source-freeownedCGO0/helpercontext. No original oracle/collection gate change.",
+    "Gzip encoding is statically bounded/deterministic beforestdout, reader caps inflate/max+1/header/CRC/eof/singlemember/trailing. Python22constructor+26receivercontrols pass. ActualGo encoding/tests/CLI/genuinecrosscheck remainunrun.",
+    "Valid0/source-derived and1/unresolved state envelopes are compatible with receiver and static producerexit branches. Four independent comparator-state checks preserve diagnostics across pass/skip/fail; failed61remain source-only and full diagnostic payload must remain inrawregistry. ReceiverF1prevents currentfull-schema claim.",
+    "Native partial observations remain25listingpass18notest61failed. They are notsource-helperoutputs orfullcompilecoverage. Printedname linesnotauthenticated execution."
+  ],
+  "staticOnly": true,
+  "subject": {
+    "authorFreezeSha256": "b2fd2550fd9ca1b5dc20774badfb77863e28236cc0535f11c6012a5aa6a0ab8d",
+    "packetIdentity": "go01-source-registry-experiment-v1",
+    "planSha256": "49637b49865d50faf365833ea4d6ea986bf6dffd7de0a33687d9687db752d5c0"
+  },
+  "synthetic": false,
+  "taskOutcomeObserved": false,
+  "validation": {
+    "authorArtifactsVerifiedUnchanged": 33,
+    "constructorControlsReplayed": 22,
+    "constructorRebuildExact": true,
+    "independentStateComparatorControls": 4,
+    "receiverChallengeCases": 10,
+    "receiverControlsReplayed": 26,
+    "ruffCheck": "passed --no-cache",
+    "ruffFormatCheck": "passed --no-cache",
+    "unexpectedMalformedAcceptances": 7
+  }
+}

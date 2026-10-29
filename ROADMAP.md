@@ -216,6 +216,14 @@ signal-killed build failures. Package inventory was established under the fixed
 conditions, but complete native collection and its selected oracle remain open;
 the kill cause, full-task qualification and campaign benefit are unestablished.
 No resource-increased retry or task substitution follows from those observations. The
+[source-derived Go registry experiment](benchmarks/head-to-head/f05-go01-source-registry-20261029/README.md)
+keeps selected source bytes separate from compiled upstream code. Its
+[receiver amendment](benchmarks/head-to-head/f05-go01-source-registry-20261029/amendment-1/README.md)
+preserves malformed-input findings and their before evidence. Owned helper checks,
+source-derived declarations and partial native-list comparisons cannot establish
+upstream compile validity or replace the current oracle's collection gate. The
+[owned-helper result](benchmarks/head-to-head/f05-go01-source-registry-result-20261029/README.md)
+retains actual tool observations separately. The
 [Python-03 source assessment](benchmarks/head-to-head/f05-python03-oracle-preparation-20261029/README.md)
 and [independent review](benchmarks/head-to-head/f05-python03-oracle-review-20261029/README.md)
 support prospective aggregate-suite coverage of the selected primary package,

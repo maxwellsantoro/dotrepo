@@ -1,0 +1,15 @@
+{
+  "state": "reviewer harness assumption corrected before review freeze",
+  "firstRunExitCode": 1,
+  "reason": "KeyError helperSourceBindings: the base plan does not have this successor-added key",
+  "correction": "Compare unchanged inherited fields against base; verify successor helperSourceBindings against exact original file hashes instead",
+  "authorFinding": false,
+  "authorFilesChanged": false,
+  "GoCompiledOrRun": false,
+  "secondRunExitCode": 1,
+  "secondReason": "Owned scratch receiver-challenge.json name was shared by copied author and retained reviewer controls; exclusive-write correctly refused",
+  "secondCorrection": "Run retained before-review challenge in its own fresh scratch child; original author outputs unaffected",
+  "thirdRunExitCode": 1,
+  "thirdReason": "Comparator replay expected its binding locator in scratch root but binding was written only in before child",
+  "thirdCorrection": "Supply identical explicit author locator in comparator scratch directory; all seven malformed cases had already rejected"
+}

@@ -1,0 +1,36 @@
+{
+  "GoCompiledOrRun": false,
+  "checks": [
+    {
+      "case": "ordinary owned partial comparison",
+      "passed": true
+    },
+    {
+      "case": "diagnostics preserved for native pass",
+      "diagnosticPackage": "owned/0",
+      "failedStillSourceOnly": false,
+      "partialState": "partial-observational-crosscheck-mismatch",
+      "passed": true
+    },
+    {
+      "case": "diagnostics preserved for native skip",
+      "diagnosticPackage": "owned/25",
+      "failedStillSourceOnly": false,
+      "partialState": "partial-observational-crosscheck-mismatch",
+      "passed": true
+    },
+    {
+      "case": "diagnostics preserved for native fail",
+      "diagnosticPackage": "owned/43",
+      "failedStillSourceOnly": true,
+      "partialState": "partial-observational-crosscheck-consistent-unqualified",
+      "passed": true
+    }
+  ],
+  "diagnosticRetention": "Partial comparison names diagnostic packages; full codes/messages remain in retained raw source-registry output. Failed61never become live validated.",
+  "fixtureDisclosure": "104owned synthetic package labels, not corpus source-registry or Go helper output",
+  "newNativeOrNetworkActions": 0,
+  "producerExitSemanticsStatic": "main exits0 after source-derived,1 after fully emitted unresolved,2 on input/encoding/transport errors; Go unrun",
+  "receiverGap": "Malformed diagnostic/optional/nonfinite cases retained separately as findingF1; these checks do not bless schema completeness.",
+  "state": "valid-state static/Python compatibility passed"
+}

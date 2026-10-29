@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-20261029/build_input.py", line 280, in <module>
+    build(args.output, args.provenance)
+  File "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-20261029/build_input.py", line 179, in build
+    files, expanded, total = select_source(SOURCE, inventory, selected)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-20261029/build_input.py", line 127, in select_source
+    require(
+  File "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-20261029/build_input.py", line 33, in require
+    raise ValueError(reason)
+ValueError: source path

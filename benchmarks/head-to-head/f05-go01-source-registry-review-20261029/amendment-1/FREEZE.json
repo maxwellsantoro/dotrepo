@@ -1,0 +1,72 @@
+{
+  "GoCompiledOrRun": false,
+  "artifacts": {
+    "README.md": {
+      "bytes": 2413,
+      "sha256": "79c073ca5cd76b3d273d242ff07bb035e6c7e07eb6b340026c337289eea6aa8e"
+    },
+    "binding-and-replays.json": {
+      "bytes": 3308,
+      "sha256": "3211a33e02cf4036c9feb91c14f0e59d6fb66b27dce4cc58fe33ace37e8ae825"
+    },
+    "independent-controls.json": {
+      "bytes": 4657,
+      "sha256": "1f17d97fcd2908ab8b6d1459fb008bdafe873aec1668b9fab1054069d6fc6755"
+    },
+    "input-rebuild.stdout": {
+      "bytes": 2096,
+      "sha256": "e730c2169c9ac8fbd2749f631516d756dd6bddddb4330bec98715c7c583f0afd"
+    },
+    "passed-review.json": {
+      "bytes": 1079,
+      "sha256": "63df2c64396548e63c776731b7eed7b8cdae002c0e6b9fb2ced6eb92264cd270"
+    },
+    "replay-author-amendment-controls.json": {
+      "bytes": 5292,
+      "sha256": "0d9ed94e3dfb866f4f7256839cdf0f1f1f2511d4617386f3366a7fadfe9f9447"
+    },
+    "replay-before-cases.json": {
+      "bytes": 1443,
+      "sha256": "997395dbff39ac6751afa58d1bd0da2ba962aacf223d5de5bcd9247d73632d39"
+    },
+    "replay-constructor-controls.json": {
+      "bytes": 1893,
+      "sha256": "0759ed14617cb7abbd688290758980b641bdd43fa95b4793596ae5e0cb3ffeed"
+    },
+    "replay-receiver-controls.json": {
+      "bytes": 2268,
+      "sha256": "3c93e8083068b275df191f4ab3cc7eac17c7b958899d92c733b62b3b043ef7fe"
+    },
+    "replay-state-compatibility.json": {
+      "bytes": 1522,
+      "sha256": "7c14cc8674a8783dd2ddb7a48b8eaf8b1188bb8f7c811bfbace67843f3748f24"
+    },
+    "review.json": {
+      "bytes": 3343,
+      "sha256": "3332b6589c3208e5f9f932f32330d0d5308dcf3be7bcc98f835709dc6a8f20cf"
+    },
+    "review_controls.py": {
+      "bytes": 10344,
+      "sha256": "c95c2b23da71346c5670a30d2999d1115c56068f4aeef40756b1aef51fd709d2"
+    },
+    "reviewer-harness-correction.json": {
+      "bytes": 1045,
+      "sha256": "dbcc984cca2e3e8e8e289beafde82367a3c9268d111de2d3c9f2a49c9e588145"
+    },
+    "source-inspection.json": {
+      "bytes": 1718,
+      "sha256": "ab1ca505337d53e33a9f78acd0f421fdf72d355d1c8b67fdd57ae3bf218365ea"
+    }
+  },
+  "campaignAdmitted": false,
+  "executionAuthorized": false,
+  "nativeTaskAdmitted": false,
+  "oracleQualified": false,
+  "state": "independent-static-amendment-review-passed-no-execution-admission",
+  "staticOnly": true,
+  "subject": {
+    "authorFreezeSha256": "e569edd4888a092aa46745d950614964ca86fc755637827fd9723fad0413da4d",
+    "packetIdentity": "go01-source-registry-experiment-v1-amendment-1",
+    "planSha256": "74258ec831c551ad1b39a497ed09320c3824aa0be9a836fb3d076684f5703482"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "goVersion": "go1.27.3",
+  "imageInventory": {
+    "path": "benchmarks/head-to-head/f05-common-image-audit-20261029/inventory.json",
+    "sha256": "f096a4b8a2346c0332082e2b88b093cc4fb78b2cbaed0b5b5af05d071695f647"
+  },
+  "imageExportSha256": "d8de699302fac90a58280e0757c22a7aa82a2c40d48d72ab2c8ffc7c933681d6",
+  "members": {
+    "usr/local/go/src/cmd/go/internal/load/test.go": {
+      "sha256": "390bda50ce1c632b32cca052b58c85f74054f4bec1ba4c68832eca440059f6d8",
+      "bytes": 27414,
+      "retainedPath": "sources/usr/local/go/src/cmd/go/internal/load/test.go"
+    },
+    "usr/local/go/src/go/doc/example.go": {
+      "sha256": "f4b795cd8b968ea48d5363777766b556697c786b808f7f384549fc0abda5a47f",
+      "bytes": 22320,
+      "retainedPath": "sources/usr/local/go/src/go/doc/example.go"
+    }
+  },
+  "semantics": {
+    "load/test.go": [
+      [
+        587,
+        643
+      ],
+      [
+        732,
+        817
+      ]
+    ],
+    "go/doc/example.go": [
+      [
+        50,
+        150
+      ],
+      [
+        595,
+        609
+      ]
+    ]
+  },
+  "sourceAcquisitionOccurred": false
+}

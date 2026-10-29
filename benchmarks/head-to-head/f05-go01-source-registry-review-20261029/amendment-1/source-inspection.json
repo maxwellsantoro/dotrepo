@@ -1,0 +1,24 @@
+{
+  "changesDiffSha256": "8572586cfa0e464298eae930a26b54f5597c6044c190e6965a08aab490e08abe",
+  "completeThreeFileDiffMatchesRetainedAuthorDiff": true,
+  "limits": [
+    "Source/closure review, not a fresh blind task trial",
+    "No target Go build/unit/CLI or genuine output/crosscheck has run",
+    "61 failed native packages remain source-only; native collection gate unchanged"
+  ],
+  "newGoNodeDockerNetworkProviderNativeActions": 0,
+  "originalGoSourcesUnchanged": {
+    "go.mod": "4bd31b11bbe7741e848df8d65dc9562d6485b1e5ebb6dc2c9025a73a3a7f0919",
+    "registry.go": "4fb307747f1a87573afba8a920b90eef7eb3424558ed890d5fd6ddfbdeaaad8a",
+    "registry_test.go": "45444e3adadbd27c0c6620aa54d1f7cb73e0040711d2fb9c4b5ad96a9f0bac13"
+  },
+  "producerCompatibility": "Go struct omitempty omits empty diagnostic sourcePath and optional zero fields. Receiver accepts omitted or literal false/string optional values; all six retained producer diagnostic forms passed synthetic shapes. No Go-produced output available.",
+  "pythonVersion": "3.12.15 (main, Oct  3 2026, 00:54:33) [Clang 22.1.3 ]",
+  "receiverSemantics": "Diagnostic keys/code/message and optional package-local selected source checked; optional example fields require string/literal booleans; strict JSON rejects nonfinite and duplicate keys. Existing source/state/ID/bounds unchanged.",
+  "reconstructedInput": {
+    "bytes": 21446036,
+    "path": "/tmp/dotrepo-go01-registry-amendment-review-7871jsc0/rebuilt-input.json",
+    "sha256": "0acd95252e7acfc23ce616d59125ebc98c0a7e4b079a789057e44a4479c88015"
+  },
+  "relocations": "Builder discovery/root and comparator retained evidence locators adjusted for amendment child only; amended local imports used."
+}

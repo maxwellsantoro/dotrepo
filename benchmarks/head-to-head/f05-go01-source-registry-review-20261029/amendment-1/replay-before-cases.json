@@ -1,0 +1,57 @@
+{
+  "fixtureDisclosure": "Synthetic Python shapes only, no Go/helper/native observations",
+  "cases": [
+    {
+      "case": "valid source-derived state",
+      "expectedAccepted": true,
+      "actualAccepted": true
+    },
+    {
+      "case": "valid unresolved state",
+      "expectedAccepted": true,
+      "actualAccepted": true
+    },
+    {
+      "case": "state hides diagnostics",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    },
+    {
+      "case": "diagnostic scalar",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    },
+    {
+      "case": "diagnostic missing fields",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    },
+    {
+      "case": "diagnostic wrong field types",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    },
+    {
+      "case": "wrong optional declaration type output",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    },
+    {
+      "case": "wrong optional declaration type emptyOutput",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    },
+    {
+      "case": "wrong optional declaration type unordered",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    },
+    {
+      "case": "non-JSON NaN accepted through loader and optional field",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    }
+  ],
+  "unexpectedAcceptances": [],
+  "newGoDaemonNodePackageNetworkNativeCalls": 0
+}

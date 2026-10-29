@@ -1,0 +1,94 @@
+{
+  "GoCompiledOrRun": false,
+  "after": {
+    "artifactCounts": {
+      "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-20261029": 33,
+      "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-20261029/amendment-1": 18,
+      "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-review-20261029": 11
+    },
+    "inheritedContextUnchanged": true,
+    "inputUnchanged": true
+  },
+  "before": {
+    "artifactCounts": {
+      "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-20261029": 33,
+      "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-20261029/amendment-1": 18,
+      "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-review-20261029": 11
+    },
+    "inheritedContextUnchanged": true,
+    "inputUnchanged": true
+  },
+  "beforeHarnessAdaptations": [
+    "NaN load moved inside exception boundary only",
+    "static Go source reference uses unchanged parent"
+  ],
+  "executionAuthorized": false,
+  "receipts": [
+    {
+      "argv": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-sync",
+        "python",
+        "/tmp/dotrepo-go01-registry-amendment-review-7871jsc0/constructor_controls.py"
+      ],
+      "exitCode": 0,
+      "stderr": "warning: `--no-sync` has no effect when used outside of a project\n",
+      "stdoutSha256": "78bb8551c20ad0d52beba7fc04b0b3462d4aba2cea89ac6e13804dcfd3ce5d4c"
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-sync",
+        "python",
+        "/tmp/dotrepo-go01-registry-amendment-review-7871jsc0/receiver_controls.py"
+      ],
+      "exitCode": 0,
+      "stderr": "warning: `--no-sync` has no effect when used outside of a project\n",
+      "stdoutSha256": "fd96573cfb2c9583f3d6dc09fbb1aa240a1909a2c1fa2b75c139efa84bd68400"
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-sync",
+        "python",
+        "/tmp/dotrepo-go01-registry-amendment-review-7871jsc0/amendment_controls.py"
+      ],
+      "exitCode": 0,
+      "stderr": "warning: `--no-sync` has no effect when used outside of a project\n",
+      "stdoutSha256": "65cc6aea9731f9706e8d2249a61f9794d66d2ab28396464ba48ce232bcf53c79"
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-sync",
+        "python",
+        "/tmp/dotrepo-go01-registry-amendment-review-7871jsc0/state_compatibility.py"
+      ],
+      "exitCode": 0,
+      "stderr": "warning: `--no-sync` has no effect when used outside of a project\n",
+      "stdoutSha256": "e5b94a2f24b19bcbb546999958d7be876677896fb24d5a6caf446e2960211d79"
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-sync",
+        "python",
+        "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-20261029/amendment-1/verify.py"
+      ],
+      "exitCode": 0,
+      "stderr": "warning: `--no-sync` has no effect when used outside of a project\n",
+      "stdoutSha256": "8c18aa950fd636f4c50f1ebec88c32a9d7cc4ec3db403fc04335344a6f9f00e6"
+    }
+  ],
+  "scratch": "/tmp/dotrepo-go01-registry-amendment-review-7871jsc0"
+}

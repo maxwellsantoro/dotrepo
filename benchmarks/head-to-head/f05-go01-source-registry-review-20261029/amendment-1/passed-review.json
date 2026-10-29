@@ -1,0 +1,24 @@
+{
+  "cacheGloballyQualified": false,
+  "campaignAdmitted": false,
+  "executionAuthorized": false,
+  "findings": [],
+  "helperCLIExecuted": false,
+  "nativeCollectionOccurred": false,
+  "nativeTaskAdmitted": false,
+  "oracleQualified": false,
+  "ownedGoTestsExecuted": false,
+  "reportPath": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-review-20261029/amendment-1/review.json",
+  "reportSha256": "3332b6589c3208e5f9f932f32330d0d5308dcf3be7bcc98f835709dc6a8f20cf",
+  "reviewScope": "Exact receiver amendment and inherited immutable source closure, static/Python only; target Go unrun",
+  "scope": "owned-source-registry-only",
+  "state": "independent-owned-registry-helper-review-passed",
+  "staticOnly": true,
+  "subject": {
+    "authorFreezeSha256": "e569edd4888a092aa46745d950614964ca86fc755637827fd9723fad0413da4d",
+    "packetIdentity": "go01-source-registry-experiment-v1-amendment-1",
+    "planSha256": "74258ec831c551ad1b39a497ed09320c3824aa0be9a836fb3d076684f5703482"
+  },
+  "synthetic": false,
+  "taskOutcomeObserved": false
+}

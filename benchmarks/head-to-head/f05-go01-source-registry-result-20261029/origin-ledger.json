@@ -1,0 +1,509 @@
+{
+  "state": "byte-preserving-copy-of-closed-owned-helper-run-and-frozen-bindings",
+  "files": [
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/FREEZE.json",
+      "retained": "evidence/FREEZE.json",
+      "bytes": 9617,
+      "sha256": "1ea59ba97218067be4bef04852d2063a25063531b6ceca0de88c83a6d07f5770"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/attempt.json",
+      "retained": "evidence/attempt.json",
+      "bytes": 507,
+      "sha256": "f4087a78f5828f52dad7e35dfb0d40b94ab3002a3f7617a101f4da7a494b0aba"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/cleanup/receipt.json",
+      "retained": "evidence/logs/cleanup/receipt.json",
+      "bytes": 711,
+      "sha256": "52c8b046d8315145c03c10b2216b25ea38d309137370fe66f0fe20471b408425"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/cleanup/stderr.bin",
+      "retained": "evidence/logs/cleanup/stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/cleanup/stdout.bin",
+      "retained": "evidence/logs/cleanup/stdout.bin",
+      "bytes": 36,
+      "sha256": "3a3c410f98f531e7e9b2566ef815d498d139fbfc3ccf6f2397a9a1eb7b018e3c"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/create/receipt.json",
+      "retained": "evidence/logs/create/receipt.json",
+      "bytes": 2143,
+      "sha256": "9a98bc0a6a619965cddf4d8796fe05ff6d436179c7717f450dd12ec7f12ecd3c"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/create/stderr.bin",
+      "retained": "evidence/logs/create/stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/create/stdout.bin",
+      "retained": "evidence/logs/create/stdout.bin",
+      "bytes": 65,
+      "sha256": "6377dc004db2b3fdc09caf378f06172fd5869e7fc527d5fdc51f67ccd482201c"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/image-inspect/receipt.json",
+      "retained": "evidence/logs/image-inspect/receipt.json",
+      "bytes": 754,
+      "sha256": "6f3704f7883897033b90a64130edfaca687e66b9250c71c3c69fffc27dc6c949"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/image-inspect/stderr.bin",
+      "retained": "evidence/logs/image-inspect/stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/image-inspect/stdout.bin",
+      "retained": "evidence/logs/image-inspect/stdout.bin",
+      "bytes": 2222,
+      "sha256": "4c6fa72b8b05b95a719110e0f7fa705758c224e253cf8c7cdf881218ea4f1913"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/initialize/receipt.json",
+      "retained": "evidence/logs/initialize/receipt.json",
+      "bytes": 978,
+      "sha256": "ab61f30c1291faa080b541dc53df8e5b4749bfe19378b41d3510f21dc2f541d5"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/initialize/stderr.bin",
+      "retained": "evidence/logs/initialize/stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/initialize/stdout.bin",
+      "retained": "evidence/logs/initialize/stdout.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/inspect-after/receipt.json",
+      "retained": "evidence/logs/inspect-after/receipt.json",
+      "bytes": 706,
+      "sha256": "6879d80fd9723be578886978219901064fc36fa9f227d960c45eafbcdca734ac"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/inspect-after/stderr.bin",
+      "retained": "evidence/logs/inspect-after/stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/inspect-after/stdout.bin",
+      "retained": "evidence/logs/inspect-after/stdout.bin",
+      "bytes": 7943,
+      "sha256": "fcd01ecfd463226a382f88a984b69c30674b72512513ea91cbba25269cf55c70"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/inspect-before/receipt.json",
+      "retained": "evidence/logs/inspect-before/receipt.json",
+      "bytes": 705,
+      "sha256": "69441ef2145fb36aa5668c16bc126116e8f79398896a728eaf0f3833de99e5e8"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/inspect-before/stderr.bin",
+      "retained": "evidence/logs/inspect-before/stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/inspect-before/stdout.bin",
+      "retained": "evidence/logs/inspect-before/stdout.bin",
+      "bytes": 7943,
+      "sha256": "fcd01ecfd463226a382f88a984b69c30674b72512513ea91cbba25269cf55c70"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/module-after/receipt.json",
+      "retained": "evidence/logs/module-after/receipt.json",
+      "bytes": 940,
+      "sha256": "f95d22b3795bc78ea48eb2a9ce149eb17c69f9ac2fe27b3822a873fd52ba0bc4"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/module-after/stderr.bin",
+      "retained": "evidence/logs/module-after/stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/module-after/stdout.bin",
+      "retained": "evidence/logs/module-after/stdout.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/module-before/receipt.json",
+      "retained": "evidence/logs/module-before/receipt.json",
+      "bytes": 941,
+      "sha256": "fa59500d422f790fcf3a66f0f33f351fe4eb7816f1dfce500cdc8dbfa9ebb45f"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/module-before/stderr.bin",
+      "retained": "evidence/logs/module-before/stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/module-before/stdout.bin",
+      "retained": "evidence/logs/module-before/stdout.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/module-provision/receipt.json",
+      "retained": "evidence/logs/module-provision/receipt.json",
+      "bytes": 809,
+      "sha256": "f1b567836f4b6c0d8961de49df4e912a13cdcf608bcd989b444c62dccfd6ac23"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/module-provision/stderr.bin",
+      "retained": "evidence/logs/module-provision/stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/module-provision/stdout.bin",
+      "retained": "evidence/logs/module-provision/stdout.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/owned-binary-sha/receipt.json",
+      "retained": "evidence/logs/owned-binary-sha/receipt.json",
+      "bytes": 786,
+      "sha256": "a82664b737866b47465d3f2987e40e53ecaeeb38cef757a9eaba26d05ee17487"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/owned-binary-sha/stderr.bin",
+      "retained": "evidence/logs/owned-binary-sha/stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/owned-binary-sha/stdout.bin",
+      "retained": "evidence/logs/owned-binary-sha/stdout.bin",
+      "bytes": 96,
+      "sha256": "20df2e06d61f4fdc65dd5d3c6791ce9e57db0d91fb67d0dd2ac24de600b39869"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/owned-build/receipt.json",
+      "retained": "evidence/logs/owned-build/receipt.json",
+      "bytes": 818,
+      "sha256": "17ca51b7a799c63eac7d4c8822c3c542f2c5d17339d3d3c401b7c504bb41f2a7"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/owned-build/stderr.bin",
+      "retained": "evidence/logs/owned-build/stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/owned-build/stdout.bin",
+      "retained": "evidence/logs/owned-build/stdout.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/owned-cli/receipt.json",
+      "retained": "evidence/logs/owned-cli/receipt.json",
+      "bytes": 888,
+      "sha256": "8e00d527d9af38c7a2c57b65a453e2d506c7ad19636c0361b13bec0238c994c5"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/owned-cli/stderr.bin",
+      "retained": "evidence/logs/owned-cli/stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/owned-cli/stdout.bin",
+      "retained": "evidence/logs/owned-cli/stdout.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/owned-tests/receipt.json",
+      "retained": "evidence/logs/owned-tests/receipt.json",
+      "bytes": 811,
+      "sha256": "dadd4be0394a1ba2817a58b0f36be13bdf6e51c86ca5efa990642e3ace993c5d"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/owned-tests/stderr.bin",
+      "retained": "evidence/logs/owned-tests/stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/owned-tests/stdout.bin",
+      "retained": "evidence/logs/owned-tests/stdout.bin",
+      "bytes": 26004,
+      "sha256": "746c0336fe244125671d3dff87e1eb75b84792e434101225dbee34a3375b2eed"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/post-cleanup-inspect/receipt.json",
+      "retained": "evidence/logs/post-cleanup-inspect/receipt.json",
+      "bytes": 706,
+      "sha256": "339f9e3f8b77b0f422f58b6cc985608c533c8f0a0f3192874a24a5efdab63186"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/post-cleanup-inspect/stderr.bin",
+      "retained": "evidence/logs/post-cleanup-inspect/stderr.bin",
+      "bytes": 59,
+      "sha256": "f6fc26add1a12f463e3e45ea8ea31648a2884bf582b151f29d3ff1fa2cabfc67"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/post-cleanup-inspect/stdout.bin",
+      "retained": "evidence/logs/post-cleanup-inspect/stdout.bin",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/post-cleanup-list/receipt.json",
+      "retained": "evidence/logs/post-cleanup-list/receipt.json",
+      "bytes": 767,
+      "sha256": "f0e0e9bdcd310ac0f94ac76128b404769d496e2bed8b19b11c2fc6cf2c365894"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/post-cleanup-list/stderr.bin",
+      "retained": "evidence/logs/post-cleanup-list/stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/post-cleanup-list/stdout.bin",
+      "retained": "evidence/logs/post-cleanup-list/stdout.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/start/receipt.json",
+      "retained": "evidence/logs/start/receipt.json",
+      "bytes": 704,
+      "sha256": "c2dbc4cb066f4c964c6341a0d4c15cd3c0837a11735bc9e7806303b7f758d313"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/start/stderr.bin",
+      "retained": "evidence/logs/start/stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/start/stdout.bin",
+      "retained": "evidence/logs/start/stdout.bin",
+      "bytes": 36,
+      "sha256": "3a3c410f98f531e7e9b2566ef815d498d139fbfc3ccf6f2397a9a1eb7b018e3c"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/tools-after/receipt.json",
+      "retained": "evidence/logs/tools-after/receipt.json",
+      "bytes": 777,
+      "sha256": "b83211449b96cca3e64f7352482efb63efb9760e1f4f0ace31f0a83c7e2a949c"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/tools-after/stderr.bin",
+      "retained": "evidence/logs/tools-after/stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/tools-after/stdout.bin",
+      "retained": "evidence/logs/tools-after/stdout.bin",
+      "bytes": 87,
+      "sha256": "331065d57d5b4c6c5cbfe3af7cff29a3f45eade41d3a8192521c95e8f050f1f5"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/tools-before/receipt.json",
+      "retained": "evidence/logs/tools-before/receipt.json",
+      "bytes": 777,
+      "sha256": "600e5c0120b958d338dbe44491b75b56d950439fa8d662cd3d8b68440bc58a72"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/tools-before/stderr.bin",
+      "retained": "evidence/logs/tools-before/stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/logs/tools-before/stdout.bin",
+      "retained": "evidence/logs/tools-before/stdout.bin",
+      "bytes": 87,
+      "sha256": "331065d57d5b4c6c5cbfe3af7cff29a3f45eade41d3a8192521c95e8f050f1f5"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/module-after.json",
+      "retained": "evidence/module-after.json",
+      "bytes": 432,
+      "sha256": "b7d24c9fd43dc1276279d160515409b23790bdc862eacf50d139fb193b4babae"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/module-after.tar",
+      "retained": "evidence/module-after.tar",
+      "bytes": 30720,
+      "sha256": "af33dcecdafc632a0165e140cd020de6a55e1c23afaac8abdbaaf688ab7245eb"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/module-before.json",
+      "retained": "evidence/module-before.json",
+      "bytes": 432,
+      "sha256": "b7d24c9fd43dc1276279d160515409b23790bdc862eacf50d139fb193b4babae"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/module-before.tar",
+      "retained": "evidence/module-before.tar",
+      "bytes": 30720,
+      "sha256": "af33dcecdafc632a0165e140cd020de6a55e1c23afaac8abdbaaf688ab7245eb"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/received.json",
+      "retained": "evidence/received.json",
+      "bytes": 463,
+      "sha256": "1860a48fedc3cba5627b97cef343d3460dd7a9391e9d6fc1b02e7d108c33c99c"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/registry.gz",
+      "retained": "evidence/registry.gz",
+      "bytes": 526407,
+      "sha256": "f32b1a5f3c3e6a83f250e4940bc3d01e3cef425b5d1764d6d5fdcf65528c152c"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/result.json",
+      "retained": "evidence/result.json",
+      "bytes": 6265,
+      "sha256": "08f941de955708b48d10b3db79c3fc11d04bd0fa19e677b453ef76816d6f52ae"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/trace.json",
+      "retained": "evidence/trace.json",
+      "bytes": 18476,
+      "sha256": "94b7eaf014805071cc1e30301865065ea20d6c932f13f382f676ded9e83528ea"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-authorization-20261029-1/FREEZE.json",
+      "retained": "authorization/FREEZE.json",
+      "bytes": 219,
+      "sha256": "a24681a9df9ea9efa2802cf092c656985db04618f23e0e6da15e683b2eec6a22"
+    },
+    {
+      "source": "/private/tmp/dotrepo-go01-owned-registry-authorization-20261029-1/authorization.json",
+      "retained": "authorization/authorization.json",
+      "bytes": 3319,
+      "sha256": "e719ff5e43b4ab30209a6ae5735ea6ae59def07e449a4e0250c786eb3393d4c3"
+    },
+    {
+      "source": "/tmp/dotrepo-go01-owned-registry-driver-20261029-1.log",
+      "retained": "outer/driver.log",
+      "bytes": 6265,
+      "sha256": "08f941de955708b48d10b3db79c3fc11d04bd0fa19e677b453ef76816d6f52ae"
+    },
+    {
+      "source": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-runtime-20261029/FREEZE.json",
+      "retained": "bindings/runtime-freeze.json",
+      "bytes": 4030,
+      "sha256": "6f22704c8c02e71e0db0bf21e80c9ffd96ef1544242e07090ad32762987c6972"
+    },
+    {
+      "source": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-runtime-20261029/plan.json",
+      "retained": "bindings/runtime-plan.json",
+      "bytes": 7114,
+      "sha256": "29533c84b635a7244b1b0f022a6200c53c8f7ca628ff1fd64dd428a1249ddd96"
+    },
+    {
+      "source": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-20261029/amendment-1/FREEZE.json",
+      "retained": "bindings/helper-freeze.json",
+      "bytes": 2368,
+      "sha256": "e569edd4888a092aa46745d950614964ca86fc755637827fd9723fad0413da4d"
+    },
+    {
+      "source": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-20261029/amendment-1/plan.json",
+      "retained": "bindings/helper-plan.json",
+      "bytes": 10120,
+      "sha256": "74258ec831c551ad1b39a497ed09320c3824aa0be9a836fb3d076684f5703482"
+    },
+    {
+      "source": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-20261029/FREEZE.json",
+      "retained": "bindings/helper-base-freeze.json",
+      "bytes": 4589,
+      "sha256": "b2fd2550fd9ca1b5dc20774badfb77863e28236cc0535f11c6012a5aa6a0ab8d"
+    },
+    {
+      "source": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-review-20261029/amendment-1/passed-review.json",
+      "retained": "bindings/helper-passed-review.json",
+      "bytes": 1079,
+      "sha256": "63df2c64396548e63c776731b7eed7b8cdae002c0e6b9fb2ced6eb92264cd270"
+    },
+    {
+      "source": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-review-20261029/amendment-1/FREEZE.json",
+      "retained": "bindings/helper-review-freeze.json",
+      "bytes": 2572,
+      "sha256": "4b3af3c97af90e8912da0b3f42af8fa07db01a5dc55ae010574eead743e39bd9"
+    },
+    {
+      "source": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-runtime-review-20261029/passed-review.json",
+      "retained": "bindings/runtime-passed-review.json",
+      "bytes": 1076,
+      "sha256": "56fdd4bf15a51d186cfd23589d6daf2f5a0f3b155af35dcd09d0f986930a75a6"
+    },
+    {
+      "source": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-runtime-review-20261029/FREEZE.json",
+      "retained": "bindings/runtime-review-freeze.json",
+      "bytes": 1765,
+      "sha256": "851b2fada0d98bca7cf530a44a506c498cfea18c639be418b1947f023ccbc385"
+    },
+    {
+      "source": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-20261029/input-provenance.json",
+      "retained": "bindings/input-provenance.json",
+      "bytes": 865172,
+      "sha256": "1ee964532a3c2ec5554150ef374676891b16299e9f364c314127b8dc58ad9290"
+    },
+    {
+      "source": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-20261029/partial-listing-observations.json",
+      "retained": "bindings/partial-listing-observations.json",
+      "bytes": 46256,
+      "sha256": "4561ceba23a09eefbc1f0b0ec84f9888b188bde84738813834d8b3015d758301"
+    },
+    {
+      "source": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-20261029/amendment-1/read_registry.py",
+      "retained": "bindings/receiver/read_registry.py",
+      "bytes": 9931,
+      "sha256": "8db78d07712a763a61dc5ef38b0feec62af68f8cf20ce80ec977caa5d1bf2a4d"
+    },
+    {
+      "source": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-20261029/amendment-1/build_input.py",
+      "retained": "bindings/receiver/build_input.py",
+      "bytes": 12321,
+      "sha256": "7bd50e99c2adc6bb2dd8cc8c6038d9bfec99fc753f01288506d80604fe977b1e"
+    },
+    {
+      "source": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-20261029/amendment-1/crosscheck_registry.py",
+      "retained": "bindings/receiver/crosscheck_registry.py",
+      "bytes": 4096,
+      "sha256": "cd8edd14d484cb66f1b640a5f442f7de4342b6e860217c7266c51d75a856ab0e"
+    },
+    {
+      "retained": "bindings/native/package-inventory.json",
+      "bytes": 825987,
+      "sha256": "764fa272f1c461f4ecc2d6e2b58d641cc65c8e64da23f55981fa12b70c75bc21",
+      "source": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-collection-result-20261029/amendment-2/evidence/package-inventory.json"
+    },
+    {
+      "retained": "bindings/native/listing-stdout.bin",
+      "bytes": 127015,
+      "sha256": "3e35220c5d834daec10a374f21b7855e57da27d7788f1b83af123f6e5e55f202",
+      "source": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-collection-result-20261029/amendment-2/evidence/logs/go-test-list/stdout.bin"
+    },
+    {
+      "retained": "bindings/native/FREEZE.json",
+      "bytes": 11147,
+      "sha256": "f2588d3ee2bdee8c5b40d5f5a328d72dd07c0f093fd6e36904a9dcecec5256a2",
+      "source": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-collection-result-20261029/amendment-2/FREEZE.json"
+    }
+  ]
+}

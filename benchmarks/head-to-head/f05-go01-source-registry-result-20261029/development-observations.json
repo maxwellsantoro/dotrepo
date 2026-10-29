@@ -1,0 +1,25 @@
+{
+  "scope": "Local static result-verifier development only; original runtime receipts unchanged",
+  "failuresRetained": [
+    {
+      "stage": "new source-only verifier",
+      "error": "KeyError packageInventorySha256",
+      "disposition": "Provenance has no such key; exact inventory SHA bound explicitly then compared to native result freeze."
+    },
+    {
+      "stage": "new source-only verifier",
+      "error": "KeyError diagnostics",
+      "disposition": "Root output schema has no global diagnostics key; check empty global summary and per-package full rows instead."
+    },
+    {
+      "stage": "synthetic CRC-negative control",
+      "error": "Uncaught zlib.error incorrect data check",
+      "disposition": "CRC negative correctly rejected; control harness catches zlib.error as expected refusal."
+    },
+    {
+      "stage": "focused Ruff",
+      "error": "E402 import after disabling bytecode",
+      "disposition": "Explicit E402 marker added to owned control harness; behavior unchanged."
+    }
+  ]
+}

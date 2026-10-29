@@ -1,0 +1,7 @@
+{
+  "state": "reviewer optional inventory key assumption corrected before freeze",
+  "reason": "First raw review exited KeyError XTestGoFiles when counting optional Go inventory lists",
+  "correction": "Use get(field, []) for absent TestGoFiles/XTestGoFiles lists; no source or evidence changed",
+  "authorFinding": false,
+  "newRuntimeActions": 0
+}

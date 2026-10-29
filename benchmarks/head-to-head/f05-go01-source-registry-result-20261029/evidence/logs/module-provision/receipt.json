@@ -1,0 +1,29 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "-i",
+    "dotrepo-owned-registry-07a16bd85ec5",
+    "tar",
+    "--extract",
+    "--no-same-owner",
+    "-C",
+    "/workspace/owned-module"
+  ],
+  "startedAt": "2026-10-29T11:45:27.340750+00:00",
+  "elapsedSeconds": 0.05890845810063183,
+  "exitCode": 0,
+  "error": null,
+  "cancelled": false,
+  "stdinBytes": 30720,
+  "stdinSha256": "4a84fb5597a510b206ded2e354879131dcfde43f5362c7d59ff1f311c1f98f7a",
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "binaryPath": null,
+  "binaryBytes": null,
+  "binarySha256": null,
+  "costUsd": null,
+  "costExclusions": [
+    "No metered host/container/download dollar receipt; no provider calls."
+  ]
+}

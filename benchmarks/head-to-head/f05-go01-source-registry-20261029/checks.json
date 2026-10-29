@@ -1,0 +1,33 @@
+{
+  "state": "source-only-implementation-stable-independent-static-review-pending",
+  "helperSourceSha256": "4fb307747f1a87573afba8a920b90eef7eb3424558ed890d5fd6ddfbdeaaad8a",
+  "helperTestSourceSha256": "45444e3adadbd27c0c6620aa54d1f7cb73e0040711d2fb9c4b5ad96a9f0bac13",
+  "constructorSha256": "ee37dbefe64e65f61e4866dd2e01fa4b89f1f43bace807879708eacc3a36d893",
+  "planSha256": "49637b49865d50faf365833ea4d6ea986bf6dffd7de0a33687d9687db752d5c0",
+  "inputSha256": "0acd95252e7acfc23ce616d59125ebc98c0a7e4b079a789057e44a4479c88015",
+  "inputBytes": 21446036,
+  "selectionSha256": "3991848e78c757487dbe9146e7888db3dabe180bd5a9d353269855177266e308",
+  "packageCount": 104,
+  "selectedFiles": 4589,
+  "selectedBytes": 15262944,
+  "sourceAndInputHashesPassed": true,
+  "PythonConstructorControlsPassed": 22,
+  "PythonReceiverComparatorControlsPassed": 26,
+  "RuffCheckFormatPassed": true,
+  "hostGoFmtOwnedSourcesOnly": "passed;host-gofmt-receipt.json",
+  "GoCompilerRun": false,
+  "GoUnitTestsRun": false,
+  "GoHelperRun": false,
+  "partialCrosscheckAgainstHelperRun": false,
+  "nativeCollectionOccurred": false,
+  "taskOutcomeObserved": false,
+  "oracleQualified": false,
+  "collectionGateChanged": false,
+  "campaignAdmitted": false,
+  "costUsd": null,
+  "preservedPreparationRefusals": [
+    "Initial20000 archive-member cap too small for68062 retained files.",
+    "Whitespace paths in379 unselected baseline fixtures were over-restricted. No extraction or source pruning occurred."
+  ],
+  "reviewerContext": "Author knows prior source/development/results, not fresh blind exposure."
+}

@@ -1,0 +1,97 @@
+{
+  "state": "passed-python-data-controls",
+  "passed": 22,
+  "controls": [
+    {
+      "case": "genuine104 selected membership validated4589 test files",
+      "passed": true
+    },
+    {
+      "case": "reject module",
+      "passed": true
+    },
+    {
+      "case": "reject directory",
+      "passed": true
+    },
+    {
+      "case": "reject wrong identity",
+      "passed": true
+    },
+    {
+      "case": "reject error",
+      "passed": true
+    },
+    {
+      "case": "reject incomplete",
+      "passed": true
+    },
+    {
+      "case": "reject test traversal",
+      "passed": true
+    },
+    {
+      "case": "reject missing test",
+      "passed": true
+    },
+    {
+      "case": "reject null test list",
+      "passed": true
+    },
+    {
+      "case": "reject duplicate test",
+      "passed": true
+    },
+    {
+      "case": "reject cross field duplicate",
+      "passed": true
+    },
+    {
+      "case": "reject no selected source",
+      "passed": true
+    },
+    {
+      "case": "reject missing package",
+      "passed": true
+    },
+    {
+      "case": "reject duplicate JSON keys",
+      "passed": true
+    },
+    {
+      "case": "unselected ignored source not embedded",
+      "passed": true
+    },
+    {
+      "case": "unselected whitespace fixture paths remain valid archive data",
+      "passed": true
+    },
+    {
+      "case": "reject changed bytes",
+      "passed": true
+    },
+    {
+      "case": "reject missing selected",
+      "passed": true
+    },
+    {
+      "case": "reject unsafe member",
+      "passed": true
+    },
+    {
+      "case": "reject duplicate archive member",
+      "passed": true
+    },
+    {
+      "case": "reject nonutf8 selected",
+      "passed": true
+    },
+    {
+      "case": "selected per-file byte bound",
+      "passed": true
+    }
+  ],
+  "GoHelperBuiltOrRun": false,
+  "upstreamImportsOrExecution": false,
+  "nativeCollectionOccurred": false
+}

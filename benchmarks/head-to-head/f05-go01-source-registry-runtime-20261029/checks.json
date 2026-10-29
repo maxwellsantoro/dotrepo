@@ -1,0 +1,72 @@
+{
+  "state": "source-only focused checks passed; no runtime authorization",
+  "commands": [
+    {
+      "argv": [
+        "uv",
+        "run",
+        "python",
+        "-B",
+        "benchmarks/head-to-head/f05-go01-source-registry-runtime-20261029/make_plan.py"
+      ],
+      "exitCode": 0,
+      "planSha256": "29533c84b635a7244b1b0f022a6200c53c8f7ca628ff1fd64dd428a1249ddd96"
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "python",
+        "-B",
+        "benchmarks/head-to-head/f05-go01-source-registry-runtime-20261029/controls.py"
+      ],
+      "exitCode": 0,
+      "stdout": "controls.final.json",
+      "lifecycleCases": 14,
+      "authorizationShapeCases": 11
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "python",
+        "-B",
+        "benchmarks/head-to-head/f05-go01-source-registry-runtime-20261029/transport_controls.py"
+      ],
+      "exitCode": 0,
+      "stdout": "transport-controls.final.json",
+      "fakeProcessCases": 5
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "ruff",
+        "check",
+        "--no-cache",
+        "benchmarks/head-to-head/f05-go01-source-registry-runtime-20261029"
+      ],
+      "exitCode": 0
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "ruff",
+        "format",
+        "--check",
+        "--no-cache",
+        "benchmarks/head-to-head/f05-go01-source-registry-runtime-20261029"
+      ],
+      "exitCode": 0,
+      "formattedPythonFiles": 5
+    }
+  ],
+  "developmentFailures": "development-failures.json; retained before plans/source and earlier control receipts remain unfrozen development history until this packet freeze.",
+  "additionalNativeGoNodeDaemonNetworkProviderActions": 0,
+  "ownedGoTestsExecuted": false,
+  "helperCLIExecuted": false,
+  "independentRuntimeReview": "pending",
+  "helperReview": "pending outside current author closure",
+  "allExecutionAndTargetAdmissionFlags": false
+}

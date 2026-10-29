@@ -1,0 +1,191 @@
+{
+  "cases": [
+    {
+      "actualAccepted": false,
+      "case": "selected wrong package",
+      "expectedAccepted": false
+    },
+    {
+      "actualAccepted": false,
+      "case": "empty source",
+      "expectedAccepted": false
+    },
+    {
+      "actualAccepted": false,
+      "case": "traversal",
+      "expectedAccepted": false
+    },
+    {
+      "actualAccepted": false,
+      "case": "globally selected but different package",
+      "expectedAccepted": false
+    },
+    {
+      "actualAccepted": true,
+      "case": "path-omitted diagnostic unknown-but-retained",
+      "expectedAccepted": true
+    },
+    {
+      "actualAccepted": true,
+      "case": "path-omitted diagnostic multiple-testmain-unresolved",
+      "expectedAccepted": true
+    },
+    {
+      "actualAccepted": false,
+      "case": "diagnostic code None",
+      "expectedAccepted": false
+    },
+    {
+      "actualAccepted": false,
+      "case": "diagnostic code 0",
+      "expectedAccepted": false
+    },
+    {
+      "actualAccepted": false,
+      "case": "diagnostic code False",
+      "expectedAccepted": false
+    },
+    {
+      "actualAccepted": false,
+      "case": "diagnostic code []",
+      "expectedAccepted": false
+    },
+    {
+      "actualAccepted": false,
+      "case": "diagnostic code {}",
+      "expectedAccepted": false
+    },
+    {
+      "actualAccepted": false,
+      "case": "diagnostic message None",
+      "expectedAccepted": false
+    },
+    {
+      "actualAccepted": false,
+      "case": "diagnostic message 0",
+      "expectedAccepted": false
+    },
+    {
+      "actualAccepted": false,
+      "case": "diagnostic message False",
+      "expectedAccepted": false
+    },
+    {
+      "actualAccepted": false,
+      "case": "diagnostic message []",
+      "expectedAccepted": false
+    },
+    {
+      "actualAccepted": false,
+      "case": "diagnostic message {}",
+      "expectedAccepted": false
+    },
+    {
+      "actualAccepted": false,
+      "case": "literal boolean required emptyOutput 0",
+      "expectedAccepted": false
+    },
+    {
+      "actualAccepted": false,
+      "case": "literal boolean required emptyOutput 1",
+      "expectedAccepted": false
+    },
+    {
+      "actualAccepted": false,
+      "case": "literal boolean required emptyOutput 'false'",
+      "expectedAccepted": false
+    },
+    {
+      "actualAccepted": false,
+      "case": "literal boolean required emptyOutput None",
+      "expectedAccepted": false
+    },
+    {
+      "actualAccepted": true,
+      "case": "literal boolean accepted emptyOutput False",
+      "expectedAccepted": true
+    },
+    {
+      "actualAccepted": true,
+      "case": "literal boolean accepted emptyOutput True",
+      "expectedAccepted": true
+    },
+    {
+      "actualAccepted": false,
+      "case": "literal boolean required unordered 0",
+      "expectedAccepted": false
+    },
+    {
+      "actualAccepted": false,
+      "case": "literal boolean required unordered 1",
+      "expectedAccepted": false
+    },
+    {
+      "actualAccepted": false,
+      "case": "literal boolean required unordered 'false'",
+      "expectedAccepted": false
+    },
+    {
+      "actualAccepted": false,
+      "case": "literal boolean required unordered None",
+      "expectedAccepted": false
+    },
+    {
+      "actualAccepted": true,
+      "case": "literal boolean accepted unordered False",
+      "expectedAccepted": true
+    },
+    {
+      "actualAccepted": true,
+      "case": "literal boolean accepted unordered True",
+      "expectedAccepted": true
+    },
+    {
+      "actualAccepted": false,
+      "case": "strict JSON {\"v\":NaN}",
+      "expectedAccepted": false
+    },
+    {
+      "actualAccepted": false,
+      "case": "strict JSON {\"v\":Infinity}",
+      "expectedAccepted": false
+    },
+    {
+      "actualAccepted": false,
+      "case": "strict JSON {\"v\":-Infinity}",
+      "expectedAccepted": false
+    },
+    {
+      "actualAccepted": false,
+      "case": "strict JSON {\"v\":1e999}",
+      "expectedAccepted": false
+    },
+    {
+      "actualAccepted": false,
+      "case": "strict JSON {\"v\":-1e999}",
+      "expectedAccepted": false
+    },
+    {
+      "actualAccepted": false,
+      "case": "strict JSON {\"v\":0,\"v\":1}",
+      "expectedAccepted": false
+    },
+    {
+      "actualAccepted": true,
+      "case": "finite JSON {\"v\":0}",
+      "expectedAccepted": true
+    },
+    {
+      "actualAccepted": true,
+      "case": "finite JSON {\"v\":false}",
+      "expectedAccepted": true
+    },
+    {
+      "actualAccepted": true,
+      "case": "finite JSON {\"v\":1.5}",
+      "expectedAccepted": true
+    }
+  ],
+  "fixtureDisclosure": "Owned Python shapes; no Go-produced observations",
+  "passed": 37
+}

@@ -1,0 +1,65 @@
+{
+  "artifacts": {
+    "README.md": {
+      "bytes": 3273,
+      "sha256": "d2ac6e00359009dd9622196cc5649efae333bde52e42711ed608df7351afad87"
+    },
+    "author-controls-replay.json": {
+      "bytes": 1562,
+      "sha256": "4d78f96e6b503365fb9d9367491f878126cbe682dd9a4c3109eb4ccbcd22f87a"
+    },
+    "author-verifier-replay.json": {
+      "bytes": 987,
+      "sha256": "38994a86be54c845ecacd25b28fe57e9563c50de5715a21e06a7ae81a1f985e3"
+    },
+    "independent-partial-comparison.json": {
+      "bytes": 7170,
+      "sha256": "4f5e4d0ace1da76ac09f397b12147d5e08c7c1a6c3d2b8078af0d2cc486a8d1d"
+    },
+    "observation-controls.json": {
+      "bytes": 1210,
+      "sha256": "fe8d2cb5ac4a81c57e352388090dbde2cbed86726d767fb157ef75eb27de0b32"
+    },
+    "observation_controls.py": {
+      "bytes": 6494,
+      "sha256": "9080c1b5ee1eae3ae8352eeb5f9271e193503be79b1850aa2e0e47795c975b9c"
+    },
+    "package-verification.json": {
+      "bytes": 1766,
+      "sha256": "fb961d262976e7c41f46ac5480c476146031254f264967e0156fef7df6bd6cc9"
+    },
+    "raw-verification.json": {
+      "bytes": 2512,
+      "sha256": "432413af8014a18361c8927190d29eadc52e5cc9a16f4daea2b9f94a8267cca4"
+    },
+    "review.json": {
+      "bytes": 5385,
+      "sha256": "d0025dc20509e55b5360eb1bd6d84e241f92ea63ffb3a09130742901885d1e46"
+    },
+    "review_raw.py": {
+      "bytes": 13206,
+      "sha256": "8a62d822adf1bde563f6826ba0fb9d80c4c019590d2aedf2f32b8c9db6bb2be0"
+    },
+    "reviewer-harness-correction.json": {
+      "bytes": 350,
+      "sha256": "98503c287814095245e1babe644f131e2c9bc92bd0cecd56ffaf7556af79956d"
+    }
+  },
+  "campaignAdmitted": false,
+  "executionAuthorized": false,
+  "findings": [],
+  "nativeCollectionOccurred": false,
+  "oracleQualified": false,
+  "reviewerNewRuntimeActions": 0,
+  "state": "independent-owned-source-registry-observation-review-passed-unqualified",
+  "subject": {
+    "helperAuthorFreezeSha256": "e569edd4888a092aa46745d950614964ca86fc755637827fd9723fad0413da4d",
+    "helperPlanSha256": "74258ec831c551ad1b39a497ed09320c3824aa0be9a836fb3d076684f5703482",
+    "rawAttemptFreezeSha256": "1ea59ba97218067be4bef04852d2063a25063531b6ceca0de88c83a6d07f5770",
+    "resultAuthorFreezeSha256": "3a9e3bb1df382a45109dd0a38327c333188cf6faf12d6caf9ecf4bb83689cc8a",
+    "runtimeAuthorFreezeSha256": "6f22704c8c02e71e0db0bf21e80c9ffd96ef1544242e07090ad32762987c6972",
+    "runtimePlanSha256": "29533c84b635a7244b1b0f022a6200c53c8f7ca628ff1fd64dd428a1249ddd96"
+  },
+  "targetCompileValidityEstablished": false,
+  "taskOutcomeObserved": false
+}

@@ -1,0 +1,61 @@
+{
+  "GoCompilationOrTestsOrCLIExecutedByReviewer": false,
+  "authorArtifactsUnchanged": 33,
+  "constructorRebuildExact": true,
+  "helperTargetBytesParsedAsDataOnly": true,
+  "hostGofmtBinaryHashMatchesReceipt": true,
+  "hostGofmtIsNotGo1273Qualification": true,
+  "imports": {
+    "registry.go": [
+      "bytes",
+      "compress/gzip",
+      "crypto/sha256",
+      "encoding/hex",
+      "encoding/json",
+      "fmt",
+      "go/ast",
+      "go/doc",
+      "go/parser",
+      "go/token",
+      "io",
+      "os",
+      "path",
+      "runtime",
+      "sort",
+      "strings",
+      "unicode",
+      "unicode/utf8"
+    ],
+    "registry_test.go": [
+      "bytes",
+      "compress/gzip",
+      "encoding/json",
+      "io",
+      "strings",
+      "testing"
+    ]
+  },
+  "inputBytes": 21446036,
+  "inputSha256": "0acd95252e7acfc23ce616d59125ebc98c0a7e4b079a789057e44a4479c88015",
+  "packages": 104,
+  "partialNativeCounts": {
+    "fail": 61,
+    "pass": 25,
+    "skip": 18
+  },
+  "primarySources": [
+    {
+      "bytes": 27414,
+      "path": "usr/local/go/src/cmd/go/internal/load/test.go",
+      "sha256": "390bda50ce1c632b32cca052b58c85f74054f4bec1ba4c68832eca440059f6d8"
+    },
+    {
+      "bytes": 22320,
+      "path": "usr/local/go/src/go/doc/example.go",
+      "sha256": "f4b795cd8b968ea48d5363777766b556697c786b808f7f384549fc0abda5a47f"
+    }
+  ],
+  "selectedBytes": 15262944,
+  "selectedFiles": 4589,
+  "state": "static source/input closure verified with one receiver finding retained"
+}

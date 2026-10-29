@@ -1,0 +1,1364 @@
+{
+  "state": "source-derived-uncompiled",
+  "globalDiagnostics": [],
+  "diagnosticCount": 0,
+  "packages": [
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/cmd/tsc",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 1,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/api",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 116,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/api/encoder",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 28,
+        "benchmarks": 3,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 1
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/api/requestfilesystem",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 126,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/ast",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 24,
+        "benchmarks": 8,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/astnav",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 5,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 1
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/binder",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 1,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/bundled",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 2,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/checker",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 24,
+        "benchmarks": 5,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/collections",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 9,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/compiler",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 20,
+        "benchmarks": 4,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/contentmapper",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 32,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/core",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 5,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/debug",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 12,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/diagnostics",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 5,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/diagnosticwriter",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/evaluator",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/execute",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/execute/build",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 5,
+        "benchmarks": 1,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/execute/incremental",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 16,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/execute/tsc",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 4,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/execute/tsctests",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 83,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 1
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/execute/watchmanager",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 12,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/format",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 7,
+        "benchmarks": 1,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/fourslash",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 4571,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 1
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests/util",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/fswatch",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 116,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/glob",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/ipc",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 17,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/jsnum",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 15,
+        "benchmarks": 2,
+        "fuzzTargets": 2,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/json",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/jsonrpc",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/locale",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/ls",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 9,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/ls/autoimport",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 13,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 1
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/ls/change",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 1,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/ls/lsconv",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 6,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/ls/lsutil",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 13,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/lsp",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 36,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 1
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 31,
+        "benchmarks": 1,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/lsp/lspwatcher",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 16,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/module",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 38,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/modulespecifiers",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 10,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/nativepath",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 1,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/nodebuilder",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/osutil",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/outputpaths",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 6,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/packagejson",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 7,
+        "benchmarks": 1,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/parser",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 11,
+        "benchmarks": 1,
+        "fuzzTargets": 1,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/pprof",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/printer",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 106,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/project",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 103,
+        "benchmarks": 1,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 1
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 4,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 1
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/project/background",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 1,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/project/dirty",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 1,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/project/logging",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 2,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/pseudochecker",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/repo",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/scanner",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 5,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/semver",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 11,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/sourcemap",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 42,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/spanmap",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 31,
+        "benchmarks": 1,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/stringutil",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 2,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/symlinks",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 9,
+        "benchmarks": 5,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/testrunner",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 4,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 1
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/testutil",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/testutil/autoimporttestutil",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/testutil/baseline",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/testutil/contentmappertest",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 1,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 1
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/testutil/emittestutil",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/testutil/filefixture",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/testutil/fixtures",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/testutil/fsbaselineutil",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/testutil/harnessutil",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/testutil/jstest",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/testutil/lsptestutil",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/testutil/parsetestutil",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/testutil/projecttestutil",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/testutil/race",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/testutil/stringtestutil",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/testutil/tsbaseline",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/tracing",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 2,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/transformers",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/transformers/declarations",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/transformers/estransforms",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/transformers/inliners",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/transformers/jsxtransforms",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/transformers/moduletransforms",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/transformers/tstransforms",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 2,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/transpile",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 3,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/tsoptions",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 62,
+        "benchmarks": 1,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 1
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/tsoptions/tsoptionstest",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/tspath",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 61,
+        "benchmarks": 7,
+        "fuzzTargets": 3,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/vfs",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 8,
+        "benchmarks": 1,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/vfs/cachedvfs",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 9,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/vfs/internal",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/vfs/iovfs",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 1,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/vfs/osvfs",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 4,
+        "benchmarks": 1,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/vfs/trackingvfs",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmatch",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 20,
+        "benchmarks": 3,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmock",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 1,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/vfs/vfstest",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 18,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    },
+    {
+      "importPath": "github.com/microsoft/TypeScript/tsc/internal/vfs/wrapvfs",
+      "state": "source-derived-uncompiled",
+      "compileValidityUnestablished": true,
+      "declarationCounts": {
+        "tests": 0,
+        "benchmarks": 0,
+        "fuzzTargets": 0,
+        "examples": 0,
+        "testMains": 0
+      },
+      "diagnostics": []
+    }
+  ],
+  "allCompileValidityUnestablished": true,
+  "nativeCollectionOccurred": false,
+  "taskOutcomeObserved": false,
+  "oracleQualified": false,
+  "campaignAdmitted": false
+}

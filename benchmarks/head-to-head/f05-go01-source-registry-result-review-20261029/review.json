@@ -1,0 +1,95 @@
+{
+  "cacheGloballyQualified": false,
+  "campaignAdmitted": false,
+  "checks": {
+    "authorSourceOnlyVerifierReplay": "passed",
+    "authorSyntheticMutationCasesReplayedInIsolatedCopy": 9,
+    "independentObservationMutationAndIsolationChecks": 11,
+    "ruffCheck": "passed --no-cache",
+    "ruffFormat": "passed --check --no-cache"
+  },
+  "cleanup": "Retained same-attempt force-removal plus missing-object inspect and responsive empty name listing confirm absence within that attempt. No separate independent absence query/receipt was made.",
+  "collectionGateChanged": false,
+  "compilationBoundary": "Exactly three owned module files provisioned: go.mod was parsed, two owned Go source files and needed standard-library packages compiled. Target source was JSON/base64 stdin data only, never compiled or executed by this helper attempt.",
+  "effort": {
+    "actualAttemptCleanupSeconds": 0.21799820801243186,
+    "actualAttemptCostUsd": null,
+    "actualAttemptDaemonCalls": 18,
+    "actualAttemptElapsedSeconds": 12.74485570890829,
+    "actualAttemptOutputBytesIncludingBinary": 632428,
+    "actualAttemptProviderCalls": 0,
+    "actualAttemptStdinBytes": 21476756,
+    "reviewerNewGoDockerNodeNetworkProviderActions": 0,
+    "unallocated": "Image/source/preparation/model/review/maintenance effort and dollar costs remain unmeasured/unallocated; no consumer savings claim."
+  },
+  "executionAuthorized": false,
+  "findings": [],
+  "harnessCorrection": "Reviewer initially assumed optional XTestGoFiles existed in every accepted package row; corrected to get(field,[]) before completion, retained separately. No author/evidence defect.",
+  "limitations": [
+    "A no-diagnostic source-derived registry is not proof of semantic completeness, typing, successful target compile or runtime behavior.",
+    "No dynamic child/fuzz-seed/runtime skip/capability/assertion behavior or proof TestMain invokes m.Run established.",
+    "All61 prior failed target packages remain source-only and unvalidated live; prior failed attempts unchanged.",
+    "Module/tool before-after hashes establish sampled retained boundaries; no universal tracing of every compiler/tool operation is claimed.",
+    "Original outer process argv receipt is unavailable; retained outer log equals final result, coordinator handoff is labeled metadata.",
+    "Bounded observation review does not replace original native collection/oracle gate or authorize further execution."
+  ],
+  "nativeCollectionOccurred": false,
+  "nativeTaskExecuted": false,
+  "observations": {
+    "GoToolHashBeforeAfterMatched": true,
+    "diagnostics": [],
+    "expandedBytes": 2263226,
+    "inputSha256": "0acd95252e7acfc23ce616d59125ebc98c0a7e4b079a789057e44a4479c88015",
+    "isolationBeforeAfterVerified": true,
+    "kinds": {
+      "benchmark": 48,
+      "example": 0,
+      "fuzz": 6,
+      "test": 5966,
+      "testMain": 11
+    },
+    "ownedCLIExit": 0,
+    "ownedTestSourceChildren": 21,
+    "ownedTestSourceTopLevels": 8,
+    "ownedToolTestsPassed": 29,
+    "physicalDeclarationFunctionOffsetsLinesColumnsChecked": 6031,
+    "registryDeclarations": 6031,
+    "registryExpandedSha256": "4a25d7781c7aa9626ead71ca13bce863f3ab389b10f52b23d5fffeb11a848ad8",
+    "registryPackages": 104,
+    "registryWireSha256": "f32b1a5f3c3e6a83f250e4940bc3d01e3cef425b5d1764d6d5fdcf65528c152c",
+    "sourceFilesDecodedAndHashed": 4589,
+    "sourceModuleBeforeAfterMatched": true,
+    "wireBytes": 526407
+  },
+  "oracleQualified": false,
+  "ownedToolObservationEstablished": true,
+  "partialComparison": {
+    "differences": [],
+    "failedPackagesStillSourceOnly": 61,
+    "independentlyReconstructedNativeEvents": 732,
+    "matchedListingPass": 25,
+    "matchedNoTestDiagnostic": 18,
+    "scope": "Prior listing observations only; listing-pass is not test-body pass. No complete target collection manifest or target compile validity is established."
+  },
+  "preservation": {
+    "currentRuntimeHelperReviewsAndAuthorizationSubjectsVerified": true,
+    "originCopiesIndependentlyByteCompared": 84,
+    "packagedArtifactsVerified": 96,
+    "priorNativeFailureFreezeVerified": "f2588d3ee2bdee8c5b40d5f5a328d72dd07c0f093fd6e36904a9dcecec5256a2",
+    "rawPayloadCopiesIndependentlyByteCompared": 63,
+    "rawReceiptTripletsVerified": 18
+  },
+  "reviewContext": "Reviewer authored the source plan/projection and helper static review, with extensive earlier qualification/review context. Reviewer did not author the helper/runtime/result implementations or conduct this actual attempt. Independent result/code/data review, not fresh blind task or consumer trial.",
+  "state": "independent-owned-source-registry-observation-review-passed-unqualified",
+  "subject": {
+    "helperAuthorFreezeSha256": "e569edd4888a092aa46745d950614964ca86fc755637827fd9723fad0413da4d",
+    "helperPlanSha256": "74258ec831c551ad1b39a497ed09320c3824aa0be9a836fb3d076684f5703482",
+    "rawAttemptFreezeSha256": "1ea59ba97218067be4bef04852d2063a25063531b6ceca0de88c83a6d07f5770",
+    "resultAuthorFreezeSha256": "3a9e3bb1df382a45109dd0a38327c333188cf6faf12d6caf9ecf4bb83689cc8a",
+    "runtimeAuthorFreezeSha256": "6f22704c8c02e71e0db0bf21e80c9ffd96ef1544242e07090ad32762987c6972",
+    "runtimePlanSha256": "29533c84b635a7244b1b0f022a6200c53c8f7ca628ff1fd64dd428a1249ddd96"
+  },
+  "synthetic": false,
+  "targetCompileValidityEstablished": false,
+  "taskOutcomeObserved": false
+}
