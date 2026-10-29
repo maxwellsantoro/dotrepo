@@ -39,6 +39,7 @@ def synthetic_runs() -> list[dict]:
                     "networkRequests": 12,
                     "networkBytes": 40000,
                     "tokensUsed": 1200,
+                    "tokenUsageComplete": True,
                     "adjudicationCalls": 2,
                     "cpuTimeMs": 500,
                     "peakMemoryBytes": 120_000_000,
@@ -190,3 +191,32 @@ def test_main_writes_json_and_markdown_outputs(tmp_path: Path) -> None:
     payload = json.loads(output_json.read_text())
     assert payload["schema"] == "dotrepo/unit-cost-report/v0.1"
     assert output_md.read_text().startswith("# Autonomous Crawl Unit-Cost Report")
+
+
+def test_legacy_called_zero_is_not_an_actual_zero_usage_sample():
+    report = unit_cost.build_report(
+        [
+            {
+                "crawls": [
+                    {"category": "changed", "tokensUsed": 0, "adjudicationCalls": 1},
+                    {
+                        "category": "changed",
+                        "tokensUsed": None,
+                        "adjudicationCalls": 1,
+                        "tokenUsageComplete": False,
+                    },
+                    {
+                        "category": "changed",
+                        "tokensUsed": 0,
+                        "adjudicationCalls": 1,
+                        "tokenUsageComplete": True,
+                    },
+                ]
+            }
+        ]
+    )
+    assert report["categories"]["changed"]["tokensUsed"] == {
+        "mean": 0.0,
+        "sampled": 1,
+        "unknown": 2,
+    }

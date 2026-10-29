@@ -76,7 +76,7 @@ struct AdjudicationHttpResponse {
 struct AdjudicationHttpError {
     error: String,
     #[serde(default)]
-    tokens_used: u64,
+    tokens_used: Option<u64>,
 }
 
 impl AdjudicationProvider for HttpAdjudicationProvider {
@@ -113,7 +113,7 @@ impl AdjudicationProvider for HttpAdjudicationProvider {
             let status = response.status();
             let failure = response.json::<AdjudicationHttpError>().ok();
             return Err(AdjudicationProviderError {
-                tokens_used: failure.as_ref().map_or(0, |error| error.tokens_used),
+                tokens_used: failure.as_ref().and_then(|error| error.tokens_used),
                 message: format!(
                     "adjudication provider {} returned {}: {}",
                     self.endpoint,
@@ -141,7 +141,7 @@ impl AdjudicationProvider for HttpAdjudicationProvider {
                 reason: response.reason,
                 source: response.source,
             },
-            tokens_used: response.tokens_used.unwrap_or(0),
+            tokens_used: response.tokens_used,
         })
     }
 }
@@ -267,5 +267,80 @@ mod context_transport_tests {
         assert_eq!(response.citations, vec!["citation"]);
         let response:AdjudicationHttpResponse=serde_json::from_value(serde_json::json!({"field":"repo.test","value":"cargo test","confidence":"medium","source":"CONTRIBUTING.md","reason":"legacy"})).unwrap();
         assert!(response.citations.is_empty());
+    }
+}
+
+#[cfg(test)]
+mod usage_transport_tests {
+    use super::*;
+    use std::io::{BufRead, BufReader, Read, Write};
+    use std::net::TcpListener;
+
+    #[test]
+    fn http_success_and_failure_preserve_missing_null_zero_and_measured_usage() {
+        for success in [true, false] {
+            for (token_field, expected) in [
+                ("", None),
+                (",\"tokensUsed\":null", None),
+                (",\"tokensUsed\":0", Some(0)),
+                (",\"tokensUsed\":120", Some(120)),
+            ] {
+                let listener = TcpListener::bind("127.0.0.1:0").unwrap();
+                let endpoint = format!("http://{}", listener.local_addr().unwrap());
+                let body = if success {
+                    format!(
+                        r#"{{"field":"repo.build","value":null,"confidence":"low","reason":"owned","source":null{token_field}}}"#
+                    )
+                } else {
+                    format!(r#"{{"error":"owned failure"{token_field}}}"#)
+                };
+                let server = std::thread::spawn(move || {
+                    let (mut stream, _) = listener.accept().unwrap();
+                    stream
+                        .set_read_timeout(Some(Duration::from_secs(5)))
+                        .unwrap();
+                    let mut reader = BufReader::new(&stream);
+                    let mut length = 0;
+                    loop {
+                        let mut line = String::new();
+                        reader.read_line(&mut line).unwrap();
+                        if line == "\r\n" {
+                            break;
+                        }
+                        if let Some(value) =
+                            line.to_ascii_lowercase().strip_prefix("content-length:")
+                        {
+                            length = value.trim().parse::<usize>().unwrap();
+                        }
+                    }
+                    reader.read_exact(&mut vec![0; length]).unwrap();
+                    let status = if success { "200 OK" } else { "502 Bad Gateway" };
+                    write!(stream, "HTTP/1.1 {status}\r\nContent-Type: application/json\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{body}", body.len()).unwrap();
+                });
+                let provider = HttpAdjudicationProvider::new(
+                    endpoint,
+                    AdjudicationTier::LocalPrimary,
+                    "owned",
+                    None,
+                    None,
+                )
+                .unwrap();
+                let result = provider.adjudicate(&AdjudicationRequest {
+                    field: "repo.build".into(),
+                    candidates: vec![],
+                });
+                let usage = if success {
+                    result.unwrap().tokens_used
+                } else {
+                    result
+                        .unwrap_err()
+                        .downcast_ref::<AdjudicationProviderError>()
+                        .unwrap()
+                        .tokens_used
+                };
+                assert_eq!(usage, expected);
+                server.join().unwrap();
+            }
+        }
     }
 }

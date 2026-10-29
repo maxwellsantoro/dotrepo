@@ -74,8 +74,15 @@ def build_completion_body(
 
 def completion_usage(payload: dict[str, Any]) -> dict[str, Any]:
     """Retain usage before parsing an answer, including billed unusable answers."""
-    usage = payload.get("usage") or {}
-    choice = (payload.get("choices") or [{}])[0]
+    usage = payload.get("usage")
+    usage = usage if isinstance(usage, dict) else {}
+    choices = payload.get("choices")
+    choice = choices[0] if isinstance(choices, list) and choices else {}
+    choice = choice if isinstance(choice, dict) else {}
+    total = usage.get("total_tokens")
+    total = total if type(total) is int and total >= 0 else None
+    details = usage.get("completion_tokens_details")
+    details = details if isinstance(details, dict) else {}
     return {
         "generationId": payload.get("id"),
         "model": payload.get("model"),
@@ -83,8 +90,9 @@ def completion_usage(payload: dict[str, Any]) -> dict[str, Any]:
         "finishReason": choice.get("finish_reason"),
         "promptTokens": usage.get("prompt_tokens"),
         "completionTokens": usage.get("completion_tokens"),
-        "reasoningTokens": (usage.get("completion_tokens_details") or {}).get("reasoning_tokens"),
-        "tokensUsed": int(usage.get("total_tokens") or 0),
+        "reasoningTokens": details.get("reasoning_tokens"),
+        "tokensUsed": total,
+        "tokenUsageComplete": total is not None,
         "cost": usage.get("cost"),
     }
 

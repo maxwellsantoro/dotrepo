@@ -1,0 +1,279 @@
+{
+  "actions": {
+    "accountSettingsRead": false,
+    "comparisonExecuted": false,
+    "inferenceCalls": 0,
+    "routeChanges": false,
+    "secretValuesRead": false
+  },
+  "families": [
+    {
+      "apiModes": [
+        "OpenRouter chat/completions (existing adapter)",
+        "OpenAI Responses (documented alternative; not this sidecar)"
+      ],
+      "directId": "gpt-6-luna",
+      "family": "Luna",
+      "identityLimit": "Existing policy resolves this concrete candidate; generic coding-agent Luna aliases are not API identity proof.",
+      "openRouterId": "openai/gpt-6-luna",
+      "priceScope": "OpenAI catalog standard list price; local OpenRouter maximum uses same input/output values",
+      "repositoryRole": "default primary, not evidence of a live configured service",
+      "requestPolicy": {
+        "maxTokens": 4096,
+        "reasoning": {
+          "effort": "low"
+        },
+        "temperature": null
+      },
+      "sources": [
+        "openai-models",
+        "openai-data",
+        "router:openai/gpt-6-luna"
+      ],
+      "usdPerMillion": {
+        "cachedInput": null,
+        "input": 0.1,
+        "output": 0.5
+      }
+    },
+    {
+      "apiModes": [
+        "OpenRouter chat/completions candidate",
+        "OpenAI Responses (documented alternative)"
+      ],
+      "directId": "gpt-6.1-terra",
+      "family": "Terra",
+      "identityLimit": "Current official catalog supplies this candidate, but bare Terra does not freeze a version or uniquely establish user intent; explicit choice remains.",
+      "openRouterId": "openai/gpt-6.1-terra",
+      "priceScope": "OpenAI catalog standard list price, not an accepted budget or actual OpenRouter charge",
+      "repositoryRole": "absent from reviewed request policies and retained canaries",
+      "requestPolicy": null,
+      "sources": [
+        "openai-models",
+        "openai-data",
+        "router:openai/gpt-6.1-terra"
+      ],
+      "usdPerMillion": {
+        "cachedInput": null,
+        "input": 1,
+        "output": 5
+      }
+    },
+    {
+      "apiModes": [
+        "OpenRouter chat/completions candidate",
+        "Meta Responses, Chat Completions or Messages (documented alternatives)"
+      ],
+      "directId": "muse-spark-1.3-contributor",
+      "family": "Muse Spark Contributor",
+      "identityLimit": "1.3 is the concrete retained candidate, not an invented equivalence with all Muse/Contributor versions.",
+      "openRouterId": "meta/muse-spark-1.3-contributor",
+      "priceScope": "Meta Contributor standard price; not Standard tier terms or account permission",
+      "repositoryRole": "retained October 4 compatibility attempt; blocked before inference by account training restriction; excluded from active sample",
+      "requestPolicy": null,
+      "sources": [
+        "meta-models",
+        "meta-prices",
+        "meta-overview",
+        "router:meta/muse-spark-1.3-contributor"
+      ],
+      "usdPerMillion": {
+        "cachedInput": 0.002,
+        "input": 0.1,
+        "output": 0.2
+      }
+    },
+    {
+      "apiModes": [
+        "OpenRouter chat/completions (existing adapter)",
+        "Alibaba Model Studio (direct region/base/API not selected here)"
+      ],
+      "directId": "qwen3.8-flash",
+      "family": "Qwen",
+      "identityLimit": "Broad Qwen family remains ambiguous beyond the existing concrete Flash route.",
+      "openRouterId": "qwen/qwen3.8-flash",
+      "priceScope": "Singapore International direct rate and published OpenRouter page; other direct regions differ",
+      "repositoryRole": "default second opinion",
+      "requestPolicy": {
+        "maxTokens": 4096,
+        "reasoning": {
+          "max_tokens": 1024
+        },
+        "temperature": 0
+      },
+      "sources": [
+        "qwen-model",
+        "qwen-retention",
+        "router:qwen/qwen3.8-flash"
+      ],
+      "usdPerMillion": {
+        "cachedInput": 0.016,
+        "input": 0.15,
+        "output": 0.47
+      }
+    },
+    {
+      "apiModes": [
+        "OpenRouter chat/completions (existing adapter)",
+        "Z.AI Chat Completion (documented alternative)"
+      ],
+      "directId": "glm-5.3-flash",
+      "family": "GLM",
+      "identityLimit": "Broad GLM family remains ambiguous beyond the existing concrete Flash route.",
+      "openRouterId": "z-ai/glm-5.3-flash",
+      "priceScope": "Z.AI direct standard rate; local OpenRouter ceiling matches. OpenRouter advertised provider minima are dynamic and are not frozen billed rates.",
+      "repositoryRole": "default tail",
+      "requestPolicy": {
+        "maxTokens": 8192,
+        "reasoning": {
+          "effort": "high"
+        },
+        "temperature": 0
+      },
+      "sources": [
+        "glm-model",
+        "glm-prices",
+        "glm-data",
+        "router:z-ai/glm-5.3-flash"
+      ],
+      "usdPerMillion": {
+        "cachedInput": 0.03,
+        "input": 0.15,
+        "output": 0.5
+      }
+    }
+  ],
+  "finiteGaps": [
+    "Explicit candidate/version and direct-vs-OpenRouter route selection, especially Terra and broad Qwen/GLM names",
+    "Account/provider/privacy eligibility including Contributor training condition; do not weaken existing restrictions to make a candidate eligible",
+    "Frozen per-candidate supported request parameters, provider route/fallback, total call/token/USD budgets and failed-call accounting",
+    "Frozen source-grounded disjoint quality cases, blinded source-only adjudication, exact prompts/settings and deterministic baseline on same cases",
+    "Measured native usage/cost/latency and missing-usage exclusions; compatibility before quality; quality before any production decision"
+  ],
+  "identity": "model-comparison-inventory-20261029",
+  "observedDate": "2026-10-29",
+  "observedHead": "52297fa39f4516b744a4fd23545b6b4265cd1531",
+  "officialSources": [
+    {
+      "id": "openai-models",
+      "method": "official page opened through web tool; no model API request",
+      "observedDate": "2026-10-29",
+      "supports": "Direct Luna/Terra identities, Responses API, list prices",
+      "url": "https://developers.openai.com/api/docs/models"
+    },
+    {
+      "id": "openai-data",
+      "method": "official page opened through web tool; no model API request",
+      "observedDate": "2026-10-29",
+      "supports": "API nontraining default; retention and endpoint storage exceptions",
+      "url": "https://developers.openai.com/api/docs/guides/your-data"
+    },
+    {
+      "id": "meta-models",
+      "method": "official page opened through web tool; no model API request",
+      "observedDate": "2026-10-29",
+      "supports": "Muse model versions and endpoint modes",
+      "url": "https://dev.meta.ai/docs/models"
+    },
+    {
+      "id": "meta-prices",
+      "method": "official page opened through web tool; no model API request",
+      "observedDate": "2026-10-29",
+      "supports": "Contributor IDs, prices and training condition",
+      "url": "https://dev.meta.ai/docs/pricing-rate-limits"
+    },
+    {
+      "id": "meta-overview",
+      "method": "official page opened through web tool; no model API request",
+      "observedDate": "2026-10-29",
+      "supports": "Direct API base and compatible endpoint families",
+      "url": "https://dev.meta.ai/docs/overview"
+    },
+    {
+      "id": "qwen-model",
+      "method": "official page opened through web tool; no model API request",
+      "observedDate": "2026-10-29",
+      "supports": "Direct model and region-dependent prices",
+      "url": "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-flash"
+    },
+    {
+      "id": "qwen-retention",
+      "method": "official page opened through web tool; no model API request",
+      "observedDate": "2026-10-29",
+      "supports": "Direct API retention, consent and conditional ZDR coverage",
+      "url": "https://www.alibabacloud.com/help/en/model-studio/data-retention-policy"
+    },
+    {
+      "id": "glm-model",
+      "method": "official page opened through web tool; no model API request",
+      "observedDate": "2026-10-29",
+      "supports": "Direct model and chat-completion/thinking settings",
+      "url": "https://docs.z.ai/guides/vlm/glm-5.3-flash"
+    },
+    {
+      "id": "glm-prices",
+      "method": "official page opened through web tool; no model API request",
+      "observedDate": "2026-10-29",
+      "supports": "Direct standard pricing",
+      "url": "https://docs.z.ai/guides/overview/pricing"
+    },
+    {
+      "id": "glm-data",
+      "method": "official page opened through web tool; no model API request",
+      "observedDate": "2026-10-29",
+      "supports": "API DPA distinguished from consumer privacy policy",
+      "url": "https://docs.z.ai/legal-agreement/privacy-policy"
+    },
+    {
+      "id": "router-policy",
+      "method": "official page opened through web tool; no model API request",
+      "observedDate": "2026-10-29",
+      "supports": "Chat endpoint, parameter/price/privacy filtering",
+      "url": "https://openrouter.ai/docs/guides/routing/provider-selection"
+    },
+    {
+      "id": "router-privacy",
+      "method": "official page opened through web tool; no model API request",
+      "observedDate": "2026-10-29",
+      "supports": "Intermediary privacy scope; provider terms also apply",
+      "url": "https://openrouter.ai/privacy/"
+    },
+    {
+      "id": "router:openai/gpt-6-luna",
+      "method": "official page opened through web tool; no model API request",
+      "observedDate": "2026-10-29",
+      "supports": "Published service route identity; listing does not prove account eligibility or a fixed provider",
+      "url": "https://openrouter.ai/openai/gpt-6-luna"
+    },
+    {
+      "id": "router:openai/gpt-6.1-terra",
+      "method": "official page opened through web tool; no model API request",
+      "observedDate": "2026-10-29",
+      "supports": "Published service route identity; listing does not prove account eligibility or a fixed provider",
+      "url": "https://openrouter.ai/openai/gpt-6.1-terra"
+    },
+    {
+      "id": "router:meta/muse-spark-1.3-contributor",
+      "method": "official page opened through web tool; no model API request",
+      "observedDate": "2026-10-29",
+      "supports": "Published service route identity; listing does not prove account eligibility or a fixed provider",
+      "url": "https://openrouter.ai/meta/muse-spark-1.3-contributor"
+    },
+    {
+      "id": "router:qwen/qwen3.8-flash",
+      "method": "official page opened through web tool; no model API request",
+      "observedDate": "2026-10-29",
+      "supports": "Published service route identity; listing does not prove account eligibility or a fixed provider",
+      "url": "https://openrouter.ai/qwen/qwen3.8-flash"
+    },
+    {
+      "id": "router:z-ai/glm-5.3-flash",
+      "method": "official page opened through web tool; no model API request",
+      "observedDate": "2026-10-29",
+      "supports": "Published service route identity; listing does not prove account eligibility or a fixed provider",
+      "url": "https://openrouter.ai/z-ai/glm-5.3-flash"
+    }
+  ],
+  "scope": "read-only preparation, five families, no ranking or eligibility determination",
+  "unknownPriceSemantics": "null cachedInput means not recorded from verified sources here, not zero price; all prices are advertised USD/million text tokens, not measured spend; taxes/credits/fees/tool charges are not calculated"
+}

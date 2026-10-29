@@ -149,25 +149,63 @@ def nonnegative_number(value: object) -> bool:
     return isinstance(value, (int, float)) and not isinstance(value, bool) and value >= 0
 
 
+def token_usage_well_formed(block: dict) -> bool:
+    if block.get("tokenUsageInvalid") is True:
+        return False
+    if "tokenUsageComplete" not in block:
+        return count_value(block.get("tokensUsed"))  # legacy shape, not completeness
+    complete = block["tokenUsageComplete"]
+    if type(complete) is not bool:
+        return False
+    if complete:
+        return (
+            count_value(block.get("tokensUsed"))
+            and block.get("unknownTokenUsageCalls", 0) == 0
+            and type(block.get("unknownTokenUsageCalls", 0)) is int
+            and count_value(block.get("tokensUsedKnownSubtotal", block["tokensUsed"]))
+            and block.get("tokensUsedKnownSubtotal", block["tokensUsed"]) == block["tokensUsed"]
+        )
+    return (
+        block.get("tokensUsed") is None
+        and "tokensUsed" in block
+        and count_value(block.get("tokensUsedKnownSubtotal"))
+        and "unknownTokenUsageCalls" in block
+        and (
+            block["unknownTokenUsageCalls"] is None or count_value(block["unknownTokenUsageCalls"])
+        )
+    )
+
+
+def token_usage_complete(block: dict) -> bool:
+    return token_usage_well_formed(block) and (
+        block.get("tokenUsageComplete") is True
+        or (
+            "tokenUsageComplete" not in block
+            and block.get("adjudicationCalls") == 0
+            and block.get("tokensUsed") == 0
+        )
+    )
+
+
 def cost_block_well_formed(block: dict) -> bool:
-    count_keys = {
-        "adjudicationCallBudget",
-        "adjudicationCalls",
-        "crawled",
-        "tokensUsed",
-    }
-    rate_keys = {"adjudicationBudgetUseRate", "tokensPerCrawled"}
-    if not count_block_well_formed(block, count_keys) or not all(
-        nonnegative_number(block.get(key)) for key in rate_keys
-    ):
+    if not count_block_well_formed(
+        block, {"adjudicationCallBudget", "adjudicationCalls", "crawled"}
+    ) or not token_usage_well_formed(block):
         return False
     budget = block["adjudicationCallBudget"]
-    crawled = block["crawled"]
     expected_budget_rate = block["adjudicationCalls"] / budget if budget else 0.0
+    if (
+        not nonnegative_number(block.get("adjudicationBudgetUseRate"))
+        or abs(block["adjudicationBudgetUseRate"] - expected_budget_rate) > 0.000001
+    ):
+        return False
+    if block.get("tokenUsageComplete") is False:
+        return "tokensPerCrawled" in block and block["tokensPerCrawled"] is None
+    crawled = block["crawled"]
     expected_token_rate = block["tokensUsed"] / crawled if crawled else 0.0
     return (
-        abs(number(block["adjudicationBudgetUseRate"]) - expected_budget_rate) <= 0.000001
-        and abs(number(block["tokensPerCrawled"]) - expected_token_rate) <= 0.000001
+        nonnegative_number(block.get("tokensPerCrawled"))
+        and abs(block["tokensPerCrawled"] - expected_token_rate) <= 0.000001
     )
 
 
@@ -263,11 +301,11 @@ def retained_proof_fields_present(summary: dict) -> bool:
         "crawled",
         "failed",
         "promoted",
-        "tokensUsed",
         "written",
     }
     return (
         count_block_well_formed(totals, required_total_keys)
+        and token_usage_well_formed(totals)
         and tier_counts_well_formed(tiers)
         and rate_block_well_formed(rates, required_aggregate_rate_keys)
         and rate_block_well_formed(worst_rates, required_rate_keys)
@@ -314,6 +352,7 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
     )
     tokens_per_crawled = tokens_used / crawled if crawled else 0.0
     aggregate_costs = {
+        **totals,
         "adjudicationBudgetUseRate": adjudication_budget_use_rate,
         "tokensPerCrawled": tokens_per_crawled,
     }
@@ -572,6 +611,29 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
         ),
     ]
 
+    total_usage_complete = token_usage_complete(totals)
+    recent_usage_complete = token_usage_complete(recent_cost_reference)
+    previous_usage_complete = token_usage_complete(previous_cost_reference)
+    usage_complete = total_usage_complete and recent_usage_complete and previous_usage_complete
+    if proof_fields_present:
+        checks.append(
+            check(
+                "token usage completeness",
+                "complete" if usage_complete else "incomplete",
+                "complete native usage or explicit no-call zero",
+                usage_complete,
+            )
+        )
+        for item in checks:
+            known = {
+                "tokens per crawled repository": total_usage_complete,
+                "recent-window tokens per crawled repository": recent_usage_complete,
+                "recent-window token intensity drift": recent_usage_complete
+                and previous_usage_complete,
+            }.get(item["label"], True)
+            if not known:
+                item["actual"], item["passed"] = None, False
+
     passed = all(item["passed"] for item in checks)
     check_summary = summarize_checks(checks)
     return {
@@ -588,12 +650,19 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
             "adjudicationCallBudget": adjudication_call_budget,
             "adjudicationCalls": adjudication_calls,
             "adjudicationBudgetUseRate": adjudication_budget_use_rate,
-            "tokensUsed": tokens_used,
-            "tokensPerCrawled": tokens_per_crawled,
+            "tokensUsed": tokens_used if total_usage_complete else None,
+            "tokensUsedKnownSubtotal": totals.get(
+                "tokensUsedKnownSubtotal", totals.get("tokensUsed")
+            ),
+            "unknownTokenUsageCalls": totals.get("unknownTokenUsageCalls"),
+            "tokenUsageComplete": total_usage_complete,
+            "tokensPerCrawled": tokens_per_crawled if total_usage_complete else None,
             "recentAdjudicationBudgetUseRate": recent_adjudication_budget_use_rate,
             "recentAdjudicationBudgetUseRateDelta": recent_adjudication_budget_use_rate_delta,
-            "recentTokensPerCrawled": recent_tokens_per_crawled,
-            "recentTokensPerCrawledDelta": recent_tokens_per_crawled_delta,
+            "recentTokensPerCrawled": recent_tokens_per_crawled if recent_usage_complete else None,
+            "recentTokensPerCrawledDelta": recent_tokens_per_crawled_delta
+            if recent_usage_complete and previous_usage_complete
+            else None,
             "recentWindowRunCount": recent_window_run_count,
             "previousWindowRunCount": previous_window_run_count,
             "secondOpinionRate": second_opinion_rate,
@@ -651,9 +720,9 @@ def render_markdown(report: dict) -> str:
         f"- recent-window tier counts: {json.dumps(recent_window_tiers, sort_keys=True)}",
         f"- previous-window tier counts: {json.dumps(previous_window_tiers, sort_keys=True)}",
         f"- adjudication call budget usage: {number(inputs.get('adjudicationBudgetUseRate')):.2%}",
-        f"- tokens per crawled repository: {number(inputs.get('tokensPerCrawled')):.2f}",
+        f"- tokens per crawled repository: {inputs.get('tokensPerCrawled') if inputs.get('tokensPerCrawled') is not None else 'unknown'}",
         f"- recent-window adjudication budget usage: {number(inputs.get('recentAdjudicationBudgetUseRate')):.2%}",
-        f"- recent-window tokens per crawled repository: {number(inputs.get('recentTokensPerCrawled')):.2f}",
+        f"- recent-window tokens per crawled repository: {inputs.get('recentTokensPerCrawled') if inputs.get('recentTokensPerCrawled') is not None else 'unknown'}",
         f"- drift reference: {inputs.get('driftReference') or 'unknown'}",
         f"- worst-run window: last {inputs.get('worstRunWindowRunCount', 0)} of {inputs.get('worstRunWindowSize', 0)} configured runs",
         f"- worst-run failure rate: {number(worst_rates.get('failureRate')):.2%}",

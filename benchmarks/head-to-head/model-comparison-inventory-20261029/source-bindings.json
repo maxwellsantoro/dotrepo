@@ -1,0 +1,71 @@
+{
+  "files": {
+    "benchmarks/head-to-head/README.md": {
+      "bytes": 19112,
+      "sha256": "322606a57ae966fb2de956e8745a7069fcbb413a7acbeb097d871d1b24edca62"
+    },
+    "benchmarks/head-to-head/bench/arms/github_arm.py": {
+      "bytes": 18710,
+      "sha256": "7ae1cdc68ec0b4d78df6cbefb1998d59bf694dafdf525424273b2082a5f9d2fa"
+    },
+    "benchmarks/head-to-head/bench/model.py": {
+      "bytes": 7183,
+      "sha256": "8d38496870a876760915154b83b46b4f699e2968d832ae83b9fc65f86725a5b2"
+    },
+    "benchmarks/head-to-head/gold.independent.yaml": {
+      "bytes": 24396,
+      "sha256": "6f33e87a5f792515b7740d78e7c3fafe9667feaf19da8a5b0a8a45db09456a16"
+    },
+    "benchmarks/head-to-head/task-fixtures/README.md": {
+      "bytes": 4995,
+      "sha256": "df061c78dc89cbf49bc88ac9d9bbcb18dfd8edba5456c865692756818c5cac6a"
+    },
+    "benchmarks/model-adjudication/2026-10-04/qwen-second-opinion-canary.json": {
+      "bytes": 4936,
+      "sha256": "5dcc0c63d9864070f0d2317ac9394e00c31f17082961d553ce49ed438a1d0f61"
+    },
+    "benchmarks/model-adjudication/2026-10-04/qwen-second-opinion-reasoning-canary.json": {
+      "bytes": 4579,
+      "sha256": "6237efc338f7ea03ecea13bf4bde91a04ba8e94db36cf80195f98181a05ee2ba"
+    },
+    "benchmarks/model-adjudication/2026-10-04/request-policy.py.txt": {
+      "bytes": 5515,
+      "sha256": "e8c477437c9798f277d48094c357b1556c214f5c632b596e7d88f71488e1579b"
+    },
+    "benchmarks/model-adjudication/2026-10-04/requests.json": {
+      "bytes": 9489,
+      "sha256": "53c4bddcc3340ecdfec804c9cacdea33784cdb013cceffb63721445f88051631"
+    },
+    "benchmarks/model-adjudication/2026-10-04/upgrade-canary-prompt-v2.json": {
+      "bytes": 2648,
+      "sha256": "b2ac4e34bacd6d19bb0d7bdc6729886225d462514c43e3756135f6d935f020a4"
+    },
+    "benchmarks/model-adjudication/2026-10-04/upgrade-canary.json": {
+      "bytes": 6585,
+      "sha256": "2d5d6bb10e14ebd6c6e87e98247e09767d25bca465afab829359f96e5fef14bc"
+    },
+    "crates/dotrepo-crawler/src/adjudication.rs": {
+      "bytes": 9894,
+      "sha256": "b1ffdff1e642d7c475e4b3c26f155993ab7844949e868dd9ecdd5e28e54178cd"
+    },
+    "docs/factual-crawl-automation.md": {
+      "bytes": 22657,
+      "sha256": "142dd4add4b94203a4fe991a63f228ed8806d9e1c0f45dae0ad9b9ed2e71735f"
+    },
+    "docs/m1-escalation-canary.md": {
+      "bytes": 5807,
+      "sha256": "ca29c228f2fdbea478a55fb1533fa8a0df8b8e418accdfe526856d98ac17c92c"
+    },
+    "scripts/adjudication_openrouter_sidecar.py": {
+      "bytes": 12780,
+      "sha256": "b700e597ea4d22a023bc2468de01166885200561ed5d39a15f07842c94af0468"
+    },
+    "scripts/openrouter_request_policy.py": {
+      "bytes": 5445,
+      "sha256": "1cd88f8a73f07f9f63b86fb56b6ed8dcf2c52e24427b64d35f5459783f71d030"
+    }
+  },
+  "observedHead": "52297fa39f4516b744a4fd23545b6b4265cd1531",
+  "repositoryRoot": "/Users/maxwell/projects/agent/dotrepo",
+  "semantics": "Exact inspected working-tree owners and canary artifacts, not a live production configuration attestation. No .env or credential contents."
+}

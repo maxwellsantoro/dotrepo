@@ -366,7 +366,7 @@ mod tests {
                         reason: "Check workflow is primary".into(),
                         source: Some(".github/workflows/check.yml".into()),
                     },
-                    tokens_used: 120,
+                    tokens_used: Some(120),
                 },
                 AdjudicationProviderResponse {
                     response: AdjudicationModelResponse {
@@ -377,7 +377,7 @@ mod tests {
                         reason: "Check workflow is primary".into(),
                         source: Some(".github/workflows/check.yml".into()),
                     },
-                    tokens_used: 95,
+                    tokens_used: Some(95),
                 },
             ],
         );
@@ -400,7 +400,7 @@ mod tests {
         );
 
         assert_eq!(report.model_calls, 2);
-        assert_eq!(report.tokens_used, 215);
+        assert_eq!(report.tokens_used, Some(215));
         assert_eq!(report.model_resolved, 2);
         assert!(scores.summary.unresolved.is_empty());
         assert_eq!(
@@ -452,7 +452,7 @@ mod tests {
                     reason: "Not sure which workflow is primary".into(),
                     source: None,
                 },
-                tokens_used: 80,
+                tokens_used: Some(80),
             }],
         );
         let second_opinion = StubAdjudicationProvider::new(
@@ -466,7 +466,7 @@ mod tests {
                     reason: "Check workflow lists --workspace, matching a monorepo build".into(),
                     source: Some(".github/workflows/check.yml".into()),
                 },
-                tokens_used: 140,
+                tokens_used: Some(140),
             }],
         );
 
@@ -488,7 +488,7 @@ mod tests {
         );
 
         assert_eq!(report.model_calls, 2);
-        assert_eq!(report.tokens_used, 220);
+        assert_eq!(report.tokens_used, Some(220));
         assert_eq!(report.model_resolved, 1);
         assert!(report
             .adjudication_tiers_used
@@ -544,7 +544,7 @@ mod tests {
                         .into(),
                     source: None,
                 },
-                tokens_used: 80,
+                tokens_used: Some(80),
             }],
         );
         let second_opinion = StubAdjudicationProvider::new(
@@ -558,7 +558,7 @@ mod tests {
                     reason: "Should never be called".into(),
                     source: None,
                 },
-                tokens_used: 140,
+                tokens_used: Some(140),
             }],
         );
 
@@ -580,7 +580,7 @@ mod tests {
         );
 
         assert_eq!(report.model_calls, 1);
-        assert_eq!(report.tokens_used, 80);
+        assert_eq!(report.tokens_used, Some(80));
         assert!(!report
             .adjudication_tiers_used
             .contains(&AdjudicationTier::LocalSecondOpinion));
@@ -635,7 +635,7 @@ mod tests {
                     reason: "Distinct, mutually exclusive ecosystems (Rust vs Node.js)".into(),
                     source: None,
                 },
-                tokens_used: 90,
+                tokens_used: Some(90),
             }],
         );
 

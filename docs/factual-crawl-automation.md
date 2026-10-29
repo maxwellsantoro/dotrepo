@@ -177,6 +177,19 @@ report, and subsequent tiers may run within the same attempt budget. Unknown
 usage is not estimated. Logs are separate from aggregate batch token telemetry.
 Historical model results and frozen benchmark inputs remain unchanged.
 
+Adjudication reports expose `tokensUsed` only when every attempted call supplies
+a valid native total. Missing usage makes that total `null`; the reported known
+values remain in `tokensUsedKnownSubtotal`, alongside
+`unknownTokenUsageCalls` and `tokenUsageComplete`. An explicit provider zero is
+known, and a report with no attempted calls has a known zero total. Failed
+subprocesses can leave the unknown-call count unknown as well. Legacy called
+rows without completeness evidence remain readable but cannot establish a
+complete cost. Incomplete or malformed usage cannot qualify token thresholds or
+the scheduled-refresh evidence window. This changes Rust adjudication
+response/error and escalation-report `tokens_used` fields to `Option<u64>` and
+allows JSON totals to be null; consumers must handle that distinction. The
+independent optional-synthesis accounting path is outside this correction.
+
 Provider selection evidence and the dated July ladder proof live in the
 [escalation canary guide](m1-escalation-canary.md). Synthetic provider checks
 establish integration behavior; they do not replace real-repository quality or

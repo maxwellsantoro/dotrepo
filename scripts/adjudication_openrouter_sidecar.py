@@ -161,7 +161,7 @@ def call_openrouter(
     model: str,
     prompt: str,
     response_schema: dict[str, Any] | None = None,
-) -> tuple[dict[str, Any], int]:
+) -> tuple[dict[str, Any], int | None]:
     body = build_completion_body(model, prompt, response_schema=response_schema)
 
     request = urllib.request.Request(
@@ -180,7 +180,12 @@ def call_openrouter(
             payload = json.loads(response.read().decode("utf-8"))
     except urllib.error.HTTPError as exc:
         detail = exc.read().decode("utf-8", errors="replace")
-        raise RuntimeError(f"OpenRouter HTTP {exc.code}: {detail}") from exc
+        try:
+            error_payload = json.loads(detail)
+        except ValueError:
+            error_payload = {}
+        usage = completion_usage(error_payload if isinstance(error_payload, dict) else {})
+        raise CompletionError(f"OpenRouter HTTP {exc.code}: {detail}", usage) from exc
 
     usage = completion_usage(payload)
     try:
@@ -193,7 +198,7 @@ def call_openrouter(
 
 
 def normalize_response(
-    request_payload: dict[str, Any], model_payload: dict[str, Any], tokens_used: int
+    request_payload: dict[str, Any], model_payload: dict[str, Any], tokens_used: int | None
 ) -> dict[str, Any]:
     confidence = str(model_payload.get("confidence", "medium")).lower()
     if confidence not in {"high", "medium", "low"}:
@@ -234,7 +239,7 @@ def normalize_response(
         if not valid:
             raise CompletionError(
                 "context response changed tuple/source/citations or selected incomplete evidence",
-                {"tokensUsed": tokens_used},
+                {"tokensUsed": tokens_used, "tokenUsageComplete": tokens_used is not None},
             )
     result = {
         "field": model_payload.get("field") or request_payload.get("field"),
@@ -243,6 +248,7 @@ def normalize_response(
         "reason": str(model_payload.get("reason") or "adjudicated by OpenRouter"),
         "source": model_payload.get("source"),
         "tokensUsed": tokens_used,
+        "tokenUsageComplete": tokens_used is not None,
     }
 
     if contextual:
@@ -282,9 +288,10 @@ def make_handler(api_key: str):
                 self.end_headers()
                 self.wfile.write(body)
             except Exception as exc:  # noqa: BLE001 - surface provider errors to client
-                error = {"error": str(exc)}
+                error = {"error": str(exc), "tokensUsed": None, "tokenUsageComplete": False}
                 if isinstance(exc, CompletionError):
                     error.update(exc.usage)
+                    error["tokenUsageComplete"] = error.get("tokensUsed") is not None
                 body = json.dumps(error).encode("utf-8")
                 self.send_response(502)
                 self.send_header("Content-Type", "application/json")

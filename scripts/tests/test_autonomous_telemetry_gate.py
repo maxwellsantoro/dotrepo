@@ -52,6 +52,7 @@ def test_evaluate_passes_when_retained_telemetry_meets_thresholds() -> None:
             "failed": 0,
             "promoted": 8,
             "tokensUsed": 1000,
+            "tokenUsageComplete": True,
         },
         "rates": {
             "failureRate": 0.0,
@@ -100,8 +101,8 @@ def test_evaluate_passes_when_retained_telemetry_meets_thresholds() -> None:
     assert report["passed"]
     assert all(item["passed"] for item in report["checks"])
     assert report["checkSummary"] == {
-        "total": 34,
-        "passed": 34,
+        "total": 35,
+        "passed": 35,
         "failed": 0,
         "failedLabels": [],
     }
@@ -149,6 +150,7 @@ def test_evaluate_reports_not_yet_for_insufficient_or_expensive_runs() -> None:
             "failed": 1,
             "promoted": 0,
             "tokensUsed": 40000,
+            "tokenUsageComplete": True,
         },
         "rates": {
             "failureRate": 0.25,
@@ -241,6 +243,7 @@ def test_evaluate_allows_environmental_recurring_failures_for_fixture_gate() -> 
             "failed": 0,
             "promoted": 8,
             "tokensUsed": 1000,
+            "tokenUsageComplete": True,
         },
         "rates": {
             "failureRate": 0.0,
@@ -308,6 +311,7 @@ def test_evaluate_rejects_recent_cost_spike_hidden_by_aggregate_rates() -> None:
             "failed": 0,
             "promoted": 8,
             "tokensUsed": 1000,
+            "tokenUsageComplete": True,
         },
         "rates": {
             "failureRate": 0.0,
@@ -344,6 +348,7 @@ def test_evaluate_rejects_recent_cost_spike_hidden_by_aggregate_rates() -> None:
             "adjudicationBudgetUseRate": 1.0,
             "crawled": 12,
             "tokensUsed": 72000,
+            "tokenUsageComplete": True,
             "tokensPerCrawled": 6000.0,
         },
         "previousWindowCosts": {
@@ -352,6 +357,7 @@ def test_evaluate_rejects_recent_cost_spike_hidden_by_aggregate_rates() -> None:
             "adjudicationBudgetUseRate": 0.5,
             "crawled": 8,
             "tokensUsed": 200,
+            "tokenUsageComplete": True,
             "tokensPerCrawled": 25.0,
         },
         "repositoriesByAdjudicationTier": {"local_primary": 4, "api_escalation": 1},
@@ -383,6 +389,7 @@ def test_evaluate_rejects_worst_run_regression_when_aggregate_rates_pass() -> No
             "failed": 1,
             "promoted": 8,
             "tokensUsed": 2000,
+            "tokenUsageComplete": True,
         },
         "rates": {
             "failureRate": 0.025,
@@ -443,6 +450,7 @@ def test_evaluate_rejects_worst_run_zero_model_regression() -> None:
             "failed": 0,
             "promoted": 8,
             "tokensUsed": 2000,
+            "tokenUsageComplete": True,
         },
         "rates": {
             "failureRate": 0.0,
@@ -498,6 +506,7 @@ def test_evaluate_rejects_recent_window_drift_when_ceiling_rates_pass() -> None:
             "failed": 0,
             "promoted": 10,
             "tokensUsed": 3000,
+            "tokenUsageComplete": True,
         },
         "rates": {
             "failureRate": 0.0,
@@ -556,6 +565,7 @@ def test_evaluate_rejects_previous_window_drift_when_aggregate_rates_pass() -> N
             "failed": 0,
             "promoted": 10,
             "tokensUsed": 3000,
+            "tokenUsageComplete": True,
         },
         "rates": {
             "failureRate": 0.0,
@@ -615,6 +625,7 @@ def test_evaluate_rejects_recent_second_opinion_drift_when_ceiling_rate_passes()
             "failed": 0,
             "promoted": 10,
             "tokensUsed": 3000,
+            "tokenUsageComplete": True,
         },
         "rates": {
             "failureRate": 0.0,
@@ -680,6 +691,7 @@ def test_evaluate_rejects_recent_zero_model_drop_when_absolute_rates_pass() -> N
             "failed": 0,
             "promoted": 10,
             "tokensUsed": 3000,
+            "tokenUsageComplete": True,
         },
         "rates": {
             "failureRate": 0.0,
@@ -735,6 +747,7 @@ def test_evaluate_rejects_missing_summary_schema() -> None:
             "failed": 0,
             "promoted": 8,
             "tokensUsed": 1000,
+            "tokenUsageComplete": True,
         },
         "rates": {
             "failureRate": 0.0,
@@ -789,6 +802,7 @@ def test_evaluate_rejects_missing_retained_proof_fields() -> None:
             "failed": 0,
             "promoted": 8,
             "tokensUsed": 1000,
+            "tokenUsageComplete": True,
         },
         "rates": {
             "failureRate": 0.0,
@@ -843,6 +857,7 @@ def test_evaluate_rejects_missing_window_zero_model_proof_fields() -> None:
             "failed": 0,
             "promoted": 8,
             "tokensUsed": 1000,
+            "tokenUsageComplete": True,
         },
         "rates": {
             "failureRate": 0.0,
@@ -899,6 +914,7 @@ def test_evaluate_rejects_missing_or_invalid_rate_proof_fields() -> None:
             "failed": 0,
             "promoted": 8,
             "tokensUsed": 1000,
+            "tokenUsageComplete": True,
         },
         "rates": {
             "failureRate": 0.0,
@@ -993,6 +1009,7 @@ def test_evaluate_rejects_missing_or_invalid_count_proof_fields() -> None:
             "failed": 0,
             "promoted": 8,
             "tokensUsed": 1000,
+            "tokenUsageComplete": True,
         },
         "rates": {
             "failureRate": 0.0,
@@ -1048,6 +1065,7 @@ def test_evaluate_rejects_missing_or_invalid_count_proof_fields() -> None:
                 "failed": 0,
                 "promoted": 8,
                 "tokensUsed": 1000,
+                "tokenUsageComplete": True,
             },
         },
         {
@@ -1074,6 +1092,7 @@ def test_evaluate_rejects_missing_or_invalid_count_proof_fields() -> None:
                 "adjudicationBudgetUseRate": 0.3,
                 "crawled": 20,
                 "tokensUsed": 1000,
+                "tokenUsageComplete": True,
                 "tokensPerCrawled": 50.0,
             },
         },
@@ -1085,6 +1104,7 @@ def test_evaluate_rejects_missing_or_invalid_count_proof_fields() -> None:
                 "adjudicationBudgetUseRate": 0.4,
                 "crawled": 20,
                 "tokensUsed": 1000,
+                "tokenUsageComplete": True,
                 "tokensPerCrawled": True,
             },
         },
@@ -1122,6 +1142,7 @@ def test_evaluate_rejects_missing_or_malformed_fixture_candidate_proof_field() -
             "failed": 0,
             "promoted": 8,
             "tokensUsed": 1000,
+            "tokenUsageComplete": True,
         },
         "rates": {
             "failureRate": 0.0,
@@ -1180,6 +1201,7 @@ def test_evaluate_rejects_malformed_fixture_candidate_entries() -> None:
             "failed": 0,
             "promoted": 8,
             "tokensUsed": 1000,
+            "tokenUsageComplete": True,
         },
         "rates": {
             "failureRate": 0.0,
@@ -1338,3 +1360,139 @@ def test_render_markdown_includes_check_table() -> None:
         "| `cargo-toml-parse-error` | `parser` | `rust` | 2 | `Cargo.toml parse error` |"
         in rendered
     )
+
+
+def usage_summary(usage):
+    rates = {
+        "failureRate": 0.0,
+        "adjudicationRate": 0.0,
+        "zeroModelRate": 1.0,
+        "secondOpinionRate": 0.0,
+        "apiEscalationRate": 0.0,
+    }
+    return {
+        "schema": "dotrepo/autonomous-telemetry-summary/v0.1",
+        "runCount": 4,
+        "budgetExhaustedRuns": 0,
+        "recentWindowRunCount": 3,
+        "previousWindowRunCount": 1,
+        "totals": {
+            "adjudicationCallBudget": 10,
+            "adjudicationCalls": 1,
+            "crawled": 20,
+            "written": 18,
+            "failed": 0,
+            "promoted": 8,
+            **usage,
+        },
+        "rates": {**rates, "promotionRate": 0.4},
+        "worstRunRates": rates,
+        "recentWindowRates": rates,
+        "previousWindowRates": rates,
+        "repositoriesByAdjudicationTier": {},
+        "regressionFixtureCandidates": [],
+    }
+
+
+def test_well_formed_incomplete_and_legacy_usage_never_prove_cost_thresholds():
+    for usage in [
+        {
+            "tokensUsed": None,
+            "tokensUsedKnownSubtotal": 120,
+            "unknownTokenUsageCalls": 1,
+            "tokenUsageComplete": False,
+        },
+        {"tokensUsed": 0},
+        {"tokensUsed": 120},
+    ]:
+        summary = usage_summary(usage)
+        report = telemetry_gate.evaluate(summary, args())
+        checks = {row["label"]: row for row in report["checks"]}
+        assert checks["retained proof fields"]["passed"]
+        assert not checks["token usage completeness"]["passed"]
+        assert checks["tokens per crawled repository"]["actual"] is None
+        assert not checks["tokens per crawled repository"]["passed"]
+        assert report["inputs"]["tokensUsed"] is None
+        assert "unknown" in telemetry_gate.render_markdown(report)
+        assert not report["passed"]
+    for usage in [{"tokensUsed": 0, "tokenUsageComplete": True}, {"tokensUsed": 0}]:
+        summary = usage_summary(usage)
+        summary["totals"]["adjudicationCalls"] = 0
+        assert telemetry_gate.evaluate(summary, args())["passed"]
+
+
+def test_incomplete_window_shape_is_valid_but_drift_unestablished():
+    summary = usage_summary({"tokensUsed": 120, "tokenUsageComplete": True})
+    summary["recentWindowCosts"] = {
+        "adjudicationCallBudget": 10,
+        "adjudicationCalls": 1,
+        "adjudicationBudgetUseRate": 0.1,
+        "crawled": 20,
+        "tokensUsed": None,
+        "tokensPerCrawled": None,
+        "tokensUsedKnownSubtotal": 0,
+        "unknownTokenUsageCalls": 1,
+        "tokenUsageComplete": False,
+    }
+    assert telemetry_gate.cost_block_well_formed(summary["recentWindowCosts"])
+    report = telemetry_gate.evaluate(summary, args())
+    checks = {row["label"]: row for row in report["checks"]}
+    assert checks["retained proof fields"]["passed"]
+    assert checks["recent-window token intensity drift"]["actual"] is None
+    assert not report["passed"]
+    summary["recentWindowCosts"]["tokensPerCrawled"] = 0
+    assert not telemetry_gate.retained_proof_fields_present(summary)
+
+
+def test_exact_reviewer_normalization_rows_cannot_pass_cost_or_streak():
+    batch_path = SCRIPT.parent / "run_autonomous_index_batch.py"
+    batch_spec = importlib.util.spec_from_file_location("normalization_batch", batch_path)
+    batch = importlib.util.module_from_spec(batch_spec)
+    batch_spec.loader.exec_module(batch)
+    import check_refresh_streak as streak
+
+    fixture_spec = importlib.util.spec_from_file_location(
+        "streak_fixture", SCRIPT.parent / "tests/test_refresh_streak.py"
+    )
+    fixture = importlib.util.module_from_spec(fixture_spec)
+    fixture_spec.loader.exec_module(fixture)
+    rows = [
+        {
+            "adjudicationCalls": 1,
+            "tokensUsed": 120,
+            "tokensUsedKnownSubtotal": 999,
+            "unknownTokenUsageCalls": 0,
+            "tokenUsageComplete": True,
+        },
+        {
+            "adjudicationCalls": 1,
+            "tokensUsed": 0,
+            "tokensUsedKnownSubtotal": 0,
+            "unknownTokenUsageCalls": False,
+            "tokenUsageComplete": True,
+        },
+        {
+            "adjudicationCalls": 1,
+            "tokensUsed": 0,
+            "tokensUsedKnownSubtotal": 0,
+            "unknownTokenUsageCalls": -1,
+            "tokenUsageComplete": True,
+        },
+    ]
+    for raw in rows:
+        assert not telemetry_gate.token_usage_well_formed(raw)
+        normalized = batch.token_usage(raw)
+        for usage in [normalized, batch.aggregate_token_usage([normalized])]:
+            assert not telemetry_gate.token_usage_well_formed(usage)
+            report = telemetry_gate.evaluate(usage_summary(usage), args())
+            assert not report["passed"]
+            checks = {item["label"]: item for item in report["checks"]}
+            assert not checks["retained proof fields"]["passed"]
+            assert report["inputs"]["tokensUsed"] is None
+            values = fixture.entries()
+            values[0]["receipt"]["budget"].update(
+                adjudicationCallBudget=1, adjudicationCalls=1, **usage
+            )
+            result = streak.assess(values, now=fixture.NOW)
+            assert not result["passed"]
+            assert "budget-evidence-missing-or-malformed" in result["runs"][0]["reasons"]

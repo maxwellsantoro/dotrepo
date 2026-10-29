@@ -231,7 +231,7 @@ pub(crate) fn crawl_repository_from_snapshot(
                 escalation.deterministic_resolved,
                 escalation.deterministic_requests,
                 escalation.model_calls,
-                escalation.tokens_used,
+                escalation.tokens_used.map_or_else(|| "unknown".into(), |tokens| tokens.to_string()),
                 escalation.remaining_unresolved
             ),
         ));

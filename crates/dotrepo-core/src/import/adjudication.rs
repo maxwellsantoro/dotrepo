@@ -6,15 +6,15 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct AdjudicationProviderResponse {
     pub response: AdjudicationModelResponse,
-    pub tokens_used: u64,
+    pub tokens_used: Option<u64>,
 }
 
 /// A provider failure with measured spend, such as a billed truncated answer.
-/// Unknown spend remains zero; it is never inferred from a token budget.
+/// Missing native usage remains unknown; it is never inferred from a token budget.
 #[derive(Debug)]
 pub struct AdjudicationProviderError {
     pub message: String,
-    pub tokens_used: u64,
+    pub tokens_used: Option<u64>,
 }
 
 impl std::fmt::Display for AdjudicationProviderError {
