@@ -1,0 +1,149 @@
+{
+  "receipts": {
+    "logs/cleanup/receipt.json": {
+      "argv": [
+        "docker",
+        "rm",
+        "-f",
+        "dotrepo-python-probe-20b34704c9de"
+      ],
+      "startedAt": "synthetic",
+      "elapsedSeconds": 0.001,
+      "exitCode": 0,
+      "error": null,
+      "cancelled": false,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "costUsd": null
+    },
+    "logs/create/receipt.json": {
+      "argv": [
+        "docker",
+        "create",
+        "--name",
+        "dotrepo-python-probe-20b34704c9de",
+        "--pull=never",
+        "--platform=linux/arm64",
+        "--init",
+        "--read-only",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--network=none",
+        "--ipc=private",
+        "--cgroupns=private",
+        "--user=1000:1000",
+        "--workdir=/workspace",
+        "--memory=4g",
+        "--memory-swap=4g",
+        "--cpus=3",
+        "--pids-limit=256",
+        "--ulimit",
+        "nofile=4096:4096",
+        "--tmpfs",
+        "/workspace:rw,exec,nosuid,nodev,size=8g,uid=1000,gid=1000,mode=0700",
+        "--tmpfs",
+        "/tmp:rw,exec,nosuid,nodev,size=512m,uid=1000,gid=1000,mode=0700",
+        "--tmpfs",
+        "/workspace/dependency-cache:rw,exec,nosuid,nodev,size=1g,uid=1000,gid=1000,mode=0700",
+        "--env",
+        "HOME=/workspace/home",
+        "--env",
+        "TMPDIR=/workspace/tmp",
+        "--env",
+        "UV_CACHE_DIR=/workspace/probe-cache",
+        "--env",
+        "UV_PYTHON_DOWNLOADS=never",
+        "--entrypoint=/bin/sh",
+        "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+        "-c",
+        "while :; do sleep 3600; done"
+      ],
+      "startedAt": "synthetic",
+      "elapsedSeconds": 0.001,
+      "exitCode": 0,
+      "error": null,
+      "cancelled": false,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "44c2336fedab8ff6a85c74c2b94165377b0981f526adb9487895ca6314165e86",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "costUsd": null
+    },
+    "logs/image-inspect/receipt.json": {
+      "argv": [
+        "docker",
+        "image",
+        "inspect",
+        "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092"
+      ],
+      "startedAt": "synthetic",
+      "elapsedSeconds": 0.001,
+      "exitCode": 0,
+      "error": null,
+      "cancelled": false,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "4c4b077142163061e8cf383061772eddfb6f9b04255c2a7ca471a8ac0944eb42",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "costUsd": null
+    },
+    "logs/post-cleanup-inspect/receipt.json": {
+      "argv": [
+        "docker",
+        "inspect",
+        "dotrepo-python-probe-20b34704c9de"
+      ],
+      "startedAt": "synthetic",
+      "elapsedSeconds": 0.001,
+      "exitCode": 1,
+      "error": null,
+      "cancelled": false,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "stderrSha256": "a7c31a0c00ee0df468087f880b030af4374be02b6a679e7fa9698d20e9b4ed41",
+      "costUsd": null
+    },
+    "logs/post-cleanup-list/receipt.json": {
+      "argv": [
+        "docker",
+        "ps",
+        "-a",
+        "--filter",
+        "name=dotrepo-python-probe-20b34704c9de",
+        "--format",
+        "{{.Names}}"
+      ],
+      "startedAt": "synthetic",
+      "elapsedSeconds": 0.001,
+      "exitCode": 0,
+      "error": null,
+      "cancelled": false,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "costUsd": null
+    },
+    "logs/start/receipt.json": {
+      "argv": [
+        "docker",
+        "start",
+        "dotrepo-python-probe-20b34704c9de"
+      ],
+      "startedAt": "synthetic",
+      "elapsedSeconds": 0.001,
+      "exitCode": 1,
+      "error": "owned synthetic client failure",
+      "cancelled": false,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "costUsd": null
+    }
+  },
+  "synthetic": true
+}

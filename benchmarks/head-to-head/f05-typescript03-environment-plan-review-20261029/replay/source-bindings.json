@@ -1,0 +1,190 @@
+{
+  "archiveSha256": "51249848d90d269ca4f03504257661e172bcc2e644bb2cc32cc37513ac60b93c",
+  "inertSourceOnly": true,
+  "ownerInputs": [
+    {
+      "bytes": 442,
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/requests/typescript-03.md",
+      "sha256": "f24fbb3870c1e319f5292e72ba0d3cdfce62bf0d81745505531307a40884be9a",
+      "snapshot": "owner-inputs/benchmarks/head-to-head/f05-agent-tasks-20261029/requests/typescript-03.md"
+    },
+    {
+      "bytes": 830,
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/gold/typescript-03.json",
+      "sha256": "94008a8ff3178c74b83f272808648f33b2fab26afcea4808a4d01347141b6be5",
+      "snapshot": "owner-inputs/benchmarks/head-to-head/f05-agent-tasks-20261029/curator/gold/typescript-03.json"
+    },
+    {
+      "bytes": 1376,
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/oracles/typescript-03.json",
+      "sha256": "7d822e0e20679ea923a8738746c2b2fcf9b0e77e15beaa770ff6271673022c68",
+      "snapshot": "owner-inputs/benchmarks/head-to-head/f05-agent-tasks-20261029/curator/oracles/typescript-03.json"
+    },
+    {
+      "bytes": 28182,
+      "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/execution-proposal.json",
+      "sha256": "7aaadfa58c2c9e44d22f562a96dfbcbfe9a1b2e66e7452e1cb412af868bf1c52",
+      "snapshot": "owner-inputs/benchmarks/head-to-head/f05-qualification-next8-20261029/execution-proposal.json"
+    },
+    {
+      "bytes": 1725,
+      "path": "benchmarks/head-to-head/f05-prelaunch-decisions-20261029/decision.json",
+      "sha256": "98fe7f62a140a80716008777cb11caf631e164bae705393d638583195020c0af",
+      "snapshot": "owner-inputs/benchmarks/head-to-head/f05-prelaunch-decisions-20261029/decision.json"
+    },
+    {
+      "bytes": 853,
+      "path": "benchmarks/head-to-head/f05-dependency-preparation-20261029/common-image.json",
+      "sha256": "a4efbd134e9edb1fbdabbf71d9ff6c257e6a0ecee97d1c52012b247516385c2f",
+      "snapshot": "owner-inputs/benchmarks/head-to-head/f05-dependency-preparation-20261029/common-image.json"
+    },
+    {
+      "bytes": 5137,
+      "path": "benchmarks/head-to-head/f05-dependency-preparation-20261029/plan.v3.json",
+      "sha256": "ac4ed276976b182bc565043779ea7bd1ebbcaf9c441d46f81b3ad569737237a1",
+      "snapshot": "owner-inputs/benchmarks/head-to-head/f05-dependency-preparation-20261029/plan.v3.json"
+    },
+    {
+      "bytes": 1040,
+      "path": "benchmarks/head-to-head/f05-dependency-preparation-20261029/image-attempt-3/logs/tools/stdout.txt",
+      "sha256": "7ed109fe20e068f792c1f16879c2d3bf8131151a2af61eb0211271149a1a180f",
+      "snapshot": "owner-inputs/benchmarks/head-to-head/f05-dependency-preparation-20261029/image-attempt-3/logs/tools/stdout.txt"
+    },
+    {
+      "bytes": 843,
+      "path": "benchmarks/head-to-head/f05-dependency-preparation-20261029/image-attempt-3/logs/tools/receipt.json",
+      "sha256": "b695e41fca4b7bf25c642a9ecce0e52a6216b4b8ee35cc73397eda3081ab4a70",
+      "snapshot": "owner-inputs/benchmarks/head-to-head/f05-dependency-preparation-20261029/image-attempt-3/logs/tools/receipt.json"
+    }
+  ],
+  "repository": "github.com/vuejs/core",
+  "revision": "05db7e807be841e6f343d0237669669b18c89d4d",
+  "sources": [
+    {
+      "bytes": 19541,
+      "path": ".github/contributing.md",
+      "sha256": "433673810dc21f66c83884a108a45ec5d1192d1964e6f2cefe840bfeb6de9843",
+      "snapshot": "sources/.github/contributing.md",
+      "url": "https://github.com/vuejs/core/blob/05db7e807be841e6f343d0237669669b18c89d4d/.github/contributing.md"
+    },
+    {
+      "bytes": 1410,
+      "path": ".github/workflows/ci.yml",
+      "sha256": "de90c129f8eff66393f4e52c2c7faf344864263327de5324decb70a390d0cd35",
+      "snapshot": "sources/.github/workflows/ci.yml",
+      "url": "https://github.com/vuejs/core/blob/05db7e807be841e6f343d0237669669b18c89d4d/.github/workflows/ci.yml"
+    },
+    {
+      "bytes": 3587,
+      "path": ".github/workflows/test.yml",
+      "sha256": "e3c271c035e23b87a1351b3459e2c37670322c518bee295a465b5f604b8fe189",
+      "snapshot": "sources/.github/workflows/test.yml",
+      "url": "https://github.com/vuejs/core/blob/05db7e807be841e6f343d0237669669b18c89d4d/.github/workflows/test.yml"
+    },
+    {
+      "bytes": 5,
+      "path": ".node-version",
+      "sha256": "a784a891ee985530f25d616fa372d1b360fc9d4ef38932ab8dc2f45edfa5b01d",
+      "snapshot": "sources/.node-version",
+      "url": "https://github.com/vuejs/core/blob/05db7e807be841e6f343d0237669669b18c89d4d/.node-version"
+    },
+    {
+      "bytes": 5155,
+      "path": "package.json",
+      "sha256": "e55e3b7b508c74dc88e9fae8f445ebfb95052b4c50f8503d9cb17594f802e4d1",
+      "snapshot": "sources/package.json",
+      "url": "https://github.com/vuejs/core/blob/05db7e807be841e6f343d0237669669b18c89d4d/package.json"
+    },
+    {
+      "bytes": 133173,
+      "path": "packages/vue/__tests__/e2e/Transition.spec.ts",
+      "sha256": "485953d57b87e8964c4d65701d6d636ac3f4811875ef1b2f0cbdeb86361bdac2",
+      "snapshot": "sources/packages/vue/__tests__/e2e/Transition.spec.ts",
+      "url": "https://github.com/vuejs/core/blob/05db7e807be841e6f343d0237669669b18c89d4d/packages/vue/__tests__/e2e/Transition.spec.ts"
+    },
+    {
+      "bytes": 11752,
+      "path": "packages/vue/__tests__/e2e/e2eBrowserUtils.ts",
+      "sha256": "2d0cb3dae05d665d2e53b98b5364b1510abbb65ba4d3c508aed76c92683db795",
+      "snapshot": "sources/packages/vue/__tests__/e2e/e2eBrowserUtils.ts",
+      "url": "https://github.com/vuejs/core/blob/05db7e807be841e6f343d0237669669b18c89d4d/packages/vue/__tests__/e2e/e2eBrowserUtils.ts"
+    },
+    {
+      "bytes": 5641,
+      "path": "packages/vue/__tests__/e2e/e2eUtils.ts",
+      "sha256": "ce93fefd0ba26af6ceebdeb276fb4e6112b37a00a92b68ae65321029cd91fb4a",
+      "snapshot": "sources/packages/vue/__tests__/e2e/e2eUtils.ts",
+      "url": "https://github.com/vuejs/core/blob/05db7e807be841e6f343d0237669669b18c89d4d/packages/vue/__tests__/e2e/e2eUtils.ts"
+    },
+    {
+      "bytes": 2795,
+      "path": "packages/vue/package.json",
+      "sha256": "206e267a523cd5ebbcdfab2ef2a243566cdbdd3d54c3d3bfd422fd64c12d22dc",
+      "snapshot": "sources/packages/vue/package.json",
+      "url": "https://github.com/vuejs/core/blob/05db7e807be841e6f343d0237669669b18c89d4d/packages/vue/package.json"
+    },
+    {
+      "bytes": 201228,
+      "path": "pnpm-lock.yaml",
+      "sha256": "13d0f6c58ac31f229387442e42a35a66a700386349ee1b99bdb7e6a2fbc3aadd",
+      "snapshot": "sources/pnpm-lock.yaml",
+      "url": "https://github.com/vuejs/core/blob/05db7e807be841e6f343d0237669669b18c89d4d/pnpm-lock.yaml"
+    },
+    {
+      "bytes": 862,
+      "path": "pnpm-workspace.yaml",
+      "sha256": "54d0a86d1828707bbfe24214ee584167ce08dc70f6bfccb2fcea748e6f1c8401",
+      "snapshot": "sources/pnpm-workspace.yaml",
+      "url": "https://github.com/vuejs/core/blob/05db7e807be841e6f343d0237669669b18c89d4d/pnpm-workspace.yaml"
+    },
+    {
+      "bytes": 11836,
+      "path": "rollup.config.js",
+      "sha256": "aa56adca0bb604d70c463270fa6fac6d32f8ce984a4e3c888f4f0e63091d2de1",
+      "snapshot": "sources/rollup.config.js",
+      "url": "https://github.com/vuejs/core/blob/05db7e807be841e6f343d0237669669b18c89d4d/rollup.config.js"
+    },
+    {
+      "bytes": 1042,
+      "path": "scripts/aliases.js",
+      "sha256": "28386214b05ddbf585110f6927d0c6d0cd870c594076633105ec50add3ac73bd",
+      "snapshot": "sources/scripts/aliases.js",
+      "url": "https://github.com/vuejs/core/blob/05db7e807be841e6f343d0237669669b18c89d4d/scripts/aliases.js"
+    },
+    {
+      "bytes": 6449,
+      "path": "scripts/build.js",
+      "sha256": "ed2d1f50b6f8daeda0aa48ca9c9bcfeb3ea04386f101baa76620e03783068490",
+      "snapshot": "sources/scripts/build.js",
+      "url": "https://github.com/vuejs/core/blob/05db7e807be841e6f343d0237669669b18c89d4d/scripts/build.js"
+    },
+    {
+      "bytes": 9308,
+      "path": "scripts/inline-enums.js",
+      "sha256": "ea98e3ddb56cce7e44254f386ab15f3bdeb26a9f87ff1c0ff809b1d7df7048d1",
+      "snapshot": "sources/scripts/inline-enums.js",
+      "url": "https://github.com/vuejs/core/blob/05db7e807be841e6f343d0237669669b18c89d4d/scripts/inline-enums.js"
+    },
+    {
+      "bytes": 2771,
+      "path": "scripts/setup-vitest.ts",
+      "sha256": "6bc3196d8b0d21bdb2f159ea9da42d051038802f1726ab17a6a5d2b3520eb59d",
+      "snapshot": "sources/scripts/setup-vitest.ts",
+      "url": "https://github.com/vuejs/core/blob/05db7e807be841e6f343d0237669669b18c89d4d/scripts/setup-vitest.ts"
+    },
+    {
+      "bytes": 2598,
+      "path": "scripts/utils.js",
+      "sha256": "3c65bcc9a67edf9282f80f54369109ca21cebfbba682ace741c07aad01cfb431",
+      "snapshot": "sources/scripts/utils.js",
+      "url": "https://github.com/vuejs/core/blob/05db7e807be841e6f343d0237669669b18c89d4d/scripts/utils.js"
+    },
+    {
+      "bytes": 3321,
+      "path": "vitest.config.ts",
+      "sha256": "98db4cc683fa725ef5beb3b19f215d07ffb972cf80650b404221a73aaa03a361",
+      "snapshot": "sources/vitest.config.ts",
+      "url": "https://github.com/vuejs/core/blob/05db7e807be841e6f343d0237669669b18c89d4d/vitest.config.ts"
+    }
+  ]
+}

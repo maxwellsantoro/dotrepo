@@ -1,0 +1,66 @@
+{
+  "actionsForbidden": [
+    "network/acquisition",
+    "upstream imports/tests",
+    "Docker/daemon",
+    "installations",
+    "providers",
+    "shared/Git edits"
+  ],
+  "automaticHighPromotion": false,
+  "base": "5d31296dce2d692c34d05dd2bfcd637e8a7e74ce",
+  "boundedReading": {
+    "additionalInertSourceFileLimit": 12,
+    "additionalSourceByteLimit": 1048576,
+    "allowed": "already retained sources only; reference bodies if present, otherwise smallest missing-source abstention",
+    "newAcquisition": false
+  },
+  "completeInstructionEstablished": false,
+  "context": "Known exposed development identity; assessor familiar with prior gold/importer/diagnostics, not fresh blinded qualification or consumer evidence",
+  "declaredAt": "2026-10-29T13:51:20.115104+00:00",
+  "declaredBeforeAdditionalSourceReading": true,
+  "independentExecution": false,
+  "packetIdentity": "e1-compose-next-source-completeness-disposition-20261029",
+  "question": "Whether the root Dockerfile untagged package-list relay and tagged test command establish the documented maintained main-module unit scope; distinguish documented applicability from actual complete execution and from every possible tagged test.",
+  "readOwners": {
+    "AGENTS.md": {
+      "bytes": 10336,
+      "sha256": "ac777fb15c3f3de96538d0449acb2aea0d0a61f5364a99c87db6e2be1dff633d"
+    },
+    "benchmarks/head-to-head/experiments/applicability-2026-10-29/e1.md": {
+      "bytes": 4777,
+      "sha256": "9ec156e06ba21105b68f51998d04168ca14f8d5f03e3d6c0ef115f1cb2515de8"
+    },
+    "index/telemetry/e1-compose-source-disposition-20261029/disposition.json": {
+      "bytes": 4917,
+      "sha256": "40c51f47f05a52b580b7be0b8a9a3eaf66ea1224a976f1e04809984b90f51066"
+    },
+    "index/telemetry/e1-keras-install-source-20261029/disposition.json": {
+      "bytes": 24899,
+      "sha256": "01400a9738c804545c07c27b24b1f6cab54e08996c288bf90b8e0ad267320978"
+    },
+    "index/telemetry/e1-keras-source-disposition-20261029/disposition.json": {
+      "bytes": 5423,
+      "sha256": "7ec613b55e20d0ab62f6f47aab095985dfdecf48786b44657f6bc937c265bcf4"
+    },
+    "index/telemetry/e1-next-context-establishment-20261029/closure-2/observations.json": {
+      "bytes": 8585,
+      "sha256": "a1deea5acf9850ca6444b8848dc5051a81378ec9a528eeee4aeaa7aa5bb56429"
+    },
+    "index/telemetry/e1-next-context-establishment-20261029/source-proposal.json": {
+      "bytes": 18541,
+      "sha256": "6678af84c0af5dc09579e81b122e1bad29959229e2f2b3c76856a6f932cc19b7"
+    }
+  },
+  "repository": "github.com/docker/compose",
+  "revision": "343bb382d2192b88d84af49971bb5cb99bee268c",
+  "taskId": "e1-go-03-repository-tests",
+  "tuple": {
+    "command": "make test",
+    "component": null,
+    "platform": "documented Linux default path",
+    "prerequisites": "retain exact prior source-proposal prerequisites; no new inferred backend/tag/tool prerequisite",
+    "scope": "repository",
+    "workingDirectory": "."
+  }
+}

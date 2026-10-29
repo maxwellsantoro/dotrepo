@@ -1,0 +1,171 @@
+{
+  "identity": "closure-1",
+  "repository": "docker/compose",
+  "revision": "343bb382d2192b88d84af49971bb5cb99bee268c",
+  "rootTreeSha1": "b10e2fc106b7ea146f5d31f56ca0386688275aa7",
+  "relayTreeSha1": "ac3e3bb514a8b3963d43a1880a793bd08191efec",
+  "requests": [
+    {
+      "path": "requests/01-commit.json",
+      "args": {
+        "url": "https://api.github.com/repos/docker/compose/git/commits/343bb382d2192b88d84af49971bb5cb99bee268c"
+      },
+      "sha256": "f0a9fed533a926a3df38b003e15d493f186098daf182959c1722839b6702b89f",
+      "readOnly": true
+    },
+    {
+      "path": "requests/02-root-tree.json",
+      "args": {
+        "url": "https://api.github.com/repos/docker/compose/git/trees/b10e2fc106b7ea146f5d31f56ca0386688275aa7"
+      },
+      "sha256": "bb83c5e0864c2714fe7f7f63a4e9a4ccfd9b222b6313b30a05df7cc82b2f78ac",
+      "readOnly": true
+    },
+    {
+      "path": "requests/03-relay-tree.json",
+      "args": {
+        "url": "https://api.github.com/repos/docker/compose/git/trees/ac3e3bb514a8b3963d43a1880a793bd08191efec"
+      },
+      "sha256": "b2ee9d6b0c0aed753f6f1cac4956fdb40b6cff4f126c806a48731abf0e9be4d1",
+      "readOnly": true
+    }
+  ],
+  "readOnlyApiCalls": 3,
+  "newSourceFiles": 0,
+  "newSourceBytes": 0,
+  "treeObjectsReconstructedAndHashMatched": true,
+  "rootEntryCount": 27,
+  "defaultBakeFiles": [
+    {
+      "path": "compose.yaml",
+      "presentInFrozenRoot": false,
+      "entry": null
+    },
+    {
+      "path": "compose.yml",
+      "presentInFrozenRoot": false,
+      "entry": null
+    },
+    {
+      "path": "docker-compose.yml",
+      "presentInFrozenRoot": false,
+      "entry": null
+    },
+    {
+      "path": "docker-compose.yaml",
+      "presentInFrozenRoot": false,
+      "entry": null
+    },
+    {
+      "path": "docker-bake.json",
+      "presentInFrozenRoot": false,
+      "entry": null
+    },
+    {
+      "path": "docker-bake.hcl",
+      "presentInFrozenRoot": true,
+      "entry": {
+        "path": "docker-bake.hcl",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "733df6e5f90f9f479645cc66abd60fcf6da8bcdf",
+        "size": 4836,
+        "url": "https://api.github.com/repos/docker/compose/git/blobs/733df6e5f90f9f479645cc66abd60fcf6da8bcdf"
+      }
+    },
+    {
+      "path": "docker-bake.override.json",
+      "presentInFrozenRoot": false,
+      "entry": null
+    },
+    {
+      "path": "docker-bake.override.hcl",
+      "presentInFrozenRoot": false,
+      "entry": null
+    }
+  ],
+  "rootGoWorkPresent": false,
+  "rootGoWorkSumPresent": false,
+  "rootModule": {
+    "path": "go.mod",
+    "mode": "100644",
+    "type": "blob",
+    "sha": "5cbae0b9a804c85f4ce490af760efcb6e4a22877",
+    "size": 6691,
+    "url": "https://api.github.com/repos/docker/compose/git/blobs/5cbae0b9a804c85f4ce490af760efcb6e4a22877"
+  },
+  "relayModule": {
+    "path": "go.mod",
+    "mode": "100644",
+    "type": "blob",
+    "sha": "7b4c9437495574466cc7dd118b0b59a198607b32",
+    "size": 48,
+    "url": "https://api.github.com/repos/docker/compose/git/blobs/7b4c9437495574466cc7dd118b0b59a198607b32"
+  },
+  "retainedSourceTreeBindings": [
+    {
+      "path": "BUILDING.md",
+      "localPath": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/BUILDING.md",
+      "sha256": "68694744374f7b98c6dd284aea8d657267a6f6383e9bd5580f725a3e723a7cd4",
+      "gitBlobSha1": "e9861f0814004f5e03fe0ad3db430fca7c91dee5",
+      "mode": "100644",
+      "rootTreeSha1": "b10e2fc106b7ea146f5d31f56ca0386688275aa7"
+    },
+    {
+      "path": "Makefile",
+      "localPath": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/Makefile",
+      "sha256": "927856982fcd81c94dd843743000b8a828baf5af02503d64f7a4c4cc477ac4cc",
+      "gitBlobSha1": "3e66c558443a1a38db4f06eba027240376d1a3a2",
+      "mode": "100644",
+      "rootTreeSha1": "b10e2fc106b7ea146f5d31f56ca0386688275aa7"
+    },
+    {
+      "path": "docker-bake.hcl",
+      "localPath": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/docker-bake.hcl",
+      "sha256": "d8e460f357e8913b41a81458d2c3280f5494368c2f20eaca7ebcb1bdeaeebce5",
+      "gitBlobSha1": "733df6e5f90f9f479645cc66abd60fcf6da8bcdf",
+      "mode": "100644",
+      "rootTreeSha1": "b10e2fc106b7ea146f5d31f56ca0386688275aa7"
+    },
+    {
+      "path": "Dockerfile",
+      "localPath": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/Dockerfile",
+      "sha256": "5f35a0fce55a645e2497f861aba1414f237d532493b4f2bda138c609b28ef44f",
+      "gitBlobSha1": "b39618746200bcc4b229490f3027cd20fdbf6e17",
+      "mode": "100644",
+      "rootTreeSha1": "b10e2fc106b7ea146f5d31f56ca0386688275aa7"
+    },
+    {
+      "path": "go.mod",
+      "localPath": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/go.mod",
+      "sha256": "add1d3fc58082dc40ea0ebcc3d2c80b1f4bf99a5452aab2026e8997b511cfb09",
+      "gitBlobSha1": "5cbae0b9a804c85f4ce490af760efcb6e4a22877",
+      "mode": "100644",
+      "rootTreeSha1": "b10e2fc106b7ea146f5d31f56ca0386688275aa7"
+    },
+    {
+      "path": "relay/go.mod",
+      "localPath": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/relay/go.mod",
+      "sha256": "d19203608de73a4b66a822559f9a8460d07a29b2b92c2f4e7665d5ddda9595f9",
+      "gitBlobSha1": "7b4c9437495574466cc7dd118b0b59a198607b32",
+      "mode": "100644",
+      "relayTreeSha1": "ac3e3bb514a8b3963d43a1880a793bd08191efec",
+      "text": "module github.com/docker/compose-relay\n\ngo 1.23\n"
+    }
+  ],
+  "commitSignatureStatus": {
+    "verified": false,
+    "reason": "unsigned",
+    "signature": null,
+    "payload": null,
+    "verified_at": null
+  },
+  "limits": [
+    "GitHub exact commit response binds its root tree pointer; commit object/signature not independently reconstructed or verified.",
+    "Root tree is complete/nontruncated and reconstructed Git SHA matches; absence is only the frozen commit root, not the user checkout, parent workspace or env.",
+    "No additional Bake default source files are present beyond already-retained docker-bake.hcl, so zero new file bodies acquired.",
+    "Root .dockerignore and .go-version entries are present in metadata; their bytes were not fetched under the default-file-only acquisition scope. No semantic claims are inferred for them.",
+    "No exhaustive nested module/test helper inventory; known relay boundary and root absence of go.work established.",
+    "No source/runtime execution, package installation, Docker, Cargo, provider, evaluated-index/profile or F05 access."
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "nativeExecution": false,
+  "observations": [
+    {
+      "detail": "Block parser metadata variables first/doc were assigned conditionally; Ruff flagged use-before-definition although frozen source data replay passed. Initialized metadata state before final rerun; no input/source or plan policy changed.",
+      "kind": "ruff-only-initial-controlfailure"
+    }
+  ],
+  "state": "owned-data-tool-development-only"
+}

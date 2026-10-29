@@ -1,0 +1,153 @@
+{
+  "actualAdmission": false,
+  "artifacts": {
+    "PLAN_FREEZE.json": {
+      "bytes": 396,
+      "sha256": "10e819f24fe40515b2d2566c565b48926727ed0de88e4a1a9e8f5a62aa06f7fa"
+    },
+    "README.md": {
+      "bytes": 1956,
+      "sha256": "72e8951e40e9757aa24c92280a605bdefbd1807e3ee72d8d73692ff90ae8a0a2"
+    },
+    "acquire.py": {
+      "bytes": 17384,
+      "sha256": "042a4ed5eb29a5661fd9b90f65a6efa244608b180d9eac5e0e334fbe60972dd9"
+    },
+    "acquisition.json": {
+      "bytes": 10871,
+      "sha256": "873ef0980495092cfe5d6462f6a05adaa76fe14e28bd113fd89c79e4d630ea27"
+    },
+    "excerpts.json": {
+      "bytes": 3679,
+      "sha256": "876f3436c2ffcc61c982586e97461591d8230029edd48a94298e74b7cffa3420"
+    },
+    "inventory.json": {
+      "bytes": 281831,
+      "sha256": "3d5f79f9bb178abaa4f94f259ac5984ee3ca259b41109cf0e8d668692699e24a"
+    },
+    "logs/batch-stderr.bin": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "logs/commit-object/receipt.json": {
+      "bytes": 1579,
+      "sha256": "50c5f7f3827305e9369d86ed44e7a83729951f629595cf1961a849a90162c4c4"
+    },
+    "logs/commit-object/stderr.bin": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "logs/commit-object/stdout.bin": {
+      "bytes": 824,
+      "sha256": "905936a6c2b6dff9468badffa902a20560e6ce469c8810a5e1e050b478dee8fb"
+    },
+    "logs/git-fetch/receipt.json": {
+      "bytes": 1688,
+      "sha256": "d7c69f1d7f777d1e804786cc2b4a065067225bf34c7a6c6b02aea7147fd3ba43"
+    },
+    "logs/git-fetch/stderr.bin": {
+      "bytes": 115,
+      "sha256": "36dcc87ca4564371606a402787b792d4ac33f8e2facf69b5fd6ecd79a0adfe47"
+    },
+    "logs/git-fetch/stdout.bin": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "logs/git-init/receipt.json": {
+      "bytes": 1611,
+      "sha256": "ca8eb976046e1392444c7c566cd940e05aad818d49e4e9a201ce5296fa43f761"
+    },
+    "logs/git-init/stderr.bin": {
+      "bytes": 586,
+      "sha256": "3e70934f1909b0f5a846d62237fcc1509d733b9fb0321187024723dfc67176d3"
+    },
+    "logs/git-init/stdout.bin": {
+      "bytes": 102,
+      "sha256": "ce523d79dcec9ffa444b868dd98c918ec980ce8c594780f66b64f2ab80be8d38"
+    },
+    "logs/recursive-tree/receipt.json": {
+      "bytes": 1597,
+      "sha256": "db13613dbe217313901bb6bc1f68f338352cf5315a1f7571121f57537a1867fe"
+    },
+    "logs/recursive-tree/stderr.bin": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "logs/recursive-tree/stdout.bin": {
+      "bytes": 117236,
+      "sha256": "cfde33627bec247a60de2a112ce6a83e9036019455a2e9db169d487089596a54"
+    },
+    "logs/revision/receipt.json": {
+      "bytes": 1541,
+      "sha256": "6f5d61ec1e2ec09d48b3d70e83350e9a746cff42561088a43cb8e706922c9539"
+    },
+    "logs/revision/stderr.bin": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "logs/revision/stdout.bin": {
+      "bytes": 41,
+      "sha256": "6e1b7bbc9ff60fa9b5a8c881f5399c207a3048e261a0dc803a1d4f4a98a32cbe"
+    },
+    "objects.git/FETCH_HEAD": {
+      "bytes": 122,
+      "sha256": "b9f7e50b403072186aba08fedb407d01233e3940281cf41e02b60cc6f23a3373"
+    },
+    "objects.git/HEAD": {
+      "bytes": 23,
+      "sha256": "f6f2b945f6c411b02ba3da9c7ace88dcf71b6af65ba2e0d89aa82900042b5a10"
+    },
+    "objects.git/config": {
+      "bytes": 111,
+      "sha256": "3c5cc3e72b5473d08433171d50fc687ac3aa2a6a3f4c20b97f5b66f581b0fec9"
+    },
+    "objects.git/objects/pack/pack-f97939507a428e072dfee7206facbab3c17ce58a.idx": {
+      "bytes": 34252,
+      "sha256": "16c5cd5f8cedb345a87fa57e30072077f911d1371cba9315bfc7af7cb228f6be"
+    },
+    "objects.git/objects/pack/pack-f97939507a428e072dfee7206facbab3c17ce58a.pack": {
+      "bytes": 1162702,
+      "sha256": "9af9a515163e283357363d7e87931be72defca7fea8110af3e58dfc512e42341"
+    },
+    "objects.git/objects/pack/pack-f97939507a428e072dfee7206facbab3c17ce58a.rev": {
+      "bytes": 4792,
+      "sha256": "72bc2580ae0df12fd6eb21e9a52acdb4f765d541deeaebb5823343e871abf71f"
+    },
+    "objects.git/shallow": {
+      "bytes": 41,
+      "sha256": "6e1b7bbc9ff60fa9b5a8c881f5399c207a3048e261a0dc803a1d4f4a98a32cbe"
+    },
+    "overlap.json": {
+      "bytes": 1428,
+      "sha256": "a4822ddbfca837ae3a4ae79ecda0590ca99e9771a5fc15f4f2c524f85e7631eb"
+    },
+    "plan.json": {
+      "bytes": 2938,
+      "sha256": "e85367cc76061f639deedad75c1c85449b34532bf412dec253c24b89396cb5ab"
+    },
+    "provenance.json": {
+      "bytes": 1906,
+      "sha256": "9eeda43b72bd4e980a072dce9c39e64b1de8c079796c1f64bbcfc06be75fb560"
+    },
+    "source.tar": {
+      "bytes": 4464640,
+      "sha256": "3c26db8b626c28f7fe149cabe27bd38cc0188f225efce7c78eda9d4730fed36a"
+    },
+    "source.tar.gz": {
+      "bytes": 861055,
+      "sha256": "cd977a07c0f45900eaadb175fe03907b42f7597b5258b2bc58fd85b6cac2ca22"
+    },
+    "verify.py": {
+      "bytes": 2914,
+      "sha256": "6cc3d30ebf39462543f7cab2f8dc6ad3df7ad232ba5fb844023096fc6094410c"
+    }
+  },
+  "confidencePromotion": false,
+  "costUsd": null,
+  "identity": "e1-compose-full-source-20261029",
+  "providerCalls": 0,
+  "repository": "github.com/docker/compose",
+  "revision": "343bb382d2192b88d84af49971bb5cb99bee268c",
+  "state": "full-source-data-acquired-not-instruction-qualification",
+  "upstreamExecuted": false
+}

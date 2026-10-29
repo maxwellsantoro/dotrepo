@@ -1,0 +1,27 @@
+{
+  "args": {
+    "url": "https://api.github.com/repos/docker/compose/git/commits/343bb382d2192b88d84af49971bb5cb99bee268c"
+  },
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "{\"sha\":\"343bb382d2192b88d84af49971bb5cb99bee268c\",\"node_id\":\"C_kwDOAOWUd9oAKDM0M2JiMzgyZDIxOTJiODhkODRhZjQ5OTcxYmI1Y2I5OWJlZTI2OGM\",\"url\":\"https://api.github.com/repos/docker/compose/git/commits/343bb382d2192b88d84af49971bb5cb99bee268c\",\"html_url\":\"https://github.com/docker/compose/commit/343bb382d2192b88d84af49971bb5cb99bee268c\",\"author\":{\"name\":\"Nicolas De Loof\",\"email\":\"nicolas.deloof@gmail.com\",\"date\":\"2026-10-28T15:11:32Z\"},\"committer\":{\"name\":\"Nicolas De loof\",\"email\":\"nicolas.deloof@gmail.com\",\"date\":\"2026-10-28T15:31:14Z\"},\"tree\":{\"sha\":\"b10e2fc106b7ea146f5d31f56ca0386688275aa7\",\"url\":\"https://api.github.com/repos/docker/compose/git/trees/b10e2fc106b7ea146f5d31f56ca0386688275aa7\"},\"message\":\"build(lint): bump golangci-lint to v2.15.0 and fix what it now reports\\n\\nThe release updates errcheck (1.20 to 1.30) and gocognit (1.2.1 to 1.3.0).\\nerrcheck now reports the receives from an error channel whose value is dropped\\non purpose, in three places: waiting for the attach copy to end after the\\ncontext is done, draining the container wait channel of a failed hook, and\\nwaiting for Up to return in a test. Say why on each, rather than handling an\\nerror nobody can act on. gocognit's new count is handled by the previous\\ncommit.\\n\\nSigned-off-by: Nicolas De Loof <nicolas.deloof@gmail.com>\",\"parents\":[{\"sha\":\"70ec1e62f696bad9c2ec6333ca7f03283cea9f6e\",\"url\":\"https://api.github.com/repos/docker/compose/git/commits/70ec1e62f696bad9c2ec6333ca7f03283cea9f6e\",\"html_url\":\"https://github.com/docker/compose/commit/70ec1e62f696bad9c2ec6333ca7f03283cea9f6e\"}],\"verification\":{\"verified\":false,\"reason\":\"unsigned\",\"signature\":null,\"payload\":null,\"verified_at\":null}}",
+      "title": "343bb382d2192b88d84af49971bb5cb99bee268c",
+      "modified_date": null,
+      "url": "https://api.github.com/repos/docker/compose/git/commits/343bb382d2192b88d84af49971bb5cb99bee268c",
+      "display_url": "https://api.github.com/repos/docker/compose/git/commits/343bb382d2192b88d84af49971bb5cb99bee268c",
+      "display_title": "343bb382d2192b88d84af49971bb5cb99bee268c",
+      "structuredContent": {
+        "title": "343bb382d2192b88d84af49971bb5cb99bee268c",
+        "content": "{\"sha\":\"343bb382d2192b88d84af49971bb5cb99bee268c\",\"node_id\":\"C_kwDOAOWUd9oAKDM0M2JiMzgyZDIxOTJiODhkODRhZjQ5OTcxYmI1Y2I5OWJlZTI2OGM\",\"url\":\"https://api.github.com/repos/docker/compose/git/commits/343bb382d2192b88d84af49971bb5cb99bee268c\",\"html_url\":\"https://github.com/docker/compose/commit/343bb382d2192b88d84af49971bb5cb99bee268c\",\"author\":{\"name\":\"Nicolas De Loof\",\"email\":\"nicolas.deloof@gmail.com\",\"date\":\"2026-10-28T15:11:32Z\"},\"committer\":{\"name\":\"Nicolas De loof\",\"email\":\"nicolas.deloof@gmail.com\",\"date\":\"2026-10-28T15:31:14Z\"},\"tree\":{\"sha\":\"b10e2fc106b7ea146f5d31f56ca0386688275aa7\",\"url\":\"https://api.github.com/repos/docker/compose/git/trees/b10e2fc106b7ea146f5d31f56ca0386688275aa7\"},\"message\":\"build(lint): bump golangci-lint to v2.15.0 and fix what it now reports\\n\\nThe release updates errcheck (1.20 to 1.30) and gocognit (1.2.1 to 1.3.0).\\nerrcheck now reports the receives from an error channel whose value is dropped\\non purpose, in three places: waiting for the attach copy to end after the\\ncontext is done, draining the container wait channel of a failed hook, and\\nwaiting for Up to return in a test. Say why on each, rather than handling an\\nerror nobody can act on. gocognit's new count is handled by the previous\\ncommit.\\n\\nSigned-off-by: Nicolas De Loof <nicolas.deloof@gmail.com>\",\"parents\":[{\"sha\":\"70ec1e62f696bad9c2ec6333ca7f03283cea9f6e\",\"url\":\"https://api.github.com/repos/docker/compose/git/commits/70ec1e62f696bad9c2ec6333ca7f03283cea9f6e\",\"html_url\":\"https://github.com/docker/compose/commit/70ec1e62f696bad9c2ec6333ca7f03283cea9f6e\"}],\"verification\":{\"verified\":false,\"reason\":\"unsigned\",\"signature\":null,\"payload\":null,\"verified_at\":null}}",
+        "display_url": "https://api.github.com/repos/docker/compose/git/commits/343bb382d2192b88d84af49971bb5cb99bee268c"
+      }
+    },
+    "isError": false
+  }
+}

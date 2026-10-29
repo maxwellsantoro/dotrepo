@@ -1,0 +1,70 @@
+{
+  "abstractCounterexamples": [
+    {
+      "actualComposePackageClaim": false,
+      "intendedUnits": [
+        "github.com/docker/compose/v5/pkg/unit"
+      ],
+      "missingIntended": [],
+      "name": "all-intended-packages-selected",
+      "selectedByLiteralSubstringFilter": [
+        "github.com/docker/compose/v5/pkg/unit"
+      ],
+      "taggedPackageInventory": [
+        "github.com/docker/compose/v5/pkg/e2e",
+        "github.com/docker/compose/v5/pkg/unit"
+      ],
+      "untaggedPackageInventory": [
+        "github.com/docker/compose/v5/pkg/e2e",
+        "github.com/docker/compose/v5/pkg/unit"
+      ]
+    },
+    {
+      "actualComposePackageClaim": false,
+      "intendedUnits": [
+        "github.com/docker/compose/v5/pkg/taggedunit",
+        "github.com/docker/compose/v5/pkg/unit"
+      ],
+      "missingIntended": [
+        "github.com/docker/compose/v5/pkg/taggedunit"
+      ],
+      "name": "tag-only-unit-package-not-enumerated",
+      "selectedByLiteralSubstringFilter": [
+        "github.com/docker/compose/v5/pkg/unit"
+      ],
+      "taggedPackageInventory": [
+        "github.com/docker/compose/v5/pkg/taggedunit",
+        "github.com/docker/compose/v5/pkg/unit"
+      ],
+      "untaggedPackageInventory": [
+        "github.com/docker/compose/v5/pkg/unit"
+      ]
+    },
+    {
+      "actualComposePackageClaim": false,
+      "intendedUnits": [
+        "github.com/docker/compose/v5/pkg/type2enum"
+      ],
+      "missingIntended": [
+        "github.com/docker/compose/v5/pkg/type2enum"
+      ],
+      "name": "literal-e2e-substring-is-not-a-directory-classifier",
+      "selectedByLiteralSubstringFilter": [],
+      "taggedPackageInventory": [
+        "github.com/docker/compose/v5/pkg/type2enum"
+      ],
+      "untaggedPackageInventory": [
+        "github.com/docker/compose/v5/pkg/type2enum"
+      ]
+    }
+  ],
+  "allPassed": true,
+  "instructionQualified": false,
+  "ownerInputHashesMatched": 7,
+  "passagesMatched": 12,
+  "rootTreeIsCompleteAtOneLevelNotRecursive": true,
+  "rootTreeSha1Reconstructed": "b10e2fc106b7ea146f5d31f56ca0386688275aa7",
+  "sourceFilesHashAndBlobMatched": 9,
+  "sourceOrShellOrGoExecuted": false,
+  "upstreamOrNetworkActions": 0
+}

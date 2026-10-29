@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- Retain exact-source Compose package-membership evidence and independent reviews
+  with portable local checks and an explicit external-archive mode. Preserve
+  conditional applicability and the unresolved execution/context joins; no
+  complete instruction or confidence promotion follows.
+- Retain an independently reviewed source-free Python/uv probe for the frozen
+  Python-01 task, including exact tool/ABI/isolation observations, raw receipts
+  and cleanup evidence. Preserve the remaining dependency, native-oracle and
+  autonomous-campaign gates.
 - Prepare a full-union Python task phase scorer with explicit synthetic source
   slots, retaining the original null-phase false acceptance before correcting
   phase-start validation. Keep native collection and trusted capture unresolved;

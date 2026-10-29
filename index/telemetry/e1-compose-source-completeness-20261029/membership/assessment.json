@@ -1,0 +1,90 @@
+{
+  "assessorFamiliarity": "Prior Keras/Compose/E1 source and diagnostic exposure, author of parent pre-acquisition assessment; not fresh blind qualification or independent consumer evidence.",
+  "automaticHighPromotion": false,
+  "conditions": [
+    "Linux Go selection, CGO1, gc compiler, source-intended Go1.26.10; no extra GOFLAGS or custom tags",
+    "TAGS command substitution supplies no extra enumeration arguments; its actual behavior is not observed",
+    "go list loads/completes the selected source packages; imports/typechecking/acquisition not established here",
+    "test command receives source-intended e2e build tag; no effective argv/environment observed",
+    "default unchanged Make/Bake/Dockerfile and clean exact source tree; relay separate module/e2e separate lane"
+  ],
+  "consumerAcceptance": false,
+  "consumerBenefit": false,
+  "controls": {
+    "abstractAdversarialMembershipExamples": "tag-only unit directory, accidental substring exclusion, module-path substring, test-only package, nested module, ignored folders and data-driven scope exclusion",
+    "acquisition35ArtifactsUnchanged": true,
+    "allPassed": true,
+    "count": 50,
+    "headerSourceByteExact": 407,
+    "parent25ArtifactsUnchanged": true,
+    "parserLimits": "ASCII constraint tags/expressions as actually observed; no complete portable Go parser/typechecker claim; inherited import/build/test behavior not modeled"
+  },
+  "explicitContext": {
+    "CGO_ENABLED": "1",
+    "GOARCH": "386",
+    "GOOS": "linux",
+    "counts": {
+      "intendedUnitTestPackages": 27,
+      "mainModuleDirectories": 38,
+      "omittedIntendedUnitTestPackages": 0,
+      "prospectiveSelectedDirectories": 37,
+      "sourceGoDirectories": 39
+    },
+    "effectiveChildContextObserved": false,
+    "enumeratorBuildTags": [],
+    "packages": "see membership.json; not repeated here",
+    "testBuildTags": [
+      "e2e"
+    ],
+    "toolchain": "source-intended Go1.26.10 gc; release tags through go1.26"
+  },
+  "generalSemanticEstablishmentCondition": "A source-based complete-tuple decision may discharge a concrete selector ambiguity by comparing full frozen package headers, module boundaries and explicit scope exclusions under declared platform/tag/CGO/toolchain conditions. The file/package membership relation can be source-established without compiling or proving dependency/program correctness. Keep unresolved command-expansion/effective-context facts explicit; do not replace them with a plausible flag normalization or an observed-success claim.",
+  "heldOutQualification": false,
+  "independentExecution": false,
+  "interpretation": {
+    "buildSetting": "Bake source declares BUILD_TAGS=e2e and supplies it to the Dockerfile ARG; the shell source spells -tags \"$BUILD_TAGS\" after the gotestsum separator. These are source-intended settings/arguments, not an observed child context.",
+    "defaultVsAll": "The intended task is the maintainer main-module unit default, excluding separately documented e2e and relay lanes. It is not all modules, every GOOS/custom tag combination, dynamic tests, all assertions or full behavior coverage.",
+    "literalTAGS": "The Dockerfile source literally executes $(TAGS) inside command substitution. Header membership cannot establish that executable lookup/output; it is not normalized into a Make variable or a -tags flag."
+  },
+  "knownDevelopment": true,
+  "limits": [
+    "No upstream source bodies after package declarations were analyzed; full file contents were hashed only for integrity.",
+    "No C import/typechecking/generated-source/TestMain/dynamic-test/skip/behavior accounting; these cannot be inferred from package membership.",
+    "Filename architecture label enumeration is grammar testing, not proof every label is supported by source-intended Go or the Alpine image.",
+    "No new source selection, task replacement, package exclusion or global acceptance rule; membership-policy.json contains explicit source-derived scope data."
+  ],
+  "newEvidence": {
+    "acquisitionFreezeSha256": "8d395d2a1040a5254c3ce3aadca84a9c611ee85ef0f788f4b81c16d7de13c9ee",
+    "archiveSha256": "3c26db8b626c28f7fe149cabe27bd38cc0188f225efce7c78eda9d4730fed36a",
+    "goFiles": 407,
+    "headerBytes": 253987,
+    "inventorySha256": "3d5f79f9bb178abaa4f94f259ac5984ee3ca259b41109cf0e8d668692699e24a",
+    "maxHeaderBytes": 1226,
+    "routingBytes": 31805,
+    "routingFiles": 9,
+    "verifiedMembers": 956
+  },
+  "newNetworkOrDaemonOrProviderActions": 0,
+  "packetIdentity": "compose-selected-unit-source-membership-amendment-1",
+  "parentPreAcquisitionAssessmentUnchanged": true,
+  "questionDisposition": {
+    "conditionalNotNative": "This is an inert source selection relation, not go list output, a native collected test inventory, observed effective Go argv, import/typecheck success, or test behavior coverage.",
+    "establishedNow": "Within the declared source contexts, all27 main-module unit test packages and117 selected unit test files remain in scope. Untagged and intended-e2e-tagged source file sets are identical for every intended unit directory. Source package selection removes only pkg/e2e from38main-module Go directories, retaining37; relay is separate. No architecture suffix or architecture/release/compiler/CGO token occurs among these source headers, so architecture label does not change this finite source set.",
+    "noActualOmissionFromThisMismatch": true,
+    "previousMissingFact": "Same-revision selected-package/build-constraint membership for the untagged enumeration versus intended e2e-tagged unit set and literal exclusion."
+  },
+  "repository": "github.com/docker/compose",
+  "revision": "343bb382d2192b88d84af49971bb5cb99bee268c",
+  "sourceImportsOrTests": false,
+  "state": "specific-source-membership-proposition-conditionally-closed; full-tuple-context-unresolved",
+  "tupleDisposition": {
+    "automaticHighPromotion": false,
+    "command": "make test source-established",
+    "completeApplicableInstructionEstablished": false,
+    "newPrerequisiteNamedTAGSInvented": false,
+    "prerequisites": "original documented Linux/Docker/Make/Go/Buildx/BuildKit/native/module/tool chain retained; not reinterpreted as measured readiness",
+    "remainingSmallestSourceContextFact": "Resolve default shell $(TAGS) lookup/stdout and resulting enumeration arguments (or a source-supported intended relay correction) before asserting an unconditional complete effective tuple. Future actual invocation must independently bind argv/effective context, but successful execution and universal dependency correctness are not E1 source prerequisites.",
+    "scope": "maintained main-module unit default source-established; specific no-omission relation closed conditionally",
+    "workingDirectory": ". source-established root relay"
+  }
+}

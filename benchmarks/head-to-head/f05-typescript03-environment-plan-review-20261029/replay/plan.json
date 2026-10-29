@@ -1,0 +1,32 @@
+{
+  "actualAdmission": false,
+  "bounds": {
+    "cacheArchiveBytes": 536870912,
+    "cpu": 3,
+    "downloadExpandedBytes": 1073741824,
+    "memoryBytes": 4294967296,
+    "pids": 256,
+    "setupSeconds": 900,
+    "tmpdir": "/workspace/tmp",
+    "traceBytesPerCommand": 2097152,
+    "workspaceBytes": 8589934592
+  },
+  "declaredAt": "2026-10-29T14:20:29.594385+00:00",
+  "executionAuthorized": false,
+  "method": "already retained source/config/lock/runner and image receipts only, data/hash parsing, no imports/installs/native execution",
+  "nativeCollectionOccurred": false,
+  "nodeCandidate": "existing24.22.2 only if source constraints support; not a claim mutable lts/* resolved to it",
+  "oracleQualified": false,
+  "packetIdentity": "f05-typescript03-source-only-environment-plan-20261029",
+  "preferredImage": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "repository": "github.com/vuejs/core",
+  "resourceNote": "New source-only plan keeps current coordinator fixed bounds; historical next8 proposal6GiB/12GiB/1200s is not execution authority here.",
+  "revision": "05db7e807be841e6f343d0237669669b18c89d4d",
+  "scope": "unchanged full five-project root unit/default Vitest target; no component/task substitution",
+  "sourceArchive": {
+    "bytes": 7086080,
+    "path": "/tmp/dotrepo-f05-qualification-next8-20261029/typescript-03/source.tar",
+    "sha256": "51249848d90d269ca4f03504257661e172bcc2e644bb2cc32cc37513ac60b93c"
+  },
+  "task": "typescript-03"
+}

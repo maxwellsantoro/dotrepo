@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-python-probe-e13a3dbb04bb",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "tar --create --format=ustar -C /workspace/owned-probe ."
+  ],
+  "startedAt": "synthetic",
+  "elapsedSeconds": 0.001,
+  "exitCode": 0,
+  "error": null,
+  "cancelled": false,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "7a09e9e078e11141c615900bce0a18a1344c150942b7cf727babf65abab4410b",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null
+}

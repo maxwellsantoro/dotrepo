@@ -1,0 +1,118 @@
+{
+  "decision": "Source-grounded plan is suitable for a minimal probe-only driver/adaptation and separate one-attempt authorization. It is not an executable runner or execution authorization.",
+  "evidence": {
+    "archiveMembersVerified": 128,
+    "authorArtifactsVerified": 11,
+    "candidateWheelRecordsChecked": 9,
+    "copiedPlanControlsPassed": 9,
+    "native311CompileOrImportProof": false,
+    "planBindingsVerified": 15,
+    "probeCommands": [
+      [
+        "uv",
+        "--version"
+      ],
+      [
+        "uv",
+        "--no-config",
+        "run",
+        "--no-project",
+        "--offline",
+        "--no-python-downloads",
+        "--python",
+        "/usr/bin/python3.11",
+        "--",
+        "python",
+        "-I",
+        "-S",
+        "/workspace/owned-probe/probe.py"
+      ]
+    ],
+    "probeEnvironment": {
+      "HOME": "/workspace/home",
+      "TMPDIR": "/workspace/tmp",
+      "UV_CACHE_DIR": "/workspace/probe-cache",
+      "UV_PYTHON_DOWNLOADS": "never"
+    },
+    "probeImports": [
+      "hashlib",
+      "json",
+      "os",
+      "pathlib",
+      "ssl",
+      "sys",
+      "sysconfig"
+    ],
+    "probeInspectedNotExecuted": true,
+    "pythonFilesParsedUsingHostAst311FeatureGrammar": 62,
+    "wheelCompatibilityProof": false
+  },
+  "findings": [],
+  "minimalNextProbeContract": {
+    "accounting": "Retain failures and elapsed/setup/provisioning effort. Cost is unknown/null; no token or network cost inference.",
+    "authorization": "Separate coordinator review/authorization binding exact driver/plan/input/output/scratch identity and one attempt; no authorization is emitted here.",
+    "deadlineInterpretation": "At most60seconds total for the probe stage including both commands/observation, charged to shared900second work budget; cleanup at most60seconds; no retry or resource increase.",
+    "implementationGate": "Adapt the existing reviewed bounded preparation transport for these two commands; bind its exact closure and pass focused fake lifecycle/inspect/deadline/receipt controls before authorization.",
+    "inputs": "Exact immutable b47 image, probe bytes/hash and audited uv/interpreter identity; no repository/lock/dependency/gold/profile/credential provisioning or inherited host environment.",
+    "isolation": "Fresh nonroot1000:1000 readonly-root container, network none from creation, no host mounts/socket, drop ALL capabilities/no-new-privileges/private PID/IPC/cgroup policy, explicit exec workspace/tmpfs and strict actual inspect checks.",
+    "limits": {
+      "cacheArchiveBytes": 536870912,
+      "cleanupSeconds": 60,
+      "combinedTraceBytesPerCommand": 2097152,
+      "cpus": 3,
+      "dependencySetupUsesRemainingWorkBudget": true,
+      "downloadCacheExpandedBytes": 1073741824,
+      "memoryBytes": 4294967296,
+      "memorySwapBytes": 4294967296,
+      "noResourceIncrease": true,
+      "pids": 256,
+      "probeChargedToSharedWorkDeadline": true,
+      "probeOutputBytes": 16384,
+      "probeSeconds": 60,
+      "sourceExpandedBytes": 9064963,
+      "sourceFiles": 128,
+      "sourcePlusCacheBytes": 2147483648,
+      "workSeconds": 900,
+      "workspaceBytes": 8589934592
+    },
+    "observations": "Retain bounded raw stdout/stderr/exit/error/argv/timing, exact image/tools/probe before-after and actual inspect plus cleanup/absence on every path. Validate actual3.11 patch, platform/ABI, executableSHA, uv0.13.6, isolated1/noSite1, sys.path and absent unexpected Python configuration. Unknown/refused options or missing observations stay failure/incomplete."
+  },
+  "remainingQualificationGaps": [
+    "Probe driver and actual probe are unrun; exact native3.11 patch/uv flags/sys.path/platform still unobserved.",
+    "Wheel-only locked installation requires separate authorization after probe disposition; candidate filenames are not complete resolver/ABI evidence.",
+    "Any cache links/type/lock/protected-source audit and fresh offline reproduction remain separate; do not silently project or dereference.",
+    "Bridge download policy is not an egress firewall, store/archive caps are not cumulative wire-byte measurement, and preparation cost remains null absent measurement.",
+    "Native collection and trusted complete phase/source/setup/process/capture joins remain missing;157static source slots are not native IDs or forced native counts."
+  ],
+  "reviewArtifacts": {
+    "controls-replay/controls.json": "fb4890b796f4135ca7299f04050a44edc6710e735513acfdf1bd5daf74032e98",
+    "verification.json": "c218bbf928342c342fc66b9c777ad344e905c41e19e96f4cd9c35374f2eab5b4"
+  },
+  "reviewerContext": "Reviewer previously assessed the Python01 source union and oracle preparation; independent code/source review, not a blind consumer trial.",
+  "scopeLimits": {
+    "actualAdmission": false,
+    "campaignAdmitted": false,
+    "consumerBenefitEstablished": false,
+    "dependencySetupExecuted": false,
+    "executionAuthorized": false,
+    "nativeCollectionOccurred": false,
+    "newGitDaemonNativeInstallDownloadNetworkProviderActions": 0,
+    "oracleQualified": false,
+    "probeExecuted": false,
+    "staticOnly": true
+  },
+  "sourceJudgments": [
+    "CPython3.11 is a defensible first candidate: project and lock permit it, maintainer Dockerfile uses python:3.11, retained grammar and selected wheel filenames do not establish a need for3.12. They do not establish native dependency or import success.",
+    "Owned probe is stdlib-only, hashes its actual executable, reports ABI/platform/flags/path/config, and contains no task import, subprocess or package execution. Plan controls parse it without executing it.",
+    "Retained image inventory binds regular0755 /usr/bin/python3.11 and /usr/local/bin/uv. Bare uv must resolve through the unchanged audited image PATH, not a host executable.",
+    "Later metadata-only locked wheel installation is a distinct unauthorized stage: dev dependency group, no optional dev extra, no project build and no dependency source build. Exact uv option/runtime behavior remains to observe.",
+    "Source-root imports, dotenv/config absence, real subprocess/loopback behavior, cache type/content and native IDs/phase joins remain unobserved. No stub or global PYTHONPATH repair is proposed."
+  ],
+  "state": "independent-source-only-environment-plan-review-complete",
+  "subject": {
+    "authorFreezeSha256": "e16c41c790fbd469263aa86791d5bc31bd59e3a1e11423f6d9d0ff78e873987a",
+    "packetIdentity": "python01-existing-image-environment-preparation-plan-v1",
+    "planSha256": "603a1ebbad92c8226803b5575b94bcf503b2d7dfac3b597e012f15ddad8e021c",
+    "probeSha256": "399fc6b34116a83a1ef87226575738433c8295fc72ba8191e645a85d29a060c3"
+  }
+}

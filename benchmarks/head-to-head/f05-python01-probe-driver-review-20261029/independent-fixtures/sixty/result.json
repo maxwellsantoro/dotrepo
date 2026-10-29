@@ -1,0 +1,28 @@
+{
+  "state": "incomplete",
+  "synthetic": true,
+  "startedAt": "2026-10-29T14:25:52.562839+00:00",
+  "daemonCalls": 12,
+  "containerCreateAttempted": true,
+  "containerAbsent": true,
+  "probeAttempted": true,
+  "ownedProbeObserved": false,
+  "actualAdmission": false,
+  "nativeCollectionOccurred": false,
+  "oracleQualified": false,
+  "campaignAdmitted": false,
+  "costUsd": null,
+  "ownedContainer": "dotrepo-python-probe-e13a3dbb04bb",
+  "authorization": {
+    "synthetic": true
+  },
+  "provisionTarSha256": "20588c56a9a3846c82aef0a91cca3a0b3d7c7ab60dd94f54be86f3417b54652c",
+  "provisionTarBytes": 10240,
+  "stage": "uv-version",
+  "error": "ValueError: shared work deadline",
+  "cancelled": false,
+  "cleanupSeconds": 0,
+  "elapsedSeconds": 61,
+  "workBudgetExceeded": false,
+  "probeBudgetExceeded": true
+}

@@ -1,0 +1,16 @@
+tree b10e2fc106b7ea146f5d31f56ca0386688275aa7
+parent 70ec1e62f696bad9c2ec6333ca7f03283cea9f6e
+author Nicolas De Loof <nicolas.deloof@gmail.com> 1793200292 +0100
+committer Nicolas De loof <nicolas.deloof@gmail.com> 1793201474 +0100
+
+build(lint): bump golangci-lint to v2.15.0 and fix what it now reports
+
+The release updates errcheck (1.20 to 1.30) and gocognit (1.2.1 to 1.3.0).
+errcheck now reports the receives from an error channel whose value is dropped
+on purpose, in three places: waiting for the attach copy to end after the
+context is done, draining the container wait channel of a failed hook, and
+waiting for Up to return in a test. Say why on each, rather than handling an
+error nobody can act on. gocognit's new count is handled by the previous
+commit.
+
+Signed-off-by: Nicolas De Loof <nicolas.deloof@gmail.com>

@@ -1,0 +1,34 @@
+{
+  "commands": [
+    {
+      "argv": "uv run python -B inspect_headers.py",
+      "bytes": 253987,
+      "exitCode": 0,
+      "headers": 407,
+      "members": 956
+    },
+    {
+      "argv": "uv run python -B membership.py",
+      "exitCode": 0,
+      "intendedUnitTestPackages": 27,
+      "omittedUnitTestPackages": 0,
+      "selectedMainModuleDirs": 37,
+      "sourceGoDirs": 39
+    },
+    {
+      "argv": "uv run python -B controls.py",
+      "checks": 50,
+      "exitCode": 0
+    },
+    {
+      "argv": "uv run ruff check --no-cache inspect_headers.py membership.py controls.py",
+      "exitCode": 0
+    },
+    {
+      "argv": "uv run ruff format --check --no-cache inspect_headers.py membership.py controls.py",
+      "exitCode": 0
+    }
+  ],
+  "sourceOrGoExecution": false,
+  "upstreamActions": 0
+}

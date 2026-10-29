@@ -1,0 +1,56 @@
+{
+  "state": "plan-data-and-owned-probe-ast-controls-pass",
+  "count": 9,
+  "cases": [
+    {
+      "case": "unchanged-prospective-plan",
+      "acceptedAsPlanOnly": true
+    },
+    {
+      "case": "build-hooks",
+      "rejectedAsPlan": true
+    },
+    {
+      "case": "project-build",
+      "rejectedAsPlan": true
+    },
+    {
+      "case": "unlocked",
+      "rejectedAsPlan": true
+    },
+    {
+      "case": "implicit-interpreter-download",
+      "rejectedAsPlan": true
+    },
+    {
+      "case": "task-source-provision",
+      "rejectedAsPlan": true
+    },
+    {
+      "case": "probe-network",
+      "rejectedAsPlan": true
+    },
+    {
+      "case": "actual-admission",
+      "rejectedAsPlan": true
+    },
+    {
+      "case": "global-cache-admission",
+      "rejectedAsPlan": true
+    }
+  ],
+  "probeImports": [
+    "hashlib",
+    "json",
+    "os",
+    "pathlib",
+    "ssl",
+    "sys",
+    "sysconfig"
+  ],
+  "probeExecuted": false,
+  "sourceOrDependencyCodeExecuted": false,
+  "daemonNetworkProviderActions": 0,
+  "actualAdmission": false,
+  "oracleQualified": false
+}

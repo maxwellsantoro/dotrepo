@@ -1,0 +1,235 @@
+{
+  "accounting": {
+    "allArtifactsSourceImageLockScriptTraceHashBound": true,
+    "cacheSemanticAuditFlagsRemainFalse": true,
+    "costUsd": null,
+    "exclusions": [
+      "No metered host/container/network charge source; null is unknown, not zero."
+    ],
+    "nativeCollectionTaskOutcomeCampaignFlagsRemainFalse": true,
+    "preflightDownloadNormalHooksBuildTestCostsSeparate": true,
+    "rawStdoutStderrAndTruncationFlags": true,
+    "receiptForEveryAcceptedAttempt": true,
+    "toolRequestBytesTimeAndFailurePreservation": true
+  },
+  "actualAdmission": false,
+  "cacheQualified": false,
+  "campaignAdmitted": false,
+  "environment": {
+    "architecture": "existing linux/arm64 glibc image; no architecture/VM switch",
+    "bootstrapNpm": {
+      "cliSha256": "8e5f6f3429f8cdbe693cdc29904e9d5a7b127a494bd15c804bd54c7403bfcbe7",
+      "launcherPath": "/usr/local/bin/npm",
+      "launcherSha256": "de0074a6bf7a9f22fc0081ec0b941ef336acc1109c2e45d2ddddb601b3188b63",
+      "version": "11.19.1"
+    },
+    "browserEnv": "No PUPPETEER_SKIP_DOWNLOAD for the full normal setup merely because unit-only CI uses it. Freeze exact PUPPETEER_CACHE_DIR/PLAYWRIGHT_BROWSERS_PATH and installed browser identities prospectively.",
+    "candidateCI": "unresolved prelaunch choice; source Puppet branch is CI ? --no-sandbox/--disable-setuid-sandbox : []; do not inject a branch after a failure",
+    "home": "/workspace/home",
+    "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+    "node": {
+      "actualScriptNodeMustBeObservedAfterPnpmSetup": true,
+      "path": "/usr/local/bin/node",
+      "sha256": "b4855de8c4781130b722ceaec9718fed77cca3eed2e5cfc5455e267c0b9ee3b0",
+      "sourceFit": "root>=20 plus all91 observed lock Node range forms permit24.22.2, including jsdom30 range^24.15.0; not a proof lts/* resolved to this version",
+      "version": "24.22.2"
+    },
+    "pnpm": {
+      "entrypointAndInstalledToolHash": null,
+      "gate": "Pinned source integrity exists in lock document1; actual tool tarball/bin/native-wrapper/source semantics must be acquired/bound/audited before invocation. No installed pnpm/corepack in inspected image.",
+      "integrity": "sha512-JaUWUqGWeFr18ovabf6NxYLr76SsHRgCIc4TkCMcX7dmN4IupLbkYzznSs3LCnf3Ja8RutOBd/3t2u6BipVcuQ==",
+      "platformIntegrity": "sha512-6e8ZAQUwFXAWHHHv5FesWqf/kEK04wuitBv5f/gxzkC0DiBfaixr+f+6JQede8SF4Ji5LcMwVFJbzAtffpWxEg==",
+      "platformPackage": "@pnpm/exe.linux-arm64@12.11.2",
+      "rawArtifactSha256": null,
+      "version": "12.11.2"
+    },
+    "tmpdir": "/workspace/tmp"
+  },
+  "executionAuthorized": false,
+  "nativeCollectionOccurred": false,
+  "nextReadyGate": "Acquire and audit exact pnpm12.11.2 tool archive plus selected linux-arm64 platform package against lock-document1 SRI, without install/scripts/import. Then qualify the bounded download-only command separately; normal hooks/browser/full-task gates remain open.",
+  "normalHookMissingBinding": {
+    "command": "npx only-allow pnpm",
+    "currentResolutionKnown": false,
+    "decision": "Do not silently fetch latest, pin a guessed version, omit preinstall or assume no-op. Determine actual existing resolution or prospective source-supported tool pin/controlled setup disposition before normal install qualification.",
+    "lockEntryFound": false,
+    "packageDevDependencyFound": false
+  },
+  "oracleQualified": false,
+  "packetIdentity": "vue-typescript03-prospective-preparation-contract-20261029",
+  "phases": [
+    {
+      "argv": [
+        "/usr/local/bin/npm",
+        "pack",
+        "pnpm@12.11.2",
+        "--ignore-scripts",
+        "--json",
+        "--pack-destination",
+        "/workspace/tool-downloads"
+      ],
+      "id": "A-tool-download",
+      "kind": "prospective-download-only",
+      "readiness": "Smallest next ready archive-only acquisition/audit gate. No execution authorized by this contract.",
+      "scriptPolicy": "No package lifecycle scripts; compare tarball SHA512 against first lock document before any tool entrypoint executes. Resolve platform optional package content to its separate source SRI."
+    },
+    {
+      "argv": [
+        "/usr/local/bin/npm",
+        "install",
+        "--prefix",
+        "/workspace/pnpm-tooling",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund",
+        "/workspace/tool-downloads/pnpm-12.11.2.tgz"
+      ],
+      "gate": "Tool package/bin/platform optional dependency closure must first be source-reviewed and SRI checked; fixed expected manifests/bin hashes not yet known. This argv is a candidate, not admitted installation.",
+      "id": "B-tool-materialization",
+      "kind": "prospective-pinned-tool-only"
+    },
+    {
+      "argv": [
+        "/workspace/pnpm-tooling/node_modules/.bin/pnpm",
+        "fetch",
+        "--frozen-lockfile",
+        "--ignore-scripts",
+        "--store-dir",
+        "/workspace/pnpm-store"
+      ],
+      "cacheRoots": [
+        "pnpm-store"
+      ],
+      "gate": "Verify exact pnpm12 command/options and two-document lock semantics with pinned tool source/help before a bounded run. No filtering/dev/optional omission, no script hooks; no checkout node_modules/build output export.",
+      "id": "C-lock-download-cache",
+      "kind": "prospective-download-only",
+      "runtimeAdmission": "Not admitted by current dependency_cache root policy; a separate bounded policy/inventory decision is needed, no disguised npm-root projection."
+    },
+    {
+      "argv": [
+        "/workspace/pnpm-tooling/node_modules/.bin/pnpm",
+        "install",
+        "--offline",
+        "--frozen-lockfile",
+        "--store-dir",
+        "/workspace/pnpm-store"
+      ],
+      "gate": "Normal preinstall npx only-allow resolution must be immutably bound; postinstall simple-git-hooks and allowBuilds hooks require explicit source/effect accounting. No --ignore-scripts equivalence claim. Complete frozen metadata+artifact caches must support offline resolution or retain failure.",
+      "gitBoundary": "Source archive has no .git; simple-git-hooks behavior and build git rev-parse result must be observed/source-reviewed, not replaced with invented Git provenance.",
+      "id": "D-normal-install",
+      "kind": "separate-normal-upstream-setup-not-download-only",
+      "normalHooks": [
+        "preinstall: npx only-allow pnpm",
+        "postinstall: simple-git-hooks",
+        "allowBuilds permits @parcel/watcher,@swc/core,esbuild,puppeteer,simple-git-hooks,unrs-resolver"
+      ]
+    },
+    {
+      "cacheRoots": [
+        ".cache/puppeteer",
+        ".cache/ms-playwright"
+      ],
+      "gate": "Exact browser build revisions/downloads/hashes, LinuxARM64 support, native library closure, browser cache links/types/caps and no-new-privileges/dropcaps compatibility must be established. Do not assume Ubuntu runner preinstalled libraries equal b47 Debian12. Browser sources/binaries not retained in this plan.",
+      "id": "E-browser-runtime-preparation",
+      "kind": "separate-normal-browser-download/setup",
+      "runtimeAdmission": "Roots not admitted by existing generic warm cache contract. Browser executables/system libs are environment inputs, not source-free download-cache safety proof.",
+      "source": "Pinned workflow test.yml e2e job after pnpm install; package versions Puppeteer25.11.0, @puppeteer/browsers3.2.2, Playwright/core1.64.0.",
+      "sourceArgvAlternatives": [
+        [
+          "/usr/local/bin/node",
+          "node_modules/puppeteer/install.mjs"
+        ],
+        [
+          "/workspace/pnpm-tooling/node_modules/.bin/pnpm",
+          "exec",
+          "playwright",
+          "install",
+          "chromium"
+        ]
+      ]
+    },
+    {
+      "argv": [
+        "/usr/local/bin/node",
+        "scripts/build.js",
+        "vue",
+        "-f",
+        "global",
+        "-d"
+      ],
+      "gate": "Normal setup/source/tool closure and build outcome/artifact hash must be captured; do not ship source build output in download cache or count compilation as test outcome.",
+      "id": "F-source-build-prerequisite",
+      "kind": "upstream-build-separate-from-download-cache",
+      "source": "Exact root test-e2e build prefix; Rollup global mapping builds packages/vue/dist/vue.global.js."
+    },
+    {
+      "argv": [
+        "/workspace/pnpm-tooling/node_modules/.bin/pnpm",
+        "test",
+        "run"
+      ],
+      "gate": "All five projects, unit-gc forks/--expose-gc, both browser routes, dynamic case/skip/failure and trusted raw process/report joins require native collection/oracle qualification before any completion claim.",
+      "id": "G-unchanged-full-test",
+      "kind": "not-yet-authorized-native-test"
+    }
+  ],
+  "repository": "github.com/vuejs/core",
+  "resources": {
+    "TMPDIR": "/workspace/tmp",
+    "cpu": 3,
+    "maxCacheTransportBytes": 536870912,
+    "maxExpandedDownloadCacheBytes": 1073741824,
+    "maxSourcePlusCacheBytes": 2147483648,
+    "maxTraceBytesPerCommand": 2097152,
+    "memoryBytes": 4294967296,
+    "pids": 256,
+    "preparationSeconds": 900,
+    "resourceIncreaseOrRetryToObtainPass": false,
+    "singlePreparationDeadlineAppliesTo": "All accepted preparation stages/tool download/cache/setup work, preflight/export and cleanup accounting in a prospective attempt; do not silently reset a new15minute allowance per step. Future execution has no authorization here.",
+    "tmpfsBytes": 536870912,
+    "workspaceBytes": 8589934592
+  },
+  "revision": "05db7e807be841e6f343d0237669669b18c89d4d",
+  "scope": {
+    "cwd": "/workspace/repo",
+    "finalCommand": [
+      "/workspace/pnpm-tooling/node_modules/.bin/pnpm",
+      "test",
+      "run"
+    ],
+    "fullTarget": [
+      "unit",
+      "unit-gc",
+      "unit-jsdom",
+      "e2e",
+      "e2e-browser"
+    ],
+    "narrowingAllowed": false,
+    "skipPolicy": "No new skips/exclusions; all five projects/native IDs and source-supported conditions require prospective oracle freeze.",
+    "unchangedRequest": true
+  },
+  "sourceConfigurationToPreserve": {
+    "allowBuilds": [
+      "@parcel/watcher",
+      "@swc/core",
+      "esbuild",
+      "puppeteer",
+      "simple-git-hooks",
+      "unrs-resolver"
+    ],
+    "ignoreOrOverridePolicy": false,
+    "minimumReleaseAgeExclude": [
+      "vitest@4.1.11"
+    ],
+    "minimumReleaseAgeMinutes": 1440,
+    "note": "No filter/--prod/--no-optional, ignore-minimum-age or trust-policy bypass to obtain a pass.",
+    "pnpmWorkspacePackagePatterns": [
+      "packages/*",
+      "packages-private/*"
+    ],
+    "trustPolicy": "no-downgrade"
+  },
+  "state": "source-only-not-executable-authorization",
+  "task": "typescript-03",
+  "taskOutcomeObserved": false
+}

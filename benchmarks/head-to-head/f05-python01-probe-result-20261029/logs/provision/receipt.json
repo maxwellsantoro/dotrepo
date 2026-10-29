@@ -1,0 +1,29 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "-i",
+    "dotrepo-python-probe-77413a5c2085",
+    "tar",
+    "--extract",
+    "--no-same-owner",
+    "-C",
+    "/workspace/owned-probe"
+  ],
+  "startedAt": "2026-10-29T14:27:18.930063+00:00",
+  "elapsedSeconds": 0.129809457808733,
+  "exitCode": 0,
+  "error": null,
+  "cancelled": false,
+  "stdinBytes": 10240,
+  "stdinSha256": "20588c56a9a3846c82aef0a91cca3a0b3d7c7ab60dd94f54be86f3417b54652c",
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "binaryPath": null,
+  "binaryBytes": null,
+  "binarySha256": null,
+  "costUsd": null,
+  "costExclusions": [
+    "No metered host/container/download dollar receipt; no provider calls."
+  ]
+}

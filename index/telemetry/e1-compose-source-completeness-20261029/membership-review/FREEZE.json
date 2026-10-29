@@ -1,0 +1,31 @@
+{
+  "artifacts": {
+    "README.md": {
+      "bytes": 1847,
+      "sha256": "cc59a4f21245fe16b9c690a40887c538f7e7cb52010148bafc6f098cd55e5efc"
+    },
+    "review.json": {
+      "bytes": 5527,
+      "sha256": "a55c1f4f5892c74c7a964867a492d4ea3abfacfd7a008dc7aadf5ed0d2fc5ba3"
+    },
+    "verification.json": {
+      "bytes": 3441,
+      "sha256": "72ebbc676212b896d689155ce3513c7482f7e0b126f21c1871c00fc149da7aab"
+    }
+  },
+  "completeApplicableInstructionEstablished": false,
+  "confidencePromotion": false,
+  "consumerAcceptance": false,
+  "executionAuthorized": false,
+  "findings": [],
+  "heldOutQualification": false,
+  "newBoundaryChallengeExperiments": 0,
+  "state": "independent-compose-conditional-source-membership-review-frozen",
+  "subject": {
+    "assessmentSha256": "4c9af8b2e88e4e93718c0387099db8e2612d9e4e3331d5c2a61cd3e088dea7b6",
+    "authorFreezeSha256": "2cd09363c3c0556ec8dc4a1c25a9de441784fa085267c180d235ea9023930f60",
+    "headersSha256": "2ed9f24461e1f1d8be6afd30ce4423a7811291603203bd747a65af592417e338",
+    "membershipSha256": "733360b455ce70467c4b5d3011dfdc4cdf1ce02374eedbea36420a3693052ee2",
+    "planSha256": "da01afb65bfde40774da781330b407156bdd66645bc1c008cbcfd6e689fb8f80"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "--workdir",
+    "/workspace/owned-probe",
+    "dotrepo-python-probe-e13a3dbb04bb",
+    "uv",
+    "--version"
+  ],
+  "startedAt": "synthetic",
+  "elapsedSeconds": 0.001,
+  "exitCode": 0,
+  "error": null,
+  "cancelled": false,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "1edbd0f211d62c184651cbb575cdde21d098750106b2ca64c26bd4d44d9be5de",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null
+}

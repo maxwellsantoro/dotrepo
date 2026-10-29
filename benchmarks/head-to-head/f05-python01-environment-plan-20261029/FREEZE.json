@@ -1,0 +1,59 @@
+{
+  "identity": "python01-existing-image-environment-plan-20261029",
+  "state": "source-only-plan-awaiting-independent-review-and-separate-authorization",
+  "base": "4e9b0c70552c9ee42ea9a8259301dc85a68bc7cc",
+  "artifacts": {
+    "README.md": {
+      "bytes": 7117,
+      "sha256": "480cf0aea2c3fc49bd643aac038c82f4d9e21edd2c1c6d1388569abeba5bbb30"
+    },
+    "assemble_plan.py": {
+      "bytes": 13278,
+      "sha256": "ab5d84fc61ec62d8078373b930b63646b66368f0b0c80bb5ce5e94ae00324511"
+    },
+    "checks.json": {
+      "bytes": 584,
+      "sha256": "13bb6d249369558b1ac18076968c0d2bd99f5bced6f36b3b1387681bb01c9945"
+    },
+    "controls.json": {
+      "bytes": 1072,
+      "sha256": "fb4890b796f4135ca7299f04050a44edc6710e735513acfdf1bd5daf74032e98"
+    },
+    "derive_source.py": {
+      "bytes": 6592,
+      "sha256": "46cc4c4ec47f11504207afaf80b4df25f5e4b8bc1f1381b80847e50c2b0bc692"
+    },
+    "plan.json": {
+      "bytes": 12887,
+      "sha256": "603a1ebbad92c8226803b5575b94bcf503b2d7dfac3b597e012f15ddad8e021c"
+    },
+    "probe.py": {
+      "bytes": 1234,
+      "sha256": "399fc6b34116a83a1ef87226575738433c8295fc72ba8191e645a85d29a060c3"
+    },
+    "source-facts.json": {
+      "bytes": 21982,
+      "sha256": "ca656a040fdeb55bb159608a6a71c5d8dbd265ed8d087c4c59455c6cff0d0647"
+    },
+    "source-spans.json": {
+      "bytes": 5113,
+      "sha256": "0d38b8902e3e48f791c49dda44e9da1d6decdd620f89d9a642321406c98e9e16"
+    },
+    "validate_plan.py": {
+      "bytes": 3854,
+      "sha256": "82eaf6a422da5953aa400be548773dff9c278056953c3232042ba6b39da9e197"
+    },
+    "verify.py": {
+      "bytes": 1143,
+      "sha256": "37211fe347debb1e6ca9f209b9cb07bbadaf4c2317443167e791971b6601a4c8"
+    }
+  },
+  "executionAuthorized": false,
+  "probeExecuted": false,
+  "dependencySetupExecuted": false,
+  "actualAdmission": false,
+  "nativeCollectionOccurred": false,
+  "oracleQualified": false,
+  "campaignAdmitted": false,
+  "costUsd": null
+}

@@ -1,0 +1,19 @@
+{
+  "state": "integration-tooling-refusals-retained",
+  "observations": [
+    {
+      "stage": "copy-adapter-initial",
+      "error": "TypeError: string indices must be integers, not str",
+      "cause": "older prior-disposition FREEZE artifacts are SHA strings; new copier initially assumed object rows",
+      "correction": "support both immutable historical shapes, preserving exact original bytes"
+    },
+    {
+      "stage": "relocation-control-initial",
+      "error": "FileNotFoundError: relocated/prior-disposition/FREEZE.json",
+      "cause": "owned copy harness globally excluded FREEZE.json instead of only generated caches",
+      "correction": "preserve all nested original freezes; exclude only __pycache__"
+    }
+  ],
+  "originalEvidenceChanged": false,
+  "upstreamExecuted": false
+}

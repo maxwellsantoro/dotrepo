@@ -1,0 +1,116 @@
+{
+  "artifactBytes": 149573,
+  "artifactCount": 25,
+  "artifacts": {
+    "README.md": {
+      "bytes": 2965,
+      "sha256": "865e40c595080d4b2b47b21ddd43e4c7a4586835ac481410ca4a9cb6bc1f404b"
+    },
+    "assessment.json": {
+      "bytes": 7727,
+      "sha256": "e911f536f9034929e06004a69ae3209a91e80fc069a85510b05ad0d93811915d"
+    },
+    "controls-initial.json": {
+      "bytes": 2118,
+      "sha256": "ae36c7b66343ec73b111b5a7cd3099d9bed7f365b97fa04f2e1d4ea7d1400886"
+    },
+    "controls.json": {
+      "bytes": 2193,
+      "sha256": "2037aae01a44febab740fa6f7b35767f06c6351e51b1ac4460f4d7048b7ecd2c"
+    },
+    "controls.py": {
+      "bytes": 5345,
+      "sha256": "70c3dd6aa2bff9967e48c0d830cc82ca9221a27578c1b57e18b16e65b8b5b3af"
+    },
+    "owner-inputs/benchmarks/head-to-head/e1-qualification-20261029/go/sources.json": {
+      "bytes": 18452,
+      "sha256": "0d74faeaf22efbff3c0cc75da6ef403f1d7ea2906ebbd5c418627bdfe06d2fef"
+    },
+    "owner-inputs/index/telemetry/e1-compose-source-disposition-20261029/disposition.json": {
+      "bytes": 4917,
+      "sha256": "40c51f47f05a52b580b7be0b8a9a3eaf66ea1224a976f1e04809984b90f51066"
+    },
+    "owner-inputs/index/telemetry/e1-next-context-establishment-20261029/closure-1/observations.json": {
+      "bytes": 6602,
+      "sha256": "a921466d34952cdb5e13722abc3e5c55bbb41c1cc3eea9a42510b18d7021f2c4"
+    },
+    "owner-inputs/index/telemetry/e1-next-context-establishment-20261029/closure-1/requests/01-commit.json": {
+      "bytes": 4509,
+      "sha256": "f0a9fed533a926a3df38b003e15d493f186098daf182959c1722839b6702b89f"
+    },
+    "owner-inputs/index/telemetry/e1-next-context-establishment-20261029/closure-1/requests/02-root-tree.json": {
+      "bytes": 13921,
+      "sha256": "bb83c5e0864c2714fe7f7f63a4e9a4ccfd9b222b6313b30a05df7cc82b2f78ac"
+    },
+    "owner-inputs/index/telemetry/e1-next-context-establishment-20261029/closure-2/observations.json": {
+      "bytes": 8585,
+      "sha256": "a1deea5acf9850ca6444b8848dc5051a81378ec9a528eeee4aeaa7aa5bb56429"
+    },
+    "owner-inputs/index/telemetry/e1-next-context-establishment-20261029/source-proposal.json": {
+      "bytes": 18541,
+      "sha256": "6678af84c0af5dc09579e81b122e1bad29959229e2f2b3c76856a6f932cc19b7"
+    },
+    "plan.json": {
+      "bytes": 2948,
+      "sha256": "8f15cc99c15816e04fd7239271b0d084b547d8a03dfa5d5f31e7e169fa2b0a1f"
+    },
+    "source-availability.json": {
+      "bytes": 730,
+      "sha256": "87b9540787bd33ee70735f900262520bd894f949219997e0c01cef5e71c4286d"
+    },
+    "source-bindings.json": {
+      "bytes": 15592,
+      "sha256": "973290f45f0cd9f74c041eccc5a4ed95065a718d88c666616600f9c44d99d509"
+    },
+    "sources/.dockerignore": {
+      "bytes": 5,
+      "sha256": "aaccb1a00557171b31d00a99a6a2666856e417964732490685cdcba9f02de491"
+    },
+    "sources/.go-version": {
+      "bytes": 8,
+      "sha256": "5ae79ef74661d43e70de64fdaad7531cab44185357110f441268bafae5e74956"
+    },
+    "sources/AGENTS.md": {
+      "bytes": 3091,
+      "sha256": "2c3364f66a30ea054f3ec3610fa4be37a98e5fc3dbd9654b44f26805c75a236e"
+    },
+    "sources/BUILDING.md": {
+      "bytes": 2206,
+      "sha256": "68694744374f7b98c6dd284aea8d657267a6f6383e9bd5580f725a3e723a7cd4"
+    },
+    "sources/Dockerfile": {
+      "bytes": 7870,
+      "sha256": "5f35a0fce55a645e2497f861aba1414f237d532493b4f2bda138c609b28ef44f"
+    },
+    "sources/Makefile": {
+      "bytes": 7050,
+      "sha256": "927856982fcd81c94dd843743000b8a828baf5af02503d64f7a4c4cc477ac4cc"
+    },
+    "sources/docker-bake.hcl": {
+      "bytes": 4836,
+      "sha256": "d8e460f357e8913b41a81458d2c3280f5494368c2f20eaca7ebcb1bdeaeebce5"
+    },
+    "sources/go.mod": {
+      "bytes": 6691,
+      "sha256": "add1d3fc58082dc40ea0ebcc3d2c80b1f4bf99a5452aab2026e8997b511cfb09"
+    },
+    "sources/pkg/compose/apiSocket_test.go": {
+      "bytes": 2145,
+      "sha256": "59f26ee95d04a855a27047089929d4cfd77cf52b68f547e3fdb38b139dc1b501"
+    },
+    "validation.json": {
+      "bytes": 526,
+      "sha256": "d2d795fd1f53fb19da221d3449475398b0b186c66e99788cc80e727baf1d75c5"
+    }
+  },
+  "assessmentSha256": "e911f536f9034929e06004a69ae3209a91e80fc069a85510b05ad0d93811915d",
+  "automaticHighPromotion": false,
+  "completeApplicableInstructionEstablished": false,
+  "consumerBenefit": false,
+  "heldOutQualification": false,
+  "independentExecution": false,
+  "newAcquisition": false,
+  "packetIdentity": "e1-compose-next-source-completeness-disposition-20261029",
+  "planSha256": "8f15cc99c15816e04fd7239271b0d084b547d8a03dfa5d5f31e7e169fa2b0a1f",
+  "state": "immutable-pre-acquisition-source-assessment"
+}

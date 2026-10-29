@@ -1,0 +1,62 @@
+{
+  "identity": "python01-source-free-probe-driver-v1",
+  "state": "owned-fake-tested-awaiting-independent-review-and-one-attempt-authorization",
+  "artifacts": {
+    "README.md": {
+      "bytes": 5901,
+      "sha256": "4657ddee5e85d974d7b3a7b5e6e76896b5b89a8ca26609cde3a9f280ca8de9bd"
+    },
+    "authorization-contract.json": {
+      "bytes": 1627,
+      "sha256": "bcefe9e135524e1528e58e5b749ab2c88bf6b81e76ecffe195b7196c92749e43"
+    },
+    "boundaries.py": {
+      "bytes": 5841,
+      "sha256": "7b03c7ab687043ab23061efde9d6328a21bb6ca94176085c87a50df8265de9e6"
+    },
+    "checks.json": {
+      "bytes": 519,
+      "sha256": "a4b28f12363dc423da6ef746f6c995772f1af85b50b4299a1080dbf54ad237a6"
+    },
+    "controls.json": {
+      "bytes": 9875,
+      "sha256": "90e33f019ab964f1535f1d0de6180f270cf5536a298c4ffeac268cfcaf9d25f8"
+    },
+    "controls.py": {
+      "bytes": 13555,
+      "sha256": "f8b468efd45cd786a80231214fb7df2f2ec1a88d9839ea47b6ef4dce6df99b91"
+    },
+    "driver.py": {
+      "bytes": 20559,
+      "sha256": "ab3e155a9076e326610ded2204d5c4e4ffb9651ba28b8e9763b23251c564b67e"
+    },
+    "make_plan.py": {
+      "bytes": 3171,
+      "sha256": "1bbb84ea9b82c1e6654d91fa2054a04f3d1f3970ccc6ceddc0e73c44c2947310"
+    },
+    "plan.json": {
+      "bytes": 4372,
+      "sha256": "45b129445ef75603e98bb2984dd022d4d9c309cf0968f7374191652df0384c23"
+    },
+    "process_io.py": {
+      "bytes": 6879,
+      "sha256": "f4f162e7465d0e6d2142bba6f898b01beec19bed1e1461ac7633a0f88cc8d1f0"
+    },
+    "synthetic-command-trace.json": {
+      "bytes": 3388,
+      "sha256": "050dfbbbe0495dd01d90c2c3fba8927e5a5f4ecf4c4fd8d2f74cffa4f3857fb7"
+    },
+    "verify.py": {
+      "bytes": 1819,
+      "sha256": "2af7652be2623d42d8252e54167218a54f75ecb31489e7ef9d46dd6e6396b13b"
+    }
+  },
+  "executionAuthorized": false,
+  "probeExecuted": false,
+  "dependencySetupAuthorized": false,
+  "actualAdmission": false,
+  "nativeCollectionOccurred": false,
+  "oracleQualified": false,
+  "campaignAdmitted": false,
+  "costUsd": null
+}

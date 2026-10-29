@@ -1,0 +1,31 @@
+{
+  "state": "owned-source-free-python-probe-observed",
+  "synthetic": false,
+  "startedAt": "2026-10-29T14:27:17.875762+00:00",
+  "daemonCalls": 16,
+  "containerCreateAttempted": true,
+  "containerAbsent": true,
+  "probeAttempted": true,
+  "ownedProbeObserved": true,
+  "actualAdmission": false,
+  "nativeCollectionOccurred": false,
+  "oracleQualified": false,
+  "campaignAdmitted": false,
+  "costUsd": null,
+  "ownedContainer": "dotrepo-python-probe-77413a5c2085",
+  "authorization": {
+    "path": "/private/tmp/dotrepo-f05-python01-probe-authorization-20261029/authorization.json",
+    "sha256": "10dbf0fd60cc5b09a2b0e6fa37312c899adf97a75f6b749f912c26621627a759",
+    "synthetic": false
+  },
+  "provisionTarSha256": "20588c56a9a3846c82aef0a91cca3a0b3d7c7ab60dd94f54be86f3417b54652c",
+  "provisionTarBytes": 10240,
+  "stage": "inspect-after",
+  "probeStderrBytes": 0,
+  "probeStderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sourceToolsBeforeAfterMatched": true,
+  "cleanupSeconds": 0.19556770799681544,
+  "elapsedSeconds": 2.7503452911041677,
+  "workBudgetExceeded": false,
+  "probeBudgetExceeded": false
+}

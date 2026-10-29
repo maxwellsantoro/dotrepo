@@ -1,0 +1,60 @@
+{
+  "completeApplicableInstructionEstablished": false,
+  "conditionalProposition": {
+    "actualGoListObserved": false,
+    "actualGoListStatus": null,
+    "context": "Clean exact343bb382source; Linux, CGO1, gc/Go1.26.10 source intention, no extra GOFLAGS/custom tags, TAGS substitution supplies no extra enumeration arguments, intended e2e test tag, go list successfully loads its source-eligible packages.",
+    "countsAre": "File/directory/package-source counts, not native collected IDs, tests executed, dynamic cases, assertions or behavior coverage.",
+    "result": "39Go directories; relay nested module excluded leaves38root module dirs; literal e2e substring filters onlypkg/e2e, retaining37. All27intended unit-test directories/117selected test files retained. Unit production/test file sets equal for no-extra-tag enumeration and intendede2e execution outside explicit e2e lane."
+  },
+  "confidencePromotion": false,
+  "consumerAcceptance": false,
+  "consumerBenefit": false,
+  "costUsd": null,
+  "decision": "Finite inspected source supports the stated conditional no-omission relation. No unjustified material conclusion found when all declared conditions are retained. This does not discharge literal TAGS/effective argv context or establish a complete applicable tuple.",
+  "executionAuthorized": false,
+  "findings": [],
+  "heldOutQualification": false,
+  "limitations": [
+    "No Go/Git process, compiler/list/test, import/typecheck, source generator, new acquisition, daemon, installation, network or provider action.",
+    "The independent finite textual header/import analysis is not a general Go parser or proof of dependency correctness.",
+    "No TestMain/dynamic test/skip/assertion accounting or actual task/agent benefit.",
+    "No full applicable instruction, High confidence promotion, held-out qualification or index/consumer update."
+  ],
+  "precisionRecommendation": "Read assessment noActualOmissionFromThisMismatch=true only within its surrounding declared conditional context; never transfer it as observed actual package coverage or consumer acceptance. Full tuple false/High false remain correct.",
+  "remainingContext": "Dockerfile literally contains $(TAGS) shell command substitution, not Make $(TAGS) expansion. Actual executable lookup/stdout/resulting enumeration argv is not observed or normalized into a flag. No executable namedTAGS is invented as universal prerequisite, no fatality/success inferred. Effective Go context and successful loading remain explicit conditions; universal dependency correctness is not required for this source relation.",
+  "reviewContext": "Prior fullsource integrity reviewer and earlier F05/E1workloadcontext; not author of this membership follow-up, not blind or new holdout qualification.",
+  "sourceAssessment": {
+    "CGO": "Declared CGO1 condition is preserved. Inert import-declaration inspection found no literal importedC in407files; quotedC occurrences in3files are ordinary test data. This does not prove cgo/dependency correctness or native loading.",
+    "modulesAndIgnoredDirs": "Full inventory has only root andrelaygo.mod. No trackedGo file occurs under testdata/vendor/dot/underscore ignored directories. No selected test-only directory depends on special test-only package behavior here.",
+    "packageBearingFixtures": "docs/examples,docs/examples/sdk,docs/yaml/main remain source-enumerable root-module packages; not silently removed because examples are not conventional unit directories.",
+    "routing": "9byte-exact routing/config files31805B verified. Bake default e2e, DockerfileARG/ENV and gotestsum -tags argument are distinct source layers; test stage declaresCGO1 and uses-race/-cover but no observed header token changes membership for those flags.",
+    "scope": "AGENTS/BUILDING separate unit default,e2e and relay lanes. Makefiletest\u2192Bake test\u2192Dockerfiletest-coverage route supports maintained main-module default. Exclusionpolicy is source-derived scope data, not a posthoc fingerprint/answer allowlist.",
+    "suffixAndConstraints": "Byte-exact407headers253987B verified against full archive. Only finite observed constraints evaluated independently; no legacy+build lines, no architecture suffix/token, no release/compiler/CGO tag in these headers. Windows/Darwin filename suffixes independently combined with explicitLinux conditions; unix/nonwin remain generic suffixes governed by header."
+  },
+  "state": "independent-compose-conditional-source-membership-review-passed",
+  "subject": {
+    "assessmentSha256": "4c9af8b2e88e4e93718c0387099db8e2612d9e4e3331d5c2a61cd3e088dea7b6",
+    "authorFreezeSha256": "2cd09363c3c0556ec8dc4a1c25a9de441784fa085267c180d235ea9023930f60",
+    "headersSha256": "2ed9f24461e1f1d8be6afd30ce4423a7811291603203bd747a65af592417e338",
+    "membershipSha256": "733360b455ce70467c4b5d3011dfdc4cdf1ce02374eedbea36420a3693052ee2",
+    "planSha256": "da01afb65bfde40774da781330b407156bdd66645bc1c008cbcfd6e689fb8f80"
+  },
+  "verification": {
+    "authorArtifactsVerified": 433,
+    "authorSyntheticControlsRunByReviewer": 0,
+    "finiteConstraintPatternsIncludingUnconstrained": 10,
+    "headerPrefixesByteExact": 407,
+    "newBoundaryChallengeExperiments": 0,
+    "omitted": 0,
+    "prospectiveSelectedDirectories": 37,
+    "rootModuleGoDirectories": 38,
+    "routingBytes": 31805,
+    "routingFilesByteExact": 9,
+    "sourceHeaderBytes": 253987,
+    "unchangedFullSourceArtifacts": 35,
+    "unchangedParentArtifacts": 25,
+    "unitDirectories": 27,
+    "unitFiles": 117
+  }
+}

@@ -1,0 +1,631 @@
+{
+  "state": "static-retained-data-inspection-only",
+  "archiveSha256": "fc70acea794785b5c6bfd06f5e0c83cb328fc5c4e05e36dab8f182fea5bd0d70",
+  "membersVerified": 128,
+  "sourceBytes": 9064963,
+  "pythonGrammarAnalysis": {
+    "hostVersion": "3.12.15 (main, Oct  3 2026, 00:54:33) [Clang 22.1.3 ]",
+    "featureVersion": [
+      3,
+      11
+    ],
+    "files": 62,
+    "failures": [],
+    "isNative311Compile": false,
+    "targetCodeExecuted": false
+  },
+  "requiresPython": ">=3.11,<3.13",
+  "lockRequiresPython": ">=3.11, <3.13",
+  "lockResolutionMarkers": [
+    "python_full_version >= '3.12'",
+    "python_full_version < '3.12'"
+  ],
+  "lockPackageCount": 185,
+  "sourceKinds": [
+    "{\"editable\": \".\"}",
+    "{\"registry\": \"https://pypi.org/simple\"}"
+  ],
+  "devDependencyGroup": [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0"
+  ],
+  "optionalDevExtraNotSelected": [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "pipreqs>=0.5.0"
+  ],
+  "buildSystem": {
+    "requires": [
+      "hatchling"
+    ],
+    "build-backend": "hatchling.build"
+  },
+  "selectedSourceBindings": {
+    "Dockerfile": {
+      "sha256": "acf36e3c8a13bd8a2a87ee68a9d52aadd569cc4755daab681b46aa5e9b85d85f",
+      "bytes": 723
+    },
+    "README.md": {
+      "sha256": "5109feef87d494dd77c0eb225486d4278fe3eb61b303574600bcf8c3c339d034",
+      "bytes": 8958
+    },
+    "backend/app/__init__.py": {
+      "sha256": "f04d262decf6c11437280c0f0c1353774f642888b2ef3f02dfa0e96e992b3c1c",
+      "bytes": 2712
+    },
+    "backend/app/config.py": {
+      "sha256": "a85580b4551724b3c2fff419565c9aa11f6dba1992f5981ed34037a264c2a2f3",
+      "bytes": 2962
+    },
+    "backend/app/services/__init__.py": {
+      "sha256": "5c78b7c2e902a80197acfeb9493ad81da903002eda04dd9870a2de1e42c12112",
+      "bytes": 1752
+    },
+    "backend/pyproject.toml": {
+      "sha256": "e923fa98056d1b6085ab789993a1d05f31bfc1e8cbbb6b9aa17d49663253c1a2",
+      "bytes": 1080
+    },
+    "backend/requirements.txt": {
+      "sha256": "5be0583939f836d1dc9cb0392af3b1410f5c65d2c37f724fb82772431173d58e",
+      "bytes": 887
+    },
+    "backend/tests/test_zep_cloud_validation_script.py": {
+      "sha256": "a3e595b1af1e7dc265d0ae9c111fc79e4a9b4e4d1a1b4ee167b2833d458fd33b",
+      "bytes": 3221
+    },
+    "backend/uv.lock": {
+      "sha256": "877281f85fe26eb120149503b0b99021fd7e3e577d026f584857d03839595b09",
+      "bytes": 339293
+    },
+    "package.json": {
+      "sha256": "f2b8cc90bc21b0b4990d5192b5e7c09161982760dede52cb743862d908526715",
+      "bytes": 702
+    }
+  },
+  "pythonSourceBindings": [
+    {
+      "path": "backend/app/__init__.py",
+      "sha256": "f04d262decf6c11437280c0f0c1353774f642888b2ef3f02dfa0e96e992b3c1c",
+      "bytes": 2712
+    },
+    {
+      "path": "backend/app/api/__init__.py",
+      "sha256": "b26d03501db10887d5181a403eeb59438c318bbe760c6f4b72e3fa24845561fb",
+      "bytes": 314
+    },
+    {
+      "path": "backend/app/api/graph.py",
+      "sha256": "096f8b54a1a81430678a4082067be000d05e9b0ebbbe047ba05ce4abde5ba56b",
+      "bytes": 34365
+    },
+    {
+      "path": "backend/app/api/report.py",
+      "sha256": "afebaad104c822dc1804940537e5925913166e8fde8fb06e08a74e00da1b8afe",
+      "bytes": 35302
+    },
+    {
+      "path": "backend/app/api/simulation.py",
+      "sha256": "48c34e15dc957a0e7205283ebaffdbb1b3c09e3a59f6a87fa35bffeafdf782d4",
+      "bytes": 100984
+    },
+    {
+      "path": "backend/app/config.py",
+      "sha256": "a85580b4551724b3c2fff419565c9aa11f6dba1992f5981ed34037a264c2a2f3",
+      "bytes": 2962
+    },
+    {
+      "path": "backend/app/models/__init__.py",
+      "sha256": "96a34db0a666946383a5ef35541b99235b0e949e97ed968b39b17e571a422e8c",
+      "bytes": 218
+    },
+    {
+      "path": "backend/app/models/project.py",
+      "sha256": "cc6ee30be35f5bfe2db51ce694b1dc5c51c77ab2da134df0fc24bfeb054bd212",
+      "bytes": 10320
+    },
+    {
+      "path": "backend/app/models/task.py",
+      "sha256": "283a2c284e2f85ecb89d8abbfefe8169c63d712a4e02f142312a66f345f09d2d",
+      "bytes": 5671
+    },
+    {
+      "path": "backend/app/services/__init__.py",
+      "sha256": "5c78b7c2e902a80197acfeb9493ad81da903002eda04dd9870a2de1e42c12112",
+      "bytes": 1752
+    },
+    {
+      "path": "backend/app/services/graph_builder.py",
+      "sha256": "ac8739bca09437136dca343d992c66b2092021e084e9a81ce37cb8c988205486",
+      "bytes": 33478
+    },
+    {
+      "path": "backend/app/services/oasis_profile_generator.py",
+      "sha256": "ed9cd3416a46b922bc2f9bf0e9623435d9b96bdf0198db27602ca8c4f0dd0e37",
+      "bytes": 51012
+    },
+    {
+      "path": "backend/app/services/ontology_generator.py",
+      "sha256": "9cf783df52d8ef80f11527c65ea9b4467c0b294064d559123a86f197d82d1cc5",
+      "bytes": 28469
+    },
+    {
+      "path": "backend/app/services/report_agent.py",
+      "sha256": "b1211efa900e2fe73875b6acbf690550ee21a40b76c5170eee4e6ec404a4be47",
+      "bytes": 101589
+    },
+    {
+      "path": "backend/app/services/simulation_config_generator.py",
+      "sha256": "3bb128db01398dd344a2a4c12875f424f7b9ae9c2a7b89f99c42e1ac555396d1",
+      "bytes": 40063
+    },
+    {
+      "path": "backend/app/services/simulation_ipc.py",
+      "sha256": "2cd596faed552c29f8e486b6641677787c2c38eeab822a82512be07e9b4088d9",
+      "bytes": 12297
+    },
+    {
+      "path": "backend/app/services/simulation_manager.py",
+      "sha256": "6287937a965a97cea12a0d54ac55e7d1ae98944a96accfd7504a21350cc4e902",
+      "bytes": 21579
+    },
+    {
+      "path": "backend/app/services/simulation_runner.py",
+      "sha256": "5ddb78ece900fe836fdb90e9d831d2036365909c953ae839497edb6ec4f20666",
+      "bytes": 81506
+    },
+    {
+      "path": "backend/app/services/text_processor.py",
+      "sha256": "0760c306c7aebdb3d1457dbbdbfa503549fa9cb3b5201cb6a83845c7b9a5c046",
+      "bytes": 1743
+    },
+    {
+      "path": "backend/app/services/zep_entity_reader.py",
+      "sha256": "80ebdc701ce68cc1d0fe2ca8d58076c8b9ac5c3fe2f38b2a3d593a8a8fb2a7a8",
+      "bytes": 15867
+    },
+    {
+      "path": "backend/app/services/zep_graph_memory_updater.py",
+      "sha256": "a9fe25ee7bd2d97d2b6ad5b21dae82955fb13acab595393b8f5cad280614dafe",
+      "bytes": 31892
+    },
+    {
+      "path": "backend/app/services/zep_tools.py",
+      "sha256": "5a2142a6a8662d764a9e31f1b12c2d19f03729f28bfd3e353ac0bcbf71d3e3be",
+      "bytes": 66001
+    },
+    {
+      "path": "backend/app/utils/__init__.py",
+      "sha256": "444e75d227f54480da0e3d4edb5b3152666540460e25dfa68c76f16c0563deb3",
+      "bytes": 265
+    },
+    {
+      "path": "backend/app/utils/file_parser.py",
+      "sha256": "f1adfdda1a6674ad7af76dc95a9b76f388470098e4cf514be908440c4167c398",
+      "bytes": 5616
+    },
+    {
+      "path": "backend/app/utils/llm_client.py",
+      "sha256": "c10c12e3d8a5bf16c3bc9b03eb64c438313108b9a9b743c4450785f1477a35e3",
+      "bytes": 9873
+    },
+    {
+      "path": "backend/app/utils/locale.py",
+      "sha256": "1029841bf7385e4c717199748cf743c2c4f2791df1f343f6eef27713467e3ae2",
+      "bytes": 1983
+    },
+    {
+      "path": "backend/app/utils/logger.py",
+      "sha256": "e05bb408d6400ffa744394bf87019cfb73f9fbca797479999a953bd9d0dc1794",
+      "bytes": 3403
+    },
+    {
+      "path": "backend/app/utils/ontology.py",
+      "sha256": "c220fff465ae465ad6c8b2fc263ca623a37394e78a4b9d0d8ad7bfc114e88d5c",
+      "bytes": 3004
+    },
+    {
+      "path": "backend/app/utils/openai_chat_compat.py",
+      "sha256": "0eb743e6d62e0c1d867a12914a5a1636e0ed694540d23d929048fa5e6cb7068e",
+      "bytes": 3109
+    },
+    {
+      "path": "backend/app/utils/retry.py",
+      "sha256": "9d6cedd532e500ad35a916f89ce61748c083d300478461ab17520cef19177e4d",
+      "bytes": 7513
+    },
+    {
+      "path": "backend/app/utils/zep.py",
+      "sha256": "652f8e2d9e7eb395724a444d6508f5944286cf8717771c9a61f826a3e0277258",
+      "bytes": 5255
+    },
+    {
+      "path": "backend/app/utils/zep_lifecycle.py",
+      "sha256": "3df1ffe202992fd40acc05634aaa58c3214550df585a13ac3d6243f0140c4c0c",
+      "bytes": 1727
+    },
+    {
+      "path": "backend/app/utils/zep_paging.py",
+      "sha256": "e1f3cdbb20530c51e8dcd0c358d38a13a760f77b0618824fdfcfecc421e206a1",
+      "bytes": 4448
+    },
+    {
+      "path": "backend/run.py",
+      "sha256": "893a01b2e1881e4eb06bdbc4737e444d72eb374f9f326a1249dbc9aa04274483",
+      "bytes": 1294
+    },
+    {
+      "path": "backend/scripts/action_logger.py",
+      "sha256": "2f446d46d95b334fc2fa07f3cf1b69c11dbd33b625d8c4a0cd6b9d9b076d7632",
+      "bytes": 10256
+    },
+    {
+      "path": "backend/scripts/run_parallel_simulation.py",
+      "sha256": "e1ee10de9a4599a8b18d01f0678f9f9caf4e0846c2355f302aaf0d56ed95e942",
+      "bytes": 62902
+    },
+    {
+      "path": "backend/scripts/run_reddit_simulation.py",
+      "sha256": "edd537c023f8169d78054ecc261d7dca28b5a83af27bdd5bf5edcf2df68d361a",
+      "bytes": 27220
+    },
+    {
+      "path": "backend/scripts/run_twitter_simulation.py",
+      "sha256": "cd766f1a55b5cec48a776ce5bb7b072dcfe7a07bd8b0f63f7c1b2b5464b772bf",
+      "bytes": 27362
+    },
+    {
+      "path": "backend/scripts/test_profile_format.py",
+      "sha256": "c60feaff8d5727c7c473d9879742c85c352151b208ec8ff72d48ad9ff9e88f17",
+      "bytes": 5856
+    },
+    {
+      "path": "backend/scripts/validate_zep_cloud_integration.py",
+      "sha256": "baf1b07bb4e23fba44cc66a363880b5be65a29843d870113aa776c6cbaa43ba9",
+      "bytes": 34544
+    },
+    {
+      "path": "backend/tests/test_llm_json_responses.py",
+      "sha256": "1a82037f2498ac5f80c230159516385089980881f1d9157e6f3ae6d61ff90061",
+      "bytes": 7719
+    },
+    {
+      "path": "backend/tests/test_ontology_api_errors.py",
+      "sha256": "ad5a7b4aebaa320f8fbdbedb6686c81bbad2fe50897d9d5539eea2687568d85f",
+      "bytes": 2364
+    },
+    {
+      "path": "backend/tests/test_ontology_attributes.py",
+      "sha256": "2959000b2f327755bd75cefd24c6c46300c1cae8aeb70ee69f9d07989963c22c",
+      "bytes": 8203
+    },
+    {
+      "path": "backend/tests/test_ontology_generator.py",
+      "sha256": "ca17fe3d212cc7bb6a650dc131f3e30f918a153d32561cfd6165041c9504a590",
+      "bytes": 2457
+    },
+    {
+      "path": "backend/tests/test_openai_chat_compat.py",
+      "sha256": "74beef867a3276a97e82e20be53832154c6d68278e89fbe16de0e75a4bfe8921",
+      "bytes": 3299
+    },
+    {
+      "path": "backend/tests/test_platform_profiles.py",
+      "sha256": "ebbfac88d0ddf5008b2d8e1c1c77e9e3c7b9e386364fffff0aeddca8c3985f6b",
+      "bytes": 2047
+    },
+    {
+      "path": "backend/tests/test_profile_field_normalization.py",
+      "sha256": "6fa99d1c71567f8d02a07a4aab14ed0f7a16b3ec6980e69594596484ca7fe40e",
+      "bytes": 2711
+    },
+    {
+      "path": "backend/tests/test_report_tool_result_sanitizer.py",
+      "sha256": "94f71ce1cee6b6429288ac2771c38e44197e79a6374135166b17297bbf462f57",
+      "bytes": 963
+    },
+    {
+      "path": "backend/tests/test_simulation_prepare_failure.py",
+      "sha256": "9afbfcfafb390c0216064e7bdb45e326039f0a37549987c4bd596773747d10c5",
+      "bytes": 3462
+    },
+    {
+      "path": "backend/tests/test_zep_cloud_contracts.py",
+      "sha256": "6bba5c2d520671e83792951ca9682648ac405ff425d9775ca0233763a715ccca",
+      "bytes": 17117
+    },
+    {
+      "path": "backend/tests/test_zep_cloud_validation_script.py",
+      "sha256": "a3e595b1af1e7dc265d0ae9c111fc79e4a9b4e4d1a1b4ee167b2833d458fd33b",
+      "bytes": 3221
+    },
+    {
+      "path": "backend/tests/test_zep_edge_paging.py",
+      "sha256": "814ea8f03910e4b77fb22d1c74686b8a72c676d5027b441e5918b65cd71989fc",
+      "bytes": 3400
+    },
+    {
+      "path": "backend/tests/test_zep_entity_reader_edges.py",
+      "sha256": "1423b21082d25e29e7e1c01319815f37c40589ebeb1ab4d0bf62d7c084e8ec6f",
+      "bytes": 1229
+    },
+    {
+      "path": "backend/tests/test_zep_graph_lifecycle.py",
+      "sha256": "a698574e2bc8dd3fb7f4f8e19df4c8e09f1bab49f527ba3341c43f3e516b4031",
+      "bytes": 12775
+    },
+    {
+      "path": "backend/tests/test_zep_graph_memory_updater.py",
+      "sha256": "18eb0df889a0fe438a94a8c51d485b0c93eff707f4a579d122169671c08e1ed8",
+      "bytes": 7142
+    },
+    {
+      "path": "backend/tests/test_zep_report_barrier.py",
+      "sha256": "04ebfee7524cf56af246efea54bbc13be43098ef90c85de149df6ab9e1a5c119",
+      "bytes": 8868
+    },
+    {
+      "path": "backend/tests/test_zep_retry_and_client.py",
+      "sha256": "699f9644181100d71cda433d530221fc31436589c36d55628bd75f0a75ed6553",
+      "bytes": 3141
+    },
+    {
+      "path": "backend/tests/test_zep_simulation_barrier.py",
+      "sha256": "77b59039841ea4a1b0873b56051d074fedb336b10283ce3f2ca7d3e392e92bed",
+      "bytes": 15448
+    },
+    {
+      "path": "scripts/fetch_star_count.py",
+      "sha256": "dfe9e0060d9abb0b3e1cda61bd73bba77fe878815adcbea14601666dce30e927",
+      "bytes": 4936
+    },
+    {
+      "path": "scripts/star_history.py",
+      "sha256": "ff1945890f0eada740539d1815887884601f5187a0363584ba925674814376b7",
+      "bytes": 62295
+    },
+    {
+      "path": "tests/test_local_star_count_fetch.py",
+      "sha256": "f9368e145018b644f28104f15012ccbe99d124647966ee225bd4153f52dbb173",
+      "bytes": 13843
+    },
+    {
+      "path": "tests/test_local_star_history.py",
+      "sha256": "5d9fb5466b5d121432d9e82869edf91fe41cb1f02b8a6fe704372fb167368d55",
+      "bytes": 35557
+    }
+  ],
+  "candidateWheelEvidence": [
+    {
+      "name": "camel-ai",
+      "version": "0.2.78",
+      "source": {
+        "registry": "https://pypi.org/simple"
+      },
+      "candidateCp311LinuxAarch64OrUniversalWheels": [
+        {
+          "url": "https://files.pythonhosted.org/packages/01/81/0cfb1c0d9da589665e2eb4471887967e70bba428638c37fb4f6a78baf300/camel_ai-0.2.78-py3-none-any.whl",
+          "hash": "sha256:356624da13dfe0c55ef43dc509c18ce029f67fe3997966495a4ce9be931078d5",
+          "size": 1415578,
+          "upload-time": "2025-10-15T17:20:51.727Z"
+        }
+      ],
+      "conditionalDependencies": []
+    },
+    {
+      "name": "camel-oasis",
+      "version": "0.2.5",
+      "source": {
+        "registry": "https://pypi.org/simple"
+      },
+      "candidateCp311LinuxAarch64OrUniversalWheels": [
+        {
+          "url": "https://files.pythonhosted.org/packages/77/d0/6d62173602433937d0228b7809e2b244e09c11cfb1be9c6754ae3b20d887/camel_oasis-0.2.5-py3-none-any.whl",
+          "hash": "sha256:9ebd6ba8e331495ee56b25cc63982188b94125dde499e5e9c00398a1d47e606d",
+          "size": 75954,
+          "upload-time": "2025-12-04T11:58:18.363Z"
+        }
+      ],
+      "conditionalDependencies": []
+    },
+    {
+      "name": "numpy",
+      "version": "2.3.5",
+      "source": {
+        "registry": "https://pypi.org/simple"
+      },
+      "candidateCp311LinuxAarch64OrUniversalWheels": [
+        {
+          "url": "https://files.pythonhosted.org/packages/f2/2b/05bbeb06e2dff5eab512dfc678b1cc5ee94d8ac5956a0885c64b6b26252b/numpy-2.3.5-cp311-cp311-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl",
+          "hash": "sha256:3095bdb8dd297e5920b010e96134ed91d852d81d490e787beca7e35ae1d89cf7",
+          "size": 14557282,
+          "upload-time": "2025-11-16T22:49:30.964Z"
+        },
+        {
+          "url": "https://files.pythonhosted.org/packages/ac/14/085f4cf05fc3f1e8aa95e85404e984ffca9b2275a5dc2b1aae18a67538b8/numpy-2.3.5-cp311-cp311-musllinux_1_2_aarch64.whl",
+          "hash": "sha256:6cf9b429b21df6b99f4dee7a1218b8b7ffbbe7df8764dc0bd60ce8a0708fed1e",
+          "size": 16341672,
+          "upload-time": "2025-11-16T22:49:37.2Z"
+        }
+      ],
+      "conditionalDependencies": []
+    },
+    {
+      "name": "pytest",
+      "version": "8.2.0",
+      "source": {
+        "registry": "https://pypi.org/simple"
+      },
+      "candidateCp311LinuxAarch64OrUniversalWheels": [
+        {
+          "url": "https://files.pythonhosted.org/packages/c4/43/6b1debd95ecdf001bc46789a933f658da3f9738c65f32db3f4e8f2a4ca97/pytest-8.2.0-py3-none-any.whl",
+          "hash": "sha256:1733f0620f6cda4095bbf0d9ff8022486e91892245bb9e7d5542c018f612f233",
+          "size": 339229,
+          "upload-time": "2024-04-27T23:34:52.413Z"
+        }
+      ],
+      "conditionalDependencies": [
+        {
+          "name": "colorama",
+          "marker": "sys_platform == 'win32'"
+        }
+      ]
+    },
+    {
+      "name": "pytest-asyncio",
+      "version": "0.23.6",
+      "source": {
+        "registry": "https://pypi.org/simple"
+      },
+      "candidateCp311LinuxAarch64OrUniversalWheels": [
+        {
+          "url": "https://files.pythonhosted.org/packages/e0/c9/de22c040d4c821c6c797ca1d720f1f4b2f4293d5757e811c62ae544496c4/pytest_asyncio-0.23.6-py3-none-any.whl",
+          "hash": "sha256:68516fdd1018ac57b846c9846b954f0393b26f094764a28c955eabb0536a4e8a",
+          "size": 17552,
+          "upload-time": "2024-03-19T07:17:32.951Z"
+        }
+      ],
+      "conditionalDependencies": []
+    },
+    {
+      "name": "scikit-learn",
+      "version": "1.8.0",
+      "source": {
+        "registry": "https://pypi.org/simple"
+      },
+      "candidateCp311LinuxAarch64OrUniversalWheels": [
+        {
+          "url": "https://files.pythonhosted.org/packages/8a/44/226142fcb7b7101e64fdee5f49dbe6288d4c7af8abf593237b70fca080a4/scikit_learn-1.8.0-cp311-cp311-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl",
+          "hash": "sha256:5e30adb87f0cc81c7690a84f7932dd66be5bac57cfe16b91cb9151683a4a2d3b",
+          "size": 8799632,
+          "upload-time": "2025-12-10T07:07:43.899Z"
+        }
+      ],
+      "conditionalDependencies": []
+    },
+    {
+      "name": "scipy",
+      "version": "1.16.3",
+      "source": {
+        "registry": "https://pypi.org/simple"
+      },
+      "candidateCp311LinuxAarch64OrUniversalWheels": [
+        {
+          "url": "https://files.pythonhosted.org/packages/be/a0/668c4609ce6dbf2f948e167836ccaf897f95fb63fa231c87da7558a374cd/scipy-1.16.3-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+          "hash": "sha256:532fb5ad6a87e9e9cd9c959b106b73145a03f04c7d57ea3e6f6bb60b86ab0876",
+          "size": 33593618,
+          "upload-time": "2025-10-28T17:32:06.902Z"
+        },
+        {
+          "url": "https://files.pythonhosted.org/packages/79/e8/d0f33590364cdbd67f28ce79368b373889faa4ee959588beddf6daef9abe/scipy-1.16.3-cp311-cp311-musllinux_1_2_aarch64.whl",
+          "hash": "sha256:b7180967113560cca57418a7bc719e30366b47959dd845a93206fbed693c867e",
+          "size": 36226154,
+          "upload-time": "2025-10-28T17:32:17.961Z"
+        }
+      ],
+      "conditionalDependencies": []
+    },
+    {
+      "name": "torch",
+      "version": "2.9.1",
+      "source": {
+        "registry": "https://pypi.org/simple"
+      },
+      "candidateCp311LinuxAarch64OrUniversalWheels": [
+        {
+          "url": "https://files.pythonhosted.org/packages/15/db/c064112ac0089af3d2f7a2b5bfbabf4aa407a78b74f87889e524b91c5402/torch-2.9.1-cp311-cp311-manylinux_2_28_aarch64.whl",
+          "hash": "sha256:62b3fd888277946918cba4478cf849303da5359f0fb4e3bfb86b0533ba2eaf8d",
+          "size": 104220430,
+          "upload-time": "2025-11-12T15:20:31.705Z"
+        }
+      ],
+      "conditionalDependencies": [
+        {
+          "name": "nvidia-cublas-cu12",
+          "marker": "platform_machine == 'x86_64' and sys_platform == 'linux'"
+        },
+        {
+          "name": "nvidia-cuda-cupti-cu12",
+          "marker": "platform_machine == 'x86_64' and sys_platform == 'linux'"
+        },
+        {
+          "name": "nvidia-cuda-nvrtc-cu12",
+          "marker": "platform_machine == 'x86_64' and sys_platform == 'linux'"
+        },
+        {
+          "name": "nvidia-cuda-runtime-cu12",
+          "marker": "platform_machine == 'x86_64' and sys_platform == 'linux'"
+        },
+        {
+          "name": "nvidia-cudnn-cu12",
+          "marker": "platform_machine == 'x86_64' and sys_platform == 'linux'"
+        },
+        {
+          "name": "nvidia-cufft-cu12",
+          "marker": "platform_machine == 'x86_64' and sys_platform == 'linux'"
+        },
+        {
+          "name": "nvidia-cufile-cu12",
+          "marker": "platform_machine == 'x86_64' and sys_platform == 'linux'"
+        },
+        {
+          "name": "nvidia-curand-cu12",
+          "marker": "platform_machine == 'x86_64' and sys_platform == 'linux'"
+        },
+        {
+          "name": "nvidia-cusolver-cu12",
+          "marker": "platform_machine == 'x86_64' and sys_platform == 'linux'"
+        },
+        {
+          "name": "nvidia-cusparse-cu12",
+          "marker": "platform_machine == 'x86_64' and sys_platform == 'linux'"
+        },
+        {
+          "name": "nvidia-cusparselt-cu12",
+          "marker": "platform_machine == 'x86_64' and sys_platform == 'linux'"
+        },
+        {
+          "name": "nvidia-nccl-cu12",
+          "marker": "platform_machine == 'x86_64' and sys_platform == 'linux'"
+        },
+        {
+          "name": "nvidia-nvjitlink-cu12",
+          "marker": "platform_machine == 'x86_64' and sys_platform == 'linux'"
+        },
+        {
+          "name": "nvidia-nvshmem-cu12",
+          "marker": "platform_machine == 'x86_64' and sys_platform == 'linux'"
+        },
+        {
+          "name": "nvidia-nvtx-cu12",
+          "marker": "platform_machine == 'x86_64' and sys_platform == 'linux'"
+        },
+        {
+          "name": "setuptools",
+          "marker": "python_full_version >= '3.12'"
+        },
+        {
+          "name": "triton",
+          "marker": "platform_machine == 'x86_64' and sys_platform == 'linux'"
+        }
+      ]
+    },
+    {
+      "name": "zep-cloud",
+      "version": "3.25.0",
+      "source": {
+        "registry": "https://pypi.org/simple"
+      },
+      "candidateCp311LinuxAarch64OrUniversalWheels": [
+        {
+          "url": "https://files.pythonhosted.org/packages/77/fc/5ca2bdd20b83bd62bc2708580f756e704f69704709e0ed43e735aa590c1e/zep_cloud-3.25.0-py3-none-any.whl",
+          "hash": "sha256:94d9599038b154af9ad33cab4b4873ed9adb1bcaa48fc4c41cbd407c1a657ef5",
+          "size": 166438,
+          "upload-time": "2026-07-16T00:46:42.39Z"
+        }
+      ],
+      "conditionalDependencies": []
+    }
+  ],
+  "wheelCompatibilityOrDependencySuccessEstablished": false,
+  "actualAdmission": false
+}

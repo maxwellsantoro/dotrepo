@@ -1,0 +1,137 @@
+[
+  {
+    "endLine": 6,
+    "passageSha256": "e113fc627d2371fb054ce4fd17abfbc9cb8bff49f68b52b87bea66b4c7f84525",
+    "path": "package.json",
+    "role": "exact package-manager and script owner",
+    "startLine": 1,
+    "text": "{\n  \"private\": true,\n  \"version\": \"3.5.44\",\n  \"packageManager\": \"pnpm@12.11.2\",\n  \"type\": \"module\",\n  \"scripts\": {\n",
+    "wholeFileSha256": "e55e3b7b508c74dc88e9fae8f445ebfb95052b4c50f8503d9cb17594f802e4d1"
+  },
+  {
+    "endLine": 24,
+    "passageSha256": "8311a79d1a495913179cdd78d1107cf75019651c674601c5a1559c80c45d7406",
+    "path": "package.json",
+    "role": "full/default/e2e build and type target distinctions",
+    "startLine": 18,
+    "text": "    \"format-check\": \"prettier --check --cache .\",\n    \"test\": \"vitest\",\n    \"test-unit\": \"vitest --project unit*\",\n    \"test-e2e\": \"node scripts/build.js vue -f global -d && vitest --project e2e --project e2e-browser\",\n    \"test-dts\": \"run-s build-dts test-dts-only\",\n    \"test-dts-only\": \"tsc -p packages-private/dts-built-test/tsconfig.json && tsc -p ./packages-private/dts-test/tsconfig.test.json\",\n    \"test-coverage\": \"vitest run --project unit* --coverage\",\n",
+    "wholeFileSha256": "e55e3b7b508c74dc88e9fae8f445ebfb95052b4c50f8503d9cb17594f802e4d1"
+  },
+  {
+    "endLine": 65,
+    "passageSha256": "cd30c374298298b12533f49b09af38b35bbca50c07bd9c433d580e8600e1f149",
+    "path": "package.json",
+    "role": "normal root hooks and Node minimum",
+    "startLine": 43,
+    "text": "    \"build-ssr-esm\": \"node scripts/build.js compiler-sfc server-renderer -f esm-browser\",\n    \"build-sfc-playground-self\": \"cd packages-private/sfc-playground && npm run build\",\n    \"preinstall\": \"npx only-allow pnpm\",\n    \"postinstall\": \"simple-git-hooks\"\n  },\n  \"simple-git-hooks\": {\n    \"pre-commit\": \"pnpm lint-staged && pnpm check\",\n    \"commit-msg\": \"node scripts/verify-commit.js\"\n  },\n  \"lint-staged\": {\n    \"*.{js,json}\": [\n      \"prettier --write\"\n    ],\n    \"*.ts?(x)\": [\n      \"eslint --fix\",\n      \"prettier --parser=typescript --write\"\n    ]\n  },\n  \"engines\": {\n    \"node\": \">=20.0.0\"\n  },\n  \"devDependencies\": {\n    \"@babel/parser\": \"catalog:\",\n",
+    "wholeFileSha256": "e55e3b7b508c74dc88e9fae8f445ebfb95052b4c50f8503d9cb17594f802e4d1"
+  },
+  {
+    "endLine": 38,
+    "passageSha256": "54d0a86d1828707bbfe24214ee584167ce08dc70f6bfccb2fcea748e6f1c8401",
+    "path": "pnpm-workspace.yaml",
+    "role": "workspace/catalog/build-hook/trust-age policies",
+    "startLine": 1,
+    "text": "packages:\n  - 'packages/*'\n  - 'packages-private/*'\n\ncatalog:\n  '@babel/parser': ^7.29.9\n  '@babel/types': ^7.29.8\n  'entities': '^7.0.1'\n  'estree-walker': ^2.0.2\n  'magic-string': ^0.30.21\n  'source-map-js': ^1.2.2\n  'vite': ^8.3.4\n  '@vitejs/plugin-vue': ^6.0.10\n\nallowBuilds:\n  '@parcel/watcher': true\n  '@swc/core': true\n  'esbuild': true\n  'puppeteer': true\n  'simple-git-hooks': true\n  'unrs-resolver': true\n\ndedupePeers: true\n\npeerDependencyRules:\n  allowedVersions:\n    'typescript-eslint>eslint': '^9.0.0'\n    '@typescript-eslint/eslint-plugin>eslint': '^9.0.0'\n    '@typescript-eslint/parser>eslint': '^9.0.0'\n    '@typescript-eslint/type-utils>eslint': '^9.0.0'\n    '@typescript-eslint/utils>eslint': '^9.0.0'\n\nminimumReleaseAge: 1440\n\ntrustPolicy: no-downgrade\nminimumReleaseAgeExclude:\n  # Renovate security update: vitest@4.1.11\n  - vitest@4.1.11\n",
+    "wholeFileSha256": "54d0a86d1828707bbfe24214ee584167ce08dc70f6bfccb2fcea748e6f1c8401"
+  },
+  {
+    "endLine": 1,
+    "passageSha256": "a784a891ee985530f25d616fa372d1b360fc9d4ef38932ab8dc2f45edfa5b01d",
+    "path": ".node-version",
+    "role": "mutable lts alias",
+    "startLine": 1,
+    "text": "lts/*",
+    "wholeFileSha256": "a784a891ee985530f25d616fa372d1b360fc9d4ef38932ab8dc2f45edfa5b01d"
+  },
+  {
+    "endLine": 120,
+    "passageSha256": "9989077dcff1373d2ec84804b60e38a7e951f1c7a0bbeafc9ad47924f9e4aa8b",
+    "path": "vitest.config.ts",
+    "role": "all five project settings",
+    "startLine": 25,
+    "text": "  test: {\n    globals: true,\n    pool: 'threads',\n    setupFiles: 'scripts/setup-vitest.ts',\n    sequence: {\n      hooks: 'list',\n    },\n    coverage: {\n      provider: 'v8',\n      reporter: ['text', 'html'],\n      include: ['packages/*/src/**'],\n      exclude: [\n        // entries that are not really used during tests\n        'packages/vue-compat/**',\n        'packages/vue/src/dev.ts',\n        'packages/vue/src/runtime.ts',\n        // not testable during unit tests\n        'packages/runtime-core/src/profiling.ts',\n        'packages/runtime-core/src/featureFlags.ts',\n        'packages/runtime-core/src/customFormatter.ts',\n        // tested via e2e so no coverage is collected\n        'packages/runtime-core/src/hydrationStrategies.ts',\n        'packages/runtime-dom/src/components/Transition*',\n      ],\n    },\n\n    projects: [\n      {\n        extends: true,\n        test: {\n          name: 'unit',\n          exclude: [\n            ...configDefaults.exclude,\n            '**/e2e/**',\n            '**/{vue,vue-compat,runtime-dom}/**',\n            'packages/server-renderer/__tests__/ssrWatch.spec.ts',\n            'packages/server-renderer/__tests__/ssrRender.spec.ts',\n          ],\n        },\n      },\n      {\n        extends: true,\n        test: {\n          name: 'unit-gc',\n          pool: 'forks',\n          include: [\n            'packages/server-renderer/__tests__/ssrWatch.spec.ts',\n            'packages/server-renderer/__tests__/ssrRender.spec.ts',\n          ],\n          execArgv: ['--expose-gc'],\n        },\n      },\n      {\n        extends: true,\n        test: {\n          name: 'unit-jsdom',\n          include: ['packages/{vue,vue-compat,runtime-dom}/**/*.{test,spec}.*'],\n          exclude: [...configDefaults.exclude, '**/e2e/**'],\n          environment: 'jsdom',\n        },\n      },\n      {\n        extends: true,\n        test: {\n          name: 'e2e',\n          environment: 'jsdom',\n          isolate: true,\n          include: ['packages/vue/__tests__/e2e/*.spec.ts'],\n          exclude: [\n            'packages/vue/__tests__/e2e/Transition.spec.ts',\n            'packages/vue/__tests__/e2e/TransitionGroup.spec.ts',\n          ],\n        },\n      },\n      {\n        extends: true,\n        define: {\n          __BROWSER__: true,\n        },\n        test: {\n          name: 'e2e-browser',\n          include: [\n            'packages/vue/__tests__/e2e/Transition.spec.ts',\n            'packages/vue/__tests__/e2e/TransitionGroup.spec.ts',\n          ],\n          browser: {\n            enabled: true,\n            provider: playwright(),\n            headless: true,\n            instances: [{ browser: 'chromium' }],\n          },\n        },\n      },\n    ],\n  },\n})\n",
+    "wholeFileSha256": "98db4cc683fa725ef5beb3b19f215d07ffb972cf80650b404221a73aaa03a361"
+  },
+  {
+    "endLine": 104,
+    "passageSha256": "7a5f0a85b61baa9973260eaac303bde2e4e9d4b9135f8fd7a017cda12038c0b1",
+    "path": ".github/contributing.md",
+    "role": "normal dependency installation and git hooks",
+    "startLine": 77,
+    "text": "## Development Setup\n\nYou will need [Node.js](https://nodejs.org) with minimum version as specified in the [`.node-version`](https://github.com/vuejs/core/blob/main/.node-version) file, and [PNPM](https://pnpm.io) with minimum version as specified in the [`\"packageManager\"` field in `package.json`](https://github.com/vuejs/core/blob/main/package.json#L4).\n\nWe also recommend installing [@antfu/ni](https://github.com/antfu/ni) to help switching between repos using different package managers. `ni` also provides the handy `nr` command which makes running npm scripts easier.\n\nAfter cloning the repo, run:\n\n```bash\n$ pnpm i # install the dependencies of the project\n```\n\nA high level overview of tools used:\n\n- [TypeScript](https://www.typescriptlang.org/) as the development language\n- [Vite](https://vite.dev/) and [ESBuild](https://esbuild.github.io/) for development bundling\n- [Rollup](https://rollupjs.org) for production bundling\n- [Vitest](https://vitest.dev/) for unit testing\n- [Prettier](https://prettier.io/) for code formatting\n- [ESLint](https://eslint.org/) for static error prevention (outside of types)\n\n## Git Hooks\n\nThe project uses [simple-git-hooks](https://github.com/toplenboren/simple-git-hooks) to enforce the following on each commit:\n\n- Type check the entire project\n- Automatically format changed files using Prettier\n- Verify commit message format (logic in `scripts/verify-commit.js`)\n",
+    "wholeFileSha256": "433673810dc21f66c83884a108a45ec5d1192d1964e6f2cefe840bfeb6de9843"
+  },
+  {
+    "endLine": 239,
+    "passageSha256": "d1c27c091ccfecdeb77ae6acc2f8ffa8b2bb4a17b81e58b0dfb3151118b6f656",
+    "path": ".github/contributing.md",
+    "role": "run-once full test intent",
+    "startLine": 209,
+    "text": "### `nr test`\n\nThe `test` script simply calls the `vitest` binary, so all [Vitest CLI Options](https://vitest.dev/guide/cli.html#options) can be used. Some examples:\n\n```bash\n# run all tests in watch mode\n$ nr test\n\n# run once and exit (equivalent to `vitest run`)\n$ nr test run\n\n# run all tests under the runtime-core package\n$ nr test runtime-core\n\n# run tests in files matching the pattern\n$ nr test <fileNamePattern>\n\n# run a specific test in specific files\n$ nr test <fileNamePattern> -t 'test name'\n```\n\nTests that test against source code are grouped under `nr test-unit`, while tests that test against built files that run in real browsers are grouped under `nr test-e2e`.\n\n### `nr test-dts`\n\nRuns `nr build-dts` first, then verify the type tests in `packages-private/dts-test` are working correctly against the actual built type declarations.\n\n## Project Structure\n\nThis repository employs a [monorepo](https://en.wikipedia.org/wiki/Monorepo) setup which hosts a number of associated packages under the `packages` directory:\n\n",
+    "wholeFileSha256": "433673810dc21f66c83884a108a45ec5d1192d1964e6f2cefe840bfeb6de9843"
+  },
+  {
+    "endLine": 100,
+    "passageSha256": "c5eda9826bc46c8bba2d5b74482d3133744fce168343413f3b7ad063c9e189ba",
+    "path": ".github/workflows/test.yml",
+    "role": "e2e ordinary install/browser downloads and target",
+    "startLine": 63,
+    "text": "        with:\n          persist-credentials: false\n\n      - name: Setup cache for Chromium binary\n        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0\n        with:\n          path: ~/.cache/puppeteer\n          key: chromium-${{ hashFiles('pnpm-lock.yaml') }}\n\n      - name: Setup cache for Playwright browsers\n        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0\n        with:\n          path: ~/.cache/ms-playwright\n          key: playwright-${{ hashFiles('pnpm-lock.yaml') }}\n\n      - name: Install pnpm\n        uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0\n\n      - name: Install Node.js\n        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0\n        with:\n          node-version-file: '.node-version'\n          cache: 'pnpm'\n\n      - run: pnpm install\n      - run: node node_modules/puppeteer/install.mjs\n      - run: pnpm exec playwright install chromium\n\n      - name: Run e2e tests\n        run: pnpm run test-e2e\n\n      - name: verify treeshaking\n        run: node scripts/verify-treeshaking.js\n\n  lint-and-test-dts:\n    runs-on: ubuntu-latest\n    env:\n      PUPPETEER_SKIP_DOWNLOAD: 'true'\n",
+    "wholeFileSha256": "e3c271c035e23b87a1351b3459e2c37670322c518bee295a465b5f604b8fe189"
+  },
+  {
+    "endLine": 36,
+    "passageSha256": "b9472cce9d208a78fcdf0241ba3adc3a5e27fff295bed0f207cf7767c671d1e4",
+    "path": "scripts/build.js",
+    "role": "build tool and git metadata observation",
+    "startLine": 20,
+    "text": "import { parseArgs } from 'node:util'\nimport path from 'node:path'\nimport { brotliCompressSync, gzipSync } from 'node:zlib'\nimport pico from 'picocolors'\nimport { cpus } from 'node:os'\nimport { targets as allTargets, exec, fuzzyMatchTarget } from './utils.js'\nimport { scanEnums } from './inline-enums.js'\nimport prettyBytes from 'pretty-bytes'\nimport { spawnSync } from 'node:child_process'\n\nconst commit = spawnSync('git', ['rev-parse', '--short=7', 'HEAD'])\n  .stdout.toString()\n  .trim()\n\nconst { values, positionals: targets } = parseArgs({\n  allowPositionals: true,\n  options: {\n",
+    "wholeFileSha256": "ed2d1f50b6f8daeda0aa48ca9c9bcfeb3ea04386f101baa76620e03783068490"
+  },
+  {
+    "endLine": 202,
+    "passageSha256": "b29014d362f05a757e97325e2e3517155f40c6d6f4017ce8c0e2b37089738237",
+    "path": "scripts/build.js",
+    "role": "global dev build relay",
+    "startLine": 160,
+    "text": "async function build(target) {\n  const pkgBase = privatePackages.includes(target)\n    ? `packages-private`\n    : `packages`\n  const pkgDir = path.resolve(`${pkgBase}/${target}`)\n  const pkg = JSON.parse(fs.readFileSync(`${pkgDir}/package.json`, 'utf-8'))\n\n  // if this is a full build (no specific targets), ignore private packages\n  if ((isRelease || !targets.length) && pkg.private) {\n    return\n  }\n\n  // if building a specific format, do not remove dist.\n  if (!formats && fs.existsSync(`${pkgDir}/dist`)) {\n    fs.rmSync(`${pkgDir}/dist`, { recursive: true })\n  }\n\n  const env =\n    (pkg.buildOptions && pkg.buildOptions.env) ||\n    (devOnly ? 'development' : 'production')\n\n  await exec(\n    'rollup',\n    [\n      '-c',\n      '--environment',\n      [\n        `COMMIT:${commit}`,\n        `NODE_ENV:${env}`,\n        `TARGET:${target}`,\n        formats ? `FORMATS:${formats}` : ``,\n        prodOnly ? `PROD_ONLY:true` : ``,\n        sourceMap ? `SOURCE_MAP:true` : ``,\n      ]\n        .filter(Boolean)\n        .join(','),\n    ],\n    { stdio: 'inherit' },\n  )\n}\n\n/**\n * Checks the sizes of all targets.\n",
+    "wholeFileSha256": "ed2d1f50b6f8daeda0aa48ca9c9bcfeb3ea04386f101baa76620e03783068490"
+  },
+  {
+    "endLine": 86,
+    "passageSha256": "4244f3f1029f3222e05e7976ddd3418be4a28051c5ec19363f2c9f8a941dc751",
+    "path": "rollup.config.js",
+    "role": "global output artifact route",
+    "startLine": 63,
+    "text": "  'esm-browser': {\n    file: resolve(`dist/${name}.esm-browser.js`),\n    format: 'es',\n  },\n  cjs: {\n    file: resolve(`dist/${name}.cjs.js`),\n    format: 'cjs',\n  },\n  global: {\n    file: resolve(`dist/${name}.global.js`),\n    format: 'iife',\n  },\n  // runtime-only builds, for main \"vue\" package only\n  'esm-bundler-runtime': {\n    file: resolve(`dist/${name}.runtime.esm-bundler.js`),\n    format: 'es',\n  },\n  'esm-browser-runtime': {\n    file: resolve(`dist/${name}.runtime.esm-browser.js`),\n    format: 'es',\n  },\n  'global-runtime': {\n    file: resolve(`dist/${name}.runtime.global.js`),\n    format: 'iife',\n",
+    "wholeFileSha256": "aa56adca0bb604d70c463270fa6fac6d32f8ce984a4e3c888f4f0e63091d2de1"
+  },
+  {
+    "endLine": 16,
+    "passageSha256": "42c38a235f06e25b8e0dd7f321af6e31fad2d9d571c84f48850019d27daa9545",
+    "path": "packages/vue/__tests__/e2e/e2eUtils.ts",
+    "role": "conditional Puppeteer sandbox args",
+    "startLine": 10,
+    "text": "const puppeteerOptions: LaunchOptions = {\n  args: process.env.CI ? ['--no-sandbox', '--disable-setuid-sandbox'] : [],\n  headless: true,\n}\n\nconst maxTries = 30\nexport const timeout = (n: number): Promise<any> =>\n",
+    "wholeFileSha256": "ce93fefd0ba26af6ceebdeb276fb4e6112b37a00a92b68ae65321029cd91fb4a"
+  },
+  {
+    "endLine": 97,
+    "passageSha256": "ddff017d80a4a03d173c646f9df09cc7a00f18bd48fff2e0ae849deb2c790c0f",
+    "path": "packages/vue/__tests__/e2e/e2eUtils.ts",
+    "role": "Puppeteer launch/closure",
+    "startLine": 70,
+    "text": "  beforeEach(async () => {\n    page = await browser.newPage()\n\n    await page.evaluateOnNewDocument(() => {\n      localStorage.clear()\n    })\n\n    page.on('console', e => {\n      if (e.type() === 'error') {\n        const err = e.args()[0]\n        console.error(`Error from Puppeteer-loaded page:\\n`, err.remoteObject())\n      }\n    })\n  })\n\n  afterEach(async () => {\n    await page.close()\n  })\n\n  afterAll(async () => {\n    await browser.close()\n  })\n\n  async function click(\n    selector: string,\n    options?: ClickOptions,\n  ): Promise<void> {\n    await page.click(selector, options)\n",
+    "wholeFileSha256": "ce93fefd0ba26af6ceebdeb276fb4e6112b37a00a92b68ae65321029cd91fb4a"
+  },
+  {
+    "endLine": 7,
+    "passageSha256": "38260ff1817eb1007852d8f69c6327ac38f30a044bffe93de699ec877ba1aa45",
+    "path": "packages/vue/__tests__/e2e/e2eBrowserUtils.ts",
+    "role": "browser runner requires built vue.global.js",
+    "startLine": 1,
+    "text": "import { cdp } from 'vitest/browser'\n\nexport const E2E_TIMEOUT: number = 30 * 1000\n\nconst maxTries = 30\nconst vueGlobalBuildUrl = new URL('../../dist/vue.global.js', import.meta.url)\n  .href\n",
+    "wholeFileSha256": "2d0cb3dae05d665d2e53b98b5364b1510abbb65ba4d3c508aed76c92683db795"
+  }
+]

@@ -1,0 +1,31 @@
+{
+  "actualAdmission": false,
+  "artifacts": {
+    "README.md": {
+      "bytes": 1422,
+      "sha256": "cf0c4e3c378bef35af802a6ce5f8d948646a1abee534c7e25985f04529aa0378"
+    },
+    "review.json": {
+      "bytes": 4046,
+      "sha256": "d956bbca6dcf46fee320976f6f2a01d1db7e2e9e27d1eed6e5508691c66e8a13"
+    },
+    "verification.json": {
+      "bytes": 8120,
+      "sha256": "6b02778dd7bfe07908dc714641bcd9ee02d329f537da7dc96fc83d0d0a0209e4"
+    }
+  },
+  "confidencePromotion": false,
+  "executionAuthorized": false,
+  "findings": [],
+  "newNetworkDaemonPackageWorkloadProviderActions": 0,
+  "state": "independent-compose-source-data-review-frozen",
+  "subject": {
+    "acquisitionScriptSha256": "042a4ed5eb29a5661fd9b90f65a6efa244608b180d9eac5e0e334fbe60972dd9",
+    "archiveSha256": "3c26db8b626c28f7fe149cabe27bd38cc0188f225efce7c78eda9d4730fed36a",
+    "authorFreezeSha256": "8d395d2a1040a5254c3ce3aadca84a9c611ee85ef0f788f4b81c16d7de13c9ee",
+    "inventorySha256": "3d5f79f9bb178abaa4f94f259ac5984ee3ca259b41109cf0e8d668692699e24a",
+    "planFreezeSha256": "10e819f24fe40515b2d2566c565b48926727ed0de88e4a1a9e8f5a62aa06f7fa",
+    "planSha256": "e85367cc76061f639deedad75c1c85449b34532bf412dec253c24b89396cb5ab"
+  },
+  "upstreamExecuted": false
+}

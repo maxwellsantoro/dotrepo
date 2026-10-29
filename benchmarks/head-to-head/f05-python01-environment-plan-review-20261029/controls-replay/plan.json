@@ -1,0 +1,277 @@
+{
+  "identity": "python01-existing-image-environment-preparation-plan-v1",
+  "base": "4e9b0c70552c9ee42ea9a8259301dc85a68bc7cc",
+  "task": {
+    "id": "python-01",
+    "repository": "github.com/666ghj/MiroFish",
+    "revision": "7657031ac01184afe2cb220f5ee3545573b5e843",
+    "originalRequestGoldUnchanged": true,
+    "acceptedAlternative": "root maintenance unittest files plus all18 backend assertion-bearing pytest files; diagnostic separate"
+  },
+  "inputBindings": {
+    "/Users/maxwell/projects/agent/dotrepo/AGENTS.md": "ac777fb15c3f3de96538d0449acb2aea0d0a61f5364a99c87db6e2be1dff633d",
+    "/Users/maxwell/projects/agent/dotrepo/ROADMAP.md": "96bcc9d1237c1cac0b2b1fc4bcedb1c2ba35ca92f5d2b9c2a5a6b8fe2db1c2e5",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-python01-oracle-decision-20261029/FREEZE.json": "944f76c7eec2978b07023521e4998f39652031e606792e598cbb51785242fa2a",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-python01-oracle-decision-20261029/decision.json": "b9ff7b34a7d881d8a2c1130585b3fa6727ae0407face8d2f480428a280d9239f",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/observer-contract.json": "8e0b15b1d18bd6b4bca8ae2c48589dab21ca733efe7081c34e96c026a8d43ca6",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/amendment-1/FREEZE.json": "994f8d9b6196252b763dbb56756dcb96b5c82b61c000164c71bbad23bdcef893",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-python01-oracle-preparation-review-20261029/amendment-1/FREEZE.json": "a36f301bdc8d43009d4651e9d3b2e5217a8d5440f31faf0ef2c4aa49bd02be9b",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-next8-20261029/python-01/acquisition.json": "02bd55b821ec5ea7181e9ec24abbedd85a389477cb3b8be58c3092791bb7497a",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-next8-20261029/python-01/provenance.json": "d640c1b1db3333892865bb4d8097cb90e1fc9c490678221c83af35a778652721",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-next8-20261029/python-01/inventory.json": "f3b3c78e90a89434ed77bbf7dc79c9397f9c0b27dc10c5eb0a60296d5b6c89e1",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-common-image-audit-20261029/freeze.json": "da4564e3b72bf7dba9cb469d51b9b1e88664ba7c9fa4bbd2b1d35bfb256e509c",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-common-image-audit-20261029/inventory.json": "f096a4b8a2346c0332082e2b88b093cc4fb78b2cbaed0b5b5af05d071695f647",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/image-attempt-3/logs/image-inspect/stdout.txt": "4c6fa72b8b05b95a719110e0f7fa705758c224e253cf8c7cdf881218ea4f1913",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/plan.json": "e11e44e5065713fc146b18eb81aaf10ff5d62ce4cbe5dcb43d2db43b9e4fb0a1",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-dependency-preparation-20261029/plan.json": "eceef38492e2b70a98c5984174e5ea8141effb3d0b3412dd788dc950e0eadfa3"
+  },
+  "source": {
+    "archive": "/tmp/dotrepo-f05-qualification-next8-20261029/python-01/source.tar",
+    "sha256": "fc70acea794785b5c6bfd06f5e0c83cb328fc5c4e05e36dab8f182fea5bd0d70",
+    "rootTree": "dcc88f9b1da4145a06769a7f979d50d77e1dba25",
+    "files": 128,
+    "expandedBytes": 9064963
+  },
+  "image": {
+    "id": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+    "platform": "linux/arm64",
+    "newImageRequired": false,
+    "pythonPath": "/usr/bin/python3.11",
+    "pythonInventory": {
+      "gid": 0,
+      "mode": "0o755",
+      "sha256": "304aa87a76ebb13fd22d253ac157f14980ff2cdb23e6274f3b045571405e07dc",
+      "size": 6616896,
+      "type": "0",
+      "uid": 0
+    },
+    "uvInventory": {
+      "gid": 0,
+      "mode": "0o755",
+      "sha256": "5bafa105c458ae95676218df743de5cd193376f9f231b06ee5f38d6e7dcfb450",
+      "size": 35035672,
+      "type": "0",
+      "uid": 0
+    },
+    "retainedUvVersion": "0.13.6",
+    "exactPythonPatchVersion": "pending-owned-probe",
+    "inheritedEnv": [
+      "GOTOOLCHAIN=local",
+      "GOENV=off"
+    ],
+    "auditDoesNotQualifyTask": true
+  },
+  "interpreterDecision": {
+    "preferred": "existing image CPython3.11",
+    "evidence": [
+      "project and lock >=3.11,<3.13",
+      "maintainer Dockerfile FROM python:3.11",
+      "62 tracked Python files parsed under feature_version3.11 with no syntax failures",
+      "lock contains cp311 linux/aarch64 candidate wheels for numpy/scipy/scikit-learn/torch plus universal pytest/plugin wheels"
+    ],
+    "requires312Established": false,
+    "guaranteed311DependencyOrImportSuccess": false,
+    "fallback": "do not download3.12 or change image after failure; retain failure and reassess only with concrete source/runtime evidence"
+  },
+  "isolation": {
+    "reuse": "existing reviewed preparation transport and strict actual-inspect policy, not a new runner",
+    "user": "1000:1000",
+    "readOnlyRoot": true,
+    "noHostMountsOrDockerSocket": true,
+    "capDrop": [
+      "ALL"
+    ],
+    "noNewPrivileges": true,
+    "pidIpcCgroupPrivate": true,
+    "oneAttemptPerSeparatelyAuthorizedStage": true,
+    "freshUniquePaths": true,
+    "cleanupAndAbsenceRequiredOnAllPaths": true
+  },
+  "limits": {
+    "workSeconds": 900,
+    "cleanupSeconds": 60,
+    "cpus": 3,
+    "memoryBytes": 4294967296,
+    "memorySwapBytes": 4294967296,
+    "pids": 256,
+    "workspaceBytes": 8589934592,
+    "downloadCacheExpandedBytes": 1073741824,
+    "cacheArchiveBytes": 536870912,
+    "sourcePlusCacheBytes": 2147483648,
+    "combinedTraceBytesPerCommand": 2097152,
+    "probeOutputBytes": 16384,
+    "probeSeconds": 60,
+    "probeChargedToSharedWorkDeadline": true,
+    "dependencySetupUsesRemainingWorkBudget": true,
+    "sourceFiles": 128,
+    "sourceExpandedBytes": 9064963,
+    "noResourceIncrease": true
+  },
+  "probe": {
+    "state": "not-executed-separate-authorization-required",
+    "source": "probe.py",
+    "sourceSha256": "399fc6b34116a83a1ef87226575738433c8295fc72ba8191e645a85d29a060c3",
+    "network": "none",
+    "cwd": "/workspace/owned-probe",
+    "provision": [
+      "probe.py only; no repository/lock/dependency source or site packages"
+    ],
+    "commands": [
+      [
+        "uv",
+        "--version"
+      ],
+      [
+        "uv",
+        "--no-config",
+        "run",
+        "--no-project",
+        "--offline",
+        "--no-python-downloads",
+        "--python",
+        "/usr/bin/python3.11",
+        "--",
+        "python",
+        "-I",
+        "-S",
+        "/workspace/owned-probe/probe.py"
+      ]
+    ],
+    "environment": {
+      "HOME": "/workspace/home",
+      "TMPDIR": "/workspace/tmp",
+      "UV_CACHE_DIR": "/workspace/probe-cache",
+      "UV_PYTHON_DOWNLOADS": "never"
+    },
+    "requiredResult": [
+      "uv0.13.6",
+      "version major/minor3.11 with exact patch retained",
+      "linux/aarch64 platform",
+      "sys.executable binary matches retained image inventory sha",
+      "isolated1,noSite1",
+      "no workspace/task import path and no unexpected Python configuration variables",
+      "raw stdout/stderr/exit/argv/time/isolation/cleanup receipts"
+    ],
+    "admission": false
+  },
+  "dependencyPreparation": {
+    "state": "prospective-not-authorized",
+    "sourceFreeMetadataOnly": true,
+    "cwd": "/workspace/project-metadata",
+    "inputMembers": [
+      "backend/pyproject.toml -> pyproject.toml",
+      "backend/uv.lock -> uv.lock"
+    ],
+    "forbiddenInputs": [
+      "app/",
+      "tests/",
+      "root scripts/",
+      "frontend/",
+      "user .env",
+      "credentials"
+    ],
+    "environment": {
+      "HOME": "/workspace/home",
+      "TMPDIR": "/workspace/tmp",
+      "LANG": "C.UTF-8",
+      "UV_CACHE_DIR": "/workspace/dependency-cache/uv",
+      "UV_PROJECT_ENVIRONMENT": "/workspace/dependency-venv",
+      "UV_PYTHON_DOWNLOADS": "never"
+    },
+    "commandArgv": [
+      "uv",
+      "--no-config",
+      "sync",
+      "--locked",
+      "--group",
+      "dev",
+      "--no-install-project",
+      "--no-build",
+      "--no-python-downloads",
+      "--python",
+      "/usr/bin/python3.11",
+      "--project",
+      "/workspace/project-metadata",
+      "--cache-dir",
+      "/workspace/dependency-cache/uv",
+      "--link-mode",
+      "copy"
+    ],
+    "network": "bridge for ordinary public PyPI downloads only; this is not a pinned egress firewall",
+    "indexOrigins": [
+      "https://pypi.org/simple",
+      "https://files.pythonhosted.org/"
+    ],
+    "requireCleanConfigAndNoAmbientCredentials": true,
+    "noBuildHooks": true,
+    "noProjectInstall": true,
+    "postInstallInterpreterImports": "not authorized in this online preparation stage; wheel .pth/startup/native payloads remain a later offline code-execution boundary",
+    "noOptionalDevExtraOrAllExtras": true,
+    "selectedDevGroup": [
+      "pytest",
+      "pytest-asyncio"
+    ],
+    "lockedExpectedRunnerVersions": {
+      "pytest": "8.2.0",
+      "pytest-asyncio": "0.23.6"
+    },
+    "onNoCompatibleWheelOrNoBuildRefusal": "retain incomplete setup; no source build/relaxation/alternative dependency/hidden stub",
+    "rawCacheAuditRequiredBeforeAnyReuse": true,
+    "actualWireDownloadBytes": "unknown unless instrumented;1GiB download-store bound is not a cumulative network-byte proof"
+  },
+  "cacheAndReceipts": {
+    "retain": [
+      "exact metadata bytes/hash",
+      "image/tool/probe identity",
+      "full raw stdout/stderr/exit/error/timing even failures",
+      "before/after metadata and source inventories",
+      "dependency cache path/type/mode/size/content inventory",
+      "installed dist-info RECORD/METADATA and wheel/lock identity mapping",
+      "bounded cache/archive sizes and cleanup/absence receipts"
+    ],
+    "exportState": "unqualified until separate content/type/hash audit and offline reinstall",
+    "excluded": [
+      "task source/tests/gold/profile",
+      "dependency virtualenv/bin and installed trees as reusable global cache",
+      "build outputs/bytecode",
+      "provider/user credentials",
+      "manager logs/config/user home",
+      "unreviewed symlink cache aliases or mutable tags"
+    ],
+    "uvCacheLayout": "do not assume regular-only; if links occur, retain their exact inventory and refuse existing regular-only cache export rather than silently dereference/drop them",
+    "globalCacheAdmission": false,
+    "archiveStaysOutsideGit": true,
+    "costUsd": null
+  },
+  "laterOfflineSetup": {
+    "notAuthorized": true,
+    "freshSession": true,
+    "network": "none",
+    "sameImagePythonLockAndSelectedGroup": true,
+    "dependencyWheelOnlyCommand": "same locked no-build/no-install-project sync against qualified cache; --offline and explicit frozen cache binding",
+    "fullSourceRequired": true,
+    "importRoots": "two fresh interpreter processes: root cwd for unittest/scripts; backend cwd for pytest/app/backend scripts; no global PYTHONPATH injection or fake SDK/package",
+    "projectInstall": "not required by source-root tests; skipping own hatchling project build is explicit, not proof normal editable install succeeded",
+    "runner": "uv run --no-sync --offline --project /workspace/repository/backend with UV_PROJECT_ENVIRONMENT bound to exact installed environment; native interpreter/sys.path/IDs must be observed before acceptance",
+    "dotenv": "preserve tracked source, root/backend ancestor/user .env absence witnesses and controlled inherited environment; do not copy deployment example or supply real keys",
+    "loopback": "none external network still permits owned loopback HTTP/thread fixtures; record actual support/errors",
+    "childInterpreter": "backend tests use sys.executable; preserve real dependency interpreter and subprocess behavior"
+  },
+  "remainingGates": [
+    "independent plan review and separate stage authorization",
+    "owned source-free interpreter/uv probe; actual patch/ABI recorded",
+    "locked wheel-only setup or retained honest refusal within current limits",
+    "cache content/type/hash/lock/protected-source audit and fresh offline install; no automatic archive acceptance",
+    "native imports/collection all20 assertion-bearing files and static/dynamic ID reconciliation",
+    "reviewed unittest phase/subTest/class-module-fixture/cleanup plus pytest setup/call/teardown observer",
+    "trusted same-call event/process/setup/source/config/installed-state/environment joins; current actual-mode oracle remains fail-closed"
+  ],
+  "actualAdmission": false,
+  "executionAuthorized": false,
+  "probeExecuted": false,
+  "dependencySetupExecuted": false,
+  "nativeCollectionOccurred": false,
+  "oracleQualified": false,
+  "campaignAdmitted": false,
+  "costUsd": null
+}

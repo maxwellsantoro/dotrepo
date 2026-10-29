@@ -1,0 +1,265 @@
+{
+  "additionalSourceFilesInspected": 9,
+  "fullArchiveAvailableUsed": false,
+  "newSourceAcquisitions": 0,
+  "ownerInputs": [
+    {
+      "bytes": 18452,
+      "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources.json",
+      "sha256": "0d74faeaf22efbff3c0cc75da6ef403f1d7ea2906ebbd5c418627bdfe06d2fef",
+      "snapshot": "owner-inputs/benchmarks/head-to-head/e1-qualification-20261029/go/sources.json"
+    },
+    {
+      "bytes": 4917,
+      "path": "index/telemetry/e1-compose-source-disposition-20261029/disposition.json",
+      "sha256": "40c51f47f05a52b580b7be0b8a9a3eaf66ea1224a976f1e04809984b90f51066",
+      "snapshot": "owner-inputs/index/telemetry/e1-compose-source-disposition-20261029/disposition.json"
+    },
+    {
+      "bytes": 18541,
+      "path": "index/telemetry/e1-next-context-establishment-20261029/source-proposal.json",
+      "sha256": "6678af84c0af5dc09579e81b122e1bad29959229e2f2b3c76856a6f932cc19b7",
+      "snapshot": "owner-inputs/index/telemetry/e1-next-context-establishment-20261029/source-proposal.json"
+    },
+    {
+      "bytes": 4509,
+      "path": "index/telemetry/e1-next-context-establishment-20261029/closure-1/requests/01-commit.json",
+      "sha256": "f0a9fed533a926a3df38b003e15d493f186098daf182959c1722839b6702b89f",
+      "snapshot": "owner-inputs/index/telemetry/e1-next-context-establishment-20261029/closure-1/requests/01-commit.json"
+    },
+    {
+      "bytes": 13921,
+      "path": "index/telemetry/e1-next-context-establishment-20261029/closure-1/requests/02-root-tree.json",
+      "sha256": "bb83c5e0864c2714fe7f7f63a4e9a4ccfd9b222b6313b30a05df7cc82b2f78ac",
+      "snapshot": "owner-inputs/index/telemetry/e1-next-context-establishment-20261029/closure-1/requests/02-root-tree.json"
+    },
+    {
+      "bytes": 6602,
+      "path": "index/telemetry/e1-next-context-establishment-20261029/closure-1/observations.json",
+      "sha256": "a921466d34952cdb5e13722abc3e5c55bbb41c1cc3eea9a42510b18d7021f2c4",
+      "snapshot": "owner-inputs/index/telemetry/e1-next-context-establishment-20261029/closure-1/observations.json"
+    },
+    {
+      "bytes": 8585,
+      "path": "index/telemetry/e1-next-context-establishment-20261029/closure-2/observations.json",
+      "sha256": "a1deea5acf9850ca6444b8848dc5051a81378ec9a528eeee4aeaa7aa5bb56429",
+      "snapshot": "owner-inputs/index/telemetry/e1-next-context-establishment-20261029/closure-2/observations.json"
+    }
+  ],
+  "repository": "github.com/docker/compose",
+  "retainedSourceBytes": 33902,
+  "revision": "343bb382d2192b88d84af49971bb5cb99bee268c",
+  "sourceLimit": {
+    "bytes": 1048576,
+    "files": 12
+  },
+  "sources": [
+    {
+      "bytes": 2206,
+      "checkedAtOriginal": "2026-10-29T05:15:10.634494+00:00",
+      "gitBlobSha1": "e9861f0814004f5e03fe0ad3db430fca7c91dee5",
+      "newAcquisition": false,
+      "path": "BUILDING.md",
+      "retainedPath": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/BUILDING.md",
+      "sha256": "68694744374f7b98c6dd284aea8d657267a6f6383e9bd5580f725a3e723a7cd4",
+      "snapshot": "sources/BUILDING.md",
+      "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/BUILDING.md"
+    },
+    {
+      "bytes": 7050,
+      "checkedAtOriginal": "2026-10-29T05:15:10.634494+00:00",
+      "gitBlobSha1": "3e66c558443a1a38db4f06eba027240376d1a3a2",
+      "newAcquisition": false,
+      "path": "Makefile",
+      "retainedPath": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/Makefile",
+      "sha256": "927856982fcd81c94dd843743000b8a828baf5af02503d64f7a4c4cc477ac4cc",
+      "snapshot": "sources/Makefile",
+      "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/Makefile"
+    },
+    {
+      "bytes": 4836,
+      "checkedAtOriginal": "2026-10-29T05:15:10.634494+00:00",
+      "gitBlobSha1": "733df6e5f90f9f479645cc66abd60fcf6da8bcdf",
+      "newAcquisition": false,
+      "path": "docker-bake.hcl",
+      "retainedPath": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/docker-bake.hcl",
+      "sha256": "d8e460f357e8913b41a81458d2c3280f5494368c2f20eaca7ebcb1bdeaeebce5",
+      "snapshot": "sources/docker-bake.hcl",
+      "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/docker-bake.hcl"
+    },
+    {
+      "bytes": 7870,
+      "checkedAtOriginal": "2026-10-29T05:15:10.634494+00:00",
+      "gitBlobSha1": "b39618746200bcc4b229490f3027cd20fdbf6e17",
+      "newAcquisition": false,
+      "path": "Dockerfile",
+      "retainedPath": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/Dockerfile",
+      "sha256": "5f35a0fce55a645e2497f861aba1414f237d532493b4f2bda138c609b28ef44f",
+      "snapshot": "sources/Dockerfile",
+      "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/Dockerfile"
+    },
+    {
+      "bytes": 6691,
+      "checkedAtOriginal": "2026-10-29T05:15:10.634494+00:00",
+      "gitBlobSha1": "5cbae0b9a804c85f4ce490af760efcb6e4a22877",
+      "newAcquisition": false,
+      "path": "go.mod",
+      "retainedPath": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/go.mod",
+      "sha256": "add1d3fc58082dc40ea0ebcc3d2c80b1f4bf99a5452aab2026e8997b511cfb09",
+      "snapshot": "sources/go.mod",
+      "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/go.mod"
+    },
+    {
+      "bytes": 3091,
+      "checkedAtOriginal": "2026-10-29T05:15:10.634494+00:00",
+      "gitBlobSha1": "48a6b6882e9624337a7b1e8ff2813e7ef2306b23",
+      "newAcquisition": false,
+      "path": "AGENTS.md",
+      "retainedPath": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/AGENTS.md",
+      "sha256": "2c3364f66a30ea054f3ec3610fa4be37a98e5fc3dbd9654b44f26805c75a236e",
+      "snapshot": "sources/AGENTS.md",
+      "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/AGENTS.md"
+    },
+    {
+      "bytes": 2145,
+      "checkedAtOriginal": "2026-10-29T05:15:10.634494+00:00",
+      "gitBlobSha1": "eb1ece2e2abdfbfad0c1779fbd7fdb1cb9ab1c97",
+      "newAcquisition": false,
+      "path": "pkg/compose/apiSocket_test.go",
+      "retainedPath": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/pkg/compose/apiSocket_test.go",
+      "sha256": "59f26ee95d04a855a27047089929d4cfd77cf52b68f547e3fdb38b139dc1b501",
+      "snapshot": "sources/pkg/compose/apiSocket_test.go",
+      "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/pkg/compose/apiSocket_test.go"
+    },
+    {
+      "bytes": 5,
+      "gitBlobSha1": "e660fd93d3196215552065b1e63bf6a2f393ed86",
+      "newAcquisition": false,
+      "path": ".dockerignore",
+      "retainedPath": "index/telemetry/e1-next-context-establishment-20261029/closure-2/sources/.dockerignore.txt",
+      "sha256": "aaccb1a00557171b31d00a99a6a2666856e417964732490685cdcba9f02de491",
+      "snapshot": "sources/.dockerignore",
+      "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/.dockerignore"
+    },
+    {
+      "bytes": 8,
+      "gitBlobSha1": "63d92c7fb83a4e20c790c13c80564a5392a8a662",
+      "newAcquisition": false,
+      "path": ".go-version",
+      "retainedPath": "index/telemetry/e1-next-context-establishment-20261029/closure-2/sources/.go-version.txt",
+      "sha256": "5ae79ef74661d43e70de64fdaad7531cab44185357110f441268bafae5e74956",
+      "snapshot": "sources/.go-version",
+      "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/.go-version"
+    }
+  ],
+  "spans": [
+    {
+      "endLine": 16,
+      "passageSha256": "f109b645b165e0722bdf126202c3ea05a2f97c96d1413d181032b56a1d106d63",
+      "path": "BUILDING.md",
+      "role": "documented Linux and other host prerequisites",
+      "startLine": 2,
+      "text": "### Prerequisites\n\n* Windows:\n  * [Docker Desktop](https://docs.docker.com/desktop/setup/install/windows-install/)\n  * make\n  * go (see [go.mod](go.mod) for minimum version)\n* macOS:\n  * [Docker Desktop](https://docs.docker.com/desktop/setup/install/mac-install/)\n  * make\n  * go (see [go.mod](go.mod) for minimum version)\n* Linux:\n  * [Docker 20.10 or later](https://docs.docker.com/engine/install/)\n  * make\n  * go (see [go.mod](go.mod) for minimum version)\n\n",
+      "wholeFileSha256": "68694744374f7b98c6dd284aea8d657267a6f6383e9bd5580f725a3e723a7cd4"
+    },
+    {
+      "endLine": 46,
+      "passageSha256": "411e886be16a738b23d9d4534091f3b18e605c66669ee717232af34e15784e34",
+      "path": "BUILDING.md",
+      "role": "all-unit declaration distinct from e2e",
+      "startLine": 31,
+      "text": "### Unit tests\n\nTo run all of the unit tests, run:\n\n```console\nmake test\n```\n\nIf you need to update a golden file simply do `go test ./... -test.update-golden`.\n\n### End-to-end tests\nTo run e2e tests, the Compose CLI binary needs to be built. All the commands to run e2e tests propose a version\nwith the prefix `build-and-e2e` to first build the CLI before executing tests.\n\nNote that this requires a local Docker Engine to be running.\n\n",
+      "wholeFileSha256": "68694744374f7b98c6dd284aea8d657267a6f6383e9bd5580f725a3e723a7cd4"
+    },
+    {
+      "endLine": 52,
+      "passageSha256": "cc72cfb88c23f84e721dd0a10d2479731150794f77ca2e53b5f15b7449069a37",
+      "path": "Makefile",
+      "role": "default Buildx and gotestsum",
+      "startLine": 46,
+      "text": "BUILDX_CMD ?= docker buildx\n\n# Pinned so that a new upstream release cannot break the build without a change\n# in this repository. Keep GOTESTSUM_VERSION in sync with the Dockerfile.\nGOTESTSUM_VERSION ?= v1.13.0\nGOFUMPT_VERSION ?= v0.12.0\nGOTESTSUM = go run gotest.tools/gotestsum@$(GOTESTSUM_VERSION)\n",
+      "wholeFileSha256": "927856982fcd81c94dd843743000b8a828baf5af02503d64f7a4c4cc477ac4cc"
+    },
+    {
+      "endLine": 129,
+      "passageSha256": "7375c09b6f153aba36963b50bd5b607a969b8aede9a67a8daa7c14a0daf109db",
+      "path": "Makefile",
+      "role": "root test and relay-test separate targets",
+      "startLine": 123,
+      "text": ".PHONY: test\ntest: ## Run unit tests\n\t$(BUILDX_CMD) bake test\n\n.PHONY: relay-test\nrelay-test: ## Run unit tests for the relay/ module\n\t$(BUILDX_CMD) bake relay-test\n",
+      "wholeFileSha256": "927856982fcd81c94dd843743000b8a828baf5af02503d64f7a4c4cc477ac4cc"
+    },
+    {
+      "endLine": 22,
+      "passageSha256": "7693f8a653f35c47ff45065b5c52071ce951f0920c279930e2059d4bbbaeff67",
+      "path": "docker-bake.hcl",
+      "role": "e2e build tag default",
+      "startLine": 20,
+      "text": "variable \"BUILD_TAGS\" {\n  default = \"e2e\"\n}\n",
+      "wholeFileSha256": "d8e460f357e8913b41a81458d2c3280f5494368c2f20eaca7ebcb1bdeaeebce5"
+    },
+    {
+      "endLine": 48,
+      "passageSha256": "597110c2c1f0a767af37124e1b7f562488cf25f777ddf84ec87fa17e9d0315e5",
+      "path": "docker-bake.hcl",
+      "role": "common target arguments",
+      "startLine": 42,
+      "text": "\ntarget \"_common\" {\n  args = {\n    GO_VERSION = GO_VERSION\n    BUILD_TAGS = BUILD_TAGS\n    BUILDKIT_CONTEXT_KEEP_GIT_DIR = 1\n  }\n",
+      "wholeFileSha256": "d8e460f357e8913b41a81458d2c3280f5494368c2f20eaca7ebcb1bdeaeebce5"
+    },
+    {
+      "endLine": 96,
+      "passageSha256": "486902b6769b2177e39406d1c1e78861f52f9e10953d1bc1a154299d4532b08f",
+      "path": "docker-bake.hcl",
+      "role": "test to test-coverage",
+      "startLine": 92,
+      "text": "\ntarget \"test\" {\n  inherits = [\"_common\"]\n  target = \"test-coverage\"\n  output = [outdir(\"./bin/coverage/unit\")]\n",
+      "wholeFileSha256": "d8e460f357e8913b41a81458d2c3280f5494368c2f20eaca7ebcb1bdeaeebce5"
+    },
+    {
+      "endLine": 26,
+      "passageSha256": "c938013e5e653bcfcd424ba5a33c88370513496f9475836dc270c646b07c9125",
+      "path": "Dockerfile",
+      "role": "tool versions and default build tags",
+      "startLine": 18,
+      "text": "ARG GO_VERSION=1.26.10\nARG XX_VERSION=1.9.0\nARG GOLANGCI_LINT_VERSION=v2.15.0\nARG ADDLICENSE_VERSION=v1.0.0\n# Keep in sync with GOTESTSUM_VERSION in the Makefile\nARG GOTESTSUM_VERSION=v1.13.0\n\nARG BUILD_TAGS=\"e2e\"\nARG DOCS_FORMATS=\"md,yaml\"\n",
+      "wholeFileSha256": "5f35a0fce55a645e2497f861aba1414f237d532493b4f2bda138c609b28ef44f"
+    },
+    {
+      "endLine": 56,
+      "passageSha256": "22c25a7e3ac2854391b22c56af8baa8f835f7df27d836efa836dd2684b59aef4",
+      "path": "Dockerfile",
+      "role": "base setup and module download",
+      "startLine": 37,
+      "text": "\nFROM --platform=${BUILDPLATFORM} golang:${GO_VERSION}-alpine3.23 AS base\nCOPY --from=xx / /\nRUN apk add --no-cache \\\n      clang \\\n      docker \\\n      file \\\n      findutils \\\n      git \\\n      make \\\n      protoc \\\n      protobuf-dev\nWORKDIR /src\nENV CGO_ENABLED=0\n\nFROM base AS build-base\nCOPY go.* .\nRUN --mount=type=cache,target=/go/pkg/mod \\\n    --mount=type=cache,target=/root/.cache/go-build \\\n    go mod download\n",
+      "wholeFileSha256": "5f35a0fce55a645e2497f861aba1414f237d532493b4f2bda138c609b28ef44f"
+    },
+    {
+      "endLine": 141,
+      "passageSha256": "b6e03da74ae8e53143315c6e7f77a84497572d85e51a15c5c73945969ea37f0d",
+      "path": "Dockerfile",
+      "role": "exact test shell relay",
+      "startLine": 123,
+      "text": "FROM build-base AS test\n# the race detector requires cgo (ENV: base sets CGO_ENABLED=0, which an ARG can't override)\nENV CGO_ENABLED=1\nARG BUILD_TAGS\nARG GOTESTSUM_VERSION\nRUN apk add --no-cache gcc musl-dev\nRUN --mount=type=bind,target=. \\\n    --mount=type=cache,target=/root/.cache \\\n    --mount=type=cache,target=/go/pkg/mod \\\n    rm -rf /tmp/coverage && \\\n    mkdir -p /tmp/coverage && \\\n    rm -rf /tmp/report && \\\n    mkdir -p /tmp/report && \\\n    go run gotest.tools/gotestsum@${GOTESTSUM_VERSION} --format testname --junitfile \"/tmp/report/report.xml\" -- -tags \"$BUILD_TAGS\" -v -race -cover -covermode=atomic $(go list  $(TAGS) ./... | grep -vE 'e2e') -args -test.gocoverdir=\"/tmp/coverage\" && \\\n    go tool covdata percent -i=/tmp/coverage\n\nFROM scratch AS test-coverage\nCOPY --from=test --link /tmp/coverage /\nCOPY --from=test --link /tmp/report /\n",
+      "wholeFileSha256": "5f35a0fce55a645e2497f861aba1414f237d532493b4f2bda138c609b28ef44f"
+    },
+    {
+      "endLine": 3,
+      "passageSha256": "7a3de29ebfa33812a1d7c5c3a837b5d5839700b4877dbb7f484e59df1558efd2",
+      "path": "go.mod",
+      "role": "root module and minimum Go",
+      "startLine": 1,
+      "text": "module github.com/docker/compose/v5\n\ngo 1.26.10\n",
+      "wholeFileSha256": "add1d3fc58082dc40ea0ebcc3d2c80b1f4bf99a5452aab2026e8997b511cfb09"
+    },
+    {
+      "endLine": 15,
+      "passageSha256": "1558094face70bf6d02453c62e4029bcd1eb628617ca766a8530cca4ae78ebed",
+      "path": "AGENTS.md",
+      "role": "maintainer main unit/default and e2e scope assertions",
+      "startLine": 6,
+      "text": "## Build & Test\n\n- Build: `make build`\n- Test all: `make test`\n- Test unit: `go test ./pkg/...` \u2014 needs no Docker daemon; the e2e suite is\n  gated behind the `e2e` build tag and is not picked up\n- Test single: `go test ./pkg/compose/ -run TestFunctionName`\n- E2E tests: `go test -tags e2e ./pkg/e2e/ -run TestName` \u2014 requires a Docker\n  daemon and the locally built binary (`make build`)\n\n",
+      "wholeFileSha256": "2c3364f66a30ea054f3ec3610fa4be37a98e5fc3dbd9654b44f26805c75a236e"
+    }
+  ]
+}

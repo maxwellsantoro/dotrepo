@@ -1,0 +1,62 @@
+{
+  "repository": "github.com/docker/compose",
+  "revision": "343bb382d2192b88d84af49971bb5cb99bee268c",
+  "taskId": "e1-go-03-repository-tests",
+  "command": "make test",
+  "workingDirectory": ".",
+  "assessor": "coordinator, separate from source-proposal author; prior roadmap/experiment exposure, not blinded holdout review",
+  "sourceBindings": {
+    "index/telemetry/e1-next-context-establishment-20261029/FREEZE.json": "b86edaf4b1075f2f1242d2280eff967202e7e32afaa5663db746dd4c643cfdfe",
+    "index/telemetry/e1-next-context-establishment-20261029/source-proposal.json": "6678af84c0af5dc09579e81b122e1bad29959229e2f2b3c76856a6f932cc19b7",
+    "index/telemetry/e1-next-context-establishment-20261029/closure-1/FREEZE.json": "5b1b3c17c0409011eaebd715ef9d031e4717087b196a66e7978e758390c75b4b",
+    "index/telemetry/e1-next-context-establishment-20261029/closure-1/automatic-establishment-verifier-spec.json": "a698851c353a4c70c77710ad1ca2455e52d60d4b1f9ccf25cc42f76039928325",
+    "index/telemetry/e1-next-context-establishment-20261029/closure-2/FREEZE.json": "0751ea87fd3bea5f64ff09b52e81b1ee6727b8e822669b6337420e9d4af9555d",
+    "index/telemetry/e1-next-context-establishment-20261029/closure-2/observations.json": "a1deea5acf9850ca6444b8848dc5051a81378ec9a528eeee4aeaa7aa5bb56429",
+    "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/BUILDING.md": "68694744374f7b98c6dd284aea8d657267a6f6383e9bd5580f725a3e723a7cd4",
+    "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/Makefile": "927856982fcd81c94dd843743000b8a828baf5af02503d64f7a4c4cc477ac4cc",
+    "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/docker-bake.hcl": "d8e460f357e8913b41a81458d2c3280f5494368c2f20eaca7ebcb1bdeaeebce5",
+    "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/Dockerfile": "5f35a0fce55a645e2497f861aba1414f237d532493b4f2bda138c609b28ef44f",
+    "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/go.mod": "add1d3fc58082dc40ea0ebcc3d2c80b1f4bf99a5452aab2026e8997b511cfb09"
+  },
+  "decisions": {
+    "representationAvailable": true,
+    "documentedCommandAndRootRouteEstablished": true,
+    "documentedLinuxPrerequisiteChainEstablished": true,
+    "independentlyExecuted": false,
+    "allUnitCoverageEstablished": false,
+    "completeApplicableInstructionAccepted": false,
+    "automaticHighRuleAuthorized": false,
+    "consumerBenefitMeasured": false
+  },
+  "reasons": [
+    {
+      "assertion": "Command and directory",
+      "disposition": "supported",
+      "basis": "BUILDING Unit tests declares make test. Root Makefile test target invokes default docker buildx bake test; only tracked default Bake file routes test to Dockerfile test-coverage. Root and relay are explicitly distinct routes."
+    },
+    {
+      "assertion": "Prerequisites",
+      "disposition": "documented and conditional",
+      "basis": "Linux Docker/Make/host Go requirements, functioning Buildx/BuildKit, builder images/native packages/modules/gotestsum/race setup and acquisition are retained. No installed environment, portable minimum Buildx version, artifact immutability or successful resolution is established."
+    },
+    {
+      "assertion": "All main-module unit coverage",
+      "disposition": "unresolved",
+      "basis": "The source selects packages with literal $(go list $(TAGS) ./... | grep -vE e2e) while tagged execution uses BUILD_TAGS=e2e. Without package/helper closure or execution, the exact all-unit coverage claim cannot be independently established. This does not prove make test is incorrect or fatal."
+    },
+    {
+      "assertion": "Absence and consumer configuration",
+      "disposition": "upstream source supplement supported; automatic importer input gap remains",
+      "basis": "Bound complete root/relay trees distinguish tracked absence from selected-file omission. Local modifications, untracked default files and Make/Bake/environment overrides remain separate consumer conditions. Current core inputs do not carry upstream-complete inventory."
+    }
+  ],
+  "nextDecision": "Do not add a Compose grammar that merely emits another Medium candidate or design a general completeness subsystem for this case. Preserve this known-development diagnostic. Select the next bounded establishment implementation only where the original task scope and complete source-supported conditions can be independently qualified. A narrower Compose suite would require a separately declared development task and cannot replace this result.",
+  "controls": {
+    "sourceHashBindingsPass": true,
+    "wrongScopeSubstitutionPermitted": false,
+    "hashIntegrityImpliesCompleteness": false,
+    "missingLocalFileImpliesUpstreamAbsence": false,
+    "documentedCommandImpliesExecutionSuccess": false,
+    "heldOutQualificationClaim": false
+  }
+}

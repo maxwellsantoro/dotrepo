@@ -1,0 +1,64 @@
+{
+  "state": "independent-python01-source-free-probe-driver-review-complete",
+  "subject": {
+    "planSha256": "45b129445ef75603e98bb2984dd022d4d9c309cf0968f7374191652df0384c23",
+    "authorFreezeSha256": "9017646e52e660a22d6a3423bb1541dc3a427c5983b3407a453b30eebffffe27",
+    "packetIdentity": "python01-source-free-probe-driver-v1"
+  },
+  "findings": [],
+  "reviewerContext": "Reviewer authored the preceding environment-plan review and independently reviewed this adapter; not a blind consumer or actual probe trial.",
+  "decision": "Narrowly supported readiness for coordinator consideration of one separately authorized source-free owned probe attempt. This report grants no execution or dependency authority.",
+  "controls": {
+    "copiedAuthorFakeControls": 26,
+    "independentFakeControls": 7,
+    "newIndependentCases": [
+      "create failure cleanup/absence",
+      "start failure cleanup/absence",
+      "preflight receipt without transport",
+      "total60second deadline before probe",
+      "single exact owned-script upload",
+      "duplicate JSON rejection",
+      "nonfinite JSON rejection"
+    ],
+    "sourceVerifierPassed": true
+  },
+  "confirmedInvariants": [
+    "Exact parent probe commands/source, current plan and complete script closure are bound. Current-plan/current-author-freeze/current-scope passed review and exact canonical fresh output/scratch are required before daemon construction. Output reuse refuses.",
+    "Exact frozen b47 image, retained five image environment entries, nonroot readonly root, none-network/private namespaces/resource/tmpfs inspect policies are reused from hash-bound trusted sources; only pure flags/inspect functions are extracted.",
+    "Only byte-exact owned probe.py is streamed. No repository, lock, dependency, gold, profile or credential payload is provisioned. Image inventory shows audited /usr/local/bin/uv is first existing uv on retained image PATH.",
+    "Actual interpreter/uv binary hashes and owned script are observed before and after; exact uvversion, strict duplicate/nonfinite JSON, schema/3.11/executable/platform/ABI/isolated/no-site/path/config validations bind tool observations. They do not qualify dependency imports.",
+    "Whole stage has60second deadline beneath900second work cap; metadata/preflight/provisioning/both commands/observations are charged. Raw stdout/stderr receipts are retained with2MiB combined trace and16KiB probeJSON caps. Missing/changed/nonzero/capped/cancelled/late evidence refuses.",
+    "Create is marked attempted before client call; create/start/failure paths force removal and same-attempt inspect/list absence checks. Unknown cleanup becomes incomplete. Costs remain null with exclusions; failures are retained."
+  ],
+  "preciseInvocation": [
+    "uv",
+    "run",
+    "--offline",
+    "--no-sync",
+    "python",
+    "/tmp/dotrepo-f05-python01-probe-driver-20261029/driver.py",
+    "--authorization",
+    "<fresh-coordinator-authorization.json>",
+    "--output",
+    "<fresh-canonical-output>",
+    "--scratch",
+    "<fresh-canonical-scratch>"
+  ],
+  "remainingAssumptionsAndLimits": [
+    "No actual daemon/image/probe command was run by this review. uv behavior, Python patch/ABI/path and actual60second feasibility remain to observe; actual refusal must be preserved without repair/retry.",
+    "Only one future attempt is scoped. Authorization is an operator consistency assertion, not cryptographic human authority; same-UID hostile mutation/daemon compromise is outside this bounded local contract.",
+    "Unchanged reviewed transport may wait at least1second when reaping an EOF client and then allow bounded5second kill/reap on exception; actual elapsed includes this tail, exceeding60seconds marks stage incomplete. Cleanup has its own60second deadline. This is not a hard real-time wall-clock kill guarantee.",
+    "Cleanup absence receipts are from the same attempt, not an independently issued daemon confirmation. Host HOME/PATH reach Docker client only; no host environment is passed into container.",
+    "Parent/reused helper locations are exact local retained paths, intentionally not a portable public runner. Required inputs must remain available and matching. Root must create exact current-subject authorization and fresh canonical paths.",
+    "No dependency setup/cache reuse/import/native collection/phase observer/oracle/campaign/benefit admission follows. Subsequent installation requires separate reviewed inputs and authorization."
+  ],
+  "staticOnly": true,
+  "executionAuthorized": false,
+  "probeExecuted": false,
+  "dependencySetupAuthorized": false,
+  "actualAdmission": false,
+  "nativeCollectionOccurred": false,
+  "oracleQualified": false,
+  "campaignAdmitted": false,
+  "costUsd": null
+}
