@@ -780,10 +780,7 @@ fn update_claim_resolution(
 }
 
 fn claim_directories_for_candidate(candidate: &CandidateManifest) -> Option<Vec<PathBuf>> {
-    let handoff_root = match candidate.path.parent() {
-        Some(parent) => parent.join("claims"),
-        None => return None,
-    };
+    let handoff_root = candidate.path.parent()?.join("claims");
     if !handoff_root.is_dir() {
         return None;
     }

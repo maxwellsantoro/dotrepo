@@ -9,6 +9,7 @@ use std::sync::Arc;
 mod adoption;
 mod claims;
 mod import;
+mod output;
 mod promotion;
 mod public;
 mod query;
@@ -18,6 +19,8 @@ mod surfaces;
 mod synthesis;
 mod util;
 mod validation;
+
+pub use output::{write_repository_outputs, RepositoryOutput, RepositoryWriter};
 
 pub use adoption::{
     adoption_status_repository, canonical_mirror_path_for_claim_path, native_repository_identity,

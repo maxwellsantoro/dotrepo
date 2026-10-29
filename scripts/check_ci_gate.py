@@ -7,6 +7,7 @@ import sys
 
 SCOPED_JOBS = {
     "rust-and-index": "run_rust_ci",
+    "write-boundary-runtime": "run_write_boundary_runtime",
     "operator-gate": "run_operator_gate",
     "public-surface-gate": "run_public_surface_gate",
     "release-gate": "run_release_gate",
