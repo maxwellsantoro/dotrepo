@@ -1,0 +1,171 @@
+[
+  {
+    "component": null,
+    "consumerSelection": {
+      "fallbackReasons": [
+        "no-assessed-contextual-instruction"
+      ],
+      "instruction": null,
+      "provenance": null
+    },
+    "ecosystem": "javascript-typescript",
+    "exportExitCode": 0,
+    "id": "e1-typescript-01-repository-tests",
+    "importExitCode": 0,
+    "profilePath": "public/v0/repos/github.com/pixijs/pixijs/profile.json",
+    "profileSha256": "afcc72f252871975606545c7fb02909d7df28e80c1d978b332a4d112139aafa3",
+    "recoveredInstructions": [
+      {
+        "command": "npm test",
+        "context": null,
+        "origin": "scalar",
+        "structurallyComplete": false
+      }
+    ],
+    "repository": "github.com/pixijs/pixijs",
+    "request": {
+      "scope": "repository"
+    },
+    "revision": "2e8cacbe1ed4ed0fc31d5b59b9895c811ac0e003",
+    "scope": "repository"
+  },
+  {
+    "component": "tests/visual/scenes",
+    "consumerSelection": {
+      "fallbackReasons": [
+        "no-assessed-contextual-instruction"
+      ],
+      "instruction": null,
+      "provenance": null
+    },
+    "ecosystem": "javascript-typescript",
+    "exportExitCode": 0,
+    "id": "e1-typescript-01-component-tests",
+    "importExitCode": 0,
+    "profilePath": "public/v0/repos/github.com/pixijs/pixijs/profile.json",
+    "profileSha256": "afcc72f252871975606545c7fb02909d7df28e80c1d978b332a4d112139aafa3",
+    "recoveredInstructions": [
+      {
+        "command": "npm test",
+        "context": null,
+        "origin": "scalar",
+        "structurallyComplete": false
+      }
+    ],
+    "repository": "github.com/pixijs/pixijs",
+    "request": {
+      "component": "tests/visual/scenes",
+      "scope": "component"
+    },
+    "revision": "2e8cacbe1ed4ed0fc31d5b59b9895c811ac0e003",
+    "scope": "component"
+  },
+  {
+    "component": null,
+    "consumerSelection": {
+      "fallbackReasons": [
+        "no-assessed-contextual-instruction"
+      ],
+      "instruction": null,
+      "provenance": null
+    },
+    "ecosystem": "javascript-typescript",
+    "exportExitCode": 0,
+    "id": "e1-typescript-02-repository-tests",
+    "importExitCode": 0,
+    "profilePath": "public/v0/repos/github.com/agalwood/Motrix/profile.json",
+    "profileSha256": "55c9383f303752dfdfc50787cea5b24c3d11705494c4478e7fa89110ddf968ef",
+    "recoveredInstructions": [
+      {
+        "command": "pnpm test",
+        "context": null,
+        "origin": "scalar",
+        "structurallyComplete": false
+      }
+    ],
+    "repository": "github.com/agalwood/Motrix",
+    "request": {
+      "scope": "repository"
+    },
+    "revision": "6aae74432187f689ffa0c8019f942ee2cb2cf91a",
+    "scope": "repository"
+  },
+  {
+    "component": "src/core",
+    "consumerSelection": {
+      "fallbackReasons": [
+        "no-assessed-contextual-instruction"
+      ],
+      "instruction": null,
+      "provenance": null
+    },
+    "ecosystem": "javascript-typescript",
+    "exportExitCode": 0,
+    "id": "e1-typescript-02-component-tests",
+    "importExitCode": 0,
+    "profilePath": "public/v0/repos/github.com/agalwood/Motrix/profile.json",
+    "profileSha256": "55c9383f303752dfdfc50787cea5b24c3d11705494c4478e7fa89110ddf968ef",
+    "recoveredInstructions": [
+      {
+        "command": "pnpm test",
+        "context": null,
+        "origin": "scalar",
+        "structurallyComplete": false
+      }
+    ],
+    "repository": "github.com/agalwood/Motrix",
+    "request": {
+      "component": "src/core",
+      "scope": "component"
+    },
+    "revision": "6aae74432187f689ffa0c8019f942ee2cb2cf91a",
+    "scope": "component"
+  },
+  {
+    "component": null,
+    "consumerSelection": {
+      "fallbackReasons": [
+        "no-assessed-contextual-instruction"
+      ],
+      "instruction": null,
+      "provenance": null
+    },
+    "ecosystem": "javascript-typescript",
+    "exportExitCode": 0,
+    "id": "e1-typescript-03-repository-tests",
+    "importExitCode": 0,
+    "profilePath": "public/v0/repos/github.com/Eugeny/tabby/profile.json",
+    "profileSha256": "7bec519a1ef00a8e4b7dac4ab8bcdccf4f8fe9d1a4e29d60dc510c8bb271448b",
+    "recoveredInstructions": [],
+    "repository": "github.com/Eugeny/tabby",
+    "request": {
+      "scope": "repository"
+    },
+    "revision": "467ce8ebfa467fb88cf6d154c9a5891e3d3647f0",
+    "scope": "repository"
+  },
+  {
+    "component": "tabby-electron",
+    "consumerSelection": {
+      "fallbackReasons": [
+        "no-assessed-contextual-instruction"
+      ],
+      "instruction": null,
+      "provenance": null
+    },
+    "ecosystem": "javascript-typescript",
+    "exportExitCode": 0,
+    "id": "e1-typescript-03-component-tests",
+    "importExitCode": 0,
+    "profilePath": "public/v0/repos/github.com/Eugeny/tabby/profile.json",
+    "profileSha256": "7bec519a1ef00a8e4b7dac4ab8bcdccf4f8fe9d1a4e29d60dc510c8bb271448b",
+    "recoveredInstructions": [],
+    "repository": "github.com/Eugeny/tabby",
+    "request": {
+      "component": "tabby-electron",
+      "scope": "component"
+    },
+    "revision": "467ce8ebfa467fb88cf6d154c9a5891e3d3647f0",
+    "scope": "component"
+  }
+]

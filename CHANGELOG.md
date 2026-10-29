@@ -2,6 +2,22 @@
 
 ## Unreleased
 
+- Extract explicit local runtime/version prerequisite lists into complete
+  source-bound command candidates. Preserve setup order and abstain on ambiguous
+  lists, external requirements and inherited section restrictions. Add exact
+  repository/component importer fixtures; these are development controls, not
+  held-out qualification or execution verification.
+- Add frozen autonomous-task experiment preparation, deterministic randomized
+  independent-session assignments, hidden-answer request boundaries and a
+  separate intention-to-treat scorer. Bind usage/runtime receipts, retain unknown
+  costs and flag campaign budget overruns. Retain a source-only command-withdrawal
+  diagnostic; no new consumer-benefit or independent-use result is claimed.
+- Retain disjoint source-only qualification/task packets and the first negative
+  E1 extraction/consumer-policy observations without tuning or replacing the
+  frozen cases. Add an internal isolated-session adapter with tested access,
+  accounting and stop controls. Actual task environments, provider qualification,
+  campaign scoring and consumer-benefit evaluation remain pending.
+
 ## 2.0.0-rc.2 — Preview
 
 This preview includes the post-RC1 source changes below. Production guidance

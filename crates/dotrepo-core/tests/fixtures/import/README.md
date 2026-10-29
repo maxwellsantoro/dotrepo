@@ -30,6 +30,16 @@ list; missing setup text alone is not evidence of no prerequisites. These
 instructions remain candidates, including repository-scoped instructions; they
 are never promoted into scalar defaults by context extraction.
 
+The `context-runtime-repository` and `context-runtime-component` cases add an
+explicit local `Prerequisites:` list. Each unindented `- ` or `* ` bullet names
+a recognized runtime/tool and a literal version or comparison; Rust also accepts
+`stable` and `nightly`. Exact requirement text is retained before the shell
+block's setup descriptions. Repository and component candidates retain their
+complete tuple, with scalar defaults absent. `context-runtime-conditional`
+withholds a list containing a conditional requirement. These synthetic
+development regressions establish importer behavior, not held-out correctness,
+successful execution, or consumer benefit.
+
 The `context-*` cases cover root/component success, missing declarations,
 incorrect or escaping directories, unresolved parameters, incompatible setup
 claims, prose and other-section prerequisites, and ambiguous instruction

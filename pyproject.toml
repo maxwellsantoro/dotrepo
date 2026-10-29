@@ -18,6 +18,8 @@ testpaths = ["scripts/tests"]
 [tool.ruff]
 line-length = 100
 target-version = "py312"
+# Retained upstream source evidence keeps its own bytes and tool configuration.
+extend-exclude = ["benchmarks/head-to-head/**/sources"]
 
 [tool.ruff.lint]
 select = ["E4", "E7", "E9", "F"]

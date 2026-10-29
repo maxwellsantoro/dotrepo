@@ -1,0 +1,244 @@
+{
+  "schema": "dotrepo-e1-source-freeze/v1",
+  "slice": "rust-6-tasks-3-repositories",
+  "frozenAt": "2026-10-29T05:00:38.413571+00:00",
+  "status": "partial-cohort; source-gold-frozen; extraction-not-requested",
+  "selectionInputs": [
+    {
+      "path": "benchmarks/head-to-head/experiments/applicability-2026-10-29/README.md",
+      "sha256": "c606c428cb3c3d78a669b68416848cec7fe4de81c8b07aa6083850c6835a978a"
+    },
+    {
+      "path": "benchmarks/head-to-head/experiments/applicability-2026-10-29/e1.md",
+      "sha256": "9ec156e06ba21105b68f51998d04168ca14f8d5f03e3d6c0ef115f1cb2515de8"
+    },
+    {
+      "path": "benchmarks/head-to-head/experiments/applicability-2026-10-29/screening-rules.md",
+      "sha256": "d3c59940aaac5a7e86ead77814111f07a59a536affea861ca0fd60af4edce6f7"
+    },
+    {
+      "path": "benchmarks/head-to-head/experiments/applicability-2026-10-29/source-frame.json",
+      "sha256": "ea9bb8138a5e1c3eb8a5bfc698ace15d39194b080ed68492ce3e9d9c1c7666e7"
+    },
+    {
+      "path": "benchmarks/head-to-head/experiments/applicability-2026-10-29/screening-reservations.json",
+      "sha256": "cd91fb903108d426c87fba86704f7e9dc219b54314445a22eeffa618df090850"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": ".gitattributes",
+      "sha256": "e071cf03675c56e21580ea85f22ad32ef69d591f15ce1dbaabbd1fb204825df0"
+    },
+    {
+      "path": "gold-rust.json",
+      "sha256": "192b055297b9a81f3632b6fbcd87b555123a2af905cc86ed810200a1c6435407"
+    },
+    {
+      "path": "receipts/github.com/storytold/photocraft/CONTRIBUTING.md.error.json",
+      "sha256": "21472c871de48afa490accc138dafe1f33c87e0442e907db6646c3dd2e6da97c"
+    },
+    {
+      "path": "receipts/github.com/storytold/photocraft/default-branch.json",
+      "sha256": "2e348166e4def5ab44fe8f6ccca41369df6f1adb009214f976278e88e66b821a"
+    },
+    {
+      "path": "receipts/github.com/storytold/photocraft/enrollment.json",
+      "sha256": "503c23f17d7948c49127d789e303008c73f4769b060f443b153dafb77b5662b7"
+    },
+    {
+      "path": "receipts/github.com/storytold/photocraft/listing-apps.json",
+      "sha256": "5e5bb2a9b02da4169961ded144cfc747a13b7d07ee7099cc25b2da34d1573b22"
+    },
+    {
+      "path": "receipts/github.com/storytold/photocraft/repository-metadata.json",
+      "sha256": "d5202555bbc4cfd3d1a78ad2d8e4040071be344cf7f997d6d35462807bc564a5"
+    },
+    {
+      "path": "receipts/github.com/warpdotdev/warp/default-branch.json",
+      "sha256": "2f4ea55f1d23c89c2e20b92239d9c77a72e2325c8024fbaec1ddc811479ea164"
+    },
+    {
+      "path": "receipts/github.com/warpdotdev/warp/enrollment.json",
+      "sha256": "6eaf89e4a42fb5676571689a22d803cc1651421e8809d4a917fbbd6485a3ad9f"
+    },
+    {
+      "path": "receipts/github.com/warpdotdev/warp/listing-app.json",
+      "sha256": "b110065ef7c66b4e675b7bfbd2cadb6f012bfed360f4b0f35460b24122eddf04"
+    },
+    {
+      "path": "receipts/github.com/warpdotdev/warp/repository-metadata.json",
+      "sha256": "e5299bdab7180e85c6d99cc60637df7c21fe78fe22f5b93cb8cefac315835ada"
+    },
+    {
+      "path": "receipts/github.com/zellij-org/zellij/default-branch.json",
+      "sha256": "8e148f283dc34ee27afedd9caf6893ff8867f75182382cf0213f81bd8d85a344"
+    },
+    {
+      "path": "receipts/github.com/zellij-org/zellij/enrollment.json",
+      "sha256": "dcec59ad68d1b46e5cfe64357fddea0e68cedc9f2944eded66aac76bce5cbf38"
+    },
+    {
+      "path": "receipts/github.com/zellij-org/zellij/listing-default-plugins-about-src.json",
+      "sha256": "ab426d5cb08d995b15363f8b7133daebd529ffa50f0b221817086990d3b6294d"
+    },
+    {
+      "path": "receipts/github.com/zellij-org/zellij/repository-metadata.json",
+      "sha256": "996622dfd10c0bb3585ec0345055f69d70219bbe29effe2402b9703300e9f9a6"
+    },
+    {
+      "path": "screening-ledger-rust.json",
+      "sha256": "01c18d8f552b111b49ba06b62a15005bc371b25c6607e9a23b3e5d715cd55679"
+    },
+    {
+      "path": "sources/github.com/storytold/photocraft/.cargo/config.toml",
+      "sha256": "c185a2b859850d94af015a9672c1568e1ef73b12612d820f596ef967b835f637"
+    },
+    {
+      "path": "sources/github.com/storytold/photocraft/AGENTS.md",
+      "sha256": "849dcb393d4b20779e0c0f71141fc5b505a181b71f35b497531dbd2e05a6c62a"
+    },
+    {
+      "path": "sources/github.com/storytold/photocraft/Cargo.toml",
+      "sha256": "9e08a93ebf39236315f8aa86a1e129b77c30a17049c1bcbb62a08c19776a85e3"
+    },
+    {
+      "path": "sources/github.com/storytold/photocraft/README.md",
+      "sha256": "620731e78f824f535e75fa39bfb2fef1bb290ac74579f02b58e4c425d1d65377"
+    },
+    {
+      "path": "sources/github.com/storytold/photocraft/apps/photocraft/Cargo.toml",
+      "sha256": "e489011fd26b5855ef9167454b321f3e951e2ecc8ac3751eba2320d90f83363b"
+    },
+    {
+      "path": "sources/github.com/storytold/photocraft/apps/photocraft/src/main.rs",
+      "sha256": "8fb06954e2f6db6983cc7167a6874ba407c5ecc9796d1f6e9596dca081ee9efc"
+    },
+    {
+      "path": "sources/github.com/storytold/photocraft/docs/development.md",
+      "sha256": "ad37558a84aa2f84928eb8b2554988fbed73ca3ac989034fe06bed9603446873"
+    },
+    {
+      "path": "sources/github.com/warpdotdev/warp/.cargo/config.toml",
+      "sha256": "28433f6ab539cdad8e18d6905ba1609e9414f238ad3ac1f732339196b94c6fd8"
+    },
+    {
+      "path": "sources/github.com/warpdotdev/warp/AGENTS.md",
+      "sha256": "c547e10474dc98c4e301e8790e5da9258fd3453874f9f11312b88ca59ac11b2f"
+    },
+    {
+      "path": "sources/github.com/warpdotdev/warp/CONTRIBUTING.md",
+      "sha256": "72f64aa3d8d6202c26c789557306e2ad341185df3ac3eb9024547e40b382e953"
+    },
+    {
+      "path": "sources/github.com/warpdotdev/warp/Cargo.toml",
+      "sha256": "98a7696ced9fc1bafd76be0fa99d217d642d71894e5b48984d22b6d2d77ac7f0"
+    },
+    {
+      "path": "sources/github.com/warpdotdev/warp/README.md",
+      "sha256": "9fad485973685dd86187fafd517b02121695a9cf6729c1bb96ad45b19a94b09b"
+    },
+    {
+      "path": "sources/github.com/warpdotdev/warp/app/Cargo.toml",
+      "sha256": "240691ed0fcfe4f86933061c0a938e0d1b63cba94e5783b1c405a2275b538706"
+    },
+    {
+      "path": "sources/github.com/warpdotdev/warp/rust-toolchain.toml",
+      "sha256": "8008c4269290b7fb62f8d4cc8b5638cb86298f336721ba9f839110474756e85e"
+    },
+    {
+      "path": "sources/github.com/warpdotdev/warp/script/bootstrap",
+      "sha256": "9ce2067212b456441afc8803b4b944f3067a5654c1e540e5845122b8d16d6127"
+    },
+    {
+      "path": "sources/github.com/warpdotdev/warp/script/install_cargo_build_deps",
+      "sha256": "202900424979302dfab23e0dca2d6cbec7d552b76f5c6675398542003bc503b0"
+    },
+    {
+      "path": "sources/github.com/warpdotdev/warp/script/install_cargo_test_deps",
+      "sha256": "0a727672a05329b7f9c11c6ea9f9a0426d53442373a6d754dbca48f2293db2b4"
+    },
+    {
+      "path": "sources/github.com/warpdotdev/warp/script/linux/bootstrap",
+      "sha256": "53b2fd3b7228f24821484a9ff7006214d52cb75114a16f2f76a53291cc969de9"
+    },
+    {
+      "path": "sources/github.com/warpdotdev/warp/script/macos/bootstrap",
+      "sha256": "223fbbf61115efdcfe5dc572a04d3c57492553786552c6aa3ac283f2beebf07f"
+    },
+    {
+      "path": "sources/github.com/warpdotdev/warp/script/presubmit",
+      "sha256": "5295a3577535a66a3258ae3370e9b970ac836111584616254a00790f2e20164a"
+    },
+    {
+      "path": "sources/github.com/warpdotdev/warp/script/windows/bootstrap.ps1",
+      "sha256": "7f93ee7cdeb72a1d74a1e17eee4f5ec9c3e19dee6287c703862639941905f5fd"
+    },
+    {
+      "path": "sources/github.com/zellij-org/zellij/.cargo/config.toml",
+      "sha256": "d42813632ce542b468c718473de1a4a6c8f6d302c534717a2f19b7aef10dbc3e"
+    },
+    {
+      "path": "sources/github.com/zellij-org/zellij/CONTRIBUTING.md",
+      "sha256": "2c4575e7a3575609fdde406b8c87f3df53802460dbfb03b4253f4330ab37f63a"
+    },
+    {
+      "path": "sources/github.com/zellij-org/zellij/Cargo.toml",
+      "sha256": "c02efc9801eefadf579135c968cafe27d2d5e12b86ac5e020ec39fe2130829a2"
+    },
+    {
+      "path": "sources/github.com/zellij-org/zellij/README.md",
+      "sha256": "b069efb98ef8cec100cc5b32debc1dc4a912f9d57ef11279a261a8a3c9548583"
+    },
+    {
+      "path": "sources/github.com/zellij-org/zellij/default-plugins/about/Cargo.toml",
+      "sha256": "fb8e9751be70f93df895d6f37cf0f23c6ad55d696c1f82723789dddec467ff8f"
+    },
+    {
+      "path": "sources/github.com/zellij-org/zellij/default-plugins/about/src/keybindings.rs",
+      "sha256": "a3508e89632ddd6e472acc903c96033fe93a1bc3875b19ea7dd2eaf47f5287f3"
+    },
+    {
+      "path": "sources/github.com/zellij-org/zellij/default-plugins/about/src/main.rs",
+      "sha256": "be43bccfffe92e0a5843128174ca16b10cb04e4745496c6c69906242e2cd4670"
+    },
+    {
+      "path": "sources/github.com/zellij-org/zellij/default-plugins/about/src/onboarding.rs",
+      "sha256": "968b57113792fdd3bee06e9ffec88afe4714347a40a90c0474684b653ed93852"
+    },
+    {
+      "path": "sources/github.com/zellij-org/zellij/rust-toolchain.toml",
+      "sha256": "733cf0884a5f62e74d4362b290704b572061e71e9f7989096aef165f99de0fdf"
+    },
+    {
+      "path": "sources/github.com/zellij-org/zellij/xtask/src/build.rs",
+      "sha256": "ae5fcc92076183ff7e1fea0555576ea660933721600af3d00ba7e824a46cc378"
+    },
+    {
+      "path": "sources/github.com/zellij-org/zellij/xtask/src/main.rs",
+      "sha256": "5e213118f58efae8bd039ff4436dc6fc4e8b4aeaa44472dba764101643b30df3"
+    },
+    {
+      "path": "sources/github.com/zellij-org/zellij/xtask/src/test.rs",
+      "sha256": "561daa9a37efaf44ba285aa88669fb9228de402696bb25e310340238b021e0cb"
+    },
+    {
+      "path": "sources.json",
+      "sha256": "f6c568931500027772de98941401217adfa344ce90d0e4ddfd8fda42fd990524"
+    }
+  ],
+  "taskCount": 6,
+  "repositoryCount": 3,
+  "goldCounts": {
+    "supported": 3,
+    "required-abstention": 1,
+    "unresolved": 2
+  },
+  "prohibitedInputsConsulted": false,
+  "upstreamCodeExecuted": false,
+  "requiresBeforeEvaluation": [
+    "Separately freeze extractor/dependencies/limits and consumer policy.",
+    "Keep raw extraction outputs and dispositions separate; do not modify this frozen gold after output inspection.",
+    "Complete remaining18tasks for full24-task qualification; partial results cannot close the full gate."
+  ]
+}

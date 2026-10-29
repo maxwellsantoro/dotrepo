@@ -1,0 +1,59 @@
+{
+  "schema": "dotrepo-e1-screening-ledger/v1",
+  "screened": [
+    {
+      "reservedQueue": "Go/e1Qualification",
+      "queuePosition": 0,
+      "repository": "github.com/infiniflow/ragflow",
+      "revision": "9a71c10b090eaca9930df186dd0f9c15ee34a2ce",
+      "decision": "enrolled",
+      "reason": "Public active non-fork Go code repository with a physical owned Go component and test intent; no command/setup completeness exclusion.",
+      "componentPath": "internal/admin",
+      "componentSelection": "The maintainer guide explicitly names internal/admin before internal/agent among Go-specific functional subtrees in lexical order, and its default wrapper/targeted admin examples plus retained unit tests establish physical test intent. Legacy Python trees and frontend web paths are filtered from this Go stratum.",
+      "sourceCheckedAt": "2026-10-29T05:16:51.743028+00:00",
+      "indexOrImporterConsulted": false,
+      "taskIds": [
+        "e1-go-01-repository-tests",
+        "e1-go-01-component-tests"
+      ]
+    },
+    {
+      "reservedQueue": "Go/e1Qualification",
+      "queuePosition": 1,
+      "repository": "github.com/golang/go",
+      "revision": "430d19f07a57ee5ed4e3b1a04b0ab54dd5a24487",
+      "decision": "enrolled",
+      "reason": "Public active non-fork Go code repository with a physical owned Go component and test intent; no command/setup completeness exclusion.",
+      "componentPath": "src/cmd/compile",
+      "componentSelection": "Official maintainer contribution guidance names owned compiler cmd/compile, crypto/sha1 and cmd/internal/testdir test work. Resolve module cmd via src/cmd/go.mod; src/cmd/compile sorts first among those literal owned package components. Source/install cwd src is not treated as a separately named production component.",
+      "sourceCheckedAt": "2026-10-29T05:16:51.743028+00:00",
+      "indexOrImporterConsulted": false,
+      "taskIds": [
+        "e1-go-02-repository-tests",
+        "e1-go-02-component-tests"
+      ],
+      "relatedSourceIdentities": [
+        "https://go.googlesource.com/go"
+      ],
+      "mirrorNote": "Official canonical/mirror relation is source-declared; no distinct historical or F-05 identity for this source was found in the frozen reservation ledger."
+    },
+    {
+      "reservedQueue": "Go/e1Qualification",
+      "queuePosition": 2,
+      "repository": "github.com/docker/compose",
+      "revision": "343bb382d2192b88d84af49971bb5cb99bee268c",
+      "decision": "enrolled",
+      "reason": "Public active non-fork Go code repository with a physical owned Go component and test intent; no command/setup completeness exclusion.",
+      "componentPath": "pkg/compose",
+      "componentSelection": "Maintainer AGENTS.md explicitly identifies pkg/compose as a unit-test package and pkg/e2e separately. The main module and named package/test source are retained; relay is a separate later module with its own test target.",
+      "sourceCheckedAt": "2026-10-29T05:16:51.743028+00:00",
+      "indexOrImporterConsulted": false,
+      "taskIds": [
+        "e1-go-03-repository-tests",
+        "e1-go-03-component-tests"
+      ]
+    }
+  ],
+  "exclusions": [],
+  "indexConsulted": false
+}

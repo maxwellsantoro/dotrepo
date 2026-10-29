@@ -1,0 +1,91 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T05:22:03.084683Z",
+    "snapshotDigest": "44ea70f9e178d7537a1317d49fb3f55ca219f442c467268c933ae494a299b42d",
+    "staleAfter": "2026-10-30T05:22:03.084683Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "pixijs",
+    "repo": "pixijs",
+    "source": "https://github.com/pixijs/pixijs"
+  },
+  "relationCount": 1,
+  "references": [
+    {
+      "relationship": "related",
+      "direction": "outgoing",
+      "target": "github.com/pixijs/pixijs",
+      "notes": "Declared repository in package.json.",
+      "trust": {
+        "confidence": "low",
+        "provenance": [
+          "declared",
+          "manifest"
+        ]
+      },
+      "identity": {
+        "host": "github.com",
+        "owner": "pixijs",
+        "repo": "pixijs",
+        "source": "https://github.com/pixijs/pixijs"
+      },
+      "profile": {
+        "identity": {
+          "host": "github.com",
+          "owner": "pixijs",
+          "repo": "pixijs",
+          "source": "https://github.com/pixijs/pixijs"
+        },
+        "name": "npm downloads",
+        "purpose": "Next-Generation, Fastest HTML5 Creation Engine for the Web",
+        "completeness": {
+          "hasBuild": true,
+          "hasTest": true,
+          "hasDocs": false,
+          "hasSecurityContact": false,
+          "hasOwnershipSignal": false,
+          "hasLicense": false,
+          "conflictCount": 0
+        },
+        "trust": {
+          "selectedStatus": "imported",
+          "confidence": "medium",
+          "provenance": [
+            "imported"
+          ],
+          "selectionReason": "only_matching_record"
+        },
+        "matched": [
+          "relation"
+        ],
+        "ranking": {
+          "score": 13,
+          "matchedFieldCount": 1,
+          "completenessSignalCount": 2,
+          "basis": [
+            "matchedFields",
+            "profileCompleteness",
+            "trustConfidence"
+          ]
+        },
+        "links": {
+          "self": "/v0/repos/github.com/pixijs/pixijs/profile.json",
+          "repository": "/v0/repos/github.com/pixijs/pixijs/index.json",
+          "trust": "/v0/repos/github.com/pixijs/pixijs/trust.json",
+          "queryTemplate": "/v0/repos/github.com/pixijs/pixijs/query?path={dot_path}",
+          "indexPath": "repos/github.com/pixijs/pixijs/"
+        }
+      }
+    }
+  ],
+  "links": {
+    "self": "/v0/repos/github.com/pixijs/pixijs/relations",
+    "repository": "/v0/repos/github.com/pixijs/pixijs/index.json",
+    "trust": "/v0/repos/github.com/pixijs/pixijs/trust.json",
+    "profile": "/v0/repos/github.com/pixijs/pixijs/profile.json",
+    "queryTemplate": "/v0/repos/github.com/pixijs/pixijs/query?path={dot_path}",
+    "indexPath": "repos/github.com/pixijs/pixijs/"
+  }
+}

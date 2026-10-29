@@ -1,0 +1,62 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T05:05:17.00058Z",
+    "snapshotDigest": "24cdb33243b74ab13719093d3c53c642e471b2a9fda4454f3a10926157fba671",
+    "staleAfter": "2026-10-30T05:05:17.00058Z"
+  },
+  "repositoryCount": 3,
+  "repositories": [
+    {
+      "identity": {
+        "host": "github.com",
+        "owner": "storytold",
+        "repo": "photocraft",
+        "source": "https://github.com/storytold/photocraft"
+      },
+      "name": "ArtCraft",
+      "description": "Image editing; an open-source, clean-room reimplementation of Adobe Photoshop, rebuilt in pure Rust.",
+      "links": {
+        "self": "/v0/repos/github.com/storytold/photocraft/index.json",
+        "trust": "/v0/repos/github.com/storytold/photocraft/trust.json",
+        "profile": "/v0/repos/github.com/storytold/photocraft/profile.json",
+        "queryTemplate": "/v0/repos/github.com/storytold/photocraft/query?path={dot_path}",
+        "indexPath": "repos/github.com/storytold/photocraft/"
+      }
+    },
+    {
+      "identity": {
+        "host": "github.com",
+        "owner": "warpdotdev",
+        "repo": "warp",
+        "source": "https://github.com/warpdotdev/warp"
+      },
+      "name": "warp",
+      "description": "Warp is an agentic development environment, born out of the terminal.",
+      "links": {
+        "self": "/v0/repos/github.com/warpdotdev/warp/index.json",
+        "trust": "/v0/repos/github.com/warpdotdev/warp/trust.json",
+        "profile": "/v0/repos/github.com/warpdotdev/warp/profile.json",
+        "queryTemplate": "/v0/repos/github.com/warpdotdev/warp/query?path={dot_path}",
+        "indexPath": "repos/github.com/warpdotdev/warp/"
+      }
+    },
+    {
+      "identity": {
+        "host": "github.com",
+        "owner": "zellij-org",
+        "repo": "zellij",
+        "source": "https://github.com/zellij-org/zellij"
+      },
+      "name": "Zellij",
+      "description": "[Screencasts & Tutorials]",
+      "links": {
+        "self": "/v0/repos/github.com/zellij-org/zellij/index.json",
+        "trust": "/v0/repos/github.com/zellij-org/zellij/trust.json",
+        "profile": "/v0/repos/github.com/zellij-org/zellij/profile.json",
+        "queryTemplate": "/v0/repos/github.com/zellij-org/zellij/query?path={dot_path}",
+        "indexPath": "repos/github.com/zellij-org/zellij/"
+      }
+    }
+  ]
+}

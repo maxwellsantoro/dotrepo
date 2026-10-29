@@ -1,0 +1,35 @@
+{
+  "taskId": "typescript-02",
+  "status": "supported-source-alternative; independent review pending",
+  "supportedCompleteAlternatives": [
+    {
+      "command": "npm run test -- __tests__/bin/agent-canvas.test.ts",
+      "working_directory": ".",
+      "scope": "component",
+      "component": "bin",
+      "prerequisites": [
+        "Node.js 24 or later",
+        "npm 11.12.1",
+        "uv (documented contributor source setup)",
+        "Run npm ci from the repository root at the frozen revision."
+      ],
+      "source": "docs/DEVELOPMENT.md",
+      "coverage": "All tests in the dedicated bin launcher suite; preserve the npm test wrapper and its make-i18n stage.",
+      "derivation": "Developer guide demonstrates suite-path arguments to npm run test; bind that documented selection mechanism to the dedicated bin suite retained in source.",
+      "qualification": "Source-supported selector binding, not a verbatim single upstream line; independent review and runtime verification pending."
+    }
+  ],
+  "reason": "Source guidance explicitly demonstrates selecting Vitest suite paths through npm run test, and the bin directory has a dedicated launcher suite. The alternative retains the npm wrapper and documented contributor setup; it is a source assessment, not execution evidence.",
+  "sourceLocators": [
+    "sources/github.com/OpenHands/OpenHands/docs/architecture.md:33-45",
+    "sources/github.com/OpenHands/OpenHands/docs/DEVELOPMENT.md:271-298",
+    "sources/github.com/OpenHands/OpenHands/README.md:123-144",
+    "sources/github.com/OpenHands/OpenHands/package.json:1-260",
+    "sources/github.com/OpenHands/OpenHands/bin/agent-canvas.mjs:1-178",
+    "sources/github.com/OpenHands/OpenHands/__tests__/bin/agent-canvas.test.ts:21-45",
+    "sources/github.com/OpenHands/OpenHands/vite.config.ts:484-518"
+  ],
+  "executionObserved": false,
+  "independentReview": "pending",
+  "sourceAssessmentOnly": true
+}

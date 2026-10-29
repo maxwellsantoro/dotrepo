@@ -1,0 +1,49 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T05:22:03.084683Z",
+    "snapshotDigest": "58df1d91f78cfee36282fd1a54ebe2aadf70b6341968d19d3ab417b5fe5c3604",
+    "staleAfter": "2026-10-30T05:22:03.084683Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "docker",
+    "repo": "compose",
+    "source": "https://github.com/docker/compose"
+  },
+  "repository": {
+    "name": "Docker Compose",
+    "description": "Docker Compose is a tool for running multi-container applications on Docker defined using the Compose file format.",
+    "homepage": "https://github.com/docker/compose",
+    "securityContact": "security@docker.com"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/docker/compose/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "imported",
+        "source": "https://github.com/docker/compose",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported"
+          ],
+          "notes": "Bootstrapped from `README.md`, `CONTRIBUTING.md`, `Makefile`, and `go.mod`. `security_contact` was extracted from CONTRIBUTING.md (no SECURITY.md found). Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/docker/compose/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/docker/compose/index.json",
+    "trust": "/v0/repos/github.com/docker/compose/trust.json",
+    "profile": "/v0/repos/github.com/docker/compose/profile.json",
+    "queryTemplate": "/v0/repos/github.com/docker/compose/query?path={dot_path}",
+    "indexPath": "repos/github.com/docker/compose/"
+  }
+}

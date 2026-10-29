@@ -1,0 +1,48 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T05:22:03.084683Z",
+    "snapshotDigest": "44ea70f9e178d7537a1317d49fb3f55ca219f442c467268c933ae494a299b42d",
+    "staleAfter": "2026-10-30T05:22:03.084683Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "agalwood",
+    "repo": "Motrix",
+    "source": "https://github.com/agalwood/Motrix"
+  },
+  "repository": {
+    "name": "Motrix",
+    "description": "A modern, full-featured download manager that stays simple to use",
+    "homepage": "https://github.com/agalwood/Motrix"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/agalwood/Motrix/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "imported",
+        "source": "https://github.com/agalwood/Motrix",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported"
+          ],
+          "notes": "Bootstrapped from `README.md` and `package.json`. Ignored component-scoped commands from `packages/finalize-fs/Cargo.toml` as repository defaults. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/agalwood/Motrix/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/agalwood/Motrix/index.json",
+    "trust": "/v0/repos/github.com/agalwood/Motrix/trust.json",
+    "profile": "/v0/repos/github.com/agalwood/Motrix/profile.json",
+    "queryTemplate": "/v0/repos/github.com/agalwood/Motrix/query?path={dot_path}",
+    "indexPath": "repos/github.com/agalwood/Motrix/"
+  }
+}

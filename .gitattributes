@@ -2,3 +2,9 @@
 # whitespace. Do not normalize evidence to satisfy patch-style checks.
 crates/dotrepo-core/tests/fixtures/import/docs-source-*/README.md -whitespace
 crates/dotrepo-core/tests/fixtures/import/context-ries-source-excerpt/README.md -whitespace
+benchmarks/head-to-head/e1-qualification-20261029/receipts/** -whitespace
+benchmarks/head-to-head/f05-agent-tasks-20261029/sources/** -whitespace
+# Frozen packet hashes bind bytes across platforms, including upstream CRLF.
+benchmarks/head-to-head/experiments/applicability-2026-10-29/** -text
+benchmarks/head-to-head/e1-qualification-20261029/** -text
+benchmarks/head-to-head/f05-agent-tasks-20261029/** -text

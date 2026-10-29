@@ -1,0 +1,16 @@
+{
+  "taskId": "rust-02",
+  "status": "required-abstention",
+  "supportedCompleteAlternatives": [],
+  "reason": "Root cargo test is documented, but no separately documented component-only invocation or complete component prerequisite tuple is established. Do not invent a one-package equivalent of the root workflow.",
+  "sourceLocators": [
+    "sources/github.com/GyulyVGC/sniffnet/Cargo.toml:178-180",
+    "sources/github.com/GyulyVGC/sniffnet/lib/sniffnet-packet-parser/Cargo.toml:1-28",
+    "sources/github.com/GyulyVGC/sniffnet/lib/sniffnet-packet-parser/src/link_type.rs:73-100",
+    "sources/github.com/GyulyVGC/sniffnet/CONTRIBUTING.md:8-18",
+    "sources/github.com/GyulyVGC/sniffnet/.github/workflows/rust.yml:23-74"
+  ],
+  "executionObserved": false,
+  "independentReview": "pending",
+  "sourceAssessmentOnly": true
+}

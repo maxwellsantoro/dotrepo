@@ -1,0 +1,40 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/docling-project/docling"
+generated_at = "2026-10-29T05:22:03.780179Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md`, `pyproject.toml`, and `Makefile`. Inferred `repo.build` from `pyproject.toml`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Docling"
+description = "Docling simplifies document processing by parsing diverse formats — including advanced PDF understanding — and providing seamless integrations with the generative AI ecosystem."
+homepage = "https://github.com/docling-project/docling"
+languages = []
+build = "python -m build"
+test = "make test"
+topics = []
+
+[repo.toolchain]
+min = "3.10"
+ecosystem = "Python"
+
+[docs]
+root = "https://docling-project.github.io/docling/"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-10-29T05:22:03.780179Z"
+confidence = "high"
+method = "extracted"
+reason = "Explicit documentation link at README.md:108: Check out Docling's [documentation](https://docling-project.github.io/docling/) for details on"
+source = "README.md"
+state = "present"
+valueJson = '"https://docling-project.github.io/docling/"'

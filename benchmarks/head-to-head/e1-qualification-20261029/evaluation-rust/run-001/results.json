@@ -1,0 +1,231 @@
+{
+  "byScope": {
+    "component": {
+      "correct-abstention": 1,
+      "supported-miss": 1,
+      "unresolved-gold": 1
+    },
+    "repository": {
+      "supported-miss": 2,
+      "unresolved-gold": 1
+    }
+  },
+  "consumerBenefitMeasured": false,
+  "evaluatedTasks": 6,
+  "executionFreezeSha256": "ce55060d54f4578f1b332404610d5afab6c40d3982f3014554d321c8580da9d0",
+  "finishedAt": "2026-10-29T05:05:20.230479+00:00",
+  "fullQualificationPassed": false,
+  "modelCalls": 0,
+  "plannedTasks": 24,
+  "rows": [
+    {
+      "applicabilityDisposition": "supported-miss",
+      "component": null,
+      "consumerSelection": {
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ],
+        "instruction": null,
+        "provenance": null
+      },
+      "exportExitCode": 0,
+      "goldState": "supported",
+      "id": "e1-rust-01-repository-tests",
+      "importExitCode": 0,
+      "profileSha256": "a7eac565caef2de4ba05544feba70d23b82d968c1e7309b387e8514f8afb5337",
+      "recoveredInstructions": [
+        {
+          "command": "cargo test --workspace",
+          "context": null,
+          "origin": "scalar",
+          "structurallyComplete": false
+        }
+      ],
+      "repository": "github.com/zellij-org/zellij",
+      "request": {
+        "scope": "repository"
+      },
+      "revision": "1f3df933978e00c246553070310175c392fcfe4f",
+      "scope": "repository"
+    },
+    {
+      "applicabilityDisposition": "correct-abstention",
+      "component": "default-plugins/about",
+      "consumerSelection": {
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ],
+        "instruction": null,
+        "provenance": null
+      },
+      "exportExitCode": 0,
+      "goldState": "required-abstention",
+      "id": "e1-rust-01-component-tests",
+      "importExitCode": 0,
+      "profileSha256": "a7eac565caef2de4ba05544feba70d23b82d968c1e7309b387e8514f8afb5337",
+      "recoveredInstructions": [
+        {
+          "command": "cargo test --workspace",
+          "context": null,
+          "origin": "scalar",
+          "structurallyComplete": false
+        }
+      ],
+      "repository": "github.com/zellij-org/zellij",
+      "request": {
+        "component": "default-plugins/about",
+        "scope": "component"
+      },
+      "revision": "1f3df933978e00c246553070310175c392fcfe4f",
+      "scope": "component"
+    },
+    {
+      "applicabilityDisposition": "unresolved-gold",
+      "component": null,
+      "consumerSelection": {
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ],
+        "instruction": null,
+        "provenance": null
+      },
+      "exportExitCode": 0,
+      "goldState": "unresolved",
+      "id": "e1-rust-02-repository-tests",
+      "importExitCode": 0,
+      "profileSha256": "e84da8564fda7bba074e5c8267d1715edf1c5cfaaa585fb3743d14f77a857dce",
+      "recoveredInstructions": [
+        {
+          "command": "cargo test --workspace",
+          "context": null,
+          "origin": "scalar",
+          "structurallyComplete": false
+        }
+      ],
+      "repository": "github.com/warpdotdev/warp",
+      "request": {
+        "scope": "repository"
+      },
+      "revision": "5a55a2aca77339ad75637bed650352369ee7fcb9",
+      "scope": "repository"
+    },
+    {
+      "applicabilityDisposition": "unresolved-gold",
+      "component": "app",
+      "consumerSelection": {
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ],
+        "instruction": null,
+        "provenance": null
+      },
+      "exportExitCode": 0,
+      "goldState": "unresolved",
+      "id": "e1-rust-02-component-tests",
+      "importExitCode": 0,
+      "profileSha256": "e84da8564fda7bba074e5c8267d1715edf1c5cfaaa585fb3743d14f77a857dce",
+      "recoveredInstructions": [
+        {
+          "command": "cargo test --workspace",
+          "context": null,
+          "origin": "scalar",
+          "structurallyComplete": false
+        }
+      ],
+      "repository": "github.com/warpdotdev/warp",
+      "request": {
+        "component": "app",
+        "scope": "component"
+      },
+      "revision": "5a55a2aca77339ad75637bed650352369ee7fcb9",
+      "scope": "component"
+    },
+    {
+      "applicabilityDisposition": "supported-miss",
+      "component": null,
+      "consumerSelection": {
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ],
+        "instruction": null,
+        "provenance": null
+      },
+      "exportExitCode": 0,
+      "goldState": "supported",
+      "id": "e1-rust-03-repository-tests",
+      "importExitCode": 0,
+      "profileSha256": "79ed8d7818fc0e5115d485234ffcf0a5dbc75c1eca4df00e65bdde4ca563d547",
+      "recoveredInstructions": [
+        {
+          "command": "cargo test --workspace",
+          "context": null,
+          "origin": "scalar",
+          "structurallyComplete": false
+        }
+      ],
+      "repository": "github.com/storytold/photocraft",
+      "request": {
+        "scope": "repository"
+      },
+      "revision": "5f9b4391874aabc9deb2fcb905267613e4d93ec8",
+      "scope": "repository"
+    },
+    {
+      "applicabilityDisposition": "supported-miss",
+      "component": "apps/photocraft",
+      "consumerSelection": {
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ],
+        "instruction": null,
+        "provenance": null
+      },
+      "exportExitCode": 0,
+      "goldState": "supported",
+      "id": "e1-rust-03-component-tests",
+      "importExitCode": 0,
+      "profileSha256": "79ed8d7818fc0e5115d485234ffcf0a5dbc75c1eca4df00e65bdde4ca563d547",
+      "recoveredInstructions": [
+        {
+          "command": "cargo test --workspace",
+          "context": null,
+          "origin": "scalar",
+          "structurallyComplete": false
+        }
+      ],
+      "repository": "github.com/storytold/photocraft",
+      "request": {
+        "component": "apps/photocraft",
+        "scope": "component"
+      },
+      "revision": "5f9b4391874aabc9deb2fcb905267613e4d93ec8",
+      "scope": "component"
+    }
+  ],
+  "schema": "dotrepo-e1-rust-evaluation/v1",
+  "scoringMethod": {
+    "acceptedTuple": "Compare command, working_directory, scope, component and prerequisite list with each frozen alternative after selection. Exact tuple match supports applicable acceptance. Otherwise retain accepted-unresolved-requires-source-adjudication; unlisted or paraphrased alternatives are not automatically wrong.",
+    "candidateRecovery": "Retain raw repo.test, test_context and every test_candidates item. A structurally complete candidate has matching context.command, directory, scope, explicit prerequisite list, source and component iff component scope; this does not establish applicability or consumer acceptance.",
+    "consumerPolicy": "value-bound-contextual-instruction-v1",
+    "executionBoundary": "Only our Git inspection, import and public export binaries run. No upstream command, bootstrap, build, test, network request, model call, execution-success or consumer-benefit observation.",
+    "limits": {
+      "exportTimeoutSeconds": 120,
+      "importTimeoutSeconds": 60,
+      "perSourceBytes": 2097152,
+      "totalSourceBytes": 10485760
+    },
+    "requiredAbstentionMissingSelection": "correct-abstention against frozen source-gold; no fallback execution is observed.",
+    "scopeAggregation": "Report all six tasks and repository/component breakdown; the other eighteen planned qualification tasks are not evaluated here.",
+    "selection": "Reference own_projects.select_profile_instruction called with identity, actual exported profile bytes, test purpose and task scope/component only; no gold command/prerequisite filtering or repairs.",
+    "sourceMaterialization": "Only frozen sources/ files are copied, byte-identically, to new temporary repository roots. This is not a full checkout and absence of unretained files limits extraction completeness.",
+    "supportedMissingSelection": "supported-miss regardless of missing record assessment or upstream fallback availability; source gold establishes an instruction exists.",
+    "timestampLimit": "CLI import uses its actual timestamp; a replay may have different record timestamps. Export timestamps are fixed to this execution freeze.",
+    "unresolvedGold": "unresolved-gold; excluded from correctness numerator, retained in six-task denominator and separate unresolved count."
+  },
+  "summary": {
+    "correct-abstention": 1,
+    "supported-miss": 3,
+    "unresolved-gold": 2
+  },
+  "upstreamCommandsExecuted": false
+}

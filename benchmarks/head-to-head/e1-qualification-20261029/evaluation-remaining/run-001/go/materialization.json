@@ -1,0 +1,128 @@
+{
+  "github.com/docker/compose": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "2c3364f66a30ea054f3ec3610fa4be37a98e5fc3dbd9654b44f26805c75a236e"
+    },
+    {
+      "path": "BUILDING.md",
+      "sha256": "68694744374f7b98c6dd284aea8d657267a6f6383e9bd5580f725a3e723a7cd4"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "sha256": "9dfbe9648dbc5a31677bda175a0eb5e577b32d499d6dfaf2fbb09b4a5bd63d1a"
+    },
+    {
+      "path": "Dockerfile",
+      "sha256": "5f35a0fce55a645e2497f861aba1414f237d532493b4f2bda138c609b28ef44f"
+    },
+    {
+      "path": "Makefile",
+      "sha256": "927856982fcd81c94dd843743000b8a828baf5af02503d64f7a4c4cc477ac4cc"
+    },
+    {
+      "path": "README.md",
+      "sha256": "02d853bbccd7d847c65eaea8c07bb14135b3f7904a48abf5898de90d5c75cb8e"
+    },
+    {
+      "path": "docker-bake.hcl",
+      "sha256": "d8e460f357e8913b41a81458d2c3280f5494368c2f20eaca7ebcb1bdeaeebce5"
+    },
+    {
+      "path": "go.mod",
+      "sha256": "add1d3fc58082dc40ea0ebcc3d2c80b1f4bf99a5452aab2026e8997b511cfb09"
+    },
+    {
+      "path": "pkg/api/api.go",
+      "sha256": "317a2470d843493b2c1ed17c7b8140ab35203f5415c224df3a2154b3f3c6603a"
+    },
+    {
+      "path": "pkg/compose/apiSocket_test.go",
+      "sha256": "59f26ee95d04a855a27047089929d4cfd77cf52b68f547e3fdb38b139dc1b501"
+    },
+    {
+      "path": "relay/README.md",
+      "sha256": "e405fceee8f08bc24d7c9a05cef1d7af9b7f5ab9f3d559fedada46d69f2513d0"
+    },
+    {
+      "path": "relay/go.mod",
+      "sha256": "d19203608de73a4b66a822559f9a8460d07a29b2b92c2f4e7665d5ddda9595f9"
+    }
+  ],
+  "github.com/golang/go": [
+    {
+      "path": "CONTRIBUTING.md",
+      "sha256": "1244fcb5fbb7f0629bc134e99a90c18e63097a66d034acee0f18eabdd4fb32d9"
+    },
+    {
+      "path": "README.md",
+      "sha256": "8247b7c5de1e74854aac1a08aa5894444d1d33b4045c70d5cc3367ad0e25c3f3"
+    },
+    {
+      "path": "doc/README.md",
+      "sha256": "c1bf000e7a873b3afed329c5b9f9c07f7692b1d7fb2bfca2d7600cec8b1d1407"
+    },
+    {
+      "path": "src/README.vendor",
+      "sha256": "609edcc5e89225798babf6672c3097d950824487756a04725d3c3e9aeaae5edc"
+    },
+    {
+      "path": "src/all.bash",
+      "sha256": "bbb4df362ad3c52b39e4be6ad82be5c476d360d27faed7d7695e703d7988607e"
+    },
+    {
+      "path": "src/cmd/compile/README.md",
+      "sha256": "019dfb6331c2cac982b9d6695cf59f59b7164e841f69fac200bacf50724d3b2c"
+    },
+    {
+      "path": "src/cmd/go.mod",
+      "sha256": "4ecc040748718e9b44cb0a3458149280d46d5b751329fd732761363161f8f59c"
+    },
+    {
+      "path": "src/go.mod",
+      "sha256": "7963a76869b68d61117808d4bc74f6d5869d49eb576960a85bc6c27c267a7d7f"
+    },
+    {
+      "path": "src/make.bash",
+      "sha256": "d0da612ae94f9d92d8c0302070eaaa1eb2e2a32709aa567f21737c1f7d01c1ea"
+    },
+    {
+      "path": "src/run.bash",
+      "sha256": "a62f852277fa572067fd0cf1ef4c045474129312f9a4ff589700ff2e156439db"
+    }
+  ],
+  "github.com/infiniflow/ragflow": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "ca9570c71572f9d0fa7e5a3b1f963456fa9bef8df5a0910e8cce884cb1b24dc1"
+    },
+    {
+      "path": "README.md",
+      "sha256": "665333bd40c1f7e32d8ee76d1fafdc574973ecdbc69ccd8ada35af1e3546fde0"
+    },
+    {
+      "path": "build.sh",
+      "sha256": "ed84e588f484d4756c05f4ded5c02e164750c6c99cc60173a8d58b7088090b6f"
+    },
+    {
+      "path": "docs/develop/contributing.md",
+      "sha256": "096013d638358bac219bb0bf4b8886ada18cb3358626ae1f723211744a852b7b"
+    },
+    {
+      "path": "go.mod",
+      "sha256": "2ccf720125223a7acfd3a2f45873b5a0aad5ffd5dd0d8ac877579ab0ac2aa5a2"
+    },
+    {
+      "path": "internal/admin/default_admin_password_test.go",
+      "sha256": "c2401faeafb3fc302ea84e205f554863195e0bdf37de78bca315e712c40633f8"
+    },
+    {
+      "path": "internal/development.md",
+      "sha256": "8431e8199ff5255b90942800b4f6db826b44883576ada3da807df66507514670"
+    },
+    {
+      "path": "tools/scripts/download_dev_deps.py",
+      "sha256": "8d98f21c143c2550ddfa896c888015141b491bd1d37e15839dbe17ac1ee138c6"
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "schema": "dotrepo-e1-screening-ledger/v1",
+  "screened": [
+    {
+      "queuePosition": 0,
+      "repository": "github.com/yangshun/tech-interview-handbook",
+      "revision": "e1d28e8886c0b6ff3e50da991ce0e895134ddc59",
+      "decision": "excluded",
+      "reason": "README self-describes free curated technical interview preparation materials; tutorial/handbook exclusion is source-based and not caused by absent test coverage.",
+      "evidence": [
+        {
+          "path": "typescript/sources/github.com/yangshun/tech-interview-handbook/README.md",
+          "startLine": 24,
+          "endLine": 32,
+          "excerpt": "Not everyone has the time to do a few hundred LeetCode questions. Here are _free and curated_ technical interview preparation materials for busy engineers, brought to you by me, the author of [Blind 75](https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU). Over 1,000,000 people have benefitted from this handbook!\n\nBesides the usual algorithm questions, other **awesome** stuff includes:\n\n- [Best practice questions](https://www.techinterviewhandbook.org/coding-interview-study-plan/) for coding interviews\n- [Grind 75](https://www.techinterviewhandbook.org/grind75/) - the next evolution of Blind 75, bigger and better\n- [How to prepare](https://www.techinterviewhandbook.org/coding-interview-prep/) for coding interviews\n- [Coding interview best practices](https://www.techinterviewhandbook.org/coding-interview-cheatsheet/) - Straight-to-the-point Do's and Don'ts\n- [Algorithm cheatsheets and tips](https://www.techinterviewhandbook.org/algorithms/study-cheatsheet/) categorized by topic",
+          "sha256": "31b808a2c614995c40005621825f395c8fe822018bc2944194077e2d84db792d"
+        }
+      ],
+      "reservedQueue": "TypeScript/e1Qualification",
+      "sourceCheckedAt": "2026-10-29T05:13:48.337959+00:00",
+      "indexOrImporterConsulted": false
+    },
+    {
+      "queuePosition": 1,
+      "repository": "github.com/pixijs/pixijs",
+      "revision": "2e8cacbe1ed4ed0fc31d5b59b9895c811ac0e003",
+      "decision": "enrolled",
+      "reason": "Active public non-fork TypeScript code repository with owned physical component and explicit test intent; no setup-completeness exclusion.",
+      "componentPath": "tests/visual/scenes",
+      "componentKind": "test-fixture/visual",
+      "componentSelection": "Root workspaces examples/playground have no own test script. Maintainer contributor guidance explicitly identifies tests/visual/scenes and visual regression coverage; this owned TypeScript fixture component is allowed by the pre-freeze clarification.",
+      "taskIds": [
+        "e1-typescript-01-repository-tests",
+        "e1-typescript-01-component-tests"
+      ],
+      "reservedQueue": "TypeScript/e1Qualification",
+      "sourceCheckedAt": "2026-10-29T05:13:48.337959+00:00",
+      "indexOrImporterConsulted": false
+    },
+    {
+      "queuePosition": 2,
+      "repository": "github.com/agalwood/Motrix",
+      "revision": "6aae74432187f689ffa0c8019f942ee2cb2cf91a",
+      "decision": "enrolled",
+      "reason": "Active public non-fork TypeScript code repository with owned physical component and explicit test intent; no setup-completeness exclusion.",
+      "componentPath": "src/core",
+      "componentKind": "production",
+      "componentSelection": "Filter mixed-language components before lexical selection: finalize-fs/native-host are Rust and safari-bootstrap Swift. Contributor layout identifies src/core as host-neutral production TypeScript; root Vitest include patterns plus actual log-redact.test.ts establish tests.",
+      "taskIds": [
+        "e1-typescript-02-repository-tests",
+        "e1-typescript-02-component-tests"
+      ],
+      "reservedQueue": "TypeScript/e1Qualification",
+      "sourceCheckedAt": "2026-10-29T05:13:48.337959+00:00",
+      "indexOrImporterConsulted": false
+    },
+    {
+      "queuePosition": 3,
+      "repository": "github.com/Eugeny/tabby",
+      "revision": "467ce8ebfa467fb88cf6d154c9a5891e3d3647f0",
+      "decision": "enrolled",
+      "reason": "Active public non-fork TypeScript code repository with owned physical component and explicit test intent; no setup-completeness exclusion.",
+      "componentPath": "tabby-electron",
+      "componentKind": "production",
+      "componentSelection": "Root manifest names test:ssh-term and test:unit patterns; tabby-electron sorts before tabby-ssh and tabby-terminal among components with explicit TypeScript test intent. Physical package and source exist; missing test-path evidence is retained as a task gap.",
+      "taskIds": [
+        "e1-typescript-03-repository-tests",
+        "e1-typescript-03-component-tests"
+      ],
+      "reservedQueue": "TypeScript/e1Qualification",
+      "sourceCheckedAt": "2026-10-29T05:13:48.337959+00:00",
+      "indexOrImporterConsulted": false
+    },
+    {
+      "queuePosition": 4,
+      "repository": "github.com/RocketChat/Rocket.Chat",
+      "revision": "7a174fd05604dac39af95f76ea9db73db2b3ca5f",
+      "decision": "deferred-not-enrolled-after-quota",
+      "reason": "Root sources were prefetched before source eligibility adjudication. The first three eligible earlier reservations filled the stratum; no eligibility judgment or replacement was made for this candidate.",
+      "reservedQueue": "TypeScript/e1Qualification",
+      "sourceCheckedAt": "2026-10-29T05:13:48.337959+00:00",
+      "indexOrImporterConsulted": false
+    }
+  ],
+  "selectionClarification": "typescript/selection-clarification.json",
+  "indexConsulted": false
+}

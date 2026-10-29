@@ -1,0 +1,185 @@
+[
+  {
+    "component": null,
+    "consumerSelection": {
+      "fallbackReasons": [
+        "no-assessed-contextual-instruction"
+      ],
+      "instruction": null,
+      "provenance": null
+    },
+    "ecosystem": "python",
+    "exportExitCode": 0,
+    "id": "e1-python-01-repository-tests",
+    "importExitCode": 0,
+    "profilePath": "public/v0/repos/github.com/ultralytics/ultralytics/profile.json",
+    "profileSha256": "b147d533fd54673f20cfe070b03713d21800b117e7a65c41d02bb2fb41ebeb95",
+    "recoveredInstructions": [
+      {
+        "command": "pytest $xdist --cov=ultralytics/ --cov-report=xml tests/ --export-env base",
+        "context": null,
+        "origin": "scalar",
+        "structurallyComplete": false
+      }
+    ],
+    "repository": "github.com/ultralytics/ultralytics",
+    "request": {
+      "scope": "repository"
+    },
+    "revision": "922563eab42b778445e55a2edbabb6974eed8e4b",
+    "scope": "repository"
+  },
+  {
+    "component": "ultralytics",
+    "consumerSelection": {
+      "fallbackReasons": [
+        "no-assessed-contextual-instruction"
+      ],
+      "instruction": null,
+      "provenance": null
+    },
+    "ecosystem": "python",
+    "exportExitCode": 0,
+    "id": "e1-python-01-component-tests",
+    "importExitCode": 0,
+    "profilePath": "public/v0/repos/github.com/ultralytics/ultralytics/profile.json",
+    "profileSha256": "b147d533fd54673f20cfe070b03713d21800b117e7a65c41d02bb2fb41ebeb95",
+    "recoveredInstructions": [
+      {
+        "command": "pytest $xdist --cov=ultralytics/ --cov-report=xml tests/ --export-env base",
+        "context": null,
+        "origin": "scalar",
+        "structurallyComplete": false
+      }
+    ],
+    "repository": "github.com/ultralytics/ultralytics",
+    "request": {
+      "component": "ultralytics",
+      "scope": "component"
+    },
+    "revision": "922563eab42b778445e55a2edbabb6974eed8e4b",
+    "scope": "component"
+  },
+  {
+    "component": null,
+    "consumerSelection": {
+      "fallbackReasons": [
+        "no-assessed-contextual-instruction"
+      ],
+      "instruction": null,
+      "provenance": null
+    },
+    "ecosystem": "python",
+    "exportExitCode": 0,
+    "id": "e1-python-02-repository-tests",
+    "importExitCode": 0,
+    "profilePath": "public/v0/repos/github.com/docling-project/docling/profile.json",
+    "profileSha256": "5dfc4048f17b1303f915cda9819afde92a3165c05f04108670967e09b6bda37d",
+    "recoveredInstructions": [
+      {
+        "command": "make test",
+        "context": null,
+        "origin": "scalar",
+        "structurallyComplete": false
+      }
+    ],
+    "repository": "github.com/docling-project/docling",
+    "request": {
+      "scope": "repository"
+    },
+    "revision": "9051777f9e420fa3a37df77425b08f22d0bf5981",
+    "scope": "repository"
+  },
+  {
+    "component": "docling",
+    "consumerSelection": {
+      "fallbackReasons": [
+        "no-assessed-contextual-instruction"
+      ],
+      "instruction": null,
+      "provenance": null
+    },
+    "ecosystem": "python",
+    "exportExitCode": 0,
+    "id": "e1-python-02-component-tests",
+    "importExitCode": 0,
+    "profilePath": "public/v0/repos/github.com/docling-project/docling/profile.json",
+    "profileSha256": "5dfc4048f17b1303f915cda9819afde92a3165c05f04108670967e09b6bda37d",
+    "recoveredInstructions": [
+      {
+        "command": "make test",
+        "context": null,
+        "origin": "scalar",
+        "structurallyComplete": false
+      }
+    ],
+    "repository": "github.com/docling-project/docling",
+    "request": {
+      "component": "docling",
+      "scope": "component"
+    },
+    "revision": "9051777f9e420fa3a37df77425b08f22d0bf5981",
+    "scope": "component"
+  },
+  {
+    "component": null,
+    "consumerSelection": {
+      "fallbackReasons": [
+        "no-assessed-contextual-instruction"
+      ],
+      "instruction": null,
+      "provenance": null
+    },
+    "ecosystem": "python",
+    "exportExitCode": 0,
+    "id": "e1-python-03-repository-tests",
+    "importExitCode": 0,
+    "profilePath": "public/v0/repos/github.com/keras-team/keras/profile.json",
+    "profileSha256": "5c55a4c8e3c227d59e3a778f3a90b4b7a8d5229d9b69f542a5c8a4f17fedbab6",
+    "recoveredInstructions": [
+      {
+        "command": "python -m pytest",
+        "context": null,
+        "origin": "scalar",
+        "structurallyComplete": false
+      }
+    ],
+    "repository": "github.com/keras-team/keras",
+    "request": {
+      "scope": "repository"
+    },
+    "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+    "scope": "repository"
+  },
+  {
+    "component": "keras/src",
+    "consumerSelection": {
+      "fallbackReasons": [
+        "no-assessed-contextual-instruction"
+      ],
+      "instruction": null,
+      "provenance": null
+    },
+    "ecosystem": "python",
+    "exportExitCode": 0,
+    "id": "e1-python-03-component-tests",
+    "importExitCode": 0,
+    "profilePath": "public/v0/repos/github.com/keras-team/keras/profile.json",
+    "profileSha256": "5c55a4c8e3c227d59e3a778f3a90b4b7a8d5229d9b69f542a5c8a4f17fedbab6",
+    "recoveredInstructions": [
+      {
+        "command": "python -m pytest",
+        "context": null,
+        "origin": "scalar",
+        "structurallyComplete": false
+      }
+    ],
+    "repository": "github.com/keras-team/keras",
+    "request": {
+      "component": "keras/src",
+      "scope": "component"
+    },
+    "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+    "scope": "component"
+  }
+]

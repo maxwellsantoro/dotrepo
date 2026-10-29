@@ -1,0 +1,38 @@
+{
+  "taskId": "rust-03",
+  "status": "unresolved",
+  "supportedCompleteAlternatives": [],
+  "reason": "Workflow documents three workspace test stages, runner matrix, environment and Linux packages. A portable consumer tuple and environment-specific completion oracle require independent review; implicit workflow cwd and prerequisite sufficiency are not independently established.",
+  "sourceLocators": [
+    "sources/github.com/iced-rs/iced/Cargo.toml:147-178",
+    "sources/github.com/iced-rs/iced/.github/workflows/test.yml:1-28"
+  ],
+  "executionObserved": false,
+  "independentReview": "pending",
+  "sourceAssessmentOnly": true,
+  "qualifiedWorkflowObservation": {
+    "commands": [
+      "cargo test --verbose --workspace",
+      "cargo test --verbose --workspace -- --ignored",
+      "cargo test --verbose --workspace --all-features"
+    ],
+    "environment": {
+      "RUSTFLAGS": "--deny warnings",
+      "ICED_TEST_BACKEND": "tiny-skia"
+    },
+    "runnerMatrix": {
+      "os": [
+        "ubuntu-latest",
+        "windows-latest",
+        "macOS-latest"
+      ],
+      "rust": [
+        "stable",
+        "beta",
+        "1.93"
+      ]
+    },
+    "linuxSetup": "sudo apt-get -qq update; sudo apt-get install -y libxkbcommon-dev libgtk-3-dev",
+    "interpretation": "Source-declared workflow, not a successful CI run or independently executed portable instruction."
+  }
+}

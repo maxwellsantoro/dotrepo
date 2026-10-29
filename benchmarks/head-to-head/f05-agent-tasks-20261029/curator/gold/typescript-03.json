@@ -1,0 +1,16 @@
+{
+  "taskId": "typescript-03",
+  "status": "unresolved",
+  "supportedCompleteAlternatives": [],
+  "reason": "The guide declares run-once testing and dependency setup, but the default Vitest project set includes source tests and browser/built-file tests. Complete browser installation and build prerequisites for that default set, plus an immutable choice for lts/*, need environment/oracle review.",
+  "sourceLocators": [
+    "sources/github.com/vuejs/core/.github/contributing.md:77-93",
+    "sources/github.com/vuejs/core/.github/contributing.md:209-239",
+    "sources/github.com/vuejs/core/package.json:1-117",
+    "sources/github.com/vuejs/core/vitest.config.ts:1-120",
+    "sources/github.com/vuejs/core/.node-version:1-1"
+  ],
+  "executionObserved": false,
+  "independentReview": "pending",
+  "sourceAssessmentOnly": true
+}

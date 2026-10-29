@@ -1,0 +1,49 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T05:22:03.084683Z",
+    "snapshotDigest": "fe3651ef5762490b41439a34654734da82a0e4891174ed6223806a46ccd53a1b",
+    "staleAfter": "2026-10-30T05:22:03.084683Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "keras-team",
+    "repo": "keras",
+    "source": "https://github.com/keras-team/keras"
+  },
+  "repository": {
+    "name": "keras",
+    "description": "Keras 3 is a multi-backend deep learning framework, with support for JAX, TensorFlow, PyTorch, and OpenVINO (for inference-only).",
+    "homepage": "https://github.com/keras-team/keras"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/keras-team/keras/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/keras-team/keras",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md` and `pyproject.toml`. Filled `repo.name` with inferred defaults. Inferred `repo.build` from `pyproject.toml`. Inferred `repo.test` from `pyproject.toml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/keras-team/keras/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/keras-team/keras/index.json",
+    "trust": "/v0/repos/github.com/keras-team/keras/trust.json",
+    "profile": "/v0/repos/github.com/keras-team/keras/profile.json",
+    "queryTemplate": "/v0/repos/github.com/keras-team/keras/query?path={dot_path}",
+    "indexPath": "repos/github.com/keras-team/keras/"
+  }
+}

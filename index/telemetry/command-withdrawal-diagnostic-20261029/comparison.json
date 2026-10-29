@@ -1,0 +1,192 @@
+{
+  "schema": "dotrepo-command-withdrawal-comparison/v1",
+  "assessmentSha256": "3de9a4714d2f2798e65fedefdf59397da9044d5d90b9b98be9ba79fcef63a4cd",
+  "priorCorrectionsSha256": "82497598189bc64eb563e01cb610b87eeb9fadb567332bc28ae59f368f5f8e32",
+  "assessmentFrozenBeforeComparison": true,
+  "assessorClass": "coding-agent, separate source-only assignment; not external participant or human review",
+  "counts": {
+    "contradicted-or-wrong-scope": 16,
+    "potentially-applicable-insufficient-evidence": 2,
+    "supported-for-claimed-task": 1
+  },
+  "cases": [
+    {
+      "caseId": "withdrawal-01",
+      "identity": "github.com/astral-sh/uv",
+      "field": "repo.build",
+      "sourceClassification": "contradicted-or-wrong-scope",
+      "priorDecision": "withheld",
+      "priorReason": "Docker/musl profiling workflow, not a repository-default build.",
+      "standaloneCleanCheckoutSufficiencyEstablished": false
+    },
+    {
+      "caseId": "withdrawal-02",
+      "identity": "github.com/astral-sh/uv",
+      "field": "repo.test",
+      "sourceClassification": "potentially-applicable-insufficient-evidence",
+      "priorDecision": "withheld",
+      "priorReason": "The source shows a nextest selector example; deleting its filter invented an unfiltered default.",
+      "standaloneCleanCheckoutSufficiencyEstablished": false
+    },
+    {
+      "caseId": "withdrawal-03",
+      "identity": "github.com/FuelLabs/fuel-core",
+      "field": "repo.build",
+      "sourceClassification": "contradicted-or-wrong-scope",
+      "priorDecision": "withheld",
+      "priorReason": "Package-specific build with disabled defaults in the Build issues troubleshooting section.",
+      "standaloneCleanCheckoutSufficiencyEstablished": false
+    },
+    {
+      "caseId": "withdrawal-04",
+      "identity": "github.com/astral-sh/ruff",
+      "field": "repo.test",
+      "sourceClassification": "contradicted-or-wrong-scope",
+      "priorDecision": "withheld",
+      "priorReason": "Parser-package tests in a Unicode update workflow, not repository-wide tests.",
+      "standaloneCleanCheckoutSufficiencyEstablished": false
+    },
+    {
+      "caseId": "withdrawal-05",
+      "identity": "github.com/GokuMohandas/Made-With-ML",
+      "field": "repo.test",
+      "sourceClassification": "contradicted-or-wrong-scope",
+      "priorDecision": "withheld",
+      "priorReason": "Data-test subset requires DATASET_LOC exported in the same block.",
+      "standaloneCleanCheckoutSufficiencyEstablished": false
+    },
+    {
+      "caseId": "withdrawal-06",
+      "identity": "github.com/clap-rs/clap",
+      "field": "repo.test",
+      "sourceClassification": "contradicted-or-wrong-scope",
+      "priorDecision": "withheld",
+      "priorReason": "Debug-output diagnostic invocation, not the selected repository-default test procedure.",
+      "standaloneCleanCheckoutSufficiencyEstablished": false
+    },
+    {
+      "caseId": "withdrawal-07",
+      "identity": "github.com/denoland/deno",
+      "field": "repo.build",
+      "sourceClassification": "contradicted-or-wrong-scope",
+      "priorDecision": "withheld",
+      "priorReason": "Special HMR development mode; source modules are read at runtime.",
+      "standaloneCleanCheckoutSufficiencyEstablished": false
+    },
+    {
+      "caseId": "withdrawal-08",
+      "identity": "github.com/denoland/deno",
+      "field": "repo.test",
+      "sourceClassification": "contradicted-or-wrong-scope",
+      "priorDecision": "withheld",
+      "priorReason": "One HMR integration-test example, not the repository suite.",
+      "standaloneCleanCheckoutSufficiencyEstablished": false
+    },
+    {
+      "caseId": "withdrawal-09",
+      "identity": "github.com/google/googletest",
+      "field": "repo.build",
+      "sourceClassification": "contradicted-or-wrong-scope",
+      "priorDecision": "withheld",
+      "priorReason": "Requires an earlier CMake configuration and cd mybuild in a separate block.",
+      "standaloneCleanCheckoutSufficiencyEstablished": false
+    },
+    {
+      "caseId": "withdrawal-10",
+      "identity": "github.com/google/googletest",
+      "field": "repo.test",
+      "sourceClassification": "contradicted-or-wrong-scope",
+      "priorDecision": "withheld",
+      "priorReason": "Runs from the previously configured mybuild directory, not the repository root.",
+      "standaloneCleanCheckoutSufficiencyEstablished": false
+    },
+    {
+      "caseId": "withdrawal-11",
+      "identity": "github.com/nlohmann/json",
+      "field": "repo.build",
+      "sourceClassification": "contradicted-or-wrong-scope",
+      "priorDecision": "withheld",
+      "priorReason": "Documentation-only build under docs/mkdocs via make -C.",
+      "standaloneCleanCheckoutSufficiencyEstablished": false
+    },
+    {
+      "caseId": "withdrawal-12",
+      "identity": "github.com/pytorch/pytorch",
+      "field": "repo.test",
+      "sourceClassification": "contradicted-or-wrong-scope",
+      "priorDecision": "withheld",
+      "priorReason": "Source explicitly labels this a -k Loss test-filter example.",
+      "standaloneCleanCheckoutSufficiencyEstablished": false
+    },
+    {
+      "caseId": "withdrawal-13",
+      "identity": "github.com/rust-lang/mdBook",
+      "field": "repo.test",
+      "sourceClassification": "contradicted-or-wrong-scope",
+      "priorDecision": "withheld",
+      "priorReason": "GUI test harness with extra requirements, explicitly excluded from the normal workspace test command.",
+      "standaloneCleanCheckoutSufficiencyEstablished": false
+    },
+    {
+      "caseId": "withdrawal-14",
+      "identity": "github.com/screenpipe/screenpipe",
+      "field": "repo.build",
+      "sourceClassification": "contradicted-or-wrong-scope",
+      "priorDecision": "withheld",
+      "priorReason": "macOS/Metal-specific build, with platform prerequisites earlier in the guide.",
+      "standaloneCleanCheckoutSufficiencyEstablished": false
+    },
+    {
+      "caseId": "withdrawal-15",
+      "identity": "github.com/serde-rs/serde",
+      "field": "repo.test",
+      "sourceClassification": "contradicted-or-wrong-scope",
+      "priorDecision": "withheld",
+      "priorReason": "The source says to run in the serde_core subdirectory.",
+      "standaloneCleanCheckoutSufficiencyEstablished": false
+    },
+    {
+      "caseId": "withdrawal-16",
+      "identity": "github.com/sharkdp/bat",
+      "field": "repo.build",
+      "sourceClassification": "potentially-applicable-insufficient-evidence",
+      "priorDecision": "withheld",
+      "priorReason": "Conditional binary-build example for syntax-test setup, not a declared default build.",
+      "standaloneCleanCheckoutSufficiencyEstablished": false
+    },
+    {
+      "caseId": "withdrawal-17",
+      "identity": "github.com/tensorflow/tensorflow",
+      "field": "repo.build",
+      "sourceClassification": "contradicted-or-wrong-scope",
+      "priorDecision": "withheld",
+      "priorReason": "Debug pip-package build example, not a general repository-default build.",
+      "standaloneCleanCheckoutSufficiencyEstablished": false
+    },
+    {
+      "caseId": "withdrawal-18",
+      "identity": "github.com/nginx/nginx",
+      "field": "repo.build",
+      "sourceClassification": "supported-for-claimed-task",
+      "priorDecision": "withheld",
+      "priorReason": "Requires auto/configure to generate the Makefile before make; the scalar loses that prerequisite.",
+      "standaloneCleanCheckoutSufficiencyEstablished": false
+    },
+    {
+      "caseId": "withdrawal-19",
+      "identity": "github.com/BurntSushi/ripgrep",
+      "field": "repo.build",
+      "sourceClassification": "contradicted-or-wrong-scope",
+      "priorDecision": "withheld",
+      "priorReason": "Optional PCRE2 feature build, not the general build: the guide separately gives cargo build --release in the clone/directory setup block.",
+      "standaloneCleanCheckoutSufficiencyEstablished": false
+    }
+  ],
+  "interpretation": [
+    "Withdrawals include explicit scope errors, insufficiently established defaults, and a documented compile step with missing setup context.",
+    "Withholding all19 does not mean all19command strings are inherently incorrect. No record restoration is justified by this source-only diagnostic.",
+    "No unchanged accepted-control population was scored, so this does not estimate overall policy precision or a causal improvement.",
+    "No fallback work was executed or timed.",
+    "The frozen assessment limitation saying no model calls means no separate benchmark/provider API calls. The source assessor itself is a model-backed coding agent; its actual usage and cost are unallocated, not zero."
+  ]
+}

@@ -1,0 +1,1548 @@
+{
+  "schema": "dotrepo-experiment-screening-reservations/v1",
+  "state": "pre-source-screening; no tasks enrolled or evaluated",
+  "seed": "dotrepo-applicability-20261029-source-screen-v1",
+  "indexConsulted": false,
+  "frameSha256": "ea9bb8138a5e1c3eb8a5bfc698ace15d39194b080ed68492ce3e9d9c1c7666e7",
+  "exclusionInputs": [
+    {
+      "path": "benchmarks/head-to-head/gold.fixture.yaml",
+      "sha256": "99508574db35195ff07adb7afcf7ab7d71fc022a5c85509ce4d242067692547b"
+    },
+    {
+      "path": "benchmarks/head-to-head/gold.independent.yaml",
+      "sha256": "6f33e87a5f792515b7740d78e7c3fafe9667feaf19da8a5b0a8a45db09456a16"
+    },
+    {
+      "path": "benchmarks/head-to-head/gold.september.yaml",
+      "sha256": "80952d673153faeeb08925c448ca1b06627709c22ffb782d423b0effa8302ab3"
+    },
+    {
+      "path": "benchmarks/head-to-head/gold.yaml",
+      "sha256": "37f09bcd6588346c7abd5ab8729e41eb6d37afff7fcb62a05cbd2530bc0e85f5"
+    },
+    {
+      "path": "benchmarks/head-to-head/results/own-projects-2026-10-04/workload.json",
+      "sha256": "1f294e164109631ac7e400ab86d06b6392c4350e50f8a8ca32a85fe225d5d1fd"
+    },
+    {
+      "path": "benchmarks/head-to-head/results/own-projects-atlas-scoped-sdk-2026-10-05/workload.json",
+      "sha256": "2dd55584ab092bf2c45c2bbe649403259546d9b72a63865c6236a8d93f33d091"
+    },
+    {
+      "path": "benchmarks/head-to-head/results/own-projects-atlas-sdk-2026-10-05/workload.json",
+      "sha256": "6dadb7ae0f461cb657ccf3f5df0702a2864ad252956703560d5f2cfe421bd0a1"
+    },
+    {
+      "path": "benchmarks/head-to-head/results/own-projects-contextual-2026-10-05/workload.json",
+      "sha256": "b56492c71a44577f0cb27332047c1ad520dd813e06e51e61ab84f8600e3fa1e2"
+    },
+    {
+      "path": "benchmarks/head-to-head/results/own-projects-readiness-2026-10-05/workload.json",
+      "sha256": "2fad1c907f6d9d03fc616a94748b046b37fbb582be47e1441637571595f39eb8"
+    },
+    {
+      "path": "benchmarks/head-to-head/results/task-controls-2026-10-05/workload.json",
+      "sha256": "75262e3e3eb9a142aaee5117ba3abd9bb52c6dd503a2f10fbe457c98db8c6c4a"
+    },
+    {
+      "path": "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+      "sha256": "dfa80ab591dd0fbf490ec027017d10a4169f0e19796077dd1055eefabfa4a0e8"
+    },
+    {
+      "path": "benchmarks/head-to-head/upstream-2026-10-27/workload.json",
+      "sha256": "17d2c6a474d32347fc2ed5697725875cf4fb349cfa1d041c826c1b106020c10b"
+    },
+    {
+      "path": "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json",
+      "sha256": "964632482ee597e7b662c7d8f2ae55440d47b47860be4d5abe8d92b1fe920bfa"
+    }
+  ],
+  "excluded": [
+    {
+      "repository": "github.com/acme/widget",
+      "sources": [
+        "benchmarks/head-to-head/gold.fixture.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/Aider-AI/aider",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/alacritty/alacritty",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/Alfred1984/interesting-python",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/ant-design/ant-design",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/apache/superset",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/astral-sh/.github",
+      "sources": [
+        "benchmarks/head-to-head/gold.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/astral-sh/ruff",
+      "sources": [
+        "benchmarks/head-to-head/gold.yaml",
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/astral-sh/uv",
+      "sources": [
+        "benchmarks/head-to-head/gold.yaml",
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/BurntSushi/jiff",
+      "sources": [
+        "benchmarks/head-to-head/gold.independent.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/BurntSushi/ripgrep",
+      "sources": [
+        "benchmarks/head-to-head/gold.yaml",
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/caddyserver/caddy",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/calcom/cal.diy",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/casey/just",
+      "sources": [
+        "benchmarks/head-to-head/gold.independent.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/chaitin/PandaWiki",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/charmbracelet/gum",
+      "sources": [
+        "benchmarks/head-to-head/gold.independent.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/clap-rs/clap",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/clementchadebec/benchmark_VAE",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/containerd/containerd",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/coqui-ai/TTS",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/corna/me_cleaner",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/denoland/deno",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/dhg/Skeleton",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/django/django",
+      "sources": [
+        "benchmarks/head-to-head/gold.independent.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/dotnet/aspnetcore",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/dotnet/roslyn",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/dotnet/runtime",
+      "sources": [
+        "benchmarks/head-to-head/gold.september.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/encode/httpx",
+      "sources": [
+        "benchmarks/head-to-head/gold.independent.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/ethereum/go-ethereum",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/expressjs/express",
+      "sources": [
+        "benchmarks/head-to-head/gold.independent.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/eza-community/eza",
+      "sources": [
+        "benchmarks/head-to-head/gold.september.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/facebook/zstd",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/fastapi/fastapi",
+      "sources": [
+        "benchmarks/head-to-head/gold.independent.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/fastapi/typer",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/fixture/absent-command",
+      "sources": [
+        "benchmarks/head-to-head/results/task-controls-2026-10-05/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/fixture/accepted-non-running-command",
+      "sources": [
+        "benchmarks/head-to-head/results/task-controls-2026-10-05/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/fixture/accepted-prerequisite-loss",
+      "sources": [
+        "benchmarks/head-to-head/results/task-controls-2026-10-05/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/fixture/compile-only-fallback",
+      "sources": [
+        "benchmarks/head-to-head/results/task-controls-2026-10-05/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/fixture/component-scope",
+      "sources": [
+        "benchmarks/head-to-head/results/task-controls-2026-10-05/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/fixture/prerequisite-test",
+      "sources": [
+        "benchmarks/head-to-head/results/task-controls-2026-10-05/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/fixture/required-argument",
+      "sources": [
+        "benchmarks/head-to-head/results/task-controls-2026-10-05/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/fixture/root-build",
+      "sources": [
+        "benchmarks/head-to-head/results/task-controls-2026-10-05/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/fixture/root-unit-test",
+      "sources": [
+        "benchmarks/head-to-head/results/task-controls-2026-10-05/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/fixture/unindexed-fallback",
+      "sources": [
+        "benchmarks/head-to-head/results/task-controls-2026-10-05/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/francoismichel/ssh3",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/FuelLabs/fuel-core",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/git-bug/git-bug",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json",
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/gohugoio/hugo",
+      "sources": [
+        "benchmarks/head-to-head/gold.september.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/GokuMohandas/Made-With-ML",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json",
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/google/googletest",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/grafana/loki",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/hashicorp/terraform",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/hyperium/hyper",
+      "sources": [
+        "benchmarks/head-to-head/gold.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/influxdata/influxdb",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/InsertKoinIO/koin",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/juanfont/headscale",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/livekit/livekit",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/mandiant/speakeasy",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/mautic/mautic",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/maxwellsantoro/dotrepo",
+      "sources": [
+        "AGENTS.md: own repository excluded"
+      ]
+    },
+    {
+      "repository": "github.com/maxwellsantoro/pagedigest",
+      "sources": [
+        "benchmarks/head-to-head/results/own-projects-2026-10-04/workload.json",
+        "benchmarks/head-to-head/results/own-projects-contextual-2026-10-05/workload.json",
+        "benchmarks/head-to-head/results/own-projects-readiness-2026-10-05/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/maxwellsantoro/RamenOS",
+      "sources": [
+        "benchmarks/head-to-head/results/own-projects-2026-10-04/workload.json",
+        "benchmarks/head-to-head/results/own-projects-contextual-2026-10-05/workload.json",
+        "benchmarks/head-to-head/results/own-projects-readiness-2026-10-05/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/maxwellsantoro/ries-rs",
+      "sources": [
+        "benchmarks/head-to-head/results/own-projects-2026-10-04/workload.json",
+        "benchmarks/head-to-head/results/own-projects-contextual-2026-10-05/workload.json",
+        "benchmarks/head-to-head/results/own-projects-readiness-2026-10-05/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/maxwellsantoro/sha256-benchmark-atlas",
+      "sources": [
+        "benchmarks/head-to-head/results/own-projects-2026-10-04/workload.json",
+        "benchmarks/head-to-head/results/own-projects-atlas-scoped-sdk-2026-10-05/workload.json",
+        "benchmarks/head-to-head/results/own-projects-atlas-sdk-2026-10-05/workload.json",
+        "benchmarks/head-to-head/results/own-projects-contextual-2026-10-05/workload.json",
+        "benchmarks/head-to-head/results/own-projects-readiness-2026-10-05/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/meilisearch/meilisearch",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/metabrainz/picard",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/microsoft/computervision-recipes",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/mil-tokyo/webdnn",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/mudler/LocalAI",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/mui/material-ui",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/nginx/nginx",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/nlohmann/json",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/nushell/nushell",
+      "sources": [
+        "benchmarks/head-to-head/gold.september.yaml",
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/nv-tlabs/vipe",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/open-mmlab/Amphion",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/openai/whisper",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/OpenMined/PySyft",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/openobserve/openobserve",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/pallets/flask",
+      "sources": [
+        "benchmarks/head-to-head/gold.independent.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/pnpm/pnpm",
+      "sources": [
+        "benchmarks/head-to-head/gold.september.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/pocketbase/pocketbase",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/prometheus/prometheus",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/psf/requests",
+      "sources": [
+        "benchmarks/head-to-head/gold.independent.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/pypa/hatch",
+      "sources": [
+        "benchmarks/head-to-head/gold.september.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/pytest-dev/pytest",
+      "sources": [
+        "benchmarks/head-to-head/gold.independent.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/pytorch/pytorch",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/QianMo/Game-Programmer-Study-Notes",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/rclone/rclone",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/redis/redis",
+      "sources": [
+        "benchmarks/head-to-head/gold.september.yaml",
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/redis/redis-py",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/repos/Alfred1984",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/repos/ant-design",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/repos/apache",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/repos/BurntSushi",
+      "sources": [
+        "benchmarks/head-to-head/gold.independent.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/repos/casey",
+      "sources": [
+        "benchmarks/head-to-head/gold.independent.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/repos/chaitin",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/repos/charmbracelet",
+      "sources": [
+        "benchmarks/head-to-head/gold.independent.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/repos/corna",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/repos/dhg",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/repos/django",
+      "sources": [
+        "benchmarks/head-to-head/gold.independent.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/repos/dotnet",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/repos/encode",
+      "sources": [
+        "benchmarks/head-to-head/gold.independent.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/repos/expressjs",
+      "sources": [
+        "benchmarks/head-to-head/gold.independent.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/repos/fastapi",
+      "sources": [
+        "benchmarks/head-to-head/gold.independent.yaml",
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/repos/francoismichel",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/repos/git-bug",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/repos/GokuMohandas",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/repos/InsertKoinIO",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/repos/livekit",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/repos/mandiant",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/repos/mautic",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/repos/microsoft",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/repos/mil-tokyo",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/repos/mui",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/repos/nv-tlabs",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/repos/open-mmlab",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/repos/openai",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/repos/pallets",
+      "sources": [
+        "benchmarks/head-to-head/gold.independent.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/repos/psf",
+      "sources": [
+        "benchmarks/head-to-head/gold.independent.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/repos/pytest-dev",
+      "sources": [
+        "benchmarks/head-to-head/gold.independent.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/repos/QianMo",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/repos/redis",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/repos/rubensousa",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/repos/rust-lang",
+      "sources": [
+        "benchmarks/head-to-head/gold.independent.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/repos/seanmonstar",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/repos/serde-rs",
+      "sources": [
+        "benchmarks/head-to-head/gold.independent.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/repos/SolaceLabs",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/repos/streamyfin",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/repos/TauricResearch",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/repos/Textualize",
+      "sources": [
+        "benchmarks/head-to-head/gold.independent.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/repos/typst",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/repos/vercel-labs",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/repos/WerWolv",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/rubensousa/GravitySnapHelper",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/rust-lang/cargo",
+      "sources": [
+        "benchmarks/head-to-head/gold.independent.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/rust-lang/mdBook",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/rustdesk/rustdesk-server",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/screenpipe/screenpipe",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/seanmonstar/reqwest",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/serde-rs/serde",
+      "sources": [
+        "benchmarks/head-to-head/gold.independent.yaml",
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/sharkdp/bat",
+      "sources": [
+        "benchmarks/head-to-head/gold.yaml",
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/sharkdp/fd",
+      "sources": [
+        "benchmarks/head-to-head/gold.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/socketio/socket.io",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/SolaceLabs/solace-agent-mesh",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/spf13/cobra",
+      "sources": [
+        "benchmarks/head-to-head/gold.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/spring-projects/spring-boot",
+      "sources": [
+        "benchmarks/head-to-head/gold.september.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/starship/starship",
+      "sources": [
+        "benchmarks/head-to-head/gold.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/streamyfin/streamyfin",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/sxyazi/yazi",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/TauricResearch/TradingAgents",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/tensorflow/tensorflow",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/Textualize/rich",
+      "sources": [
+        "benchmarks/head-to-head/gold.independent.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/tikv/tikv",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/tilt-dev/tilt",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/tokio-rs/tokio",
+      "sources": [
+        "benchmarks/head-to-head/gold.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/typst/typst",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/uutils/coreutils",
+      "sources": [
+        "index/telemetry/public-surface-review-20261028/doc-command-reextraction.json"
+      ]
+    },
+    {
+      "repository": "github.com/vercel-labs/portless",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    },
+    {
+      "repository": "github.com/vitejs/vite",
+      "sources": [
+        "benchmarks/head-to-head/gold.yaml"
+      ]
+    },
+    {
+      "repository": "github.com/WerWolv/ImHex",
+      "sources": [
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "benchmarks/head-to-head/upstream-2026-10-27/workload.json"
+      ]
+    }
+  ],
+  "queues": [
+    {
+      "ecosystem": "Rust",
+      "excludedHistorical": [
+        "github.com/denoland/deno",
+        "github.com/astral-sh/uv",
+        "github.com/BurntSushi/ripgrep",
+        "github.com/alacritty/alacritty",
+        "github.com/sharkdp/bat",
+        "github.com/starship/starship",
+        "github.com/meilisearch/meilisearch",
+        "github.com/typst/typst",
+        "github.com/FuelLabs/fuel-core",
+        "github.com/astral-sh/ruff",
+        "github.com/sharkdp/fd",
+        "github.com/sxyazi/yazi",
+        "github.com/nushell/nushell",
+        "github.com/pnpm/pnpm",
+        "github.com/casey/just",
+        "github.com/tokio-rs/tokio",
+        "github.com/influxdata/influxdb"
+      ],
+      "e1Qualification": [
+        "github.com/zellij-org/zellij",
+        "github.com/warpdotdev/warp",
+        "github.com/storytold/photocraft",
+        "github.com/farion1231/cc-switch",
+        "github.com/googleworkspace/cli",
+        "github.com/FuelLabs/fuels-rs",
+        "github.com/BloopAI/vibe-kanban",
+        "github.com/DioxusLabs/dioxus",
+        "github.com/pbakaus/impeccable",
+        "github.com/firecracker-microvm/firecracker",
+        "github.com/servo/servo",
+        "github.com/aaif-goose/goose",
+        "github.com/surrealdb/surrealdb",
+        "github.com/ankitects/anki",
+        "github.com/lencx/ChatGPT",
+        "github.com/BigPizzaV3/CodexPlusPlus",
+        "github.com/sharkdp/hyperfine",
+        "github.com/tree-sitter/tree-sitter",
+        "github.com/rustdesk/rustdesk",
+        "github.com/juspay/hyperswitch",
+        "github.com/cloudflare/pingora",
+        "github.com/vercel-labs/agent-browser",
+        "github.com/zeroclaw-labs/zeroclaw",
+        "github.com/linera-io/linera-protocol",
+        "github.com/trycua/cua",
+        "github.com/h4ckf0r0day/obscura",
+        "github.com/openai/codex",
+        "github.com/unionlabs/union",
+        "github.com/yewstack/yew",
+        "github.com/TabbyML/tabby",
+        "github.com/codewhale-hq/Codewhale",
+        "github.com/lapce/lapce",
+        "github.com/tokio-rs/axum",
+        "github.com/FuelLabs/sway",
+        "github.com/tw93/Pake",
+        "github.com/GraphiteEditor/Graphite",
+        "github.com/pola-rs/polars",
+        "github.com/rust-lang/rust",
+        "github.com/jdx/mise",
+        "github.com/Zackriya-Solutions/meetily",
+        "github.com/sunface/rust-course",
+        "github.com/chroma-core/chroma"
+      ],
+      "f05": [
+        "github.com/tauri-apps/tauri",
+        "github.com/openinterpreter/openinterpreter",
+        "github.com/GyulyVGC/sniffnet",
+        "github.com/iced-rs/iced",
+        "github.com/tinyhumansai/openhuman",
+        "github.com/ajeetdsouza/zoxide",
+        "github.com/ruvnet/RuView",
+        "github.com/rustfs/rustfs",
+        "github.com/google/comprehensive-rust",
+        "github.com/zed-industries/zed",
+        "github.com/niri-wm/niri",
+        "github.com/xai-org/x-algorithm",
+        "github.com/lbjlaq/Antigravity-Manager",
+        "github.com/xai-org/grok-build",
+        "github.com/atuinsh/atuin",
+        "github.com/fish-shell/fish-shell",
+        "github.com/clash-verge-rev/clash-verge-rev",
+        "github.com/emilk/egui",
+        "github.com/janhq/jan",
+        "github.com/swc-project/swc",
+        "github.com/jj-vcs/jj",
+        "github.com/rust-lang/rustlings",
+        "github.com/spacedriveapp/spacedrive",
+        "github.com/ultraworkers/claw-code",
+        "github.com/dandavison/delta",
+        "github.com/oven-sh/bun",
+        "github.com/t8y2/dbx",
+        "github.com/vercel/turborepo",
+        "github.com/nautechsystems/nautilus_trader",
+        "github.com/AlexsJones/llmfit",
+        "github.com/bevyengine/bevy",
+        "github.com/qdrant/qdrant",
+        "github.com/dani-garcia/vaultwarden",
+        "github.com/rtk-ai/rtk",
+        "github.com/wezterm/wezterm",
+        "github.com/helix-editor/helix",
+        "github.com/storytold/artcraft",
+        "github.com/rust-unofficial/awesome-rust",
+        "github.com/cjpais/Handy",
+        "github.com/block/buzz",
+        "github.com/herdrdev/herdr"
+      ]
+    },
+    {
+      "ecosystem": "Python",
+      "excludedHistorical": [
+        "github.com/TauricResearch/TradingAgents",
+        "github.com/openai/whisper",
+        "github.com/pytorch/pytorch",
+        "github.com/fastapi/fastapi",
+        "github.com/django/django",
+        "github.com/apache/superset",
+        "github.com/pallets/flask"
+      ],
+      "e1Qualification": [
+        "github.com/ComposioHQ/awesome-claude-skills",
+        "github.com/ultralytics/ultralytics",
+        "github.com/docling-project/docling",
+        "github.com/keras-team/keras",
+        "github.com/hiyouga/LlamaFactory",
+        "github.com/Asabeneh/30-Days-Of-Python",
+        "github.com/tensorflow/models",
+        "github.com/Z4nzu/hackingtool",
+        "github.com/usestrix/strix",
+        "github.com/hacksider/Deep-Live-Cam",
+        "github.com/calesthio/OpenMontage",
+        "github.com/donnemartin/system-design-primer",
+        "github.com/mvanhorn/last30days-skill",
+        "github.com/d2l-ai/d2l-zh",
+        "github.com/rohitg00/ai-engineering-from-scratch",
+        "github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+        "github.com/vllm-project/vllm",
+        "github.com/python/cpython",
+        "github.com/mem0ai/mem0",
+        "github.com/nvbn/thefuck",
+        "github.com/langgenius/dify",
+        "github.com/PaddlePaddle/PaddleOCR",
+        "github.com/deepseek-ai/DeepSeek-V3",
+        "github.com/unclecode/crawl4ai",
+        "github.com/open-webui/open-webui",
+        "github.com/Panniantong/Agent-Reach",
+        "github.com/Graphify-Labs/graphify",
+        "github.com/josephmisiti/awesome-machine-learning",
+        "github.com/ZhuLinsen/daily_stock_analysis",
+        "github.com/shareAI-lab/learn-claude-code",
+        "github.com/karpathy/nanoGPT",
+        "github.com/asgeirtj/system_prompts_leaks",
+        "github.com/karpathy/autoresearch",
+        "github.com/virattt/ai-hedge-fund",
+        "github.com/anthropics/skills",
+        "github.com/521xueweihan/HelloGitHub",
+        "github.com/Alishahryar1/free-claude-code",
+        "github.com/vinta/awesome-python",
+        "github.com/microsoft/markitdown",
+        "github.com/odysseus-dev/odysseus",
+        "github.com/crewAIInc/crewAI",
+        "github.com/Shubhamsaboo/awesome-llm-apps",
+        "github.com/3b1b/manim",
+        "github.com/AUTOMATIC1111/stable-diffusion-webui",
+        "github.com/blader/humanizer",
+        "github.com/yt-dlp/yt-dlp",
+        "github.com/pathwaycom/pathway"
+      ],
+      "f05": [
+        "github.com/666ghj/MiroFish",
+        "github.com/home-assistant/core",
+        "github.com/ytdl-org/youtube-dl",
+        "github.com/jingyaogong/minimind",
+        "github.com/opendatalab/MinerU",
+        "github.com/NanmiCoder/MediaCrawler",
+        "github.com/harry0703/MoneyPrinterTurbo",
+        "github.com/binary-husky/gpt_academic",
+        "github.com/Significant-Gravitas/AutoGPT",
+        "github.com/public-apis/public-apis",
+        "github.com/unslothai/unsloth",
+        "github.com/BerriAI/litellm",
+        "github.com/bytedance/deer-flow",
+        "github.com/CyC2018/CS-Notes",
+        "github.com/Comfy-Org/ComfyUI",
+        "github.com/FoundationAgents/MetaGPT",
+        "github.com/sansan0/TrendRadar",
+        "github.com/openbq-org/OpenBB",
+        "github.com/fighting41love/funNLP",
+        "github.com/sherlock-project/sherlock",
+        "github.com/swisskyrepo/PayloadsAllTheThings",
+        "github.com/huggingface/transformers",
+        "github.com/scikit-learn/scikit-learn",
+        "github.com/ansible/ansible",
+        "github.com/browser-use/browser-use",
+        "github.com/NousResearch/hermes-agent",
+        "github.com/D4Vinci/Scrapling",
+        "github.com/labmlai/annotated_deep_learning_paper_implementations",
+        "github.com/microsoft/autogen",
+        "github.com/xtekky/gpt4free",
+        "github.com/hugohe3/ppt-master",
+        "github.com/practical-tutorials/project-based-learning",
+        "github.com/abi/screenshot-to-code",
+        "github.com/datawhalechina/hello-agents",
+        "github.com/debpalash/VoiceStudio",
+        "github.com/commaai/openpilot",
+        "github.com/TheAlgorithms/Python",
+        "github.com/ai-job-search-dev/ai-job-search",
+        "github.com/github/spec-kit",
+        "github.com/scrapy/scrapy",
+        "github.com/langchain-ai/langchain",
+        "github.com/langflow-ai/langflow",
+        "github.com/RVC-Boss/GPT-SoVITS",
+        "github.com/EbookFoundation/free-programming-books",
+        "github.com/headroomlabs-ai/headroom",
+        "github.com/bregman-arie/devops-exercises"
+      ]
+    },
+    {
+      "ecosystem": "TypeScript",
+      "excludedHistorical": [
+        "github.com/ant-design/ant-design",
+        "github.com/vitejs/vite",
+        "github.com/socketio/socket.io",
+        "github.com/calcom/cal.diy"
+      ],
+      "e1Qualification": [
+        "github.com/yangshun/tech-interview-handbook",
+        "github.com/pixijs/pixijs",
+        "github.com/agalwood/Motrix",
+        "github.com/Eugeny/tabby",
+        "github.com/RocketChat/Rocket.Chat",
+        "github.com/morluto/rea",
+        "github.com/angular/angular",
+        "github.com/nilbuild/developer-roadmap",
+        "github.com/twentyhq/twenty",
+        "github.com/shadcn-ui/ui",
+        "github.com/TryGhost/Ghost",
+        "github.com/toeverything/AFFiNE",
+        "github.com/microsoft/playwright",
+        "github.com/mermaid-js/mermaid",
+        "github.com/expo/expo",
+        "github.com/ChatGPTNextWeb/NextChat",
+        "github.com/paperclipai/paperclip",
+        "github.com/lyswhut/lx-music-desktop",
+        "github.com/DIYgod/RSSHub",
+        "github.com/stablyai/orca",
+        "github.com/immich-app/immich",
+        "github.com/openclaw/openclaw",
+        "github.com/abhigyanpatwari/GitNexus",
+        "github.com/strapi/strapi",
+        "github.com/vuejs/vue",
+        "github.com/LibreChat-AI/LibreChat",
+        "github.com/firecrawl/firecrawl",
+        "github.com/nocodb/nocodb",
+        "github.com/ruvnet/ruflo",
+        "github.com/apache/echarts",
+        "github.com/freeCodeCamp/freeCodeCamp",
+        "github.com/meta/docusaurus",
+        "github.com/nestjs/nest",
+        "github.com/cypress-io/cypress",
+        "github.com/coder/code-server",
+        "github.com/remotion-dev/remotion",
+        "github.com/tailwindlabs/tailwindcss",
+        "github.com/nuxt/nuxt",
+        "github.com/cline/cline",
+        "github.com/thedotmack/claude-mem",
+        "github.com/DefinitelyTyped/DefinitelyTyped",
+        "github.com/moeru-ai/airi",
+        "github.com/ChromeDevTools/chrome-devtools-mcp",
+        "github.com/realworld-apps/realworld",
+        "github.com/KeygraphHQ/shannon",
+        "github.com/n8n-io/n8n",
+        "github.com/puppeteer/puppeteer",
+        "github.com/reduxjs/redux"
+      ],
+      "f05": [
+        "github.com/deepseek-ai/deepseek-harness",
+        "github.com/OpenHands/OpenHands",
+        "github.com/vuejs/core",
+        "github.com/TanStack/query",
+        "github.com/grafana/grafana",
+        "github.com/tldraw/tldraw",
+        "github.com/koala73/worldmonitor",
+        "github.com/CherryHQ/cherry-studio",
+        "github.com/slab/quill",
+        "github.com/heygen-com/hyperframes",
+        "github.com/cheaper-inference/OmniRoute",
+        "github.com/chenglou/pretext",
+        "github.com/anomalyco/opencode",
+        "github.com/earendil-works/pi",
+        "github.com/typescript-cheatsheets/react",
+        "github.com/ionic-team/ionic-framework",
+        "github.com/garrytan/gstack",
+        "github.com/lobehub/lobehub",
+        "github.com/storybookjs/storybook",
+        "github.com/remix-run/react-router",
+        "github.com/hoppscotch/hoppscotch",
+        "github.com/fastapi/full-stack-fastapi-template",
+        "github.com/code-yeongyu/oh-my-openagent",
+        "github.com/laurent22/joplin",
+        "github.com/withastro/astro",
+        "github.com/Stirling-Tools/Stirling-PDF",
+        "github.com/prisma/orm",
+        "github.com/upscayl/upscayl",
+        "github.com/makeplane/plane",
+        "github.com/Fission-AI/OpenSpec",
+        "github.com/modelcontextprotocol/servers",
+        "github.com/Egonex-AI/Understand-Anything",
+        "github.com/iptv-org/iptv",
+        "github.com/OpenCut-app/OpenCut",
+        "github.com/type-challenges/type-challenges",
+        "github.com/pmndrs/zustand",
+        "github.com/justjavac/wechat-miniapp-radar",
+        "github.com/appwrite/appwrite",
+        "github.com/supabase/supabase",
+        "github.com/anthropics/claude-code",
+        "github.com/excalidraw/excalidraw",
+        "github.com/siyuan-note/siyuan",
+        "github.com/upstash/context7",
+        "github.com/nexu-io/open-design",
+        "github.com/slidevjs/slidev",
+        "github.com/microsoft/vscode",
+        "github.com/google-gemini/gemini-cli",
+        "github.com/marktext/marktext"
+      ]
+    },
+    {
+      "ecosystem": "Go",
+      "excludedHistorical": [
+        "github.com/gohugoio/hugo",
+        "github.com/caddyserver/caddy",
+        "github.com/prometheus/prometheus",
+        "github.com/rclone/rclone",
+        "github.com/ethereum/go-ethereum",
+        "github.com/hashicorp/terraform",
+        "github.com/mudler/LocalAI",
+        "github.com/juanfont/headscale",
+        "github.com/spf13/cobra"
+      ],
+      "e1Qualification": [
+        "github.com/infiniflow/ragflow",
+        "github.com/golang/go",
+        "github.com/docker/compose",
+        "github.com/micro-editor/micro",
+        "github.com/iawia002/lux",
+        "github.com/astaxie/build-web-application-with-golang",
+        "github.com/milvus-io/milvus",
+        "github.com/jesseduffield/lazygit",
+        "github.com/MHSanaei/3x-ui",
+        "github.com/podman-container-tools/podman",
+        "github.com/router-for-me/CLIProxyAPI",
+        "github.com/istio/istio",
+        "github.com/gofiber/fiber",
+        "github.com/cli/cli",
+        "github.com/moby/moby",
+        "github.com/junegunn/fzf",
+        "github.com/netbirdio/netbird",
+        "github.com/labstack/echo",
+        "github.com/ollama/ollama",
+        "github.com/grafana/k6",
+        "github.com/IceWhaleTech/CasaOS",
+        "github.com/v2fly/v2ray-core",
+        "github.com/chubin/wttr.in",
+        "github.com/aquasecurity/trivy",
+        "github.com/dokku/dokku",
+        "github.com/multica-ai/multica",
+        "github.com/vxcontrol/pentagi",
+        "github.com/kubernetes/minikube",
+        "github.com/Tencent/WeKnora",
+        "github.com/unknwon/the-way-to-go_ZH_CN",
+        "github.com/seaweedfs/seaweedfs",
+        "github.com/harness/harness",
+        "github.com/glanceapp/glance",
+        "github.com/photoprism/photoprism",
+        "github.com/gin-gonic/gin",
+        "github.com/cockroachdb/cockroach",
+        "github.com/XTLS/Xray-core",
+        "github.com/spf13/viper",
+        "github.com/projectdiscovery/nuclei",
+        "github.com/traefik/traefik",
+        "github.com/ehang-io/nps",
+        "github.com/The-Vibe-Company/quivr",
+        "github.com/danielmiessler/Fabric",
+        "github.com/k3s-io/k3s",
+        "github.com/pingcap/tidb",
+        "github.com/evanw/esbuild"
+      ],
+      "f05": [
+        "github.com/microsoft/TypeScript",
+        "github.com/beego/beego",
+        "github.com/hashicorp/vault",
+        "github.com/goharbor/harbor",
+        "github.com/wagoodman/dive",
+        "github.com/JuliusBrussee/caveman",
+        "github.com/tailscale/tailscale",
+        "github.com/1Panel-dev/1Panel",
+        "github.com/syncthing/syncthing",
+        "github.com/fatedier/frp",
+        "github.com/jesseduffield/lazydocker",
+        "github.com/abiosoft/colima",
+        "github.com/kubernetes/kubernetes",
+        "github.com/schollz/croc",
+        "github.com/helm/helm",
+        "github.com/avelino/awesome-go",
+        "github.com/usememos/memos",
+        "github.com/alibaba/open-code-review",
+        "github.com/FiloSottile/mkcert",
+        "github.com/sipeed/picoclaw",
+        "github.com/esengine/DeepSeek-Reasonix",
+        "github.com/charmbracelet/bubbletea",
+        "github.com/binwiederhier/ntfy",
+        "github.com/v2ray/v2ray-core",
+        "github.com/derailed/k9s",
+        "github.com/halfrost/LeetCode-Go",
+        "github.com/QuantumNous/new-api",
+        "github.com/Wei-Shaw/sub2api",
+        "github.com/XIU2/CloudflareSpeedTest",
+        "github.com/etcd-io/etcd",
+        "github.com/wailsapp/wails",
+        "github.com/netdata/netdata",
+        "github.com/go-gorm/gorm",
+        "github.com/nektos/act",
+        "github.com/gitleaks/gitleaks",
+        "github.com/hashicorp/consul",
+        "github.com/go-gitea/gitea",
+        "github.com/opentofu/opentofu",
+        "github.com/gogs/gogs",
+        "github.com/AlistGo/alist",
+        "github.com/SagerNet/sing-box",
+        "github.com/authelia/authelia",
+        "github.com/zeromicro/go-zero",
+        "github.com/github/github-mcp-server",
+        "github.com/restic/restic"
+      ]
+    }
+  ],
+  "limitations": [
+    "Source-frame search rank is not a representative population sample.",
+    "Historical identity exclusion is derived from retained gold/workloads and the inspected documentation queue; it does not prove absence of model pretraining exposure.",
+    "Fork/mirror relations still need upstream source screening before enrollment.",
+    "Reservation is not task eligibility; no profile, current index record or acceptance result was consulted."
+  ]
+}

@@ -1,0 +1,463 @@
+{
+  "schema": "dotrepo-e1-source-gold/v1",
+  "state": "frozen-source-gold-rust-slice",
+  "frozenAt": "2026-10-29T05:00:38.413571+00:00",
+  "plannedCohortTasks": 24,
+  "sliceTasks": 6,
+  "sliceRepositories": 3,
+  "assessmentBoundary": "Gold curated before evaluated index, profiles, crawler evidence or importer output; separate source assessment assignment, not external participation or absence of model pretraining exposure.",
+  "tasks": [
+    {
+      "id": "e1-rust-01-repository-tests",
+      "repository": "github.com/zellij-org/zellij",
+      "revision": "1f3df933978e00c246553070310175c392fcfe4f",
+      "ecosystem": "rust",
+      "scope": "repository",
+      "component": null,
+      "taskIntent": "Establish the maintainer-documented repository-default automated test instruction with complete applicability context; preserve separately documented optional/e2e/ignored-suite limitations.",
+      "goldState": "supported",
+      "alternatives": [
+        {
+          "command": "cargo xtask test",
+          "working_directory": ".",
+          "scope": "repository",
+          "prerequisites": [
+            "Use the pinned Rust 1.95.0 toolchain and its rustfmt/clippy components; install the wasm32-wasip1 and x86_64-unknown-linux-musl targets declared by rust-toolchain.toml.",
+            "Install protoc for protobuf generation.",
+            "Install pkg-config and OpenSSL for the test task.",
+            "Preserve the repository target-dir configuration and do not override CARGO_TARGET_DIR for the debug/plugin build."
+          ],
+          "source": "CONTRIBUTING.md"
+        }
+      ],
+      "requiredAbstentionReasons": [],
+      "unresolvedEvidence": [],
+      "limitations": [
+        "Source applicability assessment only; no upstream code executed and no environment readiness witnessed.",
+        "Default xtask tests build plugins and run workspace test commands; the separately documented Docker/SSH end-to-end task is not included merely by calling this the default automated test instruction.",
+        "No claim that every platform library requirement of all transitive dependencies has been independently audited; prerequisite descriptions retain the explicit maintainer setup contract."
+      ],
+      "evidence": [
+        {
+          "path": "sources/github.com/zellij-org/zellij/README.md",
+          "startLine": 94,
+          "endLine": 101,
+          "excerpt": "\n## About issues in this repository\nIssues in this repository, whether open or closed, do not necessarily indicate a problem or a bug in the software. They only indicate that the reporter wanted to communicate their experiences or thoughts to the maintainers. The Zellij maintainers do their best to go over and reply to all issue reports, but unfortunately cannot promise these will always be dealt with or even read. Your understanding is appreciated.\n\n## Roadmap\nPresented here is the project roadmap, divided into three main sections.\n\nThese are issues that are either being actively worked on or are planned for the near future.",
+          "sha256": "b069efb98ef8cec100cc5b32debc1dc4a912f9d57ef11279a261a8a3c9548583"
+        },
+        {
+          "path": "sources/github.com/zellij-org/zellij/CONTRIBUTING.md",
+          "startLine": 23,
+          "endLine": 59,
+          "excerpt": "## Building\n\nTo build Zellij, we're using cargo xtask. This is a standalone package shipped\ninside the repository, so you don't have to install additional dependencies.\n\nTo build zellij, you'll need [`protoc`](https://github.com/protocolbuffers/protobuf#protobuf-compiler-installation) installed. This is used to compile the .proto files into Rust assets. These protocol buffers are used for communication between Zellij and its plugins across the wasm boundary.\n\nHere are some of the commands currently supported by the build system:\n\n```sh\n# Format code, build, then run tests\ncargo xtask\n# You can also perform these actions individually\ncargo xtask format\ncargo xtask build\ncargo xtask test\n# Run Zellij (optionally with additional arguments)\ncargo xtask run\ncargo xtask run -- -l strider\n# Install Zellij to some directory\ncargo xtask install /path/of/zellij/binary\n# Publish the zellij and zellij-tile crates\ncargo xtask publish\n```\n\nYou can see a list of all commands (with supported arguments) with `cargo xtask\n--help`. For convenience, `xtask` may be shortened to `x`: `cargo x build` etc.\n\nTo run `test`, you will need the package `pkg-config` and a version of `openssl`.\n\n### The cargo target directory\n\nDebug builds embed the plugins from `<repository>/target/wasm32-wasip1/debug`, which is\nresolved at compile time. `.cargo/config.toml` therefore pins `build.target-dir` to\n`target`, so that a `target-dir` configured globally in `~/.cargo/config.toml` does not\nmove the plugins out of reach. Removing that pin breaks debug builds for everyone who\nconfigures a shared target directory.",
+          "sha256": "2c4575e7a3575609fdde406b8c87f3df53802460dbfb03b4253f4330ab37f63a"
+        },
+        {
+          "path": "sources/github.com/zellij-org/zellij/CONTRIBUTING.md",
+          "startLine": 68,
+          "endLine": 70,
+          "excerpt": "Setting the `CARGO_TARGET_DIR` environment variable takes precedence over\n`.cargo/config.toml` and will break debug builds for the same reason. Release builds are\nunaffected, since they embed the plugins from `zellij-utils/assets/plugins`.",
+          "sha256": "2c4575e7a3575609fdde406b8c87f3df53802460dbfb03b4253f4330ab37f63a"
+        },
+        {
+          "path": "sources/github.com/zellij-org/zellij/rust-toolchain.toml",
+          "startLine": 1,
+          "endLine": 7,
+          "excerpt": "# This file is updated by `update-toolchain.sh`\n[toolchain]\n# NOTE: When updating this, modify `rust-version` in `Cargo.toml` accordingly\nchannel = \"1.95.0\"\ncomponents = [\"rustfmt\", \"clippy\"]\n# NOTE: Change this with care, this is also used by the CI pipeline\ntargets = [\"wasm32-wasip1\", \"x86_64-unknown-linux-musl\"]",
+          "sha256": "733cf0884a5f62e74d4362b290704b572061e71e9f7989096aef165f99de0fdf"
+        },
+        {
+          "path": "sources/github.com/zellij-org/zellij/.cargo/config.toml",
+          "startLine": 3,
+          "endLine": 7,
+          "excerpt": "[alias]\nxtask = \"run --package xtask --\"\nx = \"xtask\"\nq = \"x run --quick-run\"\nmake = \"xtask deprecated\"",
+          "sha256": "d42813632ce542b468c718473de1a4a6c8f6d302c534717a2f19b7aef10dbc3e"
+        },
+        {
+          "path": "sources/github.com/zellij-org/zellij/xtask/src/test.rs",
+          "startLine": 6,
+          "endLine": 50,
+          "excerpt": "pub fn test(sh: &Shell, flags: flags::Test) -> anyhow::Result<()> {\n    let err_context = \"failed to run task 'test'\";\n\n    let _pdo = sh.push_dir(crate::project_root());\n    let cargo = crate::cargo().context(err_context)?;\n    let host_triple = host_target_triple(sh).context(err_context)?;\n\n    build::build(\n        sh,\n        flags::Build {\n            release: false,\n            no_plugins: false,\n            plugins_only: true,\n            no_web: flags.no_web,\n            args: vec![],\n        },\n    )\n    .context(err_context)?;\n\n    // Test all plugins in a single invocation so Cargo unifies features and compiles\n    // shared crates (e.g. zellij-utils) only once, mirroring how plugins are built.\n    {\n        let plugin_names: Vec<&str> = crate::workspace_members()\n            .iter()\n            .filter(|m| m.crate_name.contains(\"plugins\"))\n            .map(|m| m.crate_name.rsplit_once('/').unwrap().1)\n            .collect();\n\n        if !plugin_names.is_empty() {\n            println!();\n            let msg = \">> Testing plugins\";\n            crate::status(msg);\n            println!(\"{}\", msg);\n\n            let mut cmd = cmd!(sh, \"{cargo} test --target {host_triple}\");\n            for name in &plugin_names {\n                cmd = cmd.args([\"-p\", name]);\n            }\n            cmd.arg(\"--\")\n                .args(&flags.args)\n                .run()\n                .context(\"Failed to run plugin tests\")?;\n        }\n    }\n",
+          "sha256": "561daa9a37efaf44ba285aa88669fb9228de402696bb25e310340238b021e0cb"
+        }
+      ]
+    },
+    {
+      "id": "e1-rust-01-component-tests",
+      "repository": "github.com/zellij-org/zellij",
+      "revision": "1f3df933978e00c246553070310175c392fcfe4f",
+      "ecosystem": "rust",
+      "scope": "component",
+      "component": "default-plugins/about",
+      "taskIntent": "Establish a source-supported test instruction for the owned component default-plugins/about, preserving component coverage and all documented setup.",
+      "goldState": "required-abstention",
+      "alternatives": [],
+      "requiredAbstentionReasons": [
+        "The component is real and has source unit-test intent, but retained guidance does not establish a complete standalone instruction for this single plugin. The test orchestrator builds plugins and tests all plugin packages together for feature unification, interpolating the host target and package list. Do not turn that aggregate command into an asserted exact one-component command without additional support."
+      ],
+      "unresolvedEvidence": [],
+      "limitations": [
+        "Source applicability assessment only; no upstream code executed and no environment readiness witnessed."
+      ],
+      "evidence": [
+        {
+          "path": "sources/github.com/zellij-org/zellij/Cargo.toml",
+          "startLine": 57,
+          "endLine": 82,
+          "excerpt": "    \"default-plugins/plugin-manager\",\n    \"default-plugins/about\",\n    \"default-plugins/share\",\n    \"default-plugins/multiple-select\",\n    \"default-plugins/layout-manager\",\n    \"default-plugins/prompt\",\n    \"default-plugins/context-menu\",\n    \"zellij-client\",\n    \"zellij-integration-tests\",\n    \"zellij-server\",\n    \"zellij-utils\",\n    \"zellij-tile\",\n    \"zellij-tile-utils\",\n    \"zellij-terminal\",\n    \"xtask\",\n    \".\",\n]\ndefault-members = [\".\"]\n\n[workspace.package]\nedition = \"2021\"\nlicense = \"MIT\"\nrepository = \"https://github.com/zellij-org/zellij\"\nversion = \"0.46.0\"\n# NOTE: When updating this, modify `channel` in `rust-toolchain.toml` accordingly\nrust-version = \"1.95\"",
+          "sha256": "c02efc9801eefadf579135c968cafe27d2d5e12b86ac5e020ec39fe2130829a2"
+        },
+        {
+          "path": "sources/github.com/zellij-org/zellij/default-plugins/about/Cargo.toml",
+          "startLine": 1,
+          "endLine": 10,
+          "excerpt": "[package]\nname = \"about\"\nversion = \"0.1.0\"\nauthors = [\"Aram Drevekenin <aram@poor.dev>\"]\nedition.workspace = true\nlicense.workspace = true\n\n[dependencies]\nzellij-tile = { path = \"../../zellij-tile\" }\nrand = { workspace = true }",
+          "sha256": "fb8e9751be70f93df895d6f37cf0f23c6ad55d696c1f82723789dddec467ff8f"
+        },
+        {
+          "path": "sources/github.com/zellij-org/zellij/default-plugins/about/src/onboarding.rs",
+          "startLine": 490,
+          "endLine": 517,
+          "excerpt": "#[cfg(test)]\nmod window_welcome_tests {\n    use super::*;\n\n    #[test]\n    fn the_window_welcome_points_have_no_semicolons() {\n        for point in window_welcome_points(false) {\n            assert!(!point.contains(';'), \"{}\", point);\n        }\n    }\n\n    #[test]\n    fn every_emphasized_phrase_is_in_a_point() {\n        let points = window_welcome_points(false).join(\" \");\n        for (phrase, _) in WINDOW_WELCOME_EMPHASIS {\n            assert!(points.contains(phrase), \"{}\", phrase);\n        }\n    }\n\n    #[test]\n    fn a_wrapped_point_has_one_bullet_and_an_indented_continuation() {\n        let text = window_welcome_points(false)[0].clone();\n        let ranges = emphasis_ranges(&text);\n        assert_eq!(ranges.len(), 1);\n        let wrapped = wrap(&text, 30);\n        assert!(wrapped.len() > 1);\n        assert_eq!(bulleted(&text, 32).len(), wrapped.len());\n    }",
+          "sha256": "968b57113792fdd3bee06e9ffec88afe4714347a40a90c0474684b653ed93852"
+        },
+        {
+          "path": "sources/github.com/zellij-org/zellij/xtask/src/test.rs",
+          "startLine": 13,
+          "endLine": 50,
+          "excerpt": "    build::build(\n        sh,\n        flags::Build {\n            release: false,\n            no_plugins: false,\n            plugins_only: true,\n            no_web: flags.no_web,\n            args: vec![],\n        },\n    )\n    .context(err_context)?;\n\n    // Test all plugins in a single invocation so Cargo unifies features and compiles\n    // shared crates (e.g. zellij-utils) only once, mirroring how plugins are built.\n    {\n        let plugin_names: Vec<&str> = crate::workspace_members()\n            .iter()\n            .filter(|m| m.crate_name.contains(\"plugins\"))\n            .map(|m| m.crate_name.rsplit_once('/').unwrap().1)\n            .collect();\n\n        if !plugin_names.is_empty() {\n            println!();\n            let msg = \">> Testing plugins\";\n            crate::status(msg);\n            println!(\"{}\", msg);\n\n            let mut cmd = cmd!(sh, \"{cargo} test --target {host_triple}\");\n            for name in &plugin_names {\n                cmd = cmd.args([\"-p\", name]);\n            }\n            cmd.arg(\"--\")\n                .args(&flags.args)\n                .run()\n                .context(\"Failed to run plugin tests\")?;\n        }\n    }\n",
+          "sha256": "561daa9a37efaf44ba285aa88669fb9228de402696bb25e310340238b021e0cb"
+        }
+      ]
+    },
+    {
+      "id": "e1-rust-02-repository-tests",
+      "repository": "github.com/warpdotdev/warp",
+      "revision": "5a55a2aca77339ad75637bed650352369ee7fcb9",
+      "ecosystem": "rust",
+      "scope": "repository",
+      "component": null,
+      "taskIntent": "Establish the maintainer-documented repository-default automated test instruction with complete applicability context; preserve separately documented optional/e2e/ignored-suite limitations.",
+      "goldState": "unresolved",
+      "alternatives": [],
+      "requiredAbstentionReasons": [],
+      "unresolvedEvidence": [
+        "Maintainer command recipes exist, but a complete prerequisite tuple was not established from the retained setup chain. script/bootstrap dispatches to platform scripts; the macOS script explicitly calls itself work in progress and possibly incomplete, Linux calls additional uninspected dependency installers and requires gcloud authentication for SSH integration tests, and Windows has its own setup chain. Unknowns are retained rather than interpreting the local runtime pin or nextest recipe as a complete setup contract."
+      ],
+      "limitations": [
+        "Source applicability assessment only; no upstream code executed and no environment readiness witnessed.",
+        "No repository was excluded for setup complexity. Empty alternatives here mean unresolved source curation, not evidence that no valid instruction exists.",
+        "Repository guidance names both a default-member unit-test recipe and a workspace recipe; coverage and separate doctests must be reconciled when closing the unresolved tuple."
+      ],
+      "evidence": [
+        {
+          "path": "sources/github.com/warpdotdev/warp/CONTRIBUTING.md",
+          "startLine": 141,
+          "endLine": 174,
+          "excerpt": "You can use **any coding agent** to implement a contribution \u2014 for example, Warp's built-in agent, Claude Code, Codex, Gemini CLI, or others \u2014 or no agent at all. This repository ships agent-readable context (skills under [`.agents/skills/`](.agents/skills/), specs under [`specs/`](specs/), and [`AGENTS.md`](AGENTS.md)) that any harness supporting these formats can pick up.\n\nIf you'd rather have an **Oz cloud agent** implement a ready issue for you, mention **@oss-maintainers** on the issue to request it. Approved requests run **for free** on complimentary Oz credits \u2014 you don't need to set up your own Oz account or pay for compute.\n\nWhile you can use coding agents for implementation, we expect contributors to **collaborate with us personally**. This means that you should not be using agents like OpenClaw to engage in conversation with our team. Our maintainers will always talk to you as a human, so please talk to us as a human as well.\n\n## Code Review\n\nAll pull requests go through a two-stage review process:\n\n1. **Oz review** \u2014 When you open a PR, [Oz](https://warp.dev/oz) is automatically assigned and produces the first review. Oz checks for correctness, style, test coverage, and alignment with the linked issue and any associated specs.\n2. **Warp team review** \u2014 Only after Oz has **approved** the PR is it routed to a Warp team subject-matter expert for a final human review. PRs that have not yet been approved by Oz will not be assigned to a team member.\n\nYou do not need to manually request reviewers at any stage. After pushing changes that address Oz's feedback, comment `/warp-agent-review` on the PR to request a re-review \u2014 you can do this up to **three times** per PR. If something looks stuck or you need additional reviews, mention **@oss-maintainers** on the PR to escalate to the team.\n\n### Stale PRs with requested changes\n\nIf a review (from Oz or a maintainer) leaves your PR with **changes requested** and it then goes quiet, automation follows up and eventually closes it so the review queue stays current. This applies only to external-contributor PRs with an active requested-changes review.\n\n- **Reminders** are posted at **7** and **10** days of inactivity, with the **day-10 reminder serving as the final warning**.\n- The PR is **automatically closed at ~14 days** of inactivity \u2014 but only after that final warning, so you always get a heads-up first.\n- Only **your** activity resets the timer: pushing to your branch (including a force-push) or commenting on the PR. Maintainer comments don't reset it, since the PR is waiting on you.\n- To keep a PR open, just push updates or reply. A closed PR can be reopened when you're ready to continue (reopen it and push, or ask a maintainer to reopen).\n- Maintainers can apply the **`no-autoclose`** label to exempt a PR that should stay open (for example, when it's blocked on us).\n\n## Development Setup\n\nSee [README.md](README.md) and [AGENTS.md](AGENTS.md) for the full engineering guide. Quick start:\n\n```bash\n./script/bootstrap   # platform-specific setup\ncargo run            # build and run Warp\n./script/presubmit   # fmt, clippy, and tests\n```",
+          "sha256": "72f64aa3d8d6202c26c789557306e2ad341185df3ac3eb9024547e40b382e953"
+        },
+        {
+          "path": "sources/github.com/warpdotdev/warp/AGENTS.md",
+          "startLine": 27,
+          "endLine": 30,
+          "excerpt": "### Testing\n- `cargo nextest run --no-fail-fast --workspace` - Run tests with nextest\n- `cargo test --doc` - Run doc tests\n- `cargo nextest run -p <package>` - Run tests for an individual package",
+          "sha256": "c547e10474dc98c4e301e8790e5da9258fd3453874f9f11312b88ca59ac11b2f"
+        },
+        {
+          "path": "sources/github.com/warpdotdev/warp/AGENTS.md",
+          "startLine": 52,
+          "endLine": 65,
+          "excerpt": "### Platform Setup\n- `./script/bootstrap` - Platform-specific setup plus common agent skill installation from `skills-lock.json`; prompts for project/global when an install or update is needed unless a target flag or environment override is provided.\n- `./script/bootstrap --skip-common-skills` - Platform setup without installing or updating common agent skills.\n- `WARP_SKIP_COMMON_SKILLS_INSTALL=1 ./script/run` (or `./script/bootstrap`) - Skip the common-skills install/update check, including its interactive upstream-lock-update prompt, without passing a flag on every invocation.\n- `./script/bootstrap --install-common-skills` - Explicitly install common agent skills from `skills-lock.json`; this is the default behavior.\n- `./script/bootstrap --install-common-skills-in-repo` - Platform setup plus common agent skill installation in this checkout's `.agents/skills`.\n- `./script/bootstrap --install-common-skills-globally` - Platform setup plus common agent skill installation in `~/.agents/skills`.\n- `../common-skills/scripts/install_common_skills --repo-root \"$PWD\" --project --if-needed` - Install or refresh shared agent skills in this checkout's `.agents/skills`.\n- `../common-skills/scripts/install_common_skills --repo-root \"$PWD\" --global --if-needed` - Install or refresh shared agent skills in `~/.agents/skills`.\n- `../common-skills/scripts/remove_common_skills --repo-root \"$PWD\"` - Remove shared agent skills listed in `skills-lock.json` from this checkout's `.agents/skills`.\n- `../common-skills/scripts/remove_common_skills --repo-root \"$PWD\" --global` - Remove shared agent skills listed in `skills-lock.json` from `~/.agents/skills`.\n- `../common-skills/scripts/remove_common_skills --repo-root \"$PWD\" --clear-lock` - Remove shared agent skills from this checkout and delete `skills-lock.json`.\n- `./script/install_cargo_build_deps` - Install Cargo build dependencies\n- `./script/install_cargo_test_deps` - Install Cargo test dependencies",
+          "sha256": "c547e10474dc98c4e301e8790e5da9258fd3453874f9f11312b88ca59ac11b2f"
+        },
+        {
+          "path": "sources/github.com/warpdotdev/warp/rust-toolchain.toml",
+          "startLine": 1,
+          "endLine": 4,
+          "excerpt": "[toolchain]\nchannel = \"1.92.0\"\ncomponents = [\"rustfmt\", \"clippy\", \"rust-analyzer\"]\nprofile = \"minimal\"",
+          "sha256": "8008c4269290b7fb62f8d4cc8b5638cb86298f336721ba9f839110474756e85e"
+        },
+        {
+          "path": "sources/github.com/warpdotdev/warp/script/bootstrap",
+          "startLine": 148,
+          "endLine": 188,
+          "excerpt": "# This repository requires Git LFS; ensure it is installed and initialized\n# for this checkout.\nensure_git_lfs() {\n  if ! command -v git-lfs >/dev/null 2>&1; then\n    echo\n    echo \"warning: git-lfs is not installed. Install it before continuing:\"\n    case \"${OS_TYPE}\" in\n      Darwin)               echo \"  brew install git-lfs\" ;;\n      Linux)                echo \"  sudo apt-get install -y git-lfs   # or your distro's package manager\" ;;\n      MINGW64_NT*|MSYS_NT*)  echo \"  choco install git-lfs            # or: winget install GitHub.GitLFS\" ;;\n      *)                    echo \"  See https://git-lfs.com for install instructions.\" ;;\n    esac\n    echo \"After installing, re-run ./script/bootstrap.\"\n    return 1\n  fi\n  git lfs install --local >/dev/null\n  git lfs pull\n}\n\nensure_git_lfs\n\nif [[ \"$OS_TYPE\" = \"Darwin\" ]]; then\n  print_bootstrap_preview \"macOS\"\n  ./script/macos/bootstrap \"${PLATFORM_ARGS[@]}\"\n  maybe_install_common_skills\nelif [[ \"$OS_TYPE\" = \"Linux\" ]]; then\n  print_bootstrap_preview \"Linux\"\n  ./script/linux/bootstrap \"${PLATFORM_ARGS[@]}\"\n  maybe_install_common_skills\nelif [[ \"$OS_TYPE\" =~ ^(MINGW64_NT|MSYS_NT) ]]; then\n  if [[ \"${INSTALL_COMMON_SKILLS}\" -eq 1 ]]; then\n    if [[ -n \"${COMMON_SKILLS_TARGET}\" ]]; then\n      ./script/windows/bootstrap.ps1 \"${PLATFORM_ARGS[@]}\" -InstallCommonSkills -CommonSkillsTarget \"${COMMON_SKILLS_TARGET}\"\n    else\n      ./script/windows/bootstrap.ps1 \"${PLATFORM_ARGS[@]}\" -InstallCommonSkills\n    fi\n  else\n    ./script/windows/bootstrap.ps1 \"${PLATFORM_ARGS[@]}\"\n  fi\nelse\n  echo \"No bootstrap script defined for the current platform!\"",
+          "sha256": "9ce2067212b456441afc8803b4b944f3067a5654c1e540e5845122b8d16d6127"
+        },
+        {
+          "path": "sources/github.com/warpdotdev/warp/script/linux/bootstrap",
+          "startLine": 1,
+          "endLine": 25,
+          "excerpt": "#!/usr/bin/env bash\n\nset -e\n\n. \"$PWD/script/warp_sudo\"\n\n# Update the apt cache before installing dependencies.  It can be slow, so the install scripts\n# don't do it (to avoid doing it more than once).\nwarp_sudo apt update -y\n\n# Install all dependencies needed to build, run, and test Warp.\n\"$PWD\"/script/linux/install_test_deps\n\n# Install linuxdeploy.\n\"$PWD\"/script/linux/install_linuxdeploy\n\n# Make sure we're authenticated with the gcloud CLI, otherwise SSH integration\n# tests won't work.\nif [[ \"${WARP_SKIP_GCLOUD_AUTH:-0}\" != \"1\" ]] && [[ -z \"$(gcloud auth print-identity-token)\" ]]; then\n    echo \"gcloud CLI authentication missing.  Press enter to continue...\"\n    read var\n    gcloud auth login\nfi\n\necho \"\u2705 Your machine is bootstrapped and ready to go. :)\"",
+          "sha256": "53b2fd3b7228f24821484a9ff7006214d52cb75114a16f2f76a53291cc969de9"
+        },
+        {
+          "path": "sources/github.com/warpdotdev/warp/script/macos/bootstrap",
+          "startLine": 1,
+          "endLine": 8,
+          "excerpt": "#!/bin/sh\n#\n# Run this script once to prepare your machine to develop Warp. This script is\n# a work in progress, and may be incomplete.\n\nset -e\n\n. \"$PWD/script/warp_sudo\"",
+          "sha256": "223fbbf61115efdcfe5dc572a04d3c57492553786552c6aa3ac283f2beebf07f"
+        },
+        {
+          "path": "sources/github.com/warpdotdev/warp/script/install_cargo_test_deps",
+          "startLine": 1,
+          "endLine": 15,
+          "excerpt": "#!/usr/bin/env bash\n#\n# Installs all cargo-managed dependencies required to build and test Warp.\n\n# This script should be platform-agnostic (eg. no unix-only references like /dev/null).\n\n\"$PWD\"/script/install_cargo_build_deps\n\n# note: keep this version in sync with wgslfmt in .github/workflows/ci.yml\ncargo install --git https://github.com/wgsl-analyzer/wgsl-analyzer --tag \"2025-06-28\" wgslfmt\n\n\"$PWD\"/script/install_cargo_binstall\n\n# Install nextest, which we use as our test execution harness.\ncargo binstall --secure --no-confirm --no-discover-github-token cargo-nextest",
+          "sha256": "0a727672a05329b7f9c11c6ea9f9a0426d53442373a6d754dbca48f2293db2b4"
+        }
+      ]
+    },
+    {
+      "id": "e1-rust-02-component-tests",
+      "repository": "github.com/warpdotdev/warp",
+      "revision": "5a55a2aca77339ad75637bed650352369ee7fcb9",
+      "ecosystem": "rust",
+      "scope": "component",
+      "component": "app",
+      "taskIntent": "Establish a source-supported test instruction for the owned component app, preserving component coverage and all documented setup.",
+      "goldState": "unresolved",
+      "alternatives": [],
+      "requiredAbstentionReasons": [],
+      "unresolvedEvidence": [
+        "Maintainer command recipes exist, but a complete prerequisite tuple was not established from the retained setup chain. script/bootstrap dispatches to platform scripts; the macOS script explicitly calls itself work in progress and possibly incomplete, Linux calls additional uninspected dependency installers and requires gcloud authentication for SSH integration tests, and Windows has its own setup chain. Unknowns are retained rather than interpreting the local runtime pin or nextest recipe as a complete setup contract."
+      ],
+      "limitations": [
+        "Source applicability assessment only; no upstream code executed and no environment readiness witnessed.",
+        "No repository was excluded for setup complexity. Empty alternatives here mean unresolved source curation, not evidence that no valid instruction exists.",
+        "Repository guidance names both a default-member unit-test recipe and a workspace recipe; coverage and separate doctests must be reconciled when closing the unresolved tuple."
+      ],
+      "evidence": [
+        {
+          "path": "sources/github.com/warpdotdev/warp/CONTRIBUTING.md",
+          "startLine": 141,
+          "endLine": 174,
+          "excerpt": "You can use **any coding agent** to implement a contribution \u2014 for example, Warp's built-in agent, Claude Code, Codex, Gemini CLI, or others \u2014 or no agent at all. This repository ships agent-readable context (skills under [`.agents/skills/`](.agents/skills/), specs under [`specs/`](specs/), and [`AGENTS.md`](AGENTS.md)) that any harness supporting these formats can pick up.\n\nIf you'd rather have an **Oz cloud agent** implement a ready issue for you, mention **@oss-maintainers** on the issue to request it. Approved requests run **for free** on complimentary Oz credits \u2014 you don't need to set up your own Oz account or pay for compute.\n\nWhile you can use coding agents for implementation, we expect contributors to **collaborate with us personally**. This means that you should not be using agents like OpenClaw to engage in conversation with our team. Our maintainers will always talk to you as a human, so please talk to us as a human as well.\n\n## Code Review\n\nAll pull requests go through a two-stage review process:\n\n1. **Oz review** \u2014 When you open a PR, [Oz](https://warp.dev/oz) is automatically assigned and produces the first review. Oz checks for correctness, style, test coverage, and alignment with the linked issue and any associated specs.\n2. **Warp team review** \u2014 Only after Oz has **approved** the PR is it routed to a Warp team subject-matter expert for a final human review. PRs that have not yet been approved by Oz will not be assigned to a team member.\n\nYou do not need to manually request reviewers at any stage. After pushing changes that address Oz's feedback, comment `/warp-agent-review` on the PR to request a re-review \u2014 you can do this up to **three times** per PR. If something looks stuck or you need additional reviews, mention **@oss-maintainers** on the PR to escalate to the team.\n\n### Stale PRs with requested changes\n\nIf a review (from Oz or a maintainer) leaves your PR with **changes requested** and it then goes quiet, automation follows up and eventually closes it so the review queue stays current. This applies only to external-contributor PRs with an active requested-changes review.\n\n- **Reminders** are posted at **7** and **10** days of inactivity, with the **day-10 reminder serving as the final warning**.\n- The PR is **automatically closed at ~14 days** of inactivity \u2014 but only after that final warning, so you always get a heads-up first.\n- Only **your** activity resets the timer: pushing to your branch (including a force-push) or commenting on the PR. Maintainer comments don't reset it, since the PR is waiting on you.\n- To keep a PR open, just push updates or reply. A closed PR can be reopened when you're ready to continue (reopen it and push, or ask a maintainer to reopen).\n- Maintainers can apply the **`no-autoclose`** label to exempt a PR that should stay open (for example, when it's blocked on us).\n\n## Development Setup\n\nSee [README.md](README.md) and [AGENTS.md](AGENTS.md) for the full engineering guide. Quick start:\n\n```bash\n./script/bootstrap   # platform-specific setup\ncargo run            # build and run Warp\n./script/presubmit   # fmt, clippy, and tests\n```",
+          "sha256": "72f64aa3d8d6202c26c789557306e2ad341185df3ac3eb9024547e40b382e953"
+        },
+        {
+          "path": "sources/github.com/warpdotdev/warp/AGENTS.md",
+          "startLine": 27,
+          "endLine": 30,
+          "excerpt": "### Testing\n- `cargo nextest run --no-fail-fast --workspace` - Run tests with nextest\n- `cargo test --doc` - Run doc tests\n- `cargo nextest run -p <package>` - Run tests for an individual package",
+          "sha256": "c547e10474dc98c4e301e8790e5da9258fd3453874f9f11312b88ca59ac11b2f"
+        },
+        {
+          "path": "sources/github.com/warpdotdev/warp/AGENTS.md",
+          "startLine": 52,
+          "endLine": 65,
+          "excerpt": "### Platform Setup\n- `./script/bootstrap` - Platform-specific setup plus common agent skill installation from `skills-lock.json`; prompts for project/global when an install or update is needed unless a target flag or environment override is provided.\n- `./script/bootstrap --skip-common-skills` - Platform setup without installing or updating common agent skills.\n- `WARP_SKIP_COMMON_SKILLS_INSTALL=1 ./script/run` (or `./script/bootstrap`) - Skip the common-skills install/update check, including its interactive upstream-lock-update prompt, without passing a flag on every invocation.\n- `./script/bootstrap --install-common-skills` - Explicitly install common agent skills from `skills-lock.json`; this is the default behavior.\n- `./script/bootstrap --install-common-skills-in-repo` - Platform setup plus common agent skill installation in this checkout's `.agents/skills`.\n- `./script/bootstrap --install-common-skills-globally` - Platform setup plus common agent skill installation in `~/.agents/skills`.\n- `../common-skills/scripts/install_common_skills --repo-root \"$PWD\" --project --if-needed` - Install or refresh shared agent skills in this checkout's `.agents/skills`.\n- `../common-skills/scripts/install_common_skills --repo-root \"$PWD\" --global --if-needed` - Install or refresh shared agent skills in `~/.agents/skills`.\n- `../common-skills/scripts/remove_common_skills --repo-root \"$PWD\"` - Remove shared agent skills listed in `skills-lock.json` from this checkout's `.agents/skills`.\n- `../common-skills/scripts/remove_common_skills --repo-root \"$PWD\" --global` - Remove shared agent skills listed in `skills-lock.json` from `~/.agents/skills`.\n- `../common-skills/scripts/remove_common_skills --repo-root \"$PWD\" --clear-lock` - Remove shared agent skills from this checkout and delete `skills-lock.json`.\n- `./script/install_cargo_build_deps` - Install Cargo build dependencies\n- `./script/install_cargo_test_deps` - Install Cargo test dependencies",
+          "sha256": "c547e10474dc98c4e301e8790e5da9258fd3453874f9f11312b88ca59ac11b2f"
+        },
+        {
+          "path": "sources/github.com/warpdotdev/warp/rust-toolchain.toml",
+          "startLine": 1,
+          "endLine": 4,
+          "excerpt": "[toolchain]\nchannel = \"1.92.0\"\ncomponents = [\"rustfmt\", \"clippy\", \"rust-analyzer\"]\nprofile = \"minimal\"",
+          "sha256": "8008c4269290b7fb62f8d4cc8b5638cb86298f336721ba9f839110474756e85e"
+        },
+        {
+          "path": "sources/github.com/warpdotdev/warp/script/bootstrap",
+          "startLine": 148,
+          "endLine": 188,
+          "excerpt": "# This repository requires Git LFS; ensure it is installed and initialized\n# for this checkout.\nensure_git_lfs() {\n  if ! command -v git-lfs >/dev/null 2>&1; then\n    echo\n    echo \"warning: git-lfs is not installed. Install it before continuing:\"\n    case \"${OS_TYPE}\" in\n      Darwin)               echo \"  brew install git-lfs\" ;;\n      Linux)                echo \"  sudo apt-get install -y git-lfs   # or your distro's package manager\" ;;\n      MINGW64_NT*|MSYS_NT*)  echo \"  choco install git-lfs            # or: winget install GitHub.GitLFS\" ;;\n      *)                    echo \"  See https://git-lfs.com for install instructions.\" ;;\n    esac\n    echo \"After installing, re-run ./script/bootstrap.\"\n    return 1\n  fi\n  git lfs install --local >/dev/null\n  git lfs pull\n}\n\nensure_git_lfs\n\nif [[ \"$OS_TYPE\" = \"Darwin\" ]]; then\n  print_bootstrap_preview \"macOS\"\n  ./script/macos/bootstrap \"${PLATFORM_ARGS[@]}\"\n  maybe_install_common_skills\nelif [[ \"$OS_TYPE\" = \"Linux\" ]]; then\n  print_bootstrap_preview \"Linux\"\n  ./script/linux/bootstrap \"${PLATFORM_ARGS[@]}\"\n  maybe_install_common_skills\nelif [[ \"$OS_TYPE\" =~ ^(MINGW64_NT|MSYS_NT) ]]; then\n  if [[ \"${INSTALL_COMMON_SKILLS}\" -eq 1 ]]; then\n    if [[ -n \"${COMMON_SKILLS_TARGET}\" ]]; then\n      ./script/windows/bootstrap.ps1 \"${PLATFORM_ARGS[@]}\" -InstallCommonSkills -CommonSkillsTarget \"${COMMON_SKILLS_TARGET}\"\n    else\n      ./script/windows/bootstrap.ps1 \"${PLATFORM_ARGS[@]}\" -InstallCommonSkills\n    fi\n  else\n    ./script/windows/bootstrap.ps1 \"${PLATFORM_ARGS[@]}\"\n  fi\nelse\n  echo \"No bootstrap script defined for the current platform!\"",
+          "sha256": "9ce2067212b456441afc8803b4b944f3067a5654c1e540e5845122b8d16d6127"
+        },
+        {
+          "path": "sources/github.com/warpdotdev/warp/script/linux/bootstrap",
+          "startLine": 1,
+          "endLine": 25,
+          "excerpt": "#!/usr/bin/env bash\n\nset -e\n\n. \"$PWD/script/warp_sudo\"\n\n# Update the apt cache before installing dependencies.  It can be slow, so the install scripts\n# don't do it (to avoid doing it more than once).\nwarp_sudo apt update -y\n\n# Install all dependencies needed to build, run, and test Warp.\n\"$PWD\"/script/linux/install_test_deps\n\n# Install linuxdeploy.\n\"$PWD\"/script/linux/install_linuxdeploy\n\n# Make sure we're authenticated with the gcloud CLI, otherwise SSH integration\n# tests won't work.\nif [[ \"${WARP_SKIP_GCLOUD_AUTH:-0}\" != \"1\" ]] && [[ -z \"$(gcloud auth print-identity-token)\" ]]; then\n    echo \"gcloud CLI authentication missing.  Press enter to continue...\"\n    read var\n    gcloud auth login\nfi\n\necho \"\u2705 Your machine is bootstrapped and ready to go. :)\"",
+          "sha256": "53b2fd3b7228f24821484a9ff7006214d52cb75114a16f2f76a53291cc969de9"
+        },
+        {
+          "path": "sources/github.com/warpdotdev/warp/script/macos/bootstrap",
+          "startLine": 1,
+          "endLine": 8,
+          "excerpt": "#!/bin/sh\n#\n# Run this script once to prepare your machine to develop Warp. This script is\n# a work in progress, and may be incomplete.\n\nset -e\n\n. \"$PWD/script/warp_sudo\"",
+          "sha256": "223fbbf61115efdcfe5dc572a04d3c57492553786552c6aa3ac283f2beebf07f"
+        },
+        {
+          "path": "sources/github.com/warpdotdev/warp/script/install_cargo_test_deps",
+          "startLine": 1,
+          "endLine": 15,
+          "excerpt": "#!/usr/bin/env bash\n#\n# Installs all cargo-managed dependencies required to build and test Warp.\n\n# This script should be platform-agnostic (eg. no unix-only references like /dev/null).\n\n\"$PWD\"/script/install_cargo_build_deps\n\n# note: keep this version in sync with wgslfmt in .github/workflows/ci.yml\ncargo install --git https://github.com/wgsl-analyzer/wgsl-analyzer --tag \"2025-06-28\" wgslfmt\n\n\"$PWD\"/script/install_cargo_binstall\n\n# Install nextest, which we use as our test execution harness.\ncargo binstall --secure --no-confirm --no-discover-github-token cargo-nextest",
+          "sha256": "0a727672a05329b7f9c11c6ea9f9a0426d53442373a6d754dbca48f2293db2b4"
+        },
+        {
+          "path": "sources/github.com/warpdotdev/warp/Cargo.toml",
+          "startLine": 1,
+          "endLine": 23,
+          "excerpt": "[workspace]\nmembers = [\n  \"crates/*\",\n  \"app\",\n]\nresolver = \"2\"\n\n# Include all members except serve-wasm (since it's a helper helper for serving\n# wasm binaries and not something we want to regularly compile or run\n# tests against) and integration (since it is only used for testing).\ndefault-members = [\n  \"app\",\n  \"crates/channel_versions\",\n  \"crates/command\",\n  \"crates/editor\",\n  \"crates/graphql\",\n  \"crates/markdown_parser\",\n  \"crates/sum_tree\",\n  \"crates/warpui\",\n  \"crates/warp_completer\",\n  \"crates/warp_terminal\",\n  \"crates/warp_util\",\n]",
+          "sha256": "98a7696ced9fc1bafd76be0fa99d217d642d71894e5b48984d22b6d2d77ac7f0"
+        },
+        {
+          "path": "sources/github.com/warpdotdev/warp/app/Cargo.toml",
+          "startLine": 1,
+          "endLine": 15,
+          "excerpt": "[package]\nauthors = [\"Warp Team <dev@warp.dev>\"]\ndefault-run = \"warp-oss\"\ndescription = \"The cloud-backed terminal for individuals and teams\"\nedition = \"2024\"\nautobins = false\nname = \"warp\"\nversion = \"0.1.0\"\npublish.workspace = true\nlicense.workspace = true\n\n[lib]\nname = \"warp\"\npath = \"src/lib.rs\"\n",
+          "sha256": "240691ed0fcfe4f86933061c0a938e0d1b63cba94e5783b1c405a2275b538706"
+        },
+        {
+          "path": "sources/github.com/warpdotdev/warp/app/Cargo.toml",
+          "startLine": 419,
+          "endLine": 448,
+          "excerpt": "[dev-dependencies]\nai = { workspace = true, features = [\"test-util\"] }\nasync-process.workspace = true\ncomputer_use = { workspace = true, features = [\"test-util\"] }\nfirebase.workspace = true\njsonschema = { workspace = true, default-features = false }\nasync-executor = \"1.5.1\"\ncommand = { workspace = true, features = [\"test-util\"] }\nctor = \"0.1.18\"\ncloud_object_client = { workspace = true, features = [\"test-util\"] }\nhttp_client = { workspace = true, features = [\"test-util\"] }\nmockall.workspace = true\nmockito.workspace = true\nserial_test = \"0.8.0\"\nsum_tree = { workspace = true, features = [\"test-util\"] }\nvirtual-fs.workspace = true\nwarp_completer = { workspace = true, features = [\"test-util\"] }\nwarp_core = { workspace = true, features = [\"test-util\"] }\nwarp_editor = { workspace = true, features = [\"test-util\"] }\nwarp_server_client = { workspace = true, features = [\"test-util\"] }\nwarp_server_auth = { workspace = true, features = [\"test-util\"] }\nwarp_terminal = { workspace = true, features = [\"test-util\"] }\nwarpui = { workspace = true, features = [\"test-util\"] }\nwarpui_core = { workspace = true, features = [\"test-util\"] }\nwarpui_extras = { workspace = true, features = [\"test-util\"] }\nwarp_files = { workspace = true, features = [\"test-util\"] }\nrepo_metadata = { workspace = true, features = [\"test-util\"] }\n\n[target.'cfg(not(target_family = \"wasm\"))'.dev-dependencies]\ntokio = { workspace = true, features = [\"rt-multi-thread\", \"macros\", \"process\", \"time\", \"test-util\"] }",
+          "sha256": "240691ed0fcfe4f86933061c0a938e0d1b63cba94e5783b1c405a2275b538706"
+        }
+      ]
+    },
+    {
+      "id": "e1-rust-03-repository-tests",
+      "repository": "github.com/storytold/photocraft",
+      "revision": "5f9b4391874aabc9deb2fcb905267613e4d93ec8",
+      "ecosystem": "rust",
+      "scope": "repository",
+      "component": null,
+      "taskIntent": "Establish the maintainer-documented repository-default automated test instruction with complete applicability context; preserve separately documented optional/e2e/ignored-suite limitations.",
+      "goldState": "supported",
+      "alternatives": [
+        {
+          "command": "cargo test --workspace",
+          "working_directory": ".",
+          "scope": "repository",
+          "prerequisites": [
+            "Use Rust stable 1.95 or newer on macOS, Windows or Linux.",
+            "For Linux source builds, install the windowing, GL and GTK development packages listed for the selected distribution in docs/development.md:3-10.",
+            "For Windows source builds, use the Rust MSVC toolchain and Visual Studio or Microsoft C++ Build Tools with Desktop development with C++; on Windows ARM64 also provide the C++ Clang Compiler for Windows or clang-cl.exe on PATH (docs/development.md:12-19).",
+            "The development guide additionally declares the wasm32-unknown-unknown target; retain it as documented setup even though this task is the native default test suite."
+          ],
+          "source": "docs/development.md"
+        }
+      ],
+      "requiredAbstentionReasons": [],
+      "unresolvedEvidence": [],
+      "limitations": [
+        "Source applicability assessment only; no upstream code executed and no environment readiness witnessed.",
+        "Default tests exclude opt-in corpus features and ignored tests; Japanese-font tests may skip without the explicitly optional craft-fonts input. GPU/external platform availability was not executed or verified.",
+        "The task targets documented default testing, not every optional corpus, font, ignored, sweep or release gate."
+      ],
+      "evidence": [
+        {
+          "path": "sources/github.com/storytold/photocraft/docs/development.md",
+          "startLine": 1,
+          "endLine": 19,
+          "excerpt": "# Development guide\n\n## Prerequisites\n\n- Rust stable (1.95+). Add the web target with `rustup target add wasm32-unknown-unknown`.\n- macOS, Windows or Linux. On Linux, install the windowing, GL and GTK development packages:\n  - Debian/Ubuntu: `sudo apt install libxkbcommon-dev libwayland-dev libx11-dev libxrandr-dev libxi-dev libgl1-mesa-dev libgtk-3-dev`\n  - Fedora/RHEL: `sudo dnf install libxkbcommon-devel wayland-devel libX11-devel libXrandr-devel libXi-devel mesa-libGL-devel gtk3-devel`\n  - Arch: `sudo pacman -S libxkbcommon wayland libx11 libxrandr libxi mesa gtk3`\n  - openSUSE: `sudo zypper install libxkbcommon-devel wayland-devel libX11-devel libXrandr-devel libXi-devel Mesa-libGL-devel gtk3-devel`\n\n### Windows source builds\n\nUse the Rust MSVC toolchain and install Visual Studio or Microsoft C++ Build Tools with the\n**Desktop development with C++** workload (on Windows on ARM64 / `aarch64-pc-windows-msvc`, such\nas NVIDIA RTX Spark, also select **C++ Clang Compiler for Windows** or ensure `clang-cl.exe` is on\n`PATH`, as `aws-lc-sys` needs it to assemble ARMv8 crypto routines). Follow Microsoft's\n[Rust setup guide](https://learn.microsoft.com/en-us/windows/dev-environment/rust/setup),\nthen open a new terminal and check `cargo --version` and `rustc --version`.",
+          "sha256": "ad37558a84aa2f84928eb8b2554988fbed73ca3ac989034fe06bed9603446873"
+        },
+        {
+          "path": "sources/github.com/storytold/photocraft/docs/development.md",
+          "startLine": 37,
+          "endLine": 65,
+          "excerpt": "## Build and run\n\n```sh\ncargo run --release -p photocraft -- path/to/image.psd      # desktop app\ncargo run --release -p photocraft -- --control 7878 --control-token-file .private/control.token \\\n  --automation-read-root work --automation-write-root work\ncargo test --workspace                                     # everything\ncargo xtask test                                           # tests (nextest when installed) + doctests\ncargo xtask ci                                             # the CI gate: fmt, clippy, layers, scorecard, tests, panic_hunt, doctests, wasm, i18n report\ncargo xtask stats                                          # tests and lines per crate\ncargo xtask parity                                         # Photoshop menu coverage -> docs/parity-checklist.md\n```\n\nImage code is slow at `opt-level 0`, so the workspace profile builds dependencies at `opt-level 2`. Use `--release` for anything interactive. Test builds compile ui-egui itself at `opt-level 0` (`[profile.test.package.photocraft-ui-egui]` in `Cargo.toml`): it was one of the biggest test-build units, and its tests run no heavy pixel code of their own.\n\nThe dev profile builds PhotoCraft's crates with `debug = \"line-tables-only\"` and dependencies with no debug info: panic backtraces keep file and line in PhotoCraft code, and test binaries link about twice as fast. To inspect local variables in a debugger, build with `CARGO_PROFILE_DEV_DEBUG=true`.\n\n### Faster test loops\n\nMost of a `cargo test` run is linking test binaries and running them one after another. While iterating:\n\n```sh\ncargo test -p <crate> --lib --tests        # skip examples and doctests (ui-egui has 11 examples)\ncargo test -p <crate> --test it <module>:: # one integration-test module (tests/it/<module>.rs)\ncargo nextest run --workspace              # parallel across binaries (cargo install cargo-nextest --locked)\ncargo test --doc --workspace               # nextest does not run doctests\n```\n\n[cargo-nextest](https://nexte.st) runs each test in its own process. `.config/nextest.toml` puts the GPU tests (`photocraft-gpu`, and ui-egui's integration and canvas/GPU tests) in a group of at most 4 at a time, because each process opens its own wgpu device and the in-process `gpu_lock()` no longer serializes them. On a 32-thread Windows machine the full workspace went from 297 s (`cargo test`) to about 120 s (#2204). Ignored tests run with `cargo nextest run --run-ignored only`. The longest sweeps (`photocraft-testkit`'s `Sweep`) run a quarter of their cases, a different quarter each UTC day; `PHOTOCRAFT_FULL_SWEEP=1` runs all of them, and `PHOTOCRAFT_SWEEP_PART=<n>` replays the part a failing run printed. CI runs it with `--profile ci` (fail-fast, a 10-minute hang timeout), plus `cargo test --doc` for the doctests (#6117); `PHOTOCRAFT_FULL_SWEEP=1 cargo test --workspace` stays the final check before a PR.",
+          "sha256": "ad37558a84aa2f84928eb8b2554988fbed73ca3ac989034fe06bed9603446873"
+        },
+        {
+          "path": "sources/github.com/storytold/photocraft/docs/development.md",
+          "startLine": 98,
+          "endLine": 115,
+          "excerpt": "## Fonts (craft-fonts)\n\nFont assets shared by the Crafting Apps live in [storytold/craft-fonts](https://github.com/storytold/craft-fonts), never in this repo: don't commit font files here (Inter and JetBrains Mono in `assets/fonts/` are the only exceptions; new fonts go to craft-fonts). The rules are in `craftrules/standards/fonts.md` in a sibling `craftrules` checkout (see below); that repository is not public, so outside contributors can ask a maintainer for the rules that apply to their change.\n\ncraft-fonts is an **optional build input**, never a Cargo dependency:\n\n```sh\ngit clone https://github.com/storytold/craft-fonts ../craft-fonts\nCRAFT_FONTS_DIR=\"$PWD/../craft-fonts\" cargo run --release -p photocraft\nCRAFT_FONTS_DIR=\"$PWD/../craft-fonts\" cargo test --workspace     # runs the Japanese font tests too\n```\n\n- Use an absolute path (`$PWD/...`): `build.rs` runs in `crates/text`, so a relative `CRAFT_FONTS_DIR` would resolve from there.\n- `crates/text/build.rs` reads `$CRAFT_FONTS_DIR/fonts/manifest.txt` and embeds the fonts as `photocraft_text::CRAFT_FONTS` (`crates/text/src/craft_fonts.rs`). Unset, `CRAFT_FONTS` is empty and the build is unchanged. A bad path is a build warning, or an error with `CRAFT_FONTS_REQUIRED=1` (release builds set both).\n- **UI:** the Japanese fonts (BIZ UDPGothic Regular first) are the first Japanese fallback in the lazy CJK loader (`crates/ui-egui/src/cjk_fonts.rs`), ahead of the system Japanese fonts and in the same locale script order, appended last to every egui family with the usual baseline alignment.\n- **Type tool:** the text engine registers them in `FontDb::new` (so also with no system fonts) and puts them first in the Japanese slot of the locale-ordered fallback list: BIZ UDPGothic for sans runs, Shippori Mincho / BIZ UDMincho for serif runs.\n- **Web:** the wasm32 build never embeds craft-fonts, even with `CRAFT_FONTS_DIR` set: measured on 2026-10-06, the UI face alone took the release wasm from 24.19 MB to 28.87 MB, over the 24 MiB gate in `packaging/web/package.sh`. Instead it loads fonts served next to it, on demand: `fonts/manifest.txt` beside `index.html`, in craft-fonts' manifest format (`crates/text/src/served.rs`; hosting: `packaging/web/README.md` \u203a Fonts). `PHOTOCRAFT_WEB_FONTS_DIR=\"$PWD/../craft-fonts\" packaging/web/package.sh` puts craft-fonts there. Served families are in the font menus and are fetched when picked or when a document's text needs them; they aren't in the script fallback list yet, so Japanese text set in a Latin font still needs a Japanese font picked (#1615).\n- Tests that need the fonts skip with a message when `CRAFT_FONTS` is empty; CI's Linux gate and Windows test legs build with `CRAFT_FONTS_DIR` set and `CRAFT_FONTS_REQUIRED=1`, so they run there. Desktop releases check out craft-fonts at the commit pinned in `.github/workflows/release.yml` (`CRAFT_FONTS_REF`; ci.yml pins the same commit) and ship each font's `OFL.txt` as `OFL-<family>.txt`.",
+          "sha256": "ad37558a84aa2f84928eb8b2554988fbed73ca3ac989034fe06bed9603446873"
+        },
+        {
+          "path": "sources/github.com/storytold/photocraft/docs/development.md",
+          "startLine": 657,
+          "endLine": 659,
+          "excerpt": "- The corpus tests sit behind the `corpus` cargo feature of `photocraft-psd`, `photocraft-codecs`,\n  `photocraft-io` and `photocraft-engine`, so plain `cargo test` neither compiles nor needs them.\n  The HEIF ones also need the `heif` feature of `photocraft-codecs`/`photocraft-io` (test-corpus",
+          "sha256": "ad37558a84aa2f84928eb8b2554988fbed73ca3ac989034fe06bed9603446873"
+        }
+      ]
+    },
+    {
+      "id": "e1-rust-03-component-tests",
+      "repository": "github.com/storytold/photocraft",
+      "revision": "5f9b4391874aabc9deb2fcb905267613e4d93ec8",
+      "ecosystem": "rust",
+      "scope": "component",
+      "component": "apps/photocraft",
+      "taskIntent": "Establish a source-supported test instruction for the owned component apps/photocraft, preserving component coverage and all documented setup.",
+      "goldState": "supported",
+      "alternatives": [
+        {
+          "command": "cargo test -p photocraft",
+          "working_directory": ".",
+          "scope": "component",
+          "prerequisites": [
+            "Use Rust stable 1.95 or newer on macOS, Windows or Linux.",
+            "For Linux source builds, install the windowing, GL and GTK development packages listed for the selected distribution in docs/development.md:3-10.",
+            "For Windows source builds, use the Rust MSVC toolchain and Visual Studio or Microsoft C++ Build Tools with Desktop development with C++; on Windows ARM64 also provide the C++ Clang Compiler for Windows or clang-cl.exe on PATH (docs/development.md:12-19).",
+            "The development guide additionally declares the wasm32-unknown-unknown target; retain it as documented setup even though this task is the native default test suite."
+          ],
+          "source": "AGENTS.md",
+          "component": "apps/photocraft"
+        }
+      ],
+      "requiredAbstentionReasons": [],
+      "unresolvedEvidence": [],
+      "limitations": [
+        "Source applicability assessment only; no upstream code executed and no environment readiness witnessed.",
+        "Default tests exclude opt-in corpus features and ignored tests; Japanese-font tests may skip without the explicitly optional craft-fonts input. GPU/external platform availability was not executed or verified.",
+        "The task targets documented default testing, not every optional corpus, font, ignored, sweep or release gate.",
+        "The exact package argument is resolved from maintainer generic cargo test -p <crates you touched> guidance plus the pinned component package name photocraft; this is an explicit source-bound substitution, not a claim that the literal completed string appeared in the documentation."
+      ],
+      "evidence": [
+        {
+          "path": "sources/github.com/storytold/photocraft/docs/development.md",
+          "startLine": 1,
+          "endLine": 19,
+          "excerpt": "# Development guide\n\n## Prerequisites\n\n- Rust stable (1.95+). Add the web target with `rustup target add wasm32-unknown-unknown`.\n- macOS, Windows or Linux. On Linux, install the windowing, GL and GTK development packages:\n  - Debian/Ubuntu: `sudo apt install libxkbcommon-dev libwayland-dev libx11-dev libxrandr-dev libxi-dev libgl1-mesa-dev libgtk-3-dev`\n  - Fedora/RHEL: `sudo dnf install libxkbcommon-devel wayland-devel libX11-devel libXrandr-devel libXi-devel mesa-libGL-devel gtk3-devel`\n  - Arch: `sudo pacman -S libxkbcommon wayland libx11 libxrandr libxi mesa gtk3`\n  - openSUSE: `sudo zypper install libxkbcommon-devel wayland-devel libX11-devel libXrandr-devel libXi-devel Mesa-libGL-devel gtk3-devel`\n\n### Windows source builds\n\nUse the Rust MSVC toolchain and install Visual Studio or Microsoft C++ Build Tools with the\n**Desktop development with C++** workload (on Windows on ARM64 / `aarch64-pc-windows-msvc`, such\nas NVIDIA RTX Spark, also select **C++ Clang Compiler for Windows** or ensure `clang-cl.exe` is on\n`PATH`, as `aws-lc-sys` needs it to assemble ARMv8 crypto routines). Follow Microsoft's\n[Rust setup guide](https://learn.microsoft.com/en-us/windows/dev-environment/rust/setup),\nthen open a new terminal and check `cargo --version` and `rustc --version`.",
+          "sha256": "ad37558a84aa2f84928eb8b2554988fbed73ca3ac989034fe06bed9603446873"
+        },
+        {
+          "path": "sources/github.com/storytold/photocraft/docs/development.md",
+          "startLine": 37,
+          "endLine": 65,
+          "excerpt": "## Build and run\n\n```sh\ncargo run --release -p photocraft -- path/to/image.psd      # desktop app\ncargo run --release -p photocraft -- --control 7878 --control-token-file .private/control.token \\\n  --automation-read-root work --automation-write-root work\ncargo test --workspace                                     # everything\ncargo xtask test                                           # tests (nextest when installed) + doctests\ncargo xtask ci                                             # the CI gate: fmt, clippy, layers, scorecard, tests, panic_hunt, doctests, wasm, i18n report\ncargo xtask stats                                          # tests and lines per crate\ncargo xtask parity                                         # Photoshop menu coverage -> docs/parity-checklist.md\n```\n\nImage code is slow at `opt-level 0`, so the workspace profile builds dependencies at `opt-level 2`. Use `--release` for anything interactive. Test builds compile ui-egui itself at `opt-level 0` (`[profile.test.package.photocraft-ui-egui]` in `Cargo.toml`): it was one of the biggest test-build units, and its tests run no heavy pixel code of their own.\n\nThe dev profile builds PhotoCraft's crates with `debug = \"line-tables-only\"` and dependencies with no debug info: panic backtraces keep file and line in PhotoCraft code, and test binaries link about twice as fast. To inspect local variables in a debugger, build with `CARGO_PROFILE_DEV_DEBUG=true`.\n\n### Faster test loops\n\nMost of a `cargo test` run is linking test binaries and running them one after another. While iterating:\n\n```sh\ncargo test -p <crate> --lib --tests        # skip examples and doctests (ui-egui has 11 examples)\ncargo test -p <crate> --test it <module>:: # one integration-test module (tests/it/<module>.rs)\ncargo nextest run --workspace              # parallel across binaries (cargo install cargo-nextest --locked)\ncargo test --doc --workspace               # nextest does not run doctests\n```\n\n[cargo-nextest](https://nexte.st) runs each test in its own process. `.config/nextest.toml` puts the GPU tests (`photocraft-gpu`, and ui-egui's integration and canvas/GPU tests) in a group of at most 4 at a time, because each process opens its own wgpu device and the in-process `gpu_lock()` no longer serializes them. On a 32-thread Windows machine the full workspace went from 297 s (`cargo test`) to about 120 s (#2204). Ignored tests run with `cargo nextest run --run-ignored only`. The longest sweeps (`photocraft-testkit`'s `Sweep`) run a quarter of their cases, a different quarter each UTC day; `PHOTOCRAFT_FULL_SWEEP=1` runs all of them, and `PHOTOCRAFT_SWEEP_PART=<n>` replays the part a failing run printed. CI runs it with `--profile ci` (fail-fast, a 10-minute hang timeout), plus `cargo test --doc` for the doctests (#6117); `PHOTOCRAFT_FULL_SWEEP=1 cargo test --workspace` stays the final check before a PR.",
+          "sha256": "ad37558a84aa2f84928eb8b2554988fbed73ca3ac989034fe06bed9603446873"
+        },
+        {
+          "path": "sources/github.com/storytold/photocraft/docs/development.md",
+          "startLine": 98,
+          "endLine": 115,
+          "excerpt": "## Fonts (craft-fonts)\n\nFont assets shared by the Crafting Apps live in [storytold/craft-fonts](https://github.com/storytold/craft-fonts), never in this repo: don't commit font files here (Inter and JetBrains Mono in `assets/fonts/` are the only exceptions; new fonts go to craft-fonts). The rules are in `craftrules/standards/fonts.md` in a sibling `craftrules` checkout (see below); that repository is not public, so outside contributors can ask a maintainer for the rules that apply to their change.\n\ncraft-fonts is an **optional build input**, never a Cargo dependency:\n\n```sh\ngit clone https://github.com/storytold/craft-fonts ../craft-fonts\nCRAFT_FONTS_DIR=\"$PWD/../craft-fonts\" cargo run --release -p photocraft\nCRAFT_FONTS_DIR=\"$PWD/../craft-fonts\" cargo test --workspace     # runs the Japanese font tests too\n```\n\n- Use an absolute path (`$PWD/...`): `build.rs` runs in `crates/text`, so a relative `CRAFT_FONTS_DIR` would resolve from there.\n- `crates/text/build.rs` reads `$CRAFT_FONTS_DIR/fonts/manifest.txt` and embeds the fonts as `photocraft_text::CRAFT_FONTS` (`crates/text/src/craft_fonts.rs`). Unset, `CRAFT_FONTS` is empty and the build is unchanged. A bad path is a build warning, or an error with `CRAFT_FONTS_REQUIRED=1` (release builds set both).\n- **UI:** the Japanese fonts (BIZ UDPGothic Regular first) are the first Japanese fallback in the lazy CJK loader (`crates/ui-egui/src/cjk_fonts.rs`), ahead of the system Japanese fonts and in the same locale script order, appended last to every egui family with the usual baseline alignment.\n- **Type tool:** the text engine registers them in `FontDb::new` (so also with no system fonts) and puts them first in the Japanese slot of the locale-ordered fallback list: BIZ UDPGothic for sans runs, Shippori Mincho / BIZ UDMincho for serif runs.\n- **Web:** the wasm32 build never embeds craft-fonts, even with `CRAFT_FONTS_DIR` set: measured on 2026-10-06, the UI face alone took the release wasm from 24.19 MB to 28.87 MB, over the 24 MiB gate in `packaging/web/package.sh`. Instead it loads fonts served next to it, on demand: `fonts/manifest.txt` beside `index.html`, in craft-fonts' manifest format (`crates/text/src/served.rs`; hosting: `packaging/web/README.md` \u203a Fonts). `PHOTOCRAFT_WEB_FONTS_DIR=\"$PWD/../craft-fonts\" packaging/web/package.sh` puts craft-fonts there. Served families are in the font menus and are fetched when picked or when a document's text needs them; they aren't in the script fallback list yet, so Japanese text set in a Latin font still needs a Japanese font picked (#1615).\n- Tests that need the fonts skip with a message when `CRAFT_FONTS` is empty; CI's Linux gate and Windows test legs build with `CRAFT_FONTS_DIR` set and `CRAFT_FONTS_REQUIRED=1`, so they run there. Desktop releases check out craft-fonts at the commit pinned in `.github/workflows/release.yml` (`CRAFT_FONTS_REF`; ci.yml pins the same commit) and ship each font's `OFL.txt` as `OFL-<family>.txt`.",
+          "sha256": "ad37558a84aa2f84928eb8b2554988fbed73ca3ac989034fe06bed9603446873"
+        },
+        {
+          "path": "sources/github.com/storytold/photocraft/docs/development.md",
+          "startLine": 657,
+          "endLine": 659,
+          "excerpt": "- The corpus tests sit behind the `corpus` cargo feature of `photocraft-psd`, `photocraft-codecs`,\n  `photocraft-io` and `photocraft-engine`, so plain `cargo test` neither compiles nor needs them.\n  The HEIF ones also need the `heif` feature of `photocraft-codecs`/`photocraft-io` (test-corpus",
+          "sha256": "ad37558a84aa2f84928eb8b2554988fbed73ca3ac989034fe06bed9603446873"
+        },
+        {
+          "path": "sources/github.com/storytold/photocraft/AGENTS.md",
+          "startLine": 93,
+          "endLine": 109,
+          "excerpt": "## 5. Before you finish a task\n\n```sh\ncargo test -p <crates you touched>\ncargo clippy -p <crates> --all-targets -- -D warnings\ncargo xtask layers\ncargo xtask wasm            # if you touched L0\u2013L6\ncargo xtask parity          # if you added commands; commit the regenerated docs/parity-checklist.md\ncargo test -p photocraft-engine --test panic_hunt -- --ignored   # if you added/changed commands: no panic on adversarial input (Rule 9)\ncargo xtask scorecard       # if you moved a number: flip the checklist row in scorecard/*.toml, raise a\n                            # corpus floor, fix a dead preference, or meet a budget (then set enforce = true\n                            # in perf/budgets.toml); commit the regenerated docs/scorecard.md (CI checks it)\ncargo xtask perf --quick    # if you touched a hot path; `cargo xtask perf --update-baseline` publishes a full run\ncargo xtask test-corpus     # if you touched psd, io, codecs, compose, gpu, text or format (or: --changed decides)\n```\n\nWhile iterating, run less and keep the full commands above as the final gate: `cargo test -p <crate> --lib --tests` skips the examples and doctests plain `cargo test` builds every time (ui-egui has 11 examples), and `cargo test -p <crate> --test <file>` runs one integration-test file. `cargo nextest run` runs tests in parallel across binaries; see `docs/development.md` \u203a Faster test loops.",
+          "sha256": "849dcb393d4b20779e0c0f71141fc5b505a181b71f35b497531dbd2e05a6c62a"
+        },
+        {
+          "path": "sources/github.com/storytold/photocraft/apps/photocraft/Cargo.toml",
+          "startLine": 1,
+          "endLine": 8,
+          "excerpt": "[package]\nname = \"photocraft\"\nversion.workspace = true\nedition.workspace = true\nlicense.workspace = true\ndefault-run = \"photocraft\"\ndescription = \"PhotoCraft: an open-source, native image editor\"\nbuild = \"build.rs\"",
+          "sha256": "e489011fd26b5855ef9167454b321f3e951e2ecc8ac3751eba2320d90f83363b"
+        },
+        {
+          "path": "sources/github.com/storytold/photocraft/apps/photocraft/src/main.rs",
+          "startLine": 720,
+          "endLine": 741,
+          "excerpt": "#[cfg(test)]\npub(crate) static CHILD_SPAWNS: std::sync::RwLock<()> = std::sync::RwLock::new(());\n\n/// Held by a test that checks who holds a file lock: no other test spawns a child meanwhile.\n#[cfg(test)]\npub(crate) fn no_child_spawns() -> std::sync::RwLockWriteGuard<'static, ()> {\n    CHILD_SPAWNS.write().unwrap_or_else(std::sync::PoisonError::into_inner)\n}\n\n#[cfg(test)]\nmod tests {\n    #[test]\n    fn window_and_panel_geometry_survive_a_restart() {\n        let options = super::native_options(super::CUSTOM_TITLEBAR);\n        assert!(options.persist_window);\n        assert_eq!(options.persistence_path, super::services::config_dir().map(|dir| dir.join(\"ui.ron\")));\n\n        #[derive(Default)]\n        struct Storage(std::collections::BTreeMap<String, String>);\n        impl eframe::Storage for Storage {\n            fn get_string(&self, key: &str) -> Option<String> {\n                self.0.get(key).cloned()",
+          "sha256": "8fb06954e2f6db6983cc7167a6874ba407c5ecc9796d1f6e9596dca081ee9efc"
+        },
+        {
+          "path": "sources/github.com/storytold/photocraft/Cargo.toml",
+          "startLine": 1,
+          "endLine": 10,
+          "excerpt": "[workspace]\nresolver = \"3\"\nmembers = [\"crates/*\", \"apps/*\", \"xtask\"]\ndefault-members = [\"crates/*\", \"apps/photocraft\", \"apps/photocraft-cli\", \"xtask\"]\n\n[workspace.package]\nversion = \"0.17.0\"\nedition = \"2024\"\nlicense = \"MIT OR Apache-2.0\"\nrust-version = \"1.95\"",
+          "sha256": "9e08a93ebf39236315f8aa86a1e129b77c30a17049c1bcbb62a08c19776a85e3"
+        }
+      ]
+    }
+  ]
+}

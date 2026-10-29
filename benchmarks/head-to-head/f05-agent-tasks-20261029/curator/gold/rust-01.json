@@ -1,0 +1,14 @@
+{
+  "taskId": "rust-01",
+  "status": "required-abstention",
+  "supportedCompleteAlternatives": [],
+  "reason": "No complete source-supported repository-default command/context/prerequisite tuple. External Tauri prerequisite guide and per-package coverage remain unresolved.",
+  "sourceLocators": [
+    "sources/github.com/tauri-apps/tauri/Cargo.toml:1-42",
+    "sources/github.com/tauri-apps/tauri/.github/CONTRIBUTING.md:47-104",
+    "sources/github.com/tauri-apps/tauri/.github/workflows/test-core.yml:38-139"
+  ],
+  "executionObserved": false,
+  "independentReview": "pending",
+  "sourceAssessmentOnly": true
+}

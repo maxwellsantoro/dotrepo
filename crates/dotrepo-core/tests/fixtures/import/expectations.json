@@ -1749,5 +1749,124 @@
   "overlay_evidence_contains": [
     "Imported repository name and description from README.md."
   ]
-}
+},
+  {
+    "fixture": "context-runtime-repository",
+    "repo_name": "Context fixture",
+    "repo_description": "Source-preserving contextual instructions.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ],
+    "repo_test_candidates": [
+      {
+        "command": "cargo test --locked",
+        "ecosystem": null,
+        "source": "README.md",
+        "context": {
+          "command": "cargo test --locked",
+          "working_directory": ".",
+          "scope": "repository",
+          "prerequisites": [
+            "Rust >=1.90.0"
+          ],
+          "source": "README.md"
+        }
+      }
+    ]
+  },
+  {
+    "fixture": "context-runtime-component",
+    "repo_name": "Context fixture",
+    "repo_description": "Source-preserving contextual instructions.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ],
+    "repo_test_candidates": [
+      {
+        "command": "pnpm test --run",
+        "ecosystem": null,
+        "source": "README.md",
+        "context": {
+          "command": "pnpm test --run",
+          "working_directory": "packages/ui",
+          "scope": "component",
+          "prerequisites": [
+            "Node.js 22+",
+            "pnpm >=10.0",
+            "Run `pnpm install` in `packages/ui` before this command."
+          ],
+          "source": "README.md",
+          "component": "packages/ui"
+        }
+      }
+    ]
+  },
+  {
+    "fixture": "context-runtime-conditional",
+    "repo_name": "Context fixture",
+    "repo_description": "Source-preserving contextual instructions.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ]
+  }
 ]

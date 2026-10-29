@@ -60,45 +60,50 @@ refresh has landed unattended (#166). Optimize elapsed time, not agent count:
   two checkpoints is re-scoped smaller or reassigned.
 - **Stop conditions:** F2 closes when its checkpoint evidence exists; 2.0
   final ships after a clean RC window (no rc-blocking defect and successful
-  scheduled runs), not after a fixed soak duration; C3 starts when one
+  scheduled runs), not after a fixed soak duration; C3 execution starts when one
   consenting participant is named in issue #170.
 
-The current completion target is **a release-ready toolchain and a reproducible
-operator study on the maintainer's other public projects**. Freeze source-grounded
-tasks before checking coverage, run the paired workflows, and retain failures and
-fallbacks. This is the practical next checkpoint; external recruitment is deferred.
-Independent adoption, ecosystem scale, and protocol governance remain later gates.
+The current completion target is **a release-ready toolchain, qualified instruction
+establishment, and a frozen autonomous unfamiliar-repository task experiment**.
+The [October 29 specifications](benchmarks/head-to-head/experiments/applicability-2026-10-29/README.md)
+separate representation, establishment and consumer benefit. Keep E1 development,
+E1 qualification and F-05 task identities separate; freeze source-grounded tasks
+before checking coverage. E1 and F-05 proceed concurrently with independent
+acceptance decisions. The retained own-project study is operator evidence, not
+the new holdout. Recruitment preparation can begin alongside these packets;
+outreach requires authorization and independent use requires consent. Ecosystem
+scale and protocol governance remain later gates.
 
 ### Start together
 
 | Packet / priority | Work and bounded handoff | Dependencies and ownership |
 | --- | --- | --- |
 | F1 / 1: factual freshness | Inspect current overdue and risk-weighted audit queues; correct source-backed facts, preserve abstentions, add regression fixtures, and retain dated inspection evidence | Ready now. Own disjoint repository identities and audit/freshness changes; coordinate shared importer-policy edits with E1 |
-| E1 / 2: execution metadata | Extract the complete source-grounded RFC 0021 context tuple; fixture repository/component layouts, missing prerequisites, ambiguity, and stale context | Ready now: authoring/validation/export contract exists. Own execution extraction and its tests; reserve schema/shared importer changes for coordinated integration |
+| E1 / 2: instruction establishment | Extract complete source-grounded RFC 0021 tuples; iterate on a bounded development queue and qualify on disjoint frozen tasks under the [E1 specification](benchmarks/head-to-head/experiments/applicability-2026-10-29/e1.md) | Ready now: representation exists. Own extraction and focused tests; gold assessment is separate from implementation; reserve shared contract changes for coordinated integration |
 | R1 / 3: delivery continuity | Maintain actual `ci-gate` enforcement, version-matched installation defaults, history restoration, and snapshot-coherent public smoke checks | Stable delivery evidence is retained in the changelog and dated receipts. Keep maintenance versions separate from main; repeat affected checks for future releases |
-| C1 / 4: own-project study preparation | Freeze tasks and upstream answers from the maintainer's substantive public projects; prepare paired source-first/lookup-first runs and accounting | Ready now, before inspecting coverage. Exclude dotrepo self-tests and throwaway canaries from the primary roster; own harness/client/reporting. No external participant is needed |
+| C1 / 2: F-05 experiment preparation | Freeze unfamiliar tasks, hidden gold, model/settings, environment, snapshot, randomized independent sessions, scoring and accounting under the [F-05 specification](benchmarks/head-to-head/experiments/applicability-2026-10-29/f05.md) | Ready alongside E1, before checking coverage. Keep both evaluation sets disjoint from development and historical study repositories; own harness/client/reporting. No external participant or E1 qualification is required |
 
-With three worker slots, start F1, E1, and R1. The coordinator prepares C1's task
-rubric and own-project roster, then dispatches C1 when a slot opens. With more
-capacity, C1 starts immediately. Split F1 by identity or ecosystem only when
-workers can avoid shared parser, policy, or record files. Keep the coordinator
-available for cross-cutting decisions and integration.
+With three worker slots, start F1, E1, and C1; keep R1 delivery continuity moving
+through coordinator maintenance or the next available slot. E1 and C1 have equal
+priority and neither waits for the other's acceptance. Split F1 by identity or
+ecosystem only when workers can avoid shared parser, policy, or record files.
+Keep the coordinator available for cross-cutting decisions and integration.
 
 Declare F1's checkpoint identities and fields before batching inspections, so
-catch-up has a bounded handoff. C1 can run source-first baselines and offline
-adapter tests while F1/E1 evolve; only the paired lookup-first outcome needs the
-fixed integrated export. Reuse baseline runs only when inputs, policy, cache
-conditions, and measured task environment remain comparable.
+catch-up has a bounded handoff. C1 can freeze tasks and test adapters while F1/E1
+evolve. C2 fixes an available export independently of E1's delivery; both arms
+then run under the frozen assignment/configuration. A later improved export gets
+a new experiment identity rather than replacing the earlier outcome.
 
 ### Join only where evidence is required
 
 | Packet | Prerequisites | Completion evidence |
 | --- | --- | --- |
 | F2: factual checkpoint | F1 corrections and fresh inspections integrated | Current record-age/overdue gate; exact-value, missing-answer, incorrect-assertion, and correct-abstention results by ecosystem; disposition for every inspected audit case |
-| E2: context usefulness | E1 integrated; command tasks frozen by C1 | Sources support command, directory, scope, component, prerequisites, and source together; consumer selection/fallback tests pass; component commands stay candidates unless they establish a repository default |
+| E2: establishment qualification | E1 implementation fixed; disjoint E1 qualification sources/gold frozen before evaluation | Complete source-supported tuples, per-task applicability/abstention/error dispositions, scope/ecosystem breakdowns and the bounded [E1 qualification gate](benchmarks/head-to-head/experiments/applicability-2026-10-29/e1.md#decision-and-handoff); no C1/C2 result required |
 | R2: stable delivery | R1 compatibility/release gates pass; publication authorized | Published artifacts and installation smoke tests before moving install defaults/generated maintainer CI; source merge alone is not a release |
-| C2: operator task evaluation | C1 inputs frozen; evaluated snapshot fixed | Paired reproducible outcomes on the maintainer's projects, errors/fallback work, cache state, elapsed time, and measurement boundaries; retain unfavorable results and unknown model/maintenance costs. Operator familiarity and shared cache carryover limit conclusions |
-| C3: independent pilot (deferred) | Useful operator results justify recruitment; new workload frozen, consenting participant, compatible deployed surface, and declared policy/snapshot versions | Deployed integration, observation window, repeated independent use, and outcomes meeting [pilot acceptance](docs/consumer-pilot.md#acceptance) |
+| C2: F-05 agent task evaluation | C1 configuration, oracle, assignment and snapshot frozen; autonomous adapter/scorer controls pass | Independent-session randomized access comparison of correct completion, wrong actions, applicability, fallback, actual usage and costs; retain negative and inconclusive results. E1/E2 acceptance is not a prerequisite |
+| C3: independent pilot | Preparation can begin now; execution needs a new frozen workload, consenting participant, compatible deployed surface, and declared policy/snapshot versions | Deployed integration, observation window, repeated independent use, and outcomes meeting [pilot acceptance](docs/consumer-pilot.md#acceptance); a prepared brief or operator result is not independent use |
 | G1: first growth cohort | F2, E2, C2, C3 pass; operating budgets hold | A 50–100 repository cohort meets quality, freshness, reliability, and unit-cost budgets below |
 
 C2 can evaluate an immutable published or development export while R2 proceeds.
@@ -106,8 +111,8 @@ The [contextual own-project packet](benchmarks/head-to-head/results/own-projects
 now demonstrates direct profile instruction reuse on prepared, source-inspected
 operator tasks. Use it as bounded C2 evidence; keep independent use, adoption,
 population accuracy and net cost evaluation open. The next consumer milestone is
-broader task/environment evidence or a practical independent pilot, rather than
-another apparatus expansion or an automatic growth cohort.
+the disjoint F-05 agent task experiment or a practical independent pilot, rather
+than another apparatus expansion or an automatic growth cohort.
 The [October 6 source checkpoint](index/telemetry/roadmap-factual-checkpoint-2026-10-06.md)
 and [risk audit](index/telemetry/roadmap-risk-audit-2026-10-06.md) supply bounded
 semantic dispositions and repairs. Whole-record verification and broader F2
@@ -126,26 +131,38 @@ answer passed the old reference policy. Future refreshes use the repaired source
 boundary; a cancelled proposal is not operating rotation or publication proof.
 E1 supports explicitly declared documentation contexts as candidates; general
 nested-manifest extraction and assessed acceptance remain separate work.
-An external participant is not a prerequisite for the current checkpoint. C3 is
-deferred; both useful C2 results and C3 acceptance evidence are required before
-G1 expansion. If evaluation reveals a defect,
-reopen the smallest affected packet and rerun dependent checks; preserve successful
-independent work.
+The [October 29 E1 observations](benchmarks/head-to-head/e1-qualification-20261029/evaluation-remaining/README.md)
+retain a negative qualification result and unresolved source gold at a frozen
+implementation. Those exposed cases are known workloads for later development;
+future generalization claims need fresh holdouts. The disjoint
+[F-05 source packet](benchmarks/head-to-head/f05-agent-tasks-20261029/README.md)
+and its [review addendum](benchmarks/head-to-head/f05-agent-tasks-review-20261029/README.md)
+establish source enrollment, while executable oracles, qualified environments,
+provider settings/budgets and a complete campaign freeze still gate C2.
+An external participant is not a prerequisite for E1 qualification or F-05. C3
+preparation is independent; both useful C2 results and C3 acceptance evidence are
+required before G1 expansion. A complete negative C2 report closes its measurement
+packet without satisfying the useful-outcome growth gate. If evaluation reveals
+a defect, reopen the smallest affected packet and rerun dependent checks;
+preserve successful independent work.
 
 ### Critical path and stopping rules
 
-The current study path is `C1 -> fixed snapshot -> C2`; findings reopen affected
-F1/E1 work, with F2/E2 required to establish broader quality. Stable delivery is
-`R1 -> R2`. The later independent-use path is
-`useful operator results + new frozen workload + consent + compatible deployment -> C3`.
+The independent experiment paths are `E1 development -> frozen E1 qualification -> E2`
+and `C1 -> fixed snapshot/configuration -> C2 (F-05)`. Findings reopen affected
+F1/E1 work under new experiment identities; F2/E2 establish broader quality.
+Stable delivery is `R1 -> R2`. The independent-use path is
+`new frozen workload + consent + compatible deployment -> C3`; recruitment
+preparation can proceed before these execution prerequisites are met.
 Join broader quality, independent-use evidence, and operating budgets before G1.
 Establish the actual blocking path from evidence instead of invented dates.
 
-Future C2 campaigns must retain contextual selection/execution controls and the
-consumer/scorer/runtime freeze already exercised by the retained campaign.
-Preregister new tasks, component paths and prepared environments before inspecting
-their coverage; source-inspect assessments and fix a new immutable snapshot.
-Keep source preparation, correct fallback and direct profile contribution
+Future C2 campaigns retain exporter/consumer plumbing controls and freeze the
+consumer/scorer/runtime, while F-05 hides gold from the agent and scores after
+execution. The historical fixed runner's pre-execution answer check cannot supply
+an autonomous comparison. Preregister tasks, component paths and environments
+before checking coverage; fix an immutable snapshot and randomized session plan.
+Keep source verification, correct fallback and direct profile contribution
 separate. Preserve all historical packets. Delivery maintenance must keep archive
 retrieval after edge eviction, version-matched releases, and enforced CI working
 across subsequent publications.
@@ -207,7 +224,7 @@ milestones describe outcome gates, not a second serial task list.
 | --- | --- |
 | M0: Working protocol/proof surface | Schema, CLI/MCP/LSP, generation, trust, hosted export exist; keep contracts and version boundaries coherent |
 | M1: Autonomous index factory | Crawl, refresh, escalation, telemetry, landing exist; sustain freshness, recovery, cadence, and operating costs |
-| M2: Useful shared semantic cache | Profiles and cache/freshness contracts exist; F2/E2 establish broader quality, C2 measures bounded operator task outcomes, and C3 supplies independent-use evidence |
+| M2: Useful shared semantic cache | Profiles and cache/freshness contracts exist; F2/E2 establish broader quality, C2 measures autonomous task benefit separately from retained operator reuse, and C3 supplies independent-use evidence |
 | M3: Research substrate | Search, compare, relations, optional synthesis exist; representative calibration follows consumer demand |
 | M4: Ecosystem scale | C3 and measured operating budgets gate G1 and subsequent cohorts |
 | M5: Maintainer adoption | Bootstrap, readiness, CI, claims exist; independent native use and durable handoffs remain separate from overlay coverage |
@@ -252,11 +269,13 @@ for paired tasks, [the study and later pilot](docs/consumer-pilot.md), and
 [archived reports](docs/archive/README.md) for history. Do not duplicate live
 dashboards or completed inventories here.
 
-The current checkpoint produces a frozen own-project workload, paired observed
-outcomes, and an honest disposition for each failure or fallback. It need not
-show an advantage to be informative. A product-benefit claim still requires
-improvement after fallback and maintenance costs, and independent adoption needs
-the later C3 evidence. Retain unfavorable data and revise the affected packet.
+The current checkpoint produces separate E1 qualification and F-05 task packets
+under the [October 29 specifications](benchmarks/head-to-head/experiments/applicability-2026-10-29/README.md),
+with an honest disposition for each failure or fallback. Neither needs to show
+an advantage to be informative. A product-benefit claim requires the frozen
+causal comparison, with verification, fallback and maintenance accounted for;
+independent adoption needs C3 evidence. Retain unfavorable data and revise the
+affected packet under a new experiment identity.
 
 The retained repeat closes the original own-project readiness join and supplies
 bounded direct reuse evidence. Broaden source-preserving task/environment evidence

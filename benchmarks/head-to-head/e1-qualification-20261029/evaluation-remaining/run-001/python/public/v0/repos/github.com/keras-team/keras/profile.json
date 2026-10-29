@@ -1,0 +1,58 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T05:22:03.084683Z",
+    "snapshotDigest": "fe3651ef5762490b41439a34654734da82a0e4891174ed6223806a46ccd53a1b",
+    "staleAfter": "2026-10-30T05:22:03.084683Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "keras-team",
+    "repo": "keras",
+    "source": "https://github.com/keras-team/keras"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/keras-team/keras/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/keras-team/keras",
+    "generatedAt": "2026-10-29T05:22:03.913748Z",
+    "evidencePath": "repos/github.com/keras-team/keras/evidence.md",
+    "freshnessStatus": "unknown",
+    "staleAfterDays": 30
+  },
+  "purpose": "Keras 3 is a multi-backend deep learning framework, with support for JAX, TensorFlow, PyTorch, and OpenVINO (for inference-only).",
+  "name": "keras",
+  "homepage": "https://github.com/keras-team/keras",
+  "execution": {
+    "build": "python -m build",
+    "test": "python -m pytest"
+  },
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": false,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "medium",
+    "provenance": [
+      "imported",
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/keras-team/keras/profile.json",
+    "repository": "/v0/repos/github.com/keras-team/keras/index.json",
+    "trust": "/v0/repos/github.com/keras-team/keras/trust.json",
+    "queryTemplate": "/v0/repos/github.com/keras-team/keras/query?path={dot_path}",
+    "indexPath": "repos/github.com/keras-team/keras/"
+  }
+}

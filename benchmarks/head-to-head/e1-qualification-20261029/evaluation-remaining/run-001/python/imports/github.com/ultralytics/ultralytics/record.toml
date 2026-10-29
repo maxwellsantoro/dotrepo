@@ -1,0 +1,43 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/ultralytics/ultralytics"
+generated_at = "2026-10-29T05:22:03.629554Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md`, `pyproject.toml`, and `.github/workflows/ci.yml`. Inferred `repo.build` from `pyproject.toml`. Inferred `repo.test` from `.github/workflows/ci.yml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Ultralytics YOLO banner"
+description = "Request an Enterprise License for commercial use at Ultralytics Licensing."
+homepage = "https://github.com/ultralytics/ultralytics"
+languages = []
+build = "python -m build"
+test = "pytest $xdist --cov=ultralytics/ --cov-report=xml tests/ --export-env base"
+topics = []
+
+[repo.toolchain]
+min = "3.8"
+ecosystem = "Python"
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/ultralytics/ultralytics"
+notes = "Cross-link from README: GitHub Issues"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]

@@ -1,0 +1,3 @@
+# Go source-gold slice
+
+Six tasks use the first three Go reservations: RAGFlow, Go, and Docker Compose. Five source-supported alternatives and one unresolved compiler-coverage tuple are retained. Native setup, bootstrap compiler, non-root working directory, Buildx and separate integration/module test lanes are explicit. Go primary source is an official GitHub mirror; linked maintainer website docs were independently pinned and retained. Source Gold distinguishes documented defaults from complete all-feature/all-platform execution. No third-party code, index/profile lookup or importer output was used.

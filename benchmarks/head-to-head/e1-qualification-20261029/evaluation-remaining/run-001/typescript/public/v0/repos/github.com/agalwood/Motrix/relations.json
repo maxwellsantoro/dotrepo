@@ -1,0 +1,91 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T05:22:03.084683Z",
+    "snapshotDigest": "44ea70f9e178d7537a1317d49fb3f55ca219f442c467268c933ae494a299b42d",
+    "staleAfter": "2026-10-30T05:22:03.084683Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "agalwood",
+    "repo": "Motrix",
+    "source": "https://github.com/agalwood/Motrix"
+  },
+  "relationCount": 1,
+  "references": [
+    {
+      "relationship": "related",
+      "direction": "outgoing",
+      "target": "github.com/agalwood/Motrix",
+      "notes": "Cross-link from README: v2.1.0 from GitHub Releases",
+      "trust": {
+        "confidence": "low",
+        "provenance": [
+          "declared",
+          "readme"
+        ]
+      },
+      "identity": {
+        "host": "github.com",
+        "owner": "agalwood",
+        "repo": "Motrix",
+        "source": "https://github.com/agalwood/Motrix"
+      },
+      "profile": {
+        "identity": {
+          "host": "github.com",
+          "owner": "agalwood",
+          "repo": "Motrix",
+          "source": "https://github.com/agalwood/Motrix"
+        },
+        "name": "Motrix",
+        "purpose": "A modern, full-featured download manager that stays simple to use",
+        "completeness": {
+          "hasBuild": true,
+          "hasTest": true,
+          "hasDocs": false,
+          "hasSecurityContact": false,
+          "hasOwnershipSignal": false,
+          "hasLicense": false,
+          "conflictCount": 0
+        },
+        "trust": {
+          "selectedStatus": "imported",
+          "confidence": "medium",
+          "provenance": [
+            "imported"
+          ],
+          "selectionReason": "only_matching_record"
+        },
+        "matched": [
+          "relation"
+        ],
+        "ranking": {
+          "score": 13,
+          "matchedFieldCount": 1,
+          "completenessSignalCount": 2,
+          "basis": [
+            "matchedFields",
+            "profileCompleteness",
+            "trustConfidence"
+          ]
+        },
+        "links": {
+          "self": "/v0/repos/github.com/agalwood/Motrix/profile.json",
+          "repository": "/v0/repos/github.com/agalwood/Motrix/index.json",
+          "trust": "/v0/repos/github.com/agalwood/Motrix/trust.json",
+          "queryTemplate": "/v0/repos/github.com/agalwood/Motrix/query?path={dot_path}",
+          "indexPath": "repos/github.com/agalwood/Motrix/"
+        }
+      }
+    }
+  ],
+  "links": {
+    "self": "/v0/repos/github.com/agalwood/Motrix/relations",
+    "repository": "/v0/repos/github.com/agalwood/Motrix/index.json",
+    "trust": "/v0/repos/github.com/agalwood/Motrix/trust.json",
+    "profile": "/v0/repos/github.com/agalwood/Motrix/profile.json",
+    "queryTemplate": "/v0/repos/github.com/agalwood/Motrix/query?path={dot_path}",
+    "indexPath": "repos/github.com/agalwood/Motrix/"
+  }
+}

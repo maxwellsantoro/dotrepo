@@ -1,0 +1,49 @@
+{
+  "checkedAt": "2026-10-29T04:54:15.217638+00:00",
+  "scope": "Read-only operating evidence; no schedule changes, deployment or package publication.",
+  "refreshStreakSha256": "11266c5ba1db4b8778141c03e7ab2cd17b8f2bffe344889171b4b4b9a9302af0",
+  "checkerSourceSha256": "6b7842a548238b1eb419407224ca8477a076e578a90adc0df34974067da3f4eb",
+  "latestCompletedSchedule": {
+    "id": 40641402409,
+    "html_url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/40641402409",
+    "event": "schedule",
+    "status": "completed",
+    "conclusion": "success",
+    "head_sha": "954de4f8ca4021ef414f78629d1113c492cd58f7",
+    "created_at": "2026-10-28T06:01:56Z",
+    "run_attempt": 1,
+    "path": ".github/workflows/index-autonomous-refresh.yml"
+  },
+  "artifacts": [
+    {
+      "name": "index-autonomous-batch",
+      "id": 12796370641,
+      "expired": false
+    }
+  ],
+  "branchProtection": {
+    "requiredStatusChecks": {
+      "url": "https://api.github.com/repos/maxwellsantoro/dotrepo/branches/main/protection/required_status_checks",
+      "strict": true,
+      "contexts": [
+        "ci-gate"
+      ],
+      "contexts_url": "https://api.github.com/repos/maxwellsantoro/dotrepo/branches/main/protection/required_status_checks/contexts",
+      "checks": [
+        {
+          "context": "ci-gate",
+          "app_id": 15368
+        }
+      ]
+    },
+    "enforceAdmins": {
+      "url": "https://api.github.com/repos/maxwellsantoro/dotrepo/branches/main/protection/enforce_admins",
+      "enabled": true
+    }
+  },
+  "limitations": [
+    "The successful scheduled run has no refresh-receipt artifact and cannot qualify.",
+    "Seven consecutive qualifying scheduled days remain required; manual replays cannot replace calendar evidence.",
+    "Branch settings are observed at check time and remain mutable."
+  ]
+}

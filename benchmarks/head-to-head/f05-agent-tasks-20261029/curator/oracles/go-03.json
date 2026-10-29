@@ -1,0 +1,28 @@
+{
+  "taskId": "go-03",
+  "state": "source-grounded draft; not launch-ready",
+  "sourceLocators": [
+    "sources/github.com/hashicorp/vault/go.work:1-19",
+    "sources/github.com/hashicorp/vault/api/go.mod:1-41",
+    "sources/github.com/hashicorp/vault/api/README.md:1-9",
+    "sources/github.com/hashicorp/vault/README.md:110-127",
+    "sources/github.com/hashicorp/vault/Makefile:87-96",
+    "sources/github.com/hashicorp/vault/Makefile:178-198",
+    "sources/github.com/hashicorp/vault/api/api_test.go:1-28",
+    "sources/github.com/hashicorp/vault/api/client_test.go:1-1546",
+    "sources/github.com/hashicorp/vault/.go-version:1-1"
+  ],
+  "criteria": [
+    "Verify exact upstream revision and intended scope.",
+    "Require retained actual test execution and result; a plausible command, compilation-only, listing-only or unrelated narrowed suite does not qualify.",
+    "Require the api Go module test outcome, distinguishing its descendant directories from separate api/auth/* Go modules.",
+    "Preserve or explicitly adjudicate documented generation/Docker prerequisites; root product tests or compiler success alone do not establish the requested module outcome.",
+    "Classify lost prerequisites, wrong cwd/scope, accepted unsupported instruction and recovered errors independently of final completion."
+  ],
+  "pending": [
+    "Independent gold/coverage review and executable completion oracle.",
+    "Pinned environment/image, toolchain and dependency/cache state.",
+    "Test skip and platform rules with positive/negative oracle controls.",
+    "Equal tool/network permissions, enforced resource budgets and complete usage/cost receipts."
+  ]
+}

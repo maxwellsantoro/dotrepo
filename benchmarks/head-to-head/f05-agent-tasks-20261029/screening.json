@@ -1,0 +1,208 @@
+{
+  "schema": "dotrepo-f05-source-screening/v1",
+  "state": "12 tasks enrolled by source-only screening; no evaluated coverage inspection",
+  "rules": "../experiments/applicability-2026-10-29/f05-screening-rules.md",
+  "indexConsulted": false,
+  "rows": [
+    {
+      "ecosystem": "Rust",
+      "queuePosition": 1,
+      "slot": 1,
+      "repository": "github.com/tauri-apps/tauri",
+      "revision": "548a3692f59405aeb239c5b63fa589824eee51e8",
+      "decision": "enrolled",
+      "taskId": "rust-01",
+      "reason": "Root workspace and contributor guide establish Rust test intent, but the contributor guide delegates per-package behavior and test-core covers selected packages, not one repository-default full suite."
+    },
+    {
+      "ecosystem": "Rust",
+      "queuePosition": 2,
+      "slot": 2,
+      "repository": "github.com/openinterpreter/openinterpreter",
+      "revision": "ac1fcc8fe57aba51fcc3c79afd57a0883237fe87",
+      "decision": "excluded",
+      "reason": "Source README explicitly identifies the Rust project as a fork of OpenAI Codex; shared upstream overlap with a reserved E1 identity despite GitHub fork=false.",
+      "sourceLocator": "sources/github.com/openinterpreter/openinterpreter/README.md:45-47"
+    },
+    {
+      "ecosystem": "Rust",
+      "queuePosition": 3,
+      "slot": 2,
+      "repository": "github.com/GyulyVGC/sniffnet",
+      "revision": "ab4bf739d46448436cb68933bb8260ee264449d5",
+      "decision": "enrolled",
+      "taskId": "rust-02",
+      "reason": "The only non-root workspace member is an owned library with retained unit tests; it is the lexically first eligible component."
+    },
+    {
+      "ecosystem": "Rust",
+      "queuePosition": 4,
+      "slot": 3,
+      "repository": "github.com/iced-rs/iced",
+      "revision": "cd04b74ca7073766f654535d6e72c452ef749d07",
+      "decision": "enrolled",
+      "taskId": "rust-03",
+      "reason": "Root Rust workspace and retained Test workflow establish the repository-wide CI test target."
+    },
+    {
+      "ecosystem": "Python",
+      "queuePosition": 1,
+      "slot": 1,
+      "repository": "github.com/666ghj/MiroFish",
+      "revision": "7657031ac01184afe2cb220f5ee3545573b5e843",
+      "decision": "enrolled",
+      "taskId": "python-01",
+      "reason": "Root Python tests and backend Python project/tests establish code and repository test intent."
+    },
+    {
+      "ecosystem": "Python",
+      "queuePosition": 2,
+      "slot": 2,
+      "repository": "github.com/home-assistant/core",
+      "revision": "cde3969919b9bd540b2dd75b7aa84a908acbdbfe",
+      "decision": "enrolled",
+      "taskId": "python-02",
+      "reason": "Literal lexical non-root package-path selection: the root manifest establishes the owned primary package homeassistant before narrower subpackages. Package location does not establish a separate component test instruction or component-only coverage."
+    },
+    {
+      "ecosystem": "Python",
+      "queuePosition": 3,
+      "slot": 3,
+      "repository": "github.com/ytdl-org/youtube-dl",
+      "revision": "956b8c585591b401a543e409accb163eeaaa1193",
+      "decision": "enrolled",
+      "taskId": "python-03",
+      "reason": "Literal lexical non-root package-path selection: the root manifest establishes the owned primary package youtube_dl before narrower subpackages. Package location does not establish a separate component test instruction or component-only coverage."
+    },
+    {
+      "ecosystem": "TypeScript",
+      "queuePosition": 1,
+      "slot": 1,
+      "repository": "github.com/deepseek-ai/deepseek-harness",
+      "revision": "f3803c96974ad4a94195fb97e5c637e9c2a3afe3",
+      "decision": "enrolled",
+      "taskId": "typescript-01",
+      "reason": "Root workspace manifest and default test script establish a TypeScript project and repository test target."
+    },
+    {
+      "ecosystem": "TypeScript",
+      "queuePosition": 2,
+      "slot": 2,
+      "repository": "github.com/OpenHands/OpenHands",
+      "revision": "2875056f93d6eebcd887f64ae557258a7b0b0108",
+      "decision": "enrolled",
+      "taskId": "typescript-02",
+      "reason": "Maintainer architecture names bin/ as the CLI launcher component; it precedes scripts/ and src/ lexically and has one source launcher and a dedicated bin test suite."
+    },
+    {
+      "ecosystem": "TypeScript",
+      "queuePosition": 3,
+      "slot": 3,
+      "repository": "github.com/vuejs/core",
+      "revision": "05db7e807be841e6f343d0237669669b18c89d4d",
+      "decision": "enrolled",
+      "taskId": "typescript-03",
+      "reason": "Root package scripts, contributor test guide and Vitest configuration establish a TypeScript workspace with repository-default tests."
+    },
+    {
+      "ecosystem": "Go",
+      "queuePosition": 1,
+      "slot": 1,
+      "repository": "github.com/microsoft/TypeScript",
+      "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+      "decision": "enrolled",
+      "taskId": "go-01",
+      "reason": "Source has Go workspace modules tsc/tools and maintainer guide explicitly names the default compiler/language-service Go test task."
+    },
+    {
+      "ecosystem": "Go",
+      "queuePosition": 2,
+      "slot": 2,
+      "repository": "github.com/beego/beego",
+      "revision": "939cfde380bb9f15844ad633b84f037f7da21584",
+      "decision": "enrolled",
+      "taskId": "go-02",
+      "reason": "Maintainer README names cache as an owned module; package documentation fixes its physical client/cache path and tests exist in it and its memcache/redis/ssdb backends. It is lexical before other client modules and core/server/task paths."
+    },
+    {
+      "ecosystem": "Go",
+      "queuePosition": 3,
+      "slot": 3,
+      "repository": "github.com/hashicorp/vault",
+      "revision": "352089582444ea84feb03bc97eda97b35729e8ec",
+      "decision": "enrolled",
+      "taskId": "go-03",
+      "reason": "go.work declares api as the lexical first non-root module; api/go.mod, API README and retained API tests establish an owned component with test intent."
+    }
+  ],
+  "missingSourceObservations": [
+    {
+      "repository": "github.com/tauri-apps/tauri",
+      "revision": "548a3692f59405aeb239c5b63fa589824eee51e8",
+      "path": ".github/workflows/test.yml",
+      "result": "GitHub contents 404; actual workflow directory inspected and test-core.yml retained."
+    },
+    {
+      "repository": "github.com/openinterpreter/openinterpreter",
+      "revision": "ac1fcc8fe57aba51fcc3c79afd57a0883237fe87",
+      "path": "Cargo.toml",
+      "result": "GitHub contents 404; root listing and README retained; excluded for source-declared fork overlap."
+    },
+    {
+      "repository": "github.com/GyulyVGC/sniffnet",
+      "revision": "ab4bf739d46448436cb68933bb8260ee264449d5",
+      "path": ".github/workflows/test.yml",
+      "result": "GitHub contents 404; actual workflow directory inspected and rust.yml retained."
+    },
+    {
+      "repository": "github.com/home-assistant/core",
+      "revision": "cde3969919b9bd540b2dd75b7aa84a908acbdbfe",
+      "path": "script/hassfest",
+      "result": "Contents API identifies a directory, not a file; no command was executed."
+    },
+    {
+      "repository": "github.com/home-assistant/core",
+      "revision": "cde3969919b9bd540b2dd75b7aa84a908acbdbfe",
+      "path": "tests/components/3_day_blinds",
+      "result": "GitHub contents 404; virtual alias has no owned dedicated test component."
+    }
+  ],
+  "componentScreening": [
+    {
+      "repository": "github.com/home-assistant/core",
+      "path": "homeassistant/components/3_day_blinds",
+      "decision": "not an eligible owned code/test component",
+      "reason": "Manifest declares integration_type virtual and supported_by motion_blinds; directory contains only manifest.json and no dedicated test directory exists.",
+      "sourceLocators": [
+        "sources/github.com/home-assistant/core/homeassistant/components/3_day_blinds/manifest.json:1-6"
+      ],
+      "disposition": "Provisional narrower-path inspection; not an enrolled task after applying primary-package selection."
+    },
+    {
+      "repository": "github.com/home-assistant/core",
+      "path": "homeassistant/components/abode",
+      "decision": "provisional narrower owned component; not enrolled",
+      "reason": "Abode was inspected before consistent literal non-root package-path clarification; earlier primary homeassistant path is selected. Its tests cannot substitute for primary-package coverage."
+    }
+  ],
+  "activityEvidence": "Retained repository metadata shows public, non-archived, non-disabled repositories with recent pushed_at activity; commit timestamps and pushed_at are both retained, including repositories whose default-branch commit is older. This source frame is not a population sample.",
+  "selectionClarification": {
+    "source": "Coordinator instruction before final source freeze, October 29, 2026",
+    "rule": "Use literal non-root package-path order consistently: select homeassistant and youtube_dl before narrower subpackages. Package location alone never proves distinct component coverage; leave instruction/oracle applicability unresolved where sources establish only aggregate tests.",
+    "provisionalChoices": [
+      {
+        "taskId": "python-02",
+        "component": "homeassistant/components/abode",
+        "replacement": "homeassistant"
+      },
+      {
+        "taskId": "python-03",
+        "component": "youtube_dl/downloader",
+        "replacement": "youtube_dl"
+      }
+    ],
+    "identitiesAndQuotasUnchanged": true,
+    "indexOrEvaluationInfluence": false,
+    "reason": "Apply retained manifest-established lexical order consistently before final source freeze; do not select easier or harder cases after coverage inspection."
+  }
+}

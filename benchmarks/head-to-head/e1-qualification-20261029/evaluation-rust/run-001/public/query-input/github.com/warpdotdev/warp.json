@@ -1,0 +1,90 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T05:05:17.00058Z",
+    "snapshotDigest": "24cdb33243b74ab13719093d3c53c642e471b2a9fda4454f3a10926157fba671",
+    "staleAfter": "2026-10-30T05:05:17.00058Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "warpdotdev",
+    "repo": "warp",
+    "source": "https://github.com/warpdotdev/warp"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/warpdotdev/warp/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/warpdotdev/warp",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md`, `Cargo.toml`, and `rust-toolchain.toml`. Filled `repo.name` with inferred defaults. Inferred `repo.build` from `Cargo.toml`. Inferred `repo.test` from `Cargo.toml`. Imported `repo.toolchain.min` from `rust-toolchain.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/warpdotdev/warp/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/warpdotdev/warp",
+        "generated_at": "2026-10-29T05:05:19.949417Z",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md`, `Cargo.toml`, and `rust-toolchain.toml`. Filled `repo.name` with inferred defaults. Inferred `repo.build` from `Cargo.toml`. Inferred `repo.test` from `Cargo.toml`. Imported `repo.toolchain.min` from `rust-toolchain.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "repo": {
+        "name": "warp",
+        "description": "Warp is an agentic development environment, born out of the terminal.",
+        "homepage": "https://github.com/warpdotdev/warp",
+        "license": null,
+        "status": null,
+        "visibility": null,
+        "languages": [],
+        "build": "cargo build --workspace",
+        "test": "cargo test --workspace",
+        "toolchain": {
+          "min": "1.92.0",
+          "ecosystem": "Rust"
+        },
+        "topics": []
+      },
+      "owners": null,
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "dotrepo": {
+          "field_evidence": {
+            "docs.root": {
+              "checkedAt": "2026-10-29T05:05:19.949417Z",
+              "confidence": "low",
+              "method": "ambiguous",
+              "reason": "Conflicting documentation declarations in README.md; abstained from docs.root.",
+              "source": "README.md",
+              "state": "unresolved",
+              "valueJson": "null"
+            }
+          }
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

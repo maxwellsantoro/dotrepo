@@ -1,0 +1,421 @@
+{
+  "schema": "dotrepo-e1-source-gold/v1",
+  "state": "frozen-source-gold-typescript-slice",
+  "frozenAt": "2026-10-29T05:13:48.337959+00:00",
+  "tasks": [
+    {
+      "id": "e1-typescript-01-repository-tests",
+      "repository": "github.com/pixijs/pixijs",
+      "revision": "2e8cacbe1ed4ed0fc31d5b59b9895c811ac0e003",
+      "ecosystem": "javascript-typescript",
+      "scope": "repository",
+      "component": null,
+      "componentKind": null,
+      "taskIntent": "Establish the maintainer repository-default automated test instruction with complete setup and scope.",
+      "goldState": "supported",
+      "alternatives": [
+        {
+          "command": "npm test",
+          "working_directory": ".",
+          "scope": "repository",
+          "prerequisites": [
+            "Use Node.js24 or newer as recommended by maintainer setup guidance and install the checkout dependencies with npm install from repository root.",
+            "Use the Electron test runner/environment declared in .configs/jest.config.js, installed with project dependencies; provide the graphics/display support required by the selected renderer tests.",
+            "For local runs, permit the configured global setup to start http-server on an available local port. Preserve the normal non-CI environment; setting GITHUB_ACTIONS changes that setup behavior."
+          ],
+          "source": ".github/CONTRIBUTING.md"
+        }
+      ],
+      "requiredAbstentionReasons": [],
+      "unresolvedEvidence": [],
+      "evidence": [
+        {
+          "path": "typescript/sources/github.com/pixijs/pixijs/.github/CONTRIBUTING.md",
+          "startLine": 29,
+          "endLine": 41,
+          "excerpt": "### Setting Up\n\nTo setup for making changes you will need to take a few steps, we've outlined them below:\n\n1. Ensure you have node.js installed. You can download node.js from [nodejs.org][node]. Because\npixi uses modern JS features, you will need a modern version of node. v24+ is recommended.\n\n2. Fork the **[pixi.js][pixi]** repository, if you are unsure how to do this GitHub has a guides\nfor the [command line][fork-cli] and for the [GitHub Client][fork-gui].\n\n3. Next, run `npm install` from within your clone of your fork. That will install dependencies\nnecessary to build PixiJS.\n",
+          "sha256": "0c174f4aa2eae635f24137871297ac6f2b5a3268c67daed80b33591b65c0b897"
+        },
+        {
+          "path": "typescript/sources/github.com/pixijs/pixijs/.github/CONTRIBUTING.md",
+          "startLine": 58,
+          "endLine": 92,
+          "excerpt": "### Testing Your Change\n\nYou can test your change by using the automated tests packaged with PixiJS. You can run these tests\nby running `npm test` from the command line. If you fix a bug please add a test that will catch that\nbug if it ever happens again. This prevents regressions from sneaking in.\n\nTips for a faster workflow:\n\n- Run `npm start` in one terminal. This watches the source tree and compiles it incrementally.\n- Run `npm run test unit` to run unit tests, or `npm run test visual` to run visual regression tests.\n- Run `npm run test unit debug` to use headful DevTools to debug or develop tests.\n\nYou can also run individual check categories:\n\n- `npm run test lint` \u2014 ESLint only\n- `npm run test types` \u2014 Type checking only\n- `npm run test unit` \u2014 Unit tests only\n- `npm run test visual` \u2014 Visual regression tests only\n\nFor more details on the build and test pipeline, see [scripts/README.md](../scripts/README.md).\n\n#### Visual Regression Testing\n\nPixiJS uses a custom visual tester that allows you to create pixi scenes and compare them to a reference image.\nThese tests can be found in the [visual scenes directory](../tests/visual/scenes/). To run these tests, run `npm run test visual` from the command line, or run `npm run test visual debug` to use headful DevTools to debug or develop tests.\n\nAll visual tests must end with `.scene.ts` and follows this format:\n\n```ts\nimport { Graphics } from '~/scene';\n\nimport type { Container } from '~/scene';\nimport type { Renderer } from '~/rendering';\nimport type { TestScene } from '../../types';\n",
+          "sha256": "0c174f4aa2eae635f24137871297ac6f2b5a3268c67daed80b33591b65c0b897"
+        },
+        {
+          "path": "typescript/sources/github.com/pixijs/pixijs/scripts/README.md",
+          "startLine": 5,
+          "endLine": 22,
+          "excerpt": "## Quick reference\n\n| Command | Description |\n| --- | --- |\n| `npm run build` | Full production build (bundle + types + DTS bundle) |\n| `npm run build:lib` | Dev build (bundle + types, no DTS bundling) |\n| `npm run build:docs` | Generate TypeDoc API documentation |\n| `npm start` | Start playground dev server + watch mode |\n| `npm test` | Run all checks (lint, types, index, prune, unit, visual) |\n| `npm run test:unit` | Unit tests only |\n| `npm run test:visual` | Visual regression tests only |\n| `npm run test:lint` | Lint checks only |\n| `npm run test:types` | Type checking only |\n| `npm run lint` | Lint with auto-fix |\n\n## Build pipeline (`build.mts`)\n\nThe build script accepts two flags:",
+          "sha256": "42edd71adf3f04eed49fe665d1e3c2d73d59d4c25fe7f76f491f619116c2c475"
+        },
+        {
+          "path": "typescript/sources/github.com/pixijs/pixijs/scripts/jest/jest-global-setup.ts",
+          "startLine": 7,
+          "endLine": 36,
+          "excerpt": "    if (!process.env.GITHUB_ACTIONS)\n    {\n        const { default: getPort } = await import('get-port');\n        const port = await getPort();\n\n        process.env.SERVER_PORT = String(port);\n\n        const httpServerProcess = spawn(\n            'http-server',\n            ['-c-1', '-p', String(port), `${join(process.cwd(), './')}`],\n            {\n                // See https://nodejs.org/api/child_process.html#spawning-bat-and-cmd-files-on-windows\n                shell: process.platform === 'win32',\n            },\n        );\n\n        // eslint-disable-next-line @typescript-eslint/ban-ts-comment\n        // @ts-ignore\n        globalThis.__SERVER__ = httpServerProcess;\n\n        // give the server time to start\n        await new Promise<void>((resolve) =>\n        {\n            let data = '';\n\n            httpServerProcess.stdout.on('data', (chunk) =>\n            {\n                data += chunk;\n                if (data.includes('Hit CTRL-C to stop the server'))\n                {",
+          "sha256": "b637d04e4830a80cad7d7a93d5ff54cfc4d1506a42364c4cd27eec4413bd2828"
+        },
+        {
+          "path": "typescript/sources/github.com/pixijs/pixijs/.configs/jest.config.js",
+          "startLine": 5,
+          "endLine": 10,
+          "excerpt": "    runner: '@pixi/jest-electron/runner',\n    testEnvironment: '@pixi/jest-electron/environment',\n    setupFilesAfterEnv: [\n        'jest-extended/all',\n    ],\n    globalSetup: '<rootDir>/scripts/jest/jest-global-setup.ts',",
+          "sha256": "b8fa97316d2cf32578b106ebd7467a717ca9b780c227d9ded35b8fb1df7ef177"
+        }
+      ],
+      "limitations": [
+        "Source applicability only; no upstream command executed, installed runtime or graphics environment verified.",
+        "Default test runner also performs static checks; prune failures are reported but non-blocking. Renderer-specific visual exclusions remain source-defined.",
+        "Component is explicitly a visual test-fixture collection, not a production subsystem; see frozen selection clarification."
+      ]
+    },
+    {
+      "id": "e1-typescript-01-component-tests",
+      "repository": "github.com/pixijs/pixijs",
+      "revision": "2e8cacbe1ed4ed0fc31d5b59b9895c811ac0e003",
+      "ecosystem": "javascript-typescript",
+      "scope": "component",
+      "component": "tests/visual/scenes",
+      "componentKind": "test-fixture/visual",
+      "taskIntent": "Run the maintainer visual regression suite covering owned scenes under tests/visual/scenes.",
+      "goldState": "supported",
+      "alternatives": [
+        {
+          "command": "npm run test:visual",
+          "working_directory": ".",
+          "scope": "component",
+          "prerequisites": [
+            "Use Node.js24 or newer as recommended by maintainer setup guidance and install the checkout dependencies with npm install from repository root.",
+            "Use the Electron test runner/environment declared in .configs/jest.config.js, installed with project dependencies; provide the graphics/display support required by the selected renderer tests.",
+            "For local runs, permit the configured global setup to start http-server on an available local port. Preserve the normal non-CI environment; setting GITHUB_ACTIONS changes that setup behavior."
+          ],
+          "source": "scripts/README.md",
+          "component": "tests/visual/scenes"
+        }
+      ],
+      "requiredAbstentionReasons": [],
+      "unresolvedEvidence": [],
+      "evidence": [
+        {
+          "path": "typescript/sources/github.com/pixijs/pixijs/.github/CONTRIBUTING.md",
+          "startLine": 29,
+          "endLine": 41,
+          "excerpt": "### Setting Up\n\nTo setup for making changes you will need to take a few steps, we've outlined them below:\n\n1. Ensure you have node.js installed. You can download node.js from [nodejs.org][node]. Because\npixi uses modern JS features, you will need a modern version of node. v24+ is recommended.\n\n2. Fork the **[pixi.js][pixi]** repository, if you are unsure how to do this GitHub has a guides\nfor the [command line][fork-cli] and for the [GitHub Client][fork-gui].\n\n3. Next, run `npm install` from within your clone of your fork. That will install dependencies\nnecessary to build PixiJS.\n",
+          "sha256": "0c174f4aa2eae635f24137871297ac6f2b5a3268c67daed80b33591b65c0b897"
+        },
+        {
+          "path": "typescript/sources/github.com/pixijs/pixijs/.github/CONTRIBUTING.md",
+          "startLine": 58,
+          "endLine": 92,
+          "excerpt": "### Testing Your Change\n\nYou can test your change by using the automated tests packaged with PixiJS. You can run these tests\nby running `npm test` from the command line. If you fix a bug please add a test that will catch that\nbug if it ever happens again. This prevents regressions from sneaking in.\n\nTips for a faster workflow:\n\n- Run `npm start` in one terminal. This watches the source tree and compiles it incrementally.\n- Run `npm run test unit` to run unit tests, or `npm run test visual` to run visual regression tests.\n- Run `npm run test unit debug` to use headful DevTools to debug or develop tests.\n\nYou can also run individual check categories:\n\n- `npm run test lint` \u2014 ESLint only\n- `npm run test types` \u2014 Type checking only\n- `npm run test unit` \u2014 Unit tests only\n- `npm run test visual` \u2014 Visual regression tests only\n\nFor more details on the build and test pipeline, see [scripts/README.md](../scripts/README.md).\n\n#### Visual Regression Testing\n\nPixiJS uses a custom visual tester that allows you to create pixi scenes and compare them to a reference image.\nThese tests can be found in the [visual scenes directory](../tests/visual/scenes/). To run these tests, run `npm run test visual` from the command line, or run `npm run test visual debug` to use headful DevTools to debug or develop tests.\n\nAll visual tests must end with `.scene.ts` and follows this format:\n\n```ts\nimport { Graphics } from '~/scene';\n\nimport type { Container } from '~/scene';\nimport type { Renderer } from '~/rendering';\nimport type { TestScene } from '../../types';\n",
+          "sha256": "0c174f4aa2eae635f24137871297ac6f2b5a3268c67daed80b33591b65c0b897"
+        },
+        {
+          "path": "typescript/sources/github.com/pixijs/pixijs/scripts/README.md",
+          "startLine": 5,
+          "endLine": 22,
+          "excerpt": "## Quick reference\n\n| Command | Description |\n| --- | --- |\n| `npm run build` | Full production build (bundle + types + DTS bundle) |\n| `npm run build:lib` | Dev build (bundle + types, no DTS bundling) |\n| `npm run build:docs` | Generate TypeDoc API documentation |\n| `npm start` | Start playground dev server + watch mode |\n| `npm test` | Run all checks (lint, types, index, prune, unit, visual) |\n| `npm run test:unit` | Unit tests only |\n| `npm run test:visual` | Visual regression tests only |\n| `npm run test:lint` | Lint checks only |\n| `npm run test:types` | Type checking only |\n| `npm run lint` | Lint with auto-fix |\n\n## Build pipeline (`build.mts`)\n\nThe build script accepts two flags:",
+          "sha256": "42edd71adf3f04eed49fe665d1e3c2d73d59d4c25fe7f76f491f619116c2c475"
+        },
+        {
+          "path": "typescript/sources/github.com/pixijs/pixijs/scripts/jest/jest-global-setup.ts",
+          "startLine": 7,
+          "endLine": 36,
+          "excerpt": "    if (!process.env.GITHUB_ACTIONS)\n    {\n        const { default: getPort } = await import('get-port');\n        const port = await getPort();\n\n        process.env.SERVER_PORT = String(port);\n\n        const httpServerProcess = spawn(\n            'http-server',\n            ['-c-1', '-p', String(port), `${join(process.cwd(), './')}`],\n            {\n                // See https://nodejs.org/api/child_process.html#spawning-bat-and-cmd-files-on-windows\n                shell: process.platform === 'win32',\n            },\n        );\n\n        // eslint-disable-next-line @typescript-eslint/ban-ts-comment\n        // @ts-ignore\n        globalThis.__SERVER__ = httpServerProcess;\n\n        // give the server time to start\n        await new Promise<void>((resolve) =>\n        {\n            let data = '';\n\n            httpServerProcess.stdout.on('data', (chunk) =>\n            {\n                data += chunk;\n                if (data.includes('Hit CTRL-C to stop the server'))\n                {",
+          "sha256": "b637d04e4830a80cad7d7a93d5ff54cfc4d1506a42364c4cd27eec4413bd2828"
+        },
+        {
+          "path": "typescript/sources/github.com/pixijs/pixijs/.configs/jest.config.js",
+          "startLine": 5,
+          "endLine": 10,
+          "excerpt": "    runner: '@pixi/jest-electron/runner',\n    testEnvironment: '@pixi/jest-electron/environment',\n    setupFilesAfterEnv: [\n        'jest-extended/all',\n    ],\n    globalSetup: '<rootDir>/scripts/jest/jest-global-setup.ts',",
+          "sha256": "b8fa97316d2cf32578b106ebd7467a717ca9b780c227d9ded35b8fb1df7ef177"
+        }
+      ],
+      "limitations": [
+        "Source applicability only; no upstream command executed, installed runtime or graphics environment verified.",
+        "Default test runner also performs static checks; prune failures are reported but non-blocking. Renderer-specific visual exclusions remain source-defined.",
+        "Component is explicitly a visual test-fixture collection, not a production subsystem; see frozen selection clarification."
+      ]
+    },
+    {
+      "id": "e1-typescript-02-repository-tests",
+      "repository": "github.com/agalwood/Motrix",
+      "revision": "6aae74432187f689ffa0c8019f942ee2cb2cf91a",
+      "ecosystem": "javascript-typescript",
+      "scope": "repository",
+      "component": null,
+      "componentKind": null,
+      "taskIntent": "Establish the maintainer repository-default automated test instruction with complete setup and scope.",
+      "goldState": "supported",
+      "alternatives": [
+        {
+          "command": "pnpm test",
+          "working_directory": ".",
+          "scope": "repository",
+          "prerequisites": [
+            "Use Git, Node.js22 or later and the exact pnpm version declared by package.json (12.15.0 in this source revision). Run pnpm install from the checkout root using its workspace settings.",
+            "The better-sqlite3 native module must match the Node runtime. pnpm test includes the declared pretest Node-ABI check/rebuild; direct pnpm exec vitest calls must first run node scripts/ensure-native-abi.mjs node. Native rebuild capability is needed if that check finds a mismatch.",
+            "Allow the Vitest global setup to build the QuickJS worker and obtain the lockfile-pinned builtin-plugin seed artifacts, or provide its valid populated cache. Seeds are fetched when missing; repeat runs may use the cache."
+          ],
+          "source": "CONTRIBUTING.md"
+        }
+      ],
+      "requiredAbstentionReasons": [],
+      "unresolvedEvidence": [],
+      "evidence": [
+        {
+          "path": "typescript/sources/github.com/agalwood/Motrix/CONTRIBUTING.md",
+          "startLine": 19,
+          "endLine": 29,
+          "excerpt": "Development requires Git, Node.js 22 or later, and the pnpm version declared in the `packageManager` field of `package.json`.\n\nFork the repository if you do not have write access, then clone your fork and install the dependencies:\n\n```bash\ngit clone https://github.com/<your-account>/Motrix.git\ncd Motrix\npnpm install\npnpm start\n```\n",
+          "sha256": "3d44d6983920981a4de26a943c64c76517da635d028ced9fe3d6edc22622244e"
+        },
+        {
+          "path": "typescript/sources/github.com/agalwood/Motrix/CONTRIBUTING.md",
+          "startLine": 48,
+          "endLine": 53,
+          "excerpt": "| `src/core/` | Host-neutral application services, domain behavior, engine orchestration, and plugin policy | May use `src/shared/` and host-neutral libraries; it must not import either application shell. |\n| `src/shared/` | Cross-layer schemas, protocol constants, types, locale data, and pure utilities | Must remain free of I/O, timers, network access, Electron APIs, and Node-specific APIs. |\n| `packages/native-host/` | Standalone Rust native-messaging host for browser-extension pairing | Communicates through the published bridge contract and does not depend on system Node.js or Electron. |\n| `src/test-utils/` | Test-only fixtures and helpers | Must never be imported by production code. |\n\n### Transport and Protocol Flow",
+          "sha256": "3d44d6983920981a4de26a943c64c76517da635d028ced9fe3d6edc22622244e"
+        },
+        {
+          "path": "typescript/sources/github.com/agalwood/Motrix/CONTRIBUTING.md",
+          "startLine": 112,
+          "endLine": 126,
+          "excerpt": "- behavior or logic: focused Vitest tests, or `pnpm test` for broad cross-cutting changes;\n- covered browser or Electron user flows: `pnpm test:e2e`;\n- locale resources or internationalization behavior: `pnpm run check:i18n`;\n- added or renamed files: `pnpm run check:file-names`;\n- plugin manifest contracts: `pnpm run check:schema-parity`;\n- dependencies, bundled assets, or license metadata: `pnpm run check:third-party-notices`;\n- native-host Rust code: the formatting, lint, and test commands below.\n\nFor native-host Rust changes, run:\n\n```bash\ncargo fmt --manifest-path packages/native-host/Cargo.toml --all -- --check\ncargo clippy --manifest-path packages/native-host/Cargo.toml --all-targets --locked -- -D warnings\ncargo test --manifest-path packages/native-host/Cargo.toml --locked --all-targets\n```",
+          "sha256": "3d44d6983920981a4de26a943c64c76517da635d028ced9fe3d6edc22622244e"
+        },
+        {
+          "path": "typescript/sources/github.com/agalwood/Motrix/CLAUDE.md",
+          "startLine": 16,
+          "endLine": 24,
+          "excerpt": "pnpm start:server                  # Built Node/Web server\npnpm test                          # Vitest suite\npnpm exec vitest run <test-path>   # Focused test\npnpm run lint                      # Biome over the repository\npnpm exec tsc --noEmit             # Type-check\npnpm build                         # Desktop production build\npnpm build:server                  # Node/Web production build\npnpm test:e2e                      # Playwright suite\n```",
+          "sha256": "d101f23fe120744d650994a725b7233396ca8af87ce15317debc63d6d82c48f0"
+        },
+        {
+          "path": "typescript/sources/github.com/agalwood/Motrix/vitest.config.ts",
+          "startLine": 21,
+          "endLine": 41,
+          "excerpt": "    projects: [\n      {\n        test: {\n          name: 'node',\n          globalSetup: ['tests/setup/build-worker.ts'],\n          include: ['src/**/*.test.{ts,tsx}', 'tests/**/*.test.{ts,tsx}'],\n          exclude: ['src/{renderer,preload}/**'],\n        },\n      },\n      {\n        test: {\n          name: 'browser',\n          environment: 'jsdom',\n          include: ['src/{renderer,preload}/**/*.test.{ts,tsx}'],\n        },\n      },\n    ],\n  },\n  resolve: {\n    alias: {\n      '@shared': path.resolve(import.meta.dirname, 'src/shared'),",
+          "sha256": "cd37580a83b2a57f651a626670858c3712b2309bab7484081a76edd1a05d8cf1"
+        },
+        {
+          "path": "typescript/sources/github.com/agalwood/Motrix/tests/setup/build-worker.ts",
+          "startLine": 2,
+          "endLine": 9,
+          "excerpt": "// vitest globalSetup: pre-build quick-js-worker.ts \u2192 dist-test/quick-js-worker.cjs\n// and ensure the fetched builtin-plugin seeds exist under\n// dist/builtin-plugins/<id>/ (plus the dist/builtin-moext/<file> mirrors) so\n// host e2e + smoke tests can point at the real artifacts before any test runs.\n// Seeds come from scripts/fetch-builtins.mjs \u2014 lockfile-pinned, sha256-verified\n// release artifacts, cached in node_modules/.cache/motrix-builtins after the\n// first fetch (repeat runs are offline).\n",
+          "sha256": "7eef0608c00024a7fda941f35064d80253b16881de501b5abdbe24b47d5bf2f7"
+        },
+        {
+          "path": "typescript/sources/github.com/agalwood/Motrix/scripts/ensure-native-abi.mjs",
+          "startLine": 85,
+          "endLine": 103,
+          "excerpt": "function rebuild(target) {\n  const cmd =\n    target === 'node'\n      ? ['pnpm', ['rebuild', 'better-sqlite3']]\n      : [\n          'pnpm',\n          ['exec', 'electron-rebuild', '--force', '--only', 'better-sqlite3'],\n        ]\n  const r = spawnSync(cmd[0], cmd[1], { stdio: 'inherit' })\n  if (r.error) {\n    console.error(`[ensure-native-abi] failed to spawn ${cmd[0]}:`, r.error)\n    return 1\n  }\n  return r.status ?? 0\n}\n\nfunction runMain() {\n  const target = process.argv[2]\n",
+          "sha256": "9d1d93b1f8b07665eee0f86b5defe924a3cbea73cd3cc2fd4b39d9cc7775b575"
+        },
+        {
+          "path": "typescript/sources/github.com/agalwood/Motrix/src/core/log-redact.test.ts",
+          "startLine": 1,
+          "endLine": 21,
+          "excerpt": "import { describe, expect, it } from 'vitest'\nimport { redactApplicationLogArguments, redactLogFields } from './log-redact'\n\ndescribe('redactLogFields', () => {\n  describe('application profile', () => {\n    it('retains safe create diagnostics while removing request credentials', () => {\n      const out = redactLogFields(\n        {\n          method: 'createDownload',\n          params: {\n            gid: '0123456789abcdef',\n            uris: [\n              'https://user:pass@example.com/file.zip?token=url-secret#part',\n            ],\n            saveDir: '/Users/alice/Downloads',\n            filename: 'file.zip.motrix',\n            connections: 16,\n            headers: {\n              Authorization: 'Bearer auth-secret',\n              Cookie: 'session=cookie-secret',\n            },",
+          "sha256": "f78ca797164723d3377d193b23f49ae1de16f82f20df5468e53aa63843f979c6"
+        }
+      ],
+      "limitations": [
+        "Source applicability only; no upstream command executed, installed runtime or graphics environment verified.",
+        "Root default Vitest suite excludes e2e and has separate node/browser projects. Component alternative covers co-located src/core tests, not every cross-component integration behavior."
+      ]
+    },
+    {
+      "id": "e1-typescript-02-component-tests",
+      "repository": "github.com/agalwood/Motrix",
+      "revision": "6aae74432187f689ffa0c8019f942ee2cb2cf91a",
+      "ecosystem": "javascript-typescript",
+      "scope": "component",
+      "component": "src/core",
+      "componentKind": "production",
+      "taskIntent": "Establish the source-supported co-located component tests for src/core, preserving shared setup.",
+      "goldState": "supported",
+      "alternatives": [
+        {
+          "command": "pnpm exec vitest run src/core",
+          "working_directory": ".",
+          "scope": "component",
+          "prerequisites": [
+            "Use Git, Node.js22 or later and the exact pnpm version declared by package.json (12.15.0 in this source revision). Run pnpm install from the checkout root using its workspace settings.",
+            "The better-sqlite3 native module must match the Node runtime. pnpm test includes the declared pretest Node-ABI check/rebuild; direct pnpm exec vitest calls must first run node scripts/ensure-native-abi.mjs node. Native rebuild capability is needed if that check finds a mismatch.",
+            "Allow the Vitest global setup to build the QuickJS worker and obtain the lockfile-pinned builtin-plugin seed artifacts, or provide its valid populated cache. Seeds are fetched when missing; repeat runs may use the cache."
+          ],
+          "source": "CLAUDE.md",
+          "component": "src/core"
+        }
+      ],
+      "requiredAbstentionReasons": [],
+      "unresolvedEvidence": [],
+      "evidence": [
+        {
+          "path": "typescript/sources/github.com/agalwood/Motrix/CONTRIBUTING.md",
+          "startLine": 19,
+          "endLine": 29,
+          "excerpt": "Development requires Git, Node.js 22 or later, and the pnpm version declared in the `packageManager` field of `package.json`.\n\nFork the repository if you do not have write access, then clone your fork and install the dependencies:\n\n```bash\ngit clone https://github.com/<your-account>/Motrix.git\ncd Motrix\npnpm install\npnpm start\n```\n",
+          "sha256": "3d44d6983920981a4de26a943c64c76517da635d028ced9fe3d6edc22622244e"
+        },
+        {
+          "path": "typescript/sources/github.com/agalwood/Motrix/CONTRIBUTING.md",
+          "startLine": 48,
+          "endLine": 53,
+          "excerpt": "| `src/core/` | Host-neutral application services, domain behavior, engine orchestration, and plugin policy | May use `src/shared/` and host-neutral libraries; it must not import either application shell. |\n| `src/shared/` | Cross-layer schemas, protocol constants, types, locale data, and pure utilities | Must remain free of I/O, timers, network access, Electron APIs, and Node-specific APIs. |\n| `packages/native-host/` | Standalone Rust native-messaging host for browser-extension pairing | Communicates through the published bridge contract and does not depend on system Node.js or Electron. |\n| `src/test-utils/` | Test-only fixtures and helpers | Must never be imported by production code. |\n\n### Transport and Protocol Flow",
+          "sha256": "3d44d6983920981a4de26a943c64c76517da635d028ced9fe3d6edc22622244e"
+        },
+        {
+          "path": "typescript/sources/github.com/agalwood/Motrix/CONTRIBUTING.md",
+          "startLine": 112,
+          "endLine": 126,
+          "excerpt": "- behavior or logic: focused Vitest tests, or `pnpm test` for broad cross-cutting changes;\n- covered browser or Electron user flows: `pnpm test:e2e`;\n- locale resources or internationalization behavior: `pnpm run check:i18n`;\n- added or renamed files: `pnpm run check:file-names`;\n- plugin manifest contracts: `pnpm run check:schema-parity`;\n- dependencies, bundled assets, or license metadata: `pnpm run check:third-party-notices`;\n- native-host Rust code: the formatting, lint, and test commands below.\n\nFor native-host Rust changes, run:\n\n```bash\ncargo fmt --manifest-path packages/native-host/Cargo.toml --all -- --check\ncargo clippy --manifest-path packages/native-host/Cargo.toml --all-targets --locked -- -D warnings\ncargo test --manifest-path packages/native-host/Cargo.toml --locked --all-targets\n```",
+          "sha256": "3d44d6983920981a4de26a943c64c76517da635d028ced9fe3d6edc22622244e"
+        },
+        {
+          "path": "typescript/sources/github.com/agalwood/Motrix/CLAUDE.md",
+          "startLine": 16,
+          "endLine": 24,
+          "excerpt": "pnpm start:server                  # Built Node/Web server\npnpm test                          # Vitest suite\npnpm exec vitest run <test-path>   # Focused test\npnpm run lint                      # Biome over the repository\npnpm exec tsc --noEmit             # Type-check\npnpm build                         # Desktop production build\npnpm build:server                  # Node/Web production build\npnpm test:e2e                      # Playwright suite\n```",
+          "sha256": "d101f23fe120744d650994a725b7233396ca8af87ce15317debc63d6d82c48f0"
+        },
+        {
+          "path": "typescript/sources/github.com/agalwood/Motrix/vitest.config.ts",
+          "startLine": 21,
+          "endLine": 41,
+          "excerpt": "    projects: [\n      {\n        test: {\n          name: 'node',\n          globalSetup: ['tests/setup/build-worker.ts'],\n          include: ['src/**/*.test.{ts,tsx}', 'tests/**/*.test.{ts,tsx}'],\n          exclude: ['src/{renderer,preload}/**'],\n        },\n      },\n      {\n        test: {\n          name: 'browser',\n          environment: 'jsdom',\n          include: ['src/{renderer,preload}/**/*.test.{ts,tsx}'],\n        },\n      },\n    ],\n  },\n  resolve: {\n    alias: {\n      '@shared': path.resolve(import.meta.dirname, 'src/shared'),",
+          "sha256": "cd37580a83b2a57f651a626670858c3712b2309bab7484081a76edd1a05d8cf1"
+        },
+        {
+          "path": "typescript/sources/github.com/agalwood/Motrix/tests/setup/build-worker.ts",
+          "startLine": 2,
+          "endLine": 9,
+          "excerpt": "// vitest globalSetup: pre-build quick-js-worker.ts \u2192 dist-test/quick-js-worker.cjs\n// and ensure the fetched builtin-plugin seeds exist under\n// dist/builtin-plugins/<id>/ (plus the dist/builtin-moext/<file> mirrors) so\n// host e2e + smoke tests can point at the real artifacts before any test runs.\n// Seeds come from scripts/fetch-builtins.mjs \u2014 lockfile-pinned, sha256-verified\n// release artifacts, cached in node_modules/.cache/motrix-builtins after the\n// first fetch (repeat runs are offline).\n",
+          "sha256": "7eef0608c00024a7fda941f35064d80253b16881de501b5abdbe24b47d5bf2f7"
+        },
+        {
+          "path": "typescript/sources/github.com/agalwood/Motrix/scripts/ensure-native-abi.mjs",
+          "startLine": 85,
+          "endLine": 103,
+          "excerpt": "function rebuild(target) {\n  const cmd =\n    target === 'node'\n      ? ['pnpm', ['rebuild', 'better-sqlite3']]\n      : [\n          'pnpm',\n          ['exec', 'electron-rebuild', '--force', '--only', 'better-sqlite3'],\n        ]\n  const r = spawnSync(cmd[0], cmd[1], { stdio: 'inherit' })\n  if (r.error) {\n    console.error(`[ensure-native-abi] failed to spawn ${cmd[0]}:`, r.error)\n    return 1\n  }\n  return r.status ?? 0\n}\n\nfunction runMain() {\n  const target = process.argv[2]\n",
+          "sha256": "9d1d93b1f8b07665eee0f86b5defe924a3cbea73cd3cc2fd4b39d9cc7775b575"
+        },
+        {
+          "path": "typescript/sources/github.com/agalwood/Motrix/src/core/log-redact.test.ts",
+          "startLine": 1,
+          "endLine": 21,
+          "excerpt": "import { describe, expect, it } from 'vitest'\nimport { redactApplicationLogArguments, redactLogFields } from './log-redact'\n\ndescribe('redactLogFields', () => {\n  describe('application profile', () => {\n    it('retains safe create diagnostics while removing request credentials', () => {\n      const out = redactLogFields(\n        {\n          method: 'createDownload',\n          params: {\n            gid: '0123456789abcdef',\n            uris: [\n              'https://user:pass@example.com/file.zip?token=url-secret#part',\n            ],\n            saveDir: '/Users/alice/Downloads',\n            filename: 'file.zip.motrix',\n            connections: 16,\n            headers: {\n              Authorization: 'Bearer auth-secret',\n              Cookie: 'session=cookie-secret',\n            },",
+          "sha256": "f78ca797164723d3377d193b23f49ae1de16f82f20df5468e53aa63843f979c6"
+        }
+      ],
+      "limitations": [
+        "Source applicability only; no upstream command executed, installed runtime or graphics environment verified.",
+        "Root default Vitest suite excludes e2e and has separate node/browser projects. Component alternative covers co-located src/core tests, not every cross-component integration behavior.",
+        "The test-path argument is explicitly bound from the documented focused Vitest recipe and physical src/core component plus include patterns; the completed literal command is source-derived, not claimed to be printed verbatim.",
+        "Earlier packages/finalize-fs and packages/native-host are Rust components, and safari-bootstrap is Swift; filtered from the requested TypeScript/JavaScript task stratum before selecting src/core."
+      ]
+    },
+    {
+      "id": "e1-typescript-03-repository-tests",
+      "repository": "github.com/Eugeny/tabby",
+      "revision": "467ce8ebfa467fb88cf6d154c9a5891e3d3647f0",
+      "ecosystem": "javascript-typescript",
+      "scope": "repository",
+      "component": null,
+      "componentKind": null,
+      "taskIntent": "Establish the maintainer repository-default automated test instruction with complete setup and scope.",
+      "goldState": "required-abstention",
+      "alternatives": [],
+      "requiredAbstentionReasons": [
+        "Root scripts declare test:ssh-term and test:unit with distinct coverage, but no test script or documented canonical aggregate/default test selection. Do not invent npm test or collapse both recipes to an ungrounded repository default."
+      ],
+      "unresolvedEvidence": [],
+      "evidence": [
+        {
+          "path": "typescript/sources/github.com/Eugeny/tabby/HACKING.md",
+          "startLine": 9,
+          "endLine": 35,
+          "excerpt": "# Install Dependencies\n- [Node.js](https://nodejs.org/en/download/) **version 15 or newer*\n- [Yarn](https://yarnpkg.com/)\n\nFirst, from within the `tabby` directory install the dependencies via yarn:\n\n```\n# macOS & Windows:\nyarn\n```\n\n```\n# Linux (Debian/Ubuntu here as an example)\nsudo apt install libfontconfig-dev libsecret-1-dev libarchive-tools libnss3 libatk1.0-0 libatk-bridge2.0-0 libgdk-pixbuf2.0-0 libgtk-3-0 libgbm1 cmake\nyarn\n```\n\n_\u26a0\ufe0fNote: If you forked this repository, you may need to pull down the tags from this repository before installing node modules. `git pull --tags upstream master`_\n\nBuild Tabby:\n\n```\nyarn run build\n```\n\nStart Tabby\n",
+          "sha256": "8244eec69145ca5e2915e8bc51186e0c125ff9e317563043ed7b82cd78c847bd"
+        },
+        {
+          "path": "typescript/sources/github.com/Eugeny/tabby/HACKING.md",
+          "startLine": 56,
+          "endLine": 76,
+          "excerpt": "# Project layout\n```\ntabby\n\u251c\u2500 app                                  # Electron app, just the bare essentials\n|  \u251c\u2500 src                               # Electron renderer code\n|  \u2514\u2500 main.js                           # Electron main entry point\n\u251c\u2500 build\n\u251c\u2500 clink                                # Clink distribution, for Windows\n\u251c\u2500 scripts                              # Maintenance scripts\n\u251c\u2500 tabby-community-color-schemes     # Plugin that provides color schemes\n\u251c\u2500 tabby-core                        # Plugin that provides base UI and tab management\n\u251c\u2500 tabby-electron                    # Plugin that provides Electron-specific functions\n\u251c\u2500 tabby-local                       # Plugin that provides local shells and profiles\n\u251c\u2500 tabby-plugin-manager              # Plugin that installs other plugins\n\u251c\u2500 tabby-settings                    # Plugin that provides the settings tab\n\u251c\u2500 tabby-terminal                    # Plugin that provides terminal tabs\n\u2514\u2500 tabby-web                         # Plugin that provides web-specific functions\n```\n\n# Plugin layout\n```",
+          "sha256": "8244eec69145ca5e2915e8bc51186e0c125ff9e317563043ed7b82cd78c847bd"
+        },
+        {
+          "path": "typescript/sources/github.com/Eugeny/tabby/package.json",
+          "startLine": 99,
+          "endLine": 105,
+          "excerpt": "    \"docs\": \"node scripts/build-docs.mjs\",\n    \"test:ssh-term\": \"node --experimental-strip-types --test tabby-ssh/test/*.test.ts\",\n    \"test:unit\": \"node --import ./scripts/test-register.mjs --test \\\"tabby-{terminal,electron}/test/*.test.ts\\\"\",\n    \"lint\": \"eslint --ext ts */src */lib\",\n    \"postinstall\": \"patch-package && node ./scripts/install-deps.mjs && node ./scripts/build-native.mjs\",\n    \"i18n:pull\": \"crowdin pull --skip-untranslated-strings\",\n    \"i18n:extract\": \"node scripts/i18n-extract.mjs\",",
+          "sha256": "4dec36936e3de66ba0ee3caf78ac5da509704db84e35c835de2c8418be39cc7e"
+        },
+        {
+          "path": "typescript/sources/github.com/Eugeny/tabby/tabby-electron/package.json",
+          "startLine": 2,
+          "endLine": 17,
+          "excerpt": "  \"name\": \"tabby-electron\",\n  \"version\": \"1.0.231-nightly.0\",\n  \"description\": \"Electron-specific bindings\",\n  \"keywords\": [\n    \"tabby-builtin-plugin\"\n  ],\n  \"main\": \"dist/index.js\",\n  \"typings\": \"typings/index.d.ts\",\n  \"scripts\": {\n    \"build\": \"webpack --progress --color\",\n    \"watch\": \"webpack --progress --color --watch\"\n  },\n  \"files\": [\n    \"dist\",\n    \"typings\"\n  ],",
+          "sha256": "14dffa3f6ab3964acbec3b7fa2297ef8409226be20dd5feef23247f8159c4f56"
+        }
+      ],
+      "limitations": [
+        "Source applicability only; no upstream command executed, installed runtime or graphics environment verified."
+      ]
+    },
+    {
+      "id": "e1-typescript-03-component-tests",
+      "repository": "github.com/Eugeny/tabby",
+      "revision": "467ce8ebfa467fb88cf6d154c9a5891e3d3647f0",
+      "ecosystem": "javascript-typescript",
+      "scope": "component",
+      "component": "tabby-electron",
+      "componentKind": "production",
+      "taskIntent": "Establish the source-supported co-located component tests for tabby-electron, preserving shared setup.",
+      "goldState": "unresolved",
+      "alternatives": [],
+      "requiredAbstentionReasons": [],
+      "unresolvedEvidence": [
+        "Root test:unit names tabby-electron and tabby-terminal patterns and establishes test intent, while tabby-electron package/source physically exists. The pinned tabby-electron/test path and a guessed process.test.ts returned404, and no complete isolated component test/coverage/setup tuple was established. Missing source/recipe remains unresolved rather than excluding the repository."
+      ],
+      "evidence": [
+        {
+          "path": "typescript/sources/github.com/Eugeny/tabby/HACKING.md",
+          "startLine": 9,
+          "endLine": 35,
+          "excerpt": "# Install Dependencies\n- [Node.js](https://nodejs.org/en/download/) **version 15 or newer*\n- [Yarn](https://yarnpkg.com/)\n\nFirst, from within the `tabby` directory install the dependencies via yarn:\n\n```\n# macOS & Windows:\nyarn\n```\n\n```\n# Linux (Debian/Ubuntu here as an example)\nsudo apt install libfontconfig-dev libsecret-1-dev libarchive-tools libnss3 libatk1.0-0 libatk-bridge2.0-0 libgdk-pixbuf2.0-0 libgtk-3-0 libgbm1 cmake\nyarn\n```\n\n_\u26a0\ufe0fNote: If you forked this repository, you may need to pull down the tags from this repository before installing node modules. `git pull --tags upstream master`_\n\nBuild Tabby:\n\n```\nyarn run build\n```\n\nStart Tabby\n",
+          "sha256": "8244eec69145ca5e2915e8bc51186e0c125ff9e317563043ed7b82cd78c847bd"
+        },
+        {
+          "path": "typescript/sources/github.com/Eugeny/tabby/HACKING.md",
+          "startLine": 56,
+          "endLine": 76,
+          "excerpt": "# Project layout\n```\ntabby\n\u251c\u2500 app                                  # Electron app, just the bare essentials\n|  \u251c\u2500 src                               # Electron renderer code\n|  \u2514\u2500 main.js                           # Electron main entry point\n\u251c\u2500 build\n\u251c\u2500 clink                                # Clink distribution, for Windows\n\u251c\u2500 scripts                              # Maintenance scripts\n\u251c\u2500 tabby-community-color-schemes     # Plugin that provides color schemes\n\u251c\u2500 tabby-core                        # Plugin that provides base UI and tab management\n\u251c\u2500 tabby-electron                    # Plugin that provides Electron-specific functions\n\u251c\u2500 tabby-local                       # Plugin that provides local shells and profiles\n\u251c\u2500 tabby-plugin-manager              # Plugin that installs other plugins\n\u251c\u2500 tabby-settings                    # Plugin that provides the settings tab\n\u251c\u2500 tabby-terminal                    # Plugin that provides terminal tabs\n\u2514\u2500 tabby-web                         # Plugin that provides web-specific functions\n```\n\n# Plugin layout\n```",
+          "sha256": "8244eec69145ca5e2915e8bc51186e0c125ff9e317563043ed7b82cd78c847bd"
+        },
+        {
+          "path": "typescript/sources/github.com/Eugeny/tabby/package.json",
+          "startLine": 99,
+          "endLine": 105,
+          "excerpt": "    \"docs\": \"node scripts/build-docs.mjs\",\n    \"test:ssh-term\": \"node --experimental-strip-types --test tabby-ssh/test/*.test.ts\",\n    \"test:unit\": \"node --import ./scripts/test-register.mjs --test \\\"tabby-{terminal,electron}/test/*.test.ts\\\"\",\n    \"lint\": \"eslint --ext ts */src */lib\",\n    \"postinstall\": \"patch-package && node ./scripts/install-deps.mjs && node ./scripts/build-native.mjs\",\n    \"i18n:pull\": \"crowdin pull --skip-untranslated-strings\",\n    \"i18n:extract\": \"node scripts/i18n-extract.mjs\",",
+          "sha256": "4dec36936e3de66ba0ee3caf78ac5da509704db84e35c835de2c8418be39cc7e"
+        },
+        {
+          "path": "typescript/sources/github.com/Eugeny/tabby/tabby-electron/package.json",
+          "startLine": 2,
+          "endLine": 17,
+          "excerpt": "  \"name\": \"tabby-electron\",\n  \"version\": \"1.0.231-nightly.0\",\n  \"description\": \"Electron-specific bindings\",\n  \"keywords\": [\n    \"tabby-builtin-plugin\"\n  ],\n  \"main\": \"dist/index.js\",\n  \"typings\": \"typings/index.d.ts\",\n  \"scripts\": {\n    \"build\": \"webpack --progress --color\",\n    \"watch\": \"webpack --progress --color --watch\"\n  },\n  \"files\": [\n    \"dist\",\n    \"typings\"\n  ],",
+          "sha256": "14dffa3f6ab3964acbec3b7fa2297ef8409226be20dd5feef23247f8159c4f56"
+        }
+      ],
+      "limitations": [
+        "Source applicability only; no upstream command executed, installed runtime or graphics environment verified."
+      ]
+    }
+  ]
+}

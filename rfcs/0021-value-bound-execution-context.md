@@ -80,6 +80,24 @@ lines between them become prerequisite descriptions. An empty prerequisite list
 requires the explicit source statement `Prerequisites: none.`; omission cannot
 establish it.
 
+A local `Prerequisites:` declaration may instead contain unindented `- ` or
+`* ` bullets with recognized runtime/tool names and literal version requirements,
+such as `Python 3.11 or higher` or `Node.js >=22`. Supported numeric constraints
+and Rust channel declarations are defined by the
+[context extractor](../crates/dotrepo-core/src/import/commands/context.rs).
+The extractor preserves each requirement verbatim before appending supported
+setup commands from the same fence. It does not resolve versions, install tools,
+or establish that prerequisites have been satisfied. Duplicate runtime entries,
+links, conditions, arbitrary prose, list continuations and contradictory `none`
+declarations cause abstention.
+
+Scoped blocks beneath additional ancestor sections are withheld rather than
+dropping inherited scope. One document-title ancestor is permitted, with explicit
+platform/conditional title markers rejected; arbitrary title semantics are not
+comprehensively assessed. External requirements/setup declarations still prevent
+a local list from claiming a complete prerequisite chain. These are bounded
+extraction rules, not general comprehension of contributor documentation.
+
 Unsupported prose, other setup sections, multiple fences, unresolved parameters,
 directory disagreement, and unsafe or missing directories cause abstention.
 Context extraction preserves candidates only, including repository-scoped ones;

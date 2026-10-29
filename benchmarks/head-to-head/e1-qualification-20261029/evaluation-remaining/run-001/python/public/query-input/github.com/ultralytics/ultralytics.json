@@ -1,0 +1,92 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T05:22:03.084683Z",
+    "snapshotDigest": "fe3651ef5762490b41439a34654734da82a0e4891174ed6223806a46ccd53a1b",
+    "staleAfter": "2026-10-30T05:22:03.084683Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "ultralytics",
+    "repo": "ultralytics",
+    "source": "https://github.com/ultralytics/ultralytics"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/ultralytics/ultralytics/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/ultralytics/ultralytics",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md`, `pyproject.toml`, and `.github/workflows/ci.yml`. Inferred `repo.build` from `pyproject.toml`. Inferred `repo.test` from `.github/workflows/ci.yml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/ultralytics/ultralytics/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/ultralytics/ultralytics",
+        "generated_at": "2026-10-29T05:22:03.629554Z",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md`, `pyproject.toml`, and `.github/workflows/ci.yml`. Inferred `repo.build` from `pyproject.toml`. Inferred `repo.test` from `.github/workflows/ci.yml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "repo": {
+        "name": "Ultralytics YOLO banner",
+        "description": "Request an Enterprise License for commercial use at Ultralytics Licensing.",
+        "homepage": "https://github.com/ultralytics/ultralytics",
+        "license": null,
+        "status": null,
+        "visibility": null,
+        "languages": [],
+        "build": "python -m build",
+        "test": "pytest $xdist --cov=ultralytics/ --cov-report=xml tests/ --export-env base",
+        "toolchain": {
+          "min": "3.8",
+          "ecosystem": "Python"
+        },
+        "topics": []
+      },
+      "owners": null,
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": [],
+        "links": [
+          {
+            "kind": "related",
+            "target": "github.com/ultralytics/ultralytics",
+            "notes": "Cross-link from README: GitHub Issues",
+            "trust": {
+              "confidence": "low",
+              "provenance": [
+                "declared",
+                "readme"
+              ],
+              "notes": null
+            }
+          }
+        ]
+      }
+    }
+  },
+  "conflicts": []
+}

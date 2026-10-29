@@ -1,0 +1,56 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T05:22:03.084683Z",
+    "snapshotDigest": "44ea70f9e178d7537a1317d49fb3f55ca219f442c467268c933ae494a299b42d",
+    "staleAfter": "2026-10-30T05:22:03.084683Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "Eugeny",
+    "repo": "tabby",
+    "source": "https://github.com/Eugeny/tabby"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/Eugeny/tabby/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/Eugeny/tabby",
+    "generatedAt": "2026-10-29T05:22:04.472911Z",
+    "evidencePath": "repos/github.com/Eugeny/tabby/evidence.md",
+    "freshnessStatus": "unknown",
+    "staleAfterDays": 30
+  },
+  "purpose": "This README is also available in: :es: Spanish · :ru: Русский · :kr: 한국어 · :cn: 简体中文 · :it: Italiano · :de: Deutsch · :jp: 日本語 · :id: Bahasa Indonesia · :brazil: Português · :poland: Polski",
+  "name": "GitHub All Releases",
+  "homepage": "https://github.com/Eugeny/tabby",
+  "execution": {
+    "build": "npm run build"
+  },
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": false,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "imported",
+    "confidence": "medium",
+    "provenance": [
+      "imported"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/Eugeny/tabby/profile.json",
+    "repository": "/v0/repos/github.com/Eugeny/tabby/index.json",
+    "trust": "/v0/repos/github.com/Eugeny/tabby/trust.json",
+    "queryTemplate": "/v0/repos/github.com/Eugeny/tabby/query?path={dot_path}",
+    "indexPath": "repos/github.com/Eugeny/tabby/"
+  }
+}

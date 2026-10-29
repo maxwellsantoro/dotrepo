@@ -1,0 +1,518 @@
+{
+  "schema": "dotrepo-e1-source-gold/v1",
+  "state": "frozen-source-gold-go-slice",
+  "frozenAt": "2026-10-29T05:16:51.743028+00:00",
+  "tasks": [
+    {
+      "id": "e1-go-01-repository-tests",
+      "repository": "github.com/infiniflow/ragflow",
+      "revision": "9a71c10b090eaca9930df186dd0f9c15ee34a2ce",
+      "ecosystem": "go",
+      "scope": "repository",
+      "component": null,
+      "componentKind": null,
+      "taskIntent": "Establish the maintainer repository-default automated test instruction and complete applicability context, distinguishing separate e2e/manual/modules.",
+      "goldState": "supported",
+      "alternatives": [
+        {
+          "command": "bash build.sh --test",
+          "working_directory": ".",
+          "scope": "repository",
+          "prerequisites": [
+            "Use the owning go.mod Go1.27 requirement (it supersedes build.sh help text still saying >=1.26.4). This alternative follows the documented Linux native setup.",
+            "Install Clang20 with C++20 support, LLD20 on Linux, CMake>=4.0 and PCRE2 development files per README/internal development guidance. Verify that the selected Linux linker is LLD20, since older LLD18 can produce unusable binaries.",
+            "Prepare the native static libraries with the documented uv run tools/scripts/download_dev_deps.py workflow, or equivalent verified resources. The retained downloader declares its Python/uv dependency and downloads office_oxide/pdfium/pdf_oxide/onnxruntime plus runtime assets.",
+            "Invoke build.sh for tests so required CGO/native flags are configured. The default unit tier requires native static libraries but no external databases, object stores or LLM services; integration/e2e/manual tiers are separate."
+          ],
+          "source": "AGENTS.md"
+        }
+      ],
+      "requiredAbstentionReasons": [],
+      "unresolvedEvidence": [],
+      "evidence": [
+        {
+          "path": "go/sources/github.com/infiniflow/ragflow/AGENTS.md",
+          "startLine": 83,
+          "endLine": 112,
+          "excerpt": "## Go Test Tiers\nGo tests are classified by build tag. Tag a test file with `//go:build <tier>` placed before the `package` clause. Run them through `build.sh` so the required CGO configuration and native libraries are available.\n\n| Tier | Build tag | Runs by default? | Needs |\n|---|---|---|---|\n| Unit | (none) | Yes (`bash build.sh --test`) | Native CGO static libs; no external services \u2014 uses in-memory SQLite, miniredis, or `httptest` stubs. |\n| Integration | `integration` | No (`-tags integration`) | A real service: MySQL/MinIO/Elasticsearch/Infinity/LLM. Single component, reasonably fast. |\n| E2E | `e2e` | No (`-tags e2e`) | Full cross-component pipeline (ingest \u2192 index \u2192 retrieve) against real services; heavy/slow. |\n| Manual | `manual` | No (`-tags manual`) | Very slow/expensive (deepdoc render/parity/snapshot/bench). **Local opt-in ONLY \u2014 never run in CI.** |\n| Native (orthogonal) | `cgo` / `!cgo` | `cgo` auto-satisfies under CGO_ENABLED=1 | Native static libs (`office_oxide`/`pdfium`/`pdf_oxide`). Combine with tiers, e.g. `//go:build cgo && integration`. |\n\nRun tiers locally via `build.sh`:\n```bash\nbash build.sh --test                      # unit tier (no tags)\nbash build.sh --test-integration ./...    # integration tier\nbash build.sh --test-e2e                  # e2e tier\nbash build.sh --test-manual               # manual tier (very slow)\nbash build.sh --test-all                  # integration + e2e (never includes manual)\n```\nRules:\n- New tests that touch a real external service MUST carry `integration`/`e2e`/`manual` \u2014 do not rely on `t.Skip` + env vars to soft-isolate them in the default unit run. Keep an env guard as a harmless secondary safety net if desired.\n- `manual` is never wired into CI or any automated pipeline.\n- `unit` (no tag) must stay free of external-service dependencies so `bash build.sh --test` runs without MySQL/MinIO/ES/Infinity/LLM. The native CGO static libraries (`office_oxide`/`pdfium`/`pdf_oxide`) are still required at build time and are wired by `build.sh --test`; that is expected, not an external service.\n\n## Working Rules\n- When reviewing documentation or code, inspect the full affected path and report all verifiable findings in one review; do not return after only a few findings and expose further issues in later rounds.\n- When handling review comments, independently verify each substantive claim against the current code or tests before accepting, rejecting, or acting on it.\n- Before editing, inspect the nearest code path that actually owns the behavior.\n- For server changes, work in the Go implementation. If a Python behavior is still needed, port it to Go and test the Go path before removing the Python code.\n- Keep changes small and local unless the task is explicitly a broader refactor.",
+          "sha256": "ca9570c71572f9d0fa7e5a3b1f963456fa9bef8df5a0910e8cce884cb1b24dc1"
+        },
+        {
+          "path": "go/sources/github.com/infiniflow/ragflow/AGENTS.md",
+          "startLine": 26,
+          "endLine": 49,
+          "excerpt": "## Code Layout to Expect\n- `cmd/ragflow_server.go`: Go entrypoint for the API, admin, ingestor, and syncer modes (`--api`, `--admin`, `--ingestor`, `--syncer`).\n- `cmd/ragflow-cli.go`: Go CLI entrypoint.\n- `api/`, `rag/`, `deepdoc/`, and `agent/`: legacy Python implementation pending deletion. Do not add features or extend dependencies there.\n- `internal/`: main Go application code. Important subtrees:\n- `internal/agent/`: Go agent runtime, canvas execution, components, tool bindings, workflow helpers.\n- `internal/admin/`: Go admin routes, handlers, and services.\n- `internal/binding/cpp/`: C++ tokenizer binding built by `build.sh` for the Go server.\n- `internal/cli/`: CLI parsing, HTTP transport, command execution, response formatting.\n- `internal/dao/`: Go data-access layer and persistence-facing helpers.\n- `internal/deepdoc/`: Go DeepDOC integrations, especially native-backed PDF/DOCX parsing.\n- `internal/engine/`: search/index backends such as Elasticsearch and Infinity.\n- `internal/entity/`: shared Go entities and model definitions.\n- `internal/handler/`: HTTP handlers and route-facing request logic.\n- `internal/ingestion/`: Go ingestion pipeline, canvas adapter, components, wiring, service orchestration.\n- `internal/ingestion/component/`: stage implementations such as file/parser/chunker/tokenizer/extractor.\n- `internal/ingestion/pipeline/`: DSL translation, canvas-driven execution, checkpoints, resume/run logic.\n- `internal/parser/`: parser and chunk libraries used by ingestion and other Go paths.\n- `internal/parser/parser/`: typed parse-result parsers for markdown/html/pdf/docx/xlsx/text and related families.\n- `internal/parser/chunk/`: chunk operator library and DSL/typed execution helpers.\n- `internal/service/`: higher-level business services used by handlers and server flows.\n- `internal/storage/`: storage backends and in-memory test doubles.\n- `internal/router/`: HTTP route registration.\n- `internal/server/`: server bootstrap/config wiring.",
+          "sha256": "ca9570c71572f9d0fa7e5a3b1f963456fa9bef8df5a0910e8cce884cb1b24dc1"
+        },
+        {
+          "path": "go/sources/github.com/infiniflow/ragflow/AGENTS.md",
+          "startLine": 120,
+          "endLine": 137,
+          "excerpt": "### Go backend\n```bash\nbash build.sh --all                         # build native code and Go server\nbash build.sh --go                          # build Go server with native library already built\nbash build.sh --test ./internal/handler/... # targeted unit tests\nbash build.sh --test                        # all unit tests\nbash build.sh --test-integration ./...      # integration tests; requires real services\nbash build.sh --test-e2e                    # full-pipeline tests; requires real services\nbash build.sh --test-manual                 # local opt-in only\nbash build.sh --test-all                    # integration + e2e; excludes manual\n```\n\nNative libraries, Go DeepDoc models, tokenizer assets, and `deps/cl100k_base.tiktoken` come from `tools/scripts/download_dev_deps.py` (native static libs) and `deps/download_deps.py` (models, cl100k, tokenizer assets); run them with `uv run`. Build the Go resource image with `cd deps && docker build -f Dockerfile -t infiniflow/ragflow_deps:latest .` after downloading the resources.\n\n### Frontend\n```bash\ncd web\nnpm install",
+          "sha256": "ca9570c71572f9d0fa7e5a3b1f963456fa9bef8df5a0910e8cce884cb1b24dc1"
+        },
+        {
+          "path": "go/sources/github.com/infiniflow/ragflow/README.md",
+          "startLine": 252,
+          "endLine": 271,
+          "excerpt": "1. Clone the repository and install the Go version specified in `go.mod` (currently Go 1.27), Clang 20, LLD 20, CMake \u2265 4.0, and PCRE2 development files. Go services depend on CGO and native static libraries; [build.sh](./build.sh) sets the required build parameters.\n\n   ```bash\n   git clone https://github.com/infiniflow/ragflow.git\n   cd ragflow\n   ```\n\n2. Run the dependency download script once to prepare everything the local Go server needs to build, run, parse documents and count tokens (`download_dev_deps.py` fetches the native static libraries and the runtime resources \u2014 cl100k vocabulary, DeepDoc `.ort` weights, embedding tokenizer assets):\n\n   ```bash\n   uv run tools/scripts/download_dev_deps.py\n   ```\n\n   This is the local-dev one-stop: after one run the environment is ready, and already-present files are skipped so re-running never re-downloads. The image-facing counterpart `deps/download_deps.py` fetches the same runtime resources and skips the native `.a` files \u2014 run it only when building the dependency image or in CI, not for local development.\n\n   `download_dev_deps.py` pulls and unpacks pdfium, pdf_oxide, office_oxide, and onnxruntime under `~/ragflow-native-libs`, and writes the cl100k vocabulary, DeepDoc models, and embedding tokenizer assets under `deps/`. It is a Python script; `uv run` installs its declared dependencies (`requests` and `huggingface-hub`) automatically. Skip this step if you have prepared the same resources by other means. When started from the repository root, Go services automatically find `internal/rag/res/deepdoc`; to start from another directory, set `DEEPDOC_MODEL_DIR` to its absolute path.\n\n3. Build the services:\n\n   ```bash",
+          "sha256": "665333bd40c1f7e32d8ee76d1fafdc574973ecdbc69ccd8ada35af1e3546fde0"
+        },
+        {
+          "path": "go/sources/github.com/infiniflow/ragflow/build.sh",
+          "startLine": 1258,
+          "endLine": 1269,
+          "excerpt": "DEPENDENCIES:\n    - cmake >= 4.0\n    - go >= 1.26.4\n    - clang++ with C++20 support\n    - office_oxide native library (download with: uv run tools/scripts/download_dev_deps.py)\n    - lld (Linux only): sudo apt install lld-20 && sudo ln -s /usr/bin/ld.lld-20 /usr/bin/ld.lld\n    - pcre2 development files\n        - Debian/Ubuntu: libpcre2-dev\n        - openSUSE/RHEL/Fedora: pcre2-devel\n        - macOS (Homebrew): pcre2\nEOF\n}",
+          "sha256": "ed84e588f484d4756c05f4ded5c02e164750c6c99cc60173a8d58b7088090b6f"
+        },
+        {
+          "path": "go/sources/github.com/infiniflow/ragflow/go.mod",
+          "startLine": 2,
+          "endLine": 6,
+          "excerpt": "\ngo 1.27\n\nrequire (\n\tcloud.google.com/go v0.123.0",
+          "sha256": "2ccf720125223a7acfd3a2f45873b5a0aad5ffd5dd0d8ac877579ab0ac2aa5a2"
+        },
+        {
+          "path": "go/sources/github.com/infiniflow/ragflow/internal/admin/default_admin_password_test.go",
+          "startLine": 27,
+          "endLine": 40,
+          "excerpt": "func TestConfiguredSuperuserNickname(t *testing.T) {\n\ttests := []struct {\n\t\tname string\n\t\tenv  string\n\t\twant string\n\t}{\n\t\t{name: \"unset\", want: \"admin\"},\n\t\t{name: \"blank\", env: \" \\t\", want: \"admin\"},\n\t\t{name: \"configured\", env: \"  ops  \", want: \"ops\"},\n\t}\n\tfor _, tt := range tests {\n\t\tt.Run(tt.name, func(t *testing.T) {\n\t\t\tt.Setenv(common.EnvDefaultSuperuserNickname, tt.env)\n\t\t\tif got := configuredSuperuserNickname(); got != tt.want {",
+          "sha256": "c2401faeafb3fc302ea84e205f554863195e0bdf37de78bca315e712c40633f8"
+        }
+      ],
+      "limitations": [
+        "Source support only; third-party compilation/tests and environment readiness were not executed or measured.",
+        "Default unit tests exclude integration,e2e and manual build-tag tiers. Do not substitute raw go test and lose the mandatory CGO/native configuration."
+      ]
+    },
+    {
+      "id": "e1-go-01-component-tests",
+      "repository": "github.com/infiniflow/ragflow",
+      "revision": "9a71c10b090eaca9930df186dd0f9c15ee34a2ce",
+      "ecosystem": "go",
+      "scope": "component",
+      "component": "internal/admin",
+      "componentKind": "production",
+      "taskIntent": "Establish the source-supported unit tests for the named Go component/package internal/admin; preserve coverage and setup constraints.",
+      "goldState": "supported",
+      "alternatives": [
+        {
+          "command": "bash build.sh --test ./internal/admin/...",
+          "working_directory": ".",
+          "scope": "component",
+          "prerequisites": [
+            "Use the owning go.mod Go1.27 requirement (it supersedes build.sh help text still saying >=1.26.4). This alternative follows the documented Linux native setup.",
+            "Install Clang20 with C++20 support, LLD20 on Linux, CMake>=4.0 and PCRE2 development files per README/internal development guidance. Verify that the selected Linux linker is LLD20, since older LLD18 can produce unusable binaries.",
+            "Prepare the native static libraries with the documented uv run tools/scripts/download_dev_deps.py workflow, or equivalent verified resources. The retained downloader declares its Python/uv dependency and downloads office_oxide/pdfium/pdf_oxide/onnxruntime plus runtime assets.",
+            "Invoke build.sh for tests so required CGO/native flags are configured. The default unit tier requires native static libraries but no external databases, object stores or LLM services; integration/e2e/manual tiers are separate."
+          ],
+          "source": "AGENTS.md",
+          "component": "internal/admin"
+        }
+      ],
+      "requiredAbstentionReasons": [],
+      "unresolvedEvidence": [],
+      "evidence": [
+        {
+          "path": "go/sources/github.com/infiniflow/ragflow/AGENTS.md",
+          "startLine": 83,
+          "endLine": 112,
+          "excerpt": "## Go Test Tiers\nGo tests are classified by build tag. Tag a test file with `//go:build <tier>` placed before the `package` clause. Run them through `build.sh` so the required CGO configuration and native libraries are available.\n\n| Tier | Build tag | Runs by default? | Needs |\n|---|---|---|---|\n| Unit | (none) | Yes (`bash build.sh --test`) | Native CGO static libs; no external services \u2014 uses in-memory SQLite, miniredis, or `httptest` stubs. |\n| Integration | `integration` | No (`-tags integration`) | A real service: MySQL/MinIO/Elasticsearch/Infinity/LLM. Single component, reasonably fast. |\n| E2E | `e2e` | No (`-tags e2e`) | Full cross-component pipeline (ingest \u2192 index \u2192 retrieve) against real services; heavy/slow. |\n| Manual | `manual` | No (`-tags manual`) | Very slow/expensive (deepdoc render/parity/snapshot/bench). **Local opt-in ONLY \u2014 never run in CI.** |\n| Native (orthogonal) | `cgo` / `!cgo` | `cgo` auto-satisfies under CGO_ENABLED=1 | Native static libs (`office_oxide`/`pdfium`/`pdf_oxide`). Combine with tiers, e.g. `//go:build cgo && integration`. |\n\nRun tiers locally via `build.sh`:\n```bash\nbash build.sh --test                      # unit tier (no tags)\nbash build.sh --test-integration ./...    # integration tier\nbash build.sh --test-e2e                  # e2e tier\nbash build.sh --test-manual               # manual tier (very slow)\nbash build.sh --test-all                  # integration + e2e (never includes manual)\n```\nRules:\n- New tests that touch a real external service MUST carry `integration`/`e2e`/`manual` \u2014 do not rely on `t.Skip` + env vars to soft-isolate them in the default unit run. Keep an env guard as a harmless secondary safety net if desired.\n- `manual` is never wired into CI or any automated pipeline.\n- `unit` (no tag) must stay free of external-service dependencies so `bash build.sh --test` runs without MySQL/MinIO/ES/Infinity/LLM. The native CGO static libraries (`office_oxide`/`pdfium`/`pdf_oxide`) are still required at build time and are wired by `build.sh --test`; that is expected, not an external service.\n\n## Working Rules\n- When reviewing documentation or code, inspect the full affected path and report all verifiable findings in one review; do not return after only a few findings and expose further issues in later rounds.\n- When handling review comments, independently verify each substantive claim against the current code or tests before accepting, rejecting, or acting on it.\n- Before editing, inspect the nearest code path that actually owns the behavior.\n- For server changes, work in the Go implementation. If a Python behavior is still needed, port it to Go and test the Go path before removing the Python code.\n- Keep changes small and local unless the task is explicitly a broader refactor.",
+          "sha256": "ca9570c71572f9d0fa7e5a3b1f963456fa9bef8df5a0910e8cce884cb1b24dc1"
+        },
+        {
+          "path": "go/sources/github.com/infiniflow/ragflow/AGENTS.md",
+          "startLine": 26,
+          "endLine": 49,
+          "excerpt": "## Code Layout to Expect\n- `cmd/ragflow_server.go`: Go entrypoint for the API, admin, ingestor, and syncer modes (`--api`, `--admin`, `--ingestor`, `--syncer`).\n- `cmd/ragflow-cli.go`: Go CLI entrypoint.\n- `api/`, `rag/`, `deepdoc/`, and `agent/`: legacy Python implementation pending deletion. Do not add features or extend dependencies there.\n- `internal/`: main Go application code. Important subtrees:\n- `internal/agent/`: Go agent runtime, canvas execution, components, tool bindings, workflow helpers.\n- `internal/admin/`: Go admin routes, handlers, and services.\n- `internal/binding/cpp/`: C++ tokenizer binding built by `build.sh` for the Go server.\n- `internal/cli/`: CLI parsing, HTTP transport, command execution, response formatting.\n- `internal/dao/`: Go data-access layer and persistence-facing helpers.\n- `internal/deepdoc/`: Go DeepDOC integrations, especially native-backed PDF/DOCX parsing.\n- `internal/engine/`: search/index backends such as Elasticsearch and Infinity.\n- `internal/entity/`: shared Go entities and model definitions.\n- `internal/handler/`: HTTP handlers and route-facing request logic.\n- `internal/ingestion/`: Go ingestion pipeline, canvas adapter, components, wiring, service orchestration.\n- `internal/ingestion/component/`: stage implementations such as file/parser/chunker/tokenizer/extractor.\n- `internal/ingestion/pipeline/`: DSL translation, canvas-driven execution, checkpoints, resume/run logic.\n- `internal/parser/`: parser and chunk libraries used by ingestion and other Go paths.\n- `internal/parser/parser/`: typed parse-result parsers for markdown/html/pdf/docx/xlsx/text and related families.\n- `internal/parser/chunk/`: chunk operator library and DSL/typed execution helpers.\n- `internal/service/`: higher-level business services used by handlers and server flows.\n- `internal/storage/`: storage backends and in-memory test doubles.\n- `internal/router/`: HTTP route registration.\n- `internal/server/`: server bootstrap/config wiring.",
+          "sha256": "ca9570c71572f9d0fa7e5a3b1f963456fa9bef8df5a0910e8cce884cb1b24dc1"
+        },
+        {
+          "path": "go/sources/github.com/infiniflow/ragflow/AGENTS.md",
+          "startLine": 120,
+          "endLine": 137,
+          "excerpt": "### Go backend\n```bash\nbash build.sh --all                         # build native code and Go server\nbash build.sh --go                          # build Go server with native library already built\nbash build.sh --test ./internal/handler/... # targeted unit tests\nbash build.sh --test                        # all unit tests\nbash build.sh --test-integration ./...      # integration tests; requires real services\nbash build.sh --test-e2e                    # full-pipeline tests; requires real services\nbash build.sh --test-manual                 # local opt-in only\nbash build.sh --test-all                    # integration + e2e; excludes manual\n```\n\nNative libraries, Go DeepDoc models, tokenizer assets, and `deps/cl100k_base.tiktoken` come from `tools/scripts/download_dev_deps.py` (native static libs) and `deps/download_deps.py` (models, cl100k, tokenizer assets); run them with `uv run`. Build the Go resource image with `cd deps && docker build -f Dockerfile -t infiniflow/ragflow_deps:latest .` after downloading the resources.\n\n### Frontend\n```bash\ncd web\nnpm install",
+          "sha256": "ca9570c71572f9d0fa7e5a3b1f963456fa9bef8df5a0910e8cce884cb1b24dc1"
+        },
+        {
+          "path": "go/sources/github.com/infiniflow/ragflow/README.md",
+          "startLine": 252,
+          "endLine": 271,
+          "excerpt": "1. Clone the repository and install the Go version specified in `go.mod` (currently Go 1.27), Clang 20, LLD 20, CMake \u2265 4.0, and PCRE2 development files. Go services depend on CGO and native static libraries; [build.sh](./build.sh) sets the required build parameters.\n\n   ```bash\n   git clone https://github.com/infiniflow/ragflow.git\n   cd ragflow\n   ```\n\n2. Run the dependency download script once to prepare everything the local Go server needs to build, run, parse documents and count tokens (`download_dev_deps.py` fetches the native static libraries and the runtime resources \u2014 cl100k vocabulary, DeepDoc `.ort` weights, embedding tokenizer assets):\n\n   ```bash\n   uv run tools/scripts/download_dev_deps.py\n   ```\n\n   This is the local-dev one-stop: after one run the environment is ready, and already-present files are skipped so re-running never re-downloads. The image-facing counterpart `deps/download_deps.py` fetches the same runtime resources and skips the native `.a` files \u2014 run it only when building the dependency image or in CI, not for local development.\n\n   `download_dev_deps.py` pulls and unpacks pdfium, pdf_oxide, office_oxide, and onnxruntime under `~/ragflow-native-libs`, and writes the cl100k vocabulary, DeepDoc models, and embedding tokenizer assets under `deps/`. It is a Python script; `uv run` installs its declared dependencies (`requests` and `huggingface-hub`) automatically. Skip this step if you have prepared the same resources by other means. When started from the repository root, Go services automatically find `internal/rag/res/deepdoc`; to start from another directory, set `DEEPDOC_MODEL_DIR` to its absolute path.\n\n3. Build the services:\n\n   ```bash",
+          "sha256": "665333bd40c1f7e32d8ee76d1fafdc574973ecdbc69ccd8ada35af1e3546fde0"
+        },
+        {
+          "path": "go/sources/github.com/infiniflow/ragflow/build.sh",
+          "startLine": 1258,
+          "endLine": 1269,
+          "excerpt": "DEPENDENCIES:\n    - cmake >= 4.0\n    - go >= 1.26.4\n    - clang++ with C++20 support\n    - office_oxide native library (download with: uv run tools/scripts/download_dev_deps.py)\n    - lld (Linux only): sudo apt install lld-20 && sudo ln -s /usr/bin/ld.lld-20 /usr/bin/ld.lld\n    - pcre2 development files\n        - Debian/Ubuntu: libpcre2-dev\n        - openSUSE/RHEL/Fedora: pcre2-devel\n        - macOS (Homebrew): pcre2\nEOF\n}",
+          "sha256": "ed84e588f484d4756c05f4ded5c02e164750c6c99cc60173a8d58b7088090b6f"
+        },
+        {
+          "path": "go/sources/github.com/infiniflow/ragflow/go.mod",
+          "startLine": 2,
+          "endLine": 6,
+          "excerpt": "\ngo 1.27\n\nrequire (\n\tcloud.google.com/go v0.123.0",
+          "sha256": "2ccf720125223a7acfd3a2f45873b5a0aad5ffd5dd0d8ac877579ab0ac2aa5a2"
+        },
+        {
+          "path": "go/sources/github.com/infiniflow/ragflow/internal/admin/default_admin_password_test.go",
+          "startLine": 27,
+          "endLine": 40,
+          "excerpt": "func TestConfiguredSuperuserNickname(t *testing.T) {\n\ttests := []struct {\n\t\tname string\n\t\tenv  string\n\t\twant string\n\t}{\n\t\t{name: \"unset\", want: \"admin\"},\n\t\t{name: \"blank\", env: \" \\t\", want: \"admin\"},\n\t\t{name: \"configured\", env: \"  ops  \", want: \"ops\"},\n\t}\n\tfor _, tt := range tests {\n\t\tt.Run(tt.name, func(t *testing.T) {\n\t\t\tt.Setenv(common.EnvDefaultSuperuserNickname, tt.env)\n\t\t\tif got := configuredSuperuserNickname(); got != tt.want {",
+          "sha256": "c2401faeafb3fc302ea84e205f554863195e0bdf37de78bca315e712c40633f8"
+        }
+      ],
+      "limitations": [
+        "Source support only; third-party compilation/tests and environment readiness were not executed or measured.",
+        "Default unit tests exclude integration,e2e and manual build-tag tiers. Do not substitute raw go test and lose the mandatory CGO/native configuration.",
+        "The package selector is a source-bound instance of the maintainer package-scoped wrapper recipe, resolved to the first matching Go component and its actual unit tests. No measured success is asserted."
+      ]
+    },
+    {
+      "id": "e1-go-02-repository-tests",
+      "repository": "github.com/golang/go",
+      "revision": "430d19f07a57ee5ed4e3b1a04b0ab54dd5a24487",
+      "ecosystem": "go",
+      "scope": "repository",
+      "component": null,
+      "componentKind": null,
+      "taskIntent": "Establish the maintainer repository-default automated test instruction and complete applicability context, distinguishing separate e2e/manual/modules.",
+      "goldState": "supported",
+      "alternatives": [
+        {
+          "command": "./all.bash",
+          "working_directory": "src",
+          "scope": "repository",
+          "prerequisites": [
+            "Use a Unix-like host supporting the selected native Go build/test configuration, with Bash and a complete checkout of this source revision. Run this instruction from its src directory.",
+            "Provide a working native Go bootstrap tree >=Go1.26.0, located by GOROOT_BOOTSTRAP or make.bash PATH/default discovery. The current pinned make.bash defines this minimum.",
+            "For the cgo-enabled native suite, provide the configured C/C++ compilers (gcc/clang and corresponding C++ compiler) and needed platform tools; install-source guidance explicitly requires a C compiler for cgo. Preserve the intended host/target environment rather than silently cross-compiling."
+          ],
+          "source": "src/all.bash"
+        }
+      ],
+      "requiredAbstentionReasons": [],
+      "unresolvedEvidence": [],
+      "evidence": [
+        {
+          "path": "go/sources/github.com/golang/go/README.md",
+          "startLine": 9,
+          "endLine": 12,
+          "excerpt": "Our canonical Git repository is located at https://go.googlesource.com/go.\nThere is a mirror of the repository at https://github.com/golang/go.\n\nUnless otherwise noted, the Go source files are distributed under the",
+          "sha256": "8247b7c5de1e74854aac1a08aa5894444d1d33b4045c70d5cc3367ad0e25c3f3"
+        },
+        {
+          "path": "go/sources/github.com/golang/go/src/all.bash",
+          "startLine": 6,
+          "endLine": 13,
+          "excerpt": "set -e\nif [ ! -f make.bash ]; then\n\techo 'all.bash must be run from $GOROOT/src' 1>&2\n\texit 1\nfi\n. ./make.bash \"$@\" --no-banner\nbash run.bash \"$@\" --no-rebuild\n../bin/go tool dist banner # print build info",
+          "sha256": "bbb4df362ad3c52b39e4be6ad82be5c476d360d27faed7d7695e703d7988607e"
+        },
+        {
+          "path": "go/sources/github.com/golang/go/src/make.bash",
+          "startLine": 67,
+          "endLine": 76,
+          "excerpt": "# GOROOT_BOOTSTRAP: A working Go tree >= Go 1.26.0 for bootstrap.\n# If $GOROOT_BOOTSTRAP/bin/go is missing, $(go env GOROOT) is\n# tried for all \"go\" in $PATH. By default, one of $HOME/go1.26.0,\n# $HOME/sdk/go1.26.0, or $HOME/go1.4, whichever exists, in that order.\n# We still check $HOME/go1.4 to allow for build scripts that still hard-code\n# that name even though they put newer Go toolchains there.\n\nbootgo=1.26.0\n\nset -e",
+          "sha256": "d0da612ae94f9d92d8c0302070eaaa1eb2e2a32709aa567f21737c1f7d01c1ea"
+        },
+        {
+          "path": "go/sources/github.com/golang/website/_content/doc/contribute.html",
+          "startLine": 583,
+          "endLine": 619,
+          "excerpt": "<h4 id=\"test-gorepo\">In the main Go repository</h4>\n\n<p>\nFor standard library packages, all tests within the package must pass:\n</p>\n\n<pre>\n$ go test\n</pre>\n\n<p>\nThe short test suite for the entire tree can be run with <code>all.bash</code>\n(To build under Windows use <code>all.bat</code>):\n</p>\n\n<pre>\n$ cd go/src\n$ ./all.bash\n</pre>\n\n<p>\nAfter running for a while and printing a lot of testing output, the command should finish\nby printing,\n</p>\n\n<pre>\nALL TESTS PASSED\n</pre>\n\n<p>\nYou can use <code>make.bash</code> instead of <code>all.bash</code>\nto just build the compiler and the standard library without running the test suite.\nOnce the <code>go</code> tool is built, it will be installed as <code>bin/go</code>\nunder the directory in which you cloned the Go repository, and you can\nrun it directly from there.\nSee also\nthe section on how to <a href=\"#quick_test\">test your changes quickly</a>.",
+          "sha256": "0d36ad35675a6c0256db43154619a60b6609661061713a5930767a40db1388fd"
+        },
+        {
+          "path": "go/sources/github.com/golang/website/_content/doc/install/source.html",
+          "startLine": 120,
+          "endLine": 143,
+          "excerpt": "<h2 id=\"go14\">Install Go compiler binaries for bootstrap</h2>\n\n<p>\nThe Go toolchain is written in Go. To build it, you need a Go compiler installed.\nThe scripts that do the initial build of the tools look for a \"go\" command\nin <code>$PATH</code>, so as long as you have Go installed in your\nsystem and configured in your <code>$PATH</code>, you are ready to build Go\nfrom source.\nOr if you prefer you can set <code>$GOROOT_BOOTSTRAP</code> to the\nroot of a Go installation to use to build the new Go toolchain;\n<code>$GOROOT_BOOTSTRAP/bin/go</code> should be the go command to use.</p>\n\n<p>\nThe minimum version of Go required depends on the target version of Go:\n</p>\n\n<ul>\n<li> Go &lt;= 1.4: a C toolchain.\n<li> 1.5 &lt;= Go &lt;= 1.19: a Go 1.4 compiler.\n<li> 1.20 &lt;= Go &lt;= 1.21: a Go 1.17 compiler.\n<li> 1.22 &lt;= Go &lt;= 1.23: a Go 1.20 compiler.\n<li> Going forward, Go version 1.N will require a Go 1.M compiler,\nwhere M is N-2 rounded down to an even number. Example: Go 1.24 and 1.25 require Go 1.22.\n</ul>",
+          "sha256": "351bf756f31073cc2ccf7f1ee0eb076572dbc6090b729debce59db3b39a861b7"
+        },
+        {
+          "path": "go/sources/github.com/golang/website/_content/doc/install/source.html",
+          "startLine": 249,
+          "endLine": 264,
+          "excerpt": "<h2 id=\"ccompiler\">(Optional) Install a C compiler</h2>\n\n<p>\nTo build a Go installation\nwith <code><a href=\"/cmd/cgo\">cgo</a></code> support, which permits Go\nprograms to import C libraries, a C compiler such as <code>gcc</code>\nor <code>clang</code> must be installed first. Do this using whatever\ninstallation method is standard on the system.\n</p>\n\n<p>\nTo build without <code>cgo</code>, set the environment variable\n<code>CGO_ENABLED=0</code> before running <code>all.bash</code> or\n<code>make.bash</code>.\n</p>\n",
+          "sha256": "351bf756f31073cc2ccf7f1ee0eb076572dbc6090b729debce59db3b39a861b7"
+        },
+        {
+          "path": "go/sources/github.com/golang/go/src/cmd/go.mod",
+          "startLine": 1,
+          "endLine": 8,
+          "excerpt": "module cmd\n\ngo 1.28\n\nrequire (\n\tgithub.com/google/pprof v0.0.0-20260507013755-92041b743c96\n\tgolang.org/x/arch v0.31.1-0.20260922213335-ab53fe6c43b6\n\tgolang.org/x/build v0.0.0-20260715183034-a43f90886f2e",
+          "sha256": "4ecc040748718e9b44cb0a3458149280d46d5b751329fd732761363161f8f59c"
+        },
+        {
+          "path": "go/sources/github.com/golang/go/src/cmd/compile/README.md",
+          "startLine": 233,
+          "endLine": 250,
+          "excerpt": "#### Testing your changes\n\n* Be sure to read the [Quickly testing your changes](https://go.dev/doc/contribute#quick_test)\n  section of the Go Contribution Guide.\n\n* Some tests live within the cmd/compile packages and can be run by `go test ./...` or similar,\n  but many cmd/compile tests are in the top-level\n  [test](https://github.com/golang/go/tree/master/test) directory:\n\n  ```\n  $ go test cmd/internal/testdir                           # all tests in 'test' dir\n  $ go test cmd/internal/testdir -run='Test/escape.*.go'   # test specific files in 'test' dir\n  ```\n  For details, see the [testdir README](https://github.com/golang/go/tree/master/test#readme).\n  The `errorCheck` method in [testdir_test.go](https://github.com/golang/go/blob/master/src/cmd/internal/testdir/testdir_test.go)\n  is helpful for a description of the `ERROR` comments used in many of those tests.\n\n  In addition, the `go/types` package from the standard library and `cmd/compile/internal/types2`",
+          "sha256": "019dfb6331c2cac982b9d6695cf59f59b7164e841f69fac200bacf50724d3b2c"
+        },
+        {
+          "path": "go/sources/github.com/golang/website/_content/doc/contribute.html",
+          "startLine": 1187,
+          "endLine": 1202,
+          "excerpt": "If you're modifying the compiler itself, you can just recompile\nthe <code>compile</code> tool (which is the internal binary invoked\nby <code>go</code> <code>build</code> to compile each single package).\nAfter that, you will want to test it by compiling or running something.\n\n<pre>\n$ cd $GOROOT/src\n$ [make changes...]\n$ $GOROOT/bin/go install cmd/compile\n$ $GOROOT/bin/go build [something...]   # test the new compiler\n$ $GOROOT/bin/go run [something...]     # test the new compiler\n$ $GOROOT/bin/go test [something...]    # test the new compiler\n</pre>\n\nThe same applies to other internal tools of the Go tool chain,\nsuch as <code>asm</code>, <code>cover</code>, <code>link</code>, and so on.",
+          "sha256": "0d36ad35675a6c0256db43154619a60b6609661061713a5930767a40db1388fd"
+        }
+      ],
+      "limitations": [
+        "Source support only; third-party compilation/tests and environment readiness were not executed or measured.",
+        "Repository coverage and working directory are independent: this repository-default test task runs in src, not checkout root. It is a candidate-context instruction, not a root scalar.",
+        "The maintainer guide calls this the short test suite for the entire tree. It is not all platform trybot coverage.",
+        "GitHub is an official mirror of go.googlesource.com/go; canonical relationship is retained and does not overlap another enrolled/historical identity in the frozen ledger.",
+        "Secondary maintainer docs are frozen from golang/website revision b8d34bbe2d9e230cc70ce3e4272dc651f494a188, separate from the Go source revision."
+      ]
+    },
+    {
+      "id": "e1-go-02-component-tests",
+      "repository": "github.com/golang/go",
+      "revision": "430d19f07a57ee5ed4e3b1a04b0ab54dd5a24487",
+      "ecosystem": "go",
+      "scope": "component",
+      "component": "src/cmd/compile",
+      "componentKind": "production",
+      "taskIntent": "Establish the source-supported unit tests for the named Go component/package src/cmd/compile; preserve coverage and setup constraints.",
+      "goldState": "unresolved",
+      "alternatives": [],
+      "requiredAbstentionReasons": [],
+      "unresolvedEvidence": [
+        "The compiler README states that some component tests live under cmd/compile and many live in top-level test/, with separate go test cmd/internal/testdir guidance. No single complete compiler-component instruction covering the intended package and referenced compiler regression coverage, with a consistent selected toolchain/setup tuple, was established. Do not call only go test ./... complete compiler coverage or relabel the repository all.bash suite as component-only."
+      ],
+      "evidence": [
+        {
+          "path": "go/sources/github.com/golang/go/README.md",
+          "startLine": 9,
+          "endLine": 12,
+          "excerpt": "Our canonical Git repository is located at https://go.googlesource.com/go.\nThere is a mirror of the repository at https://github.com/golang/go.\n\nUnless otherwise noted, the Go source files are distributed under the",
+          "sha256": "8247b7c5de1e74854aac1a08aa5894444d1d33b4045c70d5cc3367ad0e25c3f3"
+        },
+        {
+          "path": "go/sources/github.com/golang/go/src/all.bash",
+          "startLine": 6,
+          "endLine": 13,
+          "excerpt": "set -e\nif [ ! -f make.bash ]; then\n\techo 'all.bash must be run from $GOROOT/src' 1>&2\n\texit 1\nfi\n. ./make.bash \"$@\" --no-banner\nbash run.bash \"$@\" --no-rebuild\n../bin/go tool dist banner # print build info",
+          "sha256": "bbb4df362ad3c52b39e4be6ad82be5c476d360d27faed7d7695e703d7988607e"
+        },
+        {
+          "path": "go/sources/github.com/golang/go/src/make.bash",
+          "startLine": 67,
+          "endLine": 76,
+          "excerpt": "# GOROOT_BOOTSTRAP: A working Go tree >= Go 1.26.0 for bootstrap.\n# If $GOROOT_BOOTSTRAP/bin/go is missing, $(go env GOROOT) is\n# tried for all \"go\" in $PATH. By default, one of $HOME/go1.26.0,\n# $HOME/sdk/go1.26.0, or $HOME/go1.4, whichever exists, in that order.\n# We still check $HOME/go1.4 to allow for build scripts that still hard-code\n# that name even though they put newer Go toolchains there.\n\nbootgo=1.26.0\n\nset -e",
+          "sha256": "d0da612ae94f9d92d8c0302070eaaa1eb2e2a32709aa567f21737c1f7d01c1ea"
+        },
+        {
+          "path": "go/sources/github.com/golang/website/_content/doc/contribute.html",
+          "startLine": 583,
+          "endLine": 619,
+          "excerpt": "<h4 id=\"test-gorepo\">In the main Go repository</h4>\n\n<p>\nFor standard library packages, all tests within the package must pass:\n</p>\n\n<pre>\n$ go test\n</pre>\n\n<p>\nThe short test suite for the entire tree can be run with <code>all.bash</code>\n(To build under Windows use <code>all.bat</code>):\n</p>\n\n<pre>\n$ cd go/src\n$ ./all.bash\n</pre>\n\n<p>\nAfter running for a while and printing a lot of testing output, the command should finish\nby printing,\n</p>\n\n<pre>\nALL TESTS PASSED\n</pre>\n\n<p>\nYou can use <code>make.bash</code> instead of <code>all.bash</code>\nto just build the compiler and the standard library without running the test suite.\nOnce the <code>go</code> tool is built, it will be installed as <code>bin/go</code>\nunder the directory in which you cloned the Go repository, and you can\nrun it directly from there.\nSee also\nthe section on how to <a href=\"#quick_test\">test your changes quickly</a>.",
+          "sha256": "0d36ad35675a6c0256db43154619a60b6609661061713a5930767a40db1388fd"
+        },
+        {
+          "path": "go/sources/github.com/golang/website/_content/doc/install/source.html",
+          "startLine": 120,
+          "endLine": 143,
+          "excerpt": "<h2 id=\"go14\">Install Go compiler binaries for bootstrap</h2>\n\n<p>\nThe Go toolchain is written in Go. To build it, you need a Go compiler installed.\nThe scripts that do the initial build of the tools look for a \"go\" command\nin <code>$PATH</code>, so as long as you have Go installed in your\nsystem and configured in your <code>$PATH</code>, you are ready to build Go\nfrom source.\nOr if you prefer you can set <code>$GOROOT_BOOTSTRAP</code> to the\nroot of a Go installation to use to build the new Go toolchain;\n<code>$GOROOT_BOOTSTRAP/bin/go</code> should be the go command to use.</p>\n\n<p>\nThe minimum version of Go required depends on the target version of Go:\n</p>\n\n<ul>\n<li> Go &lt;= 1.4: a C toolchain.\n<li> 1.5 &lt;= Go &lt;= 1.19: a Go 1.4 compiler.\n<li> 1.20 &lt;= Go &lt;= 1.21: a Go 1.17 compiler.\n<li> 1.22 &lt;= Go &lt;= 1.23: a Go 1.20 compiler.\n<li> Going forward, Go version 1.N will require a Go 1.M compiler,\nwhere M is N-2 rounded down to an even number. Example: Go 1.24 and 1.25 require Go 1.22.\n</ul>",
+          "sha256": "351bf756f31073cc2ccf7f1ee0eb076572dbc6090b729debce59db3b39a861b7"
+        },
+        {
+          "path": "go/sources/github.com/golang/website/_content/doc/install/source.html",
+          "startLine": 249,
+          "endLine": 264,
+          "excerpt": "<h2 id=\"ccompiler\">(Optional) Install a C compiler</h2>\n\n<p>\nTo build a Go installation\nwith <code><a href=\"/cmd/cgo\">cgo</a></code> support, which permits Go\nprograms to import C libraries, a C compiler such as <code>gcc</code>\nor <code>clang</code> must be installed first. Do this using whatever\ninstallation method is standard on the system.\n</p>\n\n<p>\nTo build without <code>cgo</code>, set the environment variable\n<code>CGO_ENABLED=0</code> before running <code>all.bash</code> or\n<code>make.bash</code>.\n</p>\n",
+          "sha256": "351bf756f31073cc2ccf7f1ee0eb076572dbc6090b729debce59db3b39a861b7"
+        },
+        {
+          "path": "go/sources/github.com/golang/go/src/cmd/go.mod",
+          "startLine": 1,
+          "endLine": 8,
+          "excerpt": "module cmd\n\ngo 1.28\n\nrequire (\n\tgithub.com/google/pprof v0.0.0-20260507013755-92041b743c96\n\tgolang.org/x/arch v0.31.1-0.20260922213335-ab53fe6c43b6\n\tgolang.org/x/build v0.0.0-20260715183034-a43f90886f2e",
+          "sha256": "4ecc040748718e9b44cb0a3458149280d46d5b751329fd732761363161f8f59c"
+        },
+        {
+          "path": "go/sources/github.com/golang/go/src/cmd/compile/README.md",
+          "startLine": 233,
+          "endLine": 250,
+          "excerpt": "#### Testing your changes\n\n* Be sure to read the [Quickly testing your changes](https://go.dev/doc/contribute#quick_test)\n  section of the Go Contribution Guide.\n\n* Some tests live within the cmd/compile packages and can be run by `go test ./...` or similar,\n  but many cmd/compile tests are in the top-level\n  [test](https://github.com/golang/go/tree/master/test) directory:\n\n  ```\n  $ go test cmd/internal/testdir                           # all tests in 'test' dir\n  $ go test cmd/internal/testdir -run='Test/escape.*.go'   # test specific files in 'test' dir\n  ```\n  For details, see the [testdir README](https://github.com/golang/go/tree/master/test#readme).\n  The `errorCheck` method in [testdir_test.go](https://github.com/golang/go/blob/master/src/cmd/internal/testdir/testdir_test.go)\n  is helpful for a description of the `ERROR` comments used in many of those tests.\n\n  In addition, the `go/types` package from the standard library and `cmd/compile/internal/types2`",
+          "sha256": "019dfb6331c2cac982b9d6695cf59f59b7164e841f69fac200bacf50724d3b2c"
+        },
+        {
+          "path": "go/sources/github.com/golang/website/_content/doc/contribute.html",
+          "startLine": 1187,
+          "endLine": 1202,
+          "excerpt": "If you're modifying the compiler itself, you can just recompile\nthe <code>compile</code> tool (which is the internal binary invoked\nby <code>go</code> <code>build</code> to compile each single package).\nAfter that, you will want to test it by compiling or running something.\n\n<pre>\n$ cd $GOROOT/src\n$ [make changes...]\n$ $GOROOT/bin/go install cmd/compile\n$ $GOROOT/bin/go build [something...]   # test the new compiler\n$ $GOROOT/bin/go run [something...]     # test the new compiler\n$ $GOROOT/bin/go test [something...]    # test the new compiler\n</pre>\n\nThe same applies to other internal tools of the Go tool chain,\nsuch as <code>asm</code>, <code>cover</code>, <code>link</code>, and so on.",
+          "sha256": "0d36ad35675a6c0256db43154619a60b6609661061713a5930767a40db1388fd"
+        }
+      ],
+      "limitations": [
+        "Source support only; third-party compilation/tests and environment readiness were not executed or measured."
+      ]
+    },
+    {
+      "id": "e1-go-03-repository-tests",
+      "repository": "github.com/docker/compose",
+      "revision": "343bb382d2192b88d84af49971bb5cb99bee268c",
+      "ecosystem": "go",
+      "scope": "repository",
+      "component": null,
+      "componentKind": null,
+      "taskIntent": "Establish the maintainer repository-default automated test instruction and complete applicability context, distinguishing separate e2e/manual/modules.",
+      "goldState": "supported",
+      "alternatives": [
+        {
+          "command": "make test",
+          "working_directory": ".",
+          "scope": "repository",
+          "prerequisites": [
+            "Install Make and Go satisfying the owning go.mod requirement Go1.26.10.",
+            "For this make test alternative, provide working Docker/Buildx build infrastructure: Docker20.10+ on Linux or Docker Desktop on macOS/Windows per BUILDING.md, plus the docker buildx plugin selected by Makefile.",
+            "Allow required builder image, Go module and gotestsum downloads or provide suitable caches; the Dockerfile test stage installs its race-detector C toolchain and runs the declared tests inside the builder."
+          ],
+          "source": "BUILDING.md"
+        }
+      ],
+      "requiredAbstentionReasons": [],
+      "unresolvedEvidence": [],
+      "evidence": [
+        {
+          "path": "go/sources/github.com/docker/compose/AGENTS.md",
+          "startLine": 6,
+          "endLine": 17,
+          "excerpt": "## Build & Test\n\n- Build: `make build`\n- Test all: `make test`\n- Test unit: `go test ./pkg/...` \u2014 needs no Docker daemon; the e2e suite is\n  gated behind the `e2e` build tag and is not picked up\n- Test single: `go test ./pkg/compose/ -run TestFunctionName`\n- E2E tests: `go test -tags e2e ./pkg/e2e/ -run TestName` \u2014 requires a Docker\n  daemon and the locally built binary (`make build`)\n\n## E2E tests\n",
+          "sha256": "2c3364f66a30ea054f3ec3610fa4be37a98e5fc3dbd9654b44f26805c75a236e"
+        },
+        {
+          "path": "go/sources/github.com/docker/compose/BUILDING.md",
+          "startLine": 2,
+          "endLine": 19,
+          "excerpt": "### Prerequisites\n\n* Windows:\n  * [Docker Desktop](https://docs.docker.com/desktop/setup/install/windows-install/)\n  * make\n  * go (see [go.mod](go.mod) for minimum version)\n* macOS:\n  * [Docker Desktop](https://docs.docker.com/desktop/setup/install/mac-install/)\n  * make\n  * go (see [go.mod](go.mod) for minimum version)\n* Linux:\n  * [Docker 20.10 or later](https://docs.docker.com/engine/install/)\n  * make\n  * go (see [go.mod](go.mod) for minimum version)\n\n### Building the CLI\n\nOnce you have the prerequisites installed, you can build the CLI using:",
+          "sha256": "68694744374f7b98c6dd284aea8d657267a6f6383e9bd5580f725a3e723a7cd4"
+        },
+        {
+          "path": "go/sources/github.com/docker/compose/BUILDING.md",
+          "startLine": 31,
+          "endLine": 42,
+          "excerpt": "### Unit tests\n\nTo run all of the unit tests, run:\n\n```console\nmake test\n```\n\nIf you need to update a golden file simply do `go test ./... -test.update-golden`.\n\n### End-to-end tests\nTo run e2e tests, the Compose CLI binary needs to be built. All the commands to run e2e tests propose a version",
+          "sha256": "68694744374f7b98c6dd284aea8d657267a6f6383e9bd5580f725a3e723a7cd4"
+        },
+        {
+          "path": "go/sources/github.com/docker/compose/Makefile",
+          "startLine": 123,
+          "endLine": 130,
+          "excerpt": ".PHONY: test\ntest: ## Run unit tests\n\t$(BUILDX_CMD) bake test\n\n.PHONY: relay-test\nrelay-test: ## Run unit tests for the relay/ module\n\t$(BUILDX_CMD) bake relay-test\n",
+          "sha256": "927856982fcd81c94dd843743000b8a828baf5af02503d64f7a4c4cc477ac4cc"
+        },
+        {
+          "path": "go/sources/github.com/docker/compose/Dockerfile",
+          "startLine": 123,
+          "endLine": 138,
+          "excerpt": "FROM build-base AS test\n# the race detector requires cgo (ENV: base sets CGO_ENABLED=0, which an ARG can't override)\nENV CGO_ENABLED=1\nARG BUILD_TAGS\nARG GOTESTSUM_VERSION\nRUN apk add --no-cache gcc musl-dev\nRUN --mount=type=bind,target=. \\\n    --mount=type=cache,target=/root/.cache \\\n    --mount=type=cache,target=/go/pkg/mod \\\n    rm -rf /tmp/coverage && \\\n    mkdir -p /tmp/coverage && \\\n    rm -rf /tmp/report && \\\n    mkdir -p /tmp/report && \\\n    go run gotest.tools/gotestsum@${GOTESTSUM_VERSION} --format testname --junitfile \"/tmp/report/report.xml\" -- -tags \"$BUILD_TAGS\" -v -race -cover -covermode=atomic $(go list  $(TAGS) ./... | grep -vE 'e2e') -args -test.gocoverdir=\"/tmp/coverage\" && \\\n    go tool covdata percent -i=/tmp/coverage\n",
+          "sha256": "5f35a0fce55a645e2497f861aba1414f237d532493b4f2bda138c609b28ef44f"
+        },
+        {
+          "path": "go/sources/github.com/docker/compose/go.mod",
+          "startLine": 2,
+          "endLine": 6,
+          "excerpt": "\ngo 1.26.10\n\nrequire (\n\tgithub.com/DefangLabs/secret-detector v0.0.0-20260916192156-3e28d7ed64df",
+          "sha256": "add1d3fc58082dc40ea0ebcc3d2c80b1f4bf99a5452aab2026e8997b511cfb09"
+        },
+        {
+          "path": "go/sources/github.com/docker/compose/pkg/compose/apiSocket_test.go",
+          "startLine": 1,
+          "endLine": 26,
+          "excerpt": "/*\n   Copyright 2026 Docker Compose CLI authors\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n*/\n\npackage compose\n\nimport (\n\t\"testing\"\n\n\t\"github.com/compose-spec/compose-go/v2/types\"\n\t\"gotest.tools/v3/assert\"\n)\n\n// linuxContextInfo is the context of a Linux engine.",
+          "sha256": "59f26ee95d04a855a27047089929d4cfd77cf52b68f547e3fdb38b139dc1b501"
+        }
+      ],
+      "limitations": [
+        "Source support only; third-party compilation/tests and environment readiness were not executed or measured.",
+        "The default target runs main-module unit tests in Buildx and excludes e2e; relay is a distinct Go module with its own relay-test target. Coverage is the documented default, not every module and end-to-end lane."
+      ]
+    },
+    {
+      "id": "e1-go-03-component-tests",
+      "repository": "github.com/docker/compose",
+      "revision": "343bb382d2192b88d84af49971bb5cb99bee268c",
+      "ecosystem": "go",
+      "scope": "component",
+      "component": "pkg/compose",
+      "componentKind": "production",
+      "taskIntent": "Establish the source-supported unit tests for the named Go component/package pkg/compose; preserve coverage and setup constraints.",
+      "goldState": "supported",
+      "alternatives": [
+        {
+          "command": "go test ./pkg/compose/",
+          "working_directory": ".",
+          "scope": "component",
+          "prerequisites": [
+            "Use Go1.26.10 or newer satisfying go.mod, a checkout at the frozen revision and dependencies available via the Go module/vendor configuration.",
+            "Use the plain default unit-test build tags. Maintainer AGENTS.md says unit tests need no Docker daemon and e2e is gated behind an explicit build tag."
+          ],
+          "source": "AGENTS.md",
+          "component": "pkg/compose"
+        }
+      ],
+      "requiredAbstentionReasons": [],
+      "unresolvedEvidence": [],
+      "evidence": [
+        {
+          "path": "go/sources/github.com/docker/compose/AGENTS.md",
+          "startLine": 6,
+          "endLine": 17,
+          "excerpt": "## Build & Test\n\n- Build: `make build`\n- Test all: `make test`\n- Test unit: `go test ./pkg/...` \u2014 needs no Docker daemon; the e2e suite is\n  gated behind the `e2e` build tag and is not picked up\n- Test single: `go test ./pkg/compose/ -run TestFunctionName`\n- E2E tests: `go test -tags e2e ./pkg/e2e/ -run TestName` \u2014 requires a Docker\n  daemon and the locally built binary (`make build`)\n\n## E2E tests\n",
+          "sha256": "2c3364f66a30ea054f3ec3610fa4be37a98e5fc3dbd9654b44f26805c75a236e"
+        },
+        {
+          "path": "go/sources/github.com/docker/compose/BUILDING.md",
+          "startLine": 2,
+          "endLine": 19,
+          "excerpt": "### Prerequisites\n\n* Windows:\n  * [Docker Desktop](https://docs.docker.com/desktop/setup/install/windows-install/)\n  * make\n  * go (see [go.mod](go.mod) for minimum version)\n* macOS:\n  * [Docker Desktop](https://docs.docker.com/desktop/setup/install/mac-install/)\n  * make\n  * go (see [go.mod](go.mod) for minimum version)\n* Linux:\n  * [Docker 20.10 or later](https://docs.docker.com/engine/install/)\n  * make\n  * go (see [go.mod](go.mod) for minimum version)\n\n### Building the CLI\n\nOnce you have the prerequisites installed, you can build the CLI using:",
+          "sha256": "68694744374f7b98c6dd284aea8d657267a6f6383e9bd5580f725a3e723a7cd4"
+        },
+        {
+          "path": "go/sources/github.com/docker/compose/BUILDING.md",
+          "startLine": 31,
+          "endLine": 42,
+          "excerpt": "### Unit tests\n\nTo run all of the unit tests, run:\n\n```console\nmake test\n```\n\nIf you need to update a golden file simply do `go test ./... -test.update-golden`.\n\n### End-to-end tests\nTo run e2e tests, the Compose CLI binary needs to be built. All the commands to run e2e tests propose a version",
+          "sha256": "68694744374f7b98c6dd284aea8d657267a6f6383e9bd5580f725a3e723a7cd4"
+        },
+        {
+          "path": "go/sources/github.com/docker/compose/Makefile",
+          "startLine": 123,
+          "endLine": 130,
+          "excerpt": ".PHONY: test\ntest: ## Run unit tests\n\t$(BUILDX_CMD) bake test\n\n.PHONY: relay-test\nrelay-test: ## Run unit tests for the relay/ module\n\t$(BUILDX_CMD) bake relay-test\n",
+          "sha256": "927856982fcd81c94dd843743000b8a828baf5af02503d64f7a4c4cc477ac4cc"
+        },
+        {
+          "path": "go/sources/github.com/docker/compose/Dockerfile",
+          "startLine": 123,
+          "endLine": 138,
+          "excerpt": "FROM build-base AS test\n# the race detector requires cgo (ENV: base sets CGO_ENABLED=0, which an ARG can't override)\nENV CGO_ENABLED=1\nARG BUILD_TAGS\nARG GOTESTSUM_VERSION\nRUN apk add --no-cache gcc musl-dev\nRUN --mount=type=bind,target=. \\\n    --mount=type=cache,target=/root/.cache \\\n    --mount=type=cache,target=/go/pkg/mod \\\n    rm -rf /tmp/coverage && \\\n    mkdir -p /tmp/coverage && \\\n    rm -rf /tmp/report && \\\n    mkdir -p /tmp/report && \\\n    go run gotest.tools/gotestsum@${GOTESTSUM_VERSION} --format testname --junitfile \"/tmp/report/report.xml\" -- -tags \"$BUILD_TAGS\" -v -race -cover -covermode=atomic $(go list  $(TAGS) ./... | grep -vE 'e2e') -args -test.gocoverdir=\"/tmp/coverage\" && \\\n    go tool covdata percent -i=/tmp/coverage\n",
+          "sha256": "5f35a0fce55a645e2497f861aba1414f237d532493b4f2bda138c609b28ef44f"
+        },
+        {
+          "path": "go/sources/github.com/docker/compose/go.mod",
+          "startLine": 2,
+          "endLine": 6,
+          "excerpt": "\ngo 1.26.10\n\nrequire (\n\tgithub.com/DefangLabs/secret-detector v0.0.0-20260916192156-3e28d7ed64df",
+          "sha256": "add1d3fc58082dc40ea0ebcc3d2c80b1f4bf99a5452aab2026e8997b511cfb09"
+        },
+        {
+          "path": "go/sources/github.com/docker/compose/pkg/compose/apiSocket_test.go",
+          "startLine": 1,
+          "endLine": 26,
+          "excerpt": "/*\n   Copyright 2026 Docker Compose CLI authors\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n*/\n\npackage compose\n\nimport (\n\t\"testing\"\n\n\t\"github.com/compose-spec/compose-go/v2/types\"\n\t\"gotest.tools/v3/assert\"\n)\n\n// linuxContextInfo is the context of a Linux engine.",
+          "sha256": "59f26ee95d04a855a27047089929d4cfd77cf52b68f547e3fdb38b139dc1b501"
+        }
+      ],
+      "limitations": [
+        "Source support only; third-party compilation/tests and environment readiness were not executed or measured.",
+        "The complete package command is source-derived by binding the documented unit-test package pattern to the explicitly identified pkg/compose package and omitting the example single-test placeholder. It is not claimed printed verbatim.",
+        "This tuple targets the named pkg/compose package, not recursive e2e or relay-module coverage."
+      ]
+    }
+  ]
+}

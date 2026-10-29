@@ -1,0 +1,112 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T05:05:17.00058Z",
+    "snapshotDigest": "24cdb33243b74ab13719093d3c53c642e471b2a9fda4454f3a10926157fba671",
+    "staleAfter": "2026-10-30T05:05:17.00058Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "storytold",
+    "repo": "photocraft",
+    "source": "https://github.com/storytold/photocraft"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/storytold/photocraft/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/storytold/photocraft",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md` and `Cargo.toml`. Inferred `repo.build` from `Cargo.toml`. Inferred `repo.test` from `Cargo.toml`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/storytold/photocraft/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/storytold/photocraft",
+        "generated_at": "2026-10-29T05:05:20.079815Z",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md` and `Cargo.toml`. Inferred `repo.build` from `Cargo.toml`. Inferred `repo.test` from `Cargo.toml`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "repo": {
+        "name": "ArtCraft",
+        "description": "Image editing; an open-source, clean-room reimplementation of Adobe Photoshop, rebuilt in pure Rust.",
+        "homepage": "https://github.com/storytold/photocraft",
+        "license": null,
+        "status": null,
+        "visibility": null,
+        "languages": [],
+        "build": "cargo build --workspace",
+        "test": "cargo test --workspace",
+        "toolchain": {
+          "min": "1.95",
+          "ecosystem": "Rust"
+        },
+        "topics": []
+      },
+      "owners": null,
+      "docs": {
+        "root": "book/",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": [],
+        "links": [
+          {
+            "kind": "related",
+            "target": "github.com/storytold/craft-fonts",
+            "notes": "Cross-link from README: craft-fonts",
+            "trust": {
+              "confidence": "low",
+              "provenance": [
+                "declared",
+                "readme"
+              ],
+              "notes": null
+            }
+          }
+        ]
+      },
+      "x": {
+        "dotrepo": {
+          "field_evidence": {
+            "docs.root": {
+              "checkedAt": "2026-10-29T05:05:20.079815Z",
+              "confidence": "high",
+              "method": "extracted",
+              "reason": "Explicit documentation link at README.md:327: Developer, architecture, automation, format, and security documentation is maintained in the [PhotoCraft documentation book](book/).",
+              "source": "README.md",
+              "state": "present",
+              "valueJson": "\"book/\""
+            }
+          }
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

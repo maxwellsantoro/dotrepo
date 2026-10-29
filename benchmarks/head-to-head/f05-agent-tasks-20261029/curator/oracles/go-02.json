@@ -1,0 +1,29 @@
+{
+  "taskId": "go-02",
+  "state": "source-grounded draft; not launch-ready",
+  "sourceLocators": [
+    "sources/github.com/beego/beego/README.md:67-80",
+    "sources/github.com/beego/beego/client/cache/cache.go:15-35",
+    "sources/github.com/beego/beego/client/cache/cache_test.go:29-48",
+    "sources/github.com/beego/beego/CONTRIBUTING.md:30-52",
+    "sources/github.com/beego/beego/scripts/test_docker_compose.yaml:1-56",
+    "sources/github.com/beego/beego/.github/workflows/test.yml:1-163",
+    "sources/github.com/beego/beego/client/cache/memcache/memcache_test.go:34-53",
+    "sources/github.com/beego/beego/client/cache/redis/redis_test.go:1-361",
+    "sources/github.com/beego/beego/client/cache/ssdb/ssdb_test.go:1-211",
+    "sources/github.com/beego/beego/go.mod:1-5"
+  ],
+  "criteria": [
+    "Verify exact upstream revision and intended scope.",
+    "Require retained actual test execution and result; a plausible command, compilation-only, listing-only or unrelated narrowed suite does not qualify.",
+    "Require intended cache component coverage including backend subpackages; a memory-cache-only test run is narrower.",
+    "Middleware and environment variables are source-declared prerequisites whose actual availability must be frozen and observed; unavailable setup remains noncompletion/limitation.",
+    "Classify lost prerequisites, wrong cwd/scope, accepted unsupported instruction and recovered errors independently of final completion."
+  ],
+  "pending": [
+    "Independent gold/coverage review and executable completion oracle.",
+    "Pinned environment/image, toolchain and dependency/cache state.",
+    "Test skip and platform rules with positive/negative oracle controls.",
+    "Equal tool/network permissions, enforced resource budgets and complete usage/cost receipts."
+  ]
+}

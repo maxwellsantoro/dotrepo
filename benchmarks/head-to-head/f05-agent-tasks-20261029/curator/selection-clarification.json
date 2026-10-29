@@ -1,0 +1,19 @@
+{
+  "source": "Coordinator instruction before final source freeze, October 29, 2026",
+  "rule": "Use literal non-root package-path order consistently: select homeassistant and youtube_dl before narrower subpackages. Package location alone never proves distinct component coverage; leave instruction/oracle applicability unresolved where sources establish only aggregate tests.",
+  "provisionalChoices": [
+    {
+      "taskId": "python-02",
+      "component": "homeassistant/components/abode",
+      "replacement": "homeassistant"
+    },
+    {
+      "taskId": "python-03",
+      "component": "youtube_dl/downloader",
+      "replacement": "youtube_dl"
+    }
+  ],
+  "identitiesAndQuotasUnchanged": true,
+  "indexOrEvaluationInfluence": false,
+  "reason": "Apply retained manifest-established lexical order consistently before final source freeze; do not select easier or harder cases after coverage inspection."
+}

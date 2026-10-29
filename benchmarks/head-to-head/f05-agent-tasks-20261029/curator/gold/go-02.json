@@ -1,0 +1,21 @@
+{
+  "taskId": "go-02",
+  "status": "required-abstention",
+  "supportedCompleteAlternatives": [],
+  "reason": "Source documents middleware services and root CI tests, but does not declare a complete isolated cache-component command/context/prerequisite tuple. A root-only cache package invocation would omit the backend subpackages; do not invent an equivalent to the aggregate workflow.",
+  "sourceLocators": [
+    "sources/github.com/beego/beego/README.md:67-80",
+    "sources/github.com/beego/beego/client/cache/cache.go:15-35",
+    "sources/github.com/beego/beego/client/cache/cache_test.go:29-48",
+    "sources/github.com/beego/beego/CONTRIBUTING.md:30-52",
+    "sources/github.com/beego/beego/scripts/test_docker_compose.yaml:1-56",
+    "sources/github.com/beego/beego/.github/workflows/test.yml:1-163",
+    "sources/github.com/beego/beego/client/cache/memcache/memcache_test.go:34-53",
+    "sources/github.com/beego/beego/client/cache/redis/redis_test.go:1-361",
+    "sources/github.com/beego/beego/client/cache/ssdb/ssdb_test.go:1-211",
+    "sources/github.com/beego/beego/go.mod:1-5"
+  ],
+  "executionObserved": false,
+  "independentReview": "pending",
+  "sourceAssessmentOnly": true
+}

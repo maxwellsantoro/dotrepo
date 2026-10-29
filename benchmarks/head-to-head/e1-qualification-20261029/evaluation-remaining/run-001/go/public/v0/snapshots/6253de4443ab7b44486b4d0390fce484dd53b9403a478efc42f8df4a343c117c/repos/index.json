@@ -1,0 +1,62 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T05:22:03.084683Z",
+    "snapshotDigest": "58df1d91f78cfee36282fd1a54ebe2aadf70b6341968d19d3ab417b5fe5c3604",
+    "staleAfter": "2026-10-30T05:22:03.084683Z"
+  },
+  "repositoryCount": 3,
+  "repositories": [
+    {
+      "identity": {
+        "host": "github.com",
+        "owner": "docker",
+        "repo": "compose",
+        "source": "https://github.com/docker/compose"
+      },
+      "name": "Docker Compose",
+      "description": "Docker Compose is a tool for running multi-container applications on Docker defined using the Compose file format.",
+      "links": {
+        "self": "/v0/repos/github.com/docker/compose/index.json",
+        "trust": "/v0/repos/github.com/docker/compose/trust.json",
+        "profile": "/v0/repos/github.com/docker/compose/profile.json",
+        "queryTemplate": "/v0/repos/github.com/docker/compose/query?path={dot_path}",
+        "indexPath": "repos/github.com/docker/compose/"
+      }
+    },
+    {
+      "identity": {
+        "host": "github.com",
+        "owner": "golang",
+        "repo": "go",
+        "source": "https://github.com/golang/go"
+      },
+      "name": "The Go Programming Language",
+      "description": "Go is an open source programming language that makes it easy to build simple, reliable, and efficient software.",
+      "links": {
+        "self": "/v0/repos/github.com/golang/go/index.json",
+        "trust": "/v0/repos/github.com/golang/go/trust.json",
+        "profile": "/v0/repos/github.com/golang/go/profile.json",
+        "queryTemplate": "/v0/repos/github.com/golang/go/query?path={dot_path}",
+        "indexPath": "repos/github.com/golang/go/"
+      }
+    },
+    {
+      "identity": {
+        "host": "github.com",
+        "owner": "infiniflow",
+        "repo": "ragflow",
+        "source": "https://github.com/infiniflow/ragflow"
+      },
+      "name": "README in English",
+      "description": "RAGFlow is a leading open-source Retrieval-Augmented Generation (RAG) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs.",
+      "links": {
+        "self": "/v0/repos/github.com/infiniflow/ragflow/index.json",
+        "trust": "/v0/repos/github.com/infiniflow/ragflow/trust.json",
+        "profile": "/v0/repos/github.com/infiniflow/ragflow/profile.json",
+        "queryTemplate": "/v0/repos/github.com/infiniflow/ragflow/query?path={dot_path}",
+        "indexPath": "repos/github.com/infiniflow/ragflow/"
+      }
+    }
+  ]
+}

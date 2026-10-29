@@ -1,0 +1,128 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T05:22:03.084683Z",
+    "snapshotDigest": "fe3651ef5762490b41439a34654734da82a0e4891174ed6223806a46ccd53a1b",
+    "staleAfter": "2026-10-30T05:22:03.084683Z"
+  },
+  "profiles": [
+    {
+      "completeness": {
+        "conflictCount": 0,
+        "hasBuild": true,
+        "hasDocs": true,
+        "hasLicense": false,
+        "hasOwnershipSignal": false,
+        "hasSecurityContact": false,
+        "hasTest": true
+      },
+      "homepage": "https://github.com/docling-project/docling",
+      "identity": {
+        "host": "github.com",
+        "owner": "docling-project",
+        "repo": "docling",
+        "source": "https://github.com/docling-project/docling"
+      },
+      "languages": [],
+      "license": null,
+      "links": {
+        "indexPath": "repos/github.com/docling-project/docling/",
+        "queryTemplate": "/v0/repos/github.com/docling-project/docling/query?path={dot_path}",
+        "repository": "/v0/repos/github.com/docling-project/docling/index.json",
+        "self": "/v0/repos/github.com/docling-project/docling/profile.json",
+        "trust": "/v0/repos/github.com/docling-project/docling/trust.json"
+      },
+      "name": "Docling",
+      "purpose": "Docling simplifies document processing by parsing diverse formats — including advanced PDF understanding — and providing seamless integrations with the generative AI ecosystem.",
+      "topics": [],
+      "trust": {
+        "confidence": "medium",
+        "provenance": [
+          "imported",
+          "inferred"
+        ],
+        "selectedStatus": "inferred",
+        "selectionReason": "only_matching_record"
+      }
+    },
+    {
+      "completeness": {
+        "conflictCount": 0,
+        "hasBuild": true,
+        "hasDocs": false,
+        "hasLicense": false,
+        "hasOwnershipSignal": false,
+        "hasSecurityContact": false,
+        "hasTest": true
+      },
+      "homepage": "https://github.com/keras-team/keras",
+      "identity": {
+        "host": "github.com",
+        "owner": "keras-team",
+        "repo": "keras",
+        "source": "https://github.com/keras-team/keras"
+      },
+      "languages": [],
+      "license": null,
+      "links": {
+        "indexPath": "repos/github.com/keras-team/keras/",
+        "queryTemplate": "/v0/repos/github.com/keras-team/keras/query?path={dot_path}",
+        "repository": "/v0/repos/github.com/keras-team/keras/index.json",
+        "self": "/v0/repos/github.com/keras-team/keras/profile.json",
+        "trust": "/v0/repos/github.com/keras-team/keras/trust.json"
+      },
+      "name": "keras",
+      "purpose": "Keras 3 is a multi-backend deep learning framework, with support for JAX, TensorFlow, PyTorch, and OpenVINO (for inference-only).",
+      "topics": [],
+      "trust": {
+        "confidence": "medium",
+        "provenance": [
+          "imported",
+          "inferred"
+        ],
+        "selectedStatus": "inferred",
+        "selectionReason": "only_matching_record"
+      }
+    },
+    {
+      "completeness": {
+        "conflictCount": 0,
+        "hasBuild": true,
+        "hasDocs": false,
+        "hasLicense": false,
+        "hasOwnershipSignal": false,
+        "hasSecurityContact": false,
+        "hasTest": true
+      },
+      "homepage": "https://github.com/ultralytics/ultralytics",
+      "identity": {
+        "host": "github.com",
+        "owner": "ultralytics",
+        "repo": "ultralytics",
+        "source": "https://github.com/ultralytics/ultralytics"
+      },
+      "languages": [],
+      "license": null,
+      "links": {
+        "indexPath": "repos/github.com/ultralytics/ultralytics/",
+        "queryTemplate": "/v0/repos/github.com/ultralytics/ultralytics/query?path={dot_path}",
+        "repository": "/v0/repos/github.com/ultralytics/ultralytics/index.json",
+        "self": "/v0/repos/github.com/ultralytics/ultralytics/profile.json",
+        "trust": "/v0/repos/github.com/ultralytics/ultralytics/trust.json"
+      },
+      "name": "Ultralytics YOLO banner",
+      "purpose": "Request an Enterprise License for commercial use at Ultralytics Licensing.",
+      "topics": [],
+      "trust": {
+        "confidence": "medium",
+        "provenance": [
+          "imported",
+          "inferred"
+        ],
+        "selectedStatus": "inferred",
+        "selectionReason": "only_matching_record"
+      }
+    }
+  ],
+  "repositoryCount": 3
+}

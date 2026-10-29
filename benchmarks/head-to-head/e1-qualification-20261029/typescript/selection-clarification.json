@@ -1,0 +1,13 @@
+{
+  "schema": "dotrepo-e1-selection-clarification/v1",
+  "recordedAt": "2026-10-29T05:13:48.337959+00:00",
+  "authority": "Coordinator clarification before TypeScript enrollment and freeze; no extraction outputs supplied or consulted.",
+  "clarifications": [
+    "Owned test or visual-scenes components count when maintainer guidance explicitly establishes their physical path and test coverage. Record componentKind=test-fixture/visual; do not imply production code.",
+    "The ecosystem stratum describes the requested task implementation ecosystem. For TypeScript component tasks, select the lexically first source-established component with TypeScript/JavaScript test intent, filtering earlier components implemented in another ecosystem.",
+    "Keep mixed-language Motrix enrolled. Record packages/native-host as an earlier Rust component filtered from the TypeScript component stratum, then select the first matching TypeScript/JavaScript component, such as src/core, when source establishes it."
+  ],
+  "priorFrozenRulesRewritten": false,
+  "priorFrozenGoldRewritten": false,
+  "coverageOrExtractorConsulted": false
+}
