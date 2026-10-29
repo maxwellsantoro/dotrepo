@@ -1,0 +1,18 @@
+{
+  "source": "benchmarks/head-to-head/f05-offline-results-20261029/typescript-02/raw/logs/container-inspect/stdout.txt",
+  "sha256": "603bdf52c550ae67d8a5a2335d41bcf8ab8f7a7d35ed1f2edb83d159366e4ada",
+  "purpose": "Prior real receipt representation only; not a new Go01 observation or current daemon check",
+  "fields": {
+    "PidMode": "",
+    "IpcMode": "private",
+    "CgroupnsMode": "private",
+    "CapAdd": null,
+    "CapDrop": [
+      "ALL"
+    ],
+    "SecurityOpt": [
+      "no-new-privileges"
+    ]
+  },
+  "newDaemonCalls": 0
+}

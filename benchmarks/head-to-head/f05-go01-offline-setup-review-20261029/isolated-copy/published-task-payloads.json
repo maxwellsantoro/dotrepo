@@ -1,0 +1,81 @@
+{
+  "campaignAdmitted": false,
+  "lockSha256": "52b6c9bd0a26ef1b0fc27dfbfaa00df6a047cdddd587d07c4f6c1c3345faf5cf",
+  "meaning": "Normal frozen lock includes published TypeScript7.0.2/compiler artifacts; retained unchanged only as proposed offline npm setup observation inputs. Original preparation rule forbids task-specific binaries, so download cache remains globally unqualified. Native/campaign policy and source-compiled outcome evidence remain separate.",
+  "nativeTaskAdmitted": false,
+  "payloads": [
+    {
+      "cacheInventoryEntry": {
+        "bytes": 365612,
+        "mode": 420,
+        "sha256": "da2513f4b95176d6dde8b51aab7afe8a927656c9d277369793f77f7e59371c08"
+      },
+      "cachePath": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434",
+      "lock": {
+        "bin": {
+          "tsc": "bin/tsc"
+        },
+        "dev": true,
+        "engines": {
+          "node": ">=16.20.0"
+        },
+        "integrity": "sha512-8FYau96o3NKOhbjKi/qNvG/W5jhzxkbdm5sj9AbZ/5T5sWqn3hJgLfGx27sRKZWTvyzCP8dLRBTf5tBTSRVUNA==",
+        "license": "Apache-2.0",
+        "name": "typescript",
+        "optionalDependencies": {
+          "@typescript/typescript-aix-ppc64": "7.0.2",
+          "@typescript/typescript-darwin-arm64": "7.0.2",
+          "@typescript/typescript-darwin-x64": "7.0.2",
+          "@typescript/typescript-freebsd-arm64": "7.0.2",
+          "@typescript/typescript-freebsd-x64": "7.0.2",
+          "@typescript/typescript-linux-arm": "7.0.2",
+          "@typescript/typescript-linux-arm64": "7.0.2",
+          "@typescript/typescript-linux-loong64": "7.0.2",
+          "@typescript/typescript-linux-mips64el": "7.0.2",
+          "@typescript/typescript-linux-ppc64": "7.0.2",
+          "@typescript/typescript-linux-riscv64": "7.0.2",
+          "@typescript/typescript-linux-s390x": "7.0.2",
+          "@typescript/typescript-linux-x64": "7.0.2",
+          "@typescript/typescript-netbsd-arm64": "7.0.2",
+          "@typescript/typescript-netbsd-x64": "7.0.2",
+          "@typescript/typescript-openbsd-arm64": "7.0.2",
+          "@typescript/typescript-openbsd-x64": "7.0.2",
+          "@typescript/typescript-sunos-x64": "7.0.2",
+          "@typescript/typescript-win32-arm64": "7.0.2",
+          "@typescript/typescript-win32-x64": "7.0.2"
+        },
+        "resolved": "https://registry.npmjs.org/typescript/-/typescript-7.0.2.tgz",
+        "version": "7.0.2"
+      },
+      "lockPath": "node_modules/@typescript/bundled-typescript"
+    },
+    {
+      "cacheInventoryEntry": {
+        "bytes": 8900516,
+        "mode": 420,
+        "sha256": "c83d931ac9dd7549cde6e71246aa9d6a9812843023df3e277fe3b5dcf41dd0ea"
+      },
+      "cachePath": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351",
+      "lock": {
+        "cpu": [
+          "arm64"
+        ],
+        "dev": true,
+        "engines": {
+          "node": ">=16.20.0"
+        },
+        "integrity": "sha512-Qh4eU4/y3yDjnfjjyPYihMj5/ODIlmt+Bzu17OI+fiSRDW57QmU5SiN63exPRNJPKUzcc1INa1NXdrJ+MqHjUQ==",
+        "license": "Apache-2.0",
+        "optional": true,
+        "os": [
+          "linux"
+        ],
+        "resolved": "https://registry.npmjs.org/@typescript/typescript-linux-arm64/-/typescript-linux-arm64-7.0.2.tgz",
+        "version": "7.0.2"
+      },
+      "lockPath": "node_modules/@typescript/typescript-linux-arm64"
+    }
+  ],
+  "sourceCompiledTaskEvidence": false,
+  "state": "published-same-project-payload-disclosure-not-global-cache-admission"
+}

@@ -1,0 +1,27 @@
+{
+  "synthetic": false,
+  "state": "coordinator-authorized-single-offline-npm-setup",
+  "planSha256": "f1dc272c2fe53792c2a7723e3f8308418d98b0c1d15b85d197cb7cb22e6fe38a",
+  "output": "/private/tmp/dotrepo-go01-offline-setup-evidence-20261029-1",
+  "scratch": "/private/tmp/dotrepo-go01-offline-setup-scratch-20261029-1",
+  "command": "cd /workspace/repository; npm ci --offline --foreground-scripts",
+  "limits": {
+    "archiveBytes": 536870912,
+    "cleanupSeconds": 60,
+    "cpus": 3,
+    "expandedCacheBytes": 1073741824,
+    "memoryBytes": 4294967296,
+    "memorySwapBytes": 4294967296,
+    "pids": 256,
+    "sourcePlusCacheBytes": 2147483648,
+    "workSeconds": 900,
+    "workspaceBytes": 8589934592
+  },
+  "maxAttempts": 1,
+  "cacheAcceptance": {
+    "path": "/private/tmp/dotrepo-go01-offline-setup-cache-disposition-20261029-1.json",
+    "sha256": "5c2b9aaf58744b9f2778f8ef11f86e1201a0b02763a0cff784a68a8818bde377"
+  },
+  "independentReviewSha256": "dcb92ced1ba3cb55259a37992a1cd2fcff0d489abe9299685a566f8e99b6c74e",
+  "scope": "One setup-only attempt; no network, TypeScript compiler task, Go helper, Hereby, collection, test, provider/model, pruning, quota change or retry. Normal inspected npm hooks including esbuild native --version are within setup."
+}

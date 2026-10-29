@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "docker",
+    "inspect",
+    "dotrepo-go01-offline-setup-b8d3759a6baa"
+  ],
+  "startedAt": "2026-10-29T09:28:20.291630+00:00",
+  "elapsedSeconds": 0.054101666901260614,
+  "exitCode": 1,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "stderrSha256": "ef858e6849158572046db99fbc0759e94f21de5a05a54e76e85605dd0f44d5b1",
+  "binaryPath": null,
+  "binaryBytes": null,
+  "binarySha256": null,
+  "costUsd": null,
+  "costExclusions": [
+    "No metered host/container/download dollar receipt; no provider calls."
+  ]
+}

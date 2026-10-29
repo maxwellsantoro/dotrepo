@@ -1,0 +1,9 @@
+{
+  "state": "review-harness-import-failed",
+  "authorControlsPassedBeforeFailure": 64,
+  "error": "KeyError: IpcMode at positive inspect control",
+  "cause": "load_helpers inserted preparation path first; reviewer import controls selected prior preparation controls rather than copied amendment controls",
+  "authorDefect": false,
+  "realRuntimeActions": 0,
+  "correction": "Reinsert exact copied amendment path before reviewer controls import; reuse byte-identical copy, remove only generated copied controls output before rerun"
+}

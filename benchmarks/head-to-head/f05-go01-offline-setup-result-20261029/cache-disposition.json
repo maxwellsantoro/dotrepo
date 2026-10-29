@@ -1,0 +1,25 @@
+{
+  "synthetic": false,
+  "state": "coordinator-accepted-go01-cache-for-offline-npm-setup",
+  "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "cacheArchiveSha256": "583fad501fa7b1a1a6d85ab8fe4b890786e39c1e016f785d6d3fb9d060383284",
+  "cacheSpecSha256": "bf483f2de4f79cc01f5008ddb24d2c3dc10150ab176e6bbf0b6ccad3dfb00da1",
+  "auditFreeze": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-dependency-download-review-20261029/FREEZE.json",
+    "sha256": "60b3833d85619517702140317875ad874b99a4fa361d48557e051ad20af7cc54"
+  },
+  "publishedTaskPayloadDisposition": {
+    "state": "allowed-only-for-offline-npm-setup-observation",
+    "payloadsSha256": "0b3a5ad606a01fa265477d1c784686329fe2390bdb406f1cd1963403ba88ddcd",
+    "nativeTaskAdmitted": false,
+    "campaignAdmitted": false
+  },
+  "independentSetupReview": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-offline-setup-review-20261029/amendment-1/FREEZE.json",
+    "sha256": "dcb92ced1ba3cb55259a37992a1cd2fcff0d489abe9299685a566f8e99b6c74e"
+  },
+  "cacheGloballyQualified": false,
+  "originalAuditFlagsRemainFalse": true,
+  "scope": "Exact cache accepted only as input to one normal offline npm setup observation. Published same-family TS compiler payload remains disclosed; TypeScript compiler/task execution, Go helper compilation/install, native collection/testing and agent campaign are not authorized. Existing Go checksum assurance tiers/credential-marker/public-overlap limitations retained. No pruning or changed cache/source/image/resource bounds."
+}

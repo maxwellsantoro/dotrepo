@@ -1,0 +1,14 @@
+
+> @vscode/vsce-sign@2.1.0 postinstall
+> node ./src/postinstall.js
+
+
+> dprint@0.57.4 postinstall
+> node ./install.cjs
+
+
+> esbuild@0.28.2 postinstall
+> node install.js
+
+
+added 168 packages in 6s

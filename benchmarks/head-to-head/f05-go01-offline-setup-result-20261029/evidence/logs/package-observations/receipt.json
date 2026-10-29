@@ -1,0 +1,26 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-go01-offline-setup-b8d3759a6baa",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "node -e 'const fs=require(\"fs\"),path=require(\"path\"),crypto=require(\"crypto\");const root=\"/workspace/repository/node_modules\";const names={\"@vscode/vsce-sign\": \"2.1.0\", \"dprint\": \"0.57.4\", \"esbuild\": \"0.28.2\", \"@vscode/vsce-sign-linux-arm64\": \"2.0.6\", \"@dprint/linux-arm64-glibc\": \"0.57.4\", \"@esbuild/linux-arm64\": \"0.28.2\", \"@typescript/bundled-typescript\": \"7.0.2\", \"@typescript/typescript-linux-arm64\": \"7.0.2\"};const files=[\"@vscode/vsce-sign/bin/vsce-sign\", \"@vscode/vsce-sign-linux-arm64/bin/vsce-sign\", \"@dprint/linux-arm64-glibc/dprint\", \"@esbuild/linux-arm64/bin/esbuild\", \".bin/dprint\", \".bin/esbuild\"];const versions={};for(const name of Object.keys(names)){try{versions[name]=JSON.parse(fs.readFileSync(path.join(root,name,\"package.json\"),\"utf8\")).version;}catch(e){versions[name]=null;}}const rows={};for(const name of files){try{const full=path.join(root,name),link=fs.lstatSync(full),resolved=fs.realpathSync(full),s=fs.statSync(full);rows[name]={isFile:s.isFile(),contained:resolved.startsWith(root+\"/\"),resolved,bytes:s.size,mode:s.mode&511,link:link.isSymbolicLink()?fs.readlinkSync(full):null,sha256:s.isFile()?crypto.createHash(\"sha256\").update(fs.readFileSync(full)).digest(\"hex\"):null};}catch(e){rows[name]=null;}}console.log(JSON.stringify({versions,files:rows}));'"
+  ],
+  "startedAt": "2026-10-29T09:28:18.541878+00:00",
+  "elapsedSeconds": 0.1715783749241382,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "bebba1eeb010ba599065c883e4888c921b008f103f7ac1fce44ce33ea93e197d",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "binaryPath": null,
+  "binaryBytes": null,
+  "binarySha256": null,
+  "costUsd": null,
+  "costExclusions": [
+    "No metered host/container/download dollar receipt; no provider calls."
+  ]
+}

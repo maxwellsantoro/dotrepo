@@ -1,0 +1,57 @@
+{
+  "attemptCount": 1,
+  "authorizationSha256": "9661f3a147fceaac87e0f3cfa5a7cbd74711aa6d1941a834a6efb56196d2580d",
+  "cacheArchiveSha256": "583fad501fa7b1a1a6d85ab8fe4b890786e39c1e016f785d6d3fb9d060383284",
+  "cacheDispositionSha256": "5c2b9aaf58744b9f2778f8ef11f86e1201a0b02763a0cff784a68a8818bde377",
+  "cacheGloballyQualified": false,
+  "campaignAdmitted": false,
+  "cleanupSeconds": 0.5381705830805004,
+  "command": "cd /workspace/repository; npm ci --offline --foreground-scripts",
+  "containerAbsent": true,
+  "costExclusions": [
+    "No metered host/container setup dollar receipt."
+  ],
+  "costUsd": null,
+  "driverSha256": "06e3eb82f695812f96816c820f61fef1cceb242c636de5980284824948604de0",
+  "elapsedSeconds": 20.04361545899883,
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "lifecycleLogMarkers": {
+    "@vscode/vsce-sign@2.1.0 postinstall": true,
+    "dprint@0.57.4 postinstall": true,
+    "esbuild@0.28.2 postinstall": true
+  },
+  "limits": [
+    "Known hooks including esbuild native --version were within authorized setup.",
+    "No TypeScript compiler/task/native collection or tests invoked by driver.",
+    "Postinstall markers and selected binary metadata do not prove full default task execution or correctness.",
+    "LinuxARM64 Docker container on macOS; not native Linux host/x86 qualification.",
+    "Original unqualified download/cache flags and bytes remain unchanged."
+  ],
+  "modelCalls": 0,
+  "nativeCollectionOccurred": false,
+  "networkBytes": null,
+  "networkBytesExclusion": "No traffic-counter collection in this offline setup plan; none-network admission verified, no measured-byte zero claimed.",
+  "observedBinaryBinlinks": 6,
+  "planSha256": "f1dc272c2fe53792c2a7723e3f8308418d98b0c1d15b85d197cb7cb22e6fe38a",
+  "preflightSeconds": 3.88458124990575,
+  "resultSha256": "ffa96337ac3460ba6074038e79dac540b4d7256ade2f3acec0755951b216ac8c",
+  "retryOccurred": false,
+  "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+  "scope": "Normal offline npm setup observation only; published same-project compiler payloads retained unchanged and explicitly accepted only for this observation. No source-compiled task outcome, Hereby task, Go helper, native/campaign admission.",
+  "selectedPackageVersions": {
+    "@dprint/linux-arm64-glibc": "0.57.4",
+    "@esbuild/linux-arm64": "0.28.2",
+    "@typescript/bundled-typescript": "7.0.2",
+    "@typescript/typescript-linux-arm64": "7.0.2",
+    "@vscode/vsce-sign": "2.1.0",
+    "@vscode/vsce-sign-linux-arm64": "2.0.6",
+    "dprint": "0.57.4",
+    "esbuild": "0.28.2"
+  },
+  "setupSeconds": 5.745173416100442,
+  "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+  "state": "offline-npm-setup-observed",
+  "taskId": "go-01",
+  "taskOutcomeObserved": false,
+  "workElapsedSeconds": 19.50544487591833
+}

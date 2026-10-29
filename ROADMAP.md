@@ -190,8 +190,12 @@ environments and full campaign freeze remain open. The source-only
 retains the unknown earlier outcome and identifies setup, collection and exact
 source-defined skip-policy prerequisites; it authorizes no further execution. The
 [separately authorized download-only attempt](benchmarks/head-to-head/f05-go01-dependency-download-result-20261029/README.md)
-retains an unqualified Go-01 cache. Cache audit, npm hook equivalence, native
-collection and exclusion-policy acceptance remain separate gates. The
+retains an unqualified Go-01 cache. Its [bounded audit](benchmarks/head-to-head/f05-go01-dependency-download-review-20261029/README.md)
+identifies a published compiler payload from the task's project family and
+withholds runtime admission. A separately authorized
+[offline npm setup observation](benchmarks/head-to-head/f05-go01-offline-setup-result-20261029/README.md)
+retains successful installation under the frozen conditions; task equivalence,
+native collection, exclusion-policy and campaign acceptance remain separate. The
 [CI-evidence pilot](benchmarks/ci-evidence/pilot-20261029/README.md) retains
 workflow/job observations without promoting them to independent execution or
 consumer applicability.

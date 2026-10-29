@@ -1,0 +1,68 @@
+{
+  "versions": {
+    "@vscode/vsce-sign": "2.1.0",
+    "dprint": "0.57.4",
+    "esbuild": "0.28.2",
+    "@vscode/vsce-sign-linux-arm64": "2.0.6",
+    "@dprint/linux-arm64-glibc": "0.57.4",
+    "@esbuild/linux-arm64": "0.28.2",
+    "@typescript/bundled-typescript": "7.0.2",
+    "@typescript/typescript-linux-arm64": "7.0.2"
+  },
+  "files": {
+    "@vscode/vsce-sign/bin/vsce-sign": {
+      "isFile": true,
+      "contained": true,
+      "resolved": "/workspace/repository/node_modules/@vscode/vsce-sign/bin/vsce-sign",
+      "bytes": 16409133,
+      "mode": 493,
+      "link": null,
+      "sha256": "62dbbc4da520c1b2923a862487e68714542f364bd600ea3a3049e9bd3ab59c5d"
+    },
+    "@vscode/vsce-sign-linux-arm64/bin/vsce-sign": {
+      "isFile": true,
+      "contained": true,
+      "resolved": "/workspace/repository/node_modules/@vscode/vsce-sign-linux-arm64/bin/vsce-sign",
+      "bytes": 16409133,
+      "mode": 493,
+      "link": null,
+      "sha256": "62dbbc4da520c1b2923a862487e68714542f364bd600ea3a3049e9bd3ab59c5d"
+    },
+    "@dprint/linux-arm64-glibc/dprint": {
+      "isFile": true,
+      "contained": true,
+      "resolved": "/workspace/repository/node_modules/@dprint/linux-arm64-glibc/dprint",
+      "bytes": 19243392,
+      "mode": 493,
+      "link": null,
+      "sha256": "b9560ba52e91b56cfec96d82487e41355981b9c46b172927a2adaefed8d14888"
+    },
+    "@esbuild/linux-arm64/bin/esbuild": {
+      "isFile": true,
+      "contained": true,
+      "resolved": "/workspace/repository/node_modules/@esbuild/linux-arm64/bin/esbuild",
+      "bytes": 10289264,
+      "mode": 493,
+      "link": null,
+      "sha256": "90bd269553d258e80b19e3ccab4f98f0831f87442a2f056510ce24fd1b425fc2"
+    },
+    ".bin/dprint": {
+      "isFile": true,
+      "contained": true,
+      "resolved": "/workspace/repository/node_modules/dprint/dprint",
+      "bytes": 19243392,
+      "mode": 493,
+      "link": "../dprint/dprint",
+      "sha256": "b9560ba52e91b56cfec96d82487e41355981b9c46b172927a2adaefed8d14888"
+    },
+    ".bin/esbuild": {
+      "isFile": true,
+      "contained": true,
+      "resolved": "/workspace/repository/node_modules/esbuild/bin/esbuild",
+      "bytes": 10289264,
+      "mode": 493,
+      "link": "../esbuild/bin/esbuild",
+      "sha256": "90bd269553d258e80b19e3ccab4f98f0831f87442a2f056510ce24fd1b425fc2"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "declaredAt": "2026-10-29T09:30:31.806818+00:00",
+  "scope": "independent retained-result review only; no new daemon/network/package/native/provider/Cargo actions",
+  "expectedPlan": {
+    "path": "benchmarks/head-to-head/f05-go01-offline-setup-plan-20261029/amendment-1/plan.json",
+    "sha256": "f1dc272c2fe53792c2a7723e3f8308418d98b0c1d15b85d197cb7cb22e6fe38a"
+  },
+  "expectedSourceSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+  "expectedCacheSha256": "583fad501fa7b1a1a6d85ab8fe4b890786e39c1e016f785d6d3fb9d060383284",
+  "expectedImageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "expectedCommand": "cd /workspace/repository; npm ci --offline --foreground-scripts",
+  "checks": [
+    "auth/cache setup-only published-payload disposition and script/input closure",
+    "all raw receipt output hashes and exact19driver command identities",
+    "source/cache provision input hashes, source checks, tools/npm config and foreground hook markers",
+    "actual installed package versions and observed link/file metadata",
+    "vsce optional/copy hash plus dprint/esbuild wrapper/native SRI payload correspondence",
+    "finalnone/private isolation/resources/retained cleanup absence/timings/null dollarcost",
+    "original cache audit/result/parent hashes and false native/task/campaign/global flags"
+  ],
+  "limits": [
+    "Retained receipts only, no new host/container observation.",
+    "Hook log markers plus final file observations do not establish universal subprocess tracing or every hook branch.",
+    "No native collection/outcome, install-hook universality, or campaign acceptance inferred."
+  ],
+  "nativeTaskAdmitted": false,
+  "campaignAdmitted": false
+}

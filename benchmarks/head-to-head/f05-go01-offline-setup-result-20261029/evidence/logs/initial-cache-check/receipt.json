@@ -1,0 +1,27 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "-i",
+    "dotrepo-go01-offline-setup-b8d3759a6baa",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "cd /workspace/dependency-cache; sha256sum --check --status -"
+  ],
+  "startedAt": "2026-10-29T09:28:11.017109+00:00",
+  "elapsedSeconds": 1.2237871252000332,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 2283759,
+  "stdinSha256": "c553e83a08260ddb9f4049f3bfdd4c7dfc5f2a5d2eb8d2f075bda59efee0f0af",
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "binaryPath": null,
+  "binaryBytes": null,
+  "binarySha256": null,
+  "costUsd": null,
+  "costExclusions": [
+    "No metered host/container/download dollar receipt; no provider calls."
+  ]
+}

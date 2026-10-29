@@ -1,0 +1,19 @@
+{
+  "authorFreezeSha256": "4f951efe4fd345ac034a23e234f074f91b543d92da9b56ad01cd93faa3e7c3ca",
+  "sourceBindings": {
+    "setup.py": "21a0bbab9af6eddda259af65716bd47f30042c5abead4734ff81e2eedd57eaf3",
+    "controls.py": "a3080a0f91496b1eef71282de41d74a8aa64696a7e8f9259baa7e186322718da",
+    "make_plan.py": "49cd07d52fb7c88046b212e732ce2ac471d5319fa9d40cad77fd84bc35357c34",
+    "plan.json": "4df46bb13a280ae26149a1b7f2d99ef51f97099b3f30fa63444c463ab0cbceba",
+    "published-task-payloads.json": "0b3a5ad606a01fa265477d1c784686329fe2390bdb406f1cd1963403ba88ddcd"
+  },
+  "copyPurpose": "Isolated synthetic controls only; frozen original outputs never changed",
+  "allOriginalFrozenArtifactsMatched": true,
+  "forbiddenRuntimeActions": [
+    "Docker",
+    "network",
+    "package/native/upstream execution",
+    "providers",
+    "Cargo"
+  ]
+}

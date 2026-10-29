@@ -1,0 +1,29 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "-i",
+    "dotrepo-go01-offline-setup-b8d3759a6baa",
+    "tar",
+    "--extract",
+    "--no-same-owner",
+    "--no-same-permissions",
+    "-C",
+    "/workspace/dependency-cache"
+  ],
+  "startedAt": "2026-10-29T09:28:07.116243+00:00",
+  "elapsedSeconds": 2.7588399169035256,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 366622720,
+  "stdinSha256": "583fad501fa7b1a1a6d85ab8fe4b890786e39c1e016f785d6d3fb9d060383284",
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "binaryPath": null,
+  "binaryBytes": null,
+  "binarySha256": null,
+  "costUsd": null,
+  "costExclusions": [
+    "No metered host/container/download dollar receipt; no provider calls."
+  ]
+}

@@ -1,0 +1,554 @@
+{
+  "receipts": {
+    "logs/cache-provision/receipt.json": {
+      "argv": [
+        "docker",
+        "exec",
+        "-i",
+        "dotrepo-go01-offline-setup-b8d3759a6baa",
+        "tar",
+        "--extract",
+        "--no-same-owner",
+        "--no-same-permissions",
+        "-C",
+        "/workspace/dependency-cache"
+      ],
+      "startedAt": "2026-10-29T09:28:07.116243+00:00",
+      "elapsedSeconds": 2.7588399169035256,
+      "exitCode": 0,
+      "error": null,
+      "stdinBytes": 366622720,
+      "stdinSha256": "583fad501fa7b1a1a6d85ab8fe4b890786e39c1e016f785d6d3fb9d060383284",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binaryPath": null,
+      "binaryBytes": null,
+      "binarySha256": null,
+      "costUsd": null,
+      "costExclusions": [
+        "No metered host/container/download dollar receipt; no provider calls."
+      ]
+    },
+    "logs/cleanup/receipt.json": {
+      "argv": [
+        "docker",
+        "rm",
+        "-f",
+        "dotrepo-go01-offline-setup-b8d3759a6baa"
+      ],
+      "startedAt": "2026-10-29T09:28:19.873859+00:00",
+      "elapsedSeconds": 0.4165442499797791,
+      "exitCode": 0,
+      "error": null,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "bdf32b6263408051acfaded84bc6a98e8dfe7862897ad5231e79b62f5843fc6f",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binaryPath": null,
+      "binaryBytes": null,
+      "binarySha256": null,
+      "costUsd": null,
+      "costExclusions": [
+        "No metered host/container/download dollar receipt; no provider calls."
+      ]
+    },
+    "logs/container-inspect/receipt.json": {
+      "argv": [
+        "docker",
+        "inspect",
+        "dotrepo-go01-offline-setup-b8d3759a6baa"
+      ],
+      "startedAt": "2026-10-29T09:28:04.747207+00:00",
+      "elapsedSeconds": 0.030346333049237728,
+      "exitCode": 0,
+      "error": null,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "6fcd10e50f8150a60201e10b50b3f2750674bb662af0f15d178551e9bd3582de",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binaryPath": null,
+      "binaryBytes": null,
+      "binarySha256": null,
+      "costUsd": null,
+      "costExclusions": [
+        "No metered host/container/download dollar receipt; no provider calls."
+      ]
+    },
+    "logs/create/receipt.json": {
+      "argv": [
+        "docker",
+        "create",
+        "--name",
+        "dotrepo-go01-offline-setup-b8d3759a6baa",
+        "--pull=never",
+        "--platform=linux/arm64",
+        "--init",
+        "--read-only",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--network=none",
+        "--ipc=private",
+        "--cgroupns=private",
+        "--user=1000:1000",
+        "--workdir=/workspace",
+        "--memory=4g",
+        "--memory-swap=4g",
+        "--cpus=3",
+        "--pids-limit=256",
+        "--ulimit",
+        "nofile=4096:4096",
+        "--tmpfs",
+        "/workspace:rw,exec,nosuid,nodev,size=8g,uid=1000,gid=1000,mode=0700",
+        "--tmpfs",
+        "/tmp:rw,exec,nosuid,nodev,size=512m,uid=1000,gid=1000,mode=0700",
+        "--tmpfs",
+        "/workspace/dependency-cache:rw,exec,nosuid,nodev,size=1g,uid=1000,gid=1000,mode=0700",
+        "--env",
+        "GIT_CONFIG_GLOBAL=/dev/null",
+        "--env",
+        "GIT_CONFIG_NOSYSTEM=1",
+        "--env",
+        "GIT_TERMINAL_PROMPT=0",
+        "--env",
+        "GOCACHE=/workspace/go-build",
+        "--env",
+        "GOENV=off",
+        "--env",
+        "GOGC=50",
+        "--env",
+        "GOMAXPROCS=3",
+        "--env",
+        "GOPATH=/workspace/dependency-cache/go",
+        "--env",
+        "GOPROXY=off",
+        "--env",
+        "GOSUMDB=off",
+        "--env",
+        "GOTOOLCHAIN=local",
+        "--env",
+        "HOME=/workspace/home",
+        "--env",
+        "LANG=C.UTF-8",
+        "--env",
+        "NPM_CONFIG_AUDIT=false",
+        "--env",
+        "NPM_CONFIG_CACHE=/workspace/dependency-cache/npm-cache",
+        "--env",
+        "NPM_CONFIG_FOREGROUND_SCRIPTS=true",
+        "--env",
+        "NPM_CONFIG_FUND=false",
+        "--env",
+        "NPM_CONFIG_IGNORE_SCRIPTS=false",
+        "--env",
+        "NPM_CONFIG_OFFLINE=true",
+        "--env",
+        "NPM_CONFIG_REGISTRY=https://registry.npmjs.org",
+        "--env",
+        "NPM_CONFIG_USERCONFIG=/dev/null",
+        "--env",
+        "TMPDIR=/workspace/tmp",
+        "--entrypoint=/bin/sh",
+        "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+        "-c",
+        "while :; do sleep 3600; done"
+      ],
+      "startedAt": "2026-10-29T09:28:04.463980+00:00",
+      "elapsedSeconds": 0.09808324999175966,
+      "exitCode": 0,
+      "error": null,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "791f21ba12e46d7322c24da2708e11ae73b407df98f5b68250e7132c5166eece",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binaryPath": null,
+      "binaryBytes": null,
+      "binarySha256": null,
+      "costUsd": null,
+      "costExclusions": [
+        "No metered host/container/download dollar receipt; no provider calls."
+      ]
+    },
+    "logs/image-inspect/receipt.json": {
+      "argv": [
+        "docker",
+        "image",
+        "inspect",
+        "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092"
+      ],
+      "startedAt": "2026-10-29T09:28:04.331456+00:00",
+      "elapsedSeconds": 0.13178687496110797,
+      "exitCode": 0,
+      "error": null,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "4c6fa72b8b05b95a719110e0f7fa705758c224e253cf8c7cdf881218ea4f1913",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binaryPath": null,
+      "binaryBytes": null,
+      "binarySha256": null,
+      "costUsd": null,
+      "costExclusions": [
+        "No metered host/container/download dollar receipt; no provider calls."
+      ]
+    },
+    "logs/initial-cache-check/receipt.json": {
+      "argv": [
+        "docker",
+        "exec",
+        "-i",
+        "dotrepo-go01-offline-setup-b8d3759a6baa",
+        "/bin/sh",
+        "-eu",
+        "-c",
+        "cd /workspace/dependency-cache; sha256sum --check --status -"
+      ],
+      "startedAt": "2026-10-29T09:28:11.017109+00:00",
+      "elapsedSeconds": 1.2237871252000332,
+      "exitCode": 0,
+      "error": null,
+      "stdinBytes": 2283759,
+      "stdinSha256": "c553e83a08260ddb9f4049f3bfdd4c7dfc5f2a5d2eb8d2f075bda59efee0f0af",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binaryPath": null,
+      "binaryBytes": null,
+      "binarySha256": null,
+      "costUsd": null,
+      "costExclusions": [
+        "No metered host/container/download dollar receipt; no provider calls."
+      ]
+    },
+    "logs/initial-source-check/receipt.json": {
+      "argv": [
+        "docker",
+        "exec",
+        "-i",
+        "dotrepo-go01-offline-setup-b8d3759a6baa",
+        "/bin/sh",
+        "-eu",
+        "-c",
+        "cd /workspace/repository; sha256sum --check --status -"
+      ],
+      "startedAt": "2026-10-29T09:28:09.875518+00:00",
+      "elapsedSeconds": 1.140379749936983,
+      "exitCode": 0,
+      "error": null,
+      "stdinBytes": 10223478,
+      "stdinSha256": "a8064c9ae318dc9de1b4395d009c01b02f0fbe2e7c0bfe20358b189936f71aea",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binaryPath": null,
+      "binaryBytes": null,
+      "binarySha256": null,
+      "costUsd": null,
+      "costExclusions": [
+        "No metered host/container/download dollar receipt; no provider calls."
+      ]
+    },
+    "logs/initialize/receipt.json": {
+      "argv": [
+        "docker",
+        "exec",
+        "dotrepo-go01-offline-setup-b8d3759a6baa",
+        "/bin/sh",
+        "-eu",
+        "-c",
+        "mkdir -p /workspace/repository /workspace/dependency-cache /workspace/home /workspace/tmp"
+      ],
+      "startedAt": "2026-10-29T09:28:04.778186+00:00",
+      "elapsedSeconds": 0.06519141606986523,
+      "exitCode": 0,
+      "error": null,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binaryPath": null,
+      "binaryBytes": null,
+      "binarySha256": null,
+      "costUsd": null,
+      "costExclusions": [
+        "No metered host/container/download dollar receipt; no provider calls."
+      ]
+    },
+    "logs/npm-ci/receipt.json": {
+      "argv": [
+        "docker",
+        "exec",
+        "dotrepo-go01-offline-setup-b8d3759a6baa",
+        "/bin/sh",
+        "-eu",
+        "-c",
+        "cd /workspace/repository; npm ci --offline --foreground-scripts"
+      ],
+      "startedAt": "2026-10-29T09:28:12.796537+00:00",
+      "elapsedSeconds": 5.743196290917695,
+      "exitCode": 0,
+      "error": null,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "223e9671f795d53db1bda324d7d1ff639baa69f4390895ca51ade4b7fdf63442",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binaryPath": null,
+      "binaryBytes": null,
+      "binarySha256": null,
+      "costUsd": null,
+      "costExclusions": [
+        "No metered host/container/download dollar receipt; no provider calls."
+      ]
+    },
+    "logs/npm-config/receipt.json": {
+      "argv": [
+        "docker",
+        "exec",
+        "dotrepo-go01-offline-setup-b8d3759a6baa",
+        "/bin/sh",
+        "-eu",
+        "-c",
+        "cd /workspace/repository; npm config list --json"
+      ],
+      "startedAt": "2026-10-29T09:28:12.420949+00:00",
+      "elapsedSeconds": 0.3743478339165449,
+      "exitCode": 0,
+      "error": null,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "73eddda53c2b10dbc9d0205e385c27b6fc605f556b3e38f869b2949f4c340b97",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binaryPath": null,
+      "binaryBytes": null,
+      "binarySha256": null,
+      "costUsd": null,
+      "costExclusions": [
+        "No metered host/container/download dollar receipt; no provider calls."
+      ]
+    },
+    "logs/offline-final-inspect/receipt.json": {
+      "argv": [
+        "docker",
+        "inspect",
+        "dotrepo-go01-offline-setup-b8d3759a6baa"
+      ],
+      "startedAt": "2026-10-29T09:28:19.847155+00:00",
+      "elapsedSeconds": 0.026014000177383423,
+      "exitCode": 0,
+      "error": null,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "6fcd10e50f8150a60201e10b50b3f2750674bb662af0f15d178551e9bd3582de",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binaryPath": null,
+      "binaryBytes": null,
+      "binarySha256": null,
+      "costUsd": null,
+      "costExclusions": [
+        "No metered host/container/download dollar receipt; no provider calls."
+      ]
+    },
+    "logs/package-observations/receipt.json": {
+      "argv": [
+        "docker",
+        "exec",
+        "dotrepo-go01-offline-setup-b8d3759a6baa",
+        "/bin/sh",
+        "-eu",
+        "-c",
+        "node -e 'const fs=require(\"fs\"),path=require(\"path\"),crypto=require(\"crypto\");const root=\"/workspace/repository/node_modules\";const names={\"@vscode/vsce-sign\": \"2.1.0\", \"dprint\": \"0.57.4\", \"esbuild\": \"0.28.2\", \"@vscode/vsce-sign-linux-arm64\": \"2.0.6\", \"@dprint/linux-arm64-glibc\": \"0.57.4\", \"@esbuild/linux-arm64\": \"0.28.2\", \"@typescript/bundled-typescript\": \"7.0.2\", \"@typescript/typescript-linux-arm64\": \"7.0.2\"};const files=[\"@vscode/vsce-sign/bin/vsce-sign\", \"@vscode/vsce-sign-linux-arm64/bin/vsce-sign\", \"@dprint/linux-arm64-glibc/dprint\", \"@esbuild/linux-arm64/bin/esbuild\", \".bin/dprint\", \".bin/esbuild\"];const versions={};for(const name of Object.keys(names)){try{versions[name]=JSON.parse(fs.readFileSync(path.join(root,name,\"package.json\"),\"utf8\")).version;}catch(e){versions[name]=null;}}const rows={};for(const name of files){try{const full=path.join(root,name),link=fs.lstatSync(full),resolved=fs.realpathSync(full),s=fs.statSync(full);rows[name]={isFile:s.isFile(),contained:resolved.startsWith(root+\"/\"),resolved,bytes:s.size,mode:s.mode&511,link:link.isSymbolicLink()?fs.readlinkSync(full):null,sha256:s.isFile()?crypto.createHash(\"sha256\").update(fs.readFileSync(full)).digest(\"hex\"):null};}catch(e){rows[name]=null;}}console.log(JSON.stringify({versions,files:rows}));'"
+      ],
+      "startedAt": "2026-10-29T09:28:18.541878+00:00",
+      "elapsedSeconds": 0.1715783749241382,
+      "exitCode": 0,
+      "error": null,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "bebba1eeb010ba599065c883e4888c921b008f103f7ac1fce44ce33ea93e197d",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binaryPath": null,
+      "binaryBytes": null,
+      "binarySha256": null,
+      "costUsd": null,
+      "costExclusions": [
+        "No metered host/container/download dollar receipt; no provider calls."
+      ]
+    },
+    "logs/post-cleanup-inspect/receipt.json": {
+      "argv": [
+        "docker",
+        "inspect",
+        "dotrepo-go01-offline-setup-b8d3759a6baa"
+      ],
+      "startedAt": "2026-10-29T09:28:20.291630+00:00",
+      "elapsedSeconds": 0.054101666901260614,
+      "exitCode": 1,
+      "error": null,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "stderrSha256": "ef858e6849158572046db99fbc0759e94f21de5a05a54e76e85605dd0f44d5b1",
+      "binaryPath": null,
+      "binaryBytes": null,
+      "binarySha256": null,
+      "costUsd": null,
+      "costExclusions": [
+        "No metered host/container/download dollar receipt; no provider calls."
+      ]
+    },
+    "logs/post-cleanup-list/receipt.json": {
+      "argv": [
+        "docker",
+        "ps",
+        "-a",
+        "--filter",
+        "name=dotrepo-go01-offline-setup-b8d3759a6baa",
+        "--format",
+        "{{.Names}}"
+      ],
+      "startedAt": "2026-10-29T09:28:20.346836+00:00",
+      "elapsedSeconds": 0.06428258307278156,
+      "exitCode": 0,
+      "error": null,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binaryPath": null,
+      "binaryBytes": null,
+      "binarySha256": null,
+      "costUsd": null,
+      "costExclusions": [
+        "No metered host/container/download dollar receipt; no provider calls."
+      ]
+    },
+    "logs/source-provision/receipt.json": {
+      "argv": [
+        "docker",
+        "exec",
+        "-i",
+        "dotrepo-go01-offline-setup-b8d3759a6baa",
+        "tar",
+        "--extract",
+        "--no-same-owner",
+        "--no-same-permissions",
+        "-C",
+        "/workspace/repository"
+      ],
+      "startedAt": "2026-10-29T09:28:04.843983+00:00",
+      "elapsedSeconds": 2.271796999964863,
+      "exitCode": 0,
+      "error": null,
+      "stdinBytes": 280422400,
+      "stdinSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binaryPath": null,
+      "binaryBytes": null,
+      "binarySha256": null,
+      "costUsd": null,
+      "costExclusions": [
+        "No metered host/container/download dollar receipt; no provider calls."
+      ]
+    },
+    "logs/start/receipt.json": {
+      "argv": [
+        "docker",
+        "start",
+        "dotrepo-go01-offline-setup-b8d3759a6baa"
+      ],
+      "startedAt": "2026-10-29T09:28:04.562626+00:00",
+      "elapsedSeconds": 0.18401700002141297,
+      "exitCode": 0,
+      "error": null,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "bdf32b6263408051acfaded84bc6a98e8dfe7862897ad5231e79b62f5843fc6f",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binaryPath": null,
+      "binaryBytes": null,
+      "binarySha256": null,
+      "costUsd": null,
+      "costExclusions": [
+        "No metered host/container/download dollar receipt; no provider calls."
+      ]
+    },
+    "logs/tools-after/receipt.json": {
+      "argv": [
+        "docker",
+        "exec",
+        "dotrepo-go01-offline-setup-b8d3759a6baa",
+        "/bin/sh",
+        "-eu",
+        "-c",
+        "node --version; npm --version; go version; uv --version; git --version"
+      ],
+      "startedAt": "2026-10-29T09:28:18.715827+00:00",
+      "elapsedSeconds": 0.1154683749191463,
+      "exitCode": 0,
+      "error": null,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "1100e701b8e60ec3da5cdd5eabc14a56afe51c9403ada32a1bd1624518dec724",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binaryPath": null,
+      "binaryBytes": null,
+      "binarySha256": null,
+      "costUsd": null,
+      "costExclusions": [
+        "No metered host/container/download dollar receipt; no provider calls."
+      ]
+    },
+    "logs/tools-before/receipt.json": {
+      "argv": [
+        "docker",
+        "exec",
+        "dotrepo-go01-offline-setup-b8d3759a6baa",
+        "/bin/sh",
+        "-eu",
+        "-c",
+        "node --version; npm --version; go version; uv --version; git --version"
+      ],
+      "startedAt": "2026-10-29T09:28:12.242439+00:00",
+      "elapsedSeconds": 0.1775617077946663,
+      "exitCode": 0,
+      "error": null,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "1100e701b8e60ec3da5cdd5eabc14a56afe51c9403ada32a1bd1624518dec724",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binaryPath": null,
+      "binaryBytes": null,
+      "binarySha256": null,
+      "costUsd": null,
+      "costExclusions": [
+        "No metered host/container/download dollar receipt; no provider calls."
+      ]
+    },
+    "logs/tracked-source-check/receipt.json": {
+      "argv": [
+        "docker",
+        "exec",
+        "-i",
+        "dotrepo-go01-offline-setup-b8d3759a6baa",
+        "/bin/sh",
+        "-eu",
+        "-c",
+        "cd /workspace/repository; sha256sum --check --status -"
+      ],
+      "startedAt": "2026-10-29T09:28:18.832703+00:00",
+      "elapsedSeconds": 1.01327316602692,
+      "exitCode": 0,
+      "error": null,
+      "stdinBytes": 10223478,
+      "stdinSha256": "a8064c9ae318dc9de1b4395d009c01b02f0fbe2e7c0bfe20358b189936f71aea",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binaryPath": null,
+      "binaryBytes": null,
+      "binarySha256": null,
+      "costUsd": null,
+      "costExclusions": [
+        "No metered host/container/download dollar receipt; no provider calls."
+      ]
+    }
+  },
+  "synthetic": false
+}

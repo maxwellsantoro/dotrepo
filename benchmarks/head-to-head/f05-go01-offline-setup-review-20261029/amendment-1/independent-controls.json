@@ -1,0 +1,104 @@
+{
+  "authorFreezeSha256": "eff3d9798e00f55009fe1ae754b04a20ee9bd1d75f1ed5264c99d797df54e032",
+  "authorControlsPassed": 64,
+  "independentCases": [
+    {
+      "case": "original-shared-pid",
+      "rejected": true
+    },
+    {
+      "case": "original-added-cap",
+      "rejected": true
+    },
+    {
+      "case": "original-host-ipc",
+      "rejected": true
+    },
+    {
+      "case": "unknown-pid",
+      "rejected": true
+    },
+    {
+      "case": "unknown-cgroup",
+      "rejected": true
+    },
+    {
+      "case": "security-disabled-plus-safe",
+      "rejected": true
+    },
+    {
+      "case": "security-unknown",
+      "rejected": true
+    },
+    {
+      "case": "init-integer",
+      "rejected": true
+    },
+    {
+      "case": "capadd-scalar",
+      "rejected": true
+    },
+    {
+      "case": "published-port",
+      "rejected": true
+    },
+    {
+      "case": "shared-userns",
+      "rejected": true
+    },
+    {
+      "case": "bridge-network",
+      "rejected": true
+    },
+    {
+      "case": "exact-positive-capadd-None",
+      "accepted": true
+    },
+    {
+      "case": "exact-positive-capadd-[]",
+      "accepted": true
+    },
+    {
+      "case": "missing-Init",
+      "rejected": true
+    },
+    {
+      "case": "missing-DeviceRequests",
+      "rejected": true
+    },
+    {
+      "case": "missing-UsernsMode",
+      "rejected": true
+    },
+    {
+      "case": "missing-UTSMode",
+      "rejected": true
+    },
+    {
+      "case": "missing-PortBindings",
+      "rejected": true
+    },
+    {
+      "case": "only-inspect-function-changed",
+      "unchangedFunctions": [
+        "require",
+        "file_sha",
+        "write",
+        "load_helpers",
+        "load_plan",
+        "authorize",
+        "inputs",
+        "flags",
+        "run"
+      ]
+    },
+    {
+      "case": "required-policy-matches-historical-inspect",
+      "historicalSourceSha256": "603bdf52c550ae67d8a5a2335d41bcf8ab8f7a7d35ed1f2edb83d159366e4ada"
+    }
+  ],
+  "actualSetupOccurred": false,
+  "realProcessNetworkPackageNativeProviderCalls": 0,
+  "originalArtifactsUnchanged": 18,
+  "beforeReviewArtifactsUnchanged": 16
+}

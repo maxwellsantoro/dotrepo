@@ -1,0 +1,78 @@
+{
+  "state": "bounded-static-result-review-passed",
+  "findings": [],
+  "authorPacketUnchanged": 67,
+  "reviewBindingsSha256": "77691613d1122948e86de8722346e6088d8ddf7c3879b5a67d299be28b48d1ff",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 3784,
+      "sha256": "951b9249eb79b41d35e7d7028a49144eac8fe6dc096b49ad11a460661bc3c481"
+    },
+    {
+      "path": "bindings.json",
+      "bytes": 708,
+      "sha256": "77691613d1122948e86de8722346e6088d8ddf7c3879b5a67d299be28b48d1ff"
+    },
+    {
+      "path": "checks.json",
+      "bytes": 1222,
+      "sha256": "41c4315f07cdfc17517b64e3ae80e70452ef146d0e05db93307dee8fe9e62c33"
+    },
+    {
+      "path": "format-check.log",
+      "bytes": 25,
+      "sha256": "fd2299c9f1c6dc869070883e281051bfe93aacf66c1a3b0069f45b4aa410ca50"
+    },
+    {
+      "path": "format-final.log",
+      "bytes": 22,
+      "sha256": "d807f3580f2470a7fe15ad89e1a6c08e4166ffe1e33d94152d605f0c46d21bfa"
+    },
+    {
+      "path": "format.log",
+      "bytes": 19,
+      "sha256": "413a709001976657cb743636fd34e48fc41d8d302d665460d3f874b3313da127"
+    },
+    {
+      "path": "plan.json",
+      "bytes": 1740,
+      "sha256": "6885ce95e5b01568d7ce8c2e548f7e5922247990cd1f3d3d12c1a6d8a5130064"
+    },
+    {
+      "path": "review.json",
+      "bytes": 5992,
+      "sha256": "c5e9483058c3a365cd106a2026594f2740de5b23a0f9e0dd2a54c2875d859114"
+    },
+    {
+      "path": "ruff-final.log",
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": "ruff.log",
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": "verify-final.log",
+      "bytes": 360,
+      "sha256": "5b201592ed8b5fe241a497112097d61174d158e81c0ede0f029a4b7aa3640c72"
+    },
+    {
+      "path": "verify-initial.log",
+      "bytes": 541,
+      "sha256": "d93a38f975d8f58f6ceb370ba6ea36fb13ad71e1e5c092ec82460e309537e717"
+    },
+    {
+      "path": "verify-second.log",
+      "bytes": 360,
+      "sha256": "5b201592ed8b5fe241a497112097d61174d158e81c0ede0f029a4b7aa3640c72"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 17010,
+      "sha256": "e2fe3b61233578b0441177c5616ec28dea73667965577607ceb8f94c01f21eba"
+    }
+  ]
+}
