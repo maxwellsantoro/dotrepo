@@ -1,0 +1,93 @@
+{
+  "state": "portable-data-controls-pass",
+  "count": 9,
+  "executedControls": 9,
+  "externalArchiveControlPerformed": true,
+  "cases": [
+    {
+      "case": "relocated-local-only-no-external-reads",
+      "result": {
+        "state": "retained-data-and-conditional-membership-verified",
+        "mode": "local-only",
+        "copiedArtifactsVerified": 492,
+        "copiedFreezesVerified": 6,
+        "headersVerified": 407,
+        "conditionalMembershipRederived": true,
+        "fullSourceArchiveVerifiedThisRun": false,
+        "fullSourceMembersVerifiedThisRun": 0,
+        "externalArtifactsVerifiedThisRun": 0,
+        "externalArtifactsNotVerifiedThisRun": 9,
+        "bareGitObjectsVerifiedThisRun": false,
+        "gzipVerifiedThisRun": false,
+        "completeApplicableInstructionEstablished": false,
+        "confidencePromotion": false,
+        "heldOutQualification": false,
+        "consumerBenefit": false,
+        "upstreamExecuted": false
+      }
+    },
+    {
+      "case": "explicit-external-archive",
+      "result": {
+        "state": "retained-data-and-conditional-membership-verified",
+        "mode": "explicit-archive",
+        "copiedArtifactsVerified": 492,
+        "copiedFreezesVerified": 6,
+        "headersVerified": 407,
+        "conditionalMembershipRederived": true,
+        "fullSourceArchiveVerifiedThisRun": true,
+        "fullSourceMembersVerifiedThisRun": 956,
+        "externalArtifactsVerifiedThisRun": 1,
+        "externalArtifactsNotVerifiedThisRun": 8,
+        "bareGitObjectsVerifiedThisRun": false,
+        "gzipVerifiedThisRun": false,
+        "completeApplicableInstructionEstablished": false,
+        "confidencePromotion": false,
+        "heldOutQualification": false,
+        "consumerBenefit": false,
+        "upstreamExecuted": false
+      }
+    },
+    {
+      "case": "explicit-missing-archive-no-fallback",
+      "rejected": true,
+      "error": "explicit archive missing/nonregular"
+    },
+    {
+      "case": "explicit-malformed-archive",
+      "rejected": true,
+      "error": "external archive length"
+    },
+    {
+      "case": "changed-retained-header",
+      "rejected": true,
+      "error": "copied bytes changed: membership/headers/cmd/cmdtrace/cmd_span.go"
+    },
+    {
+      "case": "missing-retained-header",
+      "rejected": true,
+      "error": "[Errno 2] No such file or directory: '/private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-compose-integration-controls-580tzdss/relocated/membership/headers/cmd/cmdtrace/cmd_span.go'"
+    },
+    {
+      "case": "changed-route-source",
+      "rejected": true,
+      "error": "copied bytes changed: membership/routing/Makefile"
+    },
+    {
+      "case": "hidden-header-omission",
+      "rejected": true,
+      "error": "unexpected omitted evidence"
+    },
+    {
+      "case": "archive-silently-contained",
+      "rejected": true,
+      "error": "external artifact silently included"
+    }
+  ],
+  "newNetworkDaemonProviderActions": 0,
+  "upstreamExecuted": false,
+  "completeApplicableInstructionEstablished": false,
+  "confidencePromotion": false,
+  "heldOutQualification": false,
+  "consumerBenefit": false
+}

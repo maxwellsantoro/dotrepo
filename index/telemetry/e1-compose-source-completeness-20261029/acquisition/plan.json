@@ -1,0 +1,42 @@
+{
+  "actualAdmission": false,
+  "compressedAccounting": "Per-Git-file64MiB RLIMIT plus total objects disk watchdog/final bounds; abort/refuse on excess. Exact HTTPS wire bytes unavailable, not claimed. Additional compressed archive is generated offline and separately capped64MiB. Expanded payload/tar separately capped256MiB.",
+  "confidencePromotion": false,
+  "failurePolicy": "One fetch only; retain partial objects/logs/acquisition failure and stop, no retry/newrevision/expandedscope.",
+  "identity": "e1-compose-exact-full-source-acquisition-20261029",
+  "limits": {
+    "compressedGitObjectBytes": 67108864,
+    "expandedSourceOrArchiveBytes": 268435456,
+    "fetchAttempts": 1,
+    "logicalMembersIncludingDirectories": 50000,
+    "singleBlobBytes": 16777216,
+    "totalNetworkAndDataSeconds": 300
+  },
+  "output": "Full source.tar/source.tar.gz and finite recursive inventory/provenance/logs remain outside Git at this root; no full source bodies copied into repo. Small go.mod/BUILDING excerpts retained only.",
+  "predecessors": [
+    {
+      "bytes": 15040,
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-next8-20261029/acquire.py",
+      "sha256": "eca34867413c27f00f8db217230c3bfc779004d952ebcc2eb6b3ad170280dcf3"
+    },
+    {
+      "bytes": 6602,
+      "path": "/Users/maxwell/projects/agent/dotrepo/index/telemetry/e1-next-context-establishment-20261029/closure-1/observations.json",
+      "sha256": "a921466d34952cdb5e13722abc3e5c55bbb41c1cc3eea9a42510b18d7021f2c4"
+    },
+    {
+      "bytes": 4582,
+      "path": "/tmp/dotrepo-e1-completeness-next-disposition-20261029/FREEZE.json",
+      "sha256": "921d2e40b8a5cc5609181b2bc384339ccbfd609e3cc369f0138f426fc4cc43dd"
+    }
+  ],
+  "repository": "github.com/docker/compose",
+  "revision": "343bb382d2192b88d84af49971bb5cb99bee268c",
+  "rootTreeSha1": "b10e2fc106b7ea146f5d31f56ca0386688275aa7",
+  "scriptSha256": "042a4ed5eb29a5661fd9b90f65a6efa244608b180d9eac5e0e334fbe60972dd9",
+  "sourceAcquisitionAuthorized": true,
+  "state": "frozen-before-network",
+  "transport": "One /usr/bin/git fetch --depth=1 --no-tags --no-recurse-submodules --keep https://github.com/docker/compose.git exactrevision, into fresh bare repo; no checkout/templates/hooks/filters. No GH token or credential tool. Explicit empty home/XDG, global/system/attributes config disabled, empty credential helper, no prompts/askpass, no replacement objects, HTTPS only/no redirects; environment allowlist contains no host credential/config values.",
+  "upstreamExecutionAuthorized": false,
+  "verification": "Validate fetched commit SHA1 body and root tree, reconstruct every recursive tree, hash each raw Git blob, preserve file modes/symlink target bytes in tar, reopen/check every archive member, resolve contained noncyclic/nondangling links, record gitlinks/LFS if any, compare all retained12source files. No Go/list/test/import/upstream commands."
+}

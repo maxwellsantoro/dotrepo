@@ -1,0 +1,23 @@
+{
+  "checks": [
+    {
+      "abstractExamples": 3,
+      "command": "uv run python -B controls.py",
+      "exitCode": 0,
+      "ownerInputs": 7,
+      "rootTreeSha1Reconstructed": "b10e2fc106b7ea146f5d31f56ca0386688275aa7",
+      "sources": 9,
+      "spans": 12
+    },
+    {
+      "command": "uv run ruff check --no-cache controls.py",
+      "exitCode": 0
+    },
+    {
+      "command": "uv run ruff format --no-cache controls.py",
+      "exitCode": 0
+    }
+  ],
+  "newAcquisition": false,
+  "sourceOrNativeExecution": false
+}

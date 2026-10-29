@@ -1,0 +1,144 @@
+{
+  "state": "independent-bounded-fake-controls-pass",
+  "count": 7,
+  "cases": [
+    {
+      "case": "create-failure-cleanup",
+      "passed": true,
+      "result": {
+        "state": "incomplete",
+        "synthetic": true,
+        "startedAt": "2026-10-29T14:25:52.536430+00:00",
+        "daemonCalls": 5,
+        "containerCreateAttempted": true,
+        "containerAbsent": true,
+        "probeAttempted": false,
+        "ownedProbeObserved": false,
+        "actualAdmission": false,
+        "nativeCollectionOccurred": false,
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "costUsd": null,
+        "ownedContainer": "dotrepo-python-probe-3db67990be5d",
+        "authorization": {
+          "synthetic": true
+        },
+        "provisionTarSha256": "20588c56a9a3846c82aef0a91cca3a0b3d7c7ab60dd94f54be86f3417b54652c",
+        "provisionTarBytes": 10240,
+        "stage": "create",
+        "error": "ValueError: command failed: create",
+        "cancelled": false,
+        "cleanupSeconds": 0.0010300830472260714,
+        "elapsedSeconds": 0.012124292086809874,
+        "workBudgetExceeded": false,
+        "probeBudgetExceeded": false
+      }
+    },
+    {
+      "case": "start-failure-cleanup",
+      "passed": true,
+      "result": {
+        "state": "incomplete",
+        "synthetic": true,
+        "startedAt": "2026-10-29T14:25:52.549682+00:00",
+        "daemonCalls": 6,
+        "containerCreateAttempted": true,
+        "containerAbsent": true,
+        "probeAttempted": false,
+        "ownedProbeObserved": false,
+        "actualAdmission": false,
+        "nativeCollectionOccurred": false,
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "costUsd": null,
+        "ownedContainer": "dotrepo-python-probe-20b34704c9de",
+        "authorization": {
+          "synthetic": true
+        },
+        "provisionTarSha256": "20588c56a9a3846c82aef0a91cca3a0b3d7c7ab60dd94f54be86f3417b54652c",
+        "provisionTarBytes": 10240,
+        "stage": "start",
+        "error": "ValueError: command failed: start",
+        "cancelled": false,
+        "cleanupSeconds": 0.001002082834020257,
+        "elapsedSeconds": 0.011564250104129314,
+        "workBudgetExceeded": false,
+        "probeBudgetExceeded": false
+      }
+    },
+    {
+      "case": "preflight-failure-receipt-no-daemon",
+      "passed": true,
+      "result": {
+        "state": "incomplete",
+        "synthetic": true,
+        "startedAt": "2026-10-29T14:25:52.562304+00:00",
+        "daemonCalls": 0,
+        "containerCreateAttempted": false,
+        "containerAbsent": null,
+        "probeAttempted": false,
+        "ownedProbeObserved": false,
+        "actualAdmission": false,
+        "nativeCollectionOccurred": false,
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "costUsd": null,
+        "ownedContainer": "dotrepo-python-probe-6bf9795874cc",
+        "error": "ValueError: owned synthetic changed input",
+        "cancelled": false,
+        "elapsedSeconds": 0.00011925003491342068,
+        "workBudgetExceeded": false,
+        "probeBudgetExceeded": false
+      }
+    },
+    {
+      "case": "sixty-second-whole-stage-not-renewed-for-probe",
+      "passed": true,
+      "result": {
+        "state": "incomplete",
+        "synthetic": true,
+        "startedAt": "2026-10-29T14:25:52.562839+00:00",
+        "daemonCalls": 12,
+        "containerCreateAttempted": true,
+        "containerAbsent": true,
+        "probeAttempted": true,
+        "ownedProbeObserved": false,
+        "actualAdmission": false,
+        "nativeCollectionOccurred": false,
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "costUsd": null,
+        "ownedContainer": "dotrepo-python-probe-e13a3dbb04bb",
+        "authorization": {
+          "synthetic": true
+        },
+        "provisionTarSha256": "20588c56a9a3846c82aef0a91cca3a0b3d7c7ab60dd94f54be86f3417b54652c",
+        "provisionTarBytes": 10240,
+        "stage": "uv-version",
+        "error": "ValueError: shared work deadline",
+        "cancelled": false,
+        "cleanupSeconds": 0,
+        "elapsedSeconds": 61,
+        "workBudgetExceeded": false,
+        "probeBudgetExceeded": true
+      }
+    },
+    {
+      "case": "only-owned-script-provisioned",
+      "passed": true,
+      "tarBytes": 10240,
+      "tarSha256": "20588c56a9a3846c82aef0a91cca3a0b3d7c7ab60dd94f54be86f3417b54652c"
+    },
+    {
+      "case": "metadata-duplicate-refusal",
+      "passed": true
+    },
+    {
+      "case": "metadata-nonfinite-refusal",
+      "passed": true
+    }
+  ],
+  "probeExecuted": false,
+  "actualDaemonCalls": 0,
+  "actualAdmission": false
+}

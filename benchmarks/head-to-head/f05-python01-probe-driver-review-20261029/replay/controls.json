@@ -1,0 +1,418 @@
+{
+  "state": "owned-fake-transport-controls-pass",
+  "count": 26,
+  "cases": [
+    {
+      "case": "authorization-valid-shaped-synthetic-only",
+      "error": null,
+      "synthetic": true,
+      "actualAdmission": false
+    },
+    {
+      "case": "authorization-plan",
+      "error": "authorization subject",
+      "synthetic": true,
+      "actualAdmission": false
+    },
+    {
+      "case": "authorization-output",
+      "error": "authorization canonical paths",
+      "synthetic": true,
+      "actualAdmission": false
+    },
+    {
+      "case": "authorization-attempts",
+      "error": "attempt budget",
+      "synthetic": true,
+      "actualAdmission": false
+    },
+    {
+      "case": "authorization-review-subject",
+      "error": "review subject/state",
+      "synthetic": true,
+      "actualAdmission": false
+    },
+    {
+      "case": "authorization-review-findings",
+      "error": "review subject/state",
+      "synthetic": true,
+      "actualAdmission": false
+    },
+    {
+      "case": "authorization-review-state",
+      "error": "review subject/state",
+      "synthetic": true,
+      "actualAdmission": false
+    },
+    {
+      "case": "authorization-review-synthetic",
+      "error": "review subject/state",
+      "synthetic": true,
+      "actualAdmission": false
+    },
+    {
+      "case": "complete-owned-synthetic",
+      "state": "owned-source-free-python-probe-observed",
+      "daemonCalls": 16,
+      "containerAbsent": true,
+      "error": null,
+      "labels": [
+        "image-inspect",
+        "create",
+        "start",
+        "inspect-before",
+        "initialize",
+        "provision",
+        "tools-before",
+        "source-before",
+        "uv-version",
+        "owned-probe",
+        "tools-after",
+        "source-after",
+        "inspect-after",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "synthetic": true,
+      "actualAdmission": false
+    },
+    {
+      "case": "image",
+      "state": "incomplete",
+      "daemonCalls": 1,
+      "containerAbsent": null,
+      "error": "ValueError: image environment drift",
+      "labels": [
+        "image-inspect"
+      ],
+      "synthetic": true,
+      "actualAdmission": false
+    },
+    {
+      "case": "namespace",
+      "state": "incomplete",
+      "daemonCalls": 7,
+      "containerAbsent": true,
+      "error": "ValueError: namespace/user/init mismatch",
+      "labels": [
+        "image-inspect",
+        "create",
+        "start",
+        "inspect-before",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "synthetic": true,
+      "actualAdmission": false
+    },
+    {
+      "case": "resource",
+      "state": "incomplete",
+      "daemonCalls": 7,
+      "containerAbsent": true,
+      "error": "ValueError: resource mismatch",
+      "labels": [
+        "image-inspect",
+        "create",
+        "start",
+        "inspect-before",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "synthetic": true,
+      "actualAdmission": false
+    },
+    {
+      "case": "environment",
+      "state": "incomplete",
+      "daemonCalls": 7,
+      "containerAbsent": true,
+      "error": "ValueError: effective environment mismatch",
+      "labels": [
+        "image-inspect",
+        "create",
+        "start",
+        "inspect-before",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "synthetic": true,
+      "actualAdmission": false
+    },
+    {
+      "case": "tools-after",
+      "state": "incomplete",
+      "daemonCalls": 14,
+      "containerAbsent": true,
+      "error": "ValueError: tool identity",
+      "labels": [
+        "image-inspect",
+        "create",
+        "start",
+        "inspect-before",
+        "initialize",
+        "provision",
+        "tools-before",
+        "source-before",
+        "uv-version",
+        "owned-probe",
+        "tools-after",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "synthetic": true,
+      "actualAdmission": false
+    },
+    {
+      "case": "source-after",
+      "state": "incomplete",
+      "daemonCalls": 15,
+      "containerAbsent": true,
+      "error": "ValueError: unexpected owned directory entries",
+      "labels": [
+        "image-inspect",
+        "create",
+        "start",
+        "inspect-before",
+        "initialize",
+        "provision",
+        "tools-before",
+        "source-before",
+        "uv-version",
+        "owned-probe",
+        "tools-after",
+        "source-after",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "synthetic": true,
+      "actualAdmission": false
+    },
+    {
+      "case": "version",
+      "state": "incomplete",
+      "daemonCalls": 13,
+      "containerAbsent": true,
+      "error": "ValueError: interpreter version",
+      "labels": [
+        "image-inspect",
+        "create",
+        "start",
+        "inspect-before",
+        "initialize",
+        "provision",
+        "tools-before",
+        "source-before",
+        "uv-version",
+        "owned-probe",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "synthetic": true,
+      "actualAdmission": false
+    },
+    {
+      "case": "path",
+      "state": "incomplete",
+      "daemonCalls": 13,
+      "containerAbsent": true,
+      "error": "ValueError: unexpected import roots",
+      "labels": [
+        "image-inspect",
+        "create",
+        "start",
+        "inspect-before",
+        "initialize",
+        "provision",
+        "tools-before",
+        "source-before",
+        "uv-version",
+        "owned-probe",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "synthetic": true,
+      "actualAdmission": false
+    },
+    {
+      "case": "probe-nonzero",
+      "state": "incomplete",
+      "daemonCalls": 13,
+      "containerAbsent": true,
+      "error": "ValueError: command failed: owned-probe",
+      "labels": [
+        "image-inspect",
+        "create",
+        "start",
+        "inspect-before",
+        "initialize",
+        "provision",
+        "tools-before",
+        "source-before",
+        "uv-version",
+        "owned-probe",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "synthetic": true,
+      "actualAdmission": false
+    },
+    {
+      "case": "probe-cap",
+      "state": "incomplete",
+      "daemonCalls": 13,
+      "containerAbsent": true,
+      "error": "ValueError: probe metadata cap",
+      "labels": [
+        "image-inspect",
+        "create",
+        "start",
+        "inspect-before",
+        "initialize",
+        "provision",
+        "tools-before",
+        "source-before",
+        "uv-version",
+        "owned-probe",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "synthetic": true,
+      "actualAdmission": false
+    },
+    {
+      "case": "cancel",
+      "state": "incomplete",
+      "daemonCalls": 13,
+      "containerAbsent": true,
+      "error": "KeyboardInterrupt: KeyboardInterrupt: owned fake cancellation",
+      "labels": [
+        "image-inspect",
+        "create",
+        "start",
+        "inspect-before",
+        "initialize",
+        "provision",
+        "tools-before",
+        "source-before",
+        "uv-version",
+        "owned-probe",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "synthetic": true,
+      "actualAdmission": false
+    },
+    {
+      "case": "timeout",
+      "state": "incomplete",
+      "daemonCalls": 13,
+      "containerAbsent": true,
+      "error": "ValueError: command failed: owned-probe",
+      "labels": [
+        "image-inspect",
+        "create",
+        "start",
+        "inspect-before",
+        "initialize",
+        "provision",
+        "tools-before",
+        "source-before",
+        "uv-version",
+        "owned-probe",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "synthetic": true,
+      "actualAdmission": false
+    },
+    {
+      "case": "raw-cap",
+      "state": "incomplete",
+      "daemonCalls": 13,
+      "containerAbsent": true,
+      "error": "ValueError: raw cap",
+      "labels": [
+        "image-inspect",
+        "create",
+        "start",
+        "inspect-before",
+        "initialize",
+        "provision",
+        "tools-before",
+        "source-before",
+        "uv-version",
+        "owned-probe",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "synthetic": true,
+      "actualAdmission": false
+    },
+    {
+      "case": "cleanup",
+      "state": "incomplete",
+      "daemonCalls": 16,
+      "containerAbsent": false,
+      "error": null,
+      "labels": [
+        "image-inspect",
+        "create",
+        "start",
+        "inspect-before",
+        "initialize",
+        "provision",
+        "tools-before",
+        "source-before",
+        "uv-version",
+        "owned-probe",
+        "tools-after",
+        "source-after",
+        "inspect-after",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "synthetic": true,
+      "actualAdmission": false
+    },
+    {
+      "case": "auth",
+      "state": "incomplete",
+      "daemonCalls": 0,
+      "containerAbsent": null,
+      "error": "ValueError: owned rejected authorization",
+      "labels": [],
+      "synthetic": true,
+      "actualAdmission": false
+    },
+    {
+      "case": "existing-output",
+      "rejectedBeforeTransport": true,
+      "synthetic": true
+    },
+    {
+      "case": "expired-shared-deadline",
+      "rejectedBeforeTransport": true,
+      "synthetic": true
+    }
+  ],
+  "probeExecuted": false,
+  "actualDaemonCalls": 0,
+  "actualAdmission": false,
+  "oracleQualified": false,
+  "campaignAdmitted": false
+}

@@ -177,6 +177,12 @@ The [Compose source disposition](index/telemetry/e1-compose-source-disposition-2
 establishes the documented default route and setup chain while retaining
 unresolved unit coverage and the selected-input completeness gap. It authorizes
 neither another candidate-only grammar nor automatic confidence promotion.
+The [exact-source Compose follow-up](index/telemetry/e1-compose-source-completeness-20261029/README.md)
+supports conditional unit-package membership under its declared context, with
+portable retained-data checks and explicit external archive bindings. Literal
+shell expansion, effective package loading/compiler behavior and the complete
+applicable instruction remain unresolved; this known case supplies no fresh
+qualification result.
 The [Zellij source assessment](benchmarks/head-to-head/e1-zellij-establishment-review-20261029/README.md)
 supports its documented default recipe with explicit scope, build-state and
 environment qualifications. The [automatic-establishment decision](benchmarks/head-to-head/e1-zellij-establishment-contract-20261029/README.md)
@@ -192,6 +198,11 @@ no development replay, apparatus control or operator test result closes C2.
 The [remaining-task source proposal](benchmarks/head-to-head/f05-qualification-next8-20261029/README.md)
 and [prelaunch scope decisions](benchmarks/head-to-head/f05-prelaunch-decisions-20261029/README.md)
 preserve unresolved aggregate coverage and declare exclusion policy before runs.
+The [Vue environment plan](benchmarks/head-to-head/f05-typescript03-environment-plan-20261029/README.md)
+and [independent review](benchmarks/head-to-head/f05-typescript03-environment-plan-review-20261029/report.json)
+retain the full five-project target, compatible candidate Node and pinned pnpm
+archive inputs. Tool acquisition, normal hooks, browsers, cache admission and
+native oracle qualification remain separate preparation gates.
 Faithful source-link provisioning has a bounded independent runtime review;
 it does not qualify the affected upstream tasks. The
 [common-image and download-cache preparation](benchmarks/head-to-head/f05-dependency-preparation-20261029/README.md)
@@ -199,6 +210,11 @@ has a bounded [independent audit](benchmarks/head-to-head/f05-dependency-prepara
 the [underlying image audit](benchmarks/head-to-head/f05-common-image-audit-20261029/README.md)
 and [reviewed offline qualifications](benchmarks/head-to-head/f05-offline-results-review-20261029/README.md)
 establish three known native scopes on that image and frozen warm caches.
+The [Python-01 environment checkpoint](benchmarks/head-to-head/f05-python01-environment-checkpoint-20261029/README.md)
+independently verifies one source-free interpreter/uv observation on the same
+image. Locked-wheel preparation, cache qualification, native collection and
+trusted phase/capture joins remain required for that task; the probe does not
+close an oracle or campaign gate.
 The [append-only driver revisions](benchmarks/head-to-head/f05-offline-requalification-20261029/README.v5.md)
 retain preflight failures, enforce exact native case identity and distinguish
 assertion outcomes from later compilation/setup failure. The other task

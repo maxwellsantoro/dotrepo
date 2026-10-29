@@ -1,0 +1,4725 @@
+{
+  "aggregateHeaderBytes": 253987,
+  "archiveSha256": "3c26db8b626c28f7fe149cabe27bd38cc0188f225efce7c78eda9d4730fed36a",
+  "goFiles": 407,
+  "headers": [
+    {
+      "gitBlobSha1": "a08a158b480be1c703baf184b672bca83aa31cd6",
+      "goBuild": [],
+      "headerBytes": 621,
+      "headerSha256": "9c934d6fcb6e29b39fca363eac4664a2b41f2bf8a480e3ac9763864999a0700a",
+      "package": "cmdtrace",
+      "path": "cmd/cmdtrace/cmd_span.go",
+      "plusBuild": [],
+      "sourceBytes": 4526,
+      "sourceSha256": "b95f799705f59184b17feb4a0d04616ba3ebbe7dd4f57896bb86a82877801e98"
+    },
+    {
+      "gitBlobSha1": "27becd3c3632700dab23411b7ed4636c4d0708a0",
+      "goBuild": [],
+      "headerBytes": 621,
+      "headerSha256": "1f02421436c5a9bc054a7733905699218b98af7cd0c24cdf18c5db7959d13f5b",
+      "package": "cmdtrace",
+      "path": "cmd/cmdtrace/cmd_span_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2731,
+      "sourceSha256": "9ccf16818b0710f62e5666b9b25b1c81a589829e167f45f6a46aca7d3cfb37b2"
+    },
+    {
+      "gitBlobSha1": "39d63114c88bee72dccce70dd6fe43286f90f4ce",
+      "goBuild": [],
+      "headerBytes": 626,
+      "headerSha256": "469d5854c88a387e7cc03f19cba025ed6ee70b357a3270a389ee89d104c432b7",
+      "package": "compatibility",
+      "path": "cmd/compatibility/convert.go",
+      "plusBuild": [],
+      "sourceBytes": 2438,
+      "sourceSha256": "2a7ee36c646f332f440182b048b16d61b0625a936774f2c9c5714d9903b5b26e"
+    },
+    {
+      "gitBlobSha1": "ae01665e92a1af37c14a0dd19099e181d5f1d0d5",
+      "goBuild": [],
+      "headerBytes": 626,
+      "headerSha256": "469d5854c88a387e7cc03f19cba025ed6ee70b357a3270a389ee89d104c432b7",
+      "package": "compatibility",
+      "path": "cmd/compatibility/convert_test.go",
+      "plusBuild": [],
+      "sourceBytes": 3511,
+      "sourceSha256": "8072bea68c998f87614666eeec6f7591565c684baf51c69ec61601bcc388b1a3"
+    },
+    {
+      "gitBlobSha1": "91a9e6911740518a981eccb24bdb9acdba22cead",
+      "goBuild": [],
+      "headerBytes": 617,
+      "headerSha256": "58d61e2edaf18b8ba49cfa846cc33b82825381044e6068a621aa83c29f61f011",
+      "package": "compose",
+      "path": "cmd/compose/alpha.go",
+      "plusBuild": [],
+      "sourceBytes": 1157,
+      "sourceSha256": "d4b69023cc49e4268459825104c6a37babab887b18c21bdbad8655f9a12e063d"
+    },
+    {
+      "gitBlobSha1": "20f23fca20fb5a2899795f8326c7c4e04b2bb6a9",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/attach.go",
+      "plusBuild": [],
+      "sourceBytes": 2603,
+      "sourceSha256": "bc30bfd9c95d67db609d1e45bc4af54f11db081199ebd5c7def94b54ca329ac5"
+    },
+    {
+      "gitBlobSha1": "cc7d07ac7783f39cdcafc24fa252086dc499ede5",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/backend.go",
+      "plusBuild": [],
+      "sourceBytes": 1347,
+      "sourceSha256": "3e976af1bc253432f573baa2841e79e566ca164d7dcfa8d49a14fd1b8dcecca8"
+    },
+    {
+      "gitBlobSha1": "be93f3923d775b0170795602ea2d37635c102f46",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/bridge.go",
+      "plusBuild": [],
+      "sourceBytes": 6552,
+      "sourceSha256": "7214a415bc575bd45c4ed08d69ffc957414efab57f562de136f6c84694fbf17f"
+    },
+    {
+      "gitBlobSha1": "188e42fd14c96b07a9fdeed1ae25806d4cd33576",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "b9140edfa79005b0c20461470512c26ef3e117283a23c0d222bebba9abb888e2",
+      "package": "compose",
+      "path": "cmd/compose/bridge_test.go",
+      "plusBuild": [],
+      "sourceBytes": 3107,
+      "sourceSha256": "4a7834dd76ce8ae8e8f05f377bbf683bc848d2d660591b95a02c8a1a37c96510"
+    },
+    {
+      "gitBlobSha1": "3dc953677599ead2b735927e4dfe71639cdd1777",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/build.go",
+      "plusBuild": [],
+      "sourceBytes": 6555,
+      "sourceSha256": "5506b93153ff700c81c60d25e34925d6a7b0bbcc954142e68ace4c17b8d6e19e"
+    },
+    {
+      "gitBlobSha1": "ab35e6788049ea488c8aae48c2ee4bb7f686f64c",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "94a2c4a631d9d24472f24d15aa4aa4dce820c19c3cb560b39bf4c405843d0510",
+      "package": "compose",
+      "path": "cmd/compose/build_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2209,
+      "sourceSha256": "98d4b294d434e1913ddf4861ce4542d1a63d8870826ed045e55721a477437998"
+    },
+    {
+      "gitBlobSha1": "730deb2e56169b8193dc56ef59007b2c94493105",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/commit.go",
+      "plusBuild": [],
+      "sourceBytes": 2852,
+      "sourceSha256": "167d5645e01e5ebdb75c6573296993908b7fa92b1fcf41c9baca41f113ee3e4a"
+    },
+    {
+      "gitBlobSha1": "4d39a1982e0eb18439ebfec8deb0de6d59272914",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/completion.go",
+      "plusBuild": [],
+      "sourceBytes": 4391,
+      "sourceSha256": "fb94f11046c4f87dcbdb7d0fb54f1901b0a9d44dc35fe3a251e4fc6ae6e0fb54"
+    },
+    {
+      "gitBlobSha1": "290be9b89183739b72f4992dd0f49be85c95d3c1",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/compose.go",
+      "plusBuild": [],
+      "sourceBytes": 27049,
+      "sourceSha256": "81221a0e46326ab7eeb98d5fc1de3535966099efe99a2640c1bde076b82ce481"
+    },
+    {
+      "gitBlobSha1": "7450f7633cfa9bd1ee94a5bd0afd0837ae56f3a1",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/compose_oci_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2213,
+      "sourceSha256": "7ce0a1b26319cf1b25e1c4bfb20261a19a14600db609e9995baf532b2067d845"
+    },
+    {
+      "gitBlobSha1": "6f5ede4f4b5a96566ddaeb7d307da97b03fb222c",
+      "goBuild": [
+        "!windows"
+      ],
+      "headerBytes": 641,
+      "headerSha256": "be0c6a3f0d43d07dee6e2ff7f74ed6056e512bf2eec34f9743b6f66f40a3f1c7",
+      "package": "compose",
+      "path": "cmd/compose/compose_progress_test.go",
+      "plusBuild": [],
+      "sourceBytes": 6089,
+      "sourceSha256": "70e57cc84639291707fce8c96247e30d51e038f67c19ad678a95b333ad147021"
+    },
+    {
+      "gitBlobSha1": "6e3500998ed3fe899fe682636b9bafeeae9bfd4a",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/compose_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2493,
+      "sourceSha256": "478e311ea0e23b6f1ce60ea1582e5fd617401a4f2d6ee4bcac81342148d08200"
+    },
+    {
+      "gitBlobSha1": "da50988ce250bdb8cac1510b43223f5c9fff086d",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/config.go",
+      "plusBuild": [],
+      "sourceBytes": 23230,
+      "sourceSha256": "3007005af6d589981f7b556bed73f3fb0e7beb7bc94f77dd99341071af838a06"
+    },
+    {
+      "gitBlobSha1": "e297ccca10946b21d2a48434e61f5d8f093bae35",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/config_test.go",
+      "plusBuild": [],
+      "sourceBytes": 12482,
+      "sourceSha256": "c9b85fa9c452d84e861125eeb3bad48fce8cdfadcf0e77391d2b47b0829d3fef"
+    },
+    {
+      "gitBlobSha1": "17f7411309d9a22ed34487d09e6c366505f582fe",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/cp.go",
+      "plusBuild": [],
+      "sourceBytes": 2883,
+      "sourceSha256": "6547700127b2b722f09f92adca5d08df54c9da49b2085d7646be9b197f32f02c"
+    },
+    {
+      "gitBlobSha1": "211ec2baecd214b607b43b59716a956a108ee66f",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/create.go",
+      "plusBuild": [],
+      "sourceBytes": 7386,
+      "sourceSha256": "528407b408bdfe6f1fb34e1494a8d848642cf5e593755cea0df56ec4c1045402"
+    },
+    {
+      "gitBlobSha1": "0b0e424b0107af6ace59f0eb8362681ffcc75f3d",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/down.go",
+      "plusBuild": [],
+      "sourceBytes": 3512,
+      "sourceSha256": "f6a9a1d8153b74b50c8a2f02498f8466230858c9a6166912eac6ebcf4ac1d6a7"
+    },
+    {
+      "gitBlobSha1": "ff1fb86aa78d6c559a1c01ac135af62060ba00fa",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/events.go",
+      "plusBuild": [],
+      "sourceBytes": 2683,
+      "sourceSha256": "f2bd035795526ca029b6e0966b1c872e9c3358dff57e1be7790336827aa65baa"
+    },
+    {
+      "gitBlobSha1": "a8450b4a2371a0211c232dffb5f6a0b7df887b03",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/exec.go",
+      "plusBuild": [],
+      "sourceBytes": 4632,
+      "sourceSha256": "7f59719d112b91b5b85740b9dadcacab2d40267ff37e74be36ae1524e2a940df"
+    },
+    {
+      "gitBlobSha1": "4c7eaf7ef5d15edf9af8702367692d1c8d808105",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/export.go",
+      "plusBuild": [],
+      "sourceBytes": 2257,
+      "sourceSha256": "cd5901dfc0fe31d62abf251eaa57455a13ecc02a73f8e544d3e3b91496a1ebe9"
+    },
+    {
+      "gitBlobSha1": "e84b3b11138eb534ca2a114059dcf1414221c4d0",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "466944d0d52f311a49114457424b89754a26a2683152c511b5dd4c8f0512a2e6",
+      "package": "compose",
+      "path": "cmd/compose/generate.go",
+      "plusBuild": [],
+      "sourceBytes": 2599,
+      "sourceSha256": "8c01be97ed031dedf023ca85e00b2b82089b5b089e5b2d704dc48296b784e1a9"
+    },
+    {
+      "gitBlobSha1": "1697c8686b1f546520a8efa481a07dcb5fe91927",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/hooks.go",
+      "plusBuild": [],
+      "sourceBytes": 6240,
+      "sourceSha256": "7ced5d0df7feaa10a402a493cf241d12617338749a706a2d669c6f79aba458af"
+    },
+    {
+      "gitBlobSha1": "fc53c75edbb5e7c7c6430b33212ace9d3ae1f855",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/hooks_test.go",
+      "plusBuild": [],
+      "sourceBytes": 10623,
+      "sourceSha256": "13e05bd6a9c8101fa40defb8260268ff5c57334d347366f74172902e4fd23061"
+    },
+    {
+      "gitBlobSha1": "ead066b17a6fd6ce6ec451a005ecab0d48ac7c27",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/images.go",
+      "plusBuild": [],
+      "sourceBytes": 4306,
+      "sourceSha256": "af3d66e3f3237c808e50dd94f26276a018d35180362ab74910d72588ca0e8aae"
+    },
+    {
+      "gitBlobSha1": "1ec83153bc961a8d43a297e1e7b46bd7f75a30ac",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/kill.go",
+      "plusBuild": [],
+      "sourceBytes": 2335,
+      "sourceSha256": "ce4526b94ce5b2887c3265277090c5ae798a6ba6086a60f0b31e39f9162b7574"
+    },
+    {
+      "gitBlobSha1": "4e396f7cadee101d28a74a45ca339ce6d2f8e12f",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/list.go",
+      "plusBuild": [],
+      "sourceBytes": 3721,
+      "sourceSha256": "c8a6add89650b9779f644aef376ea8589797921eba5b9cabc50402a5d82bc2ed"
+    },
+    {
+      "gitBlobSha1": "8f1b2f11862d965cf455561715f03b5d008d95f5",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/logs.go",
+      "plusBuild": [],
+      "sourceBytes": 4934,
+      "sourceSha256": "c1406c13cc7b8bc42485037cb6a1f76e21ea3c3e87cee489b6761973570c4cc8"
+    },
+    {
+      "gitBlobSha1": "2d31cd4556cf47e76e48f5790cfd33499cfa081a",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "466944d0d52f311a49114457424b89754a26a2683152c511b5dd4c8f0512a2e6",
+      "package": "compose",
+      "path": "cmd/compose/options.go",
+      "plusBuild": [],
+      "sourceBytes": 10044,
+      "sourceSha256": "79c30d67de03f68e42d43f1ed661adfcc96e015bcd977db51c51a0c2a7b24d4d"
+    },
+    {
+      "gitBlobSha1": "07df9128545178c3b26ea59ab125469383e950b9",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "466944d0d52f311a49114457424b89754a26a2683152c511b5dd4c8f0512a2e6",
+      "package": "compose",
+      "path": "cmd/compose/options_test.go",
+      "plusBuild": [],
+      "sourceBytes": 12212,
+      "sourceSha256": "5907d3856a59d95551d7c3136302f552c5a54ec48d79be60f770f6de44627c29"
+    },
+    {
+      "gitBlobSha1": "8b8fb4a5faae39d1662dca5d2dc6e1983c396fc5",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/pause.go",
+      "plusBuild": [],
+      "sourceBytes": 2610,
+      "sourceSha256": "5f755e0dada22beae200f3e8596214632a7d6fd4e52bdac32d9b4eedd19f0079"
+    },
+    {
+      "gitBlobSha1": "e64d7e4a63d758a6b33dd98b0a16751814266f89",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/port.go",
+      "plusBuild": [],
+      "sourceBytes": 2758,
+      "sourceSha256": "5da004652ffdc6738ee14f49e977f8bbdf599d83f41280143601fa1daafc0983"
+    },
+    {
+      "gitBlobSha1": "805533ae8afffa79cd8e7577a55d512e721f010a",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/ps.go",
+      "plusBuild": [],
+      "sourceBytes": 5116,
+      "sourceSha256": "f9a89731f18c81ff8abf5651e4d54e7618f2a359d50024375bb2a6e81d4f3d9a"
+    },
+    {
+      "gitBlobSha1": "d58d5518d7a18351025e7312273cba0f36b72cb1",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/publish.go",
+      "plusBuild": [],
+      "sourceBytes": 3579,
+      "sourceSha256": "13453c55ef49dc0993c474fd77d7bb5d4c8827fc0ce435c73687d6a51f00350c"
+    },
+    {
+      "gitBlobSha1": "4710d94f1c3db4dcf96f4635e18d6984070a96d5",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/pull.go",
+      "plusBuild": [],
+      "sourceBytes": 4012,
+      "sourceSha256": "7b26dd1600de66746e2b6f669f908cba87ace06fa5b8509c2fa15c9ed27786c1"
+    },
+    {
+      "gitBlobSha1": "f13537923ec8b64044ab2fdc283fa77e50a166e8",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "466944d0d52f311a49114457424b89754a26a2683152c511b5dd4c8f0512a2e6",
+      "package": "compose",
+      "path": "cmd/compose/pullOptions_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1704,
+      "sourceSha256": "8e324fb54d37340d42f71db73a0fdb5a2e906f01eb4113ecde4ca84078f92d05"
+    },
+    {
+      "gitBlobSha1": "9528d93186ffdb4c64351993fb5284336bf3a534",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/push.go",
+      "plusBuild": [],
+      "sourceBytes": 2879,
+      "sourceSha256": "46deab2b6e4c23936772ca15dc556f0a27690b973ed28a07a89b69ab2ae7a9ed"
+    },
+    {
+      "gitBlobSha1": "f852db9eedb8658e5db8674b159b09fc81946e8b",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "94a2c4a631d9d24472f24d15aa4aa4dce820c19c3cb560b39bf4c405843d0510",
+      "package": "compose",
+      "path": "cmd/compose/push_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2126,
+      "sourceSha256": "1cc05e5ba5a70d55ae274e5c6d019d99c7343c2606bbe025f8d726a56b9c4471"
+    },
+    {
+      "gitBlobSha1": "d0765b20a5340e717df2596a5da1eb367f87e523",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/remove.go",
+      "plusBuild": [],
+      "sourceBytes": 2680,
+      "sourceSha256": "0e54af028e2d1e578047d8bd4d1c5172e354075c82d73e40492a959b04622226"
+    },
+    {
+      "gitBlobSha1": "a9d97c5026390819a81611d8ee540281f813bddf",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/restart.go",
+      "plusBuild": [],
+      "sourceBytes": 2306,
+      "sourceSha256": "028fd1b1591c702d085966c944362d39a7c74a642277b0a0b410f8b78071315e"
+    },
+    {
+      "gitBlobSha1": "9246566a7343966466b01cbcf840e9a031ce4d5b",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/run.go",
+      "plusBuild": [],
+      "sourceBytes": 20852,
+      "sourceSha256": "eb77c82ef0be1722b4e40cb4923a129ac9532a26892b2f2631808685f9a76de3"
+    },
+    {
+      "gitBlobSha1": "681f5263571ec7dd29a32a53fbd79cb94f9b7084",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/run_test.go",
+      "plusBuild": [],
+      "sourceBytes": 8624,
+      "sourceSha256": "9b671640a35ca3039212fee5b9bab56607f16360c5d2bc7cb21175df12912557"
+    },
+    {
+      "gitBlobSha1": "ae474079a6d53ed0779a92e1b315df4c00ed786e",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/scale.go",
+      "plusBuild": [],
+      "sourceBytes": 3724,
+      "sourceSha256": "4c8c333d5adb0a6b1987a359743ed6c3668a1862eadc8a7cc2a60aa39f964589"
+    },
+    {
+      "gitBlobSha1": "f3f69cec34753e0bd7c35d68ee755295dd1daa3a",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/start.go",
+      "plusBuild": [],
+      "sourceBytes": 2355,
+      "sourceSha256": "f88066360e6388012ac1bfd04e3884cb876088a3f53c2e3f3e03fbeee1fce336"
+    },
+    {
+      "gitBlobSha1": "f0be73739a6d07bfe86777aa15c69f2591e99cce",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/stats.go",
+      "plusBuild": [],
+      "sourceBytes": 3055,
+      "sourceSha256": "7f1f5d00b73535f360a6ca1630e7a98d6867638ad19e05912905c803a76e61e3"
+    },
+    {
+      "gitBlobSha1": "56a306a14011cd2b154f420feca3e75c6100e981",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/stats_projects.go",
+      "plusBuild": [],
+      "sourceBytes": 10697,
+      "sourceSha256": "d390d76b24eeab515602cbd7c414973e4fe43e47ef82508e173854e31e79dcaa"
+    },
+    {
+      "gitBlobSha1": "e9f3c901d9b84e0ea305b24595965e1d98245142",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/stats_projects_test.go",
+      "plusBuild": [],
+      "sourceBytes": 15621,
+      "sourceSha256": "09aaafcc9220ba294f0407a42a3ef60b63b13cdf5df752468aa0eac8f22b62c6"
+    },
+    {
+      "gitBlobSha1": "be5dec26fc2865ff5be464ff726a6c8bf6b84cda",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/stop.go",
+      "plusBuild": [],
+      "sourceBytes": 1990,
+      "sourceSha256": "faafa819c49a81f08344ae0f9f6adec228b7fddda8b4034e499194c310e26ddb"
+    },
+    {
+      "gitBlobSha1": "0d7f969c841f7aab837d3b10c54476427081532d",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/top.go",
+      "plusBuild": [],
+      "sourceBytes": 3746,
+      "sourceSha256": "8baf0921ab203bcf81a2273f0f01e8dc6730e9845dbb431c314c47145bdfab74"
+    },
+    {
+      "gitBlobSha1": "94853ae06a4e53e325dceafdfd2df58d81a38663",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "305c430cd945e775af0ee031740befca5eea16e976d3c23c47c94781a9c56010",
+      "package": "compose",
+      "path": "cmd/compose/top_test.go",
+      "plusBuild": [],
+      "sourceBytes": 7931,
+      "sourceSha256": "089a2c05d504926fe85151616987aef594752242c40a15c89cf95c18b06a0d88"
+    },
+    {
+      "gitBlobSha1": "a65322bdb130c26b7f9151e6525f063e54a6c612",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/unsupported_attributes.go",
+      "plusBuild": [],
+      "sourceBytes": 904,
+      "sourceSha256": "4a0233abd52f04250a95f7d2110b270adb6e09128e872c1f2730ee67e9750b26"
+    },
+    {
+      "gitBlobSha1": "ac53a3799996c9252e4a6cd1bc390b3ad10f9751",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/unsupported_attributes_test.go",
+      "plusBuild": [],
+      "sourceBytes": 3982,
+      "sourceSha256": "fe89dcdf40a1ee8953c469a29e8ae34e11c3140c42025afb34df472bec3120f9"
+    },
+    {
+      "gitBlobSha1": "c8076ca8cc6cda2a0c8d6b97c469129745d30639",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/up.go",
+      "plusBuild": [],
+      "sourceBytes": 15427,
+      "sourceSha256": "041c0b79502766cc7c2db6c5d6e8522cfca27f293eeb7f57496986976f7114a2"
+    },
+    {
+      "gitBlobSha1": "585aabae0c1203813d9297a49a838c256e49b705",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/up_attach_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2773,
+      "sourceSha256": "9231df3683a3cef247e26a6a1571ed90d1fff2c67e3c57ec1b30ac2cce7d671f"
+    },
+    {
+      "gitBlobSha1": "98ac8949db9911193831c39c84da94f96b31bea7",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/up_test.go",
+      "plusBuild": [],
+      "sourceBytes": 5846,
+      "sourceSha256": "3c4022d8f0a1fabce54aa04e2c92b95a6f9fc7baadc54eb0fcdbefb803bc8862"
+    },
+    {
+      "gitBlobSha1": "4302c15697b54e34aef81f03ee56370248e34e50",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/version.go",
+      "plusBuild": [],
+      "sourceBytes": 2086,
+      "sourceSha256": "1dacab49208dda6cfb1a35589f230eb4b3e5dbeae3266bd763cd5dc7a173e977"
+    },
+    {
+      "gitBlobSha1": "c9bf9b74eae89f65cc28b8127fef8ce073121579",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "b9140edfa79005b0c20461470512c26ef3e117283a23c0d222bebba9abb888e2",
+      "package": "compose",
+      "path": "cmd/compose/version_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1786,
+      "sourceSha256": "afa169c75fc2da53b4bae727de7962a6a7990477c7f1f3fa2c682626eaa1bcbf"
+    },
+    {
+      "gitBlobSha1": "3e085ad557d3ae3aa102792e6725b203dbfc9f2e",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "466944d0d52f311a49114457424b89754a26a2683152c511b5dd4c8f0512a2e6",
+      "package": "compose",
+      "path": "cmd/compose/viz.go",
+      "plusBuild": [],
+      "sourceBytes": 3263,
+      "sourceSha256": "dde12a585811158fb79eee12fe3132f6a55f8a686b2590a8555a78b8e8286f64"
+    },
+    {
+      "gitBlobSha1": "e862117810318e974e0275a6c0ad07e78c8ef80d",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/viz_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1945,
+      "sourceSha256": "4c4afb129209684e1af0319644aa580517754815ab0f688359f1cc98d1088ca0"
+    },
+    {
+      "gitBlobSha1": "e0da4f82e3b98e1975dd9d1602434172f60f0358",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/volumes.go",
+      "plusBuild": [],
+      "sourceBytes": 2588,
+      "sourceSha256": "2cb62bb0b34045f6125eadbb7cac8dc476c18a00bb7c2370fa1aadf58dc9b939"
+    },
+    {
+      "gitBlobSha1": "9d86fd314cfa340a3940e9fe46f009e084d70a60",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "466944d0d52f311a49114457424b89754a26a2683152c511b5dd4c8f0512a2e6",
+      "package": "compose",
+      "path": "cmd/compose/wait.go",
+      "plusBuild": [],
+      "sourceBytes": 2161,
+      "sourceSha256": "fb86059ef722b31e6d24445e7462b0a8df828cd5653c76b418644f561ca8d00c"
+    },
+    {
+      "gitBlobSha1": "3e9621713296564da461120194b39ea79a85d6f5",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "cmd/compose/watch.go",
+      "plusBuild": [],
+      "sourceBytes": 4374,
+      "sourceSha256": "bf230e07d170a58437451e8269c57dea676e47eacf9d34607e7c9c4429821293"
+    },
+    {
+      "gitBlobSha1": "a00b4ed6ad55ac590ddf1966b709cf98aa67dcd9",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "6673592cf33daba057f28056b05b543ab9c8d62efeab82a9f1ab4530e92a239b",
+      "package": "display",
+      "path": "cmd/display/colors.go",
+      "plusBuild": [],
+      "sourceBytes": 1270,
+      "sourceSha256": "1641a2a314fd16d1901571850822b175da17fa55619bc94db3352f7e5399157f"
+    },
+    {
+      "gitBlobSha1": "2ab542e5b0525b494ec6146b6e63b2e699eb1afa",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "6673592cf33daba057f28056b05b543ab9c8d62efeab82a9f1ab4530e92a239b",
+      "package": "display",
+      "path": "cmd/display/dryrun.go",
+      "plusBuild": [],
+      "sourceBytes": 667,
+      "sourceSha256": "41d36a1c7f97085202501cd72ba5239962d43ac6a97caf7115934fb33b66fcd6"
+    },
+    {
+      "gitBlobSha1": "463d9c7c14f49bb6a666ca0eb4eced14f06f67e9",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "9db834b76f55ec57eb33cff56a819cbd1fecd523c48cae1c8425aa610457222b",
+      "package": "display",
+      "path": "cmd/display/json.go",
+      "plusBuild": [],
+      "sourceBytes": 1935,
+      "sourceSha256": "a010f00a5731612065f9507551b09178f4c83cb2a0ab0380f6080fe28003aca3"
+    },
+    {
+      "gitBlobSha1": "0f0dff23a61e43274853c0ff1e3f5d748365539f",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "9db834b76f55ec57eb33cff56a819cbd1fecd523c48cae1c8425aa610457222b",
+      "package": "display",
+      "path": "cmd/display/json_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1421,
+      "sourceSha256": "2aa799b34eede942f82e6fc566fa3a5448d91c52b1a202a6dc03b1489d831c7d"
+    },
+    {
+      "gitBlobSha1": "c8da90a21ca9fedea1b2ef7044a1237b1e80d422",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "9db834b76f55ec57eb33cff56a819cbd1fecd523c48cae1c8425aa610457222b",
+      "package": "display",
+      "path": "cmd/display/mode.go",
+      "plusBuild": [],
+      "sourceBytes": 1395,
+      "sourceSha256": "954b7621f2bddaae8f96f19b686c4736201395c8e875b989420c842b1071475b"
+    },
+    {
+      "gitBlobSha1": "16f2816c0111adbe30829c9f6de6b144af6fd58e",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "6673592cf33daba057f28056b05b543ab9c8d62efeab82a9f1ab4530e92a239b",
+      "package": "display",
+      "path": "cmd/display/plain.go",
+      "plusBuild": [],
+      "sourceBytes": 1231,
+      "sourceSha256": "b47c8276f3892be620af0237840d14195298736e53a6f30325e53348ffa85d6d"
+    },
+    {
+      "gitBlobSha1": "8e1537d8061622623d5a24f751b17b39861b8d7b",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "6673592cf33daba057f28056b05b543ab9c8d62efeab82a9f1ab4530e92a239b",
+      "package": "display",
+      "path": "cmd/display/quiet.go",
+      "plusBuild": [],
+      "sourceBytes": 902,
+      "sourceSha256": "f1bbc591787ef8d89ce1141580a0994bab8d7ee8565b5a329338ae8a866499cb"
+    },
+    {
+      "gitBlobSha1": "83ee17bb2ce1aa58760838bd6b8b6389c1bb0e29",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "6673592cf33daba057f28056b05b543ab9c8d62efeab82a9f1ab4530e92a239b",
+      "package": "display",
+      "path": "cmd/display/tty.go",
+      "plusBuild": [],
+      "sourceBytes": 6361,
+      "sourceSha256": "c8f538749f325261caf9f2b1acbd52c58e2d96fb5f2ddaf66eacce025eea2d8e"
+    },
+    {
+      "gitBlobSha1": "00aa3f32cae2398664bc87fe6e029cafcd0bddca",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "6673592cf33daba057f28056b05b543ab9c8d62efeab82a9f1ab4530e92a239b",
+      "package": "display",
+      "path": "cmd/display/tty_layout.go",
+      "plusBuild": [],
+      "sourceBytes": 10388,
+      "sourceSha256": "7b1f5e4e0427dbf595bbcedb552ae4f3223c8fbea69752df51caa7281fa628ed"
+    },
+    {
+      "gitBlobSha1": "b9716f6b5ad599877fe008cf77402dcae2f906e2",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "6673592cf33daba057f28056b05b543ab9c8d62efeab82a9f1ab4530e92a239b",
+      "package": "display",
+      "path": "cmd/display/tty_model.go",
+      "plusBuild": [],
+      "sourceBytes": 4115,
+      "sourceSha256": "dbeebe51e5e0d4d28662404ad688c433eb4580868eaaedc2f39e9209494adf86"
+    },
+    {
+      "gitBlobSha1": "bd52b718c2a49d047cae65ec56d6b7f3bf76370a",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "6673592cf33daba057f28056b05b543ab9c8d62efeab82a9f1ab4530e92a239b",
+      "package": "display",
+      "path": "cmd/display/tty_screen.go",
+      "plusBuild": [],
+      "sourceBytes": 2705,
+      "sourceSha256": "13b09666823d9e5d4a875f9d4bbcfac86b5c7676f0a1d03799b572ba01c7775f"
+    },
+    {
+      "gitBlobSha1": "2f3cf84c3dfffee0d8e5883cfbd6f20460591368",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "6673592cf33daba057f28056b05b543ab9c8d62efeab82a9f1ab4530e92a239b",
+      "package": "display",
+      "path": "cmd/display/tty_test.go",
+      "plusBuild": [],
+      "sourceBytes": 13306,
+      "sourceSha256": "fa24538008465d49edccc6e608d7764b2e41145c5ab3a96dc639840162225246"
+    },
+    {
+      "gitBlobSha1": "48ec433f68c18ccbcbcb74c655038916a4ada0fb",
+      "goBuild": [],
+      "headerBytes": 622,
+      "headerSha256": "20b044df177ab9f0ce5931dbb57db204a6d0ca1bcb5bf852273f32a8947766f1",
+      "package": "formatter",
+      "path": "cmd/formatter/ansi.go",
+      "plusBuild": [],
+      "sourceBytes": 2202,
+      "sourceSha256": "e09c63e8ff5e9a026148d0e4e26274fc6306a2c5d4f22e318c5b892f11d6a44e"
+    },
+    {
+      "gitBlobSha1": "7ef668b546a281caab3e80b1f8b8f484787e9575",
+      "goBuild": [],
+      "headerBytes": 622,
+      "headerSha256": "20b044df177ab9f0ce5931dbb57db204a6d0ca1bcb5bf852273f32a8947766f1",
+      "package": "formatter",
+      "path": "cmd/formatter/ansi_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1474,
+      "sourceSha256": "6ce6bfe1abfbd4439c333c64edfe72b5bfc87eb8f3c32541d2fcf2a15a575c79"
+    },
+    {
+      "gitBlobSha1": "ea0e1a263623751a796e682b1b9ad3ad9da4f899",
+      "goBuild": [],
+      "headerBytes": 622,
+      "headerSha256": "a6e8cfb9284615b5a381cababe5d963496cd1f4ea30e3e8f0a3ce98e0baa2f84",
+      "package": "formatter",
+      "path": "cmd/formatter/colors.go",
+      "plusBuild": [],
+      "sourceBytes": 3153,
+      "sourceSha256": "26424f9f6362cae17dc57557d739e603ba9d580411d5899c57d6c34d95d33192"
+    },
+    {
+      "gitBlobSha1": "0ae447c432ffc3e50a8fae03cb5398fd44db27d3",
+      "goBuild": [],
+      "headerBytes": 622,
+      "headerSha256": "a6e8cfb9284615b5a381cababe5d963496cd1f4ea30e3e8f0a3ce98e0baa2f84",
+      "package": "formatter",
+      "path": "cmd/formatter/consts.go",
+      "plusBuild": [],
+      "sourceBytes": 985,
+      "sourceSha256": "1239ec3760ad6e286be9b255288a4aa764783bfabc356ee63ce7ba3157aede6e"
+    },
+    {
+      "gitBlobSha1": "4849f7f09c5f92badac43c1dc31ff55a5d98a214",
+      "goBuild": [],
+      "headerBytes": 622,
+      "headerSha256": "a6e8cfb9284615b5a381cababe5d963496cd1f4ea30e3e8f0a3ce98e0baa2f84",
+      "package": "formatter",
+      "path": "cmd/formatter/container.go",
+      "plusBuild": [],
+      "sourceBytes": 8439,
+      "sourceSha256": "f769542ec5176b717012415bcbe024ece93a152abac5418732c17ca8edca6170"
+    },
+    {
+      "gitBlobSha1": "4996fd854340e8a112479e81b8cead3c2ece4fe7",
+      "goBuild": [],
+      "headerBytes": 622,
+      "headerSha256": "a6e8cfb9284615b5a381cababe5d963496cd1f4ea30e3e8f0a3ce98e0baa2f84",
+      "package": "formatter",
+      "path": "cmd/formatter/container_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2289,
+      "sourceSha256": "14d65e323cdf0c9f7abd612341f6723be25f04b754762a50e1002f6258ba241e"
+    },
+    {
+      "gitBlobSha1": "6af92c478db030eec075a5db915aa3d2d195fa88",
+      "goBuild": [],
+      "headerBytes": 622,
+      "headerSha256": "a6e8cfb9284615b5a381cababe5d963496cd1f4ea30e3e8f0a3ce98e0baa2f84",
+      "package": "formatter",
+      "path": "cmd/formatter/formatter.go",
+      "plusBuild": [],
+      "sourceBytes": 1911,
+      "sourceSha256": "9e6b7f96aee6a69765412f58c2841febaba85090c8f2c8403bd3ce6d65581b68"
+    },
+    {
+      "gitBlobSha1": "07b152559c10d447b9abda250b5e9e15f9f5b7df",
+      "goBuild": [],
+      "headerBytes": 622,
+      "headerSha256": "a6e8cfb9284615b5a381cababe5d963496cd1f4ea30e3e8f0a3ce98e0baa2f84",
+      "package": "formatter",
+      "path": "cmd/formatter/formatter_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2033,
+      "sourceSha256": "97e40abfd88edfcbe166f146d762c3412200e213ed0530d554378bad787c7b28"
+    },
+    {
+      "gitBlobSha1": "b09e721aa27ee3de0ce2ccda20c340343b2d312a",
+      "goBuild": [],
+      "headerBytes": 622,
+      "headerSha256": "a6e8cfb9284615b5a381cababe5d963496cd1f4ea30e3e8f0a3ce98e0baa2f84",
+      "package": "formatter",
+      "path": "cmd/formatter/json.go",
+      "plusBuild": [],
+      "sourceBytes": 1206,
+      "sourceSha256": "c9e159e542725918c4fc8b4a2eb466d31ea4a62a90209aa9cfa2262b81eebd75"
+    },
+    {
+      "gitBlobSha1": "e0799a3fbde4df643dd13230db04d979d73719aa",
+      "goBuild": [],
+      "headerBytes": 622,
+      "headerSha256": "a6e8cfb9284615b5a381cababe5d963496cd1f4ea30e3e8f0a3ce98e0baa2f84",
+      "package": "formatter",
+      "path": "cmd/formatter/logs.go",
+      "plusBuild": [],
+      "sourceBytes": 4286,
+      "sourceSha256": "419a56296be368f0fd3ab44dfab2e685785a3b97807773cf96d834c37d955cfc"
+    },
+    {
+      "gitBlobSha1": "bb85dedef61e194258bf0e7c94ef3d2016d41a93",
+      "goBuild": [],
+      "headerBytes": 622,
+      "headerSha256": "a6e8cfb9284615b5a381cababe5d963496cd1f4ea30e3e8f0a3ce98e0baa2f84",
+      "package": "formatter",
+      "path": "cmd/formatter/pretty.go",
+      "plusBuild": [],
+      "sourceBytes": 979,
+      "sourceSha256": "fe7806ec9b1202a4c47cc8cc33d12a0742d12454f9e77eef0e588e00f5fe27ec"
+    },
+    {
+      "gitBlobSha1": "d6add09c26965370158bf15c0af9e5326901591a",
+      "goBuild": [],
+      "headerBytes": 622,
+      "headerSha256": "20b044df177ab9f0ce5931dbb57db204a6d0ca1bcb5bf852273f32a8947766f1",
+      "package": "formatter",
+      "path": "cmd/formatter/shortcut.go",
+      "plusBuild": [],
+      "sourceBytes": 10517,
+      "sourceSha256": "0ab90c79ab04c5984556054bd50ef5ed1d149fd5a2323da3c0591320aa26dba0"
+    },
+    {
+      "gitBlobSha1": "2ed82223a46f46fd8e9bbdf09479887bd0ee755d",
+      "goBuild": [],
+      "headerBytes": 622,
+      "headerSha256": "a6e8cfb9284615b5a381cababe5d963496cd1f4ea30e3e8f0a3ce98e0baa2f84",
+      "package": "formatter",
+      "path": "cmd/formatter/shortcut_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2753,
+      "sourceSha256": "7979702236e19eab5284e432944eaaa6aaac70901688d38f5280b8afa4f09442"
+    },
+    {
+      "gitBlobSha1": "0baa3a949cc68a16483a3931574827a0536b27a6",
+      "goBuild": [
+        "!windows"
+      ],
+      "headerBytes": 643,
+      "headerSha256": "d18d3d1f0bbb33cd647eb612e97d0997b595631519b9787fd60eb9dc24d5897d",
+      "package": "formatter",
+      "path": "cmd/formatter/shortcut_unix.go",
+      "plusBuild": [],
+      "sourceBytes": 723,
+      "sourceSha256": "afc6cea485e2bcca77686414e7254cfe52e8f1b332f71c333eeeca433b29bb92"
+    },
+    {
+      "gitBlobSha1": "1efa14cc2dd74715e67d6c3b86044cfc134a14b1",
+      "goBuild": [
+        "windows"
+      ],
+      "headerBytes": 642,
+      "headerSha256": "89bf393ea95fa22b5e4cc491e48f2334f3067811785cfc485ec031f56a1e9b8c",
+      "package": "formatter",
+      "path": "cmd/formatter/shortcut_windows.go",
+      "plusBuild": [],
+      "sourceBytes": 850,
+      "sourceSha256": "fa3db17f749d1e8602c0e6f9ccd0c16b31841615d776dc509f1fbb59a3dc362c"
+    },
+    {
+      "gitBlobSha1": "7534f0741cf0454b6afa6111bdc71bd1972cfd93",
+      "goBuild": [],
+      "headerBytes": 617,
+      "headerSha256": "cb5f2e828be9fc53385424273ca9b9b0c1fcdc894dc8ddc5c11487574b204f0b",
+      "package": "main",
+      "path": "cmd/main.go",
+      "plusBuild": [],
+      "sourceBytes": 2725,
+      "sourceSha256": "b03aefd6c7153e289f2f749ba03b3446e34302c40b4514d0ac261e97356c1a22"
+    },
+    {
+      "gitBlobSha1": "e7d75cc794601634446d7b876f134a4b3e871a5b",
+      "goBuild": [],
+      "headerBytes": 619,
+      "headerSha256": "89b7b2851a89a38798cb0d7b773ea8e7c2ffc0c8f3f0ffb23c634466969161f0",
+      "package": "prompt",
+      "path": "cmd/prompt/prompt.go",
+      "plusBuild": [],
+      "sourceBytes": 2945,
+      "sourceSha256": "e528082c315f9cd0b9e347545d72ee7ef84cb2e86b82265a1148d5a8d045e49d"
+    },
+    {
+      "gitBlobSha1": "83b0ff1189b1a0efddc14f0c4b0e966b0f4b5057",
+      "goBuild": [],
+      "headerBytes": 177,
+      "headerSha256": "0e5361ac7fbf00a91c4f1666f623c106c41e70795c0af5f04508f03908de3ed3",
+      "package": "prompt",
+      "path": "cmd/prompt/prompt_mock.go",
+      "plusBuild": [],
+      "sourceBytes": 2775,
+      "sourceSha256": "78317f9b7ac2e39743eb4ad9c058a50d25728860d4fce58103b78b447d1671ca"
+    },
+    {
+      "gitBlobSha1": "1072d5e96131fa22b303b51a2ee7de4d81e8a599",
+      "goBuild": [],
+      "headerBytes": 619,
+      "headerSha256": "89b7b2851a89a38798cb0d7b773ea8e7c2ffc0c8f3f0ffb23c634466969161f0",
+      "package": "prompt",
+      "path": "cmd/prompt/prompt_test.go",
+      "plusBuild": [],
+      "sourceBytes": 4947,
+      "sourceSha256": "b04410a2f16dad57d951c4da75c4d74e1fdee74617f6bc18c1a08a513b306368"
+    },
+    {
+      "gitBlobSha1": "59f939e3bbc1ecd49c3637339fb6f4631f75153a",
+      "goBuild": [],
+      "headerBytes": 617,
+      "headerSha256": "cb5f2e828be9fc53385424273ca9b9b0c1fcdc894dc8ddc5c11487574b204f0b",
+      "package": "main",
+      "path": "docs/examples/provider.go",
+      "plusBuild": [],
+      "sourceBytes": 15553,
+      "sourceSha256": "625acb746e521423fd55c9d5cfe0737a9f8fe9c3f460fa80ff89434dc2dd75fd"
+    },
+    {
+      "gitBlobSha1": "6787bcf2a148a37fa17d30fa823b58496a7126df",
+      "goBuild": [],
+      "headerBytes": 813,
+      "headerSha256": "9bd61049b1aa144751d0124124abbe542528c35f6c05d4e1ad78850d22de6691",
+      "package": "main",
+      "path": "docs/examples/sdk/main.go",
+      "plusBuild": [],
+      "sourceBytes": 2018,
+      "sourceSha256": "88d280a09be4c9f02a14619efbc163008384e11094a6a5da5a22a253492cca60"
+    },
+    {
+      "gitBlobSha1": "a132a74aa3c897e71b618581eb878a412dbe83d4",
+      "goBuild": [],
+      "headerBytes": 617,
+      "headerSha256": "cb5f2e828be9fc53385424273ca9b9b0c1fcdc894dc8ddc5c11487574b204f0b",
+      "package": "main",
+      "path": "docs/examples/sdk/options.go",
+      "plusBuild": [],
+      "sourceBytes": 1539,
+      "sourceSha256": "153f7d01fa4d028b44aa97a2bd4ea3be091b139e3f978ece22111ce5e0ad2089"
+    },
+    {
+      "gitBlobSha1": "27d2d51703fd5e5e95ad163407592e905131f584",
+      "goBuild": [],
+      "headerBytes": 617,
+      "headerSha256": "cb5f2e828be9fc53385424273ca9b9b0c1fcdc894dc8ddc5c11487574b204f0b",
+      "package": "main",
+      "path": "docs/examples/sdk/sdk_md_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2140,
+      "sourceSha256": "a64a9cb11191c19914deb81994e04c7ba8d0470279744639d27a052fc759e7c6"
+    },
+    {
+      "gitBlobSha1": "335efe9cc3b666de5e2ae157f326a5850d659302",
+      "goBuild": [],
+      "headerBytes": 617,
+      "headerSha256": "cb5f2e828be9fc53385424273ca9b9b0c1fcdc894dc8ddc5c11487574b204f0b",
+      "package": "main",
+      "path": "docs/yaml/main/generate.go",
+      "plusBuild": [],
+      "sourceBytes": 2576,
+      "sourceSha256": "774c115effb72b880fc0e93c576a443e82879efd4bfc9d4a3d3283dc131ae875"
+    },
+    {
+      "gitBlobSha1": "ebc9b48fc372fcb714a43bd51cb5444c69beff63",
+      "goBuild": [],
+      "headerBytes": 625,
+      "headerSha256": "56e015f865d25dbf64d451214ca72349d985ff511e88d57a97c71cdcf28a117c",
+      "package": "containerops",
+      "path": "internal/containerops/commit.go",
+      "plusBuild": [],
+      "sourceBytes": 1956,
+      "sourceSha256": "af95c0f12ca6f4f8ed737ffcc5b1032a70d7ad11943573b56ea51a5700851575"
+    },
+    {
+      "gitBlobSha1": "d9b9c17e517eec89bee832cf652dd2f748ad6ec2",
+      "goBuild": [],
+      "headerBytes": 764,
+      "headerSha256": "4e6a98e9a9b77e40b286e1f8da9c8f2ba096d68ed56b4beba82563358c9d88ba",
+      "package": "containerops",
+      "path": "internal/containerops/containerops.go",
+      "plusBuild": [],
+      "sourceBytes": 3059,
+      "sourceSha256": "96ea35a4b517e755e90099fa7a13066bb60f59d68e89165846df50772a6e3611"
+    },
+    {
+      "gitBlobSha1": "ced927c754515af2b34b1bacbf9038d718946b4e",
+      "goBuild": [],
+      "headerBytes": 625,
+      "headerSha256": "56e015f865d25dbf64d451214ca72349d985ff511e88d57a97c71cdcf28a117c",
+      "package": "containerops",
+      "path": "internal/containerops/cp.go",
+      "plusBuild": [],
+      "sourceBytes": 10821,
+      "sourceSha256": "4bb73c06e4a29ca09c2afdb8af3e7b6af88fffc8737ac42c0e1a633861928078"
+    },
+    {
+      "gitBlobSha1": "d6908c0d0abb5cd03d559be75726144599d726bc",
+      "goBuild": [],
+      "headerBytes": 625,
+      "headerSha256": "56e015f865d25dbf64d451214ca72349d985ff511e88d57a97c71cdcf28a117c",
+      "package": "containerops",
+      "path": "internal/containerops/cp_test.go",
+      "plusBuild": [],
+      "sourceBytes": 4410,
+      "sourceSha256": "0a34623e75ff2f650108477d20b0c8d3f718dcb12fd4bec92b8fe857c3cad904"
+    },
+    {
+      "gitBlobSha1": "0ac7a845e72e7ebb7c1953b568f00bf792c6f739",
+      "goBuild": [],
+      "headerBytes": 625,
+      "headerSha256": "56e015f865d25dbf64d451214ca72349d985ff511e88d57a97c71cdcf28a117c",
+      "package": "containerops",
+      "path": "internal/containerops/exec.go",
+      "plusBuild": [],
+      "sourceBytes": 1915,
+      "sourceSha256": "bd5c79f9d67cac4a2e17d6eb30169d5cfbb5c07e47a280e320087650a750f311"
+    },
+    {
+      "gitBlobSha1": "a66919ab7a8cc10077819c1115423807b78d3495",
+      "goBuild": [],
+      "headerBytes": 625,
+      "headerSha256": "56e015f865d25dbf64d451214ca72349d985ff511e88d57a97c71cdcf28a117c",
+      "package": "containerops",
+      "path": "internal/containerops/export.go",
+      "plusBuild": [],
+      "sourceBytes": 2587,
+      "sourceSha256": "6b0c4a5e640aff19981f1d4ba23a369909704d458d279a88afe16ef882727a62"
+    },
+    {
+      "gitBlobSha1": "136d0c53451ccdd1fb414a467c26a80ff666dbf0",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "256192440a9c3fcbddb54eba96a5446c13752fd801b30aa4699221cfa45fe108",
+      "package": "desktop",
+      "path": "internal/desktop/client.go",
+      "plusBuild": [],
+      "sourceBytes": 6893,
+      "sourceSha256": "36121a5cf87eda885c7904f2278b6be41dabc63c88466c547b09f55cefe93f78"
+    },
+    {
+      "gitBlobSha1": "7a5eeaf9211c7fbd7de60c0d849d0c049df7b241",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "256192440a9c3fcbddb54eba96a5446c13752fd801b30aa4699221cfa45fe108",
+      "package": "desktop",
+      "path": "internal/desktop/client_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2296,
+      "sourceSha256": "e7d75ce42b94ad08bea2c68449a38c47c405549f6a7b6754add06f5c337fd534"
+    },
+    {
+      "gitBlobSha1": "2adb6d80cb0e13fdeb3d0a3fea94217b3ee8e46b",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "e9961d0c21639ca15922d9400f915323ccc34e9d710b0c344310fca560fadb2d",
+      "package": "desktop",
+      "path": "internal/desktop/proxy.go",
+      "plusBuild": [],
+      "sourceBytes": 7583,
+      "sourceSha256": "44e601fdc00e44c921b33b1d62ebea0bcf193eaae5b6c904d2bcd6605dae163b"
+    },
+    {
+      "gitBlobSha1": "321b933bc71390da65741b4fb9103ee1e7f416e1",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "e9961d0c21639ca15922d9400f915323ccc34e9d710b0c344310fca560fadb2d",
+      "package": "desktop",
+      "path": "internal/desktop/proxy_test.go",
+      "plusBuild": [],
+      "sourceBytes": 6373,
+      "sourceSha256": "bd23c81d770f7fb82b194ca85c697287e84042f5ef3baafe049076d094afbb4b"
+    },
+    {
+      "gitBlobSha1": "d63780243071c89b0a3261bffbab889e59676147",
+      "goBuild": [],
+      "headerBytes": 625,
+      "headerSha256": "c8cee4206ea1e36244400eb5d215c7f440e2ce7ef51289c2b81e2e327ab079d6",
+      "package": "experimental",
+      "path": "internal/experimental/experimental.go",
+      "plusBuild": [],
+      "sourceBytes": 1875,
+      "sourceSha256": "59f2899a4872457a1f5c97cfd4b3db1be5d49285a4eb6cebf596591ac4720cde"
+    },
+    {
+      "gitBlobSha1": "ac4e849b841e48ed2cc34b4f3821840a25fde31b",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "3f4e9e4262f1bc0bbf00d689d329043edf86a8090836e5f241d631a8cc4cf5a9",
+      "package": "inspect",
+      "path": "internal/inspect/events.go",
+      "plusBuild": [],
+      "sourceBytes": 2025,
+      "sourceSha256": "295d7f1e87258c92fa7484eb0b39978955b829e2f1494338e14b7c9e2aa93c80"
+    },
+    {
+      "gitBlobSha1": "6e11ec7d572ea8182235da64caa4fc4f1e1eee5d",
+      "goBuild": [],
+      "headerBytes": 766,
+      "headerSha256": "c857d0c2c1ddad87e2fab51ad57670afc7c1d75a014f2e6e27f3317d95e9daf1",
+      "package": "inspect",
+      "path": "internal/inspect/inspect.go",
+      "plusBuild": [],
+      "sourceBytes": 2979,
+      "sourceSha256": "b0cddec31e2552111b252b84d8bb8ce3d14df64e3fab0a36d77d20bd08cbf6e5"
+    },
+    {
+      "gitBlobSha1": "7a03fb86b78536f1a81514477460ba854d97ef6d",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "3f4e9e4262f1bc0bbf00d689d329043edf86a8090836e5f241d631a8cc4cf5a9",
+      "package": "inspect",
+      "path": "internal/inspect/inspect_test.go",
+      "plusBuild": [],
+      "sourceBytes": 3619,
+      "sourceSha256": "a7c253f1c032121b9ff6c6331ec5514e49da64a237eb614072b6fd7807e8474a"
+    },
+    {
+      "gitBlobSha1": "729191d811ad450fe90b4bbe6c7a0b25334ec1e2",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "3f4e9e4262f1bc0bbf00d689d329043edf86a8090836e5f241d631a8cc4cf5a9",
+      "package": "inspect",
+      "path": "internal/inspect/ls.go",
+      "plusBuild": [],
+      "sourceBytes": 3684,
+      "sourceSha256": "9b2518608a7caf15eaabbf2e680e27791b573ef94bee7825b0024c4ed2aee4ba"
+    },
+    {
+      "gitBlobSha1": "abe30cb9f9ae2516efc1b69d5e6fe3c4c13ea996",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "3f4e9e4262f1bc0bbf00d689d329043edf86a8090836e5f241d631a8cc4cf5a9",
+      "package": "inspect",
+      "path": "internal/inspect/ls_test.go",
+      "plusBuild": [],
+      "sourceBytes": 3571,
+      "sourceSha256": "38454ba0924ee7aab8772864c8667203ea1f07300f026e95a05ca0a725d89664"
+    },
+    {
+      "gitBlobSha1": "0b34d51188f9d0d4bde1c1df3ed7e1b0ab13c67a",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "3f4e9e4262f1bc0bbf00d689d329043edf86a8090836e5f241d631a8cc4cf5a9",
+      "package": "inspect",
+      "path": "internal/inspect/port.go",
+      "plusBuild": [],
+      "sourceBytes": 1995,
+      "sourceSha256": "5d0c558fc686e48a774060943c8ec1d828b8ceae2641acb2391f38b8e54d8352"
+    },
+    {
+      "gitBlobSha1": "05558e00934cdde87bc1de22b1445fc1a6d2b7aa",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "3f4e9e4262f1bc0bbf00d689d329043edf86a8090836e5f241d631a8cc4cf5a9",
+      "package": "inspect",
+      "path": "internal/inspect/port_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2223,
+      "sourceSha256": "3ff3a57fd9c9d4829610ca37d729c4217c586682a425a454d52ef1563bfaaf93"
+    },
+    {
+      "gitBlobSha1": "cc9f61e321133d21a6a94f29de8860aaa1b0d0fa",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "3f4e9e4262f1bc0bbf00d689d329043edf86a8090836e5f241d631a8cc4cf5a9",
+      "package": "inspect",
+      "path": "internal/inspect/ps.go",
+      "plusBuild": [],
+      "sourceBytes": 4290,
+      "sourceSha256": "71019b6b44e866978e8e10b8f97301f79b49429229af9526662f2d259e01911a"
+    },
+    {
+      "gitBlobSha1": "1a627285dbe790bb208a7090acd4b1357c1b0966",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "3f4e9e4262f1bc0bbf00d689d329043edf86a8090836e5f241d631a8cc4cf5a9",
+      "package": "inspect",
+      "path": "internal/inspect/top.go",
+      "plusBuild": [],
+      "sourceBytes": 1965,
+      "sourceSha256": "8fcd8d236f73366e94c963804a664d7d6c19cbea56f3ba9a27cbdf23256fd12d"
+    },
+    {
+      "gitBlobSha1": "e0be7d6e747fbcf07a45dff546e3251e6d1f92a3",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "496a5805229caa12ecc54e049c299a8f88005f646b138b8b46f49700dbde315d",
+      "package": "inspect",
+      "path": "internal/inspect/viz.go",
+      "plusBuild": [],
+      "sourceBytes": 4802,
+      "sourceSha256": "c4795b1bfb07227c85261a3c9e361fb687dd2f3ada574db122867247149fc1a6"
+    },
+    {
+      "gitBlobSha1": "185c5d95ef5a9e7bf9cc0af6340df55abab183fc",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "3f4e9e4262f1bc0bbf00d689d329043edf86a8090836e5f241d631a8cc4cf5a9",
+      "package": "inspect",
+      "path": "internal/inspect/volumes.go",
+      "plusBuild": [],
+      "sourceBytes": 2104,
+      "sourceSha256": "9227394d8efdfd40592c70967e1c4321ee32f02c6860ff26ed044492e7bc5eaf"
+    },
+    {
+      "gitBlobSha1": "893c5772705ef658d6e0575ad66bd64a0428c1d6",
+      "goBuild": [],
+      "headerBytes": 619,
+      "headerSha256": "9ab1b2710f99e06fb338c16a799ec3589e856e189cdbd1bd511f2b012b32c395",
+      "package": "locker",
+      "path": "internal/locker/pidfile.go",
+      "plusBuild": [],
+      "sourceBytes": 887,
+      "sourceSha256": "af0a849930c5e94f638a45ce4412ddbab37e1dfc5cabaa1f2d8ff7b5f30f07a5"
+    },
+    {
+      "gitBlobSha1": "820dfe71e83a21e06c7f422c859442b2b5d80fbf",
+      "goBuild": [
+        "!windows"
+      ],
+      "headerBytes": 640,
+      "headerSha256": "61651fbe88233f1e9b97bcb0ad0f6a8d7ecf3d0a067876460c61b3d2442153d5",
+      "package": "locker",
+      "path": "internal/locker/pidfile_unix.go",
+      "plusBuild": [],
+      "sourceBytes": 787,
+      "sourceSha256": "3e83954060af52a8d1a646f6d4f2972683790be1c97dac262225c5172b15e6d4"
+    },
+    {
+      "gitBlobSha1": "f953f9dcee615962795dd6190a2e9d624e15c987",
+      "goBuild": [
+        "windows"
+      ],
+      "headerBytes": 639,
+      "headerSha256": "f492321b74dfb581017570b5f29efd7e12dab8afd60be31eeec36b5f9a809b55",
+      "package": "locker",
+      "path": "internal/locker/pidfile_windows.go",
+      "plusBuild": [],
+      "sourceBytes": 1440,
+      "sourceSha256": "f8e5f5a95ee61ae7f08275ef2f617d5a9260e0399c2da43415b6600ef93638f3"
+    },
+    {
+      "gitBlobSha1": "e60db5cc15e56adcd6c24972ac56dfe34b7031f7",
+      "goBuild": [],
+      "headerBytes": 619,
+      "headerSha256": "d1da03f93e39d9fa611f19daa83ae890a61bb473ae9930c518551a31fd50ac1a",
+      "package": "locker",
+      "path": "internal/locker/runtime.go",
+      "plusBuild": [],
+      "sourceBytes": 868,
+      "sourceSha256": "5b01018e4e79740c38953a0ff7a7ef4c72a6a7eb63fdb89f308f7108389bdd51"
+    },
+    {
+      "gitBlobSha1": "127a5fb048d6f5aa977d30c1c94e41be00a61a65",
+      "goBuild": [],
+      "headerBytes": 619,
+      "headerSha256": "d1da03f93e39d9fa611f19daa83ae890a61bb473ae9930c518551a31fd50ac1a",
+      "package": "locker",
+      "path": "internal/locker/runtime_darwin.go",
+      "plusBuild": [],
+      "sourceBytes": 997,
+      "sourceSha256": "49aaabd5c0d93947d78905ed9de57431f48e2228e6b7699ec17dafd01421e48c"
+    },
+    {
+      "gitBlobSha1": "5daf61aac520f800d24d19ce77a0d3cc89f8b32d",
+      "goBuild": [
+        "linux || openbsd || freebsd"
+      ],
+      "headerBytes": 659,
+      "headerSha256": "5a577c48359ed836efda2ec6f0a4668d1443af029bf118c73540aba2653bce3f",
+      "package": "locker",
+      "path": "internal/locker/runtime_unix.go",
+      "plusBuild": [],
+      "sourceBytes": 1257,
+      "sourceSha256": "e0a8de34dbc1d3e8b4e0ec41a24bc8c26901fa1a20f86a972f2281a3e0deee16"
+    },
+    {
+      "gitBlobSha1": "4d4451b61c6d079e2d0627f7e891a4353172d180",
+      "goBuild": [],
+      "headerBytes": 619,
+      "headerSha256": "d1da03f93e39d9fa611f19daa83ae890a61bb473ae9930c518551a31fd50ac1a",
+      "package": "locker",
+      "path": "internal/locker/runtime_windows.go",
+      "plusBuild": [],
+      "sourceBytes": 1397,
+      "sourceSha256": "c413fe70b99c998e1923f7279a23d2686f562dc31ad2b16a8ad597714506d373"
+    },
+    {
+      "gitBlobSha1": "224bec788303ab99560312e99f367fac48a7e1ac",
+      "goBuild": [],
+      "headerBytes": 619,
+      "headerSha256": "d9188f1c52434446b839f290887f0fc118aa19ce13816f752a0f647457357d2a",
+      "package": "memnet",
+      "path": "internal/memnet/conn.go",
+      "plusBuild": [],
+      "sourceBytes": 1432,
+      "sourceSha256": "101710f042709ea73d5ed23ba51e19ff24839169808b5e0414bedbb97eda80c5"
+    },
+    {
+      "gitBlobSha1": "7532f71901727358b229129c3b391c0926fefc3d",
+      "goBuild": [
+        "!windows"
+      ],
+      "headerBytes": 640,
+      "headerSha256": "f949e55a39c1bc6f79b14aafc6a94f40899d14806b09a1a83e942884db2023d3",
+      "package": "memnet",
+      "path": "internal/memnet/conn_unix.go",
+      "plusBuild": [],
+      "sourceBytes": 1060,
+      "sourceSha256": "f5adae6162c8f704d80cbc56e5f0cf8a943da83711cbb250a1d6ba519a185c15"
+    },
+    {
+      "gitBlobSha1": "b7f7d9ea8faca0b8e468a09df6540f71ee8d0ebd",
+      "goBuild": [],
+      "headerBytes": 619,
+      "headerSha256": "3cfaa8915917f550af46de1c355b7ee5fda2f5abfafd4e85d84f8156a8d7c0ba",
+      "package": "memnet",
+      "path": "internal/memnet/conn_windows.go",
+      "plusBuild": [],
+      "sourceBytes": 922,
+      "sourceSha256": "784ad6b76ed4b59bfe8c536f4d2f5316067f5d521f5e58d274fba87dd940c8b2"
+    },
+    {
+      "gitBlobSha1": "9d58ca2120fb177ab612ceb7f4d3d5dab4a7a303",
+      "goBuild": [],
+      "headerBytes": 705,
+      "headerSha256": "39e6fe09a94944ff15d6a8dce3f45805b56541191f6c700fe28c52ba8017d76b",
+      "package": "naming",
+      "path": "internal/naming/naming.go",
+      "plusBuild": [],
+      "sourceBytes": 1807,
+      "sourceSha256": "07a05d20f37ad477f765140721786e3f3129d1bdb61d308f5c076b1f20dc7e14"
+    },
+    {
+      "gitBlobSha1": "5bf4fbc300e4a636940af59e6e8d343aac59038d",
+      "goBuild": [],
+      "headerBytes": 619,
+      "headerSha256": "c85b5c099b8d8be1b3820f5f76b669ead3a794adb9d192b2154c720cbc9f37a4",
+      "package": "naming",
+      "path": "internal/naming/naming_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1388,
+      "sourceSha256": "d0148f2f562f3b913c9601c0b1335ff17fb7ad516b61d04abc911eabc9258d8b"
+    },
+    {
+      "gitBlobSha1": "89a6daf9e57eadf6363d364d40b7c0ebdce36713",
+      "goBuild": [],
+      "headerBytes": 616,
+      "headerSha256": "ebbb6a0d3a85f96017e95eb25a2747d1848dd10634b1824866c31044faf874f2",
+      "package": "oci",
+      "path": "internal/oci/push.go",
+      "plusBuild": [],
+      "sourceBytes": 8220,
+      "sourceSha256": "00e9f47e54ad2d4a73169771a8c969fb91b91f12c83e3f12b832719d887b0bd2"
+    },
+    {
+      "gitBlobSha1": "d5e2fc5cb7c62dad052293638ffc4e9bc7eda93a",
+      "goBuild": [],
+      "headerBytes": 616,
+      "headerSha256": "ebbb6a0d3a85f96017e95eb25a2747d1848dd10634b1824866c31044faf874f2",
+      "package": "oci",
+      "path": "internal/oci/resolver.go",
+      "plusBuild": [],
+      "sourceBytes": 6737,
+      "sourceSha256": "182fe5a390948a12b5af1b244d864088e6e67320d519c100c8d61959127f59ab"
+    },
+    {
+      "gitBlobSha1": "4960260c20fdaf93f41b95ca01801b6c75ed03dd",
+      "goBuild": [],
+      "headerBytes": 616,
+      "headerSha256": "4177f0fa9269948ecd81a2260e566eb51f5a3b7f96c0469af61a1e0446a654c8",
+      "package": "oci",
+      "path": "internal/oci/resolver_test.go",
+      "plusBuild": [],
+      "sourceBytes": 8281,
+      "sourceSha256": "264efe105fb500c8893b811066d38cff5d13900389c067ec7881305fb06c2e3c"
+    },
+    {
+      "gitBlobSha1": "4e4c01b8cc4508ff73f93b829ced3a08b3b74ddd",
+      "goBuild": [],
+      "headerBytes": 618,
+      "headerSha256": "0d69f83bf43a2375eec42849b756887959fb2facfbbfc9b5d15c2227bee6d62f",
+      "package": "paths",
+      "path": "internal/paths/paths.go",
+      "plusBuild": [],
+      "sourceBytes": 3006,
+      "sourceSha256": "84237b64e444f6b80d5d17d0cbeb6f202a510b778f3601913ad2d0d33beba0ad"
+    },
+    {
+      "gitBlobSha1": "81a7a4fd7eb9441357d86a5e96ae819df46831c7",
+      "goBuild": [],
+      "headerBytes": 930,
+      "headerSha256": "8725326618fc87b0187715f83520bd73f31e02e1c23eb23d3f0a8c930816550b",
+      "package": "pidfile",
+      "path": "internal/pidfile/pidfile.go",
+      "plusBuild": [],
+      "sourceBytes": 2138,
+      "sourceSha256": "73969c75e02f001b631604654561c10ccdd6a6188474e4fb542bd2b1597c90e5"
+    },
+    {
+      "gitBlobSha1": "84bcd191d5d59cf1aad618708ac16aec4ac7c896",
+      "goBuild": [
+        "!windows"
+      ],
+      "headerBytes": 641,
+      "headerSha256": "638dac065491cd0b883227ae703dc68caebc99a7fa055e25de73cf3bf8f08ad2",
+      "package": "pidfile",
+      "path": "internal/pidfile/pidfile_unix.go",
+      "plusBuild": [],
+      "sourceBytes": 978,
+      "sourceSha256": "99f487bfdfc57ed234875fa86bc3a40affef9812c6b8ffe342799aecb4e9417a"
+    },
+    {
+      "gitBlobSha1": "622318bb8b3f26e1fd5866ddf4088811224aee51",
+      "goBuild": [
+        "windows"
+      ],
+      "headerBytes": 640,
+      "headerSha256": "444da2763bb581b29584fc3cda2a7e045365473f1f40c0462386b2cd819d4abf",
+      "package": "pidfile",
+      "path": "internal/pidfile/pidfile_windows.go",
+      "plusBuild": [],
+      "sourceBytes": 1027,
+      "sourceSha256": "bec3513abfba1154955e6f4fbd7a4ae952d06637fa91b8e31823dbd22786056e"
+    },
+    {
+      "gitBlobSha1": "9c56c26a20d909b8cf8c7e8cf9a9de6e8d0344d5",
+      "goBuild": [],
+      "headerBytes": 719,
+      "headerSha256": "d9f7a9041b03f1815d9d12057bc8d3d2c987afe48fcce719a187018fe49e465a",
+      "package": "progress",
+      "path": "internal/progress/progress.go",
+      "plusBuild": [],
+      "sourceBytes": 2166,
+      "sourceSha256": "b16586f24f8e0869c8040d01c490eaa81ad8e063873d3fe42ff7c03784d03364"
+    },
+    {
+      "gitBlobSha1": "3c9601bf7fe601305ae36c2de40c1b3c510b7aba",
+      "goBuild": [],
+      "headerBytes": 621,
+      "headerSha256": "193e683f23c8025f90cf511182f839d55cf179f539bdd6ebca5d3ba5423de9e9",
+      "package": "progress",
+      "path": "internal/progress/progress_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1782,
+      "sourceSha256": "b9b741090dde8072fc5df0b154427e888cee0917ecbaaa71e64b39b82193f39e"
+    },
+    {
+      "gitBlobSha1": "c2a8efbde4efa274622b4070a5b3dae9386e4072",
+      "goBuild": [],
+      "headerBytes": 626,
+      "headerSha256": "ea47f7f39e621e1e9c4c43859b6b6355eb83d278a8e29b5dbbfe8b99ffe2c28d",
+      "package": "projectloader",
+      "path": "internal/projectloader/generate.go",
+      "plusBuild": [],
+      "sourceBytes": 8239,
+      "sourceSha256": "5314b6e0b220c1e3b9cf16e33cb2b5fcb59158cba28f833cfb1effd1f35a0036"
+    },
+    {
+      "gitBlobSha1": "d767d4eaae6d8adb18d9f6655cd61afc7e4b7d94",
+      "goBuild": [],
+      "headerBytes": 626,
+      "headerSha256": "f626e8574f645866e635eb3a8276e35838bfbf43dd15c5b878a24b902ef82f67",
+      "package": "projectloader",
+      "path": "internal/projectloader/loader.go",
+      "plusBuild": [],
+      "sourceBytes": 5391,
+      "sourceSha256": "b72d791747b5a5892d33b47d06fe72be230da18535d3d5bb8c1cfd4caec664ae"
+    },
+    {
+      "gitBlobSha1": "2dbba5fbcede18ef956c950c6d6edd2ff47a0e79",
+      "goBuild": [],
+      "headerBytes": 626,
+      "headerSha256": "f626e8574f645866e635eb3a8276e35838bfbf43dd15c5b878a24b902ef82f67",
+      "package": "projectloader",
+      "path": "internal/projectloader/loader_test.go",
+      "plusBuild": [],
+      "sourceBytes": 9179,
+      "sourceSha256": "21fbe8f98724a6fc06910f4464868f69d565695b9fc1db59a52fb547f9ffb967"
+    },
+    {
+      "gitBlobSha1": "1c50a03031cb219108f202bf25e84d5a3bf973e2",
+      "goBuild": [],
+      "headerBytes": 808,
+      "headerSha256": "fcf2b0879d4d43eae5a497d90bff85887dbfc88258d0cc766bdd31e3943b46f4",
+      "package": "projectloader",
+      "path": "internal/projectloader/projectloader.go",
+      "plusBuild": [],
+      "sourceBytes": 1439,
+      "sourceSha256": "6ee816416a8919c9288add1b67c3e78236fd5db6474e6ba4d47a5e03d922350f"
+    },
+    {
+      "gitBlobSha1": "00174c6a6d9b2c3116d649295ade1b82ac5fbd30",
+      "goBuild": [],
+      "headerBytes": 626,
+      "headerSha256": "f626e8574f645866e635eb3a8276e35838bfbf43dd15c5b878a24b902ef82f67",
+      "package": "projectloader",
+      "path": "internal/projectloader/unsupported_attributes.go",
+      "plusBuild": [],
+      "sourceBytes": 13674,
+      "sourceSha256": "4d5db9cbb20b541ecfa82895c6985335ee914d6b385a8b41177fac5161847d1d"
+    },
+    {
+      "gitBlobSha1": "91889f4cf1377c761e982e1fcb52ac787dde09ee",
+      "goBuild": [],
+      "headerBytes": 626,
+      "headerSha256": "f626e8574f645866e635eb3a8276e35838bfbf43dd15c5b878a24b902ef82f67",
+      "package": "projectloader",
+      "path": "internal/projectloader/unsupported_attributes_test.go",
+      "plusBuild": [],
+      "sourceBytes": 19196,
+      "sourceSha256": "28b029140cf267bbbac5f1c98290137b2f85edf119572ea91e1a188184797a1c"
+    },
+    {
+      "gitBlobSha1": "872df11878d1a25831450295db12bccab2f5e3f3",
+      "goBuild": [],
+      "headerBytes": 621,
+      "headerSha256": "4e050d6ed7efb58bb462da0ad7227d94c474ede0fcadb0adedf300fe3bfa3749",
+      "package": "provider",
+      "path": "internal/provider/backend_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2118,
+      "sourceSha256": "0e6f18a2dea3669c165ab87ec903daf24cb4f904878a8f9f732caa435e49a81c"
+    },
+    {
+      "gitBlobSha1": "e93b527e16a0f134cdfc3ff3205c52b14c0cc47e",
+      "goBuild": [],
+      "headerBytes": 621,
+      "headerSha256": "4e050d6ed7efb58bb462da0ad7227d94c474ede0fcadb0adedf300fe3bfa3749",
+      "package": "provider",
+      "path": "internal/provider/get_image_test.go",
+      "plusBuild": [],
+      "sourceBytes": 13505,
+      "sourceSha256": "493a55e035532872fa21914c3eca452ce13928b4b037ac5cd74761d3d7df1cf4"
+    },
+    {
+      "gitBlobSha1": "5a89c50347fa214b28ff3fda309b01d4bc3885f6",
+      "goBuild": [],
+      "headerBytes": 621,
+      "headerSha256": "4e050d6ed7efb58bb462da0ad7227d94c474ede0fcadb0adedf300fe3bfa3749",
+      "package": "provider",
+      "path": "internal/provider/plugins.go",
+      "plusBuild": [],
+      "sourceBytes": 25888,
+      "sourceSha256": "a8b66b354782584d15d13d572c26dbd12ef553a01a4cc2df559d6c91f73705fe"
+    },
+    {
+      "gitBlobSha1": "70d4583448367dccbc01d5dc6cf47d840e41d033",
+      "goBuild": [],
+      "headerBytes": 621,
+      "headerSha256": "4e050d6ed7efb58bb462da0ad7227d94c474ede0fcadb0adedf300fe3bfa3749",
+      "package": "provider",
+      "path": "internal/provider/plugins_control_test.go",
+      "plusBuild": [],
+      "sourceBytes": 16497,
+      "sourceSha256": "be3ce8eddeb1a7e9b3bcb4d6ceec86218b7f694f0ae6d9002ff01cc810f6d7f1"
+    },
+    {
+      "gitBlobSha1": "110cfdea9319dc3424015e7bbea8ebd69d4258c9",
+      "goBuild": [],
+      "headerBytes": 621,
+      "headerSha256": "4e050d6ed7efb58bb462da0ad7227d94c474ede0fcadb0adedf300fe3bfa3749",
+      "package": "provider",
+      "path": "internal/provider/plugins_test.go",
+      "plusBuild": [],
+      "sourceBytes": 4266,
+      "sourceSha256": "3f6dc2818451fbbcde38b32fbab9214b588e02fa22cf4f93574f31fff032b50a"
+    },
+    {
+      "gitBlobSha1": "b329ae9b89c23293a9009ccf0161eeffffc0ce73",
+      "goBuild": [],
+      "headerBytes": 894,
+      "headerSha256": "1eecff061811f29fe8b39cf2154d63b63d98f1835294c87a5cfae83d5e716214",
+      "package": "provider",
+      "path": "internal/provider/provider.go",
+      "plusBuild": [],
+      "sourceBytes": 2077,
+      "sourceSha256": "7742ee97e04c1fae3749252f00d98f622c43e334ee571fda0429db4f5c1bcffa"
+    },
+    {
+      "gitBlobSha1": "549fe5cee8e810e073faf6653ca0fcec53150d12",
+      "goBuild": [],
+      "headerBytes": 621,
+      "headerSha256": "a08e79b6539a624972966365d966b876f4788796709cb3a6e3d8de5ffd176e55",
+      "package": "registry",
+      "path": "internal/registry/desktop.go",
+      "plusBuild": [],
+      "sourceBytes": 6862,
+      "sourceSha256": "19ff3922a180f8945ccc95383b2e615b69bf70445c9fa9c2f9bbf104c72e88f3"
+    },
+    {
+      "gitBlobSha1": "e524a521b86f61ad0b1bc0106f04abcb795e7c8f",
+      "goBuild": [],
+      "headerBytes": 621,
+      "headerSha256": "a08e79b6539a624972966365d966b876f4788796709cb3a6e3d8de5ffd176e55",
+      "package": "registry",
+      "path": "internal/registry/desktop_test.go",
+      "plusBuild": [],
+      "sourceBytes": 15523,
+      "sourceSha256": "f8c6bdd3752bba3be1f033414db3df44ea3fda5f9034d3dd004de54c272fccaa"
+    },
+    {
+      "gitBlobSha1": "cccd7a5656cb1c52c4356f28b65482471e680d6b",
+      "goBuild": [],
+      "headerBytes": 621,
+      "headerSha256": "c39401bd5d2baa85dcf779c6f2e10c0c092220e1c1de6fcb66f62137f5de8af1",
+      "package": "registry",
+      "path": "internal/registry/registry.go",
+      "plusBuild": [],
+      "sourceBytes": 3930,
+      "sourceSha256": "cb9caaf43abb448445df76aed7b2c985a93d7c68d39c2cbcda353d4781ed3ef2"
+    },
+    {
+      "gitBlobSha1": "88df0790faafa5db0d409ba3905618616fc65f32",
+      "goBuild": [],
+      "headerBytes": 618,
+      "headerSha256": "a35a0c46552c98807f5d08dd87d6bc217aeb41a48490b26fda95e8d0d121f37b",
+      "package": "relay",
+      "path": "internal/relay/relay.go",
+      "plusBuild": [],
+      "sourceBytes": 33818,
+      "sourceSha256": "3f60ee363a9e234829b58e580fb4a295a48843867618addfe82c0c616b7a0130"
+    },
+    {
+      "gitBlobSha1": "92e1e8872d64094f58f2bf8c5aef642ba587de3b",
+      "goBuild": [],
+      "headerBytes": 618,
+      "headerSha256": "a35a0c46552c98807f5d08dd87d6bc217aeb41a48490b26fda95e8d0d121f37b",
+      "package": "relay",
+      "path": "internal/relay/relay_test.go",
+      "plusBuild": [],
+      "sourceBytes": 27824,
+      "sourceSha256": "4125eae477335c62ed6bcbc2fd2d684479dd6b3b1114f0d1b341f15ef90a5ca1"
+    },
+    {
+      "gitBlobSha1": "4fd9df37719d7a1c236f2c8bcdd491df86bfdf65",
+      "goBuild": [],
+      "headerBytes": 615,
+      "headerSha256": "e21c841d6af9cd91bfa9e9b9977ab4651569b0cd7542294d8777735117a31932",
+      "package": "sync",
+      "path": "internal/sync/shared.go",
+      "plusBuild": [],
+      "sourceBytes": 1365,
+      "sourceSha256": "7a6ba1a1afa76355ebb35397dc4e8fd68a45ec9502499a8d3537c3548da1f6e0"
+    },
+    {
+      "gitBlobSha1": "e2851a285e9ed05be1a381ed0da1d4a6295b8c6a",
+      "goBuild": [],
+      "headerBytes": 656,
+      "headerSha256": "e5bcf1cb7ecaf71766c7541b108afb98d0560eda0930df0cc0c4774ee13703db",
+      "package": "sync",
+      "path": "internal/sync/tar.go",
+      "plusBuild": [],
+      "sourceBytes": 12117,
+      "sourceSha256": "25386c38092762981ca07f0ed0d9d8f61c9a2fa3ad66fa313ebd2ca8ce10d5a6"
+    },
+    {
+      "gitBlobSha1": "2149c012e78f1b00fb5357fda01150283072a9fa",
+      "goBuild": [],
+      "headerBytes": 615,
+      "headerSha256": "e21c841d6af9cd91bfa9e9b9977ab4651569b0cd7542294d8777735117a31932",
+      "package": "sync",
+      "path": "internal/sync/tar_test.go",
+      "plusBuild": [],
+      "sourceBytes": 11720,
+      "sourceSha256": "65113cb6958d67a98e6677947ced100587eeb023d488f3fc9f30f995fc8c154b"
+    },
+    {
+      "gitBlobSha1": "07fbf64a739958f58a0cf9afcda77a0e91ec0b45",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "8166477246af786f7809cc7157c2983a063b2fb908c0ec1c1d401a8794cf0719",
+      "package": "tracing",
+      "path": "internal/tracing/attributes.go",
+      "plusBuild": [],
+      "sourceBytes": 6668,
+      "sourceSha256": "72cdc3431e4c92caa9eedf6ee438f5553e8bed8b6cc3fc743449f10455a5f5be"
+    },
+    {
+      "gitBlobSha1": "acbbe2f552aff5795558cc864b3c9ff1ce3f30e6",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "554aadd635addb90de98e306528bbbe23603b55e6066af656449b27d4470e6ad",
+      "package": "tracing",
+      "path": "internal/tracing/attributes_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2010,
+      "sourceSha256": "e656270eb0af4476cfef24b36c9994ddb4a52c1b38377574ebe53248abf8a871"
+    },
+    {
+      "gitBlobSha1": "5d5367b0231f5400bda16357df69beb1bdce0330",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "6f57a75f53e185c8990a4f033e45b71aae89eb753cc1921d13cc5d80d6599f22",
+      "package": "tracing",
+      "path": "internal/tracing/docker_context.go",
+      "plusBuild": [],
+      "sourceBytes": 3780,
+      "sourceSha256": "690276ee8e1b97de3b2a3901463ea0d64af53ec8cafa335d37101e1a39066b3f"
+    },
+    {
+      "gitBlobSha1": "222d52cf52b7be2586785c27e023df6808110eb1",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "554aadd635addb90de98e306528bbbe23603b55e6066af656449b27d4470e6ad",
+      "package": "tracing",
+      "path": "internal/tracing/keyboard_metrics.go",
+      "plusBuild": [],
+      "sourceBytes": 1199,
+      "sourceSha256": "efc06c26f1e8fb979ad11e172098d9718cca4824ac3fd8fa15e8c215a9603d5f"
+    },
+    {
+      "gitBlobSha1": "d27e262d2cd72df1ba227228693edb77438e8b35",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "6f57a75f53e185c8990a4f033e45b71aae89eb753cc1921d13cc5d80d6599f22",
+      "package": "tracing",
+      "path": "internal/tracing/mux.go",
+      "plusBuild": [],
+      "sourceBytes": 1587,
+      "sourceSha256": "e54f287eec8a4611bb5ed84f0eea7fc7bddff5df7566c3aa26098bd2d4b51b69"
+    },
+    {
+      "gitBlobSha1": "ffb68ec974618ff8470a44784d1a1cb7f45e4fd6",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "8166477246af786f7809cc7157c2983a063b2fb908c0ec1c1d401a8794cf0719",
+      "package": "tracing",
+      "path": "internal/tracing/tracing.go",
+      "plusBuild": [],
+      "sourceBytes": 4099,
+      "sourceSha256": "83e42c4d2c3e10dfd85a482038457c2c932dafcb5da900a7788d5986439c22d7"
+    },
+    {
+      "gitBlobSha1": "124c842f2d44c09e7ef5ea61a7bb85ba52d9e9f2",
+      "goBuild": [],
+      "headerBytes": 625,
+      "headerSha256": "c00bc88a7b2e549d0f4080e078b02c2d60dd2770681c3dcee36eab899ad453f1",
+      "package": "tracing_test",
+      "path": "internal/tracing/tracing_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1514,
+      "sourceSha256": "0b00455012d5f2dea0973edd17a2afd90566cd64d69eaf6315bef127be2f697a"
+    },
+    {
+      "gitBlobSha1": "e525b738b42352c1bcf31b030e0070c086375bab",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "8166477246af786f7809cc7157c2983a063b2fb908c0ec1c1d401a8794cf0719",
+      "package": "tracing",
+      "path": "internal/tracing/wrap.go",
+      "plusBuild": [],
+      "sourceBytes": 3613,
+      "sourceSha256": "6fc640af9808dd3bcc44797d847e0819e9fd74da6b44929559ec980f2deab199"
+    },
+    {
+      "gitBlobSha1": "28b701cc2db20500915891f2af17f2fef99f808c",
+      "goBuild": [],
+      "headerBytes": 621,
+      "headerSha256": "1860b28cfc894ce2a375529758f678b1e84a3ced2494c71a308bfd615b7f6c09",
+      "package": "internal",
+      "path": "internal/variables.go",
+      "plusBuild": [],
+      "sourceBytes": 708,
+      "sourceSha256": "51b73a993573ce8bc5933b46b863f5b684201c4eb2785e1b9c31ceb681548336"
+    },
+    {
+      "gitBlobSha1": "0c4074fc2f96df6b028fb2d515d59fdc2c83ad0b",
+      "goBuild": [],
+      "headerBytes": 616,
+      "headerSha256": "14b9f95dead72d3904e4bfbb09d6a8ae3c23e465464ef841243b9bd98a062846",
+      "package": "api",
+      "path": "pkg/api/api.go",
+      "plusBuild": [],
+      "sourceBytes": 32081,
+      "sourceSha256": "317a2470d843493b2c1ed17c7b8140ab35203f5415c224df3a2154b3f3c6603a"
+    },
+    {
+      "gitBlobSha1": "65f1fbbb85bad3e9260f2118f992227915673e5e",
+      "goBuild": [],
+      "headerBytes": 616,
+      "headerSha256": "14b9f95dead72d3904e4bfbb09d6a8ae3c23e465464ef841243b9bd98a062846",
+      "package": "api",
+      "path": "pkg/api/api_test.go",
+      "plusBuild": [],
+      "sourceBytes": 4061,
+      "sourceSha256": "4e76b611a600ccb86519c2ee09e459bb33be9753a5e98b41f6406b099a3ad0f3"
+    },
+    {
+      "gitBlobSha1": "af49c5d243320100cabb7ddcf366892ce97199df",
+      "goBuild": [],
+      "headerBytes": 616,
+      "headerSha256": "14b9f95dead72d3904e4bfbb09d6a8ae3c23e465464ef841243b9bd98a062846",
+      "package": "api",
+      "path": "pkg/api/context.go",
+      "plusBuild": [],
+      "sourceBytes": 1209,
+      "sourceSha256": "a0946c84cec72cc4e4bcfa6968692e71e808f1c308fca1d6213dbff1edb49170"
+    },
+    {
+      "gitBlobSha1": "4631934241743f9102453215619dc056328a03bb",
+      "goBuild": [],
+      "headerBytes": 616,
+      "headerSha256": "14b9f95dead72d3904e4bfbb09d6a8ae3c23e465464ef841243b9bd98a062846",
+      "package": "api",
+      "path": "pkg/api/env.go",
+      "plusBuild": [],
+      "sourceBytes": 738,
+      "sourceSha256": "61ad65803a5c2994083dbea35e61bacf406a1e6b7a54f7aeaafdaef34b73ae28"
+    },
+    {
+      "gitBlobSha1": "933cab45ae5db73047370831465354f5b9ebc406",
+      "goBuild": [],
+      "headerBytes": 616,
+      "headerSha256": "14b9f95dead72d3904e4bfbb09d6a8ae3c23e465464ef841243b9bd98a062846",
+      "package": "api",
+      "path": "pkg/api/errors.go",
+      "plusBuild": [],
+      "sourceBytes": 3525,
+      "sourceSha256": "64d4b6f6a7d82f69f96d93a9b3dfb6f70cbac8cbaf948ef42abd6f5753c966cd"
+    },
+    {
+      "gitBlobSha1": "d221db3fdecf90d1ef5df0b1af8ac69b1b376c97",
+      "goBuild": [],
+      "headerBytes": 616,
+      "headerSha256": "14b9f95dead72d3904e4bfbb09d6a8ae3c23e465464ef841243b9bd98a062846",
+      "package": "api",
+      "path": "pkg/api/errors_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1495,
+      "sourceSha256": "d77b9506d124244f31ff82512b4cfa5adf81c772dcc15be2cc926d1a1913f5b2"
+    },
+    {
+      "gitBlobSha1": "c300a4cc95c994cfdcd70b6c5eb3ac2dff7aeeb8",
+      "goBuild": [],
+      "headerBytes": 616,
+      "headerSha256": "14b9f95dead72d3904e4bfbb09d6a8ae3c23e465464ef841243b9bd98a062846",
+      "package": "api",
+      "path": "pkg/api/event.go",
+      "plusBuild": [],
+      "sourceBytes": 4183,
+      "sourceSha256": "b66665603a89d8b8352f8f859225760e076141a09e6a58b3bea0f2215872afab"
+    },
+    {
+      "gitBlobSha1": "d7e965059b9fc71f03f3cdbc06728426eea16b20",
+      "goBuild": [],
+      "headerBytes": 616,
+      "headerSha256": "14b9f95dead72d3904e4bfbb09d6a8ae3c23e465464ef841243b9bd98a062846",
+      "package": "api",
+      "path": "pkg/api/feature.go",
+      "plusBuild": [],
+      "sourceBytes": 843,
+      "sourceSha256": "210cfe14d1a7e7357d23c342f51ce7a293a4b178078118b7bc66d75776d5510e"
+    },
+    {
+      "gitBlobSha1": "a45267348c93fb860883318921cec504a2afaae5",
+      "goBuild": [],
+      "headerBytes": 616,
+      "headerSha256": "14b9f95dead72d3904e4bfbb09d6a8ae3c23e465464ef841243b9bd98a062846",
+      "package": "api",
+      "path": "pkg/api/labels.go",
+      "plusBuild": [],
+      "sourceBytes": 5173,
+      "sourceSha256": "0fc05b2fc74777df4f586ee16f1ccd9290018820e591e1cdc4b087bf06ec9960"
+    },
+    {
+      "gitBlobSha1": "c4af2003e9f637df9c1b7b9fb9501ecad2b1c888",
+      "goBuild": [],
+      "headerBytes": 616,
+      "headerSha256": "14b9f95dead72d3904e4bfbb09d6a8ae3c23e465464ef841243b9bd98a062846",
+      "package": "api",
+      "path": "pkg/api/labels_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1132,
+      "sourceSha256": "6d1eef840a31e094a481917930b3a286ac6ce57ae6c74f2cda054a221177ab52"
+    },
+    {
+      "gitBlobSha1": "cf9dfffd30e680e8f9153a2d9277b393e36ad5a1",
+      "goBuild": [],
+      "headerBytes": 616,
+      "headerSha256": "14b9f95dead72d3904e4bfbb09d6a8ae3c23e465464ef841243b9bd98a062846",
+      "package": "api",
+      "path": "pkg/api/up_options.go",
+      "plusBuild": [],
+      "sourceBytes": 5308,
+      "sourceSha256": "5048aec7512802845ac558bc0639f844d95b4af45e8645aa863c38fdd8ad0ce2"
+    },
+    {
+      "gitBlobSha1": "d7a4741e75d2f029064518a0c42710b8dca029e1",
+      "goBuild": [],
+      "headerBytes": 616,
+      "headerSha256": "14b9f95dead72d3904e4bfbb09d6a8ae3c23e465464ef841243b9bd98a062846",
+      "package": "api",
+      "path": "pkg/api/up_options_test.go",
+      "plusBuild": [],
+      "sourceBytes": 7761,
+      "sourceSha256": "7e6da083deba8b236a705bf51b23fb9de5ed067bc76b840ca5154e3062da281c"
+    },
+    {
+      "gitBlobSha1": "79594dc4fc445adfd704ed06cb4b563fb6fd8ae5",
+      "goBuild": [],
+      "headerBytes": 619,
+      "headerSha256": "7fb9971654cce6702a93aaa546140633342892f09cb2dce12f4abd918e766f2f",
+      "package": "bridge",
+      "path": "pkg/bridge/convert.go",
+      "plusBuild": [],
+      "sourceBytes": 9643,
+      "sourceSha256": "c4b75f0e4a4d99d4ec2e47c8f68c5097b40b9a0163ca6ce78ce0be80a7757c81"
+    },
+    {
+      "gitBlobSha1": "de0e5cdaa38b836cd442813ca1840b10b5ce37cf",
+      "goBuild": [],
+      "headerBytes": 619,
+      "headerSha256": "1bdc69168c546d975f13b54e4cc9be90a28e9ed38b3a031b7e6c966b2774061e",
+      "package": "bridge",
+      "path": "pkg/bridge/convert_test.go",
+      "plusBuild": [],
+      "sourceBytes": 4253,
+      "sourceSha256": "67c3dadd9f18ac8f6614cc004ecd2900d3517f39b3588a5ab47c17dfda28c8b7"
+    },
+    {
+      "gitBlobSha1": "9db2a508fb2c498b09ce4ab4cb9d2e3d85624b8f",
+      "goBuild": [],
+      "headerBytes": 619,
+      "headerSha256": "7fb9971654cce6702a93aaa546140633342892f09cb2dce12f4abd918e766f2f",
+      "package": "bridge",
+      "path": "pkg/bridge/transformers.go",
+      "plusBuild": [],
+      "sourceBytes": 3230,
+      "sourceSha256": "1a59e6011c6d3791f0813ebf63d55857e263f68a568521d1f9fbed7079851c41"
+    },
+    {
+      "gitBlobSha1": "2829ddfb000ad849d584ba05204fa6a7c3f5f2ac",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/apiSocket.go",
+      "plusBuild": [],
+      "sourceBytes": 3416,
+      "sourceSha256": "60125a1a52a5c0bd246f2488e4a4e9e706291fd74da26752cd1d50e60e9d308d"
+    },
+    {
+      "gitBlobSha1": "eb1ece2e2abdfbfad0c1779fbd7fdb1cb9ab1c97",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "94a2c4a631d9d24472f24d15aa4aa4dce820c19c3cb560b39bf4c405843d0510",
+      "package": "compose",
+      "path": "pkg/compose/apiSocket_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2145,
+      "sourceSha256": "59f26ee95d04a855a27047089929d4cfd77cf52b68f547e3fdb38b139dc1b501"
+    },
+    {
+      "gitBlobSha1": "4bb4d23416371dc978fe5c241c11b53af59572b5",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/api_versions.go",
+      "plusBuild": [],
+      "sourceBytes": 2882,
+      "sourceSha256": "a56c4ecda6a270991012945574fb172f016ea60bc9039b02d638fecf912391a1"
+    },
+    {
+      "gitBlobSha1": "a03f97f87cee26a2e1be91287ae59bad785069ef",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/attach.go",
+      "plusBuild": [],
+      "sourceBytes": 4200,
+      "sourceSha256": "6915ae76883129082153e95e43fb5ecf86a77afaeaedddb48c16b85d2396f1ed"
+    },
+    {
+      "gitBlobSha1": "c6209e022443056e820e5ceb7ed74a6cccf29229",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/attach_service.go",
+      "plusBuild": [],
+      "sourceBytes": 1344,
+      "sourceSha256": "255ce6faed0a6be6fc1db02b6bcce4ee14b57a6322543e603b818e1730843d58"
+    },
+    {
+      "gitBlobSha1": "e70b16d5e01e53bda36f0b69696792ad7b3041c2",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/build.go",
+      "plusBuild": [],
+      "sourceBytes": 11863,
+      "sourceSha256": "1fb74fdd3e6132928c9dd365615230d67972ae087e3ef11332c05d7540d50715"
+    },
+    {
+      "gitBlobSha1": "4ae20b303f901b7194e2bf98785c4cc87053da8f",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/build_bake.go",
+      "plusBuild": [],
+      "sourceBytes": 27476,
+      "sourceSha256": "8a798925ede7832559f9fe6fc84c2aec3949894e6bc71150c77906819e93264e"
+    },
+    {
+      "gitBlobSha1": "da77eb944a8aa6a0fdc3d941975fdbca92ab4740",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/build_bake_test.go",
+      "plusBuild": [],
+      "sourceBytes": 20405,
+      "sourceSha256": "e0873d6c59068d5c0f180062cc3ac365260b5494011daf80e72b01a1481668e9"
+    },
+    {
+      "gitBlobSha1": "a6e21320292c5ab68701a2dd1a1704925144b0bc",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/build_classic.go",
+      "plusBuild": [],
+      "sourceBytes": 12637,
+      "sourceSha256": "f2a011c9497ab49725313ff77a9f190d0c89f6f3899fb756a8c28bde80af2c89"
+    },
+    {
+      "gitBlobSha1": "1dbba84de6bb333935bbf0e6d651960aa4acb7a8",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/build_test.go",
+      "plusBuild": [],
+      "sourceBytes": 7125,
+      "sourceSha256": "ceb312636535b40b98bd5008e382e03500c7ae11e91d5b054f46f5f4c097475b"
+    },
+    {
+      "gitBlobSha1": "a78c80436530e4799d144d603cffcb45a7b1baf6",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/compose.go",
+      "plusBuild": [],
+      "sourceBytes": 19174,
+      "sourceSha256": "a53b4a3d53a64dfa46539bc97de2b332bd92ac8c8b691f17a5cc764c47758dc9"
+    },
+    {
+      "gitBlobSha1": "81f478e7386c7dbaca5a5c568d774b07a3602e7a",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "94a2c4a631d9d24472f24d15aa4aa4dce820c19c3cb560b39bf4c405843d0510",
+      "package": "compose",
+      "path": "pkg/compose/compose_test.go",
+      "plusBuild": [],
+      "sourceBytes": 3424,
+      "sourceSha256": "df08c820950347bb46f4601710d1a323b612f3409295b5298d3bdf724f71d544"
+    },
+    {
+      "gitBlobSha1": "7e503153f8f63a1906b2e48a62c41c4986670875",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/container.go",
+      "plusBuild": [],
+      "sourceBytes": 1459,
+      "sourceSha256": "0add8913b6dc39be52d29833ae6934355675cc418a890e12b93e52bcf56141ad"
+    },
+    {
+      "gitBlobSha1": "a7897a809959b3a59834116b022e4e033ab3d6dc",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/containerops.go",
+      "plusBuild": [],
+      "sourceBytes": 3124,
+      "sourceSha256": "f29e54b983476740106d5a7bb9e8bb62b5517bac192403753090c8e7d227cf8c"
+    },
+    {
+      "gitBlobSha1": "207f0dc1d44580ba04bd9578a6ee9c8756a9ffef",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/containers.go",
+      "plusBuild": [],
+      "sourceBytes": 8023,
+      "sourceSha256": "635d49be6d0a65898091129a5e4f87891f6e1071aaeb0f405e9c1ee5f47bc411"
+    },
+    {
+      "gitBlobSha1": "ae85cb373b76204906fd85bd6e98e70d579c51d0",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/containers_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2663,
+      "sourceSha256": "4cf2e38cc7419412f7f11a045d0af0a6e94e6983ab442721d6757bfa7e8a73b0"
+    },
+    {
+      "gitBlobSha1": "a854564f63dd1d4bbc9e0f8a52db81722201bfc2",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/convert.go",
+      "plusBuild": [],
+      "sourceBytes": 2404,
+      "sourceSha256": "35de081805a508ec290d3dcbfb37a6360bb26ae600f8e660942eb8c11414d5aa"
+    },
+    {
+      "gitBlobSha1": "6a688211258bc01cd9109f21ec4fb0c8ba24506d",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/cp_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2678,
+      "sourceSha256": "71214bffdd42e850b1eda655667ec7160dddfa598e651fdf14c1059a829472de"
+    },
+    {
+      "gitBlobSha1": "193eca49606f9ec6ea1b6ad9bb14158fb807b80e",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/create.go",
+      "plusBuild": [],
+      "sourceBytes": 52258,
+      "sourceSha256": "ff5d4235f48b625deb6f4c554c0c93e680ee3667f875ef7c4f86d61286d4f6ac"
+    },
+    {
+      "gitBlobSha1": "41090d940525a4c2a2277ab4ea881f1acf734011",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/create_test.go",
+      "plusBuild": [],
+      "sourceBytes": 16119,
+      "sourceSha256": "3bbba720ea884be23b321778a0d05dd1f96bb15743cdea54acd3db674d044a97"
+    },
+    {
+      "gitBlobSha1": "4917b20e82ff1b8bf2c85d4f3cb91d304889996b",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/dependencies.go",
+      "plusBuild": [],
+      "sourceBytes": 12145,
+      "sourceSha256": "a0b183e21ad66989df987311941d4ffc14f15cc5aa6ddb1f4b2aa538ac11ccb4"
+    },
+    {
+      "gitBlobSha1": "af11f0c7a89e3a35e1b0125829e728f17d4fb1ae",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/dependencies_test.go",
+      "plusBuild": [],
+      "sourceBytes": 11469,
+      "sourceSha256": "77e29d44c325b059b1877b547407621aebf4b4c3bdc18ef478715db3dd8dfa01"
+    },
+    {
+      "gitBlobSha1": "8506ab3a10112d5798bbe6aa28990602e89c6098",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/dependency_wait.go",
+      "plusBuild": [],
+      "sourceBytes": 13619,
+      "sourceSha256": "9e477a20fc9b0ee4fc64ded83236006e04a851fb7faba5234d13bf41e31286d8"
+    },
+    {
+      "gitBlobSha1": "0e22ebfe62d14edd31a17f82bceec8ea4ceff9af",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/dependency_wait_test.go",
+      "plusBuild": [],
+      "sourceBytes": 32635,
+      "sourceSha256": "34f702b221cb801ba6141bff3b2ae3bf31528623edcdd9691e93e0db5eec885a"
+    },
+    {
+      "gitBlobSha1": "d237ea02e8cb82cffd4a966b46a59641d543ddf2",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "305c430cd945e775af0ee031740befca5eea16e976d3c23c47c94781a9c56010",
+      "package": "compose",
+      "path": "pkg/compose/desktop.go",
+      "plusBuild": [],
+      "sourceBytes": 1262,
+      "sourceSha256": "a7a49e926bf6b4e7bf3cd51003abdbed4ca6eae75dd7c16b7f96bb2c30f17f59"
+    },
+    {
+      "gitBlobSha1": "207fa3e37a72ea6b391afbefc16400f8592fa55f",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/docker_cli_providers.go",
+      "plusBuild": [],
+      "sourceBytes": 1075,
+      "sourceSha256": "cc8bee48253646cfac033d7bc173e60ebbdd33c2e21a8e940442f8ebf29ef984"
+    },
+    {
+      "gitBlobSha1": "a31419639a34dd3b8046214e2e2880b83513fb5f",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/down.go",
+      "plusBuild": [],
+      "sourceBytes": 21409,
+      "sourceSha256": "d94816ee3525cfaf24602654619d397db53f9fce7f95914a474929ee815156c5"
+    },
+    {
+      "gitBlobSha1": "29678f348f21cbbc3cd770b3b358bbee99135dd2",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/down_test.go",
+      "plusBuild": [],
+      "sourceBytes": 66656,
+      "sourceSha256": "d290dc9172665d4b897b240f6ce7eca786f4e68274b8ddbaa916b5931a4d7fb7"
+    },
+    {
+      "gitBlobSha1": "cdf548f9cc80f51087bb4772eb5e225029c94849",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/envresolver.go",
+      "plusBuild": [],
+      "sourceBytes": 2240,
+      "sourceSha256": "828551a5e2414f8aec2b5cd80d9594e4e81ff05c5b17fdaa345cf0032b8ede91"
+    },
+    {
+      "gitBlobSha1": "c4cbecf536d71b1988c74ab59b8c9600fbbd74e6",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/envresolver_test.go",
+      "plusBuild": [],
+      "sourceBytes": 3516,
+      "sourceSha256": "a7e904c156f6f9f0cdaf8902607f5b79d1d25457cb71d517b07c505e8f876e7f"
+    },
+    {
+      "gitBlobSha1": "182d8456c79c1e4e78a6055df76134eba30070e9",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/executor.go",
+      "plusBuild": [],
+      "sourceBytes": 25872,
+      "sourceSha256": "b691d821be23073e88d2ed8e10e8a93bcf1c1b23e8a393aa54192f5c5d11b346"
+    },
+    {
+      "gitBlobSha1": "c10a96e5cca61aaccd7472db15cc0ef5d9e27a71",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/executor_events.go",
+      "plusBuild": [],
+      "sourceBytes": 14230,
+      "sourceSha256": "c2ec1e7fca8606d8ff99dc0a5a70c4bc5616e693fcbd74741cdb2b92e698d30a"
+    },
+    {
+      "gitBlobSha1": "764ce7a050fc05d474514205193e4030ffd9dd37",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/executor_ops.go",
+      "plusBuild": [],
+      "sourceBytes": 17637,
+      "sourceSha256": "bd56d1799af5d5447b5f408c661ea5b3bb4e580c68a92d82693e24ab674426d2"
+    },
+    {
+      "gitBlobSha1": "81ca2b3c91436947538dc809b90f2fce959dbdbb",
+      "goBuild": [
+        "!windows"
+      ],
+      "headerBytes": 641,
+      "headerSha256": "be0c6a3f0d43d07dee6e2ff7f74ed6056e512bf2eec34f9743b6f66f40a3f1c7",
+      "package": "compose",
+      "path": "pkg/compose/executor_start_test.go",
+      "plusBuild": [],
+      "sourceBytes": 91714,
+      "sourceSha256": "9ed91f75d1a79ecdea7989b5f84bcdbfbbe2a908b88b0a049280be571f3b9148"
+    },
+    {
+      "gitBlobSha1": "dcde72f8a41c0f41bdefa40c55d0b95ae5b1ddbb",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/executor_test.go",
+      "plusBuild": [],
+      "sourceBytes": 28367,
+      "sourceSha256": "0a1ac77db1e01a89f00c3fbccf539917a8291070a94323d404dff45367ebe15f"
+    },
+    {
+      "gitBlobSha1": "c820eed006d3503f17c550078c9d53c4111cfc29",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "94a2c4a631d9d24472f24d15aa4aa4dce820c19c3cb560b39bf4c405843d0510",
+      "package": "compose",
+      "path": "pkg/compose/executor_wait_slot_test.go",
+      "plusBuild": [],
+      "sourceBytes": 4094,
+      "sourceSha256": "705e96f2048f1012cd1da1659144e8cda966416503f2746eb0673aa073fb1789"
+    },
+    {
+      "gitBlobSha1": "4df2c20d496085922df7fa9d140a2c4e91d96c67",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/filters.go",
+      "plusBuild": [],
+      "sourceBytes": 1772,
+      "sourceSha256": "af8c666baf29f0f2ec7ab628d65744b16d0c616c26d73724ca374014d9ed3681"
+    },
+    {
+      "gitBlobSha1": "5da2c39750fed9e91e11e8b2874c091d6c56d60e",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/hash.go",
+      "plusBuild": [],
+      "sourceBytes": 6301,
+      "sourceSha256": "6949edc538b9b8658407214c0d0ba57b0659143264dc360c8558c8fe6eb6395e"
+    },
+    {
+      "gitBlobSha1": "22a01a5c3e0c75c73be96d2d818d0de10d152e88",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/hash_test.go",
+      "plusBuild": [],
+      "sourceBytes": 6256,
+      "sourceSha256": "353fee42ddd9739cdd4d99d658822bb69d531e04c511f56221fdba899be8541c"
+    },
+    {
+      "gitBlobSha1": "cb265529869d56fd1530e0ed4d9b927288fc51ad",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/hook.go",
+      "plusBuild": [],
+      "sourceBytes": 7162,
+      "sourceSha256": "f29057ed109dd2770e44de37f402f1217e88630db6ce512899cf390215474fe6"
+    },
+    {
+      "gitBlobSha1": "1d768fc9e41d0e2032edae76c6d4cb0ce2502715",
+      "goBuild": [
+        "!windows"
+      ],
+      "headerBytes": 641,
+      "headerSha256": "be0c6a3f0d43d07dee6e2ff7f74ed6056e512bf2eec34f9743b6f66f40a3f1c7",
+      "package": "compose",
+      "path": "pkg/compose/hook_test.go",
+      "plusBuild": [],
+      "sourceBytes": 21861,
+      "sourceSha256": "585446972c98d502150121c4db3732e7ce18cb21b64555a8240c96d8421c62e4"
+    },
+    {
+      "gitBlobSha1": "88d5ab9b647e5ec067a49347cf5dad1b41caab54",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "2f18f84578971d9f1555d7706bd3f3aa628b93401367fa5ee6d4466cda53ca7d",
+      "package": "compose",
+      "path": "pkg/compose/image_pruner.go",
+      "plusBuild": [],
+      "sourceBytes": 11614,
+      "sourceSha256": "551e2e58207a4201484cc7096ea2cccfb1c1084f49f154e3f3957d0df54129d7"
+    },
+    {
+      "gitBlobSha1": "1cf7c1b969bfe80b774ea091c2819bb4eeb8d1da",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "94a2c4a631d9d24472f24d15aa4aa4dce820c19c3cb560b39bf4c405843d0510",
+      "package": "compose",
+      "path": "pkg/compose/image_pruner_test.go",
+      "plusBuild": [],
+      "sourceBytes": 6714,
+      "sourceSha256": "2f84dc782a8540a7d81ade6d2e5e344c4eb100c23e08ee879220425cd62addd4"
+    },
+    {
+      "gitBlobSha1": "b20bb35539530e5b02029096948922fd38db1a20",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/images.go",
+      "plusBuild": [],
+      "sourceBytes": 14225,
+      "sourceSha256": "ea40dbbbd7a6bad3ae1d57421c4155e8a0b8564110275ef4ac28f66d564a607f"
+    },
+    {
+      "gitBlobSha1": "53921e97b2dab64d11c721f090d50eda3df2cb6c",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "305c430cd945e775af0ee031740befca5eea16e976d3c23c47c94781a9c56010",
+      "package": "compose",
+      "path": "pkg/compose/images_test.go",
+      "plusBuild": [],
+      "sourceBytes": 22817,
+      "sourceSha256": "a1aaab16eab273b4156e5e97f0f04072a43d6070647ca9c33e3c1f94c2ef40aa"
+    },
+    {
+      "gitBlobSha1": "fe769f4daa623566a31cd038b2760c2089a2b0d5",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/inspect.go",
+      "plusBuild": [],
+      "sourceBytes": 3298,
+      "sourceSha256": "c58f681ee80527b2a8d4f76e84baa9b20a0d8efffe87459a25a06cc7c0c23b23"
+    },
+    {
+      "gitBlobSha1": "b149c1103ea83731c556b936700e5f323a9417af",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/kill.go",
+      "plusBuild": [],
+      "sourceBytes": 2159,
+      "sourceSha256": "a0abd3b958dd02712ed156e645c212680ac524b44e7bc96d4d51f6b2255373d0"
+    },
+    {
+      "gitBlobSha1": "a55ea6f2d90ad74ed45396d69691f8c269cd6449",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/kill_test.go",
+      "plusBuild": [],
+      "sourceBytes": 5281,
+      "sourceSha256": "6e658c90841023ce4a29b50d7c7b55b4cc1bf4255e3373b09105b08ff623b12b"
+    },
+    {
+      "gitBlobSha1": "4d0c043815d7f16a493401070f9a1b8e88907538",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/logs.go",
+      "plusBuild": [],
+      "sourceBytes": 14942,
+      "sourceSha256": "5ecbe6ba8abc57996d162593059b4763c90861de042ceb4785819062e82f3dc7"
+    },
+    {
+      "gitBlobSha1": "3135a91e24b28ad1ba6cf1013fec047193e219ac",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/logs_cursor_test.go",
+      "plusBuild": [],
+      "sourceBytes": 17732,
+      "sourceSha256": "d674f58faba513867efdfe6a9c6071deab4671d47a4c832804b57119e4ce4d2a"
+    },
+    {
+      "gitBlobSha1": "413b1a0934391fa4767ab597af75bdad8a4d7605",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "2f18f84578971d9f1555d7706bd3f3aa628b93401367fa5ee6d4466cda53ca7d",
+      "package": "compose",
+      "path": "pkg/compose/logs_test.go",
+      "plusBuild": [],
+      "sourceBytes": 22990,
+      "sourceSha256": "08a261987780c7ac4cbca29c10c34dd7ac46280eeabc572e207774b4557ae0ab"
+    },
+    {
+      "gitBlobSha1": "e62b71c9a8ad4c0f198c26dea280e330d99b6785",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/model.go",
+      "plusBuild": [],
+      "sourceBytes": 7794,
+      "sourceSha256": "8b350576a2472d3dfb002b1b8d46d55eeae6d7e6b90c30971574a23415856f12"
+    },
+    {
+      "gitBlobSha1": "32fa16198f657584c807fcb84582c3ca817f6de2",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/model_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2779,
+      "sourceSha256": "409917c50960ef4f3f41d702d2aefe2d936206e41d87875e7bd4a0911482f6bb"
+    },
+    {
+      "gitBlobSha1": "0a353d7c3616a204a636306f98a1ea1eda754fcc",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/monitor.go",
+      "plusBuild": [],
+      "sourceBytes": 18422,
+      "sourceSha256": "209d333c9eb725639c3339656ce1cf7f62bb1d589593d2462eeda2c978b440e1"
+    },
+    {
+      "gitBlobSha1": "a3d1d5ccff2078096549afd94243fb594e8e2558",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/monitor_test.go",
+      "plusBuild": [],
+      "sourceBytes": 39966,
+      "sourceSha256": "69b3240702232a09066207cc8758f386c152e7fb516922a05d643e5616a925dc"
+    },
+    {
+      "gitBlobSha1": "1921be495b0538d3067064e1bdab1dc491eeb318",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/navigation_menu.go",
+      "plusBuild": [],
+      "sourceBytes": 2710,
+      "sourceSha256": "48851194c8245be0feeee090a841073279d939d0d3e7db2c64d7a74d949ddd92"
+    },
+    {
+      "gitBlobSha1": "026c932b4e6df81d2955b86f73f7b5c390894ecf",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/observed_state.go",
+      "plusBuild": [],
+      "sourceBytes": 20745,
+      "sourceSha256": "3070129842486748097fe2a4aa6167cdcce7c39cef529e0174d3be7426e97710"
+    },
+    {
+      "gitBlobSha1": "8926569585c055c39a7a8bc91fe1086bd76fdcf0",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/observed_state_test.go",
+      "plusBuild": [],
+      "sourceBytes": 33287,
+      "sourceSha256": "c75c0d6a9f473ca4c43c83ba36b10439f896c00074aa7e96d27385d3d63c5854"
+    },
+    {
+      "gitBlobSha1": "5e7c3a75777f8d2296379eaf62d68ec0f2fc05f8",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/pause.go",
+      "plusBuild": [],
+      "sourceBytes": 2633,
+      "sourceSha256": "3dda79f38bd6e58a273e43c06ff44d0ab3154a5632862a8c9bc07d91393da04c"
+    },
+    {
+      "gitBlobSha1": "2a0e361b79ced6b7fa184dfc9b75a3563dd3d53a",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/plan.go",
+      "plusBuild": [],
+      "sourceBytes": 7210,
+      "sourceSha256": "7918f08c650d623861a9c45f03e949be32454af5d23300f0e45d598b2c4f6c25"
+    },
+    {
+      "gitBlobSha1": "5ac61444e3e85d9872b66fa0dd54d1d786a759fd",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/plan_test.go",
+      "plusBuild": [],
+      "sourceBytes": 4276,
+      "sourceSha256": "984f9c6344bf266f787208b2b8e288cf988356a61ff87ece9933000e0ad2cdb3"
+    },
+    {
+      "gitBlobSha1": "fe33f2a75ab63901d90f193e6060badaeb087d44",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/plugins.go",
+      "plusBuild": [],
+      "sourceBytes": 3217,
+      "sourceSha256": "157854ebae7b19dc2ce779ef2fe74f4b7a0e012c6a63968578811511bc5b9850"
+    },
+    {
+      "gitBlobSha1": "ca9dbe2d981ea7b42ab3bcb141bd34b04c36dee6",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "94a2c4a631d9d24472f24d15aa4aa4dce820c19c3cb560b39bf4c405843d0510",
+      "package": "compose",
+      "path": "pkg/compose/plugins_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1315,
+      "sourceSha256": "76a91c13e61eb00d9d973d11434c19de77c3925815fbcb110799caa7543bf3f2"
+    },
+    {
+      "gitBlobSha1": "efecb43c8b95ae7c9a18bd7bddc0bbaf403a619e",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/port_test.go",
+      "plusBuild": [],
+      "sourceBytes": 3324,
+      "sourceSha256": "4206f65d525f186c468747a24ecdc28b6f723341b0f94af6c4cf7c0bc1657bca"
+    },
+    {
+      "gitBlobSha1": "9b0cda031b7755a1c7f5158f489d43eac2d31e2b",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/pre_start.go",
+      "plusBuild": [],
+      "sourceBytes": 21758,
+      "sourceSha256": "444539e0b0d5caccb8e2b091e1eeb15a375d4442f2d319265b2378fd90b0a511"
+    },
+    {
+      "gitBlobSha1": "7fc70d32a0f0a3c46a55e6d97df12254bdfc04f0",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/pre_start_test.go",
+      "plusBuild": [],
+      "sourceBytes": 57901,
+      "sourceSha256": "fc62c3d5672df23b61ea41a96ce91161f884de5d30f48c1eb148069e9a8fc381"
+    },
+    {
+      "gitBlobSha1": "6fe6b9fda6e4b3949057d6ed9618d80c8f573f7f",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/printer.go",
+      "plusBuild": [],
+      "sourceBytes": 1700,
+      "sourceSha256": "b83153c304e02561afe54b4a9bd83987ba4837fc00b5f0f1a1907d2562bd68b2"
+    },
+    {
+      "gitBlobSha1": "7defdf2e55dd84d4d3508ae237ff6b292f72eaae",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/progress.go",
+      "plusBuild": [],
+      "sourceBytes": 3811,
+      "sourceSha256": "2dee21105b03fe276dd2412f03442998dd502ee1863397a0472506e5c955d61a"
+    },
+    {
+      "gitBlobSha1": "049a4f99c40fe04d2beedc6627bb0c1d0119b9a9",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/projectloader.go",
+      "plusBuild": [],
+      "sourceBytes": 1992,
+      "sourceSha256": "ffdf6a898e6bc8a2589d37a1e0ba080c6ed3d9f9e55b02735ada3fc6889be3c0"
+    },
+    {
+      "gitBlobSha1": "15692b6db4502d662df2fda39cfcc7c567a7e031",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/provider_images.go",
+      "plusBuild": [],
+      "sourceBytes": 5948,
+      "sourceSha256": "1bc86c7246bc0a870dc8f02624064aa1c8a72d65efa815c608fdd470fdbfb81b"
+    },
+    {
+      "gitBlobSha1": "980dec451a72e911ccb443f2f6dd7f8b3d2cf504",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/provider_images_test.go",
+      "plusBuild": [],
+      "sourceBytes": 4959,
+      "sourceSha256": "7164bb213b1a6172754f549b9595aeca3fc4798a9f2f94ed0e7ca4d3c4200bbf"
+    },
+    {
+      "gitBlobSha1": "390da28353c8c5aae741b9f2c9349e15d2585a85",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/ps_test.go",
+      "plusBuild": [],
+      "sourceBytes": 4528,
+      "sourceSha256": "57a40ab0f3374c3345a2d78b4fca814c40371cbc47268d95d4536e66b0c19629"
+    },
+    {
+      "gitBlobSha1": "b3616030dfe61d3e6109f321293dc100b2c9f885",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/publish.go",
+      "plusBuild": [],
+      "sourceBytes": 28860,
+      "sourceSha256": "be1561770bc3666964b6a256cbc6c8551ca20a88bc2a5cee25028b4012643c3a"
+    },
+    {
+      "gitBlobSha1": "79b3884da575ddfd390966f074014649d96e3da6",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/publish_test.go",
+      "plusBuild": [],
+      "sourceBytes": 27707,
+      "sourceSha256": "1cd46be7815d26428cd17ddc7fc50665cc2515997ac4927ee1ba2ba0a1ba5d45"
+    },
+    {
+      "gitBlobSha1": "e55655a5c10a9bbd8c9cdf0fda8c1f155dd6363b",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/pull.go",
+      "plusBuild": [],
+      "sourceBytes": 21089,
+      "sourceSha256": "fb0567e54ddf7b43c53ea9a3939acf4d73dd38f71070b0f4e10d27f2edc4c495"
+    },
+    {
+      "gitBlobSha1": "f9a353968ca5374921ef089adaa3c004133112ef",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/pull_test.go",
+      "plusBuild": [],
+      "sourceBytes": 12887,
+      "sourceSha256": "5614e9a5c80735b660bbe8ae9b29b01e35d7a34d6f38e4855e2445c606a635ff"
+    },
+    {
+      "gitBlobSha1": "1ea0787665a18dbc7e8836e6c06d7eaa4311401f",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/push.go",
+      "plusBuild": [],
+      "sourceBytes": 5625,
+      "sourceSha256": "2832265a050ed2a925b9c5b5a2df9f1aca64770012815ffaefe1297b7092881f"
+    },
+    {
+      "gitBlobSha1": "0477db2006dc07f496d6ef99e63996373d446b38",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/push_test.go",
+      "plusBuild": [],
+      "sourceBytes": 6970,
+      "sourceSha256": "68745ea4a35c852fe81ef4b849fc8b642458299dbb281a104d285ff154875618"
+    },
+    {
+      "gitBlobSha1": "e934105aab9149cc8504af89d77648943710f93a",
+      "goBuild": [],
+      "headerBytes": 618,
+      "headerSha256": "3e6578ed065e2da88e3c4c4c18e20201612353c849102767a5920da5b3763557",
+      "package": "compose",
+      "path": "pkg/compose/rebuild_scheduler.go",
+      "plusBuild": [],
+      "sourceBytes": 5125,
+      "sourceSha256": "aa43fee4f76191806047fa5c2285f2ac77f1715a0f31e8a4f82007dfcf299f33"
+    },
+    {
+      "gitBlobSha1": "f4f17426c99cd3a04e2a25047121f77c2d77f048",
+      "goBuild": [],
+      "headerBytes": 618,
+      "headerSha256": "3e6578ed065e2da88e3c4c4c18e20201612353c849102767a5920da5b3763557",
+      "package": "compose",
+      "path": "pkg/compose/rebuild_scheduler_test.go",
+      "plusBuild": [],
+      "sourceBytes": 12998,
+      "sourceSha256": "b8b0d9fcb85be8d077049e25c5b011cd774c549b8aa0f7b2462bc4b6dd50e2da"
+    },
+    {
+      "gitBlobSha1": "fe1886b06a5a3228be71577f89f5e67c32ca945e",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/reconcile.go",
+      "plusBuild": [],
+      "sourceBytes": 73113,
+      "sourceSha256": "3b8f9e832a5232c0749e119bc1f01f8243b99ed822923d43e9af1eb15f9f7796"
+    },
+    {
+      "gitBlobSha1": "768f4421022bb700d3012459912091c80d82659e",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/reconcile_start_test.go",
+      "plusBuild": [],
+      "sourceBytes": 55336,
+      "sourceSha256": "6f3c964c91330f3172e631f8bc593c7d9a3e126d9229900e768a5289ab651432"
+    },
+    {
+      "gitBlobSha1": "b70184cfacb766fa939177af1a6df0f75b396b55",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/reconcile_test.go",
+      "plusBuild": [],
+      "sourceBytes": 92296,
+      "sourceSha256": "b53c2b2b9babce8c69ce6e01228fcc9d0d190e451b086aa480ecd7cd5151ceb8"
+    },
+    {
+      "gitBlobSha1": "28241197cc8f1e76b61dffb3d472796605af25dc",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/relay.go",
+      "plusBuild": [],
+      "sourceBytes": 2746,
+      "sourceSha256": "d544ae954f1e08001e2f2d87f440e3db7bf25d34e249474c3f83fc50ee1fec30"
+    },
+    {
+      "gitBlobSha1": "f4aef074fccb60b9aad5509372695bb80e9f7de6",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/relay_test.go",
+      "plusBuild": [],
+      "sourceBytes": 8351,
+      "sourceSha256": "2c18d70b5d0656506787d38fcefc5f2c3bf75087b6306da5ccda418fc0c3e76f"
+    },
+    {
+      "gitBlobSha1": "98151f4313a74c1917433ee7e2be7a3489dd9e8c",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/remove.go",
+      "plusBuild": [],
+      "sourceBytes": 3203,
+      "sourceSha256": "cc9cf16a6614404e3ce682b4e07b5a2c075157e9a916c1045ef0dae3c9e8b288"
+    },
+    {
+      "gitBlobSha1": "5c8c74fc2e4657ee5a7f7b3dfcd61d2010a447fa",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/restart.go",
+      "plusBuild": [],
+      "sourceBytes": 4621,
+      "sourceSha256": "fd2b872d25697e8cc34ab1c8da614a518f598f9bb643594f2b8686eda0faf44d"
+    },
+    {
+      "gitBlobSha1": "f74dd8f6ed6386026f901d2873bb4946a6af5d01",
+      "goBuild": [
+        "!windows"
+      ],
+      "headerBytes": 641,
+      "headerSha256": "be0c6a3f0d43d07dee6e2ff7f74ed6056e512bf2eec34f9743b6f66f40a3f1c7",
+      "package": "compose",
+      "path": "pkg/compose/restart_test.go",
+      "plusBuild": [],
+      "sourceBytes": 8583,
+      "sourceSha256": "94bfb3a54f6ca7dfca4321c6637571bef9dc9d67998297e0408588660d7bbf42"
+    },
+    {
+      "gitBlobSha1": "96b38d54776efc22bdd1ca2b96c4704e099b309d",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/run.go",
+      "plusBuild": [],
+      "sourceBytes": 10288,
+      "sourceSha256": "835306f54a8d43d79274db43c1c28965261942b986fd1daf4fc0be99e1881159"
+    },
+    {
+      "gitBlobSha1": "099457f9878f3814d3689831dbb21d8279e133a1",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/run_test.go",
+      "plusBuild": [],
+      "sourceBytes": 4719,
+      "sourceSha256": "74df3769664770796437eaabc493b48b0400ab30a5afb1b999df01f6157995c7"
+    },
+    {
+      "gitBlobSha1": "d82133c1c297149a583726b94bbf3da4dbc1453a",
+      "goBuild": [],
+      "headerBytes": 586,
+      "headerSha256": "42c3a8c8081305ddecb658e491192a2ad879eeb9880b4a5911c3d679d7e75639",
+      "package": "compose",
+      "path": "pkg/compose/scale.go",
+      "plusBuild": [],
+      "sourceBytes": 1729,
+      "sourceSha256": "dce684e68f7cd6eac472b16dbf9e22a4d31fe0ac862d99f788bac0ec3cb3cce4"
+    },
+    {
+      "gitBlobSha1": "21a48e117662febd80423c68a7c08d5ea2b49578",
+      "goBuild": [],
+      "headerBytes": 586,
+      "headerSha256": "42c3a8c8081305ddecb658e491192a2ad879eeb9880b4a5911c3d679d7e75639",
+      "package": "compose",
+      "path": "pkg/compose/scale_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1257,
+      "sourceSha256": "ce3613674d760b3e7eb427853d1f6948ddf9bc9701d789b8d8374b25a16e5bed"
+    },
+    {
+      "gitBlobSha1": "39051b62aebdef798fa9a70c5791fe9a2d743f0e",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/secrets.go",
+      "plusBuild": [],
+      "sourceBytes": 4993,
+      "sourceSha256": "da656691c7fe3e2bf0a8e709e2dcd096c06d57e3b321518fc3b6b291cc178cef"
+    },
+    {
+      "gitBlobSha1": "b9aea13a3b05ae2517fc161833e233bcbe8e9565",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/service_containers.go",
+      "plusBuild": [],
+      "sourceBytes": 13307,
+      "sourceSha256": "b56e1d9118f3bda5af9d471f42bfd799185819027c6e9db6d2252592a2c3f51d"
+    },
+    {
+      "gitBlobSha1": "0d2ffb563c585eda05c359469d70dc09e98a9d03",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/service_containers_test.go",
+      "plusBuild": [],
+      "sourceBytes": 17863,
+      "sourceSha256": "a4f57b68dfc543615c51ca78368922b405b3fd5964865cd9eefddac45aa23fa7"
+    },
+    {
+      "gitBlobSha1": "06f007546a83104de5da8d75b3da141480909699",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/shellout.go",
+      "plusBuild": [],
+      "sourceBytes": 2946,
+      "sourceSha256": "b6b052d88b5fad9a3ee8f780b8f25da69c33c533efa73108a41ec279cd4cfc58"
+    },
+    {
+      "gitBlobSha1": "bae7710eb0687e5a4d9c5017f36a5ac0105ff41e",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/start.go",
+      "plusBuild": [],
+      "sourceBytes": 6105,
+      "sourceSha256": "21ecb91c1d29dad369325dbcc641f46156a3f46288f266cc12f4c12d14869bc6"
+    },
+    {
+      "gitBlobSha1": "da358cf64b5c10e2a972c59e23378dd2343899b4",
+      "goBuild": [
+        "!windows"
+      ],
+      "headerBytes": 641,
+      "headerSha256": "be0c6a3f0d43d07dee6e2ff7f74ed6056e512bf2eec34f9743b6f66f40a3f1c7",
+      "package": "compose",
+      "path": "pkg/compose/start_test.go",
+      "plusBuild": [],
+      "sourceBytes": 12806,
+      "sourceSha256": "5b6ca0b81dec712814e469641b03fda44397ccdf7a77e8be69073b02f0f8e102"
+    },
+    {
+      "gitBlobSha1": "c494dd4cfeca03f4e41cc47261db725aadd7c849",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/stop.go",
+      "plusBuild": [],
+      "sourceBytes": 2360,
+      "sourceSha256": "7bacafff6c317efff8579daf81c02744d249e8d2505b398c89d15eabff332649"
+    },
+    {
+      "gitBlobSha1": "3333277cf4f8876b2e84f7767f1ad19517b6af24",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/stop_test.go",
+      "plusBuild": [],
+      "sourceBytes": 3638,
+      "sourceSha256": "fb9fe9bb529809b3cf2fbdc4284940849ed300a23ec48d224c30a29be0dc7037"
+    },
+    {
+      "gitBlobSha1": "d15dc1d0bc75c8b3b80520b286cb71a4031ebcff",
+      "goBuild": [],
+      "headerBytes": 622,
+      "headerSha256": "c7305b8e7bdc9ea4336ea7db09bda6ddc2c9f0f58581ea249d2d776e99760361",
+      "package": "transform",
+      "path": "pkg/compose/transform/replace.go",
+      "plusBuild": [],
+      "sourceBytes": 3912,
+      "sourceSha256": "cff45f98977dfb6abc97be511c43fc388d67ddd3d2ca0969f65197925ad4c0f0"
+    },
+    {
+      "gitBlobSha1": "6f7477e0350a33925cd46f029f33ed6cd36ada7c",
+      "goBuild": [],
+      "headerBytes": 622,
+      "headerSha256": "c7305b8e7bdc9ea4336ea7db09bda6ddc2c9f0f58581ea249d2d776e99760361",
+      "package": "transform",
+      "path": "pkg/compose/transform/replace_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1674,
+      "sourceSha256": "2227db888654bd0319fed773ce2f93092fa2d2e5e521ea9dcd272f27718e11a1"
+    },
+    {
+      "gitBlobSha1": "c917f305b0b6beba967afa8768401b44f49a7287",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/umask_test.go",
+      "plusBuild": [],
+      "sourceBytes": 3679,
+      "sourceSha256": "6593340e821fb2aa0bda36e8c304d6751a82f79744c5d24e8b60fecadd8d8d0d"
+    },
+    {
+      "gitBlobSha1": "91971675640443f8d66072d4198355f96526d9a3",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/up.go",
+      "plusBuild": [],
+      "sourceBytes": 24213,
+      "sourceSha256": "1cda6f7a7174106a281fb7648f3ed18812ff617c97414289671ba5b868619705"
+    },
+    {
+      "gitBlobSha1": "ade5f3f78228df6ed4670c695127f8faaa5afb41",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/up_options_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2431,
+      "sourceSha256": "b163b5a4d7a19445144ce6c758138f82458dee8a732e25270d209b28dfcb75fa"
+    },
+    {
+      "gitBlobSha1": "9f6f14fd7a4522b938780fff25a70b971a557324",
+      "goBuild": [
+        "!windows"
+      ],
+      "headerBytes": 641,
+      "headerSha256": "03b4bc84d9f932ef4352a22fa8f41564c0afe8cd046dbdb5ce484541a1777de6",
+      "package": "compose",
+      "path": "pkg/compose/up_phases_test.go",
+      "plusBuild": [],
+      "sourceBytes": 20096,
+      "sourceSha256": "88b21f906d7618146a1c75ae7bed5660140e896e7a0db9d33f1e828f6273cb3c"
+    },
+    {
+      "gitBlobSha1": "69a6ce72305c0324bfd16a8b2d39698fac18935e",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/up_test.go",
+      "plusBuild": [],
+      "sourceBytes": 11291,
+      "sourceSha256": "7da2022d0ac2df1f2aca35c70052933ae2761a5bd3cf6d48236cab47125ee032"
+    },
+    {
+      "gitBlobSha1": "85c58e2b2a3dacd205993d00f58da6c78ed6fafc",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/viz_test.go",
+      "plusBuild": [],
+      "sourceBytes": 6118,
+      "sourceSha256": "62a0f5283218402c7273ac5d38304f6fa8868cca536b3c9f5897800b769e702c"
+    },
+    {
+      "gitBlobSha1": "c81045c59bc978c7e21b9f085f3e4acb9389529c",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/volumes_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2719,
+      "sourceSha256": "6769545d0342260c6699f8961292609c9376b3980d2411ddac34d48a623fc1d4"
+    },
+    {
+      "gitBlobSha1": "374febc248cb4e055a3f1947dbe4b8e1146f8022",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/wait.go",
+      "plusBuild": [],
+      "sourceBytes": 2947,
+      "sourceSha256": "0d50c393e23577a30b204e6a685085e7295c64771cc6ba723ba41eea36515dd3"
+    },
+    {
+      "gitBlobSha1": "49366311743e1411da357f35e60948d5748b7dd9",
+      "goBuild": [],
+      "headerBytes": 620,
+      "headerSha256": "f9c8b4923e7f547a8aef9d68f18601fb0538d92ba4cbf46d276b1585baa66c2e",
+      "package": "compose",
+      "path": "pkg/compose/wait_test.go",
+      "plusBuild": [],
+      "sourceBytes": 4366,
+      "sourceSha256": "daa3230bd771c032e44e4ec443834ffca0cf131a54f6d32c53bb18bcdf720c1b"
+    },
+    {
+      "gitBlobSha1": "2893965ffcc8bec39f442a2058c6a04f1a75439b",
+      "goBuild": [],
+      "headerBytes": 618,
+      "headerSha256": "22fb4854499cb06c380fce378c02cf87b41573fc7386ffbcb23bcdcf7b7e2dee",
+      "package": "compose",
+      "path": "pkg/compose/watch.go",
+      "plusBuild": [],
+      "sourceBytes": 26186,
+      "sourceSha256": "76fcc54c244a9ae288061c2c2d4ab101db82cad2eb93db48f288804c33088f52"
+    },
+    {
+      "gitBlobSha1": "bfce6e51be8152521def0e75fae1593989c4a4a1",
+      "goBuild": [],
+      "headerBytes": 618,
+      "headerSha256": "3e6578ed065e2da88e3c4c4c18e20201612353c849102767a5920da5b3763557",
+      "package": "compose",
+      "path": "pkg/compose/watch_test.go",
+      "plusBuild": [],
+      "sourceBytes": 18055,
+      "sourceSha256": "4468f939797753d90d1d45eb9722d3afbe7badcbd50b31ee7f5141065e1c618b"
+    },
+    {
+      "gitBlobSha1": "eb9e16a3f812efd552d22178d81adea88fdc83f3",
+      "goBuild": [],
+      "headerBytes": 619,
+      "headerSha256": "22186f63640d8dc01aa4785386d082291cd1fb442c64cd75cf80194c62be448e",
+      "package": "dryrun",
+      "path": "pkg/dryrun/dryrunclient.go",
+      "plusBuild": [],
+      "sourceBytes": 31358,
+      "sourceSha256": "0850bccf8a2ed95e5f39f55d09f4c36cd31c7812f51683739bc10049cd3ac17a"
+    },
+    {
+      "gitBlobSha1": "b13d7db5b7dcf02fa768e6fba94cfba90ebc3ed8",
+      "goBuild": [],
+      "headerBytes": 619,
+      "headerSha256": "22186f63640d8dc01aa4785386d082291cd1fb442c64cd75cf80194c62be448e",
+      "package": "dryrun",
+      "path": "pkg/dryrun/dryrunclient_test.go",
+      "plusBuild": [],
+      "sourceBytes": 5743,
+      "sourceSha256": "0c4d571309be2fb75e9b694f4e19ef85ba7a7b2e661fe137342b7ba78ced5126"
+    },
+    {
+      "gitBlobSha1": "aaaf78897421380090339e63539c7f4ffaf58951",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "c6ae4ab1b5eee04f6196901f5d4e597b3545033fd11eb5e225a1a66c6fe6f237",
+      "package": "e2e",
+      "path": "pkg/e2e/api_socket_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1617,
+      "sourceSha256": "5c501816b1e7ebbc5e8b7e0ccdc7bb2f83bca2f4fb929247ff6a590fca090b4b"
+    },
+    {
+      "gitBlobSha1": "1b94b7992396ba6aa13bf79e3e98f8e69789636f",
+      "goBuild": [],
+      "headerBytes": 616,
+      "headerSha256": "c1a344f83dbad4fa92a405d518b13e622434508332311618531ce100942d500e",
+      "package": "e2e",
+      "path": "pkg/e2e/assert.go",
+      "plusBuild": [],
+      "sourceBytes": 5414,
+      "sourceSha256": "82753f001f3eb6a7d701b8ad1300bd753c2b2684ad155dced01938563929fa9d"
+    },
+    {
+      "gitBlobSha1": "e8d572dd5ea7b547a749a1970dea46df0f11bce5",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "c6ae4ab1b5eee04f6196901f5d4e597b3545033fd11eb5e225a1a66c6fe6f237",
+      "package": "e2e",
+      "path": "pkg/e2e/bridge_convert_output_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2583,
+      "sourceSha256": "db7696f69b8644ba4048ace86a4723526485f6a8121fc965cd73d6486e3f4b48"
+    },
+    {
+      "gitBlobSha1": "5165d3c68900050f785d83617d52fa08ea17006c",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/bridge_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2835,
+      "sourceSha256": "0b4d2ac6e875cd8bdd21e770b094402d76268d77f8bb8a1141a918bb6f1b4422"
+    },
+    {
+      "gitBlobSha1": "a445f22f2bea314d5ccbd8b6fa205e7677a6850d",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/build_test.go",
+      "plusBuild": [],
+      "sourceBytes": 29790,
+      "sourceSha256": "ed898177614972e1e0f67a3302cb97ae144081db1d9cee418e046f416c97b747"
+    },
+    {
+      "gitBlobSha1": "4802d64abbc5fb1bc8333c3b144a1da93241909b",
+      "goBuild": [
+        "e2e && !windows"
+      ],
+      "headerBytes": 644,
+      "headerSha256": "d1f4107f309d5159c025f863a6e4f0a1e758fe437c47b1853a14dc9331494dd7",
+      "package": "e2e",
+      "path": "pkg/e2e/cancel_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2871,
+      "sourceSha256": "86f27e8a6073c086a5a7f89195ee4b5a09c3066d89ea50c6211910e3a37fe812"
+    },
+    {
+      "gitBlobSha1": "05cde708702c039c85bf6946d54106faa8a1f172",
+      "goBuild": [
+        "e2e && !windows"
+      ],
+      "headerBytes": 644,
+      "headerSha256": "ae3d8a055ea404357494d47ecd55478359b01c0094c0b7edfb197167b4c37ca7",
+      "package": "e2e",
+      "path": "pkg/e2e/cascade_test.go",
+      "plusBuild": [],
+      "sourceBytes": 3062,
+      "sourceSha256": "3d4331eae716d4f1449681afce31b982609b25fbc16399a6e90256c72afbdcb3"
+    },
+    {
+      "gitBlobSha1": "238e529be00c4162393f553f041d544984a381e1",
+      "goBuild": [],
+      "headerBytes": 616,
+      "headerSha256": "6eac1718109376d6c217fe9f367ca5fc87938ed2c27f185a3816237690506a04",
+      "package": "e2e",
+      "path": "pkg/e2e/checks.go",
+      "plusBuild": [],
+      "sourceBytes": 23887,
+      "sourceSha256": "a46c2dd55ad4644b3155244608d6a88c90ca7987b6f215e341f7fc9186a23efe"
+    },
+    {
+      "gitBlobSha1": "da3093feeec2f827b3de20b51a0f168e52e272c9",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "e81cfeadf2de3db8143039b9c5073f3097fcfb6696c61c0532916052cfb3aeea",
+      "package": "e2e",
+      "path": "pkg/e2e/commit_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2125,
+      "sourceSha256": "7899d1b71c776e112793c77e98d6879c4bf9a342305b7740a0a03f8ba4173247"
+    },
+    {
+      "gitBlobSha1": "447104c963dce1cdd4a29ef9a552aed6de1916d3",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/compose_environment_test.go",
+      "plusBuild": [],
+      "sourceBytes": 5812,
+      "sourceSha256": "e5cc0987866c0044daf40227a64458c6ffe61d6f5e3695521d4b4a5c69109ac9"
+    },
+    {
+      "gitBlobSha1": "b5cf163da93d5aa2fcc6d25ab5099cc7a276b82c",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/compose_exec_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2107,
+      "sourceSha256": "87c7ebc5af54605a4a38780e88bc8a9757eece17b087aa6d60a5fb8f44464f4b"
+    },
+    {
+      "gitBlobSha1": "608adfe127816e77cad5de10df7d831435dd0b07",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/compose_run_build_once_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2504,
+      "sourceSha256": "dec7799559191fcbf6ca52a493becb1c4dd49ac853b7bdfab0e6da09941e37cf"
+    },
+    {
+      "gitBlobSha1": "1bd9e4d3b73e5daefc6f36e8a3ac025257ec5bb5",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/compose_run_test.go",
+      "plusBuild": [],
+      "sourceBytes": 11171,
+      "sourceSha256": "275e4749310925f5d7bae0f06796d52839502bd972acfdb9311008cf2cbe3155"
+    },
+    {
+      "gitBlobSha1": "a33198de72b0d1745c367cc4c3c993543418fd5b",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/compose_test.go",
+      "plusBuild": [],
+      "sourceBytes": 12761,
+      "sourceSha256": "f565e2b6b6477166362034dcfce19bbd3b9e062a295d5404eaa95108fa5c4d20"
+    },
+    {
+      "gitBlobSha1": "97c5378758b3ffbcd49a59f77dc9f1a8ca1b0938",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/compose_up_test.go",
+      "plusBuild": [],
+      "sourceBytes": 4176,
+      "sourceSha256": "84d70c50025fa5663a7c6e189e3f36fec6c964bf4a03a09f4886f3b9b2788d9a"
+    },
+    {
+      "gitBlobSha1": "0be97c28ebde3463562e3935ec039d8ed281557d",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/config_test.go",
+      "plusBuild": [],
+      "sourceBytes": 4677,
+      "sourceSha256": "0895bbda2f8236383c6021df254144fbf12e4347cdf00cb65738db6c35f8f542"
+    },
+    {
+      "gitBlobSha1": "05b2c99bf62db1893a668efcfdc9f7b638aa3e42",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/configs_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1378,
+      "sourceSha256": "1aed66da05fdc6852613e162d710504de7d9641bc820b714755cdc7ebc43862f"
+    },
+    {
+      "gitBlobSha1": "2f0fac7900056833a483c9b12426e668109a1f79",
+      "goBuild": [
+        "e2e && !windows"
+      ],
+      "headerBytes": 644,
+      "headerSha256": "ae3d8a055ea404357494d47ecd55478359b01c0094c0b7edfb197167b4c37ca7",
+      "package": "e2e",
+      "path": "pkg/e2e/container_name_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1502,
+      "sourceSha256": "e333756650ea738899890d192d98e30ec53916279fc9cad35add0ced6e5b64d1"
+    },
+    {
+      "gitBlobSha1": "5847af4e96e46e63b8b6c91f4470dc6b0e750cbc",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/cp_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2763,
+      "sourceSha256": "0456e5a2feb99bdbaae02e5c33bd07e1d363d81f16ef631b65a532a860b48360"
+    },
+    {
+      "gitBlobSha1": "84ca6eabcd9fbe7c1fc5c727352d38907a97486c",
+      "goBuild": [
+        "!standalone"
+      ],
+      "headerBytes": 640,
+      "headerSha256": "6d179338acc0e82885f140e108958f31c571c12ca6e59276a7641303c163166a",
+      "package": "e2e",
+      "path": "pkg/e2e/e2e_config_plugin.go",
+      "plusBuild": [],
+      "sourceBytes": 677,
+      "sourceSha256": "2ec89bc3d0a6ffbdd2b63b4428d91619278c9664e9b6792955667fe76576d0d9"
+    },
+    {
+      "gitBlobSha1": "a4c4fe629434046c1be3d748cb26e83f7e837200",
+      "goBuild": [
+        "standalone"
+      ],
+      "headerBytes": 639,
+      "headerSha256": "d3445bcd15fe9de769cefff2fb1413fe7d49f57f244614fa208ddcf2745a3333",
+      "package": "e2e",
+      "path": "pkg/e2e/e2e_config_standalone.go",
+      "plusBuild": [],
+      "sourceBytes": 675,
+      "sourceSha256": "8daef86a30aa0427929d1fb697ad3d90b4dac7906f7bb2dc69afe7afffe503d5"
+    },
+    {
+      "gitBlobSha1": "c7ae466dcb40ec58998ecba53d012c12484e0238",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/env_file_test.go",
+      "plusBuild": [],
+      "sourceBytes": 3687,
+      "sourceSha256": "df205a7ba4b24c0dbcf64bc317dc5c0a3214e6331036904a985b6a1d0d627665"
+    },
+    {
+      "gitBlobSha1": "ef20d7264c15391a46fbfa19751724c14303348c",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/events_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1013,
+      "sourceSha256": "af68c533961c0868b9be1cb2fc0daf6b2d57dfd6120f65459c1a1cd3f70063b8"
+    },
+    {
+      "gitBlobSha1": "d5e70087f4bd8cafe9e188f8addd2d74277d2aaa",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "e81cfeadf2de3db8143039b9c5073f3097fcfb6696c61c0532916052cfb3aeea",
+      "package": "e2e",
+      "path": "pkg/e2e/exec_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1473,
+      "sourceSha256": "7edb6a9f027a10b8c8754dc6e50dbd4997352dcdcea4cd7a83da75c939dfa11f"
+    },
+    {
+      "gitBlobSha1": "12444880062f94d8c34bd0a0e66604cc5023b017",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "e81cfeadf2de3db8143039b9c5073f3097fcfb6696c61c0532916052cfb3aeea",
+      "package": "e2e",
+      "path": "pkg/e2e/export_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1763,
+      "sourceSha256": "e30d756cbfe3d67fe8d08fd254f6b300a8b26f873825a41e25e2e5480e65e9fb"
+    },
+    {
+      "gitBlobSha1": "0fb7d4d15db03e16fc4bc8ffcfc7e73e0e6eb4c5",
+      "goBuild": [
+        "e2e && !windows"
+      ],
+      "headerBytes": 644,
+      "headerSha256": "d1f4107f309d5159c025f863a6e4f0a1e758fe437c47b1853a14dc9331494dd7",
+      "package": "e2e",
+      "path": "pkg/e2e/expose_test.go",
+      "plusBuild": [],
+      "sourceBytes": 961,
+      "sourceSha256": "992a983beb0f2aafd1984c7fa57a2b0e78c3e8178e66d493eb8c70e05e0f8670"
+    },
+    {
+      "gitBlobSha1": "ba444767f7fa8eb0d8ab50363ac0649b0bcda580",
+      "goBuild": [],
+      "headerBytes": 616,
+      "headerSha256": "bcb325890307ea931876f6bbcee8d76860dfae995cf58172e32624b6a316d291",
+      "package": "e2e",
+      "path": "pkg/e2e/framework.go",
+      "plusBuild": [],
+      "sourceBytes": 16997,
+      "sourceSha256": "8f361279ada534bd22d5334579ce39ee692f5fce202696b2fff73147aa42449c"
+    },
+    {
+      "gitBlobSha1": "b25376f9cc34ea2c216be3807a592fa89ea8a620",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "e81cfeadf2de3db8143039b9c5073f3097fcfb6696c61c0532916052cfb3aeea",
+      "package": "e2e",
+      "path": "pkg/e2e/healthcheck_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1254,
+      "sourceSha256": "94f83ab21de7fbedfacdca5aedc6c8c35f6f73c628b656d4835af4fe67d59c22"
+    },
+    {
+      "gitBlobSha1": "107c398eeb1cd19bd4a473c0230ecc339554f915",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 598,
+      "headerSha256": "515602bd08a76a76245f049efb6d4bd72f2f0a6f85229c0a5b641a9d2b005e9d",
+      "package": "e2e",
+      "path": "pkg/e2e/hooks_test.go",
+      "plusBuild": [],
+      "sourceBytes": 14059,
+      "sourceSha256": "28cfe97ec005890a269cb5b124dd9f83bdc53ff8979811fb54dd74bff3135022"
+    },
+    {
+      "gitBlobSha1": "4f2d3154ffa0960a9c39ea516619626dafd8b236",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "c6ae4ab1b5eee04f6196901f5d4e597b3545033fd11eb5e225a1a66c6fe6f237",
+      "package": "e2e",
+      "path": "pkg/e2e/image_identity_corner_test.go",
+      "plusBuild": [],
+      "sourceBytes": 4395,
+      "sourceSha256": "7443560f1b125f30fd4b2c0c0e6eca5a29ef4a2174425f4221692eaf0b21a3b7"
+    },
+    {
+      "gitBlobSha1": "b2e881c15ff381374e72d16d36ec1efccbe5a868",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/image_identity_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1837,
+      "sourceSha256": "23002dfd0c54906ec074ee57c961b284e0952ac0f18ef4fa4e325e7fbb2a8d95"
+    },
+    {
+      "gitBlobSha1": "5ffdf3a10978f9ce077616d273284c476a607a3d",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "c6ae4ab1b5eee04f6196901f5d4e597b3545033fd11eb5e225a1a66c6fe6f237",
+      "package": "e2e",
+      "path": "pkg/e2e/images_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1944,
+      "sourceSha256": "f60dbe1a7cd65f5a40a9558676e799e94cf596786b165154f89bd14f0d9506da"
+    },
+    {
+      "gitBlobSha1": "63dcddb9558e4efd8547cfbd694d9bdee33b4b0d",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/ipc_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1974,
+      "sourceSha256": "e46e165aa27f85b17cb731189be125803509de8fd42e48a9e34a2d5c9665eb60"
+    },
+    {
+      "gitBlobSha1": "b64f1700bd29ffd58765e58e7e2a566b8c0dd9c7",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/jobs_test.go",
+      "plusBuild": [],
+      "sourceBytes": 6840,
+      "sourceSha256": "f114b07c7e8fe44fdaffb17aee7d977afd3ff18a36e635cce3f9f7fb13880541"
+    },
+    {
+      "gitBlobSha1": "493385dae88e24ddc4d414e6d4f425086067d155",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/logs_test.go",
+      "plusBuild": [],
+      "sourceBytes": 3794,
+      "sourceSha256": "831bc42a41eff7e0ffdc1e5174bce3545f742a84ffc1733e9269bfdc7ea8f960"
+    },
+    {
+      "gitBlobSha1": "9a710c7a9cd5697a98eee58df621bb4a09e6ce3e",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/main_test.go",
+      "plusBuild": [],
+      "sourceBytes": 734,
+      "sourceSha256": "0ff3acadf0d439a5bca0912ecfff4ff979bb6652e612b4b821874d5e9b81579f"
+    },
+    {
+      "gitBlobSha1": "baeb6c3d24a05c938a792cb7b2c10793ccdfd958",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/model_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1033,
+      "sourceSha256": "c7371ec49b6f762761840e4fc1c1006252f730d01893496bbd0b776f8bf3ca2e"
+    },
+    {
+      "gitBlobSha1": "2590a43408b58502d2fdfff62b963fd8f4e6853c",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "c6ae4ab1b5eee04f6196901f5d4e597b3545033fd11eb5e225a1a66c6fe6f237",
+      "package": "e2e",
+      "path": "pkg/e2e/multiplatform_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2294,
+      "sourceSha256": "3d2078fc615939015869d7b502ed4f1ffa56ce2d183cc0ae25ddd37ef1e64dfc"
+    },
+    {
+      "gitBlobSha1": "652e6c44fa4e775fa043bacf5b21bd5cde62b671",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/networks_test.go",
+      "plusBuild": [],
+      "sourceBytes": 6210,
+      "sourceSha256": "529a0eb7dcfa98e543704af7ec119090ebbfc989add8b724ff8e28226fa51a7c"
+    },
+    {
+      "gitBlobSha1": "f1ad0be2c9380b643e86438aa1601e7a1ac7a307",
+      "goBuild": [
+        "e2e && !windows"
+      ],
+      "headerBytes": 644,
+      "headerSha256": "ae3d8a055ea404357494d47ecd55478359b01c0094c0b7edfb197167b4c37ca7",
+      "package": "e2e",
+      "path": "pkg/e2e/noDeps_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2263,
+      "sourceSha256": "e295f961053a6d6a7d6909256f0014e45dd378b48c5982940ddbb6fe0142fcf9"
+    },
+    {
+      "gitBlobSha1": "77eff1562c5247184fbdd64dc139abe7f6bedd0e",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/orphans_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1229,
+      "sourceSha256": "df57f9109b005db9649ac15a51e9f16afebff22392e31e2bffa47bb82796a818"
+    },
+    {
+      "gitBlobSha1": "0fa4489138cd6c38bd61571735f306c51cc94524",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/pause_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2311,
+      "sourceSha256": "e75a2c6f11913b61b5f484ffc57870a189a979d45c9940c44d98e27c122dddde"
+    },
+    {
+      "gitBlobSha1": "0a2883aa848fc612d8b313027bb34e45463f92d7",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/profiles_test.go",
+      "plusBuild": [],
+      "sourceBytes": 4189,
+      "sourceSha256": "b0e12dd82c732630d2458e10eee2e6e8c60425d6a4e0dd8653f5ffd9a316b0ca"
+    },
+    {
+      "gitBlobSha1": "672c156f5b7e1e49554aa0808db5429964984a42",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/providers_test.go",
+      "plusBuild": [],
+      "sourceBytes": 8198,
+      "sourceSha256": "0a8e27f54b63073b88ab4dab93b9205a55e1c9bb851dfc53ee763b3ba970e7f9"
+    },
+    {
+      "gitBlobSha1": "2aae0a53ae17bb67591b03fc83e599b1b17620e1",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/ps_test.go",
+      "plusBuild": [],
+      "sourceBytes": 5476,
+      "sourceSha256": "d095dc93c2dca8997876b576a3775c8674c9979fd717c9b4cce9deb0d51307e6"
+    },
+    {
+      "gitBlobSha1": "75bf247b7340a8b12023ba8b03b9f444141976f1",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/publish_test.go",
+      "plusBuild": [],
+      "sourceBytes": 9119,
+      "sourceSha256": "a0075052e22ea0e8a1a19fc56db637856898f097c62dbfefe9b578d931d709b0"
+    },
+    {
+      "gitBlobSha1": "4af831204a458dd8104258238ab9fc93114d8858",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/pull_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2606,
+      "sourceSha256": "0dde40bc39ac91373d18e956c8ec637d1a2659433e8fa537d671a37d2b415e5a"
+    },
+    {
+      "gitBlobSha1": "e9a5b0267c5932ca9270ddb39c3e05e03198df80",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "26ef65613cd70f87b01822ca65690ee666761c18521bfdcda927ea4669f11f1b",
+      "package": "e2e",
+      "path": "pkg/e2e/recreate_no_deps_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1251,
+      "sourceSha256": "cd5e9d65af197eac047327a2a9e75ae82eed51351a36d7baddeef175d59b22b1"
+    },
+    {
+      "gitBlobSha1": "8057c294b583499bca10856721694c3c629f416b",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 598,
+      "headerSha256": "351ab96d5f50eb423610b073bff5c836d641b454365b8ef005209dc4d91b9584",
+      "package": "e2e",
+      "path": "pkg/e2e/remote_git_test.go",
+      "plusBuild": [],
+      "sourceBytes": 5494,
+      "sourceSha256": "4ef83d7594407c2c5106ba32f850f93f0863de8aaacc8c0abd936e85d02b8b24"
+    },
+    {
+      "gitBlobSha1": "fed5117bf254cc7924fbe1e820d3331de7f52e7f",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 598,
+      "headerSha256": "351ab96d5f50eb423610b073bff5c836d641b454365b8ef005209dc4d91b9584",
+      "package": "e2e",
+      "path": "pkg/e2e/remote_oci_test.go",
+      "plusBuild": [],
+      "sourceBytes": 5109,
+      "sourceSha256": "247d9bd077256f0af74a8e02a3e8e529b398de4162f558eb6dc8bad140616505"
+    },
+    {
+      "gitBlobSha1": "6f0e316b6ab418ca92ee9549dd506276866f8140",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/restart_test.go",
+      "plusBuild": [],
+      "sourceBytes": 3988,
+      "sourceSha256": "a86da1b4c6fd5f2c844cce43ee3c46afa9a89c7b850a53629ae8212985e50ae6"
+    },
+    {
+      "gitBlobSha1": "9184d03a4984f8427cc0ccc20b6423f415f8506c",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 598,
+      "headerSha256": "faea1c6e93d19f875d3f3f1d7eedcfa26c153b455ea3c8ab905f939f8b0a4ac5",
+      "package": "e2e",
+      "path": "pkg/e2e/scale_test.go",
+      "plusBuild": [],
+      "sourceBytes": 4214,
+      "sourceSha256": "3bf36b56e8a596fa21a261b0dd4d76d3569ee5fc23aaa1e22ed554f52d1254f2"
+    },
+    {
+      "gitBlobSha1": "1b6ea7b5e2c7398902a4c34b247b3307ac233037",
+      "goBuild": [],
+      "headerBytes": 616,
+      "headerSha256": "6eac1718109376d6c217fe9f367ca5fc87938ed2c27f185a3816237690506a04",
+      "package": "e2e",
+      "path": "pkg/e2e/scenario.go",
+      "plusBuild": [],
+      "sourceBytes": 21869,
+      "sourceSha256": "770850c32d4b92eb5be5c6ccb7cffa950e861e0681695cfd00e4e85bd9dc2932"
+    },
+    {
+      "gitBlobSha1": "78ead037d77ea048a654fde3199727844ff7087a",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/secrets_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1435,
+      "sourceSha256": "beffad3da49d595cbfc2c8c3952e7d08becf002bafdd2f9f264d710ca6efa314"
+    },
+    {
+      "gitBlobSha1": "5bf1f3e589dd24f5346d0dc527b3f2dbce964275",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/start_stop_test.go",
+      "plusBuild": [],
+      "sourceBytes": 8153,
+      "sourceSha256": "537ead0475f833ceafd701933ab85ef768a6de182fdb7a82485dd1b9e2d85164"
+    },
+    {
+      "gitBlobSha1": "b0e43b45d70244f9ab2f1740df0b9ad91ef80533",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/testdata_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1750,
+      "sourceSha256": "945b3246099d59bb77b5ca9f01a11d33a9b83e744ec9f219b031edb5a0d7f76b"
+    },
+    {
+      "gitBlobSha1": "07f53314b1316e5748140ab698d8a19ba0507d43",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/umask_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1175,
+      "sourceSha256": "55beda2e07da9210af0e5a7d7813e9ad4c90e64fff9286e266573a423a4cb935"
+    },
+    {
+      "gitBlobSha1": "39de2f09e8eb2cee7aa6ce53651ad2617a4b6413",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/unsupported_attributes_test.go",
+      "plusBuild": [],
+      "sourceBytes": 3297,
+      "sourceSha256": "84d09d12b4f081390657553a7babda4c4921d594476f7bf327743700befc9be3"
+    },
+    {
+      "gitBlobSha1": "a5a32ecb30dcf8ae182639bc0c7c3fd382e60847",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "c6ae4ab1b5eee04f6196901f5d4e597b3545033fd11eb5e225a1a66c6fe6f237",
+      "package": "e2e",
+      "path": "pkg/e2e/up_interactive_test.go",
+      "plusBuild": [],
+      "sourceBytes": 6020,
+      "sourceSha256": "3a5163c7b8f8f709eda98ea01a373e77d773905ae75dd9fe28cef7faff65246c"
+    },
+    {
+      "gitBlobSha1": "5c99abcc571dd1560caa4d46d663a9355ff708ec",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/up_start_failure_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2116,
+      "sourceSha256": "259d619f7bdedebe9ff5b2e755638d628214753de0556c8238212bda90985f3a"
+    },
+    {
+      "gitBlobSha1": "e025e7d866a3bd1cf85a3e6ab3990e6bc9a94840",
+      "goBuild": [
+        "e2e && !windows"
+      ],
+      "headerBytes": 644,
+      "headerSha256": "ae3d8a055ea404357494d47ecd55478359b01c0094c0b7edfb197167b4c37ca7",
+      "package": "e2e",
+      "path": "pkg/e2e/up_test.go",
+      "plusBuild": [],
+      "sourceBytes": 9062,
+      "sourceSha256": "b899e53680fa18aaa343dc1ff057e002a7f1b6898ced688a84e2aac6c5e523ee"
+    },
+    {
+      "gitBlobSha1": "2fb90df93a3223d2042727e52c4e4d52eed97f6b",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/volumes_test.go",
+      "plusBuild": [],
+      "sourceBytes": 10954,
+      "sourceSha256": "6190c3a79de4d11a52c5ac25e059ae886e8bbd1595cf65fd65249e86450f423d"
+    },
+    {
+      "gitBlobSha1": "b8fb8d86d7a677388e0c1c59b4cb10e0f41c94a8",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "2f326dd8c029d2a3fee0a4895536deb73e9539630f52b6979567e0094af7bd42",
+      "package": "e2e",
+      "path": "pkg/e2e/wait_test.go",
+      "plusBuild": [],
+      "sourceBytes": 2735,
+      "sourceSha256": "9556b506b4cafa7b510a3036ec4381063f5db5b2a41f7b0c9cdf5a01ff884040"
+    },
+    {
+      "gitBlobSha1": "5f62ecaaa639515406ab5b1358d632d6451e775b",
+      "goBuild": [
+        "e2e"
+      ],
+      "headerBytes": 632,
+      "headerSha256": "e81cfeadf2de3db8143039b9c5073f3097fcfb6696c61c0532916052cfb3aeea",
+      "package": "e2e",
+      "path": "pkg/e2e/watch_test.go",
+      "plusBuild": [],
+      "sourceBytes": 21429,
+      "sourceSha256": "aee2da695b44eb9885a212216deacb1032c337d8294f26fe296faa4a78181778"
+    },
+    {
+      "gitBlobSha1": "3eb3207319d0b62f750751dd94e3a62125dadacd",
+      "goBuild": [],
+      "headerBytes": 314,
+      "headerSha256": "6d04a52f90fcd42077b7650ded06825fa37b9c3bb24fbf9f79ed950d75d1334d",
+      "package": "mocks",
+      "path": "pkg/mocks/mock_docker_api.go",
+      "plusBuild": [],
+      "sourceBytes": 75716,
+      "sourceSha256": "2adbde061938206379231f46e5df393d944782191bd41d5b163073b1937f3738"
+    },
+    {
+      "gitBlobSha1": "b8bd7b4ec15919efa3e62fbfe3c55e53cb515101",
+      "goBuild": [],
+      "headerBytes": 314,
+      "headerSha256": "5ac682e560d7dab51bf57f8945abc11d0a08d176ed45a9bdf340b0e6401e7453",
+      "package": "mocks",
+      "path": "pkg/mocks/mock_docker_cli.go",
+      "plusBuild": [],
+      "sourceBytes": 7981,
+      "sourceSha256": "05cf5641a61922bc890e69cbad0dded28c75a6d875ca3e069beb7f15139f6530"
+    },
+    {
+      "gitBlobSha1": "146144810343ec06a0ad84efc6c28dc03bc97609",
+      "goBuild": [],
+      "headerBytes": 274,
+      "headerSha256": "bb528ac5467f1595ba2d14dc932b71fdac0e940ae9366a57925143bdea463249",
+      "package": "mocks",
+      "path": "pkg/mocks/mock_docker_compose_api.go",
+      "plusBuild": [],
+      "sourceBytes": 45961,
+      "sourceSha256": "f0c5f58559fae978f9ebc5aaf633f5599fe1a8e5e21f0f4713b53f05ce7a7b1f"
+    },
+    {
+      "gitBlobSha1": "a0a6d03194e7a1b1ccd98bec7f8f234f839039b4",
+      "goBuild": [],
+      "headerBytes": 619,
+      "headerSha256": "8785c4d1114b268cff876ad8ea83538b23e35cbfc9d27018c7e2227cf96329b7",
+      "package": "remote",
+      "path": "pkg/remote/cache.go",
+      "plusBuild": [],
+      "sourceBytes": 925,
+      "sourceSha256": "3e65998d624d9917ce9478433ca9f52082d0ceb72ed5e42a5f6b1f60ff6315e2"
+    },
+    {
+      "gitBlobSha1": "7830e8ade45e669e4dd32cffdbb25259b095aca9",
+      "goBuild": [],
+      "headerBytes": 619,
+      "headerSha256": "8785c4d1114b268cff876ad8ea83538b23e35cbfc9d27018c7e2227cf96329b7",
+      "package": "remote",
+      "path": "pkg/remote/cache_darwin.go",
+      "plusBuild": [],
+      "sourceBytes": 982,
+      "sourceSha256": "67d2f4bc9eaba5f7acb1ffd9f31e330bfa223a27d2dc4d9bc5885202501a0695"
+    },
+    {
+      "gitBlobSha1": "9887dc7bb4e36bbd8ab33538c49615992d916dd9",
+      "goBuild": [
+        "linux || openbsd || freebsd"
+      ],
+      "headerBytes": 659,
+      "headerSha256": "5aaf5947f8cc68af0aaccaaece3ad309b1b81b07cfa4bf6738b7c483cc6cf050",
+      "package": "remote",
+      "path": "pkg/remote/cache_unix.go",
+      "plusBuild": [],
+      "sourceBytes": 1011,
+      "sourceSha256": "284f2a8b1c2e95d9878f95fc43df8374219d55b075b6309342dd0a1f50f393fc"
+    },
+    {
+      "gitBlobSha1": "5bc7a2f1d920b83f7b6770883edb1905afcaa0f7",
+      "goBuild": [],
+      "headerBytes": 619,
+      "headerSha256": "8785c4d1114b268cff876ad8ea83538b23e35cbfc9d27018c7e2227cf96329b7",
+      "package": "remote",
+      "path": "pkg/remote/cache_windows.go",
+      "plusBuild": [],
+      "sourceBytes": 1426,
+      "sourceSha256": "4e8d35e1ce60b902b1c563e2b9498827c8d5747d2953cf04cb8cf49c26d3b28e"
+    },
+    {
+      "gitBlobSha1": "689f08dd903434b1e644ad9d991a166f6a9af224",
+      "goBuild": [],
+      "headerBytes": 619,
+      "headerSha256": "8785c4d1114b268cff876ad8ea83538b23e35cbfc9d27018c7e2227cf96329b7",
+      "package": "remote",
+      "path": "pkg/remote/git.go",
+      "plusBuild": [],
+      "sourceBytes": 7046,
+      "sourceSha256": "6d858dae5165fc86b8c61c24cbad4996adb278bb811955c1ca9db13e064575dc"
+    },
+    {
+      "gitBlobSha1": "f78bcc25dbbe73047bd2842bac1ca982f3ee85c2",
+      "goBuild": [],
+      "headerBytes": 619,
+      "headerSha256": "8785c4d1114b268cff876ad8ea83538b23e35cbfc9d27018c7e2227cf96329b7",
+      "package": "remote",
+      "path": "pkg/remote/git_test.go",
+      "plusBuild": [],
+      "sourceBytes": 4435,
+      "sourceSha256": "175e90d0d35daa9a0d765bd1647c9914c0d8176fc01c1061c3e571f7e31cc906"
+    },
+    {
+      "gitBlobSha1": "407e20399ed29880fe879ba0c1910b6b1ac72e06",
+      "goBuild": [],
+      "headerBytes": 619,
+      "headerSha256": "8785c4d1114b268cff876ad8ea83538b23e35cbfc9d27018c7e2227cf96329b7",
+      "package": "remote",
+      "path": "pkg/remote/oci.go",
+      "plusBuild": [],
+      "sourceBytes": 8778,
+      "sourceSha256": "1cb1afda77a7f075155223086670e7ea6eb90c55407de249f6b9697c15482c19"
+    },
+    {
+      "gitBlobSha1": "28a4dbd4847190e2f1f1034fa082793406b911bc",
+      "goBuild": [],
+      "headerBytes": 619,
+      "headerSha256": "8785c4d1114b268cff876ad8ea83538b23e35cbfc9d27018c7e2227cf96329b7",
+      "package": "remote",
+      "path": "pkg/remote/oci_test.go",
+      "plusBuild": [],
+      "sourceBytes": 3514,
+      "sourceSha256": "361de26422623759a3dee867911b1433111e779a2a4418aa1dd6788b79ee48cf"
+    },
+    {
+      "gitBlobSha1": "98ab3c916156e3ec606fe2a0e159519c1e0d8003",
+      "goBuild": [],
+      "headerBytes": 618,
+      "headerSha256": "ba52fdee7607171870977bfef1131b73ad6247ec2a11b89df63f655d5f228ddd",
+      "package": "utils",
+      "path": "pkg/utils/durationutils.go",
+      "plusBuild": [],
+      "sourceBytes": 763,
+      "sourceSha256": "19a3783266774c3e2602b93a6ecf3fa63d756046ecf58fdfb49b9f71ceceb98c"
+    },
+    {
+      "gitBlobSha1": "dd0f976fe8a84830f3066f86b8f5221f35a80062",
+      "goBuild": [],
+      "headerBytes": 618,
+      "headerSha256": "ba52fdee7607171870977bfef1131b73ad6247ec2a11b89df63f655d5f228ddd",
+      "package": "utils",
+      "path": "pkg/utils/safebuffer.go",
+      "plusBuild": [],
+      "sourceBytes": 2312,
+      "sourceSha256": "397e883468cf9212120ccd1716f87b72fe5a273aeaa0eebbe55e2a038d5db80f"
+    },
+    {
+      "gitBlobSha1": "5d763bf4ca0a9697f7daf163a464a23f8be38da9",
+      "goBuild": [],
+      "headerBytes": 616,
+      "headerSha256": "6cd77bd289be38d8ac9dc4b9c867c6c28a7eb6e694622ac3ec33632a64fc903c",
+      "package": "utils",
+      "path": "pkg/utils/set.go",
+      "plusBuild": [],
+      "sourceBytes": 2013,
+      "sourceSha256": "0c6bf0ff85c10efedb62f86837eeee0f750583ed357043158b51c57cba24823c"
+    },
+    {
+      "gitBlobSha1": "3a18961972d197433620a3ea2e8ab13abcda3656",
+      "goBuild": [],
+      "headerBytes": 616,
+      "headerSha256": "7e2df0a8e275e342e9cf099610ca8852ec926fa4bea955038153c7631aed2818",
+      "package": "utils",
+      "path": "pkg/utils/set_test.go",
+      "plusBuild": [],
+      "sourceBytes": 990,
+      "sourceSha256": "1adbeb26890f8e100bf8afa1c9746c0e39bf3a2dc89d8b1ad9b52482a7a1bf63"
+    },
+    {
+      "gitBlobSha1": "7135e91781c1c7515547678347ef882a1cff9f07",
+      "goBuild": [],
+      "headerBytes": 618,
+      "headerSha256": "ba52fdee7607171870977bfef1131b73ad6247ec2a11b89df63f655d5f228ddd",
+      "package": "utils",
+      "path": "pkg/utils/stringutils.go",
+      "plusBuild": [],
+      "sourceBytes": 868,
+      "sourceSha256": "454f16ccaddc53810121cd7c28bd23f9bc1e953f1ba5ac5284e5a2b36d0a5de2"
+    },
+    {
+      "gitBlobSha1": "1b4c8ca14a937fd07c8ce34e20dc4b1e4ea5a6ef",
+      "goBuild": [],
+      "headerBytes": 618,
+      "headerSha256": "ba52fdee7607171870977bfef1131b73ad6247ec2a11b89df63f655d5f228ddd",
+      "package": "utils",
+      "path": "pkg/utils/writer.go",
+      "plusBuild": [],
+      "sourceBytes": 1488,
+      "sourceSha256": "17a858ac1735b5cbd75577f4243ce4b4ee04e99e848e85c01af2b2cbbf200359"
+    },
+    {
+      "gitBlobSha1": "bb7aed03752d86ec94e9614460ab03c0b2b4b5ee",
+      "goBuild": [],
+      "headerBytes": 618,
+      "headerSha256": "ba52fdee7607171870977bfef1131b73ad6247ec2a11b89df63f655d5f228ddd",
+      "package": "utils",
+      "path": "pkg/utils/writer_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1035,
+      "sourceSha256": "ebfe1d11b8f73f3e5e3595372d5112fe4883097bfba21379649539220d8318ce"
+    },
+    {
+      "gitBlobSha1": "c42f3533fbb8fc9b79875eeaa2a330653f239490",
+      "goBuild": [],
+      "headerBytes": 616,
+      "headerSha256": "3c5b972b6034b10c2acf0ec760c8ef5791718424162c86566e85a403b44fa0f9",
+      "package": "watch",
+      "path": "pkg/watch/debounce.go",
+      "plusBuild": [],
+      "sourceBytes": 1848,
+      "sourceSha256": "905c67a30778f6c28a31a85edc3d245a14babbe4fdb728264c8ee59c4712a26f"
+    },
+    {
+      "gitBlobSha1": "6c0474f9ac884325eb0a805e68d41aeb4fabf81c",
+      "goBuild": [],
+      "headerBytes": 616,
+      "headerSha256": "3c5b972b6034b10c2acf0ec760c8ef5791718424162c86566e85a403b44fa0f9",
+      "package": "watch",
+      "path": "pkg/watch/debounce_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1414,
+      "sourceSha256": "51b98453b41d8b4c815ea419ae5bb4a156b68df384b449a0abbdc1162fd5e683"
+    },
+    {
+      "gitBlobSha1": "5033b2405dc91abff93995e0a07b7be954405264",
+      "goBuild": [],
+      "headerBytes": 618,
+      "headerSha256": "2c2f16711564567ed0bec3b01c03e15354d92a211c08e5ad223b693d68b6ff3c",
+      "package": "watch",
+      "path": "pkg/watch/dockerignore.go",
+      "plusBuild": [],
+      "sourceBytes": 4289,
+      "sourceSha256": "3dd8f5ce9dab40444582d05eefedefbb0ed32654e99be3edd6a9cf4a9c9bdbdb"
+    },
+    {
+      "gitBlobSha1": "6e88a8574767d2ac10128b02cf89015c9f002638",
+      "goBuild": [],
+      "headerBytes": 618,
+      "headerSha256": "2c2f16711564567ed0bec3b01c03e15354d92a211c08e5ad223b693d68b6ff3c",
+      "package": "watch",
+      "path": "pkg/watch/dockerignore_test.go",
+      "plusBuild": [],
+      "sourceBytes": 3039,
+      "sourceSha256": "ecce689bfd1bb1f5baccb0cedcc87cb0ef99383d4c003900c1e20fc3f5be6b5a"
+    },
+    {
+      "gitBlobSha1": "77589a9413d4cb38ae4407818d86ddf66c48671f",
+      "goBuild": [],
+      "headerBytes": 618,
+      "headerSha256": "2c2f16711564567ed0bec3b01c03e15354d92a211c08e5ad223b693d68b6ff3c",
+      "package": "watch",
+      "path": "pkg/watch/ephemeral.go",
+      "plusBuild": [],
+      "sourceBytes": 2711,
+      "sourceSha256": "7fae57eace583247c7b1adca49d7c4cd73b828b5f99ee74d3e9c0b80d73eb247"
+    },
+    {
+      "gitBlobSha1": "007af67d3f7afbf4838e58d3c23155afd48ca63e",
+      "goBuild": [],
+      "headerBytes": 589,
+      "headerSha256": "ff7040c57ba1300b7cf7e6672fcab2585a67562b2defe3e5c3c8d8d1a7772f75",
+      "package": "watch_test",
+      "path": "pkg/watch/ephemeral_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1337,
+      "sourceSha256": "5aaaf100ecda27f01aae66b35919491c64ef6a8ffea92aba50607e56bac03fbe"
+    },
+    {
+      "gitBlobSha1": "922c84029ee5cf4bd4bc3e96f09d2cfd10437aa1",
+      "goBuild": [],
+      "headerBytes": 618,
+      "headerSha256": "2c2f16711564567ed0bec3b01c03e15354d92a211c08e5ad223b693d68b6ff3c",
+      "package": "watch",
+      "path": "pkg/watch/notify.go",
+      "plusBuild": [],
+      "sourceBytes": 3428,
+      "sourceSha256": "a653750812b2b9e5f21c2871861aac694940e40b4dd22345a93118221eba360a"
+    },
+    {
+      "gitBlobSha1": "b1ec9b9644d527082c85d46f7b16462cab918053",
+      "goBuild": [],
+      "headerBytes": 618,
+      "headerSha256": "2c2f16711564567ed0bec3b01c03e15354d92a211c08e5ad223b693d68b6ff3c",
+      "package": "watch",
+      "path": "pkg/watch/notify_test.go",
+      "plusBuild": [],
+      "sourceBytes": 13182,
+      "sourceSha256": "89e911b7b7a028e3b46da34e14cf23e39882cefd1f23c94f388518c1d8730aa7"
+    },
+    {
+      "gitBlobSha1": "fa3f85ad45710191150da34e522ffe97a4480ada",
+      "goBuild": [],
+      "headerBytes": 618,
+      "headerSha256": "2c2f16711564567ed0bec3b01c03e15354d92a211c08e5ad223b693d68b6ff3c",
+      "package": "watch",
+      "path": "pkg/watch/paths.go",
+      "plusBuild": [],
+      "sourceBytes": 1146,
+      "sourceSha256": "760b91335bfaab9167953e45b2100986e289e669a2bbe63345e2f8d0ddf8cbe6"
+    },
+    {
+      "gitBlobSha1": "60b4a15e7b5d9e17dc73a88db43ca1e77e29e7dc",
+      "goBuild": [],
+      "headerBytes": 618,
+      "headerSha256": "2c2f16711564567ed0bec3b01c03e15354d92a211c08e5ad223b693d68b6ff3c",
+      "package": "watch",
+      "path": "pkg/watch/paths_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1206,
+      "sourceSha256": "143723861a7a69b2500bc14a025f5623502eef8caea56be854d6587df9b89f31"
+    },
+    {
+      "gitBlobSha1": "011f547c1b43dcad19c7d22b0899e9b17825aea9",
+      "goBuild": [],
+      "headerBytes": 618,
+      "headerSha256": "2c2f16711564567ed0bec3b01c03e15354d92a211c08e5ad223b693d68b6ff3c",
+      "package": "watch",
+      "path": "pkg/watch/temp.go",
+      "plusBuild": [],
+      "sourceBytes": 2236,
+      "sourceSha256": "1dcc9e3e153086cb76e1bf1342704f742eeeeeb4d51d10a8c048e059bec3ce0d"
+    },
+    {
+      "gitBlobSha1": "a0855e875c8e93fc61624a50776cf38cf515bcb6",
+      "goBuild": [],
+      "headerBytes": 618,
+      "headerSha256": "2c2f16711564567ed0bec3b01c03e15354d92a211c08e5ad223b693d68b6ff3c",
+      "package": "watch",
+      "path": "pkg/watch/temp_dir_fixture.go",
+      "plusBuild": [],
+      "sourceBytes": 4497,
+      "sourceSha256": "c682a6bb00c3e727e3ec38f1e5ad8b7bde8a8eea80781e8d48d086b8dec7d11e"
+    },
+    {
+      "gitBlobSha1": "a63612aedff076b992cc774a830305b036998b38",
+      "goBuild": [
+        "fsnotify"
+      ],
+      "headerBytes": 639,
+      "headerSha256": "5a0e80fae614e83d7b12e37b210b35680f7b25a165907200cd2552b2e5ef6248",
+      "package": "watch",
+      "path": "pkg/watch/watcher_darwin.go",
+      "plusBuild": [],
+      "sourceBytes": 3401,
+      "sourceSha256": "341feeeb0410907a0b631b18b97cfb45591a39553998396911b2203e9fc6c362"
+    },
+    {
+      "gitBlobSha1": "50eb442b06bcb92af0695ec35dc611cab8058b2e",
+      "goBuild": [
+        "fsnotify"
+      ],
+      "headerBytes": 639,
+      "headerSha256": "5a0e80fae614e83d7b12e37b210b35680f7b25a165907200cd2552b2e5ef6248",
+      "package": "watch",
+      "path": "pkg/watch/watcher_darwin_test.go",
+      "plusBuild": [],
+      "sourceBytes": 1247,
+      "sourceSha256": "05ce466bb43db840b93b30919aca4ab18bc5742968037ed03e56273a9e00b8d1"
+    },
+    {
+      "gitBlobSha1": "00b81e6cf82fa2f50f5ed10b238e444358500540",
+      "goBuild": [
+        "!fsnotify"
+      ],
+      "headerBytes": 640,
+      "headerSha256": "7aee722f4272faa726e7819d3e1106fc36ffcd7256444842ad7cbef141f45b68",
+      "package": "watch",
+      "path": "pkg/watch/watcher_naive.go",
+      "plusBuild": [],
+      "sourceBytes": 9062,
+      "sourceSha256": "b63a753defcc37fc993e51f45b98e36789bab2fac099e8df25877c231f123723"
+    },
+    {
+      "gitBlobSha1": "a2172860c3d49a927b2116154f9cf1c80bacc50f",
+      "goBuild": [],
+      "headerBytes": 618,
+      "headerSha256": "2c2f16711564567ed0bec3b01c03e15354d92a211c08e5ad223b693d68b6ff3c",
+      "package": "watch",
+      "path": "pkg/watch/watcher_naive_test.go",
+      "plusBuild": [],
+      "sourceBytes": 5596,
+      "sourceSha256": "b21ac213a0bde80d3c9f1961b42f80109faaada1e9f97e1457bafedb66a3afc4"
+    },
+    {
+      "gitBlobSha1": "262269198d0f27b4441e8d682bd632f80a45a8d0",
+      "goBuild": [
+        "!fsnotify"
+      ],
+      "headerBytes": 640,
+      "headerSha256": "b7e8d776e72a68ffe57d5e6a1e47fb125f0cd9b572563aad6fda349b381a86e7",
+      "package": "watch",
+      "path": "pkg/watch/watcher_naive_walk_test.go",
+      "plusBuild": [],
+      "sourceBytes": 3353,
+      "sourceSha256": "df9c31524a4fb122d3b31d7ee7a6537a7b8fdeabaa5873d9675c5a59790697ae"
+    },
+    {
+      "gitBlobSha1": "e296a1e3de8463bf343687f1f679c2793650df9f",
+      "goBuild": [
+        "!windows"
+      ],
+      "headerBytes": 639,
+      "headerSha256": "9582ea75c2b36ee5241d824e67e34e2ba5e1a2440869d4e7bef541ba54358939",
+      "package": "watch",
+      "path": "pkg/watch/watcher_nonwin.go",
+      "plusBuild": [],
+      "sourceBytes": 887,
+      "sourceSha256": "000eadb2b3e431d93b63127a661f2c18783dfbc5c8e4f3aae2066ad4a6db9cb2"
+    },
+    {
+      "gitBlobSha1": "6e7b661d59392204ca1aae498a3ca2402f996869",
+      "goBuild": [
+        "windows"
+      ],
+      "headerBytes": 638,
+      "headerSha256": "5213e830f3638b1a655e2edaf46ec16385bb6f820e441437fa6d08f61a6711ff",
+      "package": "watch",
+      "path": "pkg/watch/watcher_windows.go",
+      "plusBuild": [],
+      "sourceBytes": 1402,
+      "sourceSha256": "1e09e428d73c9bc3f22a7f98e73869a2cb8fc97a3d5fc207c8822a81c39a31ed"
+    },
+    {
+      "gitBlobSha1": "686234b32b58433414fe8db4bd79a04f405c5488",
+      "goBuild": [],
+      "headerBytes": 1226,
+      "headerSha256": "f40a68ef2df71175873ca710f6145210d76fe66d411f55cc910f761a053b2c74",
+      "package": "main",
+      "path": "relay/main.go",
+      "plusBuild": [],
+      "sourceBytes": 7386,
+      "sourceSha256": "a5558af75d908f56981f9d2c5e93d9de4d984e7063ce0a25b34d88e0b97ef97b"
+    },
+    {
+      "gitBlobSha1": "3db5efbe42f8744f48d70fc78e5e18bcf128a5d8",
+      "goBuild": [],
+      "headerBytes": 617,
+      "headerSha256": "02532f6ae54636f7fb08ceb8d86873ba357d36c9eb6da8fa0ded7e0ac0ea0666",
+      "package": "main",
+      "path": "relay/main_test.go",
+      "plusBuild": [],
+      "sourceBytes": 5493,
+      "sourceSha256": "a6ec5bfb5fd78fd5d9809fb4d03059b1de2e0898b231a2398d90ea112d14c3bc"
+    }
+  ],
+  "memberCountVerified": 956,
+  "repository": "github.com/docker/compose",
+  "revision": "343bb382d2192b88d84af49971bb5cb99bee268c",
+  "routing": [
+    {
+      "bytes": 5,
+      "gitOid": "e660fd93d3196215552065b1e63bf6a2f393ed86",
+      "kind": "blob",
+      "mode": "100644",
+      "path": ".dockerignore",
+      "sha256": "aaccb1a00557171b31d00a99a6a2666856e417964732490685cdcba9f02de491"
+    },
+    {
+      "bytes": 8,
+      "gitOid": "63d92c7fb83a4e20c790c13c80564a5392a8a662",
+      "kind": "blob",
+      "mode": "100644",
+      "path": ".go-version",
+      "sha256": "5ae79ef74661d43e70de64fdaad7531cab44185357110f441268bafae5e74956"
+    },
+    {
+      "bytes": 3091,
+      "gitOid": "48a6b6882e9624337a7b1e8ff2813e7ef2306b23",
+      "kind": "blob",
+      "mode": "100644",
+      "path": "AGENTS.md",
+      "sha256": "2c3364f66a30ea054f3ec3610fa4be37a98e5fc3dbd9654b44f26805c75a236e"
+    },
+    {
+      "bytes": 2206,
+      "gitOid": "e9861f0814004f5e03fe0ad3db430fca7c91dee5",
+      "kind": "blob",
+      "mode": "100644",
+      "path": "BUILDING.md",
+      "sha256": "68694744374f7b98c6dd284aea8d657267a6f6383e9bd5580f725a3e723a7cd4"
+    },
+    {
+      "bytes": 7870,
+      "gitOid": "b39618746200bcc4b229490f3027cd20fdbf6e17",
+      "kind": "blob",
+      "mode": "100644",
+      "path": "Dockerfile",
+      "sha256": "5f35a0fce55a645e2497f861aba1414f237d532493b4f2bda138c609b28ef44f"
+    },
+    {
+      "bytes": 7050,
+      "gitOid": "3e66c558443a1a38db4f06eba027240376d1a3a2",
+      "kind": "blob",
+      "mode": "100644",
+      "path": "Makefile",
+      "sha256": "927856982fcd81c94dd843743000b8a828baf5af02503d64f7a4c4cc477ac4cc"
+    },
+    {
+      "bytes": 4836,
+      "gitOid": "733df6e5f90f9f479645cc66abd60fcf6da8bcdf",
+      "kind": "blob",
+      "mode": "100644",
+      "path": "docker-bake.hcl",
+      "sha256": "d8e460f357e8913b41a81458d2c3280f5494368c2f20eaca7ebcb1bdeaeebce5"
+    },
+    {
+      "bytes": 6691,
+      "gitOid": "5cbae0b9a804c85f4ce490af760efcb6e4a22877",
+      "kind": "blob",
+      "mode": "100644",
+      "path": "go.mod",
+      "sha256": "add1d3fc58082dc40ea0ebcc3d2c80b1f4bf99a5452aab2026e8997b511cfb09"
+    },
+    {
+      "bytes": 48,
+      "gitOid": "7b4c9437495574466cc7dd118b0b59a198607b32",
+      "kind": "blob",
+      "mode": "100644",
+      "path": "relay/go.mod",
+      "sha256": "d19203608de73a4b66a822559f9a8460d07a29b2b92c2f4e7665d5ddda9595f9"
+    }
+  ],
+  "state": "inert-header-and-routing-inventory-not-go-list",
+  "upstreamExecuted": false
+}

@@ -1,0 +1,36 @@
+{
+  "identity": "f05-prelaunch-decisions-20261029-v1",
+  "authority": "coordinator",
+  "baseCommit": "91643102c6083fda66827f68e43a06e7cdc8cec8",
+  "taskRosterChanged": false,
+  "upstreamTasksExecutedByThisPacket": false,
+  "paidCampaignAuthorized": false,
+  "representationEstablishmentBenefitSeparated": true,
+  "scopeDisposition": {
+    "rust-01": "full-rust-repository-coverage-unresolved",
+    "python-01": "source-default-unresolved-full-union-candidate-needs-native-proof",
+    "python-02": "full-product-suite-accepted-as-explicit-coverage-superset",
+    "python-03": "default-suite-only-with-exact-source-supported-exclusions-frozen-before-execution"
+  },
+  "unexpectedSkipsOrHiddenEarlyReturns": "noncompletion-or-unresolved",
+  "completeNativeAssertionFailure": "may-complete-obtaining-outcome-with-failing-suite-reported-separately",
+  "executableOracleQualification": "pending",
+  "sourceLinks": {
+    "runtimeSha256": "f2f43560d85d2d1934b6f84bba26951d1cee81d8fe08e291c600a89754f850ab",
+    "boundedRuntimeReview": "passed-with-no-actionable-findings",
+    "upstreamTaskExecutionQualification": "pending",
+    "dependencyCacheLinks": "forbidden"
+  },
+  "goOracle": "use-append-only-revision-rejecting-skips-at-every-depth-for-future-qualification",
+  "laterFreezeRequired": [
+    "native-test-sets-and-source-supported-exclusions",
+    "task-specific-executable-oracles-and-counterexamples",
+    "provider-model-and-inference-settings",
+    "qualified-images-and-dependencies",
+    "numeric-resource-token-time-and-cost-ceilings",
+    "cost-rates-and-maintenance-allocation",
+    "assignment-runtime-consumer-and-scorer-bindings"
+  ],
+  "e1AcceptanceDependency": false,
+  "replaceEarlierNegativeResults": false
+}

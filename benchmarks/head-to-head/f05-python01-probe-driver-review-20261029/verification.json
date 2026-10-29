@@ -1,0 +1,23 @@
+{
+  "state": "exact-source-and-review-subject-bindings-match",
+  "subject": {
+    "planSha256": "45b129445ef75603e98bb2984dd022d4d9c309cf0968f7374191652df0384c23",
+    "authorFreezeSha256": "9017646e52e660a22d6a3423bb1541dc3a427c5983b3407a453b30eebffffe27",
+    "packetIdentity": "python01-source-free-probe-driver-v1"
+  },
+  "authorArtifactsVerified": 12,
+  "reusedSources": {
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-dependency-preparation-20261029/prepare.py": "132cc30c00be4f8a7de80646ee8f87b3fff5d945c99a8f63df7a80780144538b",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-offline-setup-plan-20261029/amendment-1/setup.py": "06e3eb82f695812f96816c820f61fef1cceb242c636de5980284824948604de0",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/collection.py": "6db7f294c3158129fc75fee991ec436c1838ab0119bd7f7df9026df3d297b3d8"
+  },
+  "transportByteIdentical": true,
+  "auditUvPathCandidatesInOrder": [
+    "usr/local/bin/uv"
+  ],
+  "noNewImageOrBinaryObservation": true,
+  "copiedFakeControlsPassed": 26,
+  "independentFakeControlsPassed": 7,
+  "actualDaemonCalls": 0,
+  "probeExecuted": false
+}

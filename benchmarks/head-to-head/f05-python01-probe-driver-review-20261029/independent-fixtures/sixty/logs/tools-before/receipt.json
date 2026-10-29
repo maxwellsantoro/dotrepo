@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-python-probe-e13a3dbb04bb",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "sha256sum /usr/bin/python3.11 /usr/local/bin/uv"
+  ],
+  "startedAt": "synthetic",
+  "elapsedSeconds": 0.001,
+  "exitCode": 0,
+  "error": null,
+  "cancelled": false,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "c564a3d0b9857280a94100429b6543a6b6745181351cfadbbd01ffb1732eb551",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null
+}

@@ -1,0 +1,143 @@
+{
+  "archiveMembersVerified": 128,
+  "artifacts": 11,
+  "boundInputs": [
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/AGENTS.md",
+      "sha256": "ac777fb15c3f3de96538d0449acb2aea0d0a61f5364a99c87db6e2be1dff633d"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/ROADMAP.md",
+      "sha256": "96bcc9d1237c1cac0b2b1fc4bcedb1c2ba35ca92f5d2b9c2a5a6b8fe2db1c2e5"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-python01-oracle-decision-20261029/FREEZE.json",
+      "sha256": "944f76c7eec2978b07023521e4998f39652031e606792e598cbb51785242fa2a"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-python01-oracle-decision-20261029/decision.json",
+      "sha256": "b9ff7b34a7d881d8a2c1130585b3fa6727ae0407face8d2f480428a280d9239f"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/observer-contract.json",
+      "sha256": "8e0b15b1d18bd6b4bca8ae2c48589dab21ca733efe7081c34e96c026a8d43ca6"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/amendment-1/FREEZE.json",
+      "sha256": "994f8d9b6196252b763dbb56756dcb96b5c82b61c000164c71bbad23bdcef893"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-python01-oracle-preparation-review-20261029/amendment-1/FREEZE.json",
+      "sha256": "a36f301bdc8d43009d4651e9d3b2e5217a8d5440f31faf0ef2c4aa49bd02be9b"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-next8-20261029/python-01/acquisition.json",
+      "sha256": "02bd55b821ec5ea7181e9ec24abbedd85a389477cb3b8be58c3092791bb7497a"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-next8-20261029/python-01/provenance.json",
+      "sha256": "d640c1b1db3333892865bb4d8097cb90e1fc9c490678221c83af35a778652721"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-next8-20261029/python-01/inventory.json",
+      "sha256": "f3b3c78e90a89434ed77bbf7dc79c9397f9c0b27dc10c5eb0a60296d5b6c89e1"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-common-image-audit-20261029/freeze.json",
+      "sha256": "da4564e3b72bf7dba9cb469d51b9b1e88664ba7c9fa4bbd2b1d35bfb256e509c"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-common-image-audit-20261029/inventory.json",
+      "sha256": "f096a4b8a2346c0332082e2b88b093cc4fb78b2cbaed0b5b5af05d071695f647"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/image-attempt-3/logs/image-inspect/stdout.txt",
+      "sha256": "4c6fa72b8b05b95a719110e0f7fa705758c224e253cf8c7cdf881218ea4f1913"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/plan.json",
+      "sha256": "e11e44e5065713fc146b18eb81aaf10ff5d62ce4cbe5dcb43d2db43b9e4fb0a1"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-dependency-preparation-20261029/plan.json",
+      "sha256": "eceef38492e2b70a98c5984174e5ea8141effb3d0b3412dd788dc950e0eadfa3"
+    }
+  ],
+  "buildSystem": {
+    "build-backend": "hatchling.build",
+    "requires": [
+      "hatchling"
+    ]
+  },
+  "candidateWheelRecordsVerified": 9,
+  "dependencySetupExecuted": false,
+  "imageEnv": [
+    "PATH=/usr/local/cargo/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+    "RUSTUP_HOME=/usr/local/rustup",
+    "CARGO_HOME=/usr/local/cargo",
+    "GOTOOLCHAIN=local",
+    "GOENV=off"
+  ],
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "imageToolInventoryVerification": {
+    "bothExactRegularMode0755RootOwned": true,
+    "inventoryPath": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-common-image-audit-20261029/inventory.json",
+    "inventorySha256": "f096a4b8a2346c0332082e2b88b093cc4fb78b2cbaed0b5b5af05d071695f647",
+    "newImageOrInterpreterObservation": false,
+    "pythonPath": "usr/bin/python3.11",
+    "pythonSha256": "304aa87a76ebb13fd22d253ac157f14980ff2cdb23e6274f3b045571405e07dc",
+    "uvPath": "usr/local/bin/uv",
+    "uvSha256": "5bafa105c458ae95676218df743de5cd193376f9f231b06ee5f38d6e7dcfb450"
+  },
+  "lockRequiresPython": ">=3.11, <3.13",
+  "maintainerDockerBase": "python:3.11",
+  "native311Compilation": false,
+  "newGitDaemonNativeInstallDownloadNetworkProviderActions": 0,
+  "probeASTDoesNotCallTargetOrSubprocess": true,
+  "probeCommands": [
+    [
+      "uv",
+      "--version"
+    ],
+    [
+      "uv",
+      "--no-config",
+      "run",
+      "--no-project",
+      "--offline",
+      "--no-python-downloads",
+      "--python",
+      "/usr/bin/python3.11",
+      "--",
+      "python",
+      "-I",
+      "-S",
+      "/workspace/owned-probe/probe.py"
+    ]
+  ],
+  "probeExecuted": false,
+  "probeImports": [
+    "hashlib",
+    "json",
+    "os",
+    "pathlib",
+    "ssl",
+    "sys",
+    "sysconfig"
+  ],
+  "projectRequiresPython": ">=3.11,<3.13",
+  "python311FeatureGrammarFiles": 62,
+  "pythonFilesExecuted": 0,
+  "selectedDevGroup": [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0"
+  ],
+  "sourceSpansVerified": true,
+  "state": "independent-inert-python01-environment-plan-source-checks-passed",
+  "subjectFreezeSha256": "e16c41c790fbd469263aa86791d5bc31bd59e3a1e11423f6d9d0ff78e873987a",
+  "unselectedExtra": [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "pipreqs>=0.5.0"
+  ]
+}

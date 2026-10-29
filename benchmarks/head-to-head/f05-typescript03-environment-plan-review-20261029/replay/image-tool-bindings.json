@@ -1,0 +1,55 @@
+{
+  "freshContainerOrDaemonProbe": false,
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "inventoryPath": "benchmarks/head-to-head/f05-common-image-audit-20261029/inventory.json",
+  "inventorySha256": "f096a4b8a2346c0332082e2b88b093cc4fb78b2cbaed0b5b5af05d071695f647",
+  "noPnpmPackageInFrozenImageInventory": true,
+  "nodeVersionObservedHistorically": "v24.22.2",
+  "npmVersionObservedHistorically": "11.19.1",
+  "observedToolsReceipt": "owner-inputs/benchmarks/head-to-head/f05-dependency-preparation-20261029/image-attempt-3/logs/tools/stdout.txt",
+  "selectedEntries": {
+    "usr/local/bin/corepack": null,
+    "usr/local/bin/node": {
+      "gid": 0,
+      "mode": "0o755",
+      "sha256": "b4855de8c4781130b722ceaec9718fed77cca3eed2e5cfc5455e267c0b9ee3b0",
+      "size": 123378856,
+      "type": "0",
+      "uid": 0
+    },
+    "usr/local/bin/npm": {
+      "gid": 0,
+      "mode": "0o755",
+      "sha256": "de0074a6bf7a9f22fc0081ec0b941ef336acc1109c2e45d2ddddb601b3188b63",
+      "size": 72,
+      "type": "0",
+      "uid": 0
+    },
+    "usr/local/bin/npx": {
+      "gid": 0,
+      "mode": "0o755",
+      "sha256": "8ef0a506c1aea4a30c46d8a1b2874caa0670ea52b35954cc60709cf22117e07f",
+      "size": 72,
+      "type": "0",
+      "uid": 0
+    },
+    "usr/local/bin/pnpm": null,
+    "usr/local/lib/node_modules/npm/bin/npm-cli.js": {
+      "gid": 0,
+      "mode": "0o755",
+      "sha256": "8e5f6f3429f8cdbe693cdc29904e9d5a7b127a494bd15c804bd54c7403bfcbe7",
+      "size": 54,
+      "type": "0",
+      "uid": 0
+    },
+    "usr/local/lib/node_modules/npm/package.json": {
+      "canonicalJsonSha256": "6a1413cd31dd46564e3c3c5bf5bb54a513665c3125278412674ec2b98c6c3334",
+      "gid": 0,
+      "mode": "0o644",
+      "sha256": "f6478d5600180a23f73e4217610c7709a71cedb4ae13f6c3e15ecb457f5d4fd6",
+      "size": 6597,
+      "type": "0",
+      "uid": 0
+    }
+  }
+}

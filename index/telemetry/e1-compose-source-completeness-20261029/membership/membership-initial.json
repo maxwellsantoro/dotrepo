@@ -1,0 +1,1797 @@
+{
+  "architectureLabelsAreFilenameGrammarNotClaimedSupportedImagePlatforms": true,
+  "architectureLabelsCompared": [
+    "386",
+    "amd64",
+    "amd64p32",
+    "arm",
+    "arm64",
+    "arm64be",
+    "armbe",
+    "loong64",
+    "mips",
+    "mips64",
+    "mips64le",
+    "mips64p32",
+    "mips64p32le",
+    "mipsle",
+    "ppc",
+    "ppc64",
+    "ppc64le",
+    "riscv",
+    "riscv64",
+    "s390",
+    "s390x",
+    "sparc",
+    "sparc64",
+    "wasm"
+  ],
+  "architectureVariationInThisSource": false,
+  "completeTupleAccepted": false,
+  "conditions": [
+    "Linux Go selection, CGO1, gc compiler, source-intended Go1.26.10; no extra GOFLAGS or custom tags",
+    "TAGS command substitution supplies no extra enumeration arguments; its actual behavior is not observed",
+    "go list loads/completes the selected source packages; imports/typechecking/acquisition not established here",
+    "test command receives source-intended e2e build tag; no effective argv/environment observed",
+    "default unchanged Make/Bake/Dockerfile and clean exact source tree; relay separate module/e2e separate lane"
+  ],
+  "constraintTokensObserved": [
+    "e2e",
+    "freebsd",
+    "fsnotify",
+    "linux",
+    "openbsd",
+    "standalone",
+    "windows"
+  ],
+  "headersSha256": "2ed9f24461e1f1d8be6afd30ce4423a7811291603203bd747a65af592417e338",
+  "nativeCollectionOccurred": false,
+  "representativeContext": {
+    "CGO_ENABLED": "1",
+    "GOARCH": "386",
+    "GOOS": "linux",
+    "counts": {
+      "intendedUnitTestPackages": 27,
+      "mainModuleDirectories": 38,
+      "omittedIntendedUnitTestPackages": 0,
+      "prospectiveSelectedDirectories": 37,
+      "sourceGoDirectories": 39
+    },
+    "effectiveChildContextObserved": false,
+    "enumeratorBuildTags": [],
+    "packages": [
+      {
+        "directory": "cmd/cmdtrace",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": true,
+        "importPath": "github.com/docker/compose/v5/cmd/cmdtrace",
+        "intendedE2eTag": {
+          "production": [
+            "cmd/cmdtrace/cmd_span.go"
+          ],
+          "test": [
+            "cmd/cmdtrace/cmd_span_test.go"
+          ]
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "cmdtrace"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "cmd/cmdtrace/cmd_span.go"
+          ],
+          "test": [
+            "cmd/cmdtrace/cmd_span_test.go"
+          ]
+        }
+      },
+      {
+        "directory": "cmd/compatibility",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": true,
+        "importPath": "github.com/docker/compose/v5/cmd/compatibility",
+        "intendedE2eTag": {
+          "production": [
+            "cmd/compatibility/convert.go"
+          ],
+          "test": [
+            "cmd/compatibility/convert_test.go"
+          ]
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "compatibility"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "cmd/compatibility/convert.go"
+          ],
+          "test": [
+            "cmd/compatibility/convert_test.go"
+          ]
+        }
+      },
+      {
+        "directory": "cmd/compose",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": true,
+        "importPath": "github.com/docker/compose/v5/cmd/compose",
+        "intendedE2eTag": {
+          "production": [
+            "cmd/compose/alpha.go",
+            "cmd/compose/attach.go",
+            "cmd/compose/backend.go",
+            "cmd/compose/bridge.go",
+            "cmd/compose/build.go",
+            "cmd/compose/commit.go",
+            "cmd/compose/completion.go",
+            "cmd/compose/compose.go",
+            "cmd/compose/config.go",
+            "cmd/compose/cp.go",
+            "cmd/compose/create.go",
+            "cmd/compose/down.go",
+            "cmd/compose/events.go",
+            "cmd/compose/exec.go",
+            "cmd/compose/export.go",
+            "cmd/compose/generate.go",
+            "cmd/compose/hooks.go",
+            "cmd/compose/images.go",
+            "cmd/compose/kill.go",
+            "cmd/compose/list.go",
+            "cmd/compose/logs.go",
+            "cmd/compose/options.go",
+            "cmd/compose/pause.go",
+            "cmd/compose/port.go",
+            "cmd/compose/ps.go",
+            "cmd/compose/publish.go",
+            "cmd/compose/pull.go",
+            "cmd/compose/push.go",
+            "cmd/compose/remove.go",
+            "cmd/compose/restart.go",
+            "cmd/compose/run.go",
+            "cmd/compose/scale.go",
+            "cmd/compose/start.go",
+            "cmd/compose/stats.go",
+            "cmd/compose/stats_projects.go",
+            "cmd/compose/stop.go",
+            "cmd/compose/top.go",
+            "cmd/compose/unsupported_attributes.go",
+            "cmd/compose/up.go",
+            "cmd/compose/version.go",
+            "cmd/compose/viz.go",
+            "cmd/compose/volumes.go",
+            "cmd/compose/wait.go",
+            "cmd/compose/watch.go"
+          ],
+          "test": [
+            "cmd/compose/bridge_test.go",
+            "cmd/compose/build_test.go",
+            "cmd/compose/compose_oci_test.go",
+            "cmd/compose/compose_progress_test.go",
+            "cmd/compose/compose_test.go",
+            "cmd/compose/config_test.go",
+            "cmd/compose/hooks_test.go",
+            "cmd/compose/options_test.go",
+            "cmd/compose/pullOptions_test.go",
+            "cmd/compose/push_test.go",
+            "cmd/compose/run_test.go",
+            "cmd/compose/stats_projects_test.go",
+            "cmd/compose/top_test.go",
+            "cmd/compose/unsupported_attributes_test.go",
+            "cmd/compose/up_attach_test.go",
+            "cmd/compose/up_test.go",
+            "cmd/compose/version_test.go",
+            "cmd/compose/viz_test.go"
+          ]
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "compose"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "cmd/compose/alpha.go",
+            "cmd/compose/attach.go",
+            "cmd/compose/backend.go",
+            "cmd/compose/bridge.go",
+            "cmd/compose/build.go",
+            "cmd/compose/commit.go",
+            "cmd/compose/completion.go",
+            "cmd/compose/compose.go",
+            "cmd/compose/config.go",
+            "cmd/compose/cp.go",
+            "cmd/compose/create.go",
+            "cmd/compose/down.go",
+            "cmd/compose/events.go",
+            "cmd/compose/exec.go",
+            "cmd/compose/export.go",
+            "cmd/compose/generate.go",
+            "cmd/compose/hooks.go",
+            "cmd/compose/images.go",
+            "cmd/compose/kill.go",
+            "cmd/compose/list.go",
+            "cmd/compose/logs.go",
+            "cmd/compose/options.go",
+            "cmd/compose/pause.go",
+            "cmd/compose/port.go",
+            "cmd/compose/ps.go",
+            "cmd/compose/publish.go",
+            "cmd/compose/pull.go",
+            "cmd/compose/push.go",
+            "cmd/compose/remove.go",
+            "cmd/compose/restart.go",
+            "cmd/compose/run.go",
+            "cmd/compose/scale.go",
+            "cmd/compose/start.go",
+            "cmd/compose/stats.go",
+            "cmd/compose/stats_projects.go",
+            "cmd/compose/stop.go",
+            "cmd/compose/top.go",
+            "cmd/compose/unsupported_attributes.go",
+            "cmd/compose/up.go",
+            "cmd/compose/version.go",
+            "cmd/compose/viz.go",
+            "cmd/compose/volumes.go",
+            "cmd/compose/wait.go",
+            "cmd/compose/watch.go"
+          ],
+          "test": [
+            "cmd/compose/bridge_test.go",
+            "cmd/compose/build_test.go",
+            "cmd/compose/compose_oci_test.go",
+            "cmd/compose/compose_progress_test.go",
+            "cmd/compose/compose_test.go",
+            "cmd/compose/config_test.go",
+            "cmd/compose/hooks_test.go",
+            "cmd/compose/options_test.go",
+            "cmd/compose/pullOptions_test.go",
+            "cmd/compose/push_test.go",
+            "cmd/compose/run_test.go",
+            "cmd/compose/stats_projects_test.go",
+            "cmd/compose/top_test.go",
+            "cmd/compose/unsupported_attributes_test.go",
+            "cmd/compose/up_attach_test.go",
+            "cmd/compose/up_test.go",
+            "cmd/compose/version_test.go",
+            "cmd/compose/viz_test.go"
+          ]
+        }
+      },
+      {
+        "directory": "cmd/display",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": true,
+        "importPath": "github.com/docker/compose/v5/cmd/display",
+        "intendedE2eTag": {
+          "production": [
+            "cmd/display/colors.go",
+            "cmd/display/dryrun.go",
+            "cmd/display/json.go",
+            "cmd/display/mode.go",
+            "cmd/display/plain.go",
+            "cmd/display/quiet.go",
+            "cmd/display/tty.go",
+            "cmd/display/tty_layout.go",
+            "cmd/display/tty_model.go",
+            "cmd/display/tty_screen.go"
+          ],
+          "test": [
+            "cmd/display/json_test.go",
+            "cmd/display/tty_test.go"
+          ]
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "display"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "cmd/display/colors.go",
+            "cmd/display/dryrun.go",
+            "cmd/display/json.go",
+            "cmd/display/mode.go",
+            "cmd/display/plain.go",
+            "cmd/display/quiet.go",
+            "cmd/display/tty.go",
+            "cmd/display/tty_layout.go",
+            "cmd/display/tty_model.go",
+            "cmd/display/tty_screen.go"
+          ],
+          "test": [
+            "cmd/display/json_test.go",
+            "cmd/display/tty_test.go"
+          ]
+        }
+      },
+      {
+        "directory": "cmd/formatter",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": true,
+        "importPath": "github.com/docker/compose/v5/cmd/formatter",
+        "intendedE2eTag": {
+          "production": [
+            "cmd/formatter/ansi.go",
+            "cmd/formatter/colors.go",
+            "cmd/formatter/consts.go",
+            "cmd/formatter/container.go",
+            "cmd/formatter/formatter.go",
+            "cmd/formatter/json.go",
+            "cmd/formatter/logs.go",
+            "cmd/formatter/pretty.go",
+            "cmd/formatter/shortcut.go",
+            "cmd/formatter/shortcut_unix.go"
+          ],
+          "test": [
+            "cmd/formatter/ansi_test.go",
+            "cmd/formatter/container_test.go",
+            "cmd/formatter/formatter_test.go",
+            "cmd/formatter/shortcut_test.go"
+          ]
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "formatter"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "cmd/formatter/ansi.go",
+            "cmd/formatter/colors.go",
+            "cmd/formatter/consts.go",
+            "cmd/formatter/container.go",
+            "cmd/formatter/formatter.go",
+            "cmd/formatter/json.go",
+            "cmd/formatter/logs.go",
+            "cmd/formatter/pretty.go",
+            "cmd/formatter/shortcut.go",
+            "cmd/formatter/shortcut_unix.go"
+          ],
+          "test": [
+            "cmd/formatter/ansi_test.go",
+            "cmd/formatter/container_test.go",
+            "cmd/formatter/formatter_test.go",
+            "cmd/formatter/shortcut_test.go"
+          ]
+        }
+      },
+      {
+        "directory": "cmd",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": false,
+        "importPath": "github.com/docker/compose/v5/cmd",
+        "intendedE2eTag": {
+          "production": [
+            "cmd/main.go"
+          ],
+          "test": []
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "main"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "cmd/main.go"
+          ],
+          "test": []
+        }
+      },
+      {
+        "directory": "cmd/prompt",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": true,
+        "importPath": "github.com/docker/compose/v5/cmd/prompt",
+        "intendedE2eTag": {
+          "production": [
+            "cmd/prompt/prompt.go",
+            "cmd/prompt/prompt_mock.go"
+          ],
+          "test": [
+            "cmd/prompt/prompt_test.go"
+          ]
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "prompt"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "cmd/prompt/prompt.go",
+            "cmd/prompt/prompt_mock.go"
+          ],
+          "test": [
+            "cmd/prompt/prompt_test.go"
+          ]
+        }
+      },
+      {
+        "directory": "docs/examples",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": false,
+        "importPath": "github.com/docker/compose/v5/docs/examples",
+        "intendedE2eTag": {
+          "production": [
+            "docs/examples/provider.go"
+          ],
+          "test": []
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "main"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "docs/examples/provider.go"
+          ],
+          "test": []
+        }
+      },
+      {
+        "directory": "docs/examples/sdk",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": true,
+        "importPath": "github.com/docker/compose/v5/docs/examples/sdk",
+        "intendedE2eTag": {
+          "production": [
+            "docs/examples/sdk/main.go",
+            "docs/examples/sdk/options.go"
+          ],
+          "test": [
+            "docs/examples/sdk/sdk_md_test.go"
+          ]
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "main"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "docs/examples/sdk/main.go",
+            "docs/examples/sdk/options.go"
+          ],
+          "test": [
+            "docs/examples/sdk/sdk_md_test.go"
+          ]
+        }
+      },
+      {
+        "directory": "docs/yaml/main",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": false,
+        "importPath": "github.com/docker/compose/v5/docs/yaml/main",
+        "intendedE2eTag": {
+          "production": [
+            "docs/yaml/main/generate.go"
+          ],
+          "test": []
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "main"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "docs/yaml/main/generate.go"
+          ],
+          "test": []
+        }
+      },
+      {
+        "directory": "internal/containerops",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": true,
+        "importPath": "github.com/docker/compose/v5/internal/containerops",
+        "intendedE2eTag": {
+          "production": [
+            "internal/containerops/commit.go",
+            "internal/containerops/containerops.go",
+            "internal/containerops/cp.go",
+            "internal/containerops/exec.go",
+            "internal/containerops/export.go"
+          ],
+          "test": [
+            "internal/containerops/cp_test.go"
+          ]
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "containerops"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "internal/containerops/commit.go",
+            "internal/containerops/containerops.go",
+            "internal/containerops/cp.go",
+            "internal/containerops/exec.go",
+            "internal/containerops/export.go"
+          ],
+          "test": [
+            "internal/containerops/cp_test.go"
+          ]
+        }
+      },
+      {
+        "directory": "internal/desktop",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": true,
+        "importPath": "github.com/docker/compose/v5/internal/desktop",
+        "intendedE2eTag": {
+          "production": [
+            "internal/desktop/client.go",
+            "internal/desktop/proxy.go"
+          ],
+          "test": [
+            "internal/desktop/client_test.go",
+            "internal/desktop/proxy_test.go"
+          ]
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "desktop"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "internal/desktop/client.go",
+            "internal/desktop/proxy.go"
+          ],
+          "test": [
+            "internal/desktop/client_test.go",
+            "internal/desktop/proxy_test.go"
+          ]
+        }
+      },
+      {
+        "directory": "internal/experimental",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": false,
+        "importPath": "github.com/docker/compose/v5/internal/experimental",
+        "intendedE2eTag": {
+          "production": [
+            "internal/experimental/experimental.go"
+          ],
+          "test": []
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "experimental"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "internal/experimental/experimental.go"
+          ],
+          "test": []
+        }
+      },
+      {
+        "directory": "internal/inspect",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": true,
+        "importPath": "github.com/docker/compose/v5/internal/inspect",
+        "intendedE2eTag": {
+          "production": [
+            "internal/inspect/events.go",
+            "internal/inspect/inspect.go",
+            "internal/inspect/ls.go",
+            "internal/inspect/port.go",
+            "internal/inspect/ps.go",
+            "internal/inspect/top.go",
+            "internal/inspect/viz.go",
+            "internal/inspect/volumes.go"
+          ],
+          "test": [
+            "internal/inspect/inspect_test.go",
+            "internal/inspect/ls_test.go",
+            "internal/inspect/port_test.go"
+          ]
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "inspect"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "internal/inspect/events.go",
+            "internal/inspect/inspect.go",
+            "internal/inspect/ls.go",
+            "internal/inspect/port.go",
+            "internal/inspect/ps.go",
+            "internal/inspect/top.go",
+            "internal/inspect/viz.go",
+            "internal/inspect/volumes.go"
+          ],
+          "test": [
+            "internal/inspect/inspect_test.go",
+            "internal/inspect/ls_test.go",
+            "internal/inspect/port_test.go"
+          ]
+        }
+      },
+      {
+        "directory": "internal/locker",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": false,
+        "importPath": "github.com/docker/compose/v5/internal/locker",
+        "intendedE2eTag": {
+          "production": [
+            "internal/locker/pidfile.go",
+            "internal/locker/pidfile_unix.go",
+            "internal/locker/runtime.go",
+            "internal/locker/runtime_unix.go"
+          ],
+          "test": []
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "locker"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "internal/locker/pidfile.go",
+            "internal/locker/pidfile_unix.go",
+            "internal/locker/runtime.go",
+            "internal/locker/runtime_unix.go"
+          ],
+          "test": []
+        }
+      },
+      {
+        "directory": "internal/memnet",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": false,
+        "importPath": "github.com/docker/compose/v5/internal/memnet",
+        "intendedE2eTag": {
+          "production": [
+            "internal/memnet/conn.go",
+            "internal/memnet/conn_unix.go"
+          ],
+          "test": []
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "memnet"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "internal/memnet/conn.go",
+            "internal/memnet/conn_unix.go"
+          ],
+          "test": []
+        }
+      },
+      {
+        "directory": "internal/naming",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": true,
+        "importPath": "github.com/docker/compose/v5/internal/naming",
+        "intendedE2eTag": {
+          "production": [
+            "internal/naming/naming.go"
+          ],
+          "test": [
+            "internal/naming/naming_test.go"
+          ]
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "naming"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "internal/naming/naming.go"
+          ],
+          "test": [
+            "internal/naming/naming_test.go"
+          ]
+        }
+      },
+      {
+        "directory": "internal/oci",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": true,
+        "importPath": "github.com/docker/compose/v5/internal/oci",
+        "intendedE2eTag": {
+          "production": [
+            "internal/oci/push.go",
+            "internal/oci/resolver.go"
+          ],
+          "test": [
+            "internal/oci/resolver_test.go"
+          ]
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "oci"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "internal/oci/push.go",
+            "internal/oci/resolver.go"
+          ],
+          "test": [
+            "internal/oci/resolver_test.go"
+          ]
+        }
+      },
+      {
+        "directory": "internal/paths",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": false,
+        "importPath": "github.com/docker/compose/v5/internal/paths",
+        "intendedE2eTag": {
+          "production": [
+            "internal/paths/paths.go"
+          ],
+          "test": []
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "paths"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "internal/paths/paths.go"
+          ],
+          "test": []
+        }
+      },
+      {
+        "directory": "internal/pidfile",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": false,
+        "importPath": "github.com/docker/compose/v5/internal/pidfile",
+        "intendedE2eTag": {
+          "production": [
+            "internal/pidfile/pidfile.go",
+            "internal/pidfile/pidfile_unix.go"
+          ],
+          "test": []
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "pidfile"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "internal/pidfile/pidfile.go",
+            "internal/pidfile/pidfile_unix.go"
+          ],
+          "test": []
+        }
+      },
+      {
+        "directory": "internal/progress",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": true,
+        "importPath": "github.com/docker/compose/v5/internal/progress",
+        "intendedE2eTag": {
+          "production": [
+            "internal/progress/progress.go"
+          ],
+          "test": [
+            "internal/progress/progress_test.go"
+          ]
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "progress"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "internal/progress/progress.go"
+          ],
+          "test": [
+            "internal/progress/progress_test.go"
+          ]
+        }
+      },
+      {
+        "directory": "internal/projectloader",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": true,
+        "importPath": "github.com/docker/compose/v5/internal/projectloader",
+        "intendedE2eTag": {
+          "production": [
+            "internal/projectloader/generate.go",
+            "internal/projectloader/loader.go",
+            "internal/projectloader/projectloader.go",
+            "internal/projectloader/unsupported_attributes.go"
+          ],
+          "test": [
+            "internal/projectloader/loader_test.go",
+            "internal/projectloader/unsupported_attributes_test.go"
+          ]
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "projectloader"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "internal/projectloader/generate.go",
+            "internal/projectloader/loader.go",
+            "internal/projectloader/projectloader.go",
+            "internal/projectloader/unsupported_attributes.go"
+          ],
+          "test": [
+            "internal/projectloader/loader_test.go",
+            "internal/projectloader/unsupported_attributes_test.go"
+          ]
+        }
+      },
+      {
+        "directory": "internal/provider",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": true,
+        "importPath": "github.com/docker/compose/v5/internal/provider",
+        "intendedE2eTag": {
+          "production": [
+            "internal/provider/plugins.go",
+            "internal/provider/provider.go"
+          ],
+          "test": [
+            "internal/provider/backend_test.go",
+            "internal/provider/get_image_test.go",
+            "internal/provider/plugins_control_test.go",
+            "internal/provider/plugins_test.go"
+          ]
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "provider"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "internal/provider/plugins.go",
+            "internal/provider/provider.go"
+          ],
+          "test": [
+            "internal/provider/backend_test.go",
+            "internal/provider/get_image_test.go",
+            "internal/provider/plugins_control_test.go",
+            "internal/provider/plugins_test.go"
+          ]
+        }
+      },
+      {
+        "directory": "internal/registry",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": true,
+        "importPath": "github.com/docker/compose/v5/internal/registry",
+        "intendedE2eTag": {
+          "production": [
+            "internal/registry/desktop.go",
+            "internal/registry/registry.go"
+          ],
+          "test": [
+            "internal/registry/desktop_test.go"
+          ]
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "registry"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "internal/registry/desktop.go",
+            "internal/registry/registry.go"
+          ],
+          "test": [
+            "internal/registry/desktop_test.go"
+          ]
+        }
+      },
+      {
+        "directory": "internal/relay",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": true,
+        "importPath": "github.com/docker/compose/v5/internal/relay",
+        "intendedE2eTag": {
+          "production": [
+            "internal/relay/relay.go"
+          ],
+          "test": [
+            "internal/relay/relay_test.go"
+          ]
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "relay"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "internal/relay/relay.go"
+          ],
+          "test": [
+            "internal/relay/relay_test.go"
+          ]
+        }
+      },
+      {
+        "directory": "internal/sync",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": true,
+        "importPath": "github.com/docker/compose/v5/internal/sync",
+        "intendedE2eTag": {
+          "production": [
+            "internal/sync/shared.go",
+            "internal/sync/tar.go"
+          ],
+          "test": [
+            "internal/sync/tar_test.go"
+          ]
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "sync"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "internal/sync/shared.go",
+            "internal/sync/tar.go"
+          ],
+          "test": [
+            "internal/sync/tar_test.go"
+          ]
+        }
+      },
+      {
+        "directory": "internal/tracing",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": true,
+        "importPath": "github.com/docker/compose/v5/internal/tracing",
+        "intendedE2eTag": {
+          "production": [
+            "internal/tracing/attributes.go",
+            "internal/tracing/docker_context.go",
+            "internal/tracing/keyboard_metrics.go",
+            "internal/tracing/mux.go",
+            "internal/tracing/tracing.go",
+            "internal/tracing/wrap.go"
+          ],
+          "test": [
+            "internal/tracing/attributes_test.go",
+            "internal/tracing/tracing_test.go"
+          ]
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "tracing",
+          "tracing_test"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "internal/tracing/attributes.go",
+            "internal/tracing/docker_context.go",
+            "internal/tracing/keyboard_metrics.go",
+            "internal/tracing/mux.go",
+            "internal/tracing/tracing.go",
+            "internal/tracing/wrap.go"
+          ],
+          "test": [
+            "internal/tracing/attributes_test.go",
+            "internal/tracing/tracing_test.go"
+          ]
+        }
+      },
+      {
+        "directory": "internal",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": false,
+        "importPath": "github.com/docker/compose/v5/internal",
+        "intendedE2eTag": {
+          "production": [
+            "internal/variables.go"
+          ],
+          "test": []
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "internal"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "internal/variables.go"
+          ],
+          "test": []
+        }
+      },
+      {
+        "directory": "pkg/api",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": true,
+        "importPath": "github.com/docker/compose/v5/pkg/api",
+        "intendedE2eTag": {
+          "production": [
+            "pkg/api/api.go",
+            "pkg/api/context.go",
+            "pkg/api/env.go",
+            "pkg/api/errors.go",
+            "pkg/api/event.go",
+            "pkg/api/feature.go",
+            "pkg/api/labels.go",
+            "pkg/api/up_options.go"
+          ],
+          "test": [
+            "pkg/api/api_test.go",
+            "pkg/api/errors_test.go",
+            "pkg/api/labels_test.go",
+            "pkg/api/up_options_test.go"
+          ]
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "api"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "pkg/api/api.go",
+            "pkg/api/context.go",
+            "pkg/api/env.go",
+            "pkg/api/errors.go",
+            "pkg/api/event.go",
+            "pkg/api/feature.go",
+            "pkg/api/labels.go",
+            "pkg/api/up_options.go"
+          ],
+          "test": [
+            "pkg/api/api_test.go",
+            "pkg/api/errors_test.go",
+            "pkg/api/labels_test.go",
+            "pkg/api/up_options_test.go"
+          ]
+        }
+      },
+      {
+        "directory": "pkg/bridge",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": true,
+        "importPath": "github.com/docker/compose/v5/pkg/bridge",
+        "intendedE2eTag": {
+          "production": [
+            "pkg/bridge/convert.go",
+            "pkg/bridge/transformers.go"
+          ],
+          "test": [
+            "pkg/bridge/convert_test.go"
+          ]
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "bridge"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "pkg/bridge/convert.go",
+            "pkg/bridge/transformers.go"
+          ],
+          "test": [
+            "pkg/bridge/convert_test.go"
+          ]
+        }
+      },
+      {
+        "directory": "pkg/compose",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": true,
+        "importPath": "github.com/docker/compose/v5/pkg/compose",
+        "intendedE2eTag": {
+          "production": [
+            "pkg/compose/apiSocket.go",
+            "pkg/compose/api_versions.go",
+            "pkg/compose/attach.go",
+            "pkg/compose/attach_service.go",
+            "pkg/compose/build.go",
+            "pkg/compose/build_bake.go",
+            "pkg/compose/build_classic.go",
+            "pkg/compose/compose.go",
+            "pkg/compose/container.go",
+            "pkg/compose/containerops.go",
+            "pkg/compose/containers.go",
+            "pkg/compose/convert.go",
+            "pkg/compose/create.go",
+            "pkg/compose/dependencies.go",
+            "pkg/compose/dependency_wait.go",
+            "pkg/compose/desktop.go",
+            "pkg/compose/docker_cli_providers.go",
+            "pkg/compose/down.go",
+            "pkg/compose/envresolver.go",
+            "pkg/compose/executor.go",
+            "pkg/compose/executor_events.go",
+            "pkg/compose/executor_ops.go",
+            "pkg/compose/filters.go",
+            "pkg/compose/hash.go",
+            "pkg/compose/hook.go",
+            "pkg/compose/image_pruner.go",
+            "pkg/compose/images.go",
+            "pkg/compose/inspect.go",
+            "pkg/compose/kill.go",
+            "pkg/compose/logs.go",
+            "pkg/compose/model.go",
+            "pkg/compose/monitor.go",
+            "pkg/compose/navigation_menu.go",
+            "pkg/compose/observed_state.go",
+            "pkg/compose/pause.go",
+            "pkg/compose/plan.go",
+            "pkg/compose/plugins.go",
+            "pkg/compose/pre_start.go",
+            "pkg/compose/printer.go",
+            "pkg/compose/progress.go",
+            "pkg/compose/projectloader.go",
+            "pkg/compose/provider_images.go",
+            "pkg/compose/publish.go",
+            "pkg/compose/pull.go",
+            "pkg/compose/push.go",
+            "pkg/compose/rebuild_scheduler.go",
+            "pkg/compose/reconcile.go",
+            "pkg/compose/relay.go",
+            "pkg/compose/remove.go",
+            "pkg/compose/restart.go",
+            "pkg/compose/run.go",
+            "pkg/compose/scale.go",
+            "pkg/compose/secrets.go",
+            "pkg/compose/service_containers.go",
+            "pkg/compose/shellout.go",
+            "pkg/compose/start.go",
+            "pkg/compose/stop.go",
+            "pkg/compose/up.go",
+            "pkg/compose/wait.go",
+            "pkg/compose/watch.go"
+          ],
+          "test": [
+            "pkg/compose/apiSocket_test.go",
+            "pkg/compose/build_bake_test.go",
+            "pkg/compose/build_test.go",
+            "pkg/compose/compose_test.go",
+            "pkg/compose/containers_test.go",
+            "pkg/compose/cp_test.go",
+            "pkg/compose/create_test.go",
+            "pkg/compose/dependencies_test.go",
+            "pkg/compose/dependency_wait_test.go",
+            "pkg/compose/down_test.go",
+            "pkg/compose/envresolver_test.go",
+            "pkg/compose/executor_start_test.go",
+            "pkg/compose/executor_test.go",
+            "pkg/compose/executor_wait_slot_test.go",
+            "pkg/compose/hash_test.go",
+            "pkg/compose/hook_test.go",
+            "pkg/compose/image_pruner_test.go",
+            "pkg/compose/images_test.go",
+            "pkg/compose/kill_test.go",
+            "pkg/compose/logs_cursor_test.go",
+            "pkg/compose/logs_test.go",
+            "pkg/compose/model_test.go",
+            "pkg/compose/monitor_test.go",
+            "pkg/compose/observed_state_test.go",
+            "pkg/compose/plan_test.go",
+            "pkg/compose/plugins_test.go",
+            "pkg/compose/port_test.go",
+            "pkg/compose/pre_start_test.go",
+            "pkg/compose/provider_images_test.go",
+            "pkg/compose/ps_test.go",
+            "pkg/compose/publish_test.go",
+            "pkg/compose/pull_test.go",
+            "pkg/compose/push_test.go",
+            "pkg/compose/rebuild_scheduler_test.go",
+            "pkg/compose/reconcile_start_test.go",
+            "pkg/compose/reconcile_test.go",
+            "pkg/compose/relay_test.go",
+            "pkg/compose/restart_test.go",
+            "pkg/compose/run_test.go",
+            "pkg/compose/scale_test.go",
+            "pkg/compose/service_containers_test.go",
+            "pkg/compose/start_test.go",
+            "pkg/compose/stop_test.go",
+            "pkg/compose/umask_test.go",
+            "pkg/compose/up_options_test.go",
+            "pkg/compose/up_phases_test.go",
+            "pkg/compose/up_test.go",
+            "pkg/compose/viz_test.go",
+            "pkg/compose/volumes_test.go",
+            "pkg/compose/wait_test.go",
+            "pkg/compose/watch_test.go"
+          ]
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "compose"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "pkg/compose/apiSocket.go",
+            "pkg/compose/api_versions.go",
+            "pkg/compose/attach.go",
+            "pkg/compose/attach_service.go",
+            "pkg/compose/build.go",
+            "pkg/compose/build_bake.go",
+            "pkg/compose/build_classic.go",
+            "pkg/compose/compose.go",
+            "pkg/compose/container.go",
+            "pkg/compose/containerops.go",
+            "pkg/compose/containers.go",
+            "pkg/compose/convert.go",
+            "pkg/compose/create.go",
+            "pkg/compose/dependencies.go",
+            "pkg/compose/dependency_wait.go",
+            "pkg/compose/desktop.go",
+            "pkg/compose/docker_cli_providers.go",
+            "pkg/compose/down.go",
+            "pkg/compose/envresolver.go",
+            "pkg/compose/executor.go",
+            "pkg/compose/executor_events.go",
+            "pkg/compose/executor_ops.go",
+            "pkg/compose/filters.go",
+            "pkg/compose/hash.go",
+            "pkg/compose/hook.go",
+            "pkg/compose/image_pruner.go",
+            "pkg/compose/images.go",
+            "pkg/compose/inspect.go",
+            "pkg/compose/kill.go",
+            "pkg/compose/logs.go",
+            "pkg/compose/model.go",
+            "pkg/compose/monitor.go",
+            "pkg/compose/navigation_menu.go",
+            "pkg/compose/observed_state.go",
+            "pkg/compose/pause.go",
+            "pkg/compose/plan.go",
+            "pkg/compose/plugins.go",
+            "pkg/compose/pre_start.go",
+            "pkg/compose/printer.go",
+            "pkg/compose/progress.go",
+            "pkg/compose/projectloader.go",
+            "pkg/compose/provider_images.go",
+            "pkg/compose/publish.go",
+            "pkg/compose/pull.go",
+            "pkg/compose/push.go",
+            "pkg/compose/rebuild_scheduler.go",
+            "pkg/compose/reconcile.go",
+            "pkg/compose/relay.go",
+            "pkg/compose/remove.go",
+            "pkg/compose/restart.go",
+            "pkg/compose/run.go",
+            "pkg/compose/scale.go",
+            "pkg/compose/secrets.go",
+            "pkg/compose/service_containers.go",
+            "pkg/compose/shellout.go",
+            "pkg/compose/start.go",
+            "pkg/compose/stop.go",
+            "pkg/compose/up.go",
+            "pkg/compose/wait.go",
+            "pkg/compose/watch.go"
+          ],
+          "test": [
+            "pkg/compose/apiSocket_test.go",
+            "pkg/compose/build_bake_test.go",
+            "pkg/compose/build_test.go",
+            "pkg/compose/compose_test.go",
+            "pkg/compose/containers_test.go",
+            "pkg/compose/cp_test.go",
+            "pkg/compose/create_test.go",
+            "pkg/compose/dependencies_test.go",
+            "pkg/compose/dependency_wait_test.go",
+            "pkg/compose/down_test.go",
+            "pkg/compose/envresolver_test.go",
+            "pkg/compose/executor_start_test.go",
+            "pkg/compose/executor_test.go",
+            "pkg/compose/executor_wait_slot_test.go",
+            "pkg/compose/hash_test.go",
+            "pkg/compose/hook_test.go",
+            "pkg/compose/image_pruner_test.go",
+            "pkg/compose/images_test.go",
+            "pkg/compose/kill_test.go",
+            "pkg/compose/logs_cursor_test.go",
+            "pkg/compose/logs_test.go",
+            "pkg/compose/model_test.go",
+            "pkg/compose/monitor_test.go",
+            "pkg/compose/observed_state_test.go",
+            "pkg/compose/plan_test.go",
+            "pkg/compose/plugins_test.go",
+            "pkg/compose/port_test.go",
+            "pkg/compose/pre_start_test.go",
+            "pkg/compose/provider_images_test.go",
+            "pkg/compose/ps_test.go",
+            "pkg/compose/publish_test.go",
+            "pkg/compose/pull_test.go",
+            "pkg/compose/push_test.go",
+            "pkg/compose/rebuild_scheduler_test.go",
+            "pkg/compose/reconcile_start_test.go",
+            "pkg/compose/reconcile_test.go",
+            "pkg/compose/relay_test.go",
+            "pkg/compose/restart_test.go",
+            "pkg/compose/run_test.go",
+            "pkg/compose/scale_test.go",
+            "pkg/compose/service_containers_test.go",
+            "pkg/compose/start_test.go",
+            "pkg/compose/stop_test.go",
+            "pkg/compose/umask_test.go",
+            "pkg/compose/up_options_test.go",
+            "pkg/compose/up_phases_test.go",
+            "pkg/compose/up_test.go",
+            "pkg/compose/viz_test.go",
+            "pkg/compose/volumes_test.go",
+            "pkg/compose/wait_test.go",
+            "pkg/compose/watch_test.go"
+          ]
+        }
+      },
+      {
+        "directory": "pkg/compose/transform",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": true,
+        "importPath": "github.com/docker/compose/v5/pkg/compose/transform",
+        "intendedE2eTag": {
+          "production": [
+            "pkg/compose/transform/replace.go"
+          ],
+          "test": [
+            "pkg/compose/transform/replace_test.go"
+          ]
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "transform"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "pkg/compose/transform/replace.go"
+          ],
+          "test": [
+            "pkg/compose/transform/replace_test.go"
+          ]
+        }
+      },
+      {
+        "directory": "pkg/dryrun",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": true,
+        "importPath": "github.com/docker/compose/v5/pkg/dryrun",
+        "intendedE2eTag": {
+          "production": [
+            "pkg/dryrun/dryrunclient.go"
+          ],
+          "test": [
+            "pkg/dryrun/dryrunclient_test.go"
+          ]
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "dryrun"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "pkg/dryrun/dryrunclient.go"
+          ],
+          "test": [
+            "pkg/dryrun/dryrunclient_test.go"
+          ]
+        }
+      },
+      {
+        "directory": "pkg/e2e",
+        "excludedByLiteralE2eSubstring": true,
+        "hasIntendedSelectedTests": false,
+        "importPath": "github.com/docker/compose/v5/pkg/e2e",
+        "intendedE2eTag": {
+          "production": [
+            "pkg/e2e/assert.go",
+            "pkg/e2e/checks.go",
+            "pkg/e2e/e2e_config_plugin.go",
+            "pkg/e2e/framework.go",
+            "pkg/e2e/scenario.go"
+          ],
+          "test": [
+            "pkg/e2e/api_socket_test.go",
+            "pkg/e2e/bridge_convert_output_test.go",
+            "pkg/e2e/bridge_test.go",
+            "pkg/e2e/build_test.go",
+            "pkg/e2e/cancel_test.go",
+            "pkg/e2e/cascade_test.go",
+            "pkg/e2e/commit_test.go",
+            "pkg/e2e/compose_environment_test.go",
+            "pkg/e2e/compose_exec_test.go",
+            "pkg/e2e/compose_run_build_once_test.go",
+            "pkg/e2e/compose_run_test.go",
+            "pkg/e2e/compose_test.go",
+            "pkg/e2e/compose_up_test.go",
+            "pkg/e2e/config_test.go",
+            "pkg/e2e/configs_test.go",
+            "pkg/e2e/container_name_test.go",
+            "pkg/e2e/cp_test.go",
+            "pkg/e2e/env_file_test.go",
+            "pkg/e2e/events_test.go",
+            "pkg/e2e/exec_test.go",
+            "pkg/e2e/export_test.go",
+            "pkg/e2e/expose_test.go",
+            "pkg/e2e/healthcheck_test.go",
+            "pkg/e2e/hooks_test.go",
+            "pkg/e2e/image_identity_corner_test.go",
+            "pkg/e2e/image_identity_test.go",
+            "pkg/e2e/images_test.go",
+            "pkg/e2e/ipc_test.go",
+            "pkg/e2e/jobs_test.go",
+            "pkg/e2e/logs_test.go",
+            "pkg/e2e/main_test.go",
+            "pkg/e2e/model_test.go",
+            "pkg/e2e/multiplatform_test.go",
+            "pkg/e2e/networks_test.go",
+            "pkg/e2e/noDeps_test.go",
+            "pkg/e2e/orphans_test.go",
+            "pkg/e2e/pause_test.go",
+            "pkg/e2e/profiles_test.go",
+            "pkg/e2e/providers_test.go",
+            "pkg/e2e/ps_test.go",
+            "pkg/e2e/publish_test.go",
+            "pkg/e2e/pull_test.go",
+            "pkg/e2e/recreate_no_deps_test.go",
+            "pkg/e2e/remote_git_test.go",
+            "pkg/e2e/remote_oci_test.go",
+            "pkg/e2e/restart_test.go",
+            "pkg/e2e/scale_test.go",
+            "pkg/e2e/secrets_test.go",
+            "pkg/e2e/start_stop_test.go",
+            "pkg/e2e/testdata_test.go",
+            "pkg/e2e/umask_test.go",
+            "pkg/e2e/unsupported_attributes_test.go",
+            "pkg/e2e/up_interactive_test.go",
+            "pkg/e2e/up_start_failure_test.go",
+            "pkg/e2e/up_test.go",
+            "pkg/e2e/volumes_test.go",
+            "pkg/e2e/wait_test.go",
+            "pkg/e2e/watch_test.go"
+          ]
+        },
+        "intendedUnitDirectory": false,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": false,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "e2e"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "pkg/e2e/assert.go",
+            "pkg/e2e/checks.go",
+            "pkg/e2e/e2e_config_plugin.go",
+            "pkg/e2e/framework.go",
+            "pkg/e2e/scenario.go"
+          ],
+          "test": []
+        }
+      },
+      {
+        "directory": "pkg/mocks",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": false,
+        "importPath": "github.com/docker/compose/v5/pkg/mocks",
+        "intendedE2eTag": {
+          "production": [
+            "pkg/mocks/mock_docker_api.go",
+            "pkg/mocks/mock_docker_cli.go",
+            "pkg/mocks/mock_docker_compose_api.go"
+          ],
+          "test": []
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "mocks"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "pkg/mocks/mock_docker_api.go",
+            "pkg/mocks/mock_docker_cli.go",
+            "pkg/mocks/mock_docker_compose_api.go"
+          ],
+          "test": []
+        }
+      },
+      {
+        "directory": "pkg/remote",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": true,
+        "importPath": "github.com/docker/compose/v5/pkg/remote",
+        "intendedE2eTag": {
+          "production": [
+            "pkg/remote/cache.go",
+            "pkg/remote/cache_unix.go",
+            "pkg/remote/git.go",
+            "pkg/remote/oci.go"
+          ],
+          "test": [
+            "pkg/remote/git_test.go",
+            "pkg/remote/oci_test.go"
+          ]
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "remote"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "pkg/remote/cache.go",
+            "pkg/remote/cache_unix.go",
+            "pkg/remote/git.go",
+            "pkg/remote/oci.go"
+          ],
+          "test": [
+            "pkg/remote/git_test.go",
+            "pkg/remote/oci_test.go"
+          ]
+        }
+      },
+      {
+        "directory": "pkg/utils",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": true,
+        "importPath": "github.com/docker/compose/v5/pkg/utils",
+        "intendedE2eTag": {
+          "production": [
+            "pkg/utils/durationutils.go",
+            "pkg/utils/safebuffer.go",
+            "pkg/utils/set.go",
+            "pkg/utils/stringutils.go",
+            "pkg/utils/writer.go"
+          ],
+          "test": [
+            "pkg/utils/set_test.go",
+            "pkg/utils/writer_test.go"
+          ]
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "utils"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "pkg/utils/durationutils.go",
+            "pkg/utils/safebuffer.go",
+            "pkg/utils/set.go",
+            "pkg/utils/stringutils.go",
+            "pkg/utils/writer.go"
+          ],
+          "test": [
+            "pkg/utils/set_test.go",
+            "pkg/utils/writer_test.go"
+          ]
+        }
+      },
+      {
+        "directory": "pkg/watch",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": true,
+        "importPath": "github.com/docker/compose/v5/pkg/watch",
+        "intendedE2eTag": {
+          "production": [
+            "pkg/watch/debounce.go",
+            "pkg/watch/dockerignore.go",
+            "pkg/watch/ephemeral.go",
+            "pkg/watch/notify.go",
+            "pkg/watch/paths.go",
+            "pkg/watch/temp.go",
+            "pkg/watch/temp_dir_fixture.go",
+            "pkg/watch/watcher_naive.go",
+            "pkg/watch/watcher_nonwin.go"
+          ],
+          "test": [
+            "pkg/watch/debounce_test.go",
+            "pkg/watch/dockerignore_test.go",
+            "pkg/watch/ephemeral_test.go",
+            "pkg/watch/notify_test.go",
+            "pkg/watch/paths_test.go",
+            "pkg/watch/watcher_naive_test.go",
+            "pkg/watch/watcher_naive_walk_test.go"
+          ]
+        },
+        "intendedUnitDirectory": true,
+        "mainModuleWalkIncluded": true,
+        "selectedByProspectiveRelay": true,
+        "sourceEligibleForUntaggedEnumeration": true,
+        "sourcePackages": [
+          "watch",
+          "watch_test"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "pkg/watch/debounce.go",
+            "pkg/watch/dockerignore.go",
+            "pkg/watch/ephemeral.go",
+            "pkg/watch/notify.go",
+            "pkg/watch/paths.go",
+            "pkg/watch/temp.go",
+            "pkg/watch/temp_dir_fixture.go",
+            "pkg/watch/watcher_naive.go",
+            "pkg/watch/watcher_nonwin.go"
+          ],
+          "test": [
+            "pkg/watch/debounce_test.go",
+            "pkg/watch/dockerignore_test.go",
+            "pkg/watch/ephemeral_test.go",
+            "pkg/watch/notify_test.go",
+            "pkg/watch/paths_test.go",
+            "pkg/watch/watcher_naive_test.go",
+            "pkg/watch/watcher_naive_walk_test.go"
+          ]
+        }
+      },
+      {
+        "directory": "relay",
+        "excludedByLiteralE2eSubstring": false,
+        "hasIntendedSelectedTests": false,
+        "importPath": "github.com/docker/compose/v5/relay",
+        "intendedE2eTag": {
+          "production": [
+            "relay/main.go"
+          ],
+          "test": [
+            "relay/main_test.go"
+          ]
+        },
+        "intendedUnitDirectory": false,
+        "mainModuleWalkIncluded": false,
+        "selectedByProspectiveRelay": false,
+        "sourceEligibleForUntaggedEnumeration": false,
+        "sourcePackages": [
+          "main"
+        ],
+        "unitTestPackageOmittedBySourceSelection": false,
+        "untagged": {
+          "production": [
+            "relay/main.go"
+          ],
+          "test": [
+            "relay/main_test.go"
+          ]
+        }
+      }
+    ],
+    "testBuildTags": [
+      "e2e"
+    ],
+    "toolchain": "source-intended Go1.26.10 gc; release tags through go1.26"
+  },
+  "state": "conditional-source-membership-established-not-native-package-inventory"
+}

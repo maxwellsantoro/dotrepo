@@ -1,0 +1,497 @@
+{
+  "identity": "f05-next8-source-only-execution-proposal-v1",
+  "state": "proposal only; no upstream execution authorized or performed",
+  "sourceFreezeSha256": "fc756e0d5f8a25cddc9f19ece651b21078a68a1f601febdb8d772208c0a66d41",
+  "tasks": {
+    "rust-01": {
+      "scopeState": "aggregate Rust coverage requires coordinator adjudication",
+      "preparation": "Full Rust workspace and JS CLI lanes must be mapped before choosing an aggregate union; root recursive JS test alone is insufficient for enrolled Rust scope.",
+      "bounds": {
+        "cpu": 3,
+        "memoryBytes": 4294967296,
+        "pids": 256,
+        "workspaceBytes": 8589934592,
+        "tmpBytes": 536870912,
+        "environment": {
+          "TMPDIR": "/workspace/tmp"
+        },
+        "preparationSeconds": 900,
+        "executionSeconds": 1800,
+        "concurrentTasks": 1
+      },
+      "gate": "Source-derived lane union, native coverage oracle and prerequisite/toolchain closure not frozen. Curator follow-up is not an independent review.",
+      "task": {
+        "id": "rust-01",
+        "repository": "github.com/tauri-apps/tauri",
+        "revision": "548a3692f59405aeb239c5b63fa589824eee51e8",
+        "ecosystem": "Rust",
+        "scope": "repository",
+        "startingState": "pre-clone",
+        "component": null,
+        "request": "requests/rust-01.md",
+        "gold": "curator/gold/rust-01.json",
+        "oracle": "curator/oracles/rust-01.json",
+        "enrollmentRationale": "Root workspace and contributor guide establish Rust test intent, but the contributor guide delegates per-package behavior and test-core covers selected packages, not one repository-default full suite."
+      },
+      "archiveSha256": "43cf6ded6def92347692da1746fb6e132be6d5e142154c6bf2b97c2fae41fe02",
+      "sourceBundleReady": true,
+      "sourceBindings": []
+    },
+    "rust-03": {
+      "scopeState": "repository CI Rust test target identified; no execution qualification",
+      "sourceCommands": [
+        "cargo test --verbose --workspace",
+        "cargo test --verbose --workspace -- --ignored",
+        "cargo test --verbose --workspace --all-features"
+      ],
+      "preparation": "Candidate official Rust1.99 ARM64 image already retained satisfies source minimum1.93, but does not reproduce the entire OS/toolchain CI matrix. Add pinned libxkbcommon-dev/libgtk-3-dev in source-free image; qualify display/headless needs. Download exact locked Cargo registry and pinned Git dependencies before offline test stages.",
+      "environment": {
+        "RUSTFLAGS": "--deny warnings",
+        "ICED_TEST_BACKEND": "tiny-skia",
+        "CARGO_BUILD_JOBS": "2"
+      },
+      "bounds": {
+        "cpu": 3,
+        "memoryBytes": 4294967296,
+        "pids": 256,
+        "workspaceBytes": 8589934592,
+        "tmpBytes": 536870912,
+        "environment": {
+          "TMPDIR": "/workspace/tmp"
+        },
+        "preparationSeconds": 1200,
+        "executionSeconds": 3600,
+        "concurrentTasks": 1
+      },
+      "oracle": "Freeze native discovered test identities for each of three stages. Default-only/all-features-only is incomplete. The explicit ignored stage must not be rejected merely because the preceding default stage reports those same source-declared ignored cases; preserve per-stage exclusions and union. Listing, missing stages, unexpected skips, zero cases or compile/setup failure do not provide a complete suite outcome. Full terminal assertion failures can provide an outcome without a passing suite.",
+      "gate": "Exact image plus apt/toolchain/cache descriptors and multi-stage oracle remain unqualified.",
+      "task": {
+        "id": "rust-03",
+        "repository": "github.com/iced-rs/iced",
+        "revision": "cd04b74ca7073766f654535d6e72c452ef749d07",
+        "ecosystem": "Rust",
+        "scope": "repository",
+        "startingState": "local-checkout",
+        "component": null,
+        "request": "requests/rust-03.md",
+        "gold": "curator/gold/rust-03.json",
+        "oracle": "curator/oracles/rust-03.json",
+        "enrollmentRationale": "Root Rust workspace and retained Test workflow establish the repository-wide CI test target."
+      },
+      "archiveSha256": "19551665ef078b5392bb3640e98df32f99791320dd7afd4ca12cc081a772eb0c",
+      "sourceBundleReady": true,
+      "sourceBindings": [
+        {
+          "path": "Cargo.toml",
+          "sha256": "f83d488a8b5bbe72605fc550519b25a4de2b812258e0d3d969dbaad216fbc82a",
+          "bytes": 9253,
+          "lines": 277,
+          "retained": "prerequisite-sources/rust-03/Cargo.toml",
+          "url": "https://github.com/iced-rs/iced/blob/cd04b74ca7073766f654535d6e72c452ef749d07/Cargo.toml"
+        },
+        {
+          "path": ".github/workflows/test.yml",
+          "sha256": "425009e311909cfa967a2f8f57819e9e03b9d68d9789d929261e9c60a72a7ec9",
+          "bytes": 828,
+          "lines": 28,
+          "retained": "prerequisite-sources/rust-03/.github/workflows/test.yml",
+          "url": "https://github.com/iced-rs/iced/blob/cd04b74ca7073766f654535d6e72c452ef749d07/.github/workflows/test.yml"
+        },
+        {
+          "path": "CONTRIBUTING.md",
+          "sha256": "802768711c4c144040ff62dd60d8a3557c12d512442b15a5ddc710b0d4439010",
+          "bytes": 1726,
+          "lines": 21,
+          "retained": "prerequisite-sources/rust-03/CONTRIBUTING.md",
+          "url": "https://github.com/iced-rs/iced/blob/cd04b74ca7073766f654535d6e72c452ef749d07/CONTRIBUTING.md"
+        }
+      ]
+    },
+    "python-01": {
+      "scopeState": "full root/backend union is a proposed alternative; original default remains unresolved",
+      "preparation": "Backend source requires Python>=3.11,<3.13. Candidate exact Python3.12 plus uv image must be selected/pinned and root unittest/backend pytest dependency closure established. No credentials or model APIs may be required; preserve any unavailable setup as a blocker.",
+      "bounds": {
+        "cpu": 3,
+        "memoryBytes": 4294967296,
+        "pids": 256,
+        "workspaceBytes": 8589934592,
+        "tmpBytes": 536870912,
+        "environment": {
+          "TMPDIR": "/workspace/tmp"
+        },
+        "preparationSeconds": 900,
+        "executionSeconds": 1800,
+        "concurrentTasks": 1
+      },
+      "gate": "Coordinator must adjudicate full union coverage and manual source-only limitation separately from lack of an aggregate default; no new task or narrower replacement.",
+      "task": {
+        "id": "python-01",
+        "repository": "github.com/666ghj/MiroFish",
+        "revision": "7657031ac01184afe2cb220f5ee3545573b5e843",
+        "ecosystem": "Python",
+        "scope": "repository",
+        "startingState": "pre-clone",
+        "component": null,
+        "request": "requests/python-01.md",
+        "gold": "curator/gold/python-01.json",
+        "oracle": "curator/oracles/python-01.json",
+        "enrollmentRationale": "Root Python tests and backend Python project/tests establish code and repository test intent."
+      },
+      "archiveSha256": "fc70acea794785b5c6bfd06f5e0c83cb328fc5c4e05e36dab8f182fea5bd0d70",
+      "sourceBundleReady": true,
+      "sourceBindings": []
+    },
+    "python-02": {
+      "scopeState": "full root product suite proposed as primary-package superset, independent challenge pending",
+      "preparation": "Source .python-version3.14.10 and minimum>=3.14.2 require an exact source-free Python/uv image. Freeze local pytest-home-assistant plugin plus full lock/dependency closure and collected test/skips. Full-suite dependency/service demands cannot be inferred from package location.",
+      "bounds": {
+        "cpu": 3,
+        "memoryBytes": 6442450944,
+        "pids": 256,
+        "workspaceBytes": 12884901888,
+        "tmpBytes": 536870912,
+        "environment": {
+          "TMPDIR": "/workspace/tmp"
+        },
+        "preparationSeconds": 1800,
+        "executionSeconds": 3600,
+        "concurrentTasks": 1
+      },
+      "gate": "Three retained links need faithful bounded SourceBundle support; exact dependencies, expected collection/exclusions and resource feasibility remain unknown.",
+      "task": {
+        "id": "python-02",
+        "repository": "github.com/home-assistant/core",
+        "revision": "cde3969919b9bd540b2dd75b7aa84a908acbdbfe",
+        "ecosystem": "Python",
+        "scope": "component",
+        "startingState": "local-checkout",
+        "component": "homeassistant",
+        "request": "requests/python-02.md",
+        "gold": "curator/gold/python-02.json",
+        "oracle": "curator/oracles/python-02.json",
+        "enrollmentRationale": "Literal lexical non-root package-path selection: the root manifest establishes the owned primary package homeassistant before narrower subpackages. Package location does not establish a separate component test instruction or component-only coverage."
+      },
+      "archiveSha256": "6fe6c3084bc31e1f782696dc588cc55d61d1dd93bda8daffcba85971159ce61b",
+      "sourceBundleReady": false,
+      "sourceBindings": []
+    },
+    "python-03": {
+      "scopeState": "full core plus download product suite proposed as primary-package superset",
+      "preparation": "Select exact compatible Python and test runner from source constraints rather than assuming current Python3.14. Predeclare source-defined not-working/skipped test cases and SOCKS stand-in coverage exclusions. No credentials, public website crawling or unrestricted egress is authorized by this source-only packet.",
+      "bounds": {
+        "cpu": 3,
+        "memoryBytes": 4294967296,
+        "pids": 256,
+        "workspaceBytes": 8589934592,
+        "tmpBytes": 536870912,
+        "environment": {
+          "TMPDIR": "/workspace/tmp"
+        },
+        "preparationSeconds": 900,
+        "executionSeconds": 1800,
+        "concurrentTasks": 1
+      },
+      "gate": "Freeze expected exclusions before execution. Unexpected skip/early-return, exhausted network with green summary, core-only or one-download subset is noncompletion. Hardcoded SOCKS stand-ins are excluded coverage, not proof of actual proxy behavior. Full terminal assertion failure can still supply the requested outcome.",
+      "task": {
+        "id": "python-03",
+        "repository": "github.com/ytdl-org/youtube-dl",
+        "revision": "956b8c585591b401a543e409accb163eeaaa1193",
+        "ecosystem": "Python",
+        "scope": "component",
+        "startingState": "pre-clone",
+        "component": "youtube_dl",
+        "request": "requests/python-03.md",
+        "gold": "curator/gold/python-03.json",
+        "oracle": "curator/oracles/python-03.json",
+        "enrollmentRationale": "Literal lexical non-root package-path selection: the root manifest establishes the owned primary package youtube_dl before narrower subpackages. Package location does not establish a separate component test instruction or component-only coverage."
+      },
+      "archiveSha256": "836cb208ff4ff481e5b9879fc3c10de793e7f8bca247e645661de1e233f63aa6",
+      "sourceBundleReady": true,
+      "sourceBindings": []
+    },
+    "typescript-01": {
+      "scopeState": "root default test identified; no execution qualification",
+      "sourceCommands": [
+        "pnpm install",
+        "pnpm run typecheck",
+        "pnpm test"
+      ],
+      "preparation": "Node>=24.9 with type stripping, pnpm11.28.5, Git>=2.26, C compiler/Node headers; pin exact image/tools. Default test builds Linux ARM64 glibc host addon before complete Vitest suite. Root hook wrapper returns when archive lacks Git metadata (install-lefthook.mjs626-627); do not invent .git. Install scripts/native build still require isolated qualification. Include real PowerShell or freeze explicit source-defined omitted coverage; no API key for default unit tests may be invented.",
+      "bounds": {
+        "cpu": 3,
+        "memoryBytes": 12884901888,
+        "pids": 256,
+        "workspaceBytes": 17179869184,
+        "tmpBytes": 536870912,
+        "environment": {
+          "TMPDIR": "/workspace/tmp"
+        },
+        "preparationSeconds": 1800,
+        "executionSeconds": 1800,
+        "concurrentTasks": 1
+      },
+      "resourceRationale": "Source documents an 8GiB old-space upper ceiling per compiler, not a measured minimum RSS. Proposed12GiB is an unqualified conservative bound, exceeding current8GiB Docker VM; no VM/resource change is authorized. A later approved4/6GiB full-scope attempt could record actual feasibility/failure after source/interface/cache freeze. Serialize typecheck/build steps and use explicit2 Vitest workers without changing test inclusion.",
+      "oracle": "Preserve all four default Vitest include groups. No filtered subset, CI coverage partition or snapshot refresh. Native-addon setup failure is noncompletion. Freeze skip IDs/conditions before run; retain expected environmental exclusions separately from tests actually exercised.",
+      "gate": "Fourteen tracked links include actual fixtures. Faithful bounded link provisioning, exact dependency/native closure, PowerShell policy and larger memory allocation remain unresolved.",
+      "task": {
+        "id": "typescript-01",
+        "repository": "github.com/deepseek-ai/deepseek-harness",
+        "revision": "f3803c96974ad4a94195fb97e5c637e9c2a3afe3",
+        "ecosystem": "JavaScript/TypeScript",
+        "scope": "repository",
+        "startingState": "pre-clone",
+        "component": null,
+        "request": "requests/typescript-01.md",
+        "gold": "curator/gold/typescript-01.json",
+        "oracle": "curator/oracles/typescript-01.json",
+        "enrollmentRationale": "Root workspace manifest and default test script establish a TypeScript project and repository test target."
+      },
+      "archiveSha256": "c3287a2e874e9053fa07468897835e63895e49e3851bf8d8708337e6fbdec193",
+      "sourceBundleReady": false,
+      "sourceBindings": [
+        {
+          "path": "package.json",
+          "sha256": "d0fd7a2084d455b1651815bfbf9034e8b7dfb6571513727bec5d6cbc175a0b45",
+          "bytes": 19936,
+          "lines": 310,
+          "retained": "prerequisite-sources/typescript-01/package.json",
+          "url": "https://github.com/deepseek-ai/deepseek-harness/blob/f3803c96974ad4a94195fb97e5c637e9c2a3afe3/package.json"
+        },
+        {
+          "path": "docs/development.md",
+          "sha256": "bb06597dfeaf30de75b9d8a9220a4be401e79a71aadc21bc2766bd77eabe3cde",
+          "bytes": 25159,
+          "lines": 219,
+          "retained": "prerequisite-sources/typescript-01/docs/development.md",
+          "url": "https://github.com/deepseek-ai/deepseek-harness/blob/f3803c96974ad4a94195fb97e5c637e9c2a3afe3/docs/development.md"
+        },
+        {
+          "path": "vitest.config.ts",
+          "sha256": "9f83941a2ed74ad903ffef043d65e848b1aa1fb48caf2833ba612f632af7b5ab",
+          "bytes": 25321,
+          "lines": 439,
+          "retained": "prerequisite-sources/typescript-01/vitest.config.ts",
+          "url": "https://github.com/deepseek-ai/deepseek-harness/blob/f3803c96974ad4a94195fb97e5c637e9c2a3afe3/vitest.config.ts"
+        },
+        {
+          "path": "scripts/parallelism.ts",
+          "sha256": "ec4846417ff5760c969a52dec5511f7a06ef974dc1e5b890325a38c2a334fbf4",
+          "bytes": 2055,
+          "lines": 44,
+          "retained": "prerequisite-sources/typescript-01/scripts/parallelism.ts",
+          "url": "https://github.com/deepseek-ai/deepseek-harness/blob/f3803c96974ad4a94195fb97e5c637e9c2a3afe3/scripts/parallelism.ts"
+        },
+        {
+          "path": "scripts/install-lefthook.mjs",
+          "sha256": "f3db8265995d47d886e7367035cf46e50be77ec7700eda17d07b3aa22b8f1f20",
+          "bytes": 28528,
+          "lines": 769,
+          "retained": "prerequisite-sources/typescript-01/scripts/install-lefthook.mjs",
+          "url": "https://github.com/deepseek-ai/deepseek-harness/blob/f3803c96974ad4a94195fb97e5c637e9c2a3afe3/scripts/install-lefthook.mjs"
+        },
+        {
+          "path": "native/system/scripts/build.ts",
+          "sha256": "e2c2a93788dc81e7a0748c121b732faf7c2291aefe15d843e858135dc42e9637",
+          "bytes": 4298,
+          "lines": 92,
+          "retained": "prerequisite-sources/typescript-01/native/system/scripts/build.ts",
+          "url": "https://github.com/deepseek-ai/deepseek-harness/blob/f3803c96974ad4a94195fb97e5c637e9c2a3afe3/native/system/scripts/build.ts"
+        },
+        {
+          "path": "pnpm-workspace.yaml",
+          "sha256": "eb42731b8f509dd4ee3ae880eae1cde5381a1875a3598fd2fa83d1c1e5e1ef1a",
+          "bytes": 6380,
+          "lines": 122,
+          "retained": "prerequisite-sources/typescript-01/pnpm-workspace.yaml",
+          "url": "https://github.com/deepseek-ai/deepseek-harness/blob/f3803c96974ad4a94195fb97e5c637e9c2a3afe3/pnpm-workspace.yaml"
+        }
+      ]
+    },
+    "typescript-03": {
+      "scopeState": "root default five-project Vitest target identified; no execution qualification",
+      "sourceCommands": [
+        "pnpm install",
+        "node scripts/build.js vue -f global -d",
+        "pnpm test run"
+      ],
+      "preparation": "Pin pnpm12.11.2 and an exact Node release consistent with source .node-version lts/* and engines>=20; mutable lts alias is insufficient. Freeze Playwright Chromium plus Puppeteer browser versions/system dependency closure; source-authorized Vue global development build supplies E2E artifacts before all default projects run. Qualify Chromium sandbox feasibility under no-new-privileges/dropcaps without silently using privileged/host flags.",
+      "bounds": {
+        "cpu": 3,
+        "memoryBytes": 6442450944,
+        "pids": 256,
+        "workspaceBytes": 12884901888,
+        "tmpBytes": 536870912,
+        "environment": {
+          "TMPDIR": "/workspace/tmp"
+        },
+        "preparationSeconds": 1200,
+        "executionSeconds": 1800,
+        "concurrentTasks": 1
+      },
+      "oracle": "Require unit, unit-gc, unit-jsdom, e2e and e2e-browser with native case accounting; preserve forked --expose-gc configuration and browser execution. test-unit, test-e2e alone, zero browser tests or missing built files is not complete default coverage.",
+      "gate": "Exact Node alias resolution, native/browser image/cache closure and source-generated artifact prerequisites remain unqualified.",
+      "task": {
+        "id": "typescript-03",
+        "repository": "github.com/vuejs/core",
+        "revision": "05db7e807be841e6f343d0237669669b18c89d4d",
+        "ecosystem": "JavaScript/TypeScript",
+        "scope": "repository",
+        "startingState": "local-checkout",
+        "component": null,
+        "request": "requests/typescript-03.md",
+        "gold": "curator/gold/typescript-03.json",
+        "oracle": "curator/oracles/typescript-03.json",
+        "enrollmentRationale": "Root package scripts, contributor test guide and Vitest configuration establish a TypeScript workspace with repository-default tests."
+      },
+      "archiveSha256": "51249848d90d269ca4f03504257661e172bcc2e644bb2cc32cc37513ac60b93c",
+      "sourceBundleReady": true,
+      "sourceBindings": [
+        {
+          "path": "package.json",
+          "sha256": "e55e3b7b508c74dc88e9fae8f445ebfb95052b4c50f8503d9cb17594f802e4d1",
+          "bytes": 5155,
+          "lines": 117,
+          "retained": "prerequisite-sources/typescript-03/package.json",
+          "url": "https://github.com/vuejs/core/blob/05db7e807be841e6f343d0237669669b18c89d4d/package.json"
+        },
+        {
+          "path": ".node-version",
+          "sha256": "a784a891ee985530f25d616fa372d1b360fc9d4ef38932ab8dc2f45edfa5b01d",
+          "bytes": 5,
+          "lines": 1,
+          "retained": "prerequisite-sources/typescript-03/.node-version",
+          "url": "https://github.com/vuejs/core/blob/05db7e807be841e6f343d0237669669b18c89d4d/.node-version"
+        },
+        {
+          "path": "vitest.config.ts",
+          "sha256": "98db4cc683fa725ef5beb3b19f215d07ffb972cf80650b404221a73aaa03a361",
+          "bytes": 3321,
+          "lines": 120,
+          "retained": "prerequisite-sources/typescript-03/vitest.config.ts",
+          "url": "https://github.com/vuejs/core/blob/05db7e807be841e6f343d0237669669b18c89d4d/vitest.config.ts"
+        },
+        {
+          "path": "scripts/build.js",
+          "sha256": "ed2d1f50b6f8daeda0aa48ca9c9bcfeb3ea04386f101baa76620e03783068490",
+          "bytes": 6449,
+          "lines": 264,
+          "retained": "prerequisite-sources/typescript-03/scripts/build.js",
+          "url": "https://github.com/vuejs/core/blob/05db7e807be841e6f343d0237669669b18c89d4d/scripts/build.js"
+        },
+        {
+          "path": "pnpm-workspace.yaml",
+          "sha256": "54d0a86d1828707bbfe24214ee584167ce08dc70f6bfccb2fcea748e6f1c8401",
+          "bytes": 862,
+          "lines": 38,
+          "retained": "prerequisite-sources/typescript-03/pnpm-workspace.yaml",
+          "url": "https://github.com/vuejs/core/blob/05db7e807be841e6f343d0237669669b18c89d4d/pnpm-workspace.yaml"
+        }
+      ]
+    },
+    "go-02": {
+      "scopeState": "cache component includes root plus memcache/redis/ssdb packages; command not maintainer-declared complete tuple",
+      "proposedDerivedCommand": "go test -json -count=1 ./client/cache/...",
+      "preparation": "Pin Go1.24.2 (source go.mod and CI), locked module download and exact Redis/Memcached/SSDB versions. All three services must be reachable on container loopback6379/11211/8888 because root tests hardcode these ports. Root CI ORM MySQL/Postgres/etcd are not assumed necessary for this component. ARM64 SSDB availability and fixed service startup/health checks need actual qualification.",
+      "bounds": {
+        "cpu": 3,
+        "memoryBytes": 4294967296,
+        "pids": 256,
+        "workspaceBytes": 8589934592,
+        "tmpBytes": 536870912,
+        "environment": {
+          "TMPDIR": "/workspace/tmp"
+        },
+        "preparationSeconds": 900,
+        "executionSeconds": 1800,
+        "concurrentTasks": 1
+      },
+      "oracle": "Freeze go list/test discovery for all four cache packages; JSON terminal states must cover every native expected test. Reject skips at any depth using append-only oracle-revision/oracle.py. Memory-only subset, unavailable service, listing or setup error is noncompletion; complete native assertion failures can still supply an outcome.",
+      "gate": "Source-free pinned service toolchains and fixed loopback startup without socket/mount/hostnetwork access remain unresolved. Derived scope command must not be promoted to established maintainer instruction.",
+      "task": {
+        "id": "go-02",
+        "repository": "github.com/beego/beego",
+        "revision": "939cfde380bb9f15844ad633b84f037f7da21584",
+        "ecosystem": "Go",
+        "scope": "component",
+        "startingState": "local-checkout",
+        "component": "client/cache",
+        "request": "requests/go-02.md",
+        "gold": "curator/gold/go-02.json",
+        "oracle": "curator/oracles/go-02.json",
+        "enrollmentRationale": "Maintainer README names cache as an owned module; package documentation fixes its physical client/cache path and tests exist in it and its memcache/redis/ssdb backends. It is lexical before other client modules and core/server/task paths."
+      },
+      "archiveSha256": "7704106da11aef67bad7e0a9a4964f1d2e9a3f072511e585e677aa48f5016220",
+      "sourceBundleReady": true,
+      "sourceBindings": [
+        {
+          "path": "go.mod",
+          "sha256": "b14e12e9c56e852c25c207692da52d116fd06bc22f62e6df131188f547ed2ac2",
+          "bytes": 3919,
+          "lines": 89,
+          "retained": "prerequisite-sources/go-02/go.mod",
+          "url": "https://github.com/beego/beego/blob/939cfde380bb9f15844ad633b84f037f7da21584/go.mod"
+        },
+        {
+          "path": ".github/workflows/test.yml",
+          "sha256": "fd10fbbb296fe567bf5887aed18c79df69f5292c9e82e3e8eba9ec203074733b",
+          "bytes": 5401,
+          "lines": 163,
+          "retained": "prerequisite-sources/go-02/.github/workflows/test.yml",
+          "url": "https://github.com/beego/beego/blob/939cfde380bb9f15844ad633b84f037f7da21584/.github/workflows/test.yml"
+        },
+        {
+          "path": "client/cache/read_through_test.go",
+          "sha256": "c11045a3b1f385dcb6f3061cc5ff8b6e334b8d108721c2a0cf230291a6a0a396",
+          "bytes": 4252,
+          "lines": 171,
+          "retained": "prerequisite-sources/go-02/client/cache/read_through_test.go",
+          "url": "https://github.com/beego/beego/blob/939cfde380bb9f15844ad633b84f037f7da21584/client/cache/read_through_test.go"
+        },
+        {
+          "path": "client/cache/memcache/memcache_test.go",
+          "sha256": "350cc2a54c36ee3bc47c430aba6829a5ab2e14ac1c530aad46fee6c4d8ff9494",
+          "bytes": 6184,
+          "lines": 228,
+          "retained": "prerequisite-sources/go-02/client/cache/memcache/memcache_test.go",
+          "url": "https://github.com/beego/beego/blob/939cfde380bb9f15844ad633b84f037f7da21584/client/cache/memcache/memcache_test.go"
+        },
+        {
+          "path": "client/cache/redis/redis_test.go",
+          "sha256": "d6b03f7dc86785f51a5de7abbd3475582d13dbc185649ba1133ce4321363ddbe",
+          "bytes": 8865,
+          "lines": 361,
+          "retained": "prerequisite-sources/go-02/client/cache/redis/redis_test.go",
+          "url": "https://github.com/beego/beego/blob/939cfde380bb9f15844ad633b84f037f7da21584/client/cache/redis/redis_test.go"
+        },
+        {
+          "path": "client/cache/ssdb/ssdb_test.go",
+          "sha256": "96bd026e81fa21ef810f7d5be1bb4d609b8340faaa5f0486e1431bb9363f6925",
+          "bytes": 5491,
+          "lines": 211,
+          "retained": "prerequisite-sources/go-02/client/cache/ssdb/ssdb_test.go",
+          "url": "https://github.com/beego/beego/blob/939cfde380bb9f15844ad633b84f037f7da21584/client/cache/ssdb/ssdb_test.go"
+        }
+      ]
+    }
+  },
+  "isolation": "Fresh ephemeral nonroot containers; no host mounts/socket/credentials; read-only root, cap-drop ALL, no-new-privileges, default private PID namespace, explicit exec,nosuid,nodev tmpfs. Workspace/tmpfs sizes are capacity ceilings, not available RAM promises: all resident tmpfs/page-cache/process memory remains charged to the same container/VM limits. TMPDIR moves scratch out of the512MiB partition without raising the memory cap. Source injected by bounded bytes; no fake Git checkout metadata. No oracle/gold/profile files in agent context. Public dependency download only during separately recorded preparation, network none during default execution; any task-specific egress requires a new reviewed policy.",
+  "cachePolicy": "No cache built in this packet. Both arms must receive identical independently qualified immutable dependency archive/image conditions. No node_modules/build targets/task-source preinstallation disguised as cold cache. Every preparation receipt, source/tool/image/cache hash, time/bytes and exclusions frozen before sessions; mutable cross-session caches prohibited.",
+  "accounting": {
+    "modelCalls": 0,
+    "upstreamProjectCodeExecuted": false,
+    "indexConsulted": false,
+    "costUsd": null,
+    "costExclusions": [
+      "No host/container/download charge meter; numeric resource bounds are proposed caps, not measured cost or usage."
+    ]
+  },
+  "oracleBoundary": "Complete intended task outcome can be pass or native assertion failure. Setup/collection failure, interruption, listing, missing scope or unadjudicated skipped coverage is noncompletion. Scope/default uncertainty is not instruction establishment and is not transformed into a correct abstention. Original gold and first-four results remain unchanged.",
+  "launchRequirements": [
+    "Coordinator scope/adjudication decisions plus fresh independent challenge",
+    "Exact toolchain/source-free image digests and dependency/browser/service closure",
+    "Faithful bounded source links where present",
+    "Native collection/outcome oracle with positive/negative controls, explicit expected exclusions and no gold exposure",
+    "Numeric resource approval and actual isolated per-task qualification",
+    "Campaign model/settings/budgets/cache policy frozen independently; randomized72sessions remain unrun"
+  ]
+}

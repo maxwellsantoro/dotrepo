@@ -1,0 +1,208 @@
+[
+  {
+    "path": "Dockerfile",
+    "sha256": "acf36e3c8a13bd8a2a87ee68a9d52aadd569cc4755daab681b46aa5e9b85d85f",
+    "lines": [
+      {
+        "line": 1,
+        "text": "FROM python:3.11"
+      },
+      {
+        "line": 21,
+        "text": "  && cd backend && uv sync --frozen"
+      }
+    ]
+  },
+  {
+    "path": "README.md",
+    "sha256": "5109feef87d494dd77c0eb225486d4278fe3eb61b303574600bcf8c3c339d034",
+    "lines": [
+      {
+        "line": 103,
+        "text": "| **Python** | ≥3.11, ≤3.12 | Backend runtime | `python --version` |"
+      },
+      {
+        "line": 144,
+        "text": "npm run setup:backend"
+      }
+    ]
+  },
+  {
+    "path": "backend/app/__init__.py",
+    "sha256": "f04d262decf6c11437280c0f0c1353774f642888b2ef3f02dfa0e96e992b3c1c",
+    "lines": [
+      {
+        "line": 15,
+        "text": "from .config import Config"
+      },
+      {
+        "line": 16,
+        "text": "from .utils.logger import setup_logger, get_logger"
+      },
+      {
+        "line": 46,
+        "text": "    from .services.simulation_runner import SimulationRunner"
+      },
+      {
+        "line": 66,
+        "text": "    from .api import graph_bp, simulation_bp, report_bp"
+      }
+    ]
+  },
+  {
+    "path": "backend/app/config.py",
+    "sha256": "a85580b4551724b3c2fff419565c9aa11f6dba1992f5981ed34037a264c2a2f3",
+    "lines": [
+      {
+        "line": 4,
+        "text": "from dotenv import load_dotenv"
+      },
+      {
+        "line": 8,
+        "text": "project_root_env = os.path.join(os.path.dirname(__file__), '../../.env')"
+      },
+      {
+        "line": 10,
+        "text": "if os.path.exists(project_root_env):"
+      },
+      {
+        "line": 11,
+        "text": "    load_dotenv(project_root_env, override=True)"
+      },
+      {
+        "line": 14,
+        "text": "    load_dotenv(override=True)"
+      }
+    ]
+  },
+  {
+    "path": "backend/app/services/__init__.py",
+    "sha256": "5c78b7c2e902a80197acfeb9493ad81da903002eda04dd9870a2de1e42c12112",
+    "lines": [
+      {
+        "line": 5,
+        "text": "from .ontology_generator import OntologyGenerator"
+      },
+      {
+        "line": 6,
+        "text": "from .graph_builder import GraphBuilderService"
+      },
+      {
+        "line": 7,
+        "text": "from .text_processor import TextProcessor"
+      },
+      {
+        "line": 8,
+        "text": "from .zep_entity_reader import ZepEntityReader, EntityNode, FilteredEntities"
+      },
+      {
+        "line": 9,
+        "text": "from .oasis_profile_generator import OasisProfileGenerator, OasisAgentProfile"
+      },
+      {
+        "line": 10,
+        "text": "from .simulation_manager import SimulationManager, SimulationState, SimulationStatus"
+      },
+      {
+        "line": 11,
+        "text": "from .simulation_config_generator import ("
+      },
+      {
+        "line": 19,
+        "text": "from .simulation_runner import ("
+      },
+      {
+        "line": 26,
+        "text": "from .zep_graph_memory_updater import ("
+      },
+      {
+        "line": 31,
+        "text": "from .simulation_ipc import ("
+      }
+    ]
+  },
+  {
+    "path": "backend/pyproject.toml",
+    "sha256": "e923fa98056d1b6085ab789993a1d05f31bfc1e8cbbb6b9aa17d49663253c1a2",
+    "lines": [
+      {
+        "line": 5,
+        "text": "requires-python = \">=3.11,<3.13\""
+      },
+      {
+        "line": 40,
+        "text": "    \"pytest>=8.0.0\","
+      },
+      {
+        "line": 41,
+        "text": "    \"pytest-asyncio>=0.23.0\","
+      },
+      {
+        "line": 46,
+        "text": "requires = [\"hatchling\"]"
+      },
+      {
+        "line": 47,
+        "text": "build-backend = \"hatchling.build\""
+      },
+      {
+        "line": 51,
+        "text": "    \"pytest>=8.0.0\","
+      },
+      {
+        "line": 52,
+        "text": "    \"pytest-asyncio>=0.23.0\","
+      },
+      {
+        "line": 56,
+        "text": "packages = [\"app\"]"
+      }
+    ]
+  },
+  {
+    "path": "backend/requirements.txt",
+    "sha256": "5be0583939f836d1dc9cb0392af3b1410f5c65d2c37f724fb82772431173d58e",
+    "lines": [
+      {
+        "line": 4,
+        "text": "# Python 3.11+ required"
+      }
+    ]
+  },
+  {
+    "path": "backend/tests/test_zep_cloud_validation_script.py",
+    "sha256": "a3e595b1af1e7dc265d0ae9c111fc79e4a9b4e4d1a1b4ee167b2833d458fd33b",
+    "lines": [
+      {
+        "line": 22,
+        "text": "        dotenv.load_dotenv = overwrite_with_dotenv_value"
+      },
+      {
+        "line": 31,
+        "text": "    environment[\"PYTHONPATH\"] = os.pathsep.join("
+      },
+      {
+        "line": 32,
+        "text": "        filter(None, [str(backend_root), environment.get(\"PYTHONPATH\", \"\")])"
+      },
+      {
+        "line": 36,
+        "text": "        [sys.executable, \"-c\", probe],"
+      }
+    ]
+  },
+  {
+    "path": "package.json",
+    "sha256": "f2b8cc90bc21b0b4990d5192b5e7c09161982760dede52cb743862d908526715",
+    "lines": [
+      {
+        "line": 7,
+        "text": "    \"setup:backend\": \"cd backend && uv sync\","
+      },
+      {
+        "line": 8,
+        "text": "    \"setup:all\": \"npm run setup && npm run setup:backend\","
+      }
+    ]
+  }
+]

@@ -1,0 +1,105 @@
+{
+  "actualAdmission": false,
+  "budgetAndAccounting": {
+    "TMPDIR": "/workspace/tmp",
+    "cpu": 3,
+    "maxCacheTransportBytes": 536870912,
+    "maxExpandedDownloadCacheBytes": 1073741824,
+    "maxSourcePlusCacheBytes": 2147483648,
+    "maxTraceBytesPerCommand": 2097152,
+    "memoryBytes": 4294967296,
+    "pids": 256,
+    "preparationSeconds": 900,
+    "resourceIncreaseOrRetryToObtainPass": false,
+    "singlePreparationDeadlineAppliesTo": "All accepted preparation stages/tool download/cache/setup work, preflight/export and cleanup accounting in a prospective attempt; do not silently reset a new15minute allowance per step. Future execution has no authorization here.",
+    "tmpfsBytes": 536870912,
+    "workspaceBytes": 8589934592
+  },
+  "cacheQualified": false,
+  "campaignAdmitted": false,
+  "checks": {
+    "firstOwnedRuffFailureRetained": "development-observations.json",
+    "newAcquisitionNetworkInstallProviderActions": 0,
+    "nodeRangeFormsChecked": 91,
+    "originalTaskSourceInputsUnchanged": true,
+    "ruffPass": true,
+    "sourceDataChecksPass": true,
+    "sourceImportsTestsGoNodeOrDaemonActions": 0,
+    "toolPackagePinsExtracted": 15
+  },
+  "costUsd": null,
+  "decisions": {
+    "basis": "root>=20 and all91 frozen lock engine ranges support24.22.2, including Vite8.3.4 and jsdom30.0.1. This is finite source-engine compatibility, not full dependency/ABI resolution or lts/* alias resolution.",
+    "existingB47NodeCandidateSourceSupported": true,
+    "fullDefaultTarget": "build source-declared Vue global dev prerequisite, then pnpm test run with no project filter",
+    "nodeHash": "b4855de8c4781130b722ceaec9718fed77cca3eed2e5cfc5455e267c0b9ee3b0",
+    "nodeVersion": "24.22.2",
+    "normalInstallEquivalentToIgnoreScripts": false,
+    "pnpmInstalledToolRawHashKnown": false,
+    "pnpmIntegrityPinAvailable": true,
+    "pnpmMustBePreparedNotAssumedInstalled": true,
+    "pnpmVersion": "12.11.2",
+    "testUnitOrE2eOnlySubstitution": false
+  },
+  "executionAuthorized": false,
+  "fullProjects": [
+    "unit",
+    "unit-gc",
+    "unit-jsdom",
+    "e2e",
+    "e2e-browser"
+  ],
+  "missingConcreteGates": [
+    {
+      "fact": "Acquire raw pnpm12.11.2 and selected LinuxARM64 platform archive using exact lock-document1 integrity, bind manifests/bin paths/raw hashes and actual script Node; inspect fetch/install semantics before invocation.",
+      "id": "pnpm-tool",
+      "smallestNextReady": true
+    },
+    {
+      "fact": "Establish exact npx only-allow resolution or a separately frozen justified setup disposition; absent lock entry is not permission to resolve latest.",
+      "id": "normal-preinstall"
+    },
+    {
+      "fact": "Exact pinned Puppeteer/Playwright package browser revision/manifests, ARM64 support, binary hashes and system library/sandbox closure on b47 Debian12. No new architecture/image/resources chosen to obtain a pass.",
+      "id": "browser-pins-platform"
+    },
+    {
+      "fact": "Current warm-cache roots do not admit pnpm-store or browser caches. A specific bounded preparation/admission decision is separate; do not disguise them under npm cache roots. No qualified existing pnpm store was identified in inspected common-image/preparation inputs.",
+      "id": "cache-format"
+    },
+    {
+      "fact": "Actual normal hooks, generated global dev artifact, Git-context behavior, source immutability/permitted outputs and all setup receipts must be captured separately from download-only cache preparation.",
+      "id": "normal-setup-build"
+    },
+    {
+      "fact": "Trusted native collection/reporting for all five projects, unit-gc fork lifecycle, browser executions, all IDs/phases, unexpected skips/failures/resource interruption and raw process/source/tool/context joins. No summary-only or compilation-only completion.",
+      "id": "native-oracle"
+    }
+  ],
+  "nativeCollectionOccurred": false,
+  "normalHookBoundary": {
+    "CIConditional": "Puppeteer source adds --no-sandbox/--disable-setuid-sandbox only when process.env.CI is truthy. Initial CI/launch policy is not silently selected here; freeze/review source-supported branch before native attempt.",
+    "browserSetup": "Workflow declares pnpm install, explicit Puppeteer installer, Playwright Chromium install, then test-e2e. Unit-only PUPPETEER_SKIP_DOWNLOAD=true cannot supply full five-project setup.",
+    "dependencyHooks": "Workspace allowBuilds list retained, not proof every allowed package has a hook or that effects are qualified. Puppeteer/native package/build behavior remains source/receipt gate.",
+    "rootPostinstall": "simple-git-hooks2.14.0 exact lock SRI; source archive has no Git metadata. Actual behavior and hook output still need pinned package/source and normal setup observation.",
+    "rootPreinstall": "npx only-allow pnpm; no source lock/package dependency pin found; exact local/global/npx resolution unresolved. Do not guess a version or silently bypass."
+  },
+  "oracleQualified": false,
+  "packetIdentity": "f05-typescript03-source-only-environment-plan-20261029",
+  "preparationContractSha256": "e4973380f0a5f9f37c487d4d914b9a41bd4a1ab31837c3ea71d1b70592afd7e2",
+  "repository": "github.com/vuejs/core",
+  "reviewerContext": "Prior Go01/C1/E1 source/runtime reviewer; known frozen task source planning, not blind agent exposure, native task proof or consumer benefit.",
+  "revision": "05db7e807be841e6f343d0237669669b18c89d4d",
+  "source": {
+    "archiveSha256": "51249848d90d269ca4f03504257661e172bcc2e644bb2cc32cc37513ac60b93c",
+    "membersVerified": 703,
+    "originalGold": "unresolved, untouched",
+    "originalOracle": "source-grounded draft, untouched",
+    "retainedSourceBytes": 422474,
+    "retainedSourceFiles": 18
+  },
+  "state": "concrete-source-bound-preparation-plan-not-executable-or-qualified",
+  "taskOutcomeObserved": false,
+  "taskUnchanged": true,
+  "toolPinsSha256": "c4cae6ad0faf27cef2926aa597fba5138f358f52402a16059881680c4ec43d10"
+}

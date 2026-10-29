@@ -1,0 +1,47 @@
+{
+  "state": "operator-contract-description-not-an-authorization",
+  "liveInvocation": [
+    "uv",
+    "run",
+    "python",
+    "/tmp/dotrepo-f05-python01-probe-driver-20261029/driver.py",
+    "--authorization",
+    "<fresh-coordinator-authorization.json>",
+    "--output",
+    "<fresh-canonical-output>",
+    "--scratch",
+    "<fresh-canonical-scratch>"
+  ],
+  "requiredAuthorization": {
+    "state": "coordinator-authorized-single-python01-source-free-probe",
+    "synthetic": false,
+    "planSha256": "exact current plan.json SHA256",
+    "authorFreezeSha256": "exact current FREEZE.json SHA256 whose artifact closure contains current plan and all script hashes",
+    "output": "exact canonical resolved fresh output path",
+    "scratch": "exact canonical resolved fresh scratch path",
+    "maxAttempts": 1,
+    "commands": "exact plan.probe.commands arrays",
+    "limits": "exact plan.limits object",
+    "review": {
+      "path": "absolute regular JSON current independent passed-review object",
+      "sha256": "exact bytes SHA256"
+    }
+  },
+  "requiredReview": {
+    "subject": {
+      "planSha256": "exact current plan hash",
+      "authorFreezeSha256": "exact current author FREEZE hash",
+      "packetIdentity": "python01-source-free-probe-driver-v1"
+    },
+    "state": "independent-python01-source-free-probe-driver-review-passed",
+    "scope": "owned-source-free-python-probe-only",
+    "synthetic": false,
+    "findings": [],
+    "staticOnly": true
+  },
+  "authorizationProvided": false,
+  "actualAdmission": false,
+  "dependencySetupAuthorized": false,
+  "oracleQualified": false,
+  "campaignAdmitted": false
+}

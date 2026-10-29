@@ -1,0 +1,28 @@
+{
+  "state": "incomplete",
+  "synthetic": true,
+  "startedAt": "2026-10-29T14:25:52.549682+00:00",
+  "daemonCalls": 6,
+  "containerCreateAttempted": true,
+  "containerAbsent": true,
+  "probeAttempted": false,
+  "ownedProbeObserved": false,
+  "actualAdmission": false,
+  "nativeCollectionOccurred": false,
+  "oracleQualified": false,
+  "campaignAdmitted": false,
+  "costUsd": null,
+  "ownedContainer": "dotrepo-python-probe-20b34704c9de",
+  "authorization": {
+    "synthetic": true
+  },
+  "provisionTarSha256": "20588c56a9a3846c82aef0a91cca3a0b3d7c7ab60dd94f54be86f3417b54652c",
+  "provisionTarBytes": 10240,
+  "stage": "start",
+  "error": "ValueError: command failed: start",
+  "cancelled": false,
+  "cleanupSeconds": 0.001002082834020257,
+  "elapsedSeconds": 0.011564250104129314,
+  "workBudgetExceeded": false,
+  "probeBudgetExceeded": false
+}

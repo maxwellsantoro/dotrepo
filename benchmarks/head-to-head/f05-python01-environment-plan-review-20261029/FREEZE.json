@@ -1,0 +1,41 @@
+{
+  "actualAdmission": false,
+  "artifacts": {
+    "README.md": {
+      "bytes": 2185,
+      "sha256": "b98e0a9c4988e64a0043b47787bd2faa7cdba9cdf64724a5b3917fd258f8ee1f"
+    },
+    "controls-replay/controls.json": {
+      "bytes": 1072,
+      "sha256": "fb4890b796f4135ca7299f04050a44edc6710e735513acfdf1bd5daf74032e98"
+    },
+    "controls-replay/plan.json": {
+      "bytes": 12887,
+      "sha256": "603a1ebbad92c8226803b5575b94bcf503b2d7dfac3b597e012f15ddad8e021c"
+    },
+    "controls-replay/probe.py": {
+      "bytes": 1234,
+      "sha256": "399fc6b34116a83a1ef87226575738433c8295fc72ba8191e645a85d29a060c3"
+    },
+    "controls-replay/validate_plan.py": {
+      "bytes": 3854,
+      "sha256": "82eaf6a422da5953aa400be548773dff9c278056953c3232042ba6b39da9e197"
+    },
+    "report.json": {
+      "bytes": 6660,
+      "sha256": "1c68948b9b08a7b016c2dd9f932bd590c210caf0604e52a4d1a69eceeb7695f1"
+    },
+    "verification.json": {
+      "bytes": 5744,
+      "sha256": "c218bbf928342c342fc66b9c777ad344e905c41e19e96f4cd9c35374f2eab5b4"
+    }
+  },
+  "executionAuthorized": false,
+  "state": "independent-source-only-review-frozen",
+  "subject": {
+    "authorFreezeSha256": "e16c41c790fbd469263aa86791d5bc31bd59e3a1e11423f6d9d0ff78e873987a",
+    "packetIdentity": "python01-existing-image-environment-preparation-plan-v1",
+    "planSha256": "603a1ebbad92c8226803b5575b94bcf503b2d7dfac3b597e012f15ddad8e021c",
+    "probeSha256": "399fc6b34116a83a1ef87226575738433c8295fc72ba8191e645a85d29a060c3"
+  }
+}

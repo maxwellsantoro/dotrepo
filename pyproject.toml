@@ -18,8 +18,13 @@ testpaths = ["scripts/tests"]
 [tool.ruff]
 line-length = 100
 target-version = "py312"
-# Retained upstream source evidence keeps its own bytes and tool configuration.
-extend-exclude = ["benchmarks/head-to-head/**/sources", "index/telemetry/**/sources"]
+# Retained source evidence keeps its byte-bound historical form. The standalone
+# review helper below is archived evidence, exercised by explicit fake replays.
+extend-exclude = [
+    "benchmarks/head-to-head/**/sources",
+    "index/telemetry/**/sources",
+    "benchmarks/head-to-head/f05-python01-probe-driver-review-20261029/independent_controls.py",
+]
 
 [tool.ruff.lint]
 select = ["E4", "E7", "E9", "F"]

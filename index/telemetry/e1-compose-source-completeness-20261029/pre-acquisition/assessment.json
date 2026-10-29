@@ -1,0 +1,128 @@
+{
+  "assessorContext": "Prior known-development and source-curation exposure; independent of current C1 implementation review, not a fresh blind assessor/held-out qualification",
+  "classification": "documented-default-supported; complete-applicable-tuple-unresolved-source-bound-abstention",
+  "decisions": {
+    "allUnitPackageMembershipEstablished": false,
+    "automaticHighPromotion": false,
+    "completeApplicableInstructionEstablished": false,
+    "consumerAcceptanceJustified": false,
+    "consumerBenefit": false,
+    "contradictionEstablished": false,
+    "documentedConditionalPrerequisitesRetained": true,
+    "documentedDefaultRouteEstablished": true,
+    "existingCandidateOrOriginalGoldModified": false,
+    "extractorChangeAuthorized": false,
+    "heldOutQualification": false,
+    "independentlyExecuted": false,
+    "requiredAbstentionForCompleteTuple": true
+  },
+  "effectiveTagBoundary": "Bake declares default BUILD_TAGS=e2e and passes it as a build arg; Dockerfile declares that ARG and spells -tags \"$BUILD_TAGS\" in the gotestsum relay. These are source-intended settings and argument syntax, not an observed effective Go process environment/argument vector. No process or direct-shell transport was executed.",
+  "generalSemanticCondition": {
+    "automaticHighPromotion": false,
+    "compiledPerRepositoryFingerprints": false,
+    "condition": "At one revision bind a maintainer default declaration, root directory and implementation relay, platform/prerequisite chain and explicit scope/exclusions. If the relay introduces selection differing from the intended scope, resolve that concrete membership relation or retain the uncertainty. Readiness/resolution/test correctness remain distinct future execution observations. Do not require full imported dependency correctness or infer missing facts from command plausibility.",
+    "status": "prospective-source-establishment-condition-not-code-or-confidence-rule"
+  },
+  "implementationAmbiguity": {
+    "disposition": "Retained unresolved token/selection condition; neither fatality nor a new TAGS executable prerequisite is established.",
+    "literal": "$(go list  $(TAGS) ./... | grep -vE 'e2e')",
+    "observation": "Dockerfile RUN is a shell command, not a Make recipe; $(TAGS) cannot be normalized to a Make variable expansion or a -tags flag. No passing/failing shell behavior was executed."
+  },
+  "narrowQuestion": {
+    "missing": "A same-revision complete package/build-constraint membership account sufficient to compare the default untagged list with the e2e-tagged intended unit set and literal e2e substring exclusions. Root tree and one retained test body cannot establish that relation.",
+    "notRequired": "No universal proof of external dependency/program correctness, every helper import, artifact resolution, or prior successful execution is imposed for E1 documented applicability.",
+    "proposition": "Under frozen default Linux source configuration, does the untagged package enumeration followed by e2e-tagged execution select the complete intended main-module unit package set?",
+    "resolved": false,
+    "supported": "The maintainer explicitly declares make test for all unit tests; Make test routes root Buildx Bake test to Dockerfile test-coverage, whose test stage owns the exact command and setup. This establishes documented default applicability at the stated level, not independently measured coverage."
+  },
+  "packetIdentity": "e1-compose-next-source-completeness-disposition-20261029",
+  "repository": "github.com/docker/compose",
+  "revision": "343bb382d2192b88d84af49971bb5cb99bee268c",
+  "smallestNextFact": "Exact frozen main-module selected package/build-constraint membership resolving untagged-versus-e2e-tagged unit selection and literal e2e exclusions. A suitably bound authoritative source selection rationale could resolve scope without a successful execution; otherwise retain abstention. No whole dependency universe audit requested.",
+  "sourceAvailability": {
+    "additionalSourceFilesAcquired": 0,
+    "locatorScope": "Existing owning E1 packets and bounded locator inspection by e1_establishment; no full Compose archive or recursive package-tree locator identified there. This is not universal host-file absence.",
+    "newAcquisition": false,
+    "retainedSourceBytes": 33902,
+    "retainedSourcesUsed": 9,
+    "usedFullArchive": false
+  },
+  "taskId": "e1-go-03-repository-tests",
+  "tuple": {
+    "command": "make test",
+    "component": null,
+    "prerequisites": [
+      "Linux host prerequisites declared by BUILDING.md: Docker 20.10 or later, Make, and host Go satisfying root go.mod minimum 1.26.10. This host declaration is distinct from the container builder toolchain.",
+      "Provide functioning Docker/Buildx BuildKit infrastructure supporting bake and the declared bind/cache mounts. Makefile defaults BUILDX_CMD to docker buildx; no minimum Buildx version is documented in retained sources.",
+      "Allow the declared builder image, apk package, Go module and gotestsum v1.13.0 acquisition, or suitable existing images/caches. Default in-image Go is 1.26.10 from Dockerfile ARG, independently of host Go. The builder installs gcc/musl-dev and enables CGO for the race detector.",
+      "Use the unchanged default Make/Bake/Dockerfile configuration; overrides of BUILDX_CMD, GO_VERSION, BUILD_TAGS, GOTESTSUM_VERSION and DESTDIR require a new applicability assessment.",
+      "Coverage is the maintainer default main Go module unit target, excluding e2e package paths; relay/ is a separate module/target. This is not every module or e2e lane."
+    ],
+    "scope": "repository",
+    "source": "BUILDING.md",
+    "working_directory": "."
+  },
+  "tupleFields": [
+    {
+      "disposition": "supported",
+      "field": "command",
+      "source": [
+        "BUILDING.md:31-37",
+        "Makefile:123-125"
+      ],
+      "value": "make test"
+    },
+    {
+      "disposition": "supported-by-root-source-relay",
+      "field": "directory",
+      "source": [
+        "Makefile:123-125",
+        "docker-bake.hcl:93-97",
+        "Dockerfile:47-56"
+      ],
+      "value": "."
+    },
+    {
+      "disposition": "maintainer-default-main-module-unit-route-supported; exact-complete-all-unit-membership-unresolved",
+      "field": "scope",
+      "limit": "Separate relay and e2e lanes are not silently added; no direct Go substitute or narrower package accepted.",
+      "source": [
+        "BUILDING.md:31-46",
+        "AGENTS.md:6-15",
+        "docker-bake.hcl:190-205",
+        "Dockerfile:123-141"
+      ]
+    },
+    {
+      "disposition": "documented-source-chain-supported-conditionally",
+      "field": "prerequisite chain",
+      "limit": "Working Docker/Buildx/BuildKit, declared native/module/tool acquisition and default configuration are conditions; installed readiness or immutable external resolution not observed. No invented portable Buildx minimum.",
+      "source": [
+        "BUILDING.md:2-16",
+        "go.mod:1-3",
+        "Makefile:46-52",
+        "Dockerfile:18-56",
+        "Dockerfile:123-136"
+      ]
+    },
+    {
+      "disposition": "Linux host branch retained; no backend substitution",
+      "field": "platform/backend",
+      "limit": "No macOS/Windows equivalence or target-platform execution asserted.",
+      "source": [
+        "BUILDING.md:12-15",
+        "Dockerfile:37-49",
+        "Dockerfile:123-128"
+      ]
+    },
+    {
+      "disposition": "retained exact-revision hashes/Git blob identities match",
+      "field": "source identity",
+      "limit": "Root tree is complete at one level; nested package membership is not materialized by that fact.",
+      "source": [
+        "source-bindings.json",
+        "controls.json"
+      ]
+    }
+  ]
+}

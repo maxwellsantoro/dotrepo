@@ -1,0 +1,47 @@
+{
+  "acquisitionFreezeSha256": "8d395d2a1040a5254c3ce3aadca84a9c611ee85ef0f788f4b81c16d7de13c9ee",
+  "actionsForbidden": [
+    "network/acquisition",
+    "Go/native/source execution",
+    "daemon",
+    "providers",
+    "installations",
+    "shared/frozen edits"
+  ],
+  "archive": {
+    "bytes": 4464640,
+    "path": "/private/tmp/dotrepo-e1-compose-full-source-20261029/source.tar",
+    "sha256": "3c26db8b626c28f7fe149cabe27bd38cc0188f225efce7c78eda9d4730fed36a"
+  },
+  "automaticHighPromotion": false,
+  "declaredAt": "2026-10-29T14:00:10.982112+00:00",
+  "declaredBeforeArchiveInventoryAndHeaderAnalysis": true,
+  "independentExecution": false,
+  "inventory": {
+    "path": "/private/tmp/dotrepo-e1-compose-full-source-20261029/inventory.json",
+    "sha256": "3d5f79f9bb178abaa4f94f259ac5984ee3ca259b41109cf0e8d668692699e24a"
+  },
+  "knownDevelopmentOnly": true,
+  "method": "inert tar inventory+Go build-constraint/package-header evaluation with explicit contexts, named module/ignored-directory boundaries; no imports/typechecking/go list/process execution",
+  "packetIdentity": "compose-selected-unit-source-membership-amendment-1",
+  "parentFreezeSha256": "921d2e40b8a5cc5609181b2bc384339ccbfd609e3cc369f0138f426fc4cc43dd",
+  "qualification": false,
+  "question": "Does source-declared untagged ./... enumeration filtered by literal e2e omit packages contributing intended main-module unit tests under the source-intended e2e build setting? Distinguish this membership relation from effective child argv/context and successful execution.",
+  "repository": "github.com/docker/compose",
+  "revision": "343bb382d2192b88d84af49971bb5cb99bee268c",
+  "rootTreeSha1": "b10e2fc106b7ea146f5d31f56ca0386688275aa7",
+  "sourceReadingLimits": {
+    "maxAggregateHeaderBytes": 16777216,
+    "maxGoFiles": 10000,
+    "maxHeaderBytesPerFile": 32768,
+    "routingConfigBytes": 1048576,
+    "routingConfigFiles": 12
+  },
+  "tuple": {
+    "command": "make test",
+    "component": null,
+    "platform": "documented Linux host/build-worker conditions; architecture parameterized rather than observed",
+    "scope": "repository maintained main-module unit default",
+    "workingDirectory": "."
+  }
+}

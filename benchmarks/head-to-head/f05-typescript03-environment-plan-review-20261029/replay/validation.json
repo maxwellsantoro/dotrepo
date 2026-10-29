@@ -1,0 +1,21 @@
+{
+  "actualUpstreamOrNativeActions": 0,
+  "commands": [
+    {
+      "argv": "uv run python -B check_inputs.py",
+      "exitCode": 0,
+      "members": 703,
+      "observedEngineRangeForms": 91,
+      "pins": 15,
+      "projects": 5
+    },
+    {
+      "argv": "uv run ruff check --no-cache check_inputs.py",
+      "exitCode": 0
+    },
+    {
+      "argv": "uv run ruff format --check --no-cache check_inputs.py",
+      "exitCode": 0
+    }
+  ]
+}

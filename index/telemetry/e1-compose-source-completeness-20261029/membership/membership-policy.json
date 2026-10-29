@@ -1,0 +1,24 @@
+{
+  "basis": [
+    {
+      "assertion": "e2e suite explicitly separate from Test unit/default",
+      "endLine": 15,
+      "path": "AGENTS.md",
+      "sha256": "2c3364f66a30ea054f3ec3610fa4be37a98e5fc3dbd9654b44f26805c75a236e",
+      "startLine": 9
+    },
+    {
+      "assertion": "unit and end-to-end maintained instructions distinct",
+      "endLine": 46,
+      "path": "BUILDING.md",
+      "sha256": "68694744374f7b98c6dd284aea8d657267a6f6383e9bd5580f725a3e723a7cd4",
+      "startLine": 31
+    }
+  ],
+  "conditions": "Linux CGO1 gc Go1.26.10, no extra tags/GOFLAGS, TAGS substitution has no extra enumeration args; no observed native context",
+  "excludedUnitDirectories": [
+    "pkg/e2e"
+  ],
+  "moduleBoundary": "derive every nested go.mod from full inventory; root module name read from routing/go.mod",
+  "state": "source-derived-scope-data-not-compiled-answer-allowlist"
+}

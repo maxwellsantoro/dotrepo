@@ -1,0 +1,103 @@
+{
+  "identity": "python01-source-free-probe-driver-v1",
+  "parentFreezeSha256": "e16c41c790fbd469263aa86791d5bc31bd59e3a1e11423f6d9d0ff78e873987a",
+  "parentPlanSha256": "603a1ebbad92c8226803b5575b94bcf503b2d7dfac3b597e012f15ddad8e021c",
+  "environmentPlanReview": {
+    "path": "/tmp/dotrepo-f05-python01-environment-plan-review-20261029/FREEZE.json",
+    "sha256": "7a09aa3adee0b41e0b1e7b7b19a1eb37db7a349f54cacf62bf2be0ce4a13f615"
+  },
+  "probe": {
+    "state": "not-executed-separate-authorization-required",
+    "source": "probe.py",
+    "sourceSha256": "399fc6b34116a83a1ef87226575738433c8295fc72ba8191e645a85d29a060c3",
+    "network": "none",
+    "cwd": "/workspace/owned-probe",
+    "provision": [
+      "probe.py only; no repository/lock/dependency source or site packages"
+    ],
+    "commands": [
+      [
+        "uv",
+        "--version"
+      ],
+      [
+        "uv",
+        "--no-config",
+        "run",
+        "--no-project",
+        "--offline",
+        "--no-python-downloads",
+        "--python",
+        "/usr/bin/python3.11",
+        "--",
+        "python",
+        "-I",
+        "-S",
+        "/workspace/owned-probe/probe.py"
+      ]
+    ],
+    "environment": {
+      "HOME": "/workspace/home",
+      "TMPDIR": "/workspace/tmp",
+      "UV_CACHE_DIR": "/workspace/probe-cache",
+      "UV_PYTHON_DOWNLOADS": "never"
+    },
+    "requiredResult": [
+      "uv0.13.6",
+      "version major/minor3.11 with exact patch retained",
+      "linux/aarch64 platform",
+      "sys.executable binary matches retained image inventory sha",
+      "isolated1,noSite1",
+      "no workspace/task import path and no unexpected Python configuration variables",
+      "raw stdout/stderr/exit/argv/time/isolation/cleanup receipts"
+    ],
+    "admission": false
+  },
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "imageEnvironment": [
+    "PATH=/usr/local/cargo/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+    "RUSTUP_HOME=/usr/local/rustup",
+    "CARGO_HOME=/usr/local/cargo",
+    "GOTOOLCHAIN=local",
+    "GOENV=off"
+  ],
+  "retainedImageInspect": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/image-attempt-3/logs/image-inspect/stdout.txt",
+    "sha256": "4c6fa72b8b05b95a719110e0f7fa705758c224e253cf8c7cdf881218ea4f1913"
+  },
+  "limits": {
+    "workSeconds": 900,
+    "cleanupSeconds": 60,
+    "probeSeconds": 60,
+    "combinedStdoutStderrBytes": 2097152,
+    "probeMetadataBytes": 16384,
+    "cpus": 3,
+    "memoryBytes": 4294967296,
+    "pids": 256
+  },
+  "scripts": {
+    "driver.py": "ab3e155a9076e326610ded2204d5c4e4ffb9651ba28b8e9763b23251c564b67e",
+    "controls.py": "f8b468efd45cd786a80231214fb7df2f2ec1a88d9839ea47b6ef4dce6df99b91",
+    "make_plan.py": "1bbb84ea9b82c1e6654d91fa2054a04f3d1f3970ccc6ceddc0e73c44c2947310",
+    "process_io.py": "f4f162e7465d0e6d2142bba6f898b01beec19bed1e1461ac7633a0f88cc8d1f0",
+    "boundaries.py": "7b03c7ab687043ab23061efde9d6328a21bb6ca94176085c87a50df8265de9e6"
+  },
+  "reusedSources": {
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-dependency-preparation-20261029/prepare.py": "132cc30c00be4f8a7de80646ee8f87b3fff5d945c99a8f63df7a80780144538b",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-offline-setup-plan-20261029/amendment-1/setup.py": "06e3eb82f695812f96816c820f61fef1cceb242c636de5980284824948604de0",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/collection.py": "6db7f294c3158129fc75fee991ec436c1838ab0119bd7f7df9026df3d297b3d8"
+  },
+  "transportProvenance": {
+    "original": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-runtime-20261029/process_io.py",
+    "sha256": "f4f162e7465d0e6d2142bba6f898b01beec19bed1e1461ac7633a0f88cc8d1f0",
+    "unchanged": true,
+    "priorReviewFreeze": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-runtime-review-20261029/FREEZE.json",
+    "priorReviewFreezeSha256": "851b2fada0d98bca7cf530a44a506c498cfea18c639be418b1947f023ccbc385"
+  },
+  "executionAuthorized": false,
+  "dependencySetupAuthorized": false,
+  "actualAdmission": false,
+  "oracleQualified": false,
+  "campaignAdmitted": false,
+  "costUsd": null
+}

@@ -1,0 +1,82 @@
+{
+  "base": "4e9b0c70552c9ee42ea9a8259301dc85a68bc7cc",
+  "externalSourceArchive": {
+    "included": false,
+    "originalPath": "/tmp/dotrepo-f05-qualification-next8-20261029/python-01/source.tar",
+    "sha256": "fc70acea794785b5c6bfd06f5e0c83cb328fc5c4e05e36dab8f182fea5bd0d70"
+  },
+  "historicalAuthorizationConsumed": true,
+  "observed": {
+    "cleanupSeconds": 0.19556770799681544,
+    "containerAbsentFromSameAttemptReceipts": true,
+    "daemonCalls": 16,
+    "elapsedSeconds": 2.7503452911041677,
+    "platform": "linux-aarch64",
+    "python": "3.11.2",
+    "soabi": "cpython-311-aarch64-linux-gnu",
+    "uv": "0.13.6"
+  },
+  "originalFrozenPayloadsUnchanged": true,
+  "packets": [
+    {
+      "freezeSha256": "e16c41c790fbd469263aa86791d5bc31bd59e3a1e11423f6d9d0ff78e873987a",
+      "originalPath": "/tmp/dotrepo-f05-python01-environment-plan-20261029",
+      "path": "f05-python01-environment-plan-20261029",
+      "payloadBytes": 74856,
+      "payloadCount": 11
+    },
+    {
+      "freezeSha256": "7a09aa3adee0b41e0b1e7b7b19a1eb37db7a349f54cacf62bf2be0ce4a13f615",
+      "originalPath": "/tmp/dotrepo-f05-python01-environment-plan-review-20261029",
+      "path": "f05-python01-environment-plan-review-20261029",
+      "payloadBytes": 33636,
+      "payloadCount": 7
+    },
+    {
+      "freezeSha256": "9017646e52e660a22d6a3423bb1541dc3a427c5983b3407a453b30eebffffe27",
+      "originalPath": "/tmp/dotrepo-f05-python01-probe-driver-20261029",
+      "path": "f05-python01-probe-driver-20261029",
+      "payloadBytes": 77506,
+      "payloadCount": 12
+    },
+    {
+      "freezeSha256": "cc233e27ff5b12b31b0f4728ccf222df418db8a27fd518314f7828a984d20aa7",
+      "originalPath": "/tmp/dotrepo-f05-python01-probe-driver-review-20261029",
+      "path": "f05-python01-probe-driver-review-20261029",
+      "payloadBytes": 185558,
+      "payloadCount": 105
+    },
+    {
+      "freezeSha256": "3ff361e82b12771d6cab1120918227bf826fb11d53a3ab689c39cd1bd761a72c",
+      "originalPath": "/tmp/dotrepo-f05-python01-probe-authorization-20261029",
+      "path": "f05-python01-probe-authorization-20261029",
+      "payloadBytes": 1857,
+      "payloadCount": 2
+    },
+    {
+      "freezeSha256": "1fb5f3756be2411a9923b83113f5786f029b81a48b394bb452157c3500435edb",
+      "originalPath": "/tmp/dotrepo-f05-python01-probe-result-20261029",
+      "path": "f05-python01-probe-result-20261029",
+      "payloadBytes": 71001,
+      "payloadCount": 54
+    },
+    {
+      "freezeSha256": "163e0a82bd332b404bfb4a2424c21a1f70c9bb1cd70209ff943cba785ab846be",
+      "originalPath": "/tmp/dotrepo-f05-python01-probe-result-review-20261029",
+      "path": "f05-python01-probe-result-review-20261029",
+      "payloadBytes": 21066,
+      "payloadCount": 4
+    }
+  ],
+  "portableLocalVerification": "hash-bindings-only; original live adapter requires retained absolute environment/helper bindings",
+  "scopeLimits": {
+    "campaignAdmission": false,
+    "consumerBenefit": false,
+    "costUsd": null,
+    "dependencyInstallation": false,
+    "nativeCollection": false,
+    "oracleQualification": false,
+    "upstreamSourceProvisioned": false
+  },
+  "state": "source-free-environment-observation-independently-reviewed"
+}
