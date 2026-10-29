@@ -167,6 +167,10 @@ def main() -> int:
         server_json_path = Path(args.update_server_json)
         server = json.loads(server_json_path.read_text())
         server["version"] = args.version
+        channel = "Preview" if "-" in args.version else "Stable"
+        server["description"] = (
+            f"{channel} repository facts with evidence. Choose your release channel at dotrepo.org/docs."
+        )
         packages = server.get("packages")
         if not isinstance(packages, list) or len(packages) != 1:
             raise SystemExit(f"{server_json_path} must contain exactly one package entry to update")

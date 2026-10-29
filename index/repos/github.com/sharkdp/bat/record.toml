@@ -2,7 +2,7 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "imported"
 source = "https://github.com/sharkdp/bat"
 generated_at = "2026-10-27T17:23:12.420785Z"
 
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = 'Bootstrapped from `README.md`, `SECURITY.md`, `CONTRIBUTING.md`, and `Cargo.toml`. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Imported `repo.build` from `CONTRIBUTING.md`. Inferred `repo.test` from `Cargo.toml`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record.'
+notes = 'Bootstrapped from `README.md`, `SECURITY.md`, `CONTRIBUTING.md`, and `Cargo.toml`. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Inferred `repo.test` from `Cargo.toml`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record.'
 
 [repo]
 name = "bat"
@@ -27,7 +27,6 @@ languages = [
     "Nix",
     "Batchfile",
 ]
-build = "cargo build --bins"
 test = "cargo test"
 topics = [
     "command-line",
@@ -108,13 +107,13 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T17:23:12.420785Z"
-confidence = "high"
-method = "extracted"
-reason = "from declared repository source"
+checkedAt = "2026-10-29T02:06:09.861151Z"
+confidence = "low"
+method = "source_scope_review"
+reason = "Conditional binary-build example for syntax-test setup, not a declared default build."
 source = "CONTRIBUTING.md"
-state = "present"
-valueJson = '"cargo build --bins"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-10-27T17:23:12.420785Z"

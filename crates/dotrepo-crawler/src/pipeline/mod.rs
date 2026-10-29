@@ -436,6 +436,73 @@ mod tests {
     }
 
     #[test]
+    fn refresh_withholds_source_pinned_uv_examples_despite_prior_verified_values() {
+        let index_root = temp_dir("uv-command-scope");
+        let record_root = index_root.join(repository().record_relative_dir());
+        fs::create_dir_all(&record_root).unwrap();
+        fs::write(
+            record_root.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/example/orbit"
+[repo]
+name = "Orbit"
+description = "Old verified extraction"
+build = "cargo build --target x86_64-unknown-linux-musl --profile profiling"
+test = "cargo nextest run"
+"#,
+        )
+        .unwrap();
+        let materialized = materialize_repository(&MaterializeRepositoryInput {
+            repository: repository(),
+            files: ConventionalRepositoryFiles {
+                readme: Some(RepositoryTextFile {
+                    relative_path: PathBuf::from("README.md"),
+                    contents: "# Orbit\n\nSource-scoped command regression.\n".into(),
+                }),
+                extra_files: vec![RepositoryTextFile {
+                    relative_path: PathBuf::from("CONTRIBUTING.md"),
+                    contents: include_str!("../../../dotrepo-core/tests/fixtures/import/command-uv-docker/CONTRIBUTING.md").into(),
+                }],
+                ..Default::default()
+            },
+        }).unwrap();
+        let report = crawl_repository_from_snapshot(
+            &CrawlRepositoryRequest {
+                index_root: index_root.clone(),
+                repository: repository(),
+                generated_at: Some("2026-10-29T02:00:00Z".into()),
+                source_url: None,
+                synthesize: false,
+                synthesis_model: None,
+                synthesis_provider: None,
+                prior_synthesis_failure: None,
+            },
+            &snapshot(Some("Source-scoped command regression.")),
+            &materialized,
+        )
+        .unwrap();
+        let manifest = &report.writeback_plan.factual.import_plan.manifest;
+        assert!(
+            manifest.repo.build.is_none(),
+            "Docker example must not return on refresh"
+        );
+        assert!(
+            manifest.repo.test.is_none(),
+            "nextest filter must not be silently deleted"
+        );
+        let written = crate::apply_crawl_writeback(&report.writeback_plan).unwrap();
+        let manifest =
+            dotrepo_schema::parse_manifest(&fs::read_to_string(written.manifest_path).unwrap())
+                .unwrap();
+        assert!(manifest.repo.build.is_none() && manifest.repo.test.is_none());
+        fs::remove_dir_all(index_root).unwrap();
+    }
+
+    #[test]
     fn crawl_repository_from_snapshot_builds_factual_writeback_plan() {
         let index_root = temp_dir("factual-index");
         let materialized = materialize_repository(&MaterializeRepositoryInput {

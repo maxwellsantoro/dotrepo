@@ -1,0 +1,142 @@
+{
+  "policy": "Actual importer over frozen declared documentation sources with a minimal README when none was declared. No full recrawl or upstream execution.",
+  "sourceFiles": {
+    "crates/dotrepo-core/src/import/commands/extraction.rs": "f58a0ff064a974d014c2bca5b8a1e766ee5479043e0d699e3f72d7c4d0d1f005",
+    "crates/dotrepo-core/src/import/commands/policy.rs": "e724f6ba741f593760b720ddf541080e758efa32cabf3ade19aed2b4382143f9"
+  },
+  "checks": [
+    {
+      "identity": "github.com/FuelLabs/fuel-core",
+      "field": "repo.build",
+      "previous": "cargo build -p fuel-core-bin --no-default-features",
+      "reextracted": null,
+      "passed": true
+    },
+    {
+      "identity": "github.com/GokuMohandas/Made-With-ML",
+      "field": "repo.test",
+      "previous": "pytest --dataset-loc=$DATASET_LOC tests/data --verbose --disable-warnings",
+      "reextracted": null,
+      "passed": true
+    },
+    {
+      "identity": "github.com/astral-sh/ruff",
+      "field": "repo.test",
+      "previous": "cargo test -p ruff_python_parser",
+      "reextracted": null,
+      "passed": true
+    },
+    {
+      "identity": "github.com/astral-sh/uv",
+      "field": "repo.build",
+      "previous": "cargo build --target x86_64-unknown-linux-musl --profile profiling",
+      "reextracted": null,
+      "passed": true
+    },
+    {
+      "identity": "github.com/astral-sh/uv",
+      "field": "repo.test",
+      "previous": "cargo nextest run",
+      "reextracted": null,
+      "passed": true
+    },
+    {
+      "identity": "github.com/clap-rs/clap",
+      "field": "repo.test",
+      "previous": "cargo test --features debug",
+      "reextracted": null,
+      "passed": true
+    },
+    {
+      "identity": "github.com/denoland/deno",
+      "field": "repo.build",
+      "previous": "cargo build --features hmr",
+      "reextracted": "cargo build -vv",
+      "passed": true
+    },
+    {
+      "identity": "github.com/denoland/deno",
+      "field": "repo.test",
+      "previous": "cargo test --features hmr integration::node_unit_tests::os_test",
+      "reextracted": "cargo test -vv",
+      "passed": true
+    },
+    {
+      "identity": "github.com/google/googletest",
+      "field": "repo.build",
+      "previous": "make",
+      "reextracted": null,
+      "passed": true
+    },
+    {
+      "identity": "github.com/google/googletest",
+      "field": "repo.test",
+      "previous": "make test",
+      "reextracted": null,
+      "passed": true
+    },
+    {
+      "identity": "github.com/nginx/nginx",
+      "field": "repo.build",
+      "previous": "make",
+      "reextracted": null,
+      "passed": true
+    },
+    {
+      "identity": "github.com/nlohmann/json",
+      "field": "repo.build",
+      "previous": "make build -C docs/mkdocs",
+      "reextracted": null,
+      "passed": true
+    },
+    {
+      "identity": "github.com/pytorch/pytorch",
+      "field": "repo.test",
+      "previous": "pytest test/test_nn.py -k Loss -v",
+      "reextracted": null,
+      "passed": true
+    },
+    {
+      "identity": "github.com/rust-lang/mdBook",
+      "field": "repo.test",
+      "previous": "cargo test --test gui",
+      "reextracted": null,
+      "passed": true
+    },
+    {
+      "identity": "github.com/screenpipe/screenpipe",
+      "field": "repo.build",
+      "previous": "cargo build --release --features metal",
+      "reextracted": null,
+      "passed": true
+    },
+    {
+      "identity": "github.com/serde-rs/serde",
+      "field": "repo.test",
+      "previous": "cargo test",
+      "reextracted": null,
+      "passed": true
+    },
+    {
+      "identity": "github.com/sharkdp/bat",
+      "field": "repo.build",
+      "previous": "cargo build --bins",
+      "reextracted": null,
+      "passed": true
+    },
+    {
+      "identity": "github.com/tensorflow/tensorflow",
+      "field": "repo.build",
+      "previous": "bazel build --config=dbg //tensorflow/tools/pip_package:build_pip_package",
+      "reextracted": null,
+      "passed": true
+    },
+    {
+      "identity": "github.com/BurntSushi/ripgrep",
+      "field": "repo.build",
+      "previous": "cargo build --release --features 'pcre2'",
+      "reextracted": null,
+      "passed": true
+    }
+  ]
+}

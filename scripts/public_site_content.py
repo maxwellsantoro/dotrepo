@@ -1,5 +1,60 @@
 ARTICLES = [
     {
+        "slug": "when-a-command-needs-more-context",
+        "title": "When a build command needs more context",
+        "dek": "A source check, a withheld answer, and a reproducible regression.",
+        "published": "October 28, 2026",
+        "summary": "A concrete uv example shows why an exact quotation can still be the wrong repository "
+        "default, and how dotrepo handles the correction.",
+        "kicker": "Source inspection walkthrough",
+        "tags": ["evidence", "commands", "fallback"],
+        "body_html": "<p>A repository lookup can return a command that appears verbatim upstream and "
+        "still omit the context needed to use it. This walkthrough follows one such "
+        "correction in dotrepo's public index.</p>\n"
+        "<h2>Start with the answer and its evidence</h2>\n"
+        "<p>The earlier uv profile selected <code>cargo build --target "
+        "x86_64-unknown-linux-musl --profile profiling</code> as its build command, with a "
+        "high-confidence extraction assessment. <a "
+        'href="/repository/?repo=github.com%2Fastral-sh%2Fuv">Open uv\'s current profile</a> '
+        "to inspect the available answers and gaps.</p>\n"
+        "<h2>Read the source at the recorded revision</h2>\n"
+        "<p>At <a "
+        'href="https://github.com/astral-sh/uv/blob/e4c55567ada966de4911513b5c526070e6cddd3f/CONTRIBUTING.md#running-inside-a-docker-container">the '
+        "profile's pinned contribution-guide revision</a>, that command belongs to a Docker "
+        "workflow for <code>uv-dev</code>, alongside container setup and execution. The "
+        "exact text is supported; selecting it as a general build answer is not.</p>\n"
+        "<h2>Withhold the default and preserve the history</h2>\n"
+        "<p>The corrected record withholds that scalar build answer. It also withholds the "
+        "test default previously created by deleting a selector from a nextest example. It "
+        "does not guess replacements. The record's age and unrelated field assessments "
+        "remain unchanged, and its record-wide verification label is downgraded after this "
+        "partial inspection.</p>\n"
+        "<p><a "
+        'href="https://github.com/maxwellsantoro/dotrepo/blob/main/index/repos/github.com/astral-sh/uv/evidence.md">The '
+        "evidence history</a> preserves the earlier extraction and the correction. A newer "
+        "field inspection does not imply that every repository fact was refreshed.</p>\n"
+        "<h2>Make the failure reproducible</h2>\n"
+        "<p>The importer now screens specialized environment and diagnostic sections and "
+        "refuses to turn filtered test examples into unfiltered defaults. The source-pinned "
+        "regression is exercised through the actual importer:</p>\n"
+        "<pre><code>cargo test -p dotrepo-core --test import_quality_gate</code></pre>\n"
+        "<p><a "
+        'href="https://github.com/maxwellsantoro/dotrepo/blob/main/crates/dotrepo-core/tests/fixtures/import/command-uv-docker/CONTRIBUTING.md">The '
+        "frozen source</a> and <a "
+        'href="https://github.com/maxwellsantoro/dotrepo/blob/main/index/telemetry/public-surface-review-20261028/command-scope-corrections.json">dated '
+        "correction receipt</a> make the decision inspectable. This is static source "
+        "inspection and regression evidence; no upstream build or test was executed.</p>\n"
+        "<h2>Use fallback as part of the workflow</h2>\n"
+        "<p>Look up the repository, check the requested field and its scope, read its pinned "
+        "evidence, and consult upstream instructions when the answer is missing or "
+        "insufficient. Freshness and confidence cannot replace this check.</p>\n"
+        "<p>For a separate worked evaluation, see <a "
+        'href="https://github.com/maxwellsantoro/dotrepo/blob/main/benchmarks/head-to-head/results/own-projects-contextual-2026-10-05/README.md">the '
+        "frozen own-project operator study</a>, which retains direct answers and source "
+        "fallbacks. Maintainer-operated tasks do not establish independent adoption or "
+        "population accuracy.</p>",
+    },
+    {
         "slug": "what-the-ais-think-about-dotrepo",
         "title": "What the AIs Think About dotrepo",
         "dek": "9 models. 12 sessions. 10 questions each. One protocol built for them.",
@@ -147,5 +202,5 @@ ARTICLES = [
 <p>The current repo-side synthesis lives in <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/ai-tool-interviews.md">docs/ai-tool-interviews.md</a>, with active direction in the root roadmap. The public site carries this write-up because it remains useful product evidence, even as the implementation moves beyond its March snapshot.</p>
 <p>If you are building an AI coding tool and want to integrate dotrepo, or if you maintain a popular open-source project and want to correct or replace your overlay record, start at <a href="https://github.com/maxwellsantoro/dotrepo">github.com/maxwellsantoro/dotrepo</a>.</p>
 """,
-    }
+    },
 ]

@@ -27,6 +27,15 @@ The repository website is an inspection/integration surface; raw JSON remains
 directly accessible. Metadata supports orientation, while debugging, architecture
 research, and suitability decisions still require source inspection.
 
+Homepage lookups and catalog Profile links open `/repository/?repo=<host/owner/repo>`.
+This static browser view fetches the existing same-origin `profile.json`; it adds
+no API or record authority. A 404 stays in the view with upstream navigation and
+another lookup. Transport failures are separate from an index miss. Commands show
+their retained directory, scope and prerequisites only when the context matches
+the displayed value; otherwise the view explicitly asks for source inspection.
+Profile and Trust JSON remain directly accessible, and GitHub file evidence uses
+the retained source revision rather than a moving branch where available.
+
 ## Snapshot architecture
 
 `meta.json` points at a content-addressed tree under

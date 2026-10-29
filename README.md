@@ -28,10 +28,10 @@ are data to review, not permission to execute them.
 ## Connect your agent
 
 Install the stable MCP server with a Rust toolchain, or use the
-[stable release bundle](https://github.com/maxwellsantoro/dotrepo/releases/tag/v1.0.3):
+[stable release bundle](https://github.com/maxwellsantoro/dotrepo/releases/tag/v1.0.4):
 
 ```bash
-cargo install dotrepo-mcp --version 1.0.3 --locked
+cargo install dotrepo-mcp --version 1.0.4 --locked
 ```
 
 For clients that use an `mcpServers` configuration:
@@ -57,9 +57,10 @@ See [installation](docs/install.md) for the CLI, LSP, and VS Code extension, and
 [consumer integration](docs/external-consumer-integration.md) for fallback rules
 and a runnable client.
 
-**Version matters:** the stable release is `v1.0.3`; this branch is the
+**Version matters:** the stable release is `v1.0.4`; this branch is the
 published prerelease `2.0.0-rc.1`. Stable includes the bounded command-extraction fixes, the
-promotion no-write guard, and response-size caps. The newer field-evidence
+promotion no-write guard, response-size caps, and contained CLI/MCP output writes.
+The newer field-evidence
 schema, execution contexts, and additional MCP target checks remain on `main`.
 Use the
 [version comparison and stable documentation](docs/release-compatibility.md).
@@ -83,7 +84,7 @@ provides maintainer control. Routine generated records are machine-checked;
 ## Add a record to your repository
 
 Install the stable CLI from the release bundle or with
-`cargo install dotrepo-cli --version 1.0.3 --locked`, then:
+`cargo install dotrepo-cli --version 1.0.4 --locked`, then:
 
 ```bash
 # Start from existing README.md, CODEOWNERS, and SECURITY.md:
@@ -96,7 +97,7 @@ dotrepo --root <repo> generate --check
 ```
 
 Use `init` instead of `import` to start from a blank scaffold. The
-[stable maintainer guide](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.3/docs/maintainer-happy-path.md)
+[stable maintainer guide](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.4/docs/maintainer-happy-path.md)
 walks through adoption; [sync boundaries](docs/sync-boundaries.md) explain which
 files and regions dotrepo can manage.
 

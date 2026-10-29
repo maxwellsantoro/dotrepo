@@ -9,7 +9,7 @@ generated_at = "2026-10-27T19:54:28.124859466Z"
 [record.trust]
 confidence = "medium"
 provenance = ["imported"]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `.github/SECURITY.md`, and `.github/CONTRIBUTING.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `.github/CONTRIBUTING.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `.github/SECURITY.md`, and `.github/CONTRIBUTING.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
 
 [repo]
 name = "json"
@@ -28,7 +28,6 @@ languages = [
     "Cuda",
     "Swift",
 ]
-build = "make build -C docs/mkdocs"
 topics = [
     "json",
     "json-pointer",
@@ -105,13 +104,13 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T19:54:28.124859466Z"
-confidence = "high"
-method = "extracted"
-reason = "from declared repository source"
+checkedAt = "2026-10-29T02:06:09.861151Z"
+confidence = "low"
+method = "source_scope_review"
+reason = "Documentation-only build under docs/mkdocs via make -C."
 source = ".github/CONTRIBUTING.md"
-state = "present"
-valueJson = '"make build -C docs/mkdocs"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-10-27T19:54:28.124859466Z"

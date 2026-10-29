@@ -12,6 +12,8 @@ from urllib.parse import urlparse
 
 from public_site_content import ARTICLES
 from public_site_discovery import publish_discovery
+from public_site_styles import SITE_CHROME
+from public_repository_page import repository_href, render_repository_page
 from public_product_content import (
     render_record_freshness,
     render_profile_example,
@@ -676,7 +678,7 @@ def render_site_header(base_path: str, active: str | None = None) -> str:
         <a class="brand__mark" href="{home_href}" aria-label="dotrepo — home"><span class="brand__dot" aria-hidden="true"></span><span>repo</span></a>
         <span class="brand__tag">open metadata protocol</span>
       </div>
-      <nav class="nav__links">
+      <nav class="nav__links" aria-label="Main navigation">
         {items}
       </nav>
     </header>
@@ -880,8 +882,9 @@ def render_repository_cards(
               </div>
               <p class="repo-card__description">{description}</p>
               <div class="repo-card__links">
-                <a href="{summary}" aria-label="Open {aria_label} summary">Summary</a>
-                <a href="{trust}" aria-label="Open {aria_label} trust report">Trust</a>
+                <a href="{profile}" aria-label="Open {aria_label} profile">Profile</a>
+                <a href="{summary}" aria-label="Open {aria_label} summary">Summary JSON</a>
+                <a href="{trust}" aria-label="Open {aria_label} trust report">Trust JSON</a>
                 <a href="{query}" aria-label="Open {aria_label} description query">Query description</a>
               </div>
             </article>
@@ -890,6 +893,7 @@ def render_repository_cards(
                 label=html.escape(label),
                 description=html.escape(str(description)),
                 summary=html.escape(summary),
+                profile=html.escape(repository_href(base_path, identity), quote=True),
                 trust=html.escape(trust),
                 query=html.escape(query),
                 aria_label=aria_label,
@@ -1013,8 +1017,8 @@ def render_lookup_panel(base_path: str) -> str:
           }}
 
           function buildDestination(kind, target) {{
-            const suffix = kind === "trust" ? "trust.json" : "profile.json";
-            return `${{basePath}}/v0/repos/${{encodeURIComponent(target.host)}}/${{encodeURIComponent(target.owner)}}/${{encodeURIComponent(target.repo)}}/${{suffix}}`;
+            const identity = [target.host, target.owner, target.repo].join("/");
+            return `${{basePath}}/repository/?repo=${{encodeURIComponent(identity)}}${{kind === "trust" ? "#trust" : ""}}`;
           }}
 
           function openLookup(kind) {{
@@ -1254,6 +1258,7 @@ def render_repositories_index(inventory: dict, base_path: str) -> str:
     }}
   </style>
   {PUBLIC_PAGE_STYLES}
+  {SITE_CHROME}
 </head>
 <body>
   <div class="page">
@@ -1386,8 +1391,9 @@ def render_repositories_index(inventory: dict, base_path: str) -> str:
         const links = document.createElement("div");
         links.className = "repo-card__links";
         links.append(
-          makeLink(item.links.self, "Summary", `Open ${{item.label}} summary`),
-          makeLink(item.links.trust, "Trust", `Open ${{item.label}} trust report`),
+          makeLink(`{base_path}/repository/?repo=${{encodeURIComponent(item.label)}}`, "Profile", `Open ${{item.label}} profile`),
+          makeLink(item.links.self, "Summary JSON", `Open ${{item.label}} summary`),
+          makeLink(item.links.trust, "Trust JSON", `Open ${{item.label}} trust report`),
           makeLink(repositoryQueryHref(item), "Query description", `Open ${{item.label}} description query`)
         );
 
@@ -1696,6 +1702,7 @@ def render_writing_index(base_path: str) -> str:
     }}
   </style>
   {PUBLIC_PAGE_STYLES}
+  {SITE_CHROME}
 </head>
 <body>
   <div class="page">
@@ -1933,6 +1940,7 @@ def render_docs_index(base_path: str) -> str:
     }}
   </style>
   {PUBLIC_PAGE_STYLES}
+  {SITE_CHROME}
 </head>
 <body>
   <div class="page">
@@ -2235,6 +2243,7 @@ def render_article_page(article: dict, base_path: str) -> str:
     }}
   </style>
   {PUBLIC_PAGE_STYLES}
+  {SITE_CHROME}
 </head>
 <body>
   <div class="page">
@@ -2805,6 +2814,7 @@ def main() -> int:
     }}
   </style>
   {PUBLIC_PAGE_STYLES}
+  {SITE_CHROME}
 </head>
 <body>
   <script id="dotrepo-homepage-snapshot" type="application/json">{homepage_snapshot_state}</script>
@@ -2855,7 +2865,7 @@ def main() -> int:
       <p>Restart the client, then ask it to call <code>dotrepo.lookup</code> with
         <code>repositoryUrl: "https://github.com/BurntSushi/ripgrep"</code> and
         <code>path: "repo.test"</code>. The stable server returns a field query with trust context;
-        profile output and additional safeguards on main are unreleased.</p>
+        profile output and newer lookup safeguards require the prerelease source. Stable 1.0.4 includes the contained-write backport; the published RC predates it.</p>
       <p><a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/release-compatibility.md">Version-specific behavior and safety limits</a></p>
       <div class="cta-row">
         <a class="cta cta--primary" href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/external-consumer-integration.md">Integration and fallback guide</a>
@@ -2999,6 +3009,14 @@ def main() -> int:
 
     write_text(input_dir / "index.html", document)
     write_text(input_dir / "docs" / "index.html", render_docs_index(base_path))
+    write_text(
+        input_dir / "repository" / "index.html",
+        render_repository_page(base_path, render_site_header(base_path, "repositories")),
+    )
+    write_text(
+        input_dir / "assets" / "repository.js",
+        (REPO_ROOT / "scripts/public_repository.mjs").read_text(),
+    )
     write_text(
         input_dir / "repositories" / "index.html",
         render_repositories_index(inventory, base_path),

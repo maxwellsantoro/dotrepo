@@ -31,7 +31,7 @@ publication and consumer proof requires independent outcomes.
   every binary/MCP release asset must identify the same version. The extension
   owns its independent package version; report it separately.
 - Validate the stable release/backport against its immutable tag and dependency
-  graph. Stable 1.0.3 ships from `codex/stable-1.0`; use
+  graph. Stable 1.0.4 ships from `codex/stable-1.0`; use
   [release compatibility](release-compatibility.md) for its scope and retained
   installation evidence. Keep branch-only work distinct from published artifacts.
 - After publishing a stable tag, advance workspace and standalone alias to the
@@ -39,6 +39,15 @@ publication and consumer proof requires independent outcomes.
 - Advance `DEFAULT_CI_RELEASE_VERSION` in `adoption.rs` and regenerate the native
   CI example only after the replacement release artifact exists. Update pinned
   installs, registry metadata, and [release compatibility](release-compatibility.md).
+  Retain the verified publication receipt linked by compatibility guidance;
+  the guidance gate checks CI, Linux/macOS installation success and version binding.
+- Lead release notes with user-visible changes and package choice. The release
+  workflow renders the version's changelog and pinned install instructions with
+  absolute links before GitHub's generated detail. Registry descriptions label
+  stable or preview; a higher prerelease can still be the registry's latest.
+- Validate each published package's own README and absolute documentation links.
+  Forwarding installation pages recover links from older packaged READMEs;
+  changing source does not replace an immutable crates.io package.
 
 ## Public artifact checks
 

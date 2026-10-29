@@ -2,17 +2,16 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/tensorflow/tensorflow"
 generated_at = "2026-10-27T19:57:50.386118839Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `CONTRIBUTING.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `CONTRIBUTING.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `CONTRIBUTING.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. "
 
 [repo]
 name = "tensorflow"
@@ -48,7 +47,6 @@ languages = [
     "PowerShell",
     "Vim Snippet",
 ]
-build = "bazel build --config=dbg //tensorflow/tools/pip_package:build_pip_package"
 topics = [
     "tensorflow",
     "machine-learning",
@@ -113,13 +111,13 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T19:57:50.386118839Z"
-confidence = "high"
-method = "extracted"
-reason = "from declared repository source"
+checkedAt = "2026-10-29T02:06:09.861151Z"
+confidence = "low"
+method = "source_scope_review"
+reason = "Debug pip-package build example, not a general repository-default build."
 source = "CONTRIBUTING.md"
-state = "present"
-valueJson = '"bazel build --config=dbg //tensorflow/tools/pip_package:build_pip_package"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-10-27T19:57:50.386118839Z"

@@ -2,17 +2,16 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/nginx/nginx"
 generated_at = "2026-10-27T18:10:56.764655Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
 ]
-notes = 'Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Imported `repo.build` from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved.'
+notes = 'Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. This is an overlay bootstrap, not a maintainer-controlled canonical record. '
 
 [repo]
 name = "NGINX Banner"
@@ -30,7 +29,6 @@ languages = [
     "Shell",
     "C++",
 ]
-build = "make"
 topics = [
     "content-cache",
     "load-balancer",
@@ -101,13 +99,13 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T18:10:56.764655Z"
-confidence = "high"
-method = "extracted"
-reason = "from declared repository source"
+checkedAt = "2026-10-29T02:06:09.861151Z"
+confidence = "low"
+method = "source_scope_review"
+reason = "Requires auto/configure to generate the Makefile before make; the scalar loses that prerequisite."
 source = "README.md"
-state = "present"
-valueJson = '"make"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-10-27T18:10:56.764655Z"

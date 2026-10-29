@@ -1,10 +1,10 @@
 # Trust model
 
-This page describes the current source branch. Stable `v1.0.3` disables standalone
+This page describes the current source branch. Stable `v1.0.4` disables standalone
 promotion writes, but the newer retained field-evidence checks remain absent.
 See [release compatibility](release-compatibility.md)
 for the comparison and
-[the stable trust document](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.3/docs/trust-model.md)
+[the stable trust document](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.4/docs/trust-model.md)
 for version-matched reference material.
 
 A `.repo` record should not imply that all facts are equally authoritative. Instead, dotrepo should communicate where a record came from, how it was derived, and how much confidence downstream consumers should place in it.
@@ -137,7 +137,7 @@ manifest values and record-wide provenance; it does not freshly inspect upstream
 sources. A stable-generated `verified` label does not establish that the newer
 per-field checks ran. Omit `--apply` for read-only analysis.
 
-**Stable `v1.0.3` and `main`:** `promotion-report --apply` fails before writing
+**Stable `v1.0.4` and `main`:** `promotion-report --apply` fails before writing
 records or evidence. It cannot
 establish source inspection from a standalone manifest, record-wide provenance,
 or a newly written evidence note. On `main`, read-only promotion analysis uses retained

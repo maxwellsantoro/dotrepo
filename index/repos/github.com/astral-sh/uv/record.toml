@@ -2,17 +2,16 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/astral-sh/uv"
 generated_at = "2026-10-28T06:08:22.428612996Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, `CONTRIBUTING.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `CONTRIBUTING.md`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, `CONTRIBUTING.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. "
 
 [repo]
 name = "uv"
@@ -33,8 +32,6 @@ languages = [
     "C",
     "RenderScript",
 ]
-build = "cargo build --target x86_64-unknown-linux-musl --profile profiling"
-test = "cargo nextest run"
 topics = [
     "packaging",
     "python",
@@ -90,13 +87,13 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-28T06:08:22.428612996Z"
-confidence = "high"
-method = "extracted"
-reason = "from declared repository source"
+checkedAt = "2026-10-29T02:06:09.861151Z"
+confidence = "low"
+method = "source_scope_review"
+reason = "Docker/musl profiling workflow, not a repository-default build."
 source = "CONTRIBUTING.md"
-state = "present"
-valueJson = '"cargo build --target x86_64-unknown-linux-musl --profile profiling"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-10-28T06:08:22.428612996Z"
@@ -125,13 +122,13 @@ state = "present"
 valueJson = '"uv"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-28T06:08:22.428612996Z"
-confidence = "high"
-method = "extracted"
-reason = "from declared repository source"
+checkedAt = "2026-10-29T02:06:09.861151Z"
+confidence = "low"
+method = "source_scope_review"
+reason = "The source shows a nextest selector example; deleting its filter invented an unfiltered default."
 source = "CONTRIBUTING.md"
-state = "present"
-valueJson = '"cargo nextest run"'
+state = "unresolved"
+valueJson = "null"
 
 [x.github]
 archived = false

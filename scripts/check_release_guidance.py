@@ -66,6 +66,69 @@ def check(root: Path, *, write: bool = False) -> list[str]:
         errors.append(
             "docs/install.md: stable installation commands disagree with the stable release owner"
         )
+    # Internal agreement is insufficient: retain the publication evidence before
+    # advancing defaults, and reject defaults left behind that verified release.
+    compatibility = root / "docs/release-compatibility.md"
+    if compatibility.is_file():
+        references = re.findall(
+            r"\(\.\./(index/telemetry/[^)]+/release-[^/()]+-verification\.json)\)",
+            compatibility.read_text(),
+        )
+        if len(references) != 1:
+            errors.append("release compatibility requires one stable publication receipt")
+        else:
+            try:
+                receipt = json.loads((root / references[0]).read_text())
+                if not (
+                    receipt.get("version") == stable
+                    and receipt.get("tag") == f"v{stable}"
+                    and receipt.get("tagCommit") == receipt.get("releaseCommit")
+                    and receipt.get("releaseCommit")
+                    and receipt.get("postMergeCi", {}).get("conclusion") == "success"
+                    and receipt.get("releaseWorkflow", {}).get("conclusion") == "success"
+                    and all(
+                        receipt.get("releaseWorkflow", {}).get("publicInstallJobs", {}).get(job)
+                        == "success"
+                        for job in (
+                            "verify-public-installs (ubuntu-latest)",
+                            "verify-public-installs (macos-latest)",
+                        )
+                    )
+                ):
+                    errors.append(
+                        "stable default disagrees with verified publication/install receipt"
+                    )
+            except (OSError, ValueError):
+                errors.append("stable publication receipt is missing or invalid")
+    for relative in ("README.md", "docs/release-compatibility.md"):
+        path = root / relative
+        if path.is_file():
+            release_tags = re.findall(r"releases/tag/v(\d+\.\d+\.\d+)", path.read_text())
+            if not release_tags or release_tags[0] != stable:
+                errors.append(
+                    f"{relative}: primary stable release link disagrees with stable owner"
+                )
+    for manifest in sorted((root / "crates").glob("*/Cargo.toml")):
+        package = tomllib.loads(manifest.read_text())["package"]
+        if package.get("publish") is False:
+            continue
+        readme = package.get("readme")
+        if readme != "README.md":
+            errors.append(f"{manifest.relative_to(root)}: use a package-specific README.md")
+            continue
+        path = manifest.parent / readme
+        if not path.is_file():
+            errors.append(f"{path.relative_to(root)}: missing package README")
+            continue
+        content = path.read_text()
+        for destination in re.findall(r"\]\(([^)]+)\)", content):
+            if not destination.startswith(("https://", "#")):
+                errors.append(
+                    f"{path.relative_to(root)}: package link must be absolute: {destination}"
+                )
+        for pin in re.findall(r"cargo install \S+ --version (\S+) --locked", content):
+            if pin != stable:
+                errors.append(f"{path.relative_to(root)}: stale stable installation command")
     baseline = json.loads(
         (root / "scripts/fixtures/public_upstream_accuracy_baseline.json").read_text()
     )

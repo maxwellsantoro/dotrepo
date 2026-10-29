@@ -1,7 +1,7 @@
 # Release compatibility
 
 Use documentation for the binary you installed. The latest stable release is
-[`v1.0.3`](https://github.com/maxwellsantoro/dotrepo/releases/tag/v1.0.3), built from
+[`v1.0.4`](https://github.com/maxwellsantoro/dotrepo/releases/tag/v1.0.4), built from
 the `codex/stable-1.0` maintenance line. The current `main` source identifies itself
 as `2.0.0-rc.1`, published as a prerelease; it includes public Rust API changes
 not in stable. A final 2.0.0 has not been published. Source merges
@@ -10,15 +10,18 @@ do not change an existing release bundle or installed crate.
 ## Version-matched documentation
 
 For stable binaries, start with the tag's
-[maintainer guide](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.3/docs/maintainer-happy-path.md),
-[trust model](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.3/docs/trust-model.md),
-and [MCP contract](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.3/rfcs/0006-mcp-server-contract.md).
+[maintainer guide](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.4/docs/maintainer-happy-path.md),
+[trust model](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.4/docs/trust-model.md),
+and [MCP contract](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.4/rfcs/0006-mcp-server-contract.md).
 The tag's preparation documents retain their prepublication state. The current
-[install guide](install.md) supplies published 1.0.3 pins, and the
+[install guide](install.md) supplies published 1.0.4 pins, and the
 [historical promotion backport](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.2/docs/stable-promotion-backport.md)
-retains the 1.0.2 patch scope. The [1.0.3 boundary contract](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.3/CONTRIBUTING.md#path-containment-limits)
-defines the added import protections. Installation and deployment receipts live in
-[the dated 1.0.3 delivery evidence](../index/telemetry/stable-1.0.3-delivery-20261006/delivery.json).
+retains the 1.0.2 patch scope. The [1.0.4 boundary contract](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.4/CONTRIBUTING.md#path-containment-limits)
+defines the import and output protections. Publication, crate provenance, asset
+hashes and Linux/macOS install results are retained in
+[the 1.0.4 verification receipt](../index/telemetry/public-surface-review-20261028/release-1.0.4-verification.json).
+The [1.0.3 delivery evidence](../index/telemetry/stable-1.0.3-delivery-20261006/delivery.json)
+retains the preceding maintenance checkpoint.
 The [1.0.2 receipt](../index/telemetry/command-semantics-20261004/delivery.json)
 retains the preceding release and deployment observations unchanged.
 
@@ -29,14 +32,14 @@ fields rather than inferring server behavior from your client version.
 
 ## Safety-relevant differences
 
-Source changes after `v2.0.0-rc.1` add the shared contained output writer used by
+Stable `v1.0.4` backports the shared contained output writer used by
 generation, initialization, adoption, CI setup, claims, export, and MCP import.
 They refuse descendant links and shared-hardlink targets while preserving
-ordinary file identity and permissions. These changes require a new binary
-release; the published RC and stable bundles are unchanged. See
+ordinary file identity and permissions. The published `v2.0.0-rc.1` predates this
+change; it is present in stable 1.0.4 and current source. See
 [path containment limits](../CONTRIBUTING.md#path-containment-limits).
 
-| Behavior | Stable `v1.0.3` | Unreleased `main` |
+| Behavior | Stable `v1.0.4` | Unreleased `main` |
 | --- | --- | --- |
 | `promotion-report --apply` | Fails before writing records or evidence | Same no-write guard |
 | Read-only promotion analysis | Uses manifest values and record-wide provenance; does not inspect upstream | Uses retained value- and timestamp-bound field assessments; still not fresh inspection |
@@ -49,18 +52,21 @@ release; the published RC and stable bundles are unchanged. See
 | Import text inputs | Existing discovery uses bounded regular files without symlinks; Unix descriptor-relative opens | Same reader, also used by newer manifest discovery |
 | Rake commands | Withhold namespaces, conditional tasks and dynamic Ruby contexts | Same conservative root-task rule |
 | Forced native import writes | Refuses symlinks, shared hardlinks and nonregular targets before writing | Same refusal contract |
-| `dotrepo ci init` default | Retains prepublication `1.0.1`; pass `--version 1.0.3` explicitly | Pins `1.0.3`; no runtime latest-release discovery |
+| Repository-derived output writes | Shared root-aware writer refuses descendant links/reparse points, shared hardlinks and nonregular targets before existing files change | Same writer; see the containment limits |
+| `dotrepo ci init` default | Retains prepublication `1.0.1`; pass `--version 1.0.4` explicitly | Pins `1.0.4`; no runtime latest-release discovery |
 
 ### Promotion and trust labels
 
-Stable 1.0.2 and 1.0.3 disable standalone promotion writes. Read-only analysis retains the
+Stable 1.0.2 through 1.0.4 disable standalone promotion writes. Read-only analysis retains the
 older record-wide scoring model; a `verified` record does not prove that the newer
 per-field checks ran. Review retained sources and record age for the fact needed.
-Both maintenance patches preserve the stable schema and Rust API. Version
+These maintenance patches preserve the stable schema and Rust API. Version
 1.0.2 updated four external lock entries and the promotion/command safeguards;
 1.0.3 adds bounded import reads, forced-write checks and conservative Rake
-handling. Unix uses pinned directory descriptors; Windows ancestor replacement
-and movement of the selected root retain documented best-effort limits.
+handling; 1.0.4 extends contained writes across CLI outputs and MCP import.
+Unix uses pinned directory descriptors; Windows output traversal retains ancestor
+handles and rejects reparse points. Movement of the selected root and active
+same-user filesystem races retain the documented limits.
 
 Historical 1.0.1 allowed `promotion-report --apply` to modify records and append
 evidence. Updating documentation does not change those already-installed binaries
@@ -88,8 +94,8 @@ allowlisted stable flow. The snapshot-path guard protects a flow stable lookup
 does not use. Reachability of other targets depends on configuration and inputs.
 
 Source comparison:
-[stable lookup policy](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.3/crates/dotrepo-mcp/src/lookup.rs),
-[stable handler](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.3/crates/dotrepo-mcp/src/handlers.rs),
+[stable lookup policy](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.4/crates/dotrepo-mcp/src/lookup.rs),
+[stable handler](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.4/crates/dotrepo-mcp/src/handlers.rs),
 [current lookup policy](../crates/dotrepo-mcp/src/lookup.rs), and
 [current handler](../crates/dotrepo-mcp/src/handlers.rs).
 
