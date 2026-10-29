@@ -16,11 +16,23 @@ tested changes rather than speculative surface area.
 
 ## Path containment limits
 
-Repository-local tooling resolves paths relative to a declared root and rejects
-paths that escape that root after canonicalization. The check reduces symlink
-escape risk for existing files, but it cannot eliminate time-of-check/time-of-use
-gaps for paths that do not exist yet. Treat containment as a best-effort guard,
-not a sandbox boundary, when adding write flows.
+User-facing CLI writes and MCP imports use the shared root-aware output writer.
+The explicitly selected root may be an alias; descendant symlinks/reparse points,
+nonregular files, and shared-hardlink outputs are refused. Unix traverses and
+creates descendants relative to pinned directory descriptors with no-follow
+opens. Windows retains ancestor handles without delete sharing and rejects
+reparse points. Every destination is opened without truncation and checked
+before existing files change. Existing inodes, ownership, permissions, and ACLs
+are preserved, including write-only files and traverse-only directories.
+
+Use `write_repository_outputs` or `RepositoryWriter` for repository-derived
+destinations; the legacy `write_import_outputs` API has caller-selected paths and
+does not establish containment beneath a separately selected repository root.
+Reads elsewhere may still use canonicalization with time-of-check/time-of-use
+limits. Neither read nor write containment is a filesystem sandbox against an
+active same-user actor moving already-open directories or adding a hardlink
+after the final metadata check. Batch preflight prevents partial writes on unsafe
+destinations; later I/O failures are not a multi-file transaction.
 
 Import text inputs use a stricter contract: regular files only, no symlinks
 (including contained links), and at most 2 MiB per input. Conventional files,

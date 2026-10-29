@@ -25,6 +25,22 @@ fn main() {
 }
 
 fn run() -> Result<()> {
+    #[cfg(windows)]
+    {
+        // The debug clap parser exceeds Windows' 1 MiB main-thread stack.
+        // Match main's bounded dispatcher without changing stable arguments.
+        std::thread::Builder::new()
+            .name("dotrepo-cli".into())
+            .stack_size(8 * 1024 * 1024)
+            .spawn(run_command)?
+            .join()
+            .unwrap_or_else(|panic| std::panic::resume_unwind(panic))
+    }
+    #[cfg(not(windows))]
+    run_command()
+}
+
+fn run_command() -> Result<()> {
     let cli = Cli::parse();
     match cli.command {
         Command::Init { force } => cmd_init(cli.root, force),

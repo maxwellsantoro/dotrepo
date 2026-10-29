@@ -46,6 +46,20 @@ def test_selected_job_must_succeed(result):
     assert check_results(needs)
 
 
+@pytest.mark.parametrize("result", ["failure", "cancelled", "skipped", None])
+def test_native_write_runtime_is_required_for_rust_changes(result):
+    needs = needs_for("rust-and-index", "write-boundary-runtime", "release-gate")
+    needs["write-boundary-runtime"]["result"] = result
+    assert check_results(needs)
+    workflow = (
+        Path(__file__).resolve().parents[2] / ".github/workflows/ci.yml"
+    ).read_text()
+    assert (
+        "run_write_boundary_runtime: ${{ steps.scope.outputs.run_rust_ci }}" in workflow
+    )
+    assert "os: [ubuntu-latest, windows-latest]" in workflow
+
+
 def test_classifier_failure_missing_outputs_and_empty_scope_fail_closed():
     needs = needs_for("minimal-gate")
     variants = []

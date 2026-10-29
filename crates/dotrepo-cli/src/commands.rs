@@ -14,9 +14,10 @@ use dotrepo_core::{
     public_repository_trust_or_error_with_base, query_repository, render_dotrepo_ci_workflow,
     resolve_claim_directory, scaffold_claim_directory, trust_repository,
     validate_claim_path_matches_native_identity, validate_index_root, validate_manifest,
-    validate_repository, write_import_outputs, AdoptionRepositoryIdentity, ClaimEventAppendInput,
-    ClaimScaffoldInput, DoctorReport, DoctorSurface, ImportOptions, IndexFindingSeverity,
-    PublicErrorResponse, PublicProfileSearchOptions, PublicRepositoryIdentity,
+    validate_repository, write_repository_outputs, AdoptionRepositoryIdentity,
+    ClaimEventAppendInput, ClaimScaffoldInput, DoctorReport, DoctorSurface, ImportOptions,
+    IndexFindingSeverity, PublicErrorResponse, PublicProfileSearchOptions,
+    PublicRepositoryIdentity, RepositoryOutput, RepositoryWriter,
 };
 use dotrepo_schema::scaffold_manifest as render_scaffold_manifest;
 use dotrepo_schema::RecordMode;
@@ -75,7 +76,12 @@ pub fn cmd_init(root: PathBuf, force: bool) -> Result<()> {
     // the generated .repo will contain a placeholder. Users should edit repo.name
     // (or pass a more specific root). We deliberately do not fail init for usability.
     let manifest = render_scaffold_manifest(&repo_name)?;
-    fs::write(&manifest_path, manifest)?;
+    write_repository_outputs(
+        &root,
+        vec![(manifest_path.clone(), manifest)],
+        force,
+        "--force",
+    )?;
     println!("initialized {}", manifest_path.display());
     Ok(())
 }
@@ -105,7 +111,7 @@ pub fn cmd_import(
         .iter()
         .map(|(path, _)| path.clone())
         .collect::<Vec<_>>();
-    write_import_outputs(outputs, force, "--force")?;
+    write_repository_outputs(&root, outputs, force, "--force")?;
     for path in written_paths {
         println!("imported {}", path.display());
     }
@@ -125,7 +131,8 @@ pub fn cmd_import(
 pub fn cmd_adopt_overlay(root: PathBuf, overlay_record: PathBuf, force: bool) -> Result<()> {
     let plan = adopt_overlay_record(&root, &overlay_record)?;
     let manifest_path = plan.manifest_path.clone();
-    write_import_outputs(
+    write_repository_outputs(
+        &root,
         vec![(plan.manifest_path, plan.manifest_text)],
         force,
         "--force",
@@ -410,11 +417,12 @@ pub fn cmd_generate(root: PathBuf, check: bool) -> Result<()> {
     ensure_native_record_command(&document.manifest.record.mode, "generate")?;
     let outputs = managed_outputs(&root, &document.manifest, &document.raw)?;
 
-    for (path, contents) in outputs {
-        if let Some(parent) = path.parent() {
-            fs::create_dir_all(parent)?;
-        }
-        fs::write(&path, contents)?;
+    let paths = outputs
+        .iter()
+        .map(|(path, _)| path.clone())
+        .collect::<Vec<_>>();
+    write_repository_outputs(&root, outputs, true, "generate")?;
+    for path in paths {
         println!("generated {}", path.display());
     }
 
@@ -469,10 +477,12 @@ pub fn cmd_manage(root: PathBuf, surface: PreviewSurfaceArg, adopt: bool) -> Res
     }
 
     let plan = adopt_managed_surface(&root, surface.into())?;
-    if let Some(parent) = plan.path.parent() {
-        fs::create_dir_all(parent)?;
-    }
-    fs::write(&plan.path, plan.contents)?;
+    write_repository_outputs(
+        &root,
+        vec![(plan.path.clone(), plan.contents)],
+        true,
+        "--adopt",
+    )?;
     println!(
         "adopted {} as a partially managed {} surface",
         plan.path.display(),
@@ -555,10 +565,12 @@ pub fn cmd_ci_init(root: PathBuf, force: bool, version: Option<String>) -> Resul
 
     let version = version.unwrap_or_else(|| dotrepo_core::DEFAULT_CI_RELEASE_VERSION.to_string());
     let workflow = render_dotrepo_ci_workflow(&version);
-    if let Some(parent) = workflow_path.parent() {
-        fs::create_dir_all(parent)?;
-    }
-    fs::write(&workflow_path, workflow)?;
+    write_repository_outputs(
+        &root,
+        vec![(workflow_path.clone(), workflow)],
+        force,
+        "--force",
+    )?;
     println!(
         "initialized {} with dotrepo {}",
         workflow_path.display(),
@@ -685,15 +697,29 @@ pub fn cmd_claim_init(root: PathBuf, args: ClaimInitArgs) -> Result<()> {
             );
         }
         ensure_replaceable_claim_scaffold(&plan.claim_dir)?;
-        fs::remove_dir_all(&plan.claim_dir)?;
     }
 
-    fs::create_dir_all(plan.claim_dir.join("events"))?;
-    fs::write(&plan.claim_path, &plan.claim_text)?;
+    let writer = RepositoryWriter::new(&root)?;
+    writer.create_directory(&plan.claim_dir.join("events"))?;
+    let mut outputs = vec![RepositoryOutput {
+        path: plan.claim_path.clone(),
+        contents: plan.claim_text,
+        overwrite: force,
+    }];
+    if let (Some(path), Some(contents)) = (&plan.review_path, &plan.review_text) {
+        outputs.push(RepositoryOutput {
+            path: path.clone(),
+            contents: contents.clone(),
+            overwrite: force,
+        });
+    }
+    writer.write(outputs)?;
+    if force && plan.review_path.is_none() {
+        writer.remove_file(&plan.claim_dir.join("review.md"))?;
+    }
     println!("initialized {}", plan.claim_path.display());
-    if let (Some(review_path), Some(review_text)) = (&plan.review_path, &plan.review_text) {
-        fs::write(review_path, review_text)?;
-        println!("initialized {}", review_path.display());
+    if let Some(path) = &plan.review_path {
+        println!("initialized {}", path.display());
     }
     Ok(())
 }
@@ -790,9 +816,18 @@ pub fn cmd_claim_event(root: PathBuf, args: ClaimEventArgs) -> Result<()> {
         },
     )?;
 
-    fs::create_dir_all(claim_dir.join("events"))?;
-    fs::write(&plan.event_path, &plan.event_text)?;
-    fs::write(&plan.claim_path, &plan.claim_text)?;
+    RepositoryWriter::new(&root)?.write(vec![
+        RepositoryOutput {
+            path: plan.event_path.clone(),
+            contents: plan.event_text,
+            overwrite: false,
+        },
+        RepositoryOutput {
+            path: plan.claim_path.clone(),
+            contents: plan.claim_text,
+            overwrite: true,
+        },
+    ])?;
     println!("updated {}", plan.claim_path.display());
     println!("appended {}", plan.event_path.display());
     Ok(())
@@ -1062,11 +1097,22 @@ pub fn cmd_public(command: PublicCommand) -> Result<()> {
                 &base_path,
                 pagedigest_previous.as_deref(),
             )?;
-            for (path, contents) in outputs {
-                if let Some(parent) = path.parent() {
-                    fs::create_dir_all(parent)?;
-                }
-                fs::write(&path, contents)?;
+            fs::create_dir_all(&out_dir)?;
+            let writer = RepositoryWriter::new(&out_dir)?;
+            // Exports may contain thousands of files. Bound open descriptors
+            // while retaining the same pinned-root and no-follow guarantees.
+            let outputs = outputs
+                .into_iter()
+                .map(|(path, contents)| RepositoryOutput {
+                    path,
+                    contents,
+                    overwrite: true,
+                })
+                .collect::<Vec<_>>();
+            writer.check(&outputs)?;
+            for output in outputs {
+                let path = output.path.clone();
+                writer.write(vec![output])?;
                 println!("exported {}", path.display());
             }
             Ok(())
@@ -1140,9 +1186,16 @@ fn ensure_replaceable_claim_scaffold(claim_dir: &std::path::Path) -> Result<()> 
         let name = entry.file_name();
         let name = name.to_string_lossy();
         match name.as_ref() {
-            "claim.toml" | "review.md" => {}
+            "claim.toml" | "review.md" => {
+                if !entry.file_type()?.is_file() {
+                    bail!(
+                        "{} must be a regular file before scaffold replacement",
+                        path.display()
+                    );
+                }
+            }
             "events" => {
-                if !path.is_dir() {
+                if !entry.file_type()?.is_dir() {
                     bail!(
                         "{} must be a directory before it can be replaced",
                         path.display()

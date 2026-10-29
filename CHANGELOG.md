@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.0.4 candidate — unreleased
+
+- Backport main's root-aware `RepositoryWriter` across CLI mutation commands
+  and MCP import. Refuse descendant links/reparse points, nonregular files,
+  and shared hardlinks before changing existing outputs; preserve ordinary
+  file identity, permissions, ACLs, and explicitly selected root aliases.
+- Keep public exports within bounded descriptor use and preserve claim history
+  refusal when replacing scaffolds. CLI arguments and MCP tool schemas stay
+  compatible with 1.0.3.
+- Refresh the locked Rust TLS patch dependencies to pass current advisories.
+- Require native write-boundary regression tests on Linux and Windows; use
+  main's bounded Windows CLI dispatcher stack.
+
 ## 1.0.3 candidate — unreleased
 
 - Bound import text reads to regular repository files of at most 2 MiB and
