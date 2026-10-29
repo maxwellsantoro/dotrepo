@@ -130,6 +130,13 @@
       "previous": "bazel build --config=dbg //tensorflow/tools/pip_package:build_pip_package",
       "reextracted": null,
       "passed": true
+    },
+    {
+      "identity": "github.com/BurntSushi/ripgrep",
+      "field": "repo.build",
+      "previous": "cargo build --release --features 'pcre2'",
+      "reextracted": null,
+      "passed": true
     }
   ]
 }

@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/BurntSushi/ripgrep"
 generated_at = "2026-10-27T19:21:52.57039799Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md` and `Cargo.toml`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `README.md`. Imported `repo.test` from `README.md`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `Cargo.toml`. Filled `repo.description` with inferred defaults. Imported `repo.test` from `README.md`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. "
 
 [repo]
 name = "ripgrep"
@@ -29,7 +28,6 @@ languages = [
     "Ruby",
     "Lua",
 ]
-build = "cargo build --release --features 'pcre2'"
 test = "cargo test --all"
 topics = [
     "ripgrep",
@@ -108,13 +106,13 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T19:21:52.57039799Z"
-confidence = "high"
-method = "extracted"
-reason = "from declared repository source"
+checkedAt = "2026-10-29T02:34:17.631297Z"
+confidence = "low"
+method = "source_scope_review"
+reason = "Optional PCRE2 feature build, not the general build: the guide separately gives cargo build --release in the clone/directory setup block."
 source = "README.md"
-state = "present"
-valueJson = """"cargo build --release --features 'pcre2'""""
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-10-27T19:21:52.57039799Z"

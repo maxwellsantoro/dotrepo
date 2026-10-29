@@ -271,6 +271,21 @@
         "url": "https://raw.githubusercontent.com/nginx/nginx/797c039a9884f69aae96286dcdf1ba633e5ebf81/README.md",
         "sha256": "c20b11d05d64038c63fe78ed177b692ac48d686344be464f326bb48e7d2c224b"
       }
+    },
+    {
+      "identity": "github.com/BurntSushi/ripgrep",
+      "field": "repo.build",
+      "previous": "cargo build --release --features 'pcre2'",
+      "value": null,
+      "reason": "Optional PCRE2 feature build, not the general build: the guide separately gives cargo build --release in the clone/directory setup block.",
+      "checkedAt": "2026-10-29T02:34:17.631297Z",
+      "recordGeneratedAtUnchanged": "2026-10-27T19:21:52.57039799Z",
+      "revision": "91f5d22ef48bde459d90a8c7dbeab416e97d0f2b",
+      "source": {
+        "path": "sources/github.com/BurntSushi/ripgrep/README.md",
+        "url": "https://raw.githubusercontent.com/BurntSushi/ripgrep/91f5d22ef48bde459d90a8c7dbeab416e97d0f2b/README.md",
+        "sha256": "945622d974f65e4e141ef9726c948c2640eebd222c5b101afb6445728283921e"
+      }
     }
   ],
   "preservedDifference": {
