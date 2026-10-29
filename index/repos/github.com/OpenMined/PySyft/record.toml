@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/OpenMined/PySyft"
-generated_at = "2026-10-27T17:48:49.416095Z"
+generated_at = "2026-10-29T06:07:56.17571346Z"
 
 [record.trust]
 confidence = "medium"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `pyproject.toml`, and `CONTRIBUTING.md`. Inferred `repo.build` from `pyproject.toml`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`, `pyproject.toml`, and `Justfile`. Inferred `repo.build` from `pyproject.toml`. Imported `repo.test` from `Justfile`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "PySyft v2"
@@ -33,7 +33,7 @@ languages = [
     "Jinja",
 ]
 build = "python -m build"
-test = "pytest tests/unit/ -v"
+test = "just test-unit"
 topics = [
     "deep-learning",
     "secure-computation",
@@ -54,7 +54,7 @@ ecosystem = "Python"
 root = "https://github.com/OpenMined/PySyft/blob/dev/docs/workflow.md"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T17:48:49.416095Z"
+checkedAt = "2026-10-29T06:07:56.17571346Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -62,7 +62,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T17:48:49.416095Z"
+checkedAt = "2026-10-29T06:07:56.17571346Z"
 confidence = "high"
 method = "extracted"
 reason = "Explicit documentation link at README.md:20: - [Workflow](https://github.com/OpenMined/PySyft/blob/dev/docs/workflow.md) — End-to-end privacy-preserving data analysis workflow"
@@ -71,7 +71,7 @@ state = "present"
 valueJson = '"https://github.com/OpenMined/PySyft/blob/dev/docs/workflow.md"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T17:48:49.416095Z"
+checkedAt = "2026-10-29T06:07:56.17571346Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -79,7 +79,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T17:48:49.416095Z"
+checkedAt = "2026-10-29T06:07:56.17571346Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -87,7 +87,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T17:48:49.416095Z"
+checkedAt = "2026-10-29T06:07:56.17571346Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -96,7 +96,7 @@ state = "present"
 valueJson = '"python -m build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T17:48:49.416095Z"
+checkedAt = "2026-10-29T06:07:56.17571346Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -105,7 +105,7 @@ state = "present"
 valueJson = """"Perform data science on data that remains in someone else's server""""
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T17:48:49.416095Z"
+checkedAt = "2026-10-29T06:07:56.17571346Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -113,7 +113,7 @@ state = "present"
 valueJson = '"https://www.openmined.org/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T17:48:49.416095Z"
+checkedAt = "2026-10-29T06:07:56.17571346Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -122,19 +122,19 @@ state = "present"
 valueJson = '"PySyft v2"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T17:48:49.416095Z"
+checkedAt = "2026-10-29T06:07:56.17571346Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
-source = "CONTRIBUTING.md"
+source = "Justfile"
 state = "present"
-valueJson = '"pytest tests/unit/ -v"'
+valueJson = '"just test-unit"'
 
 [x.github]
 archived = false
 clone_url = "https://github.com/OpenMined/PySyft.git"
 default_branch = "dev"
 fork = false
-head_sha = "02b65aecda389ca577856bcc1b2342471970803c"
+head_sha = "7774b9ed821b94e03c58c1b7a2706fd4dbec97bf"
 html_url = "https://github.com/OpenMined/PySyft"
 stars = 10046

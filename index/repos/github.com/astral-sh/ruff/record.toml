@@ -2,9 +2,9 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "inferred"
 source = "https://github.com/astral-sh/ruff"
-generated_at = "2026-10-28T06:08:15.232338097Z"
+generated_at = "2026-10-29T06:11:38.173863032Z"
 
 [record.trust]
 confidence = "medium"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `Cargo.toml`, and `CONTRIBUTING.md`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Ignored component-scoped commands from `playground/ruff/package.json` as repository defaults. Inferred `repo.build` from `Cargo.toml`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `Cargo.toml`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Ignored component-scoped commands from `playground/ruff/package.json` as repository defaults. Withheld `repo.test` from `CONTRIBUTING.md` because its Cargo selector describes a component, not the repository default. Inferred `repo.build` from `Cargo.toml`. Left `repo.test` unset because `Cargo.toml` and `pyproject.toml` suggested conflicting test commands. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Ruff"
@@ -25,8 +25,8 @@ languages = [
     "Python",
     "TypeScript",
     "Shell",
-    "CSS",
     "HTML",
+    "CSS",
     "Jinja",
     "Dockerfile",
     "RenderScript",
@@ -45,6 +45,16 @@ topics = [
     "styleguide",
     "ruff",
 ]
+
+[[repo.test_candidates]]
+command = "cargo test --workspace"
+ecosystem = "Rust"
+source = "Cargo.toml"
+
+[[repo.test_candidates]]
+command = "python -m pytest"
+ecosystem = "Python"
+source = "pyproject.toml"
 
 [repo.toolchain]
 min = "1.97"
@@ -88,7 +98,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-28T06:08:15.232338097Z"
+checkedAt = "2026-10-29T06:11:38.173863032Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -96,7 +106,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-28T06:08:15.232338097Z"
+checkedAt = "2026-10-29T06:11:38.173863032Z"
 confidence = "high"
 method = "extracted"
 reason = "Explicit documentation link at README.md:12: [**Docs**](https://docs.astral.sh/ruff/) | [**Playground**](https://play.ruff.rs/)"
@@ -105,7 +115,7 @@ state = "present"
 valueJson = '"https://docs.astral.sh/ruff/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-28T06:08:15.232338097Z"
+checkedAt = "2026-10-29T06:11:38.173863032Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -113,7 +123,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-28T06:08:15.232338097Z"
+checkedAt = "2026-10-29T06:11:38.173863032Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -121,7 +131,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-28T06:08:15.232338097Z"
+checkedAt = "2026-10-29T06:11:38.173863032Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -130,7 +140,7 @@ state = "present"
 valueJson = '"cargo build --workspace"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-28T06:08:15.232338097Z"
+checkedAt = "2026-10-29T06:11:38.173863032Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -139,7 +149,7 @@ state = "present"
 valueJson = '"An extremely fast Python linter and code formatter, written in Rust."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-28T06:08:15.232338097Z"
+checkedAt = "2026-10-29T06:11:38.173863032Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -147,7 +157,7 @@ state = "present"
 valueJson = '"https://docs.astral.sh/ruff"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-28T06:08:15.232338097Z"
+checkedAt = "2026-10-29T06:11:38.173863032Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -156,11 +166,10 @@ state = "present"
 valueJson = '"Ruff"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-29T02:06:09.861151Z"
+checkedAt = "2026-10-29T06:11:38.173863032Z"
 confidence = "low"
-method = "source_scope_review"
-reason = "Parser-package tests in a Unicode update workflow, not repository-wide tests."
-source = "CONTRIBUTING.md"
+method = "unresolved"
+reason = "intra-tier conflict left field unset during import"
 state = "unresolved"
 valueJson = "null"
 
@@ -169,6 +178,6 @@ archived = false
 clone_url = "https://github.com/astral-sh/ruff.git"
 default_branch = "main"
 fork = false
-head_sha = "c618e8b1382992a27dafe2fc288777792e36ecab"
+head_sha = "7cb935d94e5ccdaefd4efee86ba454e8673a3fa6"
 html_url = "https://github.com/astral-sh/ruff"
-stars = 50330
+stars = 50346

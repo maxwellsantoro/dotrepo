@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/celery/celery"
-generated_at = "2026-10-28T06:08:57.852402525Z"
+generated_at = "2026-10-29T06:13:48.00048119Z"
 
 [record.trust]
 confidence = "medium"
@@ -52,7 +52,7 @@ maintainers = []
 security_contact = "tomer.nosrati@gmail.com"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-28T06:08:57.852402525Z"
+checkedAt = "2026-10-29T06:13:48.00048119Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -60,7 +60,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-28T06:08:57.852402525Z"
+checkedAt = "2026-10-29T06:13:48.00048119Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -68,7 +68,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-28T06:08:57.852402525Z"
+checkedAt = "2026-10-29T06:13:48.00048119Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -77,7 +77,7 @@ state = "present"
 valueJson = '"tomer.nosrati@gmail.com"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-28T06:08:57.852402525Z"
+checkedAt = "2026-10-29T06:13:48.00048119Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -85,7 +85,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-28T06:08:57.852402525Z"
+checkedAt = "2026-10-29T06:13:48.00048119Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -94,7 +94,7 @@ state = "present"
 valueJson = '"make build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-28T06:08:57.852402525Z"
+checkedAt = "2026-10-29T06:13:48.00048119Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -103,7 +103,7 @@ state = "present"
 valueJson = '"Distributed Task Queue (development branch)"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-28T06:08:57.852402525Z"
+checkedAt = "2026-10-29T06:13:48.00048119Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -111,7 +111,7 @@ state = "present"
 valueJson = '"https://docs.celeryq.dev"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-28T06:08:57.852402525Z"
+checkedAt = "2026-10-29T06:13:48.00048119Z"
 confidence = "medium"
 method = "inferred"
 reason = "fell back to directory name or GitHub API"
@@ -120,7 +120,7 @@ state = "present"
 valueJson = '"celery"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-28T06:08:57.852402525Z"
+checkedAt = "2026-10-29T06:13:48.00048119Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -133,6 +133,6 @@ archived = false
 clone_url = "https://github.com/celery/celery.git"
 default_branch = "main"
 fork = false
-head_sha = "cb2e58810d0ef17d9ee056988254525aff3e8fd6"
+head_sha = "2ef8265b0a1dd977abdbcb087d3208b6575842c1"
 html_url = "https://github.com/celery/celery"
-stars = 29088
+stars = 29096

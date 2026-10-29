@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Homebrew/brew"
-generated_at = "2026-10-27T17:45:25.48884Z"
+generated_at = "2026-10-29T06:06:27.380286758Z"
 
 [record.trust]
 confidence = "high"
@@ -67,7 +67,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T17:45:25.48884Z"
+checkedAt = "2026-10-29T06:06:27.380286758Z"
 confidence = "high"
 method = "extracted"
 reason = "Explicit documentation link at README.md:25: Read [installation](https://docs.brew.sh/Installation),"
@@ -76,7 +76,7 @@ state = "present"
 valueJson = '"https://docs.brew.sh/Installation"'
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T17:45:25.48884Z"
+checkedAt = "2026-10-29T06:06:27.380286758Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -84,7 +84,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T17:45:25.48884Z"
+checkedAt = "2026-10-29T06:06:27.380286758Z"
 confidence = "high"
 method = "unspecified"
 reason = "actionable security reporting URL"
@@ -92,7 +92,7 @@ state = "present"
 valueJson = '"https://github.com/Homebrew/.github/blob/HEAD/SECURITY.md"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T17:45:25.48884Z"
+checkedAt = "2026-10-29T06:06:27.380286758Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -100,7 +100,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T17:45:25.48884Z"
+checkedAt = "2026-10-29T06:06:27.380286758Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -108,7 +108,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T17:45:25.48884Z"
+checkedAt = "2026-10-29T06:06:27.380286758Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -117,7 +117,7 @@ state = "present"
 valueJson = '"🍺 The Package Manager for Everywhere"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T17:45:25.48884Z"
+checkedAt = "2026-10-29T06:06:27.380286758Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -125,7 +125,7 @@ state = "present"
 valueJson = '"https://brew.sh"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T17:45:25.48884Z"
+checkedAt = "2026-10-29T06:06:27.380286758Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -134,7 +134,7 @@ state = "present"
 valueJson = '"Homebrew"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T17:45:25.48884Z"
+checkedAt = "2026-10-29T06:06:27.380286758Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -146,6 +146,6 @@ archived = false
 clone_url = "https://github.com/Homebrew/brew.git"
 default_branch = "main"
 fork = false
-head_sha = "a59d9fc5f8361dccde817ce1c066fdf365c8df3e"
+head_sha = "2833c25c11846269f89b8c0bd90abf58bcba89fe"
 html_url = "https://github.com/Homebrew/brew"
-stars = 50125
+stars = 50138

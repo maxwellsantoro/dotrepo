@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/ShareX/ShareX"
-generated_at = "2026-10-27T17:26:02.994697Z"
+generated_at = "2026-10-29T06:08:35.80060679Z"
 
 [record.trust]
 confidence = "medium"
@@ -57,7 +57,7 @@ maintainers = []
 security_contact = "https://github.com/ShareX/ShareX/security"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T17:26:02.994697Z"
+checkedAt = "2026-10-29T06:08:35.80060679Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -65,7 +65,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T17:26:02.994697Z"
+checkedAt = "2026-10-29T06:08:35.80060679Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -73,7 +73,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T17:26:02.994697Z"
+checkedAt = "2026-10-29T06:08:35.80060679Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -82,7 +82,7 @@ state = "present"
 valueJson = '"https://github.com/ShareX/ShareX/security"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T17:26:02.994697Z"
+checkedAt = "2026-10-29T06:08:35.80060679Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -90,7 +90,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T17:26:02.994697Z"
+checkedAt = "2026-10-29T06:08:35.80060679Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -99,7 +99,7 @@ state = "present"
 valueJson = '"dotnet build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T17:26:02.994697Z"
+checkedAt = "2026-10-29T06:08:35.80060679Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -108,7 +108,7 @@ state = "present"
 valueJson = '"ShareX is a free and open-source application that enables users to capture or record any area of their screen with a single keystroke. It also supports uploading images, text, and various file types to a wide range of destinations."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T17:26:02.994697Z"
+checkedAt = "2026-10-29T06:08:35.80060679Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -116,7 +116,7 @@ state = "present"
 valueJson = '"https://getsharex.com"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T17:26:02.994697Z"
+checkedAt = "2026-10-29T06:08:35.80060679Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -125,7 +125,7 @@ state = "present"
 valueJson = '"ShareX Banner"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T17:26:02.994697Z"
+checkedAt = "2026-10-29T06:08:35.80060679Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -138,6 +138,6 @@ archived = false
 clone_url = "https://github.com/ShareX/ShareX.git"
 default_branch = "develop"
 fork = false
-head_sha = "fdb0d415f7124b0f95e69e4c375cd6a2a25bf041"
+head_sha = "24b51dad5a71a39bcb72db6b57d174ccfc9bad2e"
 html_url = "https://github.com/ShareX/ShareX"
-stars = 40458
+stars = 40489
