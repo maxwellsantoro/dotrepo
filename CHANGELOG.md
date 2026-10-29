@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+- Preserve inventoried source symlinks in the internal experiment runtime with
+  contained logical resolution and regular-data-before-links provisioning into
+  a fresh container directory. Keep dependency caches regular-only and account
+  for the actual submitted archives. Retain independent controls, full-source
+  task proposals and prelaunch scope decisions separately from task execution.
+- Reject source/cache aliases of every task's hidden JSON gold and oracle after
+  reserialization as well as exact-byte copies, before creating an agent session.
+- Retain a bounded public CI evidence pilot with explicit documentation,
+  workflow, job, step and execution assertion boundaries. Inaccessible logs and
+  unresolved environment/applicability claims remain unresolved.
 - Extract explicit local runtime/version prerequisite lists into complete
   source-bound command candidates. Preserve setup order and abstain on ambiguous
   lists, external requirements and inherited section restrictions. Add exact

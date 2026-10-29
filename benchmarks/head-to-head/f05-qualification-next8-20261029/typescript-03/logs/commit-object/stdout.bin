@@ -1,0 +1,25 @@
+tree 906e381f0ca5d0c66ddfdfa483a711378ae2013f
+parent ca034820b8288ab6da3a033626a7857401ee64a5
+author edison <edison@vuejs.org> 1793235262 +0800
+committer GitHub <noreply@github.com> 1793235262 +0800
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJq4pk+CRC1aQ7uu5UhlAAAn48QAHSVwMBGO37bhwW8ycO89Qpq
+ a6pBiqWBOFJTneEnSy/ZTtLHRBNKpsRJT+qccG8Mr3jdW6lXFJnkdnX6np7wQdrE
+ gUqRUm9ei8AL3PKO1y7KQohEsBnlf2Gz5ps3Tx5w4VoJ1mH309BoJWlb/7Kj831r
+ P2N4tseNRQUpUEqHl2xLx4hFEHSzQpgQpV4iRNeXx8DMeESLPfSCULXtK8LUthf1
+ Fx33HmdkZb2K1QbQxW2lYJFtFTZWxNnGZ6a/I6LHIA9F0bAjtBOeFgl1XcG6MlXF
+ 3zJWP1oKaQKcM1p8a3rEc/uqqKNX+TND7D3la5IgRS9sjELbwz2OLAMG10FKUoTq
+ hP+4MygHoGrXp9489vXFQGl7XptqBSPA6BtkVWv7OPOwqaOtgunNKEX90KPHg3vo
+ whNo9DexZ6qkuxL3zL350h3dssYzx69/aw94st71+ADK/NwQq/BTdYwpVIJIZHSi
+ /D+EYedhbUz1omd8eF2sRrcFy2z7RK6+O704G4WLAqcVtRbAk4IWhH3SvUn34hpK
+ gSgBvfOwjl65TDlAAnE/oy6paVPMuH+IKU0BNmnjvGwUpDWloHB3z0Cn0SkqMPer
+ Wn1CgDD+QLTx+abha1qFYbOq3O4DLgbsc8nD0cyRb3f7sAI6NjX3c2v6S7SBJxZE
+ BrkKFrhjJKr3XWaq8a52
+ =AfJZ
+ -----END PGP SIGNATURE-----
+ 
+
+fix(compiler-dom): preserve static boolean binding semantics (#16055)
+
+fix #16051

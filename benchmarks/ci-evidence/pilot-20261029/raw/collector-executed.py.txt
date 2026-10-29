@@ -1,0 +1,100 @@
+"""Bounded, read-only public observations; never runs upstream project code."""
+import hashlib
+import json
+import time
+import urllib.error
+import urllib.parse
+import urllib.request
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent
+BUDGET = 30
+MAX_METADATA = 2 * 1024 * 1024
+MAX_LOG = 5 * 1024 * 1024
+
+
+class NoRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None
+
+
+def request(path, label, *, log=False):
+    ledger_path = ROOT / "request-ledger.json"
+    ledger = json.loads(ledger_path.read_text()) if ledger_path.exists() else []
+    if len(ledger) >= BUDGET:
+        raise RuntimeError("Frozen request budget exhausted")
+    url = path if path.startswith("https://") else "https://api.github.com" + path
+    parsed = urllib.parse.urlsplit(url)
+    allowed = parsed.hostname == "api.github.com" or (
+        log
+        and parsed.hostname
+        and parsed.hostname.endswith((".blob.core.windows.net", ".actions.githubusercontent.com"))
+    )
+    if parsed.scheme != "https" or not allowed:
+        raise RuntimeError("Unexpected endpoint/redirect origin")
+    entry = {
+        "number": len(ledger) + 1,
+        "label": label,
+        "url": url if parsed.hostname == "api.github.com" else f"https://{parsed.hostname}{parsed.path}",
+        "startedAtUnix": time.time(),
+        "limitBytes": MAX_LOG if log else MAX_METADATA,
+        "authenticated": False,
+    }
+    req = urllib.request.Request(
+        url,
+        headers={"User-Agent": "dotrepo-ci-evidence-pilot", "Accept": "application/vnd.github+json"},
+    )
+    response = None
+    try:
+        response = urllib.request.build_opener(NoRedirect).open(req, timeout=30)
+    except urllib.error.HTTPError as exc:
+        response = exc
+    except (urllib.error.URLError, TimeoutError) as exc:
+        entry["networkError"] = str(exc)
+    raw = b""
+    redirect = None
+    if response is not None:
+        entry["status"] = response.code
+        entry["headers"] = {
+            k: response.headers[k]
+            for k in ["Content-Type", "Content-Length", "Date", "ETag", "X-RateLimit-Remaining", "Link"]
+            if k in response.headers
+        }
+        raw = response.read(entry["limitBytes"] + 1)
+        response.close()
+        entry["overLimit"] = len(raw) > entry["limitBytes"]
+        if entry["overLimit"]:
+            raw = raw[: entry["limitBytes"]]
+        if entry["status"] in (301, 302, 303, 307, 308):
+            redirect = response.headers.get("Location")
+            entry["redirectHost"] = urllib.parse.urlsplit(redirect or "").hostname
+    entry["bytesRetained"] = len(raw)
+    entry["sha256"] = hashlib.sha256(raw).hexdigest()
+    target = ROOT / "raw" / (label + (".log" if log else ".json"))
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_bytes(raw)
+    entry["bodyPath"] = str(target.relative_to(ROOT))
+    entry["elapsedSeconds"] = time.time() - entry["startedAtUnix"]
+    ledger.append(entry)
+    ledger_path.write_text(json.dumps(ledger, indent=2) + "\n")
+    print(json.dumps({k: entry.get(k) for k in ["number", "label", "status", "bytesRetained", "overLimit", "networkError"]}))
+    return entry, raw, redirect
+
+
+def json_request(path, label):
+    entry, raw, _ = request(path, label)
+    if entry.get("status") != 200 or entry.get("overLimit"):
+        return None
+    return json.loads(raw)
+
+
+def list_runs():
+    plan = json.loads((ROOT / "plan.json").read_text())
+    for case in plan["cases"]:
+        repo = case["repository"].removeprefix("github.com/")
+        label = repo.replace("/", "--")
+        json_request(f"/repos/{repo}/actions/runs?head_sha={case['revision']}&per_page=100", label + "--runs")
+
+
+if __name__ == "__main__":
+    list_runs()

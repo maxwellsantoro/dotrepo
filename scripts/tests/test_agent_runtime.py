@@ -976,6 +976,38 @@ def test_source_first_cannot_read_access_artifact_or_profile_body_from_source_bu
         runtime.load_session(path, out / "assignment.json", f"{task['id']}-r1-source-first")
 
 
+@pytest.mark.parametrize("role", ["gold", "oracle"])
+@pytest.mark.parametrize("task_index", [0, 1])
+def test_reserialized_hidden_answer_is_rejected_before_session_load(
+    campaign, session, tmp_path, role, task_index
+):
+    path, manifest = campaign
+    task, protected_task = manifest["tasks"][0], manifest["tasks"][task_index]
+    # The artifact's original serialization need not be the runner's canonical
+    # encoding. Protect every task's answers, including another task's artifact.
+    protected = b'{ "answer": "PRIVATE EVALUATOR DATA", "role": "' + role.encode() + b'" }'
+    protected_task[role] = write(tmp_path, f"protected-{role}.json", protected)
+    source_bytes = json.dumps(json.loads(protected), separators=(",", ":")).encode()
+    assert not runtime.content_digests(source_bytes) & {experiment.digest(protected)}
+    spec = bundle_spec(tmp_path, {"README.md": source_bytes}, task["revision"])
+    config = deepcopy(session[1])
+    config["sourceBundles"] = {task["repository"]: spec}
+    manifest["artifacts"]["runtime"] = write(tmp_path, "runtime.json", config)
+    manifest["artifacts"]["responses"] = write(
+        tmp_path,
+        "responses.json",
+        {
+            "snapshotSha256": manifest["artifacts"]["snapshot"]["sha256"],
+            "profiles": {task["repository"]: {"status": 404, "body": ""}},
+        },
+    )
+    save(campaign)
+    out = tmp_path / "prepared"
+    experiment.prepare(path, out)
+    with pytest.raises(ValueError, match="aliases hidden/protected"):
+        runtime.load_session(path, out / "assignment.json", f"{task['id']}-r1-source-first")
+
+
 @pytest.mark.parametrize("body", [[], None, "not-a-json-object", 17])
 def test_nonobject_provider_response_preserves_attempt_and_unknown_charges(session, tmp_path, body):
     envelope = response(text="will be replaced")
@@ -1027,3 +1059,276 @@ def test_mocked_native_http_array_response_is_accounted_without_retaining_author
     assert result["effort"]["httpRequests"] == 1
     assert result["effort"]["inputTokens"] is None and result["effort"]["providerCostUsd"] is None
     assert "fixture-private-provider-key" not in (tmp_path / "run/trace.json").read_text()
+
+
+def symlink_spec(root, files, links, *, members=None, revision="a" * 40):
+    """Build a bound fixture without creating any host filesystem link."""
+    import hashlib
+
+    spec = bundle_spec(root, files, revision)
+    buffer = io.BytesIO()
+    with tarfile.open(fileobj=buffer, mode="w") as stream:
+        for name in members if members is not None else [*files, *links]:
+            item = tarfile.TarInfo(name)
+            if name in links:
+                item.type, item.linkname = tarfile.SYMTYPE, links[name]
+                item.mode = 0o777
+                stream.addfile(item)
+            else:
+                item.size = len(files[name])
+                item.mode = 0o755 if name.endswith(".sh") else 0o644
+                stream.addfile(item, io.BytesIO(files[name]))
+    spec["archive"] = write(root, "source.tar", buffer.getvalue())
+    inventory = experiment.read_json(root / spec["inventory"]["path"])
+    inventory["symlinks"] = {}
+    for name, target in links.items():
+        raw = target.encode()
+        inventory["symlinks"][name] = {
+            "target": target,
+            "sha256": experiment.digest(raw),
+            "gitBlobSha": hashlib.sha1(b"blob " + str(len(raw)).encode() + b"\0" + raw).hexdigest(),
+            "mode": "120000",
+        }
+    spec["inventory"] = write(root, "source-inventory.json", inventory)
+    provenance = experiment.read_json(root / spec["provenance"]["path"])
+    provenance["archiveSha256"] = spec["archive"]["sha256"]
+    spec["provenance"] = write(root, "source-provenance.json", provenance)
+    return spec
+
+
+def test_source_links_chains_dotdot_and_typed_reads_without_host_links(tmp_path):
+    spec = symlink_spec(
+        tmp_path,
+        {"data/readme": b"source", "data/run.sh": b"#!/bin/sh\n"},
+        {"links/data": "../data/", "README": "links/data/../data/readme"},
+    )
+    bundle = runtime.source_bundle(tmp_path, spec, "a" * 40, set(), 1000000)
+    assert bundle.resolved_links["README"] == {"path": "data/readme", "type": "regular"}
+    assert (
+        json.loads(runtime.source_read(bundle, "README"))["target"] == "links/data/../data/readme"
+    )
+    assert {r["type"] for r in json.loads(runtime.source_read(bundle, ""))} == {
+        "regular",
+        "symlink",
+    }
+    assert runtime.source_read(bundle, "data/readme") == b"source"
+    assert not (tmp_path / "README").exists()
+
+
+@pytest.mark.parametrize(
+    "files,links",
+    [
+        ({"safe/file": b"ok"}, {"alias": "safe", "bad": "alias/../../escape"}),
+        # Lexically x/y/../../file is contained, but y resolves one level
+        # shallower before '..' is applied, so actual resolution escapes.
+        ({"safe/file": b"ok", "file": b"ok"}, {"x/y": "../safe", "bad": "x/y/../../file"}),
+        ({"file": b"ok"}, {"a": "b", "b": "a"}),
+        ({"file": b"ok"}, {"a": "missing"}),
+        ({"file": b"ok"}, {"a/up": ".."}),
+        ({"a/file": b"ok", "b/file": b"ok"}, {"a/to-b": "../b", "b/to-a": "../a"}),
+        ({"file": b"ok"}, {"a": "file/../file"}),
+    ],
+)
+def test_source_links_reject_logical_escape_cycles_dangling_and_nondirectory(
+    tmp_path, files, links
+):
+    spec = symlink_spec(tmp_path, files, links)
+    with pytest.raises(ValueError, match="escapes|cycle|dangling|regular file"):
+        runtime.source_bundle(tmp_path, spec, "a" * 40, set(), 1000000)
+
+
+@pytest.mark.parametrize(
+    "target", ["/etc/passwd", "C:/host", "C:host", "a\\b", "a\x00b", "a\nb", "a\x85b"]
+)
+def test_source_links_reject_unsafe_targets(tmp_path, target):
+    spec = symlink_spec(tmp_path, {"file": b"ok"}, {"link": target})
+    with pytest.raises(ValueError, match="unsafe source link target"):
+        runtime.source_bundle(tmp_path, spec, "a" * 40, set(), 1000000)
+
+
+@pytest.mark.parametrize("link_first", [False, True])
+def test_source_links_refuse_members_beneath_link_in_both_archive_orders(tmp_path, link_first):
+    files, links = {"target/file": b"safe", "alias/injected": b"injected"}, {"alias": "target"}
+    order = [*links, *files] if link_first else [*files, *links]
+    spec = symlink_spec(tmp_path, files, links, members=order)
+    with pytest.raises(ValueError, match="under non-directory"):
+        runtime.source_bundle(tmp_path, spec, "a" * 40, set(), 1000000)
+
+
+@pytest.mark.parametrize("field", ["target", "sha256", "gitBlobSha", "mode"])
+def test_source_links_bind_exact_target_bytes_git_blob_and_mode(tmp_path, field):
+    spec = symlink_spec(tmp_path, {"file": b"ok"}, {"link": "file"})
+    inventory = experiment.read_json(tmp_path / spec["inventory"]["path"])
+    inventory["symlinks"]["link"][field] = "different"
+    spec["inventory"] = write(tmp_path, "source-inventory.json", inventory)
+    with pytest.raises(ValueError, match="identity mismatch"):
+        runtime.source_bundle(tmp_path, spec, "a" * 40, set(), 1000000)
+
+
+def test_source_links_refuse_duplicates_and_protected_target_content(tmp_path):
+    spec = symlink_spec(tmp_path, {"file": b"hidden"}, {"link": "file"})
+    with pytest.raises(ValueError, match="aliases hidden/protected"):
+        runtime.source_bundle(tmp_path, spec, "a" * 40, runtime.content_digests(b"hidden"), 1000000)
+    spec = symlink_spec(
+        tmp_path, {"file": b"ok"}, {"link": "file"}, members=["file", "link", "link"]
+    )
+    with pytest.raises(ValueError, match="duplicate source member"):
+        runtime.source_bundle(tmp_path, spec, "a" * 40, set(), 1000000)
+
+
+@pytest.mark.parametrize("kind", [tarfile.LNKTYPE, tarfile.CHRTYPE, tarfile.FIFOTYPE])
+def test_source_links_do_not_admit_hardlinks_devices_or_fifos(tmp_path, kind):
+    spec = symlink_spec(tmp_path, {"file": b"ok"}, {"link": "file"})
+    buffer = io.BytesIO()
+    with tarfile.open(fileobj=buffer, mode="w") as stream:
+        item = tarfile.TarInfo("link")
+        item.type, item.linkname = kind, "file"
+        stream.addfile(item)
+    spec["archive"] = write(tmp_path, "source.tar", buffer.getvalue())
+    provenance = experiment.read_json(tmp_path / spec["provenance"]["path"])
+    provenance["archiveSha256"] = spec["archive"]["sha256"]
+    spec["provenance"] = write(tmp_path, "source-provenance.json", provenance)
+    with pytest.raises(ValueError, match="links/devices"):
+        runtime.source_bundle(tmp_path, spec, "a" * 40, set(), 1000000)
+
+
+def test_dependency_cache_remains_regular_only_with_valid_source_links(session, tmp_path):
+    request, _, source = session
+    spec = cache_spec(tmp_path, request, source, {"cargo/registry/cache/item": b"ok"})
+    linked = symlink_spec(
+        tmp_path / "cache",
+        {"cargo/registry/cache/item": b"ok"},
+        {"cargo/registry/cache/link": "item"},
+    )
+    for role in ("archive", "inventory", "provenance"):
+        linked[role]["path"] = "cache/" + linked[role]["path"]
+    spec["bundle"] = linked
+    preparation = experiment.read_json(tmp_path / spec["preparation"]["path"])
+    preparation["cacheArchiveSha256"] = linked["archive"]["sha256"]
+    spec["preparation"] = write(tmp_path, "cache-preparation.json", preparation)
+    with pytest.raises(ValueError, match="cache links are forbidden"):
+        runtime.dependency_cache(tmp_path, spec, request, source, set(), 1000000)
+
+
+def test_link_checkout_transports_regular_members_then_links_and_retains_copy_cost(tmp_path):
+    spec = symlink_spec(tmp_path, {"data/run.sh": b"#!/bin/sh\n"}, {"link": "data/"})
+    bundle = runtime.source_bundle(tmp_path, spec, "a" * 40, set(), 1000000)
+    invoked = []
+
+    def invoke(argv, **kwargs):
+        invoked.append((argv, kwargs))
+        return {"exitCode": 0, "error": None, "stdout": "", "stderr": ""}
+
+    result = runtime.DockerBackend(invoke).checkout(bundle, 10)
+    assert invoked[0][0][-2:] == ["/bin/mkdir", "/workspace/repository"]
+    streams = [kwargs["data"] for _, kwargs in invoked if kwargs.get("data")]
+    assert result["sourceCopy"]["stdinBytes"] == sum(map(len, streams)) > len(bundle.archive)
+    for number, raw in enumerate(streams):
+        with tarfile.open(fileobj=io.BytesIO(raw)) as archive_stream:
+            members = list(archive_stream)
+            assert all(member.issym() == (number == 1) for member in members)
+            if number == 0:
+                assert members[0].mode == 0o755
+            else:
+                assert members[0].linkname == "data/"
+
+
+ACTUAL_LINKS = json.loads(
+    (
+        BENCH / "f05-qualification-next8-20261029/source-links-qualification/actual-links.json"
+    ).read_text()
+)["links"]
+
+
+@pytest.mark.parametrize("actual", ACTUAL_LINKS, ids=lambda a: a["task"] + ":" + a["path"])
+def test_actual_seventeen_link_targets_admit_without_projection(tmp_path, actual):
+    target = actual["lexicallyResolvedTarget"]
+    files = {target + "/fixture.txt" if actual["targetKind"] == "directory" else target: b"fixture"}
+    spec = symlink_spec(tmp_path, files, {actual["path"]: actual["target"]})
+    bundle = runtime.source_bundle(tmp_path, spec, "a" * 40, set(), 1000000)
+    link = bundle.symlinks[actual["path"]]
+    assert link["sha256"] == actual["sha256"] and link["gitBlobSha"] == actual["gitBlobSha"]
+    assert bundle.resolved_links[actual["path"]] == {"path": target, "type": actual["targetKind"]}
+
+
+def test_source_link_loader_keeps_six_tuple_and_validates_before_backend(
+    campaign, session, tmp_path
+):
+    path, manifest = campaign
+    task = manifest["tasks"][0]
+    spec = symlink_spec(
+        tmp_path, {"README.md": b"source"}, {"CLAUDE.md": "README.md"}, revision=task["revision"]
+    )
+    config = deepcopy(session[1])
+    config["sourceBundles"] = {task["repository"]: spec}
+    manifest["artifacts"]["runtime"] = write(tmp_path, "runtime.json", config)
+    manifest["artifacts"]["responses"] = write(
+        tmp_path,
+        "responses.json",
+        {
+            "snapshotSha256": manifest["artifacts"]["snapshot"]["sha256"],
+            "profiles": {task["repository"]: {"status": 404, "body": ""}},
+        },
+    )
+    save(campaign)
+    out = tmp_path / "prepared"
+    experiment.prepare(path, out)
+    loaded = runtime.load_session(path, out / "assignment.json", f"{task['id']}-r1-source-first")
+    assert len(loaded) == 6 and loaded[2].symlinks["CLAUDE.md"]["target"] == "README.md"
+    # Both validation calls are loader-only: no Docker/provider API is involved.
+    hidden = (tmp_path / task["gold"]["path"]).read_bytes()
+    bad = symlink_spec(
+        tmp_path, {"README.md": hidden}, {"CLAUDE.md": "README.md"}, revision=task["revision"]
+    )
+    config["sourceBundles"] = {task["repository"]: bad}
+    manifest["artifacts"]["runtime"] = write(tmp_path, "runtime.json", config)
+    save(campaign)
+    out = tmp_path / "prepared-negative"
+    experiment.prepare(path, out)
+    with pytest.raises(ValueError, match="hidden/protected"):
+        runtime.load_session(path, out / "assignment.json", f"{task['id']}-r1-source-first")
+
+
+def test_link_metadata_output_is_bounded_and_copy_padding_is_accounted(session, tmp_path):
+    request, config, _ = session
+    spec = symlink_spec(tmp_path, {"file": b"ok"}, {"link": "file"})
+    bundle = runtime.source_bundle(tmp_path, spec, "a" * 40, set(), 1000000)
+    config["maxToolOutputBytes"] = 32
+
+    class CopyDocker(FakeDocker):
+        def checkout(self, bundle, timeout):
+            result = super().checkout(bundle, timeout)
+            return {**result, "sourceCopy": {"stdinBytes": len(bundle.archive) + 10240}}
+
+    provider = FakeProvider(
+        response(("read_upstream", {"path": "link"})),
+        response(("checkout_source", {})),
+        response(text="done"),
+    )
+    result = run((request, config, bundle), tmp_path, provider, CopyDocker())
+    events = [json.loads(line) for line in (tmp_path / "run/events.jsonl").read_text().splitlines()]
+    metadata = next(e["result"] for e in events if e["kind"] == "tool-response")
+    assert metadata["truncated"] and len(metadata["content"].encode()) <= 32
+    assert result["effort"]["decodedBytes"] == 32 + len(bundle.archive) + 10240
+
+
+@pytest.mark.parametrize("mutation", ["conflict", "missing-link", "tar-target"])
+def test_source_link_inventory_cannot_reinterpret_or_omit_archive_members(tmp_path, mutation):
+    spec = symlink_spec(tmp_path, {"file": b"ok"}, {"link": "file"})
+    inventory = experiment.read_json(tmp_path / spec["inventory"]["path"])
+    if mutation == "conflict":
+        inventory["files"]["link"] = experiment.digest(b"file")
+    elif mutation == "missing-link":
+        del inventory["symlinks"]["link"]
+    else:
+        import hashlib
+
+        target = b"file/"
+        inventory["symlinks"]["link"].update(
+            target=target.decode(),
+            sha256=experiment.digest(target),
+            gitBlobSha=hashlib.sha1(b"blob 5\0" + target).hexdigest(),
+        )
+    spec["inventory"] = write(tmp_path, "source-inventory.json", inventory)
+    with pytest.raises(ValueError, match="conflicting|links/devices|archive mismatch"):
+        runtime.source_bundle(tmp_path, spec, "a" * 40, set(), 1000000)

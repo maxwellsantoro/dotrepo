@@ -1,0 +1,128 @@
+{
+  "task": {
+    "id": "typescript-01",
+    "repository": "github.com/deepseek-ai/deepseek-harness",
+    "revision": "f3803c96974ad4a94195fb97e5c637e9c2a3afe3",
+    "ecosystem": "JavaScript/TypeScript",
+    "scope": "repository",
+    "startingState": "pre-clone",
+    "component": null,
+    "request": "requests/typescript-01.md",
+    "gold": "curator/gold/typescript-01.json",
+    "oracle": "curator/oracles/typescript-01.json",
+    "enrollmentRationale": "Root workspace manifest and default test script establish a TypeScript project and repository test target."
+  },
+  "state": "source-acquired",
+  "indexConsulted": false,
+  "modelCalls": 0,
+  "upstreamProjectCodeExecuted": false,
+  "costUsd": null,
+  "sourceAcquisitionLimits": {
+    "compressedBytes": 536870912,
+    "expandedSourceBytes": 1073741824,
+    "expandedTrancheBytes": 2147483648,
+    "fileBytes": 134217728,
+    "filesTranche": 200000
+  },
+  "costExclusions": [
+    "No metered host/container/download charge source."
+  ],
+  "scratch": "/tmp/dotrepo-f05-qualification-next8-20261029/typescript-01",
+  "partialExpandedBytes": 138154652,
+  "compressedGitObjectBytes": 44537873,
+  "completeGitObjectsAcquired": true,
+  "sourceFiles": 19863,
+  "sourceBytes": 138154652,
+  "symlinks": {
+    ".agents/notes/implemented/CLAUDE.md": {
+      "target": "AGENTS.md",
+      "gitBlobSha": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "sha256": "a54ff182c7e8acf56acfd6e4b9c3ff41e2c41a31c9b211b2deb9df75d9a478f9"
+    },
+    ".agents/skills/agent-experience/SKILL.md": {
+      "target": "../../../packages/preset/agent-preset/skills/agent-experience/SKILL.md",
+      "gitBlobSha": "fb40f7ffce2d5b4c13f844c962da35dc771caec0",
+      "sha256": "64db69fba1725d47528319dc4f704e8780ab1dcabf326c8cd93674aeb9fdd791"
+    },
+    ".claude/skills": {
+      "target": "../.agents/skills",
+      "gitBlobSha": "2b7a412b8fa0fb7e985b0793321bd4e698f2b6cd",
+      "sha256": "3c74c93317f015d16370349a76529b6f8332c808bdd589e7640eeba6a1b1b874"
+    },
+    "CLAUDE.md": {
+      "target": "AGENTS.md",
+      "gitBlobSha": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "sha256": "a54ff182c7e8acf56acfd6e4b9c3ff41e2c41a31c9b211b2deb9df75d9a478f9"
+    },
+    "apps/cli/tests/profiles/acp/cordis.yml": {
+      "target": "../../../../../snapshots/acp/escalation-approved/cordis.yml",
+      "gitBlobSha": "8a6e191c8e97ad8f581569c74f922c60aa5797c0",
+      "sha256": "e66c4cb7a6f5869ab070c7784114815b12e8366ed2a401d969312892aa39a3be"
+    },
+    "packages/CLAUDE.md": {
+      "target": "AGENTS.md",
+      "gitBlobSha": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "sha256": "a54ff182c7e8acf56acfd6e4b9c3ff41e2c41a31c9b211b2deb9df75d9a478f9"
+    },
+    "snapshots/acp/escalation-approved/system-prompt.expected.md": {
+      "target": "../../session/text-turn/system-prompt.expected.md",
+      "gitBlobSha": "bb85c10476f74cedd0285da78a06cdd6246ae8f9",
+      "sha256": "12640ae132cdc6b4f4d4a2074392fa61e246af096304f1336dc6398af3fc7fae"
+    },
+    "snapshots/acp/escalation-approved/tool-schemas.expected.json": {
+      "target": "../../session/text-turn/tool-schemas.expected.json",
+      "gitBlobSha": "c77f354b59928be0fc5371c4a14aee8e85a10a25",
+      "sha256": "f61e294422587e3bc65fbeb68ad03e9723083055ff0310ecc7e1f5bb9f522d3e"
+    },
+    "snapshots/acp/image-compaction/system-prompt.expected.md": {
+      "target": "../../session/read-image/system-prompt.expected.md",
+      "gitBlobSha": "7d5e489c58e4975138807a6955d21cce9eca8138",
+      "sha256": "a69f942fb36eb0472339da37c0e0e7296075c3ba1a23ac22c2fb030f936427ef"
+    },
+    "snapshots/sdk/account-provider-signout/system-prompt.expected.md": {
+      "target": "../text-turn/system-prompt.expected.md",
+      "gitBlobSha": "4ca0dd39b2abbfbf8d5bbb8ba56efdc36a0621f7",
+      "sha256": "9d1983b66ed868d1f880f974d2f631390fbdc69b52e92d4d0b0dce95c9d686b8"
+    },
+    "snapshots/sdk/account-provider-signout/tool-schemas.expected.json": {
+      "target": "../text-turn/tool-schemas.expected.json",
+      "gitBlobSha": "11d7ccbf24f03aa14f119900c72e2691ccd338aa",
+      "sha256": "f510eb71a43af161851add70d34f330475da955ea7c9b4ecfa73e6c44fc84a91"
+    },
+    "snapshots/session/agent-instructions/workspace/AGENTS.md": {
+      "target": "AGENTS.canonical.md",
+      "gitBlobSha": "83624c92b714a954e3b43d12785ceb222f3f4828",
+      "sha256": "b991fee549d4d6f3644cb0d8756871ff7815e848d0057166119ec7b349fd4bdb"
+    },
+    "snapshots/session/agent-instructions/workspace/nested/AGENTS.md": {
+      "target": "AGENTS.canonical.md",
+      "gitBlobSha": "83624c92b714a954e3b43d12785ceb222f3f4828",
+      "sha256": "b991fee549d4d6f3644cb0d8756871ff7815e848d0057166119ec7b349fd4bdb"
+    },
+    "vendor/CLAUDE.md": {
+      "target": "AGENTS.md",
+      "gitBlobSha": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "sha256": "a54ff182c7e8acf56acfd6e4b9c3ff41e2c41a31c9b211b2deb9df75d9a478f9"
+    }
+  },
+  "missingSubmodules": {},
+  "missingLfsObjects": [],
+  "frozenInspectedFilesMatched": [
+    "README.md",
+    "CONTRIBUTING.md",
+    "package.json",
+    "Makefile",
+    "pnpm-workspace.yaml",
+    "docs/development.md",
+    "native/system/scripts/build.ts",
+    "vitest.config.ts"
+  ],
+  "archivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/typescript-01/source.tar",
+  "archiveSha256": "c3287a2e874e9053fa07468897835e63895e49e3851bf8d8708337e6fbdec193",
+  "archiveBytes": 153876480,
+  "compressedArchivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/typescript-01/source.tar.gz",
+  "compressedArchiveSha256": "55d4cc68fa1deb292912c50866e6232eabcc435ad2d005310510b56b0f3239af",
+  "compressedArchiveBytes": 39167807,
+  "sourceBundleReady": false,
+  "elapsedSeconds": 13.323546499945223
+}

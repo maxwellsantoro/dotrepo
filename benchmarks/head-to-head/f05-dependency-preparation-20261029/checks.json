@@ -1,0 +1,37 @@
+{
+  "checkedAt": "2026-10-29T06:59:06.032024+00:00",
+  "status": "passed",
+  "priorFrozenArtifactsVerified": 454,
+  "commandReceiptsVerified": 88,
+  "tasks": [
+    {
+      "taskId": "rust-02",
+      "cacheFiles": 24692,
+      "expandedBytes": 438392465,
+      "archiveBytes": 463104000,
+      "archiveSha256": "f8ca1fccc8792cc5eb34aad37640268ab339d852de15b10a3cf1d5bcaf5296a8",
+      "draftAdmissionRefused": true
+    },
+    {
+      "taskId": "typescript-02",
+      "cacheFiles": 2562,
+      "expandedBytes": 213726697,
+      "archiveBytes": 217098240,
+      "archiveSha256": "84cfa62ad220509ff1027f2a4e97b88885dbcb4c28bdfe59b620a70224d530dc",
+      "draftAdmissionRefused": true
+    },
+    {
+      "taskId": "go-03",
+      "cacheFiles": 2832,
+      "expandedBytes": 63513466,
+      "archiveBytes": 65812480,
+      "archiveSha256": "fc8de794f4f9338fcb8be7cc0c4ef8f1a7e736e61b3a4a6bcdb3917cfb7176b8",
+      "draftAdmissionRefused": true
+    }
+  ],
+  "limitations": [
+    "Internal byte/contract consistency only, not provenance authenticity.",
+    "Audit flags intentionally refuse live runtime admission. Independent content/protected-alias audit and offline full task requalification remain necessary.",
+    "No daemon, source execution, provider/model or index/profile access."
+  ]
+}

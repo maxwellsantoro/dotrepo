@@ -1,0 +1,53 @@
+[
+    {
+        "Id": "sha256:9f07b849c4603e3ad6b52c00c2dccaaf2054f8b3ec0f4add866ffdd537073c76",
+        "RepoTags": [
+            "dotrepo-f05-node-go-uv:20261029",
+            "dotrepo-f05-prep-tools:9f07b849c460"
+        ],
+        "RepoDigests": [
+            "dotrepo-f05-node-go-uv@sha256:9f07b849c4603e3ad6b52c00c2dccaaf2054f8b3ec0f4add866ffdd537073c76",
+            "dotrepo-f05-prep-tools@sha256:9f07b849c4603e3ad6b52c00c2dccaaf2054f8b3ec0f4add866ffdd537073c76"
+        ],
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-10-29T06:07:40.907667129Z",
+        "Config": {
+            "Env": [
+                "PATH=/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "WorkingDir": "/"
+        },
+        "Architecture": "arm64",
+        "Os": "linux",
+        "Size": 2024510229,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:b072adc33b83109c75cd1aba471476d53e1348ffd59bcf64ccb58a0df445855c",
+                "sha256:d4109bcf2740cf58b3f3f0c439e77e0be57a2b108c6e55ac7aa47bf53e7150e8",
+                "sha256:f4e3441c0cd27664aa34c4c57b6c5b55c2df6495de2a3da632a6f179bac065f5"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-10-29T06:50:09.608025544Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.index.v1+json",
+            "digest": "sha256:9f07b849c4603e3ad6b52c00c2dccaaf2054f8b3ec0f4add866ffdd537073c76",
+            "size": 855
+        },
+        "Identity": {
+            "Pull": [
+                {
+                    "Repository": "docker.io/library/dotrepo-f05-prep-tools"
+                }
+            ],
+            "Build": [
+                {
+                    "Ref": "tf3tg0qkicnx3ke04a2i8dexn",
+                    "CreatedAt": "2026-10-29T06:07:42.365937338Z"
+                }
+            ]
+        }
+    }
+]

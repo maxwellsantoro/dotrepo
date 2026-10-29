@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-f05-cache-typescript-02-c986e3cb17",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "cd /workspace/repository; /workspace/npm-tooling/node_modules/.bin/npm ci --ignore-scripts"
+  ],
+  "startedAt": "2026-10-29T06:56:20.819362+00:00",
+  "elapsedSeconds": 24.14255295880139,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "3a4dd543d2b0e6f30d57a926383edf6897f2ca9b01ae037031d2adc46c2f40e5",
+  "stderrSha256": "669b02944fb1d9affdfd300f76701307c47a8e9d0de2caf78ade76f64220926b",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

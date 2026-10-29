@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "docker",
+    "build",
+    "--network=none",
+    "--pull=false",
+    "--no-cache",
+    "--progress=plain",
+    "--tag=dotrepo-f05-common:20261029",
+    "/tmp/dotrepo-f05-dependency-preparation-20261029/context"
+  ],
+  "startedAt": "2026-10-29T06:50:09.681008+00:00",
+  "elapsedSeconds": 118.9761250410229,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "88a0ee92cbb9f79580508adeb91bbab1504e3e46ebd98ae3bf72c10e9c909d43",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

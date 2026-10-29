@@ -1,0 +1,407 @@
+{
+  "schema": "dotrepo-f05-curator-scope-followup-v1",
+  "date": "2026-10-29",
+  "roleDisclosure": {
+    "authorTask": "/root/e1_establishment",
+    "originalGoldCurator": true,
+    "description": "Fuller source adjudication by the original curator, independent of evaluated extractor/index outputs and F05 runtime author. This is NOT an independent second curator, fresh model session, or campaign. Directory name independent-scope-review is an ownership path, not a claim of independent curation.",
+    "independentSecondReviewerPending": true
+  },
+  "originalSourceFreezeSha256": "fc756e0d5f8a25cddc9f19ece651b21078a68a1f601febdb8d772208c0a66d41",
+  "unchangedOriginals": true,
+  "taskRosterAndComponentClassificationsUnchanged": true,
+  "sourceBindings": "source-bindings.json",
+  "sourceOnly": {
+    "indexConsulted": false,
+    "extractorOrImporterOutputsConsulted": false,
+    "runtimeOracleImplementationConsulted": false,
+    "upstreamCodeExecuted": false,
+    "modelCampaignStarted": false,
+    "modelCalls": 0
+  },
+  "commonOracleCriteria": {
+    "taskCompletion": "The requested, source-established suite reaches its terminal test result, with nonzero actual test execution and reconciled collection/coverage. Assertion failures in the complete suite can satisfy obtaining an outcome; they are test failures, never test success.",
+    "noncompletion": [
+      "Setup/dependency/import/collection failure before applicable tests execute to a terminal result.",
+      "Listing/collect-only, compilation, dry run, command proposal, unrelated narrower suite, or zero-test summary.",
+      "Timeout, resource termination, fail-fast or interruption leaving required tests unexecuted.",
+      "Unadjudicated skips, deselection, missing buckets, hidden early-return tests or missing prerequisite coverage. A green exit code is insufficient."
+    ],
+    "correctnessVsCompletion": "An accurate report of unresolved scope or setup can be correct and useful while remaining task noncompletion. Do not score truthful blocker reporting as a completed test task.",
+    "sourcePreservation": "No upstream test edits, synthetic substitute tests, replacement skip rules, mocked production behavior beyond the maintainer suite, or changed revisions are permitted as completion substitutes.",
+    "skipPolicy": "Retain every collected, executed, failed, skipped, xfailed, deselected and early-return condition where observable. Only immutable source-declared exclusions explicitly adjudicated as part of the frozen accepted suite are permitted; all other reduced coverage requires unresolved/noncompletion. Platform-specific outcomes remain platform-specific.",
+    "oracleStatus": "Source criteria and hypothetical counterexamples only. No upstream code or oracle implementation was executed/read to derive these criteria; executable oracle and independent challenge are pending."
+  },
+  "tasks": [
+    {
+      "taskId": "rust-01",
+      "scopeDisposition": "unresolved-required-limitation",
+      "coverageEstablished": false,
+      "completeTupleEstablished": false,
+      "intendedCoverage": "The enrolled root Rust workspace, not merely the Node CLI package. The unchanged request does not authorize silently replacing Rust repository scope with an easier JavaScript default.",
+      "reason": "The full source tree contains a legitimate root JS workspace test default, but the recursive pnpm test script reaches only packages/cli test at this revision. Its own CI describes template-only tests. The Rust workspace is broader and maintainers give per-package development/testing routes and separately scoped CI lanes; no inspected source declares an aggregate Rust repository-default test suite.",
+      "sourceAssertions": [
+        {
+          "bindings": [
+            "Cargo.toml:1-46",
+            ".github/CONTRIBUTING.md:49-73,85-106"
+          ],
+          "assertion": "Root Rust workspace includes core/runtime/utils/CLI/bundler/driver/integration/example/bench members; guide delegates per-package setup and manual example checks."
+        },
+        {
+          "bindings": [
+            "package.json:13-34",
+            "pnpm-workspace.yaml:1-8",
+            "packages/cli/package.json:55-65",
+            "packages/api/package.json:38-46",
+            "packages/api-e2e/package.json:1-33",
+            "crates/tauri-schema-worker/package.json:1-13",
+            "examples/api/package.json:1-26",
+            "examples/file-associations/package.json:1-13",
+            "examples/resources/package.json:1-7",
+            ".github/workflows/test-cli-js.yml:12-16,64-72"
+          ],
+          "assertion": "Root pnpm test is source-authored and valid for JS workspace default; only CLI has a child test script. API E2E has separately named e2e scripts. It is a secondary scoped assertion, not the required Rust aggregate outcome."
+        },
+        {
+          "bindings": [
+            ".github/workflows/test-core.yml:12-21,41-80,124-139",
+            ".github/workflows/test-cli-rs.yml:77-78"
+          ],
+          "assertion": "Core workflow selects packages/features/platforms, using build on mobile and check for tauri no-default lane. CLI Rust tests are separately selected. Neither establishes one repository-default full suite."
+        }
+      ],
+      "acceptableAlternatives": [],
+      "diagnosticOnly": [
+        "Root pnpm test / recursive test script with actual Node CLI template result and disclosed scope.",
+        "A documented test-core desktop lane or Rust CLI manifest test result with exact package/features/platform; neither alone completes this task."
+      ],
+      "requiredAbstention": "Do not assert a complete applicable Rust root/default instruction or final root aggregate outcome from these sources. Report ambiguity and missing default coverage, retain enrollment.",
+      "remainingRequirements": [
+        "Independent challenge of whether any maintainer-authored aggregate Rust default was missed in acquired full source.",
+        "If no source aggregate exists, retain unresolved scope; do not create a new command by unioning CI jobs or choose Cargo defaults solely from generic tool semantics.",
+        "External platform prerequisite guide referenced by CONTRIBUTING is not revision-pinned here; any later chosen lane requires a source/environment closure review."
+      ],
+      "oracleExamples": [
+        {
+          "id": "rust01-negative-js-default",
+          "receipt": "pnpm test exits 0; CLI template test passes; report says repository Rust tests passed.",
+          "taskComplete": false,
+          "reason": "Wrong scope despite valid root script."
+        },
+        {
+          "id": "rust01-negative-core-only",
+          "receipt": "tauri-utils and tauri desktop tests pass, excludes CLI/bundler and other workspace members.",
+          "taskComplete": false,
+          "reason": "Selected CI lane is not established aggregate."
+        },
+        {
+          "id": "rust01-positive-correct-limitation",
+          "receipt": "Exact revision, root pnpm script and all Rust/member scope sources retained; agent explains no aggregate Rust default established.",
+          "taskComplete": false,
+          "reportCorrect": true,
+          "reason": "Correct limitation is not a completed requested test outcome."
+        }
+      ]
+    },
+    {
+      "taskId": "python-01",
+      "scopeDisposition": "unresolved-required-limitation",
+      "coverageEstablished": false,
+      "completeTupleEstablished": false,
+      "intendedCoverage": "Repository-default/root aggregate Python test outcome, including rather than silently choosing between root maintenance tests and backend application tests.",
+      "reason": "The complete 128-file source tree has root maintenance unittest files, backend pytest-style application tests and a backend script test. Root/frontend manifests define setup/development/build but no test entrypoint; backend declares pytest dependencies without testpaths or aggregate instruction; the only test-bearing CI lane selects two star-history tests. Sources do not declare how these become one repository-default aggregate.",
+      "sourceAssertions": [
+        {
+          "bindings": [
+            "package.json:1-21",
+            "frontend/package.json:1-22",
+            "backend/pyproject.toml:1-56",
+            "README.md:98-180"
+          ],
+          "assertion": "Setup/deployment guidance and backend dev pytest dependencies establish test intent and Python>=3.11,<3.13, not root aggregate test semantics. Deployment API keys are not automatically test prerequisites."
+        },
+        {
+          "bindings": [
+            ".github/workflows/update-star-history.yml:63-71,109-118",
+            "tests/test_local_star_count_fetch.py:1-40",
+            "tests/test_local_star_history.py:1-40"
+          ],
+          "assertion": "CI source explicitly runs both root star-history unittest modules without tokens; that subset cannot replace backend application tests."
+        },
+        {
+          "bindings": [
+            "backend/tests/test_ontology_generator.py:1-38",
+            "backend/tests/test_simulation_prepare_failure.py:1-38",
+            "backend/scripts/test_profile_format.py:1-20"
+          ],
+          "assertion": "Separate backend tests import application services and use pytest; fixtures mock some clients, so deployment-key requirements cannot be generalized to all tests."
+        }
+      ],
+      "acceptableAlternatives": [],
+      "diagnosticOnly": [
+        "The two named star-history unittest modules are a source-grounded maintenance subset.",
+        "Backend pytest-style tests are application test intent; a proposed combined root pytest command is a curator/tool-semantics derivation, not an established maintainer default."
+      ],
+      "requiredAbstention": "Retain missing aggregate/default evidence rather than nominate root unittest, backend-only pytest or deployment build as a complete root test instruction.",
+      "remainingRequirements": [
+        "Independent challenge of full-tree negative search and any additional source-owned aggregate semantics.",
+        "Even a proposed comprehensive union must be separately specified/adjudicated before a later experiment; it cannot retroactively become this task default.",
+        "For a future chosen suite: pin import path, dependency group, fixture/environment closure and any service/network requirements; no claim all LLM/Zep credentials are required or irrelevant."
+      ],
+      "oracleExamples": [
+        {
+          "id": "python01-negative-star-only",
+          "receipt": "Both named root star-history unittest modules pass.",
+          "taskComplete": false,
+          "reason": "Backend application tests unexecuted."
+        },
+        {
+          "id": "python01-negative-backend-only",
+          "receipt": "All backend/tests pass after setting PYTHONPATH=backend.",
+          "taskComplete": false,
+          "reason": "No established aggregate default and root tests excluded."
+        },
+        {
+          "id": "python01-negative-build",
+          "receipt": "npm run build passes.",
+          "taskComplete": false,
+          "reason": "Frontend compilation is not tests."
+        },
+        {
+          "id": "python01-positive-correct-limitation",
+          "receipt": "Agent preserves both test trees and source facts, declines to invent aggregate default.",
+          "taskComplete": false,
+          "reportCorrect": true,
+          "reason": "Correct abstention/limitation, not completed outcome."
+        }
+      ]
+    },
+    {
+      "taskId": "python-02",
+      "scopeDisposition": "coverage-resolved-aggregate-superset-environment-pending",
+      "coverageEstablished": true,
+      "completeTupleEstablished": false,
+      "intendedCoverage": "The complete source-configured root tests tree for Home Assistant on one frozen platform/interpreter. This is a product-suite superset covering the named primary package homeassistant; it is not a newly distinct narrow component suite, all possible platform/database matrices, benchmarks or packaging/tooling tests.",
+      "reason": "Maintainer AGENTS explicitly gives root pytest, pyproject fixes testpaths=tests, package selection is homeassistant*, coverage targets homeassistant/*, tests import homeassistant, and full CI partitions the entire tests tree. This joins package identity to a concrete product suite rather than inferring coverage from the package path alone.",
+      "sourceAssertions": [
+        {
+          "bindings": [
+            "AGENTS.md:27-37",
+            "pyproject.toml:100-106,446-458,632-637",
+            "tests/__init__.py:1-10",
+            "tests/test_core.py:1-25"
+          ],
+          "assertion": "Explicit test invocation plus test collection configuration, package/coverage target and direct imports establish applicable aggregate product coverage."
+        },
+        {
+          "bindings": [
+            ".github/workflows/ci.yaml:891-925,942-949,1030-1073,1465-1493"
+          ],
+          "assertion": "Full CI collects tests into buckets and executes every selected bucket; one bucket or integration is partial. Additional SQLite variants are explicitly partial repetitions, not requirements to call the local documented root suite complete."
+        },
+        {
+          "bindings": [
+            ".python-version:1-1",
+            "pyproject.toml:20-24",
+            "script/setup:1-36",
+            "script/bootstrap:1-24",
+            "requirements_test.txt:8-42",
+            ".github/actions/restore-or-build-venv/action.yml:74-105",
+            "packages/pytest-home-assistant/pyproject.toml:5-35",
+            "packages/pytest-home-assistant/pytest_homeassistant/bootstrap.py:1-11",
+            "packages/pytest-home-assistant/pytest_homeassistant/plugins.py:179-201,224-250"
+          ],
+          "assertion": "Runtime minimum>=3.14.2, source desired3.14.10; bootstrap installs full dependencies/editable helper packages and compiles translations. Default DB is SQLite, socket policy permits local/unix traffic while blocking external sockets. Linux CI has substantial OS libraries; portability and complete environment are not asserted."
+        }
+      ],
+      "acceptableAlternatives": [
+        {
+          "id": "ha-root-configured-product-suite",
+          "command": "uv run --no-sync pytest",
+          "directory": ".",
+          "scope": "all tests selected by immutable root pytest configuration, on frozen platform/interpreter",
+          "prerequisiteState": "Source requirements identified; exact bounded install/environment still unqualified. Use .python-version3.14.10 (manifest>=3.14.2), uv, full application/test requirements and local editable helper packages, compiled English translations. No-sync does not install missing dependencies.",
+          "conditions": [
+            "Keep root config and testpaths; do not add -k/-m/path exclusions or disable test plugins.",
+            "Prerequisite setup must preserve translations and immutable source; environment/integration dependencies must be available.",
+            "No implied requirement to edit strings.json; if modified, conditional translation regeneration applies.",
+            "No claim remote MariaDB/PostgreSQL services required for default SQLite suite; adding DB variants changes scope."
+          ]
+        },
+        {
+          "id": "ha-full-partition-equivalent",
+          "command": null,
+          "directory": ".",
+          "scope": "complete union of source-defined tests buckets on the same frozen environment",
+          "conditions": [
+            "Pre-freeze complete collection/bucket manifest and require all buckets, no selective changed-integration or one-bucket result.",
+            "Preserve configuration and test behavior; parallelization/timeout/coverage settings must be separately reviewed."
+          ]
+        }
+      ],
+      "notDistinctNarrowComponentProof": true,
+      "requiredAbstention": "Abstain from claiming a portable complete prerequisite tuple or launch readiness until environment, source-bundle treatment, skips and oracle are qualified. Scope can remain resolved even if setup/resource qualification fails.",
+      "remainingRequirements": [
+        "A Linux/platform image and actualPython/uv/dependency artifact identities and OS libraries must be frozen and qualified by owning runtime worker.",
+        "HA archive retains unsupported symlink entries (.agents/skills,.gemini/skills,CLAUDE.md); source coverage was read from regular tar members without following links. Runtime source materialization must resolve this explicitly.",
+        "Full source test execution is likely substantial; bounded resource failure must remain noncompletion, not motivate a narrower suite.",
+        "Freeze collected test identity/expected platform skips and completion oracle before campaign. Every unexpected skip, deselection, collection error, missing bucket or early stop needs noncompletion/unresolved disposition."
+      ],
+      "oracleExamples": [
+        {
+          "id": "python02-positive-pass",
+          "receipt": "Pinned revision/environment, complete root-configured collection reconciled; all applicable tests executed; no unadjudicated reduced coverage; terminal passing result retained.",
+          "taskComplete": true,
+          "testSuccess": true
+        },
+        {
+          "id": "python02-positive-fail",
+          "receipt": "Same complete suite executes to normal terminal result with assertion failures; all tests attempted without fail-fast, setup/collection errors or unadjudicated skipped coverage.",
+          "taskComplete": true,
+          "testSuccess": false
+        },
+        {
+          "id": "python02-negative-abode",
+          "receipt": "Only tests/components/abode passes.",
+          "taskComplete": false,
+          "reason": "Retargets primary package task to narrower integration."
+        },
+        {
+          "id": "python02-negative-bucket",
+          "receipt": "One full-CI bucket passes; remaining buckets never execute.",
+          "taskComplete": false,
+          "reason": "Partition incomplete."
+        },
+        {
+          "id": "python02-negative-resource",
+          "receipt": "Honest report: dependencies exceed budget, no tests run.",
+          "taskComplete": false,
+          "reportCorrect": true
+        },
+        {
+          "id": "python02-negative-collect-only",
+          "receipt": "Complete root collection lists tests, exit0; no test call phase.",
+          "taskComplete": false
+        }
+      ]
+    },
+    {
+      "taskId": "python-03",
+      "scopeDisposition": "coverage-resolved-aggregate-superset-environment-pending",
+      "coverageEstablished": true,
+      "completeTupleEstablished": false,
+      "intendedCoverage": "The full maintainer product test suite for youtube_dl on one frozen supported Python/platform, including core and download/extractor test groups, with source-declared static skips explicitly retained. Not one extractor/downloader file, offline/core-only lane or all CI interpreter platforms.",
+      "reason": "CONTRIBUTING explicitly supplies full unittest discovery and nosetests routes. Makefile test invokes all test directory tests. Packaging includes youtube_dl plus extractor/downloader/postprocessor subpackages; full test sources directly import all those surfaces. Thus full product suite can cover the named primary package as a superset, without pretending it is a distinct narrow component.",
+      "sourceAssertions": [
+        {
+          "bindings": [
+            "CONTRIBUTING.md:71-93",
+            "setup.py:102-120",
+            "Makefile:32-52",
+            "test/test_YoutubeDL.py:15-37",
+            "test/test_utils.py:13-40",
+            "test/test_downloader_http.py:12-23"
+          ],
+          "assertion": "Maintainer full-suite routes and explicit package imports establish a real aggregate test alternative; packaging identity alone is not the inference."
+        },
+        {
+          "bindings": [
+            "tox.ini:1-14",
+            "devscripts/run_tests.sh:1-22",
+            ".github/workflows/ci.yml:3-11,81-100,406-418,461-468"
+          ],
+          "assertion": "Core/offline/tox routes intentionally exclude download-related files; CI can select both core and download. Those limited routes are legitimate diagnostics but insufficient alone for this frozen full-primary-package interpretation. CI source chooses pynose forPython>=3.9; no requirement to reproduce every interpreter matrix."
+        },
+        {
+          "bindings": [
+            "test/helper.py:13-39,100-118",
+            "test/parameters.json:1-42",
+            "test/test_download.py:100-128,163-188",
+            "test/test_socks.py:24-54"
+          ],
+          "assertion": "Suite has live external extraction/downloads, source-marked broken/skip cases, optional local parameters and hidden early returns for exhausted network retries/missing proxies. Terminal green output cannot alone demonstrate exercised coverage."
+        }
+      ],
+      "acceptableAlternatives": [
+        {
+          "id": "ytdl-full-unittest",
+          "command": "python -m unittest discover",
+          "directory": ".",
+          "scope": "full unfiltered root discovery of maintained test tree",
+          "commandIsUpstreamSourceData": true,
+          "prerequisiteState": "Supported interpreter, local package imports, runner compatibility, network, test-specific binaries/proxy settings and complete collection remain environment qualification requirements. CONTRIBUTING build-only pandoc/zip requirements are not automatically test prerequisites."
+        },
+        {
+          "id": "ytdl-full-nose",
+          "command": "nosetests --verbose test",
+          "directory": ".",
+          "scope": "complete test directory with no offline/core/download exclusions",
+          "prerequisiteState": "Runner compatible with frozen interpreter; upstreamCI selects pynose forPython>=3.9. Complete network/binary/proxy/test parameter closure pending.",
+          "conditions": [
+            "make test also invokes flake8 after tests; report lint outcome separately and do not substitute it for tests.",
+            "If source CI partition route is used, both core and download groups must execute with matching complete collection; download continue-on-error is not test success."
+          ]
+        }
+      ],
+      "notDistinctNarrowComponentProof": true,
+      "requiredAbstention": "Do not claim a complete execution tuple, full exercised result or launch readiness until hidden skip/early-return and network/prerequisite accounting is qualified. Complete-scope source support does not establish cheap bounded execution.",
+      "remainingRequirements": [
+        "Freeze a supported interpreter/runner/platform; exact source dependencies and executable tools per full collection require runtime qualification.",
+        "Freeze network permissions and proxy/test local parameter policy. Do not add real credentials or fabricate proxy values to obtain a pass. Missing required coverage prerequisites is noncompletion.",
+        "Enumerate source-declared skip cases (not-working extractor/test_case skip) against exact collected test IDs before campaign. These may be retained as explicitly excluded-by-source coverage, not passing tests.",
+        "Detect/report test_download.py exhausted-network return and test_socks.py missing-parameter returns; they can look green and must not count as exercised full coverage.",
+        "A full terminal test-failed result can complete obtaining the outcome, but setup/collection/partial/hidden-no-op substitutes cannot."
+      ],
+      "oracleExamples": [
+        {
+          "id": "python03-positive-pass",
+          "receipt": "Complete unfiltered suite on pinned interpreter reaches normal result; nonzero core and download tests actually exercise behavior; exact source static skips preadjudicated and reported; no hidden network/proxy returns.",
+          "taskComplete": true,
+          "testSuccess": true
+        },
+        {
+          "id": "python03-positive-fail",
+          "receipt": "Same complete suite attempts every applicable test to terminal assertion-failure result, all expected skips separately accounted and no hidden unexercised conditions.",
+          "taskComplete": true,
+          "testSuccess": false
+        },
+        {
+          "id": "python03-negative-downloader-only",
+          "receipt": "test_downloader_http.py passes.",
+          "taskComplete": false,
+          "reason": "Only narrow downloader coverage."
+        },
+        {
+          "id": "python03-negative-offline",
+          "receipt": "make offlinetest or tox default or YTDL_TEST_SET=core passes.",
+          "taskComplete": false,
+          "reason": "Intentionally excludes download/extractor group."
+        },
+        {
+          "id": "python03-negative-network-green",
+          "receipt": "Full discovery exits0, but repeated network failures return at test_download.py180–182.",
+          "taskComplete": false,
+          "reason": "Hidden unexercised download coverage despite green summary."
+        },
+        {
+          "id": "python03-negative-proxy-green",
+          "receipt": "Full runner exits0, missing proxy settings produce test_socks.py30–37 early return.",
+          "taskComplete": false,
+          "reason": "Missing prerequisite is not exercised test result."
+        },
+        {
+          "id": "python03-negative-all-skipped",
+          "receipt": "Runner lists tests or reports all skipped, exit0.",
+          "taskComplete": false
+        }
+      ]
+    }
+  ],
+  "launchGates": [
+    "Independent second-curator challenge of this addendum.",
+    "Exact environment/resources/tool permissions/cache/cost accounting, snapshot and consumer policy freeze.",
+    "Executable completion oracle with positive/negative controls matching these scope and skipped-coverage constraints.",
+    "No campaign authorized or launched by this packet."
+  ]
+}

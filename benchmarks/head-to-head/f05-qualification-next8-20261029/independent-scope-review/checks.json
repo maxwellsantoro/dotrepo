@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "checks": [
+    "Original SOURCE_FREEZE SHA256 unchanged; original verifier passed with 12 tasks/168 source+metadata files.",
+    "All retained maintainer source bytes, hashes, lengths and line spans match copied exact archive members.",
+    "All assertion locators within exact source bounds.",
+    "All four acquisition receipts and original request/gold/oracle hashes match.",
+    "Four fixed task identities, curator disclosure and source-only/no-execution assertions retained.",
+    "Hypothetical oracle example IDs unique; unresolved tasks never completed by reporting limitations."
+  ],
+  "sourceFiles": 51,
+  "sourceSpans": 72,
+  "assertionSpanLocators": 67,
+  "originalInputs": 12,
+  "oracleExamples": 20,
+  "upstreamTestsExecuted": false,
+  "oracleExamplesExecuted": false,
+  "rustChecksRun": false
+}

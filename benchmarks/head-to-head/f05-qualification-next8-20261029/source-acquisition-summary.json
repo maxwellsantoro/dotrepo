@@ -1,0 +1,555 @@
+{
+  "tasks": [
+    {
+      "task": {
+        "id": "rust-01",
+        "repository": "github.com/tauri-apps/tauri",
+        "revision": "548a3692f59405aeb239c5b63fa589824eee51e8",
+        "ecosystem": "Rust",
+        "scope": "repository",
+        "startingState": "pre-clone",
+        "component": null,
+        "request": "requests/rust-01.md",
+        "gold": "curator/gold/rust-01.json",
+        "oracle": "curator/oracles/rust-01.json",
+        "enrollmentRationale": "Root workspace and contributor guide establish Rust test intent, but the contributor guide delegates per-package behavior and test-core covers selected packages, not one repository-default full suite."
+      },
+      "state": "source-acquired",
+      "indexConsulted": false,
+      "modelCalls": 0,
+      "upstreamProjectCodeExecuted": false,
+      "costUsd": null,
+      "sourceAcquisitionLimits": {
+        "compressedBytes": 536870912,
+        "expandedSourceBytes": 1073741824,
+        "expandedTrancheBytes": 2147483648,
+        "fileBytes": 134217728,
+        "filesTranche": 200000
+      },
+      "costExclusions": [
+        "No metered host/container/download charge source."
+      ],
+      "scratch": "/tmp/dotrepo-f05-qualification-next8-20261029/rust-01",
+      "partialExpandedBytes": 22484659,
+      "compressedGitObjectBytes": 14348664,
+      "completeGitObjectsAcquired": true,
+      "sourceFiles": 1107,
+      "sourceBytes": 22484659,
+      "symlinks": {},
+      "missingSubmodules": {},
+      "missingLfsObjects": [],
+      "frozenInspectedFilesMatched": [
+        "Cargo.toml",
+        "README.md",
+        ".github/CONTRIBUTING.md",
+        ".github/workflows/test-core.yml"
+      ],
+      "archivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/rust-01/source.tar",
+      "archiveSha256": "43cf6ded6def92347692da1746fb6e132be6d5e142154c6bf2b97c2fae41fe02",
+      "archiveBytes": 23367680,
+      "compressedArchivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/rust-01/source.tar.gz",
+      "compressedArchiveSha256": "11e37dad16f1c0e1f8af43839d23c9af158975896ab7afb24f56268b44b487ce",
+      "compressedArchiveBytes": 15773521,
+      "sourceBundleReady": true,
+      "elapsedSeconds": 3.0955941670108587
+    },
+    {
+      "task": {
+        "id": "rust-03",
+        "repository": "github.com/iced-rs/iced",
+        "revision": "cd04b74ca7073766f654535d6e72c452ef749d07",
+        "ecosystem": "Rust",
+        "scope": "repository",
+        "startingState": "local-checkout",
+        "component": null,
+        "request": "requests/rust-03.md",
+        "gold": "curator/gold/rust-03.json",
+        "oracle": "curator/oracles/rust-03.json",
+        "enrollmentRationale": "Root Rust workspace and retained Test workflow establish the repository-wide CI test target."
+      },
+      "state": "source-acquired",
+      "indexConsulted": false,
+      "modelCalls": 0,
+      "upstreamProjectCodeExecuted": false,
+      "costUsd": null,
+      "sourceAcquisitionLimits": {
+        "compressedBytes": 536870912,
+        "expandedSourceBytes": 1073741824,
+        "expandedTrancheBytes": 2147483648,
+        "fileBytes": 134217728,
+        "filesTranche": 200000
+      },
+      "costExclusions": [
+        "No metered host/container/download charge source."
+      ],
+      "scratch": "/tmp/dotrepo-f05-qualification-next8-20261029/rust-03",
+      "partialExpandedBytes": 8788452,
+      "compressedGitObjectBytes": 5511868,
+      "completeGitObjectsAcquired": true,
+      "sourceFiles": 597,
+      "sourceBytes": 8788452,
+      "symlinks": {},
+      "missingSubmodules": {},
+      "missingLfsObjects": [],
+      "frozenInspectedFilesMatched": [
+        "Cargo.toml",
+        "README.md",
+        "CONTRIBUTING.md",
+        ".github/workflows/test.yml"
+      ],
+      "archivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/rust-03/source.tar",
+      "archiveSha256": "19551665ef078b5392bb3640e98df32f99791320dd7afd4ca12cc081a772eb0c",
+      "archiveBytes": 9267200,
+      "compressedArchivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/rust-03/source.tar.gz",
+      "compressedArchiveSha256": "6145c27e9045f9102cf8fef37572810560f532d7a631eb93245350b8b2916f31",
+      "compressedArchiveBytes": 5356109,
+      "sourceBundleReady": true,
+      "elapsedSeconds": 1.9922224581241608
+    },
+    {
+      "task": {
+        "id": "python-01",
+        "repository": "github.com/666ghj/MiroFish",
+        "revision": "7657031ac01184afe2cb220f5ee3545573b5e843",
+        "ecosystem": "Python",
+        "scope": "repository",
+        "startingState": "pre-clone",
+        "component": null,
+        "request": "requests/python-01.md",
+        "gold": "curator/gold/python-01.json",
+        "oracle": "curator/oracles/python-01.json",
+        "enrollmentRationale": "Root Python tests and backend Python project/tests establish code and repository test intent."
+      },
+      "state": "source-acquired",
+      "indexConsulted": false,
+      "modelCalls": 0,
+      "upstreamProjectCodeExecuted": false,
+      "costUsd": null,
+      "sourceAcquisitionLimits": {
+        "compressedBytes": 536870912,
+        "expandedSourceBytes": 1073741824,
+        "expandedTrancheBytes": 2147483648,
+        "fileBytes": 134217728,
+        "filesTranche": 200000
+      },
+      "costExclusions": [
+        "No metered host/container/download charge source."
+      ],
+      "scratch": "/tmp/dotrepo-f05-qualification-next8-20261029/python-01",
+      "partialExpandedBytes": 9064963,
+      "compressedGitObjectBytes": 7028842,
+      "completeGitObjectsAcquired": true,
+      "sourceFiles": 128,
+      "sourceBytes": 9064963,
+      "symlinks": {},
+      "missingSubmodules": {},
+      "missingLfsObjects": [],
+      "frozenInspectedFilesMatched": [
+        "README.md",
+        "package.json",
+        "backend/pyproject.toml",
+        ".env.example",
+        "tests/test_local_star_count_fetch.py"
+      ],
+      "archivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/python-01/source.tar",
+      "archiveSha256": "fc70acea794785b5c6bfd06f5e0c83cb328fc5c4e05e36dab8f182fea5bd0d70",
+      "archiveBytes": 9175040,
+      "compressedArchivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/python-01/source.tar.gz",
+      "compressedArchiveSha256": "73dd430123b96446aa1578575f561ca17e25f7b232c8b3ee303b27bc8a901a56",
+      "compressedArchiveBytes": 7131312,
+      "sourceBundleReady": true,
+      "elapsedSeconds": 2.0075579159893095
+    },
+    {
+      "task": {
+        "id": "python-02",
+        "repository": "github.com/home-assistant/core",
+        "revision": "cde3969919b9bd540b2dd75b7aa84a908acbdbfe",
+        "ecosystem": "Python",
+        "scope": "component",
+        "startingState": "local-checkout",
+        "component": "homeassistant",
+        "request": "requests/python-02.md",
+        "gold": "curator/gold/python-02.json",
+        "oracle": "curator/oracles/python-02.json",
+        "enrollmentRationale": "Literal lexical non-root package-path selection: the root manifest establishes the owned primary package homeassistant before narrower subpackages. Package location does not establish a separate component test instruction or component-only coverage."
+      },
+      "state": "source-acquired",
+      "indexConsulted": false,
+      "modelCalls": 0,
+      "upstreamProjectCodeExecuted": false,
+      "costUsd": null,
+      "sourceAcquisitionLimits": {
+        "compressedBytes": 536870912,
+        "expandedSourceBytes": 1073741824,
+        "expandedTrancheBytes": 2147483648,
+        "fileBytes": 134217728,
+        "filesTranche": 200000
+      },
+      "costExclusions": [
+        "No metered host/container/download charge source."
+      ],
+      "scratch": "/tmp/dotrepo-f05-qualification-next8-20261029/python-02",
+      "partialExpandedBytes": 222688313,
+      "compressedGitObjectBytes": 41152273,
+      "completeGitObjectsAcquired": true,
+      "sourceFiles": 30200,
+      "sourceBytes": 222688313,
+      "symlinks": {
+        ".agents/skills": {
+          "target": "../.claude/skills/",
+          "gitBlobSha": "2cd5a6932fa9cafc113a364399b01681e05423ce",
+          "sha256": "1be2cf524a320f8298d764df148b993da1d253b86b21e605ef9f06b83efcdd9c"
+        },
+        ".gemini/skills": {
+          "target": "../.claude/skills",
+          "gitBlobSha": "454b8427cd757f30dc7fdb9a325d19c399770417",
+          "sha256": "722a918d6dee037f575ef1bf214371f14f77047e71bd75cff39f182b2ba9f6b0"
+        },
+        "CLAUDE.md": {
+          "target": "AGENTS.md",
+          "gitBlobSha": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+          "sha256": "a54ff182c7e8acf56acfd6e4b9c3ff41e2c41a31c9b211b2deb9df75d9a478f9"
+        }
+      },
+      "missingSubmodules": {},
+      "missingLfsObjects": [],
+      "frozenInspectedFilesMatched": [
+        "README.rst",
+        "CONTRIBUTING.md",
+        "pyproject.toml",
+        "homeassistant/components/3_day_blinds/manifest.json",
+        ".python-version",
+        "requirements_test.txt",
+        "script/setup",
+        "homeassistant/components/abode/manifest.json",
+        "tests/components/abode/test_init.py",
+        "script/bootstrap",
+        "AGENTS.md",
+        "requirements_all.txt",
+        ".vscode/tasks.json",
+        "homeassistant/components/abode/__init__.py",
+        "homeassistant/__init__.py"
+      ],
+      "archivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/python-02/source.tar",
+      "archiveSha256": "6fe6c3084bc31e1f782696dc588cc55d61d1dd93bda8daffcba85971159ce61b",
+      "archiveBytes": 246251520,
+      "compressedArchivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/python-02/source.tar.gz",
+      "compressedArchiveSha256": "06da3753138c16b0efc549c5f95605a7396df0be9b45c01031e725141636f371",
+      "compressedArchiveBytes": 32950955,
+      "sourceBundleReady": false,
+      "elapsedSeconds": 25.768586667021737
+    },
+    {
+      "task": {
+        "id": "python-03",
+        "repository": "github.com/ytdl-org/youtube-dl",
+        "revision": "956b8c585591b401a543e409accb163eeaaa1193",
+        "ecosystem": "Python",
+        "scope": "component",
+        "startingState": "pre-clone",
+        "component": "youtube_dl",
+        "request": "requests/python-03.md",
+        "gold": "curator/gold/python-03.json",
+        "oracle": "curator/oracles/python-03.json",
+        "enrollmentRationale": "Literal lexical non-root package-path selection: the root manifest establishes the owned primary package youtube_dl before narrower subpackages. Package location does not establish a separate component test instruction or component-only coverage."
+      },
+      "state": "source-acquired",
+      "indexConsulted": false,
+      "modelCalls": 0,
+      "upstreamProjectCodeExecuted": false,
+      "costUsd": null,
+      "sourceAcquisitionLimits": {
+        "compressedBytes": 536870912,
+        "expandedSourceBytes": 1073741824,
+        "expandedTrancheBytes": 2147483648,
+        "fileBytes": 134217728,
+        "filesTranche": 200000
+      },
+      "costExclusions": [
+        "No metered host/container/download charge source."
+      ],
+      "scratch": "/tmp/dotrepo-f05-qualification-next8-20261029/python-03",
+      "partialExpandedBytes": 6945071,
+      "compressedGitObjectBytes": 2156285,
+      "completeGitObjectsAcquired": true,
+      "sourceFiles": 981,
+      "sourceBytes": 6945071,
+      "symlinks": {},
+      "missingSubmodules": {},
+      "missingLfsObjects": [],
+      "frozenInspectedFilesMatched": [
+        "README.md",
+        "CONTRIBUTING.md",
+        "setup.py",
+        "setup.cfg",
+        "Makefile",
+        "tox.ini",
+        "youtube_dl/downloader/__init__.py",
+        "test/test_downloader_external.py",
+        "test/test_downloader_http.py",
+        "test/helper.py",
+        "youtube_dl/__init__.py"
+      ],
+      "archivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/python-03/source.tar",
+      "archiveSha256": "836cb208ff4ff481e5b9879fc3c10de793e7f8bca247e645661de1e233f63aa6",
+      "archiveBytes": 7710720,
+      "compressedArchivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/python-03/source.tar.gz",
+      "compressedArchiveSha256": "ed10ef982e821070579494d5f6e5bf675534d255048915c2ddb2ab1db94c1182",
+      "compressedArchiveBytes": 1694964,
+      "sourceBundleReady": true,
+      "elapsedSeconds": 2.002692125039175
+    },
+    {
+      "task": {
+        "id": "typescript-01",
+        "repository": "github.com/deepseek-ai/deepseek-harness",
+        "revision": "f3803c96974ad4a94195fb97e5c637e9c2a3afe3",
+        "ecosystem": "JavaScript/TypeScript",
+        "scope": "repository",
+        "startingState": "pre-clone",
+        "component": null,
+        "request": "requests/typescript-01.md",
+        "gold": "curator/gold/typescript-01.json",
+        "oracle": "curator/oracles/typescript-01.json",
+        "enrollmentRationale": "Root workspace manifest and default test script establish a TypeScript project and repository test target."
+      },
+      "state": "source-acquired",
+      "indexConsulted": false,
+      "modelCalls": 0,
+      "upstreamProjectCodeExecuted": false,
+      "costUsd": null,
+      "sourceAcquisitionLimits": {
+        "compressedBytes": 536870912,
+        "expandedSourceBytes": 1073741824,
+        "expandedTrancheBytes": 2147483648,
+        "fileBytes": 134217728,
+        "filesTranche": 200000
+      },
+      "costExclusions": [
+        "No metered host/container/download charge source."
+      ],
+      "scratch": "/tmp/dotrepo-f05-qualification-next8-20261029/typescript-01",
+      "partialExpandedBytes": 138154652,
+      "compressedGitObjectBytes": 44537873,
+      "completeGitObjectsAcquired": true,
+      "sourceFiles": 19863,
+      "sourceBytes": 138154652,
+      "symlinks": {
+        ".agents/notes/implemented/CLAUDE.md": {
+          "target": "AGENTS.md",
+          "gitBlobSha": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+          "sha256": "a54ff182c7e8acf56acfd6e4b9c3ff41e2c41a31c9b211b2deb9df75d9a478f9"
+        },
+        ".agents/skills/agent-experience/SKILL.md": {
+          "target": "../../../packages/preset/agent-preset/skills/agent-experience/SKILL.md",
+          "gitBlobSha": "fb40f7ffce2d5b4c13f844c962da35dc771caec0",
+          "sha256": "64db69fba1725d47528319dc4f704e8780ab1dcabf326c8cd93674aeb9fdd791"
+        },
+        ".claude/skills": {
+          "target": "../.agents/skills",
+          "gitBlobSha": "2b7a412b8fa0fb7e985b0793321bd4e698f2b6cd",
+          "sha256": "3c74c93317f015d16370349a76529b6f8332c808bdd589e7640eeba6a1b1b874"
+        },
+        "CLAUDE.md": {
+          "target": "AGENTS.md",
+          "gitBlobSha": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+          "sha256": "a54ff182c7e8acf56acfd6e4b9c3ff41e2c41a31c9b211b2deb9df75d9a478f9"
+        },
+        "apps/cli/tests/profiles/acp/cordis.yml": {
+          "target": "../../../../../snapshots/acp/escalation-approved/cordis.yml",
+          "gitBlobSha": "8a6e191c8e97ad8f581569c74f922c60aa5797c0",
+          "sha256": "e66c4cb7a6f5869ab070c7784114815b12e8366ed2a401d969312892aa39a3be"
+        },
+        "packages/CLAUDE.md": {
+          "target": "AGENTS.md",
+          "gitBlobSha": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+          "sha256": "a54ff182c7e8acf56acfd6e4b9c3ff41e2c41a31c9b211b2deb9df75d9a478f9"
+        },
+        "snapshots/acp/escalation-approved/system-prompt.expected.md": {
+          "target": "../../session/text-turn/system-prompt.expected.md",
+          "gitBlobSha": "bb85c10476f74cedd0285da78a06cdd6246ae8f9",
+          "sha256": "12640ae132cdc6b4f4d4a2074392fa61e246af096304f1336dc6398af3fc7fae"
+        },
+        "snapshots/acp/escalation-approved/tool-schemas.expected.json": {
+          "target": "../../session/text-turn/tool-schemas.expected.json",
+          "gitBlobSha": "c77f354b59928be0fc5371c4a14aee8e85a10a25",
+          "sha256": "f61e294422587e3bc65fbeb68ad03e9723083055ff0310ecc7e1f5bb9f522d3e"
+        },
+        "snapshots/acp/image-compaction/system-prompt.expected.md": {
+          "target": "../../session/read-image/system-prompt.expected.md",
+          "gitBlobSha": "7d5e489c58e4975138807a6955d21cce9eca8138",
+          "sha256": "a69f942fb36eb0472339da37c0e0e7296075c3ba1a23ac22c2fb030f936427ef"
+        },
+        "snapshots/sdk/account-provider-signout/system-prompt.expected.md": {
+          "target": "../text-turn/system-prompt.expected.md",
+          "gitBlobSha": "4ca0dd39b2abbfbf8d5bbb8ba56efdc36a0621f7",
+          "sha256": "9d1983b66ed868d1f880f974d2f631390fbdc69b52e92d4d0b0dce95c9d686b8"
+        },
+        "snapshots/sdk/account-provider-signout/tool-schemas.expected.json": {
+          "target": "../text-turn/tool-schemas.expected.json",
+          "gitBlobSha": "11d7ccbf24f03aa14f119900c72e2691ccd338aa",
+          "sha256": "f510eb71a43af161851add70d34f330475da955ea7c9b4ecfa73e6c44fc84a91"
+        },
+        "snapshots/session/agent-instructions/workspace/AGENTS.md": {
+          "target": "AGENTS.canonical.md",
+          "gitBlobSha": "83624c92b714a954e3b43d12785ceb222f3f4828",
+          "sha256": "b991fee549d4d6f3644cb0d8756871ff7815e848d0057166119ec7b349fd4bdb"
+        },
+        "snapshots/session/agent-instructions/workspace/nested/AGENTS.md": {
+          "target": "AGENTS.canonical.md",
+          "gitBlobSha": "83624c92b714a954e3b43d12785ceb222f3f4828",
+          "sha256": "b991fee549d4d6f3644cb0d8756871ff7815e848d0057166119ec7b349fd4bdb"
+        },
+        "vendor/CLAUDE.md": {
+          "target": "AGENTS.md",
+          "gitBlobSha": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+          "sha256": "a54ff182c7e8acf56acfd6e4b9c3ff41e2c41a31c9b211b2deb9df75d9a478f9"
+        }
+      },
+      "missingSubmodules": {},
+      "missingLfsObjects": [],
+      "frozenInspectedFilesMatched": [
+        "README.md",
+        "CONTRIBUTING.md",
+        "package.json",
+        "Makefile",
+        "pnpm-workspace.yaml",
+        "docs/development.md",
+        "native/system/scripts/build.ts",
+        "vitest.config.ts"
+      ],
+      "archivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/typescript-01/source.tar",
+      "archiveSha256": "c3287a2e874e9053fa07468897835e63895e49e3851bf8d8708337e6fbdec193",
+      "archiveBytes": 153876480,
+      "compressedArchivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/typescript-01/source.tar.gz",
+      "compressedArchiveSha256": "55d4cc68fa1deb292912c50866e6232eabcc435ad2d005310510b56b0f3239af",
+      "compressedArchiveBytes": 39167807,
+      "sourceBundleReady": false,
+      "elapsedSeconds": 13.323546499945223
+    },
+    {
+      "task": {
+        "id": "typescript-03",
+        "repository": "github.com/vuejs/core",
+        "revision": "05db7e807be841e6f343d0237669669b18c89d4d",
+        "ecosystem": "JavaScript/TypeScript",
+        "scope": "repository",
+        "startingState": "local-checkout",
+        "component": null,
+        "request": "requests/typescript-03.md",
+        "gold": "curator/gold/typescript-03.json",
+        "oracle": "curator/oracles/typescript-03.json",
+        "enrollmentRationale": "Root package scripts, contributor test guide and Vitest configuration establish a TypeScript workspace with repository-default tests."
+      },
+      "state": "source-acquired",
+      "indexConsulted": false,
+      "modelCalls": 0,
+      "upstreamProjectCodeExecuted": false,
+      "costUsd": null,
+      "sourceAcquisitionLimits": {
+        "compressedBytes": 536870912,
+        "expandedSourceBytes": 1073741824,
+        "expandedTrancheBytes": 2147483648,
+        "fileBytes": 134217728,
+        "filesTranche": 200000
+      },
+      "costExclusions": [
+        "No metered host/container/download charge source."
+      ],
+      "scratch": "/tmp/dotrepo-f05-qualification-next8-20261029/typescript-03",
+      "partialExpandedBytes": 6521634,
+      "compressedGitObjectBytes": 1818587,
+      "completeGitObjectsAcquired": true,
+      "sourceFiles": 703,
+      "sourceBytes": 6521634,
+      "symlinks": {},
+      "missingSubmodules": {},
+      "missingLfsObjects": [],
+      "frozenInspectedFilesMatched": [
+        "README.md",
+        "package.json",
+        "pnpm-workspace.yaml",
+        ".github/contributing.md",
+        ".node-version",
+        "vitest.config.ts",
+        "pnpm-lock.yaml"
+      ],
+      "archivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/typescript-03/source.tar",
+      "archiveSha256": "51249848d90d269ca4f03504257661e172bcc2e644bb2cc32cc37513ac60b93c",
+      "archiveBytes": 7086080,
+      "compressedArchivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/typescript-03/source.tar.gz",
+      "compressedArchiveSha256": "6a147c49bfb27f2871b6e557a8714de40de122dc688f15f363c6baab0683a6cd",
+      "compressedArchiveBytes": 1610372,
+      "sourceBundleReady": true,
+      "elapsedSeconds": 1.7106437091715634
+    },
+    {
+      "task": {
+        "id": "go-02",
+        "repository": "github.com/beego/beego",
+        "revision": "939cfde380bb9f15844ad633b84f037f7da21584",
+        "ecosystem": "Go",
+        "scope": "component",
+        "startingState": "local-checkout",
+        "component": "client/cache",
+        "request": "requests/go-02.md",
+        "gold": "curator/gold/go-02.json",
+        "oracle": "curator/oracles/go-02.json",
+        "enrollmentRationale": "Maintainer README names cache as an owned module; package documentation fixes its physical client/cache path and tests exist in it and its memcache/redis/ssdb backends. It is lexical before other client modules and core/server/task paths."
+      },
+      "state": "source-acquired",
+      "indexConsulted": false,
+      "modelCalls": 0,
+      "upstreamProjectCodeExecuted": false,
+      "costUsd": null,
+      "sourceAcquisitionLimits": {
+        "compressedBytes": 536870912,
+        "expandedSourceBytes": 1073741824,
+        "expandedTrancheBytes": 2147483648,
+        "fileBytes": 134217728,
+        "filesTranche": 200000
+      },
+      "costExclusions": [
+        "No metered host/container/download charge source."
+      ],
+      "scratch": "/tmp/dotrepo-f05-qualification-next8-20261029/go-02",
+      "partialExpandedBytes": 2084097,
+      "compressedGitObjectBytes": 626234,
+      "completeGitObjectsAcquired": true,
+      "sourceFiles": 401,
+      "sourceBytes": 2084097,
+      "symlinks": {},
+      "missingSubmodules": {},
+      "missingLfsObjects": [],
+      "frozenInspectedFilesMatched": [
+        "README.md",
+        "CONTRIBUTING.md",
+        "go.mod",
+        "Makefile",
+        "client/cache/cache.go",
+        "scripts/test_docker_compose.yaml",
+        "client/cache/cache_test.go",
+        ".github/workflows/test.yml",
+        "client/cache/memcache/memcache_test.go",
+        "client/cache/redis/redis_test.go",
+        "client/cache/ssdb/ssdb_test.go"
+      ],
+      "archivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/go-02/source.tar",
+      "archiveSha256": "7704106da11aef67bad7e0a9a4964f1d2e9a3f072511e585e677aa48f5016220",
+      "archiveBytes": 2406400,
+      "compressedArchivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/go-02/source.tar.gz",
+      "compressedArchiveSha256": "96305b276335bc85a94f0d2d7e2d346aa57c91c6e668d82bbdc0511bd8614358",
+      "compressedArchiveBytes": 431479,
+      "sourceBundleReady": true,
+      "elapsedSeconds": 1.1542424170766026
+    }
+  ],
+  "consumedSourceBudget": {
+    "expandedBytes": 416731841,
+    "files": 53997
+  },
+  "allSourcesAcquired": true,
+  "upstreamProjectCodeExecuted": false,
+  "costUsd": null
+}

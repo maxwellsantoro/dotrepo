@@ -1,0 +1,28 @@
+{
+  "taskId": "rust-02",
+  "state": "download-cache-retained-unqualified",
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "sourceArchiveSha256": "862b159c55ee7693faed80c2546aa203cc370e867cf5a206cff5356ab66766d6",
+  "sourceRevision": "ab4bf739d46448436cb68933bb8260ee264449d5",
+  "startedAt": "2026-10-29T06:57:21.687332+00:00",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host/download charge source."
+  ],
+  "upstreamScriptsOrTestsExecuted": false,
+  "indexConsulted": false,
+  "modelCalls": 0,
+  "cacheAuditQualified": false,
+  "setupSeconds": 6.20589108299464,
+  "networkBytes": {
+    "received": 99054593,
+    "sent": 457121,
+    "basis": "container interface counters including headers/incidental traffic"
+  },
+  "archivePath": "/tmp/dotrepo-f05-dependency-preparation-20261029/rust-02-attempt-2/cache.tar",
+  "archiveSha256": "f8ca1fccc8792cc5eb34aad37640268ab339d852de15b10a3cf1d5bcaf5296a8",
+  "cacheExpandedBytes": 438392465,
+  "cacheArchiveBytes": 463104000,
+  "cacheFiles": 24692,
+  "elapsedSeconds": 20.510774750029668
+}

@@ -1,0 +1,909 @@
+{
+  "result": "pass",
+  "frozenOwnedFilesVerified": 322,
+  "packetFreezeSha256": "3888a19462854a37c20803fa9c62f525223af9f4f3d8aa9cfa2bf46affdd2f84",
+  "commonImage": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "commonReceiptBindings": 19,
+  "allNativeTextReceiptsVerified": 90,
+  "caches": [
+    {
+      "leaf": "rust-02-attempt-2",
+      "specSha256": "269ef91c6067680f1805a632144bf50b8e6c5d16f17f9ff3d40dad8fe9527104",
+      "archiveSha256": "f8ca1fccc8792cc5eb34aad37640268ab339d852de15b10a3cf1d5bcaf5296a8",
+      "stats": {
+        "files": 24692,
+        "expandedBytes": 438392465
+      },
+      "receiptBindings": 13,
+      "scriptClosureVerified": true,
+      "downloadCommands": [
+        "cd /workspace/repository; cargo fetch --locked --target aarch64-unknown-linux-gnu --manifest-path lib/sniffnet-packet-parser/Cargo.toml"
+      ],
+      "packageChecks": {
+        "crateDownloadsMatchSourceCargoLock": 525,
+        "extractedCrateMembersByteMatched": 23003,
+        "cargoGeneratedMetadata": {
+          ".cargo-ok": 525
+        },
+        "sourceCargoConfigSha256": null
+      },
+      "exactSourceContentOverlaps": [
+        {
+          "cachePath": "cargo/registry/src/index.crates.io-1949cf8c6b5b557f/libc-0.2.191/LICENSE-APACHE",
+          "sourcePaths": [
+            "LICENSE-APACHE"
+          ],
+          "bytes": 9723
+        },
+        {
+          "cachePath": "cargo/registry/src/index.crates.io-1949cf8c6b5b557f/anyhow-1.0.104/LICENSE-APACHE",
+          "sourcePaths": [
+            "LICENSE-APACHE"
+          ],
+          "bytes": 9723
+        },
+        {
+          "cachePath": "cargo/registry/src/index.crates.io-1949cf8c6b5b557f/syn-3.0.9/LICENSE-APACHE",
+          "sourcePaths": [
+            "LICENSE-APACHE"
+          ],
+          "bytes": 9723
+        },
+        {
+          "cachePath": "cargo/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/LICENSE-APACHE",
+          "sourcePaths": [
+            "LICENSE-APACHE"
+          ],
+          "bytes": 9723
+        },
+        {
+          "cachePath": "cargo/registry/src/index.crates.io-1949cf8c6b5b557f/paste-1.0.15/LICENSE-APACHE",
+          "sourcePaths": [
+            "LICENSE-APACHE"
+          ],
+          "bytes": 9723
+        },
+        {
+          "cachePath": "cargo/registry/src/index.crates.io-1949cf8c6b5b557f/async-trait-0.1.92/LICENSE-APACHE",
+          "sourcePaths": [
+            "LICENSE-APACHE"
+          ],
+          "bytes": 9723
+        },
+        {
+          "cachePath": "cargo/registry/src/index.crates.io-1949cf8c6b5b557f/litrs-1.0.1/LICENSE-APACHE",
+          "sourcePaths": [
+            "LICENSE-APACHE"
+          ],
+          "bytes": 9723
+        },
+        {
+          "cachePath": "cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pastey-0.1.1/LICENSE-APACHE",
+          "sourcePaths": [
+            "LICENSE-APACHE"
+          ],
+          "bytes": 9723
+        },
+        {
+          "cachePath": "cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/LICENSE-APACHE",
+          "sourcePaths": [
+            "LICENSE-APACHE"
+          ],
+          "bytes": 9723
+        },
+        {
+          "cachePath": "cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-impl-1.0.69/LICENSE-APACHE",
+          "sourcePaths": [
+            "LICENSE-APACHE"
+          ],
+          "bytes": 9723
+        },
+        {
+          "cachePath": "cargo/registry/src/index.crates.io-1949cf8c6b5b557f/utf8parse-0.2.2/LICENSE-APACHE",
+          "sourcePaths": [
+            "LICENSE-APACHE"
+          ],
+          "bytes": 9723
+        },
+        {
+          "cachePath": "cargo/registry/src/index.crates.io-1949cf8c6b5b557f/etcetera-0.10.0/LICENSE-APACHE",
+          "sourcePaths": [
+            "LICENSE-APACHE"
+          ],
+          "bytes": 9723
+        },
+        {
+          "cachePath": "cargo/registry/src/index.crates.io-1949cf8c6b5b557f/finl_unicode-1.5.0/LICENSE-APACHE",
+          "sourcePaths": [
+            "LICENSE-APACHE"
+          ],
+          "bytes": 9723
+        },
+        {
+          "cachePath": "cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rustversion-1.0.23/LICENSE-APACHE",
+          "sourcePaths": [
+            "LICENSE-APACHE"
+          ],
+          "bytes": 9723
+        },
+        {
+          "cachePath": "cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/LICENSE-APACHE",
+          "sourcePaths": [
+            "LICENSE-APACHE"
+          ],
+          "bytes": 9723
+        },
+        {
+          "cachePath": "cargo/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro2-1.0.107/LICENSE-APACHE",
+          "sourcePaths": [
+            "LICENSE-APACHE"
+          ],
+          "bytes": 9723
+        },
+        {
+          "cachePath": "cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_repr-0.1.21/LICENSE-APACHE",
+          "sourcePaths": [
+            "LICENSE-APACHE"
+          ],
+          "bytes": 9723
+        },
+        {
+          "cachePath": "cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_derive-1.0.229/LICENSE-APACHE",
+          "sourcePaths": [
+            "LICENSE-APACHE"
+          ],
+          "bytes": 9723
+        },
+        {
+          "cachePath": "cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-1.0.69/LICENSE-APACHE",
+          "sourcePaths": [
+            "LICENSE-APACHE"
+          ],
+          "bytes": 9723
+        },
+        {
+          "cachePath": "cargo/registry/src/index.crates.io-1949cf8c6b5b557f/semver-1.0.28/LICENSE-APACHE",
+          "sourcePaths": [
+            "LICENSE-APACHE"
+          ],
+          "bytes": 9723
+        },
+        {
+          "cachePath": "cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.47/LICENSE-APACHE",
+          "sourcePaths": [
+            "LICENSE-APACHE"
+          ],
+          "bytes": 9723
+        },
+        {
+          "cachePath": "cargo/registry/src/index.crates.io-1949cf8c6b5b557f/unicode-ident-1.0.27/LICENSE-APACHE",
+          "sourcePaths": [
+            "LICENSE-APACHE"
+          ],
+          "bytes": 9723
+        },
+        {
+          "cachePath": "cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-impl-2.0.21/LICENSE-APACHE",
+          "sourcePaths": [
+            "LICENSE-APACHE"
+          ],
+          "bytes": 9723
+        },
+        {
+          "cachePath": "cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_test-1.0.177/LICENSE-APACHE",
+          "sourcePaths": [
+            "LICENSE-APACHE"
+          ],
+          "bytes": 9723
+        },
+        {
+          "cachePath": "cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.21/LICENSE-APACHE",
+          "sourcePaths": [
+            "LICENSE-APACHE"
+          ],
+          "bytes": 9723
+        },
+        {
+          "cachePath": "cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/LICENSE-APACHE",
+          "sourcePaths": [
+            "LICENSE-APACHE"
+          ],
+          "bytes": 9723
+        },
+        {
+          "cachePath": "cargo/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro2-diagnostics-0.10.1/LICENSE-APACHE",
+          "sourcePaths": [
+            "LICENSE-APACHE"
+          ],
+          "bytes": 9723
+        },
+        {
+          "cachePath": "cargo/registry/src/index.crates.io-1949cf8c6b5b557f/itoa-1.0.18/LICENSE-APACHE",
+          "sourcePaths": [
+            "LICENSE-APACHE"
+          ],
+          "bytes": 9723
+        }
+      ],
+      "auditFlagsRemainFalse": true,
+      "protectedHashSetSha256": "a6da70671528ca633baaf2c343ce2787699b8554904bc9c064383ea1495a38f5",
+      "nonemptyProtectedMatches": [],
+      "emptyProtectedDigestMatchesInnocuous": 60,
+      "nestedRegularMembersChecked": 23003,
+      "nestedExpandedBytesChecked": 340244577,
+      "nestedNontrivialSourceHashOverlaps": {
+        "LICENSE-APACHE": 28
+      }
+    },
+    {
+      "leaf": "typescript-02",
+      "specSha256": "73799214f324edce58980baf15d198240f0e56ee2cf62b73134e6dff3b89ea84",
+      "archiveSha256": "84cfa62ad220509ff1027f2a4e97b88885dbcb4c28bdfe59b620a70224d530dc",
+      "stats": {
+        "files": 2562,
+        "expandedBytes": 213726697
+      },
+      "receiptBindings": 15,
+      "scriptClosureVerified": true,
+      "downloadCommands": [
+        "cd /workspace/repository; npm install --prefix /workspace/npm-tooling --ignore-scripts npm@11.12.1",
+        "cd /workspace/repository; /workspace/npm-tooling/node_modules/.bin/npm ci --ignore-scripts"
+      ],
+      "packageChecks": {
+        "contentSha512Checked": 1281,
+        "indexEntriesChecked": 1323,
+        "contentReferences": 1281,
+        "publicRegistryUrls": 1281,
+        "lockMatchedTarballUrls": 1279,
+        "tarballUrlsOutsideTaskLock": [
+          "https://registry.npmjs.org/npm/-/npm-11.12.1.tgz"
+        ],
+        "sensitiveHeaderNamesRetained": [],
+        "lockTarballsWithoutSourceIntegrity": [
+          "https://registry.npmjs.org/@babel/runtime/-/runtime-7.29.7.tgz"
+        ],
+        "sourcePackageLockSha256": "0672f04e290ece5c42d4980d164e2fd8a9ddf900f361c97465646a901151592f"
+      },
+      "exactSourceContentOverlaps": [],
+      "auditFlagsRemainFalse": true,
+      "protectedHashSetSha256": "a6da70671528ca633baaf2c343ce2787699b8554904bc9c064383ea1495a38f5",
+      "nonemptyProtectedMatches": [],
+      "emptyProtectedDigestMatchesInnocuous": 69,
+      "nestedRegularMembersChecked": 88695,
+      "nestedExpandedBytesChecked": 800971557,
+      "nestedNontrivialSourceHashOverlaps": {
+        "LICENSE": 1,
+        ".github/release.yml": 1,
+        "public/mockServiceWorker.js": 1
+      }
+    },
+    {
+      "leaf": "go-03",
+      "specSha256": "57088107a36d67643add9ba4f33774a599de71a942cc54ae71b967314c7867cf",
+      "archiveSha256": "fc8de794f4f9338fcb8be7cc0c4ef8f1a7e736e61b3a4a6bcdb3917cfb7176b8",
+      "stats": {
+        "files": 2832,
+        "expandedBytes": 63513466
+      },
+      "receiptBindings": 13,
+      "scriptClosureVerified": true,
+      "downloadCommands": [
+        "cd /workspace/repository; cd api && GOWORK=off go mod download"
+      ],
+      "packageChecks": {
+        "moduleExtractedMembersByteMatched": 2648,
+        "moduleGoModH1MatchesSourceApiGoSum": 45,
+        "moduleZipH1MatchesSourceApiGoSum": 27,
+        "notInSourceApiGoSum": [],
+        "sourceApiGoSumSha256": "76d9dea4df4c44d9d54989002f3bc85bd3e578fa41e3959ba88b5edbc28085a4"
+      },
+      "exactSourceContentOverlaps": [
+        {
+          "cachePath": "go/pkg/mod/github.com/go-jose/go-jose/v4@v4.1.5/go.sum",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/github.com/hashicorp/hcl@v1.0.1-vault-7/hcl/test-fixtures/empty.hcl",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/github.com/hashicorp/hcl@v1.0.1-vault-7/hcl/parser/test-fixtures/empty.hcl",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/github.com/hashicorp/hcl@v1.0.1-vault-7/hcl/fmtcmd/test-fixtures/good.hcl",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/github.com/hashicorp/hcl@v1.0.1-vault-7/hcl/fmtcmd/test-fixtures/dir.ignore",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/github.com/go-test/deep@v1.1.1/go.sum",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/cache/download/golang.org/x/time/@v/v0.16.0.lock",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/cache/download/golang.org/x/text/@v/v0.43.0.lock",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/cache/download/golang.org/x/net/@v/v0.61.0.lock",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/cache/download/golang.org/x/sys/@v/v0.49.0.lock",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/cache/download/go.yaml.in/yaml/v3/@v/v3.0.5.lock",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/cache/download/github.com/stretchr/testify/@v/v1.12.1.lock",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/cache/download/github.com/ryanuber/go-glob/@v/v1.0.0.lock",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/cache/download/github.com/natefinch/atomic/@v/v1.0.1.lock",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/cache/download/github.com/mitchellh/mapstructure/@v/v1.5.1-0.20231216201459-8508981c8b6c.lock",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/cache/download/github.com/mitchellh/go-homedir/@v/v1.1.0.lock",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/cache/download/github.com/mattn/go-isatty/@v/v0.0.24.lock",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/cache/download/github.com/mattn/go-colorable/@v/v0.1.15.lock",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/cache/download/github.com/hashicorp/go-cleanhttp/@v/v0.5.2.lock",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/cache/download/github.com/hashicorp/go-sockaddr/@v/v1.0.7.lock",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/cache/download/github.com/hashicorp/hcl/@v/v1.0.1-vault-7.lock",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/cache/download/github.com/hashicorp/go-secure-stdlib/parseutil/@v/v0.2.0.lock",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/cache/download/github.com/hashicorp/go-secure-stdlib/strutil/@v/v0.1.2.lock",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/cache/download/github.com/hashicorp/go-rootcerts/@v/v1.0.2.lock",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/cache/download/github.com/hashicorp/go-retryablehttp/@v/v0.7.8.lock",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/cache/download/github.com/hashicorp/go-hclog/@v/v1.6.3.lock",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/cache/download/github.com/hashicorp/go-multierror/@v/v1.1.1.lock",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/cache/download/github.com/hashicorp/errwrap/@v/v1.1.0.lock",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/cache/download/github.com/go-test/deep/@v/v1.1.1.lock",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/cache/download/github.com/go-jose/go-jose/v4/@v/v4.1.5.lock",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/cache/download/github.com/fatih/color/@v/v1.19.0.lock",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/cache/download/github.com/cenkalti/backoff/v4/@v/v4.3.0.lock",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        },
+        {
+          "cachePath": "go/pkg/mod/cache/download/github.com/davecgh/go-spew/@v/v1.1.2-0.20180830191138-d8f796af33cc.lock",
+          "sourcePaths": [
+            ".release/linux/package/etc/vault.d/vault.env",
+            "helper/serverconfig/test-fixtures/raft_storage_file.db",
+            "http/web_ui/.gitkeep",
+            "tools/pipeline/internal/pkg/sarif/testdata/expected/no_cve.csv",
+            "ui/app/components/.gitkeep",
+            "ui/app/controllers/.gitkeep",
+            "ui/app/helpers/.gitkeep",
+            "ui/app/models/.gitkeep",
+            "ui/app/routes/.gitkeep",
+            "ui/tests/integration/.gitkeep",
+            "ui/tests/unit/.gitkeep",
+            "ui/vendor/.gitkeep"
+          ],
+          "bytes": 0
+        }
+      ],
+      "auditFlagsRemainFalse": true,
+      "protectedHashSetSha256": "a6da70671528ca633baaf2c343ce2787699b8554904bc9c064383ea1495a38f5",
+      "nonemptyProtectedMatches": [],
+      "emptyProtectedDigestMatchesInnocuous": 39,
+      "nestedRegularMembersChecked": 2648,
+      "nestedExpandedBytesChecked": 50842569,
+      "nestedNontrivialSourceHashOverlaps": {}
+    }
+  ],
+  "newNetworkRequests": 0,
+  "dockerDaemonCalls": 0,
+  "providerCalls": 0,
+  "upstreamExecution": false
+}

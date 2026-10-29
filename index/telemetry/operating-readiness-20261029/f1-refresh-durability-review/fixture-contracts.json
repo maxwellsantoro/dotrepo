@@ -1,0 +1,92 @@
+{
+  "state": "Proposed fixture contracts only; not installed into frozen importer pack or executed as Rust tests.",
+  "fixtures": [
+    {
+      "id": "go-multimodule-ci-scope",
+      "kind": "exact retained IBM sources",
+      "inputDirectory": "proposed-fixtures/go-multimodule-ci-scope",
+      "currentScalarPrediction": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "narrowGuardExpected": {
+        "build": null,
+        "test": null
+      },
+      "requiredChecks": [
+        "Retain unqualified/root-module candidate evidence; classify fields unresolved, not high-confidence absence.",
+        "Do not produce an invented all-module shell command or context tuple.",
+        "Fresh refresh with prior IBM withdrawal cannot restore metadata-only scalar while same contradicting scope evidence is present."
+      ]
+    },
+    {
+      "id": "go-redis-prepared-ci",
+      "kind": "exact retained Redigo sources",
+      "inputDirectory": "proposed-fixtures/go-redis-prepared-ci",
+      "currentScalarPrediction": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "narrowGuardExpected": {
+        "build": "UNCHANGED/PENDING broader or individual-withdrawal decision",
+        "test": null
+      },
+      "requiredChecks": [
+        "Retain go test -race ./... and Redis/setup conditions as evidence; no stripping to bare command.",
+        "Test field unresolved, no context/high status fabricated.",
+        "A separate negative-assessment fixture must keep both audited fields absent if all-four durability is chosen."
+      ]
+    },
+    {
+      "id": "go-simple-metadata-only-control",
+      "kind": "proposed owned synthetic positive compatibility control",
+      "input": {
+        "go.mod": "module example.test/simple\n\ngo 1.22\n"
+      },
+      "narrowGuardExpected": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "reason": "Narrow scope/setup guards must not covertly implement globally removing all metadata defaults. Wider policy may intentionally change this later with separate review."
+    },
+    {
+      "id": "go-declared-root-default-control",
+      "kind": "proposed owned synthetic positive",
+      "input": {
+        "go.mod": "module example.test/root\n\ngo 1.22\n",
+        "CONTRIBUTING.md": "# Contributing\n\n## Build\n\n```sh\ngo build ./...\n```\n\n## Tests\n\n```sh\ngo test ./...\n```\n"
+      },
+      "expected": "Retain directly source-declared root defaults when no contradictory scope/setup exists; do not rely on metadata normalization."
+    },
+    {
+      "id": "go-unrelated-example-module-control",
+      "kind": "proposed owned synthetic negative for overbroad suppression",
+      "input": "Root declared commands plus unrelated examples/demo/go.mod; no CI execution of this example as a mandatory product module.",
+      "expected": "Mere nested go.mod presence cannot establish wrong aggregate/default scope; preserve source-declared defaults or retain ambiguity explicitly rather than blanket suppression."
+    },
+    {
+      "id": "go-unrelated-redis-job-control",
+      "kind": "proposed owned synthetic negative for wholefile prerequisite scan",
+      "input": "One plain root Go test job; separate lint/demo job uses Setup redis.",
+      "expected": "Do not attach Redis prerequisite to the unrelated plain test job or suppress it solely through wholefile marker presence."
+    },
+    {
+      "id": "go-flagged-test-no-external-setup-control",
+      "kind": "proposed owned synthetic positive variant retention",
+      "input": "Root go.mod plus one root CI step go test -race ./...; no separate setup/services/workingdirectory condition.",
+      "expected": "Do not replace source-owned -race command with bare go.mod default when a dedicated no-normalization change is accepted. Keep workflow-derived confidence and applicability limitations; this alone is not a complete context proof."
+    },
+    {
+      "id": "refresh-prior-exact-withdrawal-control",
+      "kind": "proposed crawler integration negative, contract decision pending",
+      "input": "Current prior field withdrawal + same proposed old value and unchanged source closure.",
+      "expected": "If a durable per-value assessment contract is approved, prior exact rejection remains unresolved; unrelated fields still refresh. Do not treat any prior null as a universal tombstone."
+    },
+    {
+      "id": "refresh-new-declared-source-control",
+      "kind": "proposed crawler integration positive, contract decision pending",
+      "input": "Prior exact withdrawal plus a different source-supported command/value or changed source closure with explicit fresh disposition.",
+      "expected": "Re-establish using fresh evidence; never copy old high confidence or silently clear rejection solely because timestamp/head changed."
+    }
+  ]
+}

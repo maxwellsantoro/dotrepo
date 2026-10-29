@@ -1,0 +1,29 @@
+{
+  "bundle": {
+    "revision": "352089582444ea84feb03bc97eda97b35729e8ec",
+    "archive": {
+      "path": "cache.tar",
+      "sha256": "fc8de794f4f9338fcb8be7cc0c4ef8f1a7e736e61b3a4a6bcdb3917cfb7176b8"
+    },
+    "inventory": {
+      "path": "inventory.json",
+      "sha256": "c62557a79259cbe4d249c2c070c0abe108732acdb5d5c7bf5f73e185b0f1f943"
+    },
+    "provenance": {
+      "path": "provenance.json",
+      "sha256": "5c9870ade3da9b0cb7c87364132ab15e1b4dca3517ad6b26998db8c22d313bf8"
+    }
+  },
+  "preparation": {
+    "path": "preparation.json",
+    "sha256": "247835dab86b9d2e6a84cbd5c6e74e7143a82a6e606092796a6c20367c3a0fa4"
+  },
+  "script": {
+    "path": "prepare.v3.py",
+    "sha256": "c0cb25362340d616d24ee5dff3362c99ab25cdfd1d2dd6b5c219bccf395195ab"
+  },
+  "trace": {
+    "path": "trace.json",
+    "sha256": "6f17031ec0a9e54b1dd81468f4fff6a72f3d9eb08477c05e8fed561d292ea68a"
+  }
+}

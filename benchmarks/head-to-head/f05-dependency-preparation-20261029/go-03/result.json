@@ -1,0 +1,28 @@
+{
+  "taskId": "go-03",
+  "state": "download-cache-retained-unqualified",
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "sourceArchiveSha256": "cc7b18c67ce11698d79bfee35fe7afa7f7c8f0ea0dccbdaefd8836cde49f3ba2",
+  "sourceRevision": "352089582444ea84feb03bc97eda97b35729e8ec",
+  "startedAt": "2026-10-29T06:56:57.078968+00:00",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host/download charge source."
+  ],
+  "upstreamScriptsOrTestsExecuted": false,
+  "indexConsulted": false,
+  "modelCalls": 0,
+  "cacheAuditQualified": false,
+  "setupSeconds": 1.9178011671174318,
+  "networkBytes": {
+    "received": 12851668,
+    "sent": 95130,
+    "basis": "container interface counters including headers/incidental traffic"
+  },
+  "archivePath": "/tmp/dotrepo-f05-dependency-preparation-20261029/go-03/cache.tar",
+  "archiveSha256": "fc8de794f4f9338fcb8be7cc0c4ef8f1a7e736e61b3a4a6bcdb3917cfb7176b8",
+  "cacheExpandedBytes": 63513466,
+  "cacheArchiveBytes": 65812480,
+  "cacheFiles": 2832,
+  "elapsedSeconds": 6.556872790912166
+}

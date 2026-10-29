@@ -1,0 +1,946 @@
+{
+  "originalSourceFreezeSha256": "fc756e0d5f8a25cddc9f19ece651b21078a68a1f601febdb8d772208c0a66d41",
+  "tasks": {
+    "rust-01": {
+      "taskId": "rust-01",
+      "repository": "github.com/tauri-apps/tauri",
+      "revision": "548a3692f59405aeb239c5b63fa589824eee51e8",
+      "archiveSha256": "43cf6ded6def92347692da1746fb6e132be6d5e142154c6bf2b97c2fae41fe02",
+      "acquisitionReceiptSha256": "78c1db6cfc1a183f29c3b58eb05d4e00e7454eadede4bd2159cb5692aefae70b",
+      "sourceFiles": [
+        {
+          "path": "Cargo.toml",
+          "sha256": "6e04a4e37699cf7d44d35d14fa4f0626bbaea7cde433b81ad8a9adeefe211bc1",
+          "bytes": 2953,
+          "lineCount": 93,
+          "spans": [
+            {
+              "startLine": 1,
+              "endLine": 46
+            }
+          ],
+          "sourceUrl": "https://github.com/tauri-apps/tauri/blob/548a3692f59405aeb239c5b63fa589824eee51e8/Cargo.toml",
+          "retainedPath": "sources/rust-01/Cargo.toml"
+        },
+        {
+          "path": "package.json",
+          "sha256": "2d5725b499d90f9360dafa4a7204b95d48caae0f7268dbc1dbf99c22056a1e0d",
+          "bytes": 1333,
+          "lineCount": 35,
+          "spans": [
+            {
+              "startLine": 13,
+              "endLine": 34
+            }
+          ],
+          "sourceUrl": "https://github.com/tauri-apps/tauri/blob/548a3692f59405aeb239c5b63fa589824eee51e8/package.json",
+          "retainedPath": "sources/rust-01/package.json"
+        },
+        {
+          "path": "pnpm-workspace.yaml",
+          "sha256": "3a9cb62cca5274f755558a9831624b57ef54c7c9dbe428f5795844137d8ff90a",
+          "bytes": 832,
+          "lineCount": 29,
+          "spans": [
+            {
+              "startLine": 1,
+              "endLine": 8
+            }
+          ],
+          "sourceUrl": "https://github.com/tauri-apps/tauri/blob/548a3692f59405aeb239c5b63fa589824eee51e8/pnpm-workspace.yaml",
+          "retainedPath": "sources/rust-01/pnpm-workspace.yaml"
+        },
+        {
+          "path": ".github/CONTRIBUTING.md",
+          "sha256": "28fc0f28ee0642a903bd62e283429a40f7337891d75ff6d7e7739675400d6123",
+          "bytes": 8196,
+          "lineCount": 120,
+          "spans": [
+            {
+              "startLine": 49,
+              "endLine": 73
+            },
+            {
+              "startLine": 85,
+              "endLine": 106
+            }
+          ],
+          "sourceUrl": "https://github.com/tauri-apps/tauri/blob/548a3692f59405aeb239c5b63fa589824eee51e8/.github/CONTRIBUTING.md",
+          "retainedPath": "sources/rust-01/.github/CONTRIBUTING.md"
+        },
+        {
+          "path": ".github/workflows/test-core.yml",
+          "sha256": "37c4f7098d4285a3393c1788c704d9ced6eaddaaa4fdcbf77669b3dbc53db4b7",
+          "bytes": 5301,
+          "lineCount": 139,
+          "spans": [
+            {
+              "startLine": 12,
+              "endLine": 21
+            },
+            {
+              "startLine": 41,
+              "endLine": 80
+            },
+            {
+              "startLine": 124,
+              "endLine": 139
+            }
+          ],
+          "sourceUrl": "https://github.com/tauri-apps/tauri/blob/548a3692f59405aeb239c5b63fa589824eee51e8/.github/workflows/test-core.yml",
+          "retainedPath": "sources/rust-01/.github/workflows/test-core.yml"
+        },
+        {
+          "path": ".github/workflows/test-cli-rs.yml",
+          "sha256": "06b72994865724d61c5d45065fdb0705ed78d377fbe982126a04335ace4e6dca",
+          "bytes": 2705,
+          "lineCount": 78,
+          "spans": [
+            {
+              "startLine": 35,
+              "endLine": 64
+            },
+            {
+              "startLine": 77,
+              "endLine": 78
+            }
+          ],
+          "sourceUrl": "https://github.com/tauri-apps/tauri/blob/548a3692f59405aeb239c5b63fa589824eee51e8/.github/workflows/test-cli-rs.yml",
+          "retainedPath": "sources/rust-01/.github/workflows/test-cli-rs.yml"
+        },
+        {
+          "path": ".github/workflows/test-cli-js.yml",
+          "sha256": "796a4cbaeea61fccd5f79a164bf0cc42a9250631466b3de34508ec40c0dec7c2",
+          "bytes": 2004,
+          "lineCount": 72,
+          "spans": [
+            {
+              "startLine": 12,
+              "endLine": 16
+            },
+            {
+              "startLine": 41,
+              "endLine": 56
+            },
+            {
+              "startLine": 64,
+              "endLine": 72
+            }
+          ],
+          "sourceUrl": "https://github.com/tauri-apps/tauri/blob/548a3692f59405aeb239c5b63fa589824eee51e8/.github/workflows/test-cli-js.yml",
+          "retainedPath": "sources/rust-01/.github/workflows/test-cli-js.yml"
+        },
+        {
+          "path": "packages/cli/package.json",
+          "sha256": "d9b292bd391da3c43a1a392341ef34eae9fd4bfbd8d089b39c17551bff8911d1",
+          "bytes": 1889,
+          "lineCount": 67,
+          "spans": [
+            {
+              "startLine": 43,
+              "endLine": 65
+            }
+          ],
+          "sourceUrl": "https://github.com/tauri-apps/tauri/blob/548a3692f59405aeb239c5b63fa589824eee51e8/packages/cli/package.json",
+          "retainedPath": "sources/rust-01/packages/cli/package.json"
+        },
+        {
+          "path": "packages/cli/__tests__/template.spec.ts",
+          "sha256": "86ab8db90bd91c8591116303ac9c9bc38e32557d3b18ee7cf79d356e5e7d8f15",
+          "bytes": 2405,
+          "lineCount": 89,
+          "spans": [
+            {
+              "startLine": 16,
+              "endLine": 26
+            },
+            {
+              "startLine": 43,
+              "endLine": 75
+            }
+          ],
+          "sourceUrl": "https://github.com/tauri-apps/tauri/blob/548a3692f59405aeb239c5b63fa589824eee51e8/packages/cli/__tests__/template.spec.ts",
+          "retainedPath": "sources/rust-01/packages/cli/__tests__/template.spec.ts"
+        },
+        {
+          "path": "packages/api/package.json",
+          "sha256": "25e4d15f311d5c7f875f7d56afcc08f6a77483b5ebd3a314c32a30f015c86fa8",
+          "bytes": 1760,
+          "lineCount": 62,
+          "spans": [
+            {
+              "startLine": 38,
+              "endLine": 46
+            }
+          ],
+          "sourceUrl": "https://github.com/tauri-apps/tauri/blob/548a3692f59405aeb239c5b63fa589824eee51e8/packages/api/package.json",
+          "retainedPath": "sources/rust-01/packages/api/package.json"
+        },
+        {
+          "path": "packages/api-e2e/package.json",
+          "sha256": "b839c202c824ad58b1af3cc7357f821378122d2f7fa44a442bceccaa1adf5b40",
+          "bytes": 1112,
+          "lineCount": 33,
+          "spans": [
+            {
+              "startLine": 1,
+              "endLine": 33
+            }
+          ],
+          "sourceUrl": "https://github.com/tauri-apps/tauri/blob/548a3692f59405aeb239c5b63fa589824eee51e8/packages/api-e2e/package.json",
+          "retainedPath": "sources/rust-01/packages/api-e2e/package.json"
+        },
+        {
+          "path": "crates/tauri-schema-worker/package.json",
+          "sha256": "af8bd2de383f9169bda138031912a17ff7174635b5c072662c675ba8875267b8",
+          "bytes": 247,
+          "lineCount": 13,
+          "spans": [
+            {
+              "startLine": 1,
+              "endLine": 13
+            }
+          ],
+          "sourceUrl": "https://github.com/tauri-apps/tauri/blob/548a3692f59405aeb239c5b63fa589824eee51e8/crates/tauri-schema-worker/package.json",
+          "retainedPath": "sources/rust-01/crates/tauri-schema-worker/package.json"
+        },
+        {
+          "path": "examples/api/package.json",
+          "sha256": "bb459d5225d42cbaa05c9fd927db4c4eea06562331c811f0146070b19f304341",
+          "bytes": 627,
+          "lineCount": 26,
+          "spans": [
+            {
+              "startLine": 1,
+              "endLine": 26
+            }
+          ],
+          "sourceUrl": "https://github.com/tauri-apps/tauri/blob/548a3692f59405aeb239c5b63fa589824eee51e8/examples/api/package.json",
+          "retainedPath": "sources/rust-01/examples/api/package.json"
+        },
+        {
+          "path": "examples/file-associations/package.json",
+          "sha256": "97dd1852ccce1fecaf6bcdc0880ecba0cf34b34b58dc02251786f1d5119bd85c",
+          "bytes": 204,
+          "lineCount": 13,
+          "spans": [
+            {
+              "startLine": 1,
+              "endLine": 13
+            }
+          ],
+          "sourceUrl": "https://github.com/tauri-apps/tauri/blob/548a3692f59405aeb239c5b63fa589824eee51e8/examples/file-associations/package.json",
+          "retainedPath": "sources/rust-01/examples/file-associations/package.json"
+        },
+        {
+          "path": "examples/resources/package.json",
+          "sha256": "a631bbe4e3c045c42acbb1f302dd58a0d4a23e3277945efa2c5519707d282369",
+          "bytes": 116,
+          "lineCount": 7,
+          "spans": [
+            {
+              "startLine": 1,
+              "endLine": 7
+            }
+          ],
+          "sourceUrl": "https://github.com/tauri-apps/tauri/blob/548a3692f59405aeb239c5b63fa589824eee51e8/examples/resources/package.json",
+          "retainedPath": "sources/rust-01/examples/resources/package.json"
+        }
+      ]
+    },
+    "python-01": {
+      "taskId": "python-01",
+      "repository": "github.com/666ghj/MiroFish",
+      "revision": "7657031ac01184afe2cb220f5ee3545573b5e843",
+      "archiveSha256": "fc70acea794785b5c6bfd06f5e0c83cb328fc5c4e05e36dab8f182fea5bd0d70",
+      "acquisitionReceiptSha256": "02bd55b821ec5ea7181e9ec24abbedd85a389477cb3b8be58c3092791bb7497a",
+      "sourceFiles": [
+        {
+          "path": "package.json",
+          "sha256": "f2b8cc90bc21b0b4990d5192b5e7c09161982760dede52cb743862d908526715",
+          "bytes": 702,
+          "lineCount": 21,
+          "spans": [
+            {
+              "startLine": 1,
+              "endLine": 21
+            }
+          ],
+          "sourceUrl": "https://github.com/666ghj/MiroFish/blob/7657031ac01184afe2cb220f5ee3545573b5e843/package.json",
+          "retainedPath": "sources/python-01/package.json"
+        },
+        {
+          "path": "frontend/package.json",
+          "sha256": "f972113d3cca752acc44f7e63d97fec138b2a34388b173f85f847bf7108fe852",
+          "bytes": 419,
+          "lineCount": 22,
+          "spans": [
+            {
+              "startLine": 1,
+              "endLine": 22
+            }
+          ],
+          "sourceUrl": "https://github.com/666ghj/MiroFish/blob/7657031ac01184afe2cb220f5ee3545573b5e843/frontend/package.json",
+          "retainedPath": "sources/python-01/frontend/package.json"
+        },
+        {
+          "path": "backend/pyproject.toml",
+          "sha256": "e923fa98056d1b6085ab789993a1d05f31bfc1e8cbbb6b9aa17d49663253c1a2",
+          "bytes": 1080,
+          "lineCount": 56,
+          "spans": [
+            {
+              "startLine": 1,
+              "endLine": 56
+            }
+          ],
+          "sourceUrl": "https://github.com/666ghj/MiroFish/blob/7657031ac01184afe2cb220f5ee3545573b5e843/backend/pyproject.toml",
+          "retainedPath": "sources/python-01/backend/pyproject.toml"
+        },
+        {
+          "path": "README.md",
+          "sha256": "5109feef87d494dd77c0eb225486d4278fe3eb61b303574600bcf8c3c339d034",
+          "bytes": 8958,
+          "lineCount": 203,
+          "spans": [
+            {
+              "startLine": 98,
+              "endLine": 180
+            }
+          ],
+          "sourceUrl": "https://github.com/666ghj/MiroFish/blob/7657031ac01184afe2cb220f5ee3545573b5e843/README.md",
+          "retainedPath": "sources/python-01/README.md"
+        },
+        {
+          "path": ".github/workflows/update-star-history.yml",
+          "sha256": "cd63f857c71823963a3d9ef678328478870e2750c3c1f41ac708b1fa7ecec70e",
+          "bytes": 18211,
+          "lineCount": 500,
+          "spans": [
+            {
+              "startLine": 63,
+              "endLine": 71
+            },
+            {
+              "startLine": 109,
+              "endLine": 118
+            }
+          ],
+          "sourceUrl": "https://github.com/666ghj/MiroFish/blob/7657031ac01184afe2cb220f5ee3545573b5e843/.github/workflows/update-star-history.yml",
+          "retainedPath": "sources/python-01/.github/workflows/update-star-history.yml"
+        },
+        {
+          "path": "tests/test_local_star_count_fetch.py",
+          "sha256": "f9368e145018b644f28104f15012ccbe99d124647966ee225bd4153f52dbb173",
+          "bytes": 13843,
+          "lineCount": 331,
+          "spans": [
+            {
+              "startLine": 1,
+              "endLine": 40
+            }
+          ],
+          "sourceUrl": "https://github.com/666ghj/MiroFish/blob/7657031ac01184afe2cb220f5ee3545573b5e843/tests/test_local_star_count_fetch.py",
+          "retainedPath": "sources/python-01/tests/test_local_star_count_fetch.py"
+        },
+        {
+          "path": "tests/test_local_star_history.py",
+          "sha256": "5d9fb5466b5d121432d9e82869edf91fe41cb1f02b8a6fe704372fb167368d55",
+          "bytes": 35557,
+          "lineCount": 954,
+          "spans": [
+            {
+              "startLine": 1,
+              "endLine": 40
+            }
+          ],
+          "sourceUrl": "https://github.com/666ghj/MiroFish/blob/7657031ac01184afe2cb220f5ee3545573b5e843/tests/test_local_star_history.py",
+          "retainedPath": "sources/python-01/tests/test_local_star_history.py"
+        },
+        {
+          "path": "backend/tests/test_ontology_generator.py",
+          "sha256": "ca17fe3d212cc7bb6a650dc131f3e30f918a153d32561cfd6165041c9504a590",
+          "bytes": 2457,
+          "lineCount": 79,
+          "spans": [
+            {
+              "startLine": 1,
+              "endLine": 38
+            }
+          ],
+          "sourceUrl": "https://github.com/666ghj/MiroFish/blob/7657031ac01184afe2cb220f5ee3545573b5e843/backend/tests/test_ontology_generator.py",
+          "retainedPath": "sources/python-01/backend/tests/test_ontology_generator.py"
+        },
+        {
+          "path": "backend/tests/test_simulation_prepare_failure.py",
+          "sha256": "9afbfcfafb390c0216064e7bdb45e326039f0a37549987c4bd596773747d10c5",
+          "bytes": 3462,
+          "lineCount": 102,
+          "spans": [
+            {
+              "startLine": 1,
+              "endLine": 38
+            }
+          ],
+          "sourceUrl": "https://github.com/666ghj/MiroFish/blob/7657031ac01184afe2cb220f5ee3545573b5e843/backend/tests/test_simulation_prepare_failure.py",
+          "retainedPath": "sources/python-01/backend/tests/test_simulation_prepare_failure.py"
+        },
+        {
+          "path": "backend/scripts/test_profile_format.py",
+          "sha256": "c60feaff8d5727c7c473d9879742c85c352151b208ec8ff72d48ad9ff9e88f17",
+          "bytes": 5856,
+          "lineCount": 166,
+          "spans": [
+            {
+              "startLine": 1,
+              "endLine": 20
+            }
+          ],
+          "sourceUrl": "https://github.com/666ghj/MiroFish/blob/7657031ac01184afe2cb220f5ee3545573b5e843/backend/scripts/test_profile_format.py",
+          "retainedPath": "sources/python-01/backend/scripts/test_profile_format.py"
+        }
+      ],
+      "fullTreeNegativeSearch": {
+        "query": "All full-tree root test configs, manifests, workflow names and Python test paths; static inspection of retained manifests/workflows finds no root aggregate test instruction. Absence does not prove no runnable aggregate can be invented.",
+        "configurationPaths": [
+          ".github/workflows/docker-image.yml",
+          ".github/workflows/update-star-history.yml",
+          "backend/pyproject.toml",
+          "frontend/package.json",
+          "package.json"
+        ],
+        "pythonTestPaths": [
+          "backend/scripts/test_profile_format.py",
+          "backend/tests/test_llm_json_responses.py",
+          "backend/tests/test_ontology_api_errors.py",
+          "backend/tests/test_ontology_attributes.py",
+          "backend/tests/test_ontology_generator.py",
+          "backend/tests/test_openai_chat_compat.py",
+          "backend/tests/test_platform_profiles.py",
+          "backend/tests/test_profile_field_normalization.py",
+          "backend/tests/test_report_tool_result_sanitizer.py",
+          "backend/tests/test_simulation_prepare_failure.py",
+          "backend/tests/test_zep_cloud_contracts.py",
+          "backend/tests/test_zep_cloud_validation_script.py",
+          "backend/tests/test_zep_edge_paging.py",
+          "backend/tests/test_zep_entity_reader_edges.py",
+          "backend/tests/test_zep_graph_lifecycle.py",
+          "backend/tests/test_zep_graph_memory_updater.py",
+          "backend/tests/test_zep_report_barrier.py",
+          "backend/tests/test_zep_retry_and_client.py",
+          "backend/tests/test_zep_simulation_barrier.py",
+          "tests/test_local_star_count_fetch.py",
+          "tests/test_local_star_history.py"
+        ]
+      }
+    },
+    "python-02": {
+      "taskId": "python-02",
+      "repository": "github.com/home-assistant/core",
+      "revision": "cde3969919b9bd540b2dd75b7aa84a908acbdbfe",
+      "archiveSha256": "6fe6c3084bc31e1f782696dc588cc55d61d1dd93bda8daffcba85971159ce61b",
+      "acquisitionReceiptSha256": "343755c978210339025f9454660e89d95b4dcf7b7b685b9c474eff1e19dca4a9",
+      "sourceFiles": [
+        {
+          "path": "AGENTS.md",
+          "sha256": "2067e1d10c6da85df9856da6e5cbe1346d7d01949ccfbea96ff1b73394a643fa",
+          "bytes": 5708,
+          "lineCount": 57,
+          "spans": [
+            {
+              "startLine": 14,
+              "endLine": 37
+            }
+          ],
+          "sourceUrl": "https://github.com/home-assistant/core/blob/cde3969919b9bd540b2dd75b7aa84a908acbdbfe/AGENTS.md",
+          "retainedPath": "sources/python-02/AGENTS.md"
+        },
+        {
+          "path": "pyproject.toml",
+          "sha256": "60bc823ebd5fbab24c44b1b7aeed13db1a9d51378f2ddb13bf9d0af2c77c78c7",
+          "bytes": 42457,
+          "lineCount": 918,
+          "spans": [
+            {
+              "startLine": 20,
+              "endLine": 24
+            },
+            {
+              "startLine": 100,
+              "endLine": 106
+            },
+            {
+              "startLine": 446,
+              "endLine": 458
+            },
+            {
+              "startLine": 632,
+              "endLine": 637
+            }
+          ],
+          "sourceUrl": "https://github.com/home-assistant/core/blob/cde3969919b9bd540b2dd75b7aa84a908acbdbfe/pyproject.toml",
+          "retainedPath": "sources/python-02/pyproject.toml"
+        },
+        {
+          "path": ".python-version",
+          "sha256": "4f4c88910b6d485ae689143880e5e81b595a48a51ecb391b2f14feaec106d180",
+          "bytes": 8,
+          "lineCount": 1,
+          "spans": [
+            {
+              "startLine": 1,
+              "endLine": 1
+            }
+          ],
+          "sourceUrl": "https://github.com/home-assistant/core/blob/cde3969919b9bd540b2dd75b7aa84a908acbdbfe/.python-version",
+          "retainedPath": "sources/python-02/.python-version"
+        },
+        {
+          "path": "script/setup",
+          "sha256": "b56bbc608ab81944b3f6507b4cf52dfdac470b9f5312fb3c0bfd9f70810765f0",
+          "bytes": 1012,
+          "lineCount": 51,
+          "spans": [
+            {
+              "startLine": 1,
+              "endLine": 36
+            }
+          ],
+          "sourceUrl": "https://github.com/home-assistant/core/blob/cde3969919b9bd540b2dd75b7aa84a908acbdbfe/script/setup",
+          "retainedPath": "sources/python-02/script/setup"
+        },
+        {
+          "path": "script/bootstrap",
+          "sha256": "c920c9b8347b46abd7dbb12833fb125d393e3a637317405b4c7c2bdf7e2789c4",
+          "bytes": 511,
+          "lineCount": 24,
+          "spans": [
+            {
+              "startLine": 1,
+              "endLine": 24
+            }
+          ],
+          "sourceUrl": "https://github.com/home-assistant/core/blob/cde3969919b9bd540b2dd75b7aa84a908acbdbfe/script/bootstrap",
+          "retainedPath": "sources/python-02/script/bootstrap"
+        },
+        {
+          "path": "requirements_test.txt",
+          "sha256": "cbca7d43b49f697bd18825b412170c10f479fbdab63db99cfbdf63918f44d0aa",
+          "bytes": 1548,
+          "lineCount": 59,
+          "spans": [
+            {
+              "startLine": 8,
+              "endLine": 42
+            }
+          ],
+          "sourceUrl": "https://github.com/home-assistant/core/blob/cde3969919b9bd540b2dd75b7aa84a908acbdbfe/requirements_test.txt",
+          "retainedPath": "sources/python-02/requirements_test.txt"
+        },
+        {
+          "path": ".github/workflows/ci.yaml",
+          "sha256": "ea64635b1138a135028789032291fec4fbb57a6ede34c4a132d243137c3c75b5",
+          "bytes": 67496,
+          "lineCount": 1713,
+          "spans": [
+            {
+              "startLine": 891,
+              "endLine": 925
+            },
+            {
+              "startLine": 942,
+              "endLine": 949
+            },
+            {
+              "startLine": 1030,
+              "endLine": 1073
+            },
+            {
+              "startLine": 1465,
+              "endLine": 1493
+            }
+          ],
+          "sourceUrl": "https://github.com/home-assistant/core/blob/cde3969919b9bd540b2dd75b7aa84a908acbdbfe/.github/workflows/ci.yaml",
+          "retainedPath": "sources/python-02/.github/workflows/ci.yaml"
+        },
+        {
+          "path": ".github/actions/restore-or-build-venv/action.yml",
+          "sha256": "db8dc6fe6b4fca8e545fdb7d62e67587900fba00bbdc58fb53a1918647ee08fe",
+          "bytes": 5104,
+          "lineCount": 125,
+          "spans": [
+            {
+              "startLine": 74,
+              "endLine": 105
+            }
+          ],
+          "sourceUrl": "https://github.com/home-assistant/core/blob/cde3969919b9bd540b2dd75b7aa84a908acbdbfe/.github/actions/restore-or-build-venv/action.yml",
+          "retainedPath": "sources/python-02/.github/actions/restore-or-build-venv/action.yml"
+        },
+        {
+          "path": "packages/pytest-home-assistant/pyproject.toml",
+          "sha256": "2baf0f2f02b1af463cd525f82386133734cc87819d3d46cc70fd893e467a839e",
+          "bytes": 1431,
+          "lineCount": 55,
+          "spans": [
+            {
+              "startLine": 5,
+              "endLine": 35
+            }
+          ],
+          "sourceUrl": "https://github.com/home-assistant/core/blob/cde3969919b9bd540b2dd75b7aa84a908acbdbfe/packages/pytest-home-assistant/pyproject.toml",
+          "retainedPath": "sources/python-02/packages/pytest-home-assistant/pyproject.toml"
+        },
+        {
+          "path": "packages/pytest-home-assistant/pytest_homeassistant/bootstrap.py",
+          "sha256": "21b652e6ebd699692ed5ac8218a625fda8dfb6c1c43c2b45caca42fdfa488928",
+          "bytes": 337,
+          "lineCount": 11,
+          "spans": [
+            {
+              "startLine": 1,
+              "endLine": 11
+            }
+          ],
+          "sourceUrl": "https://github.com/home-assistant/core/blob/cde3969919b9bd540b2dd75b7aa84a908acbdbfe/packages/pytest-home-assistant/pytest_homeassistant/bootstrap.py",
+          "retainedPath": "sources/python-02/packages/pytest-home-assistant/pytest_homeassistant/bootstrap.py"
+        },
+        {
+          "path": "packages/pytest-home-assistant/pytest_homeassistant/plugins.py",
+          "sha256": "ba567c653a3ffeb0448f1b6d89b8b3d5a2c6113ae40340d4c00d818646474992",
+          "bytes": 83632,
+          "lineCount": 2508,
+          "spans": [
+            {
+              "startLine": 179,
+              "endLine": 201
+            },
+            {
+              "startLine": 224,
+              "endLine": 250
+            }
+          ],
+          "sourceUrl": "https://github.com/home-assistant/core/blob/cde3969919b9bd540b2dd75b7aa84a908acbdbfe/packages/pytest-home-assistant/pytest_homeassistant/plugins.py",
+          "retainedPath": "sources/python-02/packages/pytest-home-assistant/pytest_homeassistant/plugins.py"
+        },
+        {
+          "path": "tests/__init__.py",
+          "sha256": "aeaf1eb6f0778915de3377af758757af9a2a3e289c80f6113dfff915ec081e1f",
+          "bytes": 305,
+          "lineCount": 11,
+          "spans": [
+            {
+              "startLine": 1,
+              "endLine": 10
+            }
+          ],
+          "sourceUrl": "https://github.com/home-assistant/core/blob/cde3969919b9bd540b2dd75b7aa84a908acbdbfe/tests/__init__.py",
+          "retainedPath": "sources/python-02/tests/__init__.py"
+        },
+        {
+          "path": "tests/test_core.py",
+          "sha256": "c2031802fc71595f384e10151026540c9f2b17f9f5480d087da7adfe36eb950d",
+          "bytes": 115021,
+          "lineCount": 3722,
+          "spans": [
+            {
+              "startLine": 1,
+              "endLine": 25
+            }
+          ],
+          "sourceUrl": "https://github.com/home-assistant/core/blob/cde3969919b9bd540b2dd75b7aa84a908acbdbfe/tests/test_core.py",
+          "retainedPath": "sources/python-02/tests/test_core.py"
+        }
+      ]
+    },
+    "python-03": {
+      "taskId": "python-03",
+      "repository": "github.com/ytdl-org/youtube-dl",
+      "revision": "956b8c585591b401a543e409accb163eeaaa1193",
+      "archiveSha256": "836cb208ff4ff481e5b9879fc3c10de793e7f8bca247e645661de1e233f63aa6",
+      "acquisitionReceiptSha256": "2723ec26ff9a1f85f5e2d5449e9d4358333cd3fba02da045e20a29db751d5409",
+      "sourceFiles": [
+        {
+          "path": "CONTRIBUTING.md",
+          "sha256": "b7f4dd2ac304c224b671d4830813bd6b2b8799da8d78f13cf927d4379ebac247",
+          "bytes": 22864,
+          "lineCount": 434,
+          "spans": [
+            {
+              "startLine": 71,
+              "endLine": 93
+            }
+          ],
+          "sourceUrl": "https://github.com/ytdl-org/youtube-dl/blob/956b8c585591b401a543e409accb163eeaaa1193/CONTRIBUTING.md",
+          "retainedPath": "sources/python-03/CONTRIBUTING.md"
+        },
+        {
+          "path": "setup.py",
+          "sha256": "b22fbdb4f23e480976e1a5a20b95848c26680b04b796838756241191bd8dfb4d",
+          "bytes": 4621,
+          "lineCount": 148,
+          "spans": [
+            {
+              "startLine": 102,
+              "endLine": 120
+            }
+          ],
+          "sourceUrl": "https://github.com/ytdl-org/youtube-dl/blob/956b8c585591b401a543e409accb163eeaaa1193/setup.py",
+          "retainedPath": "sources/python-03/setup.py"
+        },
+        {
+          "path": "Makefile",
+          "sha256": "5335edf29074bb04a286c62f93e9cb8505b789982700ca14fb22dafb42986aa4",
+          "bytes": 6235,
+          "lineCount": 135,
+          "spans": [
+            {
+              "startLine": 32,
+              "endLine": 52
+            }
+          ],
+          "sourceUrl": "https://github.com/ytdl-org/youtube-dl/blob/956b8c585591b401a543e409accb163eeaaa1193/Makefile",
+          "retainedPath": "sources/python-03/Makefile"
+        },
+        {
+          "path": "tox.ini",
+          "sha256": "75c47b0f9ed2b6ac528d34c6f0579e09de1a4f0809d18397120827a67dde2274",
+          "bytes": 614,
+          "lineCount": 14,
+          "spans": [
+            {
+              "startLine": 1,
+              "endLine": 14
+            }
+          ],
+          "sourceUrl": "https://github.com/ytdl-org/youtube-dl/blob/956b8c585591b401a543e409accb163eeaaa1193/tox.ini",
+          "retainedPath": "sources/python-03/tox.ini"
+        },
+        {
+          "path": "devscripts/run_tests.sh",
+          "sha256": "957a422ea5da44d12a69addcc6a27f66c7e68963601c6a299e419e6c8f32cc11",
+          "bytes": 562,
+          "lineCount": 22,
+          "spans": [
+            {
+              "startLine": 1,
+              "endLine": 22
+            }
+          ],
+          "sourceUrl": "https://github.com/ytdl-org/youtube-dl/blob/956b8c585591b401a543e409accb163eeaaa1193/devscripts/run_tests.sh",
+          "retainedPath": "sources/python-03/devscripts/run_tests.sh"
+        },
+        {
+          "path": ".github/workflows/ci.yml",
+          "sha256": "10d0709634aca656e9ff0ed55a7586dee6545d8fa780ef43938550dc94da4455",
+          "bytes": 20832,
+          "lineCount": 482,
+          "spans": [
+            {
+              "startLine": 3,
+              "endLine": 11
+            },
+            {
+              "startLine": 81,
+              "endLine": 100
+            },
+            {
+              "startLine": 406,
+              "endLine": 418
+            },
+            {
+              "startLine": 461,
+              "endLine": 468
+            }
+          ],
+          "sourceUrl": "https://github.com/ytdl-org/youtube-dl/blob/956b8c585591b401a543e409accb163eeaaa1193/.github/workflows/ci.yml",
+          "retainedPath": "sources/python-03/.github/workflows/ci.yml"
+        },
+        {
+          "path": "test/helper.py",
+          "sha256": "1a71eb39bc2628ef9d6c1fb87c521914d5dd3ccbb17d1cf164be892f789bb055",
+          "bytes": 10843,
+          "lineCount": 285,
+          "spans": [
+            {
+              "startLine": 13,
+              "endLine": 39
+            },
+            {
+              "startLine": 100,
+              "endLine": 118
+            }
+          ],
+          "sourceUrl": "https://github.com/ytdl-org/youtube-dl/blob/956b8c585591b401a543e409accb163eeaaa1193/test/helper.py",
+          "retainedPath": "sources/python-03/test/helper.py"
+        },
+        {
+          "path": "test/test_download.py",
+          "sha256": "1c96c9d0727cbf8c01a449bb2bf94f659293040590a6ed7b3c8b6edc825b3fe5",
+          "bytes": 11526,
+          "lineCount": 294,
+          "spans": [
+            {
+              "startLine": 25,
+              "endLine": 41
+            },
+            {
+              "startLine": 100,
+              "endLine": 128
+            },
+            {
+              "startLine": 163,
+              "endLine": 188
+            }
+          ],
+          "sourceUrl": "https://github.com/ytdl-org/youtube-dl/blob/956b8c585591b401a543e409accb163eeaaa1193/test/test_download.py",
+          "retainedPath": "sources/python-03/test/test_download.py"
+        },
+        {
+          "path": "test/test_socks.py",
+          "sha256": "c63a0ccc3396850e82fafc14627f8d7cb2fbdef45cba5254726eeaf129812555",
+          "bytes": 3500,
+          "lineCount": 118,
+          "spans": [
+            {
+              "startLine": 24,
+              "endLine": 54
+            }
+          ],
+          "sourceUrl": "https://github.com/ytdl-org/youtube-dl/blob/956b8c585591b401a543e409accb163eeaaa1193/test/test_socks.py",
+          "retainedPath": "sources/python-03/test/test_socks.py"
+        },
+        {
+          "path": "test/test_YoutubeDL.py",
+          "sha256": "07f9b1b9506b67b123121c9f9630dfaa90d127354f7135fd6914ddb7cfa79dd6",
+          "bytes": 49179,
+          "lineCount": 1191,
+          "spans": [
+            {
+              "startLine": 15,
+              "endLine": 37
+            }
+          ],
+          "sourceUrl": "https://github.com/ytdl-org/youtube-dl/blob/956b8c585591b401a543e409accb163eeaaa1193/test/test_YoutubeDL.py",
+          "retainedPath": "sources/python-03/test/test_YoutubeDL.py"
+        },
+        {
+          "path": "test/test_utils.py",
+          "sha256": "6c74527100dc8b1d9077e9fdcc6fa6b79c12b4eaf1779420fb097ec22f404d2d",
+          "bytes": 80951,
+          "lineCount": 1774,
+          "spans": [
+            {
+              "startLine": 13,
+              "endLine": 40
+            }
+          ],
+          "sourceUrl": "https://github.com/ytdl-org/youtube-dl/blob/956b8c585591b401a543e409accb163eeaaa1193/test/test_utils.py",
+          "retainedPath": "sources/python-03/test/test_utils.py"
+        },
+        {
+          "path": "test/test_downloader_http.py",
+          "sha256": "b0b6863e5ef58a5e386a7a1769e04e4e957cd60eb878ed3bffeeb26f61119dad",
+          "bytes": 3383,
+          "lineCount": 108,
+          "spans": [
+            {
+              "startLine": 12,
+              "endLine": 23
+            }
+          ],
+          "sourceUrl": "https://github.com/ytdl-org/youtube-dl/blob/956b8c585591b401a543e409accb163eeaaa1193/test/test_downloader_http.py",
+          "retainedPath": "sources/python-03/test/test_downloader_http.py"
+        },
+        {
+          "path": "test/parameters.json",
+          "sha256": "859ff098d3ea4ade2188afc09d6efab96be479a8c3a6a576f451ccaf55edc685",
+          "bytes": 1052,
+          "lineCount": 42,
+          "spans": [
+            {
+              "startLine": 1,
+              "endLine": 42
+            }
+          ],
+          "sourceUrl": "https://github.com/ytdl-org/youtube-dl/blob/956b8c585591b401a543e409accb163eeaaa1193/test/parameters.json",
+          "retainedPath": "sources/python-03/test/parameters.json"
+        }
+      ]
+    }
+  },
+  "frozenOriginalInputs": [
+    {
+      "taskId": "rust-01",
+      "kind": "request",
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/requests/rust-01.md",
+      "sha256": "a1bfce584dfaa8127d46ab75b3ffa6120c8d7961eb90a965a43cb93ba617f1ff"
+    },
+    {
+      "taskId": "rust-01",
+      "kind": "gold",
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/gold/rust-01.json",
+      "sha256": "e0227b4be1fe5577cc9987dcad614bcfd6e49b545a16f10e46cb4ab77a433386"
+    },
+    {
+      "taskId": "rust-01",
+      "kind": "oracle",
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/oracles/rust-01.json",
+      "sha256": "2868ea7c8cf7b6b6d527542537073da2716660783ffd5ac6270cfdf1ef571c03"
+    },
+    {
+      "taskId": "python-01",
+      "kind": "request",
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/requests/python-01.md",
+      "sha256": "0d4f17d1fd158230bf1b47d975fa94899c3eb50d922b94cddda62be122ee8466"
+    },
+    {
+      "taskId": "python-01",
+      "kind": "gold",
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/gold/python-01.json",
+      "sha256": "5c36d2500082e41c5a88f50df37b55608540f9b12381a70b5dd95cf0fd784873"
+    },
+    {
+      "taskId": "python-01",
+      "kind": "oracle",
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/oracles/python-01.json",
+      "sha256": "13593a0416f65d3e6006252c2e7e6d21c05d2837d060e3aeb952a36fbe801971"
+    },
+    {
+      "taskId": "python-02",
+      "kind": "request",
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/requests/python-02.md",
+      "sha256": "6fbdd735a2e4d1bc926a00fc4d2152c4dfc5d0c327075f369962876dd3e6109e"
+    },
+    {
+      "taskId": "python-02",
+      "kind": "gold",
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/gold/python-02.json",
+      "sha256": "408796293ba750d3ae45bcd8f1117fdbf87dc4565ade485de45bba14fd9d4e8c"
+    },
+    {
+      "taskId": "python-02",
+      "kind": "oracle",
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/oracles/python-02.json",
+      "sha256": "bb9a5a746c7de7e11bbce7014e674053f154c38dee4fdd4f801d942a2621939f"
+    },
+    {
+      "taskId": "python-03",
+      "kind": "request",
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/requests/python-03.md",
+      "sha256": "e63de128929a4af76bf6901b48a6b9e2f64a69b153209cb6e9bda718c6f100ba"
+    },
+    {
+      "taskId": "python-03",
+      "kind": "gold",
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/gold/python-03.json",
+      "sha256": "ed2c6203a4c0d9e92293467590cf121bf4780c45784d8f6f94cc7981ffcc82c1"
+    },
+    {
+      "taskId": "python-03",
+      "kind": "oracle",
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/oracles/python-03.json",
+      "sha256": "6020d335c55837e085b4e7a16584721dd428783947d0f711b353f78760dc32c1"
+    }
+  ]
+}

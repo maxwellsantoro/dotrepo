@@ -1,0 +1,19 @@
+{
+  "identity": "f05-oracle-go-nested-skip-v2",
+  "frozenAt": "2026-10-29T06:28:43.022362+00:00",
+  "method": "Reject a skip at any native test depth; retain top-level expected coverage comparison.",
+  "files": {
+    "oracle.py": "3b5392c8bf298d692f0ada994a01f5e0a35bde86151d59fd8b420fa050873aa7",
+    "oracle.original.py.txt": "1e4f0f3b640df88f315fcbcddf66e9aae179d68e69db7f5da0f4bc948adcb0ab",
+    "counterexample.json": "7a533d960f363aa3b8338ee514dca682923367abac5c697c6bdadf2517388b6a"
+  },
+  "controls": {
+    "positiveControls": 3,
+    "negativeControls": 11,
+    "status": "passed",
+    "limits": "Synthetic native-format controls establish rejection behavior; actual source/environment execution is separately required."
+  },
+  "priorFrozenPacketUnchanged": true,
+  "actualTaskRunsReexecuted": false,
+  "campaignOutcomeClaim": false
+}

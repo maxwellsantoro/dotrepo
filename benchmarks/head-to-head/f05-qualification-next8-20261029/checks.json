@@ -1,0 +1,87 @@
+{
+  "checkedAt": "2026-10-29T06:42:18.376364+00:00",
+  "controls": {
+    "positive": 1,
+    "negative": [
+      "absolute-path",
+      "parent-path",
+      "duplicate-member",
+      "unbound-mode"
+    ],
+    "treeContentChangeDetected": true
+  },
+  "sourceFreezeSha256": "fc756e0d5f8a25cddc9f19ece651b21078a68a1f601febdb8d772208c0a66d41",
+  "originalFrozenArtifactsVerified": 215,
+  "tasks": [
+    {
+      "task": "rust-01",
+      "entries": 1107,
+      "bytes": 22484659,
+      "gitTreeSha": "85d734eeae9a0edb84c41a1fe0b9bbd1c12067a8",
+      "links": 0,
+      "archiveSha256": "43cf6ded6def92347692da1746fb6e132be6d5e142154c6bf2b97c2fae41fe02"
+    },
+    {
+      "task": "rust-03",
+      "entries": 597,
+      "bytes": 8788452,
+      "gitTreeSha": "dbf8740c335b5b3578f10cba374acdcb4e9079cd",
+      "links": 0,
+      "archiveSha256": "19551665ef078b5392bb3640e98df32f99791320dd7afd4ca12cc081a772eb0c"
+    },
+    {
+      "task": "python-01",
+      "entries": 128,
+      "bytes": 9064963,
+      "gitTreeSha": "dcc88f9b1da4145a06769a7f979d50d77e1dba25",
+      "links": 0,
+      "archiveSha256": "fc70acea794785b5c6bfd06f5e0c83cb328fc5c4e05e36dab8f182fea5bd0d70"
+    },
+    {
+      "task": "python-02",
+      "entries": 30203,
+      "bytes": 222688313,
+      "gitTreeSha": "60c09a501467e7497b51a62c5225056fe2f2ad79",
+      "links": 3,
+      "archiveSha256": "6fe6c3084bc31e1f782696dc588cc55d61d1dd93bda8daffcba85971159ce61b"
+    },
+    {
+      "task": "python-03",
+      "entries": 981,
+      "bytes": 6945071,
+      "gitTreeSha": "596ff4ef809eaab6454a8c3a44d879c2ba04fcdf",
+      "links": 0,
+      "archiveSha256": "836cb208ff4ff481e5b9879fc3c10de793e7f8bca247e645661de1e233f63aa6"
+    },
+    {
+      "task": "typescript-01",
+      "entries": 19877,
+      "bytes": 138154652,
+      "gitTreeSha": "457c6e9983dd1af8683453f871ce84a4eff1247d",
+      "links": 14,
+      "archiveSha256": "c3287a2e874e9053fa07468897835e63895e49e3851bf8d8708337e6fbdec193"
+    },
+    {
+      "task": "typescript-03",
+      "entries": 703,
+      "bytes": 6521634,
+      "gitTreeSha": "906e381f0ca5d0c66ddfdfa483a711378ae2013f",
+      "links": 0,
+      "archiveSha256": "51249848d90d269ca4f03504257661e172bcc2e644bb2cc32cc37513ac60b93c"
+    },
+    {
+      "task": "go-02",
+      "entries": 401,
+      "bytes": 2084097,
+      "gitTreeSha": "f955999f62ae9f3c496ff8a17dbebdf42911241b",
+      "links": 0,
+      "archiveSha256": "7704106da11aef67bad7e0a9a4964f1d2e9a3f072511e585e677aa48f5016220"
+    }
+  ],
+  "totalEntries": 53997,
+  "totalBytes": 416731841,
+  "totalLinks": 17,
+  "commandReceiptsVerified": 48,
+  "status": "passed",
+  "limits": "Local bytes/Git object Merkle consistency only; no external fetch, project execution, environment qualification, native oracle result, index/profile access, model call or consumer benefit."
+}

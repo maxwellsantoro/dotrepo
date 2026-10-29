@@ -1,0 +1,34 @@
+{
+  "imageDigest": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "revision": "352089582444ea84feb03bc97eda97b35729e8ec",
+  "sourceArchiveSha256": "cc7b18c67ce11698d79bfee35fe7afa7f7c8f0ea0dccbdaefd8836cde49f3ba2",
+  "cacheArchiveSha256": "fc8de794f4f9338fcb8be7cc0c4ef8f1a7e736e61b3a4a6bcdb3917cfb7176b8",
+  "scriptSha256": "c0cb25362340d616d24ee5dff3362c99ab25cdfd1d2dd6b5c219bccf395195ab",
+  "scriptClosure": {
+    "prepare.v3.py": "c0cb25362340d616d24ee5dff3362c99ab25cdfd1d2dd6b5c219bccf395195ab",
+    "control.py": "f4c48a59e66471d4247b25bd2c3704c681999943bc0daae5d6acf544844abb1a",
+    "capture.py": "8080a772bbb1e97c89cfb06dd31b5d250003c69ae7e17429d008e17b9f94bbbc",
+    "Dockerfile.v3": "087fa8b10248b8e77335da7056d119141a5e6d0a1347908d7433aff55d027e82",
+    "npm": "de0074a6bf7a9f22fc0081ec0b941ef336acc1109c2e45d2ddddb601b3188b63",
+    "npx": "8ef0a506c1aea4a30c46d8a1b2874caa0670ea52b35954cc60709cf22117e07f"
+  },
+  "planSha256": "ac4ed276976b182bc565043779ea7bd1ebbcaf9c441d46f81b3ad569737237a1",
+  "traceSha256": "6f17031ec0a9e54b1dd81468f4fff6a72f3d9eb08477c05e8fed561d292ea68a",
+  "downloadOnly": true,
+  "buildOutputsExcluded": false,
+  "taskSourceExcluded": false,
+  "credentialsExcluded": false,
+  "auditState": "draft-unqualified; false audit flags mean independent content/member review is pending, not a detected inclusion",
+  "preparationCostUsd": null,
+  "toolVersions": {
+    "commonImageNativeProbe": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\ncargo 1.99.0 (5f94df478 2026-08-27)\nv24.22.2\n11.19.1\n11.19.1\ngo version go1.27.3 linux/arm64\nuv 0.13.6 (aarch64-unknown-linux-musl)\ngit version 2.39.5\ncc (Debian 12.2.0-14+deb12u1) 12.2.0\nCopyright (C) 2022 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\nLinux 9b370296a30c 7.0.14-linuxkit #1 SMP PREEMPT Sun Sep 20 16:14:09 UTC 2026 aarch64 GNU/Linux\nPRETTY_NAME=\"Debian GNU/Linux 12 (bookworm)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"12\"\nVERSION=\"12 (bookworm)\"\nVERSION_CODENAME=bookworm\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\nlibasound2-dev:arm64\t1.2.8-1+b1\nlibpcap-dev:arm64\t1.10.3-1\nlibpcap0.8-dev:arm64\t1.10.3-1\n",
+    "taskNativeProbe": "go version go1.27.3 linux/arm64\ngit version 2.39.5\n"
+  },
+  "limitations": [
+    "These draft flags intentionally fail runtime cache admission until independent audit; do not replace false with true mechanically.",
+    "Root prefix/regular-file/size/hash checks passed, but content classification, protected evaluation aliases and absence of credentials have not been independently audited.",
+    "No source tests/build scripts executed. Common-image tool availability does not prove task/environment equivalence or offline cache completeness.",
+    "npm temporary tooling installation and checkout node_modules are not exported. A future session needs a frozen offline setup policy for npm11.12.1 installation from retained content.",
+    "Costs are unavailable, not zero; native transfer counters and elapsed preparation are separately retained."
+  ]
+}

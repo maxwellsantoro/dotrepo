@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "docker",
+    "image",
+    "inspect",
+    "dotrepo-f05-common:20261029"
+  ],
+  "startedAt": "2026-10-29T06:52:08.808118+00:00",
+  "elapsedSeconds": 0.0557774999178946,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "3db87bb844aa155e72fba1deb736b587fafad57d11b069b3547f79c94c3f66eb",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

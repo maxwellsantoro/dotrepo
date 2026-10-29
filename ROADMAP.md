@@ -125,6 +125,10 @@ The [cadence checkpoint](index/telemetry/roadmap-refresh-cadence-2026-10-06.md)
 diagnoses stale-base refusal and prepares a bounded deterministic regeneration.
 An enabled schedule and nominal capacity do not establish successful rotation;
 retain actual refresh, landing and publication evidence separately.
+The [withdrawal durability source review](index/telemetry/operating-readiness-20261029/f1-refresh-durability-review/README.md)
+identifies generic Go fallbacks that can repopulate four corrected scalars. It
+records proposed scope/setup controls and the separate default-evidence decision;
+no refresh replay or durable enforcement fix is claimed by that review.
 The [scheduled boundary receipt](index/telemetry/roadmap-refresh-boundary-2026-10-06.md)
 retains a completed batch cancelled before landing after an unsupported docs
 answer passed the old reference policy. Future refreshes use the repaired source
@@ -148,6 +152,17 @@ tasks. The [published response capture](benchmarks/head-to-head/f05-snapshot-202
 retains every enrolled task, including absent profiles. Complete environment,
 dependency-cache and oracle qualification still precedes the causal campaign;
 no development replay, apparatus control or operator test result closes C2.
+The [remaining-task source proposal](benchmarks/head-to-head/f05-qualification-next8-20261029/README.md)
+and [prelaunch scope decisions](benchmarks/head-to-head/f05-prelaunch-decisions-20261029/README.md)
+preserve unresolved aggregate coverage and declare exclusion policy before runs.
+Faithful source-link provisioning has a bounded independent runtime review;
+it does not qualify the affected upstream tasks. The
+[common-image and download-cache preparation](benchmarks/head-to-head/f05-dependency-preparation-20261029/README.md)
+has a bounded [independent audit](benchmarks/head-to-head/f05-dependency-preparation-review-20261029/README.md);
+offline restoration, task qualification and final image audit remain open.
+[CI-evidence pilot](benchmarks/ci-evidence/pilot-20261029/README.md) retains
+workflow/job observations without promoting them to independent execution or
+consumer applicability.
 An external participant is not a prerequisite for E1 qualification or F-05. C3
 preparation is independent; both useful C2 results and C3 acceptance evidence are
 required before G1 expansion. A complete negative C2 report closes its measurement

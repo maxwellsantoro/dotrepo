@@ -1,0 +1,53 @@
+{
+  "task": {
+    "id": "rust-03",
+    "repository": "github.com/iced-rs/iced",
+    "revision": "cd04b74ca7073766f654535d6e72c452ef749d07",
+    "ecosystem": "Rust",
+    "scope": "repository",
+    "startingState": "local-checkout",
+    "component": null,
+    "request": "requests/rust-03.md",
+    "gold": "curator/gold/rust-03.json",
+    "oracle": "curator/oracles/rust-03.json",
+    "enrollmentRationale": "Root Rust workspace and retained Test workflow establish the repository-wide CI test target."
+  },
+  "state": "source-acquired",
+  "indexConsulted": false,
+  "modelCalls": 0,
+  "upstreamProjectCodeExecuted": false,
+  "costUsd": null,
+  "sourceAcquisitionLimits": {
+    "compressedBytes": 536870912,
+    "expandedSourceBytes": 1073741824,
+    "expandedTrancheBytes": 2147483648,
+    "fileBytes": 134217728,
+    "filesTranche": 200000
+  },
+  "costExclusions": [
+    "No metered host/container/download charge source."
+  ],
+  "scratch": "/tmp/dotrepo-f05-qualification-next8-20261029/rust-03",
+  "partialExpandedBytes": 8788452,
+  "compressedGitObjectBytes": 5511868,
+  "completeGitObjectsAcquired": true,
+  "sourceFiles": 597,
+  "sourceBytes": 8788452,
+  "symlinks": {},
+  "missingSubmodules": {},
+  "missingLfsObjects": [],
+  "frozenInspectedFilesMatched": [
+    "Cargo.toml",
+    "README.md",
+    "CONTRIBUTING.md",
+    ".github/workflows/test.yml"
+  ],
+  "archivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/rust-03/source.tar",
+  "archiveSha256": "19551665ef078b5392bb3640e98df32f99791320dd7afd4ca12cc081a772eb0c",
+  "archiveBytes": 9267200,
+  "compressedArchivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/rust-03/source.tar.gz",
+  "compressedArchiveSha256": "6145c27e9045f9102cf8fef37572810560f532d7a631eb93245350b8b2916f31",
+  "compressedArchiveBytes": 5356109,
+  "sourceBundleReady": true,
+  "elapsedSeconds": 1.9922224581241608
+}

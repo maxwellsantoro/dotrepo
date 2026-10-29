@@ -121,3 +121,11 @@ Future scheduled refreshes may change these records, so integration must compare
 current hashes and resolve same-identity conflicts explicitly. These inspected cases are known audit/development material, not a
 fresh qualification set. The initial local report-generator locator error is
 retained separately; it was corrected without changing upstream source bytes.
+
+The later [manual publication recovery](manual-publication-recovery/README.md)
+retains the successful deployment of the landed index commit and its live source
+digest check. A manual recovery does not qualify the original scheduled run or
+an operating day. The separate [withdrawal durability source review](f1-refresh-durability-review/README.md)
+finds that generic Go fallbacks can repopulate all four corrected scalars during
+a fresh import. It retains source-path proof and proposed fixture contracts;
+no current refresh replay or enforcement fix was executed by that review.

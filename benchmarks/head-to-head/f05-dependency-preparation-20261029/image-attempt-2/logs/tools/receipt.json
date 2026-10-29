@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-f05-common-control-a47166e96d",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "rustc -vV; cargo --version; node --version; npm --version; npx --version; go version; uv --version; git --version; cc --version; uname -a; cat /etc/os-release; dpkg-query -W libpcap-dev libpcap0.8-dev libasound2-dev"
+  ],
+  "startedAt": "2026-10-29T06:52:10.075976+00:00",
+  "elapsedSeconds": 0.6309261249843985,
+  "exitCode": 1,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "c4f9edd7591eb5bcac09718a47fb928ddc7613377f45b7c25265193c801b0a52",
+  "stderrSha256": "2bf4193041979f6975d81c964571f58ff4537564780fc7cba43108d20ed346ae",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

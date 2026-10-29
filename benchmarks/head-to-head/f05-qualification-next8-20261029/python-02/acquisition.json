@@ -1,0 +1,80 @@
+{
+  "task": {
+    "id": "python-02",
+    "repository": "github.com/home-assistant/core",
+    "revision": "cde3969919b9bd540b2dd75b7aa84a908acbdbfe",
+    "ecosystem": "Python",
+    "scope": "component",
+    "startingState": "local-checkout",
+    "component": "homeassistant",
+    "request": "requests/python-02.md",
+    "gold": "curator/gold/python-02.json",
+    "oracle": "curator/oracles/python-02.json",
+    "enrollmentRationale": "Literal lexical non-root package-path selection: the root manifest establishes the owned primary package homeassistant before narrower subpackages. Package location does not establish a separate component test instruction or component-only coverage."
+  },
+  "state": "source-acquired",
+  "indexConsulted": false,
+  "modelCalls": 0,
+  "upstreamProjectCodeExecuted": false,
+  "costUsd": null,
+  "sourceAcquisitionLimits": {
+    "compressedBytes": 536870912,
+    "expandedSourceBytes": 1073741824,
+    "expandedTrancheBytes": 2147483648,
+    "fileBytes": 134217728,
+    "filesTranche": 200000
+  },
+  "costExclusions": [
+    "No metered host/container/download charge source."
+  ],
+  "scratch": "/tmp/dotrepo-f05-qualification-next8-20261029/python-02",
+  "partialExpandedBytes": 222688313,
+  "compressedGitObjectBytes": 41152273,
+  "completeGitObjectsAcquired": true,
+  "sourceFiles": 30200,
+  "sourceBytes": 222688313,
+  "symlinks": {
+    ".agents/skills": {
+      "target": "../.claude/skills/",
+      "gitBlobSha": "2cd5a6932fa9cafc113a364399b01681e05423ce",
+      "sha256": "1be2cf524a320f8298d764df148b993da1d253b86b21e605ef9f06b83efcdd9c"
+    },
+    ".gemini/skills": {
+      "target": "../.claude/skills",
+      "gitBlobSha": "454b8427cd757f30dc7fdb9a325d19c399770417",
+      "sha256": "722a918d6dee037f575ef1bf214371f14f77047e71bd75cff39f182b2ba9f6b0"
+    },
+    "CLAUDE.md": {
+      "target": "AGENTS.md",
+      "gitBlobSha": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+      "sha256": "a54ff182c7e8acf56acfd6e4b9c3ff41e2c41a31c9b211b2deb9df75d9a478f9"
+    }
+  },
+  "missingSubmodules": {},
+  "missingLfsObjects": [],
+  "frozenInspectedFilesMatched": [
+    "README.rst",
+    "CONTRIBUTING.md",
+    "pyproject.toml",
+    "homeassistant/components/3_day_blinds/manifest.json",
+    ".python-version",
+    "requirements_test.txt",
+    "script/setup",
+    "homeassistant/components/abode/manifest.json",
+    "tests/components/abode/test_init.py",
+    "script/bootstrap",
+    "AGENTS.md",
+    "requirements_all.txt",
+    ".vscode/tasks.json",
+    "homeassistant/components/abode/__init__.py",
+    "homeassistant/__init__.py"
+  ],
+  "archivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/python-02/source.tar",
+  "archiveSha256": "6fe6c3084bc31e1f782696dc588cc55d61d1dd93bda8daffcba85971159ce61b",
+  "archiveBytes": 246251520,
+  "compressedArchivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/python-02/source.tar.gz",
+  "compressedArchiveSha256": "06da3753138c16b0efc549c5f95605a7396df0be9b45c01031e725141636f371",
+  "compressedArchiveBytes": 32950955,
+  "sourceBundleReady": false,
+  "elapsedSeconds": 25.768586667021737
+}

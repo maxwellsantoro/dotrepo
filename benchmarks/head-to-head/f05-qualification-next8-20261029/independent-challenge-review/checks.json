@@ -1,0 +1,15 @@
+{
+  "curatorFreezeSha256": "23c4ac12f76d6c8bdb5e788ed22d88efa87a24b460cd790719ed2c46871892a3",
+  "curatorFilesVerified": 55,
+  "oracleControls": {
+    "positiveControls": 3,
+    "negativeControls": 11,
+    "status": "passed",
+    "limits": "Synthetic native-format controls establish rejection behavior; actual source/environment execution is separately required."
+  },
+  "ownNestedSkipRepro": {
+    "originalQualified": true,
+    "revisedQualified": false
+  },
+  "upstreamExecution": false
+}

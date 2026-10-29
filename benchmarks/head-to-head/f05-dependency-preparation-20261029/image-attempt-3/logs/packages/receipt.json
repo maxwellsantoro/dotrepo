@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-f05-common-control-8aa58c7cfb",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "dpkg-query -W -f='${Package}\\t${Version}\\t${Architecture}\\n'"
+  ],
+  "startedAt": "2026-10-29T06:54:37.720935+00:00",
+  "elapsedSeconds": 0.07151041715405881,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "63ad0b2c273e9b8fdf4475e360057226d346fb20c23683b83d3f429214eed101",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

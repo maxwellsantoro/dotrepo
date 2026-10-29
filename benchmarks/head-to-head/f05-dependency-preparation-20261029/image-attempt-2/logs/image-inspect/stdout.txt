@@ -1,0 +1,61 @@
+[
+    {
+        "Id": "sha256:ac1ef011a116232ea9fb6d0b534649a0cd298bbffeba25a5b124b37940568d75",
+        "RepoTags": [
+            "dotrepo-f05-common:20261029"
+        ],
+        "RepoDigests": [
+            "dotrepo-f05-common@sha256:ac1ef011a116232ea9fb6d0b534649a0cd298bbffeba25a5b124b37940568d75"
+        ],
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-10-29T06:51:02.69663418Z",
+        "Config": {
+            "User": "1000:1000",
+            "Env": [
+                "PATH=/usr/local/cargo/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "RUSTUP_HOME=/usr/local/rustup",
+                "CARGO_HOME=/usr/local/cargo",
+                "GOTOOLCHAIN=local",
+                "GOENV=off"
+            ],
+            "Entrypoint": [
+                "/bin/sh"
+            ],
+            "Cmd": [
+                "-c",
+                "while :; do sleep 3600; done"
+            ],
+            "WorkingDir": "/",
+            "ArgsEscaped": true
+        },
+        "Architecture": "arm64",
+        "Os": "linux",
+        "Size": 2707779316,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:83e93a43964f3c8392e01f7eadfd080c625d2b73b7e31fa471e8ab303ab4db84",
+                "sha256:99e0878542a4a014427aaf531fc24affd3a7a06e97292d699b33a9decab68ea3",
+                "sha256:3c7716308d3e831a59a3d803b722b8ae8622cc7523894e12a10c97d00fb23c54",
+                "sha256:b2ab582c3a53caa84d4c4c7702ec145820285f7afae6ceaaa212a359290f02e0",
+                "sha256:77a4d233f4295a77941fa3f2a79ea2c7cce651928d9757d66b46dcff858a9e76"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-10-29T06:51:49.153364841Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.index.v1+json",
+            "digest": "sha256:ac1ef011a116232ea9fb6d0b534649a0cd298bbffeba25a5b124b37940568d75",
+            "size": 856
+        },
+        "Identity": {
+            "Build": [
+                {
+                    "Ref": "1yio9zxd0469c7vjd91kqvgg8",
+                    "CreatedAt": "2026-10-29T06:52:08.379698419Z"
+                }
+            ]
+        }
+    }
+]

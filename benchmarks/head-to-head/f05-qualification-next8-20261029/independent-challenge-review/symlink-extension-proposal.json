@@ -1,0 +1,36 @@
+{
+  "scope": "Minimum internal source-only SourceBundle extension for the17actuallyretainedsymlinks; proposalonly, no runtimeimplementation or qualification.",
+  "currentState": "Regular-only admission must continue rejecting HA/Deepseek bundles until a new implementation and controls are frozen. Never drop/dereference links or claim unchanged source from a regular-file projection.",
+  "representation": {
+    "regularFiles": "Keep existing files bytes/inventoryhash/mode checks.",
+    "symlinks": "Add optional symlinks mapping normalized member path to exact relative target text/bytes, SHA256 and GitblobSHA; Gitmode120000. Preserve trailing slash and all exact bytes for identity.",
+    "archiveIdentity": "Continue binding original source revision/fullarchive/inventory/provenance and GitMerkle root including linkblobsha, rather than hashing materializedtargetbytes aslinkbytes.",
+    "sourceReads": "Expose linktype/target metadata through source-read API or a separately bounded logical resolver; never followhostfilesystemlinks. Checkout materializes actual symlinks inside container."
+  },
+  "admissionInvariants": [
+    "Reject absolute/drive/backslash/NUL/control targets; allow relative .. only when full logical resolution stays inside repository root, not merely inside /workspace. Actual17include legitimate .. targets.",
+    "Resolve chains against the complete frozen logical member inventory, with bounded hops/cycle detection; require finaltargetexistsasretainedregularfile orimplicitdirectory for this minimumextension. All17actualtargets exist.",
+    "Reject any archive member whose ancestor path is a symlink, duplicate/conflicting file/link/directory definitions, and links replacing regularfiles. This prevents extraction-order overwrites/aliasredirection.",
+    "Retain existing ban on hardlinks/devices/FIFOs/sockets, tar traversal and unsafe metadata. No arbitrary linktarget can reach hostpaths or sibling dependency-cache.",
+    "Validate all regular-file content against protected gold/profile/source policy before link admission; links may expose only alreadyvalidated source namespace.",
+    "Fresh repository directory; extract validated regularfiles/directories first and create validated symlinks last, entirely inside container asnonroot. No hostmaterialization/linkfollowing.",
+    "Count linktargetbytes, linkcount, filecount and expandedregularbytes against explicitbounds; no unboundedfanout/transitiveexpansion.",
+    "Keep dependency-cache bundles regular-only for minimalchange; do not implicitly enable symlinks there merely because they reuseSourceBundle.",
+    "Both arms receive identical source bytes/links; checkout remainsoncepersession, existing access/gold separation and costaccounting remainbinding."
+  ],
+  "requiredFutureControls": [
+    "All17actualtargets and exacttargettext/mode/Merklehashroundtrip; directoryaliases and contained .. acceptedwithoutflattening.",
+    "Absolute/drive/escaping../siblingcachetarget rejected.",
+    "Broken/chainedcycle/ancestorcycle andlinkancestorarchivewrite rejected.",
+    "Duplicate file/link andhardlink/device target rejected.",
+    "Protected-content alias via containedtarget rejected by regularsourcechecks.",
+    "Freshnonrootcontainermaterialization preserves readlink target and regular-filemodes; independentlyconfirm cleanup.",
+    "Source-readAPI never follows host symlink; reportlinkmetadata orboundedlogicaltargeterror.",
+    "Existing regular-only source/cache controls unchanged; declarationofsupportonlyafternewsource/runtime/freeze/controlreceipt."
+  ],
+  "remainingUncertainty": [
+    "Container filesystem semantics and source-read behavior require implementation tests; inventoryanalysis alone isnotqualification.",
+    "Actual17links aremaintaineragentinstructions andsnapshotfixtures; nonewas omittedforperceivedlackoftestimportance.",
+    "No general support for arbitrarysymlinktopologies, Windowssemantics or networkfilesystems isclaimed."
+  ]
+}

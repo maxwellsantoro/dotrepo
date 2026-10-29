@@ -1,0 +1,328 @@
+FFFF                                                                     [100%]
+=================================== FAILURES ===================================
+___ test_reserialized_hidden_answer_is_rejected_before_session_load[0-gold] ____
+
+campaign = (PosixPath('/private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/pytest-of-maxwell/pytest-254/test_reserialized_hi..., 'monetaryUsd': 1, 'outputTokens': 10000, 'toolCalls': 100, ...}, 'cacheState': 'cold', 'campaignBudgetUsd': 72, ...})
+session = ({'arm': 'source-first', 'artifacts': {'runtime': {'path': 'runtime.json', 'sha256': 'cccccccccccccccccccccccccccccccc...d8e8199bc2de6557569250b8f56301a07ab9', dependency_cache=None, preparation_sha256=None, symlinks={}, resolved_links={}))
+tmp_path = PosixPath('/private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/pytest-of-maxwell/pytest-254/test_reserialized_hidden_answe0')
+role = 'gold', task_index = 0
+
+    @pytest.mark.parametrize("role", ["gold", "oracle"])
+    @pytest.mark.parametrize("task_index", [0, 1])
+    def test_reserialized_hidden_answer_is_rejected_before_session_load(
+        campaign, session, tmp_path, role, task_index
+    ):
+        path, manifest = campaign
+        task, protected_task = manifest["tasks"][0], manifest["tasks"][task_index]
+        # The artifact's original serialization need not be the runner's canonical
+        # encoding. Protect every task's answers, including another task's artifact.
+        protected = b'{ "answer": "PRIVATE EVALUATOR DATA", "role": "' + role.encode() + b'" }'
+        protected_task[role] = write(tmp_path, f"protected-{role}.json", protected)
+        source_bytes = json.dumps(json.loads(protected), separators=(",", ":")).encode()
+        assert not runtime.content_digests(source_bytes) & {experiment.digest(protected)}
+        spec = bundle_spec(tmp_path, {"README.md": source_bytes}, task["revision"])
+        config = deepcopy(session[1])
+        config["sourceBundles"] = {task["repository"]: spec}
+        manifest["artifacts"]["runtime"] = write(tmp_path, "runtime.json", config)
+        save(campaign)
+        out = tmp_path / "prepared"
+        experiment.prepare(path, out)
+        with pytest.raises(ValueError, match="aliases hidden/protected"):
+>           runtime.load_session(path, out / "assignment.json", f"{task['id']}-r1-source-first")
+
+scripts/tests/test_agent_runtime.py:1000: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+benchmarks/head-to-head/bench/agent_runtime.py:480: in load_session
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+message = 'frozen responses must explicitly retain profile/absence objects'
+
+    def require(condition, message):
+        if not condition:
+>           raise ValueError(message)
+E           ValueError: frozen responses must explicitly retain profile/absence objects
+
+benchmarks/head-to-head/bench/agent_runtime.py:120: ValueError
+
+During handling of the above exception, another exception occurred:
+
+campaign = (PosixPath('/private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/pytest-of-maxwell/pytest-254/test_reserialized_hi..., 'monetaryUsd': 1, 'outputTokens': 10000, 'toolCalls': 100, ...}, 'cacheState': 'cold', 'campaignBudgetUsd': 72, ...})
+session = ({'arm': 'source-first', 'artifacts': {'runtime': {'path': 'runtime.json', 'sha256': 'cccccccccccccccccccccccccccccccc...d8e8199bc2de6557569250b8f56301a07ab9', dependency_cache=None, preparation_sha256=None, symlinks={}, resolved_links={}))
+tmp_path = PosixPath('/private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/pytest-of-maxwell/pytest-254/test_reserialized_hidden_answe0')
+role = 'gold', task_index = 0
+
+    @pytest.mark.parametrize("role", ["gold", "oracle"])
+    @pytest.mark.parametrize("task_index", [0, 1])
+    def test_reserialized_hidden_answer_is_rejected_before_session_load(
+        campaign, session, tmp_path, role, task_index
+    ):
+        path, manifest = campaign
+        task, protected_task = manifest["tasks"][0], manifest["tasks"][task_index]
+        # The artifact's original serialization need not be the runner's canonical
+        # encoding. Protect every task's answers, including another task's artifact.
+        protected = b'{ "answer": "PRIVATE EVALUATOR DATA", "role": "' + role.encode() + b'" }'
+        protected_task[role] = write(tmp_path, f"protected-{role}.json", protected)
+        source_bytes = json.dumps(json.loads(protected), separators=(",", ":")).encode()
+        assert not runtime.content_digests(source_bytes) & {experiment.digest(protected)}
+        spec = bundle_spec(tmp_path, {"README.md": source_bytes}, task["revision"])
+        config = deepcopy(session[1])
+        config["sourceBundles"] = {task["repository"]: spec}
+        manifest["artifacts"]["runtime"] = write(tmp_path, "runtime.json", config)
+        save(campaign)
+        out = tmp_path / "prepared"
+        experiment.prepare(path, out)
+>       with pytest.raises(ValueError, match="aliases hidden/protected"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E        Regex: 'aliases hidden/protected'
+E        Input: 'frozen responses must explicitly retain profile/absence objects'
+
+scripts/tests/test_agent_runtime.py:999: AssertionError
+__ test_reserialized_hidden_answer_is_rejected_before_session_load[0-oracle] ___
+
+campaign = (PosixPath('/private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/pytest-of-maxwell/pytest-254/test_reserialized_hi..., 'monetaryUsd': 1, 'outputTokens': 10000, 'toolCalls': 100, ...}, 'cacheState': 'cold', 'campaignBudgetUsd': 72, ...})
+session = ({'arm': 'source-first', 'artifacts': {'runtime': {'path': 'runtime.json', 'sha256': 'cccccccccccccccccccccccccccccccc...d8e8199bc2de6557569250b8f56301a07ab9', dependency_cache=None, preparation_sha256=None, symlinks={}, resolved_links={}))
+tmp_path = PosixPath('/private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/pytest-of-maxwell/pytest-254/test_reserialized_hidden_answe1')
+role = 'oracle', task_index = 0
+
+    @pytest.mark.parametrize("role", ["gold", "oracle"])
+    @pytest.mark.parametrize("task_index", [0, 1])
+    def test_reserialized_hidden_answer_is_rejected_before_session_load(
+        campaign, session, tmp_path, role, task_index
+    ):
+        path, manifest = campaign
+        task, protected_task = manifest["tasks"][0], manifest["tasks"][task_index]
+        # The artifact's original serialization need not be the runner's canonical
+        # encoding. Protect every task's answers, including another task's artifact.
+        protected = b'{ "answer": "PRIVATE EVALUATOR DATA", "role": "' + role.encode() + b'" }'
+        protected_task[role] = write(tmp_path, f"protected-{role}.json", protected)
+        source_bytes = json.dumps(json.loads(protected), separators=(",", ":")).encode()
+        assert not runtime.content_digests(source_bytes) & {experiment.digest(protected)}
+        spec = bundle_spec(tmp_path, {"README.md": source_bytes}, task["revision"])
+        config = deepcopy(session[1])
+        config["sourceBundles"] = {task["repository"]: spec}
+        manifest["artifacts"]["runtime"] = write(tmp_path, "runtime.json", config)
+        save(campaign)
+        out = tmp_path / "prepared"
+        experiment.prepare(path, out)
+        with pytest.raises(ValueError, match="aliases hidden/protected"):
+>           runtime.load_session(path, out / "assignment.json", f"{task['id']}-r1-source-first")
+
+scripts/tests/test_agent_runtime.py:1000: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+benchmarks/head-to-head/bench/agent_runtime.py:480: in load_session
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+message = 'frozen responses must explicitly retain profile/absence objects'
+
+    def require(condition, message):
+        if not condition:
+>           raise ValueError(message)
+E           ValueError: frozen responses must explicitly retain profile/absence objects
+
+benchmarks/head-to-head/bench/agent_runtime.py:120: ValueError
+
+During handling of the above exception, another exception occurred:
+
+campaign = (PosixPath('/private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/pytest-of-maxwell/pytest-254/test_reserialized_hi..., 'monetaryUsd': 1, 'outputTokens': 10000, 'toolCalls': 100, ...}, 'cacheState': 'cold', 'campaignBudgetUsd': 72, ...})
+session = ({'arm': 'source-first', 'artifacts': {'runtime': {'path': 'runtime.json', 'sha256': 'cccccccccccccccccccccccccccccccc...d8e8199bc2de6557569250b8f56301a07ab9', dependency_cache=None, preparation_sha256=None, symlinks={}, resolved_links={}))
+tmp_path = PosixPath('/private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/pytest-of-maxwell/pytest-254/test_reserialized_hidden_answe1')
+role = 'oracle', task_index = 0
+
+    @pytest.mark.parametrize("role", ["gold", "oracle"])
+    @pytest.mark.parametrize("task_index", [0, 1])
+    def test_reserialized_hidden_answer_is_rejected_before_session_load(
+        campaign, session, tmp_path, role, task_index
+    ):
+        path, manifest = campaign
+        task, protected_task = manifest["tasks"][0], manifest["tasks"][task_index]
+        # The artifact's original serialization need not be the runner's canonical
+        # encoding. Protect every task's answers, including another task's artifact.
+        protected = b'{ "answer": "PRIVATE EVALUATOR DATA", "role": "' + role.encode() + b'" }'
+        protected_task[role] = write(tmp_path, f"protected-{role}.json", protected)
+        source_bytes = json.dumps(json.loads(protected), separators=(",", ":")).encode()
+        assert not runtime.content_digests(source_bytes) & {experiment.digest(protected)}
+        spec = bundle_spec(tmp_path, {"README.md": source_bytes}, task["revision"])
+        config = deepcopy(session[1])
+        config["sourceBundles"] = {task["repository"]: spec}
+        manifest["artifacts"]["runtime"] = write(tmp_path, "runtime.json", config)
+        save(campaign)
+        out = tmp_path / "prepared"
+        experiment.prepare(path, out)
+>       with pytest.raises(ValueError, match="aliases hidden/protected"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E        Regex: 'aliases hidden/protected'
+E        Input: 'frozen responses must explicitly retain profile/absence objects'
+
+scripts/tests/test_agent_runtime.py:999: AssertionError
+___ test_reserialized_hidden_answer_is_rejected_before_session_load[1-gold] ____
+
+campaign = (PosixPath('/private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/pytest-of-maxwell/pytest-254/test_reserialized_hi..., 'monetaryUsd': 1, 'outputTokens': 10000, 'toolCalls': 100, ...}, 'cacheState': 'cold', 'campaignBudgetUsd': 72, ...})
+session = ({'arm': 'source-first', 'artifacts': {'runtime': {'path': 'runtime.json', 'sha256': 'cccccccccccccccccccccccccccccccc...d8e8199bc2de6557569250b8f56301a07ab9', dependency_cache=None, preparation_sha256=None, symlinks={}, resolved_links={}))
+tmp_path = PosixPath('/private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/pytest-of-maxwell/pytest-254/test_reserialized_hidden_answe2')
+role = 'gold', task_index = 1
+
+    @pytest.mark.parametrize("role", ["gold", "oracle"])
+    @pytest.mark.parametrize("task_index", [0, 1])
+    def test_reserialized_hidden_answer_is_rejected_before_session_load(
+        campaign, session, tmp_path, role, task_index
+    ):
+        path, manifest = campaign
+        task, protected_task = manifest["tasks"][0], manifest["tasks"][task_index]
+        # The artifact's original serialization need not be the runner's canonical
+        # encoding. Protect every task's answers, including another task's artifact.
+        protected = b'{ "answer": "PRIVATE EVALUATOR DATA", "role": "' + role.encode() + b'" }'
+        protected_task[role] = write(tmp_path, f"protected-{role}.json", protected)
+        source_bytes = json.dumps(json.loads(protected), separators=(",", ":")).encode()
+        assert not runtime.content_digests(source_bytes) & {experiment.digest(protected)}
+        spec = bundle_spec(tmp_path, {"README.md": source_bytes}, task["revision"])
+        config = deepcopy(session[1])
+        config["sourceBundles"] = {task["repository"]: spec}
+        manifest["artifacts"]["runtime"] = write(tmp_path, "runtime.json", config)
+        save(campaign)
+        out = tmp_path / "prepared"
+        experiment.prepare(path, out)
+        with pytest.raises(ValueError, match="aliases hidden/protected"):
+>           runtime.load_session(path, out / "assignment.json", f"{task['id']}-r1-source-first")
+
+scripts/tests/test_agent_runtime.py:1000: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+benchmarks/head-to-head/bench/agent_runtime.py:480: in load_session
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+message = 'frozen responses must explicitly retain profile/absence objects'
+
+    def require(condition, message):
+        if not condition:
+>           raise ValueError(message)
+E           ValueError: frozen responses must explicitly retain profile/absence objects
+
+benchmarks/head-to-head/bench/agent_runtime.py:120: ValueError
+
+During handling of the above exception, another exception occurred:
+
+campaign = (PosixPath('/private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/pytest-of-maxwell/pytest-254/test_reserialized_hi..., 'monetaryUsd': 1, 'outputTokens': 10000, 'toolCalls': 100, ...}, 'cacheState': 'cold', 'campaignBudgetUsd': 72, ...})
+session = ({'arm': 'source-first', 'artifacts': {'runtime': {'path': 'runtime.json', 'sha256': 'cccccccccccccccccccccccccccccccc...d8e8199bc2de6557569250b8f56301a07ab9', dependency_cache=None, preparation_sha256=None, symlinks={}, resolved_links={}))
+tmp_path = PosixPath('/private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/pytest-of-maxwell/pytest-254/test_reserialized_hidden_answe2')
+role = 'gold', task_index = 1
+
+    @pytest.mark.parametrize("role", ["gold", "oracle"])
+    @pytest.mark.parametrize("task_index", [0, 1])
+    def test_reserialized_hidden_answer_is_rejected_before_session_load(
+        campaign, session, tmp_path, role, task_index
+    ):
+        path, manifest = campaign
+        task, protected_task = manifest["tasks"][0], manifest["tasks"][task_index]
+        # The artifact's original serialization need not be the runner's canonical
+        # encoding. Protect every task's answers, including another task's artifact.
+        protected = b'{ "answer": "PRIVATE EVALUATOR DATA", "role": "' + role.encode() + b'" }'
+        protected_task[role] = write(tmp_path, f"protected-{role}.json", protected)
+        source_bytes = json.dumps(json.loads(protected), separators=(",", ":")).encode()
+        assert not runtime.content_digests(source_bytes) & {experiment.digest(protected)}
+        spec = bundle_spec(tmp_path, {"README.md": source_bytes}, task["revision"])
+        config = deepcopy(session[1])
+        config["sourceBundles"] = {task["repository"]: spec}
+        manifest["artifacts"]["runtime"] = write(tmp_path, "runtime.json", config)
+        save(campaign)
+        out = tmp_path / "prepared"
+        experiment.prepare(path, out)
+>       with pytest.raises(ValueError, match="aliases hidden/protected"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E        Regex: 'aliases hidden/protected'
+E        Input: 'frozen responses must explicitly retain profile/absence objects'
+
+scripts/tests/test_agent_runtime.py:999: AssertionError
+__ test_reserialized_hidden_answer_is_rejected_before_session_load[1-oracle] ___
+
+campaign = (PosixPath('/private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/pytest-of-maxwell/pytest-254/test_reserialized_hi..., 'monetaryUsd': 1, 'outputTokens': 10000, 'toolCalls': 100, ...}, 'cacheState': 'cold', 'campaignBudgetUsd': 72, ...})
+session = ({'arm': 'source-first', 'artifacts': {'runtime': {'path': 'runtime.json', 'sha256': 'cccccccccccccccccccccccccccccccc...d8e8199bc2de6557569250b8f56301a07ab9', dependency_cache=None, preparation_sha256=None, symlinks={}, resolved_links={}))
+tmp_path = PosixPath('/private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/pytest-of-maxwell/pytest-254/test_reserialized_hidden_answe3')
+role = 'oracle', task_index = 1
+
+    @pytest.mark.parametrize("role", ["gold", "oracle"])
+    @pytest.mark.parametrize("task_index", [0, 1])
+    def test_reserialized_hidden_answer_is_rejected_before_session_load(
+        campaign, session, tmp_path, role, task_index
+    ):
+        path, manifest = campaign
+        task, protected_task = manifest["tasks"][0], manifest["tasks"][task_index]
+        # The artifact's original serialization need not be the runner's canonical
+        # encoding. Protect every task's answers, including another task's artifact.
+        protected = b'{ "answer": "PRIVATE EVALUATOR DATA", "role": "' + role.encode() + b'" }'
+        protected_task[role] = write(tmp_path, f"protected-{role}.json", protected)
+        source_bytes = json.dumps(json.loads(protected), separators=(",", ":")).encode()
+        assert not runtime.content_digests(source_bytes) & {experiment.digest(protected)}
+        spec = bundle_spec(tmp_path, {"README.md": source_bytes}, task["revision"])
+        config = deepcopy(session[1])
+        config["sourceBundles"] = {task["repository"]: spec}
+        manifest["artifacts"]["runtime"] = write(tmp_path, "runtime.json", config)
+        save(campaign)
+        out = tmp_path / "prepared"
+        experiment.prepare(path, out)
+        with pytest.raises(ValueError, match="aliases hidden/protected"):
+>           runtime.load_session(path, out / "assignment.json", f"{task['id']}-r1-source-first")
+
+scripts/tests/test_agent_runtime.py:1000: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+benchmarks/head-to-head/bench/agent_runtime.py:480: in load_session
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+message = 'frozen responses must explicitly retain profile/absence objects'
+
+    def require(condition, message):
+        if not condition:
+>           raise ValueError(message)
+E           ValueError: frozen responses must explicitly retain profile/absence objects
+
+benchmarks/head-to-head/bench/agent_runtime.py:120: ValueError
+
+During handling of the above exception, another exception occurred:
+
+campaign = (PosixPath('/private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/pytest-of-maxwell/pytest-254/test_reserialized_hi..., 'monetaryUsd': 1, 'outputTokens': 10000, 'toolCalls': 100, ...}, 'cacheState': 'cold', 'campaignBudgetUsd': 72, ...})
+session = ({'arm': 'source-first', 'artifacts': {'runtime': {'path': 'runtime.json', 'sha256': 'cccccccccccccccccccccccccccccccc...d8e8199bc2de6557569250b8f56301a07ab9', dependency_cache=None, preparation_sha256=None, symlinks={}, resolved_links={}))
+tmp_path = PosixPath('/private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/pytest-of-maxwell/pytest-254/test_reserialized_hidden_answe3')
+role = 'oracle', task_index = 1
+
+    @pytest.mark.parametrize("role", ["gold", "oracle"])
+    @pytest.mark.parametrize("task_index", [0, 1])
+    def test_reserialized_hidden_answer_is_rejected_before_session_load(
+        campaign, session, tmp_path, role, task_index
+    ):
+        path, manifest = campaign
+        task, protected_task = manifest["tasks"][0], manifest["tasks"][task_index]
+        # The artifact's original serialization need not be the runner's canonical
+        # encoding. Protect every task's answers, including another task's artifact.
+        protected = b'{ "answer": "PRIVATE EVALUATOR DATA", "role": "' + role.encode() + b'" }'
+        protected_task[role] = write(tmp_path, f"protected-{role}.json", protected)
+        source_bytes = json.dumps(json.loads(protected), separators=(",", ":")).encode()
+        assert not runtime.content_digests(source_bytes) & {experiment.digest(protected)}
+        spec = bundle_spec(tmp_path, {"README.md": source_bytes}, task["revision"])
+        config = deepcopy(session[1])
+        config["sourceBundles"] = {task["repository"]: spec}
+        manifest["artifacts"]["runtime"] = write(tmp_path, "runtime.json", config)
+        save(campaign)
+        out = tmp_path / "prepared"
+        experiment.prepare(path, out)
+>       with pytest.raises(ValueError, match="aliases hidden/protected"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E        Regex: 'aliases hidden/protected'
+E        Input: 'frozen responses must explicitly retain profile/absence objects'
+
+scripts/tests/test_agent_runtime.py:999: AssertionError
+=========================== short test summary info ============================
+FAILED scripts/tests/test_agent_runtime.py::test_reserialized_hidden_answer_is_rejected_before_session_load[0-gold]
+FAILED scripts/tests/test_agent_runtime.py::test_reserialized_hidden_answer_is_rejected_before_session_load[0-oracle]
+FAILED scripts/tests/test_agent_runtime.py::test_reserialized_hidden_answer_is_rejected_before_session_load[1-gold]
+FAILED scripts/tests/test_agent_runtime.py::test_reserialized_hidden_answer_is_rejected_before_session_load[1-oracle]
+4 failed, 116 deselected in 0.44s

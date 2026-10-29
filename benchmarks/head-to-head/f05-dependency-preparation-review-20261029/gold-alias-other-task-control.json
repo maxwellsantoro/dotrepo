@@ -1,0 +1,44 @@
+{
+  "runtimeSha256": "43fa2f0a18802564934646db5fa80e75c0ced3856b07df8b72d5a27fda2b84c3",
+  "results": [
+    {
+      "role": "gold",
+      "serialization": "raw",
+      "outcome": "rejected",
+      "reason": "source member aliases hidden/protected evaluation or access artifact",
+      "rawSha256": "c01288f81ac97ab3e0769c3f87cfe6e62e4131f3fbf921807ca60f8f9bd80bbe",
+      "sourceSha256": "c01288f81ac97ab3e0769c3f87cfe6e62e4131f3fbf921807ca60f8f9bd80bbe",
+      "canonicalSha256": "3b38d76323378a0b3f885b88996b60ef1713507255d9cb0552536e41d91d5dfe"
+    },
+    {
+      "role": "gold",
+      "serialization": "compact",
+      "outcome": "rejected",
+      "reason": "source member aliases hidden/protected evaluation or access artifact",
+      "rawSha256": "c01288f81ac97ab3e0769c3f87cfe6e62e4131f3fbf921807ca60f8f9bd80bbe",
+      "sourceSha256": "3975d160bc9c5938d9a2b1e2de8e59d467433a41c994b0aefeb87433d01091e5",
+      "canonicalSha256": "3b38d76323378a0b3f885b88996b60ef1713507255d9cb0552536e41d91d5dfe"
+    },
+    {
+      "role": "oracle",
+      "serialization": "raw",
+      "outcome": "rejected",
+      "reason": "source member aliases hidden/protected evaluation or access artifact",
+      "rawSha256": "f84cd4d432cef8668f3f3707f0c9ad051d03869e516621b1cf300bb133e6ec5c",
+      "sourceSha256": "f84cd4d432cef8668f3f3707f0c9ad051d03869e516621b1cf300bb133e6ec5c",
+      "canonicalSha256": "1b2a449683d1747e71ae131e29a3c3601af24f69b499a3ebdabb62ca35e33d4b"
+    },
+    {
+      "role": "oracle",
+      "serialization": "compact",
+      "outcome": "rejected",
+      "reason": "source member aliases hidden/protected evaluation or access artifact",
+      "rawSha256": "f84cd4d432cef8668f3f3707f0c9ad051d03869e516621b1cf300bb133e6ec5c",
+      "sourceSha256": "962c14d160f4e56000f03d5504191f42bdd44d86a8f2899ac29cfbda0576d1dc",
+      "canonicalSha256": "1b2a449683d1747e71ae131e29a3c3601af24f69b499a3ebdabb62ca35e33d4b"
+    }
+  ],
+  "hiddenOwner": "other-task",
+  "actualHiddenBodiesRead": false,
+  "backendOrProviderCalled": false
+}

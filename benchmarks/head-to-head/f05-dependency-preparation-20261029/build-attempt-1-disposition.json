@@ -1,0 +1,11 @@
+{
+  "state": "build-failed-before-copy",
+  "planSha256": "e11e44e5065713fc146b18eb81aaf10ff5d62ce4cbe5dcb43d2db43b9e4fb0a1",
+  "recipeSha256": "7f869f2b288589f1b00223e324e32228606fc519e68539177dcb39bf6bbac5d1",
+  "traceReceipt": "image/logs/build/receipt.json",
+  "cause": "BuildKit digest-qualified local names resolved through public Docker registry; pull access denied. No actual image layers or project dependency acquisition occurred.",
+  "followupPlanSha256": "24997edeee805dfaa52e12a0e535d912bca700519c7752930fadc7052d275687",
+  "oldImagesMutated": false,
+  "upstreamExecution": false,
+  "costUsd": null
+}

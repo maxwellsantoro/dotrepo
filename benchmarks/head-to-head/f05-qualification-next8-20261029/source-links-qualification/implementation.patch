@@ -1,0 +1,696 @@
+diff --git a/benchmarks/head-to-head/bench/agent_runtime.py b/benchmarks/head-to-head/bench/agent_runtime.py
+index 28e05e4a..2ce9910b 100644
+--- a/benchmarks/head-to-head/bench/agent_runtime.py
++++ b/benchmarks/head-to-head/bench/agent_runtime.py
+@@ -5,8 +5,13 @@ networkPolicy=none, cacheState=cold or frozen-warm; explicit resources, environm
+ maxToolOutputBytes and maxProviderCalls; sourceBundles maps canonical repositories
+ onto {revision, archive, inventory, provenance} content bindings. Inventory is
+ {revision, files:{relativePath:sha256}, missingSubmodules:[], missingLfsObjects:[],
+-limitations:[]}. Archives contain only inventoried regular files/directories,
+-without links/devices/traversal or generated Git metadata. Provenance is retained
++limitations:[]}, optionally adding symlinks:{path:{target,sha256,gitBlobSha,mode}}.
++Inventoried relative symlinks preserve exact UTF-8 target bytes and Git mode120000;
++complete-tree resolution rejects escaping, dangling, cyclic and ancestor-write
++namespaces. Source reads expose link metadata without host traversal. Checkout
++copies regular members first, then actual links into a fresh container directory.
++Dependency caches remain strictly regular-only. Devices/hardlinks are forbidden.
++Provenance bindings check consistency, not authenticity. Provenance is retained
+ upstream evidence, not inferred from a directory name. The image must contain
+ only qualified dependencies, never gold, profiles, credentials or task sources.
+ 
+@@ -55,7 +60,9 @@ https://docs.docker.com/engine/security/
+ from __future__ import annotations
+ 
+ import argparse
+-from dataclasses import dataclass
++from collections import deque
++from dataclasses import dataclass, field
++import hashlib
+ import io
+ import json
+ import math
+@@ -127,12 +134,19 @@ def numeric(value, *, integer=False):
+ 
+ 
+ def relative_path(value):
+-    require(isinstance(value, str) and value and "\\" not in value, "invalid source path")
++    require(
++        isinstance(value, str)
++        and value
++        and not any(c in value for c in "\\:")
++        and not any(ord(c) < 32 or 127 <= ord(c) < 160 for c in value),
++        "invalid source path",
++    )
+     path = PurePosixPath(value)
+     require(
+         not path.is_absolute() and all(p not in {"", ".", ".."} for p in value.split("/")),
+         "source path escapes bundle",
+     )
++    require(len(value.encode("utf-8")) <= 4096, "source path exceeds byte limit")
+     return value
+ 
+ 
+@@ -154,6 +168,87 @@ class SourceBundle:
+     provenance_sha256: str
+     dependency_cache: SourceBundle | None = None
+     preparation_sha256: str | None = None
++    symlinks: dict[str, dict] = field(default_factory=dict)
++    resolved_links: dict[str, dict] = field(default_factory=dict)
++
++
++def source_link_targets(files, links, directories):
++    """Resolve POSIX components against a complete logical tree, never host paths."""
++    kinds = {name: "directory" for name in directories | {""}}
++    kinds.update(dict.fromkeys(files, "regular"))
++    kinds.update(dict.fromkeys(links, "symlink"))
++    for name in files.keys() | links.keys() | directories:
++        parts = name.split("/")
++        for end in range(1, len(parts)):
++            parent = "/".join(parts[:end])
++            require(kinds.get(parent) in {None, "directory"}, "source member under non-directory")
++            kinds[parent] = "directory"
++            require(len(kinds) <= 200000, "source logical member count exceeds limit")
++
++    resolved = {}
++    for name, link in links.items():
++        stack, pending = name.split("/")[:-1], deque(link["target"].split("/"))
++        hops = 0
++        while pending:
++            require(kinds["/".join(stack)] == "directory", "source link traverses regular file")
++            part = pending.popleft()
++            if part in {"", "."}:
++                continue
++            if part == "..":
++                require(stack, "source link escapes repository")
++                stack.pop()
++                continue
++            candidate = "/".join([*stack, part])
++            require(candidate in kinds, "dangling source link")
++            if candidate in links:
++                hops += 1
++                require(hops <= 40, "source link cycle or hop limit")
++                pending.extendleft(reversed(links[candidate]["target"].split("/")))
++            else:
++                stack.append(part)
++        target = "/".join(stack)
++        resolved[name] = {"path": target, "type": kinds[target]}
++
++    # Also refuse directory alias cycles (including aliases back to ancestors).
++    # Such links can resolve once but produce recursive namespace traversal.
++    edges = {name: set() for name, kind in kinds.items() if kind == "directory"}
++    for name in edges:
++        if name:
++            edges[name.rpartition("/")[0]].add(name)
++    for name, target in resolved.items():
++        if target["type"] == "directory":
++            edges[name.rpartition("/")[0]].add(target["path"])
++    incoming = dict.fromkeys(edges, 0)
++    for children in edges.values():
++        for child in children:
++            incoming[child] += 1
++    ready = deque(name for name, count in incoming.items() if not count)
++    visited = 0
++    while ready:
++        visited += 1
++        for child in edges[ready.popleft()]:
++            incoming[child] -= 1
++            if not incoming[child]:
++                ready.append(child)
++    require(visited == len(edges), "source directory link cycle")
++    return resolved
++
++
++def source_read(bundle, path):
++    """Bounded by the caller; links expose metadata, never host dereferences."""
++    if path == "":
++        if not bundle.symlinks:
++            return experiment.encode(sorted(bundle.files))
++        return experiment.encode(
++            [{"path": name, "type": "regular"} for name in sorted(bundle.files)]
++            + [{"path": name, "type": "symlink"} for name in sorted(bundle.symlinks)]
++        )
++    path = relative_path(path)
++    if path in bundle.symlinks:
++        return experiment.encode(
++            {"type": "symlink", **bundle.symlinks[path], "resolved": bundle.resolved_links[path]}
++        )
++    return bundle.files[path]
+ 
+ 
+ def dependency_cache(root, spec, request, source, hidden, max_bytes):
+@@ -211,7 +306,9 @@ def dependency_cache(root, spec, request, source, hidden, max_bytes):
+         and all(isinstance(item, str) for item in preparation["limitations"]),
+         "dependency preparation must retain tools and limitations",
+     )
+-    cache = source_bundle(root, spec["bundle"], request["task"]["revision"], hidden, max_bytes)
++    cache = source_bundle(
++        root, spec["bundle"], request["task"]["revision"], hidden, max_bytes, allow_symlinks=False
++    )
+     prefixes = ("cargo/registry/", "cargo/git/", "go/pkg/mod/", "npm-cache/_cacache/", "uv-cache/")
+     require(
+         all(path.startswith(prefixes) for path in cache.files),
+@@ -219,6 +316,7 @@ def dependency_cache(root, spec, request, source, hidden, max_bytes):
+     )
+     require(
+         sum(len(raw) for raw in source.files.values())
++        + sum(len(link["target"].encode()) for link in source.symlinks.values())
+         + sum(len(raw) for raw in cache.files.values())
+         <= max_bytes,
+         "source and dependency cache exceed workspace byte limit",
+@@ -227,7 +325,7 @@ def dependency_cache(root, spec, request, source, hidden, max_bytes):
+     return cache
+ 
+ 
+-def source_bundle(root, spec, revision, hidden_hashes, max_bytes):
++def source_bundle(root, spec, revision, hidden_hashes, max_bytes, *, allow_symlinks=True):
+     require(
+         set(spec) == {"revision", "archive", "inventory", "provenance"}, "invalid source bundle"
+     )
+@@ -254,10 +352,18 @@ def source_bundle(root, spec, revision, hidden_hashes, max_bytes):
+         "source provenance needs upstream locator",
+     )
+     experiment.timestamp(provenance["checkedAt"])
+-    inventory = json.loads(blobs["inventory"])
++
++    def unique_object(pairs):
++        result = {}
++        for key, value in pairs:
++            require(key not in result, "duplicate source inventory key")
++            result[key] = value
++        return result
++
++    inventory = json.loads(blobs["inventory"], object_pairs_hook=unique_object)
++    inventory_keys = {"revision", "files", "missingSubmodules", "missingLfsObjects", "limitations"}
+     require(
+-        set(inventory)
+-        == {"revision", "files", "missingSubmodules", "missingLfsObjects", "limitations"},
++        set(inventory) in (inventory_keys, inventory_keys | {"symlinks"}),
+         "source inventory must declare omissions and limitations",
+     )
+     require(inventory["revision"] == revision, "inventory revision differs from task")
+@@ -267,21 +373,73 @@ def source_bundle(root, spec, revision, hidden_hashes, max_bytes):
+             "source omissions must remain explicit",
+         )
+     require(isinstance(inventory["files"], dict) and inventory["files"], "empty source inventory")
++    links = inventory.get("symlinks", {})
++    require(isinstance(links, dict) and len(links) <= 1024, "invalid source symlink inventory")
++    require(allow_symlinks or not links, "dependency cache links are forbidden")
++    require(not inventory["files"].keys() & links.keys(), "conflicting source file/link inventory")
++    for name, link in links.items():
++        relative_path(name)
++        require(
++            isinstance(link, dict) and set(link) == {"target", "sha256", "gitBlobSha", "mode"},
++            "invalid source symlink entry",
++        )
++        target = link["target"]
++        require(
++            isinstance(target, str)
++            and target
++            and not target.startswith("/")
++            and not any(c in target for c in "\\:")
++            and not any(ord(c) < 32 or 127 <= ord(c) < 160 for c in target),
++            "unsafe source link target",
++        )
++        try:
++            raw_target = target.encode("utf-8")
++        except UnicodeEncodeError as exc:
++            raise ValueError("invalid source link target encoding") from exc
++        require(len(raw_target) <= 4096, "source link target exceeds byte limit")
++        blob = b"blob " + str(len(raw_target)).encode() + b"\0" + raw_target
++        require(
++            link["mode"] == "120000"
++            and link["sha256"] == experiment.digest(raw_target)
++            and link["gitBlobSha"] == hashlib.sha1(blob).hexdigest(),
++            "source link target identity mismatch",
++        )
++        require(
++            not content_digests(raw_target) & hidden_hashes,
++            "source link aliases hidden/protected evaluation or access artifact",
++        )
+     require(len(blobs["archive"]) <= max_bytes, "archive exceeds workspace byte limit")
+-    files, total = {}, 0
++    files, directories, seen, seen_links, total = {}, set(), set(), set(), 0
+     with tarfile.open(fileobj=io.BytesIO(blobs["archive"]), mode="r:") as archive:
+         for member in archive:
+             name = member.name.rstrip("/")
+             relative_path(name)
+-            require(member.isdir() or member.isfile(), "source links/devices are forbidden")
++            require(member.isdir() or member.name == name, "noncanonical source member path")
++            require(name not in seen, "duplicate source member")
++            seen.add(name)
++            require(len(seen) <= 200000, "source member count exceeds limit")
++            require(member.mode & ~0o777 == 0, "unsafe source member permissions")
++            require(
++                member.isdir() or member.isfile() or (member.issym() and name in links),
++                "source links/devices are forbidden without exact link inventory",
++            )
+             if member.isdir():
++                directories.add(name)
+                 continue
+-            require(name not in files, "duplicate source member")
+-            total += member.size
++            if member.issym():
++                require(
++                    member.size == 0 and member.linkname == links[name]["target"],
++                    "source link archive mismatch",
++                )
++                seen_links.add(name)
++            size = len(member.linkname.encode()) if member.issym() else member.size
++            total += size
+             require(
+-                total <= max_bytes and member.size <= max_bytes,
++                total <= max_bytes and size <= max_bytes,
+                 "source exceeds workspace byte limit",
+             )
++            if member.issym():
++                continue
+             raw = archive.extractfile(member).read()
+             digest = experiment.digest(raw)
+             require(
+@@ -291,7 +449,17 @@ def source_bundle(root, spec, revision, hidden_hashes, max_bytes):
+             require(inventory["files"].get(name) == digest, "source file inventory hash mismatch")
+             files[name] = raw
+     require(set(files) == set(inventory["files"]), "source inventory missing/extra files")
+-    return SourceBundle(blobs["archive"], files, inventory, spec["provenance"]["sha256"])
++    require(seen_links == set(links), "source inventory missing/extra links")
++    require(not directories & (files.keys() | links.keys()), "conflicting source directory")
++    resolved = source_link_targets(files, links, directories)
++    return SourceBundle(
++        blobs["archive"],
++        files,
++        inventory,
++        spec["provenance"]["sha256"],
++        symlinks=links,
++        resolved_links=resolved,
++    )
+ 
+ 
+ def load_session(manifest_path, assignment_path, session_id):
+@@ -605,31 +773,72 @@ class DockerBackend:
+ 
+     def _extract(self, bundle, directory, timeout):
+         deadline = time.monotonic() + timeout
+-        result = self._call(["exec", self.name, "/bin/mkdir", "-p", directory], timeout)
++        copy = {
++            "originalArchiveSha256": experiment.digest(bundle.archive),
++            "archives": [],
++            "stdinBytes": 0,
++        }
++        # Refuse even a previous partial extraction; there is no merging or retry
++        # into an existing namespace containing model-created links.
++        result = self._call(["exec", self.name, "/bin/mkdir", directory], timeout)
+         if result["exitCode"] != 0:
+-            return result
+-        left = deadline - time.monotonic()
+-        if left <= 0:
+-            raise TimeoutError("source provisioning deadline")
+-        return self._call(
+-            [
+-                "exec",
+-                "-i",
+-                self.name,
+-                "/bin/tar",
+-                "--extract",
+-                "--no-same-owner",
+-                "--no-same-permissions",
+-                "--directory=" + directory,
+-            ],
+-            left,
+-            data=bundle.archive,
+-        )
++            return {**result, "sourceCopy": copy}
++        phases = [("original-regular-only", bundle.archive)]
++        if bundle.symlinks:
++            phases = []
++            # Preserve archive member metadata and exact regular/link bytes;
++            # change only transport ordering, never dereference a link.
++            for link_phase in (False, True):
++                buffer = io.BytesIO()
++                with (
++                    tarfile.open(fileobj=io.BytesIO(bundle.archive), mode="r:") as original,
++                    tarfile.open(fileobj=buffer, mode="w") as transport,
++                ):
++                    for member in original:
++                        if member.issym() == link_phase:
++                            transport.addfile(
++                                member, original.extractfile(member) if member.isfile() else None
++                            )
++                phases.append(
++                    ("symlinks" if link_phase else "regular-directories", buffer.getvalue())
++                )
++        for kind, raw in phases:
++            left = deadline - time.monotonic()
++            if left <= 0:
++                return {
++                    "exitCode": None,
++                    "error": "timeout",
++                    "stdout": "",
++                    "stderr": "source provisioning deadline",
++                    "sourceCopy": copy,
++                }
++            copy["archives"].append(
++                {"kind": kind, "sha256": experiment.digest(raw), "stdinBytes": len(raw)}
++            )
++            copy["stdinBytes"] += len(raw)
++            result = self._call(
++                [
++                    "exec",
++                    "-i",
++                    self.name,
++                    "/bin/tar",
++                    "--extract",
++                    "--no-same-owner",
++                    "--no-same-permissions",
++                    "--directory=" + directory,
++                ],
++                left,
++                data=raw,
++            )
++            if result["exitCode"] != 0 or result.get("error"):
++                break
++        return {**result, "sourceCopy": copy}
+ 
+     def checkout(self, bundle, timeout):
+         return self._extract(bundle, "/workspace/repository", timeout)
+ 
+     def seed_dependencies(self, bundle, timeout):
++        require(not bundle.symlinks, "dependency cache links are forbidden")
+         return self._extract(bundle, "/workspace/dependency-cache", timeout)
+ 
+     def shell(self, command, timeout, output_limit):
+@@ -846,7 +1055,9 @@ def run_session(
+             },
+         )
+         if effort["decodedBytes"] is not None:
+-            effort["decodedBytes"] += len(bundle.archive)
++            effort["decodedBytes"] += result.get("sourceCopy", {}).get(
++                "stdinBytes", len(bundle.archive)
++            )
+         checked_out = result["exitCode"] == 0 and not result.get("error")
+         return result
+ 
+@@ -868,7 +1079,9 @@ def run_session(
+                 },
+             )
+             if effort["decodedBytes"] is not None:
+-                effort["decodedBytes"] += len(cache.archive)
++                effort["decodedBytes"] += seeded.get("sourceCopy", {}).get(
++                    "stdinBytes", len(cache.archive)
++                )
+             require(
+                 seeded["exitCode"] == 0 and not seeded.get("error"),
+                 "dependency cache provisioning failed",
+@@ -1016,11 +1229,7 @@ def run_session(
+                     elif name == "read_upstream":
+                         require(set(arguments) == {"path"}, "invalid source request")
+                         name_in_archive = arguments["path"]
+-                        raw = (
+-                            experiment.encode(sorted(bundle.files))
+-                            if name_in_archive == ""
+-                            else bundle.files[relative_path(name_in_archive)]
+-                        )
++                        raw = source_read(bundle, name_in_archive)
+                         result = {
+                             "content": raw[: config["maxToolOutputBytes"]].decode(errors="replace"),
+                             "truncated": len(raw) > config["maxToolOutputBytes"],
+diff --git a/scripts/tests/test_agent_runtime.py b/scripts/tests/test_agent_runtime.py
+index 57873ebf..4ff43a96 100644
+--- a/scripts/tests/test_agent_runtime.py
++++ b/scripts/tests/test_agent_runtime.py
+@@ -1027,3 +1027,276 @@ def test_mocked_native_http_array_response_is_accounted_without_retaining_author
+     assert result["effort"]["httpRequests"] == 1
+     assert result["effort"]["inputTokens"] is None and result["effort"]["providerCostUsd"] is None
+     assert "fixture-private-provider-key" not in (tmp_path / "run/trace.json").read_text()
++
++
++def symlink_spec(root, files, links, *, members=None, revision="a" * 40):
++    """Build a bound fixture without creating any host filesystem link."""
++    import hashlib
++
++    spec = bundle_spec(root, files, revision)
++    buffer = io.BytesIO()
++    with tarfile.open(fileobj=buffer, mode="w") as stream:
++        for name in members if members is not None else [*files, *links]:
++            item = tarfile.TarInfo(name)
++            if name in links:
++                item.type, item.linkname = tarfile.SYMTYPE, links[name]
++                item.mode = 0o777
++                stream.addfile(item)
++            else:
++                item.size = len(files[name])
++                item.mode = 0o755 if name.endswith(".sh") else 0o644
++                stream.addfile(item, io.BytesIO(files[name]))
++    spec["archive"] = write(root, "source.tar", buffer.getvalue())
++    inventory = experiment.read_json(root / spec["inventory"]["path"])
++    inventory["symlinks"] = {}
++    for name, target in links.items():
++        raw = target.encode()
++        inventory["symlinks"][name] = {
++            "target": target,
++            "sha256": experiment.digest(raw),
++            "gitBlobSha": hashlib.sha1(b"blob " + str(len(raw)).encode() + b"\0" + raw).hexdigest(),
++            "mode": "120000",
++        }
++    spec["inventory"] = write(root, "source-inventory.json", inventory)
++    provenance = experiment.read_json(root / spec["provenance"]["path"])
++    provenance["archiveSha256"] = spec["archive"]["sha256"]
++    spec["provenance"] = write(root, "source-provenance.json", provenance)
++    return spec
++
++
++def test_source_links_chains_dotdot_and_typed_reads_without_host_links(tmp_path):
++    spec = symlink_spec(
++        tmp_path,
++        {"data/readme": b"source", "data/run.sh": b"#!/bin/sh\n"},
++        {"links/data": "../data/", "README": "links/data/../data/readme"},
++    )
++    bundle = runtime.source_bundle(tmp_path, spec, "a" * 40, set(), 1000000)
++    assert bundle.resolved_links["README"] == {"path": "data/readme", "type": "regular"}
++    assert (
++        json.loads(runtime.source_read(bundle, "README"))["target"] == "links/data/../data/readme"
++    )
++    assert {r["type"] for r in json.loads(runtime.source_read(bundle, ""))} == {
++        "regular",
++        "symlink",
++    }
++    assert runtime.source_read(bundle, "data/readme") == b"source"
++    assert not (tmp_path / "README").exists()
++
++
++@pytest.mark.parametrize(
++    "files,links",
++    [
++        ({"safe/file": b"ok"}, {"alias": "safe", "bad": "alias/../../escape"}),
++        # Lexically x/y/../../file is contained, but y resolves one level
++        # shallower before '..' is applied, so actual resolution escapes.
++        ({"safe/file": b"ok", "file": b"ok"}, {"x/y": "../safe", "bad": "x/y/../../file"}),
++        ({"file": b"ok"}, {"a": "b", "b": "a"}),
++        ({"file": b"ok"}, {"a": "missing"}),
++        ({"file": b"ok"}, {"a/up": ".."}),
++        ({"a/file": b"ok", "b/file": b"ok"}, {"a/to-b": "../b", "b/to-a": "../a"}),
++        ({"file": b"ok"}, {"a": "file/../file"}),
++    ],
++)
++def test_source_links_reject_logical_escape_cycles_dangling_and_nondirectory(
++    tmp_path, files, links
++):
++    spec = symlink_spec(tmp_path, files, links)
++    with pytest.raises(ValueError, match="escapes|cycle|dangling|regular file"):
++        runtime.source_bundle(tmp_path, spec, "a" * 40, set(), 1000000)
++
++
++@pytest.mark.parametrize(
++    "target", ["/etc/passwd", "C:/host", "C:host", "a\\b", "a\x00b", "a\nb", "a\x85b"]
++)
++def test_source_links_reject_unsafe_targets(tmp_path, target):
++    spec = symlink_spec(tmp_path, {"file": b"ok"}, {"link": target})
++    with pytest.raises(ValueError, match="unsafe source link target"):
++        runtime.source_bundle(tmp_path, spec, "a" * 40, set(), 1000000)
++
++
++@pytest.mark.parametrize("link_first", [False, True])
++def test_source_links_refuse_members_beneath_link_in_both_archive_orders(tmp_path, link_first):
++    files, links = {"target/file": b"safe", "alias/injected": b"injected"}, {"alias": "target"}
++    order = [*links, *files] if link_first else [*files, *links]
++    spec = symlink_spec(tmp_path, files, links, members=order)
++    with pytest.raises(ValueError, match="under non-directory"):
++        runtime.source_bundle(tmp_path, spec, "a" * 40, set(), 1000000)
++
++
++@pytest.mark.parametrize("field", ["target", "sha256", "gitBlobSha", "mode"])
++def test_source_links_bind_exact_target_bytes_git_blob_and_mode(tmp_path, field):
++    spec = symlink_spec(tmp_path, {"file": b"ok"}, {"link": "file"})
++    inventory = experiment.read_json(tmp_path / spec["inventory"]["path"])
++    inventory["symlinks"]["link"][field] = "different"
++    spec["inventory"] = write(tmp_path, "source-inventory.json", inventory)
++    with pytest.raises(ValueError, match="identity mismatch"):
++        runtime.source_bundle(tmp_path, spec, "a" * 40, set(), 1000000)
++
++
++def test_source_links_refuse_duplicates_and_protected_target_content(tmp_path):
++    spec = symlink_spec(tmp_path, {"file": b"hidden"}, {"link": "file"})
++    with pytest.raises(ValueError, match="aliases hidden/protected"):
++        runtime.source_bundle(tmp_path, spec, "a" * 40, runtime.content_digests(b"hidden"), 1000000)
++    spec = symlink_spec(
++        tmp_path, {"file": b"ok"}, {"link": "file"}, members=["file", "link", "link"]
++    )
++    with pytest.raises(ValueError, match="duplicate source member"):
++        runtime.source_bundle(tmp_path, spec, "a" * 40, set(), 1000000)
++
++
++@pytest.mark.parametrize("kind", [tarfile.LNKTYPE, tarfile.CHRTYPE, tarfile.FIFOTYPE])
++def test_source_links_do_not_admit_hardlinks_devices_or_fifos(tmp_path, kind):
++    spec = symlink_spec(tmp_path, {"file": b"ok"}, {"link": "file"})
++    buffer = io.BytesIO()
++    with tarfile.open(fileobj=buffer, mode="w") as stream:
++        item = tarfile.TarInfo("link")
++        item.type, item.linkname = kind, "file"
++        stream.addfile(item)
++    spec["archive"] = write(tmp_path, "source.tar", buffer.getvalue())
++    provenance = experiment.read_json(tmp_path / spec["provenance"]["path"])
++    provenance["archiveSha256"] = spec["archive"]["sha256"]
++    spec["provenance"] = write(tmp_path, "source-provenance.json", provenance)
++    with pytest.raises(ValueError, match="links/devices"):
++        runtime.source_bundle(tmp_path, spec, "a" * 40, set(), 1000000)
++
++
++def test_dependency_cache_remains_regular_only_with_valid_source_links(session, tmp_path):
++    request, _, source = session
++    spec = cache_spec(tmp_path, request, source, {"cargo/registry/cache/item": b"ok"})
++    linked = symlink_spec(
++        tmp_path / "cache",
++        {"cargo/registry/cache/item": b"ok"},
++        {"cargo/registry/cache/link": "item"},
++    )
++    for role in ("archive", "inventory", "provenance"):
++        linked[role]["path"] = "cache/" + linked[role]["path"]
++    spec["bundle"] = linked
++    preparation = experiment.read_json(tmp_path / spec["preparation"]["path"])
++    preparation["cacheArchiveSha256"] = linked["archive"]["sha256"]
++    spec["preparation"] = write(tmp_path, "cache-preparation.json", preparation)
++    with pytest.raises(ValueError, match="cache links are forbidden"):
++        runtime.dependency_cache(tmp_path, spec, request, source, set(), 1000000)
++
++
++def test_link_checkout_transports_regular_members_then_links_and_retains_copy_cost(tmp_path):
++    spec = symlink_spec(tmp_path, {"data/run.sh": b"#!/bin/sh\n"}, {"link": "data/"})
++    bundle = runtime.source_bundle(tmp_path, spec, "a" * 40, set(), 1000000)
++    invoked = []
++
++    def invoke(argv, **kwargs):
++        invoked.append((argv, kwargs))
++        return {"exitCode": 0, "error": None, "stdout": "", "stderr": ""}
++
++    result = runtime.DockerBackend(invoke).checkout(bundle, 10)
++    assert invoked[0][0][-2:] == ["/bin/mkdir", "/workspace/repository"]
++    streams = [kwargs["data"] for _, kwargs in invoked if kwargs.get("data")]
++    assert result["sourceCopy"]["stdinBytes"] == sum(map(len, streams)) > len(bundle.archive)
++    for number, raw in enumerate(streams):
++        with tarfile.open(fileobj=io.BytesIO(raw)) as archive_stream:
++            members = list(archive_stream)
++            assert all(member.issym() == (number == 1) for member in members)
++            if number == 0:
++                assert members[0].mode == 0o755
++            else:
++                assert members[0].linkname == "data/"
++
++
++ACTUAL_LINKS = json.loads(
++    (
++        BENCH / "f05-qualification-next8-20261029/source-links-qualification/actual-links.json"
++    ).read_text()
++)["links"]
++
++
++@pytest.mark.parametrize("actual", ACTUAL_LINKS, ids=lambda a: a["task"] + ":" + a["path"])
++def test_actual_seventeen_link_targets_admit_without_projection(tmp_path, actual):
++    target = actual["lexicallyResolvedTarget"]
++    files = {target + "/fixture.txt" if actual["targetKind"] == "directory" else target: b"fixture"}
++    spec = symlink_spec(tmp_path, files, {actual["path"]: actual["target"]})
++    bundle = runtime.source_bundle(tmp_path, spec, "a" * 40, set(), 1000000)
++    link = bundle.symlinks[actual["path"]]
++    assert link["sha256"] == actual["sha256"] and link["gitBlobSha"] == actual["gitBlobSha"]
++    assert bundle.resolved_links[actual["path"]] == {"path": target, "type": actual["targetKind"]}
++
++
++def test_source_link_loader_keeps_six_tuple_and_validates_before_backend(
++    campaign, session, tmp_path
++):
++    path, manifest = campaign
++    task = manifest["tasks"][0]
++    spec = symlink_spec(
++        tmp_path, {"README.md": b"source"}, {"CLAUDE.md": "README.md"}, revision=task["revision"]
++    )
++    config = deepcopy(session[1])
++    config["sourceBundles"] = {task["repository"]: spec}
++    manifest["artifacts"]["runtime"] = write(tmp_path, "runtime.json", config)
++    manifest["artifacts"]["responses"] = write(
++        tmp_path,
++        "responses.json",
++        {
++            "snapshotSha256": manifest["artifacts"]["snapshot"]["sha256"],
++            "profiles": {task["repository"]: {"status": 404, "body": ""}},
++        },
++    )
++    save(campaign)
++    out = tmp_path / "prepared"
++    experiment.prepare(path, out)
++    loaded = runtime.load_session(path, out / "assignment.json", f"{task['id']}-r1-source-first")
++    assert len(loaded) == 6 and loaded[2].symlinks["CLAUDE.md"]["target"] == "README.md"
++    # Both validation calls are loader-only: no Docker/provider API is involved.
++    hidden = (tmp_path / task["gold"]["path"]).read_bytes()
++    bad = symlink_spec(
++        tmp_path, {"README.md": hidden}, {"CLAUDE.md": "README.md"}, revision=task["revision"]
++    )
++    config["sourceBundles"] = {task["repository"]: bad}
++    manifest["artifacts"]["runtime"] = write(tmp_path, "runtime.json", config)
++    save(campaign)
++    out = tmp_path / "prepared-negative"
++    experiment.prepare(path, out)
++    with pytest.raises(ValueError, match="hidden/protected"):
++        runtime.load_session(path, out / "assignment.json", f"{task['id']}-r1-source-first")
++
++
++def test_link_metadata_output_is_bounded_and_copy_padding_is_accounted(session, tmp_path):
++    request, config, _ = session
++    spec = symlink_spec(tmp_path, {"file": b"ok"}, {"link": "file"})
++    bundle = runtime.source_bundle(tmp_path, spec, "a" * 40, set(), 1000000)
++    config["maxToolOutputBytes"] = 32
++
++    class CopyDocker(FakeDocker):
++        def checkout(self, bundle, timeout):
++            result = super().checkout(bundle, timeout)
++            return {**result, "sourceCopy": {"stdinBytes": len(bundle.archive) + 10240}}
++
++    provider = FakeProvider(
++        response(("read_upstream", {"path": "link"})),
++        response(("checkout_source", {})),
++        response(text="done"),
++    )
++    result = run((request, config, bundle), tmp_path, provider, CopyDocker())
++    events = [json.loads(line) for line in (tmp_path / "run/events.jsonl").read_text().splitlines()]
++    metadata = next(e["result"] for e in events if e["kind"] == "tool-response")
++    assert metadata["truncated"] and len(metadata["content"].encode()) <= 32
++    assert result["effort"]["decodedBytes"] == 32 + len(bundle.archive) + 10240
++
++
++@pytest.mark.parametrize("mutation", ["conflict", "missing-link", "tar-target"])
++def test_source_link_inventory_cannot_reinterpret_or_omit_archive_members(tmp_path, mutation):
++    spec = symlink_spec(tmp_path, {"file": b"ok"}, {"link": "file"})
++    inventory = experiment.read_json(tmp_path / spec["inventory"]["path"])
++    if mutation == "conflict":
++        inventory["files"]["link"] = experiment.digest(b"file")
++    elif mutation == "missing-link":
++        del inventory["symlinks"]["link"]
++    else:
++        import hashlib
++
++        target = b"file/"
++        inventory["symlinks"]["link"].update(
++            target=target.decode(),
++            sha256=experiment.digest(target),
++            gitBlobSha=hashlib.sha1(b"blob 5\0" + target).hexdigest(),
++        )
++    spec["inventory"] = write(tmp_path, "source-inventory.json", inventory)
++    with pytest.raises(ValueError, match="conflicting|links/devices|archive mismatch"):
++        runtime.source_bundle(tmp_path, spec, "a" * 40, set(), 1000000)

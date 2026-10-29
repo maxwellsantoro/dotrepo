@@ -1,0 +1,172 @@
+{
+  "identity": "ci-evidence-pilot-20261029",
+  "frozenAt": "2026-10-29T06:36:53.826271+00:00",
+  "knownDevelopmentNotQualification": true,
+  "indexOrF05Consulted": false,
+  "cases": [
+    {
+      "repository": "github.com/keras-team/keras",
+      "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+      "classification": "known-exposed-E1-development",
+      "retainedWorkflowSourceAvailable": false,
+      "retainedSources": [
+        {
+          "path": "sources/github.com/keras-team/keras/CONTRIBUTING.md",
+          "upstreamPath": "CONTRIBUTING.md",
+          "sha256": "eff1a6349d222979e24b860c88e9577f603300af7658a1ac6fca3140992d0d3d",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/CONTRIBUTING.md",
+          "bytes": 13606
+        },
+        {
+          "path": "sources/github.com/keras-team/keras/README.md",
+          "upstreamPath": "README.md",
+          "sha256": "6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/README.md",
+          "bytes": 5547
+        },
+        {
+          "path": "sources/github.com/keras-team/keras/pyproject.toml",
+          "upstreamPath": "pyproject.toml",
+          "sha256": "51ac5db60612a4c92123980826c1010a6d087c7a64b11a580ebc33c21058d326",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/pyproject.toml",
+          "bytes": 2883
+        },
+        {
+          "path": "sources/github.com/keras-team/keras/requirements-common.txt",
+          "upstreamPath": "requirements-common.txt",
+          "sha256": "3df3a2a15e645bc03082648aec06570a4329fdad189e4b326df0be80d6a7615e",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/requirements-common.txt",
+          "bytes": 498
+        },
+        {
+          "path": "sources/github.com/keras-team/keras/requirements.txt",
+          "upstreamPath": "requirements.txt",
+          "sha256": "f34e2fa7d9bb205afe36e7cb8a0d53f6e3be39d0dc51b38de0619529e4e919b8",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/requirements.txt",
+          "bytes": 619
+        }
+      ]
+    },
+    {
+      "repository": "github.com/docker/compose",
+      "revision": "343bb382d2192b88d84af49971bb5cb99bee268c",
+      "classification": "known-exposed-E1-development",
+      "retainedWorkflowSourceAvailable": false,
+      "retainedSources": [
+        {
+          "path": "sources/github.com/docker/compose/AGENTS.md",
+          "upstreamPath": "AGENTS.md",
+          "sha256": "2c3364f66a30ea054f3ec3610fa4be37a98e5fc3dbd9654b44f26805c75a236e",
+          "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/AGENTS.md",
+          "bytes": 3091
+        },
+        {
+          "path": "sources/github.com/docker/compose/BUILDING.md",
+          "upstreamPath": "BUILDING.md",
+          "sha256": "68694744374f7b98c6dd284aea8d657267a6f6383e9bd5580f725a3e723a7cd4",
+          "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/BUILDING.md",
+          "bytes": 2206
+        },
+        {
+          "path": "sources/github.com/docker/compose/CONTRIBUTING.md",
+          "upstreamPath": "CONTRIBUTING.md",
+          "sha256": "9dfbe9648dbc5a31677bda175a0eb5e577b32d499d6dfaf2fbb09b4a5bd63d1a",
+          "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/CONTRIBUTING.md",
+          "bytes": 18017
+        },
+        {
+          "path": "sources/github.com/docker/compose/Dockerfile",
+          "upstreamPath": "Dockerfile",
+          "sha256": "5f35a0fce55a645e2497f861aba1414f237d532493b4f2bda138c609b28ef44f",
+          "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/Dockerfile",
+          "bytes": 7870
+        },
+        {
+          "path": "sources/github.com/docker/compose/Makefile",
+          "upstreamPath": "Makefile",
+          "sha256": "927856982fcd81c94dd843743000b8a828baf5af02503d64f7a4c4cc477ac4cc",
+          "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/Makefile",
+          "bytes": 7050
+        },
+        {
+          "path": "sources/github.com/docker/compose/README.md",
+          "upstreamPath": "README.md",
+          "sha256": "02d853bbccd7d847c65eaea8c07bb14135b3f7904a48abf5898de90d5c75cb8e",
+          "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/README.md",
+          "bytes": 3532
+        },
+        {
+          "path": "sources/github.com/docker/compose/docker-bake.hcl",
+          "upstreamPath": "docker-bake.hcl",
+          "sha256": "d8e460f357e8913b41a81458d2c3280f5494368c2f20eaca7ebcb1bdeaeebce5",
+          "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/docker-bake.hcl",
+          "bytes": 4836
+        }
+      ]
+    },
+    {
+      "repository": "github.com/storytold/photocraft",
+      "revision": "5f9b4391874aabc9deb2fcb905267613e4d93ec8",
+      "classification": "known-exposed-E1-development",
+      "retainedWorkflowSourceAvailable": false,
+      "retainedSources": [
+        {
+          "path": "sources/github.com/storytold/photocraft/.cargo/config.toml",
+          "upstreamPath": ".cargo/config.toml",
+          "sha256": "c185a2b859850d94af015a9672c1568e1ef73b12612d820f596ef967b835f637",
+          "url": "https://github.com/storytold/photocraft/blob/5f9b4391874aabc9deb2fcb905267613e4d93ec8/.cargo/config.toml",
+          "bytes": 34
+        },
+        {
+          "path": "sources/github.com/storytold/photocraft/AGENTS.md",
+          "upstreamPath": "AGENTS.md",
+          "sha256": "849dcb393d4b20779e0c0f71141fc5b505a181b71f35b497531dbd2e05a6c62a",
+          "url": "https://github.com/storytold/photocraft/blob/5f9b4391874aabc9deb2fcb905267613e4d93ec8/AGENTS.md",
+          "bytes": 19338
+        },
+        {
+          "path": "sources/github.com/storytold/photocraft/Cargo.toml",
+          "upstreamPath": "Cargo.toml",
+          "sha256": "9e08a93ebf39236315f8aa86a1e129b77c30a17049c1bcbb62a08c19776a85e3",
+          "url": "https://github.com/storytold/photocraft/blob/5f9b4391874aabc9deb2fcb905267613e4d93ec8/Cargo.toml",
+          "bytes": 9648
+        },
+        {
+          "path": "sources/github.com/storytold/photocraft/README.md",
+          "upstreamPath": "README.md",
+          "sha256": "620731e78f824f535e75fa39bfb2fef1bb290ac74579f02b58e4c425d1d65377",
+          "url": "https://github.com/storytold/photocraft/blob/5f9b4391874aabc9deb2fcb905267613e4d93ec8/README.md",
+          "bytes": 33536
+        },
+        {
+          "path": "sources/github.com/storytold/photocraft/docs/development.md",
+          "upstreamPath": "docs/development.md",
+          "sha256": "ad37558a84aa2f84928eb8b2554988fbed73ca3ac989034fe06bed9603446873",
+          "url": "https://github.com/storytold/photocraft/blob/5f9b4391874aabc9deb2fcb905267613e4d93ec8/docs/development.md",
+          "bytes": 72260
+        }
+      ]
+    }
+  ],
+  "limits": {
+    "publicApiRequestsTotal": 30,
+    "selectedWorkflowRunsPerRepository": 2,
+    "logBytesPerResponse": 5242880,
+    "sourceBytesPerFile": 2097152,
+    "metadataResponseBytes": 2097152
+  },
+  "selection": "Query first100 repository workflow runs with exact head_sha (all events). Reject mismatched head_sha. Among exact matches, prioritize completed test/ci/unit/check workflows by lexical path then run ID; select at most2 distinct workflow paths. If none, retain absence and inspect pinned tree for workflow source only, prioritize test/unit/ci paths lexical, at most2 workflow source files per repository. Never replace revision. Jobs first100 latest attempt only; retain pagination limits. At most1 test-relevant non-skipped job log per selected run; absence/HTTP/retention failures are outcomes. No workflow dispatch, rerun, upstream execution or paid calls. Stop at budget.",
+  "assertionLadder": [
+    "documented command",
+    "workflow contains command",
+    "job containing mapped step passed",
+    "actual mapped step conclusion",
+    "log text corroborates command invocation/result in that run environment",
+    "independently executed success (always unestablished in this pilot)",
+    "consumer applicability (unestablished without separate task/environment qualification)"
+  ],
+  "apiTransport": "Unauthenticated HTTPS public api.github.com only; manually checked HTTPS GitHub Actions signed-log redirects, no credentials; retain selected response headers, status, body hash, byte limits and request ledger. The available connector commit wrapper filters to PR events and has no log cap.",
+  "secretPolicy": "Do not access secrets endpoints. Source secret references and already public logs are untrusted evidence; never infer values. Stop retention and report redaction if an actual credential is recognized.",
+  "claims": "Source-only known workloads, no generalization, qualification acceptance or consumer savings.",
+  "retainedLedgerSha256": "f571327a544ad2bff27c65c39c6e5b9707dbe65416ae48f1b27256740d3acf1c"
+}

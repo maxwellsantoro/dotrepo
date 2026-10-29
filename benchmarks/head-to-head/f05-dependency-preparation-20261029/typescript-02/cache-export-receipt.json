@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-f05-cache-typescript-02-c986e3cb17",
+    "tar",
+    "-C",
+    "/workspace/dependency-cache",
+    "-cf",
+    "-",
+    "npm-cache/_cacache"
+  ],
+  "startedAt": "2026-10-29T06:56:45.688445+00:00",
+  "elapsedSeconds": 2.884323833975941,
+  "exitCode": 0,
+  "error": null,
+  "archivePath": "/tmp/dotrepo-f05-dependency-preparation-20261029/typescript-02/cache-export.tar",
+  "archiveBytes": 218654720,
+  "archiveSha256": "31f19f4b297043471d10b3f78283ad6b13dd7a8b60612815f80a3633b9080f17",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null
+}

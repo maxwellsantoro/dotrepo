@@ -1,0 +1,52 @@
+{
+  "identity": "source-provisioning-validation-20261029",
+  "baseCommit": "91643102c6083fda66827f68e43a06e7cdc8cec8",
+  "checks": {
+    "pythonFinal": {
+      "passed": 850,
+      "seconds": 19.12
+    },
+    "runtimeExperimentFocused": {
+      "passed": 175,
+      "seconds": 11.8
+    },
+    "releaseGate": "passed-including-vsix-and-worker-smoke",
+    "operatorGate": "passed",
+    "next8FullSourceIntegrity": "passed",
+    "ruff": "passed-on-isolated-selected-index-export",
+    "ruffFormat": "passed-on-isolated-selected-index-export"
+  },
+  "retainedFailures": [
+    "Root new hidden-answer tests initially omitted a valid frozen-response fixture. Both focused attempts and fullsuite failed on response validation before the intended alias check. Those failures do not prove the alias gap. Corrected fixture and fullsuite pass; independent reviewer owns the genuine before/after counterexample."
+  ],
+  "rustReuse": {
+    "sourceChanges": false,
+    "exactBasePostmergeCi": 40831838475,
+    "priorLocalGateFreeze": "index/telemetry/applicability-wave-validation-20261029/FREEZE.json",
+    "limitation": "Final new-patch CI remains required; reused Rust checks cover unchanged Rust inputs."
+  },
+  "inputs": [
+    {
+      "path": "benchmarks/head-to-head/bench/agent_runtime.py",
+      "sha256": "43fa2f0a18802564934646db5fa80e75c0ced3856b07df8b72d5a27fda2b84c3"
+    },
+    {
+      "path": "scripts/tests/test_agent_runtime.py",
+      "sha256": "b4dd1ae04e39a7c27210765c709f8b807f96bd848d9803b873f24451a8bd8286"
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "1b90a2a228b23c36c4aefb75e079e35b6d240c40287e8f49f25cf4ca2e4ebc38"
+    },
+    {
+      "path": "Cargo.lock",
+      "sha256": "2268a17be9005cead215b42f2654e7fb5629c6bc5d25b2573b6af945a073df66"
+    },
+    {
+      "path": "rust-toolchain.toml",
+      "sha256": "a6a0bbd29ffaa8182dc22d1d9149709f1091e47df40ed96eb8a78a711c66a4ce"
+    }
+  ],
+  "paidCampaignSessions": 0,
+  "consumerBenefitEstablished": false
+}

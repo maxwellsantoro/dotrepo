@@ -1,0 +1,88 @@
+{
+  "identity": "independent-f05-dependency-preparation-and-narrow-alias-review-20261029",
+  "inputPacketFreezeSha256": "3888a19462854a37c20803fa9c62f525223af9f4f3d8aa9cfa2bf46affdd2f84",
+  "descriptorAuditFlagsRemainFalse": true,
+  "runtimeAmendmentSha256": "43fa2f0a18802564934646db5fa80e75c0ced3856b07df8b72d5a27fda2b84c3",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "a4f7a584e593b47ed7419eb485aaad6e47cb6b3693d6190f6fecc74d3723fccb",
+      "bytes": 10621
+    },
+    {
+      "path": "audit-initial-lock-check-stderr.txt",
+      "sha256": "5bb8b4f38f2de463744a385fc6af8126c7034d34613033bb2363630769f4b424",
+      "bytes": 701
+    },
+    {
+      "path": "audit-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "audit.json",
+      "sha256": "4f1e5a6da69779ceb171023c8bce45cd518a1d767adef58ef235d6732b16ac8a",
+      "bytes": 35352
+    },
+    {
+      "path": "audit.py",
+      "sha256": "0ae2b7ace9a05cc957c45c5066625eb3966552ce099fe723a683b3f3246093b7",
+      "bytes": 23121
+    },
+    {
+      "path": "checks.json",
+      "sha256": "87e8d4ec3fb7e9b4611f29cb9266b4b5acf966e84b49905c558cb423eee1b09b",
+      "bytes": 1240
+    },
+    {
+      "path": "gold-alias-after-control.json",
+      "sha256": "6706fc3f10e5c5860132d230219ad4ae3ece8493156e54904216c297ebd651c1",
+      "bytes": 1996
+    },
+    {
+      "path": "gold-alias-control.json",
+      "sha256": "a95909f52048a344b02c1f5c9d4baf0b6065a02ec75124e0859d2d4cb4c911a6",
+      "bytes": 1896
+    },
+    {
+      "path": "gold-alias-other-task-control.json",
+      "sha256": "3945e2850dee3f7a4e45d13d076187480528d01989dc973f89c8d523b26b8d50",
+      "bytes": 2027
+    },
+    {
+      "path": "gold_alias_after_control.py",
+      "sha256": "442337cf7b509c3d911d33360b7d7898de7a8871813e5e4896ab92dade1d43b9",
+      "bytes": 3771
+    },
+    {
+      "path": "gold_alias_control.py",
+      "sha256": "ff95b78e031dd391a1cba0105327945e0b7201536e4c51f3b9e9862ee08f2391",
+      "bytes": 3799
+    },
+    {
+      "path": "gold_alias_other_task_control.py",
+      "sha256": "fc8d468f9d831ab241959e1340836d6d304b7fdb99e0ba39053b58b6c40a5412",
+      "bytes": 3838
+    },
+    {
+      "path": "npm-lock-integrity-mismatches.json",
+      "sha256": "fb877261d9077007ff5fe72b28822fff877357ab24388d5fbebd1f1701e01151",
+      "bytes": 236
+    },
+    {
+      "path": "npm-source-overlap-dispositions.json",
+      "sha256": "52f3ec4944fd73c3675cf2e3572e400a7134b0709397b0ea45099b3f8ae16efc",
+      "bytes": 1676
+    },
+    {
+      "path": "protected-content-digests.json",
+      "sha256": "a6da70671528ca633baaf2c343ce2787699b8554904bc9c064383ea1495a38f5",
+      "bytes": 20928
+    },
+    {
+      "path": "runtime-focused-tests-after.txt",
+      "sha256": "f640dc2ec06f41f45b2253e7bf290d078fc85eda1fc226d6a7bbf0c4ebc8ab3c",
+      "bytes": 180
+    }
+  ]
+}

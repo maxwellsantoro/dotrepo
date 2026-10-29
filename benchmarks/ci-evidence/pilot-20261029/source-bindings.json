@@ -1,0 +1,180 @@
+{
+  "sources": [
+    {
+      "path": "sources/github.com/docker/compose/.github/workflows/ci.yml",
+      "sha256": "c59e73dbf1e328c785d8e6de589358d622f6c1964ad223c149f856681fd606b1",
+      "bytes": 14256,
+      "lineCount": 427
+    },
+    {
+      "path": "sources/github.com/docker/compose/AGENTS.md",
+      "sha256": "2c3364f66a30ea054f3ec3610fa4be37a98e5fc3dbd9654b44f26805c75a236e",
+      "bytes": 3091,
+      "lineCount": 66
+    },
+    {
+      "path": "sources/github.com/docker/compose/BUILDING.md",
+      "sha256": "68694744374f7b98c6dd284aea8d657267a6f6383e9bd5580f725a3e723a7cd4",
+      "bytes": 2206,
+      "lineCount": 95
+    },
+    {
+      "path": "sources/github.com/docker/compose/CONTRIBUTING.md",
+      "sha256": "9dfbe9648dbc5a31677bda175a0eb5e577b32d499d6dfaf2fbb09b4a5bd63d1a",
+      "bytes": 18017,
+      "lineCount": 395
+    },
+    {
+      "path": "sources/github.com/docker/compose/Dockerfile",
+      "sha256": "5f35a0fce55a645e2497f861aba1414f237d532493b4f2bda138c609b28ef44f",
+      "bytes": 7870,
+      "lineCount": 235
+    },
+    {
+      "path": "sources/github.com/docker/compose/Makefile",
+      "sha256": "927856982fcd81c94dd843743000b8a828baf5af02503d64f7a4c4cc477ac4cc",
+      "bytes": 7050,
+      "lineCount": 186
+    },
+    {
+      "path": "sources/github.com/docker/compose/README.md",
+      "sha256": "02d853bbccd7d847c65eaea8c07bb14135b3f7904a48abf5898de90d5c75cb8e",
+      "bytes": 3532,
+      "lineCount": 92
+    },
+    {
+      "path": "sources/github.com/docker/compose/docker-bake.hcl",
+      "sha256": "d8e460f357e8913b41a81458d2c3280f5494368c2f20eaca7ebcb1bdeaeebce5",
+      "bytes": 4836,
+      "lineCount": 211
+    },
+    {
+      "path": "sources/github.com/keras-team/keras/.github/workflows/actions.yml",
+      "sha256": "ad84280818c4d276d6427a295d48d7547e792994dc28114e352ff4417f357806",
+      "bytes": 1650,
+      "lineCount": 58
+    },
+    {
+      "path": "sources/github.com/keras-team/keras/.github/workflows/config/jax/keras.json",
+      "sha256": "868f7cc0bfe7494b548ee9b6d0aebb2255528a840f7f1b94723c4d930416d6e4",
+      "bytes": 140,
+      "lineCount": 7
+    },
+    {
+      "path": "sources/github.com/keras-team/keras/.github/workflows/config/tensorflow/keras.json",
+      "sha256": "15097ddedccd607f99a46bdafe23417e8e82e580ae4e492ad128c7d127cbfd50",
+      "bytes": 121,
+      "lineCount": 6
+    },
+    {
+      "path": "sources/github.com/keras-team/keras/.github/workflows/config/torch/keras.json",
+      "sha256": "b3c81d0bf76f72bce58df703813c8a87063b8f01e29a4c10cd65a30038ba2352",
+      "bytes": 117,
+      "lineCount": 6
+    },
+    {
+      "path": "sources/github.com/keras-team/keras/.github/workflows/cpu_tests.yml",
+      "sha256": "c29ad40475b8e8ed2bc144b230fe0d4f2736bfafe1dd2488261cbfc74397fef2",
+      "bytes": 6919,
+      "lineCount": 175
+    },
+    {
+      "path": "sources/github.com/keras-team/keras/.github/workflows/gpu_tests.yml",
+      "sha256": "6fc16346d13a3e77648fe97b555e499ed04d7e553d598f02d775f7c56561945c",
+      "bytes": 4069,
+      "lineCount": 108
+    },
+    {
+      "path": "sources/github.com/keras-team/keras/CONTRIBUTING.md",
+      "sha256": "eff1a6349d222979e24b860c88e9577f603300af7658a1ac6fca3140992d0d3d",
+      "bytes": 13606,
+      "lineCount": 374
+    },
+    {
+      "path": "sources/github.com/keras-team/keras/README.md",
+      "sha256": "6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8",
+      "bytes": 5547,
+      "lineCount": 141
+    },
+    {
+      "path": "sources/github.com/keras-team/keras/pyproject.toml",
+      "sha256": "51ac5db60612a4c92123980826c1010a6d087c7a64b11a580ebc33c21058d326",
+      "bytes": 2883,
+      "lineCount": 119
+    },
+    {
+      "path": "sources/github.com/keras-team/keras/requirements-common.txt",
+      "sha256": "3df3a2a15e645bc03082648aec06570a4329fdad189e4b326df0be80d6a7615e",
+      "bytes": 498,
+      "lineCount": 37
+    },
+    {
+      "path": "sources/github.com/keras-team/keras/requirements-jax-cuda.txt",
+      "sha256": "9e3dd6feb5fbc931c2b60b659421359089bcff75cc0348cace2181843df3c610",
+      "bytes": 247,
+      "lineCount": 12
+    },
+    {
+      "path": "sources/github.com/keras-team/keras/requirements-tensorflow-cuda.txt",
+      "sha256": "b04883dbf25931c7c2700fd0f0c0d2f7be8c9f28689da680a39f53fcad4d0ab1",
+      "bytes": 268,
+      "lineCount": 12
+    },
+    {
+      "path": "sources/github.com/keras-team/keras/requirements-torch-cuda.txt",
+      "sha256": "395058aa4facf050ce8c71e2b56e40930871b12966121529a17935ffc2491337",
+      "bytes": 391,
+      "lineCount": 16
+    },
+    {
+      "path": "sources/github.com/keras-team/keras/requirements.txt",
+      "sha256": "f34e2fa7d9bb205afe36e7cb8a0d53f6e3be39d0dc51b38de0619529e4e919b8",
+      "bytes": 619,
+      "lineCount": 26
+    },
+    {
+      "path": "sources/github.com/storytold/photocraft/.cargo/config.toml",
+      "sha256": "c185a2b859850d94af015a9672c1568e1ef73b12612d820f596ef967b835f637",
+      "bytes": 34,
+      "lineCount": 2
+    },
+    {
+      "path": "sources/github.com/storytold/photocraft/.github/workflows/ci.yml",
+      "sha256": "6e2193555b1a3b99caeb673a48703e8c220b17320497b1ca90ed6e1c69973922",
+      "bytes": 22321,
+      "lineCount": 483
+    },
+    {
+      "path": "sources/github.com/storytold/photocraft/AGENTS.md",
+      "sha256": "849dcb393d4b20779e0c0f71141fc5b505a181b71f35b497531dbd2e05a6c62a",
+      "bytes": 19338,
+      "lineCount": 160
+    },
+    {
+      "path": "sources/github.com/storytold/photocraft/Cargo.toml",
+      "sha256": "9e08a93ebf39236315f8aa86a1e129b77c30a17049c1bcbb62a08c19776a85e3",
+      "bytes": 9648,
+      "lineCount": 201
+    },
+    {
+      "path": "sources/github.com/storytold/photocraft/README.md",
+      "sha256": "620731e78f824f535e75fa39bfb2fef1bb290ac74579f02b58e4c425d1d65377",
+      "bytes": 33536,
+      "lineCount": 457
+    },
+    {
+      "path": "sources/github.com/storytold/photocraft/docs/development.md",
+      "sha256": "ad37558a84aa2f84928eb8b2554988fbed73ca3ac989034fe06bed9603446873",
+      "bytes": 72260,
+      "lineCount": 737
+    }
+  ],
+  "spanNote": "pre-api-source-assertions freezes planned passage windows against full exact source files. Some requirements/manifests are shorter than planned end windows; interpret windows clipped to lineCount here, never nonexistent lines. Exact workflow command locators are in observations.json.",
+  "apiWorkflowBinding": "run-selection and additional-workflow-sources bind paths/Git blob SHA/contents SHA256 to exact run head revision.",
+  "collectorExecution": {
+    "executedSource": "raw/collector-executed.py.txt",
+    "executedSha256": "dda1f1f304d655082e1c9cf7c9fb89dcdc525eddb04b2bd4a17bd7883179f9d7",
+    "formattedSource": "collect.py",
+    "postExecutionChange": "Ruff formatting only; no further network requests after22."
+  }
+}

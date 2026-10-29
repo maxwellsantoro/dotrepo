@@ -1,0 +1,410 @@
+{
+  "identity": "download-only-native-trace-v1",
+  "receipts": {
+    "logs/cache-size-0/receipt.json": {
+      "argv": [
+        "docker",
+        "exec",
+        "dotrepo-f05-cache-rust-02-769a3ea0a3",
+        "/bin/sh",
+        "-eu",
+        "-c",
+        "du -sb /workspace/dependency-cache"
+      ],
+      "startedAt": "2026-10-29T06:57:30.097026+00:00",
+      "elapsedSeconds": 0.1287830830551684,
+      "exitCode": 0,
+      "error": null,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "9dc253fd3bcd91f5bdd51579c07c717c96a01d403461cb521e9f396f3fed5b4b",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "costUsd": null,
+      "costExclusions": [
+        "No metered container/host charge source."
+      ]
+    },
+    "logs/cleanup/receipt.json": {
+      "argv": [
+        "docker",
+        "rm",
+        "-f",
+        "dotrepo-f05-cache-rust-02-769a3ea0a3"
+      ],
+      "startedAt": "2026-10-29T06:57:42.199725+00:00",
+      "elapsedSeconds": 0.8149577497970313,
+      "exitCode": 0,
+      "error": null,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "9e81e78fc06b420a9a78c362581a1c2236c0e7e47d672f7b30447e4ea74094e5",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "costUsd": null,
+      "costExclusions": [
+        "No metered container/host charge source."
+      ]
+    },
+    "logs/container-inspect/receipt.json": {
+      "argv": [
+        "docker",
+        "inspect",
+        "dotrepo-f05-cache-rust-02-769a3ea0a3"
+      ],
+      "startedAt": "2026-10-29T06:57:22.207185+00:00",
+      "elapsedSeconds": 0.04227245785295963,
+      "exitCode": 0,
+      "error": null,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "64905cc22b6c408e7ed3608606374f11950541381de77b63d7c813032f9293fd",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "costUsd": null,
+      "costExclusions": [
+        "No metered container/host charge source."
+      ]
+    },
+    "logs/create/receipt.json": {
+      "argv": [
+        "docker",
+        "create",
+        "--name",
+        "dotrepo-f05-cache-rust-02-769a3ea0a3",
+        "--pull=never",
+        "--platform=linux/arm64",
+        "--init",
+        "--read-only",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--network=bridge",
+        "--ipc=private",
+        "--cgroupns=private",
+        "--user=1000:1000",
+        "--workdir=/workspace",
+        "--memory=4g",
+        "--memory-swap=4g",
+        "--cpus=3",
+        "--pids-limit=256",
+        "--ulimit",
+        "nofile=4096:4096",
+        "--tmpfs",
+        "/workspace:rw,exec,nosuid,nodev,size=4g,uid=1000,gid=1000,mode=0700",
+        "--tmpfs",
+        "/tmp:rw,exec,nosuid,nodev,size=512m,uid=1000,gid=1000,mode=0700",
+        "--tmpfs",
+        "/workspace/dependency-cache:rw,exec,nosuid,nodev,size=1g,uid=1000,gid=1000,mode=0700",
+        "--env",
+        "HOME=/workspace/home",
+        "--env",
+        "TMPDIR=/workspace/tmp",
+        "--env",
+        "LANG=C.UTF-8",
+        "--env",
+        "CARGO_HOME=/workspace/dependency-cache/cargo",
+        "--env",
+        "CARGO_TARGET_DIR=/workspace/not-exported-target",
+        "--env",
+        "GOPATH=/workspace/dependency-cache/go",
+        "--env",
+        "GOCACHE=/workspace/not-exported-go-build",
+        "--env",
+        "GOTOOLCHAIN=local",
+        "--env",
+        "GOENV=off",
+        "--env",
+        "GOMAXPROCS=3",
+        "--env",
+        "GOPROXY=https://proxy.golang.org",
+        "--env",
+        "GOSUMDB=sum.golang.org",
+        "--env",
+        "GIT_CONFIG_GLOBAL=/dev/null",
+        "--env",
+        "GIT_CONFIG_NOSYSTEM=1",
+        "--env",
+        "GIT_TERMINAL_PROMPT=0",
+        "--env",
+        "NPM_CONFIG_CACHE=/workspace/dependency-cache/npm-cache",
+        "--env",
+        "NPM_CONFIG_USERCONFIG=/dev/null",
+        "--env",
+        "NPM_CONFIG_REGISTRY=https://registry.npmjs.org",
+        "--env",
+        "NPM_CONFIG_IGNORE_SCRIPTS=true",
+        "--env",
+        "NPM_CONFIG_AUDIT=false",
+        "--env",
+        "NPM_CONFIG_FUND=false",
+        "--entrypoint=/bin/sh",
+        "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+        "-c",
+        "while :; do sleep 3600; done"
+      ],
+      "startedAt": "2026-10-29T06:57:21.688838+00:00",
+      "elapsedSeconds": 0.1971294169779867,
+      "exitCode": 0,
+      "error": null,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "cef3965cf949fe3911ef327a7307d3d9935d52d4f16c17062f145ec9d6058b31",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "costUsd": null,
+      "costExclusions": [
+        "No metered container/host charge source."
+      ]
+    },
+    "logs/disconnect-network/receipt.json": {
+      "argv": [
+        "docker",
+        "network",
+        "disconnect",
+        "bridge",
+        "dotrepo-f05-cache-rust-02-769a3ea0a3"
+      ],
+      "startedAt": "2026-10-29T06:57:30.374525+00:00",
+      "elapsedSeconds": 0.06578791700303555,
+      "exitCode": 0,
+      "error": null,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "costUsd": null,
+      "costExclusions": [
+        "No metered container/host charge source."
+      ]
+    },
+    "logs/download-0/receipt.json": {
+      "argv": [
+        "docker",
+        "exec",
+        "dotrepo-f05-cache-rust-02-769a3ea0a3",
+        "/bin/sh",
+        "-eu",
+        "-c",
+        "cd /workspace/repository; cargo fetch --locked --target aarch64-unknown-linux-gnu --manifest-path lib/sniffnet-packet-parser/Cargo.toml"
+      ],
+      "startedAt": "2026-10-29T06:57:24.020223+00:00",
+      "elapsedSeconds": 6.075774708064273,
+      "exitCode": 0,
+      "error": null,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "ac769da7913241ee9d6cf2c2de55ff559c51411b39edfd6f87b78ce6e7ad160a",
+      "costUsd": null,
+      "costExclusions": [
+        "No metered container/host charge source."
+      ]
+    },
+    "logs/initialize/receipt.json": {
+      "argv": [
+        "docker",
+        "exec",
+        "dotrepo-f05-cache-rust-02-769a3ea0a3",
+        "/bin/sh",
+        "-eu",
+        "-c",
+        "mkdir -p /workspace/repository /workspace/home /workspace/tmp /workspace/dependency-cache"
+      ],
+      "startedAt": "2026-10-29T06:57:22.250023+00:00",
+      "elapsedSeconds": 0.16949033387936652,
+      "exitCode": 0,
+      "error": null,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "costUsd": null,
+      "costExclusions": [
+        "No metered container/host charge source."
+      ]
+    },
+    "logs/network-after/receipt.json": {
+      "argv": [
+        "docker",
+        "exec",
+        "dotrepo-f05-cache-rust-02-769a3ea0a3",
+        "/bin/sh",
+        "-eu",
+        "-c",
+        "cat /sys/class/net/eth0/statistics/rx_bytes /sys/class/net/eth0/statistics/tx_bytes"
+      ],
+      "startedAt": "2026-10-29T06:57:30.317361+00:00",
+      "elapsedSeconds": 0.05664304201491177,
+      "exitCode": 0,
+      "error": null,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "bc0fd9952a557ca1f96fa9cd2e2da918be2fe81bd8da4c1447b538b1a806bf09",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "costUsd": null,
+      "costExclusions": [
+        "No metered container/host charge source."
+      ]
+    },
+    "logs/network-before/receipt.json": {
+      "argv": [
+        "docker",
+        "exec",
+        "dotrepo-f05-cache-rust-02-769a3ea0a3",
+        "/bin/sh",
+        "-eu",
+        "-c",
+        "cat /sys/class/net/eth0/statistics/rx_bytes /sys/class/net/eth0/statistics/tx_bytes"
+      ],
+      "startedAt": "2026-10-29T06:57:23.960343+00:00",
+      "elapsedSeconds": 0.0595040419138968,
+      "exitCode": 0,
+      "error": null,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "d1827ab4baea4793aa904c7334fafb2e26272534d9be1bf18d0fbec68a6aece4",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "costUsd": null,
+      "costExclusions": [
+        "No metered container/host charge source."
+      ]
+    },
+    "logs/offline-inspect/receipt.json": {
+      "argv": [
+        "docker",
+        "inspect",
+        "dotrepo-f05-cache-rust-02-769a3ea0a3"
+      ],
+      "startedAt": "2026-10-29T06:57:30.440733+00:00",
+      "elapsedSeconds": 0.029095083940774202,
+      "exitCode": 0,
+      "error": null,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "7e85c0e15249b86f9143b5e1ae4a65536e586b36061b226163beafcd0c31f9a8",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "costUsd": null,
+      "costExclusions": [
+        "No metered container/host charge source."
+      ]
+    },
+    "logs/source-provision/receipt.json": {
+      "argv": [
+        "docker",
+        "exec",
+        "-i",
+        "dotrepo-f05-cache-rust-02-769a3ea0a3",
+        "tar",
+        "--extract",
+        "--no-same-owner",
+        "--no-same-permissions",
+        "-C",
+        "/workspace/repository"
+      ],
+      "startedAt": "2026-10-29T06:57:22.461862+00:00",
+      "elapsedSeconds": 1.4465716669801623,
+      "exitCode": 0,
+      "error": null,
+      "stdinBytes": 114851840,
+      "stdinSha256": "862b159c55ee7693faed80c2546aa203cc370e867cf5a206cff5356ab66766d6",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "costUsd": null,
+      "costExclusions": [
+        "No metered container/host charge source."
+      ]
+    },
+    "logs/start/receipt.json": {
+      "argv": [
+        "docker",
+        "start",
+        "dotrepo-f05-cache-rust-02-769a3ea0a3"
+      ],
+      "startedAt": "2026-10-29T06:57:21.886626+00:00",
+      "elapsedSeconds": 0.3197192498482764,
+      "exitCode": 0,
+      "error": null,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "9e81e78fc06b420a9a78c362581a1c2236c0e7e47d672f7b30447e4ea74094e5",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "costUsd": null,
+      "costExclusions": [
+        "No metered container/host charge source."
+      ]
+    },
+    "logs/tools-after-download/receipt.json": {
+      "argv": [
+        "docker",
+        "exec",
+        "dotrepo-f05-cache-rust-02-769a3ea0a3",
+        "/bin/sh",
+        "-eu",
+        "-c",
+        "rustc -vV; cargo --version; dpkg-query -W libpcap-dev libpcap0.8-dev libasound2-dev"
+      ],
+      "startedAt": "2026-10-29T06:57:30.226279+00:00",
+      "elapsedSeconds": 0.0907165000680834,
+      "exitCode": 0,
+      "error": null,
+      "stdinBytes": 0,
+      "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "148524900b69646dad1cf3832904a1413ee31d627e403be41f892a53f5fed2d0",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "costUsd": null,
+      "costExclusions": [
+        "No metered container/host charge source."
+      ]
+    }
+  },
+  "exportReceipt": {
+    "argv": [
+      "docker",
+      "exec",
+      "dotrepo-f05-cache-rust-02-769a3ea0a3",
+      "tar",
+      "-C",
+      "/workspace/dependency-cache",
+      "-cf",
+      "-",
+      "cargo/registry"
+    ],
+    "startedAt": "2026-10-29T06:57:30.470249+00:00",
+    "elapsedSeconds": 8.43748416705057,
+    "exitCode": 0,
+    "error": null,
+    "archivePath": "/tmp/dotrepo-f05-dependency-preparation-20261029/rust-02-attempt-2/cache-export.tar",
+    "archiveBytes": 465786880,
+    "archiveSha256": "a199ddee5c168128e26a1ae153ad404471339982a97a7b5ce7c9a27f52be2161",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "costUsd": null
+  },
+  "result": {
+    "taskId": "rust-02",
+    "state": "download-cache-retained-unqualified",
+    "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+    "sourceArchiveSha256": "862b159c55ee7693faed80c2546aa203cc370e867cf5a206cff5356ab66766d6",
+    "sourceRevision": "ab4bf739d46448436cb68933bb8260ee264449d5",
+    "startedAt": "2026-10-29T06:57:21.687332+00:00",
+    "costUsd": null,
+    "costExclusions": [
+      "No metered container/host/download charge source."
+    ],
+    "upstreamScriptsOrTestsExecuted": false,
+    "indexConsulted": false,
+    "modelCalls": 0,
+    "cacheAuditQualified": false,
+    "setupSeconds": 6.20589108299464,
+    "networkBytes": {
+      "received": 99054593,
+      "sent": 457121,
+      "basis": "container interface counters including headers/incidental traffic"
+    },
+    "archivePath": "/tmp/dotrepo-f05-dependency-preparation-20261029/rust-02-attempt-2/cache.tar",
+    "archiveSha256": "f8ca1fccc8792cc5eb34aad37640268ab339d852de15b10a3cf1d5bcaf5296a8",
+    "cacheExpandedBytes": 438392465,
+    "cacheArchiveBytes": 463104000,
+    "cacheFiles": 24692,
+    "elapsedSeconds": 20.510774750029668
+  },
+  "frozenPlan": {
+    "path": "plan.v4.json",
+    "sha256": "1ba47bcc517bd240763d036249cd29b33bcfb990ed575a10135a64ceb7216a99"
+  }
+}

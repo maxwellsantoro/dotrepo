@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-f05-cache-rust-02-769a3ea0a3",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "du -sb /workspace/dependency-cache"
+  ],
+  "startedAt": "2026-10-29T06:57:30.097026+00:00",
+  "elapsedSeconds": 0.1287830830551684,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "9dc253fd3bcd91f5bdd51579c07c717c96a01d403461cb521e9f396f3fed5b4b",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

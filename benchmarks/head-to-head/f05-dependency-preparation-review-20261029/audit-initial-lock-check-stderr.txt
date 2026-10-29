@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-review-20261029/audit.py", line 485, in <module>
+    main()
+  File "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-review-20261029/audit.py", line 466, in main
+    results.append(audit(leaf, digest, source_folder))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-review-20261029/audit.py", line 342, in audit
+    assert entry["integrity"] == locked_urls[url]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

@@ -1,0 +1,140 @@
+{
+  "identity": "f1-refresh-durability-source-review-20261029",
+  "head": "91643102c6083fda66827f68e43a06e7cdc8cec8",
+  "evidenceKind": "Deterministic current-source control-flow proof, not an executed CLI/crawler replay. No Cargo/build/upstream execution/new acquisition.",
+  "scope": "Only the four retained F1 scalar withdrawals; shared Rust/index untouched.",
+  "predictions": [
+    {
+      "repository": "github.com/IBM/fp-go",
+      "revision": "42e25c64425e2291bd5b281aa852b7a790526204",
+      "field": "repo.build",
+      "reintroducedValue": "go build ./...",
+      "source": "go.mod",
+      "sourceTier": "EcosystemDefault",
+      "score": "MediumConfidencePresent",
+      "withdrawalDisposition": "potentially-applicable-insufficient-evidence",
+      "trace": [
+        "Root go.mod has module declaration; infer_go_module_commands emits build/test defaults.",
+        "Root README has no build/test declaration. Batch scripts are not command sources.",
+        "Workflow has cd v2 and cd gen/v2; infer_workflow_commands returnsNone for wholefile.",
+        "Fallback EcosystemDefault remains selectable; build selection written into freshmanifest."
+      ],
+      "limitation": "A root-module build may work. This is an unsupported repository-default claim, not evidence the build command necessarily fails."
+    },
+    {
+      "repository": "github.com/IBM/fp-go",
+      "revision": "42e25c64425e2291bd5b281aa852b7a790526204",
+      "field": "repo.test",
+      "reintroducedValue": "go test ./...",
+      "source": "go.mod",
+      "sourceTier": "EcosystemDefault",
+      "score": "MediumConfidencePresent",
+      "withdrawalDisposition": "contradicted-or-wrong-scope",
+      "trace": [
+        "Same root-module fallback after wholefile workflow refusal.",
+        "Separate retained v2/go.mod and gen/v2/go.mod plus CI module jobs establish additional owned scopes.",
+        "A root-module wildcard does not represent the separately declared module jobs; no aggregate default is established."
+      ],
+      "limitation": "Does not claim root v1 tests are invalid or fail after preparation."
+    },
+    {
+      "repository": "github.com/gomodule/redigo",
+      "revision": "57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "field": "repo.build",
+      "reintroducedValue": "go build ./...",
+      "source": "go.mod",
+      "sourceTier": "EcosystemDefault",
+      "score": "MediumConfidencePresent",
+      "withdrawalDisposition": "potentially-applicable-insufficient-evidence",
+      "trace": [
+        "Root go.mod emits generic build default.",
+        "README declares go get installation only; no source-owned build default.",
+        "Release-build workflow is ignored by specialized filename rule; no competing scalar build.",
+        "Fallback EcosystemDefault chosen."
+      ],
+      "limitation": "Redis test setup does not itself prove a Go build command incorrect. Narrow test-prerequisite fix alone does not address this build withdrawal."
+    },
+    {
+      "repository": "github.com/gomodule/redigo",
+      "revision": "57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "field": "repo.test",
+      "reintroducedValue": "go test ./...",
+      "source": "go.mod",
+      "sourceTier": "EcosystemDefault",
+      "score": "MediumConfidencePresent",
+      "withdrawalDisposition": "potentially-applicable-insufficient-evidence",
+      "trace": [
+        "go-test workflow contains no cd/non-rootworking-directory; scalar workflow extractor accepts go test -race ./....",
+        "Setup-Redis action and matrix are not carried into ImportedCommandCandidate.",
+        "-race is not excluded by specialized-Go-workflow test filter.",
+        "Workflow selection invokes preferred_go_module_default_for_workflow_command; any flagged Go command is replaced with go.mod bare default.",
+        "Source scorer assigns medium inferred default, not high."
+      ],
+      "limitation": "The tests can execute with Redis installed. The bare scalar loses required setup and the source race variant; this is not an observed test failure."
+    }
+  ],
+  "refreshPath": {
+    "priorRecord": "Both corrected records remain inferred overlays. Refresh refuses native/canonical/reviewed records, so these are eligible to be replanned.",
+    "newPlan": "pipeline/mod.rs imports materialized sources afresh; previous_manifest is not passed to import_repository_with_options. It is used for authority refusal and record-level downgrade reporting.",
+    "evidence": "retain_field_evidence reads any attachments only from the new import_plan.manifest, then replaces field_evidence with fresh scores/valueJson/source/time. It never receives the prior manifest.",
+    "status": "Medium ecosystem-default fields block verified auto-promotion; they do not remove scalar values from a fresh import. This review does not assert a scheduled writeback actually occurred; scheduler/publication gates are outside this source-path proof."
+  },
+  "existingNegativeEvidence": {
+    "exists": "The current records have exact field-level unresolved/null source_inspection assessments with sourceRevision, sourceSha256, reason and audit locator. Historical corrections.json preserves each old command and withdrawal disposition.",
+    "notTombstone": "There is no structured rejected candidate value/hash in these current field assessments, no enforceable per-value withdrawal ledger consumed by the importer, and no prior-field-evidence merge into new source plans. valueJson=null binds the absent value, not an arbitrary future rejected candidate.",
+    "guardLimits": "guard_against_unjustified_downgrade only reports changes when priorrecord was verified; it returns preserved=false and does not restore fields. Marking entire records reviewed/canonical would freeze unrelated fields and is not proposed.",
+    "caution": "Do not parse freeform reasons or audit-path prose as executable rejection policy, silently restore prior high assessments onto new values, or treat previous absence as permanent prohibition across source changes."
+  },
+  "minimalProposal": [
+    {
+      "part": "Narrow module-scope guard",
+      "goal": "Prevent the known IBM build/test fallthrough without removing all Go metadata defaults.",
+      "predicate": "Retained source establishes multiple owned Go modules AND Go CI explicitly operates separate module directories; when that evidence makes root wildcard incomplete/aggregate default unresolved, suppress metadata-only Go scalar selection, retaining candidates and unresolved explanation. Do not trigger solely on a nested example module or unrelated cd.",
+      "pathsNeeded": [
+        "crates/dotrepo-core/src/import/commands/mod.rs",
+        "crates/dotrepo-core/src/import/commands/extraction.rs",
+        "crates/dotrepo-core/src/import/inputs.rs and types.rs only if bounded nested-module source paths must enter ImportSources",
+        "crates/dotrepo-core/src/import/commands/tests.rs",
+        "new import fixtures and coordinator-owned expectations.json",
+        "crates/dotrepo-crawler/src/github.rs only if bounded workflow-named Go module acquisition is chosen; separate network bounds/fixtures required"
+      ],
+      "scopeLimit": "Exact source closure and candidate preservation need a separate implementation packet; do not infer complete context or high confidence.",
+      "sourceAvailabilityGap": "Current crawler supplemental roots include root go.mod but no nested-Go manifest discovery (github.rs26-66,791-825); ImportInputs also only loads root go.mod. Exact retained v2/gen module bytes are available for fixtures, not automatically available in a current crawler refresh. Any manifest-aware guard needs bounded source acquisition/ImportSources ownership or must retain uncertainty from workflow scope without claiming missing manifests inspected."
+    },
+    {
+      "part": "Narrow workflow setup/variant guard",
+      "goal": "Prevent known Redis test flattening/fallthrough.",
+      "predicate": "The Go test-bearing job has external service/setup dependency (here the explicit Setup redis action/matrix); withhold scalar extraction AND metadata fallback for that test field. Preserve the observed flagged candidate as unqualified evidence rather than normalize away -race. Match job/step scope so unrelated lint/release setup cannot poison a plain test job.",
+      "pathsNeeded": [
+        "crates/dotrepo-core/src/import/commands/extraction.rs",
+        "crates/dotrepo-core/src/import/commands/mod.rs",
+        "crates/dotrepo-core/src/import/commands/policy.rs",
+        "crates/dotrepo-core/src/import/commands/tests.rs",
+        "new import fixtures and coordinator-owned expectations.json"
+      ],
+      "scopeLimit": "This addresses test setup, not Redigo build. Preserving -race alone still leaves missing Redis prerequisites."
+    },
+    {
+      "part": "Explicit durability decision for all four individual withdrawals",
+      "goal": "Prevent a known audited withdrawal being overwritten by the same conventional inference while retaining unrelated refreshable facts.",
+      "predicate": "If coordinator chooses durable negative assessments, bind field+rejected exact value+source closure/revision+assessment identity; consult it during fresh refresh before writing, and require explicit new source-grounded disposition to override. Existing unresolved/null metadata alone cannot identify this exact rejected candidate.",
+      "pathsNeeded": [
+        "A separately owned private evidence contract/fixtures",
+        "crawler pipeline/evidence or a focused refresh guard",
+        "value/source/time binding tests"
+      ],
+      "scopeLimit": "Proposal only; no new format is implemented here. Do not invent tombstones by parsing reason prose or silently reject all future values. Needed to cover Redigo build without overclaiming a test-prerequisite rule."
+    },
+    {
+      "part": "Wider Go metadata-default policy",
+      "goal": "Consider whether go.mod alone should ever populate scalar defaults rather than only conventional candidates.",
+      "scopeLimit": "Globally skipping all Go EcosystemDefault scalars is a broader acceptance/coverage change. It is not the narrow approved fix, and requires frozen positive/negative fixtures plus review of existing expectations. Current test workflow_go_selectors_do_not_outrank_module_defaults deliberately locks existing normalization behavior."
+    }
+  ],
+  "notProposed": [
+    "Execute upstream builds/tests or infer runtime failure.",
+    "Fetch new sources or modify the four index fields in this review.",
+    "Global blanket suppression from any workflow setup line or any nested module.",
+    "Promote inferred defaults to high confidence, or call correction durability consumer proof."
+  ]
+}

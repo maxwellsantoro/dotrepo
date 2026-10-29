@@ -1,0 +1,44 @@
+{
+  "argv": [
+    "git",
+    "-c",
+    "core.hooksPath=/dev/null",
+    "-c",
+    "credential.helper=",
+    "-c",
+    "protocol.allow=never",
+    "-c",
+    "protocol.https.allow=always",
+    "-c",
+    "pack.windowMemory=128m",
+    "-c",
+    "pack.deltaCacheSize=32m",
+    "-c",
+    "pack.threads=1",
+    "-c",
+    "core.bigFileThreshold=32m",
+    "init",
+    "--bare",
+    "objects.git"
+  ],
+  "cwd": "/tmp/dotrepo-f05-qualification-next8-20261029/rust-01",
+  "environment": {
+    "PATH": "/Users/maxwell/projects/agent/dotrepo/.venv/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/maxwell/.local/bin:/Users/maxwell/.grok/bin:/Users/maxwell/.nvm/versions/node/v25.9.0/bin:/Users/maxwell/.bun/bin:/Users/maxwell/.local/bin:/Users/maxwell/.local/bin:/Users/maxwell/.elan/bin:/opt/homebrew/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/opt/homebrew/bin:/Users/maxwell/.codex/tmp/arg0-macos/codex-arg0VIm78J:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/maxwell/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/maxwell/.local/bin:/Users/maxwell/.grok/bin:/Users/maxwell/.atuin/bin:/Users/maxwell/.nvm/versions/node/v25.9.0/bin:/Users/maxwell/.bun/bin:/Users/maxwell/.elan/bin:/Users/maxwell/.cargo/bin:/Users/maxwell/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS",
+    "HOME": "/tmp/dotrepo-f05-qualification-next8-20261029/rust-01/empty-home",
+    "GIT_CONFIG_GLOBAL": "/dev/null",
+    "GIT_CONFIG_NOSYSTEM": "1",
+    "GIT_TERMINAL_PROMPT": "0",
+    "GIT_LFS_SKIP_SMUDGE": "1"
+  },
+  "startedAt": "2026-10-29T06:30:09.980291+00:00",
+  "elapsedSeconds": 0.11258279089815915,
+  "exitCode": 0,
+  "error": null,
+  "stdoutSha256": "e4fe92a76d7c61a7d59ee8a3c59bb57ed67ba8fe5d25c9a6afd5f085467de5f5",
+  "stderrSha256": "3e70934f1909b0f5a846d62237fcc1509d733b9fb0321187024723dfc67176d3",
+  "costUsd": null,
+  "transportBytes": null,
+  "measurementExclusions": [
+    "No metered host/download charge; Git transport byte count unavailable. Object/archive bytes measured separately."
+  ]
+}

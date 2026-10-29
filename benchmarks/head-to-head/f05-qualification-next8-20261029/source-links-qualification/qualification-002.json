@@ -1,0 +1,831 @@
+{
+  "startedAt": "2026-10-29T06:49:42.973855+00:00",
+  "runtimeSha256": "79fa0dccefee8a0fd00539a187036019b5746a6d569fab387b6ac6d686e42dbe",
+  "driverSha256": "0b92ff202be0ff477a46f22e5cb8991d1e176c9518cdc63455703d12d64effdf",
+  "image": "sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4",
+  "providerCalls": 0,
+  "upstreamExecution": false,
+  "scratch": "/tmp/dotrepo-source-links-wvxj45u5",
+  "status": "passed",
+  "actualSourceAdmission": [
+    {
+      "task": "python-02",
+      "sourceRevision": "cde3969919b9bd540b2dd75b7aa84a908acbdbfe",
+      "originalArchiveSha256": "6fe6c3084bc31e1f782696dc588cc55d61d1dd93bda8daffcba85971159ce61b",
+      "originalInventorySha256": "5da96e82f8e234d7d75d339e89e11381c5bf38115488f2381f445029562fce99",
+      "originalDetailsSha256": "9cda47539764532c77d9a5d107fdbbe02dd363d89d3a5e3661532e7cbdafb64b",
+      "originalProvenanceSha256": "e15c7767623dbccf2e424f08338f538c376f9211e72d79cd287f346a00141f69",
+      "newInventorySha256": "381818ab5920f5a9f50ff8691168361edc2b1004818db9f1af80892163fba961",
+      "regularFiles": 30200,
+      "links": [
+        {
+          "path": ".agents/skills",
+          "gitBlobSha": "2cd5a6932fa9cafc113a364399b01681e05423ce",
+          "mode": "120000",
+          "sha256": "1be2cf524a320f8298d764df148b993da1d253b86b21e605ef9f06b83efcdd9c",
+          "target": "../.claude/skills/",
+          "resolved": {
+            "path": ".claude/skills",
+            "type": "directory"
+          }
+        },
+        {
+          "path": ".gemini/skills",
+          "gitBlobSha": "454b8427cd757f30dc7fdb9a325d19c399770417",
+          "mode": "120000",
+          "sha256": "722a918d6dee037f575ef1bf214371f14f77047e71bd75cff39f182b2ba9f6b0",
+          "target": "../.claude/skills",
+          "resolved": {
+            "path": ".claude/skills",
+            "type": "directory"
+          }
+        },
+        {
+          "path": "CLAUDE.md",
+          "gitBlobSha": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+          "mode": "120000",
+          "sha256": "a54ff182c7e8acf56acfd6e4b9c3ff41e2c41a31c9b211b2deb9df75d9a478f9",
+          "target": "AGENTS.md",
+          "resolved": {
+            "path": "AGENTS.md",
+            "type": "regular"
+          }
+        }
+      ],
+      "hiddenHashes": "Empty for source data admission control; not a campaign arm/gold qualification.",
+      "upstreamCodeExecuted": false
+    },
+    {
+      "task": "typescript-01",
+      "sourceRevision": "f3803c96974ad4a94195fb97e5c637e9c2a3afe3",
+      "originalArchiveSha256": "c3287a2e874e9053fa07468897835e63895e49e3851bf8d8708337e6fbdec193",
+      "originalInventorySha256": "68297b375bc7b1936fd9af1959f151bc0808e7716bcbb5208896bad08739d966",
+      "originalDetailsSha256": "353aff07351d7dccd210e3f7f9922365789ba390f6d120021435ecfbefc39946",
+      "originalProvenanceSha256": "d7c94a11ba2282d8451b5fb45bab96840d67bbea7d8e2d78bcb8e4a70534b34b",
+      "newInventorySha256": "e0d58bb42059a791b0402b3d7df79c66c485e1de6a7086da940869d276ac0c75",
+      "regularFiles": 19863,
+      "links": [
+        {
+          "path": ".agents/notes/implemented/CLAUDE.md",
+          "gitBlobSha": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+          "mode": "120000",
+          "sha256": "a54ff182c7e8acf56acfd6e4b9c3ff41e2c41a31c9b211b2deb9df75d9a478f9",
+          "target": "AGENTS.md",
+          "resolved": {
+            "path": ".agents/notes/implemented/AGENTS.md",
+            "type": "regular"
+          }
+        },
+        {
+          "path": ".agents/skills/agent-experience/SKILL.md",
+          "gitBlobSha": "fb40f7ffce2d5b4c13f844c962da35dc771caec0",
+          "mode": "120000",
+          "sha256": "64db69fba1725d47528319dc4f704e8780ab1dcabf326c8cd93674aeb9fdd791",
+          "target": "../../../packages/preset/agent-preset/skills/agent-experience/SKILL.md",
+          "resolved": {
+            "path": "packages/preset/agent-preset/skills/agent-experience/SKILL.md",
+            "type": "regular"
+          }
+        },
+        {
+          "path": ".claude/skills",
+          "gitBlobSha": "2b7a412b8fa0fb7e985b0793321bd4e698f2b6cd",
+          "mode": "120000",
+          "sha256": "3c74c93317f015d16370349a76529b6f8332c808bdd589e7640eeba6a1b1b874",
+          "target": "../.agents/skills",
+          "resolved": {
+            "path": ".agents/skills",
+            "type": "directory"
+          }
+        },
+        {
+          "path": "CLAUDE.md",
+          "gitBlobSha": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+          "mode": "120000",
+          "sha256": "a54ff182c7e8acf56acfd6e4b9c3ff41e2c41a31c9b211b2deb9df75d9a478f9",
+          "target": "AGENTS.md",
+          "resolved": {
+            "path": "AGENTS.md",
+            "type": "regular"
+          }
+        },
+        {
+          "path": "apps/cli/tests/profiles/acp/cordis.yml",
+          "gitBlobSha": "8a6e191c8e97ad8f581569c74f922c60aa5797c0",
+          "mode": "120000",
+          "sha256": "e66c4cb7a6f5869ab070c7784114815b12e8366ed2a401d969312892aa39a3be",
+          "target": "../../../../../snapshots/acp/escalation-approved/cordis.yml",
+          "resolved": {
+            "path": "snapshots/acp/escalation-approved/cordis.yml",
+            "type": "regular"
+          }
+        },
+        {
+          "path": "packages/CLAUDE.md",
+          "gitBlobSha": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+          "mode": "120000",
+          "sha256": "a54ff182c7e8acf56acfd6e4b9c3ff41e2c41a31c9b211b2deb9df75d9a478f9",
+          "target": "AGENTS.md",
+          "resolved": {
+            "path": "packages/AGENTS.md",
+            "type": "regular"
+          }
+        },
+        {
+          "path": "snapshots/acp/escalation-approved/system-prompt.expected.md",
+          "gitBlobSha": "bb85c10476f74cedd0285da78a06cdd6246ae8f9",
+          "mode": "120000",
+          "sha256": "12640ae132cdc6b4f4d4a2074392fa61e246af096304f1336dc6398af3fc7fae",
+          "target": "../../session/text-turn/system-prompt.expected.md",
+          "resolved": {
+            "path": "snapshots/session/text-turn/system-prompt.expected.md",
+            "type": "regular"
+          }
+        },
+        {
+          "path": "snapshots/acp/escalation-approved/tool-schemas.expected.json",
+          "gitBlobSha": "c77f354b59928be0fc5371c4a14aee8e85a10a25",
+          "mode": "120000",
+          "sha256": "f61e294422587e3bc65fbeb68ad03e9723083055ff0310ecc7e1f5bb9f522d3e",
+          "target": "../../session/text-turn/tool-schemas.expected.json",
+          "resolved": {
+            "path": "snapshots/session/text-turn/tool-schemas.expected.json",
+            "type": "regular"
+          }
+        },
+        {
+          "path": "snapshots/acp/image-compaction/system-prompt.expected.md",
+          "gitBlobSha": "7d5e489c58e4975138807a6955d21cce9eca8138",
+          "mode": "120000",
+          "sha256": "a69f942fb36eb0472339da37c0e0e7296075c3ba1a23ac22c2fb030f936427ef",
+          "target": "../../session/read-image/system-prompt.expected.md",
+          "resolved": {
+            "path": "snapshots/session/read-image/system-prompt.expected.md",
+            "type": "regular"
+          }
+        },
+        {
+          "path": "snapshots/sdk/account-provider-signout/system-prompt.expected.md",
+          "gitBlobSha": "4ca0dd39b2abbfbf8d5bbb8ba56efdc36a0621f7",
+          "mode": "120000",
+          "sha256": "9d1983b66ed868d1f880f974d2f631390fbdc69b52e92d4d0b0dce95c9d686b8",
+          "target": "../text-turn/system-prompt.expected.md",
+          "resolved": {
+            "path": "snapshots/sdk/text-turn/system-prompt.expected.md",
+            "type": "regular"
+          }
+        },
+        {
+          "path": "snapshots/sdk/account-provider-signout/tool-schemas.expected.json",
+          "gitBlobSha": "11d7ccbf24f03aa14f119900c72e2691ccd338aa",
+          "mode": "120000",
+          "sha256": "f510eb71a43af161851add70d34f330475da955ea7c9b4ecfa73e6c44fc84a91",
+          "target": "../text-turn/tool-schemas.expected.json",
+          "resolved": {
+            "path": "snapshots/sdk/text-turn/tool-schemas.expected.json",
+            "type": "regular"
+          }
+        },
+        {
+          "path": "snapshots/session/agent-instructions/workspace/AGENTS.md",
+          "gitBlobSha": "83624c92b714a954e3b43d12785ceb222f3f4828",
+          "mode": "120000",
+          "sha256": "b991fee549d4d6f3644cb0d8756871ff7815e848d0057166119ec7b349fd4bdb",
+          "target": "AGENTS.canonical.md",
+          "resolved": {
+            "path": "snapshots/session/agent-instructions/workspace/AGENTS.canonical.md",
+            "type": "regular"
+          }
+        },
+        {
+          "path": "snapshots/session/agent-instructions/workspace/nested/AGENTS.md",
+          "gitBlobSha": "83624c92b714a954e3b43d12785ceb222f3f4828",
+          "mode": "120000",
+          "sha256": "b991fee549d4d6f3644cb0d8756871ff7815e848d0057166119ec7b349fd4bdb",
+          "target": "AGENTS.canonical.md",
+          "resolved": {
+            "path": "snapshots/session/agent-instructions/workspace/nested/AGENTS.canonical.md",
+            "type": "regular"
+          }
+        },
+        {
+          "path": "vendor/CLAUDE.md",
+          "gitBlobSha": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+          "mode": "120000",
+          "sha256": "a54ff182c7e8acf56acfd6e4b9c3ff41e2c41a31c9b211b2deb9df75d9a478f9",
+          "target": "AGENTS.md",
+          "resolved": {
+            "path": "vendor/AGENTS.md",
+            "type": "regular"
+          }
+        }
+      ],
+      "hiddenHashes": "Empty for source data admission control; not a campaign arm/gold qualification.",
+      "upstreamCodeExecuted": false
+    }
+  ],
+  "ownedFixtureArchiveSha256": "6a0d16c26552b8a78a8149a0fa2f3096fd2f2f4aa143b56ba63f852a5f506815",
+  "docker": [
+    {
+      "sequence": 1,
+      "container": "dotrepo-f05-c2247ea7332940f983c26ade3e862e68",
+      "checks": {
+        "links-byte-faithful-modes-nonroot-fresh": true,
+        "mount-free-network-none-readonly": true,
+        "actual-directory-alias": true,
+        "fresh-directory-refuses-merge": true,
+        "copy-byte-accounting": true,
+        "cleanup-independently-confirmed": true
+      },
+      "status": "passed",
+      "provision": {
+        "imageId": "sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4",
+        "containerName": "dotrepo-f05-c2247ea7332940f983c26ade3e862e68",
+        "network": "none",
+        "mounts": [],
+        "readonlyRoot": true
+      },
+      "checkout": {
+        "stdout": "",
+        "stderr": "",
+        "exitCode": 0,
+        "error": null,
+        "sourceCopy": {
+          "originalArchiveSha256": "6a0d16c26552b8a78a8149a0fa2f3096fd2f2f4aa143b56ba63f852a5f506815",
+          "archives": [
+            {
+              "kind": "regular-directories",
+              "sha256": "8f33810fbc6c9db98f8fe0ec5858e1f71a5121f07ce3a6b940665d1bb2702d41",
+              "stdinBytes": 10240
+            },
+            {
+              "kind": "symlinks",
+              "sha256": "b7336952972d7a6873bdf3898af3def34c7de0c59908ed7dac68f6d4a9b8f671",
+              "stdinBytes": 10240
+            }
+          ],
+          "stdinBytes": 20480
+        }
+      },
+      "read": {
+        "stdout": "data/\ndocs/message\nowned control original\n755\n1000\n",
+        "stderr": "",
+        "exitCode": 0,
+        "error": null
+      },
+      "changed": {
+        "stdout": "owned changed\n",
+        "stderr": "",
+        "exitCode": 0,
+        "error": null
+      },
+      "secondCheckout": {
+        "stdout": "",
+        "stderr": "mkdir: cannot create directory \u2018/workspace/repository\u2019: File exists\n",
+        "exitCode": 1,
+        "error": null,
+        "sourceCopy": {
+          "originalArchiveSha256": "6a0d16c26552b8a78a8149a0fa2f3096fd2f2f4aa143b56ba63f852a5f506815",
+          "archives": [],
+          "stdinBytes": 0
+        }
+      },
+      "cleanup": {
+        "stdout": "dotrepo-f05-c2247ea7332940f983c26ade3e862e68\n",
+        "stderr": "",
+        "exitCode": 0,
+        "error": null
+      },
+      "absentAfterCleanup": {
+        "stdout": "[]\n",
+        "stderr": "error: no such object: dotrepo-f05-c2247ea7332940f983c26ade3e862e68\n",
+        "exitCode": 1,
+        "error": null
+      },
+      "operations": [
+        {
+          "argv": [
+            "docker",
+            "image",
+            "inspect",
+            "sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "[\n    {\n        \"Id\": \"sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4\",\n        \"RepoTags\": [\n            \"dotrepo-f05-runtime-control:20261029\"\n        ],\n        \"RepoDigests\": [\n            \"dotrepo-f05-runtime-control@sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4\"\n        ],\n        \"Comment\": \"buildkit.dockerfile.v0\",\n        \"Created\": \"2026-10-29T06:01:37.380505627Z\",\n        \"Config\": {\n            \"Env\": [\n                \"PATH=/usr/local/bin:/usr/bin:/bin\"\n            ],\n            \"WorkingDir\": \"/\"\n        },\n        \"Architecture\": \"arm64\",\n        \"Os\": \"linux\",\n        \"Size\": 199290736,\n        \"RootFS\": {\n            \"Type\": \"layers\",\n            \"Layers\": [\n                \"sha256:20ab9113af1fc91eb309fc6add9741a83a591ef1632786575dad9316549fb811\"\n            ]\n        },\n        \"Metadata\": {\n            \"LastTagTime\": \"2026-10-29T06:01:42.113770005Z\"\n        },\n        \"Descriptor\": {\n            \"mediaType\": \"application/vnd.oci.image.index.v1+json\",\n            \"digest\": \"sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4\",\n            \"size\": 855\n        },\n        \"Identity\": {\n            \"Build\": [\n                {\n                    \"Ref\": \"v10rqzfmladlc674hwjtyj1ak\",\n                    \"CreatedAt\": \"2026-10-29T06:01:44.956521923Z\"\n                }\n            ]\n        }\n    }\n]\n",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "create",
+            "--name",
+            "dotrepo-f05-c2247ea7332940f983c26ade3e862e68",
+            "--pull=never",
+            "--read-only",
+            "--cap-drop=ALL",
+            "--security-opt=no-new-privileges",
+            "--network=none",
+            "--ipc=private",
+            "--cgroupns=private",
+            "--user",
+            "1000:1000",
+            "--workdir=/workspace",
+            "--memory",
+            "268435456",
+            "--memory-swap",
+            "268435456",
+            "--cpus",
+            "1",
+            "--pids-limit",
+            "32",
+            "--ulimit",
+            "nofile=1024:1024",
+            "--log-driver=none",
+            "--no-healthcheck",
+            "--tmpfs",
+            "/workspace:rw,exec,nosuid,nodev,size=8388608,uid=1000,gid=1000,mode=0700",
+            "--tmpfs",
+            "/tmp:rw,exec,nosuid,nodev,size=8388608,uid=1000,gid=1000,mode=0700",
+            "--label",
+            "dotrepo.session=owned-source-link-control",
+            "--env",
+            "HOME=/workspace/.home",
+            "--env",
+            "LANG=C.UTF-8",
+            "--env",
+            "PATH=/usr/bin:/bin",
+            "--entrypoint=/bin/sh",
+            "sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4",
+            "-c",
+            "while :; do sleep 3600; done"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "b6d114b78d812ece1e27c0b3486af87bd361eea3dbe68bfb2f48c6da5836d2e9\n",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "start",
+            "dotrepo-f05-c2247ea7332940f983c26ade3e862e68"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "dotrepo-f05-c2247ea7332940f983c26ade3e862e68\n",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-c2247ea7332940f983c26ade3e862e68",
+            "/bin/mkdir",
+            "/workspace/repository"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "exec",
+            "-i",
+            "dotrepo-f05-c2247ea7332940f983c26ade3e862e68",
+            "/bin/tar",
+            "--extract",
+            "--no-same-owner",
+            "--no-same-permissions",
+            "--directory=/workspace/repository"
+          ],
+          "stdinBytes": 10240,
+          "result": {
+            "stdout": "",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "exec",
+            "-i",
+            "dotrepo-f05-c2247ea7332940f983c26ade3e862e68",
+            "/bin/tar",
+            "--extract",
+            "--no-same-owner",
+            "--no-same-permissions",
+            "--directory=/workspace/repository"
+          ],
+          "stdinBytes": 10240,
+          "result": {
+            "stdout": "",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "exec",
+            "--workdir=/workspace/repository",
+            "dotrepo-f05-c2247ea7332940f983c26ade3e862e68",
+            "/bin/sh",
+            "-c",
+            "readlink docs; readlink README; cat README; stat -c '%a' data/run.sh; id -u"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "data/\ndocs/message\nowned control original\n755\n1000\n",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "inspect",
+            "dotrepo-f05-c2247ea7332940f983c26ade3e862e68"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "[\n    {\n        \"Id\": \"b6d114b78d812ece1e27c0b3486af87bd361eea3dbe68bfb2f48c6da5836d2e9\",\n        \"Created\": \"2026-10-29T06:49:48.200251548Z\",\n        \"Path\": \"/bin/sh\",\n        \"Args\": [\n            \"-c\",\n            \"while :; do sleep 3600; done\"\n        ],\n        \"State\": {\n            \"Status\": \"running\",\n            \"Running\": true,\n            \"Paused\": false,\n            \"Restarting\": false,\n            \"OOMKilled\": false,\n            \"Dead\": false,\n            \"Pid\": 32477,\n            \"ExitCode\": 0,\n            \"Error\": \"\",\n            \"StartedAt\": \"2026-10-29T06:49:48.340257007Z\",\n            \"FinishedAt\": \"0001-01-01T00:00:00Z\"\n        },\n        \"Image\": \"sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4\",\n        \"ResolvConfPath\": \"/var/lib/docker/containers/b6d114b78d812ece1e27c0b3486af87bd361eea3dbe68bfb2f48c6da5836d2e9/resolv.conf\",\n        \"HostnamePath\": \"/var/lib/docker/containers/b6d114b78d812ece1e27c0b3486af87bd361eea3dbe68bfb2f48c6da5836d2e9/hostname\",\n        \"HostsPath\": \"/var/lib/docker/containers/b6d114b78d812ece1e27c0b3486af87bd361eea3dbe68bfb2f48c6da5836d2e9/hosts\",\n        \"LogPath\": \"\",\n        \"Name\": \"/dotrepo-f05-c2247ea7332940f983c26ade3e862e68\",\n        \"RestartCount\": 0,\n        \"Driver\": \"overlayfs\",\n        \"Platform\": \"linux\",\n        \"MountLabel\": \"\",\n        \"ProcessLabel\": \"\",\n        \"AppArmorProfile\": \"\",\n        \"ExecIDs\": null,\n        \"HostConfig\": {\n            \"Binds\": null,\n            \"ContainerIDFile\": \"\",\n            \"LogConfig\": {\n                \"Type\": \"none\",\n                \"Config\": {}\n            },\n            \"NetworkMode\": \"none\",\n            \"PortBindings\": {},\n            \"RestartPolicy\": {\n                \"Name\": \"no\",\n                \"MaximumRetryCount\": 0\n            },\n            \"AutoRemove\": false,\n            \"VolumeDriver\": \"\",\n            \"VolumesFrom\": null,\n            \"ConsoleSize\": [\n                0,\n                0\n            ],\n            \"CapAdd\": null,\n            \"CapDrop\": [\n                \"ALL\"\n            ],\n            \"CgroupnsMode\": \"private\",\n            \"Dns\": null,\n            \"DnsOptions\": [],\n            \"DnsSearch\": [],\n            \"ExtraHosts\": null,\n            \"GroupAdd\": null,\n            \"IpcMode\": \"private\",\n            \"Cgroup\": \"\",\n            \"Links\": null,\n            \"OomScoreAdj\": 0,\n            \"PidMode\": \"\",\n            \"Privileged\": false,\n            \"PublishAllPorts\": false,\n            \"ReadonlyRootfs\": true,\n            \"SecurityOpt\": [\n                \"no-new-privileges\"\n            ],\n            \"Tmpfs\": {\n                \"/tmp\": \"rw,exec,nosuid,nodev,size=8388608,uid=1000,gid=1000,mode=0700\",\n                \"/workspace\": \"rw,exec,nosuid,nodev,size=8388608,uid=1000,gid=1000,mode=0700\"\n            },\n            \"UTSMode\": \"\",\n            \"UsernsMode\": \"\",\n            \"ShmSize\": 67108864,\n            \"Runtime\": \"runc\",\n            \"Isolation\": \"\",\n            \"CpuShares\": 0,\n            \"Memory\": 268435456,\n            \"NanoCpus\": 1000000000,\n            \"CgroupParent\": \"\",\n            \"BlkioWeight\": 0,\n            \"BlkioWeightDevice\": [],\n            \"BlkioDeviceReadBps\": [],\n            \"BlkioDeviceWriteBps\": [],\n            \"BlkioDeviceReadIOps\": [],\n            \"BlkioDeviceWriteIOps\": [],\n            \"CpuPeriod\": 0,\n            \"CpuQuota\": 0,\n            \"CpuRealtimePeriod\": 0,\n            \"CpuRealtimeRuntime\": 0,\n            \"CpusetCpus\": \"\",\n            \"CpusetMems\": \"\",\n            \"Devices\": [],\n            \"DeviceCgroupRules\": null,\n            \"DeviceRequests\": null,\n            \"MemoryReservation\": 0,\n            \"MemorySwap\": 268435456,\n            \"MemorySwappiness\": null,\n            \"OomKillDisable\": null,\n            \"PidsLimit\": 32,\n            \"Ulimits\": [\n                {\n                    \"Name\": \"nofile\",\n                    \"Hard\": 1024,\n                    \"Soft\": 1024\n                }\n            ],\n            \"CpuCount\": 0,\n            \"CpuPercent\": 0,\n            \"IOMaximumIOps\": 0,\n            \"IOMaximumBandwidth\": 0,\n            \"MaskedPaths\": [\n                \"/proc/acpi\",\n                \"/proc/asound\",\n                \"/proc/interrupts\",\n                \"/proc/kcore\",\n                \"/proc/keys\",\n                \"/proc/latency_stats\",\n                \"/proc/sched_debug\",\n                \"/proc/scsi\",\n                \"/proc/timer_list\",\n                \"/proc/timer_stats\",\n                \"/sys/devices/virtual/powercap\",\n                \"/sys/firmware\"\n            ],\n            \"ReadonlyPaths\": [\n                \"/proc/bus\",\n                \"/proc/fs\",\n                \"/proc/irq\",\n                \"/proc/sys\",\n                \"/proc/sysrq-trigger\"\n            ]\n        },\n        \"Storage\": {\n            \"RootFS\": {\n                \"Snapshot\": {\n                    \"Name\": \"overlayfs\"\n                }\n            }\n        },\n        \"Mounts\": [],\n        \"Config\": {\n            \"Hostname\": \"b6d114b78d81\",\n            \"Domainname\": \"\",\n            \"User\": \"1000:1000\",\n            \"AttachStdin\": false,\n            \"AttachStdout\": true,\n            \"AttachStderr\": true,\n            \"Tty\": false,\n            \"OpenStdin\": false,\n            \"StdinOnce\": false,\n            \"Env\": [\n                \"LANG=C.UTF-8\",\n                \"PATH=/usr/bin:/bin\",\n                \"HOME=/workspace/.home\"\n            ],\n            \"Cmd\": [\n                \"-c\",\n                \"while :; do sleep 3600; done\"\n            ],\n            \"Healthcheck\": {\n                \"Test\": [\n                    \"NONE\"\n                ]\n            },\n            \"Image\": \"sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4\",\n            \"Volumes\": null,\n            \"WorkingDir\": \"/workspace\",\n            \"Entrypoint\": [\n                \"/bin/sh\"\n            ],\n            \"Labels\": {\n                \"dotrepo.session\": \"owned-source-link-control\"\n            }\n        },\n        \"NetworkSettings\": {\n            \"SandboxID\": \"7a88efe9d66ecb3366c1dd1aec357114f89b55fc086e994d274dee71df855767\",\n            \"SandboxKey\": \"/var/run/docker/netns/7a88efe9d66e\",\n            \"Ports\": {},\n            \"Networks\": {\n                \"none\": {\n                    \"IPAMConfig\": null,\n                    \"Links\": null,\n                    \"Aliases\": null,\n                    \"DriverOpts\": null,\n                    \"GwPriority\": 0,\n                    \"NetworkID\": \"d2e5d0442bdb33f01f82f3f04ddfddbaba3a3c08aa212e2d313252bdd04e41b9\",\n                    \"EndpointID\": \"471c3a20ae2786c444168b07afd6e8a9004acc8300063d86a8839ef42c16c56d\",\n                    \"Gateway\": \"\",\n                    \"IPAddress\": \"\",\n                    \"MacAddress\": \"\",\n                    \"IPPrefixLen\": 0,\n                    \"IPv6Gateway\": \"\",\n                    \"GlobalIPv6Address\": \"\",\n                    \"GlobalIPv6PrefixLen\": 0,\n                    \"DNSNames\": null\n                }\n            }\n        },\n        \"ImageManifestDescriptor\": {\n            \"mediaType\": \"application/vnd.oci.image.manifest.v1+json\",\n            \"digest\": \"sha256:f4b08ac30ff7ae3803f6049f36e54a12e3c0f02e83422c6982f6164d7d0b03d8\",\n            \"size\": 481,\n            \"platform\": {\n                \"architecture\": \"arm64\",\n                \"os\": \"linux\"\n            }\n        }\n    }\n]\n",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "exec",
+            "--workdir=/workspace/repository",
+            "dotrepo-f05-c2247ea7332940f983c26ade3e862e68",
+            "/bin/sh",
+            "-c",
+            "printf 'owned changed\n' > docs/message; cat data/message"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "owned changed\n",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-c2247ea7332940f983c26ade3e862e68",
+            "/bin/mkdir",
+            "/workspace/repository"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "",
+            "stderr": "mkdir: cannot create directory \u2018/workspace/repository\u2019: File exists\n",
+            "exitCode": 1,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "rm",
+            "--force",
+            "--volumes",
+            "dotrepo-f05-c2247ea7332940f983c26ade3e862e68"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "dotrepo-f05-c2247ea7332940f983c26ade3e862e68\n",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "inspect",
+            "dotrepo-f05-c2247ea7332940f983c26ade3e862e68"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "[]\n",
+            "stderr": "error: no such object: dotrepo-f05-c2247ea7332940f983c26ade3e862e68\n",
+            "exitCode": 1,
+            "error": null
+          }
+        }
+      ]
+    },
+    {
+      "sequence": 2,
+      "container": "dotrepo-f05-9726512b02bf4071bb86aedd916b48c1",
+      "checks": {
+        "links-byte-faithful-modes-nonroot-fresh": true,
+        "mount-free-network-none-readonly": true,
+        "fresh-directory-refuses-merge": true,
+        "copy-byte-accounting": true,
+        "cleanup-independently-confirmed": true
+      },
+      "status": "passed",
+      "provision": {
+        "imageId": "sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4",
+        "containerName": "dotrepo-f05-9726512b02bf4071bb86aedd916b48c1",
+        "network": "none",
+        "mounts": [],
+        "readonlyRoot": true
+      },
+      "checkout": {
+        "stdout": "",
+        "stderr": "",
+        "exitCode": 0,
+        "error": null,
+        "sourceCopy": {
+          "originalArchiveSha256": "6a0d16c26552b8a78a8149a0fa2f3096fd2f2f4aa143b56ba63f852a5f506815",
+          "archives": [
+            {
+              "kind": "regular-directories",
+              "sha256": "8f33810fbc6c9db98f8fe0ec5858e1f71a5121f07ce3a6b940665d1bb2702d41",
+              "stdinBytes": 10240
+            },
+            {
+              "kind": "symlinks",
+              "sha256": "b7336952972d7a6873bdf3898af3def34c7de0c59908ed7dac68f6d4a9b8f671",
+              "stdinBytes": 10240
+            }
+          ],
+          "stdinBytes": 20480
+        }
+      },
+      "read": {
+        "stdout": "data/\ndocs/message\nowned control original\n755\n1000\n",
+        "stderr": "",
+        "exitCode": 0,
+        "error": null
+      },
+      "secondCheckout": {
+        "stdout": "",
+        "stderr": "mkdir: cannot create directory \u2018/workspace/repository\u2019: File exists\n",
+        "exitCode": 1,
+        "error": null,
+        "sourceCopy": {
+          "originalArchiveSha256": "6a0d16c26552b8a78a8149a0fa2f3096fd2f2f4aa143b56ba63f852a5f506815",
+          "archives": [],
+          "stdinBytes": 0
+        }
+      },
+      "cleanup": {
+        "stdout": "dotrepo-f05-9726512b02bf4071bb86aedd916b48c1\n",
+        "stderr": "",
+        "exitCode": 0,
+        "error": null
+      },
+      "absentAfterCleanup": {
+        "stdout": "[]\n",
+        "stderr": "error: no such object: dotrepo-f05-9726512b02bf4071bb86aedd916b48c1\n",
+        "exitCode": 1,
+        "error": null
+      },
+      "operations": [
+        {
+          "argv": [
+            "docker",
+            "image",
+            "inspect",
+            "sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "[\n    {\n        \"Id\": \"sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4\",\n        \"RepoTags\": [\n            \"dotrepo-f05-runtime-control:20261029\"\n        ],\n        \"RepoDigests\": [\n            \"dotrepo-f05-runtime-control@sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4\"\n        ],\n        \"Comment\": \"buildkit.dockerfile.v0\",\n        \"Created\": \"2026-10-29T06:01:37.380505627Z\",\n        \"Config\": {\n            \"Env\": [\n                \"PATH=/usr/local/bin:/usr/bin:/bin\"\n            ],\n            \"WorkingDir\": \"/\"\n        },\n        \"Architecture\": \"arm64\",\n        \"Os\": \"linux\",\n        \"Size\": 199290736,\n        \"RootFS\": {\n            \"Type\": \"layers\",\n            \"Layers\": [\n                \"sha256:20ab9113af1fc91eb309fc6add9741a83a591ef1632786575dad9316549fb811\"\n            ]\n        },\n        \"Metadata\": {\n            \"LastTagTime\": \"2026-10-29T06:01:42.113770005Z\"\n        },\n        \"Descriptor\": {\n            \"mediaType\": \"application/vnd.oci.image.index.v1+json\",\n            \"digest\": \"sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4\",\n            \"size\": 855\n        },\n        \"Identity\": {\n            \"Build\": [\n                {\n                    \"Ref\": \"v10rqzfmladlc674hwjtyj1ak\",\n                    \"CreatedAt\": \"2026-10-29T06:01:44.956521923Z\"\n                }\n            ]\n        }\n    }\n]\n",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "create",
+            "--name",
+            "dotrepo-f05-9726512b02bf4071bb86aedd916b48c1",
+            "--pull=never",
+            "--read-only",
+            "--cap-drop=ALL",
+            "--security-opt=no-new-privileges",
+            "--network=none",
+            "--ipc=private",
+            "--cgroupns=private",
+            "--user",
+            "1000:1000",
+            "--workdir=/workspace",
+            "--memory",
+            "268435456",
+            "--memory-swap",
+            "268435456",
+            "--cpus",
+            "1",
+            "--pids-limit",
+            "32",
+            "--ulimit",
+            "nofile=1024:1024",
+            "--log-driver=none",
+            "--no-healthcheck",
+            "--tmpfs",
+            "/workspace:rw,exec,nosuid,nodev,size=8388608,uid=1000,gid=1000,mode=0700",
+            "--tmpfs",
+            "/tmp:rw,exec,nosuid,nodev,size=8388608,uid=1000,gid=1000,mode=0700",
+            "--label",
+            "dotrepo.session=owned-source-link-control",
+            "--env",
+            "HOME=/workspace/.home",
+            "--env",
+            "LANG=C.UTF-8",
+            "--env",
+            "PATH=/usr/bin:/bin",
+            "--entrypoint=/bin/sh",
+            "sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4",
+            "-c",
+            "while :; do sleep 3600; done"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "c72afead8ffa58e57c268d59e190e5c8295fc6242a91018d985ebe6fe29331c9\n",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "start",
+            "dotrepo-f05-9726512b02bf4071bb86aedd916b48c1"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "dotrepo-f05-9726512b02bf4071bb86aedd916b48c1\n",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-9726512b02bf4071bb86aedd916b48c1",
+            "/bin/mkdir",
+            "/workspace/repository"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "exec",
+            "-i",
+            "dotrepo-f05-9726512b02bf4071bb86aedd916b48c1",
+            "/bin/tar",
+            "--extract",
+            "--no-same-owner",
+            "--no-same-permissions",
+            "--directory=/workspace/repository"
+          ],
+          "stdinBytes": 10240,
+          "result": {
+            "stdout": "",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "exec",
+            "-i",
+            "dotrepo-f05-9726512b02bf4071bb86aedd916b48c1",
+            "/bin/tar",
+            "--extract",
+            "--no-same-owner",
+            "--no-same-permissions",
+            "--directory=/workspace/repository"
+          ],
+          "stdinBytes": 10240,
+          "result": {
+            "stdout": "",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "exec",
+            "--workdir=/workspace/repository",
+            "dotrepo-f05-9726512b02bf4071bb86aedd916b48c1",
+            "/bin/sh",
+            "-c",
+            "readlink docs; readlink README; cat README; stat -c '%a' data/run.sh; id -u"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "data/\ndocs/message\nowned control original\n755\n1000\n",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "inspect",
+            "dotrepo-f05-9726512b02bf4071bb86aedd916b48c1"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "[\n    {\n        \"Id\": \"c72afead8ffa58e57c268d59e190e5c8295fc6242a91018d985ebe6fe29331c9\",\n        \"Created\": \"2026-10-29T06:49:49.268258799Z\",\n        \"Path\": \"/bin/sh\",\n        \"Args\": [\n            \"-c\",\n            \"while :; do sleep 3600; done\"\n        ],\n        \"State\": {\n            \"Status\": \"running\",\n            \"Running\": true,\n            \"Paused\": false,\n            \"Restarting\": false,\n            \"OOMKilled\": false,\n            \"Dead\": false,\n            \"Pid\": 32674,\n            \"ExitCode\": 0,\n            \"Error\": \"\",\n            \"StartedAt\": \"2026-10-29T06:49:49.377366132Z\",\n            \"FinishedAt\": \"0001-01-01T00:00:00Z\"\n        },\n        \"Image\": \"sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4\",\n        \"ResolvConfPath\": \"/var/lib/docker/containers/c72afead8ffa58e57c268d59e190e5c8295fc6242a91018d985ebe6fe29331c9/resolv.conf\",\n        \"HostnamePath\": \"/var/lib/docker/containers/c72afead8ffa58e57c268d59e190e5c8295fc6242a91018d985ebe6fe29331c9/hostname\",\n        \"HostsPath\": \"/var/lib/docker/containers/c72afead8ffa58e57c268d59e190e5c8295fc6242a91018d985ebe6fe29331c9/hosts\",\n        \"LogPath\": \"\",\n        \"Name\": \"/dotrepo-f05-9726512b02bf4071bb86aedd916b48c1\",\n        \"RestartCount\": 0,\n        \"Driver\": \"overlayfs\",\n        \"Platform\": \"linux\",\n        \"MountLabel\": \"\",\n        \"ProcessLabel\": \"\",\n        \"AppArmorProfile\": \"\",\n        \"ExecIDs\": null,\n        \"HostConfig\": {\n            \"Binds\": null,\n            \"ContainerIDFile\": \"\",\n            \"LogConfig\": {\n                \"Type\": \"none\",\n                \"Config\": {}\n            },\n            \"NetworkMode\": \"none\",\n            \"PortBindings\": {},\n            \"RestartPolicy\": {\n                \"Name\": \"no\",\n                \"MaximumRetryCount\": 0\n            },\n            \"AutoRemove\": false,\n            \"VolumeDriver\": \"\",\n            \"VolumesFrom\": null,\n            \"ConsoleSize\": [\n                0,\n                0\n            ],\n            \"CapAdd\": null,\n            \"CapDrop\": [\n                \"ALL\"\n            ],\n            \"CgroupnsMode\": \"private\",\n            \"Dns\": null,\n            \"DnsOptions\": [],\n            \"DnsSearch\": [],\n            \"ExtraHosts\": null,\n            \"GroupAdd\": null,\n            \"IpcMode\": \"private\",\n            \"Cgroup\": \"\",\n            \"Links\": null,\n            \"OomScoreAdj\": 0,\n            \"PidMode\": \"\",\n            \"Privileged\": false,\n            \"PublishAllPorts\": false,\n            \"ReadonlyRootfs\": true,\n            \"SecurityOpt\": [\n                \"no-new-privileges\"\n            ],\n            \"Tmpfs\": {\n                \"/tmp\": \"rw,exec,nosuid,nodev,size=8388608,uid=1000,gid=1000,mode=0700\",\n                \"/workspace\": \"rw,exec,nosuid,nodev,size=8388608,uid=1000,gid=1000,mode=0700\"\n            },\n            \"UTSMode\": \"\",\n            \"UsernsMode\": \"\",\n            \"ShmSize\": 67108864,\n            \"Runtime\": \"runc\",\n            \"Isolation\": \"\",\n            \"CpuShares\": 0,\n            \"Memory\": 268435456,\n            \"NanoCpus\": 1000000000,\n            \"CgroupParent\": \"\",\n            \"BlkioWeight\": 0,\n            \"BlkioWeightDevice\": [],\n            \"BlkioDeviceReadBps\": [],\n            \"BlkioDeviceWriteBps\": [],\n            \"BlkioDeviceReadIOps\": [],\n            \"BlkioDeviceWriteIOps\": [],\n            \"CpuPeriod\": 0,\n            \"CpuQuota\": 0,\n            \"CpuRealtimePeriod\": 0,\n            \"CpuRealtimeRuntime\": 0,\n            \"CpusetCpus\": \"\",\n            \"CpusetMems\": \"\",\n            \"Devices\": [],\n            \"DeviceCgroupRules\": null,\n            \"DeviceRequests\": null,\n            \"MemoryReservation\": 0,\n            \"MemorySwap\": 268435456,\n            \"MemorySwappiness\": null,\n            \"OomKillDisable\": null,\n            \"PidsLimit\": 32,\n            \"Ulimits\": [\n                {\n                    \"Name\": \"nofile\",\n                    \"Hard\": 1024,\n                    \"Soft\": 1024\n                }\n            ],\n            \"CpuCount\": 0,\n            \"CpuPercent\": 0,\n            \"IOMaximumIOps\": 0,\n            \"IOMaximumBandwidth\": 0,\n            \"MaskedPaths\": [\n                \"/proc/acpi\",\n                \"/proc/asound\",\n                \"/proc/interrupts\",\n                \"/proc/kcore\",\n                \"/proc/keys\",\n                \"/proc/latency_stats\",\n                \"/proc/sched_debug\",\n                \"/proc/scsi\",\n                \"/proc/timer_list\",\n                \"/proc/timer_stats\",\n                \"/sys/devices/virtual/powercap\",\n                \"/sys/firmware\"\n            ],\n            \"ReadonlyPaths\": [\n                \"/proc/bus\",\n                \"/proc/fs\",\n                \"/proc/irq\",\n                \"/proc/sys\",\n                \"/proc/sysrq-trigger\"\n            ]\n        },\n        \"Storage\": {\n            \"RootFS\": {\n                \"Snapshot\": {\n                    \"Name\": \"overlayfs\"\n                }\n            }\n        },\n        \"Mounts\": [],\n        \"Config\": {\n            \"Hostname\": \"c72afead8ffa\",\n            \"Domainname\": \"\",\n            \"User\": \"1000:1000\",\n            \"AttachStdin\": false,\n            \"AttachStdout\": true,\n            \"AttachStderr\": true,\n            \"Tty\": false,\n            \"OpenStdin\": false,\n            \"StdinOnce\": false,\n            \"Env\": [\n                \"HOME=/workspace/.home\",\n                \"LANG=C.UTF-8\",\n                \"PATH=/usr/bin:/bin\"\n            ],\n            \"Cmd\": [\n                \"-c\",\n                \"while :; do sleep 3600; done\"\n            ],\n            \"Healthcheck\": {\n                \"Test\": [\n                    \"NONE\"\n                ]\n            },\n            \"Image\": \"sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4\",\n            \"Volumes\": null,\n            \"WorkingDir\": \"/workspace\",\n            \"Entrypoint\": [\n                \"/bin/sh\"\n            ],\n            \"Labels\": {\n                \"dotrepo.session\": \"owned-source-link-control\"\n            }\n        },\n        \"NetworkSettings\": {\n            \"SandboxID\": \"d440e396c4fdc2d7b7cb187f960720ed771f75af7487663ce8937d5a527d97f1\",\n            \"SandboxKey\": \"/var/run/docker/netns/d440e396c4fd\",\n            \"Ports\": {},\n            \"Networks\": {\n                \"none\": {\n                    \"IPAMConfig\": null,\n                    \"Links\": null,\n                    \"Aliases\": null,\n                    \"DriverOpts\": null,\n                    \"GwPriority\": 0,\n                    \"NetworkID\": \"d2e5d0442bdb33f01f82f3f04ddfddbaba3a3c08aa212e2d313252bdd04e41b9\",\n                    \"EndpointID\": \"46b500f3ecce0f98febd8d8c21eb3a8859fc2e850491e218b22c462448b626fb\",\n                    \"Gateway\": \"\",\n                    \"IPAddress\": \"\",\n                    \"MacAddress\": \"\",\n                    \"IPPrefixLen\": 0,\n                    \"IPv6Gateway\": \"\",\n                    \"GlobalIPv6Address\": \"\",\n                    \"GlobalIPv6PrefixLen\": 0,\n                    \"DNSNames\": null\n                }\n            }\n        },\n        \"ImageManifestDescriptor\": {\n            \"mediaType\": \"application/vnd.oci.image.manifest.v1+json\",\n            \"digest\": \"sha256:f4b08ac30ff7ae3803f6049f36e54a12e3c0f02e83422c6982f6164d7d0b03d8\",\n            \"size\": 481,\n            \"platform\": {\n                \"architecture\": \"arm64\",\n                \"os\": \"linux\"\n            }\n        }\n    }\n]\n",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-9726512b02bf4071bb86aedd916b48c1",
+            "/bin/mkdir",
+            "/workspace/repository"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "",
+            "stderr": "mkdir: cannot create directory \u2018/workspace/repository\u2019: File exists\n",
+            "exitCode": 1,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "rm",
+            "--force",
+            "--volumes",
+            "dotrepo-f05-9726512b02bf4071bb86aedd916b48c1"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "dotrepo-f05-9726512b02bf4071bb86aedd916b48c1\n",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "inspect",
+            "dotrepo-f05-9726512b02bf4071bb86aedd916b48c1"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "[]\n",
+            "stderr": "error: no such object: dotrepo-f05-9726512b02bf4071bb86aedd916b48c1\n",
+            "exitCode": 1,
+            "error": null
+          }
+        }
+      ]
+    }
+  ]
+}

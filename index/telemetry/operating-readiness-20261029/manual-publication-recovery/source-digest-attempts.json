@@ -1,0 +1,9 @@
+{
+  "sourceCommit": "53ed7c41baab8d82b1b686143148a2e3c5e6f243",
+  "results": {
+    "full-string-order": "12002abe4d765b8b00db423381d4509f36b0524df0da55c34372bef090c8adb3",
+    "component-order": "9db3b40e9a0ce7fe655971d480fa621004ff8b65009a05fb1898d876c73c04d9"
+  },
+  "liveDigest": "9db3b40e9a0ce7fe655971d480fa621004ff8b65009a05fb1898d876c73c04d9",
+  "note": "First assertion failed; Rust PathBuf ordering compares path components rather than complete path strings."
+}

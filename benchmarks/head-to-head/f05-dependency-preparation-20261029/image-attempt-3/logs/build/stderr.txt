@@ -1,0 +1,54 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 701B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/dotrepo-f05-prep-rust:6d94650b0063
+#2 DONE 0.1s
+
+#3 [internal] load metadata for docker.io/library/dotrepo-f05-prep-tools:9f07b849c460
+#3 DONE 0.1s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [rust 1/1] FROM docker.io/library/dotrepo-f05-prep-rust:6d94650b0063@sha256:6d94650b0063dbbe7921114ee693dcf24c4c279d0e15781ae1713c88e69e167d
+#5 resolve docker.io/library/dotrepo-f05-prep-rust:6d94650b0063@sha256:6d94650b0063dbbe7921114ee693dcf24c4c279d0e15781ae1713c88e69e167d 0.0s done
+#5 CACHED
+
+#6 [tools 1/1] FROM docker.io/library/dotrepo-f05-prep-tools:9f07b849c460@sha256:9f07b849c4603e3ad6b52c00c2dccaaf2054f8b3ec0f4add866ffdd537073c76
+#6 resolve docker.io/library/dotrepo-f05-prep-tools:9f07b849c460@sha256:9f07b849c4603e3ad6b52c00c2dccaaf2054f8b3ec0f4add866ffdd537073c76 0.0s done
+#6 CACHED
+
+#7 [internal] load build context
+#7 transferring context: 206B done
+#7 DONE 0.0s
+
+#8 [stage-2 1/6] COPY --from=rust / /
+#8 DONE 14.5s
+
+#9 [stage-2 2/6] COPY --from=tools /usr/local/go /usr/local/go
+#9 DONE 6.8s
+
+#10 [stage-2 3/6] COPY --from=tools /usr/local/bin/node /usr/local/bin/uv /usr/local/bin/uvx /usr/local/bin/
+#10 DONE 1.3s
+
+#11 [stage-2 4/6] COPY --from=tools /usr/local/lib/node_modules /usr/local/lib/node_modules
+#11 DONE 0.8s
+
+#12 [stage-2 5/6] COPY npm npx /usr/local/bin/
+#12 DONE 0.0s
+
+#13 exporting to image
+#13 exporting layers
+#13 exporting layers 47.2s done
+#13 exporting manifest sha256:4431295c2f57c4a39618f1d33869b5ba295af9d780c141364bb9a93cc0fee9d5 0.1s done
+#13 exporting config sha256:7948663a704ef2d73bd08bd3f75e2a81ccfce3f32b6dc470c84fb7d2b6fbd5c6 0.0s done
+#13 exporting attestation manifest sha256:710f18f3f70c82988198bc867a6cf0af82b2de1356b726f8a2f09d6382642734 done
+#13 exporting manifest list sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092 done
+#13 naming to docker.io/library/dotrepo-f05-common:20261029 done
+#13 unpacking to docker.io/library/dotrepo-f05-common:20261029
+#13 unpacking to docker.io/library/dotrepo-f05-common:20261029 3.7s done
+#13 DONE 51.1s

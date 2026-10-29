@@ -1,0 +1,14 @@
+{
+  "positiveControls": 1,
+  "rejectedCounterexamples": [
+    "outside-root",
+    "absolute-path",
+    "parent-path",
+    "duplicate-file",
+    "symlink",
+    "hardlink",
+    "expanded-byte-limit"
+  ],
+  "state": "passed",
+  "limits": "Synthetic packer boundary checks only; no member-content audit, source execution or dependency completeness claim."
+}

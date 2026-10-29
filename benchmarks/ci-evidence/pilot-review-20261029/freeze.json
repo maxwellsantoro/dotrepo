@@ -1,0 +1,27 @@
+{
+  "kind": "independent-bounded-ci-pilot-review",
+  "inputFreezeSha256": "9b936d71ccb748bd46a69bf482ae942cde23de28c936bc6a2f77e6b9e35de8bc",
+  "actionableFindings": [],
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "5637c6779bf73a95dd341943045e9354d0446b276974ded18ecf1be8ae68c90a",
+      "bytes": 6305
+    },
+    {
+      "path": "integrity.json",
+      "sha256": "b66052f1ab90ab4013945ba92f09f0fe512c56b8d6174bd128bd45878e62b29c",
+      "bytes": 2277
+    },
+    {
+      "path": "offline-verification.json",
+      "sha256": "292a4faeafb7853c1d97622644116a755ce6ce6f9555efca911fd762b9debc0d",
+      "bytes": 363
+    },
+    {
+      "path": "verify.py",
+      "sha256": "9a8a4596b96ebc2de1abbacef5e209bb48da18d55881567ae04c693acee27df4",
+      "bytes": 5886
+    }
+  ]
+}

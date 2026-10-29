@@ -1,0 +1,136 @@
+{
+  "identity": "f05-source-free-common-image-download-caches-v1",
+  "checkedAt": "2026-10-29T06:58:01.993040+00:00",
+  "commonImage": {
+    "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+    "recipeSha256": "087fa8b10248b8e77335da7056d119141a5e6d0a1347908d7433aff55d027e82",
+    "planSha256": "ac4ed276976b182bc565043779ea7bd1ebbcaf9c441d46f81b3ad569737237a1",
+    "inputImages": [
+      "sha256:6d94650b0063dbbe7921114ee693dcf24c4c279d0e15781ae1713c88e69e167d",
+      "sha256:9f07b849c4603e3ad6b52c00c2dccaaf2054f8b3ec0f4add866ffdd537073c76"
+    ],
+    "checkedAt": "2026-10-29T06:54:37.920395+00:00",
+    "state": "source-free candidate; tool availability control only",
+    "taskQualified": false,
+    "all12EnvironmentEquivalence": false,
+    "costUsd": null,
+    "limitations": [
+      "No task source/setup/test executed in image control.",
+      "Known credential paths and exact image/environment provenance inspected; not an exhaustive credential-content audit."
+    ]
+  },
+  "tasks": [
+    {
+      "taskId": "rust-02",
+      "state": "download-cache-retained-unqualified",
+      "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+      "sourceArchiveSha256": "862b159c55ee7693faed80c2546aa203cc370e867cf5a206cff5356ab66766d6",
+      "sourceRevision": "ab4bf739d46448436cb68933bb8260ee264449d5",
+      "startedAt": "2026-10-29T06:57:21.687332+00:00",
+      "costUsd": null,
+      "costExclusions": [
+        "No metered container/host/download charge source."
+      ],
+      "upstreamScriptsOrTestsExecuted": false,
+      "indexConsulted": false,
+      "modelCalls": 0,
+      "cacheAuditQualified": false,
+      "setupSeconds": 6.20589108299464,
+      "networkBytes": {
+        "received": 99054593,
+        "sent": 457121,
+        "basis": "container interface counters including headers/incidental traffic"
+      },
+      "archivePath": "/tmp/dotrepo-f05-dependency-preparation-20261029/rust-02-attempt-2/cache.tar",
+      "archiveSha256": "f8ca1fccc8792cc5eb34aad37640268ab339d852de15b10a3cf1d5bcaf5296a8",
+      "cacheExpandedBytes": 438392465,
+      "cacheArchiveBytes": 463104000,
+      "cacheFiles": 24692,
+      "elapsedSeconds": 20.510774750029668,
+      "scratchArtifactRoot": "/tmp/dotrepo-f05-dependency-preparation-20261029/rust-02-attempt-2",
+      "draftRuntimeSpec": "rust-02-attempt-2/dependency-cache-spec.json",
+      "preparationSha256": "dab4de6fb99caa0ce87445fc1b3dd44dafecab6e87ce743460db2febd96931dd",
+      "inventorySha256": "346f678ad150ee3410b12c539430bac1813212cbe6c7725fad954fc68f25cbc2",
+      "traceSha256": "e536e84b05fa5fae4ae08f470b702d411c0d5c57a1d5b904f499653a5495b5bd",
+      "nativeReceiptsVerified": 13
+    },
+    {
+      "taskId": "typescript-02",
+      "state": "download-cache-retained-unqualified",
+      "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+      "sourceArchiveSha256": "818bf33ece0979d198ed6a11daa3e6b838cc4aefba8c3a381c86e8ce2e706f41",
+      "sourceRevision": "2875056f93d6eebcd887f64ae557258a7b0b0108",
+      "startedAt": "2026-10-29T06:56:15.960179+00:00",
+      "costUsd": null,
+      "costExclusions": [
+        "No metered container/host/download charge source."
+      ],
+      "upstreamScriptsOrTestsExecuted": false,
+      "indexConsulted": false,
+      "modelCalls": 0,
+      "cacheAuditQualified": false,
+      "setupSeconds": 27.978533416055143,
+      "networkBytes": {
+        "received": 200795248,
+        "sent": 1300540,
+        "basis": "container interface counters including headers/incidental traffic"
+      },
+      "archivePath": "/tmp/dotrepo-f05-dependency-preparation-20261029/typescript-02/cache.tar",
+      "archiveSha256": "84cfa62ad220509ff1027f2a4e97b88885dbcb4c28bdfe59b620a70224d530dc",
+      "cacheExpandedBytes": 213726697,
+      "cacheArchiveBytes": 217098240,
+      "cacheFiles": 2562,
+      "elapsedSeconds": 34.00114958384074,
+      "scratchArtifactRoot": "/tmp/dotrepo-f05-dependency-preparation-20261029/typescript-02",
+      "draftRuntimeSpec": "typescript-02/dependency-cache-spec.json",
+      "preparationSha256": "9c94f89fa251725f8ce9f2661b2a058c16cd576b7f7fb8199b5faa5c7db8a155",
+      "inventorySha256": "8d5794eb742574f17493e41e7dd242ce6d9ea0febf5766f4d275c358e0e1837c",
+      "traceSha256": "dcd3e13322acded87044cf24a8359104c2c100db4aa4c0e6e41685be41a32c3e",
+      "nativeReceiptsVerified": 15
+    },
+    {
+      "taskId": "go-03",
+      "state": "download-cache-retained-unqualified",
+      "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+      "sourceArchiveSha256": "cc7b18c67ce11698d79bfee35fe7afa7f7c8f0ea0dccbdaefd8836cde49f3ba2",
+      "sourceRevision": "352089582444ea84feb03bc97eda97b35729e8ec",
+      "startedAt": "2026-10-29T06:56:57.078968+00:00",
+      "costUsd": null,
+      "costExclusions": [
+        "No metered container/host/download charge source."
+      ],
+      "upstreamScriptsOrTestsExecuted": false,
+      "indexConsulted": false,
+      "modelCalls": 0,
+      "cacheAuditQualified": false,
+      "setupSeconds": 1.9178011671174318,
+      "networkBytes": {
+        "received": 12851668,
+        "sent": 95130,
+        "basis": "container interface counters including headers/incidental traffic"
+      },
+      "archivePath": "/tmp/dotrepo-f05-dependency-preparation-20261029/go-03/cache.tar",
+      "archiveSha256": "fc8de794f4f9338fcb8be7cc0c4ef8f1a7e736e61b3a4a6bcdb3917cfb7176b8",
+      "cacheExpandedBytes": 63513466,
+      "cacheArchiveBytes": 65812480,
+      "cacheFiles": 2832,
+      "elapsedSeconds": 6.556872790912166,
+      "scratchArtifactRoot": "/tmp/dotrepo-f05-dependency-preparation-20261029/go-03",
+      "draftRuntimeSpec": "go-03/dependency-cache-spec.json",
+      "preparationSha256": "247835dab86b9d2e6a84cbd5c6e74e7143a82a6e606092796a6c20367c3a0fa4",
+      "inventorySha256": "c62557a79259cbe4d249c2c070c0abe108732acdb5d5c7bf5f73e185b0f1f943",
+      "traceSha256": "6f17031ec0a9e54b1dd81468f4fff6a72f3d9eb08477c05e8fed561d292ea68a",
+      "nativeReceiptsVerified": 13
+    }
+  ],
+  "state": "candidate tools plus draft download caches; independent audit and actual offline task requalification pending",
+  "all12EnvironmentQualified": false,
+  "modelCalls": 0,
+  "upstreamTaskExecution": false,
+  "indexConsulted": false,
+  "vmChanged": false,
+  "costUsd": null,
+  "costExclusions": [
+    "No metered Docker/host/download charge source."
+  ]
+}

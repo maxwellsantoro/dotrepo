@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-f05-cache-rust-02-769a3ea0a3",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "cd /workspace/repository; cargo fetch --locked --target aarch64-unknown-linux-gnu --manifest-path lib/sniffnet-packet-parser/Cargo.toml"
+  ],
+  "startedAt": "2026-10-29T06:57:24.020223+00:00",
+  "elapsedSeconds": 6.075774708064273,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "ac769da7913241ee9d6cf2c2de55ff559c51411b39edfd6f87b78ce6e7ad160a",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}
