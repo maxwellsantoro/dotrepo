@@ -1,0 +1,66 @@
+--- original/adapter.py
++++ successor/adapter.py
+@@ -18,8 +18,8 @@
+ import sys
+ 
+ HERE = Path(__file__).resolve().parent
+-ROOT = HERE.parents[3]
+-AM2 = HERE.parent / "amendment-2"
++ROOT = HERE.parents[4]
++AM2 = HERE.parents[1] / "amendment-2"
+ RUNTIME_SHA = "dc585e08f24e1a20da9d9ccdafac4af3f4e10cb8451de7ca3a74c05ecc985fa0"
+ HELPER_SHA = "ffe5b5e27aaca28bceae83aac15bfeb5e83963eef63a3b2f41c97833787b4a12"
+ MAP_SHA = "768482aa2dcec46151e529a1126a8d74fbaba56f168d86c915002aa70d869e4a"
+@@ -140,6 +140,44 @@
+     )
+     require(derive.MAP_SHA == MAP_SHA, "source map changed")
+     return oracle, helper
++
++
++def isolation_options(row, config):
++    """Compare only the reviewed create policy and absent additive grants.
++
++    Docker serializes absent additive lists as null or []; neither permits a
++    grant. Explicit false privilege is required. No new namespace mode is added.
++    """
++    host = row["HostConfig"]
++    require(host["Privileged"] is False, "privileged container")
++    for key in ("CapAdd", "Devices", "DeviceRequests", "DeviceCgroupRules", "Binds", "VolumesFrom"):
++        require(
++            key in host and (host[key] is None or host[key] == []), "added/missing grant: " + key
++        )
++    require(
++        re.fullmatch(r"[1-9][0-9]*:[1-9][0-9]*", config["containerUser"]) is not None,
++        "configured user must be nonroot UID:GID",
++    )
++    require(
++        host["Ulimits"] == [{"Name": "nofile", "Soft": 1024, "Hard": 1024}], "nofile limit mismatch"
++    )
++    logs = host["LogConfig"]
++    require(
++        logs["Type"] == "none" and (logs["Config"] is None or logs["Config"] == {}),
++        "log-driver/options mismatch",
++    )
++    health = row["Config"]["Healthcheck"]
++    require(
++        isinstance(health, dict)
++        and health.get("Test") == ["NONE"]
++        and set(health)
++        <= {"Test", "Interval", "Timeout", "Retries", "StartPeriod", "StartInterval"},
++        "healthcheck not disabled",
++    )
++    require(
++        all(key == "Test" or type(value) is int and value == 0 for key, value in health.items()),
++        "disabled healthcheck option mismatch",
++    )
+ 
+ 
+ def association(session, relative, request_raw, config_raw, trace_raw):
+@@ -496,6 +534,7 @@
+             and host["CgroupnsMode"] == "private",
+             "observed isolation options",
+         )
++        isolation_options(row, config)
+         uid, gid = config["containerUser"].split(":")
+         require(
+             host["Tmpfs"]

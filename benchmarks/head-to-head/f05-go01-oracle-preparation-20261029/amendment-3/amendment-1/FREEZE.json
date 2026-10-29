@@ -1,0 +1,81 @@
+{
+  "actualAdmission": false,
+  "artifactCount": 15,
+  "artifacts": {
+    "README.md": {
+      "bytes": 1859,
+      "sha256": "dab0eae4cb5ebe1173d1441a6182d5083753b88da9c93339eaefaecd974134e0"
+    },
+    "adapter.py": {
+      "bytes": 25064,
+      "sha256": "30e3e3cecb357d5f903f42e0532c2f86a5cb16cf6714ddc9c643bcf86e5b70a4"
+    },
+    "adapter.py.diff": {
+      "bytes": 2480,
+      "sha256": "04bb539bf4fe06faf3f384877c0b526dd0be1bdea0c680051df50a875ed39959"
+    },
+    "controls.json": {
+      "bytes": 28197,
+      "sha256": "adc1d9afe93d378921abfdeadb14d3df81adfe0e613de0c58500af4bbc2c57bf"
+    },
+    "controls.py": {
+      "bytes": 15388,
+      "sha256": "6375c2f824ea5a7b3a095e04fbacbb5459a460277998edb3dac56eb38b58bd8e"
+    },
+    "controls.py.diff": {
+      "bytes": 1210,
+      "sha256": "19ae2ef82062700313a3ecb2b2fd3273d04fcf7ca8ece8e8742fe4a7363234d0"
+    },
+    "development-observations.json": {
+      "bytes": 372,
+      "sha256": "f2c3547dabbe89338da1f37b728107b04c84538a02ec2ac86febc13537426358"
+    },
+    "isolation-controls.json": {
+      "bytes": 37941,
+      "sha256": "1c11d86d548408b145a3dd30769ea7d814d3864edc8837fefa2a906e65f81f17"
+    },
+    "isolation_controls.py": {
+      "bytes": 7233,
+      "sha256": "d5957a95b6445fe668f8e4b1662d41688b5ac83df2da42f4ad99a500519d145e"
+    },
+    "parent-verification.log": {
+      "bytes": 86,
+      "sha256": "325ac733845f954410b080c8c991cbe5dd2bb8bafdeba486e10af979c4078716"
+    },
+    "plan.json": {
+      "bytes": 1483,
+      "sha256": "35e7ebee7e26f687bacc8727d9c474bc6fa83dac9887970f8f8fc01b3ad078c2"
+    },
+    "report.json": {
+      "bytes": 2536,
+      "sha256": "9a55f4657e7ea2ef2538735828d86a50d7b5b0614ed63f418cfcc34cfe2cd5ec"
+    },
+    "source-bindings.json": {
+      "bytes": 3581,
+      "sha256": "43a0ce5ecf6e37601ae0b6b5962a70b7ad0c7721be206dd2923da1420014af3b"
+    },
+    "verify.py": {
+      "bytes": 1050,
+      "sha256": "a05085fbf303b85e66f2e062d61dcbe2b3494bae57bb4f54bd9deb811b8aa075"
+    },
+    "verify.py.diff": {
+      "bytes": 198,
+      "sha256": "38ab88988881a2eb6d0620021e54e99a3f867707be3d197cb38c70142c391bbc"
+    }
+  },
+  "campaignAdmitted": false,
+  "executionAuthorized": false,
+  "nativeCollectionOccurred": false,
+  "oracleQualified": false,
+  "state": "frozen-source-only-isolation-amendment-independent-review-pending",
+  "subject": {
+    "adapterSha256": "30e3e3cecb357d5f903f42e0532c2f86a5cb16cf6714ddc9c643bcf86e5b70a4",
+    "beforeReviewFreezeSha256": "46a75d99bdf078f6018cca216e2b708fc266a619ef294fe8cd87ad996955a4e8",
+    "controlsSha256": "6375c2f824ea5a7b3a095e04fbacbb5459a460277998edb3dac56eb38b58bd8e",
+    "identity": "go01-post-run-capture-adapter-amendment-3-isolation-amendment-1",
+    "isolationControlsSha256": "d5957a95b6445fe668f8e4b1662d41688b5ac83df2da42f4ad99a500519d145e",
+    "parentAuthorFreezeSha256": "d7cd2ced83cc27cde9070e457d9fcad2185316b14ac698e83d98f189293f5cbc",
+    "sourceBindingsSha256": "43a0ce5ecf6e37601ae0b6b5962a70b7ad0c7721be206dd2923da1420014af3b"
+  },
+  "taskOutcomeObserved": false
+}

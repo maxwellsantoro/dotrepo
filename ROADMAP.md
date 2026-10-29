@@ -240,7 +240,11 @@ accepts preparation controls only. The
 and its [corrected independent review](benchmarks/head-to-head/f05-go01-event-capture-review-20261029/amendment-1/README.md)
 retain raw events and process receipts before returning tool control. Actual
 completion still refuses pending the full setup/source/tool/effective-context
-post-run join. Source enumeration and capture controls do not establish
+post-run join. The [post-run adapter preparation](benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-3/README.md)
+and its [corrected review](benchmarks/head-to-head/f05-go01-capture-adapter-review-20261029/amendment-1/README.md)
+check raw association and intended isolation while preserving those refusals;
+consistent artifact hashes alone cannot establish the required conditions.
+Source enumeration and capture controls do not establish
 successful execution or close C1. The
 [Python-03 source assessment](benchmarks/head-to-head/f05-python03-oracle-preparation-20261029/README.md)
 and [independent review](benchmarks/head-to-head/f05-python03-oracle-review-20261029/README.md)

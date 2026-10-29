@@ -1,0 +1,84 @@
+{
+  "files": [
+    {
+      "bytes": 3260,
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-3/FREEZE.json",
+      "role": "Original16artifact source-adapter freeze, unchanged",
+      "sha256": "d7cd2ced83cc27cde9070e457d9fcad2185316b14ac698e83d98f189293f5cbc"
+    },
+    {
+      "bytes": 23523,
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-3/adapter.py",
+      "role": "Exact before adapter subject",
+      "sha256": "175a15d7406909778fb0d965c4f3cf690998106f1b672ae71feaf7831a6b10ae"
+    },
+    {
+      "bytes": 2631,
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-3/plan.json",
+      "role": "Exact before plan",
+      "sha256": "cd77ba6d665ca1d7275fa9e090ded4664a43112672f10e0b1b662475f3e28bb8"
+    },
+    {
+      "bytes": 1478,
+      "path": "benchmarks/head-to-head/f05-go01-capture-adapter-review-20261029/FREEZE.json",
+      "role": "Immutable independent before-review",
+      "sha256": "46a75d99bdf078f6018cca216e2b708fc266a619ef294fe8cd87ad996955a4e8"
+    },
+    {
+      "bytes": 2847,
+      "path": "benchmarks/head-to-head/f05-go01-capture-adapter-review-20261029/review.json",
+      "role": "Independent F1 calibrated finding",
+      "sha256": "45c782e0bb1223fd452055037b0f17a394620e445f6d95c47b13e29779e8a475"
+    },
+    {
+      "bytes": 3003,
+      "path": "benchmarks/head-to-head/f05-go01-capture-adapter-review-20261029/isolation_challenge.py",
+      "role": "Independent two coherent mutation controls",
+      "sha256": "09b2043edabcd51edca728eeeab4feca90fe9e68ee8dafe62a09b4dd7fb33e1c"
+    },
+    {
+      "bytes": 2680,
+      "path": "benchmarks/head-to-head/f05-go01-capture-adapter-review-20261029/isolation-challenge.json",
+      "role": "Independent original false acceptances",
+      "sha256": "ffea6bce513c88d39a854e8845760ae34c597f0b123d8a28794fea1dba792537"
+    },
+    {
+      "bytes": 67272,
+      "path": "benchmarks/head-to-head/bench/agent_runtime.py",
+      "role": "Unchanged current create-policy/runtime",
+      "sha256": "dc585e08f24e1a20da9d9ccdafac4af3f4e10cb8451de7ca3a74c05ecc985fa0"
+    },
+    {
+      "bytes": 21684,
+      "path": "benchmarks/head-to-head/bench/event_capture.py",
+      "role": "Unchanged capture producer/helper",
+      "sha256": "ffe5b5e27aaca28bceae83aac15bfeb5e83963eef63a3b2f41c97833787b4a12"
+    },
+    {
+      "bytes": 2121,
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-2/FREEZE.json",
+      "role": "Unchanged parent scorer/map closure",
+      "sha256": "cc12c2fe8ca12e8f2eb15b2ceffc130aa4094b281a3b9057e60749ab09e510b5"
+    },
+    {
+      "bytes": 19627,
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-2/oracle.py",
+      "role": "Unchanged scoring/lifecycle logic",
+      "sha256": "d969170818e80124a0eb99947aa584b82ae9c9f50e8b32ba6dc62fe17fd3b1c9"
+    },
+    {
+      "bytes": 242536,
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-2/expected-map.json",
+      "role": "Unchanged104package5972name map",
+      "sha256": "768482aa2dcec46151e529a1126a8d74fbaba56f168d86c915002aa70d869e4a"
+    },
+    {
+      "bytes": 319621,
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/policy-proposal.json",
+      "role": "Unchanged380source-exclusion proposal",
+      "sha256": "009c116c3dce44d97c4b3b870ed6f6a46bd72ad697ecdbd05ea2806857b524ff"
+    }
+  ],
+  "originalArtifactsVerified": 16,
+  "state": "bound-frozen-before-review-and-unchanged-producer-scorer"
+}

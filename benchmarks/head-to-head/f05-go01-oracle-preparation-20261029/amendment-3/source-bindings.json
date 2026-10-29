@@ -1,0 +1,126 @@
+{
+  "files": [
+    {
+      "bytes": 2121,
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-2/FREEZE.json",
+      "role": "Unchanged source-oracle parent",
+      "sha256": "cc12c2fe8ca12e8f2eb15b2ceffc130aa4094b281a3b9057e60749ab09e510b5"
+    },
+    {
+      "bytes": 19627,
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-2/oracle.py",
+      "role": "Unchanged source-map lifecycle scorer",
+      "sha256": "d969170818e80124a0eb99947aa584b82ae9c9f50e8b32ba6dc62fe17fd3b1c9"
+    },
+    {
+      "bytes": 5622,
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-2/derive.py",
+      "role": "Unchanged bound source-map loader",
+      "sha256": "9b58061af3b1205637becea668544cc6f7b4dbb0d68a51cf1fc05601370dcde2"
+    },
+    {
+      "bytes": 15273,
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-2/controls.py",
+      "role": "Inherited44controls and owned synthetic fixture",
+      "sha256": "921f59eda2fbceb3c633dc69c89179ac2e39317cf2caa9b0e03e5d496378d4a5"
+    },
+    {
+      "bytes": 4730,
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-2/expectation.json",
+      "role": "Full104packages5972names expectation",
+      "sha256": "65d861a2c8d082fceb00fc77f1befce47b463aa272b69a71248a1f9973f3700b"
+    },
+    {
+      "bytes": 242536,
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-2/expected-map.json",
+      "role": "Unchanged exact full source map",
+      "sha256": "768482aa2dcec46151e529a1126a8d74fbaba56f168d86c915002aa70d869e4a"
+    },
+    {
+      "bytes": 319621,
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/policy-proposal.json",
+      "role": "Unchanged380source-exclusion proposal, not newly accepted",
+      "sha256": "009c116c3dce44d97c4b3b870ed6f6a46bd72ad697ecdbd05ea2806857b524ff"
+    },
+    {
+      "bytes": 662,
+      "path": "benchmarks/head-to-head/f05-go01-source-oracle-decision-20261029/FREEZE.json",
+      "role": "Prospective source-expectation decision",
+      "sha256": "22e72402f3cadf7f5ea214a546a3dcaf18b968c67da81e9e03427436c4d10ed5"
+    },
+    {
+      "bytes": 1082,
+      "path": "benchmarks/head-to-head/f05-go01-source-oracle-decision-review-20261029/FREEZE.json",
+      "role": "Independent decision review",
+      "sha256": "f1e7ff04f0e8d6c385727bb5280f187bb71038dfeb72cf7d8aea8220fa9c9cc9"
+    },
+    {
+      "bytes": 725,
+      "path": "benchmarks/head-to-head/f05-go01-event-capture-join-20261029/FREEZE.json",
+      "role": "Historical source-only capture assessment",
+      "sha256": "5cdae83d1f32a34d17f69f960fb68c2759a21636f8d5d66e203b2fc02b023016"
+    },
+    {
+      "bytes": 34176,
+      "path": "benchmarks/head-to-head/f05-go01-event-capture-join-20261029/source-trace.json",
+      "role": "Exact full-wrapper/producer source spans, historical runtime separate",
+      "sha256": "4dba9bfc8056077d193ab15b1ca13ec3f44b999fa570f83e2455b8ad776e8d7c"
+    },
+    {
+      "bytes": 1092,
+      "path": "benchmarks/head-to-head/f05-go01-event-capture-implementation-20261029/amendment-1/FREEZE.json",
+      "role": "Reviewed capture implementation successor",
+      "sha256": "a55c9de8e96056809e9fd02e3e6cdabb4a307a80c6040fe41e4a8ff1424e7918"
+    },
+    {
+      "bytes": 2521,
+      "path": "benchmarks/head-to-head/f05-go01-event-capture-review-20261029/amendment-1/FREEZE.json",
+      "role": "Independent capture after-review",
+      "sha256": "f950b91e4683bbe3da17c78369997e53069294b0a5732df82cb8c4d5dff63e81"
+    },
+    {
+      "bytes": 67272,
+      "path": "benchmarks/head-to-head/bench/agent_runtime.py",
+      "role": "Exact reviewed runtime producer, no edits",
+      "sha256": "dc585e08f24e1a20da9d9ccdafac4af3f4e10cb8451de7ca3a74c05ecc985fa0"
+    },
+    {
+      "bytes": 21684,
+      "path": "benchmarks/head-to-head/bench/event_capture.py",
+      "role": "Exact reviewed same-call export helper, no edits",
+      "sha256": "ffe5b5e27aaca28bceae83aac15bfeb5e83963eef63a3b2f41c97833787b4a12"
+    },
+    {
+      "bytes": 31089,
+      "path": "benchmarks/head-to-head/bench/agent_experiment.py",
+      "role": "Raw runtime artifact and canonical runtime configuration hash owners",
+      "sha256": "dc65a86d3be4fefe1744b110472736e2804c78433471700a4a81be87735bf290"
+    },
+    {
+      "bytes": 10700065,
+      "path": "benchmarks/head-to-head/f05-qualification-20261029/go-01-full/inventory.json",
+      "role": "Full frozen source-file digest inventory; selected subset checked",
+      "sha256": "96c935c31228fa8e05bb836a93257beeb87ac524e5eb30cdde3c546a1ea4be0e"
+    },
+    {
+      "bytes": 125368,
+      "path": "benchmarks/head-to-head/f05-go01-requalification-proposal-20261029/sources/Herebyfile.mjs",
+      "role": "Full maintainer default+source-owned gotestsum build/cache/environment merge",
+      "sha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421"
+    },
+    {
+      "bytes": 1838,
+      "path": "benchmarks/head-to-head/f05-go01-requalification-proposal-20261029/sources/package.json",
+      "role": "Normal npm dependency/hook declarations",
+      "sha256": "2828c1d269bd9c80d634131ec107ac69f1cfc3bf1f98d24c112c825c8acd7902"
+    },
+    {
+      "bytes": 9195,
+      "path": "benchmarks/head-to-head/f05-go01-requalification-proposal-20261029/sources/CONTRIBUTING.md",
+      "role": "Maintainer setup and full task intent",
+      "sha256": "b45301bb6687e1dfadc253640ee20766aa02a16d9578e92eee8c530b808d4112"
+    }
+  ],
+  "historicalBoundary": "Historical capture assessment/source trace pins old runtime43fa at8a8. Its immutable raw artifact is verified; changed current runtime is bound separately atdc585. No historical evidence rewritten.",
+  "state": "source-and-implementation-bindings-no-admission"
+}

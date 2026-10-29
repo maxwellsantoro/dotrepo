@@ -1,0 +1,53 @@
+{
+  "actualAdmission": false,
+  "campaignAdmitted": false,
+  "checks": {
+    "allPassed": true,
+    "checks": [
+      "uv run python -B benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-3/controls.py --output <fresh-unused-path>",
+      "uv run python -B benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-2/controls.py --output <fresh-unused-path>",
+      "uv run python -B benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-2/verify.py",
+      "uv run ruff check --no-cache benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-3/",
+      "uv run ruff format --check --no-cache benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-3/"
+    ],
+    "costUsd": null,
+    "emptyNamePackagesRetained": 40,
+    "finalAdapterControls": 40,
+    "finalControlReport": "controls-final3.json",
+    "inheritedUnchangedOracleControls": 44,
+    "intermediateReports": "controls.json,controls-final.json,controls-final2.json retained as superseded local preparation; final subject uses controls-final3.json. Development observations retain local fixture/control corrections.",
+    "newDaemonGoNodePackageProviderNetworkActions": 0,
+    "sourceMapPackages": 104,
+    "sourceMapTopLevelNames": 5972
+  },
+  "costUsd": null,
+  "executionAuthorized": false,
+  "limits": [
+    "Operator-consistency scope only, not active same-UID adversary authentication.",
+    "Supplied flag/hash alone cannot establish event origin; only exact retained process/raw/trace observations are checked.",
+    "Configured source subset integrity does not establish whole revision/required closure; nullable observed tool hashes do not establish build provenance.",
+    "Strict fixed inspect option spellings are conservative; no actual Docker inspect was run for this adapter.",
+    "No actual setup/import/collection/test/native/provider/network/daemon actions; no runtime, parent scorer or public-schema edits."
+  ],
+  "nativeCollectionOccurred": false,
+  "noScopeChange": "Exact full Hereby default and normal npm setup remain required; no direct-Go substitution, narrowed collection, new skip policy or green-baseline requirement. All older history and compiler-killed observations remain unchanged.",
+  "oracleQualified": false,
+  "remainingJoins": [
+    "normal npm setup same-container/source closure",
+    "source-owned gotestsum build/cache provenance",
+    "effective child Go selection context"
+  ],
+  "reviewerContext": "Author previously implemented optional capture/helper and reviewed source-oracle decisions; familiar development preparation, not fresh blind or consumer evidence. This adapter has not yet been independently reviewed.",
+  "state": "implemented-source-only-independent-review-pending",
+  "subject": {
+    "adapterSha256": "175a15d7406909778fb0d965c4f3cf690998106f1b672ae71feaf7831a6b10ae",
+    "captureImplementationAmendmentFreezeSha256": "a55c9de8e96056809e9fd02e3e6cdabb4a307a80c6040fe41e4a8ff1424e7918",
+    "captureIndependentReviewFreezeSha256": "f950b91e4683bbe3da17c78369997e53069294b0a5732df82cb8c4d5dff63e81",
+    "controlsSha256": "9dabcc14005388470af2e9fe9dd5bfb736fe0f7d8fdb585168658e4d010a5f0e",
+    "identity": "go01-post-run-capture-adapter-preparation-amendment-3",
+    "parentOracleFreezeSha256": "cc12c2fe8ca12e8f2eb15b2ceffc130aa4094b281a3b9057e60749ab09e510b5",
+    "sourceBindingsSha256": "a2169eda123f78e19b269ba4b9a418f49ddc9d75112091a8f2debf32066d0d88",
+    "sourceMapSha256": "768482aa2dcec46151e529a1126a8d74fbaba56f168d86c915002aa70d869e4a"
+  },
+  "taskOutcomeObserved": false
+}

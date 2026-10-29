@@ -1,0 +1,85 @@
+{
+  "artifactCount": 16,
+  "artifacts": {
+    "README.md": {
+      "bytes": 2628,
+      "sha256": "2f86ff98e38298d8970e65fba7beb6998ccb31b19633666a0d99452213de786a"
+    },
+    "adapter.py": {
+      "bytes": 23523,
+      "sha256": "175a15d7406909778fb0d965c4f3cf690998106f1b672ae71feaf7831a6b10ae"
+    },
+    "checks.json": {
+      "bytes": 1176,
+      "sha256": "e59bd0411f2c140eeb16703c47b0d680aee59664d4b82ddf4c6751f30c8db73a"
+    },
+    "controls-final.json": {
+      "bytes": 26807,
+      "sha256": "18adf272df1f49215ba0bb64a629ff578e4a9af47f2edf17d6cf0d055d7997a1"
+    },
+    "controls-final2.json": {
+      "bytes": 26807,
+      "sha256": "5b3d15c53d5caab78b0466d8919a70d8a497cc6a0a97c5796082d6570e8e2798"
+    },
+    "controls-final3.json": {
+      "bytes": 28197,
+      "sha256": "71c359337e84b91da5b18b989261722e6346b4340df577aa054420c2645e2234"
+    },
+    "controls.json": {
+      "bytes": 27191,
+      "sha256": "0fdd2f2581869d33b95e1fc2e64782e3f2fee76a22d14ced2128a004df2238ea"
+    },
+    "controls.py": {
+      "bytes": 14925,
+      "sha256": "9dabcc14005388470af2e9fe9dd5bfb736fe0f7d8fdb585168658e4d010a5f0e"
+    },
+    "development-observations.json": {
+      "bytes": 1351,
+      "sha256": "9337f6627dcfce7078ba0f0cf0da6317f142b32a870a5ff079d28923eee71356"
+    },
+    "inherited-controls.json": {
+      "bytes": 22451,
+      "sha256": "6f4d5d0d2649ca21bde877a8c912650b178484483c1fb0f1d58a4d59f3fd7884"
+    },
+    "parent-verification.log": {
+      "bytes": 640,
+      "sha256": "f4432eaf4cb83c2c12b3cb495fc9cd11205195376de2159331293c4cbb18e906"
+    },
+    "plan.json": {
+      "bytes": 2631,
+      "sha256": "cd77ba6d665ca1d7275fa9e090ded4664a43112672f10e0b1b662475f3e28bb8"
+    },
+    "remaining-joins.json": {
+      "bytes": 2384,
+      "sha256": "963822380b332d79ec531b63b024a1f6d53d31858b5e16bb07c104438e4576ae"
+    },
+    "report.json": {
+      "bytes": 3595,
+      "sha256": "e949a51b95635228a2c63c0d4bf79b5a886d9ca9be177e83f08092e974e43fdb"
+    },
+    "source-bindings.json": {
+      "bytes": 5839,
+      "sha256": "a2169eda123f78e19b269ba4b9a418f49ddc9d75112091a8f2debf32066d0d88"
+    },
+    "verify.py": {
+      "bytes": 1050,
+      "sha256": "e6652d6be1fee3b47fffb34d515b48c3729dd22d786931067036b40dfebeb822"
+    }
+  },
+  "campaignAdmitted": false,
+  "executionAuthorized": false,
+  "nativeCollectionOccurred": false,
+  "oracleQualified": false,
+  "state": "frozen-source-only-adapter-independent-review-pending",
+  "subject": {
+    "adapterSha256": "175a15d7406909778fb0d965c4f3cf690998106f1b672ae71feaf7831a6b10ae",
+    "captureImplementationAmendmentFreezeSha256": "a55c9de8e96056809e9fd02e3e6cdabb4a307a80c6040fe41e4a8ff1424e7918",
+    "captureIndependentReviewFreezeSha256": "f950b91e4683bbe3da17c78369997e53069294b0a5732df82cb8c4d5dff63e81",
+    "controlsSha256": "9dabcc14005388470af2e9fe9dd5bfb736fe0f7d8fdb585168658e4d010a5f0e",
+    "identity": "go01-post-run-capture-adapter-preparation-amendment-3",
+    "parentOracleFreezeSha256": "cc12c2fe8ca12e8f2eb15b2ceffc130aa4094b281a3b9057e60749ab09e510b5",
+    "sourceBindingsSha256": "a2169eda123f78e19b269ba4b9a418f49ddc9d75112091a8f2debf32066d0d88",
+    "sourceMapSha256": "768482aa2dcec46151e529a1126a8d74fbaba56f168d86c915002aa70d869e4a"
+  },
+  "taskOutcomeObserved": false
+}

@@ -1,0 +1,58 @@
+{
+  "artifacts": {
+    "README.md": {
+      "bytes": 1781,
+      "sha256": "5a4f5c7064b9d8aea63789a2ba2bfc1e80402490cbbe271c6e39330b39828099"
+    },
+    "author-controls-replay.json": {
+      "bytes": 28197,
+      "sha256": "d3ce0cbb07ae37f86f319bccd85704ccc3b19b76811afcf7fa689b3ef0d2c1f3"
+    },
+    "author-isolation-controls-replay.json": {
+      "bytes": 37941,
+      "sha256": "1c11d86d548408b145a3dd30769ea7d814d3864edc8837fefa2a906e65f81f17"
+    },
+    "challenge.json": {
+      "bytes": 30016,
+      "sha256": "9344950ffeea17c9913f6c0f4006022e7f121f0c9de7875426088dd2d1ae0c58"
+    },
+    "challenge.py": {
+      "bytes": 5498,
+      "sha256": "d83271591060bf52a0fcb28d61db64eb726fd85bd9606465735b297b0fe82799"
+    },
+    "checks.json": {
+      "bytes": 1245,
+      "sha256": "489695e9f4f735ec212646f0100da0edfb0d547337fd81be24c976af2808d008"
+    },
+    "development-observations.json": {
+      "bytes": 417,
+      "sha256": "e092ada0da24f62cdfd5d9aa9fb3068157e8be7c5b3791cd644ce1b0d235d6ee"
+    },
+    "integrity-and-source.json": {
+      "bytes": 1345,
+      "sha256": "973408c5415c00af32570b1a3fe38bf11de933cc03e672cb649068dabfe3e9a5"
+    },
+    "review.json": {
+      "bytes": 2608,
+      "sha256": "701fd258411b1782276ba48c03149ade9c854c94495831aad11909fc9caf7955"
+    },
+    "verify_review_inputs.py": {
+      "bytes": 3580,
+      "sha256": "b13ad554b735efe1f6d2dbfe7e6f1f506e0777438e517c95cc9750225c020242"
+    }
+  },
+  "beforeReviewFreezeSha256": "46a75d99bdf078f6018cca216e2b708fc266a619ef294fe8cd87ad996955a4e8",
+  "campaignAdmitted": false,
+  "executionAuthorized": false,
+  "findings": [],
+  "newRuntimeActions": 0,
+  "oracleQualified": false,
+  "state": "independent-capture-adapter-preparation-after-review-frozen",
+  "subject": {
+    "adapterSha256": "30e3e3cecb357d5f903f42e0532c2f86a5cb16cf6714ddc9c643bcf86e5b70a4",
+    "authorFreezeSha256": "bad0a161c9d84d923e0431dfac39d20dcd03a0d5fe916ce19e56c96e89c8768f",
+    "packetIdentity": "go01-post-run-capture-adapter-amendment-3-isolation-amendment-1",
+    "planSha256": "35e7ebee7e26f687bacc8727d9c474bc6fa83dac9887970f8f8fc01b3ad078c2"
+  },
+  "taskOutcomeObserved": false
+}

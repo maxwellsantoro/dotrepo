@@ -1,0 +1,45 @@
+{
+  "artifacts": {
+    "README.md": {
+      "bytes": 1679,
+      "sha256": "690759bd54a7d54b287e0c8743b87cf92a5b7b1715a5eaaa78e841e59dd6fb73"
+    },
+    "author-controls-replay.json": {
+      "bytes": 28197,
+      "sha256": "7b816632cb8b949ed5ae395cdfc00ee03f74be5ccb8e2a09da1fc05ff535cf22"
+    },
+    "author-verifier-replay.json": {
+      "bytes": 86,
+      "sha256": "325ac733845f954410b080c8c991cbe5dd2bb8bafdeba486e10af979c4078716"
+    },
+    "isolation-challenge.json": {
+      "bytes": 2680,
+      "sha256": "ffea6bce513c88d39a854e8845760ae34c597f0b123d8a28794fea1dba792537"
+    },
+    "isolation_challenge.py": {
+      "bytes": 3003,
+      "sha256": "09b2043edabcd51edca728eeeab4feca90fe9e68ee8dafe62a09b4dd7fb33e1c"
+    },
+    "parent-scorer-controls-replay.json": {
+      "bytes": 22451,
+      "sha256": "6f4d5d0d2649ca21bde877a8c912650b178484483c1fb0f1d58a4d59f3fd7884"
+    },
+    "review.json": {
+      "bytes": 2847,
+      "sha256": "45c782e0bb1223fd452055037b0f17a394620e445f6d95c47b13e29779e8a475"
+    },
+    "source-inspection.json": {
+      "bytes": 1677,
+      "sha256": "f34b12fc6ebfb3cd9b629f5bf602a01d9ef19a74dd4cae846fc716ff076fdb4d"
+    }
+  },
+  "authorFreezeSha256": "d7cd2ced83cc27cde9070e457d9fcad2185316b14ac698e83d98f189293f5cbc",
+  "campaignAdmitted": false,
+  "executionAuthorized": false,
+  "findings": [
+    "F1"
+  ],
+  "newRuntimeActions": 0,
+  "oracleQualified": false,
+  "state": "independent-capture-adapter-before-review-findings-present"
+}
