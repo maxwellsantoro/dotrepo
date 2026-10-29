@@ -6,7 +6,7 @@ It follows the current source branch; consult
 [release compatibility](release-compatibility.md) for stable binary behavior.
 
 <!-- dotrepo:release-status:start -->
-Stable installs use `1.0.4`; current source is `2.0.0-rc.1` (release candidate).
+Stable installs use `1.0.4`; current source is `2.0.0-rc.2` (release candidate).
 Use the matching tagged documentation for installed binaries.
 <!-- dotrepo:release-status:end -->
 

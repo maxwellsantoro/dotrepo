@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## 2.0.0-rc.2 — Unreleased candidate
+
+This source candidate includes the post-RC1 changes below. It has not been
+published or verified through registry installation; published `2.0.0-rc.1`
+artifacts remain unchanged. Production installs continue to use stable `1.0.4`.
+
 - Correct source-scoped build/test answers after a pinned documentation audit;
   preserve record age and unrelated assessments, and withdraw verification after
   partial corrections. Reject specialized environment/diagnostic sections and
