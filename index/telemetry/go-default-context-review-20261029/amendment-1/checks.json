@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-29",
+  "authorFreeze": {
+    "path": "index/telemetry/go-default-context-20261029/amendment-1/freeze.json",
+    "sha256": "37e50d22b8dbeef8f74a7e0d6860634d33bf2282ce4c5e1b7a6ab6c1890c8939",
+    "verifiedFiles": 21
+  },
+  "sourceBindings": {
+    "path": "index/telemetry/go-default-context-20261029/amendment-1/source-bindings.json",
+    "sha256": "915edafc06a3a88f94af1fa286343183336c1f9de96418b574a451a36e91a7f0",
+    "verifiedFiles": 28,
+    "changedPaths": [
+      "crates/dotrepo-core/src/import/commands/go_context.rs",
+      "crates/dotrepo-core/src/import/commands/go_context/tests.rs"
+    ]
+  },
+  "priorReview": {
+    "path": "index/telemetry/go-default-context-review-20261029/freeze.json",
+    "sha256": "c96064782b00d2f3475fe6a5e5d32558a0c3a7dfa48881a97a6f9b565bf6f506",
+    "verifiedUnchangedFiles": 13
+  },
+  "cliSha256": "42a9f9ed07ecf1b7662e1de2b0edfef257c08e128ec96b4d2684a1597ba7db35",
+  "expectationsCoordinatorIntegratedSha256": "d9e1afa09eae92f3265978f3ffa957ec02170fcb6d27bc4c4249a497f2109e93",
+  "cliCasesPassed": 41,
+  "exactOriginalCasesPassed": 6,
+  "focusedCoreTestsPassed": 18,
+  "focusedCommand": "cargo test -p dotrepo-core import::commands::go_context::tests -- --nocapture",
+  "focusedExitCode": 0,
+  "upstreamCodeExecuted": false,
+  "providerCalls": 0,
+  "networkCalls": 0,
+  "indexWrites": 0,
+  "remainingActionableFindings": 0
+}

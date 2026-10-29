@@ -1,0 +1,134 @@
+[
+  {
+    "path": "checks/dotrepo-go-default-context-amendment-1-cli-build-final.log",
+    "sha256": "6bf79fd301e2517a20f9eda034ceafb61a29ce64c4b083d8a1431f524a6f5f95",
+    "tail": [
+      "   Compiling dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)",
+      "   Compiling dotrepo-cli v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-cli)",
+      "    Finished `dev` profile [unoptimized + debuginfo] target(s) in 7.73s"
+    ]
+  },
+  {
+    "path": "checks/dotrepo-go-default-context-amendment-1-cli-build.log",
+    "sha256": "caef18873579452096a1a739ea83d6f580aadf7ab93e51887234eb50ea58542e",
+    "tail": [
+      "   Compiling dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)",
+      "   Compiling dotrepo-cli v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-cli)",
+      "    Finished `dev` profile [unoptimized + debuginfo] target(s) in 6.09s"
+    ]
+  },
+  {
+    "path": "checks/dotrepo-go-default-context-amendment-1-clippy-001.log",
+    "sha256": "ea041cee44618f6f41769915c8362eb1a629eaeabfda34dd293716704a2bd03b",
+    "tail": [
+      "    Checking dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)",
+      "    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.61s"
+    ]
+  },
+  {
+    "path": "checks/dotrepo-go-default-context-amendment-1-clippy-002.log",
+    "sha256": "40e251fdcfbc6e6ffa019c76815c6775e37373e7b9c880f2d732e15037d887a8",
+    "tail": [
+      "    Checking dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)",
+      "    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.24s"
+    ]
+  },
+  {
+    "path": "checks/dotrepo-go-default-context-amendment-1-clippy-003.log",
+    "sha256": "799125143e788b073e1f0f112cd643109b7918893dda2c538d77fde19a1a5087",
+    "tail": [
+      "    Checking dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)",
+      "    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.80s"
+    ]
+  },
+  {
+    "path": "checks/dotrepo-go-default-context-amendment-1-quality-001.log",
+    "sha256": "fdb8862b15cdb19f54396458d86557aab3a7f01d42990fc7a88db36cdb6b52da",
+    "tail": [
+      "test import_quality_gate_matches_checked_in_expectations ... ok",
+      "",
+      "test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.28s",
+      ""
+    ]
+  },
+  {
+    "path": "checks/dotrepo-go-default-context-amendment-1-quality-002.log",
+    "sha256": "a69a728c895c4a4139da21c05948c1e06bf78bc9b0f21571350c156c8f994121",
+    "tail": [
+      "test import_quality_gate_matches_checked_in_expectations ... ok",
+      "",
+      "test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.35s",
+      ""
+    ]
+  },
+  {
+    "path": "checks/dotrepo-go-default-context-amendment-1-tests-001.log",
+    "sha256": "6e01d068fff837e2ceafc38df8f5553fded4fe61ec9f5524382637eb3de44d6f",
+    "tail": [
+      "   |",
+      "",
+      "For more information about this error, try `rustc --explain E0106`.",
+      "error: could not compile `dotrepo-core` (lib test) due to 1 previous error"
+    ]
+  },
+  {
+    "path": "checks/dotrepo-go-default-context-amendment-1-tests-002.log",
+    "sha256": "46341adbe40a1b5600e52bd940848c3e096e65f09fe89bf9f421f8830aa78375",
+    "tail": [
+      "test import::commands::go_context::tests::full_import_f1_go_context_fixture_contracts ... ok",
+      "",
+      "test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 253 filtered out; finished in 0.05s",
+      ""
+    ]
+  },
+  {
+    "path": "checks/dotrepo-go-default-context-amendment-1-tests-003.log",
+    "sha256": "5908cbf492f6fa04fccd8645e486b8e043456bc38a37b9e7282cfd190e6a411f",
+    "tail": [
+      "test import::commands::context::python_recipe::tests::natural_python_recipe_rejects_wrong_scope_directory_conditions_and_missing_chain ... ok",
+      "",
+      "test result: ok. 69 passed; 0 failed; 0 ignored; 0 measured; 202 filtered out; finished in 0.14s",
+      ""
+    ]
+  },
+  {
+    "path": "checks/dotrepo-go-default-context-amendment-1-tests-004.log",
+    "sha256": "2794118398b1c166891900e9d310d8ded43ea82d8c657a989393356ae4a65c37",
+    "tail": [
+      "test import::commands::go_context::tests::full_import_f1_go_context_fixture_contracts ... ok",
+      "",
+      "test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 253 filtered out; finished in 0.04s",
+      ""
+    ]
+  },
+  {
+    "path": "checks/dotrepo-go-default-context-amendment-1-tests-005.log",
+    "sha256": "da71cccbe77438fdcc257d205f881e97e5b5138aa7a980f51133c5afd19e5bf4",
+    "tail": [
+      "test import::commands::context::python_recipe::tests::natural_python_recipe_rejects_wrong_scope_directory_conditions_and_missing_chain ... ok",
+      "",
+      "test result: ok. 69 passed; 0 failed; 0 ignored; 0 measured; 202 filtered out; finished in 0.14s",
+      ""
+    ]
+  },
+  {
+    "path": "checks/dotrepo-go-default-context-amendment-1-tests-006.log",
+    "sha256": "095001d45221dab9102c227f8f56dd2223591037cee1c641596c63939ff2a7e2",
+    "tail": [
+      "     |                           ^^^^^^^ required by this bound in `core::str::<impl str>::starts_with`",
+      "",
+      "For more information about this error, try `rustc --explain E0277`.",
+      "error: could not compile `dotrepo-core` (lib test) due to 1 previous error"
+    ]
+  },
+  {
+    "path": "checks/dotrepo-go-default-context-amendment-1-tests-007.log",
+    "sha256": "285aaa894c2ee3fcee769e208b1e78e88f5341ca80ad780e5fb6c7c039316069",
+    "tail": [
+      "test import::commands::context::python_recipe::tests::natural_python_recipe_rejects_wrong_scope_directory_conditions_and_missing_chain ... ok",
+      "",
+      "test result: ok. 69 passed; 0 failed; 0 ignored; 0 measured; 202 filtered out; finished in 0.24s",
+      ""
+    ]
+  }
+]

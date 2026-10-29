@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-f05-offline-rust-02-38781c3168",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "cd /workspace/repository; rustc -vV; cargo --version; dpkg-query -W libpcap-dev libpcap0.8-dev libasound2-dev"
+  ],
+  "startedAt": "2026-10-29T07:35:03.735823+00:00",
+  "elapsedSeconds": 0.11882020812481642,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "148524900b69646dad1cf3832904a1413ee31d627e403be41f892a53f5fed2d0",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

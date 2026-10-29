@@ -1,0 +1,26 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "-i",
+    "dotrepo-f05-offline-rust-02-38781c3168",
+    "tar",
+    "--extract",
+    "--no-same-owner",
+    "--no-same-permissions",
+    "-C",
+    "/workspace/repository"
+  ],
+  "startedAt": "2026-10-29T07:34:51.536301+00:00",
+  "elapsedSeconds": 1.4003126670140773,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 114851840,
+  "stdinSha256": "862b159c55ee7693faed80c2546aa203cc370e867cf5a206cff5356ab66766d6",
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

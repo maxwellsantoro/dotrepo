@@ -1,0 +1,114 @@
+{
+  "schema": "dotrepo-go-default-context-development-freeze/v1",
+  "date": "2026-10-29",
+  "scope": "Known F1 development regressions; no held-out qualification or consumer benefit claim",
+  "baseline": "d76581560e88e92d9a0298c2c7fc94e28c44542d",
+  "implementationBindingsSha256": "b5952ccca9f35d5cb7298de4bb01870ff0098ab294ad080666e9799b4fd14a09",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 6110,
+      "sha256": "e090e911a96690dc4ece8de24e7f101fe7342db01fc0bbfe05db45bacd79c48e"
+    },
+    {
+      "path": "before-and-sources.json",
+      "bytes": 4322,
+      "sha256": "0974e219fb039ee0de91eee8b040f9e6bfc6d66a99ce035cfa84dc4326f633b2"
+    },
+    {
+      "path": "checks/dotrepo-go-default-context-clippy-001.log",
+      "bytes": 549,
+      "sha256": "496ff46cf0dcc0aab603d57be3fb43ddef702ee6843a4547f7f75878d3874dea"
+    },
+    {
+      "path": "checks/dotrepo-go-default-context-clippy-002.log",
+      "bytes": 170,
+      "sha256": "a04d5e10d925308e6806b975820dae9da6a22af9951a3a855c328a2cc834591d"
+    },
+    {
+      "path": "checks/dotrepo-go-default-context-escalation-001.log",
+      "bytes": 1242,
+      "sha256": "887ab4ed9fd1b14e757c1378775f55d7a4af8a94b20793621544c6bac4fc0faa"
+    },
+    {
+      "path": "checks/dotrepo-go-default-context-facade-001.log",
+      "bytes": 4181,
+      "sha256": "c619e1f131ba38495e97b5d84604b5b8c870ec36d9cfed1fcec4916bafb2b12e"
+    },
+    {
+      "path": "checks/dotrepo-go-default-context-fields-001.log",
+      "bytes": 272,
+      "sha256": "bed1c6f6ff4cdd3077b447e8d09dbf12c200ca05c3f865c5ae4c1924d18083c8"
+    },
+    {
+      "path": "checks/dotrepo-go-default-context-quality-001.log",
+      "bytes": 521,
+      "sha256": "7861f71f14546ef2fb81dbca5515208779c86bbaaada95efa0e55f4582046420"
+    },
+    {
+      "path": "checks/dotrepo-go-default-context-tests-001.log",
+      "bytes": 1734,
+      "sha256": "bde5d6a86b38c2ffa7e780c0575213438cd08d883d72ff2406a158bf66f7c45f"
+    },
+    {
+      "path": "checks/dotrepo-go-default-context-tests-002.log",
+      "bytes": 6176,
+      "sha256": "7c4089445684df73e554617002686e404428c1a6b53db703f92ffd51a52f0805"
+    },
+    {
+      "path": "checks/dotrepo-go-default-context-tests-003.log",
+      "bytes": 6402,
+      "sha256": "e7d79b35001c9f6c4dc79d19f335eece238490039b79203621bef0e207f2122b"
+    },
+    {
+      "path": "checks/dotrepo-go-default-context-tests-004.log",
+      "bytes": 16153,
+      "sha256": "bcf4546dad2c23302b01edf87a0a88363eb36eb3514737d224550689ef02f645"
+    },
+    {
+      "path": "checks/dotrepo-go-default-context-tests-005.log",
+      "bytes": 16998,
+      "sha256": "689539275f686c4cf99616a4bf92bd8cc545d3ffed75abcdf92e617c7572dcd3"
+    },
+    {
+      "path": "checks/dotrepo-go-default-context-tests-006.log",
+      "bytes": 30448,
+      "sha256": "b0628f53b8cefa85e87173c94ca1a70668761f422ad378ee5cd7163b6c85cd04"
+    },
+    {
+      "path": "checks/dotrepo-go-default-context-tests-007.log",
+      "bytes": 25394,
+      "sha256": "f7872b6de6c8c90e1080a4bb6b98f247084fdee9ba045878600ca1bd3278b911"
+    },
+    {
+      "path": "checks.json",
+      "bytes": 5307,
+      "sha256": "a4641da2faf7abe9be8e38e69dc2186595e8aa3f18d84f8c84d780925126931c"
+    },
+    {
+      "path": "escalation-controls.json",
+      "bytes": 11105,
+      "sha256": "ec927fc3663a5b4b3da62eb89aac73e189c3e782874199cb1b64a436c94e3dc6"
+    },
+    {
+      "path": "fixture-plans.json",
+      "bytes": 21247,
+      "sha256": "3ee1df784c3312898ebc4920001db580517f3ba2996bf92f476cab3866d25397"
+    },
+    {
+      "path": "implementation-bindings.json",
+      "bytes": 6134,
+      "sha256": "b5952ccca9f35d5cb7298de4bb01870ff0098ab294ad080666e9799b4fd14a09"
+    },
+    {
+      "path": "proposed-expectations-additions.json",
+      "bytes": 11840,
+      "sha256": "e6b2cea0b42815c2acff57747faeb53a4975734bca2a5616992b72af3616adc6"
+    },
+    {
+      "path": "proposed-expectations.patch",
+      "bytes": 12361,
+      "sha256": "0e4b4df03f3398f1abb15cf2a858e87e2758e9cd47905a3557a5de92d1c9dd4f"
+    }
+  ]
+}

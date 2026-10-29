@@ -1,0 +1,53 @@
+{
+  "identity": "independent-offline-requalification-v3-review",
+  "inputPacketFreezeSha256": "daac836830a0f853e83dc2a67b0de8115ee4d73b42cce7eb468326f87ed82b78",
+  "actionableFindings": 2,
+  "liveExecution": false,
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "fbd0f502ec40f0aea6a6d505442405127d227ae00115a70c62317ad62fa47190",
+      "bytes": 4565
+    },
+    {
+      "path": "author-controls-rerun.json",
+      "sha256": "d9f3b045965f23ac46b87edb05028afeb7b195bb7e90857e29242b7926b0ebd8",
+      "bytes": 785
+    },
+    {
+      "path": "counterexamples.json",
+      "sha256": "dfd72d32015c946b399c22e0c098b251a727e083b5c6548f66e45f8baeba60e2",
+      "bytes": 3169
+    },
+    {
+      "path": "counterexamples.py",
+      "sha256": "685580916e3b315e295b68d3b6b0e22b53f30aeb536ed54a72e7c992c90ad2fc",
+      "bytes": 8275
+    },
+    {
+      "path": "historical-rust-stderr.txt",
+      "sha256": "a6a089e54b1e00c1be77f345f878c38a7811b58f7606faf3b5bda2b212c369e2",
+      "bytes": 729
+    },
+    {
+      "path": "historical-rust-stdout.txt",
+      "sha256": "d606452a4046247af21809b98d1c434a7c253dabdcfe7af0078d4f89285caed6",
+      "bytes": 358
+    },
+    {
+      "path": "input-bindings.json",
+      "sha256": "fb74f24e7021693715bd34301cb4a6efcacc0bab24aa0d7b2f99f153c6000cd2",
+      "bytes": 1640
+    },
+    {
+      "path": "metadata-verification.json",
+      "sha256": "675d82696e0246411b71101a549d12c6467dd41e051f8a3d3969070f5c4474e2",
+      "bytes": 172
+    },
+    {
+      "path": "parser-manifest.toml",
+      "sha256": "3b0a80798ac6377085087cf17efeaad377288ffc20d663e42729d75455f4c921",
+      "bytes": 764
+    }
+  ]
+}

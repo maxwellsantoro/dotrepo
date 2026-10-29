@@ -1,0 +1,24 @@
+........................................................................ [  8%]
+........................................................................ [ 16%]
+........................................................................ [ 25%]
+........................................................................ [ 33%]
+........................................................................ [ 42%]
+........................................................................ [ 50%]
+........................................................................ [ 59%]
+........................................................................ [ 67%]
+........................................................................ [ 76%]
+........................................................................ [ 84%]
+........................................................................ [ 93%]
+..........................................................               [100%]
+============================= slowest 10 durations =============================
+19.72s call     scripts/tests/test_contextual_instruction_path.py::test_exported_context_executes_without_source_fallback[False]
+0.83s call     scripts/tests/test_agent_experiment.py::test_campaign_known_subtotal_overrun_requires_visible_disposition[True]
+0.65s call     scripts/tests/test_contextual_instruction_path.py::test_exported_context_executes_without_source_fallback[True]
+0.64s call     scripts/tests/test_agent_experiment.py::test_unknown_campaign_cost_cannot_be_reported_as_within_budget
+0.62s call     scripts/tests/test_openrouter_adjudication.py::test_http_error_carries_measured_usage
+0.42s call     scripts/tests/test_recover_public_snapshot_history.py::test_per_entry_recovery_uses_the_exact_original_exporter_pin
+0.41s call     scripts/tests/test_contextual_instruction_path.py::test_context_binding_and_missing_prerequisites_cannot_pass_the_task
+0.37s call     scripts/tests/test_agent_experiment.py::test_campaign_known_subtotal_overrun_requires_visible_disposition[False]
+0.33s call     scripts/tests/test_agent_experiment.py::test_all_retained_monetary_costs_count_toward_campaign_ceiling
+0.26s call     scripts/tests/test_autonomous_refresh_base.py::test_actual_base_command_records_match_or_drift_without_live_base_substitution[aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa]
+850 passed in 40.39s

@@ -66,6 +66,10 @@ pub struct ImportCommandCandidates {
     pub candidates: Vec<CommandCandidateSummary>,
     pub selected_build: Option<CommandCandidateSelection>,
     pub selected_test: Option<CommandCandidateSelection>,
+    /// Scalar command fields whose observed scope or prerequisites remain
+    /// unresolved. Candidate diagnostics are retained, but cannot be promoted
+    /// by adjudication without an independently eligible selection.
+    pub blocked_scalar_fields: Vec<String>,
 }
 
 #[derive(Debug, Clone)]
@@ -266,6 +270,7 @@ pub(crate) struct ImportedCommandMetadata {
     pub(crate) inferred_fields: Vec<String>,
     pub(crate) notes: Vec<String>,
     pub(crate) evidence_bullets: Vec<String>,
+    pub(crate) blocked_scalar_fields: Vec<String>,
 }
 
 #[derive(Default)]

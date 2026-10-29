@@ -1,0 +1,32 @@
+{
+  "argv": [
+    "docker",
+    "export",
+    "dotrepo-f05-common-image-audit-7cdd12d72c7f"
+  ],
+  "canonicalCapBytes": 16777216,
+  "canonicalSizeExcludedFiles": 15,
+  "containerNeverStarted": true,
+  "costUsd": null,
+  "credentialPathCandidates": 5,
+  "elapsedSeconds": 43.516742541920394,
+  "exitCode": 0,
+  "exportBytes": 1937748992,
+  "exportPath": "/tmp/dotrepo-f05-common-image-audit-9slpmcbi/filesystem-export.tar",
+  "exportSha256": "d8de699302fac90a58280e0757c22a7aa82a2c40d48d72ab2c8ffc7c933681d6",
+  "image": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "knownSourceArchiveMatches": [],
+  "members": 48155,
+  "noHostExtraction": true,
+  "nonemptyProtectedMatches": [],
+  "statistics": {
+    "canonicalJsonFiles": 250,
+    "directories": 4943,
+    "hardlinks": 6,
+    "innocuousEmptyProtectedMatches": 105,
+    "notCanonicalizedNonJsonOrInvalid": 40377,
+    "regularBytes": 1902710429,
+    "regularFiles": 40642,
+    "symlinks": 2564
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-f05-offline-typescript-02-42be4a14b4",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "cd /workspace/repository; /workspace/npm-tooling/node_modules/.bin/npm ci --offline --ignore-scripts"
+  ],
+  "startedAt": "2026-10-29T07:35:20.869114+00:00",
+  "elapsedSeconds": 26.492041083052754,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "a5928d487e7f0014e4827d8a0017b740f9322780f0894a60b4a6723a286078db",
+  "stderrSha256": "111420dbd49c81cc1ca4756f86aa2009682a3d4ea551dbf76ae074ad973d8fec",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

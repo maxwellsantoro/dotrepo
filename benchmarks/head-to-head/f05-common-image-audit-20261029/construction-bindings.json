@@ -1,0 +1,25 @@
+{
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "architecture": "arm64",
+  "os": "linux",
+  "layers": [
+    "sha256:83e93a43964f3c8392e01f7eadfd080c625d2b73b7e31fa471e8ab303ab4db84",
+    "sha256:a69427f086ccc411ac57d1205bd64fd660ca4f986571352d7b35c414edc644ad",
+    "sha256:df9347fd633033a5da81ddd35ab566b5c4aeb268e2142e2214a628f90c017deb",
+    "sha256:a9e29cb5b57b68bd85f202186daeb1dbb34d5a93908f7ea417957b4b8b85764f",
+    "sha256:0b7e69daacaeef71d3bd93ee45b27b8969063c97ede39f80a8ec11532f0f949d"
+  ],
+  "sameConfigurationAndLayersAsPreparationReceipt": true,
+  "priorImageInspectSha256": "4c6fa72b8b05b95a719110e0f7fa705758c224e253cf8c7cdf881218ea4f1913",
+  "currentImageInspectSha256": "4c6fa72b8b05b95a719110e0f7fa705758c224e253cf8c7cdf881218ea4f1913",
+  "recipeSha256": "087fa8b10248b8e77335da7056d119141a5e6d0a1347908d7433aff55d027e82",
+  "recipePath": "benchmarks/head-to-head/f05-dependency-preparation-20261029/Dockerfile.v3",
+  "inputImages": [
+    "sha256:6d94650b0063dbbe7921114ee693dcf24c4c279d0e15781ae1713c88e69e167d",
+    "sha256:9f07b849c4603e3ad6b52c00c2dccaaf2054f8b3ec0f4add866ffdd537073c76"
+  ],
+  "recipeIntroducesOnlyInputImageCopiesAndOwnedNpmLaunchers": true,
+  "recipeHasRunStep": false,
+  "rawImageLayersExported": false,
+  "claimScope": "Resolved final image filesystem, configuration/layer bindings and prior construction provenance. Deleted/opaque raw historical layer payloads not scanned."
+}

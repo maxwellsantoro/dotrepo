@@ -1,0 +1,306 @@
+{
+  "cliSha256": "42a9f9ed07ecf1b7662e1de2b0edfef257c08e128ec96b4d2684a1597ba7db35",
+  "scratch": "/tmp/dotrepo-go-context-review-y5racsij",
+  "actualFirstPartyImporterRuns": 6,
+  "upstreamCodeExecuted": false,
+  "providerOrNetworkCalls": 0,
+  "results": [
+    {
+      "case": "root-default",
+      "workflow": "jobs:\n  unit:\n    steps:\n      - run: go test ./...\n",
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-review-y5racsij/root-default",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-review-y5racsij/root-default/record.toml\nimported /tmp/dotrepo-go-context-review-y5racsij/root-default/evidence.md\n- imported from: README.md, go.mod, .github/workflows/ci.yml\n- inferred defaults: repo.description, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "build": "go build ./...",
+      "test": "go test ./...",
+      "manifest": {
+        "schema": "dotrepo/v0.1",
+        "record": {
+          "mode": "overlay",
+          "status": "inferred",
+          "source": "https://example.test/review",
+          "generated_at": "2026-10-29T07:37:19.417567Z",
+          "trust": {
+            "confidence": "medium",
+            "provenance": [
+              "imported",
+              "inferred"
+            ],
+            "notes": "Bootstrapped from `README.md`, `go.mod`, and `.github/workflows/ci.yml`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `go.mod`. Inferred `repo.test` from `.github/workflows/ci.yml`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+          }
+        },
+        "repo": {
+          "name": "Owned synthetic Go context fixture",
+          "description": "Imported repository metadata; review and refine before relying on it.",
+          "homepage": "https://example.test/review",
+          "languages": [],
+          "build": "go build ./...",
+          "test": "go test ./...",
+          "topics": [],
+          "toolchain": {
+            "min": "1.23",
+            "ecosystem": "Go"
+          }
+        }
+      },
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Inferred repo.test from .github/workflows/ci.yml as `go test ./...`.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "service-standard",
+      "workflow": "jobs:\n  unit:\n    services:\n      redis:\n        image: redis:7\n    steps:\n      - run: go test -race ./...\n",
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-review-y5racsij/service-standard",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-review-y5racsij/service-standard/record.toml\nimported /tmp/dotrepo-go-context-review-y5racsij/service-standard/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "build": "go build ./...",
+      "test": null,
+      "manifest": {
+        "schema": "dotrepo/v0.1",
+        "record": {
+          "mode": "overlay",
+          "status": "inferred",
+          "source": "https://example.test/review",
+          "generated_at": "2026-10-29T07:37:19.442589Z",
+          "trust": {
+            "confidence": "medium",
+            "provenance": [
+              "imported",
+              "inferred"
+            ],
+            "notes": "Bootstrapped from `README.md` and `go.mod`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `go.mod`. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+          }
+        },
+        "repo": {
+          "name": "Owned synthetic Go context fixture",
+          "description": "Imported repository metadata; review and refine before relying on it.",
+          "homepage": "https://example.test/review",
+          "languages": [],
+          "build": "go build ./...",
+          "topics": [],
+          "toolchain": {
+            "min": "1.23",
+            "ecosystem": "Go"
+          }
+        }
+      },
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "service-quoted-jobs",
+      "workflow": "\"jobs\":\n  unit:\n    services:\n      redis:\n        image: redis:7\n    steps:\n      - run: go test -race ./...\n",
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-review-y5racsij/service-quoted-jobs",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-review-y5racsij/service-quoted-jobs/record.toml\nimported /tmp/dotrepo-go-context-review-y5racsij/service-quoted-jobs/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "build": "go build ./...",
+      "test": null,
+      "manifest": {
+        "schema": "dotrepo/v0.1",
+        "record": {
+          "mode": "overlay",
+          "status": "inferred",
+          "source": "https://example.test/review",
+          "generated_at": "2026-10-29T07:37:19.452187Z",
+          "trust": {
+            "confidence": "medium",
+            "provenance": [
+              "imported",
+              "inferred"
+            ],
+            "notes": "Bootstrapped from `README.md` and `go.mod`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `go.mod`. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+          }
+        },
+        "repo": {
+          "name": "Owned synthetic Go context fixture",
+          "description": "Imported repository metadata; review and refine before relying on it.",
+          "homepage": "https://example.test/review",
+          "languages": [],
+          "build": "go build ./...",
+          "topics": [],
+          "toolchain": {
+            "min": "1.23",
+            "ecosystem": "Go"
+          }
+        }
+      },
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "service-quoted-steps",
+      "workflow": "jobs:\n  unit:\n    services:\n      redis:\n        image: redis:7\n    \"steps\":\n      - run: go test -race ./...\n",
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-review-y5racsij/service-quoted-steps",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-review-y5racsij/service-quoted-steps/record.toml\nimported /tmp/dotrepo-go-context-review-y5racsij/service-quoted-steps/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "build": "go build ./...",
+      "test": null,
+      "manifest": {
+        "schema": "dotrepo/v0.1",
+        "record": {
+          "mode": "overlay",
+          "status": "inferred",
+          "source": "https://example.test/review",
+          "generated_at": "2026-10-29T07:37:19.461629Z",
+          "trust": {
+            "confidence": "medium",
+            "provenance": [
+              "imported",
+              "inferred"
+            ],
+            "notes": "Bootstrapped from `README.md` and `go.mod`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `go.mod`. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+          }
+        },
+        "repo": {
+          "name": "Owned synthetic Go context fixture",
+          "description": "Imported repository metadata; review and refine before relying on it.",
+          "homepage": "https://example.test/review",
+          "languages": [],
+          "build": "go build ./...",
+          "topics": [],
+          "toolchain": {
+            "min": "1.23",
+            "ecosystem": "Go"
+          }
+        }
+      },
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "environment-data-working-directory",
+      "workflow": "env:\n  EXAMPLE_CONFIGURATION: |\n    working-directory: examples\njobs:\n  unit:\n    steps:\n      - run: go test ./...\n",
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-review-y5racsij/environment-data-working-directory",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-review-y5racsij/environment-data-working-directory/record.toml\nimported /tmp/dotrepo-go-context-review-y5racsij/environment-data-working-directory/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "build": "go build ./...",
+      "test": "go test ./...",
+      "manifest": {
+        "schema": "dotrepo/v0.1",
+        "record": {
+          "mode": "overlay",
+          "status": "inferred",
+          "source": "https://example.test/review",
+          "generated_at": "2026-10-29T07:37:19.470852Z",
+          "trust": {
+            "confidence": "medium",
+            "provenance": [
+              "imported",
+              "inferred"
+            ],
+            "notes": "Bootstrapped from `README.md` and `go.mod`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `go.mod`. Inferred `repo.test` from `go.mod`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+          }
+        },
+        "repo": {
+          "name": "Owned synthetic Go context fixture",
+          "description": "Imported repository metadata; review and refine before relying on it.",
+          "homepage": "https://example.test/review",
+          "languages": [],
+          "build": "go build ./...",
+          "test": "go test ./...",
+          "topics": [],
+          "toolchain": {
+            "min": "1.23",
+            "ecosystem": "Go"
+          }
+        }
+      },
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Inferred repo.test from go.mod as `go test ./...`.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "job-environment-data-working-directory",
+      "workflow": "jobs:\n  unit:\n    env:\n      EXAMPLE_CONFIGURATION: |\n        working-directory: examples\n    steps:\n      - run: go test ./...\n",
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-review-y5racsij/job-environment-data-working-directory",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-review-y5racsij/job-environment-data-working-directory/record.toml\nimported /tmp/dotrepo-go-context-review-y5racsij/job-environment-data-working-directory/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "build": "go build ./...",
+      "test": "go test ./...",
+      "manifest": {
+        "schema": "dotrepo/v0.1",
+        "record": {
+          "mode": "overlay",
+          "status": "inferred",
+          "source": "https://example.test/review",
+          "generated_at": "2026-10-29T07:37:19.479768Z",
+          "trust": {
+            "confidence": "medium",
+            "provenance": [
+              "imported",
+              "inferred"
+            ],
+            "notes": "Bootstrapped from `README.md` and `go.mod`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `go.mod`. Inferred `repo.test` from `go.mod`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+          }
+        },
+        "repo": {
+          "name": "Owned synthetic Go context fixture",
+          "description": "Imported repository metadata; review and refine before relying on it.",
+          "homepage": "https://example.test/review",
+          "languages": [],
+          "build": "go build ./...",
+          "test": "go test ./...",
+          "topics": [],
+          "toolchain": {
+            "min": "1.23",
+            "ecosystem": "Go"
+          }
+        }
+      },
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Inferred repo.test from go.mod as `go test ./...`.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    }
+  ]
+}

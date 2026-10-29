@@ -1,0 +1,170 @@
+   Compiling dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 7.02s
+     Running unittests src/lib.rs (target/debug/deps/dotrepo_core-6af6d15045c80b2a)
+
+running 12 tests
+test import::commands::go_context::tests::declared_commands_and_unrelated_ecosystems_survive_go_guards ... ok
+test import::commands::go_context::tests::cd_dot_does_not_reset_a_preceding_component_change ... ok
+test import::commands::go_context::tests::quoted_hash_in_nonroot_directory_is_not_an_inline_comment ... ok
+test import::commands::go_context::tests::comments_and_explicit_go_directory_flags_do_not_erase_scope ... ok
+test import::commands::go_context::tests::scoped_go_workflow_blocks_metadata_fallthrough_without_nested_manifests ... ok
+test import::commands::go_context::tests::same_job_service_setup_blocks_only_test_default ... ok
+test import::commands::go_context::tests::inline_services_and_explicit_redis_preparation_remain_prerequisites ... ok
+test import::commands::go_context::tests::unrelated_service_job_and_non_go_directory_change_do_not_poison_defaults ... ok
+test import::commands::go_context::tests::workflow_and_job_defaults_apply_but_root_cwd_is_preserved ... ok
+test import::commands::go_context::tests::independent_explicit_defaults_remain_adjudication_eligible ... ok
+F1_ESCALATION_CONTROL {"blockedScalarFields":["repo.build","repo.test"],"deterministicRequests":0,"fixture":"f1-go-multimodule-context","manifest":{"compat":null,"docs":null,"owners":null,"readme":null,"record":{"generated_at":null,"mode":"overlay","source":"https://example.test/context","status":"imported","trust":{"confidence":"medium","notes":"Bootstrapped from `README.md` and `go.mod`. Left `repo.build` unset because Go workflow component scope is unresolved in `.github/workflows/build.yml`; a conventional root module command cannot establish repository coverage. Left `repo.test` unset because Go workflow component scope is unresolved in `.github/workflows/build.yml`; a conventional root module command cannot establish repository coverage. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record.","provenance":["imported"]}},"relations":null,"repo":{"build":null,"description":"**🚧 Work in progress! 🚧** Despite major version 1 (due to semantic-release limitations), we're working to minimize breaking changes.","homepage":"https://example.test/context","languages":[],"license":null,"name":"fp-go","status":null,"test":null,"toolchain":{"ecosystem":"Go","min":"1.20"},"topics":[],"visibility":null},"schema":"dotrepo/v0.1"},"modelBudget":0,"modelCalls":0,"unresolved":["repo.build","repo.test"]}
+F1_FIXTURE_PLAN {"evidence":"# Evidence\n\n- Imported repository name and description from README.md.\n- Left `repo.build` unset because Go workflow component scope is unresolved in `.github/workflows/build.yml`; a conventional root module command cannot establish repository coverage.\n- Left `repo.test` unset because Go workflow component scope is unresolved in `.github/workflows/build.yml`; a conventional root module command cannot establish repository coverage.\n- Imported repo.toolchain.min from go.mod as `1.20` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n","fixture":"f1-go-multimodule-context","importedSources":["README.md","go.mod"],"inferredFields":[],"manifest":{"compat":null,"docs":null,"owners":null,"readme":null,"record":{"generated_at":null,"mode":"overlay","source":"https://example.test/context","status":"imported","trust":{"confidence":"medium","notes":"Bootstrapped from `README.md` and `go.mod`. Left `repo.build` unset because Go workflow component scope is unresolved in `.github/workflows/build.yml`; a conventional root module command cannot establish repository coverage. Left `repo.test` unset because Go workflow component scope is unresolved in `.github/workflows/build.yml`; a conventional root module command cannot establish repository coverage. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record.","provenance":["imported"]}},"relations":null,"repo":{"build":null,"description":"**🚧 Work in progress! 🚧** Despite major version 1 (due to semantic-release limitations), we're working to minimize breaking changes.","homepage":"https://example.test/context","languages":[],"license":null,"name":"fp-go","status":null,"test":null,"toolchain":{"ecosystem":"Go","min":"1.20"},"topics":[],"visibility":null},"schema":"dotrepo/v0.1"},"nativeManifest":{"compat":{"github":{"codeowners":"skip","contributing":"skip","pull_request_template":"skip","security":"skip"}},"docs":null,"owners":null,"readme":{"sections":["overview","security"],"tagline":null,"title":"fp-go"},"record":{"generated_at":null,"mode":"native","source":null,"status":"draft","trust":{"confidence":"medium","notes":"Bootstrapped from `README.md` and `go.mod`. Left `repo.build` unset because Go workflow component scope is unresolved in `.github/workflows/build.yml`; a conventional root module command cannot establish repository coverage. Left `repo.test` unset because Go workflow component scope is unresolved in `.github/workflows/build.yml`; a conventional root module command cannot establish repository coverage. Imported `repo.toolchain.min` from `go.mod`.","provenance":["imported"]}},"relations":null,"repo":{"build":null,"description":"**🚧 Work in progress! 🚧** Despite major version 1 (due to semantic-release limitations), we're working to minimize breaking changes.","homepage":null,"languages":[],"license":null,"name":"fp-go","status":null,"test":null,"toolchain":{"ecosystem":"Go","min":"1.20"},"topics":[],"visibility":null},"schema":"dotrepo/v0.1"}}
+F1_ESCALATION_CONTROL {"blockedScalarFields":["repo.build","repo.test"],"deterministicRequests":0,"fixture":"f1-go-multimodule-context","manifest":{"compat":null,"docs":null,"owners":null,"readme":null,"record":{"generated_at":null,"mode":"overlay","source":"https://example.test/context","status":"imported","trust":{"confidence":"medium","notes":"Bootstrapped from `README.md` and `go.mod`. Left `repo.build` unset because Go workflow component scope is unresolved in `.github/workflows/build.yml`; a conventional root module command cannot establish repository coverage. Left `repo.test` unset because Go workflow component scope is unresolved in `.github/workflows/build.yml`; a conventional root module command cannot establish repository coverage. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record.","provenance":["imported"]}},"relations":null,"repo":{"build":null,"description":"**🚧 Work in progress! 🚧** Despite major version 1 (due to semantic-release limitations), we're working to minimize breaking changes.","homepage":"https://example.test/context","languages":[],"license":null,"name":"fp-go","status":null,"test":null,"toolchain":{"ecosystem":"Go","min":"1.20"},"topics":[],"visibility":null},"schema":"dotrepo/v0.1"},"modelBudget":2,"modelCalls":0,"unresolved":["repo.build","repo.test"]}
+F1_ESCALATION_CONTROL {"blockedScalarFields":["repo.test"],"deterministicRequests":0,"fixture":"f1-go-service-context","manifest":{"compat":null,"docs":{"api":null,"architecture":null,"getting_started":null,"root":"https://pkg.go.dev/github.com/gomodule/redigo/redis"},"owners":null,"readme":null,"record":{"generated_at":null,"mode":"overlay","source":"https://example.test/context","status":"inferred","trust":{"confidence":"medium","notes":"Bootstrapped from `README.markdown` and `go.mod`. Inferred `repo.build` from `go.mod`. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/go-test.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record.","provenance":["imported","inferred"]}},"relations":null,"repo":{"build":"go build ./...","description":"Install Redigo using the \"go get\" command:","homepage":"https://example.test/context","languages":[],"license":null,"name":"Redigo","status":null,"test":null,"toolchain":{"ecosystem":"Go","min":"1.17"},"topics":[],"visibility":null},"schema":"dotrepo/v0.1","x":{"dotrepo":{"field_evidence":{"docs.root":{"confidence":"high","method":"extracted","reason":"Explicit documentation link at README.markdown:21: - [API Reference](https://pkg.go.dev/github.com/gomodule/redigo/redis)","source":"README.markdown","state":"present","valueJson":"\"https://pkg.go.dev/github.com/gomodule/redigo/redis\""}}}}},"modelBudget":0,"modelCalls":0,"unresolved":["repo.test"]}
+F1_FIXTURE_PLAN {"evidence":"# Evidence\n\n- Imported repository name, description, and docs entry points from README.markdown.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/go-test.yml`; the same job declares an external service prerequisite.\n- Imported repo.toolchain.min from go.mod as `1.17` (Go).\n- Imported docs.root as `https://pkg.go.dev/github.com/gomodule/redigo/redis`. Explicit documentation link at README.markdown:21: - [API Reference](https://pkg.go.dev/github.com/gomodule/redigo/redis)\n- This is an overlay record, not a maintainer-controlled canonical record.\n","fixture":"f1-go-service-context","importedSources":["README.markdown","go.mod"],"inferredFields":["repo.build"],"manifest":{"compat":null,"docs":{"api":null,"architecture":null,"getting_started":null,"root":"https://pkg.go.dev/github.com/gomodule/redigo/redis"},"owners":null,"readme":null,"record":{"generated_at":null,"mode":"overlay","source":"https://example.test/context","status":"inferred","trust":{"confidence":"medium","notes":"Bootstrapped from `README.markdown` and `go.mod`. Inferred `repo.build` from `go.mod`. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/go-test.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record.","provenance":["imported","inferred"]}},"relations":null,"repo":{"build":"go build ./...","description":"Install Redigo using the \"go get\" command:","homepage":"https://example.test/context","languages":[],"license":null,"name":"Redigo","status":null,"test":null,"toolchain":{"ecosystem":"Go","min":"1.17"},"topics":[],"visibility":null},"schema":"dotrepo/v0.1","x":{"dotrepo":{"field_evidence":{"docs.root":{"confidence":"high","method":"extracted","reason":"Explicit documentation link at README.markdown:21: - [API Reference](https://pkg.go.dev/github.com/gomodule/redigo/redis)","source":"README.markdown","state":"present","valueJson":"\"https://pkg.go.dev/github.com/gomodule/redigo/redis\""}}}}},"nativeManifest":{"compat":{"github":{"codeowners":"skip","contributing":"skip","pull_request_template":"skip","security":"skip"}},"docs":null,"owners":null,"readme":{"sections":["overview","security"],"tagline":null,"title":"Redigo"},"record":{"generated_at":null,"mode":"native","source":null,"status":"draft","trust":{"confidence":"medium","notes":"Bootstrapped from `README.markdown` and `go.mod`. Inferred `repo.build` from `go.mod`. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/go-test.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`.","provenance":["imported","inferred"]}},"relations":null,"repo":{"build":"go build ./...","description":"Install Redigo using the \"go get\" command:","homepage":null,"languages":[],"license":null,"name":"Redigo","status":null,"test":null,"toolchain":{"ecosystem":"Go","min":"1.17"},"topics":[],"visibility":null},"schema":"dotrepo/v0.1"}}
+F1_ESCALATION_CONTROL {"blockedScalarFields":["repo.test"],"deterministicRequests":0,"fixture":"f1-go-service-context","manifest":{"compat":null,"docs":{"api":null,"architecture":null,"getting_started":null,"root":"https://pkg.go.dev/github.com/gomodule/redigo/redis"},"owners":null,"readme":null,"record":{"generated_at":null,"mode":"overlay","source":"https://example.test/context","status":"inferred","trust":{"confidence":"medium","notes":"Bootstrapped from `README.markdown` and `go.mod`. Inferred `repo.build` from `go.mod`. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/go-test.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record.","provenance":["imported","inferred"]}},"relations":null,"repo":{"build":"go build ./...","description":"Install Redigo using the \"go get\" command:","homepage":"https://example.test/context","languages":[],"license":null,"name":"Redigo","status":null,"test":null,"toolchain":{"ecosystem":"Go","min":"1.17"},"topics":[],"visibility":null},"schema":"dotrepo/v0.1","x":{"dotrepo":{"field_evidence":{"docs.root":{"confidence":"high","method":"extracted","reason":"Explicit documentation link at README.markdown:21: - [API Reference](https://pkg.go.dev/github.com/gomodule/redigo/redis)","source":"README.markdown","state":"present","valueJson":"\"https://pkg.go.dev/github.com/gomodule/redigo/redis\""}}}}},"modelBudget":2,"modelCalls":0,"unresolved":["repo.test"]}
+F1_ESCALATION_CONTROL {"blockedScalarFields":["repo.test"],"deterministicRequests":0,"fixture":"f1-go-services-block-context","manifest":{"compat":null,"docs":null,"owners":null,"readme":null,"record":{"generated_at":null,"mode":"overlay","source":"https://example.test/context","status":"inferred","trust":{"confidence":"medium","notes":"Bootstrapped from `README.md` and `go.mod`. Inferred `repo.build` from `go.mod`. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record.","provenance":["imported","inferred"]}},"relations":null,"repo":{"build":"go build ./...","description":"Bounded Go command selection fixture.","homepage":"https://example.test/context","languages":[],"license":null,"name":"Go Context Fixture","status":null,"test":null,"toolchain":{"ecosystem":"Go","min":"1.22"},"topics":[],"visibility":null},"schema":"dotrepo/v0.1"},"modelBudget":0,"modelCalls":0,"unresolved":["repo.test"]}
+F1_ESCALATION_CONTROL {"blockedScalarFields":["repo.test"],"deterministicRequests":0,"fixture":"f1-go-services-block-context","manifest":{"compat":null,"docs":null,"owners":null,"readme":null,"record":{"generated_at":null,"mode":"overlay","source":"https://example.test/context","status":"inferred","trust":{"confidence":"medium","notes":"Bootstrapped from `README.md` and `go.mod`. Inferred `repo.build` from `go.mod`. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record.","provenance":["imported","inferred"]}},"relations":null,"repo":{"build":"go build ./...","description":"Bounded Go command selection fixture.","homepage":"https://example.test/context","languages":[],"license":null,"name":"Go Context Fixture","status":null,"test":null,"toolchain":{"ecosystem":"Go","min":"1.22"},"topics":[],"visibility":null},"schema":"dotrepo/v0.1"},"modelBudget":2,"modelCalls":0,"unresolved":["repo.test"]}
+test import::commands::go_context::tests::escalation_cannot_restore_context_blocked_scalars_even_with_model_budget ... ok
+F1_FIXTURE_PLAN {"evidence":"# Evidence\n\n- Imported repository name and description from README.md.\n- Imported repo.build from CONTRIBUTING.md as `go build ./...`.\n- Imported repo.test from CONTRIBUTING.md as `go test ./...`.\n- Imported repo.toolchain.min from go.mod as `1.22` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n","fixture":"f1-go-declared-context","importedSources":["README.md","CONTRIBUTING.md","go.mod"],"inferredFields":[],"manifest":{"compat":null,"docs":null,"owners":null,"readme":null,"record":{"generated_at":null,"mode":"overlay","source":"https://example.test/context","status":"imported","trust":{"confidence":"medium","notes":"Bootstrapped from `README.md`, `CONTRIBUTING.md`, and `go.mod`. Imported `repo.build` from `CONTRIBUTING.md`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record.","provenance":["imported"]}},"relations":null,"repo":{"build":"go build ./...","description":"Bounded Go command selection fixture.","homepage":"https://example.test/context","languages":[],"license":null,"name":"Go Context Fixture","status":null,"test":"go test ./...","toolchain":{"ecosystem":"Go","min":"1.22"},"topics":[],"visibility":null},"schema":"dotrepo/v0.1"},"nativeManifest":{"compat":{"github":{"codeowners":"skip","contributing":"skip","pull_request_template":"skip","security":"skip"}},"docs":null,"owners":null,"readme":{"sections":["overview","security"],"tagline":null,"title":"Go Context Fixture"},"record":{"generated_at":null,"mode":"native","source":null,"status":"draft","trust":{"confidence":"medium","notes":"Bootstrapped from `README.md`, `CONTRIBUTING.md`, and `go.mod`. Imported `repo.build` from `CONTRIBUTING.md`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `go.mod`.","provenance":["imported"]}},"relations":null,"repo":{"build":"go build ./...","description":"Bounded Go command selection fixture.","homepage":null,"languages":[],"license":null,"name":"Go Context Fixture","status":null,"test":"go test ./...","toolchain":{"ecosystem":"Go","min":"1.22"},"topics":[],"visibility":null},"schema":"dotrepo/v0.1"}}
+F1_FIXTURE_PLAN {"evidence":"# Evidence\n\n- Imported repository name and description from README.md.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Inferred repo.test from .github/workflows/ci.yml as `go test ./...`.\n- Imported repo.toolchain.min from go.mod as `1.22` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n","fixture":"f1-go-unrelated-service-context","importedSources":["README.md","go.mod",".github/workflows/ci.yml"],"inferredFields":["repo.build","repo.test"],"manifest":{"compat":null,"docs":null,"owners":null,"readme":null,"record":{"generated_at":null,"mode":"overlay","source":"https://example.test/context","status":"inferred","trust":{"confidence":"medium","notes":"Bootstrapped from `README.md`, `go.mod`, and `.github/workflows/ci.yml`. Inferred `repo.build` from `go.mod`. Inferred `repo.test` from `.github/workflows/ci.yml`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record.","provenance":["imported","inferred"]}},"relations":null,"repo":{"build":"go build ./...","description":"Bounded Go command selection fixture.","homepage":"https://example.test/context","languages":[],"license":null,"name":"Go Context Fixture","status":null,"test":"go test ./...","toolchain":{"ecosystem":"Go","min":"1.22"},"topics":[],"visibility":null},"schema":"dotrepo/v0.1"},"nativeManifest":{"compat":{"github":{"codeowners":"skip","contributing":"skip","pull_request_template":"skip","security":"skip"}},"docs":null,"owners":null,"readme":{"sections":["overview","security"],"tagline":null,"title":"Go Context Fixture"},"record":{"generated_at":null,"mode":"native","source":null,"status":"draft","trust":{"confidence":"medium","notes":"Bootstrapped from `README.md`, `go.mod`, and `.github/workflows/ci.yml`. Inferred `repo.build` from `go.mod`. Inferred `repo.test` from `.github/workflows/ci.yml`. Imported `repo.toolchain.min` from `go.mod`.","provenance":["imported","inferred"]}},"relations":null,"repo":{"build":"go build ./...","description":"Bounded Go command selection fixture.","homepage":null,"languages":[],"license":null,"name":"Go Context Fixture","status":null,"test":"go test ./...","toolchain":{"ecosystem":"Go","min":"1.22"},"topics":[],"visibility":null},"schema":"dotrepo/v0.1"}}
+F1_FIXTURE_PLAN {"evidence":"# Evidence\n\n- Imported repository name and description from README.md.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Inferred repo.test from go.mod as `go test ./...`.\n- Imported repo.toolchain.min from go.mod as `1.22` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n","fixture":"f1-go-example-module-context","importedSources":["README.md","go.mod"],"inferredFields":["repo.build","repo.test"],"manifest":{"compat":null,"docs":null,"owners":null,"readme":null,"record":{"generated_at":null,"mode":"overlay","source":"https://example.test/context","status":"inferred","trust":{"confidence":"medium","notes":"Bootstrapped from `README.md` and `go.mod`. Inferred `repo.build` from `go.mod`. Inferred `repo.test` from `go.mod`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record.","provenance":["imported","inferred"]}},"relations":null,"repo":{"build":"go build ./...","description":"Bounded Go command selection fixture.","homepage":"https://example.test/context","languages":[],"license":null,"name":"Go Context Fixture","status":null,"test":"go test ./...","toolchain":{"ecosystem":"Go","min":"1.22"},"topics":[],"visibility":null},"schema":"dotrepo/v0.1"},"nativeManifest":{"compat":{"github":{"codeowners":"skip","contributing":"skip","pull_request_template":"skip","security":"skip"}},"docs":null,"owners":null,"readme":{"sections":["overview","security"],"tagline":null,"title":"Go Context Fixture"},"record":{"generated_at":null,"mode":"native","source":null,"status":"draft","trust":{"confidence":"medium","notes":"Bootstrapped from `README.md` and `go.mod`. Inferred `repo.build` from `go.mod`. Inferred `repo.test` from `go.mod`. Imported `repo.toolchain.min` from `go.mod`.","provenance":["imported","inferred"]}},"relations":null,"repo":{"build":"go build ./...","description":"Bounded Go command selection fixture.","homepage":null,"languages":[],"license":null,"name":"Go Context Fixture","status":null,"test":"go test ./...","toolchain":{"ecosystem":"Go","min":"1.22"},"topics":[],"visibility":null},"schema":"dotrepo/v0.1"}}
+F1_FIXTURE_PLAN {"evidence":"# Evidence\n\n- Imported repository name and description from README.md.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite.\n- Imported repo.toolchain.min from go.mod as `1.22` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n","fixture":"f1-go-services-block-context","importedSources":["README.md","go.mod"],"inferredFields":["repo.build"],"manifest":{"compat":null,"docs":null,"owners":null,"readme":null,"record":{"generated_at":null,"mode":"overlay","source":"https://example.test/context","status":"inferred","trust":{"confidence":"medium","notes":"Bootstrapped from `README.md` and `go.mod`. Inferred `repo.build` from `go.mod`. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record.","provenance":["imported","inferred"]}},"relations":null,"repo":{"build":"go build ./...","description":"Bounded Go command selection fixture.","homepage":"https://example.test/context","languages":[],"license":null,"name":"Go Context Fixture","status":null,"test":null,"toolchain":{"ecosystem":"Go","min":"1.22"},"topics":[],"visibility":null},"schema":"dotrepo/v0.1"},"nativeManifest":{"compat":{"github":{"codeowners":"skip","contributing":"skip","pull_request_template":"skip","security":"skip"}},"docs":null,"owners":null,"readme":{"sections":["overview","security"],"tagline":null,"title":"Go Context Fixture"},"record":{"generated_at":null,"mode":"native","source":null,"status":"draft","trust":{"confidence":"medium","notes":"Bootstrapped from `README.md` and `go.mod`. Inferred `repo.build` from `go.mod`. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`.","provenance":["imported","inferred"]}},"relations":null,"repo":{"build":"go build ./...","description":"Bounded Go command selection fixture.","homepage":null,"languages":[],"license":null,"name":"Go Context Fixture","status":null,"test":null,"toolchain":{"ecosystem":"Go","min":"1.22"},"topics":[],"visibility":null},"schema":"dotrepo/v0.1"}}
+test import::commands::go_context::tests::full_import_f1_go_context_fixture_contracts ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 253 filtered out; finished in 0.05s
+
+     Running tests/adjudication_pipeline.rs (target/debug/deps/adjudication_pipeline-c1bb7e5f17cc1d31)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 8 filtered out; finished in 0.00s
+
+     Running tests/auto_publish.rs (target/debug/deps/auto_publish-0c2df6cabe5544c4)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 23 filtered out; finished in 0.00s
+
+     Running tests/claim_fixture_pack.rs (target/debug/deps/claim_fixture_pack-96aa8f1cc0faa77a)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.00s
+
+     Running tests/docs_evidence.rs (target/debug/deps/docs_evidence-99ac5bdcf49cbd07)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 3 filtered out; finished in 0.00s
+
+     Running tests/execution_context.rs (target/debug/deps/execution_context-c95d8f75b4a7a915)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 11 filtered out; finished in 0.00s
+
+     Running tests/import_escalation_safety.rs (target/debug/deps/import_escalation_safety-bc63373bbf85d771)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 6 filtered out; finished in 0.00s
+
+     Running tests/import_field_scoring.rs (target/debug/deps/import_field_scoring-2512db18552c5288)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.00s
+
+     Running tests/import_fixture_pack.rs (target/debug/deps/import_fixture_pack-687d8101fa2212c2)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 4 filtered out; finished in 0.00s
+
+     Running tests/import_input_boundaries.rs (target/debug/deps/import_input_boundaries-c0fe9f21bc2f9339)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 6 filtered out; finished in 0.00s
+
+     Running tests/import_quality_gate.rs (target/debug/deps/import_quality_gate-0c9f2def4d15fcd0)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.00s
+
+     Running tests/import_verification.rs (target/debug/deps/import_verification-3fae21b091200ba5)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.00s
+
+     Running tests/path_containment.rs (target/debug/deps/path_containment-814b437c1abd18ce)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 3 filtered out; finished in 0.00s
+
+     Running tests/public_batch_limits.rs (target/debug/deps/public_batch_limits-f2f5de0fc58f5f1a)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.00s
+
+     Running tests/public_contract_compatibility.rs (target/debug/deps/public_contract_compatibility-6340876fafcd8cee)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.00s
+
+     Running tests/public_error_fixture_pack.rs (target/debug/deps/public_error_fixture_pack-77d6d52b50f13134)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.00s
+
+     Running tests/public_export_fixture_pack.rs (target/debug/deps/public_export_fixture_pack-fac6d52aea1fe4cc)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 3 filtered out; finished in 0.00s
+
+     Running tests/public_freshness_semantics.rs (target/debug/deps/public_freshness_semantics-e51ddc9e6ca39fb3)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 6 filtered out; finished in 0.00s
+
+     Running tests/public_query_fixture_pack.rs (target/debug/deps/public_query_fixture_pack-d2f6502aff07aaef)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 3 filtered out; finished in 0.00s
+
+     Running tests/query_path_parity.rs (target/debug/deps/query_path_parity-929e948e0c0435fe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 0.00s
+
+     Running tests/regression_fixture_pack.rs (target/debug/deps/regression_fixture_pack-1064082bc700824e)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.00s
+
+     Running tests/relation_semantics.rs (target/debug/deps/relation_semantics-440e82450dc45544)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 4 filtered out; finished in 0.00s
+
+     Running tests/synthesis_io_semantics.rs (target/debug/deps/synthesis_io_semantics-d00e7dfba4b82604)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 8 filtered out; finished in 0.00s
+
+     Running tests/validate_repository_candidates.rs (target/debug/deps/validate_repository_candidates-606e98786b30b92e)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 3 filtered out; finished in 0.00s
+

@@ -1,0 +1,27 @@
+{
+  "state": "passed",
+  "authorizationNegativeControls": [
+    "changed-plan",
+    "changed-image",
+    "missing-cache-audit",
+    "pending-coordinator",
+    "false-audit-flag",
+    "integer-audit-flag",
+    "changed-cache-binding",
+    "changed-audit-bytes",
+    "run-without-acceptance-before-docker"
+  ],
+  "isolationFlagsChecked": true,
+  "terminalAssertionFailureCanBeOutcome": true,
+  "nestedSkipRejected": true,
+  "listingRejected": true,
+  "nativeOracleControls": {
+    "positiveControls": 3,
+    "negativeControls": 11,
+    "status": "passed",
+    "limits": "Synthetic native-format controls establish rejection behavior; actual source/environment execution is separately required."
+  },
+  "dockerCalls": 0,
+  "upstreamSourceBytesRead": false,
+  "actualTaskOutcomes": null
+}

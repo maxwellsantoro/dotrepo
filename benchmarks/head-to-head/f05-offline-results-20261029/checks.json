@@ -1,0 +1,24 @@
+{
+  "checkedAt": "2026-10-29T07:41:10.759423+00:00",
+  "state": "passed",
+  "reportSha256": "a0a431ae442235d1b7dde642a884cc539aa7d36c1dbc2172aafb9255a9bc758c",
+  "verifiedCommandReceipts": 60,
+  "tasks": [
+    {
+      "taskId": "rust-02",
+      "leafFreezeSha256": "d48ccbd478ed8f58fb577428f067000ff460e11068b17fb34122ec5ff462869a",
+      "passed": true
+    },
+    {
+      "taskId": "typescript-02",
+      "leafFreezeSha256": "fbfd63eb670d4571bd68116aa48ba5fdf737e644d789a845741aeaffb60d62a8",
+      "passed": true
+    },
+    {
+      "taskId": "go-03",
+      "leafFreezeSha256": "84c64b53ff2e3e5a4cbdf76650ba9b6642c04f8ebeedb72c22d8134e77c1e027",
+      "passed": true
+    }
+  ],
+  "newDockerOrUpstreamOrNetworkOrProviderCalls": 0
+}

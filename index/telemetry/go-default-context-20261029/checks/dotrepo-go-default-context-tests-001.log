@@ -1,0 +1,28 @@
+   Compiling dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 5.49s
+     Running unittests src/lib.rs (target/debug/deps/dotrepo_core-6af6d15045c80b2a)
+
+running 7 tests
+test import::commands::go_context::tests::declared_commands_and_unrelated_ecosystems_survive_go_guards ... ok
+test import::commands::go_context::tests::unrelated_service_job_and_non_go_directory_change_do_not_poison_defaults ... ok
+test import::commands::go_context::tests::same_job_service_setup_blocks_only_test_default ... ok
+test import::commands::go_context::tests::cd_dot_does_not_reset_a_preceding_component_change ... ok
+
+thread 'import::commands::go_context::tests::scoped_go_workflow_blocks_metadata_fallthrough_without_nested_manifests' (41446146) panicked at crates/dotrepo-core/src/import/commands/go_context/tests.rs:41:9:
+assertion `left == right` failed: working-directory: v2
+        run: go test ./...
+  left: [false, false]
+ right: [true, true]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test import::commands::go_context::tests::scoped_go_workflow_blocks_metadata_fallthrough_without_nested_manifests ... FAILED
+test import::commands::go_context::tests::workflow_and_job_defaults_apply_but_root_cwd_is_preserved ... ok
+test import::commands::go_context::tests::full_import_f1_go_context_fixture_contracts ... ok
+
+failures:
+
+failures:
+    import::commands::go_context::tests::scoped_go_workflow_blocks_metadata_fallthrough_without_nested_manifests
+
+test result: FAILED. 6 passed; 1 failed; 0 ignored; 0 measured; 253 filtered out; finished in 0.02s
+
+error: test failed, to rerun pass `-p dotrepo-core --lib`

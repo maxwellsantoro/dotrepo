@@ -1,0 +1,495 @@
+{
+  "identity": "f05-three-original-scope-offline-requalification-plan-v5-exact-native-case-ids",
+  "frozenAt": "2026-10-29T07:29:36.735343+00:00",
+  "state": "plan only; independent cache audit and coordinator execution acceptance pending",
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "code": {
+    "driver.v5.py": "bf24973c7fede7d1d379de4cf740f0bba815fcfb580a13f9c29b270def0e4c6d",
+    "controls.v5.py": "3a5e42dc5deaa7b558b0ac3a2132914330b28d5259d9eb039553c55892f354c0",
+    "controls_amendment_v5.py": "9e0aa4e4fb9d70066c33137626db0080c0251c52fb6cd4ca25dfa54253ac07ec",
+    "oracle_v5.py": "668242c28d89556d4e23eea384fe418b04ed5f4d26bfd3126298f1a4186db57f",
+    "oracle.py": "3b5392c8bf298d692f0ada994a01f5e0a35bde86151d59fd8b420fa050873aa7",
+    "control.py": "f4c48a59e66471d4247b25bd2c3704c681999943bc0daae5d6acf544844abb1a",
+    "capture.py": "8080a772bbb1e97c89cfb06dd31b5d250003c69ae7e17429d008e17b9f94bbbc"
+  },
+  "frozenMetadata": [
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-20261029/runs/rust-02/attempt-1/result.json",
+      "sha256": "feabfca06d21494709522e05303f29e93a7bd32e3296ded778cd1c5def37081d"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-20261029/rust-02-full/inventory.json",
+      "sha256": "e04bbccfff19d356f66981ec9ae7074fe26b44a4d6a76591b70cd8c1c816865c"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/rust-02-attempt-2/inventory.json",
+      "sha256": "346f678ad150ee3410b12c539430bac1813212cbe6c7725fad954fc68f25cbc2"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/rust-02-attempt-2/provenance.json",
+      "sha256": "c5ee235392b745d021252d32753c86eacdd295a5c8fb5d0d476378f26aa5d49a"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/rust-02-attempt-2/preparation.json",
+      "sha256": "dab4de6fb99caa0ce87445fc1b3dd44dafecab6e87ce743460db2febd96931dd"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-20261029/rust-02-full/acquisition.json",
+      "sha256": "ea895c111db5af6bd807e2c77eb6688650d9fdea549b4b99695d4955bb831730"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/rust-02-attempt-2/dependency-cache-spec.json",
+      "sha256": "269ef91c6067680f1805a632144bf50b8e6c5d16f17f9ff3d40dad8fe9527104"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/rust-02-attempt-2/trace.json",
+      "sha256": "e536e84b05fa5fae4ae08f470b702d411c0d5c57a1d5b904f499653a5495b5bd"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/rust-02-attempt-2/result.json",
+      "sha256": "ade2898fcbbdf13791fb93af802aae963341e0788de7614de52f7ab31478a1c1"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-20261029/runs/typescript-02/attempt-1/result.json",
+      "sha256": "03e9ef820e70efadd4553051692ddec7cb5c41ee3126be60b6cbdcbb1ac7f76d"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-20261029/typescript-02/inventory.json",
+      "sha256": "ba57c4fe3c2ae83ae10005b4ff3ed3998d1f94d75d2778163167da69637f78d7"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/typescript-02/inventory.json",
+      "sha256": "8d5794eb742574f17493e41e7dd242ce6d9ea0febf5766f4d275c358e0e1837c"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/typescript-02/provenance.json",
+      "sha256": "91f01a7d2ef9a245c8b8e8184d57eab84dbb9b173d095d47a7747b5160769a76"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/typescript-02/preparation.json",
+      "sha256": "9c94f89fa251725f8ce9f2661b2a058c16cd576b7f7fb8199b5faa5c7db8a155"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-20261029/typescript-02/acquisition.json",
+      "sha256": "22cc2d69aa97548effcfc1eeac25e38846f9af97e94fc2d2dea5bab57b118825"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/typescript-02/dependency-cache-spec.json",
+      "sha256": "73799214f324edce58980baf15d198240f0e56ee2cf62b73134e6dff3b89ea84"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/typescript-02/trace.json",
+      "sha256": "dcd3e13322acded87044cf24a8359104c2c100db4aa4c0e6e41685be41a32c3e"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/typescript-02/result.json",
+      "sha256": "05d4de945ec96b014d9683286e4ba6b639ecb58d99bcfbdb5da7ba587090da26"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-20261029/runs/go-03/attempt-2/result.json",
+      "sha256": "e140b1691fa28f7a5454ae2d836bbfbae8df1de56accfd8e552b085f9802ba35"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-20261029/go-03/inventory.json",
+      "sha256": "0dde9a80e14165d1675227db0842f3c88bda2828dd20506e75d6b4ff5d9fcd74"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/go-03/inventory.json",
+      "sha256": "c62557a79259cbe4d249c2c070c0abe108732acdb5d5c7bf5f73e185b0f1f943"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/go-03/provenance.json",
+      "sha256": "5c9870ade3da9b0cb7c87364132ab15e1b4dca3517ad6b26998db8c22d313bf8"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/go-03/preparation.json",
+      "sha256": "247835dab86b9d2e6a84cbd5c6e74e7143a82a6e606092796a6c20367c3a0fa4"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-20261029/go-03/acquisition.json",
+      "sha256": "246e783ee3aa92c2f093049fef6407fbed7bd106d4f66d4ba6d3aec3e62d369b"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/go-03/dependency-cache-spec.json",
+      "sha256": "57088107a36d67643add9ba4f33774a599de71a942cc54ae71b967314c7867cf"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/go-03/trace.json",
+      "sha256": "6f17031ec0a9e54b1dd81468f4fff6a72f3d9eb08477c05e8fed561d292ea68a"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/go-03/result.json",
+      "sha256": "3a9014689bad6fcf117dd8bf264f49570c61c9b2e3a66c0d0644b9abd6460f2f"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-20261029/execution-freeze.v4.json",
+      "sha256": "fb93320b4258850137f58ca9c9bb1a1b88601f0fc84398c624f8c882d766eb4b"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/packet-freeze.json",
+      "sha256": "3888a19462854a37c20803fa9c62f525223af9f4f3d8aa9cfa2bf46affdd2f84"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/common-image.json",
+      "sha256": "a4efbd134e9edb1fbdabbf71d9ff6c257e6a0ecee97d1c52012b247516385c2f"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/image-attempt-3/logs/tools/stdout.txt",
+      "sha256": "7ed109fe20e068f792c1f16879c2d3bf8131151a2af61eb0211271149a1a180f"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/image-attempt-3/logs/image-inspect/stdout.txt",
+      "sha256": "4c6fa72b8b05b95a719110e0f7fa705758c224e253cf8c7cdf881218ea4f1913"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/plan.v3.json",
+      "sha256": "ac4ed276976b182bc565043779ea7bd1ebbcaf9c441d46f81b3ad569737237a1"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/plan.v4.json",
+      "sha256": "1ba47bcc517bd240763d036249cd29b33bcfb990ed575a10135a64ceb7216a99"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-next8-20261029/oracle-revision/freeze.json",
+      "sha256": "ba7f7fa0fd4d29d04ed6ab3bfa7ca7ee25a61e431591f852881aa77ff3082ebd"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/plan.json",
+      "sha256": "758947ace79e53be0ba3234b11ca09d7138b36cce517c4fdcaf05d39d980924d"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/plan.v2.json",
+      "sha256": "8cd85c2660ef2d97e1f46d0cb64b60c0bf7b619d7409680d0b4d9f684d445577"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/plan.v3.json",
+      "sha256": "43a2544d2dbedaaebfbb54302bf4be031f56089bef288cd6a0efd34bec77aa90"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/packet-freeze.json",
+      "sha256": "daac836830a0f853e83dc2a67b0de8115ee4d73b42cce7eb468326f87ed82b78"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/root-policy-v4.json",
+      "sha256": "a64064afdf2da04c1ca37c25d2d639971eb2d3d1b2360d4aa418e77ede81a8ba"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/source-bindings-v4/bindings.json",
+      "sha256": "aeeb8ac22f768468ee9cb418b9eec71491ea5bbdb79e11afd10d667d01284f6b"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/source-bindings-v4/historical-rust-stderr.txt",
+      "sha256": "a6a089e54b1e00c1be77f345f878c38a7811b58f7606faf3b5bda2b212c369e2"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/source-bindings-v4/historical-rust-stdout.txt",
+      "sha256": "d606452a4046247af21809b98d1c434a7c253dabdcfe7af0078d4f89285caed6"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/source-bindings-v4/logs/cargo-test-help/receipt.json",
+      "sha256": "ee916950322b6739490e49f63eadafb5abfb6ccfd06b078e9be15742921a3c73"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/source-bindings-v4/logs/cargo-test-help/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/source-bindings-v4/logs/cargo-test-help/stdout.txt",
+      "sha256": "a750301c3a378d70ec9a29386e125e7c5c981387462805442e04b51dcda57502"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/source-bindings-v4/logs/cargo-version/receipt.json",
+      "sha256": "4530e528928ab742deeb580baa08899ed7ba93b189f97bdb87ed4d4a5cdc171c"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/source-bindings-v4/logs/cargo-version/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/source-bindings-v4/logs/cargo-version/stdout.txt",
+      "sha256": "1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/source-bindings-v4/original-rust-request.md",
+      "sha256": "a59aad6359985d60882c86f0320b37be43a78b1ea8bbd17227c356c2347ab438"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/source-bindings-v4/parser-manifest.toml",
+      "sha256": "3b0a80798ac6377085087cf17efeaad377288ffc20d663e42729d75455f4c921"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/plan.v4.json",
+      "sha256": "a53d9917f427464544b1b7d4bd0a50a3cd6240db8d0dcd73e72ac89e3b4f7382"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/freeze.v4.json",
+      "sha256": "f69fb629d7415b0226eead17a0b51081b73691b4eda0ddd2e040ec1580b42822"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/root-policy-v5.json",
+      "sha256": "0bc03b479bc6bed3501864e3c024361bae0ca1abe8a0357b9a0a6960a7368ef0"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/independent-exact-case-counterexample-v4.json",
+      "sha256": "ec78438d0815b7717bd09132043f6e4f1e8fca14aec641a57e25e613a0deeca8"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/generated-cache-disposition-v4.json",
+      "sha256": "901b28c79536d95c6a45e17a0e1ec9a47784d7c51c8269833408046d4fe563a4"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/source-binding-validation-v4.json",
+      "sha256": "604b5c70575122099c9e53881dd1139817616e210081626751df6e3d39f6c365"
+    }
+  ],
+  "tasks": {
+    "rust-02": {
+      "id": "rust-02",
+      "repository": "github.com/GyulyVGC/sniffnet",
+      "revision": "ab4bf739d46448436cb68933bb8260ee264449d5",
+      "scope": "component",
+      "component": "lib/sniffnet-packet-parser",
+      "kind": "rust",
+      "originalTestCommand": "cargo test --locked --manifest-path lib/sniffnet-packet-parser/Cargo.toml -- --nocapture",
+      "testCommand": "cargo test --locked --manifest-path lib/sniffnet-packet-parser/Cargo.toml -- --nocapture",
+      "originalSuccessfulResult": {
+        "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-20261029/runs/rust-02/attempt-1/result.json",
+        "sha256": "feabfca06d21494709522e05303f29e93a7bd32e3296ded778cd1c5def37081d"
+      },
+      "source": {
+        "archive": {
+          "path": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/rust-02-full/runtime-source.tar",
+          "sha256": "862b159c55ee7693faed80c2546aa203cc370e867cf5a206cff5356ab66766d6"
+        },
+        "inventory": {
+          "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-20261029/rust-02-full/inventory.json",
+          "sha256": "e04bbccfff19d356f66981ec9ae7074fe26b44a4d6a76591b70cd8c1c816865c"
+        }
+      },
+      "cache": {
+        "archive": {
+          "path": "/tmp/dotrepo-f05-dependency-preparation-20261029/rust-02-attempt-2/cache.tar",
+          "sha256": "f8ca1fccc8792cc5eb34aad37640268ab339d852de15b10a3cf1d5bcaf5296a8"
+        },
+        "inventory": {
+          "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/rust-02-attempt-2/inventory.json",
+          "sha256": "346f678ad150ee3410b12c539430bac1813212cbe6c7725fad954fc68f25cbc2"
+        },
+        "provenance": {
+          "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/rust-02-attempt-2/provenance.json",
+          "sha256": "c5ee235392b745d021252d32753c86eacdd295a5c8fb5d0d476378f26aa5d49a"
+        },
+        "draftPreparation": {
+          "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/rust-02-attempt-2/preparation.json",
+          "sha256": "dab4de6fb99caa0ce87445fc1b3dd44dafecab6e87ce743460db2febd96931dd"
+        }
+      },
+      "cacheRoots": [
+        "cargo/registry"
+      ],
+      "toolProbe": "rustc -vV; cargo --version; dpkg-query -W libpcap-dev libpcap0.8-dev libasound2-dev",
+      "afterSetupProbe": "rustc -vV; cargo --version; dpkg-query -W libpcap-dev libpcap0.8-dev libasound2-dev",
+      "offlineSetup": [
+        "cargo fetch --locked --offline --target aarch64-unknown-linux-gnu --manifest-path lib/sniffnet-packet-parser/Cargo.toml"
+      ],
+      "expectedTests": [
+        "test_link_type_from_pcap_supported",
+        "test_link_type_from_pcap_unsupported"
+      ],
+      "rustDefaultPolicy": {
+        "unitAssertionFailureStopsDefault": true,
+        "unitCases": 2,
+        "successDocPhaseCases": 0,
+        "assertionFailureExitCode": 101,
+        "requiresOrdinaryLibFailureDiagnostic": true,
+        "compilerSetupUnknownDiagnosticsAreNoncompletion": true,
+        "defaultStopDocPhase": "unexecuted-default-stop; not exercised and not completephasecoverage",
+        "authority": "Coordinator approved bounded default-command outcome semantics before any native attempt; originalrequest asks obtain component test outcome.",
+        "sourceEvidence": [
+          "source-bindings-v4/original-rust-request.md",
+          "source-bindings-v4/historical-rust-stdout.txt",
+          "source-bindings-v4/historical-rust-stderr.txt",
+          "source-bindings-v4/parser-manifest.toml",
+          "source-bindings-v4/logs/cargo-test-help/stdout.txt"
+        ],
+        "behaviorLimit": "A completed default command outcome does not establish all behavior branches, passing tests or an exercised doc phase when defaultstop occurs.",
+        "expectedUnitCaseIds": [
+          "link_type::tests::test_link_type_from_pcap_supported",
+          "link_type::tests::test_link_type_from_pcap_unsupported"
+        ],
+        "identityRule": "Exact full retained native case IDs and cardinality; suffix/basename/prefix matches cannot establish coverage."
+      }
+    },
+    "typescript-02": {
+      "id": "typescript-02",
+      "repository": "github.com/OpenHands/OpenHands",
+      "revision": "2875056f93d6eebcd887f64ae557258a7b0b0108",
+      "scope": "component",
+      "component": "bin",
+      "kind": "vitest",
+      "originalTestCommand": "PATH=/workspace/npm-tooling/node_modules/.bin:$PATH npm run test -- __tests__/bin/agent-canvas.test.ts --reporter=json --outputFile=/workspace/vitest.json",
+      "testCommand": "PATH=/workspace/npm-tooling/node_modules/.bin:$PATH npm run test -- __tests__/bin/agent-canvas.test.ts --reporter=json --outputFile=/workspace/vitest.json",
+      "originalSuccessfulResult": {
+        "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-20261029/runs/typescript-02/attempt-1/result.json",
+        "sha256": "03e9ef820e70efadd4553051692ddec7cb5c41ee3126be60b6cbdcbb1ac7f76d"
+      },
+      "source": {
+        "archive": {
+          "path": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/typescript-02/runtime-source.tar",
+          "sha256": "818bf33ece0979d198ed6a11daa3e6b838cc4aefba8c3a381c86e8ce2e706f41"
+        },
+        "inventory": {
+          "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-20261029/typescript-02/inventory.json",
+          "sha256": "ba57c4fe3c2ae83ae10005b4ff3ed3998d1f94d75d2778163167da69637f78d7"
+        }
+      },
+      "cache": {
+        "archive": {
+          "path": "/tmp/dotrepo-f05-dependency-preparation-20261029/typescript-02/cache.tar",
+          "sha256": "84cfa62ad220509ff1027f2a4e97b88885dbcb4c28bdfe59b620a70224d530dc"
+        },
+        "inventory": {
+          "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/typescript-02/inventory.json",
+          "sha256": "8d5794eb742574f17493e41e7dd242ce6d9ea0febf5766f4d275c358e0e1837c"
+        },
+        "provenance": {
+          "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/typescript-02/provenance.json",
+          "sha256": "91f01a7d2ef9a245c8b8e8184d57eab84dbb9b173d095d47a7747b5160769a76"
+        },
+        "draftPreparation": {
+          "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/typescript-02/preparation.json",
+          "sha256": "9c94f89fa251725f8ce9f2661b2a058c16cd576b7f7fb8199b5faa5c7db8a155"
+        }
+      },
+      "cacheRoots": [
+        "npm-cache/_cacache"
+      ],
+      "toolProbe": "node --version; npm --version; uv --version",
+      "afterSetupProbe": "test \"$(/workspace/npm-tooling/node_modules/.bin/npm --version)\" = 11.12.1; /workspace/npm-tooling/node_modules/.bin/npm --version; sha256sum /workspace/npm-tooling/node_modules/npm/bin/npm-cli.js /workspace/npm-tooling/node_modules/npm/package.json",
+      "offlineSetup": [
+        "npm install --offline --ignore-scripts --prefix /workspace/npm-tooling npm@11.12.1",
+        "/workspace/npm-tooling/node_modules/.bin/npm ci --offline --ignore-scripts"
+      ],
+      "expectedTests": [
+        "does not require build/ in --backend-only mode",
+        "shows usage info in --help output"
+      ],
+      "suite": "__tests__/bin/agent-canvas.test.ts"
+    },
+    "go-03": {
+      "id": "go-03",
+      "repository": "github.com/hashicorp/vault",
+      "revision": "352089582444ea84feb03bc97eda97b35729e8ec",
+      "scope": "component",
+      "component": "api",
+      "kind": "go",
+      "originalTestCommand": "cd api && GOWORK=off go test -json -count=1 ./...",
+      "testCommand": "cd api && GOWORK=off go test -json -count=1 ./...",
+      "originalSuccessfulResult": {
+        "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-20261029/runs/go-03/attempt-2/result.json",
+        "sha256": "e140b1691fa28f7a5454ae2d836bbfbae8df1de56accfd8e552b085f9802ba35"
+      },
+      "source": {
+        "archive": {
+          "path": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-03/runtime-source.tar",
+          "sha256": "cc7b18c67ce11698d79bfee35fe7afa7f7c8f0ea0dccbdaefd8836cde49f3ba2"
+        },
+        "inventory": {
+          "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-20261029/go-03/inventory.json",
+          "sha256": "0dde9a80e14165d1675227db0842f3c88bda2828dd20506e75d6b4ff5d9fcd74"
+        }
+      },
+      "cache": {
+        "archive": {
+          "path": "/tmp/dotrepo-f05-dependency-preparation-20261029/go-03/cache.tar",
+          "sha256": "fc8de794f4f9338fcb8be7cc0c4ef8f1a7e736e61b3a4a6bcdb3917cfb7176b8"
+        },
+        "inventory": {
+          "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/go-03/inventory.json",
+          "sha256": "c62557a79259cbe4d249c2c070c0abe108732acdb5d5c7bf5f73e185b0f1f943"
+        },
+        "provenance": {
+          "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/go-03/provenance.json",
+          "sha256": "5c9870ade3da9b0cb7c87364132ab15e1b4dca3517ad6b26998db8c22d313bf8"
+        },
+        "draftPreparation": {
+          "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/go-03/preparation.json",
+          "sha256": "247835dab86b9d2e6a84cbd5c6e74e7143a82a6e606092796a6c20367c3a0fa4"
+        }
+      },
+      "cacheRoots": [
+        "go/pkg/mod"
+      ],
+      "toolProbe": "go version; git --version",
+      "afterSetupProbe": "go version; git --version",
+      "offlineSetup": [
+        "cd api && GOWORK=off GOPROXY=off go mod download"
+      ],
+      "listCommand": "cd api && GOWORK=off go test -json -list . ./...",
+      "packagePrefix": "github.com/hashicorp/vault/api",
+      "expectedPackages": [
+        "github.com/hashicorp/vault/api",
+        "github.com/hashicorp/vault/api/cliconfig",
+        "github.com/hashicorp/vault/api/tokenhelper"
+      ],
+      "expectedTopLevelTests": 93
+    }
+  },
+  "environment": {
+    "HOME": "/workspace/home",
+    "TMPDIR": "/workspace/tmp",
+    "LANG": "C.UTF-8",
+    "CARGO_HOME": "/workspace/dependency-cache/cargo",
+    "CARGO_TARGET_DIR": "/workspace/cargo-target",
+    "CARGO_NET_OFFLINE": "true",
+    "CARGO_BUILD_JOBS": "3",
+    "GOPATH": "/workspace/dependency-cache/go",
+    "GOCACHE": "/workspace/go-build",
+    "GOTOOLCHAIN": "local",
+    "GOENV": "off",
+    "GOMAXPROCS": "3",
+    "GOPROXY": "off",
+    "GOSUMDB": "sum.golang.org",
+    "GIT_CONFIG_GLOBAL": "/dev/null",
+    "GIT_CONFIG_NOSYSTEM": "1",
+    "GIT_TERMINAL_PROMPT": "0",
+    "NPM_CONFIG_CACHE": "/workspace/dependency-cache/npm-cache",
+    "NPM_CONFIG_USERCONFIG": "/dev/null",
+    "NPM_CONFIG_OFFLINE": "true",
+    "NPM_CONFIG_AUDIT": "false",
+    "NPM_CONFIG_FUND": "false"
+  },
+  "resources": {
+    "cpu": 3,
+    "memoryBytes": 4294967296,
+    "memorySwapBytes": 4294967296,
+    "pids": 256,
+    "workspaceCapacityBytes": 8589934592,
+    "tmpCapacityBytes": 536870912,
+    "TMPDIR": "/workspace/tmp",
+    "taskDeadlineSeconds": 1800,
+    "textTraceBytesPerCommand": 2097152,
+    "sourcePlusCacheExpandedBytes": 2147483648,
+    "cleanupGraceSeconds": 60
+  },
+  "toolIdentity": "All tool bytes are bound by exact source-free imageID and exact cache archives. Native version-probe bytes are frozen metadata; per-executable hashes will be retained by trusted preflight after authorization, not invented in advance.",
+  "toolHashCommand": "rust_root=$(rustc --print sysroot); sha256sum \"$rust_root/bin/rustc\" \"$rust_root/bin/cargo\" /usr/local/bin/node /usr/local/bin/uv /usr/local/go/bin/go /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/lib/node_modules/npm/package.json",
+  "scopeBoundary": "Original native commands unchanged: sniffnet parser default features including nativepcap; OpenHands exactbin launcher test wrapper includingi18n; Vaultapi,cliconfig,tokenhelper93top-level tests. No source/index/model/provider inspection or task replacement.",
+  "oracleBoundary": "Fullnativeprocess/phase scoring after execution. NormalRustsuccessneeds2unit+0docphase,markers,exit0. Root-approved completeunitassertionfailuremay provide defaultcommandoutcome withdocphaseexplicitlyunexecuted/defaultstop; phasecoverageincomplete. Unitpass+laterdoccompile/setupfailure, timeout, missing/unknown/protocoldiagnostics noncompletion. PinnedGo nestedskiprule preserved.",
+  "cacheAuditGate": "Draft source/cache/preparation bytes remain unchanged with false auditflags. Require separate coordinator acceptance bound to this plan and per-task qualified-download-cache receipts binding image,revision,source/cache,draftpreparation and explicit independent audit assertions. The driver cannot mint acceptance/audit flags. Local receipt consistency does not authenticate author/provenance.",
+  "setupLimitation": "Npm exact11.12.1 bootstrap and npmci use --offline --ignore-scripts from retained cache. Native npmtest wrapper still executes its original scripts offline; ignore-scripts is not set globally. Normal online npmci/hook equivalence remains unestablished. Cold/warm cache economics and external preparation work remain separate.",
+  "isolation": "Networknone from creation, no host mounts/socket/credentials, nonroot1000, readonlyroot, capdropALL/no-newprivileges/privatePID, exec-nosuid-nodev tmpfs. Each task receives fresh source/cache copies; no shared mutable cache. Tmpfs ceilings do not promise availableRAM.",
+  "authorizationReceived": false,
+  "cacheAuditQualified": false,
+  "upstreamExecution": false,
+  "dockerCalls": 0,
+  "modelCalls": 0,
+  "indexConsulted": false,
+  "vmChanges": false,
+  "costUsd": null,
+  "costExclusions": [
+    "Plan/control packet only; future actualhost/containercost unavailable unless independent meterprovided."
+  ],
+  "priorPlanSha256": "a53d9917f427464544b1b7d4bd0a50a3cd6240db8d0dcd73e72ac89e3b4f7382",
+  "change": "Preserve frozenv4 targetedpreflight/phase fixes and independentexactcasecounterexample. Rustdefaultoracle additionally requires exact full retained native unitcase IDs/cardinality, rejecting prefixed/unrelatedmodule/duplicate aliases; no source/cache/image/commands/environment/resources changes."
+}

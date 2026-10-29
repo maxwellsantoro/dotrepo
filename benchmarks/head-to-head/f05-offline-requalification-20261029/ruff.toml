@@ -1,0 +1,6 @@
+extend = "../../../pyproject.toml"
+
+[lint.per-file-ignores]
+# Frozen synthetic driver loader executes importlib before importing its oracle.
+# Preserve the retained bytes rather than rewriting an already-bound control.
+"controls.v2.py" = ["E402"]

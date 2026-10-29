@@ -1,0 +1,212 @@
+{
+  "state": "static-native-evidence-qualified-for-three-known-scopes",
+  "reviewer": "/root/e1_establishment",
+  "priorContext": "Prior F05 curator/runtime development context; separate from execution author, not a blind consumer or second independent gold curator.",
+  "planSha256": "2d44b468d8954b42210cce44ae12c2571a835b8a89154d585a20f4cdbbce90e6",
+  "beforeSha256": "ebe024b00217a705ca8425dda1ab6ed01a86be4fc88b9a92fca589214cc27ff6",
+  "taskResults": [
+    {
+      "task": "rust-02",
+      "leafFreezeSha256": "d48ccbd478ed8f58fb577428f067000ff460e11068b17fb34122ec5ff462869a",
+      "verifiedReceiptCount": 19,
+      "sourceCacheImageAcceptanceBindings": true,
+      "exactIsolationAndResources": true,
+      "nativeScope": {
+        "unitCaseIds": [
+          [
+            "link_type::tests::test_link_type_from_pcap_unsupported",
+            "ok"
+          ],
+          [
+            "link_type::tests::test_link_type_from_pcap_supported",
+            "ok"
+          ]
+        ],
+        "docCases": 0,
+        "phaseCoverageComplete": true,
+        "defaultFeatureFlagChanged": false
+      },
+      "cleanupAndRetainedIndependentAbsence": true,
+      "taskOutcomeQualified": true,
+      "testsPassed": true,
+      "preflightSeconds": 1.6114997919648886,
+      "nativeTestSeconds": 6.0606139581650496,
+      "totalMeasuredOperatorSeconds": 22.665252333972603,
+      "costUsd": null
+    },
+    {
+      "task": "typescript-02",
+      "leafFreezeSha256": "fbfd63eb670d4571bd68116aa48ba5fdf737e644d789a845741aeaffb60d62a8",
+      "verifiedReceiptCount": 21,
+      "sourceCacheImageAcceptanceBindings": true,
+      "exactIsolationAndResources": true,
+      "nativeScope": {
+        "suite": "__tests__/bin/agent-canvas.test.ts",
+        "caseTitles": [
+          "does not require build/ in --backend-only mode",
+          "shows usage info in --help output"
+        ],
+        "npmVersion": "11.12.1",
+        "nativeWrapperAndI18nObserved": true,
+        "offlineInstallHooksDisabled": true,
+        "onlineNpmCiEquivalenceEstablished": false
+      },
+      "cleanupAndRetainedIndependentAbsence": true,
+      "taskOutcomeQualified": true,
+      "testsPassed": true,
+      "preflightSeconds": 0.5980951669625938,
+      "nativeTestSeconds": 3.298096084035933,
+      "totalMeasuredOperatorSeconds": 41.08278683270328,
+      "costUsd": null
+    },
+    {
+      "task": "go-03",
+      "leafFreezeSha256": "84c64b53ff2e3e5a4cbdf76650ba9b6642c04f8ebeedb72c22d8134e77c1e027",
+      "verifiedReceiptCount": 20,
+      "sourceCacheImageAcceptanceBindings": true,
+      "exactIsolationAndResources": true,
+      "nativeScope": {
+        "packages": [
+          "github.com/hashicorp/vault/api",
+          "github.com/hashicorp/vault/api/cliconfig",
+          "github.com/hashicorp/vault/api/tokenhelper"
+        ],
+        "topLevelTests": 93,
+        "nestedTestCases": 121,
+        "allRunCasesTerminalPass": true,
+        "skipAtAnyDepth": false
+      },
+      "cleanupAndRetainedIndependentAbsence": true,
+      "taskOutcomeQualified": true,
+      "testsPassed": true,
+      "preflightSeconds": 0.9548558748792857,
+      "nativeTestSeconds": 72.12953316606581,
+      "totalMeasuredOperatorSeconds": 100.0218427919317,
+      "costUsd": null
+    }
+  ],
+  "archiveBindings": [
+    {
+      "task": "rust-02",
+      "kind": "source",
+      "path": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/rust-02-full/runtime-source.tar",
+      "bytes": 114851840,
+      "sha256": "862b159c55ee7693faed80c2546aa203cc370e867cf5a206cff5356ab66766d6",
+      "inventoryFiles": 605
+    },
+    {
+      "task": "rust-02",
+      "kind": "cache",
+      "path": "/tmp/dotrepo-f05-dependency-preparation-20261029/rust-02-attempt-2/cache.tar",
+      "bytes": 463104000,
+      "sha256": "f8ca1fccc8792cc5eb34aad37640268ab339d852de15b10a3cf1d5bcaf5296a8",
+      "inventoryFiles": 24692
+    },
+    {
+      "task": "typescript-02",
+      "kind": "source",
+      "path": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/typescript-02/runtime-source.tar",
+      "bytes": 33597440,
+      "sha256": "818bf33ece0979d198ed6a11daa3e6b838cc4aefba8c3a381c86e8ce2e706f41",
+      "inventoryFiles": 2784
+    },
+    {
+      "task": "typescript-02",
+      "kind": "cache",
+      "path": "/tmp/dotrepo-f05-dependency-preparation-20261029/typescript-02/cache.tar",
+      "bytes": 217098240,
+      "sha256": "84cfa62ad220509ff1027f2a4e97b88885dbcb4c28bdfe59b620a70224d530dc",
+      "inventoryFiles": 2562
+    },
+    {
+      "task": "go-03",
+      "kind": "source",
+      "path": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-03/runtime-source.tar",
+      "bytes": 52541440,
+      "sha256": "cc7b18c67ce11698d79bfee35fe7afa7f7c8f0ea0dccbdaefd8836cde49f3ba2",
+      "inventoryFiles": 9658
+    },
+    {
+      "task": "go-03",
+      "kind": "cache",
+      "path": "/tmp/dotrepo-f05-dependency-preparation-20261029/go-03/cache.tar",
+      "bytes": 65812480,
+      "sha256": "fc8de794f4f9338fcb8be7cc0c4ef8f1a7e736e61b3a4a6bcdb3917cfb7176b8",
+      "inventoryFiles": 2832
+    }
+  ],
+  "codeAndAcceptanceBindings": [
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-results-20261029/control.py",
+      "sha256": "f4c48a59e66471d4247b25bd2c3704c681999943bc0daae5d6acf544844abb1a"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-results-20261029/capture.py",
+      "sha256": "8080a772bbb1e97c89cfb06dd31b5d250003c69ae7e17429d008e17b9f94bbbc"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/driver.v5.py",
+      "sha256": "bf24973c7fede7d1d379de4cf740f0bba815fcfb580a13f9c29b270def0e4c6d"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/plan.v5.json",
+      "sha256": "2d44b468d8954b42210cce44ae12c2571a835b8a89154d585a20f4cdbbce90e6"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-acceptance-20261029/acceptance.json",
+      "sha256": "01ff9e6f9790de814907e71dae59d438d0ba7effde829959eaba3d52ad3e5110"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-acceptance-20261029/FREEZE.json",
+      "sha256": "0763682faa7f3b1f255ccd518ccf55eab8f4e59b352e1c60ea749d18dbe274d4"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-acceptance-20261029/rust-02-cache-audit.json",
+      "sha256": "493a926abce0e1f25d696eee1b62cca1a4823cb367452c0a854016228f16dc75"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-acceptance-20261029/typescript-02-cache-audit.json",
+      "sha256": "8e8c96f4cb0dd175ebdb06b0610182d3f74d304b16396875fd76dab231bd1ebf"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-acceptance-20261029/go-03-cache-audit.json",
+      "sha256": "a60bd4aeff95179e14ae5951d8c6c941090ec5a928c19b51af1541fd0a7daf96"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-results-20261029/run_serial.v2.py",
+      "sha256": "59d8c956330021b8d55914f5dbde04567d43bf30e2f914cd2f14538e2aeb4b67"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/driver.v5.py",
+      "sha256": "bf24973c7fede7d1d379de4cf740f0bba815fcfb580a13f9c29b270def0e4c6d"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/controls.v5.py",
+      "sha256": "3a5e42dc5deaa7b558b0ac3a2132914330b28d5259d9eb039553c55892f354c0"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/controls_amendment_v5.py",
+      "sha256": "9e0aa4e4fb9d70066c33137626db0080c0251c52fb6cd4ca25dfa54253ac07ec"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/oracle_v5.py",
+      "sha256": "668242c28d89556d4e23eea384fe418b04ed5f4d26bfd3126298f1a4186db57f"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/oracle.py",
+      "sha256": "3b5392c8bf298d692f0ada994a01f5e0a35bde86151d59fd8b420fa050873aa7"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/control.py",
+      "sha256": "f4c48a59e66471d4247b25bd2c3704c681999943bc0daae5d6acf544844abb1a"
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/capture.py",
+      "sha256": "8080a772bbb1e97c89cfb06dd31b5d250003c69ae7e17429d008e17b9f94bbbc"
+    }
+  ],
+  "noNewDockerCalls": true,
+  "noNewUpstreamExecution": true,
+  "noNetworkOrProviderCalls": true,
+  "consumerBenefitEstablished": false
+}

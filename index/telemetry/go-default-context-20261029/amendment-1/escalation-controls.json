@@ -1,0 +1,186 @@
+[
+  {
+    "blockedScalarFields": [],
+    "budget": 0,
+    "build": "go build ./...",
+    "case": "root-default",
+    "modelCalls": 0,
+    "test": "go test ./...",
+    "unresolved": [],
+    "workflow": "jobs:\n  unit:\n    steps:\n      - run: go test ./...\n"
+  },
+  {
+    "blockedScalarFields": [],
+    "budget": 2,
+    "build": "go build ./...",
+    "case": "root-default",
+    "modelCalls": 0,
+    "test": "go test ./...",
+    "unresolved": [],
+    "workflow": "jobs:\n  unit:\n    steps:\n      - run: go test ./...\n"
+  },
+  {
+    "blockedScalarFields": [
+      "repo.test"
+    ],
+    "budget": 0,
+    "build": "go build ./...",
+    "case": "plain-service",
+    "modelCalls": 0,
+    "test": null,
+    "unresolved": [
+      "repo.test"
+    ],
+    "workflow": "jobs:\n  unit:\n    services:\n      redis:\n        image: redis:7\n    steps:\n      - run: go test -race ./...\n"
+  },
+  {
+    "blockedScalarFields": [
+      "repo.test"
+    ],
+    "budget": 2,
+    "build": "go build ./...",
+    "case": "plain-service",
+    "modelCalls": 0,
+    "test": null,
+    "unresolved": [
+      "repo.test"
+    ],
+    "workflow": "jobs:\n  unit:\n    services:\n      redis:\n        image: redis:7\n    steps:\n      - run: go test -race ./...\n"
+  },
+  {
+    "blockedScalarFields": [
+      "repo.test"
+    ],
+    "budget": 0,
+    "build": "go build ./...",
+    "case": "quoted-jobs-service",
+    "modelCalls": 0,
+    "test": null,
+    "unresolved": [
+      "repo.test"
+    ],
+    "workflow": "\"jobs\":\n  unit:\n    services:\n      redis:\n        image: redis:7\n    steps:\n      - run: go test -race ./...\n"
+  },
+  {
+    "blockedScalarFields": [
+      "repo.test"
+    ],
+    "budget": 2,
+    "build": "go build ./...",
+    "case": "quoted-jobs-service",
+    "modelCalls": 0,
+    "test": null,
+    "unresolved": [
+      "repo.test"
+    ],
+    "workflow": "\"jobs\":\n  unit:\n    services:\n      redis:\n        image: redis:7\n    steps:\n      - run: go test -race ./...\n"
+  },
+  {
+    "blockedScalarFields": [
+      "repo.test"
+    ],
+    "budget": 0,
+    "build": "go build ./...",
+    "case": "quoted-steps-service",
+    "modelCalls": 0,
+    "test": null,
+    "unresolved": [
+      "repo.test"
+    ],
+    "workflow": "jobs:\n  unit:\n    services:\n      redis:\n        image: redis:7\n    \"steps\":\n      - run: go test -race ./...\n"
+  },
+  {
+    "blockedScalarFields": [
+      "repo.test"
+    ],
+    "budget": 2,
+    "build": "go build ./...",
+    "case": "quoted-steps-service",
+    "modelCalls": 0,
+    "test": null,
+    "unresolved": [
+      "repo.test"
+    ],
+    "workflow": "jobs:\n  unit:\n    services:\n      redis:\n        image: redis:7\n    \"steps\":\n      - run: go test -race ./...\n"
+  },
+  {
+    "blockedScalarFields": [],
+    "budget": 0,
+    "build": "go build ./...",
+    "case": "workflow-env-data",
+    "modelCalls": 0,
+    "test": "go test ./...",
+    "unresolved": [],
+    "workflow": "env:\n  EXAMPLE_CONFIGURATION: |\n    working-directory: examples\njobs:\n  unit:\n    steps:\n      - run: go test ./...\n"
+  },
+  {
+    "blockedScalarFields": [],
+    "budget": 2,
+    "build": "go build ./...",
+    "case": "workflow-env-data",
+    "modelCalls": 0,
+    "test": "go test ./...",
+    "unresolved": [],
+    "workflow": "env:\n  EXAMPLE_CONFIGURATION: |\n    working-directory: examples\njobs:\n  unit:\n    steps:\n      - run: go test ./...\n"
+  },
+  {
+    "blockedScalarFields": [],
+    "budget": 0,
+    "build": "go build ./...",
+    "case": "job-env-data",
+    "modelCalls": 0,
+    "test": "go test ./...",
+    "unresolved": [],
+    "workflow": "jobs:\n  unit:\n    env:\n      EXAMPLE_CONFIGURATION: |\n        working-directory: examples\n    steps:\n      - run: go test ./...\n"
+  },
+  {
+    "blockedScalarFields": [],
+    "budget": 2,
+    "build": "go build ./...",
+    "case": "job-env-data",
+    "modelCalls": 0,
+    "test": "go test ./...",
+    "unresolved": [],
+    "workflow": "jobs:\n  unit:\n    env:\n      EXAMPLE_CONFIGURATION: |\n        working-directory: examples\n    steps:\n      - run: go test ./...\n"
+  },
+  {
+    "blockedScalarFields": [],
+    "budget": 0,
+    "build": "go build ./...",
+    "case": "step-overrides-default",
+    "modelCalls": 0,
+    "test": "go test ./...",
+    "unresolved": [],
+    "workflow": "defaults:\n  run:\n    working-directory: v2\njobs:\n  unit:\n    steps:\n      - run: go test ./...\n        working-directory: .\n"
+  },
+  {
+    "blockedScalarFields": [],
+    "budget": 2,
+    "build": "go build ./...",
+    "case": "step-overrides-default",
+    "modelCalls": 0,
+    "test": "go test ./...",
+    "unresolved": [],
+    "workflow": "defaults:\n  run:\n    working-directory: v2\njobs:\n  unit:\n    steps:\n      - run: go test ./...\n        working-directory: .\n"
+  },
+  {
+    "blockedScalarFields": [],
+    "budget": 0,
+    "build": "go build ./...",
+    "case": "heredoc-data",
+    "modelCalls": 0,
+    "test": "go test ./...",
+    "unresolved": [],
+    "workflow": "jobs:\n  unit:\n    steps:\n      - run: |\n          cat <<'END'\n          working-directory: examples\n          uses: shogo82148/actions-setup-redis@v1\n          services:\n            redis:\n              image: redis:7\n          cd v2\n          redis-server --daemonize yes\n          go test ./...\n          END\n          go test ./...\n"
+  },
+  {
+    "blockedScalarFields": [],
+    "budget": 2,
+    "build": "go build ./...",
+    "case": "heredoc-data",
+    "modelCalls": 0,
+    "test": "go test ./...",
+    "unresolved": [],
+    "workflow": "jobs:\n  unit:\n    steps:\n      - run: |\n          cat <<'END'\n          working-directory: examples\n          uses: shogo82148/actions-setup-redis@v1\n          services:\n            redis:\n              image: redis:7\n          cd v2\n          redis-server --daemonize yes\n          go test ./...\n          END\n          go test ./...\n"
+  }
+]

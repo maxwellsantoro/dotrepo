@@ -1,0 +1,39 @@
+{
+  "identity": "offline-rust-default-phases-source-bindings-v4",
+  "sourceArchiveSha256": "862b159c55ee7693faed80c2546aa203cc370e867cf5a206cff5356ab66766d6",
+  "sourceRevision": "ab4bf739d46448436cb68933bb8260ee264449d5",
+  "files": [
+    {
+      "role": "component manifest",
+      "upstreamPath": "lib/sniffnet-packet-parser/Cargo.toml",
+      "revision": "ab4bf739d46448436cb68933bb8260ee264449d5",
+      "sha256": "3b0a80798ac6377085087cf17efeaad377288ffc20d663e42729d75455f4c921",
+      "retained": "source-bindings-v4/parser-manifest.toml",
+      "lines": 28,
+      "url": "https://github.com/GyulyVGC/sniffnet/blob/ab4bf739d46448436cb68933bb8260ee264449d5/lib/sniffnet-packet-parser/Cargo.toml"
+    },
+    {
+      "role": "historical stdout",
+      "sourcePath": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-20261029/runs/rust-02/attempt-1/logs/actual-tests/stdout.txt",
+      "sha256": "d606452a4046247af21809b98d1c434a7c253dabdcfe7af0078d4f89285caed6",
+      "retained": "source-bindings-v4/historical-rust-stdout.txt",
+      "lines": 12
+    },
+    {
+      "role": "historical stderr",
+      "sourcePath": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-20261029/runs/rust-02/attempt-1/logs/actual-tests/stderr.txt",
+      "sha256": "a6a089e54b1e00c1be77f345f878c38a7811b58f7606faf3b5bda2b212c369e2",
+      "retained": "source-bindings-v4/historical-rust-stderr.txt",
+      "lines": 18
+    },
+    {
+      "role": "original task request",
+      "sourcePath": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-agent-tasks-20261029/requests/rust-02.md",
+      "sha256": "a59aad6359985d60882c86f0320b37be43a78b1ea8bbd17227c356c2347ab438",
+      "retained": "source-bindings-v4/original-rust-request.md",
+      "lines": 1
+    }
+  ],
+  "scope": "Exact parser default cargo command: two unit cases plus zero-test doc phase when units pass; manifest does not disable doctests. Default unit assertion failure may terminate later phase under explicit coordinator-approved frozen policy.",
+  "upstreamExecution": false
+}

@@ -1,0 +1,247 @@
+{
+  "state": "passed",
+  "authorizationNegativeControls": [
+    "changed-plan",
+    "changed-image",
+    "missing-cache-audit",
+    "pending-coordinator",
+    "false-audit-flag",
+    "integer-audit-flag",
+    "changed-cache-binding",
+    "changed-audit-bytes",
+    "run-without-acceptance-before-docker"
+  ],
+  "isolationFlagsChecked": true,
+  "terminalAssertionFailureCanBeOutcome": true,
+  "nestedSkipRejected": true,
+  "listingRejected": true,
+  "nativeOracleControls": {
+    "positiveControls": 3,
+    "negativeControls": 11,
+    "status": "passed",
+    "limits": "Synthetic native-format controls establish rejection behavior; actual source/environment execution is separately required."
+  },
+  "v4AmendmentControls": {
+    "state": "passed",
+    "syntheticOnly": true,
+    "historicalSuccessRecognized": true,
+    "phaseNegativeControls": [
+      "unit-pass-later-doc-compile-failure",
+      "all-pass-but-exit101",
+      "unit-pass-missing-doc-phase",
+      "doc-marker-without-terminal-summary",
+      "native-timeout",
+      "assertion-failure-summary-with-all-cases-ok",
+      "assertion-failure-plus-compiler-error",
+      "unknown-unit-failure-diagnostic"
+    ],
+    "policyDisabledRejectsDefaultStop": true,
+    "acceptedPreflightFailureRetained": {
+      "taskId": "rust-02",
+      "stage": "accepted-source-preflight",
+      "state": "failed-before-native-outcome",
+      "preflightSeconds": 0.001716917147859931,
+      "metadataVerification": {
+        "state": "direct API; separate metadata verification timing not supplied",
+        "elapsedSeconds": null
+      },
+      "startedAt": "2026-10-29T07:27:18.414512+00:00",
+      "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+      "sourceRevision": "ab4bf739d46448436cb68933bb8260ee264449d5",
+      "sourceArchiveSha256": "862b159c55ee7693faed80c2546aa203cc370e867cf5a206cff5356ab66766d6",
+      "cacheArchiveSha256": "f8ca1fccc8792cc5eb34aad37640268ab339d852de15b10a3cf1d5bcaf5296a8",
+      "containerCreateAttempted": false,
+      "dockerCalls": 0,
+      "taskOutcomeObserved": false,
+      "testsPassed": null,
+      "costUsd": null,
+      "costExclusions": [
+        "No metered host/container charge source; dependency preparation retained separately."
+      ],
+      "modelCalls": 0,
+      "indexConsulted": false,
+      "campaignExecuted": false,
+      "failureStage": "accepted-source-preflight",
+      "errorType": "ValueError",
+      "error": "synthetic archive hash mismatch",
+      "workElapsedSeconds": 0.0017172081861644983,
+      "cleanupAttempted": false,
+      "cleanupExitCode": null,
+      "cleanupReason": "no container creation attempted; no daemon cleanup needed",
+      "cleanupSeconds": 0.0,
+      "elapsedSeconds": 0.0017177921254187822,
+      "totalMeasuredOperatorSeconds": null
+    },
+    "fullMockedDriver": [
+      {
+        "case": "late-doc-compile",
+        "syntheticResult": {
+          "taskId": "rust-02",
+          "stage": "tracked-source-after-tests",
+          "state": "incomplete-or-protocol-deviation",
+          "preflightSeconds": 0.0007312921807169914,
+          "metadataVerification": {
+            "state": "direct API; separate metadata verification timing not supplied",
+            "elapsedSeconds": null
+          },
+          "startedAt": "2026-10-29T07:27:18.416228+00:00",
+          "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+          "sourceRevision": "ab4bf739d46448436cb68933bb8260ee264449d5",
+          "sourceArchiveSha256": "862b159c55ee7693faed80c2546aa203cc370e867cf5a206cff5356ab66766d6",
+          "cacheArchiveSha256": "f8ca1fccc8792cc5eb34aad37640268ab339d852de15b10a3cf1d5bcaf5296a8",
+          "containerCreateAttempted": true,
+          "dockerCalls": 16,
+          "taskOutcomeObserved": false,
+          "testsPassed": null,
+          "costUsd": null,
+          "costExclusions": [
+            "No metered host/container charge source; dependency preparation retained separately."
+          ],
+          "modelCalls": 0,
+          "indexConsulted": false,
+          "campaignExecuted": false,
+          "offlineSetupSeconds": 2.4579931050539017e-06,
+          "testExitCode": 101,
+          "executionError": null,
+          "oracle": {
+            "qualified": false,
+            "reason": "compile/setup/unknown diagnostic prevents complete default outcome",
+            "processExitCode": 101,
+            "processError": null,
+            "phaseCoverageComplete": false,
+            "unitPhase": {
+              "terminal": true,
+              "exercised": true,
+              "status": "ok",
+              "passed": 2,
+              "failed": 0,
+              "ignored": 0,
+              "measured": 0,
+              "filtered": 0,
+              "cases": [
+                "test_link_type_from_pcap_supported",
+                "test_link_type_from_pcap_unsupported"
+              ]
+            },
+            "docPhase": {
+              "state": "unknown",
+              "exercised": false,
+              "terminal": false
+            },
+            "summaries": [
+              {
+                "status": "ok",
+                "passed": 2,
+                "failed": 0,
+                "ignored": 0,
+                "measured": 0,
+                "filtered": 0
+              }
+            ],
+            "unitMarkerCount": 1,
+            "docMarkerCount": 1,
+            "unitMarkerObserved": true,
+            "docMarkerObserved": true,
+            "unexpectedFailureDiagnostics": [
+              "error: doctest failed, to rerun pass --doc"
+            ]
+          },
+          "trackedSourceIntact": true,
+          "workElapsedSeconds": 0.0009068329818546772,
+          "cleanupAttempted": true,
+          "cleanupExitCode": 0,
+          "cleanupSeconds": 8.330680429935455e-07,
+          "elapsedSeconds": 0.0009081671014428139,
+          "totalMeasuredOperatorSeconds": null
+        }
+      },
+      {
+        "case": "terminal-unit-assertion",
+        "syntheticResult": {
+          "taskId": "rust-02",
+          "stage": "tracked-source-after-tests",
+          "state": "offline-outcome-observed-pending-independent-review",
+          "preflightSeconds": 0.000634749885648489,
+          "metadataVerification": {
+            "state": "direct API; separate metadata verification timing not supplied",
+            "elapsedSeconds": null
+          },
+          "startedAt": "2026-10-29T07:27:18.417306+00:00",
+          "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+          "sourceRevision": "ab4bf739d46448436cb68933bb8260ee264449d5",
+          "sourceArchiveSha256": "862b159c55ee7693faed80c2546aa203cc370e867cf5a206cff5356ab66766d6",
+          "cacheArchiveSha256": "f8ca1fccc8792cc5eb34aad37640268ab339d852de15b10a3cf1d5bcaf5296a8",
+          "containerCreateAttempted": true,
+          "dockerCalls": 16,
+          "taskOutcomeObserved": true,
+          "testsPassed": false,
+          "costUsd": null,
+          "costExclusions": [
+            "No metered host/container charge source; dependency preparation retained separately."
+          ],
+          "modelCalls": 0,
+          "indexConsulted": false,
+          "campaignExecuted": false,
+          "offlineSetupSeconds": 1.9168946892023087e-06,
+          "testExitCode": 101,
+          "executionError": null,
+          "oracle": {
+            "qualified": true,
+            "reason": "terminal unit assertion failure is frozen default-command outcome; doc phase unexecuted",
+            "processExitCode": 101,
+            "processError": null,
+            "phaseCoverageComplete": false,
+            "unitPhase": {
+              "terminal": true,
+              "exercised": true,
+              "status": "FAILED",
+              "passed": 1,
+              "failed": 1,
+              "ignored": 0,
+              "measured": 0,
+              "filtered": 0,
+              "cases": [
+                "test_link_type_from_pcap_supported",
+                "test_link_type_from_pcap_unsupported"
+              ]
+            },
+            "docPhase": {
+              "state": "unexecuted-default-stop",
+              "exercised": false,
+              "terminal": false,
+              "testCases": null
+            },
+            "summaries": [
+              {
+                "status": "FAILED",
+                "passed": 1,
+                "failed": 1,
+                "ignored": 0,
+                "measured": 0,
+                "filtered": 0
+              }
+            ],
+            "unitMarkerCount": 1,
+            "docMarkerCount": 0,
+            "unitMarkerObserved": true,
+            "docMarkerObserved": false,
+            "unexpectedFailureDiagnostics": []
+          },
+          "trackedSourceIntact": true,
+          "workElapsedSeconds": 0.0007884579245001078,
+          "cleanupAttempted": true,
+          "cleanupExitCode": 0,
+          "cleanupSeconds": 7.499475032091141e-07,
+          "elapsedSeconds": 0.0007895419839769602,
+          "totalMeasuredOperatorSeconds": null
+        }
+      }
+    ],
+    "actualDockerCalls": 0,
+    "actualUpstreamExecution": false,
+    "actualTaskOutcomes": null
+  },
+  "dockerCalls": 0,
+  "upstreamSourceBytesRead": false,
+  "actualTaskOutcomes": null
+}

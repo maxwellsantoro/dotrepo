@@ -1,0 +1,29 @@
+{
+  "reviewer": "/root/withdrawal_diagnostic",
+  "author": "/root/f05_harness",
+  "priorContext": "Prior development/source/runtime review; not fresh blind gold/agent exposure.",
+  "v5": {
+    "plan.v5.json": "2d44b468d8954b42210cce44ae12c2571a835b8a89154d585a20f4cdbbce90e6",
+    "driver.v5.py": "bf24973c7fede7d1d379de4cf740f0bba815fcfb580a13f9c29b270def0e4c6d",
+    "oracle_v5.py": "668242c28d89556d4e23eea384fe418b04ed5f4d26bfd3126298f1a4186db57f",
+    "controls.v5.py": "3a5e42dc5deaa7b558b0ac3a2132914330b28d5259d9eb039553c55892f354c0",
+    "controls_amendment_v5.py": "9e0aa4e4fb9d70066c33137626db0080c0251c52fb6cd4ca25dfa54253ac07ec"
+  },
+  "v4FrozenFilesVerified": 9,
+  "v4ReviewerFilesVerified": 8,
+  "originalSubstantiveV3FilesUnchanged": 20,
+  "disclosedGeneratedCacheChanges": [
+    {
+      "path": ".ruff_cache/0.14.14/17153894268613294756",
+      "frozenSha256": "b33fd4de79f462840970de152e86d2e92e65c794cd08b1e157c834a201065ee1",
+      "observedSha256": "baaf44351c2ba9576df4b544324b7df16aa1e61cde334e8f2ef30b0274c86993"
+    }
+  ],
+  "phasePolicyUnchangedExceptStrictCaseIdentity": true,
+  "fullCaseIdsMatchRetainedHistoricalNativeOutput": [
+    "link_type::tests::test_link_type_from_pcap_supported",
+    "link_type::tests::test_link_type_from_pcap_unsupported"
+  ],
+  "sourceTaskCommandsImageResourcesSetupUnchanged": "Retargeted independent controls compare v5task minusRustpolicy to v3 and fixed environment/resource identities.",
+  "actualNewDockerOrProviderNetworkCalls": 0
+}

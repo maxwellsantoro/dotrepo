@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+- Withhold inferred Go scalar commands when observed workflow directories or
+  same-job service setup leave repository scope or prerequisites unresolved.
+  Preserve the restriction through adjudication with typed in-memory metadata,
+  while retaining attributed candidates and explicit maintainer defaults. Add
+  source-backed and negative-control fixtures; this does not resolve every
+  conventional Go default or establish execution portability.
+- Retain independently reviewed offline qualifications for three frozen native
+  scopes using one common image and immutable download caches. Preserve failed
+  driver versions and correct lost preflight receipts, incomplete Rust phase
+  scoring and nonexact test-name matching before native attempts. These are
+  operator qualifications, not an autonomous-agent benefit result.
 - Preserve inventoried source symlinks in the internal experiment runtime with
   contained logical resolution and regular-data-before-links provisioning into
   a fresh container directory. Keep dependency caches regular-only and account

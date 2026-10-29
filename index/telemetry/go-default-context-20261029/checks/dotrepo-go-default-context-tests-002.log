@@ -1,0 +1,66 @@
+   Compiling dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.15s
+     Running unittests src/lib.rs (target/debug/deps/dotrepo_core-6af6d15045c80b2a)
+
+running 58 tests
+test import::commands::context::tests::explicit_runtime_list_cannot_override_external_setup_contracts ... ok
+test import::commands::context::tests::explicit_runtime_list_cannot_supply_missing_or_conflicting_context ... ok
+test import::commands::context::tests::explicit_runtime_prerequisites_preserve_complete_component_tuple ... ok
+test import::commands::context::tests::explicit_runtime_prerequisites_can_establish_runtime_only_setup ... ok
+test import::commands::context::tests::missing_prerequisites_and_contradictory_none_still_abstain ... ok
+test import::commands::go_context::tests::cd_dot_does_not_reset_a_preceding_component_change ... ok
+test import::commands::go_context::tests::declared_commands_and_unrelated_ecosystems_survive_go_guards ... ok
+test import::commands::context::tests::scoped_sections_cannot_discard_ancestor_restrictions ... ok
+test import::commands::context::tests::prerequisite_lists_abstain_on_incomplete_or_ambiguous_declarations ... ok
+test import::commands::go_context::tests::same_job_service_setup_blocks_only_test_default ... ok
+test import::commands::go_context::tests::scoped_go_workflow_blocks_metadata_fallthrough_without_nested_manifests ... ok
+test import::commands::go_context::tests::unrelated_service_job_and_non_go_directory_change_do_not_poison_defaults ... ok
+test import::commands::go_context::tests::workflow_and_job_defaults_apply_but_root_cwd_is_preserved ... ok
+test import::commands::scope::tests::scope_cases_match_reference_consumer ... ok
+test import::commands::tests::docs_abstain_when_environment_prerequisite_would_be_lost ... ok
+test import::commands::tests::docs_accept_cargo_toolchain_override_and_keep_it_in_the_command ... ok
+test import::commands::tests::dependency_installation_is_not_a_build_or_test_command ... ok
+test import::commands::tests::docs_nextest_examples_do_not_invent_an_unfiltered_runner_command ... ok
+test import::commands::tests::docs_reject_package_narrowed_go_test_examples ... ok
+test import::commands::tests::host_package_install_with_build_essential_is_not_a_build_command ... ok
+test import::commands::tests::documentation_fences_do_not_reset_directory_or_make_configuration ... ok
+test import::commands::tests::infer_gradle_commands_uses_wrapper_only_when_present ... ok
+test import::commands::tests::infer_setup_cfg_abstains_on_unrelated_test_substrings ... ok
+test import::commands::tests::infer_setup_cfg_detects_extras_require_test_pytest ... ok
+test import::commands::tests::infer_setup_commands_provide_pytest_for_classic_python ... ok
+test import::commands::tests::infer_setup_py_abstains_without_test_signals ... ok
+test import::commands::tests::infer_setup_py_prefers_unittest_when_pytest_is_absent ... ok
+test import::commands::tests::infer_tox_ini_commands_detects_testenv ... ok
+test import::commands::context::python_recipe::tests::natural_python_recipe_rejects_even_contained_requirement_symlinks ... ok
+test import::commands::tests::makefile_commands_name_only_targets_that_exist ... ok
+test import::commands::tests::makefile_unit_test_target_outranks_composite_test ... ok
+test import::commands::tests::makefile_preferred_over_justfile_on_task_script_conflict ... ok
+test import::commands::tests::nonexecuting_test_modes_are_withheld_without_rewriting_flags ... ok
+test import::commands::context::python_recipe::tests::natural_python_recipe_recovers_real_source_tuple_with_medium_bound_evidence ... ok
+test import::commands::tests::package_commands_preserve_the_declared_script_name ... ok
+test import::commands::tests::load_best_package_json_prefers_server_app_over_root_format_only ... ok
+test import::commands::tests::package_json_test_conflicts_with_python_test_default ... ok
+test import::commands::tests::pyproject_tox_conflicts_with_setup_py_pytest_instead_of_losing ... ok
+test import::commands::tests::readme_doc_commands_abstain_after_directory_change ... ok
+test import::commands::tests::resolve_unique_command_candidate_prefers_generic_over_monorepo_slice_workflows ... ok
+test import::commands::tests::resolve_unique_command_candidate_prefers_primary_ci_workflow ... ok
+test import::commands::tests::sanitize_import_command_rejects_shell_like_values ... ok
+test import::commands::tests::specialized_go_ci_coverdir_is_not_a_workflow_test_command ... ok
+test import::commands::tests::sonnet_workflow_skips_setup_before_the_actual_runner ... ok
+test import::commands::tests::workflow_and_makefile_inference_improvements_do_not_regress_safety ... ok
+test import::commands::tests::workflow_go_selectors_do_not_outrank_module_defaults ... ok
+test import::commands::tests::workflow_cargo_selectors_do_not_outrank_workspace_defaults ... ok
+test import::commands::tests::workflow_gradle_tasks_defer_to_wrapper_defaults ... ok
+test import::commands::tests::workflow_inference_ignores_specialized_cargo_commands ... ok
+test import::commands::tests::workflow_inference_skips_shell_assignments_and_prefers_bazel_build ... ok
+test import::commands::tests::workflow_run_commands_shed_inline_yaml_quotes ... ok
+test import::commands::tests::workflow_python_runner_must_be_an_invocation ... ok
+test import::commands::tests::workflow_wrapper_chmod_is_not_a_build_command ... ok
+test import::commands::tests::specialized_doc_sections_do_not_inherit_repository_default_authority ... ok
+test import::commands::context::python_recipe::tests::natural_python_recipe_import_preserves_candidate_assessment_without_scalar_promotion ... ok
+test import::commands::context::python_recipe::tests::natural_python_recipe_rejects_hidden_indented_and_external_pretest_setup ... ok
+test import::commands::go_context::tests::full_import_f1_go_context_fixture_contracts ... ok
+test import::commands::context::python_recipe::tests::natural_python_recipe_rejects_wrong_scope_directory_conditions_and_missing_chain ... ok
+
+test result: ok. 58 passed; 0 failed; 0 ignored; 0 measured; 202 filtered out; finished in 0.10s
+

@@ -1,0 +1,11 @@
+jobs:
+  unit:
+    defaults:
+      run:
+        working-directory: .
+    steps:
+      - run: go test ./...
+  demo:
+    steps:
+      - uses: shogo82148/actions-setup-redis@v1
+      - run: echo service demo

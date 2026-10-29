@@ -1,0 +1,168 @@
+{
+  "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+  "note": "Excerpts use readable newline rendering; sources/ retains original byte sequences.",
+  "spans": [
+    {
+      "source": "sources/CONTRIBUTING.md",
+      "upstreamPath": "CONTRIBUTING.md",
+      "sourceSha256": "b45301bb6687e1dfadc253640ee20766aa02a16d9578e92eee8c530b808d4112",
+      "startLine": 76,
+      "endLine": 105,
+      "excerpt": "## Prerequisites\n\n- Go 1.27\n- Node.js 24\n- npm (the version declared by `packageManager` in `package.json`)\n- Git\n\nOn Windows, enable long paths:\n\n```bash\ngit config --global core.longpaths true\n```\n\n## Setup\n\n```bash\ngit clone https://github.com/microsoft/TypeScript.git\ncd TypeScript\nnpm ci\n```\n\nThe repository uses a Go workspace with modules in `tsc/` and `tools/`.\n\n## Common tasks\n\n```bash\nnpx hereby build         # Build the native compiler into built/local/tsc\nnpx hereby test          # Run compiler and language-service Go tests\nnpx hereby test:all      # Also run benchmarks, tools, and API tests\nnpx hereby test:codegen  # Run codegen tests without regenerating source outputs",
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/CONTRIBUTING.md#L76-L105"
+    },
+    {
+      "source": "sources/CONTRIBUTING.md",
+      "upstreamPath": "CONTRIBUTING.md",
+      "sourceSha256": "b45301bb6687e1dfadc253640ee20766aa02a16d9578e92eee8c530b808d4112",
+      "startLine": 110,
+      "endLine": 123,
+      "excerpt": "npx hereby check:format  # Check formatting without changing files\nnpx hereby tidy          # Tidy both modules and synchronize go.work\n```\n\nGeneration is owned by `Herebyfile.mjs`; Go directives forward to the same\n`generate:*` tasks for compatibility. Use a subtask such as\n`npx hereby generate:diagnostics` to run one generator group, and pass `--force`\nto bypass incremental caches. `generate` includes every generator and fetches\nthe pinned LSP model when its local cache is missing or stale. Use\n`generate:go` for the narrower scope of `go generate ./...` in the `tsc` module.\nUp-to-date generators emit no status messages.\n\n`npx hereby build` runs `generate` before compiling; a separate generation step\nis not needed. The API and package build tasks share this prerequisite, and",
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/CONTRIBUTING.md#L110-L123"
+    },
+    {
+      "source": "sources/package.json",
+      "upstreamPath": "package.json",
+      "sourceSha256": "2828c1d269bd9c80d634131ec107ac69f1cfc3bf1f98d24c112c825c8acd7902",
+      "startLine": 6,
+      "endLine": 24,
+      "excerpt": "    \"engines\": {\n        \"node\": \">=22.18\"\n    },\n    \"workspaces\": [\n        \"packages/*\"\n    ],\n    \"scripts\": {\n        \"build\": \"hereby build\",\n        \"build:watch\": \"hereby build:watch\",\n        \"build:watch:debug\": \"hereby build:watch --debug\",\n        \"test\": \"hereby test\",\n        \"lint\": \"hereby lint\",\n        \"format\": \"hereby format\",\n        \"check:format\": \"hereby check:format\",\n        \"generate\": \"hereby generate\",\n        \"tidy\": \"hereby tidy\",\n        \"extension:build\": \"npm run -w native-preview build\",\n        \"extension:watch\": \"npm run -w native-preview watch\",\n        \"setup-hooks\": \"node tools/scripts/link-hooks.mjs\"",
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/package.json#L6-L24"
+    },
+    {
+      "source": "sources/package.json",
+      "upstreamPath": "package.json",
+      "sourceSha256": "2828c1d269bd9c80d634131ec107ac69f1cfc3bf1f98d24c112c825c8acd7902",
+      "startLine": 45,
+      "endLine": 57,
+      "excerpt": "    },\n    \"packageManager\": \"npm@11.19.1+sha512.cedb312b1b7f92421a02cfb68b4194e88f8346651dacd6acc5364a25ef5309d4a32b19616a1ff8aff865e7280c0fa5c0835a99f5cd93368991e2a80ec9da75d2\",\n    \"volta\": {\n        \"node\": \"24.20.0\",\n        \"npm\": \"11.19.1\"\n    },\n    \"allowScripts\": {\n        \"@vscode/vsce-sign@2.1.0\": true,\n        \"keytar@7.9.0\": true,\n        \"dprint@0.57.4\": true,\n        \"esbuild@0.28.2\": true\n    }\n}",
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/package.json#L45-L57"
+    },
+    {
+      "source": "sources/Herebyfile.mjs",
+      "upstreamPath": "Herebyfile.mjs",
+      "sourceSha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421",
+      "startLine": 98,
+      "endLine": 122,
+      "excerpt": "\nconst { values: rawOptions } = parseArgs({\n    args: process.argv.slice(2),\n    options: {\n        tests: { type: \"string\", short: \"t\" },\n        fix: { type: \"boolean\" },\n        force: { type: \"boolean\", default: parseEnvBoolean(\"FORCE\") },\n        api: { type: \"boolean\" },\n        all: { type: \"boolean\" },\n        debug: { type: \"boolean\" },\n        dirty: { type: \"boolean\" },\n        release: { type: \"boolean\" },\n\n        setPrerelease: { type: \"string\" },\n        forRelease: { type: \"boolean\" },\n        respectGoEnv: { type: \"boolean\" },\n        vscodeTypescriptRelease: { type: \"boolean\" },\n        platform: { type: \"string\" },\n\n        race: { type: \"boolean\", default: parseEnvBoolean(\"RACE\") },\n        noembed: { type: \"boolean\", default: parseEnvBoolean(\"NOEMBED\") },\n        concurrentTestPrograms: { type: \"boolean\", default: parseEnvBoolean(\"CONCURRENT_TEST_PROGRAMS\") },\n        coverage: { type: \"boolean\", default: parseEnvBoolean(\"COVERAGE\") },\n    },\n    strict: false,",
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/Herebyfile.mjs#L98-L122"
+    },
+    {
+      "source": "sources/Herebyfile.mjs",
+      "upstreamPath": "Herebyfile.mjs",
+      "sourceSha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421",
+      "startLine": 160,
+      "endLine": 184,
+      "excerpt": "const defaultGoBuildTags = [\n    ...(options.noembed ? [\"noembed\"] : []),\n];\n\n/**\n * @param  {...string} extra\n * @returns {string[]}\n */\nfunction goBuildTags(...extra) {\n    const tags = new Set(defaultGoBuildTags.concat(extra));\n    return tags.size ? [`-tags=${[...tags].join(\",\")}`] : [];\n}\n\nconst goBuildFlags = [\n    ...(options.race ? [\"-race\"] : []),\n    // https://github.com/go-delve/delve/blob/62cd2d423c6a85991e49d6a70cc5cb3e97d6ceef/Documentation/usage/dlv_exec.md?plain=1#L12\n    ...(options.debug ? [\"-gcflags=all=-N -l\"] : []),\n];\n\nconst goBuildEnv = {\n    ...(options.race ? {} : { CGO_ENABLED: \"0\" }),\n};\n\n/**\n * @template T",
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/Herebyfile.mjs#L160-L184"
+    },
+    {
+      "source": "sources/Herebyfile.mjs",
+      "upstreamPath": "Herebyfile.mjs",
+      "sourceSha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421",
+      "startLine": 876,
+      "endLine": 920,
+      "excerpt": "function goTestFlags(taskName) {\n    ensureCoverageDirExists();\n    return [\n        ...goBuildFlags,\n        ...goBuildTags(),\n        ...(options.tests ? [`-run=${options.tests}`] : []),\n        // Go 1.27 duplicates promoted AST wrappers, exhausting CI disk under coverage.\n        // Tests strip DWARF when linking; omit it earlier to shrink temporary and cached archives.\n        ...(options.coverage && !options.debug ? [\"-gcflags=all=-dwarf=false\"] : []),\n        ...(options.coverage ? [`-coverprofile=${path.join(coverageDir, \"coverage.\" + taskName + \".out\")}`, \"-coverpkg=./...\"] : []),\n    ];\n}\n\nfunction getGODEBUG() {\n    const key = \"tracebackancestors\";\n    const setting = `${key}=10`;\n    const existing = process.env.GODEBUG ?? \"\";\n    if (!existing) return setting;\n    if (existing.includes(`${key}=`)) return existing;\n    return `${existing},${setting}`;\n}\n\nconst goTestEnv = {\n    GODEBUG: getGODEBUG(),\n    ...(options.concurrentTestPrograms ? { TS_TEST_PROGRAM_SINGLE_THREADED: \"false\" } : {}),\n    // Go test caching takes a long time on Windows.\n    // https://github.com/golang/go/issues/72992\n    ...(process.platform === \"win32\" ? { GOFLAGS: \"-count=1\" } : {}),\n};\n\nconst baselineTrackingEnabled = false && ![\n    options.tests,\n    options.noembed,\n    options.concurrentTestPrograms,\n    options.race,\n    options.dirty,\n].some(Boolean);\n\nconst goTestSumFlags = [\n    \"--format-hide-empty-pkg\",\n    \"--hide-summary\",\n    \"skipped\",\n];\n\n/**",
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/Herebyfile.mjs#L876-L920"
+    },
+    {
+      "source": "sources/Herebyfile.mjs",
+      "upstreamPath": "Herebyfile.mjs",
+      "sourceSha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421",
+      "startLine": 968,
+      "endLine": 1010,
+      "excerpt": "function gotestsumArgs(taskName) {\n    return [\n        ...goTestSumFlags,\n        \"--\",\n        ...goTestFlags(taskName),\n    ];\n}\n\n/**\n * @param {string} taskName\n */\nfunction goTest(taskName) {\n    return [\"go\", \"test\"].concat(goTestFlags(taskName));\n}\n\nasync function runTests() {\n    if (!options.dirty) {\n        await rimraf(localBaseline);\n        await fs.promises.mkdir(localBaseline, { recursive: true });\n    }\n\n    // Create a tmp directory for baseline tracking if enabled\n    /** @type {string | undefined} */\n    let trackingDir;\n    /** @type {(() => Promise<void>) | undefined} */\n    let cleanupTracking;\n\n    if (baselineTrackingEnabled) {\n        const tempTrackingDir = fs.mkdtempSync(path.join(os.tmpdir(), \"tsgo-baseline-tracking-\"));\n        trackingDir = tempTrackingDir;\n        cleanupTracking = () => rimraf(tempTrackingDir);\n    }\n\n    try {\n        const testEnv = {\n            ...goTestEnv,\n            ...(trackingDir ? { TSGO_BASELINE_TRACKING_DIR: trackingDir } : {}),\n        };\n        await gotestsumTool.run([...gotestsumArgs(\"tests\"), \"./...\", ...(isCI ? [\"--timeout=45m\"] : [])], {\n            env: testEnv,\n            cwd: \"./tsc\",\n        });\n",
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/Herebyfile.mjs#L968-L1010"
+    },
+    {
+      "source": "sources/Herebyfile.mjs",
+      "upstreamPath": "Herebyfile.mjs",
+      "sourceSha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421",
+      "startLine": 1046,
+      "endLine": 1062,
+      "excerpt": "export const testTsc = task({\n    name: \"test:tsc\",\n    description: \"Runs all tests in the tsc module.\",\n    run: runTests,\n});\n\nexport const testExtension = task({\n    name: \"test:extension\",\n    description: \"Runs the VS Code extension tests.\",\n    run: runTestExtension,\n});\n\nexport const test = task({\n    name: \"test\",\n    description: \"Alias for test:tsc.\",\n    dependencies: [testTsc],\n});",
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/Herebyfile.mjs#L1046-L1062"
+    },
+    {
+      "source": "sources/Herebyfile.mjs",
+      "upstreamPath": "Herebyfile.mjs",
+      "sourceSha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421",
+      "startLine": 1150,
+      "endLine": 1163,
+      "excerpt": "export const testAll = task({\n    name: \"test:all\",\n    description: \"Runs compiler, extension, benchmark, tools, and API tests. Codegen tests are opt-in via test:codegen.\",\n    dependencies: [tsgo, buildAPITests],\n    run: async () => {\n        // Prevent interleaving by running these directly instead of in parallel.\n        await runTests();\n        await runTestExtension();\n        await runTestBenchmarks();\n        await runTestTools();\n        await runTestAPI();\n        await runTestAPIBenchmarks();\n    },\n});",
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/Herebyfile.mjs#L1150-L1163"
+    },
+    {
+      "source": "sources/Herebyfile.mjs",
+      "upstreamPath": "Herebyfile.mjs",
+      "sourceSha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421",
+      "startLine": 1208,
+      "endLine": 1218,
+      "excerpt": "const gotestsumTool = createCachedTool({\n    toolPath: `./tools/gotestsum${process.platform === \"win32\" ? \".exe\" : \"\"}`,\n    globs: [\"./tools/go.mod\", \"./tools/go.sum\"],\n    build: async () => {\n        await run(\"go\", [\"install\", \"gotest.tools/gotestsum\"], {\n            cwd: \"./tools\",\n            env: { GOBIN: path.resolve(\"./tools\") },\n        });\n    },\n});\n",
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/Herebyfile.mjs#L1208-L1218"
+    },
+    {
+      "source": "sources/tsc/internal/fourslash/tests/aliasMergingWithNamespace_test.go",
+      "upstreamPath": "tsc/internal/fourslash/tests/aliasMergingWithNamespace_test.go",
+      "sourceSha256": "4bc35d615390b3e7821f4242b7f5b0ebf5273d4cb544bad04767e0e9441a188b",
+      "startLine": 9,
+      "endLine": 14,
+      "excerpt": "\nfunc TestAliasMergingWithNamespace(t *testing.T) {\n\tt.Skip(\"Known failing fourslash test\")\n\tt.Parallel()\n\tdefer testutil.RecoverAndFail(t, \"Panic on fourslash test\")\n\tconst content = `namespace bar { }",
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/tsc/internal/fourslash/tests/aliasMergingWithNamespace_test.go#L9-L14"
+    },
+    {
+      "source": "sources/tsc/internal/fourslash/tests/autoImportPackageRootPathTypeModule_test.go",
+      "upstreamPath": "tsc/internal/fourslash/tests/autoImportPackageRootPathTypeModule_test.go",
+      "sourceSha256": "ae289ea4af9c099c79ac306543e8695277abf9dfdffda55b442199f13c6a4745",
+      "startLine": 9,
+      "endLine": 14,
+      "excerpt": "\nfunc TestAutoImportPackageRootPathTypeModule(t *testing.T) {\n\tt.Skip()\n\tt.Parallel()\n\tdefer testutil.RecoverAndFail(t, \"Panic on fourslash test\")\n\tconst content = `// @allowJs: true",
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/tsc/internal/fourslash/tests/autoImportPackageRootPathTypeModule_test.go#L9-L14"
+    },
+    {
+      "source": "sources/tsc/internal/lsp/replay_test.go",
+      "upstreamPath": "tsc/internal/lsp/replay_test.go",
+      "sourceSha256": "5425fdbb311e388761c33100d343576168a76e41ccc8817a039483569d6902bb",
+      "startLine": 24,
+      "endLine": 28,
+      "excerpt": "var (\n\treplay      = flag.String(\"replay\", \"\", \"Path to replay file\")\n\ttestDir     = flag.String(\"testDir\", \"\", \"Path to project directory\")\n\tsimple      = flag.Bool(\"simple\", false, \"Replay only file opening and closing, plus the final request\")\n\tsuperSimple = flag.Bool(\"superSimple\", false, \"Replay only the final file opening and the final request\")",
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/tsc/internal/lsp/replay_test.go#L24-L28"
+    },
+    {
+      "source": "sources/tsc/internal/lsp/replay_test.go",
+      "upstreamPath": "tsc/internal/lsp/replay_test.go",
+      "sourceSha256": "5425fdbb311e388761c33100d343576168a76e41ccc8817a039483569d6902bb",
+      "startLine": 42,
+      "endLine": 49,
+      "excerpt": "func TestReplay(t *testing.T) {\n\tt.Parallel()\n\tif replay == nil || *replay == \"\" {\n\t\tt.Skip(\"no replay file specified\")\n\t}\n\tif testDir == nil || *testDir == \"\" {\n\t\tt.Fatal(\"testDir must be specified\")\n\t}",
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/tsc/internal/lsp/replay_test.go#L42-L49"
+    },
+    {
+      "source": "sources/tsc/internal/fswatch/fanotify_linux_test.go",
+      "upstreamPath": "tsc/internal/fswatch/fanotify_linux_test.go",
+      "sourceSha256": "f5e1b08aad68b1e9538f14f1d442bf09bc2aee362706d66a5a492024120cb6a9",
+      "startLine": 34,
+      "endLine": 45,
+      "excerpt": "\nfunc TestLinuxFanotifyBackendSelection(t *testing.T) {\n\tt.Parallel()\n\tif !fanotifyAvailable() {\n\t\tt.Skip(\"fanotify not available\")\n\t}\n\timpl, err := fanotifyWatcher.getImpl()\n\tif err != nil {\n\t\tt.Fatal(err)\n\t}\n\tif _, ok := impl.(*fanotifyBackend); !ok {\n\t\tt.Fatalf(\"fanotify watcher = %T, want *fanotifyBackend\", impl)",
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/tsc/internal/fswatch/fanotify_linux_test.go#L34-L45"
+    },
+    {
+      "source": "sources/tsc/internal/parser/parser_test.go",
+      "upstreamPath": "tsc/internal/parser/parser_test.go",
+      "sourceSha256": "d6272679167b0560dee59d4d52bf39f1bb9124af152425a86f8f6cae7b6e6658",
+      "startLine": 139,
+      "endLine": 143,
+      "excerpt": "\tf.Fuzz(func(t *testing.T, extension string, sourceText string, externalModuleIndicatorOptionsJSX bool, externalModuleIndicatorOptionsForce bool) {\n\t\tif !extensions.Has(extension) {\n\t\t\tt.Skip()\n\t\t}\n",
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/tsc/internal/parser/parser_test.go#L139-L143"
+    },
+    {
+      "source": "sources/tsc/internal/jsnum/string_test.go",
+      "upstreamPath": "tsc/internal/jsnum/string_test.go",
+      "sourceSha256": "52908d6be0ffb8511e9e4ac5507361dcd60c15c02132fa56ec44e1dad7de1dfe",
+      "startLine": 279,
+      "endLine": 283,
+      "excerpt": "\tf.Fuzz(func(t *testing.T, s string) {\n\t\tif len(s) > 350 {\n\t\t\tt.Skip()\n\t\t}\n",
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/tsc/internal/jsnum/string_test.go#L279-L283"
+    }
+  ]
+}

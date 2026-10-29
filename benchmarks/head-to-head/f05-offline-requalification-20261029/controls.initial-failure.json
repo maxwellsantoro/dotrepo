@@ -1,0 +1,9 @@
+{
+  "state": "failed-closed-during-synthetic-control",
+  "planSha256": "758947ace79e53be0ba3234b11ca09d7138b36cce517c4fdcaf05d39d980924d",
+  "error": "ValueError: output outside owned scratch prefix",
+  "cause": "macOS output.resolve() begins /private/tmp while literal gate expected /tmp. No actualDocker/source read attempted.",
+  "correctedPlanSha256": "8cd85c2660ef2d97e1f46d0cb64b60c0bf7b619d7409680d0b4d9f684d445577",
+  "dockerCalls": 0,
+  "upstreamExecution": false
+}

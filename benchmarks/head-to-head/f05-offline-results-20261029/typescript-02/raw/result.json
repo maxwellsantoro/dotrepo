@@ -1,0 +1,50 @@
+{
+  "taskId": "typescript-02",
+  "stage": "tracked-source-after-tests",
+  "state": "offline-outcome-observed-pending-independent-review",
+  "preflightSeconds": 0.5980951669625938,
+  "metadataVerification": {
+    "state": "passed",
+    "elapsedSeconds": 0.02158649987541139,
+    "outsideTaskDeadline": true,
+    "planSha256": "2d44b468d8954b42210cce44ae12c2571a835b8a89154d585a20f4cdbbce90e6"
+  },
+  "startedAt": "2026-10-29T07:35:12.003431+00:00",
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "sourceRevision": "2875056f93d6eebcd887f64ae557258a7b0b0108",
+  "sourceArchiveSha256": "818bf33ece0979d198ed6a11daa3e6b838cc4aefba8c3a381c86e8ce2e706f41",
+  "cacheArchiveSha256": "84cfa62ad220509ff1027f2a4e97b88885dbcb4c28bdfe59b620a70224d530dc",
+  "containerCreateAttempted": true,
+  "dockerCalls": 18,
+  "taskOutcomeObserved": true,
+  "testsPassed": true,
+  "costUsd": null,
+  "costExclusions": [
+    "No metered host/container charge source; dependency preparation retained separately."
+  ],
+  "modelCalls": 0,
+  "indexConsulted": false,
+  "campaignExecuted": false,
+  "offlineSetupSeconds": 28.252802750095725,
+  "testExitCode": 0,
+  "executionError": null,
+  "oracle": {
+    "qualified": true,
+    "reason": "entire launcher suite executed",
+    "expectedTests": [
+      "does not require build/ in --backend-only mode",
+      "shows usage info in --help output"
+    ],
+    "observedTests": [
+      "does not require build/ in --backend-only mode",
+      "shows usage info in --help output"
+    ]
+  },
+  "trackedSourceIntact": true,
+  "workElapsedSeconds": 39.40223825001158,
+  "cleanupAttempted": true,
+  "cleanupExitCode": 0,
+  "cleanupSeconds": 1.6589599999133497,
+  "elapsedSeconds": 41.061200332827866,
+  "totalMeasuredOperatorSeconds": 41.08278683270328
+}

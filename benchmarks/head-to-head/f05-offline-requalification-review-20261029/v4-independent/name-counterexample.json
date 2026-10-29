@@ -1,0 +1,66 @@
+{
+  "syntheticOnly": true,
+  "case": "wrong-test-name-sharing-expected-suffix",
+  "expectedQualified": false,
+  "observed": {
+    "qualified": true,
+    "reason": "units and zero-case default doc phase terminal",
+    "processExitCode": 0,
+    "processError": null,
+    "phaseCoverageComplete": true,
+    "unitPhase": {
+      "terminal": true,
+      "exercised": true,
+      "status": "ok",
+      "passed": 2,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "cases": [
+        "test_link_type_from_pcap_supported",
+        "test_link_type_from_pcap_unsupported"
+      ]
+    },
+    "docPhase": {
+      "state": "zero-case-phase-terminal",
+      "exercised": true,
+      "terminal": true,
+      "testCases": 0
+    },
+    "summaries": [
+      {
+        "status": "ok",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0
+      },
+      {
+        "status": "ok",
+        "passed": 0,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0
+      }
+    ],
+    "unitMarkerCount": 1,
+    "docMarkerCount": 1,
+    "unitMarkerObserved": true,
+    "docMarkerObserved": true,
+    "unexpectedFailureDiagnostics": []
+  },
+  "native": {
+    "stdout": "\nrunning 2 tests\ntest link_type::tests::unrelated_test_link_type_from_pcap_supported ... ok\ntest link_type::tests::test_link_type_from_pcap_unsupported ... ok\n\ntest result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n",
+    "stderr": "   Compiling memchr v2.8.3\n   Compiling regex-syntax v0.8.11\n   Compiling cfg-if v1.0.5\n   Compiling libc v0.2.191\n   Compiling aho-corasick v1.1.5\n   Compiling libloading v0.8.9\n   Compiling pkg-config v0.3.34\n   Compiling regex-automata v0.4.18\n   Compiling arrayvec v0.7.8\n   Compiling errno v0.2.8\n   Compiling bitflags v1.3.2\n   Compiling etherparse v0.21.0\n   Compiling regex v1.13.1\n   Compiling pcap v2.5.0\n   Compiling sniffnet-packet-parser v0.2.1 (/workspace/repository/lib/sniffnet-packet-parser)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 6.55s\n     Running unittests src/lib.rs (/workspace/cargo-target/debug/deps/sniffnet_packet_parser-3e366c0ab30047cd)\n   Doc-tests sniffnet_packet_parser\n",
+    "exitCode": 0,
+    "error": null
+  },
+  "finding": "A different terminal basename is reported as the expected case.",
+  "actualDockerCalls": 0,
+  "upstreamExecution": false,
+  "modelCalls": 0,
+  "indexConsulted": false
+}

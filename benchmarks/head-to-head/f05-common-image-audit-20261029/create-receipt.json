@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "docker",
+    "create",
+    "--name",
+    "dotrepo-f05-common-image-audit-7cdd12d72c7f",
+    "--pull=never",
+    "--network=none",
+    "--read-only",
+    "--cap-drop=ALL",
+    "--security-opt=no-new-privileges",
+    "--user=1000:1000",
+    "--entrypoint=/bin/true",
+    "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092"
+  ],
+  "costUsd": null,
+  "elapsedSeconds": 0.14911550004035234,
+  "exitCode": 0,
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "fe4299f781ba3760cc5c6d51682de75eeb1983e4f10ec0d69558df1d132a6fa7"
+}

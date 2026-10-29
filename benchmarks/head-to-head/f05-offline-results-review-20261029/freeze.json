@@ -1,0 +1,54 @@
+{
+  "schema": "dotrepo-native-qualification-evidence-review/v1",
+  "date": "2026-10-29",
+  "reviewer": "/root/e1_establishment",
+  "authorPacketFreezeSha256": "d1f9673dfc4dc69fb4a5aa8f3c3af0c3cfcf58c7de0d94f1e21c08f3fa14a844",
+  "disposition": "Three known native scopes qualified/passing; no qualification-blocking finding; copied acceptance-freeze inventory omission explicitly bound. No consumer benefit or campaign admission.",
+  "newDockerCalls": 0,
+  "newUpstreamExecution": false,
+  "networkCalls": 0,
+  "providerCalls": 0,
+  "indexAccess": false,
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "aff201c65baccdce7931c35bda698c2bfca215acf7d9339d84492eecb219ffc6",
+      "bytes": 8194
+    },
+    {
+      "path": "effort-accounting.json",
+      "sha256": "35ce6f5e6a44a39e5252417f6f661c91e00a192f3621c8a0567e0f096fe742d4",
+      "bytes": 2276
+    },
+    {
+      "path": "final-packet-verification.json",
+      "sha256": "388c5909487e58e0b449b59c29767a9c349a144cc03ad49507443fc928a61164",
+      "bytes": 917
+    },
+    {
+      "path": "input-bindings.json",
+      "sha256": "81caf02c02286c0f4ea38318f9e3c6905836421aa36989e8ca227341db638b1a",
+      "bytes": 4846
+    },
+    {
+      "path": "retained-review-attempts.json",
+      "sha256": "58b18763eeb80208e3893241801dacc742109729854ecdba1aa1b61afebd7571",
+      "bytes": 471
+    },
+    {
+      "path": "verification.json",
+      "sha256": "a61ae4453544772f00492d9853d49be966fe95787b40b0f7833d7f014717be10",
+      "bytes": 9041
+    },
+    {
+      "path": "verify_final_packet.py",
+      "sha256": "21fe18011172f66860290afbf685f47ed03ec802c597d6dfa81bc66b8170d80c",
+      "bytes": 2858
+    },
+    {
+      "path": "verify_results.py",
+      "sha256": "542ecb89aa945a9c4aae2e30ec06da5a8a9787159639db116c874e67d754a79a",
+      "bytes": 17783
+    }
+  ]
+}

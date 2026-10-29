@@ -1,0 +1,41 @@
+{
+  "identity": "independent-common-image-filesystem-audit-v1",
+  "frozenAt": "2026-10-29T07:08:59.678655+00:00",
+  "image": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "scriptSha256": "c829f8dcacba1bc139810c552a4ba65790fbfa4b09f5cfad21648adf5b89dcca",
+  "protectedDigestInputSha256": "a6da70671528ca633baaf2c343ce2787699b8554904bc9c064383ea1495a38f5",
+  "knownSourceArchiveInputSha256": "42a4056cc825607cca676db4a30cfdc5b1bea2a0fca314668dfe2f0bf7c6169c",
+  "bounds": {
+    "exportBytes": 4294967296,
+    "members": 200000,
+    "exportSeconds": 600,
+    "canonicalJsonFileCap": 16777216,
+    "captureBytesPerCommand": 2097152,
+    "exportStderrBytes": 1048576
+  },
+  "operations": [
+    "inspect exact local image",
+    "create unique never-started container --pullnever networknone readonly nonroot capdrop no mounts",
+    "inspect stopped container",
+    "stream docker export to hash inventory and private scratch tar; no host extraction",
+    "remove owned stopped container",
+    "independently inspect absence"
+  ],
+  "prohibited": [
+    "start",
+    "exec",
+    "upstream code",
+    "network or package calls",
+    "provider calls",
+    "index/profile body reads",
+    "descriptor edits",
+    "VM changes"
+  ],
+  "claimLimits": [
+    "No universal secret/encoding absence proof.",
+    "Canonical JSON skipped for files above16MiB; exact hashes checked for every regular file.",
+    "Empty absent-profile byte matches are innocuous and separately counted.",
+    "Opaque permissions do not replace rootfs inspection.",
+    "Official-package/stdlib/license overlaps are not automatic task-source leaks."
+  ]
+}

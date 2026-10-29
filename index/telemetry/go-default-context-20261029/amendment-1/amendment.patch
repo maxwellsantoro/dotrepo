@@ -1,0 +1,688 @@
+--- a/crates/dotrepo-core/src/import/commands/go_context.rs
++++ b/crates/dotrepo-core/src/import/commands/go_context.rs
+@@ -1,12 +1,12 @@
+ //! Refuse conventional Go scalars when acquired CI exposes unresolved scope/setup.
+ //! This is a bounded workflow screen, not a YAML interpreter or execution proof.
+ use super::super::types::{CommandSourceTier, ImportedCommandCandidate, ImportedFile};
+-use super::extraction::extract_workflow_run_commands;
+ 
+ #[derive(Default)]
+ pub(super) struct GoContextGuard {
+     scoped: Vec<String>,
+     prepared_test: Vec<String>,
++    unsupported: Vec<String>,
+ }
+ 
+ fn line(value: &str) -> Option<(usize, &str)> {
+@@ -42,19 +42,182 @@
+         .then(|| (value.len() - value.trim_start().len(), text))
+ }
+ 
+-fn nonroot_directory(lines: &[&str]) -> bool {
+-    lines
+-        .iter()
+-        .filter_map(|value| line(value))
+-        .any(|(_, text)| {
+-            text.strip_prefix("- ")
+-                .unwrap_or(text)
+-                .strip_prefix("working-directory:")
+-                .is_some_and(|path| {
+-                    let path = path.trim().trim_matches(['\'', '"']);
+-                    !matches!(path, "." | "./")
+-                })
+-        })
++// A small structural view of supported workflow mappings. Scalar bodies are
++// data here, including run bodies; only the associated run property reads them.
++#[derive(Clone, Copy)]
++struct Row<'a> {
++    index: usize,
++    indent: usize,
++    text: &'a str,
++}
++
++fn mapping(text: &str) -> Option<(&str, &str)> {
++    let text = text.strip_prefix("- ").unwrap_or(text);
++    let (key, value) = text.split_once(':')?;
++    let key = key.trim();
++    let key = if key.starts_with(['\'', '"']) {
++        let quote = key.chars().next()?;
++        key.strip_prefix(quote)?.strip_suffix(quote)?
++    } else {
++        key
++    };
++    (!key.is_empty()
++        && key
++            .chars()
++            .all(|ch| ch.is_ascii_alphanumeric() || "_-".contains(ch)))
++    .then_some((key, value.trim()))
++}
++
++fn block_scalar(value: &str) -> bool {
++    value.starts_with(['|', '>'])
++        && value[1..]
++            .chars()
++            .all(|ch| matches!(ch, '+' | '-' | '1'..='9'))
++}
++
++fn structural_rows<'a>(lines: &[&'a str]) -> Vec<Row<'a>> {
++    let mut scalar_indent = None;
++    let mut rows = Vec::new();
++    for (index, raw) in lines.iter().enumerate() {
++        let Some((indent, text)) = line(raw) else {
++            continue;
++        };
++        if scalar_indent.is_some_and(|parent| indent > parent) {
++            continue;
++        }
++        scalar_indent = None;
++        if mapping(text).is_some_and(|(_, value)| block_scalar(value)) {
++            scalar_indent = Some(indent + usize::from(text.starts_with("- ")) * 2);
++        }
++        rows.push(Row {
++            index,
++            indent,
++            text,
++        });
++    }
++    rows
++}
++
++fn block_end(rows: &[Row<'_>], start: usize) -> usize {
++    (start + 1..rows.len())
++        .find(|&index| rows[index].indent <= rows[start].indent)
++        .unwrap_or(rows.len())
++}
++
++fn property<'a>(rows: &'a [Row<'a>], indent: usize, key: &str) -> Option<&'a [Row<'a>]> {
++    let start = rows.iter().position(|row| {
++        row.indent + usize::from(row.text.starts_with("- ")) * 2 == indent
++            && mapping(row.text).is_some_and(|(name, _)| name == key)
++    })?;
++    Some(&rows[start..block_end(rows, start)])
++}
++
++fn child<'a>(rows: &'a [Row<'a>], key: &str) -> Option<&'a [Row<'a>]> {
++    let indent = rows.get(1..)?.iter().map(|row| row.indent).min()?;
++    property(&rows[1..], indent, key)
++}
++
++fn nonroot_value(value: &str) -> bool {
++    !matches!(value.trim_matches(['\'', '"']), "." | "./")
++}
++
++fn default_directory(rows: &[Row<'_>], indent: usize) -> Option<bool> {
++    let defaults = property(rows, indent, "defaults")?;
++    let value = mapping(defaults[0].text)?.1;
++    // An inline/aliased default is unsupported, so it cannot establish root cwd.
++    if !value.is_empty() {
++        return Some(true);
++    }
++    let run = child(defaults, "run")?;
++    if !mapping(run[0].text)?.1.is_empty() {
++        return Some(true);
++    }
++    let directory = child(run, "working-directory")?;
++    Some(nonroot_value(mapping(directory[0].text)?.1))
++}
++
++fn run_commands(rows: &[Row<'_>], lines: &[&str], indent: usize) -> (Vec<String>, bool) {
++    let Some(run) = property(rows, indent, "run") else {
++        let unknown_go_property = rows.iter().any(|row| {
++            row.indent + usize::from(row.text.starts_with("- ")) * 2 == indent
++                && mapping(row.text).is_none()
++                && (go_task(row.text).is_some()
++                    || ["- {", "- *", "- &"]
++                        .iter()
++                        .any(|prefix| row.text.starts_with(prefix)))
++        });
++        return (Vec::new(), unknown_go_property);
++    };
++    let value = mapping(run[0].text).expect("run property").1;
++    if value.starts_with(['\'', '"']) {
++        let quote = value.chars().next().expect("quoted value");
++        if value.len() < 2
++            || !value.ends_with(quote)
++            || value[1..value.len() - 1].contains(['\\', '\'', '"'])
++        {
++            return (Vec::new(), true);
++        }
++    }
++    if value.starts_with('>') {
++        // Folded shell programs need YAML folding semantics; line-by-line
++        // inspection cannot establish what command was invoked.
++        return (Vec::new(), true);
++    }
++    let commands = if block_scalar(value) {
++        let start = run[0].index + 1;
++        let end = rows
++            .iter()
++            .find(|row| row.index > run[0].index)
++            .map(|row| row.index)
++            .unwrap_or_else(|| {
++                (start..lines.len())
++                    .find(|&index| {
++                        line(lines[index]).is_some_and(|(level, _)| level <= run[0].indent)
++                    })
++                    .unwrap_or(lines.len())
++            });
++        lines[start..end]
++            .iter()
++            .map(|line| line.trim())
++            .collect::<Vec<_>>()
++    } else if value.starts_with(['*', '{', '[']) || value.contains("${{") {
++        return (Vec::new(), true);
++    } else {
++        vec![value.trim_matches(['\'', '"'])]
++    };
++    let mut output = Vec::new();
++    let mut heredoc: Option<String> = None;
++    let mut unsupported = false;
++    for command in commands {
++        if let Some(delimiter) = &heredoc {
++            if command == delimiter {
++                heredoc = None;
++            }
++            continue;
++        }
++        if command.is_empty() || command.starts_with('#') {
++            continue;
++        }
++        if let Some((_, tail)) = command.split_once("<<") {
++            let token = tail
++                .trim_start_matches('-')
++                .split_whitespace()
++                .next()
++                .unwrap_or("");
++            let delimiter = token.trim_matches(['\'', '"']);
++            if delimiter.is_empty()
++                || !delimiter
++                    .chars()
++                    .all(|ch| ch.is_ascii_alphanumeric() || ch == '_')
++            {
++                unsupported = true;
++                break;
++            }
++            heredoc = Some(delimiter.to_owned());
++        }
++        output.push(command.to_owned());
++    }
++    (output, unsupported || heredoc.is_some())
+ }
+ 
+ fn go_task(command: &str) -> Option<bool> {
+@@ -96,55 +259,28 @@
+         })
+ }
+ 
+-fn service_setup(lines: &[&str], prefix: &[&str]) -> bool {
+-    let property_indent = prefix
+-        .first()
+-        .and_then(|value| line(value))
+-        .map(|(indent, _)| indent + 2);
+-    if prefix
+-        .iter()
+-        .filter_map(|value| line(value))
+-        .any(|(indent, text)| {
+-            Some(indent) == property_indent
+-                && text
+-                    .strip_prefix("services:")
+-                    .is_some_and(|value| value.trim() != "{}")
+-        })
+-    {
+-        return true;
+-    }
+-    let action_setup = lines
+-        .iter()
+-        .filter_map(|value| line(value))
+-        .any(|(_, text)| {
+-            let text = text.strip_prefix("- ").unwrap_or(text);
+-            let Some(action) = text.strip_prefix("uses:") else {
+-                return false;
+-            };
+-            let action = action.trim().to_ascii_lowercase();
+-            [
+-                "redis", "postgres", "mysql", "mariadb", "mongodb", "rabbitmq", "kafka",
+-            ]
+-            .iter()
+-            .any(|service| action.contains(&format!("setup-{service}")))
+-        });
+-    action_setup
+-        || extract_workflow_run_commands(&lines.join("\n"))
+-            .iter()
+-            .any(|command| {
+-                let command = command
+-                    .trim()
+-                    .strip_prefix("sudo ")
+-                    .unwrap_or(command.trim());
+-                command.starts_with("redis-server ")
+-                    || command == "redis-server"
+-                    || ((command.starts_with("apt-get install ")
+-                        || command.starts_with("apt install ")
+-                        || command.starts_with("brew install "))
+-                        && command
+-                            .split_whitespace()
+-                            .any(|token| matches!(token, "redis" | "redis-server")))
+-            })
++fn service_action(action: &str) -> bool {
++    let action = action.to_ascii_lowercase();
++    [
++        "redis", "postgres", "mysql", "mariadb", "mongodb", "rabbitmq", "kafka",
++    ]
++    .iter()
++    .any(|service| action.contains(&format!("setup-{service}")))
++}
++
++fn service_command(command: &str) -> bool {
++    let command = command
++        .trim()
++        .strip_prefix("sudo ")
++        .unwrap_or(command.trim());
++    command.starts_with("redis-server ")
++        || command == "redis-server"
++        || ((command.starts_with("apt-get install ")
++            || command.starts_with("apt install ")
++            || command.starts_with("brew install "))
++            && command
++                .split_whitespace()
++                .any(|token| matches!(token, "redis" | "redis-server")))
+ }
+ 
+ impl GoContextGuard {
+@@ -152,80 +288,98 @@
+         let mut guard = Self::default();
+         for file in workflows {
+             let lines = file.contents.lines().collect::<Vec<_>>();
+-            let Some(jobs) = lines
+-                .iter()
+-                .position(|value| line(value) == Some((0, "jobs:")))
+-            else {
++            let rows = structural_rows(&lines);
++            let Some(jobs) = property(&rows, 0, "jobs") else {
++                if lines.iter().any(|text| go_task(text.trim()).is_some()) {
++                    guard.unsupported.push(file.path.clone());
++                }
+                 continue;
+             };
+-            let end = (jobs + 1..lines.len())
+-                .find(|&i| line(lines[i]).is_some_and(|(indent, _)| indent == 0))
+-                .unwrap_or(lines.len());
+-            let Some(job_indent) = lines[jobs + 1..end]
+-                .iter()
+-                .filter_map(|value| line(value))
+-                .map(|(indent, _)| indent)
+-                .min()
+-            else {
++            if !mapping(jobs[0].text).expect("jobs property").1.is_empty() {
++                guard.unsupported.push(file.path.clone());
++                continue;
++            }
++            let workflow_directory = default_directory(&rows, 0);
++            let Some(job_indent) = jobs[1..].iter().map(|row| row.indent).min() else {
+                 continue;
+             };
+-            let starts = (jobs + 1..end)
+-                .filter(|&i| {
+-                    line(lines[i])
+-                        .is_some_and(|(indent, text)| indent == job_indent && text.ends_with(':'))
+-                })
++            let starts = (1..jobs.len())
++                .filter(|&index| jobs[index].indent == job_indent)
+                 .collect::<Vec<_>>();
+             for (number, &start) in starts.iter().enumerate() {
+-                let stop = starts.get(number + 1).copied().unwrap_or(end);
+-                let job = &lines[start..stop];
+-                let Some(steps) = job
+-                    .iter()
+-                    .position(|value| line(value).is_some_and(|(_, text)| text == "steps:"))
+-                else {
++                let job = &jobs[start..starts.get(number + 1).copied().unwrap_or(jobs.len())];
++                if mapping(job[0].text).is_none_or(|(_, value)| !value.is_empty()) {
++                    if !guard.unsupported.contains(&file.path) {
++                        guard.unsupported.push(file.path.clone());
++                    }
++                    continue;
++                }
++                let Some(property_indent) = job[1..].iter().map(|row| row.indent).min() else {
+                     continue;
+                 };
+-                let prefix = &job[..steps];
+-                let prepared = service_setup(job, prefix);
+-                let default_nonroot =
+-                    nonroot_directory(&lines[..jobs]) || nonroot_directory(prefix);
+-                let Some(step_indent) = job[steps + 1..]
++                let Some(steps) = property(&job[1..], property_indent, "steps") else {
++                    if job.iter().any(|row| go_task(row.text).is_some())
++                        && !guard.unsupported.contains(&file.path)
++                    {
++                        guard.unsupported.push(file.path.clone());
++                    }
++                    continue;
++                };
++                if !mapping(steps[0].text).expect("steps property").1.is_empty() {
++                    guard.unsupported.push(file.path.clone());
++                    continue;
++                }
++                let default_directory =
++                    default_directory(&job[1..], property_indent).or(workflow_directory);
++                let mut prepared =
++                    property(&job[1..], property_indent, "services").is_some_and(|value| {
++                        mapping(value[0].text).expect("services property").1 != "{}"
++                    });
++                let Some(step_indent) = steps[1..]
+                     .iter()
+-                    .filter_map(|value| line(value))
+-                    .filter(|(_, text)| text.starts_with('-'))
+-                    .map(|(indent, _)| indent)
++                    .filter(|row| row.text.starts_with("- "))
++                    .map(|row| row.indent)
+                     .min()
+                 else {
+                     continue;
+                 };
+-                let step_starts = (steps + 1..job.len())
+-                    .filter(|&i| {
+-                        line(job[i]).is_some_and(|(indent, text)| {
+-                            indent == step_indent && text.starts_with('-')
+-                        })
++                let starts = (1..steps.len())
++                    .filter(|&index| {
++                        steps[index].indent == step_indent && steps[index].text.starts_with("- ")
+                     })
+                     .collect::<Vec<_>>();
+-                for (number, &step_start) in step_starts.iter().enumerate() {
+-                    let step_stop = step_starts.get(number + 1).copied().unwrap_or(job.len());
+-                    let step = &job[step_start..step_stop];
+-                    let mut nonroot = default_nonroot || nonroot_directory(step);
+-                    for command in extract_workflow_run_commands(&step.join("\n")) {
++                let mut observations = Vec::new();
++                for (number, &start) in starts.iter().enumerate() {
++                    let step =
++                        &steps[start..starts.get(number + 1).copied().unwrap_or(steps.len())];
++                    let indent = step_indent + 2;
++                    let mut nonroot = property(step, indent, "working-directory")
++                        .map(|value| nonroot_value(mapping(value[0].text).expect("cwd property").1))
++                        .or(default_directory)
++                        .unwrap_or(false);
++                    prepared |= property(step, indent, "uses").is_some_and(|value| {
++                        service_action(mapping(value[0].text).expect("uses property").1)
++                    });
++                    let (commands, unsupported) = run_commands(step, &lines, indent);
++                    if unsupported && !guard.unsupported.contains(&file.path) {
++                        guard.unsupported.push(file.path.clone());
++                    }
++                    for command in commands {
++                        prepared |= service_command(&command);
+                         if let Some(path) = command.trim().strip_prefix("cd ") {
+-                            // cd . does not undo an earlier directory change.
+-                            nonroot |= !matches!(path.trim().trim_matches(['\'', '"']), "." | "./");
++                            nonroot |= nonroot_value(path.trim());
+                         }
+                         if let Some(build) = go_task(&command) {
+-                            let nonroot = nonroot || go_nonroot_flag(&command);
+-                            if nonroot && !guard.scoped.contains(&file.path) {
+-                                guard.scoped.push(file.path.clone());
+-                            }
+-                            if !build
+-                                && !nonroot
+-                                && prepared
+-                                && !guard.prepared_test.contains(&file.path)
+-                            {
+-                                guard.prepared_test.push(file.path.clone());
+-                            }
++                            observations.push((build, nonroot || go_nonroot_flag(&command)));
+                         }
++                    }
++                }
++                for (build, nonroot) in observations {
++                    if nonroot && !guard.scoped.contains(&file.path) {
++                        guard.scoped.push(file.path.clone());
++                    }
++                    if !build && !nonroot && prepared && !guard.prepared_test.contains(&file.path) {
++                        guard.prepared_test.push(file.path.clone());
+                     }
+                 }
+             }
+@@ -254,7 +408,9 @@
+                 if value
+                     .as_deref()
+                     .is_some_and(|command| go_task(command).is_some())
+-                    && (!self.scoped.is_empty() || (index == 1 && !self.prepared_test.is_empty()))
++                    && (!self.scoped.is_empty()
++                        || !self.unsupported.is_empty()
++                        || (index == 1 && !self.prepared_test.is_empty()))
+                 {
+                     *value = None;
+                     blocked[index] = true;
+@@ -265,7 +421,9 @@
+     }
+ 
+     pub(super) fn reason(&self, test: bool) -> String {
+-        if !self.scoped.is_empty() {
++        if !self.unsupported.is_empty() {
++            format!("Go workflow execution context has unsupported structure in `{}`; conventional commands cannot establish repository scope/setup", self.unsupported.join("`, `"))
++        } else if !self.scoped.is_empty() {
+             format!("Go workflow component scope is unresolved in `{}`; a conventional root module command cannot establish repository coverage", self.scoped.join("`, `"))
+         } else if test {
+             format!("Go test workflow setup is unresolved in `{}`; the same job declares an external service prerequisite", self.prepared_test.join("`, `"))
+--- a/crates/dotrepo-core/src/import/commands/go_context/tests.rs
++++ b/crates/dotrepo-core/src/import/commands/go_context/tests.rs
+@@ -344,3 +344,219 @@
+                 .any(|candidate| candidate.source_path == "CONTRIBUTING.md")));
+     }
+ }
++
++#[test]
++fn quoted_supported_mapping_keys_preserve_scope_and_service_association() {
++    for quote in ["", "\"", "'"] {
++        let key = |name: &str| format!("{quote}{name}{quote}");
++        let contents = format!("{}:\n  {}:\n    {}:\n      redis:\n        image: redis:7\n    {}:\n      - {}: go test -race ./...\n",key("jobs"),key("unit"),key("services"),key("steps"),key("run"));
++        assert_eq!(defaults(&guard(&contents)), [false, true], "{contents}");
++        let contents = format!("{}:\n  unit:\n    {}:\n      - {}: shogo82148/actions-setup-redis@v1\n      - {}: go test -race ./...\n",key("jobs"),key("steps"),key("uses"),key("run"));
++        assert_eq!(defaults(&guard(&contents)), [false, true], "{contents}");
++        let contents = format!(
++            "{}:\n  unit:\n    {}:\n      - {}: v2\n        {}: go test ./...\n",
++            key("jobs"),
++            key("steps"),
++            key("working-directory"),
++            key("run")
++        );
++        assert_eq!(defaults(&guard(&contents)), [true, true], "{contents}");
++    }
++}
++
++#[test]
++fn non_run_literal_and_folded_scalar_bodies_are_configuration_data() {
++    for style in ["|", "|-", ">", ">-"] {
++        for location in ["workflow", "job", "step-name", "step-env"] {
++            let data = "working-directory: examples\nuses: shogo82148/actions-setup-redis@v1\nservices:\n  redis:\n    image: redis:7\njobs:\n  example:\n    steps:\n      - run: go test ./...\n";
++            let indented = |count: usize| {
++                data.lines()
++                    .map(|line| format!("{}{line}\n", " ".repeat(count)))
++                    .collect::<String>()
++            };
++            let contents = match location {
++                "workflow" => format!("env:\n  CONFIG: {style}\n{}jobs:\n  unit:\n    steps:\n      - run: go test ./...\n",indented(4)),
++                "job" => format!("jobs:\n  unit:\n    env:\n      CONFIG: {style}\n{}    steps:\n      - run: go test ./...\n",indented(8)),
++                "step-name" => format!("jobs:\n  unit:\n    steps:\n      - name: {style}\n{}        run: go test ./...\n",indented(10)),
++                _ => format!("jobs:\n  unit:\n    steps:\n      - env:\n          CONFIG: {style}\n{}        run: go test ./...\n",indented(12)),
++            };
++            assert_eq!(
++                defaults(&guard(&contents)),
++                [false, false],
++                "{location}/{style}: {contents}"
++            );
++        }
++    }
++}
++
++#[test]
++fn run_body_and_heredoc_data_are_not_execution_properties_or_commands() {
++    let contents = "jobs:\n  unit:\n    steps:\n      - run: |\n          cat <<'CONFIG'\n          working-directory: examples\n          uses: shogo82148/actions-setup-redis@v1\n          services:\n            redis:\n              image: redis:7\n          cd v2\n          redis-server --daemonize yes\n          go test ./...\n          CONFIG\n          go test ./...\n";
++    assert_eq!(defaults(&guard(contents)), [false, false]);
++    let real_cwd = contents.replace("          CONFIG\n", "          CONFIG\n          cd v2\n");
++    assert_eq!(defaults(&guard(&real_cwd)), [true, true]);
++    let real_service = contents.replace(
++        "          CONFIG\n",
++        "          CONFIG\n          redis-server --daemonize yes\n",
++    );
++    assert_eq!(defaults(&guard(&real_service)), [false, true]);
++}
++
++#[test]
++fn applicable_directory_overrides_follow_workflow_job_step_precedence() {
++    for (workflow, job, step, expected) in [
++        ("v2", None, Some("."), [false, false]),
++        ("v2", Some("."), None, [false, false]),
++        ("v2", Some("examples"), Some("."), [false, false]),
++        (".", Some("examples"), Some("."), [false, false]),
++        (".", Some("."), Some("v2"), [true, true]),
++        ("v2", None, None, [true, true]),
++    ] {
++        let job_default = job
++            .map(|directory| {
++                format!("    defaults:\n      run:\n        working-directory: {directory}\n")
++            })
++            .unwrap_or_default();
++        let step_setting = step
++            .map(|directory| format!("        working-directory: {directory}\n"))
++            .unwrap_or_default();
++        let contents = format!("defaults:\n  run:\n    working-directory: {workflow}\njobs:\n  unit:\n{job_default}    steps:\n      - run: go test ./...\n{step_setting}");
++        assert_eq!(defaults(&guard(&contents)), expected, "{contents}");
++    }
++    assert_eq!(defaults(&guard("defaults:\n  run:\n    working-directory: v2\njobs:\n  unit:\n    steps:\n      - working-directory: .\n        run: |\n          cd v2\n          go test ./...\n")),[true,true]);
++}
++
++#[test]
++fn unsupported_run_or_flow_context_remains_unresolved() {
++    for contents in [
++        "jobs:\n  unit:\n    steps:\n      - run: >\n          go\n          test ./...\n",
++        "jobs:\n  unit:\n    \"\\u0073teps\":\n      - run: go test ./...\n",
++        "jobs:\n  unit:\n    steps:\n      - \"\\u0072un\": go test ./...\n",
++        "jobs:\n  unit: {steps: [{run: go test ./...}]}\n",
++        "jobs:\n  unit: *external_job\n",
++        "jobs:\n  unit:\n    steps:\n      - {run: go test ./...}\n",
++        "jobs:\n  unit:\n    steps:\n      - *external_step\n",
++        "jobs:\n  unit:\n    steps:\n      - run: \"go\\n test ./...\"\n",
++        "jobs:\n  unit:\n    steps:\n      - run: \"go\n          test ./...\"\n",
++        "jobs:\n  unit:\n    steps:\n      - run: ${{ inputs.command }}\n",
++        "jobs:\n  unit:\n    steps: [{run: go test ./...}]\n",
++        "jobs: {unit: {steps: [{run: go test ./...}]}}\n",
++        "jobs:\n  unit:\n    steps:\n      - run: |\n          cat <<'END'\n          go test ./...\n",
++    ] {
++        assert_eq!(defaults(&guard(contents)), [true, true], "{contents}");
++    }
++}
++
++#[test]
++fn amendment_full_import_and_escalation_association_controls() {
++    use crate::import::{
++        build_adjudication_requests, run_import_escalation, ImportEscalationOptions,
++        TieredAdjudicationProviders,
++    };
++    let cases = [
++        ("root-default", "jobs:\n  unit:\n    steps:\n      - run: go test ./...\n", false),
++        ("plain-service", "jobs:\n  unit:\n    services:\n      redis:\n        image: redis:7\n    steps:\n      - run: go test -race ./...\n", true),
++        ("quoted-jobs-service", "\"jobs\":\n  unit:\n    services:\n      redis:\n        image: redis:7\n    steps:\n      - run: go test -race ./...\n", true),
++        ("quoted-steps-service", "jobs:\n  unit:\n    services:\n      redis:\n        image: redis:7\n    \"steps\":\n      - run: go test -race ./...\n", true),
++        ("workflow-env-data", "env:\n  EXAMPLE_CONFIGURATION: |\n    working-directory: examples\njobs:\n  unit:\n    steps:\n      - run: go test ./...\n", false),
++        ("job-env-data", "jobs:\n  unit:\n    env:\n      EXAMPLE_CONFIGURATION: |\n        working-directory: examples\n    steps:\n      - run: go test ./...\n", false),
++        ("step-overrides-default", "defaults:\n  run:\n    working-directory: v2\njobs:\n  unit:\n    steps:\n      - run: go test ./...\n        working-directory: .\n", false),
++        ("heredoc-data", "jobs:\n  unit:\n    steps:\n      - run: |\n          cat <<'END'\n          working-directory: examples\n          uses: shogo82148/actions-setup-redis@v1\n          services:\n            redis:\n              image: redis:7\n          cd v2\n          redis-server --daemonize yes\n          go test ./...\n          END\n          go test ./...\n", false),
++    ];
++    let root = std::env::temp_dir().join(format!(
++        "dotrepo-go-context-amendment-{}-{}",
++        std::process::id(),
++        std::time::SystemTime::now()
++            .duration_since(std::time::UNIX_EPOCH)
++            .unwrap()
++            .as_nanos()
++    ));
++    std::fs::create_dir_all(root.join(".github/workflows")).unwrap();
++    std::fs::write(
++        root.join("README.md"),
++        "# Amendment control\n\nOwned synthetic Go association control.\n",
++    )
++    .unwrap();
++    std::fs::write(
++        root.join("go.mod"),
++        "module example.test/amendment\n\ngo 1.22\n",
++    )
++    .unwrap();
++    for (name, workflow, blocked_test) in cases {
++        std::fs::write(root.join(".github/workflows/ci.yml"), workflow).unwrap();
++        for budget in [0, 2] {
++            let mut plan = import_repository(
++                &root,
++                ImportMode::Overlay,
++                Some("https://example.test/amendment"),
++            )
++            .unwrap();
++            let verification = verify_import_plan(&root, &plan, "https://example.test/amendment");
++            let mut scores = crate::score_import_fields(&plan, &verification);
++            if blocked_test {
++                assert_eq!(
++                    plan.command_candidates.blocked_scalar_fields,
++                    vec!["repo.test"]
++                );
++                assert!(build_adjudication_requests(&scores, &plan)
++                    .iter()
++                    .all(|request| request.field != "repo.test"));
++            } else {
++                assert!(
++                    plan.command_candidates.blocked_scalar_fields.is_empty(),
++                    "{name}"
++                );
++            }
++            let provider = crate::import::StubAdjudicationProvider::new(
++                crate::import::AdjudicationTier::LocalPrimary,
++                Vec::new(),
++            );
++            let result = run_import_escalation(
++                &root,
++                &mut plan,
++                &verification,
++                &mut scores,
++                &ImportEscalationOptions {
++                    max_adjudication_calls: budget,
++                    ..Default::default()
++                },
++                TieredAdjudicationProviders {
++                    local_primary: Some(&provider),
++                    local_second_opinion: None,
++                    api_escalation: None,
++                },
++            );
++            assert_eq!(result.model_calls, 0, "{name}");
++            assert_eq!(
++                plan.manifest.repo.build.as_deref(),
++                Some("go build ./..."),
++                "{name}"
++            );
++            assert_eq!(
++                plan.manifest.repo.test.as_deref(),
++                if blocked_test {
++                    None
++                } else {
++                    Some("go test ./...")
++                },
++                "{name}"
++            );
++            if blocked_test {
++                assert_eq!(
++                    scores
++                        .scores
++                        .iter()
++                        .find(|s| s.field == "repo.test")
++                        .unwrap()
++                        .confidence,
++                    crate::FieldConfidence::Unresolved
++                );
++            }
++            println!(
++                "F1_AMENDMENT_CONTROL {}",
++                serde_json::json!({"case":name,"workflow":workflow,"budget":budget,"blockedScalarFields":plan.command_candidates.blocked_scalar_fields,"modelCalls":result.model_calls,"build":plan.manifest.repo.build,"test":plan.manifest.repo.test,"unresolved":scores.summary.unresolved})
++            );
++        }
++    }
++    std::fs::remove_dir_all(root).unwrap();
++}

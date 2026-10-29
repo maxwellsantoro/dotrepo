@@ -1,0 +1,51 @@
+{
+  "state": "qualified-download-cache",
+  "authority": "coordinator /root",
+  "scope": "Three frozen native scopes offline requalification only; no campaign admission or universal absence proof.",
+  "imageDigest": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "revision": "2875056f93d6eebcd887f64ae557258a7b0b0108",
+  "sourceArchiveSha256": "818bf33ece0979d198ed6a11daa3e6b838cc4aefba8c3a381c86e8ce2e706f41",
+  "cacheArchiveSha256": "84cfa62ad220509ff1027f2a4e97b88885dbcb4c28bdfe59b620a70224d530dc",
+  "draftPreparationSha256": "9c94f89fa251725f8ce9f2661b2a058c16cd576b7f7fb8199b5faa5c7db8a155",
+  "downloadOnly": true,
+  "buildOutputsExcluded": true,
+  "taskSourceExcluded": true,
+  "credentialsExcluded": true,
+  "protectedEvaluationAliasesExcluded": true,
+  "evidence": [
+    {
+      "path": "benchmarks/head-to-head/f05-dependency-preparation-20261029/packet-freeze.json",
+      "sha256": "3888a19462854a37c20803fa9c62f525223af9f4f3d8aa9cfa2bf46affdd2f84"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-dependency-preparation-review-20261029/freeze.json",
+      "sha256": "962b6aa6a9d95b9d9ce04e2c7e5124ed5fcbef23264c410271902437b618e219"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-common-image-audit-20261029/freeze.json",
+      "sha256": "da4564e3b72bf7dba9cb469d51b9b1e88664ba7c9fa4bbd2b1d35bfb256e509c"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-requalification-20261029/packet-freeze.v5.json",
+      "sha256": "3bfa484cfd9b8d335bc636ad1610ccee902c7a46ff0f55bf5ab44e71e5691919"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-requalification-review-20261029/v5-independent/freeze.json",
+      "sha256": "236deb229344546dfa95b959bf4cce9d9d20260300fd4d4b3fe263a6b751150a"
+    }
+  ],
+  "assertionDefinitions": {
+    "buildOutputsExcluded": "No locally produced task build/test outputs; source distributions may contain their published package assets.",
+    "taskSourceExcluded": "No task-specific checkout/test source; independently classified shared licenses, tiny common data and published dependency assets remain allowed.",
+    "credentialsExcluded": "No supplied host/provider credentials or unexplained operational credentials observed under frozen recipe/content/filesystem checks; public packaged examples are explicitly classified.",
+    "protectedEvaluationAliasesExcluded": "Known retained nonempty raw/canonical protected artifacts under the frozen audit set; not a substring/semantic or future-artifact guarantee."
+  },
+  "limitations": [
+    "Offline restoration and native task outcomes are the purpose of the next attempt, not established here.",
+    "Common-image audit has stated canonical size bounds and public fixture/marker dispositions.",
+    "One npm lock entry lacks integrity; content/index integrity and retained package-origin evidence remain separately recorded.",
+    "Npm ignored installation hooks are not claimed equivalent to normal npm ci.",
+    "Original draft flags and all historical receipts remain unchanged.",
+    "No provider/model/agent campaign is authorized."
+  ]
+}

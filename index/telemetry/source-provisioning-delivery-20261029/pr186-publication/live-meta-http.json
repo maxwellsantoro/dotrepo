@@ -1,0 +1,22 @@
+{
+  "url": "https://dotrepo.org/v0/meta.json",
+  "status": 200,
+  "headers": {
+    "Date": "Thu, 29 Oct 2026 07:49:56 GMT",
+    "Content-Type": "application/json",
+    "Content-Length": "1291",
+    "Connection": "close",
+    "CF-Cache-Status": "HIT",
+    "Cache-Control": "public, max-age=60, must-revalidate",
+    "ETag": "\"92c071e7e7bf9573d38e9a23eb95c790\"",
+    "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=oHOo3tCrtH1l%2BMIFLDrbmLvUUW3rMdnt6Y4gI5v7M0xIwh%2Fd67BMpqB1HIisgNYZL6puo8%2FGv88MCTlcCniRz0Q6S7ZG%2Bu%2FTGhqmjLlpxmGtgN0AKrElMs7iq8lsOQ%3D%3D\"}]}",
+    "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+    "Server": "cloudflare",
+    "CF-RAY": "a5209620b8485a29-EWR",
+    "alt-svc": "h3=\":443\"; ma=86400"
+  },
+  "decodedBytes": 1291,
+  "sha256": "fd9894b079679f8f021323909ac1575e25af59cf3cf4cf570e765594f5126d05",
+  "observedAt": "2026-10-29T07:49:56.038380+00:00",
+  "priorRead": "default urllib User-Agent received HTTP 403; explicit verification User-Agent used for this bounded retry"
+}

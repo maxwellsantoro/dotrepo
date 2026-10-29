@@ -1,0 +1,5 @@
+extend = "../../../pyproject.toml"
+
+[format]
+# Preserve the unused, already-bound initial orchestration snapshot.
+exclude = ["run_serial.py"]

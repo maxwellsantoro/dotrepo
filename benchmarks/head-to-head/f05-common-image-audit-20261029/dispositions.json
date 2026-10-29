@@ -1,0 +1,119 @@
+{
+  "credentialPathDispositions": [
+    {
+      "path": "etc/shadow",
+      "sha256": "094a62d2cdc00712da656df82b4108cc1af3927f505095ff7a03b059719f8cff",
+      "entries": 18,
+      "lockedPasswordEntries": 18,
+      "nonlockedPasswordEntries": 0,
+      "disposition": "System account/group database; every retained password field is locked. No password value printed or retained separately."
+    },
+    {
+      "path": "etc/gshadow",
+      "sha256": "cf4089f5608d70e72c296b4ce4ee31785cf9fff47f7d79e14e45daa4c551f186",
+      "entries": 39,
+      "lockedPasswordEntries": 39,
+      "nonlockedPasswordEntries": 0,
+      "disposition": "System account/group database; every retained password field is locked. No password value printed or retained separately."
+    },
+    {
+      "path": "etc/passwd",
+      "sha256": "21352194cc533bc5878721507450d867d28ccb1c2f5cd773c792251fa1e63185",
+      "entries": 18,
+      "onlyPlaceholderPasswordFields": true,
+      "disposition": "System account/group metadata, no password/hash-bearing value in password field."
+    },
+    {
+      "path": "etc/group",
+      "sha256": "a04d31407e501e9cbfefeb5a1c8d72b38ba7de4b84e2802602f202760cfa64ac",
+      "entries": 39,
+      "onlyPlaceholderPasswordFields": true,
+      "disposition": "System account/group metadata, no password/hash-bearing value in password field."
+    },
+    {
+      "path": "usr/local/lib/node_modules/npm/.npmrc",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "disposition": "Empty distributed npm config; no credential content."
+    },
+    {
+      "path": "root/.bashrc",
+      "sha256": "373b7d3b2ab90d75daf94ca16d61339d088c12020ad43b65d1b34ea80b0c0818",
+      "bytes": 571,
+      "assignmentVariableNames": [],
+      "disposition": "Only retained root startup files; bounded assignment-name detector recognized no credential-named assignment. Exact protected-digest checks also passed. Contents were not executed; no universal secret absence proof."
+    },
+    {
+      "path": "root/.profile",
+      "sha256": "bbee58b1e0787bb851e7f7a4d0c187a8122d68eb67e5fa464696310398ac005b",
+      "bytes": 161,
+      "assignmentVariableNames": [],
+      "disposition": "Only retained root startup files; bounded assignment-name detector recognized no credential-named assignment. Exact protected-digest checks also passed. Contents were not executed; no universal secret absence proof."
+    }
+  ],
+  "hardlinkDispositions": [
+    {
+      "path": "usr/bin/bzcat",
+      "target": "usr/bin/bunzip2",
+      "resolvedRegularTarget": "usr/bin/bunzip2",
+      "sha256": "40cbbed6f2decef80c0620931b095623705422c19cb5c14b8b27f125a3a5be21",
+      "disposition": "Export hardlink to retained regular target; raw/canonical protected checks cover the target bytes."
+    },
+    {
+      "path": "usr/bin/bzip2",
+      "target": "usr/bin/bunzip2",
+      "resolvedRegularTarget": "usr/bin/bunzip2",
+      "sha256": "40cbbed6f2decef80c0620931b095623705422c19cb5c14b8b27f125a3a5be21",
+      "disposition": "Export hardlink to retained regular target; raw/canonical protected checks cover the target bytes."
+    },
+    {
+      "path": "usr/bin/perl5.36.0",
+      "target": "usr/bin/perl",
+      "resolvedRegularTarget": "usr/bin/perl",
+      "sha256": "a6097f7672f78105082b665344a2deef7f26be89833dc170fa573c0c64deba2b",
+      "disposition": "Export hardlink to retained regular target; raw/canonical protected checks cover the target bytes."
+    },
+    {
+      "path": "usr/bin/perlthanks",
+      "target": "usr/bin/perlbug",
+      "resolvedRegularTarget": "usr/bin/perlbug",
+      "sha256": "90a0a0cfa2a46a79e7eaba2617ad131153bb1dfa2d973abe613107401160448d",
+      "disposition": "Export hardlink to retained regular target; raw/canonical protected checks cover the target bytes."
+    },
+    {
+      "path": "usr/bin/uncompress",
+      "target": "usr/bin/gunzip",
+      "resolvedRegularTarget": "usr/bin/gunzip",
+      "sha256": "55c2f67ca4c3cca0ebac659f0075461dd671ec4937ecd6c71123bb49ed322ebd",
+      "disposition": "Export hardlink to retained regular target; raw/canonical protected checks cover the target bytes."
+    },
+    {
+      "path": "usr/bin/zipinfo",
+      "target": "usr/bin/unzip",
+      "resolvedRegularTarget": "usr/bin/unzip",
+      "sha256": "104cb83abadfb24c8cb09818021604b8d6ec17c3d5dad330268df4e985e2f65d",
+      "disposition": "Export hardlink to retained regular target; raw/canonical protected checks cover the target bytes."
+    }
+  ],
+  "rootPaths": [
+    "root",
+    "root/.bashrc",
+    "root/.profile"
+  ],
+  "workspacePaths": [],
+  "tmpPaths": [
+    "tmp"
+  ],
+  "homePaths": [
+    "home"
+  ],
+  "noNonemptyProtectedMatch": true,
+  "knownSourceArchiveMatches": [],
+  "boundedFinding": "No unexplained credential-like path, protected-content alias or known source archive observed in this exported filesystem.",
+  "limitations": [
+    "No universal secret, encryption, encoding, semantic or substring absence proof.",
+    "Only final accessible merged filesystem exported; raw/deleted historical layer payloads not scanned.",
+    "Canonical JSON capped16MiB;15largerfiles receive exacthashonly.",
+    "Future protected artifacts not in supplied digest set remain unassessed."
+  ]
+}

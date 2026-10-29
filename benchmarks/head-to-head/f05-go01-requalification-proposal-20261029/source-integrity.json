@@ -1,0 +1,232 @@
+{
+  "readOnly": true,
+  "oldArtifactManifestVerifiedFiles": 454,
+  "oldArtifactMismatches": [],
+  "sourceArchive": {
+    "path": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar",
+    "sha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+    "bytes": 280422400,
+    "regularMembersVerifiedAgainstFrozenInventory": 68062,
+    "sourceBytes": 365903,
+    "fullSourceBytes": 218783760,
+    "inventoryExactPathSet": true,
+    "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+    "gitTreeSha": "0e8e44749de9c275750a56bbca5cde84985fd3d0",
+    "treeProof": "retained source-tree-validation.json, no new Git/network acquisition"
+  },
+  "retainedSourceCopies": [
+    {
+      "path": "sources/CONTRIBUTING.md",
+      "upstreamPath": "CONTRIBUTING.md",
+      "sha256": "b45301bb6687e1dfadc253640ee20766aa02a16d9578e92eee8c530b808d4112",
+      "bytes": 9195,
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/CONTRIBUTING.md"
+    },
+    {
+      "path": "sources/Herebyfile.mjs",
+      "upstreamPath": "Herebyfile.mjs",
+      "sha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421",
+      "bytes": 125368,
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/Herebyfile.mjs"
+    },
+    {
+      "path": "sources/README.md",
+      "upstreamPath": "README.md",
+      "sha256": "b43867a1a978a0a3d881b91e50e9807f1f56e3f1dd54d65cad43f471c84e0036",
+      "bytes": 2741,
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/README.md"
+    },
+    {
+      "path": "sources/go.work",
+      "upstreamPath": "go.work",
+      "sha256": "d6c5314b1f983eb6de36253c903ac00aa8e6fecd9512d2adba882b5701ce7d29",
+      "bytes": 33,
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/go.work"
+    },
+    {
+      "path": "sources/package-lock.json",
+      "upstreamPath": "package-lock.json",
+      "sha256": "52b6c9bd0a26ef1b0fc27dfbfaa00df6a047cdddd587d07c4f6c1c3345faf5cf",
+      "bytes": 143844,
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/package-lock.json"
+    },
+    {
+      "path": "sources/package.json",
+      "upstreamPath": "package.json",
+      "sha256": "2828c1d269bd9c80d634131ec107ac69f1cfc3bf1f98d24c112c825c8acd7902",
+      "bytes": 1838,
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/package.json"
+    },
+    {
+      "path": "sources/packages/typescript/package.json",
+      "upstreamPath": "packages/typescript/package.json",
+      "sha256": "2ae264680bfa5bad7393d516580f03dd9748ebb0da7a0655c7ed57b697b485fd",
+      "bytes": 3638,
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/packages/typescript/package.json"
+    },
+    {
+      "path": "sources/packages/vscode-typescript-nightly/package.json",
+      "upstreamPath": "packages/vscode-typescript-nightly/package.json",
+      "sha256": "18953f8e9f88a5b4a72265f51d6a27d485b3ddf6b3429446a94f8079aa41e914",
+      "bytes": 701,
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/packages/vscode-typescript-nightly/package.json"
+    },
+    {
+      "path": "sources/packages/vscode-typescript/package.json",
+      "upstreamPath": "packages/vscode-typescript/package.json",
+      "sha256": "72e501c1a9f9d37c707c6915d102893a943ac3e2289c56ce17bf5a98ee25fc3f",
+      "bytes": 17944,
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/packages/vscode-typescript/package.json"
+    },
+    {
+      "path": "sources/tools/go.mod",
+      "upstreamPath": "tools/go.mod",
+      "sha256": "968e2374d845585e30ffb1c3b32fbf4b2924dab702cddd91ae33327609d5625b",
+      "bytes": 1485,
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/tools/go.mod"
+    },
+    {
+      "path": "sources/tools/go.sum",
+      "upstreamPath": "tools/go.sum",
+      "sha256": "015fd234f9f2211f196e5be01b74f8aa833858b13bd1a2a2e43117059503bcf1",
+      "bytes": 8844,
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/tools/go.sum"
+    },
+    {
+      "path": "sources/tsc/go.mod",
+      "upstreamPath": "tsc/go.mod",
+      "sha256": "1e0963224f3096e3e8215acea83c033392c8135e7453b8a9680261baa5c18b25",
+      "bytes": 748,
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/tsc/go.mod"
+    },
+    {
+      "path": "sources/tsc/go.sum",
+      "upstreamPath": "tsc/go.sum",
+      "sha256": "00f7fee0307755fa8b871cd25a68b8c478341bc2b2af8731b2f2fc4da3739eee",
+      "bytes": 2867,
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/tsc/go.sum"
+    },
+    {
+      "path": "sources/tsc/internal/fourslash/tests/aliasMergingWithNamespace_test.go",
+      "upstreamPath": "tsc/internal/fourslash/tests/aliasMergingWithNamespace_test.go",
+      "sha256": "4bc35d615390b3e7821f4242b7f5b0ebf5273d4cb544bad04767e0e9441a188b",
+      "bytes": 540,
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/tsc/internal/fourslash/tests/aliasMergingWithNamespace_test.go"
+    },
+    {
+      "path": "sources/tsc/internal/fourslash/tests/autoImportPackageRootPathTypeModule_test.go",
+      "upstreamPath": "tsc/internal/fourslash/tests/autoImportPackageRootPathTypeModule_test.go",
+      "sha256": "ae289ea4af9c099c79ac306543e8695277abf9dfdffda55b442199f13c6a4745",
+      "bytes": 826,
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/tsc/internal/fourslash/tests/autoImportPackageRootPathTypeModule_test.go"
+    },
+    {
+      "path": "sources/tsc/internal/fswatch/fanotify_linux_test.go",
+      "upstreamPath": "tsc/internal/fswatch/fanotify_linux_test.go",
+      "sha256": "f5e1b08aad68b1e9538f14f1d442bf09bc2aee362706d66a5a492024120cb6a9",
+      "bytes": 5824,
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/tsc/internal/fswatch/fanotify_linux_test.go"
+    },
+    {
+      "path": "sources/tsc/internal/fswatch/testutil_test.go",
+      "upstreamPath": "tsc/internal/fswatch/testutil_test.go",
+      "sha256": "ab20fe2b946a1d2e4ddbe585529c6d165251f995bf8a5b733294938a0999ffc0",
+      "bytes": 5838,
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/tsc/internal/fswatch/testutil_test.go"
+    },
+    {
+      "path": "sources/tsc/internal/jsnum/string_test.go",
+      "upstreamPath": "tsc/internal/jsnum/string_test.go",
+      "sha256": "52908d6be0ffb8511e9e4ac5507361dcd60c15c02132fa56ec44e1dad7de1dfe",
+      "bytes": 8520,
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/tsc/internal/jsnum/string_test.go"
+    },
+    {
+      "path": "sources/tsc/internal/lsp/replay_test.go",
+      "upstreamPath": "tsc/internal/lsp/replay_test.go",
+      "sha256": "5425fdbb311e388761c33100d343576168a76e41ccc8817a039483569d6902bb",
+      "bytes": 6861,
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/tsc/internal/lsp/replay_test.go"
+    },
+    {
+      "path": "sources/tsc/internal/parser/parser_test.go",
+      "upstreamPath": "tsc/internal/parser/parser_test.go",
+      "sha256": "d6272679167b0560dee59d4d52bf39f1bb9124af152425a86f8f6cae7b6e6658",
+      "bytes": 18248,
+      "url": "https://github.com/microsoft/TypeScript/blob/25f823dc198a00744b458a7bc6984359f0dd7cac/tsc/internal/parser/parser_test.go"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "benchmarks/head-to-head/f05-qualification-20261029/artifact-hashes.json",
+      "sha256": "fa4d560a502c2d259577af1e1488fc12638a490e9bed089976b95b5971cba758",
+      "bytes": 56338
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-qualification-20261029/execution-freeze.json",
+      "sha256": "dcf78d4bfd3683c496cf2c2ec078372591af0bea356f4e0b44008f48840595a7",
+      "bytes": 9033
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-qualification-20261029/execution-freeze.v4.json",
+      "sha256": "fb93320b4258850137f58ca9c9bb1a1b88601f0fc84398c624f8c882d766eb4b",
+      "bytes": 9524
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-qualification-20261029/qualify.py",
+      "sha256": "1d4bfb02b59f89a200889d340297abc4a75976f0913de4dd5bee084bb2276c27",
+      "bytes": 10845
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-qualification-20261029/oracle.py",
+      "sha256": "1e4f0f3b640df88f315fcbcddf66e9aae179d68e69db7f5da0f4bc948adcb0ab",
+      "bytes": 5911
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-qualification-20261029/go-01-full/acquisition.json",
+      "sha256": "e56d34e7fe5cde09761d5fcff28d93984cc4b1a78b1eac4e26b22cac17211ac0",
+      "bytes": 1432
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-qualification-20261029/go-01-full/inventory.json",
+      "sha256": "96c935c31228fa8e05bb836a93257beeb87ac524e5eb30cdde3c546a1ea4be0e",
+      "bytes": 10700065
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-qualification-20261029/go-01-full/source-tree-validation.json",
+      "sha256": "efa9fb10268f2d393ab1b51435b29fdf3a197fb95f715dbcc1f3fb1f7bd41b54",
+      "bytes": 1009
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-qualification-20261029/runs/go-01/attempt-1/result.json",
+      "sha256": "9c1271e855e5435909d6f982fd2c959dc634362e7f1686bbecc1c7b21cc8d000",
+      "bytes": 886
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-qualification-20261029/runs/go-01/attempt-2/result.json",
+      "sha256": "db6eb1986762c44e40b0ad2ed604e08d1f78f17c59913d706ed53f86f4928465",
+      "bytes": 886
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-dependency-preparation-20261029/common-image.json",
+      "sha256": "a4efbd134e9edb1fbdabbf71d9ff6c257e6a0ecee97d1c52012b247516385c2f",
+      "bytes": 853
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-dependency-preparation-20261029/image-attempt-3/logs/tools/stdout.txt",
+      "sha256": "7ed109fe20e068f792c1f16879c2d3bf8131151a2af61eb0211271149a1a180f",
+      "bytes": 1040
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/requests/go-01.md",
+      "sha256": "b177f75b4a308966c31dcbc4fda35d97da8bc61b76d315ee0995294963ad7898",
+      "bytes": 452
+    }
+  ],
+  "knownDisabledCandidateCount": 377,
+  "limits": [
+    "All regular archive bytes rehashed locally; no upstream code executed.",
+    "Static lexical test/skip inventory is not native Go collection and does not settle all platform/conditional exclusions.",
+    "No package acquisition, Docker daemon, provider or index access."
+  ]
+}

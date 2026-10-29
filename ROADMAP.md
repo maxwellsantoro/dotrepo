@@ -129,6 +129,10 @@ The [withdrawal durability source review](index/telemetry/operating-readiness-20
 identifies generic Go fallbacks that can repopulate four corrected scalars. It
 records proposed scope/setup controls and the separate default-evidence decision;
 no refresh replay or durable enforcement fix is claimed by that review.
+The subsequent [Go scope/setup development packet](index/telemetry/go-default-context-20261029/README.md)
+adds bounded importer and escalation guards for those source patterns. Redigo's
+build-default inference remains a separate evidence-policy decision; the fixture
+results do not establish general workflow parsing or consumer benefit.
 The [scheduled boundary receipt](index/telemetry/roadmap-refresh-boundary-2026-10-06.md)
 retains a completed batch cancelled before landing after an unsupported docs
 answer passed the old reference policy. Future refreshes use the repaired source
@@ -159,7 +163,16 @@ Faithful source-link provisioning has a bounded independent runtime review;
 it does not qualify the affected upstream tasks. The
 [common-image and download-cache preparation](benchmarks/head-to-head/f05-dependency-preparation-20261029/README.md)
 has a bounded [independent audit](benchmarks/head-to-head/f05-dependency-preparation-review-20261029/README.md);
-offline restoration, task qualification and final image audit remain open.
+the [underlying image audit](benchmarks/head-to-head/f05-common-image-audit-20261029/README.md)
+and [reviewed offline qualifications](benchmarks/head-to-head/f05-offline-results-review-20261029/README.md)
+establish three known native scopes on that image and frozen warm caches.
+The [append-only driver revisions](benchmarks/head-to-head/f05-offline-requalification-20261029/README.v5.md)
+retain preflight failures, enforce exact native case identity and distinguish
+assertion outcomes from later compilation/setup failure. The other task
+environments and full campaign freeze remain open. The source-only
+[Go-01 retry proposal](benchmarks/head-to-head/f05-go01-requalification-proposal-20261029/README.md)
+retains the unknown earlier outcome and identifies setup, collection and exact
+source-defined skip-policy prerequisites; it authorizes no further execution. The
 [CI-evidence pilot](benchmarks/ci-evidence/pilot-20261029/README.md) retains
 workflow/job observations without promoting them to independent execution or
 consumer applicability.

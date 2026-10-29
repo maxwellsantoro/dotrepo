@@ -1,0 +1,117 @@
+{
+  "reviewer": "/root/e1_establishment",
+  "author": "/root/f05_harness",
+  "contextDisclosure": "Reviewer has earlier F05 curation, source-provisioning and harness-regression review context; separate from offline execution author, not fresh/blind consumer context.",
+  "files": [
+    {
+      "path": "benchmarks/head-to-head/f05-offline-results-20261029/BEFORE.v2.json",
+      "sha256": "ebe024b00217a705ca8425dda1ab6ed01a86be4fc88b9a92fca589214cc27ff6",
+      "bytes": 4568
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-results-20261029/rust-02-FREEZE.json",
+      "sha256": "d48ccbd478ed8f58fb577428f067000ff460e11068b17fb34122ec5ff462869a",
+      "bytes": 7085
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-results-20261029/typescript-02-FREEZE.json",
+      "sha256": "fbfd63eb670d4571bd68116aa48ba5fdf737e644d789a845741aeaffb60d62a8",
+      "bytes": 7776
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-results-20261029/go-03-FREEZE.json",
+      "sha256": "84c64b53ff2e3e5a4cbdf76650ba9b6642c04f8ebeedb72c22d8134e77c1e027",
+      "bytes": 7406
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-requalification-20261029/plan.v5.json",
+      "sha256": "2d44b468d8954b42210cce44ae12c2571a835b8a89154d585a20f4cdbbce90e6",
+      "bytes": 29234
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-requalification-20261029/packet-freeze.v5.json",
+      "sha256": "3bfa484cfd9b8d335bc636ad1610ccee902c7a46ff0f55bf5ab44e71e5691919",
+      "bytes": 827
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-requalification-20261029/driver.v5.py",
+      "sha256": "bf24973c7fede7d1d379de4cf740f0bba815fcfb580a13f9c29b270def0e4c6d",
+      "bytes": 19875
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-requalification-20261029/oracle_v5.py",
+      "sha256": "668242c28d89556d4e23eea384fe418b04ed5f4d26bfd3126298f1a4186db57f",
+      "bytes": 5804
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-requalification-20261029/oracle.py",
+      "sha256": "3b5392c8bf298d692f0ada994a01f5e0a35bde86151d59fd8b420fa050873aa7",
+      "bytes": 6112
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-requalification-20261029/control.py",
+      "sha256": "f4c48a59e66471d4247b25bd2c3704c681999943bc0daae5d6acf544844abb1a",
+      "bytes": 1675
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-requalification-20261029/capture.py",
+      "sha256": "8080a772bbb1e97c89cfb06dd31b5d250003c69ae7e17429d008e17b9f94bbbc",
+      "bytes": 2240
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-acceptance-20261029/FREEZE.json",
+      "sha256": "0763682faa7f3b1f255ccd518ccf55eab8f4e59b352e1c60ea749d18dbe274d4",
+      "bytes": 852
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-acceptance-20261029/acceptance.json",
+      "sha256": "01ff9e6f9790de814907e71dae59d438d0ba7effde829959eaba3d52ad3e5110",
+      "bytes": 1563
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-acceptance-20261029/rust-02-cache-audit.json",
+      "sha256": "493a926abce0e1f25d696eee1b62cca1a4823cb367452c0a854016228f16dc75",
+      "bytes": 3108
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-acceptance-20261029/typescript-02-cache-audit.json",
+      "sha256": "8e8c96f4cb0dd175ebdb06b0610182d3f74d304b16396875fd76dab231bd1ebf",
+      "bytes": 3108
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-acceptance-20261029/go-03-cache-audit.json",
+      "sha256": "a60bd4aeff95179e14ae5951d8c6c941090ec5a928c19b51af1541fd0a7daf96",
+      "bytes": 3108
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-results-20261029/FREEZE.json",
+      "sha256": "d1f9673dfc4dc69fb4a5aa8f3c3af0c3cfcf58c7de0d94f1e21c08f3fa14a844",
+      "bytes": 752
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-results-20261029/artifact-hashes.json",
+      "sha256": "62d39f894d6b071a72bcee1f93858fc57964d8172b6e4f59d9ae6bdc3cd2bec5",
+      "bytes": 25211
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-results-20261029/report.json",
+      "sha256": "a0a431ae442235d1b7dde642a884cc539aa7d36c1dbc2172aafb9255a9bc758c",
+      "bytes": 8836
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-results-20261029/checks.json",
+      "sha256": "6980de6a726fa2cc17b66841332f796ce77eaa5286ac08f2eff4b04c48e82ffb",
+      "bytes": 732
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-results-20261029/source-bindings.json",
+      "sha256": "c257d7782d819b9044d93ed6fec69a9600d8fda96b6533621d9ce1c056e7d314",
+      "bytes": 6607
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-results-20261029/inputs/FREEZE.json",
+      "sha256": "0763682faa7f3b1f255ccd518ccf55eab8f4e59b352e1c60ea749d18dbe274d4",
+      "bytes": 852
+    }
+  ]
+}

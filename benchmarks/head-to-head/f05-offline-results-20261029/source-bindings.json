@@ -1,0 +1,126 @@
+{
+  "planSha256": "2d44b468d8954b42210cce44ae12c2571a835b8a89154d585a20f4cdbbce90e6",
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "bindings": [
+    {
+      "taskId": "rust-02",
+      "revision": "ab4bf739d46448436cb68933bb8260ee264449d5",
+      "source": {
+        "archive": {
+          "path": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/rust-02-full/runtime-source.tar",
+          "sha256": "862b159c55ee7693faed80c2546aa203cc370e867cf5a206cff5356ab66766d6"
+        },
+        "inventory": {
+          "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-20261029/rust-02-full/inventory.json",
+          "sha256": "e04bbccfff19d356f66981ec9ae7074fe26b44a4d6a76591b70cd8c1c816865c"
+        }
+      },
+      "cache": {
+        "archive": {
+          "path": "/tmp/dotrepo-f05-dependency-preparation-20261029/rust-02-attempt-2/cache.tar",
+          "sha256": "f8ca1fccc8792cc5eb34aad37640268ab339d852de15b10a3cf1d5bcaf5296a8"
+        },
+        "inventory": {
+          "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/rust-02-attempt-2/inventory.json",
+          "sha256": "346f678ad150ee3410b12c539430bac1813212cbe6c7725fad954fc68f25cbc2"
+        },
+        "provenance": {
+          "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/rust-02-attempt-2/provenance.json",
+          "sha256": "c5ee235392b745d021252d32753c86eacdd295a5c8fb5d0d476378f26aa5d49a"
+        },
+        "draftPreparation": {
+          "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/rust-02-attempt-2/preparation.json",
+          "sha256": "dab4de6fb99caa0ce87445fc1b3dd44dafecab6e87ce743460db2febd96931dd"
+        }
+      },
+      "originalTestCommand": "cargo test --locked --manifest-path lib/sniffnet-packet-parser/Cargo.toml -- --nocapture",
+      "nativeTestCommand": "cargo test --locked --manifest-path lib/sniffnet-packet-parser/Cargo.toml -- --nocapture",
+      "expectedScope": {
+        "scope": "component",
+        "component": "lib/sniffnet-packet-parser"
+      },
+      "rawAttempt": "rust-02/raw",
+      "toolHashReceipt": "rust-02/raw/logs/source-free-tool-byte-hashes/receipt.json"
+    },
+    {
+      "taskId": "typescript-02",
+      "revision": "2875056f93d6eebcd887f64ae557258a7b0b0108",
+      "source": {
+        "archive": {
+          "path": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/typescript-02/runtime-source.tar",
+          "sha256": "818bf33ece0979d198ed6a11daa3e6b838cc4aefba8c3a381c86e8ce2e706f41"
+        },
+        "inventory": {
+          "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-20261029/typescript-02/inventory.json",
+          "sha256": "ba57c4fe3c2ae83ae10005b4ff3ed3998d1f94d75d2778163167da69637f78d7"
+        }
+      },
+      "cache": {
+        "archive": {
+          "path": "/tmp/dotrepo-f05-dependency-preparation-20261029/typescript-02/cache.tar",
+          "sha256": "84cfa62ad220509ff1027f2a4e97b88885dbcb4c28bdfe59b620a70224d530dc"
+        },
+        "inventory": {
+          "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/typescript-02/inventory.json",
+          "sha256": "8d5794eb742574f17493e41e7dd242ce6d9ea0febf5766f4d275c358e0e1837c"
+        },
+        "provenance": {
+          "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/typescript-02/provenance.json",
+          "sha256": "91f01a7d2ef9a245c8b8e8184d57eab84dbb9b173d095d47a7747b5160769a76"
+        },
+        "draftPreparation": {
+          "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/typescript-02/preparation.json",
+          "sha256": "9c94f89fa251725f8ce9f2661b2a058c16cd576b7f7fb8199b5faa5c7db8a155"
+        }
+      },
+      "originalTestCommand": "PATH=/workspace/npm-tooling/node_modules/.bin:$PATH npm run test -- __tests__/bin/agent-canvas.test.ts --reporter=json --outputFile=/workspace/vitest.json",
+      "nativeTestCommand": "PATH=/workspace/npm-tooling/node_modules/.bin:$PATH npm run test -- __tests__/bin/agent-canvas.test.ts --reporter=json --outputFile=/workspace/vitest.json",
+      "expectedScope": {
+        "scope": "component",
+        "component": "bin"
+      },
+      "rawAttempt": "typescript-02/raw",
+      "toolHashReceipt": "typescript-02/raw/logs/source-free-tool-byte-hashes/receipt.json"
+    },
+    {
+      "taskId": "go-03",
+      "revision": "352089582444ea84feb03bc97eda97b35729e8ec",
+      "source": {
+        "archive": {
+          "path": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-03/runtime-source.tar",
+          "sha256": "cc7b18c67ce11698d79bfee35fe7afa7f7c8f0ea0dccbdaefd8836cde49f3ba2"
+        },
+        "inventory": {
+          "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-20261029/go-03/inventory.json",
+          "sha256": "0dde9a80e14165d1675227db0842f3c88bda2828dd20506e75d6b4ff5d9fcd74"
+        }
+      },
+      "cache": {
+        "archive": {
+          "path": "/tmp/dotrepo-f05-dependency-preparation-20261029/go-03/cache.tar",
+          "sha256": "fc8de794f4f9338fcb8be7cc0c4ef8f1a7e736e61b3a4a6bcdb3917cfb7176b8"
+        },
+        "inventory": {
+          "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/go-03/inventory.json",
+          "sha256": "c62557a79259cbe4d249c2c070c0abe108732acdb5d5c7bf5f73e185b0f1f943"
+        },
+        "provenance": {
+          "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/go-03/provenance.json",
+          "sha256": "5c9870ade3da9b0cb7c87364132ab15e1b4dca3517ad6b26998db8c22d313bf8"
+        },
+        "draftPreparation": {
+          "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/go-03/preparation.json",
+          "sha256": "247835dab86b9d2e6a84cbd5c6e74e7143a82a6e606092796a6c20367c3a0fa4"
+        }
+      },
+      "originalTestCommand": "cd api && GOWORK=off go test -json -count=1 ./...",
+      "nativeTestCommand": "cd api && GOWORK=off go test -json -count=1 ./...",
+      "expectedScope": {
+        "scope": "component",
+        "component": "api"
+      },
+      "rawAttempt": "go-03/raw",
+      "toolHashReceipt": "go-03/raw/logs/source-free-tool-byte-hashes/receipt.json"
+    }
+  ]
+}

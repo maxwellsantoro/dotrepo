@@ -1,0 +1,29 @@
+   Compiling dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)
+error[E0277]: the trait bound `[&str; 3]: Pattern` is not satisfied
+    --> crates/dotrepo-core/src/import/commands/go_context.rs:144:73
+     |
+ 144 |                 && (go_task(row.text).is_some() || row.text.starts_with(["- {", "- *", "- &"]))
+     |                                                             ----------- ^^^^^^^^^^^^^^^^^^^^^ the trait `FnMut(char)` is not implemented for `[&str; 3]`
+     |                                                             |
+     |                                                             required by a bound introduced by this call
+     |
+help: the following other types implement trait `Pattern`
+    --> /Users/maxwell/.rustup/toolchains/stable-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/str/pattern.rs:830:1
+     |
+ 830 | impl<const N: usize> Pattern for [char; N] {
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `[char; N]`
+...
+ 852 | impl<'b, const N: usize> Pattern for &'b [char; N] {
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `&[char; N]`
+...
+ 894 | impl<'b> Pattern for &'b [char] {
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `&[char]`
+     = note: required for `[&str; 3]` to implement `Pattern`
+note: required by a bound in `core::str::<impl str>::starts_with`
+    --> /Users/maxwell/.rustup/toolchains/stable-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/str/mod.rs:1421:27
+     |
+1421 |     pub fn starts_with<P: Pattern>(&self, pat: P) -> bool {
+     |                           ^^^^^^^ required by this bound in `core::str::<impl str>::starts_with`
+
+For more information about this error, try `rustc --explain E0277`.
+error: could not compile `dotrepo-core` (lib test) due to 1 previous error
