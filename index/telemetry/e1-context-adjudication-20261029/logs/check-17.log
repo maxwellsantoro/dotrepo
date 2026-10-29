@@ -1,0 +1,17 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.04s
+     Running unittests src/lib.rs (/tmp/dotrepo-e1-context-adjudication-target/debug/deps/dotrepo_core-6af6d15045c80b2a)
+
+running 10 tests
+test import::escalation::tests::deterministic_escalation_keeps_node_python_test_conflict_absent ... ok
+test import::escalation::tests::escalation_rejects_unsafe_value_returned_by_adjudication_provider ... ok
+test import::escalation::tests::declared_script_avoids_polyglot_default_escalation ... ok
+test import::escalation::tests::deepen_finds_security_contact_in_readme_section ... ok
+test import::escalation::tests::confident_abstention_does_not_escalate_to_second_opinion ... ok
+test import::escalation::tests::deterministic_escalation_marks_conflicts_absent_without_model_spend ... ok
+test import::escalation::tests::escalation_does_not_apply_unsafe_task_script_test_command ... ok
+test import::escalation::tests::model_escalation_resolves_remaining_fields_under_cap ... ok
+test import::escalation::tests::low_confidence_abstention_escalates_to_second_opinion ... ok
+test import::escalation::tests::writeback_gate_can_pass_while_auto_publish_remains_blocked ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 296 filtered out; finished in 0.01s
+

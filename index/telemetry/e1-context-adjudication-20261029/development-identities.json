@@ -1,0 +1,23 @@
+{
+  "scope": "Previously exposed known development only; no new holdout or F05 tuning",
+  "identities": [
+    {
+      "repository": "github.com/keras-team/keras",
+      "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+      "activity": "Reuse committed5file python_recipe testdata only; no new grammar or extraction rule."
+    },
+    {
+      "repository": "github.com/docker/compose",
+      "revision": "343bb382d2192b88d84af49971bb5cb99bee268c",
+      "activity": "Declared known development; not inspected or replayed for this transport implementation."
+    },
+    {
+      "repository": "github.com/zellij-org/zellij",
+      "revision": "1f3df933978e00c246553070310175c392fcfe4f",
+      "activity": "Declared known development; not inspected or replayed for this transport implementation."
+    }
+  ],
+  "syntheticCounterexamples": "example/synthetic-context plus local owned response/body/path/cap/budget mutations",
+  "consumerBenefitMeasured": false,
+  "sourceCompletenessQualified": false
+}

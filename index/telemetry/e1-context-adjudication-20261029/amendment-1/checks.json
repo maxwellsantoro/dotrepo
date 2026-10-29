@@ -1,0 +1,49 @@
+[
+  {
+    "argv": [
+      "uv",
+      "run",
+      "--offline",
+      "--locked",
+      "pytest",
+      "-q",
+      "scripts/tests/test_openrouter_adjudication.py"
+    ],
+    "workdir": "/Users/maxwell/.codex/worktrees/e1-context-adjudication/dotrepo",
+    "exitCode": 0,
+    "log": "check-1.log"
+  },
+  {
+    "argv": [
+      "uv",
+      "run",
+      "--offline",
+      "--locked",
+      "ruff",
+      "check",
+      "--no-cache",
+      "scripts/adjudication_openrouter_sidecar.py",
+      "scripts/tests/test_openrouter_adjudication.py"
+    ],
+    "workdir": "/Users/maxwell/.codex/worktrees/e1-context-adjudication/dotrepo",
+    "exitCode": 0,
+    "log": "check-2.log"
+  },
+  {
+    "argv": [
+      "uv",
+      "run",
+      "--offline",
+      "--locked",
+      "ruff",
+      "format",
+      "--check",
+      "--no-cache",
+      "scripts/adjudication_openrouter_sidecar.py",
+      "scripts/tests/test_openrouter_adjudication.py"
+    ],
+    "workdir": "/Users/maxwell/.codex/worktrees/e1-context-adjudication/dotrepo",
+    "exitCode": 0,
+    "log": "check-3.log"
+  }
+]

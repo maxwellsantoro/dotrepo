@@ -122,6 +122,7 @@ fn second_opinion_live_ladder_from_low_confidence_primary() {
         AdjudicationTier::LocalPrimary,
         vec![AdjudicationProviderResponse {
             response: AdjudicationModelResponse {
+                citations: Vec::new(),
                 field: "repo.build".into(),
                 value: None,
                 confidence: AdjudicationModelConfidence::Low,
@@ -252,6 +253,7 @@ fn billed_http_failure_counts_tokens_and_attempt_before_second_opinion() {
         AdjudicationTier::LocalSecondOpinion,
         vec![AdjudicationProviderResponse {
             response: AdjudicationModelResponse {
+                citations: Vec::new(),
                 field: "repo.build".into(),
                 value: Some("cargo build --workspace".into()),
                 confidence: AdjudicationModelConfidence::High,

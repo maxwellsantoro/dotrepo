@@ -1,0 +1,9 @@
+{
+  "originalAuthorFreezeSha256": "9cff9fe402a545300eefd17c61afc155b51c2607dcf8ab249c0222aefcaa420e",
+  "finding": "Root-accepted independent reviewer finding: explicit provider Low context selection was unconditionally normalized to Medium, bypassing intended Low rejection/escalation.",
+  "exactLocalNegativeReproduction": "before-reproduction.json",
+  "exactBeforeAfterControl": "before-after-controls.json",
+  "reviewHashNotCircularlyRequired": "Independent reviewer will bind its finding and this successor in its own immutable report.",
+  "scope": "Preserve Low/Medium; cap High non-null context selection only; no Rust or other policy changes.",
+  "externalProviderCalls": 0
+}

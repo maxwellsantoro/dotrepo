@@ -158,6 +158,13 @@ an upstream task is unavailable.
 The [next E1 development replay](benchmarks/head-to-head/e1-development-20261029b/README.md)
 recovers an attributed multi-file candidate while retaining consumer abstention;
 independent source-completeness review remains distinct from syntax recovery.
+The [context adjudication input repair](index/telemetry/e1-context-adjudication-20261029/README.md)
+transports existing whole-tuple candidates with bounded admitted source passages,
+exact citations and post-response source checks. Its
+[confidence correction](index/telemetry/e1-context-adjudication-20261029/amendment-1/README.md)
+preserves Low responses rather than promoting them to Medium. Context selection
+remains capped at Medium; source completeness, fresh held-out qualification and
+consumer benefit remain separate gates.
 The [Keras source disposition](index/telemetry/e1-keras-source-disposition-20261029/README.md)
 retains backend/release qualifications, local-install uncertainty and CI scope
 differences. The bounded [installation-source follow-up](index/telemetry/e1-keras-install-source-20261029/README.md)

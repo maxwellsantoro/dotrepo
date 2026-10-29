@@ -1,0 +1,431 @@
+[
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "-p",
+      "dotrepo-core",
+      "--lib",
+      "context_adjudication",
+      "--",
+      "--nocapture"
+    ],
+    "workdir": "/Users/maxwell/.codex/worktrees/e1-context-adjudication/dotrepo",
+    "exitCode": 0,
+    "log": "logs/check-1.log",
+    "state": "superseded; admitted-input final Rust source receipts appended"
+  },
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "-p",
+      "dotrepo-core",
+      "--test",
+      "adjudication_pipeline",
+      "--test",
+      "import_escalation_safety"
+    ],
+    "workdir": "/Users/maxwell/.codex/worktrees/e1-context-adjudication/dotrepo",
+    "exitCode": 0,
+    "log": "logs/check-2.log",
+    "state": "superseded; admitted-input final Rust source receipts appended"
+  },
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "-p",
+      "dotrepo-crawler",
+      "--lib",
+      "context_transport_tests"
+    ],
+    "workdir": "/Users/maxwell/.codex/worktrees/e1-context-adjudication/dotrepo",
+    "exitCode": 0,
+    "log": "logs/check-3.log",
+    "state": "superseded; admitted-input final Rust source receipts appended"
+  },
+  {
+    "argv": [
+      "uv",
+      "run",
+      "--offline",
+      "--locked",
+      "pytest",
+      "-q",
+      "scripts/tests/test_openrouter_adjudication.py"
+    ],
+    "workdir": "/Users/maxwell/.codex/worktrees/e1-context-adjudication/dotrepo",
+    "exitCode": 0,
+    "log": "logs/check-4.log"
+  },
+  {
+    "argv": [
+      "uv",
+      "run",
+      "--offline",
+      "--locked",
+      "ruff",
+      "check",
+      "--no-cache",
+      "scripts/adjudication_openrouter_sidecar.py",
+      "scripts/tests/test_openrouter_adjudication.py"
+    ],
+    "workdir": "/Users/maxwell/.codex/worktrees/e1-context-adjudication/dotrepo",
+    "exitCode": 0,
+    "log": "logs/check-5.log"
+  },
+  {
+    "argv": [
+      "uv",
+      "run",
+      "--offline",
+      "--locked",
+      "ruff",
+      "format",
+      "--check",
+      "--no-cache",
+      "scripts/adjudication_openrouter_sidecar.py",
+      "scripts/tests/test_openrouter_adjudication.py"
+    ],
+    "workdir": "/Users/maxwell/.codex/worktrees/e1-context-adjudication/dotrepo",
+    "exitCode": 0,
+    "log": "logs/check-6.log"
+  },
+  {
+    "argv": [
+      "cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "workdir": "/Users/maxwell/.codex/worktrees/e1-context-adjudication/dotrepo",
+    "exitCode": 0,
+    "log": "logs/check-7.log",
+    "state": "superseded; admitted-input final Rust source receipts appended"
+  },
+  {
+    "argv": [
+      "cargo",
+      "clippy",
+      "--offline",
+      "--locked",
+      "-p",
+      "dotrepo-core",
+      "-p",
+      "dotrepo-crawler",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "workdir": "/Users/maxwell/.codex/worktrees/e1-context-adjudication/dotrepo",
+    "exitCode": 0,
+    "log": "logs/check-8.log",
+    "state": "superseded; admitted-input final Rust source receipts appended"
+  },
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "-p",
+      "dotrepo-core",
+      "--lib",
+      "context_adjudication",
+      "--",
+      "--nocapture"
+    ],
+    "exitCode": 0,
+    "workdir": "/Users/maxwell/.codex/worktrees/e1-context-adjudication/dotrepo",
+    "log": "logs/check-9.log",
+    "state": "superseded; admitted-input final Rust source receipts appended"
+  },
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "-p",
+      "dotrepo-core",
+      "--test",
+      "adjudication_pipeline",
+      "--test",
+      "import_escalation_safety"
+    ],
+    "workdir": "/Users/maxwell/.codex/worktrees/e1-context-adjudication/dotrepo",
+    "exitCode": 0,
+    "log": "logs/check-10.log",
+    "state": "superseded; admitted-input final Rust source receipts appended"
+  },
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "-p",
+      "dotrepo-core",
+      "--lib",
+      "import::escalation"
+    ],
+    "workdir": "/Users/maxwell/.codex/worktrees/e1-context-adjudication/dotrepo",
+    "exitCode": 0,
+    "log": "logs/check-11.log",
+    "state": "superseded; admitted-input final Rust source receipts appended"
+  },
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "-p",
+      "dotrepo-crawler",
+      "--lib",
+      "context_transport_tests"
+    ],
+    "workdir": "/Users/maxwell/.codex/worktrees/e1-context-adjudication/dotrepo",
+    "exitCode": 0,
+    "log": "logs/check-12.log",
+    "state": "superseded; admitted-input final Rust source receipts appended"
+  },
+  {
+    "argv": [
+      "cargo",
+      "clippy",
+      "--offline",
+      "--locked",
+      "-p",
+      "dotrepo-core",
+      "-p",
+      "dotrepo-crawler",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "workdir": "/Users/maxwell/.codex/worktrees/e1-context-adjudication/dotrepo",
+    "exitCode": 0,
+    "log": "logs/check-13.log",
+    "state": "superseded; admitted-input final Rust source receipts appended"
+  },
+  {
+    "argv": [
+      "cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "workdir": "/Users/maxwell/.codex/worktrees/e1-context-adjudication/dotrepo",
+    "exitCode": 0,
+    "log": "logs/check-14.log",
+    "state": "superseded; admitted-input final Rust source receipts appended"
+  },
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "-p",
+      "dotrepo-core",
+      "--lib",
+      "context_adjudication",
+      "--",
+      "--nocapture"
+    ],
+    "workdir": "/Users/maxwell/.codex/worktrees/e1-context-adjudication/dotrepo",
+    "exitCode": 0,
+    "log": "logs/check-15.log",
+    "state": "superseded; admitted-input final Rust source receipts appended"
+  },
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "-p",
+      "dotrepo-core",
+      "--test",
+      "adjudication_pipeline",
+      "--test",
+      "import_escalation_safety"
+    ],
+    "workdir": "/Users/maxwell/.codex/worktrees/e1-context-adjudication/dotrepo",
+    "exitCode": 0,
+    "log": "logs/check-16.log",
+    "state": "superseded; admitted-input final Rust source receipts appended"
+  },
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "-p",
+      "dotrepo-core",
+      "--lib",
+      "import::escalation"
+    ],
+    "workdir": "/Users/maxwell/.codex/worktrees/e1-context-adjudication/dotrepo",
+    "exitCode": 0,
+    "log": "logs/check-17.log",
+    "state": "superseded; admitted-input final Rust source receipts appended"
+  },
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "-p",
+      "dotrepo-crawler",
+      "--lib",
+      "context_transport_tests"
+    ],
+    "workdir": "/Users/maxwell/.codex/worktrees/e1-context-adjudication/dotrepo",
+    "exitCode": 0,
+    "log": "logs/check-18.log",
+    "state": "superseded; admitted-input final Rust source receipts appended"
+  },
+  {
+    "argv": [
+      "cargo",
+      "clippy",
+      "--offline",
+      "--locked",
+      "-p",
+      "dotrepo-core",
+      "-p",
+      "dotrepo-crawler",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "workdir": "/Users/maxwell/.codex/worktrees/e1-context-adjudication/dotrepo",
+    "exitCode": 0,
+    "log": "logs/check-19.log",
+    "state": "superseded; admitted-input final Rust source receipts appended"
+  },
+  {
+    "argv": [
+      "cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "workdir": "/Users/maxwell/.codex/worktrees/e1-context-adjudication/dotrepo",
+    "exitCode": 0,
+    "log": "logs/check-20.log",
+    "state": "superseded; admitted-input final Rust source receipts appended"
+  },
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "-p",
+      "dotrepo-core",
+      "--lib",
+      "context_adjudication",
+      "--",
+      "--nocapture"
+    ],
+    "workdir": "/Users/maxwell/.codex/worktrees/e1-context-adjudication/dotrepo",
+    "exitCode": 0,
+    "log": "logs/check-22.log"
+  },
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "-p",
+      "dotrepo-core",
+      "--test",
+      "adjudication_pipeline",
+      "--test",
+      "import_escalation_safety"
+    ],
+    "workdir": "/Users/maxwell/.codex/worktrees/e1-context-adjudication/dotrepo",
+    "exitCode": 0,
+    "log": "logs/check-23.log"
+  },
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "-p",
+      "dotrepo-core",
+      "--lib",
+      "import::escalation"
+    ],
+    "workdir": "/Users/maxwell/.codex/worktrees/e1-context-adjudication/dotrepo",
+    "exitCode": 0,
+    "log": "logs/check-24.log"
+  },
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "-p",
+      "dotrepo-crawler",
+      "--lib",
+      "context_transport_tests"
+    ],
+    "workdir": "/Users/maxwell/.codex/worktrees/e1-context-adjudication/dotrepo",
+    "exitCode": 0,
+    "log": "logs/check-25.log"
+  },
+  {
+    "argv": [
+      "cargo",
+      "clippy",
+      "--offline",
+      "--locked",
+      "-p",
+      "dotrepo-core",
+      "-p",
+      "dotrepo-crawler",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "workdir": "/Users/maxwell/.codex/worktrees/e1-context-adjudication/dotrepo",
+    "exitCode": 0,
+    "log": "logs/check-26.log"
+  },
+  {
+    "argv": [
+      "cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "workdir": "/Users/maxwell/.codex/worktrees/e1-context-adjudication/dotrepo",
+    "exitCode": 0,
+    "log": "logs/check-27.log"
+  }
+]

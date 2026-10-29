@@ -81,7 +81,8 @@ pub fn run_import_escalation(
         }
     }
 
-    run_model_escalation(plan, field_scores, options, providers, &mut report);
+    run_model_escalation(root, plan, field_scores, options, providers, &mut report);
+    report.remaining_unresolved = field_scores.summary.unresolved.len();
 
     if field_scores.summary.unresolved.is_empty() {
         return report;
@@ -185,11 +186,13 @@ mod tests {
             field: "repo.test".into(),
             candidates: vec![
                 AdjudicationCandidate {
+                    context_evidence: None,
                     value: "npm test".into(),
                     source_path: "package.json".into(),
                     source_tier: CommandSourceTier::Manifest,
                 },
                 AdjudicationCandidate {
+                    context_evidence: None,
                     value: "tox".into(),
                     source_path: "pyproject.toml".into(),
                     source_tier: CommandSourceTier::EcosystemDefault,
@@ -356,6 +359,7 @@ mod tests {
             vec![
                 AdjudicationProviderResponse {
                     response: AdjudicationModelResponse {
+                        citations: Vec::new(),
                         field: "repo.build".into(),
                         value: Some("cargo build --workspace".into()),
                         confidence: AdjudicationModelConfidence::Medium,
@@ -366,6 +370,7 @@ mod tests {
                 },
                 AdjudicationProviderResponse {
                     response: AdjudicationModelResponse {
+                        citations: Vec::new(),
                         field: "repo.test".into(),
                         value: Some("cargo test --workspace".into()),
                         confidence: AdjudicationModelConfidence::Medium,
@@ -440,6 +445,7 @@ mod tests {
             AdjudicationTier::LocalPrimary,
             vec![AdjudicationProviderResponse {
                 response: AdjudicationModelResponse {
+                    citations: Vec::new(),
                     field: "repo.build".into(),
                     value: None,
                     confidence: AdjudicationModelConfidence::Low,
@@ -453,6 +459,7 @@ mod tests {
             AdjudicationTier::LocalSecondOpinion,
             vec![AdjudicationProviderResponse {
                 response: AdjudicationModelResponse {
+                    citations: Vec::new(),
                     field: "repo.build".into(),
                     value: Some("cargo build --workspace".into()),
                     confidence: AdjudicationModelConfidence::High,
@@ -529,6 +536,7 @@ mod tests {
             AdjudicationTier::LocalPrimary,
             vec![AdjudicationProviderResponse {
                 response: AdjudicationModelResponse {
+                    citations: Vec::new(),
                     field: "repo.build".into(),
                     value: None,
                     confidence: AdjudicationModelConfidence::High,
@@ -543,6 +551,7 @@ mod tests {
             AdjudicationTier::LocalSecondOpinion,
             vec![AdjudicationProviderResponse {
                 response: AdjudicationModelResponse {
+                    citations: Vec::new(),
                     field: "repo.build".into(),
                     value: Some("cargo build --workspace".into()),
                     confidence: AdjudicationModelConfidence::High,
@@ -619,6 +628,7 @@ mod tests {
             AdjudicationTier::LocalPrimary,
             vec![AdjudicationProviderResponse {
                 response: AdjudicationModelResponse {
+                    citations: Vec::new(),
                     field: "repo.build".into(),
                     value: None,
                     confidence: AdjudicationModelConfidence::High,
@@ -716,6 +726,7 @@ mod tests {
         let requests = vec![crate::import::AdjudicationRequest {
             field: "repo.test".into(),
             candidates: vec![crate::import::AdjudicationCandidate {
+                context_evidence: None,
                 value: "go test ./... || true".into(),
                 source_path: "Makefile".into(),
                 source_tier: CommandSourceTier::Workflow,

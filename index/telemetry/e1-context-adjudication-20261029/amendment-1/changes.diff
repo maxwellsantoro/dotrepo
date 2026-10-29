@@ -1,0 +1,48 @@
+--- before/scripts/adjudication_openrouter_sidecar.py
++++ after/scripts/adjudication_openrouter_sidecar.py
+@@ -247,7 +247,8 @@
+ 
+     if contextual:
+         result["citations"] = citations
+-        result["confidence"] = "medium" if model_payload.get("value") is not None else confidence
++        if model_payload.get("value") is not None and confidence == "high":
++            result["confidence"] = "medium"
+     return result
+ 
+ 
+--- before/scripts/tests/test_openrouter_adjudication.py
++++ after/scripts/tests/test_openrouter_adjudication.py
+@@ -320,3 +320,33 @@
+     )
+     assert "citations" not in result
+     assert "citations" not in sidecar.adjudication_schema(scalar)["properties"]
++
++
++@pytest.mark.parametrize(
++    "provider_confidence,expected", [("low", "low"), ("medium", "medium"), ("high", "medium")]
++)
++def test_context_selection_preserves_low_and_caps_only_high(provider_confidence, expected):
++    payload = context_request()
++    answer = context_answer(payload)
++    answer["confidence"] = provider_confidence
++    result = sidecar.normalize_response(payload, answer, 35)
++    assert result["confidence"] == expected
++    assert result["value"] == answer["value"]
++    assert result["source"] == answer["source"]
++    assert result["citations"] == answer["citations"]
++    assert result["tokensUsed"] == 35
++
++
++def test_context_low_abstention_stays_low_without_citations():
++    payload = context_request()
++    answer = {
++        "field": payload["field"],
++        "value": None,
++        "source": None,
++        "confidence": "low",
++        "reason": "unresolved source closure",
++        "citations": [],
++    }
++    result = sidecar.normalize_response(payload, answer, 35)
++    assert result["confidence"] == "low"
++    assert result["value"] is None and result["source"] is None and result["citations"] == []

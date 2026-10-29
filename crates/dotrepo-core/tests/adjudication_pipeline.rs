@@ -90,11 +90,13 @@ fn post_check_accepts_valid_candidate() {
         field: "repo.build".into(),
         candidates: vec![
             AdjudicationCandidate {
+                context_evidence: None,
                 value: "cargo build --workspace".into(),
                 source_path: ".github/workflows/ci.yml".into(),
                 source_tier: CommandSourceTier::Workflow,
             },
             AdjudicationCandidate {
+                context_evidence: None,
                 value: "cargo build".into(),
                 source_path: ".github/workflows/release.yml".into(),
                 source_tier: CommandSourceTier::Workflow,
@@ -103,6 +105,7 @@ fn post_check_accepts_valid_candidate() {
     };
 
     let response = AdjudicationModelResponse {
+        citations: Vec::new(),
         field: "repo.build".into(),
         value: Some("cargo build --workspace".into()),
         confidence: AdjudicationModelConfidence::Medium,
@@ -130,6 +133,7 @@ fn post_check_rejects_out_of_candidate_value() {
     let request = AdjudicationRequest {
         field: "repo.test".into(),
         candidates: vec![AdjudicationCandidate {
+            context_evidence: None,
             value: "cargo test".into(),
             source_path: "Cargo.toml".into(),
             source_tier: CommandSourceTier::Manifest,
@@ -137,6 +141,7 @@ fn post_check_rejects_out_of_candidate_value() {
     };
 
     let response = AdjudicationModelResponse {
+        citations: Vec::new(),
         field: "repo.test".into(),
         value: Some("cargo test --all-features --release".into()),
         confidence: AdjudicationModelConfidence::Medium,
@@ -158,6 +163,7 @@ fn post_check_rejects_response_for_another_field_including_abstention() {
     let request = AdjudicationRequest {
         field: "repo.build".into(),
         candidates: vec![AdjudicationCandidate {
+            context_evidence: None,
             value: "cargo build".into(),
             source_path: "Cargo.toml".into(),
             source_tier: CommandSourceTier::Manifest,
@@ -166,6 +172,7 @@ fn post_check_rejects_response_for_another_field_including_abstention() {
 
     for value in [Some("cargo build".into()), None] {
         let response = AdjudicationModelResponse {
+            citations: Vec::new(),
             field: "repo.test".into(),
             value,
             confidence: AdjudicationModelConfidence::High,
@@ -191,11 +198,13 @@ fn post_check_requires_cited_source_to_support_selected_value() {
         field: "repo.build".into(),
         candidates: vec![
             AdjudicationCandidate {
+                context_evidence: None,
                 value: "cargo build --workspace".into(),
                 source_path: ".github/workflows/check.yml".into(),
                 source_tier: CommandSourceTier::Workflow,
             },
             AdjudicationCandidate {
+                context_evidence: None,
                 value: "cargo build".into(),
                 source_path: ".github/workflows/release.yml".into(),
                 source_tier: CommandSourceTier::Workflow,
@@ -205,6 +214,7 @@ fn post_check_requires_cited_source_to_support_selected_value() {
 
     for source in ["Cargo.toml", ".github/workflows/release.yml"] {
         let response = AdjudicationModelResponse {
+            citations: Vec::new(),
             field: request.field.clone(),
             value: Some("cargo build --workspace".into()),
             confidence: AdjudicationModelConfidence::High,
@@ -226,6 +236,7 @@ fn post_check_maps_null_to_absent() {
     let request = AdjudicationRequest {
         field: "repo.build".into(),
         candidates: vec![AdjudicationCandidate {
+            context_evidence: None,
             value: "make build".into(),
             source_path: "Makefile".into(),
             source_tier: CommandSourceTier::TaskScript,
@@ -233,6 +244,7 @@ fn post_check_maps_null_to_absent() {
     };
 
     let response = AdjudicationModelResponse {
+        citations: Vec::new(),
         field: "repo.build".into(),
         value: None,
         confidence: AdjudicationModelConfidence::High,
@@ -287,6 +299,7 @@ fn apply_results_updates_scores_and_summary() {
             let first_value = req.candidates.first().unwrap().value.clone();
             apply_adjudication_response(
                 &AdjudicationModelResponse {
+                    citations: Vec::new(),
                     field: req.field.clone(),
                     value: Some(first_value),
                     confidence: AdjudicationModelConfidence::Medium,

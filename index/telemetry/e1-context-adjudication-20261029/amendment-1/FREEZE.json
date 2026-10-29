@@ -1,0 +1,26 @@
+{
+  "identity": "e1-context-adjudication-amendment-1-low-confidence",
+  "state": "narrow sidecar correction; independent after-review and combined gates pending",
+  "parentFreezeSha256": "9cff9fe402a545300eefd17c61afc155b51c2607dcf8ab249c0222aefcaa420e",
+  "artifactSha256": {
+    "README.md": "278f722540ea67b70037e3c3e990621293a29aff81147ed27a71280c6f289445",
+    "before/adjudication_openrouter_sidecar.py": "09c5600bae57fa23d18854061dca78fb5a228253d9d13ebab8b89eb0292d6509",
+    "before/test_openrouter_adjudication.py": "38c4595e1b65c199b7e951f35cfba714473959e07c0577f961e5da08d3371c3c",
+    "before-after-controls.json": "0e4f19610ea6f0ab915d27bdbc1f0f1d81044f70d711dce2cbba0a819fd4e7be",
+    "before-reproduction.json": "22e26a38921f40347ba8171c54931819f0533c6f68603afd3fcb1790c928324a",
+    "changes.diff": "ad15365e6b77017e3765cfdc1659368de8201e9992e31ec9820b699648127b20",
+    "check-1.log": "a2ba576971784a4846898e00e5a9a8e4f25a283bee25ec5d104b7f3183c80588",
+    "check-2.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "check-3.log": "3bc53bf3e981a98a34a852e175bf9b77af841edea74fca595d9aedcbaf9a4938",
+    "checks.json": "6849f6a867c0154cc50659a25c8ddd0c6045fa6bb70a1b7bc267305471237e7a",
+    "code-bindings.json": "4ca30b919455a6a6e5a3ba22906e715d941dbc01a49def446c039dbae0e3480d",
+    "predecessor-and-finding.json": "ce71e38f0ba66ea7c901571c4bd8823cae3fd562a919ccb5d7863dd9df7f51be"
+  },
+  "artifactCount": 12,
+  "artifactBytes": 34515,
+  "currentCodeBindingsSha256": "4ca30b919455a6a6e5a3ba22906e715d941dbc01a49def446c039dbae0e3480d",
+  "sourceCompletenessQualified": false,
+  "recordAuthorityMinted": false,
+  "externalProviderCalls": 0,
+  "costUsd": null
+}

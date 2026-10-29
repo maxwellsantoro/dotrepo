@@ -1,0 +1,26 @@
+{
+  "synthetic": true,
+  "externalProviderCalls": 0,
+  "cases": [
+    {
+      "providerConfidence": "low",
+      "beforeNormalizedConfidence": "medium",
+      "afterNormalizedConfidence": "low",
+      "otherResponseFieldsUnchanged": true
+    },
+    {
+      "providerConfidence": "medium",
+      "beforeNormalizedConfidence": "medium",
+      "afterNormalizedConfidence": "medium",
+      "otherResponseFieldsUnchanged": true
+    },
+    {
+      "providerConfidence": "high",
+      "beforeNormalizedConfidence": "medium",
+      "afterNormalizedConfidence": "medium",
+      "otherResponseFieldsUnchanged": true
+    }
+  ],
+  "coreLowGate": "Unchanged context apply rejects Low; unchanged model ladder may continue a Low Rejected result only within shared remaining-call cap.",
+  "sourceInspectedOnlyAfterPythonFix": true
+}

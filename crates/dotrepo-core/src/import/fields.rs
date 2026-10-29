@@ -573,6 +573,7 @@ pub fn build_adjudication_requests(
             let mut candidates = Vec::new();
             if let Some(value) = github_value.filter(|value| !value.trim().is_empty()) {
                 candidates.push(AdjudicationCandidate {
+                    context_evidence: None,
                     value,
                     source_path: "GitHub API".into(),
                     source_tier: super::types::CommandSourceTier::GitHubApi,
@@ -580,6 +581,7 @@ pub fn build_adjudication_requests(
             }
             if let Some(value) = score_value.filter(|value| !value.trim().is_empty()) {
                 candidates.push(AdjudicationCandidate {
+                    context_evidence: None,
                     value,
                     source_path: "README.md".into(),
                     source_tier: super::types::CommandSourceTier::Manifest,
@@ -623,6 +625,7 @@ pub fn build_adjudication_requests(
             if let Some(value) = value.filter(|command| sanitize_import_command(command).is_some())
             {
                 candidates.push(AdjudicationCandidate {
+                    context_evidence: None,
                     value: value.clone(),
                     source_path: candidate.source_path.clone(),
                     source_tier: candidate.source_tier,
@@ -645,6 +648,9 @@ pub fn apply_adjudication_response(
     response: &AdjudicationModelResponse,
     request: &AdjudicationRequest,
 ) -> AdjudicationResult {
+    if super::context_adjudication::is_context_field(&request.field) {
+        return super::context_adjudication::apply(response, request);
+    }
     if response.field != request.field {
         return AdjudicationResult {
             field: request.field.clone(),
@@ -717,6 +723,28 @@ pub fn apply_adjudication_results(report: &mut FieldScoreReport, results: &[Adju
         let Some(score) = report.scores.iter_mut().find(|s| s.field == result.field) else {
             continue;
         };
+        if super::context_adjudication::is_context_field(&result.field) {
+            if matches!(
+                score.confidence,
+                FieldConfidence::HighConfidencePresent | FieldConfidence::HighConfidenceAbsent
+            ) {
+                continue;
+            }
+
+            match &result.outcome {
+                AdjudicationOutcome::Resolved { value, reason, .. }
+                    if score.value.as_deref() == Some(value.as_str()) =>
+                {
+                    score.confidence = FieldConfidence::MediumConfidencePresent;
+                    score.reason = format!("context adjudication: {reason}");
+                }
+                _ => {
+                    score.confidence = FieldConfidence::Unresolved;
+                    score.reason = "context adjudication did not establish an eligible exact tuple; candidate retained".into();
+                }
+            }
+            continue;
+        }
         if !matches!(
             score.confidence,
             FieldConfidence::Unresolved | FieldConfidence::Suspect

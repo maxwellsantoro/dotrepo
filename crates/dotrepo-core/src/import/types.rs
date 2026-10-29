@@ -158,6 +158,9 @@ pub struct FieldScoreReport {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AdjudicationCandidate {
+    /// Omitted for legacy scalar requests. Source content is untrusted data.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub context_evidence: Option<AdjudicationContextEvidence>,
     pub value: String,
     pub source_path: String,
     pub source_tier: CommandSourceTier,
@@ -181,6 +184,9 @@ pub enum AdjudicationModelConfidence {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AdjudicationModelResponse {
+    /// Required to equal the retained span identities for a context selection.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub citations: Vec<String>,
     pub field: String,
     pub value: Option<String>,
     pub confidence: AdjudicationModelConfidence,
@@ -342,4 +348,31 @@ pub(crate) struct ImportedCommandCandidate {
     pub(crate) source_tier: CommandSourceTier,
     pub(crate) build: Option<String>,
     pub(crate) test: Option<String>,
+}
+
+/// Internal provider input, not a manifest or public profile contract.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct AdjudicationContextEvidence {
+    pub candidate_id: String,
+    pub tuple_json: String,
+    pub generated_at: Option<String>,
+    pub source_revision: Option<String>,
+    pub revision_state: String,
+    pub sources: Vec<AdjudicationSourcePassage>,
+    pub omissions: Vec<String>,
+    pub limitations: Vec<String>,
+}
+
+/// Exact bounded source bytes and their whole-file and passage identities.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct AdjudicationSourcePassage {
+    pub citation_id: String,
+    pub path: String,
+    pub start_line: usize,
+    pub end_line: usize,
+    pub whole_file_sha256: String,
+    pub body_sha256: String,
+    pub body: String,
 }

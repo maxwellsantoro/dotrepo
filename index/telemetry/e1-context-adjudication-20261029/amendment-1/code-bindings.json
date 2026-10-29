@@ -1,0 +1,32 @@
+{
+  "changedPythonPaths": [
+    "scripts/adjudication_openrouter_sidecar.py",
+    "scripts/tests/test_openrouter_adjudication.py"
+  ],
+  "unchangedRustBoundaryPaths": [
+    "crates/dotrepo-core/src/import/context_adjudication.rs",
+    "crates/dotrepo-core/src/import/escalation/model_ladder.rs"
+  ],
+  "files": [
+    {
+      "path": "scripts/adjudication_openrouter_sidecar.py",
+      "sha256": "b700e597ea4d22a023bc2468de01166885200561ed5d39a15f07842c94af0468",
+      "bytes": 12780
+    },
+    {
+      "path": "scripts/tests/test_openrouter_adjudication.py",
+      "sha256": "f86ad18c824508a6c06fdd7e910c2f4f2827e839cfab083ab6dfa9027f273a27",
+      "bytes": 12218
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/context_adjudication.rs",
+      "sha256": "1c243cfda571fdf1598d03ccb8be63d62f9fbfbed659a9266355fc1a63fc4d3f",
+      "bytes": 17914
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/escalation/model_ladder.rs",
+      "sha256": "ec57688d2be9a53f70094c23f11af10385246eaba81429a2351a01d19727810e",
+      "bytes": 6531
+    }
+  ]
+}

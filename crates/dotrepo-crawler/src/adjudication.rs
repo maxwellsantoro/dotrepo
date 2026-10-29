@@ -67,6 +67,8 @@ struct AdjudicationHttpResponse {
     reason: String,
     source: Option<String>,
     tokens_used: Option<u64>,
+    #[serde(default)]
+    citations: Vec<String>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -132,6 +134,7 @@ impl AdjudicationProvider for HttpAdjudicationProvider {
 
         Ok(AdjudicationProviderResponse {
             response: dotrepo_core::AdjudicationModelResponse {
+                citations: response.citations,
                 field: response.field,
                 value: response.value,
                 confidence: response.confidence,
@@ -214,5 +217,55 @@ pub fn import_escalation_options_from_env() -> dotrepo_core::ImportEscalationOpt
         max_adjudication_calls,
         enable_second_opinion,
         enable_api_escalation,
+    }
+}
+
+#[cfg(test)]
+mod context_transport_tests {
+    use super::*;
+
+    #[test]
+    fn context_wire_carries_typed_source_bytes_and_citations_without_scalar_shape_change() {
+        let candidate = dotrepo_core::AdjudicationCandidate {
+            value: "{\"command\":\"cargo test\"}".into(),
+            source_path: "CONTRIBUTING.md".into(),
+            source_tier: dotrepo_core::CommandSourceTier::ContribDoc,
+            context_evidence: Some(dotrepo_core::AdjudicationContextEvidence {
+                candidate_id: "candidate".into(),
+                tuple_json: "{\"command\":\"cargo test\"}".into(),
+                generated_at: None,
+                source_revision: None,
+                revision_state: "unknown".into(),
+                sources: vec![dotrepo_core::AdjudicationSourcePassage {
+                    citation_id: "citation".into(),
+                    path: "CONTRIBUTING.md".into(),
+                    start_line: 1,
+                    end_line: 1,
+                    whole_file_sha256: "file".into(),
+                    body_sha256: "body".into(),
+                    body: "untrusted source text\n".into(),
+                }],
+                omissions: vec![],
+                limitations: vec!["completeness unresolved".into()],
+            }),
+        };
+        let candidates = [candidate];
+        let payload = AdjudicationHttpRequest {
+            field: "repo.test_candidates.0",
+            candidates: &candidates,
+            provider: "stub",
+            model: Some("stub"),
+            tier: "local_primary",
+        };
+        let wire = serde_json::to_value(payload).unwrap();
+        assert_eq!(
+            wire["candidates"][0]["contextEvidence"]["sources"][0]["body"],
+            "untrusted source text\n"
+        );
+        assert!(wire["candidates"][0]["contextEvidence"]["sourceRevision"].is_null());
+        let response:AdjudicationHttpResponse=serde_json::from_value(serde_json::json!({"field":"repo.test_candidates.0","value":candidates[0].value,"confidence":"medium","source":"CONTRIBUTING.md","reason":"synthetic","citations":["citation"]})).unwrap();
+        assert_eq!(response.citations, vec!["citation"]);
+        let response:AdjudicationHttpResponse=serde_json::from_value(serde_json::json!({"field":"repo.test","value":"cargo test","confidence":"medium","source":"CONTRIBUTING.md","reason":"legacy"})).unwrap();
+        assert!(response.citations.is_empty());
     }
 }

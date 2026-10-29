@@ -12,6 +12,7 @@ use crate::validate_manifest;
 
 mod adjudication;
 mod commands;
+mod context_adjudication;
 mod context_verification;
 mod escalation;
 mod evidence;
@@ -38,12 +39,13 @@ pub use fields::{
     score_import_fields,
 };
 pub use types::{
-    AdjudicationCandidate, AdjudicationModelConfidence, AdjudicationModelResponse,
-    AdjudicationOutcome, AdjudicationRequest, AdjudicationResult, CandidateProvenance,
-    CommandCandidateSelection, CommandCandidateSummary, CommandSourceTier, FieldConfidence,
-    FieldScore, FieldScoreReport, FieldScoreSummary, GitHubSnapshotFacts, ImportCommandCandidates,
-    ImportMode, ImportOptions, ImportPlan, ImportPreviewReport, ImportedCommandProvenance,
-    VerificationCheck, VerificationReport, VerificationSeverity,
+    AdjudicationCandidate, AdjudicationContextEvidence, AdjudicationModelConfidence,
+    AdjudicationModelResponse, AdjudicationOutcome, AdjudicationRequest, AdjudicationResult,
+    AdjudicationSourcePassage, CandidateProvenance, CommandCandidateSelection,
+    CommandCandidateSummary, CommandSourceTier, FieldConfidence, FieldScore, FieldScoreReport,
+    FieldScoreSummary, GitHubSnapshotFacts, ImportCommandCandidates, ImportMode, ImportOptions,
+    ImportPlan, ImportPreviewReport, ImportedCommandProvenance, VerificationCheck,
+    VerificationReport, VerificationSeverity,
 };
 
 pub use write::write_import_outputs;

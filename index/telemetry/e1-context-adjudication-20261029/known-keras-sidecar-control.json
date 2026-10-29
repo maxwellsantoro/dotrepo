@@ -1,0 +1,92 @@
+{
+  "syntheticResponse": true,
+  "promptSha256": "88e42d76c958ce7b670a4757b55dc0052a72006222e0fd7098cfa6047f24cb08",
+  "schemaSha256": "1ea5f2867e0850cfbbd260aa2afe309fbf4b8b59f16b7831956a475b965a2389",
+  "retainedSources": [
+    {
+      "path": "CONTRIBUTING.md",
+      "wholeFileSha256": "eff1a6349d222979e24b860c88e9577f603300af7658a1ac6fca3140992d0d3d",
+      "bodySha256": "fe9b69155bec1756ef6f16923443363a7eb36fce4e8f60176619113ebec2c543",
+      "startLine": 202,
+      "endLine": 224,
+      "bodyBytes": 525
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "wholeFileSha256": "eff1a6349d222979e24b860c88e9577f603300af7658a1ac6fca3140992d0d3d",
+      "bodySha256": "e597c278288603d13e7ae85643bc0163a152869b659413dac5f472878026c815",
+      "startLine": 81,
+      "endLine": 112,
+      "bodyBytes": 1008
+    },
+    {
+      "path": "README.md",
+      "wholeFileSha256": "6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8",
+      "bodySha256": "ed2521fcd333cf96b726167f776f1aa29db8556a0f048ca22799c48f0f0ef1be",
+      "startLine": 43,
+      "endLine": 65,
+      "bodyBytes": 453
+    },
+    {
+      "path": "README.md",
+      "wholeFileSha256": "6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8",
+      "bodySha256": "512cd9ac70242ac93de6f11e39200aa76f65ef5c9376934927d8e0e747092b8e",
+      "startLine": 91,
+      "endLine": 114,
+      "bodyBytes": 692
+    },
+    {
+      "path": "README.md",
+      "wholeFileSha256": "6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8",
+      "bodySha256": "96a456d365834debf843291aa9f21e1a6748685855d8d436d0d3712ff8e3bf91",
+      "startLine": 77,
+      "endLine": 90,
+      "bodyBytes": 640
+    },
+    {
+      "path": "pyproject.toml",
+      "wholeFileSha256": "51ac5db60612a4c92123980826c1010a6d087c7a64b11a580ebc33c21058d326",
+      "bodySha256": "51ac5db60612a4c92123980826c1010a6d087c7a64b11a580ebc33c21058d326",
+      "startLine": 1,
+      "endLine": 119,
+      "bodyBytes": 2883
+    },
+    {
+      "path": "requirements.txt",
+      "wholeFileSha256": "f34e2fa7d9bb205afe36e7cb8a0d53f6e3be39d0dc51b38de0619529e4e919b8",
+      "bodySha256": "f34e2fa7d9bb205afe36e7cb8a0d53f6e3be39d0dc51b38de0619529e4e919b8",
+      "startLine": 1,
+      "endLine": 26,
+      "bodyBytes": 619
+    },
+    {
+      "path": "requirements-common.txt",
+      "wholeFileSha256": "3df3a2a15e645bc03082648aec06570a4329fdad189e4b326df0be80d6a7615e",
+      "bodySha256": "3df3a2a15e645bc03082648aec06570a4329fdad189e4b326df0be80d6a7615e",
+      "startLine": 1,
+      "endLine": 37,
+      "bodyBytes": 498
+    }
+  ],
+  "normalized": {
+    "field": "repo.test_candidates.0",
+    "value": "{\"command\":\"pytest keras\",\"ecosystem\":\"Python\",\"source\":\"CONTRIBUTING.md\",\"context\":{\"command\":\"pytest keras\",\"working_directory\":\".\",\"scope\":\"repository\",\"prerequisites\":[\"Use Python >=3.11 as declared by pyproject.toml; the local setup guide states the weaker minimum 3.10. No runtime was inspected.\",\"Use the documented local setup route (CONTRIBUTING.md:81-112): To set up your local dev environment, you will need the following tools. 1. [git](https://github.com/) for code repository management. 2. [python](https://www.python.org/) to build and code in Keras. The following commands check the tools above are successfully installed. Note that Keras requires at least Python 3.10 to run. ```shell git --version python --version ``` Clone your forked repo to your local machine. Go to the cloned directory to install the dependencies. ```shell git clone https://github.com/YOUR_GITHUB_USERNAME/keras.git cd keras pip install -r requirements.txt ``` You then need to configure the backend to use, see the [Configuring your backend](https://github.com/keras-team/keras/blob/master/README.md#configuring-your-backend) section of the README. You can also add GPU support to your environment, see the [Adding GPU support](https://github.com/keras-team/keras/blob/master/README.md#adding-gpu-support) section of the README.\",\"Retain the local installation and platform conditions (README.md:43-65): Keras 3 is compatible with Linux and macOS systems. For Windows users, we recommend using WSL2 to run Keras. To install a local development version: 1. Install dependencies: ``` pip install -r requirements.txt ``` 2. Run installation command from the root directory. ``` python pip_build.py --install ``` 3. Run API generation script when creating PRs that update `keras_export` public APIs: ``` ./shell/api_gen.sh ```\",\"Configure a backend before imports and retain backend limitations (README.md:91-114): You can export the environment variable `KERAS_BACKEND` or you can edit your local config file at `~/.keras/keras.json` to configure your backend. Available backend options are: `\\\"tensorflow\\\"`, `\\\"jax\\\"`, `\\\"torch\\\"`, `\\\"openvino\\\"`. Example: ``` export KERAS_BACKEND=\\\"jax\\\" ``` In Colab, you can do: ```python import os os.environ[\\\"KERAS_BACKEND\\\"] = \\\"jax\\\" import keras ``` **Note:** The backend must be configured before importing `keras`, and the backend cannot be changed after the package has been imported. **Note:** The OpenVINO backend is an inference-only backend, meaning it is designed only for running model predictions using `model.predict()` method.\",\"Use the documented CPU requirements route; GPU setup is not established by this candidate: The `requirements.txt` file will install a CPU-only version of TensorFlow, JAX, and PyTorch.\",\"Retain default test coverage and the separately documented optional skip/backend variants (CONTRIBUTING.md:202-224): You can run all the tests locally by running the following command in the repo root directory. ```shell pytest keras ``` Note that you can skip the Keras applications tests using the `SKIP_APPLICATIONS_TESTS` environment variable. This will cut down the testing time significantly. ```shell SKIP_APPLICATIONS_TESTS=True pytest keras ``` To run all tests using a different backend, you can simply specify it on the command line. ```shell KERAS_BACKEND=jax SKIP_APPLICATIONS_TESTS=True pytest keras ```\",\"Install the complete retained requirements include chain: requirements.txt, requirements-common.txt. Environment markers and index declarations remain source data, not evidence of installed dependencies.\"],\"source\":\"CONTRIBUTING.md\"}}",
+    "confidence": "medium",
+    "reason": "owned synthetic transport selection only",
+    "source": "CONTRIBUTING.md",
+    "tokensUsed": 0,
+    "citations": [
+      "fba44af64af3a8a948b8980d6ab480028d8fb18c3c9c6ff5e0aea9376b8df530",
+      "c91e32c115427cafa292868b2606b86c2e7e7ef17f46f2537257ab3c35b64820",
+      "d743bffab6ecf84bb45f0b04370219e04287e4895840ac39ce5e5cdcea1b9e1b",
+      "9badb2d345281f963335db33e2b0d5bd1d7cfc5d59bcee94ca47ba25c664aeda",
+      "ee4596131347f7cffd16f57b993ca080421e77a9ec494953f355996d498e0298",
+      "cd104f322b6f1b669e286c86b3e2cca8470e8503db4410f0f31d43b1395ac49e",
+      "13d91aae094d9c17192bc75b1d7f1927ac7d4b06b3068bd015b53a57cdb2b7c8",
+      "2920f15f0f2744256cdfbb8aa276b1f454f904d45755818c1461e19dedb587bf"
+    ]
+  },
+  "sourceCompletenessEstablished": false,
+  "consumerBenefitMeasured": false,
+  "providerCallsExternal": 0
+}

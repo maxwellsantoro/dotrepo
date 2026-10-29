@@ -105,6 +105,15 @@ fail deterministic post-checks. Confident absence can terminate escalation;
 low-confidence absence/rejection continues when policy and budget permit.
 See [`import/escalation/`](../crates/dotrepo-core/src/import/escalation/).
 
+Existing contextual build/test candidates can also enter this ladder after
+scalar requests. They carry exact tuples and bounded source passages from the
+importer's admitted inputs; candidate-selected private paths alone cannot supply
+bodies. Selection requires unchanged source bytes and citations, stays at most
+Medium, and cannot promote a component command to a repository default. Missing
+evidence and abstention remain unresolved. These requests use the existing
+provider configuration and shared call cap; there is no separate context opt-in.
+They do not establish complete prerequisite coverage or consumer applicability.
+
 The tier order is deterministic resolution, bounded primary adjudicator,
 independent second opinion, then stronger remote adjudicator. Provider/model
 identity is runtime configuration, not a protocol constant. Most repositories
@@ -131,6 +140,10 @@ The batch hard ceiling is `INDEX_MAX_BATCH_ADJUDICATION_CALLS` or
 `--adjudication-call-budget`; each repository's `INDEX_MAX_ADJUDICATION_CALLS`
 is capped by the remaining budget. On exhaustion the runner removes provider
 URLs for remaining repositories, allowing deterministic partial progress.
+Source attachments are byte-bounded. Completion-token and provider price limits
+do not provide a pre-call prompt-token estimate or a total-dollar ceiling; larger
+requests can cost more within the same call cap. The deterministic-only operating
+decision above is not changed by adding context transport.
 Configuration and provider contracts live in
 [`adjudication.rs`](../crates/dotrepo-crawler/src/adjudication.rs) and
 [the sidecar](../scripts/adjudication_openrouter_sidecar.py).

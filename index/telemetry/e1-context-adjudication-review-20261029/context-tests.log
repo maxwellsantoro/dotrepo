@@ -1,0 +1,159 @@
+   Compiling dotrepo-core v2.0.0-rc.2 (/Users/maxwell/.codex/worktrees/e1-context-adjudication/dotrepo/crates/dotrepo-core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.37s
+     Running unittests src/lib.rs (/tmp/dotrepo-e1-context-adjudication-target/debug/deps/dotrepo_core-6af6d15045c80b2a)
+
+running 13 tests
+test import::context_adjudication::tests::ladder_rechecks_changed_sources_after_provider_and_retains_unresolved ... ok
+test import::context_adjudication::tests::candidate_paths_cannot_exfiltrate_unadmitted_private_source_bytes ... ok
+test import::context_adjudication::tests::context_request_retains_exact_tuple_bytes_and_explicit_unknowns ... ok
+test import::context_adjudication::tests::scalar_serialization_omits_context_and_old_responses_default_citations ... ok
+test import::context_adjudication::tests::existing_higher_confidence_context_score_is_not_replaced ... ok
+test import::context_adjudication::tests::evidence_mutation_and_retained_source_caps_are_checked ... ok
+test import::context_adjudication::tests::tuple_and_citation_mutations_are_rejected_and_abstention_is_not_absence ... ok
+test import::context_adjudication::tests::actual_ladder_transports_context_under_budget_without_scalar_or_conflict_promotion ... ok
+test import::context_adjudication::tests::repeated_bound_file_spans_preserve_exact_bytes_and_reject_time_span_mutation ... ok
+test import::context_adjudication::tests::source_reader_rejects_leaf_and_ancestor_symlinks ... ok
+test import::context_adjudication::tests::missing_malformed_changed_and_oversized_sources_disclose_and_refuse_selection ... ok
+test import::context_adjudication::tests::many_large_contexts_share_call_cap_and_preserve_existing_scalar_priority ... ok
+test import::context_adjudication::tests::real_known_keras_candidate_reaches_source_bound_request_without_new_extraction ... ok
+
+test result: ok. 13 passed; 0 failed; 0 ignored; 0 measured; 294 filtered out; finished in 0.04s
+
+     Running tests/adjudication_pipeline.rs (/tmp/dotrepo-e1-context-adjudication-target/debug/deps/adjudication_pipeline-c1bb7e5f17cc1d31)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 8 filtered out; finished in 0.00s
+
+     Running tests/auto_publish.rs (/tmp/dotrepo-e1-context-adjudication-target/debug/deps/auto_publish-0c2df6cabe5544c4)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 23 filtered out; finished in 0.00s
+
+     Running tests/claim_fixture_pack.rs (/tmp/dotrepo-e1-context-adjudication-target/debug/deps/claim_fixture_pack-96aa8f1cc0faa77a)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.00s
+
+     Running tests/docs_evidence.rs (/tmp/dotrepo-e1-context-adjudication-target/debug/deps/docs_evidence-99ac5bdcf49cbd07)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 3 filtered out; finished in 0.00s
+
+     Running tests/execution_context.rs (/tmp/dotrepo-e1-context-adjudication-target/debug/deps/execution_context-c95d8f75b4a7a915)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 11 filtered out; finished in 0.00s
+
+     Running tests/import_escalation_safety.rs (/tmp/dotrepo-e1-context-adjudication-target/debug/deps/import_escalation_safety-bc63373bbf85d771)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 6 filtered out; finished in 0.00s
+
+     Running tests/import_field_scoring.rs (/tmp/dotrepo-e1-context-adjudication-target/debug/deps/import_field_scoring-2512db18552c5288)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.00s
+
+     Running tests/import_fixture_pack.rs (/tmp/dotrepo-e1-context-adjudication-target/debug/deps/import_fixture_pack-687d8101fa2212c2)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 4 filtered out; finished in 0.00s
+
+     Running tests/import_input_boundaries.rs (/tmp/dotrepo-e1-context-adjudication-target/debug/deps/import_input_boundaries-c0fe9f21bc2f9339)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 6 filtered out; finished in 0.00s
+
+     Running tests/import_quality_gate.rs (/tmp/dotrepo-e1-context-adjudication-target/debug/deps/import_quality_gate-0c9f2def4d15fcd0)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.00s
+
+     Running tests/import_verification.rs (/tmp/dotrepo-e1-context-adjudication-target/debug/deps/import_verification-3fae21b091200ba5)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.00s
+
+     Running tests/path_containment.rs (/tmp/dotrepo-e1-context-adjudication-target/debug/deps/path_containment-814b437c1abd18ce)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 3 filtered out; finished in 0.00s
+
+     Running tests/public_batch_limits.rs (/tmp/dotrepo-e1-context-adjudication-target/debug/deps/public_batch_limits-f2f5de0fc58f5f1a)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.00s
+
+     Running tests/public_contract_compatibility.rs (/tmp/dotrepo-e1-context-adjudication-target/debug/deps/public_contract_compatibility-6340876fafcd8cee)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.00s
+
+     Running tests/public_error_fixture_pack.rs (/tmp/dotrepo-e1-context-adjudication-target/debug/deps/public_error_fixture_pack-77d6d52b50f13134)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.00s
+
+     Running tests/public_export_fixture_pack.rs (/tmp/dotrepo-e1-context-adjudication-target/debug/deps/public_export_fixture_pack-fac6d52aea1fe4cc)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 3 filtered out; finished in 0.00s
+
+     Running tests/public_freshness_semantics.rs (/tmp/dotrepo-e1-context-adjudication-target/debug/deps/public_freshness_semantics-e51ddc9e6ca39fb3)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 6 filtered out; finished in 0.00s
+
+     Running tests/public_query_fixture_pack.rs (/tmp/dotrepo-e1-context-adjudication-target/debug/deps/public_query_fixture_pack-d2f6502aff07aaef)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 3 filtered out; finished in 0.00s
+
+     Running tests/query_path_parity.rs (/tmp/dotrepo-e1-context-adjudication-target/debug/deps/query_path_parity-929e948e0c0435fe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 0.00s
+
+     Running tests/regression_fixture_pack.rs (/tmp/dotrepo-e1-context-adjudication-target/debug/deps/regression_fixture_pack-1064082bc700824e)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.00s
+
+     Running tests/relation_semantics.rs (/tmp/dotrepo-e1-context-adjudication-target/debug/deps/relation_semantics-440e82450dc45544)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 4 filtered out; finished in 0.00s
+
+     Running tests/synthesis_io_semantics.rs (/tmp/dotrepo-e1-context-adjudication-target/debug/deps/synthesis_io_semantics-d00e7dfba4b82604)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 8 filtered out; finished in 0.00s
+
+     Running tests/validate_repository_candidates.rs (/tmp/dotrepo-e1-context-adjudication-target/debug/deps/validate_repository_candidates-606e98786b30b92e)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 3 filtered out; finished in 0.00s
+

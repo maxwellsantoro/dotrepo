@@ -1,0 +1,24 @@
+{
+  "scope": "Local owned implementation/test iterations, not upstream defects",
+  "observations": [
+    {
+      "stage": "first cargo check",
+      "failure": "sha2 0.11 digest output does not implement LowerHex",
+      "resolution": "Use existing byte-to-lowercase-hex convention."
+    },
+    {
+      "stage": "first new unit compilation",
+      "failure": "Test moved RecordStatus then tried to compare it",
+      "resolution": "Clone baseline status; no production policy change."
+    },
+    {
+      "stage": "first new Keras unit run",
+      "failure": "Assumed existing scalar test absent",
+      "resolution": "Removed stale assumption; preserve existing scalar behavior and verify only source-tuple request transport."
+    },
+    {
+      "stage": "mock-only sidecar run",
+      "scope": "Initially23passed/1owned-loopbacktestdeselected; full24test suite subsequently authorized and passed."
+    }
+  ]
+}
