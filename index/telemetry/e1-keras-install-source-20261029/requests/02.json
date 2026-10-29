@@ -1,0 +1,25 @@
+{
+  "args": {
+    "repository_full_name": "keras-team/keras",
+    "path": "keras/src/version.py",
+    "ref": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+    "encoding": "base64"
+  },
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "ZnJvbSBrZXJhcy5zcmMuYXBpX2V4cG9ydCBpbXBvcnQga2VyYXNfZXhwb3J0\nCgojIFVuaXF1ZSBzb3VyY2Ugb2YgdHJ1dGggZm9yIHRoZSB2ZXJzaW9uIG51\nbWJlci4KX192ZXJzaW9uX18gPSAiMy4xNi4wIgoKCkBrZXJhc19leHBvcnQo\nImtlcmFzLnZlcnNpb24iKQpkZWYgdmVyc2lvbigpOgogICAgcmV0dXJuIF9f\ndmVyc2lvbl9fCg==\n",
+      "encoding": "base64",
+      "sha": "c8f0abf971f398a9da95492fb23da4f90dcb8719",
+      "display_url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/src/version.py",
+      "display_title": "version.py"
+    },
+    "isError": false
+  },
+  "reason": "pip_build.py imports keras.src.version"
+}

@@ -1,0 +1,52 @@
+{
+  "identity": "go-build-evidence-before-conflict-review",
+  "finding": "Module-only removal flag also blocks conflicting eligible maintainer alternatives; actual importer evidence plus frozen source-path proof. No direct CLI request-report claim.",
+  "newNativeUpstreamOrProviderCalls": 0,
+  "files": [
+    {
+      "path": "cli-build.log",
+      "sha256": "5f893505062b74835aa8d3c673edb2e763b32f1ab2ee428c151352cc378310d2",
+      "bytes": 266
+    },
+    {
+      "path": "observation.json",
+      "sha256": "b2e44f972aa4a83170765256bf948a47e41ed2c737e115166b312a0cffd9f701",
+      "bytes": 3987
+    },
+    {
+      "path": "reproduce.py",
+      "sha256": "2796377e72d791e156688e21df9279f39a9a9efcdde7649fd64b8d7ffc1fc1fb",
+      "bytes": 4088
+    },
+    {
+      "path": "source-before/crates/dotrepo-core/src/facade_tests/import_repository.rs.txt",
+      "sha256": "7971136b54544abbe7e383be64d190caf6b579c2e75f867df59851249c501c63",
+      "bytes": 48695
+    },
+    {
+      "path": "source-before/crates/dotrepo-core/src/import/commands/go_context/tests.rs.txt",
+      "sha256": "8e79a42e78483424105733b4de6e371415fab2fce69bcaef664ba0b185b95ebf",
+      "bytes": 31733
+    },
+    {
+      "path": "source-before/crates/dotrepo-core/src/import/commands/go_context.rs.txt",
+      "sha256": "04a4923b8eb025156362181658ed3265077fcc07d38be5e80707c76d930eb29f",
+      "bytes": 17245
+    },
+    {
+      "path": "source-before/crates/dotrepo-core/src/import/commands/mod.rs.txt",
+      "sha256": "b50bad2dca6b3dcfd23ef9cbead3359f394623e8523b3d6d88a506d2b4725379",
+      "bytes": 20705
+    },
+    {
+      "path": "source-before/crates/dotrepo-core/src/import/fields.rs.txt",
+      "sha256": "dfe9f0686824ff0df0ab481e835983e6789ad795c00cb88d305541f59f651b60",
+      "bytes": 30449
+    },
+    {
+      "path": "source-before/crates/dotrepo-core/tests/fixtures/import/expectations.json.txt",
+      "sha256": "a80e0ffa170701f5bc9e880115cc1a19a183ae24ce9117524d57f7d186c29651",
+      "bytes": 88613
+    }
+  ]
+}

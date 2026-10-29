@@ -1,0 +1,15 @@
+{
+  "packet": "index/telemetry/e1-context-binding-verifier-20261029",
+  "frozenAt": "2026-10-29",
+  "artifacts": 24,
+  "artifactManifestSha256": "d197c6cb3966bd38a195ea664d2bd76da541f8ee4ff0406835ba29fc5ac2897c",
+  "base": "72c654caaba1c88a7206815296bec91fa3bb5760",
+  "upstreamExecuted": false,
+  "networkProviderIndexCalls": 0,
+  "historicalInputsRewritten": false,
+  "remainingGates": [
+    "independent E1 verifier review",
+    "coordinator combined gates"
+  ],
+  "conclusion": "Mechanical integrity passed; semantic completeness/high promotion/consumer acceptance unresolved"
+}

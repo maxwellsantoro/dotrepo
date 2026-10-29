@@ -1,0 +1,1030 @@
+{
+  "baseCommit": "72c654caaba1c88a7206815296bec91fa3bb5760",
+  "branch": "codex/go-build-source-evidence",
+  "checks": {
+    "rustFinal": "8 command receipts all exit0",
+    "python": "850 passed; exit0",
+    "releaseGate": "passed including VSIX",
+    "operatorGate": "passed; exit0",
+    "isolatedSelectedIndexRuff": "check and format passed, --no-cache",
+    "focusedRegressionCanary": "2 passed; explicit absent-build contract"
+  },
+  "retainedFailures": [
+    "first full workspace run expected old Testify module-only build",
+    "first final rustfmt check rejected newly added assertion layout",
+    "author compile/order and independent counterexample failures retained in their owning packets"
+  ],
+  "limits": [
+    "Final public gate runs after this freeze; receipt stays outside index",
+    "Exact-head CI and native platform checks remain separate merge gates",
+    "Fresh report for the same unmodified plan/root is required for source scoring; no filesystem lease or report authentication",
+    "Keras completeness, fresh E1 qualification, Go01 policy/native collection, F05 campaign/model/budget, independent use and scheduled observation remain open"
+  ],
+  "inputs": [
+    {
+      "path": ".gitattributes",
+      "sha256": "4f893a98260875edb202426fe91897ccae98330a6129df4462ea63070560c769",
+      "bytes": 4037
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "5d60db02d950b32f5af724a65fba5cb343ede13c4b0e1cf12c0bead82ee38ca2",
+      "bytes": 36843
+    },
+    {
+      "path": "ROADMAP.md",
+      "sha256": "1178296df3c8c99d5dec8f3d26216c21f9b6f770642d32996262d7f1afee67d5",
+      "bytes": 25059
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/README.md",
+      "sha256": "921a1175a3dbd688515092de5bd2c634d08c7230ad3854506d2630ffd13fc560",
+      "bytes": 9879
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-1/BEFORE.json",
+      "sha256": "1e3d2d0904fbd56174b0151ca86555d49ef29e7930da2079ceb45fe5c911046a",
+      "bytes": 2388
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-1/README.md",
+      "sha256": "e78e0f9bf3aeb886da7e199d44c3678100e3ce00ab9404d619c39578474f4d1c",
+      "bytes": 4348
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-1/checks.json",
+      "sha256": "870873ba0159ebd06d51826b541017bbb5fc5cc0325fc73bcaad3cd89c0cf84f",
+      "bytes": 607
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-1/controls-final.json",
+      "sha256": "f77b5b7d2a267d5d80b38c9944e550a09e8d242fa3258ace4e5fbbdf4a6c8781",
+      "bytes": 25460
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-1/controls.json",
+      "sha256": "f77b5b7d2a267d5d80b38c9944e550a09e8d242fa3258ace4e5fbbdf4a6c8781",
+      "bytes": 25460
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-1/controls.py",
+      "sha256": "15512791bbd72cd47f04bd096847fd7f646a98c9eb8da9664c0a9228cf5a1c74",
+      "bytes": 13612
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-1/freeze.json",
+      "sha256": "490e3d6e535b7d06e97ee500063a3baa55bd8f28fdee8abbf4b0d0f1137a7d1b",
+      "bytes": 2087
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-1/hierarchy-results.json",
+      "sha256": "a2104c5c92b7c2b866066e772a385624ca1e9a8677b723f8a2792c388fb8b357",
+      "bytes": 18122
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-1/hierarchy_controls.py",
+      "sha256": "09c04d48c2376b12187266119d3b20471d9cb0285e28d2a6f1327eaa00ba3011",
+      "bytes": 10972
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-1/oracle.py",
+      "sha256": "059ac111da3e00605b06e8afcea92467bc294b7cec05d35203bfd402fccaa726",
+      "bytes": 16895
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-1/parallel-source-binding.json",
+      "sha256": "cdbce7836537937e9ddca9f29fb73b8590c0939c010376ae5a1b9ccdda852aa8",
+      "bytes": 2246
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/checks.json",
+      "sha256": "bcace73ee88f78906f4edda1105d8006fbaf0f010551aa6a1f661e70dfca3e23",
+      "bytes": 444
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/collection-required.json",
+      "sha256": "bac8e773da998d371be4724ff9f3c505bea1bb38c8a97884866a7f9e04603607",
+      "bytes": 823
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/contract-bindings.json",
+      "sha256": "dccdaa9cfea5631ece1ee4d0bc6a9274eba32945631af5aa4919dfcd4885ce98",
+      "bytes": 971
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/controls-final.json",
+      "sha256": "7f1f04b2a86b4f4fef9aeec9917ea33098373449d354334bf1e70c7037697f21",
+      "bytes": 25063
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/controls-final2.json",
+      "sha256": "c03ea5a36c9d8caad0dd770f34058e4b2161dfcf78201184699d5f7c9241d91a",
+      "bytes": 25446
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/controls.json",
+      "sha256": "09bb4312c993cc151f88487b2c6817b332cfe985e82cdcb4395517a054d6c142",
+      "bytes": 21501
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/controls.py",
+      "sha256": "b412bd3c0a8bfad132bad3cdcd5e0cc136638742519960600a7acb54784f58e3",
+      "bytes": 13605
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/derive.py",
+      "sha256": "4602936e5214b92fb2f4a0c51a8aea1bd2d1feb0981d31e5d3ec320a9034d519",
+      "bytes": 8867
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/freeze.json",
+      "sha256": "d7b8b8f6ad1a5bf7616b05333fac739c32efd79ef40c4e696bf5c336d7074cf2",
+      "bytes": 3209
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/oracle.py",
+      "sha256": "f58db90df7179c26413cdceb0efb9ddcb0a389902bae8a27524faea59a8c11dc",
+      "bytes": 14989
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/policy-proposal.json",
+      "sha256": "009c116c3dce44d97c4b3b870ed6f6a46bd72ad697ecdbd05ea2806857b524ff",
+      "bytes": 319621
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/skip-source-ledger.json",
+      "sha256": "85c1e2cc490e8a95abcba4b631f86c45c2f94607cd5c62fc7cb2598ef61ebb52",
+      "bytes": 449303
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/source-bindings.json",
+      "sha256": "4b57e26c46ce2d15fe1d7f31c57b07cfa9cc4f7434ee93d13f1a902516380116",
+      "bytes": 5589
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/unresolved-conditions.json",
+      "sha256": "7b24d633be6d2cd77dc16d38b7213b6f75679c220a7d847b970a0a544035f213",
+      "bytes": 3927
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/validation.json",
+      "sha256": "0b18f1451eaafe0cf227c526581e880c67ae36c73a4add3544a0d9ad067c1ebf",
+      "bytes": 1512
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/verify.py",
+      "sha256": "7f8596e6683bae1feb706a73895c5eeb6f12977761e689e1b3904a5db586c911",
+      "bytes": 4116
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-review-20261029/README.md",
+      "sha256": "13d82379ba2f44fd333a6e12c886b9fcbbbae4c36d26a9472c5fbed1bb7b1f6b",
+      "bytes": 6217
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-review-20261029/amendment-1/README.md",
+      "sha256": "38bf07a5be95fadc3734c69bb87b4db1f0ebc5243256b8ad55ec091292538470",
+      "bytes": 4412
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-review-20261029/amendment-1/author-BEFORE.json",
+      "sha256": "1e3d2d0904fbd56174b0151ca86555d49ef29e7930da2079ceb45fe5c911046a",
+      "bytes": 2388
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-review-20261029/amendment-1/author-base-controls-independent-rerun.json",
+      "sha256": "f77b5b7d2a267d5d80b38c9944e550a09e8d242fa3258ace4e5fbbdf4a6c8781",
+      "bytes": 25460
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-review-20261029/amendment-1/author-hierarchy-independent-rerun.json",
+      "sha256": "a2104c5c92b7c2b866066e772a385624ca1e9a8677b723f8a2792c388fb8b357",
+      "bytes": 18122
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-review-20261029/amendment-1/checks.json",
+      "sha256": "329c4d8dfe3ad130987d878413b25392c234a7a4d28f5faea9cbac8d5f577243",
+      "bytes": 688
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-review-20261029/amendment-1/freeze.json",
+      "sha256": "919ee07e22f7e360f1c2c5992e6daf9ec3408b2e0d73f1698b79a711d0346766",
+      "bytes": 1868
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-review-20261029/amendment-1/independent-results.json",
+      "sha256": "d1ec931c1e98bf548f4a44b303d0ae1505e2f191183dc092fb9e82e3fa303e89",
+      "bytes": 11543
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-review-20261029/amendment-1/independent_controls.py",
+      "sha256": "cf0a68d9b49b88c5a78a4b90291e124e1cd9a633aa2690d47e3233d8eaf63730",
+      "bytes": 6511
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-review-20261029/amendment-1/input-integrity.json",
+      "sha256": "a067eace9dabf0ac06600b14c7eebc8600485ff90191040d83892d7cf00f6323",
+      "bytes": 344
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-review-20261029/amendment-1/reviewed-oracle.diff",
+      "sha256": "d4ec0a67f19f9ab7c058750e3473859bae7f6c8d9a5ec961cb38ad331e2b0931",
+      "bytes": 4030
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-review-20261029/author-controls-independent-rerun.json",
+      "sha256": "c03ea5a36c9d8caad0dd770f34058e4b2161dfcf78201184699d5f7c9241d91a",
+      "bytes": 25446
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-review-20261029/author-verifier-independent-rerun.json",
+      "sha256": "ee9e89920a7c90fb9e5cb89980ed25cfb8a15ba1cde3b932fa6ab3d70d259c5a",
+      "bytes": 444
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-review-20261029/challenge-results.initial.json",
+      "sha256": "cd46975e25932acbb0812664c0ec1ee5ab4ec47160fcb23011b55d8c44ffd14a",
+      "bytes": 24479
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-review-20261029/challenge-results.json",
+      "sha256": "5df9a353f4236c9d9e315e7fc5293cfd9ab0319508ee9b5cd8c00112de530c0e",
+      "bytes": 24429
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-review-20261029/challenge.initial.py.txt",
+      "sha256": "645d5209a6256e956c6850c5a2d22acc30d56d5ca275984dc6e1ed8322d88670",
+      "bytes": 3516
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-review-20261029/challenge.py",
+      "sha256": "8945e4e12eaf97cf44a9906e6e2315e19dacf9af7bbde2f5a33e194cc6c75dab",
+      "bytes": 3600
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-review-20261029/freeze.json",
+      "sha256": "23848e0c6322915648b709cf85a3a044abc4e5d2de90f62b1dcebb8f22cdc62c",
+      "bytes": 2005
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-review-20261029/input-and-source-checks.json",
+      "sha256": "674ba3cc7a8b9eb6aa9755244333c27f965f6ed908f043099177669ae236c2e0",
+      "bytes": 1419
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-review-20261029/oracle.before.py.txt",
+      "sha256": "f58db90df7179c26413cdceb0efb9ddcb0a389902bae8a27524faea59a8c11dc",
+      "bytes": 14989
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-oracle-review-20261029/toolchain-source-spans.json",
+      "sha256": "dd18c4ee1715f5ce845a27cc6b3b13320a113dcbe107eac5bdb7e856611fca75",
+      "bytes": 5525
+    },
+    {
+      "path": "crates/dotrepo-core/src/facade_tests/import_repository.rs",
+      "sha256": "7971136b54544abbe7e383be64d190caf6b579c2e75f867df59851249c501c63",
+      "bytes": 48695
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/commands/go_context.rs",
+      "sha256": "8cfbf598cbc78929aa6e750fc5d677e77f1608c145aa81f94a84b09eaf15acea",
+      "bytes": 17631
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/commands/go_context/tests.rs",
+      "sha256": "d1e69f19c651f11315abbc1cff1a85cb4c9d65a83a7e851d9f50ec3ce1798bac",
+      "bytes": 35172
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/commands/mod.rs",
+      "sha256": "b50bad2dca6b3dcfd23ef9cbead3359f394623e8523b3d6d88a506d2b4725379",
+      "bytes": 20705
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/context_verification.rs",
+      "sha256": "ad337069d7a3cb53d3e09da91a4bfc09b6f27604759da273af876bcc1c2e3047",
+      "bytes": 6731
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/context_verification/tests.rs",
+      "sha256": "ecff5722fdb95773bd208f9a94e40f8ef755849cf2695e58ce35f11d7d17088f",
+      "bytes": 12464
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/fields.rs",
+      "sha256": "3c8af1dc2dfa47f6305b270d2a182cbdfcbd6b17b5e7db9507f25e70add54981",
+      "bytes": 30801
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/mod.rs",
+      "sha256": "90522b052d74729a1f5e77e0fac5ba349ee30c6385499ee4375bdc5acda24563",
+      "bytes": 31824
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/expectations.json",
+      "sha256": "a80e0ffa170701f5bc9e880115cc1a19a183ae24ce9117524d57f7d186c29651",
+      "bytes": 88613
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/regression/go-testify-canary/expectation.json",
+      "sha256": "e581f72db8f80051df5c1d8476c1d455cb7c4c78885ad49039845cfd379049df",
+      "bytes": 487
+    },
+    {
+      "path": "crates/dotrepo-core/tests/regression_fixture_pack.rs",
+      "sha256": "0cd3aaccb503993f9134734ec80a4bf9c845bd144134d45908e346817b070746",
+      "bytes": 17179
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-20261029/FREEZE.json",
+      "sha256": "9b001c54fd16b1f473251326bae82647a86770915fb9871bde6010d11674d0e5",
+      "bytes": 583
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-20261029/README.md",
+      "sha256": "3b40da65056ea6815803de03872c0c86289542b4652b5d7526fa3b718530da0a",
+      "bytes": 4193
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-20261029/artifact-hashes.json",
+      "sha256": "d197c6cb3966bd38a195ea664d2bd76da541f8ee4ff0406835ba29fc5ac2897c",
+      "bytes": 3986
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-20261029/checks/cli-build.log",
+      "sha256": "9b65cf48c363ce58aa1a2aaa394bfc077be12396e3457d1e7dcca8861271576a",
+      "bytes": 266
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-20261029/checks/clippy.log",
+      "sha256": "c45ac52c010ca2859c1f9fc9d32a9f3db1e03545de246928cb7a76c7f85d9add",
+      "bytes": 170
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-20261029/checks/compile-failed.log",
+      "sha256": "8a032a1a7a9f2a50d3f44d85c76d655d2ffdc288ff720cc767c7fb6a096fd6e8",
+      "bytes": 1549
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-20261029/checks/control-correction.json",
+      "sha256": "bd0e7fc311b003569db6b065ea0b413ebaa25c7c58190890494e257bd20166a1",
+      "bytes": 419
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-20261029/checks/quality-gate.log",
+      "sha256": "5f28c7cfc5921e7c05502bc1e6b6375b5d2dc65e1de9ae0cf78153037d7b4535",
+      "bytes": 521
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-20261029/checks/ruff-check.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-20261029/checks/ruff-format.log",
+      "sha256": "3bc53bf3e981a98a34a852e175bf9b77af841edea74fca595d9aedcbaf9a4938",
+      "bytes": 26
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-20261029/checks/unit-tests.log",
+      "sha256": "f8c9e1bfa7b41021a9f9d3506bb05f14cb6fa995636da04a10a643fa80672206",
+      "bytes": 1243
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-20261029/cli-recovery.json",
+      "sha256": "cd69f6612d9113012fcff3fae4d0fb6dad565d23587b37770643cd2a36c454c9",
+      "bytes": 12485
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-20261029/cli_recovery.py",
+      "sha256": "b73bd26b3823cd2f79cb72404c6e94d3bcfa6bd58f67a715e2e256ca8b909ac0",
+      "bytes": 3181
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-20261029/development-plan.json",
+      "sha256": "4b482427038cc199b7f7876d2df6de72eaf817b85ce558fc9c643a7215480e92",
+      "bytes": 2705
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-20261029/shared-wiring.patch",
+      "sha256": "06769dce27ca190b91e960dd9be20f7622c65b1f01c2d49d7b528daa15231a87",
+      "bytes": 881
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-20261029/source-bindings.json",
+      "sha256": "c5ecf35bba6ff351581931a1114cfecbe87377ff427aa527a0e580e4215798a1",
+      "bytes": 1601
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-20261029/source-snapshot/crates/dotrepo-core/src/facade_tests/import_repository.rs.txt",
+      "sha256": "7971136b54544abbe7e383be64d190caf6b579c2e75f867df59851249c501c63",
+      "bytes": 48695
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-20261029/source-snapshot/crates/dotrepo-core/src/import/commands/go_context.rs.txt",
+      "sha256": "8cfbf598cbc78929aa6e750fc5d677e77f1608c145aa81f94a84b09eaf15acea",
+      "bytes": 17631
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-20261029/source-snapshot/crates/dotrepo-core/src/import/commands/go_context/tests.rs.txt",
+      "sha256": "d1e69f19c651f11315abbc1cff1a85cb4c9d65a83a7e851d9f50ec3ce1798bac",
+      "bytes": 35172
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-20261029/source-snapshot/crates/dotrepo-core/src/import/commands/mod.rs.txt",
+      "sha256": "b50bad2dca6b3dcfd23ef9cbead3359f394623e8523b3d6d88a506d2b4725379",
+      "bytes": 20705
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-20261029/source-snapshot/crates/dotrepo-core/src/import/context_verification.rs.txt",
+      "sha256": "ad337069d7a3cb53d3e09da91a4bfc09b6f27604759da273af876bcc1c2e3047",
+      "bytes": 6731
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-20261029/source-snapshot/crates/dotrepo-core/src/import/context_verification/tests.rs.txt",
+      "sha256": "ecff5722fdb95773bd208f9a94e40f8ef755849cf2695e58ce35f11d7d17088f",
+      "bytes": 12464
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-20261029/source-snapshot/crates/dotrepo-core/src/import/fields.rs.txt",
+      "sha256": "3c8af1dc2dfa47f6305b270d2a182cbdfcbd6b17b5e7db9507f25e70add54981",
+      "bytes": 30801
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-20261029/source-snapshot/crates/dotrepo-core/src/import/mod.rs.txt",
+      "sha256": "90522b052d74729a1f5e77e0fac5ba349ee30c6385499ee4375bdc5acda24563",
+      "bytes": 31824
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-20261029/source-snapshot/crates/dotrepo-core/src/import/read.rs.txt",
+      "sha256": "eb85dbf4de4f108aa1fbaa746829386ba8e9c3f62afe2ee3dfd2559ace34d3eb",
+      "bytes": 4404
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-20261029/source-snapshot/crates/dotrepo-core/tests/fixtures/import/expectations.json.txt",
+      "sha256": "a80e0ffa170701f5bc9e880115cc1a19a183ae24ce9117524d57f7d186c29651",
+      "bytes": 88613
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-review-20261029/BEFORE.json",
+      "sha256": "a61d694a723b1abc605756280d6cef0ff91c9ea374ead3083924b060b665c719",
+      "bytes": 2400
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-review-20261029/FREEZE.json",
+      "sha256": "6ec4d1f041704b5811ce5583db196bf7834eb7c7170e236016655d4d98eb1a61",
+      "bytes": 3379
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-review-20261029/README.md",
+      "sha256": "6daf8e40e34cb9cf8ffa231f563699a94dee74fba661aab6ff3d9289a7132097",
+      "bytes": 5166
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-review-20261029/controls.json",
+      "sha256": "2d9566f3ea6ac81a659504f9f08ed99d1a4db7c0707c48328a0947af5d89fed9",
+      "bytes": 13539
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-review-20261029/execution/AFTER.json",
+      "sha256": "39313ee2f2d1ae80a7a66dfb5ace639ff8bf0da6329d01ecb0f3231837f5d9e6",
+      "bytes": 312
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-review-20261029/execution/controls/receipt.json",
+      "sha256": "c4ee4913141fcb12e86dce721425e7af3b334ba40372d2ae5770a1262078fd3b",
+      "bytes": 821
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-review-20261029/execution/controls/stderr.txt",
+      "sha256": "7a8af41b80339860bbf4a5240a80b4ba9c60f875ab82c659c32b9d577024c087",
+      "bytes": 2567
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-review-20261029/execution/controls/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-review-20261029/execution/lock-binding.json",
+      "sha256": "cdc5e79ca42d6cb8167edfd94bf25702f32c3dbde6ac08a2b0cd38c6b17d209c",
+      "bytes": 175
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-review-20261029/execution/lock/receipt.json",
+      "sha256": "b9ebb6718722de41eb23ea60603769c04d37fc4c171eecccaa65433eb46598f6",
+      "bytes": 654
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-review-20261029/execution/lock/stderr.txt",
+      "sha256": "6d63475bc4e46ff0c5a1d171528acdeaf01f5f757dccfcbb415b4a94d7c3d7ef",
+      "bytes": 528
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-review-20261029/execution/lock/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-review-20261029/focused-checks.json",
+      "sha256": "6182ab3c1b3c2d2b7568287a581f24d7cd8fac88f17f3130de918b79b9ed2e9c",
+      "bytes": 277
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-review-20261029/harness/Cargo.lock",
+      "sha256": "47f03a01aa735d14ec9bf70897d45dc81f597178fcaf8c2fc82afbceb5ddd8bf",
+      "bytes": 11365
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-review-20261029/harness/Cargo.toml",
+      "sha256": "302873209e3c946c0959b2a448fd6f12f79f8d971f9de9e6144a421b8ee7ba7f",
+      "bytes": 234
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-review-20261029/harness/src/main.rs",
+      "sha256": "a2e742527abf9f3fa1384df69d660c4af167867fd8337bff760e2dfb4e9fa49e",
+      "bytes": 10925
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-review-20261029/review.json",
+      "sha256": "aa2e3c642f41c9e6283223ccf8c36c0de63e1b353b8db4c970851f6060b78e04",
+      "bytes": 909
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-review-20261029/run_controls.py",
+      "sha256": "f317911d9a60a910d26ae7ca89ae72e89ecc6297d678c2ef9d93c8d93916cb50",
+      "bytes": 4779
+    },
+    {
+      "path": "index/telemetry/e1-context-binding-verifier-review-20261029/static-review.json",
+      "sha256": "841d67be3af43f0a44f83a12d718e838d26cabe8cf76addebaf8b286ea157aeb",
+      "bytes": 2044
+    },
+    {
+      "path": "index/telemetry/e1-keras-install-source-20261029/FREEZE.json",
+      "sha256": "6d00012a5b89bebd76d0f761bf1761213696350b6388cdb942d6deeed9ba9a1b",
+      "bytes": 604
+    },
+    {
+      "path": "index/telemetry/e1-keras-install-source-20261029/README.md",
+      "sha256": "0beeaf43c147836a97d8546d9342bcb944a6557b207c389b6ce48ec7b53f676d",
+      "bytes": 4702
+    },
+    {
+      "path": "index/telemetry/e1-keras-install-source-20261029/artifact-hashes.json",
+      "sha256": "634700e5a8ca673af8932b398acaf8b9c0401cb921217101a6b5bfa6b5566af9",
+      "bytes": 3648
+    },
+    {
+      "path": "index/telemetry/e1-keras-install-source-20261029/disposition.json",
+      "sha256": "01400a9738c804545c07c27b24b1f6cab54e08996c288bf90b8e0ad267320978",
+      "bytes": 24899
+    },
+    {
+      "path": "index/telemetry/e1-keras-install-source-20261029/plan.json",
+      "sha256": "5f96a552a582551a7cbea47a9204d9ca4818c023972de3798f25cccadad49cc2",
+      "bytes": 1236
+    },
+    {
+      "path": "index/telemetry/e1-keras-install-source-20261029/request-ledger.json",
+      "sha256": "eff35d003123a0f8dd76fe68dbe289ce58cf4cad2f82c39a405da5e2a149ff98",
+      "bytes": 8167
+    },
+    {
+      "path": "index/telemetry/e1-keras-install-source-20261029/requests/01.json",
+      "sha256": "f7488a7548292166bb040eafbb21f4a974d471f50c738994156748875d2097e7",
+      "bytes": 6765
+    },
+    {
+      "path": "index/telemetry/e1-keras-install-source-20261029/requests/02.json",
+      "sha256": "da65434ab2af7d97e8dab328e388449cdaa84eae3dd2e195c96abd379db7886d",
+      "bytes": 947
+    },
+    {
+      "path": "index/telemetry/e1-keras-install-source-20261029/requests/03.json",
+      "sha256": "28f569094cd8884ce0acc5dbdd5dfab41ee71fc65366d010b67e796a39c16f72",
+      "bytes": 1336
+    },
+    {
+      "path": "index/telemetry/e1-keras-install-source-20261029/requests/04.json",
+      "sha256": "3eb634e26460f6ddf9efcf50c0fd2001a2d64037d483fd28128233d466204c05",
+      "bytes": 1672
+    },
+    {
+      "path": "index/telemetry/e1-keras-install-source-20261029/requests/05.json",
+      "sha256": "be76a284b9644b5b5e8a85b69eaae952534c9ea967f9712653a59fd03e250a50",
+      "bytes": 4759
+    },
+    {
+      "path": "index/telemetry/e1-keras-install-source-20261029/requests/06.json",
+      "sha256": "28fc90e2d657bec61e7a36d9f1ee52e465247eeb2882031d395f3e0ccb6c3b0f",
+      "bytes": 7103
+    },
+    {
+      "path": "index/telemetry/e1-keras-install-source-20261029/requests/07.json",
+      "sha256": "f76f09330459b22aac8d0965f1ded350acc95a14612c99a15c1207a17cbcc172",
+      "bytes": 2321
+    },
+    {
+      "path": "index/telemetry/e1-keras-install-source-20261029/requests/08.json",
+      "sha256": "3860df5244d05b084cf3470a2c837a2a83f30d09f72365e63a3f601f693495ca",
+      "bytes": 20840
+    },
+    {
+      "path": "index/telemetry/e1-keras-install-source-20261029/requests/09-commit.json",
+      "sha256": "eb04148b774c9ca2c7d4fa4aeace55da83ba9f922d94648e6c00647682355a6e",
+      "bytes": 10130
+    },
+    {
+      "path": "index/telemetry/e1-keras-install-source-20261029/ruff-check.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    },
+    {
+      "path": "index/telemetry/e1-keras-install-source-20261029/ruff-format.log",
+      "sha256": "fd2299c9f1c6dc869070883e281051bfe93aacf66c1a3b0069f45b4aa410ca50",
+      "bytes": 25
+    },
+    {
+      "path": "index/telemetry/e1-keras-install-source-20261029/sources/keras/__init__.py.txt",
+      "sha256": "6ec3dd120fe34c1d5330e757ffe5db774a66c0aa01b0908f4c7fd39ead40d383",
+      "bytes": 446
+    },
+    {
+      "path": "index/telemetry/e1-keras-install-source-20261029/sources/keras/api/__init__.py.txt",
+      "sha256": "3e0df362a6b9bb3e5253858af4ca306107334be94addbee75a14f3c9f9ea7429",
+      "bytes": 2951
+    },
+    {
+      "path": "index/telemetry/e1-keras-install-source-20261029/sources/keras/src/__init__.py.txt",
+      "sha256": "1a2e12ec4882324134dcf6dd18da4575a518c92583b3f15c009f136b3f58d411",
+      "bytes": 684
+    },
+    {
+      "path": "index/telemetry/e1-keras-install-source-20261029/sources/keras/src/api_export.py.txt",
+      "sha256": "8173a404e9e6b1c574d7758073be65738529d35f8a920f44ca52004ff41672d8",
+      "bytes": 1173
+    },
+    {
+      "path": "index/telemetry/e1-keras-install-source-20261029/sources/keras/src/backend/__init__.py.txt",
+      "sha256": "b8af805a3f5b657a1cde3b5dd9137992121093477f97b8f13cc9cffa6751b126",
+      "bytes": 4645
+    },
+    {
+      "path": "index/telemetry/e1-keras-install-source-20261029/sources/keras/src/backend/config.py.txt",
+      "sha256": "a54307c8326eab51707bb0a87603cf1c209801f2c2a228ac6e3e4396b177bd28",
+      "bytes": 14565
+    },
+    {
+      "path": "index/telemetry/e1-keras-install-source-20261029/sources/keras/src/version.py.txt",
+      "sha256": "9f9719f7d69e3451a15765192fd37916e6980539aa1eb6c20d3b3cf82c65d4b2",
+      "bytes": 190
+    },
+    {
+      "path": "index/telemetry/e1-keras-install-source-20261029/sources/pip_build.py.txt",
+      "sha256": "d7192e9c67e260e98a328b2a88f27076fcc441fdfe889f75961fd79cce8275c3",
+      "bytes": 4464
+    },
+    {
+      "path": "index/telemetry/e1-keras-install-source-20261029/verification.json",
+      "sha256": "ec327af843a9ef90e42630ff0d44e3b82bc6e981b052987e139bbb3fbf493127",
+      "bytes": 155
+    },
+    {
+      "path": "index/telemetry/e1-keras-install-source-20261029/verify.py",
+      "sha256": "a65093c19adf3ba2f71bfe8a3b20fddf9dc7ee2728de5da96a3d4df1ea72fbd0",
+      "bytes": 2735
+    },
+    {
+      "path": "index/telemetry/e1-keras-source-disposition-20261029/FREEZE.json",
+      "sha256": "2c53e516f15aafe6c80e16aa2b9ff1b104b2537d0a67857052e8f9737303545d",
+      "bytes": 525
+    },
+    {
+      "path": "index/telemetry/e1-keras-source-disposition-20261029/README.md",
+      "sha256": "c912bbbcd71209e4ce7a6c41e79b4759889a52580fd8ad823ba839ee76c17ede",
+      "bytes": 1200
+    },
+    {
+      "path": "index/telemetry/e1-keras-source-disposition-20261029/disposition.json",
+      "sha256": "7ec613b55e20d0ab62f6f47aab095985dfdecf48786b44657f6bc937c265bcf4",
+      "bytes": 5423
+    },
+    {
+      "path": "index/telemetry/e1-keras-source-disposition-20261029/source-bindings.json",
+      "sha256": "ed072b83aade65c21d2eb31d201d051a909865ccd83a57d5b0d90254470309e2",
+      "bytes": 17053
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-20261029/README.md",
+      "sha256": "3a1d06988b29d4febcfb411e9b98f983ea1e98605cb1f2cf03cfd7b81ca7e767",
+      "bytes": 6670
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-20261029/before-conflict-fix-bindings.json",
+      "sha256": "15cbcb8e94f8ac67abe0218a9c85241eafda3295dafd8ff65ff194c55cdbec05",
+      "bytes": 863
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-20261029/checks.json",
+      "sha256": "f4e63cba8dd098dc91ca8524aa0f6f3f50d524e2ca1eece97705344e1e81c143",
+      "bytes": 1452
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-20261029/checks/clippy-before-conflict-fix.log",
+      "sha256": "c12bbebcf0924e896153940a00792327ba5289d00ca4d99003fa6c923c065f3e",
+      "bytes": 170
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-20261029/checks/clippy-final.log",
+      "sha256": "e30bf1692f0bbf4faa4bf82315dac33ba3d2f07458607ba8925c4e1548af1c70",
+      "bytes": 170
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-20261029/checks/commands-attempt-3-test-option-compile-failure.log",
+      "sha256": "4d4f5ec2737d31b74f9394874db65b719cb656d6e2d6994983d4d86431c9391e",
+      "bytes": 1348
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-20261029/checks/commands-before-conflict-fix.log",
+      "sha256": "e8d3c8a179f352787bec0f5f9e965324b7273e2fd5f3c814eec3b04d13d70b8b",
+      "bytes": 40497
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-20261029/checks/commands-final.log",
+      "sha256": "46074f29e6f6278f1985a5d586aa9c2b6ce55a405fc57aca61f39ea1c7ba8462",
+      "bytes": 41098
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-20261029/checks/facade-before-conflict-fix.log",
+      "sha256": "92fd5b4d99464a075ff0c29fd8f888168bab48978e71e06487408ffc449cf5ea",
+      "bytes": 476
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-20261029/checks/facade-final.log",
+      "sha256": "d6121474762f1566e88470428b0f5128277d1f922f9fc5039bac8eb4cb932b67",
+      "bytes": 378
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-20261029/checks/focused-attempt-1-compile-failure.log",
+      "sha256": "beef315e5d3c1c991429f6d0adb8a180be65c0ce78782e7c5b2599420c113774",
+      "bytes": 1991
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-20261029/checks/focused-attempt-2.log",
+      "sha256": "34feae945d8be6f8861cd46da45df928948084ed59f9ccf021bfa9c47a3151a9",
+      "bytes": 40507
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-20261029/checks/format-attempt-1-shared-call-failure.log",
+      "sha256": "13e4f8407560e18539e92eb60168a0f982ea3b6f7acca9fea09e99171b955ab4",
+      "bytes": 558
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-20261029/checks/format-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-20261029/checks/quality-attempt-1-imported-source-order-failure.log",
+      "sha256": "9b2a25ba5369eb6c7c19ebbaaeaf16965a6bb78af3ad37897697a850fa3b5896",
+      "bytes": 1031
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-20261029/checks/quality-final.log",
+      "sha256": "42aee4b63fff5fe2b902e11385636642f1333d81236977283879facd250f59dd",
+      "bytes": 521
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-20261029/control-receipts.json",
+      "sha256": "1d614d7ff5be8bba658ebdbfa538b43fe0c242325822c11d04694aac8401f25b",
+      "bytes": 46467
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-20261029/freeze.json",
+      "sha256": "b2c97dc0fb664bda4c59999db6ba55fc6e9a00c5d0f5bc49b388061340afe97f",
+      "bytes": 4422
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-20261029/implementation.patch",
+      "sha256": "cf13dd49ff2f8512d3df2df3439b792f13af55620fd021a338681d19ac44b444",
+      "bytes": 31740
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-20261029/input-source-bindings.json",
+      "sha256": "19d9492d876df35a781c1415631ea4349c27a2b9d1e9e6a3a645998da957d3bd",
+      "bytes": 8903
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-20261029/proposed-expectations-order-supplement.patch",
+      "sha256": "4bc0e3470826ebfb47f4a0fd57f8fd4b2620e28edef18aadee4a1ab2d636dab8",
+      "bytes": 399
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-20261029/proposed-expectations-summary.json",
+      "sha256": "ec963a5c79105207684aa2921e8de583cb821199da5eb8edcd7bb44394bf1b4f",
+      "bytes": 340
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-20261029/proposed-expectations.patch",
+      "sha256": "e52640d085e423bd464bd8ab395a346695526cbb5d78e1329b470aa44f3a4c09",
+      "bytes": 11369
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-20261029/proposed-facade-test.patch",
+      "sha256": "932038ee135cf25ad51316ddf118c721b401b266f713482dce01ce6cd6e3da0d",
+      "bytes": 1479
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-20261029/source-bindings.json",
+      "sha256": "9c8aa806bb7e2077c8f8c1c0ea1dfa4c3e8687e2359225ce616030b723a62849",
+      "bytes": 3088
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-review-20261029/FREEZE.json",
+      "sha256": "d39d9bdfcbd5e894fd9e54cd59b46209267b43211fd320180fbe9a498a7d60db",
+      "bytes": 529
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-review-20261029/README.md",
+      "sha256": "f0c3cfedef4ba1926c9bdc71637b23988c23a51ebe4cf20866b87ab5ab62dfd7",
+      "bytes": 3539
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-review-20261029/after-conflict/controls.py",
+      "sha256": "f107df996a9123a30ca69d20eb0bbda424d5c0d11c5cd90d02d81b137f566b32",
+      "bytes": 3876
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-review-20261029/after-conflict/focused-tests.log",
+      "sha256": "79a9c3a91f9fe4ba52fb5fb097be5a2c7afdddf290f6693984ad76770095bab5",
+      "bytes": 35946
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-review-20261029/after-conflict/observations.json",
+      "sha256": "6a7a577e7634f5cfa8f2b82f13f42acbdee9359cfec4713a5bcaee857e7beb4c",
+      "bytes": 12073
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-review-20261029/after-conflict/ruff-check.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-review-20261029/after-conflict/ruff-format.log",
+      "sha256": "3bc53bf3e981a98a34a852e175bf9b77af841edea74fca595d9aedcbaf9a4938",
+      "bytes": 26
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-review-20261029/after-conflict/source-bindings.json",
+      "sha256": "c5ecf35bba6ff351581931a1114cfecbe87377ff427aa527a0e580e4215798a1",
+      "bytes": 1601
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-review-20261029/after-conflict/source-snapshot/crates/dotrepo-core/src/facade_tests/import_repository.rs.txt",
+      "sha256": "7971136b54544abbe7e383be64d190caf6b579c2e75f867df59851249c501c63",
+      "bytes": 48695
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-review-20261029/after-conflict/source-snapshot/crates/dotrepo-core/src/import/commands/go_context.rs.txt",
+      "sha256": "8cfbf598cbc78929aa6e750fc5d677e77f1608c145aa81f94a84b09eaf15acea",
+      "bytes": 17631
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-review-20261029/after-conflict/source-snapshot/crates/dotrepo-core/src/import/commands/go_context/tests.rs.txt",
+      "sha256": "d1e69f19c651f11315abbc1cff1a85cb4c9d65a83a7e851d9f50ec3ce1798bac",
+      "bytes": 35172
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-review-20261029/after-conflict/source-snapshot/crates/dotrepo-core/src/import/commands/mod.rs.txt",
+      "sha256": "b50bad2dca6b3dcfd23ef9cbead3359f394623e8523b3d6d88a506d2b4725379",
+      "bytes": 20705
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-review-20261029/after-conflict/source-snapshot/crates/dotrepo-core/src/import/context_verification.rs.txt",
+      "sha256": "ad337069d7a3cb53d3e09da91a4bfc09b6f27604759da273af876bcc1c2e3047",
+      "bytes": 6731
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-review-20261029/after-conflict/source-snapshot/crates/dotrepo-core/src/import/context_verification/tests.rs.txt",
+      "sha256": "ecff5722fdb95773bd208f9a94e40f8ef755849cf2695e58ce35f11d7d17088f",
+      "bytes": 12464
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-review-20261029/after-conflict/source-snapshot/crates/dotrepo-core/src/import/fields.rs.txt",
+      "sha256": "3c8af1dc2dfa47f6305b270d2a182cbdfcbd6b17b5e7db9507f25e70add54981",
+      "bytes": 30801
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-review-20261029/after-conflict/source-snapshot/crates/dotrepo-core/src/import/mod.rs.txt",
+      "sha256": "90522b052d74729a1f5e77e0fac5ba349ee30c6385499ee4375bdc5acda24563",
+      "bytes": 31824
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-review-20261029/after-conflict/source-snapshot/crates/dotrepo-core/src/import/read.rs.txt",
+      "sha256": "eb85dbf4de4f108aa1fbaa746829386ba8e9c3f62afe2ee3dfd2559ace34d3eb",
+      "bytes": 4404
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-review-20261029/after-conflict/source-snapshot/crates/dotrepo-core/tests/fixtures/import/expectations.json.txt",
+      "sha256": "a80e0ffa170701f5bc9e880115cc1a19a183ae24ce9117524d57f7d186c29651",
+      "bytes": 88613
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-review-20261029/artifact-hashes.json",
+      "sha256": "54d5c865028de9318f14d4f137933b13064b0f1f8a194486582d4192c4bdba64",
+      "bytes": 5069
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-review-20261029/before-conflict/cli-build.log",
+      "sha256": "5f893505062b74835aa8d3c673edb2e763b32f1ab2ee428c151352cc378310d2",
+      "bytes": 266
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-review-20261029/before-conflict/freeze.json",
+      "sha256": "d160760b719b427b9b78af6c6563f83b4c11bf367fa5807c9ae4bb31495f0cc7",
+      "bytes": 1993
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-review-20261029/before-conflict/observation.json",
+      "sha256": "b2e44f972aa4a83170765256bf948a47e41ed2c737e115166b312a0cffd9f701",
+      "bytes": 3987
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-review-20261029/before-conflict/reproduce.py",
+      "sha256": "2796377e72d791e156688e21df9279f39a9a9efcdde7649fd64b8d7ffc1fc1fb",
+      "bytes": 4088
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-review-20261029/before-conflict/source-before/crates/dotrepo-core/src/facade_tests/import_repository.rs.txt",
+      "sha256": "7971136b54544abbe7e383be64d190caf6b579c2e75f867df59851249c501c63",
+      "bytes": 48695
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-review-20261029/before-conflict/source-before/crates/dotrepo-core/src/import/commands/go_context.rs.txt",
+      "sha256": "04a4923b8eb025156362181658ed3265077fcc07d38be5e80707c76d930eb29f",
+      "bytes": 17245
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-review-20261029/before-conflict/source-before/crates/dotrepo-core/src/import/commands/go_context/tests.rs.txt",
+      "sha256": "8e79a42e78483424105733b4de6e371415fab2fce69bcaef664ba0b185b95ebf",
+      "bytes": 31733
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-review-20261029/before-conflict/source-before/crates/dotrepo-core/src/import/commands/mod.rs.txt",
+      "sha256": "b50bad2dca6b3dcfd23ef9cbead3359f394623e8523b3d6d88a506d2b4725379",
+      "bytes": 20705
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-review-20261029/before-conflict/source-before/crates/dotrepo-core/src/import/fields.rs.txt",
+      "sha256": "dfe9f0686824ff0df0ab481e835983e6789ad795c00cb88d305541f59f651b60",
+      "bytes": 30449
+    },
+    {
+      "path": "index/telemetry/go-build-evidence-review-20261029/before-conflict/source-before/crates/dotrepo-core/tests/fixtures/import/expectations.json.txt",
+      "sha256": "a80e0ffa170701f5bc9e880115cc1a19a183ae24ce9117524d57f7d186c29651",
+      "bytes": 88613
+    },
+    {
+      "path": "index/telemetry/go-context-delivery-20261029/FREEZE.json",
+      "sha256": "78e674cf383d6f656056d838555fe7a28b9de2530c01d796e408db2d85ac0ed7",
+      "bytes": 1121
+    },
+    {
+      "path": "index/telemetry/go-context-delivery-20261029/README.md",
+      "sha256": "08cc9083dea58eee39cdd283a38250969e582b5ca078e2ce74b84179b2ba9130",
+      "bytes": 629
+    },
+    {
+      "path": "index/telemetry/go-context-delivery-20261029/main-protection.json",
+      "sha256": "da8cc5bc40e1a99e6aabba568bdefd33483a2ae12ce6c25326ce04d75120189e",
+      "bytes": 990
+    },
+    {
+      "path": "index/telemetry/go-context-delivery-20261029/observation.json",
+      "sha256": "66e0594832b2bf9927291354a9e383443263d89bb684a610c068061c910af98f",
+      "bytes": 314
+    },
+    {
+      "path": "index/telemetry/go-context-delivery-20261029/postmerge-ci.json",
+      "sha256": "2a9f49ef539dfbbd0fe11efbebcdbe2cada115a9602cb38318dd922245af3365",
+      "bytes": 20262
+    },
+    {
+      "path": "index/telemetry/go-context-delivery-20261029/pr187-ci.json",
+      "sha256": "2d8b21cc6947515583fe8aec49b7b9129d7f44d36fe610c8d6433d78c72219c3",
+      "bytes": 20262
+    },
+    {
+      "path": "index/telemetry/go-context-delivery-20261029/pr187.json",
+      "sha256": "7282a874976f94c093f5ec786fa7bb86f2a361e1243fdaa310f1b33f8e9b2ceb",
+      "bytes": 378
+    },
+    {
+      "path": "index/telemetry/go-context-delivery-20261029/publication-observation.json",
+      "sha256": "82fb0b67e292d99257ada8f1cc93f486a6837cb0fabdc42f182301a656ff89dc",
+      "bytes": 594
+    }
+  ]
+}

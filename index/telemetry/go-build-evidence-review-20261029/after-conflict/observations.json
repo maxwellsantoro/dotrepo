@@ -1,0 +1,119 @@
+{
+  "cliSha256": "b9cd73236bca71ecf4fb7aa06bfe131b1ecc41a9b0fdfb43de579fb6d24ce0d0",
+  "firstPartyCliImports": 5,
+  "upstreamExecuted": false,
+  "providerNetworkIndexCalls": 0,
+  "results": [
+    {
+      "case": "module-only",
+      "inputs": {
+        "go.mod": "module example.test/control\n\ngo 1.22\n"
+      },
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-build-review-after-67g2b1l3",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/control"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-build-review-after-67g2b1l3/record.toml\nimported /tmp/dotrepo-go-build-review-after-67g2b1l3/evidence.md\n- imported from: go.mod\n- inferred defaults: repo.name, repo.description, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "manifest": "schema = \"dotrepo/v0.1\"\n\n[record]\nmode = \"overlay\"\nstatus = \"inferred\"\nsource = \"https://example.test/control\"\ngenerated_at = \"2026-10-29T08:08:28.376029Z\"\n\n[record.trust]\nconfidence = \"medium\"\nprovenance = [\n    \"imported\",\n    \"inferred\",\n]\nnotes = \"Bootstrapped from `go.mod`. Filled `repo.name` and `repo.description` with inferred defaults. Inferred `repo.test` from `go.mod`. Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record.\"\n\n[repo]\nname = \"dotrepo-go-build-review-after-67g2b1l3\"\ndescription = \"Imported repository metadata; review and refine before relying on it.\"\nhomepage = \"https://example.test/control\"\nlanguages = []\ntest = \"go test ./...\"\ntopics = []\n\n[repo.toolchain]\nmin = \"1.22\"\necosystem = \"Go\"\n",
+      "evidence": "# Evidence\n\n- Inferred fallback values for `repo.name` and `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.test from go.mod as `go test ./...`.\n- Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction.\n- Imported repo.toolchain.min from go.mod as `1.22` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "explicit",
+      "inputs": {
+        "go.mod": "module example.test/control\n\ngo 1.22\n",
+        "README.md": "# Owned control\n\n## Build\n\n```sh\ngo build ./...\n```\n"
+      },
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-build-review-after-1lscdi71",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/control"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-build-review-after-1lscdi71/record.toml\nimported /tmp/dotrepo-go-build-review-after-1lscdi71/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "manifest": "schema = \"dotrepo/v0.1\"\n\n[record]\nmode = \"overlay\"\nstatus = \"inferred\"\nsource = \"https://example.test/control\"\ngenerated_at = \"2026-10-29T08:08:28.382805Z\"\n\n[record.trust]\nconfidence = \"medium\"\nprovenance = [\n    \"imported\",\n    \"inferred\",\n]\nnotes = \"Bootstrapped from `README.md` and `go.mod`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `README.md`. Inferred `repo.test` from `go.mod`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record.\"\n\n[repo]\nname = \"Owned control\"\ndescription = \"Imported repository metadata; review and refine before relying on it.\"\nhomepage = \"https://example.test/control\"\nlanguages = []\nbuild = \"go build ./...\"\ntest = \"go test ./...\"\ntopics = []\n\n[repo.toolchain]\nmin = \"1.22\"\necosystem = \"Go\"\n",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Imported repo.build from README.md as `go build ./...`.\n- Inferred repo.test from go.mod as `go test ./...`.\n- Imported repo.toolchain.min from go.mod as `1.22` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "explicit-conflict",
+      "inputs": {
+        "go.mod": "module example.test/control\n\ngo 1.22\n",
+        "README.md": "# Owned control\n\n## Build\n\n```sh\ngo build ./...\n```\n",
+        "CONTRIBUTING.md": "# Contributing\n\n## Build\n\n```sh\ngo build -tags=integration ./...\n```\n"
+      },
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-build-review-after-l6otb3ln",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/control"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-build-review-after-l6otb3ln/record.toml\nimported /tmp/dotrepo-go-build-review-after-l6otb3ln/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "manifest": "schema = \"dotrepo/v0.1\"\n\n[record]\nmode = \"overlay\"\nstatus = \"inferred\"\nsource = \"https://example.test/control\"\ngenerated_at = \"2026-10-29T08:08:28.389385Z\"\n\n[record.trust]\nconfidence = \"medium\"\nprovenance = [\n    \"imported\",\n    \"inferred\",\n]\nnotes = \"Bootstrapped from `README.md` and `go.mod`. Filled `repo.description` with inferred defaults. Left `repo.build` unset because `CONTRIBUTING.md` and `README.md` suggested conflicting build commands. Inferred `repo.test` from `go.mod`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record.\"\n\n[repo]\nname = \"Owned control\"\ndescription = \"Imported repository metadata; review and refine before relying on it.\"\nhomepage = \"https://example.test/control\"\nlanguages = []\ntest = \"go test ./...\"\ntopics = []\n\n[repo.toolchain]\nmin = \"1.22\"\necosystem = \"Go\"\n",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Left `repo.build` unset because `CONTRIBUTING.md` and `README.md` suggested conflicting build commands.\n- Inferred repo.test from go.mod as `go test ./...`.\n- Imported repo.toolchain.min from go.mod as `1.22` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "tagged-workflow",
+      "inputs": {
+        "go.mod": "module example.test/control\n\ngo 1.22\n",
+        ".github/workflows/ci.yml": "jobs:\n  build:\n    steps:\n      - run: go build -tags=integration ./...\n"
+      },
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-build-review-after-5j_pdylq",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/control"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-build-review-after-5j_pdylq/record.toml\nimported /tmp/dotrepo-go-build-review-after-5j_pdylq/evidence.md\n- imported from: .github/workflows/ci.yml, go.mod\n- inferred defaults: repo.name, repo.description, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "manifest": "schema = \"dotrepo/v0.1\"\n\n[record]\nmode = \"overlay\"\nstatus = \"inferred\"\nsource = \"https://example.test/control\"\ngenerated_at = \"2026-10-29T08:08:28.395853Z\"\n\n[record.trust]\nconfidence = \"medium\"\nprovenance = [\n    \"imported\",\n    \"inferred\",\n]\nnotes = \"Bootstrapped from `.github/workflows/ci.yml` and `go.mod`. Filled `repo.name` and `repo.description` with inferred defaults. Inferred `repo.build` from `.github/workflows/ci.yml`. Inferred `repo.test` from `go.mod`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record.\"\n\n[repo]\nname = \"dotrepo-go-build-review-after-5j_pdylq\"\ndescription = \"Imported repository metadata; review and refine before relying on it.\"\nhomepage = \"https://example.test/control\"\nlanguages = []\nbuild = \"go build -tags=integration ./...\"\ntest = \"go test ./...\"\ntopics = []\n\n[repo.toolchain]\nmin = \"1.22\"\necosystem = \"Go\"\n",
+      "evidence": "# Evidence\n\n- Inferred fallback values for `repo.name` and `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from .github/workflows/ci.yml as `go build -tags=integration ./...`.\n- Inferred repo.test from go.mod as `go test ./...`.\n- Imported repo.toolchain.min from go.mod as `1.22` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "service-test",
+      "inputs": {
+        "go.mod": "module example.test/control\n\ngo 1.22\n",
+        ".github/workflows/ci.yml": "jobs:\n  test:\n    services:\n      redis:\n        image: redis:7\n    steps:\n      - run: go test -race ./...\n"
+      },
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-build-review-after-epo905kr",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/control"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-build-review-after-epo905kr/record.toml\nimported /tmp/dotrepo-go-build-review-after-epo905kr/evidence.md\n- imported from: go.mod\n- inferred defaults: repo.name, repo.description\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "manifest": "schema = \"dotrepo/v0.1\"\n\n[record]\nmode = \"overlay\"\nstatus = \"inferred\"\nsource = \"https://example.test/control\"\ngenerated_at = \"2026-10-29T08:08:28.402885Z\"\n\n[record.trust]\nconfidence = \"medium\"\nprovenance = [\n    \"imported\",\n    \"inferred\",\n]\nnotes = \"Bootstrapped from `go.mod`. Filled `repo.name` and `repo.description` with inferred defaults. Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record.\"\n\n[repo]\nname = \"dotrepo-go-build-review-after-epo905kr\"\ndescription = \"Imported repository metadata; review and refine before relying on it.\"\nhomepage = \"https://example.test/control\"\nlanguages = []\ntopics = []\n\n[repo.toolchain]\nmin = \"1.22\"\necosystem = \"Go\"\n",
+      "evidence": "# Evidence\n\n- Inferred fallback values for `repo.name` and `repo.description` because the imported files did not provide enough structured metadata.\n- Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction.\n- Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite.\n- Imported repo.toolchain.min from go.mod as `1.22` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    }
+  ],
+  "limits": "CLI observes deterministic imports; direct request eligibility and budgets 0/2 are separately exercised in core tests. Workflow command preservation does not prove repository-default applicability."
+}

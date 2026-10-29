@@ -1,0 +1,517 @@
+{
+  "controls": [
+    {
+      "case": "child-starts-after-parent-terminal",
+      "before": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": true,
+        "testsPassed": true,
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "expectedTopLevelTests": 3,
+        "observedNestedTests": 2,
+        "packages": 3,
+        "excludedBehavior": [
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestAliasMergingWithNamespace",
+            "reason": "Known failing fourslash test",
+            "exercised": false
+          },
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+            "test": "TestATA/deduplicate_from_local_@types_packages",
+            "reason": "Todo - implement removing local @types from include list",
+            "exercised": false
+          }
+        ],
+        "failedTests": []
+      },
+      "after": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "nested run after ancestor terminal"
+      },
+      "frozenBeforeEventIdentityPreserved": true,
+      "passed": true
+    },
+    {
+      "case": "parent-terminal-while-child-running",
+      "before": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": true,
+        "testsPassed": true,
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "expectedTopLevelTests": 3,
+        "observedNestedTests": 2,
+        "packages": 3,
+        "excludedBehavior": [
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestAliasMergingWithNamespace",
+            "reason": "Known failing fourslash test",
+            "exercised": false
+          },
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+            "test": "TestATA/deduplicate_from_local_@types_packages",
+            "reason": "Todo - implement removing local @types from include list",
+            "exercised": false
+          }
+        ],
+        "failedTests": []
+      },
+      "after": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "parent terminal while descendant unfinished"
+      },
+      "frozenBeforeEventIdentityPreserved": true,
+      "passed": true
+    },
+    {
+      "case": "failing-child-with-passing-parent",
+      "before": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": true,
+        "testsPassed": false,
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "expectedTopLevelTests": 3,
+        "observedNestedTests": 2,
+        "packages": 3,
+        "excludedBehavior": [
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestAliasMergingWithNamespace",
+            "reason": "Known failing fourslash test",
+            "exercised": false
+          },
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+            "test": "TestATA/deduplicate_from_local_@types_packages",
+            "reason": "Todo - implement removing local @types from include list",
+            "exercised": false
+          }
+        ],
+        "failedTests": [
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestSyntheticActive/child"
+          }
+        ]
+      },
+      "after": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "failed descendant requires failed parent"
+      },
+      "frozenBeforeEventIdentityPreserved": true,
+      "passed": true
+    },
+    {
+      "case": "valid original parent-child",
+      "expectedCandidateCompletion": true,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": true,
+        "testsPassed": true,
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "expectedTopLevelTests": 3,
+        "observedNestedTests": 2,
+        "packages": 3,
+        "excludedBehavior": [
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestAliasMergingWithNamespace",
+            "reason": "Known failing fourslash test",
+            "exercised": false
+          },
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+            "test": "TestATA/deduplicate_from_local_@types_packages",
+            "reason": "Todo - implement removing local @types from include list",
+            "exercised": false
+          }
+        ],
+        "failedTests": []
+      },
+      "passed": true
+    },
+    {
+      "case": "valid sequential siblings after prior sibling terminal",
+      "expectedCandidateCompletion": true,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": true,
+        "testsPassed": true,
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "expectedTopLevelTests": 3,
+        "observedNestedTests": 3,
+        "packages": 3,
+        "excludedBehavior": [
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestAliasMergingWithNamespace",
+            "reason": "Known failing fourslash test",
+            "exercised": false
+          },
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+            "test": "TestATA/deduplicate_from_local_@types_packages",
+            "reason": "Todo - implement removing local @types from include list",
+            "exercised": false
+          }
+        ],
+        "failedTests": []
+      },
+      "passed": true
+    },
+    {
+      "case": "valid parallel siblings pause-cont remain nonterminal",
+      "expectedCandidateCompletion": true,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": true,
+        "testsPassed": true,
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "expectedTopLevelTests": 3,
+        "observedNestedTests": 3,
+        "packages": 3,
+        "excludedBehavior": [
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestAliasMergingWithNamespace",
+            "reason": "Known failing fourslash test",
+            "exercised": false
+          },
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+            "test": "TestATA/deduplicate_from_local_@types_packages",
+            "reason": "Todo - implement removing local @types from include list",
+            "exercised": false
+          }
+        ],
+        "failedTests": []
+      },
+      "passed": true
+    },
+    {
+      "case": "valid sibling prefix collision does not create ancestry",
+      "expectedCandidateCompletion": true,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": true,
+        "testsPassed": true,
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "expectedTopLevelTests": 3,
+        "observedNestedTests": 4,
+        "packages": 3,
+        "excludedBehavior": [
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestAliasMergingWithNamespace",
+            "reason": "Known failing fourslash test",
+            "exercised": false
+          },
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+            "test": "TestATA/deduplicate_from_local_@types_packages",
+            "reason": "Todo - implement removing local @types from include list",
+            "exercised": false
+          }
+        ],
+        "failedTests": []
+      },
+      "passed": true
+    },
+    {
+      "case": "grandchild starts after immediate parent terminal",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "nested run after ancestor terminal"
+      },
+      "passed": true
+    },
+    {
+      "case": "parent terminal while grandchild unfinished",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "parent terminal while descendant unfinished"
+      },
+      "passed": true
+    },
+    {
+      "case": "grandparent terminal while descendants unfinished",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "parent terminal while descendant unfinished"
+      },
+      "passed": true
+    },
+    {
+      "case": "valid complete child assertion failure propagates to parent",
+      "expectedCandidateCompletion": true,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": true,
+        "testsPassed": false,
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "expectedTopLevelTests": 3,
+        "observedNestedTests": 2,
+        "packages": 3,
+        "excludedBehavior": [
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestAliasMergingWithNamespace",
+            "reason": "Known failing fourslash test",
+            "exercised": false
+          },
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+            "test": "TestATA/deduplicate_from_local_@types_packages",
+            "reason": "Todo - implement removing local @types from include list",
+            "exercised": false
+          }
+        ],
+        "failedTests": [
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestSyntheticActive"
+          },
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestSyntheticActive/child"
+          }
+        ]
+      },
+      "passed": true
+    },
+    {
+      "case": "valid deep assertion failure propagates through all ancestors",
+      "expectedCandidateCompletion": true,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": true,
+        "testsPassed": false,
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "expectedTopLevelTests": 3,
+        "observedNestedTests": 3,
+        "packages": 3,
+        "excludedBehavior": [
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestAliasMergingWithNamespace",
+            "reason": "Known failing fourslash test",
+            "exercised": false
+          },
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+            "test": "TestATA/deduplicate_from_local_@types_packages",
+            "reason": "Todo - implement removing local @types from include list",
+            "exercised": false
+          }
+        ],
+        "failedTests": [
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestSyntheticActive"
+          },
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestSyntheticActive/child"
+          },
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestSyntheticActive/child/deep"
+          }
+        ]
+      },
+      "passed": true
+    },
+    {
+      "case": "deep failure with passing immediate parent rejected",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "failed descendant requires failed parent"
+      },
+      "passed": true
+    },
+    {
+      "case": "deep failure with passing grandparent rejected",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "failed descendant requires failed parent"
+      },
+      "passed": true
+    },
+    {
+      "case": "failed child with skipped parent rejected",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "failed descendant requires failed parent"
+      },
+      "passed": true
+    },
+    {
+      "case": "sibling-prefix failure affects only actual slash ancestors",
+      "expectedCandidateCompletion": true,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": true,
+        "testsPassed": false,
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "expectedTopLevelTests": 3,
+        "observedNestedTests": 4,
+        "packages": 3,
+        "excludedBehavior": [
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestAliasMergingWithNamespace",
+            "reason": "Known failing fourslash test",
+            "exercised": false
+          },
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+            "test": "TestATA/deduplicate_from_local_@types_packages",
+            "reason": "Todo - implement removing local @types from include list",
+            "exercised": false
+          }
+        ],
+        "failedTests": [
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestSyntheticActive"
+          },
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestSyntheticActive/childish"
+          },
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestSyntheticActive/childish/deep"
+          }
+        ]
+      },
+      "passed": true
+    },
+    {
+      "case": "top-level prefix names remain independent",
+      "expectedCandidateCompletion": true,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": true,
+        "testsPassed": true,
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "expectedTopLevelTests": 4,
+        "observedNestedTests": 2,
+        "packages": 3,
+        "excludedBehavior": [
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestAliasMergingWithNamespace",
+            "reason": "Known failing fourslash test",
+            "exercised": false
+          },
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+            "test": "TestATA/deduplicate_from_local_@types_packages",
+            "reason": "Todo - implement removing local @types from include list",
+            "exercised": false
+          }
+        ],
+        "failedTests": []
+      },
+      "passed": true
+    },
+    {
+      "case": "excluded-child-only manifest limitation retained",
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": true,
+        "testsPassed": true,
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "expectedTopLevelTests": 1,
+        "observedNestedTests": 1,
+        "packages": 1,
+        "excludedBehavior": [
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+            "test": "TestATA/deduplicate_from_local_@types_packages",
+            "reason": "Todo - implement removing local @types from include list",
+            "exercised": false
+          }
+        ],
+        "failedTests": []
+      },
+      "classification": "A claimed complete top-level manifest cannot prove unobserved intended children. No generic active-child predicate added; actual native manifest remains missing.",
+      "passed": true
+    }
+  ],
+  "passed": 18,
+  "originalAndBeforeBindingsUnchanged": true,
+  "nativeCollectionOccurred": false,
+  "taskOutcomeObserved": false,
+  "newDockerNetworkProviderNativeCalls": 0
+}

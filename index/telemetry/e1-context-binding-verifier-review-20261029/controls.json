@@ -1,0 +1,433 @@
+{
+  "highConfidenceOrCompletenessClaim": false,
+  "independentControls": [
+    {
+      "case": "baseline-repeated-path-spans",
+      "observed": {
+        "checks": [
+          {
+            "checkId": "context-source-bindings/repo.test_candidates.0",
+            "field": "repo.test_candidates.0",
+            "message": "Attached source hashes, line ranges, exact candidate, source and assessment time match; prerequisite completeness remains unresolved.",
+            "severity": "Pass"
+          }
+        ],
+        "confidence": "MediumConfidencePresent",
+        "verificationPassed": true
+      },
+      "passed": true
+    },
+    {
+      "case": "confidence-spoof-stays-medium",
+      "observed": {
+        "checks": [
+          {
+            "checkId": "context-source-bindings/repo.test_candidates.0",
+            "field": "repo.test_candidates.0",
+            "message": "Attached source hashes, line ranges, exact candidate, source and assessment time match; prerequisite completeness remains unresolved.",
+            "severity": "Pass"
+          }
+        ],
+        "confidence": "MediumConfidencePresent",
+        "verificationPassed": true
+      },
+      "passed": true
+    },
+    {
+      "case": "semantic-incompleteness-stays-medium",
+      "observed": {
+        "checks": [
+          {
+            "checkId": "context-source-bindings/repo.test_candidates.0",
+            "field": "repo.test_candidates.0",
+            "message": "Attached source hashes, line ranges, exact candidate, source and assessment time match; prerequisite completeness remains unresolved.",
+            "severity": "Pass"
+          }
+        ],
+        "confidence": "MediumConfidencePresent",
+        "verificationPassed": true
+      },
+      "passed": true
+    },
+    {
+      "case": "crlf-byte-change",
+      "observed": {
+        "checks": [
+          {
+            "checkId": "context-source-bindings/repo.test_candidates.0",
+            "field": "repo.test_candidates.0",
+            "message": "Attached contextual source integrity failed: source hash differs for requirements-common.txt",
+            "severity": "Failure"
+          }
+        ],
+        "confidence": "Unresolved",
+        "verificationPassed": false
+      },
+      "passed": true
+    },
+    {
+      "case": "invalid-utf8",
+      "observed": {
+        "checks": [
+          {
+            "checkId": "context-source-bindings/repo.test_candidates.0",
+            "field": "repo.test_candidates.0",
+            "message": "Attached contextual source integrity failed: invalid utf-8 sequence of 1 bytes from index 0",
+            "severity": "Failure"
+          }
+        ],
+        "confidence": "Unresolved",
+        "verificationPassed": false
+      },
+      "passed": true
+    },
+    {
+      "case": "directory-source",
+      "observed": {
+        "checks": [
+          {
+            "checkId": "context-source-bindings/repo.test_candidates.0",
+            "field": "repo.test_candidates.0",
+            "message": "Attached contextual source integrity failed: import input requirements-common.txt must be a regular file",
+            "severity": "Failure"
+          }
+        ],
+        "confidence": "Unresolved",
+        "verificationPassed": false
+      },
+      "passed": true
+    },
+    {
+      "case": "missing-source",
+      "observed": {
+        "checks": [
+          {
+            "checkId": "context-source-bindings/repo.test_candidates.0",
+            "field": "repo.test_candidates.0",
+            "message": "Attached contextual source integrity failed: refused import input requirements-common.txt: No such file or directory (os error 2)",
+            "severity": "Failure"
+          }
+        ],
+        "confidence": "Unresolved",
+        "verificationPassed": false
+      },
+      "passed": true
+    },
+    {
+      "case": "oversized-source",
+      "observed": {
+        "checks": [
+          {
+            "checkId": "context-source-bindings/repo.test_candidates.0",
+            "field": "repo.test_candidates.0",
+            "message": "Attached contextual source integrity failed: import input requirements-common.txt exceeds 2097152 bytes",
+            "severity": "Failure"
+          }
+        ],
+        "confidence": "Unresolved",
+        "verificationPassed": false
+      },
+      "passed": true
+    },
+    {
+      "case": "path-parent",
+      "observed": {
+        "checks": [
+          {
+            "checkId": "context-source-bindings/repo.test_candidates.0",
+            "field": "repo.test_candidates.0",
+            "message": "Attached contextual source integrity failed: invalid contained source path",
+            "severity": "Failure"
+          }
+        ],
+        "confidence": "Unresolved",
+        "verificationPassed": false
+      },
+      "passed": true
+    },
+    {
+      "case": "path-empty-component",
+      "observed": {
+        "checks": [
+          {
+            "checkId": "context-source-bindings/repo.test_candidates.0",
+            "field": "repo.test_candidates.0",
+            "message": "Attached contextual source integrity failed: invalid contained source path",
+            "severity": "Failure"
+          }
+        ],
+        "confidence": "Unresolved",
+        "verificationPassed": false
+      },
+      "passed": true
+    },
+    {
+      "case": "path-control",
+      "observed": {
+        "checks": [
+          {
+            "checkId": "context-source-bindings/repo.test_candidates.0",
+            "field": "repo.test_candidates.0",
+            "message": "Attached contextual source integrity failed: invalid contained source path",
+            "severity": "Failure"
+          }
+        ],
+        "confidence": "Unresolved",
+        "verificationPassed": false
+      },
+      "passed": true
+    },
+    {
+      "case": "path-colon",
+      "observed": {
+        "checks": [
+          {
+            "checkId": "context-source-bindings/repo.test_candidates.0",
+            "field": "repo.test_candidates.0",
+            "message": "Attached contextual source integrity failed: invalid contained source path",
+            "severity": "Failure"
+          }
+        ],
+        "confidence": "Unresolved",
+        "verificationPassed": false
+      },
+      "passed": true
+    },
+    {
+      "case": "hash-uppercase",
+      "observed": {
+        "checks": [
+          {
+            "checkId": "context-source-bindings/repo.test_candidates.0",
+            "field": "repo.test_candidates.0",
+            "message": "Attached contextual source integrity failed: source SHA256 must be 64 lowercase hexadecimal digits",
+            "severity": "Failure"
+          }
+        ],
+        "confidence": "Unresolved",
+        "verificationPassed": false
+      },
+      "passed": true
+    },
+    {
+      "case": "range-zero",
+      "observed": {
+        "checks": [
+          {
+            "checkId": "context-source-bindings/repo.test_candidates.0",
+            "field": "repo.test_candidates.0",
+            "message": "Attached contextual source integrity failed: source line range is invalid for CONTRIBUTING.md",
+            "severity": "Failure"
+          }
+        ],
+        "confidence": "Unresolved",
+        "verificationPassed": false
+      },
+      "passed": true
+    },
+    {
+      "case": "range-past-end",
+      "observed": {
+        "checks": [
+          {
+            "checkId": "context-source-bindings/repo.test_candidates.0",
+            "field": "repo.test_candidates.0",
+            "message": "Attached contextual source integrity failed: source line range is invalid for CONTRIBUTING.md",
+            "severity": "Failure"
+          }
+        ],
+        "confidence": "Unresolved",
+        "verificationPassed": false
+      },
+      "passed": true
+    },
+    {
+      "case": "span-duplicate",
+      "observed": {
+        "checks": [
+          {
+            "checkId": "context-source-bindings/repo.test_candidates.0",
+            "field": "repo.test_candidates.0",
+            "message": "Attached contextual source integrity failed: duplicate source binding span",
+            "severity": "Failure"
+          }
+        ],
+        "confidence": "Unresolved",
+        "verificationPassed": false
+      },
+      "passed": true
+    },
+    {
+      "case": "attachment-empty",
+      "observed": {
+        "checks": [
+          {
+            "checkId": "context-source-bindings/repo.test_candidates.0",
+            "field": "repo.test_candidates.0",
+            "message": "Attached contextual source integrity failed: source binding set must contain 1..=128 entries",
+            "severity": "Failure"
+          }
+        ],
+        "confidence": "Unresolved",
+        "verificationPassed": false
+      },
+      "passed": true
+    },
+    {
+      "case": "attachment-nonstring",
+      "observed": {
+        "checks": [
+          {
+            "checkId": "context-source-bindings/repo.test_candidates.0",
+            "field": "repo.test_candidates.0",
+            "message": "Attached contextual source integrity failed: sourceBindingsJson must be a JSON string",
+            "severity": "Failure"
+          }
+        ],
+        "confidence": "Unresolved",
+        "verificationPassed": false
+      },
+      "passed": true
+    },
+    {
+      "case": "attachment-too-many",
+      "observed": {
+        "checks": [
+          {
+            "checkId": "context-source-bindings/repo.test_candidates.0",
+            "field": "repo.test_candidates.0",
+            "message": "Attached contextual source integrity failed: source binding set must contain 1..=128 entries",
+            "severity": "Failure"
+          }
+        ],
+        "confidence": "Unresolved",
+        "verificationPassed": false
+      },
+      "passed": true
+    },
+    {
+      "case": "attachment-too-large",
+      "observed": {
+        "checks": [
+          {
+            "checkId": "context-source-bindings/repo.test_candidates.0",
+            "field": "repo.test_candidates.0",
+            "message": "Attached contextual source integrity failed: source binding attachment exceeds byte limit",
+            "severity": "Failure"
+          }
+        ],
+        "confidence": "Unresolved",
+        "verificationPassed": false
+      },
+      "passed": true
+    },
+    {
+      "case": "command-source-unbound",
+      "observed": {
+        "checks": [
+          {
+            "checkId": "context-source-bindings/repo.test_candidates.0",
+            "field": "repo.test_candidates.0",
+            "message": "Attached contextual source integrity failed: candidate command/context source is not in its binding set",
+            "severity": "Failure"
+          }
+        ],
+        "confidence": "Unresolved",
+        "verificationPassed": false
+      },
+      "passed": true
+    },
+    {
+      "case": "context-source-unbound",
+      "observed": {
+        "checks": [
+          {
+            "checkId": "context-source-bindings/repo.test_candidates.0",
+            "field": "repo.test_candidates.0",
+            "message": "Attached contextual source integrity failed: candidate command/context source is not in its binding set",
+            "severity": "Failure"
+          }
+        ],
+        "confidence": "Unresolved",
+        "verificationPassed": false
+      },
+      "passed": true
+    },
+    {
+      "case": "tuple-changed",
+      "observed": {
+        "checks": [
+          {
+            "checkId": "context-source-bindings/repo.test_candidates.0",
+            "field": "repo.test_candidates.0",
+            "message": "Attached contextual source integrity failed: candidate differs from its bound exact value",
+            "severity": "Failure"
+          }
+        ],
+        "confidence": "Unresolved",
+        "verificationPassed": false
+      },
+      "passed": true
+    },
+    {
+      "case": "checked-time-changed",
+      "observed": {
+        "checks": [
+          {
+            "checkId": "context-source-bindings/repo.test_candidates.0",
+            "field": "repo.test_candidates.0",
+            "message": "Attached contextual source integrity failed: candidate source assessment time differs from generation time",
+            "severity": "Failure"
+          }
+        ],
+        "confidence": "Unresolved",
+        "verificationPassed": false
+      },
+      "passed": true
+    },
+    {
+      "case": "missing-generation",
+      "observed": {
+        "checks": [
+          {
+            "checkId": "context-source-bindings/repo.test_candidates.0",
+            "field": "repo.test_candidates.0",
+            "message": "Attached contextual source integrity failed: candidate generation time is absent",
+            "severity": "Failure"
+          }
+        ],
+        "confidence": "Unresolved",
+        "verificationPassed": false
+      },
+      "passed": true
+    },
+    {
+      "case": "absence-preserves-no-score",
+      "observed": {
+        "checks": [],
+        "confidence": "absent",
+        "verificationPassed": true
+      },
+      "passed": true
+    },
+    {
+      "case": "stale-report-caller-precondition",
+      "classification": "documented API limitation, not canonical-flow defect",
+      "fresh": {
+        "checks": [
+          {
+            "checkId": "context-source-bindings/repo.test_candidates.0",
+            "field": "repo.test_candidates.0",
+            "message": "Attached contextual source integrity failed: expected ident at line 1 column 2",
+            "severity": "Failure"
+          }
+        ],
+        "confidence": "Unresolved",
+        "verificationPassed": false
+      },
+      "passed": true,
+      "staleConfidence": "MediumConfidencePresent"
+    }
+  ],
+  "upstreamExecution": false
+}

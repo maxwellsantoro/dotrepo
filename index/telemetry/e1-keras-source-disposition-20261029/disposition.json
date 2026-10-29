@@ -1,0 +1,92 @@
+{
+  "identity": "e1-keras-source-disposition-20261029",
+  "assessor": "coordinator /root, separate from current mechanical-verifier implementation assignment; prior project and development-result context disclosed",
+  "observedAt": "2026-10-29T07:55:18.189976+00:00",
+  "classification": "known E1 development source assessment, not fresh qualification gold, native execution, independent consumer use or causal benefit",
+  "repository": "github.com/keras-team/keras",
+  "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+  "documentedCandidate": {
+    "command": "pytest keras",
+    "directory": ".",
+    "scope": "repository",
+    "source": "CONTRIBUTING.md:202-209",
+    "status": "documented local all-tests instruction; prerequisite completeness unresolved"
+  },
+  "dispositions": [
+    {
+      "topic": "runtime",
+      "established": "Contributing guide says Python at least 3.10; pinned project metadata requires >=3.11. Retain both assertions and the disagreement; do not present the guide minimum alone as sufficient.",
+      "support": [
+        "CONTRIBUTING.md:85-94",
+        "pyproject.toml:12"
+      ]
+    },
+    {
+      "topic": "local setup",
+      "established": "Root requirements install and backend configuration are documented. README local install adds pip_build.py --install; its implementation has not been inspected in this packet.",
+      "unresolved": "Script behavior, build prerequisites and whether its local install route is necessary/sufficient for all pytest cases remain open. No prerequisite completeness or installation success asserted.",
+      "support": [
+        "CONTRIBUTING.md:96-111",
+        "README.md:41-64"
+      ]
+    },
+    {
+      "topic": "backend choice",
+      "established": "README requires selecting a backend before importing Keras and describes OpenVINO as inference-only. CONTRIBUTING documents backend variants; optional SKIP_APPLICATIONS_TESTS changes scope.",
+      "unresolved": "Do not declare all listed backends interchangeable for the full local suite or silently set the optional skip.",
+      "support": [
+        "README.md:91-113",
+        "CONTRIBUTING.md:211-224"
+      ]
+    },
+    {
+      "topic": "backend minima",
+      "established": "The table states TensorFlow2.16.1/JAX0.4.20/PyTorch2.6.0/OpenVINO2026.2.0 for the latest stable Keras v3.x release.",
+      "unresolved": "That release qualification does not establish the minimum sufficient versions for every development-snapshot test. Requirements are not a fully locked environment; retain qualification instead of promoting universal snapshot minima.",
+      "support": [
+        "README.md:66-88",
+        "requirements.txt",
+        "requirements-common.txt"
+      ]
+    },
+    {
+      "topic": "CI setup",
+      "established": "Pinned CPU workflow uses Python3.11-slim, backend configuration, build-essential with a Torch Dynamo comment, and extra no-deps tf_keras installation. It also uninstalls installed keras.",
+      "unresolved": "These are CI observations and possible missing local context. They do not prove build-essential or tf_keras mandatory for every documented local backend/task; required local applicability needs code/source assessment.",
+      "support": [
+        ".github/workflows/cpu_tests.yml:22-49",
+        ".github/workflows/cpu_tests.yml:66-70"
+      ]
+    },
+    {
+      "topic": "CI-only auxiliaries",
+      "established": "Workflow comments attribute curl/git/gpg installation to codecov. Coverage upload has its own optional token and nonfatal failure setting.",
+      "unresolved": "Do not copy the uploader secret/tool chain into local-test prerequisites. This does not negate independently documented git requirements or prove absence of other uses.",
+      "support": [
+        ".github/workflows/cpu_tests.yml:40-49",
+        ".github/workflows/cpu_tests.yml:167-175",
+        "CONTRIBUTING.md:85"
+      ]
+    },
+    {
+      "topic": "scope/execution",
+      "established": "CPU main suite excludes applications/wrappers, which have conditional separate steps; integrations and no-xdist/multi-device variants are separate. NNX matrix has conditional narrower flow.",
+      "unresolved": "Successful CI jobs/steps cannot establish that unfiltered pytest keras executed successfully or that every conditional suite ran. No execution observation is newly claimed.",
+      "support": [
+        ".github/workflows/cpu_tests.yml:72-75",
+        ".github/workflows/cpu_tests.yml:88-108",
+        ".github/workflows/cpu_tests.yml:115-160",
+        ".github/workflows/actions.yml:3-4"
+      ]
+    }
+  ],
+  "decision": {
+    "sourceIntegrity": "Whole-file hashes match retained exact-revision source inventory; selected spans support only stated assertions. Hash match is not prerequisite completeness.",
+    "completeInstructionEstablished": false,
+    "highConfidencePromotionJustified": false,
+    "consumerAcceptanceJustified": false,
+    "existingMediumCandidate": "Retain only while exact tuple/time/source/hash bindings remain valid, with independent completeness unresolved.",
+    "nextEvidence": "Inspect exact-revision pip_build.py and relevant backend/test setup source before any complete-local-instruction claim; acquire only under a separate bounded source packet."
+  },
+  "actions": "Read retained local source and hash it only. No new fetch, package install, upstream execution, Docker, provider/model call or index record change."
+}

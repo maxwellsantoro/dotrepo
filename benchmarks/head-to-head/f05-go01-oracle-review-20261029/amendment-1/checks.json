@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "remainingBoundedFindings": 0,
+  "exactBeforeCasesOldAcceptNewReject": 3,
+  "authorBaseControls": 60,
+  "authorHierarchyControls": 18,
+  "independentControlsIncludingExactBefore": 10,
+  "ruffCheck": "passed",
+  "ruffFormatCheck": "passed",
+  "sourcePolicyConstantsUnchanged": true,
+  "policyAccepted": false,
+  "nativeCollectionOccurred": false,
+  "actualTaskOutcomeObserved": false,
+  "newCalls": {
+    "Cargo": 0,
+    "Docker": 0,
+    "native": 0,
+    "network": 0,
+    "package": 0,
+    "provider": 0
+  },
+  "reviewHarnessCorrection": "Initial tuple item assignment raised TypeError before evaluating; corrected event-list mutation. Not an oracle failure."
+}

@@ -1,0 +1,61 @@
+{
+  "identity": "independent-go01-oracle-before-amendment-review-20261029",
+  "authorFreezeSha256": "d7b8b8f6ad1a5bf7616b05333fac739c32efd79ef40c4e696bf5c336d7074cf2",
+  "oracleSha256": "f58db90df7179c26413cdceb0efb9ddcb0a389902bae8a27524faea59a8c11dc",
+  "findings": 2,
+  "acceptedMalformedSyntheticCases": 3,
+  "nativeCollectionOccurred": false,
+  "actualTaskOutcomeObserved": false,
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 6217,
+      "sha256": "13d82379ba2f44fd333a6e12c886b9fcbbbae4c36d26a9472c5fbed1bb7b1f6b"
+    },
+    {
+      "path": "author-controls-independent-rerun.json",
+      "bytes": 25446,
+      "sha256": "c03ea5a36c9d8caad0dd770f34058e4b2161dfcf78201184699d5f7c9241d91a"
+    },
+    {
+      "path": "author-verifier-independent-rerun.json",
+      "bytes": 444,
+      "sha256": "ee9e89920a7c90fb9e5cb89980ed25cfb8a15ba1cde3b932fa6ab3d70d259c5a"
+    },
+    {
+      "path": "challenge-results.initial.json",
+      "bytes": 24479,
+      "sha256": "cd46975e25932acbb0812664c0ec1ee5ab4ec47160fcb23011b55d8c44ffd14a"
+    },
+    {
+      "path": "challenge-results.json",
+      "bytes": 24429,
+      "sha256": "5df9a353f4236c9d9e315e7fc5293cfd9ab0319508ee9b5cd8c00112de530c0e"
+    },
+    {
+      "path": "challenge.initial.py.txt",
+      "bytes": 3516,
+      "sha256": "645d5209a6256e956c6850c5a2d22acc30d56d5ca275984dc6e1ed8322d88670"
+    },
+    {
+      "path": "challenge.py",
+      "bytes": 3600,
+      "sha256": "8945e4e12eaf97cf44a9906e6e2315e19dacf9af7bbde2f5a33e194cc6c75dab"
+    },
+    {
+      "path": "input-and-source-checks.json",
+      "bytes": 1419,
+      "sha256": "674ba3cc7a8b9eb6aa9755244333c27f965f6ed908f043099177669ae236c2e0"
+    },
+    {
+      "path": "oracle.before.py.txt",
+      "bytes": 14989,
+      "sha256": "f58db90df7179c26413cdceb0efb9ddcb0a389902bae8a27524faea59a8c11dc"
+    },
+    {
+      "path": "toolchain-source-spans.json",
+      "bytes": 5525,
+      "sha256": "dd18c4ee1715f5ce845a27cc6b3b13320a113dcbe107eac5bdb7e856611fca75"
+    }
+  ]
+}

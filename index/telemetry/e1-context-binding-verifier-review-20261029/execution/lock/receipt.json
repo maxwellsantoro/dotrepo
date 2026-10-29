@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "cargo",
+    "generate-lockfile",
+    "--offline",
+    "--manifest-path",
+    "/Users/maxwell/projects/agent/dotrepo/index/telemetry/e1-context-binding-verifier-review-20261029/harness/Cargo.toml"
+  ],
+  "startedAt": "2026-10-29T08:07:44.511613+00:00",
+  "elapsedSeconds": 0.3371820419561118,
+  "exitCode": 0,
+  "error": null,
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "6d63475bc4e46ff0c5a1d171528acdeaf01f5f757dccfcbb415b4a94d7c3d7ef",
+  "costUsd": null,
+  "costExclusions": [
+    "Unmetered local operator/Cargo work; no native upstream task or paid provider call."
+  ]
+}

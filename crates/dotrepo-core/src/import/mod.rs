@@ -12,6 +12,7 @@ use crate::validate_manifest;
 
 mod adjudication;
 mod commands;
+mod context_verification;
 mod escalation;
 mod evidence;
 mod fields;
@@ -766,6 +767,8 @@ pub fn verify_import_plan(root: &Path, plan: &ImportPlan, source_url: &str) -> V
             }
         }
     }
+
+    checks.extend(context_verification::verify(root, plan));
 
     let passed = checks
         .iter()

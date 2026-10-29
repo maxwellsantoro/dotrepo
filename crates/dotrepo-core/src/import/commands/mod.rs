@@ -16,6 +16,7 @@ mod policy;
 mod scope;
 
 pub(crate) use context::infer_documented_context_candidates;
+pub(super) use go_context::scalar_candidate_is_eligible;
 
 pub(crate) use policy::sanitize_import_command;
 

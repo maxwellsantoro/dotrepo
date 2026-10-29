@@ -1,0 +1,15 @@
+[
+  {
+    "name": "rustfmt",
+    "argv": [
+      "cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "startedAt": "2026-10-29T08:11:11.704359+00:00",
+    "elapsedSeconds": 0.7489267501514405,
+    "exitCode": 1
+  }
+]

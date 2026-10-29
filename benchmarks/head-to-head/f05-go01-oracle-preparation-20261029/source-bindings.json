@@ -1,0 +1,163 @@
+{
+  "proposalFreezeSha256": "e3e291bc00097dea64fe0173b7125024693d4f69585bf212df30d4124ce25b55",
+  "proposalBindings": [
+    {
+      "path": ".gitattributes",
+      "bytes": 105,
+      "sha256": "1bc7ef4a0eb1f3eacc1258e41ebc2699c2326f72350d7beea9bdc532ac80241d"
+    },
+    {
+      "path": "README.md",
+      "bytes": 9387,
+      "sha256": "4c2893e224b0524eaeefdb11e64f711dcf83e8b2e3e1b3118d911ff035b07185"
+    },
+    {
+      "path": "checks.json",
+      "bytes": 539,
+      "sha256": "a6f39a6b4a40fbf70ac2f1a7a4981744344fb27c0cb11140f7515823611f54b0"
+    },
+    {
+      "path": "known-disabled-candidates.json",
+      "bytes": 208360,
+      "sha256": "8b269768c6defd3d3cc1be9b5c0b485b09f66734943e90cc2d54a40c82468001"
+    },
+    {
+      "path": "proposal.json",
+      "bytes": 9489,
+      "sha256": "cb4f6481f447519ba0e087d91661afc870ab4f992356c1e0bce1fd00a0ae6da0"
+    },
+    {
+      "path": "source-integrity.json",
+      "bytes": 10901,
+      "sha256": "e2f9532d52efddf99e24a7078a4a77ba279df49383494f952d8e71c529e63a5c"
+    },
+    {
+      "path": "source-spans.json",
+      "bytes": 17810,
+      "sha256": "ee8eae8f5d5e1bfbdc4db7a2294a268625af0179397953f656ec0f98d4ea4d50"
+    },
+    {
+      "path": "sources/CONTRIBUTING.md",
+      "bytes": 9195,
+      "sha256": "b45301bb6687e1dfadc253640ee20766aa02a16d9578e92eee8c530b808d4112"
+    },
+    {
+      "path": "sources/Herebyfile.mjs",
+      "bytes": 125368,
+      "sha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421"
+    },
+    {
+      "path": "sources/README.md",
+      "bytes": 2741,
+      "sha256": "b43867a1a978a0a3d881b91e50e9807f1f56e3f1dd54d65cad43f471c84e0036"
+    },
+    {
+      "path": "sources/go.work",
+      "bytes": 33,
+      "sha256": "d6c5314b1f983eb6de36253c903ac00aa8e6fecd9512d2adba882b5701ce7d29"
+    },
+    {
+      "path": "sources/package-lock.json",
+      "bytes": 143844,
+      "sha256": "52b6c9bd0a26ef1b0fc27dfbfaa00df6a047cdddd587d07c4f6c1c3345faf5cf"
+    },
+    {
+      "path": "sources/package.json",
+      "bytes": 1838,
+      "sha256": "2828c1d269bd9c80d634131ec107ac69f1cfc3bf1f98d24c112c825c8acd7902"
+    },
+    {
+      "path": "sources/packages/typescript/package.json",
+      "bytes": 3638,
+      "sha256": "2ae264680bfa5bad7393d516580f03dd9748ebb0da7a0655c7ed57b697b485fd"
+    },
+    {
+      "path": "sources/packages/vscode-typescript/package.json",
+      "bytes": 17944,
+      "sha256": "72e501c1a9f9d37c707c6915d102893a943ac3e2289c56ce17bf5a98ee25fc3f"
+    },
+    {
+      "path": "sources/packages/vscode-typescript-nightly/package.json",
+      "bytes": 701,
+      "sha256": "18953f8e9f88a5b4a72265f51d6a27d485b3ddf6b3429446a94f8079aa41e914"
+    },
+    {
+      "path": "sources/tools/go.mod",
+      "bytes": 1485,
+      "sha256": "968e2374d845585e30ffb1c3b32fbf4b2924dab702cddd91ae33327609d5625b"
+    },
+    {
+      "path": "sources/tools/go.sum",
+      "bytes": 8844,
+      "sha256": "015fd234f9f2211f196e5be01b74f8aa833858b13bd1a2a2e43117059503bcf1"
+    },
+    {
+      "path": "sources/tsc/go.mod",
+      "bytes": 748,
+      "sha256": "1e0963224f3096e3e8215acea83c033392c8135e7453b8a9680261baa5c18b25"
+    },
+    {
+      "path": "sources/tsc/go.sum",
+      "bytes": 2867,
+      "sha256": "00f7fee0307755fa8b871cd25a68b8c478341bc2b2af8731b2f2fc4da3739eee"
+    },
+    {
+      "path": "sources/tsc/internal/fourslash/tests/aliasMergingWithNamespace_test.go",
+      "bytes": 540,
+      "sha256": "4bc35d615390b3e7821f4242b7f5b0ebf5273d4cb544bad04767e0e9441a188b"
+    },
+    {
+      "path": "sources/tsc/internal/fourslash/tests/autoImportPackageRootPathTypeModule_test.go",
+      "bytes": 826,
+      "sha256": "ae289ea4af9c099c79ac306543e8695277abf9dfdffda55b442199f13c6a4745"
+    },
+    {
+      "path": "sources/tsc/internal/fswatch/fanotify_linux_test.go",
+      "bytes": 5824,
+      "sha256": "f5e1b08aad68b1e9538f14f1d442bf09bc2aee362706d66a5a492024120cb6a9"
+    },
+    {
+      "path": "sources/tsc/internal/fswatch/testutil_test.go",
+      "bytes": 5838,
+      "sha256": "ab20fe2b946a1d2e4ddbe585529c6d165251f995bf8a5b733294938a0999ffc0"
+    },
+    {
+      "path": "sources/tsc/internal/jsnum/string_test.go",
+      "bytes": 8520,
+      "sha256": "52908d6be0ffb8511e9e4ac5507361dcd60c15c02132fa56ec44e1dad7de1dfe"
+    },
+    {
+      "path": "sources/tsc/internal/lsp/replay_test.go",
+      "bytes": 6861,
+      "sha256": "5425fdbb311e388761c33100d343576168a76e41ccc8817a039483569d6902bb"
+    },
+    {
+      "path": "sources/tsc/internal/parser/parser_test.go",
+      "bytes": 18248,
+      "sha256": "d6272679167b0560dee59d4d52bf39f1bb9124af152425a86f8f6cae7b6e6658"
+    },
+    {
+      "path": "static-test-inventory.json",
+      "bytes": 2530259,
+      "sha256": "e2d37c8a5a50d23aa2d14d960ac88ae4b261bc217354ce5762c2fa2ba8ebc200"
+    }
+  ],
+  "sourceArchive": {
+    "path": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar",
+    "sha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+    "bytes": 280422400,
+    "regularMembersVerifiedAgainstFrozenInventory": 68062,
+    "sourceBytes": 365903,
+    "fullSourceBytes": 218783760,
+    "inventoryExactPathSet": true,
+    "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+    "gitTreeSha": "0e8e44749de9c275750a56bbca5cde84985fd3d0",
+    "treeProof": "retained source-tree-validation.json, no new Git/network acquisition"
+  },
+  "sourceArchiveRehashed": true,
+  "testFileSkipSitesBound": 469,
+  "additionalNonTestHelperSkipSitesBound": 11,
+  "proposedExactExclusions": 380,
+  "nativeCollectionOccurred": false,
+  "networkDockerProviderOrUpstreamExecutionCalls": 0
+}

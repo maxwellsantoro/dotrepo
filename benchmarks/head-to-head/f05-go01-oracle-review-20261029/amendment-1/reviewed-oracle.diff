@@ -1,0 +1,85 @@
+--- original/oracle.py
++++ amendment-1/oracle.py
+@@ -37,6 +37,12 @@
+ 
+ def digest(value):
+     return hashlib.sha256(canonical(value).encode()).hexdigest()
++
++
++def ancestors(test):
++    """Existing slash-delimited identity contract; no unobserved children inferred."""
++    parts = test.split("/")
++    return ["/".join(parts[:end]) for end in range(1, len(parts))]
+ 
+ 
+ def require(condition, reason):
+@@ -120,7 +126,7 @@
+             "changed binding",
+         )
+         require(policy.get("state") == "accepted-before-execution", "exclusion policy unaccepted")
+-        proposed = json.loads((Path(__file__).parent / "policy-proposal.json").read_text())[
++        proposed = json.loads((Path(__file__).parent.parent / "policy-proposal.json").read_text())[
+             "exclusions"
+         ]
+         require(digest(proposed) == EXCLUSION_SET_SHA256, "changed source exclusion proposal")
+@@ -231,6 +237,7 @@
+         )
+         started, ended, ran, terminal = set(), {}, set(), {}
+         outputs, package_outputs = {}, {}
++        unfinished_descendants, failed_descendants = {}, {}
+         for row in parse_events(raw):
+             package, test, action = row["Package"], row.get("Test"), row["Action"]
+             require(package in packages, "wrong or uncollected package")
+@@ -257,13 +264,41 @@
+                 require(key not in ran, "duplicate test run")
+                 if "/" in test:
+                     require((package, test.rsplit("/", 1)[0]) in ran, "nested run without parent")
++                    require(
++                        all((package, parent) not in terminal for parent in ancestors(test)),
++                        "nested run after ancestor terminal",
++                    )
++                    for parent in ancestors(test):
++                        parent_key = package, parent
++                        unfinished_descendants[parent_key] = (
++                            unfinished_descendants.get(parent_key, 0) + 1
++                        )
+                 ran.add(key)
+             else:
+                 require(key in ran, "test event without run")
+                 if action == "output":
+                     outputs[key] = outputs.get(key, "") + row.get("Output", "")
+                 elif action in ("pass", "fail", "skip"):
++                    require(
++                        unfinished_descendants.get(key, 0) == 0,
++                        "parent terminal while descendant unfinished",
++                    )
++                    require(
++                        action == "fail" or failed_descendants.get(key, 0) == 0,
++                        "failed descendant requires failed parent",
++                    )
+                     terminal[key] = action
++                    for parent in ancestors(test):
++                        parent_key = package, parent
++                        require(
++                            unfinished_descendants.get(parent_key, 0) > 0,
++                            "invalid descendant lifecycle count",
++                        )
++                        unfinished_descendants[parent_key] -= 1
++                        if action == "fail":
++                            failed_descendants[parent_key] = (
++                                failed_descendants.get(parent_key, 0) + 1
++                            )
+                 else:
+                     require(action in ("pause", "cont"), "unexpected test action")
+         require(started == set(packages) == set(ended), "missing package coverage")
+@@ -298,6 +333,10 @@
+         failed = {key for key, state in terminal.items() if state == "fail"}
+         for key in failed:
+             require(
++                all(terminal.get((key[0], parent)) == "fail" for parent in ancestors(key[1])),
++                "failed descendant requires failed ancestors",
++            )
++            require(
+                 re.search(r"(?m)^\s*--- FAIL: " + re.escape(key[1]) + r" \(", outputs.get(key, "")),
+                 "failure lacks terminal assertion diagnostic",
+             )

@@ -1,0 +1,18 @@
+{
+  "base": "72c654caaba1c88a7206815296bec91fa3bb5760",
+  "sourceSha256": {
+    "crates/dotrepo-core/src/import/context_verification.rs": "ad337069d7a3cb53d3e09da91a4bfc09b6f27604759da273af876bcc1c2e3047",
+    "crates/dotrepo-core/src/import/context_verification/tests.rs": "ecff5722fdb95773bd208f9a94e40f8ef755849cf2695e58ce35f11d7d17088f",
+    "crates/dotrepo-core/src/import/fields.rs": "3c8af1dc2dfa47f6305b270d2a182cbdfcbd6b17b5e7db9507f25e70add54981",
+    "crates/dotrepo-core/src/import/mod.rs": "90522b052d74729a1f5e77e0fac5ba349ee30c6385499ee4375bdc5acda24563",
+    "crates/dotrepo-core/src/import/read.rs": "eb85dbf4de4f108aa1fbaa746829386ba8e9c3f62afe2ee3dfd2559ace34d3eb",
+    "crates/dotrepo-core/src/import/commands/go_context.rs": "8cfbf598cbc78929aa6e750fc5d677e77f1608c145aa81f94a84b09eaf15acea",
+    "crates/dotrepo-core/src/import/commands/go_context/tests.rs": "d1e69f19c651f11315abbc1cff1a85cb4c9d65a83a7e851d9f50ec3ce1798bac",
+    "crates/dotrepo-core/src/import/commands/mod.rs": "b50bad2dca6b3dcfd23ef9cbead3359f394623e8523b3d6d88a506d2b4725379",
+    "crates/dotrepo-core/src/facade_tests/import_repository.rs": "7971136b54544abbe7e383be64d190caf6b579c2e75f867df59851249c501c63",
+    "crates/dotrepo-core/tests/fixtures/import/expectations.json": "a80e0ffa170701f5bc9e880115cc1a19a183ae24ce9117524d57f7d186c29651"
+  },
+  "cliSha256": "b9cd73236bca71ecf4fb7aa06bfe131b1ecc41a9b0fdfb43de579fb6d24ce0d0",
+  "workingTreeChangesIncluded": true,
+  "sourceSnapshotPurpose": "Exact integrated reviewed/tested bytes; not a claim author Go checks covered subsequent E1 shared wiring."
+}

@@ -133,6 +133,10 @@ The subsequent [Go scope/setup development packet](index/telemetry/go-default-co
 adds bounded importer and escalation guards for those source patterns. Redigo's
 build-default inference remains a separate evidence-policy decision; the fixture
 results do not establish general workflow parsing or consumer benefit.
+The separate [Go build-evidence packet](index/telemetry/go-build-evidence-20261029/README.md)
+keeps module-only conventional build candidates diagnostic while requiring
+eligible build evidence in selection and adjudication. Existing inferred workflow
+commands remain observations, with their default intent and completeness separate.
 The [scheduled boundary receipt](index/telemetry/roadmap-refresh-boundary-2026-10-06.md)
 retains a completed batch cancelled before landing after an unsupported docs
 answer passed the old reference policy. Future refreshes use the repaired source
@@ -150,6 +154,14 @@ provider settings/budgets and a complete campaign freeze still gate C2.
 The [next E1 development replay](benchmarks/head-to-head/e1-development-20261029b/README.md)
 recovers an attributed multi-file candidate while retaining consumer abstention;
 independent source-completeness review remains distinct from syntax recovery.
+The [Keras source disposition](index/telemetry/e1-keras-source-disposition-20261029/README.md)
+retains backend/release qualifications, local-install uncertainty and CI scope
+differences. The bounded [installation-source follow-up](index/telemetry/e1-keras-install-source-20261029/README.md)
+establishes helper/tool and backend-initialization conditions while retaining its
+uninspected closure; it supplies no complete-instruction or execution claim.
+The [mechanical source-binding verifier](index/telemetry/e1-context-binding-verifier-20261029/README.md)
+checks integrity without promoting the candidate or closing completeness and
+fresh held-out qualification gates.
 The [bounded task execution qualification](benchmarks/head-to-head/f05-qualification-20261029/README.md)
 retains real native outcomes and resource failures without narrowing the frozen
 tasks. The [published response capture](benchmarks/head-to-head/f05-snapshot-20261029/README.md)

@@ -1,0 +1,687 @@
+{
+  "scope": "synthetic state/coverage challenges only; no native outcome",
+  "oracle": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/oracle.py",
+  "results": [
+    {
+      "case": "valid-positive-control",
+      "expectedCandidateCompletion": true,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": true,
+        "testsPassed": true,
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "expectedTopLevelTests": 3,
+        "observedNestedTests": 2,
+        "packages": 3,
+        "excludedBehavior": [
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestAliasMergingWithNamespace",
+            "reason": "Known failing fourslash test",
+            "exercised": false
+          },
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+            "test": "TestATA/deduplicate_from_local_@types_packages",
+            "reason": "Todo - implement removing local @types from include list",
+            "exercised": false
+          }
+        ],
+        "failedTests": []
+      },
+      "matchesExpected": true,
+      "events": [
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "start"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "run",
+          "Test": "TestSyntheticActive"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "run",
+          "Test": "TestSyntheticActive/child"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "pass",
+          "Test": "TestSyntheticActive/child"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "pass",
+          "Test": "TestSyntheticActive"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "run",
+          "Test": "TestAliasMergingWithNamespace"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "output",
+          "Test": "TestAliasMergingWithNamespace",
+          "Output": "    disabled_test.go:11: Known failing fourslash test\n"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "skip",
+          "Test": "TestAliasMergingWithNamespace"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "pass"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "start"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "run",
+          "Test": "TestATA"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "run",
+          "Test": "TestATA/deduplicate_from_local_@types_packages"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "output",
+          "Test": "TestATA/deduplicate_from_local_@types_packages",
+          "Output": "    ata_test.go:518: Todo - implement removing local @types from include list\n"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "skip",
+          "Test": "TestATA/deduplicate_from_local_@types_packages"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "pass",
+          "Test": "TestATA"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "pass"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/synthetic-no-tests",
+          "Action": "start"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/synthetic-no-tests",
+          "Action": "output",
+          "Output": "? synthetic [no test files]\n"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/synthetic-no-tests",
+          "Action": "skip"
+        }
+      ]
+    },
+    {
+      "case": "child-starts-after-parent-terminal",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": true,
+        "testsPassed": true,
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "expectedTopLevelTests": 3,
+        "observedNestedTests": 2,
+        "packages": 3,
+        "excludedBehavior": [
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestAliasMergingWithNamespace",
+            "reason": "Known failing fourslash test",
+            "exercised": false
+          },
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+            "test": "TestATA/deduplicate_from_local_@types_packages",
+            "reason": "Todo - implement removing local @types from include list",
+            "exercised": false
+          }
+        ],
+        "failedTests": []
+      },
+      "matchesExpected": false,
+      "events": [
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "start"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "run",
+          "Test": "TestSyntheticActive"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "pass",
+          "Test": "TestSyntheticActive"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "run",
+          "Test": "TestSyntheticActive/child"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "pass",
+          "Test": "TestSyntheticActive/child"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "run",
+          "Test": "TestAliasMergingWithNamespace"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "output",
+          "Test": "TestAliasMergingWithNamespace",
+          "Output": "    disabled_test.go:11: Known failing fourslash test\n"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "skip",
+          "Test": "TestAliasMergingWithNamespace"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "pass"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "start"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "run",
+          "Test": "TestATA"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "run",
+          "Test": "TestATA/deduplicate_from_local_@types_packages"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "output",
+          "Test": "TestATA/deduplicate_from_local_@types_packages",
+          "Output": "    ata_test.go:518: Todo - implement removing local @types from include list\n"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "skip",
+          "Test": "TestATA/deduplicate_from_local_@types_packages"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "pass",
+          "Test": "TestATA"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "pass"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/synthetic-no-tests",
+          "Action": "start"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/synthetic-no-tests",
+          "Action": "output",
+          "Output": "? synthetic [no test files]\n"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/synthetic-no-tests",
+          "Action": "skip"
+        }
+      ]
+    },
+    {
+      "case": "parent-terminal-while-child-running",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": true,
+        "testsPassed": true,
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "expectedTopLevelTests": 3,
+        "observedNestedTests": 2,
+        "packages": 3,
+        "excludedBehavior": [
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestAliasMergingWithNamespace",
+            "reason": "Known failing fourslash test",
+            "exercised": false
+          },
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+            "test": "TestATA/deduplicate_from_local_@types_packages",
+            "reason": "Todo - implement removing local @types from include list",
+            "exercised": false
+          }
+        ],
+        "failedTests": []
+      },
+      "matchesExpected": false,
+      "events": [
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "start"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "run",
+          "Test": "TestSyntheticActive"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "run",
+          "Test": "TestSyntheticActive/child"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "pass",
+          "Test": "TestSyntheticActive"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "pass",
+          "Test": "TestSyntheticActive/child"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "run",
+          "Test": "TestAliasMergingWithNamespace"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "output",
+          "Test": "TestAliasMergingWithNamespace",
+          "Output": "    disabled_test.go:11: Known failing fourslash test\n"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "skip",
+          "Test": "TestAliasMergingWithNamespace"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "pass"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "start"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "run",
+          "Test": "TestATA"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "run",
+          "Test": "TestATA/deduplicate_from_local_@types_packages"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "output",
+          "Test": "TestATA/deduplicate_from_local_@types_packages",
+          "Output": "    ata_test.go:518: Todo - implement removing local @types from include list\n"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "skip",
+          "Test": "TestATA/deduplicate_from_local_@types_packages"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "pass",
+          "Test": "TestATA"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "pass"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/synthetic-no-tests",
+          "Action": "start"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/synthetic-no-tests",
+          "Action": "output",
+          "Output": "? synthetic [no test files]\n"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/synthetic-no-tests",
+          "Action": "skip"
+        }
+      ]
+    },
+    {
+      "case": "failing-child-with-passing-parent",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": true,
+        "testsPassed": false,
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "expectedTopLevelTests": 3,
+        "observedNestedTests": 2,
+        "packages": 3,
+        "excludedBehavior": [
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestAliasMergingWithNamespace",
+            "reason": "Known failing fourslash test",
+            "exercised": false
+          },
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+            "test": "TestATA/deduplicate_from_local_@types_packages",
+            "reason": "Todo - implement removing local @types from include list",
+            "exercised": false
+          }
+        ],
+        "failedTests": [
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestSyntheticActive/child"
+          }
+        ]
+      },
+      "matchesExpected": false,
+      "events": [
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "start"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "run",
+          "Test": "TestSyntheticActive"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "run",
+          "Test": "TestSyntheticActive/child"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "output",
+          "Test": "TestSyntheticActive/child",
+          "Output": "--- FAIL: TestSyntheticActive/child (0.01s)\n"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "fail",
+          "Test": "TestSyntheticActive/child"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "pass",
+          "Test": "TestSyntheticActive"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "run",
+          "Test": "TestAliasMergingWithNamespace"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "output",
+          "Test": "TestAliasMergingWithNamespace",
+          "Output": "    disabled_test.go:11: Known failing fourslash test\n"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "skip",
+          "Test": "TestAliasMergingWithNamespace"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "fail"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "start"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "run",
+          "Test": "TestATA"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "run",
+          "Test": "TestATA/deduplicate_from_local_@types_packages"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "output",
+          "Test": "TestATA/deduplicate_from_local_@types_packages",
+          "Output": "    ata_test.go:518: Todo - implement removing local @types from include list\n"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "skip",
+          "Test": "TestATA/deduplicate_from_local_@types_packages"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "pass",
+          "Test": "TestATA"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "pass"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/synthetic-no-tests",
+          "Action": "start"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/synthetic-no-tests",
+          "Action": "output",
+          "Output": "? synthetic [no test files]\n"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/synthetic-no-tests",
+          "Action": "skip"
+        }
+      ]
+    },
+    {
+      "case": "only-excluded-child-under-passing-parent",
+      "expectedCandidateCompletion": null,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": true,
+        "testsPassed": true,
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "expectedTopLevelTests": 1,
+        "observedNestedTests": 1,
+        "packages": 1,
+        "excludedBehavior": [
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+            "test": "TestATA/deduplicate_from_local_@types_packages",
+            "reason": "Todo - implement removing local @types from include list",
+            "exercised": false
+          }
+        ],
+        "failedTests": []
+      },
+      "matchesExpected": null,
+      "events": [
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "start"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "run",
+          "Test": "TestATA"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "run",
+          "Test": "TestATA/deduplicate_from_local_@types_packages"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "output",
+          "Test": "TestATA/deduplicate_from_local_@types_packages",
+          "Output": "    ata_test.go:518: Todo - implement removing local @types from include list\n"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "skip",
+          "Test": "TestATA/deduplicate_from_local_@types_packages"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "pass",
+          "Test": "TestATA"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "pass"
+        }
+      ]
+    },
+    {
+      "case": "missing-child-terminal-negative-control",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "missing run/terminal coverage"
+      },
+      "matchesExpected": true,
+      "events": [
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "start"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "run",
+          "Test": "TestSyntheticActive"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "run",
+          "Test": "TestSyntheticActive/child"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "pass",
+          "Test": "TestSyntheticActive"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "run",
+          "Test": "TestAliasMergingWithNamespace"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "output",
+          "Test": "TestAliasMergingWithNamespace",
+          "Output": "    disabled_test.go:11: Known failing fourslash test\n"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "skip",
+          "Test": "TestAliasMergingWithNamespace"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+          "Action": "pass"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "start"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "run",
+          "Test": "TestATA"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "run",
+          "Test": "TestATA/deduplicate_from_local_@types_packages"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "output",
+          "Test": "TestATA/deduplicate_from_local_@types_packages",
+          "Output": "    ata_test.go:518: Todo - implement removing local @types from include list\n"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "skip",
+          "Test": "TestATA/deduplicate_from_local_@types_packages"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "pass",
+          "Test": "TestATA"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+          "Action": "pass"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/synthetic-no-tests",
+          "Action": "start"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/synthetic-no-tests",
+          "Action": "output",
+          "Output": "? synthetic [no test files]\n"
+        },
+        {
+          "Package": "github.com/microsoft/TypeScript/tsc/synthetic-no-tests",
+          "Action": "skip"
+        }
+      ]
+    }
+  ],
+  "observedAcceptanceGaps": [
+    "child-starts-after-parent-terminal",
+    "parent-terminal-while-child-running",
+    "failing-child-with-passing-parent"
+  ],
+  "taskOutcomeObserved": false,
+  "calls": {
+    "Docker": 0,
+    "network": 0,
+    "upstream": 0,
+    "provider": 0
+  }
+}

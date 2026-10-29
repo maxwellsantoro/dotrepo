@@ -1,0 +1,28 @@
+   Compiling dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)
+error[E0599]: no method named `contains` found for enum `std::option::Option<T>` in the current scope
+    --> crates/dotrepo-core/src/import/commands/go_context/tests.rs:745:14
+     |
+ 738 |           assert!(plan
+     |  _________________-
+ 739 | |             .manifest
+ 740 | |             .record
+ 741 | |             .trust
+...    |
+ 744 | |             .notes
+ 745 | |             .contains("conflicting build commands"));
+     | |             -^^^^^^^^ method not found in `std::option::Option<std::string::String>`
+     | |_____________|
+     |
+     |
+note: the method `contains` exists on the type `std::string::String`
+    --> /Users/maxwell/.rustup/toolchains/stable-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/str/mod.rs:1383:5
+     |
+1383 |     pub fn contains<P: Pattern>(&self, pat: P) -> bool {
+     |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider using `Option::expect` to unwrap the `std::string::String` value, panicking if the value is an `Option::None`
+     |
+ 744 |             .notes.expect("REASON")
+     |                   +++++++++++++++++
+
+For more information about this error, try `rustc --explain E0599`.
+error: could not compile `dotrepo-core` (lib test) due to 1 previous error

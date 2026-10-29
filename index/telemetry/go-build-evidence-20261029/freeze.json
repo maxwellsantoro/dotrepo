@@ -1,0 +1,130 @@
+{
+  "identity": "go-build-evidence-eligibility-20261029",
+  "state": "focused implementation handoff; independent final review and integrated gates pending",
+  "sourceBindingsSha256": "9c8aa806bb7e2077c8f8c1c0ea1dfa4c3e8687e2359225ce616030b723a62849",
+  "historicalBindingNote": "Before later coordinator E1-verifier shared wiring; do not treat focused checks as integrated checks.",
+  "upstreamExecution": false,
+  "indexWrites": 0,
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 6670,
+      "sha256": "3a1d06988b29d4febcfb411e9b98f983ea1e98605cb1f2cf03cfd7b81ca7e767"
+    },
+    {
+      "path": "before-conflict-fix-bindings.json",
+      "bytes": 863,
+      "sha256": "15cbcb8e94f8ac67abe0218a9c85241eafda3295dafd8ff65ff194c55cdbec05"
+    },
+    {
+      "path": "checks/clippy-before-conflict-fix.log",
+      "bytes": 170,
+      "sha256": "c12bbebcf0924e896153940a00792327ba5289d00ca4d99003fa6c923c065f3e"
+    },
+    {
+      "path": "checks/clippy-final.log",
+      "bytes": 170,
+      "sha256": "e30bf1692f0bbf4faa4bf82315dac33ba3d2f07458607ba8925c4e1548af1c70"
+    },
+    {
+      "path": "checks/commands-attempt-3-test-option-compile-failure.log",
+      "bytes": 1348,
+      "sha256": "4d4f5ec2737d31b74f9394874db65b719cb656d6e2d6994983d4d86431c9391e"
+    },
+    {
+      "path": "checks/commands-before-conflict-fix.log",
+      "bytes": 40497,
+      "sha256": "e8d3c8a179f352787bec0f5f9e965324b7273e2fd5f3c814eec3b04d13d70b8b"
+    },
+    {
+      "path": "checks/commands-final.log",
+      "bytes": 41098,
+      "sha256": "46074f29e6f6278f1985a5d586aa9c2b6ce55a405fc57aca61f39ea1c7ba8462"
+    },
+    {
+      "path": "checks/facade-before-conflict-fix.log",
+      "bytes": 476,
+      "sha256": "92fd5b4d99464a075ff0c29fd8f888168bab48978e71e06487408ffc449cf5ea"
+    },
+    {
+      "path": "checks/facade-final.log",
+      "bytes": 378,
+      "sha256": "d6121474762f1566e88470428b0f5128277d1f922f9fc5039bac8eb4cb932b67"
+    },
+    {
+      "path": "checks/focused-attempt-1-compile-failure.log",
+      "bytes": 1991,
+      "sha256": "beef315e5d3c1c991429f6d0adb8a180be65c0ce78782e7c5b2599420c113774"
+    },
+    {
+      "path": "checks/focused-attempt-2.log",
+      "bytes": 40507,
+      "sha256": "34feae945d8be6f8861cd46da45df928948084ed59f9ccf021bfa9c47a3151a9"
+    },
+    {
+      "path": "checks/format-attempt-1-shared-call-failure.log",
+      "bytes": 558,
+      "sha256": "13e4f8407560e18539e92eb60168a0f982ea3b6f7acca9fea09e99171b955ab4"
+    },
+    {
+      "path": "checks/format-final.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "checks/quality-attempt-1-imported-source-order-failure.log",
+      "bytes": 1031,
+      "sha256": "9b2a25ba5369eb6c7c19ebbaaeaf16965a6bb78af3ad37897697a850fa3b5896"
+    },
+    {
+      "path": "checks/quality-final.log",
+      "bytes": 521,
+      "sha256": "42aee4b63fff5fe2b902e11385636642f1333d81236977283879facd250f59dd"
+    },
+    {
+      "path": "checks.json",
+      "bytes": 1452,
+      "sha256": "f4e63cba8dd098dc91ca8524aa0f6f3f50d524e2ca1eece97705344e1e81c143"
+    },
+    {
+      "path": "control-receipts.json",
+      "bytes": 46467,
+      "sha256": "1d614d7ff5be8bba658ebdbfa538b43fe0c242325822c11d04694aac8401f25b"
+    },
+    {
+      "path": "implementation.patch",
+      "bytes": 31740,
+      "sha256": "cf13dd49ff2f8512d3df2df3439b792f13af55620fd021a338681d19ac44b444"
+    },
+    {
+      "path": "input-source-bindings.json",
+      "bytes": 8903,
+      "sha256": "19d9492d876df35a781c1415631ea4349c27a2b9d1e9e6a3a645998da957d3bd"
+    },
+    {
+      "path": "proposed-expectations-order-supplement.patch",
+      "bytes": 399,
+      "sha256": "4bc0e3470826ebfb47f4a0fd57f8fd4b2620e28edef18aadee4a1ab2d636dab8"
+    },
+    {
+      "path": "proposed-expectations-summary.json",
+      "bytes": 340,
+      "sha256": "ec963a5c79105207684aa2921e8de583cb821199da5eb8edcd7bb44394bf1b4f"
+    },
+    {
+      "path": "proposed-expectations.patch",
+      "bytes": 11369,
+      "sha256": "e52640d085e423bd464bd8ab395a346695526cbb5d78e1329b470aa44f3a4c09"
+    },
+    {
+      "path": "proposed-facade-test.patch",
+      "bytes": 1479,
+      "sha256": "932038ee135cf25ad51316ddf118c721b401b266f713482dce01ce6cd6e3da0d"
+    },
+    {
+      "path": "source-bindings.json",
+      "bytes": 3088,
+      "sha256": "9c8aa806bb7e2077c8f8c1c0ea1dfa4c3e8687e2359225ce616030b723a62849"
+    }
+  ]
+}

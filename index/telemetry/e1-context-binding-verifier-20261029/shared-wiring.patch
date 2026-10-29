@@ -1,0 +1,20 @@
+*** Begin Patch
+*** Update File: crates/dotrepo-core/src/import/mod.rs
+@@
+ mod commands;
++mod context_verification;
+@@
+-    let passed = checks
++    checks.extend(context_verification::verify(root, plan));
++
++    let passed = checks
+*** Update File: crates/dotrepo-core/src/import/fields.rs
+@@
+                 && evidence.get("checkedAt").and_then(toml::Value::as_str)
+-                    == plan.manifest.record.generated_at.as_deref();
++                    == plan.manifest.record.generated_at.as_deref()
++                && super::context_verification::source_bindings_intact(verification, &field);
+@@
+-                    "Natural instruction candidate changed after source binding; source establishment must be repeated."
++                    "Natural instruction candidate or attached sources failed integrity binding; source establishment must be repeated."
+*** End Patch

@@ -1,0 +1,137 @@
+[
+  {
+    "path": "README.md",
+    "bytes": 3539,
+    "sha256": "f0c3cfedef4ba1926c9bdc71637b23988c23a51ebe4cf20866b87ab5ab62dfd7"
+  },
+  {
+    "path": "after-conflict/controls.py",
+    "bytes": 3876,
+    "sha256": "f107df996a9123a30ca69d20eb0bbda424d5c0d11c5cd90d02d81b137f566b32"
+  },
+  {
+    "path": "after-conflict/focused-tests.log",
+    "bytes": 35946,
+    "sha256": "79a9c3a91f9fe4ba52fb5fb097be5a2c7afdddf290f6693984ad76770095bab5"
+  },
+  {
+    "path": "after-conflict/observations.json",
+    "bytes": 12073,
+    "sha256": "6a7a577e7634f5cfa8f2b82f13f42acbdee9359cfec4713a5bcaee857e7beb4c"
+  },
+  {
+    "path": "after-conflict/ruff-check.log",
+    "bytes": 19,
+    "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+  },
+  {
+    "path": "after-conflict/ruff-format.log",
+    "bytes": 26,
+    "sha256": "3bc53bf3e981a98a34a852e175bf9b77af841edea74fca595d9aedcbaf9a4938"
+  },
+  {
+    "path": "after-conflict/source-bindings.json",
+    "bytes": 1601,
+    "sha256": "c5ecf35bba6ff351581931a1114cfecbe87377ff427aa527a0e580e4215798a1"
+  },
+  {
+    "path": "after-conflict/source-snapshot/crates/dotrepo-core/src/facade_tests/import_repository.rs.txt",
+    "bytes": 48695,
+    "sha256": "7971136b54544abbe7e383be64d190caf6b579c2e75f867df59851249c501c63"
+  },
+  {
+    "path": "after-conflict/source-snapshot/crates/dotrepo-core/src/import/commands/go_context/tests.rs.txt",
+    "bytes": 35172,
+    "sha256": "d1e69f19c651f11315abbc1cff1a85cb4c9d65a83a7e851d9f50ec3ce1798bac"
+  },
+  {
+    "path": "after-conflict/source-snapshot/crates/dotrepo-core/src/import/commands/go_context.rs.txt",
+    "bytes": 17631,
+    "sha256": "8cfbf598cbc78929aa6e750fc5d677e77f1608c145aa81f94a84b09eaf15acea"
+  },
+  {
+    "path": "after-conflict/source-snapshot/crates/dotrepo-core/src/import/commands/mod.rs.txt",
+    "bytes": 20705,
+    "sha256": "b50bad2dca6b3dcfd23ef9cbead3359f394623e8523b3d6d88a506d2b4725379"
+  },
+  {
+    "path": "after-conflict/source-snapshot/crates/dotrepo-core/src/import/context_verification/tests.rs.txt",
+    "bytes": 12464,
+    "sha256": "ecff5722fdb95773bd208f9a94e40f8ef755849cf2695e58ce35f11d7d17088f"
+  },
+  {
+    "path": "after-conflict/source-snapshot/crates/dotrepo-core/src/import/context_verification.rs.txt",
+    "bytes": 6731,
+    "sha256": "ad337069d7a3cb53d3e09da91a4bfc09b6f27604759da273af876bcc1c2e3047"
+  },
+  {
+    "path": "after-conflict/source-snapshot/crates/dotrepo-core/src/import/fields.rs.txt",
+    "bytes": 30801,
+    "sha256": "3c8af1dc2dfa47f6305b270d2a182cbdfcbd6b17b5e7db9507f25e70add54981"
+  },
+  {
+    "path": "after-conflict/source-snapshot/crates/dotrepo-core/src/import/mod.rs.txt",
+    "bytes": 31824,
+    "sha256": "90522b052d74729a1f5e77e0fac5ba349ee30c6385499ee4375bdc5acda24563"
+  },
+  {
+    "path": "after-conflict/source-snapshot/crates/dotrepo-core/src/import/read.rs.txt",
+    "bytes": 4404,
+    "sha256": "eb85dbf4de4f108aa1fbaa746829386ba8e9c3f62afe2ee3dfd2559ace34d3eb"
+  },
+  {
+    "path": "after-conflict/source-snapshot/crates/dotrepo-core/tests/fixtures/import/expectations.json.txt",
+    "bytes": 88613,
+    "sha256": "a80e0ffa170701f5bc9e880115cc1a19a183ae24ce9117524d57f7d186c29651"
+  },
+  {
+    "path": "before-conflict/cli-build.log",
+    "bytes": 266,
+    "sha256": "5f893505062b74835aa8d3c673edb2e763b32f1ab2ee428c151352cc378310d2"
+  },
+  {
+    "path": "before-conflict/freeze.json",
+    "bytes": 1993,
+    "sha256": "d160760b719b427b9b78af6c6563f83b4c11bf367fa5807c9ae4bb31495f0cc7"
+  },
+  {
+    "path": "before-conflict/observation.json",
+    "bytes": 3987,
+    "sha256": "b2e44f972aa4a83170765256bf948a47e41ed2c737e115166b312a0cffd9f701"
+  },
+  {
+    "path": "before-conflict/reproduce.py",
+    "bytes": 4088,
+    "sha256": "2796377e72d791e156688e21df9279f39a9a9efcdde7649fd64b8d7ffc1fc1fb"
+  },
+  {
+    "path": "before-conflict/source-before/crates/dotrepo-core/src/facade_tests/import_repository.rs.txt",
+    "bytes": 48695,
+    "sha256": "7971136b54544abbe7e383be64d190caf6b579c2e75f867df59851249c501c63"
+  },
+  {
+    "path": "before-conflict/source-before/crates/dotrepo-core/src/import/commands/go_context/tests.rs.txt",
+    "bytes": 31733,
+    "sha256": "8e79a42e78483424105733b4de6e371415fab2fce69bcaef664ba0b185b95ebf"
+  },
+  {
+    "path": "before-conflict/source-before/crates/dotrepo-core/src/import/commands/go_context.rs.txt",
+    "bytes": 17245,
+    "sha256": "04a4923b8eb025156362181658ed3265077fcc07d38be5e80707c76d930eb29f"
+  },
+  {
+    "path": "before-conflict/source-before/crates/dotrepo-core/src/import/commands/mod.rs.txt",
+    "bytes": 20705,
+    "sha256": "b50bad2dca6b3dcfd23ef9cbead3359f394623e8523b3d6d88a506d2b4725379"
+  },
+  {
+    "path": "before-conflict/source-before/crates/dotrepo-core/src/import/fields.rs.txt",
+    "bytes": 30449,
+    "sha256": "dfe9f0686824ff0df0ab481e835983e6789ad795c00cb88d305541f59f651b60"
+  },
+  {
+    "path": "before-conflict/source-before/crates/dotrepo-core/tests/fixtures/import/expectations.json.txt",
+    "bytes": 88613,
+    "sha256": "a80e0ffa170701f5bc9e880115cc1a19a183ae24ce9117524d57f7d186c29651"
+  }
+]

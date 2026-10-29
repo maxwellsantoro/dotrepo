@@ -1,0 +1,12 @@
+[package]
+name = "dotrepo-context-binding-independent-controls"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[workspace]
+
+[dependencies]
+dotrepo-core = { path = "../../../../crates/dotrepo-core" }
+serde_json = "1"
+toml = "0.8"

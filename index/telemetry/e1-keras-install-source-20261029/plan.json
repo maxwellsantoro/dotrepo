@@ -1,0 +1,13 @@
+{
+  "identity": "e1-keras-install-source-20261029",
+  "repository": "keras-team/keras",
+  "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+  "classification": "Known development source follow-up by prior E1 extractor/gold author, not fresh holdout or independent consumer evidence",
+  "startingDispositionFreezeSha256": "2c53e516f15aafe6c80e16aa2b9ff1b104b2537d0a67857052e8f9737303545d",
+  "initialSource": "pip_build.py",
+  "initialSourceReason": "Exact-revision retained README.md:54-58 directly declares python pip_build.py --install from repository root",
+  "followPolicy": "Only direct local references needed to inspect installation/setup/generated-source/backend/version behavior. No arbitrary traversal or crawl.",
+  "bounds": {"files": 8, "bytesPerFile": 2097152, "totalSourceBytes": 8388608, "readOnlyApiCalls": 12},
+  "forbidden": ["Rust/shared edits", "extractor or confidence promotion", "evaluated index or F05 access", "upstream/package/native/container execution", "paid provider calls", "workflow execution"],
+  "successMeaning": "Retained exact-revision bytes and bounded source assertions/gaps only; documented commands are not execution success. Completeness remains unresolved if closure is insufficient."
+}

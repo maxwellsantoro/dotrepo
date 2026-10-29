@@ -1,0 +1,22 @@
+{
+  "stage": "original new build-only rule, prior to independent conflict finding amendment",
+  "sourceFiles": [
+    {
+      "path": "crates/dotrepo-core/src/import/commands/mod.rs",
+      "sha256": "b50bad2dca6b3dcfd23ef9cbead3359f394623e8523b3d6d88a506d2b4725379"
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/commands/go_context.rs",
+      "sha256": "04a4923b8eb025156362181658ed3265077fcc07d38be5e80707c76d930eb29f"
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/commands/go_context/tests.rs",
+      "sha256": "8e79a42e78483424105733b4de6e371415fab2fce69bcaef664ba0b185b95ebf"
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/fields.rs",
+      "sha256": "dfe9f0686824ff0df0ab481e835983e6789ad795c00cb88d305541f59f651b60"
+    }
+  ],
+  "limits": "Not final implementation; retained for actual reviewer before reproduction."
+}

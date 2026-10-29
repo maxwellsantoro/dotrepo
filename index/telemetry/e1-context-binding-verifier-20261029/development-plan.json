@@ -1,0 +1,64 @@
+{
+  "identity": "mechanical-context-source-binding-verifier",
+  "base": "df4252056ce18dec6a13d5e84706c2ae48a13a2d",
+  "metadataOnlyAdvance": "72c654caaba1c88a7206815296bec91fa3bb5760",
+  "state": "prepared; module unlinked and Rust tests not yet executed while Go author owns Cargo",
+  "ownedRust": [
+    "crates/dotrepo-core/src/import/context_verification.rs",
+    "crates/dotrepo-core/src/import/context_verification/tests.rs"
+  ],
+  "sharedWiringOwner": "coordinator /root",
+  "constraints": {
+    "extractionChanged": false,
+    "semanticCompletenessEstablished": false,
+    "confidencePromotion": false,
+    "protocolChanged": false,
+    "crawlerOrPublicChanged": false,
+    "upstreamExecuted": false,
+    "providerOrNetworkCalls": 0
+  },
+  "independentSourceDispositionFreezeSha256": "2c53e516f15aafe6c80e16aa2b9ff1b104b2537d0a67857052e8f9737303545d",
+  "developmentSource": {
+    "repository": "github.com/keras-team/keras",
+    "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+    "knownDevelopment": true,
+    "files": [
+      {
+        "path": "crates/dotrepo-core/src/import/commands/context/python_recipe/testdata/CONTRIBUTING.md",
+        "sha256": "eff1a6349d222979e24b860c88e9577f603300af7658a1ac6fca3140992d0d3d"
+      },
+      {
+        "path": "crates/dotrepo-core/src/import/commands/context/python_recipe/testdata/README.md",
+        "sha256": "6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8"
+      },
+      {
+        "path": "crates/dotrepo-core/src/import/commands/context/python_recipe/testdata/pyproject.toml",
+        "sha256": "51ac5db60612a4c92123980826c1010a6d087c7a64b11a580ebc33c21058d326"
+      },
+      {
+        "path": "crates/dotrepo-core/src/import/commands/context/python_recipe/testdata/requirements.txt",
+        "sha256": "f34e2fa7d9bb205afe36e7cb8a0d53f6e3be39d0dc51b38de0619529e4e919b8"
+      },
+      {
+        "path": "crates/dotrepo-core/src/import/commands/context/python_recipe/testdata/requirements-common.txt",
+        "sha256": "3df3a2a15e645bc03082648aec06570a4329fdad189e4b326df0be80d6a7615e"
+      }
+    ]
+  },
+  "bounds": {
+    "sourceBindingEntries": 128,
+    "attachmentBytes": 131072,
+    "sourceReadBytesPerFile": 2097152
+  },
+  "plannedChecks": [
+    "unmodified real Keras route at most Medium",
+    "changed/deleted/nonregular/oversized source",
+    "malformed/empty/overbound attachment",
+    "invalid row/path/hash/span",
+    "unrelated valid file collection",
+    "duplicate exact span while repeated paths distinct spans pass",
+    "tuple/source/generation-assessment time mismatch",
+    "Unix leaf/ancestor symlink refusal",
+    "absent attachment compatibility and missing/conflicting verification checks"
+  ]
+}

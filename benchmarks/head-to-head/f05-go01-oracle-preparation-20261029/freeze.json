@@ -1,0 +1,100 @@
+{
+  "identity": "f05-go01-source-only-oracle-preparation-20261029",
+  "frozenAt": "2026-10-29T08:00:28.276969+00:00",
+  "sourceRevision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+  "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+  "policyAccepted": false,
+  "nativeCollectionComplete": false,
+  "nativeCounts": null,
+  "sourceExclusionsProposed": 380,
+  "syntheticControls": 60,
+  "oracleSha256": "f58db90df7179c26413cdceb0efb9ddcb0a389902bae8a27524faea59a8c11dc",
+  "controlsSha256": "b412bd3c0a8bfad132bad3cdcd5e0cc136638742519960600a7acb54784f58e3",
+  "proposalSha256": "009c116c3dce44d97c4b3b870ed6f6a46bd72ad697ecdbd05ea2806857b524ff",
+  "excludedGeneratedDirectories": [
+    "__pycache__",
+    ".ruff_cache"
+  ],
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 9879,
+      "sha256": "921a1175a3dbd688515092de5bd2c634d08c7230ad3854506d2630ffd13fc560"
+    },
+    {
+      "path": "checks.json",
+      "bytes": 444,
+      "sha256": "bcace73ee88f78906f4edda1105d8006fbaf0f010551aa6a1f661e70dfca3e23"
+    },
+    {
+      "path": "collection-required.json",
+      "bytes": 823,
+      "sha256": "bac8e773da998d371be4724ff9f3c505bea1bb38c8a97884866a7f9e04603607"
+    },
+    {
+      "path": "contract-bindings.json",
+      "bytes": 971,
+      "sha256": "dccdaa9cfea5631ece1ee4d0bc6a9274eba32945631af5aa4919dfcd4885ce98"
+    },
+    {
+      "path": "controls-final.json",
+      "bytes": 25063,
+      "sha256": "7f1f04b2a86b4f4fef9aeec9917ea33098373449d354334bf1e70c7037697f21"
+    },
+    {
+      "path": "controls-final2.json",
+      "bytes": 25446,
+      "sha256": "c03ea5a36c9d8caad0dd770f34058e4b2161dfcf78201184699d5f7c9241d91a"
+    },
+    {
+      "path": "controls.json",
+      "bytes": 21501,
+      "sha256": "09bb4312c993cc151f88487b2c6817b332cfe985e82cdcb4395517a054d6c142"
+    },
+    {
+      "path": "controls.py",
+      "bytes": 13605,
+      "sha256": "b412bd3c0a8bfad132bad3cdcd5e0cc136638742519960600a7acb54784f58e3"
+    },
+    {
+      "path": "derive.py",
+      "bytes": 8867,
+      "sha256": "4602936e5214b92fb2f4a0c51a8aea1bd2d1feb0981d31e5d3ec320a9034d519"
+    },
+    {
+      "path": "oracle.py",
+      "bytes": 14989,
+      "sha256": "f58db90df7179c26413cdceb0efb9ddcb0a389902bae8a27524faea59a8c11dc"
+    },
+    {
+      "path": "policy-proposal.json",
+      "bytes": 319621,
+      "sha256": "009c116c3dce44d97c4b3b870ed6f6a46bd72ad697ecdbd05ea2806857b524ff"
+    },
+    {
+      "path": "skip-source-ledger.json",
+      "bytes": 449303,
+      "sha256": "85c1e2cc490e8a95abcba4b631f86c45c2f94607cd5c62fc7cb2598ef61ebb52"
+    },
+    {
+      "path": "source-bindings.json",
+      "bytes": 5589,
+      "sha256": "4b57e26c46ce2d15fe1d7f31c57b07cfa9cc4f7434ee93d13f1a902516380116"
+    },
+    {
+      "path": "unresolved-conditions.json",
+      "bytes": 3927,
+      "sha256": "7b24d633be6d2cd77dc16d38b7213b6f75679c220a7d847b970a0a544035f213"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 1512,
+      "sha256": "0b18f1451eaafe0cf227c526581e880c67ae36c73a4add3544a0d9ad067c1ebf"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 4116,
+      "sha256": "7f8596e6683bae1feb706a73895c5eeb6f12977761e689e1b3904a5db586c911"
+    }
+  ]
+}

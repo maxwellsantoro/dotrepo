@@ -1,0 +1,16 @@
+   Compiling dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.93s
+     Running unittests src/lib.rs (target/debug/deps/dotrepo_core-6af6d15045c80b2a)
+
+running 8 tests
+test import::context_verification::tests::unrelated_valid_sources_do_not_establish_declared_sources ... ok
+test import::context_verification::tests::unmodified_real_keras_route_checks_integrity_only_and_stays_medium ... ok
+test import::context_verification::tests::absent_attachment_and_missing_or_conflicting_checks_do_not_create_a_pass ... ok
+test import::context_verification::tests::symlink_source_leaf_and_ancestor_are_refused_without_following ... ok
+test import::context_verification::tests::changed_deleted_or_nonregular_source_after_import_is_unresolved ... ok
+test import::context_verification::tests::malformed_empty_or_excessive_attachment_is_unresolved ... ok
+test import::context_verification::tests::tuple_source_and_time_changes_are_unresolved ... ok
+test import::context_verification::tests::invalid_row_shapes_paths_hashes_and_spans_are_unresolved ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 273 filtered out; finished in 0.32s
+

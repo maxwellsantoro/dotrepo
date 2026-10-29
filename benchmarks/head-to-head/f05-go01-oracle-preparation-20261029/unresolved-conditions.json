@@ -1,0 +1,52 @@
+{
+  "state": "unresolved-source-only-conditions; no extra approved exclusions",
+  "lexicalTestSitesBeyondExactProposal": 89,
+  "nonTestHelperSites": 11,
+  "excludedBehaviorNeverPassedBehavior": true,
+  "compilerEmitOutput": {
+    "sourcePath": "tsc/internal/testrunner/compiler_runner.go",
+    "sourceSha256": "1d0fe0e64d74bb1993de04851c86e108553ee4bbeb4dcde580e1c1820a89c3fa",
+    "startLine": 406,
+    "endLine": 425,
+    "excerpt": "var skippedEmitTests = map[string]string{\n\t\"filesEmittingIntoSameOutput.ts\":                  \"Output order nondeterministic due to collision on filename during parallel emit.\",\n\t\"jsFileCompilationWithJsEmitPathSameAsInput.ts\":   \"Output order nondeterministic due to collision on filename during parallel emit.\",\n\t\"grammarErrors.ts\":                                \"Output order nondeterministic due to collision on filename during parallel emit.\",\n\t\"jsFileCompilationEmitBlockedCorrectly.ts\":        \"Output order nondeterministic due to collision on filename during parallel emit.\",\n\t\"jsDeclarationsReexportAliasesEsModuleInterop.ts\": \"cls.d.ts is missing statements when run concurrently.\",\n\t\"jsFileCompilationWithoutJsExtensions.ts\":         \"No files are emitted.\",\n\t\"typeOnlyMerge2.ts\":                               \"Nondeterministic contents when run concurrently.\",\n\t\"typeOnlyMerge3.ts\":                               \"Nondeterministic contents when run concurrently.\",\n}\n\nfunc (c *compilerTest) verifyJavaScriptOutput(t *testing.T, suiteName string) {\n\tif !c.hasNonDtsFiles {\n\t\treturn\n\t}\n\n\tt.Run(\"output\", func(t *testing.T) {\n\t\tif msg, ok := skippedEmitTests[c.basename]; ok {\n\t\t\tt.Skip(msg)\n\t\t}",
+    "sourceBasenames": [
+      "filesEmittingIntoSameOutput.ts",
+      "jsFileCompilationWithJsEmitPathSameAsInput.ts",
+      "grammarErrors.ts",
+      "jsFileCompilationEmitBlockedCorrectly.ts",
+      "jsDeclarationsReexportAliasesEsModuleInterop.ts",
+      "jsFileCompilationWithoutJsExtensions.ts",
+      "typeOnlyMerge2.ts",
+      "typeOnlyMerge3.ts"
+    ],
+    "missing": "Exact full JSON nested identities after source-derived suite/config naming and option mapping. No basename/suffix/prefix allowlist."
+  },
+  "otherConditions": [
+    {
+      "family": "Unsupported compiler options",
+      "source": "tsc/internal/testutil/harnessutil/harnessutil.go:1232-1257",
+      "disposition": "Seven source predicates need exact fixture/config/identity mapping; no blanket helper-message exclusion."
+    },
+    {
+      "family": "Fuzz seed predicates",
+      "source": [
+        "tsc/internal/parser/parser_test.go:139-142",
+        "tsc/internal/jsnum/string_test.go:279-282"
+      ],
+      "disposition": "Seed identities/arguments and predicate results not collected; exact identities must be independently source-bound before exclusion."
+    },
+    {
+      "family": "Fanotify/NameToHandleAt, watcher capabilities and filesystem permissions",
+      "disposition": "Nonroot/cap-drop alone does not prove exact skip conditions. Bind actual capability/filesystem probes separately before tests, then review any source-bound proposed exact identity; current oracle rejects all such skips."
+    },
+    {
+      "family": "Missing embedded bundles, Node, fixtures or home directory",
+      "disposition": "May be setup defects. Current default embedding/Node/image declarations do not permit these skips. Preserve as unresolved/noncompletion."
+    },
+    {
+      "family": "Platform/build-tag/race/benchmark alternatives",
+      "disposition": "Native collection must retain actual Linux ARM64 package/file/tag resolution. Do not treat out-of-scope variants or benchmark helper skip sites as executed default tests."
+    }
+  ],
+  "nextGate": "Source-only exact dynamic identity/condition adjudication and independent review before any expanded skip policy; no exclusions added from future execution failures."
+}

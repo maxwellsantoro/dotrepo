@@ -1,0 +1,76 @@
++ cargo run -p dotrepo-cli -- validate-index
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.12s
+     Running `target/debug/dotrepo validate-index`
+index valid
++ cargo test -p dotrepo-core --test claim_fixture_pack
+   Compiling dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.43s
+     Running tests/claim_fixture_pack.rs (target/debug/deps/claim_fixture_pack-96aa8f1cc0faa77a)
+
+running 7 tests
+test claim_fixture_pack_loads_representative_claim_histories ... ok
+test claim_fixture_pack_builds_read_only_claim_reports ... ok
+test index_validation_replays_claim_transition_sources ... ok
+test valid_in_review_claim_breaks_equal_rank_ties_before_path_order ... ok
+test claim_fixture_pack_matches_validation_expectations ... ok
+test reviewer_workflow_helpers_match_golden_claim_fixtures ... ok
+test authority_resolution_rejects_invalid_claims_at_index_and_repository_scope ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
++ cargo test -p dotrepo-cli --test claim_command_contract
+   Compiling dotrepo-cli v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-cli)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.65s
+     Running tests/claim_command_contract.rs (target/debug/deps/claim_command_contract-023ef4290a36cc20)
+
+running 8 tests
+test claim_event_command_rejects_absolute_claim_paths ... ok
+test claim_command_rejects_absolute_claim_paths ... ok
+test claim_command_reports_superseded_handoff_from_fixture ... ok
+test validate_index_rejects_invalid_claim_history ... ok
+test claim_command_reports_corrected_history_from_fixture ... ok
+test native_claim_commands_execute_derived_claim_path_workflow ... ok
+test live_seed_overlay_handoff_surfaces_in_public_outputs ... ok
+test claim_commands_execute_documented_operator_workflow ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.41s
+
++ cargo run -q -p dotrepo-cli -- --root /Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core/tests/fixtures/claims/accepted-clean claim repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-01 --json
++ cargo run -q -p dotrepo-cli -- --root /Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core/tests/fixtures/claims/corrected claim repos/github.com/acme/widget/claims/2026-03-15-maintainer-claim-01 --json
++ cargo run -q -p dotrepo-cli -- --root /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-index claim-init --host github.com --owner cli --repo cli --claim-id 2026-03-19-maintainer-claim-01 --claimant-name GitHub CLI maintainers --asserted-role maintainer --contact maintainers@github.com --record-source https://github.com/cli/cli --canonical-repo-url https://github.com/cli/cli --review-md
+initialized /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-index/repos/github.com/cli/cli/claims/2026-03-19-maintainer-claim-01/claim.toml
++ cargo run -q -p dotrepo-cli -- --root /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-index claim-event repos/github.com/cli/cli/claims/2026-03-19-maintainer-claim-01 --kind submitted --actor claimant --summary Submitted maintainer claim.
+updated /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-index/repos/github.com/cli/cli/claims/2026-03-19-maintainer-claim-01/claim.toml
+appended /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-index/repos/github.com/cli/cli/claims/2026-03-19-maintainer-claim-01/events/0001-submitted.toml
++ cargo run -q -p dotrepo-cli -- --root /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-index claim-event repos/github.com/cli/cli/claims/2026-03-19-maintainer-claim-01 --kind accepted --actor index-reviewer --summary Accepted claim after maintainer review. --canonical-record-path .repo --canonical-mirror-path repos/github.com/cli/cli/record.toml
+updated /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-index/repos/github.com/cli/cli/claims/2026-03-19-maintainer-claim-01/claim.toml
+appended /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-index/repos/github.com/cli/cli/claims/2026-03-19-maintainer-claim-01/events/0002-accepted.toml
++ cargo run -q -p dotrepo-cli -- public export --index-root /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-index --out-dir /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-public --generated-at 2026-03-10T18:30:00Z --stale-after 2026-03-11T18:30:00Z
+exported /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-public/v0/meta.json
+exported /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-public/v0/repos/github.com/cli/cli/index.json
+exported /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-public/v0/repos/github.com/cli/cli/trust.json
+exported /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-public/v0/repos/github.com/cli/cli/profile.json
+exported /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-public/v0/repos/github.com/cli/cli/relations.json
+exported /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-public/query-input/github.com/cli/cli.json
+exported /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-public/v0/repos/index.json
+exported /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-public/v0/repos/search.json
+exported /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-public/v0/snapshots/87af36392d68834b23608002e4de36a156c5698320609a62366f786ee625c44f/repos/github.com/cli/cli/index.json
+exported /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-public/v0/snapshots/87af36392d68834b23608002e4de36a156c5698320609a62366f786ee625c44f/repos/github.com/cli/cli/trust.json
+exported /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-public/v0/snapshots/87af36392d68834b23608002e4de36a156c5698320609a62366f786ee625c44f/repos/github.com/cli/cli/profile.json
+exported /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-public/v0/snapshots/87af36392d68834b23608002e4de36a156c5698320609a62366f786ee625c44f/repos/github.com/cli/cli/relations.json
+exported /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-public/v0/snapshots/87af36392d68834b23608002e4de36a156c5698320609a62366f786ee625c44f/query-input/github.com/cli/cli.json
+exported /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-public/v0/snapshots/87af36392d68834b23608002e4de36a156c5698320609a62366f786ee625c44f/repos/index.json
+exported /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-public/v0/snapshots/87af36392d68834b23608002e4de36a156c5698320609a62366f786ee625c44f/repos/search.json
+exported /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-public/v0/files.json
+exported /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-public/v0/snapshots/87af36392d68834b23608002e4de36a156c5698320609a62366f786ee625c44f/files.json
+exported /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-public/v0/snapshots/log.json
+exported /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-public/v0/stats.json
+exported /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-public/.well-known/pagedigest.json
+
+operator gate artifacts
+  accepted-clean report: /private/tmp/dotrepo-source-integrity-wave-operator-20261029/reports/accepted-clean.json
+  corrected report: /private/tmp/dotrepo-source-integrity-wave-operator-20261029/reports/corrected.json
+  invalid-history stderr: /private/tmp/dotrepo-source-integrity-wave-operator-20261029/reports/invalid-history.stderr.txt
+  readme: /private/tmp/dotrepo-source-integrity-wave-operator-20261029/README.txt
+  live seed summary: /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-public/v0/repos/github.com/cli/cli/index.json
+  live seed trust: /private/tmp/dotrepo-source-integrity-wave-operator-20261029/live-seed-handoff-public/v0/repos/github.com/cli/cli/trust.json
