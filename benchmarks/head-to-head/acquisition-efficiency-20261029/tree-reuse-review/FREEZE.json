@@ -1,0 +1,34 @@
+{
+  "state": "independent-bounded-acquisition-tree-reuse-review-frozen",
+  "subject": {
+    "base": "9fe76b4d08e44db3b4563281b82054674101dacc",
+    "authorFreezeSha256": "0b719e2fc41d3560f23e1c82ad46fe69d3c5d4d4ca76a496de75789366dbf654",
+    "githubRsSha256": "b5a8dd3ea5c8c7217268aed3b6a27ee4034d87fe1a629a0cb87d307b4a5cd3bb",
+    "newTestsSha256": "9cb13bd8a6cfc8b7056c833912e9d4aab77c224e3d710a999f9e42fc2c1d361e",
+    "patchSha256": "ba8fb6f9a5bb47a9f85d045b2c4b182cd51be193a313cb5c7fcbe95fa2db5fed"
+  },
+  "artifacts": {
+    "README.md": {
+      "bytes": 1639,
+      "sha256": "9650291e8b2a0dc58ba182c11ac32d64b49917ee585646e3504133b388a772c7"
+    },
+    "base-github.rs.txt": {
+      "bytes": 55764,
+      "sha256": "98dc36c7daed98e03fc33fa0ddf80919bb360b383320d4e9ecfdac40b45a0b08"
+    },
+    "focused-tests.log": {
+      "bytes": 3092,
+      "sha256": "87584e95f6173f4b5ae8f5a2ed5779bb2eb19c379282e235e51897900ad4e2b0"
+    },
+    "report.json": {
+      "bytes": 4074,
+      "sha256": "0c3b3ca84f52977cbf4402b228154962eba07838cd9b85c9c4eda81317ddfc79"
+    },
+    "verification.json": {
+      "bytes": 1598,
+      "sha256": "3e8ffbed9af93c29d11408b628251b86f717b538abf5ec9433011c6a47af2ed3"
+    }
+  },
+  "externalAcquisitionAuthorized": false,
+  "live100ComparisonPerformed": false
+}

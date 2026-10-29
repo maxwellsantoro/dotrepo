@@ -1,0 +1,21 @@
+   Compiling dotrepo-crawler v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-crawler)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.61s
+     Running unittests src/lib.rs (target/debug/deps/dotrepo_crawler-475e401e93341950)
+
+running 1 test
+
+thread 'github::tree_reuse_tests::tree_reuse_preserves_selected_bytes_order_and_real_counters' (42184230) panicked at crates/dotrepo-crawler/src/github/tree_reuse_tests.rs:152:5:
+assertion `left == right` failed: successful tree must be reused by both selectors
+  left: 2
+ right: 1
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test github::tree_reuse_tests::tree_reuse_preserves_selected_bytes_order_and_real_counters ... FAILED
+
+failures:
+
+failures:
+    github::tree_reuse_tests::tree_reuse_preserves_selected_bytes_order_and_real_counters
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 55 filtered out; finished in 0.09s
+
+error: test failed, to rerun pass `-p dotrepo-crawler --lib`

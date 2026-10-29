@@ -1,0 +1,149 @@
+{
+  "identity": "bounded-acquisition-efficiency-inputs-and-tree-reuse-v1",
+  "frozenAt": "2026-10-29T15:30:42.129144+00:00",
+  "baselineCommit": "9fe76b4d08e44db3b4563281b82054674101dacc",
+  "sourceSubjects": {
+    "crates/dotrepo-crawler/src/github.rs": {
+      "sha256": "b5a8dd3ea5c8c7217268aed3b6a27ee4034d87fe1a629a0cb87d307b4a5cd3bb",
+      "bytes": 56185
+    },
+    "crates/dotrepo-crawler/src/github/tree_reuse_tests.rs": {
+      "sha256": "9cb13bd8a6cfc8b7056c833912e9d4aab77c224e3d710a999f9e42fc2c1d361e",
+      "bytes": 12632
+    },
+    "scripts/render_unit_cost_report.py": {
+      "sha256": "ec8fc9b8f5a82b4f7d0f485fdf1615328c438e5cb1e61b6ad2b05b1185645959",
+      "bytes": 10785
+    }
+  },
+  "artifacts": {
+    "README.md": {
+      "sha256": "ff4aff46d5fba5656bef586a98ccee276a3939c962cf3ac7c2c74b4be1d550fc",
+      "bytes": 5115
+    },
+    "cohort/FREEZE.json": {
+      "sha256": "e91743d1f238f91f70c1637609effb1e172449091897a304b1345ab94990572b",
+      "bytes": 963
+    },
+    "cohort/README.md": {
+      "sha256": "d5bd0bfc0bff86b926490cc0f615cdeb5ae9fa86801e654e0ae283274152a5e8",
+      "bytes": 3972
+    },
+    "cohort/cohort.json": {
+      "sha256": "30299636a76494a8a27f1f64621e49977fa1e09a7c7dbedc0e2ae7adb2e61c61",
+      "bytes": 68284
+    },
+    "cohort/inputs.json": {
+      "sha256": "d3129ed976f57fb0de3f6187609bb91c085949f345be114c0899eaa661b4a124",
+      "bytes": 351668
+    },
+    "cohort-review/FREEZE.json": {
+      "sha256": "aaca054f45ed623d8721152c984e198c132846b227ed36dcda97cce36d7e2ac8",
+      "bytes": 658
+    },
+    "cohort-review/check.py": {
+      "sha256": "c3d638ad383ad0d64fbef88d7e743cb2d539254ec4949fa60010bc88e486e8bd",
+      "bytes": 8528
+    },
+    "cohort-review/checks.log": {
+      "sha256": "1e68dc6a48fcbbb251a8921dd7638fb0fab5526d66ce8ae9f91586e24c3e45e6",
+      "bytes": 38
+    },
+    "cohort-review/report.json": {
+      "sha256": "513359153ceb074f533dac6f307ae7066e0201675ff6acfafb6323e0a5da7a34",
+      "bytes": 1204
+    },
+    "language-inputs.json": {
+      "sha256": "fc293a9cf6c22706e3aa6fd36801c53bd53d934aeed95a1f529cfd84586526a6",
+      "bytes": 49435
+    },
+    "measurement/FREEZE.json": {
+      "sha256": "2db2666519421cd9151ad1322c99b4235c948313648ec67dba3ea7ccd85bf166",
+      "bytes": 675
+    },
+    "measurement/README.md": {
+      "sha256": "7a2aba8547d2488c0d12ccddf701f0ac9ed8a9e1cb7dfcceebc2729b632b6bff",
+      "bytes": 2913
+    },
+    "measurement/assessment.json": {
+      "sha256": "71b1a1e66a963752c3d7bd3c50442a19b0ef965854c8494e893172b0baccf86b",
+      "bytes": 8343
+    },
+    "measurement/source-bindings.json": {
+      "sha256": "382584ddaf29dbef95bd5cc8ecad4297783f2b62ca30c8c0c4d2cff9f6719a32",
+      "bytes": 4866
+    },
+    "tree-reuse/FREEZE.json": {
+      "sha256": "0b719e2fc41d3560f23e1c82ad46fe69d3c5d4d4ca76a496de75789366dbf654",
+      "bytes": 1688
+    },
+    "tree-reuse/README.md": {
+      "sha256": "c70d19cdf3271dd9ad283ffc9f4d2f0d0ea41e60f40c1c841a7bacde91ec45f6",
+      "bytes": 2556
+    },
+    "tree-reuse/after-final.log": {
+      "sha256": "a8d9a018bbbf0b9abe33e9db262427b3e9989cd6e1ac3fa8c5ddd89bf9dd7385",
+      "bytes": 3196
+    },
+    "tree-reuse/after.log": {
+      "sha256": "669194d6341d52ae16c3a5aa1ed00efbca11d2d8dadf9ba88b6fc4a2c2328fac",
+      "bytes": 3083
+    },
+    "tree-reuse/before-corrected-fixture.log": {
+      "sha256": "e0e0ab162a228c7d1692b97f72115b173fb09c04eb4b58bf72cab63c8a604c9c",
+      "bytes": 1017
+    },
+    "tree-reuse/before.log": {
+      "sha256": "e9597064936e3b5b437cdd8f1fc09251c2a193497adf940c0bbbecf118b0fcc6",
+      "bytes": 14079
+    },
+    "tree-reuse/clippy.log": {
+      "sha256": "0aee0d245a74a88a2391162826fcacd74be8d518e64b181a5968655381c678c2",
+      "bytes": 274
+    },
+    "tree-reuse/fmt-before-format.log": {
+      "sha256": "d1d4c44b1770510ab7ff13618e0a465d6e555a188dc5ee035d198f393c1ec9cb",
+      "bytes": 11603
+    },
+    "tree-reuse/fmt-final.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "tree-reuse/handoff.json": {
+      "sha256": "12322e2345cabc9ea2107c691384db9c5df7f38be21e8f874920152861544c43",
+      "bytes": 1233
+    },
+    "tree-reuse/patch.diff": {
+      "sha256": "ba8fb6f9a5bb47a9f85d045b2c4b182cd51be193a313cb5c7fcbe95fa2db5fed",
+      "bytes": 19505
+    },
+    "tree-reuse-review/FREEZE.json": {
+      "sha256": "e9ef13478fdc348b66f4714c8a6ab3f273379a21b3e1ba59f7b4989138245301",
+      "bytes": 1290
+    },
+    "tree-reuse-review/README.md": {
+      "sha256": "9650291e8b2a0dc58ba182c11ac32d64b49917ee585646e3504133b388a772c7",
+      "bytes": 1639
+    },
+    "tree-reuse-review/base-github.rs.txt": {
+      "sha256": "98dc36c7daed98e03fc33fa0ddf80919bb360b383320d4e9ecfdac40b45a0b08",
+      "bytes": 55764
+    },
+    "tree-reuse-review/focused-tests.log": {
+      "sha256": "87584e95f6173f4b5ae8f5a2ed5779bb2eb19c379282e235e51897900ad4e2b0",
+      "bytes": 3092
+    },
+    "tree-reuse-review/report.json": {
+      "sha256": "0c3b3ca84f52977cbf4402b228154962eba07838cd9b85c9c4eda81317ddfc79",
+      "bytes": 4074
+    },
+    "tree-reuse-review/verification.json": {
+      "sha256": "3e8ffbed9af93c29d11408b628251b86f717b538abf5ec9433011c6a47af2ed3",
+      "bytes": 1598
+    }
+  },
+  "full100ComparisonPerformed": false,
+  "liveBenchmarkAuthorization": false,
+  "F05ReadinessChanged": false,
+  "consumerBenefitEstablished": false
+}

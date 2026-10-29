@@ -1,0 +1,57 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.46s
+     Running unittests src/lib.rs (target/debug/deps/dotrepo_crawler-475e401e93341950)
+
+running 19 tests
+test github::tests::dotnet_primary_language_requires_top_rank ... ok
+test github::tests::languages_by_byte_count_descending_handles_empty_map ... ok
+test github::tests::languages_by_byte_count_descending_orders_by_dominance_not_alphabetically ... ok
+test github::tests::languages_by_byte_count_descending_breaks_ties_alphabetically ... ok
+test github::tests::supplemental_root_files_cover_every_dotrepo_core_deterministic_parser ... ok
+test github::tests::node_package_json_path_preference_ranks_apps_over_sdks ... ok
+test github::tests::first_root_paths_with_suffixes_picks_sorted_csproj_and_sln ... ok
+test github::tests::select_dotnet_paths_from_tree_prefers_non_test_projects ... ok
+test github::tests::refresh_candidates_from_state_uses_repository_heads ... ok
+dotrepo-crawler: skipping github.com/acme/gone in refresh planning: simulated unfetchable repository
+test github::tests::refresh_candidates_from_state_skips_unfetchable_repositories ... ok
+test github::tests::build_http_client_applies_timeouts_and_headers ... ok
+test github::tree_reuse_tests::tree_reuse_is_lazy_when_no_selector_needs_a_tree ... ok
+test github::tree_reuse_tests::tree_reuse_successful_empty_tree_is_reused ... ok
+test github::tree_reuse_tests::tree_reuse_does_not_cache_404_and_later_selector_can_observe_success ... ok
+test github::tree_reuse_tests::tree_reuse_preserves_selected_bytes_order_and_real_counters ... ok
+test github::tree_reuse_tests::tree_reuse_non_200_or_malformed_response_keeps_fatal_error ... ok
+test github::tree_reuse_tests::tree_reuse_serves_rust_and_dotnet_without_changing_root_probe_or_selection ... ok
+test github::tests::http_client_times_out_hung_requests ... ok
+test github::tree_reuse_tests::tree_reuse_is_scoped_to_each_invocation_repository_and_ref ... ok
+
+test result: ok. 19 passed; 0 failed; 0 ignored; 0 measured; 38 filtered out; finished in 0.31s
+
+     Running unittests src/main.rs (target/debug/deps/dotrepo_crawler-b52c6a32ae430824)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 17 filtered out; finished in 0.00s
+
+     Running tests/openrouter_env_escalation.rs (target/debug/deps/openrouter_env_escalation-9ddb8fb84c336363)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 3 filtered out; finished in 0.00s
+
+     Running tests/pipeline_offline.rs (target/debug/deps/pipeline_offline-2f2294e8e6ec6fe2)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 0.00s
+
+     Running tests/targets_file_batch.rs (target/debug/deps/targets_file_batch-fd3f6abd143729e0)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 3 filtered out; finished in 0.00s
+
+     Running tests/writeback_gate.rs (target/debug/deps/writeback_gate-e84fb7fe279b5540)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.00s
+

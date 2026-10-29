@@ -33,6 +33,11 @@ above the threshold; counts are diagnostic snapshots, not permanent baselines.
 | `crates/dotrepo-cli/src/tests.rs` | 1,610 lines, test-only. Split by CLI command domain when adding the next test family. |
 | `crates/dotrepo-core/src/facade_tests/import_repository.rs` | 1,608 lines, test-only. Split evidence, escalation, and assembly domains on the next import-fixture expansion; parsing already has its own module. |
 
+The bounded per-fetch Git-tree reuse change retains `github.rs`: it replaces
+duplicated loading within existing selectors without adding an API or
+materialization feature. Its new HTTP controls live in a test-only child module.
+This retain rationale does not defer the planned split for a new feature.
+
 The command orchestrator's unit tests now live in `import/commands/tests.rs`,
 keeping `mod.rs` focused on loading and assembly. `claims.rs` remains near the
 threshold. Check sizes when expanding them; do not rely on former counts.

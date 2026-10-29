@@ -1,0 +1,31 @@
+{
+  "base": "9fe76b4d08e44db3b4563281b82054674101dacc",
+  "baseGithubSha256": "98dc36c7daed98e03fc33fa0ddf80919bb360b383320d4e9ecfdac40b45a0b08",
+  "currentFiles": [
+    {
+      "path": "crates/dotrepo-crawler/src/github.rs",
+      "bytes": 56185,
+      "sha256": "b5a8dd3ea5c8c7217268aed3b6a27ee4034d87fe1a629a0cb87d307b4a5cd3bb"
+    },
+    {
+      "path": "crates/dotrepo-crawler/src/github/tree_reuse_tests.rs",
+      "bytes": 12632,
+      "sha256": "9cb13bd8a6cfc8b7056c833912e9d4aab77c224e3d710a999f9e42fc2c1d361e"
+    }
+  ],
+  "scope": "private successful recursive-tree reuse per fetch_repository_files invocation; no404memoization",
+  "checks": {
+    "githubTestsPassed": 19,
+    "newTests": 7,
+    "fmtAllCheck": true,
+    "crawlerAllTargetClippyWarningsDenied": true,
+    "externalAcquisition": false,
+    "live100Comparison": false
+  },
+  "limits": [
+    "Selected-file ranking, limits, raw-file fetches, root probe duplicates and tree truncation handling unchanged.",
+    "Existing network bytes remain Content-Length-based, not complete actual-body accounting.",
+    "Exact-ref experiment helper/current-head CLI distinction remains separate.",
+    "No production model/policy/protocol/storage/writeback changes."
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "crates/dotrepo-crawler/src/main.rs": {
+    "commit": "9fe76b4d08e44db3b4563281b82054674101dacc",
+    "sha256": "1f186d88e1acaa9b7e6b3732e3a00bbaa915671ffbfe33ab743a230f4f5ad433",
+    "bytes": 14797,
+    "locator": "54-94 CrawlArgs lacks revision;97-131 seed dry-run;162-183 refresh-plan",
+    "bindingType": "immutable Git blob, not assertion about later mutable working tree"
+  },
+  "crates/dotrepo-crawler/src/lib.rs": {
+    "commit": "9fe76b4d08e44db3b4563281b82054674101dacc",
+    "sha256": "63c7c408bc4ddebf760ac2632d67b1b6c2b9af4db126542bad4468ec057d790c",
+    "bytes": 15085,
+    "locator": "29-31 public crawl;58-64 RepositoryRef;358-370 request;386-397 NetworkUsage header-byte contract",
+    "bindingType": "immutable Git blob, not assertion about later mutable working tree"
+  },
+  "crates/dotrepo-crawler/src/commands.rs": {
+    "commit": "9fe76b4d08e44db3b4563281b82054674101dacc",
+    "sha256": "915261d32fa526ef4cc526cc775e80364702ba2e346880acd8608ad2bb324210",
+    "bytes": 37625,
+    "locator": "74-143 no-write crawl timers/write gate;214-273 dry-run seed drops cost fields;509-532 refresh planning wall timer",
+    "bindingType": "immutable Git blob, not assertion about later mutable working tree"
+  },
+  "crates/dotrepo-crawler/src/report.rs": {
+    "commit": "9fe76b4d08e44db3b4563281b82054674101dacc",
+    "sha256": "73ea6656b790fdf9a6c3d8d954abd1dd5e590c7574a610059595c803b2523292",
+    "bytes": 26995,
+    "locator": "20-41 crawl report;133-144 refresh report lacks network and CPU/RSS",
+    "bindingType": "immutable Git blob, not assertion about later mutable working tree"
+  },
+  "crates/dotrepo-crawler/src/pipeline/mod.rs": {
+    "commit": "9fe76b4d08e44db3b4563281b82054674101dacc",
+    "sha256": "52ce9631da2e421650ed8d40a5e1e4960da5601a5f5cdc7c482dd3c6467d9ab8",
+    "bytes": 47994,
+    "locator": "74-115 capture current head then exact-file ref;101/109 network only attached on successful report;154-218 static import/verification/escalation",
+    "bindingType": "immutable Git blob, not assertion about later mutable working tree"
+  },
+  "crates/dotrepo-crawler/src/adjudication.rs": {
+    "commit": "9fe76b4d08e44db3b4563281b82054674101dacc",
+    "sha256": "b1ffdff1e642d7c475e4b3c26f155993ab7844949e868dd9ecdd5e28e54178cd",
+    "bytes": 9894,
+    "locator": "155-202 env providers;204-223 zero-call options",
+    "bindingType": "immutable Git blob, not assertion about later mutable working tree"
+  },
+  "crates/dotrepo-core/src/import/mod.rs": {
+    "commit": "9fe76b4d08e44db3b4563281b82054674101dacc",
+    "sha256": "cd7db40b036d0e62f29521b044e969c4cf5b6bfaaacad9a9ef834e34cd1c3e19",
+    "bytes": 31910,
+    "locator": "665+ static verify_import_plan, no build/test invocation in inspected orchestration",
+    "bindingType": "immutable Git blob, not assertion about later mutable working tree"
+  },
+  "scripts/run_autonomous_index_batch.py": {
+    "commit": "9fe76b4d08e44db3b4563281b82054674101dacc",
+    "sha256": "6369f940bc73f426a4647be804b6716549f3603b56e9dc1d961fd66bf982a33b",
+    "bytes": 59827,
+    "locator": "195-218 model budget env;235-275 zero post-planning skip rows;1304-1321 refresh subprocess;1404-1468 --write and resource sample",
+    "bindingType": "immutable Git blob, not assertion about later mutable working tree"
+  },
+  "scripts/process_resources.py": {
+    "commit": "9fe76b4d08e44db3b4563281b82054674101dacc",
+    "sha256": "d5af9933f6daedbd2fc18702475c55296cb3aefdcc62c75f7d5d756dde4731a6",
+    "bytes": 4614,
+    "locator": "7-10 limitations;31-75 process-group RSS;78-138 RUSAGE/0.2s sampling and no deadline",
+    "bindingType": "immutable Git blob, not assertion about later mutable working tree"
+  },
+  "scripts/render_unit_cost_report.py": {
+    "commit": "9fe76b4d08e44db3b4563281b82054674101dacc",
+    "sha256": "36916071cb7d92973fc3ce16b1b30697afa51a2262643e9736ddc2577992fb1f",
+    "bytes": 10069,
+    "locator": "10-21 overstrong interpretation;83-96 entries omit planning;111-178 numeric averages;202-239 emitted Markdown only CPU/RSS caveat",
+    "bindingType": "immutable Git blob, not assertion about later mutable working tree"
+  },
+  "scripts/refresh_stale_index.py": {
+    "commit": "9fe76b4d08e44db3b4563281b82054674101dacc",
+    "sha256": "8cb5afa824ff5a175cc14c2e74d712f08fdcb1506234a0d43eee13b31a91e6ab",
+    "bytes": 4444,
+    "locator": "68-113 --write catchup unsuitable as read-only baseline",
+    "bindingType": "immutable Git blob, not assertion about later mutable working tree"
+  },
+  "docs/factual-crawl-automation.md": {
+    "commit": "9fe76b4d08e44db3b4563281b82054674101dacc",
+    "sha256": "142dd4add4b94203a4fe991a63f228ed8806d9e1c0f45dae0ad9b9ed2e71735f",
+    "bytes": 22657,
+    "locator": "347-356 planning/head costs excluded and status advancement proxy",
+    "bindingType": "immutable Git blob, not assertion about later mutable working tree"
+  }
+}

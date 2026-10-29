@@ -1,0 +1,266 @@
+Diff in /Users/maxwell/projects/agent/dotrepo/crates/dotrepo-crawler/src/github/tree_reuse_tests.rs:36:
+                     Err(error) => panic!("owned listener: {error}"),
+                 };
+                 stream.set_nonblocking(false).unwrap();
+-                stream.set_read_timeout(Some(Duration::from_secs(2))).unwrap();
++                stream
++                    .set_read_timeout(Some(Duration::from_secs(2)))
++                    .unwrap();
+                 let mut raw = Vec::new();
+                 while !raw.ends_with(b"\r\n\r\n") {
+                     let mut byte = [0];
+Diff in /Users/maxwell/projects/agent/dotrepo/crates/dotrepo-crawler/src/github/tree_reuse_tests.rs:56:
+                 write!(stream, "HTTP/1.1 {status} fixture\r\nContent-Length: {}\r\nContent-Type: application/json\r\nConnection: close\r\n\r\n{body}", body.len()).unwrap();
+             }
+         });
+-        Self { base, requests, stop, thread: Some(thread) }
++        Self {
++            base,
++            requests,
++            stop,
++            thread: Some(thread),
++        }
+     }
+ 
+     fn client(&self) -> HttpGitHubClient {
+Diff in /Users/maxwell/projects/agent/dotrepo/crates/dotrepo-crawler/src/github/tree_reuse_tests.rs:63:
+         HttpGitHubClient {
+-            client: Client::builder().timeout(Duration::from_secs(3)).no_proxy().build().unwrap(),
++            client: Client::builder()
++                .timeout(Duration::from_secs(3))
++                .no_proxy()
++                .build()
++                .unwrap(),
+             api_base_url: Url::parse(&self.base).unwrap(),
+             raw_base_url: Url::parse(&(self.base.clone() + "raw")).unwrap(),
+             network: RefCell::new(NetworkUsage::default()),
+Diff in /Users/maxwell/projects/agent/dotrepo/crates/dotrepo-crawler/src/github/tree_reuse_tests.rs:69:
+     }
+ 
+     fn tree_calls(&self) -> usize {
+-        self.requests.lock().unwrap().iter().filter(|(path, _)| path.contains("/git/trees/")).count()
++        self.requests
++            .lock()
++            .unwrap()
++            .iter()
++            .filter(|(path, _)| path.contains("/git/trees/"))
++            .count()
+     }
+ 
+     fn assert_counters(&self, client: &HttpGitHubClient) {
+Diff in /Users/maxwell/projects/agent/dotrepo/crates/dotrepo-crawler/src/github/tree_reuse_tests.rs:76:
+         let requests = self.requests.lock().unwrap();
+         let usage = client.network_usage();
+         assert_eq!(usage.requests as usize, requests.len());
+-        assert_eq!(usage.bytes as usize, requests.iter().map(|(_, bytes)| bytes).sum::<usize>());
++        assert_eq!(
++            usage.bytes as usize,
++            requests.iter().map(|(_, bytes)| bytes).sum::<usize>()
++        );
+     }
+ }
+ 
+Diff in /Users/maxwell/projects/agent/dotrepo/crates/dotrepo-crawler/src/github/tree_reuse_tests.rs:84:
+     fn drop(&mut self) {
+         self.stop.store(true, Ordering::Relaxed);
+         let result = self.thread.take().unwrap().join();
+-        if !thread::panicking() { result.unwrap(); }
++        if !thread::panicking() {
++            result.unwrap();
++        }
+     }
+ }
+ 
+Diff in /Users/maxwell/projects/agent/dotrepo/crates/dotrepo-crawler/src/github/tree_reuse_tests.rs:91:
+ fn repository(name: &str) -> RepositoryRef {
+-    RepositoryRef { host: "github.com".into(), owner: "owned".into(), repo: name.into() }
++    RepositoryRef {
++        host: "github.com".into(),
++        owner: "owned".into(),
++        repo: name.into(),
++    }
+ }
+ 
+ fn languages() -> Vec<String> {
+Diff in /Users/maxwell/projects/agent/dotrepo/crates/dotrepo-crawler/src/github/tree_reuse_tests.rs:106:
+         {"path": "examples/demo/setup.py", "type": "blob"},
+         {"path": "sdk/setup.py", "type": "blob"},
+         {"path": "src/setup.py", "type": "tree"}
+-    ]}).to_string()
++    ]})
++    .to_string()
+ }
+ 
+ fn fixture_reply(path: &str, _: usize) -> Reply {
+Diff in /Users/maxwell/projects/agent/dotrepo/crates/dotrepo-crawler/src/github/tree_reuse_tests.rs:137:
+ fn tree_reuse_preserves_selected_bytes_order_and_real_counters() {
+     let server = Server::start(fixture_reply);
+     let client = server.client();
+-    let files = client.fetch_repository_files(&repository("mixed"), "fixed-ref", &languages()).unwrap();
+-    let selected: Vec<_> = files.extra_files.iter().map(|file| (file.relative_path.to_string_lossy().to_string(), file.contents.clone())).collect();
+-    assert_eq!(selected, vec![
+-        ("package.json".into(), "{\"scripts\":{\"test\":\"owned-root\"}}\n".into()),
+-        ("pyproject.toml".into(), "[project]\nname = 'owned'\n".into()),
+-        ("server/package.json".into(), "owned server bytes\n".into()),
+-        ("web/package.json".into(), "owned web bytes\n".into()),
+-        ("python/pyproject.toml".into(), "owned python project bytes\n".into()),
+-        ("python/setup.py".into(), "owned setup bytes\n".into()),
+-    ]);
++    let files = client
++        .fetch_repository_files(&repository("mixed"), "fixed-ref", &languages())
++        .unwrap();
++    let selected: Vec<_> = files
++        .extra_files
++        .iter()
++        .map(|file| {
++            (
++                file.relative_path.to_string_lossy().to_string(),
++                file.contents.clone(),
++            )
++        })
++        .collect();
++    assert_eq!(
++        selected,
++        vec![
++            (
++                "package.json".into(),
++                "{\"scripts\":{\"test\":\"owned-root\"}}\n".into()
++            ),
++            (
++                "pyproject.toml".into(),
++                "[project]\nname = 'owned'\n".into()
++            ),
++            ("server/package.json".into(), "owned server bytes\n".into()),
++            ("web/package.json".into(), "owned web bytes\n".into()),
++            (
++                "python/pyproject.toml".into(),
++                "owned python project bytes\n".into()
++            ),
++            ("python/setup.py".into(), "owned setup bytes\n".into()),
++        ]
++    );
+     assert_eq!(files.readme.unwrap().contents, "# owned\n");
+     server.assert_counters(&client);
+-    assert_eq!(server.tree_calls(), 1, "successful tree must be reused by both selectors");
++    assert_eq!(
++        server.tree_calls(),
++        1,
++        "successful tree must be reused by both selectors"
++    );
+ }
+ 
+ #[test]
+Diff in /Users/maxwell/projects/agent/dotrepo/crates/dotrepo-crawler/src/github/tree_reuse_tests.rs:162:
+         }
+     });
+     let client = server.client();
+-    let files = client.fetch_repository_files(&repository("mixed"), "fixed-ref", &languages()).unwrap();
+-    let paths: Vec<_> = files.extra_files.iter().map(|file| file.relative_path.to_string_lossy().to_string()).collect();
+-    assert_eq!(paths, vec!["package.json", "pyproject.toml", "python/pyproject.toml", "python/setup.py"]);
++    let files = client
++        .fetch_repository_files(&repository("mixed"), "fixed-ref", &languages())
++        .unwrap();
++    let paths: Vec<_> = files
++        .extra_files
++        .iter()
++        .map(|file| file.relative_path.to_string_lossy().to_string())
++        .collect();
++    assert_eq!(
++        paths,
++        vec![
++            "package.json",
++            "pyproject.toml",
++            "python/pyproject.toml",
++            "python/setup.py"
++        ]
++    );
+     assert_eq!(server.tree_calls(), 2);
+     server.assert_counters(&client);
+ }
+Diff in /Users/maxwell/projects/agent/dotrepo/crates/dotrepo-crawler/src/github/tree_reuse_tests.rs:173:
+ fn tree_reuse_is_lazy_when_no_selector_needs_a_tree() {
+     let server = Server::start(fixture_reply);
+     let client = server.client();
+-    client.fetch_repository_files(&repository("go-only"), "fixed-ref", &["Go".into()]).unwrap();
++    client
++        .fetch_repository_files(&repository("go-only"), "fixed-ref", &["Go".into()])
++        .unwrap();
+     assert_eq!(server.tree_calls(), 0);
+     server.assert_counters(&client);
+ }
+Diff in /Users/maxwell/projects/agent/dotrepo/crates/dotrepo-crawler/src/github/tree_reuse_tests.rs:181:
+ #[test]
+ fn tree_reuse_successful_empty_tree_is_reused() {
+     let server = Server::start(|path, count| {
+-        if path.contains("/git/trees/") { (200, "{\"tree\":[]}".into()) } else { fixture_reply(path, count) }
++        if path.contains("/git/trees/") {
++            (200, "{\"tree\":[]}".into())
++        } else {
++            fixture_reply(path, count)
++        }
+     });
+     let client = server.client();
+-    let files = client.fetch_repository_files(&repository("empty"), "fixed-ref", &languages()).unwrap();
++    let files = client
++        .fetch_repository_files(&repository("empty"), "fixed-ref", &languages())
++        .unwrap();
+     assert_eq!(files.extra_files.len(), 2);
+     assert_eq!(server.tree_calls(), 1);
+     server.assert_counters(&client);
+Diff in /Users/maxwell/projects/agent/dotrepo/crates/dotrepo-crawler/src/github/tree_reuse_tests.rs:194:
+ fn tree_reuse_non_200_or_malformed_response_keeps_fatal_error() {
+     for (status, body) in [(500, "owned server error"), (200, "not json")] {
+         let server = Server::start(move |path, count| {
+-            if path.contains("/git/trees/") { (status, body.into()) } else { fixture_reply(path, count) }
++            if path.contains("/git/trees/") {
++                (status, body.into())
++            } else {
++                fixture_reply(path, count)
++            }
+         });
+         let client = server.client();
+-        assert!(client.fetch_repository_files(&repository("broken"), "fixed-ref", &languages()).is_err());
++        assert!(client
++            .fetch_repository_files(&repository("broken"), "fixed-ref", &languages())
++            .is_err());
+         assert_eq!(server.tree_calls(), 1);
+         server.assert_counters(&client);
+     }
+Diff in /Users/maxwell/projects/agent/dotrepo/crates/dotrepo-crawler/src/github/tree_reuse_tests.rs:207:
+ fn tree_reuse_is_scoped_to_each_invocation_repository_and_ref() {
+     let server = Server::start(fixture_reply);
+     let client = server.client();
+-    for (repo, reference) in [("first", "one"), ("first", "one"), ("first", "two"), ("second", "one")] {
+-        client.fetch_repository_files(&repository(repo), reference, &languages()).unwrap();
++    for (repo, reference) in [
++        ("first", "one"),
++        ("first", "one"),
++        ("first", "two"),
++        ("second", "one"),
++    ] {
++        client
++            .fetch_repository_files(&repository(repo), reference, &languages())
++            .unwrap();
+     }
+     assert_eq!(server.tree_calls(), 4);
+     let requests = server.requests.lock().unwrap();
+Diff in /Users/maxwell/projects/agent/dotrepo/crates/dotrepo-crawler/src/github/tree_reuse_tests.rs:215:
+-    let paths: Vec<_> = requests.iter().filter(|(path, _)| path.contains("/git/trees/")).map(|(path, _)| path.as_str()).collect();
+-    assert_eq!(paths, vec!["/repos/owned/first/git/trees/one?recursive=1", "/repos/owned/first/git/trees/one?recursive=1", "/repos/owned/first/git/trees/two?recursive=1", "/repos/owned/second/git/trees/one?recursive=1"]);
++    let paths: Vec<_> = requests
++        .iter()
++        .filter(|(path, _)| path.contains("/git/trees/"))
++        .map(|(path, _)| path.as_str())
++        .collect();
++    assert_eq!(
++        paths,
++        vec![
++            "/repos/owned/first/git/trees/one?recursive=1",
++            "/repos/owned/first/git/trees/one?recursive=1",
++            "/repos/owned/first/git/trees/two?recursive=1",
++            "/repos/owned/second/git/trees/one?recursive=1"
++        ]
++    );
+     drop(requests);
+     server.assert_counters(&client);
+ }

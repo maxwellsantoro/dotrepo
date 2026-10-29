@@ -1,0 +1,41 @@
+{
+  "state": "independent-tree-reuse-patch-review-passed",
+  "subject": {
+    "base": "9fe76b4d08e44db3b4563281b82054674101dacc",
+    "authorFreezeSha256": "0b719e2fc41d3560f23e1c82ad46fe69d3c5d4d4ca76a496de75789366dbf654",
+    "githubRsSha256": "b5a8dd3ea5c8c7217268aed3b6a27ee4034d87fe1a629a0cb87d307b4a5cd3bb",
+    "newTestsSha256": "9cb13bd8a6cfc8b7056c833912e9d4aab77c224e3d710a999f9e42fc2c1d361e",
+    "patchSha256": "ba8fb6f9a5bb47a9f85d045b2c4b182cd51be193a313cb5c7fcbe95fa2db5fed"
+  },
+  "findings": [],
+  "scope": "Bounded successful recursive-tree reuse code review only; not live acquisition100 comparison or field-quality/consumer evidence.",
+  "sourceAssessment": [
+    "Local tree_cache=None is constructed inside each fetch_repository_files. No client/global cache storage or key reuse spans an invocation/repository/ref. All four selectors receive that invocation same repository/default_branch/reference and same local slot.",
+    "Private helper issues unchanged recursive tree endpoint lazily on None, assigns only after successful get_optional_json completion, returns borrowed Some tree.404 stays None and later selector still GETs; malformed/500 errors propagate and stop materialization. Successful empty decoded tree is reusable.",
+    "Language/root/monorepo/.NET short circuits are unchanged. Selection predicates, ranking/truncation, requested raw paths/body/order, workflow/root probes and final conventional-file assembly remain source-identical except tree acquisition substitution.",
+    "Counters are not synthesized for cache hits. Only actual send_with_retry calls update original requests and Content-Length-based bytes; localhost fixtures assert exact known-header request/byte totals and reduced successful tree count."
+  ],
+  "validation": {
+    "focusedOfflineGithubTests": 19,
+    "newOwnedLocalhostControls": 7,
+    "observedExternalGitHubCalls": 0,
+    "authorFmtAndCrawlerAllTargetsOfflineClippy": "retained pass receipts at exactsubject; independently hashverified, not rerun",
+    "authorBeforeControl": "Corrected fixture proved selected bytes/order/counters then failed2treecalls vs1; initial fixture defect retained and not claimed as product evidence.",
+    "schemaCorrection": "Initial review metadata checker assumed wrong freeze schema, corrected to files list; no source defect."
+  },
+  "behaviorAndMeasurementLimits": [
+    "Parity means same stable tree/raw response data at a fixed ref. A successful cached response intentionally removes later tree GETs; removed requests cannot expose a later transient error or moving-branch tree. The production current-head interface remains non-atomic; exact revision comparison must separately bind frozenrefs.",
+    "Existing recursive tree truncation treatment, repeated Cargo/root/marker probes, raw-file requests and rate-limit policy remain unchanged. This is not evidence of full tree completeness or portable instruction correctness.",
+    "Known Content-Length test totals do not establish actual response-body/wire-byte accounting. Chunked/missing/compressed header limitations remain for the measurement owner to handle distinctly.",
+    "No100repository run, cold/warm result, wall/CPU/RSS benefit, provider or field-disposition change was measured here; cohort and measurement protocol gates remain separate."
+  ],
+  "reviewerContext": "Reviewer froze the separate acquisition100 cohort and has prior source/harness review context, but did not implement this Rust cache patch. Independent bounded code/tests review, not blind acquisition or consumer trial.",
+  "integrationDisposition": "No bounded blocker to coordinator integration and combined gates at these exact hashes. This review grants no external acquisition/livecomparison/provider/index-writeback authority.",
+  "externalAcquisitionAuthorized": false,
+  "live100ComparisonPerformed": false,
+  "providerCalls": 0,
+  "upstreamNativeWorkloads": 0,
+  "indexWriteback": false,
+  "consumerBenefitEstablished": false,
+  "verificationSha256": "3e8ffbed9af93c29d11408b628251b86f717b538abf5ec9433011c6a47af2ed3"
+}

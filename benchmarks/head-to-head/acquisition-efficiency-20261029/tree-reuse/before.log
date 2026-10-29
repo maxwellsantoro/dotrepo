@@ -1,0 +1,118 @@
+   Compiling dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)
+   Compiling dotrepo-crawler v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-crawler)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 14.57s
+     Running unittests src/lib.rs (target/debug/deps/dotrepo_crawler-475e401e93341950)
+
+running 1 test
+
+thread '<unnamed>' (42183437) panicked at crates/dotrepo-crawler/src/github/tree_reuse_tests.rs:42:47:
+called `Result::unwrap()` on an `Err` value: Os { code: 35, kind: WouldBlock, message: "Resource temporarily unavailable" }
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread 'github::tree_reuse_tests::tree_reuse_preserves_selected_bytes_order_and_real_counters' (42183436) panicked at crates/dotrepo-crawler/src/github/tree_reuse_tests.rs:138:96:
+called `Result::unwrap()` on an `Err` value: failed to GET http://127.0.0.1:59405/raw//owned/mixed/fixed-ref/server/package.json
+
+Caused by:
+    0: error sending request for url (http://127.0.0.1:59405/raw//owned/mixed/fixed-ref/server/package.json)
+    1: client error (SendRequest)
+    2: connection error
+    3: Connection reset by peer (os error 54)
+
+thread 'github::tree_reuse_tests::tree_reuse_preserves_selected_bytes_order_and_real_counters' (42183436) panicked at crates/dotrepo-crawler/src/github/tree_reuse_tests.rs:85:44:
+called `Result::unwrap()` on an `Err` value: Any { .. }
+stack backtrace:
+   0:        0x101808f58 - std[15f51b41b433de00]::backtrace_rs::backtrace::libunwind::trace
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/../../backtrace/src/backtrace/libunwind.rs:117:9
+   1:        0x101808f58 - std[15f51b41b433de00]::backtrace_rs::backtrace::trace_unsynchronized::<std[15f51b41b433de00]::sys::backtrace::_print_fmt::{closure#1}>
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/../../backtrace/src/backtrace/mod.rs:66:14
+   2:        0x101808f58 - std[15f51b41b433de00]::sys::backtrace::_print_fmt
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/sys/backtrace.rs:74:9
+   3:        0x101808f58 - <<std[15f51b41b433de00]::sys::backtrace::BacktraceLock>::print::DisplayBacktrace as core[e5a5d44af443baf0]::fmt::Display>::fmt
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/sys/backtrace.rs:44:26
+   4:        0x10181f6c8 - <core[e5a5d44af443baf0]::fmt::rt::Argument>::fmt
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/fmt/rt.rs:152:76
+   5:        0x10181f6c8 - core[e5a5d44af443baf0]::fmt::write
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/fmt/mod.rs:1687:22
+   6:        0x10180ef34 - core[e5a5d44af443baf0]::io::write::default_write_fmt::<std[15f51b41b433de00]::sys::stdio::unix::Stderr>
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/io/write.rs:402:11
+   7:        0x10180ef34 - <std[15f51b41b433de00]::sys::stdio::unix::Stderr as core[e5a5d44af443baf0]::io::write::Write>::write_fmt
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/io/write.rs:335:13
+   8:        0x1017e8cc0 - <std[15f51b41b433de00]::sys::backtrace::BacktraceLock>::print
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/sys/backtrace.rs:47:25
+   9:        0x1017e8cc0 - std[15f51b41b433de00]::panicking::default_hook::{closure#0}
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/panicking.rs:292:27
+  10:        0x101800cfc - std[15f51b41b433de00]::panicking::default_hook
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/panicking.rs:319:9
+  11:        0x1018011b4 - std[15f51b41b433de00]::panicking::panic_with_hook
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/panicking.rs:815:13
+  12:        0x1017e8d44 - std[15f51b41b433de00]::panicking::panic_handler::{closure#0}
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/panicking.rs:688:13
+  13:        0x1017e058c - std[15f51b41b433de00]::sys::backtrace::__rust_end_short_backtrace::<std[15f51b41b433de00]::panicking::panic_handler::{closure#0}, !>
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/sys/backtrace.rs:182:18
+  14:        0x1017e9810 - __rustc[9d087a5ab36ea756]::rust_begin_unwind
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/panicking.rs:679:5
+  15:        0x1018414b8 - core[e5a5d44af443baf0]::panicking::panic_fmt
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/panicking.rs:80:14
+  16:        0x101841204 - core[e5a5d44af443baf0]::result::unwrap_failed
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/result.rs:1871:5
+  17:        0x100f76bf4 - <core[e5a5d44af443baf0]::result::Result<(), alloc[4ca4a55bf09a7fe7]::boxed::Box<dyn core[e5a5d44af443baf0]::any::Any + core[e5a5d44af443baf0]::marker::Send>>>::unwrap
+                               at /Users/maxwell/.rustup/toolchains/stable-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/result.rs:1232:23
+  18:        0x100f76bf4 - <dotrepo_crawler[8c8db21df972d1c2]::github::tree_reuse_tests::Server as core[e5a5d44af443baf0]::ops::drop::Drop>::drop
+                               at /Users/maxwell/projects/agent/dotrepo/crates/dotrepo-crawler/src/github/tree_reuse_tests.rs:85:44
+  19:        0x100f72e40 - core[e5a5d44af443baf0]::ptr::drop_glue::<dotrepo_crawler[8c8db21df972d1c2]::github::tree_reuse_tests::Server>
+                               at /Users/maxwell/.rustup/toolchains/stable-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/ptr/mod.rs:847:1
+  20:        0x100fd8f14 - dotrepo_crawler[8c8db21df972d1c2]::github::tree_reuse_tests::tree_reuse_preserves_selected_bytes_order_and_real_counters
+                               at /Users/maxwell/projects/agent/dotrepo/crates/dotrepo-crawler/src/github/tree_reuse_tests.rs:151:1
+  21:        0x100f92b58 - dotrepo_crawler[8c8db21df972d1c2]::github::tree_reuse_tests::tree_reuse_preserves_selected_bytes_order_and_real_counters::{closure#0}
+                               at /Users/maxwell/projects/agent/dotrepo/crates/dotrepo-crawler/src/github/tree_reuse_tests.rs:135:65
+  22:        0x100f77a54 - <dotrepo_crawler[8c8db21df972d1c2]::github::tree_reuse_tests::tree_reuse_preserves_selected_bytes_order_and_real_counters::{closure#0} as core[e5a5d44af443baf0]::ops::function::FnOnce<()>>::call_once
+                               at /Users/maxwell/.rustup/toolchains/stable-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/ops/function.rs:250:5
+  23:        0x101029a58 - <fn() -> core[e5a5d44af443baf0]::result::Result<(), alloc[4ca4a55bf09a7fe7]::string::String> as core[e5a5d44af443baf0]::ops::function::FnOnce<()>>::call_once
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/ops/function.rs:250:5
+  24:        0x101029a58 - test[fe40804de6659d7f]::__rust_begin_short_backtrace::<core[e5a5d44af443baf0]::result::Result<(), alloc[4ca4a55bf09a7fe7]::string::String>, fn() -> core[e5a5d44af443baf0]::result::Result<(), alloc[4ca4a55bf09a7fe7]::string::String>>
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/test/src/lib.rs:733:18
+  25:        0x101034fcc - test[fe40804de6659d7f]::run_test_in_process::{closure#0}
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/test/src/lib.rs:756:74
+  26:        0x101034fcc - <core[e5a5d44af443baf0]::panic::unwind_safe::AssertUnwindSafe<test[fe40804de6659d7f]::run_test_in_process::{closure#0}> as core[e5a5d44af443baf0]::ops::function::FnOnce<()>>::call_once
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/panic/unwind_safe.rs:275:9
+  27:        0x101034fcc - std[15f51b41b433de00]::panicking::catch_unwind::do_call::<core[e5a5d44af443baf0]::panic::unwind_safe::AssertUnwindSafe<test[fe40804de6659d7f]::run_test_in_process::{closure#0}>, core[e5a5d44af443baf0]::result::Result<(), alloc[4ca4a55bf09a7fe7]::string::String>>
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/panicking.rs:576:43
+  28:        0x101034fcc - std[15f51b41b433de00]::panicking::catch_unwind::<core[e5a5d44af443baf0]::result::Result<(), alloc[4ca4a55bf09a7fe7]::string::String>, core[e5a5d44af443baf0]::panic::unwind_safe::AssertUnwindSafe<test[fe40804de6659d7f]::run_test_in_process::{closure#0}>>
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/panicking.rs:544:19
+  29:        0x101034fcc - std[15f51b41b433de00]::panic::catch_unwind::<core[e5a5d44af443baf0]::panic::unwind_safe::AssertUnwindSafe<test[fe40804de6659d7f]::run_test_in_process::{closure#0}>, core[e5a5d44af443baf0]::result::Result<(), alloc[4ca4a55bf09a7fe7]::string::String>>
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/panic.rs:359:14
+  30:        0x101034fcc - test[fe40804de6659d7f]::run_test_in_process
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/test/src/lib.rs:756:27
+  31:        0x101034fcc - test[fe40804de6659d7f]::run_test::{closure#0}
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/test/src/lib.rs:677:43
+  32:        0x10102f96c - test[fe40804de6659d7f]::run_test::{closure#1}
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/test/src/lib.rs:707:41
+  33:        0x10102f96c - std[15f51b41b433de00]::sys::backtrace::__rust_begin_short_backtrace::<test[fe40804de6659d7f]::run_test::{closure#1}, ()>
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/sys/backtrace.rs:166:18
+  34:        0x101037490 - std[15f51b41b433de00]::thread::lifecycle::spawn_unchecked::<test[fe40804de6659d7f]::run_test::{closure#1}, ()>::{closure#1}::{closure#0}
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/thread/lifecycle.rs:70:13
+  35:        0x101037490 - <core[e5a5d44af443baf0]::panic::unwind_safe::AssertUnwindSafe<std[15f51b41b433de00]::thread::lifecycle::spawn_unchecked<test[fe40804de6659d7f]::run_test::{closure#1}, ()>::{closure#1}::{closure#0}> as core[e5a5d44af443baf0]::ops::function::FnOnce<()>>::call_once
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/panic/unwind_safe.rs:275:9
+  36:        0x101037490 - std[15f51b41b433de00]::panicking::catch_unwind::do_call::<core[e5a5d44af443baf0]::panic::unwind_safe::AssertUnwindSafe<std[15f51b41b433de00]::thread::lifecycle::spawn_unchecked<test[fe40804de6659d7f]::run_test::{closure#1}, ()>::{closure#1}::{closure#0}>, ()>
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/panicking.rs:576:43
+  37:        0x101037490 - std[15f51b41b433de00]::panicking::catch_unwind::<(), core[e5a5d44af443baf0]::panic::unwind_safe::AssertUnwindSafe<std[15f51b41b433de00]::thread::lifecycle::spawn_unchecked<test[fe40804de6659d7f]::run_test::{closure#1}, ()>::{closure#1}::{closure#0}>>
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/panicking.rs:544:19
+  38:        0x101037490 - std[15f51b41b433de00]::panic::catch_unwind::<core[e5a5d44af443baf0]::panic::unwind_safe::AssertUnwindSafe<std[15f51b41b433de00]::thread::lifecycle::spawn_unchecked<test[fe40804de6659d7f]::run_test::{closure#1}, ()>::{closure#1}::{closure#0}>, ()>
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/panic.rs:359:14
+  39:        0x101037490 - std[15f51b41b433de00]::thread::lifecycle::spawn_unchecked::<test[fe40804de6659d7f]::run_test::{closure#1}, ()>::{closure#1}
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/thread/lifecycle.rs:68:26
+  40:        0x101037490 - <std[15f51b41b433de00]::thread::lifecycle::spawn_unchecked<test[fe40804de6659d7f]::run_test::{closure#1}, ()>::{closure#1} as core[e5a5d44af443baf0]::ops::function::FnOnce<()>>::call_once::{shim:vtable#0}
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/ops/function.rs:250:5
+  41:        0x101807b08 - <alloc[4ca4a55bf09a7fe7]::boxed::Box<dyn core[e5a5d44af443baf0]::ops::function::FnOnce<(), Output = ()> + core[e5a5d44af443baf0]::marker::Send> as core[e5a5d44af443baf0]::ops::function::FnOnce<()>>::call_once
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/alloc/src/boxed.rs:2320:9
+  42:        0x101807b08 - <std[15f51b41b433de00]::sys::thread::unix::Thread>::new::thread_start
+                               at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/sys/thread/unix.rs:123:17
+  43:        0x19e4cdd00 - __pthread_exit
+
+thread 'github::tree_reuse_tests::tree_reuse_preserves_selected_bytes_order_and_real_counters' (42183436) panicked at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/panicking.rs:233:5:
+panic in a destructor during cleanup
+thread caused non-unwinding panic. aborting.
+error: test failed, to rerun pass `-p dotrepo-crawler --lib`
+
+Caused by:
+  process didn't exit successfully: `/Users/maxwell/projects/agent/dotrepo/target/debug/deps/dotrepo_crawler-475e401e93341950 'tree_reuse_tests::tree_reuse_preserves_selected_bytes_order_and_real_counters' --nocapture` (signal: 6, SIGABRT: process abort signal)
