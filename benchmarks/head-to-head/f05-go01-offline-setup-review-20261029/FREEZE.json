@@ -1,0 +1,29 @@
+{
+  "state": "review-frozen-live-setup-readiness-withheld",
+  "authorFreezeSha256": "4f951efe4fd345ac034a23e234f074f91b543d92da9b56ad01cd93faa3e7c3ca",
+  "actualSetupOccurred": false,
+  "realRuntimeActions": 0,
+  "artifactSha256": {
+    "README.md": "bd73bb40975d465d2dd7f67cba3a81a63a15843c70b2a6e86a636f4b003fdebb",
+    "checks.json": "922d7d4ece46f9dc735acd002e13269bca8695585ba814afe462a9ced1c8465c",
+    "counterexamples.json": "5393565741794bdb76fac4c7c6b4c016303a6487d306e700965ce87bace71567",
+    "counterexamples.py": "935aa4b57f50a6683e90604a257ef362307b83c80b707bd6d1469fdd42ea061a",
+    "counterexamples.stdout": "fc84ca197724b0017e8e09db0cbd1856c8b46ff783fa6a78bc42eb60c6e53b6e",
+    "input-bindings.json": "4d716b9edd5c070278910a83c13ac26943c896ddb64fffe3c6c250afdda1d6af",
+    "isolated-copy/controls.json": "45821e1f88d80a719175b44a1b773dab76a834335773e87e95608679e18410b8",
+    "isolated-copy/controls.py": "a3080a0f91496b1eef71282de41d74a8aa64696a7e8f9259baa7e186322718da",
+    "isolated-copy/make_plan.py": "49cd07d52fb7c88046b212e732ce2ac471d5319fa9d40cad77fd84bc35357c34",
+    "isolated-copy/plan.json": "4df46bb13a280ae26149a1b7f2d99ef51f97099b3f30fa63444c463ab0cbceba",
+    "isolated-copy/published-task-payloads.json": "0b3a5ad606a01fa265477d1c784686329fe2390bdb406f1cd1963403ba88ddcd",
+    "isolated-copy/setup.py": "21a0bbab9af6eddda259af65716bd47f30042c5abead4734ff81e2eedd57eaf3",
+    "prior-inspect-representation.json": "cf8e5bac3050f05229528411f083f4ff88ae81696ab492fd187af46edead5777",
+    "replay_controls.py": "a0f10b656b65853dece706a20dbb5f31de855e5a154be543375708c234a4ff21",
+    "replayed-controls.stdout": "63d45d85437785f620f039586934d75fdde565873b0652dfbe02bfd29293d841",
+    "review.json": "2d2adeb0735c853571ff0e70f6f6ef291fe11eb36e7513e98998335b0b5afd97"
+  },
+  "excludedGeneratedDirectories": [
+    "__pycache__",
+    ".ruff_cache"
+  ],
+  "originalFrozenFilesRechecked": 18
+}

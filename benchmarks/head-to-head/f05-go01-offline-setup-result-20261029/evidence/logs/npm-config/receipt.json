@@ -1,0 +1,26 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-go01-offline-setup-b8d3759a6baa",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "cd /workspace/repository; npm config list --json"
+  ],
+  "startedAt": "2026-10-29T09:28:12.420949+00:00",
+  "elapsedSeconds": 0.3743478339165449,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "73eddda53c2b10dbc9d0205e385c27b6fc605f556b3e38f869b2949f4c340b97",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "binaryPath": null,
+  "binaryBytes": null,
+  "binarySha256": null,
+  "costUsd": null,
+  "costExclusions": [
+    "No metered host/container/download dollar receipt; no provider calls."
+  ]
+}

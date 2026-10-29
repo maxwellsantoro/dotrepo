@@ -1,0 +1,72 @@
+{
+  "state": "offline-npm-setup-observed",
+  "stage": "offline-final-inspect",
+  "startedAt": "2026-10-29T09:28:00.376458+00:00",
+  "synthetic": false,
+  "taskId": "go-01",
+  "nativeCollectionOccurred": false,
+  "taskOutcomeObserved": false,
+  "modelCalls": 0,
+  "costUsd": null,
+  "costExclusions": [
+    "No metered host/container setup dollar receipt."
+  ],
+  "daemonCalls": 19,
+  "containerCreateAttempted": true,
+  "containerAbsent": true,
+  "setupObserved": true,
+  "campaignAdmitted": false,
+  "cacheGloballyQualified": false,
+  "ownedContainer": "dotrepo-go01-offline-setup-b8d3759a6baa",
+  "planSha256": "f1dc272c2fe53792c2a7723e3f8308418d98b0c1d15b85d197cb7cb22e6fe38a",
+  "authorizationSha256": "9661f3a147fceaac87e0f3cfa5a7cbd74711aa6d1941a834a6efb56196d2580d",
+  "cacheAcceptance": {
+    "authorization": {
+      "synthetic": false,
+      "state": "coordinator-authorized-single-offline-npm-setup",
+      "planSha256": "f1dc272c2fe53792c2a7723e3f8308418d98b0c1d15b85d197cb7cb22e6fe38a",
+      "output": "/private/tmp/dotrepo-go01-offline-setup-evidence-20261029-1",
+      "scratch": "/private/tmp/dotrepo-go01-offline-setup-scratch-20261029-1",
+      "command": "cd /workspace/repository; npm ci --offline --foreground-scripts",
+      "limits": {
+        "archiveBytes": 536870912,
+        "cleanupSeconds": 60,
+        "cpus": 3,
+        "expandedCacheBytes": 1073741824,
+        "memoryBytes": 4294967296,
+        "memorySwapBytes": 4294967296,
+        "pids": 256,
+        "sourcePlusCacheBytes": 2147483648,
+        "workSeconds": 900,
+        "workspaceBytes": 8589934592
+      },
+      "maxAttempts": 1,
+      "cacheAcceptance": {
+        "path": "/private/tmp/dotrepo-go01-offline-setup-cache-disposition-20261029-1.json",
+        "sha256": "5c2b9aaf58744b9f2778f8ef11f86e1201a0b02763a0cff784a68a8818bde377"
+      },
+      "independentReviewSha256": "dcb92ced1ba3cb55259a37992a1cd2fcff0d489abe9299685a566f8e99b6c74e",
+      "scope": "One setup-only attempt; no network, TypeScript compiler task, Go helper, Hereby, collection, test, provider/model, pruning, quota change or retry. Normal inspected npm hooks including esbuild native --version are within setup."
+    },
+    "cacheAcceptanceSha256": "5c2b9aaf58744b9f2778f8ef11f86e1201a0b02763a0cff784a68a8818bde377",
+    "auditFreeze": {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-dependency-download-review-20261029/FREEZE.json",
+      "sha256": "60b3833d85619517702140317875ad874b99a4fa361d48557e051ad20af7cc54"
+    }
+  },
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+  "cacheArchiveSha256": "583fad501fa7b1a1a6d85ab8fe4b890786e39c1e016f785d6d3fb9d060383284",
+  "preflightSeconds": 3.88458124990575,
+  "lifecycleLogMarkers": {
+    "@vscode/vsce-sign@2.1.0 postinstall": true,
+    "dprint@0.57.4 postinstall": true,
+    "esbuild@0.28.2 postinstall": true
+  },
+  "setupSeconds": 5.745173416100442,
+  "workElapsedSeconds": 19.50544487591833,
+  "cleanupExitCode": 0,
+  "cleanupSeconds": 0.5381705830805004,
+  "elapsedSeconds": 20.04361545899883,
+  "workBudgetExceeded": false
+}

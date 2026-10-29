@@ -1,0 +1,44 @@
+{
+  "reviewDate": "2026-10-29",
+  "reviewer": "/root/e1_establishment",
+  "reviewerContext": "Existing E1/F05 curator; independent of this setup author, not fresh blinded curation",
+  "authorFreezeSha256": "4f951efe4fd345ac034a23e234f074f91b543d92da9b56ad01cd93faa3e7c3ca",
+  "observedCheckoutHead": "595303f9b8bfa58366c9f2c93fb619ca54591ea2",
+  "disposition": "live-setup-readiness-withheld-pending-inspect-admission-correction",
+  "findings": [
+    {
+      "id": "inspect-isolation-mismatches",
+      "source": "setup.py",
+      "startLine": 199,
+      "endLine": 205,
+      "acceptedCounterexamples": [
+        "shared-pid-namespace",
+        "capability-added-back",
+        "host-ipc"
+      ],
+      "impact": "Actual inspect-state admission does not enforce all intended capability/namespace conditions",
+      "actualUnsafeContainerObserved": false,
+      "createArgvSafeForTheseFields": true,
+      "requiredBeforeLiveSetup": "Admit only exact intended private/default PID, private IPC/cgroup namespaces, no CapAdd and exact no-new-privileges policy; reject unknown/mismatching values and retest independently"
+    }
+  ],
+  "syntheticControls": {
+    "authorReplayedPassed": 34,
+    "independentCases": 12,
+    "expectedRefusalsRetained": true
+  },
+  "actualSetupOccurred": false,
+  "realDockerNetworkPackageNativeProviderCalls": 0,
+  "taskOutcomeObserved": false,
+  "nativeTaskAdmitted": false,
+  "campaignAdmitted": false,
+  "cacheGloballyQualified": false,
+  "publishedCompilerPayloadDisposition": "May only be separately accepted for offline npm setup observation, never inferred to qualify task/campaign/global cache",
+  "limits": [
+    "Synthetic records do not demonstrate actual isolation or cleanup",
+    "No large actual source/cache archive rescan in this review",
+    "No Docker daemon, hook/native/upstream execution, network, model, provider or Cargo action",
+    "No general hostile-Docker or filesystem proof",
+    "Cgroup namespace not checked by source predicate; static observation only"
+  ]
+}

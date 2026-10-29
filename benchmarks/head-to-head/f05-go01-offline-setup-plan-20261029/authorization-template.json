@@ -1,0 +1,25 @@
+{
+  "cacheAcceptance": {
+    "path": "/absolute/REQUIRES_COORDINATOR_CACHE_ACCEPTANCE.json",
+    "sha256": "REQUIRES_FROZEN_SHA256"
+  },
+  "command": "cd /workspace/repository; npm ci --offline --foreground-scripts",
+  "limits": {
+    "archiveBytes": 536870912,
+    "cleanupSeconds": 60,
+    "cpus": 3,
+    "expandedCacheBytes": 1073741824,
+    "memoryBytes": 4294967296,
+    "memorySwapBytes": 4294967296,
+    "pids": 256,
+    "sourcePlusCacheBytes": 2147483648,
+    "workSeconds": 900,
+    "workspaceBytes": 8589934592
+  },
+  "maxAttempts": 1,
+  "output": "/private/tmp/REQUIRES_UNIQUE_OUTPUT",
+  "planSha256": "4df46bb13a280ae26149a1b7f2d99ef51f97099b3f30fa63444c463ab0cbceba",
+  "scratch": "/private/tmp/REQUIRES_UNIQUE_SCRATCH",
+  "state": "NOT_AUTHORIZED_TEMPLATE",
+  "synthetic": true
+}

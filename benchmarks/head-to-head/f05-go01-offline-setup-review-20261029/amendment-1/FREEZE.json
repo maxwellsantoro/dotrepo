@@ -1,0 +1,32 @@
+{
+  "state": "bounded-inspect-amendment-review-passed-no-live-authorization",
+  "authorFreezeSha256": "eff3d9798e00f55009fe1ae754b04a20ee9bd1d75f1ed5264c99d797df54e032",
+  "beforeReviewFreezeSha256": "fb021636ee56231e1399264bb11f10cf51c007d84be3228604617defe65d9961",
+  "actualSetupOccurred": false,
+  "artifactSha256": {
+    "README.md": "f9152a91d6b51b5d4fa8918970e654e417bd73628412b5eb239fcc9ab6b306db",
+    "checks.json": "6343fc2495ee71c12b90ad2622892db18bdaecff76aea636e3709678b188dcad",
+    "controls.before-import-fix.stdout": "8707aa783b83b244264f9dd674b42a9dee4909d2dfde271515123bec0f5c4797",
+    "controls.stdout": "058afbceec7dc8527f0854515fc2130661ebc369e0beaa2bde19bfa01ad83d2e",
+    "harness-first-attempt.json": "c4f72145f4754a8f76e0464095552e87e35bfe44c55e32cd0d214781e1224070",
+    "independent-controls.json": "f1ef88f55120ce5912e95296f885d6d3b5625b818a128c8367d2df0b450f27fc",
+    "isolated-copy/amendment-1/README.md": "f1b662e1a67494a3cdb636494dc0f5720a66853c58c482504b32968ab7f003ee",
+    "isolated-copy/amendment-1/authorization-template.json": "a2147095c9da53a9eb82ec7e447b543a89726b402a38b63745075987cfecd7f0",
+    "isolated-copy/amendment-1/checks.json": "8dcb1194df7ca452f4c8a6bf1abd0da47be2e5ce400158848035aea459dff75b",
+    "isolated-copy/amendment-1/controls.json": "26cff4e6177d3464cf6e76b0407c2666b759628227350ab5c64938c9337d3460",
+    "isolated-copy/amendment-1/controls.py": "ab2dd1cbcfb8070e2ccb54add4dee361a82e04d575d7c916e186ffe50b2c3de6",
+    "isolated-copy/amendment-1/inspect-policy.json": "7fac9bfb93cec6ed04a89c4c293d4bd0624218e61d79a89780064a05419dc4b3",
+    "isolated-copy/amendment-1/make_plan.py": "48b5e99d5cb73d85be528a721d0a28c94e19c78affff73b3dcc1aa120d7050b0",
+    "isolated-copy/amendment-1/plan.json": "f1dc272c2fe53792c2a7723e3f8308418d98b0c1d15b85d197cb7cb22e6fe38a",
+    "isolated-copy/amendment-1/published-task-payloads.json": "0b3a5ad606a01fa265477d1c784686329fe2390bdb406f1cd1963403ba88ddcd",
+    "isolated-copy/amendment-1/setup.py": "06e3eb82f695812f96816c820f61fef1cceb242c636de5980284824948604de0",
+    "isolated-copy/plan.json": "4df46bb13a280ae26149a1b7f2d99ef51f97099b3f30fa63444c463ab0cbceba",
+    "review.json": "cdafa3283168d8127f999db7fb0ea5db093e7e0cb0d1d1540cda4f6d5b0ab255",
+    "review_controls.before-import-fix.py": "061b5613464fd85e5188875127136b2c5bffabe7ccf85991df7cd5c730b0df89",
+    "review_controls.py": "ebb1f04bfc5dd6e5cd06c6b12d9cf2f5750317471a62ebfb5c7af89cb966d0d7"
+  },
+  "excludedGeneratedDirectories": [
+    "__pycache__",
+    ".ruff_cache"
+  ]
+}

@@ -1,0 +1,434 @@
+{
+  "cases": [
+    {
+      "case": "shared-pid-namespace",
+      "inspectorAccepted": true,
+      "state": {
+        "Image": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+        "Mounts": [],
+        "Config": {
+          "User": "1000:1000",
+          "Env": [
+            "PATH=x",
+            "RUSTUP_HOME=x",
+            "CARGO_HOME=x",
+            "GOTOOLCHAIN=local",
+            "GOENV=off",
+            "GIT_CONFIG_GLOBAL=/dev/null",
+            "GIT_CONFIG_NOSYSTEM=1",
+            "GIT_TERMINAL_PROMPT=0",
+            "GOCACHE=/workspace/go-build",
+            "GOGC=50",
+            "GOMAXPROCS=3",
+            "GOPATH=/workspace/dependency-cache/go",
+            "GOPROXY=off",
+            "GOSUMDB=off",
+            "HOME=/workspace/home",
+            "LANG=C.UTF-8",
+            "NPM_CONFIG_AUDIT=false",
+            "NPM_CONFIG_CACHE=/workspace/dependency-cache/npm-cache",
+            "NPM_CONFIG_FOREGROUND_SCRIPTS=true",
+            "NPM_CONFIG_FUND=false",
+            "NPM_CONFIG_IGNORE_SCRIPTS=false",
+            "NPM_CONFIG_OFFLINE=true",
+            "NPM_CONFIG_REGISTRY=https://registry.npmjs.org",
+            "NPM_CONFIG_USERCONFIG=/dev/null",
+            "TMPDIR=/workspace/tmp"
+          ]
+        },
+        "HostConfig": {
+          "Binds": [],
+          "ReadonlyRootfs": true,
+          "Privileged": false,
+          "CapDrop": [
+            "ALL"
+          ],
+          "SecurityOpt": [
+            "no-new-privileges"
+          ],
+          "PidMode": "container:another",
+          "Memory": 4294967296,
+          "MemorySwap": 4294967296,
+          "NanoCpus": 3000000000,
+          "PidsLimit": 256,
+          "NetworkMode": "none",
+          "Tmpfs": {
+            "/workspace": "rw,exec,nosuid,nodev,size=8g",
+            "/tmp": "rw,exec,nosuid,nodev,size=512m",
+            "/workspace/dependency-cache": "rw,exec,nosuid,nodev,size=1g"
+          }
+        },
+        "NetworkSettings": {
+          "Networks": {
+            "none": {
+              "IPAddress": "",
+              "Gateway": ""
+            }
+          }
+        }
+      },
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "capability-added-back",
+      "inspectorAccepted": true,
+      "state": {
+        "Image": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+        "Mounts": [],
+        "Config": {
+          "User": "1000:1000",
+          "Env": [
+            "PATH=x",
+            "RUSTUP_HOME=x",
+            "CARGO_HOME=x",
+            "GOTOOLCHAIN=local",
+            "GOENV=off",
+            "GIT_CONFIG_GLOBAL=/dev/null",
+            "GIT_CONFIG_NOSYSTEM=1",
+            "GIT_TERMINAL_PROMPT=0",
+            "GOCACHE=/workspace/go-build",
+            "GOGC=50",
+            "GOMAXPROCS=3",
+            "GOPATH=/workspace/dependency-cache/go",
+            "GOPROXY=off",
+            "GOSUMDB=off",
+            "HOME=/workspace/home",
+            "LANG=C.UTF-8",
+            "NPM_CONFIG_AUDIT=false",
+            "NPM_CONFIG_CACHE=/workspace/dependency-cache/npm-cache",
+            "NPM_CONFIG_FOREGROUND_SCRIPTS=true",
+            "NPM_CONFIG_FUND=false",
+            "NPM_CONFIG_IGNORE_SCRIPTS=false",
+            "NPM_CONFIG_OFFLINE=true",
+            "NPM_CONFIG_REGISTRY=https://registry.npmjs.org",
+            "NPM_CONFIG_USERCONFIG=/dev/null",
+            "TMPDIR=/workspace/tmp"
+          ]
+        },
+        "HostConfig": {
+          "Binds": [],
+          "ReadonlyRootfs": true,
+          "Privileged": false,
+          "CapDrop": [
+            "ALL"
+          ],
+          "SecurityOpt": [
+            "no-new-privileges"
+          ],
+          "PidMode": "",
+          "Memory": 4294967296,
+          "MemorySwap": 4294967296,
+          "NanoCpus": 3000000000,
+          "PidsLimit": 256,
+          "NetworkMode": "none",
+          "Tmpfs": {
+            "/workspace": "rw,exec,nosuid,nodev,size=8g",
+            "/tmp": "rw,exec,nosuid,nodev,size=512m",
+            "/workspace/dependency-cache": "rw,exec,nosuid,nodev,size=1g"
+          },
+          "CapAdd": [
+            "SYS_ADMIN"
+          ]
+        },
+        "NetworkSettings": {
+          "Networks": {
+            "none": {
+              "IPAddress": "",
+              "Gateway": ""
+            }
+          }
+        }
+      },
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "host-ipc",
+      "inspectorAccepted": true,
+      "state": {
+        "Image": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+        "Mounts": [],
+        "Config": {
+          "User": "1000:1000",
+          "Env": [
+            "PATH=x",
+            "RUSTUP_HOME=x",
+            "CARGO_HOME=x",
+            "GOTOOLCHAIN=local",
+            "GOENV=off",
+            "GIT_CONFIG_GLOBAL=/dev/null",
+            "GIT_CONFIG_NOSYSTEM=1",
+            "GIT_TERMINAL_PROMPT=0",
+            "GOCACHE=/workspace/go-build",
+            "GOGC=50",
+            "GOMAXPROCS=3",
+            "GOPATH=/workspace/dependency-cache/go",
+            "GOPROXY=off",
+            "GOSUMDB=off",
+            "HOME=/workspace/home",
+            "LANG=C.UTF-8",
+            "NPM_CONFIG_AUDIT=false",
+            "NPM_CONFIG_CACHE=/workspace/dependency-cache/npm-cache",
+            "NPM_CONFIG_FOREGROUND_SCRIPTS=true",
+            "NPM_CONFIG_FUND=false",
+            "NPM_CONFIG_IGNORE_SCRIPTS=false",
+            "NPM_CONFIG_OFFLINE=true",
+            "NPM_CONFIG_REGISTRY=https://registry.npmjs.org",
+            "NPM_CONFIG_USERCONFIG=/dev/null",
+            "TMPDIR=/workspace/tmp"
+          ]
+        },
+        "HostConfig": {
+          "Binds": [],
+          "ReadonlyRootfs": true,
+          "Privileged": false,
+          "CapDrop": [
+            "ALL"
+          ],
+          "SecurityOpt": [
+            "no-new-privileges"
+          ],
+          "PidMode": "",
+          "Memory": 4294967296,
+          "MemorySwap": 4294967296,
+          "NanoCpus": 3000000000,
+          "PidsLimit": 256,
+          "NetworkMode": "none",
+          "Tmpfs": {
+            "/workspace": "rw,exec,nosuid,nodev,size=8g",
+            "/tmp": "rw,exec,nosuid,nodev,size=512m",
+            "/workspace/dependency-cache": "rw,exec,nosuid,nodev,size=1g"
+          },
+          "IpcMode": "host"
+        },
+        "NetworkSettings": {
+          "Networks": {
+            "none": {
+              "IPAddress": "",
+              "Gateway": ""
+            }
+          }
+        }
+      },
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "bridge",
+      "inspectorAccepted": false,
+      "state": {
+        "Image": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+        "Mounts": [],
+        "Config": {
+          "User": "1000:1000",
+          "Env": [
+            "PATH=x",
+            "RUSTUP_HOME=x",
+            "CARGO_HOME=x",
+            "GOTOOLCHAIN=local",
+            "GOENV=off",
+            "GIT_CONFIG_GLOBAL=/dev/null",
+            "GIT_CONFIG_NOSYSTEM=1",
+            "GIT_TERMINAL_PROMPT=0",
+            "GOCACHE=/workspace/go-build",
+            "GOGC=50",
+            "GOMAXPROCS=3",
+            "GOPATH=/workspace/dependency-cache/go",
+            "GOPROXY=off",
+            "GOSUMDB=off",
+            "HOME=/workspace/home",
+            "LANG=C.UTF-8",
+            "NPM_CONFIG_AUDIT=false",
+            "NPM_CONFIG_CACHE=/workspace/dependency-cache/npm-cache",
+            "NPM_CONFIG_FOREGROUND_SCRIPTS=true",
+            "NPM_CONFIG_FUND=false",
+            "NPM_CONFIG_IGNORE_SCRIPTS=false",
+            "NPM_CONFIG_OFFLINE=true",
+            "NPM_CONFIG_REGISTRY=https://registry.npmjs.org",
+            "NPM_CONFIG_USERCONFIG=/dev/null",
+            "TMPDIR=/workspace/tmp"
+          ]
+        },
+        "HostConfig": {
+          "Binds": [],
+          "ReadonlyRootfs": true,
+          "Privileged": false,
+          "CapDrop": [
+            "ALL"
+          ],
+          "SecurityOpt": [
+            "no-new-privileges"
+          ],
+          "PidMode": "",
+          "Memory": 4294967296,
+          "MemorySwap": 4294967296,
+          "NanoCpus": 3000000000,
+          "PidsLimit": 256,
+          "NetworkMode": "bridge",
+          "Tmpfs": {
+            "/workspace": "rw,exec,nosuid,nodev,size=8g",
+            "/tmp": "rw,exec,nosuid,nodev,size=512m",
+            "/workspace/dependency-cache": "rw,exec,nosuid,nodev,size=1g"
+          }
+        },
+        "NetworkSettings": {
+          "Networks": {
+            "none": {
+              "IPAddress": "",
+              "Gateway": ""
+            }
+          }
+        }
+      },
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "unexpected-environment",
+      "inspectorAccepted": false,
+      "state": {
+        "Image": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+        "Mounts": [],
+        "Config": {
+          "User": "1000:1000",
+          "Env": [
+            "PATH=x",
+            "RUSTUP_HOME=x",
+            "CARGO_HOME=x",
+            "GOTOOLCHAIN=local",
+            "GOENV=off",
+            "GIT_CONFIG_GLOBAL=/dev/null",
+            "GIT_CONFIG_NOSYSTEM=1",
+            "GIT_TERMINAL_PROMPT=0",
+            "GOCACHE=/workspace/go-build",
+            "GOGC=50",
+            "GOMAXPROCS=3",
+            "GOPATH=/workspace/dependency-cache/go",
+            "GOPROXY=off",
+            "GOSUMDB=off",
+            "HOME=/workspace/home",
+            "LANG=C.UTF-8",
+            "NPM_CONFIG_AUDIT=false",
+            "NPM_CONFIG_CACHE=/workspace/dependency-cache/npm-cache",
+            "NPM_CONFIG_FOREGROUND_SCRIPTS=true",
+            "NPM_CONFIG_FUND=false",
+            "NPM_CONFIG_IGNORE_SCRIPTS=false",
+            "NPM_CONFIG_OFFLINE=true",
+            "NPM_CONFIG_REGISTRY=https://registry.npmjs.org",
+            "NPM_CONFIG_USERCONFIG=/dev/null",
+            "TMPDIR=/workspace/tmp",
+            "TOKEN=synthetic"
+          ]
+        },
+        "HostConfig": {
+          "Binds": [],
+          "ReadonlyRootfs": true,
+          "Privileged": false,
+          "CapDrop": [
+            "ALL"
+          ],
+          "SecurityOpt": [
+            "no-new-privileges"
+          ],
+          "PidMode": "",
+          "Memory": 4294967296,
+          "MemorySwap": 4294967296,
+          "NanoCpus": 3000000000,
+          "PidsLimit": 256,
+          "NetworkMode": "none",
+          "Tmpfs": {
+            "/workspace": "rw,exec,nosuid,nodev,size=8g",
+            "/tmp": "rw,exec,nosuid,nodev,size=512m",
+            "/workspace/dependency-cache": "rw,exec,nosuid,nodev,size=1g"
+          }
+        },
+        "NetworkSettings": {
+          "Networks": {
+            "none": {
+              "IPAddress": "",
+              "Gateway": ""
+            }
+          }
+        }
+      },
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "cache-symlink",
+      "archiveAccepted": false,
+      "reason": "link or special archive member",
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "cache-hardlink",
+      "archiveAccepted": false,
+      "reason": "link or special archive member",
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "cache-traversal",
+      "archiveAccepted": false,
+      "reason": "unsafe archive path",
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "cache-outside-root",
+      "archiveAccepted": false,
+      "reason": "outside export roots",
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "protected-source-payload",
+      "archiveAccepted": false,
+      "reason": "protected raw/canonical content alias",
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "ordinary-regular-cache",
+      "archiveAccepted": true,
+      "reason": null,
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "preflight-consumes-work-budget-before-any-daemon",
+      "outcome": {
+        "state": "incomplete-work-budget-exceeded",
+        "stage": "input-preflight",
+        "startedAt": "2026-10-29T09:18:35.316853+00:00",
+        "synthetic": true,
+        "taskId": "go-01",
+        "nativeCollectionOccurred": false,
+        "taskOutcomeObserved": false,
+        "modelCalls": 0,
+        "costUsd": null,
+        "costExclusions": [
+          "No metered host/container setup dollar receipt."
+        ],
+        "daemonCalls": 0,
+        "containerCreateAttempted": false,
+        "containerAbsent": null,
+        "setupObserved": false,
+        "campaignAdmitted": false,
+        "cacheGloballyQualified": false,
+        "ownedContainer": "dotrepo-go01-offline-setup-108e7a70fef4",
+        "planSha256": "4df46bb13a280ae26149a1b7f2d99ef51f97099b3f30fa63444c463ab0cbceba",
+        "authorizationSha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+        "cacheAcceptance": {
+          "syntheticControlOnly": true
+        },
+        "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+        "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+        "cacheArchiveSha256": "583fad501fa7b1a1a6d85ab8fe4b890786e39c1e016f785d6d3fb9d060383284",
+        "preflightSeconds": 901,
+        "error": "ValueError: 900-second work deadline exhausted",
+        "workElapsedSeconds": 901,
+        "elapsedSeconds": 901,
+        "workBudgetExceeded": true
+      },
+      "realDaemonCalls": 0
+    }
+  ],
+  "realDaemonNetworkPackageNativeProviderCalls": 0,
+  "inspectorGaps": [
+    "shared-pid-namespace",
+    "capability-added-back",
+    "host-ipc"
+  ]
+}

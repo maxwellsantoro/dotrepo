@@ -1,0 +1,32 @@
+{
+  "CapAddAllowed": [
+    null,
+    []
+  ],
+  "beforeReviewFreezeSha256": "fb021636ee56231e1399264bb11f10cf51c007d84be3228604617defe65d9961",
+  "cacheGloballyQualified": false,
+  "liveObservationOccurred": false,
+  "meaning": "Empty inspected PidMode is the retained Docker default private PID representation; no other or unknown PID value accepted. IPC/cgroup namespaces must be explicitly private. No added caps or additional security opt is accepted. Safe actual create argv unchanged.",
+  "originalFreezeSha256": "4f951efe4fd345ac034a23e234f074f91b543d92da9b56ad01cd93faa3e7c3ca",
+  "required": {
+    "CapDrop": [
+      "ALL"
+    ],
+    "CgroupnsMode": "private",
+    "DeviceRequests": null,
+    "Devices": [],
+    "Init": true,
+    "IpcMode": "private",
+    "Links": null,
+    "PidMode": "",
+    "PortBindings": {},
+    "PublishAllPorts": false,
+    "SecurityOpt": [
+      "no-new-privileges"
+    ],
+    "UTSMode": "",
+    "UsernsMode": "",
+    "VolumesFrom": null
+  },
+  "state": "source-only-inspect-policy-amendment"
+}

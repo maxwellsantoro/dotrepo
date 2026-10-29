@@ -1,0 +1,236 @@
+[
+    {
+        "Id": "f445a352914460f72b81afc15beb9b6c541f4a115a8e14349c8a5ab0390ab5a9",
+        "Created": "2026-10-29T09:28:04.499028512Z",
+        "Path": "/bin/sh",
+        "Args": [
+            "-c",
+            "while :; do sleep 3600; done"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 40850,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2026-10-29T09:28:04.646687095Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+        "ResolvConfPath": "/var/lib/docker/containers/f445a352914460f72b81afc15beb9b6c541f4a115a8e14349c8a5ab0390ab5a9/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/f445a352914460f72b81afc15beb9b6c541f4a115a8e14349c8a5ab0390ab5a9/hostname",
+        "HostsPath": "/var/lib/docker/containers/f445a352914460f72b81afc15beb9b6c541f4a115a8e14349c8a5ab0390ab5a9/hosts",
+        "LogPath": "",
+        "Name": "/dotrepo-go01-offline-setup-b8d3759a6baa",
+        "RestartCount": 0,
+        "Driver": "overlayfs",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "local",
+                "Config": {}
+            },
+            "NetworkMode": "none",
+            "PortBindings": {},
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "CapAdd": null,
+            "CapDrop": [
+                "ALL"
+            ],
+            "CgroupnsMode": "private",
+            "Dns": null,
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": true,
+            "SecurityOpt": [
+                "no-new-privileges"
+            ],
+            "Tmpfs": {
+                "/tmp": "rw,exec,nosuid,nodev,size=512m,uid=1000,gid=1000,mode=0700",
+                "/workspace": "rw,exec,nosuid,nodev,size=8g,uid=1000,gid=1000,mode=0700",
+                "/workspace/dependency-cache": "rw,exec,nosuid,nodev,size=1g,uid=1000,gid=1000,mode=0700"
+            },
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 4294967296,
+            "NanoCpus": 3000000000,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": [],
+            "BlkioDeviceReadBps": [],
+            "BlkioDeviceWriteBps": [],
+            "BlkioDeviceReadIOps": [],
+            "BlkioDeviceWriteIOps": [],
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "MemoryReservation": 0,
+            "MemorySwap": 4294967296,
+            "MemorySwappiness": null,
+            "OomKillDisable": null,
+            "PidsLimit": 256,
+            "Ulimits": [
+                {
+                    "Name": "nofile",
+                    "Hard": 4096,
+                    "Soft": 4096
+                }
+            ],
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/acpi",
+                "/proc/asound",
+                "/proc/interrupts",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/sys/devices/virtual/powercap",
+                "/sys/firmware"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ],
+            "Init": true
+        },
+        "Storage": {
+            "RootFS": {
+                "Snapshot": {
+                    "Name": "overlayfs"
+                }
+            }
+        },
+        "Mounts": [],
+        "Config": {
+            "Hostname": "f445a3529144",
+            "Domainname": "",
+            "User": "1000:1000",
+            "AttachStdin": false,
+            "AttachStdout": true,
+            "AttachStderr": true,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "LANG=C.UTF-8",
+                "NPM_CONFIG_REGISTRY=https://registry.npmjs.org",
+                "GIT_CONFIG_GLOBAL=/dev/null",
+                "GIT_CONFIG_NOSYSTEM=1",
+                "GIT_TERMINAL_PROMPT=0",
+                "GOENV=off",
+                "GOGC=50",
+                "HOME=/workspace/home",
+                "NPM_CONFIG_FOREGROUND_SCRIPTS=true",
+                "NPM_CONFIG_FUND=false",
+                "GOCACHE=/workspace/go-build",
+                "GOPROXY=off",
+                "GOSUMDB=off",
+                "GOTOOLCHAIN=local",
+                "NPM_CONFIG_AUDIT=false",
+                "NPM_CONFIG_CACHE=/workspace/dependency-cache/npm-cache",
+                "NPM_CONFIG_IGNORE_SCRIPTS=false",
+                "NPM_CONFIG_OFFLINE=true",
+                "GOMAXPROCS=3",
+                "GOPATH=/workspace/dependency-cache/go",
+                "NPM_CONFIG_USERCONFIG=/dev/null",
+                "TMPDIR=/workspace/tmp",
+                "PATH=/usr/local/cargo/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "RUSTUP_HOME=/usr/local/rustup",
+                "CARGO_HOME=/usr/local/cargo"
+            ],
+            "Cmd": [
+                "-c",
+                "while :; do sleep 3600; done"
+            ],
+            "Image": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+            "Volumes": null,
+            "WorkingDir": "/workspace",
+            "Entrypoint": [
+                "/bin/sh"
+            ],
+            "Labels": {}
+        },
+        "NetworkSettings": {
+            "SandboxID": "576e15ddb580f36d82bf10aca47c6ee8be3add938fb3afa355c5f828e24da805",
+            "SandboxKey": "/var/run/docker/netns/576e15ddb580",
+            "Ports": {},
+            "Networks": {
+                "none": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "DriverOpts": null,
+                    "GwPriority": 0,
+                    "NetworkID": "d2e5d0442bdb33f01f82f3f04ddfddbaba3a3c08aa212e2d313252bdd04e41b9",
+                    "EndpointID": "82f6d27a761eaef0cdda189782c55068c2e6c87937f1586893cc5e0b9807917a",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "MacAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DNSNames": null
+                }
+            }
+        },
+        "ImageManifestDescriptor": {
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "digest": "sha256:4431295c2f57c4a39618f1d33869b5ba295af9d780c141364bb9a93cc0fee9d5",
+            "size": 1249,
+            "platform": {
+                "architecture": "arm64",
+                "os": "linux"
+            }
+        }
+    }
+]

@@ -1,0 +1,11 @@
+{
+  "actualSetupOccurred": false,
+  "commands": [
+    {"command": "uv run --offline --no-sync python benchmarks/head-to-head/f05-go01-offline-setup-review-20261029/replay_controls.py", "exitCode": 0, "authorControlsPassed": 34},
+    {"command": "uv run --offline --no-sync python benchmarks/head-to-head/f05-go01-offline-setup-review-20261029/counterexamples.py", "exitCode": 0, "independentCases": 12, "findingCases": 3},
+    {"command": "uv run --offline --no-sync ruff check --no-cache benchmarks/head-to-head/f05-go01-offline-setup-review-20261029/replay_controls.py benchmarks/head-to-head/f05-go01-offline-setup-review-20261029/counterexamples.py", "exitCode": 0},
+    {"command": "uv run --offline --no-sync ruff format --check --no-cache benchmarks/head-to-head/f05-go01-offline-setup-review-20261029/replay_controls.py benchmarks/head-to-head/f05-go01-offline-setup-review-20261029/counterexamples.py", "exitCode": 0, "formattedFiles": 2}
+  ],
+  "copiedAuthorScriptsReformatted": false,
+  "realRuntimeActions": 0
+}

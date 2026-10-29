@@ -1,0 +1,431 @@
+{
+  "passed": 29,
+  "controls": [
+    {
+      "case": "owned valid authorization assertion shape",
+      "passed": true,
+      "daemonCalls": 0
+    },
+    {
+      "case": "reject-synthetic",
+      "passed": true,
+      "daemonCalls": 0
+    },
+    {
+      "case": "reject-plan",
+      "passed": true,
+      "daemonCalls": 0
+    },
+    {
+      "case": "reject-paths",
+      "passed": true,
+      "daemonCalls": 0
+    },
+    {
+      "case": "reject-command",
+      "passed": true,
+      "daemonCalls": 0
+    },
+    {
+      "case": "reject-bounds",
+      "passed": true,
+      "daemonCalls": 0
+    },
+    {
+      "case": "reject-missing-acceptance",
+      "passed": true,
+      "daemonCalls": 0
+    },
+    {
+      "case": "reject-acceptance-false",
+      "passed": true,
+      "daemonCalls": 0
+    },
+    {
+      "case": "reject-wrong-cache",
+      "passed": true,
+      "daemonCalls": 0
+    },
+    {
+      "case": "reject-changed-audit",
+      "passed": true,
+      "daemonCalls": 0
+    },
+    {
+      "case": "synthetic-success",
+      "passed": true,
+      "state": "offline-npm-setup-observed",
+      "virtualCalls": [
+        "image-inspect",
+        "create",
+        "start",
+        "container-inspect",
+        "initialize",
+        "source-provision",
+        "cache-provision",
+        "initial-source-check",
+        "initial-cache-check",
+        "tools-before",
+        "npm-config",
+        "npm-ci",
+        "package-observations",
+        "tools-after",
+        "tracked-source-check",
+        "offline-final-inspect",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "synthetic-unauthorized",
+      "passed": true,
+      "state": "incomplete",
+      "virtualCalls": [],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "synthetic-preflight",
+      "passed": true,
+      "state": "incomplete",
+      "virtualCalls": [],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "synthetic-create",
+      "passed": true,
+      "state": "incomplete",
+      "virtualCalls": [
+        "image-inspect",
+        "create",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "synthetic-network",
+      "passed": true,
+      "state": "incomplete",
+      "virtualCalls": [
+        "image-inspect",
+        "create",
+        "start",
+        "container-inspect",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "synthetic-mount",
+      "passed": true,
+      "state": "incomplete",
+      "virtualCalls": [
+        "image-inspect",
+        "create",
+        "start",
+        "container-inspect",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "synthetic-stream-hash",
+      "passed": true,
+      "state": "incomplete",
+      "virtualCalls": [
+        "image-inspect",
+        "create",
+        "start",
+        "container-inspect",
+        "initialize",
+        "source-provision",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "synthetic-config",
+      "passed": true,
+      "state": "incomplete",
+      "virtualCalls": [
+        "image-inspect",
+        "create",
+        "start",
+        "container-inspect",
+        "initialize",
+        "source-provision",
+        "cache-provision",
+        "initial-source-check",
+        "initial-cache-check",
+        "tools-before",
+        "npm-config",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "synthetic-npm-ci",
+      "passed": true,
+      "state": "incomplete",
+      "virtualCalls": [
+        "image-inspect",
+        "create",
+        "start",
+        "container-inspect",
+        "initialize",
+        "source-provision",
+        "cache-provision",
+        "initial-source-check",
+        "initial-cache-check",
+        "tools-before",
+        "npm-config",
+        "npm-ci",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "synthetic-hook-observation",
+      "passed": true,
+      "state": "incomplete",
+      "virtualCalls": [
+        "image-inspect",
+        "create",
+        "start",
+        "container-inspect",
+        "initialize",
+        "source-provision",
+        "cache-provision",
+        "initial-source-check",
+        "initial-cache-check",
+        "tools-before",
+        "npm-config",
+        "npm-ci",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "synthetic-deadline",
+      "passed": true,
+      "state": "incomplete-work-budget-exceeded",
+      "virtualCalls": [
+        "image-inspect",
+        "create",
+        "start",
+        "container-inspect",
+        "initialize",
+        "source-provision",
+        "cache-provision",
+        "initial-source-check",
+        "initial-cache-check",
+        "tools-before",
+        "npm-config",
+        "npm-ci",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "synthetic-versions",
+      "passed": true,
+      "state": "incomplete",
+      "virtualCalls": [
+        "image-inspect",
+        "create",
+        "start",
+        "container-inspect",
+        "initialize",
+        "source-provision",
+        "cache-provision",
+        "initial-source-check",
+        "initial-cache-check",
+        "tools-before",
+        "npm-config",
+        "npm-ci",
+        "package-observations",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "synthetic-binlinks",
+      "passed": true,
+      "state": "incomplete",
+      "virtualCalls": [
+        "image-inspect",
+        "create",
+        "start",
+        "container-inspect",
+        "initialize",
+        "source-provision",
+        "cache-provision",
+        "initial-source-check",
+        "initial-cache-check",
+        "tools-before",
+        "npm-config",
+        "npm-ci",
+        "package-observations",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "synthetic-outside",
+      "passed": true,
+      "state": "incomplete",
+      "virtualCalls": [
+        "image-inspect",
+        "create",
+        "start",
+        "container-inspect",
+        "initialize",
+        "source-provision",
+        "cache-provision",
+        "initial-source-check",
+        "initial-cache-check",
+        "tools-before",
+        "npm-config",
+        "npm-ci",
+        "package-observations",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "synthetic-tool-change",
+      "passed": true,
+      "state": "incomplete",
+      "virtualCalls": [
+        "image-inspect",
+        "create",
+        "start",
+        "container-inspect",
+        "initialize",
+        "source-provision",
+        "cache-provision",
+        "initial-source-check",
+        "initial-cache-check",
+        "tools-before",
+        "npm-config",
+        "npm-ci",
+        "package-observations",
+        "tools-after",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "synthetic-tracked-source-check",
+      "passed": true,
+      "state": "incomplete",
+      "virtualCalls": [
+        "image-inspect",
+        "create",
+        "start",
+        "container-inspect",
+        "initialize",
+        "source-provision",
+        "cache-provision",
+        "initial-source-check",
+        "initial-cache-check",
+        "tools-before",
+        "npm-config",
+        "npm-ci",
+        "package-observations",
+        "tools-after",
+        "tracked-source-check",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "synthetic-cleanup",
+      "passed": true,
+      "state": "incomplete-cleanup-or-absence-unresolved",
+      "virtualCalls": [
+        "image-inspect",
+        "create",
+        "start",
+        "container-inspect",
+        "initialize",
+        "source-provision",
+        "cache-provision",
+        "initial-source-check",
+        "initial-cache-check",
+        "tools-before",
+        "npm-config",
+        "npm-ci",
+        "package-observations",
+        "tools-after",
+        "tracked-source-check",
+        "offline-final-inspect",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "synthetic-absence",
+      "passed": true,
+      "state": "incomplete-cleanup-or-absence-unresolved",
+      "virtualCalls": [
+        "image-inspect",
+        "create",
+        "start",
+        "container-inspect",
+        "initialize",
+        "source-provision",
+        "cache-provision",
+        "initial-source-check",
+        "initial-cache-check",
+        "tools-before",
+        "npm-config",
+        "npm-ci",
+        "package-observations",
+        "tools-after",
+        "tracked-source-check",
+        "offline-final-inspect",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "frozen offline argv and hook-enabled command",
+      "passed": true
+    }
+  ],
+  "actualSetupOccurred": false,
+  "realDaemonNetworkProviderCalls": 0,
+  "nativeCollectionOccurred": false
+}

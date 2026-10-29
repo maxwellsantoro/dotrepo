@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Retain one normal npm setup observation in an offline container for the frozen
+  Go-01 task, with source/cache bindings, lifecycle logs, package/bin-link
+  observations and cleanup receipts. Preserve the published compiler-payload
+  boundary and withheld task, campaign and global-cache admission.
 - Require current-project documentation ownership rather than accepting links
   from integration prose or differently named quickstart subjects. Preserve
   direct declarations and navigation links, including custom documentation
