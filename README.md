@@ -57,8 +57,9 @@ See [installation](docs/install.md) for the CLI, LSP, and VS Code extension, and
 [consumer integration](docs/external-consumer-integration.md) for fallback rules
 and a runnable client.
 
-**Version matters:** the stable release is `v1.0.4`; this branch is the
-published prerelease `2.0.0-rc.1`. Stable includes the bounded command-extraction fixes, the
+**Version matters:** the stable release is `v1.0.4`; this source candidate is
+`2.0.0-rc.2` and remains unpublished. Published prerelease `2.0.0-rc.1` artifacts
+remain unchanged. Stable includes the bounded command-extraction fixes, the
 promotion no-write guard, response-size caps, and contained CLI/MCP output writes.
 The newer field-evidence
 schema, execution contexts, and additional MCP target checks remain on `main`.
