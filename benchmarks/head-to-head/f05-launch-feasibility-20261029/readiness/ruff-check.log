@@ -1,0 +1,14 @@
+F841 Local variable `next8` is assigned to but never used
+   --> /tmp/dotrepo-f05-launch-readiness-inventory-20261029/assemble_inventory.py:306:5
+    |
+304 |         ]
+305 |     }
+306 |     next8 = {
+    |     ^^^^^
+307 |         r["id"]: r
+308 |         for r in json.loads((BASE / "f05-qualification-next8-20261029/report.json").read_text())[
+    |
+help: Remove assignment to unused variable `next8`
+
+Found 1 error.
+No fixes available (1 hidden fix can be enabled with the `--unsafe-fixes` option).

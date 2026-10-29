@@ -1,0 +1,114 @@
+{
+  "scope": "Local exact archive hashes only; reuse retained Git/tree/member integrity checks; not source admission/runtime load/session proof.",
+  "tasks": [
+    {
+      "taskId": "rust-01",
+      "archivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/rust-01/source.tar",
+      "retainedExpectedSha256": "43cf6ded6def92347692da1746fb6e132be6d5e142154c6bf2b97c2fae41fe02",
+      "currentlyPresent": true,
+      "observedSha256": "43cf6ded6def92347692da1746fb6e132be6d5e142154c6bf2b97c2fae41fe02",
+      "bytes": 23367680,
+      "hashMatched": true
+    },
+    {
+      "taskId": "rust-02",
+      "archivePath": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/rust-02-full/runtime-source.tar",
+      "retainedExpectedSha256": "862b159c55ee7693faed80c2546aa203cc370e867cf5a206cff5356ab66766d6",
+      "currentlyPresent": true,
+      "observedSha256": "862b159c55ee7693faed80c2546aa203cc370e867cf5a206cff5356ab66766d6",
+      "bytes": 114851840,
+      "hashMatched": true
+    },
+    {
+      "taskId": "rust-03",
+      "archivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/rust-03/source.tar",
+      "retainedExpectedSha256": "19551665ef078b5392bb3640e98df32f99791320dd7afd4ca12cc081a772eb0c",
+      "currentlyPresent": true,
+      "observedSha256": "19551665ef078b5392bb3640e98df32f99791320dd7afd4ca12cc081a772eb0c",
+      "bytes": 9267200,
+      "hashMatched": true
+    },
+    {
+      "taskId": "python-01",
+      "archivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/python-01/source.tar",
+      "retainedExpectedSha256": "fc70acea794785b5c6bfd06f5e0c83cb328fc5c4e05e36dab8f182fea5bd0d70",
+      "currentlyPresent": true,
+      "observedSha256": "fc70acea794785b5c6bfd06f5e0c83cb328fc5c4e05e36dab8f182fea5bd0d70",
+      "bytes": 9175040,
+      "hashMatched": true
+    },
+    {
+      "taskId": "python-02",
+      "archivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/python-02/source.tar",
+      "retainedExpectedSha256": "6fe6c3084bc31e1f782696dc588cc55d61d1dd93bda8daffcba85971159ce61b",
+      "currentlyPresent": true,
+      "observedSha256": "6fe6c3084bc31e1f782696dc588cc55d61d1dd93bda8daffcba85971159ce61b",
+      "bytes": 246251520,
+      "hashMatched": true
+    },
+    {
+      "taskId": "python-03",
+      "archivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/python-03/source.tar",
+      "retainedExpectedSha256": "836cb208ff4ff481e5b9879fc3c10de793e7f8bca247e645661de1e233f63aa6",
+      "currentlyPresent": true,
+      "observedSha256": "836cb208ff4ff481e5b9879fc3c10de793e7f8bca247e645661de1e233f63aa6",
+      "bytes": 7710720,
+      "hashMatched": true
+    },
+    {
+      "taskId": "typescript-01",
+      "archivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/typescript-01/source.tar",
+      "retainedExpectedSha256": "c3287a2e874e9053fa07468897835e63895e49e3851bf8d8708337e6fbdec193",
+      "currentlyPresent": true,
+      "observedSha256": "c3287a2e874e9053fa07468897835e63895e49e3851bf8d8708337e6fbdec193",
+      "bytes": 153876480,
+      "hashMatched": true
+    },
+    {
+      "taskId": "typescript-02",
+      "archivePath": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/typescript-02/runtime-source.tar",
+      "retainedExpectedSha256": "818bf33ece0979d198ed6a11daa3e6b838cc4aefba8c3a381c86e8ce2e706f41",
+      "currentlyPresent": true,
+      "observedSha256": "818bf33ece0979d198ed6a11daa3e6b838cc4aefba8c3a381c86e8ce2e706f41",
+      "bytes": 33597440,
+      "hashMatched": true
+    },
+    {
+      "taskId": "typescript-03",
+      "archivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/typescript-03/source.tar",
+      "retainedExpectedSha256": "51249848d90d269ca4f03504257661e172bcc2e644bb2cc32cc37513ac60b93c",
+      "currentlyPresent": true,
+      "observedSha256": "51249848d90d269ca4f03504257661e172bcc2e644bb2cc32cc37513ac60b93c",
+      "bytes": 7086080,
+      "hashMatched": true
+    },
+    {
+      "taskId": "go-01",
+      "archivePath": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar",
+      "retainedExpectedSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+      "currentlyPresent": true,
+      "observedSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+      "bytes": 280422400,
+      "hashMatched": true
+    },
+    {
+      "taskId": "go-02",
+      "archivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/go-02/source.tar",
+      "retainedExpectedSha256": "7704106da11aef67bad7e0a9a4964f1d2e9a3f072511e585e677aa48f5016220",
+      "currentlyPresent": true,
+      "observedSha256": "7704106da11aef67bad7e0a9a4964f1d2e9a3f072511e585e677aa48f5016220",
+      "bytes": 2406400,
+      "hashMatched": true
+    },
+    {
+      "taskId": "go-03",
+      "archivePath": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-03/runtime-source.tar",
+      "retainedExpectedSha256": "cc7b18c67ce11698d79bfee35fe7afa7f7c8f0ea0dccbdaefd8836cde49f3ba2",
+      "currentlyPresent": true,
+      "observedSha256": "cc7b18c67ce11698d79bfee35fe7afa7f7c8f0ea0dccbdaefd8836cde49f3ba2",
+      "bytes": 52541440,
+      "hashMatched": true
+    }
+  ],
+  "networkOrExecutionActions": 0
+}

@@ -1,0 +1,43 @@
+{
+  "state": "append-only-readiness-review-lint-scope-erratum",
+  "originalReviewFreezeSha256": "943d1d24849d8c9ca6d0e3c6178a9bb4a5bd2a9126bea147d98db0211c3e81ab",
+  "originalReviewReportSha256": "c9d564b3b3f863209d974460055729865b6deda00ed9194a59bb36035ec029a3",
+  "originalAuthorFreezeSha256": "378233aabf128c2acd919a589d604c2b972d918518f8d7f7188000cf61f8cb87",
+  "correction": {
+    "field": "report.evidenceChecks.ruffCheckAndFormatPass",
+    "originalValue": true,
+    "accurateScope": "The independent review ran Ruff check/format on its owned verify.py only. The broad field did not distinguish that from the author script lint and must not be read as an author/full-packet lint pass.",
+    "reviewOwnedVerifier": {
+      "path": "/tmp/dotrepo-f05-launch-readiness-inventory-review-20261029/verify.py",
+      "sha256": "fcec4d17b140cfe8f89194aeadef6d0a48a16d82ea16c4f1fd624754354de59b",
+      "recordedRuffCheckAndFormat": "passed before original freeze"
+    },
+    "authorHistoricalScript": {
+      "path": "/tmp/dotrepo-f05-launch-readiness-inventory-20261029/assemble_inventory.py",
+      "bytes": 30127,
+      "sha256": "ec44611bafe7b3ab819e9814d85b0e947949dd3ae3ee942a12583cfe1b9ee42c",
+      "ruffCheckPass": false,
+      "diagnostic": "F841 unused local next8 assigned at line306",
+      "retainedRuffLog": {
+        "path": "/tmp/dotrepo-f05-launch-readiness-inventory-20261029/ruff-check.log",
+        "sha256": "3577f8cda0eb4e1553076bbf3acc3f783a7ecd831b24a7c3eece848d27b64468"
+      }
+    }
+  },
+  "integrationTreatmentReview": {
+    "decision": "Supported as explicitly labeled inert evidence projection, conditional on exact byte/hash and source mapping verification at integration.",
+    "proposedDestinationName": "assemble_inventory.py.txt",
+    "requirements": [
+      "Copy the exact30127bytes/SHA256ec44611bafe7b3ab819e9814d85b0e947949dd3ae3ee942a12583cfe1b9ee42c without fixing the frozen script.",
+      "Retain explicit source filename/path, original author FREEZE and original artifact hash/size in the projection map; historical source identity remains assemble_inventory.py.",
+      "Label the projected file as retained prefreeze authoring source, not active repository tooling or a lint-passing executable.",
+      "Preserve the historical F841 raw log and this correction; no pyproject lint exclusion or rewrite of original frozen script is needed."
+    ],
+    "limits": "This reviews the stated treatment, not an unseen final destination-byte claim. Root must verify actual copied projection and mapping. A clean active-code Ruff gate does not retroactively make the inert historical script lint-clean."
+  },
+  "effectOnReadiness": "No change to twelve task identities,43evidence bindings/archive counts or C1-NO-GO decision; unused local assignment is not a task/readiness observation.",
+  "newActions": "Inert existing text/hash inspection and erratum writing only; no implementation, lint rerun, workload, acquisition, daemon, network, install or provider action.",
+  "executionAuthorized": false,
+  "paidLaunchAuthorized": false,
+  "newInfrastructureAuthorized": false
+}

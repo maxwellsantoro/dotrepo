@@ -1,0 +1,82 @@
+{
+  "state": "independent-finite-readiness-inventory-verification-pass",
+  "authorArtifacts": 9,
+  "evidenceBindings": 43,
+  "unchangedTaskIdentities": 12,
+  "archives": [
+    {
+      "id": "rust-01",
+      "bytes": 23367680,
+      "sha256": "43cf6ded6def92347692da1746fb6e132be6d5e142154c6bf2b97c2fae41fe02"
+    },
+    {
+      "id": "rust-02",
+      "bytes": 114851840,
+      "sha256": "862b159c55ee7693faed80c2546aa203cc370e867cf5a206cff5356ab66766d6"
+    },
+    {
+      "id": "rust-03",
+      "bytes": 9267200,
+      "sha256": "19551665ef078b5392bb3640e98df32f99791320dd7afd4ca12cc081a772eb0c"
+    },
+    {
+      "id": "python-01",
+      "bytes": 9175040,
+      "sha256": "fc70acea794785b5c6bfd06f5e0c83cb328fc5c4e05e36dab8f182fea5bd0d70"
+    },
+    {
+      "id": "python-02",
+      "bytes": 246251520,
+      "sha256": "6fe6c3084bc31e1f782696dc588cc55d61d1dd93bda8daffcba85971159ce61b"
+    },
+    {
+      "id": "python-03",
+      "bytes": 7710720,
+      "sha256": "836cb208ff4ff481e5b9879fc3c10de793e7f8bca247e645661de1e233f63aa6"
+    },
+    {
+      "id": "typescript-01",
+      "bytes": 153876480,
+      "sha256": "c3287a2e874e9053fa07468897835e63895e49e3851bf8d8708337e6fbdec193"
+    },
+    {
+      "id": "typescript-02",
+      "bytes": 33597440,
+      "sha256": "818bf33ece0979d198ed6a11daa3e6b838cc4aefba8c3a381c86e8ce2e706f41"
+    },
+    {
+      "id": "typescript-03",
+      "bytes": 7086080,
+      "sha256": "51249848d90d269ca4f03504257661e172bcc2e644bb2cc32cc37513ac60b93c"
+    },
+    {
+      "id": "go-01",
+      "bytes": 280422400,
+      "sha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f"
+    },
+    {
+      "id": "go-02",
+      "bytes": 2406400,
+      "sha256": "7704106da11aef67bad7e0a9a4964f1d2e9a3f072511e585e677aa48f5016220"
+    },
+    {
+      "id": "go-03",
+      "bytes": 52541440,
+      "sha256": "cc7b18c67ce11698d79bfee35fe7afa7f7c8f0ea0dccbdaefd8836cde49f3ba2"
+    }
+  ],
+  "archiveBytesRehashed": 940554240,
+  "boundedKnownNativeScopes": [
+    "rust-02",
+    "typescript-02",
+    "go-03"
+  ],
+  "tasksWithoutThatQualification": 9,
+  "sharedGateGroups": 6,
+  "campaignSourceAdmissionsEstablished": 0,
+  "agentSessionOrProviderLiveQualifications": 0,
+  "actualCampaignSessions": 0,
+  "countsNotAdditive": "9 task-scope qualification gaps and6 shared gate groups; not15 sequential implementation steps or18 task env/oracle failures.12 source-admission checks overlap shared final-freeze gate.",
+  "newNetworkDaemonInstallProviderNativeActions": 0,
+  "executionAuthorized": false
+}

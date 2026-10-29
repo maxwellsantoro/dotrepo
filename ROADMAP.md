@@ -5,6 +5,11 @@ preserve their evidence and age, and reuse them across agents, developers, and
 tools. Overlay coverage works before maintainer adoption; API and MCP are the
 primary consumer surfaces.
 
+Optimize useful, trustworthy repository knowledge per unit of total cost.
+Repository counts, extracted fields and verification labels are inputs to that
+assessment, not the objective. Preserve reusable investigation, including the
+limits of what was established.
+
 This file owns priorities, dependencies, and completion gates. [README](README.md)
 owns shipped behavior, [CHANGELOG](CHANGELOG.md) owns completed implementation,
 and [the documentation map](docs/README.md) routes detailed work. Code and tested
@@ -73,6 +78,21 @@ acceptance decisions. The retained own-project study is operator evidence, not
 the new holdout. Recruitment preparation can begin alongside these packets;
 outreach requires authorization and independent use requires consent. Ecosystem
 scale and protocol governance remain later gates.
+
+The immediate checkpoint is **F-05 launch feasibility**, not completion of an
+environment platform. Finish the existing bounded preparations, retain a single
+twelve-task readiness matrix and deduplicated open-gate count, exercise the full
+session-to-scoring path with owned synthetic controls, then freeze the required
+campaign inputs or record a C1 no-go. Do not change task identities, exclude
+lookup misses, raise resource limits or launch paid sessions to avoid that
+decision. A no-go records the current product/experiment boundary; it does not
+prove that every task is infeasible. Further preparation needs a separately
+bounded decision, rather than an automatic chain of prerequisites.
+The [October 29 feasibility checkpoint](benchmarks/head-to-head/f05-launch-feasibility-20261029/README.md)
+records the current C1 no-go, independently reviewed twelve-task matrix, fixed
+profile applicability diagnostic and complete owned synthetic scoring path.
+Reopening requires an explicit bounded decision on its named evidence gaps;
+the general dispatch order below does not restart environment preparation.
 
 ### Start together
 
@@ -183,6 +203,9 @@ portable retained-data checks and explicit external archive bindings. Literal
 shell expansion, effective package loading/compiler behavior and the complete
 applicable instruction remain unresolved; this known case supplies no fresh
 qualification result.
+Close this investigation at the retained limitation. Further E1 generalization
+uses fresh qualification identities rather than repeated Compose/Keras/Zellij
+development investigations.
 The [Zellij source assessment](benchmarks/head-to-head/e1-zellij-establishment-review-20261029/README.md)
 supports its documented default recipe with explicit scope, build-state and
 environment qualifications. The [automatic-establishment decision](benchmarks/head-to-head/e1-zellij-establishment-contract-20261029/README.md)
@@ -331,6 +354,17 @@ rather than starting a separate repository-wide cleanup.
 
 These constraints apply to every packet and cannot be traded away for speed:
 
+- **Accuracy is task-relative.** Judge an answer against requested scope and
+  required context. A correct component command is not automatically a root
+  instruction; an omitted essential prerequisite leaves it incomplete.
+- **Abstention stays informative.** Distinguish unavailable or contradictory
+  evidence, incomplete context, inapplicable scope, stale evidence and
+  parser/model failure. Preserve the source and smallest next verification step
+  when supported, rather than turning uncertainty into a generic command.
+- **Scaling follows demonstrated utility.** Demand comes from lookup misses
+  and repeated investigations. Raw profile, field and verified-record counts
+  cannot substitute for usefulness after verification, fallback and maintenance.
+
 - Parse facts first, then deterministic reconciliation, bounded candidate-constrained
   adjudication, an independent opinion, and a budgeted tail. Stop with partial
   publication or abstention when evidence is insufficient. Generated overlays
@@ -363,6 +397,51 @@ every plan. Project adjudication tiers and coding-agent assignments are
 separate decisions. Cache identities bind evidence, field, prompt/policy, and
 model; count failed calls and preserve partial progress. Avoid unchanged work
 before spending additional model or network budget.
+
+### Partial knowledge and bounded efficiency experiments
+
+Keep repository understanding, task guidance and actionable instructions
+distinct. Purpose, structure, documentation and ownership need dated source
+support; command candidates also need attributed scope and context. A qualified
+instruction requires the complete context and task-specific consumer acceptance.
+An investigation lead can remain useful with unresolved context when its source,
+limitation and next verification step are explicit. First trial the existing
+candidate/evidence surfaces without relaxing instruction selection or adding a
+protocol field. Measure lead usefulness separately from instruction acceptance.
+
+Avoid repeated work unless a relevant dependency changed. Separate repository
+revision, source-blob contents, extractor/policy, inference model/prompt,
+verification policy and export/snapshot identities. Reuse source acquisition
+across extractor changes and unchanged blobs across revisions when sound; never
+renew factual inspection age merely because an artifact was reused. Prefer
+request elimination and tree reuse, then content-addressed intermediates,
+persistent process/client batching, bounded concurrency and incremental export.
+Keep the public format and storage architecture while measuring these changes.
+
+Run a separate acquisition experiment on 100 mixed repositories frozen at exact
+revisions before comparing implementations. Retain baseline and revised results
+with identical source opportunities, field dispositions, context/prerequisite
+recovery, incorrect/missing facts, HTTP requests/bytes, wall/CPU time, peak memory
+and refresh-planning cost. Compare equivalent cold/warm conditions and include
+failures and fallback. The proposed 10–15 requests and roughly two seconds per
+recrawl are targets to test, not achieved values; establish the measured baseline
+first. Accept an optimization only without extraction/evidence regressions.
+This experiment does not gate F-05 and authorizes no larger indexing cohort.
+
+Keep production inference pinned while evaluating alternatives. Separate schema
+compatibility, grounded task quality and production eligibility. A recurring,
+versioned evaluation record should bind exact provider/model and API mode,
+prompt/schema, disjoint development/qualification inputs, actual input/output/
+reasoning/cached usage, retries, valid responses, correct/incorrect selections,
+abstentions and cost per supported correct decision and repository including
+escalation/fallback. The requested candidate families are Luna, Terra, Muse Spark
+Contributor, Qwen and GLM; resolve current exact routes, availability and provider
+terms at freeze time rather than treating these names as eligible endpoints.
+Synthetic canaries establish compatibility only. Shadow comparisons cannot
+replace the incumbent before disjoint quality requirements pass; choose the
+cheapest eligible route for each decision class. Contributor-mode evaluation
+requires the declared public-source privacy assumption and checked terms.
+Model comparison does not block deterministic acquisition improvements or F-05.
 
 ## Product milestones
 

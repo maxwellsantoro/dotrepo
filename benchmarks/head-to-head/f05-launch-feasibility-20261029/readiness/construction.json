@@ -1,0 +1,20 @@
+{
+  "tasks": 12,
+  "evidenceBindings": 43,
+  "counts": {
+    "tasks": 12,
+    "repositories": 12,
+    "fullExactSourceArchivesRetainedAndHashRechecked": 12,
+    "exactCampaignSourceAdmissionsEstablished": 0,
+    "exactCampaignSourceAdmissionsUnverified": 12,
+    "boundedNativeEnvironmentScopesQualified": 3,
+    "boundedNativeOutcomeOraclesQualified": 3,
+    "tasksWithoutBoundedNativeEnvironmentAndOutcomeQualification": 9,
+    "taskEvidenceUnit": "one task has both bounded native environment and outcome qualification;3met/9unmet of12. Environment/oracle columns overlap; do not add as18distincttasks.",
+    "agentSessionCaptureOrProviderLiveQualifiedTasks": 0,
+    "agentSessionsRun": 0,
+    "sharedLaunchGateGroupsUnmet": 6,
+    "sharedLaunchGateGroupsTotal": 6,
+    "countingRule": "Six explicitly grouped shared gates counted once, not12times. Source retention/admission and bounded operator/session qualification are separate facts. Unknown/unverified is unmet, not unavailable."
+  }
+}

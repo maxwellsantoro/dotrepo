@@ -1,0 +1,17 @@
+{
+  "state": "readiness-review-lint-erratum-frozen",
+  "parentReviewFreezeSha256": "943d1d24849d8c9ca6d0e3c6178a9bb4a5bd2a9126bea147d98db0211c3e81ab",
+  "originalAuthorFreezeSha256": "378233aabf128c2acd919a589d604c2b972d918518f8d7f7188000cf61f8cb87",
+  "artifacts": {
+    "README.md": {
+      "bytes": 1172,
+      "sha256": "80d6b4ffa52284e76102d7ee50c976f7a22b6a8b8b9eac94f497666cf069f11f"
+    },
+    "erratum.json": {
+      "bytes": 3111,
+      "sha256": "fe8dd035aa919d9f444e3b3aea2523dc858132712aef32a1ad6e46b574ce8a23"
+    }
+  },
+  "decisionUnchanged": "C1-NO-GO-current-evidence",
+  "executionAuthorized": false
+}

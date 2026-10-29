@@ -1,0 +1,46 @@
+{
+  "schema": "f05-fixed-applicability-diagnostic-freeze-v1",
+  "frozenAt": "2026-10-29T14:56:37.963218+00:00",
+  "state": "known-source-reference-policy-diagnostic-only",
+  "inputFreezeSha256": "e0286bb486ead69935ca3fbcfda526c505573eb0d026a92b12ad437994c4ec6f",
+  "actualTaskOrCampaignAdmission": false,
+  "nativeExecution": false,
+  "causalBenefitMeasured": false,
+  "files": [
+    {
+      "path": "INPUT_FREEZE.json",
+      "sha256": "e0286bb486ead69935ca3fbcfda526c505573eb0d026a92b12ad437994c4ec6f",
+      "bytes": 15198
+    },
+    {
+      "path": "README.md",
+      "sha256": "b5784d2560c470dde5b8c85dc018227cb624be91d4ade15e3e95bbe675738c1e",
+      "bytes": 9570
+    },
+    {
+      "path": "diagnose.py",
+      "sha256": "dda82285ad281ae11a0fecbf4c49a47895f397874165c1ddd5ab4bba4ea150da",
+      "bytes": 8684
+    },
+    {
+      "path": "existing-controls.log",
+      "sha256": "2ea3f8b9057e6488d8fd07e18d4874fcecb77c1222ccf7c1dfa63523fa6dd356",
+      "bytes": 114
+    },
+    {
+      "path": "replay.json",
+      "sha256": "81dcf7c7721af4ff56a73690ac4ea396244daf8d3a0157be398e0f56b4200c35",
+      "bytes": 27391
+    },
+    {
+      "path": "ruff-check.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    },
+    {
+      "path": "ruff-format.log",
+      "sha256": "413a709001976657cb743636fd34e48fc41d8d302d665460d3f874b3313da127",
+      "bytes": 19
+    }
+  ]
+}
