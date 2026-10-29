@@ -1,0 +1,148 @@
+{
+  "verifiedAt": "2026-10-29T05:45:47.496599+00:00",
+  "version": "2.0.0-rc.2",
+  "tag": "v2.0.0-rc.2",
+  "tagCommit": "94e02bd43d7cae1e5b6cd37ebd7a2a66a9b2b773",
+  "releaseUrl": "https://github.com/maxwellsantoro/dotrepo/releases/tag/v2.0.0-rc.2",
+  "channel": "prerelease",
+  "stableProductionVersion": "1.0.4",
+  "observedWorkflows": {
+    "source-preparation-ci": {
+      "runId": 40822163434,
+      "headSha": "5fbb89a02a9f55eb7dd1952f68243394cfb26562",
+      "conclusion": "success",
+      "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/40822163434",
+      "capture": "source-preparation-ci.json",
+      "jobsCapture": "source-preparation-ci-jobs.json",
+      "jobs": {
+        "change-scope": "success",
+        "release-gate": "success",
+        "operator-gate": "success",
+        "write-boundary-runtime (windows-latest)": "success",
+        "rust-and-index": "success",
+        "python-gate": "success",
+        "write-boundary-runtime (ubuntu-latest)": "success",
+        "public-surface-gate": "skipped",
+        "minimal-gate": "skipped",
+        "ci-gate": "success"
+      }
+    },
+    "ci-before-tag": {
+      "runId": 40823811775,
+      "headSha": "94e02bd43d7cae1e5b6cd37ebd7a2a66a9b2b773",
+      "conclusion": "success",
+      "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/40823811775",
+      "capture": "ci-before-tag.json",
+      "jobsCapture": "ci-before-tag-jobs.json",
+      "jobs": {
+        "change-scope": "success",
+        "minimal-gate": "success",
+        "release-gate": "skipped",
+        "rust-and-index": "skipped",
+        "write-boundary-runtime": "skipped",
+        "operator-gate": "skipped",
+        "public-surface-gate": "skipped",
+        "python-gate": "skipped",
+        "ci-gate": "success"
+      }
+    },
+    "release-workflow": {
+      "runId": 40823937226,
+      "headSha": "94e02bd43d7cae1e5b6cd37ebd7a2a66a9b2b773",
+      "conclusion": "success",
+      "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/40823937226",
+      "capture": "release-workflow.json",
+      "jobsCapture": "release-workflow-jobs.json",
+      "jobs": {
+        "version-integrity": "success",
+        "vscode-extension": "success",
+        "binaries (macos-latest, dotrepo-binaries-macos)": "success",
+        "binaries (ubuntu-latest, dotrepo-binaries-linux)": "success",
+        "release": "success",
+        "mcp-registry": "success",
+        "publish-crates": "success"
+      }
+    },
+    "experimental-merge-ci": {
+      "runId": 40824573490,
+      "headSha": "8ff47789a13cc542f0cd49e98f46fc625fe58971",
+      "conclusion": "success",
+      "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/40824573490",
+      "capture": "experimental-merge-ci.json",
+      "jobsCapture": "experimental-merge-ci-jobs.json",
+      "jobs": {
+        "change-scope": "success",
+        "operator-gate": "success",
+        "release-gate": "success",
+        "python-gate": "success",
+        "rust-and-index": "success",
+        "write-boundary-runtime (ubuntu-latest)": "success",
+        "write-boundary-runtime (windows-latest)": "success",
+        "minimal-gate": "skipped",
+        "public-surface-gate": "skipped",
+        "ci-gate": "success"
+      }
+    }
+  },
+  "macOSPacket": {
+    "manifest": "index/telemetry/rc2-delivery-20261029/evidence-manifest.json",
+    "sha256": "0829710fc2b048fcc5aa1c4e6e00ddcb4cfd2d891e5f02f9183ec9c90e72c4e7",
+    "verifiedFiles": 35,
+    "execution": "macOS ARM64",
+    "independentReview": "Read-only local artifact/log/source/binary binding review found no inconsistencies; no repeated network access or installations."
+  },
+  "linuxPacket": {
+    "manifest": "index/telemetry/rc2-linux-verification-20261029/artifact-hashes.json",
+    "sha256": "88eb2f2ba1f283053b213080e812c9f5ec2f5a960964a4f9b2bde7e0d1db1381",
+    "verifiedFiles": 662,
+    "execution": "Linux ARM64 container on macOS ARM64",
+    "verification": {
+      "verifiedAt": "2026-10-29T05:44:45.466764+00:00",
+      "status": "passed-with-retained-initial-verifier-configuration-failure",
+      "version": "2.0.0-rc.2",
+      "sourceCommit": "94e02bd43d7cae1e5b6cd37ebd7a2a66a9b2b773",
+      "imageId": "sha256:114c7a4425406451c2866b6aafe69fe29b1b298832db1277d411ac73c82d04d6",
+      "packages": [
+        "dotrepo-cli",
+        "dotrepo-mcp",
+        "dotrepo-lsp",
+        "dotrepo"
+      ],
+      "exactLockedRegistryInstallations": 4,
+      "packagedSourceAndRegistryChecksumMatches": 4,
+      "controlledSafetyChecks": 40,
+      "nativeArm64ElfBinaries": 5,
+      "cliHelpChecks": 3,
+      "standaloneAliasValidation": "passed",
+      "mcpStdio": "passed-seven-responses",
+      "lspStdio": "passed-initialize-diagnostics-shutdown-exit",
+      "containersRemoved": true,
+      "limits": [
+        "Linux ARM64 container execution on macOS ARM64; not native Linux host execution",
+        "No x86_64 release bundle executed",
+        "Public Docker bridge network during registry installation, disconnected for controls",
+        "Fresh Cargo home; sequential packages share container cache; host/VM caches uncontrolled",
+        "Dotrepo-owned controlled fixtures only; no upstream project commands or model calls",
+        "Packaging and safety evidence, not independent consumer usefulness"
+      ]
+    }
+  },
+  "failedAttemptsRetained": {
+    "macOS": [
+      "unsupported CLI --version verifier assumption",
+      "optional fixture key verifier assumption"
+    ],
+    "linux": [
+      "tmpfs noexec verifier configuration"
+    ]
+  },
+  "limits": [
+    "Frozen observations, not an ongoing availability monitor",
+    "CLI has no version self-report flag; provenance binds identity",
+    "No native Linux host or x86_64 release-bundle execution",
+    "VSIX asset integrity checked; editor installation not tested",
+    "Caches and environment limits are owned by each installation packet",
+    "Release excludes subsequent E1/F05 source changes",
+    "No unfamiliar-task completion, consumer-benefit, independent-use or operational-streak claim"
+  ]
+}

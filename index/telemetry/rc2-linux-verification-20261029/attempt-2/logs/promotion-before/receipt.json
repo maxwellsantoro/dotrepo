@@ -1,0 +1,17 @@
+{
+  "startedAt": "2026-10-29T05:44:38.704926+00:00",
+  "endedAt": "2026-10-29T05:44:38.773708+00:00",
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-rc2-linux-b55b7fd4961b",
+    "sha256sum",
+    "/work/promotion/index/repos/github.com/example/sentinel/record.toml",
+    "/work/promotion/index/repos/github.com/example/sentinel/evidence.md"
+  ],
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdoutSha256": "bf6b63b851a58a7fb683aa544701eee1f02f6150853f84ffe7b40c90e78eac35",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

@@ -1,0 +1,24 @@
+{
+  "startedAt": "2026-10-29T05:42:33.917986+00:00",
+  "endedAt": "2026-10-29T05:42:57.853729+00:00",
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-rc2-linux-b55b7fd4961b",
+    "cargo",
+    "install",
+    "dotrepo-lsp",
+    "--locked",
+    "--version",
+    "=2.0.0-rc.2",
+    "--root",
+    "/work/install-dotrepo-lsp",
+    "--target-dir",
+    "/work/cargo-target"
+  ],
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "81143c4649736ba708bd0cb14e3105541c4d1da22d0c6f49021d004c09098a26"
+}

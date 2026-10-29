@@ -1,0 +1,19 @@
+{
+  "startedAt": "2026-10-29T05:44:38.032054+00:00",
+  "endedAt": "2026-10-29T05:44:38.114866+00:00",
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-rc2-linux-b55b7fd4961b",
+    "/work/install-dotrepo-cli/bin/dotrepo",
+    "--root",
+    "/work/outputs/ci-parent/checkout",
+    "ci",
+    "init"
+  ],
+  "exitCode": 1,
+  "error": null,
+  "stdinBytes": 0,
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "b8b3f5d18c71326061933814db068048d9f017c39c1a3aaa5a4b57f08f7a40df"
+}

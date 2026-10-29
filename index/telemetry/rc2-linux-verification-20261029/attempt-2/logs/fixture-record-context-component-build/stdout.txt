@@ -1,0 +1,31 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/example/safety-fixture"
+generated_at = "2026-10-29T05:44:31.998306583Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Context fixture"
+description = "Source-preserving contextual instructions."
+homepage = "https://github.com/example/safety-fixture"
+languages = []
+topics = []
+
+[[repo.build_candidates]]
+command = "npm run build"
+source = "README.md"
+
+[repo.build_candidates.context]
+command = "npm run build"
+working_directory = "packages/ui"
+scope = "component"
+component = "packages/ui"
+prerequisites = ["Run `npm ci` in `packages/ui` before this command."]
+source = "README.md"

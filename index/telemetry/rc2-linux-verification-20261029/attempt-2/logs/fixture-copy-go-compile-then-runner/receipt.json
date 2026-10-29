@@ -1,0 +1,18 @@
+{
+  "startedAt": "2026-10-29T05:44:29.282524+00:00",
+  "endedAt": "2026-10-29T05:44:29.351803+00:00",
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-rc2-linux-b55b7fd4961b",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "mkdir -p /work/cases; cp -a /work/source/crates/dotrepo-core/tests/fixtures/import/go-compile-then-runner /work/cases/go-compile-then-runner"
+  ],
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

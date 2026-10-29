@@ -1,0 +1,19 @@
+{
+  "startedAt": "2026-10-29T05:42:33.443255+00:00",
+  "endedAt": "2026-10-29T05:42:33.629932+00:00",
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-rc2-linux-b55b7fd4961b",
+    "cargo",
+    "install",
+    "--list",
+    "--root",
+    "/work/install-dotrepo-mcp"
+  ],
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdoutSha256": "16373ee48e1a1fa10e620234367f3f293198975401799627f52929533f7efce2",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

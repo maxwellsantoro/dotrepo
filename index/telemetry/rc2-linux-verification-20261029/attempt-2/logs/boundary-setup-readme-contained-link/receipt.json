@@ -1,0 +1,18 @@
+{
+  "startedAt": "2026-10-29T05:44:33.774178+00:00",
+  "endedAt": "2026-10-29T05:44:33.852094+00:00",
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-rc2-linux-b55b7fd4961b",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "mkdir -p /work/boundaries/readme-contained-link/repo; printf '# Fixture\\n\\nOrdinary contained input.\\n' >/work/boundaries/readme-contained-link/repo/README.md; printf '# External sentinel\\n\\nUnchanged.\\n' >/work/boundaries/readme-contained-link/outside; printf '# Inside\\n' >/work/boundaries/readme-contained-link/repo/inside.md; rm /work/boundaries/readme-contained-link/repo/README.md; ln -s /work/boundaries/readme-contained-link/repo/inside.md /work/boundaries/readme-contained-link/repo/README.md"
+  ],
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

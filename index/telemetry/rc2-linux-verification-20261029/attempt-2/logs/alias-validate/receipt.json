@@ -1,0 +1,18 @@
+{
+  "startedAt": "2026-10-29T05:44:40.109289+00:00",
+  "endedAt": "2026-10-29T05:44:40.181369+00:00",
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-rc2-linux-b55b7fd4961b",
+    "/work/install-dotrepo/bin/dotrepo",
+    "--root",
+    "/work/source/examples/native-minimal",
+    "validate"
+  ],
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdoutSha256": "d5834a4bcc4d986f92458bf0e2f8d44e505ec4ed79bc6ccd2116cc83ec2acc7d",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

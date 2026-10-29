@@ -1,0 +1,258 @@
+{
+  "checkedAt": "2026-10-29T05:37:14.333265+00:00",
+  "binary": "/private/tmp/dotrepo-rc2-delivery-full-40823937226/extracted/dotrepo-2.0.0-rc.2-aarch64-apple-darwin/bin/dotrepo",
+  "binarySha256": "0aef2136142b3a652c64486e916fc7d6432dada82c0c60da8162dc6ae42cac3f",
+  "version": "2.0.0-rc.2",
+  "versionSource": "Source owner; correlate with package/bundle receipt",
+  "sourceCommit": "94e02bd43d7cae1e5b6cd37ebd7a2a66a9b2b773",
+  "results": [
+    {
+      "fixture": "make-diagnostic",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "make-comment",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "make-uppercase",
+      "result": "passed",
+      "build": "make BUILD",
+      "test": null
+    },
+    {
+      "fixture": "make-prerequisite",
+      "result": "passed",
+      "build": null,
+      "test": "make test"
+    },
+    {
+      "fixture": "make-expressions",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "just-required-argument",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "just-wrapper",
+      "result": "passed",
+      "build": null,
+      "test": "just test"
+    },
+    {
+      "fixture": "go-compile-only",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "go-compile-then-runner",
+      "result": "passed",
+      "build": null,
+      "test": "go test ./..."
+    },
+    {
+      "fixture": "rake-root",
+      "result": "passed",
+      "build": "rake build",
+      "test": "rake test"
+    },
+    {
+      "fixture": "rake-namespace",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "rake-nested-namespace",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "rake-mixed",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "rake-if-modifier",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "rake-unless-modifier",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "rake-if-block",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "rake-if-quoted-hash",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "context-repository-tests",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "context-component-tests",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "context-component-build",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "context-wrong-directory",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "context-prose-prerequisite",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "context-nextest-selector",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "command-pagedigest-manifest-path",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "command-uv-docker",
+      "result": "passed",
+      "build": null,
+      "test": null
+    },
+    {
+      "fixture": "readme-escape",
+      "result": "passed",
+      "exitCode": 1,
+      "sentinelUnchanged": true,
+      "diagnostic": "refused import input README.md: Too many levels of symbolic links (os error 62)\n"
+    },
+    {
+      "fixture": "readme-contained-link",
+      "result": "passed",
+      "exitCode": 1,
+      "sentinelUnchanged": true,
+      "diagnostic": "refused import input README.md: Too many levels of symbolic links (os error 62)\n"
+    },
+    {
+      "fixture": "package-escape",
+      "result": "passed",
+      "exitCode": 1,
+      "sentinelUnchanged": true,
+      "diagnostic": "import input symlinks are unsupported: package.json\n"
+    },
+    {
+      "fixture": "workflow-directory-escape",
+      "result": "passed",
+      "exitCode": 1,
+      "sentinelUnchanged": true,
+      "diagnostic": "import input symlinks are unsupported: .github/workflows\n"
+    },
+    {
+      "fixture": "oversized-readme",
+      "result": "passed",
+      "exitCode": 1,
+      "sentinelUnchanged": true,
+      "diagnostic": "import input README.md exceeds 2097152 bytes\n"
+    },
+    {
+      "fixture": "directory-readme",
+      "result": "passed",
+      "exitCode": 1,
+      "sentinelUnchanged": true,
+      "diagnostic": "import input README.md must be a regular file\n"
+    },
+    {
+      "fixture": "fifo-readme",
+      "result": "passed",
+      "exitCode": 1,
+      "sentinelUnchanged": true,
+      "diagnostic": "import input README.md must be a regular file\n"
+    },
+    {
+      "fixture": "force-symlink",
+      "result": "passed",
+      "exitCode": 1,
+      "sentinelUnchanged": true,
+      "diagnostic": "output write refused; existing artifacts require --force: refused output /var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-installed-boundary-dzvmg2ag/repo/record.toml: requires a regular file; if it already exists, request overwrite: Too many levels of symbolic links (os error 62)\n"
+    },
+    {
+      "fixture": "force-hardlink",
+      "result": "passed",
+      "exitCode": 1,
+      "sentinelUnchanged": true,
+      "diagnostic": "output write refused; existing artifacts require --force: output must not be a shared hardlink\n"
+    },
+    {
+      "fixture": "generate-parent",
+      "result": "passed",
+      "exitCode": 1,
+      "sentinelUnchanged": true
+    },
+    {
+      "fixture": "generate-leaf",
+      "result": "passed",
+      "exitCode": 1,
+      "sentinelUnchanged": true
+    },
+    {
+      "fixture": "generate-hardlink",
+      "result": "passed",
+      "exitCode": 1,
+      "sentinelUnchanged": true
+    },
+    {
+      "fixture": "ci-parent",
+      "result": "passed",
+      "exitCode": 1,
+      "sentinelUnchanged": true
+    },
+    {
+      "fixture": "init-dangling",
+      "result": "passed",
+      "exitCode": 1,
+      "sentinelUnchanged": true
+    },
+    {
+      "fixture": "promotion-no-write",
+      "result": "passed"
+    }
+  ],
+  "limits": "Controlled local fixtures only; no upstream execution."
+}

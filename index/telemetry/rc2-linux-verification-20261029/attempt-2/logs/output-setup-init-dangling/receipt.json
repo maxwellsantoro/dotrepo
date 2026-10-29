@@ -1,0 +1,18 @@
+{
+  "startedAt": "2026-10-29T05:44:38.264298+00:00",
+  "endedAt": "2026-10-29T05:44:38.340468+00:00",
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-rc2-linux-b55b7fd4961b",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "mkdir -p /work/outputs/init-dangling/checkout /work/outputs/init-dangling/outside; printf '%s' 'schema=\"dotrepo/v0.1\"\n[record]\nmode=\"native\"\nstatus=\"draft\"\n[repo]\nname=\"fixture\"\ndescription=\"Fixture project\"\n[compat.github]\ncodeowners=\"generate\"\n' >/work/outputs/init-dangling/checkout/.repo; printf 'EXTERNAL SENTINEL\\n' >/work/outputs/init-dangling/outside/CODEOWNERS; rm /work/outputs/init-dangling/checkout/.repo; ln -s /work/outputs/init-dangling/outside/missing /work/outputs/init-dangling/checkout/.repo"
+  ],
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

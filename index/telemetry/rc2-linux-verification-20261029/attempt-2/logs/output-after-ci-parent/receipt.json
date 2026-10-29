@@ -1,0 +1,16 @@
+{
+  "startedAt": "2026-10-29T05:44:38.115885+00:00",
+  "endedAt": "2026-10-29T05:44:38.191323+00:00",
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-rc2-linux-b55b7fd4961b",
+    "sha256sum",
+    "/work/outputs/ci-parent/outside/CODEOWNERS"
+  ],
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdoutSha256": "81fe43a7a370e0b760cfeb85a63b722af577936e5445595b51b61decc8157ca5",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

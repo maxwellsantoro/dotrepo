@@ -1,0 +1,21 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/example/safety-fixture"
+generated_at = "2026-10-29T05:44:29.637890472Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md` and `Rakefile`. Imported `repo.build` from `Rakefile`. Imported `repo.test` from `Rakefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Rake fixture"
+description = "Conservative task declaration extraction."
+homepage = "https://github.com/example/safety-fixture"
+languages = []
+build = "rake build"
+test = "rake test"
+topics = []

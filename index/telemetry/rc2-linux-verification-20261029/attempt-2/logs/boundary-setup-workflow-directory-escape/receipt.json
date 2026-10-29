@@ -1,0 +1,18 @@
+{
+  "startedAt": "2026-10-29T05:44:34.528846+00:00",
+  "endedAt": "2026-10-29T05:44:34.598537+00:00",
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-rc2-linux-b55b7fd4961b",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "mkdir -p /work/boundaries/workflow-directory-escape/repo; printf '# Fixture\\n\\nOrdinary contained input.\\n' >/work/boundaries/workflow-directory-escape/repo/README.md; printf '# External sentinel\\n\\nUnchanged.\\n' >/work/boundaries/workflow-directory-escape/outside; mkdir -p /work/boundaries/workflow-directory-escape/repo/.github /work/boundaries/workflow-directory-escape/outside-workflows; printf 'name: Test\\non: [push]\\njobs: {}\\n' >/work/boundaries/workflow-directory-escape/outside-workflows/test.yml; ln -s /work/boundaries/workflow-directory-escape/outside-workflows /work/boundaries/workflow-directory-escape/repo/.github/workflows"
+  ],
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

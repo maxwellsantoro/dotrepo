@@ -1,0 +1,16 @@
+{
+  "startedAt": "2026-10-29T05:44:32.266181+00:00",
+  "endedAt": "2026-10-29T05:44:32.348488+00:00",
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-rc2-linux-b55b7fd4961b",
+    "cat",
+    "/work/cases/context-wrong-directory/record.toml"
+  ],
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdoutSha256": "faf9dae59dd8783ea8316e8ef76db63bc18942d8fc67ec42901f658fca8f5703",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

@@ -1,0 +1,43 @@
+{
+  "algorithm": "sha256",
+  "excludes": [
+    "evidence-manifest.json"
+  ],
+  "files": {
+    "README.md": "4edc07148690fea31bf12d19862c2b04609fede3deb511208bbeb1ed42e5203d",
+    "check_installed_safety.py": "7280c3d3e20ad7b85ed9ccce866f0382c793f90847ca28690adb8a38b8b3a14e",
+    "delivery.json": "b5cd9170154be1a94699c579e95692f4e16a8998c154fd27a637a645f7de56d4",
+    "publication/dotrepo-2.0.0-rc.2-aarch64-apple-darwin.sha256": "98d232ec709260b7a1bf8cb08d37bca2f7f14ee94c386d035fdee06598331a30",
+    "publication/dotrepo-2.0.0-rc.2-x86_64-unknown-linux-gnu.sha256": "977f7f746aa3f781e11591e02aefb003af978c8fca5b66122bb6be2a2196efe3",
+    "publication/dotrepo-cli-metadata.json": "cf94ed7a1f0360951f03bb266dd43fd22563134d33d54436722bb95a253141ff",
+    "publication/dotrepo-core-metadata.json": "6b4e1a0d3438f0aa740c04af20fbd94909d5682228aae0480f42494f740d2513",
+    "publication/dotrepo-lsp-metadata.json": "65a5ec26977dff737aa08833c88f1cb952ebc090b6497442a20eed52813c706b",
+    "publication/dotrepo-mcp-2.0.0-rc.2.mcpb.sha256": "26790f06e6a4d12c9d6613ffa13c100eb3a7372af84609f4f740958c3bc0c53d",
+    "publication/dotrepo-mcp-metadata.json": "8cdb8cc80939b6138eb8720b0e9f11f067e40d153351016e51b750cd726877f3",
+    "publication/dotrepo-metadata.json": "39aa48c1598540176adbea87af7a165ed5c07c81c7e4d537753d1f1b051d9f90",
+    "publication/dotrepo-schema-metadata.json": "6985165db79cd3790794c1e7341a7dc309fba4889d0c5a6caf84b94893bba792",
+    "publication/dotrepo-transport-metadata.json": "171bf4a4f92d7b2da310406334e1575d59ca16db33e785c54263e4c97a337717",
+    "publication/mcp-registry.json": "ba9fdb5cbce2b304503d1d0ad0fe7d79f0aef357c2a07ce492a291e5d3dede2a",
+    "publication/release.json": "462de4eaa50c72e0720c0abd75eba5a17e7bbc2d79f905722a41d6c016109cd9",
+    "publication/tag-refs.txt": "21a6ee32370f0ad5d9ef35be4e78ea8825626889e802b0eae57c1a091217e85d",
+    "receipts/attempt-01-unsupported-cli-version/receipt.json": "6fca80175a74f9383b460855bf207ea40d95e09f9bcd05c3dfc89ce706f3c99b",
+    "receipts/attempt-02-optional-fixture-key/bundle-safety.log": "384109c9b2880071b804475d6742b9519919cbdedf7aad310966f964033652ae",
+    "receipts/attempt-02-optional-fixture-key/receipt.json": "b2cb8c67044a547abf044a31bf1737cadbe456e563512ff641d9fd21c3e25e37",
+    "receipts/attempt-03-full-pass/bundle-lsp-stdio.log": "f700c9f1aa8cdbb944ef3506c728f3299a0e0c014e750373f4cd701f248388fa",
+    "receipts/attempt-03-full-pass/bundle-mcp-stdio.log": "f700c9f1aa8cdbb944ef3506c728f3299a0e0c014e750373f4cd701f248388fa",
+    "receipts/attempt-03-full-pass/bundle-safety.json": "202c73510c7a61d64758ef7b0f9fb291c2086a97eeb93ac9defec9719415ad87",
+    "receipts/attempt-03-full-pass/bundle-safety.log": "ef706626032f0aea1125a5003acb7ea46ab7c725f48b88d4c154c942b9373890",
+    "receipts/attempt-03-full-pass/install-dotrepo-cli.log": "030ab9e4482fe9883f58c23f3afef38daa885d30d2dbe0bc12f71694f17099d2",
+    "receipts/attempt-03-full-pass/install-dotrepo-lsp.log": "703ff0eb27b149c02e5469097f20c64d4e47068cbb5606164ef52e242806d8ca",
+    "receipts/attempt-03-full-pass/install-dotrepo-mcp.log": "6251657dffba4ad0c35af5c782cd498afea86ed3f2c8c7039f77c2cbcf6f0d40",
+    "receipts/attempt-03-full-pass/install-dotrepo.log": "4a881a0d2b1756438b246588775bdd8093f172bfda79e5f5cc068598c06ab93d",
+    "receipts/attempt-03-full-pass/receipt.json": "1393cb825eb53e74e7fd8335b1c9adc5a498052019d823851d79bc4bee7ba2f1",
+    "receipts/attempt-03-full-pass/registry-alias-safety.json": "79e32dce0a50a3413611e1dc99004429e6bcd538e9219bc63dba46996af1ba9d",
+    "receipts/attempt-03-full-pass/registry-alias-safety.log": "977c146a637de3da88cbd3f3b062f2d4eeb29e2358e8514b1c24387c1713a3c0",
+    "receipts/attempt-03-full-pass/registry-lsp-stdio.log": "f700c9f1aa8cdbb944ef3506c728f3299a0e0c014e750373f4cd701f248388fa",
+    "receipts/attempt-03-full-pass/registry-mcp-stdio.log": "f700c9f1aa8cdbb944ef3506c728f3299a0e0c014e750373f4cd701f248388fa",
+    "receipts/attempt-03-full-pass/registry-safety.json": "74750053d4c9021ef78e08cdcf5384c93b22143a18817b9a1e93ed95f6e2ea59",
+    "receipts/attempt-03-full-pass/registry-safety.log": "977c146a637de3da88cbd3f3b062f2d4eeb29e2358e8514b1c24387c1713a3c0",
+    "verify_publication.py": "6cc1d7a6fbdc333f8a44d31e787c4fb3c99eb7f4f9bf8da95b4f7da65f4d1c53"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "startedAt": "2026-10-29T05:38:00.221648+00:00",
+  "endedAt": "2026-10-29T05:38:00.531792+00:00",
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-rc2-linux-a9b7a771418c",
+    "/bin/mkdir",
+    "-p",
+    "/work/home",
+    "/work/source",
+    "/work/cargo"
+  ],
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

@@ -1,0 +1,31 @@
+reference cli for the dotrepo protocol
+
+Usage: dotrepo [OPTIONS] <COMMAND>
+
+Commands:
+  init                 Initialize a canonical root `.repo` scaffold
+  import               Import conventional repository surfaces into a dotrepo record
+  adopt-overlay        Bootstrap a native `.repo` from an existing public overlay record
+  validate             Validate only the root `.repo` or root `record.toml`
+  validate-index       Validate a public index tree rooted at `index/`
+  promotion-report     Inspect retained field assessments; fresh crawler verification is required to promote
+  query                Query one field from the selected record, preserving trust-aware selection in `--json`
+  generate             Render generated compatibility surfaces or fail when they drift
+  doctor               Inspect unmanaged conventional files at the repository root
+  manage               Adopt one supported Markdown surface into managed-region sync
+  preview              Preview how dotrepo would render or replace one managed surface
+  trust                Inspect trust, authority handoff, and competing records for one repository identity
+  adoption-status      Summarize native adoption readiness for the current repository
+  ci                   Scaffold CI for the canonical native-repo maintainer loop
+  claim                Inspect one maintainer-claim directory from the index
+  claim-init           Scaffold a draft maintainer-claim directory for one index repository
+  claim-from-native    Scaffold a maintainer claim from the current native `.repo`
+  claim-event          Append a new claim event and update the current claim state
+  claim-submit-native  Append a submitted claim event with the claim path derived from the current native `.repo`
+  claim-accept-native  Append an accepted claim event with canonical links from the current native `.repo`
+  public               Inspect or export public read-only index responses
+  help                 Print this message or the help of the given subcommand(s)
+
+Options:
+      --root <ROOT>  Repository root containing `.repo` or overlay records [default: .]
+  -h, --help         Print help

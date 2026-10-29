@@ -18,10 +18,17 @@
   accounting and stop controls. Actual task environments, provider qualification,
   campaign scoring and consumer-benefit evaluation remain pending.
 
-## 2.0.0-rc.2 — Preview
+## 2.0.0-rc.2 — 2026-10-29
 
 This preview includes the post-RC1 source changes below. Production guidance
 remains pinned to stable `1.0.4`; the 2.0 line includes public Rust API changes.
+
+- Publish Linux/macOS bundles, checksums, VSIX, MCPB, seven crates including the
+  standalone alias, and the MCP registry entry from the reviewed release source.
+  Retain [delivery and macOS installation evidence](index/telemetry/rc2-delivery-20261029/README.md)
+  separately from [Linux container verification](index/telemetry/rc2-linux-verification-20261029/README.md).
+  Experimental instruction extraction and agent-evaluation tooling remain
+  unreleased; publication does not establish consumer benefit.
 
 - Correct source-scoped build/test answers after a pinned documentation audit;
   preserve record age and unrelated assessments, and withdraw verification after

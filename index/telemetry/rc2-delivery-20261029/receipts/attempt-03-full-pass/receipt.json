@@ -1,0 +1,631 @@
+{
+  "version": "2.0.0-rc.2",
+  "tag": "v2.0.0-rc.2",
+  "expectedCommit": "94e02bd43d7cae1e5b6cd37ebd7a2a66a9b2b773",
+  "startedAt": "2026-10-29T05:37:08.429766+00:00",
+  "status": "public_artifacts_and_local_macos_checks_passed",
+  "stages": [
+    {
+      "arguments": [
+        "uv",
+        "run",
+        "python",
+        "/Users/maxwell/projects/agent/dotrepo/index/telemetry/rc2-delivery-20261029/check_installed_safety.py",
+        "--bin",
+        "/private/tmp/dotrepo-rc2-delivery-full-40823937226/extracted/dotrepo-2.0.0-rc.2-aarch64-apple-darwin/bin/dotrepo",
+        "--source",
+        "/private/tmp/dotrepo-rc2-delivery-full-40823937226/source",
+        "--output",
+        "/private/tmp/dotrepo-rc2-delivery-full-40823937226/bundle-safety.json"
+      ],
+      "startedAt": "2026-10-29T05:37:13.880568+00:00",
+      "completedAt": "2026-10-29T05:37:14.366343+00:00",
+      "exitCode": 0,
+      "log": "/private/tmp/dotrepo-rc2-delivery-full-40823937226/bundle-safety.log",
+      "logSha256": "ef706626032f0aea1125a5003acb7ea46ab7c725f48b88d4c154c942b9373890"
+    },
+    {
+      "arguments": [
+        "uv",
+        "run",
+        "python",
+        "/private/tmp/dotrepo-rc2-delivery-full-40823937226/bundle-mcp-stdio.py"
+      ],
+      "startedAt": "2026-10-29T05:37:14.367362+00:00",
+      "completedAt": "2026-10-29T05:37:14.630440+00:00",
+      "exitCode": 0,
+      "log": "/private/tmp/dotrepo-rc2-delivery-full-40823937226/bundle-mcp-stdio.log",
+      "logSha256": "f700c9f1aa8cdbb944ef3506c728f3299a0e0c014e750373f4cd701f248388fa"
+    },
+    {
+      "arguments": [
+        "uv",
+        "run",
+        "python",
+        "/private/tmp/dotrepo-rc2-delivery-full-40823937226/bundle-lsp-stdio.py"
+      ],
+      "startedAt": "2026-10-29T05:37:14.631379+00:00",
+      "completedAt": "2026-10-29T05:37:14.834182+00:00",
+      "exitCode": 0,
+      "log": "/private/tmp/dotrepo-rc2-delivery-full-40823937226/bundle-lsp-stdio.log",
+      "logSha256": "f700c9f1aa8cdbb944ef3506c728f3299a0e0c014e750373f4cd701f248388fa"
+    },
+    {
+      "arguments": [
+        "cargo",
+        "install",
+        "dotrepo-cli",
+        "--version",
+        "=2.0.0-rc.2",
+        "--locked",
+        "--root",
+        "/private/tmp/dotrepo-rc2-delivery-full-40823937226/registry"
+      ],
+      "startedAt": "2026-10-29T05:37:17.680407+00:00",
+      "completedAt": "2026-10-29T05:37:58.625449+00:00",
+      "exitCode": 0,
+      "log": "/private/tmp/dotrepo-rc2-delivery-full-40823937226/install-dotrepo-cli.log",
+      "logSha256": "030ab9e4482fe9883f58c23f3afef38daa885d30d2dbe0bc12f71694f17099d2"
+    },
+    {
+      "arguments": [
+        "cargo",
+        "install",
+        "dotrepo-mcp",
+        "--version",
+        "=2.0.0-rc.2",
+        "--locked",
+        "--root",
+        "/private/tmp/dotrepo-rc2-delivery-full-40823937226/registry"
+      ],
+      "startedAt": "2026-10-29T05:37:58.635355+00:00",
+      "completedAt": "2026-10-29T05:39:00.148298+00:00",
+      "exitCode": 0,
+      "log": "/private/tmp/dotrepo-rc2-delivery-full-40823937226/install-dotrepo-mcp.log",
+      "logSha256": "6251657dffba4ad0c35af5c782cd498afea86ed3f2c8c7039f77c2cbcf6f0d40"
+    },
+    {
+      "arguments": [
+        "cargo",
+        "install",
+        "dotrepo-lsp",
+        "--version",
+        "=2.0.0-rc.2",
+        "--locked",
+        "--root",
+        "/private/tmp/dotrepo-rc2-delivery-full-40823937226/registry"
+      ],
+      "startedAt": "2026-10-29T05:39:00.157352+00:00",
+      "completedAt": "2026-10-29T05:39:19.381777+00:00",
+      "exitCode": 0,
+      "log": "/private/tmp/dotrepo-rc2-delivery-full-40823937226/install-dotrepo-lsp.log",
+      "logSha256": "703ff0eb27b149c02e5469097f20c64d4e47068cbb5606164ef52e242806d8ca"
+    },
+    {
+      "arguments": [
+        "cargo",
+        "install",
+        "dotrepo",
+        "--version",
+        "=2.0.0-rc.2",
+        "--locked",
+        "--root",
+        "/private/tmp/dotrepo-rc2-delivery-full-40823937226/registry-alias"
+      ],
+      "startedAt": "2026-10-29T05:39:19.387150+00:00",
+      "completedAt": "2026-10-29T05:40:04.636836+00:00",
+      "exitCode": 0,
+      "log": "/private/tmp/dotrepo-rc2-delivery-full-40823937226/install-dotrepo.log",
+      "logSha256": "4a881a0d2b1756438b246588775bdd8093f172bfda79e5f5cc068598c06ab93d"
+    },
+    {
+      "arguments": [
+        "uv",
+        "run",
+        "python",
+        "/Users/maxwell/projects/agent/dotrepo/index/telemetry/rc2-delivery-20261029/check_installed_safety.py",
+        "--bin",
+        "/private/tmp/dotrepo-rc2-delivery-full-40823937226/registry/bin/dotrepo",
+        "--source",
+        "/private/tmp/dotrepo-rc2-delivery-full-40823937226/source",
+        "--output",
+        "/private/tmp/dotrepo-rc2-delivery-full-40823937226/registry-safety.json"
+      ],
+      "startedAt": "2026-10-29T05:40:04.815430+00:00",
+      "completedAt": "2026-10-29T05:40:05.253766+00:00",
+      "exitCode": 0,
+      "log": "/private/tmp/dotrepo-rc2-delivery-full-40823937226/registry-safety.log",
+      "logSha256": "977c146a637de3da88cbd3f3b062f2d4eeb29e2358e8514b1c24387c1713a3c0"
+    },
+    {
+      "arguments": [
+        "uv",
+        "run",
+        "python",
+        "/Users/maxwell/projects/agent/dotrepo/index/telemetry/rc2-delivery-20261029/check_installed_safety.py",
+        "--bin",
+        "/private/tmp/dotrepo-rc2-delivery-full-40823937226/registry-alias/bin/dotrepo",
+        "--source",
+        "/private/tmp/dotrepo-rc2-delivery-full-40823937226/source",
+        "--output",
+        "/private/tmp/dotrepo-rc2-delivery-full-40823937226/registry-alias-safety.json"
+      ],
+      "startedAt": "2026-10-29T05:40:05.409457+00:00",
+      "completedAt": "2026-10-29T05:40:05.838133+00:00",
+      "exitCode": 0,
+      "log": "/private/tmp/dotrepo-rc2-delivery-full-40823937226/registry-alias-safety.log",
+      "logSha256": "977c146a637de3da88cbd3f3b062f2d4eeb29e2358e8514b1c24387c1713a3c0"
+    },
+    {
+      "arguments": [
+        "uv",
+        "run",
+        "python",
+        "/private/tmp/dotrepo-rc2-delivery-full-40823937226/registry-mcp-stdio.py"
+      ],
+      "startedAt": "2026-10-29T05:40:05.839494+00:00",
+      "completedAt": "2026-10-29T05:40:06.102915+00:00",
+      "exitCode": 0,
+      "log": "/private/tmp/dotrepo-rc2-delivery-full-40823937226/registry-mcp-stdio.log",
+      "logSha256": "f700c9f1aa8cdbb944ef3506c728f3299a0e0c014e750373f4cd701f248388fa"
+    },
+    {
+      "arguments": [
+        "uv",
+        "run",
+        "python",
+        "/private/tmp/dotrepo-rc2-delivery-full-40823937226/registry-lsp-stdio.py"
+      ],
+      "startedAt": "2026-10-29T05:40:06.103816+00:00",
+      "completedAt": "2026-10-29T05:40:06.372464+00:00",
+      "exitCode": 0,
+      "log": "/private/tmp/dotrepo-rc2-delivery-full-40823937226/registry-lsp-stdio.log",
+      "logSha256": "f700c9f1aa8cdbb944ef3506c728f3299a0e0c014e750373f4cd701f248388fa"
+    }
+  ],
+  "packages": [
+    {
+      "package": "dotrepo-schema",
+      "version": "2.0.0-rc.2",
+      "sourceCommit": "94e02bd43d7cae1e5b6cd37ebd7a2a66a9b2b773",
+      "metadataSha256": "6985165db79cd3790794c1e7341a7dc309fba4889d0c5a6caf84b94893bba792",
+      "sourcePathsCompared": [
+        "Cargo.toml.orig",
+        "README.md",
+        "src/lib.rs"
+      ],
+      "url": "https://crates.io/api/v1/crates/dotrepo-schema/2.0.0-rc.2/download",
+      "startedAt": "2026-10-29T05:37:14.894336+00:00",
+      "completedAt": "2026-10-29T05:37:15.209145+00:00",
+      "bytes": 7986,
+      "sha256": "5b0b479f74fe07434e98be3f467ed49401cade585cd3f4b1443cd55304a378e2"
+    },
+    {
+      "package": "dotrepo-transport",
+      "version": "2.0.0-rc.2",
+      "sourceCommit": "94e02bd43d7cae1e5b6cd37ebd7a2a66a9b2b773",
+      "metadataSha256": "171bf4a4f92d7b2da310406334e1575d59ca16db33e785c54263e4c97a337717",
+      "sourcePathsCompared": [
+        "Cargo.toml.orig",
+        "README.md",
+        "src/lib.rs"
+      ],
+      "url": "https://crates.io/api/v1/crates/dotrepo-transport/2.0.0-rc.2/download",
+      "startedAt": "2026-10-29T05:37:15.269829+00:00",
+      "completedAt": "2026-10-29T05:37:15.601484+00:00",
+      "bytes": 5259,
+      "sha256": "4ce71bb7631984cf1fe04fd65331880139d138f995282985b00235a54af46869"
+    },
+    {
+      "package": "dotrepo-core",
+      "version": "2.0.0-rc.2",
+      "sourceCommit": "94e02bd43d7cae1e5b6cd37ebd7a2a66a9b2b773",
+      "metadataSha256": "6b4e1a0d3438f0aa740c04af20fbd94909d5682228aae0480f42494f740d2513",
+      "sourcePathsCompared": [
+        "Cargo.toml.orig",
+        "README.md",
+        "src/adoption.rs",
+        "src/claims.rs",
+        "src/execution.rs",
+        "src/facade_tests/claims.rs",
+        "src/facade_tests/common.rs",
+        "src/facade_tests/import_parsing.rs",
+        "src/facade_tests/import_repository.rs",
+        "src/facade_tests/mod.rs",
+        "src/facade_tests/public.rs",
+        "src/facade_tests/relations.rs",
+        "src/facade_tests/selection.rs",
+        "src/facade_tests/surfaces.rs",
+        "src/facade_tests/validation.rs",
+        "src/generation.rs",
+        "src/import/adjudication.rs",
+        "src/import/commands/context.rs",
+        "src/import/commands/extraction.rs",
+        "src/import/commands/mod.rs",
+        "src/import/commands/policy.rs",
+        "src/import/commands/scope.rs",
+        "src/import/commands/tests.rs",
+        "src/import/escalation/deterministic.rs",
+        "src/import/escalation/mod.rs",
+        "src/import/escalation/model_ladder.rs",
+        "src/import/escalation/report.rs",
+        "src/import/evidence.rs",
+        "src/import/fields.rs",
+        "src/import/inputs.rs",
+        "src/import/mod.rs",
+        "src/import/parsing/codeowners.rs",
+        "src/import/parsing/markdown.rs",
+        "src/import/parsing/mod.rs",
+        "src/import/parsing/readme.rs",
+        "src/import/parsing/security.rs",
+        "src/import/parsing/urls.rs",
+        "src/import/read.rs",
+        "src/import/toolchain.rs",
+        "src/import/types.rs",
+        "src/import/write.rs",
+        "src/lib.rs",
+        "src/output.rs",
+        "src/output_platform/tests.rs",
+        "src/output_platform/unix.rs",
+        "src/output_platform/windows.rs",
+        "src/promotion.rs",
+        "src/public/compare.rs",
+        "src/public/error.rs",
+        "src/public/evidence.rs",
+        "src/public/export.rs",
+        "src/public/mod.rs",
+        "src/public/pagedigest.rs",
+        "src/public/profile.rs",
+        "src/public/relations.rs",
+        "src/public/search.rs",
+        "src/public/types.rs",
+        "src/query.rs",
+        "src/render.rs",
+        "src/selection.rs",
+        "src/surfaces/doctor.rs",
+        "src/surfaces/mod.rs",
+        "src/surfaces/readme.rs",
+        "src/synthesis.rs",
+        "src/util.rs",
+        "src/validation.rs",
+        "tests/adjudication_pipeline.rs",
+        "tests/auto_publish.rs",
+        "tests/claim_fixture_pack.rs",
+        "tests/docs_evidence.rs",
+        "tests/execution_context.rs",
+        "tests/fixtures/import/no-conventional-surfaces/src/main.rs",
+        "tests/import_escalation_safety.rs",
+        "tests/import_field_scoring.rs",
+        "tests/import_fixture_pack.rs",
+        "tests/import_input_boundaries.rs",
+        "tests/import_quality_gate.rs",
+        "tests/import_verification.rs",
+        "tests/path_containment.rs",
+        "tests/public_batch_limits.rs",
+        "tests/public_contract_compatibility.rs",
+        "tests/public_error_fixture_pack.rs",
+        "tests/public_export_fixture_pack.rs",
+        "tests/public_freshness_semantics.rs",
+        "tests/public_query_fixture_pack.rs",
+        "tests/query_path_parity.rs",
+        "tests/regression_fixture_pack.rs",
+        "tests/relation_semantics.rs",
+        "tests/synthesis_io_semantics.rs",
+        "tests/validate_repository_candidates.rs"
+      ],
+      "url": "https://crates.io/api/v1/crates/dotrepo-core/2.0.0-rc.2/download",
+      "startedAt": "2026-10-29T05:37:15.644012+00:00",
+      "completedAt": "2026-10-29T05:37:16.100178+00:00",
+      "bytes": 307291,
+      "sha256": "2032011d4316bd7c06bcd795dd34149d71950684325061e10f67f339dfec901f"
+    },
+    {
+      "package": "dotrepo-cli",
+      "version": "2.0.0-rc.2",
+      "sourceCommit": "94e02bd43d7cae1e5b6cd37ebd7a2a66a9b2b773",
+      "metadataSha256": "cf94ed7a1f0360951f03bb266dd43fd22563134d33d54436722bb95a253141ff",
+      "sourcePathsCompared": [
+        "Cargo.toml.orig",
+        "README.md",
+        "src/bin/dotrepo-public-query.rs",
+        "src/cli.rs",
+        "src/commands.rs",
+        "src/error.rs",
+        "src/format.rs",
+        "src/lib.rs",
+        "src/main.rs",
+        "src/tests.rs",
+        "tests/ci_command_contract.rs",
+        "tests/claim_command_contract.rs",
+        "tests/doctor_command_contract.rs",
+        "tests/hosted_query_server_contract.rs",
+        "tests/manage_command_contract.rs",
+        "tests/preview_command_contract.rs",
+        "tests/promotion_command_contract.rs",
+        "tests/public_command_contract.rs",
+        "tests/write_safety_contract.rs"
+      ],
+      "url": "https://crates.io/api/v1/crates/dotrepo-cli/2.0.0-rc.2/download",
+      "startedAt": "2026-10-29T05:37:16.175588+00:00",
+      "completedAt": "2026-10-29T05:37:16.526875+00:00",
+      "bytes": 45433,
+      "sha256": "d40da83ad718db800f33a7e08f080b4efa6a0f73a4cb3b97a8f23a8e65a3b480"
+    },
+    {
+      "package": "dotrepo-mcp",
+      "version": "2.0.0-rc.2",
+      "sourceCommit": "94e02bd43d7cae1e5b6cd37ebd7a2a66a9b2b773",
+      "metadataSha256": "8cdb8cc80939b6138eb8720b0e9f11f067e40d153351016e51b750cd726877f3",
+      "sourcePathsCompared": [
+        "Cargo.toml.orig",
+        "README.md",
+        "src/dispatch.rs",
+        "src/handlers.rs",
+        "src/lookup.rs",
+        "src/main.rs",
+        "src/test_support.rs",
+        "src/tests.rs",
+        "src/tools.rs"
+      ],
+      "url": "https://crates.io/api/v1/crates/dotrepo-mcp/2.0.0-rc.2/download",
+      "startedAt": "2026-10-29T05:37:16.570521+00:00",
+      "completedAt": "2026-10-29T05:37:16.944763+00:00",
+      "bytes": 34438,
+      "sha256": "1575aa1c567b87e2164ec0d27d95803d9bf13d8870c18304fa76348f13b3d541"
+    },
+    {
+      "package": "dotrepo-lsp",
+      "version": "2.0.0-rc.2",
+      "sourceCommit": "94e02bd43d7cae1e5b6cd37ebd7a2a66a9b2b773",
+      "metadataSha256": "65a5ec26977dff737aa08833c88f1cb952ebc090b6497442a20eed52813c706b",
+      "sourcePathsCompared": [
+        "Cargo.toml.orig",
+        "README.md",
+        "src/code_actions.rs",
+        "src/completions.rs",
+        "src/diagnostics.rs",
+        "src/dispatch.rs",
+        "src/main.rs",
+        "src/protocol.rs",
+        "src/state.rs",
+        "src/tests.rs",
+        "tests/stdio_recovery.rs"
+      ],
+      "url": "https://crates.io/api/v1/crates/dotrepo-lsp/2.0.0-rc.2/download",
+      "startedAt": "2026-10-29T05:37:16.984350+00:00",
+      "completedAt": "2026-10-29T05:37:17.342694+00:00",
+      "bytes": 27500,
+      "sha256": "5f6d38f9c7504d16fe08bba7111e227ba7eea9a031e14cb0ea2184ab25e8e9a1"
+    },
+    {
+      "package": "dotrepo",
+      "version": "2.0.0-rc.2",
+      "sourceCommit": "94e02bd43d7cae1e5b6cd37ebd7a2a66a9b2b773",
+      "metadataSha256": "39aa48c1598540176adbea87af7a165ed5c07c81c7e4d537753d1f1b051d9f90",
+      "sourcePathsCompared": [
+        "Cargo.toml.orig",
+        "README.md",
+        "src/main.rs"
+      ],
+      "url": "https://crates.io/api/v1/crates/dotrepo/2.0.0-rc.2/download",
+      "startedAt": "2026-10-29T05:37:17.384714+00:00",
+      "completedAt": "2026-10-29T05:37:17.678746+00:00",
+      "bytes": 7741,
+      "sha256": "4ed7b51b9d1a11ebd5835842f7a9afe3fcb98cee76d45bdbf94cc5f4e528d6d1"
+    }
+  ],
+  "pendingPackages": [],
+  "localPlatform": {
+    "system": "Darwin",
+    "machine": "arm64"
+  },
+  "linuxExecution": {
+    "status": "not executed locally",
+    "checksumVerificationIsExecution": false
+  },
+  "historicalHelper": {
+    "path": "index/telemetry/stable-1.0.3-delivery-20261006/verify_publication.py",
+    "sha256": "1fb3539c53c97dcd4a7e59548cb740f5a4ee156c4f25a9870139b1a44adbbd62"
+  },
+  "limits": "Controlled own-project fixtures and public release provenance only; no third-party builds, publication, settings changes or independent consumer experiment.",
+  "releaseWorkflow": {
+    "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/40823937226",
+    "status": "completed",
+    "conclusion": "success",
+    "headSha": "94e02bd43d7cae1e5b6cd37ebd7a2a66a9b2b773",
+    "jobs": [
+      {
+        "name": "version-integrity",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/40823937226/job/123282525954"
+      },
+      {
+        "name": "vscode-extension",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/40823937226/job/123282586137"
+      },
+      {
+        "name": "binaries (macos-latest, dotrepo-binaries-macos)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/40823937226/job/123282586191"
+      },
+      {
+        "name": "binaries (ubuntu-latest, dotrepo-binaries-linux)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/40823937226/job/123282586204"
+      },
+      {
+        "name": "release",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/40823937226/job/123283184094"
+      },
+      {
+        "name": "mcp-registry",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/40823937226/job/123283297985"
+      },
+      {
+        "name": "publish-crates",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/40823937226/job/123283298069"
+      }
+    ],
+    "linuxInterpretation": "Linux artifact builds are not public-install execution. Only explicitly observed install/test jobs establish that evidence."
+  },
+  "source": {
+    "commit": "94e02bd43d7cae1e5b6cd37ebd7a2a66a9b2b773",
+    "cargoTomlSha256": "1b90a2a228b23c36c4aefb75e079e35b6d240c40287e8f49f25cf4ca2e4ebc38",
+    "cargoLockSha256": "2268a17be9005cead215b42f2654e7fb5629c6bc5d25b2573b6af945a073df66"
+  },
+  "assets": {
+    "dotrepo-2.0.0-rc.2-aarch64-apple-darwin.sha256": {
+      "url": "https://github.com/maxwellsantoro/dotrepo/releases/download/v2.0.0-rc.2/dotrepo-2.0.0-rc.2-aarch64-apple-darwin.sha256",
+      "startedAt": "2026-10-29T05:37:11.822584+00:00",
+      "completedAt": "2026-10-29T05:37:11.907091+00:00",
+      "bytes": 113,
+      "sha256": "98d232ec709260b7a1bf8cb08d37bca2f7f14ee94c386d035fdee06598331a30"
+    },
+    "dotrepo-2.0.0-rc.2-aarch64-apple-darwin.tar.gz": {
+      "url": "https://github.com/maxwellsantoro/dotrepo/releases/download/v2.0.0-rc.2/dotrepo-2.0.0-rc.2-aarch64-apple-darwin.tar.gz",
+      "startedAt": "2026-10-29T05:37:11.907170+00:00",
+      "completedAt": "2026-10-29T05:37:12.306102+00:00",
+      "bytes": 6489838,
+      "sha256": "048162610235eaaf686a86b5532cd2e9eae6e0e2025d128127e94799aeab61fe",
+      "matchingChecksum": "dotrepo-2.0.0-rc.2-aarch64-apple-darwin.sha256"
+    },
+    "dotrepo-2.0.0-rc.2-x86_64-unknown-linux-gnu.sha256": {
+      "url": "https://github.com/maxwellsantoro/dotrepo/releases/download/v2.0.0-rc.2/dotrepo-2.0.0-rc.2-x86_64-unknown-linux-gnu.sha256",
+      "startedAt": "2026-10-29T05:37:12.306216+00:00",
+      "completedAt": "2026-10-29T05:37:12.384961+00:00",
+      "bytes": 117,
+      "sha256": "977f7f746aa3f781e11591e02aefb003af978c8fca5b66122bb6be2a2196efe3"
+    },
+    "dotrepo-2.0.0-rc.2-x86_64-unknown-linux-gnu.tar.gz": {
+      "url": "https://github.com/maxwellsantoro/dotrepo/releases/download/v2.0.0-rc.2/dotrepo-2.0.0-rc.2-x86_64-unknown-linux-gnu.tar.gz",
+      "startedAt": "2026-10-29T05:37:12.385027+00:00",
+      "completedAt": "2026-10-29T05:37:12.756038+00:00",
+      "bytes": 7290584,
+      "sha256": "25de7f9909717f3753f63b7cedbfe7e072b4271a6acc4c83f1724ed71f74653d",
+      "matchingChecksum": "dotrepo-2.0.0-rc.2-x86_64-unknown-linux-gnu.sha256"
+    },
+    "dotrepo-mcp-2.0.0-rc.2.mcpb": {
+      "url": "https://github.com/maxwellsantoro/dotrepo/releases/download/v2.0.0-rc.2/dotrepo-mcp-2.0.0-rc.2.mcpb",
+      "startedAt": "2026-10-29T05:37:12.756178+00:00",
+      "completedAt": "2026-10-29T05:37:13.193008+00:00",
+      "bytes": 5674847,
+      "sha256": "7123ebca346d1f53f960bdefc5ccb98d70ca66d6015454b61bd35ce294d75f3d",
+      "matchingChecksum": "dotrepo-mcp-2.0.0-rc.2.mcpb.sha256"
+    },
+    "dotrepo-mcp-2.0.0-rc.2.mcpb.sha256": {
+      "url": "https://github.com/maxwellsantoro/dotrepo/releases/download/v2.0.0-rc.2/dotrepo-mcp-2.0.0-rc.2.mcpb.sha256",
+      "startedAt": "2026-10-29T05:37:13.193211+00:00",
+      "completedAt": "2026-10-29T05:37:13.276214+00:00",
+      "bytes": 94,
+      "sha256": "26790f06e6a4d12c9d6613ffa13c100eb3a7372af84609f4f740958c3bc0c53d"
+    },
+    "dotrepo-vscode-v1.0.0.vsix": {
+      "url": "https://github.com/maxwellsantoro/dotrepo/releases/download/v2.0.0-rc.2/dotrepo-vscode-v1.0.0.vsix",
+      "startedAt": "2026-10-29T05:37:13.276278+00:00",
+      "completedAt": "2026-10-29T05:37:13.359921+00:00",
+      "bytes": 105649,
+      "sha256": "34e95755bdad8d46656cdf507d1a85e72555c031f4d637054afdb557a7197112"
+    }
+  },
+  "mcpb": {
+    "version": "2.0.0-rc.2",
+    "sha256": "7123ebca346d1f53f960bdefc5ccb98d70ca66d6015454b61bd35ce294d75f3d",
+    "binaryParity": {
+      "aarch64-apple-darwin": {
+        "member": "server/darwin-arm64/dotrepo-mcp",
+        "sha256": "14fc65bf6c79a524e9ae660279bdf5cffaf8b0d4e6754abb02b88be569700c12",
+        "execution": "not executed by binary-parity check"
+      },
+      "x86_64-unknown-linux-gnu": {
+        "member": "server/linux-x64/dotrepo-mcp",
+        "sha256": "a38b425da8839d30c5d09ed0239ddf8be91aeb36b3ad8e70b0642121c7bc35cd",
+        "execution": "not executed by binary-parity check"
+      }
+    }
+  },
+  "mcpRegistry": {
+    "url": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.maxwellsantoro%2Fdotrepo/versions/2.0.0-rc.2",
+    "version": "2.0.0-rc.2",
+    "mcpbChecksumVerified": true,
+    "responseSha256": "ba9fdb5cbce2b304503d1d0ad0fe7d79f0aef357c2a07ce492a291e5d3dede2a"
+  },
+  "bundleBinaries": {
+    "dotrepo": "0aef2136142b3a652c64486e916fc7d6432dada82c0c60da8162dc6ae42cac3f",
+    "dotrepo-public-query": "263e2929465914f0667b3af0867cb0daa1ce3741192710e89b28e9ac78990158",
+    "dotrepo-mcp": "14fc65bf6c79a524e9ae660279bdf5cffaf8b0d4e6754abb02b88be569700c12",
+    "dotrepo-lsp": "0ab0de2f1ddf59c85b0686c14cb6696da1732f57d4f6fcaa39a8d44d7202b6bc"
+  },
+  "controlledChecksSourceSha256": "7280c3d3e20ad7b85ed9ccce866f0382c793f90847ca28690adb8a38b8b3a14e",
+  "cliIdentity": {
+    "bundle": {
+      "binarySha256": "0aef2136142b3a652c64486e916fc7d6432dada82c0c60da8162dc6ae42cac3f",
+      "selfReportedVersion": null,
+      "versionBinding": "Versioned bundle README/tag or exact registry installation identity; published CLI has no --version flag."
+    },
+    "registry": {
+      "binarySha256": "640ee4b0d0eec221287fb4553e1e4bb991c1e6a2b943ac912857351fe35d42b0",
+      "selfReportedVersion": null,
+      "versionBinding": "Versioned bundle README/tag or exact registry installation identity; published CLI has no --version flag."
+    },
+    "registry-alias": {
+      "binarySha256": "28573aa544ee2bf254656af383f17ae8f99d0e6fc20c33c10e2aaa6ace74eff3",
+      "selfReportedVersion": null,
+      "versionBinding": "Versioned bundle README/tag or exact registry installation identity; published CLI has no --version flag."
+    }
+  },
+  "registryInstallIsolation": {
+    "cargoHome": "/private/tmp/dotrepo-rc2-delivery-full-40823937226/cargo-home",
+    "cargoTarget": "/private/tmp/dotrepo-rc2-delivery-full-40823937226/cargo-target",
+    "registryCacheReused": false,
+    "workspacePatchesUsed": false,
+    "installedRootsFresh": true
+  },
+  "registryInstallations": [
+    {
+      "package": "dotrepo-cli",
+      "identity": "dotrepo-cli 2.0.0-rc.2 (registry+https://github.com/rust-lang/crates.io-index)",
+      "binaries": {
+        "dotrepo": "640ee4b0d0eec221287fb4553e1e4bb991c1e6a2b943ac912857351fe35d42b0",
+        "dotrepo-public-query": "e7a381f7714b0bb190d209109d2b2b90ed5c2055a5aec7971a5a57fa75f8f3f5"
+      }
+    },
+    {
+      "package": "dotrepo-mcp",
+      "identity": "dotrepo-mcp 2.0.0-rc.2 (registry+https://github.com/rust-lang/crates.io-index)",
+      "binaries": {
+        "dotrepo-mcp": "94be7d1390c3d790353a8ae2d9cd2e3fbad9de481c219eb24658e9e07af6ebc9"
+      }
+    },
+    {
+      "package": "dotrepo-lsp",
+      "identity": "dotrepo-lsp 2.0.0-rc.2 (registry+https://github.com/rust-lang/crates.io-index)",
+      "binaries": {
+        "dotrepo-lsp": "b67593f505a287840d120c504be9c2a54292bcf962896d48c51de89f166d65a1"
+      }
+    },
+    {
+      "package": "dotrepo",
+      "identity": "dotrepo 2.0.0-rc.2 (registry+https://github.com/rust-lang/crates.io-index)",
+      "binaries": {
+        "dotrepo": "28573aa544ee2bf254656af383f17ae8f99d0e6fc20c33c10e2aaa6ace74eff3"
+      }
+    }
+  ],
+  "runtime": {
+    "cargo": "cargo 1.99.0 (5f94df478 2026-08-27)",
+    "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1",
+    "uv": "uv 0.12.23 (46b84fd0b 2026-10-03 aarch64-apple-darwin)"
+  },
+  "completedAt": "2026-10-29T05:40:06.903854+00:00"
+}

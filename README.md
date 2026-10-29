@@ -57,12 +57,12 @@ See [installation](docs/install.md) for the CLI, LSP, and VS Code extension, and
 [consumer integration](docs/external-consumer-integration.md) for fallback rules
 and a runnable client.
 
-**Version matters:** the stable release is `v1.0.4`; this source candidate is
-`2.0.0-rc.2` and remains unpublished. Published prerelease `2.0.0-rc.1` artifacts
-remain unchanged. Stable includes the bounded command-extraction fixes, the
-promotion no-write guard, response-size caps, and contained CLI/MCP output writes.
-The newer field-evidence
-schema, execution contexts, and additional MCP target checks remain on `main`.
+**Version matters:** production installs use stable `v1.0.4`. The published
+[`v2.0.0-rc.2` preview](https://github.com/maxwellsantoro/dotrepo/releases/tag/v2.0.0-rc.2)
+includes retained field assessments, execution contexts, newer MCP target checks,
+and the contained CLI/MCP output writer. Additional instruction-extraction and
+evaluation work in this checkout is recorded under Unreleased in the changelog;
+it is outside that published tag. Installed RC1 artifacts remain unchanged.
 Use the
 [version comparison and stable documentation](docs/release-compatibility.md).
 

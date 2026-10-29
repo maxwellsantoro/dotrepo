@@ -1,0 +1,18 @@
+{
+  "startedAt": "2026-10-29T05:44:38.557897+00:00",
+  "endedAt": "2026-10-29T05:44:38.627265+00:00",
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-rc2-linux-b55b7fd4961b",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "test ! -e /work/outputs/init-dangling/outside/workflows; test ! -e /work/outputs/init-dangling/outside/missing; test ! -e /work/outputs/init-dangling/checkout/README.md"
+  ],
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

@@ -1,0 +1,34 @@
+Local and review-only HTTP surface for the public query contract. Bind to loopback for smoke tests; do not expose batch routes on the public internet without a reverse proxy, rate limits, and the cardinality caps enforced by dotrepo-core.
+
+Usage: dotrepo-public-query [OPTIONS]
+
+Options:
+      --index-root <INDEX_ROOT>
+          Index snapshot root used to answer public query requests
+          
+          [default: index]
+
+      --bind <BIND>
+          Address to bind, for example 127.0.0.1:3000
+          
+          [default: 127.0.0.1:3000]
+
+      --base-path <BASE_PATH>
+          URL base path prefix for hosted public links, such as `/dotrepo`
+          
+          [default: /]
+
+      --public-root <PUBLIC_ROOT>
+          Optional exported public tree to serve on the same origin as query
+
+      --stale-after-hours <STALE_AFTER_HOURS>
+          Advisory staleness window in hours for rendered responses
+
+      --generated-at <GENERATED_AT>
+          Fixed RFC 3339 generation timestamp for deterministic review
+
+      --stale-after <STALE_AFTER>
+          Fixed RFC 3339 staleness timestamp for deterministic review
+
+  -h, --help
+          Print help (see a summary with '-h')
