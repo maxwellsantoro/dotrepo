@@ -69,7 +69,7 @@ fn wrong_field_model_response_preserves_known_test_command() {
                 reason: "incorrect field in provider response".into(),
                 source: Some(".github/workflows/check.yml".into()),
             },
-            tokens_used: 17,
+            tokens_used: Some(17),
         }],
     );
     let report = run_import_escalation(
@@ -90,7 +90,7 @@ fn wrong_field_model_response_preserves_known_test_command() {
 
     assert_eq!(report.model_calls, 1);
     assert_eq!(report.model_resolved, 0);
-    assert_eq!(report.tokens_used, 17);
+    assert_eq!(report.tokens_used, Some(17));
     assert_eq!(plan.manifest.repo.test.as_deref(), Some("cargo test"));
     assert_eq!(
         selection_details(&plan.command_candidates.selected_test),
@@ -281,7 +281,7 @@ impl AdjudicationProvider for FailingProvider {
 
 #[test]
 fn failed_attempts_share_the_cap_across_tiers_and_fields() {
-    for budget in [1, 2, 4] {
+    for budget in [0, 1, 2, 4] {
         let root = workflow_fixture(&format!("failed-budget-{budget}"), true);
         let source = "https://github.com/example/failed-budget";
         let mut plan = import_repository(&root, ImportMode::Overlay, Some(source)).expect("import");
@@ -315,7 +315,10 @@ fn failed_attempts_share_the_cap_across_tiers_and_fields() {
         assert_eq!(actual_attempts, budget);
         assert_eq!(report.model_calls, actual_attempts);
         assert_eq!(report.model_resolved, 0);
-        assert_eq!(report.tokens_used, 0);
+        assert_eq!(report.tokens_used, (budget == 0).then_some(0));
+        assert_eq!(report.tokens_used_known_subtotal, 0);
+        assert_eq!(report.unknown_token_usage_calls, budget);
+        assert_eq!(report.token_usage_complete, budget == 0);
         for provider in [&primary, &second, &api] {
             assert_eq!(
                 report.adjudication_tiers_used.contains(&provider.tier),
@@ -351,7 +354,7 @@ fn failed_primary_attempt_counts_before_a_successful_second_opinion() {
                 reason: "grounded second opinion".into(),
                 source: Some(".github/workflows/check.yml".into()),
             },
-            tokens_used: 23,
+            tokens_used: Some(23),
         }],
     );
 
@@ -375,7 +378,10 @@ fn failed_primary_attempt_counts_before_a_successful_second_opinion() {
     assert_eq!(primary.attempts.load(Ordering::SeqCst), 1);
     assert_eq!(report.model_calls, 2);
     assert_eq!(report.model_resolved, 1);
-    assert_eq!(report.tokens_used, 23);
+    assert_eq!(report.tokens_used, None);
+    assert_eq!(report.tokens_used_known_subtotal, 23);
+    assert_eq!(report.unknown_token_usage_calls, 1);
+    assert!(!report.token_usage_complete);
     assert!(report
         .adjudication_tiers_used
         .contains(&AdjudicationTier::LocalPrimary));
@@ -387,4 +393,69 @@ fn failed_primary_attempt_counts_before_a_successful_second_opinion() {
         Some("cargo build --workspace")
     );
     fs::remove_dir_all(root).expect("cleanup");
+}
+
+#[test]
+fn mixed_native_usage_preserves_subtotal_and_unknown_attempts() {
+    for budget in [0, 1, 2, 3] {
+        let root = workflow_fixture(&format!("mixed-usage-{budget}"), false);
+        let source = "https://github.com/example/mixed-usage";
+        let mut plan = import_repository(&root, ImportMode::Overlay, Some(source)).unwrap();
+        let verification = verify_import_plan(&root, &plan, source);
+        let mut scores = score_import_fields(&plan, &verification);
+        let provider = |tier, tokens_used| {
+            StubAdjudicationProvider::new(
+                tier,
+                vec![AdjudicationProviderResponse {
+                    response: AdjudicationModelResponse {
+                        field: "repo.build".into(),
+                        value: None,
+                        confidence: AdjudicationModelConfidence::Low,
+                        reason: "owned low-confidence abstention".into(),
+                        source: None,
+                        citations: Vec::new(),
+                    },
+                    tokens_used,
+                }],
+            )
+        };
+        let primary = provider(AdjudicationTier::LocalPrimary, Some(120));
+        let second = provider(AdjudicationTier::LocalSecondOpinion, None);
+        let api = provider(AdjudicationTier::ApiEscalation, Some(0));
+        let report = run_import_escalation(
+            &root,
+            &mut plan,
+            &verification,
+            &mut scores,
+            &ImportEscalationOptions {
+                max_adjudication_calls: budget,
+                enable_second_opinion: true,
+                enable_api_escalation: true,
+            },
+            TieredAdjudicationProviders {
+                local_primary: Some(&primary),
+                local_second_opinion: Some(&second),
+                api_escalation: Some(&api),
+            },
+        );
+        assert_eq!(report.model_calls, budget);
+        assert_eq!(
+            report.tokens_used_known_subtotal,
+            if budget > 0 { 120 } else { 0 }
+        );
+        assert_eq!(report.unknown_token_usage_calls, usize::from(budget >= 2));
+        assert_eq!(report.token_usage_complete, budget < 2);
+        assert_eq!(
+            report.tokens_used,
+            match budget {
+                0 => Some(0),
+                1 => Some(120),
+                _ => None,
+            }
+        );
+        let wire = serde_json::to_value(&report).unwrap();
+        assert_eq!(wire["tokenUsageComplete"], budget < 2);
+        assert_eq!(wire["tokensUsed"].is_null(), budget >= 2);
+        fs::remove_dir_all(root).unwrap();
+    }
 }

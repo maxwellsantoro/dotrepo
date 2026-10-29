@@ -156,3 +156,43 @@ def test_collector_corroborates_retained_receipt_with_actual_deploy_steps(monkey
     assert report["passed"] is published
     if not published:
         assert "deployment-receipt-not-corroborated" in report["runs"][0]["reasons"]
+
+
+@pytest.mark.parametrize(
+    "usage, reason",
+    [
+        (
+            {
+                "tokensUsed": None,
+                "tokensUsedKnownSubtotal": 120,
+                "unknownTokenUsageCalls": 1,
+                "tokenUsageComplete": False,
+            },
+            "budget-token-usage-incomplete",
+        ),
+        ({"tokensUsed": 0}, "budget-token-usage-incomplete"),
+        ({"tokensUsed": 120}, "budget-token-usage-incomplete"),
+        ({"tokensUsed": None, "tokenUsageComplete": True}, "budget-evidence-missing-or-malformed"),
+    ],
+)
+def test_unknown_and_legacy_called_usage_do_not_qualify(usage, reason):
+    values = entries()
+    budget = values[0]["receipt"]["budget"]
+    budget.update(adjudicationCallBudget=1, adjudicationCalls=1, **usage)
+    report = assess(values, now=NOW)
+    assert not report["passed"]
+    assert report["qualifiedDays"] == 0
+    assert reason in report["runs"][0]["reasons"]
+
+
+def test_explicit_native_zero_with_calls_and_no_call_zero_are_known():
+    values = entries()
+    values[0]["receipt"]["budget"].update(
+        adjudicationCallBudget=1,
+        adjudicationCalls=1,
+        tokensUsed=0,
+        tokensUsedKnownSubtotal=0,
+        unknownTokenUsageCalls=0,
+        tokenUsageComplete=True,
+    )
+    assert assess(values, now=NOW)["passed"]

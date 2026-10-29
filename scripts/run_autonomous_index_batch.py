@@ -268,6 +268,9 @@ def unchanged_skips_from_refresh_plan(refresh_plan_stdout: str) -> list[dict]:
                 "networkBytes": 0,
                 "adjudicationCalls": 0,
                 "tokensUsed": 0,
+                "tokensUsedKnownSubtotal": 0,
+                "unknownTokenUsageCalls": 0,
+                "tokenUsageComplete": True,
                 "cpuTimeMs": 0,
                 "peakMemoryBytes": 0,
             }
@@ -742,6 +745,7 @@ def enrich_telemetry(telemetry: dict, args: argparse.Namespace) -> dict:
     synthesis_failures: Counter[str] = Counter()
 
     for crawl in crawls:
+        crawl.update(token_usage(crawl))
         if crawl.get("status") == "failed":
             failure_class = classify_failure(crawl.get("error"))
             crawl["failureClass"] = failure_class
@@ -761,6 +765,7 @@ def enrich_telemetry(telemetry: dict, args: argparse.Namespace) -> dict:
         if synthesis_failure:
             synthesis_failures[str(synthesis_failure.get("class") or "unknown")] += 1
 
+    telemetry.update(aggregate_token_usage(crawls))
     telemetry.update(
         {
             "schema": "dotrepo/autonomous-telemetry/v0.1",
@@ -867,26 +872,150 @@ def aggregate_tiers(runs: list[dict]) -> dict[str, int]:
     return dict(sorted(tier_counts.items()))
 
 
-def aggregate_costs(runs: list[dict]) -> dict[str, int | float]:
+def token_usage(row: dict) -> dict:
+    """Normalize new telemetry without treating legacy placeholders as measured usage."""
+
+    def count(value):
+        return value if type(value) is int and value >= 0 else None
+
+    total = count(row.get("tokensUsed"))
+    calls = count(row.get("adjudicationCalls"))
+    unknown = count(row.get("unknownTokenUsageCalls"))
+    invalid_fields = set()
+    if row.get("tokenUsageInvalid") is True:
+        prior_fields = row.get("tokenUsageInvalidFields")
+        if isinstance(prior_fields, list):
+            invalid_fields.update(
+                field
+                for field in prior_fields
+                if type(field) is str
+                and field
+                in {
+                    "tokensUsed",
+                    "tokensUsedKnownSubtotal",
+                    "unknownTokenUsageCalls",
+                    "tokenUsageComplete",
+                    "tokenUsageInvalid",
+                }
+            )
+        invalid_fields.add("tokenUsageInvalid")
+    for field in ("tokensUsed", "tokensUsedKnownSubtotal", "unknownTokenUsageCalls"):
+        if field in row and row[field] is not None and count(row[field]) is None:
+            invalid_fields.add(field)
+    if "tokensUsedKnownSubtotal" in row and row["tokensUsedKnownSubtotal"] is None:
+        invalid_fields.add("tokensUsedKnownSubtotal")
+    if "tokenUsageComplete" in row and type(row["tokenUsageComplete"]) is not bool:
+        invalid_fields.add("tokenUsageComplete")
+    complete = row.get("tokenUsageComplete") is True
+    if complete:
+        if total is None:
+            invalid_fields.add("tokensUsed")
+        if "unknownTokenUsageCalls" in row and (
+            type(row["unknownTokenUsageCalls"]) is not int or row["unknownTokenUsageCalls"] != 0
+        ):
+            invalid_fields.add("unknownTokenUsageCalls")
+    if row.get("tokenUsageComplete") is False and total is not None:
+        invalid_fields.add("tokensUsed")
+    if (
+        total is not None
+        and "tokensUsedKnownSubtotal" in row
+        and row["tokensUsedKnownSubtotal"] != total
+    ):
+        invalid_fields.add("tokensUsedKnownSubtotal")
+    if unknown is not None and calls is not None and unknown > calls:
+        invalid_fields.add("unknownTokenUsageCalls")
+    if invalid_fields:
+        # Preserve only the four bounded usage scalars, never an entire provider
+        # payload. Invalid metadata is excluded from known spend, not certified
+        # as zero. Its marker survives normalization and aggregation.
+        fields = (
+            "tokensUsed",
+            "tokensUsedKnownSubtotal",
+            "unknownTokenUsageCalls",
+            "tokenUsageComplete",
+        )
+        reported = row.get("tokenUsageReported")
+        reported = reported if isinstance(reported, dict) else row
+        bounded = {}
+        for field in fields:
+            if field in reported:
+                value = reported[field]
+                bounded[field] = (
+                    value
+                    if value is None
+                    or type(value) is bool
+                    or (type(value) is int and value.bit_length() <= 64)
+                    else {"invalidType": type(value).__name__}
+                )
+        return {
+            "tokensUsed": None,
+            "tokensUsedKnownSubtotal": 0,
+            "unknownTokenUsageCalls": None,
+            "tokenUsageComplete": False,
+            "tokenUsageInvalid": True,
+            "tokenUsageInvalidFields": sorted(invalid_fields),
+            "tokenUsageReported": bounded,
+        }
+    # Explicit no-call legacy records need no native usage response. An absent
+    # call count (e.g. a crashed subprocess) does not establish this condition.
+    if "tokenUsageComplete" not in row and calls == 0 and total in (None, 0):
+        total, complete = 0, True
+    subtotal = count(row.get("tokensUsedKnownSubtotal"))
+    if subtotal is None:
+        subtotal = total if total is not None else 0
+    if complete:
+        subtotal, unknown = total, 0
+    elif unknown is None:
+        unknown = calls if calls else None
+    return {
+        "tokensUsed": total if complete else None,
+        "tokensUsedKnownSubtotal": subtotal,
+        "unknownTokenUsageCalls": unknown,
+        "tokenUsageComplete": complete,
+    }
+
+
+def aggregate_token_usage(rows: list[dict]) -> dict:
+    usages = [token_usage(row) for row in rows]
+    complete = all(row["tokenUsageComplete"] for row in usages)
+    subtotal = sum(row["tokensUsedKnownSubtotal"] for row in usages)
+    counts = [row["unknownTokenUsageCalls"] for row in usages]
+    result = {
+        "tokensUsed": subtotal if complete else None,
+        "tokensUsedKnownSubtotal": subtotal,
+        "unknownTokenUsageCalls": None if None in counts else sum(counts),
+        "tokenUsageComplete": complete,
+    }
+    if any(row.get("tokenUsageInvalid") is True for row in usages):
+        result["tokenUsageInvalid"] = True
+        result["tokenUsageInvalidFields"] = sorted(
+            {field for row in usages for field in row.get("tokenUsageInvalidFields", [])}
+        )
+    return result
+
+
+def aggregate_costs(runs: list[dict]) -> dict:
     totals = Counter()
     for run_telemetry in runs:
         for key in (
             "adjudicationCallBudget",
             "adjudicationCalls",
             "crawled",
-            "tokensUsed",
         ):
             totals[key] += int(run_telemetry.get(key) or 0)
 
     budget = totals["adjudicationCallBudget"]
     crawled = totals["crawled"]
+    usage = aggregate_token_usage(runs)
     return {
         "adjudicationCallBudget": budget,
         "adjudicationCalls": totals["adjudicationCalls"],
         "adjudicationBudgetUseRate": (totals["adjudicationCalls"] / budget if budget else 0.0),
         "crawled": crawled,
-        "tokensUsed": totals["tokensUsed"],
-        "tokensPerCrawled": totals["tokensUsed"] / crawled if crawled else 0.0,
+        **usage,
+        "tokensPerCrawled": (usage["tokensUsed"] / crawled if crawled else 0.0)
+        if usage["tokenUsageComplete"]
+        else None,
     }
 
 
@@ -942,7 +1071,6 @@ def aggregate_runs(runs: list[dict]) -> dict:
             "discoveryQueued",
             "adjudicationCallBudget",
             "adjudicationCalls",
-            "tokensUsed",
             "promoted",
             "zeroModelRuns",
             "synthesisRequested",
@@ -992,6 +1120,8 @@ def aggregate_runs(runs: list[dict]) -> dict:
         ecosystem_counts[ecosystem] += count
         failure_classes_by_ecosystem[f"{failure_class}/{ecosystem}"] += count
 
+    for key, value in aggregate_token_usage(runs).items():
+        totals[key] = value
     crawled = totals["crawled"]
     repos_with_adjudication = crawled - totals["zeroModelRuns"]
     if not saw_crawled_run:
@@ -1377,6 +1507,9 @@ def main() -> int:
             "skipped": 0,
             "adjudicationCalls": 0,
             "tokensUsed": 0,
+            "tokensUsedKnownSubtotal": 0,
+            "unknownTokenUsageCalls": 0,
+            "tokenUsageComplete": True,
             "adjudicationRate": 0.0,
             "adjudicationCallBudget": adjudication_call_budget,
             "adjudicationBudgetExhausted": False,
@@ -1401,6 +1534,8 @@ def main() -> int:
         before_status = capture_record_status_before_crawl(Path(args.index_root), identity)
         try:
             crawl_env = crawl_env_for_remaining_budget(base_env, remaining_adjudication_calls)
+            if not adjudication_enabled(crawl_env):
+                entry.update(adjudicationCalls=0, tokensUsed=0, tokenUsageComplete=True)
             entry["adjudicationCallBudgetBefore"] = remaining_adjudication_calls
             crawl_command = [
                 "cargo",
@@ -1456,7 +1591,14 @@ def main() -> int:
                 escalation = payload.get("escalation") or {}
                 entry["escalation"] = escalation
                 entry["adjudicationCalls"] = int(escalation.get("modelCalls") or 0)
-                entry["tokensUsed"] = int(escalation.get("tokensUsed") or 0)
+                entry.update(
+                    token_usage(
+                        {
+                            **escalation,
+                            "adjudicationCalls": escalation.get("modelCalls"),
+                        }
+                    )
+                )
                 entry["recordStatus"] = payload.get("recordStatus")
                 entry["synthesisPath"] = payload.get("synthesisPath")
                 entry["synthesisFailure"] = payload.get("synthesisFailure")
@@ -1489,7 +1631,6 @@ def main() -> int:
     failed = sum(1 for item in crawls if item["status"] == "failed")
     skipped = sum(1 for item in crawls if item["status"] == "skipped")
     adjudication_calls = sum(int(item.get("adjudicationCalls") or 0) for item in crawls)
-    tokens_used = sum(int(item.get("tokensUsed") or 0) for item in crawls)
     repos_with_adjudication = sum(
         1 for item in crawls if int(item.get("adjudicationCalls") or 0) > 0
     )
@@ -1502,7 +1643,7 @@ def main() -> int:
         "failed": failed,
         "skipped": skipped,
         "adjudicationCalls": adjudication_calls,
-        "tokensUsed": tokens_used,
+        **aggregate_token_usage(crawls),
         "adjudicationRate": adjudication_rate,
         "adjudicationCallBudget": adjudication_call_budget,
         "adjudicationBudgetExhausted": (

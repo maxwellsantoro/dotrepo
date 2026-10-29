@@ -18,6 +18,9 @@ SCHEMA = "dotrepo-refresh-receipt/v1"
 BUDGET_FIELDS = ("adjudicationCallBudget", "adjudicationCalls", "tokensUsed", "failed", "crawled")
 
 
+TOKEN_USAGE_FIELDS = ("tokensUsedKnownSubtotal", "unknownTokenUsageCalls", "tokenUsageComplete")
+
+
 def api(path, *, binary=False):
     result = subprocess.run(["gh", "api", path], capture_output=True, check=True)
     return result.stdout if binary else json.loads(result.stdout)
@@ -37,7 +40,11 @@ def record(args):
         "event": run["event"],
         "startedAt": run["created_at"],
         "checks": dict(item.split("=", 1) for item in args.check),
-        "budget": {key: telemetry.get(key) for key in BUDGET_FIELDS},
+        "budget": {
+            key: telemetry.get(key)
+            for key in (*BUDGET_FIELDS, *TOKEN_USAGE_FIELDS)
+            if key in BUDGET_FIELDS or key in telemetry
+        },
         "landing": read_json(args.batch_dir / "landing.json"),
     }
 
@@ -66,10 +73,19 @@ def problems(run, receipt):
     ):
         reasons.append("required-refresh-check-missing-or-failed")
     budget = receipt.get("budget") or {}
-    if any(type(budget.get(key)) is not int or budget[key] < 0 for key in BUDGET_FIELDS):
-        reasons.append("budget-evidence-missing")
-    elif budget["adjudicationCalls"] > budget["adjudicationCallBudget"] or budget["failed"] != 0:
-        reasons.append("budget-exceeded-or-refresh-failed")
+    count_fields = [key for key in BUDGET_FIELDS if key != "tokensUsed"]
+    counts_valid = all(type(budget.get(key)) is int and budget[key] >= 0 for key in count_fields)
+    # Legacy numeric receipts remain readable. Called legacy rows cannot prove
+    # completeness; no-call zero needs no native usage response.
+    from check_autonomous_telemetry_gate import token_usage_complete, token_usage_well_formed
+
+    if not counts_valid or not token_usage_well_formed(budget):
+        reasons.append("budget-evidence-missing-or-malformed")
+    else:
+        if not token_usage_complete(budget):
+            reasons.append("budget-token-usage-incomplete")
+        if budget["adjudicationCalls"] > budget["adjudicationCallBudget"] or budget["failed"] != 0:
+            reasons.append("budget-exceeded-or-refresh-failed")
     landing = receipt.get("landing") or {}
     if (
         landing.get("status") != "published"

@@ -9,16 +9,19 @@ category:
 
 - ``unchanged``: the refresh scheduler found the repository's head SHA
   unchanged (see `dotrepo-crawler/src/schedule.rs`'s `ScheduleRefreshReport`)
-  and skipped it entirely. Recorded under each run's ``unchangedSkips`` list
-  with all costs pinned at zero by construction (no fetch, no import, no
-  model call was ever attempted).
+  and skipped its crawl. Recorded under each run's ``unchangedSkips`` list
+  with zero attributed crawl costs. The preceding refresh planning and head
+  requests are excluded here, so this is not zero total maintenance cost.
 - ``changed``: the repository was re-crawled (fetched, imported, verified)
   but the resulting record did not advance on the draft -> inferred ->
   imported -> reviewed -> verified -> canonical status ladder relative to
   what was on disk before this run.
 - ``improved``: the repository was re-crawled and its record status
-  advanced on that ladder — a real completeness/quality gain, not just
-  avoided or repeated work.
+  advanced on that ladder. This historical telemetry label is a status-change
+  proxy, not an independent correctness, completeness or consumer-value result.
+
+Network bytes retain the crawler's Content-Length accounting. Missing headers
+can appear as zero; these values do not establish all transferred body bytes.
 
 CPU time and peak memory are collected by
 ``scripts/run_autonomous_index_batch.py`` via ``process_resources`` (child
@@ -122,7 +125,19 @@ def summarize_category(category: str, entries: list[dict]) -> dict[str, Any]:
     ]
     tokens = [
         value
-        for value in (number_or_none(entry.get("tokensUsed")) for entry in entries)
+        for value in (
+            number_or_none(entry.get("tokensUsed"))
+            for entry in entries
+            if entry.get("tokenUsageInvalid") is not True
+            and (
+                entry.get("tokenUsageComplete") is True
+                or (
+                    "tokenUsageComplete" not in entry
+                    and entry.get("adjudicationCalls") == 0
+                    and entry.get("tokensUsed") == 0
+                )
+            )
+        )
         if value is not None
     ]
     model_calls = [
@@ -169,7 +184,11 @@ def summarize_category(category: str, entries: list[dict]) -> dict[str, Any]:
             "mean": mean_or_none(network_requests),
             "sampled": len(network_requests),
         },
-        "tokensUsed": {"mean": mean_or_none(tokens), "sampled": len(tokens)},
+        "tokensUsed": {
+            "mean": mean_or_none(tokens),
+            "sampled": len(tokens),
+            "unknown": len(entries) - len(tokens),
+        },
         "modelCalls": {"mean": mean_or_none(model_calls), "sampled": len(model_calls)},
         "cpuTimeMs": cpu_summary,
         "peakMemoryBytes": peak_summary,
@@ -233,6 +252,16 @@ def render_markdown(report: dict[str, Any]) -> str:
         "process-group sampling via `ps` during each crawl subprocess "
         "(`scripts/process_resources.py`). Legacy telemetry without those fields "
         "shows `n/a` rather than fabricated zeros."
+    )
+    lines.append("")
+    lines.append(
+        "Categories describe crawl/status outcomes, not independently established "
+        "quality or usefulness. Refresh planning and head-check costs are excluded; "
+        "an unchanged row's zero crawl cost is not zero total maintenance cost. "
+        "Token means include only explicitly complete usage (or explicit no-call zero); "
+        "legacy called rows without completeness are unknown, including recorded zeros. "
+        "Network bytes use crawler Content-Length accounting; missing headers can "
+        "appear as zero, so this is not complete transferred-byte measurement."
     )
     lines.append("")
     return "\n".join(lines)

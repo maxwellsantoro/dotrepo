@@ -171,6 +171,7 @@ def test_http_error_carries_measured_usage(monkeypatch):
         assert json.loads(failure.value.read()) == {
             "error": "truncated",
             "tokensUsed": 350,
+            "tokenUsageComplete": True,
             "cost": 0.000155,
         }
     finally:
@@ -350,3 +351,91 @@ def test_context_low_abstention_stays_low_without_citations():
     result = sidecar.normalize_response(payload, answer, 35)
     assert result["confidence"] == "low"
     assert result["value"] is None and result["source"] is None and result["citations"] == []
+
+
+@pytest.mark.parametrize(
+    "native, expected",
+    [
+        ({}, None),
+        ({"total_tokens": None}, None),
+        ({"total_tokens": 0}, 0),
+        ({"total_tokens": 120}, 120),
+        ({"total_tokens": False}, None),
+        ({"total_tokens": "0"}, None),
+        ({"total_tokens": -1}, None),
+    ],
+)
+def test_native_usage_is_not_inferred_or_coerced(monkeypatch, native, expected):
+    payload = completion(json.dumps({"field": "repo.build", "value": "cargo build"}))
+    payload["usage"] = native
+    stub_openrouter(monkeypatch, payload)
+    parsed, tokens = sidecar.call_openrouter(
+        api_key="owned", model=policy.DEFAULT_PRIMARY_MODEL, prompt="owned synthetic"
+    )
+    response = sidecar.normalize_response(candidate_request(), parsed, tokens)
+    assert response["tokensUsed"] == expected
+    assert response["tokenUsageComplete"] is (expected is not None)
+    payload["choices"] = []
+    with pytest.raises(policy.CompletionError) as failure:
+        policy.completion_text(payload)
+    assert failure.value.usage["tokensUsed"] == expected
+
+
+@pytest.mark.parametrize(
+    "native, expected",
+    [
+        ({}, None),
+        ({"total_tokens": None}, None),
+        ({"total_tokens": 0}, 0),
+        ({"total_tokens": 120}, 120),
+    ],
+)
+def test_native_http_error_preserves_known_or_unknown_usage(monkeypatch, native, expected):
+    def fail(*args, **kwargs):
+        raise urllib.error.HTTPError(
+            "https://unused.invalid",
+            429,
+            "synthetic",
+            {},
+            io.BytesIO(json.dumps({"usage": native}).encode()),
+        )
+
+    monkeypatch.setattr(urllib.request, "urlopen", fail)
+    with pytest.raises(policy.CompletionError) as failure:
+        sidecar.call_openrouter(api_key="owned", model=policy.DEFAULT_PRIMARY_MODEL, prompt="owned")
+    assert failure.value.usage["tokensUsed"] == expected
+    assert failure.value.usage["tokenUsageComplete"] is (expected is not None)
+
+
+@pytest.mark.parametrize(
+    "error",
+    [
+        RuntimeError("owned transport failure"),
+        policy.CompletionError("owned unusable answer", {"tokensUsed": None}),
+    ],
+)
+def test_http_error_without_native_usage_is_explicitly_unknown(monkeypatch, error):
+    def fail(**kwargs):
+        raise error
+
+    monkeypatch.setattr(sidecar, "call_openrouter", fail)
+    server = ThreadingHTTPServer(("127.0.0.1", 0), sidecar.make_handler("owned"))
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    try:
+        request = urllib.request.Request(
+            f"http://127.0.0.1:{server.server_port}/adjudicate",
+            data=json.dumps(
+                {**candidate_request(), "model": policy.DEFAULT_PRIMARY_MODEL}
+            ).encode(),
+            headers={"Content-Type": "application/json"},
+        )
+        with pytest.raises(urllib.error.HTTPError) as failure:
+            urllib.request.urlopen(request, timeout=2)
+        result = json.loads(failure.value.read())
+        assert result["tokensUsed"] is None
+        assert result["tokenUsageComplete"] is False
+    finally:
+        server.shutdown()
+        server.server_close()
+        thread.join(timeout=2)

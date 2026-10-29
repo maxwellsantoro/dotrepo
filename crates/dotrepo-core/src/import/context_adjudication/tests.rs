@@ -284,7 +284,7 @@ impl AdjudicationProvider for RecordingProvider {
         self.seen.lock().unwrap().push(request.clone());
         Ok(AdjudicationProviderResponse {
             response: response(request),
-            tokens_used: 7,
+            tokens_used: Some(7),
         })
     }
 }
@@ -327,7 +327,7 @@ fn actual_ladder_transports_context_under_budget_without_scalar_or_conflict_prom
             },
         );
         assert_eq!(report.model_calls, budget);
-        assert_eq!(report.tokens_used, budget as u64 * 7);
+        assert_eq!(report.tokens_used, Some(budget as u64 * 7));
         assert_eq!(plan.manifest.repo.test_candidates, original);
         assert_eq!(plan.manifest.repo.test, original_scalar);
         assert_eq!(plan.manifest.record.status, original_status);
@@ -446,7 +446,7 @@ impl AdjudicationProvider for MutatingProvider {
         fs::write(&self.source, "changed after request capture\n").unwrap();
         Ok(AdjudicationProviderResponse {
             response: answer,
-            tokens_used: 11,
+            tokens_used: Some(11),
         })
     }
 }
@@ -480,7 +480,7 @@ fn ladder_rechecks_changed_sources_after_provider_and_retains_unresolved() {
         },
     );
     assert_eq!(report.model_calls, 1);
-    assert_eq!(report.tokens_used, 11);
+    assert_eq!(report.tokens_used, Some(11));
     assert_eq!(plan.manifest.repo.test_candidates, original);
     assert_eq!(
         scores
@@ -514,7 +514,7 @@ impl AdjudicationProvider for ScalarsFirstProvider {
                 reason: "owned scalar-priority stub".into(),
                 citations: vec![],
             },
-            tokens_used: 13,
+            tokens_used: Some(13),
         })
     }
 }
@@ -604,7 +604,7 @@ fn many_large_contexts_share_call_cap_and_preserve_existing_scalar_priority() {
     );
     assert_eq!(*provider.seen.lock().unwrap(), vec!["repo.build"]);
     assert_eq!(report.model_calls, 1);
-    assert_eq!(report.tokens_used, 13);
+    assert_eq!(report.tokens_used, Some(13));
     assert_eq!(plan.manifest.repo.build.as_deref(), Some("cargo build"));
     assert_eq!(plan.manifest.repo.test_candidates.len(), 32);
     assert_eq!(report.remaining_unresolved, scores.summary.unresolved.len());

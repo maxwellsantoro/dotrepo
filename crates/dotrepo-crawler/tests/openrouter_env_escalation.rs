@@ -74,7 +74,10 @@ fn openrouter_env_escalation_smoke() {
 
     eprintln!("escalation report: {report:?}");
     assert!(report.model_calls > 0, "expected model calls");
-    assert!(report.tokens_used > 0, "expected token usage");
+    assert!(
+        report.tokens_used.is_some_and(|tokens| tokens > 0),
+        "expected token usage"
+    );
     assert!(
         scores.summary.unresolved.is_empty(),
         "expected unresolved fields to clear: {:?}",
@@ -129,7 +132,7 @@ fn second_opinion_live_ladder_from_low_confidence_primary() {
                 reason: "Canary: forced low-confidence primary abstention".into(),
                 source: None,
             },
-            tokens_used: 50,
+            tokens_used: Some(50),
         }],
     );
 
@@ -176,7 +179,10 @@ fn second_opinion_live_ladder_from_low_confidence_primary() {
         "expected second-opinion or API tier after low-confidence primary: {:?}",
         report.adjudication_tiers_used
     );
-    assert!(report.tokens_used > 50, "expected live provider tokens");
+    assert!(
+        report.tokens_used.is_some_and(|tokens| tokens > 50),
+        "expected live provider tokens"
+    );
 
     let _ = fs::remove_dir_all(&root);
 }
@@ -260,7 +266,7 @@ fn billed_http_failure_counts_tokens_and_attempt_before_second_opinion() {
                 reason: "workspace CI".into(),
                 source: Some(".github/workflows/check.yml".into()),
             },
-            tokens_used: 80,
+            tokens_used: Some(80),
         }],
     );
     let report = run_import_escalation(
@@ -281,7 +287,7 @@ fn billed_http_failure_counts_tokens_and_attempt_before_second_opinion() {
     );
     server.join().expect("server");
     assert_eq!(report.model_calls, 2);
-    assert_eq!(report.tokens_used, 430);
+    assert_eq!(report.tokens_used, Some(430));
     assert_eq!(report.model_resolved, 1);
     assert_eq!(
         plan.manifest.repo.build.as_deref(),

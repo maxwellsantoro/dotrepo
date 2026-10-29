@@ -442,6 +442,11 @@ replace the incumbent before disjoint quality requirements pass; choose the
 cheapest eligible route for each decision class. Contributor-mode evaluation
 requires the declared public-source privacy assumption and checked terms.
 Model comparison does not block deterministic acquisition improvements or F-05.
+The [October 29 comparison inventory](benchmarks/head-to-head/model-comparison-inventory-20261029/README.md)
+binds current code policy and official-source observations separately. It leaves
+exact evaluated routes, account/terms eligibility, frozen budgets and disjoint
+grounded qualification open; advertised prices and synthetic compatibility
+cannot establish cost per correct supported decision.
 
 ## Product milestones
 

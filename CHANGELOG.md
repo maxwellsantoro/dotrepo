@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+- Preserve unknown adjudication token usage through provider responses, failed
+  calls, batch totals and unit-cost reports. Report a nullable complete total,
+  known subtotal and completeness instead of treating missing usage as zero;
+  keep token and scheduled-refresh qualification closed when usage is incomplete.
+  The Rust adjudication response/error and escalation-report `tokens_used` fields
+  now use `Option<u64>`; model routes and attempted-call limits are unchanged.
+- Retain a dated model-comparison inventory separating API compatibility,
+  source-grounded quality and production eligibility. Exact routes, terms,
+  disjoint qualification inputs and measured cost remain comparison prerequisites;
+  the inventory does not change the production model policy.
 - Record a C1 launch-feasibility no-go with an independently reviewed twelve-task
   readiness matrix and six deduplicated shared gate groups. Retain the fixed
   captured-profile diagnostic: five hits, seven misses and zero established

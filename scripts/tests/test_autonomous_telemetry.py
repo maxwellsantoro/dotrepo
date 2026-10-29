@@ -56,6 +56,7 @@ def test_aggregate_runs_calculates_retained_rates_and_recurring_failures() -> No
             "adjudicationCalls": 2,
             "adjudicationBudgetExhausted": True,
             "tokensUsed": 50,
+            "tokenUsageComplete": True,
             "promoted": 1,
             "zeroModelRuns": 1,
             "repositoriesByAdjudicationTier": {"local_primary": 1},
@@ -131,6 +132,9 @@ def test_aggregate_runs_calculates_retained_rates_and_recurring_failures() -> No
         "crawled": 4,
         "tokensPerCrawled": 12.5,
         "tokensUsed": 50,
+        "tokensUsedKnownSubtotal": 50,
+        "unknownTokenUsageCalls": 0,
+        "tokenUsageComplete": True,
     }
     assert summary["previousWindowRunCount"] == 0
     assert summary["previousWindowRates"] == {
@@ -148,6 +152,9 @@ def test_aggregate_runs_calculates_retained_rates_and_recurring_failures() -> No
         "crawled": 0,
         "tokensPerCrawled": 0.0,
         "tokensUsed": 0,
+        "tokensUsedKnownSubtotal": 0,
+        "unknownTokenUsageCalls": 0,
+        "tokenUsageComplete": True,
     }
     assert summary["repositoriesByAdjudicationTier"] == {
         "api_escalation": 1,
@@ -321,6 +328,7 @@ def test_aggregate_runs_calculates_previous_window_rates() -> None:
                 "adjudicationCallBudget": 4,
                 "adjudicationCalls": 4 if recent else 1,
                 "tokensUsed": 800 if recent else 200,
+                "tokenUsageComplete": True,
                 "zeroModelRuns": 2 if recent else 4,
                 "repositoriesByAdjudicationTier": (
                     {"local_primary": 2, "api_escalation": 1} if recent else {}
@@ -361,6 +369,9 @@ def test_aggregate_runs_calculates_previous_window_rates() -> None:
         "crawled": 12,
         "tokensPerCrawled": 200.0,
         "tokensUsed": 2400,
+        "tokensUsedKnownSubtotal": 2400,
+        "unknownTokenUsageCalls": 0,
+        "tokenUsageComplete": True,
     }
     assert summary["previousWindowCosts"] == {
         "adjudicationBudgetUseRate": 0.25,
@@ -369,6 +380,9 @@ def test_aggregate_runs_calculates_previous_window_rates() -> None:
         "crawled": 12,
         "tokensPerCrawled": 50.0,
         "tokensUsed": 600,
+        "tokensUsedKnownSubtotal": 600,
+        "unknownTokenUsageCalls": 0,
+        "tokenUsageComplete": True,
     }
 
 
@@ -1017,3 +1031,113 @@ def test_select_refresh_batch_or_empty_degrades_when_no_batches(tmp_path: Path) 
     assert selected is False
     metadata = autonomous_batch.json.loads(selected_metadata.read_text())
     assert metadata["batch"]["reason"] == "no_scheduled_refreshes"
+
+
+def test_token_usage_keeps_unknown_separate_from_reported_zero_and_legacy():
+    rows = [
+        {"adjudicationCalls": 1, "tokensUsed": 120, "tokenUsageComplete": True},
+        {
+            "adjudicationCalls": 1,
+            "tokensUsed": None,
+            "unknownTokenUsageCalls": 1,
+            "tokensUsedKnownSubtotal": 0,
+            "tokenUsageComplete": False,
+        },
+        {"adjudicationCalls": 1, "tokensUsed": 0, "tokenUsageComplete": True},
+    ]
+    for aggregate in (
+        autonomous_batch.aggregate_costs(rows),
+        autonomous_batch.aggregate_runs(rows)["totals"],
+    ):
+        assert aggregate["tokensUsed"] is None
+        assert aggregate["tokensUsedKnownSubtotal"] == 120
+        assert aggregate["unknownTokenUsageCalls"] == 1
+        assert aggregate["tokenUsageComplete"] is False
+    for value in (0, 120, None):
+        legacy = autonomous_batch.token_usage({"adjudicationCalls": 1, "tokensUsed": value})
+        assert legacy["tokensUsed"] is None
+        assert legacy["tokensUsedKnownSubtotal"] == (value or 0)
+        assert legacy["unknownTokenUsageCalls"] == 1
+    assert autonomous_batch.token_usage({})["unknownTokenUsageCalls"] is None
+    assert autonomous_batch.aggregate_token_usage([]) == {
+        "tokensUsed": 0,
+        "tokensUsedKnownSubtotal": 0,
+        "unknownTokenUsageCalls": 0,
+        "tokenUsageComplete": True,
+    }
+    assert (
+        autonomous_batch.token_usage({"adjudicationCalls": 0, "tokensUsed": 0})["tokensUsed"] == 0
+    )
+
+
+def test_failed_crawl_without_report_is_unknown_but_disabled_model_is_known_zero():
+    args = Namespace(index_root="index", state_path="unused", batch_size=2, limit=2)
+    report = autonomous_batch.enrich_telemetry(
+        {
+            "crawls": [
+                {"status": "failed", "error": "timeout"},
+                {
+                    "status": "failed",
+                    "error": "parse",
+                    "adjudicationCalls": 0,
+                    "tokensUsed": 0,
+                    "tokenUsageComplete": True,
+                },
+            ]
+        },
+        args,
+    )
+    assert report["tokensUsed"] is None
+    assert report["unknownTokenUsageCalls"] is None
+    assert report["crawls"][0]["tokenUsageComplete"] is False
+    assert report["crawls"][1]["tokensUsed"] == 0
+
+
+@pytest.mark.parametrize(
+    "patch",
+    [
+        {"tokensUsedKnownSubtotal": 999},
+        {"unknownTokenUsageCalls": False},
+        {"unknownTokenUsageCalls": -1},
+        {"unknownTokenUsageCalls": None},
+        {"tokensUsedKnownSubtotal": None},
+        {"tokenUsageComplete": "true"},
+    ],
+)
+def test_invalid_usage_is_retained_and_never_laundered_by_normalization(patch):
+    raw = {
+        "adjudicationCalls": 1,
+        "tokensUsed": 120,
+        "tokensUsedKnownSubtotal": 120,
+        "unknownTokenUsageCalls": 0,
+        "tokenUsageComplete": True,
+        **patch,
+    }
+    normalized = autonomous_batch.token_usage(raw)
+    assert normalized["tokensUsed"] is None
+    assert normalized["tokenUsageComplete"] is False
+    assert normalized["unknownTokenUsageCalls"] is None
+    assert normalized["tokenUsageInvalid"] is True
+    assert set(normalized["tokenUsageReported"]) <= {
+        "tokensUsed",
+        "tokensUsedKnownSubtotal",
+        "unknownTokenUsageCalls",
+        "tokenUsageComplete",
+    }
+    if patch.get("tokensUsedKnownSubtotal") == 999:
+        assert normalized["tokenUsageReported"]["tokensUsedKnownSubtotal"] == 999
+    for report in [
+        autonomous_batch.aggregate_token_usage([normalized]),
+        autonomous_batch.aggregate_costs([normalized]),
+        autonomous_batch.aggregate_runs([normalized])["totals"],
+    ]:
+        assert report["tokenUsageInvalid"] is True
+        assert report["tokensUsed"] is None
+        assert report["unknownTokenUsageCalls"] is None
+        assert report["tokenUsageComplete"] is False
+    mixed = autonomous_batch.aggregate_token_usage(
+        [normalized, {"tokensUsed": 7, "adjudicationCalls": 1, "tokenUsageComplete": True}]
+    )
+    assert mixed["tokensUsedKnownSubtotal"] == 7
+    assert mixed["tokensUsed"] is None
+    assert mixed["tokenUsageInvalid"] is True

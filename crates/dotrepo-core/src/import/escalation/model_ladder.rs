@@ -95,14 +95,15 @@ pub(crate) fn run_model_escalation(
             let provider_response = match provider.adjudicate(&request) {
                 Ok(response) => response,
                 Err(error) => {
-                    if let Some(failure) = error.downcast_ref::<crate::AdjudicationProviderError>()
-                    {
-                        report.tokens_used += failure.tokens_used;
-                    }
+                    report.record_token_usage(
+                        error
+                            .downcast_ref::<crate::AdjudicationProviderError>()
+                            .and_then(|failure| failure.tokens_used),
+                    );
                     continue;
                 }
             };
-            report.tokens_used += provider_response.tokens_used;
+            report.record_token_usage(provider_response.tokens_used);
 
             let result = if super::super::context_adjudication::is_context_field(&request.field)
                 && !super::super::context_adjudication::still_current(root, plan, &request)
