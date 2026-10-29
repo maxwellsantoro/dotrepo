@@ -1,0 +1,39 @@
+{
+  "assessment": "Source-grounded input/query distinction correct. GOENV=off input and environment hash unchanged; expected queried GOENV empty. No historical result is reclassified and no launch is authorized.",
+  "cacheGloballyQualified": false,
+  "campaignAdmitted": false,
+  "executionAuthorized": false,
+  "findings": [],
+  "limits": [
+    "Only trusted local source/hash/AST and fake controls ran. No live daemon/Go/Cargo/package/upstream/native/provider/network.",
+    "Historical actual raw query is a fixture, not a new native outcome. Original attempt remains incomplete before go-list/go-test-list.",
+    "Current plan/outer authorFREEZE/current independent passed subject required for any new acceptance; prior review cannot admit successor.",
+    "Source/observer/initializer-output limits remain unchanged; task/native/global/cache/campaign admissions withheld."
+  ],
+  "nativeCollectionOccurred": false,
+  "nativeTaskAdmitted": false,
+  "roleDisclosure": "Reviewer authored source plan/Go-only projection and earlier driver reviews, not this amendment. Independent bounded implementation/source review, not blind trial.",
+  "scope": "go01-collection-only",
+  "sourceSemantics": "cfg.EnvFile returns empty filename for off; MkEnv emits it, while initEnvCache separately reads GOROOT/go.env. User config disabled does not mean all Go defaults disabled.",
+  "state": "independent-go01-collection-driver-review-passed",
+  "subject": {
+    "authorFreezeSha256": "a922cea56e81f471b1a6cd69ec576abcde7b9dd67aed246cb745e3432531196e",
+    "driverPlanSha256": "c7dbacdf6c3966f66fd0ef805a85db452ce72180d3db22347a5c8a06f941d4a0",
+    "packetIdentity": "go01-collection-driver-amendment-2"
+  },
+  "synthetic": false,
+  "taskOutcomeObserved": false,
+  "validation": {
+    "authorAmendmentControlsPassed": 40,
+    "authorArtifacts": 35,
+    "authorGoenvControlsPassed": 22,
+    "authorPriorControlsPassed": 59,
+    "fakeTransportControlsPassed": 2,
+    "freshObserverCalls": 0,
+    "independentSubjectClosureFullFakeControlsPassed": 45,
+    "minimalNormalizedRuntimeAstVerified": true,
+    "oldAcceptanceReuseRejected": true,
+    "retainedBeforeChallengesMatched": 23,
+    "sourceFilesAndLineSpansImageBound": 3
+  }
+}

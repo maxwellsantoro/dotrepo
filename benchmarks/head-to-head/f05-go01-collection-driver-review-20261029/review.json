@@ -1,0 +1,69 @@
+{
+  "authorFreezeSha256": "b176a6c3dfff4965a53e601a05eccab03257f9b3cfe78b5846317d29b2302eaa",
+  "cacheGloballyQualified": false,
+  "campaignAdmitted": false,
+  "driverPlanSha256": "0dfc8aaeb60efc55de51d9120850b4ed379532bfce09497112ebbecd7a0d69ac",
+  "executionAuthorized": false,
+  "findings": [
+    {
+      "disposition": "requires acceptance binding amendment",
+      "evidence": "acceptance-reuse.json",
+      "id": "F1",
+      "impact": "A previously accepted/reviewed driver may be substituted by a newly authorized unreviewed driver without invalidating the old acceptance. This is internal review/admission continuity, not an authentication/cryptographic human-authority claim.",
+      "locator": "collection.py:157-181",
+      "minimumFix": "Require scoped acceptance to bind the exact current driver plan and reviewed packet identity; validate before daemon. Preserve historical assertions and require a new acceptance for changed driver.",
+      "observed": "authorize accepted even when acceptance and old review explicitly contain a different plan/packet identity. Driver-review artifact content is never bound to current driver plan/packet.",
+      "trigger": "Fresh current-plan authorization plus a previously scoped acceptance and hash-valid old driverReviewFreeze, all source/image/environment/projection unchanged."
+    },
+    {
+      "disposition": "requires exact tmpfs inspect policy amendment",
+      "evidence": "challenge-results.json",
+      "id": "F2",
+      "impact": "The actual inspect admission does not enforce its intended resource/security/mount policy. Exact generated create argv remains safe and no unsafe actual execution is asserted.",
+      "locator": "collection.py:218-219 delegating frozen setup.py:243-253",
+      "minimumFix": "Keep historical helper immutable; successor collection inspect wrapper should enforce the exact intended tmpfs roots/options, rejecting duplicates/conflicts/extra roots and unknowns, with representation-matching positives.",
+      "observed": "All three actual-state mutations accepted because frozen helper checks required option membership but not conflicting/duplicate options or exact tmpfs keys.",
+      "trigger": "Mutate actual inspect HostConfig.Tmpfs to append size=16g after size=8g, append suid after nosuid, or add an extra /workspace/extra overlay."
+    },
+    {
+      "disposition": "requires bounded package parser consistency amendment",
+      "evidence": "challenge-results.json",
+      "id": "F3",
+      "impact": "Parser accepts malformed/contradictory Go metadata as inventory. No claim these are normal native Go output; targeted fake counterexamples exercise fail-closed evidence admission.",
+      "locator": "listing.py:55-101",
+      "minimumFix": "Bind package directory to module-relative ImportPath; require safe unique basename .go file identities, and where feasible bind selected paths to validated source inventory. Preserve legitimate Cgo/Test/XTest and zero-test package cases.",
+      "observed": "All three contradictory package inventories accepted. Directory only needs to be somewhere under CWD; selected files only need be nonempty strings lacking slash.",
+      "trigger": "Required package ImportPath with a different in-checkout directory; GoFiles=[\"..\"]; duplicate selected source filename."
+    }
+  ],
+  "limits": [
+    "No real daemon/Go/Cargo/package/upstream/native/provider/network call by review.",
+    "Only non-Python tooling was the explicitly authorized builtin Node fs/crypto observer on isolated synthetic fixtures; host Node v25.9.0 is not image/native qualification.",
+    "Review does not admit source/cache/environment/task/global/campaign; all launch acceptance remains coordinator-owned."
+  ],
+  "nativeCollectionOccurred": false,
+  "reviewedConstraints": [
+    "Only three exact Go command strings; go env gate precedes listing and test-list; no npm/Hereby/helper build/test-body invocation in driver.",
+    "Exact image/source/projection/environment/tool hashes bound; prospective CC/CXX gcc/g++ decision retained as explicit successor context, not observed default/native receipt.",
+    "Scoped no-npm Go-only seed; full mixed parent cache and npm compiler payload are not provisioned. No output build-cache export as campaign seed.",
+    "Raw stdout/stderr bytes retained and successful parse bytes copied losslessly; nonzero/error/cap/UTF8/truncation rejects. Parser does not guarantee against arbitrary misleading initializer stdout, as author declares.",
+    "Authorization/preflight attempt receipt precedes daemon; cancellation/deadline/create and cleanup failures tested using fake transports; cleanup/absence uncertainty yields incomplete.",
+    "Source content/type tree observations before/after detect names/bytes/symlinks but do not prove modes or immutability between observations. Tool regular hashes are observed; frozen root/image supplies symlink chains.",
+    "Listing is native preparation with init/TestMain effects, not test-body execution/coverage or task outcome. No dynamic nested cases/native counts invented."
+  ],
+  "roleDisclosure": "Reviewer authored original source-only collection proposal and Go-only projection but not this driver. This is an independent implementation review, not fresh blind task trial or source/consumer usefulness experiment.",
+  "state": "bounded independent implementation review: amendments required before execution",
+  "taskOutcomeObserved": false,
+  "validation": {
+    "authorArtifactsVerifiedUnchanged": 33,
+    "copiedAuthorDriverControlsPassed": 59,
+    "copiedAuthorizedNodeObserverControlsPassed": 6,
+    "copiedFakeTransportControlsPassed": 2,
+    "independentChallenges": 23,
+    "independentMatchedExpectations": 17,
+    "independentUnexpectedAcceptances": 6,
+    "rootRequestedAcceptanceReuseReproduced": true,
+    "ruffCheck": "passed --no-cache",
+    "ruffFormatCheck": "passed --no-cache"
+  }
+}

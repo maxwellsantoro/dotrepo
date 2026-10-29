@@ -1,0 +1,272 @@
+[
+  {
+    "displayExcerpt": "go 1.27\n\nuse (\n\t./tools\n\t./tsc\n)\n",
+    "endLine": 6,
+    "interpretation": "Both tools and tsc modules belong to the frozen workspace; collection remains cwd tsc ./..., not whole-workspace task replacement.",
+    "path": "go.work",
+    "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+    "sha256": "d6c5314b1f983eb6de36253c903ac00aa8e6fecd9512d2adba882b5701ce7d29",
+    "source": "exact frozen runtime-source.tar",
+    "startLine": 1
+  },
+  {
+    "displayExcerpt": "module github.com/microsoft/TypeScript/tsc\n\ngo 1.27\n\nrequire (\n\tgithub.com/Microsoft/go-winio v0.6.2\n\tgithub.com/google/go-cmp v0.7.0\n\tgithub.com/klauspost/compress v1.20.0\n\tgithub.com/mackerelio/go-osstat v0.2.8\n\tgithub.com/peter-evans/patience v0.3.0\n\tgithub.com/zeebo/xxh3 v1.1.0\n\tgolang.org/x/sync v0.23.0\n\tgolang.org/x/sys v0.48.0\n\tgolang.org/x/term v0.46.0\n\tgolang.org/x/text v0.42.0\n\tgotest.tools/v3 v3.5.2\n)\n",
+    "endLine": 17,
+    "interpretation": "Native module and declared Go language/dependencies; offline modules are proposed inputs, not proof compilation succeeds.",
+    "path": "tsc/go.mod",
+    "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+    "sha256": "1e0963224f3096e3e8215acea83c033392c8135e7453b8a9680261baa5c18b25",
+    "source": "exact frozen runtime-source.tar",
+    "startLine": 1
+  },
+  {
+    "displayExcerpt": "async function runTests() {\n    if (!options.dirty) {\n        await rimraf(localBaseline);\n        await fs.promises.mkdir(localBaseline, { recursive: true });\n    }\n\n    // Create a tmp directory for baseline tracking if enabled\n    /** @type {string | undefined} */\n    let trackingDir;\n    /** @type {(() => Promise<void>) | undefined} */\n    let cleanupTracking;\n\n    if (baselineTrackingEnabled) {\n        const tempTrackingDir = fs.mkdtempSync(path.join(os.tmpdir(), \"tsgo-baseline-tracking-\"));\n        trackingDir = tempTrackingDir;\n        cleanupTracking = () => rimraf(tempTrackingDir);\n    }\n\n    try {\n        const testEnv = {\n            ...goTestEnv,\n            ...(trackingDir ? { TSGO_BASELINE_TRACKING_DIR: trackingDir } : {}),\n        };\n        await gotestsumTool.run([...gotestsumArgs(\"tests\"), \"./...\", ...(isCI ? [\"--timeout=45m\"] : [])], {\n            env: testEnv,\n            cwd: \"./tsc\",\n        });\n",
+    "endLine": 1009,
+    "interpretation": "Full default wrapper owns setup/cleanup plus source-owned gotestsum, invoking ./... from tsc.",
+    "path": "Herebyfile.mjs",
+    "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+    "sha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421",
+    "source": "exact frozen runtime-source.tar",
+    "startLine": 983
+  },
+  {
+    "displayExcerpt": "export const testTsc = task({\n    name: \"test:tsc\",\n    description: \"Runs all tests in the tsc module.\",\n    run: runTests,\n});\n\nexport const testExtension = task({\n    name: \"test:extension\",\n    description: \"Runs the VS Code extension tests.\",\n    run: runTestExtension,\n});\n\nexport const test = task({\n    name: \"test\",\n    description: \"Alias for test:tsc.\",\n    dependencies: [testTsc],\n});\n",
+    "endLine": 1062,
+    "interpretation": "Repository test aliases test:tsc, whose description covers all tests in tsc module.",
+    "path": "Herebyfile.mjs",
+    "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+    "sha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421",
+    "source": "exact frozen runtime-source.tar",
+    "startLine": 1046
+  },
+  {
+    "displayExcerpt": "    };\n}\n\nconst gotestsumTool = createCachedTool({\n    toolPath: `./tools/gotestsum${process.platform === \"win32\" ? \".exe\" : \"\"}`,\n    globs: [\"./tools/go.mod\", \"./tools/go.sum\"],\n    build: async () => {\n        await run(\"go\", [\"install\", \"gotest.tools/gotestsum\"], {\n            cwd: \"./tools\",\n            env: { GOBIN: path.resolve(\"./tools\") },\n        });\n    },\n});\n\n",
+    "endLine": 1218,
+    "interpretation": "Default wrapper builds gotestsum from tools module through source-owned tool flow; direct Go collection does not call this helper.",
+    "path": "Herebyfile.mjs",
+    "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+    "sha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421",
+    "source": "exact frozen runtime-source.tar",
+    "startLine": 1205
+  },
+  {
+    "displayExcerpt": "var getNodeExeOnce = sync.OnceValue(func() string {\n\tconst exeName = \"node\"\n\texe, err := exec.LookPath(exeName)\n\tif err != nil {\n\t\treturn \"\"\n\t}\n\treturn exe\n})\n",
+    "endLine": 26,
+    "interpretation": "sync.OnceValue closure delays Node lookup until called; declaration does not itself invoke Node.",
+    "path": "tsc/internal/testutil/jstest/node.go",
+    "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+    "sha256": "daca63240ff6e26420e9f9fa9fdaf23477d09333cecdb202ad78353dbd9e1472",
+    "source": "exact frozen runtime-source.tar",
+    "startLine": 19
+  },
+  {
+    "displayExcerpt": "// EvalNodeScriptWithTS is like EvalNodeScript, but provides the TypeScript\n// library to the script as the first argument.\nfunc EvalNodeScriptWithTS[T any](t testing.TB, script string, dir string, args ...string) (result T, err error) {\n\tif dir == \"\" {\n\t\tdir = t.TempDir()\n\t}\n\ttsSrc := tspath.NormalizePath(filepath.Join(repo.RootPath(), \"..\", \"node_modules/typescript/lib/typescript.js\"))\n\tif tsSrc[0] == '/' {\n\t\ttsSrc = \"file://\" + tsSrc\n\t} else {\n\t\ttsSrc = \"file:///\" + tsSrc\n\t}\n\ttsLoaderScript := fmt.Sprintf(`import script from \"./script.mjs\";\nimport * as ts from \"%s\";\nprocess.stdout.write(JSON.stringify(await script(ts, ...process.argv.slice(2))));`, tsSrc)\n\treturn evalNodeScript[T](t, script, tsLoaderScript, dir, args...)\n",
+    "endLine": 50,
+    "interpretation": "Actual test helper supplies root node_modules/typescript/lib/typescript.js as JS reference; cannot remove normal npm setup from eventual full tests.",
+    "path": "tsc/internal/testutil/jstest/node.go",
+    "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+    "sha256": "daca63240ff6e26420e9f9fa9fdaf23477d09333cecdb202ad78353dbd9e1472",
+    "source": "exact frozen runtime-source.tar",
+    "startLine": 35
+  },
+  {
+    "displayExcerpt": "func TestMain(m *testing.M) {\n\tcore.ApplyDebugStackLimit()\n\tdefer baseline.Track()()\n\tm.Run()\n}\n",
+    "endLine": 14,
+    "interpretation": "Common TestMain applies stack limit, defers baseline.Track, calls m.Run; collection still executes this wrapper.",
+    "path": "tsc/internal/testrunner/testmain_test.go",
+    "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+    "sha256": "10cf6068edfc411bee2904fca73b9b32507a836760d7c9bbcd20e9fd2d745ff7",
+    "source": "exact frozen runtime-source.tar",
+    "startLine": 10
+  },
+  {
+    "displayExcerpt": "func ApplyDebugStackLimit() {\n\tv := os.Getenv(\"TS_GO_DEBUG_STACK_LIMIT\") //nolint:forbidigo\n\tif v == \"\" {\n\t\treturn\n\t}\n\tn, err := strconv.Atoi(v)\n\tif err != nil || n <= 0 {\n\t\treturn\n\t}\n\trtdebug.SetMaxStack(n)\n}\n",
+    "endLine": 34,
+    "interpretation": "Stack-limit helper reads TS_GO_DEBUG_STACK_LIMIT and otherwise returns. Future explicit environment must avoid unintended inherited settings.",
+    "path": "tsc/internal/core/core.go",
+    "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+    "sha256": "c669af063743873cb2084b3432f17ecf8b2e20655d916c9a4ac53364fd75f067",
+    "source": "exact frozen runtime-source.tar",
+    "startLine": 24
+  },
+  {
+    "displayExcerpt": "\t// trackingDir is the directory where tracking files should be written.\n\t// If non-empty, baseline tracking is enabled.\n\t// Set by Herebyfile.mjs when running full test suites with tracking enabled.\n\ttrackingDir = os.Getenv(\"TSGO_BASELINE_TRACKING_DIR\")\n)\n\n// Track sets up baseline tracking and returns a cleanup function that writes the tracking file.\n// It should be called from TestMain using defer:\n//\n//\tfunc TestMain(m *testing.M) {\n//\t    defer baseline.Track()()\n//\t    m.Run()\n//\t}\nfunc Track() func() {\n\ttrackingInitialized = true\n\n\tif trackingDir == \"\" {\n\t\treturn func() {}\n\t}\n",
+    "endLine": 40,
+    "interpretation": "Explicitly absent tracking env makes Track a no-op cleanup; absence is an input condition.",
+    "path": "tsc/internal/testutil/baseline/testmain.go",
+    "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+    "sha256": "0f6f5b354b79049a49fbac991e6de4f7cd48198b9993f38464c0f3844f725f21",
+    "source": "exact frozen runtime-source.tar",
+    "startLine": 22
+  },
+  {
+    "displayExcerpt": "// helperEnv, when set, makes the test binary act as the mapper subprocess instead of running tests. This\n// lets the out-of-process test spawn a real subprocess (itself) that speaks the mapper protocol over\n// stdio, exercising the same handler code that the in-process spawner runs over a pipe.\nconst helperEnv = \"TSGO_CONTENT_MAPPER_HELPER\"\n\nfunc TestMain(m *testing.M) {\n\tif os.Getenv(helperEnv) == \"1\" {\n\t\t_ = contentmappertest.Serve(context.Background(), stdio{})\n\t\tos.Exit(0)\n\t}\n\tos.Exit(m.Run())\n}\n",
+    "endLine": 29,
+    "interpretation": "Helper env 1 changes TestMain into IPC service; explicitly absent env is necessary.",
+    "path": "tsc/internal/testutil/contentmappertest/mapper_test.go",
+    "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+    "sha256": "e4c66085faa84e87096e833571383d67ecfc3bd1dcbffaec8daded73be427403",
+    "source": "exact frozen runtime-source.tar",
+    "startLine": 18
+  },
+  {
+    "displayExcerpt": "func init() {\n\tif fanotifyAvailable() {\n\t\tfanotifyWatcher.factory = func() watcherImpl { return newFanotifyBackend(false) }\n\t}\n}\n\n// fanotifyAvailable probes whether fanotify_init succeeds with the flags\n// this backend needs.\nfunc fanotifyAvailable() bool {\n\tif runtime.GOOS == \"android\" {\n\t\treturn false\n\t}\n\tfd, err := unix.FanotifyInit(fanotifyInitFlags, unix.O_RDONLY|unix.O_CLOEXEC)\n\tif err != nil {\n\t\treturn false\n\t}\n\t_ = unix.Close(fd)\n\treturn true\n",
+    "endLine": 199,
+    "interpretation": "Init probes kernel capability; failure returns unavailable. No static claim of runtime watcher coverage.",
+    "path": "tsc/internal/fswatch/fanotify_linux.go",
+    "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+    "sha256": "d18a8d35e63ccc0d4dd2929c1e02bde7c6178619542f29d2a4e7701d76a1e568",
+    "source": "exact frozen runtime-source.tar",
+    "startLine": 182
+  },
+  {
+    "displayExcerpt": "// availableWatchers is populated at init time from whichever backends\n// are available on the current platform, plus any test-only watcher\n// variants registered in additionalTestWatchers (see e.g.\n// fanotify_linux_test.go).\nvar availableWatchers []Watcher\n\n// additionalTestWatchers is appended to by platform-specific *_test.go\n// init() functions to register test-only watcher variants (e.g. the\n// fanotify-no-rename backend that exercises the FAN_MOVED_FROM/_TO\n// fallback path). Producers' init() must run before this file's init();\n// since Go runs file inits in lexicographic file-name order and this\n// file is watcher_test.go, that ordering is satisfied for every other\n// *_test.go file in the package.\nvar additionalTestWatchers []Watcher\n\nfunc init() {\n\tfor _, b := range AllWatchers() {\n\t\tif b.Available() {\n\t\t\tavailableWatchers = append(availableWatchers, b)\n\t\t}\n\t}\n\tfor _, b := range additionalTestWatchers {\n\t\tif b.Available() {\n\t\t\tavailableWatchers = append(availableWatchers, b)\n\t\t}\n\t}\n}\n",
+    "endLine": 88,
+    "interpretation": "Available watcher set depends on native init/capability conditions; top-level collection cannot freeze dynamic nested behavior.",
+    "path": "tsc/internal/fswatch/watcher_test.go",
+    "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+    "sha256": "5fd665b6d785c72d123408afffe7a7449c8cf3b5e17f0ba1b67b4669f539c8e2",
+    "source": "exact frozen runtime-source.tar",
+    "startLine": 62
+  },
+  {
+    "displayExcerpt": "//go:generate npx hereby generate:bundled\n\n// Define the below here to consolidate documentation.\n\n// Embedded is true if the bundled files are implemented through an embedded FS.\nconst Embedded = embedded\n",
+    "endLine": 19,
+    "interpretation": "go:generate text is a directive, not an automatic collection command; no generation is proposed.",
+    "path": "tsc/internal/bundled/bundled.go",
+    "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+    "sha256": "2948e963408d9458619fa545e3fa5434a2cbf032eb2a194e9bb4bf56100ac0a6",
+    "source": "exact frozen runtime-source.tar",
+    "startLine": 14
+  },
+  {
+    "displayExcerpt": "    },\n    \"devDependencies\": {\n        \"@typescript/typescript\": \"0.0.0\",\n        \"@types/vscode\": \"~1.125.0\",\n        \"@typescript/bundled-typescript\": \"npm:typescript@7.0.2\",\n        \"@vscode/vsce\": \"4.0.0\",\n        \"esbuild\": \"^0.28.2\"\n",
+    "endLine": 391,
+    "interpretation": "Published native TypeScript7 alias is separately declared for extension packaging, distinct from JS6 reference.",
+    "path": "packages/vscode-typescript/package.json",
+    "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+    "sha256": "72e501c1a9f9d37c707c6915d102893a943ac3e2289c56ce17bf5a98ee25fc3f",
+    "source": "exact frozen runtime-source.tar",
+    "startLine": 385
+  },
+  {
+    "displayExcerpt": "\nconst getPublishedTypeScriptPackageDir = memoize(() => {\n    const candidates = [\n        path.join(extensionDir, \"node_modules\", publishedTypeScriptAliasPackageName),\n        path.join(__dirname, \"node_modules\", publishedTypeScriptAliasPackageName),\n    ];\n\n    for (const candidate of candidates) {\n        if (fs.existsSync(path.join(candidate, \"package.json\"))) {\n            return candidate;\n        }\n    }\n\n    throw new Error(`Could not find ${publishedTypeScriptAliasPackageName}; run npm install first.`);\n});\n\nconst getPublishedTypeScriptPackageJson = memoize(() => {\n    const packageJson = JSON.parse(fs.readFileSync(path.join(getPublishedTypeScriptPackageDir(), \"package.json\"), \"utf8\"));\n    if (packageJson.name !== \"typescript\") {\n        throw new Error(`${publishedTypeScriptAliasPackageName} should alias the typescript package, but found ${packageJson.name}.`);\n    }\n    if (!packageJson.version || typeof packageJson.version !== \"string\") {\n        throw new Error(`${publishedTypeScriptAliasPackageName} package.json did not contain a version.`);\n    }\n    if (!packageJson.optionalDependencies || typeof packageJson.optionalDependencies !== \"object\") {\n        throw new Error(`${publishedTypeScriptAliasPackageName} package.json did not contain platform optionalDependencies.`);\n    }\n",
+    "endLine": 2860,
+    "interpretation": "Published alias lookup is a memoized packaging helper; this static read does not prove all Hereby transitive loading effects.",
+    "path": "Herebyfile.mjs",
+    "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+    "sha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421",
+    "source": "exact frozen runtime-source.tar",
+    "startLine": 2834
+  },
+  {
+    "interpretation": "Source-owned JS6 reference constraint/lock differs from published native7 alias and optional platform package; no inferred execution result.",
+    "parsedValue": "^6.0.3",
+    "path": "package.json",
+    "sha256": "2828c1d269bd9c80d634131ec107ac69f1cfc3bf1f98d24c112c825c8acd7902"
+  },
+  {
+    "interpretation": "Source-owned JS6 reference constraint/lock differs from published native7 alias and optional platform package; no inferred execution result.",
+    "parsedValue": {
+      "node_modules/@typescript/bundled-typescript": {
+        "bin": {
+          "tsc": "bin/tsc"
+        },
+        "dev": true,
+        "engines": {
+          "node": ">=16.20.0"
+        },
+        "integrity": "sha512-8FYau96o3NKOhbjKi/qNvG/W5jhzxkbdm5sj9AbZ/5T5sWqn3hJgLfGx27sRKZWTvyzCP8dLRBTf5tBTSRVUNA==",
+        "license": "Apache-2.0",
+        "name": "typescript",
+        "optionalDependencies": {
+          "@typescript/typescript-aix-ppc64": "7.0.2",
+          "@typescript/typescript-darwin-arm64": "7.0.2",
+          "@typescript/typescript-darwin-x64": "7.0.2",
+          "@typescript/typescript-freebsd-arm64": "7.0.2",
+          "@typescript/typescript-freebsd-x64": "7.0.2",
+          "@typescript/typescript-linux-arm": "7.0.2",
+          "@typescript/typescript-linux-arm64": "7.0.2",
+          "@typescript/typescript-linux-loong64": "7.0.2",
+          "@typescript/typescript-linux-mips64el": "7.0.2",
+          "@typescript/typescript-linux-ppc64": "7.0.2",
+          "@typescript/typescript-linux-riscv64": "7.0.2",
+          "@typescript/typescript-linux-s390x": "7.0.2",
+          "@typescript/typescript-linux-x64": "7.0.2",
+          "@typescript/typescript-netbsd-arm64": "7.0.2",
+          "@typescript/typescript-netbsd-x64": "7.0.2",
+          "@typescript/typescript-openbsd-arm64": "7.0.2",
+          "@typescript/typescript-openbsd-x64": "7.0.2",
+          "@typescript/typescript-sunos-x64": "7.0.2",
+          "@typescript/typescript-win32-arm64": "7.0.2",
+          "@typescript/typescript-win32-x64": "7.0.2"
+        },
+        "resolved": "https://registry.npmjs.org/typescript/-/typescript-7.0.2.tgz",
+        "version": "7.0.2"
+      },
+      "node_modules/@typescript/typescript-linux-arm64": {
+        "cpu": [
+          "arm64"
+        ],
+        "dev": true,
+        "engines": {
+          "node": ">=16.20.0"
+        },
+        "integrity": "sha512-Qh4eU4/y3yDjnfjjyPYihMj5/ODIlmt+Bzu17OI+fiSRDW57QmU5SiN63exPRNJPKUzcc1INa1NXdrJ+MqHjUQ==",
+        "license": "Apache-2.0",
+        "optional": true,
+        "os": [
+          "linux"
+        ],
+        "resolved": "https://registry.npmjs.org/@typescript/typescript-linux-arm64/-/typescript-linux-arm64-7.0.2.tgz",
+        "version": "7.0.2"
+      },
+      "node_modules/typescript": {
+        "bin": {
+          "tsc": "bin/tsc",
+          "tsserver": "bin/tsserver"
+        },
+        "dev": true,
+        "engines": {
+          "node": ">=14.17"
+        },
+        "integrity": "sha512-y2TvuxSZPDyQakkFRPZHKFm+KKVqIisdg9/CZwm9ftvKXLP8NRWj38/ODjNbr43SsoXqNuAisEf1GdCxqWcdBw==",
+        "license": "Apache-2.0",
+        "resolved": "https://registry.npmjs.org/typescript/-/typescript-6.0.3.tgz",
+        "version": "6.0.3"
+      }
+    },
+    "path": "package-lock.json",
+    "sha256": "52b6c9bd0a26ef1b0fc27dfbfaa00df6a047cdddd587d07c4f6c1c3345faf5cf"
+  },
+  {
+    "displayExcerpt": "//\t-list regexp\n//\t    List tests, benchmarks, fuzz tests, or examples matching the regular\n//\t    expression. No tests, benchmarks, fuzz tests, or examples will be run.\n//\t    This will only list top-level tests. No subtest or subbenchmarks will be\n//\t    shown.\n",
+    "endLine": 3466,
+    "exportSha256": "d8de699302fac90a58280e0757c22a7aa82a2c40d48d72ab2c8ffc7c933681d6",
+    "interpretation": "Go -list lists top-level identities without test bodies; no subtest/subbenchmark inference.",
+    "path": "usr/local/go/src/cmd/go/alldocs.go",
+    "sha256": "09b0d7570c1695acc0ccad5593e3f5c2f888548cfc7f80a49933a19f3514aa69",
+    "sourceImageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+    "startLine": 3462
+  },
+  {
+    "displayExcerpt": "\tif *matchList != \"\" {\n\t\tlistTests(m.deps.MatchString, m.tests, m.benchmarks, m.fuzzTargets, m.examples)\n\t\tm.exitCode = 0\n\t\treturn\n\t}\n",
+    "endLine": 2570,
+    "exportSha256": "d8de699302fac90a58280e0757c22a7aa82a2c40d48d72ab2c8ffc7c933681d6",
+    "interpretation": "M.Run listing branch returns before normal running branch; package init and TestMain remain outside that fact.",
+    "path": "usr/local/go/src/testing/testing.go",
+    "sha256": "27c59df1832eae458ab8d2d4b6a6252bbd1ea2a3001734910d1ce2decff16f81",
+    "sourceImageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+    "startLine": 2566
+  },
+  {
+    "displayExcerpt": "// SetFromGOFLAGS sets the flags in the given flag set using settings in $GOFLAGS.\nfunc SetFromGOFLAGS(flags *flag.FlagSet) {\n\tInitGOFLAGS()\n\n\t// This loop is similar to flag.Parse except that it ignores\n\t// unknown flags found in goflags, so that setting, say, GOFLAGS=-ldflags=-w\n\t// does not break commands that don't have a -ldflags.\n\t// It also adjusts the output to be clear that the reported problem is from $GOFLAGS.\n\twhere := \"$GOFLAGS\"\n\tif runtime.GOOS == \"windows\" {\n\t\twhere = \"%GOFLAGS%\"\n\t}\n\tfor _, goflag := range goflags {\n\t\tname, value, hasValue := goflag, \"\", false\n\t\t// Ignore invalid flags like '=' or '=value'.\n\t\t// If it is not reported in InitGOFlags it means we don't want to report it.\n\t\tif i := strings.Index(goflag, \"=\"); i == 0 {\n\t\t\tcontinue\n\t\t} else if i > 0 {\n\t\t\tname, value, hasValue = goflag[:i], goflag[i+1:], true\n\t\t}\n\t\tif strings.HasPrefix(name, \"--\") {\n\t\t\tname = name[1:]\n\t\t}\n\t\tf := flags.Lookup(name[1:])\n\t\tif f == nil {\n\t\t\tcontinue\n",
+    "endLine": 116,
+    "exportSha256": "d8de699302fac90a58280e0757c22a7aa82a2c40d48d72ab2c8ffc7c933681d6",
+    "interpretation": "Global GOFLAGS recognized elsewhere do not automatically break commands lacking a flag; actual go-env/list outcome still unobserved.",
+    "path": "usr/local/go/src/cmd/go/internal/base/goflags.go",
+    "sha256": "cf287bd9d900d6f1c3b4b99dad154f226edb675d49c5ec0f315204ff5212239d",
+    "sourceImageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+    "startLine": 90
+  }
+]

@@ -1,0 +1,197 @@
+{
+  "identity": "e1-zellij-establishment-contract-20261029",
+  "date": "2026-10-29",
+  "state": "proposal-only-not-authorized-code-or-confidence-change",
+  "repository": "github.com/zellij-org/zellij",
+  "revision": "1f3df933978e00c246553070310175c392fcfe4f",
+  "taskId": "e1-rust-01-repository-tests",
+  "sourceReviewFreezeSha256": "11d33120596bfe8cca2d5983f419e80eef17816acaade50bb398d500fc0bc58e",
+  "existingCoordinatorSourceDecision": "Documented applicability and prerequisite contract accepted; no discovered contradiction; automatic high remains separately gated.",
+  "recognitionMode": "Initial bounded named recipe accepts this reviewed9-file source bundle; unreviewed byte/control/prose drift does not inherit establishment. No general Rust interpreter, syntax-derived completeness or claim of future-revision generalization.",
+  "requiredInputs": [
+    {
+      "path": "CONTRIBUTING.md",
+      "role": "Entire explicit recipe, tool requirements, target-dir warning and separate e2e sections; keep paragraph/section authority.",
+      "reviewedSha256": "2c4575e7a3575609fdde406b8c87f3df53802460dbfb03b4253f4330ab37f63a",
+      "retainedPath": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/zellij-org/zellij/CONTRIBUTING.md",
+      "required": true,
+      "maximumBytes": 131072
+    },
+    {
+      "path": "rust-toolchain.toml",
+      "role": "Exact declared toolchain/components/targets.",
+      "reviewedSha256": "733cf0884a5f62e74d4362b290704b572061e71e9f7989096aef165f99de0fdf",
+      "retainedPath": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/zellij-org/zellij/rust-toolchain.toml",
+      "required": true,
+      "maximumBytes": 131072
+    },
+    {
+      "path": ".cargo/config.toml",
+      "role": "Alias, target-dir, target-specific linker and wasm rustflags.",
+      "reviewedSha256": "d42813632ce542b468c718473de1a4a6c8f6d302c534717a2f19b7aef10dbc3e",
+      "retainedPath": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/zellij-org/zellij/.cargo/config.toml",
+      "required": true,
+      "maximumBytes": 131072
+    },
+    {
+      "path": "Cargo.toml",
+      "role": "Owning root package, workspace/default-members, features and Rust declaration.",
+      "reviewedSha256": "c02efc9801eefadf579135c968cafe27d2d5e12b86ac5e020ec39fe2130829a2",
+      "retainedPath": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/zellij-org/zellij/Cargo.toml",
+      "required": true,
+      "maximumBytes": 131072
+    },
+    {
+      "path": "xtask/src/main.rs",
+      "role": "Dispatcher, root/Cargo resolution and exact maintained member list.",
+      "reviewedSha256": "5e213118f58efae8bd039ff4436dc6fc4e8b4aeaa44472dba764101643b30df3",
+      "retainedPath": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/zellij-org/zellij/xtask/src/main.rs",
+      "required": true,
+      "maximumBytes": 131072
+    },
+    {
+      "path": "xtask/src/test.rs",
+      "role": "Default ordered test phases, host target, feature checks and failfast propagation.",
+      "reviewedSha256": "561daa9a37efaf44ba285aa88669fb9228de402696bb25e310340238b021e0cb",
+      "retainedPath": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/zellij-org/zellij/xtask/src/test.rs",
+      "required": true,
+      "maximumBytes": 131072
+    },
+    {
+      "path": "xtask/src/build.rs",
+      "role": "Proto setup, wasm plugin build/stamp/force conditions, no new prerequisite omission.",
+      "reviewedSha256": "ae5fcc92076183ff7e1fea0555576ea660933721600af3d00ba7e824a46cc378",
+      "retainedPath": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/zellij-org/zellij/xtask/src/build.rs",
+      "required": true,
+      "maximumBytes": 131072
+    },
+    {
+      "path": "xtask/src/flags.rs",
+      "role": "Declared no-optout/no-filter default and separate integration/e2e commands.",
+      "reviewedSha256": "ab0542ae1bad28ee9f56386868e2f1a8eda897c1dc05e0425b8d0933ca3abf78",
+      "retainedPath": "benchmarks/head-to-head/e1-zellij-establishment-source-20261029/sources/xtask/src/flags.rs.txt",
+      "required": true,
+      "maximumBytes": 131072
+    },
+    {
+      "path": "xtask/src/metadata.rs",
+      "role": "Root feature subset meaning; no workspace enumeration inference.",
+      "reviewedSha256": "861f4974828c70422a0098676cddab2f3446e5c84241297270d8d9766e998154",
+      "retainedPath": "benchmarks/head-to-head/e1-zellij-establishment-source-20261029/sources/xtask/src/metadata.rs.txt",
+      "required": true,
+      "maximumBytes": 131072
+    }
+  ],
+  "bounds": {
+    "maximumFiles": 9,
+    "maximumBytesPerFile": 131072,
+    "maximumTotalBytes": 1048576,
+    "reads": "Existing read_input contained regular non-symlink conventions; fail closed for ancestor/leaf links, reparse/path traversal/invalid UTF8/oversize/duplicate/conflicting selected source. Read each once for inference; verification rereads independently.",
+    "networkOrExecution": false
+  },
+  "expectedTuple": {
+    "command": "cargo xtask test",
+    "working_directory": ".",
+    "scope": "repository",
+    "prerequisites": [
+      "Use Rust1.95.0 and the rustfmt/clippy components plus wasm32-wasip1 and x86_64-unknown-linux-musl targets declared by rust-toolchain.toml.",
+      "Install protoc for documented protobuf generation.",
+      "Install pkg-config and OpenSSL for test; minimum compatible versions are not declared.",
+      "Preserve .cargo/config.toml target-dir=target and the documented debug plugin path; do not override CARGO_TARGET_DIR. A target folder symlink is the documented sharing alternative.",
+      "Use the intended checkout/toolchain resolution for CARGO_MANIFEST_DIR, CARGO and rustc/PATH; consumer override state must be checked locally.",
+      "When targeting x86_64-pc-windows-gnu, provide configured linker x86_64-w64-mingw32-gcc."
+    ],
+    "source": "CONTRIBUTING.md"
+  },
+  "retainedQualifications": [
+    "Repository means maintainer default19-entry application-test route, not every21workspace member:12plugin packages and7nonplugin entries. xtask and zellij-integration-tests test selection is not claimed.",
+    "No no-web/no-terminal/filter arguments added; separate in-processintegration/e2e setup is not part of this route.",
+    "Plugin rebuilding and protobuf generation depend on force/cache/stamp/timestamps; no claim every invocation rebuilds. Tests short-circuit on prior phase failure.",
+    "No observed installation, dependency success, Windows/all-platform readiness, actual execution or benefit. Documented prerequisites are not a universal sufficiency warranty.",
+    "No partial materialization absence proof or assumption user local/global overrides absent."
+  ],
+  "semanticChecks": [
+    "Bind explicit visible maintainer Building section command and test-specific/native prerequisites; reject hidden/indented declarations, changed section ownership, conflicting setup or conditional prose rather than compiling arbitrary prose. Initial exact reviewed document byte fingerprint prevents silently accepting new prose.",
+    "Parse root Cargo/toolchain/config TOML with owning root path, exact alias run --package xtask --, target-dir target, conditional GNU linker, pinned toolchain/components/targets. Do not trust load_best_cargo_toml selecting a nested manifest.",
+    "Confirm reviewed dispatcher/root/default flags and19-member list are the exact assessed source bodies, and list is a subset of root21members with exact2omissions. A bounded fingerprint/skeleton check is allowed; no Rust evaluation.",
+    "Confirm reviewed test/build/metadata bodies retain host plugin aggregation, nonplugin all-features route, optional-feature checks and documented state conditions. Any unreviewed semantic/body change receives no establishment witness.",
+    "Construct candidate from source values; independent candidate-specific verifier reconstructs expected tuple from reviewed contract, rereads all9sources, and checks complete exact tuple/source/generatedAt plus separate mechanical attachment integrity.",
+    "Retain each relied-on source passage/hash in sourceBindingsJson; bind command+cwd+scope+entire ordered prerequisite list+context source and checkedAt to valueJson and generatedAt. Missing any binding cannot pass.",
+    "Only an independently approved semantic establishment check may permit score above Medium. Scalar assessment, parser output/evidence flag, file existence or source_bindings_intact alone cannot do so."
+  ],
+  "rejectionMutations": [
+    "Delete/oversize/symlink ancestor or leaf of any9requiredfiles; invalid UTF8 or path traversal.",
+    "Move command into HTML comment/indented example, change heading ownership or append unconsumed required test setup.",
+    "Change command to bare cargo test, add no-web/no-terminal/filter, cwd/component or omit/reorder/alter prerequisites without reviewed matching tuple.",
+    "Modify toolchain pin/components/targets, alias, target-dir or GNU linker condition; strip platform condition in output.",
+    "Change hardcoded member list, workspace membership, nonplugin --all-features, optional-feature stages, flags/default/control flow or build timestamp logic.",
+    "Add external setup command or include/helper edge in reviewed bodies; no inherited high when source bundle changes.",
+    "Use unrelated valid source bindings, stale checkedAt/generatedAt, mismatching valueJson, missing candidate-specific semantic check or forged public evidence success marker.",
+    "Keep only current crawler-selected files and pretend missing config/toolchain/xtask bodies are absent.",
+    "Keep same candidate command but require a source-authored conditional prerequisite that is missing from output."
+  ],
+  "positiveControls": [
+    "Unmodified nine retained sources reproduce exact original task with all qualifications and independently verified evidence.",
+    "Explicit GNU linker remains target conditional, all21 claim rejected while maintained19default supported.",
+    "Invalid source or tuple mutation cannot regain automatic acceptance through scalar/adjudication fallback.",
+    "After importer public export, exact tuple/source/time/attachments survive unchanged; source-bound consumer remains subject to existing policy."
+  ],
+  "confidenceRationale": {
+    "aboveMediumNeeds": [
+      "Coordinator-approved source completeness/applicability disposition for this exact task and reviewed recipe contract, distinct from author grammar/byte tests.",
+      "Independent source/code review challenges owning sections, prerequisites/conditions/default scope and verifier reachability before enablement.",
+      "Fresh candidate-specific semantic witness for exact reviewed bundle and tuple, plus independent existing mechanical source-binding pass; no attachment-provided trust flag.",
+      "Meaningful positive/negative fixtures and actual first-party import/verification/score/export/consumer controls prove wrong tuples abstain and current exact route is accepted without scalar promotion."
+    ],
+    "doesNotNeed": [
+      "Upstream execution or exhaustive transitive dependency-success proof for documented source gold.",
+      "A new public/protocol schema, general proof registry, policy framework or automatic executor."
+    ],
+    "doesNotEstablish": [
+      "Execution success, universal environment readiness, independent generalization, causal consumer benefit or maintainer/canonical/reviewed status."
+    ]
+  },
+  "owningCodeProposal": [
+    {
+      "path": "crates/dotrepo-core/src/import/commands/context.rs",
+      "change": "Wire one private named recipe helper; preserve existing recipes/scalars."
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/commands/context/rust_xtask_recipe.rs (new)",
+      "change": "Bounded nine-file source recognizer/candidate+bindings; use existing types and safe reads, no broad ImportSources field needed."
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/context_establishment.rs (new, or a narrow separately owned equivalent)",
+      "change": "Candidate-specific semantic establishment check for approved exact recipe; must not redefine mechanical context_verification success as completeness."
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/mod.rs",
+      "change": "Root-owned minimal private verifier wiring."
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/fields.rs",
+      "change": "Root-owned candidate-specific higher assessment eligibility only when semantic check+exact binding pass; absent witness stays current Medium/Unresolved."
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/new Zellij recipe fixture plus expectations.json",
+      "change": "Full nine-source positive and meaningful mutation controls; existing frozen sources/results immutable."
+    }
+  ],
+  "crawlerLimit": {
+    "source": "crates/dotrepo-crawler/src/github.rs SUPPLEMENTAL_ROOT_FILES/fetch_rust_manifest_files",
+    "finding": "Current materialization does not provide rust-toolchain.toml,.cargo/config.toml or xtask source bodies; rootCargo causes nested Rust scan early return. Existing materialize.extra_files can write them when explicitly acquired.",
+    "initialScope": "Local/retained complete recipe input only. Partial hosted crawler input must abstain; no crawler change authorized in this proposal.",
+    "laterSeparatePacket": "If required, bounded direct source acquisition/materialization of these exact positive required paths, not absent-file claims/general tree proof or execution."
+  },
+  "gateOrder": [
+    "Root independently reviews this proposed contract and assigns code ownership before implementation.",
+    "Implement inference and separately reviewed semantic verification with meaningful fixtures, without confidence by parser declaration.",
+    "Root combined checks/public export exact-source consumer gate; independent mutation review.",
+    "Preserve old supported-miss as known development; future heldout/consumer comparison remains independent."
+  ],
+  "limits": [
+    "Single already-exposed known-development recipe; exact source fingerprint intentionally brittle under maintainer edits.",
+    "No broadRust/xtask coverage or guarantee version updates automatically qualify; re-review required for changed fingerprints.",
+    "Author is sourceproposal/followupassessor, not independent second curator. No code/Cargo/source/daemon/network/provider execution."
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "beforeReviewFreezeSha256": "2329a7941142c543ea6450972f5b1041f78f02aad36d7b232b3059a0d773a7e1",
+  "boundaryAssessment": [
+    "All exact before tmpfs cases now reject, and positives retain reviewed exact UID/GID/mode with order-independent unique options. No extra roots/conflicts/duplicates permitted. Safe create argv unchanged.",
+    "All before parser cases now reject. Actual run passes validated regular source inventory into package parser; membership, cross-field uniqueness, safe .go basenames and ImportPath-relative directories checked.",
+    "Only original three Go commands, source/image/Go-only projection/environment/CC-CXX/limits/tool/source observers remain; no npm/helper/task-body/network fallback or buildcache export introduced.",
+    "Transport and builtin Node observer bytes and used Python functions equal prior independently replayed evidence; prior host Node file hash still matches. No fresh Node call needed."
+  ],
+  "cacheGloballyQualified": false,
+  "campaignAdmitted": false,
+  "executionAuthorized": false,
+  "findings": [],
+  "limits": [
+    "No real daemon/Go/Cargo/package/upstream/native/provider/network action. Collection may compile/init/TestMain only after separate root authorization.",
+    "A real independent review based on synthetic/data controls is not actual native collection, image/tool/environment qualification, task outcome or campaign usefulness.",
+    "Existing declared limits remain: source observations at two instants do not prove modes/intervening mutations; listing cannot certify against arbitrary misleading initializer stdout or establish dynamic subtest/fuzz-seed/test-body outcomes.",
+    "Internal subject/review assertions enforce operator continuity, not cryptographic human identity or a general report framework. Future changed driver bytes need a new review/acceptance subject."
+  ],
+  "nativeCollectionOccurred": false,
+  "nativeTaskAdmitted": false,
+  "resolvedBeforeFindings": [
+    "F1 current driver/review subject continuity",
+    "F2 exact actual tmpfs map/options",
+    "F3 package directory/selected file/source membership consistency"
+  ],
+  "roleDisclosure": "Reviewer authored original source plan/projection, not collection driver/amendment. Independent implementation review, not blind task trial.",
+  "scope": "go01-collection-only",
+  "state": "independent-go01-collection-driver-review-passed",
+  "subject": {
+    "authorFreezeSha256": "0bdbd19da1a1607bb4a104156c008a05b934736556465d632364e634daeaa8e3",
+    "driverPlanSha256": "235244044e794fe26ba7f241b2abdaf37387546cae93a60cb956e2059fe07cbd",
+    "packetIdentity": "go01-collection-driver-amendment-1"
+  },
+  "subjectAndClosureAssessment": [
+    "Real frozen author FREEZE binds the exact current plan and complete explicit script/local closure. Positive current_subject equals independently hashed original author bytes.",
+    "Copied closure controls reject missing plan/script/local hashes, wrong script bytes, wrong local bytes, wrong packet identity, stale top-level plan and incomplete supplied plan. Copies restored; original frozen bytes untouched.",
+    "Scoped acceptance must equal the current plan/FREEZE/packet subject. Hash-valid before/unrelated/stale/findings-present/missing/wrong-type/wrong-scope/synthetic/admission-bearing review objects reject.",
+    "Four full fake driver paths use actual authorize: current review shape completes synthetic listing; unrelated review makes zero fake daemon calls; create and cleanup failure remain incomplete with retained results. Owned review/auth fixtures authorize no real action."
+  ],
+  "synthetic": false,
+  "taskOutcomeObserved": false,
+  "validation": {
+    "authorAmendmentArtifactsVerified": 29,
+    "authorAmendmentControlsPassed": 40,
+    "authorFakeTransportControlsPassed": 2,
+    "authorPriorFakeControlsPassed": 59,
+    "beforeReviewArtifactsVerifiedUnchanged": 11,
+    "freshNodeObserverCalls": 0,
+    "newIndependentControlsPassed": 45,
+    "newIndependentFullFakePaths": 4,
+    "parentArtifactsVerifiedUnchanged": 33,
+    "retainedIndependentBeforeChallengesNowMatch": 23,
+    "retainedOldAcceptanceReuseRejected": true,
+    "ruffCheck": "passed --no-cache",
+    "ruffFormatCheck": "passed --no-cache",
+    "unchangedObserverEvidenceReused": true
+  }
+}

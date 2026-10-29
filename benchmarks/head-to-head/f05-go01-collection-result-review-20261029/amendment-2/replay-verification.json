@@ -1,0 +1,39 @@
+{
+  "state": "verified-retained-incomplete-collection-attempt",
+  "nativeCollectionAttempted": true,
+  "packageInventoryCount": 104,
+  "rawCollectionEvents": 732,
+  "actionCounts": {
+    "build-output": 2,
+    "build-fail": 2,
+    "start": 104,
+    "output": 520,
+    "fail": 61,
+    "pass": 25,
+    "skip": 18
+  },
+  "packageTerminalsObserved": 104,
+  "collectionCompleted": false,
+  "fullCollectionManifestExists": false,
+  "listingPassesAreTaskPasses": false,
+  "testBodyEventsObserved": false,
+  "initializationExecutionExtent": "unresolved",
+  "terminationCause": null,
+  "oomProven": false,
+  "goTestListExitCode": 1,
+  "goTestListSeconds": 195.7369840000756,
+  "goTestListStdoutBytes": 127015,
+  "goTestListStderrBytes": 0,
+  "daemonCalls": 17,
+  "stdinBytes": 585257959,
+  "rawOutputBytes": 869478,
+  "elapsedSeconds": 215.05245641618967,
+  "costUsd": null,
+  "sourceAndToolsAfterObserved": false,
+  "independentAbsenceObservation": false,
+  "inputArchives": {
+    "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+    "projectionArchiveSha256": "76ea2bfa6725335b889d44fed07f40f6eeb804d124d683ad4f2c0a6a2607bcfd",
+    "sourceTreeBeforeMatchesArchive": true
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "state": "retained-actual-NPM-setup-inspects-have-no-newly-identified-tmpfs-counterexamples",
+  "observations": [
+    {
+      "path": "benchmarks/head-to-head/f05-go01-offline-setup-result-20261029/evidence/logs/container-inspect/stdout.bin",
+      "sha256": "6fcd10e50f8150a60201e10b50b3f2750674bb662af0f15d178551e9bd3582de",
+      "tmpfs": {
+        "/tmp": "rw,exec,nosuid,nodev,size=512m,uid=1000,gid=1000,mode=0700",
+        "/workspace": "rw,exec,nosuid,nodev,size=8g,uid=1000,gid=1000,mode=0700",
+        "/workspace/dependency-cache": "rw,exec,nosuid,nodev,size=1g,uid=1000,gid=1000,mode=0700"
+      },
+      "mounts": []
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-go01-offline-setup-result-20261029/evidence/logs/offline-final-inspect/stdout.bin",
+      "sha256": "6fcd10e50f8150a60201e10b50b3f2750674bb662af0f15d178551e9bd3582de",
+      "tmpfs": {
+        "/tmp": "rw,exec,nosuid,nodev,size=512m,uid=1000,gid=1000,mode=0700",
+        "/workspace": "rw,exec,nosuid,nodev,size=8g,uid=1000,gid=1000,mode=0700",
+        "/workspace/dependency-cache": "rw,exec,nosuid,nodev,size=1g,uid=1000,gid=1000,mode=0700"
+      },
+      "mounts": []
+    }
+  ],
+  "scope": "Read-only static check of prior actual metadata; original inspector accepted broader synthetic variants, but these exact retained observations have intended roots/options with no duplicates/conflicts. No fresh daemon/runtime observation or historical mutation."
+}

@@ -1,0 +1,29 @@
+--- amendment-2/collection.py
++++ amendment-3/collection.py
+@@ -33,6 +33,7 @@
+     "observer_controls.py",
+     "amendment_controls.py",
+     "goenv_controls.py",
++    "testonly_controls.py",
+ }
+ LOCAL_NAMES = {
+     "compiler-context-decision.json",
+@@ -40,6 +41,9 @@
+     "goenv-source-semantics.json",
+     "actual-go-env-stdout.bin",
+     "actual-go-env-receipt.json",
++    "test-only-source-semantics.json",
++    "actual-go-list-stdout.bin",
++    "actual-go-list-receipt.json",
+ }
+ COMMANDS = [
+     "go env -json GOOS GOARCH GOVERSION GOTOOLCHAIN GOENV GOWORK GOFLAGS CGO_ENABLED CC CXX",
+@@ -87,7 +91,7 @@
+     require(file_sha(NEXT / "plan.json") == NEXT_PLAN_SHA, "changed parent collection plan")
+     parent = json.loads((NEXT / "plan.json").read_text())
+     require(
+-        plan.get("identity") == "go01-collection-driver-amendment-2",
++        plan.get("identity") == "go01-collection-driver-amendment-3",
+         "changed driver packet identity",
+     )
+     require(

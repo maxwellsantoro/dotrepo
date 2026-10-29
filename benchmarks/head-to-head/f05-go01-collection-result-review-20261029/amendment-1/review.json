@@ -1,0 +1,63 @@
+{
+  "archiveAndFrozenParserReplay": "passed local-data verifier --input-archives",
+  "assessment": [
+    "All87child artifacts and78original files verified, parent91 unchanged.",
+    "Exact currentplan/authorFREEZE/independentpassedreview/acceptance/authorization lineage retained; query correction prospective, runtime source/image/cache/inputenv/bounds unchanged.",
+    "All16rawtrace triplets and actualargv lists independently checked, including exactnewgo-list and same prior-safecreate/isolation/env/provision/observation/cleanup commands.",
+    "Raw104unique packageobjects include one test-only package with0Go/0Cgo/3Test/4368XTest files; these are raw file counts, not test case counts or accepted coverage.",
+    "Rawpackagecopy lossless, noaccepted inventory/collection artifacts. Frozenownedparser rejection replayed without importing upstream code.",
+    "Reportcurrent andall-three elapsed/call/byte totals matchrawreceipts. Costsunknown/null; no consumercomparison."
+  ],
+  "authorMutationControlsReplayed": 8,
+  "cacheGloballyQualified": false,
+  "campaignAdmitted": false,
+  "executionAuthorized": false,
+  "findings": [],
+  "limits": [
+    "Initialsource/cache/tool/tree evidence only; after checks skipped.",
+    "Cleanup supported by same-attempt removal/inspect/list receipts, no independentabsence observation.",
+    "Outerexit status is coordinator transcription; no complete outerargv/process receipt.",
+    "No live daemon/Go/Cargo/Node/package/upstream/native/provider/network action by reviewer.",
+    "Known exposeddevelopment case, notholdout qualification/taskcompletion/consumerproof."
+  ],
+  "nativeCollectionOccurred": false,
+  "nativeTaskAdmitted": false,
+  "outcome": "Actual go-list exit0/raw104objects preserved; frozen parser rejected required test-only package. No accepted inventory or go-test-list. Result remains incomplete.",
+  "roleDisclosure": "Reviewer authored prior source proposal/projection and independent driver/result reviews, not runtime/operator or result packaging. Static independent review, not blind trial.",
+  "ruffCheck": "passed --no-cache",
+  "ruffFormatCheck": "passed --no-cache",
+  "scope": "actual run3 evidence preservation only",
+  "state": "independent-retained-incomplete-result-review-passed",
+  "subject": {
+    "driverAuthorFreezeSha256": "a922cea56e81f471b1a6cd69ec576abcde7b9dd67aed246cb745e3432531196e",
+    "driverPlanSha256": "c7dbacdf6c3966f66fd0ef805a85db452ce72180d3db22347a5c8a06f941d4a0",
+    "resultPacketFreezeSha256": "297d15b898895d6d228a94d4a85ffa3df4f0bff4a7bfc9f5ecfdecd2169efb91"
+  },
+  "synthetic": false,
+  "taskOutcomeObserved": false,
+  "validation": {
+    "actualArgvClosures": 16,
+    "afterIntegrity": "not established",
+    "cleanupEvidence": "same-attempt only",
+    "costUsd": null,
+    "elapsedSeconds": 17.91199929197319,
+    "goTestListExecuted": false,
+    "inventoryAccepted": false,
+    "nativeCollectionOccurred": false,
+    "newLiveActions": 0,
+    "originalCopies": 78,
+    "packetArtifacts": 87,
+    "parentArtifactsUnchanged": 91,
+    "rawOutputBytes": 742463,
+    "rawTestOnlyFileCounts": {
+      "CgoFiles": 0,
+      "GoFiles": 0,
+      "TestGoFiles": 3,
+      "XTestGoFiles": 4368
+    },
+    "rawUniquePackageObjects": 104,
+    "state": "independently-verified-incomplete-go-list-parser-result",
+    "stdinBytes": 585257959,
+    "taskOutcomeObserved": false
+  }
+}

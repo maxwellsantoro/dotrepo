@@ -1,0 +1,201 @@
+{
+  "passed": 40,
+  "controls": [
+    {
+      "case": "positive historical tmpfs container-inspect",
+      "passed": true,
+      "historicalOnly": true
+    },
+    {
+      "case": "positive historical tmpfs offline-final-inspect",
+      "passed": true,
+      "historicalOnly": true
+    },
+    {
+      "case": "same exact options reordered",
+      "passed": true
+    },
+    {
+      "case": "reject-tmpfs-conflicting-size",
+      "passed": true
+    },
+    {
+      "case": "reject-tmpfs-suid-override",
+      "passed": true
+    },
+    {
+      "case": "reject-tmpfs-extra-overlay",
+      "passed": true
+    },
+    {
+      "case": "reject-tmpfs-duplicate-same-size",
+      "passed": true
+    },
+    {
+      "case": "reject-tmpfs-duplicate-nosuid",
+      "passed": true
+    },
+    {
+      "case": "reject-tmpfs-missing-owner",
+      "passed": true
+    },
+    {
+      "case": "reject-tmpfs-wrong-mode",
+      "passed": true
+    },
+    {
+      "case": "reject-tmpfs-unknown-option",
+      "passed": true
+    },
+    {
+      "case": "reject-tmpfs-missing-root",
+      "passed": true
+    },
+    {
+      "case": "reviewed safe create argv unchanged",
+      "passed": true
+    },
+    {
+      "case": "reject-selected-package-directory-alias",
+      "passed": true
+    },
+    {
+      "case": "reject-selected-package-dotdot-source",
+      "passed": true
+    },
+    {
+      "case": "reject-selected-package-dot-source",
+      "passed": true
+    },
+    {
+      "case": "reject-selected-package-duplicate-source",
+      "passed": true
+    },
+    {
+      "case": "reject-selected-package-cross-field-duplicate",
+      "passed": true
+    },
+    {
+      "case": "reject-selected-package-absolute-source",
+      "passed": true
+    },
+    {
+      "case": "reject-selected-package-backslash-source",
+      "passed": true
+    },
+    {
+      "case": "reject-selected-package-control-source",
+      "passed": true
+    },
+    {
+      "case": "reject-selected-package-wrong-extension",
+      "passed": true
+    },
+    {
+      "case": "reject-selected-package-missing-source-in-inventory",
+      "passed": true
+    },
+    {
+      "case": "legitimate Go Cgo Test XTest and zero-test packages",
+      "passed": true
+    },
+    {
+      "case": "subject-valid-current-subject",
+      "passed": true,
+      "accepted": true,
+      "syntheticOwnedAssertionOnly": true
+    },
+    {
+      "case": "subject-stale-acceptance-plan",
+      "passed": true,
+      "accepted": false,
+      "syntheticOwnedAssertionOnly": true
+    },
+    {
+      "case": "subject-stale-acceptance-freeze",
+      "passed": true,
+      "accepted": false,
+      "syntheticOwnedAssertionOnly": true
+    },
+    {
+      "case": "subject-stale-review-plan",
+      "passed": true,
+      "accepted": false,
+      "syntheticOwnedAssertionOnly": true
+    },
+    {
+      "case": "subject-stale-review-freeze",
+      "passed": true,
+      "accepted": false,
+      "syntheticOwnedAssertionOnly": true
+    },
+    {
+      "case": "subject-wrong-review-packet",
+      "passed": true,
+      "accepted": false,
+      "syntheticOwnedAssertionOnly": true
+    },
+    {
+      "case": "subject-arbitrary-review",
+      "passed": true,
+      "accepted": false,
+      "syntheticOwnedAssertionOnly": true
+    },
+    {
+      "case": "subject-before-review",
+      "passed": true,
+      "accepted": false,
+      "syntheticOwnedAssertionOnly": true
+    },
+    {
+      "case": "subject-findings-present",
+      "passed": true,
+      "accepted": false,
+      "syntheticOwnedAssertionOnly": true
+    },
+    {
+      "case": "subject-findings-missing",
+      "passed": true,
+      "accepted": false,
+      "syntheticOwnedAssertionOnly": true
+    },
+    {
+      "case": "subject-review-synthetic",
+      "passed": true,
+      "accepted": false,
+      "syntheticOwnedAssertionOnly": true
+    },
+    {
+      "case": "subject-wrong-review-scope",
+      "passed": true,
+      "accepted": false,
+      "syntheticOwnedAssertionOnly": true
+    },
+    {
+      "case": "subject-review-authorizes",
+      "passed": true,
+      "accepted": false,
+      "syntheticOwnedAssertionOnly": true
+    },
+    {
+      "case": "subject-auth-old-freeze",
+      "passed": true,
+      "accepted": false,
+      "syntheticOwnedAssertionOnly": true
+    },
+    {
+      "case": "subject-freeze-missing-script",
+      "passed": true,
+      "accepted": false,
+      "syntheticOwnedAssertionOnly": true
+    },
+    {
+      "case": "subject-freeze-old-plan",
+      "passed": true,
+      "accepted": false,
+      "syntheticOwnedAssertionOnly": true
+    }
+  ],
+  "actualCollectionOrDaemonCalls": 0,
+  "syntheticAssertionFixturesNotRealReviews": true
+}

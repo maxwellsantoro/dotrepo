@@ -1,0 +1,24 @@
+{
+  "at": "2026-10-29T09:55:47.919307+00:00",
+  "excludedActions": [
+    "daemon",
+    "network",
+    "Go",
+    "Cargo",
+    "package manager",
+    "upstream code",
+    "provider/model",
+    "index edits"
+  ],
+  "incompleteInitialControl": "An earlier inline assertion stopped without saved results before complete source/projection checking; subsequent named-member diagnostic compared all37 retained source raw bytes/hash successfully. No discrepancy is being credited as an upstream finding. This saved checker replaces that incomplete control.",
+  "inputs": {
+    "parentCacheSha256": "583fad501fa7b1a1a6d85ab8fe4b890786e39c1e016f785d6d3fb9d060383284",
+    "projectionFreezeSha256": "424d9381ba042a60ba562cae5236279225d27c984a17636a8fa7e8d1d7e256ad",
+    "projectionTarSha256": "76ea2bfa6725335b889d44fed07f40f6eeb804d124d683ad4f2c0a6a2607bcfd",
+    "proposalFreezeSha256": "c2f6160768d023eee42f62e51511a5af53d448fff0d7f1edc807bc4a9623a09d"
+  },
+  "permittedActions": "Local retained file/source/tar reads and stdlib hashes; no extraction or package execution",
+  "reviewer": "same development reviewer; not fresh blind model exposure",
+  "scope": "Source-only collection proposal plus exact regular Go module projection; no task/native/campaign admission",
+  "state": "before-independent-local-source-projection-verification"
+}

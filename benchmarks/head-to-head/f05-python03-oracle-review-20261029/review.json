@@ -1,0 +1,65 @@
+{
+  "campaignAdmitted": false,
+  "checks": "Own stdlib verifier passed all13 packet artifacts/8 history bindings/981 source members/20 exact texts/18 spans/20 skip-site bindings/32 AST parses and exact7 method identities. Ruff check/format passed --no-cache.",
+  "consumerBenefitMeasured": false,
+  "disposition": {
+    "alternatives": "Documented root unittest discover; explicit full nosetests test; make test additionally flake8. Exact interpreter/runner/collection equivalence is unobserved.",
+    "negativeBoundary": "test_download180-182 exhausted network return and unknown skips/returns are noncompletion, even with pass/green summary. Other broken/capability cases need exact prospective acceptance.",
+    "readiness": "No executable oracle, observer, environment or native manifest exists; packet explicitly retains those gates and all admissions false. No premature runnable claim found.",
+    "scope": "Full maintained aggregate suite applies to unchanged primary package youtube_dl; source supports the interpretation, with no component-only command necessary. This is applicability of a suite, not all-product-behavior coverage. Explicit prospective acceptance remains coordinator-owned.",
+    "sevenExclusions": "Exact3 SOCKS stand-ins +4 optional-proxy early-return methods match unmodified committed defaults. Proposal remains unaccepted and excludes real proxy behavior. It preserves actual terminal statuses rather than fabricating skip outcomes."
+  },
+  "environmentQualified": false,
+  "findings": [],
+  "inputFreezeSha256": "df2b640f4c3ac6fbf778751d77a2241aef74b036c247a6521c9ab7e1e6ef0c88",
+  "integrity": {
+    "authorArtifactCount": 13,
+    "exactSelectedTexts": 20,
+    "exactSourceSpans": 18,
+    "expandedBytes": 6945071,
+    "historicalInputBindings": 8,
+    "nativeCaseCount": null,
+    "proposedExclusionSourceIdentities": [
+      "test.test_socks.TestMultipleSocks.test_proxy_http",
+      "test.test_socks.TestMultipleSocks.test_proxy_https",
+      "test.test_socks.TestMultipleSocks.test_secondary_proxy_http",
+      "test.test_socks.TestMultipleSocks.test_secondary_proxy_https",
+      "test.test_socks.TestSocks.test_socks4",
+      "test.test_socks.TestSocks.test_socks4a",
+      "test.test_socks.TestSocks.test_socks5"
+    ],
+    "regularFiles": 981,
+    "scopeOracleEnvironmentOrCampaignAdmission": false,
+    "sourceArchiveSha256": "836cb208ff4ff481e5b9879fc3c10de793e7f8bca247e645661de1e233f63aa6",
+    "state": "passed-independent-static-source-integrity",
+    "syntacticSkipSiteBindings": 20,
+    "testPythonAstParses": 32,
+    "upstreamImportsOrExecution": false
+  },
+  "limitations": [
+    "Aggregate source support does not prove exhaustive behavioral coverage or compatibility of unittest/Nose/PyNose on a future interpreter.",
+    "Static AST/source checks execute no imports and are not native collection; runtime dynamic extractor order/identities, nested behavior, all conditional returns/skips and capability conditions remain unresolved.",
+    "Known source-default exclusions can qualify only under explicit pre-run accepted policy and matching source/config; no seven-method acceptance or allowance is minted here.",
+    "Future observer must reliably attribute early-return source sites to active dynamic IDs, reconcile all intended terminal tests and setup/teardown phases, and demonstrate positive/negative runtime controls. This review does not validate such an implementation.",
+    "Network-none environment cannot establish intended live product/download outcomes; precise network authority, endpoints, dependencies, parameter state, runtime/resources and cost accounting remain to be frozen.",
+    "No setup,imports,tests,collection,network,daemon,package,Go,Cargo,upstream or provider/model execution occurred; local dollar cost unknown/null."
+  ],
+  "minimumFutureGates": [
+    "Explicit prospective scope/exclusion decisions without rewriting old gold or post-run exceptions.",
+    "Exact supported Python image/interpreter/runner/settings/dependencies/parameters/network/capabilities/resource context freeze.",
+    "Separately authorized native full collection with dynamic source mapping, zero/empty refusal and immutable hidden manifest before run.",
+    "Bounded independent lifecycle/source-site observer and scoring implementation with meaningful phase/network/skip/return controls; hidden oracle kept outside agent environment.",
+    "Only after those gates: explicit bounded execution authorization; preserve failures/noncompletion and distinguish outcome from testsPassed."
+  ],
+  "nativeCollectionOccurred": false,
+  "oracleExecutable": false,
+  "originalHistory": "All8 historical input bindings verified; original unresolved gold/draft oracle/history unchanged. No index/profile/importer/evaluation reads.",
+  "repository": "github.com/ytdl-org/youtube-dl",
+  "reviewedAt": "2026-10-29T10:10:10.215215+00:00",
+  "reviewerContext": "Same development reviewer who curated/challenged prior F05 source scope; familiar with earlier decisions. Not fresh blind gold or unfamiliar paid-agent exposure.",
+  "revision": "956b8c585591b401a543e409accb163eeaaa1193",
+  "scopeAcceptedByThisReview": false,
+  "sourceCounterexamples": "counterexample-requirements.json contains9 future-observer challenges, not executed native controls.",
+  "state": "source-only independent review complete; no blocking source-policy finding",
+  "taskOutcomeObserved": false
+}

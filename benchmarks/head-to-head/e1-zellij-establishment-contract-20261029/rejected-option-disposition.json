@@ -1,0 +1,9 @@
+{
+  "state": "rejected-not-for-production",
+  "rejectedDraftSha256": "d32515a539d0d4211b445e294dd5a92c313b324f02308f7eb6f5f2ba548e5b64",
+  "reason": "Hardcoding upstream revision/nine whole-file fingerprints as completeness policy would compile a known development answer into a per-repository allowlist, move investigation facts out of retained index/evidence and establish no extractor generalization.",
+  "coordinatorDecision": "Do not implement this option; accepted documented source gold does not authorize a production confidence allowlist.",
+  "historicalDraftPreserved": true,
+  "anyCodeAuthorized": false,
+  "AIReviewMayMintReviewedStatus": false
+}

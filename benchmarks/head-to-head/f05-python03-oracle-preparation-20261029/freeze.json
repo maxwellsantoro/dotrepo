@@ -1,0 +1,59 @@
+{
+  "artifacts": {
+    "README.md": {
+      "bytes": 7481,
+      "sha256": "41988fd6826e055ffe1a0d478c52e878f0137c6ae718d9ee8d95a89ae29a27b9"
+    },
+    "exclusion-proposal.json": {
+      "bytes": 2635,
+      "sha256": "e6419f1664a46e54ea6a1e806008a736d4598a8e5d9f4eaeaa989a28a1a74ba9"
+    },
+    "input-bindings.json": {
+      "bytes": 1526,
+      "sha256": "49ab657456335e82bd83080ab62c1617be2b296ccd5ed8e6b149c720ba433079"
+    },
+    "oracle-requirements.json": {
+      "bytes": 3805,
+      "sha256": "d50f5a77213fb0822307f42b7d3795b4afac1fb9191940c4f071860a9f6a7de7"
+    },
+    "prepare_disposition.py": {
+      "bytes": 4793,
+      "sha256": "aaea9169cf849cd30984440e95f4ddb87e9dd25f02f7ec50a4a3befb1cfa82b5"
+    },
+    "scope-disposition.json": {
+      "bytes": 5117,
+      "sha256": "c45cc2e42630600edc10881c24deede69b10f0370de42a08c908cf366afaa99d"
+    },
+    "selected-source-members.json": {
+      "bytes": 363068,
+      "sha256": "15d7ae69527d0a4869a3eb941c92477c0f61ac43d71530b64a934076076b439a"
+    },
+    "source-controls.json": {
+      "bytes": 583,
+      "sha256": "c8c94e5090bb5e268aa48667249895febc9c5cddc7fac30ea79284900780473d"
+    },
+    "source-scan.json": {
+      "bytes": 11223,
+      "sha256": "6540d0ac4d5a309e3eda005d0f935fc4b5664898860ecda60536acf1eb652d9b"
+    },
+    "source-skip-candidates.json": {
+      "bytes": 7321,
+      "sha256": "26f0ed89ecc66597dd40fc25bf519c9b6666513f5637da6093874cc0ce3885f4"
+    },
+    "source-spans.json": {
+      "bytes": 16875,
+      "sha256": "5fae18d963eb754466bb04e0367d4206f0907f7e8d01de6c2b1b687e6903c6dd"
+    },
+    "validation.json": {
+      "bytes": 1128,
+      "sha256": "059dcf38c63c10d8388142d54d2cb2ae654270eb1240098b74849eea3e42d9fd"
+    },
+    "verify_source.py": {
+      "bytes": 6740,
+      "sha256": "c33c475c5f3dc75f7a87828a007a0885a48c936e435c7b34889f6c59e2528790"
+    }
+  },
+  "kind": "source-only Python-03 scope/oracle preparation; no native or campaign admission",
+  "revision": "956b8c585591b401a543e409accb163eeaaa1193",
+  "taskId": "python-03"
+}

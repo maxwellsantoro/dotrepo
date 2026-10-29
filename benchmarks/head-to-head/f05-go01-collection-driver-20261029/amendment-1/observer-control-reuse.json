@@ -1,0 +1,21 @@
+{
+  "state": "unchanged-owned-observer-evidence-reused-no-new-Node-call",
+  "parentControlsPath": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-collection-driver-20261029/observer-controls.json",
+  "parentControlsSha256": "7b6f2e5f569b6f9899bd8f15a5372e83f66678b3508c04b44fcb9f3a64786567",
+  "authorizedParentControls": 6,
+  "algorithmSha256": "951e92037d41f19e471f5cb3fb4e42c675cb4a8bf5f510268df05cb10296056f",
+  "controlScriptUnchanged": true,
+  "usedPythonFunctionsUnchanged": [
+    "tree_expected",
+    "file_sha",
+    "write"
+  ],
+  "localNodeBytesStillMatch": true,
+  "parentNodeIdentity": {
+    "resolvedPath": "/Users/maxwell/.nvm/versions/node/v25.9.0/bin/node",
+    "sha256": "4b3fe8b384e30ee917e28a9f5b79a3ca64b72b13b70d9ab2273e6e9a823f4cbf",
+    "version": "v25.9.0",
+    "runtimeRole": "host owned data-observer validation, not frozen image/upstream execution"
+  },
+  "freshObserverCalls": 0
+}

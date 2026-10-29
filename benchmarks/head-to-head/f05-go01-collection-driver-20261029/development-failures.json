@@ -1,0 +1,16 @@
+[
+  {
+    "phase": "first synthetic controls",
+    "error": "authorization identity mismatch",
+    "cause": "Owned /tmp fixture strings were not canonical /private/tmp output/scratch identities; driver correctly refused before any daemon call",
+    "driverSha256": "97323dfc43fa65720aacec09c54424a3d7b8ef735ec591b185c1da6f58a0fe66",
+    "controlsSha256": "b621ac1efc9ba2941ad5373fe61c8b870c72ba137136fd2561088e8afcf9e6ec",
+    "realActions": 0
+  },
+  {
+    "phase": "Source-provenance finalcheck",
+    "error": "Required package used internal/fourslash instead of source directory internal/fourslash/tests",
+    "cause": "Static author lowerbound initially used component name rather than test-file directory; fake fixtures mirrored assumption. Retained test source imports internal/fourslash from package directory tests, so guard corrected before freeze. No native run occurred.",
+    "realUpstreamActions": 0
+  }
+]

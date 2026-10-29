@@ -1,0 +1,55 @@
+{
+  "authorVerifierControlsReplayed": 9,
+  "cacheGloballyQualified": false,
+  "campaignAdmitted": false,
+  "checks": {
+    "actualArgvClosuresVerified": 15,
+    "afterIntegrity": "not established",
+    "allPacketArtifactsVerified": 91,
+    "cleanupEvidence": "same-attempt only",
+    "costUsd": null,
+    "elapsedSecondsBothAttempts": 16.591300040949136,
+    "newDaemonGoPackageNativeProviderNetworkCalls": 0,
+    "noInventoryOrListing": true,
+    "originalCopiesVerified": 82,
+    "outerExitReceipt": "coordinator transcription only",
+    "queryInputGOENV": "off",
+    "queryOutputGOENV": "",
+    "rawOutputBytes": 11171,
+    "resultRemainsIncomplete": true,
+    "state": "independently-verified-incomplete-result",
+    "stdinBytes": 585257959
+  },
+  "executionAuthorized": false,
+  "findings": [],
+  "fullSourceAndProjectionArchiveVerifier": "passed local hash/source-tree/checksum-manifest reconstruction; no extraction or code execution",
+  "limitations": [
+    "No observed inventory/listing/init/TestMain/testbody/agenttask/consumerbenefit.",
+    "Retained local receipts are operator evidence, not cryptographic execution attestation.",
+    "Review performed no fresh daemon/Go/Cargo/package/upstream/native/provider/network action and no cleanup rerun.",
+    "Known development case, not holdout/generalization; successful evidence review does not convert incomplete operator result into qualification."
+  ],
+  "nativeCollectionOccurred": false,
+  "nativeTaskAdmitted": false,
+  "outcome": "Both invocations remain incomplete. First canonical-path identity refusal before daemon; second strict GOENV mismatch before go-list/test-list. No retrospective success or native task inference.",
+  "reviewedEvidence": [
+    "All91 packet artifacts and82 copied original source paths hash-identical; actual15raw receipt/stdout/stderr triplets reconcile with trace.",
+    "All15 actual argv lists independently reconstructed and matched, including exactcreate/resources/env/image/no mounts/networknone, declared goenv, source/cacheprovision, trusted observers andcleanup.",
+    "Source/image/Go-onlyprojection/currentplan+review+auth+pathamendment binding retained. Only declared paths and explicit previous refusal linkage changed in renewed authorization.",
+    "InputGOENVoff/queryempty difference is the only query mismatch under frozen old expectation; source semantics correction belongs to separate amendment2 review.",
+    "Elapsed/daemon/stdin/rawoutput sums match report; no invented dollar/totalreview/model-cost figures.",
+    "Initialsource/cachechecksum and complete beforetree compare to exactinputarchive; aftersource/toolchecks absent.",
+    "Same-attempt force-removal/inspect/list receipts support reported absence; no separate independent hostabsence receipt.",
+    "Outerexitstatuses are explicitly coordinator transcription; complete outerargv/processreceipt unavailable."
+  ],
+  "roleDisclosure": "Reviewer authored original source-only plan/projection and preceding independent driver reviews, not actual operator attempt or result packaging. This is static independent evidence review, not blind task trial.",
+  "scope": "faithful preservation and static evidence review; not native qualification",
+  "state": "independent-retained-incomplete-result-review-passed",
+  "subject": {
+    "driverAuthorFreezeSha256": "0bdbd19da1a1607bb4a104156c008a05b934736556465d632364e634daeaa8e3",
+    "driverPlanSha256": "235244044e794fe26ba7f241b2abdaf37387546cae93a60cb956e2059fe07cbd",
+    "resultPacketFreezeSha256": "3d88c025332c325a17d3fe95a3b55aebcd9e67e75992950525727d84f1d7eca6"
+  },
+  "synthetic": false,
+  "taskOutcomeObserved": false
+}

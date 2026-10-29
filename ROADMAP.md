@@ -149,8 +149,12 @@ implementation. Those exposed cases are known workloads for later development;
 future generalization claims need fresh holdouts. The disjoint
 [F-05 source packet](benchmarks/head-to-head/f05-agent-tasks-20261029/README.md)
 and its [review addendum](benchmarks/head-to-head/f05-agent-tasks-review-20261029/README.md)
-establish source enrollment, while executable oracles, qualified environments,
+establish source enrollment, while executable oracles, frozen environments,
 provider settings/budgets and a complete campaign freeze still gate C2.
+C1 requires frozen conditions and usable completion/error oracles, not a green
+baseline for every task. Keep unavailable setup and failed tasks in the assigned
+denominator; an unresolved oracle or owned harness defect is not evidence that
+an upstream task is unavailable.
 The [next E1 development replay](benchmarks/head-to-head/e1-development-20261029b/README.md)
 recovers an attributed multi-file candidate while retaining consumer abstention;
 independent source-completeness review remains distinct from syntax recovery.
@@ -166,6 +170,12 @@ The [Compose source disposition](index/telemetry/e1-compose-source-disposition-2
 establishes the documented default route and setup chain while retaining
 unresolved unit coverage and the selected-input completeness gap. It authorizes
 neither another candidate-only grammar nor automatic confidence promotion.
+The [Zellij source assessment](benchmarks/head-to-head/e1-zellij-establishment-review-20261029/README.md)
+supports its documented default recipe with explicit scope, build-state and
+environment qualifications. The [automatic-establishment decision](benchmarks/head-to-head/e1-zellij-establishment-contract-20261029/README.md)
+retains that investigation while rejecting a compiled per-repository fingerprint
+allowlist; no general semantic rule or automatic confidence promotion was
+established by this known development case.
 The [bounded task execution qualification](benchmarks/head-to-head/f05-qualification-20261029/README.md)
 retains real native outcomes and resource failures without narrowing the frozen
 tasks. The [published response capture](benchmarks/head-to-head/f05-snapshot-20261029/README.md)
@@ -195,7 +205,23 @@ identifies a published compiler payload from the task's project family and
 withholds runtime admission. A separately authorized
 [offline npm setup observation](benchmarks/head-to-head/f05-go01-offline-setup-result-20261029/README.md)
 retains successful installation under the frozen conditions; task equivalence,
-native collection, exclusion-policy and campaign acceptance remain separate. The
+native collection, exclusion-policy and campaign acceptance remain separate.
+The [next collection proposal](benchmarks/head-to-head/f05-go01-next-qualification-20261029/README.md)
+separates Go inventory collection from the intended full-task npm setup and
+retains a separately scoped Go-only dependency projection. The
+[reviewed collection driver](benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/README.md)
+and [retained attempts](benchmarks/head-to-head/f05-go01-collection-result-20261029/amendment-2/README.md)
+separate repaired preflight/parser defects from the subsequent compiler
+signal-killed build failures. Package inventory was established under the fixed
+conditions, but complete native collection and its selected oracle remain open;
+the kill cause, full-task qualification and campaign benefit are unestablished.
+No resource-increased retry or task substitution follows from those observations. The
+[Python-03 source assessment](benchmarks/head-to-head/f05-python03-oracle-preparation-20261029/README.md)
+and [independent review](benchmarks/head-to-head/f05-python03-oracle-review-20261029/README.md)
+support prospective aggregate-suite coverage of the selected primary package,
+while preserving the original unresolved gold. Interpreter/network conditions,
+native collection, exclusion acceptance and a reliable execution observer remain
+open; a green framework summary alone cannot establish the required outcome. The
 [CI-evidence pilot](benchmarks/ci-evidence/pilot-20261029/README.md) retains
 workflow/job observations without promoting them to independent execution or
 consumer applicability.

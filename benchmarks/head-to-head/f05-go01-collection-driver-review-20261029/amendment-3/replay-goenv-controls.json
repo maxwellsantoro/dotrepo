@@ -1,0 +1,158 @@
+{
+  "passed": 22,
+  "controls": [
+    {
+      "case": "genuine retained native query bytes accepted with unchanged inputoff",
+      "passed": true
+    },
+    {
+      "case": "old expected literaloff rejects genuine query",
+      "passed": true
+    },
+    {
+      "case": "reject changed query field CC",
+      "passed": true
+    },
+    {
+      "case": "reject changed query field CGO_ENABLED",
+      "passed": true
+    },
+    {
+      "case": "reject changed query field CXX",
+      "passed": true
+    },
+    {
+      "case": "reject changed query field GOARCH",
+      "passed": true
+    },
+    {
+      "case": "reject changed query field GOENV",
+      "passed": true
+    },
+    {
+      "case": "reject changed query field GOFLAGS",
+      "passed": true
+    },
+    {
+      "case": "reject changed query field GOOS",
+      "passed": true
+    },
+    {
+      "case": "reject changed query field GOTOOLCHAIN",
+      "passed": true
+    },
+    {
+      "case": "reject changed query field GOVERSION",
+      "passed": true
+    },
+    {
+      "case": "reject changed query field GOWORK",
+      "passed": true
+    },
+    {
+      "case": "reject missing GOENV",
+      "passed": true
+    },
+    {
+      "case": "reject null GOENV",
+      "passed": true
+    },
+    {
+      "case": "reject extra output field",
+      "passed": true
+    },
+    {
+      "case": "reject duplicate GOENV",
+      "passed": true
+    },
+    {
+      "case": "reject multiple objects",
+      "passed": true
+    },
+    {
+      "case": "reject invalid JSON",
+      "passed": true
+    },
+    {
+      "case": "reject container empty input",
+      "passed": true
+    },
+    {
+      "case": "reject container missing input",
+      "passed": true
+    },
+    {
+      "case": "reject container user config input",
+      "passed": true
+    },
+    {
+      "case": "full fake driver crosses go-env gate using exact historical query bytes",
+      "passed": true,
+      "commandLabels": [
+        "image-inspect",
+        "create",
+        "start",
+        "container-inspect",
+        "initialize",
+        "source-provision",
+        "cache-provision",
+        "initial-source-check",
+        "initial-cache-check",
+        "tools-before",
+        "source-tree-before",
+        "go-env",
+        "go-list",
+        "go-test-list",
+        "source-tree-after",
+        "tools-after",
+        "tracked-source-check",
+        "offline-final-inspect",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "result": {
+        "state": "native-top-level-collection-observed",
+        "stage": "offline-final-inspect",
+        "startedAt": "2026-10-29T10:45:26.032762+00:00",
+        "synthetic": true,
+        "taskId": "go-01",
+        "nativeCollectionOccurred": false,
+        "taskOutcomeObserved": false,
+        "modelCalls": 0,
+        "costUsd": null,
+        "costExclusions": [
+          "No metered host/container setup dollar receipt."
+        ],
+        "daemonCalls": 21,
+        "containerCreateAttempted": true,
+        "containerAbsent": true,
+        "collectionObserved": true,
+        "nativeCollectionAttempted": true,
+        "nativeTaskAdmitted": false,
+        "campaignAdmitted": false,
+        "cacheGloballyQualified": false,
+        "ownedContainer": "dotrepo-go01-collection-c05f74171fd5",
+        "planSha256": "847c5e161f75f7d141f5dd59bc0df670d7261f1fad687184cafa4c1a64407000",
+        "authorizationSha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "collectionAcceptance": {
+          "syntheticOwnedAssertion": true
+        },
+        "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+        "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+        "cacheArchiveSha256": "76ea2bfa6725335b889d44fed07f40f6eeb804d124d683ad4f2c0a6a2607bcfd",
+        "environmentSha256": "3649e45b9b1c1f62faeb2c3a168d93d91a7be7a62e7e2905c07d9ba69ddb65fe",
+        "preflightSeconds": 0,
+        "collectionSeconds": 0,
+        "workElapsedSeconds": 0,
+        "cleanupExitCode": 0,
+        "cleanupSeconds": 0,
+        "elapsedSeconds": 0,
+        "workBudgetExceeded": false
+      }
+    }
+  ],
+  "realDaemonGoNetworkPackageProviderCalls": 0,
+  "actualNativeCollectionOccurred": false,
+  "historicalRawQueryFixtureOnly": true
+}

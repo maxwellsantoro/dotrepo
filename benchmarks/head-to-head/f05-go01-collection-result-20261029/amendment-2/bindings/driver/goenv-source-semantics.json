@@ -1,0 +1,55 @@
+{
+  "state": "source-established-query-value-correction-no-execution-authorization",
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "frozenImageInventory": {
+    "path": "benchmarks/head-to-head/f05-common-image-audit-20261029/inventory.json",
+    "sha256": "f096a4b8a2346c0332082e2b88b093cc4fb78b2cbaed0b5b5af05d071695f647"
+  },
+  "retainedImageExportPath": "/tmp/dotrepo-f05-common-image-audit-9slpmcbi/filesystem-export.tar",
+  "retainedImageExportSha256": "d8de699302fac90a58280e0757c22a7aa82a2c40d48d72ab2c8ffc7c933681d6",
+  "sourceObservations": [
+    {
+      "path": "usr/local/go/src/cmd/go/alldocs.go",
+      "sha256": "09b0d7570c1695acc0ccad5593e3f5c2f888548cfc7f80a49933a19f3514aa69",
+      "startLine": 2449,
+      "endLine": 2453,
+      "excerpt": "//\tGOENV\n//\t\tThe location of the Go environment configuration file.\n//\t\tCannot be set using 'go env -w'.\n//\t\tSetting GOENV=off in the environment disables the use of the\n//\t\tdefault configuration file.\n",
+      "retainedPath": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-2/sources/usr/local/go/src/cmd/go/alldocs.go"
+    },
+    {
+      "path": "usr/local/go/src/cmd/go/internal/cfg/cfg.go",
+      "sha256": "8eb038ac6df168fe5af971cd768d99dd3c64224273072a4160dcc5f51eacae9d",
+      "startLine": 342,
+      "endLine": 369,
+      "excerpt": "// EnvFile returns the name of the Go environment configuration file,\n// and reports whether the effective value differs from the default.\nfunc EnvFile() (string, bool, error) {\n\tif file := os.Getenv(\"GOENV\"); file != \"\" {\n\t\tif file == \"off\" {\n\t\t\treturn \"\", false, fmt.Errorf(\"GOENV=off\")\n\t\t}\n\t\treturn file, true, nil\n\t}\n\tdir, err := os.UserConfigDir()\n\tif err != nil {\n\t\treturn \"\", false, err\n\t}\n\tif dir == \"\" {\n\t\treturn \"\", false, fmt.Errorf(\"missing user-config dir\")\n\t}\n\treturn filepath.Join(dir, \"go/env\"), false, nil\n}\n\nfunc initEnvCache() {\n\tenvCache.m = make(map[string]string)\n\tenvCache.goroot = make(map[string]string)\n\tif file, _, _ := EnvFile(); file != \"\" {\n\t\treadEnvFile(file, \"user\")\n\t}\n\tgoroot := findGOROOT(envCache.m[\"GOROOT\"])\n\tif goroot != \"\" {\n\t\treadEnvFile(filepath.Join(goroot, \"go.env\"), \"GOROOT\")\n",
+      "retainedPath": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-2/sources/usr/local/go/src/cmd/go/internal/cfg/cfg.go"
+    },
+    {
+      "path": "usr/local/go/src/cmd/go/internal/envcmd/env.go",
+      "sha256": "41e6ac34c8deb9acfdec65cb3ead710df925af85799ec37237a96abc00ed281e",
+      "startLine": 79,
+      "endLine": 89,
+      "excerpt": "func MkEnv() []cfg.EnvVar {\n\tenvFile, envFileChanged, _ := cfg.EnvFile()\n\tenv := []cfg.EnvVar{\n\t\t// NOTE: Keep this list (and in general, all lists in source code) sorted by name.\n\t\t{Name: \"GO111MODULE\", Value: cfg.Getenv(\"GO111MODULE\")},\n\t\t{Name: \"GOARCH\", Value: cfg.Goarch, Changed: cfg.Goarch != runtime.GOARCH},\n\t\t{Name: \"GOAUTH\", Value: cfg.GOAUTH, Changed: cfg.GOAUTHChanged},\n\t\t{Name: \"GOCACHE\"},\n\t\t{Name: \"GOCACHEPROG\", Value: cfg.GOCACHEPROG, Changed: cfg.GOCACHEPROGChanged},\n\t\t{Name: \"GODEBUG\", Value: os.Getenv(\"GODEBUG\")},\n\t\t{Name: \"GOENV\", Value: envFile, Changed: envFileChanged},\n",
+      "retainedPath": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-2/sources/usr/local/go/src/cmd/go/internal/envcmd/env.go"
+    }
+  ],
+  "interpretation": "Input GOENV=off disables user Go environment configuration file. cfg.EnvFile returns empty filename; envcmd.MkEnv emits that empty filename for GOENV. GOROOT/go.env defaults remain separately loaded; this is not all-config disablement.",
+  "environmentInputUnchanged": "GOENV=off",
+  "correctExpectedGoEnvQueryValue": "",
+  "actualFailedAttempt": {
+    "resultPath": "/tmp/dotrepo-go01-native-collection-result-20261029-2/result.json",
+    "resultSha256": "67cc8497d9b26919907719374016a3fa3f2c6327a020e881586fc2ed6bdd2a2a",
+    "stdoutSha256": "bfa88e9ed8bc5888d6bd3376082142b1e8e743cbbb971fb9794a89d7b5cd266b",
+    "receiptSha256": "a9cff7b1e6a837abe7b7b65131f57637a3a4f31c10080e3bb87b33891c49664f",
+    "inspectPath": "/tmp/dotrepo-go01-native-collection-result-20261029-2/logs/container-inspect/stdout.bin",
+    "inspectSha256": "3700b176ddbc1f324a2d7a3ca7ada809aa93953d4f7186f228fbbbb127f43819",
+    "observedContainerInputGOENV": "off",
+    "observedQueriedGOENV": "",
+    "qualification": "Historical failed go-env attempt only; native collection did not occur."
+  },
+  "sourceSemanticsIndependentOfSingleReceipt": true,
+  "freshGoDaemonNetworkPackageProviderCalls": 0,
+  "executionAuthorized": false,
+  "nativeCollectionOccurred": false,
+  "taskOutcomeObserved": false
+}

@@ -1,0 +1,51 @@
+[
+  {
+    "argv": [
+      "uv",
+      "run",
+      "--offline",
+      "--no-sync",
+      "ruff",
+      "check",
+      "--no-cache",
+      "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/controls.py",
+      "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/observer_controls.py",
+      "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/transport_controls.py",
+      "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/make_plan.py",
+      "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/process_io.py",
+      "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/listing.py",
+      "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/collection.py",
+      "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/testonly_controls.py",
+      "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/goenv_controls.py",
+      "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/amendment_controls.py"
+    ],
+    "exitCode": 0,
+    "stdout": "All checks passed!\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "uv",
+      "run",
+      "--offline",
+      "--no-sync",
+      "ruff",
+      "format",
+      "--check",
+      "--no-cache",
+      "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/controls.py",
+      "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/observer_controls.py",
+      "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/transport_controls.py",
+      "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/make_plan.py",
+      "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/process_io.py",
+      "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/listing.py",
+      "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/collection.py",
+      "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/testonly_controls.py",
+      "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/goenv_controls.py",
+      "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/amendment_controls.py"
+    ],
+    "exitCode": 0,
+    "stdout": "10 files already formatted\n",
+    "stderr": ""
+  }
+]

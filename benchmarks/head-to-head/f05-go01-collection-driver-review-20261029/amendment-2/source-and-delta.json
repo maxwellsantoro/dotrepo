@@ -1,0 +1,51 @@
+{
+  "configurationLimit": "User env file disabled; image GOROOT/go.env defaults remain.",
+  "historicalQueryReceiptBound": true,
+  "inputGOENV": "off",
+  "newGoDaemonNetworkNativeCalls": 0,
+  "normalizedRuntimeAstEqualsParent": true,
+  "queriedGOENV": "",
+  "sameContextFields": [
+    "commands",
+    "cwd",
+    "limits",
+    "environment",
+    "environmentSha256",
+    "imageId",
+    "sourceArchiveSha256",
+    "projection",
+    "treeObservation",
+    "toolProbe",
+    "expectedToolOutput"
+  ],
+  "sources": [
+    {
+      "imageBound": true,
+      "path": "usr/local/go/src/cmd/go/alldocs.go",
+      "sha256": "09b0d7570c1695acc0ccad5593e3f5c2f888548cfc7f80a49933a19f3514aa69",
+      "spanBound": true
+    },
+    {
+      "imageBound": true,
+      "path": "usr/local/go/src/cmd/go/internal/cfg/cfg.go",
+      "sha256": "8eb038ac6df168fe5af971cd768d99dd3c64224273072a4160dcc5f51eacae9d",
+      "spanBound": true
+    },
+    {
+      "imageBound": true,
+      "path": "usr/local/go/src/cmd/go/internal/envcmd/env.go",
+      "sha256": "41e6ac34c8deb9acfdec65cb3ead710df925af85799ec37237a96abc00ed281e",
+      "spanBound": true
+    }
+  ],
+  "state": "source/query correction independently verified; no result reclassification",
+  "unchangedCodeFiles": [
+    "listing.py",
+    "process_io.py",
+    "tree-observer.js",
+    "controls.py",
+    "amendment_controls.py",
+    "observer_controls.py",
+    "transport_controls.py"
+  ]
+}

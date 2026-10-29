@@ -1,0 +1,54 @@
+{
+  "synthetic": true,
+  "liveCalls": 0,
+  "cases": [
+    {
+      "case": "valid-incomplete-result",
+      "accepted": true,
+      "expectedAccepted": true,
+      "error": null
+    },
+    {
+      "case": "fabricated-collection-success",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "unsupported outcome: collectionObserved"
+    },
+    {
+      "case": "missing-cleanup-absence",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "cleanup state"
+    },
+    {
+      "case": "empty-raw-package-stream-consistent-hash",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "raw object count changed"
+    },
+    {
+      "case": "truncated-raw-package-stream-consistent-hash",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "Expecting value: line 1 column 15 (char 14)"
+    },
+    {
+      "case": "false-accepted-package-inventory",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "unexpected accepted/later artifact"
+    },
+    {
+      "case": "invented-later-collection",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "unexpected accepted/later artifact"
+    },
+    {
+      "case": "raw-package-copy-mismatch",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "raw package copy"
+    }
+  ]
+}

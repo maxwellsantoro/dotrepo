@@ -1,0 +1,97 @@
+{
+  "identity": "go01-collection-result-amendment-2",
+  "state": "incomplete-native-collection-attempt",
+  "synthetic": false,
+  "repository": "github.com/microsoft/TypeScript",
+  "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+  "parentFreezeSha256": "3d88c025332c325a17d3fe95a3b55aebcd9e67e75992950525727d84f1d7eca6",
+  "previousChildFreezeSha256": "297d15b898895d6d228a94d4a85ffa3df4f0bff4a7bfc9f5ecfdecd2169efb91",
+  "driverPlanSha256": "847c5e161f75f7d141f5dd59bc0df670d7261f1fad687184cafa4c1a64407000",
+  "driverAuthorFreezeSha256": "bca1522ad5b9d29a52cce68ce2d8b1d14a176511286f97761662337f17a3ecd7",
+  "prospectiveAmendment": "New independently reviewed driver admits source-valid test-only packages using its selected four-file-list union; unchanged source/image/cache/container environment/cwd/commands/limits. Prior failures preserved.",
+  "nativeCollectionAttempted": true,
+  "collectionCompleted": false,
+  "fullCollectionManifestExists": false,
+  "goEnvironmentPassed": true,
+  "packageInventoryPassed": true,
+  "packageInventoryCount": 104,
+  "goTestList": {
+    "exitCode": 1,
+    "elapsedSeconds": 195.7369840000756,
+    "stdoutBytes": 127015,
+    "stderrBytes": 0,
+    "rawEvents": 732,
+    "actions": {
+      "build-output": 2,
+      "build-fail": 2,
+      "start": 104,
+      "output": 520,
+      "fail": 61,
+      "pass": 25,
+      "skip": 18
+    },
+    "packageTerminalsObserved": 104,
+    "testBodyEventCount": 0,
+    "raw": "evidence/logs/go-test-list/stdout.bin",
+    "canonicalCollectionEventsFileWritten": false
+  },
+  "compilerDiagnostics": [
+    "internal/compiler [cmd/tsc] compile: signal: killed",
+    "internal/ast compile: signal: killed"
+  ],
+  "terminationCause": null,
+  "oomProven": false,
+  "causeEvidenceMissing": [
+    "No cgroup kill/OOM counters retained.",
+    "No final container inspection or separate termination-cause observation."
+  ],
+  "initializationExecutionExtent": "unresolved",
+  "initializationBoundary": "The actual Go test-list invocation permits compilation, package init and TestMain. Its incomplete flag does not prove initialization was absent; some binaries reached listing pass/skip terminals. No specific per-package init/TestMain extent is established.",
+  "testBodyEventsObserved": false,
+  "defaultHerebyTaskExecuted": false,
+  "taskOutcomeObserved": false,
+  "nativeTaskAdmitted": false,
+  "campaignAdmitted": false,
+  "cacheGloballyQualified": false,
+  "collectionLimitations": [
+    "All 104 packages have package-level terminal events, but 61 fail and two build failures prevent complete native test identity collection.",
+    "25 pass and18 skip are listing-phase package terminals, not test/task passes or accepted exclusions.",
+    "No successful collection manifest exists; raw partial output remains preserved despite no canonical collection-events file written after nonzero exit.",
+    "No timeout/output-cap/cancellation observed; compiler kill cause stays unknown.",
+    "Source/tool after observations did not run."
+  ],
+  "cleanup": {
+    "forceRemovalExitCode": 0,
+    "elapsedSeconds": 0.9095162919256836,
+    "containerAbsentReported": true,
+    "sameAttemptInspectAbsence": true,
+    "sameAttemptResponsiveNameListEmpty": true,
+    "independentAbsenceObservation": false
+  },
+  "effort": {
+    "daemonCalls": 17,
+    "elapsedSeconds": 215.05245641618967,
+    "stdinBytes": 585257959,
+    "rawOutputBytes": 869478,
+    "costUsd": null,
+    "modelCallsLaunchedByDriver": 0,
+    "unmeasured": "Host preparation, coordination, source curation, reviewer/model effort and dollar costs unmeasured; this is no consumer comparison.",
+    "allFourInvocations": {
+      "daemonCalls": 48,
+      "sumDriverElapsedSeconds": 249.555755749112,
+      "stdinBytes": 1755773877,
+      "rawOutputBytes": 1623112,
+      "note": "Preparation accounting includes predaemon refusal and separately authorized amended plans; no agent/task comparison."
+    }
+  },
+  "preservation": {
+    "originalFilesCopied": 86,
+    "originalBytesCopied": 3362273,
+    "parent91Unchanged": true,
+    "previousChild87Unchanged": true,
+    "sourceCacheOrBuildArtifactExports": false,
+    "outerExitCodeFromCoordinator": 1,
+    "completeOriginalOuterArgvReceiptAvailable": false
+  },
+  "authorDisclosure": "Prior driver/result author packaging observed result; static verifier is not independent result review, held-out qualification or consumer benefit."
+}

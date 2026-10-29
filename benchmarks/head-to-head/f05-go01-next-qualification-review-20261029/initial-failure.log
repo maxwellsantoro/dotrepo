@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-next-qualification-review-20261029/verify.py", line 165, in <module>
+    main()
+  File "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-next-qualification-review-20261029/verify.py", line 121, in main
+    require(set(source_bytes) == wanted, "all retained source paths")
+  File "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-next-qualification-review-20261029/verify.py", line 30, in require
+    raise AssertionError(reason)
+AssertionError: all retained source paths

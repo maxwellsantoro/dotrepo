@@ -1,0 +1,60 @@
+{
+  "synthetic": true,
+  "liveCalls": 0,
+  "cases": [
+    {
+      "case": "valid-retained-observations",
+      "accepted": true,
+      "expectedAccepted": true,
+      "error": null
+    },
+    {
+      "case": "raw-stream-corruption",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "raw stream mismatch"
+    },
+    {
+      "case": "invented-completion",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "unsupported success: nativeCollectionOccurred"
+    },
+    {
+      "case": "lost-cleanup-evidence",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "cleanup outcome"
+    },
+    {
+      "case": "go-env-exit-mismatch",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "unexpected command exit"
+    },
+    {
+      "case": "different-env-mismatch-with-consistent-hashes",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "different env failure"
+    },
+    {
+      "case": "effective-env-change-with-consistent-hashes",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "effective environment"
+    },
+    {
+      "case": "unexpected-later-collection-artifact",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "unexpected later phase"
+    },
+    {
+      "case": "acceptance-original-byte-change",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "retained size changed: authorization/acceptance.json"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "allowedControls": "fake transports; trusted local hash/parser controls; Node builtin fs/crypto on isolated synthetic tmp fixtures only",
+  "checks": {
+    "authorization": [
+      "No authorization/malformed/wrong plan,closure,source,projection,image,scope,output,scratch must refuse before daemon.",
+      "Exclusive output and scratch; preflight failures after accepted auth retain attempt/effort without claiming daemon absence from a failed call."
+    ],
+    "commands": [
+      "Only frozen go env/go list/go test-list invocations; no npm,Hereby,gotestsum,helper compilation/install or tests/native task run.",
+      "Exact cwd/source go.work,local toolchain,proxyoff/sumdboff,CGO and compiler context frozen; no inherited credentials/tags/flags/config.",
+      "Collection can compile/init/TestMain; never advertise no upstream execution for a future actual run."
+    ],
+    "inputs_and_observer": [
+      "Exact source/projection hashes and inventory/regular-safe path bounds; no npm subtree or buildcache.",
+      "Full source and tool inventory before/after; digest type/path/link/mode/content completeness,unknown/mutation failure closed.",
+      "Node builtin-only observer controls permitted only on isolated synthetic fs fixtures, no project/npm imports."
+    ],
+    "isolation": [
+      "Exact no-network,nonroot,readonly,dropALL,no CapAdd,private namespaces,no mounts/socket/host env; reject unknown altered inspect values.",
+      "Fixed image ID,3CPU4GiB/equal swap256PID8GiBworkspace,900s+60cleanup; explicit exec tmpfs and TMPDIR/workspace; no resource expansion."
+    ],
+    "lifecycle": [
+      "Create/admission/seed/env/list/collect/observer failures and timeout/cancel retain stage/usage/failure; cleanup attempted on every created/maybe-created handle and independently retain absence outcome.",
+      "Output caps/transport caps/watchdog disconnects/missing final receipts never produce qualified success.",
+      "Unknown costs remain null with exclusions; all campaign/task/native/global flags false even successful collection."
+    ],
+    "parser": [
+      "Full lossless stream,real stderr and exit/error; no printable-only filtering or truncation tolerated.",
+      "No empty/malformed/trailing/duplicate/contradictory package or listing stream; retain zero-test packages but reject missing package closure.",
+      "Unexpected lifecycle/run/bench output or package errors fail collection; no inferred dynamic subtests,capability skips or body outcomes.",
+      "Collection manifest package identity and top-level Test/Example/Fuzz candidates bound to actual package metadata,listing and source; no packageprefix alias."
+    ]
+  },
+  "forbidden": "Live daemon/Go/Cargo/package/upstream/native/provider/network actions",
+  "inputs": {
+    "benchmarks/head-to-head/f05-go01-next-qualification-20261029/freeze.json": {
+      "bytes": 1421,
+      "sha256": "c2f6160768d023eee42f62e51511a5af53d448fff0d7f1edc807bc4a9623a09d"
+    },
+    "benchmarks/head-to-head/f05-go01-next-qualification-20261029/go-only-projection-1/freeze.json": {
+      "bytes": 1119,
+      "sha256": "424d9381ba042a60ba562cae5236279225d27c984a17636a8fa7e8d1d7e256ad"
+    },
+    "benchmarks/head-to-head/f05-go01-next-qualification-20261029/go-only-projection-1/projection-spec.json": {
+      "bytes": 1900,
+      "sha256": "d6eac9285a5cb14967352d978fe7983fbb54498c1382ededbfa8d0c8b1dfeda0"
+    },
+    "benchmarks/head-to-head/f05-go01-next-qualification-20261029/plan.json": {
+      "bytes": 5817,
+      "sha256": "5eff74e73198becf50a55d3145f704a9eff29e4f6107d95826a54aa58d486f69"
+    },
+    "benchmarks/head-to-head/f05-go01-offline-setup-plan-20261029/amendment-1/setup.py": {
+      "bytes": 21260,
+      "sha256": "06e3eb82f695812f96816c820f61fef1cceb242c636de5980284824948604de0"
+    }
+  },
+  "roleDisclosure": "Reviewer authored prior source-only plan and Go-only projection, not collection driver. Independent implementation review, not blind task trial.",
+  "state": "pre-implementation-review expectations; driver handoff pending"
+}

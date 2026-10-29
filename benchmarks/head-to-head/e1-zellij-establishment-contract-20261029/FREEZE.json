@@ -1,0 +1,17 @@
+{
+  "identity": "e1-zellij-establishment-contract-20261029",
+  "state": "proposal-concluded-no-production-high-code-change",
+  "sourceReviewFreezeSha256": "11d33120596bfe8cca2d5983f419e80eef17816acaade50bb398d500fc0bc58e",
+  "compiledPerRepositoryFingerprintAllowlistRejected": true,
+  "knownDevelopmentNotHoldout": true,
+  "automaticHighChangeRecommended": false,
+  "actions": "source-only local reads/data validation; no production/index/history/runtime changes",
+  "artifactSha256": {
+    "README.md": "a3237d5b80943ad0c688851cc51368db2a9f6c129943188b7b8c059cf6c5339e",
+    "checks.json": "a61f1a7fc3bc8ed01fc988f770e1e88df1d221225e4e57dbb5c8b736bdf05754",
+    "recommendation.json": "1fea8bd73dc8c784b488ad17c11ccbe92bf150c7130ec318590e475bdd0a4b11",
+    "rejected-fingerprint-option.json": "d32515a539d0d4211b445e294dd5a92c313b324f02308f7eb6f5f2ba548e5b64",
+    "rejected-option-disposition.json": "c6d14984611805c2c2eac9d88aabc50e47cdd7731622fbbd7cea2d2b0f1e6208",
+    "source-review-recheck.stdout": "7b23d25002ae425a191cbfaabac27e137cda057776de91c5bd41477335284e33"
+  }
+}

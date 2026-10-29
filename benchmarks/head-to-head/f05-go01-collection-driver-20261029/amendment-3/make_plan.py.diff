@@ -1,0 +1,42 @@
+--- amendment-2/make_plan.py
++++ amendment-3/make_plan.py
+@@ -44,6 +44,8 @@
+     paths = [
+         HERE.parent / "FREEZE.json",
+         HERE.parent / "amendment-1/FREEZE.json",
++        HERE.parent / "amendment-2/FREEZE.json",
++        BASE / "f05-go01-collection-driver-review-20261029/amendment-2/FREEZE.json",
+         BASE / "f05-go01-collection-driver-review-20261029/amendment-1/FREEZE.json",
+         *sorted((HERE / "sources").rglob("*.go")),
+         BASE / "f05-go01-collection-driver-review-20261029/FREEZE.json",
+@@ -66,9 +68,9 @@
+     bindings = {str(path): sha(path) for path in paths}
+     bindings.update(json.loads((NEXT / "input-bindings.json").read_text()))
+     plan = {
+-        "identity": "go01-collection-driver-amendment-2",
+-        "amendsAuthorFreezeSha256": "0bdbd19da1a1607bb4a104156c008a05b934736556465d632364e634daeaa8e3",
+-        "beforeReviewFreezeSha256": "7ad27fa44da993c1619abef1881355e7f94eade3c12e5783e8b8d21bb119e032",
++        "identity": "go01-collection-driver-amendment-3",
++        "amendsAuthorFreezeSha256": "a922cea56e81f471b1a6cd69ec576abcde7b9dd67aed246cb745e3432531196e",
++        "beforeReviewFreezeSha256": "cf79a5349dae67b0862322a7632c1c8735c1f87612a68ab7cfda889a3eff10fb",
+         "state": "source-only-driver-proposal-not-admitted",
+         "parentPlanSha256": sha(NEXT / "plan.json"),
+         "parentFreezeSha256": sha(NEXT / "freeze.json"),
+@@ -137,6 +139,7 @@
+                 "observer_controls.py",
+                 "amendment_controls.py",
+                 "goenv_controls.py",
++                "testonly_controls.py",
+             ]
+         },
+         "localFiles": {
+@@ -145,6 +148,9 @@
+             "goenv-source-semantics.json": sha(HERE / "goenv-source-semantics.json"),
+             "actual-go-env-stdout.bin": sha(HERE / "actual-go-env-stdout.bin"),
+             "actual-go-env-receipt.json": sha(HERE / "actual-go-env-receipt.json"),
++            "test-only-source-semantics.json": sha(HERE / "test-only-source-semantics.json"),
++            "actual-go-list-stdout.bin": sha(HERE / "actual-go-list-stdout.bin"),
++            "actual-go-list-receipt.json": sha(HERE / "actual-go-list-receipt.json"),
+         },
+         "bindings": bindings,
+     }

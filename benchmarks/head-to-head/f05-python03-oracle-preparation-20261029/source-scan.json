@@ -1,0 +1,308 @@
+{
+  "allRegularFilesMatched": 981,
+  "astParseFailures": [],
+  "executionOccurred": false,
+  "indexConsulted": false,
+  "nativeCollectionOccurred": false,
+  "selectedFiles": 20,
+  "skipCandidateSites": 20,
+  "sourceArchivePath": "/tmp/dotrepo-f05-qualification-next8-20261029/python-03/source.tar",
+  "sourceArchiveSha256": "836cb208ff4ff481e5b9879fc3c10de793e7f8bca247e645661de1e233f63aa6",
+  "sourceBytes": 6945071,
+  "sourceInventoryPath": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-next8-20261029/python-03/inventory.json",
+  "sourceInventorySha256": "db7f542988b53bb874e6bbc0c59fb861b079991f84dfe2b0758ebdaf313fc821",
+  "sourcePathSetMatched": true,
+  "testFilesParsed": [
+    {
+      "packageImports": [],
+      "path": "test/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "topLevelTestOrLoadTestsFunctions": []
+    },
+    {
+      "packageImports": [
+        "import youtube_dl.extractor",
+        "from youtube_dl import YoutubeDL",
+        "from youtube_dl.compat import (",
+        "from youtube_dl.utils import ("
+      ],
+      "path": "test/helper.py",
+      "sha256": "1a71eb39bc2628ef9d6c1fb87c521914d5dd3ccbb17d1cf164be892f789bb055",
+      "topLevelTestOrLoadTestsFunctions": []
+    },
+    {
+      "packageImports": [
+        "from youtube_dl.compat import (",
+        "from youtube_dl.extractor.common import InfoExtractor",
+        "from youtube_dl.extractor import (",
+        "from youtube_dl.utils import ("
+      ],
+      "path": "test/test_InfoExtractor.py",
+      "sha256": "8f337d2329b4880382621d217f05339fd551c2e405793390787ccb4b810472bd",
+      "topLevelTestOrLoadTestsFunctions": []
+    },
+    {
+      "packageImports": [
+        "from youtube_dl import YoutubeDL",
+        "from youtube_dl.compat import (",
+        "from youtube_dl.extractor import YoutubeIE",
+        "from youtube_dl.extractor.common import InfoExtractor",
+        "from youtube_dl.postprocessor.common import PostProcessor",
+        "from youtube_dl.utils import ("
+      ],
+      "path": "test/test_YoutubeDL.py",
+      "sha256": "07f9b1b9506b67b123121c9f9630dfaa90d127354f7135fd6914ddb7cfa79dd6",
+      "topLevelTestOrLoadTestsFunctions": []
+    },
+    {
+      "packageImports": [
+        "from youtube_dl.utils import YoutubeDLCookieJar"
+      ],
+      "path": "test/test_YoutubeDLCookieJar.py",
+      "sha256": "06c4cabe8417735fa978d5e727607b72cdec32d7edde00166c2877ec0ea6ad25",
+      "topLevelTestOrLoadTestsFunctions": []
+    },
+    {
+      "packageImports": [
+        "from youtube_dl.aes import aes_decrypt, aes_encrypt, aes_cbc_decrypt, aes_cbc_encrypt, aes_decrypt_text, aes_ecb_encrypt",
+        "from youtube_dl.utils import bytes_to_intlist, intlist_to_bytes"
+      ],
+      "path": "test/test_aes.py",
+      "sha256": "67fd60f244a4bf749ab775cb49e93785d814e2626bd32bd2e8965acb0ef36528",
+      "topLevelTestOrLoadTestsFunctions": []
+    },
+    {
+      "packageImports": [
+        "from youtube_dl import YoutubeDL",
+        "from youtube_dl.utils import DownloadError"
+      ],
+      "path": "test/test_age_restriction.py",
+      "sha256": "a00dee740a4325729190513bdbdf72cb41fba9c345440a278cdd07e8604c47cf",
+      "topLevelTestOrLoadTestsFunctions": []
+    },
+    {
+      "packageImports": [
+        "from youtube_dl.extractor import ("
+      ],
+      "path": "test/test_all_urls.py",
+      "sha256": "417918cc01146c29d9f9586a4c8292fd7172a68d0ef93eebe137162ee29f398b",
+      "topLevelTestOrLoadTestsFunctions": []
+    },
+    {
+      "packageImports": [
+        "from youtube_dl.cache import Cache",
+        "from youtube_dl.utils import version_tuple",
+        "from youtube_dl.version import __version__"
+      ],
+      "path": "test/test_cache.py",
+      "sha256": "503ece8ff561bc4a5627d93b85ef07ee59404b83abab938ecca9b9040a972828",
+      "topLevelTestOrLoadTestsFunctions": []
+    },
+    {
+      "packageImports": [
+        "from youtube_dl.compat import (",
+        "import youtube_dl.compat"
+      ],
+      "path": "test/test_compat.py",
+      "sha256": "1892abd9a932df9887b79b5519cb07a0ac3236a5be480112ddfc40b040020362",
+      "topLevelTestOrLoadTestsFunctions": []
+    },
+    {
+      "packageImports": [
+        "import youtube_dl.YoutubeDL",
+        "from youtube_dl.compat import (",
+        "from youtube_dl.utils import (",
+        "from youtube_dl.extractor import get_info_extractor"
+      ],
+      "path": "test/test_download.py",
+      "sha256": "1c96c9d0727cbf8c01a449bb2bf94f659293040590a6ed7b3c8b6edc825b3fe5",
+      "topLevelTestOrLoadTestsFunctions": []
+    },
+    {
+      "packageImports": [
+        "from youtube_dl import YoutubeDL",
+        "from youtube_dl.compat import (",
+        "from youtube_dl.utils import (",
+        "from youtube_dl.downloader.external import (",
+        "from youtube_dl.postprocessor import ("
+      ],
+      "path": "test/test_downloader_external.py",
+      "sha256": "4629150db82a4c166a3f3fb2ec5da914de1e97499715941465be4f8d48f89711",
+      "topLevelTestOrLoadTestsFunctions": []
+    },
+    {
+      "packageImports": [
+        "from youtube_dl import YoutubeDL",
+        "from youtube_dl.compat import compat_http_server",
+        "from youtube_dl.downloader.http import HttpFD",
+        "from youtube_dl.utils import encodeFilename"
+      ],
+      "path": "test/test_downloader_http.py",
+      "sha256": "b0b6863e5ef58a5e386a7a1769e04e4e957cd60eb878ed3bffeeb26f61119dad",
+      "topLevelTestOrLoadTestsFunctions": []
+    },
+    {
+      "packageImports": [
+        "from youtube_dl.compat import compat_register_utf8, compat_subprocess_get_DEVNULL",
+        "from youtube_dl.utils import encodeArgument"
+      ],
+      "path": "test/test_execution.py",
+      "sha256": "127273c44aed7e4e30efea678e4a7040d2bd39050443f30ac481612d4ecc1163",
+      "topLevelTestOrLoadTestsFunctions": []
+    },
+    {
+      "packageImports": [
+        "from youtube_dl.compat import (",
+        "from youtube_dl.utils import (",
+        "from youtube_dl import YoutubeDL"
+      ],
+      "path": "test/test_http.py",
+      "sha256": "d336a188d149107734c37462e5810032bc68c99369713333eee001691f2a1b43",
+      "topLevelTestOrLoadTestsFunctions": []
+    },
+    {
+      "packageImports": [
+        "from youtube_dl.extractor import IqiyiIE"
+      ],
+      "path": "test/test_iqiyi_sdk_interpreter.py",
+      "sha256": "d53a531cdbf794685659d9884c3109983895c55239893b3c81a285f6a2691261",
+      "topLevelTestOrLoadTestsFunctions": []
+    },
+    {
+      "packageImports": [
+        "from youtube_dl.compat import compat_str as str",
+        "from youtube_dl.jsinterp import JS_Undefined, JSInterpreter"
+      ],
+      "path": "test/test_jsinterp.py",
+      "sha256": "61c7903a3d7167c2db13aa95fd22088c00959eb724970012854ecd77494431c2",
+      "topLevelTestOrLoadTestsFunctions": []
+    },
+    {
+      "packageImports": [
+        "from youtube_dl.extractor import ("
+      ],
+      "path": "test/test_netrc.py",
+      "sha256": "27ca7d1116b89c66ada4128f9685114d8d7185388ca76fc59d7e2f040c9f538c",
+      "topLevelTestOrLoadTestsFunctions": []
+    },
+    {
+      "packageImports": [
+        "from youtube_dl.options import _hide_login_info"
+      ],
+      "path": "test/test_options.py",
+      "sha256": "387079d02864cf9bdd560a2cb4d1ee659ed047b6da5fda39d7cfe9edde496d6a",
+      "topLevelTestOrLoadTestsFunctions": []
+    },
+    {
+      "packageImports": [
+        "from youtube_dl.postprocessor import MetadataFromTitlePP"
+      ],
+      "path": "test/test_postprocessors.py",
+      "sha256": "f0b302b9204cc210bf5a4780ea141e0eff268696456a89c785a6bf9691ff0139",
+      "topLevelTestOrLoadTestsFunctions": []
+    },
+    {
+      "packageImports": [
+        "from youtube_dl.compat import ("
+      ],
+      "path": "test/test_socks.py",
+      "sha256": "c63a0ccc3396850e82fafc14627f8d7cb2fbdef45cba5254726eeaf129812555",
+      "topLevelTestOrLoadTestsFunctions": []
+    },
+    {
+      "packageImports": [
+        "from youtube_dl.extractor import ("
+      ],
+      "path": "test/test_subtitles.py",
+      "sha256": "5b461c83a14b9b938d86475b8439146f1b20b2835a8f114c454594ed690b2512",
+      "topLevelTestOrLoadTestsFunctions": []
+    },
+    {
+      "packageImports": [
+        "from youtube_dl.swfinterp import SWFInterpreter",
+        "from youtube_dl.compat import compat_open as open"
+      ],
+      "path": "test/test_swfinterp.py",
+      "sha256": "e5a42025ba3472f87468819684f54fb74d92dda8204379c0bcab374913715960",
+      "topLevelTestOrLoadTestsFunctions": []
+    },
+    {
+      "packageImports": [
+        "from youtube_dl.traversal import (",
+        "from youtube_dl.compat import (",
+        "from youtube_dl.utils import ("
+      ],
+      "path": "test/test_traversal.py",
+      "sha256": "130f5d9ae37fec08561dffcc4b3c7bbee970858a1962c94bb04b50628ea3228a",
+      "topLevelTestOrLoadTestsFunctions": []
+    },
+    {
+      "packageImports": [
+        "from youtube_dl.compat import compat_open as open"
+      ],
+      "path": "test/test_unicode_literals.py",
+      "sha256": "cae1aabe4559e61641cb78ea26345e81eda496c03e39492e3f77574fc446bca0",
+      "topLevelTestOrLoadTestsFunctions": []
+    },
+    {
+      "packageImports": [
+        "from youtube_dl.update import rsa_verify"
+      ],
+      "path": "test/test_update.py",
+      "sha256": "f43e21c85302e28108202c80c40d578d6c7d89908db6b5cb50abd65e06f0cdc8",
+      "topLevelTestOrLoadTestsFunctions": []
+    },
+    {
+      "packageImports": [
+        "from youtube_dl.utils import (",
+        "from youtube_dl.compat import ("
+      ],
+      "path": "test/test_utils.py",
+      "sha256": "6c74527100dc8b1d9077e9fdcc6fa6b79c12b4eaf1779420fb097ec22f404d2d",
+      "topLevelTestOrLoadTestsFunctions": []
+    },
+    {
+      "packageImports": [],
+      "path": "test/test_verbose_output.py",
+      "sha256": "00c3c07b8082451108e410a8564f40cbe8291702f507a8b0ae834368ec4efcb4",
+      "topLevelTestOrLoadTestsFunctions": []
+    },
+    {
+      "packageImports": [
+        "import youtube_dl.YoutubeDL",
+        "import youtube_dl.extractor",
+        "from youtube_dl.compat import compat_open as open"
+      ],
+      "path": "test/test_write_annotations.py",
+      "sha256": "547723a0f50573ffa0f41a273dc1ab7925e81087bcf8338a666b905a0bf3b216",
+      "topLevelTestOrLoadTestsFunctions": []
+    },
+    {
+      "packageImports": [
+        "from youtube_dl.extractor import ("
+      ],
+      "path": "test/test_youtube_lists.py",
+      "sha256": "0cb633ff8553a542f68a5e610efa1e20014cf80c4f5e5103a199b1c5f00a3d49",
+      "topLevelTestOrLoadTestsFunctions": []
+    },
+    {
+      "packageImports": [
+        "from youtube_dl.extractor import YoutubeIE"
+      ],
+      "path": "test/test_youtube_misc.py",
+      "sha256": "c12410e9237590c1ccf7093e51996451f430304b9429e58543de05855a8dd722",
+      "topLevelTestOrLoadTestsFunctions": []
+    },
+    {
+      "packageImports": [
+        "from youtube_dl.compat import (",
+        "from youtube_dl.extractor import YoutubeIE",
+        "from youtube_dl.jsinterp import JSInterpreter"
+      ],
+      "path": "test/test_youtube_signature.py",
+      "sha256": "cf3f500f60e8581c3274105cea8cdd68adca52d0fc438b09d2674ada3c354aef",
+      "topLevelTestOrLoadTestsFunctions": []
+    }
+  ],
+  "testParameterLocalFilePresent": false
+}

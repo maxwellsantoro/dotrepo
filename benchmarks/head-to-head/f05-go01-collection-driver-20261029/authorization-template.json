@@ -1,0 +1,31 @@
+{
+  "state": "NOT_AUTHORIZED",
+  "synthetic": true,
+  "planSha256": "0dfc8aaeb60efc55de51d9120850b4ed379532bfce09497112ebbecd7a0d69ac",
+  "output": "/ABSOLUTE/FRESH/OUTPUT",
+  "scratch": "/ABSOLUTE/FRESH/SCRATCH",
+  "commands": [
+    "go env -json GOOS GOARCH GOVERSION GOTOOLCHAIN GOENV GOWORK GOFLAGS CGO_ENABLED CC CXX",
+    "go list -json ./...",
+    "go test -json -list . ./..."
+  ],
+  "limits": {
+    "cleanupSeconds": 60,
+    "combinedStdoutStderrPerCommandBytes": 2097152,
+    "cpus": 3,
+    "dependencyTmpfsBytes": 1073741824,
+    "memoryBytes": 4294967296,
+    "memorySwapBytes": 4294967296,
+    "pids": 256,
+    "sourcePlusSeedExpandedBytes": 2147483648,
+    "tmpTmpfsBytes": 536870912,
+    "transportBytesPerArchive": 536870912,
+    "workSecondsIncludingPreflight": 900,
+    "workspaceTmpfsBytes": 8589934592
+  },
+  "maxAttempts": 1,
+  "collectionAcceptance": {
+    "path": "/MISSING/INDEPENDENT/ACCEPTANCE",
+    "sha256": "UNRESOLVED"
+  }
+}

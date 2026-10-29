@@ -1,0 +1,27 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-go01-collection-65c4db826e0d",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "node -e '// Trusted data-only observer. Never imports or executes repository modules.\nconst fs = require('\"'\"'node:fs'\"'\"');\nconst path = require('\"'\"'node:path'\"'\"');\nconst crypto = require('\"'\"'node:crypto'\"'\"');\n// Only owned observer controls pass a synthetic argv root; production passes none.\nconst root = process.argv[1] || '\"'\"'/workspace/repository'\"'\"';\nconst rows = [];\nlet bytes = 0;\nfunction visit(relative) {\n  if (rows.length >= 200000) throw new Error('\"'\"'source tree entry bound'\"'\"');\n  const full = relative === '\"'\"'.'\"'\"' ? root : path.join(root, relative);\n  const stat = fs.lstatSync(full);\n  if (stat.isSymbolicLink()) {\n    rows.push([relative, '\"'\"'symlink'\"'\"', fs.readlinkSync(full)]);\n  } else if (stat.isDirectory()) {\n    rows.push([relative, '\"'\"'directory'\"'\"']);\n    for (const child of fs.readdirSync(full)) visit(relative === '\"'\"'.'\"'\"' ? child : relative + '\"'\"'/'\"'\"' + child);\n  } else if (stat.isFile()) {\n    if (stat.size > 134217728) throw new Error('\"'\"'source tree file bound'\"'\"');\n    bytes += stat.size;\n    if (bytes > 2147483648) throw new Error('\"'\"'source tree expanded bound'\"'\"');\n    rows.push([relative, '\"'\"'file'\"'\"', crypto.createHash('\"'\"'sha256'\"'\"').update(fs.readFileSync(full)).digest('\"'\"'hex'\"'\"'), stat.size]);\n  } else {\n    rows.push([relative, '\"'\"'special'\"'\"']);\n  }\n}\nvisit('\"'\"'.'\"'\"');\nrows.sort((a, b) => Buffer.compare(Buffer.from(a[0]), Buffer.from(b[0])));\nconst raw = rows.map(row => JSON.stringify(row) + '\"'\"'\\n'\"'\"').join('\"'\"''\"'\"');\nconsole.log(JSON.stringify({sha256: crypto.createHash('\"'\"'sha256'\"'\"').update(raw).digest('\"'\"'hex'\"'\"'), entries: rows.length, bytes}));\n'"
+  ],
+  "startedAt": "2026-10-29T10:48:02.998300+00:00",
+  "elapsedSeconds": 1.2293806669767946,
+  "exitCode": 0,
+  "error": null,
+  "cancelled": false,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "24e270a2b7e40a9e747492b86c99ca35e838c96d566fcbdfdc372adb215ab88c",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "binaryPath": null,
+  "binaryBytes": null,
+  "binarySha256": null,
+  "costUsd": null,
+  "costExclusions": [
+    "No metered host/container/download dollar receipt; no provider calls."
+  ]
+}

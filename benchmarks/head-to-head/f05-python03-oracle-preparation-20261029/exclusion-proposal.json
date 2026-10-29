@@ -1,0 +1,50 @@
+{
+  "globalSkipCountAllowance": null,
+  "groups": [
+    {
+      "accepted": false,
+      "behaviorExercised": false,
+      "condition": "Frozen unmodified _SKIP_SOCKS_TEST = True; no monkeypatch/subclass/config changes; collected identities must reconcile exactly.",
+      "observed": false,
+      "proposal": "Retain terminal test outcomes but separately mark real SOCKS proxy behavior excluded by maintained source default.",
+      "sourceIdentities": [
+        "test.test_socks.TestSocks.test_socks4",
+        "test.test_socks.TestSocks.test_socks4a",
+        "test.test_socks.TestSocks.test_socks5"
+      ],
+      "sourcePath": "test/test_socks.py",
+      "sourceSpan": [
+        79,
+        114
+      ]
+    },
+    {
+      "accepted": false,
+      "behaviorExercised": false,
+      "condition": "Frozen committed test/parameters.json has no primary_proxy, primary_server_ip, secondary_proxy, secondary_server_ip; test/local_parameters.json remains absent; no parameter overrides supply these keys. Exact native identities must reconcile.",
+      "observed": false,
+      "proposal": "Retain source-default optional-configuration early returns as explicit proxy-behavior exclusions if prospectively accepted. They are neither observed proxy tests nor evidence the optional services work. Configuring proxy tests instead requires exact configuration, privacy/network authority and prerequisite freeze.",
+      "sourceIdentities": [
+        "test.test_socks.TestMultipleSocks.test_proxy_http",
+        "test.test_socks.TestMultipleSocks.test_proxy_https",
+        "test.test_socks.TestMultipleSocks.test_secondary_proxy_http",
+        "test.test_socks.TestMultipleSocks.test_secondary_proxy_https"
+      ],
+      "sourcePath": "test/test_socks.py",
+      "sourceSpan": [
+        24,
+        76
+      ]
+    }
+  ],
+  "neverCoveredByThisProposal": [
+    "test_download network exhaustion return (test/test_download.py:180-182)",
+    "Unexpected skip/return at any test or nesting level",
+    "Unknown or changed dynamic extractor identity",
+    "Missing setup/import/collection, timeout/resource failure or truncated output"
+  ],
+  "otherSkipCandidates": "source-skip-candidates.json has 20 syntactically identified candidate call/decorator sites, not 20 tests, not an exhaustive runtime skip inventory, and not an approved list. Dynamic test definitions and capability conditions still require exact pre-run assessment/collection.",
+  "policyChangeAfterOutcomeForbidden": true,
+  "sourceRevision": "956b8c585591b401a543e409accb163eeaaa1193",
+  "state": "unaccepted exact source-default behavior exclusions; no general skip allowance"
+}

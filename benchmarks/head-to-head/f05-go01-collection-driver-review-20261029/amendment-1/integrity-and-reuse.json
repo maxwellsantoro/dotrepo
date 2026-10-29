@@ -1,0 +1,48 @@
+{
+  "copiedAuthorFreezeRestored": true,
+  "freshObserverCalls": 0,
+  "frozenPacketsVerified": [
+    {
+      "allUnchanged": true,
+      "artifacts": 33,
+      "freeze": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-collection-driver-20261029/FREEZE.json",
+      "sha256": "b176a6c3dfff4965a53e601a05eccab03257f9b3cfe78b5846317d29b2302eaa"
+    },
+    {
+      "allUnchanged": true,
+      "artifacts": 29,
+      "freeze": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-1/FREEZE.json",
+      "sha256": "0bdbd19da1a1607bb4a104156c008a05b934736556465d632364e634daeaa8e3"
+    },
+    {
+      "allUnchanged": true,
+      "artifacts": 11,
+      "freeze": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-collection-driver-review-20261029/FREEZE.json",
+      "sha256": "2329a7941142c543ea6450972f5b1041f78f02aad36d7b232b3059a0d773a7e1"
+    }
+  ],
+  "nodeBytesStillMatch": true,
+  "priorIndependentObserverControlsPassed": 6,
+  "priorObserverEvidenceSha256": "7b6f2e5f569b6f9899bd8f15a5372e83f66678b3508c04b44fcb9f3a64786567",
+  "reusedObserverAndTransportEquality": {
+    "file_sha": true,
+    "observer_controls.py": true,
+    "process_io.py": true,
+    "tree-observer.js": true,
+    "tree_expected": true,
+    "write": true
+  },
+  "samePlanFields": [
+    "commands",
+    "limits",
+    "environment",
+    "environmentSha256",
+    "imageId",
+    "sourceArchiveSha256",
+    "projection",
+    "expectedGoEnv",
+    "expectedToolOutput",
+    "toolProbe",
+    "treeObservation"
+  ]
+}

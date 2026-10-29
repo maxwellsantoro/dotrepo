@@ -1,0 +1,184 @@
+{
+  "synthetic": true,
+  "checks": [
+    {
+      "case": "ordinary-synthetic-package-and-listing",
+      "expectedAccepted": true,
+      "actualAccepted": true,
+      "matched": true
+    },
+    {
+      "case": "duplicate-key",
+      "expectedAccepted": false,
+      "actualAccepted": false,
+      "matched": true
+    },
+    {
+      "case": "non-object",
+      "expectedAccepted": false,
+      "actualAccepted": false,
+      "matched": true
+    },
+    {
+      "case": "non-json-number",
+      "expectedAccepted": false,
+      "actualAccepted": false,
+      "matched": true
+    },
+    {
+      "case": "truncated-object",
+      "expectedAccepted": false,
+      "actualAccepted": false,
+      "matched": true
+    },
+    {
+      "case": "invalid-utf8",
+      "expectedAccepted": false,
+      "actualAccepted": false,
+      "matched": true
+    },
+    {
+      "case": "non-json-tail",
+      "expectedAccepted": false,
+      "actualAccepted": false,
+      "matched": true
+    },
+    {
+      "case": "empty-stream",
+      "expectedAccepted": false,
+      "actualAccepted": false,
+      "matched": true
+    },
+    {
+      "case": "pid-container-join",
+      "expectedAccepted": false,
+      "actualAccepted": false,
+      "matched": true
+    },
+    {
+      "case": "ipc-host",
+      "expectedAccepted": false,
+      "actualAccepted": false,
+      "matched": true
+    },
+    {
+      "case": "added-cap",
+      "expectedAccepted": false,
+      "actualAccepted": false,
+      "matched": true
+    },
+    {
+      "case": "security-unconfined",
+      "expectedAccepted": false,
+      "actualAccepted": false,
+      "matched": true
+    },
+    {
+      "case": "tmpfs-workspace-larger-last",
+      "expectedAccepted": false,
+      "actualAccepted": true,
+      "matched": false
+    },
+    {
+      "case": "tmpfs-workspace-suid-last",
+      "expectedAccepted": false,
+      "actualAccepted": true,
+      "matched": false
+    },
+    {
+      "case": "tmpfs-dependency-extra-overlay",
+      "expectedAccepted": false,
+      "actualAccepted": true,
+      "matched": false
+    },
+    {
+      "case": "missing-event-package",
+      "expectedAccepted": false,
+      "actualAccepted": false,
+      "matched": true
+    },
+    {
+      "case": "event-body-identity",
+      "expectedAccepted": false,
+      "actualAccepted": false,
+      "matched": true
+    },
+    {
+      "case": "event-after-terminal",
+      "expectedAccepted": false,
+      "actualAccepted": false,
+      "matched": true
+    },
+    {
+      "case": "missing-package-terminal",
+      "expectedAccepted": false,
+      "actualAccepted": false,
+      "matched": true
+    },
+    {
+      "case": "duplicate-start",
+      "expectedAccepted": false,
+      "actualAccepted": false,
+      "matched": true
+    },
+    {
+      "case": "package-directory-alias",
+      "expectedAccepted": false,
+      "actualAccepted": true,
+      "matched": false
+    },
+    {
+      "case": "selected-source-dotdot",
+      "expectedAccepted": false,
+      "actualAccepted": true,
+      "matched": false
+    },
+    {
+      "case": "selected-source-duplicate",
+      "expectedAccepted": false,
+      "actualAccepted": true,
+      "matched": false
+    }
+  ],
+  "matched": 17,
+  "total": 23,
+  "mismatches": [
+    {
+      "case": "tmpfs-workspace-larger-last",
+      "expectedAccepted": false,
+      "actualAccepted": true,
+      "matched": false
+    },
+    {
+      "case": "tmpfs-workspace-suid-last",
+      "expectedAccepted": false,
+      "actualAccepted": true,
+      "matched": false
+    },
+    {
+      "case": "tmpfs-dependency-extra-overlay",
+      "expectedAccepted": false,
+      "actualAccepted": true,
+      "matched": false
+    },
+    {
+      "case": "package-directory-alias",
+      "expectedAccepted": false,
+      "actualAccepted": true,
+      "matched": false
+    },
+    {
+      "case": "selected-source-dotdot",
+      "expectedAccepted": false,
+      "actualAccepted": true,
+      "matched": false
+    },
+    {
+      "case": "selected-source-duplicate",
+      "expectedAccepted": false,
+      "actualAccepted": true,
+      "matched": false
+    }
+  ],
+  "realProcessSocketGoDaemonNativeProviderCalls": 0
+}

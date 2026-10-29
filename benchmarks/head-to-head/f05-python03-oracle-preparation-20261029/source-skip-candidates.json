@@ -1,0 +1,162 @@
+[
+  {
+    "endLine": 111,
+    "excerpt": "            self.skipTest(_encode_str(reason))\n",
+    "meaning": "Source skip/capability candidate only; no exclusion accepted and no native collection identity inferred.",
+    "path": "test/test_download.py",
+    "sha256": "1c96c9d0727cbf8c01a449bb2bf94f659293040590a6ed7b3c8b6edc825b3fe5",
+    "startLine": 111
+  },
+  {
+    "endLine": 114,
+    "excerpt": "            print_skipping('IE marked as not _WORKING')\n",
+    "meaning": "Source skip/capability candidate only; no exclusion accepted and no native collection identity inferred.",
+    "path": "test/test_download.py",
+    "sha256": "1c96c9d0727cbf8c01a449bb2bf94f659293040590a6ed7b3c8b6edc825b3fe5",
+    "startLine": 114
+  },
+  {
+    "endLine": 122,
+    "excerpt": "            print_skipping(test_case['skip'])\n",
+    "meaning": "Source skip/capability candidate only; no exclusion accepted and no native collection identity inferred.",
+    "path": "test/test_download.py",
+    "sha256": "1c96c9d0727cbf8c01a449bb2bf94f659293040590a6ed7b3c8b6edc825b3fe5",
+    "startLine": 122
+  },
+  {
+    "endLine": 126,
+    "excerpt": "                print_skipping('test depends on %sIE, marked as not WORKING' % other_ie.ie_key())\n",
+    "meaning": "Source skip/capability candidate only; no exclusion accepted and no native collection identity inferred.",
+    "path": "test/test_download.py",
+    "sha256": "1c96c9d0727cbf8c01a449bb2bf94f659293040590a6ed7b3c8b6edc825b3fe5",
+    "startLine": 126
+  },
+  {
+    "endLine": 76,
+    "excerpt": "    return unittest.skipUnless(externalFD.available(),\n                               externalFD.get_basename() + ' not found')\n",
+    "meaning": "Source skip/capability candidate only; no exclusion accepted and no native collection identity inferred.",
+    "path": "test/test_downloader_external.py",
+    "sha256": "4629150db82a4c166a3f3fb2ec5da914de1e97499715941465be4f8d48f89711",
+    "startLine": 75
+  },
+  {
+    "endLine": 241,
+    "excerpt": "    return unittest.skipUnless(\n        avail, externalFD.get_basename() + ' not found')\n",
+    "meaning": "Source skip/capability candidate only; no exclusion accepted and no native collection identity inferred.",
+    "path": "test/test_downloader_external.py",
+    "sha256": "4629150db82a4c166a3f3fb2ec5da914de1e97499715941465be4f8d48f89711",
+    "startLine": 240
+  },
+  {
+    "endLine": 323,
+    "excerpt": "    @unittest.skipUnless(_check_cert, 'No support for certificate check in SSL')\n",
+    "meaning": "Source skip/capability candidate only; no exclusion accepted and no native collection identity inferred.",
+    "path": "test/test_http.py",
+    "sha256": "d336a188d149107734c37462e5810032bc68c99369713333eee001691f2a1b43",
+    "startLine": 323
+  },
+  {
+    "endLine": 473,
+    "excerpt": "    @unittest.skipUnless(brotli, 'brotli support is not installed')\n",
+    "meaning": "Source skip/capability candidate only; no exclusion accepted and no native collection identity inferred.",
+    "path": "test/test_http.py",
+    "sha256": "d336a188d149107734c37462e5810032bc68c99369713333eee001691f2a1b43",
+    "startLine": 473
+  },
+  {
+    "endLine": 526,
+    "excerpt": "    @unittest.skip('Not yet working')\n",
+    "meaning": "Source skip/capability candidate only; no exclusion accepted and no native collection identity inferred.",
+    "path": "test/test_jsinterp.py",
+    "sha256": "61c7903a3d7167c2db13aa95fd22088c00959eb724970012854ecd77494431c2",
+    "startLine": 526
+  },
+  {
+    "endLine": 168,
+    "excerpt": "@unittest.skip('IE broken')\n",
+    "meaning": "Source skip/capability candidate only; no exclusion accepted and no native collection identity inferred.",
+    "path": "test/test_subtitles.py",
+    "sha256": "5b461c83a14b9b938d86475b8439146f1b20b2835a8f114c454594ed690b2512",
+    "startLine": 168
+  },
+  {
+    "endLine": 205,
+    "excerpt": "@unittest.skip('IE broken')\n",
+    "meaning": "Source skip/capability candidate only; no exclusion accepted and no native collection identity inferred.",
+    "path": "test/test_subtitles.py",
+    "sha256": "5b461c83a14b9b938d86475b8439146f1b20b2835a8f114c454594ed690b2512",
+    "startLine": 205
+  },
+  {
+    "endLine": 227,
+    "excerpt": "@unittest.skip('IE broken')\n",
+    "meaning": "Source skip/capability candidate only; no exclusion accepted and no native collection identity inferred.",
+    "path": "test/test_subtitles.py",
+    "sha256": "5b461c83a14b9b938d86475b8439146f1b20b2835a8f114c454594ed690b2512",
+    "startLine": 227
+  },
+  {
+    "endLine": 249,
+    "excerpt": "@unittest.skip('IE broken')\n",
+    "meaning": "Source skip/capability candidate only; no exclusion accepted and no native collection identity inferred.",
+    "path": "test/test_subtitles.py",
+    "sha256": "5b461c83a14b9b938d86475b8439146f1b20b2835a8f114c454594ed690b2512",
+    "startLine": 249
+  },
+  {
+    "endLine": 262,
+    "excerpt": "@unittest.skip('IE broken')\n",
+    "meaning": "Source skip/capability candidate only; no exclusion accepted and no native collection identity inferred.",
+    "path": "test/test_subtitles.py",
+    "sha256": "5b461c83a14b9b938d86475b8439146f1b20b2835a8f114c454594ed690b2512",
+    "startLine": 262
+  },
+  {
+    "endLine": 275,
+    "excerpt": "@unittest.skip('IE broken')\n",
+    "meaning": "Source skip/capability candidate only; no exclusion accepted and no native collection identity inferred.",
+    "path": "test/test_subtitles.py",
+    "sha256": "5b461c83a14b9b938d86475b8439146f1b20b2835a8f114c454594ed690b2512",
+    "startLine": 275
+  },
+  {
+    "endLine": 324,
+    "excerpt": "@unittest.skip('IE broken - DRM only')\n",
+    "meaning": "Source skip/capability candidate only; no exclusion accepted and no native collection identity inferred.",
+    "path": "test/test_subtitles.py",
+    "sha256": "5b461c83a14b9b938d86475b8439146f1b20b2835a8f114c454594ed690b2512",
+    "startLine": 324
+  },
+  {
+    "endLine": 351,
+    "excerpt": "@unittest.skip('IE broken')\n",
+    "meaning": "Source skip/capability candidate only; no exclusion accepted and no native collection identity inferred.",
+    "path": "test/test_subtitles.py",
+    "sha256": "5b461c83a14b9b938d86475b8439146f1b20b2835a8f114c454594ed690b2512",
+    "startLine": 351
+  },
+  {
+    "endLine": 128,
+    "excerpt": "    @unittest.skip('ASR subs all in all supported langs now')\n",
+    "meaning": "Source skip/capability candidate only; no exclusion accepted and no native collection identity inferred.",
+    "path": "test/test_subtitles.py",
+    "sha256": "5b461c83a14b9b938d86475b8439146f1b20b2835a8f114c454594ed690b2512",
+    "startLine": 128
+  },
+  {
+    "endLine": 43,
+    "excerpt": "            self.skipTest('IE marked as not _WORKING')\n",
+    "meaning": "Source skip/capability candidate only; no exclusion accepted and no native collection identity inferred.",
+    "path": "test/test_subtitles.py",
+    "sha256": "5b461c83a14b9b938d86475b8439146f1b20b2835a8f114c454594ed690b2512",
+    "startLine": 43
+  },
+  {
+    "endLine": 48,
+    "excerpt": "                    self.skipTest('mxmlc not found!')\n",
+    "meaning": "Source skip/capability candidate only; no exclusion accepted and no native collection identity inferred.",
+    "path": "test/test_swfinterp.py",
+    "sha256": "e5a42025ba3472f87468819684f54fb74d92dda8204379c0bcab374913715960",
+    "startLine": 48
+  }
+]

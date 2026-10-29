@@ -1,0 +1,82 @@
+{
+  "admissions": {
+    "campaignAdmitted": false,
+    "completeInstructionEstablished": false,
+    "consumerBenefitMeasured": false,
+    "environmentQualified": false,
+    "nativeCollectionOccurred": false,
+    "oracleExecutable": false,
+    "scopeAccepted": false,
+    "taskOutcomeObserved": false
+  },
+  "alternatives": [
+    {
+      "cwd": ".",
+      "role": "Preferred smallest documented full-suite candidate; interpreter and native collection still need freezing.",
+      "upstreamCommand": "python -m unittest discover"
+    },
+    {
+      "cwd": ".",
+      "role": "Explicit Makefile full test invocation; pin compatible Nose/PyNose and prove intended collection before execution.",
+      "upstreamCommand": "nosetests --verbose test"
+    },
+    {
+      "cwd": ".",
+      "role": "Full test invocation followed by flake8; lint is an additional phase, not a substitute for tests. Requires GNU make, runner and flake8.",
+      "upstreamCommand": "make test"
+    }
+  ],
+  "component": "youtube_dl",
+  "historicalGold": {
+    "interpretationAmendmentRequiredBeforeRun": true,
+    "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/gold/python-03.json",
+    "reason": "Original physical-package evidence did not establish coverage. This additional full-source assessment proposes aggregate applicability without rewriting the original uncertainty or substituting youtube_dl/downloader.",
+    "status": "unresolved",
+    "unchanged": true
+  },
+  "notEquivalent": [
+    "python test/test_download.py alone",
+    "youtube_dl/downloader-only tests",
+    "default tox invocation (explicit exclusions)",
+    "make offlinetest",
+    "CI core partition alone",
+    "CI download partition alone",
+    "test listing or successful imports"
+  ],
+  "partitionAlternative": "A pre-frozen union of core and download CI partitions may cover the same intended suite only if independently collected identities reconcile to the full suite and both portions obtain outcomes. Download continue-on-error is a CI policy, not task success.",
+  "prerequisites": {
+    "establishedFromSource": [
+      "Full exact retained source, including test fixtures and all extractor definitions.",
+      "Writable isolated working directory, valid HOME, supported Python standard library and SSL/runtime capabilities.",
+      "Live product/download portions use external network resources; network=none cannot establish their intended default outcomes.",
+      "Committed test/parameters.json is merged with optional test/local_parameters.json; freeze exact parameter bytes and absence/presence before collection.",
+      "Nose route needs a compatible pinned runner; CI selects PyNose for Python >=3.9 but does not lock its version."
+    ],
+    "notImplied": [
+      "pandoc/zip/build artifact generation are not prerequisites established for documented direct test route.",
+      "Absent optional external binaries or proxy configuration are not automatically acceptable skips.",
+      "The existing Rust/Node/Go common image is not a qualified Python-03 environment."
+    ]
+  },
+  "remainingGates": [
+    "Independent source/scope and proposed exclusion review plus explicit prospective interpretation acceptance.",
+    "Exact image/interpreter/runner/runtime and dependency conditions, parameters, permissions, network and budgets frozen before collection.",
+    "Separate native collection manifest with dynamic extractor identity/source mapping, expected source-defined and capability-dependent skips, and exact preaccepted exclusions.",
+    "A bounded executable observer/oracle with positive and negative controls for all source early-return/skip cases and phase classification; this packet supplies requirements only.",
+    "Execution authorization only after the above; all future outcomes retained, no task replacement or post-run exclusions."
+  ],
+  "repository": "github.com/ytdl-org/youtube-dl",
+  "revision": "956b8c585591b401a543e409accb163eeaaa1193",
+  "roleDisclosure": "Author has prior F-05 preparation context and read the original curator follow-up plus challenger/root source decisions. This is additional source analysis, not a fresh blind independent gold review.",
+  "scopeProposal": {
+    "componentOnlyCommandRequired": false,
+    "maintainedAggregateSuiteApplicable": true,
+    "rationale": "The selected primary package includes extractor, downloader and postprocessor subpackages. Maintainer-documented full aggregate tests import and exercise these parts of the product. A component-only invocation is unnecessary to obtain the selected package test outcome. This establishes an applicable maintained suite, not exhaustive behavioral coverage or a complete execution tuple.",
+    "requiredExtent": "Entire unfiltered maintained product test suite on one prospectively frozen supported interpreter/platform; not every CI interpreter matrix member. Preserve core and download/extractor/product portions.",
+    "targetChanged": false
+  },
+  "sourceMissing": [],
+  "startingState": "pre-clone",
+  "state": "prospective source interpretation; not accepted and not execution-ready",
+  "taskId": "python-03"
+}

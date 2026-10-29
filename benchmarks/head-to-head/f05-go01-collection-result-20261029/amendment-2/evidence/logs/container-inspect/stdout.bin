@@ -1,0 +1,231 @@
+[
+    {
+        "Id": "dff03176d8ea7325dc1f24a0b7773426a814de36a583e138cfa6e530c58f5705",
+        "Created": "2026-10-29T10:47:53.592956631Z",
+        "Path": "/bin/sh",
+        "Args": [
+            "-c",
+            "while :; do sleep 3600; done"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 41947,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2026-10-29T10:47:53.738749922Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+        "ResolvConfPath": "/var/lib/docker/containers/dff03176d8ea7325dc1f24a0b7773426a814de36a583e138cfa6e530c58f5705/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/dff03176d8ea7325dc1f24a0b7773426a814de36a583e138cfa6e530c58f5705/hostname",
+        "HostsPath": "/var/lib/docker/containers/dff03176d8ea7325dc1f24a0b7773426a814de36a583e138cfa6e530c58f5705/hosts",
+        "LogPath": "",
+        "Name": "/dotrepo-go01-collection-65c4db826e0d",
+        "RestartCount": 0,
+        "Driver": "overlayfs",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "local",
+                "Config": {}
+            },
+            "NetworkMode": "none",
+            "PortBindings": {},
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "CapAdd": null,
+            "CapDrop": [
+                "ALL"
+            ],
+            "CgroupnsMode": "private",
+            "Dns": null,
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": true,
+            "SecurityOpt": [
+                "no-new-privileges"
+            ],
+            "Tmpfs": {
+                "/tmp": "rw,exec,nosuid,nodev,size=512m,uid=1000,gid=1000,mode=0700",
+                "/workspace": "rw,exec,nosuid,nodev,size=8g,uid=1000,gid=1000,mode=0700",
+                "/workspace/dependency-cache": "rw,exec,nosuid,nodev,size=1g,uid=1000,gid=1000,mode=0700"
+            },
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 4294967296,
+            "NanoCpus": 3000000000,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": [],
+            "BlkioDeviceReadBps": [],
+            "BlkioDeviceWriteBps": [],
+            "BlkioDeviceReadIOps": [],
+            "BlkioDeviceWriteIOps": [],
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "MemoryReservation": 0,
+            "MemorySwap": 4294967296,
+            "MemorySwappiness": null,
+            "OomKillDisable": null,
+            "PidsLimit": 256,
+            "Ulimits": [
+                {
+                    "Name": "nofile",
+                    "Hard": 4096,
+                    "Soft": 4096
+                }
+            ],
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/acpi",
+                "/proc/asound",
+                "/proc/interrupts",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/sys/devices/virtual/powercap",
+                "/sys/firmware"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ],
+            "Init": true
+        },
+        "Storage": {
+            "RootFS": {
+                "Snapshot": {
+                    "Name": "overlayfs"
+                }
+            }
+        },
+        "Mounts": [],
+        "Config": {
+            "Hostname": "dff03176d8ea",
+            "Domainname": "",
+            "User": "1000:1000",
+            "AttachStdin": false,
+            "AttachStdout": true,
+            "AttachStderr": true,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "GOFLAGS=-p=1 -count=1",
+                "GOPATH=/workspace/dependency-cache/go",
+                "GOPROXY=off",
+                "GOSUMDB=off",
+                "TMPDIR=/workspace/tmp",
+                "GOCACHE=/workspace/go-build",
+                "CXX=/usr/bin/g++",
+                "GODEBUG=tracebackancestors=10",
+                "GOENV=off",
+                "GOGC=50",
+                "GOMAXPROCS=3",
+                "HOME=/workspace/home",
+                "LANG=C.UTF-8",
+                "CC=/usr/bin/gcc",
+                "CGO_ENABLED=1",
+                "GOTOOLCHAIN=local",
+                "GOWORK=/workspace/repository/go.work",
+                "PATH=/usr/local/cargo/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "RUSTUP_HOME=/usr/local/rustup",
+                "CARGO_HOME=/usr/local/cargo"
+            ],
+            "Cmd": [
+                "-c",
+                "while :; do sleep 3600; done"
+            ],
+            "Image": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+            "Volumes": null,
+            "WorkingDir": "/workspace",
+            "Entrypoint": [
+                "/bin/sh"
+            ],
+            "Labels": {}
+        },
+        "NetworkSettings": {
+            "SandboxID": "14a94d85d8a9bb5f5f9a324ecc867e4c28c05856fd5cfc1a55d50c4725971610",
+            "SandboxKey": "/var/run/docker/netns/14a94d85d8a9",
+            "Ports": {},
+            "Networks": {
+                "none": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "DriverOpts": null,
+                    "GwPriority": 0,
+                    "NetworkID": "d2e5d0442bdb33f01f82f3f04ddfddbaba3a3c08aa212e2d313252bdd04e41b9",
+                    "EndpointID": "c214c35c924dc87d2292d5a5baef99bd020582246618f3929fe52311b46b9776",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "MacAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DNSNames": null
+                }
+            }
+        },
+        "ImageManifestDescriptor": {
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "digest": "sha256:4431295c2f57c4a39618f1d33869b5ba295af9d780c141364bb9a93cc0fee9d5",
+            "size": 1249,
+            "platform": {
+                "architecture": "arm64",
+                "os": "linux"
+            }
+        }
+    }
+]

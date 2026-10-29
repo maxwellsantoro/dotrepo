@@ -1,0 +1,60 @@
+{
+  "cases": [
+    {
+      "id": "standin-green",
+      "requiredDisposition": "If prospectively accepted, retain terminal tests but mark real SOCKS behavior excluded; never claim proxy behavior passed.",
+      "scenario": "All3 TestSocks methods terminal pass with unchanged _SKIP_SOCKS_TEST=True.",
+      "source": "test/test_socks.py:79-114"
+    },
+    {
+      "id": "configured-proxy",
+      "requiredDisposition": "Refuse stale exclusion conditions; exact config/services/network authority and prerequisite context need their own freeze.",
+      "scenario": "Local parameters or overrides supply proxy/server keys, while old four-method source-default exclusion is reused.",
+      "source": "test/helper.py:27-39; test/test_socks.py:24-76"
+    },
+    {
+      "id": "standin-flag-changed",
+      "requiredDisposition": "Refuse source/config mismatch; actual srelay/services prerequisite path differs.",
+      "scenario": "_SKIP_SOCKS_TEST becomes False but old three-method exclusion remains.",
+      "source": "test/test_socks.py:80-105"
+    },
+    {
+      "id": "network-return-green",
+      "requiredDisposition": "Noncompletion, bound to active dynamic ID, even if all summary statuses are green. Warning substring alone is not a complete observer.",
+      "scenario": "Dynamic TestDownload reaches180-182 and returns after retries; unittest reports pass.",
+      "source": "test/test_download.py:170-182"
+    },
+    {
+      "id": "unknown-return-or-skip",
+      "requiredDisposition": "Unresolved/noncompletion; exact7 proposal is not a wildcard or count-based allowance.",
+      "scenario": "Other or unknown active case silently returns/skips and is absorbed by a generic allowance.",
+      "source": "exclusion-proposal.json neverCoveredByThisProposal; oracle-requirements.json"
+    },
+    {
+      "id": "download-only",
+      "requiredDisposition": "Scope incomplete; full selected product aggregate includes core and product portions.",
+      "scenario": "Only test/test_download.py or downloader subpackage is executed.",
+      "source": "README.md:997-1005; setup.py:111-116; Makefile:35-38"
+    },
+    {
+      "id": "offline-or-single-partition",
+      "requiredDisposition": "Scope incomplete; a partition union requires pre-frozen full-native identity reconciliation and both outcomes.",
+      "scenario": "Default tox, make offlinetest or one CI partition is credited as full suite.",
+      "source": "tox.ini:9-13; Makefile:43-52; devscripts/run_tests.sh:4-22"
+    },
+    {
+      "id": "static-count",
+      "requiredDisposition": "Reject that inference; dynamic identities require separately authorized native collection.",
+      "scenario": "32 AST files or20 syntactic skip sites is reported as native test count or approved exclusions.",
+      "source": "test/test_download.py:278-289; source-scan.json"
+    },
+    {
+      "id": "complete-failure-vs-setup",
+      "requiredDisposition": "Keep distinctions: complete failing suite may yield an outcome; unknown phase or unmet prerequisite does not.",
+      "scenario": "A fully reconciled test-body assertion failure is treated like incomplete imports/network/setup, or setup error credited as test outcome.",
+      "source": "oracle-requirements.json executionAndObservationGate"
+    }
+  ],
+  "kind": "Source-grounded reviewer challenges to future observer; no executable observer or native traces",
+  "runtimeControlsExecuted": false
+}

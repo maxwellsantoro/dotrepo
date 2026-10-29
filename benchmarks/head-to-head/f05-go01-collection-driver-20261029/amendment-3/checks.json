@@ -1,0 +1,92 @@
+{
+  "state": "source-only test-only-package amendment3 fake controls passed; independent review pending",
+  "driverIdentity": "go01-collection-driver-amendment-3",
+  "driverPlanSha256": "847c5e161f75f7d141f5dd59bc0df670d7261f1fad687184cafa4c1a64407000",
+  "driverSha256": "6db7f294c3158129fc75fee991ec436c1838ab0119bd7f7df9026df3d297b3d8",
+  "listingSha256": "b786455b864221f3320646d9b7a05b883ee6c0ded995a44aee85c7c37d34284a",
+  "environmentSha256": "3649e45b9b1c1f62faeb2c3a168d93d91a7be7a62e7e2905c07d9ba69ddb65fe",
+  "allEnvironmentAndExpectedGoEnvFieldsUnchanged": true,
+  "resourceCommandsSourceImageCachePolicyUnchanged": true,
+  "sourceSemantics": "Nonempty validated union of GoFiles,CgoFiles,TestGoFiles,XTestGoFiles; ignored-only/no-selected sources fail. This is selected-source metadata admission, not general Go parser/typing validation.",
+  "historicalFailedAttemptPreserved": {
+    "resultPath": "/tmp/dotrepo-go01-native-collection-result-20261029-3/result.json",
+    "resultSha256": "1ebce3bc9670ce1cbb02e4a0160b00c9dd421a75329a5f2bc87c5c6d91448fa2",
+    "queryStdoutSha256": "b4ef7caa0fafcffea826f91d0123143b6ed83e8f01f060e339975675d4597db8",
+    "queryReceiptSha256": "0a6131a5aee7fe052c1a50c362d7eb03dcd7687a0fafb51b62adf75a97592cef",
+    "jsonPackageObjects": 104,
+    "selectedPackage": {
+      "ImportPath": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+      "Dir": "/workspace/repository/tsc/internal/fourslash/tests",
+      "Name": "fourslash",
+      "GoFilesCount": 0,
+      "CgoFilesCount": 0,
+      "TestGoFilesCount": 3,
+      "XTestGoFilesCount": 4368,
+      "IgnoredGoFilesCount": 13,
+      "all4371SelectedFilesInFrozenInventory": true
+    },
+    "sourceDeclarations": [
+      {
+        "path": "tsc/internal/fourslash/tests/NavigationBarJsDoc_test.go",
+        "sha256": "8e84c972e920ae27921e88ad31666f7f289c49d5aecf6cdea486ae0281a8f60e",
+        "line": 1,
+        "excerpt": "package fourslash_test\n"
+      },
+      {
+        "path": "tsc/internal/fourslash/tests/autoCloseFragment_test.go",
+        "sha256": "b4ace2fd9eee186535396632a2fa683bea0dd44ef786d9bad3df9a1bc564f70e",
+        "line": 1,
+        "excerpt": "package fourslash\n"
+      }
+    ],
+    "qualification": "Historical incomplete go-list parser attempt, no go-test-list native collection occurred."
+  },
+  "priorPacketsUnchanged": {
+    "benchmarks/head-to-head/f05-go01-collection-driver-20261029": {
+      "freezeSha256": "b176a6c3dfff4965a53e601a05eccab03257f9b3cfe78b5846317d29b2302eaa",
+      "unchangedArtifacts": 33
+    },
+    "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-1": {
+      "freezeSha256": "0bdbd19da1a1607bb4a104156c008a05b934736556465d632364e634daeaa8e3",
+      "unchangedArtifacts": 29
+    },
+    "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-2": {
+      "freezeSha256": "a922cea56e81f471b1a6cd69ec576abcde7b9dd67aed246cb745e3432531196e",
+      "unchangedArtifacts": 35
+    },
+    "benchmarks/head-to-head/f05-go01-collection-driver-review-20261029/amendment-2": {
+      "freezeSha256": "cf79a5349dae67b0862322a7632c1c8735c1f87612a68ab7cfda889a3eff10fb",
+      "unchangedArtifacts": 17
+    }
+  },
+  "unchangedCopiedHelpers": [
+    "process_io.py",
+    "tree-observer.js",
+    "controls.py",
+    "transport_controls.py",
+    "observer_controls.py",
+    "amendment_controls.py",
+    "goenv_controls.py",
+    "compiler-context-decision.json",
+    "tmpfs-retrospective.json",
+    "goenv-source-semantics.json",
+    "actual-go-env-stdout.bin",
+    "actual-go-env-receipt.json"
+  ],
+  "priorFakeDriverControlsPassed": 59,
+  "priorAmendmentControlsPassed": 40,
+  "fakeTransportControlsPassed": 2,
+  "GOENVControlsPassed": 22,
+  "newTestOnlyControlsPassed": 20,
+  "NodeControlsReusedFromUnchangedInputs": 6,
+  "localMetadataIntegrityPassed": true,
+  "ruffCheckFormatPassed": true,
+  "freshDaemonGoNodeNetworkPackageProviderCalls": 0,
+  "realAcceptanceOrAuthorizationCreated": false,
+  "nativeCollectionOccurred": false,
+  "taskOutcomeObserved": false,
+  "nativeTaskAdmitted": false,
+  "campaignAdmitted": false,
+  "cacheGloballyQualified": false,
+  "costUsd": null
+}

@@ -1,0 +1,32 @@
+{
+  "state": "coordinator-authorized-single-go01-collection-attempt",
+  "synthetic": false,
+  "planSha256": "235244044e794fe26ba7f241b2abdaf37387546cae93a60cb956e2059fe07cbd",
+  "authorFreezeSha256": "0bdbd19da1a1607bb4a104156c008a05b934736556465d632364e634daeaa8e3",
+  "output": "/tmp/dotrepo-go01-native-collection-result-20261029-1",
+  "scratch": "/tmp/dotrepo-go01-native-collection-scratch-20261029-1",
+  "commands": [
+    "go env -json GOOS GOARCH GOVERSION GOTOOLCHAIN GOENV GOWORK GOFLAGS CGO_ENABLED CC CXX",
+    "go list -json ./...",
+    "go test -json -list . ./..."
+  ],
+  "limits": {
+    "cleanupSeconds": 60,
+    "combinedStdoutStderrPerCommandBytes": 2097152,
+    "cpus": 3,
+    "dependencyTmpfsBytes": 1073741824,
+    "memoryBytes": 4294967296,
+    "memorySwapBytes": 4294967296,
+    "pids": 256,
+    "sourcePlusSeedExpandedBytes": 2147483648,
+    "tmpTmpfsBytes": 536870912,
+    "transportBytesPerArchive": 536870912,
+    "workSecondsIncludingPreflight": 900,
+    "workspaceTmpfsBytes": 8589934592
+  },
+  "maxAttempts": 1,
+  "collectionAcceptance": {
+    "path": "/tmp/dotrepo-go01-native-collection-authorization-20261029-1/acceptance.json",
+    "sha256": "b5162492a550d35ba7b843a6c4f59fa622fac1f98092a68bc5587b0675f09e11"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "identity": "e1-zellij-establishment-review-20261029",
+  "date": "2026-10-29",
+  "revision": "1f3df933978e00c246553070310175c392fcfe4f",
+  "taskId": "e1-rust-01-repository-tests",
+  "commandUnchanged": "cargo xtask test",
+  "documentedApplicabilityEstablished": true,
+  "universalPrerequisiteSufficiencyEstablished": false,
+  "highConfidencePromotion": false,
+  "consumerEvidence": false,
+  "knownDevelopment": true,
+  "priorProposalAuthorContextDisclosed": true,
+  "artifactSha256": {
+    "README.md": "a3027affd7d87142fe1d76c7112d33d728759ba68d434e2265a864a13838381e",
+    "assessment.json": "8e247a8d00c47dc0449a91b6e86c93e4b46b7ec8c0781a3ba24d512e27368501",
+    "checks.json": "23869cf2725ea64a42876158ac57e6ac59f77a2d5220d743ac67202efe84bf20",
+    "ruff-check.stdout": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "ruff-format.stdout": "fd2299c9f1c6dc869070883e281051bfe93aacf66c1a3b0069f45b4aa410ca50",
+    "source-bindings.json": "2f86557677785622c341d3f8bcf2258031962403ae19e9cc7e60f36e62961767",
+    "verification.stdout": "7b23d25002ae425a191cbfaabac27e137cda057776de91c5bd41477335284e33",
+    "verify.py": "4e618a8fc57009bba4b9a14240e43d479fabfd9f979364421ebddc535882fe6b"
+  },
+  "noProductionIndexOrHistoricalEdits": true,
+  "sourceActions": "local read-only data/hash checks only"
+}

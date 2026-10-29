@@ -1,0 +1,62 @@
+{
+  "passed": 2,
+  "controls": [
+    {
+      "case": "cancellation",
+      "passed": true,
+      "fakeClientKilled": true,
+      "receipt": {
+        "argv": [
+          "NEVER_EXECUTED"
+        ],
+        "startedAt": "2026-10-29T10:22:49.261270+00:00",
+        "elapsedSeconds": 0,
+        "exitCode": -9,
+        "error": "KeyboardInterrupt: owned client cancellation",
+        "cancelled": true,
+        "stdinBytes": 0,
+        "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "binaryPath": null,
+        "binaryBytes": null,
+        "binarySha256": null,
+        "costUsd": null,
+        "costExclusions": [
+          "No metered host/container/download dollar receipt; no provider calls."
+        ],
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    {
+      "case": "deadline",
+      "passed": true,
+      "fakeClientKilled": true,
+      "receipt": {
+        "argv": [
+          "NEVER_EXECUTED"
+        ],
+        "startedAt": "2026-10-29T10:22:49.262006+00:00",
+        "elapsedSeconds": 11,
+        "exitCode": -9,
+        "error": "attempt deadline exhausted",
+        "cancelled": false,
+        "stdinBytes": 0,
+        "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "binaryPath": null,
+        "binaryBytes": null,
+        "binarySha256": null,
+        "costUsd": null,
+        "costExclusions": [
+          "No metered host/container/download dollar receipt; no provider calls."
+        ],
+        "stdout": "",
+        "stderr": ""
+      }
+    }
+  ],
+  "realProcessSocketCalls": 0
+}

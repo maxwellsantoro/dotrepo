@@ -1,0 +1,60 @@
+{
+  "synthetic": true,
+  "liveCalls": 0,
+  "cases": [
+    {
+      "case": "valid-incomplete-attempt",
+      "accepted": true,
+      "expectedAccepted": true,
+      "error": null
+    },
+    {
+      "case": "fabricated-full-collection",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "unsupported outcome: nativeCollectionOccurred"
+    },
+    {
+      "case": "lost-attempted-flag",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "collection attempt lost"
+    },
+    {
+      "case": "unproven-oom-cause",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "unproven cause claim"
+    },
+    {
+      "case": "lost-package-inventory",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "package inventory differs/incomplete"
+    },
+    {
+      "case": "fabricated-full-manifest",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "unexpected successful/later artifact"
+    },
+    {
+      "case": "different-terminal-scope-consistent-hash",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "package scope/terminal mismatch"
+    },
+    {
+      "case": "lost-cleanup-absence",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "cleanup state"
+    },
+    {
+      "case": "fabricated-timeout",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "deadline/cancellation"
+    }
+  ]
+}

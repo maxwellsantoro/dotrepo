@@ -1,0 +1,23 @@
+{
+  "commands": [
+    {
+      "command": "uv run --offline --no-sync python benchmarks/head-to-head/f05-python03-oracle-preparation-20261029/verify_source.py",
+      "exitCode": 0,
+      "result": "981 exact members; 18 spans; 20 syntactic skip sites; 32 AST parses; six negative controls rejected; no upstream code executed"
+    },
+    {
+      "command": "uv run --offline --no-sync ruff check --no-cache benchmarks/head-to-head/f05-python03-oracle-preparation-20261029/prepare_disposition.py benchmarks/head-to-head/f05-python03-oracle-preparation-20261029/verify_source.py",
+      "exitCode": 0,
+      "result": "All checks passed"
+    },
+    {
+      "command": "uv run --offline --no-sync ruff format --check --no-cache benchmarks/head-to-head/f05-python03-oracle-preparation-20261029/prepare_disposition.py benchmarks/head-to-head/f05-python03-oracle-preparation-20261029/verify_source.py",
+      "exitCode": 0,
+      "result": "2 files already formatted"
+    }
+  ],
+  "executionAuthorized": false,
+  "nativeCollectionOccurred": false,
+  "scope": "trusted local source-data controls only",
+  "taskOutcomeObserved": false
+}

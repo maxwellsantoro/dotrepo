@@ -1,0 +1,79 @@
+{
+  "identity": "e1-zellij-establishment-contract-20261029",
+  "state": "source-proposal-concluded-no-high-code-change",
+  "sourceReviewFreezeSha256": "11d33120596bfe8cca2d5983f419e80eef17816acaade50bb398d500fc0bc58e",
+  "taskId": "e1-rust-01-repository-tests",
+  "commandUnchanged": "cargo xtask test",
+  "documentedApplicabilitySupported": true,
+  "productionCodeChangeRecommendedNow": false,
+  "automaticHighChangeRecommended": false,
+  "compiledRevisionOrSourceFingerprintAllowlistRejected": true,
+  "knownDevelopmentNotHoldout": true,
+  "retainedSourceAssessmentIsAppropriate": true,
+  "boundedGeneralizableExtractionPossibility": {
+    "purpose": "Recover attributed source candidates, not establish high by grammar",
+    "positiveInputs": [
+      "CONTRIBUTING.md for visible command and scoped prerequisite/target-dir prose",
+      ".cargo/config.toml for exact Cargo alias/root target configuration and conditional linker",
+      "Cargo.toml root for owning workspace/package identity",
+      "rust-toolchain.toml for declared pin/components/targets"
+    ],
+    "additionalScopeInputs": [
+      "xtask/src/main.rs",
+      "xtask/src/test.rs",
+      "xtask/src/build.rs",
+      "xtask/src/flags.rs",
+      "xtask/src/metadata.rs"
+    ],
+    "checks": [
+      "Visible attributable maintainer command block under correct section; no comments/indented examples or borrowed ancestor/condition.",
+      "Typed TOML alias, owning root/toolchain/targets; retain raw conditional setup prose rather than flattening.",
+      "Whole explicit prerequisite tuple source binding, no implicit empty prerequisites and no scalar promotion.",
+      "Absent or unsupported route/conditional scope cannot be guessed from command token; source-bound Medium or abstention, not automaticHigh."
+    ],
+    "limitation": "No demonstrated bounded general parser independently establishes the19-entry arbitrary Rust default route plus build-state/environment/prerequisite semantics. Exact source snapshots may validate evidence but must not be compiled as per-repository confidence allowlists. No extraction implementation requested by this packet."
+  },
+  "concreteAutomaticHighBlockers": [
+    "A Cargo alias and command docs do not generally prove the Rust program default route; here it selects a hardcoded subset independent of Cargo workspace21.",
+    "Optional flags/external parser, command flow, helper calls, conditional plugin/protobuf regeneration and feature subset logic require source reasoning that is not reducible to currently demonstrated bounded syntax predicates.",
+    "Natural maintainer setup/target-dir/platform prose cannot safely become a completeness certificate from successful token matching; unsupported new conditions must remain unresolved.",
+    "Current score_import_fields gives intact contextual bindings at mostMedium; raising confidence on a recipe marker/hashpass would bypass the independent semantic question.",
+    "Current crawler omits required source bodies/config/toolchain; partial materialization cannot claim upstream absence."
+  ],
+  "retainedClaims": [
+    "Command root and maintained-default19scope supported; all21claim false.",
+    "Rust1.95.0/components/targets, protoc/pkg-config/OpenSSL, target-dir/CARGO_TARGET_DIR warning and GNUWindowsconditional linker retained.",
+    "No invented minimum native-tool versions, environment readiness or all-platform success.",
+    "No optional flags/subset/e2e substitution or forced plugin rebuild."
+  ],
+  "requiredNegativeControlsIfAnyFutureRecognizer": [
+    "Move command into hidden/indented/wrong-owner block; reject establishment.",
+    "Add/alter setup or platform condition; no inherited confidence.",
+    "Change alias/toolchain/targetdir/default flags/membership/route/helpers; reject unsupported semantic establishment.",
+    "Strip GNU-target condition or CARGO_TARGET_DIR warning in tuple; reject.",
+    "Wrong source tuple/time, unrelated bindings, deleted/symlinked/oversize source; integrity fails.",
+    "Partial materialization or source hashpass without semantic verification cannot yieldHigh.",
+    "No scalar/adjudication fallback may restore the rejected context as complete."
+  ],
+  "whatCouldJustifyAboveMedium": [
+    "Retained source assessment of the exact tuple through existing per-field evidence/source/time mechanisms and existing publication gate; this is a source investigation result, not extractor generalization. No reviewed/canonical status minted by AI assessments.",
+    "For automaticHigh, first demonstrate an independently specified general semantic rule across multiple distinct development patterns, independent implementation review and meaningful mutation/held-out qualification. This packet demonstrates no such rule.",
+    "No upstream execution or exhaustive dependency-success proof is required to accept documented source gold; execution and consumer benefit remain separate assertions."
+  ],
+  "nextGate": [
+    "Root considers source assessment for retained investigation evidence under existing trust/policy boundaries.",
+    "No productionHigh/code ownership from this proposal. If Medium extraction itself becomes valuable, specify that separate bounded change and evaluate its effect before implementation.",
+    "Future automatic establishment must demonstrate a general rule without encoding per-repository source answers into Rust; qualification identities must be disjoint from this exposed development task."
+  ],
+  "actions": {
+    "productionEdits": 0,
+    "indexEdits": 0,
+    "network": 0,
+    "daemon": 0,
+    "packages": 0,
+    "nativeTasks": 0,
+    "Cargo": 0,
+    "providersModels": 0
+  },
+  "reviewContext": "Original proposal/followup author; no independent second-curator claim"
+}
