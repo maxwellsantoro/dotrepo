@@ -1,0 +1,22 @@
+{
+  "startedAt": "2026-10-29T05:44:29.352766+00:00",
+  "endedAt": "2026-10-29T05:44:29.432994+00:00",
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-rc2-linux-b55b7fd4961b",
+    "/work/install-dotrepo-cli/bin/dotrepo",
+    "--root",
+    "/work/cases/go-compile-then-runner",
+    "import",
+    "--mode",
+    "overlay",
+    "--source",
+    "https://github.com/example/safety-fixture"
+  ],
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdoutSha256": "362d000ad191b11d914962c6e084a082463675199338e7b2aeb967a9a413f121",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

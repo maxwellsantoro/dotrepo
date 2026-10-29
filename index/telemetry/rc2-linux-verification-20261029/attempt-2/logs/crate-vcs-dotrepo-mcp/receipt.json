@@ -1,0 +1,17 @@
+{
+  "startedAt": "2026-10-29T05:42:33.631087+00:00",
+  "endedAt": "2026-10-29T05:42:33.775931+00:00",
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-rc2-linux-b55b7fd4961b",
+    "/bin/sh",
+    "-c",
+    "cat /work/cargo/registry/src/*/dotrepo-mcp-2.0.0-rc.2/.cargo_vcs_info.json"
+  ],
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdoutSha256": "e52d2ebb79d5ff6a488f0d15d47075b927ccd71b13c04aa669334ee013946a5f",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

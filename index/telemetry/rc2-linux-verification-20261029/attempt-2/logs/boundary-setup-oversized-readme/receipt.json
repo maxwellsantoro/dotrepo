@@ -1,0 +1,18 @@
+{
+  "startedAt": "2026-10-29T05:44:34.924793+00:00",
+  "endedAt": "2026-10-29T05:44:35.064542+00:00",
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-rc2-linux-b55b7fd4961b",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "mkdir -p /work/boundaries/oversized-readme/repo; printf '# Fixture\\n\\nOrdinary contained input.\\n' >/work/boundaries/oversized-readme/repo/README.md; printf '# External sentinel\\n\\nUnchanged.\\n' >/work/boundaries/oversized-readme/outside; truncate -s 2097153 /work/boundaries/oversized-readme/repo/README.md"
+  ],
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

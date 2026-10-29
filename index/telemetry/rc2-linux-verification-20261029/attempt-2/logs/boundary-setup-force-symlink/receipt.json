@@ -1,0 +1,18 @@
+{
+  "startedAt": "2026-10-29T05:44:36.149488+00:00",
+  "endedAt": "2026-10-29T05:44:36.227267+00:00",
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-rc2-linux-b55b7fd4961b",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "mkdir -p /work/boundaries/force-symlink/repo; printf '# Fixture\\n\\nOrdinary contained input.\\n' >/work/boundaries/force-symlink/repo/README.md; printf '# External sentinel\\n\\nUnchanged.\\n' >/work/boundaries/force-symlink/outside; ln -s /work/boundaries/force-symlink/outside /work/boundaries/force-symlink/repo/record.toml"
+  ],
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

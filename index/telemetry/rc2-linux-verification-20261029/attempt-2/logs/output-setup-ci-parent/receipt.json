@@ -1,0 +1,18 @@
+{
+  "startedAt": "2026-10-29T05:44:37.871699+00:00",
+  "endedAt": "2026-10-29T05:44:37.948056+00:00",
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-rc2-linux-b55b7fd4961b",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "mkdir -p /work/outputs/ci-parent/checkout /work/outputs/ci-parent/outside; printf '%s' 'schema=\"dotrepo/v0.1\"\n[record]\nmode=\"native\"\nstatus=\"draft\"\n[repo]\nname=\"fixture\"\ndescription=\"Fixture project\"\n[compat.github]\ncodeowners=\"generate\"\n' >/work/outputs/ci-parent/checkout/.repo; printf 'EXTERNAL SENTINEL\\n' >/work/outputs/ci-parent/outside/CODEOWNERS; ln -s /work/outputs/ci-parent/outside /work/outputs/ci-parent/checkout/.github"
+  ],
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

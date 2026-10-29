@@ -1,0 +1,20 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/example/safety-fixture"
+generated_at = "2026-10-29T05:44:28.248838138Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md` and `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Command Semantics"
+description = "Source-preserving command regression fixture."
+homepage = "https://github.com/example/safety-fixture"
+languages = []
+test = "make test"
+topics = []

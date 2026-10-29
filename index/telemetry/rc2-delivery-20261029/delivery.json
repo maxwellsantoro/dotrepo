@@ -1,0 +1,79 @@
+{
+  "version": "2.0.0-rc.2",
+  "tag": "v2.0.0-rc.2",
+  "sourceCommit": "94e02bd43d7cae1e5b6cd37ebd7a2a66a9b2b773",
+  "status": "public_artifacts_and_local_macos_checks_passed",
+  "localPlatform": {
+    "system": "Darwin",
+    "machine": "arm64"
+  },
+  "verificationFinishedAt": "2026-10-29T05:40:06.903854+00:00",
+  "releaseUrl": "https://github.com/maxwellsantoro/dotrepo/releases/tag/v2.0.0-rc.2",
+  "releaseWorkflow": "https://github.com/maxwellsantoro/dotrepo/actions/runs/40823937226",
+  "finalReceipt": "receipts/attempt-03-full-pass/receipt.json",
+  "attempts": [
+    {
+      "receipt": "receipts/attempt-01-unsupported-cli-version/receipt.json",
+      "sha256": "6fca80175a74f9383b460855bf207ea40d95e09f9bcd05c3dfc89ce706f3c99b",
+      "status": "failed",
+      "error": "AssertionError: (['/private/tmp/dotrepo-rc2-delivery-bundle-40823937226/extracted/dotrepo-2.0.0-rc.2-aarch64-apple-darwin/bin/dotrepo', '--version'], \"error: unexpected argument '--version' found\\n\\nUsage: dotrepo [OPTIONS] <COMMAND>\\n\\nFor more information, try '--help'.\\n\")",
+      "startedAt": "2026-10-29T05:35:33.979370+00:00",
+      "completedAt": "2026-10-29T05:35:40.833219+00:00"
+    },
+    {
+      "receipt": "receipts/attempt-02-optional-fixture-key/receipt.json",
+      "sha256": "b2cb8c67044a547abf044a31bf1737cadbe456e563512ff641d9fd21c3e25e37",
+      "status": "failed",
+      "error": "AssertionError: (['uv', 'run', 'python', '/Users/maxwell/projects/agent/dotrepo/index/telemetry/rc2-delivery-20261029/check_installed_safety.py', '--bin', '/private/tmp/dotrepo-rc2-delivery-bundle-40823937226-retry1/extracted/dotrepo-2.0.0-rc.2-aarch64-apple-darwin/bin/dotrepo', '--source', '/private/tmp/dotrepo-rc2-delivery-bundle-40823937226-retry1/source', '--output', '/private/tmp/dotrepo-rc2-delivery-bundle-40823937226-retry1/bundle-safety.json'], 1, PosixPath('/private/tmp/dotrepo-rc2-delivery-bundle-40823937226-retry1/bundle-safety.log'))",
+      "startedAt": "2026-10-29T05:36:30.241332+00:00",
+      "completedAt": "2026-10-29T05:36:37.215021+00:00"
+    },
+    {
+      "receipt": "receipts/attempt-03-full-pass/receipt.json",
+      "sha256": "1393cb825eb53e74e7fd8335b1c9adc5a498052019d823851d79bc4bee7ba2f1",
+      "status": "public_artifacts_and_local_macos_checks_passed",
+      "error": null,
+      "startedAt": "2026-10-29T05:37:08.429766+00:00",
+      "completedAt": "2026-10-29T05:40:06.903854+00:00"
+    }
+  ],
+  "scriptSha256": {
+    "verify_publication.py": "6cc1d7a6fbdc333f8a44d31e787c4fb3c99eb7f4f9bf8da95b4f7da65f4d1c53",
+    "check_installed_safety.py": "7280c3d3e20ad7b85ed9ccce866f0382c793f90847ca28690adb8a38b8b3a14e"
+  },
+  "observedResults": {
+    "publicCrates": 7,
+    "gitHubAssets": 7,
+    "freshLockedRegistryInstalls": 4,
+    "successfulStages": 11,
+    "controlledCliChecksByArtifact": {
+      "macosBundle": 40,
+      "registryCli": 40,
+      "registryStandaloneAlias": 40
+    },
+    "stdioChecks": 4,
+    "packagedSourcePathsCompared": 138
+  },
+  "limits": [
+    "Local execution is macOS ARM64 only; Linux asset and MCPB parity are checksum evidence, not Linux execution.",
+    "The publication workflow Linux artifact build does not establish fresh Linux public installation.",
+    "CLI --version is unavailable; its identity is bound by the versioned bundle/tag or exact registry installation, while MCP/LSP self-report RC2.",
+    "VSIX digest and size were checked; it was not installed in an editor.",
+    "Own-project controlled fixtures and protocol smoke do not establish independent consumer benefit.",
+    "Earlier failed verifier attempts remain retained observations; they were corrected harness assumptions, not successful verification.",
+    "Large downloads, source clone and installed binaries remain in the final receipt temporary output root."
+  ],
+  "retainedBindingCheck": {
+    "checkedAt": "2026-10-29T05:41:20.693336+00:00",
+    "result": "passed",
+    "checks": [
+      "exact source/version",
+      "all metadata hashes and crate checksums",
+      "four installation identities",
+      "eleven zero-exit stages and retained log hashes",
+      "three exact 40-result safety packets and binary hashes",
+      "controlled-check script source hash",
+      "MCP registry response hash"
+    ]
+  }
+}

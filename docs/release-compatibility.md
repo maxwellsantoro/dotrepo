@@ -2,12 +2,12 @@
 
 Use documentation for the binary you installed. The latest stable release is
 [`v1.0.4`](https://github.com/maxwellsantoro/dotrepo/releases/tag/v1.0.4), built from
-the `codex/stable-1.0` maintenance line. The current source candidate identifies
-itself as `2.0.0-rc.2` and remains unpublished. Published prerelease
-`2.0.0-rc.1` includes public Rust API changes not in stable, but its immutable
-artifacts do not receive later source fixes. Neither this RC2 candidate nor a
-final 2.0.0 has been published. Source merges do not change an existing release
-bundle or installed crate.
+the `codex/stable-1.0` maintenance line. The published
+[`v2.0.0-rc.2` preview](https://github.com/maxwellsantoro/dotrepo/releases/tag/v2.0.0-rc.2)
+includes public Rust API changes and the safety/API improvements below. Final
+2.0.0 remains unreleased. This checkout also contains changes listed under
+Unreleased in the changelog; they are outside the RC2 tag. Source merges do not
+change an existing release bundle or installed crate, including RC1 artifacts.
 
 ## Version-matched documentation
 
@@ -22,6 +22,12 @@ retains the 1.0.2 patch scope. The [1.0.4 boundary contract](https://github.com/
 defines the import and output protections. Publication, crate provenance, asset
 hashes and Linux/macOS install results are retained in
 [the 1.0.4 verification receipt](../index/telemetry/public-surface-review-20261028/release-1.0.4-verification.json).
+The [RC2 publication join](../index/telemetry/rc2-publication-20261029/README.md)
+binds CI, publication and the separate installation receipts. Its
+[macOS delivery packet](../index/telemetry/rc2-delivery-20261029/README.md)
+retains provenance, asset and macOS installation checks. Linux container checks
+have a [separate receipt](../index/telemetry/rc2-linux-verification-20261029/README.md);
+the host, architecture and retained failures bound each result.
 The [1.0.3 delivery evidence](../index/telemetry/stable-1.0.3-delivery-20261006/delivery.json)
 retains the preceding maintenance checkpoint.
 The [1.0.2 receipt](../index/telemetry/command-semantics-20261004/delivery.json)
@@ -38,11 +44,10 @@ Stable `v1.0.4` backports the shared contained output writer used by
 generation, initialization, adoption, CI setup, claims, export, and MCP import.
 They refuse descendant links and shared-hardlink targets while preserving
 ordinary file identity and permissions. The published `v2.0.0-rc.1` predates this
-change; it is present in stable 1.0.4 and the unpublished RC2 source candidate.
-Do not infer RC2 registry or release-bundle availability from this source. See
+change; it is present in stable 1.0.4 and published RC2. See
 [path containment limits](../CONTRIBUTING.md#path-containment-limits).
 
-| Behavior | Stable `v1.0.4` | Unpublished RC2 source |
+| Behavior | Stable `v1.0.4` | Published preview `v2.0.0-rc.2` |
 | --- | --- | --- |
 | `promotion-report --apply` | Fails before writing records or evidence | Same no-write guard |
 | Read-only promotion analysis | Uses manifest values and record-wide provenance; does not inspect upstream | Uses retained value- and timestamp-bound field assessments; still not fresh inspection |
@@ -79,8 +84,8 @@ inspection and verification; retained assessment analysis is not fresh inspectio
 Source comparison:
 [1.0.1 promotion](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.1/crates/dotrepo-core/src/promotion.rs),
 [1.0.2 CLI dispatch](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.2/crates/dotrepo-cli/src/commands.rs),
-[current promotion](../crates/dotrepo-core/src/promotion.rs), and
-[current regression tests](../crates/dotrepo-core/tests/auto_publish.rs).
+[RC2 promotion](https://github.com/maxwellsantoro/dotrepo/blob/v2.0.0-rc.2/crates/dotrepo-core/src/promotion.rs), and
+[RC2 regression tests](https://github.com/maxwellsantoro/dotrepo/blob/v2.0.0-rc.2/crates/dotrepo-core/tests/auto_publish.rs).
 
 ### MCP network policy
 
@@ -91,7 +96,7 @@ Stable lookup defaults to `https://dotrepo.org` and also permits
 and HTTP for local development. A custom local server needs both overrides.
 Leave both unset for ordinary hosted lookup.
 
-Additional target checks on `main` are defense in depth. This source comparison
+Additional target checks in RC2 are defense in depth. This source comparison
 establishes validation differences, not a demonstrated exploit of the normal
 allowlisted stable flow. The snapshot-path guard protects a flow stable lookup
 does not use. Reachability of other targets depends on configuration and inputs.
@@ -99,8 +104,8 @@ does not use. Reachability of other targets depends on configuration and inputs.
 Source comparison:
 [stable lookup policy](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.4/crates/dotrepo-mcp/src/lookup.rs),
 [stable handler](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.4/crates/dotrepo-mcp/src/handlers.rs),
-[current lookup policy](../crates/dotrepo-mcp/src/lookup.rs), and
-[current handler](../crates/dotrepo-mcp/src/handlers.rs).
+[RC2 lookup policy](https://github.com/maxwellsantoro/dotrepo/blob/v2.0.0-rc.2/crates/dotrepo-mcp/src/lookup.rs), and
+[RC2 handler](https://github.com/maxwellsantoro/dotrepo/blob/v2.0.0-rc.2/crates/dotrepo-mcp/src/handlers.rs).
 
 ## Installation and release checks
 

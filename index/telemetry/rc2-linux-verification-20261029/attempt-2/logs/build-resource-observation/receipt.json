@@ -1,0 +1,17 @@
+{
+  "startedAt": "2026-10-29T05:42:36.899368+00:00",
+  "endedAt": "2026-10-29T05:42:38.051340+00:00",
+  "argv": [
+    "docker",
+    "stats",
+    "--no-stream",
+    "--format",
+    "{{json .}}",
+    "dotrepo-rc2-linux-b55b7fd4961b"
+  ],
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdoutSha256": "1dcda5e39dacca32fe61d9fe62dc61375473efba5de1d55a0f5fc50e4ffdafaf",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

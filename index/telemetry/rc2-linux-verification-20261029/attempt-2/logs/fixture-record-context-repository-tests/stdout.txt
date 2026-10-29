@@ -1,0 +1,30 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/example/safety-fixture"
+generated_at = "2026-10-29T05:44:31.464355208Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Context fixture"
+description = "Source-preserving contextual instructions."
+homepage = "https://github.com/example/safety-fixture"
+languages = []
+topics = []
+
+[[repo.test_candidates]]
+command = "cargo test --locked"
+source = "README.md"
+
+[repo.test_candidates.context]
+command = "cargo test --locked"
+working_directory = "."
+scope = "repository"
+prerequisites = []
+source = "README.md"

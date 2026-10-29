@@ -1,0 +1,8 @@
+{"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2025-11-25", "capabilities": {}, "clientInfo": {"name": "linux-rc2-control", "version": "0"}}}
+{"jsonrpc": "2.0", "method": "notifications/initialized", "params": {}}
+{"jsonrpc": "2.0", "id": 2, "method": "tools/list", "params": {}}
+{"jsonrpc": "2.0", "id": 3, "method": "tools/call", "params": {"name": "dotrepo.validate", "arguments": {"root": "/work/source/examples/native-minimal"}}}
+{"jsonrpc": "2.0", "id": 4, "method": "tools/call", "params": {"name": "dotrepo.query", "arguments": {"root": "/work/source/examples/native-minimal", "path": "repo.name"}}}
+{"jsonrpc": "2.0", "id": 5, "method": "tools/call", "params": {"name": "dotrepo.trust", "arguments": {"root": "/work/source/examples/native-minimal"}}}
+{"jsonrpc": "2.0", "id": 6, "method": "tools/call", "params": {"name": "dotrepo.import_preview", "arguments": {"root": "/work/source/examples/native-minimal", "mode": "native"}}}
+{"jsonrpc": "2.0", "id": 7, "method": "tools/call", "params": {"name": "dotrepo.import_write", "arguments": {"root": "/work/source/examples/native-minimal", "mode": "native"}}}

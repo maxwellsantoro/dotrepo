@@ -1,0 +1,30 @@
+{
+  "verifiedAt": "2026-10-29T05:44:45.466764+00:00",
+  "status": "passed-with-retained-initial-verifier-configuration-failure",
+  "version": "2.0.0-rc.2",
+  "sourceCommit": "94e02bd43d7cae1e5b6cd37ebd7a2a66a9b2b773",
+  "imageId": "sha256:114c7a4425406451c2866b6aafe69fe29b1b298832db1277d411ac73c82d04d6",
+  "packages": [
+    "dotrepo-cli",
+    "dotrepo-mcp",
+    "dotrepo-lsp",
+    "dotrepo"
+  ],
+  "exactLockedRegistryInstallations": 4,
+  "packagedSourceAndRegistryChecksumMatches": 4,
+  "controlledSafetyChecks": 40,
+  "nativeArm64ElfBinaries": 5,
+  "cliHelpChecks": 3,
+  "standaloneAliasValidation": "passed",
+  "mcpStdio": "passed-seven-responses",
+  "lspStdio": "passed-initialize-diagnostics-shutdown-exit",
+  "containersRemoved": true,
+  "limits": [
+    "Linux ARM64 container execution on macOS ARM64; not native Linux host execution",
+    "No x86_64 release bundle executed",
+    "Public Docker bridge network during registry installation, disconnected for controls",
+    "Fresh Cargo home; sequential packages share container cache; host/VM caches uncontrolled",
+    "Dotrepo-owned controlled fixtures only; no upstream project commands or model calls",
+    "Packaging and safety evidence, not independent consumer usefulness"
+  ]
+}

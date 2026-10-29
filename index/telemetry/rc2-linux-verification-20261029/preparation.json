@@ -1,0 +1,124 @@
+{
+  "preparedAt": "2026-10-29T05:36:34.141919+00:00",
+  "status": "waiting-for-exact-crate-ready-relay;container-not-yet-created",
+  "version": "2.0.0-rc.2",
+  "tag": "v2.0.0-rc.2",
+  "sourceCommit": "94e02bd43d7cae1e5b6cd37ebd7a2a66a9b2b773",
+  "imageId": "sha256:114c7a4425406451c2866b6aafe69fe29b1b298832db1277d411ac73c82d04d6",
+  "architecture": "linux/arm64",
+  "hostPlatform": "macOS-27.0.1-arm64-arm-64bit",
+  "containerExecutionNotNativeLinuxHost": true,
+  "registryInstallPackages": [
+    "dotrepo-cli",
+    "dotrepo-mcp",
+    "dotrepo-lsp",
+    "dotrepo"
+  ],
+  "plannedCommands": [
+    [
+      "cargo",
+      "install",
+      "dotrepo-cli",
+      "--locked",
+      "--version",
+      "=2.0.0-rc.2",
+      "--root",
+      "/work/install-dotrepo-cli",
+      "--target-dir",
+      "/work/cargo-target"
+    ],
+    [
+      "cargo",
+      "install",
+      "dotrepo-mcp",
+      "--locked",
+      "--version",
+      "=2.0.0-rc.2",
+      "--root",
+      "/work/install-dotrepo-mcp",
+      "--target-dir",
+      "/work/cargo-target"
+    ],
+    [
+      "cargo",
+      "install",
+      "dotrepo-lsp",
+      "--locked",
+      "--version",
+      "=2.0.0-rc.2",
+      "--root",
+      "/work/install-dotrepo-lsp",
+      "--target-dir",
+      "/work/cargo-target"
+    ],
+    [
+      "cargo",
+      "install",
+      "dotrepo",
+      "--locked",
+      "--version",
+      "=2.0.0-rc.2",
+      "--root",
+      "/work/install-dotrepo",
+      "--target-dir",
+      "/work/cargo-target"
+    ]
+  ],
+  "controlledFixtureCount": 25,
+  "plannedBoundaryAndWriteControls": 15,
+  "referenceSources": [
+    {
+      "originalPath": "index/telemetry/rc2-delivery-20261029/check_installed_safety.py",
+      "retainedPath": "check_installed_safety.reference.py.txt",
+      "sha256": "d58d0579550fb38124a3d525c9a9a06a1f2957fbaa7ce024d9979f2128acd595"
+    },
+    {
+      "originalPath": "index/telemetry/stable-1.0.3-delivery-20261006/mcp-stdio.py.txt",
+      "retainedPath": "mcp-stdio.py.txt",
+      "sha256": "d8f06c55ba6939c8694b71dd56422bfb964a1fb6da68710ef98061267ee9d0fe"
+    },
+    {
+      "originalPath": "index/telemetry/stable-1.0.3-delivery-20261006/lsp-stdio.py.txt",
+      "retainedPath": "lsp-stdio.py.txt",
+      "sha256": "9f216ba4fea1a07e0f90e6c8a34f6d07ecb5fecb9cad2497b78a0ac475bde2f9"
+    }
+  ],
+  "controlledSourceArchiveSha256": "1548406ad9a86b41c070d91dd130b94d2b68c21916a7fb7523b437f0ae5e8c42",
+  "controlledSourcePaths": [
+    "Cargo.toml",
+    "crates/dotrepo-core/tests/fixtures/import/expectations.json",
+    "examples/native-minimal",
+    "crates/dotrepo-core/tests/fixtures/import/command-pagedigest-manifest-path",
+    "crates/dotrepo-core/tests/fixtures/import/command-uv-docker",
+    "crates/dotrepo-core/tests/fixtures/import/context-component-build",
+    "crates/dotrepo-core/tests/fixtures/import/context-component-tests",
+    "crates/dotrepo-core/tests/fixtures/import/context-nextest-selector",
+    "crates/dotrepo-core/tests/fixtures/import/context-prose-prerequisite",
+    "crates/dotrepo-core/tests/fixtures/import/context-repository-tests",
+    "crates/dotrepo-core/tests/fixtures/import/context-wrong-directory",
+    "crates/dotrepo-core/tests/fixtures/import/go-compile-only",
+    "crates/dotrepo-core/tests/fixtures/import/go-compile-then-runner",
+    "crates/dotrepo-core/tests/fixtures/import/just-required-argument",
+    "crates/dotrepo-core/tests/fixtures/import/just-wrapper",
+    "crates/dotrepo-core/tests/fixtures/import/make-comment",
+    "crates/dotrepo-core/tests/fixtures/import/make-diagnostic",
+    "crates/dotrepo-core/tests/fixtures/import/make-expressions",
+    "crates/dotrepo-core/tests/fixtures/import/make-prerequisite",
+    "crates/dotrepo-core/tests/fixtures/import/make-uppercase",
+    "crates/dotrepo-core/tests/fixtures/import/rake-if-block",
+    "crates/dotrepo-core/tests/fixtures/import/rake-if-modifier",
+    "crates/dotrepo-core/tests/fixtures/import/rake-if-quoted-hash",
+    "crates/dotrepo-core/tests/fixtures/import/rake-mixed",
+    "crates/dotrepo-core/tests/fixtures/import/rake-namespace",
+    "crates/dotrepo-core/tests/fixtures/import/rake-nested-namespace",
+    "crates/dotrepo-core/tests/fixtures/import/rake-root",
+    "crates/dotrepo-core/tests/fixtures/import/rake-unless-modifier"
+  ],
+  "networkPolicy": "bridge only while public-registry installs run; disconnect before controlled CLI/stdio checks; no host env or credentials forwarded",
+  "limits": [
+    "Linux ARM64 container on Docker Desktop/macOS, not native Linux host",
+    "No x86_64 release-bundle execution",
+    "Actual compiler/kernel/ELF/registry metadata and stdio outcomes pending",
+    "No arbitrary third-party project workloads or model calls"
+  ]
+}

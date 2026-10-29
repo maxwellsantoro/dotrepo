@@ -1,0 +1,18 @@
+{
+  "startedAt": "2026-10-29T05:44:34.147966+00:00",
+  "endedAt": "2026-10-29T05:44:34.224798+00:00",
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-rc2-linux-b55b7fd4961b",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "mkdir -p /work/boundaries/package-escape/repo; printf '# Fixture\\n\\nOrdinary contained input.\\n' >/work/boundaries/package-escape/repo/README.md; printf '# External sentinel\\n\\nUnchanged.\\n' >/work/boundaries/package-escape/outside; printf '%s' '{\"scripts\":{\"test\":\"vitest run\"}}' >/work/boundaries/package-escape/outside; ln -s /work/boundaries/package-escape/outside /work/boundaries/package-escape/repo/package.json"
+  ],
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

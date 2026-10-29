@@ -1,0 +1,11 @@
+Content-Length: 163
+
+{"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"processId": null, "capabilities": {}, "clientInfo": {"name": "linux-rc2-control", "version": "0"}}}Content-Length: 57
+
+{"jsonrpc": "2.0", "method": "initialized", "params": {}}Content-Length: 1429
+
+{"jsonrpc": "2.0", "method": "textDocument/didOpen", "params": {"textDocument": {"uri": "file:///work/source/examples/native-minimal/.repo", "languageId": "toml", "version": 1, "text": "schema = \"dotrepo/v0.1\"\n\n[record]\nmode = \"native\"\nstatus = \"canonical\"\n\n[record.trust]\nconfidence = \"high\"\nprovenance = [\"declared\", \"verified\"]\nnotes = \"Maintainer-controlled source of truth.\"\n\n[repo]\nname = \"orbit\"\ndescription = \"Fast local-first sync engine\"\nhomepage = \"https://example.com/orbit\"\nlicense = \"MIT\"\nstatus = \"active\"\nvisibility = \"public\"\nlanguages = [\"rust\"]\nbuild = \"cargo build\"\ntest = \"cargo test\"\ntopics = [\"sync\", \"cli\", \"local-first\"]\n\n[owners]\nmaintainers = [\"@alice\", \"@bob\"]\nteam = \"platform\"\nsecurity_contact = \"security@example.com\"\n\n[docs]\nroot = \"docs/\"\ngetting_started = \"docs/getting-started.md\"\narchitecture = \"docs/architecture.md\"\n\n[readme]\ntitle = \"Orbit\"\ntagline = \"Fast local-first sync engine\"\nsections = [\"overview\", \"docs\", \"quickstart\", \"security\"]\n\n[readme.custom_sections.quickstart]\ncontent = \"Run `cargo build` and `cargo test` to validate the local development setup.\"\n\n[compat.github]\ncodeowners = \"generate\"\nsecurity = \"generate\"\ncontributing = \"generate\"\npull_request_template = \"generate\"\n\n[relations]\nreferences = []\n\n[x.example]\ninternal_id = \"orbit-prod\"\n"}}}Content-Length: 63
+
+{"jsonrpc": "2.0", "id": 2, "method": "shutdown", "params": {}}Content-Length: 50
+
+{"jsonrpc": "2.0", "method": "exit", "params": {}}

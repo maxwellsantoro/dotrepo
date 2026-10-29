@@ -1,0 +1,172 @@
+{
+  "version": "2.0.0-rc.2",
+  "tag": "v2.0.0-rc.2",
+  "expectedCommit": "94e02bd43d7cae1e5b6cd37ebd7a2a66a9b2b773",
+  "startedAt": "2026-10-29T05:35:33.979370+00:00",
+  "status": "failed",
+  "stages": [],
+  "packages": [],
+  "pendingPackages": [
+    "dotrepo-schema",
+    "dotrepo-transport",
+    "dotrepo-core",
+    "dotrepo-cli",
+    "dotrepo-mcp",
+    "dotrepo-lsp",
+    "dotrepo"
+  ],
+  "localPlatform": {
+    "system": "Darwin",
+    "machine": "arm64"
+  },
+  "linuxExecution": {
+    "status": "not executed locally",
+    "checksumVerificationIsExecution": false
+  },
+  "historicalHelper": {
+    "path": "index/telemetry/stable-1.0.3-delivery-20261006/verify_publication.py",
+    "sha256": "1fb3539c53c97dcd4a7e59548cb740f5a4ee156c4f25a9870139b1a44adbbd62"
+  },
+  "limits": "Controlled own-project fixtures and public release provenance only; no third-party builds, publication, settings changes or independent consumer experiment.",
+  "releaseWorkflow": {
+    "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/40823937226",
+    "status": "in_progress",
+    "conclusion": null,
+    "headSha": "94e02bd43d7cae1e5b6cd37ebd7a2a66a9b2b773",
+    "jobs": [
+      {
+        "name": "version-integrity",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/40823937226/job/123282525954"
+      },
+      {
+        "name": "vscode-extension",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/40823937226/job/123282586137"
+      },
+      {
+        "name": "binaries (macos-latest, dotrepo-binaries-macos)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/40823937226/job/123282586191"
+      },
+      {
+        "name": "binaries (ubuntu-latest, dotrepo-binaries-linux)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/40823937226/job/123282586204"
+      },
+      {
+        "name": "release",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/40823937226/job/123283184094"
+      },
+      {
+        "name": "mcp-registry",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/40823937226/job/123283297985"
+      },
+      {
+        "name": "publish-crates",
+        "status": "in_progress",
+        "conclusion": null,
+        "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/40823937226/job/123283298069"
+      }
+    ],
+    "linuxInterpretation": "Linux artifact builds are not public-install execution. Only explicitly observed install/test jobs establish that evidence."
+  },
+  "source": {
+    "commit": "94e02bd43d7cae1e5b6cd37ebd7a2a66a9b2b773",
+    "cargoTomlSha256": "1b90a2a228b23c36c4aefb75e079e35b6d240c40287e8f49f25cf4ca2e4ebc38",
+    "cargoLockSha256": "2268a17be9005cead215b42f2654e7fb5629c6bc5d25b2573b6af945a073df66"
+  },
+  "assets": {
+    "dotrepo-2.0.0-rc.2-aarch64-apple-darwin.sha256": {
+      "url": "https://github.com/maxwellsantoro/dotrepo/releases/download/v2.0.0-rc.2/dotrepo-2.0.0-rc.2-aarch64-apple-darwin.sha256",
+      "startedAt": "2026-10-29T05:35:37.322614+00:00",
+      "completedAt": "2026-10-29T05:35:37.674340+00:00",
+      "bytes": 113,
+      "sha256": "98d232ec709260b7a1bf8cb08d37bca2f7f14ee94c386d035fdee06598331a30"
+    },
+    "dotrepo-2.0.0-rc.2-aarch64-apple-darwin.tar.gz": {
+      "url": "https://github.com/maxwellsantoro/dotrepo/releases/download/v2.0.0-rc.2/dotrepo-2.0.0-rc.2-aarch64-apple-darwin.tar.gz",
+      "startedAt": "2026-10-29T05:35:37.674412+00:00",
+      "completedAt": "2026-10-29T05:35:38.327178+00:00",
+      "bytes": 6489838,
+      "sha256": "048162610235eaaf686a86b5532cd2e9eae6e0e2025d128127e94799aeab61fe",
+      "matchingChecksum": "dotrepo-2.0.0-rc.2-aarch64-apple-darwin.sha256"
+    },
+    "dotrepo-2.0.0-rc.2-x86_64-unknown-linux-gnu.sha256": {
+      "url": "https://github.com/maxwellsantoro/dotrepo/releases/download/v2.0.0-rc.2/dotrepo-2.0.0-rc.2-x86_64-unknown-linux-gnu.sha256",
+      "startedAt": "2026-10-29T05:35:38.327275+00:00",
+      "completedAt": "2026-10-29T05:35:38.529874+00:00",
+      "bytes": 117,
+      "sha256": "977f7f746aa3f781e11591e02aefb003af978c8fca5b66122bb6be2a2196efe3"
+    },
+    "dotrepo-2.0.0-rc.2-x86_64-unknown-linux-gnu.tar.gz": {
+      "url": "https://github.com/maxwellsantoro/dotrepo/releases/download/v2.0.0-rc.2/dotrepo-2.0.0-rc.2-x86_64-unknown-linux-gnu.tar.gz",
+      "startedAt": "2026-10-29T05:35:38.529945+00:00",
+      "completedAt": "2026-10-29T05:35:39.131948+00:00",
+      "bytes": 7290584,
+      "sha256": "25de7f9909717f3753f63b7cedbfe7e072b4271a6acc4c83f1724ed71f74653d",
+      "matchingChecksum": "dotrepo-2.0.0-rc.2-x86_64-unknown-linux-gnu.sha256"
+    },
+    "dotrepo-mcp-2.0.0-rc.2.mcpb": {
+      "url": "https://github.com/maxwellsantoro/dotrepo/releases/download/v2.0.0-rc.2/dotrepo-mcp-2.0.0-rc.2.mcpb",
+      "startedAt": "2026-10-29T05:35:39.132081+00:00",
+      "completedAt": "2026-10-29T05:35:39.702918+00:00",
+      "bytes": 5674847,
+      "sha256": "7123ebca346d1f53f960bdefc5ccb98d70ca66d6015454b61bd35ce294d75f3d",
+      "matchingChecksum": "dotrepo-mcp-2.0.0-rc.2.mcpb.sha256"
+    },
+    "dotrepo-mcp-2.0.0-rc.2.mcpb.sha256": {
+      "url": "https://github.com/maxwellsantoro/dotrepo/releases/download/v2.0.0-rc.2/dotrepo-mcp-2.0.0-rc.2.mcpb.sha256",
+      "startedAt": "2026-10-29T05:35:39.703024+00:00",
+      "completedAt": "2026-10-29T05:35:39.907178+00:00",
+      "bytes": 94,
+      "sha256": "26790f06e6a4d12c9d6613ffa13c100eb3a7372af84609f4f740958c3bc0c53d"
+    },
+    "dotrepo-vscode-v1.0.0.vsix": {
+      "url": "https://github.com/maxwellsantoro/dotrepo/releases/download/v2.0.0-rc.2/dotrepo-vscode-v1.0.0.vsix",
+      "startedAt": "2026-10-29T05:35:39.907247+00:00",
+      "completedAt": "2026-10-29T05:35:40.144384+00:00",
+      "bytes": 105649,
+      "sha256": "34e95755bdad8d46656cdf507d1a85e72555c031f4d637054afdb557a7197112"
+    }
+  },
+  "mcpb": {
+    "version": "2.0.0-rc.2",
+    "sha256": "7123ebca346d1f53f960bdefc5ccb98d70ca66d6015454b61bd35ce294d75f3d",
+    "binaryParity": {
+      "aarch64-apple-darwin": {
+        "member": "server/darwin-arm64/dotrepo-mcp",
+        "sha256": "14fc65bf6c79a524e9ae660279bdf5cffaf8b0d4e6754abb02b88be569700c12",
+        "execution": "not executed by binary-parity check"
+      },
+      "x86_64-unknown-linux-gnu": {
+        "member": "server/linux-x64/dotrepo-mcp",
+        "sha256": "a38b425da8839d30c5d09ed0239ddf8be91aeb36b3ad8e70b0642121c7bc35cd",
+        "execution": "not executed by binary-parity check"
+      }
+    }
+  },
+  "mcpRegistry": {
+    "url": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.maxwellsantoro%2Fdotrepo/versions/2.0.0-rc.2",
+    "version": "2.0.0-rc.2",
+    "mcpbChecksumVerified": true,
+    "responseSha256": "ba9fdb5cbce2b304503d1d0ad0fe7d79f0aef357c2a07ce492a291e5d3dede2a"
+  },
+  "bundleBinaries": {
+    "dotrepo": "0aef2136142b3a652c64486e916fc7d6432dada82c0c60da8162dc6ae42cac3f",
+    "dotrepo-public-query": "263e2929465914f0667b3af0867cb0daa1ce3741192710e89b28e9ac78990158",
+    "dotrepo-mcp": "14fc65bf6c79a524e9ae660279bdf5cffaf8b0d4e6754abb02b88be569700c12",
+    "dotrepo-lsp": "0ab0de2f1ddf59c85b0686c14cb6696da1732f57d4f6fcaa39a8d44d7202b6bc"
+  },
+  "controlledChecksSourceSha256": "d58d0579550fb38124a3d525c9a9a06a1f2957fbaa7ce024d9979f2128acd595",
+  "error": "AssertionError: (['/private/tmp/dotrepo-rc2-delivery-bundle-40823937226/extracted/dotrepo-2.0.0-rc.2-aarch64-apple-darwin/bin/dotrepo', '--version'], \"error: unexpected argument '--version' found\\n\\nUsage: dotrepo [OPTIONS] <COMMAND>\\n\\nFor more information, try '--help'.\\n\")",
+  "completedAt": "2026-10-29T05:35:40.833219+00:00"
+}

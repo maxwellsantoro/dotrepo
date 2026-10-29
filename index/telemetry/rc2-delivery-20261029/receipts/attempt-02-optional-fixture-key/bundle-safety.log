@@ -1,0 +1,9 @@
+warning: `VIRTUAL_ENV=/Users/maxwell/projects/agent/dotrepo/.venv` does not match the project environment path `.venv` and will be ignored; use `--active` to target the active environment instead
+Using CPython 3.12.15
+Creating virtual environment at: .venv
+Installed 12 packages in 27ms
+Traceback (most recent call last):
+  File "/Users/maxwell/projects/agent/dotrepo/index/telemetry/rc2-delivery-20261029/check_installed_safety.py", line 91, in <module>
+    assert record.get("build") == row["repo_build"], row["fixture"]
+                                  ~~~^^^^^^^^^^^^^^
+KeyError: 'repo_build'

@@ -1,0 +1,17 @@
+{
+  "startedAt": "2026-10-29T05:42:58.255883+00:00",
+  "endedAt": "2026-10-29T05:42:58.467638+00:00",
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-rc2-linux-b55b7fd4961b",
+    "/bin/sh",
+    "-c",
+    "sha256sum /work/cargo/registry/cache/*/dotrepo-lsp-2.0.0-rc.2.crate"
+  ],
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdoutSha256": "4c3f58cc7f7d039605a1e039fe040af25a6891dfd8add4f15519fbc461250f27",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

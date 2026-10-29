@@ -1,0 +1,18 @@
+{
+  "startedAt": "2026-10-29T05:44:28.600359+00:00",
+  "endedAt": "2026-10-29T05:44:28.672269+00:00",
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-rc2-linux-b55b7fd4961b",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "mkdir -p /work/cases; cp -a /work/source/crates/dotrepo-core/tests/fixtures/import/just-required-argument /work/cases/just-required-argument"
+  ],
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

@@ -1,0 +1,16 @@
+{
+  "startedAt": "2026-10-29T05:44:34.007130+00:00",
+  "endedAt": "2026-10-29T05:44:34.077698+00:00",
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-rc2-linux-b55b7fd4961b",
+    "sha256sum",
+    "/work/boundaries/readme-contained-link/repo/inside.md"
+  ],
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdoutSha256": "b529f2438556fb079ada47a45df94dbe4c41a325c7e4a76735add671cc483370",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

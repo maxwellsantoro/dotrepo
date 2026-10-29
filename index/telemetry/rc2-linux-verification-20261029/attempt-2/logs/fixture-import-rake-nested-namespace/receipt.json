@@ -1,0 +1,22 @@
+{
+  "startedAt": "2026-10-29T05:44:30.054461+00:00",
+  "endedAt": "2026-10-29T05:44:30.133588+00:00",
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-rc2-linux-b55b7fd4961b",
+    "/work/install-dotrepo-cli/bin/dotrepo",
+    "--root",
+    "/work/cases/rake-nested-namespace",
+    "import",
+    "--mode",
+    "overlay",
+    "--source",
+    "https://github.com/example/safety-fixture"
+  ],
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdoutSha256": "7824a8ed8a7bf0043859e81ccc5281a51da2948e992b385618e440755e1972d5",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

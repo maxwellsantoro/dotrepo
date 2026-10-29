@@ -1,0 +1,7 @@
+Content-Length: 259
+
+{"id":1,"jsonrpc":"2.0","result":{"capabilities":{"codeActionProvider":true,"completionProvider":{},"hoverProvider":true,"textDocumentSync":{"change":1,"openClose":true,"save":{"includeText":true}}},"serverInfo":{"name":"dotrepo-lsp","version":"2.0.0-rc.2"}}}Content-Length: 361
+
+{"jsonrpc":"2.0","method":"textDocument/publishDiagnostics","params":{"diagnostics":[{"message":"repo.homepage must resolve to a host/owner/repo URL for claim-from-native","range":{"end":{"character":6,"line":11},"start":{"character":0,"line":11}},"severity":4,"source":"adoption_status"}],"uri":"file:///work/source/examples/native-minimal/.repo","version":1}}Content-Length: 38
+
+{"id":2,"jsonrpc":"2.0","result":null}
