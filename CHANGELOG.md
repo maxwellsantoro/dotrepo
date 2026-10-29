@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+- Extract explicit local runtime/version prerequisite lists into complete
+  source-bound command candidates. Preserve setup order and abstain on ambiguous
+  lists, external requirements and inherited section restrictions. Add exact
+  repository/component importer fixtures; these are development controls, not
+  held-out qualification or execution verification.
+- Add frozen autonomous-task experiment preparation, deterministic randomized
+  independent-session assignments, hidden-answer request boundaries and a
+  separate intention-to-treat scorer. Bind usage/runtime receipts, retain unknown
+  costs and flag campaign budget overruns. Retain a source-only command-withdrawal
+  diagnostic; no new consumer-benefit or independent-use result is claimed.
+
 - Correct source-scoped build/test answers after a pinned documentation audit;
   preserve record age and unrelated assessments, and withdraw verification after
   partial corrections. Reject specialized environment/diagnostic sections and

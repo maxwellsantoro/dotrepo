@@ -1,0 +1,650 @@
+{
+  "schemaVersion": 1,
+  "scope": "Development diagnostic of 19 historical assertions across 16 repositories; never held-out qualification.",
+  "assessmentBasis": "Masked case list and pinned source bytes only; frozen before any prior correction disposition or current index record was inspected. Retained path mapping supplied by coordinator after source judgments were formed; retained files were checked only for byte/hash parity.",
+  "baseCommit": "6fed5d5c",
+  "assessmentDate": "2026-10-29",
+  "classificationMeaning": {
+    "contradicted-or-wrong-scope": "Source explicitly contradicts default scope or documents a narrower/special task or working directory. This does not say the command is invalid for that task.",
+    "potentially-applicable-insufficient-evidence": "Source suggests a relevant build/test command but does not establish the full asserted repository-default command or coverage.",
+    "supported-for-claimed-task": "Source explicitly supports the command for the default build/test task; prerequisites and standalone workflow sufficiency remain separate.",
+    "unresolved": "Pinned material cannot resolve task applicability."
+  },
+  "limitations": [
+    "No upstream command execution, model calls, network lookup, fallback timing or measured user effort.",
+    "No prior correction JSON or current index records inspected.",
+    "Only one pinned document per repository was available; linked but unretained material was not treated as inspected evidence.",
+    "Task applicability is separate from scalar publication suitability. A supported compile step may still require prior configuration and must not be treated as safe without that context."
+  ],
+  "counts": {
+    "contradicted-or-wrong-scope": 16,
+    "potentially-applicable-insufficient-evidence": 2,
+    "supported-for-claimed-task": 1
+  },
+  "assessments": [
+    {
+      "caseId": "withdrawal-01",
+      "identity": "github.com/astral-sh/uv",
+      "field": "repo.build",
+      "assertion": "cargo build --target x86_64-unknown-linux-musl --profile profiling",
+      "revision": "e4c55567ada966de4911513b5c526070e6cddd3f",
+      "source": {
+        "path": "index/telemetry/public-surface-review-20261028/sources/github.com/astral-sh/uv/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/astral-sh/uv/e4c55567ada966de4911513b5c526070e6cddd3f/CONTRIBUTING.md",
+        "sha256": "b474892c11039bfc04449a838c5c923c90bff8843007fa62adc7713eada13afe"
+      },
+      "classification": "contradicted-or-wrong-scope",
+      "claimedTask": "repository-default build",
+      "rationale": "Container-oriented musl/profiling build for a uv-dev resolve-many workflow, rather than the repository-default build. The full asserted command is present, but its special target, profile and surrounding Docker use are explicit.",
+      "documentedSpecialOrConditionalTask": "Build uv/uv-dev for the documented Docker isolation workflow.",
+      "knownPrerequisitesAndRestrictions": [
+        "Rust and C compiler (lines 36-38).",
+        "Linux musl target/toolchain suitable for x86_64-unknown-linux-musl; setup for that target is not supplied in this excerpt.",
+        "Docker builder image and container workflow (lines 238-242)."
+      ],
+      "standaloneCleanCheckoutSufficiencyEstablished": false,
+      "executionVerified": false,
+      "uncertaintyOrLimit": "Source does not establish this target/profile as the repository default.",
+      "evidence": [
+        {
+          "startLine": 231,
+          "endLine": 246,
+          "excerpt": "\nSource distributions can run arbitrary code on build and can make unwanted modifications to your\nsystem\n([\"Someone's Been Messing With My Subnormals!\" on Blogspot](https://moyix.blogspot.com/2022/09/someones-been-messing-with-my-subnormals.html),\n[\"nvidia-pyindex\" on PyPI](https://pypi.org/project/nvidia-pyindex/)), which can even occur when\njust resolving requirements. To prevent this, there's a Docker container you can run commands in:\n\n```console\n$ docker build -t uv-builder -f crates/uv-dev/builder.dockerfile --load .\n# Build for musl to avoid glibc errors, might not be required with your OS version\ncargo build --target x86_64-unknown-linux-musl --profile profiling\ndocker run --rm -it -v $(pwd):/app uv-builder /app/target/x86_64-unknown-linux-musl/profiling/uv-dev resolve-many --cache-dir /app/cache-docker /app/scripts/popular_packages/pypi_10k_most_dependents.txt\n```\n\nWe recommend using this container if you don't trust the dependency tree of the package(s) you are\ntrying to resolve or install."
+        }
+      ]
+    },
+    {
+      "caseId": "withdrawal-02",
+      "identity": "github.com/astral-sh/uv",
+      "field": "repo.test",
+      "assertion": "cargo nextest run",
+      "revision": "e4c55567ada966de4911513b5c526070e6cddd3f",
+      "source": {
+        "path": "index/telemetry/public-surface-review-20261028/sources/github.com/astral-sh/uv/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/astral-sh/uv/e4c55567ada966de4911513b5c526070e6cddd3f/CONTRIBUTING.md",
+        "sha256": "b474892c11039bfc04449a838c5c923c90bff8843007fa62adc7713eada13afe"
+      },
+      "classification": "potentially-applicable-insufficient-evidence",
+      "claimedTask": "repository-default test",
+      "rationale": "The source recommends nextest for testing, but shows a filtered command for one named test and a separate cargo-insta command to run all tests while accepting snapshots. It does not explicitly give the complete unfiltered asserted string as a repository-default command. Removing the filter is plausible but remains an inference from the retained source.",
+      "documentedSpecialOrConditionalTask": "Run the Rust test suite through the recommended nextest runner; exact unfiltered command requires confirmation.",
+      "knownPrerequisitesAndRestrictions": [
+        "Rust and C compiler (lines 36-38).",
+        "cargo-nextest must be available; this source recommends it but does not give an installation step here.",
+        "Testing requires multiple specific Python versions; source gives cargo run python install (lines 92-98)."
+      ],
+      "standaloneCleanCheckoutSufficiencyEstablished": false,
+      "executionVerified": false,
+      "uncertaintyOrLimit": "Cargo workspace/default-member coverage and unfiltered runner behavior are not established by the retained document alone.",
+      "evidence": [
+        {
+          "startLine": 63,
+          "endLine": 98,
+          "excerpt": "## Testing\n\nFor running tests, we recommend [nextest](https://nexte.st/).\n\nTo run a specific test by name:\n\n```shell\ncargo nextest run -E 'test(test_name)'\n```\n\nThe test suite ignores `RUST_LOG` to avoid snapshot pollution. To enable logging in test\nsubprocesses, use `UV_INTERNAL__TEST_RUST_LOG`, for example:\n\n```shell\nUV_INTERNAL__TEST_RUST_LOG=uv=debug cargo nextest run -E 'test(test_name)'\n```\n\nTo run all tests and accept snapshot changes:\n\n```shell\ncargo insta test --accept --test-runner nextest\n```\n\nTo update snapshots for a specific test:\n\n```shell\ncargo insta test --accept --test-runner nextest -- <test_name>\n```\n\n### Python\n\nTesting uv requires multiple specific Python versions; they can be installed with:\n\n```shell\ncargo run python install\n```"
+        }
+      ]
+    },
+    {
+      "caseId": "withdrawal-03",
+      "identity": "github.com/FuelLabs/fuel-core",
+      "field": "repo.build",
+      "assertion": "cargo build -p fuel-core-bin --no-default-features",
+      "revision": "ffd6563763582f8b0d9073a7cc115b57002ee684",
+      "source": {
+        "path": "index/telemetry/public-surface-review-20261028/sources/github.com/FuelLabs/fuel-core/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/FuelLabs/fuel-core/ffd6563763582f8b0d9073a7cc115b57002ee684/CONTRIBUTING.md",
+        "sha256": "2fd38b4c49b8c698f7118fdb69d6ed092340efa2af2834560d8dfdb4bb3fffbc"
+      },
+      "classification": "contradicted-or-wrong-scope",
+      "claimedTask": "repository-default build",
+      "rationale": "The default build guidance is cargo xtask build, which also dumps the schema. The asserted package build with default features disabled appears under Build issues as an in-memory database workaround for testing purposes.",
+      "documentedSpecialOrConditionalTask": "Build fuel-core-bin with an in-memory database to reduce build time in a testing workflow.",
+      "knownPrerequisitesAndRestrictions": [
+        "Rust stable toolchain; git, rustup and clang are listed prerequisites (lines 13-25).",
+        "Disabling default features changes the database configuration and does not replace the documented schema-dumping xtask workflow."
+      ],
+      "standaloneCleanCheckoutSufficiencyEstablished": false,
+      "executionVerified": false,
+      "uncertaintyOrLimit": "No execution or claim that the workaround is invalid for its documented purpose.",
+      "evidence": [
+        {
+          "startLine": 45,
+          "endLine": 55,
+          "excerpt": "### Building and testing\n\nInstead of a makefile, Fuel Core uses the `xtask` pattern to manage custom build processes.\n\nYou can build Fuel Core:\n\n```sh\ncargo xtask build\n```\n\nThis command will run `cargo build` and also dump the latest schema into `crates/client/assets/schema.sdl` folder."
+        },
+        {
+          "startLine": 85,
+          "endLine": 93,
+          "excerpt": "### Build issues\n\nDue to dependencies on external components such as RocksDb, build times can be large without caching.\nUsing an in-memory (hashmap) based database is supported for testing purposes, so build times can be improved by disabling\ndefault features.\n\n```sh\ncargo build -p fuel-core-bin --no-default-features\n```"
+        }
+      ]
+    },
+    {
+      "caseId": "withdrawal-04",
+      "identity": "github.com/astral-sh/ruff",
+      "field": "repo.test",
+      "assertion": "cargo test -p ruff_python_parser",
+      "revision": "c618e8b1382992a27dafe2fc288777792e36ecab",
+      "source": {
+        "path": "index/telemetry/public-surface-review-20261028/sources/github.com/astral-sh/ruff/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/astral-sh/ruff/c618e8b1382992a27dafe2fc288777792e36ecab/CONTRIBUTING.md",
+        "sha256": "8e0479f1dda2f3a3a5b1aae90e31ac3455ef5d019c23bdcc62f6b4c221fb88f9"
+      },
+      "classification": "contradicted-or-wrong-scope",
+      "claimedTask": "repository-default test",
+      "rationale": "The asserted command runs one package and is prescribed specifically after updating supported Unicode data and adding a parser regression test. General Rust test validation is documented separately.",
+      "documentedSpecialOrConditionalTask": "Run parser regression tests while updating the supported Unicode version.",
+      "knownPrerequisitesAndRestrictions": [
+        "Rust toolchain and uv development tools (lines 70-83).",
+        "Unicode-update workflow also calls for the vendored library exhaustive tests with nightly Rust (lines 637-643)."
+      ],
+      "standaloneCleanCheckoutSufficiencyEstablished": false,
+      "executionVerified": false,
+      "uncertaintyOrLimit": "Package-scoped parser coverage does not establish repository-wide default test coverage.",
+      "evidence": [
+        {
+          "startLine": 92,
+          "endLine": 110,
+          "excerpt": "We recommend [nextest](https://nexte.st/) to run Ruff's test suite (via `uv run --only-dev cargo nextest run`),\nthough it's not strictly necessary. Throughout this guide, any usages of `cargo test` can be replaced\nwith `uv run --only-dev cargo nextest run`.\n\n### Development\n\nAfter cloning the repository, run Ruff locally from the repository root with:\n\n```shell\ncargo run -p ruff -- check /path/to/file.py --no-cache\n```\n\nPrior to opening a pull request, ensure that your code has been auto-formatted,\nand that it passes both the lint and test validation checks:\n\n```shell\nCARGO_BUILD_WARNINGS=deny cargo clippy --workspace --all-targets --all-features  # Rust linting\nRUFF_UPDATE_SCHEMA=1 cargo test  # Rust testing and updating ruff.schema.json\nuv run --only-dev --locked prek run --all-files  # Rust and Python formatting, Markdown and Python linting, etc."
+        },
+        {
+          "startLine": 637,
+          "endLine": 643,
+          "excerpt": "1. Add a parser regression test for a name introduced in the new Unicode version.\n    Run the parser tests and the vendored library's exhaustive tests:\n\n    ```shell\n    cargo test -p ruff_python_parser\n    cargo +nightly test -p ruff_unicode_names2 --lib\n    ```"
+        }
+      ]
+    },
+    {
+      "caseId": "withdrawal-05",
+      "identity": "github.com/GokuMohandas/Made-With-ML",
+      "field": "repo.test",
+      "assertion": "pytest --dataset-loc=$DATASET_LOC tests/data --verbose --disable-warnings",
+      "revision": "3361aeb8ddfc2affdba9f545c978c38c85cee764",
+      "source": {
+        "path": "index/telemetry/public-surface-review-20261028/sources/github.com/GokuMohandas/Made-With-ML/README.md",
+        "url": "https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/3361aeb8ddfc2affdba9f545c978c38c85cee764/README.md",
+        "sha256": "de3c1169085f5092d203330e50c442004f0939217f6aed123857d08253aff450"
+      },
+      "classification": "contradicted-or-wrong-scope",
+      "claimedTask": "repository-default test",
+      "rationale": "The Testing block separates code, data, model and coverage commands. The assertion is only the data tests and depends on the preceding DATASET_LOC export. It omits other documented test categories.",
+      "documentedSpecialOrConditionalTask": "Run data validation tests against the selected dataset.",
+      "knownPrerequisitesAndRestrictions": [
+        "Set DATASET_LOC to a suitable dataset URL before this command (line 380).",
+        "The Python environment must contain the project test dependencies; this snippet is not a complete environment setup."
+      ],
+      "standaloneCleanCheckoutSufficiencyEstablished": false,
+      "executionVerified": false,
+      "uncertaintyOrLimit": "No claim about whether a full combined test workflow exists elsewhere.",
+      "evidence": [
+        {
+          "startLine": 374,
+          "endLine": 391,
+          "excerpt": "### Testing\n```bash\n# Code\npython3 -m pytest tests/code --verbose --disable-warnings\n\n# Data\nexport DATASET_LOC=\"https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/dataset.csv\"\npytest --dataset-loc=$DATASET_LOC tests/data --verbose --disable-warnings\n\n# Model\nexport EXPERIMENT_NAME=\"llm\"\nexport RUN_ID=$(python madewithml/predict.py get-best-run-id --experiment-name $EXPERIMENT_NAME --metric val_loss --mode ASC)\npytest --run-id=$RUN_ID tests/model --verbose --disable-warnings\n\n# Coverage\npython3 -m pytest tests/code --cov madewithml --cov-report html --disable-warnings  # html report\npython3 -m pytest tests/code --cov madewithml --cov-report term --disable-warnings  # terminal report\n```"
+        }
+      ]
+    },
+    {
+      "caseId": "withdrawal-06",
+      "identity": "github.com/clap-rs/clap",
+      "field": "repo.test",
+      "assertion": "cargo test --features debug",
+      "revision": "ccc89b83875474399e9d9d70841163f6319d1a41",
+      "source": {
+        "path": "index/telemetry/public-surface-review-20261028/sources/github.com/clap-rs/clap/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/clap-rs/clap/ccc89b83875474399e9d9d70841163f6319d1a41/CONTRIBUTING.md",
+        "sha256": "847fc0e8d8e5473d0c2f22ff427c86488c574d92ad1b1786cbe62d0eba7528ed"
+      },
+      "classification": "contradicted-or-wrong-scope",
+      "claimedTask": "repository-default test",
+      "rationale": "The command is explicitly introduced under Debugging Clap to see debug output while developing features. It can run the full test suite in that special configuration, but the common verification guidance instead points to make test-full.",
+      "documentedSpecialOrConditionalTask": "Run full or individual tests with clap debug output enabled.",
+      "knownPrerequisitesAndRestrictions": [
+        "Rust/Cargo environment.",
+        "Enable the debug feature deliberately; this is a debugging configuration (lines 89-97)."
+      ],
+      "standaloneCleanCheckoutSufficiencyEstablished": false,
+      "executionVerified": false,
+      "uncertaintyOrLimit": "This is not a claim that the source command lacks full-suite applicability in its documented debug configuration.",
+      "evidence": [
+        {
+          "startLine": 77,
+          "endLine": 98,
+          "excerpt": "### Verifying Changes\n\nA common (sub)set of commands for verifying your change:\n```console\n$ make test-full\n$ make clippy-full\n$ make doc\n```\n*(If `make` is not available on your system, you can look up what these expand to in the [Makefile](./Makefile))*\n\nCheck out the [Makefile](./Makefile) for more commands run by CI.\n\n### Debugging Clap\n\nA helpful technique is to see the `clap` debug output while developing features. In order to see the debug output while running the full test suite or individual tests, run:\n\n```console\n$ cargo test --features debug\n\n# Or for individual tests\n$ cargo test --test <test_name> --features debug\n```"
+        }
+      ]
+    },
+    {
+      "caseId": "withdrawal-07",
+      "identity": "github.com/denoland/deno",
+      "field": "repo.build",
+      "assertion": "cargo build --features hmr",
+      "revision": "e7b39ebd55c85aaf6a29290c1f5a99e2e21e09dd",
+      "source": {
+        "path": "index/telemetry/public-surface-review-20261028/sources/github.com/denoland/deno/.github/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/denoland/deno/e7b39ebd55c85aaf6a29290c1f5a99e2e21e09dd/.github/CONTRIBUTING.md",
+        "sha256": "d1d1570c2dbe526203fb93a37da249d935adc049c74f2bd6e9fbba9cadf33fbb"
+      },
+      "classification": "contradicted-or-wrong-scope",
+      "claimedTask": "repository-default build",
+      "rationale": "The source identifies ./x as the common development CLI, then introduces --features hmr as a special mode for iterating on JS/TS modules, whose sources are read at runtime rather than embedded.",
+      "documentedSpecialOrConditionalTask": "Build the deno binary for JS/TS Hot Module Replacement development.",
+      "knownPrerequisitesAndRestrictions": [
+        "Local JS/TS sources must be available at runtime in HMR mode (lines 49-52).",
+        "The retained excerpt does not establish complete native build prerequisites."
+      ],
+      "standaloneCleanCheckoutSufficiencyEstablished": false,
+      "executionVerified": false,
+      "uncertaintyOrLimit": "No source-based reason to call this invalid for the HMR workflow.",
+      "evidence": [
+        {
+          "startLine": 27,
+          "endLine": 62,
+          "excerpt": "## The `./x` tool\n\nDeno uses the `./x` developer CLI for common development tasks like building,\ntesting, formatting, and linting. Run `./x --help` to see all available\ncommands.\n\n```sh\n./x build       # Build the deno binary (debug mode)\n./x check       # Fast compile check (no linking)\n./x fmt         # Format all code\n./x lint        # Lint all code (JS/TS + Rust)\n./x lint-js     # Lint JavaScript/TypeScript only\n./x verify      # Pre-commit verification (fmt + lint-js)\n./x test        # Run runtime unit tests\n./x node-test   # Run Node.js API unit tests\n./x node-compat # Run Node.js compatibility tests\n./x spec        # Run spec (integration) tests\n./x napi        # Run NAPI (native addon) tests\n```\n\n## Hot Module Replacement (HMR) mode\n\nWhile iterating on JavaScript/TypeScript modules it is recommended to include\n`--features hmr` in your `cargo` flags. This is a special development mode where\nthe JS/TS sources are not included in the binary but read at runtime, meaning\nthe binary will not have to be rebuilt if they are changed.\n\n```sh\n# cargo build\ncargo build --features hmr\n\n# cargo run -- run hello.ts\ncargo run --features hmr -- run hello.ts\n\n# cargo test integration::node_unit_tests::os_test\ncargo test --features hmr integration::node_unit_tests::os_test"
+        }
+      ]
+    },
+    {
+      "caseId": "withdrawal-08",
+      "identity": "github.com/denoland/deno",
+      "field": "repo.test",
+      "assertion": "cargo test --features hmr integration::node_unit_tests::os_test",
+      "revision": "e7b39ebd55c85aaf6a29290c1f5a99e2e21e09dd",
+      "source": {
+        "path": "index/telemetry/public-surface-review-20261028/sources/github.com/denoland/deno/.github/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/denoland/deno/e7b39ebd55c85aaf6a29290c1f5a99e2e21e09dd/.github/CONTRIBUTING.md",
+        "sha256": "d1d1570c2dbe526203fb93a37da249d935adc049c74f2bd6e9fbba9cadf33fbb"
+      },
+      "classification": "contradicted-or-wrong-scope",
+      "claimedTask": "repository-default test",
+      "rationale": "The command combines the special HMR development mode with a named node_unit_tests::os_test filter. It is an example of a selected test, rather than the repository-default test task.",
+      "documentedSpecialOrConditionalTask": "Run the named Node compatibility OS test in HMR mode.",
+      "knownPrerequisitesAndRestrictions": [
+        "HMR reads local JS/TS sources at runtime (lines 49-52).",
+        "Applicable Rust build/test toolchain and environment are not fully enumerated in this snippet."
+      ],
+      "standaloneCleanCheckoutSufficiencyEstablished": false,
+      "executionVerified": false,
+      "uncertaintyOrLimit": "This does not evaluate the selected test behavior or result.",
+      "evidence": [
+        {
+          "startLine": 47,
+          "endLine": 62,
+          "excerpt": "## Hot Module Replacement (HMR) mode\n\nWhile iterating on JavaScript/TypeScript modules it is recommended to include\n`--features hmr` in your `cargo` flags. This is a special development mode where\nthe JS/TS sources are not included in the binary but read at runtime, meaning\nthe binary will not have to be rebuilt if they are changed.\n\n```sh\n# cargo build\ncargo build --features hmr\n\n# cargo run -- run hello.ts\ncargo run --features hmr -- run hello.ts\n\n# cargo test integration::node_unit_tests::os_test\ncargo test --features hmr integration::node_unit_tests::os_test"
+        }
+      ]
+    },
+    {
+      "caseId": "withdrawal-09",
+      "identity": "github.com/google/googletest",
+      "field": "repo.build",
+      "assertion": "make",
+      "revision": "cd8e73f067129f8489e35c7b51c7a68552b289d2",
+      "source": {
+        "path": "index/telemetry/public-surface-review-20261028/sources/github.com/google/googletest/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/google/googletest/cd8e73f067129f8489e35c7b51c7a68552b289d2/CONTRIBUTING.md",
+        "sha256": "f3ebba9e9dcf173b241a09082c73bccb0f2ea742ae9d7892bbaedaf928bca007"
+      },
+      "classification": "contradicted-or-wrong-scope",
+      "claimedTask": "repository-default build",
+      "rationale": "The source changes into mybuild and configures CMake with both test options before invoking make. The asserted bare make loses that working-directory and configuration context; it is not documented as a repository-root default command.",
+      "documentedSpecialOrConditionalTask": "Build Google Test/Mock and desired self-tests in a configured build directory on Unix-like systems.",
+      "knownPrerequisitesAndRestrictions": [
+        "CMake and Python prerequisites (lines 86-93).",
+        "mkdir mybuild; cd mybuild; cmake -Dgtest_build_tests=ON -Dgmock_build_tests=ON ${GTEST_REPO_DIR} (lines 105-108).",
+        "The source describes make specifically for Unix-like systems (lines 128-132)."
+      ],
+      "standaloneCleanCheckoutSufficiencyEstablished": false,
+      "executionVerified": false,
+      "uncertaintyOrLimit": "The retained file does not prove whether some alternative in-source build could work; it documents the out-of-tree sequence.",
+      "evidence": [
+        {
+          "startLine": 86,
+          "endLine": 108,
+          "excerpt": "## Requirements for Contributors\n\nIf you plan to contribute a patch, you need to build Google Test, Google Mock,\nand their own tests from a git checkout, which has further requirements:\n\n*   [Python](https://www.python.org/) v3.6 or newer (for running some of the\n    tests and re-generating certain source files from templates)\n*   [CMake](https://cmake.org/) v2.8.12 or newer\n\n## Developing Google Test and Google Mock\n\nThis section discusses how to make your own changes to the Google Test project.\n\n### Testing Google Test and Google Mock Themselves\n\nTo make sure your changes work as intended and don't break existing\nfunctionality, you'll want to compile and run Google Test and GoogleMock's own\ntests. For that you can use CMake:\n\n```\nmkdir mybuild\ncd mybuild\ncmake -Dgtest_build_tests=ON -Dgmock_build_tests=ON ${GTEST_REPO_DIR}"
+        },
+        {
+          "startLine": 119,
+          "endLine": 138,
+          "excerpt": "Make sure you have Python installed, as some of Google Test's tests are written\nin Python. If the cmake command complains about not being able to find Python\n(`Could NOT find PythonInterp (missing: PYTHON_EXECUTABLE)`), try telling it\nexplicitly where your Python executable can be found:\n\n```\ncmake -DPYTHON_EXECUTABLE=path/to/python ...\n```\n\nNext, you can build Google Test and / or Google Mock and all desired tests. On\n\\*nix, this is usually done by\n\n```\nmake\n```\n\nTo run the tests, do\n\n```\nmake test"
+        }
+      ]
+    },
+    {
+      "caseId": "withdrawal-10",
+      "identity": "github.com/google/googletest",
+      "field": "repo.test",
+      "assertion": "make test",
+      "revision": "cd8e73f067129f8489e35c7b51c7a68552b289d2",
+      "source": {
+        "path": "index/telemetry/public-surface-review-20261028/sources/github.com/google/googletest/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/google/googletest/cd8e73f067129f8489e35c7b51c7a68552b289d2/CONTRIBUTING.md",
+        "sha256": "f3ebba9e9dcf173b241a09082c73bccb0f2ea742ae9d7892bbaedaf928bca007"
+      },
+      "classification": "contradicted-or-wrong-scope",
+      "claimedTask": "repository-default test",
+      "rationale": "make test follows the documented out-of-tree CMake configuration and make build. Extracting the final line omits the required working directory and preceding build/test configuration.",
+      "documentedSpecialOrConditionalTask": "Run Google Test/Mock self-tests in the configured build directory.",
+      "knownPrerequisitesAndRestrictions": [
+        "CMake/Python prerequisites (lines 86-93).",
+        "Configure in mybuild with gtest_build_tests and gmock_build_tests enabled (lines 105-108).",
+        "Build the configured targets with make before make test (lines 128-138)."
+      ],
+      "standaloneCleanCheckoutSufficiencyEstablished": false,
+      "executionVerified": false,
+      "uncertaintyOrLimit": "The source supports this command in the configured directory, not a bare root invocation.",
+      "evidence": [
+        {
+          "startLine": 99,
+          "endLine": 108,
+          "excerpt": "### Testing Google Test and Google Mock Themselves\n\nTo make sure your changes work as intended and don't break existing\nfunctionality, you'll want to compile and run Google Test and GoogleMock's own\ntests. For that you can use CMake:\n\n```\nmkdir mybuild\ncd mybuild\ncmake -Dgtest_build_tests=ON -Dgmock_build_tests=ON ${GTEST_REPO_DIR}"
+        },
+        {
+          "startLine": 119,
+          "endLine": 141,
+          "excerpt": "Make sure you have Python installed, as some of Google Test's tests are written\nin Python. If the cmake command complains about not being able to find Python\n(`Could NOT find PythonInterp (missing: PYTHON_EXECUTABLE)`), try telling it\nexplicitly where your Python executable can be found:\n\n```\ncmake -DPYTHON_EXECUTABLE=path/to/python ...\n```\n\nNext, you can build Google Test and / or Google Mock and all desired tests. On\n\\*nix, this is usually done by\n\n```\nmake\n```\n\nTo run the tests, do\n\n```\nmake test\n```\n\nAll tests should pass."
+        }
+      ]
+    },
+    {
+      "caseId": "withdrawal-11",
+      "identity": "github.com/nlohmann/json",
+      "field": "repo.build",
+      "assertion": "make build -C docs/mkdocs",
+      "revision": "84c5421644314a301ecb1312bbb4e1ff7e1a729d",
+      "source": {
+        "path": "index/telemetry/public-surface-review-20261028/sources/github.com/nlohmann/json/.github/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/nlohmann/json/84c5421644314a301ecb1312bbb4e1ff7e1a729d/.github/CONTRIBUTING.md",
+        "sha256": "997bbf1bde2e3d44a8223c7db9f01961b1505931913ef497f1aa942cc1b3fd13"
+      },
+      "classification": "contradicted-or-wrong-scope",
+      "claimedTask": "repository-default build",
+      "rationale": "The assertion is explicitly a strict MkDocs documentation build and switches to docs/mkdocs. The library and tests have a separate CMake workflow.",
+      "documentedSpecialOrConditionalTask": "Check documentation for broken links, anchors and structural problems.",
+      "knownPrerequisitesAndRestrictions": [
+        "Documentation environment setup is shown via make install_venv -C docs/mkdocs (lines 134-138).",
+        "Node.js is required for the separate Mermaid check, not asserted here as a prerequisite of make build itself (line 149)."
+      ],
+      "standaloneCleanCheckoutSufficiencyEstablished": false,
+      "executionVerified": false,
+      "uncertaintyOrLimit": "Documentation build validity does not establish the default software/library build.",
+      "evidence": [
+        {
+          "startLine": 88,
+          "endLine": 96,
+          "excerpt": "#### Run the tests\n\nFirst, ensure the test suite runs before making any changes:\n\n```sh\n$ cmake -S. -B build\n$ cmake --build build -j 10\n$ ctest --test-dir build -j 10\n```"
+        },
+        {
+          "startLine": 125,
+          "endLine": 150,
+          "excerpt": "### Update the documentation\n\nThe [main documentation](https://json.nlohmann.me) of the library is generated from the files\n[`docs/mkdocs/docs`](https://github.com/nlohmann/json/blob/develop/docs/mkdocs/docs). This folder contains dedicated\npages for [certain features](https://github.com/nlohmann/json/tree/develop/docs/mkdocs/docs/features), a list of\n[all exceptions](https://github.com/nlohmann/json/blob/develop/docs/mkdocs/docs/home/exceptions.md), and \n[extensive API documentation](https://github.com/nlohmann/json/tree/develop/docs/mkdocs/docs/api) with details on every\npublic API function.\n\nBuild the documentation locally using:\n\n```shell\nmake install_venv -C docs/mkdocs\nmake serve -C docs/mkdocs\n```\n\nThe documentation will then be available at <http://127.0.0.1:8000/>. See the documentation of\n[mkdocs](https://www.mkdocs.org) and [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) for more\ninformation.\n\nBefore opening a pull request, check the documentation like the CI does:\n\n```shell\nmake build -C docs/mkdocs          # strict build: fails on broken links, anchors, and structure problems\nmake check_mermaid -C docs/mkdocs  # checks the Mermaid diagrams (requires Node.js)\n```"
+        }
+      ]
+    },
+    {
+      "caseId": "withdrawal-12",
+      "identity": "github.com/pytorch/pytorch",
+      "field": "repo.test",
+      "assertion": "pytest test/test_nn.py -k Loss -v",
+      "revision": "6ce2d3101ac63a4778b4ac00a811fb4cfd4ed42d",
+      "source": {
+        "path": "index/telemetry/public-surface-review-20261028/sources/github.com/pytorch/pytorch/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/pytorch/pytorch/6ce2d3101ac63a4778b4ac00a811fb4cfd4ed42d/CONTRIBUTING.md",
+        "sha256": "bdfa782fc586441f115ff1a89d38b24e1fc6dcb6337982d9674253b532c91b53"
+      },
+      "classification": "contradicted-or-wrong-scope",
+      "claimedTask": "repository-default test",
+      "rationale": "The source labels this as an example selecting tests containing a substring, for a change to Loss functions. It is restricted to test_nn.py and -k Loss; the whole-suite runner is documented separately.",
+      "documentedSpecialOrConditionalTask": "Run selected neural-network Loss function tests during local development.",
+      "knownPrerequisitesAndRestrictions": [
+        "Install expecttest/hypothesis and pytest in the Python environment (lines 532-541).",
+        "Use an interpreter with torch installed; the source describes spin test as preserving that interpreter (lines 580-584)."
+      ],
+      "standaloneCleanCheckoutSufficiencyEstablished": false,
+      "executionVerified": false,
+      "uncertaintyOrLimit": "The source says pytest works for local development but is not officially supported; this is not a claim that the command cannot run.",
+      "evidence": [
+        {
+          "startLine": 530,
+          "endLine": 549,
+          "excerpt": "### Python Unit Testing\n\n**Prerequisites**:\nThe following packages should be installed with `pip`:\n- `expecttest` and `hypothesis` - required to run tests\n- `pyrefly` - recommended for type checking. [Pyrefly](https://pyrefly.org/)\n- `pytest` - recommended to run tests more selectively\nRunning\n```\npip install --group dev\n```\nwill install these dependencies for you.\n\nAll PyTorch test suites are located in the `test` folder and start with\n`test_`. Run the entire test\nsuite with\n\n```bash\npython test/run_test.py\n```"
+        },
+        {
+          "startLine": 578,
+          "endLine": 595,
+          "excerpt": "### Better local unit tests with `pytest`\n\nWe don't officially support `pytest`, but it works well with our\n`unittest` tests and offers a number of useful features for local\ndeveloping. Install it via `pip install pytest` (`pip install --group dev`\nincludes it). `spin test ARGS` runs `pytest ARGS` with the same interpreter\nthat has torch installed, editable or not.\n\nIf you want to just run tests that contain a specific substring, you can\nuse the `-k` flag:\n\n```bash\npytest test/test_nn.py -k Loss -v\n```\n\nThe above is an example of testing a change to all Loss functions: this\ncommand runs tests such as `TestNN.test_BCELoss` and\n`TestNN.test_MSELoss` and can be useful to save keystrokes."
+        }
+      ]
+    },
+    {
+      "caseId": "withdrawal-13",
+      "identity": "github.com/rust-lang/mdBook",
+      "field": "repo.test",
+      "assertion": "cargo test --test gui",
+      "revision": "8c41b823bb093fd14303dc38809c78e0df2d53ea",
+      "source": {
+        "path": "index/telemetry/public-surface-review-20261028/sources/github.com/rust-lang/mdBook/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/rust-lang/mdBook/8c41b823bb093fd14303dc38809c78e0df2d53ea/CONTRIBUTING.md",
+        "sha256": "ce3a8f5a12c708f3e182c8e9a503c51e959e328fe1015be60bcdb0f1b5f494c4"
+      },
+      "classification": "contradicted-or-wrong-scope",
+      "claimedTask": "repository-default test",
+      "rationale": "The source distinguishes the GUI harness from ordinary workspace unit/integration tests and says it does not run automatically because of extra requirements. It is a separate specialized test task.",
+      "documentedSpecialOrConditionalTask": "Run mdBook browser GUI tests.",
+      "knownPrerequisitesAndRestrictions": [
+        "npm must be installed first (line 193).",
+        "Install browser-ui-test as prompted by the first run, then rerun (lines 205-206)."
+      ],
+      "standaloneCleanCheckoutSufficiencyEstablished": false,
+      "executionVerified": false,
+      "uncertaintyOrLimit": "No execution result or claim that GUI tests are inappropriate when specifically requested.",
+      "evidence": [
+        {
+          "startLine": 152,
+          "endLine": 159,
+          "excerpt": "## Tests\n\nThe main test harness is described in the [testsuite documentation](tests/testsuite/README.md). There are several different commands to run different kinds of tests:\n\n- `cargo test --workspace` — This runs all of the unit and integration tests, except for the GUI tests.\n- `cargo test --test gui` — This runs the [GUI test harness](#browser-compatibility-and-testing). This does not get run automatically due to its extra requirements.\n- `npm run lint` — [Checks the `.js` files](#checking-changes-in-js-files)\n- `cargo test --workspace --no-default-features` — Testing without default features helps check that all feature checks are implemented correctly."
+        },
+        {
+          "startLine": 186,
+          "endLine": 206,
+          "excerpt": "## Browser compatibility and testing\n\nCurrently we don't have a strict browser compatibility matrix due to our limited resources.\nWe generally strive to keep mdBook compatible with a relatively recent browser on all of the most major platforms.\nThat is, supporting Chrome, Safari, Firefox, Edge on Windows, macOS, Linux, iOS, and Android.\nIf possible, do your best to avoid breaking older browser releases.\n\nGUI tests are checked with the GUI testsuite. To run it, you need to install `npm` first. Then run:\n\n```\ncargo test --test gui\n```\n\nIf you want to only run some tests, you can filter them by passing (part of) their name:\n\n```\ncargo test --test gui -- search\n```\n\nThe first time, it'll fail and ask you to install the `browser-ui-test` package. Install it with the provided\ncommand then re-run the tests."
+        }
+      ]
+    },
+    {
+      "caseId": "withdrawal-14",
+      "identity": "github.com/screenpipe/screenpipe",
+      "field": "repo.build",
+      "assertion": "cargo build --release --features metal",
+      "revision": "38059f4f75b82641da2999bc0bb2a03552876f08",
+      "source": {
+        "path": "index/telemetry/public-surface-review-20261028/sources/github.com/screenpipe/screenpipe/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/screenpipe/screenpipe/38059f4f75b82641da2999bc0bb2a03552876f08/CONTRIBUTING.md",
+        "sha256": "5ff910d4bf599ef3dc3d1e8f862a26e9904b6e51a9baed92e0f3fc81050a0d2b"
+      },
+      "classification": "contradicted-or-wrong-scope",
+      "claimedTask": "repository-default build",
+      "rationale": "The exact command is under macOS and enables Metal. The source gives a different Linux build and separate desktop-app build steps. An unqualified repository-default scalar loses explicit platform and component restrictions.",
+      "documentedSpecialOrConditionalTask": "Build the standalone screenpipe executable in the documented macOS setup with Metal support.",
+      "knownPrerequisitesAndRestrictions": [
+        "macOS; Rust, brew dependencies and full initialized Xcode (lines 16-27).",
+        "Bun is included in the documented setup (lines 29-31), with separate frontend/desktop build steps (lines 50-54)."
+      ],
+      "standaloneCleanCheckoutSufficiencyEstablished": false,
+      "executionVerified": false,
+      "uncertaintyOrLimit": "The command is directly supported for the documented macOS executable build; the classification concerns its unqualified repository-default assertion.",
+      "evidence": [
+        {
+          "startLine": 14,
+          "endLine": 54,
+          "excerpt": "## installation and build guide\n\n### macos\n\n1. **install dependencies**:\n   ```bash\n   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh\n   brew install pkg-config ffmpeg jq cmake wget git-lfs\n   ```\n   Install Xcode via App Store (or elsewhere) and initialize. Xcode command line tools only installation is insufficent. \n   ```\n   sudo xcodebuild -license\n   xcodebuild -runFirstLaunch\n   ```\n\n2. **install bun cli**:\n   ```bash\n   curl -fsSL https://bun.sh/install | bash\n   ```\n\n3. **clone the repository**:\n   ```bash\n   git clone https://github.com/screenpipe/screenpipe\n   cd screenpipe\n   ```\n\n4. **build the project**:\n   ```bash\n   cargo build --release --features metal\n   ```\n\n5. **run screenpipe**:\n   ```bash\n   ./target/release/screenpipe\n   ```\n\n6. **build the desktop app**:\n   ```bash\n   cd apps/screenpipe-app-tauri\n   bun install\n   bun run build:tauri:dev"
+        },
+        {
+          "startLine": 178,
+          "endLine": 214,
+          "excerpt": "### linux\n\n1. **install dependencies**:\n   ```bash\n   sudo apt-get install -y g++ ffmpeg tesseract-ocr cmake libavformat-dev libavfilter-dev libavdevice-dev libssl-dev libtesseract-dev libxdo-dev libsdl2-dev libclang-dev libxtst-dev libpipewire-0.3-dev\n   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh\n   source ~/.bashrc\n   ```\n\n2. **install bun cli**:\n   ```bash\n   curl -fsSL https://bun.sh/install | bash\n   ```\n\n3. **install vulkan dependencies (optional, for AMD GPU acceleration)**:\n   ```bash\n   sudo apt-get install -y libvulkan-dev glslc\n   ```\n\n4. **clone and build**:\n   ```bash\n   git clone https://github.com/screenpipe/screenpipe\n   cd screenpipe\n   cargo build --release\n   ```\n\n5. **run the application**:\n   ```bash\n   ./target/release/screenpipe\n   ```\n\n6. **build the desktop app**:\n   ```bash\n   sudo apt-get install -y libayatana-appindicator3-1 libayatana-appindicator3-dev librsvg2-dev libwebkit2gtk-4.1-dev\n   cd apps/screenpipe-app-tauri\n   bun install\n   bun tauri build"
+        }
+      ]
+    },
+    {
+      "caseId": "withdrawal-15",
+      "identity": "github.com/serde-rs/serde",
+      "field": "repo.test",
+      "assertion": "cargo test",
+      "revision": "0db9b3b504bcb0a7fa9cf001429869519afd3e9a",
+      "source": {
+        "path": "index/telemetry/public-surface-review-20261028/sources/github.com/serde-rs/serde/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/serde-rs/serde/0db9b3b504bcb0a7fa9cf001429869519afd3e9a/CONTRIBUTING.md",
+        "sha256": "91f0716e8011f1c92ee5d24a3ddd5ccd61e300cf85735afb732ae1c389c39814"
+      },
+      "classification": "contradicted-or-wrong-scope",
+      "claimedTask": "repository-default test",
+      "rationale": "The cargo test snippet is under In the serde_core directory and tests Serde documentation examples. The source gives a distinct test_suite directory command using nightly and unstable features for the full test suite.",
+      "documentedSpecialOrConditionalTask": "Run documentation example tests from serde_core.",
+      "knownPrerequisitesAndRestrictions": [
+        "Working directory serde_core (line 30).",
+        "The full test_suite workflow requires nightly Rust (lines 37-44)."
+      ],
+      "standaloneCleanCheckoutSufficiencyEstablished": false,
+      "executionVerified": false,
+      "uncertaintyOrLimit": "No conclusion about a root cargo test invocation can be inferred from this nested example.",
+      "evidence": [
+        {
+          "startLine": 23,
+          "endLine": 47,
+          "excerpt": "## Running the test suite\n\nWe encourage you to check that the test suite passes locally before submitting a\npull request with your changes. If anything does not pass, typically it will be\neasier to iterate and fix it locally than waiting for the CI servers to run\ntests for you.\n\n##### In the [`serde_core`] directory\n\n```sh\n# Test all the example code in Serde documentation\ncargo test\n```\n\n##### In the [`test_suite`] directory\n\n```sh\n# Run the full test suite, including tests of unstable functionality\ncargo +nightly test --features unstable\n```\n\nNote that this test suite currently only supports running on a nightly compiler.\n\n[`serde_core`]: https://github.com/serde-rs/serde/tree/master/serde_core\n[`test_suite`]: https://github.com/serde-rs/serde/tree/master/test_suite"
+        }
+      ]
+    },
+    {
+      "caseId": "withdrawal-16",
+      "identity": "github.com/sharkdp/bat",
+      "field": "repo.build",
+      "assertion": "cargo build --bins",
+      "revision": "a9aa73d215455a479f072da75dd39f19826acfea",
+      "source": {
+        "path": "index/telemetry/public-surface-review-20261028/sources/github.com/sharkdp/bat/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/sharkdp/bat/a9aa73d215455a479f072da75dd39f19826acfea/CONTRIBUTING.md",
+        "sha256": "da748a38b6ed4c89cb9a3ef6f6b7a2b9e7d1e1dcd53ec3272f8d3a82512a1303"
+      },
+      "classification": "potentially-applicable-insufficient-evidence",
+      "claimedTask": "repository-default build",
+      "rationale": "The source acknowledges cargo build --bins as a way to build bat binaries and identifies the debug output under target/debug from the project root. It appears only as a conditional in syntax-test setup, with general Development instructions delegated to an unretained README. It therefore supports potential build applicability without establishing repository-default scope.",
+      "documentedSpecialOrConditionalTask": "Build debug binaries, then expose bat on PATH for syntax tests.",
+      "knownPrerequisitesAndRestrictions": [
+        "Rust/Cargo environment; full development prerequisites are delegated to README and not retained here.",
+        "For the associated syntax-test workflow, add target/debug to PATH (lines 107-111); that PATH step is not a build prerequisite."
+      ],
+      "standaloneCleanCheckoutSufficiencyEstablished": false,
+      "executionVerified": false,
+      "uncertaintyOrLimit": "Need the pinned README/Cargo manifest to determine whether binaries-only is the intended repository default or omits required build scope.",
+      "evidence": [
+        {
+          "startLine": 47,
+          "endLine": 50,
+          "excerpt": "## Development\n\nPlease check out the [Development](https://github.com/sharkdp/bat#development)\nsection in the README."
+        },
+        {
+          "startLine": 97,
+          "endLine": 115,
+          "excerpt": "### Ensuring bat is available for Syntax tests\n\nThe syntax test script (`tests/syntax-tests/update.sh`) calls `bat` from your PATH and regenerates the highlighted output files under\n`tests/syntax-tests/highlighted/`. These files are used to verify that syntax highlighting works as expected.\n\n- If you only built the binaries with:\n  ```bash\n  cargo build --bins\n  ```\n\n  you need to add the debug build to your PATH from the bat project root before running the tests.\n  See also step 5 in [Syntax\ntests](https://github.com/sharkdp/bat/blob/master/doc/assets.md#syntax-tests) for related instructions.\n  ```bash\n  export PATH=\"$PATH:$(pwd)/target/debug\"\n  ```\n  Otherwise, you will see:\n  ```bash\n  Error: Could not execute 'bat'. Please make sure that the executable is available on the PATH."
+        }
+      ]
+    },
+    {
+      "caseId": "withdrawal-17",
+      "identity": "github.com/tensorflow/tensorflow",
+      "field": "repo.build",
+      "assertion": "bazel build --config=dbg //tensorflow/tools/pip_package:build_pip_package",
+      "revision": "aef0d5a52fe23403fe28c1d3a35164f86ed1fadc",
+      "source": {
+        "path": "index/telemetry/public-surface-review-20261028/sources/github.com/tensorflow/tensorflow/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/tensorflow/tensorflow/aef0d5a52fe23403fe28c1d3a35164f86ed1fadc/CONTRIBUTING.md",
+        "sha256": "5e65d599896aecb72cbfef121a0d2fe0e3e780c4e02b0f6002109f01c7020317"
+      },
+      "classification": "contradicted-or-wrong-scope",
+      "claimedTask": "repository-default build",
+      "rationale": "The section is Debug builds and the command is explicitly an example of building the pip package with debugging information and optimizations disabled. This does not establish the repository-default build.",
+      "documentedSpecialOrConditionalTask": "Build the TensorFlow pip package for C++ debugging.",
+      "knownPrerequisitesAndRestrictions": [
+        "Bazel and TensorFlow source-build setup are required; the retained source links to separate build instructions without retaining their full prerequisites.",
+        "This configuration still does not supply debug information for TensorFlow kernels and dependencies (lines 363-366)."
+      ],
+      "standaloneCleanCheckoutSufficiencyEstablished": false,
+      "executionVerified": false,
+      "uncertaintyOrLimit": "Do not infer a complete normal TensorFlow build or fully debug-enabled dependencies from this command.",
+      "evidence": [
+        {
+          "startLine": 352,
+          "endLine": 366,
+          "excerpt": "#### Debug builds\n\nWhen [building Tensorflow](https://www.tensorflow.org/install/source), passing\n`--config=dbg` to Bazel will build with debugging information and without\noptimizations, allowing you to use GDB or other debuggers to debug C++ code. For\nexample, you can build the pip package with debugging information by running:\n\n```bash\nbazel build --config=dbg //tensorflow/tools/pip_package:build_pip_package\n```\n\nTensorFlow kernels and TensorFlow's dependencies are still not built with\ndebugging information with `--config=dbg`, as issues occur on Linux if\nthere is too much debug info (see [this GitHub\nissue](https://github.com/tensorflow/tensorflow/issues/48919) for context). If"
+        }
+      ]
+    },
+    {
+      "caseId": "withdrawal-18",
+      "identity": "github.com/nginx/nginx",
+      "field": "repo.build",
+      "assertion": "make",
+      "revision": "797c039a9884f69aae96286dcdf1ba633e5ebf81",
+      "source": {
+        "path": "index/telemetry/public-surface-review-20261028/sources/github.com/nginx/nginx/README.md",
+        "url": "https://raw.githubusercontent.com/nginx/nginx/797c039a9884f69aae96286dcdf1ba633e5ebf81/README.md",
+        "sha256": "c20b11d05d64038c63fe78ed177b692ac48d686344be464f326bb48e7d2c224b"
+      },
+      "classification": "supported-for-claimed-task",
+      "claimedTask": "repository-default build",
+      "rationale": "The pinned README explicitly presents make in the NGINX source root as the compile step and says auto/configure without flags chooses the default options. Thus the command is supported for the claimed default compile task. It is insufficient as a standalone clean-checkout workflow because configuration generates its Makefile first.",
+      "documentedSpecialOrConditionalTask": "Compile NGINX with the configuration selected by auto/configure; default flags select the documented default options.",
+      "knownPrerequisitesAndRestrictions": [
+        "Compiler, Make and dependency libraries (lines 129-148); extra modules may require other libraries (lines 151-155).",
+        "From the repository root run auto/configure successfully first; it generates the Makefile (lines 164-177)."
+      ],
+      "standaloneCleanCheckoutSufficiencyEstablished": false,
+      "executionVerified": false,
+      "uncertaintyOrLimit": "Supported-for-claimed-task describes the documented compile step, not unconditional scalar publication, clean-checkout sufficiency, actual execution, or a safe recommendation without setup context.",
+      "evidence": [
+        {
+          "startLine": 126,
+          "endLine": 148,
+          "excerpt": "# Building from source\nThe following steps can be used to build NGINX from source code available in this repository.\n\n## Installing dependencies\nMost Linux distributions will require several dependencies to be installed in order to build NGINX. The following instructions are specific to the `apt` package manager, widely available on most Ubuntu/Debian distributions and their derivatives.\n\n> [!TIP]\n> It is always a good idea to update your package repository lists prior to installing new packages.\n> ```bash\n> sudo apt update\n> ```\n\n### Installing compiler and make utility\nUse the following command to install the GNU C compiler and Make utility.\n\n```bash\nsudo apt install gcc make\n```\n\n### Installing dependency libraries\n\n```bash\nsudo apt install libpcre3-dev zlib1g-dev"
+        },
+        {
+          "startLine": 164,
+          "endLine": 180,
+          "excerpt": "## Configuring the build\nPrior to building NGINX, you must run the `configure` script with [appropriate flags](https://nginx.org/en/docs/configure.html). This will generate a Makefile in your NGINX source root directory that can then be used to compile NGINX with [options specified during configuration](https://nginx.org/en/docs/configure.html).\n\nFrom the NGINX source code repository's root directory:\n\n```bash\nauto/configure\n```\n\n> [!IMPORTANT]\n> Configuring the build without any flags will compile NGINX with the default set of options. Please refer to https://nginx.org/en/docs/configure.html for a full list of available build configuration options.\n\n## Compiling\nThe `configure` script will generate a `Makefile` in the NGINX source root directory upon successful execution. To compile NGINX into a binary, issue the following command from that same directory:\n\n```bash\nmake"
+        }
+      ]
+    },
+    {
+      "caseId": "withdrawal-19",
+      "identity": "github.com/BurntSushi/ripgrep",
+      "field": "repo.build",
+      "assertion": "cargo build --release --features 'pcre2'",
+      "revision": "91f5d22ef48bde459d90a8c7dbeab416e97d0f2b",
+      "source": {
+        "path": "index/telemetry/public-surface-review-20261028/sources/github.com/BurntSushi/ripgrep/README.md",
+        "url": "https://raw.githubusercontent.com/BurntSushi/ripgrep/91f5d22ef48bde459d90a8c7dbeab416e97d0f2b/README.md",
+        "sha256": "945622d974f65e4e141ef9726c948c2640eebd222c5b101afb6445728283921e"
+      },
+      "classification": "contradicted-or-wrong-scope",
+      "claimedTask": "repository-default build",
+      "rationale": "The source first documents cargo build --release for the ordinary build, then explicitly calls PCRE2 support optional. The asserted command enables that optional feature, so it is not supported as the unqualified default build.",
+      "documentedSpecialOrConditionalTask": "Build ripgrep with optional PCRE2 support.",
+      "knownPrerequisitesAndRestrictions": [
+        "Rust 1.96.0 stable or newer in the retained source (lines 453-456).",
+        "PCRE2 via pkg-config or a system C compiler to build PCRE2 from source (lines 483-486)."
+      ],
+      "standaloneCleanCheckoutSufficiencyEstablished": false,
+      "executionVerified": false,
+      "uncertaintyOrLimit": "The optional build is documented and may be appropriate for a PCRE2-specific task; no execution was performed.",
+      "evidence": [
+        {
+          "startLine": 451,
+          "endLine": 486,
+          "excerpt": "### Building\n\nripgrep is written in Rust, so you'll need to grab a\n[Rust installation](https://www.rust-lang.org/) in order to compile it.\nripgrep compiles with Rust 1.96.0 (stable) or newer. In general, ripgrep tracks\nthe latest stable release of the Rust compiler.\n\nTo build ripgrep:\n\n```\n$ git clone https://github.com/BurntSushi/ripgrep\n$ cd ripgrep\n$ cargo build --release\n$ ./target/release/rg --version\n0.1.3\n```\n\n**NOTE:** In the past, ripgrep supported a `simd-accel` Cargo feature when\nusing a Rust nightly compiler. This only benefited UTF-16 transcoding.\nSince it required unstable features, this build mode was prone to breakage.\nBecause of that, support for it has been removed. If you want SIMD\noptimizations for UTF-16 transcoding, then you'll have to petition the\n[`encoding_rs`](https://github.com/hsivonen/encoding_rs) project to use stable\nAPIs.\n\nFinally, optional PCRE2 support can be built with ripgrep by enabling the\n`pcre2` feature:\n\n```\n$ cargo build --release --features 'pcre2'\n```\n\nEnabling the PCRE2 feature works with a stable Rust compiler and will\nattempt to automatically find and link with your system's PCRE2 library via\n`pkg-config`. If one doesn't exist, then ripgrep will build PCRE2 from source\nusing your system's C compiler and then statically link it into the final"
+        }
+      ]
+    }
+  ]
+}

@@ -61,8 +61,11 @@ and independent adoption are separate evidence levels.
   metrics and limitations of legacy cost estimates
 - [Head-to-head benchmark](../benchmarks/head-to-head/README.md): independent
   gold, upstream fallback, frozen inputs, and retained wins and losses
-- [Own-project study and later pilot](consumer-pilot.md): operator task outcomes
-  now; independent external use and complete cost accounting at a later stage
+- [E1 and F-05 specifications](../benchmarks/head-to-head/experiments/applicability-2026-10-29/README.md):
+  disjoint development/holdouts, task applicability and a frozen autonomous agent
+  comparison; prospective design, with no new measured outcome claimed
+- [Own-project study and later pilot](consumer-pilot.md): retained operator task
+  outcomes and separate independent external-use acceptance requirements
 
 ## Contracts and history
 

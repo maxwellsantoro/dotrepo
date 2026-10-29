@@ -10,6 +10,9 @@ use super::super::types::{ImportSources, ImportedFile};
 use super::extraction::{documented_build_command, documented_test_command};
 use super::policy::{is_setup_only_command, sanitize_import_command};
 
+#[cfg(test)]
+mod tests;
+
 pub(crate) fn infer_documented_context_candidates(
     root: &Path,
     sources: &ImportSources<'_>,
@@ -40,6 +43,7 @@ fn extract_contexts(root: &Path, file: &ImportedFile) -> Vec<(bool, BuildTestCan
     let mut current = Section::default();
     let mut fence: Option<&str> = None;
     let mut outside_setup = false;
+    let mut ancestors: Vec<(usize, String)> = Vec::new();
     for line in file.contents.lines() {
         let trimmed = line.trim();
         if let Some(delimiter) = fence {
@@ -63,14 +67,26 @@ fn extract_contexts(root: &Path, file: &ImportedFile) -> Vec<(bool, BuildTestCan
             fence = Some(if delimiter == "```" { "```" } else { "~~~" });
         } else if trimmed.starts_with('#') {
             sections.push(std::mem::take(&mut current));
+            let depth = trimmed.chars().take_while(|ch| *ch == '#').count();
+            while ancestors.last().is_some_and(|(level, _)| *level >= depth) {
+                ancestors.pop();
+            }
             current.heading = trimmed.trim_start_matches('#').trim().to_string();
+            if parse_heading(&current.heading).is_some() {
+                current.invalid |= unsupported_scope_ancestor(&ancestors);
+            }
             if parse_heading(&current.heading).is_none() && mentions_setup(&current.heading) {
                 outside_setup = true;
             }
+            ancestors.push((depth, current.heading.clone()));
         } else if !trimmed.is_empty() {
             if parse_heading(&current.heading).is_none() && mentions_setup(trimmed) {
                 outside_setup = true;
             }
+            // Indented list entries may be continuations or nested conditions.
+            // Do not flatten those into an unconditional prerequisite list.
+            current.invalid |=
+                parse_heading(&current.heading).is_some() && line.starts_with(char::is_whitespace);
             current.prose.push(trimmed.to_string());
         }
     }
@@ -87,6 +103,42 @@ fn extract_contexts(root: &Path, file: &ImportedFile) -> Vec<(bool, BuildTestCan
         .collect()
 }
 
+fn unsupported_scope_ancestor(ancestors: &[(usize, String)]) -> bool {
+    ancestors.iter().any(|(depth, heading)| {
+        // A nested section may carry scope or conditions that this small
+        // extractor cannot establish. Permit only an unqualified document
+        // title; do not flatten other ancestor headings away.
+        *depth != 1
+            || heading
+                .to_ascii_lowercase()
+                .split(|ch: char| !ch.is_ascii_alphanumeric())
+                .any(|word| {
+                    matches!(
+                        word,
+                        "windows"
+                            | "linux"
+                            | "macos"
+                            | "osx"
+                            | "unix"
+                            | "freebsd"
+                            | "android"
+                            | "ios"
+                            | "docker"
+                            | "container"
+                            | "wasm"
+                            | "cross"
+                            | "only"
+                            | "if"
+                            | "when"
+                            | "conditional"
+                            | "example"
+                            | "benchmark"
+                            | "component"
+                    )
+                })
+    })
+}
+
 fn mentions_setup(text: &str) -> bool {
     text.to_ascii_lowercase()
         .split(|ch: char| !ch.is_ascii_alphanumeric())
@@ -98,6 +150,10 @@ fn mentions_setup(text: &str) -> bool {
                     | "install"
                     | "setup"
                     | "requires"
+                    | "require"
+                    | "required"
+                    | "requirement"
+                    | "requirements"
                     | "activate"
                     | "export"
                     | "configure"
@@ -141,6 +197,69 @@ fn literal_directory(path: &str) -> bool {
                 .all(|part| !part.is_empty() && !matches!(part, "." | "..")))
 }
 
+/// Accept only an explicit, local list of runtime requirements. This grammar
+/// preserves the source assertion; it neither resolves versions nor infers
+/// missing setup. Arbitrary prose may hide conditions or external instructions.
+fn declared_prerequisites(prose: &[String]) -> Option<(Vec<String>, bool)> {
+    if prose.is_empty() {
+        return Some((Vec::new(), false));
+    }
+    if prose == ["Prerequisites: none."] {
+        return Some((Vec::new(), true));
+    }
+    let (heading, requirements) = prose.split_first()?;
+    if heading != "Prerequisites:" || requirements.is_empty() {
+        return None;
+    }
+    let mut prerequisites = Vec::new();
+    let mut tools = Vec::new();
+    for line in requirements {
+        let requirement = line
+            .strip_prefix("- ")
+            .or_else(|| line.strip_prefix("* "))?;
+        let tool = literal_runtime_requirement(requirement)?;
+        // Conflicting declarations must not be silently reconciled, including
+        // alternate version constraints for the same runtime.
+        if tools.contains(&tool) {
+            return None;
+        }
+        tools.push(tool);
+        prerequisites.push(requirement.to_string());
+    }
+    Some((prerequisites, false))
+}
+
+fn literal_runtime_requirement(requirement: &str) -> Option<&str> {
+    let (tool, version) = requirement.split_once(' ')?;
+    if !matches!(
+        tool,
+        "Rust" | "Python" | "Go" | "Node.js" | "npm" | "pnpm" | "Yarn" | "Bun" | "uv"
+    ) {
+        return None;
+    }
+    if tool == "Rust" && matches!(version, "stable" | "nightly") {
+        return Some(tool);
+    }
+    let bound = version
+        .strip_suffix(" or higher")
+        .or_else(|| version.strip_suffix(" or newer"))
+        .or_else(|| version.strip_suffix('+'));
+    let compared = [">=", "<=", "==", ">", "<", "="]
+        .into_iter()
+        .find_map(|operator| version.strip_prefix(operator));
+    // Two forms of bounds in one declaration can contradict one another.
+    if bound.is_some() && compared.is_some() {
+        return None;
+    }
+    let version = bound.or(compared).unwrap_or(version);
+    let components = version.split('.').collect::<Vec<_>>();
+    (components.len() <= 3
+        && components.iter().all(|component| {
+            !component.is_empty() && component.bytes().all(|byte| byte.is_ascii_digit())
+        }))
+    .then_some(tool)
+}
+
 fn parse_section(
     root: &Path,
     file: &ImportedFile,
@@ -150,12 +269,7 @@ fn parse_section(
     if section.invalid || section.blocks.len() != 1 {
         return None;
     }
-    // Explicit none is the sole supported prose contract. Unknown preceding
-    // setup prose, omitted versions, and descriptive lists remain unassessed.
-    let explicit_none = section.prose.as_slice() == ["Prerequisites: none."];
-    if !section.prose.is_empty() && !explicit_none {
-        return None;
-    }
+    let (mut prerequisites, explicit_none) = declared_prerequisites(&section.prose)?;
     let lines = section.blocks[0]
         .iter()
         .filter(|line| !line.is_empty())
@@ -188,7 +302,6 @@ fn parse_section(
     if recognized != command {
         return None;
     }
-    let mut prerequisites = Vec::new();
     for setup in &lines[1..lines.len() - 1] {
         if !is_setup_only_command(setup)
             || setup.contains(['&', ';', '|', '$', '`', '<', '>', '{', '}', '\\'])

@@ -9,6 +9,12 @@ This exists because the case for dotrepo currently rests on asserted metrics
 turns the claim into a measurement that can come out *against* dotrepo. That is
 the point. If dotrepo can't clear the bar here, the bar found something real.
 
+The prospective [E1 and F-05 applicability experiments](experiments/applicability-2026-10-29/README.md)
+separate instruction representation, source-grounded establishment and autonomous
+consumer benefit. They specify disjoint development/qualification/task sets and
+a frozen randomized agent comparison. They do not change the historical factual
+benchmark or turn fixed operator runs into autonomous or independent-use evidence.
+
 ## What it measures
 
 Two arms answer the same fixed question set over the same repos:
