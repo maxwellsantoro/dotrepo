@@ -1,0 +1,530 @@
+diff --git a/crates/dotrepo-core/src/import/parsing/markdown.rs b/crates/dotrepo-core/src/import/parsing/markdown.rs
+index ee8ac67b..a1d0a5b3 100644
+--- a/crates/dotrepo-core/src/import/parsing/markdown.rs
++++ b/crates/dotrepo-core/src/import/parsing/markdown.rs
+@@ -6,6 +6,9 @@ use super::readme::parse_html_attr;
+ use super::security::extract_link_destination;
+ use std::collections::HashMap;
+ 
++#[cfg(test)]
++mod docs_tests;
++
+ pub(crate) fn normalize_readme_text(line: &str) -> Option<String> {
+     let linked = rewrite_markdown_links(line);
+     let stripped = replace_common_html_entities(&strip_html_tags(&linked));
+@@ -86,6 +89,207 @@ struct DocsCandidate {
+     evidence: ReadmeDocEvidence,
+ }
+ 
++const START_LABELS: &[&str] = &[
++    "getting started",
++    "getting started guide",
++    "quickstart",
++    "quickstart guide",
++    "quick start",
++    "quick start guide",
++    "installation",
++    "installation guide",
++    "installation documentation",
++];
++
++fn project_qualified_label(label: &str, labels: &[&str], project: Option<&str>) -> bool {
++    project.is_some_and(|name| {
++        let name = name.trim().to_ascii_lowercase();
++        !name.is_empty()
++            && labels.iter().any(|kind| {
++                label == format!("{name} {kind}") || label == format!("{kind} for {name}")
++            })
++    })
++}
++
++// A generic link in prose can describe a dependency or integration. Accept
++// bounded direct instructions and statements with the current project as the
++// subject, rather than finding documentation words anywhere in a sentence.
++fn direct_docs_prose(
++    text: &str,
++    label: &str,
++    project: Option<&str>,
++    documentation_label: bool,
++) -> bool {
++    let text = text.trim().trim_end_matches('.');
++    let mut targets = vec![label.to_string()];
++    if let Some(name) = project.filter(|name| !name.trim().is_empty()) {
++        targets.push(format!("{} {label}", name.trim().to_ascii_lowercase()));
++    }
++    if documentation_label
++        && ["see the", "read the", "visit the", "follow the"]
++            .iter()
++            .any(|verb| {
++                targets.iter().any(|target| {
++                    text.strip_prefix(&format!("{verb} {target}"))
++                        .is_some_and(|tail| {
++                            matches!(
++                                tail,
++                                "" | " for more information" | " for further instructions"
++                            )
++                        })
++                })
++            })
++    {
++        return true;
++    }
++    let mut subjects = vec!["documentation", "this project's documentation"]
++        .into_iter()
++        .map(str::to_string)
++        .collect::<Vec<_>>();
++    if let Some(name) = project {
++        let name = name.trim().to_ascii_lowercase();
++        if !name.is_empty() {
++            subjects.push(format!("{name}'s documentation"));
++            subjects.push(format!("documentation for {name}"));
++        }
++    }
++    subjects.iter().any(|subject| {
++        text == format!("{subject} is available at {label}")
++            || text == format!("{subject} is at {label}")
++    })
++}
++
++struct DocsParagraph {
++    rendered: String,
++    navigation: bool,
++    link_count: usize,
++}
++
++#[derive(Default)]
++struct DocsParagraphCache {
++    current: Option<(std::ops::Range<usize>, DocsParagraph)>,
++    #[cfg(test)]
++    builds: usize,
++}
++
++impl DocsParagraphCache {
++    fn context(
++        &mut self,
++        lines: &[&str],
++        index: usize,
++        definitions: &HashMap<String, String>,
++    ) -> &DocsParagraph {
++        if !self
++            .current
++            .as_ref()
++            .is_some_and(|(range, _)| range.contains(&index))
++        {
++            let list_item = |line: &str| {
++                let line = line.trim();
++                line.starts_with("- ")
++                    || line.starts_with("* ")
++                    || line.starts_with("+ ")
++                    || starts_with_ordered_list_item(line)
++            };
++            let boundary = |line: &str| {
++                let line = line.trim();
++                line.is_empty()
++                    || line.starts_with('#')
++                    || line.starts_with("```")
++                    || line.starts_with("~~~")
++                    || list_item(line)
++                    || line.starts_with("[![")
++                    || is_markdown_reference_definition(line)
++            };
++            let mut start = index;
++            let mut end = index + 1;
++            // List entries are independent declarations. Ordinary contiguous
++            // lines share one subject; never truncate a paragraph into nav.
++            if !boundary(lines[index]) {
++                while start > 0 && !boundary(lines[start - 1]) {
++                    start -= 1;
++                }
++                // A wrapped link must retain the preceding list item's
++                // subject, rather than becoming standalone navigation.
++                if start > 0 && list_item(lines[start - 1]) {
++                    start -= 1;
++                }
++            }
++            if !boundary(lines[index]) || list_item(lines[index]) {
++                while end < lines.len() && !boundary(lines[end]) {
++                    end += 1;
++                }
++            }
++            let mut rendered = String::new();
++            let mut navigation = true;
++            let mut link_count = 0;
++            for line in &lines[start..end] {
++                let line = rewrite_documentation_badges(line.trim());
++                let links = docs_links(&line, definitions);
++                link_count += links.len();
++                navigation &= docs_navigation(&line, &links);
++                if let Some(text) = normalize_readme_text(&line) {
++                    if !rendered.is_empty() {
++                        rendered.push(' ');
++                    }
++                    rendered.push_str(&text.to_ascii_lowercase());
++                }
++            }
++            self.current = Some((
++                start..end,
++                DocsParagraph {
++                    rendered,
++                    navigation,
++                    link_count,
++                },
++            ));
++            #[cfg(test)]
++            {
++                self.builds += 1;
++            }
++        }
++        &self.current.as_ref().expect("paragraph initialized").1
++    }
++}
++
++fn docs_links(line: &str, definitions: &HashMap<String, String>) -> Vec<(String, String)> {
++    let mut links = extract_markdown_links(line);
++    links.extend(extract_markdown_reference_links(line, definitions));
++    links.extend(extract_html_links(line));
++    links
++}
++
++fn docs_navigation(line: &str, links: &[(String, String)]) -> bool {
++    let mut remainder = strip_html_tags(&rewrite_markdown_links(line));
++    for (label, _) in links {
++        remainder = remainder.replace(label, "");
++    }
++    // Unresolved reference-style neighbours such as [Website][] are labels,
++    // not prose. Work per physical line so wrapped paragraphs are scanned once.
++    let mut bracket_depth = 0usize;
++    remainder.chars().all(|ch| match ch {
++        '[' => {
++            bracket_depth += 1;
++            true
++        }
++        ']' if bracket_depth > 0 => {
++            bracket_depth -= 1;
++            true
++        }
++        _ if bracket_depth > 0 => true,
++        _ => ch.is_whitespace() || "|·•:/-()*".contains(ch),
++    }) && bracket_depth == 0
++}
++
++fn named_docs_label(label: &str) -> bool {
++    label.split_whitespace().any(|word| {
++        matches!(
++            word,
++            "docs" | "documentation" | "quickstart" | "getting" | "installation" | "reference"
++        )
++    })
++}
++
+ fn select_docs_candidate(candidates: Vec<DocsCandidate>) -> (Option<DocsCandidate>, bool) {
+     let Some(rank) = candidates.iter().map(|candidate| candidate.rank).max() else {
+         return (None, false);
+@@ -114,6 +318,7 @@ pub(crate) fn parse_readme_docs_metadata(
+     let mut getting_started = Vec::new();
+     let mut fence: Option<char> = None;
+     let mut docs_intro = false;
++    let mut paragraphs = DocsParagraphCache::default();
+ 
+     for (index, line) in lines.iter().enumerate() {
+         let line = line.trim();
+@@ -141,9 +346,7 @@ pub(crate) fn parse_readme_docs_metadata(
+         // the image endpoint. Normalize only explicit docs labels here;
+         // unrelated images and generic badge labels remain unassessed.
+         let docs_line = rewrite_documentation_badges(line);
+-        let mut links = extract_markdown_links(&docs_line);
+-        links.extend(extract_markdown_reference_links(&docs_line, &definitions));
+-        links.extend(extract_html_links(&docs_line));
++        let mut links = docs_links(&docs_line, &definitions);
+         let lower_line = strip_html_tags(&docs_line)
+             .replace("**", "")
+             .replace("__", "")
+@@ -157,32 +360,15 @@ pub(crate) fn parse_readme_docs_metadata(
+                 }
+             }
+         }
+-        let single_link = links.len() == 1;
+-        let mut remainder = strip_html_tags(&rewrite_markdown_links(&docs_line));
+-        for (label, _) in &links {
+-            remainder = remainder.replace(label, "");
++        if links.is_empty() {
++            docs_intro = docs_intro && lower_line.contains("docs") && lower_line.ends_with(':');
++            continue;
+         }
+-        // Reference-style navigation may include unresolved neighbours such
+-        // as [Website][]. Ignore their bracketed labels, not surrounding prose.
+-        let mut bracket_depth = 0usize;
+-        let navigation = remainder.chars().all(|ch| match ch {
+-            '[' => {
+-                bracket_depth += 1;
+-                true
+-            }
+-            ']' if bracket_depth > 0 => {
+-                bracket_depth -= 1;
+-                true
+-            }
+-            _ if bracket_depth > 0 => true,
+-            _ => ch.is_whitespace() || "|·•:/-()*".contains(ch),
+-        }) && bracket_depth == 0;
+-        let declaration = single_link
+-            && (docs_intro || prefix || lower_line.contains("documentation is available at"));
+-        docs_intro = docs_intro
+-            && links.is_empty()
+-            && lower_line.contains("docs")
+-            && lower_line.ends_with(':');
++        let single_link = links.len() == 1;
++        let paragraph = paragraphs.context(lines, index, &definitions);
++        let navigation = paragraph.navigation;
++        let section_intro = docs_intro;
++        docs_intro = false;
+ 
+         for (label, url) in links {
+             if is_badge_asset_url(&url) {
+@@ -194,26 +380,50 @@ pub(crate) fn parse_readme_docs_metadata(
+                 continue;
+             }
+             let label = label.to_ascii_lowercase();
+-            let is_start = label.contains("getting started")
+-                || label.contains("quickstart")
+-                || label == "installation"
+-                || label == "installation guide"
+-                || label == "installation documentation"
+-                || (single_link
+-                    && (lower_line.starts_with("getting started:")
+-                        || lower_line.starts_with("quickstart:")));
++            let start_prefix =
++                lower_line.starts_with("getting started:") || lower_line.starts_with("quickstart:");
++            let is_start = (single_link && start_prefix && !named_docs_label(&label))
++                || START_LABELS.contains(&label.as_str())
++                || project_qualified_label(&label, START_LABELS, project_name);
++            let root_labels = [
++                "docs",
++                "documentation",
++                "configuration",
++                "reference",
++                "api reference",
++            ];
++            let is_root = root_labels.contains(&label.as_str())
++                || project_qualified_label(&label, &root_labels, project_name);
++            // An explicit prefix may label a URL or neutral title, but cannot
++            // erase an explicitly different documentation/quickstart subject.
++            let compatible_label = is_start || is_root || !named_docs_label(&label);
++            let direct_prose = single_link
++                && paragraph.link_count == 1
++                && compatible_label
++                && direct_docs_prose(
++                    &paragraph.rendered,
++                    &label,
++                    project_name,
++                    is_root || is_start,
++                );
++            let bare_url = line.trim_start_matches(['-', '*', '+', ' ']) == url;
++            let section_declaration = section_intro
++                && (navigation
++                    || bare_url
++                    || paragraph.rendered.trim_end_matches('.') == format!("available {label}"));
++            let declaration =
++                single_link && compatible_label && (section_declaration || prefix || direct_prose);
++            if is_start && !(navigation || direct_prose || (single_link && start_prefix)) {
++                continue;
++            }
+             let rank = if declaration {
+                 3
+-            } else if matches!(label.as_str(), "docs" | "documentation")
+-                || project_name.is_some_and(|name| {
+-                    label == format!("{} documentation", name.to_ascii_lowercase())
+-                })
++            } else if (navigation || direct_prose)
++                && (matches!(label.as_str(), "docs" | "documentation")
++                    || project_qualified_label(&label, &["docs", "documentation"], project_name))
+             {
+                 2
+-            } else if matches!(
+-                label.as_str(),
+-                "configuration" | "reference" | "api reference"
+-            ) {
++            } else if (navigation || direct_prose) && is_root {
+                 1
+             } else {
+                 0
+diff --git a/crates/dotrepo-core/src/import/parsing/markdown/docs_tests.rs b/crates/dotrepo-core/src/import/parsing/markdown/docs_tests.rs
+new file mode 100644
+index 00000000..1666e2c9
+--- /dev/null
++++ b/crates/dotrepo-core/src/import/parsing/markdown/docs_tests.rs
+@@ -0,0 +1,175 @@
++use super::parse_readme_docs_metadata;
++
++fn docs(source: &str, name: &str) -> super::ReadmeDocsMetadata {
++    parse_readme_docs_metadata(&source.lines().collect::<Vec<_>>(), Some(name))
++}
++
++#[test]
++fn integration_prose_does_not_establish_project_documentation() {
++    // Exact pinned SwiftLint README wording; the label names the project,
++    // while the possessive and surrounding prose identify the integration.
++    let source = "### MegaLinter\n\nSwiftLint is also embedded in [MegaLinter](https://megalinter.io), an\nopen-source aggregator of linters for CI. See its\n[SwiftLint documentation](https://megalinter.io/latest/descriptors/swift_swiftlint/)\nfor setup instructions.";
++    assert_eq!(docs(source, "SwiftLint").root, None);
++    assert_eq!(
++        docs(
++            "See its [Documentation](https://shared.example/integration).",
++            "Orbit"
++        )
++        .root,
++        None
++    );
++}
++
++#[test]
++fn quickstart_subject_must_match_the_project() {
++    // Exact pinned MinIO README link sentence, referring to the client.
++    let source = "Follow the MinIO Client [Quickstart Guide](https://docs.min.io/community/minio-object-store/reference/minio-mc.html#quickstart) for further instructions.";
++    assert_eq!(docs(source, "MinIO").getting_started, None);
++    assert_eq!(
++        docs(source, "MinIO Client").getting_started.as_deref(),
++        Some("https://docs.min.io/community/minio-object-store/reference/minio-mc.html#quickstart")
++    );
++    for source in [
++        "Getting started: [Other Quickstart Guide](https://custom.example/start)",
++        "Quickstart: [Getting Started for Other](https://custom.example/start)",
++        "[Orbit Client Quickstart](https://custom.example/start)",
++        "Other's [Quickstart](https://custom.example/start) is useful.",
++    ] {
++        assert_eq!(docs(source, "Orbit").getting_started, None, "{source}");
++    }
++}
++
++#[test]
++fn direct_and_navigation_declarations_keep_custom_domains() {
++    for source in [
++        "[Documentation](https://shared.example/other/project)",
++        "Docs: [manual](https://shared.example/other/project)",
++        "Documentation: [docs/](https://shared.example/other/project)",
++        "## Documentation\n\n[Manual](https://shared.example/other/project)",
++        "## Documentation\n\nAvailable [here](https://shared.example/other/project).",
++        "## Docs\n\nYou can read our docs at:\n\n- https://shared.example/other/project",
++        "Orbit's documentation is available at [guide](https://shared.example/other/project).",
++        "Documentation for Orbit is available at [guide](https://shared.example/other/project).",
++        "Read the [Orbit documentation](https://shared.example/other/project) for more information.",
++    ] {
++        assert_eq!(docs(source, "Orbit").root.as_deref(), Some("https://shared.example/other/project"), "{source}");
++    }
++    let nav = docs("[Docs](./manual/) | [Getting Started](./start.md)", "Orbit");
++    assert_eq!(nav.root.as_deref(), Some("./manual/"));
++    assert_eq!(nav.getting_started.as_deref(), Some("./start.md"));
++    assert_eq!(
++        docs(
++            "Getting started: [guide](https://custom.example/start)",
++            "Orbit"
++        )
++        .getting_started
++        .as_deref(),
++        Some("https://custom.example/start")
++    );
++}
++
++#[test]
++fn third_party_subjects_and_misleading_prefixes_do_not_declare_ownership() {
++    for source in [
++        "Other's documentation is available at [Documentation](https://custom.example/manual).",
++        "## Documentation\n\nOther's documentation is available at [Documentation](https://custom.example/manual).",
++        "Documentation: [Other documentation](https://custom.example/manual)",
++        "The catalogue includes [Orbit documentation](https://custom.example/manual).",
++        "See the [Documentation](https://custom.example/manual) for Other.",
++        "Read the [license](https://custom.example/manual).",
++        "Read the [code of conduct](https://custom.example/manual).",
++        "See the [issue tracker](https://custom.example/manual).",
++        "- Other integration: see its\n  [Documentation](https://custom.example/manual).",
++    ] {
++        assert_eq!(docs(source, "Orbit").root, None, "{source}");
++    }
++}
++
++#[test]
++fn start_labels_are_exact_generic_or_project_qualified() {
++    for label in [
++        "Getting Started",
++        "Getting Started Guide",
++        "Quickstart",
++        "Quickstart Guide",
++        "Quick Start",
++        "Quick Start Guide",
++        "Installation",
++        "Installation Guide",
++        "Installation Documentation",
++        "Orbit Quickstart Guide",
++        "Getting Started for Orbit",
++    ] {
++        let source = format!("[{label}](https://custom.example/start)");
++        assert_eq!(
++            docs(&source, "Orbit").getting_started.as_deref(),
++            Some("https://custom.example/start"),
++            "{label}"
++        );
++    }
++    assert_eq!(
++        docs(
++            "See the [installation documentation](https://custom.example/start).",
++            "Orbit"
++        )
++        .getting_started
++        .as_deref(),
++        Some("https://custom.example/start")
++    );
++}
++
++#[test]
++fn ambiguous_declarations_still_abstain_and_retain_evidence() {
++    let parsed = docs(
++        "[Docs](https://one.example/manual) | [Documentation](https://two.example/manual)",
++        "Orbit",
++    );
++    assert_eq!(parsed.root, None);
++    assert!(parsed.root_ambiguous);
++    let parsed = docs(
++        "# Orbit\n\nDocs: [manual](https://custom.example/manual)",
++        "Orbit",
++    );
++    assert_eq!(parsed.root_evidence.unwrap().line, 3);
++}
++
++#[test]
++fn documentation_badges_are_independent_of_neighboring_badges() {
++    let source = "[![CI](https://ci.example/badge.svg)](https://ci.example/run)\n[![docs](https://badge.example/docs.svg)](https://custom.example/manual)\n[![license](https://badge.example/license.svg)](https://custom.example/license)";
++    assert_eq!(
++        docs(source, "Orbit").root.as_deref(),
++        Some("https://custom.example/manual")
++    );
++}
++
++#[test]
++fn integration_hosts_are_valid_when_the_source_declares_project_docs_directly() {
++    assert_eq!(
++        docs(
++            "[SwiftLint documentation](https://megalinter.io/latest/descriptors/swift_swiftlint/)",
++            "SwiftLint"
++        )
++        .root
++        .as_deref(),
++        Some("https://megalinter.io/latest/descriptors/swift_swiftlint/")
++    );
++}
++
++#[test]
++fn a_long_wrapped_paragraph_builds_its_context_only_once() {
++    use super::{markdown_reference_definitions, DocsParagraphCache};
++    let mut lines = vec!["Other's integration documentation and catalogue:"; 20_000];
++    for index in (1..lines.len()).step_by(10) {
++        lines[index] = "See its [Orbit documentation](https://custom.example/integration) for setup instructions.";
++    }
++    assert!(lines.iter().map(|line| line.len()).sum::<usize>() > 1_000_000);
++    let definitions = markdown_reference_definitions(&lines);
++    let mut cache = DocsParagraphCache::default();
++    for index in 0..lines.len() {
++        let context = cache.context(&lines, index, &definitions);
++        assert!(!context.navigation);
++        assert_eq!(context.link_count, 2_000);
++    }
++    assert_eq!(cache.builds, 1);
++    assert_eq!(parse_readme_docs_metadata(&lines, Some("Orbit")).root, None);
++}

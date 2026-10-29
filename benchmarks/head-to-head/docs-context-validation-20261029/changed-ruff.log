@@ -1,0 +1,33 @@
+All checks passed!
+20 files already formatted
+[
+  {
+    "command": [
+      "uv",
+      "run",
+      "ruff",
+      "check",
+      "--config",
+      "/Users/maxwell/projects/agent/dotrepo/pyproject.toml",
+      "--force-exclude",
+      "--no-cache"
+    ],
+    "changedPythonInputs": 20,
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "uv",
+      "run",
+      "ruff",
+      "format",
+      "--check",
+      "--config",
+      "/Users/maxwell/projects/agent/dotrepo/pyproject.toml",
+      "--force-exclude",
+      "--no-cache"
+    ],
+    "changedPythonInputs": 20,
+    "exitCode": 0
+  }
+]

@@ -1,0 +1,56 @@
+{
+  "identity": "e1-zellij-establishment-source-20261029",
+  "repository": "zellij-org/zellij",
+  "revision": "1f3df933978e00c246553070310175c392fcfe4f",
+  "taskId": "e1-rust-01-repository-tests",
+  "unchangedTaskCommand": "cargo xtask test",
+  "classification": "Known exposed supported-miss development follow-up by prior project/E1 author, not fresh holdout or consumer evidence",
+  "proposalFreezeSha256": "33d898e69f6b42c562b65e6536fcccf333ebd3416dc9ed3b74b47c68a294163e",
+  "declarationFreezeSha256": "bbe705ee069917efab189678a5fff71662a03b5790999c6cba5a8dd06f37e3cf",
+  "retainedMain": {
+    "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/zellij-org/zellij/xtask/src/main.rs",
+    "sha256": "5e213118f58efae8bd039ff4436dc6fc4e8b4aeaa44472dba764101643b30df3",
+    "moduleDeclarations": {
+      "flags": 13,
+      "metadata": 16
+    },
+    "pathBoundary": "Plain Rust external module declarations with no #[path] override in retained source. Only the two explicitly authorized conventional .rs paths will be requested; missing/generated/other layout causes path-gap report, never a wider search."
+  },
+  "requests": [
+    {
+      "args": {
+        "repository_full_name": "zellij-org/zellij",
+        "path": "xtask/src/flags.rs",
+        "ref": "1f3df933978e00c246553070310175c392fcfe4f",
+        "encoding": "base64"
+      },
+      "requestArgsCanonicalSha256": "038b8133024e2e219b3019e267cf9ddca795a8a1f4c5fe169996c893daf6681a",
+      "expectedBodyHash": "Not known before acquisition; retain returned blob identity and recompute whole-file SHA256 and Git blob SHA1 without executing source."
+    },
+    {
+      "args": {
+        "repository_full_name": "zellij-org/zellij",
+        "path": "xtask/src/metadata.rs",
+        "ref": "1f3df933978e00c246553070310175c392fcfe4f",
+        "encoding": "base64"
+      },
+      "requestArgsCanonicalSha256": "e01ec0861b68e4df69361def869818a361aa3d5fcefaa0ab9c606e0ac2638a77",
+      "expectedBodyHash": "Not known before acquisition; retain returned blob identity and recompute whole-file SHA256 and Git blob SHA1 without executing source."
+    }
+  ],
+  "bounds": {
+    "readOnlyRequests": 4,
+    "bytesPerFile": 2097152,
+    "pathsOnly": true
+  },
+  "questions": [
+    "Default Test flags: no-web/no-terminal, argument forwarding, ordinary versus CI/e2e command dispatch.",
+    "metadata workspace/feature filters and optional-feature checks reached by unchanged default task."
+  ],
+  "preserve": [
+    "Original task/gold/result unchanged",
+    "Windows GNU linker condition retained",
+    "No index writes while exporter gate active",
+    "No recursive closure, code, package, native/upstream/model execution or high confidence rule"
+  ]
+}

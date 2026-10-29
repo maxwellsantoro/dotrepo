@@ -1,0 +1,85 @@
+{
+  "executionOccurred": false,
+  "nativeBinaryInspection": false,
+  "packages": [
+    {
+      "cacheInventoryEntry": {
+        "bytes": 7112848,
+        "mode": 420,
+        "sha256": "eadb8584cdcb835827811fa2f8c89ca8e2b6c64789b0929c90841c29be3d4210"
+      },
+      "cachePath": "npm-cache/_cacache/content-v2/sha512/71/f6/f5a8aee5ca0b4c6b8354976e7cda73fb6a588b62e0c456901b5c93240ead6a13ea25230fdeb3e0bc8f52c9c2f711ab5236c961ad4a7dc4903a7d0eae4574",
+      "lock": {
+        "cpu": [
+          "arm64"
+        ],
+        "dev": true,
+        "integrity": "sha512-cfb1qK7lygtMa4NUl2582nP7aliLYuDEVpAbXJMkDq1qE+olIw/es+C8j1LJwvcRq1I2yWGtSn3EkDp9Dq5FdA==",
+        "license": "SEE LICENSE IN LICENSE.txt",
+        "optional": true,
+        "os": [
+          "linux"
+        ],
+        "resolved": "https://registry.npmjs.org/@vscode/vsce-sign-linux-arm64/-/vsce-sign-linux-arm64-2.0.6.tgz",
+        "version": "2.0.6"
+      },
+      "meaning": "Integrity-addressed compressed package present in retained regular cache inventory; no optional binary executed or runtime resolution demonstrated.",
+      "name": "@vscode/vsce-sign-linux-arm64"
+    },
+    {
+      "cacheInventoryEntry": {
+        "bytes": 8049644,
+        "mode": 420,
+        "sha256": "6b4826dc8dd766a44fccc24e44ee8bd05018483976bb89934be836690c0085ce"
+      },
+      "cachePath": "npm-cache/_cacache/content-v2/sha512/cc/50/a0c76136b33127320b4108a888fc6e6f5799a2eeb9d3543301d85ac86ba2617aa17ca607ebc7a9b71d6cc879def8705337fca087d0b9887c23594f9bd17f",
+      "lock": {
+        "cpu": [
+          "arm64"
+        ],
+        "dev": true,
+        "integrity": "sha512-zFCgx2E2szEnMgtBCKiI/G5vV5mi7rnTVDMB2FrIa6JheqF8pgfrx6m3HWzIed74cFM3/KCH0LmIfCNZT5vRfw==",
+        "libc": [
+          "glibc"
+        ],
+        "license": "MIT",
+        "optional": true,
+        "os": [
+          "linux"
+        ],
+        "resolved": "https://registry.npmjs.org/@dprint/linux-arm64-glibc/-/linux-arm64-glibc-0.57.4.tgz",
+        "version": "0.57.4"
+      },
+      "meaning": "Integrity-addressed compressed package present in retained regular cache inventory; no optional binary executed or runtime resolution demonstrated.",
+      "name": "@dprint/linux-arm64-glibc"
+    },
+    {
+      "cacheInventoryEntry": {
+        "bytes": 4283627,
+        "mode": 420,
+        "sha256": "a96dbfa41d3ef5dbd1ef22b1c10d5187be9267e86093a870f06402a7ec931596"
+      },
+      "cachePath": "npm-cache/_cacache/content-v2/sha512/a5/6e/000b43f78adf1cedda3d315338a79d45cc7cdd33f4d9adeaeeae045c1c9d964dad55435088ab5f319dc7e9049c38a23922659aca5b6c8805604ff768fa52",
+      "lock": {
+        "cpu": [
+          "arm64"
+        ],
+        "dev": true,
+        "engines": {
+          "node": ">=18"
+        },
+        "integrity": "sha512-pW4AC0P3it8c7do9MVM4p51FzHzdM/TZrerurgRcHJ2WTa1VQ1CIq18xncfpBJw4ojkiZZrKW2yIBWBP92j6Ug==",
+        "license": "MIT",
+        "optional": true,
+        "os": [
+          "linux"
+        ],
+        "resolved": "https://registry.npmjs.org/@esbuild/linux-arm64/-/linux-arm64-0.28.2.tgz",
+        "version": "0.28.2"
+      },
+      "meaning": "Integrity-addressed compressed package present in retained regular cache inventory; no optional binary executed or runtime resolution demonstrated.",
+      "name": "@esbuild/linux-arm64"
+    }
+  ],
+  "platform": "linux arm64 glibc"
+}

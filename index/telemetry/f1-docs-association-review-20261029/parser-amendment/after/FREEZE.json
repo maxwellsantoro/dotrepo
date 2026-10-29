@@ -1,0 +1,50 @@
+{
+  "classification": "Independent after-amendment1 review; originalprefixfindingclosed, onebareURLownerblocker",
+  "files": [
+    {
+      "path": "controls.py",
+      "bytes": 7940,
+      "sha256": "93286364fa6e5d3fdb06c0175e1f82b6becdb6a391bc8448f34831e9921a62a8"
+    },
+    {
+      "path": "findings.json",
+      "bytes": 1286,
+      "sha256": "d8ff3526ad4aeb9e73aac6044cb744dc3feecdadb7a181f6a9ed0fdb51d7604f"
+    },
+    {
+      "path": "observations.json",
+      "bytes": 800500,
+      "sha256": "88c0bb9831936bbc581d3b16bb0d52f55e394b154230df42595d0686f8fcf76e"
+    },
+    {
+      "path": "ruff-check.log",
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": "ruff-format.log",
+      "bytes": 25,
+      "sha256": "fd2299c9f1c6dc869070883e281051bfe93aacf66c1a3b0069f45b4aa410ca50"
+    },
+    {
+      "path": "source-snapshot/crates/dotrepo-core/src/import/parsing/markdown/docs_tests.rs.txt",
+      "bytes": 10810,
+      "sha256": "17b1772a51ea9b548ba5a624f196b960179a52bdd04a104b6996cbf34791d48a"
+    },
+    {
+      "path": "source-snapshot/crates/dotrepo-core/src/import/parsing/markdown.rs.txt",
+      "bytes": 28761,
+      "sha256": "ced9ffdd6963499237fb65e23828d13af9749e88188e6693c5745333c0edbeec"
+    },
+    {
+      "path": "startup-safe-refusal.json",
+      "bytes": 528,
+      "sha256": "3382c88500c814200821493fd9551b86770f11f7232112bfc25d88637267719a"
+    }
+  ],
+  "authorAmendmentFreezeSha256": "8243f8c63d63e9aa9d0c1a83e81fad1113bab394bd05c36a491ec3615dab168b",
+  "cliSha256": "65e50e4d67c1e0ebb176f0d3950bc00d8d498c6464ca1d2fd9cf8df059dab9a6",
+  "firstPartyCliImports": 31,
+  "blockingFindings": 1,
+  "upstreamNetworkCargoProviderCalls": 0
+}

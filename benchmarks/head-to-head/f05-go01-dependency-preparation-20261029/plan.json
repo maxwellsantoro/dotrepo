@@ -1,0 +1,103 @@
+{
+  "base": "595303f9b8bfa58366c9f2c93fb619ca54591ea2",
+  "bindings": {
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-common-image-audit-20261029/FREEZE.json": "da4564e3b72bf7dba9cb469d51b9b1e88664ba7c9fa4bbd2b1d35bfb256e509c",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/image-attempt-3/logs/tools/stdout.txt": "7ed109fe20e068f792c1f16879c2d3bf8131151a2af61eb0211271149a1a180f",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-review-20261029/freeze.json": "962b6aa6a9d95b9d9ce04e2c7e5124ed5fcbef23264c410271902437b618e219",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-review-20261029/protected-content-digests.json": "a6da70671528ca633baaf2c343ce2787699b8554904bc9c064383ea1495a38f5",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-dependency-preparation-20261029/source-download-config.json": "bf17416f4e537a9eefb1e04fc924c25a4e17d3abd75ea0bcf004afcb41a1c407",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-1/freeze.json": "490e3d6e535b7d06e97ee500063a3baa55bd8f28fdee8abbf4b0d0f1137a7d1b",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-oracle-review-20261029/amendment-1/freeze.json": "919ee07e22f7e360f1c2c5992e6daf9ec3408b2e0d73f1698b79a711d0346766",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-requalification-proposal-20261029/freeze.json": "e3e291bc00097dea64fe0173b7125024693d4f69585bf212df30d4124ce25b55",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-requalification-proposal-20261029/proposal.json": "cb4f6481f447519ba0e087d91661afc870ab4f992356c1e0bce1fd00a0ae6da0",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-20261029/go-01-full/acquisition.json": "e56d34e7fe5cde09761d5fcff28d93984cc4b1a78b1eac4e26b22cac17211ac0",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-20261029/go-01-full/inventory.json": "96c935c31228fa8e05bb836a93257beeb87ac524e5eb30cdde3c546a1ea4be0e"
+  },
+  "commands": [
+    "cd /workspace/repository; npm ci --ignore-scripts",
+    "cd /workspace/repository/tsc; go mod download",
+    "cd /workspace/repository/tools; go mod download"
+  ],
+  "draftAuditFlags": {
+    "buildOutputsExcluded": false,
+    "credentialsExcluded": false,
+    "downloadOnly": false,
+    "taskSourceExcluded": false
+  },
+  "environment": {
+    "GIT_CONFIG_GLOBAL": "/dev/null",
+    "GIT_CONFIG_NOSYSTEM": "1",
+    "GIT_TERMINAL_PROMPT": "0",
+    "GOCACHE": "/workspace/go-build",
+    "GOENV": "off",
+    "GOGC": "50",
+    "GOMAXPROCS": "3",
+    "GOPATH": "/workspace/dependency-cache/go",
+    "GOPROXY": "https://proxy.golang.org",
+    "GOSUMDB": "sum.golang.org",
+    "GOTOOLCHAIN": "local",
+    "HOME": "/workspace/home",
+    "LANG": "C.UTF-8",
+    "NPM_CONFIG_AUDIT": "false",
+    "NPM_CONFIG_CACHE": "/workspace/dependency-cache/npm-cache",
+    "NPM_CONFIG_FUND": "false",
+    "NPM_CONFIG_IGNORE_SCRIPTS": "true",
+    "NPM_CONFIG_REGISTRY": "https://registry.npmjs.org",
+    "NPM_CONFIG_USERCONFIG": "/dev/null",
+    "TMPDIR": "/workspace/tmp"
+  },
+  "executionAuthorized": false,
+  "expectedToolLines": [
+    "v24.22.2",
+    "11.19.1",
+    "go version go1.27.3 linux/arm64",
+    "uv 0.13.6 (aarch64-unknown-linux-musl)",
+    "git version 2.39.5"
+  ],
+  "exportRoots": [
+    "npm-cache/_cacache",
+    "go/pkg/mod"
+  ],
+  "identity": "go01-single-download-only-preparation-v1",
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "limits": {
+    "archiveBytes": 536870912,
+    "cleanupSeconds": 60,
+    "cpus": 3,
+    "expandedCacheBytes": 1073741824,
+    "memoryBytes": 4294967296,
+    "memorySwapBytes": 4294967296,
+    "pids": 256,
+    "sourcePlusCacheBytes": 2147483648,
+    "workSeconds": 900,
+    "workspaceBytes": 8589934592
+  },
+  "limitsOfEvidence": [
+    "No daemon/network/preparation call authorized by this plan.",
+    "Bridge network has pinned public package-manager endpoints, not an egress firewall; source scripts are disabled.",
+    "Cache tmpfs hard capacity and quarter-second apparent-size sampling bound growth; transient logical growth is not an instantaneous universal filesystem proof.",
+    "Every attempt/failure retained, one accepted attempt only. Separate60second cleanup/absence grace; actual work overrun is an incomplete result.",
+    "Independent package-lock/go.sum integrity, source/member classification, credentials/protected-content audit and later offline requalification remain required.",
+    "Npm install-hook equivalence, native collection and exclusion-policy acceptance remain separate; no campaign admission."
+  ],
+  "repository": "github.com/microsoft/TypeScript",
+  "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+  "scripts": {
+    "boundaries.py": "7b03c7ab687043ab23061efde9d6328a21bb6ca94176085c87a50df8265de9e6",
+    "controls.py": "e879a36f0e6e2f81b6402496b4fed220c4af67ee42b6c7696e8c514b58a93394",
+    "io_controls.py": "1224404c3ae96d3b826306219b137b89d2eaa0f4abdb9f2b091cca2cd65d92ae",
+    "make_plan.py": "c6a5711d97a84a38a07a9705f823232a974bdf69264ce85b5f4e0475cb37242a",
+    "prepare.py": "132cc30c00be4f8a7de80646ee8f87b3fff5d945c99a8f63df7a80780144538b",
+    "process_io.py": "54fafcbeefb9c7516f65e4a1eae2959dd2934c9359b316ef2e0cf79fe0207ede",
+    "protected-digests.json": "3a2ac923c48b0c91c81f80176bcb4fbcfa054afd912dbdb96af2ba5159cb518f"
+  },
+  "source": {
+    "archiveBytes": 280422400,
+    "archivePath": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar",
+    "archiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+    "expandedBytes": 218783760,
+    "inventoryPath": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-20261029/go-01-full/inventory.json"
+  },
+  "state": "plan and driver only; external coordinator authorization required",
+  "toolProbe": "node --version; npm --version; go version; uv --version; git --version"
+}

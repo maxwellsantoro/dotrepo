@@ -1,0 +1,27 @@
+{
+  "commands": [
+    "cd /workspace/repository; npm ci --ignore-scripts",
+    "cd /workspace/repository/tsc; go mod download",
+    "cd /workspace/repository/tools; go mod download"
+  ],
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "limits": {
+    "archiveBytes": 536870912,
+    "cleanupSeconds": 60,
+    "cpus": 3,
+    "expandedCacheBytes": 1073741824,
+    "memoryBytes": 4294967296,
+    "memorySwapBytes": 4294967296,
+    "pids": 256,
+    "sourcePlusCacheBytes": 2147483648,
+    "workSeconds": 900,
+    "workspaceBytes": 8589934592
+  },
+  "maxAttempts": 1,
+  "output": "/tmp/REQUIRES_COORDINATOR_UNIQUE_EVIDENCE_PATH",
+  "planSha256": "eceef38492e2b70a98c5984174e5ea8141effb3d0b3412dd788dc950e0eadfa3",
+  "scratch": "/tmp/REQUIRES_COORDINATOR_UNIQUE_CACHE_PATH",
+  "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+  "state": "NOT_AUTHORIZED_TEMPLATE",
+  "synthetic": true
+}

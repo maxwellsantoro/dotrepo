@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Require current-project documentation ownership rather than accepting links
+  from integration prose or differently named quickstart subjects. Preserve
+  direct declarations and navigation links, including custom documentation
+  domains. Correct SwiftLint and MinIO documentation associations while retaining
+  record age and withdrawing whole-record verification after partial inspection.
 - Keep a root `go.mod` conventional build as a diagnostic candidate while
   requiring other eligible evidence for a scalar build instruction. Apply that
   eligibility to selection and adjudication; conventional Go test defaults keep

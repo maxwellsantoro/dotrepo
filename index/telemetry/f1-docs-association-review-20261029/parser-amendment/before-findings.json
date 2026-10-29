@@ -1,0 +1,73 @@
+{
+  "status": "blocking correctness finding",
+  "ownerBoundary": "Independent reviewer owns no production edits",
+  "authorFreezeSha256": "a0c96b5567d7d054162994d4c4645f8bb90a9af2b7bf8abca976aa0e9b5a3bab",
+  "codeSha256": {
+    "crates/dotrepo-core/src/import/parsing/markdown.rs": "9fec1c4754834677b542a354d12c976e57fb5267ef69bd78d77c3468cd5ec9cf",
+    "crates/dotrepo-core/src/import/parsing/markdown/docs_tests.rs": "2740609996c1a196dab0a1e427825e3d10a3e1548ecad22351ad8a327aac27ae"
+  },
+  "cliSha256": "04f5e2aa8d80ce1701fb7ec2cbab7e431242dac7adb1aed41d73e93b9479ef8b",
+  "finding": {
+    "path": "crates/dotrepo-core/src/import/parsing/markdown.rs",
+    "mechanism": "declaration accepts physical-line prefix without checking paragraph.rendered ownership; start-prefix is_start similarly bypasses context. Paragraph cache retains subject, but these paths do not consume it.",
+    "cases": [
+      {
+        "case": "wrapped-neutral-docs-prefix",
+        "input": "# Orbit\n\nOther's integration setup includes its own\nDocs: [manual](https://shared.example/orbit/manual)\n",
+        "expectedRoot": null,
+        "expectedStart": null,
+        "actualRoot": "https://shared.example/orbit/manual",
+        "actualStart": null
+      },
+      {
+        "case": "list-wrapped-neutral-docs-prefix",
+        "input": "# Orbit\n\n- Other's integration setup includes its own\n  Documentation: [manual](https://shared.example/orbit/manual)\n",
+        "expectedRoot": null,
+        "expectedStart": null,
+        "actualRoot": "https://shared.example/orbit/manual",
+        "actualStart": null
+      },
+      {
+        "case": "wrapped-start-prefix",
+        "input": "# Orbit\n\nOther's integration setup includes its own\nGetting started: [guide](https://shared.example/orbit/manual)\n",
+        "expectedRoot": null,
+        "expectedStart": null,
+        "actualRoot": null,
+        "actualStart": "https://shared.example/orbit/manual"
+      },
+      {
+        "case": "explicit-prefix-other-tail",
+        "input": "# Orbit\n\nDocs: [manual](https://shared.example/orbit/manual) for Other's integration.\n",
+        "expectedRoot": null,
+        "expectedStart": null,
+        "actualRoot": "https://shared.example/orbit/manual",
+        "actualStart": null
+      }
+    ],
+    "requiredBehavior": "Genuine standalone neutral docs/start prefixes stay valid, but prefix and trailing prose must be assessed within full paragraph/list-owner context. Conflicting subject prose abstains. No URL blacklist."
+  },
+  "controlsPassed": 15,
+  "controlsFailed": 4,
+  "longParagraphObservations": [
+    {
+      "case": "long-contiguous-1000",
+      "inputBytes": 41410,
+      "elapsedSeconds": 0.0676654172129929,
+      "root": null
+    },
+    {
+      "case": "long-contiguous-4000",
+      "inputBytes": 168610,
+      "elapsedSeconds": 0.2608426248189062,
+      "root": null
+    },
+    {
+      "case": "long-contiguous-12000",
+      "inputBytes": 509610,
+      "elapsedSeconds": 0.7712564170360565,
+      "root": null
+    }
+  ],
+  "complexityReview": "Paragraph context built once per contiguous range, then cached for monotone traversal; repeated multi-link long paragraphs skip direct-prose whole-string checks by link_count. Observed whole CLI scaling approximately linear for selected1000/4000/12000-line controls; no universal complexity proof claimed.",
+  "noCargoNetworkUpstreamExecution": true
+}

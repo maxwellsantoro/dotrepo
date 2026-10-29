@@ -1,0 +1,55 @@
+{
+  "status": "source-only proposed acceptance conditions; no code or new proof subsystem authorized",
+  "frozenTask": "e1-go-03-repository-tests; make test from root; documented default main-module unit coverage",
+  "sourceAssertionsNowEstablished": [
+    "Exact commit root tree lists only docker-bake.hcl among eight default Bake filenames; seven absent in that tree.",
+    "Root go.mod present, root go.work/go.work.sum absent in exact tree; relay/go.mod exists in a separately bound relay tree and retained body declares module github.com/docker/compose-relay with Go1.23.",
+    "Five proposed route sources and retained relay manifest hash to Git blob IDs in those exact trees."
+  ],
+  "candidateSpecificEstablishmentChecks": [
+    {
+      "id": "tuple/source/time-integrity",
+      "requirement": "Existing exact candidate value/time and sourceBindings mechanical verifier passes. This remains necessary but insufficient."
+    },
+    {
+      "id": "documented-default-command-and-context",
+      "requirement": "Independent assessor approves exact natural BUILDING prerequisites/unit command, root Make/Bake route, repository-default unit scope and exclusions. Conflicting command/directory/platform or unconsumed required setup remains unresolved."
+    },
+    {
+      "id": "default-bake-file-set",
+      "requirement": "Use actual upstream-complete root inventory evidence bound to the same revision, not merely the files a materializer happened to fetch. Require the supported default file-set (only owning docker-bake.hcl here), or assess every additional default file. An unproven missing file is unresolved, not absent."
+    },
+    {
+      "id": "module-boundaries",
+      "requirement": "Bind root module/version and known relay separate-module boundary. Unexpected/uninspected go.work or additional relevant module context must not be silently merged. This does not claim exhaustive all-module coverage; target is maintained repository default."
+    },
+    {
+      "id": "documented-prerequisite-closure",
+      "requirement": "Separate host Make/Go/Docker prerequisites from in-image Go/native tools and source-declared acquisition. Buildx existence required, undocumented minimum stays unknown. Preserve raw Dockerfile token/scope; assessor must explicitly disposition $(TAGS), not normalize or invent a tool requirement."
+    },
+    {
+      "id": "consumer-condition-preservation",
+      "requirement": "Keep unchanged checkout/no added default files/no BUILDX_BAKE_FILE, CLI or env overrides as explicit applicability conditions. Upstream absence proof cannot establish that a later consumer satisfies them, has a working builder/network or ran tests."
+    }
+  ],
+  "existingInputGap": {
+    "core": "ImportSources/ImportPlan contain selected file contents, candidate/evidence and observations; no upstream-complete root tree inventory or reliable distinction between file absent upstream and file omitted by a caller. read_input failure alone cannot establish source absence.",
+    "crawler": "Current github root materialization selects named inputs and lacks three route source files; selected materialization is not an upstream root inventory. No completeness proof is passed into current core importer.",
+    "consequence": "Under current selected-input contracts, an automatic high source-establishment check that requires default-file absence must remain unresolved even when all present-file hashes pass. The retained closure solves this source fact for independent assessment, not the generic importer-input gap.",
+    "nextDecision": "Coordinator should choose the minimal way an existing exact-revision source acquisition/caller can supply trustworthy completeness/absence evidence, if needed, only after assessor disposition. This packet proposes no public protocol, metadata/proof subsystem, crawler change or high rule."
+  },
+  "negativeControlsBeforeAnyAcceptance": [
+    "Present tracked compose.yaml/docker-bake.override.hcl changes effective default route and cannot be ignored.",
+    "Partial materialization omits those files: existence checks return missing but no complete root inventory proof => unresolved.",
+    "Complete tree belongs to other revision or does not bind route blob hashes => unresolved.",
+    "Consumer adds untracked override file or sets BUILDX_BAKE_FILE: conditional instruction cannot be presented as unconditionally applicable.",
+    "Root go.work or route context/dependency changes, missing relay boundary, wrong scope or mutated prerequisite source => unresolved.",
+    "Hash-valid docs with added service/secret/setup condition must fail separate completeness assessment."
+  ],
+  "remainingGates": [
+    "Independent source-completeness assessment using parent proposal and this closure",
+    "Minimal input/materialization/absence-evidence decision before automatic high verification",
+    "Bounded implementation ownership/tests/review only after above decisions",
+    "Fresh holdout qualification and consumer benefit remain independent/unperformed"
+  ]
+}

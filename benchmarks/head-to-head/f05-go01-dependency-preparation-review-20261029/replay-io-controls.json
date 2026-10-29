@@ -1,0 +1,57 @@
+{
+  "controls": [
+    {
+      "case": "input",
+      "error": null,
+      "exitCode": 0,
+      "rawBindingsChecked": true,
+      "passed": true
+    },
+    {
+      "case": "text",
+      "error": "combined text trace limit",
+      "exitCode": -9,
+      "rawBindingsChecked": true,
+      "passed": true
+    },
+    {
+      "case": "stderr",
+      "error": "combined text trace limit",
+      "exitCode": -9,
+      "rawBindingsChecked": true,
+      "passed": true
+    },
+    {
+      "case": "binary",
+      "error": "binary archive transport limit",
+      "exitCode": -9,
+      "rawBindingsChecked": true,
+      "passed": true
+    },
+    {
+      "case": "timeout",
+      "error": "attempt deadline exhausted",
+      "exitCode": -9,
+      "rawBindingsChecked": true,
+      "passed": true
+    },
+    {
+      "case": "missing-input",
+      "error": "FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/dotrepo-go01-plan-root-review-20261029/io-synthetic-kzsb_vk0/absent'",
+      "exitCode": null,
+      "rawBindingsChecked": true,
+      "passed": true
+    },
+    {
+      "case": "raw-bytes",
+      "error": null,
+      "exitCode": 0,
+      "rawBindingsChecked": true,
+      "passed": true
+    }
+  ],
+  "passed": 7,
+  "workload": "tiny owned uv byte emitters only; synthetic caps lowered to16bytes",
+  "DockerNetworkNativeTaskProviderCalls": 0,
+  "actualPreparationOccurred": false
+}

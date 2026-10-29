@@ -1,0 +1,19 @@
+# Evidence
+
+- Imported repository name and docs entry points from README.md.
+- Imported the security reporting channel from SECURITY.md.
+- Imported repo.build from Makefile as `make build`.
+- Imported repo.test from Makefile as `make test`.
+- Imported repo.toolchain.min from go.mod as `1.24.0` (Go).
+- Imported docs.getting_started as `https://docs.min.io/community/minio-object-store/reference/minio-mc.html#quickstart`. Explicit documentation link at README.md:153: Follow the MinIO Client [Quickstart Guide](https://docs.min.io/community/minio-object-store/reference/minio-mc.html#quickstart) for further instructions.
+- This is an overlay record, not a maintainer-controlled canonical record.
+- Augmented repo.license from GitHub repository metadata.
+- Augmented repo.visibility from GitHub repository metadata.
+- Augmented repo.languages from GitHub repository metadata.
+- Augmented repo.topics from GitHub repository metadata.
+- Constrained repo.description with GitHub repository metadata.
+- Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
+
+## Auto-promotion
+
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

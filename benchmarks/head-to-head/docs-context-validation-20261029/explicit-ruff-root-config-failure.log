@@ -1,0 +1,47 @@
+E402 Module level import not at top of file
+  --> benchmarks/head-to-head/f05-offline-requalification-20261029/controls.v2.py:15:1
+   |
+13 | driver = importlib.util.module_from_spec(spec)
+14 | spec.loader.exec_module(driver)
+15 | from oracle import controls as oracle_controls
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+16 |
+17 | HERE = Path(__file__).resolve().parent
+   |
+
+Found 1 error.
+Would reformat: benchmarks/head-to-head/f05-offline-results-20261029/run_serial.py
+1 file would be reformatted, 286 files already formatted
+[
+  {
+    "command": [
+      "uv",
+      "run",
+      "ruff",
+      "check",
+      "--config",
+      "/Users/maxwell/projects/agent/dotrepo/pyproject.toml",
+      "--force-exclude",
+      "--no-cache"
+    ],
+    "trackedPythonInputs": 327,
+    "exitCode": 1,
+    "seconds": 0.10262041701935232
+  },
+  {
+    "command": [
+      "uv",
+      "run",
+      "ruff",
+      "format",
+      "--check",
+      "--config",
+      "/Users/maxwell/projects/agent/dotrepo/pyproject.toml",
+      "--force-exclude",
+      "--no-cache"
+    ],
+    "trackedPythonInputs": 327,
+    "exitCode": 1,
+    "seconds": 0.05946645908989012
+  }
+]

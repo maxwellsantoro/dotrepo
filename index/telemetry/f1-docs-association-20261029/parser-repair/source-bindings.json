@@ -1,0 +1,22 @@
+{
+  "baseDeclared": "595303f9b8bfa58366c9f2c93fb619ca54591ea2",
+  "observedHead": "595303f9b8bfa58366c9f2c93fb619ca54591ea2",
+  "sourceBindings": [
+    {
+      "path": "crates/dotrepo-core/src/import/parsing/markdown.rs",
+      "bytes": 25222,
+      "sha256": "9fec1c4754834677b542a354d12c976e57fb5267ef69bd78d77c3468cd5ec9cf",
+      "retained": "sources/markdown.rs"
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/parsing/markdown/docs_tests.rs",
+      "bytes": 7282,
+      "sha256": "2740609996c1a196dab0a1e427825e3d10a3e1548ecad22351ad8a327aac27ae",
+      "retained": "sources/docs_tests.rs"
+    }
+  ],
+  "beforeMarkdownSha256": "c428584a054de7be1f51c273cbfb21dfa05cdcaacdce8b7769a6ea9ac11914f0",
+  "cliSha256": "04f5e2aa8d80ce1701fb7ec2cbab7e431242dac7adb1aed41d73e93b9479ef8b",
+  "parentFreezeSha256": "2a4b40f7e5cfc35d796fe6e2f0d15a9ecaf40aa80ffd20cabc4d13190aa2f3ed",
+  "publicationBoundaryFreezeSha256": "15abf34686425c4555ff6345e2826220ff0f2493fcd19bdead222f844c6b9733"
+}

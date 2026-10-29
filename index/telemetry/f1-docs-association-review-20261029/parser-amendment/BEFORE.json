@@ -1,0 +1,45 @@
+{
+  "classification": "Independent before-amendment parser finding; prior docsrecord review unchanged",
+  "authorFreezeSha256": "a0c96b5567d7d054162994d4c4645f8bb90a9af2b7bf8abca976aa0e9b5a3bab",
+  "files": [
+    {
+      "path": "before-findings.json",
+      "bytes": 3393,
+      "sha256": "c5a7140ea1db2672f6b0a7ce28ac321cf3526e6a7f560b7beccdaa3cea4c5cce"
+    },
+    {
+      "path": "before-ruff-check.log",
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": "before-ruff-format.log",
+      "bytes": 25,
+      "sha256": "fd2299c9f1c6dc869070883e281051bfe93aacf66c1a3b0069f45b4aa410ca50"
+    },
+    {
+      "path": "before-source/crates/dotrepo-core/src/import/parsing/markdown/docs_tests.rs.txt",
+      "bytes": 7282,
+      "sha256": "2740609996c1a196dab0a1e427825e3d10a3e1548ecad22351ad8a327aac27ae"
+    },
+    {
+      "path": "before-source/crates/dotrepo-core/src/import/parsing/markdown.rs.txt",
+      "bytes": 25222,
+      "sha256": "9fec1c4754834677b542a354d12c976e57fb5267ef69bd78d77c3468cd5ec9cf"
+    },
+    {
+      "path": "controls.py",
+      "bytes": 6104,
+      "sha256": "b9ccf09b01b7124788c8c092cce78827419c725d5d92c636eaca6e20de9acc8f"
+    },
+    {
+      "path": "observations-before.json",
+      "bytes": 776149,
+      "sha256": "c57c3dd4bbf28afa5a596743e368f73f68d9974e0c0d21192e5912a7a2e22efa"
+    }
+  ],
+  "blockingFindings": 1,
+  "mismatchedControls": 4,
+  "firstPartyCliImports": 19,
+  "upstreamNetworkProviderCargo": false
+}

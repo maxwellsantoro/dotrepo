@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "identity": "github.com/realm/SwiftLint",
+      "field": "docs.root",
+      "oldHashRecheckedImmediatelyBeforeWrite": true,
+      "afterMatchesOwnedRecord": true,
+      "evidenceOriginalIsExactPrefix": true,
+      "uninspectedFactsAndEvidenceUnchanged": true,
+      "recordGeneratedAtPreserved": "2026-10-27T18:15:27.41844Z",
+      "targetValueJsonMatches": true,
+      "verifiedReviewedCanonicalMinted": false
+    },
+    {
+      "identity": "github.com/minio/minio",
+      "field": "docs.getting_started",
+      "oldHashRecheckedImmediatelyBeforeWrite": true,
+      "afterMatchesOwnedRecord": true,
+      "evidenceOriginalIsExactPrefix": true,
+      "uninspectedFactsAndEvidenceUnchanged": true,
+      "recordGeneratedAtPreserved": "2026-10-04T07:53:35.951591156Z",
+      "targetValueJsonMatches": true,
+      "verifiedReviewedCanonicalMinted": false
+    }
+  ],
+  "firstPartyExistingCliValidateIndex": "exit0 index valid",
+  "cliSha256": "b9cd73236bca71ecf4fb7aa06bfe131b1ecc41a9b0fdfb43de579fb6d24ce0d0",
+  "newCargoBuild": false,
+  "upstreamLookups": 8,
+  "sourceFilesGitBlobShaVerified": 2,
+  "beforeLookupDeclarationFrozen": true,
+  "newPackageProviderOrUpstreamExecutionCalls": 0,
+  "remainingGates": [
+    "coordinator independent source/patch review",
+    "integrated index/public-surface gate on exact landed source",
+    "contextual parser regression/policy fix for demonstrated recurrence"
+  ]
+}

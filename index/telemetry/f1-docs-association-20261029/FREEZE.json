@@ -1,0 +1,250 @@
+{
+  "identity": "f1-docs-association-20261029",
+  "base": "595303f9b8bfa58366c9f2c93fb619ca54591ea2",
+  "declaredIdentities": 2,
+  "declaredFields": 2,
+  "correctedFields": 2,
+  "abstainedFields": 0,
+  "verifiedClaimsWithdrawn": 2,
+  "newReviewedCanonicalVerified": 0,
+  "explicitLookupOperations": 8,
+  "upstreamCodeExecuted": false,
+  "wholeRecordDatesPreserved": true,
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 157,
+      "sha256": "677af07d66a704037813a58c2deb83000b664a91609bfe5bc3214d319a1d8ffb"
+    },
+    {
+      "path": "README.md",
+      "bytes": 7264,
+      "sha256": "f7b1fcee405b0f31a936db1a9a18c83668a90b49b4afdc8fbdb2cc3ff0a1eb33"
+    },
+    {
+      "path": "after/github.com/minio/minio/evidence.md",
+      "bytes": 3739,
+      "sha256": "7d245ad5f125a0e980ab54ed82e37ed959611a8e0ddfb2b0b611ad0de1ff2719"
+    },
+    {
+      "path": "after/github.com/minio/minio/record.toml",
+      "bytes": 5059,
+      "sha256": "578e8a8209c8cc025375bf523d858956ef4253e5ea743ca223254ef0ede87ff4"
+    },
+    {
+      "path": "after/github.com/realm/SwiftLint/evidence.md",
+      "bytes": 3681,
+      "sha256": "665dd35edad808a185a034e2f66de381454f45902bab7898fae03c53fa26bd84"
+    },
+    {
+      "path": "after/github.com/realm/SwiftLint/record.toml",
+      "bytes": 4735,
+      "sha256": "61abe990654c62421639c3fff4c47ecf7eb33fbc1dd7962554248b732c566d57"
+    },
+    {
+      "path": "assessments.json",
+      "bytes": 13877,
+      "sha256": "e092702734b42f002492f005c2e502f446b9d5308b2886daf9fcbea2a6cfe707"
+    },
+    {
+      "path": "before/github.com/minio/minio/evidence.md",
+      "bytes": 1244,
+      "sha256": "3388cd58078fa166c92b5407c07288f66681e29367073c03a9a581d6f26709a1"
+    },
+    {
+      "path": "before/github.com/minio/minio/record.toml",
+      "bytes": 4170,
+      "sha256": "cb28185023915957c67d66aa26b39b41dba782faac2417ce035d5e56a2427acf"
+    },
+    {
+      "path": "before/github.com/realm/SwiftLint/evidence.md",
+      "bytes": 1168,
+      "sha256": "4998b44d3a499e8e1425673337a39e6ee89aa31fba159eb43c391fe521d671fa"
+    },
+    {
+      "path": "before/github.com/realm/SwiftLint/record.toml",
+      "bytes": 3888,
+      "sha256": "21a00bdcbb80c699dc85659242394ba089064a35dce0596ed089b44bfa9a0b28"
+    },
+    {
+      "path": "checks/validate-index.receipt.json",
+      "bytes": 654,
+      "sha256": "8f068443df4006bef4b903c0e3a73d80e5a408d47ecd67cce1eff0ab159c0dd1"
+    },
+    {
+      "path": "checks/validate-index.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "checks/validate-index.stdout",
+      "bytes": 12,
+      "sha256": "afb45179148d84481cb7fbd3cd6a98ae44cdae7068f1d780e66f13aea51f84d7"
+    },
+    {
+      "path": "checks.json",
+      "bytes": 1456,
+      "sha256": "1b850b64a2dcccad8be150f2235155074e5099ec142ee71ff55ece86b26896e3"
+    },
+    {
+      "path": "corrections.patch",
+      "bytes": 11731,
+      "sha256": "363ad73c81849235e58b2bb7e9ef7904f3289d80f6c04c0a69ce7d17a232b45f"
+    },
+    {
+      "path": "declaration-freeze.json",
+      "bytes": 943,
+      "sha256": "7ecd77079b56e9bd467f6d782ba9d8614e342dc3be19f6e193516ab0a73eadcb"
+    },
+    {
+      "path": "declaration.json",
+      "bytes": 3441,
+      "sha256": "0f0d046871e511a265341cdf3958282cde882be75af02e88e8dfa2817e6a1c5a"
+    },
+    {
+      "path": "parser-replay/minio/README.md",
+      "bytes": 8960,
+      "sha256": "aae99b6e35489bb26bfba4290ac567861d123230d1831562b6aee8c1363aead3"
+    },
+    {
+      "path": "parser-replay/minio/evidence.md",
+      "bytes": 488,
+      "sha256": "38e6fb66ef9cde570dbd43d8db2ab842a974508bd480728d8ec073fbd1af86aa"
+    },
+    {
+      "path": "parser-replay/minio/record.toml",
+      "bytes": 1171,
+      "sha256": "f34c44ac5cf5e4fa8760668f944505949cf2ca88548d9f1c0a969e070067ef12"
+    },
+    {
+      "path": "parser-replay/minio/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "parser-replay/minio/stdout.txt",
+      "bytes": 310,
+      "sha256": "463c6778d0568efb7d4c62d694e9f5e80b00405045ec9334afff1553cacab8a3"
+    },
+    {
+      "path": "parser-replay/swiftlint/README.md",
+      "bytes": 38416,
+      "sha256": "b1490448cf43b1319e87686239617bc8dfe6f60b725ed9cb8f81b326d124c534"
+    },
+    {
+      "path": "parser-replay/swiftlint/evidence.md",
+      "bytes": 475,
+      "sha256": "98daf3a45c446fda1fd17bed575f569ab1f397c92703422bdc122cdc417ecd1b"
+    },
+    {
+      "path": "parser-replay/swiftlint/record.toml",
+      "bytes": 1285,
+      "sha256": "ef145a1282373924e6dff44cc753a6d055908ef2c858c3261023a1b2c748af8b"
+    },
+    {
+      "path": "parser-replay/swiftlint/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "parser-replay/swiftlint/stdout.txt",
+      "bytes": 318,
+      "sha256": "64af2f7ac30a570e8f97f1ced3497e4e2999825c4886b4de122193124d2ba95d"
+    },
+    {
+      "path": "parser-replay.json",
+      "bytes": 1917,
+      "sha256": "3d49a8e09058d1f9342f41fbc8162e06dc2ce3a3701488df4b8c10e35509214b"
+    },
+    {
+      "path": "regression-proposal.json",
+      "bytes": 1729,
+      "sha256": "757e86d13b28d4a9b475bd15a4fcee770f792449b11758f8123c384d2abc24e5"
+    },
+    {
+      "path": "requests/minio-commit.json",
+      "bytes": 3267,
+      "sha256": "8b028707c542913967d7607a33639ad5faf4584e05d4546b91aae53cdf82a39f"
+    },
+    {
+      "path": "requests/minio-readme.json",
+      "bytes": 12932,
+      "sha256": "64ef5c5b318a80d3b25d0fef4ce49778169b4df0f64fbf558ff3b82477d65625"
+    },
+    {
+      "path": "requests/minio-repository.json",
+      "bytes": 1113,
+      "sha256": "fa529552aa22c740d9354a8f92a90b33c6373ce4b4f50baf7d2c9ca7eba2b7f7"
+    },
+    {
+      "path": "requests/swiftlint-commit.json",
+      "bytes": 8513,
+      "sha256": "e0295eece1c1d86dffe09df6ed56a0ce60251c61bd4e810dfd9fd25467073a03"
+    },
+    {
+      "path": "requests/swiftlint-documentation-index.json",
+      "bytes": 797,
+      "sha256": "7dade736fce38ef3522673597edbf2d58a03136e51cff0aaeb6300126d785c87"
+    },
+    {
+      "path": "requests/swiftlint-readme.json",
+      "bytes": 53528,
+      "sha256": "4b132fab04266a6cbb4f403cb1415939bbd9ff30571a20aee5b4e45af295a078"
+    },
+    {
+      "path": "requests/swiftlint-repository.json",
+      "bytes": 1146,
+      "sha256": "ba00a0796c21c6ebe58b4b0e374228899abc7c3019f70f4f29285275a3f2a57d"
+    },
+    {
+      "path": "requests/swiftlint-rule-directory.json",
+      "bytes": 758,
+      "sha256": "1c868c18459fe3a23b687ed28a320ca3e786d42ca5b989d06493a2c8c57bbfd5"
+    },
+    {
+      "path": "requests-ledger.json",
+      "bytes": 4975,
+      "sha256": "8607a440d0dbd81a0fbac72005c99e2097636da7b72db3f82b2541532220490f"
+    },
+    {
+      "path": "source-bindings.json",
+      "bytes": 1632,
+      "sha256": "247ff04cdbb83ad9180ff798abfbe8a124f5ec4d336a065f12fc1b1954d89ca7"
+    },
+    {
+      "path": "source-freeze.json",
+      "bytes": 3160,
+      "sha256": "5739cd06d846b5cc9c2aaba8e2118b2990f602e1fc790e9dac7dc4b378c939ab"
+    },
+    {
+      "path": "sources/github.com/minio/minio/README.md",
+      "bytes": 8960,
+      "sha256": "aae99b6e35489bb26bfba4290ac567861d123230d1831562b6aee8c1363aead3"
+    },
+    {
+      "path": "sources/github.com/minio/minio/commit.json",
+      "bytes": 1269,
+      "sha256": "fb6b48577cd7989f394d139b42aeea452117fbc592eaa25108e863ba454cc571"
+    },
+    {
+      "path": "sources/github.com/realm/SwiftLint/README.md",
+      "bytes": 38416,
+      "sha256": "b1490448cf43b1319e87686239617bc8dfe6f60b725ed9cb8f81b326d124c534"
+    },
+    {
+      "path": "sources/github.com/realm/SwiftLint/commit.json",
+      "bytes": 3823,
+      "sha256": "e81521e70fa211cd9e60bd3f683319472168edaa98aa1b61516cb3273b5cd794"
+    },
+    {
+      "path": "targets/swiftlint-documentation-index.html",
+      "bytes": 85671,
+      "sha256": "bf89bac5f9749fa1c172ba65013fa43840b50225660602ebd114ad47ac9081fb"
+    },
+    {
+      "path": "targets/swiftlint-rule-directory.html",
+      "bytes": 63118,
+      "sha256": "c1d6ef04e87845f2c6e541a27c1b2ae011a868389d717dfbeb995169bdc32226"
+    }
+  ]
+}

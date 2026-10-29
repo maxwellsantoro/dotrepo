@@ -1,0 +1,25 @@
+   Compiling dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.80s
+     Running tests/import_quality_gate.rs (target/debug/deps/import_quality_gate-0c9f2def4d15fcd0)
+
+running 2 tests
+test imported_context_candidates_are_valid_and_exactly_value_bound ... ok
+test import_quality_gate_matches_checked_in_expectations ... FAILED
+
+failures:
+
+---- import_quality_gate_matches_checked_in_expectations stdout ----
+
+thread 'import_quality_gate_matches_checked_in_expectations' (41590082) panicked at crates/dotrepo-core/tests/import_quality_gate.rs:91:5:
+assertion `left == right` failed
+  left: None
+ right: Some("https://redis.readthedocs.io/en/stable/")
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    import_quality_gate_matches_checked_in_expectations
+
+test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.17s
+
+error: test failed, to rerun pass `-p dotrepo-core --test import_quality_gate`

@@ -1,0 +1,7 @@
+{
+  "stagedFilesCompared": 547,
+  "allStagedBlobsMatchWorkingBytes": true,
+  "attributesSha256": "32eaa0af6e795c45eb0c4909781e3c9f40d5eb8b7b7104be5f9a163a758bc17b",
+  "scope": "Narrow existing -text/-whitespace evidence policy extended to new frozen packets. Preserve tool whitespace and patch context, and prevent platform text conversion. Live source whitespace check passed. No code/index fact/dependency inputs changed after final gates.",
+  "initialDiffCheck": "Unscoped whitespace check reported raw tool log and retained patch whitespace; no evidence bytes stripped or rewritten. Existing .gitattributes policy applied before final push."
+}

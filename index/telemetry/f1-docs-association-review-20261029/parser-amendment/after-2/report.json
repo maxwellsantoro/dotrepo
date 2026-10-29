@@ -1,0 +1,63 @@
+{
+  "disposition": "pass for bounded documentation association repair; no remaining blocking finding",
+  "priorFindings": [
+    {
+      "finding": "Physical docs/start prefix overrides full paragraph ownership",
+      "beforeFreezeSha256": "da3832db715ec2d9cb356dcdf98f4708b895c3bd3a931413e0a49095af1554ca",
+      "disposition": "closed by full paragraph prefix declaration check; exact4controls and validneighbors pass"
+    },
+    {
+      "finding": "Physical bare URL under docs heading overrides trailing integration owner",
+      "beforeFreezeSha256": "cf44e8af18fd27831c8751ec09b178fd0c129b9902be898f596c159d00d517cc",
+      "disposition": "closed by whole rendered paragraph URL equality; originalcase+7neighboringbare/intro cases pass"
+    }
+  ],
+  "actualControls": {
+    "syntheticImports": 38,
+    "retainedRealReadmeImports": 2,
+    "mismatches": 0,
+    "cargoBuilds": 0,
+    "networkUpstreamProviderCalls": 0
+  },
+  "sourceSha256": {
+    "crates/dotrepo-core/src/import/parsing/markdown.rs": "aa0f205d9447143eca5f831feb569562fcc5d3ae01031615a7d8c90ec7e29674",
+    "crates/dotrepo-core/src/import/parsing/markdown/docs_tests.rs": "f62f4fd3a3cb3468d64cf5245123d7fc08c7c539cded250596595e9a880ba836"
+  },
+  "stableCopiedCli": {
+    "path": "/tmp/dotrepo-docs-bare-url-review-cli-20261029",
+    "sha256": "79a4e70fb5c6e80708c27230e6958b51217727069f957d823215c494ab4b0b61"
+  },
+  "authorAmendment2FreezeSha256": "3173ed08ae307f812cec925b9df66a0fcb1973dbf2212b21f299989d11184fd0",
+  "complexityReview": {
+    "structure": "DocsParagraphCache stores start..end and reuses it during monotone line traversal. Every nonempty paragraph render/classification is built once for its range; list continuations retain predecessor owner. Multi-link mixed paragraphs short-circuit direct whole-prose checks. Complete independent prefix/navigation rows are cached as declarations.",
+    "longControls": [
+      {
+        "case": "long-contiguous-1000",
+        "bytes": 41410,
+        "elapsedSeconds": 0.0663123328704387,
+        "root": null
+      },
+      {
+        "case": "long-contiguous-4000",
+        "bytes": 168610,
+        "elapsedSeconds": 0.25079850014299154,
+        "root": null
+      },
+      {
+        "case": "long-contiguous-12000",
+        "bytes": 509610,
+        "elapsedSeconds": 0.7538912920281291,
+        "root": null
+      }
+    ],
+    "limit": "Observed whole CLI timings on shared host, not formal universal complexity proof. Existing per-line link extraction helpers and arbitrary malformed Markdown/HTML are not globally requalified."
+  },
+  "limits": [
+    "Bounded lexical source association; unknown forms may abstain. No domain/owner blacklist used.",
+    "Real README-only imports abstain selected wrong fields without guessing reviewed replacement roots; full crawler refresh and independent external consumption untested.",
+    "Public assessment timestamp semantics and the two corrected records remain unchanged; independent record review already frozen.",
+    "Coordinator combined core/public/release gates still required on final integrated inputs."
+  ],
+  "priorArtifactsUnchanged": true,
+  "reviewerProductionEdits": false
+}

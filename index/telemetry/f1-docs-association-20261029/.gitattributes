@@ -1,0 +1,4 @@
+# Exact upstream source/HTML bytes are evidence, not formatting inputs.
+sources/** -whitespace
+targets/** -whitespace
+parser-replay/**/README.md -whitespace

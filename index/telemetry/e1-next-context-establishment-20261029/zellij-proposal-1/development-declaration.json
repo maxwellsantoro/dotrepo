@@ -1,0 +1,132 @@
+{
+  "identity": "e1-next-context-establishment-20261029/zellij-proposal-1",
+  "date": "2026-10-29",
+  "repository": "github.com/zellij-org/zellij",
+  "revision": "1f3df933978e00c246553070310175c392fcfe4f",
+  "taskId": "e1-rust-01-repository-tests",
+  "taskIntent": "Establish the maintainer-documented repository-default automated test instruction with complete applicability context; preserve separately documented optional/e2e/ignored-suite limitations.",
+  "declarationBoundary": "Declared repository/task as known development before any code/grammar/high rule. Original qualification source/gold/results unchanged. Prior implementation and gold review context disclosed; new assessment is not fresh holdout or consumer use.",
+  "originalScope": "repository",
+  "commandUnchanged": "cargo xtask test",
+  "directory": ".",
+  "component": null,
+  "startingGoldState": "supported",
+  "startingEvaluationDisposition": "supported-miss",
+  "goldOwner": {
+    "path": "benchmarks/head-to-head/e1-qualification-20261029/gold-rust.json",
+    "sha256": "192b055297b9a81f3632b6fbcd87b555123a2af905cc86ed810200a1c6435407"
+  },
+  "resultOwner": {
+    "path": "benchmarks/head-to-head/e1-qualification-20261029/evaluation-rust/run-001/results.json",
+    "sha256": "9de67de0301882d16cf62069d9d686c9c0b5041c8550c633ffe3fef9f3997f3e",
+    "taskRow": {
+      "applicabilityDisposition": "supported-miss",
+      "component": null,
+      "consumerSelection": {
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ],
+        "instruction": null,
+        "provenance": null
+      },
+      "exportExitCode": 0,
+      "goldState": "supported",
+      "id": "e1-rust-01-repository-tests",
+      "importExitCode": 0,
+      "profileSha256": "a7eac565caef2de4ba05544feba70d23b82d968c1e7309b387e8514f8afb5337",
+      "recoveredInstructions": [
+        {
+          "command": "cargo test --workspace",
+          "context": null,
+          "origin": "scalar",
+          "structurallyComplete": false
+        }
+      ],
+      "repository": "github.com/zellij-org/zellij",
+      "request": {
+        "scope": "repository"
+      },
+      "revision": "1f3df933978e00c246553070310175c392fcfe4f",
+      "scope": "repository"
+    }
+  },
+  "retainedSourceInputs": [
+    {
+      "path": "CONTRIBUTING.md",
+      "retainedPath": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/zellij-org/zellij/CONTRIBUTING.md",
+      "bytes": 12601,
+      "sha256": "2c4575e7a3575609fdde406b8c87f3df53802460dbfb03b4253f4330ab37f63a",
+      "url": "https://github.com/zellij-org/zellij/blob/1f3df933978e00c246553070310175c392fcfe4f/CONTRIBUTING.md"
+    },
+    {
+      "path": "rust-toolchain.toml",
+      "retainedPath": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/zellij-org/zellij/rust-toolchain.toml",
+      "bytes": 317,
+      "sha256": "733cf0884a5f62e74d4362b290704b572061e71e9f7989096aef165f99de0fdf",
+      "url": "https://github.com/zellij-org/zellij/blob/1f3df933978e00c246553070310175c392fcfe4f/rust-toolchain.toml"
+    },
+    {
+      "path": ".cargo/config.toml",
+      "retainedPath": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/zellij-org/zellij/.cargo/config.toml",
+      "bytes": 301,
+      "sha256": "d42813632ce542b468c718473de1a4a6c8f6d302c534717a2f19b7aef10dbc3e",
+      "url": "https://github.com/zellij-org/zellij/blob/1f3df933978e00c246553070310175c392fcfe4f/.cargo/config.toml"
+    },
+    {
+      "path": "Cargo.toml",
+      "retainedPath": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/zellij-org/zellij/Cargo.toml",
+      "bytes": 8638,
+      "sha256": "c02efc9801eefadf579135c968cafe27d2d5e12b86ac5e020ec39fe2130829a2",
+      "url": "https://github.com/zellij-org/zellij/blob/1f3df933978e00c246553070310175c392fcfe4f/Cargo.toml"
+    },
+    {
+      "path": "xtask/src/main.rs",
+      "retainedPath": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/zellij-org/zellij/xtask/src/main.rs",
+      "bytes": 7625,
+      "sha256": "5e213118f58efae8bd039ff4436dc6fc4e8b4aeaa44472dba764101643b30df3",
+      "url": "https://github.com/zellij-org/zellij/blob/1f3df933978e00c246553070310175c392fcfe4f/xtask/src/main.rs"
+    },
+    {
+      "path": "xtask/src/test.rs",
+      "retainedPath": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/zellij-org/zellij/xtask/src/test.rs",
+      "bytes": 5242,
+      "sha256": "561daa9a37efaf44ba285aa88669fb9228de402696bb25e310340238b021e0cb",
+      "url": "https://github.com/zellij-org/zellij/blob/1f3df933978e00c246553070310175c392fcfe4f/xtask/src/test.rs"
+    },
+    {
+      "path": "xtask/src/build.rs",
+      "retainedPath": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/zellij-org/zellij/xtask/src/build.rs",
+      "bytes": 11812,
+      "sha256": "ae5fcc92076183ff7e1fea0555576ea660933721600af3d00ba7e824a46cc378",
+      "url": "https://github.com/zellij-org/zellij/blob/1f3df933978e00c246553070310175c392fcfe4f/xtask/src/build.rs"
+    }
+  ],
+  "rationale": "Of exposed Rust gold: Warp is unresolved setup; Photocraft default carries many platform/optional font/corpus/GPU distinctions. Zellij explicitly documents one unchanged xtask test recipe, protoc/pkg-config/OpenSSL setup, a pinned Rust toolchain/targets and target-dir constraint. Retained alias, dispatcher and test/build bodies bind owning root and scope; prefer bounded natural source contract over another generalized framework.",
+  "independentSourceGoldAsStartingAssertion": [
+    {
+      "command": "cargo xtask test",
+      "working_directory": ".",
+      "scope": "repository",
+      "prerequisites": [
+        "Use the pinned Rust 1.95.0 toolchain and its rustfmt/clippy components; install the wasm32-wasip1 and x86_64-unknown-linux-musl targets declared by rust-toolchain.toml.",
+        "Install protoc for protobuf generation.",
+        "Install pkg-config and OpenSSL for the test task.",
+        "Preserve the repository target-dir configuration and do not override CARGO_TARGET_DIR for the debug/plugin build."
+      ],
+      "source": "CONTRIBUTING.md"
+    }
+  ],
+  "sourceQuestionsForRoot": [
+    "Preserve toolchain/targets and protoc/pkg-config/OpenSSL as documented, including target-dir and no CARGO_TARGET_DIR override. Do not replace xtask with cargo test or add no-web/no-terminal flags.",
+    "Default test route builds/plugins through retained build.rs, tests aggregate plugin packages and other workspace crates, and performs feature-optional checks; no component-only or all-e2e claim.",
+    "Retained test.rs refers to metadata/flags modules not present in this selected source set. Root assessor should decide if maintainer setup/default recipe plus retained orchestration is sufficient or identify one precise source gap; no new acquisition authorized here.",
+    "Root .cargo/config contains Windows GNU linker clause; any cross-platform claim must retain actual toolchain/platform conditions or be bounded honestly."
+  ],
+  "permissions": {
+    "codeEdits": false,
+    "newNetwork": false,
+    "cargoUpstreamExecution": false,
+    "confidencePromotion": false,
+    "parserAfterReviewTakesPriority": true
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "actualPreparationExecuted": false,
+  "costUsd": null,
+  "daemonNetworkProviderCalls": 0,
+  "limitations": [
+    "No live download or task execution.",
+    "Cache/source audit flags remain false.",
+    "Package-manager hooks are disabled; equivalence to normal setup is unresolved."
+  ],
+  "localSourcePreflight": "passed: 68062 regular files; 218783760 expanded bytes; 125 protected digests",
+  "nativeCollectionOccurred": false,
+  "ownedTransportControlsPassed": 7,
+  "ruffCheck": "passed: uv run --offline --no-sync ruff check --no-cache <packet>",
+  "ruffFormat": "passed: uv run --offline --no-sync ruff format --check --no-cache <packet>; 6 files already formatted",
+  "state": "plan-only-handoff",
+  "syntheticControlsPassed": 32
+}

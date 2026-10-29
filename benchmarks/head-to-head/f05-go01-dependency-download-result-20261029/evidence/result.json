@@ -1,0 +1,48 @@
+{
+  "taskId": "go-01",
+  "state": "download-cache-retained-unqualified",
+  "stage": "archive-validation",
+  "synthetic": false,
+  "startedAt": "2026-10-29T08:55:10.939220+00:00",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered host/container/download dollar receipt."
+  ],
+  "cacheAuditQualified": false,
+  "draftAuditFlags": {
+    "downloadOnly": false,
+    "buildOutputsExcluded": false,
+    "taskSourceExcluded": false,
+    "credentialsExcluded": false
+  },
+  "nativeCollectionOccurred": false,
+  "taskOutcomeObserved": false,
+  "modelCalls": 0,
+  "daemonCalls": 24,
+  "cleanupAttempted": true,
+  "containerAbsent": true,
+  "ownedContainer": "dotrepo-go01-download-fc0698f62c78",
+  "containerCreateAttempted": true,
+  "authorizationSha256": "f292bae0bf13a34a0bfa37b5d1ed1911ec64c172ef041f3c370c62767df52dfc",
+  "planSha256": "eceef38492e2b70a98c5984174e5ea8141effb3d0b3412dd788dc950e0eadfa3",
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+  "preflightSeconds": 2.4207280830014497,
+  "downloadSeconds": 15.515584291191772,
+  "networkBytes": {
+    "received": 171425424,
+    "sent": 1121785,
+    "basis": "container interface counters; includes protocol/incidental traffic"
+  },
+  "cacheArchivePath": "/private/tmp/dotrepo-go01-dependency-download-cache-20261029-1/cache.tar",
+  "cacheArchiveSha256": "583fad501fa7b1a1a6d85ab8fe4b890786e39c1e016f785d6d3fb9d060383284",
+  "cacheExpandedBytes": 351962210,
+  "cacheFiles": 15246,
+  "workElapsedSeconds": 29.433992125093937,
+  "workBudgetExceeded": false,
+  "cleanupExitCode": 0,
+  "cleanupSeconds": 0.5493352089542896,
+  "cleanupBudgetExceeded": false,
+  "elapsedSeconds": 29.98334233299829,
+  "finalizationSeconds": 0.20916575007140636
+}

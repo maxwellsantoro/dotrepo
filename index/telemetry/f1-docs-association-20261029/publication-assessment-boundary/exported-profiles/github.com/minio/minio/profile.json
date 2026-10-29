@@ -1,0 +1,149 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T08:40:00Z",
+    "snapshotDigest": "51fa687deb7b08913b721401c7efea724279c88608bb21832919272a7530342e"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "minio",
+    "repo": "minio",
+    "source": "https://github.com/minio/minio"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/minio/minio/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/minio/minio",
+    "generatedAt": "2026-10-04T07:53:35.951591156Z",
+    "evidencePath": "repos/github.com/minio/minio/evidence.md",
+    "freshnessStatus": "fresh",
+    "ageDays": 25,
+    "staleAfterDays": 30,
+    "sourceRevision": "7aac2a2c5b7c882e68c1ce017d8256be2feea27f"
+  },
+  "purpose": "MinIO is a high-performance, S3 compatible object store, open sourced under GNU AGPLv3 license.",
+  "name": "MinIO Quickstart Guide",
+  "homepage": "https://github.com/minio/minio",
+  "license": "AGPL-3.0",
+  "visibility": "public",
+  "languages": [
+    "Go",
+    "Shell",
+    "Makefile",
+    "Mustache",
+    "Go Template",
+    "Dockerfile"
+  ],
+  "topics": [
+    "go",
+    "storage",
+    "cloud",
+    "s3",
+    "objectstorage",
+    "cloudstorage",
+    "amazon-s3",
+    "cloudnative",
+    "k8s",
+    "kubernetes",
+    "multi-cloud",
+    "multi-cloud-kubernetes"
+  ],
+  "execution": {
+    "build": "make build",
+    "test": "make test"
+  },
+  "docs": {
+    "gettingStarted": "https://github.com/minio/minio/blob/7aac2a2c5b7c882e68c1ce017d8256be2feea27f/README.md#install-from-source"
+  },
+  "ownership": {
+    "securityContact": "security@min.io"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "imported",
+    "confidence": "medium",
+    "provenance": [
+      "imported"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "fieldEvidence": {
+    "docs.root": {
+      "checkedAt": "2026-10-04T07:53:35.951591156Z",
+      "confidence": "high",
+      "method": "not_found_in_inspected_sources",
+      "reason": "no unambiguous documentation declaration detected",
+      "state": "not_found"
+    },
+    "owners.security_contact": {
+      "checkedAt": "2026-10-04T07:53:35.951591156Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "direct email or mailing list",
+      "source": "SECURITY.md",
+      "state": "present"
+    },
+    "owners.team": {
+      "checkedAt": "2026-10-04T07:53:35.951591156Z",
+      "confidence": "high",
+      "method": "not_found_in_inspected_sources",
+      "reason": "no single clear team in CODEOWNERS",
+      "state": "not_found"
+    },
+    "repo.build": {
+      "checkedAt": "2026-10-04T07:53:35.951591156Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "from declared repository source",
+      "source": "Makefile",
+      "state": "present"
+    },
+    "repo.description": {
+      "checkedAt": "2026-10-04T07:53:35.951591156Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "constrained by GitHub repository metadata",
+      "source": "GitHub API",
+      "state": "present"
+    },
+    "repo.homepage": {
+      "checkedAt": "2026-10-04T07:53:35.951591156Z",
+      "confidence": "high",
+      "method": "unspecified",
+      "reason": "set and passes quality check",
+      "state": "present"
+    },
+    "repo.name": {
+      "checkedAt": "2026-10-04T07:53:35.951591156Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "extracted from README title with post-cleaners",
+      "source": "README.md",
+      "state": "present"
+    },
+    "repo.test": {
+      "checkedAt": "2026-10-04T07:53:35.951591156Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "from declared repository source",
+      "source": "Makefile",
+      "state": "present"
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/minio/minio/profile.json",
+    "repository": "/v0/repos/github.com/minio/minio/index.json",
+    "trust": "/v0/repos/github.com/minio/minio/trust.json",
+    "queryTemplate": "/v0/repos/github.com/minio/minio/query?path={dot_path}",
+    "indexPath": "repos/github.com/minio/minio/"
+  }
+}

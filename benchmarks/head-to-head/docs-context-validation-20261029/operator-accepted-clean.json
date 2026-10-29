@@ -1,0 +1,53 @@
+{
+  "claimPath": "repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-01/claim.toml",
+  "state": "accepted",
+  "kind": "maintainer_authority",
+  "identity": {
+    "host": "github.com",
+    "owner": "acme",
+    "repo": "widget"
+  },
+  "claimant": {
+    "display_name": "Acme maintainers",
+    "asserted_role": "maintainer",
+    "contact": "maintainers@acme.dev"
+  },
+  "target": {
+    "indexPaths": [
+      "repos/github.com/acme/widget/record.toml"
+    ],
+    "recordSources": [
+      "https://github.com/acme/widget"
+    ],
+    "canonicalRepoUrl": "https://github.com/acme/widget",
+    "handoff": "superseded"
+  },
+  "resolution": {
+    "canonical_record_path": ".repo",
+    "canonical_mirror_path": "repos/github.com/acme/widget/record.toml",
+    "result_event": "events/0002-accepted.toml"
+  },
+  "reviewPath": "repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-01/review.md",
+  "events": [
+    {
+      "path": "repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-01/events/0001-submitted.toml",
+      "sequence": 1,
+      "kind": "submitted",
+      "timestamp": "2026-03-10T14:30:00Z",
+      "actor": "claimant",
+      "summary": "Submitted maintainer claim.",
+      "from": "draft",
+      "to": "submitted"
+    },
+    {
+      "path": "repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-01/events/0002-accepted.toml",
+      "sequence": 2,
+      "kind": "accepted",
+      "timestamp": "2026-03-12T09:15:00Z",
+      "actor": "index-reviewer",
+      "summary": "Accepted maintainer claim after identity review.",
+      "from": "submitted",
+      "to": "accepted"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "attemptCount": 1,
+  "authorizationSha256": "f292bae0bf13a34a0bfa37b5d1ed1911ec64c172ef041f3c370c62767df52dfc",
+  "cacheArchiveBytes": 366622720,
+  "cacheArchivePath": "/private/tmp/dotrepo-go01-dependency-download-cache-20261029-1/cache.tar",
+  "cacheArchiveSha256": "583fad501fa7b1a1a6d85ab8fe4b890786e39c1e016f785d6d3fb9d060383284",
+  "cacheAuditQualified": false,
+  "cacheExpandedBytes": 351962210,
+  "cacheFiles": 15246,
+  "cleanupSeconds": 0.5493352089542896,
+  "containerAbsent": true,
+  "costExclusions": [
+    "No metered host/container/download dollar receipt."
+  ],
+  "costUsd": null,
+  "downloadSeconds": 15.515584291191772,
+  "draftAuditFlags": {
+    "buildOutputsExcluded": false,
+    "credentialsExcluded": false,
+    "downloadOnly": false,
+    "taskSourceExcluded": false
+  },
+  "driverDaemonCalls": 24,
+  "driverResultSha256": "de67147b4e6cef16866cea03052c286d95a64dd5794631e3a19750a4282f6b36",
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "limits": [
+    "Cache content/semantic/credential audit remains independent; no campaign admission.",
+    "npm lifecycle hooks disabled; normal npm setup equivalence unresolved.",
+    "LinuxARM64 Docker container on macOS, not native Linux host/x86.",
+    "Counters include protocol/incidental traffic; no complete HTTP request accounting.",
+    "Native collection, exclusion-policy acceptance and full-wrapper task qualification remain separate."
+  ],
+  "modelCalls": 0,
+  "nativeCollectionOccurred": false,
+  "networkBytes": {
+    "basis": "container interface counters; includes protocol/incidental traffic",
+    "received": 171425424,
+    "sent": 1121785
+  },
+  "observations": [
+    "npm added168packages; informational npm12.2.1 update notice. No update performed.",
+    "All three frozen package-download commands exited0; Go download stdout/stderr empty.",
+    "Tools unchanged; original tracked-source byte checks passed before and after."
+  ],
+  "planSha256": "eceef38492e2b70a98c5984174e5ea8141effb3d0b3412dd788dc950e0eadfa3",
+  "preflightSeconds": 2.4207280830014497,
+  "retried": false,
+  "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+  "rootInventorySummary": {
+    "go/pkg/mod": {
+      "expandedBytes": 278162103,
+      "files": 14922
+    },
+    "npm-cache/_cacache": {
+      "expandedBytes": 73800107,
+      "files": 324
+    }
+  },
+  "separateReadonlyAbsenceDaemonCalls": 2,
+  "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+  "state": "download-cache-retained-unqualified",
+  "taskId": "go-01",
+  "taskOutcomeObserved": false,
+  "totalSeconds": 29.98334233299829,
+  "workSeconds": 29.433992125093937
+}

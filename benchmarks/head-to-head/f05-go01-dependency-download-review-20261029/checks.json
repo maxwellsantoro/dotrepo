@@ -1,0 +1,63 @@
+{
+  "commands": [
+    {
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-sync",
+        "python",
+        "-B",
+        "benchmarks/head-to-head/f05-go01-dependency-download-review-20261029/audit.py"
+      ],
+      "exitCode": 0,
+      "log": "audit-complete.log"
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-sync",
+        "python",
+        "-B",
+        "benchmarks/head-to-head/f05-go01-dependency-download-review-20261029/classify.py"
+      ],
+      "exitCode": 0,
+      "log": "classify-final.log"
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-sync",
+        "ruff",
+        "check",
+        "--no-cache",
+        "benchmarks/head-to-head/f05-go01-dependency-download-review-20261029/audit.py",
+        "benchmarks/head-to-head/f05-go01-dependency-download-review-20261029/classify.py"
+      ],
+      "exitCode": 0,
+      "log": "ruff-final2.log"
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-sync",
+        "ruff",
+        "format",
+        "--check",
+        "--no-cache",
+        "benchmarks/head-to-head/f05-go01-dependency-download-review-20261029/audit.py",
+        "benchmarks/head-to-head/f05-go01-dependency-download-review-20261029/classify.py"
+      ],
+      "exitCode": 0,
+      "log": "format-check.log"
+    }
+  ],
+  "allOriginalFlagsUnchanged": true,
+  "noNewExternalOrDaemonOrNativeCalls": true
+}

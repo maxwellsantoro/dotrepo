@@ -2,17 +2,16 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/minio/minio"
 generated_at = "2026-10-04T07:53:35.951591156Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, `Makefile`, and `go.mod`. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, `Makefile`, and `go.mod`. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Bounded F1 source inspection corrected docs.getting_started association on 2026-10-29. Whole-record verification withdrawn; other fields and the original generated_at were not refreshed."
 
 [repo]
 name = "MinIO Quickstart Guide"
@@ -54,16 +53,20 @@ maintainers = []
 security_contact = "security@min.io"
 
 [docs]
-getting_started = "https://docs.min.io/community/minio-object-store/reference/minio-mc.html#quickstart"
+getting_started = "https://github.com/minio/minio/blob/7aac2a2c5b7c882e68c1ce017d8256be2feea27f/README.md#install-from-source"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-04T07:53:35.951591156Z"
+checkedAt = "2026-10-29T08:36:31.832479Z"
 confidence = "high"
-method = "extracted"
-reason = "Explicit documentation link at README.md:153: Follow the MinIO Client [Quickstart Guide](https://docs.min.io/community/minio-object-store/reference/minio-mc.html#quickstart) for further instructions."
-source = "README.md"
+method = "source_inspection"
+reason = "Pinned README lines 139-153 explicitly scopes the old Quickstart Guide link to the separate MinIO Client mc. For this server repository, README lines 23-24 declares that the README supplies source-build and baremetal deployment instructions, lines 59-89 provides Install from Source and standalone-server startup, and line 99 explicitly links #install-from-source. The replacement resolves that declared fragment against the exact immutable README URL. This is server getting-started documentation, not proof that commands execute or that the unmaintained project is currently supported."
+source = "https://github.com/minio/minio/blob/7aac2a2c5b7c882e68c1ce017d8256be2feea27f/README.md"
+sourceRevision = "7aac2a2c5b7c882e68c1ce017d8256be2feea27f"
+sourceSha256 = "aae99b6e35489bb26bfba4290ac567861d123230d1831562b6aee8c1363aead3"
+audit = "index/telemetry/f1-docs-association-20261029/assessments.json"
+disposition = "corrected-source-association"
 state = "present"
-valueJson = '"https://docs.min.io/community/minio-object-store/reference/minio-mc.html#quickstart"'
+valueJson = "\"https://github.com/minio/minio/blob/7aac2a2c5b7c882e68c1ce017d8256be2feea27f/README.md#install-from-source\""
 
 [x.dotrepo.field_evidence."docs.root"]
 checkedAt = "2026-10-04T07:53:35.951591156Z"

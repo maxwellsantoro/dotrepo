@@ -1,0 +1,19 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://example.test/orbit"
+generated_at = "2026-10-29T09:00:02.043378Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Orbit"
+description = "Orbit documentation for setup."
+homepage = "https://example.test/orbit"
+languages = []
+topics = []

@@ -1,0 +1,34 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://example.test/orbit"
+generated_at = "2026-10-29T09:00:02.114507Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md`. Filled `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Orbit"
+description = "Imported repository metadata; review and refine before relying on it."
+homepage = "https://example.test/orbit"
+languages = []
+topics = []
+
+[docs]
+getting_started = "https://shared.example/orbit/manual"
+
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-10-29T09:00:02.114507Z"
+confidence = "high"
+method = "extracted"
+reason = "Explicit documentation link at README.md:3: Getting started: [guide](https://shared.example/orbit/manual)"
+source = "README.md"
+state = "present"
+valueJson = '"https://shared.example/orbit/manual"'

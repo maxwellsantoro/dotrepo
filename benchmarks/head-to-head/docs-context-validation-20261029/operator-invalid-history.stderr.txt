@@ -1,0 +1,4 @@
+index validation failed:
+- repos/github.com/acme/widget/record.toml: overlay records must not use reviewed or canonical status without an accepted maintainer claim
+- repos/github.com/acme/widget/claims/2026-03-16-maintainer-claim-01/claim.toml: claim events must use contiguous sequence numbers starting at 1; expected 1, found 2 in repos/github.com/acme/widget/claims/2026-03-16-maintainer-claim-01/events/0002-submitted.toml
+- repos/github.com/acme/widget/claims/2026-03-16-maintainer-claim-01/claim.toml: claim.state is Accepted, but replayed event history resolves to Submitted

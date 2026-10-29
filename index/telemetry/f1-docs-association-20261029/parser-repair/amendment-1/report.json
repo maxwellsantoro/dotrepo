@@ -1,0 +1,42 @@
+{
+  "state": "focused-pass-independent-retest-pending",
+  "independentBeforeCases": 19,
+  "independentBeforeMismatches": 4,
+  "amendedReplayCases": 22,
+  "amendedReplayMismatches": 0,
+  "docsFilteredTestsPassed": 20,
+  "newTestsTotal": 12,
+  "existingParsingTestsPassed": 31,
+  "fixtureGateTestsPassed": 2,
+  "sharedExpectationsEditedByWorker": false,
+  "clippy": "core all-targets pass",
+  "format": "owned Rust files pass",
+  "firstPartyCliBuild": "pass",
+  "sourceOnly": true,
+  "newNetworkProviderUpstreamCalls": 0,
+  "retainedFailures": [
+    {
+      "path": "checks/docs-tests.log",
+      "detail": "First amendment rejected existing bold **Documentation** prefix; prefix-token emphasis restored, without stripping surrounding prose."
+    },
+    {
+      "path": "checks/fixture-gate.log",
+      "detail": "First whole-paragraph single-prefix rule over-withheld adjacent complete Documentation/Getting Started rows; cached complete-row classification preserves both."
+    }
+  ],
+  "additionalBeforeObservation": {
+    "path": "additional-owner-boundary.json",
+    "cliSha256": "04f5e2aa8d80ce1701fb7ec2cbab7e431242dac7adb1aed41d73e93b9479ef8b",
+    "detail": "Old frozen binary admitted third-party docs-intro + later bare URL; current binary rejects same input."
+  },
+  "limits": [
+    "Bounded lexical source association; no complete Markdown/HTML semantic ownership proof.",
+    "A complete standalone/nav/badge declaration is treated as an author declaration, independent of domain.",
+    "Complete direct declaration rows are classified once in the cached paragraph; a paragraph containing other prose retains its full subject.",
+    "Prefix eligibility is exact after one list marker and optional prefix emphasis/terminal period; broader true prose may abstain.",
+    "Own docs-intro continuation is a bounded set of neutral/current-project phrases, not an arbitrary subject parser.",
+    "Existing per-physical-line link helper complexity is unchanged; the cache control is not a universal complexity proof.",
+    "No replacement URL inference, URI resolution, confidence promotion, target runtime/version check, or whole crawler refresh.",
+    "Original record/source freezes and historical failure receipts remain unchanged."
+  ]
+}

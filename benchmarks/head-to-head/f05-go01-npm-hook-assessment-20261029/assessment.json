@@ -1,0 +1,63 @@
+{
+  "cacheAuditQualified": false,
+  "costExclusion": "Unmetered bounded local source-data inspection only.",
+  "costUsd": null,
+  "equivalenceEstablished": false,
+  "executionOccurred": false,
+  "identitiesDeclaredBeforeHookBodies": true,
+  "identitiesSha256": "ad4aafcd5e1b8a4b6a31ebc758f4028c27154b8960bf138fff98975a5a4157bd",
+  "nativeCollectionOccurred": false,
+  "networkDockerProviderCalls": 0,
+  "packages": [
+    {
+      "disposition": "not globally equivalent; default-task irrelevance not proven",
+      "frozenPlatformBranch": "linux-arm64 from platform/arch and non-Alpine os-release",
+      "hook": "node ./src/postinstall.js",
+      "ignoredHookDifference": "Own-bin copy is omitted; runtime main expects own-bin path. No demonstrated lazy repair in retained main.",
+      "name": "@vscode/vsce-sign",
+      "normalSetupEffects": [
+        "Copy optional @vscode/vsce-sign-linux-arm64/bin/vsce-sign into own bin/vsce-sign.",
+        "Missing optional resolution invokes nested npm install; if that fails, direct registry download/extraction/chmod."
+      ],
+      "taskRelevance": "Extension signing behavior is not exercised by the static test:tsc task definition, but complete module-loading/use closure is not established here.",
+      "version": "2.1.0"
+    },
+    {
+      "disposition": "conditional lazy fallback supported by source; no runtime equivalence established",
+      "frozenPlatformBranch": "linux-arm64-glibc conditional on retained Debian image and detector behavior",
+      "hook": "node ./install.cjs",
+      "ignoredHookDifference": "Skips eager setup and .bin optimization. bin.cjs can invoke same runInstall lazily when called; this may still mutate files, probe libc, download or fail.",
+      "name": "dprint",
+      "normalSetupEffects": [
+        "Resolve optional native package, link/copy executable into dprint and chmod executable.",
+        "Optimize .bin entry; optimization failures are swallowed.",
+        "Missing optional native package can download registry tar via curl/Node, verify hash, write/chmod."
+      ],
+      "taskRelevance": "Formatter task is separate from the static test alias; full imported module closure remains unresolved.",
+      "version": "0.57.4"
+    },
+    {
+      "disposition": "candidate lazy resolver exists; no setup/binary-validation equivalence established",
+      "frozenPlatformBranch": "linux arm64 LE selects @esbuild/linux-arm64/bin/esbuild; manual ESBUILD_BINARY_PATH absent in frozen allowlist",
+      "hook": "node install.js",
+      "ignoredHookDifference": "No optimization, eager fallback or binary version execution. Retained CLI/API resolve optional binary lazily, but resolution/executability/service behavior is untested.",
+      "name": "esbuild",
+      "normalSetupEffects": [
+        "Resolve optional native binary; fallback nested npm/direct download when unavailable, with hash check on fallback bytes.",
+        "May optimize bin/esbuild by hardlink/rename on non-Windows non-Yarn native paths.",
+        "Execute selected binary via --version and require exact package version."
+      ],
+      "taskRelevance": "No esbuild import appears in the retained Herebyfile static imports; transitively loaded task/helper/package code not exhaustively adjudicated.",
+      "version": "0.28.2"
+    }
+  ],
+  "remainingGates": [
+    "Independent cache-content audit remains pending.",
+    "Offline npm installation/optional-dependency/bin-link resolution under exact frozen npm/platform has not been observed.",
+    "Normal setup hooks perform upstream JavaScript and esbuild native --version; this packet authorizes neither.",
+    "No native executable probe, libc detector execution, task module loading or full-wrapper qualification occurred.",
+    "No new skip exclusions; dynamic skip predicates, future native collection and oracle policy acceptance remain separate."
+  ],
+  "scopeUnchanged": "Full npx hereby test alias/test:tsc ./... wrapper; no new filters or exclusions.",
+  "state": "source-only-disposition-unaccepted"
+}

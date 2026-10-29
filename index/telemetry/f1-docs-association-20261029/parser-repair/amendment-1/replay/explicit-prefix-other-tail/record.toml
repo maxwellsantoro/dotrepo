@@ -1,0 +1,22 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://example.test/orbit"
+generated_at = "2026-10-29T09:00:02.072342Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md`. Filled `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Orbit"
+description = "Imported repository metadata; review and refine before relying on it."
+homepage = "https://example.test/orbit"
+languages = []
+topics = []

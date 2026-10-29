@@ -1,0 +1,122 @@
+{
+  "explicitReadOnlyOperations": 8,
+  "maximumOperations": 12,
+  "remainingBudgetUnused": 4,
+  "connectorCalls": 6,
+  "boundedDirectHttpGets": 2,
+  "automaticRedirects": 0,
+  "connectorInternalHttpCount": "opaque; no wire request/traffic total claimed",
+  "newPackagesProvidersOrUpstreamExecution": 0,
+  "operations": [
+    {
+      "path": "requests/swiftlint-repository.json",
+      "id": "swiftlint-repository",
+      "tool": "mcp__codex_apps__github_get_repo",
+      "arguments": {
+        "repository_full_name": "realm/SwiftLint"
+      },
+      "startedAt": "2026-10-29T08:32:23.428Z",
+      "elapsedMilliseconds": 570,
+      "elapsedSeconds": null,
+      "sha256": "ba00a0796c21c6ebe58b4b0e374228899abc7c3019f70f4f29285275a3f2a57d",
+      "requestWireBytes": "not exposed by connector; raw file payloads or HTTP bodies retained separately"
+    },
+    {
+      "path": "requests/minio-repository.json",
+      "id": "minio-repository",
+      "tool": "mcp__codex_apps__github_get_repo",
+      "arguments": {
+        "repository_full_name": "minio/minio"
+      },
+      "startedAt": "2026-10-29T08:32:23.433Z",
+      "elapsedMilliseconds": 531,
+      "elapsedSeconds": null,
+      "sha256": "fa529552aa22c740d9354a8f92a90b33c6373ce4b4f50baf7d2c9ca7eba2b7f7",
+      "requestWireBytes": "not exposed by connector; raw file payloads or HTTP bodies retained separately"
+    },
+    {
+      "path": "requests/minio-commit.json",
+      "id": "minio-commit",
+      "tool": "mcp__codex_apps__github_fetch",
+      "arguments": {
+        "url": "https://api.github.com/repos/minio/minio/git/commits/7aac2a2c5b7c882e68c1ce017d8256be2feea27f"
+      },
+      "startedAt": "2026-10-29T08:32:42.469Z",
+      "elapsedMilliseconds": 380,
+      "elapsedSeconds": null,
+      "sha256": "8b028707c542913967d7607a33639ad5faf4584e05d4546b91aae53cdf82a39f",
+      "requestWireBytes": "not exposed by connector; raw file payloads or HTTP bodies retained separately"
+    },
+    {
+      "path": "requests/minio-readme.json",
+      "id": "minio-readme",
+      "tool": "mcp__codex_apps__github_fetch_file",
+      "arguments": {
+        "repository_full_name": "minio/minio",
+        "path": "README.md",
+        "ref": "7aac2a2c5b7c882e68c1ce017d8256be2feea27f",
+        "encoding": "base64"
+      },
+      "startedAt": "2026-10-29T08:32:42.469Z",
+      "elapsedMilliseconds": 565,
+      "elapsedSeconds": null,
+      "sha256": "64ef5c5b318a80d3b25d0fef4ce49778169b4df0f64fbf558ff3b82477d65625",
+      "requestWireBytes": "not exposed by connector; raw file payloads or HTTP bodies retained separately"
+    },
+    {
+      "path": "requests/swiftlint-commit.json",
+      "id": "swiftlint-commit",
+      "tool": "mcp__codex_apps__github_fetch",
+      "arguments": {
+        "url": "https://api.github.com/repos/realm/SwiftLint/git/commits/ec4691d9e813a1d3358e82917326b56b0a71d3c9"
+      },
+      "startedAt": "2026-10-29T08:32:42.469Z",
+      "elapsedMilliseconds": 439,
+      "elapsedSeconds": null,
+      "sha256": "e0295eece1c1d86dffe09df6ed56a0ce60251c61bd4e810dfd9fd25467073a03",
+      "requestWireBytes": "not exposed by connector; raw file payloads or HTTP bodies retained separately"
+    },
+    {
+      "path": "requests/swiftlint-readme.json",
+      "id": "swiftlint-readme",
+      "tool": "mcp__codex_apps__github_fetch_file",
+      "arguments": {
+        "repository_full_name": "realm/SwiftLint",
+        "path": "README.md",
+        "ref": "ec4691d9e813a1d3358e82917326b56b0a71d3c9",
+        "encoding": "base64"
+      },
+      "startedAt": "2026-10-29T08:32:42.469Z",
+      "elapsedMilliseconds": 391,
+      "elapsedSeconds": null,
+      "sha256": "4b132fab04266a6cbb4f403cb1415939bbd9ff30571a20aee5b4e45af295a078",
+      "requestWireBytes": "not exposed by connector; raw file payloads or HTTP bodies retained separately"
+    },
+    {
+      "path": "requests/swiftlint-rule-directory.json",
+      "id": "swiftlint-rule-directory",
+      "tool": "bounded direct HTTP GET",
+      "arguments": {
+        "url": "https://realm.github.io/SwiftLint/rule-directory.html"
+      },
+      "startedAt": "2026-10-29T08:34:21.052487+00:00",
+      "elapsedMilliseconds": null,
+      "elapsedSeconds": 0.09866925003007054,
+      "sha256": "1c868c18459fe3a23b687ed28a320ca3e786d42ca5b989d06493a2c8c57bbfd5",
+      "requestWireBytes": "not exposed by connector; raw file payloads or HTTP bodies retained separately"
+    },
+    {
+      "path": "requests/swiftlint-documentation-index.json",
+      "id": "swiftlint-documentation-index",
+      "tool": "bounded direct HTTP GET",
+      "arguments": {
+        "url": "https://realm.github.io/SwiftLint/index.html"
+      },
+      "startedAt": "2026-10-29T08:34:31.315054+00:00",
+      "elapsedMilliseconds": null,
+      "elapsedSeconds": 0.11560679110698402,
+      "sha256": "7dade736fce38ef3522673597edbf2d58a03136e51cff0aaeb6300126d785c87",
+      "requestWireBytes": "not exposed by connector; raw file payloads or HTTP bodies retained separately"
+    }
+  ]
+}

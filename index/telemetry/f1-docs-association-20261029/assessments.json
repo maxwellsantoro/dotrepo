@@ -1,0 +1,131 @@
+{
+  "schema": "dotrepo-f1-docs-association-assessments/v1",
+  "assessedAt": "2026-10-29T08:36:31.832479Z",
+  "identities": 2,
+  "fields": 2,
+  "corrected": 2,
+  "abstained": 0,
+  "requestsUsed": 8,
+  "maximumRequests": 12,
+  "sourceOnlyScope": "documentation association and entrypoint, not runtime/version/support validation",
+  "cases": [
+    {
+      "identity": "github.com/realm/SwiftLint",
+      "field": "docs.root",
+      "oldValue": "https://megalinter.io/latest/descriptors/swift_swiftlint/",
+      "oldDisposition": "contradicted-or-wrong-scope for repository documentation entrypoint; remains potentially applicable to its explicitly named integration/client task",
+      "newValue": "https://realm.github.io/SwiftLint/index.html",
+      "newDisposition": "supported-source-associated-entrypoint",
+      "reason": "Pinned README lines 482-487 identifies the old URL as MegaLinter aggregator integration setup, not the project documentation entrypoint. README lines 606-607 declares the SwiftLint Rule Directory; its retained HTTP200 page links index.html as the documentation header/breadcrumb, and the retained HTTP200 index identifies SwiftLintCore Docs, links realm/SwiftLint and renders the SwiftLint overview. The replacement resolves that declared navigation link exactly. Target pages are mutable observations; source-commit/version parity is not established.",
+      "checkedAt": "2026-10-29T08:36:31.832479Z",
+      "source": {
+        "identity": "github.com/realm/SwiftLint",
+        "revision": "ec4691d9e813a1d3358e82917326b56b0a71d3c9",
+        "path": "sources/github.com/realm/SwiftLint/README.md",
+        "bytes": 38416,
+        "sha256": "b1490448cf43b1319e87686239617bc8dfe6f60b725ed9cb8f81b326d124c534",
+        "gitBlobSha": "4bb2c15642cc0bd5352294931d95ac1268c0c355",
+        "url": "https://github.com/realm/SwiftLint/blob/ec4691d9e813a1d3358e82917326b56b0a71d3c9/README.md",
+        "commitTreeSha": "964df09a82e33ed1c6bcc1df90b204d3eb99e505",
+        "checkedAt": "2026-10-29T08:32:42.469Z",
+        "transport": "GitHub connector base64 contents response; exact decoded upstream bytes preserved",
+        "request": "requests/swiftlint-readme.json"
+      },
+      "passages": [
+        {
+          "source": "sources/github.com/realm/SwiftLint/README.md",
+          "sourceSha256": "b1490448cf43b1319e87686239617bc8dfe6f60b725ed9cb8f81b326d124c534",
+          "startLine": 482,
+          "endLine": 487,
+          "excerpt": "### MegaLinter\n\nSwiftLint is also embedded in [MegaLinter](https://megalinter.io), an\nopen-source aggregator of linters for CI. See its\n[SwiftLint documentation](https://megalinter.io/latest/descriptors/swift_swiftlint/)\nfor setup instructions.",
+          "url": "https://github.com/realm/SwiftLint/blob/ec4691d9e813a1d3358e82917326b56b0a71d3c9/README.md#L482-L487"
+        },
+        {
+          "source": "sources/github.com/realm/SwiftLint/README.md",
+          "sourceSha256": "b1490448cf43b1319e87686239617bc8dfe6f60b725ed9cb8f81b326d124c534",
+          "startLine": 599,
+          "endLine": 610,
+          "excerpt": "## Rules\n\nOver 200 rules are included in SwiftLint and the Swift community (that's you!)\ncontinues to contribute more over time.\n[Pull requests](https://github.com/realm/SwiftLint/blob/main/CONTRIBUTING.md)\nare encouraged.\n\nYou can find an updated list of rules and more information about them in the\n[Rule Directory](https://realm.github.io/SwiftLint/rule-directory.html).\n\nYou can also check the\n[Source/SwiftLintBuiltInRules/Rules](https://github.com/realm/SwiftLint/tree/main/Source/SwiftLintBuiltInRules/Rules)",
+          "url": "https://github.com/realm/SwiftLint/blob/ec4691d9e813a1d3358e82917326b56b0a71d3c9/README.md#L599-L610"
+        }
+      ],
+      "targetObservations": "README.md:606\u2013607 \u2192 https://realm.github.io/SwiftLint/rule-directory.html (HTTP 200, SHA256 c1d6ef04e87845f2c6e541a27c1b2ae011a868389d717dfbeb995169bdc32226) \u2192 header/breadcrumb index.html \u2192 https://realm.github.io/SwiftLint/index.html (HTTP 200, SHA256 bf89bac5f9749fa1c172ba65013fa43840b50225660602ebd114ad47ac9081fb). No redirect was followed. The index identifies SwiftLintCore 0.65.1 Docs and links this repository; no version parity is claimed.",
+      "recordGeneratedAtPreserved": "2026-10-27T18:15:27.41844Z",
+      "statusBefore": "verified",
+      "statusAfter": "imported",
+      "trustAfter": "medium/imported; no reviewed/canonical/verified minting",
+      "uninspectedFieldsUnchanged": true,
+      "beforeRecordSha256": "21a00bdcbb80c699dc85659242394ba089064a35dce0596ed089b44bfa9a0b28",
+      "beforeEvidenceSha256": "4998b44d3a499e8e1425673337a39e6ee89aa31fba159eb43c391fe521d671fa",
+      "afterRecordSha256": "61abe990654c62421639c3fff4c47ecf7eb33fbc1dd7962554248b732c566d57",
+      "afterEvidenceSha256": "665dd35edad808a185a034e2f66de381454f45902bab7898fae03c53fa26bd84"
+    },
+    {
+      "identity": "github.com/minio/minio",
+      "field": "docs.getting_started",
+      "oldValue": "https://docs.min.io/community/minio-object-store/reference/minio-mc.html#quickstart",
+      "oldDisposition": "contradicted-or-wrong-scope for repository documentation entrypoint; remains potentially applicable to its explicitly named integration/client task",
+      "newValue": "https://github.com/minio/minio/blob/7aac2a2c5b7c882e68c1ce017d8256be2feea27f/README.md#install-from-source",
+      "newDisposition": "supported-source-associated-entrypoint",
+      "reason": "Pinned README lines 139-153 explicitly scopes the old Quickstart Guide link to the separate MinIO Client mc. For this server repository, README lines 23-24 declares that the README supplies source-build and baremetal deployment instructions, lines 59-89 provides Install from Source and standalone-server startup, and line 99 explicitly links #install-from-source. The replacement resolves that declared fragment against the exact immutable README URL. This is server getting-started documentation, not proof that commands execute or that the unmaintained project is currently supported.",
+      "checkedAt": "2026-10-29T08:36:31.832479Z",
+      "source": {
+        "identity": "github.com/minio/minio",
+        "revision": "7aac2a2c5b7c882e68c1ce017d8256be2feea27f",
+        "path": "sources/github.com/minio/minio/README.md",
+        "bytes": 8960,
+        "sha256": "aae99b6e35489bb26bfba4290ac567861d123230d1831562b6aee8c1363aead3",
+        "gitBlobSha": "84e49277432b54d5e84de2a5be59c75950746d37",
+        "url": "https://github.com/minio/minio/blob/7aac2a2c5b7c882e68c1ce017d8256be2feea27f/README.md",
+        "commitTreeSha": "376b09b793c57170a905208e64590164d8ab7a3b",
+        "checkedAt": "2026-10-29T08:32:42.469Z",
+        "transport": "GitHub connector base64 contents response; exact decoded upstream bytes preserved",
+        "request": "requests/minio-readme.json"
+      },
+      "passages": [
+        {
+          "source": "sources/github.com/minio/minio/README.md",
+          "sourceSha256": "aae99b6e35489bb26bfba4290ac567861d123230d1831562b6aee8c1363aead3",
+          "startLine": 1,
+          "endLine": 24,
+          "excerpt": "> [!NOTE]\n> **THIS REPOSITORY IS NO LONGER MAINTAINED.**\n>\n> **Alternatives:**\n> - **[AIStor Free](https://min.io/download)** \u2014 Full-featured, standalone edition for community use (free license)\n> - **[AIStor Enterprise](https://min.io/pricing)** \u2014 Distributed edition with commercial support\n\n---\n\n# MinIO Quickstart Guide\n\n[![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io) [![Docker Pulls](https://img.shields.io/docker/pulls/minio/minio.svg?maxAge=604800)](https://hub.docker.com/r/minio/minio/) [![license](https://img.shields.io/badge/license-AGPL%20V3-blue)](https://github.com/minio/minio/blob/master/LICENSE)\n\n[![MinIO](https://raw.githubusercontent.com/minio/minio/master/.github/logo.svg?sanitize=true)](https://min.io)\n\nMinIO is a high-performance, S3-compatible object storage solution released under the GNU AGPL v3.0 license.\nDesigned for speed and scalability, it powers AI/ML, analytics, and data-intensive workloads with industry-leading performance.\n\n- S3 API Compatible \u2013 Seamless integration with existing S3 tools\n- Built for AI & Analytics \u2013 Optimized for large-scale data pipelines\n- High Performance \u2013 Ideal for demanding storage workloads.\n\nThis README provides instructions for building MinIO from source and deploying onto baremetal hardware.\nUse the [MinIO Documentation](https://github.com/minio/docs) project to build and host a local copy of the documentation.",
+          "url": "https://github.com/minio/minio/blob/7aac2a2c5b7c882e68c1ce017d8256be2feea27f/README.md#L1-L24"
+        },
+        {
+          "source": "sources/github.com/minio/minio/README.md",
+          "sourceSha256": "aae99b6e35489bb26bfba4290ac567861d123230d1831562b6aee8c1363aead3",
+          "startLine": 59,
+          "endLine": 89,
+          "excerpt": "## Install from Source\n\nUse the following commands to compile and run a standalone MinIO server from source.\nIf you do not have a working Golang environment, please follow [How to install Golang](https://golang.org/doc/install). Minimum version required is [go1.24](https://golang.org/dl/#stable)\n\n```sh\ngo install github.com/minio/minio@latest\n```\n\nYou can alternatively run `go build` and use the `GOOS` and `GOARCH` environment variables to control the OS and architecture target.\nFor example:\n\n```\nenv GOOS=linux GOARCH=arm64 go build\n```\n\nStart MinIO by running `minio server PATH` where `PATH` is any empty folder on your local filesystem.\n\nThe MinIO deployment starts using default root credentials `minioadmin:minioadmin`.\nYou can test the deployment using the MinIO Console, an embedded web-based object browser built into MinIO Server.\nPoint a web browser running on the host machine to <http://127.0.0.1:9000> and log in with the root credentials.\nYou can use the Browser to create buckets, upload objects, and browse the contents of the MinIO server.\n\nYou can also connect using any S3-compatible tool, such as the MinIO Client `mc` commandline tool:\n\n```sh\nmc alias set local http://localhost:9000 minioadmin minioadmin\nmc admin info local\n```\n\nSee [Test using MinIO Client `mc`](#test-using-minio-client-mc) for more information on using the `mc` commandline tool.",
+          "url": "https://github.com/minio/minio/blob/7aac2a2c5b7c882e68c1ce017d8256be2feea27f/README.md#L59-L89"
+        },
+        {
+          "source": "sources/github.com/minio/minio/README.md",
+          "sourceSha256": "aae99b6e35489bb26bfba4290ac567861d123230d1831562b6aee8c1363aead3",
+          "startLine": 96,
+          "endLine": 99,
+          "excerpt": "## Build Docker Image\n\nYou can use the `docker build .` command to build a Docker image on your local host machine.\nYou must first [build MinIO](#install-from-source) and ensure the `minio` binary exists in the project root.",
+          "url": "https://github.com/minio/minio/blob/7aac2a2c5b7c882e68c1ce017d8256be2feea27f/README.md#L96-L99"
+        },
+        {
+          "source": "sources/github.com/minio/minio/README.md",
+          "sourceSha256": "aae99b6e35489bb26bfba4290ac567861d123230d1831562b6aee8c1363aead3",
+          "startLine": 129,
+          "endLine": 159,
+          "excerpt": "## Test MinIO Connectivity\n\n### Test using MinIO Console\n\nMinIO Server comes with an embedded web based object browser.\nPoint your web browser to <http://127.0.0.1:9000> to ensure your server has started successfully.\n\n> [!NOTE]\n> MinIO runs console on random port by default, if you wish to choose a specific port use `--console-address` to pick a specific interface and port.\n\n### Test using MinIO Client `mc`\n\n`mc` provides a modern alternative to UNIX commands like ls, cat, cp, mirror, diff etc. It supports filesystems and Amazon S3 compatible cloud storage services.\n\nThe following commands set a local alias, validate the server information, create a bucket, copy data to that bucket, and list the contents of the bucket.\n\n```sh\nmc alias set local http://localhost:9000 minioadmin minioadmin\nmc admin info\nmc mb data\nmc cp ~/Downloads/mydata data/\nmc ls data/\n```\n\nFollow the MinIO Client [Quickstart Guide](https://docs.min.io/community/minio-object-store/reference/minio-mc.html#quickstart) for further instructions.\n\n## Explore Further\n\n- [The MinIO documentation website](https://docs.min.io/community/minio-object-store/index.html)\n- [MinIO Erasure Code Overview](https://docs.min.io/community/minio-object-store/operations/concepts/erasure-coding.html)\n- [Use `mc` with MinIO Server](https://docs.min.io/community/minio-object-store/reference/minio-mc.html)",
+          "url": "https://github.com/minio/minio/blob/7aac2a2c5b7c882e68c1ce017d8256be2feea27f/README.md#L129-L159"
+        }
+      ],
+      "targetObservations": "The replacement uses the exact GitHub README content already fetched at the pinned commit, with its explicitly referenced #install-from-source fragment. No additional mutable external target was selected or fetched. The README marks the repository unmaintained; the existing archived metadata is retained.",
+      "recordGeneratedAtPreserved": "2026-10-04T07:53:35.951591156Z",
+      "statusBefore": "verified",
+      "statusAfter": "imported",
+      "trustAfter": "medium/imported; no reviewed/canonical/verified minting",
+      "uninspectedFieldsUnchanged": true,
+      "beforeRecordSha256": "cb28185023915957c67d66aa26b39b41dba782faac2417ce035d5e56a2427acf",
+      "beforeEvidenceSha256": "3388cd58078fa166c92b5407c07288f66681e29367073c03a9a581d6f26709a1",
+      "afterRecordSha256": "578e8a8209c8cc025375bf523d858956ef4253e5ea743ca223254ef0ede87ff4",
+      "afterEvidenceSha256": "7d245ad5f125a0e980ab54ed82e37ed959611a8e0ddfb2b0b611ad0de1ff2719"
+    }
+  ]
+}

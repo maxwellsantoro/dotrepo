@@ -1,0 +1,126 @@
+{
+  "bounds": {
+    "compressedPackageBytes": 33554432,
+    "expandedPackageBytes": 33554432,
+    "fileBytes": 2097152,
+    "members": 10000
+  },
+  "cacheArchiveSha256": "583fad501fa7b1a1a6d85ab8fe4b890786e39c1e016f785d6d3fb9d060383284",
+  "downloadPacketFreezeSha256": "47bdfb0f26520e3ef7cb8afef4226bb965e81ceddf380e72ac5934f7be819a8e",
+  "downloadProvenanceSha256": "985024ecf3fca22bfc75d2dae70099edb764d1fa9fd1c45fd1b8bf901bfa519d",
+  "executionOccurred": false,
+  "hookBodiesInspected": false,
+  "npmLockSha256": "52b6c9bd0a26ef1b0fc27dfbfaa00df6a047cdddd587d07c4f6c1c3345faf5cf",
+  "packages": [
+    {
+      "cachePath": "npm-cache/_cacache/content-v2/sha512/f4/04/2ba9aceb0604e0452bb095e2d55d4ac8529858d36fd21428764ca6282d5ff189f24075b961766126c39814ad848f437b11c0db3d8b208c0f5e2c013104ea",
+      "dev": true,
+      "hasInstallScript": true,
+      "integrity": "sha512-9AQrqazrBgTgRSuwleLVXUrIUphY02/SFCh2TKYoLV/xifJAdblhdmEmw5gUrYSPQ3sRwNs9iyCMD14sATEE6g==",
+      "license": "SEE LICENSE IN LICENSE.txt",
+      "lockPath": "node_modules/@vscode/vsce-sign",
+      "optionalDependencies": {
+        "@vscode/vsce-sign-alpine-arm64": "2.0.6",
+        "@vscode/vsce-sign-alpine-x64": "2.0.6",
+        "@vscode/vsce-sign-darwin-arm64": "2.0.6",
+        "@vscode/vsce-sign-darwin-x64": "2.0.6",
+        "@vscode/vsce-sign-linux-arm": "2.0.6",
+        "@vscode/vsce-sign-linux-arm64": "2.0.6",
+        "@vscode/vsce-sign-linux-x64": "2.0.6",
+        "@vscode/vsce-sign-win32-arm64": "2.0.6",
+        "@vscode/vsce-sign-win32-x64": "2.0.6"
+      },
+      "resolved": "https://registry.npmjs.org/@vscode/vsce-sign/-/vsce-sign-2.1.0.tgz",
+      "tarballBytes": 10115,
+      "tarballSha256": "406852a22ee49aabb8f3b9b1a6b47e25a5772207a2b64eca170ace59136c7929",
+      "version": "2.1.0"
+    },
+    {
+      "bin": {
+        "dprint": "bin.cjs"
+      },
+      "cachePath": "npm-cache/_cacache/content-v2/sha512/8a/2a/2b81f26bad5ec30dfed2f4007f779641e7d267e6274c0d0a14ee8e87f66e80bc655a2c03eb19302c9664f0ca491fb7d0986d6cea52b2a398a4fcd0a5a600",
+      "dev": true,
+      "hasInstallScript": true,
+      "integrity": "sha512-iiorgfJrrV7DDf7S9AB/d5ZB59Jn5idMDQoU7o6H9m6AvGVaLAPrGTAslmTwykkft9CYbWzqUrKjmKT80KWmAA==",
+      "license": "MIT",
+      "lockPath": "node_modules/dprint",
+      "optionalDependencies": {
+        "@dprint/android-arm64": "0.57.4",
+        "@dprint/android-x64": "0.57.4",
+        "@dprint/darwin-arm64": "0.57.4",
+        "@dprint/darwin-x64": "0.57.4",
+        "@dprint/linux-arm64-glibc": "0.57.4",
+        "@dprint/linux-arm64-musl": "0.57.4",
+        "@dprint/linux-loong64-glibc": "0.57.4",
+        "@dprint/linux-loong64-musl": "0.57.4",
+        "@dprint/linux-ppc64-glibc": "0.57.4",
+        "@dprint/linux-ppc64-musl": "0.57.4",
+        "@dprint/linux-riscv64-glibc": "0.57.4",
+        "@dprint/linux-x64-glibc": "0.57.4",
+        "@dprint/linux-x64-musl": "0.57.4",
+        "@dprint/win32-arm64": "0.57.4",
+        "@dprint/win32-x64": "0.57.4"
+      },
+      "resolved": "https://registry.npmjs.org/dprint/-/dprint-0.57.4.tgz",
+      "tarballBytes": 7271,
+      "tarballSha256": "557f7a8bee7e462f95b22677ca76eb2ff7f6ede8ad0043b48a063a785b24101c",
+      "version": "0.57.4"
+    },
+    {
+      "bin": {
+        "esbuild": "bin/esbuild"
+      },
+      "cachePath": "npm-cache/_cacache/content-v2/sha512/1c/a5/4b4bc76f208fb1a0a5bd926ab16d12ab9d61177c926bfc56618499a2a880747b4e7740d605a8e068b9330efe4e6c203e0cbc28940afbfc6fd338877db020",
+      "dev": true,
+      "engines": {
+        "node": ">=18"
+      },
+      "hasInstallScript": true,
+      "integrity": "sha512-HKVLS8dvII+xoKW9kmqxbRKrnWEXfJJr/FZhhJmiqIB0e053QNYFqOBouTMO/k5sID4MvCiUCvv8b9M4h32wIA==",
+      "license": "MIT",
+      "lockPath": "node_modules/esbuild",
+      "optionalDependencies": {
+        "@esbuild/aix-ppc64": "0.28.2",
+        "@esbuild/android-arm": "0.28.2",
+        "@esbuild/android-arm64": "0.28.2",
+        "@esbuild/android-x64": "0.28.2",
+        "@esbuild/darwin-arm64": "0.28.2",
+        "@esbuild/darwin-x64": "0.28.2",
+        "@esbuild/freebsd-arm64": "0.28.2",
+        "@esbuild/freebsd-x64": "0.28.2",
+        "@esbuild/linux-arm": "0.28.2",
+        "@esbuild/linux-arm64": "0.28.2",
+        "@esbuild/linux-ia32": "0.28.2",
+        "@esbuild/linux-loong64": "0.28.2",
+        "@esbuild/linux-mips64el": "0.28.2",
+        "@esbuild/linux-ppc64": "0.28.2",
+        "@esbuild/linux-riscv64": "0.28.2",
+        "@esbuild/linux-s390x": "0.28.2",
+        "@esbuild/linux-x64": "0.28.2",
+        "@esbuild/netbsd-arm64": "0.28.2",
+        "@esbuild/netbsd-x64": "0.28.2",
+        "@esbuild/openbsd-arm64": "0.28.2",
+        "@esbuild/openbsd-x64": "0.28.2",
+        "@esbuild/openharmony-arm64": "0.28.2",
+        "@esbuild/sunos-x64": "0.28.2",
+        "@esbuild/win32-arm64": "0.28.2",
+        "@esbuild/win32-ia32": "0.28.2",
+        "@esbuild/win32-x64": "0.28.2"
+      },
+      "resolved": "https://registry.npmjs.org/esbuild/-/esbuild-0.28.2.tgz",
+      "tarballBytes": 34207,
+      "tarballSha256": "e045f94c235c7adc50e77ba2a579c7bec41b496b6b47c3a7845f7c1e19959a88",
+      "version": "0.28.2"
+    }
+  ],
+  "platform": {
+    "arch": "arm64",
+    "libc": "glibc/bookworm",
+    "node": "v24.22.2",
+    "npm": "11.19.1",
+    "os": "linux"
+  },
+  "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+  "state": "identities-frozen-before-hook-inspection"
+}

@@ -1,0 +1,77 @@
+[
+  {
+    "name": "existing-parsing-complete",
+    "command": [
+      "cargo",
+      "test",
+      "-p",
+      "dotrepo-core",
+      "--lib",
+      "import_parsing"
+    ],
+    "startedAt": "2026-10-29T08:51:21.860235+00:00",
+    "elapsedSeconds": 0.13914733286947012,
+    "exitCode": 0,
+    "log": "checks/existing-parsing-complete.log"
+  },
+  {
+    "name": "fixture-gate-complete",
+    "command": [
+      "cargo",
+      "test",
+      "-p",
+      "dotrepo-core",
+      "--test",
+      "import_quality_gate"
+    ],
+    "startedAt": "2026-10-29T08:51:21.999571+00:00",
+    "elapsedSeconds": 3.1451777920592576,
+    "exitCode": 0,
+    "log": "checks/fixture-gate-complete.log"
+  },
+  {
+    "name": "clippy-complete",
+    "command": [
+      "cargo",
+      "clippy",
+      "-p",
+      "dotrepo-core",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "startedAt": "2026-10-29T08:51:25.144886+00:00",
+    "elapsedSeconds": 5.783381416928023,
+    "exitCode": 0,
+    "log": "checks/clippy-complete.log"
+  },
+  {
+    "name": "fmt-complete",
+    "command": [
+      "rustfmt",
+      "--edition",
+      "2021",
+      "--check",
+      "crates/dotrepo-core/src/import/parsing/markdown.rs",
+      "crates/dotrepo-core/src/import/parsing/markdown/docs_tests.rs"
+    ],
+    "startedAt": "2026-10-29T08:51:30.928350+00:00",
+    "elapsedSeconds": 0.06432491587474942,
+    "exitCode": 0,
+    "log": "checks/fmt-complete.log"
+  },
+  {
+    "name": "cli-build",
+    "command": [
+      "cargo",
+      "build",
+      "-p",
+      "dotrepo-cli"
+    ],
+    "startedAt": "2026-10-29T08:51:30.992900+00:00",
+    "elapsedSeconds": 2.638736167224124,
+    "exitCode": 0,
+    "log": "checks/cli-build.log"
+  }
+]

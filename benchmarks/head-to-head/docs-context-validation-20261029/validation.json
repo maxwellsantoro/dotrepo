@@ -1,0 +1,39 @@
+{
+  "base": "595303f9b8bfa58366c9f2c93fb619ca54591ea2",
+  "stagedTreeBeforeValidation": "684329bc8acf8b7a07c5bfbffcb0466f8ac422e8",
+  "functionalInputsIncludeValidation": false,
+  "rustSourceBindings": {
+    "crates/dotrepo-core/src/import/parsing/markdown.rs": "aa0f205d9447143eca5f831feb569562fcc5d3ae01031615a7d8c90ec7e29674",
+    "crates/dotrepo-core/src/import/parsing/markdown/docs_tests.rs": "f62f4fd3a3cb3468d64cf5245123d7fc08c7c539cded250596595e9a880ba836"
+  },
+  "unchangedDependencyDenyInputs": {
+    "Cargo.lock": "2268a17be9005cead215b42f2654e7fb5629c6bc5d25b2573b6af945a073df66",
+    "Cargo.toml": "1b90a2a228b23c36c4aefb75e079e35b6d240c40287e8f49f25cf4ca2e4ebc38",
+    "deny.toml": "a148498847378e3b06de3d106589be82bcc2b32776e2dd6c8ce59b3c3d6cc28b",
+    "crates/dotrepo/Cargo.toml": "700a6dd96068f9a50dbc9c75fe0649b971f0f578da0057a1dba78e5042020eb1",
+    "crates/dotrepo-cli/Cargo.toml": "0ad579f0fccddf05402da5f5dada840889601ee9c1f267dc6710ed8042afe1ab",
+    "crates/dotrepo-core/Cargo.toml": "50cde58a5940e8c4607f9009cc94340c9731051d561f0dd0802df96c0fdd9920",
+    "crates/dotrepo-crawler/Cargo.toml": "fa4a897725f49a18d91e294d191e3a5c0e7a37cc6aba9ba709e220204f6b999b",
+    "crates/dotrepo-lsp/Cargo.toml": "f9b1c984e4bc4cc9f8f157d9bf04bfd77115a36034242fb7f66778f90aad37f3",
+    "crates/dotrepo-mcp/Cargo.toml": "fa4421f554b7ae2f62a371c6b3c2503b473c811e071bdf8c53511cad314db3ce",
+    "crates/dotrepo-schema/Cargo.toml": "ff4c32d82635d9b9cc89aa1d6cd06d7d928dbd7b97203d6154dd0166d74466e4",
+    "crates/dotrepo-transport/Cargo.toml": "3c34b0f93ce6b86b5593b702659e9cf5f9919ecca0ad94eff5159e160539df9e"
+  },
+  "checks": {
+    "finalIntegratedGates": "all seven exit0; complete release includes VSIX",
+    "python": "850 passed17.01s",
+    "ruff": "standard repository check+format pass, plus all staged changed Python paths under owning root config",
+    "releaseVersion": "2.0.0-rc.2 parity passed",
+    "toolchain": "1.90.0 parity passed",
+    "deny": "passed in superseded-rust-1; dependency/config inputs unchanged",
+    "independentParser": "38 synthetic+2 retained README imports pass, c885a45bd81422cbaf13cdf389a1e4628850736e01d4711f2d32bb4e1816cd7b"
+  },
+  "resultBoundaries": {
+    "E1": "prior failing qualification unchanged; Compose unresolved, Zellij known development/source only, no new accepted/heldout result",
+    "Go01": "one download attempt, independently audited; same-family published compiler means cache admission withheld; all original flags false",
+    "F05C2": "no new native task or paid agent campaign session",
+    "F08": "0of7 in retained08:40UTC report; publicationnotverified scheduledrun; manual/main publication not qualification"
+  },
+  "supersededChecks": "Earlier source checks passed before independent review changes. Their receipt logs are retained; final code checks repeated after final repair. Explicit-file Ruff experiments selected nested upstream configuration or overrode frozen snapshot discovery; those failures did not change archived bytes. Standard repository and changed-input checks pass.",
+  "excludedNextPacket": "Offline npm setup plan/review/amendment remain uncommitted next work; no actual setup authorized."
+}

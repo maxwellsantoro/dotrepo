@@ -1,0 +1,15 @@
+{
+  "command": [
+    "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+    "validate-index",
+    "--index-root",
+    "index"
+  ],
+  "startedAt": "2026-10-29T08:37:44.040710+00:00",
+  "exitCode": 0,
+  "cliSha256": "b9cd73236bca71ecf4fb7aa06bfe131b1ecc41a9b0fdfb43de579fb6d24ce0d0",
+  "buildPerformed": false,
+  "sourceBindingLimitation": "Existing local first-party validator binary; no new Cargo build in this packet. Integrated validation remains coordinator-owned.",
+  "stdoutSha256": "afb45179148d84481cb7fbd3cd6a98ae44cdae7068f1d780e66f13aea51f84d7",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

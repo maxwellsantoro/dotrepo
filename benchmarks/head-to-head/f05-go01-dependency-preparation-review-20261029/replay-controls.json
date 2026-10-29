@@ -1,0 +1,404 @@
+{
+  "state": "synthetic controls only",
+  "passed": 32,
+  "controls": [
+    {
+      "case": "regular bytes preserved",
+      "passed": true
+    },
+    {
+      "case": "reject-parent",
+      "passed": true
+    },
+    {
+      "case": "reject-absolute",
+      "passed": true
+    },
+    {
+      "case": "reject-empty-component",
+      "passed": true
+    },
+    {
+      "case": "reject-colon",
+      "passed": true
+    },
+    {
+      "case": "reject-outside-root",
+      "passed": true
+    },
+    {
+      "case": "reject-duplicate",
+      "passed": true
+    },
+    {
+      "case": "reject-symlink",
+      "passed": true
+    },
+    {
+      "case": "reject-hardlink",
+      "passed": true
+    },
+    {
+      "case": "reject-fifo",
+      "passed": true
+    },
+    {
+      "case": "reject-root-replaced-file",
+      "passed": true
+    },
+    {
+      "case": "raw-gold-alias",
+      "passed": true
+    },
+    {
+      "case": "canonical-gold-alias",
+      "passed": true
+    },
+    {
+      "case": "expanded-cap",
+      "passed": true
+    },
+    {
+      "case": "source-cache-sum-cap",
+      "passed": true
+    },
+    {
+      "case": "stream-write-cap-before-write",
+      "passed": true
+    },
+    {
+      "case": "member-cap-before-body-read",
+      "passed": true
+    },
+    {
+      "case": "synthetic-backend-success",
+      "passed": true,
+      "state": "download-cache-retained-unqualified",
+      "stage": "archive-validation",
+      "virtualCalls": [
+        "image-inspect",
+        "create",
+        "start",
+        "container-inspect",
+        "initialize",
+        "source-provision",
+        "initial-source-check",
+        "tools-before",
+        "network-before",
+        "download-0",
+        "cache-size-0",
+        "download-1",
+        "cache-size-1",
+        "download-2",
+        "cache-size-2",
+        "tools-after",
+        "network-after",
+        "disconnect",
+        "offline-inspect",
+        "tracked-source-check",
+        "cache-export",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "synthetic-backend-preflight",
+      "passed": true,
+      "state": "incomplete",
+      "stage": "source-preflight",
+      "virtualCalls": [],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "synthetic-backend-unauthorized",
+      "passed": true,
+      "state": "incomplete",
+      "stage": "authorization",
+      "virtualCalls": [],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "synthetic-backend-create",
+      "passed": true,
+      "state": "incomplete",
+      "stage": "create",
+      "virtualCalls": [
+        "image-inspect",
+        "create",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "synthetic-backend-download-1",
+      "passed": true,
+      "state": "incomplete",
+      "stage": "download-1",
+      "virtualCalls": [
+        "image-inspect",
+        "create",
+        "start",
+        "container-inspect",
+        "initialize",
+        "source-provision",
+        "initial-source-check",
+        "tools-before",
+        "network-before",
+        "download-0",
+        "cache-size-0",
+        "download-1",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "synthetic-backend-cache-cap",
+      "passed": true,
+      "state": "incomplete",
+      "stage": "cache-size-0",
+      "virtualCalls": [
+        "image-inspect",
+        "create",
+        "start",
+        "container-inspect",
+        "initialize",
+        "source-provision",
+        "initial-source-check",
+        "tools-before",
+        "network-before",
+        "download-0",
+        "cache-size-0",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "synthetic-backend-deadline",
+      "passed": true,
+      "state": "incomplete-work-budget-exceeded",
+      "stage": "download-0",
+      "virtualCalls": [
+        "image-inspect",
+        "create",
+        "start",
+        "container-inspect",
+        "initialize",
+        "source-provision",
+        "initial-source-check",
+        "tools-before",
+        "network-before",
+        "download-0",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "synthetic-backend-export-link",
+      "passed": true,
+      "state": "incomplete",
+      "stage": "archive-validation",
+      "virtualCalls": [
+        "image-inspect",
+        "create",
+        "start",
+        "container-inspect",
+        "initialize",
+        "source-provision",
+        "initial-source-check",
+        "tools-before",
+        "network-before",
+        "download-0",
+        "cache-size-0",
+        "download-1",
+        "cache-size-1",
+        "download-2",
+        "cache-size-2",
+        "tools-after",
+        "network-after",
+        "disconnect",
+        "offline-inspect",
+        "tracked-source-check",
+        "cache-export",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "synthetic-backend-disconnect",
+      "passed": true,
+      "state": "incomplete",
+      "stage": "disconnect",
+      "virtualCalls": [
+        "image-inspect",
+        "create",
+        "start",
+        "container-inspect",
+        "initialize",
+        "source-provision",
+        "initial-source-check",
+        "tools-before",
+        "network-before",
+        "download-0",
+        "cache-size-0",
+        "download-1",
+        "cache-size-1",
+        "download-2",
+        "cache-size-2",
+        "tools-after",
+        "network-after",
+        "disconnect",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "synthetic-backend-mount-admission",
+      "passed": true,
+      "state": "incomplete",
+      "stage": "container-inspect",
+      "virtualCalls": [
+        "image-inspect",
+        "create",
+        "start",
+        "container-inspect",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "synthetic-backend-source-stream",
+      "passed": true,
+      "state": "incomplete",
+      "stage": "source-provision",
+      "virtualCalls": [
+        "image-inspect",
+        "create",
+        "start",
+        "container-inspect",
+        "initialize",
+        "source-provision",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "synthetic-backend-tool-change",
+      "passed": true,
+      "state": "incomplete",
+      "stage": "tools-after",
+      "virtualCalls": [
+        "image-inspect",
+        "create",
+        "start",
+        "container-inspect",
+        "initialize",
+        "source-provision",
+        "initial-source-check",
+        "tools-before",
+        "network-before",
+        "download-0",
+        "cache-size-0",
+        "download-1",
+        "cache-size-1",
+        "download-2",
+        "cache-size-2",
+        "tools-after",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "synthetic-backend-cleanup",
+      "passed": true,
+      "state": "incomplete-cleanup-or-absence-unresolved",
+      "stage": "archive-validation",
+      "virtualCalls": [
+        "image-inspect",
+        "create",
+        "start",
+        "container-inspect",
+        "initialize",
+        "source-provision",
+        "initial-source-check",
+        "tools-before",
+        "network-before",
+        "download-0",
+        "cache-size-0",
+        "download-1",
+        "cache-size-1",
+        "download-2",
+        "cache-size-2",
+        "tools-after",
+        "network-after",
+        "disconnect",
+        "offline-inspect",
+        "tracked-source-check",
+        "cache-export",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "synthetic-backend-post-cleanup-list",
+      "passed": true,
+      "state": "incomplete-cleanup-or-absence-unresolved",
+      "stage": "archive-validation",
+      "virtualCalls": [
+        "image-inspect",
+        "create",
+        "start",
+        "container-inspect",
+        "initialize",
+        "source-provision",
+        "initial-source-check",
+        "tools-before",
+        "network-before",
+        "download-0",
+        "cache-size-0",
+        "download-1",
+        "cache-size-1",
+        "download-2",
+        "cache-size-2",
+        "tools-after",
+        "network-after",
+        "disconnect",
+        "offline-inspect",
+        "tracked-source-check",
+        "cache-export",
+        "cleanup",
+        "post-cleanup-inspect",
+        "post-cleanup-list"
+      ],
+      "realDaemonCalls": 0
+    },
+    {
+      "case": "frozen-container-argv",
+      "passed": true
+    }
+  ],
+  "actualPreparationOccurred": false,
+  "nativeCollectionOccurred": false,
+  "realDockerNetworkProviderCalls": 0
+}

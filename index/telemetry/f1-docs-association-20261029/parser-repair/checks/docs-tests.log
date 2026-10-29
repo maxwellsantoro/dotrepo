@@ -1,0 +1,14 @@
+   Compiling dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.48s
+     Running unittests src/lib.rs (target/debug/deps/dotrepo_core-6af6d15045c80b2a)
+
+running 6 tests
+test import::parsing::markdown::docs_tests::ambiguous_declarations_still_abstain_and_retain_evidence ... ok
+test import::parsing::markdown::docs_tests::third_party_subjects_and_misleading_prefixes_do_not_declare_ownership ... ok
+test import::parsing::markdown::docs_tests::quickstart_subject_must_match_the_project ... ok
+test import::parsing::markdown::docs_tests::integration_prose_does_not_establish_project_documentation ... ok
+test import::parsing::markdown::docs_tests::direct_and_navigation_declarations_keep_custom_domains ... ok
+test import::parsing::markdown::docs_tests::start_labels_are_exact_generic_or_project_qualified ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 281 filtered out; finished in 0.01s
+

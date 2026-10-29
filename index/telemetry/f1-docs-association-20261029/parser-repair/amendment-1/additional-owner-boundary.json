@@ -1,0 +1,19 @@
+{
+  "input": "# Orbit\n\n## Docs\n\nOther's docs at:\n\n- https://shared.example/integration\n",
+  "command": [
+    "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+    "--root",
+    "/Users/maxwell/projects/agent/dotrepo/index/telemetry/f1-docs-association-20261029/parser-repair/amendment-1/additional-owner-boundary",
+    "import",
+    "--mode",
+    "overlay",
+    "--source",
+    "https://example.test/orbit"
+  ],
+  "exitCode": 0,
+  "actualRoot": "https://shared.example/integration",
+  "expectedRoot": null,
+  "binarySha256": "04f5e2aa8d80ce1701fb7ec2cbab7e431242dac7adb1aed41d73e93b9479ef8b",
+  "firstPartyImportOnly": true,
+  "networkUpstreamProviderCalls": 0
+}

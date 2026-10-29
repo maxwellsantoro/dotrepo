@@ -1,0 +1,254 @@
+{
+  "identity": "e1-next-context-establishment-20261029/closure-2",
+  "revision": "343bb382d2192b88d84af49971bb5cb99bee268c",
+  "rootTreeSha1": "b10e2fc106b7ea146f5d31f56ca0386688275aa7",
+  "closure1ApiCalls": 3,
+  "additionalBodyRequests": 2,
+  "totalClosureCalls": 5,
+  "newSourceFiles": 2,
+  "newSourceBytes": 13,
+  "sources": [
+    {
+      "path": ".dockerignore",
+      "retainedPath": "sources/.dockerignore.txt",
+      "bytes": 5,
+      "sha256": "aaccb1a00557171b31d00a99a6a2666856e417964732490685cdcba9f02de491",
+      "gitBlobSha1": "e660fd93d3196215552065b1e63bf6a2f393ed86",
+      "treeMode": "100644",
+      "rootTreeSha1": "b10e2fc106b7ea146f5d31f56ca0386688275aa7",
+      "text": "bin/\n",
+      "requestPath": "requests/01.json",
+      "requestSha256": "22dd5d7ffabdc00c1252b57a2cbc015b2f318b6fb252cb7c21bbdfedb710110d",
+      "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/.dockerignore"
+    },
+    {
+      "path": ".go-version",
+      "retainedPath": "sources/.go-version.txt",
+      "bytes": 8,
+      "sha256": "5ae79ef74661d43e70de64fdaad7531cab44185357110f441268bafae5e74956",
+      "gitBlobSha1": "63d92c7fb83a4e20c790c13c80564a5392a8a662",
+      "treeMode": "100644",
+      "rootTreeSha1": "b10e2fc106b7ea146f5d31f56ca0386688275aa7",
+      "text": "1.26.10\n",
+      "requestPath": "requests/02.json",
+      "requestSha256": "15a0695f6af6200297d91fd9425e6b09fb8bac34e3f672c2e98cd35ef85e55ed",
+      "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/.go-version"
+    }
+  ],
+  "makefileInspection": {
+    "localPath": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/Makefile",
+    "wholeFileSha256": "927856982fcd81c94dd843743000b8a828baf5af02503d64f7a4c4cc477ac4cc",
+    "linesInspected": 186,
+    "explicitIncludeOverrideDefineUndefineDirectives": [],
+    "retainedAssignmentsAndConditions": [
+      {
+        "line": 15,
+        "text": "PKG := github.com/docker/compose/v5"
+      },
+      {
+        "line": 16,
+        "text": "VERSION ?= $(shell git describe --match 'v[0-9]*' --dirty='.m' --always --tags)"
+      },
+      {
+        "line": 18,
+        "text": "GO_LDFLAGS ?= -w -X ${PKG}/internal.Version=${VERSION}"
+      },
+      {
+        "line": 19,
+        "text": "GO_BUILDTAGS ?= e2e"
+      },
+      {
+        "line": 20,
+        "text": "DRIVE_PREFIX?="
+      },
+      {
+        "line": 21,
+        "text": "ifeq ($(OS),Windows_NT)"
+      },
+      {
+        "line": 22,
+        "text": "    DETECTED_OS = Windows"
+      },
+      {
+        "line": 23,
+        "text": "    DRIVE_PREFIX=C:"
+      },
+      {
+        "line": 24,
+        "text": "else"
+      },
+      {
+        "line": 25,
+        "text": "    DETECTED_OS = $(shell uname -s)"
+      },
+      {
+        "line": 26,
+        "text": "endif"
+      },
+      {
+        "line": 28,
+        "text": "ifeq ($(DETECTED_OS),Windows)"
+      },
+      {
+        "line": 29,
+        "text": "\tBINARY_EXT=.exe"
+      },
+      {
+        "line": 30,
+        "text": "endif"
+      },
+      {
+        "line": 32,
+        "text": "BUILD_FLAGS?="
+      },
+      {
+        "line": 33,
+        "text": "TEST_FLAGS?="
+      },
+      {
+        "line": 34,
+        "text": "E2E_TEST?="
+      },
+      {
+        "line": 35,
+        "text": "E2E_PARALLEL_PLUGIN?=4"
+      },
+      {
+        "line": 36,
+        "text": "E2E_STANDALONE_PARALLEL?=4"
+      },
+      {
+        "line": 37,
+        "text": "ifneq ($(E2E_TEST),)"
+      },
+      {
+        "line": 38,
+        "text": "\tTEST_FLAGS:=$(TEST_FLAGS) -run '$(E2E_TEST)'"
+      },
+      {
+        "line": 39,
+        "text": "endif"
+      },
+      {
+        "line": 41,
+        "text": "EXCLUDE_E2E_TESTS?="
+      },
+      {
+        "line": 42,
+        "text": "ifneq ($(EXCLUDE_E2E_TESTS),)"
+      },
+      {
+        "line": 43,
+        "text": "\tTEST_FLAGS:=$(TEST_FLAGS) -skip '$(EXCLUDE_E2E_TESTS)'"
+      },
+      {
+        "line": 44,
+        "text": "endif"
+      },
+      {
+        "line": 46,
+        "text": "BUILDX_CMD ?= docker buildx"
+      },
+      {
+        "line": 50,
+        "text": "GOTESTSUM_VERSION ?= v1.13.0"
+      },
+      {
+        "line": 51,
+        "text": "GOFUMPT_VERSION ?= v0.12.0"
+      },
+      {
+        "line": 52,
+        "text": "GOTESTSUM = go run gotest.tools/gotestsum@$(GOTESTSUM_VERSION)"
+      },
+      {
+        "line": 63,
+        "text": "DESTDIR ?="
+      },
+      {
+        "line": 69,
+        "text": "\tGO111MODULE=on go build $(BUILD_FLAGS) -trimpath -tags \"$(GO_BUILDTAGS)\" -ldflags \"$(GO_LDFLAGS)\" -o \"$(or $(DESTDIR),./bin/build)/docker-compose$(BINARY_EXT)\" ./cmd"
+      },
+      {
+        "line": 73,
+        "text": "\tBUILD_TAGS=\"$(GO_BUILDTAGS)\" $(BUILDX_CMD) bake binary"
+      },
+      {
+        "line": 77,
+        "text": "\tBUILD_TAGS=\"$(GO_BUILDTAGS)\" $(BUILDX_CMD) bake binary-with-coverage"
+      },
+      {
+        "line": 105,
+        "text": "MOCKGEN = go run go.uber.org/mock/mockgen@v0.4.0"
+      }
+    ],
+    "defaultMakefileNamesInFrozenRoot": [
+      {
+        "path": "GNUmakefile",
+        "present": false
+      },
+      {
+        "path": "makefile",
+        "present": false
+      },
+      {
+        "path": "Makefile",
+        "present": true
+      }
+    ],
+    "testTarget": {
+      "startLine": 123,
+      "endLine": 125,
+      "text": ".PHONY: test\ntest: ## Run unit tests\n\t$(BUILDX_CMD) bake test",
+      "dependencies": [],
+      "recipe": "$(BUILDX_CMD) bake test"
+    },
+    "separateRelayTargetLines": [
+      127,
+      129
+    ]
+  },
+  "dockerfileSpecificIgnoreFilePresentInFrozenRoot": false,
+  "claims": [
+    {
+      "assertion": "Root .dockerignore body contains only bin/ followed by newline. It does not list package/module/Make/Bake/Docker sources for exclusion. Existing bin outputs are excluded by this declared pattern.",
+      "support": ".dockerignore:1",
+      "limit": "No Docker build/context transmission occurred; source pattern is not runtime context observation."
+    },
+    {
+      "assertion": "Root .go-version body is 1.26.10, agreeing textually with root go.mod minimum and default in-image Dockerfile GO_VERSION.",
+      "support": ".go-version:1; go.mod:3; Dockerfile:18",
+      "limit": "Version-manager hint, module minimum and image ARG are distinct assertions; no toolchain installation or resolution was observed."
+    },
+    {
+      "assertion": "Whole retained Makefile has no include/-include/sinclude/override/define/undefine directive. Its test target has no target prerequisites and a single Buildx Bake recipe. Other explicit conditional assignments concern platform and separate e2e flags.",
+      "support": "Makefile whole-file;46;123-129",
+      "limit": "Does not prove Make environment/CLI/MAKEFILES/MAKEFLAGS, added makefiles or consumer command context have no overrides."
+    }
+  ],
+  "remainingUncertainty": [
+    {
+      "topic": "Dockerfile build tags and enumeration",
+      "detail": "Bake BUILD_TAGS defaults to e2e and test stage passes -tags \"$BUILD_TAGS\" while package enumeration uses literal shell $(go list $(TAGS) ./... | grep -vE e2e). Preserve exact command and tag/package selection mismatch as source uncertainty; do not equate untagged enumeration with tagged complete execution, invent TAGS executable prerequisite, or declare fatal without evidence."
+    },
+    {
+      "topic": "consumer overrides and readiness",
+      "detail": "Instruction requires unchanged frozen checkout/default filenames and no local/CLI/environment/Make/Bake overrides, with working Docker/Buildx and acquisition access/caches. Frozen source facts cannot verify those future conditions."
+    },
+    {
+      "topic": "automatic source-input completeness",
+      "detail": "Current core/crawler selected-file input contract cannot distinguish upstream absence from materialization omission; closure root tree is external evidence, not a new automatic importer capability."
+    }
+  ],
+  "disposition": {
+    "defaultBakeTrackedFileClosure": "resolved for exact frozen root tree by closure1",
+    "buildContextIgnoreBody": "inspected and bound; no source inputs named for exclusion",
+    "versionHintBody": "inspected and bound; agrees textually",
+    "makeDeclaredIncludesOverrides": "none in retained whole source",
+    "completeDocumentedTuple": "await independent completeness assessor; command/scope/prerequisites unchanged, new facts supplied for that decision",
+    "confidencePromotion": false,
+    "executionSuccess": false,
+    "consumerBenefit": false,
+    "codeChanges": false
+  }
+}

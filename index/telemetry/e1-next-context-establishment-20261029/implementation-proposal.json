@@ -1,0 +1,49 @@
+{
+  "status": "proposal only; no code ownership or implementation authorized",
+  "proposedOwningPaths": [
+    {
+      "path": "crates/dotrepo-core/src/import/commands/context/make_recipe.rs",
+      "change": "New focused private helper for one bounded documented Make -> Buildx Bake -> Docker test recipe family. Directly bounded-read only root BUILDING.md, docker-bake.hcl, Dockerfile; reuse owning root Makefile/go.mod."
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/commands/context/make_recipe/tests.rs",
+      "change": "New retained natural-source positive plus refusal controls; no upstream execution."
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/commands/context.rs",
+      "change": "Minimal helper declaration/call to append deduplicated test candidate and existing evidence extension."
+    }
+  ],
+  "noPublicContractExpansion": true,
+  "supportPredicates": [
+    "Read visible unindented Markdown Prerequisites and Unit tests sections, retaining Linux platform branch and exact sole make test fence. Reject commented/fenced/conditional/ambiguous or conflicting declarations rather than flattening them.",
+    "Require root Makefile owning the literal unique test target with one docker Buildx bake invocation and literal default BUILDX_CMD. No includes, extra recipes or relevant dynamic/conditional overrides may be ignored.",
+    "Require matching Bake target test mapping to Dockerfile test-coverage, inheritance/arguments and output location; inspect inherited base/build-base/test stages and preserve declared images, module acquisition, native tools, CGO/race options and exact test coverage filter as source data. Unsupported routing/extra setup or unclear shell state abstains rather than becoming generic execution interpretation.",
+    "Bind root Go module/version and separate-module/e2e exclusions; repository means documented default, not all suites/modules. No component or bare Go scalar promotion.",
+    "Use existing BuildTestCandidate/ExecutionContext with command/context source BUILDING.md and exact working directory/scope/prerequisite strings. Use existing valueJson, checkedAt/generatedAt and sourceBindingsJson, binding every consumed whole-file hash plus passage span.",
+    "New helper emits at most existing Medium candidate assessment. Mechanical integrity must pass but never supplies semantic completeness. Separate source assessor/reviewer must settle applicability/completeness before any higher assessment or consumer acceptance."
+  ],
+  "mustResolveBeforeImplementing": [
+    "Independent assessor disposition of Dockerfile literal shell $(TAGS), completeness of documented builder contract, default task scope and root/platform conditions.",
+    "Default Bake override-file inventory is not established by selected retained files. Do not claim their absence; either limit route to confirmed defaults using additional separately authorized exact-revision evidence or leave completeness unresolved.",
+    "Decide local full-checkout importer scope versus crawler: current github.rs MATERIALIZED root paths include Makefile/go.mod but not BUILDING.md/Dockerfile/docker-bake.hcl. This packet proposes no crawler change or claim of automatic hosted availability."
+  ],
+  "counterexamples": [
+    "Missing/changed BUILDING prerequisite branch; hidden/indented instruction; duplicate command; conditional platform ancestor.",
+    "Root command moved to nested Makefile or make -C variant; conflicting directory; extra target prerequisites; include/relevant variable override; unrelated e2e target cannot supply setup for unit target.",
+    "Missing Bake target, extra inheritance, changed target/context, external helper reference, hidden prerequisite or unsupported argument/source route.",
+    "Version conflict between root go.mod and documented/build input; removed CGO/native setup; added required service/secret; changed e2e/relay coverage.",
+    "Automatic Bake override/changed default configuration cannot be silently ignored; literal shell token must not be normalized into an environment flag.",
+    "Changed/deleted/symlink source or invalid span must be rejected by existing mechanical verifier; valid hashes alone never high."
+  ],
+  "sharedFixtureProposal": "After completeness/implementation scope approval, request new focused fixture directory and exact expectation entry from coordinator; do not rewrite frozen source/gold/results.",
+  "maintenanceLimit": "This would be a deliberately narrow natural Make/Buildx recipe join, not a general Make, HCL, Dockerfile, shell, or AGENTS compiler. If the five-file route cannot be supported without an execution-language interpreter or broad framework, stop and retain the exact source gap.",
+  "stagedGateOrder": [
+    "Frozen source proposal (this packet)",
+    "Independent source-completeness challenge and scope decision",
+    "Coordinator transfers exact code/fixture ownership",
+    "Focused extraction/evidence/refusal tests and natural-source replay",
+    "Independent implementation review and integrated gates",
+    "Any higher source assessment/consumer acceptance only through separately approved completeness gate; fresh E1 qualification and consumer benefit remain separate"
+  ]
+}

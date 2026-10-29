@@ -1,0 +1,45 @@
+[
+  {
+    "command": [
+      "cargo",
+      "fmt",
+      "--all"
+    ],
+    "exitCode": 0,
+    "seconds": 0.5112070001196116
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "-p",
+      "dotrepo-core",
+      "--lib",
+      "docs"
+    ],
+    "exitCode": 0,
+    "seconds": 4.22618520911783
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "-p",
+      "dotrepo-core",
+      "--test",
+      "import_quality_gate"
+    ],
+    "exitCode": 0,
+    "seconds": 3.8064944169018418
+  },
+  {
+    "command": [
+      "cargo",
+      "build",
+      "-p",
+      "dotrepo-cli"
+    ],
+    "exitCode": 0,
+    "seconds": 3.2166572499554604
+  }
+]

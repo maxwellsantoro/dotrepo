@@ -1,0 +1,13 @@
+{
+  "executionOccurred": false,
+  "members": {
+    "package/package.json": {
+      "bytes": 1202,
+      "sha256": "ebd6fca3cc17f074848ed33a0be58fbf3bcda62ec6d6e21e73244d4245b9896a",
+      "text": "{\n  \"name\": \"dprint\",\n  \"version\": \"0.57.4\",\n  \"description\": \"Pluggable and configurable code formatting platform written in Rust.\",\n  \"bin\": \"bin.cjs\",\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/dprint/dprint.git\"\n  },\n  \"keywords\": [\n    \"code\",\n    \"formatter\"\n  ],\n  \"author\": \"David Sherret\",\n  \"license\": \"MIT\",\n  \"bugs\": {\n    \"url\": \"https://github.com/dprint/dprint/issues\"\n  },\n  \"homepage\": \"https://github.com/dprint/dprint#readme\",\n  \"preferUnplugged\": true,\n  \"scripts\": {\n    \"postinstall\": \"node ./install.cjs\"\n  },\n  \"optionalDependencies\": {\n    \"@dprint/win32-x64\": \"0.57.4\",\n    \"@dprint/win32-arm64\": \"0.57.4\",\n    \"@dprint/darwin-x64\": \"0.57.4\",\n    \"@dprint/darwin-arm64\": \"0.57.4\",\n    \"@dprint/linux-x64-glibc\": \"0.57.4\",\n    \"@dprint/linux-x64-musl\": \"0.57.4\",\n    \"@dprint/linux-arm64-glibc\": \"0.57.4\",\n    \"@dprint/linux-arm64-musl\": \"0.57.4\",\n    \"@dprint/linux-riscv64-glibc\": \"0.57.4\",\n    \"@dprint/linux-loong64-glibc\": \"0.57.4\",\n    \"@dprint/linux-loong64-musl\": \"0.57.4\",\n    \"@dprint/linux-ppc64-glibc\": \"0.57.4\",\n    \"@dprint/linux-ppc64-musl\": \"0.57.4\",\n    \"@dprint/android-arm64\": \"0.57.4\",\n    \"@dprint/android-x64\": \"0.57.4\"\n  }\n}\n"
+    }
+  },
+  "packageLockPath": "node_modules/dprint",
+  "tarballSha256": "557f7a8bee7e462f95b22677ca76eb2ff7f6ede8ad0043b48a063a785b24101c",
+  "version": "0.57.4"
+}

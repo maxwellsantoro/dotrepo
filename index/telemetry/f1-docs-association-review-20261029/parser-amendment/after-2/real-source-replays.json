@@ -1,0 +1,53 @@
+{
+  "cliSha256": "79a4e70fb5c6e80708c27230e6958b51217727069f957d823215c494ab4b0b61",
+  "firstPartyReadmeOnlyImports": 2,
+  "upstreamCodeExecuted": false,
+  "networkCalls": 0,
+  "replays": [
+    {
+      "repository": "realm/SwiftLint",
+      "selectedField": "docs.root",
+      "sourcePath": "index/telemetry/f1-docs-association-20261029/sources/github.com/realm/SwiftLint/README.md",
+      "sourceSha256": "b1490448cf43b1319e87686239617bc8dfe6f60b725ed9cb8f81b326d124c534",
+      "argv": [
+        "/tmp/dotrepo-docs-bare-url-review-cli-20261029",
+        "--root",
+        "/tmp/dotrepo-f1-docs-review-real-73cd7auf",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://github.com/realm/SwiftLint"
+      ],
+      "exitCode": 0,
+      "actualSelectedField": null,
+      "record": "schema = \"dotrepo/v0.1\"\n\n[record]\nmode = \"overlay\"\nstatus = \"imported\"\nsource = \"https://github.com/realm/SwiftLint\"\ngenerated_at = \"2026-10-29T09:04:56.366082Z\"\n\n[record.trust]\nconfidence = \"medium\"\nprovenance = [\"imported\"]\nnotes = \"Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record.\"\n\n[repo]\nname = \"SwiftLint\"\ndescription = \"A tool to enforce Swift style and conventions, loosely based on the now archived GitHub Swift Style Guide.\"\nhomepage = \"https://github.com/realm/SwiftLint\"\nlanguages = []\ntopics = []\n\n[relations]\nreferences = []\n\n[[relations.links]]\nkind = \"related\"\ntarget = \"github.com/github/swift-style-guide\"\nnotes = \"Cross-link from README: GitHub Swift Style Guide\"\n\n[relations.links.trust]\nconfidence = \"low\"\nprovenance = [\n    \"declared\",\n    \"readme\",\n]\n",
+      "evidence": "# Evidence\n\n- Imported repository name and description from README.md.\n- Discovered related relation to github.com/github/swift-style-guide from README cross-link.\n- This is an overlay record, not a maintainer-controlled canonical record.\n",
+      "stdout": "imported /tmp/dotrepo-f1-docs-review-real-73cd7auf/record.toml\nimported /tmp/dotrepo-f1-docs-review-real-73cd7auf/evidence.md\n- imported from: README.md\n- mode: Overlay\n- status: Imported\n",
+      "stderr": ""
+    },
+    {
+      "repository": "minio/minio",
+      "selectedField": "docs.getting_started",
+      "sourcePath": "index/telemetry/f1-docs-association-20261029/sources/github.com/minio/minio/README.md",
+      "sourceSha256": "aae99b6e35489bb26bfba4290ac567861d123230d1831562b6aee8c1363aead3",
+      "argv": [
+        "/tmp/dotrepo-docs-bare-url-review-cli-20261029",
+        "--root",
+        "/tmp/dotrepo-f1-docs-review-real-tis4fnmn",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://github.com/minio/minio"
+      ],
+      "exitCode": 0,
+      "actualSelectedField": null,
+      "record": "schema = \"dotrepo/v0.1\"\n\n[record]\nmode = \"overlay\"\nstatus = \"imported\"\nsource = \"https://github.com/minio/minio\"\ngenerated_at = \"2026-10-29T09:04:56.389438Z\"\n\n[record.trust]\nconfidence = \"medium\"\nprovenance = [\"imported\"]\nnotes = \"Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record.\"\n\n[repo]\nname = \"MinIO Quickstart Guide\"\ndescription = \"MinIO is a high-performance, S3-compatible object storage solution released under the GNU AGPL v3.0 license.\"\nhomepage = \"https://github.com/minio/minio\"\nlanguages = []\ntopics = []\n",
+      "evidence": "# Evidence\n\n- Imported repository name and description from README.md.\n- This is an overlay record, not a maintainer-controlled canonical record.\n",
+      "stdout": "imported /tmp/dotrepo-f1-docs-review-real-tis4fnmn/record.toml\nimported /tmp/dotrepo-f1-docs-review-real-tis4fnmn/evidence.md\n- imported from: README.md\n- mode: Overlay\n- status: Imported\n",
+      "stderr": ""
+    }
+  ],
+  "limitation": "Retained README-only parser controls, not full crawler refresh or replacement-entrypoint derivation."
+}

@@ -1,0 +1,27 @@
+{
+  "baseDeclared": "595303f9b8bfa58366c9f2c93fb619ca54591ea2",
+  "observedHead": "595303f9b8bfa58366c9f2c93fb619ca54591ea2",
+  "sourceBindings": [
+    {
+      "path": "crates/dotrepo-core/src/import/parsing/markdown.rs",
+      "bytes": 28761,
+      "sha256": "ced9ffdd6963499237fb65e23828d13af9749e88188e6693c5745333c0edbeec",
+      "retained": "sources/markdown.rs"
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/parsing/markdown/docs_tests.rs",
+      "bytes": 10810,
+      "sha256": "17b1772a51ea9b548ba5a624f196b960179a52bdd04a104b6996cbf34791d48a",
+      "retained": "sources/docs_tests.rs"
+    }
+  ],
+  "cliSha256": "65e50e4d67c1e0ebb176f0d3950bc00d8d498c6464ca1d2fd9cf8df059dab9a6",
+  "priorFrozenInputs": {
+    "index/telemetry/f1-docs-association-20261029/parser-repair/FREEZE.json": "a0c96b5567d7d054162994d4c4645f8bb90a9af2b7bf8abca976aa0e9b5a3bab",
+    "index/telemetry/f1-docs-association-review-20261029/parser-amendment/BEFORE.json": "da3832db715ec2d9cb356dcdf98f4708b895c3bd3a931413e0a49095af1554ca",
+    "index/telemetry/f1-docs-association-review-20261029/parser-amendment/before-findings.json": "c5a7140ea1db2672f6b0a7ce28ac321cf3526e6a7f560b7beccdaa3cea4c5cce",
+    "index/telemetry/f1-docs-association-review-20261029/parser-amendment/observations-before.json": "c57c3dd4bbf28afa5a596743e368f73f68d9974e0c0d21192e5912a7a2e22efa",
+    "index/telemetry/f1-docs-association-20261029/FREEZE.json": "2a4b40f7e5cfc35d796fe6e2f0d15a9ecaf40aa80ffd20cabc4d13190aa2f3ed",
+    "index/telemetry/f1-docs-association-20261029/publication-assessment-boundary/FREEZE.json": "15abf34686425c4555ff6345e2826220ff0f2493fcd19bdead222f844c6b9733"
+  }
+}

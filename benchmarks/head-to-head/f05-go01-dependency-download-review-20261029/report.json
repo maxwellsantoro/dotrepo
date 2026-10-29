@@ -1,0 +1,128 @@
+{
+  "state": "bounded-static-audit-complete-runtime-admission-withheld",
+  "reviewedAt": "2026-10-29T09:16:31.137626+00:00",
+  "actualPreparationPacketFreezeSha256": "47bdfb0f26520e3ef7cb8afef4226bb965e81ceddf380e72ac5934f7be819a8e",
+  "cacheArchiveSha256": "583fad501fa7b1a1a6d85ab8fe4b890786e39c1e016f785d6d3fb9d060383284",
+  "cacheFiles": 15246,
+  "cacheExpandedBytes": 351962210,
+  "cacheTarBytes": 366622720,
+  "retainedArtifactBindings": 92,
+  "retainedReceiptBindings": 26,
+  "newDaemonNetworkProviderUpstreamNativeCalls": 0,
+  "currentContainerAbsenceIndependentlyProbed": false,
+  "observedCleanupScope": "retained successful cleanup and two exact-name inspect/list absence observations, not a new daemon check",
+  "allDescriptorFlagsRemainFalse": true,
+  "materialBoundary": {
+    "finding": "same-project-family published native compiler is present; package integrity does not establish task-specific prebuilt-output/source exclusion",
+    "prebuiltCompiler": {
+      "package": "@typescript/typescript-linux-arm64",
+      "version": "7.0.2",
+      "publicUrl": "https://registry.npmjs.org/@typescript/typescript-linux-arm64/-/typescript-linux-arm64-7.0.2.tgz",
+      "integrity": "sha512-Qh4eU4/y3yDjnfjjyPYihMj5/ODIlmt+Bzu17OI+fiSRDW57QmU5SiN63exPRNJPKUzcc1INa1NXdrJ+MqHjUQ==",
+      "path": "package/lib/tsc",
+      "bytes": 22872226,
+      "sha256": "f86e8070c267b12d6c119bf567cb82d8b245e9d93da1864bc7c603cea10a8b2f",
+      "format": "ELF",
+      "class": 2,
+      "elfMachine": 183
+    },
+    "sourceDependencyPath": [
+      {
+        "path": "packages/vscode-typescript",
+        "role": "devDependencies",
+        "dependency": "@typescript/bundled-typescript",
+        "version": "npm:typescript@7.0.2"
+      }
+    ],
+    "proposedDisposition": "Preserve archive and false flags. At most a separate explicitly scoped offline npm setup observation may be considered; no native/campaign/runtime admission follows from this audit."
+  },
+  "checksumTiers": {
+    "directFrozenSourceGoSum": {
+      "moduleZipH1": 47,
+      "goModH1": 65
+    },
+    "sourceRootedTransitiveGoSum": {
+      "additionalChecksumObservations": 172,
+      "sourceRootedDownloadedModuleZipsTotal": 135,
+      "scope": "go.sum inside checksum-bound downloaded modules; checksum provenance only, not complete dependency necessity or independent registry authenticity"
+    },
+    "capturedGoToolAndSumdbOnly": [
+      {
+        "module": "github.com/stretchr/objx",
+        "version": "v0.1.0",
+        "h1": "h1:4G4v2dO3VZwixGIRoQ5Lfboy6nUhCyYzaqnIAPPhYs4=",
+        "cachedSumdbLookupMatches": true,
+        "sourceRootedTransitivePinMatches": false,
+        "pinOrigin": null,
+        "scope": "checksum provenance; task dependency necessity not inferred from pin presence"
+      }
+    ],
+    "cachedSumdbLookupConsistency": 173,
+    "sumdbSignaturesIndependentlyVerified": false,
+    "residualTrust": "exact pinned Go1.27.3 tool/image/settings, retained successful go mod download receipts and captured public checksum-service data; no new external authenticity check"
+  },
+  "npm": {
+    "contentSha512Checks": 162,
+    "indexEntriesChecked": 165,
+    "sourceLockMatchedTarballEntries": 165,
+    "tarballsOutsideSourceLock": 0,
+    "sensitiveRequestResponseHeaderNames": 0,
+    "notFetchedSourceLockEntries": 77,
+    "notFetchedEntriesAllOptional": true,
+    "scope": "LinuxARM64 platform-specific download set; not a claim of hook equivalence or complete offline test setup"
+  },
+  "sourceOverlaps": {
+    "nonemptyOccurrences": 284,
+    "categories": {
+      "shared public license text": 3,
+      "public TypeScript standard-library declaration files also bundled as task inputs": 192,
+      "public TypeScript package wrapper/readme/API declaration also present in task source; explicit exception decision needed": 3,
+      "public vscode-jsonrpc dependency also vendored in task source": 86
+    },
+    "zeroByteOverlapClaim": false,
+    "classification": "SRI-bound public package copies of standard library, vendored dependency, licenses and three task-family wrapper/readme/API files. Retained with provenance, not silently pruned or called source absence."
+  },
+  "protectedContent": {
+    "digestCount": 125,
+    "outerRegularFiles": 15246,
+    "nestedPackageRegularFiles": 31838,
+    "nestedExpandedBytes": 499680412,
+    "nonemptyExactRawOrCanonicalMatches": 0,
+    "emptyMatches": 197,
+    "canonicalJsonCapBytes": 16777216,
+    "canonicalJsonSizeExclusions": 3,
+    "rawChecksForSizeExclusions": true,
+    "containmentScope": "outer regular files and regular payloads directly inside downloaded npm tarballs/Go module ZIPs; further encoded/inner compressed content is not recursively proved absent"
+  },
+  "credentials": {
+    "markerOccurrences": 56,
+    "types": {
+      "privateKeyPem": 40,
+      "awsAccessKeyShaped": 14,
+      "credentialLikeFilename": 2
+    },
+    "disposition": "Public checksum-bound Go fixtures/examples/configuration and source-lock-SRI-bound npm code/documentation/detector patterns; exact paths/hash/provenance retained without values. No host environment injection was observed: retained container environment equals image environment plus declared plan overrides.",
+    "universalCredentialAbsenceProven": false
+  },
+  "preservedUnknowns": [
+    "Npm install-hook equivalence remains unresolved.",
+    "Native collection, complete default test outcome, exact380-exclusion acceptance and dynamic identity/capability rules remain separate unclosed gates.",
+    "Old Go01 OOM/ENOSPC noncompletion history is unchanged; no new test outcome measured.",
+    "Preparation dollar cost remains null; no consumer or causal effect measurement.",
+    "Public/package provenance is not a proof against every secret encoding, semantic answer leak, compromised package or unknown future protected artifact."
+  ],
+  "harnessFailuresRetained": [
+    {
+      "path": "audit-initial.log",
+      "cause": "Case-sensitive expected Docker absence phrase; retained stderr is lowercase. Corrected checker only; no daemon/workload rerun."
+    },
+    {
+      "path": "ruff.log",
+      "cause": "Unused review-script imports; removed and final check passes."
+    },
+    {
+      "path": null,
+      "cause": "Initial same-family observation helper assumed every package root is package/ and every npm identity had package metadata; corrected classifier supports one-component package roots. Tool failure retained in task history; no input change."
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "boundSpans": 22,
+  "daemonNetworkProviderCalls": 0,
+  "identityDeclarationSha256": "ad4aafcd5e1b8a4b6a31ebc758f4028c27154b8960bf138fff98975a5a4157bd",
+  "limitations": "No binary content execution, installation, native collection or setup-equivalence observation.",
+  "memberReadLog": [
+    {
+      "memberRequests": [
+        "package/package.json"
+      ],
+      "output": "vsce-package.json",
+      "tarballSha256": "406852a22ee49aabb8f3b9b1a6b47e25a5772207a2b64eca170ace59136c7929"
+    },
+    {
+      "memberRequests": [
+        "package/package.json"
+      ],
+      "output": "dprint-package.json",
+      "tarballSha256": "557f7a8bee7e462f95b22677ca76eb2ff7f6ede8ad0043b48a063a785b24101c"
+    },
+    {
+      "memberRequests": [
+        "package/package.json"
+      ],
+      "output": "esbuild-package.json",
+      "tarballSha256": "e045f94c235c7adc50e77ba2a579c7bec41b496b6b47c3a7845f7c1e19959a88"
+    },
+    {
+      "memberRequests": [
+        "package/src/postinstall.js"
+      ],
+      "output": "vsce-hook.json",
+      "tarballSha256": "406852a22ee49aabb8f3b9b1a6b47e25a5772207a2b64eca170ace59136c7929"
+    },
+    {
+      "memberRequests": [
+        "package/install.cjs"
+      ],
+      "output": "dprint-hook.json",
+      "tarballSha256": "557f7a8bee7e462f95b22677ca76eb2ff7f6ede8ad0043b48a063a785b24101c"
+    },
+    {
+      "memberRequests": [
+        "package/install.js"
+      ],
+      "output": "esbuild-hook.json",
+      "tarballSha256": "e045f94c235c7adc50e77ba2a579c7bec41b496b6b47c3a7845f7c1e19959a88"
+    },
+    {
+      "memberRequests": [
+        "package/src/main.js",
+        "package/src/permissions.js",
+        "package/src/target.js"
+      ],
+      "output": "vsce-closure.json",
+      "tarballSha256": "406852a22ee49aabb8f3b9b1a6b47e25a5772207a2b64eca170ace59136c7929"
+    },
+    {
+      "memberRequests": [
+        "package/bin.cjs",
+        "package/install_api.cjs"
+      ],
+      "output": "dprint-closure.json",
+      "tarballSha256": "557f7a8bee7e462f95b22677ca76eb2ff7f6ede8ad0043b48a063a785b24101c"
+    },
+    {
+      "memberRequests": [
+        "package/bin/esbuild",
+        "package/lib/main.js"
+      ],
+      "output": "esbuild-closure.json",
+      "tarballSha256": "e045f94c235c7adc50e77ba2a579c7bec41b496b6b47c3a7845f7c1e19959a88"
+    },
+    {
+      "memberRequests": [
+        "package/hashes.json"
+      ],
+      "output": "dprint-hashes.json",
+      "tarballSha256": "557f7a8bee7e462f95b22677ca76eb2ff7f6ede8ad0043b48a063a785b24101c"
+    }
+  ],
+  "optionalCompressedIntegrityChecks": 3,
+  "requestedMembers": 14,
+  "ruffCheck": "passed --no-cache",
+  "ruffFormat": "passed --check --no-cache",
+  "state": "passed-local-data-bindings",
+  "upstreamScriptsExecuted": false
+}

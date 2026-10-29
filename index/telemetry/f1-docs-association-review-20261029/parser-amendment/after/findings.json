@@ -1,0 +1,23 @@
+{
+  "authorAmendmentFreezeSha256": "8243f8c63d63e9aa9d0c1a83e81fad1113bab394bd05c36a491ec3615dab168b",
+  "sourceSha256": {
+    "crates/dotrepo-core/src/import/parsing/markdown.rs": "ced9ffdd6963499237fb65e23828d13af9749e88188e6693c5745333c0edbeec",
+    "crates/dotrepo-core/src/import/parsing/markdown/docs_tests.rs": "17b1772a51ea9b548ba5a624f196b960179a52bdd04a104b6996cbf34791d48a"
+  },
+  "cliSha256": "65e50e4d67c1e0ebb176f0d3950bc00d8d498c6464ca1d2fd9cf8df059dab9a6",
+  "originalFinding": "closed: all4wrongprefixcases abstain",
+  "remainingBlockingFinding": {
+    "case": "section-bare-url-other-tail",
+    "input": "# Orbit\n\n## Docs\nhttps://other.example/guide\nfor Other's integration.\n",
+    "actualRoot": "https://other.example/guide",
+    "expectedRoot": null,
+    "path": "crates/dotrepo-core/src/import/parsing/markdown.rs",
+    "mechanism": "section_declaration accepts physical bare_url regardless of trailing full paragraph ownership. Use complete paragraph/direct declaration rather than the physical line alone.",
+    "origin": "Coordinator proposed neighbor, independently executed and source-reviewed by this reviewer."
+  },
+  "actualCliImports": 31,
+  "passed": 30,
+  "failed": 1,
+  "noCargoNetworkUpstreamExecution": true,
+  "sourceChangesByReviewer": false
+}
