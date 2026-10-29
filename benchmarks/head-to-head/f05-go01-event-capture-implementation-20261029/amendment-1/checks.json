@@ -1,0 +1,24 @@
+{
+  "checks": [
+    {
+      "command": "uv run pytest scripts/tests/test_agent_runtime.py scripts/tests/test_agent_event_capture.py",
+      "passed": 161,
+      "seconds": 1.9,
+      "exitCode": 0
+    },
+    {
+      "command": "uv run ruff check benchmarks/head-to-head/bench/agent_runtime.py scripts/tests/test_agent_runtime.py",
+      "exitCode": 0
+    },
+    {
+      "command": "uv run ruff format --check benchmarks/head-to-head/bench/agent_runtime.py scripts/tests/test_agent_runtime.py",
+      "exitCode": 0
+    }
+  ],
+  "newRegressionCases": [
+    "raw pipe EOF before process exit",
+    "text pipe EOF before process exit"
+  ],
+  "actualUpstreamActions": 0,
+  "independentSuccessorReview": "pending"
+}

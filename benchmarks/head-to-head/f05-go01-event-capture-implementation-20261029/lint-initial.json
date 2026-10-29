@@ -1,0 +1,1 @@
+{"state":"corrected-own-test-import-style","finding":"Ruff F811: imported session fixture name also used as test parameter,9occurrences","correction":"Import alias and define local fixture wrapper; no runtime behavior change."}

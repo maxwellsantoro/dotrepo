@@ -1,0 +1,678 @@
+{
+  "synthetic": true,
+  "nativeActions": false,
+  "actualAdmissions": false,
+  "checks": [
+    {
+      "case": "complete104package5972name synthetic trace",
+      "candidateAccepted": true,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": true,
+        "testsPassed": true,
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required",
+        "expectedTopLevelTests": 5972,
+        "observedNestedTests": 0,
+        "packages": 104,
+        "excludedBehavior": [],
+        "failedTests": []
+      }
+    },
+    {
+      "case": "complete terminal assertion failure",
+      "candidateAccepted": true,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": true,
+        "testsPassed": false,
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required",
+        "expectedTopLevelTests": 5972,
+        "observedNestedTests": 0,
+        "packages": 104,
+        "excludedBehavior": [],
+        "failedTests": [
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/cmd/tsc",
+            "test": "TestChildProcessCloseDoesNotWaitForLauncherDescendants"
+          }
+        ]
+      }
+    },
+    {
+      "case": "complete observed nested lifecycle",
+      "candidateAccepted": true,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": true,
+        "testsPassed": true,
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required",
+        "expectedTopLevelTests": 5972,
+        "observedNestedTests": 1,
+        "packages": 104,
+        "excludedBehavior": [],
+        "failedTests": []
+      }
+    },
+    {
+      "case": "exact existing declared skip",
+      "candidateAccepted": true,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": true,
+        "testsPassed": true,
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required",
+        "expectedTopLevelTests": 5972,
+        "observedNestedTests": 0,
+        "packages": 104,
+        "excludedBehavior": [
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestAliasMergingWithNamespace",
+            "reason": "Known failing fourslash test",
+            "exercised": false
+          }
+        ],
+        "failedTests": []
+      }
+    },
+    {
+      "case": "exact existing bare skip",
+      "candidateAccepted": true,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": true,
+        "testsPassed": true,
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required",
+        "expectedTopLevelTests": 5972,
+        "observedNestedTests": 0,
+        "packages": 104,
+        "excludedBehavior": [
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestAutoImportPackageRootPathTypeModule",
+            "reason": "Source-authored unconditional bare skip",
+            "exercised": false
+          }
+        ],
+        "failedTests": []
+      }
+    },
+    {
+      "case": "declared skip without witnessed reason",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "skip reason not witnessed",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "skip policy cannot widen",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "exclusion outside source proposal",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "missing source expectation",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "source expectation missing",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "fake native origin",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "source expectation missing",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "edited source subject",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "source expectation subject mismatch",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "changed source selection",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "source expectation subject mismatch",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "changed wrapper command",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "wrong command/scope",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "changed image",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "selection image mismatch",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "missing empty-scope package in expectations",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "source identity/package set mismatch",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "missing observed package",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "missing package coverage",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "missing top-level identity",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "missing run/terminal coverage",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "benchmark promoted to required event",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "source identity/package set mismatch",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "TestMain wrapper promoted to event",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "source identity/package set mismatch",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "late descendant",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "nested run after ancestor terminal",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "unfinished descendant",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "parent terminal while descendant unfinished",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "failed descendant with passing parent",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "failed descendant requires failed parent",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "unexpected top-level skip",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "unexpected skip at any nesting depth",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "unexpected nested skip",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "unexpected skip at any nesting depth",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "build killed disguised as full assertion failure",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "setup/runtime/resource diagnostic",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "resource failure despite complete synthetic events",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "failed/unknown execution control: resourceFailure",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "setup incomplete",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "incomplete execution control: setupComplete",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "wrapper incomplete",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "incomplete execution control: wrapperCompleted",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "source changed after selection",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "incomplete execution control: trackedSourceIntact",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "truncated events",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "failed/unknown execution control: truncated",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "listing-only",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "missing run/terminal coverage",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "zero-name selected-test-source package cannot claim no-test-files",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "zero-test package incomplete",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "forged standalone file rejected in synthetic join",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "unbound/forged synthetic capture fixture",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "actual or invalid synthetic mode remains blocked False",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": false,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "reviewed-full-task-capture-join-unavailable",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "actual or invalid synthetic mode remains blocked None",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": null,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "synthetic type",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "actual or invalid synthetic mode remains blocked 1",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": 1,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "synthetic type",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "changed expectations frozen during execution",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "expectation not frozen before execution",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "unaccepted skip policy",
+      "candidateAccepted": false,
+      "result": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "exclusion policy unaccepted",
+        "oracleQualified": false,
+        "campaignAdmitted": false,
+        "nativeCollectionOccurred": false,
+        "captureJoinState": "open-reviewed-full-task-capture-join-required"
+      }
+    },
+    {
+      "case": "registry selection context changed",
+      "candidateAccepted": false,
+      "error": "changed target selection context"
+    },
+    {
+      "case": "registry package lost",
+      "candidateAccepted": false,
+      "error": "incomplete package selection"
+    },
+    {
+      "case": "registry identity edited",
+      "candidateAccepted": false,
+      "error": "changed expected identity map"
+    },
+    {
+      "case": "registry diagnostic",
+      "candidateAccepted": false,
+      "error": "unresolved or duplicate package"
+    },
+    {
+      "case": "registry fake compile validity",
+      "candidateAccepted": false,
+      "error": "false compile validity"
+    },
+    {
+      "case": "bound source edited",
+      "candidateAccepted": false,
+      "error": "changed bound source: benchmarks/head-to-head/f05-go01-source-registry-result-20261029/FREEZE.json"
+    },
+    {
+      "case": "bound source deleted",
+      "candidateAccepted": false,
+      "error": "[Errno 2] No such file or directory: 'SYNTHETIC_ROOT/benchmarks/head-to-head/f05-go01-source-registry-result-20261029/FREEZE.json'"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "artifactCount": 5,
+  "artifactSha256": {
+    "README.md": "f086178a4f00c4e1f0ced612928deb08e9176238d74ba1c8f6152102202b605d",
+    "checks.json": "9c9a59b705707deb99643c4fdee39710caced55bb3af63fdba4d4a3501d0498a",
+    "fix.diff": "0d27eda7e16d3cbb1d4b21fc568b30c61a252a875298ecb3e51aca5758ae58b5",
+    "independent-before-counterexample.json": "385827d6a0359e0a7388cbf5aac091bb7746821f57167ac192a37a8a454f370c",
+    "source-bindings.json": "410b3006a5224c4fc022ef9804cab7bb4b42b858381c2b5fcb8e8718902fa9db"
+  },
+  "campaignAdmitted": false,
+  "codeSha256": {
+    "benchmarks/head-to-head/bench/agent_runtime.py": "dc585e08f24e1a20da9d9ccdafac4af3f4e10cb8451de7ca3a74c05ecc985fa0",
+    "scripts/tests/test_agent_runtime.py": "7e1fb8f1e149bfe180c40248effecef1709a6c7da1398cb208b4445fb426c339"
+  },
+  "executionAuthorized": false,
+  "identity": "go01-event-capture-wait-deadline-amendment-1",
+  "oracleQualified": false,
+  "predecessorFreezeSha256": "f9748188f66b9facf40983844bab33f2b1a6a72c5d07a3f2885d990ebb4f199d",
+  "state": "corrected-owned-control-passed-independent-review-pending"
+}

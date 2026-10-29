@@ -1,0 +1,141 @@
+{
+  "binding": "Exact retained full archive bytes and line spans, no execution",
+  "spans": [
+    {
+      "claim": "setup/dev/build but no test script",
+      "endLine": 12,
+      "excerpt": "  \"scripts\": {\n    \"setup\": \"npm install && cd frontend && npm install\",\n    \"setup:backend\": \"cd backend && uv sync\",\n    \"setup:all\": \"npm run setup && npm run setup:backend\",\n    \"dev\": \"concurrently --kill-others -n \\\"backend,frontend\\\" -c \\\"green,cyan\\\" \\\"npm run backend\\\" \\\"npm run frontend\\\"\",\n    \"backend\": \"cd backend && uv run python run.py\",\n    \"frontend\": \"cd frontend && npm run dev\",\n    \"build\": \"cd frontend && npm run build\"\n",
+      "path": "package.json",
+      "sourceSha256": "f2b8cc90bc21b0b4990d5192b5e7c09161982760dede52cb743862d908526715",
+      "startLine": 5
+    },
+    {
+      "claim": "Python constraint, application and dev dependency declarations",
+      "endLine": 56,
+      "excerpt": "[project]\nname = \"mirofish-backend\"\nversion = \"0.1.0\"\ndescription = \"MiroFish - 简洁通用的群体智能引擎，预测万物\"\nrequires-python = \">=3.11,<3.13\"\nlicense = { text = \"AGPL-3.0\" }\nauthors = [\n    { name = \"MiroFish Team\" }\n]\n\ndependencies = [\n    # 核心框架\n    \"flask>=3.0.0\",\n    \"flask-cors>=6.0.0\",\n    \n    # LLM 相关\n    \"openai>=1.0.0\",\n    \n    # Zep Cloud\n    \"zep-cloud==3.25.0\",\n    \"httpx>=0.27.0\",\n    \n    # OASIS 社交媒体模拟\n    \"camel-oasis==0.2.5\",\n    \"camel-ai==0.2.78\",\n    \n    # 文件处理\n    \"PyMuPDF>=1.24.0\",\n    # 编码检测（支持非UTF-8编码的文本文件）\n    \"charset-normalizer>=3.0.0\",\n    \"chardet>=5.0.0\",\n    \n    # 工具库\n    \"python-dotenv>=1.0.0\",\n    \"pydantic>=2.0.0\",\n]\n\n[project.optional-dependencies]\ndev = [\n    \"pytest>=8.0.0\",\n    \"pytest-asyncio>=0.23.0\",\n    \"pipreqs>=0.5.0\",\n]\n\n[build-system]\nrequires = [\"hatchling\"]\nbuild-backend = \"hatchling.build\"\n\n[dependency-groups]\ndev = [\n    \"pytest>=8.0.0\",\n    \"pytest-asyncio>=0.23.0\",\n]\n\n[tool.hatch.build.targets.wheel]\npackages = [\"app\"]\n",
+      "path": "backend/pyproject.toml",
+      "sourceSha256": "e923fa98056d1b6085ab789993a1d05f31bfc1e8cbbb6b9aa17d49663253c1a2",
+      "startLine": 1
+    },
+    {
+      "claim": "source CI maintenance subset; not backend union",
+      "endLine": 71,
+      "excerpt": "      - name: Run Star History tests without tokens\n        env:\n          GITHUB_TOKEN: ''\n          GH_TOKEN: ''\n        run: >-\n          python3 -m unittest\n          tests.test_local_star_history\n          tests.test_local_star_count_fetch\n          -v\n",
+      "path": ".github/workflows/update-star-history.yml",
+      "sourceSha256": "cd63f857c71823963a3d9ef678328478870e2750c3c1f41ac708b1fa7ecec70e",
+      "startLine": 63
+    },
+    {
+      "claim": "diagnostic intended profile-format validation",
+      "endLine": 21,
+      "excerpt": "\"\"\"\n测试Profile格式生成是否符合OASIS要求\n验证：\n1. Twitter Profile生成CSV格式\n2. Reddit Profile生成JSON详细格式\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport csv\nimport tempfile\n\n# 添加项目路径\nsys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))\n\nfrom app.services.oasis_profile_generator import OasisProfileGenerator, OasisAgentProfile\n\n\ndef test_profile_formats():\n    \"\"\"测试Profile格式\"\"\"\n",
+      "path": "backend/scripts/test_profile_format.py",
+      "sourceSha256": "c60feaff8d5727c7c473d9879742c85c352151b208ec8ff72d48ad9ff9e88f17",
+      "startLine": 1
+    },
+    {
+      "claim": "Twitter output then missing-field errors only printed",
+      "endLine": 95,
+      "excerpt": "    generator = OasisProfileGenerator.__new__(OasisProfileGenerator)\n    \n    # 使用临时目录\n    with tempfile.TemporaryDirectory() as temp_dir:\n        twitter_path = os.path.join(temp_dir, \"twitter_profiles.csv\")\n        reddit_path = os.path.join(temp_dir, \"reddit_profiles.json\")\n        \n        # 测试Twitter CSV格式\n        print(\"\\n1. 测试Twitter Profile (CSV格式)\")\n        print(\"-\" * 40)\n        generator._save_twitter_csv(test_profiles, twitter_path)\n        \n        # 读取并验证CSV\n        with open(twitter_path, 'r', encoding='utf-8') as f:\n            reader = csv.DictReader(f)\n            rows = list(reader)\n            \n        print(f\"   文件: {twitter_path}\")\n        print(f\"   行数: {len(rows)}\")\n        print(f\"   表头: {list(rows[0].keys())}\")\n        print(f\"\\n   示例数据 (第1行):\")\n        for key, value in rows[0].items():\n            print(f\"     {key}: {value}\")\n        \n        # 验证必需字段\n        required_twitter_fields = ['user_id', 'user_name', 'name', 'bio', \n                                   'friend_count', 'follower_count', 'statuses_count', 'created_at']\n        missing = set(required_twitter_fields) - set(rows[0].keys())\n        if missing:\n            print(f\"\\n   [错误] 缺少字段: {missing}\")\n        else:\n            print(f\"\\n   [通过] 所有必需字段都存在\")\n",
+      "path": "backend/scripts/test_profile_format.py",
+      "sourceSha256": "c60feaff8d5727c7c473d9879742c85c352151b208ec8ff72d48ad9ff9e88f17",
+      "startLine": 64
+    },
+    {
+      "claim": "Reddit required fields and print-only continuation",
+      "endLine": 126,
+      "excerpt": "        # 验证详细格式字段\n        required_reddit_fields = ['realname', 'username', 'bio', 'persona']\n        optional_reddit_fields = ['age', 'gender', 'mbti', 'country', 'profession', 'interested_topics']\n        \n        missing = set(required_reddit_fields) - set(reddit_data[0].keys())\n        if missing:\n            print(f\"\\n   [错误] 缺少必需字段: {missing}\")\n        else:\n            print(f\"\\n   [通过] 所有必需字段都存在\")\n        \n        present_optional = set(optional_reddit_fields) & set(reddit_data[0].keys())\n        print(f\"   [信息] 可选字段: {present_optional}\")\n    \n    print(\"\\n\" + \"=\" * 60)\n    print(\"测试完成!\")\n",
+      "path": "backend/scripts/test_profile_format.py",
+      "sourceSha256": "c60feaff8d5727c7c473d9879742c85c352151b208ec8ff72d48ad9ff9e88f17",
+      "startLine": 112
+    },
+    {
+      "claim": "manual expected-format display and main entrypoint",
+      "endLine": 164,
+      "excerpt": "def show_expected_formats():\n    \"\"\"显示OASIS期望的格式\"\"\"\n    print(\"\\n\" + \"=\" * 60)\n    print(\"OASIS 期望的Profile格式参考\")\n    print(\"=\" * 60)\n    \n    print(\"\\n1. Twitter Profile (CSV格式)\")\n    print(\"-\" * 40)\n    twitter_example = \"\"\"user_id,user_name,name,bio,friend_count,follower_count,statuses_count,created_at\n0,user0,User Zero,I am user zero with interests in technology.,100,150,500,2023-01-01\n1,user1,User One,Tech enthusiast and coffee lover.,200,250,1000,2023-01-02\"\"\"\n    print(twitter_example)\n    \n    print(\"\\n2. Reddit Profile (JSON详细格式)\")\n    print(\"-\" * 40)\n    reddit_example = [\n        {\n            \"realname\": \"James Miller\",\n            \"username\": \"millerhospitality\",\n            \"bio\": \"Passionate about hospitality & tourism.\",\n            \"persona\": \"James is a seasoned professional in the Hospitality & Tourism industry...\",\n            \"age\": 40,\n            \"gender\": \"male\",\n            \"mbti\": \"ESTJ\",\n            \"country\": \"UK\",\n            \"profession\": \"Hospitality & Tourism\",\n            \"interested_topics\": [\"Economics\", \"Business\"]\n        }\n    ]\n    print(json.dumps(reddit_example, ensure_ascii=False, indent=2))\n\n\nif __name__ == \"__main__\":\n    test_profile_formats()\n    show_expected_formats()\n",
+      "path": "backend/scripts/test_profile_format.py",
+      "sourceSha256": "c60feaff8d5727c7c473d9879742c85c352151b208ec8ff72d48ad9ff9e88f17",
+      "startLine": 130
+    },
+    {
+      "claim": "current Twitter writer schema differs from diagnostic",
+      "endLine": 1163,
+      "excerpt": "    def _save_twitter_csv(self, profiles: List[OasisAgentProfile], file_path: str):\n        \"\"\"\n        保存Twitter Profile为CSV格式（符合OASIS官方要求）\n        \n        OASIS Twitter要求的CSV字段：\n        - user_id: 用户ID（根据CSV顺序从0开始）\n        - name: 用户真实姓名\n        - username: 系统中的用户名\n        - user_char: 详细人设描述（注入到LLM系统提示中，指导Agent行为）\n        - description: 简短的公开简介（显示在用户资料页面）\n        \n        user_char vs description 区别：\n        - user_char: 内部使用，LLM系统提示，决定Agent如何思考和行动\n        - description: 外部显示，其他用户可见的简介\n        \"\"\"\n        import csv\n        \n        # 确保文件扩展名是.csv\n        if not file_path.endswith('.csv'):\n            file_path = file_path.replace('.json', '.csv')\n        \n        with open(file_path, 'w', newline='', encoding='utf-8') as f:\n            writer = csv.writer(f)\n            \n            # 写入OASIS要求的表头\n            headers = ['user_id', 'name', 'username', 'user_char', 'description']\n            writer.writerow(headers)\n            \n            # 写入数据行\n            for idx, profile in enumerate(profiles):\n                # user_char: 完整人设（bio + persona），用于LLM系统提示\n                user_char = profile.bio\n                if profile.persona and profile.persona != profile.bio:\n                    user_char = f\"{profile.bio} {profile.persona}\"\n                # 处理换行符（CSV中用空格替代）\n                user_char = user_char.replace('\\n', ' ').replace('\\r', ' ')\n                \n                # description: 简短简介，用于外部显示\n                description = profile.bio.replace('\\n', ' ').replace('\\r', ' ')\n                \n                row = [\n                    idx,                    # user_id: 从0开始的顺序ID\n                    profile.name,           # name: 真实姓名\n                    profile.user_name,      # username: 用户名\n                    user_char,              # user_char: 完整人设（内部LLM使用）\n                    description             # description: 简短简介（外部显示）\n                ]\n                writer.writerow(row)\n        \n        logger.info(f\"已保存 {len(profiles)} 个Twitter Profile到 {file_path} (OASIS CSV格式)\")\n",
+      "path": "backend/app/services/oasis_profile_generator.py",
+      "sourceSha256": "ed9cd3416a46b922bc2f9bf0e9623435d9b96bdf0198db27602ca8c4f0dd0e37",
+      "startLine": 1114
+    },
+    {
+      "claim": "current Reddit writer uses name rather than realname",
+      "endLine": 1237,
+      "excerpt": "    def _save_reddit_json(self, profiles: List[OasisAgentProfile], file_path: str):\n        \"\"\"\n        保存Reddit Profile为JSON格式\n        \n        使用与 to_reddit_format() 一致的格式，确保 OASIS 能正确读取。\n        必须包含 user_id 字段，这是 OASIS agent_graph.get_agent() 匹配的关键！\n        \n        必需字段：\n        - user_id: 用户ID（整数，用于匹配 initial_posts 中的 poster_agent_id）\n        - username: 用户名\n        - name: 显示名称\n        - bio: 简介\n        - persona: 详细人设\n        - age: 年龄（整数）\n        - gender: \"male\", \"female\", 或 \"other\"\n        - mbti: MBTI类型\n        - country: 国家\n        \"\"\"\n        data = []\n        for idx, profile in enumerate(profiles):\n            # 使用与 to_reddit_format() 一致的格式\n            item = {\n                \"user_id\": profile.user_id if profile.user_id is not None else idx,  # 关键：必须包含 user_id\n                \"username\": profile.user_name,\n                \"name\": profile.name,\n                \"bio\": profile.bio[:150],\n                \"persona\": profile.persona,\n                \"karma\": profile.karma if profile.karma else 1000,\n                \"created_at\": profile.created_at,\n                # OASIS必需字段 - 确保都有默认值\n                \"age\": profile.age if profile.age else 30,\n                \"gender\": self._normalize_gender(profile.gender),\n                \"mbti\": profile.mbti if profile.mbti else \"ISTJ\",\n                \"country\": profile.country if profile.country else \"中国\",\n            }\n            \n            # 可选字段\n            if profile.profession:\n                item[\"profession\"] = profile.profession\n            if profile.interested_topics:\n                item[\"interested_topics\"] = profile.interested_topics\n            \n            data.append(item)\n        \n        with open(file_path, 'w', encoding='utf-8') as f:\n            json.dump(data, f, ensure_ascii=False, indent=2)\n        \n        logger.info(f\"已保存 {len(profiles)} 个Reddit Profile到 {file_path} (JSON格式，包含user_id字段)\")\n",
+      "path": "backend/app/services/oasis_profile_generator.py",
+      "sourceSha256": "ed9cd3416a46b922bc2f9bf0e9623435d9b96bdf0198db27602ca8c4f0dd0e37",
+      "startLine": 1190
+    },
+    {
+      "claim": "assertion-bearing serialization behavior",
+      "endLine": 76,
+      "excerpt": "def test_normalized_profile_serializes_to_twitter_and_reddit(tmp_path):\n    profile = OasisAgentProfile(\n        user_id=1,\n        user_name=\"agent\",\n        name=\"Agent Name\",\n        bio={\"summary\": \"公开简介\"},\n        persona=[\"详细\", \"人设\"],\n        mbti={\"text\": \"ENFP\"},\n        interested_topics=[\"AI\", [\"政策\"]],\n    )\n    generator = object.__new__(OasisProfileGenerator)\n    twitter_path = tmp_path / \"twitter_profiles.csv\"\n    reddit_path = tmp_path / \"reddit_profiles.json\"\n\n    generator._save_twitter_csv([profile], str(twitter_path))\n    generator._save_reddit_json([profile], str(reddit_path))\n\n    with twitter_path.open(encoding=\"utf-8\") as handle:\n        twitter = next(csv.DictReader(handle))\n    reddit = json.loads(reddit_path.read_text(encoding=\"utf-8\"))[0]\n\n    assert twitter[\"description\"] == \"公开简介\"\n    assert twitter[\"user_char\"] == \"公开简介 详细, 人设\"\n    assert reddit[\"bio\"] == \"公开简介\"\n    assert reddit[\"persona\"] == \"详细, 人设\"\n    assert reddit[\"mbti\"] == \"ENFP\"\n    assert reddit[\"interested_topics\"] == [\"AI\", \"政策\"]\n",
+      "path": "backend/tests/test_profile_field_normalization.py",
+      "sourceSha256": "6fa99d1c71567f8d02a07a4aab14ed0f7a16b3ec6980e69594596484ca7fe40e",
+      "startLine": 50
+    },
+    {
+      "claim": "native child interpreter import probe with sentinel key, not Cloud validation execution",
+      "endLine": 45,
+      "excerpt": "def test_validation_script_preserves_the_process_key_across_app_config_import():\n    backend_root = Path(__file__).resolve().parents[1]\n    script_path = backend_root / \"scripts\" / \"validate_zep_cloud_integration.py\"\n    probe = textwrap.dedent(\n        f\"\"\"\n        import os\n        import runpy\n        import dotenv\n\n        def overwrite_with_dotenv_value(*_args, **_kwargs):\n            os.environ[\"ZEP_API_KEY\"] = \"dotenv-test-key\"\n            return True\n\n        dotenv.load_dotenv = overwrite_with_dotenv_value\n        namespace = runpy.run_path({str(script_path)!r}, run_name=\"zep_validation_probe\")\n        assert namespace[\"_PROCESS_ZEP_API_KEY\"] == \"process-test-key\"\n        assert namespace[\"_require_process_api_key\"]() == \"process-test-key\"\n        assert os.environ[\"ZEP_API_KEY\"] == \"process-test-key\"\n        \"\"\"\n    )\n    environment = os.environ.copy()\n    environment[\"ZEP_API_KEY\"] = \"process-test-key\"\n    environment[\"PYTHONPATH\"] = os.pathsep.join(\n        filter(None, [str(backend_root), environment.get(\"PYTHONPATH\", \"\")])\n    )\n\n    completed = subprocess.run(\n        [sys.executable, \"-c\", probe],\n        cwd=backend_root,\n        env=environment,\n        capture_output=True,\n        text=True,\n        timeout=30,\n        check=False,\n    )\n\n    assert completed.returncode == 0, completed.stderr\n",
+      "path": "backend/tests/test_zep_cloud_validation_script.py",
+      "sourceSha256": "a3e595b1af1e7dc265d0ae9c111fc79e4a9b4e4d1a1b4ee167b2833d458fd33b",
+      "startLine": 9
+    },
+    {
+      "claim": "real manual Cloud validation explicitly excluded from automated tests",
+      "endLine": 9,
+      "excerpt": "#!/usr/bin/env python3\n\"\"\"Run a manual, real Zep Cloud validation against a retained test graph.\n\nThis script is intentionally excluded from the automated test suite. It requires\n``ZEP_API_KEY`` at runtime, never prints the key, and deletes the graph unless\n``--keep-graph`` is explicitly supplied. If the activity updater cannot be\nconfirmed drained after a failure, the graph is retained to avoid a write/delete\nrace.\n\"\"\"\n",
+      "path": "backend/scripts/validate_zep_cloud_integration.py",
+      "sourceSha256": "baf1b07bb4e23fba44cc66a363880b5be65a29843d870113aa776c6cbaa43ba9",
+      "startLine": 1
+    },
+    {
+      "claim": "backend app import needs Flask/CORS/config",
+      "endLine": 23,
+      "excerpt": "from flask import Flask, request\nfrom flask_cors import CORS\n\nfrom .config import Config\nfrom .utils.logger import setup_logger, get_logger\n\n\ndef create_app(config_class=Config):\n    \"\"\"Flask应用工厂函数\"\"\"\n    app = Flask(__name__)\n    app.config.from_object(config_class)\n    \n",
+      "path": "backend/app/__init__.py",
+      "sourceSha256": "f04d262decf6c11437280c0f0c1353774f642888b2ef3f02dfa0e96e992b3c1c",
+      "startLine": 12
+    },
+    {
+      "claim": "eager services import closure",
+      "endLine": 38,
+      "excerpt": "from .ontology_generator import OntologyGenerator\nfrom .graph_builder import GraphBuilderService\nfrom .text_processor import TextProcessor\nfrom .zep_entity_reader import ZepEntityReader, EntityNode, FilteredEntities\nfrom .oasis_profile_generator import OasisProfileGenerator, OasisAgentProfile\nfrom .simulation_manager import SimulationManager, SimulationState, SimulationStatus\nfrom .simulation_config_generator import (\n    SimulationConfigGenerator, \n    SimulationParameters,\n    AgentActivityConfig,\n    TimeSimulationConfig,\n    EventConfig,\n    PlatformConfig\n)\nfrom .simulation_runner import (\n    SimulationRunner,\n    SimulationRunState,\n    RunnerStatus,\n    AgentAction,\n    RoundSummary\n)\nfrom .zep_graph_memory_updater import (\n    ZepGraphMemoryUpdater,\n    ZepGraphMemoryManager,\n    AgentActivity\n)\nfrom .simulation_ipc import (\n    SimulationIPCClient,\n    SimulationIPCServer,\n    IPCCommand,\n    IPCResponse,\n    CommandType,\n    CommandStatus\n)\n",
+      "path": "backend/app/services/__init__.py",
+      "sourceSha256": "5c78b7c2e902a80197acfeb9493ad81da903002eda04dd9870a2de1e42c12112",
+      "startLine": 5
+    },
+    {
+      "claim": "dotenv may load repository or environment overrides",
+      "endLine": 14,
+      "excerpt": "from dotenv import load_dotenv\n\n# 加载项目根目录的 .env 文件\n# 路径: MiroFish/.env (相对于 backend/app/config.py)\nproject_root_env = os.path.join(os.path.dirname(__file__), '../../.env')\n\nif os.path.exists(project_root_env):\n    load_dotenv(project_root_env, override=True)\nelse:\n    # 如果根目录没有 .env，尝试加载环境变量（用于生产环境）\n    load_dotenv(override=True)\n",
+      "path": "backend/app/config.py",
+      "sourceSha256": "a85580b4551724b3c2fff419565c9aa11f6dba1992f5981ed34037a264c2a2f3",
+      "startLine": 4
+    },
+    {
+      "claim": "installed ZepSDK contract uses MockTransport",
+      "endLine": 501,
+      "excerpt": "                \"progress\": {\"percent_complete\": 100, \"succeeded_items\": 1},\n            })\n        if path.endswith(\"/batches/batch-1/items\") and request.method == \"GET\":\n            return httpx.Response(200, json={\n                \"items\": [{\n                    \"item_id\": \"item-1\",\n                    \"sequence_index\": 0,\n                    \"status\": \"succeeded\",\n                    \"episode_uuid\": \"episode-1\",\n                    \"source_uuid\": \"episode-1\",\n                }],\n                \"next_cursor\": None,\n            })\n        raise AssertionError(f\"Unexpected request: {request.method} {path}\")\n\n    with httpx.Client(transport=httpx.MockTransport(handler)) as transport_client:\n        builder = object.__new__(GraphBuilderService)\n        builder.client = Zep(api_key=\"test-key\", httpx_client=transport_client)\n        submission = builder.add_text_batches(\"graph-id\", [\"source chunk\"])\n        assert builder._wait_for_batch(submission, timeout=1) == [\"episode-1\"]\n\n    assert [(method, path) for method, path, _body in requests] == [\n        (\"POST\", \"/api/v2/batches\"),\n        (\"POST\", \"/api/v2/batches/batch-1/items\"),\n        (\"POST\", \"/api/v2/batches/batch-1/process\"),\n        (\"GET\", \"/api/v2/batches/batch-1\"),\n        (\"GET\", \"/api/v2/batches/batch-1/items\"),\n    ]\n    add_payload = json.loads(requests[1][2])\n    assert add_payload[\"items\"][0] == {\n        \"data\": \"source chunk\",\n        \"data_type\": \"text\",\n        \"graph_id\": \"graph-id\",\n        \"metadata\": add_payload[\"items\"][0][\"metadata\"],\n        \"source_description\": \"MiroFish source document chunk\",\n        \"type\": \"graph_episode\",\n    }\n",
+      "path": "backend/tests/test_zep_cloud_contracts.py",
+      "sourceSha256": "6bba5c2d520671e83792951ca9682648ac405ff425d9775ca0233763a715ccca",
+      "startLine": 465
+    },
+    {
+      "claim": "root tests import scripts and create loopback HTTPServer fixture",
+      "endLine": 64,
+      "excerpt": "import ast\nimport io\nimport json\nimport os\nimport threading\nimport unittest\nfrom contextlib import redirect_stderr, redirect_stdout\nfrom http.server import BaseHTTPRequestHandler, HTTPServer\nfrom pathlib import Path\nfrom unittest.mock import patch\n\nfrom scripts import fetch_star_count\n\n\nTOKEN_SENTINEL = \"TOKEN_FETCH_ONLY_DO_NOT_LEAK_7z9\"\n\n\nclass RecordingHandler(BaseHTTPRequestHandler):\n    def do_GET(self):\n        self.server.requests.append(\n            {\"path\": self.path, \"headers\": dict(self.headers.items())}\n        )\n        response = self.server.response\n        self.send_response(response[\"status\"])\n        for name, value in response.get(\"headers\", {}).items():\n            self.send_header(name, value)\n        self.end_headers()\n        try:\n            self.wfile.write(response.get(\"body\", b\"\"))\n        except BrokenPipeError:\n            pass\n\n    def log_message(self, *_args):\n        return\n\n\nclass LocalHttpServer:\n    def __init__(self, *, status=200, headers=None, body=b\"\"):\n        self.response = {\n            \"status\": status,\n            \"headers\": headers or {},\n            \"body\": body,\n        }\n\n    def __enter__(self):\n        self.server = HTTPServer((\"127.0.0.1\", 0), RecordingHandler)\n        self.server.requests = []\n        self.server.response = self.response\n        self.thread = threading.Thread(\n            target=self.server.serve_forever,\n            kwargs={\"poll_interval\": 0.01},\n            daemon=True,\n        )\n        self.thread.start()\n        host, port = self.server.server_address\n        self.url = f\"http://{host}:{port}/repository\"\n        return self\n\n    def __exit__(self, _exc_type, _exc, _traceback):\n        self.server.shutdown()\n        self.server.server_close()\n        self.thread.join(timeout=2)\n\n\n",
+      "path": "tests/test_local_star_count_fetch.py",
+      "sourceSha256": "f9368e145018b644f28104f15012ccbe99d124647966ee225bd4153f52dbb173",
+      "startLine": 1
+    }
+  ]
+}

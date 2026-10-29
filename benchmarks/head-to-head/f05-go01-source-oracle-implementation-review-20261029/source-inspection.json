@@ -1,0 +1,57 @@
+{
+  "author": {
+    "FREEZE.json": {
+      "bytes": 2121,
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-2/FREEZE.json",
+      "sha256": "cc12c2fe8ca12e8f2eb15b2ceffc130aa4094b281a3b9057e60749ab09e510b5"
+    },
+    "capture-dependency.json": {
+      "bytes": 877,
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-2/capture-dependency.json",
+      "sha256": "f1ebdded7c1482ef1dd2544b5c149fdb1b795d98c1437426f920ab5e52321b02"
+    },
+    "derive.py": {
+      "bytes": 5622,
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-2/derive.py",
+      "sha256": "9b58061af3b1205637becea668544cc6f7b4dbb0d68a51cf1fc05601370dcde2"
+    },
+    "expectation.json": {
+      "bytes": 4730,
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-2/expectation.json",
+      "sha256": "65d861a2c8d082fceb00fc77f1befce47b463aa272b69a71248a1f9973f3700b"
+    },
+    "expected-map.json": {
+      "bytes": 242536,
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-2/expected-map.json",
+      "sha256": "768482aa2dcec46151e529a1126a8d74fbaba56f168d86c915002aa70d869e4a"
+    },
+    "oracle.diff": {
+      "bytes": 9809,
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-2/oracle.diff",
+      "sha256": "5f1234a8dbe0d1fab9a9b73e5ad11207eef4049ce0a68b4c119c2465d70f3aca"
+    },
+    "oracle.py": {
+      "bytes": 19627,
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-2/oracle.py",
+      "sha256": "d969170818e80124a0eb99947aa584b82ae9c9f50e8b32ba6dc62fe17fd3b1c9"
+    },
+    "plan.json": {
+      "bytes": 710,
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-2/plan.json",
+      "sha256": "feb7dc297a3d73e94c0bb6412ad5baefcdd2c4de6004a7163d19a2f5387edd7c"
+    },
+    "source-bindings.json": {
+      "bytes": 2484,
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-2/source-bindings.json",
+      "sha256": "25ad36a65f53431ded8afd7f171c539805f1de9619b95c3ed1e67654b0ced795"
+    }
+  },
+  "boundSources": 11,
+  "captureAssessmentFreezeSha256": "5cdae83d1f32a34d17f69f960fb68c2759a21636f8d5d66e203b2fc02b023016",
+  "completeOracleDiffExact": true,
+  "lifecycle": "Author verifier independently replayed AST comparison; unchanged except stricter no-test-files skip refusal when selected test source exists.",
+  "newRuntimeActions": 0,
+  "originalHelpersAndConstantsAstEqual": true,
+  "skipAuthorizationAndAssertionProcessSections": "Exact unchanged bytes apart from native/source origin noun.",
+  "trustedCaptureBoundary": "Actual evaluation unconditionally refuses before supplied receipt flags could qualify; synthetic fixtures are consistency only."
+}

@@ -797,6 +797,41 @@ def test_limited_host_capture_stops_flooding_without_retaining_unbounded_output(
     assert len(result["stdout"]) + len(result["stderr"]) <= 1024
 
 
+@pytest.mark.skipif(not Path("/bin/sh").is_file(), reason="owned POSIX shell control")
+@pytest.mark.parametrize("raw", [False, True])
+def test_pipe_eof_before_process_exit_retains_timeout_and_reaps_client(monkeypatch, raw):
+    real_popen, processes = subprocess.Popen, []
+
+    def observed_popen(*args, **kwargs):
+        process = real_popen(*args, **kwargs)
+        processes.append(process)
+        return process
+
+    monkeypatch.setattr(runtime.subprocess, "Popen", observed_popen)
+    try:
+        result = runtime.limited_process(
+            [
+                "/bin/sh",
+                "-c",
+                "printf retained; printf diagnostic >&2; exec 1>&- 2>&-; while :; do :; done",
+            ],
+            timeout=0.2,
+            output_limit=1024,
+            raw=raw,
+        )
+        assert result["error"] == "timeout"
+        assert result["stdout"] == (b"retained" if raw else "retained")
+        assert result["stderr"] == (b"diagnostic" if raw else "diagnostic")
+        assert result["exitCode"] is not None
+        assert len(processes) == 1 and processes[0].returncode is not None
+    finally:
+        # Keep the negative control safe even against the historical defect.
+        for process in processes:
+            if process.poll() is None:
+                process.kill()
+            process.wait()
+
+
 def test_cli_cannot_launch_live_campaign_without_qualified_transport(campaign, tmp_path):
     # An incomplete runtime artifact is rejected before Docker/provider setup.
     path, _ = campaign
@@ -1332,3 +1367,77 @@ def test_source_link_inventory_cannot_reinterpret_or_omit_archive_members(tmp_pa
     spec["inventory"] = write(tmp_path, "source-inventory.json", inventory)
     with pytest.raises(ValueError, match="conflicting|links/devices|archive mismatch"):
         runtime.source_bundle(tmp_path, spec, "a" * 40, set(), 1000000)
+
+
+@pytest.mark.parametrize("raw,cancelled", [(False, False), (True, False), (True, True)])
+def test_limited_process_optional_raw_and_cancelled_prefix_are_retained(
+    monkeypatch, raw, cancelled
+):
+    """Fake pipes only: no subprocess, daemon, provider or upstream invocation."""
+    from types import SimpleNamespace
+
+    class Pipe:
+        def __init__(self, number, data):
+            self.number, self.chunks = number, [data, b""]
+
+        def fileno(self):
+            return self.number
+
+        def close(self):
+            pass
+
+    class Process:
+        def __init__(self):
+            self.stdout, self.stderr = Pipe(90001, b"\xffowned"), Pipe(90002, b"\x80")
+            self.returncode, self.killed = None, False
+
+        def kill(self):
+            self.returncode, self.killed = -9, True
+
+        def wait(self, **kwargs):
+            if cancelled:
+                assert self.killed, "cancellation waited before killing client"
+            if self.returncode is None:
+                self.returncode = 0
+            return self.returncode
+
+    class Selector:
+        def __init__(self):
+            self.keys, self.turn = {}, 0
+
+        def register(self, stream, events):
+            self.keys[stream.fileno()] = SimpleNamespace(fileobj=stream)
+
+        def unregister(self, stream):
+            del self.keys[stream.fileno()]
+
+        def get_map(self):
+            return self.keys
+
+        def select(self, timeout):
+            self.turn += 1
+            if cancelled and self.turn == 2:
+                raise KeyboardInterrupt("owned fake cancellation")
+            return [(key, None) for key in list(self.keys.values())]
+
+        def close(self):
+            pass
+
+    process = Process()
+    monkeypatch.setattr(runtime.subprocess, "Popen", lambda *args, **kwargs: process)
+    monkeypatch.setattr(runtime.selectors, "DefaultSelector", Selector)
+    monkeypatch.setattr(runtime.os, "set_blocking", lambda *args: None)
+    monkeypatch.setattr(
+        runtime.os,
+        "read",
+        lambda fd, size: (process.stdout if fd == 90001 else process.stderr).chunks.pop(0),
+    )
+    result = runtime.limited_process(["NEVER_EXECUTED"], timeout=10, output_limit=100, raw=raw)
+    assert result["stdout"] == (b"\xffowned" if raw else "\ufffdowned")
+    assert result["stderr"] == (b"\x80" if raw else "\ufffd")
+    if cancelled:
+        assert process.killed and result["exitCode"] == -9
+        assert result["cancelled"] is True and result["error"] == "KeyboardInterrupt"
+    else:
+        assert result["exitCode"] == 0 and result["error"] is None
+        assert set(result) == {"stdout", "stderr", "exitCode", "error"}

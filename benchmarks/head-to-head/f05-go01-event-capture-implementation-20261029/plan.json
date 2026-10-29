@@ -1,0 +1,53 @@
+{
+  "accounting": "Descriptor records request attempts, captured transport counts/completeness, process raw counts, shared elapsed and null unmetered native cost. Unknown transfer makes aggregate transport/effort decodedBytes null. Internal Docker requests are reported as capture requests, not relabeled providerHTTPcalls. Elapsed is whole operation, not an isolated causal overhead estimate.",
+  "campaignAdmitted": false,
+  "codeSha256": {
+    "benchmarks/head-to-head/bench/agent_runtime.py": "d4581245001b9f7710e04a50818ab73b802e7a7a156167eea19ad46abb6a6c2c",
+    "benchmarks/head-to-head/bench/event_capture.py": "ffe5b5e27aaca28bceae83aac15bfeb5e83963eef63a3b2f41c97833787b4a12",
+    "scripts/tests/test_agent_event_capture.py": "ff5393313566aba40a7a883ea99b1640889af43e67d0b26b3fac54753af49756",
+    "scripts/tests/test_agent_runtime.py": "6a52a74cee0a16b52163b3651f52138cc58b6f65ff1ff9e7d72a0f1161645654"
+  },
+  "configContract": {
+    "budget": "Each enabled config freezes positive per-call values under ceilings. Normally8instrumentation requests plus chosen process; combined raw capture stdin/stdout/stderr count toward maxCaptureBytes; process response separately bounded by existing maxToolOutputBytes. One deadline starts before Capture construction and is reused for preflight/chosen process/export/afterchecks; no fresh export timeout. Session wall budget and elapsed include all phases.",
+    "ceilings": {
+      "maxCaptureBytes": 536870912,
+      "maxEventBytes": 268435456,
+      "maxMetadataBytes": 2097152,
+      "maxRequests": 16
+    },
+    "keys": [
+      "helperSha256",
+      "path",
+      "sourceFiles",
+      "toolPaths",
+      "maxEventBytes",
+      "maxMetadataBytes",
+      "maxCaptureBytes",
+      "maxRequests"
+    ],
+    "path": "One literal child of/workspace, outside checkout; existing path is not deleted and invalidates freshness only.",
+    "sourceFiles": "Sorted unique1..10000retained regular source paths; hashes from host-validated bundle. Exact subset recorded, no whole-tree claim.",
+    "toolPaths": "1..32absolute literal paths mapped to immutable expectedSHA256 or null(observation-only/source-generated unknown hash). Hash observations do not alone prove a source-owned build."
+  },
+  "executionAuthorized": false,
+  "failurePolicy": "Missing/stale/unsafe/changed/capped/no-context/receipt/aftercheck exports are unqualified, retaining raw failures. Ordinary command response preserved. Actual shared timeout/cancellation stops session paid continuation. Cancellation retains partial stream and kills client before wait; normal session finally cleans container. Nonzero assertion-like exit may be captured but is never classified as task outcome by runtime.",
+  "identity": "go01-optional-event-capture-implementation-v1",
+  "nativeCollectionOccurred": false,
+  "operationSequence": [
+    "Raw inspect-before, selected source/tool witness, fixed event-path absent baseline. Errors with remaining budget do not deny arbitrary chosen command.",
+    "Run unchanged chosen shell command and retain raw stdout/stderr/argv/hash/exit/error/time receipt before UTF8 display. No permission screening against a hidden correct command.",
+    "Before returning tool response, raw inspect-after/witness-after; regular nonlink/single-link bounded event stat+hash; boundedUSTARexport; raw extracted event bytes/hash; second stat+hash consistency.",
+    "Host-only descriptor/raw artifacts emitted before tool response; provider receives ordinary shell result only. All state remains unqualified; post-run oracle must check actual command/scope/context/source/tool closure."
+  ],
+  "optionalConfig": "eventCaptures maps frozen repository keys to one common per-repository spec. Absent map preserves normal shell path. No arm-specific branch or hidden command/scorer/gold access. Helper import is lazy; enabled spec binds helperSha256.",
+  "oracleQualified": false,
+  "remainingPosthocJoin": [
+    "Independent implementation review before any runtime adoption.",
+    "Scorer adapter must bind exact descriptor/raw artifacts/actual tool-call/process/setup/source/tool/effective-target context to frozen expectations/skip policy; currently actual source-origin scorer remains failclosed.",
+    "Base container environment and literal chosen command/source config are observed; effective child Go selection is not queried/proved by this runtime. Full required closure must be checked posthoc; subset consistency is insufficient.",
+    "Any actual qualification/config/model/cost/randomization/execution acceptance stays separate. No Go/Node/Docker/upstream/network/provider action authorized or performed here."
+  ],
+  "sourceBindingsSha256": "750a88d823d798965c346439709d85a256f0ac228fd9d6417e4906c521bd3b90",
+  "state": "implemented-disabled-by-default-static-review-pending",
+  "taskOutcomeObserved": false
+}

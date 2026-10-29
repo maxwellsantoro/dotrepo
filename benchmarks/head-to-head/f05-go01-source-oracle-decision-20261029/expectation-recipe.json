@@ -1,0 +1,566 @@
+{
+  "identity": "prospective-source-expectation-recipe-not-an-accepted-oracle",
+  "registryGzipSha256": "f32b1a5f3c3e6a83f250e4940bc3d01e3cef425b5d1764d6d5fdcf65528c152c",
+  "registryExpandedSha256": "4a25d7781c7aa9626ead71ca13bce863f3ab389b10f52b23d5fffeb11a848ad8",
+  "sourceContext": {
+    "discoverySourcesSha256": "4ff48c80f3ab60084de6e73563a5eae55227be5db1b34aa04e3e5a5ceba3efcb",
+    "environmentSha256": "3649e45b9b1c1f62faeb2c3a168d93d91a7be7a62e7e2905c07d9ba69ddb65fe",
+    "goVersion": "go1.27.3",
+    "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+    "packageInventorySha256": "764fa272f1c461f4ecc2d6e2b58d641cc65c8e64da23f55981fa12b70c75bc21",
+    "repository": "github.com/microsoft/TypeScript",
+    "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+    "selectionSha256": "3991848e78c757487dbe9146e7888db3dabe180bd5a9d353269855177266e308",
+    "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+    "sourceInventorySha256": "96c935c31228fa8e05bb836a93257beeb87ac524e5eb30cdde3c546a1ea4be0e"
+  },
+  "requiredKinds": [
+    "tests",
+    "examples",
+    "fuzzTargets"
+  ],
+  "recipe": "For each of all104 registry packages, sort exact declaration name strings from tests/examples/fuzzTargets; preserve empty arrays. Refuse duplicate (package,name), diagnostics or unresolved states. Do not interpret stable physical declaration IDs as runtime event names.",
+  "canonicalExpectedNameMap": {
+    "sha256": "768482aa2dcec46151e529a1126a8d74fbaba56f168d86c915002aa70d869e4a",
+    "bytes": 242536,
+    "serialization": "UTF8 json.dumps(map,sort_keys=True,separators=(comma,colon),ensure_ascii=True,allow_nan=False); no trailing LF",
+    "packages": 104,
+    "names": 5972,
+    "emptyNamePackages": 40
+  },
+  "declarations": {
+    "tests": 5966,
+    "examples": 0,
+    "fuzzTargets": 6,
+    "benchmarksNotRequired": 48,
+    "testMainWrappersNotCaseIds": 11,
+    "totalDeclarations": 6031
+  },
+  "perPackage": [
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/cmd/tsc",
+      "requiredTopLevelNames": 1,
+      "namesSha256": "c64f98919966136963684ac83fde02d5fe072c3be5fc7a6b693b1a6ec4d6afb0"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/api",
+      "requiredTopLevelNames": 116,
+      "namesSha256": "036d0c36375a4a50712cc78d577c6c394cd5a2b8d1ed41fa9a8682af1c6537c2"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/api/encoder",
+      "requiredTopLevelNames": 28,
+      "namesSha256": "0c2e9b2e47ab340c82668d3b83011be42f0995a16b289ac6ac526517cbbdfbd4"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/api/requestfilesystem",
+      "requiredTopLevelNames": 126,
+      "namesSha256": "fd49e5ac3e9b42f7c763b0c0bae357e284add4a4eeda4a69bf1e62f0f88a4a60"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/ast",
+      "requiredTopLevelNames": 24,
+      "namesSha256": "ddd71247136204ce7301723925fd092185d04aa88c28518c379eb7529e1a312a"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/astnav",
+      "requiredTopLevelNames": 5,
+      "namesSha256": "fb261f6e6b9a329a07b2c92a7697fceb24e46127e355e7308c088eb4bcf6b7d4"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/binder",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/bundled",
+      "requiredTopLevelNames": 2,
+      "namesSha256": "f0f64df1474cb24ee3224fb634f758d5f6c318c5b360890431e04177a2d2b1f4"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/checker",
+      "requiredTopLevelNames": 24,
+      "namesSha256": "9151bcf25727471385d7f672032c829425d77eb5ab4d127f3e5418da244fc85a"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/collections",
+      "requiredTopLevelNames": 9,
+      "namesSha256": "237df45ffa77b08f0ae60c0296f52c46025f7275269f31bc08b2b13e38d90c47"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/compiler",
+      "requiredTopLevelNames": 20,
+      "namesSha256": "c27ded8b8548f213c3123780668a27c69b66c22e6d4f916a9d0fccb4cf71f6bc"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/contentmapper",
+      "requiredTopLevelNames": 32,
+      "namesSha256": "aa7fb8f052b6cb20a9a7e2b3b7f8cbc42c563701902420dac4e7e99d7c153a60"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/core",
+      "requiredTopLevelNames": 5,
+      "namesSha256": "c9c53db0c19b55f450e8bc38601b0d0f0251e50f10b127919b03ea5bd4e305c3"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/debug",
+      "requiredTopLevelNames": 12,
+      "namesSha256": "9d781174ded397b7da8d5d1152f119cb21a811cc4b4eb139d2cf682c63504ec7"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/diagnostics",
+      "requiredTopLevelNames": 5,
+      "namesSha256": "e6ce1334a73e83876653f13af68414c996d28419e99cc6fcfd84925dca873bd6"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/diagnosticwriter",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/evaluator",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/execute",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/execute/build",
+      "requiredTopLevelNames": 5,
+      "namesSha256": "d495934156e0fdad75b19987772f1ea0e46a72c49e746274678241490eb5f506"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/execute/incremental",
+      "requiredTopLevelNames": 16,
+      "namesSha256": "c3abbb3b3a8aa25b26a62dfc019c2cd8304bf0751e5d5f30a1ebcd282ff488b6"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/execute/tsc",
+      "requiredTopLevelNames": 4,
+      "namesSha256": "16a7a8c4ae1e5136da279f955d765c92a79ff37492bb11a27212d6afec306242"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/execute/tsctests",
+      "requiredTopLevelNames": 83,
+      "namesSha256": "e48d9c5d1fe5ca996fd55a3dfec7509f9a07f13713e08bbbd35e7b182bb644c1"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/execute/watchmanager",
+      "requiredTopLevelNames": 12,
+      "namesSha256": "0f84c0ea6ced89e1bdc7432e0d2861170e9695dbb42fce35d8a68aa09142ac65"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/format",
+      "requiredTopLevelNames": 7,
+      "namesSha256": "c63b0bb13f2284a34d1215efe325cf292ac7473c3a950cf2fff011fbfa2a914f"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+      "requiredTopLevelNames": 4571,
+      "namesSha256": "d8aa6853ade68bd5a53b667a8d554927e47f7c781992f5c83adbcdbe9f8cc6c7"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests/util",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/fswatch",
+      "requiredTopLevelNames": 116,
+      "namesSha256": "a3f85aca15127bd33e092f8a9d3133ab5153680fb4394a7282367ca73eabd8c9"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/glob",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/ipc",
+      "requiredTopLevelNames": 17,
+      "namesSha256": "b2be2edb212a4a6f06c16106d7518d85a2d70a01678a41de2d3053f60bff0690"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/jsnum",
+      "requiredTopLevelNames": 17,
+      "namesSha256": "81d2b48e3d0e7430f93e2f9061ce5b82c77c261713da1a50401c16ca7a8adfb7"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/json",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/jsonrpc",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/locale",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/ls",
+      "requiredTopLevelNames": 9,
+      "namesSha256": "3b6a58ae76849b328c848cdeb654f8c555a38b76b5023ebd8969297822478a80"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/ls/autoimport",
+      "requiredTopLevelNames": 13,
+      "namesSha256": "1f76a11a44cab8ebd45ee433e26c29176f4d950cc148b705d1b0ab92c44c1adc"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/ls/change",
+      "requiredTopLevelNames": 1,
+      "namesSha256": "0b0b3ce7f0e0f6c4acd768b8a3543bf780845863829a259a711106bd30ff58eb"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/ls/lsconv",
+      "requiredTopLevelNames": 6,
+      "namesSha256": "2f986525a8ee84e80596c78826adce2e050539468b503adc67f58a229b9f18c6"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/ls/lsutil",
+      "requiredTopLevelNames": 13,
+      "namesSha256": "f56c5dc1d1595c75302a5d892ff9bbdb2e6bdf2a3edc1c4c76fc41972bd0d14e"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/lsp",
+      "requiredTopLevelNames": 36,
+      "namesSha256": "b0863d523d23297499a1e61b57ae60ca2bab998241cd5e7f7ae65013d2fd703c"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto",
+      "requiredTopLevelNames": 31,
+      "namesSha256": "605be6fffdc3040d68ac841264c1aff2bb68ebba17bab9b233f78bfc1e48a9f3"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/lsp/lspwatcher",
+      "requiredTopLevelNames": 16,
+      "namesSha256": "4ebc6f0eb29bdfb2be15f0982b9cf335d237af1d81ad628cbabb12b0f951e1b0"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/module",
+      "requiredTopLevelNames": 38,
+      "namesSha256": "e1b1d4d24bd35fdaa584634ea464f0d44465cdbd7be8f6dae6db1e453ecde3f1"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/modulespecifiers",
+      "requiredTopLevelNames": 10,
+      "namesSha256": "d9d3e3b4563fa54932528f50bf3ccb8260d12e536df9ea9be9019fa754ab1506"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/nativepath",
+      "requiredTopLevelNames": 1,
+      "namesSha256": "919a694dd1cdc2869ed35b697376cdc5983f8663abae953f8199f8f351a74c02"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/nodebuilder",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/osutil",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/outputpaths",
+      "requiredTopLevelNames": 6,
+      "namesSha256": "5dacf6229883bca76267d27b9caac4907acee00ddaf89028be58e4e50f64be81"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/packagejson",
+      "requiredTopLevelNames": 7,
+      "namesSha256": "87a6f723ab61788bf0e6ef9cd66659f9d317c387ac640169e0c03bf5cf305932"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/parser",
+      "requiredTopLevelNames": 12,
+      "namesSha256": "827487dbf15ebd3c9e2e7730419188f142156ebb26fcb2357188cdc4384e7dc8"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/pprof",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/printer",
+      "requiredTopLevelNames": 106,
+      "namesSha256": "71739e688c0fbe2d49c319ffc6b2ac7dad3d531b0cf1c36c07092f854decd37f"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/project",
+      "requiredTopLevelNames": 103,
+      "namesSha256": "71ec86f777a39de3e5c398862ef370f59a5dbeadeada7a4696c05fff1daf83eb"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+      "requiredTopLevelNames": 4,
+      "namesSha256": "4617eb25338852bf78cf1117fdf075a69801bc7b79cef144e7fca379b3715f41"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/project/background",
+      "requiredTopLevelNames": 1,
+      "namesSha256": "94ced97d85548109f4753b0a69eca3a102b1d27914f839f52c6962bb2865c655"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/project/dirty",
+      "requiredTopLevelNames": 1,
+      "namesSha256": "038050eb76d1d6abd7c278c8c58196e6779589b9c335dab807e78ce6ab89df82"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/project/logging",
+      "requiredTopLevelNames": 2,
+      "namesSha256": "c6cdba9c131bd8726e42b4ebae3d978be71a8a41582f7d8038b4ac310a7e73a3"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/pseudochecker",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/repo",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/scanner",
+      "requiredTopLevelNames": 5,
+      "namesSha256": "49dd6e15500c5d85fae31fd8427ee12f6c79a0deb8115f306c4d2c421826b1da"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/semver",
+      "requiredTopLevelNames": 11,
+      "namesSha256": "825509ad5b698dc1acad4332808bbf51fa315d2792345b4d5b5dd74607a7486a"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/sourcemap",
+      "requiredTopLevelNames": 42,
+      "namesSha256": "9e15efcf0b592caa1e81a4e4da8fdd4306a7b7bbd3fdae497b6a2452ab26dc83"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/spanmap",
+      "requiredTopLevelNames": 31,
+      "namesSha256": "edeb07f4f34e13c53f34e59432a4be238c4bcd877c86779f9299aacd1820635a"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/stringutil",
+      "requiredTopLevelNames": 2,
+      "namesSha256": "ffc625042a886b7cdd118ab249ad783e16e6e90e5b7f1c1f881abd5ebd89ccc3"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/symlinks",
+      "requiredTopLevelNames": 9,
+      "namesSha256": "806977c276a33ee10bbd6b935bd9581b0e7aa1c2867090be940597def5e3ee31"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/testrunner",
+      "requiredTopLevelNames": 4,
+      "namesSha256": "3424d0ac8116038abec70f874722718f9a817f74bc41e7c15c7217a19afa3a44"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/testutil",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/testutil/autoimporttestutil",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/testutil/baseline",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/testutil/contentmappertest",
+      "requiredTopLevelNames": 1,
+      "namesSha256": "fe694463ee50b4bfa1b72aefd04f39c404d3b7dd7090a92a81d5fcd128de3afe"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/testutil/emittestutil",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/testutil/filefixture",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/testutil/fixtures",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/testutil/fsbaselineutil",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/testutil/harnessutil",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/testutil/jstest",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/testutil/lsptestutil",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/testutil/parsetestutil",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/testutil/projecttestutil",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/testutil/race",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/testutil/stringtestutil",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/testutil/tsbaseline",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/tracing",
+      "requiredTopLevelNames": 2,
+      "namesSha256": "d78fc263d79c20bd3654de675b72ec1fdb59b014787970216e52029ea3cad7b0"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/transformers",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/transformers/declarations",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/transformers/estransforms",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/transformers/inliners",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/transformers/jsxtransforms",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/transformers/moduletransforms",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/transformers/tstransforms",
+      "requiredTopLevelNames": 2,
+      "namesSha256": "aab185b021166a66c81a725f725ffb0a6a2f83c2c5bc9bb74c43659b43f9b34f"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/transpile",
+      "requiredTopLevelNames": 3,
+      "namesSha256": "525b61cdc2ac764424519fffea4028db200da61a1ce61c3055465a533ba50bb0"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/tsoptions",
+      "requiredTopLevelNames": 62,
+      "namesSha256": "64834141151cfddaf794449f0727bd5e7ff929cf5ce6d3a696f084e8bc1a99a0"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/tsoptions/tsoptionstest",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/tspath",
+      "requiredTopLevelNames": 64,
+      "namesSha256": "6086b4bfbb5667fb8f91bf9327a89847d53d26b9920d417fd1ddaf245e30deaa"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/vfs",
+      "requiredTopLevelNames": 8,
+      "namesSha256": "bce777e9273a1095f5ee36100310e19418850805c6e0a61f515a32635bd82936"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/vfs/cachedvfs",
+      "requiredTopLevelNames": 9,
+      "namesSha256": "cdb1cb2dab851eefaa0e29208a1301f501a1e61dd3047ad6004548a1e535b577"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/vfs/internal",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/vfs/iovfs",
+      "requiredTopLevelNames": 1,
+      "namesSha256": "12c65c6ad69a7b22355caf6fb6c196bce6f92cd64aa6fbdd8f4f56a05da5364d"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/vfs/osvfs",
+      "requiredTopLevelNames": 4,
+      "namesSha256": "e1b9f55672be3704b3fdacc5eb00662c6badd608f07a912e8007307a6e2b44de"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/vfs/trackingvfs",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmatch",
+      "requiredTopLevelNames": 20,
+      "namesSha256": "91b0eb0fe32242fa9ef7f120ff92071beac7f7ccc4310efbef1d13c8f24cfdac"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmock",
+      "requiredTopLevelNames": 1,
+      "namesSha256": "9c706d55885c85e331409c10b1bebb6a836ed1cc1b34d63c0a32d008b24ee655"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/vfs/vfstest",
+      "requiredTopLevelNames": 18,
+      "namesSha256": "0ba3971ac18d93afd61db359d0aea12629756555833f6e941bb916c7bd1b50b0"
+    },
+    {
+      "package": "github.com/microsoft/TypeScript/tsc/internal/vfs/wrapvfs",
+      "requiredTopLevelNames": 0,
+      "namesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    }
+  ],
+  "nativeManifest": false,
+  "accepted": false,
+  "currentGateChanged": false,
+  "oracleQualified": false,
+  "campaignAdmitted": false
+}

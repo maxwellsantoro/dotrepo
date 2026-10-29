@@ -1,0 +1,124 @@
+{
+  "archive": {
+    "bytes": 9175040,
+    "fileBytes": 9064963,
+    "path": "/tmp/dotrepo-f05-qualification-next8-20261029/python-01/source.tar",
+    "regularFilesVerifiedAgainstInventory": 128,
+    "sha256": "fc70acea794785b5c6bfd06f5e0c83cb328fc5c4e05e36dab8f182fea5bd0d70"
+  },
+  "inspectedMembers": {
+    ".github/workflows/update-star-history.yml": {
+      "bytes": 18211,
+      "sha256": "cd63f857c71823963a3d9ef678328478870e2750c3c1f41ac708b1fa7ecec70e"
+    },
+    "backend/app/__init__.py": {
+      "bytes": 2712,
+      "sha256": "f04d262decf6c11437280c0f0c1353774f642888b2ef3f02dfa0e96e992b3c1c"
+    },
+    "backend/app/config.py": {
+      "bytes": 2962,
+      "sha256": "a85580b4551724b3c2fff419565c9aa11f6dba1992f5981ed34037a264c2a2f3"
+    },
+    "backend/app/services/__init__.py": {
+      "bytes": 1752,
+      "sha256": "5c78b7c2e902a80197acfeb9493ad81da903002eda04dd9870a2de1e42c12112"
+    },
+    "backend/app/services/oasis_profile_generator.py": {
+      "bytes": 51012,
+      "sha256": "ed9cd3416a46b922bc2f9bf0e9623435d9b96bdf0198db27602ca8c4f0dd0e37"
+    },
+    "backend/pyproject.toml": {
+      "bytes": 1080,
+      "sha256": "e923fa98056d1b6085ab789993a1d05f31bfc1e8cbbb6b9aa17d49663253c1a2"
+    },
+    "backend/scripts/test_profile_format.py": {
+      "bytes": 5856,
+      "sha256": "c60feaff8d5727c7c473d9879742c85c352151b208ec8ff72d48ad9ff9e88f17"
+    },
+    "backend/scripts/validate_zep_cloud_integration.py": {
+      "bytes": 34544,
+      "sha256": "baf1b07bb4e23fba44cc66a363880b5be65a29843d870113aa776c6cbaa43ba9"
+    },
+    "backend/tests/test_profile_field_normalization.py": {
+      "bytes": 2711,
+      "sha256": "6fa99d1c71567f8d02a07a4aab14ed0f7a16b3ec6980e69594596484ca7fe40e"
+    },
+    "backend/tests/test_zep_cloud_contracts.py": {
+      "bytes": 17117,
+      "sha256": "6bba5c2d520671e83792951ca9682648ac405ff425d9775ca0233763a715ccca"
+    },
+    "backend/tests/test_zep_cloud_validation_script.py": {
+      "bytes": 3221,
+      "sha256": "a3e595b1af1e7dc265d0ae9c111fc79e4a9b4e4d1a1b4ee167b2833d458fd33b"
+    },
+    "package.json": {
+      "bytes": 702,
+      "sha256": "f2b8cc90bc21b0b4990d5192b5e7c09161982760dede52cb743862d908526715"
+    },
+    "tests/test_local_star_count_fetch.py": {
+      "bytes": 13843,
+      "sha256": "f9368e145018b644f28104f15012ccbe99d124647966ee225bd4153f52dbb173"
+    }
+  },
+  "noIndexOrProfileConsulted": true,
+  "noSourceAcquisition": true,
+  "priorOwners": [
+    {
+      "bytes": 447,
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/requests/python-01.md",
+      "sha256": "0d4f17d1fd158230bf1b47d975fa94899c3eb50d922b94cddda62be122ee8466"
+    },
+    {
+      "bytes": 511,
+      "path": "benchmarks/head-to-head/f05-prelaunch-decisions-20261029/freeze.json",
+      "sha256": "b476f79b4e6238fc15cf3ff53363cc3deaa9415a572946fcc20acb14a7b1bce5"
+    },
+    {
+      "bytes": 1725,
+      "path": "benchmarks/head-to-head/f05-prelaunch-decisions-20261029/decision.json",
+      "sha256": "98fe7f62a140a80716008777cb11caf631e164bae705393d638583195020c0af"
+    },
+    {
+      "bytes": 9946,
+      "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/freeze.json",
+      "sha256": "23c4ac12f76d6c8bdb5e788ed22d88efa87a24b460cd790719ed2c46871892a3"
+    },
+    {
+      "bytes": 26004,
+      "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/dispositions.json",
+      "sha256": "3d24e49557b2e2b86ac0cf11a046ce14e6fe746bebc3838108ec284db0bbb1af"
+    },
+    {
+      "bytes": 1546,
+      "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-challenge-review/FREEZE.json",
+      "sha256": "204521730218b794c176d3d2cff36f1e70558cdfea2264213d3f845ef8d6a5e6"
+    },
+    {
+      "bytes": 16931,
+      "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-challenge-review/mirofish-test-paths.json",
+      "sha256": "e6d9a04802ebfe6c6dd8a74bd0032288ace1d6556302e0c85cdcd863e167cb83"
+    },
+    {
+      "bytes": 1452,
+      "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-challenge-review/coordinator-decision-receipt.json",
+      "sha256": "ea5ca798efef6080081fc31538f33ccd17704c9775ac05b7d9d3d4290e56fec1"
+    },
+    {
+      "bytes": 1916,
+      "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/python-01/acquisition.json",
+      "sha256": "02bd55b821ec5ea7181e9ec24abbedd85a389477cb3b8be58c3092791bb7497a"
+    },
+    {
+      "bytes": 508,
+      "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/python-01/provenance.json",
+      "sha256": "d640c1b1db3333892865bb4d8097cb90e1fc9c490678221c83af35a778652721"
+    },
+    {
+      "bytes": 14260,
+      "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/python-01/inventory.json",
+      "sha256": "f3b3c78e90a89434ed77bbf7dc79c9397f9c0b27dc10c5eb0a60296d5b6c89e1"
+    }
+  ],
+  "repository": "github.com/666ghj/MiroFish",
+  "revision": "7657031ac01184afe2cb220f5ee3545573b5e843"
+}

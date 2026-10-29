@@ -1,0 +1,79 @@
+{
+  "actualOracleUsable": false,
+  "campaignAdmitted": false,
+  "contextDisclosure": "Reviewer authored earlier F05/source/oracle/runtime-related tooling and reviews, but not this optional capture patch or coordinator fix. Original reviewer finding is frozen separately and resolved here. Independent implementation review with context, not a blind task trial.",
+  "controls": {
+    "additionalMockedFinalWaitCancellation": 1,
+    "authorAmendmentArtifactsVerified": 5,
+    "directOwnedPosixEOFSuccessorChecks": 2,
+    "focusedRuntimeAndCaptureTests": 161,
+    "focusedSeconds": 1.65,
+    "independentHelperMockMutations": 9,
+    "preservedBeforeArtifacts": 5,
+    "ruffCheckFormat": "passed --no-cache"
+  },
+  "costUsd": null,
+  "executionAuthorized": false,
+  "findings": [],
+  "independentMockCases": [
+    "Complete raw association with invalidUTF8 payload; exact before/command/after ordering.",
+    "Changed containerID/environment, source changed tolink, nonbyte/unknown transport, inconsistent raw process receipt rejected as incomplete.",
+    "Cancellation before chosenprocess and after chosenprocess returns cancellation and retained incomplete descriptor; no realprocess call in these mocks.",
+    "Absent-before/generated-after null-hash tool is explicitly observed, retaining postrun limitation and no whole-tree qualification."
+  ],
+  "limitations": [
+    "No actualDocker/container/Go/Node/upstream task/network/provider execution occurred. Existing161 suite and directEOF controls use only owned trusted local subprocesses; helper mutations are fakes.",
+    "This implementation supports practical inspected source/process/export association, not cryptographic writer authentication against actively adversarial sameUID upstream code.",
+    "A postrun adapter must still bind actual command/fullscope/setup/source-ownedtool/effective target selection and required source closure to capture descriptor/raw bytes. No arbitrary supplied flag/hash authenticates those facts.",
+    "Full raw-event output size and applicable campaign capture/session limits remain prospective; capped/failed export stays unqualified and all effort/errors must remain retained.",
+    "Host/container dollar cost remains unknown; no consumer-benefit or causal-overhead claim is made."
+  ],
+  "nativeCollectionOccurred": false,
+  "newDockerGoNodeUpstreamNetworkProviderActions": 0,
+  "oracleQualified": false,
+  "preparationImplementationReviewPassed": true,
+  "resolvedFinding": {
+    "amendment": "Use remaining deadline; on waittimeout kill/reap and return retained raw bytes+timeout. Handle finalwait cancellation with client cleanup.",
+    "beforeReviewFreezeSha256": "1e9334124173c54b97cb50eb2a36f54407971528c71bd8d9a7bb750371378d6a",
+    "beforeState": "After pipeEOF, finalwait raised TimeoutExpired and left owned childalive; old finalwait pattern inherited frombaseline.",
+    "directRetest": [
+      {
+        "alreadyReaped": true,
+        "elapsedSeconds": 0.05642941617406905,
+        "exception": null,
+        "path": "eof-after.json"
+      },
+      {
+        "alreadyReaped": true,
+        "elapsedSeconds": 0.053997332928702235,
+        "exception": null,
+        "path": "eof-prefix-after.json"
+      }
+    ],
+    "id": "F1",
+    "mockedFinalWaitCancellation": "passed; kills/reaps once, closes both pipes and selector, returns cancelled true",
+    "rawPrefixHex": "ff806f776e65640a"
+  },
+  "scope": "Optional disabled-by-default same-tool-call raw event observation and bounded transport operator-consistency implementation. This review does not establish actual full-task provenance/selection/tool build or oracle/campaign admission.",
+  "state": "independent-optional-capture-implementation-review-passed",
+  "subject": {
+    "authorAmendmentFreezeSha256": "a55c9de8e96056809e9fd02e3e6cdabb4a307a80c6040fe41e4a8ff1424e7918",
+    "codeSha256": {
+      "benchmarks/head-to-head/bench/agent_runtime.py": "dc585e08f24e1a20da9d9ccdafac4af3f4e10cb8451de7ca3a74c05ecc985fa0",
+      "benchmarks/head-to-head/bench/event_capture.py": "ffe5b5e27aaca28bceae83aac15bfeb5e83963eef63a3b2f41c97833787b4a12",
+      "scripts/tests/test_agent_event_capture.py": "ff5393313566aba40a7a883ea99b1640889af43e67d0b26b3fac54753af49756",
+      "scripts/tests/test_agent_runtime.py": "7e1fb8f1e149bfe180c40248effecef1709a6c7da1398cb208b4445fb426c339"
+    },
+    "originalImplementationFreezeSha256": "f9748188f66b9facf40983844bab33f2b1a6a72c5d07a3f2885d990ebb4f199d"
+  },
+  "taskOutcomeObserved": false,
+  "verifiedBoundaries": [
+    "Same-call host ordering records baseline/source/tool/context before unchanged chosen shell and exports/rechecks raw file before returning tool response; no expected/gold command matching is introduced.",
+    "Default absent capture map preserves normal shell path. Config is repository-level and arm-neutral, bound to helper hash and existing frozen source bundle; no index/gold/scorer content is consulted.",
+    "Fixed literal workspace-child path, regular single-link bounded event metadata, USTAR member/path/header/trailing/count checks and before/after file hash/size/stat comparison reject stale/missing/unsafe/capped/changed evidence as unqualified.",
+    "Byte artifacts are retained independently of UTF8 replacement-decoded provider display. Process/descriptor/event artifacts stay host-only; process result preserves chosen output on capture-only failure.",
+    "Shared deadline spans helper construction/probes/chosen process/export/afterchecks; timeout/cancellation propagates budget stop. Request and byte ceilings apply, errors and rawcounts remain visible; unknown transfer produces unavailable/null aggregate accounting.",
+    "Source witness is an explicit retained regular subset, never a whole-revision claim. Null/created tool paths are observations only, not proof of a source-owned build. Actual inspected context is retained, but effective child Go selection is not inferred from base environment.",
+    "Capture state remains unqualified. Nonzero command exit can have captured bytes without runtime calling it a completed assertion outcome. Actual source-origin oracle remains independently failclosed."
+  ]
+}

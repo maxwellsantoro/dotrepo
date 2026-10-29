@@ -1,0 +1,155 @@
+{
+  "actualOutcomeOrOracleAdmission": false,
+  "authorArtifactsUnchanged": 15,
+  "captureJoin": "OPEN",
+  "cases": [
+    {
+      "candidateAccepted": true,
+      "case": "full104 and5972 positive remains synthetic",
+      "reason": "complete active default-suite outcome with declared exclusions",
+      "testsPassed": true
+    },
+    {
+      "candidateAccepted": true,
+      "case": "complete assertion failure remains synthetic failed outcome",
+      "reason": "complete active default-suite outcome with declared exclusions",
+      "testsPassed": false
+    },
+    {
+      "candidateAccepted": false,
+      "case": "retained hierarchy late",
+      "reason": "nested run after ancestor terminal",
+      "testsPassed": null
+    },
+    {
+      "candidateAccepted": false,
+      "case": "retained hierarchy unfinished",
+      "reason": "parent terminal while descendant unfinished",
+      "testsPassed": null
+    },
+    {
+      "candidateAccepted": false,
+      "case": "retained hierarchy child-fail-parent-pass",
+      "reason": "failed descendant requires failed parent",
+      "testsPassed": null
+    },
+    {
+      "candidateAccepted": true,
+      "case": "retained hierarchy prefix-siblings",
+      "reason": "complete active default-suite outcome with declared exclusions",
+      "testsPassed": true
+    },
+    {
+      "candidateAccepted": true,
+      "case": "retained hierarchy deep-failure",
+      "reason": "complete active default-suite outcome with declared exclusions",
+      "testsPassed": false
+    },
+    {
+      "candidateAccepted": false,
+      "case": "retained hierarchy deep-failure-pass-ancestor",
+      "reason": "failed descendant requires failed parent",
+      "testsPassed": null
+    },
+    {
+      "candidateAccepted": false,
+      "case": "unknown top-level event not silently ignored",
+      "reason": "test outside collected scope",
+      "testsPassed": null
+    },
+    {
+      "candidateAccepted": false,
+      "case": "Fuzz top-level missing cannot shrink scope",
+      "reason": "missing run/terminal coverage",
+      "testsPassed": null
+    },
+    {
+      "candidateAccepted": false,
+      "case": "missing zero-name package coverage rejected",
+      "reason": "missing package coverage",
+      "testsPassed": null
+    },
+    {
+      "candidateAccepted": false,
+      "case": "binder source-selected file cannot become no-test skip",
+      "reason": "zero-test package incomplete",
+      "testsPassed": null
+    },
+    {
+      "candidateAccepted": true,
+      "case": "empty selected-source package can complete at package level",
+      "reason": "complete active default-suite outcome with declared exclusions",
+      "testsPassed": true
+    },
+    {
+      "candidateAccepted": false,
+      "case": "fabricated actual capture booleans cannot enable outcome",
+      "reason": "reviewed-full-task-capture-join-unavailable",
+      "testsPassed": null
+    },
+    {
+      "candidateAccepted": false,
+      "case": "actual or nonliteral synthetic selector False",
+      "reason": "reviewed-full-task-capture-join-unavailable",
+      "testsPassed": null
+    },
+    {
+      "candidateAccepted": false,
+      "case": "actual or nonliteral synthetic selector 1",
+      "reason": "synthetic type",
+      "testsPassed": null
+    },
+    {
+      "candidateAccepted": false,
+      "case": "actual or nonliteral synthetic selector 'true'",
+      "reason": "synthetic type",
+      "testsPassed": null
+    },
+    {
+      "candidateAccepted": false,
+      "case": "actual or nonliteral synthetic selector None",
+      "reason": "synthetic type",
+      "testsPassed": null
+    },
+    {
+      "candidateAccepted": false,
+      "case": "fake native collection origin cannot replace source",
+      "reason": "source expectation missing",
+      "testsPassed": null
+    },
+    {
+      "candidateAccepted": false,
+      "case": "effective target context changed",
+      "reason": "source expectation subject mismatch",
+      "testsPassed": null
+    },
+    {
+      "candidateAccepted": false,
+      "case": "normal setup cannot be omitted",
+      "reason": "incomplete execution control: setupComplete",
+      "testsPassed": null
+    },
+    {
+      "candidateAccepted": false,
+      "case": "wrapper failure cannot be listing success",
+      "reason": "incomplete execution control: wrapperCompleted",
+      "testsPassed": null
+    },
+    {
+      "candidateAccepted": false,
+      "case": "new skip exclusion cannot be inferred from failure",
+      "reason": "exclusion outside source proposal",
+      "testsPassed": null
+    },
+    {
+      "candidateAccepted": false,
+      "case": "isolated frozen expected-map.json edited"
+    },
+    {
+      "candidateAccepted": false,
+      "case": "isolated frozen expectation.json edited"
+    }
+  ],
+  "newRuntimeActions": 0,
+  "state": "independent-source-successor-synthetic-controls-passed"
+}

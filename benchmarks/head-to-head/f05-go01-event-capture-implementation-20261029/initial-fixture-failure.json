@@ -1,0 +1,13 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "pytest",
+    "-q",
+    "scripts/tests/test_agent_event_capture.py::test_session_host_only_capture_receipt_accounting_and_cleanup[False]"
+  ],
+  "exitCode": 1,
+  "cause": "Session fake returned constant /owned-container in inspect response while actual capture correctly checks randomized session container name. Fixture corrected; no actual daemon or task result.",
+  "failedTests": 1,
+  "broaderInitialRun": "1failed/150passed; same fixture mismatch"
+}

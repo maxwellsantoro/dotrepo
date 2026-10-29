@@ -1,0 +1,21 @@
+{
+  "completeDiffSha256": "27c6fd329d27225daf9c3d2fd8eaca781ca1d020a99749f948eb06e6989eab06",
+  "frozenCodeSubjects": {
+    "benchmarks/head-to-head/bench/agent_runtime.py": "d4581245001b9f7710e04a50818ab73b802e7a7a156167eea19ad46abb6a6c2c",
+    "benchmarks/head-to-head/bench/event_capture.py": "ffe5b5e27aaca28bceae83aac15bfeb5e83963eef63a3b2f41c97833787b4a12",
+    "scripts/tests/test_agent_event_capture.py": "ff5393313566aba40a7a883ea99b1640889af43e67d0b26b3fac54753af49756",
+    "scripts/tests/test_agent_runtime.py": "6a52a74cee0a16b52163b3651f52138cc58b6f65ff1ff9e7d72a0f1161645654"
+  },
+  "frozenImplementationArtifactsVerified": 13,
+  "implementationFreezeSha256": "f9748188f66b9facf40983844bab33f2b1a6a72c5d07a3f2885d990ebb4f199d",
+  "planSha256": "13d8ee8024a55ee5e89153019e5c07ac38ab0aac5885d7732e47bb8c5bc88f77",
+  "readOnlyStaticObservations": [
+    "Optional capture absent map preserves default path and reads no gold/scorer/expected command.",
+    "Same method deadline is passed through capture probes/process/export; each instrumentation call is raw and capped; event tar/member framing/hash/stat checks are explicit.",
+    "Source witness subset and unknown/source-generated tool observations are explicitly limited; no whole-tree or source-owned-build proof is asserted.",
+    "Ordinary command output is preserved on capture-only errors; raw artifacts/descriptor remain host-only, returned model tool response does not contain descriptor paths.",
+    "Cancellation result propagates budget stop and session finally cleanup; final EOF wait failure is F1."
+  ],
+  "reviewerNewDockerGoNodeNetworkProviderCalls": 0,
+  "runtimeCurrentPathMayAdvance": "Root took narrow fix ownership after F1 reproduction. Original subjects/diff remain historical; do not compare later current runtime bytes to oldhash as an integrity failure."
+}

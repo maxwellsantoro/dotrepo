@@ -1,0 +1,64 @@
+{
+  "artifacts": {
+    "README.md": {
+      "bytes": 2042,
+      "sha256": "07ec548c8ab1d12ee9f78b525f11e709054f382e8e7babb6d64127ea14768265"
+    },
+    "eof-after.json": {
+      "bytes": 797,
+      "sha256": "d8561a51b73579208e5ac3e2d35801b6a94ccc6682b108af6cdb51ffb6d7e2be"
+    },
+    "eof-prefix-after.json": {
+      "bytes": 843,
+      "sha256": "03718db8ef28c869cde6b75fc53931f0505c91085d4bf657bf7a2ca545c5ed64"
+    },
+    "focused-tests.txt": {
+      "bytes": 260,
+      "sha256": "8167742b92e794332265f81d2e9b8838b6aa5b728914a073047389ee2d7b2414"
+    },
+    "mock-checks.json": {
+      "bytes": 1705,
+      "sha256": "6b11b7b8971a194dcc530fec4a2354cc487917bc90c2a635dd9a9571617b28e7"
+    },
+    "mock_checks.py": {
+      "bytes": 6801,
+      "sha256": "55cf628b3711a49177ac12a82a352f1458b84486169162de0c20c6087c6dd6a8"
+    },
+    "review.json": {
+      "bytes": 6159,
+      "sha256": "e2c6ee2c65b8c36a36f3c434093498729e8e707c423a24bd2375ae0a5ad48c49"
+    },
+    "source-bindings.json": {
+      "bytes": 1061,
+      "sha256": "6e7703fb6c6ab3e7c130d313e0930525d164fcedfe45e9fca8e07bce607f7b08"
+    },
+    "wait-cancel-check.json": {
+      "bytes": 259,
+      "sha256": "ae8dae4333b2b13844f345ad1345e0df7d49d467e484542f28d18b78b8b08d63"
+    },
+    "wait_cancel_check.py": {
+      "bytes": 2674,
+      "sha256": "740f713fc3ab358cd4ad34e9943da6fd40bc50dbf8e3d3fcedb1fb5fde9f2e27"
+    }
+  },
+  "beforeReviewFreezeSha256": "1e9334124173c54b97cb50eb2a36f54407971528c71bd8d9a7bb750371378d6a",
+  "campaignAdmitted": false,
+  "executionAuthorized": false,
+  "findings": [],
+  "newDockerGoNodeUpstreamNetworkProviderActions": 0,
+  "oracleQualified": false,
+  "resolvedFindings": [
+    "F1"
+  ],
+  "state": "independent-optional-capture-implementation-review-passed-no-actual-admission",
+  "subject": {
+    "authorAmendmentFreezeSha256": "a55c9de8e96056809e9fd02e3e6cdabb4a307a80c6040fe41e4a8ff1424e7918",
+    "codeSha256": {
+      "benchmarks/head-to-head/bench/agent_runtime.py": "dc585e08f24e1a20da9d9ccdafac4af3f4e10cb8451de7ca3a74c05ecc985fa0",
+      "benchmarks/head-to-head/bench/event_capture.py": "ffe5b5e27aaca28bceae83aac15bfeb5e83963eef63a3b2f41c97833787b4a12",
+      "scripts/tests/test_agent_event_capture.py": "ff5393313566aba40a7a883ea99b1640889af43e67d0b26b3fac54753af49756",
+      "scripts/tests/test_agent_runtime.py": "7e1fb8f1e149bfe180c40248effecef1709a6c7da1398cb208b4445fb426c339"
+    },
+    "originalImplementationFreezeSha256": "f9748188f66b9facf40983844bab33f2b1a6a72c5d07a3f2885d990ebb4f199d"
+  }
+}

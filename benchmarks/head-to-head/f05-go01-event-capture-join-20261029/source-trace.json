@@ -1,0 +1,293 @@
+{
+  "createdAt": "2026-10-29T12:08:43.098125+00:00",
+  "independentDecisionReviewFreeze": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-oracle-decision-review-20261029/FREEZE.json",
+    "sha256": "f1e7ff04f0e8d6c385727bb5280f187bb71038dfeb72cf7d8aea8220fa9c9cc9"
+  },
+  "newAcquisition": false,
+  "newNativeGoNodeDaemonNetworkProviderActions": 0,
+  "scope": "source-only operator-consistency capture-join assessment",
+  "sourceDecisionFreeze": {
+    "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-oracle-decision-20261029/FREEZE.json",
+    "sha256": "22e72402f3cadf7f5ea214a546a3dcaf18b968c67da81e9e03427436c4d10ed5"
+  },
+  "sources": [
+    {
+      "bytes": 125368,
+      "container": null,
+      "excerptFormat": "Line excerpt with LF separators; full raw source hash above preserves original bytes, not a normalized source copy.",
+      "origin": "repository-retained-file",
+      "path": "benchmarks/head-to-head/f05-go01-requalification-proposal-20261029/sources/Herebyfile.mjs",
+      "role": "Frozen full maintained wrapper",
+      "sha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421",
+      "spans": [
+        {
+          "claim": "Default flags/env; options.tests filters; console hides skipped/empty summaries only.",
+          "excerpt": "function goTestFlags(taskName) {\n    ensureCoverageDirExists();\n    return [\n        ...goBuildFlags,\n        ...goBuildTags(),\n        ...(options.tests ? [`-run=${options.tests}`] : []),\n        // Go 1.27 duplicates promoted AST wrappers, exhausting CI disk under coverage.\n        // Tests strip DWARF when linking; omit it earlier to shrink temporary and cached archives.\n        ...(options.coverage && !options.debug ? [\"-gcflags=all=-dwarf=false\"] : []),\n        ...(options.coverage ? [`-coverprofile=${path.join(coverageDir, \"coverage.\" + taskName + \".out\")}`, \"-coverpkg=./...\"] : []),\n    ];\n}\n\nfunction getGODEBUG() {\n    const key = \"tracebackancestors\";\n    const setting = `${key}=10`;\n    const existing = process.env.GODEBUG ?? \"\";\n    if (!existing) return setting;\n    if (existing.includes(`${key}=`)) return existing;\n    return `${existing},${setting}`;\n}\n\nconst goTestEnv = {\n    GODEBUG: getGODEBUG(),\n    ...(options.concurrentTestPrograms ? { TS_TEST_PROGRAM_SINGLE_THREADED: \"false\" } : {}),\n    // Go test caching takes a long time on Windows.\n    // https://github.com/golang/go/issues/72992\n    ...(process.platform === \"win32\" ? { GOFLAGS: \"-count=1\" } : {}),\n};\n\nconst baselineTrackingEnabled = false && ![\n    options.tests,\n    options.noembed,\n    options.concurrentTestPrograms,\n    options.race,\n    options.dirty,\n].some(Boolean);\n\nconst goTestSumFlags = [\n    \"--format-hide-empty-pkg\",\n    \"--hide-summary\",\n    \"skipped\",\n];",
+          "firstLine": 876,
+          "lastLine": 918
+        },
+        {
+          "claim": "gotestsum arguments combine fixed format flags and Go test flags.",
+          "excerpt": "function gotestsumArgs(taskName) {\n    return [\n        ...goTestSumFlags,\n        \"--\",\n        ...goTestFlags(taskName),\n    ];\n}\n\n/**",
+          "firstLine": 968,
+          "lastLine": 976
+        },
+        {
+          "claim": "runTests invokes source-owned gotestsum ./... from tsc.",
+          "excerpt": "async function runTests() {\n    if (!options.dirty) {\n        await rimraf(localBaseline);\n        await fs.promises.mkdir(localBaseline, { recursive: true });\n    }\n\n    // Create a tmp directory for baseline tracking if enabled\n    /** @type {string | undefined} */\n    let trackingDir;\n    /** @type {(() => Promise<void>) | undefined} */\n    let cleanupTracking;\n\n    if (baselineTrackingEnabled) {\n        const tempTrackingDir = fs.mkdtempSync(path.join(os.tmpdir(), \"tsgo-baseline-tracking-\"));\n        trackingDir = tempTrackingDir;\n        cleanupTracking = () => rimraf(tempTrackingDir);\n    }\n\n    try {\n        const testEnv = {\n            ...goTestEnv,\n            ...(trackingDir ? { TSGO_BASELINE_TRACKING_DIR: trackingDir } : {}),\n        };\n        await gotestsumTool.run([...gotestsumArgs(\"tests\"), \"./...\", ...(isCI ? [\"--timeout=45m\"] : [])], {\n            env: testEnv,\n            cwd: \"./tsc\",\n        });",
+          "firstLine": 983,
+          "lastLine": 1009
+        },
+        {
+          "claim": "Hereby test is alias of full test:tsc.",
+          "excerpt": "export const testTsc = task({\n    name: \"test:tsc\",\n    description: \"Runs all tests in the tsc module.\",\n    run: runTests,\n});\n\nexport const testExtension = task({\n    name: \"test:extension\",\n    description: \"Runs the VS Code extension tests.\",\n    run: runTestExtension,\n});\n\nexport const test = task({\n    name: \"test\",\n    description: \"Alias for test:tsc.\",\n    dependencies: [testTsc],\n});",
+          "firstLine": 1046,
+          "lastLine": 1062
+        },
+        {
+          "claim": "createCachedTool validates source-module hash cache or builds gotestsum by go install in tools; then runs resolved tool.",
+          "excerpt": "function createCachedTool({ toolPath, globs, build, exclude }) {\n    toolPath = path.resolve(toolPath);\n    const hashPath = toolPath + \".hash\";\n    const files = fs.globSync(globs, { exclude }).filter(file => fs.statSync(file).isFile()).map(file => path.resolve(file));\n    files.sort();\n\n    const ensure = memoize(async () => {\n        const hash = crypto.createHash(\"sha256\");\n        for (const file of files) {\n            hash.update(file);\n            hash.update(fs.readFileSync(file));\n        }\n        const digest = hash.digest(\"hex\") + \"\\n\";\n        if (\n            fs.existsSync(toolPath)\n            && fs.existsSync(hashPath)\n            && fs.readFileSync(hashPath, \"utf8\") === digest\n        ) {\n            return;\n        }\n\n        await build(toolPath);\n        fs.writeFileSync(hashPath, digest);\n    });\n\n    return {\n        ensure,\n        /** @param {string[]} args @param {RunOptions} [options] */\n        run: async (args, options) => {\n            await ensure();\n            return run(toolPath, args, options);\n        },\n    };\n}\n\nconst gotestsumTool = createCachedTool({\n    toolPath: `./tools/gotestsum${process.platform === \"win32\" ? \".exe\" : \"\"}`,\n    globs: [\"./tools/go.mod\", \"./tools/go.sum\"],\n    build: async () => {\n        await run(\"go\", [\"install\", \"gotest.tools/gotestsum\"], {\n            cwd: \"./tools\",\n            env: { GOBIN: path.resolve(\"./tools\") },\n        });\n    },\n});\n",
+          "firstLine": 1173,
+          "lastLine": 1218
+        }
+      ]
+    },
+    {
+      "bytes": 57667,
+      "container": null,
+      "excerptFormat": "Line excerpt with LF separators; full raw source hash above preserves original bytes, not a normalized source copy.",
+      "origin": "repository-retained-file",
+      "path": "benchmarks/head-to-head/bench/agent_runtime.py",
+      "role": "Current reusable host capture boundary",
+      "sha256": "43fa2f0a18802564934646db5fa80e75c0ced3856b07df8b72d5a27fda2b84c3",
+      "spans": [
+        {
+          "claim": "Host captures stdout/stderr under combined output/time limits, decoding with replacement.",
+          "excerpt": "def limited_process(argv, *, data=b\"\", timeout, output_limit):\n    \"\"\"Bound host capture even when an untrusted container writes indefinitely.\"\"\"\n    host_env = {key: os.environ[key] for key in (\"PATH\", \"HOME\") if key in os.environ}\n    with tempfile.TemporaryFile() as incoming:\n        incoming.write(data)\n        incoming.seek(0)\n        process = subprocess.Popen(\n            argv, stdin=incoming, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=host_env\n        )\n        selector = selectors.DefaultSelector()\n        streams = {process.stdout: bytearray(), process.stderr: bytearray()}\n        for stream in streams:\n            os.set_blocking(stream.fileno(), False)\n            selector.register(stream, selectors.EVENT_READ)\n        deadline, error = time.monotonic() + timeout, None\n        try:\n            while selector.get_map():\n                remaining = deadline - time.monotonic()\n                if remaining <= 0:\n                    error = \"timeout\"\n                    break\n                for key, _ in selector.select(min(remaining, 0.1)):\n                    chunk = os.read(key.fileobj.fileno(), 65536)\n                    if not chunk:\n                        selector.unregister(key.fileobj)\n                        continue\n                    available = output_limit - sum(map(len, streams.values()))\n                    streams[key.fileobj].extend(chunk[:available])\n                    if len(chunk) > available:\n                        error = \"output-limit\"\n                        break\n                if error:\n                    break\n        finally:\n            if error:\n                process.kill()\n            process.wait(timeout=max(1, deadline - time.monotonic()))\n            selector.close()\n            for stream in streams:\n                stream.close()\n        return {\n            \"stdout\": bytes(streams[process.stdout]).decode(errors=\"replace\"),\n            \"stderr\": bytes(streams[process.stderr]).decode(errors=\"replace\"),\n            \"exitCode\": process.returncode,\n            \"error\": error,\n        }\n\n",
+          "firstLine": 634,
+          "lastLine": 681
+        },
+        {
+          "claim": "Host operation records docker argv/input count/result.",
+          "excerpt": "        self.invoke = invoke\n        self.name = \"dotrepo-f05-\" + uuid.uuid4().hex\n        self.created = False\n        self.operations = []\n\n    def _call(self, args, timeout, *, data=b\"\", limit=65536):\n        result = self.invoke([\"docker\", *args], data=data, timeout=timeout, output_limit=limit)\n        self.operations.append(\n            {\"argv\": [\"docker\", *args], \"stdinBytes\": len(data), \"result\": result}\n        )",
+          "firstLine": 688,
+          "lastLine": 697
+        },
+        {
+          "claim": "Shell operation executes chosen command in source checkout; no event export hook.",
+          "excerpt": "    def shell(self, command, timeout, output_limit):\n        return self._call(\n            [\"exec\", \"--workdir=/workspace/repository\", self.name, \"/bin/sh\", \"-c\", command],\n            timeout,\n            limit=output_limit,\n        )\n",
+          "firstLine": 847,
+          "lastLine": 853
+        },
+        {
+          "claim": "Actual shell receives remaining session budget/configured maxToolOutputBytes.",
+          "excerpt": "                    require(name in TOOL_NAMES, \"unsupported tool\")\n                    require(\n                        name != \"lookup\" or request[\"arm\"] == \"dotrepo-access\", \"arm denies lookup\"\n                    )\n                    if name == \"shell\":\n                        require(\n                            set(arguments) == {\"command\"} and isinstance(arguments[\"command\"], str),\n                            \"invalid shell request\",\n                        )\n                        require(checked_out, \"checkout_source is required before shell\")\n                        result = backend.shell(\n                            arguments[\"command\"], remaining(), config[\"maxToolOutputBytes\"]\n                        )\n                        if result.get(\"error\") in {\"timeout\", \"output-limit\"}:\n                            status = \"budget-exhausted\"",
+          "firstLine": 1210,
+          "lastLine": 1224
+        },
+        {
+          "claim": "Tool response emitted after backend returns; prospective export must precede return/control handoff.",
+          "excerpt": "                except (ValueError, KeyError, TypeError) as exc:\n                    result = {\"error\": str(exc)}\n                emit(\"tool-response\", {\"id\": call[\"id\"], \"result\": result})\n                messages.append(\n                    {\n                        \"role\": \"tool\",\n                        \"tool_call_id\": call[\"id\"],\n                        \"content\": json.dumps(result, allow_nan=False),\n                    }\n                )",
+          "firstLine": 1249,
+          "lastLine": 1258
+        }
+      ]
+    },
+    {
+      "bytes": 10845,
+      "container": null,
+      "excerptFormat": "Line excerpt with LF separators; full raw source hash above preserves original bytes, not a normalized source copy.",
+      "origin": "repository-retained-file",
+      "path": "benchmarks/head-to-head/f05-qualification-20261029/qualify.py",
+      "role": "Historical native attempt association",
+      "sha256": "1d4bfb02b59f89a200889d340297abc4a75976f0913de4dd5bee084bb2276c27",
+      "spans": [
+        {
+          "claim": "Historical actual-tests process and exit/error retained.",
+          "excerpt": "    assert not inspect[\"Mounts\"] and not inspect[\"NetworkSettings\"][\"Networks\"]\n    assert inspect[\"HostConfig\"][\"ReadonlyRootfs\"] and inspect[\"HostConfig\"][\"CapDrop\"] == [\"ALL\"]\n    run_started = time.monotonic()\n    listing = None\n    if spec.get(\"listCommand\"):\n        listing = shell(\"native-test-list\", spec[\"listCommand\"], timeout=1200)\n    remaining = 1200 - (time.monotonic() - run_started)\n    assert remaining > 0, \"execution budget exhausted\"\n    actual = shell(\"actual-tests\", spec[\"testCommand\"], timeout=remaining, allow_failure=True)\n    result[\"executionSeconds\"] = time.monotonic() - run_started\n    result[\"testExitCode\"], result[\"executionError\"] = actual[\"exitCode\"], actual[\"error\"]",
+          "firstLine": 201,
+          "lastLine": 211
+        },
+        {
+          "claim": "Tracked source check then separate cat event-file capture; sequence/copy not standalone origin descriptor.",
+          "excerpt": "    inventory = json.loads((source_folder / \"inventory.json\").read_text())[\"files\"]\n    source_check = call(\n        \"tracked-source-after-tests\",\n        [\"xargs\", \"-0\", \"sha256sum\", \"--\"],\n        data=b\"\".join((\"/workspace/repository/\" + path).encode() + b\"\\0\" for path in inventory),\n        timeout=180,\n        allow_failure=True,\n    )\n    changed = []\n    observed_files = set()\n    for line in source_check[\"stdout\"].splitlines():\n        digest, path = line.split(\"  \", 1)\n        path = path.removeprefix(\"/workspace/repository/\")\n        observed_files.add(path)\n        if inventory.get(path) != digest:\n            changed.append(path)\n    changed += sorted(set(inventory) - observed_files)\n    result[\"changedTrackedFiles\"] = changed\n    result[\"trackedSourceIntact\"] = source_check[\"exitCode\"] == 0 and not changed\n    if spec[\"kind\"] == \"go\":\n        raw = actual[\"stdout\"]\n        if args.task == \"go-01\":\n            events = call(\n                \"native-events\",\n                [\"cat\", \"/workspace/go-test-events.jsonl\"],\n                allow_failure=True,\n                limit=256 * 1024**2,\n            )\n            raw = events[\"stdout\"] if events[\"exitCode\"] == 0 else \"\"\n        verdict = go_outcome(listing[\"stdout\"], raw, spec[\"packagePrefix\"])",
+          "firstLine": 212,
+          "lastLine": 241
+        }
+      ]
+    },
+    {
+      "bytes": 1676,
+      "container": null,
+      "excerptFormat": "Line excerpt with LF separators; full raw source hash above preserves original bytes, not a normalized source copy.",
+      "origin": "repository-retained-file",
+      "path": "benchmarks/head-to-head/f05-qualification-20261029/control.py",
+      "role": "Historical host receipt",
+      "sha256": "6c2765b936fbb93c9222847766a9acc254d5d59c6e95ee93a126b8f83b97bd98",
+      "spans": [
+        {
+          "claim": "Historical capture receipt includes argv, timeout, byte/hash output and elapsed fields; default16MiB.",
+          "excerpt": "def command(folder, label, argv, *, data=b\"\", timeout=60, limit=16 * 1024**2):\n    output = folder / \"logs\" / label\n    output.mkdir(parents=True)\n    started_at, start = datetime.now(timezone.utc).isoformat(), time.monotonic()\n    result = limited_process(argv, data=data, timeout=timeout, output_limit=limit)\n    (output / \"stdout.txt\").write_text(result[\"stdout\"])\n    (output / \"stderr.txt\").write_text(result[\"stderr\"])\n    receipt = {\n        \"argv\": argv,\n        \"startedAt\": started_at,\n        \"elapsedSeconds\": time.monotonic() - start,\n        \"exitCode\": result[\"exitCode\"],\n        \"error\": result[\"error\"],\n        \"stdinBytes\": len(data),\n        \"stdinSha256\": sha(data),\n        \"stdoutSha256\": sha(result[\"stdout\"].encode()),\n        \"stderrSha256\": sha(result[\"stderr\"].encode()),\n        \"costUsd\": None,\n        \"costExclusions\": [\"No metered container/host charge source.\"],\n    }\n    write(output / \"receipt.json\", receipt)\n    return result",
+          "firstLine": 24,
+          "lastLine": 45
+        }
+      ]
+    },
+    {
+      "bytes": 16895,
+      "container": null,
+      "excerptFormat": "Line excerpt with LF separators; full raw source hash above preserves original bytes, not a normalized source copy.",
+      "origin": "repository-retained-file",
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-1/oracle.py",
+      "role": "Existing frozen scorer boundary, not changing amendment2",
+      "sha256": "059ac111da3e00605b06e8afcea92467bc294b7cec05d35203bfd402fccaa726",
+      "spans": [
+        {
+          "claim": "Scorer explicitly says receipt/provenance fields are assertions, not authentication.",
+          "excerpt": "\"\"\"Task-specific post-run Go JSON checks. This module never launches a process.\n\nInput provenance/acceptance fields are assertions bound by external receipts;\ninternal consistency checks do not authenticate them. The current policy and\ncollection are deliberately incomplete. Synthetic results cannot report an\nactual task outcome. Never use this scorer to gate an agent's shell decisions.\n\"\"\"",
+          "firstLine": 1,
+          "lastLine": 7
+        },
+        {
+          "claim": "Execution completeness booleans and rawEventsSha256 consistency are checked.",
+          "excerpt": "            execution.get(\"error\") is None\n            and type(execution.get(\"exitCode\")) is int\n            and execution[\"exitCode\"] in (0, 1),\n            \"wrapper process failure\",\n        )\n        require(\n            execution.get(\"rawEventsSha256\") == hashlib.sha256(raw.encode()).hexdigest(),\n            \"raw event hash mismatch\",\n        )\n        packages = collection.get(\"packages\")\n        require(isinstance(packages, dict) and packages, \"missing intended packages\")\n        expected = set()\n        for package, tests in packages.items():\n            require(\n                isinstance(package, str)\n                and (package == PREFIX or package.startswith(PREFIX + \"/\")),\n                \"collection wrong package\",\n            )\n            require(\n                isinstance(tests, list)\n                and all(\n                    isinstance(t, str) and re.fullmatch(r\"(?:Test|Example|Fuzz)[^/\\s]*\", t)\n                    for t in tests\n                ),\n                \"collection test identities\",",
+          "firstLine": 175,
+          "lastLine": 199
+        },
+        {
+          "claim": "All intended package coverage and empty-name package terminal rules retained.",
+          "excerpt": "        require(skipped <= exclusions.keys(), \"unexpected skip at any nesting depth\")\n        for key in skipped:\n            message = exclusions[key].get(\"outputReason\")\n            if message is not None:\n                require(\n                    isinstance(message, str) and message and message in outputs.get(key, \"\"),\n                    \"skip reason not witnessed\",\n                )\n            else:\n                require(\n                    re.search(\n                        r\"(?m)^\\s*--- SKIP: \" + re.escape(key[1]) + r\" \\(\", outputs.get(key, \"\")\n                    ),\n                    \"bare skip lacks terminal diagnostic\",\n                )\n        for package, state in ended.items():\n            if packages[package]:\n                require(state in (\"pass\", \"fail\"), \"test package skipped\")\n                failed_here = any(p == package and s == \"fail\" for (p, _), s in terminal.items())\n                require((state == \"fail\") is failed_here, \"package/test failure mismatch\")\n            else:\n                require(\n                    state == \"pass\"\n                    or (state == \"skip\" and \"[no test files]\" in package_outputs.get(package, \"\")),\n                    \"zero-test package incomplete\",\n                )\n        failed = {key for key, state in terminal.items() if state == \"fail\"}\n        for key in failed:\n            require(\n                all(terminal.get((key[0], parent)) == \"fail\" for parent in ancestors(key[1])),\n                \"failed descendant requires failed ancestors\",\n            )\n            require(\n                re.search(r\"(?m)^\\s*--- FAIL: \" + re.escape(key[1]) + r\" \\(\", outputs.get(key, \"\")),\n                \"failure lacks terminal assertion diagnostic\",\n            )\n        all_output = (\n            \"\".join(outputs.values())\n            + \"\".join(package_outputs.values())\n            + execution.get(\"stderr\", \"\")\n        )",
+          "firstLine": 307,
+          "lastLine": 347
+        }
+      ]
+    },
+    {
+      "bytes": 17162,
+      "container": {
+        "inventory": "benchmarks/head-to-head/f05-go01-dependency-download-result-20261029/evidence/inventory.json",
+        "memberSha256": "e9dfe9a55bda5917c7a80951e6f56f0d1b55ad5a8439d51f210e56c0e8f41f49",
+        "path": "/private/tmp/dotrepo-go01-dependency-download-cache-20261029-1/cache.tar",
+        "sha256": "583fad501fa7b1a1a6d85ab8fe4b890786e39c1e016f785d6d3fb9d060383284",
+        "trustLimit": "Public dependency source integrity bound to reviewed download/cache evidence; not a new external authenticity proof."
+      },
+      "excerptFormat": "Line excerpt with LF separators; full raw source hash above preserves original bytes, not a normalized source copy.",
+      "origin": "retained-regular-cache-member",
+      "path": "go/pkg/mod/gotest.tools/gotestsum@v1.13.0/cmd/main.go",
+      "role": "Gotestsum event process chain",
+      "sha256": "e9dfe9a55bda5917c7a80951e6f56f0d1b55ad5a8439d51f210e56c0e8f41f49",
+      "spans": [
+        {
+          "claim": "GOTESTSUM_JSONFILE selects all-event file, distinct timing-only option.",
+          "excerpt": "\tflags.StringVar(&opts.jsonFile, \"jsonfile\",\n\t\tlookEnvWithDefault(\"GOTESTSUM_JSONFILE\", \"\"),\n\t\t\"write all TestEvents to file\")\n\tflags.StringVar(&opts.jsonFileTimingEvents, \"jsonfile-timing-events\",\n\t\tlookEnvWithDefault(\"GOTESTSUM_JSONFILE_TIMING_EVENTS\", \"\"),\n\t\t\"write only the pass, skip, and fail TestEvents to the file\")",
+          "firstLine": 79,
+          "lastLine": 84
+        },
+        {
+          "claim": "Starts Go process; scanner uses its stdout/stderr; process wait/exit retained.",
+          "excerpt": "\tgoTestProc, err := startGoTestFn(ctx, \"\", goTestCmdArgs(opts, rerunOpts{}))\n\tif err != nil {\n\t\treturn err\n\t}\n\n\thandler, err := newEventHandler(opts)\n\tif err != nil {\n\t\treturn err\n\t}\n\tdefer handler.Close() //nolint:errcheck\n\tcfg := testjson.ScanConfig{\n\t\tStdout:                   goTestProc.stdout,\n\t\tStderr:                   goTestProc.stderr,\n\t\tHandler:                  handler,\n\t\tStop:                     cancel,\n\t\tIgnoreNonJSONOutputLines: opts.ignoreNonJSONOutputLines,\n\t}\n\texec, err := testjson.ScanTestOutput(cfg)\n\thandler.Flush()\n\tif err != nil {\n\t\treturn finishRun(opts, exec, err)\n\t}\n\n\texitErr := goTestProc.cmd.Wait()\n\tif signum := atomic.LoadInt32(&goTestProc.signal); signum != 0 {\n\t\treturn finishRun(opts, exec, exitError{num: signalExitCode + int(signum)})\n\t}\n\tif exitErr == nil || opts.rerunFailsMaxAttempts == 0 {\n\t\treturn finishRun(opts, exec, exitErr)",
+          "firstLine": 282,
+          "lastLine": 310
+        },
+        {
+          "claim": "Normal go test command arguments; raw-command separate branch.",
+          "excerpt": "func goTestCmdArgs(opts *options, rerunOpts rerunOpts) []string {\n\tif opts.rawCommand {\n\t\tvar result []string\n\t\tresult = append(result, opts.args...)\n\t\tresult = append(result, rerunOpts.Args()...)\n\t\treturn result\n\t}\n\n\targs := append([]string{}, opts.args...)\n\tresult := []string{\"go\", \"test\"}\n\n\tif len(args) == 0 {\n\t\tresult = append(result, \"-json\")\n\t\tif rerunOpts.runFlag != \"\" {\n\t\t\tresult = append(result, rerunOpts.runFlag)\n\t\t}\n\t\treturn append(result, cmdArgPackageList(opts, rerunOpts, \"./...\")...)\n\t}\n\n\tif boolArgIndex(\"json\", args) < 0 {\n\t\tresult = append(result, \"-json\")\n\t}\n\n\tif rerunOpts.runFlag != \"\" {\n\t\t// Remove any existing run arg, it needs to be replaced with our new one\n\t\t// and duplicate args are not allowed by 'go test'.\n\t\trunIndex, runIndexEnd := argIndex(\"run\", args)\n\t\tif runIndex >= 0 && runIndexEnd < len(args) {\n\t\t\targs = append(args[:runIndex], args[runIndexEnd+1:]...)",
+          "firstLine": 345,
+          "lastLine": 373
+        },
+        {
+          "claim": "exec.CommandContext pipes from actual Go child.",
+          "excerpt": "func startGoTest(ctx context.Context, dir string, args []string) (*proc, error) {\n\tif len(args) == 0 {\n\t\treturn nil, errors.New(\"missing command to run\")\n\t}\n\n\tcmd := exec.CommandContext(ctx, args[0], args[1:]...)\n\tcmd.Stdin = os.Stdin\n\tcmd.Dir = dir\n\n\tp := proc{cmd: cmd}\n\tlog.Debugf(\"exec: %s\", cmd.Args)\n\tvar err error\n\tp.stdout, err = cmd.StdoutPipe()\n\tif err != nil {\n\t\treturn nil, err\n\t}\n\tp.stderr, err = cmd.StderrPipe()\n\tif err != nil {\n\t\treturn nil, err\n\t}\n\tif err := cmd.Start(); err != nil {",
+          "firstLine": 445,
+          "lastLine": 465
+        }
+      ]
+    },
+    {
+      "bytes": 4997,
+      "container": {
+        "inventory": "benchmarks/head-to-head/f05-go01-dependency-download-result-20261029/evidence/inventory.json",
+        "memberSha256": "9e4312e5793f73cda82ead45e4af29aa1516013bd1905dbe82dea747c686f440",
+        "path": "/private/tmp/dotrepo-go01-dependency-download-cache-20261029-1/cache.tar",
+        "sha256": "583fad501fa7b1a1a6d85ab8fe4b890786e39c1e016f785d6d3fb9d060383284",
+        "trustLimit": "Public dependency source integrity bound to reviewed download/cache evidence; not a new external authenticity proof."
+      },
+      "excerptFormat": "Line excerpt with LF separators; full raw source hash above preserves original bytes, not a normalized source copy.",
+      "origin": "retained-regular-cache-member",
+      "path": "go/pkg/mod/gotest.tools/gotestsum@v1.13.0/cmd/handler.go",
+      "role": "Gotestsum event-file writer",
+      "sha256": "9e4312e5793f73cda82ead45e4af29aa1516013bd1905dbe82dea747c686f440",
+      "spans": [
+        {
+          "claim": "Every scanned event written to jsonFile before console formatting.",
+          "excerpt": "func (h *eventHandler) Event(event testjson.TestEvent, execution *testjson.Execution) error {\n\tif err := writeWithNewline(h.jsonFile, event.Bytes()); err != nil {\n\t\treturn fmt.Errorf(\"failed to write JSON file: %w\", err)\n\t}\n\tif event.Action.IsTerminal() {\n\t\tif err := writeWithNewline(h.jsonFileTimingEvents, event.Bytes()); err != nil {\n\t\t\treturn fmt.Errorf(\"failed to write JSON file: %w\", err)\n\t\t}\n\t}\n\n\terr := h.formatter.Format(event, execution)",
+          "firstLine": 38,
+          "lastLine": 48
+        },
+        {
+          "claim": "Writes original event bytes plus newline; synthetic zero-byte events ignored.",
+          "excerpt": "func writeWithNewline(out io.Writer, b []byte) error {\n\t// ignore artificial events that have len(b) == 0\n\tif out == nil || len(b) == 0 {\n\t\treturn nil\n\t}\n\tif _, err := out.Write(b); err != nil {\n\t\treturn err\n\t}\n\t_, err := out.Write([]byte{'\\n'})\n\treturn err",
+          "firstLine": 59,
+          "lastLine": 68
+        },
+        {
+          "claim": "JSONFILE path opened with os.Create, not append.",
+          "excerpt": "\tif opts.jsonFile != \"\" {\n\t\t_ = os.MkdirAll(filepath.Dir(opts.jsonFile), 0o755)\n\t\thandler.jsonFile, err = os.Create(opts.jsonFile)\n\t\tif err != nil {\n\t\t\treturn handler, fmt.Errorf(\"failed to create file: %w\", err)\n\t\t}\n\t}\n\tif opts.jsonFileTimingEvents != \"\" {\n\t\t_ = os.MkdirAll(filepath.Dir(opts.jsonFileTimingEvents), 0o755)\n\t\thandler.jsonFileTimingEvents, err = os.Create(opts.jsonFileTimingEvents)\n\t\tif err != nil {\n\t\t\treturn handler, fmt.Errorf(\"failed to create file: %w\", err)\n\t\t}\n\t}",
+          "firstLine": 119,
+          "lastLine": 132
+        }
+      ]
+    },
+    {
+      "bytes": 24698,
+      "container": {
+        "inventory": "benchmarks/head-to-head/f05-go01-dependency-download-result-20261029/evidence/inventory.json",
+        "memberSha256": "3f742c28db76d95b28492b018bfdc5c8364be7a54c6073be0646783dfc6e0c32",
+        "path": "/private/tmp/dotrepo-go01-dependency-download-cache-20261029-1/cache.tar",
+        "sha256": "583fad501fa7b1a1a6d85ab8fe4b890786e39c1e016f785d6d3fb9d060383284",
+        "trustLimit": "Public dependency source integrity bound to reviewed download/cache evidence; not a new external authenticity proof."
+      },
+      "excerptFormat": "Line excerpt with LF separators; full raw source hash above preserves original bytes, not a normalized source copy.",
+      "origin": "retained-regular-cache-member",
+      "path": "go/pkg/mod/gotest.tools/gotestsum@v1.13.0/testjson/execution.go",
+      "role": "Gotestsum scan chain",
+      "sha256": "3f742c28db76d95b28492b018bfdc5c8364be7a54c6073be0646783dfc6e0c32",
+      "spans": [
+        {
+          "claim": "ScanTestOutput reads Go stdout/stderr and invokes event handler.",
+          "excerpt": "// ScanTestOutput reads lines from config.Stdout and config.Stderr, populates an\n// Execution, calls the Handler for each event, and returns the Execution.\n//\n// If config.Handler is nil, a default no-op handler will be used.\nfunc ScanTestOutput(config ScanConfig) (*Execution, error) {\n\tif config.Stdout == nil {\n\t\treturn nil, fmt.Errorf(\"stdout reader must be non-nil\")\n\t}\n\tif config.Handler == nil {\n\t\tconfig.Handler = noopHandler{}\n\t}\n\tif config.Stderr == nil {\n\t\tconfig.Stderr = new(bytes.Reader)\n\t}\n\tif config.Stop == nil {\n\t\tconfig.Stop = func() {}\n\t}\n\texecution := config.Execution\n\tif execution == nil {\n\t\texecution = newExecution()\n\t}\n\texecution.done = false\n\texecution.lastRunID = config.RunID\n\n\tvar group errgroup.Group\n\tgroup.Go(func() error {\n\t\treturn stopOnError(config.Stop, readStdout(config, execution))\n\t})\n\tgroup.Go(func() error {\n\t\treturn stopOnError(config.Stop, readStderr(config, execution))",
+          "firstLine": 761,
+          "lastLine": 790
+        },
+        {
+          "claim": "Scans/parses real Go stdout event lines and sends handlers; errors retained.",
+          "excerpt": "func readStdout(config ScanConfig, execution *Execution) error {\n\tscanner := bufio.NewScanner(config.Stdout)\n\tfor scanner.Scan() {\n\t\traw := scanner.Bytes()\n\t\tevent, err := parseEvent(raw)\n\t\tswitch {\n\t\tcase err == errBadEvent:\n\t\t\t//nolint:errcheck\n\t\t\tconfig.Handler.Err(errBadEvent.Error() + \": \" + scanner.Text())\n\t\t\tcontinue\n\t\tcase err != nil:\n\t\t\tif config.IgnoreNonJSONOutputLines {\n\t\t\t\t//nolint:errcheck\n\t\t\t\tconfig.Handler.Err(string(raw))\n\t\t\t\tcontinue\n\t\t\t}\n\t\t\treturn fmt.Errorf(\"failed to parse test output: %s: %w\", string(raw), err)\n\t\t}\n\n\t\tevent.RunID = config.RunID\n\t\texecution.add(event)\n\t\tif err := config.Handler.Event(event, execution); err != nil {\n\t\t\treturn err\n\t\t}\n\t}\n\tif err := scanner.Err(); err != nil {\n\t\treturn fmt.Errorf(\"failed to scan test output: %w\", err)\n\t}",
+          "firstLine": 810,
+          "lastLine": 837
+        }
+      ]
+    },
+    {
+      "bytes": 4587,
+      "container": {
+        "memberSha256": "5d0c46a19d38bfc283f378a8f3498510af40d68b2994c20c41f1976e4870bd15",
+        "path": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar",
+        "sha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f"
+      },
+      "excerptFormat": "Line excerpt with LF separators; full raw source hash above preserves original bytes, not a normalized source copy.",
+      "origin": "retained-source-archive-member",
+      "path": "tools/scripts/gen/utils.mts",
+      "role": "Hereby child environment/process propagation",
+      "sha256": "5d0c46a19d38bfc283f378a8f3498510af40d68b2994c20c41f1976e4870bd15",
+      "spans": [
+        {
+          "claim": "run merges inherited environment with supplied overrides; cwd explicit; default stdio inherit and throwOnError=true.",
+          "excerpt": "export async function run(command: string, args: readonly string[] = [], options: RunOptions = {}) {\n    console.log(\"$ \" + [command, ...args].map(formatCommandArg).join(\" \"));\n    return withFileFingerprintWrites(() =>\n        x(command, args, {\n            throwOnError: true,\n            ...(options.signal ? { signal: options.signal } : {}),\n            nodeOptions: {\n                cwd: options.cwd,\n                env: options.env ? { ...process.env, ...options.env } : undefined,\n                stdio: options.captureOutput ? \"pipe\" : \"inherit\",\n            },\n        })\n    );",
+          "firstLine": 87,
+          "lastLine": 99
+        }
+      ]
+    }
+  ]
+}

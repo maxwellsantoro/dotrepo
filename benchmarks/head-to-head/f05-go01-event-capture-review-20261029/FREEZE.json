@@ -1,0 +1,33 @@
+{
+  "artifacts": {
+    "README.md": {
+      "bytes": 1324,
+      "sha256": "31f0ac7c77dbe8bb384eb3b7e0b09dd6c6a6bf2513596505a6d4d2a4a2826270"
+    },
+    "pipe-eof-timeout-counterexample.json": {
+      "bytes": 864,
+      "sha256": "385827d6a0359e0a7388cbf5aac091bb7746821f57167ac192a37a8a454f370c"
+    },
+    "reproduce_eof.py": {
+      "bytes": 2790,
+      "sha256": "7e5821cf5a5c09f0f6dd5334cb03f8e51e306d1f9a36f077c64ff6e4921af162"
+    },
+    "review.json": {
+      "bytes": 3634,
+      "sha256": "9d06230568b8226b742723e73c7b000ee1eec504cdc5c9cc63c608106c1dd50f"
+    },
+    "source-inspection.json": {
+      "bytes": 1848,
+      "sha256": "a62b3bc8dec8818b1dd1a8aba94dadf43770eee3979b7407f253ef277db5618c"
+    }
+  },
+  "campaignAdmitted": false,
+  "executionAuthorized": false,
+  "findings": [
+    "F1"
+  ],
+  "implementationFreezeSha256": "f9748188f66b9facf40983844bab33f2b1a6a72c5d07a3f2885d990ebb4f199d",
+  "newDaemonUpstreamNetworkProviderActions": 0,
+  "oracleQualified": false,
+  "state": "independent-capture-before-review-findings-present"
+}

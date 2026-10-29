@@ -1,0 +1,17 @@
+{
+  "identity": "go01-source-expectation-oracle-preparation-amendment-2",
+  "scope": "source adapter plus synthetic post-run scorer only",
+  "sourceBindingsSha256": "25ad36a65f53431ded8afd7f171c539805f1de9619b95c3ed1e67654b0ced795",
+  "mapSha256": "768482aa2dcec46151e529a1126a8d74fbaba56f168d86c915002aa70d869e4a",
+  "expectedPackages": 104,
+  "expectedTopLevelNames": 5972,
+  "captureJoin": "OPEN; no reviewed atomic full-wrapper event export descriptor",
+  "actualEvaluation": "always fail closed",
+  "currentGateChanged": false,
+  "executionAuthorized": false,
+  "oracleQualified": false,
+  "campaignAdmitted": false,
+  "nativeCollectionOccurred": false,
+  "skipPolicyAccepted": false,
+  "costUsd": null
+}

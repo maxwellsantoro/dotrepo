@@ -1,0 +1,74 @@
+--- before/benchmarks/head-to-head/bench/agent_runtime.py
++++ after/benchmarks/head-to-head/bench/agent_runtime.py
+@@ -698,10 +698,23 @@
+         finally:
+             if error:
+                 process.kill()
+-            process.wait(timeout=max(1, deadline - time.monotonic()))
+-            selector.close()
+-            for stream in streams:
+-                stream.close()
++            try:
++                # Pipe EOF need not mean process exit. Keep the original
++                # deadline and retain a receipt even when the client stays alive.
++                process.wait(timeout=max(0, deadline - time.monotonic()))
++            except subprocess.TimeoutExpired:
++                error = error or "timeout"
++                process.kill()
++                process.wait()
++            except BaseException as exc:
++                error = error or type(exc).__name__
++                cancelled = cancelled or isinstance(exc, (KeyboardInterrupt, SystemExit))
++                process.kill()
++                process.wait()
++            finally:
++                selector.close()
++                for stream in streams:
++                    stream.close()
+         value = {
+             "stdout": bytes(streams[process.stdout]),
+             "stderr": bytes(streams[process.stderr]),
+--- before/scripts/tests/test_agent_runtime.py
++++ after/scripts/tests/test_agent_runtime.py
+@@ -795,6 +795,41 @@
+     )
+     assert result["error"] == "output-limit"
+     assert len(result["stdout"]) + len(result["stderr"]) <= 1024
++
++
++@pytest.mark.skipif(not Path("/bin/sh").is_file(), reason="owned POSIX shell control")
++@pytest.mark.parametrize("raw", [False, True])
++def test_pipe_eof_before_process_exit_retains_timeout_and_reaps_client(monkeypatch, raw):
++    real_popen, processes = subprocess.Popen, []
++
++    def observed_popen(*args, **kwargs):
++        process = real_popen(*args, **kwargs)
++        processes.append(process)
++        return process
++
++    monkeypatch.setattr(runtime.subprocess, "Popen", observed_popen)
++    try:
++        result = runtime.limited_process(
++            [
++                "/bin/sh",
++                "-c",
++                "printf retained; printf diagnostic >&2; exec 1>&- 2>&-; while :; do :; done",
++            ],
++            timeout=0.2,
++            output_limit=1024,
++            raw=raw,
++        )
++        assert result["error"] == "timeout"
++        assert result["stdout"] == (b"retained" if raw else "retained")
++        assert result["stderr"] == (b"diagnostic" if raw else "diagnostic")
++        assert result["exitCode"] is not None
++        assert len(processes) == 1 and processes[0].returncode is not None
++    finally:
++        # Keep the negative control safe even against the historical defect.
++        for process in processes:
++            if process.poll() is None:
++                process.kill()
++            process.wait()
+ 
+ 
+ def test_cli_cannot_launch_live_campaign_without_qualified_transport(campaign, tmp_path):
