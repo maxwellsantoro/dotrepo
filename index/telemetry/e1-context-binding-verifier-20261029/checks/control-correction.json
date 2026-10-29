@@ -1,0 +1,7 @@
+{
+  "attempt": "initial CLI recovery control",
+  "outcome": "assertion failed because existing scalar repo.test was present",
+  "failedAssertion": "manifest[repo].get(test) is None",
+  "correction": "Removed unrelated scalar-absence assumption; retained actual scalar in cli-recovery.json. No Rust/source behavior changed. CLI recovery does not invoke integrity verifier.",
+  "observedScalarTest": "python -m pytest"
+}

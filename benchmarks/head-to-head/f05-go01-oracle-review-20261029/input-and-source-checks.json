@@ -1,0 +1,32 @@
+{
+  "authorFreeze": {
+    "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/freeze.json",
+    "sha256": "d7b8b8f6ad1a5bf7616b05333fac739c32efd79ef40c4e696bf5c336d7074cf2",
+    "verifiedFiles": 16
+  },
+  "oracleSha256": "f58db90df7179c26413cdceb0efb9ddcb0a389902bae8a27524faea59a8c11dc",
+  "controlsSha256": "b412bd3c0a8bfad132bad3cdcd5e0cc136638742519960600a7acb54784f58e3",
+  "exactSourceExclusionsChecked": 380,
+  "knownFourslashSourceCases": 377,
+  "additionalCases": [
+    "exact immediate bare fourslash skip",
+    "default empty replay flag condition",
+    "exact immediate ATA subtest Todo skip"
+  ],
+  "ataNameEvidence": "Literal ASCII spaces map to underscores by rewrite/isSpace in exact common-image Go testing/match.go; source literal appears once. Still no native collection or execution observed.",
+  "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+  "policyState": "proposal-unaccepted",
+  "nativeCollectionOccurred": false,
+  "newCalls": {
+    "network": 0,
+    "Docker": 0,
+    "upstream": 0,
+    "package": 0,
+    "provider": 0
+  },
+  "limits": [
+    "Dynamic helper/configuration/seed/capability mapping remains unresolved.",
+    "Exact allowed-source entries do not establish whole native collection or external acceptance.",
+    "Failing native stream hierarchy controls are synthetic; actual taskOutcomeObserved remains false."
+  ]
+}

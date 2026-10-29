@@ -1,0 +1,14 @@
+{
+  "packet": "index/telemetry/go-build-evidence-review-20261029",
+  "frozenAt": "2026-10-29",
+  "artifacts": 27,
+  "artifactManifestSha256": "54d5c865028de9318f14d4f137933b13064b0f1f8a194486582d4192c4bdba64",
+  "base": "72c654caaba1c88a7206815296bec91fa3bb5760",
+  "upstreamExecuted": false,
+  "networkProviderIndexCalls": 0,
+  "historicalInputsRewritten": false,
+  "remainingGates": [
+    "coordinator combined gates"
+  ],
+  "conclusion": "Original explicit-conflict finding closed; no remaining bounded eligibility finding"
+}

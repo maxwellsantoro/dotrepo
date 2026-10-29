@@ -1,0 +1,63 @@
+{
+  "checkedAt": "2026-10-29T08:00:28.272191+00:00",
+  "checks": [
+    {
+      "argv": [
+        "uv",
+        "run",
+        "ruff",
+        "check",
+        "--no-cache",
+        "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029"
+      ],
+      "exitCode": 0
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "ruff",
+        "format",
+        "--check",
+        "--no-cache",
+        "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029"
+      ],
+      "exitCode": 0
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-sync",
+        "python",
+        "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/controls.py",
+        "--output",
+        "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/controls-final2.json"
+      ],
+      "exitCode": 0,
+      "syntheticControls": 60
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-sync",
+        "python",
+        "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/verify.py",
+        "--archive",
+        "--output",
+        "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/checks.json"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "actualNativeCollectionOrSuiteExecuted": false,
+  "policyAccepted": false,
+  "newCachePrepared": false,
+  "dollarCost": null,
+  "costExclusions": [
+    "Host/operator source-review and synthetic-control dollar costs are not metered; no zero total-cost claim."
+  ]
+}

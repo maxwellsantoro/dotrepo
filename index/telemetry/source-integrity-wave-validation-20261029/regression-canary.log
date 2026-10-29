@@ -1,0 +1,10 @@
+   Compiling dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.95s
+     Running tests/regression_fixture_pack.rs (target/debug/deps/regression_fixture_pack-1064082bc700824e)
+
+running 2 tests
+test regression_fixture_stubs_materialize_cleanly ... ok
+test regression_fixture_pack_replays_checked_in_fixtures ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+

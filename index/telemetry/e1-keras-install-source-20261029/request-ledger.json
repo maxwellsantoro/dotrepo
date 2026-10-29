@@ -1,0 +1,183 @@
+{
+  "repository": "keras-team/keras",
+  "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+  "apiCalls": 9,
+  "fullSourceFiles": 8,
+  "totalSourceBytes": 29118,
+  "additionalCallsPermittedButNotUsed": 3,
+  "allFullFileGitBlobIdsMatched": true,
+  "commitMetadataIncludesIncidentalDiffNotUsedForInstallationClaims": true,
+  "requests": [
+    {
+      "requestFile": "requests/01.json",
+      "args": {
+        "repository_full_name": "keras-team/keras",
+        "path": "pip_build.py",
+        "ref": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+        "encoding": "base64"
+      },
+      "reason": "README direct pip_build.py reference",
+      "readOnly": true,
+      "sha256": "d7192e9c67e260e98a328b2a88f27076fcc441fdfe889f75961fd79cce8275c3",
+      "sourcePath": "pip_build.py",
+      "retainedPath": "sources/pip_build.py.txt",
+      "bytes": 4464,
+      "gitBlobSha1": "cef5e0d7ba5572742c3a63db0f5a17c5e60f5bbd",
+      "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/pip_build.py",
+      "lines": 163,
+      "commitRefBoundByRequestAndUrl": true,
+      "requestSha256": "f7488a7548292166bb040eafbb21f4a974d471f50c738994156748875d2097e7"
+    },
+    {
+      "requestFile": "requests/02.json",
+      "args": {
+        "repository_full_name": "keras-team/keras",
+        "path": "keras/src/version.py",
+        "ref": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+        "encoding": "base64"
+      },
+      "reason": "pip_build.py imports keras.src.version",
+      "readOnly": true,
+      "sha256": "9f9719f7d69e3451a15765192fd37916e6980539aa1eb6c20d3b3cf82c65d4b2",
+      "sourcePath": "keras/src/version.py",
+      "retainedPath": "sources/keras/src/version.py.txt",
+      "bytes": 190,
+      "gitBlobSha1": "c8f0abf971f398a9da95492fb23da4f90dcb8719",
+      "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/src/version.py",
+      "lines": 9,
+      "commitRefBoundByRequestAndUrl": true,
+      "requestSha256": "da65434ab2af7d97e8dab328e388449cdaa84eae3dd2e195c96abd379db7886d"
+    },
+    {
+      "requestFile": "requests/03.json",
+      "args": {
+        "repository_full_name": "keras-team/keras",
+        "path": "keras/__init__.py",
+        "ref": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+        "encoding": "base64"
+      },
+      "reason": "Python parent package initializer on pip_build.py imported keras.src.version chain",
+      "readOnly": true,
+      "sha256": "6ec3dd120fe34c1d5330e757ffe5db774a66c0aa01b0908f4c7fd39ead40d383",
+      "sourcePath": "keras/__init__.py",
+      "retainedPath": "sources/keras/__init__.py.txt",
+      "bytes": 446,
+      "gitBlobSha1": "0dc0f6aad102ca6c8aaf4ff1480ebe1544a2c7db",
+      "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/__init__.py",
+      "lines": 13,
+      "commitRefBoundByRequestAndUrl": true,
+      "requestSha256": "28f569094cd8884ce0acc5dbdd5dfab41ee71fc65366d010b67e796a39c16f72"
+    },
+    {
+      "requestFile": "requests/04.json",
+      "args": {
+        "repository_full_name": "keras-team/keras",
+        "path": "keras/src/__init__.py",
+        "ref": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+        "encoding": "base64"
+      },
+      "reason": "Python parent package initializer on pip_build.py imported keras.src.version chain",
+      "readOnly": true,
+      "sha256": "1a2e12ec4882324134dcf6dd18da4575a518c92583b3f15c009f136b3f58d411",
+      "sourcePath": "keras/src/__init__.py",
+      "retainedPath": "sources/keras/src/__init__.py.txt",
+      "bytes": 684,
+      "gitBlobSha1": "9778bcd4d63a55c5cd0f82566a7a9e7041e6e086",
+      "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/src/__init__.py",
+      "lines": 20,
+      "commitRefBoundByRequestAndUrl": true,
+      "requestSha256": "3eb634e26460f6ddf9efcf50c0fd2001a2d64037d483fd28128233d466204c05"
+    },
+    {
+      "requestFile": "requests/05.json",
+      "args": {
+        "repository_full_name": "keras-team/keras",
+        "path": "keras/api/__init__.py",
+        "ref": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+        "encoding": "base64"
+      },
+      "reason": "keras/__init__.py imports generated keras.api",
+      "readOnly": true,
+      "sha256": "3e0df362a6b9bb3e5253858af4ca306107334be94addbee75a14f3c9f9ea7429",
+      "sourcePath": "keras/api/__init__.py",
+      "retainedPath": "sources/keras/api/__init__.py.txt",
+      "bytes": 2951,
+      "gitBlobSha1": "13343791723773223fa20be0bd6f8b2bbe3bc4f3",
+      "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/api/__init__.py",
+      "lines": 67,
+      "commitRefBoundByRequestAndUrl": true,
+      "requestSha256": "be76a284b9644b5b5e8a85b69eaae952534c9ea967f9712653a59fd03e250a50"
+    },
+    {
+      "requestFile": "requests/06.json",
+      "args": {
+        "repository_full_name": "keras-team/keras",
+        "path": "keras/src/backend/__init__.py",
+        "ref": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+        "encoding": "base64"
+      },
+      "reason": "keras/src/__init__.py imports backend",
+      "readOnly": true,
+      "sha256": "b8af805a3f5b657a1cde3b5dd9137992121093477f97b8f13cc9cffa6751b126",
+      "sourcePath": "keras/src/backend/__init__.py",
+      "retainedPath": "sources/keras/src/backend/__init__.py.txt",
+      "bytes": 4645,
+      "gitBlobSha1": "6ade17201c9e455b6d895a0d7ac226779c50564b",
+      "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/src/backend/__init__.py",
+      "lines": 130,
+      "commitRefBoundByRequestAndUrl": true,
+      "requestSha256": "28fc90e2d657bec61e7a36d9f1ee52e465247eeb2882031d395f3e0ccb6c3b0f"
+    },
+    {
+      "requestFile": "requests/07.json",
+      "args": {
+        "repository_full_name": "keras-team/keras",
+        "path": "keras/src/api_export.py",
+        "ref": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+        "encoding": "base64"
+      },
+      "reason": "keras/src/version.py imports keras_export decorator",
+      "readOnly": true,
+      "sha256": "8173a404e9e6b1c574d7758073be65738529d35f8a920f44ca52004ff41672d8",
+      "sourcePath": "keras/src/api_export.py",
+      "retainedPath": "sources/keras/src/api_export.py.txt",
+      "bytes": 1173,
+      "gitBlobSha1": "76d007dc2af0aaae1f93bf8c684d43c2b782ed19",
+      "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/src/api_export.py",
+      "lines": 49,
+      "commitRefBoundByRequestAndUrl": true,
+      "requestSha256": "f76f09330459b22aac8d0965f1ded350acc95a14612c99a15c1207a17cbcc172"
+    },
+    {
+      "requestFile": "requests/08.json",
+      "args": {
+        "repository_full_name": "keras-team/keras",
+        "path": "keras/src/backend/config.py",
+        "ref": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+        "encoding": "base64"
+      },
+      "reason": "keras/src/backend/__init__.py directly imports backend configuration; inspect default/backend/environment conditions",
+      "readOnly": true,
+      "sha256": "a54307c8326eab51707bb0a87603cf1c209801f2c2a228ac6e3e4396b177bd28",
+      "sourcePath": "keras/src/backend/config.py",
+      "retainedPath": "sources/keras/src/backend/config.py.txt",
+      "bytes": 14565,
+      "gitBlobSha1": "c7920fe910290b6009bedc9fe4aacb697db4a822",
+      "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/src/backend/config.py",
+      "lines": 486,
+      "commitRefBoundByRequestAndUrl": true,
+      "requestSha256": "3860df5244d05b084cf3470a2c837a2a83f30d09f72365e63a3f601f693495ca"
+    },
+    {
+      "requestFile": "requests/09-commit.json",
+      "args": {
+        "repo_full_name": "keras-team/keras",
+        "commit_sha": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45"
+      },
+      "reason": "Confirm declared exact revision identity; metadata only, not additional source-file acquisition",
+      "readOnly": true,
+      "sha256": "eb04148b774c9ca2c7d4fa4aeace55da83ba9f922d94648e6c00647682355a6e",
+      "requestSha256": "eb04148b774c9ca2c7d4fa4aeace55da83ba9f922d94648e6c00647682355a6e"
+    }
+  ]
+}

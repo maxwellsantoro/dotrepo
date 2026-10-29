@@ -1,0 +1,833 @@
+//! Field-resolution and reconciliation: scoring imported/inferred manifest
+//! fields for confidence, building adjudication requests for unresolved
+//! fields, and applying adjudication responses back into field scores.
+use super::commands::{sanitize_import_command, scalar_candidate_is_eligible};
+use super::parsing::{is_actionable_security_url, is_quality_url};
+use super::types::{
+    AdjudicationCandidate, AdjudicationModelResponse, AdjudicationOutcome, AdjudicationRequest,
+    AdjudicationResult, FieldConfidence, FieldScore, FieldScoreReport, FieldScoreSummary,
+    ImportedCommandProvenance,
+};
+use super::{ImportPlan, VerificationReport};
+
+fn score_docs_field(plan: &ImportPlan, field: &str, value: Option<&str>) -> FieldScore {
+    let evidence = plan
+        .manifest
+        .x
+        .get("dotrepo")
+        .and_then(|extension| extension.get("field_evidence"))
+        .and_then(|fields| fields.get(field));
+    if value.is_none()
+        && evidence
+            .and_then(|entry| entry.get("state"))
+            .and_then(toml::Value::as_str)
+            == Some("unresolved")
+    {
+        return FieldScore {
+            field: field.into(),
+            confidence: FieldConfidence::Unresolved,
+            value: None,
+            source: evidence
+                .and_then(|entry| entry.get("source"))
+                .and_then(toml::Value::as_str)
+                .map(str::to_string),
+            reason: "conflicting documentation declarations; no target selected".into(),
+        };
+    }
+    let grounded = value.and_then(|value| {
+        let evidence = evidence?;
+        let recorded: serde_json::Value =
+            serde_json::from_str(evidence.get("valueJson")?.as_str()?).ok()?;
+        let source = evidence.get("source")?.as_str()?;
+        let reason = evidence.get("reason")?.as_str()?;
+        (recorded.as_str() == Some(value)
+            && evidence.get("method")?.as_str() == Some("extracted")
+            && plan.imported_sources.iter().any(|path| path == source)
+            && !reason.is_empty())
+        .then_some((source, reason))
+    });
+    FieldScore {
+        field: field.into(),
+        confidence: match value {
+            None => FieldConfidence::HighConfidenceAbsent,
+            Some(value) if grounded.is_some() && is_quality_url(value) => {
+                FieldConfidence::HighConfidencePresent
+            }
+            Some(_) => FieldConfidence::MediumConfidencePresent,
+        },
+        source: grounded.map(|(source, _)| source.to_string()),
+        value: value.map(str::to_string),
+        reason: match (value, grounded) {
+            (_, Some((_, reason))) => reason.to_string(),
+            (Some(_), None) => {
+                "documentation target present without a retained source declaration".into()
+            }
+            (None, _) => "no unambiguous documentation declaration detected".into(),
+        },
+    }
+}
+
+pub fn score_import_fields(
+    plan: &ImportPlan,
+    verification: &VerificationReport,
+) -> FieldScoreReport {
+    let mut scores = Vec::new();
+
+    // repo.name
+    let name_has_readme_source = plan
+        .imported_sources
+        .iter()
+        .any(|s| s.eq_ignore_ascii_case("readme.md"));
+    let name_conflict = plan
+        .github
+        .as_ref()
+        .and_then(|github| github.repo_name.as_deref())
+        .is_some_and(|slug| !repository_names_match(&plan.manifest.repo.name, slug));
+    scores.push(FieldScore {
+        field: "repo.name".into(),
+        confidence: if name_conflict {
+            FieldConfidence::Suspect
+        } else if name_has_readme_source {
+            FieldConfidence::HighConfidencePresent
+        } else {
+            FieldConfidence::MediumConfidencePresent
+        },
+        source: plan.imported_sources.first().cloned(),
+        value: Some(plan.manifest.repo.name.clone()),
+        reason: if name_conflict {
+            "README-derived name conflicts with GitHub repository name".into()
+        } else if name_has_readme_source {
+            "extracted from README title with post-cleaners".into()
+        } else {
+            "fell back to directory name or GitHub API".into()
+        },
+    });
+
+    // repo.description
+    let description_conflict = plan.github.as_ref().is_some_and(|github| {
+        description_conflicts_with_github(
+            &plan.manifest.repo.description,
+            github.description.as_deref(),
+            &github.topics,
+        )
+    });
+    let description_matches_github = plan.github.as_ref().is_some_and(|github| {
+        github
+            .description
+            .as_deref()
+            .is_some_and(|description| plan.manifest.repo.description.trim() == description.trim())
+    });
+    scores.push(FieldScore {
+        field: "repo.description".into(),
+        confidence: if description_conflict {
+            FieldConfidence::Suspect
+        } else if description_matches_github || name_has_readme_source {
+            FieldConfidence::HighConfidencePresent
+        } else {
+            FieldConfidence::MediumConfidencePresent
+        },
+        source: if description_matches_github {
+            Some("GitHub API".into())
+        } else {
+            plan.imported_sources.first().cloned()
+        },
+        value: Some(plan.manifest.repo.description.clone()),
+        reason: if description_conflict {
+            "README-derived description has no meaningful overlap with GitHub description or topics"
+                .into()
+        } else if description_matches_github {
+            "constrained by GitHub repository metadata".into()
+        } else if name_has_readme_source {
+            "extracted from README paragraph with post-cleaners".into()
+        } else {
+            "fell back to GitHub API or inferred".into()
+        },
+    });
+
+    // repo.homepage
+    if let Some(ref homepage) = plan.manifest.repo.homepage {
+        scores.push(FieldScore {
+            field: "repo.homepage".into(),
+            confidence: if is_quality_url(homepage) {
+                FieldConfidence::HighConfidencePresent
+            } else {
+                FieldConfidence::MediumConfidencePresent
+            },
+            source: None,
+            value: Some(homepage.clone()),
+            reason: "set and passes quality check".into(),
+        });
+    } else {
+        scores.push(FieldScore {
+            field: "repo.homepage".into(),
+            confidence: FieldConfidence::HighConfidenceAbsent,
+            source: None,
+            value: None,
+            reason: "no homepage detected".into(),
+        });
+    }
+
+    // repo.build
+    // Trust notes may still record an intra-tier conflict even when candidate
+    // sanitization left verification.absent_fields set. Prefer unresolved so
+    // fresh crawler verification cannot turn a conflict into verified absence.
+    let trust_notes = plan
+        .manifest
+        .record
+        .trust
+        .as_ref()
+        .and_then(|trust| trust.notes.as_deref())
+        .unwrap_or("");
+    let build_conflict_note = trust_notes.contains("Left `repo.build` unset because")
+        && trust_notes.contains("conflicting build commands");
+    let build_unresolved = verification
+        .unresolved_fields
+        .contains(&"repo.build".to_string())
+        || build_conflict_note;
+    let build_absent = verification
+        .absent_fields
+        .contains(&"repo.build".to_string())
+        && !build_conflict_note;
+    if let Some(ref build) = plan.manifest.repo.build {
+        let is_ecosystem_default = plan
+            .command_candidates
+            .selected_build
+            .as_ref()
+            .map(|s| {
+                matches!(
+                    s.source_tier,
+                    super::types::CommandSourceTier::EcosystemDefault
+                )
+            })
+            .unwrap_or(false);
+        scores.push(FieldScore {
+            field: "repo.build".into(),
+            confidence: if is_ecosystem_default {
+                FieldConfidence::MediumConfidencePresent
+            } else if plan
+                .command_candidates
+                .selected_build
+                .as_ref()
+                .is_some_and(|s| matches!(s.provenance, ImportedCommandProvenance::Imported))
+            {
+                FieldConfidence::HighConfidencePresent
+            } else {
+                FieldConfidence::MediumConfidencePresent
+            },
+            source: plan
+                .command_candidates
+                .selected_build
+                .as_ref()
+                .map(|s| s.source_path.clone()),
+            value: Some(build.clone()),
+            reason: if is_ecosystem_default {
+                "inferred ecosystem default from build-tool metadata".into()
+            } else if plan
+                .command_candidates
+                .selected_build
+                .as_ref()
+                .is_some_and(|s| matches!(s.provenance, ImportedCommandProvenance::Imported))
+            {
+                "from declared repository source".into()
+            } else {
+                "from workflow fallback".into()
+            },
+        });
+    } else if build_unresolved {
+        scores.push(FieldScore {
+            field: "repo.build".into(),
+            confidence: FieldConfidence::Unresolved,
+            source: None,
+            value: None,
+            reason: if build_conflict_note {
+                "intra-tier conflict left field unset during import".into()
+            } else {
+                "conflicting candidates, no clear winner".into()
+            },
+        });
+    } else if build_absent {
+        scores.push(FieldScore {
+            field: "repo.build".into(),
+            confidence: FieldConfidence::HighConfidenceAbsent,
+            source: None,
+            value: None,
+            reason: "no build command sources found".into(),
+        });
+    }
+
+    // repo.test
+    let test_conflict_note = trust_notes.contains("Left `repo.test` unset because")
+        && trust_notes.contains("conflicting test commands");
+    let test_unresolved = verification
+        .unresolved_fields
+        .contains(&"repo.test".to_string())
+        || test_conflict_note;
+    let test_absent = verification
+        .absent_fields
+        .contains(&"repo.test".to_string())
+        && !test_conflict_note;
+    if let Some(ref test) = plan.manifest.repo.test {
+        let is_ecosystem_default = plan
+            .command_candidates
+            .selected_test
+            .as_ref()
+            .map(|s| {
+                matches!(
+                    s.source_tier,
+                    super::types::CommandSourceTier::EcosystemDefault
+                )
+            })
+            .unwrap_or(false);
+        scores.push(FieldScore {
+            field: "repo.test".into(),
+            confidence: if is_ecosystem_default {
+                FieldConfidence::MediumConfidencePresent
+            } else if plan
+                .command_candidates
+                .selected_test
+                .as_ref()
+                .is_some_and(|s| matches!(s.provenance, ImportedCommandProvenance::Imported))
+            {
+                FieldConfidence::HighConfidencePresent
+            } else {
+                FieldConfidence::MediumConfidencePresent
+            },
+            source: plan
+                .command_candidates
+                .selected_test
+                .as_ref()
+                .map(|s| s.source_path.clone()),
+            value: Some(test.clone()),
+            reason: if is_ecosystem_default {
+                "inferred ecosystem default from build-tool metadata".into()
+            } else if plan
+                .command_candidates
+                .selected_test
+                .as_ref()
+                .is_some_and(|s| matches!(s.provenance, ImportedCommandProvenance::Imported))
+            {
+                "from declared repository source".into()
+            } else {
+                "from workflow fallback".into()
+            },
+        });
+    } else if test_unresolved {
+        scores.push(FieldScore {
+            field: "repo.test".into(),
+            confidence: FieldConfidence::Unresolved,
+            source: None,
+            value: None,
+            reason: if test_conflict_note {
+                "intra-tier conflict left field unset during import".into()
+            } else {
+                "conflicting candidates, no clear winner".into()
+            },
+        });
+    } else if test_absent {
+        scores.push(FieldScore {
+            field: "repo.test".into(),
+            confidence: FieldConfidence::HighConfidenceAbsent,
+            source: None,
+            value: None,
+            reason: "no test command sources found".into(),
+        });
+    }
+
+    // owners.security_contact
+    let owners = plan.manifest.owners.as_ref();
+    let security = owners.and_then(|o| o.security_contact.as_deref());
+    if let Some(contact) = security {
+        if contact == "unknown" {
+            scores.push(FieldScore {
+                field: "owners.security_contact".into(),
+                confidence: FieldConfidence::HighConfidenceAbsent,
+                source: None,
+                value: Some(contact.into()),
+                reason: "explicitly unknown".into(),
+            });
+        } else if contact.contains('@') {
+            scores.push(FieldScore {
+                field: "owners.security_contact".into(),
+                confidence: FieldConfidence::HighConfidencePresent,
+                source: plan
+                    .imported_sources
+                    .iter()
+                    .find(|source| source.to_ascii_lowercase().ends_with("security.md"))
+                    .cloned(),
+                value: Some(contact.into()),
+                reason: "direct email or mailing list".into(),
+            });
+        } else if is_actionable_security_url(contact) {
+            scores.push(FieldScore {
+                field: "owners.security_contact".into(),
+                confidence: FieldConfidence::HighConfidencePresent,
+                source: plan
+                    .imported_sources
+                    .iter()
+                    .find(|source| source.to_ascii_lowercase().ends_with("security.md"))
+                    .cloned(),
+                value: Some(contact.into()),
+                reason: "actionable security reporting URL".into(),
+            });
+        } else {
+            scores.push(FieldScore {
+                field: "owners.security_contact".into(),
+                confidence: FieldConfidence::MediumConfidencePresent,
+                source: plan
+                    .imported_sources
+                    .iter()
+                    .find(|source| source.to_ascii_lowercase().ends_with("security.md"))
+                    .cloned(),
+                value: Some(contact.into()),
+                reason: "policy URL or non-email contact".into(),
+            });
+        }
+    } else {
+        scores.push(FieldScore {
+            field: "owners.security_contact".into(),
+            confidence: FieldConfidence::HighConfidenceAbsent,
+            source: None,
+            value: None,
+            reason: "no SECURITY.md or security contact sources found".into(),
+        });
+    }
+
+    // owners.team
+    let team = owners.and_then(|o| o.team.as_deref());
+    if let Some(team_val) = team {
+        scores.push(FieldScore {
+            field: "owners.team".into(),
+            confidence: FieldConfidence::HighConfidencePresent,
+            source: plan
+                .imported_sources
+                .iter()
+                .find(|s| s.eq_ignore_ascii_case("codeowners"))
+                .cloned(),
+            value: Some(team_val.into()),
+            reason: "clear CODEOWNERS team".into(),
+        });
+    } else {
+        scores.push(FieldScore {
+            field: "owners.team".into(),
+            confidence: FieldConfidence::HighConfidenceAbsent,
+            source: None,
+            value: None,
+            reason: "no single clear team in CODEOWNERS".into(),
+        });
+    }
+
+    for (field, value) in [
+        (
+            "docs.root",
+            plan.manifest
+                .docs
+                .as_ref()
+                .and_then(|docs| docs.root.as_deref()),
+        ),
+        (
+            "docs.getting_started",
+            plan.manifest
+                .docs
+                .as_ref()
+                .and_then(|docs| docs.getting_started.as_deref()),
+        ),
+    ] {
+        scores.push(score_docs_field(plan, field, value));
+    }
+
+    // Natural multi-file context recovery is distinct from independent source
+    // verification. Score the complete, exactly bound candidate, never reuse
+    // its scalar command assessment or infer high confidence from its grammar.
+    for (purpose, candidates) in [
+        ("build", &plan.manifest.repo.build_candidates),
+        ("test", &plan.manifest.repo.test_candidates),
+    ] {
+        for (index, candidate) in candidates.iter().enumerate() {
+            let field = format!("repo.{purpose}_candidates.{index}");
+            let Some(evidence) = plan
+                .manifest
+                .x
+                .get("dotrepo")
+                .and_then(|extension| extension.get("field_evidence"))
+                .and_then(|fields| fields.get(&field))
+                .filter(|entry| entry.get("sourceBindingsJson").is_some())
+            else {
+                continue;
+            };
+            let recorded = evidence
+                .get("valueJson")
+                .and_then(toml::Value::as_str)
+                .and_then(|value| serde_json::from_str::<serde_json::Value>(value).ok());
+            let current = serde_json::to_value(candidate).ok();
+            let source = candidate.context.as_ref().map(|value| value.source.clone());
+            let bound = current.is_some()
+                && recorded == current
+                && plan.manifest.record.generated_at.is_some()
+                && source.as_deref() == evidence.get("source").and_then(toml::Value::as_str)
+                && evidence.get("checkedAt").and_then(toml::Value::as_str)
+                    == plan.manifest.record.generated_at.as_deref();
+            scores.push(FieldScore {
+                field,
+                confidence: if bound {
+                    FieldConfidence::MediumConfidencePresent
+                } else {
+                    FieldConfidence::Unresolved
+                },
+                source,
+                value: current.map(|value| value.to_string()),
+                reason: if bound {
+                    "Source-bound natural instruction candidate recovered; independent prerequisite completeness verification remains unresolved."
+                } else {
+                    "Natural instruction candidate changed after source binding; source establishment must be repeated."
+                }
+                .into(),
+            });
+        }
+    }
+
+    let high_confidence_present: Vec<_> = scores
+        .iter()
+        .filter(|s| s.confidence == FieldConfidence::HighConfidencePresent)
+        .map(|s| s.field.clone())
+        .collect();
+    let medium_confidence_present: Vec<_> = scores
+        .iter()
+        .filter(|s| s.confidence == FieldConfidence::MediumConfidencePresent)
+        .map(|s| s.field.clone())
+        .collect();
+    let high_confidence_absent: Vec<_> = scores
+        .iter()
+        .filter(|s| s.confidence == FieldConfidence::HighConfidenceAbsent)
+        .map(|s| s.field.clone())
+        .collect();
+    let suspect: Vec<_> = scores
+        .iter()
+        .filter(|s| s.confidence == FieldConfidence::Suspect)
+        .map(|s| s.field.clone())
+        .collect();
+    let unresolved: Vec<_> = scores
+        .iter()
+        .filter(|s| s.confidence == FieldConfidence::Unresolved)
+        .map(|s| s.field.clone())
+        .collect();
+
+    let eligible_for_auto_publish =
+        unresolved.is_empty() && medium_confidence_present.is_empty() && suspect.is_empty();
+
+    FieldScoreReport {
+        scores,
+        summary: FieldScoreSummary {
+            high_confidence_present,
+            medium_confidence_present,
+            suspect,
+            high_confidence_absent,
+            unresolved,
+            eligible_for_auto_publish,
+        },
+    }
+}
+
+pub fn build_adjudication_requests(
+    report: &FieldScoreReport,
+    plan: &ImportPlan,
+) -> Vec<AdjudicationRequest> {
+    let unresolved_fields: Vec<&str> = report
+        .scores
+        .iter()
+        .filter(|s| {
+            matches!(
+                s.confidence,
+                FieldConfidence::Unresolved | FieldConfidence::Suspect
+            )
+        })
+        .map(|s| s.field.as_str())
+        .collect();
+
+    if unresolved_fields.is_empty() {
+        return Vec::new();
+    }
+
+    let mut requests = Vec::new();
+
+    for field in &unresolved_fields {
+        let is_build = *field == "repo.build";
+        let is_test = *field == "repo.test";
+
+        if *field == "repo.name" || *field == "repo.description" {
+            let score_value = report
+                .scores
+                .iter()
+                .find(|score| score.field == *field)
+                .and_then(|score| score.value.clone());
+            let github_value = plan.github.as_ref().and_then(|github| {
+                if *field == "repo.name" {
+                    github.repo_name.clone()
+                } else {
+                    github.description.clone()
+                }
+            });
+            let mut candidates = Vec::new();
+            if let Some(value) = github_value.filter(|value| !value.trim().is_empty()) {
+                candidates.push(AdjudicationCandidate {
+                    value,
+                    source_path: "GitHub API".into(),
+                    source_tier: super::types::CommandSourceTier::GitHubApi,
+                });
+            }
+            if let Some(value) = score_value.filter(|value| !value.trim().is_empty()) {
+                candidates.push(AdjudicationCandidate {
+                    value,
+                    source_path: "README.md".into(),
+                    source_tier: super::types::CommandSourceTier::Manifest,
+                });
+            }
+            if !candidates.is_empty() {
+                requests.push(AdjudicationRequest {
+                    field: field.to_string(),
+                    candidates,
+                });
+            }
+            continue;
+        }
+
+        if !is_build && !is_test {
+            continue;
+        }
+        if plan
+            .command_candidates
+            .blocked_scalar_fields
+            .iter()
+            .any(|blocked| blocked == *field)
+        {
+            continue;
+        }
+
+        let mut candidates = Vec::new();
+        for candidate in &plan.command_candidates.candidates {
+            if !scalar_candidate_is_eligible(
+                &candidate.source_path,
+                candidate.source_tier,
+                is_build,
+            ) {
+                continue;
+            }
+            let value = if is_build {
+                candidate.build.as_ref()
+            } else {
+                candidate.test.as_ref()
+            };
+            if let Some(value) = value.filter(|command| sanitize_import_command(command).is_some())
+            {
+                candidates.push(AdjudicationCandidate {
+                    value: value.clone(),
+                    source_path: candidate.source_path.clone(),
+                    source_tier: candidate.source_tier,
+                });
+            }
+        }
+
+        if !candidates.is_empty() {
+            requests.push(AdjudicationRequest {
+                field: field.to_string(),
+                candidates,
+            });
+        }
+    }
+
+    requests
+}
+
+pub fn apply_adjudication_response(
+    response: &AdjudicationModelResponse,
+    request: &AdjudicationRequest,
+) -> AdjudicationResult {
+    if response.field != request.field {
+        return AdjudicationResult {
+            field: request.field.clone(),
+            outcome: AdjudicationOutcome::Rejected {
+                model_value: response.value.clone().unwrap_or_default(),
+                reason: format!(
+                    "model responded for field {:?}, expected {:?}",
+                    response.field, request.field
+                ),
+            },
+        };
+    }
+
+    let candidate_values: Vec<&str> = request
+        .candidates
+        .iter()
+        .map(|c| c.value.as_str())
+        .collect();
+
+    match &response.value {
+        Some(value) => {
+            if candidate_values.iter().any(|c| *c == value) {
+                if let Some(source) = &response.source {
+                    if !request.candidates.iter().any(|candidate| {
+                        candidate.value == *value && candidate.source_path == *source
+                    }) {
+                        return AdjudicationResult {
+                            field: request.field.clone(),
+                            outcome: AdjudicationOutcome::Rejected {
+                                model_value: value.clone(),
+                                reason: format!(
+                                    "model cited source {source:?} without the proposed candidate value"
+                                ),
+                            },
+                        };
+                    }
+                }
+                AdjudicationResult {
+                    field: request.field.clone(),
+                    outcome: AdjudicationOutcome::Resolved {
+                        value: value.clone(),
+                        confidence: FieldConfidence::MediumConfidencePresent,
+                        reason: response.reason.clone(),
+                    },
+                }
+            } else {
+                AdjudicationResult {
+                    field: request.field.clone(),
+                    outcome: AdjudicationOutcome::Rejected {
+                        model_value: value.clone(),
+                        reason: format!(
+                            "model proposed value not in candidate set: {:?}",
+                            candidate_values
+                        ),
+                    },
+                }
+            }
+        }
+        None => AdjudicationResult {
+            field: request.field.clone(),
+            outcome: AdjudicationOutcome::Absent {
+                reason: response.reason.clone(),
+            },
+        },
+    }
+}
+
+pub fn apply_adjudication_results(report: &mut FieldScoreReport, results: &[AdjudicationResult]) {
+    for result in results {
+        let Some(score) = report.scores.iter_mut().find(|s| s.field == result.field) else {
+            continue;
+        };
+        if !matches!(
+            score.confidence,
+            FieldConfidence::Unresolved | FieldConfidence::Suspect
+        ) {
+            continue;
+        }
+        match &result.outcome {
+            AdjudicationOutcome::Resolved {
+                value,
+                confidence,
+                reason,
+            } => {
+                score.confidence = confidence.clone();
+                score.value = Some(value.clone());
+                score.reason = format!("adjudicated: {}", reason);
+            }
+            AdjudicationOutcome::Absent { reason } => {
+                score.confidence = FieldConfidence::HighConfidenceAbsent;
+                score.value = None;
+                score.reason = format!("adjudicated absent: {}", reason);
+            }
+            AdjudicationOutcome::Rejected { .. } => {
+                // Leave as unresolved — model couldn't help
+            }
+        }
+    }
+
+    // Recompute summary
+    let mut high_confidence_present = Vec::new();
+    let mut medium_confidence_present = Vec::new();
+    let mut high_confidence_absent = Vec::new();
+    let mut suspect = Vec::new();
+    let mut unresolved = Vec::new();
+    for score in &report.scores {
+        match score.confidence {
+            FieldConfidence::HighConfidencePresent => {
+                high_confidence_present.push(score.field.clone())
+            }
+            FieldConfidence::MediumConfidencePresent => {
+                medium_confidence_present.push(score.field.clone())
+            }
+            FieldConfidence::Suspect => suspect.push(score.field.clone()),
+            FieldConfidence::HighConfidenceAbsent => {
+                high_confidence_absent.push(score.field.clone())
+            }
+            FieldConfidence::Unresolved => unresolved.push(score.field.clone()),
+        }
+    }
+    report.summary.high_confidence_present = high_confidence_present;
+    report.summary.medium_confidence_present = medium_confidence_present;
+    report.summary.high_confidence_absent = high_confidence_absent;
+    report.summary.suspect = suspect;
+    report.summary.unresolved = unresolved;
+    report.summary.eligible_for_auto_publish = report.summary.unresolved.is_empty()
+        && report.summary.medium_confidence_present.is_empty()
+        && report.summary.suspect.is_empty();
+}
+
+fn repository_names_match(candidate: &str, github_name: &str) -> bool {
+    let compact = |value: &str| {
+        value
+            .chars()
+            .filter(|ch| ch.is_alphanumeric())
+            .flat_map(char::to_lowercase)
+            .collect::<String>()
+    };
+    let candidate = compact(candidate);
+    let github_name = compact(github_name);
+    !candidate.is_empty()
+        && !github_name.is_empty()
+        && (candidate == github_name
+            || candidate.contains(&github_name)
+            || github_name.contains(&candidate))
+}
+
+fn description_conflicts_with_github(
+    candidate: &str,
+    github_description: Option<&str>,
+    topics: &[String],
+) -> bool {
+    let candidate_tokens = meaningful_tokens(candidate);
+    let mut reference_tokens = github_description
+        .map(meaningful_tokens)
+        .unwrap_or_default();
+    for topic in topics {
+        reference_tokens.extend(meaningful_tokens(topic));
+    }
+    !candidate_tokens.is_empty()
+        && !reference_tokens.is_empty()
+        && candidate_tokens.is_disjoint(&reference_tokens)
+}
+
+fn meaningful_tokens(value: &str) -> std::collections::HashSet<String> {
+    const STOP: &[&str] = &[
+        "the",
+        "and",
+        "for",
+        "with",
+        "from",
+        "this",
+        "that",
+        "your",
+        "you",
+        "are",
+        "use",
+        "using",
+        "repository",
+        "project",
+        "tool",
+        "latest",
+        "here",
+    ];
+    value
+        .split(|ch: char| !ch.is_alphanumeric())
+        .map(str::to_ascii_lowercase)
+        .filter(|token| token.len() >= 3 && !STOP.contains(&token.as_str()))
+        .collect()
+}

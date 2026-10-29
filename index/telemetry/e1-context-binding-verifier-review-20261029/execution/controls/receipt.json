@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "cargo",
+    "run",
+    "--offline",
+    "--locked",
+    "--manifest-path",
+    "/Users/maxwell/projects/agent/dotrepo/index/telemetry/e1-context-binding-verifier-review-20261029/harness/Cargo.toml",
+    "--",
+    "/tmp/dotrepo-e1-context-binding-independent-20261029-82e91a/fixtures",
+    "/tmp/dotrepo-e1-context-binding-independent-20261029-82e91a/result.json"
+  ],
+  "startedAt": "2026-10-29T08:07:44.849931+00:00",
+  "elapsedSeconds": 12.060180500149727,
+  "exitCode": 0,
+  "error": null,
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "7a8af41b80339860bbf4a5240a80b4ba9c60f875ab82c659c32b9d577024c087",
+  "costUsd": null,
+  "costExclusions": [
+    "Unmetered local operator/Cargo work; no native upstream task or paid provider call."
+  ]
+}

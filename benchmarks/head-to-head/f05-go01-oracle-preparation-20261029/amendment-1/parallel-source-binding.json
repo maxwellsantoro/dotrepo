@@ -1,0 +1,29 @@
+{
+  "state": "existing exact common-image primary source read as data only; no new daemon/native collection",
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "existingInventorySha256": "f096a4b8a2346c0332082e2b88b093cc4fb78b2cbaed0b5b5af05d071695f647",
+  "failureRecursionAndParentWait": "Bound before-review toolchain-source-spans.json in BEFORE.json",
+  "parallelControlSpans": [
+    {
+      "path": "usr/local/go/src/testing/testing.go",
+      "sha256": "27c59df1832eae458ab8d2d4b6a6252bbd1ea2a3001734910d1ce2decff16f81",
+      "startLine": 1953,
+      "endLine": 1967,
+      "excerpt": "\tif t.chatty != nil {\n\t\tt.chatty.Updatef(t.name, \"=== PAUSE %s\\n\", t.name)\n\t}\n\trunning.Delete(t.name)\n\n\tt.signal <- true   // Release calling test.\n\t<-t.parent.barrier // Wait for the parent test to complete.\n\tt.tstate.waitParallel()\n\tparallelStart.Add(1)\n\n\tif t.chatty != nil {\n\t\tt.chatty.Updatef(t.name, \"=== CONT  %s\\n\", t.name)\n\t}\n\trunning.Store(t.name, highPrecisionTimeNow())\n\tt.start = highPrecisionTimeNow()"
+    },
+    {
+      "path": "usr/local/go/src/cmd/internal/test2json/test2json.go",
+      "sha256": "81b811cc3af1cc49da5faec1a93aabf12b769a69a5dbc60505c125edb19d288b",
+      "startLine": 193,
+      "endLine": 201,
+      "excerpt": "\tupdates = [][]byte{\n\t\t[]byte(\"=== RUN   \"),\n\t\t[]byte(\"=== PAUSE \"),\n\t\t[]byte(\"=== CONT  \"),\n\t\t[]byte(\"=== NAME  \"),\n\t\t[]byte(\"=== PASS  \"),\n\t\t[]byte(\"=== FAIL  \"),\n\t\t[]byte(\"=== SKIP  \"),\n\t\t[]byte(\"=== ATTR  \"),"
+    },
+    {
+      "path": "usr/local/go/src/cmd/internal/test2json/test2json.go",
+      "sha256": "81b811cc3af1cc49da5faec1a93aabf12b769a69a5dbc60505c125edb19d288b",
+      "startLine": 310,
+      "endLine": 323,
+      "excerpt": "\t\tif indent > 0 && indent <= len(c.report) {\n\t\t\tc.testName = c.report[indent-1].Test\n\t\t}\n\t\tc.output.write(origLine)\n\t\treturn\n\t}\n\n\t// Parse out action and test name from \"=== ACTION: Name\".\n\taction, name, _ := strings.Cut(string(line[len(\"=== \"):]), \" \")\n\taction = strings.TrimSuffix(action, \":\")\n\taction = strings.ToLower(action)\n\tname = strings.TrimSpace(name)\n\n\te := &event{Action: action}"
+    }
+  ]
+}

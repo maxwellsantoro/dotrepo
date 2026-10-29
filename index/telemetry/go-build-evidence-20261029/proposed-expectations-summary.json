@@ -1,0 +1,11 @@
+{
+  "changedFixtures": [
+    "f1-go-service-context",
+    "f1-go-unrelated-service-context",
+    "f1-go-example-module-context",
+    "f1-go-services-block-context"
+  ],
+  "basedOn": "F1_FIXTURE_PLAN native+overlay outputs in checks/focused-attempt-2.log",
+  "testValuesUnchanged": true,
+  "historicalSourcesOrFrozenResultsChanged": false
+}

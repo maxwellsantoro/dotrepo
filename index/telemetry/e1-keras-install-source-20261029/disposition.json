@@ -1,0 +1,457 @@
+{
+  "identity": "e1-keras-install-source-20261029",
+  "authorContext": "Prior E1 Keras extractor/gold author; source-only known development follow-up, not fresh holdout, independent second curator, execution or consumer trial",
+  "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+  "newReadOnlyApiCalls": 9,
+  "newFullSourceFiles": 8,
+  "newSourceBytes": 29118,
+  "reusedSourceBindings": {
+    "README.md": {
+      "localPath": "crates/dotrepo-core/src/import/commands/context/python_recipe/testdata/README.md",
+      "sha256": "6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8",
+      "bytes": 5547,
+      "lines": 141,
+      "newApiAcquisition": false,
+      "sourceIdentity": "Already retained exact-revision E1 source; no new fetch/copy",
+      "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/README.md"
+    },
+    "CONTRIBUTING.md": {
+      "localPath": "crates/dotrepo-core/src/import/commands/context/python_recipe/testdata/CONTRIBUTING.md",
+      "sha256": "eff1a6349d222979e24b860c88e9577f603300af7658a1ac6fca3140992d0d3d",
+      "bytes": 13606,
+      "lines": 374,
+      "newApiAcquisition": false,
+      "sourceIdentity": "Already retained exact-revision E1 source; no new fetch/copy",
+      "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/CONTRIBUTING.md"
+    },
+    "pyproject.toml": {
+      "localPath": "crates/dotrepo-core/src/import/commands/context/python_recipe/testdata/pyproject.toml",
+      "sha256": "51ac5db60612a4c92123980826c1010a6d087c7a64b11a580ebc33c21058d326",
+      "bytes": 2883,
+      "lines": 119,
+      "newApiAcquisition": false,
+      "sourceIdentity": "Already retained exact-revision E1 source; no new fetch/copy",
+      "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/pyproject.toml"
+    },
+    "requirements.txt": {
+      "localPath": "crates/dotrepo-core/src/import/commands/context/python_recipe/testdata/requirements.txt",
+      "sha256": "f34e2fa7d9bb205afe36e7cb8a0d53f6e3be39d0dc51b38de0619529e4e919b8",
+      "bytes": 619,
+      "lines": 26,
+      "newApiAcquisition": false,
+      "sourceIdentity": "Already retained exact-revision E1 source; no new fetch/copy",
+      "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/requirements.txt"
+    },
+    "requirements-common.txt": {
+      "localPath": "crates/dotrepo-core/src/import/commands/context/python_recipe/testdata/requirements-common.txt",
+      "sha256": "3df3a2a15e645bc03082648aec06570a4329fdad189e4b326df0be80d6a7615e",
+      "bytes": 498,
+      "lines": 37,
+      "newApiAcquisition": false,
+      "sourceIdentity": "Already retained exact-revision E1 source; no new fetch/copy",
+      "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/requirements-common.txt"
+    }
+  },
+  "claims": [
+    {
+      "id": "documented-local-recipe",
+      "kind": "documented",
+      "assertion": "README documents requirements installation then python pip_build.py --install from repository root; Linux/macOS compatibility and WSL2 recommendation qualify platform scope.",
+      "support": [
+        {
+          "path": "README.md",
+          "startLine": 41,
+          "endLine": 64,
+          "wholeFileSha256": "6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8",
+          "passageSha256": "bb124c31512415caa6d17cd379bc642558de14d07b0538079ae025162399f5c5",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/README.md#L41-L64"
+        }
+      ],
+      "limit": "Documentation is not observed installation success, and CONTRIBUTING local-test setup does not explicitly state this wheel install is necessary for pytest keras."
+    },
+    {
+      "id": "script-build-tools",
+      "kind": "implementation",
+      "assertion": "pip_build.py invokes python3 -m build and pip3 install wheel --force-reinstall --no-dependencies when --install and a matching wheel exists.",
+      "support": [
+        {
+          "path": "pip_build.py",
+          "startLine": 102,
+          "endLine": 139,
+          "wholeFileSha256": "d7192e9c67e260e98a328b2a88f27076fcc441fdfe889f75961fd79cce8275c3",
+          "passageSha256": "2e08778533a231f96d59284206f9e4313ef9b57e948f46eb3402c5af2cb7d9f5",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/pip_build.py#L102-L139"
+        },
+        {
+          "path": "pip_build.py",
+          "startLine": 159,
+          "endLine": 163,
+          "wholeFileSha256": "d7192e9c67e260e98a328b2a88f27076fcc441fdfe889f75961fd79cce8275c3",
+          "passageSha256": "040452e8ed2a7d0bc6db3cdec7183e78f72ac8948b8f8653c763b401faacbefe",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/pip_build.py#L159-L163"
+        },
+        {
+          "path": "requirements-common.txt",
+          "startLine": 17,
+          "endLine": 21,
+          "wholeFileSha256": "3df3a2a15e645bc03082648aec06570a4329fdad189e4b326df0be80d6a7615e",
+          "passageSha256": "a26575cc156a93fca24276e2dcd883ac3cdeb395cb2ceb6ada02923fa846cac6",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/requirements-common.txt#L17-L21"
+        }
+      ],
+      "limit": "python3/pip3 are PATH-resolved names, not bound to the launching interpreter. Dependencies must already be present; actual package resolution and environment identity were not tested."
+    },
+    {
+      "id": "build-system-runtime",
+      "kind": "declared-metadata",
+      "assertion": "The copied pyproject declares setuptools >=61.0, setuptools.build_meta, Python >=3.11, dynamic version keras.src.version.__version__, and API/source package remapping.",
+      "support": [
+        {
+          "path": "pyproject.toml",
+          "startLine": 1,
+          "endLine": 14,
+          "wholeFileSha256": "51ac5db60612a4c92123980826c1010a6d087c7a64b11a580ebc33c21058d326",
+          "passageSha256": "0b77ee8ab5c422f65cbdfd9feab616af2c61b907f831873467fbf5bf06eb3794",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/pyproject.toml#L1-L14"
+        },
+        {
+          "path": "pyproject.toml",
+          "startLine": 48,
+          "endLine": 54,
+          "wholeFileSha256": "51ac5db60612a4c92123980826c1010a6d087c7a64b11a580ebc33c21058d326",
+          "passageSha256": "44355a2194c9942312af2a8b9f2329f6a654e276b8a9d87d1b2ec58b84b82ec7",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/pyproject.toml#L48-L54"
+        },
+        {
+          "path": "CONTRIBUTING.md",
+          "startLine": 85,
+          "endLine": 94,
+          "wholeFileSha256": "eff1a6349d222979e24b860c88e9577f603300af7658a1ac6fca3140992d0d3d",
+          "passageSha256": "9e924eded0bca8947d1bb50f4063ced8af2775e8af9deee5273ef4de1ffb065a",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/CONTRIBUTING.md#L85-L94"
+        }
+      ],
+      "limit": "Preserve CONTRIBUTING Python >=3.10 disagreement. Neither metadata nor guide establishes a fully resolved environment; external build backend was not inspected."
+    },
+    {
+      "id": "temp-and-artifacts",
+      "kind": "implementation",
+      "assertion": "Script resolves its own root path, refuses an existing tmp_build_dir, copies keras plus pyproject/README, excludes test suffixes, builds artifacts, copies them into dist and removes temporary build directory in finally.",
+      "support": [
+        {
+          "path": "pip_build.py",
+          "startLine": 33,
+          "endLine": 36,
+          "wholeFileSha256": "d7192e9c67e260e98a328b2a88f27076fcc441fdfe889f75961fd79cce8275c3",
+          "passageSha256": "c9957bad67ed2b3446ea9f3ec740425626f04a6c74add3702e520fec9a4f3bf3",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/pip_build.py#L33-L36"
+        },
+        {
+          "path": "pip_build.py",
+          "startLine": 65,
+          "endLine": 99,
+          "wholeFileSha256": "d7192e9c67e260e98a328b2a88f27076fcc441fdfe889f75961fd79cce8275c3",
+          "passageSha256": "7ab1bf2e63a3a76e603ba1dbd8a88985dbd282397a4e4e6b779ff0bbedbaa059",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/pip_build.py#L65-L99"
+        },
+        {
+          "path": "pip_build.py",
+          "startLine": 102,
+          "endLine": 125,
+          "wholeFileSha256": "d7192e9c67e260e98a328b2a88f27076fcc441fdfe889f75961fd79cce8275c3",
+          "passageSha256": "a1c8c14aebf7295220c5775acf0fb834ec54dab8803b3dfa47065befc1cacc51",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/pip_build.py#L102-L125"
+        },
+        {
+          "path": "pip_build.py",
+          "startLine": 159,
+          "endLine": 163,
+          "wholeFileSha256": "d7192e9c67e260e98a328b2a88f27076fcc441fdfe889f75961fd79cce8275c3",
+          "passageSha256": "040452e8ed2a7d0bc6db3cdec7183e78f72ac8948b8f8653c763b401faacbefe",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/pip_build.py#L159-L163"
+        }
+      ],
+      "limit": "Writable filesystem and available tools are operational prerequisites. Failure handling was not executed; a preexisting dist is not cleared, so wheel selection is not independently fresh-artifact evidence."
+    },
+    {
+      "id": "version-modes",
+      "kind": "implementation",
+      "assertion": "Declared source version is 3.16.0. Optional nightly/rc flags alter the copied version; --nightly also changes copied package name to keras-nightly.",
+      "support": [
+        {
+          "path": "keras/src/version.py",
+          "startLine": 1,
+          "endLine": 9,
+          "wholeFileSha256": "9f9719f7d69e3451a15765192fd37916e6980539aa1eb6c20d3b3cf82c65d4b2",
+          "passageSha256": "9f9719f7d69e3451a15765192fd37916e6980539aa1eb6c20d3b3cf82c65d4b2",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/src/version.py#L1-L9"
+        },
+        {
+          "path": "pip_build.py",
+          "startLine": 39,
+          "endLine": 62,
+          "wholeFileSha256": "d7192e9c67e260e98a328b2a88f27076fcc441fdfe889f75961fd79cce8275c3",
+          "passageSha256": "496744bfc2920aef17f343a72db44e4655d2d6aac97f0823ad1fab034acf30ea",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/pip_build.py#L39-L62"
+        },
+        {
+          "path": "pip_build.py",
+          "startLine": 142,
+          "endLine": 163,
+          "wholeFileSha256": "d7192e9c67e260e98a328b2a88f27076fcc441fdfe889f75961fd79cce8275c3",
+          "passageSha256": "66ad74156bb4e10af852ab7d556f309e1ec4a8ea016ddbc9c6a51339d29ee99e",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/pip_build.py#L142-L163"
+        }
+      ],
+      "limit": "Default README --install recipe requests neither mode. No built artifact/version was observed."
+    },
+    {
+      "id": "import-before-build",
+      "kind": "implementation",
+      "assertion": "Helper tries importing torch before importing Keras version; its comment attributes this ordering to a TensorFlow/PyTorch runtime crash. Reading version imports Keras parent packages and generated API, with broad library/backend imports.",
+      "support": [
+        {
+          "path": "pip_build.py",
+          "startLine": 27,
+          "endLine": 31,
+          "wholeFileSha256": "d7192e9c67e260e98a328b2a88f27076fcc441fdfe889f75961fd79cce8275c3",
+          "passageSha256": "1845876e80830b40341a3612ec329adaf3a46d34382e71a73d684c050ff6ec27",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/pip_build.py#L27-L31"
+        },
+        {
+          "path": "pip_build.py",
+          "startLine": 91,
+          "endLine": 97,
+          "wholeFileSha256": "d7192e9c67e260e98a328b2a88f27076fcc441fdfe889f75961fd79cce8275c3",
+          "passageSha256": "977610dd7ece50871860a27230f9edef8e7a834fdf3b8a9a8be0afed5ba8f3a4",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/pip_build.py#L91-L97"
+        },
+        {
+          "path": "keras/__init__.py",
+          "startLine": 1,
+          "endLine": 10,
+          "wholeFileSha256": "6ec3dd120fe34c1d5330e757ffe5db774a66c0aa01b0908f4c7fd39ead40d383",
+          "passageSha256": "398d9c0cffca69a8cd254497da877f9d05a358072d1f2fa44e3278df172225b8",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/__init__.py#L1-L10"
+        },
+        {
+          "path": "keras/api/__init__.py",
+          "startLine": 1,
+          "endLine": 15,
+          "wholeFileSha256": "3e0df362a6b9bb3e5253858af4ca306107334be94addbee75a14f3c9f9ea7429",
+          "passageSha256": "43e261ee6c73ecfba11d53c85256c889002fdcdce7bb78f5413afec8121cf4d0",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/api/__init__.py#L1-L15"
+        },
+        {
+          "path": "keras/src/__init__.py",
+          "startLine": 1,
+          "endLine": 20,
+          "wholeFileSha256": "1a2e12ec4882324134dcf6dd18da4575a518c92583b3f15c009f136b3f58d411",
+          "passageSha256": "1a2e12ec4882324134dcf6dd18da4575a518c92583b3f15c009f136b3f58d411",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/src/__init__.py#L1-L20"
+        },
+        {
+          "path": "keras/src/version.py",
+          "startLine": 1,
+          "endLine": 9,
+          "wholeFileSha256": "9f9719f7d69e3451a15765192fd37916e6980539aa1eb6c20d3b3cf82c65d4b2",
+          "passageSha256": "9f9719f7d69e3451a15765192fd37916e6980539aa1eb6c20d3b3cf82c65d4b2",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/src/version.py#L1-L9"
+        }
+      ],
+      "limit": "Only ImportError is caught for initial torch import; full import closure is not acquired. The comment is source attribution, not independently reproduced crash/success."
+    },
+    {
+      "id": "backend-state",
+      "kind": "implementation",
+      "assertion": "Backend config defaults to TensorFlow, reads KERAS_HOME or user/temp keras.json state, and permits a nonempty KERAS_BACKEND override; backend initializer dispatches backend imports or a pluggable loader.",
+      "support": [
+        {
+          "path": "keras/src/backend/config.py",
+          "startLine": 15,
+          "endLine": 23,
+          "wholeFileSha256": "a54307c8326eab51707bb0a87603cf1c209801f2c2a228ac6e3e4396b177bd28",
+          "passageSha256": "f9bb64c816348527510bfd1124221ecfeecffdaa5d334d81e8e5514dad61c49d",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/src/backend/config.py#L15-L23"
+        },
+        {
+          "path": "keras/src/backend/config.py",
+          "startLine": 283,
+          "endLine": 306,
+          "wholeFileSha256": "a54307c8326eab51707bb0a87603cf1c209801f2c2a228ac6e3e4396b177bd28",
+          "passageSha256": "9bc314544f6a8b40fe4dfc57a60d1a53b4d3d4d9d6b6453c617e5fc2d0aec0b1",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/src/backend/config.py#L283-L306"
+        },
+        {
+          "path": "keras/src/backend/config.py",
+          "startLine": 321,
+          "endLine": 365,
+          "wholeFileSha256": "a54307c8326eab51707bb0a87603cf1c209801f2c2a228ac6e3e4396b177bd28",
+          "passageSha256": "5aee447fd9a5870002fe72abad1384fbcd0d1964324a648308f479c6dd7b1dbb",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/src/backend/config.py#L321-L365"
+        },
+        {
+          "path": "keras/src/backend/__init__.py",
+          "startLine": 1,
+          "endLine": 7,
+          "wholeFileSha256": "b8af805a3f5b657a1cde3b5dd9137992121093477f97b8f13cc9cffa6751b126",
+          "passageSha256": "936c1eeedba5838302096b6f9d3425a6911b8d4bb44ce0a1070bfe9b74c10d0c",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/src/backend/__init__.py#L1-L7"
+        },
+        {
+          "path": "keras/src/backend/__init__.py",
+          "startLine": 27,
+          "endLine": 50,
+          "wholeFileSha256": "b8af805a3f5b657a1cde3b5dd9137992121093477f97b8f13cc9cffa6751b126",
+          "passageSha256": "28a333b38373290695b574c12ff746a0d4f8de0159bcfdd62f0708dd2299e7b1",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/src/backend/__init__.py#L27-L50"
+        },
+        {
+          "path": "README.md",
+          "startLine": 91,
+          "endLine": 113,
+          "wholeFileSha256": "6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8",
+          "passageSha256": "2f57c4be384e35e3bd08ffb63d46bf5b7ec8edb4a90b00d41dca9e958b089f97",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/README.md#L91-L113"
+        }
+      ],
+      "limit": "A deterministic setup cannot assume unchanged user config, no import side effects or backend interchangeability. Backend implementation and pluggable-loader closure remain uninspected."
+    },
+    {
+      "id": "requirements-preserve-conditions",
+      "kind": "declared-dependencies",
+      "assertion": "Requirements retain TensorFlow/darwin and torch-xla/non-darwin markers, extra PyTorch index, unpinned jax[cpu]/flax/openvino and common requirements; common file names build/tests and onnxscript!=0.3.2.",
+      "support": [
+        {
+          "path": "requirements.txt",
+          "startLine": 1,
+          "endLine": 26,
+          "wholeFileSha256": "f34e2fa7d9bb205afe36e7cb8a0d53f6e3be39d0dc51b38de0619529e4e919b8",
+          "passageSha256": "f34e2fa7d9bb205afe36e7cb8a0d53f6e3be39d0dc51b38de0619529e4e919b8",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/requirements.txt#L1-L26"
+        },
+        {
+          "path": "requirements-common.txt",
+          "startLine": 1,
+          "endLine": 37,
+          "wholeFileSha256": "3df3a2a15e645bc03082648aec06570a4329fdad189e4b326df0be80d6a7615e",
+          "passageSha256": "3df3a2a15e645bc03082648aec06570a4329fdad189e4b326df0be80d6a7615e",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/requirements-common.txt#L1-L37"
+        }
+      ],
+      "limit": "The JAX pin comment is not an executable version pin. Root requirements are not a lock or proof of satisfiability; README backend minima apply to latest stable release, not proven snapshot test minima."
+    },
+    {
+      "id": "generated-api",
+      "kind": "implementation-and-doc",
+      "assertion": "Checked-in keras/api/__init__.py labels itself autogenerated and is imported by root package. README scopes API generation to PRs changing keras_export APIs. pip_build.py itself does not call the API generator.",
+      "support": [
+        {
+          "path": "keras/api/__init__.py",
+          "startLine": 1,
+          "endLine": 15,
+          "wholeFileSha256": "3e0df362a6b9bb3e5253858af4ca306107334be94addbee75a14f3c9f9ea7429",
+          "passageSha256": "43e261ee6c73ecfba11d53c85256c889002fdcdce7bb78f5413afec8121cf4d0",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/api/__init__.py#L1-L15"
+        },
+        {
+          "path": "keras/__init__.py",
+          "startLine": 6,
+          "endLine": 10,
+          "wholeFileSha256": "6ec3dd120fe34c1d5330e757ffe5db774a66c0aa01b0908f4c7fd39ead40d383",
+          "passageSha256": "f7c23a1f30bd260bbcce0f93f37a21f95cc9fcb6f911cc9ffd9f09a59c145c64",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/__init__.py#L6-L10"
+        },
+        {
+          "path": "README.md",
+          "startLine": 60,
+          "endLine": 64,
+          "wholeFileSha256": "6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8",
+          "passageSha256": "ba6057962aab30ee224d67821d63f9c3a410d216ec020798dc0a24cdf182b042",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/README.md#L60-L64"
+        },
+        {
+          "path": "pip_build.py",
+          "startLine": 73,
+          "endLine": 104,
+          "wholeFileSha256": "d7192e9c67e260e98a328b2a88f27076fcc441fdfe889f75961fd79cce8275c3",
+          "passageSha256": "766ab508f5783a76325a04943c915d1b481072de41fcf6859d9de577642ac116",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/pip_build.py#L73-L104"
+        }
+      ],
+      "limit": "shell/api_gen.sh and its generator were not acquired because eight-file bound reached; API consistency and generator prerequisites are unresolved, not implicitly satisfied."
+    },
+    {
+      "id": "optional-namex",
+      "kind": "implementation",
+      "assertion": "Version decorator helper tolerates missing namex locally, while package metadata and common requirements still declare namex.",
+      "support": [
+        {
+          "path": "keras/src/api_export.py",
+          "startLine": 1,
+          "endLine": 4,
+          "wholeFileSha256": "8173a404e9e6b1c574d7758073be65738529d35f8a920f44ca52004ff41672d8",
+          "passageSha256": "aaa984f2ce4579cb94030cc4c1ab9b9485ff92f92ffa2d39c640b4b121dd84aa",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/src/api_export.py#L1-L4"
+        },
+        {
+          "path": "keras/src/api_export.py",
+          "startLine": 31,
+          "endLine": 49,
+          "wholeFileSha256": "8173a404e9e6b1c574d7758073be65738529d35f8a920f44ca52004ff41672d8",
+          "passageSha256": "35c97a85fa44495b16f8bdef3d7d71f8321af6b6d2d530a6ed018032c75c392a",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/src/api_export.py#L31-L49"
+        },
+        {
+          "path": "pyproject.toml",
+          "startLine": 27,
+          "endLine": 36,
+          "wholeFileSha256": "51ac5db60612a4c92123980826c1010a6d087c7a64b11a580ebc33c21058d326",
+          "passageSha256": "f94b20d5d025343bb26df81918b8ec540b9b94cf9ac11da26140ad0773b9b192",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/pyproject.toml#L27-L36"
+        },
+        {
+          "path": "requirements-common.txt",
+          "startLine": 1,
+          "endLine": 2,
+          "wholeFileSha256": "3df3a2a15e645bc03082648aec06570a4329fdad189e4b326df0be80d6a7615e",
+          "passageSha256": "2932f162646e382f94dc057f5d30209537edba32663b66570a750070fba9f4bd",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/requirements-common.txt#L1-L2"
+        }
+      ],
+      "limit": "One optional import branch does not establish namex optional for the whole package or all tests."
+    }
+  ],
+  "unresolvedClosure": [
+    {
+      "reference": "keras/api and keras/src broad exported subpackages, common backend types/scopes",
+      "reason": "import tree broad; eight-file acquisition bound reached; no sufficiency claim"
+    },
+    {
+      "reference": "keras/src/backend/{tensorflow,jax,torch,numpy}/__init__.py and keras/src/utils/module_utils.py",
+      "reason": "backend selection/plug-in import dependencies not acquired"
+    },
+    {
+      "reference": "shell/api_gen.sh and generator",
+      "reason": "README conditional API-generation route not acquired"
+    },
+    {
+      "reference": "external setuptools/build/backend packages and PATH interpreter identity",
+      "reason": "outside local-source packet; no resolution/install/execution"
+    },
+    {
+      "reference": "all pytest cases, backend-specific setup, optional skips and CI-only auxiliaries",
+      "reason": "installation helper does not establish test prerequisite completeness; root source disposition remains authoritative"
+    }
+  ],
+  "decision": {
+    "missingHelperImplementationInspected": true,
+    "documentedLocalInstallRecipe": true,
+    "independentInstallationSuccess": false,
+    "completeInstructionEstablished": false,
+    "confidencePromotion": false,
+    "consumerAcceptance": false,
+    "extractorGrammarChange": false
+  },
+  "boundedStop": "Eight new full source files acquired; nine read-only connector calls. Three unused calls do not authorize more files. No broader crawl or source execution."
+}

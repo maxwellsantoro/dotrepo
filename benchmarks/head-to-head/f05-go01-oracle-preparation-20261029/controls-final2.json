@@ -1,0 +1,867 @@
+{
+  "identity": "synthetic-only-go01-controls",
+  "controls": [
+    {
+      "name": "complete active coverage with exact source-declared exclusions",
+      "expectedCandidateCompletion": true,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": true,
+        "testsPassed": true,
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "expectedTopLevelTests": 3,
+        "observedNestedTests": 2,
+        "packages": 3,
+        "excludedBehavior": [
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestAliasMergingWithNamespace",
+            "reason": "Known failing fourslash test",
+            "exercised": false
+          },
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+            "test": "TestATA/deduplicate_from_local_@types_packages",
+            "reason": "Todo - implement removing local @types from include list",
+            "exercised": false
+          }
+        ],
+        "failedTests": []
+      },
+      "passed": true
+    },
+    {
+      "name": "complete assertion failure remains an observed default outcome",
+      "expectedCandidateCompletion": true,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": true,
+        "testsPassed": false,
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "expectedTopLevelTests": 3,
+        "observedNestedTests": 2,
+        "packages": 3,
+        "excludedBehavior": [
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestAliasMergingWithNamespace",
+            "reason": "Known failing fourslash test",
+            "exercised": false
+          },
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+            "test": "TestATA/deduplicate_from_local_@types_packages",
+            "reason": "Todo - implement removing local @types from include list",
+            "exercised": false
+          }
+        ],
+        "failedTests": [
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestSyntheticActive"
+          }
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "source-declared bare skip needs exact terminal diagnostic",
+      "expectedCandidateCompletion": true,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": true,
+        "testsPassed": true,
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "expectedTopLevelTests": 3,
+        "observedNestedTests": 2,
+        "packages": 3,
+        "excludedBehavior": [
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestAutoImportPackageRootPathTypeModule",
+            "reason": "Source-authored unconditional bare skip",
+            "exercised": false
+          },
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+            "test": "TestATA/deduplicate_from_local_@types_packages",
+            "reason": "Todo - implement removing local @types from include list",
+            "exercised": false
+          }
+        ],
+        "failedTests": []
+      },
+      "passed": true
+    },
+    {
+      "name": "bare skip without terminal diagnostic",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "bare skip lacks terminal diagnostic"
+      },
+      "passed": true
+    },
+    {
+      "name": "source-default no-replay exclusion",
+      "expectedCandidateCompletion": true,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": true,
+        "testsPassed": true,
+        "reason": "complete active default-suite outcome with declared exclusions",
+        "expectedTopLevelTests": 4,
+        "observedNestedTests": 2,
+        "packages": 4,
+        "excludedBehavior": [
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests",
+            "test": "TestAliasMergingWithNamespace",
+            "reason": "Known failing fourslash test",
+            "exercised": false
+          },
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/lsp",
+            "test": "TestReplay",
+            "reason": "no replay file specified",
+            "exercised": false
+          },
+          {
+            "package": "github.com/microsoft/TypeScript/tsc/internal/project/ata",
+            "test": "TestATA/deduplicate_from_local_@types_packages",
+            "reason": "Todo - implement removing local @types from include list",
+            "exercised": false
+          }
+        ],
+        "failedTests": []
+      },
+      "passed": true
+    },
+    {
+      "name": "native collection absent",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "native collection missing"
+      },
+      "passed": true
+    },
+    {
+      "name": "empty native collection",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "missing intended packages"
+      },
+      "passed": true
+    },
+    {
+      "name": "excluded-only stand-in supplies no active outcome",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "no active intended tests"
+      },
+      "passed": true
+    },
+    {
+      "name": "policy unaccepted",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "exclusion policy unaccepted"
+      },
+      "passed": true
+    },
+    {
+      "name": "collection late freeze",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "collection not frozen before execution"
+      },
+      "passed": true
+    },
+    {
+      "name": "policy accepted after execution",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "policy not accepted before execution"
+      },
+      "passed": true
+    },
+    {
+      "name": "collection failure",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "collection process incomplete"
+      },
+      "passed": true
+    },
+    {
+      "name": "collection bool-zero alias",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "collection process incomplete"
+      },
+      "passed": true
+    },
+    {
+      "name": "duplicate collected identity",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "duplicate collected identity"
+      },
+      "passed": true
+    },
+    {
+      "name": "changed source revision",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "wrong source"
+      },
+      "passed": true
+    },
+    {
+      "name": "changed environment",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "changed binding"
+      },
+      "passed": true
+    },
+    {
+      "name": "narrowed command",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "wrong command/scope"
+      },
+      "passed": true
+    },
+    {
+      "name": "missing control setupComplete",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "incomplete execution control: setupComplete"
+      },
+      "passed": true
+    },
+    {
+      "name": "missing control wrapperCompleted",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "incomplete execution control: wrapperCompleted"
+      },
+      "passed": true
+    },
+    {
+      "name": "missing control trackedSourceIntact",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "incomplete execution control: trackedSourceIntact"
+      },
+      "passed": true
+    },
+    {
+      "name": "missing control eventsComplete",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "incomplete execution control: eventsComplete"
+      },
+      "passed": true
+    },
+    {
+      "name": "failed control truncated",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "failed/unknown execution control: truncated"
+      },
+      "passed": true
+    },
+    {
+      "name": "failed control resourceFailure",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "failed/unknown execution control: resourceFailure"
+      },
+      "passed": true
+    },
+    {
+      "name": "failed control timedOut",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "failed/unknown execution control: timedOut"
+      },
+      "passed": true
+    },
+    {
+      "name": "missing execution control not false",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "failed/unknown execution control: timedOut"
+      },
+      "passed": true
+    },
+    {
+      "name": "wrapper error",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "wrapper process failure"
+      },
+      "passed": true
+    },
+    {
+      "name": "wrapper bool-zero alias",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "wrapper process failure"
+      },
+      "passed": true
+    },
+    {
+      "name": "all pass but nonzero wrapper",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "wrapper/test result mismatch"
+      },
+      "passed": true
+    },
+    {
+      "name": "wrong package",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "wrong or uncollected package"
+      },
+      "passed": true
+    },
+    {
+      "name": "missing zero-test package terminal",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "missing package coverage"
+      },
+      "passed": true
+    },
+    {
+      "name": "zero-test skip without native no-test diagnostic",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "zero-test package incomplete"
+      },
+      "passed": true
+    },
+    {
+      "name": "no package start",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "test outside collected scope"
+      },
+      "passed": true
+    },
+    {
+      "name": "missing top-level terminal",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "missing run/terminal coverage"
+      },
+      "passed": true
+    },
+    {
+      "name": "missing nested terminal",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "missing run/terminal coverage"
+      },
+      "passed": true
+    },
+    {
+      "name": "nested run without parent",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "nested run without parent"
+      },
+      "passed": true
+    },
+    {
+      "name": "unexpected collected-test prefix collision",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "test outside collected scope"
+      },
+      "passed": true
+    },
+    {
+      "name": "duplicate run",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "duplicate test run"
+      },
+      "passed": true
+    },
+    {
+      "name": "terminal without run",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "test event without run"
+      },
+      "passed": true
+    },
+    {
+      "name": "post-terminal event",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "event after test terminal"
+      },
+      "passed": true
+    },
+    {
+      "name": "unexpected top-level skip",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "unexpected skip at any nesting depth"
+      },
+      "passed": true
+    },
+    {
+      "name": "unexpected nested skip with passing parent",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "unexpected skip at any nesting depth"
+      },
+      "passed": true
+    },
+    {
+      "name": "unexpected deeper skip",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "unexpected skip at any nesting depth"
+      },
+      "passed": true
+    },
+    {
+      "name": "declared skip changed message",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "skip reason not witnessed"
+      },
+      "passed": true
+    },
+    {
+      "name": "exact nested exclusion rejects prefix collision",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "test event without run"
+      },
+      "passed": true
+    },
+    {
+      "name": "unqualified capability not added to allowlist",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "exclusion outside source proposal"
+      },
+      "passed": true
+    },
+    {
+      "name": "posthoc exclusion reason mutation",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "exclusion outside source proposal"
+      },
+      "passed": true
+    },
+    {
+      "name": "unbound exclusion set",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "unbound exclusion set"
+      },
+      "passed": true
+    },
+    {
+      "name": "panic not assertion outcome",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "setup/runtime/resource diagnostic"
+      },
+      "passed": true
+    },
+    {
+      "name": "compile failure after partial test events",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "setup/runtime/resource diagnostic"
+      },
+      "passed": true
+    },
+    {
+      "name": "resource diagnostic",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "setup/runtime/resource diagnostic"
+      },
+      "passed": true
+    },
+    {
+      "name": "nonobject raw JSON",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "nonobject event"
+      },
+      "passed": true
+    },
+    {
+      "name": "invalid test type",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "test identity type"
+      },
+      "passed": true
+    },
+    {
+      "name": "malformed raw JSON",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "Expecting property name enclosed in double quotes: line 1 column 2 (char 1)"
+      },
+      "passed": true
+    },
+    {
+      "name": "duplicate raw key",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "duplicate JSON key"
+      },
+      "passed": true
+    },
+    {
+      "name": "unterminated events",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "unterminated raw event stream"
+      },
+      "passed": true
+    },
+    {
+      "name": "listing-only stream",
+      "expectedCandidateCompletion": false,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "package event without start"
+      },
+      "passed": true
+    },
+    {
+      "name": "changed raw event hash",
+      "passed": true,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "raw event hash mismatch"
+      }
+    },
+    {
+      "name": "changed collection digest",
+      "passed": true,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "unbound collection/policy"
+      }
+    },
+    {
+      "name": "actual unready artifact rejected: collection-required.json",
+      "passed": true,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "environment digest"
+      }
+    },
+    {
+      "name": "actual unready artifact rejected: policy-proposal.json",
+      "passed": true,
+      "observed": {
+        "taskId": "go-01",
+        "synthetic": true,
+        "taskOutcomeObserved": false,
+        "candidateOutcomeObserved": false,
+        "testsPassed": null,
+        "reason": "environment digest"
+      }
+    }
+  ],
+  "passed": 60,
+  "nativeCollectionOccurred": false,
+  "newProcessNetworkDockerProviderCalls": 0
+}

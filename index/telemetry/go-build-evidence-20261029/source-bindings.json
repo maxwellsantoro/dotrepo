@@ -1,0 +1,75 @@
+{
+  "base": "df4252056ce18dec6a13d5e84706c2ae48a13a2d",
+  "observedHead": "72c654caaba1c88a7206815296bec91fa3bb5760",
+  "headFastForwardNote": "Coordinator advanced metadata from base to merged PR187; base source tree unchanged before this patch.",
+  "files": [
+    {
+      "path": "crates/dotrepo-core/src/import/commands/mod.rs",
+      "sha256": "b50bad2dca6b3dcfd23ef9cbead3359f394623e8523b3d6d88a506d2b4725379",
+      "bytes": 20705,
+      "baseSha256": "5829b372b37a346789fd7ae7130f0eff1023dacef4502e05b07d8fc04927449e",
+      "changed": true,
+      "owner": "worker"
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/commands/go_context.rs",
+      "sha256": "8cfbf598cbc78929aa6e750fc5d677e77f1608c145aa81f94a84b09eaf15acea",
+      "bytes": 17631,
+      "baseSha256": "f0563131ab54d1bbd48b6813f6d8266f021c2a66f0650ebf8e8032001b2d7396",
+      "changed": true,
+      "owner": "worker"
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/commands/go_context/tests.rs",
+      "sha256": "d1e69f19c651f11315abbc1cff1a85cb4c9d65a83a7e851d9f50ec3ce1798bac",
+      "bytes": 35172,
+      "baseSha256": "4dff010c85bbda98437933720b9189b041c067173e6f11ef632519109ba2d2b2",
+      "changed": true,
+      "owner": "worker"
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/fields.rs",
+      "sha256": "dfe9f0686824ff0df0ab481e835983e6789ad795c00cb88d305541f59f651b60",
+      "bytes": 30449,
+      "baseSha256": "46fdf08b498a4cfb398e8f61aa96a232105c6ccf2b85545abfe74d56acaf90dd",
+      "changed": true,
+      "owner": "coordinator"
+    },
+    {
+      "path": "crates/dotrepo-core/src/facade_tests/import_repository.rs",
+      "sha256": "7971136b54544abbe7e383be64d190caf6b579c2e75f867df59851249c501c63",
+      "bytes": 48695,
+      "baseSha256": "987f269d108e4b9a86674ab555b9bf88d40cd2c8595503e040846d48beb03835",
+      "changed": true,
+      "owner": "coordinator"
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/expectations.json",
+      "sha256": "a80e0ffa170701f5bc9e880115cc1a19a183ae24ce9117524d57f7d186c29651",
+      "bytes": 88613,
+      "baseSha256": "d9e1afa09eae92f3265978f3ffa957ec02170fcb6d27bc4c4249a497f2109e93",
+      "changed": true,
+      "owner": "coordinator"
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/types.rs",
+      "sha256": "963e6999b47fde6b4b9c8127ee5032bb56b6860e23e1ead2bdc83cd4e2597544",
+      "bytes": 10206,
+      "baseSha256": "963e6999b47fde6b4b9c8127ee5032bb56b6860e23e1ead2bdc83cd4e2597544",
+      "changed": false,
+      "owner": "unchanged-shared"
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/mod.rs",
+      "sha256": "c042b2343c40d7897c6fa8e6a56ff73c4d719eb8724a906eb784f02b49bc541a",
+      "bytes": 31736,
+      "baseSha256": "c042b2343c40d7897c6fa8e6a56ff73c4d719eb8724a906eb784f02b49bc541a",
+      "changed": false,
+      "owner": "unchanged-shared"
+    }
+  ],
+  "independentBeforeConflictReview": {
+    "path": "index/telemetry/go-build-evidence-review-20261029/before-conflict/freeze.json",
+    "sha256": "d160760b719b427b9b78af6c6563f83b4c11bf367fa5807c9ae4bb31495f0cc7"
+  }
+}

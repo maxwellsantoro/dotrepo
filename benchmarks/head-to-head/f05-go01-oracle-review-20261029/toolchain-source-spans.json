@@ -1,0 +1,47 @@
+{
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "inventoryPath": "benchmarks/head-to-head/f05-common-image-audit-20261029/inventory.json",
+  "inventorySha256": "f096a4b8a2346c0332082e2b88b093cc4fb78b2cbaed0b5b5af05d071695f647",
+  "spans": [
+    {
+      "sourcePath": "usr/local/go/src/testing/testing.go",
+      "sha256": "27c59df1832eae458ab8d2d4b6a6252bbd1ea2a3001734910d1ce2decff16f81",
+      "startLine": 1045,
+      "endLine": 1068,
+      "excerpt": "func (c *common) Fail() {\n\tif c.parent != nil {\n\t\tc.parent.Fail()\n\t}\n\tc.mu.Lock()\n\tdefer c.mu.Unlock()\n\t// c.done needs to be locked to synchronize checks to c.done in parent tests.\n\tif c.done {\n\t\tpanic(\"Fail in goroutine after \" + c.name + \" has completed\")\n\t}\n\tc.failed = true\n}\n\n// Failed reports whether the function has failed.\nfunc (c *common) Failed() bool {\n\tc.mu.RLock()\n\tdefer c.mu.RUnlock()\n\n\tif !c.done && int64(race.Errors()) > c.lastRaceErrors.Load() {\n\t\tc.mu.RUnlock()\n\t\tc.checkRaces()\n\t\tc.mu.RLock()\n\t}\n",
+      "provenance": "existing exact common-image export, matched frozen inventory; no daemon or upstream execution"
+    },
+    {
+      "sourcePath": "usr/local/go/src/testing/testing.go",
+      "sha256": "27c59df1832eae458ab8d2d4b6a6252bbd1ea2a3001734910d1ce2decff16f81",
+      "startLine": 1080,
+      "endLine": 1103,
+      "excerpt": "func (c *common) FailNow() {\n\tc.checkFuzzFn(\"FailNow\")\n\tc.Fail()\n\n\t// Calling runtime.Goexit will exit the goroutine, which\n\t// will run the deferred functions in this goroutine,\n\t// which will eventually run the deferred lines in tRunner,\n\t// which will signal to the test loop that this test is done.\n\t//\n\t// A previous version of this code said:\n\t//\n\t//\tc.duration = ...\n\t//\tc.signal <- c.self\n\t//\truntime.Goexit()\n\t//\n\t// This previous version duplicated code (those lines are in\n\t// tRunner no matter what), but worse the goroutine teardown\n\t// implicit in runtime.Goexit was not guaranteed to complete\n\t// before the test exited. If a test deferred an important cleanup\n\t// function (like removing temporary files), there was no guarantee\n\t// it would run on a test failure. Because we send on c.signal during\n\t// a top-of-stack deferred function now, we know that the send\n\t// only happens after any other stacked defers have completed.\n\tc.mu.Lock()",
+      "provenance": "existing exact common-image export, matched frozen inventory; no daemon or upstream execution"
+    },
+    {
+      "sourcePath": "usr/local/go/src/testing/match.go",
+      "sha256": "f28418759ed48c72821b5ecc3700041b74151108557618f50d355ea98a1bbebe",
+      "startLine": 284,
+      "endLine": 307,
+      "excerpt": "func rewrite(s string) string {\n\tb := []byte{}\n\tfor _, r := range s {\n\t\tswitch {\n\t\tcase isSpace(r):\n\t\t\tb = append(b, '_')\n\t\tcase !strconv.IsPrint(r):\n\t\t\ts := strconv.QuoteRune(r)\n\t\t\tb = append(b, s[1:len(s)-1]...)\n\t\tdefault:\n\t\t\tb = append(b, string(r)...)\n\t\t}\n\t}\n\treturn string(b)\n}\n\nfunc isSpace(r rune) bool {\n\tif r < 0x2000 {\n\t\tswitch r {\n\t\t// Note: not the same as Unicode Z class.\n\t\tcase '\\t', '\\n', '\\v', '\\f', '\\r', ' ', 0x85, 0xA0, 0x1680:\n\t\t\treturn true\n\t\t}\n\t} else {",
+      "provenance": "existing exact common-image export, matched frozen inventory; no daemon or upstream execution"
+    },
+    {
+      "sourcePath": "usr/local/go/src/testing/match.go",
+      "sha256": "f28418759ed48c72821b5ecc3700041b74151108557618f50d355ea98a1bbebe",
+      "startLine": 300,
+      "endLine": 323,
+      "excerpt": "func isSpace(r rune) bool {\n\tif r < 0x2000 {\n\t\tswitch r {\n\t\t// Note: not the same as Unicode Z class.\n\t\tcase '\\t', '\\n', '\\v', '\\f', '\\r', ' ', 0x85, 0xA0, 0x1680:\n\t\t\treturn true\n\t\t}\n\t} else {\n\t\tif r <= 0x200a {\n\t\t\treturn true\n\t\t}\n\t\tswitch r {\n\t\tcase 0x2028, 0x2029, 0x202f, 0x205f, 0x3000:\n\t\t\treturn true\n\t\t}\n\t}\n\treturn false\n}",
+      "provenance": "existing exact common-image export, matched frozen inventory; no daemon or upstream execution"
+    },
+    {
+      "sourcePath": "usr/local/go/src/testing/testing.go",
+      "sha256": "27c59df1832eae458ab8d2d4b6a6252bbd1ea2a3001734910d1ce2decff16f81",
+      "startLine": 2133,
+      "endLine": 2163,
+      "excerpt": "\t\tif len(t.sub) > 0 {\n\t\t\t// Run parallel subtests.\n\n\t\t\t// Decrease the running count for this test and mark it as no longer running.\n\t\t\tt.tstate.release()\n\t\t\trunning.Delete(t.name)\n\n\t\t\t// Release the parallel subtests.\n\t\t\tclose(t.barrier)\n\t\t\t// Wait for subtests to complete.\n\t\t\tfor _, sub := range t.sub {\n\t\t\t\t<-sub.signal\n\t\t\t}\n\n\t\t\t// Run any cleanup callbacks, marking the test as running\n\t\t\t// in case the cleanup hangs.\n\t\t\tcleanupStart := highPrecisionTimeNow()\n\t\t\trunning.Store(t.name, cleanupStart)\n\t\t\terr := t.runCleanup(recoverAndReturnPanic)\n\t\t\tt.duration += highPrecisionTimeSince(cleanupStart)\n\t\t\tif err != nil {\n\t\t\t\tdoPanic(err)\n\t\t\t}\n\t\t\tt.checkRaces()\n\t\t\tif !t.isParallel {\n\t\t\t\t// Reacquire the count for sequential tests. See comment in Run.\n\t\t\t\tt.tstate.waitParallel()\n\t\t\t}\n\t\t} else if t.isParallel {\n\t\t\t// Only release the count for this test if it was run as a parallel\n\t\t\t// test. See comment in Run method.",
+      "provenance": "existing exact common-image export, matched frozen inventory; no daemon or upstream execution"
+    }
+  ]
+}

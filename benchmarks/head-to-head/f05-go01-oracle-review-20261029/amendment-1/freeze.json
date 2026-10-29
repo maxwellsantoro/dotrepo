@@ -1,0 +1,55 @@
+{
+  "identity": "independent-go01-oracle-amendment-1-review-20261029",
+  "authorAmendmentFreezeSha256": "490e3d6e535b7d06e97ee500063a3baa55bd8f28fdee8abbf4b0d0f1137a7d1b",
+  "oracleSha256": "059ac111da3e00605b06e8afcea92467bc294b7cec05d35203bfd402fccaa726",
+  "beforeReviewFreezeSha256": "23848e0c6322915648b709cf85a3a044abc4e5d2de90f62b1dcebb8f22cdc62c",
+  "remainingBoundedFindings": 0,
+  "actualTaskOutcomeObserved": false,
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 4412,
+      "sha256": "38bf07a5be95fadc3734c69bb87b4db1f0ebc5243256b8ad55ec091292538470"
+    },
+    {
+      "path": "author-BEFORE.json",
+      "bytes": 2388,
+      "sha256": "1e3d2d0904fbd56174b0151ca86555d49ef29e7930da2079ceb45fe5c911046a"
+    },
+    {
+      "path": "author-base-controls-independent-rerun.json",
+      "bytes": 25460,
+      "sha256": "f77b5b7d2a267d5d80b38c9944e550a09e8d242fa3258ace4e5fbbdf4a6c8781"
+    },
+    {
+      "path": "author-hierarchy-independent-rerun.json",
+      "bytes": 18122,
+      "sha256": "a2104c5c92b7c2b866066e772a385624ca1e9a8677b723f8a2792c388fb8b357"
+    },
+    {
+      "path": "checks.json",
+      "bytes": 688,
+      "sha256": "329c4d8dfe3ad130987d878413b25392c234a7a4d28f5faea9cbac8d5f577243"
+    },
+    {
+      "path": "independent-results.json",
+      "bytes": 11543,
+      "sha256": "d1ec931c1e98bf548f4a44b303d0ae1505e2f191183dc092fb9e82e3fa303e89"
+    },
+    {
+      "path": "independent_controls.py",
+      "bytes": 6511,
+      "sha256": "cf0a68d9b49b88c5a78a4b90291e124e1cd9a633aa2690d47e3233d8eaf63730"
+    },
+    {
+      "path": "input-integrity.json",
+      "bytes": 344,
+      "sha256": "a067eace9dabf0ac06600b14c7eebc8600485ff90191040d83892d7cf00f6323"
+    },
+    {
+      "path": "reviewed-oracle.diff",
+      "bytes": 4030,
+      "sha256": "d4ec0a67f19f9ab7c058750e3473859bae7f6c8d9a5ec961cb38ad331e2b0931"
+    }
+  ]
+}

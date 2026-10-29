@@ -1,0 +1,203 @@
+{
+  "priorAmendmentBindings": {
+    "path": "index/telemetry/go-default-context-20261029/amendment-1/source-bindings.json",
+    "sha256": "915edafc06a3a88f94af1fa286343183336c1f9de96418b574a451a36e91a7f0"
+  },
+  "unchangedFixtureInputs": [
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-declared-context/.github/workflows/build.yml",
+      "sha256": "1931d37e0f552e7451472cbc4e75f119a09fc6d8d70819aa29e0481173e4a25c",
+      "bytes": 6616,
+      "unchangedFromPriorAmendment": true
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-declared-context/.github/workflows/go-test.yml",
+      "sha256": "f6e5dca75defdea9f22c29c189a2ca46b398bc19018be5f41e43055e329fa84d",
+      "bytes": 809,
+      "unchangedFromPriorAmendment": true
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-declared-context/CONTRIBUTING.md",
+      "sha256": "aa0ded1e7e3a9bec27c177a6024585fac5f8ef8be54003be6baea9a14e92ff39",
+      "bytes": 70,
+      "unchangedFromPriorAmendment": true
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-declared-context/README.md",
+      "sha256": "ee04ae774b67ed0d0c88b2df9058f001ca2d3efefa24e7f63038320ecbdd8694",
+      "bytes": 60,
+      "unchangedFromPriorAmendment": true
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-declared-context/go.mod",
+      "sha256": "78018dad8d6f072b258f9b711d5a3ac23fc7403c4cda3ce45d8e076486ebfc07",
+      "bytes": 37,
+      "unchangedFromPriorAmendment": true
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-example-module-context/.github/workflows/ci.yml",
+      "sha256": "376367921d2b626cec57a09daa84be1356faca7a88d4ad128ca4460b238a431d",
+      "bytes": 133,
+      "unchangedFromPriorAmendment": true
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-example-module-context/README.md",
+      "sha256": "ee04ae774b67ed0d0c88b2df9058f001ca2d3efefa24e7f63038320ecbdd8694",
+      "bytes": 60,
+      "unchangedFromPriorAmendment": true
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-example-module-context/examples/demo/go.mod",
+      "sha256": "adac0404f03c9fc3799414313e257eae386a392ffa8a7700f5e44fdf1e1d9dfb",
+      "bytes": 34,
+      "unchangedFromPriorAmendment": true
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-example-module-context/go.mod",
+      "sha256": "78018dad8d6f072b258f9b711d5a3ac23fc7403c4cda3ce45d8e076486ebfc07",
+      "bytes": 37,
+      "unchangedFromPriorAmendment": true
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-multimodule-context/.github/workflows/build.yml",
+      "sha256": "1931d37e0f552e7451472cbc4e75f119a09fc6d8d70819aa29e0481173e4a25c",
+      "bytes": 6616,
+      "unchangedFromPriorAmendment": true
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-multimodule-context/README.md",
+      "sha256": "f92d9a6e245607599eedee3a941ffcaf0aadef007d3cbbf6b26a04ee653a433a",
+      "bytes": 10836,
+      "unchangedFromPriorAmendment": true
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-multimodule-context/go.mod",
+      "sha256": "d99a7fedebc0034b3ee99bb1e820f0e93660d2e44e6e3b7a5de8252afab23544",
+      "bytes": 489,
+      "unchangedFromPriorAmendment": true
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-service-context/.github/workflows/go-test.yml",
+      "sha256": "f6e5dca75defdea9f22c29c189a2ca46b398bc19018be5f41e43055e329fa84d",
+      "bytes": 809,
+      "unchangedFromPriorAmendment": true
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-service-context/.github/workflows/release-build.yml",
+      "sha256": "1e4c7c2dae8bc6b2286ee87e5055900ef4d08c53608d95213bb4d8b484dd06b8",
+      "bytes": 640,
+      "unchangedFromPriorAmendment": true
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-service-context/README.markdown",
+      "sha256": "9fade03f42daf7476a14204e80bb2dd64593bf81f4bedf332d00625a3b6f522d",
+      "bytes": 2294,
+      "unchangedFromPriorAmendment": true
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-service-context/go.mod",
+      "sha256": "f3e99bdde7f6debc48f93a63e4aea3ab921066267fe0fc0780bf888aa4a82b4d",
+      "bytes": 441,
+      "unchangedFromPriorAmendment": true
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-services-block-context/.github/workflows/ci.yml",
+      "sha256": "80c08c06d8b80138590ef1ae5f76f25a372fbcb2f81684a7af29fc7408dcfcc4",
+      "bytes": 108,
+      "unchangedFromPriorAmendment": true
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-services-block-context/README.md",
+      "sha256": "ee04ae774b67ed0d0c88b2df9058f001ca2d3efefa24e7f63038320ecbdd8694",
+      "bytes": 60,
+      "unchangedFromPriorAmendment": true
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-services-block-context/go.mod",
+      "sha256": "78018dad8d6f072b258f9b711d5a3ac23fc7403c4cda3ce45d8e076486ebfc07",
+      "bytes": 37,
+      "unchangedFromPriorAmendment": true
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-unrelated-service-context/.github/workflows/ci.yml",
+      "sha256": "84c944703c84ede5e5eba65d7feeb1cefc7e99288bc2db511d890a964eeccf4b",
+      "bytes": 204,
+      "unchangedFromPriorAmendment": true
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-unrelated-service-context/README.md",
+      "sha256": "ee04ae774b67ed0d0c88b2df9058f001ca2d3efefa24e7f63038320ecbdd8694",
+      "bytes": 60,
+      "unchangedFromPriorAmendment": true
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-unrelated-service-context/go.mod",
+      "sha256": "78018dad8d6f072b258f9b711d5a3ac23fc7403c4cda3ce45d8e076486ebfc07",
+      "bytes": 37,
+      "unchangedFromPriorAmendment": true
+    }
+  ],
+  "f1SourceFreeze": {
+    "path": "index/telemetry/operating-readiness-20261029/f1-source-freeze.json",
+    "sha256": "779bf4cea196f16ff3f16526e71321367f351fe0a2f5eaeea166099fe8b10d98"
+  },
+  "unchangedRetainedRedigoSources": [
+    {
+      "path": "index/telemetry/operating-readiness-20261029/sources/github.com/gomodule/redigo/.github/CONTRIBUTING.md",
+      "sha256": "05cf85c5dacd641824dce40ad4c48b26fb91e52dfb35e5f6d0567912759170d3",
+      "bytes": 208
+    },
+    {
+      "path": "index/telemetry/operating-readiness-20261029/sources/github.com/gomodule/redigo/.github/workflows/go-test.yml",
+      "sha256": "f6e5dca75defdea9f22c29c189a2ca46b398bc19018be5f41e43055e329fa84d",
+      "bytes": 809
+    },
+    {
+      "path": "index/telemetry/operating-readiness-20261029/sources/github.com/gomodule/redigo/.github/workflows/release-build.yml",
+      "sha256": "1e4c7c2dae8bc6b2286ee87e5055900ef4d08c53608d95213bb4d8b484dd06b8",
+      "bytes": 640
+    },
+    {
+      "path": "index/telemetry/operating-readiness-20261029/sources/github.com/gomodule/redigo/.travis.yml",
+      "sha256": "b86d18f702a8fb303b33436326613dcde21600b29480d43bad344ebfad45fde7",
+      "bytes": 265
+    },
+    {
+      "path": "index/telemetry/operating-readiness-20261029/sources/github.com/gomodule/redigo/README.markdown",
+      "sha256": "9fade03f42daf7476a14204e80bb2dd64593bf81f4bedf332d00625a3b6f522d",
+      "bytes": 2294
+    },
+    {
+      "path": "index/telemetry/operating-readiness-20261029/sources/github.com/gomodule/redigo/_commit.json",
+      "sha256": "c7b0d4f00458332e99ea1150273267de77170cdc67d96bc3c2165abe7384927d",
+      "bytes": 7208
+    },
+    {
+      "path": "index/telemetry/operating-readiness-20261029/sources/github.com/gomodule/redigo/_directory-.github_workflows.json",
+      "sha256": "e6c5fab0afbb66cb728d005ae0fc323859aead01fbf2f8ec16344f589b17d84c",
+      "bytes": 3733
+    },
+    {
+      "path": "index/telemetry/operating-readiness-20261029/sources/github.com/gomodule/redigo/_directory-redis.json",
+      "sha256": "ac224fb2a5256822fcf0e60db48242408e6ee2db4d07c56eb2086d0586ec1d43",
+      "bytes": 27174
+    },
+    {
+      "path": "index/telemetry/operating-readiness-20261029/sources/github.com/gomodule/redigo/_root-directory.json",
+      "sha256": "527bded711db7f473e232e5ef2c7711c07a0e9e4124593f279d1f6f0cbceb9d8",
+      "bytes": 8645
+    },
+    {
+      "path": "index/telemetry/operating-readiness-20261029/sources/github.com/gomodule/redigo/go.mod",
+      "sha256": "f3e99bdde7f6debc48f93a63e4aea3ab921066267fe0fc0780bf888aa4a82b4d",
+      "bytes": 441
+    },
+    {
+      "path": "index/telemetry/operating-readiness-20261029/sources/github.com/gomodule/redigo/redis/test_test.go",
+      "sha256": "91e3066bd8b8eb32a5b778c6cbff27e08cd31b690d0a8424368cbd49e96cf17b",
+      "bytes": 5792
+    }
+  ],
+  "redigoRevision": "57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+  "freshSourceAcquisition": false
+}

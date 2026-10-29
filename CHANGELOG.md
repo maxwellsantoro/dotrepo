@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- Keep a root `go.mod` conventional build as a diagnostic candidate while
+  requiring other eligible evidence for a scalar build instruction. Apply that
+  eligibility to selection and adjudication; conventional Go test defaults keep
+  their existing scope/setup policy.
+- Check contextual source attachments during import verification and scoring
+  against contained regular files, exact hashes, valid line spans and
+  tuple/source/time bindings before retaining their existing medium assessment.
+  Integrity does not establish prerequisite
+  completeness, execution success or consumer applicability.
 - Withhold inferred Go scalar commands when observed workflow directories or
   same-job service setup leave repository scope or prerequisites unresolved.
   Preserve the restriction through adjudication with typed in-memory metadata,

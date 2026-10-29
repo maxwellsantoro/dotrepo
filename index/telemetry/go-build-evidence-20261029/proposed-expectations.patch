@@ -1,0 +1,180 @@
+--- a/crates/dotrepo-core/tests/fixtures/import/expectations.json
++++ b/crates/dotrepo-core/tests/fixtures/import/expectations.json
+@@ -2053,7 +2053,7 @@
+     "fixture": "f1-go-service-context",
+     "repo_name": "Redigo",
+     "repo_description": "Install Redigo using the \"go get\" command:",
+-    "repo_build": "go build ./...",
++    "repo_build": null,
+     "repo_test": null,
+     "repo_build_candidates": [],
+     "repo_test_candidates": [],
+@@ -2065,27 +2065,24 @@
+       "README.markdown",
+       "go.mod"
+     ],
+-    "inferred_fields": [
+-      "repo.build"
+-    ],
+-    "maintainers": [],
+-    "team": null,
+-    "security_contact": null,
+-    "native_status": "draft",
+-    "overlay_status": "inferred",
+-    "trust_provenance": [
+-      "imported",
+-      "inferred"
+-    ],
+-    "native_trust_note_contains": [
+-      "Bootstrapped from `README.markdown` and `go.mod`. Inferred `repo.build` from `go.mod`. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/go-test.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`."
+-    ],
+-    "overlay_trust_note_contains": [
+-      "Bootstrapped from `README.markdown` and `go.mod`. Inferred `repo.build` from `go.mod`. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/go-test.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
++    "inferred_fields": [],
++    "maintainers": [],
++    "team": null,
++    "security_contact": null,
++    "native_status": "draft",
++    "overlay_status": "imported",
++    "trust_provenance": [
++      "imported"
++    ],
++    "native_trust_note_contains": [
++      "Bootstrapped from `README.markdown` and `go.mod`. Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/go-test.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`."
++    ],
++    "overlay_trust_note_contains": [
++      "Bootstrapped from `README.markdown` and `go.mod`. Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/go-test.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+     ],
+     "overlay_evidence_contains": [
+       "Imported repository name, description, and docs entry points from README.markdown.",
+-      "Inferred repo.build from go.mod as `go build ./...`.",
++      "Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction.",
+       "Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/go-test.yml`; the same job declares an external service prerequisite.",
+       "Imported repo.toolchain.min from go.mod as `1.17` (Go).",
+       "Imported docs.root as `https://pkg.go.dev/github.com/gomodule/redigo/redis`. Explicit documentation link at README.markdown:21: - [API Reference](https://pkg.go.dev/github.com/gomodule/redigo/redis)",
+@@ -2136,7 +2133,7 @@
+     "fixture": "f1-go-unrelated-service-context",
+     "repo_name": "Go Context Fixture",
+     "repo_description": "Bounded Go command selection fixture.",
+-    "repo_build": "go build ./...",
++    "repo_build": null,
+     "repo_test": "go test ./...",
+     "repo_build_candidates": [],
+     "repo_test_candidates": [],
+@@ -2150,7 +2147,6 @@
+       ".github/workflows/ci.yml"
+     ],
+     "inferred_fields": [
+-      "repo.build",
+       "repo.test"
+     ],
+     "maintainers": [],
+@@ -2163,14 +2159,14 @@
+       "inferred"
+     ],
+     "native_trust_note_contains": [
+-      "Bootstrapped from `README.md`, `go.mod`, and `.github/workflows/ci.yml`. Inferred `repo.build` from `go.mod`. Inferred `repo.test` from `.github/workflows/ci.yml`. Imported `repo.toolchain.min` from `go.mod`."
+-    ],
+-    "overlay_trust_note_contains": [
+-      "Bootstrapped from `README.md`, `go.mod`, and `.github/workflows/ci.yml`. Inferred `repo.build` from `go.mod`. Inferred `repo.test` from `.github/workflows/ci.yml`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
++      "Bootstrapped from `README.md`, `.github/workflows/ci.yml`, and `go.mod`. Inferred `repo.test` from `.github/workflows/ci.yml`. Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction. Imported `repo.toolchain.min` from `go.mod`."
++    ],
++    "overlay_trust_note_contains": [
++      "Bootstrapped from `README.md`, `.github/workflows/ci.yml`, and `go.mod`. Inferred `repo.test` from `.github/workflows/ci.yml`. Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+     ],
+     "overlay_evidence_contains": [
+       "Imported repository name and description from README.md.",
+-      "Inferred repo.build from go.mod as `go build ./...`.",
++      "Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction.",
+       "Inferred repo.test from .github/workflows/ci.yml as `go test ./...`.",
+       "Imported repo.toolchain.min from go.mod as `1.22` (Go).",
+       "This is an overlay record, not a maintainer-controlled canonical record."
+@@ -2180,7 +2176,7 @@
+     "fixture": "f1-go-example-module-context",
+     "repo_name": "Go Context Fixture",
+     "repo_description": "Bounded Go command selection fixture.",
+-    "repo_build": "go build ./...",
++    "repo_build": null,
+     "repo_test": "go test ./...",
+     "repo_build_candidates": [],
+     "repo_test_candidates": [],
+@@ -2193,7 +2189,6 @@
+       "go.mod"
+     ],
+     "inferred_fields": [
+-      "repo.build",
+       "repo.test"
+     ],
+     "maintainers": [],
+@@ -2206,14 +2201,14 @@
+       "inferred"
+     ],
+     "native_trust_note_contains": [
+-      "Bootstrapped from `README.md` and `go.mod`. Inferred `repo.build` from `go.mod`. Inferred `repo.test` from `go.mod`. Imported `repo.toolchain.min` from `go.mod`."
+-    ],
+-    "overlay_trust_note_contains": [
+-      "Bootstrapped from `README.md` and `go.mod`. Inferred `repo.build` from `go.mod`. Inferred `repo.test` from `go.mod`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
++      "Bootstrapped from `README.md` and `go.mod`. Inferred `repo.test` from `go.mod`. Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction. Imported `repo.toolchain.min` from `go.mod`."
++    ],
++    "overlay_trust_note_contains": [
++      "Bootstrapped from `README.md` and `go.mod`. Inferred `repo.test` from `go.mod`. Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+     ],
+     "overlay_evidence_contains": [
+       "Imported repository name and description from README.md.",
+-      "Inferred repo.build from go.mod as `go build ./...`.",
++      "Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction.",
+       "Inferred repo.test from go.mod as `go test ./...`.",
+       "Imported repo.toolchain.min from go.mod as `1.22` (Go).",
+       "This is an overlay record, not a maintainer-controlled canonical record."
+@@ -2223,7 +2218,7 @@
+     "fixture": "f1-go-services-block-context",
+     "repo_name": "Go Context Fixture",
+     "repo_description": "Bounded Go command selection fixture.",
+-    "repo_build": "go build ./...",
++    "repo_build": null,
+     "repo_test": null,
+     "repo_build_candidates": [],
+     "repo_test_candidates": [],
+@@ -2235,27 +2230,24 @@
+       "README.md",
+       "go.mod"
+     ],
+-    "inferred_fields": [
+-      "repo.build"
+-    ],
+-    "maintainers": [],
+-    "team": null,
+-    "security_contact": null,
+-    "native_status": "draft",
+-    "overlay_status": "inferred",
+-    "trust_provenance": [
+-      "imported",
+-      "inferred"
+-    ],
+-    "native_trust_note_contains": [
+-      "Bootstrapped from `README.md` and `go.mod`. Inferred `repo.build` from `go.mod`. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`."
+-    ],
+-    "overlay_trust_note_contains": [
+-      "Bootstrapped from `README.md` and `go.mod`. Inferred `repo.build` from `go.mod`. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
++    "inferred_fields": [],
++    "maintainers": [],
++    "team": null,
++    "security_contact": null,
++    "native_status": "draft",
++    "overlay_status": "imported",
++    "trust_provenance": [
++      "imported"
++    ],
++    "native_trust_note_contains": [
++      "Bootstrapped from `README.md` and `go.mod`. Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`."
++    ],
++    "overlay_trust_note_contains": [
++      "Bootstrapped from `README.md` and `go.mod`. Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+     ],
+     "overlay_evidence_contains": [
+       "Imported repository name and description from README.md.",
+-      "Inferred repo.build from go.mod as `go build ./...`.",
++      "Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction.",
+       "Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite.",
+       "Imported repo.toolchain.min from go.mod as `1.22` (Go).",
+       "This is an overlay record, not a maintainer-controlled canonical record."

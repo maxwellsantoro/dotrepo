@@ -1,0 +1,64 @@
+{
+  "args": {
+    "repo_full_name": "keras-team/keras",
+    "commit_sha": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45"
+  },
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "commit": {
+        "sha": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+        "message": "Fix loading remote .keras files (#24081)",
+        "url": "https://api.github.com/repos/keras-team/keras/commits/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+        "html_url": "https://github.com/keras-team/keras/commit/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+        "diff": "@@ -97,7 +97,7 @@ def save_model(model, filepath, overwrite=True, zipped=None, **kwargs):\n \n     # If file exists and should not be overwritten.\n     try:\n-        exists = (not is_hf) and os.path.exists(filepath)\n+        exists = (not is_hf) and file_utils.exists(filepath)\n     except TypeError:\n         exists = False\n     if exists and not overwrite:\n@@ -262,7 +262,7 @@ def save_weights(\n             f\"specified. Received: filepath={filepath_str}\"\n         )\n     try:\n-        exists = os.path.exists(filepath)\n+        exists = file_utils.exists(filepath)\n     except TypeError:\n         exists = False\n     if exists and not overwrite:\n@@ -338,7 +338,7 @@ def load_model(filepath, custom_objects=None, compile=True, safe_mode=True):\n                 \"Invalid filename: expected a `.keras` extension. \"\n                 f\"Received: filepath={filepath}\"\n             )\n-        with open(filepath, \"rb\") as f:\n+        with file_utils.File(filepath, \"rb\") as f:\n             return _load_model_from_fileobj(\n                 f, custom_objects, compile, safe_mode\n             )\n@@ -19,6 +19,7 @@\n from keras.src import testing\n from keras.src.saving import saving_lib\n from keras.src.utils import file_utils\n+from keras.src.utils.module_utils import LazyModule\n \n \n @keras.saving.register_keras_serializable(package=\"my_custom_package\")\n@@ -1450,6 +1451,30 @@ def is_remote_path(path):\n             model.save_weights(temp_filepath)\n             model.load_weights(temp_filepath)\n \n+    def test_remote_path_saving_and_loading_with_epath(self):\n+        # A local directory stands in for the remote location, and TensorFlow\n+        # is hidden so that etils.epath is used.\n+        remote_dir = os.path.join(self.get_temp_dir(), \"remote\")\n+        os.makedirs(remote_dir)\n+        filepath = os.path.join(remote_dir, \"model.keras\")\n+        model = _get_basic_functional_model()\n+        x = np.random.random((2, 4))\n+\n+        with (\n+            mock.patch.object(\n+                file_utils,\n+                \"is_remote_path\",\n+                lambda path: str(path).startswith(remote_dir),\n+            ),\n+            mock.patch.object(\n+                file_utils, \"gfile\", LazyModule(\"keras_test_unavailable_module\")\n+            ),\n+        ):\n+            saving_lib.save_model(model, filepath)\n+            new_model = saving_lib.load_model(filepath)\n+\n+        self.assertAllClose(model.predict(x), new_model.predict(x))\n+\n \n class SavingH5IOStoreTest(testing.TestCase):\n     def test_h5_io_store_basics(self):",
+        "files": [
+          {
+            "filename": "keras/src/saving/saving_api.py",
+            "patch": "@@ -97,7 +97,7 @@ def save_model(model, filepath, overwrite=True, zipped=None, **kwargs):\n \n     # If file exists and should not be overwritten.\n     try:\n-        exists = (not is_hf) and os.path.exists(filepath)\n+        exists = (not is_hf) and file_utils.exists(filepath)\n     except TypeError:\n         exists = False\n     if exists and not overwrite:\n@@ -262,7 +262,7 @@ def save_weights(\n             f\"specified. Received: filepath={filepath_str}\"\n         )\n     try:\n-        exists = os.path.exists(filepath)\n+        exists = file_utils.exists(filepath)\n     except TypeError:\n         exists = False\n     if exists and not overwrite:"
+          },
+          {
+            "filename": "keras/src/saving/saving_lib.py",
+            "patch": "@@ -338,7 +338,7 @@ def load_model(filepath, custom_objects=None, compile=True, safe_mode=True):\n                 \"Invalid filename: expected a `.keras` extension. \"\n                 f\"Received: filepath={filepath}\"\n             )\n-        with open(filepath, \"rb\") as f:\n+        with file_utils.File(filepath, \"rb\") as f:\n             return _load_model_from_fileobj(\n                 f, custom_objects, compile, safe_mode\n             )"
+          },
+          {
+            "filename": "keras/src/saving/saving_lib_test.py",
+            "patch": "@@ -19,6 +19,7 @@\n from keras.src import testing\n from keras.src.saving import saving_lib\n from keras.src.utils import file_utils\n+from keras.src.utils.module_utils import LazyModule\n \n \n @keras.saving.register_keras_serializable(package=\"my_custom_package\")\n@@ -1450,6 +1451,30 @@ def is_remote_path(path):\n             model.save_weights(temp_filepath)\n             model.load_weights(temp_filepath)\n \n+    def test_remote_path_saving_and_loading_with_epath(self):\n+        # A local directory stands in for the remote location, and TensorFlow\n+        # is hidden so that etils.epath is used.\n+        remote_dir = os.path.join(self.get_temp_dir(), \"remote\")\n+        os.makedirs(remote_dir)\n+        filepath = os.path.join(remote_dir, \"model.keras\")\n+        model = _get_basic_functional_model()\n+        x = np.random.random((2, 4))\n+\n+        with (\n+            mock.patch.object(\n+                file_utils,\n+                \"is_remote_path\",\n+                lambda path: str(path).startswith(remote_dir),\n+            ),\n+            mock.patch.object(\n+                file_utils, \"gfile\", LazyModule(\"keras_test_unavailable_module\")\n+            ),\n+        ):\n+            saving_lib.save_model(model, filepath)\n+            new_model = saving_lib.load_model(filepath)\n+\n+        self.assertAllClose(model.predict(x), new_model.predict(x))\n+\n \n class SavingH5IOStoreTest(testing.TestCase):\n     def test_h5_io_store_basics(self):"
+          }
+        ],
+        "repository_full_name": "keras-team/keras",
+        "comments": null,
+        "author": {
+          "login": "SamanehSaadat",
+          "name": null,
+          "email": null,
+          "avatar_url": "https://avatars.githubusercontent.com/u/1986164?v=4",
+          "id": 1986164
+        },
+        "committer": {
+          "login": "web-flow",
+          "name": null,
+          "email": null,
+          "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+          "id": 19864447
+        },
+        "created_at": "2026-10-27T23:29:19Z",
+        "git_author_email": null,
+        "display_url": "https://github.com/keras-team/keras/commit/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+        "display_title": "Fix loading remote .keras files (#24081)"
+      },
+      "url": "https://github.com/keras-team/keras/commit/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+      "title": "Fix loading remote .keras files (#24081)",
+      "diff": "@@ -97,7 +97,7 @@ def save_model(model, filepath, overwrite=True, zipped=None, **kwargs):\n \n     # If file exists and should not be overwritten.\n     try:\n-        exists = (not is_hf) and os.path.exists(filepath)\n+        exists = (not is_hf) and file_utils.exists(filepath)\n     except TypeError:\n         exists = False\n     if exists and not overwrite:\n@@ -262,7 +262,7 @@ def save_weights(\n             f\"specified. Received: filepath={filepath_str}\"\n         )\n     try:\n-        exists = os.path.exists(filepath)\n+        exists = file_utils.exists(filepath)\n     except TypeError:\n         exists = False\n     if exists and not overwrite:\n@@ -338,7 +338,7 @@ def load_model(filepath, custom_objects=None, compile=True, safe_mode=True):\n                 \"Invalid filename: expected a `.keras` extension. \"\n                 f\"Received: filepath={filepath}\"\n             )\n-        with open(filepath, \"rb\") as f:\n+        with file_utils.File(filepath, \"rb\") as f:\n             return _load_model_from_fileobj(\n                 f, custom_objects, compile, safe_mode\n             )\n@@ -19,6 +19,7 @@\n from keras.src import testing\n from keras.src.saving import saving_lib\n from keras.src.utils import file_utils\n+from keras.src.utils.module_utils import LazyModule\n \n \n @keras.saving.register_keras_serializable(package=\"my_custom_package\")\n@@ -1450,6 +1451,30 @@ def is_remote_path(path):\n             model.save_weights(temp_filepath)\n             model.load_weights(temp_filepath)\n \n+    def test_remote_path_saving_and_loading_with_epath(self):\n+        # A local directory stands in for the remote location, and TensorFlow\n+        # is hidden so that etils.epath is used.\n+        remote_dir = os.path.join(self.get_temp_dir(), \"remote\")\n+        os.makedirs(remote_dir)\n+        filepath = os.path.join(remote_dir, \"model.keras\")\n+        model = _get_basic_functional_model()\n+        x = np.random.random((2, 4))\n+\n+        with (\n+            mock.patch.object(\n+                file_utils,\n+                \"is_remote_path\",\n+                lambda path: str(path).startswith(remote_dir),\n+            ),\n+            mock.patch.object(\n+                file_utils, \"gfile\", LazyModule(\"keras_test_unavailable_module\")\n+            ),\n+        ):\n+            saving_lib.save_model(model, filepath)\n+            new_model = saving_lib.load_model(filepath)\n+\n+        self.assertAllClose(model.predict(x), new_model.predict(x))\n+\n \n class SavingH5IOStoreTest(testing.TestCase):\n     def test_h5_io_store_basics(self):",
+      "display_url": "https://github.com/keras-team/keras/commit/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+      "display_title": "Fix loading remote .keras files (#24081)"
+    },
+    "isError": false
+  },
+  "reason": "Confirm declared exact revision identity; metadata only, not additional source-file acquisition"
+}

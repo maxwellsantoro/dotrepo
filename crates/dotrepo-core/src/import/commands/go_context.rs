@@ -1,6 +1,17 @@
-//! Refuse conventional Go scalars when acquired CI exposes unresolved scope/setup.
+//! Refuse metadata-only Go builds and scalars with unresolved CI scope/setup.
 //! This is a bounded workflow screen, not a YAML interpreter or execution proof.
 use super::super::types::{CommandSourceTier, ImportedCommandCandidate, ImportedFile};
+
+/// A root Go module identifies an ecosystem, not a declared build instruction.
+/// Keep its conventional candidate for diagnostics, but share this eligibility
+/// rule with adjudication so a later tier cannot restore it as a scalar.
+pub(crate) fn scalar_candidate_is_eligible(
+    source_path: &str,
+    source_tier: CommandSourceTier,
+    build: bool,
+) -> bool {
+    !(build && source_tier == CommandSourceTier::EcosystemDefault && source_path == "go.mod")
+}
 
 #[derive(Default)]
 pub(super) struct GoContextGuard {
@@ -394,6 +405,7 @@ impl GoContextGuard {
     ) -> (Vec<ImportedCommandCandidate>, [bool; 2]) {
         let mut filtered = candidates.to_vec();
         let mut blocked = [false; 2];
+        let mut conventional_build_withheld = false;
         for candidate in &mut filtered {
             if !matches!(
                 candidate.source_tier,
@@ -416,6 +428,23 @@ impl GoContextGuard {
                     blocked[index] = true;
                 }
             }
+            if candidate.build.is_some()
+                && !scalar_candidate_is_eligible(
+                    &candidate.source_path,
+                    candidate.source_tier,
+                    true,
+                )
+            {
+                candidate.build = None;
+                conventional_build_withheld = true;
+            }
+        }
+        // A conflict between eligible instructions must remain adjudicable.
+        // Actual workflow scope/setup refusal keeps its existing field block.
+        if conventional_build_withheld
+            && !filtered.iter().any(|candidate| candidate.build.is_some())
+        {
+            blocked[0] = true;
         }
         (filtered, blocked)
     }
@@ -428,7 +457,7 @@ impl GoContextGuard {
         } else if test {
             format!("Go test workflow setup is unresolved in `{}`; the same job declares an external service prerequisite", self.prepared_test.join("`, `"))
         } else {
-            unreachable!("build guard requires scoped Go workflow evidence")
+            "root go.mod supplies only a conventional build candidate, not a repository-default build instruction".into()
         }
     }
 }

@@ -1,0 +1,21 @@
+{
+  "state": "missing-native-collection",
+  "synthetic": false,
+  "binding": {
+    "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+    "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+    "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+    "environmentSha256": "UNRESOLVED_FUTURE_FROZEN_ENVIRONMENT",
+    "command": "GOTESTSUM_JSONFILE=/workspace/go-test-events.jsonl GOFLAGS=\"-p=1 -count=1\" npx hereby test",
+    "scope": "repository-default"
+  },
+  "packages": {},
+  "exitCode": null,
+  "error": null,
+  "completedAt": null,
+  "frozenAt": null,
+  "rawEventsSha256": null,
+  "packageInventorySha256": null,
+  "receiptSha256": null,
+  "note": "No native case/package counts collected; static lexical inventory is not a substitute"
+}

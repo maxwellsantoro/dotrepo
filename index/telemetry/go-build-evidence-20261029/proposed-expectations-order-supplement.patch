@@ -1,0 +1,13 @@
+--- a/crates/dotrepo-core/tests/fixtures/import/expectations.json
++++ b/crates/dotrepo-core/tests/fixtures/import/expectations.json
+@@ -2143,8 +2143,8 @@
+     "overlay_docs_getting_started": null,
+     "imported_sources": [
+       "README.md",
+-      "go.mod",
+-      ".github/workflows/ci.yml"
++      ".github/workflows/ci.yml",
++      "go.mod"
+     ],
+     "inferred_fields": [
+       "repo.test"

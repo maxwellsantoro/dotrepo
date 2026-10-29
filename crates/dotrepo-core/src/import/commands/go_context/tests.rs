@@ -9,10 +9,11 @@ fn guard(contents: &str) -> GoContextGuard {
     }])
 }
 
+// Exercise structural refusal independently of the module-only build policy.
 fn defaults(guard: &GoContextGuard) -> [bool; 2] {
     let (_, blocked) = guard.selection_candidates(&[ImportedCommandCandidate {
-        source_path: "go.mod".into(),
-        source_tier: CommandSourceTier::EcosystemDefault,
+        source_path: ".github/workflows/ci.yml".into(),
+        source_tier: CommandSourceTier::Workflow,
         build: Some("go build ./...".into()),
         test: Some("go test ./...".into()),
     }]);
@@ -107,7 +108,7 @@ fn declared_commands_and_unrelated_ecosystems_survive_go_guards() {
 fn full_import_f1_go_context_fixture_contracts() {
     for (fixture, build, test) in [
         ("f1-go-multimodule-context", None, None),
-        ("f1-go-service-context", Some("go build ./..."), None),
+        ("f1-go-service-context", None, None),
         (
             "f1-go-declared-context",
             Some("go build ./..."),
@@ -115,15 +116,11 @@ fn full_import_f1_go_context_fixture_contracts() {
         ),
         (
             "f1-go-unrelated-service-context",
-            Some("go build ./..."),
+            None,
             Some("go test ./..."),
         ),
-        (
-            "f1-go-example-module-context",
-            Some("go build ./..."),
-            Some("go test ./..."),
-        ),
-        ("f1-go-services-block-context", Some("go build ./..."), None),
+        ("f1-go-example-module-context", None, Some("go test ./...")),
+        ("f1-go-services-block-context", None, None),
     ] {
         let root = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
             .join("tests/fixtures/import")
@@ -233,8 +230,11 @@ fn escalation_cannot_restore_context_blocked_scalars_even_with_model_budget() {
     }
     for (fixture, blocked_fields) in [
         ("f1-go-multimodule-context", vec!["repo.build", "repo.test"]),
-        ("f1-go-service-context", vec!["repo.test"]),
-        ("f1-go-services-block-context", vec!["repo.test"]),
+        ("f1-go-service-context", vec!["repo.build", "repo.test"]),
+        (
+            "f1-go-services-block-context",
+            vec!["repo.build", "repo.test"],
+        ),
     ] {
         for model_budget in [0, 2] {
             let root = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
@@ -496,14 +496,14 @@ fn amendment_full_import_and_escalation_association_controls() {
             if blocked_test {
                 assert_eq!(
                     plan.command_candidates.blocked_scalar_fields,
-                    vec!["repo.test"]
+                    vec!["repo.build", "repo.test"]
                 );
                 assert!(build_adjudication_requests(&scores, &plan)
                     .iter()
                     .all(|request| request.field != "repo.test"));
             } else {
                 assert!(
-                    plan.command_candidates.blocked_scalar_fields.is_empty(),
+                    plan.command_candidates.blocked_scalar_fields == ["repo.build"],
                     "{name}"
                 );
             }
@@ -527,11 +527,7 @@ fn amendment_full_import_and_escalation_association_controls() {
                 },
             );
             assert_eq!(result.model_calls, 0, "{name}");
-            assert_eq!(
-                plan.manifest.repo.build.as_deref(),
-                Some("go build ./..."),
-                "{name}"
-            );
+            assert_eq!(plan.manifest.repo.build.as_deref(), None, "{name}");
             assert_eq!(
                 plan.manifest.repo.test.as_deref(),
                 if blocked_test {
@@ -557,6 +553,236 @@ fn amendment_full_import_and_escalation_association_controls() {
                 serde_json::json!({"case":name,"workflow":workflow,"budget":budget,"blockedScalarFields":plan.command_candidates.blocked_scalar_fields,"modelCalls":result.model_calls,"build":plan.manifest.repo.build,"test":plan.manifest.repo.test,"unresolved":scores.summary.unresolved})
             );
         }
+    }
+    std::fs::remove_dir_all(root).unwrap();
+}
+
+#[test]
+fn module_only_build_evidence_stays_unresolved_through_actual_escalation() {
+    use crate::import::{
+        build_adjudication_requests, run_import_escalation, ImportEscalationOptions,
+        TieredAdjudicationProviders,
+    };
+    let root = std::env::temp_dir().join(format!(
+        "dotrepo-go-build-evidence-{}-{}",
+        std::process::id(),
+        std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap()
+            .as_nanos()
+    ));
+    std::fs::create_dir_all(root.join(".github/workflows")).unwrap();
+    std::fs::write(root.join("README.md"), "# Build evidence control\n").unwrap();
+    std::fs::write(
+        root.join("go.mod"),
+        "module example.test/build-evidence\n\ngo 1.22\n",
+    )
+    .unwrap();
+    for (name, workflow, declared_build, expected_build, expected_test) in [
+        ("module-only", None, false, None, Some("go test ./...")),
+        (
+            "ordinary-build-observation",
+            Some(("ci.yml", "jobs:\n  build:\n    steps:\n      - run: go build ./...\n")),
+            false,
+            Some("go build ./..."),
+            Some("go test ./..."),
+        ),
+        (
+            "tagged-observation-is-not-normalized",
+            Some(("ci.yml", "jobs:\n  build:\n    steps:\n      - run: go build -tags=integration ./...\n")),
+            false,
+            Some("go build -tags=integration ./..."),
+            Some("go test ./..."),
+        ),
+        (
+            "release-does-not-establish-default",
+            Some(("release-build.yml", "jobs:\n  build:\n    steps:\n      - run: go build ./...\n")),
+            false,
+            None,
+            Some("go test ./..."),
+        ),
+        (
+            "scoped-observation-does-not-restore-module-build",
+            Some(("ci.yml", "jobs:\n  build:\n    steps:\n      - run: |\n          cd examples\n          go build ./...\n")),
+            false,
+            None,
+            None,
+        ),
+        (
+            "explicit-source-build",
+            None,
+            true,
+            Some("go build ./..."),
+            Some("go test ./..."),
+        ),
+    ] {
+        let workflows = root.join(".github/workflows");
+        for file in std::fs::read_dir(&workflows).unwrap() {
+            std::fs::remove_file(file.unwrap().path()).unwrap();
+        }
+        if let Some((path, contents)) = workflow {
+            std::fs::write(workflows.join(path), contents).unwrap();
+        }
+        let contributing = root.join("CONTRIBUTING.md");
+        if declared_build {
+            std::fs::write(
+                &contributing,
+                "# Contributing\n\n## Build\n\n```sh\ngo build ./...\n```\n",
+            )
+            .unwrap();
+        } else if contributing.exists() {
+            std::fs::remove_file(contributing).unwrap();
+        }
+        for budget in [0, 2] {
+            let mut plan = import_repository(
+                &root,
+                ImportMode::Overlay,
+                Some("https://example.test/build-evidence"),
+            )
+            .unwrap();
+            assert_eq!(plan.manifest.repo.build.as_deref(), expected_build, "{name}");
+            assert_eq!(plan.manifest.repo.test.as_deref(), expected_test, "{name}");
+            assert!(plan.command_candidates.candidates.iter().any(|candidate| {
+                candidate.source_path == "go.mod"
+                    && candidate.build.as_deref() == Some("go build ./...")
+                    && candidate.test.as_deref() == Some("go test ./...")
+            }));
+            assert_eq!(
+                plan.command_candidates
+                    .blocked_scalar_fields
+                    .iter()
+                    .any(|field| field == "repo.build"),
+                expected_build.is_none(),
+                "{name}"
+            );
+            let verification = verify_import_plan(&root, &plan, "https://example.test/build-evidence");
+            let mut scores = crate::score_import_fields(&plan, &verification);
+            if expected_build.is_none() {
+                assert_eq!(
+                    scores.scores.iter().find(|s| s.field == "repo.build").unwrap().confidence,
+                    crate::FieldConfidence::Unresolved,
+                    "{name}"
+                );
+            }
+            // A suspect observation/declaration may still be adjudicated, but
+            // the raw module build is never among its selectable alternatives.
+            let mut suspect = scores.clone();
+            suspect.scores.iter_mut().find(|s| s.field == "repo.build").unwrap().confidence = crate::FieldConfidence::Suspect;
+            let requests = build_adjudication_requests(&suspect, &plan);
+            let request = requests.iter().find(|r| r.field == "repo.build");
+            assert_eq!(request.is_some(), expected_build.is_some(), "{name}");
+            if let Some(request) = request {
+                assert!(request.candidates.iter().all(|candidate| candidate.source_path != "go.mod"));
+            }
+            let provider = crate::import::StubAdjudicationProvider::new(
+                crate::import::AdjudicationTier::LocalPrimary,
+                Vec::new(),
+            );
+            let result = run_import_escalation(
+                &root,
+                &mut plan,
+                &verification,
+                &mut scores,
+                &ImportEscalationOptions { max_adjudication_calls: budget, ..Default::default() },
+                TieredAdjudicationProviders { local_primary: Some(&provider), local_second_opinion: None, api_escalation: None },
+            );
+            assert_eq!(result.model_calls, 0, "{name}");
+            assert_eq!(plan.manifest.repo.build.as_deref(), expected_build, "{name}");
+            assert_eq!(plan.manifest.repo.test.as_deref(), expected_test, "{name}");
+            if expected_build.is_none() {
+                assert_eq!(scores.scores.iter().find(|s| s.field == "repo.build").unwrap().confidence, crate::FieldConfidence::Unresolved, "{name}");
+            }
+            println!("GO_BUILD_EVIDENCE_CONTROL {}", serde_json::json!({"case":name,"budget":budget,"build":plan.manifest.repo.build,"test":plan.manifest.repo.test,"blockedScalarFields":plan.command_candidates.blocked_scalar_fields,"modelCalls":result.model_calls,"deterministicRequests":result.deterministic_requests,"unresolved":scores.summary.unresolved}));
+        }
+    }
+    std::fs::remove_dir_all(root).unwrap();
+}
+
+#[test]
+fn explicit_build_conflicts_remain_adjudicable_without_relaxing_context_blocks() {
+    let root = std::env::temp_dir().join(format!(
+        "dotrepo-go-build-conflict-{}-{}",
+        std::process::id(),
+        std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap()
+            .as_nanos()
+    ));
+    std::fs::create_dir_all(root.join(".github/workflows")).unwrap();
+    std::fs::write(
+        root.join("go.mod"),
+        "module example.test/conflict\n\ngo 1.22\n",
+    )
+    .unwrap();
+    std::fs::write(
+        root.join("README.md"),
+        "# Explicit conflict control\n\n## Build\n\n```sh\ngo build ./...\n```\n",
+    )
+    .unwrap();
+    std::fs::write(
+        root.join("CONTRIBUTING.md"),
+        "# Contributing\n\n## Build\n\n```sh\ngo build -tags=integration ./...\n```\n",
+    )
+    .unwrap();
+    for scoped_workflow in [false, true] {
+        if scoped_workflow {
+            std::fs::write(root.join(".github/workflows/ci.yml"), "jobs:\n  build:\n    steps:\n      - run: |\n          cd component\n          go build ./...\n").unwrap();
+        }
+        let plan = import_repository(
+            &root,
+            ImportMode::Overlay,
+            Some("https://example.test/conflict"),
+        )
+        .unwrap();
+        assert!(plan.manifest.repo.build.is_none());
+        assert!(plan
+            .manifest
+            .record
+            .trust
+            .as_ref()
+            .unwrap()
+            .notes
+            .as_deref()
+            .unwrap()
+            .contains("conflicting build commands"));
+        assert_eq!(
+            plan.command_candidates
+                .blocked_scalar_fields
+                .iter()
+                .any(|field| field == "repo.build"),
+            scoped_workflow
+        );
+        let verification = verify_import_plan(&root, &plan, "https://example.test/conflict");
+        let scores = crate::score_import_fields(&plan, &verification);
+        let requests = crate::import::build_adjudication_requests(&scores, &plan);
+        let request = requests
+            .iter()
+            .find(|request| request.field == "repo.build");
+        if scoped_workflow {
+            assert!(
+                request.is_none(),
+                "existing context refusal remains field-wide"
+            );
+        } else {
+            let request = request.expect("eligible explicit conflict remains adjudicable");
+            assert_eq!(request.candidates.len(), 2);
+            assert!(request
+                .candidates
+                .iter()
+                .any(|candidate| candidate.source_path == "README.md"));
+            assert!(request
+                .candidates
+                .iter()
+                .any(|candidate| candidate.source_path == "CONTRIBUTING.md"));
+            assert!(request
+                .candidates
+                .iter()
+                .all(|candidate| candidate.source_path != "go.mod"));
+        }
+        println!(
+            "GO_BUILD_CONFLICT_CONTROL {}",
+            serde_json::json!({"scopedWorkflow":scoped_workflow,"blockedScalarFields":plan.command_candidates.blocked_scalar_fields,"build":plan.manifest.repo.build,"buildRequestCandidates":request.map(|request|request.candidates.iter().map(|candidate|serde_json::json!({"source":candidate.source_path,"value":candidate.value})).collect::<Vec<_>>())})
+        );
     }
     std::fs::remove_dir_all(root).unwrap();
 }

@@ -1,0 +1,27 @@
+{
+  "state": "static review before independent execution",
+  "reviewerContext": "Separate from verifier author, with prior F05/E1 project and results context. Not fresh blinded qualification or independent consumer evidence.",
+  "blockingFindings": [],
+  "checked": [
+    "Attachment limit128KiB and1..128typedrows; serde rejects unknown/missing row fields and invalid numeric types.",
+    "Contained lexical relativepaths; existing read_input Unix directory-handle openat/no-follow/nonblock, regular-file and2MiB+1boundedread; UTF8decode refuses loss. Windows ancestor races retain existing documentedbest-effort limit.",
+    "FullbyteSHA256+validinclusive1basedranges; repeated path distinct spans allowed, duplicateexactspan rejected; no claimspan semantics.",
+    "Exact candidateJSON, contextassessment source, matching nonemptygeneration/checkedtime; both command/context source paths must occur in binding set.",
+    "Fresh verification Failure lowers globalreportpassed and candidate scoreUnresolved; successfulcheck permits atmostMedium and doesnotestablishprerequisitecompleteness or execution.",
+    "Canonical import_preview_repository verifies immediately before score with unchangedplan; no stalecanonicalreuse identified in reviewed callers."
+  ],
+  "limitations": [
+    {
+      "identity": "callerreportfreshness",
+      "state": "not a bounded-change defect",
+      "source": "score_import_fields accepts rootless caller-supplied VerificationReport. Reusing oldPass after changingattachment/source mayretainMedium; source canchangeafterverification. Fresh report required and now documented. Independent counterexample pending slotrelease."
+    },
+    {
+      "identity": "semantics",
+      "state": "explicitly unresolved",
+      "source": "Hash/span validity and self-consistenttuple cannotestablishmeaning/completeness; known Kerasdevelopmentdisposition remainsincomplete."
+    }
+  ],
+  "rootSourceDispositionFreezeSha256": "2c53e516f15aafe6c80e16aa2b9ff1b104b2537d0a67857052e8f9737303545d",
+  "executionPerformed": false
+}

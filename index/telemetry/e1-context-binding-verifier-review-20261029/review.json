@@ -1,0 +1,16 @@
+{
+  "reviewedAt": "2026-10-29T08:09:00.513130+00:00",
+  "state": "bounded independent review passed; no blocking finding",
+  "freshControlsPassed": 26,
+  "callerPreconditionCounterexamplesPassed": 1,
+  "blockingFindings": [],
+  "apiLimitation": "Stale caller-supplied report is not a live source guarantee; fresh same-root/plan verification documented and canonical preview order inspected.",
+  "sourceIntegrityIsSemanticCompleteness": false,
+  "highConfidencePromotion": false,
+  "upstreamCommandsExecuted": false,
+  "containerNetworkProviderCalls": 0,
+  "evaluatedSourceBindingsUnchanged": true,
+  "controlsSha256": "2d9566f3ea6ac81a659504f9f08ed99d1a4db7c0707c48328a0947af5d89fed9",
+  "sourceDispositionFreezeSha256": "2c53e516f15aafe6c80e16aa2b9ff1b104b2537d0a67857052e8f9737303545d",
+  "context": "Prior F05/E1 context disclosed; separate from verifier author; no fresh-blind or consumer-proof claim."
+}

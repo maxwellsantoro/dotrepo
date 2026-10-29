@@ -1,0 +1,13 @@
+Diff in /Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core/src/import/fields.rs:604:
+ 
+         let mut candidates = Vec::new();
+         for candidate in &plan.command_candidates.candidates {
+-            if !scalar_candidate_is_eligible(&candidate.source_path, candidate.source_tier, is_build) {
++            if !scalar_candidate_is_eligible(
++                &candidate.source_path,
++                candidate.source_tier,
++                is_build,
++            ) {
+                 continue;
+             }
+             let value = if is_build {

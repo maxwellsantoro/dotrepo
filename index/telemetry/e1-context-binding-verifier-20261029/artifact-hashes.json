@@ -1,0 +1,122 @@
+[
+  {
+    "path": "README.md",
+    "bytes": 4193,
+    "sha256": "3b40da65056ea6815803de03872c0c86289542b4652b5d7526fa3b718530da0a"
+  },
+  {
+    "path": "checks/cli-build.log",
+    "bytes": 266,
+    "sha256": "9b65cf48c363ce58aa1a2aaa394bfc077be12396e3457d1e7dcca8861271576a"
+  },
+  {
+    "path": "checks/clippy.log",
+    "bytes": 170,
+    "sha256": "c45ac52c010ca2859c1f9fc9d32a9f3db1e03545de246928cb7a76c7f85d9add"
+  },
+  {
+    "path": "checks/compile-failed.log",
+    "bytes": 1549,
+    "sha256": "8a032a1a7a9f2a50d3f44d85c76d655d2ffdc288ff720cc767c7fb6a096fd6e8"
+  },
+  {
+    "path": "checks/control-correction.json",
+    "bytes": 419,
+    "sha256": "bd0e7fc311b003569db6b065ea0b413ebaa25c7c58190890494e257bd20166a1"
+  },
+  {
+    "path": "checks/quality-gate.log",
+    "bytes": 521,
+    "sha256": "5f28c7cfc5921e7c05502bc1e6b6375b5d2dc65e1de9ae0cf78153037d7b4535"
+  },
+  {
+    "path": "checks/ruff-check.log",
+    "bytes": 19,
+    "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+  },
+  {
+    "path": "checks/ruff-format.log",
+    "bytes": 26,
+    "sha256": "3bc53bf3e981a98a34a852e175bf9b77af841edea74fca595d9aedcbaf9a4938"
+  },
+  {
+    "path": "checks/unit-tests.log",
+    "bytes": 1243,
+    "sha256": "f8c9e1bfa7b41021a9f9d3506bb05f14cb6fa995636da04a10a643fa80672206"
+  },
+  {
+    "path": "cli-recovery.json",
+    "bytes": 12485,
+    "sha256": "cd69f6612d9113012fcff3fae4d0fb6dad565d23587b37770643cd2a36c454c9"
+  },
+  {
+    "path": "cli_recovery.py",
+    "bytes": 3181,
+    "sha256": "b73bd26b3823cd2f79cb72404c6e94d3bcfa6bd58f67a715e2e256ca8b909ac0"
+  },
+  {
+    "path": "development-plan.json",
+    "bytes": 2705,
+    "sha256": "4b482427038cc199b7f7876d2df6de72eaf817b85ce558fc9c643a7215480e92"
+  },
+  {
+    "path": "shared-wiring.patch",
+    "bytes": 881,
+    "sha256": "06769dce27ca190b91e960dd9be20f7622c65b1f01c2d49d7b528daa15231a87"
+  },
+  {
+    "path": "source-bindings.json",
+    "bytes": 1601,
+    "sha256": "c5ecf35bba6ff351581931a1114cfecbe87377ff427aa527a0e580e4215798a1"
+  },
+  {
+    "path": "source-snapshot/crates/dotrepo-core/src/facade_tests/import_repository.rs.txt",
+    "bytes": 48695,
+    "sha256": "7971136b54544abbe7e383be64d190caf6b579c2e75f867df59851249c501c63"
+  },
+  {
+    "path": "source-snapshot/crates/dotrepo-core/src/import/commands/go_context/tests.rs.txt",
+    "bytes": 35172,
+    "sha256": "d1e69f19c651f11315abbc1cff1a85cb4c9d65a83a7e851d9f50ec3ce1798bac"
+  },
+  {
+    "path": "source-snapshot/crates/dotrepo-core/src/import/commands/go_context.rs.txt",
+    "bytes": 17631,
+    "sha256": "8cfbf598cbc78929aa6e750fc5d677e77f1608c145aa81f94a84b09eaf15acea"
+  },
+  {
+    "path": "source-snapshot/crates/dotrepo-core/src/import/commands/mod.rs.txt",
+    "bytes": 20705,
+    "sha256": "b50bad2dca6b3dcfd23ef9cbead3359f394623e8523b3d6d88a506d2b4725379"
+  },
+  {
+    "path": "source-snapshot/crates/dotrepo-core/src/import/context_verification/tests.rs.txt",
+    "bytes": 12464,
+    "sha256": "ecff5722fdb95773bd208f9a94e40f8ef755849cf2695e58ce35f11d7d17088f"
+  },
+  {
+    "path": "source-snapshot/crates/dotrepo-core/src/import/context_verification.rs.txt",
+    "bytes": 6731,
+    "sha256": "ad337069d7a3cb53d3e09da91a4bfc09b6f27604759da273af876bcc1c2e3047"
+  },
+  {
+    "path": "source-snapshot/crates/dotrepo-core/src/import/fields.rs.txt",
+    "bytes": 30801,
+    "sha256": "3c8af1dc2dfa47f6305b270d2a182cbdfcbd6b17b5e7db9507f25e70add54981"
+  },
+  {
+    "path": "source-snapshot/crates/dotrepo-core/src/import/mod.rs.txt",
+    "bytes": 31824,
+    "sha256": "90522b052d74729a1f5e77e0fac5ba349ee30c6385499ee4375bdc5acda24563"
+  },
+  {
+    "path": "source-snapshot/crates/dotrepo-core/src/import/read.rs.txt",
+    "bytes": 4404,
+    "sha256": "eb85dbf4de4f108aa1fbaa746829386ba8e9c3f62afe2ee3dfd2559ace34d3eb"
+  },
+  {
+    "path": "source-snapshot/crates/dotrepo-core/tests/fixtures/import/expectations.json.txt",
+    "bytes": 88613,
+    "sha256": "a80e0ffa170701f5bc9e880115cc1a19a183ae24ce9117524d57f7d186c29651"
+  }
+]

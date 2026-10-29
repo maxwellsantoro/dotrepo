@@ -1,0 +1,44 @@
+{
+  "status": "passed",
+  "bindingStage": "eligibility patch before coordinator subsequent E1-verifier wiring; source-bindings and implementation.patch preserved",
+  "commandsContextTests": 71,
+  "goTestsIncluded": 20,
+  "existingFacadeRegression": 1,
+  "importQualityGateTests": 2,
+  "coreAllTargetsClippy": "passed",
+  "cargoFmtCheck": "passed",
+  "gitDiffCheck": "passed",
+  "actualEscalationReceipts": {
+    "newBuildEligibility": 12,
+    "existingF1": 6,
+    "existingAssociation": 16,
+    "budgets": [
+      0,
+      2
+    ],
+    "modelCalls": 0
+  },
+  "explicitConflictRequestControls": 2,
+  "fixtureInputHashesPreserved": 22,
+  "retainedRedigoInputHashesPreserved": 11,
+  "expectedGoldenRowsChanged": 4,
+  "newFixtureDirectories": 0,
+  "sourcePackageNetworkCalls": 0,
+  "upstreamCodeExecuted": false,
+  "providerCalls": 0,
+  "indexWrites": 0,
+  "retainedFailures": [
+    "checks/focused-attempt-1-compile-failure.log",
+    "checks/commands-attempt-3-test-option-compile-failure.log",
+    "checks/quality-attempt-1-imported-source-order-failure.log",
+    "checks/format-attempt-1-shared-call-failure.log"
+  ],
+  "independentBeforeConflictFinding": "index/telemetry/go-build-evidence-review-20261029/before-conflict/freeze.json",
+  "notClaimed": [
+    "held-out qualification",
+    "source-established maintainer defaults from workflows",
+    "upstream execution validation",
+    "consumer benefit",
+    "full YAML or shell interpretation"
+  ]
+}

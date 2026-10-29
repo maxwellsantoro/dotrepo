@@ -232,7 +232,7 @@ testpaths = ["tests"]
 }
 
 #[test]
-fn import_repository_imports_go_module_build_and_test_defaults() {
+fn import_repository_withholds_module_only_build_but_keeps_test_default() {
     let root = temp_dir("import-go-mod-commands");
     fs::write(
         root.join("README.md"),
@@ -252,7 +252,25 @@ fn import_repository_imports_go_module_build_and_test_defaults() {
     )
     .expect("import succeeds");
 
-    assert_eq!(plan.manifest.repo.build.as_deref(), Some("go build ./..."));
+    assert!(plan.manifest.repo.build.is_none());
+    assert!(plan.command_candidates.selected_build.is_none());
+    assert!(plan.command_candidates.candidates.iter().any(|candidate| {
+        candidate.source_path == "go.mod" && candidate.build.as_deref() == Some("go build ./...")
+    }));
+    let verification = verify_import_plan(&root, &plan, "https://github.com/example/orbit");
+    let scores = crate::score_import_fields(&plan, &verification);
+    assert_eq!(
+        scores
+            .scores
+            .iter()
+            .find(|score| score.field == "repo.build")
+            .unwrap()
+            .confidence,
+        crate::FieldConfidence::Unresolved
+    );
+    assert!(crate::import::build_adjudication_requests(&scores, &plan)
+        .iter()
+        .all(|request| request.field != "repo.build"));
     assert_eq!(plan.manifest.repo.test.as_deref(), Some("go test ./..."));
     assert!(plan.imported_sources.iter().any(|path| path == "go.mod"));
 

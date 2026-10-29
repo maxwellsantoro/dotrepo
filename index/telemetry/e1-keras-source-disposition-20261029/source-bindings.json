@@ -1,0 +1,177 @@
+{
+  "repository": "github.com/keras-team/keras",
+  "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+  "retainedSourceInventory": "benchmarks/ci-evidence/pilot-20261029/source-bindings.json",
+  "sources": [
+    {
+      "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/keras-team/keras/CONTRIBUTING.md",
+      "sourcePath": "CONTRIBUTING.md",
+      "sha256": "eff1a6349d222979e24b860c88e9577f603300af7658a1ac6fca3140992d0d3d",
+      "bytes": 13606,
+      "lines": 374,
+      "spans": [
+        {
+          "firstLine": 85,
+          "lastLine": 111,
+          "text": "1.  [git](https://github.com/) for code repository management.\n2.  [python](https://www.python.org/) to build and code in Keras.\n\nThe following commands check the tools above are successfully installed. Note\nthat Keras requires at least Python 3.10 to run.\n\n```shell\ngit --version\npython --version\n```\n\nClone your forked repo to your local machine. Go to the cloned directory to\ninstall the dependencies.\n\n```shell\ngit clone https://github.com/YOUR_GITHUB_USERNAME/keras.git\ncd keras\npip install -r requirements.txt\n```\n\nYou then need to configure the backend to use, see the\n[Configuring your backend](https://github.com/keras-team/keras/blob/master/README.md#configuring-your-backend)\nsection of the README.\n\nYou can also add GPU support to your environment, see the\n[Adding GPU support](https://github.com/keras-team/keras/blob/master/README.md#adding-gpu-support)\nsection of the README."
+        },
+        {
+          "firstLine": 202,
+          "lastLine": 224,
+          "text": "### Run all tests\n\nYou can run all the tests locally by running the following command in the repo\nroot directory.\n\n```shell\npytest keras\n```\n\nNote that you can skip the Keras applications tests using the\n`SKIP_APPLICATIONS_TESTS` environment variable. This will cut down the testing\ntime significantly.\n\n```shell\nSKIP_APPLICATIONS_TESTS=True pytest keras\n```\n\nTo run all tests using a different backend, you can simply specify it on the\ncommand line.\n\n```shell\nKERAS_BACKEND=jax SKIP_APPLICATIONS_TESTS=True pytest keras\n```"
+        }
+      ]
+    },
+    {
+      "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/keras-team/keras/README.md",
+      "sourcePath": "README.md",
+      "sha256": "6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8",
+      "bytes": 5547,
+      "lines": 141,
+      "spans": [
+        {
+          "firstLine": 41,
+          "lastLine": 88,
+          "text": "### Local installation\n\n#### Minimal installation\n\nKeras 3 is compatible with Linux and macOS systems. For Windows users, we recommend using WSL2 to run Keras.\nTo install a local development version:\n\n1. Install dependencies:\n\n```\npip install -r requirements.txt\n```\n\n2. Run installation command from the root directory.\n\n```\npython pip_build.py --install\n```\n\n3. Run API generation script when creating PRs that update `keras_export` public APIs:\n\n```\n./shell/api_gen.sh\n```\n\n## Backend Compatibility Table\n\nThe following table lists the minimum supported versions of each backend for the latest stable release of Keras (v3.x):\n\n| Backend    | Minimum Supported Version |\n|------------|---------------------------|\n| TensorFlow | 2.16.1                    |\n| JAX        | 0.4.20                    |\n| PyTorch    | 2.6.0                     |\n| OpenVINO   | 2026.2.0                  |\n\n#### Adding GPU support\n\nThe `requirements.txt` file will install a CPU-only version of TensorFlow, JAX, and PyTorch. For GPU support, we also\nprovide a separate `requirements-{backend}-cuda.txt` for TensorFlow, JAX, and PyTorch. These install all CUDA\ndependencies via `pip` and expect a NVIDIA driver to be pre-installed. We recommend a clean Python environment for each\nbackend to avoid CUDA version mismatches. As an example, here is how to create a JAX GPU environment with `conda`:\n\n```shell\nconda create -y -n keras-jax python=3.10\nconda activate keras-jax\npip install -r requirements-jax-cuda.txt\npython pip_build.py --install"
+        },
+        {
+          "firstLine": 91,
+          "lastLine": 113,
+          "text": "## Configuring your backend\n\nYou can export the environment variable `KERAS_BACKEND` or you can edit your local config file at `~/.keras/keras.json`\nto configure your backend. Available backend options are: `\"tensorflow\"`, `\"jax\"`, `\"torch\"`, `\"openvino\"`. Example:\n\n```\nexport KERAS_BACKEND=\"jax\"\n```\n\nIn Colab, you can do:\n\n```python\nimport os\nos.environ[\"KERAS_BACKEND\"] = \"jax\"\n\nimport keras\n```\n\n**Note:** The backend must be configured before importing `keras`, and the backend cannot be changed after\nthe package has been imported.\n\n**Note:** The OpenVINO backend is an inference-only backend, meaning it is designed only for running model\npredictions using `model.predict()` method."
+        }
+      ]
+    },
+    {
+      "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/keras-team/keras/pyproject.toml",
+      "sourcePath": "pyproject.toml",
+      "sha256": "51ac5db60612a4c92123980826c1010a6d087c7a64b11a580ebc33c21058d326",
+      "bytes": 2883,
+      "lines": 119,
+      "spans": [
+        {
+          "firstLine": 1,
+          "lastLine": 20,
+          "text": "[build-system]\nrequires = [\"setuptools >=61.0\"]\nbuild-backend = \"setuptools.build_meta\"\n\n[project]\nname = \"keras\"\nauthors = [\n    {name = \"Keras team\", email = \"keras-users@googlegroups.com\"},\n]\ndescription = \"Multi-backend Keras\"\nreadme = \"README.md\"\nrequires-python = \">=3.11\"\nlicense = {text = \"Apache License 2.0\"}\ndynamic = [\"version\"]\nclassifiers = [\n    \"Development Status :: 4 - Beta\",\n    \"Programming Language :: Python :: 3\",\n    \"Programming Language :: Python :: 3.11\",\n    \"Programming Language :: Python :: 3.12\",\n    \"Programming Language :: Python :: 3 :: Only\","
+        }
+      ]
+    },
+    {
+      "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/keras-team/keras/requirements.txt",
+      "sourcePath": "requirements.txt",
+      "sha256": "f34e2fa7d9bb205afe36e7cb8a0d53f6e3be39d0dc51b38de0619529e4e919b8",
+      "bytes": 619,
+      "lines": 26,
+      "spans": [
+        {
+          "firstLine": 1,
+          "lastLine": 26,
+          "text": "# Tensorflow.\n# Note: when the version of Tensorflow is changed, the version tf_keras must be\n# changed in .github/workflows/actions.yml (pip install --no-deps tf_keras).\ntensorflow-cpu;sys_platform != 'darwin'\ntensorflow;sys_platform == 'darwin'\nai-edge-litert\n\n# Torch.\n--extra-index-url https://download.pytorch.org/whl/cpu\ntorch\ntorch-xla;sys_platform != 'darwin'\n\n# Jax.\n# Pinned to 0.8.0 on CPU for CI compatibility with older backends.\n# Note that we test against the latest JAX on GPU.\njax[cpu]\nflax\n\n# OpenVino\nopenvino\n\n# Common deps.\n-r requirements-common.txt\n\n# LiteRT torch converter.\nlitert-torch>=0.9.1"
+        }
+      ]
+    },
+    {
+      "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/keras-team/keras/requirements-common.txt",
+      "sourcePath": "requirements-common.txt",
+      "sha256": "3df3a2a15e645bc03082648aec06570a4329fdad189e4b326df0be80d6a7615e",
+      "bytes": 498,
+      "lines": 37,
+      "spans": [
+        {
+          "firstLine": 1,
+          "lastLine": 37,
+          "text": "pre-commit\nnamex>=0.1.0\nruff\nnumpy\nscipy\nscikit-learn\npillow\npandas\nabsl-py\nrequests\nh5py\nml-dtypes\nprotobuf\ntensorboard\ntensorboard-plugin-profile\nrich\nbuild\noptree\npytest\npytest-cov\npytest-xdist\npackaging\n# for tree_test.py\ndm_tree\ncoverage\n# for onnx_test.py\nonnxruntime\n# https://github.com/keras-team/keras/issues/21390\n# onnxscript==0.3.2 breaks LSTM model export.\nonnxscript!=0.3.2\njax2onnx\ntf2onnx\ngrain\n# for orbax_checkpoint_test.py\norbax-checkpoint\n# for remote file access\netils[epath]"
+        }
+      ]
+    },
+    {
+      "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/keras-team/keras/.github/workflows/cpu_tests.yml",
+      "sourcePath": ".github/workflows/cpu_tests.yml",
+      "sha256": "c29ad40475b8e8ed2bc144b230fe0d4f2736bfafe1dd2488261cbfc74397fef2",
+      "bytes": 6919,
+      "lines": 175,
+      "spans": [
+        {
+          "firstLine": 22,
+          "lastLine": 49,
+          "text": "      matrix:\n        backend: [tensorflow, jax, torch, numpy]\n        nnx_enabled: [false]\n        include:\n          - backend: jax\n            nnx_enabled: true\n\n    container:\n      image: python:3.11-slim\n\n    name: ${{ format('Run tests on CPU ({0}{1})', matrix.backend, matrix.nnx_enabled && ', NNX' || '') }}\n    runs-on: linux-x86-n4-16\n    timeout-minutes: ${{ inputs.timeout }}\n\n    env:\n      KERAS_HOME: .github/workflows/config/${{ matrix.backend }}\n\n    steps:\n      - name: Install binary dependencies\n        # build-essential is the C++ compiler for Torch Dynamo\n        # curl, git, gpg are for codecov/codecov-action\n        run: |\n          apt-get update\n          apt-get -y install build-essential\n          apt-get -y install curl\n          apt-get -y install git\n          apt-get -y install gnupg\n          git config --global --add safe.directory '*'"
+        },
+        {
+          "firstLine": 66,
+          "lastLine": 75,
+          "text": "      - name: Install Python dependencies\n        run: |\n          pip install -r requirements.txt\n          pip install --no-deps tf_keras\n          pip uninstall -y keras\n\n      - name: Run Tests for applications\n        if: ${{ steps.filter.outputs.applications == 'true' && matrix.nnx_enabled == false }}\n        run: |\n          pytest keras/src/applications --cov=keras/src/applications --cov-config=pyproject.toml"
+        },
+        {
+          "firstLine": 88,
+          "lastLine": 108,
+          "text": "      - name: Run Tests for wrappers\n        if: ${{ steps.filter.outputs.wrappers == 'true' && matrix.nnx_enabled == false }}\n        run: |\n          pytest keras/src/wrappers --cov=keras/src/wrappers --cov-config=pyproject.toml\n          coverage xml --include='keras/src/wrappers/*' -o wrappers-coverage.xml\n\n      - name: Upload Coverage for wrappers\n        if: ${{ steps.filter.outputs.wrappers == 'true' && matrix.nnx_enabled == false }}\n        uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1\n        with:\n          env_vars: PYTHON,KERAS_HOME\n          flags: keras.wrappers,keras.wrappers-${{ matrix.backend }}\n          files: wrappers-coverage.xml\n          token: ${{ secrets.CODECOV_TOKEN }}\n          fail_ci_if_error: false\n\n      - name: Test integrations\n        if: ${{ matrix.backend != 'numpy' && matrix.nnx_enabled == false }}\n        run: |\n          PYTHONPATH=. python integration_tests/import_test.py\n          PYTHONPATH=. python integration_tests/numerical_test.py"
+        },
+        {
+          "firstLine": 115,
+          "lastLine": 145,
+          "text": "      - name: Test basic flow with NNX\n        if: ${{ matrix.nnx_enabled == true }}\n        env:\n          KERAS_NNX_ENABLED: true\n        run: |\n          PYTHONPATH=. python integration_tests/import_test.py\n          pytest integration_tests/basic_full_flow.py\n\n      - name: Test TF-specific integrations\n        if: ${{ matrix.backend == 'tensorflow'}}\n        run: |\n          PYTHONPATH=. python integration_tests/tf_distribute_training_test.py\n          PYTHONPATH=. python integration_tests/tf_custom_fit_test.py\n\n      - name: Test Torch-specific integrations\n        if: ${{ matrix.backend == 'torch'}}\n        run: |\n          pytest integration_tests/torch_workflow_test.py\n          PYTHONPATH=. python integration_tests/torch_custom_fit_test.py\n\n      - name: Run Tests\n        if: ${{ matrix.nnx_enabled == false }}\n        run: pytest keras -n 12 --dist loadfile --ignore keras/src/applications --ignore keras/src/wrappers --cov=keras --cov-config=pyproject.toml\n\n      - name: Run Tests Incompatible with pytest-xdist\n        if: ${{ matrix.nnx_enabled == false }}\n        run: pytest keras -m no_pytest_xdist -v --cov=keras --cov-config=pyproject.toml --cov-append\n\n      - name: Run Multi-Device Tests\n        if: ${{ matrix.backend == 'jax' }}\n        run: JAX_NUM_CPU_DEVICES=4 pytest keras -m multi_device --cov=keras --cov-config=pyproject.toml --cov-append"
+        },
+        {
+          "firstLine": 147,
+          "lastLine": 175,
+          "text": "      - name: Run Multi-Process Tests with torchrun\n        if: ${{ matrix.backend == 'torch' }}\n        # On CPU, torch counts one device per process, so the `multi_device`\n        # tests run only under torchrun. torchrun fails when a rank fails, and\n        # `--tee=3` puts the rank in front of each output line. `-x` stops a\n        # failing rank at once, so the other rank does not wait for it in a\n        # collective. The timeout stops all other hangs. Each rank writes its\n        # own coverage file, because two pytest-cov sessions that combine into\n        # one `.coverage` at the same time can corrupt it.\n        timeout-minutes: 10\n        run: |\n          torchrun --nproc_per_node=2 --master_addr=127.0.0.1 --master_port=29500 --tee=3 \\\n            -m coverage run --parallel-mode --source=keras --rcfile=pyproject.toml \\\n            -m pytest keras/src/backend/torch/torch_multi_process_distribution_test.py -m multi_device -x\n          coverage combine --append\n\n      - name: Convert Coverage\n        if: ${{ matrix.nnx_enabled == false }}\n        run: coverage xml --omit='keras/src/applications/*,keras/src/wrappers/*,keras/api' -o core-coverage.xml\n\n      - name: Upload Coverage\n        if: ${{ matrix.nnx_enabled == false }}\n        uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1\n        with:\n          env_vars: PYTHON,KERAS_HOME,KERAS_NNX_ENABLED\n          flags: keras,keras-cpu,keras-${{ matrix.backend }}${{ matrix.nnx_enabled == 'true' && '-nnx' || '' }}\n          files: core-coverage.xml\n          token: ${{ secrets.CODECOV_TOKEN }}\n          fail_ci_if_error: false"
+        }
+      ]
+    },
+    {
+      "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/keras-team/keras/.github/workflows/actions.yml",
+      "sourcePath": ".github/workflows/actions.yml",
+      "sha256": "ad84280818c4d276d6427a295d48d7547e792994dc28114e352ff4417f357806",
+      "bytes": 1650,
+      "lines": 58,
+      "spans": [
+        {
+          "firstLine": 1,
+          "lastLine": 24,
+          "text": "name: Tests\n\n# TODO: Consider enabling all tests (pytest, applications, etc.) with NNX in the future\n# Currently only basic flow tests run with NNX enabled\n\non:\n  push:\n    branches: [ master ]\n  pull_request:\n  release:\n    types: [created]\n\npermissions:\n  contents: read\n\nconcurrency:\n  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}\n  cancel-in-progress: true\n\njobs:\n  cpu_tests:\n    uses: ./.github/workflows/cpu_tests.yml # zizmor: ignore[self-repository]\n    secrets:\n      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}"
+        }
+      ]
+    },
+    {
+      "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/keras-team/keras/.github/workflows/config/jax/keras.json",
+      "sourcePath": ".github/workflows/config/jax/keras.json",
+      "sha256": "868f7cc0bfe7494b548ee9b6d0aebb2255528a840f7f1b94723c4d930416d6e4",
+      "bytes": 140,
+      "lines": 7,
+      "spans": [
+        {
+          "firstLine": 1,
+          "lastLine": 7,
+          "text": "{\n    \"floatx\": \"float32\",\n    \"epsilon\": 1e-07,\n    \"backend\": \"jax\",\n    \"image_data_format\": \"channels_last\",\n    \"nnx_enabled\": false\n}"
+        }
+      ]
+    },
+    {
+      "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/keras-team/keras/.github/workflows/config/tensorflow/keras.json",
+      "sourcePath": ".github/workflows/config/tensorflow/keras.json",
+      "sha256": "15097ddedccd607f99a46bdafe23417e8e82e580ae4e492ad128c7d127cbfd50",
+      "bytes": 121,
+      "lines": 6,
+      "spans": [
+        {
+          "firstLine": 1,
+          "lastLine": 6,
+          "text": "{\n    \"floatx\": \"float32\",\n    \"epsilon\": 1e-07,\n    \"backend\": \"tensorflow\",\n    \"image_data_format\": \"channels_last\"\n}"
+        }
+      ]
+    },
+    {
+      "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/keras-team/keras/.github/workflows/config/torch/keras.json",
+      "sourcePath": ".github/workflows/config/torch/keras.json",
+      "sha256": "b3c81d0bf76f72bce58df703813c8a87063b8f01e29a4c10cd65a30038ba2352",
+      "bytes": 117,
+      "lines": 6,
+      "spans": [
+        {
+          "firstLine": 1,
+          "lastLine": 6,
+          "text": "{\n    \"floatx\": \"float32\",\n    \"epsilon\": 1e-07,\n    \"backend\": \"torch\",\n    \"image_data_format\": \"channels_first\"\n}"
+        }
+      ]
+    }
+  ]
+}

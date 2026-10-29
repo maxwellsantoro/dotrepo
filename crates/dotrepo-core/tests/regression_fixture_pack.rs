@@ -44,6 +44,8 @@ struct RegressionExpectation {
     #[serde(default)]
     repo_build: Option<String>,
     #[serde(default)]
+    repo_build_absent: bool,
+    #[serde(default)]
     repo_test: Option<String>,
     #[serde(default)]
     repo_toolchain_min: Option<String>,
@@ -239,6 +241,16 @@ fn assert_plan_matches(plan: &ImportPlan, expectation: &RegressionExpectation) {
             plan.manifest.repo.build.as_deref(),
             Some(expected),
             "repo.build"
+        );
+    }
+    if expectation.repo_build_absent {
+        assert!(
+            expectation.repo_build.is_none(),
+            "repo.build expectation must not require both a value and absence"
+        );
+        assert_eq!(
+            plan.manifest.repo.build, None,
+            "repo.build must remain absent"
         );
     }
     if let Some(expected) = expectation.repo_test.as_deref() {

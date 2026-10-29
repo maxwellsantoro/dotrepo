@@ -1,0 +1,55 @@
+warning: patch `dotrepo-transport v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-transport)` was not used in the crate graph
+help: Check that the patched package version and available features are compatible
+      with the dependency requirements. If the patch has a different version from
+      what is locked in the Cargo.lock file, run `cargo update` to use the new
+      version. This may also occur with an optional dependency that is not enabled.
+   Compiling proc-macro2 v1.0.107
+   Compiling unicode-ident v1.0.27
+   Compiling quote v1.0.47
+   Compiling serde_core v1.0.229
+   Compiling serde v1.0.229
+   Compiling crossbeam-utils v0.8.23
+   Compiling typenum v1.20.1
+   Compiling crossbeam-epoch v0.9.21
+   Compiling equivalent v1.0.3
+   Compiling crossbeam-deque v0.8.8
+   Compiling libc v0.2.191
+   Compiling hashbrown v0.17.1
+   Compiling zmij v1.0.23
+   Compiling rayon-core v1.13.0
+   Compiling hybrid-array v0.4.15
+   Compiling thiserror v2.0.21
+   Compiling winnow v0.7.15
+   Compiling indexmap v2.14.2
+   Compiling toml_write v0.1.2
+   Compiling syn v3.0.9
+   Compiling crypto-common v0.2.2
+   Compiling block-buffer v0.12.1
+   Compiling serde_json v1.0.154
+   Compiling const-oid v0.10.2
+   Compiling memchr v2.8.3
+   Compiling anyhow v1.0.104
+   Compiling digest v0.11.3
+   Compiling cpufeatures v0.3.1
+   Compiling cfg-if v1.0.5
+   Compiling time-core v0.1.9
+   Compiling powerfmt v0.2.1
+   Compiling num-conv v0.2.2
+   Compiling deranged v0.5.9
+   Compiling itoa v1.0.18
+   Compiling either v1.19.0
+   Compiling sha2 v0.11.1
+   Compiling roxmltree v0.21.2
+   Compiling rayon v1.12.0
+   Compiling serde_derive v1.0.229
+   Compiling thiserror-impl v2.0.21
+   Compiling time v0.3.55
+   Compiling toml_datetime v0.6.11
+   Compiling serde_spanned v0.6.9
+   Compiling toml_edit v0.22.27
+   Compiling toml v0.8.23
+   Compiling dotrepo-schema v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-schema)
+   Compiling dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)
+   Compiling dotrepo-context-binding-independent-controls v0.0.0 (/Users/maxwell/projects/agent/dotrepo/index/telemetry/e1-context-binding-verifier-review-20261029/harness)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 11.35s
+     Running `/tmp/dotrepo-e1-context-binding-independent-20261029-82e91a/target/debug/dotrepo-context-binding-independent-controls /tmp/dotrepo-e1-context-binding-independent-20261029-82e91a/fixtures /tmp/dotrepo-e1-context-binding-independent-20261029-82e91a/result.json`

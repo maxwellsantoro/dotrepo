@@ -1,0 +1,12 @@
+Diff in /Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core/tests/regression_fixture_pack.rs:248:
+             expectation.repo_build.is_none(),
+             "repo.build expectation must not require both a value and absence"
+         );
+-        assert_eq!(plan.manifest.repo.build, None, "repo.build must remain absent");
++        assert_eq!(
++            plan.manifest.repo.build, None,
++            "repo.build must remain absent"
++        );
+     }
+     if let Some(expected) = expectation.repo_test.as_deref() {
+         assert_eq!(

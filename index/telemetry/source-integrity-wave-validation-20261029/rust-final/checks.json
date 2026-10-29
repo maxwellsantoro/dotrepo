@@ -1,0 +1,107 @@
+[
+  {
+    "name": "rustfmt",
+    "argv": [
+      "cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "startedAt": "2026-10-29T08:11:18.328416+00:00",
+    "elapsedSeconds": 0.4730621250346303,
+    "exitCode": 0
+  },
+  {
+    "name": "clippy",
+    "argv": [
+      "cargo",
+      "clippy",
+      "--workspace",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "startedAt": "2026-10-29T08:11:18.802167+00:00",
+    "elapsedSeconds": 1.1910514580085874,
+    "exitCode": 0
+  },
+  {
+    "name": "deny",
+    "argv": [
+      "cargo",
+      "deny",
+      "check",
+      "advisories",
+      "licenses",
+      "bans",
+      "sources"
+    ],
+    "startedAt": "2026-10-29T08:11:19.993602+00:00",
+    "elapsedSeconds": 0.7278523328714073,
+    "exitCode": 0
+  },
+  {
+    "name": "workspace",
+    "argv": [
+      "cargo",
+      "test",
+      "--workspace"
+    ],
+    "startedAt": "2026-10-29T08:11:20.721861+00:00",
+    "elapsedSeconds": 33.5222570002079,
+    "exitCode": 0
+  },
+  {
+    "name": "alias-fmt",
+    "argv": [
+      "cargo",
+      "fmt",
+      "--manifest-path",
+      "crates/dotrepo/Cargo.toml",
+      "--",
+      "--check"
+    ],
+    "startedAt": "2026-10-29T08:11:54.246135+00:00",
+    "elapsedSeconds": 0.11065187491476536,
+    "exitCode": 0
+  },
+  {
+    "name": "alias-check",
+    "argv": [
+      "cargo",
+      "check",
+      "--locked",
+      "--manifest-path",
+      "crates/dotrepo/Cargo.toml"
+    ],
+    "startedAt": "2026-10-29T08:11:54.357391+00:00",
+    "elapsedSeconds": 1.561152125010267,
+    "exitCode": 0
+  },
+  {
+    "name": "release-parity",
+    "argv": [
+      "uv",
+      "run",
+      "python",
+      "scripts/check_release_version.py"
+    ],
+    "startedAt": "2026-10-29T08:11:55.919016+00:00",
+    "elapsedSeconds": 0.06326500000432134,
+    "exitCode": 0
+  },
+  {
+    "name": "toolchain-parity",
+    "argv": [
+      "uv",
+      "run",
+      "python",
+      "scripts/check_toolchain_manifest_parity.py"
+    ],
+    "startedAt": "2026-10-29T08:11:55.982684+00:00",
+    "elapsedSeconds": 0.04359774990007281,
+    "exitCode": 0
+  }
+]

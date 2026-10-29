@@ -1,0 +1,711 @@
+warning[duplicate]: found 2 duplicate entries for crate 'syn'
+    ┌─ /Users/maxwell/projects/agent/dotrepo/Cargo.lock:111:1
+    │  
+111 │ ╭ syn 2.0.117 registry+https://github.com/rust-lang/crates.io-index
+112 │ │ syn 3.0.6 registry+https://github.com/rust-lang/crates.io-index
+    │ ╰───────────────────────────────────────────────────────────────┘ lock entries
+    │  
+    ├ syn v2.0.117
+      ├── displaydoc v0.2.5
+      │   ├── icu_collections v2.1.1
+      │   │   ├── icu_normalizer v2.1.1
+      │   │   │   └── idna_adapter v1.2.1
+      │   │   │       └── idna v1.1.0
+      │   │   │           └── url v2.5.8
+      │   │   │               ├── dotrepo-cli v2.0.0-rc.2
+      │   │   │               ├── dotrepo-lsp v2.0.0-rc.2
+      │   │   │               └── reqwest v0.12.28
+      │   │   │                   ├── dotrepo-crawler v2.0.0-rc.2
+      │   │   │                   └── dotrepo-mcp v2.0.0-rc.2
+      │   │   └── icu_properties v2.1.2
+      │   │       └── idna_adapter v1.2.1 (*)
+      │   ├── icu_locale_core v2.1.1
+      │   │   ├── icu_properties v2.1.2 (*)
+      │   │   └── icu_provider v2.1.1
+      │   │       ├── icu_normalizer v2.1.1 (*)
+      │   │       └── icu_properties v2.1.2 (*)
+      │   ├── icu_provider v2.1.1 (*)
+      │   ├── tinystr v0.8.2
+      │   │   └── icu_locale_core v2.1.1 (*)
+      │   └── zerotrie v0.2.3
+      │       ├── icu_properties v2.1.2 (*)
+      │       └── icu_provider v2.1.1 (*)
+      ├── synstructure v0.13.2
+      │   ├── yoke-derive v0.8.1
+      │   │   └── yoke v0.8.1
+      │   │       ├── icu_collections v2.1.1 (*)
+      │   │       ├── icu_provider v2.1.1 (*)
+      │   │       ├── zerotrie v0.2.3 (*)
+      │   │       └── zerovec v0.11.5
+      │   │           ├── icu_collections v2.1.1 (*)
+      │   │           ├── icu_locale_core v2.1.1 (*)
+      │   │           ├── icu_normalizer v2.1.1 (*)
+      │   │           ├── icu_properties v2.1.2 (*)
+      │   │           ├── icu_provider v2.1.1 (*)
+      │   │           ├── potential_utf v0.1.4
+      │   │           │   └── icu_collections v2.1.1 (*)
+      │   │           └── tinystr v0.8.2 (*)
+      │   └── zerofrom-derive v0.1.6
+      │       └── zerofrom v0.1.6
+      │           ├── icu_collections v2.1.1 (*)
+      │           ├── icu_provider v2.1.1 (*)
+      │           ├── yoke v0.8.1 (*)
+      │           ├── zerotrie v0.2.3 (*)
+      │           └── zerovec v0.11.5 (*)
+      ├── thiserror-impl v2.0.18
+      │   └── thiserror v2.0.18
+      │       ├── dotrepo-cli v2.0.0-rc.2 (*)
+      │       └── dotrepo-schema v2.0.0-rc.2
+      │           ├── dotrepo-cli v2.0.0-rc.2 (*)
+      │           ├── dotrepo-core v2.0.0-rc.2
+      │           │   ├── dotrepo-cli v2.0.0-rc.2 (*)
+      │           │   ├── dotrepo-crawler v2.0.0-rc.2 (*)
+      │           │   ├── dotrepo-lsp v2.0.0-rc.2 (*)
+      │           │   └── dotrepo-mcp v2.0.0-rc.2 (*)
+      │           ├── dotrepo-crawler v2.0.0-rc.2 (*)
+      │           ├── dotrepo-lsp v2.0.0-rc.2 (*)
+      │           └── dotrepo-mcp v2.0.0-rc.2 (*)
+      ├── wasm-bindgen-macro-support v0.2.114
+      │   └── wasm-bindgen-macro v0.2.114
+      │       └── wasm-bindgen v0.2.114
+      │           ├── js-sys v0.3.91
+      │           │   ├── reqwest v0.12.28 (*)
+      │           │   ├── wasm-bindgen-futures v0.4.64
+      │           │   │   └── reqwest v0.12.28 (*)
+      │           │   └── web-sys v0.3.91
+      │           │       ├── reqwest v0.12.28 (*)
+      │           │       └── wasm-bindgen-futures v0.4.64 (*)
+      │           ├── reqwest v0.12.28 (*)
+      │           ├── wasm-bindgen-futures v0.4.64 (*)
+      │           └── web-sys v0.3.91 (*)
+      ├── yoke-derive v0.8.1 (*)
+      ├── zerofrom-derive v0.1.6 (*)
+      └── zerovec-derive v0.11.2
+          └── zerovec v0.11.5 (*)
+    ├ syn v3.0.6
+      ├── clap_derive v4.6.7
+      │   └── clap v4.6.7
+      │       ├── dotrepo-cli v2.0.0-rc.2
+      │       └── dotrepo-crawler v2.0.0-rc.2
+      └── serde_derive v1.0.229
+          └── serde v1.0.229
+              ├── dotrepo-cli v2.0.0-rc.2 (*)
+              ├── (dev) dotrepo-core v2.0.0-rc.2
+              │   ├── dotrepo-cli v2.0.0-rc.2 (*)
+              │   ├── dotrepo-crawler v2.0.0-rc.2 (*)
+              │   ├── dotrepo-lsp v2.0.0-rc.2
+              │   └── dotrepo-mcp v2.0.0-rc.2
+              ├── dotrepo-crawler v2.0.0-rc.2 (*)
+              ├── dotrepo-lsp v2.0.0-rc.2 (*)
+              ├── dotrepo-mcp v2.0.0-rc.2 (*)
+              ├── dotrepo-schema v2.0.0-rc.2
+              │   ├── dotrepo-cli v2.0.0-rc.2 (*)
+              │   ├── dotrepo-core v2.0.0-rc.2 (*)
+              │   ├── dotrepo-crawler v2.0.0-rc.2 (*)
+              │   ├── dotrepo-lsp v2.0.0-rc.2 (*)
+              │   └── dotrepo-mcp v2.0.0-rc.2 (*)
+              ├── dotrepo-transport v2.0.0-rc.2
+              │   ├── dotrepo-lsp v2.0.0-rc.2 (*)
+              │   └── dotrepo-mcp v2.0.0-rc.2 (*)
+              ├── reqwest v0.12.28
+              │   ├── dotrepo-crawler v2.0.0-rc.2 (*)
+              │   └── dotrepo-mcp v2.0.0-rc.2 (*)
+              ├── serde_spanned v0.6.9
+              │   ├── toml v0.8.23
+              │   │   ├── dotrepo-core v2.0.0-rc.2 (*)
+              │   │   ├── dotrepo-crawler v2.0.0-rc.2 (*)
+              │   │   └── dotrepo-schema v2.0.0-rc.2 (*)
+              │   └── toml_edit v0.22.27
+              │       └── toml v0.8.23 (*)
+              ├── serde_urlencoded v0.7.1
+              │   └── reqwest v0.12.28 (*)
+              ├── toml v0.8.23 (*)
+              ├── toml_datetime v0.6.11
+              │   ├── toml v0.8.23 (*)
+              │   └── toml_edit v0.22.27 (*)
+              └── toml_edit v0.22.27 (*)
+
+warning[duplicate]: found 3 duplicate entries for crate 'windows-sys'
+    ┌─ /Users/maxwell/projects/agent/dotrepo/Cargo.lock:150:1
+    │  
+150 │ ╭ windows-sys 0.52.0 registry+https://github.com/rust-lang/crates.io-index
+151 │ │ windows-sys 0.60.2 registry+https://github.com/rust-lang/crates.io-index
+152 │ │ windows-sys 0.61.2 registry+https://github.com/rust-lang/crates.io-index
+    │ ╰────────────────────────────────────────────────────────────────────────┘ lock entries
+    │  
+    ├ windows-sys v0.52.0
+      └── ring v0.17.14
+          ├── rustls v0.23.46
+          │   ├── hyper-rustls v0.27.7
+          │   │   └── reqwest v0.12.28
+          │   │       ├── dotrepo-crawler v2.0.0-rc.2
+          │   │       └── dotrepo-mcp v2.0.0-rc.2
+          │   ├── reqwest v0.12.28 (*)
+          │   └── tokio-rustls v0.26.4
+          │       ├── hyper-rustls v0.27.7 (*)
+          │       └── reqwest v0.12.28 (*)
+          └── rustls-webpki v0.103.16
+              └── rustls v0.23.46 (*)
+    ├ windows-sys v0.60.2
+      ├── anstyle-query v1.1.5
+      │   └── anstream v1.0.0
+      │       └── clap_builder v4.6.7
+      │           └── clap v4.6.7
+      │               ├── dotrepo-cli v2.0.0-rc.2
+      │               └── dotrepo-crawler v2.0.0-rc.2
+      ├── anstyle-wincon v3.0.11
+      │   └── anstream v1.0.0 (*)
+      └── socket2 v0.6.3
+          ├── hyper-util v0.1.20
+          │   ├── hyper-rustls v0.27.7
+          │   │   └── reqwest v0.12.28
+          │   │       ├── dotrepo-crawler v2.0.0-rc.2 (*)
+          │   │       └── dotrepo-mcp v2.0.0-rc.2
+          │   └── reqwest v0.12.28 (*)
+          └── tokio v1.50.0
+              ├── hyper v1.8.1
+              │   ├── hyper-rustls v0.27.7 (*)
+              │   ├── hyper-util v0.1.20 (*)
+              │   └── reqwest v0.12.28 (*)
+              ├── hyper-rustls v0.27.7 (*)
+              ├── hyper-util v0.1.20 (*)
+              ├── reqwest v0.12.28 (*)
+              ├── tokio-rustls v0.26.4
+              │   ├── hyper-rustls v0.27.7 (*)
+              │   └── reqwest v0.12.28 (*)
+              └── tower v0.5.3
+                  ├── reqwest v0.12.28 (*)
+                  └── tower-http v0.6.8
+                      └── reqwest v0.12.28 (*)
+    ├ windows-sys v0.61.2
+      ├── dotrepo-core v2.0.0-rc.2
+      │   ├── dotrepo-cli v2.0.0-rc.2
+      │   ├── dotrepo-crawler v2.0.0-rc.2
+      │   ├── dotrepo-lsp v2.0.0-rc.2
+      │   └── dotrepo-mcp v2.0.0-rc.2
+      ├── mio v1.1.1
+      │   └── tokio v1.50.0
+      │       ├── hyper v1.8.1
+      │       │   ├── hyper-rustls v0.27.7
+      │       │   │   └── reqwest v0.12.28
+      │       │   │       ├── dotrepo-crawler v2.0.0-rc.2 (*)
+      │       │   │       └── dotrepo-mcp v2.0.0-rc.2 (*)
+      │       │   ├── hyper-util v0.1.20
+      │       │   │   ├── hyper-rustls v0.27.7 (*)
+      │       │   │   └── reqwest v0.12.28 (*)
+      │       │   └── reqwest v0.12.28 (*)
+      │       ├── hyper-rustls v0.27.7 (*)
+      │       ├── hyper-util v0.1.20 (*)
+      │       ├── reqwest v0.12.28 (*)
+      │       ├── tokio-rustls v0.26.4
+      │       │   ├── hyper-rustls v0.27.7 (*)
+      │       │   └── reqwest v0.12.28 (*)
+      │       └── tower v0.5.3
+      │           ├── reqwest v0.12.28 (*)
+      │           └── tower-http v0.6.8
+      │               └── reqwest v0.12.28 (*)
+      └── tokio v1.50.0 (*)
+
+warning[duplicate]: found 2 duplicate entries for crate 'windows-targets'
+    ┌─ /Users/maxwell/projects/agent/dotrepo/Cargo.lock:153:1
+    │  
+153 │ ╭ windows-targets 0.52.6 registry+https://github.com/rust-lang/crates.io-index
+154 │ │ windows-targets 0.53.5 registry+https://github.com/rust-lang/crates.io-index
+    │ ╰────────────────────────────────────────────────────────────────────────────┘ lock entries
+    │  
+    ├ windows-targets v0.52.6
+      └── windows-sys v0.52.0
+          └── ring v0.17.14
+              ├── rustls v0.23.46
+              │   ├── hyper-rustls v0.27.7
+              │   │   └── reqwest v0.12.28
+              │   │       ├── dotrepo-crawler v2.0.0-rc.2
+              │   │       └── dotrepo-mcp v2.0.0-rc.2
+              │   ├── reqwest v0.12.28 (*)
+              │   └── tokio-rustls v0.26.4
+              │       ├── hyper-rustls v0.27.7 (*)
+              │       └── reqwest v0.12.28 (*)
+              └── rustls-webpki v0.103.16
+                  └── rustls v0.23.46 (*)
+    ├ windows-targets v0.53.5
+      └── windows-sys v0.60.2
+          ├── anstyle-query v1.1.5
+          │   └── anstream v1.0.0
+          │       └── clap_builder v4.6.7
+          │           └── clap v4.6.7
+          │               ├── dotrepo-cli v2.0.0-rc.2
+          │               └── dotrepo-crawler v2.0.0-rc.2
+          ├── anstyle-wincon v3.0.11
+          │   └── anstream v1.0.0 (*)
+          └── socket2 v0.6.3
+              ├── hyper-util v0.1.20
+              │   ├── hyper-rustls v0.27.7
+              │   │   └── reqwest v0.12.28
+              │   │       ├── dotrepo-crawler v2.0.0-rc.2 (*)
+              │   │       └── dotrepo-mcp v2.0.0-rc.2
+              │   └── reqwest v0.12.28 (*)
+              └── tokio v1.50.0
+                  ├── hyper v1.8.1
+                  │   ├── hyper-rustls v0.27.7 (*)
+                  │   ├── hyper-util v0.1.20 (*)
+                  │   └── reqwest v0.12.28 (*)
+                  ├── hyper-rustls v0.27.7 (*)
+                  ├── hyper-util v0.1.20 (*)
+                  ├── reqwest v0.12.28 (*)
+                  ├── tokio-rustls v0.26.4
+                  │   ├── hyper-rustls v0.27.7 (*)
+                  │   └── reqwest v0.12.28 (*)
+                  └── tower v0.5.3
+                      ├── reqwest v0.12.28 (*)
+                      └── tower-http v0.6.8
+                          └── reqwest v0.12.28 (*)
+
+warning[duplicate]: found 2 duplicate entries for crate 'windows_aarch64_gnullvm'
+    ┌─ /Users/maxwell/projects/agent/dotrepo/Cargo.lock:155:1
+    │  
+155 │ ╭ windows_aarch64_gnullvm 0.52.6 registry+https://github.com/rust-lang/crates.io-index
+156 │ │ windows_aarch64_gnullvm 0.53.1 registry+https://github.com/rust-lang/crates.io-index
+    │ ╰────────────────────────────────────────────────────────────────────────────────────┘ lock entries
+    │  
+    ├ windows_aarch64_gnullvm v0.52.6
+      └── windows-targets v0.52.6
+          └── windows-sys v0.52.0
+              └── ring v0.17.14
+                  ├── rustls v0.23.46
+                  │   ├── hyper-rustls v0.27.7
+                  │   │   └── reqwest v0.12.28
+                  │   │       ├── dotrepo-crawler v2.0.0-rc.2
+                  │   │       └── dotrepo-mcp v2.0.0-rc.2
+                  │   ├── reqwest v0.12.28 (*)
+                  │   └── tokio-rustls v0.26.4
+                  │       ├── hyper-rustls v0.27.7 (*)
+                  │       └── reqwest v0.12.28 (*)
+                  └── rustls-webpki v0.103.16
+                      └── rustls v0.23.46 (*)
+    ├ windows_aarch64_gnullvm v0.53.1
+      └── windows-targets v0.53.5
+          └── windows-sys v0.60.2
+              ├── anstyle-query v1.1.5
+              │   └── anstream v1.0.0
+              │       └── clap_builder v4.6.7
+              │           └── clap v4.6.7
+              │               ├── dotrepo-cli v2.0.0-rc.2
+              │               └── dotrepo-crawler v2.0.0-rc.2
+              ├── anstyle-wincon v3.0.11
+              │   └── anstream v1.0.0 (*)
+              └── socket2 v0.6.3
+                  ├── hyper-util v0.1.20
+                  │   ├── hyper-rustls v0.27.7
+                  │   │   └── reqwest v0.12.28
+                  │   │       ├── dotrepo-crawler v2.0.0-rc.2 (*)
+                  │   │       └── dotrepo-mcp v2.0.0-rc.2
+                  │   └── reqwest v0.12.28 (*)
+                  └── tokio v1.50.0
+                      ├── hyper v1.8.1
+                      │   ├── hyper-rustls v0.27.7 (*)
+                      │   ├── hyper-util v0.1.20 (*)
+                      │   └── reqwest v0.12.28 (*)
+                      ├── hyper-rustls v0.27.7 (*)
+                      ├── hyper-util v0.1.20 (*)
+                      ├── reqwest v0.12.28 (*)
+                      ├── tokio-rustls v0.26.4
+                      │   ├── hyper-rustls v0.27.7 (*)
+                      │   └── reqwest v0.12.28 (*)
+                      └── tower v0.5.3
+                          ├── reqwest v0.12.28 (*)
+                          └── tower-http v0.6.8
+                              └── reqwest v0.12.28 (*)
+
+warning[duplicate]: found 2 duplicate entries for crate 'windows_aarch64_msvc'
+    ┌─ /Users/maxwell/projects/agent/dotrepo/Cargo.lock:157:1
+    │  
+157 │ ╭ windows_aarch64_msvc 0.52.6 registry+https://github.com/rust-lang/crates.io-index
+158 │ │ windows_aarch64_msvc 0.53.1 registry+https://github.com/rust-lang/crates.io-index
+    │ ╰─────────────────────────────────────────────────────────────────────────────────┘ lock entries
+    │  
+    ├ windows_aarch64_msvc v0.52.6
+      └── windows-targets v0.52.6
+          └── windows-sys v0.52.0
+              └── ring v0.17.14
+                  ├── rustls v0.23.46
+                  │   ├── hyper-rustls v0.27.7
+                  │   │   └── reqwest v0.12.28
+                  │   │       ├── dotrepo-crawler v2.0.0-rc.2
+                  │   │       └── dotrepo-mcp v2.0.0-rc.2
+                  │   ├── reqwest v0.12.28 (*)
+                  │   └── tokio-rustls v0.26.4
+                  │       ├── hyper-rustls v0.27.7 (*)
+                  │       └── reqwest v0.12.28 (*)
+                  └── rustls-webpki v0.103.16
+                      └── rustls v0.23.46 (*)
+    ├ windows_aarch64_msvc v0.53.1
+      └── windows-targets v0.53.5
+          └── windows-sys v0.60.2
+              ├── anstyle-query v1.1.5
+              │   └── anstream v1.0.0
+              │       └── clap_builder v4.6.7
+              │           └── clap v4.6.7
+              │               ├── dotrepo-cli v2.0.0-rc.2
+              │               └── dotrepo-crawler v2.0.0-rc.2
+              ├── anstyle-wincon v3.0.11
+              │   └── anstream v1.0.0 (*)
+              └── socket2 v0.6.3
+                  ├── hyper-util v0.1.20
+                  │   ├── hyper-rustls v0.27.7
+                  │   │   └── reqwest v0.12.28
+                  │   │       ├── dotrepo-crawler v2.0.0-rc.2 (*)
+                  │   │       └── dotrepo-mcp v2.0.0-rc.2
+                  │   └── reqwest v0.12.28 (*)
+                  └── tokio v1.50.0
+                      ├── hyper v1.8.1
+                      │   ├── hyper-rustls v0.27.7 (*)
+                      │   ├── hyper-util v0.1.20 (*)
+                      │   └── reqwest v0.12.28 (*)
+                      ├── hyper-rustls v0.27.7 (*)
+                      ├── hyper-util v0.1.20 (*)
+                      ├── reqwest v0.12.28 (*)
+                      ├── tokio-rustls v0.26.4
+                      │   ├── hyper-rustls v0.27.7 (*)
+                      │   └── reqwest v0.12.28 (*)
+                      └── tower v0.5.3
+                          ├── reqwest v0.12.28 (*)
+                          └── tower-http v0.6.8
+                              └── reqwest v0.12.28 (*)
+
+warning[duplicate]: found 2 duplicate entries for crate 'windows_i686_gnu'
+    ┌─ /Users/maxwell/projects/agent/dotrepo/Cargo.lock:159:1
+    │  
+159 │ ╭ windows_i686_gnu 0.52.6 registry+https://github.com/rust-lang/crates.io-index
+160 │ │ windows_i686_gnu 0.53.1 registry+https://github.com/rust-lang/crates.io-index
+    │ ╰─────────────────────────────────────────────────────────────────────────────┘ lock entries
+    │  
+    ├ windows_i686_gnu v0.52.6
+      └── windows-targets v0.52.6
+          └── windows-sys v0.52.0
+              └── ring v0.17.14
+                  ├── rustls v0.23.46
+                  │   ├── hyper-rustls v0.27.7
+                  │   │   └── reqwest v0.12.28
+                  │   │       ├── dotrepo-crawler v2.0.0-rc.2
+                  │   │       └── dotrepo-mcp v2.0.0-rc.2
+                  │   ├── reqwest v0.12.28 (*)
+                  │   └── tokio-rustls v0.26.4
+                  │       ├── hyper-rustls v0.27.7 (*)
+                  │       └── reqwest v0.12.28 (*)
+                  └── rustls-webpki v0.103.16
+                      └── rustls v0.23.46 (*)
+    ├ windows_i686_gnu v0.53.1
+      └── windows-targets v0.53.5
+          └── windows-sys v0.60.2
+              ├── anstyle-query v1.1.5
+              │   └── anstream v1.0.0
+              │       └── clap_builder v4.6.7
+              │           └── clap v4.6.7
+              │               ├── dotrepo-cli v2.0.0-rc.2
+              │               └── dotrepo-crawler v2.0.0-rc.2
+              ├── anstyle-wincon v3.0.11
+              │   └── anstream v1.0.0 (*)
+              └── socket2 v0.6.3
+                  ├── hyper-util v0.1.20
+                  │   ├── hyper-rustls v0.27.7
+                  │   │   └── reqwest v0.12.28
+                  │   │       ├── dotrepo-crawler v2.0.0-rc.2 (*)
+                  │   │       └── dotrepo-mcp v2.0.0-rc.2
+                  │   └── reqwest v0.12.28 (*)
+                  └── tokio v1.50.0
+                      ├── hyper v1.8.1
+                      │   ├── hyper-rustls v0.27.7 (*)
+                      │   ├── hyper-util v0.1.20 (*)
+                      │   └── reqwest v0.12.28 (*)
+                      ├── hyper-rustls v0.27.7 (*)
+                      ├── hyper-util v0.1.20 (*)
+                      ├── reqwest v0.12.28 (*)
+                      ├── tokio-rustls v0.26.4
+                      │   ├── hyper-rustls v0.27.7 (*)
+                      │   └── reqwest v0.12.28 (*)
+                      └── tower v0.5.3
+                          ├── reqwest v0.12.28 (*)
+                          └── tower-http v0.6.8
+                              └── reqwest v0.12.28 (*)
+
+warning[duplicate]: found 2 duplicate entries for crate 'windows_i686_gnullvm'
+    ┌─ /Users/maxwell/projects/agent/dotrepo/Cargo.lock:161:1
+    │  
+161 │ ╭ windows_i686_gnullvm 0.52.6 registry+https://github.com/rust-lang/crates.io-index
+162 │ │ windows_i686_gnullvm 0.53.1 registry+https://github.com/rust-lang/crates.io-index
+    │ ╰─────────────────────────────────────────────────────────────────────────────────┘ lock entries
+    │  
+    ├ windows_i686_gnullvm v0.52.6
+      └── windows-targets v0.52.6
+          └── windows-sys v0.52.0
+              └── ring v0.17.14
+                  ├── rustls v0.23.46
+                  │   ├── hyper-rustls v0.27.7
+                  │   │   └── reqwest v0.12.28
+                  │   │       ├── dotrepo-crawler v2.0.0-rc.2
+                  │   │       └── dotrepo-mcp v2.0.0-rc.2
+                  │   ├── reqwest v0.12.28 (*)
+                  │   └── tokio-rustls v0.26.4
+                  │       ├── hyper-rustls v0.27.7 (*)
+                  │       └── reqwest v0.12.28 (*)
+                  └── rustls-webpki v0.103.16
+                      └── rustls v0.23.46 (*)
+    ├ windows_i686_gnullvm v0.53.1
+      └── windows-targets v0.53.5
+          └── windows-sys v0.60.2
+              ├── anstyle-query v1.1.5
+              │   └── anstream v1.0.0
+              │       └── clap_builder v4.6.7
+              │           └── clap v4.6.7
+              │               ├── dotrepo-cli v2.0.0-rc.2
+              │               └── dotrepo-crawler v2.0.0-rc.2
+              ├── anstyle-wincon v3.0.11
+              │   └── anstream v1.0.0 (*)
+              └── socket2 v0.6.3
+                  ├── hyper-util v0.1.20
+                  │   ├── hyper-rustls v0.27.7
+                  │   │   └── reqwest v0.12.28
+                  │   │       ├── dotrepo-crawler v2.0.0-rc.2 (*)
+                  │   │       └── dotrepo-mcp v2.0.0-rc.2
+                  │   └── reqwest v0.12.28 (*)
+                  └── tokio v1.50.0
+                      ├── hyper v1.8.1
+                      │   ├── hyper-rustls v0.27.7 (*)
+                      │   ├── hyper-util v0.1.20 (*)
+                      │   └── reqwest v0.12.28 (*)
+                      ├── hyper-rustls v0.27.7 (*)
+                      ├── hyper-util v0.1.20 (*)
+                      ├── reqwest v0.12.28 (*)
+                      ├── tokio-rustls v0.26.4
+                      │   ├── hyper-rustls v0.27.7 (*)
+                      │   └── reqwest v0.12.28 (*)
+                      └── tower v0.5.3
+                          ├── reqwest v0.12.28 (*)
+                          └── tower-http v0.6.8
+                              └── reqwest v0.12.28 (*)
+
+warning[duplicate]: found 2 duplicate entries for crate 'windows_i686_msvc'
+    ┌─ /Users/maxwell/projects/agent/dotrepo/Cargo.lock:163:1
+    │  
+163 │ ╭ windows_i686_msvc 0.52.6 registry+https://github.com/rust-lang/crates.io-index
+164 │ │ windows_i686_msvc 0.53.1 registry+https://github.com/rust-lang/crates.io-index
+    │ ╰──────────────────────────────────────────────────────────────────────────────┘ lock entries
+    │  
+    ├ windows_i686_msvc v0.52.6
+      └── windows-targets v0.52.6
+          └── windows-sys v0.52.0
+              └── ring v0.17.14
+                  ├── rustls v0.23.46
+                  │   ├── hyper-rustls v0.27.7
+                  │   │   └── reqwest v0.12.28
+                  │   │       ├── dotrepo-crawler v2.0.0-rc.2
+                  │   │       └── dotrepo-mcp v2.0.0-rc.2
+                  │   ├── reqwest v0.12.28 (*)
+                  │   └── tokio-rustls v0.26.4
+                  │       ├── hyper-rustls v0.27.7 (*)
+                  │       └── reqwest v0.12.28 (*)
+                  └── rustls-webpki v0.103.16
+                      └── rustls v0.23.46 (*)
+    ├ windows_i686_msvc v0.53.1
+      └── windows-targets v0.53.5
+          └── windows-sys v0.60.2
+              ├── anstyle-query v1.1.5
+              │   └── anstream v1.0.0
+              │       └── clap_builder v4.6.7
+              │           └── clap v4.6.7
+              │               ├── dotrepo-cli v2.0.0-rc.2
+              │               └── dotrepo-crawler v2.0.0-rc.2
+              ├── anstyle-wincon v3.0.11
+              │   └── anstream v1.0.0 (*)
+              └── socket2 v0.6.3
+                  ├── hyper-util v0.1.20
+                  │   ├── hyper-rustls v0.27.7
+                  │   │   └── reqwest v0.12.28
+                  │   │       ├── dotrepo-crawler v2.0.0-rc.2 (*)
+                  │   │       └── dotrepo-mcp v2.0.0-rc.2
+                  │   └── reqwest v0.12.28 (*)
+                  └── tokio v1.50.0
+                      ├── hyper v1.8.1
+                      │   ├── hyper-rustls v0.27.7 (*)
+                      │   ├── hyper-util v0.1.20 (*)
+                      │   └── reqwest v0.12.28 (*)
+                      ├── hyper-rustls v0.27.7 (*)
+                      ├── hyper-util v0.1.20 (*)
+                      ├── reqwest v0.12.28 (*)
+                      ├── tokio-rustls v0.26.4
+                      │   ├── hyper-rustls v0.27.7 (*)
+                      │   └── reqwest v0.12.28 (*)
+                      └── tower v0.5.3
+                          ├── reqwest v0.12.28 (*)
+                          └── tower-http v0.6.8
+                              └── reqwest v0.12.28 (*)
+
+warning[duplicate]: found 2 duplicate entries for crate 'windows_x86_64_gnu'
+    ┌─ /Users/maxwell/projects/agent/dotrepo/Cargo.lock:165:1
+    │  
+165 │ ╭ windows_x86_64_gnu 0.52.6 registry+https://github.com/rust-lang/crates.io-index
+166 │ │ windows_x86_64_gnu 0.53.1 registry+https://github.com/rust-lang/crates.io-index
+    │ ╰───────────────────────────────────────────────────────────────────────────────┘ lock entries
+    │  
+    ├ windows_x86_64_gnu v0.52.6
+      └── windows-targets v0.52.6
+          └── windows-sys v0.52.0
+              └── ring v0.17.14
+                  ├── rustls v0.23.46
+                  │   ├── hyper-rustls v0.27.7
+                  │   │   └── reqwest v0.12.28
+                  │   │       ├── dotrepo-crawler v2.0.0-rc.2
+                  │   │       └── dotrepo-mcp v2.0.0-rc.2
+                  │   ├── reqwest v0.12.28 (*)
+                  │   └── tokio-rustls v0.26.4
+                  │       ├── hyper-rustls v0.27.7 (*)
+                  │       └── reqwest v0.12.28 (*)
+                  └── rustls-webpki v0.103.16
+                      └── rustls v0.23.46 (*)
+    ├ windows_x86_64_gnu v0.53.1
+      └── windows-targets v0.53.5
+          └── windows-sys v0.60.2
+              ├── anstyle-query v1.1.5
+              │   └── anstream v1.0.0
+              │       └── clap_builder v4.6.7
+              │           └── clap v4.6.7
+              │               ├── dotrepo-cli v2.0.0-rc.2
+              │               └── dotrepo-crawler v2.0.0-rc.2
+              ├── anstyle-wincon v3.0.11
+              │   └── anstream v1.0.0 (*)
+              └── socket2 v0.6.3
+                  ├── hyper-util v0.1.20
+                  │   ├── hyper-rustls v0.27.7
+                  │   │   └── reqwest v0.12.28
+                  │   │       ├── dotrepo-crawler v2.0.0-rc.2 (*)
+                  │   │       └── dotrepo-mcp v2.0.0-rc.2
+                  │   └── reqwest v0.12.28 (*)
+                  └── tokio v1.50.0
+                      ├── hyper v1.8.1
+                      │   ├── hyper-rustls v0.27.7 (*)
+                      │   ├── hyper-util v0.1.20 (*)
+                      │   └── reqwest v0.12.28 (*)
+                      ├── hyper-rustls v0.27.7 (*)
+                      ├── hyper-util v0.1.20 (*)
+                      ├── reqwest v0.12.28 (*)
+                      ├── tokio-rustls v0.26.4
+                      │   ├── hyper-rustls v0.27.7 (*)
+                      │   └── reqwest v0.12.28 (*)
+                      └── tower v0.5.3
+                          ├── reqwest v0.12.28 (*)
+                          └── tower-http v0.6.8
+                              └── reqwest v0.12.28 (*)
+
+warning[duplicate]: found 2 duplicate entries for crate 'windows_x86_64_gnullvm'
+    ┌─ /Users/maxwell/projects/agent/dotrepo/Cargo.lock:167:1
+    │  
+167 │ ╭ windows_x86_64_gnullvm 0.52.6 registry+https://github.com/rust-lang/crates.io-index
+168 │ │ windows_x86_64_gnullvm 0.53.1 registry+https://github.com/rust-lang/crates.io-index
+    │ ╰───────────────────────────────────────────────────────────────────────────────────┘ lock entries
+    │  
+    ├ windows_x86_64_gnullvm v0.52.6
+      └── windows-targets v0.52.6
+          └── windows-sys v0.52.0
+              └── ring v0.17.14
+                  ├── rustls v0.23.46
+                  │   ├── hyper-rustls v0.27.7
+                  │   │   └── reqwest v0.12.28
+                  │   │       ├── dotrepo-crawler v2.0.0-rc.2
+                  │   │       └── dotrepo-mcp v2.0.0-rc.2
+                  │   ├── reqwest v0.12.28 (*)
+                  │   └── tokio-rustls v0.26.4
+                  │       ├── hyper-rustls v0.27.7 (*)
+                  │       └── reqwest v0.12.28 (*)
+                  └── rustls-webpki v0.103.16
+                      └── rustls v0.23.46 (*)
+    ├ windows_x86_64_gnullvm v0.53.1
+      └── windows-targets v0.53.5
+          └── windows-sys v0.60.2
+              ├── anstyle-query v1.1.5
+              │   └── anstream v1.0.0
+              │       └── clap_builder v4.6.7
+              │           └── clap v4.6.7
+              │               ├── dotrepo-cli v2.0.0-rc.2
+              │               └── dotrepo-crawler v2.0.0-rc.2
+              ├── anstyle-wincon v3.0.11
+              │   └── anstream v1.0.0 (*)
+              └── socket2 v0.6.3
+                  ├── hyper-util v0.1.20
+                  │   ├── hyper-rustls v0.27.7
+                  │   │   └── reqwest v0.12.28
+                  │   │       ├── dotrepo-crawler v2.0.0-rc.2 (*)
+                  │   │       └── dotrepo-mcp v2.0.0-rc.2
+                  │   └── reqwest v0.12.28 (*)
+                  └── tokio v1.50.0
+                      ├── hyper v1.8.1
+                      │   ├── hyper-rustls v0.27.7 (*)
+                      │   ├── hyper-util v0.1.20 (*)
+                      │   └── reqwest v0.12.28 (*)
+                      ├── hyper-rustls v0.27.7 (*)
+                      ├── hyper-util v0.1.20 (*)
+                      ├── reqwest v0.12.28 (*)
+                      ├── tokio-rustls v0.26.4
+                      │   ├── hyper-rustls v0.27.7 (*)
+                      │   └── reqwest v0.12.28 (*)
+                      └── tower v0.5.3
+                          ├── reqwest v0.12.28 (*)
+                          └── tower-http v0.6.8
+                              └── reqwest v0.12.28 (*)
+
+warning[duplicate]: found 2 duplicate entries for crate 'windows_x86_64_msvc'
+    ┌─ /Users/maxwell/projects/agent/dotrepo/Cargo.lock:169:1
+    │  
+169 │ ╭ windows_x86_64_msvc 0.52.6 registry+https://github.com/rust-lang/crates.io-index
+170 │ │ windows_x86_64_msvc 0.53.1 registry+https://github.com/rust-lang/crates.io-index
+    │ ╰────────────────────────────────────────────────────────────────────────────────┘ lock entries
+    │  
+    ├ windows_x86_64_msvc v0.52.6
+      └── windows-targets v0.52.6
+          └── windows-sys v0.52.0
+              └── ring v0.17.14
+                  ├── rustls v0.23.46
+                  │   ├── hyper-rustls v0.27.7
+                  │   │   └── reqwest v0.12.28
+                  │   │       ├── dotrepo-crawler v2.0.0-rc.2
+                  │   │       └── dotrepo-mcp v2.0.0-rc.2
+                  │   ├── reqwest v0.12.28 (*)
+                  │   └── tokio-rustls v0.26.4
+                  │       ├── hyper-rustls v0.27.7 (*)
+                  │       └── reqwest v0.12.28 (*)
+                  └── rustls-webpki v0.103.16
+                      └── rustls v0.23.46 (*)
+    ├ windows_x86_64_msvc v0.53.1
+      └── windows-targets v0.53.5
+          └── windows-sys v0.60.2
+              ├── anstyle-query v1.1.5
+              │   └── anstream v1.0.0
+              │       └── clap_builder v4.6.7
+              │           └── clap v4.6.7
+              │               ├── dotrepo-cli v2.0.0-rc.2
+              │               └── dotrepo-crawler v2.0.0-rc.2
+              ├── anstyle-wincon v3.0.11
+              │   └── anstream v1.0.0 (*)
+              └── socket2 v0.6.3
+                  ├── hyper-util v0.1.20
+                  │   ├── hyper-rustls v0.27.7
+                  │   │   └── reqwest v0.12.28
+                  │   │       ├── dotrepo-crawler v2.0.0-rc.2 (*)
+                  │   │       └── dotrepo-mcp v2.0.0-rc.2
+                  │   └── reqwest v0.12.28 (*)
+                  └── tokio v1.50.0
+                      ├── hyper v1.8.1
+                      │   ├── hyper-rustls v0.27.7 (*)
+                      │   ├── hyper-util v0.1.20 (*)
+                      │   └── reqwest v0.12.28 (*)
+                      ├── hyper-rustls v0.27.7 (*)
+                      ├── hyper-util v0.1.20 (*)
+                      ├── reqwest v0.12.28 (*)
+                      ├── tokio-rustls v0.26.4
+                      │   ├── hyper-rustls v0.27.7 (*)
+                      │   └── reqwest v0.12.28 (*)
+                      └── tower v0.5.3
+                          ├── reqwest v0.12.28 (*)
+                          └── tower-http v0.6.8
+                              └── reqwest v0.12.28 (*)
+
+advisories ok, bans ok, licenses ok, sources ok

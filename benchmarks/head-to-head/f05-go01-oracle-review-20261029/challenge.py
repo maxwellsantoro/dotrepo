@@ -1,0 +1,102 @@
+"""Owned synthetic native-format challenges; no processes or upstream execution."""
+
+from copy import deepcopy
+import importlib.util
+import json
+from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parents[3]
+AUTHOR = ROOT / "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029"
+sys.path.insert(0, str(AUTHOR))
+spec = importlib.util.spec_from_file_location("go01_author_controls", AUTHOR / "controls.py")
+controls = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(controls)
+
+
+def main():
+    results = []
+
+    def check(name, mutate=None, expect=False):
+        data = controls.fixture()
+        if mutate:
+            mutate(*data)
+        result = controls.score(data)
+        assert result["taskOutcomeObserved"] is False
+        results.append(
+            {
+                "case": name,
+                "expectedCandidateCompletion": expect,
+                "observed": result,
+                "matchesExpected": (result["candidateOutcomeObserved"] is expect)
+                if expect is not None
+                else None,
+                "events": deepcopy(data[0]),
+            }
+        )
+
+    check("valid-positive-control", expect=True)
+
+    def starts_after_parent_terminal(events, collection, policy, execution):
+        parent_end = events.pop(4)
+        events.insert(2, parent_end)
+
+    check("child-starts-after-parent-terminal", starts_after_parent_terminal)
+
+    def ends_after_parent_terminal(events, collection, policy, execution):
+        events[3], events[4] = events[4], events[3]
+
+    check("parent-terminal-while-child-running", ends_after_parent_terminal)
+
+    def failing_child_passing_parent(events, collection, policy, execution):
+        events.insert(
+            3,
+            controls.row(
+                controls.P,
+                "output",
+                "TestSyntheticActive/child",
+                "--- FAIL: TestSyntheticActive/child (0.01s)\n",
+            ),
+        )
+        next(
+            row
+            for row in events
+            if row.get("Test") == "TestSyntheticActive/child" and row["Action"] == "pass"
+        )["Action"] = "fail"
+        next(
+            row
+            for row in events
+            if row["Package"] == controls.P and row["Action"] == "pass" and "Test" not in row
+        )["Action"] = "fail"
+        execution["exitCode"] = 1
+
+    check("failing-child-with-passing-parent", failing_child_passing_parent)
+
+    def excluded_child_only(events, collection, policy, execution):
+        events[:] = [row for row in events if row["Package"] == controls.Q]
+        collection["packages"] = {controls.Q: ["TestATA"]}
+        policy["exclusions"] = [row for row in policy["exclusions"] if row["test"] == controls.TODO]
+
+    check("only-excluded-child-under-passing-parent", excluded_child_only, expect=None)
+
+    def missing_child_terminal(events, collection, policy, execution):
+        events.pop(3)
+
+    check("missing-child-terminal-negative-control", missing_child_terminal)
+    output = {
+        "scope": "synthetic state/coverage challenges only; no native outcome",
+        "oracle": str(AUTHOR / "oracle.py"),
+        "results": results,
+        "observedAcceptanceGaps": [
+            row["case"] for row in results if row["matchesExpected"] is False
+        ],
+        "taskOutcomeObserved": False,
+        "calls": {"Docker": 0, "network": 0, "upstream": 0, "provider": 0},
+    }
+    with (Path(__file__).parent / "challenge-results.json").open("x") as stream:
+        json.dump(output, stream, indent=2)
+        stream.write("\n")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,634 @@
+diff --git a/crates/dotrepo-core/src/facade_tests/import_repository.rs b/crates/dotrepo-core/src/facade_tests/import_repository.rs
+index 4cd1a374..1f284663 100644
+--- a/crates/dotrepo-core/src/facade_tests/import_repository.rs
++++ b/crates/dotrepo-core/src/facade_tests/import_repository.rs
+@@ -232,7 +232,7 @@ testpaths = ["tests"]
+ }
+ 
+ #[test]
+-fn import_repository_imports_go_module_build_and_test_defaults() {
++fn import_repository_withholds_module_only_build_but_keeps_test_default() {
+     let root = temp_dir("import-go-mod-commands");
+     fs::write(
+         root.join("README.md"),
+@@ -252,7 +252,25 @@ fn import_repository_imports_go_module_build_and_test_defaults() {
+     )
+     .expect("import succeeds");
+ 
+-    assert_eq!(plan.manifest.repo.build.as_deref(), Some("go build ./..."));
++    assert!(plan.manifest.repo.build.is_none());
++    assert!(plan.command_candidates.selected_build.is_none());
++    assert!(plan.command_candidates.candidates.iter().any(|candidate| {
++        candidate.source_path == "go.mod" && candidate.build.as_deref() == Some("go build ./...")
++    }));
++    let verification = verify_import_plan(&root, &plan, "https://github.com/example/orbit");
++    let scores = crate::score_import_fields(&plan, &verification);
++    assert_eq!(
++        scores
++            .scores
++            .iter()
++            .find(|score| score.field == "repo.build")
++            .unwrap()
++            .confidence,
++        crate::FieldConfidence::Unresolved
++    );
++    assert!(crate::import::build_adjudication_requests(&scores, &plan)
++        .iter()
++        .all(|request| request.field != "repo.build"));
+     assert_eq!(plan.manifest.repo.test.as_deref(), Some("go test ./..."));
+     assert!(plan.imported_sources.iter().any(|path| path == "go.mod"));
+ 
+diff --git a/crates/dotrepo-core/src/import/commands/go_context.rs b/crates/dotrepo-core/src/import/commands/go_context.rs
+index 13b8042c..c046c8b3 100644
+--- a/crates/dotrepo-core/src/import/commands/go_context.rs
++++ b/crates/dotrepo-core/src/import/commands/go_context.rs
+@@ -1,7 +1,18 @@
+-//! Refuse conventional Go scalars when acquired CI exposes unresolved scope/setup.
++//! Refuse metadata-only Go builds and scalars with unresolved CI scope/setup.
+ //! This is a bounded workflow screen, not a YAML interpreter or execution proof.
+ use super::super::types::{CommandSourceTier, ImportedCommandCandidate, ImportedFile};
+ 
++/// A root Go module identifies an ecosystem, not a declared build instruction.
++/// Keep its conventional candidate for diagnostics, but share this eligibility
++/// rule with adjudication so a later tier cannot restore it as a scalar.
++pub(crate) fn scalar_candidate_is_eligible(
++    source_path: &str,
++    source_tier: CommandSourceTier,
++    build: bool,
++) -> bool {
++    !(build && source_tier == CommandSourceTier::EcosystemDefault && source_path == "go.mod")
++}
++
+ #[derive(Default)]
+ pub(super) struct GoContextGuard {
+     scoped: Vec<String>,
+@@ -394,6 +405,7 @@ impl GoContextGuard {
+     ) -> (Vec<ImportedCommandCandidate>, [bool; 2]) {
+         let mut filtered = candidates.to_vec();
+         let mut blocked = [false; 2];
++        let mut conventional_build_withheld = false;
+         for candidate in &mut filtered {
+             if !matches!(
+                 candidate.source_tier,
+@@ -416,6 +428,23 @@ impl GoContextGuard {
+                     blocked[index] = true;
+                 }
+             }
++            if candidate.build.is_some()
++                && !scalar_candidate_is_eligible(
++                    &candidate.source_path,
++                    candidate.source_tier,
++                    true,
++                )
++            {
++                candidate.build = None;
++                conventional_build_withheld = true;
++            }
++        }
++        // A conflict between eligible instructions must remain adjudicable.
++        // Actual workflow scope/setup refusal keeps its existing field block.
++        if conventional_build_withheld
++            && !filtered.iter().any(|candidate| candidate.build.is_some())
++        {
++            blocked[0] = true;
+         }
+         (filtered, blocked)
+     }
+@@ -428,7 +457,7 @@ impl GoContextGuard {
+         } else if test {
+             format!("Go test workflow setup is unresolved in `{}`; the same job declares an external service prerequisite", self.prepared_test.join("`, `"))
+         } else {
+-            unreachable!("build guard requires scoped Go workflow evidence")
++            "root go.mod supplies only a conventional build candidate, not a repository-default build instruction".into()
+         }
+     }
+ }
+diff --git a/crates/dotrepo-core/src/import/commands/go_context/tests.rs b/crates/dotrepo-core/src/import/commands/go_context/tests.rs
+index c40846d7..9e258585 100644
+--- a/crates/dotrepo-core/src/import/commands/go_context/tests.rs
++++ b/crates/dotrepo-core/src/import/commands/go_context/tests.rs
+@@ -9,10 +9,11 @@ fn guard(contents: &str) -> GoContextGuard {
+     }])
+ }
+ 
++// Exercise structural refusal independently of the module-only build policy.
+ fn defaults(guard: &GoContextGuard) -> [bool; 2] {
+     let (_, blocked) = guard.selection_candidates(&[ImportedCommandCandidate {
+-        source_path: "go.mod".into(),
+-        source_tier: CommandSourceTier::EcosystemDefault,
++        source_path: ".github/workflows/ci.yml".into(),
++        source_tier: CommandSourceTier::Workflow,
+         build: Some("go build ./...".into()),
+         test: Some("go test ./...".into()),
+     }]);
+@@ -107,7 +108,7 @@ fn declared_commands_and_unrelated_ecosystems_survive_go_guards() {
+ fn full_import_f1_go_context_fixture_contracts() {
+     for (fixture, build, test) in [
+         ("f1-go-multimodule-context", None, None),
+-        ("f1-go-service-context", Some("go build ./..."), None),
++        ("f1-go-service-context", None, None),
+         (
+             "f1-go-declared-context",
+             Some("go build ./..."),
+@@ -115,15 +116,11 @@ fn full_import_f1_go_context_fixture_contracts() {
+         ),
+         (
+             "f1-go-unrelated-service-context",
+-            Some("go build ./..."),
++            None,
+             Some("go test ./..."),
+         ),
+-        (
+-            "f1-go-example-module-context",
+-            Some("go build ./..."),
+-            Some("go test ./..."),
+-        ),
+-        ("f1-go-services-block-context", Some("go build ./..."), None),
++        ("f1-go-example-module-context", None, Some("go test ./...")),
++        ("f1-go-services-block-context", None, None),
+     ] {
+         let root = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+             .join("tests/fixtures/import")
+@@ -233,8 +230,11 @@ fn escalation_cannot_restore_context_blocked_scalars_even_with_model_budget() {
+     }
+     for (fixture, blocked_fields) in [
+         ("f1-go-multimodule-context", vec!["repo.build", "repo.test"]),
+-        ("f1-go-service-context", vec!["repo.test"]),
+-        ("f1-go-services-block-context", vec!["repo.test"]),
++        ("f1-go-service-context", vec!["repo.build", "repo.test"]),
++        (
++            "f1-go-services-block-context",
++            vec!["repo.build", "repo.test"],
++        ),
+     ] {
+         for model_budget in [0, 2] {
+             let root = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+@@ -496,14 +496,14 @@ fn amendment_full_import_and_escalation_association_controls() {
+             if blocked_test {
+                 assert_eq!(
+                     plan.command_candidates.blocked_scalar_fields,
+-                    vec!["repo.test"]
++                    vec!["repo.build", "repo.test"]
+                 );
+                 assert!(build_adjudication_requests(&scores, &plan)
+                     .iter()
+                     .all(|request| request.field != "repo.test"));
+             } else {
+                 assert!(
+-                    plan.command_candidates.blocked_scalar_fields.is_empty(),
++                    plan.command_candidates.blocked_scalar_fields == ["repo.build"],
+                     "{name}"
+                 );
+             }
+@@ -527,11 +527,7 @@ fn amendment_full_import_and_escalation_association_controls() {
+                 },
+             );
+             assert_eq!(result.model_calls, 0, "{name}");
+-            assert_eq!(
+-                plan.manifest.repo.build.as_deref(),
+-                Some("go build ./..."),
+-                "{name}"
+-            );
++            assert_eq!(plan.manifest.repo.build.as_deref(), None, "{name}");
+             assert_eq!(
+                 plan.manifest.repo.test.as_deref(),
+                 if blocked_test {
+@@ -560,3 +556,233 @@ fn amendment_full_import_and_escalation_association_controls() {
+     }
+     std::fs::remove_dir_all(root).unwrap();
+ }
++
++#[test]
++fn module_only_build_evidence_stays_unresolved_through_actual_escalation() {
++    use crate::import::{
++        build_adjudication_requests, run_import_escalation, ImportEscalationOptions,
++        TieredAdjudicationProviders,
++    };
++    let root = std::env::temp_dir().join(format!(
++        "dotrepo-go-build-evidence-{}-{}",
++        std::process::id(),
++        std::time::SystemTime::now()
++            .duration_since(std::time::UNIX_EPOCH)
++            .unwrap()
++            .as_nanos()
++    ));
++    std::fs::create_dir_all(root.join(".github/workflows")).unwrap();
++    std::fs::write(root.join("README.md"), "# Build evidence control\n").unwrap();
++    std::fs::write(
++        root.join("go.mod"),
++        "module example.test/build-evidence\n\ngo 1.22\n",
++    )
++    .unwrap();
++    for (name, workflow, declared_build, expected_build, expected_test) in [
++        ("module-only", None, false, None, Some("go test ./...")),
++        (
++            "ordinary-build-observation",
++            Some(("ci.yml", "jobs:\n  build:\n    steps:\n      - run: go build ./...\n")),
++            false,
++            Some("go build ./..."),
++            Some("go test ./..."),
++        ),
++        (
++            "tagged-observation-is-not-normalized",
++            Some(("ci.yml", "jobs:\n  build:\n    steps:\n      - run: go build -tags=integration ./...\n")),
++            false,
++            Some("go build -tags=integration ./..."),
++            Some("go test ./..."),
++        ),
++        (
++            "release-does-not-establish-default",
++            Some(("release-build.yml", "jobs:\n  build:\n    steps:\n      - run: go build ./...\n")),
++            false,
++            None,
++            Some("go test ./..."),
++        ),
++        (
++            "scoped-observation-does-not-restore-module-build",
++            Some(("ci.yml", "jobs:\n  build:\n    steps:\n      - run: |\n          cd examples\n          go build ./...\n")),
++            false,
++            None,
++            None,
++        ),
++        (
++            "explicit-source-build",
++            None,
++            true,
++            Some("go build ./..."),
++            Some("go test ./..."),
++        ),
++    ] {
++        let workflows = root.join(".github/workflows");
++        for file in std::fs::read_dir(&workflows).unwrap() {
++            std::fs::remove_file(file.unwrap().path()).unwrap();
++        }
++        if let Some((path, contents)) = workflow {
++            std::fs::write(workflows.join(path), contents).unwrap();
++        }
++        let contributing = root.join("CONTRIBUTING.md");
++        if declared_build {
++            std::fs::write(
++                &contributing,
++                "# Contributing\n\n## Build\n\n```sh\ngo build ./...\n```\n",
++            )
++            .unwrap();
++        } else if contributing.exists() {
++            std::fs::remove_file(contributing).unwrap();
++        }
++        for budget in [0, 2] {
++            let mut plan = import_repository(
++                &root,
++                ImportMode::Overlay,
++                Some("https://example.test/build-evidence"),
++            )
++            .unwrap();
++            assert_eq!(plan.manifest.repo.build.as_deref(), expected_build, "{name}");
++            assert_eq!(plan.manifest.repo.test.as_deref(), expected_test, "{name}");
++            assert!(plan.command_candidates.candidates.iter().any(|candidate| {
++                candidate.source_path == "go.mod"
++                    && candidate.build.as_deref() == Some("go build ./...")
++                    && candidate.test.as_deref() == Some("go test ./...")
++            }));
++            assert_eq!(
++                plan.command_candidates
++                    .blocked_scalar_fields
++                    .iter()
++                    .any(|field| field == "repo.build"),
++                expected_build.is_none(),
++                "{name}"
++            );
++            let verification = verify_import_plan(&root, &plan, "https://example.test/build-evidence");
++            let mut scores = crate::score_import_fields(&plan, &verification);
++            if expected_build.is_none() {
++                assert_eq!(
++                    scores.scores.iter().find(|s| s.field == "repo.build").unwrap().confidence,
++                    crate::FieldConfidence::Unresolved,
++                    "{name}"
++                );
++            }
++            // A suspect observation/declaration may still be adjudicated, but
++            // the raw module build is never among its selectable alternatives.
++            let mut suspect = scores.clone();
++            suspect.scores.iter_mut().find(|s| s.field == "repo.build").unwrap().confidence = crate::FieldConfidence::Suspect;
++            let requests = build_adjudication_requests(&suspect, &plan);
++            let request = requests.iter().find(|r| r.field == "repo.build");
++            assert_eq!(request.is_some(), expected_build.is_some(), "{name}");
++            if let Some(request) = request {
++                assert!(request.candidates.iter().all(|candidate| candidate.source_path != "go.mod"));
++            }
++            let provider = crate::import::StubAdjudicationProvider::new(
++                crate::import::AdjudicationTier::LocalPrimary,
++                Vec::new(),
++            );
++            let result = run_import_escalation(
++                &root,
++                &mut plan,
++                &verification,
++                &mut scores,
++                &ImportEscalationOptions { max_adjudication_calls: budget, ..Default::default() },
++                TieredAdjudicationProviders { local_primary: Some(&provider), local_second_opinion: None, api_escalation: None },
++            );
++            assert_eq!(result.model_calls, 0, "{name}");
++            assert_eq!(plan.manifest.repo.build.as_deref(), expected_build, "{name}");
++            assert_eq!(plan.manifest.repo.test.as_deref(), expected_test, "{name}");
++            if expected_build.is_none() {
++                assert_eq!(scores.scores.iter().find(|s| s.field == "repo.build").unwrap().confidence, crate::FieldConfidence::Unresolved, "{name}");
++            }
++            println!("GO_BUILD_EVIDENCE_CONTROL {}", serde_json::json!({"case":name,"budget":budget,"build":plan.manifest.repo.build,"test":plan.manifest.repo.test,"blockedScalarFields":plan.command_candidates.blocked_scalar_fields,"modelCalls":result.model_calls,"deterministicRequests":result.deterministic_requests,"unresolved":scores.summary.unresolved}));
++        }
++    }
++    std::fs::remove_dir_all(root).unwrap();
++}
++
++#[test]
++fn explicit_build_conflicts_remain_adjudicable_without_relaxing_context_blocks() {
++    let root = std::env::temp_dir().join(format!(
++        "dotrepo-go-build-conflict-{}-{}",
++        std::process::id(),
++        std::time::SystemTime::now()
++            .duration_since(std::time::UNIX_EPOCH)
++            .unwrap()
++            .as_nanos()
++    ));
++    std::fs::create_dir_all(root.join(".github/workflows")).unwrap();
++    std::fs::write(
++        root.join("go.mod"),
++        "module example.test/conflict\n\ngo 1.22\n",
++    )
++    .unwrap();
++    std::fs::write(
++        root.join("README.md"),
++        "# Explicit conflict control\n\n## Build\n\n```sh\ngo build ./...\n```\n",
++    )
++    .unwrap();
++    std::fs::write(
++        root.join("CONTRIBUTING.md"),
++        "# Contributing\n\n## Build\n\n```sh\ngo build -tags=integration ./...\n```\n",
++    )
++    .unwrap();
++    for scoped_workflow in [false, true] {
++        if scoped_workflow {
++            std::fs::write(root.join(".github/workflows/ci.yml"), "jobs:\n  build:\n    steps:\n      - run: |\n          cd component\n          go build ./...\n").unwrap();
++        }
++        let plan = import_repository(
++            &root,
++            ImportMode::Overlay,
++            Some("https://example.test/conflict"),
++        )
++        .unwrap();
++        assert!(plan.manifest.repo.build.is_none());
++        assert!(plan
++            .manifest
++            .record
++            .trust
++            .as_ref()
++            .unwrap()
++            .notes
++            .as_deref()
++            .unwrap()
++            .contains("conflicting build commands"));
++        assert_eq!(
++            plan.command_candidates
++                .blocked_scalar_fields
++                .iter()
++                .any(|field| field == "repo.build"),
++            scoped_workflow
++        );
++        let verification = verify_import_plan(&root, &plan, "https://example.test/conflict");
++        let scores = crate::score_import_fields(&plan, &verification);
++        let requests = crate::import::build_adjudication_requests(&scores, &plan);
++        let request = requests
++            .iter()
++            .find(|request| request.field == "repo.build");
++        if scoped_workflow {
++            assert!(
++                request.is_none(),
++                "existing context refusal remains field-wide"
++            );
++        } else {
++            let request = request.expect("eligible explicit conflict remains adjudicable");
++            assert_eq!(request.candidates.len(), 2);
++            assert!(request
++                .candidates
++                .iter()
++                .any(|candidate| candidate.source_path == "README.md"));
++            assert!(request
++                .candidates
++                .iter()
++                .any(|candidate| candidate.source_path == "CONTRIBUTING.md"));
++            assert!(request
++                .candidates
++                .iter()
++                .all(|candidate| candidate.source_path != "go.mod"));
++        }
++        println!(
++            "GO_BUILD_CONFLICT_CONTROL {}",
++            serde_json::json!({"scopedWorkflow":scoped_workflow,"blockedScalarFields":plan.command_candidates.blocked_scalar_fields,"build":plan.manifest.repo.build,"buildRequestCandidates":request.map(|request|request.candidates.iter().map(|candidate|serde_json::json!({"source":candidate.source_path,"value":candidate.value})).collect::<Vec<_>>())})
++        );
++    }
++    std::fs::remove_dir_all(root).unwrap();
++}
+diff --git a/crates/dotrepo-core/src/import/commands/mod.rs b/crates/dotrepo-core/src/import/commands/mod.rs
+index f014d9c2..b1eab7ed 100644
+--- a/crates/dotrepo-core/src/import/commands/mod.rs
++++ b/crates/dotrepo-core/src/import/commands/mod.rs
+@@ -16,6 +16,7 @@ mod policy;
+ mod scope;
+ 
+ pub(crate) use context::infer_documented_context_candidates;
++pub(super) use go_context::scalar_candidate_is_eligible;
+ 
+ pub(crate) use policy::sanitize_import_command;
+ 
+diff --git a/crates/dotrepo-core/src/import/fields.rs b/crates/dotrepo-core/src/import/fields.rs
+index dd1efca0..a7137e8f 100644
+--- a/crates/dotrepo-core/src/import/fields.rs
++++ b/crates/dotrepo-core/src/import/fields.rs
+@@ -1,7 +1,7 @@
+ //! Field-resolution and reconciliation: scoring imported/inferred manifest
+ //! fields for confidence, building adjudication requests for unresolved
+ //! fields, and applying adjudication responses back into field scores.
+-use super::commands::sanitize_import_command;
++use super::commands::{sanitize_import_command, scalar_candidate_is_eligible};
+ use super::parsing::{is_actionable_security_url, is_quality_url};
+ use super::types::{
+     AdjudicationCandidate, AdjudicationModelResponse, AdjudicationOutcome, AdjudicationRequest,
+@@ -604,6 +604,13 @@ pub fn build_adjudication_requests(
+ 
+         let mut candidates = Vec::new();
+         for candidate in &plan.command_candidates.candidates {
++            if !scalar_candidate_is_eligible(
++                &candidate.source_path,
++                candidate.source_tier,
++                is_build,
++            ) {
++                continue;
++            }
+             let value = if is_build {
+                 candidate.build.as_ref()
+             } else {
+diff --git a/crates/dotrepo-core/tests/fixtures/import/expectations.json b/crates/dotrepo-core/tests/fixtures/import/expectations.json
+index e237bc12..b391c4bf 100644
+--- a/crates/dotrepo-core/tests/fixtures/import/expectations.json
++++ b/crates/dotrepo-core/tests/fixtures/import/expectations.json
+@@ -2053,7 +2053,7 @@
+     "fixture": "f1-go-service-context",
+     "repo_name": "Redigo",
+     "repo_description": "Install Redigo using the \"go get\" command:",
+-    "repo_build": "go build ./...",
++    "repo_build": null,
+     "repo_test": null,
+     "repo_build_candidates": [],
+     "repo_test_candidates": [],
+@@ -2065,27 +2065,24 @@
+       "README.markdown",
+       "go.mod"
+     ],
+-    "inferred_fields": [
+-      "repo.build"
+-    ],
++    "inferred_fields": [],
+     "maintainers": [],
+     "team": null,
+     "security_contact": null,
+     "native_status": "draft",
+-    "overlay_status": "inferred",
++    "overlay_status": "imported",
+     "trust_provenance": [
+-      "imported",
+-      "inferred"
++      "imported"
+     ],
+     "native_trust_note_contains": [
+-      "Bootstrapped from `README.markdown` and `go.mod`. Inferred `repo.build` from `go.mod`. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/go-test.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`."
++      "Bootstrapped from `README.markdown` and `go.mod`. Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/go-test.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`."
+     ],
+     "overlay_trust_note_contains": [
+-      "Bootstrapped from `README.markdown` and `go.mod`. Inferred `repo.build` from `go.mod`. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/go-test.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
++      "Bootstrapped from `README.markdown` and `go.mod`. Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/go-test.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+     ],
+     "overlay_evidence_contains": [
+       "Imported repository name, description, and docs entry points from README.markdown.",
+-      "Inferred repo.build from go.mod as `go build ./...`.",
++      "Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction.",
+       "Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/go-test.yml`; the same job declares an external service prerequisite.",
+       "Imported repo.toolchain.min from go.mod as `1.17` (Go).",
+       "Imported docs.root as `https://pkg.go.dev/github.com/gomodule/redigo/redis`. Explicit documentation link at README.markdown:21: - [API Reference](https://pkg.go.dev/github.com/gomodule/redigo/redis)",
+@@ -2136,7 +2133,7 @@
+     "fixture": "f1-go-unrelated-service-context",
+     "repo_name": "Go Context Fixture",
+     "repo_description": "Bounded Go command selection fixture.",
+-    "repo_build": "go build ./...",
++    "repo_build": null,
+     "repo_test": "go test ./...",
+     "repo_build_candidates": [],
+     "repo_test_candidates": [],
+@@ -2146,11 +2143,10 @@
+     "overlay_docs_getting_started": null,
+     "imported_sources": [
+       "README.md",
+-      "go.mod",
+-      ".github/workflows/ci.yml"
++      ".github/workflows/ci.yml",
++      "go.mod"
+     ],
+     "inferred_fields": [
+-      "repo.build",
+       "repo.test"
+     ],
+     "maintainers": [],
+@@ -2163,14 +2159,14 @@
+       "inferred"
+     ],
+     "native_trust_note_contains": [
+-      "Bootstrapped from `README.md`, `go.mod`, and `.github/workflows/ci.yml`. Inferred `repo.build` from `go.mod`. Inferred `repo.test` from `.github/workflows/ci.yml`. Imported `repo.toolchain.min` from `go.mod`."
++      "Bootstrapped from `README.md`, `.github/workflows/ci.yml`, and `go.mod`. Inferred `repo.test` from `.github/workflows/ci.yml`. Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction. Imported `repo.toolchain.min` from `go.mod`."
+     ],
+     "overlay_trust_note_contains": [
+-      "Bootstrapped from `README.md`, `go.mod`, and `.github/workflows/ci.yml`. Inferred `repo.build` from `go.mod`. Inferred `repo.test` from `.github/workflows/ci.yml`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
++      "Bootstrapped from `README.md`, `.github/workflows/ci.yml`, and `go.mod`. Inferred `repo.test` from `.github/workflows/ci.yml`. Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+     ],
+     "overlay_evidence_contains": [
+       "Imported repository name and description from README.md.",
+-      "Inferred repo.build from go.mod as `go build ./...`.",
++      "Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction.",
+       "Inferred repo.test from .github/workflows/ci.yml as `go test ./...`.",
+       "Imported repo.toolchain.min from go.mod as `1.22` (Go).",
+       "This is an overlay record, not a maintainer-controlled canonical record."
+@@ -2180,7 +2176,7 @@
+     "fixture": "f1-go-example-module-context",
+     "repo_name": "Go Context Fixture",
+     "repo_description": "Bounded Go command selection fixture.",
+-    "repo_build": "go build ./...",
++    "repo_build": null,
+     "repo_test": "go test ./...",
+     "repo_build_candidates": [],
+     "repo_test_candidates": [],
+@@ -2193,7 +2189,6 @@
+       "go.mod"
+     ],
+     "inferred_fields": [
+-      "repo.build",
+       "repo.test"
+     ],
+     "maintainers": [],
+@@ -2206,14 +2201,14 @@
+       "inferred"
+     ],
+     "native_trust_note_contains": [
+-      "Bootstrapped from `README.md` and `go.mod`. Inferred `repo.build` from `go.mod`. Inferred `repo.test` from `go.mod`. Imported `repo.toolchain.min` from `go.mod`."
++      "Bootstrapped from `README.md` and `go.mod`. Inferred `repo.test` from `go.mod`. Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction. Imported `repo.toolchain.min` from `go.mod`."
+     ],
+     "overlay_trust_note_contains": [
+-      "Bootstrapped from `README.md` and `go.mod`. Inferred `repo.build` from `go.mod`. Inferred `repo.test` from `go.mod`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
++      "Bootstrapped from `README.md` and `go.mod`. Inferred `repo.test` from `go.mod`. Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+     ],
+     "overlay_evidence_contains": [
+       "Imported repository name and description from README.md.",
+-      "Inferred repo.build from go.mod as `go build ./...`.",
++      "Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction.",
+       "Inferred repo.test from go.mod as `go test ./...`.",
+       "Imported repo.toolchain.min from go.mod as `1.22` (Go).",
+       "This is an overlay record, not a maintainer-controlled canonical record."
+@@ -2223,7 +2218,7 @@
+     "fixture": "f1-go-services-block-context",
+     "repo_name": "Go Context Fixture",
+     "repo_description": "Bounded Go command selection fixture.",
+-    "repo_build": "go build ./...",
++    "repo_build": null,
+     "repo_test": null,
+     "repo_build_candidates": [],
+     "repo_test_candidates": [],
+@@ -2235,27 +2230,24 @@
+       "README.md",
+       "go.mod"
+     ],
+-    "inferred_fields": [
+-      "repo.build"
+-    ],
++    "inferred_fields": [],
+     "maintainers": [],
+     "team": null,
+     "security_contact": null,
+     "native_status": "draft",
+-    "overlay_status": "inferred",
++    "overlay_status": "imported",
+     "trust_provenance": [
+-      "imported",
+-      "inferred"
++      "imported"
+     ],
+     "native_trust_note_contains": [
+-      "Bootstrapped from `README.md` and `go.mod`. Inferred `repo.build` from `go.mod`. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`."
++      "Bootstrapped from `README.md` and `go.mod`. Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`."
+     ],
+     "overlay_trust_note_contains": [
+-      "Bootstrapped from `README.md` and `go.mod`. Inferred `repo.build` from `go.mod`. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
++      "Bootstrapped from `README.md` and `go.mod`. Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+     ],
+     "overlay_evidence_contains": [
+       "Imported repository name and description from README.md.",
+-      "Inferred repo.build from go.mod as `go build ./...`.",
++      "Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction.",
+       "Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite.",
+       "Imported repo.toolchain.min from go.mod as `1.22` (Go).",
+       "This is an overlay record, not a maintainer-controlled canonical record."

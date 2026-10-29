@@ -1,0 +1,2256 @@
+[
+  {
+    "fixture": "full-signals",
+    "repo_name": "Orbit",
+    "repo_description": "Fast local-first sync engine.",
+    "imported_sources": ["README.md", ".github/CODEOWNERS", ".github/SECURITY.md"],
+    "inferred_fields": [],
+    "maintainers": ["@orbit-maintainer"],
+    "team": null,
+    "security_contact": "security@example.com",
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["Bootstrapped from", "`README.md`", "`.github/CODEOWNERS`", "`.github/SECURITY.md`"],
+    "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "`.github/CODEOWNERS`", "`.github/SECURITY.md`", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Imported maintainer candidates from CODEOWNERS.", "Imported the security reporting channel from SECURITY.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "badge-heavy-readme",
+    "repo_name": "Crate Atlas",
+    "repo_description": "Declarative release automation for Cargo workspaces.",
+    "imported_sources": ["README.md", "SECURITY.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": "https://example.com/security",
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["Bootstrapped from", "`README.md`", "`SECURITY.md`", "policy or reporting URL rather than a direct mailbox"],
+    "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "`SECURITY.md`", "policy or reporting URL rather than a direct mailbox", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Imported the security reporting channel from SECURITY.md.", "policy or reporting URL rather than a direct mailbox", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "reference-badge-readme",
+    "repo_name": "Serde",
+    "repo_description": "Serde is a framework for *ser*ializing and *de*serializing Rust data structures efficiently and generically.",
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["Bootstrapped from `README.md`."],
+    "overlay_trust_note_contains": ["Bootstrapped from `README.md`.", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "setext-heading-readme",
+    "repo_name": "Forge",
+    "repo_description": "Release train coordinator for multi-crate workspaces.",
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["Bootstrapped from `README.md`."],
+    "overlay_trust_note_contains": ["Bootstrapped from `README.md`.", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "html-heading-readme",
+    "repo_name": "Nimbus",
+    "repo_description": "Small deployment orchestrator for self-hosted services.",
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["Bootstrapped from `README.md`."],
+    "overlay_trust_note_contains": ["Bootstrapped from `README.md`.", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "inline-html-wrapper-readme",
+    "repo_name": "Skyhook",
+    "repo_description": "Builds deployable release manifests for edge services.",
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["Bootstrapped from `README.md`."],
+    "overlay_trust_note_contains": ["Bootstrapped from `README.md`.", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "docs-nav-readme",
+    "repo_name": "Tidelift",
+    "repo_description": "Policy-aware release orchestration for multi-service deploys.",
+    "docs_root": "./docs/",
+    "docs_getting_started": "./docs/getting-started.md",
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["Bootstrapped from `README.md`."],
+    "overlay_trust_note_contains": ["Bootstrapped from `README.md`.", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name, description, and docs entry points from README.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "docs-label-readme",
+    "repo_name": "Lantern Dock",
+    "repo_description": "Source-aware release promotion for multi-environment deploys.",
+    "docs_root": "./docs/",
+    "docs_getting_started": "./docs/quickstart.md",
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["Bootstrapped from `README.md`."],
+    "overlay_trust_note_contains": ["Bootstrapped from `README.md`.", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name, description, and docs entry points from README.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "root-conventional-files",
+    "repo_name": "Harbor",
+    "repo_description": "Imported repository metadata; review and refine before relying on it.",
+    "imported_sources": ["README.md", "CODEOWNERS", "SECURITY.md"],
+    "inferred_fields": ["repo.description"],
+    "maintainers": ["@harbor-maintainer", "@docs-team", "docs@example.com"],
+    "team": null,
+    "security_contact": "https://github.com/acme/harbor/security/policy",
+    "native_status": "draft",
+    "overlay_status": "inferred",
+    "trust_provenance": ["imported", "inferred"],
+    "native_trust_note_contains": ["Bootstrapped from", "`README.md`", "`CODEOWNERS`", "`SECURITY.md`", "Filled `repo.description` with inferred defaults.", "policy or reporting URL rather than a direct mailbox"],
+    "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "`CODEOWNERS`", "`SECURITY.md`", "Filled `repo.description` with inferred defaults.", "policy or reporting URL rather than a direct mailbox", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name from README.md.", "Imported maintainer candidates from CODEOWNERS.", "Imported the security reporting channel from SECURITY.md.", "policy or reporting URL rather than a direct mailbox", "Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "description-only-readme",
+    "repo_name": "description-only-readme",
+    "repo_description": "Lightweight release notes generator for Git repositories.",
+    "imported_sources": ["README.md"],
+    "inferred_fields": ["repo.name"],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "inferred",
+    "trust_provenance": ["imported", "inferred"],
+    "native_trust_note_contains": ["Bootstrapped from `README.md`.", "Filled `repo.name` with inferred defaults."],
+    "overlay_trust_note_contains": ["Bootstrapped from `README.md`.", "Filled `repo.name` with inferred defaults.", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository description from README.md.", "Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "security-markdown-link",
+    "repo_name": "Beacon",
+    "repo_description": "Repository release dashboard.",
+    "imported_sources": ["README.md", "SECURITY.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": "security@example.com",
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["Bootstrapped from", "`README.md`", "`SECURITY.md`"],
+    "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "`SECURITY.md`", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Imported the security reporting channel from SECURITY.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "security-reference-link",
+    "repo_name": "Watchtower",
+    "repo_description": "Release integrity tracking for self-hosted deployments.",
+    "imported_sources": ["README.md", "SECURITY.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": "security@example.com",
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["Bootstrapped from", "`README.md`", "`SECURITY.md`"],
+    "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "`SECURITY.md`", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Imported the security reporting channel from SECURITY.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "security-html-anchor",
+    "repo_name": "Porthole",
+    "repo_description": "Coordinated disclosure workflow for release automation services.",
+    "imported_sources": ["README.md", "SECURITY.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": "security@example.com",
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["Bootstrapped from", "`README.md`", "`SECURITY.md`"],
+    "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "`SECURITY.md`", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Imported the security reporting channel from SECURITY.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "security-mailto-query",
+    "repo_name": "Signal Harbor",
+    "repo_description": "Security triage coordination for automated release systems.",
+    "imported_sources": ["README.md", "SECURITY.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": "security@example.com",
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["Bootstrapped from", "`README.md`", "`SECURITY.md`"],
+    "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "`SECURITY.md`", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Imported the security reporting channel from SECURITY.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "security-contact-unknown",
+    "repo_name": "Lantern",
+    "repo_description": "Release health dashboards for CLI tools.",
+    "imported_sources": ["README.md", ".github/SECURITY.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": "unknown",
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["Bootstrapped from", "`README.md`", "`.github/SECURITY.md`"],
+    "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "`.github/SECURITY.md`", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Imported SECURITY.md, but no explicit contact channel was parsed, so security_contact = \"unknown\" is intentional.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "no-conventional-surfaces",
+    "repo_name": "no-conventional-surfaces",
+    "repo_description": "Imported repository metadata; review and refine before relying on it.",
+    "imported_sources": [],
+    "inferred_fields": ["repo.name", "repo.description"],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "inferred",
+    "trust_provenance": ["inferred"],
+    "native_trust_note_contains": ["Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported.", "Filled `repo.name` and `repo.description` with inferred defaults."],
+    "overlay_trust_note_contains": ["Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported.", "Filled `repo.name` and `repo.description` with inferred defaults.", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["No README.md, CODEOWNERS, or SECURITY.md content was imported; this record needs manual completion.", "Inferred fallback values for `repo.name` and `repo.description` because the imported files did not provide enough structured metadata.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "mixed-codeowners",
+    "repo_name": "Driftwood",
+    "repo_description": "Repository metadata linter.",
+    "imported_sources": ["README.md", "CODEOWNERS"],
+    "inferred_fields": [],
+    "maintainers": ["@maintainer", "@org/release-team", "security@example.com", "@org/docs-team"],
+    "team": "@org/release-team",
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["Bootstrapped from", "`README.md`", "`CODEOWNERS`", "prefers `@org/release-team` from the repo-wide rule"],
+    "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "`CODEOWNERS`", "prefers `@org/release-team` from the repo-wide rule", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Imported maintainer candidates from CODEOWNERS.", "prefers `@org/release-team` from the repo-wide rule", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "team-heavy-codeowners",
+    "repo_name": "Bramble",
+    "repo_description": "Policy-aware deployment ownership map for large service estates.",
+    "imported_sources": ["README.md", "CODEOWNERS"],
+    "inferred_fields": [],
+    "maintainers": ["@org/platform-team", "@org/release-team", "@alice", "@org/docs-team", "@org/payments-team"],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["Bootstrapped from", "`README.md`", "`CODEOWNERS`", "`owners.team` was left unset"],
+    "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "`CODEOWNERS`", "`owners.team` was left unset", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Imported maintainer candidates from CODEOWNERS.", "`owners.team` was left unset", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "workflow-fallback",
+    "repo_name": "Orbit",
+    "repo_description": "Policy-aware release orchestration for multi-service deploys.",
+    "repo_build": "cargo build --workspace",
+    "repo_test": "cargo test --workspace",
+    "imported_sources": ["README.md", ".github/workflows/ci.yml"],
+    "inferred_fields": ["repo.build", "repo.test"],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "inferred",
+    "trust_provenance": ["imported", "inferred"],
+    "native_trust_note_contains": ["Bootstrapped from", "`README.md`", "`.github/workflows/ci.yml`", "Inferred `repo.build` from `.github/workflows/ci.yml`.", "Inferred `repo.test` from `.github/workflows/ci.yml`."],
+    "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "`.github/workflows/ci.yml`", "Inferred `repo.build` from `.github/workflows/ci.yml`.", "Inferred `repo.test` from `.github/workflows/ci.yml`.", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Inferred repo.build from .github/workflows/ci.yml as `cargo build --workspace`.", "Inferred repo.test from .github/workflows/ci.yml as `cargo test --workspace`.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "manifest-workflow-agree",
+    "repo_name": "Orbit",
+    "repo_description": "Policy-aware release orchestration for multi-service deploys.",
+    "repo_build": "cargo build --workspace",
+    "repo_test": "cargo test --workspace",
+    "imported_sources": ["README.md", ".github/workflows/ci.yml"],
+    "inferred_fields": ["repo.build", "repo.test"],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "inferred",
+    "trust_provenance": ["imported", "inferred"],
+    "native_trust_note_contains": ["Bootstrapped from", "`README.md`", "`.github/workflows/ci.yml`", "Inferred `repo.build` from `.github/workflows/ci.yml`.", "Inferred `repo.test` from `.github/workflows/ci.yml`."],
+    "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "`.github/workflows/ci.yml`", "Inferred `repo.build` from `.github/workflows/ci.yml`.", "Inferred `repo.test` from `.github/workflows/ci.yml`.", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Inferred repo.build from .github/workflows/ci.yml as `cargo build --workspace`.", "Inferred repo.test from .github/workflows/ci.yml as `cargo test --workspace`.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "manifest-workflow-conflict",
+    "repo_name": "Orbit",
+    "repo_description": "Policy-aware release orchestration for multi-service deploys.",
+    "repo_build": "cargo build --workspace",
+    "repo_test": "cargo test",
+    "imported_sources": ["README.md", "Cargo.toml", ".github/workflows/ci.yml"],
+    "inferred_fields": ["repo.build", "repo.test"],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "inferred",
+    "trust_provenance": ["imported", "inferred"],
+    "native_trust_note_contains": ["Bootstrapped from", "`README.md`", "`.github/workflows/ci.yml`", "Inferred `repo.build` from `Cargo.toml`.", "Inferred `repo.test` from `.github/workflows/ci.yml`."],
+    "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "`.github/workflows/ci.yml`", "Inferred `repo.build` from `Cargo.toml`.", "Inferred `repo.test` from `.github/workflows/ci.yml`.", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Inferred repo.build from Cargo.toml as `cargo build --workspace`.", "Inferred repo.test from .github/workflows/ci.yml as `cargo test`.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "sponsor-heading-readme",
+    "repo_name": "Vitest",
+    "repo_description": "Next generation testing framework powered by Vite.",
+    "overlay_docs_root": "https://example.com/docs",
+    "overlay_docs_getting_started": "https://example.com/guide",
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["Bootstrapped from `README.md`"],
+    "overlay_trust_note_contains": ["Bootstrapped from `README.md`", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name, description, and docs entry points from README.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "promo-link-heading-readme",
+    "repo_name": "promo-link-heading-readme",
+    "repo_description": "Cobra is a library for creating powerful modern CLI applications.",
+    "imported_sources": ["README.md"],
+    "inferred_fields": ["repo.name"],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "inferred",
+    "trust_provenance": ["imported", "inferred"],
+    "native_trust_note_contains": ["Bootstrapped from `README.md`"],
+    "overlay_trust_note_contains": ["Bootstrapped from `README.md`", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository description from README.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "blockquote-tagline-readme",
+    "repo_name": "The Uncompromising Code Formatter",
+    "repo_description": "_Black_ is the uncompromising Python code formatter.",
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["Bootstrapped from `README.md`"],
+    "overlay_trust_note_contains": ["Bootstrapped from `README.md`", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "backtick-email-security",
+    "repo_name": "SecurityFixture",
+    "repo_description": "Fixture for testing backtick-wrapped security emails.",
+    "imported_sources": ["README.md", "SECURITY.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": "cobra-security@googlegroups.com",
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["Bootstrapped from", "`README.md`", "`SECURITY.md`"],
+    "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "`SECURITY.md`", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Imported the security reporting channel from SECURITY.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "admonition-readme",
+    "repo_name": "Admonlib",
+    "repo_description": "Admonlib is a small library that skips GitHub admonitions when extracting project descriptions.",
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["Bootstrapped from `README.md`."],
+    "overlay_trust_note_contains": ["Bootstrapped from `README.md`.", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "question-heading-readme",
+    "repo_name": "question-heading-readme",
+    "repo_description": "Questiontool is a lightweight CLI for asking structured questions in terminal scripts.",
+    "imported_sources": ["README.md"],
+    "inferred_fields": ["repo.name"],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "inferred",
+    "trust_provenance": ["imported", "inferred"],
+    "native_trust_note_contains": ["Bootstrapped from `README.md`.", "Filled `repo.name` with inferred defaults."],
+    "overlay_trust_note_contains": ["Bootstrapped from `README.md`.", "Filled `repo.name` with inferred defaults.", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository description from README.md.", "Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "downstream-packager-security",
+    "repo_name": "PackagerNote",
+    "repo_description": "Fixture for reporting URLs that must beat downstream packager emails.",
+    "imported_sources": ["README.md", "SECURITY.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": "https://github.com/example/packagernote/security/advisories/new",
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["Bootstrapped from", "`README.md`", "`SECURITY.md`"],
+    "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "`SECURITY.md`", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Imported the security reporting channel from SECURITY.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+  "fixture": "nightly-toolchain-contributing",
+  "repo_name": "NightlySuite",
+  "repo_description": "Fixture for documented test commands that pin a cargo toolchain.",
+  "repo_build": "cargo build",
+  "repo_test": "cargo test",
+  "imported_sources": [
+    "README.md",
+    "Cargo.toml"
+  ],
+  "inferred_fields": [
+    "repo.build",
+    "repo.test"
+  ],
+  "maintainers": [],
+  "team": null,
+  "security_contact": null,
+  "native_status": "draft",
+  "overlay_status": "inferred",
+  "trust_provenance": [
+    "imported",
+    "inferred"
+  ],
+  "native_trust_note_contains": [
+    "Bootstrapped from",
+    "`README.md`"
+  ],
+  "overlay_trust_note_contains": [
+    "Bootstrapped from",
+    "`README.md`",
+    "This is an overlay bootstrap, not a maintainer-controlled canonical record."
+  ],
+  "overlay_evidence_contains": [
+    "Imported repository name and description from README.md.",
+    "Inferred repo.test from Cargo.toml as `cargo test`."
+  ]
+},
+  {
+    "fixture": "docs-third-party-readme",
+    "repo_name": "uv",
+    "repo_description": "An extremely fast Python package and project manager, written in Rust.",
+    "overlay_docs_root": "https://docs.astral.sh/uv",
+    "overlay_docs_getting_started": "https://docs.astral.sh/uv/getting-started/installation/",
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from `README.md`."
+    ],
+    "overlay_trust_note_contains": [
+      "This is an overlay bootstrap"
+    ],
+    "overlay_evidence_contains": [
+      "Imported docs.root as `https://docs.astral.sh/uv`.",
+      "README.md:11:",
+      "Imported docs.getting_started as `https://docs.astral.sh/uv/getting-started/installation/`.",
+      "README.md:7:"
+    ]
+  },
+  {
+    "fixture": "docs-ambiguous-readme",
+    "repo_name": "Orbit",
+    "repo_description": "A documentation ambiguity fixture.",
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from `README.md`."
+    ],
+    "overlay_trust_note_contains": [
+      "This is an overlay bootstrap"
+    ],
+    "overlay_evidence_contains": [
+      "Conflicting documentation declarations in README.md; abstained from docs.root."
+    ]
+  },
+  {
+    "fixture": "command-placeholder",
+    "repo_name": "Signal",
+    "repo_description": "Repository orientation regression fixture.",
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ]
+  },
+  {
+    "fixture": "command-continuation",
+    "repo_name": "Signal",
+    "repo_description": "Repository orientation regression fixture.",
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ]
+  },
+  {
+    "fixture": "command-setup-only",
+    "repo_name": "Signal",
+    "repo_description": "Repository orientation regression fixture.",
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ]
+  },
+  {
+    "fixture": "command-component-doc",
+    "repo_name": "Signal",
+    "repo_description": "Repository orientation regression fixture.",
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ]
+  },
+  {
+    "fixture": "command-component-manifest",
+    "repo_name": "Signal",
+    "repo_description": "Repository orientation regression fixture.",
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ]
+  },
+  {
+    "fixture": "command-component-workflow",
+    "repo_name": "Signal",
+    "repo_description": "Repository orientation regression fixture.",
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ]
+  },
+  {
+    "fixture": "command-root-with-component",
+    "repo_name": "Signal",
+    "repo_description": "Repository orientation regression fixture.",
+    "repo_build": "cargo build --workspace",
+    "repo_test": "cargo test --workspace",
+    "imported_sources": [
+      "README.md",
+      "Cargo.toml"
+    ],
+    "inferred_fields": [
+      "repo.build",
+      "repo.test"
+    ],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "inferred",
+    "trust_provenance": [
+      "imported",
+      "inferred"
+    ],
+    "native_trust_note_contains": [
+      "Ignored component-scoped commands from `playground/package.json`"
+    ],
+    "overlay_trust_note_contains": [
+      "Ignored component-scoped commands from `playground/package.json`"
+    ],
+    "overlay_evidence_contains": [
+      "Ignored component-scoped commands from `playground/package.json`"
+    ]
+  },
+  {
+    "fixture": "command-python-setup-only",
+    "repo_name": "Signal",
+    "repo_description": "Repository orientation regression fixture.",
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ]
+  },
+  {
+    "fixture": "make-diagnostic",
+    "repo_name": "Command Semantics",
+    "repo_description": "Source-preserving command regression fixture.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_trust_note_contains": [
+      "This is an overlay bootstrap"
+    ],
+    "overlay_evidence_contains": [
+      "This is an overlay record"
+    ]
+  },
+  {
+    "fixture": "make-comment",
+    "repo_name": "Command Semantics",
+    "repo_description": "Source-preserving command regression fixture.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_trust_note_contains": [
+      "This is an overlay bootstrap"
+    ],
+    "overlay_evidence_contains": [
+      "This is an overlay record"
+    ]
+  },
+  {
+    "fixture": "make-uppercase",
+    "repo_name": "Command Semantics",
+    "repo_description": "Source-preserving command regression fixture.",
+    "repo_build": "make BUILD",
+    "repo_test": null,
+    "imported_sources": [
+      "README.md",
+      "Makefile"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_trust_note_contains": [
+      "This is an overlay bootstrap"
+    ],
+    "overlay_evidence_contains": [
+      "This is an overlay record"
+    ]
+  },
+  {
+    "fixture": "make-prerequisite",
+    "repo_name": "Command Semantics",
+    "repo_description": "Source-preserving command regression fixture.",
+    "repo_build": null,
+    "repo_test": "make test",
+    "imported_sources": [
+      "README.md",
+      "Makefile"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_trust_note_contains": [
+      "This is an overlay bootstrap"
+    ],
+    "overlay_evidence_contains": [
+      "This is an overlay record"
+    ]
+  },
+  {
+    "fixture": "make-expressions",
+    "repo_name": "Command Semantics",
+    "repo_description": "Source-preserving command regression fixture.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_trust_note_contains": [
+      "This is an overlay bootstrap"
+    ],
+    "overlay_evidence_contains": [
+      "This is an overlay record"
+    ]
+  },
+  {
+    "fixture": "just-required-argument",
+    "repo_name": "Command Semantics",
+    "repo_description": "Source-preserving command regression fixture.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_trust_note_contains": [
+      "This is an overlay bootstrap"
+    ],
+    "overlay_evidence_contains": [
+      "This is an overlay record"
+    ]
+  },
+  {
+    "fixture": "just-wrapper",
+    "repo_name": "Command Semantics",
+    "repo_description": "Source-preserving command regression fixture.",
+    "repo_build": null,
+    "repo_test": "just test",
+    "imported_sources": [
+      "README.md",
+      "justfile"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_trust_note_contains": [
+      "This is an overlay bootstrap"
+    ],
+    "overlay_evidence_contains": [
+      "This is an overlay record"
+    ]
+  },
+  {
+    "fixture": "go-compile-only",
+    "repo_name": "Command Semantics",
+    "repo_description": "Source-preserving command regression fixture.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_trust_note_contains": [
+      "This is an overlay bootstrap"
+    ],
+    "overlay_evidence_contains": [
+      "This is an overlay record"
+    ]
+  },
+  {
+    "fixture": "go-compile-then-runner",
+    "repo_name": "Command Semantics",
+    "repo_description": "Source-preserving command regression fixture.",
+    "repo_build": null,
+    "repo_test": "go test ./...",
+    "imported_sources": [
+      "README.md",
+      "CONTRIBUTING.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_trust_note_contains": [
+      "This is an overlay bootstrap"
+    ],
+    "overlay_evidence_contains": [
+      "This is an overlay record"
+    ]
+  },
+  {
+    "fixture": "rake-root",
+    "repo_name": "Rake fixture",
+    "repo_description": "Conservative task declaration extraction.",
+    "repo_build": "rake build",
+    "repo_test": "rake test",
+    "imported_sources": [
+      "README.md",
+      "Rakefile"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "`README.md`",
+      "`Rakefile`"
+    ],
+    "overlay_trust_note_contains": [
+      "`README.md`",
+      "`Rakefile`"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ]
+  },
+  {
+    "fixture": "rake-namespace",
+    "repo_name": "Rake fixture",
+    "repo_description": "Conservative task declaration extraction.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ]
+  },
+  {
+    "fixture": "rake-nested-namespace",
+    "repo_name": "Rake fixture",
+    "repo_description": "Conservative task declaration extraction.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ]
+  },
+  {
+    "fixture": "rake-mixed",
+    "repo_name": "Rake fixture",
+    "repo_description": "Conservative task declaration extraction.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ]
+  },
+  {
+    "fixture": "rake-if-modifier",
+    "repo_name": "Rake fixture",
+    "repo_description": "Conservative task declaration extraction.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ]
+  },
+  {
+    "fixture": "rake-unless-modifier",
+    "repo_name": "Rake fixture",
+    "repo_description": "Conservative task declaration extraction.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ]
+  },
+  {
+    "fixture": "rake-if-block",
+    "repo_name": "Rake fixture",
+    "repo_description": "Conservative task declaration extraction.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ]
+  },
+  {
+    "fixture": "rake-if-quoted-hash",
+    "repo_name": "Rake fixture",
+    "repo_description": "Conservative task declaration extraction.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ]
+  },
+  {
+    "fixture": "context-repository-tests",
+    "repo_name": "Context fixture",
+    "repo_description": "Source-preserving contextual instructions.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["`README.md`"],
+    "overlay_trust_note_contains": ["`README.md`"],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md."],
+    "repo_test_candidates": [
+      {
+        "command": "cargo test --locked",
+        "ecosystem": null,
+        "source": "README.md",
+        "context": {
+          "command": "cargo test --locked",
+          "working_directory": ".",
+          "scope": "repository",
+          "prerequisites": [],
+          "source": "README.md"
+        }
+      }
+    ]
+  },
+  {
+    "fixture": "context-component-tests",
+    "repo_name": "Context fixture",
+    "repo_description": "Source-preserving contextual instructions.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["`README.md`"],
+    "overlay_trust_note_contains": ["`README.md`"],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md."],
+    "repo_test_candidates": [
+      {
+        "command": "npm test",
+        "ecosystem": null,
+        "source": "README.md",
+        "context": {
+          "command": "npm test",
+          "working_directory": "packages/ui",
+          "scope": "component",
+          "prerequisites": [
+            "Run `npm ci` in `packages/ui` before this command."
+          ],
+          "source": "README.md",
+          "component": "packages/ui"
+        }
+      }
+    ]
+  },
+  {
+    "fixture": "context-component-build",
+    "repo_name": "Context fixture",
+    "repo_description": "Source-preserving contextual instructions.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["`README.md`"],
+    "overlay_trust_note_contains": ["`README.md`"],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md."],
+    "repo_build_candidates": [
+      {
+        "command": "npm run build",
+        "ecosystem": null,
+        "source": "README.md",
+        "context": {
+          "command": "npm run build",
+          "working_directory": "packages/ui",
+          "scope": "component",
+          "prerequisites": [
+            "Run `npm ci` in `packages/ui` before this command."
+          ],
+          "source": "README.md",
+          "component": "packages/ui"
+        }
+      }
+    ]
+  },
+  {
+    "fixture": "context-missing-prerequisites",
+    "repo_name": "Context fixture",
+    "repo_description": "Source-preserving contextual instructions.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["`README.md`"],
+    "overlay_trust_note_contains": ["`README.md`"],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md."]
+  },
+  {
+    "fixture": "context-wrong-directory",
+    "repo_name": "Context fixture",
+    "repo_description": "Source-preserving contextual instructions.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["`README.md`"],
+    "overlay_trust_note_contains": ["`README.md`"],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md."]
+  },
+  {
+    "fixture": "context-escaping-directory",
+    "repo_name": "Context fixture",
+    "repo_description": "Source-preserving contextual instructions.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["`README.md`"],
+    "overlay_trust_note_contains": ["`README.md`"],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md."]
+  },
+  {
+    "fixture": "context-dynamic-directory",
+    "repo_name": "Context fixture",
+    "repo_description": "Source-preserving contextual instructions.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["`README.md`"],
+    "overlay_trust_note_contains": ["`README.md`"],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md."]
+  },
+  {
+    "fixture": "context-prose-prerequisite",
+    "repo_name": "Context fixture",
+    "repo_description": "Source-preserving contextual instructions.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["`README.md`"],
+    "overlay_trust_note_contains": ["`README.md`"],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md."]
+  },
+  {
+    "fixture": "context-external-prerequisite",
+    "repo_name": "Context fixture",
+    "repo_description": "Source-preserving contextual instructions.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["`README.md`"],
+    "overlay_trust_note_contains": ["`README.md`"],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md."]
+  },
+  {
+    "fixture": "context-contradictory-prerequisites",
+    "repo_name": "Context fixture",
+    "repo_description": "Source-preserving contextual instructions.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["`README.md`"],
+    "overlay_trust_note_contains": ["`README.md`"],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md."]
+  },
+  {
+    "fixture": "context-ambiguous-sequence",
+    "repo_name": "Context fixture",
+    "repo_description": "Source-preserving contextual instructions.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["`README.md`"],
+    "overlay_trust_note_contains": ["`README.md`"],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md."]
+  },
+  {
+    "fixture": "context-unresolved-command",
+    "repo_name": "Context fixture",
+    "repo_description": "Source-preserving contextual instructions.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["`README.md`"],
+    "overlay_trust_note_contains": ["`README.md`"],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md."]
+  },
+  {
+    "fixture": "context-nextest-selector",
+    "repo_name": "Context fixture",
+    "repo_description": "Source-preserving contextual instructions.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["`README.md`"],
+    "overlay_trust_note_contains": ["`README.md`"],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md."]
+  },
+  {
+    "fixture": "docs-setup-dependent-test",
+    "repo_name": "Context fixture",
+    "repo_description": "Source-preserving contextual instructions.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["`README.md`"],
+    "overlay_trust_note_contains": ["`README.md`"],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md."]
+  },
+  {
+    "fixture": "context-ries-source-excerpt",
+    "repo_name": "Context fixture",
+    "repo_description": "Source-preserving contextual instructions.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["`README.md`"],
+    "overlay_trust_note_contains": ["`README.md`"],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md."]
+  },
+  {
+    "fixture": "context-component-missing-directory",
+    "repo_name": "Context fixture",
+    "repo_description": "Source-preserving contextual instructions.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["`README.md`"],
+    "overlay_trust_note_contains": ["`README.md`"],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md."]
+  },
+  {
+    "fixture": "context-repository-missing-directory",
+    "repo_name": "Context fixture",
+    "repo_description": "Source-preserving contextual instructions.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["`README.md`"],
+    "overlay_trust_note_contains": ["`README.md`"],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md."]
+  },
+  {
+    "fixture": "context-other-block-prerequisite",
+    "repo_name": "Context fixture",
+    "repo_description": "Source-preserving contextual instructions.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["`README.md`"],
+    "overlay_trust_note_contains": ["`README.md`"],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md."]
+  },
+  {
+    "fixture": "docs-source-sound-redux",
+    "repo_name": "SoundRedux",
+    "repo_description": "**NOTE** It seems that SoundCloud has revoked my api client keys without any explanation or warning.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["`README.md`"],
+    "overlay_trust_note_contains": ["`README.md`"],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md."]
+  },
+  {
+    "fixture": "docs-source-jassics-security-study-plan",
+    "repo_name": "docs-source-jassics-security-study-plan",
+    "repo_description": "This is to give a study plan to prepare for a specific role.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": ["README.md"],
+    "inferred_fields": ["repo.name"],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "inferred",
+    "trust_provenance": ["imported", "inferred"],
+    "native_trust_note_contains": ["`README.md`"],
+    "overlay_trust_note_contains": ["`README.md`"],
+    "overlay_evidence_contains": ["Imported repository description from README.md."]
+  },
+  {
+    "fixture": "docs-source-vibevoice",
+    "repo_name": "VibeVoice",
+    "repo_description": "2026-09-03: 🚀 We released VibeVoice-ASR-Streaming, a unified streaming ASR model that continuously transcribes ''who said what'' as speech arrives, with support for customized hotwords and 10 languages.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["`README.md`"],
+    "overlay_trust_note_contains": ["`README.md`"],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md."]
+  },
+  {
+    "fixture": "docs-source-redis-py",
+    "repo_name": "redis-py",
+    "repo_description": "The Python interface to the Redis key-value store.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["`README.md`"],
+    "overlay_trust_note_contains": ["`README.md`"],
+    "overlay_evidence_contains": ["Imported repository name, description, and docs entry points from README.md."],
+    "overlay_docs_root": "https://redis.readthedocs.io/en/stable/"
+  },
+{
+  "fixture": "command-pagedigest-manifest-path",
+  "repo_name": "Signal",
+  "repo_description": "Repository orientation regression fixture.",
+  "imported_sources": [
+    "README.md"
+  ],
+  "inferred_fields": [],
+  "maintainers": [],
+  "team": null,
+  "security_contact": null,
+  "native_status": "draft",
+  "overlay_status": "imported",
+  "trust_provenance": [
+    "imported"
+  ],
+  "native_trust_note_contains": [
+    "Bootstrapped from"
+  ],
+  "overlay_trust_note_contains": [
+    "Bootstrapped from"
+  ],
+  "overlay_evidence_contains": [
+    "Imported repository name and description from README.md."
+  ]
+},
+{
+  "fixture": "command-uv-docker",
+  "repo_name": "uv",
+  "repo_description": "An extremely fast Python package and project manager, written in Rust.",
+  "repo_build": null,
+  "repo_test": null,
+  "imported_sources": [
+    "README.md"
+  ],
+  "inferred_fields": [],
+  "maintainers": [],
+  "team": null,
+  "security_contact": null,
+  "native_status": "draft",
+  "overlay_status": "imported",
+  "trust_provenance": [
+    "imported"
+  ],
+  "native_trust_note_contains": [
+    "Bootstrapped from"
+  ],
+  "overlay_trust_note_contains": [
+    "Bootstrapped from"
+  ],
+  "overlay_evidence_contains": [
+    "Imported repository name and description from README.md."
+  ]
+},
+  {
+    "fixture": "context-runtime-repository",
+    "repo_name": "Context fixture",
+    "repo_description": "Source-preserving contextual instructions.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ],
+    "repo_test_candidates": [
+      {
+        "command": "cargo test --locked",
+        "ecosystem": null,
+        "source": "README.md",
+        "context": {
+          "command": "cargo test --locked",
+          "working_directory": ".",
+          "scope": "repository",
+          "prerequisites": [
+            "Rust >=1.90.0"
+          ],
+          "source": "README.md"
+        }
+      }
+    ]
+  },
+  {
+    "fixture": "context-runtime-component",
+    "repo_name": "Context fixture",
+    "repo_description": "Source-preserving contextual instructions.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ],
+    "repo_test_candidates": [
+      {
+        "command": "pnpm test --run",
+        "ecosystem": null,
+        "source": "README.md",
+        "context": {
+          "command": "pnpm test --run",
+          "working_directory": "packages/ui",
+          "scope": "component",
+          "prerequisites": [
+            "Node.js 22+",
+            "pnpm >=10.0",
+            "Run `pnpm install` in `packages/ui` before this command."
+          ],
+          "source": "README.md",
+          "component": "packages/ui"
+        }
+      }
+    ]
+  },
+  {
+    "fixture": "context-runtime-conditional",
+    "repo_name": "Context fixture",
+    "repo_description": "Source-preserving contextual instructions.",
+    "repo_build": null,
+    "repo_test": null,
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ]
+  },
+  {
+    "fixture": "context-python-natural-local",
+    "repo_name": "context-python-natural-local",
+    "repo_description": "Keras 3 is a multi-backend deep learning framework, with support for JAX, TensorFlow, PyTorch, and OpenVINO (for inference-only).",
+    "repo_build": "python -m build",
+    "repo_test": "python -m pytest",
+    "imported_sources": [
+      "README.md",
+      "pyproject.toml",
+      "CONTRIBUTING.md",
+      "requirements.txt",
+      "requirements-common.txt"
+    ],
+    "inferred_fields": [
+      "repo.name",
+      "repo.build",
+      "repo.test"
+    ],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "inferred",
+    "trust_provenance": [
+      "imported",
+      "inferred"
+    ],
+    "native_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository description from README.md."
+    ],
+    "repo_test_candidates": [
+      {
+        "command": "pytest keras",
+        "ecosystem": "Python",
+        "source": "CONTRIBUTING.md",
+        "context": {
+          "command": "pytest keras",
+          "working_directory": ".",
+          "scope": "repository",
+          "prerequisites": [
+            "Use Python >=3.11 as declared by pyproject.toml; the local setup guide states the weaker minimum 3.10. No runtime was inspected.",
+            "Use the documented local setup route (CONTRIBUTING.md:81-112): To set up your local dev environment, you will need the following tools. 1. [git](https://github.com/) for code repository management. 2. [python](https://www.python.org/) to build and code in Keras. The following commands check the tools above are successfully installed. Note that Keras requires at least Python 3.10 to run. ```shell git --version python --version ``` Clone your forked repo to your local machine. Go to the cloned directory to install the dependencies. ```shell git clone https://github.com/YOUR_GITHUB_USERNAME/keras.git cd keras pip install -r requirements.txt ``` You then need to configure the backend to use, see the [Configuring your backend](https://github.com/keras-team/keras/blob/master/README.md#configuring-your-backend) section of the README. You can also add GPU support to your environment, see the [Adding GPU support](https://github.com/keras-team/keras/blob/master/README.md#adding-gpu-support) section of the README.",
+            "Retain the local installation and platform conditions (README.md:43-65): Keras 3 is compatible with Linux and macOS systems. For Windows users, we recommend using WSL2 to run Keras. To install a local development version: 1. Install dependencies: ``` pip install -r requirements.txt ``` 2. Run installation command from the root directory. ``` python pip_build.py --install ``` 3. Run API generation script when creating PRs that update `keras_export` public APIs: ``` ./shell/api_gen.sh ```",
+            "Configure a backend before imports and retain backend limitations (README.md:91-114): You can export the environment variable `KERAS_BACKEND` or you can edit your local config file at `~/.keras/keras.json` to configure your backend. Available backend options are: `\"tensorflow\"`, `\"jax\"`, `\"torch\"`, `\"openvino\"`. Example: ``` export KERAS_BACKEND=\"jax\" ``` In Colab, you can do: ```python import os os.environ[\"KERAS_BACKEND\"] = \"jax\" import keras ``` **Note:** The backend must be configured before importing `keras`, and the backend cannot be changed after the package has been imported. **Note:** The OpenVINO backend is an inference-only backend, meaning it is designed only for running model predictions using `model.predict()` method.",
+            "Use the documented CPU requirements route; GPU setup is not established by this candidate: The `requirements.txt` file will install a CPU-only version of TensorFlow, JAX, and PyTorch.",
+            "Retain default test coverage and the separately documented optional skip/backend variants (CONTRIBUTING.md:202-224): You can run all the tests locally by running the following command in the repo root directory. ```shell pytest keras ``` Note that you can skip the Keras applications tests using the `SKIP_APPLICATIONS_TESTS` environment variable. This will cut down the testing time significantly. ```shell SKIP_APPLICATIONS_TESTS=True pytest keras ``` To run all tests using a different backend, you can simply specify it on the command line. ```shell KERAS_BACKEND=jax SKIP_APPLICATIONS_TESTS=True pytest keras ```",
+            "Install the complete retained requirements include chain: requirements.txt, requirements-common.txt. Environment markers and index declarations remain source data, not evidence of installed dependencies."
+          ],
+          "source": "CONTRIBUTING.md"
+        }
+      }
+    ],
+    "docs_root": null,
+    "overlay_docs_root": null,
+    "docs_getting_started": null,
+    "overlay_docs_getting_started": null
+  },
+  {
+    "fixture": "context-python-natural-missing-requirement",
+    "repo_name": "context-python-natural-missing-requirement",
+    "repo_description": "Keras 3 is a multi-backend deep learning framework, with support for JAX, TensorFlow, PyTorch, and OpenVINO (for inference-only).",
+    "repo_build": "python -m build",
+    "repo_test": "python -m pytest",
+    "imported_sources": [
+      "README.md",
+      "pyproject.toml"
+    ],
+    "inferred_fields": [
+      "repo.name",
+      "repo.build",
+      "repo.test"
+    ],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "inferred",
+    "trust_provenance": [
+      "imported",
+      "inferred"
+    ],
+    "native_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository description from README.md."
+    ],
+    "repo_test_candidates": [],
+    "docs_root": null,
+    "overlay_docs_root": null,
+    "docs_getting_started": null,
+    "overlay_docs_getting_started": null
+  },
+  {
+    "fixture": "context-python-natural-conditional",
+    "repo_name": "context-python-natural-conditional",
+    "repo_description": "Keras 3 is a multi-backend deep learning framework, with support for JAX, TensorFlow, PyTorch, and OpenVINO (for inference-only).",
+    "repo_build": "python -m build",
+    "repo_test": "python -m pytest",
+    "imported_sources": [
+      "README.md",
+      "pyproject.toml"
+    ],
+    "inferred_fields": [
+      "repo.name",
+      "repo.build",
+      "repo.test"
+    ],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "inferred",
+    "trust_provenance": [
+      "imported",
+      "inferred"
+    ],
+    "native_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_trust_note_contains": [
+      "`README.md`"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository description from README.md."
+    ],
+    "repo_test_candidates": [],
+    "docs_root": null,
+    "overlay_docs_root": null,
+    "docs_getting_started": null,
+    "overlay_docs_getting_started": null
+  },
+  {
+    "fixture": "f1-go-multimodule-context",
+    "repo_name": "fp-go",
+    "repo_description": "**\ud83d\udea7 Work in progress! \ud83d\udea7** Despite major version 1 (due to semantic-release limitations), we're working to minimize breaking changes.",
+    "repo_build": null,
+    "repo_test": null,
+    "repo_build_candidates": [],
+    "repo_test_candidates": [],
+    "docs_root": null,
+    "docs_getting_started": null,
+    "overlay_docs_root": null,
+    "overlay_docs_getting_started": null,
+    "imported_sources": [
+      "README.md",
+      "go.mod"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from `README.md` and `go.mod`. Left `repo.build` unset because Go workflow component scope is unresolved in `.github/workflows/build.yml`; a conventional root module command cannot establish repository coverage. Left `repo.test` unset because Go workflow component scope is unresolved in `.github/workflows/build.yml`; a conventional root module command cannot establish repository coverage. Imported `repo.toolchain.min` from `go.mod`."
+    ],
+    "overlay_trust_note_contains": [
+      "Bootstrapped from `README.md` and `go.mod`. Left `repo.build` unset because Go workflow component scope is unresolved in `.github/workflows/build.yml`; a conventional root module command cannot establish repository coverage. Left `repo.test` unset because Go workflow component scope is unresolved in `.github/workflows/build.yml`; a conventional root module command cannot establish repository coverage. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md.",
+      "Left `repo.build` unset because Go workflow component scope is unresolved in `.github/workflows/build.yml`; a conventional root module command cannot establish repository coverage.",
+      "Left `repo.test` unset because Go workflow component scope is unresolved in `.github/workflows/build.yml`; a conventional root module command cannot establish repository coverage.",
+      "Imported repo.toolchain.min from go.mod as `1.20` (Go).",
+      "This is an overlay record, not a maintainer-controlled canonical record."
+    ]
+  },
+  {
+    "fixture": "f1-go-service-context",
+    "repo_name": "Redigo",
+    "repo_description": "Install Redigo using the \"go get\" command:",
+    "repo_build": null,
+    "repo_test": null,
+    "repo_build_candidates": [],
+    "repo_test_candidates": [],
+    "docs_root": null,
+    "docs_getting_started": null,
+    "overlay_docs_root": "https://pkg.go.dev/github.com/gomodule/redigo/redis",
+    "overlay_docs_getting_started": null,
+    "imported_sources": [
+      "README.markdown",
+      "go.mod"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from `README.markdown` and `go.mod`. Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/go-test.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`."
+    ],
+    "overlay_trust_note_contains": [
+      "Bootstrapped from `README.markdown` and `go.mod`. Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/go-test.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name, description, and docs entry points from README.markdown.",
+      "Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction.",
+      "Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/go-test.yml`; the same job declares an external service prerequisite.",
+      "Imported repo.toolchain.min from go.mod as `1.17` (Go).",
+      "Imported docs.root as `https://pkg.go.dev/github.com/gomodule/redigo/redis`. Explicit documentation link at README.markdown:21: - [API Reference](https://pkg.go.dev/github.com/gomodule/redigo/redis)",
+      "This is an overlay record, not a maintainer-controlled canonical record."
+    ]
+  },
+  {
+    "fixture": "f1-go-declared-context",
+    "repo_name": "Go Context Fixture",
+    "repo_description": "Bounded Go command selection fixture.",
+    "repo_build": "go build ./...",
+    "repo_test": "go test ./...",
+    "repo_build_candidates": [],
+    "repo_test_candidates": [],
+    "docs_root": null,
+    "docs_getting_started": null,
+    "overlay_docs_root": null,
+    "overlay_docs_getting_started": null,
+    "imported_sources": [
+      "README.md",
+      "CONTRIBUTING.md",
+      "go.mod"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from `README.md`, `CONTRIBUTING.md`, and `go.mod`. Imported `repo.build` from `CONTRIBUTING.md`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `go.mod`."
+    ],
+    "overlay_trust_note_contains": [
+      "Bootstrapped from `README.md`, `CONTRIBUTING.md`, and `go.mod`. Imported `repo.build` from `CONTRIBUTING.md`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md.",
+      "Imported repo.build from CONTRIBUTING.md as `go build ./...`.",
+      "Imported repo.test from CONTRIBUTING.md as `go test ./...`.",
+      "Imported repo.toolchain.min from go.mod as `1.22` (Go).",
+      "This is an overlay record, not a maintainer-controlled canonical record."
+    ]
+  },
+  {
+    "fixture": "f1-go-unrelated-service-context",
+    "repo_name": "Go Context Fixture",
+    "repo_description": "Bounded Go command selection fixture.",
+    "repo_build": null,
+    "repo_test": "go test ./...",
+    "repo_build_candidates": [],
+    "repo_test_candidates": [],
+    "docs_root": null,
+    "docs_getting_started": null,
+    "overlay_docs_root": null,
+    "overlay_docs_getting_started": null,
+    "imported_sources": [
+      "README.md",
+      ".github/workflows/ci.yml",
+      "go.mod"
+    ],
+    "inferred_fields": [
+      "repo.test"
+    ],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "inferred",
+    "trust_provenance": [
+      "imported",
+      "inferred"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from `README.md`, `.github/workflows/ci.yml`, and `go.mod`. Inferred `repo.test` from `.github/workflows/ci.yml`. Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction. Imported `repo.toolchain.min` from `go.mod`."
+    ],
+    "overlay_trust_note_contains": [
+      "Bootstrapped from `README.md`, `.github/workflows/ci.yml`, and `go.mod`. Inferred `repo.test` from `.github/workflows/ci.yml`. Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md.",
+      "Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction.",
+      "Inferred repo.test from .github/workflows/ci.yml as `go test ./...`.",
+      "Imported repo.toolchain.min from go.mod as `1.22` (Go).",
+      "This is an overlay record, not a maintainer-controlled canonical record."
+    ]
+  },
+  {
+    "fixture": "f1-go-example-module-context",
+    "repo_name": "Go Context Fixture",
+    "repo_description": "Bounded Go command selection fixture.",
+    "repo_build": null,
+    "repo_test": "go test ./...",
+    "repo_build_candidates": [],
+    "repo_test_candidates": [],
+    "docs_root": null,
+    "docs_getting_started": null,
+    "overlay_docs_root": null,
+    "overlay_docs_getting_started": null,
+    "imported_sources": [
+      "README.md",
+      "go.mod"
+    ],
+    "inferred_fields": [
+      "repo.test"
+    ],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "inferred",
+    "trust_provenance": [
+      "imported",
+      "inferred"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from `README.md` and `go.mod`. Inferred `repo.test` from `go.mod`. Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction. Imported `repo.toolchain.min` from `go.mod`."
+    ],
+    "overlay_trust_note_contains": [
+      "Bootstrapped from `README.md` and `go.mod`. Inferred `repo.test` from `go.mod`. Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md.",
+      "Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction.",
+      "Inferred repo.test from go.mod as `go test ./...`.",
+      "Imported repo.toolchain.min from go.mod as `1.22` (Go).",
+      "This is an overlay record, not a maintainer-controlled canonical record."
+    ]
+  },
+  {
+    "fixture": "f1-go-services-block-context",
+    "repo_name": "Go Context Fixture",
+    "repo_description": "Bounded Go command selection fixture.",
+    "repo_build": null,
+    "repo_test": null,
+    "repo_build_candidates": [],
+    "repo_test_candidates": [],
+    "docs_root": null,
+    "docs_getting_started": null,
+    "overlay_docs_root": null,
+    "overlay_docs_getting_started": null,
+    "imported_sources": [
+      "README.md",
+      "go.mod"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from `README.md` and `go.mod`. Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`."
+    ],
+    "overlay_trust_note_contains": [
+      "Bootstrapped from `README.md` and `go.mod`. Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction. Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md.",
+      "Left `repo.build` unset because root go.mod supplies only a conventional build candidate, not a repository-default build instruction.",
+      "Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite.",
+      "Imported repo.toolchain.min from go.mod as `1.22` (Go).",
+      "This is an overlay record, not a maintainer-controlled canonical record."
+    ]
+  }
+]

@@ -1,7 +1,7 @@
 //! Field-resolution and reconciliation: scoring imported/inferred manifest
 //! fields for confidence, building adjudication requests for unresolved
 //! fields, and applying adjudication responses back into field scores.
-use super::commands::sanitize_import_command;
+use super::commands::{sanitize_import_command, scalar_candidate_is_eligible};
 use super::parsing::{is_actionable_security_url, is_quality_url};
 use super::types::{
     AdjudicationCandidate, AdjudicationModelResponse, AdjudicationOutcome, AdjudicationRequest,
@@ -67,6 +67,9 @@ fn score_docs_field(plan: &ImportPlan, field: &str, value: Option<&str>) -> Fiel
     }
 }
 
+/// Score a plan using fresh verification of the same root and unmodified plan.
+/// Reverify after changing the plan or its source files. A verification report
+/// records an observation; it does not prevent the files from changing afterward.
 pub fn score_import_fields(
     plan: &ImportPlan,
     verification: &VerificationReport,
@@ -465,7 +468,8 @@ pub fn score_import_fields(
                 && plan.manifest.record.generated_at.is_some()
                 && source.as_deref() == evidence.get("source").and_then(toml::Value::as_str)
                 && evidence.get("checkedAt").and_then(toml::Value::as_str)
-                    == plan.manifest.record.generated_at.as_deref();
+                    == plan.manifest.record.generated_at.as_deref()
+                && super::context_verification::source_bindings_intact(verification, &field);
             scores.push(FieldScore {
                 field,
                 confidence: if bound {
@@ -478,7 +482,7 @@ pub fn score_import_fields(
                 reason: if bound {
                     "Source-bound natural instruction candidate recovered; independent prerequisite completeness verification remains unresolved."
                 } else {
-                    "Natural instruction candidate changed after source binding; source establishment must be repeated."
+                    "Natural instruction candidate or attached sources failed integrity binding; source establishment must be repeated."
                 }
                 .into(),
             });
@@ -604,6 +608,13 @@ pub fn build_adjudication_requests(
 
         let mut candidates = Vec::new();
         for candidate in &plan.command_candidates.candidates {
+            if !scalar_candidate_is_eligible(
+                &candidate.source_path,
+                candidate.source_tier,
+                is_build,
+            ) {
+                continue;
+            }
             let value = if is_build {
                 candidate.build.as_ref()
             } else {

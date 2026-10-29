@@ -1,0 +1,157 @@
+{
+  "schema": "dotrepo-gate-timings/v0",
+  "status": "passed",
+  "elapsedSeconds": 65.877884,
+  "stages": [
+    {
+      "name": "cargo run -p dotrepo-cli -- validate-index",
+      "elapsedSeconds": 1.618458,
+      "status": "passed"
+    },
+    {
+      "name": "cargo run -p dotrepo-cli -- --root . validate",
+      "elapsedSeconds": 0.454627,
+      "status": "passed"
+    },
+    {
+      "name": "cargo test -p dotrepo-core --test import_quality_gate --test public_export_fixture_pack --test public_query_fixture_pack --test public_error_fixture_pack --test public_freshness_semantics --test public_contract_compatibility",
+      "elapsedSeconds": 9.907481,
+      "status": "passed"
+    },
+    {
+      "name": "cargo run --release -p dotrepo-cli -- public export --index-root index --out-dir /private/tmp/dotrepo-source-integrity-wave-release-20261029/public --base-path / --generated-at 2026-10-29T08:12:34Z --stale-after 2026-10-30T08:12:34Z",
+      "elapsedSeconds": 15.05963,
+      "status": "passed"
+    },
+    {
+      "name": "uv run python scripts/check_public_record_freshness.py --public-root /private/tmp/dotrepo-source-integrity-wave-release-20261029/public --max-stale-or-unknown-rate 0.1 --output-json /private/tmp/dotrepo-source-integrity-wave-release-20261029/public-record-freshness.json",
+      "elapsedSeconds": 0.11795,
+      "status": "passed"
+    },
+    {
+      "name": "uv run python scripts/render_public_pages_landing.py --input /private/tmp/dotrepo-source-integrity-wave-release-20261029/public",
+      "elapsedSeconds": 0.327177,
+      "status": "passed"
+    },
+    {
+      "name": "uv run python scripts/check_public_profile_coverage.py --public-root /private/tmp/dotrepo-source-integrity-wave-release-20261029/public --min-profiles 613 --min-high-signal 0 --min-high-signal-ratio 0.0 --max-conflict-rate 0.0 --max-malformed-profiles 0 --output-json /private/tmp/dotrepo-source-integrity-wave-release-20261029/public-profile-coverage.json --output-md /private/tmp/dotrepo-source-integrity-wave-release-20261029/public-profile-coverage.md --min-signal hasBuild=328 --min-signal hasDocs=165 --min-signal hasLicense=558 --min-signal hasOwnershipSignal=110 --min-signal hasSecurityContact=205 --min-signal hasTest=323",
+      "elapsedSeconds": 0.134813,
+      "status": "passed"
+    },
+    {
+      "name": "uv run python scripts/check_public_quality_dashboard.py --public-root /private/tmp/dotrepo-source-integrity-wave-release-20261029/public --min-profiles 613 --max-generic-field-hits 8 --max-duplicated-description-values 1 --max-duplicate-description-records 2 --max-bad-looking-records 9 --output-json /private/tmp/dotrepo-source-integrity-wave-release-20261029/public-quality-dashboard.json --output-md /private/tmp/dotrepo-source-integrity-wave-release-20261029/public-quality-dashboard.md",
+      "elapsedSeconds": 0.117873,
+      "status": "passed"
+    },
+    {
+      "name": "uv run python scripts/measure_public_policy_coverage.py --public-root /private/tmp/dotrepo-source-integrity-wave-release-20261029/public --output-json /private/tmp/dotrepo-source-integrity-wave-release-20261029/public-policy-coverage.json --output-md /private/tmp/dotrepo-source-integrity-wave-release-20261029/public-policy-coverage.md",
+      "elapsedSeconds": 0.186696,
+      "status": "passed"
+    },
+    {
+      "name": "uv run python scripts/plan_index_growth_tranche.py --candidate-file /Users/maxwell/projects/agent/dotrepo/index/tranche-two-targets.txt --target-count 0 --min-selected 0 --current-high-signal 349 --milestone-high-signal-target 500 --min-planned-high-signal-capacity 349 --output-targets /private/tmp/dotrepo-source-integrity-wave-release-20261029/index-growth-targets.txt --output-json /private/tmp/dotrepo-source-integrity-wave-release-20261029/index-growth-plan.json --output-md /private/tmp/dotrepo-source-integrity-wave-release-20261029/index-growth-plan.md",
+      "elapsedSeconds": 0.080804,
+      "status": "passed"
+    },
+    {
+      "name": "uv run python scripts/build_public_lookup_workload.py --public-root /private/tmp/dotrepo-source-integrity-wave-release-20261029/public --mode research --limit 0 --output /private/tmp/dotrepo-source-integrity-wave-release-20261029/public-lookup-workload.json",
+      "elapsedSeconds": 0.0532,
+      "status": "passed"
+    },
+    {
+      "name": "uv run python scripts/measure_public_lookup_efficiency.py --public-root /private/tmp/dotrepo-source-integrity-wave-release-20261029/public --index-root index --workload /private/tmp/dotrepo-source-integrity-wave-release-20261029/public-lookup-workload.json --generated-at 2026-10-29T08:12:34Z --min-tasks 2452 --min-repositories 613 --min-task-hit-rate 0.47 --min-field-hit-rate 0.71 --max-dotrepo-to-scrape-proxy-ratio 2.43 --output-json /private/tmp/dotrepo-source-integrity-wave-release-20261029/public-lookup-efficiency.json --output-md /private/tmp/dotrepo-source-integrity-wave-release-20261029/public-lookup-efficiency.md --min-intent-hit-rate documentation=0.24 --min-intent-hit-rate execution=0.466 --min-intent-hit-rate overview=0.74 --min-intent-hit-rate security=0.35",
+      "elapsedSeconds": 0.730543,
+      "status": "passed"
+    },
+    {
+      "name": "uv run python scripts/render_public_efficiency_page.py --input /private/tmp/dotrepo-source-integrity-wave-release-20261029/public --benchmark /private/tmp/dotrepo-source-integrity-wave-release-20261029/public-lookup-efficiency.json",
+      "elapsedSeconds": 0.35832,
+      "status": "passed"
+    },
+    {
+      "name": "uv run python scripts/measure_public_factual_accuracy.py --public-root /private/tmp/dotrepo-source-integrity-wave-release-20261029/public --workload scripts/fixtures/public_factual_accuracy_workload.json --generated-at 2026-10-29T08:12:34Z --min-assertions 20 --min-repositories 3 --min-accuracy-rate 1.0 --max-missing-rate 0.0 --max-mismatch-rate 0.0 --output-json /private/tmp/dotrepo-source-integrity-wave-release-20261029/public-factual-accuracy.json --output-md /private/tmp/dotrepo-source-integrity-wave-release-20261029/public-factual-accuracy.md",
+      "elapsedSeconds": 0.04363,
+      "status": "passed"
+    },
+    {
+      "name": "uv run python scripts/measure_public_factual_accuracy.py --public-root /private/tmp/dotrepo-source-integrity-wave-release-20261029/public --workload benchmarks/head-to-head/upstream-2026-10-27/workload.json --min-assertions 119 --min-repositories 31 --min-accuracy-rate 1.0 --max-missing-rate 0 --max-mismatch-rate 0 --output-json /private/tmp/dotrepo-source-integrity-wave-release-20261029/independent-upstream-accuracy.json --output-md /private/tmp/dotrepo-source-integrity-wave-release-20261029/independent-upstream-accuracy.md",
+      "elapsedSeconds": 0.046086,
+      "status": "passed"
+    },
+    {
+      "name": "uv run python scripts/check_release_guidance.py",
+      "elapsedSeconds": 0.048375,
+      "status": "passed"
+    },
+    {
+      "name": "node scripts/check_public_links.mjs /private/tmp/dotrepo-source-integrity-wave-release-20261029/public",
+      "elapsedSeconds": 0.349748,
+      "status": "passed"
+    },
+    {
+      "name": "uv run python scripts/sync_cloudflare_public_snapshot.py --input /private/tmp/dotrepo-source-integrity-wave-release-20261029/public --output /Users/maxwell/projects/agent/dotrepo/cloudflare/hosted-query/public-snapshot",
+      "elapsedSeconds": 5.026097,
+      "status": "passed"
+    },
+    {
+      "name": "uv run python scripts/package_public_export.py --input /private/tmp/dotrepo-source-integrity-wave-release-20261029/public --output-dir /private/tmp/dotrepo-source-integrity-wave-release-20261029/public-bundle",
+      "elapsedSeconds": 1.500126,
+      "status": "passed"
+    },
+    {
+      "name": "npm ci",
+      "elapsedSeconds": 2.541082,
+      "status": "passed"
+    },
+    {
+      "name": "npm test",
+      "elapsedSeconds": 1.421175,
+      "status": "passed"
+    },
+    {
+      "name": "npm run deploy:dry-run",
+      "elapsedSeconds": 3.066277,
+      "status": "passed"
+    },
+    {
+      "name": "cargo build --release -p dotrepo-cli --bins -p dotrepo-lsp -p dotrepo-mcp",
+      "elapsedSeconds": 17.312512,
+      "status": "passed"
+    },
+    {
+      "name": "uv run python scripts/package_release_binaries.py --bin-dir target/release --output-dir /private/tmp/dotrepo-source-integrity-wave-release-20261029/release-bundle --target aarch64-apple-darwin",
+      "elapsedSeconds": 1.125645,
+      "status": "passed"
+    },
+    {
+      "name": "npm ci",
+      "elapsedSeconds": 0.762747,
+      "status": "passed"
+    },
+    {
+      "name": "npm run build",
+      "elapsedSeconds": 0.144116,
+      "status": "passed"
+    },
+    {
+      "name": "npm run package:vsix -- --output /private/tmp/dotrepo-source-integrity-wave-release-20261029/vsix/dotrepo-vscode-v1.0.0.vsix",
+      "elapsedSeconds": 0.181958,
+      "status": "passed"
+    },
+    {
+      "name": "verify public metadata and files",
+      "elapsedSeconds": 0.285856,
+      "status": "passed"
+    },
+    {
+      "name": "release install and stdio smoke tests",
+      "elapsedSeconds": 1.050782,
+      "status": "passed"
+    },
+    {
+      "name": "Cloudflare Worker smoke test",
+      "elapsedSeconds": 1.310455,
+      "status": "passed"
+    }
+  ]
+}

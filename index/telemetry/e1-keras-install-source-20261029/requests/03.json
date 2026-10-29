@@ -1,0 +1,25 @@
+{
+  "args": {
+    "repository_full_name": "keras-team/keras",
+    "path": "keras/__init__.py",
+    "ref": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+    "encoding": "base64"
+  },
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "IyBUaGlzIGZpbGUgc2hvdWxkIE5FVkVSIGJlIHBhY2thZ2VkISBUaGlzIGlz\nIGEgaGFjayB0byBtYWtlICJpbXBvcnQga2VyYXMiIGZyb20KIyB0aGUgYmFz\nZSBvZiB0aGUgcmVwbyBqdXN0IGltcG9ydCB0aGUgc291cmNlIGZpbGVzLiBX\nZSdsbCBrZWVwIGl0IGZvciBjb21wYXQuCgppbXBvcnQgb3MgICMgaXNvcnQ6\nIHNraXAKCiMgQWRkIGV2ZXJ5dGhpbmcgaW4gL2FwaS8gdG8gdGhlIG1vZHVs\nZSBzZWFyY2ggcGF0aC4KX19wYXRoX18uYXBwZW5kKG9zLnBhdGguam9pbihv\ncy5wYXRoLmRpcm5hbWUoX19maWxlX18pLCAiYXBpIikpICAjIG5vcWE6IEY0\nMDUKCmZyb20ga2VyYXMuYXBpIGltcG9ydCAqICAjIG5vcWE6IEY0MDMsIEU0\nMDIKZnJvbSBrZXJhcy5hcGkgaW1wb3J0IF9fdmVyc2lvbl9fICAjIG5vcWE6\nIEU0MDIKCiMgRG9uJ3QgcG9sbHV0ZSBuYW1lc3BhY2UuCmRlbCBvcwo=\n",
+      "encoding": "base64",
+      "sha": "0dc0f6aad102ca6c8aaf4ff1480ebe1544a2c7db",
+      "display_url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/__init__.py",
+      "display_title": "__init__.py"
+    },
+    "isError": false
+  },
+  "reason": "Python parent package initializer on pip_build.py imported keras.src.version chain"
+}
