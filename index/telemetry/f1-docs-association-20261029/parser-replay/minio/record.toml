@@ -1,0 +1,31 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/minio/minio"
+generated_at = "2026-10-29T08:38:08.375109Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "MinIO Quickstart Guide"
+description = "MinIO is a high-performance, S3-compatible object storage solution released under the GNU AGPL v3.0 license."
+homepage = "https://github.com/minio/minio"
+languages = []
+topics = []
+
+[docs]
+getting_started = "https://docs.min.io/community/minio-object-store/reference/minio-mc.html#quickstart"
+
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-10-29T08:38:08.375109Z"
+confidence = "high"
+method = "extracted"
+reason = "Explicit documentation link at README.md:153: Follow the MinIO Client [Quickstart Guide](https://docs.min.io/community/minio-object-store/reference/minio-mc.html#quickstart) for further instructions."
+source = "README.md"
+state = "present"
+valueJson = '"https://docs.min.io/community/minio-object-store/reference/minio-mc.html#quickstart"'

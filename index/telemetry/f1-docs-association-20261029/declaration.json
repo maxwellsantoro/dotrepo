@@ -1,0 +1,67 @@
+{
+  "schema": "dotrepo-f1-docs-association-declaration/v1",
+  "declaredAt": "2026-10-29T08:32:02.615406+00:00",
+  "base": "595303f9b8bfa58366c9f2c93fb619ca54591ea2",
+  "identities": [
+    {
+      "identity": "github.com/realm/SwiftLint",
+      "field": "docs.root",
+      "oldValue": "https://megalinter.io/latest/descriptors/swift_swiftlint/",
+      "recordSha256": "21a00bdcbb80c699dc85659242394ba089064a35dce0596ed089b44bfa9a0b28",
+      "evidenceSha256": "4998b44d3a499e8e1425673337a39e6ee89aa31fba159eb43c391fe521d671fa",
+      "mode": "overlay",
+      "status": "verified",
+      "authority": "automatically verified overlay; no native/reviewed/canonical authority claimed",
+      "recordSource": "https://github.com/realm/SwiftLint",
+      "recordGeneratedAt": "2026-10-27T18:15:27.41844Z",
+      "sourceRevisionFromRecord": "ec4691d9e813a1d3358e82917326b56b0a71d3c9",
+      "oldFieldEvidence": {
+        "checkedAt": "2026-10-27T18:15:27.41844Z",
+        "confidence": "high",
+        "method": "extracted",
+        "reason": "Explicit documentation link at README.md:486: [SwiftLint documentation](https://megalinter.io/latest/descriptors/swift_swiftlint/)",
+        "source": "README.md",
+        "state": "present",
+        "valueJson": "\"https://megalinter.io/latest/descriptors/swift_swiftlint/\""
+      }
+    },
+    {
+      "identity": "github.com/minio/minio",
+      "field": "docs.getting_started",
+      "oldValue": "https://docs.min.io/community/minio-object-store/reference/minio-mc.html#quickstart",
+      "recordSha256": "cb28185023915957c67d66aa26b39b41dba782faac2417ce035d5e56a2427acf",
+      "evidenceSha256": "3388cd58078fa166c92b5407c07288f66681e29367073c03a9a581d6f26709a1",
+      "mode": "overlay",
+      "status": "verified",
+      "authority": "automatically verified overlay; no native/reviewed/canonical authority claimed",
+      "recordSource": "https://github.com/minio/minio",
+      "recordGeneratedAt": "2026-10-04T07:53:35.951591156Z",
+      "sourceRevisionFromRecord": "7aac2a2c5b7c882e68c1ce017d8256be2feea27f",
+      "oldFieldEvidence": {
+        "checkedAt": "2026-10-04T07:53:35.951591156Z",
+        "confidence": "high",
+        "method": "extracted",
+        "reason": "Explicit documentation link at README.md:153: Follow the MinIO Client [Quickstart Guide](https://docs.min.io/community/minio-object-store/reference/minio-mc.html#quickstart) for further instructions.",
+        "source": "README.md",
+        "state": "present",
+        "valueJson": "\"https://docs.min.io/community/minio-object-store/reference/minio-mc.html#quickstart\""
+      }
+    }
+  ],
+  "selection": "Two explicitly assigned flagged docs fields from existing eligible-risk-sample; signals are selection only, not correctness labels. No F05/E1 identity included.",
+  "limits": {
+    "maximumReadOnlyApiHttpRequests": 12,
+    "perIdentitySources": "exact commit metadata and README plus at most two directly referenced relevant files",
+    "sourceBytesPerFile": 2097152,
+    "crawl": false,
+    "upstreamExecution": false,
+    "packages": false,
+    "providers": false,
+    "indexFieldsInspected": [
+      "docs.root for SwiftLint",
+      "docs.getting_started for minio"
+    ]
+  },
+  "authorityRule": "May correct/downgrade automated verified overlays; no reviewed/canonical/verified minting; preserve unrelated facts and historical evidence. Recheck hashes immediately before any writes.",
+  "beforeLookupRequests": 0
+}

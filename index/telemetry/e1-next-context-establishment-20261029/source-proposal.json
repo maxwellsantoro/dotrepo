@@ -1,0 +1,244 @@
+{
+  "identity": "e1-next-context-establishment-20261029",
+  "base": "595303f9b8bfa58366c9f2c93fb619ca54591ea2",
+  "classification": "Known exposed E1 development identity, selected by prior extractor/gold author; not fresh qualification or independent consumer evidence",
+  "repository": "github.com/docker/compose",
+  "revision": "343bb382d2192b88d84af49971bb5cb99bee268c",
+  "taskId": "e1-go-03-repository-tests",
+  "taskIntent": "Establish the maintainer repository-default automated unit-test instruction and complete applicability context; distinguish e2e/manual/separate modules. Preserve original exposed repository task rather than substituting a narrower direct Go suite.",
+  "proposedTuple": {
+    "command": "make test",
+    "working_directory": ".",
+    "scope": "repository",
+    "component": null,
+    "source": "BUILDING.md",
+    "prerequisites": [
+      "Linux host prerequisites declared by BUILDING.md: Docker 20.10 or later, Make, and host Go satisfying root go.mod minimum 1.26.10. This host declaration is distinct from the container builder toolchain.",
+      "Provide functioning Docker/Buildx BuildKit infrastructure supporting bake and the declared bind/cache mounts. Makefile defaults BUILDX_CMD to docker buildx; no minimum Buildx version is documented in retained sources.",
+      "Allow the declared builder image, apk package, Go module and gotestsum v1.13.0 acquisition, or suitable existing images/caches. Default in-image Go is 1.26.10 from Dockerfile ARG, independently of host Go. The builder installs gcc/musl-dev and enables CGO for the race detector.",
+      "Use the unchanged default Make/Bake/Dockerfile configuration; overrides of BUILDX_CMD, GO_VERSION, BUILD_TAGS, GOTESTSUM_VERSION and DESTDIR require a new applicability assessment.",
+      "Coverage is the maintainer default main Go module unit target, excluding e2e package paths; relay/ is a separate module/target. This is not every module or e2e lane."
+    ]
+  },
+  "sourceGrounding": {
+    "command": "BUILDING.md:31-37 says all unit tests; Makefile:123-125 owns literal test target.",
+    "directory": "Root Makefile and root Bake/Dockerfile/go.mod own the route; no -C/context override in declared make test route. Root is an assessed source-derived directory, not a printed cd instruction.",
+    "scope": "Documented all-unit default, implemented by Bake test -> Dockerfile test-coverage and test stage. Separate relay target explicitly documented in Makefile/Bake; scope is repository default rather than all possible suites.",
+    "platform": "Selected Linux prerequisite branch retained explicitly; no cross-platform generalization.",
+    "prerequisites": "BUILDING root prerequisite list, root go.mod minimum, Make Buildx default, Bake stage mapping and Dockerfile inherited setup/test commands retained together."
+  },
+  "uncertainties": [
+    {
+      "topic": "literal shell token",
+      "source": "Dockerfile:136",
+      "detail": "The retained RUN command literally has $(go list $(TAGS) ./... | grep -vE e2e). The inner $(TAGS) is shell command-substitution syntax; its intended command/behavior has not been independently established. Do not normalize it into a flag or claim it ran successfully. Independent assessor must decide whether this is an applicability/completeness blocker. This concern is not declared fatal and does not establish a new TAGS executable prerequisite."
+    },
+    {
+      "topic": "test helper closure",
+      "detail": "Retained sources do not include every package test/helper or dependency/build-system source. The explicit maintained Dockerfile setup may be a sufficient documented contract, but no universal absence of additional runtime conditions is proven."
+    },
+    {
+      "topic": "environment readiness/external artifacts",
+      "detail": "Docker/Buildx availability, image/package/module fetches, compiler behavior, network, resources and actual test execution are unobserved. Source establishes recipe, not that a particular consumer environment satisfies it."
+    },
+    {
+      "topic": "configuration",
+      "detail": "Task is default configuration only. Shell Make variables, Bake auto override files/env, builder platform and preexisting outputs can change behavior. The complete checkout inventory is not retained; absence of additional Bake override files cannot be inferred from this selected file set."
+    },
+    {
+      "topic": "Buildx minimum",
+      "detail": "Buildx availability is a prerequisite inferred from the exact Make command; no minimum Buildx release is documented or invented."
+    }
+  ],
+  "decisions": {
+    "representationExists": true,
+    "sourceProposalFrozenBeforeCode": true,
+    "completeInstructionEstablishedByThisAuthor": false,
+    "needsIndependentCompletenessDisposition": true,
+    "highConfidencePromotion": false,
+    "consumerBenefitMeasured": false,
+    "implementationAuthorized": false
+  },
+  "selectionComparison": {
+    "photocraft": "Broad optional font/corpus/GPU/platform distinctions and additional referenced helper sources remain, increasing closure cost.",
+    "pixijs": "Default npm test includes browser/visual/server/build conditions; narrower selectors would change task scope and runner/setup references need closure.",
+    "compose": "Exact natural BUILDING unit command plus root Make/Bake/Docker implementation and platform prerequisites all retained. Strongest bounded source proposal; qualifications above stay visible."
+  },
+  "readBoundaries": {
+    "newNetworkCalls": 0,
+    "upstreamExecuted": false,
+    "cargoBuilds": 0,
+    "f05SourcesRead": false,
+    "evaluatedIndexProfilesRead": false,
+    "sharedFilesEdited": false
+  },
+  "sourceLedger": {
+    "path": "benchmarks/head-to-head/e1-development-20261029b/development-ledger.json",
+    "sha256": "f571327a544ad2bff27c65c39c6e5b9707dbe65416ae48f1b27256740d3acf1c"
+  },
+  "sources": {
+    "BUILDING.md": {
+      "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/BUILDING.md",
+      "upstreamPath": "BUILDING.md",
+      "bytes": 2206,
+      "sha256": "68694744374f7b98c6dd284aea8d657267a6f6383e9bd5580f725a3e723a7cd4",
+      "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/BUILDING.md"
+    },
+    "Makefile": {
+      "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/Makefile",
+      "upstreamPath": "Makefile",
+      "bytes": 7050,
+      "sha256": "927856982fcd81c94dd843743000b8a828baf5af02503d64f7a4c4cc477ac4cc",
+      "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/Makefile"
+    },
+    "docker-bake.hcl": {
+      "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/docker-bake.hcl",
+      "upstreamPath": "docker-bake.hcl",
+      "bytes": 4836,
+      "sha256": "d8e460f357e8913b41a81458d2c3280f5494368c2f20eaca7ebcb1bdeaeebce5",
+      "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/docker-bake.hcl"
+    },
+    "Dockerfile": {
+      "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/Dockerfile",
+      "upstreamPath": "Dockerfile",
+      "bytes": 7870,
+      "sha256": "5f35a0fce55a645e2497f861aba1414f237d532493b4f2bda138c609b28ef44f",
+      "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/Dockerfile"
+    },
+    "go.mod": {
+      "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/go.mod",
+      "upstreamPath": "go.mod",
+      "bytes": 6691,
+      "sha256": "add1d3fc58082dc40ea0ebcc3d2c80b1f4bf99a5452aab2026e8997b511cfb09",
+      "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/go.mod"
+    }
+  },
+  "passages": [
+    {
+      "path": "BUILDING.md",
+      "startLine": 2,
+      "endLine": 16,
+      "wholeFileSha256": "68694744374f7b98c6dd284aea8d657267a6f6383e9bd5580f725a3e723a7cd4",
+      "passageSha256": "f109b645b165e0722bdf126202c3ea05a2f97c96d1413d181032b56a1d106d63",
+      "text": "### Prerequisites\n\n* Windows:\n  * [Docker Desktop](https://docs.docker.com/desktop/setup/install/windows-install/)\n  * make\n  * go (see [go.mod](go.mod) for minimum version)\n* macOS:\n  * [Docker Desktop](https://docs.docker.com/desktop/setup/install/mac-install/)\n  * make\n  * go (see [go.mod](go.mod) for minimum version)\n* Linux:\n  * [Docker 20.10 or later](https://docs.docker.com/engine/install/)\n  * make\n  * go (see [go.mod](go.mod) for minimum version)\n\n",
+      "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/BUILDING.md#L2-L16"
+    },
+    {
+      "path": "BUILDING.md",
+      "startLine": 19,
+      "endLine": 37,
+      "wholeFileSha256": "68694744374f7b98c6dd284aea8d657267a6f6383e9bd5580f725a3e723a7cd4",
+      "passageSha256": "299303fa329c0b5fdf8ea6ea284bdf53bd876a669cf109a069fa683d43d5d2d1",
+      "text": "Once you have the prerequisites installed, you can build the CLI using:\n\n```console\nmake\n```\n\nThis will output a `docker-compose` CLI plugin for your host machine in\n`./bin/build`.\n\nYou can statically cross compile the CLI for Windows, macOS, and Linux using the\n`cross` target.\n\n### Unit tests\n\nTo run all of the unit tests, run:\n\n```console\nmake test\n```\n",
+      "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/BUILDING.md#L19-L37"
+    },
+    {
+      "path": "BUILDING.md",
+      "startLine": 40,
+      "endLine": 44,
+      "wholeFileSha256": "68694744374f7b98c6dd284aea8d657267a6f6383e9bd5580f725a3e723a7cd4",
+      "passageSha256": "0f7a579834d4589f5b65b66a11bc5e96badfb694cdba0a749c37a8916ea1894f",
+      "text": "\n### End-to-end tests\nTo run e2e tests, the Compose CLI binary needs to be built. All the commands to run e2e tests propose a version\nwith the prefix `build-and-e2e` to first build the CLI before executing tests.\n\n",
+      "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/BUILDING.md#L40-L44"
+    },
+    {
+      "path": "Makefile",
+      "startLine": 15,
+      "endLine": 19,
+      "wholeFileSha256": "927856982fcd81c94dd843743000b8a828baf5af02503d64f7a4c4cc477ac4cc",
+      "passageSha256": "b67166573cf62e0f0f2181d12adacca488c884a1dc181f895e27444cbd06c7e6",
+      "text": "PKG := github.com/docker/compose/v5\nVERSION ?= $(shell git describe --match 'v[0-9]*' --dirty='.m' --always --tags)\n\nGO_LDFLAGS ?= -w -X ${PKG}/internal.Version=${VERSION}\nGO_BUILDTAGS ?= e2e\n",
+      "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/Makefile#L15-L19"
+    },
+    {
+      "path": "Makefile",
+      "startLine": 32,
+      "endLine": 52,
+      "wholeFileSha256": "927856982fcd81c94dd843743000b8a828baf5af02503d64f7a4c4cc477ac4cc",
+      "passageSha256": "103127c3dc69bd12735c1bef0bea45b83826830ed3af00f2b7b49bc0e04f2a2e",
+      "text": "BUILD_FLAGS?=\nTEST_FLAGS?=\nE2E_TEST?=\nE2E_PARALLEL_PLUGIN?=4\nE2E_STANDALONE_PARALLEL?=4\nifneq ($(E2E_TEST),)\n\tTEST_FLAGS:=$(TEST_FLAGS) -run '$(E2E_TEST)'\nendif\n\nEXCLUDE_E2E_TESTS?=\nifneq ($(EXCLUDE_E2E_TESTS),)\n\tTEST_FLAGS:=$(TEST_FLAGS) -skip '$(EXCLUDE_E2E_TESTS)'\nendif\n\nBUILDX_CMD ?= docker buildx\n\n# Pinned so that a new upstream release cannot break the build without a change\n# in this repository. Keep GOTESTSUM_VERSION in sync with the Dockerfile.\nGOTESTSUM_VERSION ?= v1.13.0\nGOFUMPT_VERSION ?= v0.12.0\nGOTESTSUM = go run gotest.tools/gotestsum@$(GOTESTSUM_VERSION)\n",
+      "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/Makefile#L32-L52"
+    },
+    {
+      "path": "Makefile",
+      "startLine": 123,
+      "endLine": 129,
+      "wholeFileSha256": "927856982fcd81c94dd843743000b8a828baf5af02503d64f7a4c4cc477ac4cc",
+      "passageSha256": "7375c09b6f153aba36963b50bd5b607a969b8aede9a67a8daa7c14a0daf109db",
+      "text": ".PHONY: test\ntest: ## Run unit tests\n\t$(BUILDX_CMD) bake test\n\n.PHONY: relay-test\nrelay-test: ## Run unit tests for the relay/ module\n\t$(BUILDX_CMD) bake relay-test\n",
+      "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/Makefile#L123-L129"
+    },
+    {
+      "path": "docker-bake.hcl",
+      "startLine": 15,
+      "endLine": 22,
+      "wholeFileSha256": "d8e460f357e8913b41a81458d2c3280f5494368c2f20eaca7ebcb1bdeaeebce5",
+      "passageSha256": "feeb7059f200892f8b3731c55731508117a36bb96439ac84e3b71b861630958d",
+      "text": "variable \"GO_VERSION\" {\n  # default ARG value set in Dockerfile\n  default = null\n}\n\nvariable \"BUILD_TAGS\" {\n  default = \"e2e\"\n}\n",
+      "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/docker-bake.hcl#L15-L22"
+    },
+    {
+      "path": "docker-bake.hcl",
+      "startLine": 43,
+      "endLine": 49,
+      "wholeFileSha256": "d8e460f357e8913b41a81458d2c3280f5494368c2f20eaca7ebcb1bdeaeebce5",
+      "passageSha256": "63e1abaf2045ef906d782f1de1f8dcbe54613f29e93136f49853bc5419095996",
+      "text": "target \"_common\" {\n  args = {\n    GO_VERSION = GO_VERSION\n    BUILD_TAGS = BUILD_TAGS\n    BUILDKIT_CONTEXT_KEEP_GIT_DIR = 1\n  }\n}\n",
+      "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/docker-bake.hcl#L43-L49"
+    },
+    {
+      "path": "docker-bake.hcl",
+      "startLine": 93,
+      "endLine": 97,
+      "wholeFileSha256": "d8e460f357e8913b41a81458d2c3280f5494368c2f20eaca7ebcb1bdeaeebce5",
+      "passageSha256": "a1c34a78185efd652045baa8ddf30d13757535422472a8774212d6fd4b438c44",
+      "text": "target \"test\" {\n  inherits = [\"_common\"]\n  target = \"test-coverage\"\n  output = [outdir(\"./bin/coverage/unit\")]\n}\n",
+      "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/docker-bake.hcl#L93-L97"
+    },
+    {
+      "path": "docker-bake.hcl",
+      "startLine": 170,
+      "endLine": 184,
+      "wholeFileSha256": "d8e460f357e8913b41a81458d2c3280f5494368c2f20eaca7ebcb1bdeaeebce5",
+      "passageSha256": "0b324373cea391dfd428a9fad143c5bc985a813660fabc52458215781d59e9b4",
+      "text": "// relay-lint and relay-test validate relay/'s own module (a separate go.mod:\n// go vet/lint/test from the repo root don't cover it). Self-contained build\n// context, so relay/ carries its own .golangci.yml rather than sharing the\n// root one, which isn't in scope for a \"./relay\" context.\ntarget \"relay-lint\" {\n  context = \"./relay\"\n  target  = \"lint\"\n  output  = [\"type=cacheonly\"]\n}\n\ntarget \"relay-test\" {\n  context = \"./relay\"\n  target  = \"test\"\n  output  = [\"type=cacheonly\"]\n}\n",
+      "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/docker-bake.hcl#L170-L184"
+    },
+    {
+      "path": "Dockerfile",
+      "startLine": 18,
+      "endLine": 27,
+      "wholeFileSha256": "5f35a0fce55a645e2497f861aba1414f237d532493b4f2bda138c609b28ef44f",
+      "passageSha256": "b19cf066b2c67168fbbf5a609a30cb40ce6203b833c8d0dd1e195c8f189972aa",
+      "text": "ARG GO_VERSION=1.26.10\nARG XX_VERSION=1.9.0\nARG GOLANGCI_LINT_VERSION=v2.15.0\nARG ADDLICENSE_VERSION=v1.0.0\n# Keep in sync with GOTESTSUM_VERSION in the Makefile\nARG GOTESTSUM_VERSION=v1.13.0\n\nARG BUILD_TAGS=\"e2e\"\nARG DOCS_FORMATS=\"md,yaml\"\nARG LICENSE_FILES=\".*\\(Dockerfile\\|Makefile\\|\\.go\\|\\.hcl\\|\\.sh\\)\"\n",
+      "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/Dockerfile#L18-L27"
+    },
+    {
+      "path": "Dockerfile",
+      "startLine": 29,
+      "endLine": 56,
+      "wholeFileSha256": "5f35a0fce55a645e2497f861aba1414f237d532493b4f2bda138c609b28ef44f",
+      "passageSha256": "30dac6196d5bb7ccfa19f8354cd1320df1a13fe84546e492c4d8f6f65f6d619d",
+      "text": "# xx is a helper for cross-compilation\nFROM --platform=${BUILDPLATFORM} tonistiigi/xx:${XX_VERSION} AS xx\n\n# osxcross contains the MacOSX cross toolchain for xx\nFROM crazymax/osxcross:15.5-alpine AS osxcross\n\nFROM golangci/golangci-lint:${GOLANGCI_LINT_VERSION}-alpine AS golangci-lint\nFROM ghcr.io/google/addlicense:${ADDLICENSE_VERSION} AS addlicense\n\nFROM --platform=${BUILDPLATFORM} golang:${GO_VERSION}-alpine3.23 AS base\nCOPY --from=xx / /\nRUN apk add --no-cache \\\n      clang \\\n      docker \\\n      file \\\n      findutils \\\n      git \\\n      make \\\n      protoc \\\n      protobuf-dev\nWORKDIR /src\nENV CGO_ENABLED=0\n\nFROM base AS build-base\nCOPY go.* .\nRUN --mount=type=cache,target=/go/pkg/mod \\\n    --mount=type=cache,target=/root/.cache/go-build \\\n    go mod download\n",
+      "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/Dockerfile#L29-L56"
+    },
+    {
+      "path": "Dockerfile",
+      "startLine": 123,
+      "endLine": 141,
+      "wholeFileSha256": "5f35a0fce55a645e2497f861aba1414f237d532493b4f2bda138c609b28ef44f",
+      "passageSha256": "b6e03da74ae8e53143315c6e7f77a84497572d85e51a15c5c73945969ea37f0d",
+      "text": "FROM build-base AS test\n# the race detector requires cgo (ENV: base sets CGO_ENABLED=0, which an ARG can't override)\nENV CGO_ENABLED=1\nARG BUILD_TAGS\nARG GOTESTSUM_VERSION\nRUN apk add --no-cache gcc musl-dev\nRUN --mount=type=bind,target=. \\\n    --mount=type=cache,target=/root/.cache \\\n    --mount=type=cache,target=/go/pkg/mod \\\n    rm -rf /tmp/coverage && \\\n    mkdir -p /tmp/coverage && \\\n    rm -rf /tmp/report && \\\n    mkdir -p /tmp/report && \\\n    go run gotest.tools/gotestsum@${GOTESTSUM_VERSION} --format testname --junitfile \"/tmp/report/report.xml\" -- -tags \"$BUILD_TAGS\" -v -race -cover -covermode=atomic $(go list  $(TAGS) ./... | grep -vE 'e2e') -args -test.gocoverdir=\"/tmp/coverage\" && \\\n    go tool covdata percent -i=/tmp/coverage\n\nFROM scratch AS test-coverage\nCOPY --from=test --link /tmp/coverage /\nCOPY --from=test --link /tmp/report /\n",
+      "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/Dockerfile#L123-L141"
+    },
+    {
+      "path": "go.mod",
+      "startLine": 1,
+      "endLine": 3,
+      "wholeFileSha256": "add1d3fc58082dc40ea0ebcc3d2c80b1f4bf99a5452aab2026e8997b511cfb09",
+      "passageSha256": "7a3de29ebfa33812a1d7c5c3a837b5d5839700b4877dbb7f484e59df1558efd2",
+      "text": "module github.com/docker/compose/v5\n\ngo 1.26.10\n",
+      "url": "https://github.com/docker/compose/blob/343bb382d2192b88d84af49971bb5cb99bee268c/go.mod#L1-L3"
+    }
+  ]
+}

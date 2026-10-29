@@ -1,0 +1,142 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T08:40:00Z",
+    "snapshotDigest": "51fa687deb7b08913b721401c7efea724279c88608bb21832919272a7530342e"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "realm",
+    "repo": "SwiftLint",
+    "source": "https://github.com/realm/SwiftLint"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/realm/SwiftLint/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/realm/SwiftLint",
+    "generatedAt": "2026-10-27T18:15:27.41844Z",
+    "evidencePath": "repos/github.com/realm/SwiftLint/evidence.md",
+    "freshnessStatus": "fresh",
+    "ageDays": 1,
+    "staleAfterDays": 30,
+    "sourceRevision": "ec4691d9e813a1d3358e82917326b56b0a71d3c9"
+  },
+  "purpose": "A tool to enforce Swift style and conventions.",
+  "name": "SwiftLint",
+  "homepage": "https://realm.github.io/SwiftLint",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Swift",
+    "Starlark",
+    "Ruby",
+    "Makefile",
+    "Shell",
+    "Dockerfile",
+    "HTML",
+    "C"
+  ],
+  "topics": [
+    "linter",
+    "linting",
+    "swift",
+    "static-analysis",
+    "code-quality",
+    "hacktoberfest"
+  ],
+  "execution": {
+    "build": "make all",
+    "test": "make test"
+  },
+  "docs": {
+    "root": "https://realm.github.io/SwiftLint/index.html"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "imported",
+    "confidence": "medium",
+    "provenance": [
+      "imported"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "fieldEvidence": {
+    "docs.getting_started": {
+      "checkedAt": "2026-10-27T18:15:27.41844Z",
+      "confidence": "high",
+      "method": "not_found_in_inspected_sources",
+      "reason": "no unambiguous documentation declaration detected",
+      "state": "not_found"
+    },
+    "owners.security_contact": {
+      "checkedAt": "2026-10-27T18:15:27.41844Z",
+      "confidence": "high",
+      "method": "not_found_in_inspected_sources",
+      "reason": "no SECURITY.md or security contact sources found",
+      "state": "not_found"
+    },
+    "owners.team": {
+      "checkedAt": "2026-10-27T18:15:27.41844Z",
+      "confidence": "high",
+      "method": "not_found_in_inspected_sources",
+      "reason": "no single clear team in CODEOWNERS",
+      "state": "not_found"
+    },
+    "repo.build": {
+      "checkedAt": "2026-10-27T18:15:27.41844Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "from declared repository source",
+      "source": "Makefile",
+      "state": "present"
+    },
+    "repo.description": {
+      "checkedAt": "2026-10-27T18:15:27.41844Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "constrained by GitHub repository metadata",
+      "source": "GitHub API",
+      "state": "present"
+    },
+    "repo.homepage": {
+      "checkedAt": "2026-10-27T18:15:27.41844Z",
+      "confidence": "high",
+      "method": "unspecified",
+      "reason": "set and passes quality check",
+      "state": "present"
+    },
+    "repo.name": {
+      "checkedAt": "2026-10-27T18:15:27.41844Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "extracted from README title with post-cleaners",
+      "source": "README.md",
+      "state": "present"
+    },
+    "repo.test": {
+      "checkedAt": "2026-10-27T18:15:27.41844Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "from declared repository source",
+      "source": "Makefile",
+      "state": "present"
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/realm/SwiftLint/profile.json",
+    "repository": "/v0/repos/github.com/realm/SwiftLint/index.json",
+    "trust": "/v0/repos/github.com/realm/SwiftLint/trust.json",
+    "queryTemplate": "/v0/repos/github.com/realm/SwiftLint/query?path={dot_path}",
+    "indexPath": "repos/github.com/realm/SwiftLint/"
+  }
+}

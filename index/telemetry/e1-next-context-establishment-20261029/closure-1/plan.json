@@ -1,0 +1,13 @@
+{
+  "identity": "e1-next-context-establishment-20261029/closure-1",
+  "repository": "docker/compose",
+  "revision": "343bb382d2192b88d84af49971bb5cb99bee268c",
+  "parentFreezeSha256": "b86edaf4b1075f2f1242d2280eff967202e7e32afaa5663db746dd4c643cfdfe",
+  "taskUnchanged": "e1-go-03-repository-tests: make test from root with main-module default unit coverage",
+  "bounds": {"readOnlyGitHubCalls": 6, "additionalFiles": 4, "bytesPerFile": 2097152, "totalSourceBytes": 8388608},
+  "acquisition": "Exact Git commit metadata -> nonrecursive complete root tree -> only present additional default Bake files; relay subtree metadata only if necessary to bind separate module",
+  "defaultBakeFiles": ["compose.yaml", "compose.yml", "docker-compose.yml", "docker-compose.yaml", "docker-bake.json", "docker-bake.hcl", "docker-bake.override.json", "docker-bake.override.hcl"],
+  "additionalQuestions": ["root go.work presence/absence", "root go.mod and relay subtree/module binding"],
+  "conditionsRetained": ["Unchanged frozen checkout", "No user-local default override files", "No BUILDX_BAKE_FILE, CLI or environment configuration overrides"],
+  "constraints": {"upstreamExecution": false, "packagesContainersCargoProvidersIndexF05": false, "confidencePromotion": false, "commandSubstitution": false, "sourceOnlyPriorAuthorDevelopmentFollowup": true}
+}

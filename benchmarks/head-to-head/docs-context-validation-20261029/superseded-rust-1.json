@@ -1,0 +1,59 @@
+[
+  {
+    "command": [
+      "cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exitCode": 0,
+    "seconds": 0.5601359999272972
+  },
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "--workspace",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exitCode": 0,
+    "seconds": 9.914708666037768
+  },
+  {
+    "command": [
+      "cargo",
+      "deny",
+      "check",
+      "advisories",
+      "licenses",
+      "bans",
+      "sources"
+    ],
+    "exitCode": 0,
+    "seconds": 0.6532747079618275
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--workspace"
+    ],
+    "exitCode": 0,
+    "seconds": 109.5105170828756
+  },
+  {
+    "command": [
+      "cargo",
+      "check",
+      "--locked",
+      "--manifest-path",
+      "crates/dotrepo/Cargo.toml"
+    ],
+    "exitCode": 0,
+    "seconds": 1.2402606250252575
+  }
+]

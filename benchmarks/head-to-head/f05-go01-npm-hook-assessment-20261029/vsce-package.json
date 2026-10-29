@@ -1,0 +1,13 @@
+{
+  "executionOccurred": false,
+  "members": {
+    "package/package.json": {
+      "bytes": 1035,
+      "sha256": "094ee1688ec4c49bbea8762f4f3da35da8fcabd7c416ec9c275359d1700858ee",
+      "text": "{\n  \"name\": \"@vscode/vsce-sign\",\n  \"description\": \"Visual Studio Code extension package signing and verification module\",\n  \"version\": \"2.1.0\",\n  \"author\": {\n    \"name\": \"Microsoft\"\n  },\n  \"license\": \"SEE LICENSE IN LICENSE.txt\",\n  \"devDependencies\": {\n    \"mocha\": \"^10.0.0\"\n  },\n  \"optionalDependencies\": {\n    \"@vscode/vsce-sign-darwin-arm64\": \"2.0.6\",\n    \"@vscode/vsce-sign-darwin-x64\": \"2.0.6\",\n    \"@vscode/vsce-sign-win32-arm64\": \"2.0.6\",\n    \"@vscode/vsce-sign-win32-x64\": \"2.0.6\",\n    \"@vscode/vsce-sign-linux-arm64\": \"2.0.6\",\n    \"@vscode/vsce-sign-linux-arm\": \"2.0.6\",\n    \"@vscode/vsce-sign-linux-x64\": \"2.0.6\",\n    \"@vscode/vsce-sign-alpine-arm64\": \"2.0.6\",\n    \"@vscode/vsce-sign-alpine-x64\": \"2.0.6\"\n  },\n  \"homepage\": \"https://github.com/Microsoft/node-vsce-sign\",\n  \"main\": \"src/main.js\",\n  \"scripts\": {\n    \"postinstall\": \"node ./src/postinstall.js\",\n    \"package\": \"node ./build/package.js\",\n    \"download\": \"node ./build/download.js\",\n    \"test\": \"mocha ./src/test/*.test.js --timeout 5s --fail-zero --exit\"\n  }\n}\n"
+    }
+  },
+  "packageLockPath": "node_modules/@vscode/vsce-sign",
+  "tarballSha256": "406852a22ee49aabb8f3b9b1a6b47e25a5772207a2b64eca170ace59136c7929",
+  "version": "2.1.0"
+}

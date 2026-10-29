@@ -1,0 +1,46 @@
+{
+  "state": "focused-checks-pass-independent-review-pending",
+  "newTests": 9,
+  "docsFilteredTestsPassed": 17,
+  "existingParsingTestsPassed": 31,
+  "fixtureGateTestsPassed": 2,
+  "sharedExpectationsChanged": false,
+  "coreAllTargetsClippy": "pass",
+  "ownedRustfmtCheck": "pass",
+  "sourceOnlyCliReplays": 2,
+  "oldAssociationSelectedAfterRepair": 0,
+  "indexRecordsChangedByParserRepair": false,
+  "upstreamExecution": false,
+  "networkRequests": 0,
+  "modelCalls": 0,
+  "retainedFailures": [
+    {
+      "path": "checks/existing-parsing-tests.log",
+      "exitCode": 101,
+      "details": "29 passed/2 failed; first revision omitted docs-section Available [here] and bare URL after docs intro. Both preserved in final controls."
+    },
+    {
+      "path": "checks/fixture-gate.log",
+      "exitCode": 101,
+      "details": "1 passed/1 failed; first paragraph grouping suppressed redis-py docs badge among adjacent badges. Explicit badge rows now independent declarations; unchanged fixture expectations pass."
+    }
+  ],
+  "performanceControl": {
+    "inputBytesGreaterThan": 1000000,
+    "physicalLines": 20000,
+    "linkedLines": 2000,
+    "paragraphContextBuilds": 1,
+    "timingThresholdUsed": false,
+    "result": "complete paragraph remains prose and abstains; no truncation into nav"
+  },
+  "remainingLimits": [
+    "Bounded lexical source association, not semantic ownership or target correctness proof.",
+    "Explicit standalone/nav/badge declarations are accepted as source declarations without host/domain restrictions.",
+    "Only known neutral direct instruction shapes and exact project-qualified labels are recognized; other genuine prose may abstain.",
+    "Paragraph grouping handles contiguous wrapped prose/list continuations with bounded heading/fence/badge/reference/list boundaries; not a complete Markdown AST or arbitrary HTML parser.",
+    "Existing per-line link parser complexity remains; cache prevents repeated full-paragraph scans/rendering, not a claim of universal linear complexity.",
+    "No external URI resolution, parent URL guessing, version parity, liveness check, or maintainer status promotion added.",
+    "README-only replays are not complete crawler refreshes; no tombstone policy added.",
+    "Corrected index records and fresh assessment publication limitation remain independently frozen."
+  ]
+}

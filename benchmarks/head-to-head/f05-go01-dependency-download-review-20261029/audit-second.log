@@ -1,0 +1,903 @@
+{
+  "stats": {
+    "outerExpandedBytes": 351962210,
+    "outerFiles": 15246,
+    "notCanonicalJson": 41193,
+    "canonicalJsonParsed": 5888,
+    "emptyProtectedAliases": 197,
+    "canonicalJsonSizeExcluded": 3,
+    "nestedFiles": 31838,
+    "nestedExpandedBytes": 499680412
+  },
+  "npm": {
+    "stats": {
+      "lockMatchedTarballs": 165,
+      "indexEntries": 165,
+      "contentSha512": 162,
+      "nestedType:b'5'": 11
+    },
+    "publicRegistryUrls": 162,
+    "tarballsOutsideSourceLock": [],
+    "sourceLockExternalUrls": 239,
+    "sensitiveHeaderNames": []
+  },
+  "go": {
+    "stats": {
+      "extractedMembersByteMatched": 13820,
+      "ziphashMatches": 136,
+      "sourceGoSumZipMatches": 47,
+      "sourceGoSumModMatches": 65
+    },
+    "checksumsMissingFromSelectedSourceSums": [
+      {
+        "module": "go.yaml.in/yaml/v3",
+        "version": "v3.0.4",
+        "h1": "h1:tfq32ie2Jv2UxXFdLJdh3jXuOzWiL1fo0bu/FbuKpbc="
+      },
+      {
+        "module": "go.yaml.in/yaml/v3",
+        "version": "v3.0.4/go.mod",
+        "h1": "h1:DhzuOOF2ATzADvBadXxruRBLzYTpT36CKvDb3+aBEFg="
+      },
+      {
+        "module": "go.mongodb.org/mongo-driver",
+        "version": "v1.17.6",
+        "h1": "h1:87JUG1wZfWsr6rIz3ZmpH90rL5tea7O3IHuSwHUpsss="
+      },
+      {
+        "module": "go.mongodb.org/mongo-driver",
+        "version": "v1.17.6/go.mod",
+        "h1": "h1:Hy04i7O2kC4RS06ZrhPRqj/u4DTYkFDAAccj+rVKqgQ="
+      },
+      {
+        "module": "dario.cat/mergo",
+        "version": "v1.0.2",
+        "h1": "h1:85+piFYR1tMbRrLcDwR18y4UKJ3aH1Tbzi24VRW1TK8="
+      },
+      {
+        "module": "dario.cat/mergo",
+        "version": "v1.0.2/go.mod",
+        "h1": "h1:E/hbnu0NxMFBjpMIE34DRGLWqDy0g5FuKDhCb31ngxA="
+      },
+      {
+        "module": "gopkg.in/check.v1",
+        "version": "v0.0.0-20161208181325-20d25e280405",
+        "h1": "h1:yhCVgyC4o1eVCa2tZl7eS0r+SDo693bJlVdllGtEeKM="
+      },
+      {
+        "module": "gopkg.in/yaml.v2",
+        "version": "v2.2.2",
+        "h1": "h1:ZCJp+EgiOT7lHqUV2J862kp8Qj64Jo6az82+3Td9dZw="
+      },
+      {
+        "module": "golang.org/x/telemetry",
+        "version": "v0.0.0-20260908163034-4bcc4b2ee518",
+        "h1": "h1:F5BWKvW126NXR74uxkxuc1jQHhm/rwm/J3rSiFyuRs4="
+      },
+      {
+        "module": "golang.org/x/telemetry",
+        "version": "v0.0.0-20260908163034-4bcc4b2ee518/go.mod",
+        "h1": "h1:i+ivNqjDnTF3WTElsdk5g9V5DTSBYgdNo7xTU9SDwYA="
+      },
+      {
+        "module": "golang.org/x/exp",
+        "version": "v0.0.0-20251209150349-8475f28825e9",
+        "h1": "h1:MDfG8Cvcqlt9XXrmEiD4epKn7VJHZO84hejP9Jmp0MM="
+      },
+      {
+        "module": "golang.org/x/exp",
+        "version": "v0.0.0-20251209150349-8475f28825e9/go.mod",
+        "h1": "h1:EPRbTFwzwjXj9NpYyyrvenVh9Y+GFeEvMNh7Xuz7xgU="
+      },
+      {
+        "module": "golang.org/x/net",
+        "version": "v0.59.0",
+        "h1": "h1:5zfYln+w5XCxwrnMMJPufRgNoXEaGxl0wo5GqPXyues="
+      },
+      {
+        "module": "golang.org/x/net",
+        "version": "v0.59.0/go.mod",
+        "h1": "h1:2DA/G1UfVbCpQPeWTmMPGY7Cs2PkBkwu743bVX5PIVg="
+      },
+      {
+        "module": "github.com/yuin/goldmark",
+        "version": "v1.4.13",
+        "h1": "h1:fVcFKWvrslecOb/tg+Cc05dkeYx540o0FuFt3nUVDoE="
+      },
+      {
+        "module": "github.com/yuin/goldmark",
+        "version": "v1.4.13/go.mod",
+        "h1": "h1:6yULJ656Px+3vBD8DxQVa3kxgyrAnzto9xy5taEt/CY="
+      },
+      {
+        "module": "github.com/xo/terminfo",
+        "version": "v0.0.0-20220910002029-abceb7e1c41e",
+        "h1": "h1:JVG44RsyaB9T2KIHavMF/ppJZNG9ZpyihvCd0w101no="
+      },
+      {
+        "module": "github.com/xo/terminfo",
+        "version": "v0.0.0-20220910002029-abceb7e1c41e/go.mod",
+        "h1": "h1:RbqR21r5mrJuqunuUZ/Dhy/avygyECGrLceyNeo4LiM="
+      },
+      {
+        "module": "github.com/wagoodman/go-progress",
+        "version": "v0.0.0-20230925121702-07e42b3cdba0",
+        "h1": "h1:0KGbf+0SMg+UFy4e1A/CPVvXn21f1qtWdeJwxZFoQG8="
+      },
+      {
+        "module": "github.com/wagoodman/go-progress",
+        "version": "v0.0.0-20230925121702-07e42b3cdba0/go.mod",
+        "h1": "h1:jLXFoL31zFaHKAAyZUh+sxiTDFe1L1ZHrcK2T1itVKA="
+      },
+      {
+        "module": "github.com/wagoodman/go-partybus",
+        "version": "v0.0.0-20230516145632-8ccac152c651",
+        "h1": "h1:jIVmlAFIqV3d+DOxazTR9v+zgj8+VYuQBzPgBZvWBHA="
+      },
+      {
+        "module": "github.com/wagoodman/go-partybus",
+        "version": "v0.0.0-20230516145632-8ccac152c651/go.mod",
+        "h1": "h1:b26F2tHLqaoRQf8DywqzVaV1MQ9yvjb0OMcNl7Nxu20="
+      },
+      {
+        "module": "github.com/subosito/gotenv",
+        "version": "v1.6.0",
+        "h1": "h1:9NlTDc1FTs4qu0DDq7AEtTPNw6SVm7uBMsUCUjABIf8="
+      },
+      {
+        "module": "github.com/subosito/gotenv",
+        "version": "v1.6.0/go.mod",
+        "h1": "h1:Dk4QP5c2W3ibzajGcXpNraDfq2IrhjMIvMSWPKKo0FU="
+      },
+      {
+        "module": "github.com/spf13/viper",
+        "version": "v1.21.0",
+        "h1": "h1:x5S+0EU27Lbphp4UKm1C+1oQO+rKx36vfCoaVebLFSU="
+      },
+      {
+        "module": "github.com/spf13/viper",
+        "version": "v1.21.0/go.mod",
+        "h1": "h1:P0lhsswPGWD/1lZJ9ny3fYnVqxiegrlNrEmgLjbTCAY="
+      },
+      {
+        "module": "github.com/spf13/pflag",
+        "version": "v1.0.10",
+        "h1": "h1:4EBh2KAYBwaONj6b2Ye1GiHfwjqyROoF4RwYO+vPwFk="
+      },
+      {
+        "module": "github.com/spf13/pflag",
+        "version": "v1.0.10/go.mod",
+        "h1": "h1:McXfInJRrz4CZXVZOBLb0bTZqETkiAhM9Iw0y3An2Bg="
+      },
+      {
+        "module": "github.com/spf13/cobra",
+        "version": "v1.10.2",
+        "h1": "h1:DMTTonx5m65Ic0GOoRY2c16WCbHxOOw6xxezuLaBpcU="
+      },
+      {
+        "module": "github.com/spf13/cobra",
+        "version": "v1.10.2/go.mod",
+        "h1": "h1:7C1pvHqHw5A4vrJfjNwvOdzYu0Gml16OCs2GRiTUUS4="
+      },
+      {
+        "module": "github.com/spf13/cast",
+        "version": "v1.10.0",
+        "h1": "h1:h2x0u2shc1QuLHfxi+cTJvs30+ZAHOGRic8uyGTDWxY="
+      },
+      {
+        "module": "github.com/spf13/cast",
+        "version": "v1.10.0/go.mod",
+        "h1": "h1:jNfB8QC9IA6ZuY2ZjDp0KtFO2LZZlg4S/7bzP6qqeHo="
+      },
+      {
+        "module": "github.com/spf13/afero",
+        "version": "v1.15.0",
+        "h1": "h1:b/YBCLWAJdFWJTN9cLhiXXcD7mzKn9Dm86dNnfyQw1I="
+      },
+      {
+        "module": "github.com/spf13/afero",
+        "version": "v1.15.0/go.mod",
+        "h1": "h1:NC2ByUVxtQs4b3sIUphxK0NioZnmxgyCrfzeuq8lxMg="
+      },
+      {
+        "module": "github.com/sagikazarmark/locafero",
+        "version": "v0.12.0",
+        "h1": "h1:/NQhBAkUb4+fH1jivKHWusDYFjMOOKU88eegjfxfHb4="
+      },
+      {
+        "module": "github.com/sagikazarmark/locafero",
+        "version": "v0.12.0/go.mod",
+        "h1": "h1:sZh36u/YSZ918v0Io+U9ogLYQJ9tLLBmM4eneO6WwsI="
+      },
+      {
+        "module": "github.com/rivo/uniseg",
+        "version": "v0.4.7",
+        "h1": "h1:WUdvkW8uEhrYfLC4ZzdpI2ztxP1I582+49Oc5Mq64VQ="
+      },
+      {
+        "module": "github.com/rivo/uniseg",
+        "version": "v0.4.7/go.mod",
+        "h1": "h1:FN3SvrM+Zdj16jyLfmOkMNblXMcoc8DfTHruCPUcx88="
+      },
+      {
+        "module": "github.com/pelletier/go-toml/v2",
+        "version": "v2.2.4",
+        "h1": "h1:mye9XuhQ6gvn5h28+VilKrrPoQVanw5PMw/TB0t5Ec4="
+      },
+      {
+        "module": "github.com/pelletier/go-toml/v2",
+        "version": "v2.2.4/go.mod",
+        "h1": "h1:2gIqNv+qfxSVS7cM2xJQKtLSTLUE9V8t9Stt+h56mCY="
+      },
+      {
+        "module": "github.com/oklog/ulid",
+        "version": "v1.3.1",
+        "h1": "h1:EGfNDEx6MqHz8B3uNV6QAib1UR2Lm97sHi3ocA6ESJ4="
+      },
+      {
+        "module": "github.com/oklog/ulid",
+        "version": "v1.3.1/go.mod",
+        "h1": "h1:CirwcVhetQ6Lv90oh/F+FBtV6XMibvdAFo93nm5qn4U="
+      },
+      {
+        "module": "github.com/muesli/termenv",
+        "version": "v0.16.0",
+        "h1": "h1:S5AlUN9dENB57rsbnkPyfdGuWIlkmzJjbFf0Tf5FWUc="
+      },
+      {
+        "module": "github.com/muesli/termenv",
+        "version": "v0.16.0/go.mod",
+        "h1": "h1:ZRfOIKPFDYQoDFF4Olj7/QJbW60Ol/kL1pU3VfY/Cnk="
+      },
+      {
+        "module": "github.com/muesli/reflow",
+        "version": "v0.3.0",
+        "h1": "h1:IFsN6K9NfGtjeggFP+68I4chLZV2yIKsXJFNZ+eWh6s="
+      },
+      {
+        "module": "github.com/muesli/reflow",
+        "version": "v0.3.0/go.mod",
+        "h1": "h1:pbwTDkVPibjO2kyvBQRBxTWEEGDGq0FlB1BIKtnHY/8="
+      },
+      {
+        "module": "github.com/muesli/cancelreader",
+        "version": "v0.2.2",
+        "h1": "h1:3I4Kt4BQjOR54NavqnDogx/MIoWBFa0StPA8ELUXHmA="
+      },
+      {
+        "module": "github.com/muesli/cancelreader",
+        "version": "v0.2.2/go.mod",
+        "h1": "h1:3XuTXfFS2VjM+HTLZY9Ak0l6eUKfijIfMUZ4EgX0QYo="
+      },
+      {
+        "module": "github.com/muesli/ansi",
+        "version": "v0.0.0-20230316100256-276c6243b2f6",
+        "h1": "h1:ZK8zHtRHOkbHy6Mmr5D264iyp3TiX5OmNcI5cIARiQI="
+      },
+      {
+        "module": "github.com/muesli/ansi",
+        "version": "v0.0.0-20230316100256-276c6243b2f6/go.mod",
+        "h1": "h1:CJlz5H+gyd6CUWT45Oy4q24RdLyn7Md9Vj2/ldJBSIo="
+      },
+      {
+        "module": "github.com/lucasb-eyer/go-colorful",
+        "version": "v1.3.0",
+        "h1": "h1:2/yBRLdWBZKrf7gB40FoiKfAWYQ0lqNcbuQwVHXptag="
+      },
+      {
+        "module": "github.com/lucasb-eyer/go-colorful",
+        "version": "v1.3.0/go.mod",
+        "h1": "h1:R4dSotOR9KMtayYi1e77YzuveK+i7ruzyGqttikkLy0="
+      },
+      {
+        "module": "github.com/jedib0t/go-pretty",
+        "version": "v4.3.0+incompatible",
+        "h1": "h1:CGs8AVhEKg/n9YbUenWmNStRW2PHJzaeDodcfvRAbIo="
+      },
+      {
+        "module": "github.com/jedib0t/go-pretty",
+        "version": "v4.3.0+incompatible/go.mod",
+        "h1": "h1:XemHduiw8R651AF9Pt4FwCTKeG3oo7hrHJAoznj9nag="
+      },
+      {
+        "module": "github.com/inconshreveable/mousetrap",
+        "version": "v1.1.0",
+        "h1": "h1:wN+x4NVGpMsO7ErUn/mUI3vEoE6Jt13X2s0bqwp9tc8="
+      },
+      {
+        "module": "github.com/inconshreveable/mousetrap",
+        "version": "v1.1.0/go.mod",
+        "h1": "h1:vpF70FUmC8bwa3OWnCshd2FqLfsEA9PFc4w1p2J65bw="
+      },
+      {
+        "module": "github.com/iancoleman/strcase",
+        "version": "v0.3.0",
+        "h1": "h1:nTXanmYxhfFAMjZL34Ov6gkzEsSJZ5DbhxWjvSASxEI="
+      },
+      {
+        "module": "github.com/iancoleman/strcase",
+        "version": "v0.3.0/go.mod",
+        "h1": "h1:iwCmte+B7n89clKwxIoIXy/HfoL7AsD47ZCWhYzw7ho="
+      },
+      {
+        "module": "github.com/hashicorp/go-multierror",
+        "version": "v1.1.1",
+        "h1": "h1:H5DkEtf6CXdFp0N0Em5UCwQpXMWke8IA0+lD48awMYo="
+      },
+      {
+        "module": "github.com/hashicorp/go-multierror",
+        "version": "v1.1.1/go.mod",
+        "h1": "h1:iw975J/qwKPdAO1clOe2L8331t/9/fmwbPZ6JB6eMoM="
+      },
+      {
+        "module": "github.com/hashicorp/errwrap",
+        "version": "v1.1.0",
+        "h1": "h1:OxrOeh75EUXMY8TBjag2fzXGZ40LB6IKw45YeGUDY2I="
+      },
+      {
+        "module": "github.com/hashicorp/errwrap",
+        "version": "v1.1.0/go.mod",
+        "h1": "h1:YH+1FKiLXxHSkmPseP+kNlulaMuP3n2brvKWEqk/Jc4="
+      },
+      {
+        "module": "github.com/gookit/color",
+        "version": "v1.6.0",
+        "h1": "h1:JjJXBTk1ETNyqyilJhkTXJYYigHG24TM9Xa2M1xAhRA="
+      },
+      {
+        "module": "github.com/gookit/color",
+        "version": "v1.6.0/go.mod",
+        "h1": "h1:9ACFc7/1IpHGBW8RwuDm/0YEnhg3dwwXpoMsmtyHfjs="
+      },
+      {
+        "module": "github.com/golang-jwt/jwt/v4",
+        "version": "v4.5.2",
+        "h1": "h1:YtQM7lnr8iZ+j5q71MGKkNw9Mn7AjHM68uc9g5fXeUI="
+      },
+      {
+        "module": "github.com/golang-jwt/jwt/v4",
+        "version": "v4.5.2/go.mod",
+        "h1": "h1:m21LjoU+eqJr34lmDMbreY2eSTRJ1cv77w39/MY0Ch0="
+      },
+      {
+        "module": "github.com/go-viper/mapstructure/v2",
+        "version": "v2.4.0",
+        "h1": "h1:EBsztssimR/CONLSZZ04E8qAkxNYq4Qp9LvH92wZUgs="
+      },
+      {
+        "module": "github.com/go-viper/mapstructure/v2",
+        "version": "v2.4.0/go.mod",
+        "h1": "h1:oJDH3BJKyqBA2TXFhDsKDGDTlndYOZ6rGS0BRZIxGhM="
+      },
+      {
+        "module": "github.com/go-openapi/strfmt",
+        "version": "v0.25.0",
+        "h1": "h1:7R0RX7mbKLa9EYCTHRcCuIPcaqlyQiWNPTXwClK0saQ="
+      },
+      {
+        "module": "github.com/go-openapi/strfmt",
+        "version": "v0.25.0/go.mod",
+        "h1": "h1:nNXct7OzbwrMY9+5tLX4I21pzcmE6ccMGXl3jFdPfn8="
+      },
+      {
+        "module": "github.com/go-openapi/errors",
+        "version": "v0.22.5",
+        "h1": "h1:Yfv4O/PRYpNF3BNmVkEizcHb3uLVVsrDt3LNdgAKRY4="
+      },
+      {
+        "module": "github.com/go-openapi/errors",
+        "version": "v0.22.5/go.mod",
+        "h1": "h1:z9S8ASTUqx7+CP1Q8dD8ewGH/1JWFFLX/2PmAYNQLgk="
+      },
+      {
+        "module": "github.com/gabriel-vasile/mimetype",
+        "version": "v1.4.13",
+        "h1": "h1:46nXokslUBsAJE/wMsp5gtO500a4F3Nkz9Ufpk2AcUM="
+      },
+      {
+        "module": "github.com/gabriel-vasile/mimetype",
+        "version": "v1.4.13/go.mod",
+        "h1": "h1:d+9Oxyo1wTzWdyVUPMmXFvp4F9tea18J8ufA774AB3s="
+      },
+      {
+        "module": "github.com/felixge/fgprof",
+        "version": "v0.9.5",
+        "h1": "h1:8+vR6yu2vvSKn08urWyEuxx75NWPEvybbkBirEpsbVY="
+      },
+      {
+        "module": "github.com/felixge/fgprof",
+        "version": "v0.9.5/go.mod",
+        "h1": "h1:yKl+ERSa++RYOs32d8K6WEXCB4uXdLls4ZaZPpayhMM="
+      },
+      {
+        "module": "github.com/erikgeiser/promptkit",
+        "version": "v0.9.0",
+        "h1": "h1:3qL1mS/ntCrXdb8sTP/ka82CJ9kEQaGuYXNrYJkWYBc="
+      },
+      {
+        "module": "github.com/erikgeiser/promptkit",
+        "version": "v0.9.0/go.mod",
+        "h1": "h1:pU9dtogSe3Jlc2AY77EP7R4WFP/vgD4v+iImC83KsCo="
+      },
+      {
+        "module": "github.com/erikgeiser/coninput",
+        "version": "v0.0.0-20211004153227-1c3628e74d0f",
+        "h1": "h1:Y/CXytFA4m6baUTXGLOoWe4PQhGxaX0KpnayAqC48p4="
+      },
+      {
+        "module": "github.com/erikgeiser/coninput",
+        "version": "v0.0.0-20211004153227-1c3628e74d0f/go.mod",
+        "h1": "h1:vw97MGsxSvLiUE2X8qFplwetxpGLQrlU1Q9AUEIzCaM="
+      },
+      {
+        "module": "github.com/clipperhouse/uax29/v2",
+        "version": "v2.3.0",
+        "h1": "h1:SNdx9DVUqMoBuBoW3iLOj4FQv3dN5mDtuqwuhIGpJy4="
+      },
+      {
+        "module": "github.com/clipperhouse/uax29/v2",
+        "version": "v2.3.0/go.mod",
+        "h1": "h1:Wn1g7MK6OoeDT0vL+Q0SQLDz/KpfsVRgg6W7ihQeh4g="
+      },
+      {
+        "module": "github.com/clipperhouse/stringish",
+        "version": "v0.1.1",
+        "h1": "h1:+NSqMOr3GR6k1FdRhhnXrLfztGzuG+VuFDfatpWHKCs="
+      },
+      {
+        "module": "github.com/clipperhouse/stringish",
+        "version": "v0.1.1/go.mod",
+        "h1": "h1:v/WhFtE1q0ovMta2+m+UbpZ+2/HEXNWYXQgCt4hdOzA="
+      },
+      {
+        "module": "github.com/clipperhouse/displaywidth",
+        "version": "v0.6.2",
+        "h1": "h1:ZDpTkFfpHOKte4RG5O/BOyf3ysnvFswpyYrV7z2uAKo="
+      },
+      {
+        "module": "github.com/clipperhouse/displaywidth",
+        "version": "v0.6.2/go.mod",
+        "h1": "h1:R+kHuzaYWFkTm7xoMmK1lFydbci4X2CicfbGstSGg0o="
+      },
+      {
+        "module": "github.com/charmbracelet/x/term",
+        "version": "v0.2.2",
+        "h1": "h1:xVRT/S2ZcKdhhOuSP4t5cLi5o+JxklsoEObBSgfgZRk="
+      },
+      {
+        "module": "github.com/charmbracelet/x/term",
+        "version": "v0.2.2/go.mod",
+        "h1": "h1:kF8CY5RddLWrsgVwpw4kAa6TESp6EB5y3uxGLeCqzAI="
+      },
+      {
+        "module": "github.com/charmbracelet/x/cellbuf",
+        "version": "v0.0.14",
+        "h1": "h1:iUEMryGyFTelKW3THW4+FfPgi4fkmKnnaLOXuc+/Kj4="
+      },
+      {
+        "module": "github.com/charmbracelet/x/cellbuf",
+        "version": "v0.0.14/go.mod",
+        "h1": "h1:P447lJl49ywBbil/KjCk2HexGh4tEY9LH0/1QrZZ9rA="
+      },
+      {
+        "module": "github.com/charmbracelet/x/ansi",
+        "version": "v0.11.3",
+        "h1": "h1:6DcVaqWI82BBVM/atTyq6yBoRLZFBsnoDoX9GCu2YOI="
+      },
+      {
+        "module": "github.com/charmbracelet/x/ansi",
+        "version": "v0.11.3/go.mod",
+        "h1": "h1:yI7Zslym9tCJcedxz5+WBq+eUGMJT0bM06Fqy1/Y4dI="
+      },
+      {
+        "module": "github.com/charmbracelet/lipgloss",
+        "version": "v1.1.0",
+        "h1": "h1:vYXsiLHVkK7fp74RkV7b2kq9+zDLoEU4MZoFqR/noCY="
+      },
+      {
+        "module": "github.com/charmbracelet/lipgloss",
+        "version": "v1.1.0/go.mod",
+        "h1": "h1:/6Q8FR2o+kj8rz4Dq0zQc3vYf7X+B0binUUBwA0aL30="
+      },
+      {
+        "module": "github.com/charmbracelet/harmonica",
+        "version": "v0.2.0",
+        "h1": "h1:8NxJWRWg/bzKqqEaaeFNipOu77YR5t8aSwG4pgaUBiQ="
+      },
+      {
+        "module": "github.com/charmbracelet/harmonica",
+        "version": "v0.2.0/go.mod",
+        "h1": "h1:KSri/1RMQOZLbw7AHqgcBycp8pgJnQMYYT8QZRqZ1Ao="
+      },
+      {
+        "module": "github.com/charmbracelet/colorprofile",
+        "version": "v0.4.1",
+        "h1": "h1:a1lO03qTrSIRaK8c3JRxJDZOvhvIeSco3ej+ngLk1kk="
+      },
+      {
+        "module": "github.com/charmbracelet/colorprofile",
+        "version": "v0.4.1/go.mod",
+        "h1": "h1:U1d9Dljmdf9DLegaJ0nGZNJvoXAhayhmidOdcBwAvKk="
+      },
+      {
+        "module": "github.com/charmbracelet/bubbles",
+        "version": "v0.21.0",
+        "h1": "h1:9TdC97SdRVg/1aaXNVWfFH3nnLAwOXr8Fn6u6mfQdFs="
+      },
+      {
+        "module": "github.com/charmbracelet/bubbles",
+        "version": "v0.21.0/go.mod",
+        "h1": "h1:HF+v6QUR4HkEpz62dx7ym2xc71/KBHg+zKwJtMw+qtg="
+      },
+      {
+        "module": "github.com/charmbracelet/bubbletea",
+        "version": "v1.3.10",
+        "h1": "h1:otUDHWMMzQSB0Pkc87rm691KZ3SWa4KUlvF9nRvCICw="
+      },
+      {
+        "module": "github.com/charmbracelet/bubbletea",
+        "version": "v1.3.10/go.mod",
+        "h1": "h1:ORQfo0fk8U+po9VaNvnV95UPWA1BitP1E0N6xJPlHr4="
+      },
+      {
+        "module": "github.com/aymanbagabas/go-osc52/v2",
+        "version": "v2.0.1",
+        "h1": "h1:HwpRHbFMcZLEVr42D4p7XBqjyuxQH5SMiErDT4WkJ2k="
+      },
+      {
+        "module": "github.com/aymanbagabas/go-osc52/v2",
+        "version": "v2.0.1/go.mod",
+        "h1": "h1:uYgXzlJ7ZpABp8OJ+exZzJJhRNQ2ASbcXHWsFqH8hp8="
+      },
+      {
+        "module": "github.com/aws/smithy-go",
+        "version": "v1.24.2",
+        "h1": "h1:FzA3bu/nt/vDvmnkg+R8Xl46gmzEDam6mZ1hzmwXFng="
+      },
+      {
+        "module": "github.com/aws/smithy-go",
+        "version": "v1.24.2/go.mod",
+        "h1": "h1:YE2RhdIuDbA5E5bTdciG9KrW3+TiEONeUWCqxX9i1Fc="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/sts",
+        "version": "v1.41.8",
+        "h1": "h1:XQTQTF75vnug2TXS8m7CVJfC2nniYPZnO1D4Np761Oo="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/sts",
+        "version": "v1.41.8/go.mod",
+        "h1": "h1:Xgx+PR1NUOjNmQY+tRMnouRp83JRM8pRMw/vCaVhPkI="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/ssooidc",
+        "version": "v1.35.16",
+        "h1": "h1:EnUdUqRP1CNzt2DkV67tJx6XDN4xlfBFm+bzeNOQVb0="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/ssooidc",
+        "version": "v1.35.16/go.mod",
+        "h1": "h1:Jic/xv0Rq/pFNCh3WwpH4BEqdbSAl+IyHro8LbibHD8="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/sso",
+        "version": "v1.30.12",
+        "h1": "h1:iSsvB9EtQ09YrsmIc44Heqlx5ByGErqhPK1ZQLppias="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/sso",
+        "version": "v1.30.12/go.mod",
+        "h1": "h1:fEWYKTRGoZNl8tZ77i61/ccwOMJdGxwOhWCkp6TXAr0="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/signin",
+        "version": "v1.0.7",
+        "h1": "h1:Y2cAXlClHsXkkOvWZFXATr34b0hxxloeQu/pAZz2row="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/signin",
+        "version": "v1.0.7/go.mod",
+        "h1": "h1:idzZ7gmDeqeNrSPkdbtMp9qWMgcBwykA7P7Rzh5DXVU="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/s3",
+        "version": "v1.96.2",
+        "h1": "h1:M1A9AjcFwlxTLuf0Faj88L8Iqw0n/AJHjpZTQzMMsSc="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/s3",
+        "version": "v1.96.2/go.mod",
+        "h1": "h1:KsdTV6Q9WKUZm2mNJnUFmIoXfZux91M3sr/a4REX8e0="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/internal/s3shared",
+        "version": "v1.19.18",
+        "h1": "h1:/A/xDuZAVD2BpsS2fftFRo/NoEKQJ8YTnJDEHBy2Gtg="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/internal/s3shared",
+        "version": "v1.19.18/go.mod",
+        "h1": "h1:hWe9b4f+djUQGmyiGEeOnZv69dtMSgpDRIvNMvuvzvY="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url",
+        "version": "v1.13.19",
+        "h1": "h1:X1Tow7suZk9UCJHE1Iw9GMZJJl0dAnKXXP1NaSDHwmw="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url",
+        "version": "v1.13.19/go.mod",
+        "h1": "h1:/rARO8psX+4sfjUQXp5LLifjUt8DuATZ31WptNJTyQA="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/internal/checksum",
+        "version": "v1.9.10",
+        "h1": "h1:fJvQ5mIBVfKtiyx0AHY6HeWcRX5LGANLpq8SVR+Uazs="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/internal/checksum",
+        "version": "v1.9.10/go.mod",
+        "h1": "h1:Kzm5e6OmNH8VMkgK9t+ry5jEih4Y8whqs+1hrkxim1I="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding",
+        "version": "v1.13.6",
+        "h1": "h1:XAq62tBTJP/85lFD5oqOOe7YYgWxY9LvWq8plyDvDVg="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding",
+        "version": "v1.13.6/go.mod",
+        "h1": "h1:x0nZssQ3qZSnIcePWLvcoFisRXJzcTVvYpAAdYX8+GI="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/internal/v4a",
+        "version": "v1.4.18",
+        "h1": "h1:eZioDaZGJ0tMM4gzmkNIO2aAoQd+je7Ug7TkvAzlmkU="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/internal/v4a",
+        "version": "v1.4.18/go.mod",
+        "h1": "h1:CCXwUKAJdoWr6/NcxZ+zsiPr6oH/Q5aTooRGYieAyj4="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/internal/ini",
+        "version": "v1.8.4",
+        "h1": "h1:WKuaxf++XKWlHWu9ECbMlha8WOEGm0OUEZqm4K/Gcfk="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/internal/ini",
+        "version": "v1.8.4/go.mod",
+        "h1": "h1:ZWy7j6v1vWGmPReu0iSGvRiise4YI5SkR3OHKTZ6Wuc="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/internal/endpoints/v2",
+        "version": "v2.7.19",
+        "h1": "h1:AWeJMk33GTBf6J20XJe6qZoRSJo0WfUhsMdUKhoODXE="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/internal/endpoints/v2",
+        "version": "v2.7.19/go.mod",
+        "h1": "h1:+GWrYoaAsV7/4pNHpwh1kiNLXkKaSoppxQq9lbH8Ejw="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/internal/configsources",
+        "version": "v1.4.19",
+        "h1": "h1:/sECfyq2JTifMI2JPyZ4bdRN77zJmr6SrS1eL3augIA="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/internal/configsources",
+        "version": "v1.4.19/go.mod",
+        "h1": "h1:dMf8A5oAqr9/oxOfLkC/c2LU/uMcALP0Rgn2BD5LWn0="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/feature/s3/manager",
+        "version": "v1.21.1",
+        "h1": "h1:1hWFp+52Vq8Fevy/KUhbW/1MEApMz7uitCF/PQXRJpk="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/feature/s3/manager",
+        "version": "v1.21.1/go.mod",
+        "h1": "h1:sIec8j802/rCkCKgZV678HFR0s7lhQUYXT77tIvlaa4="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/feature/ec2/imds",
+        "version": "v1.18.19",
+        "h1": "h1:INUvJxmhdEbVulJYHI061k4TVuS3jzzthNvjqvVvTKM="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/feature/ec2/imds",
+        "version": "v1.18.19/go.mod",
+        "h1": "h1:FpZN2QISLdEBWkayloda+sZjVJL+e9Gl0k1SyTgcswU="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/credentials",
+        "version": "v1.19.11",
+        "h1": "h1:NdV8cwCcAXrCWyxArt58BrvZJ9pZ9Fhf9w6Uh5W3Uyc="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/credentials",
+        "version": "v1.19.11/go.mod",
+        "h1": "h1:30yY2zqkMPdrvxBqzI9xQCM+WrlrZKSOpSJEsylVU+8="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/config",
+        "version": "v1.32.10",
+        "h1": "h1:9DMthfO6XWZYLfzZglAgW5Fyou2nRI5CuV44sTedKBI="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/config",
+        "version": "v1.32.10/go.mod",
+        "h1": "h1:2rUIOnA2JaiqYmSKYmRJlcMWy6qTj1vuRFscppSBMcw="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream",
+        "version": "v1.7.5",
+        "h1": "h1:zWFmPmgw4sveAYi1mRqG+E/g0461cJ5M4bJ8/nc6d3Q="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream",
+        "version": "v1.7.5/go.mod",
+        "h1": "h1:nVUlMLVV8ycXSb7mSkcNu9e3v/1TJq2RTlrPwhYWr5c="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2",
+        "version": "v1.41.3",
+        "h1": "h1:4kQ/fa22KjDt13QCy1+bYADvdgcxpfH18f0zP542kZA="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2",
+        "version": "v1.41.3/go.mod",
+        "h1": "h1:mwsPRE8ceUUpiTgF7QmQIJ7lgsKUPQOUl3o72QBrE1o="
+      },
+      {
+        "module": "github.com/atotto/clipboard",
+        "version": "v0.1.4",
+        "h1": "h1:EH0zSVneZPSuFR11BlR9YppQTVDbh5+16AmcJi4g1z4="
+      },
+      {
+        "module": "github.com/atotto/clipboard",
+        "version": "v0.1.4/go.mod",
+        "h1": "h1:ZY9tmq7sm5xIbd9bOK4onWV4S6X0u6GY7Vn0Yu86PYI="
+      },
+      {
+        "module": "github.com/andybalholm/cascadia",
+        "version": "v1.3.3",
+        "h1": "h1:AG2YHrzJIm4BZ19iwJ/DAua6Btl3IwJX+VI4kktS1LM="
+      },
+      {
+        "module": "github.com/andybalholm/cascadia",
+        "version": "v1.3.3/go.mod",
+        "h1": "h1:xNd9bqTn98Ln4DwST8/nG+H0yuB8Hmgu1YHNnWw0GeA="
+      },
+      {
+        "module": "github.com/PuerkitoBio/goquery",
+        "version": "v1.11.0",
+        "h1": "h1:jZ7pwMQXIITcUXNH83LLk+txlaEy6NVOfTuP43xxfqw="
+      },
+      {
+        "module": "github.com/PuerkitoBio/goquery",
+        "version": "v1.11.0/go.mod",
+        "h1": "h1:wQHgxUOU3JGuj3oD/QFfxUdlzW6xPHfqyHre6VMY4DQ="
+      },
+      {
+        "module": "github.com/adrg/xdg",
+        "version": "v0.5.3",
+        "h1": "h1:xRnxJXne7+oWDatRhR1JLnvuccuIeCoBu2rtuLqQB78="
+      },
+      {
+        "module": "github.com/adrg/xdg",
+        "version": "v0.5.3/go.mod",
+        "h1": "h1:nlTsY+NNiCBGCK2tpm09vRqfVzrc2fLmXGpBLF0zlTQ="
+      },
+      {
+        "module": "github.com/stretchr/objx",
+        "version": "v0.1.0",
+        "h1": "h1:4G4v2dO3VZwixGIRoQ5Lfboy6nUhCyYzaqnIAPPhYs4="
+      },
+      {
+        "module": "github.com/pborman/indent",
+        "version": "v1.2.1",
+        "h1": "h1:lFiviAbISHv3Rf0jcuh489bi06hj98JsVMtIDZQb9yM="
+      },
+      {
+        "module": "github.com/pborman/indent",
+        "version": "v1.2.1/go.mod",
+        "h1": "h1:FitS+t35kIYtB5xWTZAPhnmrxcciEEOdbyrrpz5K6Vw="
+      },
+      {
+        "module": "github.com/pborman/getopt",
+        "version": "v0.0.0-20180811024354-2b5b3bfb099b",
+        "h1": "h1:K1wa7ads2Bu1PavI6LfBRMYSy6Zi+Rky0OhWBfrmkmY="
+      },
+      {
+        "module": "github.com/certifi/gocertifi",
+        "version": "v0.0.0-20180118203423-deb3ae2ef261",
+        "h1": "h1:6/yVvBsKeAw05IUj4AzvrxaCnDjN4nUqKjW9+w5wixg="
+      },
+      {
+        "module": "github.com/pkg/profile",
+        "version": "v1.7.0",
+        "h1": "h1:hnbDkaNWPCLMO9wGLdBFTIZvzDrDfBM2072E1S9gJkA="
+      },
+      {
+        "module": "github.com/pkg/profile",
+        "version": "v1.7.0/go.mod",
+        "h1": "h1:8Uer0jas47ZQMJ7VD+OHknK4YDY07LPUC6dEvqDjvNo="
+      },
+      {
+        "module": "github.com/mattn/go-localereader",
+        "version": "v0.0.2-0.20220822084749-2491eb6c1c75",
+        "h1": "h1:P8UmIzZMYDR+NGImiFvErt6VWfIRPuGM+vyjiEdkmIw="
+      },
+      {
+        "module": "github.com/mattn/go-localereader",
+        "version": "v0.0.2-0.20220822084749-2491eb6c1c75/go.mod",
+        "h1": "h1:8fBrzywKY7BI3czFoHkuzRoWE9C+EiG4R1k4Cjx5p88="
+      },
+      {
+        "module": "github.com/mattn/go-runewidth",
+        "version": "v0.0.19",
+        "h1": "h1:v++JhqYnZuu5jSKrk9RbgF5v4CGUjqRfBm05byFGLdw="
+      },
+      {
+        "module": "github.com/mattn/go-runewidth",
+        "version": "v0.0.19/go.mod",
+        "h1": "h1:XBkDxAl56ILZc9knddidhrOlY5R/pDhgLpndooCuJAs="
+      },
+      {
+        "module": "github.com/anchore/go-homedir",
+        "version": "v0.0.0-20250319154043-c29668562e4d",
+        "h1": "h1:gT69osH9AsdpOfqxbRwtxcNnSZ1zg4aKy2BevO3ZBdc="
+      },
+      {
+        "module": "github.com/anchore/go-homedir",
+        "version": "v0.0.0-20250319154043-c29668562e4d/go.mod",
+        "h1": "h1:PhSnuFYknwPZkOWKB1jXBNToChBA+l0FjwOxtViIc50="
+      },
+      {
+        "module": "github.com/anchore/fangs",
+        "version": "v0.0.0-20251204220743-df7ac3652565",
+        "h1": "h1:w7AFkXXSlBSgY/+NbuQIg5qp8hBq2VTliVL1y9p3QzU="
+      },
+      {
+        "module": "github.com/anchore/fangs",
+        "version": "v0.0.0-20251204220743-df7ac3652565/go.mod",
+        "h1": "h1:yYsgDLrzipKlyDAzrjtd35lMcXyZ60b8Ko8vTaMwqoU="
+      },
+      {
+        "module": "github.com/anchore/clio",
+        "version": "v0.0.0-20251028140840-721eea5390a4",
+        "h1": "h1:ou5Co2rLHT5mqVdVmVE7QukGe2cCFTryAaaVzEEDnb0="
+      },
+      {
+        "module": "github.com/anchore/clio",
+        "version": "v0.0.0-20251028140840-721eea5390a4/go.mod",
+        "h1": "h1:Qps+CdrdcMx1k7GhKaJ1ZkKYZvRaIfbNmW6B8/5ONPs="
+      },
+      {
+        "module": "github.com/anchore/bubbly",
+        "version": "v0.0.0-20250717181826-8a411f9d8cbf",
+        "h1": "h1:UY7SQkfVVaeGUpPZrJxqmTc8M0ZSWc5ChiKF6I6aL3I="
+      },
+      {
+        "module": "github.com/anchore/bubbly",
+        "version": "v0.0.0-20250717181826-8a411f9d8cbf/go.mod",
+        "h1": "h1:w8Br1ZKk1Nk82YRSh10pcD7LO7avPyFmNnaY1TRPgs0="
+      },
+      {
+        "module": "github.com/google/pprof",
+        "version": "v0.0.0-20251213031049-b05bdaca462f",
+        "h1": "h1:HU1RgM6NALf/KW9HEY6zry3ADbDKcmpQ+hJedoNGQYQ="
+      },
+      {
+        "module": "github.com/google/pprof",
+        "version": "v0.0.0-20251213031049-b05bdaca462f/go.mod",
+        "h1": "h1:67FPmZWbr+KDT/VlpWtw6sO9XSjpJmLuHpoLmWiTGgY="
+      }
+    ]
+  },
+  "protectedMatches": 0,
+  "sourceOverlaps": 284,
+  "credentialMarkers": 56,
+  "unclassifiedOuterFiles": 0
+}

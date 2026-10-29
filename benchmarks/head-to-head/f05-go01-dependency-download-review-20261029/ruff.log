@@ -1,0 +1,23 @@
+F401 [*] `collections.defaultdict` imported but unused
+ --> benchmarks/head-to-head/f05-go01-dependency-download-review-20261029/classify.py:4:34
+  |
+3 | import base64
+4 | from collections import Counter, defaultdict
+  |                                  ^^^^^^^^^^^
+5 | import io
+6 | import json
+  |
+help: Remove unused import: `collections.defaultdict`
+
+F401 [*] `audit.sha` imported but unused
+  --> benchmarks/head-to-head/f05-go01-dependency-download-review-20261029/classify.py:11:56
+   |
+ 9 | import zipfile
+10 |
+11 | from audit import HERE, PREP, dirhash, file_sha, load, sha, unescape
+   |                                                        ^^^
+   |
+help: Remove unused import: `audit.sha`
+
+Found 2 errors.
+[*] 2 fixable with the `--fix` option.

@@ -1,0 +1,53 @@
+{
+  "cases": [
+    {
+      "identity": "github.com/realm/SwiftLint",
+      "field": "docs.root",
+      "selectedValue": null,
+      "command": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/Users/maxwell/projects/agent/dotrepo/index/telemetry/f1-docs-association-20261029/parser-repair/replay/swiftlint",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://github.com/realm/SwiftLint"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 0.3328293329104781,
+      "cliSha256": "04f5e2aa8d80ce1701fb7ec2cbab7e431242dac7adb1aed41d73e93b9479ef8b",
+      "sourceSha256": "b1490448cf43b1319e87686239617bc8dfe6f60b725ed9cb8f81b326d124c534",
+      "sourceSubset": "exact retained pinned README only; no complete crawler-refresh claim",
+      "network": false,
+      "thirdPartyCodeExecution": false,
+      "liveIndexWrite": false
+    },
+    {
+      "identity": "github.com/minio/minio",
+      "field": "docs.getting_started",
+      "selectedValue": null,
+      "command": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/Users/maxwell/projects/agent/dotrepo/index/telemetry/f1-docs-association-20261029/parser-repair/replay/minio",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://github.com/minio/minio"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 0.013369583059102297,
+      "cliSha256": "04f5e2aa8d80ce1701fb7ec2cbab7e431242dac7adb1aed41d73e93b9479ef8b",
+      "sourceSha256": "aae99b6e35489bb26bfba4290ac567861d123230d1831562b6aee8c1363aead3",
+      "sourceSubset": "exact retained pinned README only; no complete crawler-refresh claim",
+      "network": false,
+      "thirdPartyCodeExecution": false,
+      "liveIndexWrite": false
+    }
+  ],
+  "oldSelectedValuesNowWithheld": 2,
+  "replacementInferred": false,
+  "modelCalls": 0
+}

@@ -1,0 +1,132 @@
+[
+  {
+    "path": "BEFORE.json",
+    "bytes": 1526,
+    "sha256": "da3832db715ec2d9cb356dcdf98f4708b895c3bd3a931413e0a49095af1554ca"
+  },
+  {
+    "path": "README.md",
+    "bytes": 2990,
+    "sha256": "808e5e2a17d349911a48f4585801da23a20f054ccfdec3b51d1ccd5a74ff7cf0"
+  },
+  {
+    "path": "after/FREEZE.json",
+    "bytes": 1738,
+    "sha256": "cf44e8af18fd27831c8751ec09b178fd0c129b9902be898f596c159d00d517cc"
+  },
+  {
+    "path": "after/controls.py",
+    "bytes": 7940,
+    "sha256": "93286364fa6e5d3fdb06c0175e1f82b6becdb6a391bc8448f34831e9921a62a8"
+  },
+  {
+    "path": "after/findings.json",
+    "bytes": 1286,
+    "sha256": "d8ff3526ad4aeb9e73aac6044cb744dc3feecdadb7a181f6a9ed0fdb51d7604f"
+  },
+  {
+    "path": "after/observations.json",
+    "bytes": 800500,
+    "sha256": "88c0bb9831936bbc581d3b16bb0d52f55e394b154230df42595d0686f8fcf76e"
+  },
+  {
+    "path": "after/ruff-check.log",
+    "bytes": 19,
+    "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+  },
+  {
+    "path": "after/ruff-format.log",
+    "bytes": 25,
+    "sha256": "fd2299c9f1c6dc869070883e281051bfe93aacf66c1a3b0069f45b4aa410ca50"
+  },
+  {
+    "path": "after/source-snapshot/crates/dotrepo-core/src/import/parsing/markdown/docs_tests.rs.txt",
+    "bytes": 10810,
+    "sha256": "17b1772a51ea9b548ba5a624f196b960179a52bdd04a104b6996cbf34791d48a"
+  },
+  {
+    "path": "after/source-snapshot/crates/dotrepo-core/src/import/parsing/markdown.rs.txt",
+    "bytes": 28761,
+    "sha256": "ced9ffdd6963499237fb65e23828d13af9749e88188e6693c5745333c0edbeec"
+  },
+  {
+    "path": "after/startup-safe-refusal.json",
+    "bytes": 528,
+    "sha256": "3382c88500c814200821493fd9551b86770f11f7232112bfc25d88637267719a"
+  },
+  {
+    "path": "after-2/controls.py",
+    "bytes": 9219,
+    "sha256": "2b8fc248c7e40d2109320fcf7698c3bf20e98d4ab1e6a71c27444cc27b75e18f"
+  },
+  {
+    "path": "after-2/observations.json",
+    "bytes": 814103,
+    "sha256": "90a95ca000dad27be6d85f2e8e391127fd365c1041356aa206764ca3d5ec68aa"
+  },
+  {
+    "path": "after-2/real-source-replays.json",
+    "bytes": 4014,
+    "sha256": "19ab17d105d2672fa978cf0694a6fcc0ff9bbd9a66c9f3bbb45ea3249be644da"
+  },
+  {
+    "path": "after-2/report.json",
+    "bytes": 3162,
+    "sha256": "df0e5fd2855fd3e27d3dcfd7e9ed4baf5493443efbb79f94b43b62339a1927c6"
+  },
+  {
+    "path": "after-2/ruff-check.log",
+    "bytes": 19,
+    "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+  },
+  {
+    "path": "after-2/ruff-format.log",
+    "bytes": 25,
+    "sha256": "fd2299c9f1c6dc869070883e281051bfe93aacf66c1a3b0069f45b4aa410ca50"
+  },
+  {
+    "path": "after-2/source-snapshot/crates/dotrepo-core/src/import/parsing/markdown/docs_tests.rs.txt",
+    "bytes": 11589,
+    "sha256": "f62f4fd3a3cb3468d64cf5245123d7fc08c7c539cded250596595e9a880ba836"
+  },
+  {
+    "path": "after-2/source-snapshot/crates/dotrepo-core/src/import/parsing/markdown.rs.txt",
+    "bytes": 29006,
+    "sha256": "aa0f205d9447143eca5f831feb569562fcc5d3ae01031615a7d8c90ec7e29674"
+  },
+  {
+    "path": "before-findings.json",
+    "bytes": 3393,
+    "sha256": "c5a7140ea1db2672f6b0a7ce28ac321cf3526e6a7f560b7beccdaa3cea4c5cce"
+  },
+  {
+    "path": "before-ruff-check.log",
+    "bytes": 19,
+    "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+  },
+  {
+    "path": "before-ruff-format.log",
+    "bytes": 25,
+    "sha256": "fd2299c9f1c6dc869070883e281051bfe93aacf66c1a3b0069f45b4aa410ca50"
+  },
+  {
+    "path": "before-source/crates/dotrepo-core/src/import/parsing/markdown/docs_tests.rs.txt",
+    "bytes": 7282,
+    "sha256": "2740609996c1a196dab0a1e427825e3d10a3e1548ecad22351ad8a327aac27ae"
+  },
+  {
+    "path": "before-source/crates/dotrepo-core/src/import/parsing/markdown.rs.txt",
+    "bytes": 25222,
+    "sha256": "9fec1c4754834677b542a354d12c976e57fb5267ef69bd78d77c3468cd5ec9cf"
+  },
+  {
+    "path": "controls.py",
+    "bytes": 6104,
+    "sha256": "b9ccf09b01b7124788c8c092cce78827419c725d5d92c636eaca6e20de9acc8f"
+  },
+  {
+    "path": "observations-before.json",
+    "bytes": 776149,
+    "sha256": "c57c3dd4bbf28afa5a596743e368f73f68d9974e0c0d21192e5912a7a2e22efa"
+  }
+]

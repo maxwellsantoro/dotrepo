@@ -1,0 +1,23 @@
+   Compiling dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.56s
+     Running unittests src/lib.rs (target/debug/deps/dotrepo_core-6af6d15045c80b2a)
+
+running 15 tests
+test import::commands::tests::docs_reject_package_narrowed_go_test_examples ... ok
+test import::commands::tests::docs_nextest_examples_do_not_invent_an_unfiltered_runner_command ... ok
+test import::commands::tests::docs_abstain_when_environment_prerequisite_would_be_lost ... ok
+test import::commands::tests::docs_accept_cargo_toolchain_override_and_keep_it_in_the_command ... ok
+test import::parsing::markdown::docs_tests::ambiguous_declarations_still_abstain_and_retain_evidence ... ok
+test import::parsing::markdown::docs_tests::integration_prose_does_not_establish_project_documentation ... ok
+test import::parsing::markdown::docs_tests::quickstart_subject_must_match_the_project ... ok
+test import::parsing::markdown::docs_tests::third_party_subjects_and_misleading_prefixes_do_not_declare_ownership ... ok
+test import::parsing::markdown::docs_tests::direct_and_navigation_declarations_keep_custom_domains ... ok
+test tests::import_parsing::docs_selection_ignores_license_images_and_catalogue_links ... ok
+test import::parsing::markdown::docs_tests::start_labels_are_exact_generic_or_project_qualified ... ok
+test tests::import_parsing::parse_readme_docs_metadata_extracts_docs_and_getting_started_links ... ok
+test tests::import_parsing::docs_selection_requires_a_declaration_and_abstains_on_ambiguity ... ok
+test tests::import_parsing::parse_readme_docs_metadata_extracts_reference_and_html_docs_links ... ok
+test import::parsing::markdown::docs_tests::a_long_wrapped_paragraph_builds_its_context_only_once ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 273 filtered out; finished in 0.89s
+

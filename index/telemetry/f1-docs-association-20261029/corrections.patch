@@ -1,0 +1,147 @@
+--- a/index/repos/github.com/realm/SwiftLint/record.toml
++++ b/index/repos/github.com/realm/SwiftLint/record.toml
+@@ -2,17 +2,16 @@
+ 
+ [record]
+ mode = "overlay"
+-status = "verified"
++status = "imported"
+ source = "https://github.com/realm/SwiftLint"
+ generated_at = "2026-10-27T18:15:27.41844Z"
+ 
+ [record.trust]
+-confidence = "high"
++confidence = "medium"
+ provenance = [
+     "imported",
+-    "verified",
+ ]
+-notes = "Bootstrapped from `README.md` and `Makefile`. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
++notes = "Bootstrapped from `README.md` and `Makefile`. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Bounded F1 source inspection corrected docs.root association on 2026-10-29. Whole-record verification withdrawn; other fields and the original generated_at were not refreshed."
+ 
+ [repo]
+ name = "SwiftLint"
+@@ -42,7 +41,7 @@
+ ]
+ 
+ [docs]
+-root = "https://megalinter.io/latest/descriptors/swift_swiftlint/"
++root = "https://realm.github.io/SwiftLint/index.html"
+ 
+ [relations]
+ references = []
+@@ -68,13 +67,17 @@
+ valueJson = "null"
+ 
+ [x.dotrepo.field_evidence."docs.root"]
+-checkedAt = "2026-10-27T18:15:27.41844Z"
++checkedAt = "2026-10-29T08:36:31.832479Z"
+ confidence = "high"
+-method = "extracted"
+-reason = "Explicit documentation link at README.md:486: [SwiftLint documentation](https://megalinter.io/latest/descriptors/swift_swiftlint/)"
+-source = "README.md"
++method = "source_inspection"
++reason = "Pinned README lines 482-487 identifies the old URL as MegaLinter aggregator integration setup, not the project documentation entrypoint. README lines 606-607 declares the SwiftLint Rule Directory; its retained HTTP200 page links index.html as the documentation header/breadcrumb, and the retained HTTP200 index identifies SwiftLintCore Docs, links realm/SwiftLint and renders the SwiftLint overview. The replacement resolves that declared navigation link exactly. Target pages are mutable observations; source-commit/version parity is not established."
++source = "https://github.com/realm/SwiftLint/blob/ec4691d9e813a1d3358e82917326b56b0a71d3c9/README.md"
++sourceRevision = "ec4691d9e813a1d3358e82917326b56b0a71d3c9"
++sourceSha256 = "b1490448cf43b1319e87686239617bc8dfe6f60b725ed9cb8f81b326d124c534"
++audit = "index/telemetry/f1-docs-association-20261029/assessments.json"
++disposition = "corrected-source-association"
+ state = "present"
+-valueJson = '"https://megalinter.io/latest/descriptors/swift_swiftlint/"'
++valueJson = "\"https://realm.github.io/SwiftLint/index.html\""
+ 
+ [x.dotrepo.field_evidence."owners.security_contact"]
+ checkedAt = "2026-10-27T18:15:27.41844Z"
+--- a/index/repos/github.com/realm/SwiftLint/evidence.md
++++ b/index/repos/github.com/realm/SwiftLint/evidence.md
+@@ -17,3 +17,18 @@
+ ## Auto-promotion
+ 
+ All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
++
++
++## Bounded F1 documentation association correction — 2026-10-29
++
++Earlier import and auto-promotion paragraphs above are retained as historical evidence. This dated correction supersedes the selected `docs.root` value and withdraws the whole-record verified claim.
++
++- Previous value: `https://megalinter.io/latest/descriptors/swift_swiftlint/`. Its source association is to the named integration/client task, not this repository documentation entrypoint.
++- Corrected value: `https://realm.github.io/SwiftLint/index.html`.
++- Source: https://github.com/realm/SwiftLint/blob/ec4691d9e813a1d3358e82917326b56b0a71d3c9/README.md, revision `ec4691d9e813a1d3358e82917326b56b0a71d3c9`, README SHA256 `b1490448cf43b1319e87686239617bc8dfe6f60b725ed9cb8f81b326d124c534`, Git blob `4bb2c15642cc0bd5352294931d95ac1268c0c355`.
++- Assessment: Pinned README lines 482-487 identifies the old URL as MegaLinter aggregator integration setup, not the project documentation entrypoint. README lines 606-607 declares the SwiftLint Rule Directory; its retained HTTP200 page links index.html as the documentation header/breadcrumb, and the retained HTTP200 index identifies SwiftLintCore Docs, links realm/SwiftLint and renders the SwiftLint overview. The replacement resolves that declared navigation link exactly. Target pages are mutable observations; source-commit/version parity is not established.
++- Target/source observations: README.md:606–607 → https://realm.github.io/SwiftLint/rule-directory.html (HTTP 200, SHA256 c1d6ef04e87845f2c6e541a27c1b2ae011a868389d717dfbeb995169bdc32226) → header/breadcrumb index.html → https://realm.github.io/SwiftLint/index.html (HTTP 200, SHA256 bf89bac5f9749fa1c172ba65013fa43840b50225660602ebd114ad47ac9081fb). No redirect was followed. The index identifies SwiftLintCore 0.65.1 Docs and links this repository; no version parity is claimed.
++- Field evidence checked at `2026-10-29T08:36:31.832479Z` and bound to the exact replacement value. Raw sources, request timings, before/after hashes, limitations and dispositions: `index/telemetry/f1-docs-association-20261029/`.
++- Record downgraded from automated verified to imported with medium record trust. Remaining fields were not reinspected, their old evidence timestamps are retained, and `generated_at = 2026-10-27T18:15:27.41844Z` is unchanged; this does not reset whole-record factual age. No upstream command execution or maintainer review was performed.
++
++This is an overlay record, not a maintainer-controlled canonical record.
+--- a/index/repos/github.com/minio/minio/record.toml
++++ b/index/repos/github.com/minio/minio/record.toml
+@@ -2,17 +2,16 @@
+ 
+ [record]
+ mode = "overlay"
+-status = "verified"
++status = "imported"
+ source = "https://github.com/minio/minio"
+ generated_at = "2026-10-04T07:53:35.951591156Z"
+ 
+ [record.trust]
+-confidence = "high"
++confidence = "medium"
+ provenance = [
+     "imported",
+-    "verified",
+ ]
+-notes = "Bootstrapped from `README.md`, `SECURITY.md`, `Makefile`, and `go.mod`. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
++notes = "Bootstrapped from `README.md`, `SECURITY.md`, `Makefile`, and `go.mod`. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Bounded F1 source inspection corrected docs.getting_started association on 2026-10-29. Whole-record verification withdrawn; other fields and the original generated_at were not refreshed."
+ 
+ [repo]
+ name = "MinIO Quickstart Guide"
+@@ -54,16 +53,20 @@
+ security_contact = "security@min.io"
+ 
+ [docs]
+-getting_started = "https://docs.min.io/community/minio-object-store/reference/minio-mc.html#quickstart"
++getting_started = "https://github.com/minio/minio/blob/7aac2a2c5b7c882e68c1ce017d8256be2feea27f/README.md#install-from-source"
+ 
+ [x.dotrepo.field_evidence."docs.getting_started"]
+-checkedAt = "2026-10-04T07:53:35.951591156Z"
++checkedAt = "2026-10-29T08:36:31.832479Z"
+ confidence = "high"
+-method = "extracted"
+-reason = "Explicit documentation link at README.md:153: Follow the MinIO Client [Quickstart Guide](https://docs.min.io/community/minio-object-store/reference/minio-mc.html#quickstart) for further instructions."
+-source = "README.md"
++method = "source_inspection"
++reason = "Pinned README lines 139-153 explicitly scopes the old Quickstart Guide link to the separate MinIO Client mc. For this server repository, README lines 23-24 declares that the README supplies source-build and baremetal deployment instructions, lines 59-89 provides Install from Source and standalone-server startup, and line 99 explicitly links #install-from-source. The replacement resolves that declared fragment against the exact immutable README URL. This is server getting-started documentation, not proof that commands execute or that the unmaintained project is currently supported."
++source = "https://github.com/minio/minio/blob/7aac2a2c5b7c882e68c1ce017d8256be2feea27f/README.md"
++sourceRevision = "7aac2a2c5b7c882e68c1ce017d8256be2feea27f"
++sourceSha256 = "aae99b6e35489bb26bfba4290ac567861d123230d1831562b6aee8c1363aead3"
++audit = "index/telemetry/f1-docs-association-20261029/assessments.json"
++disposition = "corrected-source-association"
+ state = "present"
+-valueJson = '"https://docs.min.io/community/minio-object-store/reference/minio-mc.html#quickstart"'
++valueJson = "\"https://github.com/minio/minio/blob/7aac2a2c5b7c882e68c1ce017d8256be2feea27f/README.md#install-from-source\""
+ 
+ [x.dotrepo.field_evidence."docs.root"]
+ checkedAt = "2026-10-04T07:53:35.951591156Z"
+--- a/index/repos/github.com/minio/minio/evidence.md
++++ b/index/repos/github.com/minio/minio/evidence.md
+@@ -17,3 +17,18 @@
+ ## Auto-promotion
+ 
+ All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
++
++
++## Bounded F1 documentation association correction — 2026-10-29
++
++Earlier import and auto-promotion paragraphs above are retained as historical evidence. This dated correction supersedes the selected `docs.getting_started` value and withdraws the whole-record verified claim.
++
++- Previous value: `https://docs.min.io/community/minio-object-store/reference/minio-mc.html#quickstart`. Its source association is to the named integration/client task, not this repository documentation entrypoint.
++- Corrected value: `https://github.com/minio/minio/blob/7aac2a2c5b7c882e68c1ce017d8256be2feea27f/README.md#install-from-source`.
++- Source: https://github.com/minio/minio/blob/7aac2a2c5b7c882e68c1ce017d8256be2feea27f/README.md, revision `7aac2a2c5b7c882e68c1ce017d8256be2feea27f`, README SHA256 `aae99b6e35489bb26bfba4290ac567861d123230d1831562b6aee8c1363aead3`, Git blob `84e49277432b54d5e84de2a5be59c75950746d37`.
++- Assessment: Pinned README lines 139-153 explicitly scopes the old Quickstart Guide link to the separate MinIO Client mc. For this server repository, README lines 23-24 declares that the README supplies source-build and baremetal deployment instructions, lines 59-89 provides Install from Source and standalone-server startup, and line 99 explicitly links #install-from-source. The replacement resolves that declared fragment against the exact immutable README URL. This is server getting-started documentation, not proof that commands execute or that the unmaintained project is currently supported.
++- Target/source observations: The replacement uses the exact GitHub README content already fetched at the pinned commit, with its explicitly referenced #install-from-source fragment. No additional mutable external target was selected or fetched. The README marks the repository unmaintained; the existing archived metadata is retained.
++- Field evidence checked at `2026-10-29T08:36:31.832479Z` and bound to the exact replacement value. Raw sources, request timings, before/after hashes, limitations and dispositions: `index/telemetry/f1-docs-association-20261029/`.
++- Record downgraded from automated verified to imported with medium record trust. Remaining fields were not reinspected, their old evidence timestamps are retained, and `generated_at = 2026-10-04T07:53:35.951591156Z` is unchanged; this does not reset whole-record factual age. No upstream command execution or maintainer review was performed.
++
++This is an overlay record, not a maintainer-controlled canonical record.

@@ -1,0 +1,35 @@
+{
+  "sha": "ec4691d9e813a1d3358e82917326b56b0a71d3c9",
+  "node_id": "C_kwDOAiE69toAKGVjNDY5MWQ5ZTgxM2ExZDMzNThlODI5MTczMjZiNTZiMGE3MWQzYzk",
+  "url": "https://api.github.com/repos/realm/SwiftLint/git/commits/ec4691d9e813a1d3358e82917326b56b0a71d3c9",
+  "html_url": "https://github.com/realm/SwiftLint/commit/ec4691d9e813a1d3358e82917326b56b0a71d3c9",
+  "author": {
+    "name": "dependabot[bot]",
+    "email": "49699333+dependabot[bot]@users.noreply.github.com",
+    "date": "2026-09-28T07:32:50Z"
+  },
+  "committer": {
+    "name": "GitHub",
+    "email": "noreply@github.com",
+    "date": "2026-09-28T07:32:50Z"
+  },
+  "tree": {
+    "sha": "964df09a82e33ed1c6bcc1df90b204d3eb99e505",
+    "url": "https://api.github.com/repos/realm/SwiftLint/git/trees/964df09a82e33ed1c6bcc1df90b204d3eb99e505"
+  },
+  "message": "Bump ruby/setup-ruby from 1.323.0 to 1.325.0 (#6928)\n\nBumps [ruby/setup-ruby](https://github.com/ruby/setup-ruby) from 1.323.0 to 1.325.0.\n- [Release notes](https://github.com/ruby/setup-ruby/releases)\n- [Changelog](https://github.com/ruby/setup-ruby/blob/master/release.rb)\n- [Commits](https://github.com/ruby/setup-ruby/compare/984c0c890880bbf811283d6f09c4607c62d210a4...e8944e80fb94b20106697132f8c20c665fab29e9)\n\n---\nupdated-dependencies:\n- dependency-name: ruby/setup-ruby\n  dependency-version: 1.325.0\n  dependency-type: direct:production\n  update-type: version-update:semver-minor\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+  "parents": [
+    {
+      "sha": "9e3686fa45398d810a456b92a0382771453468fb",
+      "url": "https://api.github.com/repos/realm/SwiftLint/git/commits/9e3686fa45398d810a456b92a0382771453468fb",
+      "html_url": "https://github.com/realm/SwiftLint/commit/9e3686fa45398d810a456b92a0382771453468fb"
+    }
+  ],
+  "verification": {
+    "verified": true,
+    "reason": "valid",
+    "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJquhgiCRC1aQ7uu5UhlAAAfpsQAA3FKZZhgOofxn11vTFkkSEA\n88WwygNzZ2iYlwh83idKq/ZgXwSWbK8uQBrHoyL26mIuVX4C8RdW25CDdMKP3BMJ\nH7BxDXVRnNVE8PJ50vtb4z3nghG23lIZiGy4CicBoF/bBwVEouQJhcFtvZ114f14\n6MQtpv1dwD2YJuyDvq8ogBwoE98f5UV8YRRXxQOJ9M0yGuZkObdyyACVU7OHeqic\njFhlVt6pf4kMZLJi59DgL4wdblbSHmuSgfXyTGLHD0vQYZpSLHFEKETorjUHsSZT\n26pv9mZ8uFxhJv/krOx7UGTSXH9A2tHLuNphi516BZpI4eD+YwTOGRvcWah35WDx\nBkiYkG6XFkSzzwi65e4nY2zAWX5XHBmZ4O/mWd0evsREsNf6VLmuqvvBMLXXwMke\nyaqTFhd3V/BBssVdLp6K6EXaFnIpCeGlTe379hbVnmF8iLsOssB1MnsKaQnO4Ncc\n060/c90m7zs0S/vRLAc0kP5p0xCKHlmCic1qG4way9491w4dRnhTpRI1jGVhLeP4\ndIar+27CqZaK6yafgmWavFVsAiF8eYPvPjxL4WVh16QoMFvFzWwnKjCavUsW+qic\nFsxKbyNrXIaOJvay8yq60VBxevtOAxQ6G2Bl1rK5xFkaHU/6iT8d2GQlJH6nNVTw\nPlNpDX/+S45/w1M5FffM\n=4c9T\n-----END PGP SIGNATURE-----\n",
+    "payload": "tree 964df09a82e33ed1c6bcc1df90b204d3eb99e505\nparent 9e3686fa45398d810a456b92a0382771453468fb\nauthor dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com> 1790580770 +0000\ncommitter GitHub <noreply@github.com> 1790580770 +0000\n\nBump ruby/setup-ruby from 1.323.0 to 1.325.0 (#6928)\n\nBumps [ruby/setup-ruby](https://github.com/ruby/setup-ruby) from 1.323.0 to 1.325.0.\n- [Release notes](https://github.com/ruby/setup-ruby/releases)\n- [Changelog](https://github.com/ruby/setup-ruby/blob/master/release.rb)\n- [Commits](https://github.com/ruby/setup-ruby/compare/984c0c890880bbf811283d6f09c4607c62d210a4...e8944e80fb94b20106697132f8c20c665fab29e9)\n\n---\nupdated-dependencies:\n- dependency-name: ruby/setup-ruby\n  dependency-version: 1.325.0\n  dependency-type: direct:production\n  update-type: version-update:semver-minor\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+    "verified_at": "2026-09-28T07:32:51Z"
+  }
+}

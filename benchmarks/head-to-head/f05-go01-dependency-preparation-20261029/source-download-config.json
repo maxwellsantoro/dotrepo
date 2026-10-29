@@ -1,0 +1,34 @@
+{
+  "state": "pinned source data only; no commands executed",
+  "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+  "archiveNpmYarnConfigPaths": [],
+  "goConfigs": {
+    "go.work": {
+      "sha256": "d6c5314b1f983eb6de36253c903ac00aa8e6fecd9512d2adba882b5701ce7d29",
+      "text": "go 1.27\n\nuse (\n\t./tools\n\t./tsc\n)\n",
+      "replaceOrExcludeOrRetractOrToolchainDirectives": []
+    },
+    "tsc/go.mod": {
+      "sha256": "1e0963224f3096e3e8215acea83c033392c8135e7453b8a9680261baa5c18b25",
+      "text": "module github.com/microsoft/TypeScript/tsc\n\ngo 1.27\n\nrequire (\n\tgithub.com/Microsoft/go-winio v0.6.2\n\tgithub.com/google/go-cmp v0.7.0\n\tgithub.com/klauspost/compress v1.20.0\n\tgithub.com/mackerelio/go-osstat v0.2.8\n\tgithub.com/peter-evans/patience v0.3.0\n\tgithub.com/zeebo/xxh3 v1.1.0\n\tgolang.org/x/sync v0.23.0\n\tgolang.org/x/sys v0.48.0\n\tgolang.org/x/term v0.46.0\n\tgolang.org/x/text v0.42.0\n\tgotest.tools/v3 v3.5.2\n)\n\nrequire (\n\tgithub.com/klauspost/cpuid/v2 v2.2.10 // indirect\n\tgithub.com/matryer/moq v0.7.1 // indirect\n\tgithub.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect\n\tgolang.org/x/mod v0.41.0 // indirect\n\tgolang.org/x/tools v0.50.0 // indirect\n)\n\ntool (\n\tgithub.com/matryer/moq\n\tgolang.org/x/tools/cmd/stringer\n)\n",
+      "replaceOrExcludeOrRetractOrToolchainDirectives": []
+    },
+    "tools/go.mod": {
+      "sha256": "968e2374d845585e30ffb1c3b32fbf4b2924dab702cddd91ae33327609d5625b",
+      "text": "module github.com/microsoft/TypeScript/tools\n\ngo 1.27\n\nrequire (\n\tgithub.com/anchore/quill v0.7.1\n\tgithub.com/blacktop/go-macho v1.1.283\n\tgithub.com/golangci/plugin-module-register v0.1.2\n\tgolang.org/x/mod v0.41.0\n\tgolang.org/x/tools v0.50.0\n\tgotest.tools/v3 v3.5.2\n)\n\nrequire (\n\tgithub.com/anchore/go-logger v0.0.0-20251106021608-a5b0513fa9a9 // indirect\n\tgithub.com/anchore/go-macholibre v0.0.0-20250826193721-3cd206ca93aa // indirect\n\tgithub.com/bitfield/gotestdox v0.2.2 // indirect\n\tgithub.com/blacktop/go-dwarf v1.0.14 // indirect\n\tgithub.com/dnephin/pflag v1.0.7 // indirect\n\tgithub.com/fatih/color v1.18.0 // indirect\n\tgithub.com/fsnotify/fsnotify v1.9.0 // indirect\n\tgithub.com/github/smimesign v0.2.0 // indirect\n\tgithub.com/go-restruct/restruct v1.2.0-alpha // indirect\n\tgithub.com/google/go-cmp v0.7.0 // indirect\n\tgithub.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510 // indirect\n\tgithub.com/google/uuid v1.6.0 // indirect\n\tgithub.com/mattn/go-colorable v0.1.14 // indirect\n\tgithub.com/mattn/go-isatty v0.0.20 // indirect\n\tgithub.com/pkg/errors v0.9.1 // indirect\n\tgithub.com/scylladb/go-set v1.0.3-0.20200225121959-cc7b2070d91e // indirect\n\tgolang.org/x/crypto v0.57.0 // indirect\n\tgolang.org/x/sync v0.23.0 // indirect\n\tgolang.org/x/sys v0.48.0 // indirect\n\tgolang.org/x/term v0.46.0 // indirect\n\tgolang.org/x/text v0.42.0 // indirect\n\tgotest.tools/gotestsum v1.13.0 // indirect\n\tsoftware.sslmate.com/src/go-pkcs12 v0.7.2 // indirect\n)\n\ntool gotest.tools/gotestsum\n",
+      "replaceOrExcludeOrRetractOrToolchainDirectives": []
+    }
+  },
+  "npmLockSha256": "52b6c9bd0a26ef1b0fc27dfbfaa00df6a047cdddd587d07c4f6c1c3345faf5cf",
+  "externalResolutionCount": 242,
+  "externalResolutionOrigins": [
+    "https://registry.npmjs.org"
+  ],
+  "npmInternalWorkspaceLinks": [
+    "node_modules/@typescript/typescript",
+    "node_modules/native-preview",
+    "node_modules/vscode-typescript-nightly"
+  ],
+  "packageManager": "npm@11.19.1+sha512.cedb312b1b7f92421a02cfb68b4194e88f8346651dacd6acc5364a25ef5309d4a32b19616a1ff8aff865e7280c0fa5c0835a99f5cd93368991e2a80ec9da75d2",
+  "meaning": "No .npmrc/.yarnrc found in full archive; go.work uses only tools/tsc. No replace/exclude/retract/toolchain/godebug directives in selected workspace modules; tool declarations name dependencies but no go install/build command is authorized. CLI/environment pinned registry/proxy/sumdb and ignore-scripts remain required; hook equivalence unresolved."
+}

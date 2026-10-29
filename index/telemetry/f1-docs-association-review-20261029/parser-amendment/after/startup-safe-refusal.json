@@ -1,0 +1,8 @@
+{
+  "attempt": "Initial after-controls startup",
+  "expectedCliSha256": "65e50e4d67c1e0ebb176f0d3950bc00d8d498c6464ca1d2fd9cf8df059dab9a6",
+  "observedTargetCliSha256": "e0204f1626ab47eaca9dfd6ac11b056e013e5d843beee2ae6da59250d256c987",
+  "outcome": "AssertionError before any CLI imports; target binary was changing under combined gates",
+  "rootResolution": "Coordinator supplied stable copied /tmp/dotrepo-docs-context-review-cli-20261029 matching author expected65e50e4d before and after copy",
+  "productionEdits": false
+}

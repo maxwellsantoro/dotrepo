@@ -1,0 +1,27 @@
+{
+  "actualPreparationExecuted": false,
+  "artifactSha256": {
+    "README.md": "efc53fb583054197f3494c74503f7287a3f0882011aad5f0e2de5aeca64c05c7",
+    "authorization-template.json": "e54d22038dcac4273878bfda7b8410f25780e72f9ef1af30b150328639de38e8",
+    "boundaries.py": "7b03c7ab687043ab23061efde9d6328a21bb6ca94176085c87a50df8265de9e6",
+    "checks.json": "f34b908c0b0013328ec362f88d99b44db3a9b72c5d3942ac69d3a4280de31cb1",
+    "controls.before-output-binding.json": "f888db02f9bbf3b6fac05a8cd82079ec0c6fb03b3f448352595f691c5dbbf38d",
+    "controls.development.json": "faa3f93831fded8d67318cba5ea1f1c782ea81cb63fadad7817c0593537c55b8",
+    "controls.json": "f888db02f9bbf3b6fac05a8cd82079ec0c6fb03b3f448352595f691c5dbbf38d",
+    "controls.py": "e879a36f0e6e2f81b6402496b4fed220c4af67ee42b6c7696e8c514b58a93394",
+    "io-controls.json": "f66e5903365ab254ab79623cb85e99b330b54e39f3c912dcb7acd2f74434d9b8",
+    "io_controls.py": "1224404c3ae96d3b826306219b137b89d2eaa0f4abdb9f2b091cca2cd65d92ae",
+    "make_plan.py": "c6a5711d97a84a38a07a9705f823232a974bdf69264ce85b5f4e0475cb37242a",
+    "plan.json": "eceef38492e2b70a98c5984174e5ea8141effb3d0b3412dd788dc950e0eadfa3",
+    "prepare.py": "132cc30c00be4f8a7de80646ee8f87b3fff5d945c99a8f63df7a80780144538b",
+    "process_io.py": "54fafcbeefb9c7516f65e4a1eae2959dd2934c9359b316ef2e0cf79fe0207ede",
+    "protected-digests.json": "3a2ac923c48b0c91c81f80176bcb4fbcfa054afd912dbdb96af2ba5159cb518f",
+    "source-download-config.json": "bf17416f4e537a9eefb1e04fc924c25a4e17d3abd75ea0bcf004afcb41a1c407",
+    "source-preflight-check.before-lint-cleanup.json": "a01482a2d597238b7e7ae51db276943de8544bb8dee4c3d7a12583a8985616d0",
+    "source-preflight-check.before-output-binding.json": "87abf1d54329ebaddfc32cc7c01266f22f3fa95ad6bb7ac486583e42c42fa704",
+    "source-preflight-check.development.json": "d95d2e8a10f64083d729d7d767310191c9e6700b38f54923edabd2a50ad31561",
+    "source-preflight-check.json": "1355e222d0e19ad31d7d13dae18ccd0687053bc09583663936b9d8b251f28ca4"
+  },
+  "limits": "No daemon/network/native/provider/model action authorized by this freeze.",
+  "state": "frozen-plan-only-unaccepted"
+}

@@ -1,0 +1,30 @@
+{
+  "bundle": {
+    "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+    "archive": {
+      "path": "cache.tar",
+      "sha256": "583fad501fa7b1a1a6d85ab8fe4b890786e39c1e016f785d6d3fb9d060383284"
+    },
+    "inventory": {
+      "path": "inventory.json",
+      "sha256": "900550d8e44827f96a9e7db46f3b4551db734938564c8921473fe56a6257415c"
+    },
+    "provenance": {
+      "path": "provenance.json",
+      "sha256": "985024ecf3fca22bfc75d2dae70099edb764d1fa9fd1c45fd1b8bf901bfa519d"
+    }
+  },
+  "preparation": {
+    "path": "preparation.json",
+    "sha256": "336ae1a6776897288dbe5958967b2d8917f6aa2dbb4362322ff6fbfc2f961a31"
+  },
+  "script": {
+    "path": "prepare.py",
+    "sha256": "132cc30c00be4f8a7de80646ee8f87b3fff5d945c99a8f63df7a80780144538b"
+  },
+  "trace": {
+    "path": "trace.json",
+    "sha256": "c8cdfdd37c07dcaf63dd148ebeb4884fd90e5083f82084a5bf23215d40b46182"
+  },
+  "state": "draft-unqualified; not runtime admission"
+}

@@ -1,0 +1,6 @@
+{
+  "initialVerifierError": "KeyError:size",
+  "correction": "The existing frozen inventory member contract uses bytes, not size. Corrected only new read-only verifier.",
+  "artifactMismatch": false,
+  "nativeRerun": false
+}

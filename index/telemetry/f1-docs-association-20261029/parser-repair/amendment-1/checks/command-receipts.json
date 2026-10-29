@@ -1,0 +1,32 @@
+[
+  {
+    "name": "existing-parsing",
+    "command": [
+      "cargo",
+      "test",
+      "-p",
+      "dotrepo-core",
+      "--lib",
+      "import_parsing"
+    ],
+    "startedAt": "2026-10-29T08:56:35.697441+00:00",
+    "elapsedSeconds": 0.2706801251042634,
+    "exitCode": 0,
+    "log": "checks/existing-parsing.log"
+  },
+  {
+    "name": "fixture-gate",
+    "command": [
+      "cargo",
+      "test",
+      "-p",
+      "dotrepo-core",
+      "--test",
+      "import_quality_gate"
+    ],
+    "startedAt": "2026-10-29T08:56:35.968310+00:00",
+    "elapsedSeconds": 4.234204542124644,
+    "exitCode": 101,
+    "log": "checks/fixture-gate.log"
+  }
+]

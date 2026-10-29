@@ -1,0 +1,47 @@
+{"command": ["cargo", "fmt", "--all"], "exitCode": 0, "seconds": 0.5112070001196116}
+   Compiling dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.40s
+     Running unittests src/lib.rs (target/debug/deps/dotrepo_core-6af6d15045c80b2a)
+
+running 21 tests
+test import::commands::tests::docs_abstain_when_environment_prerequisite_would_be_lost ... ok
+test import::commands::tests::docs_nextest_examples_do_not_invent_an_unfiltered_runner_command ... ok
+test import::commands::tests::docs_accept_cargo_toolchain_override_and_keep_it_in_the_command ... ok
+test import::commands::tests::docs_reject_package_narrowed_go_test_examples ... ok
+test import::parsing::markdown::docs_tests::ambiguous_declarations_still_abstain_and_retain_evidence ... ok
+test import::parsing::markdown::docs_tests::documentation_badges_are_independent_of_neighboring_badges ... ok
+test import::parsing::markdown::docs_tests::integration_hosts_are_valid_when_the_source_declares_project_docs_directly ... ok
+test import::parsing::markdown::docs_tests::integration_prose_does_not_establish_project_documentation ... ok
+test import::parsing::markdown::docs_tests::documentation_heading_bare_urls_keep_the_whole_paragraph_subject ... ok
+test import::parsing::markdown::docs_tests::complete_prefix_declarations_preserve_neutral_titles_and_list_owners ... ok
+test import::parsing::markdown::docs_tests::direct_and_navigation_declarations_keep_custom_domains ... ok
+test import::parsing::markdown::docs_tests::quickstart_subject_must_match_the_project ... ok
+test import::parsing::markdown::docs_tests::third_party_subjects_and_misleading_prefixes_do_not_declare_ownership ... ok
+test import::parsing::markdown::docs_tests::start_labels_are_exact_generic_or_project_qualified ... ok
+test tests::import_parsing::docs_selection_ignores_license_images_and_catalogue_links ... ok
+test tests::import_parsing::parse_readme_docs_metadata_extracts_docs_and_getting_started_links ... ok
+test import::parsing::markdown::docs_tests::physical_prefixes_cannot_override_a_paragraph_or_list_subject ... ok
+test import::parsing::markdown::docs_tests::docs_section_intro_must_have_a_neutral_or_current_project_subject ... ok
+test tests::import_parsing::parse_readme_docs_metadata_extracts_reference_and_html_docs_links ... ok
+test tests::import_parsing::docs_selection_requires_a_declaration_and_abstains_on_ambiguity ... ok
+test import::parsing::markdown::docs_tests::a_long_wrapped_paragraph_builds_its_context_only_once ... ok
+
+test result: ok. 21 passed; 0 failed; 0 ignored; 0 measured; 273 filtered out; finished in 0.89s
+
+{"command": ["cargo", "test", "-p", "dotrepo-core", "--lib", "docs"], "exitCode": 0, "seconds": 4.22618520911783}
+   Compiling dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.63s
+     Running tests/import_quality_gate.rs (target/debug/deps/import_quality_gate-0c9f2def4d15fcd0)
+
+running 2 tests
+test imported_context_candidates_are_valid_and_exactly_value_bound ... ok
+test import_quality_gate_matches_checked_in_expectations ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.28s
+
+{"command": ["cargo", "test", "-p", "dotrepo-core", "--test", "import_quality_gate"], "exitCode": 0, "seconds": 3.8064944169018418}
+   Compiling dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)
+   Compiling dotrepo-cli v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-cli)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.17s
+{"command": ["cargo", "build", "-p", "dotrepo-cli"], "exitCode": 0, "seconds": 3.2166572499554604}
+review_cli_sha256 79a4e70fb5c6e80708c27230e6958b51217727069f957d823215c494ab4b0b61

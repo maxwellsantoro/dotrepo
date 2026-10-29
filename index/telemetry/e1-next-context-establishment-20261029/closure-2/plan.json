@@ -1,0 +1,14 @@
+{
+  "identity": "e1-next-context-establishment-20261029/closure-2",
+  "repository": "docker/compose",
+  "revision": "343bb382d2192b88d84af49971bb5cb99bee268c",
+  "rootTreeSha1": "b10e2fc106b7ea146f5d31f56ca0386688275aa7",
+  "priorClosureFreezeSha256": "5b1b3c17c0409011eaebd715ef9d031e4717087b196a66e7978e758390c75b4b",
+  "exactAcquisition": [
+    {"path": ".dockerignore", "blobSha1": "e660fd93d3196215552065b1e63bf6a2f393ed86", "treeDeclaredBytes": 5},
+    {"path": ".go-version", "blobSha1": "63d92c7fb83a4e20c790c13c80564a5392a8a662", "treeDeclaredBytes": 8}
+  ],
+  "bounds": {"bodyRequests": 2, "combinedClosureCallsMax": 6, "bytesPerFile": 2097152, "totalAdditionalSourceFilesMax": 4},
+  "localInspection": "Retained whole root Makefile include/override/assignment declarations and existing Bake/Docker tags; no other acquisition",
+  "constraints": {"codeChanges": false, "upstreamExecution": false, "otherNetworkCalls": false, "confidencePromotion": false, "taskUnchanged": true}
+}

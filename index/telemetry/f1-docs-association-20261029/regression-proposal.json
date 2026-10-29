@@ -1,0 +1,25 @@
+{
+  "state": "proposed regression coverage; shared parser/fixtures untouched",
+  "basis": "Two exact pinned README-only first-party import replays reproduce old selected associations; these are not full crawler replays.",
+  "cases": [
+    {
+      "id": "f1-docs-integration-subject",
+      "source": "SwiftLint README482\u2013487",
+      "negative": "An integration heading and its possessive aggregator wording must not let a link label containing SwiftLint documentation establish project docs.root.",
+      "desired": "withhold this integration link as project root; select a replacement only with its own project-associated evidence",
+      "positive": "An explicitly project-owned documentation declaration on a custom/shared domain remains eligible; no megalinter-domain blacklist and no parent-URL guessing"
+    },
+    {
+      "id": "f1-docs-client-versus-server-subject",
+      "source": "Minio README139\u2013153 versus23\u201324,59\u201389,99",
+      "negative": "A Quickstart Guide explicitly for MinIO Client mc must not become server docs.getting_started merely by keyword match.",
+      "desired": "withhold client quickstart for server entrypoint; support exact server README section when relative/self-source URI resolution and field semantics are separately implemented",
+      "positive": "The same Client Quickstart can be relevant when the indexed repository is the client; do not ban client or quickstart words globally"
+    }
+  ],
+  "limits": [
+    "Data corrections and field evidence do not act as per-value tombstones.",
+    "No shared parser changes or new fixture expectations were made in this packet.",
+    "Source-association, target liveness and version/runtime correctness remain distinct."
+  ]
+}

@@ -1,0 +1,193 @@
+{
+  "classification": "Known exposed supported-miss source proposal only; original result unchanged",
+  "repository": "github.com/zellij-org/zellij",
+  "revision": "1f3df933978e00c246553070310175c392fcfe4f",
+  "taskId": "e1-rust-01-repository-tests",
+  "taskIntent": "Establish the maintainer-documented repository-default automated test instruction with complete applicability context; preserve separately documented optional/e2e/ignored-suite limitations.",
+  "tupleFromExistingGold": {
+    "command": "cargo xtask test",
+    "working_directory": ".",
+    "scope": "repository",
+    "prerequisites": [
+      "Use the pinned Rust 1.95.0 toolchain and its rustfmt/clippy components; install the wasm32-wasip1 and x86_64-unknown-linux-musl targets declared by rust-toolchain.toml.",
+      "Install protoc for protobuf generation.",
+      "Install pkg-config and OpenSSL for the test task.",
+      "Preserve the repository target-dir configuration and do not override CARGO_TARGET_DIR for the debug/plugin build."
+    ],
+    "source": "CONTRIBUTING.md"
+  },
+  "scopeExplanation": "Unchanged maintainer default xtask test route. Do not replace it with bare cargo test, plugin-only/subset, no-web/no-terminal flags, or Docker/SSH e2e. Tests aggregate plugins for feature unification, iterate non-plugin workspace members with all features by default, and perform optional feature checks.",
+  "rationale": "Least-complex already-supported exposed Rust repository miss outside original four complex development identities: one explicit command, concrete native prerequisites, exact toolchain/targets and local target-dir contract. Existing retained source supports local owning alias/dispatch/root/default test stages. Reuse source gold as a starting assertion, not independent new qualification.",
+  "sourcePassages": [
+    {
+      "path": "CONTRIBUTING.md",
+      "startLine": 23,
+      "endLine": 59,
+      "wholeFileSha256": "2c4575e7a3575609fdde406b8c87f3df53802460dbfb03b4253f4330ab37f63a",
+      "passageSha256": "574fb4679a2f93f05751e022d0cf5c87e5786f2fd0230496ee48012d9ada2836",
+      "text": "## Building\n\nTo build Zellij, we're using cargo xtask. This is a standalone package shipped\ninside the repository, so you don't have to install additional dependencies.\n\nTo build zellij, you'll need [`protoc`](https://github.com/protocolbuffers/protobuf#protobuf-compiler-installation) installed. This is used to compile the .proto files into Rust assets. These protocol buffers are used for communication between Zellij and its plugins across the wasm boundary.\n\nHere are some of the commands currently supported by the build system:\n\n```sh\n# Format code, build, then run tests\ncargo xtask\n# You can also perform these actions individually\ncargo xtask format\ncargo xtask build\ncargo xtask test\n# Run Zellij (optionally with additional arguments)\ncargo xtask run\ncargo xtask run -- -l strider\n# Install Zellij to some directory\ncargo xtask install /path/of/zellij/binary\n# Publish the zellij and zellij-tile crates\ncargo xtask publish\n```\n\nYou can see a list of all commands (with supported arguments) with `cargo xtask\n--help`. For convenience, `xtask` may be shortened to `x`: `cargo x build` etc.\n\nTo run `test`, you will need the package `pkg-config` and a version of `openssl`.\n\n### The cargo target directory\n\nDebug builds embed the plugins from `<repository>/target/wasm32-wasip1/debug`, which is\nresolved at compile time. `.cargo/config.toml` therefore pins `build.target-dir` to\n`target`, so that a `target-dir` configured globally in `~/.cargo/config.toml` does not\nmove the plugins out of reach. Removing that pin breaks debug builds for everyone who\nconfigures a shared target directory.\n",
+      "url": "https://github.com/zellij-org/zellij/blob/1f3df933978e00c246553070310175c392fcfe4f/CONTRIBUTING.md#L23-L59"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "startLine": 68,
+      "endLine": 70,
+      "wholeFileSha256": "2c4575e7a3575609fdde406b8c87f3df53802460dbfb03b4253f4330ab37f63a",
+      "passageSha256": "5184ad00f8b6618d993a2078b4cf8423f952a84cd3b0c0f67a0de8da7d58885a",
+      "text": "Setting the `CARGO_TARGET_DIR` environment variable takes precedence over\n`.cargo/config.toml` and will break debug builds for the same reason. Release builds are\nunaffected, since they embed the plugins from `zellij-utils/assets/plugins`.\n",
+      "url": "https://github.com/zellij-org/zellij/blob/1f3df933978e00c246553070310175c392fcfe4f/CONTRIBUTING.md#L68-L70"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "startLine": 104,
+      "endLine": 125,
+      "wholeFileSha256": "2c4575e7a3575609fdde406b8c87f3df53802460dbfb03b4253f4330ab37f63a",
+      "passageSha256": "e364cfadf0ec3ec54f939f550b2d3cabb1d3ca0813bf339a5b2aaa683c938319",
+      "text": "## Running the end-to-end tests\nZellij includes some end-to-end tests which test the whole application as a black-box from the outside.\nThese tests work by running a docker container which contains the Zellij binary, connecting to it via ssh, sending some commands and comparing the output received against predefined snapshots.\n\n<details>\n<summary>macOS prerequisites (expand here):</summary>\n\nThe build uses `cargo-zigbuild` to cross-compile a native musl binary (arm64 on Apple Silicon, amd64 on Intel) so the Docker container runs without emulation on any Mac.\n\n1. `cargo install cargo-zigbuild`\n2. `brew install zig`\n</details>\n\n\nTo run these tests locally, you'll need to have either `docker` or `podman` and also `docker compose` installed.\nOnce you do, in the repository root:\n\n1. `docker compose up -d` will start up the docker container\n2. `cargo xtask ci e2e --build` will build the Zellij binary in the target folder, which is shared with the container\n3. `cargo xtask ci e2e --test` will run the tests\n\nTo re-run the tests after you've changed something in the code base, be sure to repeat steps 2 and 3.\n",
+      "url": "https://github.com/zellij-org/zellij/blob/1f3df933978e00c246553070310175c392fcfe4f/CONTRIBUTING.md#L104-L125"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "startLine": 138,
+      "endLine": 159,
+      "wholeFileSha256": "2c4575e7a3575609fdde406b8c87f3df53802460dbfb03b4253f4330ab37f63a",
+      "passageSha256": "e453c64e21ff5786527273cd668e96021c80659bd6496f484a07d5bae74e2eb4",
+      "text": "When running Zellij with the `--debug` flag, Zellij will dump a copy of all bytes received over the pty for each pane in: `/$temp_dir/zellij-<UID>/zellij-log/zellij-<pane_id>.log`. These might be useful when troubleshooting terminal issues.\n\n## Toolchain Versions and MSRV\n\nDevelopment aims to track the current stable Rust toolchain version, although\nwith a slight delay. The reason behind this is that users running `cargo\ninstall --locked zellij` will use whatever toolchain version they have\ninstalled locally and we cannot influence this (except for terminating\ncompilation on a \"mismatch\" from our expectation). By using current toolchain\nversions we hope to ensure that bugs are caught before users experience them.\nIt hopefully also ensures that (at least for a certain time after a release has\nbeen made) the binary obtained by installation from source doesn't deviate\n(much at least) from the pre-built binaries attached as release assets. The\ndelay in toolchain updates is due to a certain amount of manual testing that is\nperformed afterward.\n\nAt this point in time, there is no MSRV policy. As our resources are limited,\nwe try to focus on making the code work with whatever development toolchain is\ncurrently mentioned in `rust-toolchain.toml`. While it may still be possible to\ncompile Zellij with older Rust versions, we cannot offer support in such\nsituations.\n\n",
+      "url": "https://github.com/zellij-org/zellij/blob/1f3df933978e00c246553070310175c392fcfe4f/CONTRIBUTING.md#L138-L159"
+    },
+    {
+      "path": "rust-toolchain.toml",
+      "startLine": 1,
+      "endLine": 7,
+      "wholeFileSha256": "733cf0884a5f62e74d4362b290704b572061e71e9f7989096aef165f99de0fdf",
+      "passageSha256": "733cf0884a5f62e74d4362b290704b572061e71e9f7989096aef165f99de0fdf",
+      "text": "# This file is updated by `update-toolchain.sh`\n[toolchain]\n# NOTE: When updating this, modify `rust-version` in `Cargo.toml` accordingly\nchannel = \"1.95.0\"\ncomponents = [\"rustfmt\", \"clippy\"]\n# NOTE: Change this with care, this is also used by the CI pipeline\ntargets = [\"wasm32-wasip1\", \"x86_64-unknown-linux-musl\"]\n",
+      "url": "https://github.com/zellij-org/zellij/blob/1f3df933978e00c246553070310175c392fcfe4f/rust-toolchain.toml#L1-L7"
+    },
+    {
+      "path": ".cargo/config.toml",
+      "startLine": 1,
+      "endLine": 16,
+      "wholeFileSha256": "d42813632ce542b468c718473de1a4a6c8f6d302c534717a2f19b7aef10dbc3e",
+      "passageSha256": "d42813632ce542b468c718473de1a4a6c8f6d302c534717a2f19b7aef10dbc3e",
+      "text": "parallel-compiler = true\n\n[alias]\nxtask = \"run --package xtask --\"\nx = \"xtask\"\nq = \"x run --quick-run\"\nmake = \"xtask deprecated\"\n\n[target.x86_64-pc-windows-gnu]\nlinker = \"x86_64-w64-mingw32-gcc\"\n\n[build]\ntarget-dir = \"target\"\n\n[target.wasm32-wasip1]\nrustflags = [\"-C\", \"link-arg=-zstack-size=524288\"]\n",
+      "url": "https://github.com/zellij-org/zellij/blob/1f3df933978e00c246553070310175c392fcfe4f/.cargo/config.toml#L1-L16"
+    },
+    {
+      "path": "Cargo.toml",
+      "startLine": 50,
+      "endLine": 82,
+      "wholeFileSha256": "c02efc9801eefadf579135c968cafe27d2d5e12b86ac5e020ec39fe2130829a2",
+      "passageSha256": "0f69f0b385fe2b84beb865265f227d3594fef54b43ca9817776718c757278258",
+      "text": "[workspace]\nmembers = [\n    \"default-plugins/bars\",\n    \"default-plugins/strider\",\n    \"default-plugins/fixture-plugin-for-tests\",\n    \"default-plugins/session-manager\",\n    \"default-plugins/configuration\",\n    \"default-plugins/plugin-manager\",\n    \"default-plugins/about\",\n    \"default-plugins/share\",\n    \"default-plugins/multiple-select\",\n    \"default-plugins/layout-manager\",\n    \"default-plugins/prompt\",\n    \"default-plugins/context-menu\",\n    \"zellij-client\",\n    \"zellij-integration-tests\",\n    \"zellij-server\",\n    \"zellij-utils\",\n    \"zellij-tile\",\n    \"zellij-tile-utils\",\n    \"zellij-terminal\",\n    \"xtask\",\n    \".\",\n]\ndefault-members = [\".\"]\n\n[workspace.package]\nedition = \"2021\"\nlicense = \"MIT\"\nrepository = \"https://github.com/zellij-org/zellij\"\nversion = \"0.46.0\"\n# NOTE: When updating this, modify `channel` in `rust-toolchain.toml` accordingly\nrust-version = \"1.95\"\n",
+      "url": "https://github.com/zellij-org/zellij/blob/1f3df933978e00c246553070310175c392fcfe4f/Cargo.toml#L50-L82"
+    },
+    {
+      "path": "xtask/src/main.rs",
+      "startLine": 137,
+      "endLine": 150,
+      "wholeFileSha256": "5e213118f58efae8bd039ff4436dc6fc4e8b4aeaa44472dba764101643b30df3",
+      "passageSha256": "496c60d71b6031306e01678d9162ccad8f869d948dddbc571f85908051b1b3aa",
+      "text": "fn main() -> anyhow::Result<()> {\n    let shell = &Shell::new()?;\n\n    let flags = flags::Xtask::from_env()?;\n    let now = Instant::now();\n\n    match flags.subcommand {\n        flags::XtaskCmd::Deprecated(_flags) => deprecation_notice(),\n        flags::XtaskCmd::Build(flags) => build::build(shell, flags),\n        flags::XtaskCmd::Format(flags) => format::format(shell, flags),\n        flags::XtaskCmd::Test(flags) => test::test(shell, flags),\n        flags::XtaskCmd::IntegrationTest(flags) => integration_test::integration_test(shell, flags),\n        flags::XtaskCmd::Proto(_flags) => build::proto(shell),\n        flags::XtaskCmd::Assets(flags) => assets::assets(shell, flags),\n",
+      "url": "https://github.com/zellij-org/zellij/blob/1f3df933978e00c246553070310175c392fcfe4f/xtask/src/main.rs#L137-L150"
+    },
+    {
+      "path": "xtask/src/main.rs",
+      "startLine": 166,
+      "endLine": 189,
+      "wholeFileSha256": "5e213118f58efae8bd039ff4436dc6fc4e8b4aeaa44472dba764101643b30df3",
+      "passageSha256": "dac4f2792808cbcb1b210c25153d99ad2b23b7e5177b4090142a81aa8891ad05",
+      "text": "fn project_root() -> PathBuf {\n    Path::new(\n        &env::var(\"CARGO_MANIFEST_DIR\").unwrap_or_else(|_| env!(\"CARGO_MANIFEST_DIR\").to_owned()),\n    )\n    .ancestors()\n    .nth(1)\n    .unwrap()\n    .to_path_buf()\n}\n\nfn asset_dir() -> PathBuf {\n    crate::project_root().join(\"zellij-utils\").join(\"assets\")\n}\n\npub fn target_dir() -> PathBuf {\n    match env::var_os(\"CARGO_TARGET_DIR\") {\n        Some(dir) => PathBuf::from(dir),\n        None => crate::project_root().join(\"target\"),\n    }\n}\n\npub fn cargo() -> anyhow::Result<PathBuf> {\n    std::env::var_os(\"CARGO\")\n        .map_or_else(|| which::which(\"cargo\"), |exe| Ok(PathBuf::from(exe)))\n",
+      "url": "https://github.com/zellij-org/zellij/blob/1f3df933978e00c246553070310175c392fcfe4f/xtask/src/main.rs#L166-L189"
+    },
+    {
+      "path": "xtask/src/test.rs",
+      "startLine": 6,
+      "endLine": 24,
+      "wholeFileSha256": "561daa9a37efaf44ba285aa88669fb9228de402696bb25e310340238b021e0cb",
+      "passageSha256": "cb636a7090f6073aa33ddc9ced88b6d6e7d465712a3d0e4b6c4ceff111660e0a",
+      "text": "pub fn test(sh: &Shell, flags: flags::Test) -> anyhow::Result<()> {\n    let err_context = \"failed to run task 'test'\";\n\n    let _pdo = sh.push_dir(crate::project_root());\n    let cargo = crate::cargo().context(err_context)?;\n    let host_triple = host_target_triple(sh).context(err_context)?;\n\n    build::build(\n        sh,\n        flags::Build {\n            release: false,\n            no_plugins: false,\n            plugins_only: true,\n            no_web: flags.no_web,\n            args: vec![],\n        },\n    )\n    .context(err_context)?;\n\n",
+      "url": "https://github.com/zellij-org/zellij/blob/1f3df933978e00c246553070310175c392fcfe4f/xtask/src/test.rs#L6-L24"
+    },
+    {
+      "path": "xtask/src/test.rs",
+      "startLine": 26,
+      "endLine": 50,
+      "wholeFileSha256": "561daa9a37efaf44ba285aa88669fb9228de402696bb25e310340238b021e0cb",
+      "passageSha256": "363d6dd9530af3fd7bf6b1cc3d28ba7095163de638ed9f85bcf4c67c35022b55",
+      "text": "    // shared crates (e.g. zellij-utils) only once, mirroring how plugins are built.\n    {\n        let plugin_names: Vec<&str> = crate::workspace_members()\n            .iter()\n            .filter(|m| m.crate_name.contains(\"plugins\"))\n            .map(|m| m.crate_name.rsplit_once('/').unwrap().1)\n            .collect();\n\n        if !plugin_names.is_empty() {\n            println!();\n            let msg = \">> Testing plugins\";\n            crate::status(msg);\n            println!(\"{}\", msg);\n\n            let mut cmd = cmd!(sh, \"{cargo} test --target {host_triple}\");\n            for name in &plugin_names {\n                cmd = cmd.args([\"-p\", name]);\n            }\n            cmd.arg(\"--\")\n                .args(&flags.args)\n                .run()\n                .context(\"Failed to run plugin tests\")?;\n        }\n    }\n\n",
+      "url": "https://github.com/zellij-org/zellij/blob/1f3df933978e00c246553070310175c392fcfe4f/xtask/src/test.rs#L26-L50"
+    },
+    {
+      "path": "xtask/src/test.rs",
+      "startLine": 52,
+      "endLine": 110,
+      "wholeFileSha256": "561daa9a37efaf44ba285aa88669fb9228de402696bb25e310340238b021e0cb",
+      "passageSha256": "386046117811776c76e501620e6212d09e1a10560f65e19eb7b044530e6742f8",
+      "text": "    if flags.no_web {\n        excluded.push(metadata::WEB_FEATURE);\n    }\n    if flags.no_terminal {\n        excluded.push(metadata::TERMINAL_FEATURE);\n    }\n\n    for WorkspaceMember { crate_name, .. } in crate::workspace_members()\n        .iter()\n        .filter(|m| !m.crate_name.contains(\"plugins\"))\n        .filter(|m| !(flags.no_terminal && m.crate_name == \"zellij-terminal\"))\n    {\n        let _pd = sh.push_dir(Path::new(crate_name));\n        println!();\n        let msg = format!(\">> Testing '{}'\", crate_name);\n        crate::status(&msg);\n        println!(\"{}\", msg);\n\n        let cmd = if excluded.is_empty() {\n            cmd!(sh, \"{cargo} test --all-features --\")\n        } else {\n            match metadata::get_features_without(sh, crate_name, &excluded)\n                .context(\"Failed to check features\")?\n            {\n                Some(features) => {\n                    if features.is_empty() {\n                        cmd!(sh, \"{cargo} test --no-default-features --\")\n                    } else {\n                        cmd!(sh, \"{cargo} test --no-default-features --features\")\n                            .arg(features)\n                            .arg(\"--\")\n                    }\n                },\n                None => {\n                    cmd!(sh, \"{cargo} test --all-features --\")\n                },\n            }\n        };\n\n        cmd.args(&flags.args)\n            .run()\n            .with_context(|| format!(\"Failed to run tests for '{}'\", crate_name))?;\n    }\n\n    if !flags.no_terminal {\n        check_feature_is_optional(sh, &cargo, &excluded, metadata::TERMINAL_FEATURE)\n            .context(err_context)?;\n    }\n    if !flags.no_web {\n        check_feature_is_optional(sh, &cargo, &excluded, metadata::WEB_FEATURE)\n            .context(err_context)?;\n    }\n\n    Ok(())\n}\n\nfn check_feature_is_optional(\n    sh: &Shell,\n    cargo: &std::path::PathBuf,\n",
+      "url": "https://github.com/zellij-org/zellij/blob/1f3df933978e00c246553070310175c392fcfe4f/xtask/src/test.rs#L52-L110"
+    },
+    {
+      "path": "xtask/src/test.rs",
+      "startLine": 113,
+      "endLine": 147,
+      "wholeFileSha256": "561daa9a37efaf44ba285aa88669fb9228de402696bb25e310340238b021e0cb",
+      "passageSha256": "c1ce75444dffd4a43075f32165baf18bcf4f32c081c4a55d1a4778d3ebea3825",
+      "text": ") -> anyhow::Result<()> {\n    let mut excluded = already_excluded.to_vec();\n    excluded.push(feature);\n\n    let Some(features) =\n        metadata::get_features_without(sh, \".\", &excluded).context(\"Failed to check features\")?\n    else {\n        return Ok(());\n    };\n\n    let _pd = sh.push_dir(crate::project_root());\n    println!();\n    let msg = format!(\">> Checking the build without '{}'\", feature);\n    crate::status(&msg);\n    println!(\"{}\", msg);\n\n    let cmd = if features.is_empty() {\n        cmd!(sh, \"{cargo} check --all-targets --no-default-features\")\n    } else {\n        cmd!(\n            sh,\n            \"{cargo} check --all-targets --no-default-features --features\"\n        )\n        .arg(features)\n    };\n\n    cmd.run()\n        .with_context(|| format!(\"The build without '{}' does not compile\", feature))\n}\n\npub fn host_target_triple(sh: &Shell) -> anyhow::Result<String> {\n    let rustc_ver = cmd!(sh, \"rustc -vV\")\n        .read()\n        .context(\"Failed to determine host triple\")?;\n    let maybe_triple = rustc_ver\n",
+      "url": "https://github.com/zellij-org/zellij/blob/1f3df933978e00c246553070310175c392fcfe4f/xtask/src/test.rs#L113-L147"
+    },
+    {
+      "path": "xtask/src/build.rs",
+      "startLine": 15,
+      "endLine": 56,
+      "wholeFileSha256": "ae5fcc92076183ff7e1fea0555576ea660933721600af3d00ba7e824a46cc378",
+      "passageSha256": "6ddb893cffa81afb9168c43efc25342118ee833fb4a78cef00138d61d6bde574",
+      "text": "pub fn build(sh: &Shell, flags: flags::Build) -> anyhow::Result<()> {\n    let _pd = sh.push_dir(crate::project_root());\n\n    let cargo = crate::cargo()?;\n    if flags.no_plugins && flags.plugins_only {\n        eprintln!(\"Cannot use both '--no-plugins' and '--plugins-only'\");\n        std::process::exit(1);\n    }\n\n    // zellij-utils requires protobuf definition files to be present. Usually these are\n    // auto-generated with `build.rs`-files, but this is currently broken for us.\n    // See [this PR][1] for details.\n    //\n    // [1]: https://github.com/zellij-org/zellij/pull/2711#issuecomment-1695015818\n    run_proto_codegen(sh, false);\n\n    // Build all plugins in a single invocation so Cargo can unify transitive dependency\n    // features across all of them and compile shared crates (e.g. zellij-utils) only once.\n    let build_plugins =\n        !flags.no_plugins && (flags.release || plugins_force() || plugin_sources_changed());\n    if build_plugins {\n        let plugin_members: Vec<&WorkspaceMember> = crate::workspace_members()\n            .iter()\n            .filter(|m| m.build && m.crate_name.contains(\"plugins\"))\n            .collect();\n\n        if !plugin_members.is_empty() {\n            eprintln!();\n            let msg = \">> Building plugins\";\n            crate::status(msg);\n            eprintln!(\"{}\", msg);\n\n            if flags.release {\n                build_plugins_release_into_assets(sh, &plugin_members)?;\n            } else {\n                let mut base_cmd = cmd!(sh, \"{cargo} build --target wasm32-wasip1\");\n                for member in &plugin_members {\n                    base_cmd = base_cmd.args([\"-p\", plugin_name_of(member)?]);\n                }\n                base_cmd.run().context(\"failed to build plugins\")?;\n                write_plugin_stamp(sh);\n            }\n",
+      "url": "https://github.com/zellij-org/zellij/blob/1f3df933978e00c246553070310175c392fcfe4f/xtask/src/build.rs#L15-L56"
+    },
+    {
+      "path": "xtask/src/build.rs",
+      "startLine": 256,
+      "endLine": 319,
+      "wholeFileSha256": "ae5fcc92076183ff7e1fea0555576ea660933721600af3d00ba7e824a46cc378",
+      "passageSha256": "c31e5e718cc85c9eb336777b5529158d8c03dccc3a1b16eb5848d989b314e654",
+      "text": "    let zellij_utils_basedir = crate::project_root().join(\"zellij-utils\");\n    let _pd = sh.push_dir(&zellij_utils_basedir);\n\n    let specs: &[(&str, &str, &str)] = &[\n        (\"assets/prost\", \"src/plugin_api\", \"generated_plugin_api.rs\"),\n        (\n            \"assets/prost_ipc\",\n            \"src/client_server_contract\",\n            \"generated_client_server_api.rs\",\n        ),\n        (\n            \"assets/prost_web_server\",\n            \"src/web_server_contract\",\n            \"generated_web_server_api.rs\",\n        ),\n        (\n            \"assets/prost_nested_session\",\n            \"src/nested_session_contract\",\n            \"generated_nested_session_api.rs\",\n        ),\n    ];\n\n    for (out_subdir, src_subdir, include_file) in specs {\n        let out_dir = sh.current_dir().join(out_subdir);\n        let src_dir = sh.current_dir().join(src_subdir);\n        std::fs::create_dir_all(&out_dir).unwrap();\n\n        let last_generated = out_dir\n            .join(include_file)\n            .metadata()\n            .and_then(|m| m.modified());\n        let mut proto_files = vec![];\n        let mut needs_regeneration = force;\n\n        for entry in std::fs::read_dir(&src_dir).unwrap() {\n            let entry_path = entry.unwrap().path();\n            if entry_path.is_file()\n                && entry_path\n                    .extension()\n                    .map(|e| e == \"proto\")\n                    .unwrap_or(false)\n            {\n                let modified = entry_path.metadata().and_then(|m| m.modified());\n                needs_regeneration |= match (&last_generated, modified) {\n                    (Ok(last_generated), Ok(modified)) => modified > *last_generated,\n                    // Couldn't read some metadata, assume needs update\n                    _ => true,\n                };\n                proto_files.push(entry_path.display().to_string());\n            }\n        }\n        proto_files.sort();\n\n        if needs_regeneration {\n            let mut prost = prost_build::Config::new();\n            prost.out_dir(&out_dir);\n            prost.include_file(include_file);\n            prost.compile_protos(&proto_files, &[src_dir]).unwrap();\n        }\n    }\n}\n\nfn move_plugin_to_assets(sh: &Shell, plugin_name: &str) -> anyhow::Result<()> {\n    let err_context = || format!(\"failed to move plugin '{plugin_name}' to assets folder\");\n",
+      "url": "https://github.com/zellij-org/zellij/blob/1f3df933978e00c246553070310175c392fcfe4f/xtask/src/build.rs#L256-L319"
+    }
+  ],
+  "preciseAssessmentQuestions": [
+    {
+      "topic": "documented prerequisite completeness",
+      "question": "Does the maintained CONTRIBUTING contract protoc/pkg-config/OpenSSL plus pinned toolchain/targets and target-dir constraint establish the default instruction at this snapshot? It explicitly documents setup; do not require exhaustive dependency success proof or infer unlisted prerequisites from execution not performed."
+    },
+    {
+      "topic": "default flag/source boundary",
+      "question": "test.rs references flags::Test and metadata helpers not retained in the selected source set. Decide whether retained docs plus default test body support the unchanged task, or identify precisely which one helper/default would change required prerequisites/scope. No new fetch is proposed without that concrete need."
+    },
+    {
+      "topic": "platform conditional linker",
+      "question": "Retained .cargo/config.toml supplies x86_64-w64-mingw32-gcc for Windows GNU. Preserve this condition for that target; root assessor may select a source-supported native platform condition without changing the original suite. Do not claim all platform environments ready."
+    },
+    {
+      "topic": "prerequisite pin versus consumer state",
+      "question": "Source toolchain/config declarations are evidence; actual installed tools, dependencies/caches, Cargo aliases/env/config overrides, resources and execution are consumer/environment conditions and unobserved. CARGO_TARGET_DIR must not override documented target-dir."
+    }
+  ],
+  "minimalFutureCodeSurfaceIfAccepted": [
+    "Owning import/commands/context focused Rust-recipe helper and tests; minimal orchestrator hook only after coordinator transfers files.",
+    "Reuse ImportSources rust-toolchain/Cargo and direct bounded local .cargo/config/CONTRIBUTING/xtask inputs as necessary; no public/schema/crawler contract expansion assumed.",
+    "Candidate value/source/time and mechanical source bindings remain required, with independent source-completeness disposition before any higher assessment. No grammar recognition alone mints high/status."
+  ],
+  "notProposed": [
+    "No new source acquisition or full recursive closure",
+    "No generic Rust-source interpreter, shell executor or proof subsystem",
+    "No new tasks, narrowed suite, high rule or code changes",
+    "No rewriting old qualification gold/results"
+  ],
+  "gateDependencies": [
+    "Root independent exact-applicability/source-completeness assessment of this unchanged task",
+    "Only then choose smallest automatic source-establishment contract and exact ownership",
+    "Focused natural-source/mutation checks and independent implementation review",
+    "Fresh holdout qualification and consumer-benefit experiment stay separate"
+  ]
+}

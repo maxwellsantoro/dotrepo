@@ -1,0 +1,237 @@
+{
+  "packageSpans": [
+    {
+      "artifact": "vsce-hook.json",
+      "endLine": 56,
+      "excerpt": "async function main() {\n    const architecture = process.env['npm_config_arch'] ?? process.arch;\n    const target = getTarget(process.platform, architecture);\n\n    if (!target) {\n        throw new Error(`The current platform (${process.platform}) and architecture (${architecture}) is not supported.`);\n    }\n\n    const binDir = path.join(__dirname, '..', 'bin');\n    if (!fs.existsSync(binDir)) {\n        fs.mkdirSync(binDir);\n    }\n\n    const exeName = IS_WINDOWS ? 'vsce-sign.exe' : 'vsce-sign';\n    const subPath = `bin/${exeName}`;\n    const binPath = path.join(binDir, exeName);\n    const pkgName = `@vscode/vsce-sign-${target}`;\n\n    try {\n        setup(pkgName, subPath, binPath);\n    } catch (err) {\n        const version = require(path.join(__dirname, '..', 'package.json')).optionalDependencies[pkgName];\n        if (!version) {\n            throw new Error(`Failed to find version of \"${pkgName}\" in the optionalDependencies of \"@vscode/vsce-sign\"`);\n        }\n        await fallbackSetup(pkgName, subPath, binPath, version);\n    }\n}\n\n/**\n * @param {string} pkgName \n * @param {string} subPath \n * @param {string} binPath \n */\nfunction setup(pkgName, subPath, binPath) {\n    const targetBinPath = require.resolve(`${pkgName}/${subPath}`);\n    fs.copyFileSync(targetBinPath, binPath);\n}\n",
+      "meaning": "platform selection and required binary copy",
+      "member": "package/src/postinstall.js",
+      "memberSha256": "77a408796da2c0b48ad1c9cee6cdb3dd70662f7b2a8c353a61a617106bd0c762",
+      "startLine": 19
+    },
+    {
+      "artifact": "vsce-hook.json",
+      "endLine": 86,
+      "excerpt": "async function fallbackSetup(pkgName, subPath, binPath, version) {\n    console.error(`[@vscode/vsce-sign] Failed to find package \"${pkgName}\" on the file system\n\nThis can happen if you use the \"--no-optional\" flag. The \"optionalDependencies\"\npackage.json feature is used to install the correct binary executable\nfor your current platform. This install script will now attempt to work around\nthis. If that fails, you need to remove the \"--no-optional\" flag to use @vscode/vsce-sign.\n`);\n\n    try {\n        console.error(`[@vscode/vsce-sign] Trying to install package \"${pkgName}\" using npm`);\n        installUsingNPM(pkgName, subPath, binPath, version);\n        return;\n    } catch (err2) {\n        console.error(`[@vscode/vsce-sign] Failed to install package \"${pkgName}\" using npm: ${err2 && err2.message || err2}`);\n    }\n\n    try {\n        await downloadDirectlyFromNPM(pkgName, subPath, binPath, version);\n        return;\n    } catch (e3) {\n        throw new Error(`Failed to install package \"${pkgName}\"`);\n    }\n",
+      "meaning": "missing optional dependency fallback",
+      "member": "package/src/postinstall.js",
+      "memberSha256": "77a408796da2c0b48ad1c9cee6cdb3dd70662f7b2a8c353a61a617106bd0c762",
+      "startLine": 64
+    },
+    {
+      "artifact": "vsce-hook.json",
+      "endLine": 145,
+      "excerpt": "function installUsingNPM(pkgName, subpath, binPath, version) {\n    const env = { ...process.env, npm_config_global: void 0 };\n    const vsceSignLibDir = path.dirname(require.resolve('@vscode/vsce-sign'));\n    const installDir = path.join(vsceSignLibDir, \"npm-install\");\n    fs.mkdirSync(installDir);\n    try {\n        fs.writeFileSync(path.join(installDir, \"package.json\"), \"{}\");\n        // Pass --force so npm installs this deliberately-selected, platform-specific\n        // package even when the host os/cpu differ from the target (e.g. building a\n        // Linux arm64 or alpine server on an x64 host). npm otherwise rejects it with\n        // EBADPLATFORM and we fall through to a hardcoded public download, which fails\n        // in network-isolated / air-gapped environments. The install still uses the\n        // configured (authenticated) registry, so this resolves from a private feed.\n        cp.execSync(\n            `npm install --loglevel=error --prefer-offline --no-audit --progress=false --force ${pkgName}@${version}`,\n            { cwd: installDir, stdio: \"pipe\", env }\n        );\n        const installedBinPath = path.join(installDir, \"node_modules\", pkgName, subpath);\n        fs.renameSync(installedBinPath, binPath);\n    } finally {\n        try {\n            fs.rmSync(installDir, { recursive: true, force: true, maxRetries: 3 });\n        } catch {\n        }\n    }\n}\n\n/**\n * \n * @param {string} pkgName \n * @param {string} subpath \n * @param {string} binPath\n * @param {string} version\n */\nasync function downloadDirectlyFromNPM(pkgName, subpath, binPath, version) {\n    const url = `https://registry.npmjs.org/${pkgName}/-/${pkgName.replace(\"@vscode/\", \"\")}-${version}.tgz`;\n    console.error(`[@vscode/vsce-sign] Trying to download ${JSON.stringify(url)}`);\n\n    let buffer;\n    try {\n        buffer = await fetch(url);\n    } catch (e) {\n        console.error(`[@vscode/vsce-sign] Failed to download ${JSON.stringify(url)}: ${e && e.message || e}`);\n        throw e;\n    }\n\n    fs.writeFileSync(binPath, extractFileFromTarGzip(buffer, subpath));\n    if (!IS_WINDOWS) {\n        setPermissions(binPath);\n    }\n}\n",
+      "meaning": "npm install/direct registry extraction and chmod paths",
+      "member": "package/src/postinstall.js",
+      "memberSha256": "77a408796da2c0b48ad1c9cee6cdb3dd70662f7b2a8c353a61a617106bd0c762",
+      "startLine": 95
+    },
+    {
+      "artifact": "vsce-closure.json",
+      "endLine": 39,
+      "excerpt": "function getTarget(platform, architecture, isAlpineLinuxFunc = isAlpineLinux) {\n    switch (platform) {\n        case 'darwin':\n            return getMacOsRuntimeIdentifier(architecture);\n\n        case 'linux':\n            if (isAlpineLinuxFunc()) {\n                return getAlpineLinuxRuntimeIdentifier(architecture);\n            }\n\n            return getLinuxRuntimeIdentifier(architecture);\n\n        case 'win32':\n            return getWindowsRuntimeIdentifier(architecture);\n\n        default:\n            return null;\n    }\n",
+      "meaning": "Linux versus Alpine platform selection",
+      "member": "package/src/target.js",
+      "memberSha256": "4b03b6f1342d16b473596f727bae8bb63a68d8fc9b172f0bbe45aa724cad4178",
+      "startLine": 22
+    },
+    {
+      "artifact": "vsce-closure.json",
+      "endLine": 70,
+      "excerpt": "function getLinuxRuntimeIdentifier(architecture) {\n    switch (architecture) {\n        case 'arm':\n        case 'arm64':\n        case 'x64':\n            return `linux-${architecture}`;\n\n        default:\n            return null;\n    }\n",
+      "meaning": "arm64 Linux target",
+      "member": "package/src/target.js",
+      "memberSha256": "4b03b6f1342d16b473596f727bae8bb63a68d8fc9b172f0bbe45aa724cad4178",
+      "startLine": 61
+    },
+    {
+      "artifact": "vsce-closure.json",
+      "endLine": 126,
+      "excerpt": "function isAlpineLinux() {\n    let content;\n\n    try {\n        const fileContent = fs.readFileSync('/etc/os-release');\n        content = fileContent.toString();\n    } catch (error) {\n        try {\n            const fileContent = fs.readFileSync('/usr/lib/os-release');\n            content = fileContent.toString();\n        } catch (error) {\n        }\n    }\n\n    return !!content && (content.match(/^ID=([^\\u001b\\r\\n]*)/m) || [])[1] === 'alpine';\n}\n",
+      "meaning": "os-release Alpine detector",
+      "member": "package/src/target.js",
+      "memberSha256": "4b03b6f1342d16b473596f727bae8bb63a68d8fc9b172f0bbe45aa724cad4178",
+      "startLine": 111
+    },
+    {
+      "artifact": "vsce-closure.json",
+      "endLine": 16,
+      "excerpt": "const { execFile } = require('child_process');\nconst Path = require('path');\n\nconst command = process.platform === 'win32' ? 'vsce-sign.exe' : 'vsce-sign';\nconst vsceSignFilePath = Path.join(__dirname, '..', 'bin', command);\n\n// If this module is in an .asar file, then the binary is unpacked.\nconst vsceSignOnDiskFilePath = vsceSignFilePath.replace(/\\bnode_modules\\.asar\\b/, 'node_modules.asar.unpacked');\n",
+      "meaning": "runtime path requires own bin",
+      "member": "package/src/main.js",
+      "memberSha256": "0c9307a30aa7dee8aae701cd798dab43cb8801255a91817296f16b6a60d72449",
+      "startLine": 9
+    },
+    {
+      "artifact": "dprint-hook.json",
+      "endLine": 10,
+      "excerpt": "// @ts-check\n\"use strict\";\n\nconst api = require(\"./install_api.cjs\");\nconst exePath = api.runInstall();\ntry {\n  api.replaceBinEntry(exePath);\n} catch (_err) {\n  // ignore - falls back to bin.cjs\n}\n",
+      "meaning": "postinstall dispatch and optional bin optimization",
+      "member": "package/install.cjs",
+      "memberSha256": "30c93a4ac2fbb7e35b01c6322c1d64941b847d61ee510ef2ed43962a491a79d8",
+      "startLine": 1
+    },
+    {
+      "artifact": "dprint-closure.json",
+      "endLine": 66,
+      "excerpt": "  runInstall() {\n    const dprintFileName = os.platform() === \"win32\" ? \"dprint.exe\" : \"dprint\";\n    const targetExecutablePath = path.join(\n      __dirname,\n      dprintFileName,\n    );\n\n    if (fs.existsSync(targetExecutablePath)) {\n      return targetExecutablePath;\n    }\n\n    const target = getTarget();\n    const sourceExecutablePath = resolveSourceExecutablePath(target, dprintFileName);\n\n    if (sourceExecutablePath == null) {\n      // the @dprint/<target> optional dependency isn't installed (for example\n      // the user ran `npm install --omit=optional`), so download the binary\n      // directly from the registry like esbuild does\n      downloadExecutable(target, dprintFileName, targetExecutablePath);\n      if (os.platform() !== \"win32\") {\n        // chmod +x\n        chmodX(targetExecutablePath);\n      }\n      return targetExecutablePath;\n    }\n\n    try {\n      if (process.env.DPRINT_SIMULATED_READONLY_FILE_SYSTEM === \"1\") {\n        console.warn(\"Simulating readonly file system for testing.\");\n        throw new Error(\"Throwing for testing purposes.\");\n      }\n\n      // in order to make things faster the next time we run and to allow the\n      // dprint vscode extension to easily pick this up, copy the executable\n      // into the dprint package folder\n      hardLinkOrCopy(sourceExecutablePath, targetExecutablePath);\n      if (os.platform() !== \"win32\") {\n        // chmod +x\n        chmodX(targetExecutablePath);\n      }\n      return targetExecutablePath;\n    } catch (err) {\n      // this may fail on readonly file systems... in this case, fall\n      // back to using the resolved package path\n      if (process.env.DPRINT_DEBUG === \"1\") {\n        console.warn(\n          \"Failed to copy executable from \"\n            + sourceExecutablePath + \" to \" + targetExecutablePath\n            + \". Using resolved package path instead.\",\n          err,\n        );\n      }\n      return sourceExecutablePath;\n    }\n  },\n",
+      "meaning": "optional binary setup/copy/chmod and readonly fallback",
+      "member": "package/install_api.cjs",
+      "memberSha256": "89da3973a6a467f5b395adfbfeaecb2fe3226c54e17c0b7f54dda71135347328",
+      "startLine": 12
+    },
+    {
+      "artifact": "dprint-closure.json",
+      "endLine": 108,
+      "excerpt": "function resolveSourceExecutablePath(target, dprintFileName) {\n  let sourcePackagePath;\n  try {\n    sourcePackagePath = path.dirname(require.resolve(\"@dprint/\" + target + \"/package.json\"));\n  } catch {\n    // the optional dependency wasn't installed\n    return undefined;\n  }\n  const sourceExecutablePath = path.join(sourcePackagePath, dprintFileName);\n  return fs.existsSync(sourceExecutablePath) ? sourceExecutablePath : undefined;\n}\n\n/**\n * Downloads the binary tarball for the target from the registry and extracts\n * the executable to the destination path.\n * @param target {string}\n * @param dprintFileName {string}\n * @param destinationPath {string}\n */\nfunction downloadExecutable(target, dprintFileName, destinationPath) {\n  const version = require(\"./package.json\").version;\n  const registry = (process.env.npm_config_registry || \"https://registry.npmjs.org\")\n    .replace(/\\/+$/, \"\");\n  // npm tarball urls drop the scope from the file name (e.g.\n  // https://registry.npmjs.org/@dprint/win32-x64/-/win32-x64-1.0.0.tgz)\n  const tarballUrl = registry + \"/@dprint/\" + target + \"/-/\" + target + \"-\" + version + \".tgz\";\n  console.error(\"[dprint] Optional dependency @dprint/\" + target + \" was not installed. Downloading from \" + tarballUrl);\n  const tarballBuffer = downloadBufferSync(tarballUrl);\n  // files inside an npm tarball live under the \"package/\" directory\n  const executableBuffer = extractFileFromTarGzip(tarballBuffer, \"package/\" + dprintFileName);\n  verifyExecutableHash(target, executableBuffer);\n  atomicWriteFile(destinationPath, executableBuffer);\n}\n",
+      "meaning": "dependency resolution/direct download fallback",
+      "member": "package/install_api.cjs",
+      "memberSha256": "89da3973a6a467f5b395adfbfeaecb2fe3226c54e17c0b7f54dda71135347328",
+      "startLine": 76
+    },
+    {
+      "artifact": "dprint-closure.json",
+      "endLine": 135,
+      "excerpt": "function verifyExecutableHash(target, buffer) {\n  let hashes;\n  try {\n    hashes = require(\"./hashes.json\");\n  } catch (err) {\n    throw new Error(\"Could not load hashes.json to verify the downloaded binary: \" + (err && err.message || err));\n  }\n  const expected = hashes[target];\n  if (typeof expected !== \"string\") {\n    throw new Error(\"No known hash for @dprint/\" + target + \" to verify the download against.\");\n  }\n  const actual = require(\"crypto\").createHash(\"sha256\").update(buffer).digest(\"hex\");\n  if (actual !== expected) {\n    throw new Error(\n      \"Integrity check failed for the downloaded @dprint/\" + target + \" binary.\\n\"\n        + \"  Expected sha256: \" + expected + \"\\n\"\n        + \"  Actual sha256:   \" + actual,\n    );\n  }\n}\n",
+      "meaning": "fallback downloaded binary hash check",
+      "member": "package/install_api.cjs",
+      "memberSha256": "89da3973a6a467f5b395adfbfeaecb2fe3226c54e17c0b7f54dda71135347328",
+      "startLine": 116
+    },
+    {
+      "artifact": "dprint-closure.json",
+      "endLine": 319,
+      "excerpt": "function getTarget() {\n  const platform = os.platform();\n  if (platform === \"linux\") {\n    return platform + \"-\" + getArch() + \"-\" + getLinuxFamily();\n  } else {\n    return platform + \"-\" + getArch();\n  }\n}\n\nfunction getArch() {\n  const arch = os.arch();\n  if (arch !== \"arm64\" && arch !== \"x64\" && arch !== \"riscv64\" && arch !== \"loong64\" && arch !== \"ppc64\") {\n    throw new Error(\"Unsupported architecture \" + os.arch() + \". Only x64, arm64, riscv64, loong64 and ppc64 binaries are available.\");\n  }\n  return arch;\n}\n\nfunction getLinuxFamily() {\n  return getIsMusl() ? \"musl\" : \"glibc\";\n\n  function getIsMusl() {\n    // code adapted from https://github.com/napi-rs/package-template/blob/main/index.js\n    // which is in turn based on https://github.com/lovell/detect-libc (Apache 2.0 license)\n    if (cachedIsMusl == null) {\n      cachedIsMusl = innerGet();\n    }\n    return cachedIsMusl;\n\n    function innerGet() {\n      try {\n        if (os.platform() !== \"linux\") {\n          return false;\n        }\n        let musl = isMuslFromFilesystem();\n        if (musl == null) {\n          musl = isMuslFromReport();\n        }\n        if (musl == null) {\n          musl = isMuslFromChildProcess();\n        }\n        return musl;\n      } catch (err) {\n        // just in case\n        console.warn(\"Error checking if musl.\", err);\n        return false;\n      }\n",
+      "meaning": "Linux arm64/libc branch",
+      "member": "package/install_api.cjs",
+      "memberSha256": "89da3973a6a467f5b395adfbfeaecb2fe3226c54e17c0b7f54dda71135347328",
+      "startLine": 274
+    },
+    {
+      "artifact": "dprint-closure.json",
+      "endLine": 362,
+      "excerpt": "    function isMuslFromFilesystem() {\n      try {\n        return fs.readFileSync(\"/usr/bin/ldd\", \"utf-8\").includes(\"musl\");\n      } catch {\n        return null;\n      }\n    }\n\n    function isMuslFromReport() {\n      if (typeof process.report?.getReport !== \"function\") {\n        return null;\n      }\n      // excludeNetwork avoids a slow reverse DNS lookup while generating the\n      // report, but it's a global flag so restore it once we're done\n      const originalExcludeNetwork = process.report.excludeNetwork;\n      let rawReport;\n      try {\n        process.report.excludeNetwork = true;\n        rawReport = process.report.getReport();\n      } finally {\n        process.report.excludeNetwork = originalExcludeNetwork;\n      }\n      const report = typeof rawReport === \"string\" ? JSON.parse(rawReport) : rawReport;\n      if (!report) {\n        return null;\n      }\n      if (report.header && report.header.glibcVersionRuntime) {\n        return false;\n      }\n      if (Array.isArray(report.sharedObjects)) {\n        return report.sharedObjects.some(isFileMusl);\n      }\n      return false;\n    }\n\n    function isMuslFromChildProcess() {\n      try {\n        return require(\"child_process\").execSync(\"ldd --version\", { encoding: \"utf8\" }).includes(\"musl\");\n      } catch {\n        return false;\n      }\n",
+      "meaning": "libc filesystem/report/process probes",
+      "member": "package/install_api.cjs",
+      "memberSha256": "89da3973a6a467f5b395adfbfeaecb2fe3226c54e17c0b7f54dda71135347328",
+      "startLine": 322
+    },
+    {
+      "artifact": "dprint-closure.json",
+      "endLine": 398,
+      "excerpt": "/**\n * Replaces the bin entry in node_modules/.bin to point directly at the\n * native binary, avoiding Node.js startup overhead on each invocation.\n * @param exePath {string}\n */\nfunction replaceBinEntry(exePath) {\n  const binDir = findBinDir();\n  if (binDir === undefined) return;\n\n  const relative = path.relative(binDir, exePath);\n  if (os.platform() === \"win32\") {\n    // rewrite .cmd and .ps1 wrappers to invoke the native binary directly\n    fs.writeFileSync(\n      path.join(binDir, \"dprint.cmd\"),\n      \"@\\\"%~dp0\" + relative + \"\\\" %*\\r\\n\",\n    );\n    fs.writeFileSync(\n      path.join(binDir, \"dprint.ps1\"),\n      \"& \\\"$PSScriptRoot/\" + relative.replace(/\\\\/g, \"/\")\n        + \"\\\" $args\\r\\nexit $LASTEXITCODE\\r\\n\",\n    );\n  } else {\n    // replace symlink to point directly at the native binary\n    const binDprint = path.join(binDir, \"dprint\");\n    fs.unlinkSync(binDprint);\n    fs.symlinkSync(relative, binDprint);\n  }\n}\n",
+      "meaning": "bin entry rewrite",
+      "member": "package/install_api.cjs",
+      "memberSha256": "89da3973a6a467f5b395adfbfeaecb2fe3226c54e17c0b7f54dda71135347328",
+      "startLine": 371
+    },
+    {
+      "artifact": "dprint-closure.json",
+      "endLine": 24,
+      "excerpt": "const exePath = path.join(__dirname, os.platform() === \"win32\" ? \"dprint.exe\" : \"dprint\");\n\nif (!fs.existsSync(exePath)) {\n  try {\n    const resolvedExePath = require(\"./install_api.cjs\").runInstall();\n    runDprintExe(resolvedExePath);\n  } catch (err) {\n    if (err !== undefined && typeof err.message === \"string\") {\n      console.error(err.message);\n    } else {\n      console.error(err);\n    }\n    process.exit(1);\n  }\n} else {\n  runDprintExe(exePath);\n",
+      "meaning": "lazy setup on invocation",
+      "member": "package/bin.cjs",
+      "memberSha256": "f937afc1e9c45d4fb3e26a9900a96681a8d048e03466648d0ce38c7db4cf4198",
+      "startLine": 9
+    },
+    {
+      "artifact": "esbuild-hook.json",
+      "endLine": 81,
+      "excerpt": "var knownUnixlikePackages = {\n  \"aix ppc64 BE\": \"@esbuild/aix-ppc64\",\n  \"android arm64 LE\": \"@esbuild/android-arm64\",\n  \"darwin arm64 LE\": \"@esbuild/darwin-arm64\",\n  \"darwin x64 LE\": \"@esbuild/darwin-x64\",\n  \"freebsd arm64 LE\": \"@esbuild/freebsd-arm64\",\n  \"freebsd x64 LE\": \"@esbuild/freebsd-x64\",\n  \"linux arm LE\": \"@esbuild/linux-arm\",\n  \"linux arm64 LE\": \"@esbuild/linux-arm64\",\n  \"linux ia32 LE\": \"@esbuild/linux-ia32\",\n  \"linux mips64el LE\": \"@esbuild/linux-mips64el\",\n  \"linux ppc64 LE\": \"@esbuild/linux-ppc64\",\n  \"linux riscv64 LE\": \"@esbuild/linux-riscv64\",\n  \"linux s390x BE\": \"@esbuild/linux-s390x\",\n  \"linux x64 LE\": \"@esbuild/linux-x64\",\n  \"linux loong64 LE\": \"@esbuild/linux-loong64\",\n  \"netbsd arm64 LE\": \"@esbuild/netbsd-arm64\",\n  \"netbsd x64 LE\": \"@esbuild/netbsd-x64\",\n  \"openbsd arm64 LE\": \"@esbuild/openbsd-arm64\",\n  \"openbsd x64 LE\": \"@esbuild/openbsd-x64\",\n  \"sunos x64 LE\": \"@esbuild/sunos-x64\"\n};\nvar knownWebAssemblyFallbackPackages = {\n  \"android arm LE\": \"@esbuild/android-arm\",\n  \"android x64 LE\": \"@esbuild/android-x64\",\n  \"openharmony arm64 LE\": \"@esbuild/openharmony-arm64\"\n};\nfunction pkgAndSubpathForCurrentPlatform() {\n  let pkg;\n  let subpath;\n  let isWASM = false;\n  let platformKey = `${process.platform} ${os.arch()} ${os.endianness()}`;\n  if (platformKey in knownWindowsPackages) {\n    pkg = knownWindowsPackages[platformKey];\n    subpath = \"esbuild.exe\";\n  } else if (platformKey in knownUnixlikePackages) {\n    pkg = knownUnixlikePackages[platformKey];\n    subpath = \"bin/esbuild\";\n  } else if (platformKey in knownWebAssemblyFallbackPackages) {\n    pkg = knownWebAssemblyFallbackPackages[platformKey];\n    subpath = \"bin/esbuild\";\n    isWASM = true;\n  } else {\n    throw new Error(`Unsupported platform: ${platformKey}`);\n  }\n  return { pkg, subpath, isWASM };\n",
+      "meaning": "Linux ARM64 little-endian optional target",
+      "member": "package/install.js",
+      "memberSha256": "612294e278914443bdcf81cb17f54afec34dbdd2ebd999a6ee187912320cc315",
+      "startLine": 36
+    },
+    {
+      "artifact": "esbuild-hook.json",
+      "endLine": 138,
+      "excerpt": "function validateBinaryVersion(...command) {\n  command.push(\"--version\");\n  let stdout;\n  try {\n    stdout = child_process.execFileSync(command.shift(), command, {\n      // Without this, this install script strangely crashes with the error\n      // \"EACCES: permission denied, write\" but only on Ubuntu Linux when node is\n      // installed from the Snap Store. This is not a problem when you download\n      // the official version of node. The problem appears to be that stderr\n      // (i.e. file descriptor 2) isn't writable?\n      //\n      // More info:\n      // - https://snapcraft.io/ (what the Snap Store is)\n      // - https://nodejs.org/dist/ (download the official version of node)\n      // - https://github.com/evanw/esbuild/issues/1711#issuecomment-1027554035\n      //\n      stdio: \"pipe\"\n    }).toString().trim();\n  } catch (err) {\n    if (os2.platform() === \"darwin\" && /_SecTrustEvaluateWithError/.test(err + \"\")) {\n      let os3 = \"this version of macOS\";\n      try {\n        os3 = \"macOS \" + child_process.execFileSync(\"sw_vers\", [\"-productVersion\"]).toString().trim();\n      } catch {\n      }\n      throw new Error(`The \"esbuild\" package cannot be installed because ${os3} is too outdated.\n\nThe Go compiler (which esbuild relies on) no longer supports ${os3},\nwhich means the \"esbuild\" binary executable can't be run. You can either:\n\n  * Update your version of macOS to one that the Go compiler supports\n  * Use the \"esbuild-wasm\" package instead of the \"esbuild\" package\n  * Build esbuild yourself using an older version of the Go compiler\n`);\n    }\n    throw err;\n  }\n  if (stdout !== packageJSON.version) {\n    throw new Error(`Expected ${JSON.stringify(packageJSON.version)} but got ${JSON.stringify(stdout)}`);\n  }\n",
+      "meaning": "native version validation execution",
+      "member": "package/install.js",
+      "memberSha256": "612294e278914443bdcf81cb17f54afec34dbdd2ebd999a6ee187912320cc315",
+      "startLine": 99
+    },
+    {
+      "artifact": "esbuild-hook.json",
+      "endLine": 199,
+      "excerpt": "function installUsingNPM(pkg, subpath, binPath) {\n  const env = { ...process.env, npm_config_global: void 0 };\n  const esbuildLibDir = path2.dirname(require.resolve(\"esbuild\"));\n  const installDir = path2.join(esbuildLibDir, \"npm-install\");\n  fs2.mkdirSync(installDir);\n  try {\n    fs2.writeFileSync(path2.join(installDir, \"package.json\"), \"{}\");\n    child_process.execSync(\n      `npm install --loglevel=error --prefer-offline --no-audit --progress=false ${pkg}@${packageJSON.version}`,\n      { cwd: installDir, stdio: \"pipe\", env }\n    );\n    const installedBinPath = path2.join(installDir, \"node_modules\", pkg, subpath);\n    binaryIntegrityCheck(pkg, subpath, fs2.readFileSync(installedBinPath));\n    fs2.renameSync(installedBinPath, binPath);\n  } finally {\n    try {\n      removeRecursive(installDir);\n    } catch {\n    }\n  }\n",
+      "meaning": "npm fallback install",
+      "member": "package/install.js",
+      "memberSha256": "612294e278914443bdcf81cb17f54afec34dbdd2ebd999a6ee187912320cc315",
+      "startLine": 180
+    },
+    {
+      "artifact": "esbuild-hook.json",
+      "endLine": 255,
+      "excerpt": "function applyManualBinaryPathOverride(overridePath) {\n  const pathString = JSON.stringify(overridePath);\n  fs2.writeFileSync(toPath, `#!/usr/bin/env node\nrequire('child_process').execFileSync(${pathString}, process.argv.slice(2), { stdio: 'inherit' });\n`);\n  const libMain = path2.join(__dirname, \"lib\", \"main.js\");\n  const code = fs2.readFileSync(libMain, \"utf8\");\n  fs2.writeFileSync(libMain, `var ESBUILD_BINARY_PATH = ${pathString};\n${code}`);\n}\nfunction maybeOptimizePackage(binPath, isWASM) {\n  if (os2.platform() !== \"win32\" && !isYarn() && !isWASM) {\n    const tempPath = path2.join(__dirname, \"bin-esbuild\");\n    try {\n      fs2.linkSync(binPath, tempPath);\n      fs2.renameSync(tempPath, toPath);\n      isToPathJS = false;\n      fs2.unlinkSync(tempPath);\n    } catch {\n    }\n  }\n}\nfunction binaryIntegrityCheck(pkg, subpath, bytes) {\n  const hash = crypto.createHash(\"sha256\").update(bytes).digest(\"hex\");\n  const key = `${pkg}/${subpath}`;\n  const expected = packageJSON[\"esbuild.binaryHashes\"][key];\n  if (!expected) throw new Error(`Missing hash for \"${key}\"`);\n  if (hash !== expected) throw new Error(`\"${hash.slice(0, 8)}...\" doesn't match \"${expected.slice(0, 8)}...\" for \"${pkg}\"`);\n}\nasync function downloadDirectlyFromNPM(pkg, subpath, binPath) {\n  const url = `https://registry.npmjs.org/${pkg}/-/${pkg.replace(\"@esbuild/\", \"\")}-${packageJSON.version}.tgz`;\n  console.error(`[esbuild] Trying to download ${JSON.stringify(url)}`);\n  try {\n    const bytes = extractFileFromTarGzip(await fetch(url), subpath);\n    binaryIntegrityCheck(pkg, subpath, bytes);\n    fs2.writeFileSync(binPath, bytes);\n    fs2.chmodSync(binPath, 493);\n  } catch (e) {\n    console.error(`[esbuild] Failed to download ${JSON.stringify(url)}: ${e && e.message || e}`);\n    throw e;\n  }\n",
+      "meaning": "manual override/optimization/direct download",
+      "member": "package/install.js",
+      "memberSha256": "612294e278914443bdcf81cb17f54afec34dbdd2ebd999a6ee187912320cc315",
+      "startLine": 215
+    },
+    {
+      "artifact": "esbuild-hook.json",
+      "endLine": 300,
+      "excerpt": "async function checkAndPreparePackage() {\n  if (isValidBinaryPath(ESBUILD_BINARY_PATH)) {\n    if (!fs2.existsSync(ESBUILD_BINARY_PATH)) {\n      console.warn(`[esbuild] Ignoring bad configuration: ESBUILD_BINARY_PATH=${ESBUILD_BINARY_PATH}`);\n    } else {\n      applyManualBinaryPathOverride(ESBUILD_BINARY_PATH);\n      return;\n    }\n  }\n  const { pkg, subpath, isWASM } = pkgAndSubpathForCurrentPlatform();\n  let binPath;\n  try {\n    binPath = require.resolve(`${pkg}/${subpath}`);\n  } catch (e) {\n    console.error(`[esbuild] Failed to find package \"${pkg}\" on the file system\n\nThis can happen if you use the \"--no-optional\" flag. The \"optionalDependencies\"\npackage.json feature is used by esbuild to install the correct binary executable\nfor your current platform. This install script will now attempt to work around\nthis. If that fails, you need to remove the \"--no-optional\" flag to use esbuild.\n`);\n    if (isWASM) throw new Error(`Failed to install package \"${pkg}\"`);\n    binPath = downloadedBinPath(pkg, subpath);\n    try {\n      console.error(`[esbuild] Trying to install package \"${pkg}\" using npm`);\n      installUsingNPM(pkg, subpath, binPath);\n    } catch (e2) {\n      console.error(`[esbuild] Failed to install package \"${pkg}\" using npm: ${e2 && e2.message || e2}`);\n      try {\n        await downloadDirectlyFromNPM(pkg, subpath, binPath);\n      } catch (e3) {\n        throw new Error(`Failed to install package \"${pkg}\"`);\n      }\n    }\n  }\n  maybeOptimizePackage(binPath, isWASM);\n}\ncheckAndPreparePackage().then(() => {\n  if (isToPathJS) {\n    validateBinaryVersion(process.execPath, toPath);\n  } else {\n    validateBinaryVersion(toPath);\n  }\n});\n",
+      "meaning": "default optional resolution and hook main",
+      "member": "package/install.js",
+      "memberSha256": "612294e278914443bdcf81cb17f54afec34dbdd2ebd999a6ee187912320cc315",
+      "startLine": 257
+    },
+    {
+      "artifact": "esbuild-closure.json",
+      "endLine": 128,
+      "excerpt": "function generateBinPath() {\n  if (isValidBinaryPath(ESBUILD_BINARY_PATH)) {\n    if (!fs.existsSync(ESBUILD_BINARY_PATH)) {\n      console.warn(`[esbuild] Ignoring bad configuration: ESBUILD_BINARY_PATH=${ESBUILD_BINARY_PATH}`);\n    } else {\n      return { binPath: ESBUILD_BINARY_PATH, isWASM: false };\n    }\n  }\n  const { pkg, subpath, isWASM: isWASM2 } = pkgAndSubpathForCurrentPlatform();\n  let binPath2;\n  try {\n    binPath2 = require.resolve(`${pkg}/${subpath}`);\n  } catch (e) {\n    binPath2 = downloadedBinPath(pkg, subpath);\n    if (!fs.existsSync(binPath2)) {\n      try {\n        require.resolve(pkg);\n      } catch {\n",
+      "meaning": "CLI lazy optional-binary path resolution",
+      "member": "package/bin/esbuild",
+      "memberSha256": "183d6ead2dbc3af51aec767d5395f86fe54fbbc2d2aa8e54feb4e31d76a62f7e",
+      "startLine": 111
+    },
+    {
+      "artifact": "esbuild-closure.json",
+      "endLine": 223,
+      "excerpt": "var { binPath, isWASM } = generateBinPath();\nif (isWASM) {\n  require(\"child_process\").execFileSync(\"node\", [binPath].concat(process.argv.slice(2)), { stdio: \"inherit\" });\n} else {\n  require(\"child_process\").execFileSync(binPath, process.argv.slice(2), { stdio: \"inherit\" });\n}\n",
+      "meaning": "CLI executes resolved binary",
+      "member": "package/bin/esbuild",
+      "memberSha256": "183d6ead2dbc3af51aec767d5395f86fe54fbbc2d2aa8e54feb4e31d76a62f7e",
+      "startLine": 218
+    }
+  ],
+  "retainedTaskScopeSources": [
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-requalification-proposal-20261029/sources/Herebyfile.mjs",
+      "sha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421",
+      "spans": [
+        {
+          "endLine": 36,
+          "excerpt": "// @ts-check\n\nimport AdmZip from \"adm-zip\";\nimport chokidar from \"chokidar\";\nimport { task as herebyTask } from \"hereby\";\nimport assert from \"node:assert\";\nimport crypto from \"node:crypto\";\nimport fs from \"node:fs\";\nimport { createRequire } from \"node:module\";\nimport os from \"node:os\";\nimport path from \"node:path\";\nimport url from \"node:url\";\nimport {\n    parseArgs,\n    styleText,\n} from \"node:util\";\nimport * as tar from \"tar\";\nimport {\n    x,\n    xSync,\n} from \"tinyexec\";\nimport {\n    enableFileFingerprintCache,\n    invalidateFileFingerprints,\n    run,\n} from \"./tools/scripts/gen/utils.mts\";\nimport {\n    ensureModel as ensureLSPModel,\n    outputs as lspModelOutputs,\n} from \"./tools/scripts/lsp/fetchModel.mts\";\nimport { outputs as encoderOutputs } from \"./tools/scripts/tsc/generate-encoder.ts\";\nimport { outputs as enumOutputs } from \"./tools/scripts/tsc/generate-enums.ts\";\nimport { outputs as goASTOutputs } from \"./tools/scripts/tsc/generate-go-ast.ts\";\nimport { outputs as tsASTOutputs } from \"./tools/scripts/tsc/generate-ts-ast.ts\";\nimport generateUnicodeData, { outputs as unicodeOutputs } from \"./tsc/internal/stringutil/_scripts/generate-unicode-data.mts\";\n\n",
+          "startLine": 1
+        },
+        {
+          "endLine": 1009,
+          "excerpt": "        await gotestsumTool.run([...gotestsumArgs(\"tests\"), \"./...\", ...(isCI ? [\"--timeout=45m\"] : [])], {\n            env: testEnv,\n            cwd: \"./tsc\",\n        });\n",
+          "startLine": 1006
+        },
+        {
+          "endLine": 1062,
+          "excerpt": "export const testTsc = task({\n    name: \"test:tsc\",\n    description: \"Runs all tests in the tsc module.\",\n    run: runTests,\n});\n\nexport const testExtension = task({\n    name: \"test:extension\",\n    description: \"Runs the VS Code extension tests.\",\n    run: runTestExtension,\n});\n\nexport const test = task({\n    name: \"test\",\n    description: \"Alias for test:tsc.\",\n    dependencies: [testTsc],\n});\n",
+          "startLine": 1046
+        }
+      ]
+    },
+    {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-requalification-proposal-20261029/sources/package.json",
+      "sha256": "2828c1d269bd9c80d634131ec107ac69f1cfc3bf1f98d24c112c825c8acd7902",
+      "spans": [
+        {
+          "endLine": 57,
+          "excerpt": "{\n    \"name\": \"@typescript/repo\",\n    \"private\": true,\n    \"version\": \"0.0.0\",\n    \"license\": \"Apache-2.0\",\n    \"engines\": {\n        \"node\": \">=22.18\"\n    },\n    \"workspaces\": [\n        \"packages/*\"\n    ],\n    \"scripts\": {\n        \"build\": \"hereby build\",\n        \"build:watch\": \"hereby build:watch\",\n        \"build:watch:debug\": \"hereby build:watch --debug\",\n        \"test\": \"hereby test\",\n        \"lint\": \"hereby lint\",\n        \"format\": \"hereby format\",\n        \"check:format\": \"hereby check:format\",\n        \"generate\": \"hereby generate\",\n        \"tidy\": \"hereby tidy\",\n        \"extension:build\": \"npm run -w native-preview build\",\n        \"extension:watch\": \"npm run -w native-preview watch\",\n        \"setup-hooks\": \"node tools/scripts/link-hooks.mjs\"\n    },\n    \"devDependencies\": {\n        \"@dprint/json\": \"^0.23.0\",\n        \"@dprint/typescript\": \"^0.96.1\",\n        \"@jakebailey/dprint-plugin-gofumpt\": \"^0.0.18\",\n        \"@types/node\": \"^22.20.1\",\n        \"@unicode/unicode-15.1.0\": \"^1.6.17\",\n        \"adm-zip\": \"^0.6.1\",\n        \"chokidar\": \"^5.0.0\",\n        \"dprint\": \"^0.57.4\",\n        \"dprint-plugin-yaml\": \"^0.6.0\",\n        \"hereby\": \"^1.15.2\",\n        \"tar\": \"^7.5.22\",\n        \"tinyexec\": \"^1.3.1\",\n        \"typescript\": \"^6.0.3\"\n    },\n    \"overrides\": {\n        \"@microsoft/applicationinsights-web-basic\": \"3.3.11\",\n        \"@microsoft/1ds-core-js\": \"4.3.11\",\n        \"@microsoft/1ds-post-js\": \"4.3.11\"\n    },\n    \"packageManager\": \"npm@11.19.1+sha512.cedb312b1b7f92421a02cfb68b4194e88f8346651dacd6acc5364a25ef5309d4a32b19616a1ff8aff865e7280c0fa5c0835a99f5cd93368991e2a80ec9da75d2\",\n    \"volta\": {\n        \"node\": \"24.20.0\",\n        \"npm\": \"11.19.1\"\n    },\n    \"allowScripts\": {\n        \"@vscode/vsce-sign@2.1.0\": true,\n        \"keytar@7.9.0\": true,\n        \"dprint@0.57.4\": true,\n        \"esbuild@0.28.2\": true\n    }\n}\n",
+          "startLine": 1
+        }
+      ]
+    }
+  ],
+  "scopeClosureComplete": false
+}

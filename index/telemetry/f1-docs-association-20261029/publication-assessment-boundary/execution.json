@@ -1,0 +1,18 @@
+{
+  "command": [
+    "target/debug/dotrepo",
+    "public",
+    "export",
+    "--index-root",
+    "index/telemetry/f1-docs-association-20261029/publication-assessment-boundary/index",
+    "--out-dir",
+    "index/telemetry/f1-docs-association-20261029/publication-assessment-boundary/public",
+    "--generated-at",
+    "2026-10-29T08:40:00Z"
+  ],
+  "exitCode": 0,
+  "binarySha256": "b9cd73236bca71ecf4fb7aa06bfe131b1ecc41a9b0fdfb43de579fb6d24ce0d0",
+  "observedAt": "2026-10-29T08:42:39.059987+00:00",
+  "networkRequests": 0,
+  "cargo": false
+}

@@ -1,0 +1,56 @@
+{
+  "method": "Independent source/navigation and frozen-output challenge; reasoned timestamp counterexamples are source inspection, not new Rust executions",
+  "cases": [
+    {
+      "case": "descriptive-link-label-in-wrong-subject",
+      "input": "SwiftLint README:482-487 has a SwiftLint documentation label under MegaLinter and says See its setup instructions",
+      "challenge": "An exact project-name documentation label could falsely qualify an integration page as docs.root",
+      "disposition": "Old value is wrong-scope for project root; narrow correction is supported by separate README Rule Directory plus exact header/breadcrumb navigation to project index. The integration link remains useful for its own task.",
+      "rootCandidateNotAcceptedBy": "label or same-domain matching alone"
+    },
+    {
+      "case": "same-project-domain-client-quickstart",
+      "input": "MinIO README:139-153 explicitly names Client mc before linking its Quickstart Guide",
+      "challenge": "Matching docs.min.io domain and Quickstart Guide label do not establish the server getting_started field",
+      "disposition": "Client setup is a different subject. Server Install from Source and startup guidance at59-89 plus explicit #install-from-source reference99 supports the immutable README fragment. Runtime installation success is not asserted."
+    },
+    {
+      "case": "mutable-version-page",
+      "input": "SwiftLint retained target says SwiftLintCore0.65.1 Docs while source is a pinned README commit",
+      "challenge": "Page identity and HTTP200 could be misused as version/commit parity evidence",
+      "disposition": "They establish observed documentation navigation/identity only. Record/evidence explicitly retain unresolved source-commit/version parity and target mutability. No version matching or freshness guarantee follows."
+    },
+    {
+      "case": "fresh-field-check-with-old-record-date",
+      "input": "Corrected exact values are freshly assessed on October29 while generated_at remains October27/October4",
+      "challenge": "Fresh field evidence might be wrongly exported or record age refreshed",
+      "disposition": "Frozen exporter receipts omit both new doc assessments and retain facts/dates. Current public/evidence.rs48-54 requires checkedAt exactly equal generated_at. This omission is the existing contract, not missing correction storage."
+    },
+    {
+      "case": "wrong-bound-value-even-if-time-matches",
+      "input": "Hypothetical restored old valueJson with a matching record timestamp",
+      "challenge": "Timestamp equality alone might carry an assessment to a new fact",
+      "disposition": "Current source public/evidence.rs41-47 rejects bound/current value inequality before timestamp checks. This is a reasoned source-path counterexample; no live or frozen record was mutated."
+    },
+    {
+      "case": "backdate-or-rejuvenate-to-pass-publication",
+      "input": "Hypothetical checkedAt backdating or advancing the whole generated_at to October29",
+      "challenge": "Either could force timestamp equality while misrepresenting observation time or uninspected record age",
+      "disposition": "Neither is warranted. Actual records preserve original factual age and use actual field observation time. Public assessment-contract changes need separate design/validation; this record correction should not alter that gate."
+    },
+    {
+      "case": "remaining-historical-high-assessments",
+      "input": "Other old fieldEvidence remains unchanged and may export because its old checkedAt still equals generated_at",
+      "challenge": "Withdrawal of whole-record verification could be mistaken for fresh validation of every retained field",
+      "disposition": "Record becomes imported/medium, verified provenance removed, correction appendix supersedes historical auto-promotion. Other values/assessments remain uninspected and explicitly unrefreshed, not endorsed by this review."
+    },
+    {
+      "case": "fresh-import-reintroduces-old-links",
+      "input": "Author's README-only parser replays reproduce old links",
+      "challenge": "Data correction could be mistaken for a durable parser fix or individual tombstone",
+      "disposition": "The records are correct narrow corrections; generic importer durability remains separate. The author states no tombstone/full refresh proof. Parser amendment will receive a separate frozen independent review after stable handoff."
+    }
+  ],
+  "blockingRecordFindings": [],
+  "remainingGates": ["Independent parser-amendment review", "Coordinator integrated validation/public gate"]
+}

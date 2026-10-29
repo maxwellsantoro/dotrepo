@@ -1,0 +1,1000 @@
+{"command": ["cargo", "fmt", "--all", "--", "--check"]}
+{"command": ["cargo", "fmt", "--all", "--", "--check"], "exitCode": 0, "seconds": 0.6969615831039846}
+{"command": ["cargo", "clippy", "--workspace", "--all-targets", "--", "-D", "warnings"]}
+    Checking dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)
+    Checking dotrepo-cli v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-cli)
+    Checking dotrepo-crawler v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-crawler)
+    Checking dotrepo-lsp v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-lsp)
+    Checking dotrepo-mcp v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-mcp)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 10.71s
+{"command": ["cargo", "clippy", "--workspace", "--all-targets", "--", "-D", "warnings"], "exitCode": 0, "seconds": 10.802169166970998}
+{"command": ["cargo", "test", "--workspace"]}
+   Compiling dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)
+   Compiling dotrepo-cli v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-cli)
+   Compiling dotrepo-crawler v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-crawler)
+   Compiling dotrepo-lsp v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-lsp)
+   Compiling dotrepo-mcp v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-mcp)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 12.77s
+     Running unittests src/lib.rs (target/debug/deps/dotrepo_cli-ccc060291ca8e766)
+
+running 37 tests
+test tests::adoption_status_reports_missing_native_onboarding_steps ... ok
+test tests::adopt_overlay_rejects_non_overlay_record ... ok
+test tests::claim_accept_native_requires_path_or_claim_id ... ok
+test tests::claim_accept_native_requires_homepage_identity ... ok
+test tests::adopt_overlay_refuses_existing_repo_without_force ... ok
+test tests::adopt_overlay_bootstraps_native_manifest ... ok
+test tests::claim_from_native_requires_homepage_identity ... ok
+test tests::claim_init_force_refuses_existing_event_history ... ok
+test tests::adoption_status_reports_ready_native_loop ... ok
+test tests::claim_event_refuses_invalid_transition ... ok
+test tests::claim_event_appends_submitted_history_and_updates_claim_state ... ok
+test tests::claim_submit_native_requires_homepage_identity ... ok
+test tests::claim_event_records_canonical_handoff_links ... ok
+test tests::format_claim_report_surfaces_handoff_and_events ... ok
+test tests::format_query_value_defaults_to_human_readable_strings ... ok
+test tests::format_query_value_rejects_raw_composite_values ... ok
+test tests::claim_from_native_derives_identity_and_canonical_source ... ok
+test tests::claim_init_refuses_existing_claim_dir_without_force ... ok
+test tests::doctor_refuses_overlay_records ... ok
+test tests::claim_accept_native_records_canonical_handoff_links ... ok
+test tests::deterministic_public_export_requires_generated_at_for_fixed_stale_after ... ok
+test tests::generate_check_refuses_overlay_records ... ok
+test tests::claim_init_scaffolds_valid_claim_directory ... ok
+test tests::generate_refuses_overlay_records ... ok
+test tests::format_trust_report_explains_canonical_handoff_plainly ... ok
+test tests::format_trust_report_explains_equal_authority_conflicts ... ok
+test tests::import_refuses_existing_evidence_without_leaving_partial_manifest ... ok
+test tests::query_raw_should_refuse_competing_records ... ok
+test tests::public_freshness_reuses_snapshot_digest ... ok
+test tests::validate_reports_multiple_diagnostics ... ok
+test tests::validate_index_allows_warning_only_runs ... ok
+test tests::write_import_output_refuses_to_clobber_existing_file_without_force ... ok
+test tests::validate_index_fails_on_structural_errors ... ok
+test tests::import_writes_overlay_manifest_and_evidence ... ok
+test tests::public_export_writes_static_repository_and_trust_json ... ok
+test tests::public_export_honors_base_path_in_inventory_links ... ok
+test tests::deterministic_public_export_repeats_byte_for_byte ... ok
+
+test result: ok. 37 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+     Running unittests src/main.rs (target/debug/deps/dotrepo-35cb63d8224a08aa)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/dotrepo-public-query.rs (target/debug/deps/dotrepo_public_query-261edf2f420dbbfc)
+
+running 6 tests
+test tests::route_request_rejects_dot_segments_in_repository_identity ... ok
+test tests::route_request_decodes_batch_profiles ... ok
+test tests::route_request_decodes_valid_repository_identity ... ok
+test tests::route_request_decodes_batch_query_with_base_path ... ok
+test tests::route_request_rejects_batch_without_repositories ... ok
+test tests::resolve_static_path_serves_directory_index ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/ci_command_contract.rs (target/debug/deps/ci_command_contract-f65fd302914bda72)
+
+running 4 tests
+test ci_init_refuses_overlay_records ... ok
+test ci_init_refuses_to_overwrite_without_force ... ok
+test ci_init_writes_pinned_native_repo_workflow ... ok
+test ci_init_matches_checked_in_native_example_workflow ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.26s
+
+     Running tests/claim_command_contract.rs (target/debug/deps/claim_command_contract-968b4a856fcb280e)
+
+running 8 tests
+test claim_command_rejects_absolute_claim_paths ... ok
+test claim_event_command_rejects_absolute_claim_paths ... ok
+test claim_command_reports_superseded_handoff_from_fixture ... ok
+test validate_index_rejects_invalid_claim_history ... ok
+test claim_command_reports_corrected_history_from_fixture ... ok
+test native_claim_commands_execute_derived_claim_path_workflow ... ok
+test live_seed_overlay_handoff_surfaces_in_public_outputs ... ok
+test claim_commands_execute_documented_operator_workflow ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+     Running tests/doctor_command_contract.rs (target/debug/deps/doctor_command_contract-c74db033a26247c6)
+
+running 1 test
+test doctor_json_reports_lossy_generate_recommendations ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/hosted_query_server_contract.rs (target/debug/deps/hosted_query_server_contract-84d2c5f9dc879395)
+
+running 4 tests
+dotrepo-public-query listening on 127.0.0.1:52946
+dotrepo-public-query listening on 127.0.0.1:52947
+dotrepo-public-query listening on 127.0.0.1:52945
+dotrepo-public-query listening on 127.0.0.1:52944
+test hosted_query_server_serves_batch_profile_and_query_routes ... ok
+test hosted_query_server_serves_static_export_and_resolves_emitted_query_template ... ok
+test hosted_query_server_honors_base_path_and_preserves_equal_authority_conflicts ... ok
+test hosted_query_server_matches_checked_in_query_fixtures ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.34s
+
+     Running tests/manage_command_contract.rs (target/debug/deps/manage_command_contract-b3408be652fa90f5)
+
+running 6 tests
+test manage_adopt_refuses_overlay_records ... ok
+test manage_adopt_refuses_security_without_generate_enabled ... ok
+test manage_adopt_refuses_missing_supported_file ... ok
+test manage_adopt_preserves_existing_github_security_path ... ok
+test manage_adopt_preserves_unmanaged_readme_prose ... ok
+test manage_adopt_refuses_pull_request_template ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/preview_command_contract.rs (target/debug/deps/preview_command_contract-cd4f0cdfe67a5b30)
+
+running 5 tests
+test preview_json_preserves_outer_security_prose_for_partially_managed_files ... ok
+test preview_human_output_explains_all_or_nothing_pull_request_template_behavior ... ok
+test preview_refuses_overlay_records ... ok
+test preview_json_preserves_outer_readme_prose_for_partially_managed_files ... ok
+test preview_json_reports_lossy_contributing_replacement ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/promotion_command_contract.rs (target/debug/deps/promotion_command_contract-a253f695d10d8c39)
+
+running 1 test
+test standalone_apply_rejects_invented_commands_without_writing_evidence ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/public_command_contract.rs (target/debug/deps/public_command_contract-715acf787de661d3)
+
+running 12 tests
+test public_query_missing_path_prints_json_error_and_exit_code_1 ... ok
+test public_query_success_prints_json_to_stdout ... ok
+test public_batch_profiles_reports_successes_and_item_errors ... ok
+test public_relations_resolves_referenced_profiles ... ok
+test public_profile_success_prints_compact_research_shape ... ok
+test public_batch_query_reports_multiple_paths_and_item_errors ... ok
+test public_relations_reports_reverse_references ... ok
+test public_compare_reports_side_by_side_signals ... ok
+test public_summary_missing_repo_prints_json_error_and_exit_code_1 ... ok
+test public_summary_honors_base_path_in_links ... ok
+test public_trust_invalid_identity_prints_json_error_and_exit_code_1 ... ok
+test public_search_filters_profiles ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/write_safety_contract.rs (target/debug/deps/write_safety_contract-a7c3139b92793109)
+
+running 5 tests
+test init_ci_and_manage_cannot_write_through_links ... ok
+test force_scaffold_preserves_history_refusal_and_removes_only_optional_review ... ok
+test claims_reject_symlinked_ancestors_events_and_event_leaf ... ok
+test generate_rejects_leaf_parent_and_hardlink_without_changing_other_outputs ... ok
+test large_public_exports_keep_file_descriptor_use_bounded ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.17s
+
+     Running unittests src/lib.rs (target/debug/deps/dotrepo_core-2d68b09553db00d1)
+
+running 293 tests
+test adoption::tests::canonical_mirror_path_derives_from_claim_path ... ok
+test adoption::tests::record_status_name_matches_schema_contract ... ok
+test adoption::tests::validate_claim_path_rejects_identity_mismatch ... ok
+test adoption::tests::repository_identity_parses_homepage_urls_consistently ... ok
+test adoption::tests::record_status_omitted_for_overlay_only_roots ... ok
+test adoption::tests::record_status_uses_lowercase_contract ... ok
+test adoption::tests::adoption_status_surfaces_surface_inspection_check ... ok
+test import::commands::context::tests::explicit_runtime_list_cannot_supply_missing_or_conflicting_context ... ok
+test import::commands::context::tests::explicit_runtime_list_cannot_override_external_setup_contracts ... ok
+test import::commands::context::tests::explicit_runtime_prerequisites_can_establish_runtime_only_setup ... ok
+test import::commands::context::tests::explicit_runtime_prerequisites_preserve_complete_component_tuple ... ok
+test import::commands::context::tests::prerequisite_lists_abstain_on_incomplete_or_ambiguous_declarations ... ok
+test import::commands::context::tests::missing_prerequisites_and_contradictory_none_still_abstain ... ok
+test import::commands::context::tests::scoped_sections_cannot_discard_ancestor_restrictions ... ok
+test import::commands::go_context::tests::applicable_directory_overrides_follow_workflow_job_step_precedence ... ok
+test import::commands::go_context::tests::cd_dot_does_not_reset_a_preceding_component_change ... ok
+test import::commands::context::python_recipe::tests::natural_python_recipe_rejects_even_contained_requirement_symlinks ... ok
+test import::commands::go_context::tests::comments_and_explicit_go_directory_flags_do_not_erase_scope ... ok
+test import::commands::go_context::tests::declared_commands_and_unrelated_ecosystems_survive_go_guards ... ok
+test import::commands::context::python_recipe::tests::natural_python_recipe_recovers_real_source_tuple_with_medium_bound_evidence ... ok
+test import::commands::go_context::tests::independent_explicit_defaults_remain_adjudication_eligible ... ok
+test import::commands::go_context::tests::inline_services_and_explicit_redis_preparation_remain_prerequisites ... ok
+test import::commands::go_context::tests::explicit_build_conflicts_remain_adjudicable_without_relaxing_context_blocks ... ok
+test import::commands::go_context::tests::non_run_literal_and_folded_scalar_bodies_are_configuration_data ... ok
+test import::commands::go_context::tests::quoted_hash_in_nonroot_directory_is_not_an_inline_comment ... ok
+test import::commands::go_context::tests::quoted_supported_mapping_keys_preserve_scope_and_service_association ... ok
+test import::commands::go_context::tests::run_body_and_heredoc_data_are_not_execution_properties_or_commands ... ok
+test import::commands::go_context::tests::same_job_service_setup_blocks_only_test_default ... ok
+test import::commands::go_context::tests::scoped_go_workflow_blocks_metadata_fallthrough_without_nested_manifests ... ok
+test import::commands::go_context::tests::unrelated_service_job_and_non_go_directory_change_do_not_poison_defaults ... ok
+test import::commands::go_context::tests::unsupported_run_or_flow_context_remains_unresolved ... ok
+test import::commands::go_context::tests::workflow_and_job_defaults_apply_but_root_cwd_is_preserved ... ok
+test import::commands::scope::tests::scope_cases_match_reference_consumer ... ok
+test import::commands::tests::dependency_installation_is_not_a_build_or_test_command ... ok
+test import::commands::tests::docs_abstain_when_environment_prerequisite_would_be_lost ... ok
+test import::commands::tests::docs_accept_cargo_toolchain_override_and_keep_it_in_the_command ... ok
+test import::commands::tests::docs_nextest_examples_do_not_invent_an_unfiltered_runner_command ... ok
+test import::commands::tests::docs_reject_package_narrowed_go_test_examples ... ok
+test import::commands::tests::documentation_fences_do_not_reset_directory_or_make_configuration ... ok
+test import::commands::tests::host_package_install_with_build_essential_is_not_a_build_command ... ok
+test import::commands::tests::infer_gradle_commands_uses_wrapper_only_when_present ... ok
+test import::commands::tests::infer_setup_cfg_abstains_on_unrelated_test_substrings ... ok
+test import::commands::tests::infer_setup_cfg_detects_extras_require_test_pytest ... ok
+test import::commands::tests::infer_setup_commands_provide_pytest_for_classic_python ... ok
+test import::commands::tests::infer_setup_py_abstains_without_test_signals ... ok
+test import::commands::tests::infer_setup_py_prefers_unittest_when_pytest_is_absent ... ok
+test import::commands::tests::infer_tox_ini_commands_detects_testenv ... ok
+test import::commands::context::python_recipe::tests::natural_python_recipe_rejects_hidden_indented_and_external_pretest_setup ... ok
+test import::commands::tests::makefile_commands_name_only_targets_that_exist ... ok
+test import::commands::tests::makefile_preferred_over_justfile_on_task_script_conflict ... ok
+test import::commands::tests::makefile_unit_test_target_outranks_composite_test ... ok
+test import::commands::tests::nonexecuting_test_modes_are_withheld_without_rewriting_flags ... ok
+test import::commands::tests::package_commands_preserve_the_declared_script_name ... ok
+test import::commands::go_context::tests::amendment_full_import_and_escalation_association_controls ... ok
+test import::commands::tests::package_json_test_conflicts_with_python_test_default ... ok
+test import::commands::context::python_recipe::tests::natural_python_recipe_import_preserves_candidate_assessment_without_scalar_promotion ... ok
+test import::commands::tests::load_best_package_json_prefers_server_app_over_root_format_only ... ok
+test import::commands::tests::readme_doc_commands_abstain_after_directory_change ... ok
+test import::commands::tests::resolve_unique_command_candidate_prefers_generic_over_monorepo_slice_workflows ... ok
+test import::commands::tests::sanitize_import_command_rejects_shell_like_values ... ok
+test import::commands::tests::pyproject_tox_conflicts_with_setup_py_pytest_instead_of_losing ... ok
+test import::commands::tests::resolve_unique_command_candidate_prefers_primary_ci_workflow ... ok
+test import::commands::tests::sonnet_workflow_skips_setup_before_the_actual_runner ... ok
+test import::commands::tests::specialized_go_ci_coverdir_is_not_a_workflow_test_command ... ok
+test import::commands::tests::workflow_and_makefile_inference_improvements_do_not_regress_safety ... ok
+test import::commands::tests::workflow_gradle_tasks_defer_to_wrapper_defaults ... ok
+test import::commands::tests::workflow_go_selectors_do_not_outrank_module_defaults ... ok
+test import::commands::tests::workflow_cargo_selectors_do_not_outrank_workspace_defaults ... ok
+test import::commands::tests::workflow_python_runner_must_be_an_invocation ... ok
+test import::commands::tests::workflow_inference_skips_shell_assignments_and_prefers_bazel_build ... ok
+test import::commands::tests::workflow_inference_ignores_specialized_cargo_commands ... ok
+test import::commands::tests::workflow_run_commands_shed_inline_yaml_quotes ... ok
+test import::commands::tests::workflow_wrapper_chmod_is_not_a_build_command ... ok
+test import::commands::tests::specialized_doc_sections_do_not_inherit_repository_default_authority ... ok
+test import::commands::go_context::tests::module_only_build_evidence_stays_unresolved_through_actual_escalation ... ok
+test import::commands::go_context::tests::escalation_cannot_restore_context_blocked_scalars_even_with_model_budget ... ok
+test import::context_verification::tests::absent_attachment_and_missing_or_conflicting_checks_do_not_create_a_pass ... ok
+test import::commands::go_context::tests::full_import_f1_go_context_fixture_contracts ... ok
+test import::context_verification::tests::unmodified_real_keras_route_checks_integrity_only_and_stays_medium ... ok
+test import::escalation::tests::confident_abstention_does_not_escalate_to_second_opinion ... ok
+test import::context_verification::tests::unrelated_valid_sources_do_not_establish_declared_sources ... ok
+test import::escalation::tests::declared_script_avoids_polyglot_default_escalation ... ok
+test import::escalation::tests::deterministic_escalation_keeps_node_python_test_conflict_absent ... ok
+test import::escalation::tests::deepen_finds_security_contact_in_readme_section ... ok
+test import::escalation::tests::deterministic_escalation_marks_conflicts_absent_without_model_spend ... ok
+test import::escalation::tests::escalation_does_not_apply_unsafe_task_script_test_command ... ok
+test import::escalation::tests::escalation_rejects_unsafe_value_returned_by_adjudication_provider ... ok
+test import::escalation::tests::low_confidence_abstention_escalates_to_second_opinion ... ok
+test import::escalation::tests::writeback_gate_can_pass_while_auto_publish_remains_blocked ... ok
+test import::evidence::relation_target_tests::github_relation_targets_are_reduced_to_repository_identity ... ok
+test import::evidence::relation_target_tests::malformed_github_relation_targets_are_rejected ... ok
+test import::escalation::tests::model_escalation_resolves_remaining_fields_under_cap ... ok
+test import::parsing::markdown::docs_tests::ambiguous_declarations_still_abstain_and_retain_evidence ... ok
+test import::parsing::markdown::docs_tests::complete_prefix_declarations_preserve_neutral_titles_and_list_owners ... ok
+test import::parsing::markdown::docs_tests::direct_and_navigation_declarations_keep_custom_domains ... ok
+test import::context_verification::tests::symlink_source_leaf_and_ancestor_are_refused_without_following ... ok
+test import::parsing::markdown::docs_tests::docs_section_intro_must_have_a_neutral_or_current_project_subject ... ok
+test import::parsing::markdown::docs_tests::documentation_badges_are_independent_of_neighboring_badges ... ok
+test import::parsing::markdown::docs_tests::integration_hosts_are_valid_when_the_source_declares_project_docs_directly ... ok
+test import::parsing::markdown::docs_tests::integration_prose_does_not_establish_project_documentation ... ok
+test import::parsing::markdown::docs_tests::quickstart_subject_must_match_the_project ... ok
+test import::parsing::markdown::docs_tests::physical_prefixes_cannot_override_a_paragraph_or_list_subject ... ok
+test import::parsing::markdown::docs_tests::start_labels_are_exact_generic_or_project_qualified ... ok
+test import::parsing::security::security_contact_tests::lone_email_without_context_is_kept_when_no_url_exists ... ok
+test import::parsing::markdown::docs_tests::third_party_subjects_and_misleading_prefixes_do_not_declare_ownership ... ok
+test import::parsing::security::security_contact_tests::reporting_context_email_still_beats_policy_url ... ok
+test import::parsing::security::security_contact_tests::non_actionable_winner_does_not_hide_reporting_url ... ok
+test import::parsing::security::security_contact_tests::reporting_url_beats_incidental_downstream_packager_email ... ok
+test import::parsing::security::security_url_tests::non_actionable_security_md_urls_do_not_become_contacts ... ok
+test import::parsing::security::security_url_tests::recognizes_common_security_reporting_surfaces ... ok
+test import::parsing::security::security_url_tests::rejects_non_reporting_channels ... ok
+test import::toolchain::tests::extracts_cargo_package_rust_version ... ok
+test import::toolchain::tests::extracts_current_readme_msrv_when_manifest_has_no_minimum ... ok
+test import::toolchain::tests::extracts_python_node_and_go_minimums ... ok
+test import::toolchain::tests::prefers_cargo_minimum_over_rust_toolchain_pin ... ok
+test import::write::write_import_output_tests::forced_import_preserves_regular_file_permissions_and_root_aliases ... ok
+test import::write::write_import_output_tests::forced_import_rejects_existing_and_dangling_symlink_outputs ... ok
+test import::write::write_import_output_tests::forced_import_preserves_explicit_deny_read_acl ... ok
+test import::write::write_import_output_tests::forced_import_rejects_hardlinks_without_changing_external_inode ... ok
+test import::write::write_import_output_tests::forced_import_updates_writable_file_in_unwritable_directory ... ok
+test import::write::write_import_output_tests::write_import_outputs_rolls_back_when_second_write_fails ... ok
+test import::write::write_import_output_tests::forced_overlay_preflights_evidence_before_replacing_manifest ... ok
+test import::commands::context::python_recipe::tests::natural_python_recipe_rejects_wrong_scope_directory_conditions_and_missing_chain ... ok
+test output::tests::parent_and_leaf_replacement_cannot_redirect_opened_outputs_or_cleanup ... ok
+test output::tests::rejects_parent_components_and_creates_ordinary_outputs ... ok
+test output::tests::root_alias_permissions_and_inode_survive_overwrite ... ok
+test public::evidence::tests::changing_a_fact_or_check_time_invalidates_its_assessment ... ok
+test output::tests::rejects_leaf_parent_dangling_and_hard_links_before_any_truncation ... ok
+test public::evidence::tests::fresh_export_cannot_rejuvenate_old_or_invalid_records ... ok
+test public::pagedigest::tests::added_and_removed_urls_increment_site_rev ... ok
+test public::pagedigest::tests::content_change_increments_rev_and_site_rev ... ok
+test public::pagedigest::tests::first_export_seeds_revisions_at_one_and_covers_only_repo_files ... ok
+test public::pagedigest::tests::freshness_only_churn_keeps_revisions_and_site_rev_but_updates_digest ... ok
+test public::pagedigest::tests::hosted_base_path_prefixes_keys_and_coverage ... ok
+test public::evidence::tests::query_evidence_matches_shared_worker_contract_and_profile ... ok
+test public::pagedigest::tests::previous_manifest_round_trips_through_serialization ... ok
+test render::tests::generated_output_comparison_ignores_only_the_generator_version ... ok
+test import::context_verification::tests::changed_deleted_or_nonregular_source_after_import_is_unresolved ... ok
+test public::relations::tests::indexed_responses_use_loaded_records_without_reading_the_index_again ... ok
+test tests::claims::append_claim_event_advances_draft_claim_to_submitted ... ok
+test tests::claims::append_claim_event_rejects_canonical_links_for_non_accepted_states ... ok
+test tests::claims::append_claim_event_records_canonical_links_for_accepted_handoff ... ok
+test output::tests::rooted_overwrite_preserves_deny_read_acl ... ok
+test tests::claims::append_claim_event_rejects_invalid_acceptance_from_draft ... ok
+test tests::claims::parse_claim_record_rejects_unknown_schema ... ok
+test tests::claims::parse_claim_event_rejects_zero_sequence ... ok
+test tests::claims::scaffold_claim_directory_requires_existing_index_record ... ok
+test tests::claims::load_claim_directory_reads_claim_and_events ... ok
+test tests::claims::append_claim_event_allows_corrected_handoff_adjustments ... ok
+test tests::claims::scaffold_claim_directory_renders_valid_draft_claim ... ok
+test tests::import_parsing::cargo_build_beats_generic_pyproject_build_default ... ok
+test tests::import_parsing::clean_project_description_accepts_quoted_sentence_with_internal_structure ... ok
+test tests::import_parsing::clean_project_description_rejects_quoted_tagline ... ok
+test tests::import_parsing::clean_project_name_accepts_real_project_names ... ok
+test tests::import_parsing::clean_project_name_recovers_slug_from_colon_tagline ... ok
+test tests::import_parsing::clean_project_name_rejects_nav_bars_badge_spill_and_sentences ... ok
+test tests::claims::validate_index_root_reports_claim_event_history_errors ... ok
+test tests::import_parsing::clean_project_name_rejects_question_and_announcement_headings ... ok
+test tests::import_parsing::conflicting_node_and_python_test_signals_abstain ... ok
+test tests::claims::validate_index_root_accepts_well_formed_claim_directory ... ok
+test tests::claims::validate_index_root_reports_claim_identity_mismatch ... ok
+test tests::import_parsing::docs_selection_ignores_license_images_and_catalogue_links ... ok
+test tests::import_parsing::infer_pyproject_commands_detects_nox ... ok
+test tests::import_parsing::infer_pyproject_commands_detects_optional_test_dependencies ... ok
+test tests::import_parsing::docs_selection_requires_a_declaration_and_abstains_on_ambiguity ... ok
+test tests::import_parsing::infer_pyproject_commands_detects_tox ... ok
+test tests::import_parsing::infer_pyproject_commands_prefers_explicit_tool_over_default ... ok
+test tests::import_parsing::infer_pyproject_commands_produces_default_test_when_build_system_exists ... ok
+test tests::import_parsing::is_non_project_heading_rejects_sponsor_compound ... ok
+test tests::import_parsing::normalize_description_line_rejects_unbalanced_brackets ... ok
+test tests::import_parsing::parse_readme_docs_metadata_extracts_docs_and_getting_started_links ... ok
+test tests::import_parsing::parse_readme_metadata_preserves_unicode_text_around_markdown_links ... ok
+test tests::import_parsing::normalize_description_line_rejects_url_and_file_path_artifacts ... ok
+test tests::import_parsing::parse_readme_metadata_ignores_promotions_before_and_after_title ... ok
+test tests::import_parsing::parse_readme_metadata_skips_reference_definitions_and_trailing_badges ... ok
+test tests::import_parsing::parse_readme_metadata_uses_logo_alt_before_later_section_headings ... ok
+test tests::import_parsing::parse_readme_title_line_rejects_promo_link_heading ... ok
+test tests::import_parsing::parse_readme_title_skips_installation_and_contributing_headings ... ok
+test tests::import_parsing::parse_readme_docs_metadata_extracts_reference_and_html_docs_links ... ok
+test tests::import_parsing::parse_readme_title_skips_non_project_headings ... ok
+test tests::import_parsing::readme_image_title_fills_empty_alt_before_support_sections ... ok
+test tests::import_parsing::readme_image_title_does_not_override_alt_or_accept_badges_and_navigation ... ok
+test tests::import_parsing::try_parse_multiline_html_heading_extracts_name ... ok
+test tests::import_repository::contributing_md_does_not_treat_make_lint_as_build_command ... ok
+test tests::import_repository::contributing_md_produces_contribdoc_candidates ... ok
+test tests::import_repository::declared_makefile_beats_ecosystem_default ... ok
+test tests::import_repository::declared_package_commands_beat_cargo_ecosystem_defaults ... ok
+test tests::import_repository::import_repository_accepts_readme_variants_and_preserves_their_paths ... ok
+test tests::import_repository::declared_package_commands_beat_other_ecosystem_defaults ... ok
+test tests::import_repository::import_repository_extracts_security_from_contributing_when_no_security_md ... ok
+test tests::import_repository::import_repository_bootstraps_native_manifest_from_conventional_files ... ok
+test tests::import_parsing::support_and_donation_headings_are_not_project_names ... ok
+test tests::import_repository::import_repository_enables_generate_only_for_reproducible_surfaces ... ok
+test tests::import_repository::import_repository_extracts_security_from_issue_template ... ok
+test tests::import_repository::import_repository_falls_back_to_workflow_commands_when_manifests_are_absent ... ok
+test tests::import_repository::import_repository_ignores_comment_only_mix_project_signals ... ok
+test tests::import_repository::import_repository_ignores_comment_only_rebar_terms ... ok
+test tests::import_repository::import_repository_ignores_comments_and_prefixed_rake_tasks ... ok
+test tests::import_repository::import_repository_ignores_empty_or_invalid_composer_scripts ... ok
+test tests::import_repository::import_repository_ignores_unsafe_or_incomplete_cmake_workflows ... ok
+test tests::import_repository::import_repository_imports_cargo_workspace_build_and_test_commands ... ok
+test tests::import_repository::import_repository_imports_cmake_workflow_presets ... ok
+test tests::import_repository::import_repository_ignores_non_maven_xml_named_pom ... ok
+test tests::import_repository::import_repository_imports_maven_build_and_test_defaults ... ok
+test tests::import_repository::import_repository_imports_explicit_dotnet_test_project_commands ... ok
+test tests::import_repository::import_repository_imports_composer_build_and_test_scripts ... ok
+test tests::import_repository::import_repository_imports_mix_project_commands ... ok
+test tests::import_repository::import_repository_imports_explicit_rake_tasks ... ok
+test tests::import_repository::import_repository_imports_package_json_commands_with_runner_detection ... ok
+test tests::import_repository::import_repository_imports_pyproject_build_and_test_defaults ... ok
+test tests::import_repository::import_repository_imports_rebar_project_commands ... ok
+test tests::import_repository::import_repository_marks_overlay_fallbacks_as_inferred ... ok
+test tests::import_repository::import_repository_only_builds_non_test_dotnet_project ... ok
+test tests::import_repository::import_repository_keeps_manifest_commands_imported_when_workflow_agrees ... ok
+test tests::import_repository::import_repository_keeps_richer_surfaces_at_skip ... ok
+test tests::import_repository::import_repository_prefers_security_md_over_contributing ... ok
+test tests::import_repository::import_repository_uses_banner_title_before_donation_and_sponsor_sections ... ok
+test tests::import_repository::import_repository_prefers_primary_ci_workflow_over_release_workflow ... ok
+test tests::import_repository::import_repository_withholds_module_only_build_but_keeps_test_default ... ok
+test tests::import_repository::justfile_assignments_do_not_produce_taskscript_candidates ... ok
+test tests::import_repository::makefile_produces_taskscript_candidates ... ok
+test tests::import_repository::justfile_produces_taskscript_candidates ... ok
+test tests::import_repository::makefile_beats_workflow ... ok
+test tests::import_repository::workflow_only_fallback ... ok
+test tests::import_repository::observed_workflow_beats_ecosystem_default ... ok
+test tests::import_repository::manifest_workflow_agree ... ok
+test tests::public::public_repository_query_rejects_dot_segments_in_identity ... ok
+test import::context_verification::tests::malformed_empty_or_excessive_attachment_is_unresolved ... ok
+test tests::public::public_repository_query_preserves_competing_values ... ok
+test tests::public::public_query_input_snapshot_matches_direct_query_semantics ... ok
+test tests::public::export_public_index_static_emits_meta_summary_trust_and_query_input_files ... ok
+test tests::public::public_repository_summary_includes_freshness_links_and_artifacts ... ok
+test tests::selection::query_manifest_walks_dynamic_paths ... ok
+test tests::public::public_repository_summary_omits_rejected_claim_context ... ok
+test tests::relations::trust_confidence_boost_produces_expected_values_and_search_ranking_uses_it ... ok
+test tests::selection::query_repository_prefers_higher_status_overlay ... ok
+test tests::selection::query_repository_serializes_selection_and_conflicts ... ok
+test tests::selection::query_repository_surfaces_equal_authority_overlay_conflicts ... ok
+test tests::selection::trust_repository_serializes_selection_and_conflicts ... ok
+test tests::selection::query_repository_prefers_canonical_over_matching_overlay ... ok
+test tests::selection::trust_repository_omits_rejected_claim_context_from_normal_visibility ... ok
+test tests::surfaces::adopt_managed_surface_preserves_unmanaged_readme_prose ... ok
+test tests::surfaces::adopt_managed_surface_refuses_missing_supported_file ... ok
+test tests::surfaces::generate_check_repository_detects_drift_inside_managed_regions ... ok
+test tests::surfaces::generate_check_repository_rejects_overlay_records ... ok
+test tests::surfaces::generate_check_repository_does_not_flag_unmanaged_readme ... ok
+test tests::surfaces::github_outputs_generate_remaining_compat_files ... ok
+test tests::surfaces::generate_check_ignores_and_generate_preserves_stamp_only_version_drift ... ok
+test tests::surfaces::inspect_surface_states_flags_lossy_contributing_generation ... ok
+test tests::surfaces::inspect_surface_states_flags_lossy_pull_request_template_generation ... ok
+test tests::surfaces::inspect_surface_states_reports_partially_managed_and_malformed_files ... ok
+test tests::surfaces::generation_check_and_github_preview_agree_on_all_enabled_outputs ... ok
+test tests::surfaces::inspect_surface_states_treats_partially_managed_readme_as_honest ... ok
+test tests::surfaces::inspect_surface_states_reports_supported_and_unsupported_surfaces ... ok
+test tests::selection::valid_root_record_survives_unrelated_deep_descendants ... ok
+test tests::surfaces::load_manifest_from_root_falls_back_to_record_toml ... ok
+test tests::surfaces::inspect_surface_states_treats_partially_managed_security_as_honest ... ok
+test tests::surfaces::load_manifest_document_returns_path_and_raw_bytes ... ok
+test tests::surfaces::managed_outputs_do_not_overwrite_unmanaged_readme_without_markers ... ok
+test tests::surfaces::managed_outputs_accept_whitespace_variation_in_markers ... ok
+test tests::surfaces::managed_outputs_fail_on_malformed_nested_regions ... ok
+test tests::surfaces::managed_outputs_preserve_unmanaged_contributing_content_outside_markers ... ok
+test tests::surfaces::managed_outputs_reject_overlay_records ... ok
+test tests::surfaces::parse_managed_marker_rejects_extra_tokens ... ok
+test tests::surfaces::managed_outputs_preserve_unmanaged_readme_content_outside_markers ... ok
+test tests::surfaces::managed_outputs_preserve_unmanaged_security_content_outside_markers ... ok
+test tests::surfaces::render_readme_rejects_custom_sections_outside_repository_root ... ok
+test tests::surfaces::render_readme_renders_custom_sections ... ok
+test tests::validation::parse_codeowners_metadata_keeps_team_unset_when_broad_ownership_is_ambiguous ... ok
+test tests::validation::parse_contributing_security_extracts_email_from_responsible_disclosure_heading ... ok
+test tests::validation::parse_codeowners_metadata_prefers_repo_wide_team_over_narrower_team_rules ... ok
+test tests::surfaces::validate_manifest_rejects_custom_sections_outside_repository_root ... ok
+test tests::validation::parse_contributing_security_extracts_email_from_section ... ok
+test tests::validation::parse_contributing_security_ignores_non_security_sections ... ok
+test tests::validation::parse_security_contact_finds_backtick_email ... ok
+test tests::validation::parse_issue_template_security_extracts_email ... ok
+test tests::validation::parse_security_contact_preserves_unicode_context_around_links ... ok
+test tests::validation::parse_security_contact_prefers_reporting_url_over_redirect_destination ... ok
+test tests::validation::parse_security_import_metadata_marks_policy_urls_as_partial_security_channels ... ok
+test tests::validation::parse_security_contact_rejects_non_security_url ... ok
+test tests::validation::parse_security_contact_supports_reference_links_html_anchors_and_mailto_queries ... ok
+test tests::validation::validate_manifest_diagnostics_accumulates_multiple_errors ... ok
+test util::tests::contains_unsafe_shell_like_value_rejects_chaining_and_substitution ... ok
+test util::tests::hex_lower_preserves_leading_zeroes_and_lowercase ... ok
+test util::tests::resolve_workspace_repository_root_accepts_missing_subdirectory ... ok
+test util::tests::source_digest_matches_sha256_vectors ... ok
+test tests::validation::validate_index_root_reports_path_mismatches_and_missing_evidence ... ok
+test tests::validation::validate_index_root_emits_quality_warnings_for_non_reference_vocab ... ok
+test tests::validation::validate_index_root_accepts_seed_overlay_layout ... ok
+test import::context_verification::tests::tuple_source_and_time_changes_are_unresolved ... ok
+test import::context_verification::tests::invalid_row_shapes_paths_hashes_and_spans_are_unresolved ... ok
+test import::parsing::markdown::docs_tests::a_long_wrapped_paragraph_builds_its_context_only_once ... ok
+test tests::relations::import_overlay_with_github_facts_discovers_fork_relation_and_records_evidence ... ok
+
+test result: ok. 293 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.10s
+
+     Running tests/adjudication_pipeline.rs (target/debug/deps/adjudication_pipeline-399396b0f588f849)
+
+running 8 tests
+test post_check_accepts_valid_candidate ... ok
+test post_check_maps_null_to_absent ... ok
+test post_check_rejects_response_for_another_field_including_abstention ... ok
+test post_check_rejects_out_of_candidate_value ... ok
+test post_check_requires_cited_source_to_support_selected_value ... ok
+test build_requests_empty_when_no_unresolved ... ok
+test build_requests_only_includes_unresolved_build_test ... ok
+test apply_results_updates_scores_and_summary ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/auto_publish.rs (target/debug/deps/auto_publish-b6faba53d96e51a5)
+
+running 23 tests
+test downgrade_guard_is_a_noop_when_there_is_no_prior_record ... ok
+test downgrade_guard_is_a_noop_when_fresh_status_is_not_lower ... ok
+test downgrade_guard_never_inherits_canonical_authority ... ok
+test promote_does_not_downgrade_canonical ... ok
+test promote_does_not_downgrade_reviewed ... ok
+test promote_does_not_promote_unresolved ... ok
+test promote_eligible_manifest_to_verified ... ok
+test downgrade_guard_allows_downgrade_when_a_field_genuinely_regresses ... ok
+test downgrade_guard_requires_fresh_verification_even_for_unchanged_values ... ok
+test promote_preserves_existing_trust_notes ... ok
+test end_to_end_eligible_repo_promotes ... ok
+test justfile_only_assignments_do_not_import_as_commands ... ok
+test promotion_never_rewrites_field_values ... ok
+test contributing_make_lint_is_not_imported_as_build ... ok
+test score_index_record_for_promotion_treats_command_conflict_as_unresolved ... ok
+test promotion_does_not_upgrade_unresolved_fields ... ok
+test retained_assessments_cannot_outlive_their_values_or_check_times ... ok
+test promotion_does_not_change_record_authority_semantics ... ok
+test promotion_preserves_imported_provenance_origins ... ok
+test end_to_end_conflict_repo_does_not_promote ... ok
+test promotion_analysis_includes_malformed_records_as_blocked ... ok
+test promotion_only_touches_status_trust_and_evidence_wording ... ok
+test standalone_apply_cannot_mint_evidence_for_an_invented_command ... ok
+
+test result: ok. 23 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/claim_fixture_pack.rs (target/debug/deps/claim_fixture_pack-84fbbb619286c0fe)
+
+running 7 tests
+test claim_fixture_pack_builds_read_only_claim_reports ... ok
+test claim_fixture_pack_loads_representative_claim_histories ... ok
+test valid_in_review_claim_breaks_equal_rank_ties_before_path_order ... ok
+test index_validation_replays_claim_transition_sources ... ok
+test reviewer_workflow_helpers_match_golden_claim_fixtures ... ok
+test claim_fixture_pack_matches_validation_expectations ... ok
+test authority_resolution_rejects_invalid_claims_at_index_and_repository_scope ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+     Running tests/docs_evidence.rs (target/debug/deps/docs_evidence-1aaa33f432933ede)
+
+running 3 tests
+test ambiguous_documentation_stays_unresolved_even_with_a_homepage ... ok
+test documentation_confidence_requires_evidence_for_the_selected_value ... ok
+test imported_docs_assessments_survive_public_evidence_validation ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/execution_context.rs (target/debug/deps/execution_context-b9630cb218048aaa)
+
+running 11 tests
+test legacy_commands_do_not_gain_invented_context ... ok
+test context_binding_cannot_change_when_public_scalars_are_trimmed ... ok
+test component_scope_requires_a_component_and_repository_scope_forbids_one ... ok
+test changing_or_removing_a_command_invalidates_retained_context ... ok
+test explicit_context_round_trips_and_is_queryable_without_creating_a_scalar ... ok
+test native_context_rejects_symlink_escape ... ok
+test prerequisites_are_explicit_descriptions_and_empty_list_is_preserved ... ok
+test context_requires_explicit_scope_directory_and_prerequisites ... ok
+test scalar_context_cannot_relabel_component_commands_as_repository_defaults ... ok
+test paths_are_portable_normalized_and_contained_even_for_overlays ... ok
+test public_profile_and_static_export_preserve_context_with_camel_case_keys ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/import_escalation_safety.rs (target/debug/deps/import_escalation_safety-bed8d02f115f51fd)
+
+running 6 tests
+test score_application_does_not_overwrite_an_already_resolved_field ... ok
+test duplicate_values_use_grounded_provenance_from_strongest_source ... ok
+test plan_application_rejects_mispaired_results_and_ungrounded_values ... ok
+test wrong_field_model_response_preserves_known_test_command ... ok
+test failed_primary_attempt_counts_before_a_successful_second_opinion ... ok
+test failed_attempts_share_the_cap_across_tiers_and_fields ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/import_field_scoring.rs (target/debug/deps/import_field_scoring-d51fe4486b4536d6)
+
+running 7 tests
+test score_full_signals_all_high ... ok
+test score_security_unknown_high_confidence ... ok
+test matching_github_metadata_remains_high_confidence ... ok
+test score_absent_fields_high_confidence ... ok
+test ecosystem_defaults_prevent_auto_publish ... ok
+test score_unresolved_prevents_auto_publish ... ok
+test known_bad_catalog_examples_are_suspect_and_escalated ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/import_fixture_pack.rs (target/debug/deps/import_fixture_pack-5adb010352f7a654)
+
+running 4 tests
+test import_fixture_pack_extracts_docs_entry_points_and_skips_nav_lines ... ok
+test import_fixture_pack_captures_readme_title_and_description_edge_cases ... ok
+test import_fixture_pack_strengthens_owner_and_security_extraction ... ok
+test import_fixture_pack_supports_native_and_overlay_bootstrap ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.28s
+
+     Running tests/import_input_boundaries.rs (target/debug/deps/import_input_boundaries-14a9ecdd2b730ebb)
+
+running 6 tests
+test import_refuses_fifo_without_waiting_for_a_writer ... ok
+test import_refuses_escaping_and_contained_readme_links ... ok
+test import_refuses_directory_and_oversized_conventional_inputs ... ok
+test ordinary_import_inputs_remain_usable ... ok
+test import_refuses_manifest_and_workflow_directory_links ... ok
+test namespaced_rake_tasks_never_become_root_commands ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/import_quality_gate.rs (target/debug/deps/import_quality_gate-9ae4ffcfaf419010)
+
+running 2 tests
+test imported_context_candidates_are_valid_and_exactly_value_bound ... ok
+test import_quality_gate_matches_checked_in_expectations ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.28s
+
+     Running tests/import_verification.rs (target/debug/deps/import_verification-7146f5adb6254079)
+
+running 5 tests
+test verify_records_absent_fields ... ok
+test verify_passes_for_full_signals_fixture ... ok
+test verify_detects_identity_mismatch ... ok
+test verify_records_unresolved_fields ... ok
+test verify_records_command_candidates ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/path_containment.rs (target/debug/deps/path_containment-f47e353c1fd4c8f1)
+
+running 3 tests
+test resolve_claim_directory_rejects_parent_dir_components ... ok
+test resolve_claim_directory_rejects_absolute_paths ... ok
+test resolve_claim_directory_rejects_symlink_escape ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/public_batch_limits.rs (target/debug/deps/public_batch_limits-b98640f9f882b32f)
+
+running 2 tests
+test batch_profiles_rejects_identity_overflow ... ok
+test batch_query_rejects_result_overflow ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/public_contract_compatibility.rs (target/debug/deps/public_contract_compatibility-f1839ff4bcc77eb5)
+
+running 2 tests
+test public_contract_compatibility_covers_equal_authority_query_conflicts ... ok
+test public_contract_compatibility_manifest_matches_live_outputs ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/public_error_fixture_pack.rs (target/debug/deps/public_error_fixture_pack-e359d17b9fd3117a)
+
+running 2 tests
+test public_error_fixture_pack_uses_summary_and_trust_error_codes ... ok
+test public_error_fixture_pack_matches_checked_in_outputs ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/public_export_fixture_pack.rs (target/debug/deps/public_export_fixture_pack-b02d0b2f51d38c82)
+
+running 3 tests
+test public_export_pagedigest_stats_report_cold_start_fetch_cost ... ok
+test public_export_fixture_pack_covers_plain_and_claim_aware_identities ... ok
+test public_export_fixture_pack_matches_checked_in_outputs ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/public_freshness_semantics.rs (target/debug/deps/public_freshness_semantics-89587321924dccba)
+
+running 6 tests
+test snapshot_digest_ignores_local_crawler_state ... ok
+test import_options_can_populate_record_generated_at ... ok
+test record_generated_at_is_semantically_neutral_for_query_and_trust ... ok
+test stale_after_remains_additive_only_for_public_response_shape ... ok
+test snapshot_freshness_stays_aligned_across_public_surfaces ... ok
+test immutable_export_identity_changes_with_payload_and_retains_history ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/public_query_fixture_pack.rs (target/debug/deps/public_query_fixture_pack-673078dc1f73b9f9)
+
+running 3 tests
+test public_query_aliases_common_github_native_fields ... ok
+test public_query_fixture_pack_covers_success_and_error_contracts ... ok
+test public_query_fixture_pack_matches_checked_in_outputs ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/query_path_parity.rs (target/debug/deps/query_path_parity-02cd12600a7451d2)
+
+running 1 test
+test query_path_cases_match_shared_contract ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/regression_fixture_pack.rs (target/debug/deps/regression_fixture_pack-3e921a1f2a5b489f)
+
+running 2 tests
+test regression_fixture_stubs_materialize_cleanly ... ok
+test regression_fixture_pack_replays_checked_in_fixtures ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s
+
+     Running tests/relation_semantics.rs (target/debug/deps/relation_semantics-2bd471879ffe53b5)
+
+running 4 tests
+test typed_relations_require_valid_identity_and_independent_trust ... ok
+test github_relation_identity_resolution_is_case_insensitive_across_filesystems ... ok
+test exported_relations_use_selected_records_and_preserve_missing_and_self_targets ... ok
+test typed_relations_validate_and_traverse_with_semantic_inverses ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/synthesis_io_semantics.rs (target/debug/deps/synthesis_io_semantics-972d4d5f53abc7e0)
+
+running 8 tests
+test generate_basic_synthesis_treats_empty_build_test_as_missing ... ok
+test generate_basic_synthesis_uses_placeholders_when_build_test_missing ... ok
+test generate_basic_synthesis_uses_factual_build_test_and_passes_validation ... ok
+test write_synthesis_rejects_conflicts_with_factual_build_or_test ... ok
+test plan_synthesis_write_uses_in_memory_manifest_before_record_writeback ... ok
+test write_synthesis_and_get_synthesis_round_trip_against_record_root ... ok
+test validate_index_root_accepts_optional_valid_synthesis_toml ... ok
+test validate_index_root_reports_invalid_synthesis_without_requiring_it ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/validate_repository_candidates.rs (target/debug/deps/validate_repository_candidates-7290f7b02546c442)
+
+running 3 tests
+test validate_repository_checks_all_root_candidates ... ok
+test query_and_trust_select_valid_root_repo_when_record_toml_is_invalid ... ok
+test validate_repository_ignores_descendant_record_candidates ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running unittests src/lib.rs (target/debug/deps/dotrepo_crawler-475e401e93341950)
+
+running 49 tests
+test github::tests::dotnet_primary_language_requires_top_rank ... ok
+test discover::tests::seed_repositories_filters_archived_and_forks_defensively ... ok
+test discover::tests::seed_repositories_uses_default_star_band_and_stops_at_limit ... ok
+test github::tests::first_root_paths_with_suffixes_picks_sorted_csproj_and_sln ... ok
+test discover::tests::seed_repositories_dedupes_across_star_bands ... ok
+test discover::tests::seed_repositories_rejects_limits_above_maximum ... ok
+test github::tests::languages_by_byte_count_descending_handles_empty_map ... ok
+test github::tests::languages_by_byte_count_descending_breaks_ties_alphabetically ... ok
+test github::tests::languages_by_byte_count_descending_orders_by_dominance_not_alphabetically ... ok
+test github::tests::refresh_candidates_from_state_skips_unfetchable_repositories ... ok
+test github::tests::refresh_candidates_from_state_uses_repository_heads ... ok
+test github::tests::supplemental_root_files_cover_every_dotrepo_core_deterministic_parser ... ok
+test github::tests::node_package_json_path_preference_ranks_apps_over_sdks ... ok
+test github::tests::select_dotnet_paths_from_tree_prefers_non_test_projects ... ok
+test materialize::tests::materialize_repository_rejects_unsafe_repository_identity ... ok
+test materialize::tests::materialize_repository_rejects_paths_outside_repository_root ... ok
+test discover::tests::seed_repositories_continues_to_later_bands_after_page_cap ... ok
+test materialize::tests::materialize_repository_reports_absent_optional_surfaces ... ok
+test github::tests::build_http_client_applies_timeouts_and_headers ... ok
+test materialize::tests::materialize_repository_writes_preferred_conventional_surfaces ... ok
+test pipeline::evidence::tests::context_source_attachment_requires_exact_tuple_source_and_time ... ok
+test pipeline::tests::crawl_prefers_github_description_over_suspect_readme_description ... ok
+test pipeline::tests::crawl_prefers_github_description_over_overlapping_readme_description ... ok
+test pipeline::tests::crawl_from_snapshot_preserves_prior_synthesis_failure_when_not_synthesizing ... ok
+test pipeline::tests::crawl_replaces_suspect_readme_identity_with_github_facts ... ok
+test pipeline::tests::crawl_repository_from_snapshot_keeps_synthesis_non_blocking ... ok
+test pipeline::tests::crawl_repository_from_snapshot_rejects_missing_description ... ok
+test pipeline::tests::crawl_keeps_declared_documentation_distinct_from_github_homepage ... ok
+test pipeline::tests::homepage_conflicts_with_identity_detects_cross_repository_urls ... ok
+test schedule::tests::schedule_refresh_picks_missing_factual_and_head_change ... ok
+test schedule::tests::schedule_refresh_prioritizes_factual_work_when_limit_is_tight ... ok
+test schedule::tests::schedule_refresh_requests_synthesis_after_failure_or_model_change ... ok
+test schedule::tests::unchanged_head_still_refreshes_expired_or_invalid_factual_records ... ok
+test pipeline::tests::crawl_repository_from_snapshot_builds_factual_writeback_plan ... ok
+test synth::tests::http_provider_sends_grounded_context_and_parses_bounded_fields ... ok
+test pipeline::tests::crawl_repository_from_snapshot_skips_github_homepage_pointing_at_a_different_repository ... ok
+test synth::tests::provider_output_builds_valid_plan_without_overwriting_factual_commands ... ok
+test tests::repository_ref_builds_record_paths ... ok
+test synth::tests::source_bounds_fail_before_calling_provider ... ok
+test pipeline::tests::crawl_repository_with_client_preserves_readme_variant_in_evidence ... ok
+test synth::tests::ungrounded_or_unknown_provider_output_is_rejected ... ok
+test pipeline::tests::crawl_repository_from_snapshot_requires_fresh_verification_for_prior_verified_record ... ok
+test pipeline::tests::crawl_repository_with_client_materializes_and_plans_factual_writeback ... ok
+test writeback::tests::invalid_destination_does_not_change_any_final_artifacts ... ok
+test writeback::tests::writeback_rejects_missing_evidence_text_without_partial_finals ... ok
+test writeback::tests::commit_failure_restores_existing_artifacts_and_removes_new_ones ... ok
+test writeback::tests::writeback_stages_all_artifacts_before_any_final_commit ... ok
+test pipeline::tests::refresh_withholds_source_pinned_uv_examples_despite_prior_verified_values ... ok
+test github::tests::http_client_times_out_hung_requests ... ok
+
+test result: ok. 49 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.27s
+
+     Running unittests src/main.rs (target/debug/deps/dotrepo_crawler-b52c6a32ae430824)
+
+running 17 tests
+test report::tests::build_seed_review_assessment_flags_inferred_execution_and_missing_security ... ok
+test report::tests::build_seed_review_assessment_allows_honest_absence_without_high_priority ... ok
+test commands::tests::upsert_state_record_replaces_existing_repository ... ok
+test report::tests::build_seed_review_report_excludes_failed_crawls_from_missing_metadata_counts ... ok
+test report::tests::build_seed_review_report_summarizes_priority_buckets ... ok
+test commands::tests::refresh_inspection_limit_allows_empty_plans ... ok
+test commands::tests::refresh_inspection_limit_rotates_oldest_factual_crawls_first ... ok
+test tests::cli_parses_crawl_with_bounded_synthesis ... ok
+test tests::cli_parses_refresh_plan_command ... ok
+test tests::cli_parses_seed_command_with_targets_file ... ok
+test tests::cli_parses_seed_command ... ok
+test tests::cli_parses_schedule_command ... ok
+test tests::parse_star_band_supports_range_and_open_ended_forms ... ok
+test tests::parse_repository_targets_rejects_path_traversal ... ok
+test tests::parse_repository_targets_supports_comments_and_dedupes ... ok
+test commands::tests::cmd_seed_rejects_targets_file_limits_above_maximum ... ok
+test commands::tests::refresh_plan_falls_back_to_committed_index_records_when_state_is_empty ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/openrouter_env_escalation.rs (target/debug/deps/openrouter_env_escalation-9ddb8fb84c336363)
+
+running 3 tests
+test second_opinion_live_ladder_from_low_confidence_primary ... ok
+test openrouter_env_escalation_smoke ... ok
+test billed_http_failure_counts_tokens_and_attempt_before_second_opinion ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/pipeline_offline.rs (target/debug/deps/pipeline_offline-2f2294e8e6ec6fe2)
+
+running 1 test
+test offline_writeback_from_import_fixture_validates_index ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/targets_file_batch.rs (target/debug/deps/targets_file_batch-fd3f6abd143729e0)
+
+running 3 tests
+test parse_repository_targets_supports_comments_and_dedupes ... ok
+test discovery_report_from_targets_respects_limit ... ok
+test load_repository_targets_reads_targets_file_fixture ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/writeback_gate.rs (target/debug/deps/writeback_gate-e84fb7fe279b5540)
+
+running 2 tests
+test crawler_writeback_gate_blocks_when_verification_fails ... ok
+test crawler_writeback_gate_allows_partial_overlay_when_verification_passes ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/dotrepo_lsp-5191117c206875ad)
+
+running 18 tests
+test code_actions::tests::homepage_edit_handles_repo_header_at_end_without_newline ... ok
+test tests::diagnostics_for_parse_errors_use_toml_spans ... ok
+test tests::diagnostics_for_invalid_overlay_manifest_reuse_core_messages ... ok
+test tests::completion_returns_core_fields_and_enum_values ... ok
+test code_actions::tests::homepage_edit_keeps_nested_tables_multiline_values_and_toml_forms_valid ... ok
+test tests::diagnostics_for_native_manifest_include_adoption_hints ... ok
+test tests::code_action_adds_homepage_placeholder_for_adoption_hint ... ok
+test tests::failed_initialize_preserves_state_and_null_id_gets_a_response ... ok
+test tests::diagnostics_for_native_manifest_skip_adoption_hints_when_ready ... ok
+test tests::diagnostics_warn_when_homepage_does_not_resolve_to_identity ... ok
+test tests::code_action_creates_ci_workflow_for_adoption_hint ... ok
+test tests::initialize_advertises_code_action_provider ... ok
+test tests::did_open_publishes_diagnostics ... ok
+test tests::hover_resolves_nested_inline_table_fields ... ok
+test tests::hover_returns_schema_help_for_core_fields ... ok
+test tests::hover_ignores_fake_toml_structure_inside_multiline_strings ... ok
+test tests::did_open_ignores_manifest_outside_workspace_folders ... ok
+test tests::diagnostics_surface_other_root_manifest_validation_errors ... ok
+
+test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/stdio_recovery.rs (target/debug/deps/stdio_recovery-7d0d7d1169fd8b1f)
+
+running 1 test
+test malformed_messages_do_not_end_the_stdio_session ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.21s
+
+     Running unittests src/main.rs (target/debug/deps/dotrepo_mcp-0ae1ac18772ac3ee)
+
+running 38 tests
+test lookup::tests::mixed_resolution_rejects_mapped_private_addresses ... ok
+test lookup::tests::error_diagnostic_is_bounded_at_unicode_boundaries ... ok
+test lookup::tests::is_blocked_lookup_host_covers_cloud_metadata_names ... ok
+test lookup::tests::normalize_public_base_url_allows_default_public_origins ... ok
+test lookup::tests::mapped_ipv6_addresses_follow_ipv4_policy ... ok
+test lookup::tests::parse_repository_url_supports_upstream_and_hosted_urls ... ok
+test lookup::tests::remote_body_read_stops_without_content_length ... ok
+test lookup::tests::ensure_lookup_endpoint_safe_blocks_literal_private_ips ... ok
+test lookup::tests::fetch_remote_json_bounds_success_and_error_responses ... ok
+test lookup::tests::is_blocked_lookup_ip_covers_cgnat_and_documentation_ranges ... ok
+test lookup::tests::normalize_public_base_url_blocks_private_hosts_by_default ... ok
+test lookup::tests::normalize_public_base_url_requires_https_by_default ... ok
+test lookup::tests::normalize_public_base_url_requires_opt_in_for_custom_origins ... ok
+test lookup::tests::resolve_same_origin_path_url_keeps_allowlisted_origin ... ok
+test lookup::tests::resolve_same_origin_path_url_rejects_parent_segments ... ok
+test lookup::tests::resolve_same_origin_path_url_rejects_protocol_relative_and_absolute ... ok
+test tests::import_write_refuses_existing_evidence_without_leaving_partial_manifest ... ok
+test tests::initialize_and_list_tools ... ok
+test tests::forced_import_write_rejects_workspace_symlinks_without_absolute_root_override ... ok
+test lookup::tests::validate_lookup_addresses_rejects_any_private_resolution ... ok
+test lookup::tests::unsafe_local_override_still_allows_mapped_private_addresses ... ok
+test tests::import_preview_reports_inferred_overlay_fallbacks ... ok
+test tests::message_framing_round_trips ... ok
+test tests::import_preview_tool_matches_core_report ... ok
+test tests::tools_require_initialized_notification ... ok
+test tests::unknown_method_returns_method_not_found_and_ping_still_works ... ok
+test tests::import_write_respects_force_flag ... ok
+test tests::lookup_tool_fetches_hosted_summary_trust_and_query ... ok
+test tests::lookup_tool_rejects_inconsistent_snapshots_identities_and_query_paths ... ok
+test tests::lookup_tool_retries_whole_lookup_when_a_deployment_advances ... ok
+test tests::write_import_output_refuses_to_clobber_existing_file_without_force ... ok
+test tests::query_tool_returns_trust_context ... ok
+test tests::validate_accepts_missing_repository_subdirectory ... ok
+test tests::validate_tool_rejects_absolute_root_without_opt_in ... ok
+test tests::validate_tool_returns_structured_diagnostics ... ok
+test tests::claim_inspect_tool_matches_core_report ... ok
+test tests::validate_tool_rejects_relative_root_escape ... ok
+test tests::maintainer_path_tools_match_core_reports ... ok
+
+test result: ok. 38 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.17s
+
+     Running unittests src/lib.rs (target/debug/deps/dotrepo_schema-e23c1467c63ce03a)
+
+running 5 tests
+test tests::synthesis_validation_rejects_oversized_and_empty_fields ... ok
+test tests::synthesis_document_round_trips_through_parse_and_render ... ok
+test tests::parse_manifest_lifts_legacy_top_level_trust ... ok
+test tests::parse_manifest_rejects_split_trust_sections ... ok
+test tests::scaffold_manifest_renders_parseable_manifest ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/dotrepo_transport-211764b7dd49fdb4)
+
+running 12 tests
+test tests::auto_read_handles_consecutive_newline_messages_and_blank_lines ... ok
+test tests::auto_read_accepts_final_unterminated_newline_message ... ok
+test tests::newline_framing_round_trips ... ok
+test tests::message_framing_round_trips ... ok
+test tests::read_jsonrpc_message_rejects_missing_content_length ... ok
+test tests::read_jsonrpc_message_rejects_invalid_content_length ... ok
+test tests::auto_read_detects_content_length_framing ... ok
+test tests::read_jsonrpc_message_rejects_oversized_content_length ... ok
+test tests::read_jsonrpc_message_rejects_truncated_body ... ok
+test tests::read_jsonrpc_message_rejects_oversized_header_line ... ok
+test tests::read_jsonrpc_message_rejects_truncated_headers ... ok
+test tests::auto_read_rejects_oversized_newline_message ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+   Doc-tests dotrepo_cli
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests dotrepo_core
+
+running 3 tests
+test crates/dotrepo-core/src/lib.rs - trust_repository (line 429) - compile ... ok
+test crates/dotrepo-core/src/lib.rs - query_repository (line 381) - compile ... ok
+test crates/dotrepo-core/src/validation.rs - validation::validate_repository (line 71) - compile ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.72s
+
+   Doc-tests dotrepo_crawler
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests dotrepo_schema
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests dotrepo_transport
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+{"command": ["cargo", "test", "--workspace"], "exitCode": 0, "seconds": 113.17686808411963}
+{"command": ["cargo", "check", "--locked", "--manifest-path", "crates/dotrepo/Cargo.toml"]}
+warning: patch `dotrepo-transport v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-transport)` was not used in the crate graph
+help: Check that the patched package version and available features are compatible
+      with the dependency requirements. If the patch has a different version from
+      what is locked in the Cargo.lock file, run `cargo update` to use the new
+      version. This may also occur with an optional dependency that is not enabled.
+    Checking dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)
+    Checking dotrepo-cli v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-cli)
+    Checking dotrepo v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.03s
+{"command": ["cargo", "check", "--locked", "--manifest-path", "crates/dotrepo/Cargo.toml"], "exitCode": 0, "seconds": 1.0856031249277294}

@@ -1,0 +1,33 @@
+ruff failed
+  Cause: Required version `>=0.17.3` does not match the running version `0.14.14`
+ruff failed
+  Cause: Required version `>=0.17.3` does not match the running version `0.14.14`
+[
+  {
+    "command": [
+      "uv",
+      "run",
+      "ruff",
+      "check",
+      "--force-exclude",
+      "--no-cache"
+    ],
+    "trackedPythonInputs": 327,
+    "exitCode": 2,
+    "seconds": 0.06140200002118945
+  },
+  {
+    "command": [
+      "uv",
+      "run",
+      "ruff",
+      "format",
+      "--check",
+      "--force-exclude",
+      "--no-cache"
+    ],
+    "trackedPythonInputs": 327,
+    "exitCode": 2,
+    "seconds": 0.024365958059206605
+  }
+]

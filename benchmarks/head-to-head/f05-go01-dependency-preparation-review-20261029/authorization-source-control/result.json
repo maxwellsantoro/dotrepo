@@ -1,0 +1,7 @@
+{
+  "case": "wrong-source-authorization",
+  "rejected": true,
+  "reason": "authorization binding mismatch",
+  "realDaemonNetworkProviderCalls": 0,
+  "note": "Tenth independent authorization control; parent nine did not separately mutate sourceArchiveSha256 despite README wording. Source-preflight/stream failures were in author controls. Parent remains unchanged."
+}

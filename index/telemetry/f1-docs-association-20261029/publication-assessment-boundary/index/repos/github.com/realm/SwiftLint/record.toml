@@ -1,0 +1,149 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/realm/SwiftLint"
+generated_at = "2026-10-27T18:15:27.41844Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+]
+notes = "Bootstrapped from `README.md` and `Makefile`. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Bounded F1 source inspection corrected docs.root association on 2026-10-29. Whole-record verification withdrawn; other fields and the original generated_at were not refreshed."
+
+[repo]
+name = "SwiftLint"
+description = "A tool to enforce Swift style and conventions."
+homepage = "https://realm.github.io/SwiftLint"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Swift",
+    "Starlark",
+    "Ruby",
+    "Makefile",
+    "Shell",
+    "Dockerfile",
+    "HTML",
+    "C",
+]
+build = "make all"
+test = "make test"
+topics = [
+    "linter",
+    "linting",
+    "swift",
+    "static-analysis",
+    "code-quality",
+    "hacktoberfest",
+]
+
+[docs]
+root = "https://realm.github.io/SwiftLint/index.html"
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/github/swift-style-guide"
+notes = "Cross-link from README: GitHub Swift Style Guide"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-10-27T18:15:27.41844Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-10-29T08:36:31.832479Z"
+confidence = "high"
+method = "source_inspection"
+reason = "Pinned README lines 482-487 identifies the old URL as MegaLinter aggregator integration setup, not the project documentation entrypoint. README lines 606-607 declares the SwiftLint Rule Directory; its retained HTTP200 page links index.html as the documentation header/breadcrumb, and the retained HTTP200 index identifies SwiftLintCore Docs, links realm/SwiftLint and renders the SwiftLint overview. The replacement resolves that declared navigation link exactly. Target pages are mutable observations; source-commit/version parity is not established."
+source = "https://github.com/realm/SwiftLint/blob/ec4691d9e813a1d3358e82917326b56b0a71d3c9/README.md"
+sourceRevision = "ec4691d9e813a1d3358e82917326b56b0a71d3c9"
+sourceSha256 = "b1490448cf43b1319e87686239617bc8dfe6f60b725ed9cb8f81b326d124c534"
+audit = "index/telemetry/f1-docs-association-20261029/assessments.json"
+disposition = "corrected-source-association"
+state = "present"
+valueJson = "\"https://realm.github.io/SwiftLint/index.html\""
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-10-27T18:15:27.41844Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-10-27T18:15:27.41844Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-10-27T18:15:27.41844Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "Makefile"
+state = "present"
+valueJson = '"make all"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-10-27T18:15:27.41844Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"A tool to enforce Swift style and conventions."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-10-27T18:15:27.41844Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://realm.github.io/SwiftLint"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-10-27T18:15:27.41844Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README title with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"SwiftLint"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-10-27T18:15:27.41844Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "Makefile"
+state = "present"
+valueJson = '"make test"'
+
+[x.github]
+archived = false
+clone_url = "https://github.com/realm/SwiftLint.git"
+default_branch = "main"
+fork = false
+head_sha = "ec4691d9e813a1d3358e82917326b56b0a71d3c9"
+html_url = "https://github.com/realm/SwiftLint"
+stars = 19777

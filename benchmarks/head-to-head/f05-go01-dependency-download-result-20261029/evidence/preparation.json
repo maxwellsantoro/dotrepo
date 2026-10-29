@@ -1,0 +1,28 @@
+{
+  "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+  "imageDigest": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+  "cacheArchiveSha256": "583fad501fa7b1a1a6d85ab8fe4b890786e39c1e016f785d6d3fb9d060383284",
+  "planSha256": "eceef38492e2b70a98c5984174e5ea8141effb3d0b3412dd788dc950e0eadfa3",
+  "scriptSha256": "132cc30c00be4f8a7de80646ee8f87b3fff5d945c99a8f63df7a80780144538b",
+  "scriptClosure": {
+    "boundaries.py": "7b03c7ab687043ab23061efde9d6328a21bb6ca94176085c87a50df8265de9e6",
+    "controls.py": "e879a36f0e6e2f81b6402496b4fed220c4af67ee42b6c7696e8c514b58a93394",
+    "io_controls.py": "1224404c3ae96d3b826306219b137b89d2eaa0f4abdb9f2b091cca2cd65d92ae",
+    "make_plan.py": "c6a5711d97a84a38a07a9705f823232a974bdf69264ce85b5f4e0475cb37242a",
+    "prepare.py": "132cc30c00be4f8a7de80646ee8f87b3fff5d945c99a8f63df7a80780144538b",
+    "process_io.py": "54fafcbeefb9c7516f65e4a1eae2959dd2934c9359b316ef2e0cf79fe0207ede",
+    "protected-digests.json": "3a2ac923c48b0c91c81f80176bcb4fbcfa054afd912dbdb96af2ba5159cb518f"
+  },
+  "traceSha256": "c8cdfdd37c07dcaf63dd148ebeb4884fd90e5083f82084a5bf23215d40b46182",
+  "preparationCostUsd": null,
+  "costExclusions": [
+    "No metered host/container/download dollar receipt."
+  ],
+  "downloadOnly": false,
+  "buildOutputsExcluded": false,
+  "taskSourceExcluded": false,
+  "credentialsExcluded": false,
+  "state": "draft-unqualified; independent audit and explicit acceptance required",
+  "synthetic": false
+}

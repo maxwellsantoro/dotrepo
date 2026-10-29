@@ -1,0 +1,20 @@
+{
+  "identity": "e1-zellij-establishment-source-20261029",
+  "date": "2026-10-29",
+  "repository": "zellij-org/zellij",
+  "revision": "1f3df933978e00c246553070310175c392fcfe4f",
+  "taskId": "e1-rust-01-repository-tests",
+  "commandUnchanged": "cargo xtask test",
+  "declarationFreezeSha256": "30ec0c82bb9ea9c3f9f6113016ad126ce2a325963b68a591e94ff88d1d22850f",
+  "artifactManifestSha256": "a6033e238227e7728089d2f75548dd53abfd8acd2d782a348472c806696dab40",
+  "artifacts": 14,
+  "readOnlySourceRequests": 2,
+  "newSourceFiles": 2,
+  "sourceBytes": 14942,
+  "completeInstructionPromotion": false,
+  "indexWrites": false,
+  "codeOrProtocolChanges": false,
+  "upstreamExecution": false,
+  "furtherAcquisitionProposed": false,
+  "nextGate": "Root independent exact-applicability/source-completeness disposition"
+}

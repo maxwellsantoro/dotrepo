@@ -1,0 +1,84 @@
+[
+  {
+    "command": [
+      "cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exitCode": 0,
+    "seconds": 0.6943900419864804
+  },
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "--workspace",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exitCode": 0,
+    "seconds": 11.036434709094465
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--workspace"
+    ],
+    "exitCode": 0,
+    "seconds": 119.49806020804681
+  },
+  {
+    "command": [
+      "cargo",
+      "check",
+      "--locked",
+      "--manifest-path",
+      "crates/dotrepo/Cargo.toml"
+    ],
+    "exitCode": 0,
+    "seconds": 1.0354877500794828
+  },
+  {
+    "command": [
+      "cargo",
+      "run",
+      "-p",
+      "dotrepo-cli",
+      "--",
+      "validate-index",
+      "--index-root",
+      "index"
+    ],
+    "exitCode": 0,
+    "seconds": 1.1975244581699371
+  },
+  {
+    "command": [
+      "uv",
+      "run",
+      "python",
+      "scripts/check_release_gate.py",
+      "--output-root",
+      "/tmp/dotrepo-docs-context-release-gate-20261029"
+    ],
+    "exitCode": 0,
+    "seconds": 64.49990750011057
+  },
+  {
+    "command": [
+      "uv",
+      "run",
+      "python",
+      "scripts/check_operator_claim_gate.py",
+      "--output-root",
+      "/tmp/dotrepo-docs-context-operator-gate-20261029"
+    ],
+    "exitCode": 0,
+    "seconds": 9.295903875026852
+  }
+]

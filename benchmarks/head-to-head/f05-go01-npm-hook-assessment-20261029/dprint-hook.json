@@ -1,0 +1,13 @@
+{
+  "executionOccurred": false,
+  "members": {
+    "package/install.cjs": {
+      "bytes": 197,
+      "sha256": "30c93a4ac2fbb7e35b01c6322c1d64941b847d61ee510ef2ed43962a491a79d8",
+      "text": "// @ts-check\n\"use strict\";\n\nconst api = require(\"./install_api.cjs\");\nconst exePath = api.runInstall();\ntry {\n  api.replaceBinEntry(exePath);\n} catch (_err) {\n  // ignore - falls back to bin.cjs\n}\n"
+    }
+  },
+  "packageLockPath": "node_modules/dprint",
+  "tarballSha256": "557f7a8bee7e462f95b22677ca76eb2ff7f6ede8ad0043b48a063a785b24101c",
+  "version": "0.57.4"
+}

@@ -1,0 +1,72 @@
+[
+  {
+    "name": "existing-parsing-final",
+    "command": [
+      "cargo",
+      "test",
+      "-p",
+      "dotrepo-core",
+      "--lib",
+      "import_parsing"
+    ],
+    "elapsedSeconds": 0.15841233381070197,
+    "exitCode": 0,
+    "log": "checks/existing-parsing-final.log"
+  },
+  {
+    "name": "fixture-gate-final",
+    "command": [
+      "cargo",
+      "test",
+      "-p",
+      "dotrepo-core",
+      "--test",
+      "import_quality_gate"
+    ],
+    "elapsedSeconds": 3.4037625829223543,
+    "exitCode": 0,
+    "log": "checks/fixture-gate-final.log"
+  },
+  {
+    "name": "clippy-final",
+    "command": [
+      "cargo",
+      "clippy",
+      "-p",
+      "dotrepo-core",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "elapsedSeconds": 6.002127791987732,
+    "exitCode": 0,
+    "log": "checks/clippy-final.log"
+  },
+  {
+    "name": "fmt-final",
+    "command": [
+      "rustfmt",
+      "--edition",
+      "2021",
+      "--check",
+      "crates/dotrepo-core/src/import/parsing/markdown.rs",
+      "crates/dotrepo-core/src/import/parsing/markdown/docs_tests.rs"
+    ],
+    "elapsedSeconds": 0.06557679106481373,
+    "exitCode": 0,
+    "log": "checks/fmt-final.log"
+  },
+  {
+    "name": "cli-build-final",
+    "command": [
+      "cargo",
+      "build",
+      "-p",
+      "dotrepo-cli"
+    ],
+    "elapsedSeconds": 2.8185398341156542,
+    "exitCode": 0,
+    "log": "checks/cli-build-final.log"
+  }
+]

@@ -1,0 +1,26 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-go01-download-fc0698f62c78",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "cd /workspace/repository; npm ci --ignore-scripts & download_pid=$!; while kill -0 \"$download_pid\" 2>/dev/null; do size=$(du -sb /workspace/dependency-cache); size=${size%%[!0-9]*}; if [ \"$size\" -gt 1073741824 ]; then kill \"$download_pid\" 2>/dev/null || true; echo \"cache-expanded-limit\" >&2; exit 73; fi; sleep 0.25; done; wait \"$download_pid\""
+  ],
+  "startedAt": "2026-10-29T08:55:17.662617+00:00",
+  "elapsedSeconds": 7.486714708153158,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "df050b5cb93078b5d443f6d3dfbcfd51b0d16e8e840dd012588cbd7163ff4da9",
+  "stderrSha256": "66b052a3fb08c0a91f1da0c77bc87888b8271466430e294241b2b89e8fa91dd4",
+  "binaryPath": null,
+  "binaryBytes": null,
+  "binarySha256": null,
+  "costUsd": null,
+  "costExclusions": [
+    "No metered host/container/download dollar receipt; no provider calls."
+  ]
+}

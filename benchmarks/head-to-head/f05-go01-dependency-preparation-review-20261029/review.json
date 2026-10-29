@@ -1,0 +1,19 @@
+{
+  "authorFreezeSha256": "e3e5a7dee8eef95a7232d3721283ddadd3224f0c315a0f08e2400b06f327ccdc",
+  "authorArtifactsVerified": 20,
+  "authorControlsReplayed": 32,
+  "ownedUvTransportControlsReplayed": 7,
+  "sourcePreflight": {
+    "files": 68062,
+    "expandedBytes": 218783760,
+    "protectedDigests": 125,
+    "seconds": 2.4203527909703553,
+    "daemonCalls": 0
+  },
+  "independentAuthorizationControls": 9,
+  "firstControlFailure": "Root fixture used /tmp rather than resolved /private/tmp. Existing checker correctly rejected it; no production change. Retained first-review-failure.log.",
+  "actualPreparationOccurred": false,
+  "nativeCollectionOccurred": false,
+  "realDaemonNetworkProviderCalls": 0,
+  "blockingFindings": []
+}

@@ -1,0 +1,39 @@
+{
+  "checks": [
+    {
+      "identity": "github.com/realm/SwiftLint",
+      "field": "docs.root",
+      "publicDocsKey": "root",
+      "storedValue": "https://realm.github.io/SwiftLint/index.html",
+      "storedCheckedAt": "2026-10-29T08:36:31.832479Z",
+      "preservedRecordGeneratedAt": "2026-10-27T18:15:27.41844Z",
+      "publishedFactMatches": true,
+      "publishedAssessmentPresent": false,
+      "otherPublishedAssessmentCount": 8,
+      "recordStatus": "imported",
+      "recordDatePreserved": true
+    },
+    {
+      "identity": "github.com/minio/minio",
+      "field": "docs.getting_started",
+      "publicDocsKey": "gettingStarted",
+      "storedValue": "https://github.com/minio/minio/blob/7aac2a2c5b7c882e68c1ce017d8256be2feea27f/README.md#install-from-source",
+      "storedCheckedAt": "2026-10-29T08:36:31.832479Z",
+      "preservedRecordGeneratedAt": "2026-10-04T07:53:35.951591156Z",
+      "publishedFactMatches": true,
+      "publishedAssessmentPresent": false,
+      "otherPublishedAssessmentCount": 8,
+      "recordStatus": "imported",
+      "recordDatePreserved": true
+    }
+  ],
+  "allPassed": true,
+  "initialVerifierError": "Initial comparison used getting_started for public docs key; public shape is gettingStarted. Corrected observation without rerunning export or changing records.",
+  "scope": "two corrected record copies, existing CLI local public export; no network or live public regeneration",
+  "sourceContract": {
+    "path": "crates/dotrepo-core/src/public/evidence.rs",
+    "sha256": "db49e21717811968262ead84b439c9aad4fd5af61600ba14a9ef3daeda6d3cf4",
+    "lines": "48-54"
+  },
+  "exportOutputRetention": "all output digests retained; two profiles retained verbatim; other generated outputs removed after observation"
+}

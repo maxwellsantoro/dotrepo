@@ -1,0 +1,30 @@
+{
+  "priorFreezes": [
+    {
+      "freeze": "index/telemetry/f1-docs-association-20261029/FREEZE.json",
+      "sha256": "2a4b40f7e5cfc35d796fe6e2f0d15a9ecaf40aa80ffd20cabc4d13190aa2f3ed",
+      "files": 47,
+      "unchanged": true
+    },
+    {
+      "freeze": "index/telemetry/f1-docs-association-20261029/publication-assessment-boundary/FREEZE.json",
+      "sha256": "15abf34686425c4555ff6345e2826220ff0f2493fcd19bdead222f844c6b9733",
+      "files": 13,
+      "unchanged": true
+    },
+    {
+      "freeze": "index/telemetry/f1-docs-association-20261029/parser-repair/FREEZE.json",
+      "sha256": "a0c96b5567d7d054162994d4c4645f8bb90a9af2b7bf8abca976aa0e9b5a3bab",
+      "files": 33,
+      "unchanged": true
+    },
+    {
+      "freeze": "index/telemetry/f1-docs-association-review-20261029/parser-amendment/BEFORE.json",
+      "sha256": "da3832db715ec2d9cb356dcdf98f4708b895c3bd3a931413e0a49095af1554ca",
+      "files": 7,
+      "unchanged": true
+    }
+  ],
+  "liveRecordsMatchOriginalFrozenAfter": true,
+  "currentSourceBindingsMatch": true
+}

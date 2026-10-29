@@ -1,0 +1,65 @@
+[
+  {
+    "case": "valid-resolved-paths",
+    "accepted": true,
+    "reason": null,
+    "passed": true,
+    "liveActions": 0
+  },
+  {
+    "case": "unresolved-tmp-alias",
+    "accepted": false,
+    "reason": "authorization must bind unique output/scratch identities",
+    "passed": true,
+    "liveActions": 0
+  },
+  {
+    "case": "wrong-output",
+    "accepted": false,
+    "reason": "authorization must bind unique output/scratch identities",
+    "passed": true,
+    "liveActions": 0
+  },
+  {
+    "case": "wrong-scratch",
+    "accepted": false,
+    "reason": "authorization must bind unique output/scratch identities",
+    "passed": true,
+    "liveActions": 0
+  },
+  {
+    "case": "boolean-attempt",
+    "accepted": false,
+    "reason": "authorization conditions differ",
+    "passed": true,
+    "liveActions": 0
+  },
+  {
+    "case": "synthetic",
+    "accepted": false,
+    "reason": "synthetic/missing authorization is not live authorization",
+    "passed": true,
+    "liveActions": 0
+  },
+  {
+    "case": "wrong-image",
+    "accepted": false,
+    "reason": "authorization binding mismatch",
+    "passed": true,
+    "liveActions": 0
+  },
+  {
+    "case": "wrong-plan",
+    "accepted": false,
+    "reason": "authorization binding mismatch",
+    "passed": true,
+    "liveActions": 0
+  },
+  {
+    "case": "float-bound",
+    "accepted": false,
+    "reason": "noninteger authorization bounds",
+    "passed": true,
+    "liveActions": 0
+  }
+]

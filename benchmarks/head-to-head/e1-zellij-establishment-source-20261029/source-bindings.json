@@ -1,0 +1,30 @@
+{
+  "requests": 2,
+  "sources": [
+    {
+      "upstreamPath": "xtask/src/flags.rs",
+      "retainedPath": "sources/xtask/src/flags.rs.txt",
+      "bytes": 7486,
+      "sha256": "ab0542ae1bad28ee9f56386868e2f1a8eda897c1dc05e0425b8d0933ca3abf78",
+      "gitBlobSha1": "1836c0256e6c6c888ed869fbd7c6d068a504a91d",
+      "requestPath": "requests/01.json",
+      "requestSha256": "8a83a159765a5720b8a1074eac8e16c1ad23633c1f60e4e01a72d886b66c7a9d",
+      "url": "https://github.com/zellij-org/zellij/blob/1f3df933978e00c246553070310175c392fcfe4f/xtask/src/flags.rs",
+      "requestedCommit": "1f3df933978e00c246553070310175c392fcfe4f"
+    },
+    {
+      "upstreamPath": "xtask/src/metadata.rs",
+      "retainedPath": "sources/xtask/src/metadata.rs.txt",
+      "bytes": 7456,
+      "sha256": "861f4974828c70422a0098676cddab2f3446e5c84241297270d8d9766e998154",
+      "gitBlobSha1": "84add9e274628ae4868315a48ab0a2c4fb5b64aa",
+      "requestPath": "requests/02.json",
+      "requestSha256": "d2960991d698ef9f933c08834eed150bb009e9d976665199f85adddaf0e60368",
+      "url": "https://github.com/zellij-org/zellij/blob/1f3df933978e00c246553070310175c392fcfe4f/xtask/src/metadata.rs",
+      "requestedCommit": "1f3df933978e00c246553070310175c392fcfe4f"
+    }
+  ],
+  "newSourceBytes": 14942,
+  "allReturnedGitBlobIdsMatched": true,
+  "commitEvidence": "Explicit exact-ref requests and returned immutable URLs; no new full tree acquisition or commit signature proof."
+}

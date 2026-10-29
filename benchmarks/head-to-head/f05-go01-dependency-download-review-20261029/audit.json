@@ -1,0 +1,3785 @@
+{
+  "state": "static-audit-observations-not-admission",
+  "artifactBindings": 92,
+  "receiptBindings": 26,
+  "image": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "cacheSha256": "583fad501fa7b1a1a6d85ab8fe4b890786e39c1e016f785d6d3fb9d060383284",
+  "stats": {
+    "outerExpandedBytes": 351962210,
+    "outerFiles": 15246,
+    "notCanonicalJson": 41193,
+    "canonicalJsonParsed": 5888,
+    "emptyProtectedAliases": 197,
+    "canonicalJsonSizeExcluded": 3,
+    "nestedFiles": 31838,
+    "nestedExpandedBytes": 499680412
+  },
+  "protectedDigestCount": 125,
+  "nonemptyProtectedMatches": [],
+  "exactSourceOverlaps": [
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/LICENSE",
+      "bytes": 9197,
+      "sha256": "a7d00bfd54525bc694b6e32f64c7ebcf5e6b7ae3657be5cc12767bce74654a47",
+      "sourcePathCount": 5,
+      "sourcePaths": [
+        "LICENSE.txt",
+        "packages/vscode-typescript-nightly/LICENSE",
+        "packages/vscode-typescript/LICENSE",
+        "tools/LICENSE",
+        "tsc/LICENSE"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.d.ts",
+      "bytes": 953,
+      "sha256": "0e6477e5049e579cc5de741a70ac91235252edc0468b2e569f22de9db3357786",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.decorators.legacy.d.ts",
+      "bytes": 1287,
+      "sha256": "b3a048b3e9302ef9a34ef4ebb9aecfb28b66abb3bce577206a79fee559c230da",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.decorators.legacy.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.dom.asynciterable.d.ts",
+      "bytes": 933,
+      "sha256": "7f57fc4404ff020bc45b9c620aff2b40f700b95fe31164024c453a5e3c163c54",
+      "sourcePathCount": 4,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.dom.asynciterable.d.ts",
+        "tsc/internal/bundled/libs/lib.dom.iterable.d.ts",
+        "tsc/internal/bundled/libs/lib.webworker.asynciterable.d.ts",
+        "tsc/internal/bundled/libs/lib.webworker.iterable.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.dom.iterable.d.ts",
+      "bytes": 933,
+      "sha256": "7f57fc4404ff020bc45b9c620aff2b40f700b95fe31164024c453a5e3c163c54",
+      "sourcePathCount": 4,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.dom.asynciterable.d.ts",
+        "tsc/internal/bundled/libs/lib.dom.iterable.d.ts",
+        "tsc/internal/bundled/libs/lib.webworker.asynciterable.d.ts",
+        "tsc/internal/bundled/libs/lib.webworker.iterable.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2015.collection.d.ts",
+      "bytes": 5627,
+      "sha256": "f0b6b1d3624fb143656dd86a8dd3e1950b7e65f218319b47bde52f65d47e2e4b",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2015.collection.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2015.core.d.ts",
+      "bytes": 22821,
+      "sha256": "770011bd32a52f929fc98fbf9976c1fa9d80b6445171c02b08627fdba9778933",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2015.core.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2015.d.ts",
+      "bytes": 1202,
+      "sha256": "3f88bedbeb09c6f5a6645cb24c7c55f1aa22d19ae96c8e6959cbd8b85a707bc6",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2015.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2015.generator.d.ts",
+      "bytes": 2518,
+      "sha256": "00343ca5b2e3d48fa5df1db6e32ea2a59afab09590274a6cccb1dbae82e60c7c",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2015.generator.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2015.iterable.d.ts",
+      "bytes": 18185,
+      "sha256": "ebd9f816d4002697cb2864bea1f0b70a103124e18a8cd9645eeccc09bdf80ab4",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2015.iterable.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2015.promise.d.ts",
+      "bytes": 3161,
+      "sha256": "2c1afac30a01772cd2a9a298a7ce7706b5892e447bb46bdbeef720f7b5da77ad",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2015.promise.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2015.proxy.d.ts",
+      "bytes": 5212,
+      "sha256": "7b0225f483e4fa685625ebe43dd584bb7973bbd84e66a6ba7bbe175ee1048b4f",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2015.proxy.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2015.reflect.d.ts",
+      "bytes": 6454,
+      "sha256": "c0a4b8ac6ce74679c1da2b3795296f5896e31c38e888469a8e0f99dc3305de60",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2015.reflect.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2015.symbol.d.ts",
+      "bytes": 1608,
+      "sha256": "83e3871cda2abd4421970fa923cca51a9ce8cdbece6f898285643ab030cb80f3",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2015.symbol.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2015.symbol.wellknown.d.ts",
+      "bytes": 10971,
+      "sha256": "c5079c53f0f141a0698faa903e76cb41cd664e3efb01cc17a5c46ec2eb0bef42",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2015.symbol.wellknown.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2016.array.include.d.ts",
+      "bytes": 5165,
+      "sha256": "32cafbc484dea6b0ab62cf8473182bbcb23020d70845b406f80b7526f38ae862",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2016.array.include.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2016.d.ts",
+      "bytes": 926,
+      "sha256": "7fe93b39b810eadd916be8db880dd7f0f7012a5cc6ffb62de8f62a2117fa6f1f",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2016.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2016.full.d.ts",
+      "bytes": 993,
+      "sha256": "19adadff5144f8f89fef0a10b299d7a96206f4913d4c17d4864171320e9edbd6",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2016.full.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2016.intl.d.ts",
+      "bytes": 1445,
+      "sha256": "fca4cdcb6d6c5ef18a869003d02c9f0fd95df8cfaf6eb431cd3376bc034cad36",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2016.intl.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2017.arraybuffer.d.ts",
+      "bytes": 876,
+      "sha256": "b93ec88115de9a9dc1b602291b85baf825c85666bf25985cc5f698073892b467",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2017.arraybuffer.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2017.d.ts",
+      "bytes": 1123,
+      "sha256": "bb0074cc08b84a2374af33d8bf044b80851ccc9e719a5e202eacf40db2c31600",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2017.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2017.date.d.ts",
+      "bytes": 1877,
+      "sha256": "f5c06dcc3fe849fcb297c247865a161f995cc29de7aa823afdd75aaaddc1419b",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2017.date.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2017.full.d.ts",
+      "bytes": 993,
+      "sha256": "83635f912d414d0c5a855fba3e18418e9db7e73c2e0e170009c48275cc8c1a36",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2017.full.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2017.intl.d.ts",
+      "bytes": 1410,
+      "sha256": "c7b3542146734342e440a84b213384bfa188835537ddbda50d30766f0593aff9",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2017.intl.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2017.object.d.ts",
+      "bytes": 2434,
+      "sha256": "b77e16112127a4b169ef0b8c3a4d730edf459c5f25fe52d5e436a6919206c4d7",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2017.object.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2017.sharedmemory.d.ts",
+      "bytes": 7170,
+      "sha256": "fbffd9337146eff822c7c00acbb78b01ea7ea23987f6c961eba689349e744f8c",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2017.sharedmemory.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2017.string.d.ts",
+      "bytes": 2540,
+      "sha256": "6aaeba1e4f228fda4e9175e34d96807e2c6dc984d0b37a772b3af9365a456681",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2017.string.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2017.typedarrays.d.ts",
+      "bytes": 1503,
+      "sha256": "ce6180fa19b1cccd07ee7f7dbb9a367ac19c0ed160573e4686425060b6df7f57",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2017.typedarrays.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2018.asyncgenerator.d.ts",
+      "bytes": 2653,
+      "sha256": "3f02e2476bccb9dbe21280d6090f0df17d2f66b74711489415a8aa4df73c9675",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2018.asyncgenerator.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2018.asynciterable.d.ts",
+      "bytes": 2218,
+      "sha256": "45e3ab34c1c013c8ab2dc1ba4c80c780744b13b5676800ae2e3be27ae862c40c",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2018.asynciterable.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2018.d.ts",
+      "bytes": 1049,
+      "sha256": "1a7daebe4f45fb03d9ec53d60008fbf9ac45a697fdc89e4ce218bc94b94f94d6",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2018.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2018.full.d.ts",
+      "bytes": 1035,
+      "sha256": "63787dbe04141f5d3ebce2e08b64bc9bba589beb0a4d22e7994d3005af1e48a6",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2018.full.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2018.promise.d.ts",
+      "bytes": 1314,
+      "sha256": "e42e397f1a5a77994f0185fd1466520691456c772d06bf843e5084ceb879a0ad",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2018.promise.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2018.regexp.d.ts",
+      "bytes": 1193,
+      "sha256": "f4c2b41f90c95b1c532ecc874bd3c111865793b23aebcc1c3cbbabcd5d76ffb0",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2018.regexp.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2019.array.d.ts",
+      "bytes": 3124,
+      "sha256": "ab26191cfad5b66afa11b8bf935ef1cd88fabfcb28d30b2dfa6fad877d050332",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2019.array.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2019.d.ts",
+      "bytes": 1032,
+      "sha256": "f94b133a3cb14a288803be545ac2683e0d0ff6661bcd37e31aaaec54fc382aed",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2019.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2019.full.d.ts",
+      "bytes": 1035,
+      "sha256": "e3de8409485b0c198a5a075bd4a1d06d8f42dc52b377709d33b131b97de56456",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2019.full.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2019.intl.d.ts",
+      "bytes": 919,
+      "sha256": "689da16f46e647cef0d64b0def88910e818a5877ca5379ede156ca3afb780ac3",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2019.intl.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2019.object.d.ts",
+      "bytes": 1434,
+      "sha256": "2088bc26531e38fb05eedac2951480db5309f6be3fa4a08d2221abb0f5b4200d",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2019.object.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2019.string.d.ts",
+      "bytes": 1489,
+      "sha256": "cb9d366c425fea79716a8fb3af0d78e6b22ebbab3bd64d25063b42dc9f531c1e",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2019.string.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2019.symbol.d.ts",
+      "bytes": 967,
+      "sha256": "500934a8089c26d57ebdb688fc9757389bb6207a3c8f0674d68efa900d2abb34",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2019.symbol.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2020.bigint.d.ts",
+      "bytes": 38258,
+      "sha256": "bc21cc8b6fee4f4c2440d08035b7ea3c06b3511314c8bab6bef7a92de58a2593",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2020.bigint.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2020.d.ts",
+      "bytes": 1162,
+      "sha256": "f59d0650799f8782fd74cf73c19223730c6d1b9198671b1c5b3a38e1188b5953",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2020.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2020.date.d.ts",
+      "bytes": 2917,
+      "sha256": "7ca53d13d2957003abb47922a71866ba7cb2068f8d154877c596d63c359fed25",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2020.date.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2020.full.d.ts",
+      "bytes": 1035,
+      "sha256": "577cc49be1979782a5a695b46049566d123e2a75382f10bb82f2e5c87e29059a",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2020.full.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2020.number.d.ts",
+      "bytes": 1548,
+      "sha256": "b7bf9377723203b5a6a4b920164df22d56a43f593269ba6ae1fdc97774b68855",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2020.number.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2020.promise.d.ts",
+      "bytes": 1764,
+      "sha256": "54725f8c4df3d900cb4dac84b64689ce29548da0b4e9b7c2de61d41c79293611",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2020.promise.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2020.sharedmemory.d.ts",
+      "bytes": 5089,
+      "sha256": "e5594bc3076ac29e6c1ebda77939bc4c8833de72f654b6e376862c0473199323",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2020.sharedmemory.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2020.string.d.ts",
+      "bytes": 2451,
+      "sha256": "2f3eb332c2d73e729f3364fcc0c2b375e72a121e8157d25a82d67a138c83a95c",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2020.string.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2020.symbol.wellknown.d.ts",
+      "bytes": 1566,
+      "sha256": "6f4427f9642ce8d500970e4e69d1397f64072ab73b97e476b4002a646ac743b1",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2020.symbol.wellknown.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2021.d.ts",
+      "bytes": 997,
+      "sha256": "8a15b4607d9a499e2dbeed9ec0d3c0d7372c850b2d5f1fb259e8f6d41d468a84",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2021.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2021.full.d.ts",
+      "bytes": 1035,
+      "sha256": "e4a70ead7fea07d9abe520cc9e30c04ac035ebceaab28f9e67211610006c65de",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2021.full.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2021.intl.d.ts",
+      "bytes": 8206,
+      "sha256": "a917a49ac94cd26b754ab84e113369a75d1a47a710661d7cd25e961cc797065f",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2021.intl.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2021.promise.d.ts",
+      "bytes": 2223,
+      "sha256": "db9709688f82c9e5f65a119c64d835f906efe5f559d08b11642d56eb85b79357",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2021.promise.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2021.string.d.ts",
+      "bytes": 1553,
+      "sha256": "4b25b8c874acd1a4cf8444c3617e037d444d19080ac9f634b405583fd10ce1f7",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2021.string.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2021.weakref.d.ts",
+      "bytes": 3132,
+      "sha256": "37be57d7c90cf1f8112ee2636a068d8fd181289f82b744160ec56a7dc158a9f5",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2021.weakref.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2022.d.ts",
+      "bytes": 1069,
+      "sha256": "26e0fe14baee4e127f4365d1ae0b276f400562e45e19e35fd2d4c296684715e6",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2022.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2022.error.d.ts",
+      "bytes": 2340,
+      "sha256": "195daca651dde22f2167ac0d0a05e215308119a3100f5e6268e8317d05a92526",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2022.error.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2022.full.d.ts",
+      "bytes": 1035,
+      "sha256": "01a30f9e8582b369075c0808df71121e6855cb06fd8d3d39511d9ebb66405205",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2022.full.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2022.intl.d.ts",
+      "bytes": 7653,
+      "sha256": "8b11e4285cd2bb164a4dc09248bdec69e9842517db4ca47c1ba913011e44ff2f",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2022.intl.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2022.object.d.ts",
+      "bytes": 1046,
+      "sha256": "0508571a52475e245b02bc50fa1394065a0a3d05277fbf5120c3784b85651799",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2022.object.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2022.regexp.d.ts",
+      "bytes": 1304,
+      "sha256": "fc611fea8d30ea72c6bbfb599c9b4d393ce22e2f5bfef2172534781e7d138104",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2022.regexp.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2022.string.d.ts",
+      "bytes": 1116,
+      "sha256": "8f9af488f510c3015af3cc8c267a9e9d96c4dd38a1fdff0e11dc5a544711415b",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2022.string.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2023.array.d.ts",
+      "bytes": 40197,
+      "sha256": "0bd714129fca875f7d4c477a1a392200b0bcd13fb2e80928cd334b63830ea047",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2023.array.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2023.collection.d.ts",
+      "bytes": 861,
+      "sha256": "e2c9037ae6cd2c52d80ceef0b3c5ffdb488627d71529cf4f63776daf11161c9a",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2023.collection.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2023.d.ts",
+      "bytes": 960,
+      "sha256": "1e9332c23e9a907175e0ffc6a49e236f97b48838cc8aec9ce7e4cec21e544b65",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2023.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2023.full.d.ts",
+      "bytes": 1035,
+      "sha256": "821bd6049b8f96b9d24c9fbc49b542dcf7a80d76f9efb330b5ef32c373af83d4",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2023.full.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2024.arraybuffer.d.ts",
+      "bytes": 2598,
+      "sha256": "bc238c3f81c2984751932b6aab223cd5b830e0ac6cad76389e5e9d2ffc03287d",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2024.arraybuffer.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2024.collection.d.ts",
+      "bytes": 1185,
+      "sha256": "4a07f9b76d361f572620927e5735b77d6d2101c23cdd94383eb5b706e7b36357",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2024.collection.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2024.d.ts",
+      "bytes": 1127,
+      "sha256": "3753fbc1113dc511214802a2342280a8b284ab9094f6420e7aa171e868679f91",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2024.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2024.full.d.ts",
+      "bytes": 1035,
+      "sha256": "b9f65879de79a7647ad2e5b8089277c215911fa99d4b858d78014df6ba2852f3",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2024.full.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2024.object.d.ts",
+      "bytes": 1220,
+      "sha256": "7c4e8dc6ab834cc6baa0227e030606d29e3e8449a9f67cdf5605ea5493c4db29",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2024.object.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2024.promise.d.ts",
+      "bytes": 1350,
+      "sha256": "de7ba0fd02e06cd9a5bd4ab441ed0e122735786e67dde1e849cced1cd8b46b78",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2024.promise.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2024.regexp.d.ts",
+      "bytes": 1034,
+      "sha256": "6148e4e88d720a06855071c3db02069434142a8332cf9c182cda551adedf3156",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2024.regexp.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2024.sharedmemory.d.ts",
+      "bytes": 3038,
+      "sha256": "d63dba625b108316a40c95a4425f8d4294e0deeccfd6c7e59d819efa19e23409",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2024.sharedmemory.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2024.string.d.ts",
+      "bytes": 1155,
+      "sha256": "0568d6befee03dd435bed4fc25c4e46865b24bdcb8c563fdc21f580a2c301904",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2024.string.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2025.collection.d.ts",
+      "bytes": 3839,
+      "sha256": "30d62269b05b584741f19a5369852d5d34895aa2ac4fd948956f886d15f9cc0d",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2025.collection.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2025.d.ts",
+      "bytes": 1079,
+      "sha256": "999ca32883495a866aa5737fe1babc764a469e4cde6ee6b136a4b9ae68853e4b",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2025.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2025.float16.d.ts",
+      "bytes": 20489,
+      "sha256": "f128dae7c44d8f35ee42e0a437000a57c9f06cc04f8b4fb42eebf44954d53dc8",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2025.float16.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2025.full.d.ts",
+      "bytes": 1035,
+      "sha256": "e03da518b01b46a4c99a1f88cd727ee98ddf14492c43dae1ae7a63e992971bab",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2025.full.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2025.intl.d.ts",
+      "bytes": 9390,
+      "sha256": "ffbe6d7b295306b2ba88030f65b74c107d8d99bdcf596ea99c62a02f606108b0",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2025.intl.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2025.iterator.d.ts",
+      "bytes": 8637,
+      "sha256": "996fb27b15277369c68a4ba46ed138b4e9e839a02fb4ec756f7997629242fd9f",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2025.iterator.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2025.promise.d.ts",
+      "bytes": 1619,
+      "sha256": "79b712591b270d4778c89706ca2cfc56ddb8c3f895840e477388f1710dc5eda9",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2025.promise.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es2025.regexp.d.ts",
+      "bytes": 1255,
+      "sha256": "20884846cef428b992b9bd032e70a4ef88e349263f63aeddf04dda837a7dba26",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2025.regexp.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.es6.d.ts",
+      "bytes": 993,
+      "sha256": "174a0fa01bb60bcb80e09b0b7bdcdddf688891433d6030244df5b44eb9ebd210",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es6.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.esnext.collection.d.ts",
+      "bytes": 2598,
+      "sha256": "db59a81f070c1880ad645b2c0275022baa6a0c4f0acdc58d29d349c6efcf0903",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2026.collection.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.esnext.date.d.ts",
+      "bytes": 917,
+      "sha256": "673294292640f5722b700e7d814e17aaf7d93f83a48a2c9b38f33cbc940ad8b0",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.esnext.date.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.esnext.decorators.d.ts",
+      "bytes": 1031,
+      "sha256": "d786b48f934cbca483b3c6d0a798cb43bbb4ada283e76fb22c28e53ae05b9e69",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.esnext.decorators.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.esnext.disposable.d.ts",
+      "bytes": 6767,
+      "sha256": "1ecb8e347cb6b2a8927c09b86263663289418df375f5e68e11a0ae683776978f",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.esnext.disposable.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.esnext.error.d.ts",
+      "bytes": 990,
+      "sha256": "142efd4ce210576f777dc34df121777be89eda476942d6d6663b03dcb53be3ff",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2026.error.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.esnext.full.d.ts",
+      "bytes": 1035,
+      "sha256": "ef4a897cd2a3f91000c10264e400b3667c7e51e1b7365f03b62e8081dc53bde6",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.esnext.full.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.esnext.intl.d.ts",
+      "bytes": 5305,
+      "sha256": "379bc41580c2d774f82e828c70308f24a005b490c25ba34d679d84bcf05c3d9d",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.esnext.intl.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.esnext.sharedmemory.d.ts",
+      "bytes": 1028,
+      "sha256": "ed484fb2aa8a1a23d0277056ec3336e0a0b52f9b8d6a961f338a642faf43235d",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.esnext.sharedmemory.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.esnext.temporal.d.ts",
+      "bytes": 22011,
+      "sha256": "4ffedae1d1c2d53fdbca1c96d3c7dda544281f7d262f99b6880634f8fd8d9820",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.esnext.temporal.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.esnext.typedarrays.d.ts",
+      "bytes": 3350,
+      "sha256": "83a730b125d477dd264df8ba479afab27a3dae7152b005c214ab94dc7ee44fd3",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2026.typedarrays.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.scripthost.d.ts",
+      "bytes": 9412,
+      "sha256": "f13f4b465c99041e912db5c44129a94588e1aafee35a50eab51044833f50b4ee",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.scripthost.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.webworker.asynciterable.d.ts",
+      "bytes": 933,
+      "sha256": "7f57fc4404ff020bc45b9c620aff2b40f700b95fe31164024c453a5e3c163c54",
+      "sourcePathCount": 4,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.dom.asynciterable.d.ts",
+        "tsc/internal/bundled/libs/lib.dom.iterable.d.ts",
+        "tsc/internal/bundled/libs/lib.webworker.asynciterable.d.ts",
+        "tsc/internal/bundled/libs/lib.webworker.iterable.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.webworker.importscripts.d.ts",
+      "bytes": 1002,
+      "sha256": "2a2de5b9459b3fc44decd9ce6100b72f1b002ef523126c1d3d8b2a4a63d74d78",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.webworker.importscripts.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/42/1e/1e538ff2df20e39df8e3c8f62284c8f9fce0c8966b7e073bb5ece23e7e24910d6e7b4265394a237addec4f44d24f294cdc73520d6b535776b27e32a1e351!package/lib/lib.webworker.iterable.d.ts",
+      "bytes": 933,
+      "sha256": "7f57fc4404ff020bc45b9c620aff2b40f700b95fe31164024c453a5e3c163c54",
+      "sourcePathCount": 4,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.dom.asynciterable.d.ts",
+        "tsc/internal/bundled/libs/lib.dom.iterable.d.ts",
+        "tsc/internal/bundled/libs/lib.webworker.asynciterable.d.ts",
+        "tsc/internal/bundled/libs/lib.webworker.iterable.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/LICENSE",
+      "bytes": 9197,
+      "sha256": "a7d00bfd54525bc694b6e32f64c7ebcf5e6b7ae3657be5cc12767bce74654a47",
+      "sourcePathCount": 5,
+      "sourcePaths": [
+        "LICENSE.txt",
+        "packages/vscode-typescript-nightly/LICENSE",
+        "packages/vscode-typescript/LICENSE",
+        "tools/LICENSE",
+        "tsc/LICENSE"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/bin/tsc",
+      "bytes": 44,
+      "sha256": "2219f428a7e55aaf1f7ad85b9b0f0cf5078aeb76ccc9a7c6036c92d48f492ffd",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/bin/tsc"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/common/api.js",
+      "bytes": 11346,
+      "sha256": "0d8ccd38514f3994256d0c271b9b6e288174e13847ed2c8561abd5f005bdeb76",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/api.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/common/cancellation.js",
+      "bytes": 4808,
+      "sha256": "b851c4246fa5a644bcebe56b1fb74048948eab0886d706e59e2090fa7e41550b",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/cancellation.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/common/connection.js",
+      "bytes": 52964,
+      "sha256": "0a3a46fad254b78fc2ee371d8438037c860b9bc73124fddb038bf3bb5a3c94f4",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/connection.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/common/disposable.js",
+      "bytes": 677,
+      "sha256": "ad43f37a324cf41af376ea66004063ac5867a2e3dfce81b47ab617b9105a0a7d",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/disposable.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/common/encoding.js",
+      "bytes": 2649,
+      "sha256": "812de3b9b71e07f4c042de286e44a3acc070d4639257e39a9de20548b1f3262b",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/encoding.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/common/events.js",
+      "bytes": 4683,
+      "sha256": "d521b1fc2887c04a2d3f4d4403b5bd9fa734ef83e6f53e99bcc781d791db1508",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/events.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/common/is.js",
+      "bytes": 1143,
+      "sha256": "db07129f8322e52c81034004a1a1eb9b1be743c9ec55f5f6a5b33da48cb8a2a8",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/is.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/common/linkedMap.js",
+      "bytes": 12048,
+      "sha256": "9c2041c8828be66893ba5f97933cc7d3698a1bad2f34b742761e6f2a3e615346",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/linkedMap.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/browser/main.js",
+      "bytes": 3147,
+      "sha256": "3d8217c2dde5d7602a722ad015eff7a02ce3ae46d42e32b6c5e22a7175e46a8f",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/browser/main.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/common/messageBuffer.js",
+      "bytes": 5699,
+      "sha256": "27beae232413871d20551178d3342ee0bc927e8b05862883c75ce021291f11cc",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/messageBuffer.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/common/messageReader.js",
+      "bytes": 9958,
+      "sha256": "5f912919f4b2584a38812535e7894c851a13b8f51a7ad6b769f2b5e35beffaef",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/messageReader.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/common/messages.js",
+      "bytes": 14187,
+      "sha256": "7a06cfd7456c2f2471dc6aab3fb69683a62245d2a91859b337e03e0e66fa0b26",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/messages.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/common/messageWriter.js",
+      "bytes": 6061,
+      "sha256": "cd9cd263bdd57b32eac86a0dd83ac7241aa95ffb7a43af1e680b65449799afbc",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/messageWriter.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/common/ral.js",
+      "bytes": 834,
+      "sha256": "9b4736fe0168adf1dff8a1f41cf76dc8e9f380684cbb39056403e81a05a51cb3",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/ral.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/browser/ril.js",
+      "bytes": 7272,
+      "sha256": "0005e065b0500c85e7cf3c4dc856b9a1282084d4405c7c17fafa9ee3f2143aab",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/browser/ril.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/node/ril.js",
+      "bytes": 5413,
+      "sha256": "b05099278ce67ce95c1b87ff3297c670d178969553b6b49e0e97083e0805ac94",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/node/ril.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/common/semaphore.js",
+      "bytes": 2396,
+      "sha256": "9a7afb92b0ae8d9c341373fdecfb0133b4ba7414455110408809c2f4a05af1d1",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/semaphore.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/common/sharedArrayCancellation.js",
+      "bytes": 2639,
+      "sha256": "91a1128bc09e21d95be67dd441e13a0373af7c97d6ccf912b7b4168d11190efa",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/sharedArrayCancellation.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/README.md",
+      "bytes": 2790,
+      "sha256": "2b0c6b9a289d72ce11bce498cc7b21c9dad32e8f7d3a28211225d433f2686d89",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/typescript-package-readme.md"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/README.md",
+      "bytes": 1987,
+      "sha256": "aa24dd83f5f65d1ad0e816438f62fc4eb30f0a8af04b8d97933b1b09c59446af",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/README.md"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/common/api.d.ts",
+      "bytes": 4646,
+      "sha256": "3d6103a9369b34873198bae0db9745986046f20eaa8e805d81886e8982f49554",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/api.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/common/cancellation.d.ts",
+      "bytes": 1030,
+      "sha256": "392dd7b1117b588cba36c04909efd24b0458980506e8e8c1966114f8989058e2",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/cancellation.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/common/connection.d.ts",
+      "bytes": 20837,
+      "sha256": "86beb461bcefd29f17e932d32affa1dd08ab05ceb80c00befebe67bf5072f608",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/connection.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/common/disposable.d.ts",
+      "bytes": 188,
+      "sha256": "f0745ab78e18a2befaf1d9951481973318722c4e2f33e859239f55fa999ff2b1",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/disposable.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/common/encoding.d.ts",
+      "bytes": 1897,
+      "sha256": "e445daedeac3005da51d0a3e3258be16096e1c0116701e8979272aaf7aba5fb4",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/encoding.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/common/events.d.ts",
+      "bytes": 1086,
+      "sha256": "886e183dd0199e7de45d6308ac3e2185dac6f83283d1b8200ea62cf5c43966a1",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/events.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/lib/getExePath.d.ts",
+      "bytes": 68,
+      "sha256": "e6110f9086cf143dd2dde7530c89cda637b2ce3ea4731c14b0a75434ab68573f",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/lib/getExePath.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/common/is.d.ts",
+      "bytes": 433,
+      "sha256": "cf445a02b226e862589a7a4d4296dc0eb7e2b3398d24e2a9109fae165a179db1",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/is.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/common/linkedMap.d.ts",
+      "bytes": 1634,
+      "sha256": "10884636f0702390dbaee15bc8837d258174ce41dc4d4ce447da3e4c2fe785c1",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/linkedMap.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/browser/main.d.ts",
+      "bytes": 994,
+      "sha256": "fbbdb0baaade3505088d8eeaee2e57468ccd5fb08189cb5dfc58ec9c571f3191",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/browser/main.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/node/main.d.ts",
+      "bytes": 3382,
+      "sha256": "9fa6d0cba5093edfc07799a4fbe8f7609d106e992b84a6763613c17ba6bad6d6",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/node/main.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/common/messageBuffer.d.ts",
+      "bytes": 907,
+      "sha256": "4962729121c2cb97a4481cdb06dfc720a79a3bc2fc9330ff2bcf604cfc541177",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/messageBuffer.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/common/messageReader.d.ts",
+      "bytes": 3002,
+      "sha256": "3ca7b2e8012b9a6be09fafd62f8f3937388b9e1600a59c98887d2b11f6d01b43",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/messageReader.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/common/messages.d.ts",
+      "bytes": 12602,
+      "sha256": "b716daa9737308e83fc9d3826cac21b3a6c12ff420b5e89415d1ca396616f1b6",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/messages.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/common/messageWriter.d.ts",
+      "bytes": 2193,
+      "sha256": "b138b3f30708386023a7dc9981bb867808e5ff3383429ac7f69b7bfd0dcc5bd5",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/messageWriter.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/common/ral.d.ts",
+      "bytes": 2835,
+      "sha256": "2d79ae695899e28c4dba32ba39268a1eafc556f3f183175a355424fae553585a",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/ral.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/browser/ril.d.ts",
+      "bytes": 723,
+      "sha256": "fbfcd7c063556aca0f88a89414d5168d531fe4ecac5b172a0b39d193cfec0846",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/browser/ril.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/node/ril.d.ts",
+      "bytes": 382,
+      "sha256": "8c4c4c0580961b284c2196e9abbfd6f456249a4710aecf88a8c3b53f1ed98244",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/node/ril.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/common/semaphore.d.ts",
+      "bytes": 272,
+      "sha256": "e861653b284114109a695dd061a427b7bb09ce01dbe1c2d3e753fc342919faaf",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/semaphore.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/lib/common/sharedArrayCancellation.d.ts",
+      "bytes": 801,
+      "sha256": "13ec544ab0a3a7ff96afac1016f55b264c812428e37d595dc33b688296435469",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/sharedArrayCancellation.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/typings/thenable.d.ts",
+      "bytes": 398,
+      "sha256": "65b9243c80068ec9696b1fbdd23c9acf80d51df02f97b2d7a0514312b0a9fe7d",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/typings/thenable.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/f0/56/1abbdea8dcd28e85b8ca8bfa8dbc6fd6e63873c646dd9b9b23f406d9ff94f9b16aa7de12602df1b1dbbb11299593bf2cc23fc74b4414dfe6d05349155434!package/vendor/vscode-jsonrpc/License.txt",
+      "bytes": 1095,
+      "sha256": "ec9ee83580841e8eb687aca9867f221503809ba6426c7f876ede17d91b9fcfd0",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/License.txt"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.d.ts",
+      "bytes": 953,
+      "sha256": "0e6477e5049e579cc5de741a70ac91235252edc0468b2e569f22de9db3357786",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.decorators.legacy.d.ts",
+      "bytes": 1287,
+      "sha256": "b3a048b3e9302ef9a34ef4ebb9aecfb28b66abb3bce577206a79fee559c230da",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.decorators.legacy.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.dom.asynciterable.d.ts",
+      "bytes": 933,
+      "sha256": "7f57fc4404ff020bc45b9c620aff2b40f700b95fe31164024c453a5e3c163c54",
+      "sourcePathCount": 4,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.dom.asynciterable.d.ts",
+        "tsc/internal/bundled/libs/lib.dom.iterable.d.ts",
+        "tsc/internal/bundled/libs/lib.webworker.asynciterable.d.ts",
+        "tsc/internal/bundled/libs/lib.webworker.iterable.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.dom.iterable.d.ts",
+      "bytes": 933,
+      "sha256": "7f57fc4404ff020bc45b9c620aff2b40f700b95fe31164024c453a5e3c163c54",
+      "sourcePathCount": 4,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.dom.asynciterable.d.ts",
+        "tsc/internal/bundled/libs/lib.dom.iterable.d.ts",
+        "tsc/internal/bundled/libs/lib.webworker.asynciterable.d.ts",
+        "tsc/internal/bundled/libs/lib.webworker.iterable.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2015.d.ts",
+      "bytes": 1202,
+      "sha256": "3f88bedbeb09c6f5a6645cb24c7c55f1aa22d19ae96c8e6959cbd8b85a707bc6",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2015.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2015.generator.d.ts",
+      "bytes": 2518,
+      "sha256": "00343ca5b2e3d48fa5df1db6e32ea2a59afab09590274a6cccb1dbae82e60c7c",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2015.generator.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2015.iterable.d.ts",
+      "bytes": 18185,
+      "sha256": "ebd9f816d4002697cb2864bea1f0b70a103124e18a8cd9645eeccc09bdf80ab4",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2015.iterable.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2015.promise.d.ts",
+      "bytes": 3161,
+      "sha256": "2c1afac30a01772cd2a9a298a7ce7706b5892e447bb46bdbeef720f7b5da77ad",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2015.promise.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2015.proxy.d.ts",
+      "bytes": 5212,
+      "sha256": "7b0225f483e4fa685625ebe43dd584bb7973bbd84e66a6ba7bbe175ee1048b4f",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2015.proxy.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2015.reflect.d.ts",
+      "bytes": 6454,
+      "sha256": "c0a4b8ac6ce74679c1da2b3795296f5896e31c38e888469a8e0f99dc3305de60",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2015.reflect.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2015.symbol.wellknown.d.ts",
+      "bytes": 10971,
+      "sha256": "c5079c53f0f141a0698faa903e76cb41cd664e3efb01cc17a5c46ec2eb0bef42",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2015.symbol.wellknown.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2016.array.include.d.ts",
+      "bytes": 5165,
+      "sha256": "32cafbc484dea6b0ab62cf8473182bbcb23020d70845b406f80b7526f38ae862",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2016.array.include.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2016.d.ts",
+      "bytes": 926,
+      "sha256": "7fe93b39b810eadd916be8db880dd7f0f7012a5cc6ffb62de8f62a2117fa6f1f",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2016.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2016.full.d.ts",
+      "bytes": 993,
+      "sha256": "19adadff5144f8f89fef0a10b299d7a96206f4913d4c17d4864171320e9edbd6",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2016.full.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2016.intl.d.ts",
+      "bytes": 1445,
+      "sha256": "fca4cdcb6d6c5ef18a869003d02c9f0fd95df8cfaf6eb431cd3376bc034cad36",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2016.intl.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2017.arraybuffer.d.ts",
+      "bytes": 876,
+      "sha256": "b93ec88115de9a9dc1b602291b85baf825c85666bf25985cc5f698073892b467",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2017.arraybuffer.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2017.d.ts",
+      "bytes": 1123,
+      "sha256": "bb0074cc08b84a2374af33d8bf044b80851ccc9e719a5e202eacf40db2c31600",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2017.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2017.date.d.ts",
+      "bytes": 1877,
+      "sha256": "f5c06dcc3fe849fcb297c247865a161f995cc29de7aa823afdd75aaaddc1419b",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2017.date.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2017.full.d.ts",
+      "bytes": 993,
+      "sha256": "83635f912d414d0c5a855fba3e18418e9db7e73c2e0e170009c48275cc8c1a36",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2017.full.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2017.intl.d.ts",
+      "bytes": 1410,
+      "sha256": "c7b3542146734342e440a84b213384bfa188835537ddbda50d30766f0593aff9",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2017.intl.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2017.object.d.ts",
+      "bytes": 2434,
+      "sha256": "b77e16112127a4b169ef0b8c3a4d730edf459c5f25fe52d5e436a6919206c4d7",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2017.object.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2017.sharedmemory.d.ts",
+      "bytes": 7170,
+      "sha256": "fbffd9337146eff822c7c00acbb78b01ea7ea23987f6c961eba689349e744f8c",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2017.sharedmemory.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2017.typedarrays.d.ts",
+      "bytes": 1503,
+      "sha256": "ce6180fa19b1cccd07ee7f7dbb9a367ac19c0ed160573e4686425060b6df7f57",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2017.typedarrays.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2018.asyncgenerator.d.ts",
+      "bytes": 2653,
+      "sha256": "3f02e2476bccb9dbe21280d6090f0df17d2f66b74711489415a8aa4df73c9675",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2018.asyncgenerator.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2018.asynciterable.d.ts",
+      "bytes": 2218,
+      "sha256": "45e3ab34c1c013c8ab2dc1ba4c80c780744b13b5676800ae2e3be27ae862c40c",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2018.asynciterable.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2018.d.ts",
+      "bytes": 1049,
+      "sha256": "1a7daebe4f45fb03d9ec53d60008fbf9ac45a697fdc89e4ce218bc94b94f94d6",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2018.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2018.full.d.ts",
+      "bytes": 1035,
+      "sha256": "63787dbe04141f5d3ebce2e08b64bc9bba589beb0a4d22e7994d3005af1e48a6",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2018.full.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2018.promise.d.ts",
+      "bytes": 1314,
+      "sha256": "e42e397f1a5a77994f0185fd1466520691456c772d06bf843e5084ceb879a0ad",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2018.promise.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2018.regexp.d.ts",
+      "bytes": 1193,
+      "sha256": "f4c2b41f90c95b1c532ecc874bd3c111865793b23aebcc1c3cbbabcd5d76ffb0",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2018.regexp.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2019.array.d.ts",
+      "bytes": 3124,
+      "sha256": "ab26191cfad5b66afa11b8bf935ef1cd88fabfcb28d30b2dfa6fad877d050332",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2019.array.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2019.d.ts",
+      "bytes": 1032,
+      "sha256": "f94b133a3cb14a288803be545ac2683e0d0ff6661bcd37e31aaaec54fc382aed",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2019.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2019.full.d.ts",
+      "bytes": 1035,
+      "sha256": "e3de8409485b0c198a5a075bd4a1d06d8f42dc52b377709d33b131b97de56456",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2019.full.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2019.intl.d.ts",
+      "bytes": 919,
+      "sha256": "689da16f46e647cef0d64b0def88910e818a5877ca5379ede156ca3afb780ac3",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2019.intl.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2019.object.d.ts",
+      "bytes": 1434,
+      "sha256": "2088bc26531e38fb05eedac2951480db5309f6be3fa4a08d2221abb0f5b4200d",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2019.object.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2019.string.d.ts",
+      "bytes": 1489,
+      "sha256": "cb9d366c425fea79716a8fb3af0d78e6b22ebbab3bd64d25063b42dc9f531c1e",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2019.string.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2019.symbol.d.ts",
+      "bytes": 967,
+      "sha256": "500934a8089c26d57ebdb688fc9757389bb6207a3c8f0674d68efa900d2abb34",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2019.symbol.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2020.bigint.d.ts",
+      "bytes": 38258,
+      "sha256": "bc21cc8b6fee4f4c2440d08035b7ea3c06b3511314c8bab6bef7a92de58a2593",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2020.bigint.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2020.d.ts",
+      "bytes": 1162,
+      "sha256": "f59d0650799f8782fd74cf73c19223730c6d1b9198671b1c5b3a38e1188b5953",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2020.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2020.date.d.ts",
+      "bytes": 2917,
+      "sha256": "7ca53d13d2957003abb47922a71866ba7cb2068f8d154877c596d63c359fed25",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2020.date.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2020.full.d.ts",
+      "bytes": 1035,
+      "sha256": "577cc49be1979782a5a695b46049566d123e2a75382f10bb82f2e5c87e29059a",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2020.full.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2020.number.d.ts",
+      "bytes": 1548,
+      "sha256": "b7bf9377723203b5a6a4b920164df22d56a43f593269ba6ae1fdc97774b68855",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2020.number.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2020.promise.d.ts",
+      "bytes": 1764,
+      "sha256": "54725f8c4df3d900cb4dac84b64689ce29548da0b4e9b7c2de61d41c79293611",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2020.promise.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2020.sharedmemory.d.ts",
+      "bytes": 5089,
+      "sha256": "e5594bc3076ac29e6c1ebda77939bc4c8833de72f654b6e376862c0473199323",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2020.sharedmemory.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2020.string.d.ts",
+      "bytes": 2451,
+      "sha256": "2f3eb332c2d73e729f3364fcc0c2b375e72a121e8157d25a82d67a138c83a95c",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2020.string.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2020.symbol.wellknown.d.ts",
+      "bytes": 1566,
+      "sha256": "6f4427f9642ce8d500970e4e69d1397f64072ab73b97e476b4002a646ac743b1",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2020.symbol.wellknown.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2021.d.ts",
+      "bytes": 997,
+      "sha256": "8a15b4607d9a499e2dbeed9ec0d3c0d7372c850b2d5f1fb259e8f6d41d468a84",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2021.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2021.full.d.ts",
+      "bytes": 1035,
+      "sha256": "e4a70ead7fea07d9abe520cc9e30c04ac035ebceaab28f9e67211610006c65de",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2021.full.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2021.intl.d.ts",
+      "bytes": 8206,
+      "sha256": "a917a49ac94cd26b754ab84e113369a75d1a47a710661d7cd25e961cc797065f",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2021.intl.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2021.promise.d.ts",
+      "bytes": 2223,
+      "sha256": "db9709688f82c9e5f65a119c64d835f906efe5f559d08b11642d56eb85b79357",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2021.promise.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2021.string.d.ts",
+      "bytes": 1553,
+      "sha256": "4b25b8c874acd1a4cf8444c3617e037d444d19080ac9f634b405583fd10ce1f7",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2021.string.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2021.weakref.d.ts",
+      "bytes": 3132,
+      "sha256": "37be57d7c90cf1f8112ee2636a068d8fd181289f82b744160ec56a7dc158a9f5",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2021.weakref.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2022.d.ts",
+      "bytes": 1069,
+      "sha256": "26e0fe14baee4e127f4365d1ae0b276f400562e45e19e35fd2d4c296684715e6",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2022.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2022.error.d.ts",
+      "bytes": 2340,
+      "sha256": "195daca651dde22f2167ac0d0a05e215308119a3100f5e6268e8317d05a92526",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2022.error.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2022.full.d.ts",
+      "bytes": 1035,
+      "sha256": "01a30f9e8582b369075c0808df71121e6855cb06fd8d3d39511d9ebb66405205",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2022.full.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2022.intl.d.ts",
+      "bytes": 7653,
+      "sha256": "8b11e4285cd2bb164a4dc09248bdec69e9842517db4ca47c1ba913011e44ff2f",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2022.intl.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2022.object.d.ts",
+      "bytes": 1046,
+      "sha256": "0508571a52475e245b02bc50fa1394065a0a3d05277fbf5120c3784b85651799",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2022.object.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2022.regexp.d.ts",
+      "bytes": 1304,
+      "sha256": "fc611fea8d30ea72c6bbfb599c9b4d393ce22e2f5bfef2172534781e7d138104",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2022.regexp.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2022.string.d.ts",
+      "bytes": 1116,
+      "sha256": "8f9af488f510c3015af3cc8c267a9e9d96c4dd38a1fdff0e11dc5a544711415b",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2022.string.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2023.array.d.ts",
+      "bytes": 40197,
+      "sha256": "0bd714129fca875f7d4c477a1a392200b0bcd13fb2e80928cd334b63830ea047",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2023.array.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2023.collection.d.ts",
+      "bytes": 861,
+      "sha256": "e2c9037ae6cd2c52d80ceef0b3c5ffdb488627d71529cf4f63776daf11161c9a",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2023.collection.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2023.d.ts",
+      "bytes": 960,
+      "sha256": "1e9332c23e9a907175e0ffc6a49e236f97b48838cc8aec9ce7e4cec21e544b65",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2023.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2023.full.d.ts",
+      "bytes": 1035,
+      "sha256": "821bd6049b8f96b9d24c9fbc49b542dcf7a80d76f9efb330b5ef32c373af83d4",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2023.full.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2024.arraybuffer.d.ts",
+      "bytes": 2598,
+      "sha256": "bc238c3f81c2984751932b6aab223cd5b830e0ac6cad76389e5e9d2ffc03287d",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2024.arraybuffer.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2024.collection.d.ts",
+      "bytes": 1185,
+      "sha256": "4a07f9b76d361f572620927e5735b77d6d2101c23cdd94383eb5b706e7b36357",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2024.collection.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2024.d.ts",
+      "bytes": 1127,
+      "sha256": "3753fbc1113dc511214802a2342280a8b284ab9094f6420e7aa171e868679f91",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2024.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2024.full.d.ts",
+      "bytes": 1035,
+      "sha256": "b9f65879de79a7647ad2e5b8089277c215911fa99d4b858d78014df6ba2852f3",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2024.full.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2024.object.d.ts",
+      "bytes": 1220,
+      "sha256": "7c4e8dc6ab834cc6baa0227e030606d29e3e8449a9f67cdf5605ea5493c4db29",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2024.object.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2024.promise.d.ts",
+      "bytes": 1350,
+      "sha256": "de7ba0fd02e06cd9a5bd4ab441ed0e122735786e67dde1e849cced1cd8b46b78",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2024.promise.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2024.regexp.d.ts",
+      "bytes": 1034,
+      "sha256": "6148e4e88d720a06855071c3db02069434142a8332cf9c182cda551adedf3156",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2024.regexp.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2024.sharedmemory.d.ts",
+      "bytes": 3038,
+      "sha256": "d63dba625b108316a40c95a4425f8d4294e0deeccfd6c7e59d819efa19e23409",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2024.sharedmemory.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2024.string.d.ts",
+      "bytes": 1155,
+      "sha256": "0568d6befee03dd435bed4fc25c4e46865b24bdcb8c563fdc21f580a2c301904",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2024.string.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2025.collection.d.ts",
+      "bytes": 3839,
+      "sha256": "30d62269b05b584741f19a5369852d5d34895aa2ac4fd948956f886d15f9cc0d",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2025.collection.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2025.d.ts",
+      "bytes": 1079,
+      "sha256": "999ca32883495a866aa5737fe1babc764a469e4cde6ee6b136a4b9ae68853e4b",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2025.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2025.float16.d.ts",
+      "bytes": 20489,
+      "sha256": "f128dae7c44d8f35ee42e0a437000a57c9f06cc04f8b4fb42eebf44954d53dc8",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2025.float16.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2025.full.d.ts",
+      "bytes": 1035,
+      "sha256": "e03da518b01b46a4c99a1f88cd727ee98ddf14492c43dae1ae7a63e992971bab",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2025.full.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2025.intl.d.ts",
+      "bytes": 9390,
+      "sha256": "ffbe6d7b295306b2ba88030f65b74c107d8d99bdcf596ea99c62a02f606108b0",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2025.intl.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2025.iterator.d.ts",
+      "bytes": 8637,
+      "sha256": "996fb27b15277369c68a4ba46ed138b4e9e839a02fb4ec756f7997629242fd9f",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2025.iterator.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2025.promise.d.ts",
+      "bytes": 1619,
+      "sha256": "79b712591b270d4778c89706ca2cfc56ddb8c3f895840e477388f1710dc5eda9",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2025.promise.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es2025.regexp.d.ts",
+      "bytes": 1255,
+      "sha256": "20884846cef428b992b9bd032e70a4ef88e349263f63aeddf04dda837a7dba26",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2025.regexp.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.es6.d.ts",
+      "bytes": 993,
+      "sha256": "174a0fa01bb60bcb80e09b0b7bdcdddf688891433d6030244df5b44eb9ebd210",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es6.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.esnext.collection.d.ts",
+      "bytes": 2598,
+      "sha256": "db59a81f070c1880ad645b2c0275022baa6a0c4f0acdc58d29d349c6efcf0903",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2026.collection.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.esnext.date.d.ts",
+      "bytes": 917,
+      "sha256": "673294292640f5722b700e7d814e17aaf7d93f83a48a2c9b38f33cbc940ad8b0",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.esnext.date.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.esnext.decorators.d.ts",
+      "bytes": 1031,
+      "sha256": "d786b48f934cbca483b3c6d0a798cb43bbb4ada283e76fb22c28e53ae05b9e69",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.esnext.decorators.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.esnext.disposable.d.ts",
+      "bytes": 6767,
+      "sha256": "1ecb8e347cb6b2a8927c09b86263663289418df375f5e68e11a0ae683776978f",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.esnext.disposable.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.esnext.error.d.ts",
+      "bytes": 990,
+      "sha256": "142efd4ce210576f777dc34df121777be89eda476942d6d6663b03dcb53be3ff",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2026.error.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.esnext.full.d.ts",
+      "bytes": 1035,
+      "sha256": "ef4a897cd2a3f91000c10264e400b3667c7e51e1b7365f03b62e8081dc53bde6",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.esnext.full.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.esnext.intl.d.ts",
+      "bytes": 5305,
+      "sha256": "379bc41580c2d774f82e828c70308f24a005b490c25ba34d679d84bcf05c3d9d",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.esnext.intl.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.esnext.sharedmemory.d.ts",
+      "bytes": 1028,
+      "sha256": "ed484fb2aa8a1a23d0277056ec3336e0a0b52f9b8d6a961f338a642faf43235d",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.esnext.sharedmemory.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.esnext.temporal.d.ts",
+      "bytes": 22011,
+      "sha256": "4ffedae1d1c2d53fdbca1c96d3c7dda544281f7d262f99b6880634f8fd8d9820",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.esnext.temporal.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.esnext.typedarrays.d.ts",
+      "bytes": 3350,
+      "sha256": "83a730b125d477dd264df8ba479afab27a3dae7152b005c214ab94dc7ee44fd3",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.es2026.typedarrays.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.scripthost.d.ts",
+      "bytes": 9412,
+      "sha256": "f13f4b465c99041e912db5c44129a94588e1aafee35a50eab51044833f50b4ee",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.scripthost.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.webworker.asynciterable.d.ts",
+      "bytes": 933,
+      "sha256": "7f57fc4404ff020bc45b9c620aff2b40f700b95fe31164024c453a5e3c163c54",
+      "sourcePathCount": 4,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.dom.asynciterable.d.ts",
+        "tsc/internal/bundled/libs/lib.dom.iterable.d.ts",
+        "tsc/internal/bundled/libs/lib.webworker.asynciterable.d.ts",
+        "tsc/internal/bundled/libs/lib.webworker.iterable.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.webworker.importscripts.d.ts",
+      "bytes": 1002,
+      "sha256": "2a2de5b9459b3fc44decd9ce6100b72f1b002ef523126c1d3d8b2a4a63d74d78",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.webworker.importscripts.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/lib/lib.webworker.iterable.d.ts",
+      "bytes": 933,
+      "sha256": "7f57fc4404ff020bc45b9c620aff2b40f700b95fe31164024c453a5e3c163c54",
+      "sourcePathCount": 4,
+      "sourcePaths": [
+        "tsc/internal/bundled/libs/lib.dom.asynciterable.d.ts",
+        "tsc/internal/bundled/libs/lib.dom.iterable.d.ts",
+        "tsc/internal/bundled/libs/lib.webworker.asynciterable.d.ts",
+        "tsc/internal/bundled/libs/lib.webworker.iterable.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/cb/64/efbb14993c3c906a490544f6472859be28a56a222b1d83dfc26709bd7edbca5cb3fc3515a3dfcfce0e335baf8dd2b285ea36e022b047f519d0b1a9671d07!package/LICENSE.txt",
+      "bytes": 9197,
+      "sha256": "a7d00bfd54525bc694b6e32f64c7ebcf5e6b7ae3657be5cc12767bce74654a47",
+      "sourcePathCount": 5,
+      "sourcePaths": [
+        "LICENSE.txt",
+        "packages/vscode-typescript-nightly/LICENSE",
+        "packages/vscode-typescript/LICENSE",
+        "tools/LICENSE",
+        "tsc/LICENSE"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/5c/89/7327b429fe3cd223576ceff1703c05ab3de4d903ba40b655b885d27527ac575892fa751f506270e124e74bcdd2a1510e4c9ba9af50cc3edc370e4106ac3f!package/License.txt",
+      "bytes": 1095,
+      "sha256": "ec9ee83580841e8eb687aca9867f221503809ba6426c7f876ede17d91b9fcfd0",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/License.txt"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/common/api.js",
+      "bytes": 11346,
+      "sha256": "0d8ccd38514f3994256d0c271b9b6e288174e13847ed2c8561abd5f005bdeb76",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/api.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/common/cancellation.js",
+      "bytes": 4808,
+      "sha256": "b851c4246fa5a644bcebe56b1fb74048948eab0886d706e59e2090fa7e41550b",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/cancellation.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/common/connection.js",
+      "bytes": 52964,
+      "sha256": "0a3a46fad254b78fc2ee371d8438037c860b9bc73124fddb038bf3bb5a3c94f4",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/connection.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/common/disposable.js",
+      "bytes": 677,
+      "sha256": "ad43f37a324cf41af376ea66004063ac5867a2e3dfce81b47ab617b9105a0a7d",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/disposable.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/common/encoding.js",
+      "bytes": 2649,
+      "sha256": "812de3b9b71e07f4c042de286e44a3acc070d4639257e39a9de20548b1f3262b",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/encoding.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/common/events.js",
+      "bytes": 4683,
+      "sha256": "d521b1fc2887c04a2d3f4d4403b5bd9fa734ef83e6f53e99bcc781d791db1508",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/events.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/common/is.js",
+      "bytes": 1143,
+      "sha256": "db07129f8322e52c81034004a1a1eb9b1be743c9ec55f5f6a5b33da48cb8a2a8",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/is.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/common/linkedMap.js",
+      "bytes": 12048,
+      "sha256": "9c2041c8828be66893ba5f97933cc7d3698a1bad2f34b742761e6f2a3e615346",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/linkedMap.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/browser/main.js",
+      "bytes": 3147,
+      "sha256": "3d8217c2dde5d7602a722ad015eff7a02ce3ae46d42e32b6c5e22a7175e46a8f",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/browser/main.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/node/main.js",
+      "bytes": 10853,
+      "sha256": "5025a67769e9854bbe1eaffdf39d7c254f8b60862b8cfc4d3d33b00929ec50c4",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/node/main.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/common/messageBuffer.js",
+      "bytes": 5699,
+      "sha256": "27beae232413871d20551178d3342ee0bc927e8b05862883c75ce021291f11cc",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/messageBuffer.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/common/messageReader.js",
+      "bytes": 9958,
+      "sha256": "5f912919f4b2584a38812535e7894c851a13b8f51a7ad6b769f2b5e35beffaef",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/messageReader.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/common/messages.js",
+      "bytes": 14187,
+      "sha256": "7a06cfd7456c2f2471dc6aab3fb69683a62245d2a91859b337e03e0e66fa0b26",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/messages.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/common/messageWriter.js",
+      "bytes": 6061,
+      "sha256": "cd9cd263bdd57b32eac86a0dd83ac7241aa95ffb7a43af1e680b65449799afbc",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/messageWriter.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/common/ral.js",
+      "bytes": 834,
+      "sha256": "9b4736fe0168adf1dff8a1f41cf76dc8e9f380684cbb39056403e81a05a51cb3",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/ral.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/browser/ril.js",
+      "bytes": 7272,
+      "sha256": "0005e065b0500c85e7cf3c4dc856b9a1282084d4405c7c17fafa9ee3f2143aab",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/browser/ril.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/node/ril.js",
+      "bytes": 5413,
+      "sha256": "b05099278ce67ce95c1b87ff3297c670d178969553b6b49e0e97083e0805ac94",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/node/ril.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/common/semaphore.js",
+      "bytes": 2396,
+      "sha256": "9a7afb92b0ae8d9c341373fdecfb0133b4ba7414455110408809c2f4a05af1d1",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/semaphore.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/common/sharedArrayCancellation.js",
+      "bytes": 2639,
+      "sha256": "91a1128bc09e21d95be67dd441e13a0373af7c97d6ccf912b7b4168d11190efa",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/sharedArrayCancellation.js"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/package.json",
+      "bytes": 1947,
+      "sha256": "c90ae8c111f36e2ffa492d26458a77251aa0e56191c1855f979e7631cf987954",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/package.json"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/README.md",
+      "bytes": 1987,
+      "sha256": "aa24dd83f5f65d1ad0e816438f62fc4eb30f0a8af04b8d97933b1b09c59446af",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/README.md"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/common/api.d.ts",
+      "bytes": 4646,
+      "sha256": "3d6103a9369b34873198bae0db9745986046f20eaa8e805d81886e8982f49554",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/api.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/common/cancellation.d.ts",
+      "bytes": 1030,
+      "sha256": "392dd7b1117b588cba36c04909efd24b0458980506e8e8c1966114f8989058e2",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/cancellation.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/common/connection.d.ts",
+      "bytes": 20837,
+      "sha256": "86beb461bcefd29f17e932d32affa1dd08ab05ceb80c00befebe67bf5072f608",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/connection.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/common/disposable.d.ts",
+      "bytes": 188,
+      "sha256": "f0745ab78e18a2befaf1d9951481973318722c4e2f33e859239f55fa999ff2b1",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/disposable.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/common/encoding.d.ts",
+      "bytes": 1897,
+      "sha256": "e445daedeac3005da51d0a3e3258be16096e1c0116701e8979272aaf7aba5fb4",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/encoding.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/common/events.d.ts",
+      "bytes": 1086,
+      "sha256": "886e183dd0199e7de45d6308ac3e2185dac6f83283d1b8200ea62cf5c43966a1",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/events.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/common/is.d.ts",
+      "bytes": 433,
+      "sha256": "cf445a02b226e862589a7a4d4296dc0eb7e2b3398d24e2a9109fae165a179db1",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/is.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/common/linkedMap.d.ts",
+      "bytes": 1634,
+      "sha256": "10884636f0702390dbaee15bc8837d258174ce41dc4d4ce447da3e4c2fe785c1",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/linkedMap.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/browser/main.d.ts",
+      "bytes": 994,
+      "sha256": "fbbdb0baaade3505088d8eeaee2e57468ccd5fb08189cb5dfc58ec9c571f3191",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/browser/main.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/node/main.d.ts",
+      "bytes": 3382,
+      "sha256": "9fa6d0cba5093edfc07799a4fbe8f7609d106e992b84a6763613c17ba6bad6d6",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/node/main.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/common/messageBuffer.d.ts",
+      "bytes": 907,
+      "sha256": "4962729121c2cb97a4481cdb06dfc720a79a3bc2fc9330ff2bcf604cfc541177",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/messageBuffer.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/common/messageReader.d.ts",
+      "bytes": 3002,
+      "sha256": "3ca7b2e8012b9a6be09fafd62f8f3937388b9e1600a59c98887d2b11f6d01b43",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/messageReader.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/common/messages.d.ts",
+      "bytes": 12602,
+      "sha256": "b716daa9737308e83fc9d3826cac21b3a6c12ff420b5e89415d1ca396616f1b6",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/messages.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/common/messageWriter.d.ts",
+      "bytes": 2193,
+      "sha256": "b138b3f30708386023a7dc9981bb867808e5ff3383429ac7f69b7bfd0dcc5bd5",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/messageWriter.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/common/ral.d.ts",
+      "bytes": 2835,
+      "sha256": "2d79ae695899e28c4dba32ba39268a1eafc556f3f183175a355424fae553585a",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/ral.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/browser/ril.d.ts",
+      "bytes": 723,
+      "sha256": "fbfcd7c063556aca0f88a89414d5168d531fe4ecac5b172a0b39d193cfec0846",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/browser/ril.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/node/ril.d.ts",
+      "bytes": 382,
+      "sha256": "8c4c4c0580961b284c2196e9abbfd6f456249a4710aecf88a8c3b53f1ed98244",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/node/ril.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/common/semaphore.d.ts",
+      "bytes": 272,
+      "sha256": "e861653b284114109a695dd061a427b7bb09ce01dbe1c2d3e753fc342919faaf",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/semaphore.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/lib/common/sharedArrayCancellation.d.ts",
+      "bytes": 801,
+      "sha256": "13ec544ab0a3a7ff96afac1016f55b264c812428e37d595dc33b688296435469",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/lib/common/sharedArrayCancellation.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/typings/thenable.d.ts",
+      "bytes": 398,
+      "sha256": "65b9243c80068ec9696b1fbdd23c9acf80d51df02f97b2d7a0514312b0a9fe7d",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/typings/thenable.d.ts"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/49/b4/1257dc917a6011c5e5f0e8b539b12e99ab47bdfc3802097e727a51f6eb76505ae91b4e4f0417c7e34ebaf577389ab1fe06c2525bbd3c059d3ae74055995d!package/License.txt",
+      "bytes": 1095,
+      "sha256": "ec9ee83580841e8eb687aca9867f221503809ba6426c7f876ede17d91b9fcfd0",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/License.txt"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/11/bc/0817e2946f0c43e63ba640da62042bfb0493374627abbf885c6f0fe9e6376c9f0145a51fc1d959b0a9f1f8a795ec2b8ea7907dee800dd6b7025e9071c913!package/License.txt",
+      "bytes": 1095,
+      "sha256": "ec9ee83580841e8eb687aca9867f221503809ba6426c7f876ede17d91b9fcfd0",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/License.txt"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/11/0c/aa24c8b9e761386537f8ea2cd0e058fa5eabaac42c924772796520f54a2b0c7fa45fa5e3961f118113c1abe95d3fdc61c819d0330e7f05f3ed674c60a7a1!package/License.txt",
+      "bytes": 1095,
+      "sha256": "ec9ee83580841e8eb687aca9867f221503809ba6426c7f876ede17d91b9fcfd0",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/License.txt"
+      ]
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/0c/5e/3df96795e69cb8ccee618686e9eb48e3b0348ad2502a0343ae2812c1be9e36dc73d641c09b859cf7260c9f21ec2c133d9ff14f97ef9c4d2051dd897666db!package/License.txt",
+      "bytes": 1095,
+      "sha256": "ec9ee83580841e8eb687aca9867f221503809ba6426c7f876ede17d91b9fcfd0",
+      "sourcePathCount": 1,
+      "sourcePaths": [
+        "packages/typescript/vendor/vscode-jsonrpc/License.txt"
+      ]
+    }
+  ],
+  "credentialMarkers": [
+    {
+      "path": "go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.6/testdata/kmip-certs/server-ec.pem",
+      "marker": "private-key-pem",
+      "sha256": "0d9bb8cf46e124185e7a47cf9888f4ce5eb5eea80a30cb1805e447e25ba6c2cd"
+    },
+    {
+      "path": "go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.6/testdata/kmip-certs/client-ec.pem",
+      "marker": "private-key-pem",
+      "sha256": "dfd9f212847883f3a98bd69b33948c699f73fc7c63c6d42764b50f2c98821b7c"
+    },
+    {
+      "path": "go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.6/testdata/auth/mongodb-aws.rst",
+      "marker": "aws-access-key-shaped",
+      "sha256": "0a27c53115a2ccda4a451554b1cd677f9cdcb00de9b8d4d06ce3c983c43d4637"
+    },
+    {
+      "path": "go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.6/mongo/options/testdata/one-pk-multiple-certs.pem",
+      "marker": "private-key-pem",
+      "sha256": "669d7d50b15b19e81038fa25e9bf4146bc06a592a9fc34cc77029bb4440e0fb3"
+    },
+    {
+      "path": "go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.6/mongo/options/testdata/nopass/key.pem",
+      "marker": "private-key-pem",
+      "sha256": "f1a0ca6cbdf5c4eeb44d6f3c66d640ecfcf37369b1de620d40b6e20dd6fa05d3"
+    },
+    {
+      "path": "go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.6/mongo/options/testdata/nopass/certificate.pem",
+      "marker": "private-key-pem",
+      "sha256": "1daa3f75793c84de9de23bd50f5dcd93aa457ed6428047f167a8923d378abfe4"
+    },
+    {
+      "path": "go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.6/mongo/options/testdata/key.pem",
+      "marker": "private-key-pem",
+      "sha256": "c0001b855272bb1d87f2c456205143bebc04cbdcbe0ef838ad6aad6ffce8e48c"
+    },
+    {
+      "path": "go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.6/mongo/options/testdata/certificate.pem",
+      "marker": "private-key-pem",
+      "sha256": "93cecb8a41458a90cc4ff252a133c9f2ef33b5ec906bce80ea6641e80e6a6a1b"
+    },
+    {
+      "path": "go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.6/mongo/options/testdata/ca-with-intermediates.pem",
+      "marker": "private-key-pem",
+      "sha256": "b773430ff4f77cf39daa8c61184340c649b1dbc2e123951a18af54f429c33b45"
+    },
+    {
+      "path": "go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.6/mongo/options/testdata/ca-key.pem",
+      "marker": "private-key-pem",
+      "sha256": "a9752460d53b6bf8d35e0283d17b7a9f02a69d4d4e1ae48b7c733303f6ffa9da"
+    },
+    {
+      "path": "go/pkg/mod/golang.org/x/telemetry@v0.0.0-20260908163034-4bcc4b2ee518/internal/config/testdata/config.json",
+      "marker": "credential-like-name",
+      "sha256": "6b25ebb3b3014846ecf25c457765408457d843e68050b5045baa6b98748c18c7"
+    },
+    {
+      "path": "go/pkg/mod/golang.org/x/crypto@v0.57.0/ssh/testdata/keys.go",
+      "marker": "private-key-pem",
+      "sha256": "2dad445a36ecf0aed83ac85061216073aee0cf9e93ad7bacf51162d9d69f23aa"
+    },
+    {
+      "path": "go/pkg/mod/golang.org/x/crypto@v0.57.0/ssh/test/session_test.go",
+      "marker": "private-key-pem",
+      "sha256": "1bf941c63519c4744e2c695966c103fbdd4309d1fe84b349fa0819891a3d1ac7"
+    },
+    {
+      "path": "go/pkg/mod/golang.org/x/crypto@v0.57.0/ssh/keys_test.go",
+      "marker": "private-key-pem",
+      "sha256": "cd1dc5c836f516b5079622124a0974888f6619a2673c7fa2d8e3a62bf58f55b2"
+    },
+    {
+      "path": "go/pkg/mod/golang.org/x/crypto@v0.57.0/acme/jws_test.go",
+      "marker": "private-key-pem",
+      "sha256": "ab455f181ca0f45d23fdfcd909afebe9ef6923a2febc13eed33445028e7eea4a"
+    },
+    {
+      "path": "go/pkg/mod/github.com/golang-jwt/jwt/v4@v4.5.2/test/sample_key",
+      "marker": "private-key-pem",
+      "sha256": "9a39720a1e110182577eb35aae86c779da6e6bd779cc7d2aefa0a43b93039fbd"
+    },
+    {
+      "path": "go/pkg/mod/github.com/golang-jwt/jwt/v4@v4.5.2/test/privateSecure.pem",
+      "marker": "private-key-pem",
+      "sha256": "bfd14a01ec5ddb80f9ce6e204d11154b60835830bebc19db1e8a128b5b50e79d"
+    },
+    {
+      "path": "go/pkg/mod/github.com/golang-jwt/jwt/v4@v4.5.2/test/ed25519-private.pem",
+      "marker": "private-key-pem",
+      "sha256": "ca38f0093a8016e663bafd8fad29e786b3036eaf6957b04a8c7b1117119a73fc"
+    },
+    {
+      "path": "go/pkg/mod/github.com/golang-jwt/jwt/v4@v4.5.2/test/ec512-private.pem",
+      "marker": "private-key-pem",
+      "sha256": "f3c2596c6eed99ebdcb3cf1250ce87a5d5f41e416b26855be2efb588f89d59c5"
+    },
+    {
+      "path": "go/pkg/mod/github.com/golang-jwt/jwt/v4@v4.5.2/test/ec384-private.pem",
+      "marker": "private-key-pem",
+      "sha256": "92c66300dedd5840409a8c69d75f9cfb9dbf7bdc2bf53f70ca86fadd7e9fc437"
+    },
+    {
+      "path": "go/pkg/mod/github.com/golang-jwt/jwt/v4@v4.5.2/test/ec256-private.pem",
+      "marker": "private-key-pem",
+      "sha256": "8f49d16949ee77fd16e896ecdfe5abd8271118ca2854ec2983238cf57d44a077"
+    },
+    {
+      "path": "go/pkg/mod/github.com/aws/aws-sdk-go-v2@v1.41.3/aws/signer/v4/middleware_test.go",
+      "marker": "aws-access-key-shaped",
+      "sha256": "707c475213cc8a9904efc23a838f79baae794a9671f43bf3d51b2f14cf5107be"
+    },
+    {
+      "path": "go/pkg/mod/github.com/aws/aws-sdk-go-v2@v1.41.3/aws/credential_cache_test.go",
+      "marker": "aws-access-key-shaped",
+      "sha256": "2659029d98dd27b3a8c60a88123dd36df80eab6f35abf4014e9dac4a19f4fec3"
+    },
+    {
+      "path": "go/pkg/mod/github.com/aws/aws-sdk-go-v2/service/s3@v1.96.2/presign_post_test.go",
+      "marker": "aws-access-key-shaped",
+      "sha256": "883f5e64a390380102113f69db1ccb5b7222bb5f4908524f94cc2bbacaec9480"
+    },
+    {
+      "path": "go/pkg/mod/github.com/aws/aws-sdk-go-v2/service/sts@v1.41.8/api_op_GetAccessKeyInfo.go",
+      "marker": "aws-access-key-shaped",
+      "sha256": "026bf5c99202b1b8c2bfb42deaa0964404efb95db5af80f64726890a1c122c9c"
+    },
+    {
+      "path": "go/pkg/mod/github.com/aws/aws-sdk-go-v2/credentials@v1.19.11/processcreds/testdata/longsessiontoken.json",
+      "marker": "aws-access-key-shaped",
+      "sha256": "24cd39544ab2e751b0c8faf12df8ff86f49d61130e09cef7d38c6114fbd4b861"
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/3d/4d/25dc2b046559b62bcbd9345c6f826339774631fec54bfdac565b48490687b2881e90feebfb8573916fb11dce5371bde86c58417cdbfa3efec5e5228f9423!package/types/config/Configuration.d.ts",
+      "marker": "private-key-pem",
+      "sha256": "0d9b0b2b9b82e97786f86efc07cf62b74dc46bfcb4d90387cd306cd0aa2516ed"
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/3d/4d/25dc2b046559b62bcbd9345c6f826339774631fec54bfdac565b48490687b2881e90feebfb8573916fb11dce5371bde86c58417cdbfa3efec5e5228f9423!package/src/config/Configuration.ts",
+      "marker": "private-key-pem",
+      "sha256": "6a0d99d1677a35922bce0cb97b23fc0787b454f1ef2f1562a6836e80762ea104"
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/2b/78/cfaa3bdaf1b427743289a9cb6719fc2e0315369fd5cd08fb5b5d523926f0bb167422360ff25a540f6cc525057b41a01185629d3c03de26e9fbed73dbfecc!package/module/index-BtYFilXh.js",
+      "marker": "aws-access-key-shaped",
+      "sha256": "6d8e6358da886441aa9c7c966c73371cace248a27fd04ca6a7dc3162ac0f2260"
+    },
+    {
+      "path": "npm-cache/_cacache/content-v2/sha512/2b/78/cfaa3bdaf1b427743289a9cb6719fc2e0315369fd5cd08fb5b5d523926f0bb167422360ff25a540f6cc525057b41a01185629d3c03de26e9fbed73dbfecc!package/module/index-BtYFilXh.js.map",
+      "marker": "aws-access-key-shaped",
+      "sha256": "96ebd4050bb144d4075e8fdfa69282ad146e4073789ed6f32be6cdb09f3d5e18"
+    },
+    {
+      "path": "go/pkg/mod/cache/download/go.mongodb.org/mongo-driver/@v/v1.17.6.zip!go.mongodb.org/mongo-driver@v1.17.6/mongo/options/testdata/ca-key.pem",
+      "marker": "private-key-pem",
+      "sha256": "a9752460d53b6bf8d35e0283d17b7a9f02a69d4d4e1ae48b7c733303f6ffa9da"
+    },
+    {
+      "path": "go/pkg/mod/cache/download/go.mongodb.org/mongo-driver/@v/v1.17.6.zip!go.mongodb.org/mongo-driver@v1.17.6/mongo/options/testdata/ca-with-intermediates.pem",
+      "marker": "private-key-pem",
+      "sha256": "b773430ff4f77cf39daa8c61184340c649b1dbc2e123951a18af54f429c33b45"
+    },
+    {
+      "path": "go/pkg/mod/cache/download/go.mongodb.org/mongo-driver/@v/v1.17.6.zip!go.mongodb.org/mongo-driver@v1.17.6/mongo/options/testdata/certificate.pem",
+      "marker": "private-key-pem",
+      "sha256": "93cecb8a41458a90cc4ff252a133c9f2ef33b5ec906bce80ea6641e80e6a6a1b"
+    },
+    {
+      "path": "go/pkg/mod/cache/download/go.mongodb.org/mongo-driver/@v/v1.17.6.zip!go.mongodb.org/mongo-driver@v1.17.6/mongo/options/testdata/key.pem",
+      "marker": "private-key-pem",
+      "sha256": "c0001b855272bb1d87f2c456205143bebc04cbdcbe0ef838ad6aad6ffce8e48c"
+    },
+    {
+      "path": "go/pkg/mod/cache/download/go.mongodb.org/mongo-driver/@v/v1.17.6.zip!go.mongodb.org/mongo-driver@v1.17.6/mongo/options/testdata/nopass/certificate.pem",
+      "marker": "private-key-pem",
+      "sha256": "1daa3f75793c84de9de23bd50f5dcd93aa457ed6428047f167a8923d378abfe4"
+    },
+    {
+      "path": "go/pkg/mod/cache/download/go.mongodb.org/mongo-driver/@v/v1.17.6.zip!go.mongodb.org/mongo-driver@v1.17.6/mongo/options/testdata/nopass/key.pem",
+      "marker": "private-key-pem",
+      "sha256": "f1a0ca6cbdf5c4eeb44d6f3c66d640ecfcf37369b1de620d40b6e20dd6fa05d3"
+    },
+    {
+      "path": "go/pkg/mod/cache/download/go.mongodb.org/mongo-driver/@v/v1.17.6.zip!go.mongodb.org/mongo-driver@v1.17.6/mongo/options/testdata/one-pk-multiple-certs.pem",
+      "marker": "private-key-pem",
+      "sha256": "669d7d50b15b19e81038fa25e9bf4146bc06a592a9fc34cc77029bb4440e0fb3"
+    },
+    {
+      "path": "go/pkg/mod/cache/download/go.mongodb.org/mongo-driver/@v/v1.17.6.zip!go.mongodb.org/mongo-driver@v1.17.6/testdata/auth/mongodb-aws.rst",
+      "marker": "aws-access-key-shaped",
+      "sha256": "0a27c53115a2ccda4a451554b1cd677f9cdcb00de9b8d4d06ce3c983c43d4637"
+    },
+    {
+      "path": "go/pkg/mod/cache/download/go.mongodb.org/mongo-driver/@v/v1.17.6.zip!go.mongodb.org/mongo-driver@v1.17.6/testdata/kmip-certs/client-ec.pem",
+      "marker": "private-key-pem",
+      "sha256": "dfd9f212847883f3a98bd69b33948c699f73fc7c63c6d42764b50f2c98821b7c"
+    },
+    {
+      "path": "go/pkg/mod/cache/download/go.mongodb.org/mongo-driver/@v/v1.17.6.zip!go.mongodb.org/mongo-driver@v1.17.6/testdata/kmip-certs/server-ec.pem",
+      "marker": "private-key-pem",
+      "sha256": "0d9bb8cf46e124185e7a47cf9888f4ce5eb5eea80a30cb1805e447e25ba6c2cd"
+    },
+    {
+      "path": "go/pkg/mod/cache/download/golang.org/x/telemetry/@v/v0.0.0-20260908163034-4bcc4b2ee518.zip!golang.org/x/telemetry@v0.0.0-20260908163034-4bcc4b2ee518/internal/config/testdata/config.json",
+      "marker": "credential-like-name",
+      "sha256": "6b25ebb3b3014846ecf25c457765408457d843e68050b5045baa6b98748c18c7"
+    },
+    {
+      "path": "go/pkg/mod/cache/download/golang.org/x/crypto/@v/v0.57.0.zip!golang.org/x/crypto@v0.57.0/acme/jws_test.go",
+      "marker": "private-key-pem",
+      "sha256": "ab455f181ca0f45d23fdfcd909afebe9ef6923a2febc13eed33445028e7eea4a"
+    },
+    {
+      "path": "go/pkg/mod/cache/download/golang.org/x/crypto/@v/v0.57.0.zip!golang.org/x/crypto@v0.57.0/ssh/keys_test.go",
+      "marker": "private-key-pem",
+      "sha256": "cd1dc5c836f516b5079622124a0974888f6619a2673c7fa2d8e3a62bf58f55b2"
+    },
+    {
+      "path": "go/pkg/mod/cache/download/golang.org/x/crypto/@v/v0.57.0.zip!golang.org/x/crypto@v0.57.0/ssh/test/session_test.go",
+      "marker": "private-key-pem",
+      "sha256": "1bf941c63519c4744e2c695966c103fbdd4309d1fe84b349fa0819891a3d1ac7"
+    },
+    {
+      "path": "go/pkg/mod/cache/download/golang.org/x/crypto/@v/v0.57.0.zip!golang.org/x/crypto@v0.57.0/ssh/testdata/keys.go",
+      "marker": "private-key-pem",
+      "sha256": "2dad445a36ecf0aed83ac85061216073aee0cf9e93ad7bacf51162d9d69f23aa"
+    },
+    {
+      "path": "go/pkg/mod/cache/download/github.com/golang-jwt/jwt/v4/@v/v4.5.2.zip!github.com/golang-jwt/jwt/v4@v4.5.2/test/ec256-private.pem",
+      "marker": "private-key-pem",
+      "sha256": "8f49d16949ee77fd16e896ecdfe5abd8271118ca2854ec2983238cf57d44a077"
+    },
+    {
+      "path": "go/pkg/mod/cache/download/github.com/golang-jwt/jwt/v4/@v/v4.5.2.zip!github.com/golang-jwt/jwt/v4@v4.5.2/test/ec384-private.pem",
+      "marker": "private-key-pem",
+      "sha256": "92c66300dedd5840409a8c69d75f9cfb9dbf7bdc2bf53f70ca86fadd7e9fc437"
+    },
+    {
+      "path": "go/pkg/mod/cache/download/github.com/golang-jwt/jwt/v4/@v/v4.5.2.zip!github.com/golang-jwt/jwt/v4@v4.5.2/test/ec512-private.pem",
+      "marker": "private-key-pem",
+      "sha256": "f3c2596c6eed99ebdcb3cf1250ce87a5d5f41e416b26855be2efb588f89d59c5"
+    },
+    {
+      "path": "go/pkg/mod/cache/download/github.com/golang-jwt/jwt/v4/@v/v4.5.2.zip!github.com/golang-jwt/jwt/v4@v4.5.2/test/ed25519-private.pem",
+      "marker": "private-key-pem",
+      "sha256": "ca38f0093a8016e663bafd8fad29e786b3036eaf6957b04a8c7b1117119a73fc"
+    },
+    {
+      "path": "go/pkg/mod/cache/download/github.com/golang-jwt/jwt/v4/@v/v4.5.2.zip!github.com/golang-jwt/jwt/v4@v4.5.2/test/privateSecure.pem",
+      "marker": "private-key-pem",
+      "sha256": "bfd14a01ec5ddb80f9ce6e204d11154b60835830bebc19db1e8a128b5b50e79d"
+    },
+    {
+      "path": "go/pkg/mod/cache/download/github.com/golang-jwt/jwt/v4/@v/v4.5.2.zip!github.com/golang-jwt/jwt/v4@v4.5.2/test/sample_key",
+      "marker": "private-key-pem",
+      "sha256": "9a39720a1e110182577eb35aae86c779da6e6bd779cc7d2aefa0a43b93039fbd"
+    },
+    {
+      "path": "go/pkg/mod/cache/download/github.com/aws/aws-sdk-go-v2/service/sts/@v/v1.41.8.zip!github.com/aws/aws-sdk-go-v2/service/sts@v1.41.8/api_op_GetAccessKeyInfo.go",
+      "marker": "aws-access-key-shaped",
+      "sha256": "026bf5c99202b1b8c2bfb42deaa0964404efb95db5af80f64726890a1c122c9c"
+    },
+    {
+      "path": "go/pkg/mod/cache/download/github.com/aws/aws-sdk-go-v2/service/s3/@v/v1.96.2.zip!github.com/aws/aws-sdk-go-v2/service/s3@v1.96.2/presign_post_test.go",
+      "marker": "aws-access-key-shaped",
+      "sha256": "883f5e64a390380102113f69db1ccb5b7222bb5f4908524f94cc2bbacaec9480"
+    },
+    {
+      "path": "go/pkg/mod/cache/download/github.com/aws/aws-sdk-go-v2/credentials/@v/v1.19.11.zip!github.com/aws/aws-sdk-go-v2/credentials@v1.19.11/processcreds/testdata/longsessiontoken.json",
+      "marker": "aws-access-key-shaped",
+      "sha256": "24cd39544ab2e751b0c8faf12df8ff86f49d61130e09cef7d38c6114fbd4b861"
+    },
+    {
+      "path": "go/pkg/mod/cache/download/github.com/aws/aws-sdk-go-v2/@v/v1.41.3.zip!github.com/aws/aws-sdk-go-v2@v1.41.3/aws/credential_cache_test.go",
+      "marker": "aws-access-key-shaped",
+      "sha256": "2659029d98dd27b3a8c60a88123dd36df80eab6f35abf4014e9dac4a19f4fec3"
+    },
+    {
+      "path": "go/pkg/mod/cache/download/github.com/aws/aws-sdk-go-v2/@v/v1.41.3.zip!github.com/aws/aws-sdk-go-v2@v1.41.3/aws/signer/v4/middleware_test.go",
+      "marker": "aws-access-key-shaped",
+      "sha256": "707c475213cc8a9904efc23a838f79baae794a9671f43bf3d51b2f14cf5107be"
+    }
+  ],
+  "npm": {
+    "stats": {
+      "lockMatchedTarballs": 165,
+      "indexEntries": 165,
+      "contentSha512": 162,
+      "nestedType:b'5'": 11
+    },
+    "publicRegistryUrls": 162,
+    "tarballsOutsideSourceLock": [],
+    "sourceLockExternalUrls": 239,
+    "sensitiveHeaderNames": []
+  },
+  "go": {
+    "stats": {
+      "extractedMembersByteMatched": 13820,
+      "ziphashMatches": 136,
+      "sourceGoSumZipMatches": 47,
+      "sourceGoSumModMatches": 65
+    },
+    "checksumsMissingFromSelectedSourceSums": [
+      {
+        "module": "go.yaml.in/yaml/v3",
+        "version": "v3.0.4",
+        "h1": "h1:tfq32ie2Jv2UxXFdLJdh3jXuOzWiL1fo0bu/FbuKpbc="
+      },
+      {
+        "module": "go.yaml.in/yaml/v3",
+        "version": "v3.0.4/go.mod",
+        "h1": "h1:DhzuOOF2ATzADvBadXxruRBLzYTpT36CKvDb3+aBEFg="
+      },
+      {
+        "module": "go.mongodb.org/mongo-driver",
+        "version": "v1.17.6",
+        "h1": "h1:87JUG1wZfWsr6rIz3ZmpH90rL5tea7O3IHuSwHUpsss="
+      },
+      {
+        "module": "go.mongodb.org/mongo-driver",
+        "version": "v1.17.6/go.mod",
+        "h1": "h1:Hy04i7O2kC4RS06ZrhPRqj/u4DTYkFDAAccj+rVKqgQ="
+      },
+      {
+        "module": "dario.cat/mergo",
+        "version": "v1.0.2",
+        "h1": "h1:85+piFYR1tMbRrLcDwR18y4UKJ3aH1Tbzi24VRW1TK8="
+      },
+      {
+        "module": "dario.cat/mergo",
+        "version": "v1.0.2/go.mod",
+        "h1": "h1:E/hbnu0NxMFBjpMIE34DRGLWqDy0g5FuKDhCb31ngxA="
+      },
+      {
+        "module": "gopkg.in/check.v1",
+        "version": "v0.0.0-20161208181325-20d25e280405",
+        "h1": "h1:yhCVgyC4o1eVCa2tZl7eS0r+SDo693bJlVdllGtEeKM="
+      },
+      {
+        "module": "gopkg.in/yaml.v2",
+        "version": "v2.2.2",
+        "h1": "h1:ZCJp+EgiOT7lHqUV2J862kp8Qj64Jo6az82+3Td9dZw="
+      },
+      {
+        "module": "golang.org/x/telemetry",
+        "version": "v0.0.0-20260908163034-4bcc4b2ee518",
+        "h1": "h1:F5BWKvW126NXR74uxkxuc1jQHhm/rwm/J3rSiFyuRs4="
+      },
+      {
+        "module": "golang.org/x/telemetry",
+        "version": "v0.0.0-20260908163034-4bcc4b2ee518/go.mod",
+        "h1": "h1:i+ivNqjDnTF3WTElsdk5g9V5DTSBYgdNo7xTU9SDwYA="
+      },
+      {
+        "module": "golang.org/x/exp",
+        "version": "v0.0.0-20251209150349-8475f28825e9",
+        "h1": "h1:MDfG8Cvcqlt9XXrmEiD4epKn7VJHZO84hejP9Jmp0MM="
+      },
+      {
+        "module": "golang.org/x/exp",
+        "version": "v0.0.0-20251209150349-8475f28825e9/go.mod",
+        "h1": "h1:EPRbTFwzwjXj9NpYyyrvenVh9Y+GFeEvMNh7Xuz7xgU="
+      },
+      {
+        "module": "golang.org/x/net",
+        "version": "v0.59.0",
+        "h1": "h1:5zfYln+w5XCxwrnMMJPufRgNoXEaGxl0wo5GqPXyues="
+      },
+      {
+        "module": "golang.org/x/net",
+        "version": "v0.59.0/go.mod",
+        "h1": "h1:2DA/G1UfVbCpQPeWTmMPGY7Cs2PkBkwu743bVX5PIVg="
+      },
+      {
+        "module": "github.com/yuin/goldmark",
+        "version": "v1.4.13",
+        "h1": "h1:fVcFKWvrslecOb/tg+Cc05dkeYx540o0FuFt3nUVDoE="
+      },
+      {
+        "module": "github.com/yuin/goldmark",
+        "version": "v1.4.13/go.mod",
+        "h1": "h1:6yULJ656Px+3vBD8DxQVa3kxgyrAnzto9xy5taEt/CY="
+      },
+      {
+        "module": "github.com/xo/terminfo",
+        "version": "v0.0.0-20220910002029-abceb7e1c41e",
+        "h1": "h1:JVG44RsyaB9T2KIHavMF/ppJZNG9ZpyihvCd0w101no="
+      },
+      {
+        "module": "github.com/xo/terminfo",
+        "version": "v0.0.0-20220910002029-abceb7e1c41e/go.mod",
+        "h1": "h1:RbqR21r5mrJuqunuUZ/Dhy/avygyECGrLceyNeo4LiM="
+      },
+      {
+        "module": "github.com/wagoodman/go-progress",
+        "version": "v0.0.0-20230925121702-07e42b3cdba0",
+        "h1": "h1:0KGbf+0SMg+UFy4e1A/CPVvXn21f1qtWdeJwxZFoQG8="
+      },
+      {
+        "module": "github.com/wagoodman/go-progress",
+        "version": "v0.0.0-20230925121702-07e42b3cdba0/go.mod",
+        "h1": "h1:jLXFoL31zFaHKAAyZUh+sxiTDFe1L1ZHrcK2T1itVKA="
+      },
+      {
+        "module": "github.com/wagoodman/go-partybus",
+        "version": "v0.0.0-20230516145632-8ccac152c651",
+        "h1": "h1:jIVmlAFIqV3d+DOxazTR9v+zgj8+VYuQBzPgBZvWBHA="
+      },
+      {
+        "module": "github.com/wagoodman/go-partybus",
+        "version": "v0.0.0-20230516145632-8ccac152c651/go.mod",
+        "h1": "h1:b26F2tHLqaoRQf8DywqzVaV1MQ9yvjb0OMcNl7Nxu20="
+      },
+      {
+        "module": "github.com/subosito/gotenv",
+        "version": "v1.6.0",
+        "h1": "h1:9NlTDc1FTs4qu0DDq7AEtTPNw6SVm7uBMsUCUjABIf8="
+      },
+      {
+        "module": "github.com/subosito/gotenv",
+        "version": "v1.6.0/go.mod",
+        "h1": "h1:Dk4QP5c2W3ibzajGcXpNraDfq2IrhjMIvMSWPKKo0FU="
+      },
+      {
+        "module": "github.com/spf13/viper",
+        "version": "v1.21.0",
+        "h1": "h1:x5S+0EU27Lbphp4UKm1C+1oQO+rKx36vfCoaVebLFSU="
+      },
+      {
+        "module": "github.com/spf13/viper",
+        "version": "v1.21.0/go.mod",
+        "h1": "h1:P0lhsswPGWD/1lZJ9ny3fYnVqxiegrlNrEmgLjbTCAY="
+      },
+      {
+        "module": "github.com/spf13/pflag",
+        "version": "v1.0.10",
+        "h1": "h1:4EBh2KAYBwaONj6b2Ye1GiHfwjqyROoF4RwYO+vPwFk="
+      },
+      {
+        "module": "github.com/spf13/pflag",
+        "version": "v1.0.10/go.mod",
+        "h1": "h1:McXfInJRrz4CZXVZOBLb0bTZqETkiAhM9Iw0y3An2Bg="
+      },
+      {
+        "module": "github.com/spf13/cobra",
+        "version": "v1.10.2",
+        "h1": "h1:DMTTonx5m65Ic0GOoRY2c16WCbHxOOw6xxezuLaBpcU="
+      },
+      {
+        "module": "github.com/spf13/cobra",
+        "version": "v1.10.2/go.mod",
+        "h1": "h1:7C1pvHqHw5A4vrJfjNwvOdzYu0Gml16OCs2GRiTUUS4="
+      },
+      {
+        "module": "github.com/spf13/cast",
+        "version": "v1.10.0",
+        "h1": "h1:h2x0u2shc1QuLHfxi+cTJvs30+ZAHOGRic8uyGTDWxY="
+      },
+      {
+        "module": "github.com/spf13/cast",
+        "version": "v1.10.0/go.mod",
+        "h1": "h1:jNfB8QC9IA6ZuY2ZjDp0KtFO2LZZlg4S/7bzP6qqeHo="
+      },
+      {
+        "module": "github.com/spf13/afero",
+        "version": "v1.15.0",
+        "h1": "h1:b/YBCLWAJdFWJTN9cLhiXXcD7mzKn9Dm86dNnfyQw1I="
+      },
+      {
+        "module": "github.com/spf13/afero",
+        "version": "v1.15.0/go.mod",
+        "h1": "h1:NC2ByUVxtQs4b3sIUphxK0NioZnmxgyCrfzeuq8lxMg="
+      },
+      {
+        "module": "github.com/sagikazarmark/locafero",
+        "version": "v0.12.0",
+        "h1": "h1:/NQhBAkUb4+fH1jivKHWusDYFjMOOKU88eegjfxfHb4="
+      },
+      {
+        "module": "github.com/sagikazarmark/locafero",
+        "version": "v0.12.0/go.mod",
+        "h1": "h1:sZh36u/YSZ918v0Io+U9ogLYQJ9tLLBmM4eneO6WwsI="
+      },
+      {
+        "module": "github.com/rivo/uniseg",
+        "version": "v0.4.7",
+        "h1": "h1:WUdvkW8uEhrYfLC4ZzdpI2ztxP1I582+49Oc5Mq64VQ="
+      },
+      {
+        "module": "github.com/rivo/uniseg",
+        "version": "v0.4.7/go.mod",
+        "h1": "h1:FN3SvrM+Zdj16jyLfmOkMNblXMcoc8DfTHruCPUcx88="
+      },
+      {
+        "module": "github.com/pelletier/go-toml/v2",
+        "version": "v2.2.4",
+        "h1": "h1:mye9XuhQ6gvn5h28+VilKrrPoQVanw5PMw/TB0t5Ec4="
+      },
+      {
+        "module": "github.com/pelletier/go-toml/v2",
+        "version": "v2.2.4/go.mod",
+        "h1": "h1:2gIqNv+qfxSVS7cM2xJQKtLSTLUE9V8t9Stt+h56mCY="
+      },
+      {
+        "module": "github.com/oklog/ulid",
+        "version": "v1.3.1",
+        "h1": "h1:EGfNDEx6MqHz8B3uNV6QAib1UR2Lm97sHi3ocA6ESJ4="
+      },
+      {
+        "module": "github.com/oklog/ulid",
+        "version": "v1.3.1/go.mod",
+        "h1": "h1:CirwcVhetQ6Lv90oh/F+FBtV6XMibvdAFo93nm5qn4U="
+      },
+      {
+        "module": "github.com/muesli/termenv",
+        "version": "v0.16.0",
+        "h1": "h1:S5AlUN9dENB57rsbnkPyfdGuWIlkmzJjbFf0Tf5FWUc="
+      },
+      {
+        "module": "github.com/muesli/termenv",
+        "version": "v0.16.0/go.mod",
+        "h1": "h1:ZRfOIKPFDYQoDFF4Olj7/QJbW60Ol/kL1pU3VfY/Cnk="
+      },
+      {
+        "module": "github.com/muesli/reflow",
+        "version": "v0.3.0",
+        "h1": "h1:IFsN6K9NfGtjeggFP+68I4chLZV2yIKsXJFNZ+eWh6s="
+      },
+      {
+        "module": "github.com/muesli/reflow",
+        "version": "v0.3.0/go.mod",
+        "h1": "h1:pbwTDkVPibjO2kyvBQRBxTWEEGDGq0FlB1BIKtnHY/8="
+      },
+      {
+        "module": "github.com/muesli/cancelreader",
+        "version": "v0.2.2",
+        "h1": "h1:3I4Kt4BQjOR54NavqnDogx/MIoWBFa0StPA8ELUXHmA="
+      },
+      {
+        "module": "github.com/muesli/cancelreader",
+        "version": "v0.2.2/go.mod",
+        "h1": "h1:3XuTXfFS2VjM+HTLZY9Ak0l6eUKfijIfMUZ4EgX0QYo="
+      },
+      {
+        "module": "github.com/muesli/ansi",
+        "version": "v0.0.0-20230316100256-276c6243b2f6",
+        "h1": "h1:ZK8zHtRHOkbHy6Mmr5D264iyp3TiX5OmNcI5cIARiQI="
+      },
+      {
+        "module": "github.com/muesli/ansi",
+        "version": "v0.0.0-20230316100256-276c6243b2f6/go.mod",
+        "h1": "h1:CJlz5H+gyd6CUWT45Oy4q24RdLyn7Md9Vj2/ldJBSIo="
+      },
+      {
+        "module": "github.com/lucasb-eyer/go-colorful",
+        "version": "v1.3.0",
+        "h1": "h1:2/yBRLdWBZKrf7gB40FoiKfAWYQ0lqNcbuQwVHXptag="
+      },
+      {
+        "module": "github.com/lucasb-eyer/go-colorful",
+        "version": "v1.3.0/go.mod",
+        "h1": "h1:R4dSotOR9KMtayYi1e77YzuveK+i7ruzyGqttikkLy0="
+      },
+      {
+        "module": "github.com/jedib0t/go-pretty",
+        "version": "v4.3.0+incompatible",
+        "h1": "h1:CGs8AVhEKg/n9YbUenWmNStRW2PHJzaeDodcfvRAbIo="
+      },
+      {
+        "module": "github.com/jedib0t/go-pretty",
+        "version": "v4.3.0+incompatible/go.mod",
+        "h1": "h1:XemHduiw8R651AF9Pt4FwCTKeG3oo7hrHJAoznj9nag="
+      },
+      {
+        "module": "github.com/inconshreveable/mousetrap",
+        "version": "v1.1.0",
+        "h1": "h1:wN+x4NVGpMsO7ErUn/mUI3vEoE6Jt13X2s0bqwp9tc8="
+      },
+      {
+        "module": "github.com/inconshreveable/mousetrap",
+        "version": "v1.1.0/go.mod",
+        "h1": "h1:vpF70FUmC8bwa3OWnCshd2FqLfsEA9PFc4w1p2J65bw="
+      },
+      {
+        "module": "github.com/iancoleman/strcase",
+        "version": "v0.3.0",
+        "h1": "h1:nTXanmYxhfFAMjZL34Ov6gkzEsSJZ5DbhxWjvSASxEI="
+      },
+      {
+        "module": "github.com/iancoleman/strcase",
+        "version": "v0.3.0/go.mod",
+        "h1": "h1:iwCmte+B7n89clKwxIoIXy/HfoL7AsD47ZCWhYzw7ho="
+      },
+      {
+        "module": "github.com/hashicorp/go-multierror",
+        "version": "v1.1.1",
+        "h1": "h1:H5DkEtf6CXdFp0N0Em5UCwQpXMWke8IA0+lD48awMYo="
+      },
+      {
+        "module": "github.com/hashicorp/go-multierror",
+        "version": "v1.1.1/go.mod",
+        "h1": "h1:iw975J/qwKPdAO1clOe2L8331t/9/fmwbPZ6JB6eMoM="
+      },
+      {
+        "module": "github.com/hashicorp/errwrap",
+        "version": "v1.1.0",
+        "h1": "h1:OxrOeh75EUXMY8TBjag2fzXGZ40LB6IKw45YeGUDY2I="
+      },
+      {
+        "module": "github.com/hashicorp/errwrap",
+        "version": "v1.1.0/go.mod",
+        "h1": "h1:YH+1FKiLXxHSkmPseP+kNlulaMuP3n2brvKWEqk/Jc4="
+      },
+      {
+        "module": "github.com/gookit/color",
+        "version": "v1.6.0",
+        "h1": "h1:JjJXBTk1ETNyqyilJhkTXJYYigHG24TM9Xa2M1xAhRA="
+      },
+      {
+        "module": "github.com/gookit/color",
+        "version": "v1.6.0/go.mod",
+        "h1": "h1:9ACFc7/1IpHGBW8RwuDm/0YEnhg3dwwXpoMsmtyHfjs="
+      },
+      {
+        "module": "github.com/golang-jwt/jwt/v4",
+        "version": "v4.5.2",
+        "h1": "h1:YtQM7lnr8iZ+j5q71MGKkNw9Mn7AjHM68uc9g5fXeUI="
+      },
+      {
+        "module": "github.com/golang-jwt/jwt/v4",
+        "version": "v4.5.2/go.mod",
+        "h1": "h1:m21LjoU+eqJr34lmDMbreY2eSTRJ1cv77w39/MY0Ch0="
+      },
+      {
+        "module": "github.com/go-viper/mapstructure/v2",
+        "version": "v2.4.0",
+        "h1": "h1:EBsztssimR/CONLSZZ04E8qAkxNYq4Qp9LvH92wZUgs="
+      },
+      {
+        "module": "github.com/go-viper/mapstructure/v2",
+        "version": "v2.4.0/go.mod",
+        "h1": "h1:oJDH3BJKyqBA2TXFhDsKDGDTlndYOZ6rGS0BRZIxGhM="
+      },
+      {
+        "module": "github.com/go-openapi/strfmt",
+        "version": "v0.25.0",
+        "h1": "h1:7R0RX7mbKLa9EYCTHRcCuIPcaqlyQiWNPTXwClK0saQ="
+      },
+      {
+        "module": "github.com/go-openapi/strfmt",
+        "version": "v0.25.0/go.mod",
+        "h1": "h1:nNXct7OzbwrMY9+5tLX4I21pzcmE6ccMGXl3jFdPfn8="
+      },
+      {
+        "module": "github.com/go-openapi/errors",
+        "version": "v0.22.5",
+        "h1": "h1:Yfv4O/PRYpNF3BNmVkEizcHb3uLVVsrDt3LNdgAKRY4="
+      },
+      {
+        "module": "github.com/go-openapi/errors",
+        "version": "v0.22.5/go.mod",
+        "h1": "h1:z9S8ASTUqx7+CP1Q8dD8ewGH/1JWFFLX/2PmAYNQLgk="
+      },
+      {
+        "module": "github.com/gabriel-vasile/mimetype",
+        "version": "v1.4.13",
+        "h1": "h1:46nXokslUBsAJE/wMsp5gtO500a4F3Nkz9Ufpk2AcUM="
+      },
+      {
+        "module": "github.com/gabriel-vasile/mimetype",
+        "version": "v1.4.13/go.mod",
+        "h1": "h1:d+9Oxyo1wTzWdyVUPMmXFvp4F9tea18J8ufA774AB3s="
+      },
+      {
+        "module": "github.com/felixge/fgprof",
+        "version": "v0.9.5",
+        "h1": "h1:8+vR6yu2vvSKn08urWyEuxx75NWPEvybbkBirEpsbVY="
+      },
+      {
+        "module": "github.com/felixge/fgprof",
+        "version": "v0.9.5/go.mod",
+        "h1": "h1:yKl+ERSa++RYOs32d8K6WEXCB4uXdLls4ZaZPpayhMM="
+      },
+      {
+        "module": "github.com/erikgeiser/promptkit",
+        "version": "v0.9.0",
+        "h1": "h1:3qL1mS/ntCrXdb8sTP/ka82CJ9kEQaGuYXNrYJkWYBc="
+      },
+      {
+        "module": "github.com/erikgeiser/promptkit",
+        "version": "v0.9.0/go.mod",
+        "h1": "h1:pU9dtogSe3Jlc2AY77EP7R4WFP/vgD4v+iImC83KsCo="
+      },
+      {
+        "module": "github.com/erikgeiser/coninput",
+        "version": "v0.0.0-20211004153227-1c3628e74d0f",
+        "h1": "h1:Y/CXytFA4m6baUTXGLOoWe4PQhGxaX0KpnayAqC48p4="
+      },
+      {
+        "module": "github.com/erikgeiser/coninput",
+        "version": "v0.0.0-20211004153227-1c3628e74d0f/go.mod",
+        "h1": "h1:vw97MGsxSvLiUE2X8qFplwetxpGLQrlU1Q9AUEIzCaM="
+      },
+      {
+        "module": "github.com/clipperhouse/uax29/v2",
+        "version": "v2.3.0",
+        "h1": "h1:SNdx9DVUqMoBuBoW3iLOj4FQv3dN5mDtuqwuhIGpJy4="
+      },
+      {
+        "module": "github.com/clipperhouse/uax29/v2",
+        "version": "v2.3.0/go.mod",
+        "h1": "h1:Wn1g7MK6OoeDT0vL+Q0SQLDz/KpfsVRgg6W7ihQeh4g="
+      },
+      {
+        "module": "github.com/clipperhouse/stringish",
+        "version": "v0.1.1",
+        "h1": "h1:+NSqMOr3GR6k1FdRhhnXrLfztGzuG+VuFDfatpWHKCs="
+      },
+      {
+        "module": "github.com/clipperhouse/stringish",
+        "version": "v0.1.1/go.mod",
+        "h1": "h1:v/WhFtE1q0ovMta2+m+UbpZ+2/HEXNWYXQgCt4hdOzA="
+      },
+      {
+        "module": "github.com/clipperhouse/displaywidth",
+        "version": "v0.6.2",
+        "h1": "h1:ZDpTkFfpHOKte4RG5O/BOyf3ysnvFswpyYrV7z2uAKo="
+      },
+      {
+        "module": "github.com/clipperhouse/displaywidth",
+        "version": "v0.6.2/go.mod",
+        "h1": "h1:R+kHuzaYWFkTm7xoMmK1lFydbci4X2CicfbGstSGg0o="
+      },
+      {
+        "module": "github.com/charmbracelet/x/term",
+        "version": "v0.2.2",
+        "h1": "h1:xVRT/S2ZcKdhhOuSP4t5cLi5o+JxklsoEObBSgfgZRk="
+      },
+      {
+        "module": "github.com/charmbracelet/x/term",
+        "version": "v0.2.2/go.mod",
+        "h1": "h1:kF8CY5RddLWrsgVwpw4kAa6TESp6EB5y3uxGLeCqzAI="
+      },
+      {
+        "module": "github.com/charmbracelet/x/cellbuf",
+        "version": "v0.0.14",
+        "h1": "h1:iUEMryGyFTelKW3THW4+FfPgi4fkmKnnaLOXuc+/Kj4="
+      },
+      {
+        "module": "github.com/charmbracelet/x/cellbuf",
+        "version": "v0.0.14/go.mod",
+        "h1": "h1:P447lJl49ywBbil/KjCk2HexGh4tEY9LH0/1QrZZ9rA="
+      },
+      {
+        "module": "github.com/charmbracelet/x/ansi",
+        "version": "v0.11.3",
+        "h1": "h1:6DcVaqWI82BBVM/atTyq6yBoRLZFBsnoDoX9GCu2YOI="
+      },
+      {
+        "module": "github.com/charmbracelet/x/ansi",
+        "version": "v0.11.3/go.mod",
+        "h1": "h1:yI7Zslym9tCJcedxz5+WBq+eUGMJT0bM06Fqy1/Y4dI="
+      },
+      {
+        "module": "github.com/charmbracelet/lipgloss",
+        "version": "v1.1.0",
+        "h1": "h1:vYXsiLHVkK7fp74RkV7b2kq9+zDLoEU4MZoFqR/noCY="
+      },
+      {
+        "module": "github.com/charmbracelet/lipgloss",
+        "version": "v1.1.0/go.mod",
+        "h1": "h1:/6Q8FR2o+kj8rz4Dq0zQc3vYf7X+B0binUUBwA0aL30="
+      },
+      {
+        "module": "github.com/charmbracelet/harmonica",
+        "version": "v0.2.0",
+        "h1": "h1:8NxJWRWg/bzKqqEaaeFNipOu77YR5t8aSwG4pgaUBiQ="
+      },
+      {
+        "module": "github.com/charmbracelet/harmonica",
+        "version": "v0.2.0/go.mod",
+        "h1": "h1:KSri/1RMQOZLbw7AHqgcBycp8pgJnQMYYT8QZRqZ1Ao="
+      },
+      {
+        "module": "github.com/charmbracelet/colorprofile",
+        "version": "v0.4.1",
+        "h1": "h1:a1lO03qTrSIRaK8c3JRxJDZOvhvIeSco3ej+ngLk1kk="
+      },
+      {
+        "module": "github.com/charmbracelet/colorprofile",
+        "version": "v0.4.1/go.mod",
+        "h1": "h1:U1d9Dljmdf9DLegaJ0nGZNJvoXAhayhmidOdcBwAvKk="
+      },
+      {
+        "module": "github.com/charmbracelet/bubbles",
+        "version": "v0.21.0",
+        "h1": "h1:9TdC97SdRVg/1aaXNVWfFH3nnLAwOXr8Fn6u6mfQdFs="
+      },
+      {
+        "module": "github.com/charmbracelet/bubbles",
+        "version": "v0.21.0/go.mod",
+        "h1": "h1:HF+v6QUR4HkEpz62dx7ym2xc71/KBHg+zKwJtMw+qtg="
+      },
+      {
+        "module": "github.com/charmbracelet/bubbletea",
+        "version": "v1.3.10",
+        "h1": "h1:otUDHWMMzQSB0Pkc87rm691KZ3SWa4KUlvF9nRvCICw="
+      },
+      {
+        "module": "github.com/charmbracelet/bubbletea",
+        "version": "v1.3.10/go.mod",
+        "h1": "h1:ORQfo0fk8U+po9VaNvnV95UPWA1BitP1E0N6xJPlHr4="
+      },
+      {
+        "module": "github.com/aymanbagabas/go-osc52/v2",
+        "version": "v2.0.1",
+        "h1": "h1:HwpRHbFMcZLEVr42D4p7XBqjyuxQH5SMiErDT4WkJ2k="
+      },
+      {
+        "module": "github.com/aymanbagabas/go-osc52/v2",
+        "version": "v2.0.1/go.mod",
+        "h1": "h1:uYgXzlJ7ZpABp8OJ+exZzJJhRNQ2ASbcXHWsFqH8hp8="
+      },
+      {
+        "module": "github.com/aws/smithy-go",
+        "version": "v1.24.2",
+        "h1": "h1:FzA3bu/nt/vDvmnkg+R8Xl46gmzEDam6mZ1hzmwXFng="
+      },
+      {
+        "module": "github.com/aws/smithy-go",
+        "version": "v1.24.2/go.mod",
+        "h1": "h1:YE2RhdIuDbA5E5bTdciG9KrW3+TiEONeUWCqxX9i1Fc="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/sts",
+        "version": "v1.41.8",
+        "h1": "h1:XQTQTF75vnug2TXS8m7CVJfC2nniYPZnO1D4Np761Oo="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/sts",
+        "version": "v1.41.8/go.mod",
+        "h1": "h1:Xgx+PR1NUOjNmQY+tRMnouRp83JRM8pRMw/vCaVhPkI="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/ssooidc",
+        "version": "v1.35.16",
+        "h1": "h1:EnUdUqRP1CNzt2DkV67tJx6XDN4xlfBFm+bzeNOQVb0="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/ssooidc",
+        "version": "v1.35.16/go.mod",
+        "h1": "h1:Jic/xv0Rq/pFNCh3WwpH4BEqdbSAl+IyHro8LbibHD8="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/sso",
+        "version": "v1.30.12",
+        "h1": "h1:iSsvB9EtQ09YrsmIc44Heqlx5ByGErqhPK1ZQLppias="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/sso",
+        "version": "v1.30.12/go.mod",
+        "h1": "h1:fEWYKTRGoZNl8tZ77i61/ccwOMJdGxwOhWCkp6TXAr0="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/signin",
+        "version": "v1.0.7",
+        "h1": "h1:Y2cAXlClHsXkkOvWZFXATr34b0hxxloeQu/pAZz2row="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/signin",
+        "version": "v1.0.7/go.mod",
+        "h1": "h1:idzZ7gmDeqeNrSPkdbtMp9qWMgcBwykA7P7Rzh5DXVU="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/s3",
+        "version": "v1.96.2",
+        "h1": "h1:M1A9AjcFwlxTLuf0Faj88L8Iqw0n/AJHjpZTQzMMsSc="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/s3",
+        "version": "v1.96.2/go.mod",
+        "h1": "h1:KsdTV6Q9WKUZm2mNJnUFmIoXfZux91M3sr/a4REX8e0="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/internal/s3shared",
+        "version": "v1.19.18",
+        "h1": "h1:/A/xDuZAVD2BpsS2fftFRo/NoEKQJ8YTnJDEHBy2Gtg="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/internal/s3shared",
+        "version": "v1.19.18/go.mod",
+        "h1": "h1:hWe9b4f+djUQGmyiGEeOnZv69dtMSgpDRIvNMvuvzvY="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url",
+        "version": "v1.13.19",
+        "h1": "h1:X1Tow7suZk9UCJHE1Iw9GMZJJl0dAnKXXP1NaSDHwmw="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url",
+        "version": "v1.13.19/go.mod",
+        "h1": "h1:/rARO8psX+4sfjUQXp5LLifjUt8DuATZ31WptNJTyQA="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/internal/checksum",
+        "version": "v1.9.10",
+        "h1": "h1:fJvQ5mIBVfKtiyx0AHY6HeWcRX5LGANLpq8SVR+Uazs="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/internal/checksum",
+        "version": "v1.9.10/go.mod",
+        "h1": "h1:Kzm5e6OmNH8VMkgK9t+ry5jEih4Y8whqs+1hrkxim1I="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding",
+        "version": "v1.13.6",
+        "h1": "h1:XAq62tBTJP/85lFD5oqOOe7YYgWxY9LvWq8plyDvDVg="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding",
+        "version": "v1.13.6/go.mod",
+        "h1": "h1:x0nZssQ3qZSnIcePWLvcoFisRXJzcTVvYpAAdYX8+GI="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/internal/v4a",
+        "version": "v1.4.18",
+        "h1": "h1:eZioDaZGJ0tMM4gzmkNIO2aAoQd+je7Ug7TkvAzlmkU="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/internal/v4a",
+        "version": "v1.4.18/go.mod",
+        "h1": "h1:CCXwUKAJdoWr6/NcxZ+zsiPr6oH/Q5aTooRGYieAyj4="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/internal/ini",
+        "version": "v1.8.4",
+        "h1": "h1:WKuaxf++XKWlHWu9ECbMlha8WOEGm0OUEZqm4K/Gcfk="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/internal/ini",
+        "version": "v1.8.4/go.mod",
+        "h1": "h1:ZWy7j6v1vWGmPReu0iSGvRiise4YI5SkR3OHKTZ6Wuc="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/internal/endpoints/v2",
+        "version": "v2.7.19",
+        "h1": "h1:AWeJMk33GTBf6J20XJe6qZoRSJo0WfUhsMdUKhoODXE="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/internal/endpoints/v2",
+        "version": "v2.7.19/go.mod",
+        "h1": "h1:+GWrYoaAsV7/4pNHpwh1kiNLXkKaSoppxQq9lbH8Ejw="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/internal/configsources",
+        "version": "v1.4.19",
+        "h1": "h1:/sECfyq2JTifMI2JPyZ4bdRN77zJmr6SrS1eL3augIA="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/internal/configsources",
+        "version": "v1.4.19/go.mod",
+        "h1": "h1:dMf8A5oAqr9/oxOfLkC/c2LU/uMcALP0Rgn2BD5LWn0="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/feature/s3/manager",
+        "version": "v1.21.1",
+        "h1": "h1:1hWFp+52Vq8Fevy/KUhbW/1MEApMz7uitCF/PQXRJpk="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/feature/s3/manager",
+        "version": "v1.21.1/go.mod",
+        "h1": "h1:sIec8j802/rCkCKgZV678HFR0s7lhQUYXT77tIvlaa4="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/feature/ec2/imds",
+        "version": "v1.18.19",
+        "h1": "h1:INUvJxmhdEbVulJYHI061k4TVuS3jzzthNvjqvVvTKM="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/feature/ec2/imds",
+        "version": "v1.18.19/go.mod",
+        "h1": "h1:FpZN2QISLdEBWkayloda+sZjVJL+e9Gl0k1SyTgcswU="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/credentials",
+        "version": "v1.19.11",
+        "h1": "h1:NdV8cwCcAXrCWyxArt58BrvZJ9pZ9Fhf9w6Uh5W3Uyc="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/credentials",
+        "version": "v1.19.11/go.mod",
+        "h1": "h1:30yY2zqkMPdrvxBqzI9xQCM+WrlrZKSOpSJEsylVU+8="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/config",
+        "version": "v1.32.10",
+        "h1": "h1:9DMthfO6XWZYLfzZglAgW5Fyou2nRI5CuV44sTedKBI="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/config",
+        "version": "v1.32.10/go.mod",
+        "h1": "h1:2rUIOnA2JaiqYmSKYmRJlcMWy6qTj1vuRFscppSBMcw="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream",
+        "version": "v1.7.5",
+        "h1": "h1:zWFmPmgw4sveAYi1mRqG+E/g0461cJ5M4bJ8/nc6d3Q="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream",
+        "version": "v1.7.5/go.mod",
+        "h1": "h1:nVUlMLVV8ycXSb7mSkcNu9e3v/1TJq2RTlrPwhYWr5c="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2",
+        "version": "v1.41.3",
+        "h1": "h1:4kQ/fa22KjDt13QCy1+bYADvdgcxpfH18f0zP542kZA="
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2",
+        "version": "v1.41.3/go.mod",
+        "h1": "h1:mwsPRE8ceUUpiTgF7QmQIJ7lgsKUPQOUl3o72QBrE1o="
+      },
+      {
+        "module": "github.com/atotto/clipboard",
+        "version": "v0.1.4",
+        "h1": "h1:EH0zSVneZPSuFR11BlR9YppQTVDbh5+16AmcJi4g1z4="
+      },
+      {
+        "module": "github.com/atotto/clipboard",
+        "version": "v0.1.4/go.mod",
+        "h1": "h1:ZY9tmq7sm5xIbd9bOK4onWV4S6X0u6GY7Vn0Yu86PYI="
+      },
+      {
+        "module": "github.com/andybalholm/cascadia",
+        "version": "v1.3.3",
+        "h1": "h1:AG2YHrzJIm4BZ19iwJ/DAua6Btl3IwJX+VI4kktS1LM="
+      },
+      {
+        "module": "github.com/andybalholm/cascadia",
+        "version": "v1.3.3/go.mod",
+        "h1": "h1:xNd9bqTn98Ln4DwST8/nG+H0yuB8Hmgu1YHNnWw0GeA="
+      },
+      {
+        "module": "github.com/PuerkitoBio/goquery",
+        "version": "v1.11.0",
+        "h1": "h1:jZ7pwMQXIITcUXNH83LLk+txlaEy6NVOfTuP43xxfqw="
+      },
+      {
+        "module": "github.com/PuerkitoBio/goquery",
+        "version": "v1.11.0/go.mod",
+        "h1": "h1:wQHgxUOU3JGuj3oD/QFfxUdlzW6xPHfqyHre6VMY4DQ="
+      },
+      {
+        "module": "github.com/adrg/xdg",
+        "version": "v0.5.3",
+        "h1": "h1:xRnxJXne7+oWDatRhR1JLnvuccuIeCoBu2rtuLqQB78="
+      },
+      {
+        "module": "github.com/adrg/xdg",
+        "version": "v0.5.3/go.mod",
+        "h1": "h1:nlTsY+NNiCBGCK2tpm09vRqfVzrc2fLmXGpBLF0zlTQ="
+      },
+      {
+        "module": "github.com/stretchr/objx",
+        "version": "v0.1.0",
+        "h1": "h1:4G4v2dO3VZwixGIRoQ5Lfboy6nUhCyYzaqnIAPPhYs4="
+      },
+      {
+        "module": "github.com/pborman/indent",
+        "version": "v1.2.1",
+        "h1": "h1:lFiviAbISHv3Rf0jcuh489bi06hj98JsVMtIDZQb9yM="
+      },
+      {
+        "module": "github.com/pborman/indent",
+        "version": "v1.2.1/go.mod",
+        "h1": "h1:FitS+t35kIYtB5xWTZAPhnmrxcciEEOdbyrrpz5K6Vw="
+      },
+      {
+        "module": "github.com/pborman/getopt",
+        "version": "v0.0.0-20180811024354-2b5b3bfb099b",
+        "h1": "h1:K1wa7ads2Bu1PavI6LfBRMYSy6Zi+Rky0OhWBfrmkmY="
+      },
+      {
+        "module": "github.com/certifi/gocertifi",
+        "version": "v0.0.0-20180118203423-deb3ae2ef261",
+        "h1": "h1:6/yVvBsKeAw05IUj4AzvrxaCnDjN4nUqKjW9+w5wixg="
+      },
+      {
+        "module": "github.com/pkg/profile",
+        "version": "v1.7.0",
+        "h1": "h1:hnbDkaNWPCLMO9wGLdBFTIZvzDrDfBM2072E1S9gJkA="
+      },
+      {
+        "module": "github.com/pkg/profile",
+        "version": "v1.7.0/go.mod",
+        "h1": "h1:8Uer0jas47ZQMJ7VD+OHknK4YDY07LPUC6dEvqDjvNo="
+      },
+      {
+        "module": "github.com/mattn/go-localereader",
+        "version": "v0.0.2-0.20220822084749-2491eb6c1c75",
+        "h1": "h1:P8UmIzZMYDR+NGImiFvErt6VWfIRPuGM+vyjiEdkmIw="
+      },
+      {
+        "module": "github.com/mattn/go-localereader",
+        "version": "v0.0.2-0.20220822084749-2491eb6c1c75/go.mod",
+        "h1": "h1:8fBrzywKY7BI3czFoHkuzRoWE9C+EiG4R1k4Cjx5p88="
+      },
+      {
+        "module": "github.com/mattn/go-runewidth",
+        "version": "v0.0.19",
+        "h1": "h1:v++JhqYnZuu5jSKrk9RbgF5v4CGUjqRfBm05byFGLdw="
+      },
+      {
+        "module": "github.com/mattn/go-runewidth",
+        "version": "v0.0.19/go.mod",
+        "h1": "h1:XBkDxAl56ILZc9knddidhrOlY5R/pDhgLpndooCuJAs="
+      },
+      {
+        "module": "github.com/anchore/go-homedir",
+        "version": "v0.0.0-20250319154043-c29668562e4d",
+        "h1": "h1:gT69osH9AsdpOfqxbRwtxcNnSZ1zg4aKy2BevO3ZBdc="
+      },
+      {
+        "module": "github.com/anchore/go-homedir",
+        "version": "v0.0.0-20250319154043-c29668562e4d/go.mod",
+        "h1": "h1:PhSnuFYknwPZkOWKB1jXBNToChBA+l0FjwOxtViIc50="
+      },
+      {
+        "module": "github.com/anchore/fangs",
+        "version": "v0.0.0-20251204220743-df7ac3652565",
+        "h1": "h1:w7AFkXXSlBSgY/+NbuQIg5qp8hBq2VTliVL1y9p3QzU="
+      },
+      {
+        "module": "github.com/anchore/fangs",
+        "version": "v0.0.0-20251204220743-df7ac3652565/go.mod",
+        "h1": "h1:yYsgDLrzipKlyDAzrjtd35lMcXyZ60b8Ko8vTaMwqoU="
+      },
+      {
+        "module": "github.com/anchore/clio",
+        "version": "v0.0.0-20251028140840-721eea5390a4",
+        "h1": "h1:ou5Co2rLHT5mqVdVmVE7QukGe2cCFTryAaaVzEEDnb0="
+      },
+      {
+        "module": "github.com/anchore/clio",
+        "version": "v0.0.0-20251028140840-721eea5390a4/go.mod",
+        "h1": "h1:Qps+CdrdcMx1k7GhKaJ1ZkKYZvRaIfbNmW6B8/5ONPs="
+      },
+      {
+        "module": "github.com/anchore/bubbly",
+        "version": "v0.0.0-20250717181826-8a411f9d8cbf",
+        "h1": "h1:UY7SQkfVVaeGUpPZrJxqmTc8M0ZSWc5ChiKF6I6aL3I="
+      },
+      {
+        "module": "github.com/anchore/bubbly",
+        "version": "v0.0.0-20250717181826-8a411f9d8cbf/go.mod",
+        "h1": "h1:w8Br1ZKk1Nk82YRSh10pcD7LO7avPyFmNnaY1TRPgs0="
+      },
+      {
+        "module": "github.com/google/pprof",
+        "version": "v0.0.0-20251213031049-b05bdaca462f",
+        "h1": "h1:HU1RgM6NALf/KW9HEY6zry3ADbDKcmpQ+hJedoNGQYQ="
+      },
+      {
+        "module": "github.com/google/pprof",
+        "version": "v0.0.0-20251213031049-b05bdaca462f/go.mod",
+        "h1": "h1:67FPmZWbr+KDT/VlpWtw6sO9XSjpJmLuHpoLmWiTGgY="
+      }
+    ]
+  },
+  "unclassifiedOuterFiles": [],
+  "allDescriptorFlagsRemainFalse": true,
+  "newDaemonNetworkProviderUpstreamCalls": 0
+}

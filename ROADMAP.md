@@ -162,6 +162,10 @@ uninspected closure; it supplies no complete-instruction or execution claim.
 The [mechanical source-binding verifier](index/telemetry/e1-context-binding-verifier-20261029/README.md)
 checks integrity without promoting the candidate or closing completeness and
 fresh held-out qualification gates.
+The [Compose source disposition](index/telemetry/e1-compose-source-disposition-20261029/README.md)
+establishes the documented default route and setup chain while retaining
+unresolved unit coverage and the selected-input completeness gap. It authorizes
+neither another candidate-only grammar nor automatic confidence promotion.
 The [bounded task execution qualification](benchmarks/head-to-head/f05-qualification-20261029/README.md)
 retains real native outcomes and resource failures without narrowing the frozen
 tasks. The [published response capture](benchmarks/head-to-head/f05-snapshot-20261029/README.md)
@@ -185,6 +189,9 @@ environments and full campaign freeze remain open. The source-only
 [Go-01 retry proposal](benchmarks/head-to-head/f05-go01-requalification-proposal-20261029/README.md)
 retains the unknown earlier outcome and identifies setup, collection and exact
 source-defined skip-policy prerequisites; it authorizes no further execution. The
+[separately authorized download-only attempt](benchmarks/head-to-head/f05-go01-dependency-download-result-20261029/README.md)
+retains an unqualified Go-01 cache. Cache audit, npm hook equivalence, native
+collection and exclusion-policy acceptance remain separate gates. The
 [CI-evidence pilot](benchmarks/ci-evidence/pilot-20261029/README.md) retains
 workflow/job observations without promoting them to independent execution or
 consumer applicability.

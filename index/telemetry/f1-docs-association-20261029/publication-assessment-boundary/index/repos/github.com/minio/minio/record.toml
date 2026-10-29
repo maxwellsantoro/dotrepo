@@ -1,0 +1,147 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/minio/minio"
+generated_at = "2026-10-04T07:53:35.951591156Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, `Makefile`, and `go.mod`. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Bounded F1 source inspection corrected docs.getting_started association on 2026-10-29. Whole-record verification withdrawn; other fields and the original generated_at were not refreshed."
+
+[repo]
+name = "MinIO Quickstart Guide"
+description = "MinIO is a high-performance, S3 compatible object store, open sourced under GNU AGPLv3 license."
+homepage = "https://github.com/minio/minio"
+license = "AGPL-3.0"
+visibility = "public"
+languages = [
+    "Go",
+    "Shell",
+    "Makefile",
+    "Mustache",
+    "Go Template",
+    "Dockerfile",
+]
+build = "make build"
+test = "make test"
+topics = [
+    "go",
+    "storage",
+    "cloud",
+    "s3",
+    "objectstorage",
+    "cloudstorage",
+    "amazon-s3",
+    "cloudnative",
+    "k8s",
+    "kubernetes",
+    "multi-cloud",
+    "multi-cloud-kubernetes",
+]
+
+[repo.toolchain]
+min = "1.24.0"
+ecosystem = "Go"
+
+[owners]
+maintainers = []
+security_contact = "security@min.io"
+
+[docs]
+getting_started = "https://github.com/minio/minio/blob/7aac2a2c5b7c882e68c1ce017d8256be2feea27f/README.md#install-from-source"
+
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-10-29T08:36:31.832479Z"
+confidence = "high"
+method = "source_inspection"
+reason = "Pinned README lines 139-153 explicitly scopes the old Quickstart Guide link to the separate MinIO Client mc. For this server repository, README lines 23-24 declares that the README supplies source-build and baremetal deployment instructions, lines 59-89 provides Install from Source and standalone-server startup, and line 99 explicitly links #install-from-source. The replacement resolves that declared fragment against the exact immutable README URL. This is server getting-started documentation, not proof that commands execute or that the unmaintained project is currently supported."
+source = "https://github.com/minio/minio/blob/7aac2a2c5b7c882e68c1ce017d8256be2feea27f/README.md"
+sourceRevision = "7aac2a2c5b7c882e68c1ce017d8256be2feea27f"
+sourceSha256 = "aae99b6e35489bb26bfba4290ac567861d123230d1831562b6aee8c1363aead3"
+audit = "index/telemetry/f1-docs-association-20261029/assessments.json"
+disposition = "corrected-source-association"
+state = "present"
+valueJson = "\"https://github.com/minio/minio/blob/7aac2a2c5b7c882e68c1ce017d8256be2feea27f/README.md#install-from-source\""
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-10-04T07:53:35.951591156Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-10-04T07:53:35.951591156Z"
+confidence = "high"
+method = "extracted"
+reason = "direct email or mailing list"
+source = "SECURITY.md"
+state = "present"
+valueJson = '"security@min.io"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-10-04T07:53:35.951591156Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-10-04T07:53:35.951591156Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "Makefile"
+state = "present"
+valueJson = '"make build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-10-04T07:53:35.951591156Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"MinIO is a high-performance, S3 compatible object store, open sourced under GNU AGPLv3 license."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-10-04T07:53:35.951591156Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://github.com/minio/minio"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-10-04T07:53:35.951591156Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README title with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"MinIO Quickstart Guide"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-10-04T07:53:35.951591156Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "Makefile"
+state = "present"
+valueJson = '"make test"'
+
+[x.github]
+archived = true
+clone_url = "https://github.com/minio/minio.git"
+default_branch = "master"
+fork = false
+head_sha = "7aac2a2c5b7c882e68c1ce017d8256be2feea27f"
+html_url = "https://github.com/minio/minio"
+stars = 61342

@@ -1,0 +1,29 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-go01-download-fc0698f62c78",
+    "tar",
+    "-C",
+    "/workspace/dependency-cache",
+    "-cf",
+    "-",
+    "npm-cache/_cacache",
+    "go/pkg/mod"
+  ],
+  "startedAt": "2026-10-29T08:55:34.757868+00:00",
+  "elapsedSeconds": 2.158316707937047,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "binaryPath": "/private/tmp/dotrepo-go01-dependency-download-cache-20261029-1/download-roots.tar",
+  "binaryBytes": 368476160,
+  "binarySha256": "e813fac6a74b926bc08ebf8ab322e958f3ea8ef783fabe269f6cf35855378776",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered host/container/download dollar receipt; no provider calls."
+  ]
+}

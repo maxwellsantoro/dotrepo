@@ -1,0 +1,26 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-go01-download-fc0698f62c78",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "node --version; npm --version; go version; uv --version; git --version"
+  ],
+  "startedAt": "2026-10-29T08:55:33.177850+00:00",
+  "elapsedSeconds": 0.17782791680656374,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "1100e701b8e60ec3da5cdd5eabc14a56afe51c9403ada32a1bd1624518dec724",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "binaryPath": null,
+  "binaryBytes": null,
+  "binarySha256": null,
+  "costUsd": null,
+  "costExclusions": [
+    "No metered host/container/download dollar receipt; no provider calls."
+  ]
+}
