@@ -1,0 +1,1186 @@
+{
+  "counts": {
+    "fail": 61,
+    "pass": 25,
+    "skip": 18
+  },
+  "nativeFullCollectionExists": false,
+  "packageInventorySha256": "764fa272f1c461f4ecc2d6e2b58d641cc65c8e64da23f55981fa12b70c75bc21",
+  "packages": {
+    "github.com/microsoft/TypeScript/tsc/cmd/tsc": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 1
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/api": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 17
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/api/encoder": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 3
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/api/requestfilesystem": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 4
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/ast": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 7
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/astnav": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 2
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/binder": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 1
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/bundled": {
+      "comparisonRole": "positive-partial-listing",
+      "nativeListingTerminal": "pass",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [
+        "TestTestingLibPath",
+        "TestEmbeddedLibs"
+      ],
+      "selectedTestSourceFiles": 1
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/checker": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 3
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/collections": {
+      "comparisonRole": "positive-partial-listing",
+      "nativeListingTerminal": "pass",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [
+        "TestOrderedMapEqualFunc",
+        "TestOrderedMap",
+        "TestOrderedMapClone",
+        "TestOrderedMapClear",
+        "TestOrderedMapWithSizeHint",
+        "TestOrderedMapUnmarshalJSON",
+        "TestOrderedSet",
+        "TestOrderedSetWithSizeHint",
+        "TestSyncMapWithNil"
+      ],
+      "selectedTestSourceFiles": 3
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/compiler": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 5
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/contentmapper": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 2
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/core": {
+      "comparisonRole": "positive-partial-listing",
+      "nativeListingTerminal": "pass",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [
+        "TestPatternOverlappingMatch",
+        "TestArenaBoundsSingleValueRetention",
+        "TestArenaMixedSingleValuesAndSlices",
+        "TestArenaZeroSizedValues",
+        "TestBreadthFirstSearchParallel"
+      ],
+      "selectedTestSourceFiles": 3
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/debug": {
+      "comparisonRole": "positive-partial-listing",
+      "nativeListingTerminal": "pass",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [
+        "TestFailEmptyReason",
+        "TestFailWithReason",
+        "TestFailBadSyntaxKindNoMessage",
+        "TestFailBadSyntaxKindWithMessage",
+        "TestAssertNeverDefaultMessageKindString",
+        "TestAssertNeverCustomMessageKindString",
+        "TestAssertNeverStringer",
+        "TestAssertNeverFallback",
+        "TestAssertTrue",
+        "TestAssertTrueWithMessage",
+        "TestAssertFalseNoMessage",
+        "TestAssertFalseWithMessage"
+      ],
+      "selectedTestSourceFiles": 1
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/diagnostics": {
+      "comparisonRole": "positive-partial-listing",
+      "nativeListingTerminal": "pass",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [
+        "TestLocalize",
+        "TestLocalize_ByKey",
+        "TestLocaleFiles",
+        "TestLocaleFilesIgnoreStaleDiagnostics",
+        "TestGenerateLocalizations"
+      ],
+      "selectedTestSourceFiles": 1
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/diagnosticwriter": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/evaluator": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/execute": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/execute/build": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 3
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/execute/incremental": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 3
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/execute/tsc": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 2
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/execute/tsctests": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 8
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/execute/watchmanager": {
+      "comparisonRole": "positive-partial-listing",
+      "nativeListingTerminal": "pass",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [
+        "TestDirWatchSetCoverage",
+        "TestDirWatchSetCaseSensitive",
+        "TestDirWatchSetCaseInsensitive",
+        "TestDirWatchSetCanonicalDedup",
+        "TestDirWatchSetUpgradeToRecursive",
+        "TestDirWatchSetNeverDowngrades",
+        "TestDirWatchSetDirs",
+        "TestResolveDesiredDirsShallowProject",
+        "TestResolveDesiredDirsAncestorFallback",
+        "TestResolveDesiredDirsSkipsNonDiskPaths",
+        "TestResolveDesiredDirsDeduplicatesCaseInsensitiveAncestors",
+        "TestReconcileWatchesIgnoresCaseOnlySpellingChanges"
+      ],
+      "selectedTestSourceFiles": 1
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/format": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 5
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/fourslash": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 4371
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/fourslash/tests/util": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/fswatch": {
+      "comparisonRole": "positive-partial-listing",
+      "nativeListingTerminal": "pass",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [
+        "TestEventListCreateThenDelete",
+        "TestEventListDeleteThenCreate",
+        "TestEventListCreateDeleteCreate",
+        "TestEventListErrorIsLatchedAndCleared",
+        "TestEventListDrainIsAtomic",
+        "TestEventListDrainReturnsErrorWithEvents",
+        "TestEventListDrainForSequences",
+        "TestFallbackWatcherRoutesUnsupportedDirectories",
+        "TestFallbackWatcherDoesNotFallbackForUnrelatedError",
+        "TestFallbackWatcherDoesNotUseSecondaryOnHappyPath",
+        "TestFallbackWatcherRollsBackRoutedWatchesOnFailure",
+        "TestFanotifyUsesInternalInotifyFallback",
+        "TestLinuxFanotifyShutdownBeforeStart",
+        "TestLinuxFanotifyBackendSelection",
+        "TestLinuxFanotifySubscribeCleansUpAfterMarkFailure",
+        "TestLinuxFanotifyParseDfidNameRoundTrip",
+        "TestFanotifyCrossWatcherSameFs",
+        "TestLinuxFanotifyMaybeWrapUnsupportedFilesystem",
+        "TestLinuxFanotifyMarkENODEVTagged",
+        "TestLinuxFanotifyUnsupportedTagSurvivesDirWatchError",
+        "TestWalkDirDoesNotFollowSymlinkedDir",
+        "TestWalkDirDoesNotFollowRootSymlinkedDir",
+        "TestWalkDirIgnoresUnreadableSubdir",
+        "TestWalkDirMissingDir",
+        "TestWalkDirNotADir",
+        "TestWalkDirEntries",
+        "TestWalkDirCallback",
+        "TestWalkDirCallbackError",
+        "TestPathComparer",
+        "TestPathComparerUnicodeAlignment",
+        "TestFileCallbackCaseSensitivity",
+        "TestPathComparerExactKeys",
+        "TestRebasePath",
+        "TestPhysicalDirForResolvesSymlinkAncestor",
+        "TestIsInDirectoryOrSelf",
+        "TestWatchFileCreate",
+        "TestWatchFileUpdate",
+        "TestWatchFileRename",
+        "TestWatchFileRenameExisting",
+        "TestWatchFileDelete",
+        "TestSubscribeDirCreate",
+        "TestSubscribeNonASCIIPath",
+        "TestSubscribeDirRename",
+        "TestSubscribeDirDelete",
+        "TestSubscribeWatchedDirDeleted",
+        "TestSubscribeSubfileCreate",
+        "TestSubscribeSubfileUpdate",
+        "TestSubscribeSubfileRename",
+        "TestSubscribeSubfileDelete",
+        "TestSubscribeSubdirCreate",
+        "TestSubscribeSubdirDeleteWithFiles",
+        "TestSubscribeSymlinkCreate",
+        "TestSubscribeSymlinkDelete",
+        "TestSubscribeSymlinkedDirectoryRebasesTargetEvents",
+        "TestRecursiveSubscribeSymlinkedDirectoryDoesNotFollowDescendantSymlink",
+        "TestSubscribeCoalesceCreateUpdate",
+        "TestSubscribeCoalesceDeleteCreateAsUpdate",
+        "TestSubscribeCoalesceCreateThenDelete",
+        "TestSubscribeCoalesceMultipleUpdates",
+        "TestSubscribeCoalesceUpdateDelete",
+        "TestSubscribeMultipleSameDir",
+        "TestSubscribeMultipleDifferentDirs",
+        "TestWatchDirectoriesBatch",
+        "TestWatchRejectsNetworkPaths",
+        "TestFastRecursiveWatcherConsolidatesSiblingDirectories",
+        "TestFastRecursiveWatcherDoesNotConsolidateSymlinkOutsideRoot",
+        "TestConsolidatedSymlinkChildMapsSharedLogicalPath",
+        "TestConsolidatedSymlinkChildTerminatesFromSharedLogicalPath",
+        "TestConsolidatedChildWatchFiltersAgainstRequestedDir",
+        "TestConsolidatedChildWatchIgnoresEventsBeforeSubscribe",
+        "TestRecursiveWatchWithIgnoreDoesNotFilterByLogicalRoot",
+        "TestSubscribeMissingDirError",
+        "TestSubscribeNotADirError",
+        "TestSubscribeRejectsNilCallback",
+        "TestSubscribeRejectsRelativePath",
+        "TestSubscribeUnsubscribeIdempotent",
+        "TestSubscribeCloseThenReSubscribe",
+        "TestSubscribeNoGoroutineLeak",
+        "TestSubscribeDeepNestedCreate",
+        "TestSubscribeManyFilesAtOnce",
+        "TestSubscribeTruncateFile",
+        "TestSubscribeConcurrentSubscribeUnsubscribe",
+        "TestSubscribeRenameDir",
+        "TestSubscribeReplaceFileWithDir",
+        "TestSubscribeAppendToFile",
+        "TestSubscribeNoEventsAfterUnsubscribe",
+        "TestBackendRunReturnsStartError",
+        "TestDirWatchErrorImplementsError",
+        "TestFileCallbackForwardsErrAlongsideEvents",
+        "TestRenameDirOutOfTreeNoStaleEvents",
+        "TestDefaultBackendMatchesPlatform",
+        "TestUnavailableBackendReturnsError",
+        "TestSubscribeNestedDirDeletionCleansDescendants",
+        "TestNonRecursiveFileCreate",
+        "TestNonRecursiveFileUpdate",
+        "TestNonRecursiveFileDelete",
+        "TestNonRecursiveDirCreate",
+        "TestNonRecursiveGrandchildIgnored",
+        "TestNonRecursiveNewSubdirContentIgnored",
+        "TestNonRecursiveAndRecursiveSameDir",
+        "TestNonRecursiveWithDeniedSubdir",
+        "TestFileWatchCreate",
+        "TestFileWatchUpdate",
+        "TestFileWatchDelete",
+        "TestFileWatchIgnoresSiblings",
+        "TestFileWatchMultipleSameDir",
+        "TestFileWatchDeleteAndRecreate",
+        "TestFileWatchNonExistentTarget",
+        "TestRecursiveMoveInPrePopulated",
+        "TestAtomicSave",
+        "TestAtomicSaveFileWatch",
+        "TestReplaceDirWithFile",
+        "TestRecreateSubdirAndModify",
+        "TestReplaceParentDirWithDifferent",
+        "TestRoundTripRename",
+        "TestRecursiveWithDeniedSubdir"
+      ],
+      "selectedTestSourceFiles": 6
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/glob": {
+      "comparisonRole": "empty-no-test-diagnostic",
+      "nativeListingTerminal": "skip",
+      "noTestFilesDiagnostic": true,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/ipc": {
+      "comparisonRole": "positive-partial-listing",
+      "nativeListingTerminal": "pass",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [
+        "TestTimingCollector",
+        "TestServerTimingSnapshotDisabled",
+        "TestTimingCollectorReset",
+        "TestDurationToMillis",
+        "TestPipeTransportClosePreservesReplacement",
+        "TestPipeTransportPermissions",
+        "TestAsyncConnRunWaitsForHandlers",
+        "TestAsyncConnRunCancelsHandlersOnEOF",
+        "TestAsyncConnResponseWriteFailureWithNilTransport",
+        "TestAsyncConnCallReturnsWhenPeerCloses",
+        "TestAsyncConnCallAfterReadLoopFailureReturnsImmediately",
+        "TestAsyncConnTerminalErrorIncludesResponseWriteFailure",
+        "TestAsyncConnRunWaitsForRequestAfterPeerCloses",
+        "TestSyncConnRunReturnsResponseWriteFailure",
+        "TestSyncConnRunReturnsPanicResponseWriteFailure",
+        "TestSyncConnAnswersNestedRequestsInStackOrder",
+        "TestSyncConnNotificationHandlerCanCall"
+      ],
+      "selectedTestSourceFiles": 4
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/jsnum": {
+      "comparisonRole": "positive-partial-listing",
+      "nativeListingTerminal": "pass",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [
+        "TestToInt32",
+        "TestBitwiseNOT",
+        "TestBitwiseAND",
+        "TestBitwiseOR",
+        "TestBitwiseXOR",
+        "TestSignedRightShift",
+        "TestUnsignedRightShift",
+        "TestLeftShift",
+        "TestRemainder",
+        "TestExponentiate",
+        "TestParsePseudoBigInt",
+        "TestString",
+        "TestFromString",
+        "TestStringRoundtrip",
+        "TestStringJS",
+        "BenchmarkToInt32",
+        "BenchmarkExponentiate",
+        "FuzzStringJS",
+        "FuzzFromStringJS"
+      ],
+      "selectedTestSourceFiles": 4
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/json": {
+      "comparisonRole": "empty-no-test-diagnostic",
+      "nativeListingTerminal": "skip",
+      "noTestFilesDiagnostic": true,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/jsonrpc": {
+      "comparisonRole": "empty-no-test-diagnostic",
+      "nativeListingTerminal": "skip",
+      "noTestFilesDiagnostic": true,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/locale": {
+      "comparisonRole": "empty-no-test-diagnostic",
+      "nativeListingTerminal": "skip",
+      "noTestFilesDiagnostic": true,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/ls": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 5
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/ls/autoimport": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 6
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/ls/change": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 1
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/ls/lsconv": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 1
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/ls/lsutil": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 2
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/lsp": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 15
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/lsp/lsproto": {
+      "comparisonRole": "positive-partial-listing",
+      "nativeListingTerminal": "pass",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [
+        "TestUnmarshalRejectsNullForOptionalNonNullableFields",
+        "TestUnmarshalAcceptsNullForNullableFields",
+        "TestUnmarshalAcceptsOmittedOptionalFields",
+        "TestUnmarshalRejectsIncompleteObjects",
+        "TestMarshalUnmarshalRoundTrip",
+        "TestUnmarshalUnionTypes",
+        "TestMarshalUnionTypes",
+        "TestUnmarshalIgnoresUnknownFields",
+        "TestUnmarshalRejectsWrongTypes",
+        "TestUnmarshalUnionTypeWrongKind",
+        "TestUnmarshalBooleanUnionTypes",
+        "TestUnmarshalDiscriminatorUnion",
+        "TestUnmarshalPresenceDiscriminatorUnion",
+        "TestUnmarshalStringOrArrayUnion",
+        "TestUnmarshalDocumentEditUnion",
+        "TestUnmarshalFieldOrdering",
+        "TestUnmarshalCompletionItemDataFileName",
+        "TestUnmarshalEmptyObject",
+        "TestMarshalOmitsZeroOptionalFields",
+        "TestLiteralTypes",
+        "TestEnumStringValues",
+        "TestRoundTrip",
+        "TestStrictnessMissingRequired",
+        "TestStrictnessNotObject",
+        "TestUnmarshalParamsRequiresParams",
+        "TestUnmarshalCompletionItem",
+        "TestTryDynamicFileNameToDocumentUri",
+        "TestBaseReader",
+        "TestBaseReaderMultipleReads",
+        "TestBaseWriter",
+        "TestBaseWriterWriteError",
+        "BenchmarkUnmarshalDiscriminatedUnion"
+      ],
+      "selectedTestSourceFiles": 3
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/lsp/lspwatcher": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 1
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/module": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 3
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/modulespecifiers": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 1
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/nativepath": {
+      "comparisonRole": "positive-partial-listing",
+      "nativeListingTerminal": "pass",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [
+        "TestIsNetworkPath"
+      ],
+      "selectedTestSourceFiles": 1
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/nodebuilder": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/osutil": {
+      "comparisonRole": "empty-no-test-diagnostic",
+      "nativeListingTerminal": "skip",
+      "noTestFilesDiagnostic": true,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/outputpaths": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 1
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/packagejson": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 4
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/parser": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 1
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/pprof": {
+      "comparisonRole": "empty-no-test-diagnostic",
+      "nativeListingTerminal": "skip",
+      "noTestFilesDiagnostic": true,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/printer": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 3
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/project": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 21
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/project/ata": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 5
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/project/background": {
+      "comparisonRole": "positive-partial-listing",
+      "nativeListingTerminal": "pass",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [
+        "TestQueue"
+      ],
+      "selectedTestSourceFiles": 1
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/project/dirty": {
+      "comparisonRole": "positive-partial-listing",
+      "nativeListingTerminal": "pass",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [
+        "TestSyncMapProxyFor"
+      ],
+      "selectedTestSourceFiles": 1
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/project/logging": {
+      "comparisonRole": "positive-partial-listing",
+      "nativeListingTerminal": "pass",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [
+        "TestLogTreeImplementsLogger",
+        "TestLogTree"
+      ],
+      "selectedTestSourceFiles": 1
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/pseudochecker": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/repo": {
+      "comparisonRole": "empty-no-test-diagnostic",
+      "nativeListingTerminal": "skip",
+      "noTestFilesDiagnostic": true,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/scanner": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 1
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/semver": {
+      "comparisonRole": "positive-partial-listing",
+      "nativeListingTerminal": "pass",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [
+        "TestWildcardsHaveSameString",
+        "TestVersionRanges",
+        "TestComparatorsOfVersionRanges",
+        "TestConjunctionsOfVersionRanges",
+        "TestDisjunctionsOfVersionRanges",
+        "TestHyphensOfVersionRanges",
+        "TestTildesOfVersionRanges",
+        "TestCaretsOfVersionRanges",
+        "TestTryParseSemver",
+        "TestVersionString",
+        "TestVersionCompare"
+      ],
+      "selectedTestSourceFiles": 2
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/sourcemap": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 2
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/spanmap": {
+      "comparisonRole": "positive-partial-listing",
+      "nativeListingTerminal": "pass",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [
+        "TestVirtualToOriginalSpanVerbatim",
+        "TestVirtualToOriginalSpanAtom",
+        "TestVirtualAlias",
+        "TestVirtualToOriginalSpanSynthesizedGap",
+        "TestOriginalToVirtualIntersectingSpansAllowsUncoveredEndpoints",
+        "TestVirtualToOriginalSpanEmptyIsSynthesized",
+        "TestVirtualToOriginalSpanCrossingSegments",
+        "TestVirtualToOriginalSpanNilIdentity",
+        "TestVirtualToOriginalPosition",
+        "TestVirtualToOriginalPositionExact",
+        "TestVirtualToOriginalPositionExactRejectsDiscontinuousBoundary",
+        "TestZeroLengthSpansAtSegmentEnds",
+        "TestMapPositionNilIdentity",
+        "TestOriginalToVirtualSpanVerbatim",
+        "TestOriginalToVirtualSpanAtom",
+        "TestOriginalToVirtualSpanGap",
+        "TestOriginalToVirtualSpanNilIdentity",
+        "TestOriginalToVirtualPositions",
+        "TestOriginalToVirtualPositionsAtEndpoint",
+        "TestOriginalToVirtualDuplicateGroup",
+        "TestOriginalToVirtualOverlappingSpans",
+        "TestOriginalToVirtualPositionFindsEarlyCoveringSegment",
+        "TestOriginalToVirtualOverlapFallsBackFromDisabledContainer",
+        "TestOriginalToVirtualCrossGroupProjections",
+        "TestOriginalToVirtualExplicitZeroFeatures",
+        "TestFeatureParticipationOriginalAndVirtual",
+        "TestOriginalToVirtualSpanRoundTrip",
+        "TestMarshalRoundTrip",
+        "TestValidate",
+        "TestValidateOriginalOverlapAndFeatures",
+        "TestValidateNilIsValid",
+        "BenchmarkOriginalToVirtualPositionNearEnd"
+      ],
+      "selectedTestSourceFiles": 1
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/stringutil": {
+      "comparisonRole": "positive-partial-listing",
+      "nativeListingTerminal": "pass",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [
+        "TestJSCasing",
+        "TestEncodeURI"
+      ],
+      "selectedTestSourceFiles": 2
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/symlinks": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 2
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/testrunner": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 5
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/testutil": {
+      "comparisonRole": "empty-no-test-diagnostic",
+      "nativeListingTerminal": "skip",
+      "noTestFilesDiagnostic": true,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/testutil/autoimporttestutil": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/testutil/baseline": {
+      "comparisonRole": "empty-no-test-diagnostic",
+      "nativeListingTerminal": "skip",
+      "noTestFilesDiagnostic": true,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/testutil/contentmappertest": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 1
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/testutil/emittestutil": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/testutil/filefixture": {
+      "comparisonRole": "empty-no-test-diagnostic",
+      "nativeListingTerminal": "skip",
+      "noTestFilesDiagnostic": true,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/testutil/fixtures": {
+      "comparisonRole": "empty-no-test-diagnostic",
+      "nativeListingTerminal": "skip",
+      "noTestFilesDiagnostic": true,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/testutil/fsbaselineutil": {
+      "comparisonRole": "empty-no-test-diagnostic",
+      "nativeListingTerminal": "skip",
+      "noTestFilesDiagnostic": true,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/testutil/harnessutil": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/testutil/jstest": {
+      "comparisonRole": "empty-no-test-diagnostic",
+      "nativeListingTerminal": "skip",
+      "noTestFilesDiagnostic": true,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/testutil/lsptestutil": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/testutil/parsetestutil": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/testutil/projecttestutil": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/testutil/race": {
+      "comparisonRole": "empty-no-test-diagnostic",
+      "nativeListingTerminal": "skip",
+      "noTestFilesDiagnostic": true,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/testutil/stringtestutil": {
+      "comparisonRole": "empty-no-test-diagnostic",
+      "nativeListingTerminal": "skip",
+      "noTestFilesDiagnostic": true,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/testutil/tsbaseline": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/tracing": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 1
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/transformers": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/transformers/declarations": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/transformers/estransforms": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/transformers/inliners": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/transformers/jsxtransforms": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/transformers/moduletransforms": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/transformers/tstransforms": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 2
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/transpile": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 2
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/tsoptions": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 13
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/tsoptions/tsoptionstest": {
+      "comparisonRole": "source-only-not-validated-live",
+      "nativeListingTerminal": "fail",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/tspath": {
+      "comparisonRole": "positive-partial-listing",
+      "nativeListingTerminal": "pass",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [
+        "TestContainsIgnoredPath",
+        "TestIgnoredPathsPatterns",
+        "TestIgnoredPathsEdgeCases",
+        "TestNormalizeSlashes",
+        "TestGetRootLength",
+        "TestPathIsAbsolute",
+        "TestIsUrl",
+        "TestIsRootedDiskPath",
+        "TestGetDirectoryPath",
+        "TestGetLongestExtensionFromPath",
+        "TestRemoveAnyFileExtension",
+        "TestGetPathComponents",
+        "TestReducePathComponents",
+        "TestCombinePaths",
+        "TestResolvePath",
+        "TestResolvePathWithoutTrailingDirectorySeparator",
+        "TestNormalizePathDriveRoot",
+        "TestGetNormalizedAbsolutePath",
+        "TestGetRelativePathToDirectoryOrUrl",
+        "TestToFileNameLowerCase",
+        "TestCaseSensitivityTrimPrefix",
+        "TestPathIsRelative",
+        "TestGetCommonParents",
+        "TestStartsWithDirectory",
+        "TestStartsWithDirectoryEdgeCases",
+        "TestToRootedFilePath",
+        "TestEncodedDynamicPathsPreserveOpaqueIdentity",
+        "TestPathKeyFromCanonicalRejectsURLSuffix",
+        "TestDynamicPathKeyCaseInsensitiveKeyPreservesIdentity",
+        "TestExtensionMutationsPreserveNormalizedInvariant",
+        "TestFileNameStemsPreserveFilenamePrefixes",
+        "TestCompareFileNameStemsKeepsLiteralDotComponentsAndCasingPolicy",
+        "TestSplitAtRootLevelComponentKeepsRoot",
+        "TestToRootedFilePathRequiresRoot",
+        "TestRootedFilePathFromAbsolute",
+        "TestRootedFilePathFromNormalized",
+        "TestTypedPathConstructorsAndDecoders",
+        "TestRelativePath",
+        "TestTypedPathComponents",
+        "TestTryRelativePathBetweenFilePaths",
+        "TestRootedFilePathDirectory",
+        "TestRootedFilePathWithoutRoot",
+        "TestRootedFilePathRootAndRelativePath",
+        "TestCommonDirectoryOfFiles",
+        "TestRelativePathsFromTypedPaths",
+        "TestContainsFilePath",
+        "TestSourceMapLocation",
+        "TestRootedPath",
+        "TestRootedPathCompare",
+        "TestPathOperationsSeparateRooting",
+        "TestRootedFilePathExtensionOperationsPreserveInvariants",
+        "TestForEachAncestorDirectoryPath",
+        "TestRootedFilePathComponents",
+        "TestCaseSensitivityKey",
+        "TestPathKeyConstructionMethods",
+        "TestRootedDirectoryPathResolutionMatchesGeneralRooting",
+        "TestRewriteExtension",
+        "TestRootedFilePathRewriteExtension",
+        "TestModuleSpecifierShouldRewriteExtension",
+        "TestUntitledPathHandling",
+        "TestUntitledPathEdgeCases",
+        "BenchmarkCombinePaths",
+        "BenchmarkGetNormalizedAbsolutePath",
+        "BenchmarkToFileNameLowerCase",
+        "BenchmarkHasRelativePathSegment",
+        "BenchmarkPathIsRelative",
+        "BenchmarkRootedDirectoryPathResolveFile",
+        "BenchmarkRootedFilePathToPathKey",
+        "FuzzGetNormalizedAbsolutePath",
+        "FuzzToFileNameLowerCase",
+        "FuzzHasRelativePathSegment"
+      ],
+      "selectedTestSourceFiles": 6
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/vfs": {
+      "comparisonRole": "positive-partial-listing",
+      "nativeListingTerminal": "pass",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [
+        "TestWalkDir",
+        "TestWalkDirDoesNotFollowRootSymlink",
+        "TestWalkDirReportsRootFileSymlink",
+        "TestWalkDirSkipDir",
+        "TestWalkDirSkipAll",
+        "TestWalkDirConsumesSkipDirForRootFile",
+        "TestWalkDirConsumesSkipForMissingRoot",
+        "TestWalkDirUsesSymlinkMetadataWithoutRealpathCalls",
+        "BenchmarkReadFile"
+      ],
+      "selectedTestSourceFiles": 2
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/vfs/cachedvfs": {
+      "comparisonRole": "positive-partial-listing",
+      "nativeListingTerminal": "pass",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [
+        "TestDirectoryExists",
+        "TestFileExists",
+        "TestGetAccessibleEntries",
+        "TestRealpath",
+        "TestStat",
+        "TestReadFile",
+        "TestCaseSensitivity",
+        "TestRemove",
+        "TestWriteFile"
+      ],
+      "selectedTestSourceFiles": 1
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/vfs/internal": {
+      "comparisonRole": "empty-no-test-diagnostic",
+      "nativeListingTerminal": "skip",
+      "noTestFilesDiagnostic": true,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/vfs/iovfs": {
+      "comparisonRole": "positive-partial-listing",
+      "nativeListingTerminal": "pass",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [
+        "TestIOFS"
+      ],
+      "selectedTestSourceFiles": 1
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/vfs/osvfs": {
+      "comparisonRole": "positive-partial-listing",
+      "nativeListingTerminal": "pass",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [
+        "TestSymlinkRealpath",
+        "TestGetAccessibleEntries",
+        "TestGetGlobalTypingsCacheLocation",
+        "TestOS",
+        "BenchmarkRealpath"
+      ],
+      "selectedTestSourceFiles": 3
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/vfs/trackingvfs": {
+      "comparisonRole": "empty-no-test-diagnostic",
+      "nativeListingTerminal": "skip",
+      "noTestFilesDiagnostic": true,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmatch": {
+      "comparisonRole": "positive-partial-listing",
+      "nativeListingTerminal": "pass",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [
+        "TestReadDirectory",
+        "TestIsImplicitGlob",
+        "TestReadDirectoryEdgeCases",
+        "TestReadDirectoryEmptyIncludes",
+        "TestReadDirectorySymlinkCycle",
+        "TestReadDirectoryMatchesTypeScriptBaselines",
+        "TestReadDirectoryWithExtendedDynamicRoot",
+        "TestReadDirectoryDynamicRootUsesCaseSensitivePatterns",
+        "TestDynamicAbsoluteGlobUsesCaseSensitivePattern",
+        "TestSpecMatcher",
+        "TestSpecMatcher_MatchString",
+        "TestSingleSpecMatcher_MatchString",
+        "TestSpecMatchers_MatchIndex",
+        "TestSingleSpecMatcher",
+        "TestSpecMatchers",
+        "TestGlobPatternInternals",
+        "TestMatchSegmentsEdgeCases",
+        "TestReadDirectoryConsecutiveSlashes",
+        "TestGlobPatternLiteralWithPackageFolders",
+        "TestGetBasePathsCaseSensitivity",
+        "BenchmarkReadDirectory",
+        "BenchmarkPatternCompilation",
+        "BenchmarkPatternMatching"
+      ],
+      "selectedTestSourceFiles": 2
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/vfs/vfsmock": {
+      "comparisonRole": "positive-partial-listing",
+      "nativeListingTerminal": "pass",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [
+        "TestWrap"
+      ],
+      "selectedTestSourceFiles": 1
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/vfs/vfstest": {
+      "comparisonRole": "positive-partial-listing",
+      "nativeListingTerminal": "pass",
+      "noTestFilesDiagnostic": false,
+      "observedNameLines": [
+        "TestInsensitive",
+        "TestInsensitiveUpper",
+        "TestSensitive",
+        "TestSensitiveDuplicatePath",
+        "TestInsensitiveDuplicatePath",
+        "TestWritableFS",
+        "TestWritableFSDelete",
+        "TestStress",
+        "TestParentDirFile",
+        "TestFromMap",
+        "TestVFSTestMapFS",
+        "TestVFSTestMapFSWindows",
+        "TestBOM",
+        "TestSymlink",
+        "TestWritableFSSymlink",
+        "TestWritableFSSymlinkChain",
+        "TestWritableFSSymlinkChainNotDir",
+        "TestWritableFSSymlinkDelete"
+      ],
+      "selectedTestSourceFiles": 1
+    },
+    "github.com/microsoft/TypeScript/tsc/internal/vfs/wrapvfs": {
+      "comparisonRole": "empty-no-test-diagnostic",
+      "nativeListingTerminal": "skip",
+      "noTestFilesDiagnostic": true,
+      "observedNameLines": [],
+      "selectedTestSourceFiles": 0
+    }
+  },
+  "rawEventsPath": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-collection-result-20261029/amendment-2/evidence/logs/go-test-list/stdout.bin",
+  "rawEventsSha256": "3e35220c5d834daec10a374f21b7855e57da27d7788f1b83af123f6e5e55f202",
+  "resultFreezeSha256": "f2588d3ee2bdee8c5b40d5f5a328d72dd07c0f093fd6e36904a9dcecec5256a2",
+  "state": "retained-partial-observations-only-source-helper-unrun",
+  "testBodiesExecutedByThisPreparation": false,
+  "warning": "These are exact observed name lines, not newly established source registry/expected cases.61 failed packages remain unvalidated live. Printed names alone are not observer authentication."
+}

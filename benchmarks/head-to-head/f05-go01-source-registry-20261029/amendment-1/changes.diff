@@ -1,0 +1,152 @@
+--- parent/build_input.py
++++ amendment-1/build_input.py
+@@ -4,11 +4,13 @@
+ import base64
+ import hashlib
+ import json
++import math
+ from pathlib import Path
+ import tarfile
+ 
+ HERE = Path(__file__).resolve().parent
+-ROOT = HERE.parents[2]
++PARENT = HERE.parent
++ROOT = PARENT.parents[2]
+ RESULT = ROOT / "benchmarks/head-to-head/f05-go01-collection-result-20261029/amendment-2"
+ SOURCE = Path("/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar")
+ SOURCE_INVENTORY = (
+@@ -50,13 +52,31 @@
+     return result
+ 
+ 
++def reject_constant(value):
++    raise ValueError("nonfinite JSON constant: " + value)
++
++
++def finite_float(value):
++    parsed = float(value)
++    require(math.isfinite(parsed), "nonfinite JSON number")
++    return parsed
++
++
+ def load(raw):
+-    return json.loads(raw, object_pairs_hook=unique_object)
++    return json.loads(
++        raw,
++        object_pairs_hook=unique_object,
++        parse_constant=reject_constant,
++        parse_float=finite_float,
++    )
+ 
+ 
+ def encode(value):
+     return (
+-        json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False) + "\n"
++        json.dumps(
++            value, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False
++        )
++        + "\n"
+     ).encode()
+ 
+ 
+@@ -196,7 +216,7 @@
+         "sourceInventorySha256": SOURCE_INVENTORY_SHA,
+         "packageInventorySha256": sha(package_raw),
+         "environmentSha256": plan["environmentSha256"],
+-        "discoverySourcesSha256": file_sha(HERE / "discovery-source-bindings.json"),
++        "discoverySourcesSha256": file_sha(PARENT / "discovery-source-bindings.json"),
+     }
+     rows = []
+     for key, row in sorted(packages.items()):
+--- parent/read_registry.py
++++ amendment-1/read_registry.py
+@@ -29,6 +29,7 @@
+ 
+ 
+ def validate(value, provenance, packages):
++    builder.require(isinstance(value, dict), "output object")
+     builder.require(
+         set(value)
+         == {
+@@ -61,7 +62,9 @@
+     )
+     rows = value["packages"]
+     builder.require(
+-        isinstance(rows, list) and [row["importPath"] for row in rows] == sorted(packages),
++        isinstance(rows, list)
++        and all(isinstance(row, dict) for row in rows)
++        and [row.get("importPath") for row in rows] == sorted(packages),
+         "complete exact package order/set",
+     )
+     seen_ids, count, unresolved = set(), 0, False
+@@ -75,6 +78,33 @@
+             row["compileValidityUnestablished"] is True and isinstance(row["diagnostics"], list),
+             "package validity/diagnostics",
+         )
++        for diagnostic in row["diagnostics"]:
++            builder.require(isinstance(diagnostic, dict), "diagnostic object")
++            builder.require(
++                {"code", "message"} <= set(diagnostic) <= {"code", "message", "sourcePath"},
++                "diagnostic keys",
++            )
++            builder.require(
++                isinstance(diagnostic["code"], str)
++                and bool(diagnostic["code"])
++                and isinstance(diagnostic["message"], str)
++                and bool(diagnostic["message"]),
++                "diagnostic string fields",
++            )
++            if "sourcePath" in diagnostic:
++                diagnostic_path = diagnostic["sourcePath"]
++                native = packages[row["importPath"]]
++                builder.require(
++                    isinstance(diagnostic_path, str)
++                    and diagnostic_path in provenance["selectedFiles"]
++                    and diagnostic_path
++                    == native["Dir"].removeprefix("/workspace/repository/")
++                    + "/"
++                    + diagnostic_path.rsplit("/", 1)[-1]
++                    and diagnostic_path.rsplit("/", 1)[-1]
++                    in native.get("TestGoFiles", []) + native.get("XTestGoFiles", []),
++                    "diagnostic source package membership",
++                )
+         builder.require(
+             row["state"]
+             == (
+@@ -86,6 +116,7 @@
+         for field, kind in zip(FIELDS, KINDS):
+             builder.require(isinstance(row[field], list), "declaration list")
+             for declaration in row[field]:
++                builder.require(isinstance(declaration, dict), "declaration object")
+                 count += 1
+                 builder.require(count <= 10000, "declaration count bound")
+                 required = {
+@@ -106,7 +137,17 @@
+                     <= required | {"output", "emptyOutput", "unordered"},
+                     "declaration keys",
+                 )
++                for key, expected_type in [
++                    ("output", str),
++                    ("emptyOutput", bool),
++                    ("unordered", bool),
++                ]:
++                    if key in declaration:
++                        builder.require(
++                            type(declaration[key]) is expected_type, "optional declaration type"
++                        )
+                 source_path = declaration["sourcePath"]
++                builder.require(isinstance(source_path, str), "source path string")
+                 item = provenance["selectedFiles"].get(source_path)
+                 builder.require(
+                     item is not None and declaration["sourceSha256"] == item["sha256"],
+--- parent/crosscheck_registry.py
++++ amendment-1/crosscheck_registry.py
+@@ -7,7 +7,7 @@
+ import build_input as builder
+ import read_registry as receiver
+ 
+-HERE = Path(__file__).resolve().parent
++HERE = Path(__file__).resolve().parent.parent
+ 
+ 
+ def compare(registry, observations):

@@ -1,0 +1,33 @@
+{
+  "GoExecutionAuthorized": false,
+  "beforeReviewFreezeSha256": "df6d752afd787928917416664c879a5422edf632750ba3e2d52cb37f2edce074",
+  "campaignAdmitted": false,
+  "collectionGateChanged": false,
+  "helperSourceBindings": {
+    "go.mod": {
+      "path": "benchmarks/head-to-head/f05-go01-source-registry-20261029/go.mod",
+      "sha256": "4bd31b11bbe7741e848df8d65dc9562d6485b1e5ebb6dc2c9025a73a3a7f0919"
+    },
+    "registry.go": {
+      "path": "benchmarks/head-to-head/f05-go01-source-registry-20261029/registry.go",
+      "sha256": "4fb307747f1a87573afba8a920b90eef7eb3424558ed890d5fd6ddfbdeaaad8a"
+    },
+    "registry_test.go": {
+      "path": "benchmarks/head-to-head/f05-go01-source-registry-20261029/registry_test.go",
+      "sha256": "45444e3adadbd27c0c6620aa54d1f7cb73e0040711d2fb9c4b5ad96a9f0bac13"
+    }
+  },
+  "identity": "go01-source-registry-experiment-v1-amendment-1",
+  "inputSha256": "0acd95252e7acfc23ce616d59125ebc98c0a7e4b079a789057e44a4479c88015",
+  "nativeCollectionOccurred": false,
+  "oracleQualified": false,
+  "parentFreezeSha256": "b2fd2550fd9ca1b5dc20774badfb77863e28236cc0535f11c6012a5aa6a0ab8d",
+  "planPath": "benchmarks/head-to-head/f05-go01-source-registry-20261029/amendment-1/plan.json",
+  "planSha256": "74258ec831c551ad1b39a497ed09320c3824aa0be9a836fb3d076684f5703482",
+  "pythonSha256": {
+    "build_input.py": "7bd50e99c2adc6bb2dd8cc8c6038d9bfec99fc753f01288506d80604fe977b1e",
+    "crosscheck_registry.py": "cd8edd14d484cb66f1b640a5f442f7de4342b6e860217c7266c51d75a856ab0e",
+    "read_registry.py": "8db78d07712a763a61dc5ef38b0feec62af68f8cf20ce80ec977caa5d1bf2a4d"
+  },
+  "scope": "source-only-strict-receiver-amendment"
+}

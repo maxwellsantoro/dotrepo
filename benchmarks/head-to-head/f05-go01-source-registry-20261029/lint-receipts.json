@@ -1,0 +1,43 @@
+[
+  {
+    "argv": [
+      "uv",
+      "run",
+      "--offline",
+      "--no-sync",
+      "ruff",
+      "check",
+      "--no-cache",
+      "benchmarks/head-to-head/f05-go01-source-registry-20261029/receiver_controls.py",
+      "benchmarks/head-to-head/f05-go01-source-registry-20261029/read_registry.py",
+      "benchmarks/head-to-head/f05-go01-source-registry-20261029/constructor_controls.py",
+      "benchmarks/head-to-head/f05-go01-source-registry-20261029/build_input.py",
+      "benchmarks/head-to-head/f05-go01-source-registry-20261029/crosscheck_registry.py",
+      "benchmarks/head-to-head/f05-go01-source-registry-20261029/prepare_crosscheck.py"
+    ],
+    "exitCode": 0,
+    "stdout": "All checks passed!\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "uv",
+      "run",
+      "--offline",
+      "--no-sync",
+      "ruff",
+      "format",
+      "--check",
+      "--no-cache",
+      "benchmarks/head-to-head/f05-go01-source-registry-20261029/receiver_controls.py",
+      "benchmarks/head-to-head/f05-go01-source-registry-20261029/read_registry.py",
+      "benchmarks/head-to-head/f05-go01-source-registry-20261029/constructor_controls.py",
+      "benchmarks/head-to-head/f05-go01-source-registry-20261029/build_input.py",
+      "benchmarks/head-to-head/f05-go01-source-registry-20261029/crosscheck_registry.py",
+      "benchmarks/head-to-head/f05-go01-source-registry-20261029/prepare_crosscheck.py"
+    ],
+    "exitCode": 0,
+    "stdout": "6 files already formatted\n",
+    "stderr": ""
+  }
+]

@@ -1,0 +1,49 @@
+{
+  "artifacts": {
+    "README.md": {
+      "bytes": 3732,
+      "sha256": "b5ccaa15453bcbc1647abd34c698ec130b42a9ebe93c1f1e241cdee93b1095d3"
+    },
+    "author-binding.json": {
+      "bytes": 684,
+      "sha256": "448f5502117cb1ac5bd59a2402c047214a3d7a6226c635680b5b3dd55e9035c3"
+    },
+    "constructor-rebuild.stdout": {
+      "bytes": 2093,
+      "sha256": "62847603b9d4a35835bc2a0f253f44dd9fb550e9ae9fa0fc386daf930ce22077"
+    },
+    "receiver-challenge.json": {
+      "bytes": 2336,
+      "sha256": "740d55871f9cc26539085829d09857a6df587b2f07aeca4235f60887b829b147"
+    },
+    "receiver_challenge.py": {
+      "bytes": 4520,
+      "sha256": "389145169327f508a847a2174ac51f945b5a542e5909c8534c5204a0fe7ded7e"
+    },
+    "replay-constructor-controls.json": {
+      "bytes": 1893,
+      "sha256": "0759ed14617cb7abbd688290758980b641bdd43fa95b4793596ae5e0cb3ffeed"
+    },
+    "replay-receiver-controls.json": {
+      "bytes": 2268,
+      "sha256": "3c93e8083068b275df191f4ab3cc7eac17c7b958899d92c733b62b3b043ef7fe"
+    },
+    "review.json": {
+      "bytes": 5361,
+      "sha256": "5ad1011666eac198bef3825887380ce992748989b02642911e7f8ac52c6496ed"
+    },
+    "source-inspection.json": {
+      "bytes": 1487,
+      "sha256": "92f7e8e2f5a45000472b0c8c941b42e8220ecb6e1a26963f1ad67f4a5670a339"
+    },
+    "state-compatibility.json": {
+      "bytes": 1522,
+      "sha256": "7c14cc8674a8783dd2ddb7a48b8eaf8b1188bb8f7c811bfbace67843f3748f24"
+    },
+    "state_compatibility.py": {
+      "bytes": 3949,
+      "sha256": "cc4b88cc0ccc87be50c942652b8d14f108b168f997cd05b312871507298c902e"
+    }
+  },
+  "state": "independent static before-review; one receiver schema finding; Go unrun/no admission"
+}

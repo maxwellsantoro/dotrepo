@@ -1,0 +1,53 @@
+{
+  "cases": [
+    {
+      "case": "badCRC",
+      "passed": true
+    },
+    {
+      "case": "truncated",
+      "passed": true
+    },
+    {
+      "case": "second member",
+      "passed": true
+    },
+    {
+      "case": "different source context",
+      "passed": true
+    },
+    {
+      "case": "wrong positive source name becomes mismatch",
+      "passed": true
+    },
+    {
+      "case": "spurious no-test declaration becomes mismatch",
+      "passed": true
+    },
+    {
+      "case": "failed native package diagnostic retained without promotion",
+      "passed": true
+    },
+    {
+      "case": "positive diagnostic cannot be hidden as match",
+      "passed": true
+    },
+    {
+      "case": "actual isolation and environment before",
+      "passed": true
+    },
+    {
+      "case": "actual isolation and environment after",
+      "passed": true
+    },
+    {
+      "case": "same-attempt cleanup absence receipts",
+      "passed": true
+    }
+  ],
+  "inputWireSha256": "f32b1a5f3c3e6a83f250e4940bc3d01e3cef425b5d1764d6d5fdcf65528c152c",
+  "nativeCollectionOccurred": false,
+  "newGoDockerNodeNetworkProviderActions": 0,
+  "state": "captured-observation-data-controls-passed",
+  "taskOutcomeObserved": false
+}

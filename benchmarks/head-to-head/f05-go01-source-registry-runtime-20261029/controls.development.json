@@ -1,0 +1,95 @@
+{
+  "synthetic": true,
+  "nativeProcessDaemonNetworkCalls": 0,
+  "checks": [
+    {
+      "case": "valid-shaped-empty-synthetic-output",
+      "observed": true,
+      "stage": "observed",
+      "error": null,
+      "syntheticDaemonCalls": 18
+    },
+    {
+      "case": "namespace",
+      "observed": false,
+      "stage": "inspect-before",
+      "error": "ValueError: namespace/user/init mismatch",
+      "syntheticDaemonCalls": 7
+    },
+    {
+      "case": "environment",
+      "observed": false,
+      "stage": "inspect-before",
+      "error": "ValueError: effective environment mismatch",
+      "syntheticDaemonCalls": 7
+    },
+    {
+      "case": "source-after",
+      "observed": false,
+      "stage": "module-after",
+      "error": "ValueError: unowned/special module member",
+      "syntheticDaemonCalls": 17
+    },
+    {
+      "case": "unit-coverage",
+      "observed": false,
+      "stage": "owned-tests",
+      "error": "ValueError: parent before child terminal",
+      "syntheticDaemonCalls": 12
+    },
+    {
+      "case": "unit-failed",
+      "observed": false,
+      "stage": "owned-tests",
+      "error": "ValueError: owned-tests failed: None",
+      "syntheticDaemonCalls": 12
+    },
+    {
+      "case": "multimember",
+      "observed": false,
+      "stage": "owned-cli",
+      "error": "ValueError: truncated/multiple/trailing gzip data",
+      "syntheticDaemonCalls": 15
+    },
+    {
+      "case": "crc",
+      "observed": false,
+      "stage": "owned-cli",
+      "error": "error: Error -3 while decompressing data: incorrect length check",
+      "syntheticDaemonCalls": 15
+    },
+    {
+      "case": "exit-state",
+      "observed": false,
+      "stage": "owned-cli",
+      "error": "ValueError: helper exit disagrees with source diagnostics",
+      "syntheticDaemonCalls": 15
+    },
+    {
+      "case": "cli-error",
+      "observed": false,
+      "stage": "owned-cli",
+      "error": "ValueError: owned-cli failed: None",
+      "syntheticDaemonCalls": 15
+    },
+    {
+      "case": "output-cap",
+      "observed": false,
+      "stage": "owned-cli",
+      "error": "ValueError: owned-cli failed: binary archive transport limit",
+      "syntheticDaemonCalls": 15
+    },
+    {
+      "case": "cleanup",
+      "observed": false,
+      "stage": "observed",
+      "error": null,
+      "syntheticDaemonCalls": 18
+    },
+    {
+      "case": "authorization-refusal",
+      "observed": false,
+      "daemonCalls": 0
+    }
+  ]
+}

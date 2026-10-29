@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "uv",
+    "run",
+    "python",
+    "benchmarks/head-to-head/f05-go01-source-registry-20261029/amendment-1/build_input.py",
+    "--output",
+    "/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-source-registry-amendment1-dk9ps2fu/input.json",
+    "--provenance",
+    "/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-source-registry-amendment1-dk9ps2fu/provenance.json"
+  ],
+  "exitCode": 0,
+  "stdout": "{\n  \"state\": \"prepared-source-bytes-only-helper-unrun\",\n  \"inputPath\": \"/private/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-source-registry-amendment1-dk9ps2fu/input.json\",\n  \"inputSha256\": \"0acd95252e7acfc23ce616d59125ebc98c0a7e4b079a789057e44a4479c88015\",\n  \"inputBytes\": 21446036,\n  \"sourceContext\": {\n    \"repository\": \"github.com/microsoft/TypeScript\",\n    \"revision\": \"25f823dc198a00744b458a7bc6984359f0dd7cac\",\n    \"imageId\": \"sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092\",\n    \"goVersion\": \"go1.27.3\",\n    \"sourceArchiveSha256\": \"c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f\",\n    \"sourceInventorySha256\": \"96c935c31228fa8e05bb836a93257beeb87ac524e5eb30cdde3c546a1ea4be0e\",\n    \"packageInventorySha256\": \"764fa272f1c461f4ecc2d6e2b58d641cc65c8e64da23f55981fa12b70c75bc21\",\n    \"environmentSha256\": \"3649e45b9b1c1f62faeb2c3a168d93d91a7be7a62e7e2905c07d9ba69ddb65fe\",\n    \"discoverySourcesSha256\": \"4ff48c80f3ab60084de6e73563a5eae55227be5db1b34aa04e3e5a5ceba3efcb\",\n    \"selectionSha256\": \"3991848e78c757487dbe9146e7888db3dabe180bd5a9d353269855177266e308\"\n  },\n  \"sourceArchivePath\": \"/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar\",\n  \"sourceInventoryPath\": \"/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-qualification-20261029/go-01-full/inventory.json\",\n  \"packageInventoryPath\": \"/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-collection-result-20261029/amendment-2/evidence/package-inventory.json\",\n  \"resultFreezeSha256\": \"f2588d3ee2bdee8c5b40d5f5a328d72dd07c0f093fd6e36904a9dcecec5256a2\",\n  \"driverFreezeSha256\": \"bca1522ad5b9d29a52cce68ce2d8b1d14a176511286f97761662337f17a3ecd7\",\n  \"packageCount\": 104,\n  \"selectedFileCount\": 4589,\n  \"selectedBytes\": 15262944,\n  \"archiveExpandedBytes\": 218783760,\n  \"sourceOnlyPackagesNotLiveValidated\": 61,\n  \"nativePassPackagesForFutureCrosscheck\": 25,\n  \"nativeNoTestSkipPackages\": 18,\n  \"helperBuilt\": false,\n  \"helperExecuted\": false,\n  \"nativeCollectionOccurred\": false,\n  \"taskOutcomeObserved\": false,\n  \"collectionGateChanged\": false\n}\n",
+  "stderr": "",
+  "newGoDaemonNetworkNativeCalls": 0,
+  "inputSha256": "0acd95252e7acfc23ce616d59125ebc98c0a7e4b079a789057e44a4479c88015",
+  "inputBytes": 21446036,
+  "matchesOriginalInput": true
+}

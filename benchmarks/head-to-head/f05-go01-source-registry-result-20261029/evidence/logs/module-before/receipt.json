@@ -1,0 +1,27 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-owned-registry-07a16bd85ec5",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "tar --create --format=ustar -C /workspace/owned-module ."
+  ],
+  "startedAt": "2026-10-29T11:45:27.549611+00:00",
+  "elapsedSeconds": 0.062186791095882654,
+  "exitCode": 0,
+  "error": null,
+  "cancelled": false,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "binaryPath": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/module-before.tar",
+  "binaryBytes": 30720,
+  "binarySha256": "af33dcecdafc632a0165e140cd020de6a55e1c23afaac8abdbaaf688ab7245eb",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered host/container/download dollar receipt; no provider calls."
+  ]
+}

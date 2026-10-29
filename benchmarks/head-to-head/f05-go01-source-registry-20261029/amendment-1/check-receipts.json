@@ -1,0 +1,62 @@
+{
+  "GoCompiledOrRun": false,
+  "controlReceipts": {
+    "constructor-controls.json": {
+      "passed": 22,
+      "sha256": "0759ed14617cb7abbd688290758980b641bdd43fa95b4793596ae5e0cb3ffeed"
+    },
+    "receiver-challenge.json": {
+      "passed": 38,
+      "sha256": "0d9ed94e3dfb866f4f7256839cdf0f1f1f2511d4617386f3366a7fadfe9f9447",
+      "unexpectedAcceptances": 0
+    },
+    "receiver-controls.json": {
+      "passed": 26,
+      "sha256": "3c93e8083068b275df191f4ab3cc7eac17c7b958899d92c733b62b3b043ef7fe"
+    }
+  },
+  "executionAuthorized": false,
+  "inputRebuildSha256": "1db962b5e9e4d3413bd2d83bb4a1b89acf39cd9de5c13593bb3c5c340a38816f",
+  "nativeCollectionOccurred": false,
+  "receipts": [
+    {
+      "argv": [
+        "uv",
+        "run",
+        "python",
+        "benchmarks/head-to-head/f05-go01-source-registry-20261029/amendment-1/verify.py"
+      ],
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "{\n  \"GoCompiledOrRun\": false,\n  \"beforeReviewArtifactsUnchanged\": 11,\n  \"collectionGateChanged\": false,\n  \"executionAuthorized\": false,\n  \"helperEnvironmentAndPathsUnchanged\": true,\n  \"helperSourcesUnchanged\": 3,\n  \"inputBytesUnchanged\": 21446036,\n  \"inputSha256\": \"0acd95252e7acfc23ce616d59125ebc98c0a7e4b079a789057e44a4479c88015\",\n  \"nativeCollectionOccurred\": false,\n  \"oracleQualified\": false,\n  \"parentArtifactsUnchanged\": 33,\n  \"state\": \"verified-source-only-amendment-integrity\"\n}\n"
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "ruff",
+        "check",
+        "--no-cache",
+        "benchmarks/head-to-head/f05-go01-source-registry-20261029/amendment-1"
+      ],
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "All checks passed!\n"
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "ruff",
+        "format",
+        "--no-cache",
+        "--check",
+        "benchmarks/head-to-head/f05-go01-source-registry-20261029/amendment-1"
+      ],
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "7 files already formatted\n"
+    }
+  ],
+  "state": "passed-focused-python-only-checks"
+}

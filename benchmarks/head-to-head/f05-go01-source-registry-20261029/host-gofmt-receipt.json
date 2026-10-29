@@ -1,0 +1,18 @@
+{
+  "state": "owned-source-format-and-syntax-parse-passed",
+  "argv": [
+    "/opt/homebrew/bin/gofmt",
+    "-w",
+    "benchmarks/head-to-head/f05-go01-source-registry-20261029/registry.go",
+    "benchmarks/head-to-head/f05-go01-source-registry-20261029/registry_test.go"
+  ],
+  "exitCode": 0,
+  "stdout": "",
+  "stderr": "",
+  "toolPath": "/opt/homebrew/bin/gofmt",
+  "resolvedToolPath": "/opt/homebrew/Cellar/go/1.27.1/libexec/bin/gofmt",
+  "toolSha256": "9cd491f4ab78b3b3312d5120f425904d86ba55643eeaf815c36fc8034e999997",
+  "toolBytes": 2972610,
+  "scope": "Only2 owned new Go files; retained upstream source copies untouched",
+  "limits": "Host formatting tool only. Exact Go1.27 library/discovery equivalence, compiler,unit tests and helper execution remain unrun. No go version/helper/test/compile invocation performed."
+}

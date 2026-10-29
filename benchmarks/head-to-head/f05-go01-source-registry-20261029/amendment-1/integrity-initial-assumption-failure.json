@@ -1,0 +1,9 @@
+{
+  "state": "local-verifier-implementation-error-corrected",
+  "command": "uv run python amendment-1/verify.py",
+  "exitCode": 1,
+  "error": "AssertionError: README.md",
+  "cause": "New verifier initially compared review artifact map objects directly to SHA strings; reviewer map uses {bytes,sha256}. No evidence bytes changed or failed integrity.",
+  "correction": "Read digest[sha256] and verify bytes separately.",
+  "GoOrNativeActions": 0
+}

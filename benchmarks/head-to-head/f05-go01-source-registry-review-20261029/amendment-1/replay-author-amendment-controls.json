@@ -1,0 +1,199 @@
+{
+  "fixtureDisclosure": "Synthetic Python shapes only, no Go/helper/native observations",
+  "cases": [
+    {
+      "case": "valid source-derived state",
+      "expectedAccepted": true,
+      "actualAccepted": true
+    },
+    {
+      "case": "valid unresolved state",
+      "expectedAccepted": true,
+      "actualAccepted": true
+    },
+    {
+      "case": "state hides diagnostics",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    },
+    {
+      "case": "diagnostic scalar",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    },
+    {
+      "case": "diagnostic missing fields",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    },
+    {
+      "case": "diagnostic wrong field types",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    },
+    {
+      "case": "wrong optional declaration type output",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    },
+    {
+      "case": "wrong optional declaration type emptyOutput",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    },
+    {
+      "case": "wrong optional declaration type unordered",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    },
+    {
+      "case": "non-JSON NaN accepted through loader and optional field",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    },
+    {
+      "case": "reject nonfinite numeric token Infinity",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    },
+    {
+      "case": "reject nonfinite numeric token -Infinity",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    },
+    {
+      "case": "reject nonfinite numeric token 1e999",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    },
+    {
+      "case": "reject nonfinite numeric token -1e999",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    },
+    {
+      "case": "reject nonfinite encoding nan",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    },
+    {
+      "case": "reject nonfinite encoding inf",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    },
+    {
+      "case": "reject nonfinite encoding -inf",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    },
+    {
+      "case": "valid producer diagnostic parse-error",
+      "expectedAccepted": true,
+      "actualAccepted": true
+    },
+    {
+      "case": "valid producer diagnostic package-clause-mismatch",
+      "expectedAccepted": true,
+      "actualAccepted": true
+    },
+    {
+      "case": "valid producer diagnostic invalid-discovery-signature",
+      "expectedAccepted": true,
+      "actualAccepted": true
+    },
+    {
+      "case": "valid producer diagnostic example-location-unresolved",
+      "expectedAccepted": true,
+      "actualAccepted": true
+    },
+    {
+      "case": "valid producer diagnostic duplicate-runtime-name-unresolved",
+      "expectedAccepted": true,
+      "actualAccepted": true
+    },
+    {
+      "case": "valid producer diagnostic multiple-testmain-unresolved",
+      "expectedAccepted": true,
+      "actualAccepted": true
+    },
+    {
+      "case": "invalid diagnostic unknown key",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    },
+    {
+      "case": "invalid diagnostic missing message",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    },
+    {
+      "case": "invalid diagnostic empty code",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    },
+    {
+      "case": "invalid diagnostic empty message",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    },
+    {
+      "case": "invalid diagnostic wrong source type",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    },
+    {
+      "case": "invalid diagnostic unknown source",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    },
+    {
+      "case": "valid typed optional example nonempty output",
+      "expectedAccepted": true,
+      "actualAccepted": true
+    },
+    {
+      "case": "valid typed optional example empty output",
+      "expectedAccepted": true,
+      "actualAccepted": true
+    },
+    {
+      "case": "valid typed optional example unordered output",
+      "expectedAccepted": true,
+      "actualAccepted": true
+    },
+    {
+      "case": "valid typed optional example literal false and empty string",
+      "expectedAccepted": true,
+      "actualAccepted": true
+    },
+    {
+      "case": "optional field literal boundary output",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    },
+    {
+      "case": "optional field literal boundary emptyOutput",
+      "expectedAccepted": true,
+      "actualAccepted": true
+    },
+    {
+      "case": "optional field literal boundary unordered",
+      "expectedAccepted": true,
+      "actualAccepted": true
+    },
+    {
+      "case": "reject root scalar",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    },
+    {
+      "case": "reject package scalar",
+      "expectedAccepted": false,
+      "actualAccepted": false
+    }
+  ],
+  "unexpectedAcceptances": [],
+  "newGoDaemonNodePackageNetworkNativeCalls": 0,
+  "beforeReviewFreezeSha256": "df6d752afd787928917416664c879a5422edf632750ba3e2d52cb37f2edce074",
+  "state": "passed-amended-receiver-python-controls"
+}

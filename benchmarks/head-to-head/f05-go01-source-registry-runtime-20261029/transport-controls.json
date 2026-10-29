@@ -1,0 +1,41 @@
+{
+  "synthetic": true,
+  "realProcessSocketCalls": 0,
+  "cases": [
+    {
+      "case": "binary-lossless",
+      "passed": true,
+      "binaryBytes": 5,
+      "error": null,
+      "cancelled": false
+    },
+    {
+      "case": "combined-cap",
+      "passed": true,
+      "binaryBytes": 2097151,
+      "error": "binary archive transport limit",
+      "cancelled": false
+    },
+    {
+      "case": "binary-cap",
+      "passed": true,
+      "binaryBytes": 2097152,
+      "error": "binary archive transport limit",
+      "cancelled": false
+    },
+    {
+      "case": "cancel",
+      "passed": true,
+      "binaryBytes": 0,
+      "error": "KeyboardInterrupt: synthetic cancellation",
+      "cancelled": true
+    },
+    {
+      "case": "deadline",
+      "passed": true,
+      "binaryBytes": 0,
+      "error": "attempt deadline exhausted",
+      "cancelled": false
+    }
+  ]
+}

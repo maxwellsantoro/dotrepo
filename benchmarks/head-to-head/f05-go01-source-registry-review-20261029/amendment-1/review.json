@@ -1,0 +1,62 @@
+{
+  "bindings": {
+    "authorSubjectSha256": "49dd2f3fd30cb3cfa3447489fb43f6cdb373e6960efe6350618679b9d7cb8fe2",
+    "diffVerifiedExact": true,
+    "inputBytes": 21446036,
+    "inputRebuiltExact": true,
+    "inputSha256": "0acd95252e7acfc23ce616d59125ebc98c0a7e4b079a789057e44a4479c88015"
+  },
+  "cacheGloballyQualified": false,
+  "campaignAdmitted": false,
+  "checks": {
+    "ruffCheck": "passed --no-cache",
+    "ruffFormat": "passed --check --no-cache",
+    "threeFileDelta": "strict schema/JSON validation plus deeper data-reference relocation; Go/module/selected source/environment/resource/output gates unchanged"
+  },
+  "controls": {
+    "independentAdditional": 37,
+    "priorMalformedShapes": 7,
+    "replayedAuthorAmendment": 38,
+    "replayedConstructor": 22,
+    "replayedReceiverComparator": 26,
+    "retainedBeforeOperations": 10,
+    "statePartialComparator": 4
+  },
+  "executionAuthorized": false,
+  "findings": [],
+  "harnessCorrections": "Three reviewer harness assumptions corrected before freeze; retained in reviewer-harness-correction.json; no author defect or original evidence change.",
+  "helperCLIExecuted": false,
+  "limitations": [
+    "Static/Python source and data evidence only; no actual Go compilation, unit tests or helper CLI invocation.",
+    "No genuine Go-produced registry/gzip or partial-corpus crosscheck; deterministic gzip producer/AST semantics remain untested at target Go1.27.3.",
+    "Source semantics/metadata/schema consistency does not prove authenticity, typing, native collection, complete target coverage, task completion or benefit.",
+    "61 previously failed packages remain source-only and unvalidated live; dynamic children, TestMain body and skip conditions unresolved.",
+    "Root must separately review runtime closure and authorize any owned-tool attempt; no execution authorization from this report."
+  ],
+  "nativeCollectionOccurred": false,
+  "nativeTaskAdmitted": false,
+  "oracleQualified": false,
+  "ownedGoTestsExecuted": false,
+  "preservedArtifacts": {
+    "amendmentAuthor": 18,
+    "beforeReview": 11,
+    "originalAuthor": 33
+  },
+  "producerStateCompatibility": "Receiver validates both source-derived-uncompiled (prospective producer exit0) and unresolved-source-discovery (prospective exit1) shapes; global/package diagnostics and partial comparator exclusions remain. No producer invocation occurred.",
+  "resolvedFindings": [
+    {
+      "beforeReviewFreezeSha256": "df6d752afd787928917416664c879a5422edf632750ba3e2d52cb37f2edce074",
+      "id": "F1",
+      "resolution": "All seven exact malformed diagnostic/optional/nonfinite shapes refuse; valid producer-shaped diagnostics and example fields preserved."
+    }
+  ],
+  "reviewContext": "Reviewer authored source-plan/projection/other qualification tooling and original static review, but not Go registry or this receiver amendment. Independent implementation review with extensive prior context, not a fresh blind task trial.",
+  "state": "independent-static-amendment-review-passed",
+  "staticOnly": true,
+  "subject": {
+    "authorFreezeSha256": "e569edd4888a092aa46745d950614964ca86fc755637827fd9723fad0413da4d",
+    "packetIdentity": "go01-source-registry-experiment-v1-amendment-1",
+    "planSha256": "74258ec831c551ad1b39a497ed09320c3824aa0be9a836fb3d076684f5703482"
+  },
+  "taskOutcomeObserved": false
+}

@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "docker",
+    "inspect",
+    "dotrepo-owned-registry-07a16bd85ec5"
+  ],
+  "startedAt": "2026-10-29T11:45:39.256595+00:00",
+  "elapsedSeconds": 0.04690379207022488,
+  "exitCode": 1,
+  "error": null,
+  "cancelled": false,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "stderrSha256": "f6fc26add1a12f463e3e45ea8ea31648a2884bf582b151f29d3ff1fa2cabfc67",
+  "binaryPath": null,
+  "binaryBytes": null,
+  "binarySha256": null,
+  "costUsd": null,
+  "costExclusions": [
+    "No metered host/container/download dollar receipt; no provider calls."
+  ]
+}

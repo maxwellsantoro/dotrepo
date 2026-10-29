@@ -1,0 +1,20 @@
+{
+  "sourceOnly": true,
+  "newNativeActions": false,
+  "verifier": "passed; all84 origin copies match originals; 63 runtime payloads and external author/review closures intact",
+  "syntheticControls": {
+    "passed": 9,
+    "positive": 1,
+    "negative": 8
+  },
+  "ruffCheck": "passed --no-cache on owned packet",
+  "ruffFormat": "passed --no-cache on owned packet",
+  "partialComparator": "passed local frozen Python comparator;25 listing pass/18 no-test matched;61 failed unvalidated; no differences",
+  "expandedOutputRetained": "losslessly as original gzip plus bounded hash-bound receiver, not duplicated expanded JSON",
+  "targetCompileValidityEstablished": false,
+  "nativeCollectionOccurred": false,
+  "taskOutcomeObserved": false,
+  "oracleQualified": false,
+  "campaignAdmitted": false,
+  "costUsd": null
+}

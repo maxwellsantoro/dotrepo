@@ -1,0 +1,33 @@
+{
+  "state": "verified-static-source-boundaries",
+  "subject": {
+    "planSha256": "29533c84b635a7244b1b0f022a6200c53c8f7ca628ff1fd64dd428a1249ddd96",
+    "authorFreezeSha256": "6f22704c8c02e71e0db0bf21e80c9ffd96ef1544242e07090ad32762987c6972",
+    "packetIdentity": "go01-owned-source-registry-runtime-v1"
+  },
+  "authorArtifactsUnchanged": 30,
+  "authorArtifactBytes": 203622,
+  "correctedHelperReviewDecisionCompatible": true,
+  "moduleCopiedFiles": [
+    "go.mod",
+    "registry.go",
+    "registry_test.go"
+  ],
+  "moduleSourcesAndInputBound": true,
+  "inputBytes": 21446036,
+  "expectedTestIds": {
+    "topLevel": 8,
+    "children": 21,
+    "exactOwnedSourceNamesMatch": true
+  },
+  "commandsAndProspectiveEnvironmentMatchHelper": true,
+  "reviewDecisionBoundary": "Runtime binds raw passed-review decision artifact hash, exact subject/state/scope/false admission flags/empty findings. It does not traverse reportPath/reportSha256 or full review freeze; coordinator separately verifies and retains those before authorization.",
+  "ioBoundary": "Only the exact three owned module files provisioned; exact hash/size input streamed as bytes to CLI stdin. No target source path extraction/module import/typecheck/test is requested.",
+  "containment": "Bound pure flags/inspect wrappers retain exact image/nonroot/read-only/no-host-mount/no-network/resource/tmpfs checks before and after; actual containment remains unobserved by this review.",
+  "accounting": "Binary stdout raw capture;2MiB combined limit; bounded receiver8MiB inflate;900swork+60cleanup;nullcost; no promotion on failures/cancellation/after-check failure.",
+  "roleDisclosure": "Reviewer authored helper and receiver, not runner; extensive prior source context, not fresh blind trial.",
+  "ownedGoTestsExecuted": false,
+  "helperCLIExecuted": false,
+  "nativeCollectionOccurred": false,
+  "executionAuthorized": false
+}

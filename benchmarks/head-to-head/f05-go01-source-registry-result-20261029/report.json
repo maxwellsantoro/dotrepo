@@ -1,0 +1,128 @@
+{
+  "identity": "go01-owned-source-registry-result-20261029",
+  "state": "owned-helper-source-registry-observed-uncompiled-unqualified",
+  "synthetic": false,
+  "runtimeResultFreezeSha256": "1ea59ba97218067be4bef04852d2063a25063531b6ceca0de88c83a6d07f5770",
+  "runtimeSubject": {
+    "planSha256": "29533c84b635a7244b1b0f022a6200c53c8f7ca628ff1fd64dd428a1249ddd96",
+    "authorFreezeSha256": "6f22704c8c02e71e0db0bf21e80c9ffd96ef1544242e07090ad32762987c6972",
+    "packetIdentity": "go01-owned-source-registry-runtime-v1"
+  },
+  "helperSubject": {
+    "planSha256": "74258ec831c551ad1b39a497ed09320c3824aa0be9a836fb3d076684f5703482",
+    "authorFreezeSha256": "e569edd4888a092aa46745d950614964ca86fc755637827fd9723fad0413da4d",
+    "packetIdentity": "go01-source-registry-experiment-v1-amendment-1"
+  },
+  "ownedTool": {
+    "unitCasesPassed": 29,
+    "topLevelTests": 8,
+    "childCases": 21,
+    "moduleFiles": [
+      "go.mod",
+      "registry.go",
+      "registry_test.go"
+    ],
+    "targetGoFilesCompiled": false,
+    "cliExitCode": 0,
+    "registryState": "source-derived-uncompiled",
+    "hasSourceDiagnostics": false,
+    "helperBinarySha256": "f1acb8bc1bc9a405a77d36a46775afcc187021f58229d96ff6c2e9d2cb7ad2e3"
+  },
+  "input": {
+    "bytes": 21446036,
+    "sha256": "0acd95252e7acfc23ce616d59125ebc98c0a7e4b079a789057e44a4479c88015",
+    "role": "Upstream selected source bytes are JSON/base64 stdin data only, outside compiled owned module."
+  },
+  "output": {
+    "packages": 104,
+    "declarations": 6031,
+    "kinds": {
+      "tests": 5966,
+      "benchmarks": 48,
+      "fuzzTargets": 6,
+      "examples": 0,
+      "testMains": 11
+    },
+    "gzip": "evidence/registry.gz",
+    "gzipBytes": 526407,
+    "gzipSha256": "f32b1a5f3c3e6a83f250e4940bc3d01e3cef425b5d1764d6d5fdcf65528c152c",
+    "expandedBytes": 2263226,
+    "expandedSha256": "4a25d7781c7aa9626ead71ca13bce863f3ab389b10f52b23d5fffeb11a848ad8",
+    "fullDiagnostics": "full-diagnostics.json",
+    "diagnosticCount": 0,
+    "universalCompileValidityUnestablished": true,
+    "expansion": "Reconstructed losslessly from evidence/registry.gz by the hash-bound bounded receiver; duplicate expanded payload omitted."
+  },
+  "partialCrosscheck": {
+    "state": "partial-observational-crosscheck-consistent-unqualified",
+    "matchedNativeListingPassPackages": 25,
+    "matchedNoTestDiagnosticPackages": 18,
+    "unvalidatedFailedPackages": 61,
+    "differences": 0,
+    "fullListsAndDiagnostics": "partial-crosscheck.json",
+    "underlyingNativeAttempt": "../f05-go01-collection-result-20261029/amendment-2/",
+    "scope": "Only prior25 listing pass and18 no-test diagnostic observations crosschecked. All61 failed native packages remain source-only/unvalidated."
+  },
+  "targetCompileValidityEstablished": false,
+  "nativeCollectionOccurred": false,
+  "nativeTaskExecuted": false,
+  "taskOutcomeObserved": false,
+  "oracleQualified": false,
+  "collectionGateChanged": false,
+  "campaignAdmitted": false,
+  "cacheGloballyQualified": false,
+  "limitsAndIntegrity": {
+    "sameAuditedImage": true,
+    "helperCGO": 0,
+    "helperGOWORK": "off",
+    "targetContextRemainsInputDataOnly": true,
+    "noneNetwork": true,
+    "memoryBytes": 4294967296,
+    "cpus": 3,
+    "pids": 256,
+    "combinedCommandOutputCapBytes": 2097152,
+    "registryCompressedCapBytes": 2097152,
+    "registryExpandedCapBytes": 8388608,
+    "workSeconds": 900,
+    "cleanupSeconds": 60,
+    "onlyOwnedThreeFileModuleBeforeAfterMatched": true,
+    "GoBinaryBeforeAfterMatched": true,
+    "sameContainerBeforeAfterIsolationMatched": true
+  },
+  "effort": {
+    "daemonCalls": 18,
+    "elapsedSeconds": 12.74485570890829,
+    "cleanupSeconds": 0.21799820801243186,
+    "stdinBytes": 21476756,
+    "outputBytesIncludingBinary": 632428,
+    "modelCallsLaunchedByRuntime": 0,
+    "costUsd": null,
+    "unmeasured": "Host/image preparation, source investigation, review, model and maintenance effort/dollar costs remain unallocated; no consumer savings comparison."
+  },
+  "cleanup": {
+    "sameAttemptForceRemovalExitCode": 0,
+    "sameAttemptInspectAbsence": true,
+    "sameAttemptResponsiveNameListEmpty": true,
+    "containerAbsentReported": true,
+    "independentAbsenceObservation": false
+  },
+  "preservation": {
+    "originLedger": "origin-ledger.json",
+    "originalAndBindingFilesCopied": 84,
+    "copiedBytes": 2630782,
+    "actualResultPayloadFiles": 63,
+    "actualResultPayloadBytes": 674724,
+    "actualResultIncludingFreezeFiles": 64,
+    "actualResultIncludingFreezeBytes": 684341,
+    "originalOuterArgvReceiptAvailable": false
+  },
+  "limitations": [
+    "Owned helper tool tests/build/CLI passed; target source was parsed, not typechecked/compiled/executed.",
+    "No dynamic children, fuzz seeds, runtime skips/capabilities, assertion behavior or proof TestMain calls m.Run established.",
+    "No diagnostics means no implemented source-discovery diagnostic triggered; it does not prove semantic completeness.",
+    "Partial crosscheck is not independent full collection or acceptance of current oracle.",
+    "All prior failed native attempts and unvalidated61 packages remain unchanged.",
+    "Same-attempt cleanup evidence only; no separate independent absence receipt provided."
+  ],
+  "authorDisclosure": "Author previously authored runtime and result packets; independent result review remains separate. Known development/operator observation, not fresh holdout or consumer benefit."
+}

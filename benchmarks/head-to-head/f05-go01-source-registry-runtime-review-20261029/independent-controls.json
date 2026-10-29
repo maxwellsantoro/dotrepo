@@ -1,0 +1,83 @@
+{
+  "state": "passed-independent-fake-only-controls",
+  "checks": [
+    {
+      "case": "exact current closure subject",
+      "passed": true
+    },
+    {
+      "case": "reject unknown suffix identity",
+      "passed": true
+    },
+    {
+      "case": "reject missing child",
+      "passed": true
+    },
+    {
+      "case": "reject skip child",
+      "passed": true
+    },
+    {
+      "case": "reject test before package start",
+      "passed": true
+    },
+    {
+      "case": "reject duplicate package start",
+      "passed": true
+    },
+    {
+      "case": "reject event after package terminal",
+      "passed": true
+    },
+    {
+      "case": "reject parent before children",
+      "passed": true
+    },
+    {
+      "case": "reject wrong package",
+      "passed": true
+    },
+    {
+      "case": "valid complete 29-ID unit coverage",
+      "passed": true
+    },
+    {
+      "case": "create-exception",
+      "passed": true,
+      "daemonCallsAreSynthetic": 5,
+      "containerAbsent": true
+    },
+    {
+      "case": "cancel-tests",
+      "passed": true,
+      "daemonCallsAreSynthetic": 12,
+      "containerAbsent": true
+    },
+    {
+      "case": "preflight-error",
+      "passed": true,
+      "daemonCallsAreSynthetic": 0,
+      "containerAbsent": null
+    },
+    {
+      "case": "deadline",
+      "passed": true,
+      "daemonCallsAreSynthetic": 12,
+      "containerAbsent": true
+    },
+    {
+      "case": "partial-stdin",
+      "passed": true,
+      "stdinBytes": 200,
+      "error": null
+    },
+    {
+      "case": "early-closed-pipe",
+      "passed": true,
+      "stdinBytes": 0,
+      "error": "source input pipe closed early"
+    }
+  ],
+  "realGoNodeDaemonNetworkUpstreamProcesses": 0,
+  "helperAuthorRelationship": "Reviewer authored helper/receiver, not runner; prior source context, not fresh blind trial."
+}

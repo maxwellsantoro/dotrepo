@@ -1,0 +1,27 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-owned-registry-07a16bd85ec5",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "sha256sum /usr/local/go/bin/go"
+  ],
+  "startedAt": "2026-10-29T11:45:38.921637+00:00",
+  "elapsedSeconds": 0.10794016695581377,
+  "exitCode": 0,
+  "error": null,
+  "cancelled": false,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "331065d57d5b4c6c5cbfe3af7cff29a3f45eade41d3a8192521c95e8f050f1f5",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "binaryPath": null,
+  "binaryBytes": null,
+  "binarySha256": null,
+  "costUsd": null,
+  "costExclusions": [
+    "No metered host/container/download dollar receipt; no provider calls."
+  ]
+}

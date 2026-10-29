@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "-i",
+    "dotrepo-owned-registry-07a16bd85ec5",
+    "/workspace/owned-bin/registry"
+  ],
+  "startedAt": "2026-10-29T11:45:38.251160+00:00",
+  "elapsedSeconds": 0.5436812920961529,
+  "exitCode": 0,
+  "error": null,
+  "cancelled": false,
+  "stdinBytes": 21446036,
+  "stdinSha256": "0acd95252e7acfc23ce616d59125ebc98c0a7e4b079a789057e44a4479c88015",
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "binaryPath": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1/registry.gz",
+  "binaryBytes": 526407,
+  "binarySha256": "f32b1a5f3c3e6a83f250e4940bc3d01e3cef425b5d1764d6d5fdcf65528c152c",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered host/container/download dollar receipt; no provider calls."
+  ]
+}

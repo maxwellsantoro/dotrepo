@@ -1,0 +1,24 @@
+{
+  "cacheGloballyQualified": false,
+  "campaignAdmitted": false,
+  "executionAuthorized": false,
+  "findings": [],
+  "helperCLIExecuted": false,
+  "nativeCollectionOccurred": false,
+  "nativeTaskAdmitted": false,
+  "oracleQualified": false,
+  "ownedGoTestsExecuted": false,
+  "reportPath": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-runtime-review-20261029/review.json",
+  "reportSha256": "8f902fffe9a8f97e2237259471536a777eae4ea57f55a43d2c9f18de85efb835",
+  "reviewScope": "Exact frozen owned-only runner source/closure and trusted Python fake controls; no Go/daemon/native execution",
+  "scope": "owned-source-registry-only",
+  "state": "independent-owned-registry-runtime-review-passed",
+  "staticOnly": true,
+  "subject": {
+    "authorFreezeSha256": "6f22704c8c02e71e0db0bf21e80c9ffd96ef1544242e07090ad32762987c6972",
+    "packetIdentity": "go01-owned-source-registry-runtime-v1",
+    "planSha256": "29533c84b635a7244b1b0f022a6200c53c8f7ca628ff1fd64dd428a1249ddd96"
+  },
+  "synthetic": false,
+  "taskOutcomeObserved": false
+}

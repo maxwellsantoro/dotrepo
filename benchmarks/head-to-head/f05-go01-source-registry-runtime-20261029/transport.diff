@@ -1,0 +1,40 @@
+--- reviewed/process_io.py
++++ runtime/process_io.py
+@@ -69,20 +69,35 @@
+                             selector.unregister(key.fileobj)
+                             continue
+                         if role == "stdout" and binary:
+-                            available = TRANSPORT_LIMIT - received
++                            available = min(
++                                TRANSPORT_LIMIT - received,
++                                TEXT_LIMIT - received,
++                                TEXT_LIMIT
++                                - received
++                                - sum(len(value) for value in captured.values()),
++                            )
+                             binary.write(chunk[:available])
+                             received += min(len(chunk), available)
+                             if len(chunk) > available:
+                                 error = "binary archive transport limit"
+                                 break
+                         else:
+-                            available = TEXT_LIMIT - sum(len(value) for value in captured.values())
++                            available = (
++                                TEXT_LIMIT
++                                - received
++                                - sum(len(value) for value in captured.values())
++                            )
+                             captured[role].extend(chunk[:available])
+                             if len(chunk) > available:
+                                 error = "combined text trace limit"
+                                 break
+                     if error:
+                         break
++            except BaseException:
++                # Cancel before finally waits; do not mask cancellation with a late timeout.
++                if process.poll() is None:
++                    process.kill()
++                raise
+             finally:
+                 if error and process.poll() is None:
+                     process.kill()

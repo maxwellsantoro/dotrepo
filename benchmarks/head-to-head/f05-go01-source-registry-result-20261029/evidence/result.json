@@ -1,0 +1,132 @@
+{
+  "state": "owned-helper-observed-uncompiled-source-registry",
+  "stage": "observed",
+  "synthetic": false,
+  "startedAt": "2026-10-29T11:45:26.585812+00:00",
+  "ownedRegistryOutputObserved": true,
+  "ownedCLIAttempted": true,
+  "ownedTestsPassed": true,
+  "nativeCollectionOccurred": false,
+  "taskOutcomeObserved": false,
+  "campaignAdmitted": false,
+  "oracleQualified": false,
+  "cacheGloballyQualified": false,
+  "daemonCalls": 18,
+  "containerCreateAttempted": true,
+  "containerAbsent": true,
+  "costUsd": null,
+  "modelCalls": 0,
+  "ownedContainer": "dotrepo-owned-registry-07a16bd85ec5",
+  "authorization": {
+    "state": "coordinator-authorized-single-owned-registry-attempt",
+    "synthetic": false,
+    "runtimeSubject": {
+      "planSha256": "29533c84b635a7244b1b0f022a6200c53c8f7ca628ff1fd64dd428a1249ddd96",
+      "authorFreezeSha256": "6f22704c8c02e71e0db0bf21e80c9ffd96ef1544242e07090ad32762987c6972",
+      "packetIdentity": "go01-owned-source-registry-runtime-v1"
+    },
+    "helperSubject": {
+      "planSha256": "74258ec831c551ad1b39a497ed09320c3824aa0be9a836fb3d076684f5703482",
+      "authorFreezeSha256": "e569edd4888a092aa46745d950614964ca86fc755637827fd9723fad0413da4d",
+      "packetIdentity": "go01-source-registry-experiment-v1-amendment-1"
+    },
+    "output": "/private/tmp/dotrepo-go01-owned-registry-result-20261029-1",
+    "scratch": "/private/tmp/dotrepo-go01-owned-registry-scratch-20261029-1",
+    "maxAttempts": 1,
+    "commands": [
+      "go test -json -count=1 -timeout=60s .",
+      "go build -o /workspace/owned-bin/registry .",
+      "/workspace/owned-bin/registry"
+    ],
+    "limits": {
+      "workSecondsIncludingPreflight": 900,
+      "cleanupSeconds": 60,
+      "cpus": 3,
+      "memoryBytes": 4294967296,
+      "memorySwapBytes": 4294967296,
+      "pids": 256,
+      "workspaceTmpfsBytes": 8589934592,
+      "dependencyTmpfsBytes": 1073741824,
+      "tmpTmpfsBytes": 536870912,
+      "combinedStdoutStderrPerCommandBytes": 2097152,
+      "compressedRegistryBytes": 2097152,
+      "expandedRegistryBytes": 8388608
+    },
+    "inputSha256": "0acd95252e7acfc23ce616d59125ebc98c0a7e4b079a789057e44a4479c88015",
+    "runtimeReview": {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-runtime-review-20261029/passed-review.json",
+      "sha256": "56fdd4bf15a51d186cfd23589d6daf2f5a0f3b155af35dcd09d0f986930a75a6"
+    },
+    "helperReview": {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-review-20261029/amendment-1/passed-review.json",
+      "sha256": "63df2c64396548e63c776731b7eed7b8cdae002c0e6b9fb2ced6eb92264cd270"
+    },
+    "fullClosuresVerified": {
+      "runtime": {
+        "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-runtime-20261029/FREEZE.json",
+        "sha256": "6f22704c8c02e71e0db0bf21e80c9ffd96ef1544242e07090ad32762987c6972",
+        "verifiedArtifacts": 30
+      },
+      "helper": {
+        "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-20261029/amendment-1/FREEZE.json",
+        "sha256": "e569edd4888a092aa46745d950614964ca86fc755637827fd9723fad0413da4d",
+        "verifiedArtifacts": 18
+      },
+      "helperReview": {
+        "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-review-20261029/amendment-1/FREEZE.json",
+        "sha256": "4b3af3c97af90e8912da0b3f42af8fa07db01a5dc55ae010574eead743e39bd9",
+        "verifiedArtifacts": 14
+      },
+      "runtimeReview": {
+        "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-source-registry-runtime-review-20261029/FREEZE.json",
+        "sha256": "851b2fada0d98bca7cf530a44a506c498cfea18c639be418b1947f023ccbc385",
+        "verifiedArtifacts": 10
+      }
+    },
+    "scope": "Owned stdlib module unit tests/build/CLI only; upstream source is stdin data, never compiled or executed. No network, provider, upstream/native task or oracle/campaign admission."
+  },
+  "planSha256": "29533c84b635a7244b1b0f022a6200c53c8f7ca628ff1fd64dd428a1249ddd96",
+  "inputSha256": "0acd95252e7acfc23ce616d59125ebc98c0a7e4b079a789057e44a4479c88015",
+  "moduleTarSha256": "4a84fb5597a510b206ded2e354879131dcfde43f5362c7d59ff1f311c1f98f7a",
+  "moduleTarBytes": 30720,
+  "ownedTestIds": [
+    "TestBodylessExampleAndMethodAreNotRegistered",
+    "TestDeterministicBoundedGzipEncoding",
+    "TestDiscoveryNamesAndSignatures",
+    "TestDiscoveryNamesAndSignatures/bad-main",
+    "TestDiscoveryNamesAndSignatures/bare-prefix",
+    "TestDiscoveryNamesAndSignatures/benchmark",
+    "TestDiscoveryNamesAndSignatures/dot-import-shape",
+    "TestDiscoveryNamesAndSignatures/fuzz",
+    "TestDiscoveryNamesAndSignatures/generics",
+    "TestDiscoveryNamesAndSignatures/lower-prefix",
+    "TestDiscoveryNamesAndSignatures/main-as-test",
+    "TestDiscoveryNamesAndSignatures/main-as-test-discovery-quirk",
+    "TestDiscoveryNamesAndSignatures/main-wrapper",
+    "TestDiscoveryNamesAndSignatures/nonpointer",
+    "TestDiscoveryNamesAndSignatures/parse-error",
+    "TestDiscoveryNamesAndSignatures/receiver",
+    "TestDiscoveryNamesAndSignatures/result",
+    "TestDiscoveryNamesAndSignatures/string-and-comment",
+    "TestDiscoveryNamesAndSignatures/two-params",
+    "TestDiscoveryNamesAndSignatures/underscore",
+    "TestDiscoveryNamesAndSignatures/unicode-lower",
+    "TestDiscoveryNamesAndSignatures/unicode-title",
+    "TestDiscoveryNamesAndSignatures/uppercase",
+    "TestDiscoveryNamesAndSignatures/wrongtype",
+    "TestDuplicatesRetainDistinctStableDeclarations",
+    "TestExamplesUseOutputAndSourceOrder",
+    "TestExternalPackageClauseAndEmptyRegistry",
+    "TestJSONStructureRefusesAmbiguity",
+    "TestPhysicalLocationIgnoresLineDirective"
+  ],
+  "ownedBinaryShaObservation": "f1acb8bc1bc9a405a77d36a46775afcc187021f58229d96ff6c2e9d2cb7ad2e3  /workspace/owned-bin/registry\n",
+  "registryState": "source-derived-uncompiled",
+  "hasSourceDiagnostics": false,
+  "ownedCLIExitCode": 0,
+  "targetCompileValidityUnestablished": true,
+  "sourceToolsBeforeAfterMatched": true,
+  "cleanupSeconds": 0.21799820801243186,
+  "elapsedSeconds": 12.74485570890829,
+  "workBudgetExceeded": false
+}
