@@ -1,0 +1,351 @@
+{
+  "version": "1.0.4",
+  "verifiedAt": "2026-10-29T01:08:50.864039+00:00",
+  "result": "verified public stable release",
+  "reviewedCandidate": "ab1bae433f26cfe1553f0452ac5f5c901311177d",
+  "releaseCommit": "7ffcbd398359ab9a8b491f24491bf69060ab740e",
+  "reviewedTree": "35f9ce94dd1f5d1e35228e69bd06812a2354e664",
+  "mergedTree": "35f9ce94dd1f5d1e35228e69bd06812a2354e664",
+  "tag": "v1.0.4",
+  "tagObject": "1f08bbbce27c420c641106cb0038e569e6c2ffe2",
+  "tagCommit": "7ffcbd398359ab9a8b491f24491bf69060ab740e",
+  "pullRequest": "https://github.com/maxwellsantoro/dotrepo/pull/178",
+  "postMergeCi": {
+    "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/40796954517",
+    "conclusion": "success"
+  },
+  "releaseWorkflow": {
+    "url": "https://github.com/maxwellsantoro/dotrepo/actions/runs/40797577991",
+    "conclusion": "success",
+    "publicInstallJobs": {
+      "verify-public-installs (ubuntu-latest)": "success",
+      "verify-public-installs (macos-latest)": "success"
+    }
+  },
+  "releaseAssets": {
+    "release": "https://github.com/maxwellsantoro/dotrepo/releases/tag/v1.0.4",
+    "assets": {
+      "dotrepo-1.0.4-aarch64-apple-darwin.sha256": {
+        "sha256": "1857bf831726ec9138f374a4a8333ae395897ada46ef5444180e07f21d8ef4da",
+        "size": 108,
+        "url": "https://github.com/maxwellsantoro/dotrepo/releases/download/v1.0.4/dotrepo-1.0.4-aarch64-apple-darwin.sha256"
+      },
+      "dotrepo-1.0.4-aarch64-apple-darwin.tar.gz": {
+        "sha256": "c798e53b2c3fd548cae332a33a4da7d27574a208366f4f94baffcd7c773fbbc4",
+        "size": 6030957,
+        "url": "https://github.com/maxwellsantoro/dotrepo/releases/download/v1.0.4/dotrepo-1.0.4-aarch64-apple-darwin.tar.gz"
+      },
+      "dotrepo-1.0.4-x86_64-unknown-linux-gnu.sha256": {
+        "sha256": "519eb26a8a281bb778d740fc2398a28b1d4480c687156cae0498c43ca3a1f8b6",
+        "size": 112,
+        "url": "https://github.com/maxwellsantoro/dotrepo/releases/download/v1.0.4/dotrepo-1.0.4-x86_64-unknown-linux-gnu.sha256"
+      },
+      "dotrepo-1.0.4-x86_64-unknown-linux-gnu.tar.gz": {
+        "sha256": "f5a00c12d1be16a880f5adaf11811788a16624280a5e794c155a9582624828a5",
+        "size": 6764072,
+        "url": "https://github.com/maxwellsantoro/dotrepo/releases/download/v1.0.4/dotrepo-1.0.4-x86_64-unknown-linux-gnu.tar.gz"
+      },
+      "dotrepo-mcp-1.0.4.mcpb": {
+        "sha256": "4b9aeee087a17541d454c7bc487a77dbd76f2255606b7c92b88b2bac2bd52534",
+        "size": 5377664,
+        "url": "https://github.com/maxwellsantoro/dotrepo/releases/download/v1.0.4/dotrepo-mcp-1.0.4.mcpb"
+      },
+      "dotrepo-mcp-1.0.4.mcpb.sha256": {
+        "sha256": "1b086de9d15e67f83932b72df8c720602989d972653301790d79789dc615952b",
+        "size": 89,
+        "url": "https://github.com/maxwellsantoro/dotrepo/releases/download/v1.0.4/dotrepo-mcp-1.0.4.mcpb.sha256"
+      },
+      "dotrepo-vscode-v1.0.0.vsix": {
+        "sha256": "40af467f4523997fc9555fb0835a6f98c020383b20d783e3b28855ea0d1a7e43",
+        "size": 88434,
+        "url": "https://github.com/maxwellsantoro/dotrepo/releases/download/v1.0.4/dotrepo-vscode-v1.0.0.vsix"
+      }
+    }
+  },
+  "publicCrates": {
+    "dotrepo-schema": {
+      "version": "1.0.4",
+      "sha256": "ebcd10d19f256502ff478da000a45e74300dca2b86e5f57f2995484932c702ca",
+      "sourceCommit": "7ffcbd398359ab9a8b491f24491bf69060ab740e",
+      "sourcePathsCompared": [],
+      "createdAt": "2026-10-29T01:02:03.060763Z",
+      "url": "https://crates.io/crates/dotrepo-schema/1.0.4"
+    },
+    "dotrepo-transport": {
+      "version": "1.0.4",
+      "sha256": "1e0a7ec94f61d56cbf946ac2fe4e5e7619bdadaa5c2eb7060707563bf756e636",
+      "sourceCommit": "7ffcbd398359ab9a8b491f24491bf69060ab740e",
+      "sourcePathsCompared": [],
+      "createdAt": "2026-10-29T01:02:09.955619Z",
+      "url": "https://crates.io/crates/dotrepo-transport/1.0.4"
+    },
+    "dotrepo-core": {
+      "version": "1.0.4",
+      "sha256": "67c1c773b28d9188497a24c6754570cc6817d70d1bf47882445338245217ed71",
+      "sourceCommit": "7ffcbd398359ab9a8b491f24491bf69060ab740e",
+      "sourcePathsCompared": [
+        "src/output.rs",
+        "src/output_platform/unix.rs",
+        "src/output_platform/windows.rs"
+      ],
+      "createdAt": "2026-10-29T01:02:21.089731Z",
+      "url": "https://crates.io/crates/dotrepo-core/1.0.4"
+    },
+    "dotrepo-cli": {
+      "version": "1.0.4",
+      "sha256": "f996928a479c4982b3736a5d010e5ca9f4f55163557966e5aa7bdf157522f10a",
+      "sourceCommit": "7ffcbd398359ab9a8b491f24491bf69060ab740e",
+      "sourcePathsCompared": [
+        "src/cli.rs",
+        "src/commands.rs",
+        "src/main.rs"
+      ],
+      "createdAt": "2026-10-29T01:02:39.413471Z",
+      "url": "https://crates.io/crates/dotrepo-cli/1.0.4"
+    },
+    "dotrepo-mcp": {
+      "version": "1.0.4",
+      "sha256": "d1cc9e3d8151a7330e4ed28d776f89535248bc9edccc6b3b2bfa1296fe15e9f3",
+      "sourceCommit": "7ffcbd398359ab9a8b491f24491bf69060ab740e",
+      "sourcePathsCompared": [
+        "src/tools.rs",
+        "src/handlers.rs",
+        "src/dispatch.rs"
+      ],
+      "createdAt": "2026-10-29T01:03:04.291955Z",
+      "url": "https://crates.io/crates/dotrepo-mcp/1.0.4"
+    },
+    "dotrepo-lsp": {
+      "version": "1.0.4",
+      "sha256": "22147215234ce5273332e09983bbe26236639624b1c12c69763fe9edac703e16",
+      "sourceCommit": "7ffcbd398359ab9a8b491f24491bf69060ab740e",
+      "sourcePathsCompared": [],
+      "createdAt": "2026-10-29T01:03:12.637036Z",
+      "url": "https://crates.io/crates/dotrepo-lsp/1.0.4"
+    }
+  },
+  "mcpRegistry": {
+    "version": "1.0.4",
+    "url": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.maxwellsantoro%2Fdotrepo/versions/1.0.4",
+    "mcpbChecksumVerified": true
+  },
+  "mcpbBinaryParity": {
+    "aarch64-apple-darwin": {
+      "mcpbMember": "server/darwin-arm64/dotrepo-mcp",
+      "sha256": "749f52af45fc3ba21d1571b3067d07f2115ffa198aba5663fbc0f36fd9ebb36d"
+    },
+    "x86_64-unknown-linux-gnu": {
+      "mcpbMember": "server/linux-x64/dotrepo-mcp",
+      "sha256": "7f4fc97da17ffd722e347321498567c45379e6cf4fb1e2579dbca93a6ce78125"
+    }
+  },
+  "ordinaryComparisons": {
+    "linuxPublicBundleVsRegistry": {
+      "passed": true,
+      "differences": [],
+      "normalizations": [
+        "temporary roots",
+        "stable patch version",
+        "timestamps"
+      ],
+      "checks": [
+        "help",
+        "generate",
+        "generateCheck",
+        "validate",
+        "trust",
+        "doctor",
+        "query",
+        "generatedFiles",
+        "nativeImport",
+        "nativeForceImport",
+        "nativeFiles",
+        "overlayImport",
+        "overlayForceImport",
+        "overlayFiles",
+        "mcp",
+        "mcpFiles"
+      ],
+      "baselineSha256": {
+        "dotrepo": "fddc39f811dec5b81964dde53f1d1fde198af7f34c77a4d1ea52c4dca335a759",
+        "dotrepo-mcp": "7f4fc97da17ffd722e347321498567c45379e6cf4fb1e2579dbca93a6ce78125"
+      },
+      "candidateSha256": {
+        "dotrepo": "82921409905ed093da4ad7a10ad33dba4c5ae4c95e8e5ed762558c102366f1d5",
+        "dotrepo-mcp": "b2158ca427253aae3b359fb510b3b783c2d53b185cbc45cfc01af9326256b2d0"
+      }
+    },
+    "macosPublicBundleVsRegistry": {
+      "passed": true,
+      "differences": [],
+      "normalizations": [
+        "temporary roots",
+        "stable patch version",
+        "timestamps"
+      ],
+      "checks": [
+        "help",
+        "generate",
+        "generateCheck",
+        "validate",
+        "trust",
+        "doctor",
+        "query",
+        "generatedFiles",
+        "nativeImport",
+        "nativeForceImport",
+        "nativeFiles",
+        "overlayImport",
+        "overlayForceImport",
+        "overlayFiles",
+        "mcp",
+        "mcpFiles"
+      ],
+      "baselineSha256": {
+        "dotrepo": "c281ca5f1d7520b40a99385f5c4b024508e0812618e40a03ad01a78f1078df1e",
+        "dotrepo-mcp": "749f52af45fc3ba21d1571b3067d07f2115ffa198aba5663fbc0f36fd9ebb36d"
+      },
+      "candidateSha256": {
+        "dotrepo": "d54bc998dc4d639ce04238fe7a1a19c2dff6eb280c6cef5052170dab49c532bf",
+        "dotrepo-mcp": "b89d842a2f943bf9f5aa203976e4bd7cf7c0c6214ec74d2b2242411034a47ea1"
+      }
+    },
+    "macbookPublicRegistryVsBundle": {
+      "passed": true,
+      "differences": [],
+      "normalizations": [
+        "temporary roots",
+        "stable patch version",
+        "timestamps"
+      ],
+      "checks": [
+        "help",
+        "generate",
+        "generateCheck",
+        "validate",
+        "trust",
+        "doctor",
+        "query",
+        "generatedFiles",
+        "nativeImport",
+        "nativeForceImport",
+        "nativeFiles",
+        "overlayImport",
+        "overlayForceImport",
+        "overlayFiles",
+        "mcp",
+        "mcpFiles"
+      ],
+      "baselineSha256": {
+        "dotrepo": "c281ca5f1d7520b40a99385f5c4b024508e0812618e40a03ad01a78f1078df1e",
+        "dotrepo-mcp": "749f52af45fc3ba21d1571b3067d07f2115ffa198aba5663fbc0f36fd9ebb36d"
+      },
+      "candidateSha256": {
+        "dotrepo": "8e37a3b49004de8a0f035d1a4df7f660c7c357467b47c7b3d281150ad448e3c1",
+        "dotrepo-mcp": "ea35cb277c7a3fe8751c259439d740ebd7179f9b62881e7e405d273daf1e5e2f"
+      }
+    },
+    "publicBundleVsStable103": {
+      "passed": true,
+      "differences": [],
+      "normalizations": [
+        "temporary roots",
+        "stable patch version",
+        "timestamps"
+      ],
+      "checks": [
+        "help",
+        "generate",
+        "generateCheck",
+        "validate",
+        "trust",
+        "doctor",
+        "query",
+        "generatedFiles",
+        "nativeImport",
+        "nativeForceImport",
+        "nativeFiles",
+        "overlayImport",
+        "overlayForceImport",
+        "overlayFiles",
+        "mcp",
+        "mcpFiles"
+      ],
+      "baselineSha256": {
+        "dotrepo": "824857ed50095236cb4b86c8873478b1cda205bcdfd9b333e023093416c32358",
+        "dotrepo-mcp": "17d134f65ad6569c2f41e4004902377cf3fa17411015d651c4204d973b97ef37"
+      },
+      "candidateSha256": {
+        "dotrepo": "c281ca5f1d7520b40a99385f5c4b024508e0812618e40a03ad01a78f1078df1e",
+        "dotrepo-mcp": "749f52af45fc3ba21d1571b3067d07f2115ffa198aba5663fbc0f36fd9ebb36d"
+      }
+    }
+  },
+  "existingCliRefusalRegressions": {
+    "linuxPublicBundleAndRegistry": "passed in CI",
+    "macosPublicBundleAndRegistry": "passed in CI",
+    "macbookPublicBundle": "5 passed",
+    "macbookPublicRegistry": "5 passed"
+  },
+  "lspStdio": {
+    "bundle": [
+      {
+        "id": 1,
+        "jsonrpc": "2.0",
+        "result": {
+          "capabilities": {
+            "codeActionProvider": true,
+            "completionProvider": {},
+            "hoverProvider": true,
+            "textDocumentSync": {
+              "change": 1,
+              "openClose": true,
+              "save": {
+                "includeText": true
+              }
+            }
+          },
+          "serverInfo": {
+            "name": "dotrepo-lsp",
+            "version": "1.0.4"
+          }
+        }
+      },
+      {
+        "id": 2,
+        "jsonrpc": "2.0",
+        "result": null
+      }
+    ],
+    "registry": [
+      {
+        "id": 1,
+        "jsonrpc": "2.0",
+        "result": {
+          "capabilities": {
+            "codeActionProvider": true,
+            "completionProvider": {},
+            "hoverProvider": true,
+            "textDocumentSync": {
+              "change": 1,
+              "openClose": true,
+              "save": {
+                "includeText": true
+              }
+            }
+          },
+          "serverInfo": {
+            "name": "dotrepo-lsp",
+            "version": "1.0.4"
+          }
+        }
+      },
+      {
+        "id": 2,
+        "jsonrpc": "2.0",
+        "result": null
+      }
+    ]
+  },
+  "testBoundary": "Existing refusal/regression suites ran only against fixed 1.0.4 binaries. Prior public releases were used only for ordinary-output comparisons. No pre-fix overwrite demonstration ran."
+}

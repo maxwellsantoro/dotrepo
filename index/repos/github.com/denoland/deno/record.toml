@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/denoland/deno"
 generated_at = "2026-10-27T18:24:35.843121Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/SECURITY.md`, and `.github/CONTRIBUTING.md`. Filled `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `.github/CONTRIBUTING.md`. Imported `repo.test` from `.github/CONTRIBUTING.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/SECURITY.md`, and `.github/CONTRIBUTING.md`. Filled `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. "
 
 [repo]
 name = "Deno"
@@ -40,8 +39,6 @@ languages = [
     "Vento",
     "Nunjucks",
 ]
-build = "cargo build --features hmr"
-test = "cargo test --features hmr integration::node_unit_tests::os_test"
 topics = [
     "deno",
     "typescript",
@@ -87,13 +84,13 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T18:24:35.843121Z"
-confidence = "high"
-method = "extracted"
-reason = "from declared repository source"
+checkedAt = "2026-10-29T02:06:09.861151Z"
+confidence = "low"
+method = "source_scope_review"
+reason = "Special HMR development mode; source modules are read at runtime."
 source = ".github/CONTRIBUTING.md"
-state = "present"
-valueJson = '"cargo build --features hmr"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-10-27T18:24:35.843121Z"
@@ -122,13 +119,13 @@ state = "present"
 valueJson = '"Deno"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T18:24:35.843121Z"
-confidence = "high"
-method = "extracted"
-reason = "from declared repository source"
+checkedAt = "2026-10-29T02:06:09.861151Z"
+confidence = "low"
+method = "source_scope_review"
+reason = "One HMR integration-test example, not the repository suite."
 source = ".github/CONTRIBUTING.md"
-state = "present"
-valueJson = '"cargo test --features hmr integration::node_unit_tests::os_test"'
+state = "unresolved"
+valueJson = "null"
 
 [x.github]
 archived = false

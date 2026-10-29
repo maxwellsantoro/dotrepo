@@ -61,3 +61,26 @@ def test_audit_requires_pinned_revision(tmp_path, monkeypatch):
     )
     result = audit.audit_record(path, Path("/test/dotrepo"), tmp_path / "receipt")
     assert result["error"] == "audit requires a pinned GitHub revision"
+
+
+def test_documentation_audit_is_opt_in_and_never_runs_upstream_commands(tmp_path, monkeypatch):
+    path = retained_record(tmp_path, value="cargo build --profile profiling")
+    path.write_text(
+        path.read_text().replace('source = "Makefile"', 'source = "CONTRIBUTING.md"')
+        + 'confidence = "high"\nmethod = "extracted"\nstate = "present"\n'
+    )
+    original = path.read_bytes()
+    assert audit.audit_record(path, Path("/test/dotrepo"), tmp_path / "receipt") is None
+    body = b"# Contributing\n\n## Docker\n\n```sh\ncargo build --profile profiling\n```\n"
+    monkeypatch.setattr(audit, "urlopen", lambda *_args, **_kwargs: io.BytesIO(body))
+
+    def reimport(command, **kwargs):
+        assert command[0] == "/test/dotrepo" and command[3:6] == ["import", "--mode", "overlay"]
+        root = Path(command[2])
+        assert (root / "CONTRIBUTING.md").read_bytes() == body
+        (root / "record.toml").write_text("[repo]\n")
+
+    monkeypatch.setattr(audit.subprocess, "run", reimport)
+    result = audit.audit_record(path, Path("/test/dotrepo"), tmp_path / "receipt", "docs")
+    assert result["fields"][0]["disposition"] == "withhold"
+    assert path.read_bytes() == original

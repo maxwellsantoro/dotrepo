@@ -306,7 +306,7 @@ cargo test
 }
 
 #[test]
-fn docs_nextest_examples_publish_runner_not_specific_selector() {
+fn docs_nextest_examples_do_not_invent_an_unfiltered_runner_command() {
     use super::super::types::ImportedFile;
     use super::extraction::infer_contributing_commands;
 
@@ -324,8 +324,18 @@ cargo nextest run -E 'test(test_name)'
         .into(),
     };
 
-    let candidate = infer_contributing_commands(&contributing).expect("CONTRIBUTING commands");
-    assert_eq!(candidate.test.as_deref(), Some("cargo nextest run"));
+    assert!(infer_contributing_commands(&contributing).is_none());
+    let explicit = ImportedFile {
+        contents: "# Contributing\n\n```sh\ncargo nextest run\n```\n".into(),
+        ..contributing
+    };
+    assert_eq!(
+        infer_contributing_commands(&explicit)
+            .unwrap()
+            .test
+            .as_deref(),
+        Some("cargo nextest run")
+    );
 }
 
 #[test]
@@ -706,16 +716,13 @@ fn docs_accept_cargo_toolchain_override_and_keep_it_in_the_command() {
     use super::super::types::ImportedFile;
     use super::extraction::infer_contributing_commands;
 
-    // Shaped like serde-rs/serde: the full-suite command pins a toolchain
-    // and lives under a directory-specific subheading of the test section.
+    // An explicitly documented root command may pin its Cargo toolchain.
     let contributing = ImportedFile {
         path: "CONTRIBUTING.md".into(),
         contents: r#"
 # Contributing
 
 ## Running the test suite
-
-##### In the [`test_suite`] directory
 
 ```sh
 # Run the full test suite, including tests of unstable functionality
@@ -751,6 +758,68 @@ RUFF_UPDATE_SCHEMA=1 cargo test
     };
 
     assert!(infer_contributing_commands(&contributing).is_none());
+}
+
+#[test]
+fn specialized_doc_sections_do_not_inherit_repository_default_authority() {
+    use super::super::types::ImportedFile;
+    use super::extraction::infer_contributing_commands;
+
+    for section in [
+        "Running inside a Docker container",
+        "Container builds",
+        "Profiling",
+        "Cross-compiling",
+        "Cross compilation",
+        "Building for musl",
+        "Wasm builds",
+        "Debug builds",
+        "Update the documentation",
+        "Hot Module Replacement (HMR) mode",
+        "macOS",
+        "Windows",
+        "In the [`serde_core`] directory",
+        "Syntax tests",
+    ] {
+        let specialized = format!(
+            "# Contributing\n\n## {section}\n\n```sh\ncargo build --profile profiling\ncargo test\n```\n"
+        );
+        let file = ImportedFile {
+            path: "CONTRIBUTING.md".into(),
+            contents: specialized.clone(),
+        };
+        assert!(infer_contributing_commands(&file).is_none(), "{section}");
+        let file = ImportedFile {
+            contents: format!(
+                "{specialized}\n## Development\n\n```sh\ncargo build\ncargo test --all\n```\n"
+            ),
+            ..file
+        };
+        let candidate = infer_contributing_commands(&file).expect("root development commands");
+        assert_eq!(candidate.build.as_deref(), Some("cargo build"));
+        assert_eq!(candidate.test.as_deref(), Some("cargo test --all"));
+    }
+}
+
+#[test]
+fn documentation_fences_do_not_reset_directory_or_make_configuration() {
+    use super::super::types::ImportedFile;
+    use super::extraction::infer_contributing_commands;
+
+    for preparation in [
+        "cd mybuild",
+        "cmake -Dgtest_build_tests=ON .",
+        "auto/configure",
+    ] {
+        let file = ImportedFile {
+            path: "CONTRIBUTING.md".into(),
+            contents: format!("# Contributing\n\n## Building and testing\n\n```sh\n{preparation}\n```\n\n```sh\nmake\n```\n\n```sh\nmake test\n```\n"),
+        };
+        assert!(
+            infer_contributing_commands(&file).is_none(),
+            "{preparation}"
+        );
+    }
 }
 
 #[test]

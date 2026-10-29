@@ -1,0 +1,1082 @@
+{
+  "checkedAt": "2026-10-29T02:00:27.538206Z",
+  "policy": "static-source-preservation; no upstream execution; no task-correctness claim",
+  "sourceKind": "docs",
+  "records": [
+    {
+      "identity": "github.com/Aider-AI/aider",
+      "revision": "5dc9490bb35f9729ef2c95d00a19ccd30c26339c",
+      "sources": [
+        {
+          "path": "sources/github.com/Aider-AI/aider/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/Aider-AI/aider/5dc9490bb35f9729ef2c95d00a19ccd30c26339c/CONTRIBUTING.md",
+          "sha256": "aaaafd32db23af352ffdd277425021a2bc738480d321b2b20b1b252e7e811ee0"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "pytest",
+          "candidate": "pytest",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/BurntSushi/ripgrep",
+      "revision": "91f5d22ef48bde459d90a8c7dbeab416e97d0f2b",
+      "sources": [
+        {
+          "path": "sources/github.com/BurntSushi/ripgrep/README.md",
+          "url": "https://raw.githubusercontent.com/BurntSushi/ripgrep/91f5d22ef48bde459d90a8c7dbeab416e97d0f2b/README.md",
+          "sha256": "945622d974f65e4e141ef9726c948c2640eebd222c5b101afb6445728283921e"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "README.md",
+          "inspectedSource": "README.md",
+          "previous": "cargo build --release --features 'pcre2'",
+          "candidate": "cargo build --release --features 'pcre2'",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "README.md",
+          "inspectedSource": "README.md",
+          "previous": "cargo test --all",
+          "candidate": "cargo test --all",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/FuelLabs/fuel-core",
+      "revision": "ffd6563763582f8b0d9073a7cc115b57002ee684",
+      "sources": [
+        {
+          "path": "sources/github.com/FuelLabs/fuel-core/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/FuelLabs/fuel-core/ffd6563763582f8b0d9073a7cc115b57002ee684/CONTRIBUTING.md",
+          "sha256": "2fd38b4c49b8c698f7118fdb69d6ed092340efa2af2834560d8dfdb4bb3fffbc"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "cargo build -p fuel-core-bin --no-default-features",
+          "candidate": null,
+          "disposition": "withhold"
+        },
+        {
+          "field": "repo.test",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "cargo test --all-targets",
+          "candidate": "cargo test --all-targets",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/GokuMohandas/Made-With-ML",
+      "revision": "3361aeb8ddfc2affdba9f545c978c38c85cee764",
+      "sources": [
+        {
+          "path": "sources/github.com/GokuMohandas/Made-With-ML/README.md",
+          "url": "https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/3361aeb8ddfc2affdba9f545c978c38c85cee764/README.md",
+          "sha256": "de3c1169085f5092d203330e50c442004f0939217f6aed123857d08253aff450"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "README.md",
+          "inspectedSource": "README.md",
+          "previous": "pytest --dataset-loc=$DATASET_LOC tests/data --verbose --disable-warnings",
+          "candidate": "pytest --dataset-loc=$DATASET_LOC tests/data --verbose --disable-warnings",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/OpenMined/PySyft",
+      "revision": "02b65aecda389ca577856bcc1b2342471970803c",
+      "sources": [
+        {
+          "path": "sources/github.com/OpenMined/PySyft/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/OpenMined/PySyft/02b65aecda389ca577856bcc1b2342471970803c/CONTRIBUTING.md",
+          "sha256": "b01eb8af3780b57e7a740f5c4ef5b92c7b54663f320e084de1d27ffebfd2e169"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "pytest tests/unit/ -v",
+          "candidate": "pytest tests/unit/ -v",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/alacritty/alacritty",
+      "revision": "bbb2cbf9470a6707b1205fbddbdb25109b14e2fd",
+      "sources": [
+        {
+          "path": "sources/github.com/alacritty/alacritty/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/alacritty/alacritty/bbb2cbf9470a6707b1205fbddbdb25109b14e2fd/CONTRIBUTING.md",
+          "sha256": "37ab3c68696ce0c3ab465044d0bb2c49722ee434ceeedd3543193808de50181d"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "cargo test",
+          "candidate": "cargo test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/astral-sh/ruff",
+      "revision": "c618e8b1382992a27dafe2fc288777792e36ecab",
+      "sources": [
+        {
+          "path": "sources/github.com/astral-sh/ruff/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/astral-sh/ruff/c618e8b1382992a27dafe2fc288777792e36ecab/CONTRIBUTING.md",
+          "sha256": "8e0479f1dda2f3a3a5b1aae90e31ac3455ef5d019c23bdcc62f6b4c221fb88f9"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "cargo test -p ruff_python_parser",
+          "candidate": null,
+          "disposition": "withhold"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/astral-sh/uv",
+      "revision": "e4c55567ada966de4911513b5c526070e6cddd3f",
+      "sources": [
+        {
+          "path": "sources/github.com/astral-sh/uv/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/astral-sh/uv/e4c55567ada966de4911513b5c526070e6cddd3f/CONTRIBUTING.md",
+          "sha256": "b474892c11039bfc04449a838c5c923c90bff8843007fa62adc7713eada13afe"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "cargo build --target x86_64-unknown-linux-musl --profile profiling",
+          "candidate": null,
+          "disposition": "withhold"
+        },
+        {
+          "field": "repo.test",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "cargo nextest run",
+          "candidate": "cargo nextest run",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/caddyserver/caddy",
+      "revision": "71c5812cfeb7ce9ab471d323ccd98e6fb7cf8d26",
+      "sources": [
+        {
+          "path": "sources/github.com/caddyserver/caddy/README.md",
+          "url": "https://raw.githubusercontent.com/caddyserver/caddy/71c5812cfeb7ce9ab471d323ccd98e6fb7cf8d26/README.md",
+          "sha256": "0bc5939a26994a481e65b84b4e1b9ee44dd06796df4a196c75e9bdcdd4868b18"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "README.md",
+          "inspectedSource": "README.md",
+          "previous": "go test ./...",
+          "candidate": "go test ./...",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/calcom/cal.diy",
+      "revision": "56da01b4b1664894b784aca636eccab0c56cc141",
+      "sources": [
+        {
+          "path": "sources/github.com/calcom/cal.diy/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/calcom/cal.diy/56da01b4b1664894b784aca636eccab0c56cc141/CONTRIBUTING.md",
+          "sha256": "bd02d95ba813913c777afb57ee246ea9cf2a2b151ed60b5c7070f32fd4c51598"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "yarn build",
+          "candidate": "yarn build",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/clap-rs/clap",
+      "revision": "ccc89b83875474399e9d9d70841163f6319d1a41",
+      "sources": [
+        {
+          "path": "sources/github.com/clap-rs/clap/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/clap-rs/clap/ccc89b83875474399e9d9d70841163f6319d1a41/CONTRIBUTING.md",
+          "sha256": "847fc0e8d8e5473d0c2f22ff427c86488c574d92ad1b1786cbe62d0eba7528ed"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "cargo test --features debug",
+          "candidate": "cargo test --features debug",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/clementchadebec/benchmark_VAE",
+      "revision": "6419e21558f2a6abc2da99944bddda846ded30f4",
+      "sources": [
+        {
+          "path": "sources/github.com/clementchadebec/benchmark_VAE/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/clementchadebec/benchmark_VAE/6419e21558f2a6abc2da99944bddda846ded30f4/CONTRIBUTING.md",
+          "sha256": "b74fc1cd4cf464099ed45ad888fcda735dc6f1881351c8e52a04332235a9fe6b"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "pytest tests/",
+          "candidate": "pytest tests/",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/containerd/containerd",
+      "revision": "43aa4ea134f3e50791b8537c48a18303f0fcc775",
+      "sources": [
+        {
+          "path": "sources/github.com/containerd/containerd/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/containerd/containerd/43aa4ea134f3e50791b8537c48a18303f0fcc775/CONTRIBUTING.md",
+          "sha256": "0678eb2e96d2ee6bb128ff0515ff49894bb48cfab256348d021aa7a7c56fe8e3"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "make check",
+          "candidate": "make check",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/coqui-ai/TTS",
+      "revision": "dbf1a08a0d4e47fdad6172e433eeb34bc6b13b4e",
+      "sources": [
+        {
+          "path": "sources/github.com/coqui-ai/TTS/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/coqui-ai/TTS/dbf1a08a0d4e47fdad6172e433eeb34bc6b13b4e/CONTRIBUTING.md",
+          "sha256": "5baec38a18b1b22c43e7e4653fd6963524fefefdc1c71664ad643fdbe0b25430"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/denoland/deno",
+      "revision": "e7b39ebd55c85aaf6a29290c1f5a99e2e21e09dd",
+      "sources": [
+        {
+          "path": "sources/github.com/denoland/deno/.github/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/denoland/deno/e7b39ebd55c85aaf6a29290c1f5a99e2e21e09dd/.github/CONTRIBUTING.md",
+          "sha256": "d1d1570c2dbe526203fb93a37da249d935adc049c74f2bd6e9fbba9cadf33fbb"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": ".github/CONTRIBUTING.md",
+          "inspectedSource": ".github/CONTRIBUTING.md",
+          "previous": "cargo build --features hmr",
+          "candidate": "cargo build --features hmr",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": ".github/CONTRIBUTING.md",
+          "inspectedSource": ".github/CONTRIBUTING.md",
+          "previous": "cargo test --features hmr integration::node_unit_tests::os_test",
+          "candidate": "cargo test --features hmr integration::node_unit_tests::os_test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/ethereum/go-ethereum",
+      "revision": "7d0a3d848b82959eb14d5eb4b65cc0c26ae97418",
+      "sources": [
+        {
+          "path": "sources/github.com/ethereum/go-ethereum/README.md",
+          "url": "https://raw.githubusercontent.com/ethereum/go-ethereum/7d0a3d848b82959eb14d5eb4b65cc0c26ae97418/README.md",
+          "sha256": "f78f3bd17b128c895b9f9b03256670b7903babb38e99592a6a7893f905579b69"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "README.md",
+          "inspectedSource": "README.md",
+          "previous": "make all",
+          "candidate": "make all",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/facebook/zstd",
+      "revision": "49cf51799ea051457f57243527aa2058f999f005",
+      "sources": [
+        {
+          "path": "sources/github.com/facebook/zstd/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/facebook/zstd/49cf51799ea051457f57243527aa2058f999f005/CONTRIBUTING.md",
+          "sha256": "c8df0c309e51a5de8a9b17ab7cf720ad01a520a1e3a75f70b3966ca96bb70822"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "make check",
+          "candidate": "make check",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/git-bug/git-bug",
+      "revision": "9a127941bde4e689fd78ce6c9bab984ff06433c3",
+      "sources": [
+        {
+          "path": "sources/github.com/git-bug/git-bug/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/git-bug/git-bug/9a127941bde4e689fd78ce6c9bab984ff06433c3/CONTRIBUTING.md",
+          "sha256": "fef1252dc6f4616f2fb76759bffdc3ffac8936b540f5e659e3419b735f66ce95"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "make",
+          "candidate": "make",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/google/googletest",
+      "revision": "cd8e73f067129f8489e35c7b51c7a68552b289d2",
+      "sources": [
+        {
+          "path": "sources/github.com/google/googletest/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/google/googletest/cd8e73f067129f8489e35c7b51c7a68552b289d2/CONTRIBUTING.md",
+          "sha256": "f3ebba9e9dcf173b241a09082c73bccb0f2ea742ae9d7892bbaedaf928bca007"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "make",
+          "candidate": "make",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/grafana/loki",
+      "revision": "b47fb0508848144eb7a405ab68e46d291bf671b3",
+      "sources": [
+        {
+          "path": "sources/github.com/grafana/loki/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/grafana/loki/b47fb0508848144eb7a405ab68e46d291bf671b3/CONTRIBUTING.md",
+          "sha256": "46417c20a695eeca53710367313317b46083613e82edb0b520e386d9885d347e"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/hashicorp/terraform",
+      "revision": "ae75cbe434a7dbcca310b11f6b5d9bc5dfdb3380",
+      "sources": [
+        {
+          "path": "sources/github.com/hashicorp/terraform/.github/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/hashicorp/terraform/ae75cbe434a7dbcca310b11f6b5d9bc5dfdb3380/.github/CONTRIBUTING.md",
+          "sha256": "e429071a1bfc57ce5202cf1d1bea46cb7336272c7faf84b53f2b2286ef323aff"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": ".github/CONTRIBUTING.md",
+          "inspectedSource": ".github/CONTRIBUTING.md",
+          "previous": "go test ./...",
+          "candidate": "go test ./...",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/influxdata/influxdb",
+      "revision": "185688a5a813016c0d26ec10abbad2ca770670ed",
+      "sources": [
+        {
+          "path": "sources/github.com/influxdata/influxdb/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/influxdata/influxdb/185688a5a813016c0d26ec10abbad2ca770670ed/CONTRIBUTING.md",
+          "sha256": "82c141d38798600848dba87b3fcf75666d7309cfae18370c35c19abe0bb171b7"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "cargo nextest run",
+          "candidate": "cargo nextest run",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/juanfont/headscale",
+      "revision": "2d220b2eb8be8d31ed603000d0b0be02c2cd94d0",
+      "sources": [
+        {
+          "path": "sources/github.com/juanfont/headscale/README.md",
+          "url": "https://raw.githubusercontent.com/juanfont/headscale/2d220b2eb8be8d31ed603000d0b0be02c2cd94d0/README.md",
+          "sha256": "475a4074034044c0cdf991cab5ba4eef8954f05474bd711f07b91805635d9d7d"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "README.md",
+          "inspectedSource": "README.md",
+          "previous": "make build",
+          "candidate": "make build",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "README.md",
+          "inspectedSource": "README.md",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/meilisearch/meilisearch",
+      "revision": "9bbe2813f55fb856d1d710470a8020240c292e32",
+      "sources": [
+        {
+          "path": "sources/github.com/meilisearch/meilisearch/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/meilisearch/meilisearch/9bbe2813f55fb856d1d710470a8020240c292e32/CONTRIBUTING.md",
+          "sha256": "9b33da6bf39f25f9c7331033ff3745e92a6484d18e7c70e27dfd1c7f28d7209e"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "cargo test",
+          "candidate": "cargo test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/metabrainz/picard",
+      "revision": "9b6689727e9e8314836b1a77a68f21d84f2a7f03",
+      "sources": [
+        {
+          "path": "sources/github.com/metabrainz/picard/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/metabrainz/picard/9b6689727e9e8314836b1a77a68f21d84f2a7f03/CONTRIBUTING.md",
+          "sha256": "473cd4136c1e11aeec9e37f2daaf1985f22d12c4488221696dfe6c9d77a0ceff"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "pytest -n auto",
+          "candidate": "pytest -n auto",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/mudler/LocalAI",
+      "revision": "7903a9fce0f3e07af669851d840cc92914046ef9",
+      "sources": [
+        {
+          "path": "sources/github.com/mudler/LocalAI/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/mudler/LocalAI/7903a9fce0f3e07af669851d840cc92914046ef9/CONTRIBUTING.md",
+          "sha256": "a265f875cad46917d38949ea1019df10bc3e9df16e8667281ab789455bccf55a"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "make build",
+          "candidate": "make build",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/nginx/nginx",
+      "revision": "797c039a9884f69aae96286dcdf1ba633e5ebf81",
+      "sources": [
+        {
+          "path": "sources/github.com/nginx/nginx/README.md",
+          "url": "https://raw.githubusercontent.com/nginx/nginx/797c039a9884f69aae96286dcdf1ba633e5ebf81/README.md",
+          "sha256": "c20b11d05d64038c63fe78ed177b692ac48d686344be464f326bb48e7d2c224b"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "README.md",
+          "inspectedSource": "README.md",
+          "previous": "make",
+          "candidate": "make",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/nlohmann/json",
+      "revision": "84c5421644314a301ecb1312bbb4e1ff7e1a729d",
+      "sources": [
+        {
+          "path": "sources/github.com/nlohmann/json/.github/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/nlohmann/json/84c5421644314a301ecb1312bbb4e1ff7e1a729d/.github/CONTRIBUTING.md",
+          "sha256": "997bbf1bde2e3d44a8223c7db9f01961b1505931913ef497f1aa942cc1b3fd13"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": ".github/CONTRIBUTING.md",
+          "inspectedSource": ".github/CONTRIBUTING.md",
+          "previous": "make build -C docs/mkdocs",
+          "candidate": "make build -C docs/mkdocs",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/nushell/nushell",
+      "revision": "99705528485da55059f4b32d010226ed64a9c97a",
+      "sources": [
+        {
+          "path": "sources/github.com/nushell/nushell/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/nushell/nushell/99705528485da55059f4b32d010226ed64a9c97a/CONTRIBUTING.md",
+          "sha256": "7789c4d79a1b437beb696fe2632e4de959475e855a3e57fa4ffa87e40788726e"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "cargo test --workspace",
+          "candidate": "cargo test --workspace",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/openobserve/openobserve",
+      "revision": "5fd94111c2c6415ee9a3ef83ca29e5ebd6aa2ded",
+      "sources": [
+        {
+          "path": "sources/github.com/openobserve/openobserve/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/openobserve/openobserve/5fd94111c2c6415ee9a3ef83ca29e5ebd6aa2ded/CONTRIBUTING.md",
+          "sha256": "8abb301fbf6f282e1f604c8aadcdcf2340b151dcac9ecc1641a41c285863c2bc"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "cargo build --release",
+          "candidate": "cargo build --release",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/pocketbase/pocketbase",
+      "revision": "7f2773ec234b62d0b80ca47c508397cb3d0da3ea",
+      "sources": [
+        {
+          "path": "sources/github.com/pocketbase/pocketbase/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/pocketbase/pocketbase/7f2773ec234b62d0b80ca47c508397cb3d0da3ea/CONTRIBUTING.md",
+          "sha256": "ec703c99f593dc2319b84546efcda9a204fe638c559c38fc8182c3196941a555"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "go test ./...",
+          "candidate": "go test ./...",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/prometheus/prometheus",
+      "revision": "3861d587c7070dff79ae7862d4735e35cfc82f6e",
+      "sources": [
+        {
+          "path": "sources/github.com/prometheus/prometheus/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/prometheus/prometheus/3861d587c7070dff79ae7862d4735e35cfc82f6e/CONTRIBUTING.md",
+          "sha256": "495e6a60acc256f677a8f5432c72e1a3c6113e678094922c7d489848fb74b364"
+        },
+        {
+          "path": "sources/github.com/prometheus/prometheus/README.md",
+          "url": "https://raw.githubusercontent.com/prometheus/prometheus/3861d587c7070dff79ae7862d4735e35cfc82f6e/README.md",
+          "sha256": "fb0d761371424c5fe128cbee49d1c2999c0b99d554a5f2332b1148d97b99b04d"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "README.md",
+          "inspectedSource": "README.md",
+          "previous": "make build",
+          "candidate": null,
+          "disposition": "withhold"
+        },
+        {
+          "field": "repo.test",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/pytorch/pytorch",
+      "revision": "6ce2d3101ac63a4778b4ac00a811fb4cfd4ed42d",
+      "sources": [
+        {
+          "path": "sources/github.com/pytorch/pytorch/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/pytorch/pytorch/6ce2d3101ac63a4778b4ac00a811fb4cfd4ed42d/CONTRIBUTING.md",
+          "sha256": "bdfa782fc586441f115ff1a89d38b24e1fc6dcb6337982d9674253b532c91b53"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "pytest test/test_nn.py -k Loss -v",
+          "candidate": "pytest test/test_nn.py -k Loss -v",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/rclone/rclone",
+      "revision": "545b142ad484d53fa05732640fc29164af7fda61",
+      "sources": [
+        {
+          "path": "sources/github.com/rclone/rclone/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/rclone/rclone/545b142ad484d53fa05732640fc29164af7fda61/CONTRIBUTING.md",
+          "sha256": "cc51c6da296f69b9937e6d62fe7b2d5166e45301051766586c1ea0401fbea92d"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "go build",
+          "candidate": "go build",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "go test -v ./...",
+          "candidate": "go test -v ./...",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/redis/redis",
+      "revision": "33c2a2a145d3f09b42503df27d3ffbc76f34e32c",
+      "sources": [
+        {
+          "path": "sources/github.com/redis/redis/README.md",
+          "url": "https://raw.githubusercontent.com/redis/redis/33c2a2a145d3f09b42503df27d3ffbc76f34e32c/README.md",
+          "sha256": "947c87732c7ec6382a64ac7c637bea474b6aa478f22dcf3d8091bb6ca8bb531d"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "README.md",
+          "inspectedSource": "README.md",
+          "previous": "make",
+          "candidate": "make",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/rust-lang/mdBook",
+      "revision": "8c41b823bb093fd14303dc38809c78e0df2d53ea",
+      "sources": [
+        {
+          "path": "sources/github.com/rust-lang/mdBook/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/rust-lang/mdBook/8c41b823bb093fd14303dc38809c78e0df2d53ea/CONTRIBUTING.md",
+          "sha256": "ce3a8f5a12c708f3e182c8e9a503c51e959e328fe1015be60bcdb0f1b5f494c4"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "cargo test --test gui",
+          "candidate": "cargo test --test gui",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/rustdesk/rustdesk-server",
+      "revision": "873230e35a8805de7fd057e7eb763c46f7a174ef",
+      "sources": [
+        {
+          "path": "sources/github.com/rustdesk/rustdesk-server/README.md",
+          "url": "https://raw.githubusercontent.com/rustdesk/rustdesk-server/873230e35a8805de7fd057e7eb763c46f7a174ef/README.md",
+          "sha256": "b1103ff8ecf441b86544c1e981410a0b4e739489526fd19713e0ce299b37fb67"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "README.md",
+          "inspectedSource": "README.md",
+          "previous": "cargo build --release",
+          "candidate": "cargo build --release",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/screenpipe/screenpipe",
+      "revision": "38059f4f75b82641da2999bc0bb2a03552876f08",
+      "sources": [
+        {
+          "path": "sources/github.com/screenpipe/screenpipe/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/screenpipe/screenpipe/38059f4f75b82641da2999bc0bb2a03552876f08/CONTRIBUTING.md",
+          "sha256": "5ff910d4bf599ef3dc3d1e8f862a26e9904b6e51a9baed92e0f3fc81050a0d2b"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "cargo build --release --features metal",
+          "candidate": "cargo build --release --features metal",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "cargo test",
+          "candidate": "cargo test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/serde-rs/serde",
+      "revision": "0db9b3b504bcb0a7fa9cf001429869519afd3e9a",
+      "sources": [
+        {
+          "path": "sources/github.com/serde-rs/serde/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/serde-rs/serde/0db9b3b504bcb0a7fa9cf001429869519afd3e9a/CONTRIBUTING.md",
+          "sha256": "91f0716e8011f1c92ee5d24a3ddd5ccd61e300cf85735afb732ae1c389c39814"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "cargo test",
+          "candidate": "cargo test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/sharkdp/bat",
+      "revision": "a9aa73d215455a479f072da75dd39f19826acfea",
+      "sources": [
+        {
+          "path": "sources/github.com/sharkdp/bat/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/sharkdp/bat/a9aa73d215455a479f072da75dd39f19826acfea/CONTRIBUTING.md",
+          "sha256": "da748a38b6ed4c89cb9a3ef6f6b7a2b9e7d1e1dcd53ec3272f8d3a82512a1303"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "cargo build --bins",
+          "candidate": "cargo build --bins",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/socketio/socket.io",
+      "revision": "1eaa582d3b453e3e6f522300ed05b10da0a0799b",
+      "sources": [
+        {
+          "path": "sources/github.com/socketio/socket.io/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/socketio/socket.io/1eaa582d3b453e3e6f522300ed05b10da0a0799b/CONTRIBUTING.md",
+          "sha256": "4b54396e74893d2daa61862ee19d79c9b73fc6de348b71fd79ff66d814c5fa90"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "npm test -ws",
+          "candidate": "npm test -ws",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/sxyazi/yazi",
+      "revision": "40a91421893bfd1ae02ef7a55afd41f886558d8c",
+      "sources": [
+        {
+          "path": "sources/github.com/sxyazi/yazi/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/sxyazi/yazi/40a91421893bfd1ae02ef7a55afd41f886558d8c/CONTRIBUTING.md",
+          "sha256": "a3b5d6ceca2d7bc76285846e62db7ed4a72a6df49f051e3cb08eb6d313971b76"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "cargo build",
+          "candidate": "cargo build",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "cargo test --workspace --verbose",
+          "candidate": "cargo test --workspace --verbose",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/tensorflow/tensorflow",
+      "revision": "aef0d5a52fe23403fe28c1d3a35164f86ed1fadc",
+      "sources": [
+        {
+          "path": "sources/github.com/tensorflow/tensorflow/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/tensorflow/tensorflow/aef0d5a52fe23403fe28c1d3a35164f86ed1fadc/CONTRIBUTING.md",
+          "sha256": "5e65d599896aecb72cbfef121a0d2fe0e3e780c4e02b0f6002109f01c7020317"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "bazel build --config=dbg //tensorflow/tools/pip_package:build_pip_package",
+          "candidate": "bazel build --config=dbg //tensorflow/tools/pip_package:build_pip_package",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/tikv/tikv",
+      "revision": "2be7aafd3d04a128100c5df69cb43fc99ad14b04",
+      "sources": [
+        {
+          "path": "sources/github.com/tikv/tikv/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/tikv/tikv/2be7aafd3d04a128100c5df69cb43fc99ad14b04/CONTRIBUTING.md",
+          "sha256": "7c1984f60da794587e236cc3cbf62e0d7a46171f25404844017e9e446e98a13e"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "make build",
+          "candidate": "make build",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/tilt-dev/tilt",
+      "revision": "f3acf27d8459924249776d72a82e1d5d99139c33",
+      "sources": [
+        {
+          "path": "sources/github.com/tilt-dev/tilt/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/tilt-dev/tilt/f3acf27d8459924249776d72a82e1d5d99139c33/CONTRIBUTING.md",
+          "sha256": "318234c38449fa2edc1de5640b29dbfddb4f32a77a567e61088b6d1a0035e009"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/uutils/coreutils",
+      "revision": "5fc0d3b566f557cb5f675238f8409baa4d7b6da7",
+      "sources": [
+        {
+          "path": "sources/github.com/uutils/coreutils/README.md",
+          "url": "https://raw.githubusercontent.com/uutils/coreutils/5fc0d3b566f557cb5f675238f8409baa4d7b6da7/README.md",
+          "sha256": "1e31ff7caa7496a7219aceaf0afe8f35c45605db14176ff97aa60a4ba7bb6af4"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "README.md",
+          "inspectedSource": "README.md",
+          "previous": "cargo build --release",
+          "candidate": "cargo build --release",
+          "disposition": "unchanged"
+        }
+      ]
+    }
+  ]
+}

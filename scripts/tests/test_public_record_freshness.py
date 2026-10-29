@@ -65,7 +65,7 @@ def test_lookup_example_uses_record_command_source_and_age(tmp_path):
     assert "stale" in rendered
     assert "run-tests --target &#x27;&lt;example&gt;&#x27;" in rendered
     assert "Source evidence" in rendered
-    assert "/preview/v0/repos/github.com/example/tool/profile.json" in rendered
+    assert "/preview/repository/?repo=github.com%2Fexample%2Ftool" in rendered
     assert "read the upstream instructions" in rendered
     assert "<example>" not in rendered
 

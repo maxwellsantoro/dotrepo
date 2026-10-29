@@ -5,6 +5,7 @@ import json
 from collections import Counter
 from datetime import datetime
 from pathlib import Path
+from public_repository_page import repository_href
 
 
 def profiles(public_root: Path, inventory: dict):
@@ -133,7 +134,7 @@ def render_lookup_example(public_root: Path, inventory: dict, base_path: str, no
         if evidence
         else "Source evidence unavailable"
     )
-    profile_url = base_path + "/v0/repos/" + label + "/profile.json"
+    profile_url = repository_href(base_path, identity)
     return f'''<aside class="panel lookup-example" aria-label="Real lookup example">
       <p class="eyebrow">A real lookup from this export</p>
       <h2>“How do I test {html.escape(identity["repo"])}?”</h2>

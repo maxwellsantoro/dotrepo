@@ -2,17 +2,16 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/GokuMohandas/Made-With-ML"
 generated_at = "2026-10-27T17:42:45.216204Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`. Imported `repo.test` from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. "
 
 [repo]
 name = "Made With ML"
@@ -26,7 +25,6 @@ languages = [
     "Shell",
     "Makefile",
 ]
-test = "pytest --dataset-loc=$DATASET_LOC tests/data --verbose --disable-warnings"
 topics = [
     "machine-learning",
     "deep-learning",
@@ -111,13 +109,13 @@ state = "present"
 valueJson = '"Made With ML"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T17:42:45.216204Z"
-confidence = "high"
-method = "extracted"
-reason = "from declared repository source"
+checkedAt = "2026-10-29T02:06:09.861151Z"
+confidence = "low"
+method = "source_scope_review"
+reason = "Data-test subset requires DATASET_LOC exported in the same block."
 source = "README.md"
-state = "present"
-valueJson = '"pytest --dataset-loc=$DATASET_LOC tests/data --verbose --disable-warnings"'
+state = "unresolved"
+valueJson = "null"
 
 [x.github]
 archived = false

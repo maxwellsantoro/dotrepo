@@ -784,6 +784,8 @@ fn infer_markdown_doc_commands(file: &ImportedFile) -> Option<ImportedCommandCan
     let mut current_heading = String::new();
     let mut headings: Vec<(usize, String)> = Vec::new();
     let mut block_lines = Vec::new();
+    let mut inherited_shell_context = false;
+    let mut make_requires_configuration = false;
     for line in file.contents.lines() {
         let trimmed = line.trim();
         if trimmed.starts_with("```") || trimmed.starts_with("~~~") {
@@ -792,13 +794,38 @@ fn infer_markdown_doc_commands(file: &ImportedFile) -> Option<ImportedCommandCan
                     let unprompted = line.trim_start_matches(['$', '>', '%', '❯']).trim();
                     unprompted == "cd"
                         || unprompted.starts_with("cd ")
+                        || ["export ", "source ", ". ", "docker ", "conda activate "]
+                            .iter()
+                            .any(|prefix| unprompted.starts_with(prefix))
                         || is_setup_only_command(unprompted)
                 });
-                if !has_context {
+                // A new fence does not reset the shell's directory/environment.
+                // Configuration in an earlier fence also remains a prerequisite
+                // for a generated Makefile (e.g. Google Test and nginx).
+                inherited_shell_context |= block_lines.iter().any(|line| {
+                    let line = line.trim_start_matches(['$', '>', '%', '❯']).trim();
+                    line == "cd"
+                        || ["cd ", "export ", "source ", ". "]
+                            .iter()
+                            .any(|prefix| line.starts_with(prefix))
+                });
+                make_requires_configuration |= block_lines.iter().any(|line| {
+                    let line = line.trim_start_matches(['$', '>', '%', '❯']).trim();
+                    matches!(
+                        line.split_whitespace().next(),
+                        Some("./configure" | "auto/configure" | "cmake")
+                    )
+                });
+                if !has_context && !inherited_shell_context {
                     for line in &block_lines {
                         let Some(command) = normalize_documented_command_line(line) else {
                             continue;
                         };
+                        if make_requires_configuration
+                            && starts_with_command_prefix(&command, "make")
+                        {
+                            continue;
+                        }
                         if build.is_none() && doc_heading_allows_command(&current_heading, true) {
                             build = documented_build_command(&command);
                         }
@@ -849,6 +876,22 @@ fn doc_heading_allows_command(heading: &str, select_build: bool) -> bool {
         "extension",
         "example",
         "benchmark",
+        // Ancestor headings such as "Contributing" do not make a specialized
+        // environment or diagnostic workflow the repository default.
+        "docker",
+        "container",
+        "profiling",
+        "cross-compil",
+        "cross compil",
+        "musl",
+        "wasm",
+        "debug",
+        "documentation",
+        "hot module replacement",
+        "macos",
+        "windows",
+        "in the [",
+        "syntax test",
         "single test",
         "specific test",
         "component",
@@ -969,16 +1012,26 @@ pub(super) fn documented_build_command(command: &str) -> Option<String> {
 }
 
 pub(super) fn documented_test_command(command: &str) -> Option<String> {
-    if is_nonexecuting_test_command(command) {
+    if is_nonexecuting_test_command(command)
+        || command.split_whitespace().any(|token| {
+            matches!(
+                token,
+                "--test" | "--bench" | "-k" | "-E" | "--filter-expr" | "--exact" | "-run"
+            ) || ["--test=", "--bench=", "--filter-expr=", "-run="]
+                .iter()
+                .any(|prefix| token.starts_with(prefix))
+                || token.contains("::")
+                || token.contains('$')
+        })
+    {
         return None;
     }
     let stripped = without_cargo_toolchain_override(command);
     let matchable = stripped.as_deref().unwrap_or(command);
     if starts_with_command_prefix(matchable, "cargo nextest run") {
-        // Documentation often shows a selector-specific nextest invocation
-        // immediately after recommending nextest. Publish the runner command,
-        // not the example's one-test selector.
-        return Some("cargo nextest run".to_string());
+        // Keep exact source commands. A runner recommendation does not establish
+        // that deleting a selector yields the repository's default invocation.
+        return (matchable == "cargo nextest run").then(|| command.to_string());
     }
     if is_package_narrowed_go_test_example(matchable) {
         // A documented `go test` narrowed to one package (e.g.

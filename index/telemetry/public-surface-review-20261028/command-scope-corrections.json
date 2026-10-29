@@ -1,0 +1,282 @@
+{
+  "checkedAt": "2026-10-29T02:06:09.861151Z",
+  "scope": "59 high-confidence extracted documentation command fields across 46 records; source re-extraction plus targeted semantic inspection, not population correctness or execution validation.",
+  "corrections": [
+    {
+      "identity": "github.com/astral-sh/uv",
+      "field": "repo.build",
+      "previous": "cargo build --target x86_64-unknown-linux-musl --profile profiling",
+      "value": null,
+      "reason": "Docker/musl profiling workflow, not a repository-default build.",
+      "checkedAt": "2026-10-29T02:06:09.861151Z",
+      "recordGeneratedAtUnchanged": "2026-10-28T06:08:22.428612996Z",
+      "revision": "e4c55567ada966de4911513b5c526070e6cddd3f",
+      "source": {
+        "path": "sources/github.com/astral-sh/uv/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/astral-sh/uv/e4c55567ada966de4911513b5c526070e6cddd3f/CONTRIBUTING.md",
+        "sha256": "b474892c11039bfc04449a838c5c923c90bff8843007fa62adc7713eada13afe"
+      }
+    },
+    {
+      "identity": "github.com/astral-sh/uv",
+      "field": "repo.test",
+      "previous": "cargo nextest run",
+      "value": null,
+      "reason": "The source shows a nextest selector example; deleting its filter invented an unfiltered default.",
+      "checkedAt": "2026-10-29T02:06:09.861151Z",
+      "recordGeneratedAtUnchanged": "2026-10-28T06:08:22.428612996Z",
+      "revision": "e4c55567ada966de4911513b5c526070e6cddd3f",
+      "source": {
+        "path": "sources/github.com/astral-sh/uv/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/astral-sh/uv/e4c55567ada966de4911513b5c526070e6cddd3f/CONTRIBUTING.md",
+        "sha256": "b474892c11039bfc04449a838c5c923c90bff8843007fa62adc7713eada13afe"
+      }
+    },
+    {
+      "identity": "github.com/FuelLabs/fuel-core",
+      "field": "repo.build",
+      "previous": "cargo build -p fuel-core-bin --no-default-features",
+      "value": null,
+      "reason": "Package-specific build with disabled defaults in the Build issues troubleshooting section.",
+      "checkedAt": "2026-10-29T02:06:09.861151Z",
+      "recordGeneratedAtUnchanged": "2026-10-27T18:23:19.792396Z",
+      "revision": "ffd6563763582f8b0d9073a7cc115b57002ee684",
+      "source": {
+        "path": "sources/github.com/FuelLabs/fuel-core/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/FuelLabs/fuel-core/ffd6563763582f8b0d9073a7cc115b57002ee684/CONTRIBUTING.md",
+        "sha256": "2fd38b4c49b8c698f7118fdb69d6ed092340efa2af2834560d8dfdb4bb3fffbc"
+      }
+    },
+    {
+      "identity": "github.com/astral-sh/ruff",
+      "field": "repo.test",
+      "previous": "cargo test -p ruff_python_parser",
+      "value": null,
+      "reason": "Parser-package tests in a Unicode update workflow, not repository-wide tests.",
+      "checkedAt": "2026-10-29T02:06:09.861151Z",
+      "recordGeneratedAtUnchanged": "2026-10-28T06:08:15.232338097Z",
+      "revision": "c618e8b1382992a27dafe2fc288777792e36ecab",
+      "source": {
+        "path": "sources/github.com/astral-sh/ruff/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/astral-sh/ruff/c618e8b1382992a27dafe2fc288777792e36ecab/CONTRIBUTING.md",
+        "sha256": "8e0479f1dda2f3a3a5b1aae90e31ac3455ef5d019c23bdcc62f6b4c221fb88f9"
+      }
+    },
+    {
+      "identity": "github.com/GokuMohandas/Made-With-ML",
+      "field": "repo.test",
+      "previous": "pytest --dataset-loc=$DATASET_LOC tests/data --verbose --disable-warnings",
+      "value": null,
+      "reason": "Data-test subset requires DATASET_LOC exported in the same block.",
+      "checkedAt": "2026-10-29T02:06:09.861151Z",
+      "recordGeneratedAtUnchanged": "2026-10-27T17:42:45.216204Z",
+      "revision": "3361aeb8ddfc2affdba9f545c978c38c85cee764",
+      "source": {
+        "path": "sources/github.com/GokuMohandas/Made-With-ML/README.md",
+        "url": "https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/3361aeb8ddfc2affdba9f545c978c38c85cee764/README.md",
+        "sha256": "de3c1169085f5092d203330e50c442004f0939217f6aed123857d08253aff450"
+      }
+    },
+    {
+      "identity": "github.com/clap-rs/clap",
+      "field": "repo.test",
+      "previous": "cargo test --features debug",
+      "value": null,
+      "reason": "Debug-output diagnostic invocation, not the selected repository-default test procedure.",
+      "checkedAt": "2026-10-29T02:06:09.861151Z",
+      "recordGeneratedAtUnchanged": "2026-10-27T17:22:56.764083Z",
+      "revision": "ccc89b83875474399e9d9d70841163f6319d1a41",
+      "source": {
+        "path": "sources/github.com/clap-rs/clap/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/clap-rs/clap/ccc89b83875474399e9d9d70841163f6319d1a41/CONTRIBUTING.md",
+        "sha256": "847fc0e8d8e5473d0c2f22ff427c86488c574d92ad1b1786cbe62d0eba7528ed"
+      }
+    },
+    {
+      "identity": "github.com/denoland/deno",
+      "field": "repo.build",
+      "previous": "cargo build --features hmr",
+      "value": null,
+      "reason": "Special HMR development mode; source modules are read at runtime.",
+      "checkedAt": "2026-10-29T02:06:09.861151Z",
+      "recordGeneratedAtUnchanged": "2026-10-27T18:24:35.843121Z",
+      "revision": "e7b39ebd55c85aaf6a29290c1f5a99e2e21e09dd",
+      "source": {
+        "path": "sources/github.com/denoland/deno/.github/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/denoland/deno/e7b39ebd55c85aaf6a29290c1f5a99e2e21e09dd/.github/CONTRIBUTING.md",
+        "sha256": "d1d1570c2dbe526203fb93a37da249d935adc049c74f2bd6e9fbba9cadf33fbb"
+      }
+    },
+    {
+      "identity": "github.com/denoland/deno",
+      "field": "repo.test",
+      "previous": "cargo test --features hmr integration::node_unit_tests::os_test",
+      "value": null,
+      "reason": "One HMR integration-test example, not the repository suite.",
+      "checkedAt": "2026-10-29T02:06:09.861151Z",
+      "recordGeneratedAtUnchanged": "2026-10-27T18:24:35.843121Z",
+      "revision": "e7b39ebd55c85aaf6a29290c1f5a99e2e21e09dd",
+      "source": {
+        "path": "sources/github.com/denoland/deno/.github/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/denoland/deno/e7b39ebd55c85aaf6a29290c1f5a99e2e21e09dd/.github/CONTRIBUTING.md",
+        "sha256": "d1d1570c2dbe526203fb93a37da249d935adc049c74f2bd6e9fbba9cadf33fbb"
+      }
+    },
+    {
+      "identity": "github.com/google/googletest",
+      "field": "repo.build",
+      "previous": "make",
+      "value": null,
+      "reason": "Requires an earlier CMake configuration and cd mybuild in a separate block.",
+      "checkedAt": "2026-10-29T02:06:09.861151Z",
+      "recordGeneratedAtUnchanged": "2026-10-27T18:02:22.434158Z",
+      "revision": "cd8e73f067129f8489e35c7b51c7a68552b289d2",
+      "source": {
+        "path": "sources/github.com/google/googletest/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/google/googletest/cd8e73f067129f8489e35c7b51c7a68552b289d2/CONTRIBUTING.md",
+        "sha256": "f3ebba9e9dcf173b241a09082c73bccb0f2ea742ae9d7892bbaedaf928bca007"
+      }
+    },
+    {
+      "identity": "github.com/google/googletest",
+      "field": "repo.test",
+      "previous": "make test",
+      "value": null,
+      "reason": "Runs from the previously configured mybuild directory, not the repository root.",
+      "checkedAt": "2026-10-29T02:06:09.861151Z",
+      "recordGeneratedAtUnchanged": "2026-10-27T18:02:22.434158Z",
+      "revision": "cd8e73f067129f8489e35c7b51c7a68552b289d2",
+      "source": {
+        "path": "sources/github.com/google/googletest/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/google/googletest/cd8e73f067129f8489e35c7b51c7a68552b289d2/CONTRIBUTING.md",
+        "sha256": "f3ebba9e9dcf173b241a09082c73bccb0f2ea742ae9d7892bbaedaf928bca007"
+      }
+    },
+    {
+      "identity": "github.com/nlohmann/json",
+      "field": "repo.build",
+      "previous": "make build -C docs/mkdocs",
+      "value": null,
+      "reason": "Documentation-only build under docs/mkdocs via make -C.",
+      "checkedAt": "2026-10-29T02:06:09.861151Z",
+      "recordGeneratedAtUnchanged": "2026-10-27T19:54:28.124859466Z",
+      "revision": "84c5421644314a301ecb1312bbb4e1ff7e1a729d",
+      "source": {
+        "path": "sources/github.com/nlohmann/json/.github/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/nlohmann/json/84c5421644314a301ecb1312bbb4e1ff7e1a729d/.github/CONTRIBUTING.md",
+        "sha256": "997bbf1bde2e3d44a8223c7db9f01961b1505931913ef497f1aa942cc1b3fd13"
+      }
+    },
+    {
+      "identity": "github.com/pytorch/pytorch",
+      "field": "repo.test",
+      "previous": "pytest test/test_nn.py -k Loss -v",
+      "value": null,
+      "reason": "Source explicitly labels this a -k Loss test-filter example.",
+      "checkedAt": "2026-10-29T02:06:09.861151Z",
+      "recordGeneratedAtUnchanged": "2026-10-27T19:55:30.66956914Z",
+      "revision": "6ce2d3101ac63a4778b4ac00a811fb4cfd4ed42d",
+      "source": {
+        "path": "sources/github.com/pytorch/pytorch/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/pytorch/pytorch/6ce2d3101ac63a4778b4ac00a811fb4cfd4ed42d/CONTRIBUTING.md",
+        "sha256": "bdfa782fc586441f115ff1a89d38b24e1fc6dcb6337982d9674253b532c91b53"
+      }
+    },
+    {
+      "identity": "github.com/rust-lang/mdBook",
+      "field": "repo.test",
+      "previous": "cargo test --test gui",
+      "value": null,
+      "reason": "GUI test harness with extra requirements, explicitly excluded from the normal workspace test command.",
+      "checkedAt": "2026-10-29T02:06:09.861151Z",
+      "recordGeneratedAtUnchanged": "2026-10-27T18:16:11.225179Z",
+      "revision": "8c41b823bb093fd14303dc38809c78e0df2d53ea",
+      "source": {
+        "path": "sources/github.com/rust-lang/mdBook/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/rust-lang/mdBook/8c41b823bb093fd14303dc38809c78e0df2d53ea/CONTRIBUTING.md",
+        "sha256": "ce3a8f5a12c708f3e182c8e9a503c51e959e328fe1015be60bcdb0f1b5f494c4"
+      }
+    },
+    {
+      "identity": "github.com/screenpipe/screenpipe",
+      "field": "repo.build",
+      "previous": "cargo build --release --features metal",
+      "value": null,
+      "reason": "macOS/Metal-specific build, with platform prerequisites earlier in the guide.",
+      "checkedAt": "2026-10-29T02:06:09.861151Z",
+      "recordGeneratedAtUnchanged": "2026-10-27T17:12:11.789725Z",
+      "revision": "38059f4f75b82641da2999bc0bb2a03552876f08",
+      "source": {
+        "path": "sources/github.com/screenpipe/screenpipe/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/screenpipe/screenpipe/38059f4f75b82641da2999bc0bb2a03552876f08/CONTRIBUTING.md",
+        "sha256": "5ff910d4bf599ef3dc3d1e8f862a26e9904b6e51a9baed92e0f3fc81050a0d2b"
+      }
+    },
+    {
+      "identity": "github.com/serde-rs/serde",
+      "field": "repo.test",
+      "previous": "cargo test",
+      "value": null,
+      "reason": "The source says to run in the serde_core subdirectory.",
+      "checkedAt": "2026-10-29T02:06:09.861151Z",
+      "recordGeneratedAtUnchanged": "2026-10-27T19:58:46.580218403Z",
+      "revision": "0db9b3b504bcb0a7fa9cf001429869519afd3e9a",
+      "source": {
+        "path": "sources/github.com/serde-rs/serde/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/serde-rs/serde/0db9b3b504bcb0a7fa9cf001429869519afd3e9a/CONTRIBUTING.md",
+        "sha256": "91f0716e8011f1c92ee5d24a3ddd5ccd61e300cf85735afb732ae1c389c39814"
+      }
+    },
+    {
+      "identity": "github.com/sharkdp/bat",
+      "field": "repo.build",
+      "previous": "cargo build --bins",
+      "value": null,
+      "reason": "Conditional binary-build example for syntax-test setup, not a declared default build.",
+      "checkedAt": "2026-10-29T02:06:09.861151Z",
+      "recordGeneratedAtUnchanged": "2026-10-27T17:23:12.420785Z",
+      "revision": "a9aa73d215455a479f072da75dd39f19826acfea",
+      "source": {
+        "path": "sources/github.com/sharkdp/bat/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/sharkdp/bat/a9aa73d215455a479f072da75dd39f19826acfea/CONTRIBUTING.md",
+        "sha256": "da748a38b6ed4c89cb9a3ef6f6b7a2b9e7d1e1dcd53ec3272f8d3a82512a1303"
+      }
+    },
+    {
+      "identity": "github.com/tensorflow/tensorflow",
+      "field": "repo.build",
+      "previous": "bazel build --config=dbg //tensorflow/tools/pip_package:build_pip_package",
+      "value": null,
+      "reason": "Debug pip-package build example, not a general repository-default build.",
+      "checkedAt": "2026-10-29T02:06:09.861151Z",
+      "recordGeneratedAtUnchanged": "2026-10-27T19:57:50.386118839Z",
+      "revision": "aef0d5a52fe23403fe28c1d3a35164f86ed1fadc",
+      "source": {
+        "path": "sources/github.com/tensorflow/tensorflow/CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/tensorflow/tensorflow/aef0d5a52fe23403fe28c1d3a35164f86ed1fadc/CONTRIBUTING.md",
+        "sha256": "5e65d599896aecb72cbfef121a0d2fe0e3e780c4e02b0f6002109f01c7020317"
+      }
+    },
+    {
+      "identity": "github.com/nginx/nginx",
+      "field": "repo.build",
+      "previous": "make",
+      "value": null,
+      "reason": "Requires auto/configure to generate the Makefile before make; the scalar loses that prerequisite.",
+      "checkedAt": "2026-10-29T02:06:09.861151Z",
+      "recordGeneratedAtUnchanged": "2026-10-27T18:10:56.764655Z",
+      "revision": "797c039a9884f69aae96286dcdf1ba633e5ebf81",
+      "source": {
+        "path": "sources/github.com/nginx/nginx/README.md",
+        "url": "https://raw.githubusercontent.com/nginx/nginx/797c039a9884f69aae96286dcdf1ba633e5ebf81/README.md",
+        "sha256": "c20b11d05d64038c63fe78ed177b692ac48d686344be464f326bb48e7d2c224b"
+      }
+    }
+  ],
+  "preservedDifference": {
+    "identity": "github.com/prometheus/prometheus",
+    "field": "repo.build",
+    "value": "make build",
+    "reason": "README explicitly recommends make build for compiling embedded assets. Isolated re-extraction failure is not evidence the retained answer is wrong."
+  }
+}

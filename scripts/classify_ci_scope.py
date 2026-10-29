@@ -46,6 +46,8 @@ PUBLIC_SCRIPTS = {
     "public_site_discovery.py",
     "public_site_content.py",
     "public_product_content.py",
+    "public_repository_page.py",
+    "public_site_styles.py",
     "language_family.py",
     "sync_cloudflare_public_snapshot.py",
     "restore_cloudflare_public_state.py",
@@ -70,6 +72,7 @@ RELEASE_SCRIPTS = {
     "package_release_binaries.py",
     "package_vscode_extension.py",
     "package_mcpb_bundle.py",
+    "render_release_notes.py",
 }
 
 
@@ -123,7 +126,7 @@ def jobs_for_path(path: str) -> set[str]:
         }:
             return FULL.copy()
         return PYTHON.copy()
-    if path == "scripts/check_public_links.mjs":
+    if path in {"scripts/check_public_links.mjs", "scripts/public_repository.mjs"}:
         return PUBLIC.copy()
     if path == "scripts/check_public_presentation.cjs" or path.startswith("editors/"):
         return RELEASE.copy()

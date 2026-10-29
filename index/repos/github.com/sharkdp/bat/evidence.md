@@ -18,3 +18,12 @@
 ## Fresh verification
 
 Prior verified authority was not inherited: this refresh must qualify using its current field scores.
+
+
+## Partial command-scope correction — October 28, 2026
+
+The earlier extraction and auto-promotion notes above are historical. The following scalar answers are withheld after inspection at the recorded upstream revision:
+
+- `repo.build`: Conditional binary-build example for syntax-test setup, not a declared default build.
+
+Record status is now imported with medium record confidence. This is a partial source inspection, not a full-record re-verification or upstream execution. Record age, GitHub metadata, unrelated fields and their assessments are unchanged. New null assessments are checked at 2026-10-29T02:06:09.861151Z; because they are newer than the record timestamp, the public exporter withholds them until a coherent record refresh. See `index/telemetry/public-surface-review-20261028/command-scope-corrections.json`.

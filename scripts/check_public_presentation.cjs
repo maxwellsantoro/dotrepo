@@ -19,7 +19,7 @@ const { chromium } = require('playwright');
     const file = path.resolve(root, `.${pathname}`, pathname.endsWith('/') ? 'index.html' : '');
     if (!file.startsWith(root + path.sep)) { res.writeHead(403).end(); return; }
     try {
-      res.setHeader('Content-Type', file.endsWith('.json') ? 'application/json' : file.endsWith('.html') ? 'text/html' : 'application/octet-stream');
+      res.setHeader('Content-Type', file.endsWith('.json') ? 'application/json' : file.endsWith('.html') ? 'text/html' : file.endsWith('.js') ? 'text/javascript' : 'application/octet-stream');
       res.end(fs.readFileSync(file));
     } catch { res.writeHead(404).end('Not found'); }
   });
@@ -36,8 +36,9 @@ const { chromium } = require('playwright');
       page.setDefaultTimeout(10_000);
       const errors = [];
       page.on('pageerror', e => errors.push(e.message));
-      page.on('console', m => { if (m.type() === 'error') errors.push(`${m.text()} ${m.location().url}`); });
-      for (const route of ['/', '/docs/', '/writing/', '/writing/what-the-ais-think-about-dotrepo/', '/repositories/', '/efficiency/']) {
+      const missing = 'dotrepo-audit-no-such-owner/no-such-repository';
+      page.on('console', m => { if (m.type() === 'error' && !m.location().url.includes(missing)) errors.push(`${m.text()} ${m.location().url}`); });
+      for (const route of ['/', '/docs/', '/writing/', '/writing/what-the-ais-think-about-dotrepo/', '/writing/when-a-command-needs-more-context/', '/repositories/', '/repository/', '/efficiency/']) {
         await page.goto(origin + route);
         await page.waitForLoadState('networkidle');
         // Keep diagnostic pixels even if an assertion below stops this run.
@@ -50,6 +51,7 @@ const { chromium } = require('playwright');
         assert.equal(await page.locator('meta[property="og:title"]').count(), 1);
         assert.equal(await page.locator('meta[name="twitter:card"]').getAttribute('content'), 'summary');
         assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, `Horizontal overflow: ${device} ${route}`);
+        assert.equal(await page.locator('.nav__links').evaluate(el => el.scrollWidth > el.clientWidth), false, `Hidden navigation: ${device} ${route}`);
         if (route === '/docs/') {
           assert.equal(await page.locator('.start-paths a').count(), 3);
           const bounds = await page.locator('.start-paths a').first().boundingBox();
@@ -60,6 +62,7 @@ const { chromium } = require('playwright');
           const cap = page.locator('#repository-cap-note');
           await search.fill('BurntSushi/ripgrep');
           assert.equal(await page.locator('.repo-card').count(), 1);
+          assert.match(await page.getByRole('link', {name:'Open github.com/BurntSushi/ripgrep profile',exact:true}).getAttribute('href'), /\/repository\/\?repo=/);
           assert.equal(await cap.isVisible(), false);
           assert.equal(await page.locator('#repository-load-more').isVisible(), false);
           await search.fill('zzzzzz-no-such-repository');
@@ -98,11 +101,23 @@ const { chromium } = require('playwright');
           assert.notEqual(await page.evaluate(() => getComputedStyle(document.activeElement).outlineStyle), 'none');
           await page.locator('#repo-lookup-input').fill('BurntSushi/ripgrep');
           await page.getByRole('button', { name: 'Open profile', exact: true }).click();
-          await page.waitForURL('**/BurntSushi/ripgrep/profile.json');
+          await page.waitForURL(url => url.pathname === '/repository/' && url.searchParams.get('repo') === 'github.com/BurntSushi/ripgrep');
+          await page.locator('#profile-content:not([hidden])').waitFor();
+          assert.equal(await page.locator('#repository-title').textContent(), 'ripgrep');
+          assert.match(await page.locator('#profile-facts').textContent(), /Scope, working directory and prerequisites not retained|Scope:/);
+          assert.match(await page.getByRole('link', {name:'Profile JSON',exact:true}).getAttribute('href'), /\/profile\.json$/);
           await page.goBack();
           await page.locator('#repo-lookup-input').fill('BurntSushi/ripgrep');
           await page.locator('#repo-lookup-trust').click();
-          await page.waitForURL('**/BurntSushi/ripgrep/trust.json');
+          await page.waitForURL(url => url.pathname === '/repository/' && url.hash === '#trust');
+          await page.locator('#profile-content:not([hidden])').waitFor();
+          await page.goBack();
+          await page.locator('#repo-lookup-input').fill(missing);
+          await page.getByRole('button', { name: 'Open profile', exact: true }).click();
+          await page.locator('#profile-missing:not([hidden])').waitFor();
+          assert.match(await page.getByRole('link', {name:'Upstream repository',exact:true}).getAttribute('href'), /github\.com\/dotrepo-audit-no-such-owner\/no-such-repository$/);
+          assert.equal(await page.getByRole('button', {name:'Look up repository',exact:true}).isVisible(), true);
+          await page.screenshot({path:path.join(evidence,`${device}-lookup-miss.png`),fullPage:true});
           await page.goBack();
         }
         assert.deepEqual(errors, [], `${device} ${route} console errors`);

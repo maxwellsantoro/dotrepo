@@ -167,10 +167,24 @@ jobs:
             server.json
           if-no-files-found: error
           retention-days: 14
+      - name: Prepare user-facing release notes
+        run: uv run python scripts/render_release_notes.py --version "${{ steps.version.outputs.value }}" --output release-assets/release-notes.md
+      - name: Select release channel
+        id: channel
+        shell: bash
+        run: |
+          if [[ "${GITHUB_REF_NAME%%+*}" == *-* ]]; then
+            echo "prerelease=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "prerelease=false" >> "$GITHUB_OUTPUT"
+          fi
       - name: Publish GitHub release assets
         uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3.0.3
         with:
           generate_release_notes: true
+          body_path: release-assets/release-notes.md
+          prerelease: ${{ steps.channel.outputs.prerelease == 'true' }}
+          make_latest: ${{ steps.channel.outputs.prerelease == 'true' && 'false' || 'true' }}
           files: |
             release-assets/**/*.tar.gz
             release-assets/**/*.sha256

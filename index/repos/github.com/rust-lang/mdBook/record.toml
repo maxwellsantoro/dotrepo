@@ -2,7 +2,7 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "imported"
 source = "https://github.com/rust-lang/mdBook"
 generated_at = "2026-10-27T18:16:11.225179Z"
 
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `Cargo.toml`, and `CONTRIBUTING.md`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `Cargo.toml`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`, `Cargo.toml`, and `CONTRIBUTING.md`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `Cargo.toml`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "mdBook"
@@ -30,7 +30,6 @@ languages = [
     "PureScript",
 ]
 build = "cargo build --workspace"
-test = "cargo test --test gui"
 topics = []
 
 [repo.toolchain]
@@ -105,13 +104,13 @@ state = "present"
 valueJson = '"mdBook"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T18:16:11.225179Z"
-confidence = "high"
-method = "extracted"
-reason = "from declared repository source"
+checkedAt = "2026-10-29T02:06:09.861151Z"
+confidence = "low"
+method = "source_scope_review"
+reason = "GUI test harness with extra requirements, explicitly excluded from the normal workspace test command."
 source = "CONTRIBUTING.md"
-state = "present"
-valueJson = '"cargo test --test gui"'
+state = "unresolved"
+valueJson = "null"
 
 [x.github]
 archived = false

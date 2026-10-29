@@ -6,7 +6,7 @@ It follows the current source branch; consult
 [release compatibility](release-compatibility.md) for stable binary behavior.
 
 <!-- dotrepo:release-status:start -->
-Stable installs use `1.0.3`; current source is `2.0.0-rc.1` (release candidate).
+Stable installs use `1.0.4`; current source is `2.0.0-rc.1` (release candidate).
 Use the matching tagged documentation for installed binaries.
 <!-- dotrepo:release-status:end -->
 
@@ -24,7 +24,9 @@ Use the matching tagged documentation for installed binaries.
 
 1. **MCP registry listing** — keep `server.json` / mcpb bundle and
    [`docs/mcp-registry-publishing.md`](./mcp-registry-publishing.md) aligned
-   with the latest stable release; re-publish on each stable tag.
+   with the source release being packaged; publish the matching bundle on each
+   tag. The registry's latest view can prefer a higher prerelease: link the
+   explicit stable version from installation guidance and label preview builds.
 2. **Efficiency pitch** — regenerate the public efficiency page on deploy
    (`scripts/render_public_efficiency_page.py` via the release/public gate).
    Label presence and policy acceptance separately; request reduction is modeled.

@@ -12,6 +12,7 @@ import html
 import json
 from pathlib import Path
 from public_site_discovery import publish_discovery
+from public_site_styles import SITE_CHROME
 
 from measure_public_lookup_efficiency import (
     MAX_BATCH_PATHS,
@@ -341,6 +342,7 @@ def render_efficiency_page(report: dict, base_path: str, policy_report: dict | N
       .coverage-group, .costs {{ break-inside: avoid; }}
     }}
   </style>
+  {SITE_CHROME}
 </head>
 <body>
   <div class="page">

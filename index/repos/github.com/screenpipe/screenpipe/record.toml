@@ -2,17 +2,16 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/screenpipe/screenpipe"
 generated_at = "2026-10-27T17:12:11.789725Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md` and `CONTRIBUTING.md`. Ignored component-scoped commands from `apps/screenpipe-app-tauri/package.json` as repository defaults. Imported `repo.build` from `CONTRIBUTING.md`. Imported `repo.test` from `CONTRIBUTING.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `CONTRIBUTING.md`. Ignored component-scoped commands from `apps/screenpipe-app-tauri/package.json` as repository defaults. Imported `repo.test` from `CONTRIBUTING.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. "
 
 [repo]
 name = "DOWNLOAD SCREENPIPE"
@@ -37,7 +36,6 @@ languages = [
     "C",
     "C#",
 ]
-build = "cargo build --release --features metal"
 test = "cargo test"
 topics = [
     "ai",
@@ -103,13 +101,13 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T17:12:11.789725Z"
-confidence = "high"
-method = "extracted"
-reason = "from declared repository source"
+checkedAt = "2026-10-29T02:06:09.861151Z"
+confidence = "low"
+method = "source_scope_review"
+reason = "macOS/Metal-specific build, with platform prerequisites earlier in the guide."
 source = "CONTRIBUTING.md"
-state = "present"
-valueJson = '"cargo build --release --features metal"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-10-27T17:12:11.789725Z"

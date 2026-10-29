@@ -1,5 +1,5 @@
 #!/usr/bin/env -S uv run python
-"""Re-extract retained Make/Just commands at pinned revisions without executing them."""
+"""Re-extract retained commands at pinned revisions without executing them."""
 
 from __future__ import annotations
 
@@ -18,10 +18,11 @@ from urllib.parse import quote
 from urllib.request import Request, urlopen
 
 TASK_SOURCES = {"Makefile", "makefile", "GNUmakefile", "justfile", "Justfile"}
+DOC_SOURCES = {"README.md", "CONTRIBUTING.md", ".github/CONTRIBUTING.md"}
 MAX_SOURCE_BYTES = 1024 * 1024
 
 
-def audit_record(path: Path, cli: Path, output: Path) -> dict | None:
+def audit_record(path: Path, cli: Path, output: Path, source_kind: str = "task") -> dict | None:
     record = tomllib.loads(path.read_text())
     assessments = record.get("x", {}).get("dotrepo", {}).get("field_evidence", {})
     fields = {
@@ -29,9 +30,17 @@ def audit_record(path: Path, cli: Path, output: Path) -> dict | None:
         for field, evidence in assessments.items()
         if field in {"repo.build", "repo.test"}
         and (
-            evidence.get("source") in TASK_SOURCES
+            (source_kind in {"task", "all"} and evidence.get("source") in TASK_SOURCES)
             or (
-                field == "repo.test"
+                source_kind in {"docs", "all"}
+                and evidence.get("source") in DOC_SOURCES
+                and evidence.get("confidence") == "high"
+                and evidence.get("method") == "extracted"
+                and evidence.get("state") == "present"
+            )
+            or (
+                source_kind in {"task", "all"}
+                and field == "repo.test"
                 and "go test" in record["repo"].get("test", "")
                 and any(
                     token in {"-c", "-list"}
@@ -59,7 +68,7 @@ def audit_record(path: Path, cli: Path, output: Path) -> dict | None:
             (root / "README.md").write_text("# Command Audit\n\nPinned command-source audit.\n")
             actual_sources = {}
             for source in sorted(set(fields.values())):
-                if source not in TASK_SOURCES | {"CONTRIBUTING.md", ".github/CONTRIBUTING.md"}:
+                if source not in TASK_SOURCES | DOC_SOURCES:
                     raise ValueError(f"unsupported source: {source}")
                 alternatives = [source]
                 if source in {"Makefile", "makefile", "GNUmakefile"}:
@@ -125,7 +134,7 @@ def audit_record(path: Path, cli: Path, output: Path) -> dict | None:
                         if previous == candidate
                         else "withhold"
                         if candidate is None
-                        else "replace-wrapper",
+                        else "candidate-differs",
                     }
                 )
     except (OSError, ValueError, subprocess.CalledProcessError) as exc:
@@ -139,6 +148,7 @@ def main() -> int:
     parser.add_argument("--cli", type=Path, default=Path("target/debug/dotrepo"))
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--workers", type=int, default=8)
+    parser.add_argument("--source-kind", choices=("task", "docs", "all"), default="task")
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=True)
     paths = sorted(args.index_root.glob("repos/*/*/*/record.toml"))
@@ -146,13 +156,15 @@ def main() -> int:
         results = [
             row
             for row in executor.map(
-                lambda path: audit_record(path, args.cli.resolve(), args.output), paths
+                lambda path: audit_record(path, args.cli.resolve(), args.output, args.source_kind),
+                paths,
             )
             if row is not None
         ]
     report = {
         "checkedAt": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "policy": "static-source-preservation; no upstream execution; no task-correctness claim",
+        "sourceKind": args.source_kind,
         "records": results,
     }
     (args.output / "report.json").write_text(json.dumps(report, indent=2) + "\n")

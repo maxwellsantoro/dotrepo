@@ -2,6 +2,22 @@
 
 ## Unreleased
 
+- Correct source-scoped build/test answers after a pinned documentation audit;
+  preserve record age and unrelated assessments, and withdraw verification after
+  partial corrections. Reject specialized environment/diagnostic sections and
+  filtered nextest examples as repository defaults. Retain the source regression
+  and dated audit under `index/telemetry/public-surface-review-20261028/`.
+- Add a readable repository profile and not-indexed recovery over the existing
+  JSON API, showing command context gaps, pinned evidence, age and conflicts.
+  Route homepage/catalog lookups into that view, keep direct JSON links, wrap
+  mobile navigation and share site chrome with the efficiency page. Add a
+  current source-inspection walkthrough without claiming independent adoption.
+- Advance tested stable guidance and generated maintainer CI to published 1.0.4,
+  correct the stable/RC write-safety comparison, and check the retained publication
+  receipt before accepting guidance. Give published packages focused READMEs,
+  recover old installation links, label registry channels and lead future release
+  notes with user changes and explicit installation choices.
+
 - Contain repository-derived CLI and MCP import writes beneath an explicitly
   selected root. Refuse descendant symlinks/reparse points, nonregular targets,
   and shared hardlinks before truncation; preserve ordinary file identity,
@@ -46,6 +62,19 @@
   the R2 subscription and recovery sequence before publication resumes.
 - Refresh the compatible Wrangler lockfile to clear reported development-tool
   dependency advisories.
+
+## 1.0.4 — 2026-10-28
+
+- Refuse unsafe output targets across CLI writes and MCP import before existing
+  files change. The shared contained writer preserves ordinary file identity,
+  permissions and ACLs while rejecting descendant links/reparse points,
+  nonregular files and shared hardlinks. Large exports keep bounded descriptor use.
+- Preserve stable CLI arguments, MCP schemas and ordinary output behavior. The
+  public Rust API and newer per-field/context contracts remain on the 2.0 line.
+- Verify tagged artifacts, all six published crate hashes/provenance and fresh
+  CLI/MCP/LSP installs on Linux and macOS. Retain the
+  [public verification receipt](index/telemetry/public-surface-review-20261028/release-1.0.4-verification.json);
+  the published 2.0.0 RC predates this stable write-safety backport.
 
 ## 2.0.0-rc.1 — 2026-10-27
 

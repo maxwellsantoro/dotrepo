@@ -19,3 +19,13 @@
 ## Auto-promotion
 
 All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
+
+
+## Partial command-scope correction — October 28, 2026
+
+The earlier extraction and auto-promotion notes above are historical. The following scalar answers are withheld after inspection at the recorded upstream revision:
+
+- `repo.build`: Docker/musl profiling workflow, not a repository-default build.
+- `repo.test`: The source shows a nextest selector example; deleting its filter invented an unfiltered default.
+
+Record status is now imported with medium record confidence. This is a partial source inspection, not a full-record re-verification or upstream execution. Record age, GitHub metadata, unrelated fields and their assessments are unchanged. New null assessments are checked at 2026-10-29T02:06:09.861151Z; because they are newer than the record timestamp, the public exporter withholds them until a coherent record refresh. See `index/telemetry/public-surface-review-20261028/command-scope-corrections.json`.

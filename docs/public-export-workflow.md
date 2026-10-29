@@ -14,7 +14,7 @@ runtime bounds; [public examples](public-export-examples.md) owns routes.
 
 ```text
 public/
-  index.html, docs/, repositories/, writing/
+  index.html, docs/, repositories/, repository/, writing/, assets/repository.js
   query-input/<host>/<owner>/<repo>.json
   v0/
     meta.json, files.json, stats.json

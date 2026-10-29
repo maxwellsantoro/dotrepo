@@ -22,6 +22,11 @@ Follow [the team execution guide](docs/agent-execution.md).
 
 The October 28 review makes contained writes, supported public links, consistent
 release guidance, and value-bound query assessments prerequisites for 2.0 final.
+The follow-up public audit also requires source-scoped command selection,
+readable profile/miss states, package onboarding links and explicit release
+channels. Its dated source dispositions and publication receipt live in
+`index/telemetry/public-surface-review-20261028/`; source corrections and local
+checks do not establish a deployed correction or a new package publication.
 The [unreleased changelog](CHANGELOG.md#unreleased) records implementation;
 complete release/operator checks and the original overwrite reproductions must
 pass on the candidate being promoted. Source changes do not update installed RC
