@@ -1,0 +1,38 @@
+[
+  {
+    "task": "rust-02",
+    "driverTaskAndCleanupSeconds": 22.647097167093307,
+    "driverMetadataVerificationSeconds": 0.018155166879296303,
+    "driverReportedTotalMeasuredOperatorSeconds": 22.665252333972603,
+    "outerDriverInvocationSeconds": 22.747731167124584,
+    "postCleanupInspectSeconds": 0.161809790879488,
+    "postCleanupListSeconds": 0.03939549997448921,
+    "costUsd": null,
+    "accounting": "Driver times are nested within outer invocation. Add outer invocation and post-cleanup checks once; do not add nested driver times again. External dependency/image preparation and earlier failed preparation effort remain separate; no consumer causal savings claimed.",
+    "retainedOuterInvocationAndPostChecksSeconds": 22.94893645797856
+  },
+  {
+    "task": "typescript-02",
+    "driverTaskAndCleanupSeconds": 41.061200332827866,
+    "driverMetadataVerificationSeconds": 0.02158649987541139,
+    "driverReportedTotalMeasuredOperatorSeconds": 41.08278683270328,
+    "outerDriverInvocationSeconds": 41.214699167059734,
+    "postCleanupInspectSeconds": 0.516007416183129,
+    "postCleanupListSeconds": 0.10819741594605148,
+    "costUsd": null,
+    "accounting": "Driver times are nested within outer invocation. Add outer invocation and post-cleanup checks once; do not add nested driver times again. External dependency/image preparation and earlier failed preparation effort remain separate; no consumer causal savings claimed.",
+    "retainedOuterInvocationAndPostChecksSeconds": 41.838903999188915
+  },
+  {
+    "task": "go-03",
+    "driverTaskAndCleanupSeconds": 99.95430262479931,
+    "driverMetadataVerificationSeconds": 0.06754016713239253,
+    "driverReportedTotalMeasuredOperatorSeconds": 100.0218427919317,
+    "outerDriverInvocationSeconds": 100.33771141595207,
+    "postCleanupInspectSeconds": 0.16844579204916954,
+    "postCleanupListSeconds": 0.03935600002296269,
+    "costUsd": null,
+    "accounting": "Driver times are nested within outer invocation. Add outer invocation and post-cleanup checks once; do not add nested driver times again. External dependency/image preparation and earlier failed preparation effort remain separate; no consumer causal savings claimed.",
+    "retainedOuterInvocationAndPostChecksSeconds": 100.5455132080242
+  }
+]

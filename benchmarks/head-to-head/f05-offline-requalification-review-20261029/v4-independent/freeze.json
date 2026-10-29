@@ -1,0 +1,52 @@
+{
+  "schema": "dotrepo-offline-amendment-review/v1",
+  "date": "2026-10-29",
+  "reviewedVersion": "v4",
+  "disposition": "two prior findings corrected; exact Rust terminal-case identity defect remains; successor required before native authorization",
+  "dockerCalls": 0,
+  "upstreamExecution": false,
+  "modelCalls": 0,
+  "indexConsulted": false,
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "61c631c14cfc9c0278b91a23c5e73d6815ff9965904cb4ad5111fd6ca9e4940a",
+      "bytes": 6493
+    },
+    {
+      "path": "author-controls-rerun.json",
+      "sha256": "561e80e350c542b061c2b6c2b638e627ba0f85cec3c427223a0d4853dcd49d2f",
+      "bytes": 9241
+    },
+    {
+      "path": "controls.json",
+      "sha256": "73e81e2f1e3610bde6b512c3e4b8904e26ba0bac8dda3d747ff6b16d02a16580",
+      "bytes": 71125
+    },
+    {
+      "path": "input-bindings.json",
+      "sha256": "ea36b89c80cd575ba0617db6fe13716446149394c7bd18a98ec56bed4da8c8c3",
+      "bytes": 4450
+    },
+    {
+      "path": "metadata.json",
+      "sha256": "ee1f900d1e6230648b8f60427ba8d3b6ff61c20edea8e6649b168c02b8ee6a87",
+      "bytes": 383
+    },
+    {
+      "path": "name-counterexample.json",
+      "sha256": "38baec0e3423953c4344c08ef53f0f95847f63dbd0ba7d97f839e297ff5bab05",
+      "bytes": 2638
+    },
+    {
+      "path": "name_counterexample.py",
+      "sha256": "8f8073d4e73b30fe8532a6c0194bdbf866ce45698435bf0e913e27442ba9dca1",
+      "bytes": 1632
+    },
+    {
+      "path": "review_controls.py",
+      "sha256": "784de983f06e046171d528c9eb6966bcb84e731d5ff4a1695e5dc61c5d0cfa3c",
+      "bytes": 14285
+    }
+  ]
+}

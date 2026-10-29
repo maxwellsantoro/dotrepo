@@ -1,0 +1,83 @@
+{
+  "identity": "three-original-native-scopes-single-serialized-authorized-attempts-v2-formatted-wrapper",
+  "frozenAt": "2026-10-29T07:34:18.680401+00:00",
+  "authority": "Explicit coordinator authorization in current task",
+  "bindings": {
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-results-20261029/control.py": "f4c48a59e66471d4247b25bd2c3704c681999943bc0daae5d6acf544844abb1a",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-results-20261029/capture.py": "8080a772bbb1e97c89cfb06dd31b5d250003c69ae7e17429d008e17b9f94bbbc",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/driver.v5.py": "bf24973c7fede7d1d379de4cf740f0bba815fcfb580a13f9c29b270def0e4c6d",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/plan.v5.json": "2d44b468d8954b42210cce44ae12c2571a835b8a89154d585a20f4cdbbce90e6",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-acceptance-20261029/acceptance.json": "01ff9e6f9790de814907e71dae59d438d0ba7effde829959eaba3d52ad3e5110",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-acceptance-20261029/FREEZE.json": "0763682faa7f3b1f255ccd518ccf55eab8f4e59b352e1c60ea749d18dbe274d4",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-acceptance-20261029/rust-02-cache-audit.json": "493a926abce0e1f25d696eee1b62cca1a4823cb367452c0a854016228f16dc75",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-acceptance-20261029/typescript-02-cache-audit.json": "8e8c96f4cb0dd175ebdb06b0610182d3f74d304b16396875fd76dab231bd1ebf",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-acceptance-20261029/go-03-cache-audit.json": "a60bd4aeff95179e14ae5951d8c6c941090ec5a928c19b51af1541fd0a7daf96",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-results-20261029/run_serial.v2.py": "59d8c956330021b8d55914f5dbde04567d43bf30e2f914cd2f14538e2aeb4b67"
+  },
+  "attempts": [
+    {
+      "task": "rust-02",
+      "output": "/tmp/dotrepo-f05-offline-requalification-rust-02-20261029-3aaa3ea9",
+      "argv": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-sync",
+        "python",
+        "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/driver.v5.py",
+        "run",
+        "--task",
+        "rust-02",
+        "--acceptance",
+        "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-acceptance-20261029/acceptance.json",
+        "--output",
+        "/tmp/dotrepo-f05-offline-requalification-rust-02-20261029-3aaa3ea9"
+      ]
+    },
+    {
+      "task": "typescript-02",
+      "output": "/tmp/dotrepo-f05-offline-requalification-typescript-02-20261029-13ef45e2",
+      "argv": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-sync",
+        "python",
+        "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/driver.v5.py",
+        "run",
+        "--task",
+        "typescript-02",
+        "--acceptance",
+        "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-acceptance-20261029/acceptance.json",
+        "--output",
+        "/tmp/dotrepo-f05-offline-requalification-typescript-02-20261029-13ef45e2"
+      ]
+    },
+    {
+      "task": "go-03",
+      "output": "/tmp/dotrepo-f05-offline-requalification-go-03-20261029-aa7262eb",
+      "argv": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-sync",
+        "python",
+        "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/driver.v5.py",
+        "run",
+        "--task",
+        "go-03",
+        "--acceptance",
+        "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-acceptance-20261029/acceptance.json",
+        "--output",
+        "/tmp/dotrepo-f05-offline-requalification-go-03-20261029-aa7262eb"
+      ]
+    }
+  ],
+  "planSourceCacheImageResourceCommandsChanged": false,
+  "retriesAuthorized": false,
+  "newDownloadsAuthorized": false,
+  "paidModelCampaignAuthorized": false,
+  "costUsd": null,
+  "priorUnusedBeforeSha256": "08a185b2cd6c241fa3fafab2041a053462d6be21e0d13f37df3d009be3a51eb0",
+  "change": "Formatting-only successor of unexecuted orchestration wrapper; nativefrozenv5driver/plan/acceptance/taskargv/outputidentities unchanged. Initialunusedsnapshotretained."
+}

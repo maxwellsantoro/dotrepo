@@ -1,0 +1,38 @@
+{
+  "inputs": [
+    {
+      "path": "benchmarks/head-to-head/f05-offline-requalification-20261029/packet-freeze.json",
+      "sha256": "daac836830a0f853e83dc2a67b0de8115ee4d73b42cce7eb468326f87ed82b78"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-requalification-20261029/plan.v3.json",
+      "sha256": "43a2544d2dbedaaebfbb54302bf4be031f56089bef288cd6a0efd34bec77aa90"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-requalification-20261029/driver.v3.py",
+      "sha256": "ed5a3503853981661e636b08e6306f320c68be61c114c3a5d7cac7a386dd82ba"
+    },
+    {
+      "archive": {
+        "path": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/rust-02-full/runtime-source.tar",
+        "sha256": "862b159c55ee7693faed80c2546aa203cc370e867cf5a206cff5356ab66766d6"
+      },
+      "member": "lib/sniffnet-packet-parser/Cargo.toml",
+      "sha256": "3b0a80798ac6377085087cf17efeaad377288ffc20d663e42729d75455f4c921",
+      "retainedCopy": "parser-manifest.toml"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-qualification-20261029/runs/rust-02/attempt-1/logs/actual-tests/stdout.txt",
+      "sha256": "d606452a4046247af21809b98d1c434a7c253dabdcfe7af0078d4f89285caed6",
+      "retainedCopy": "historical-rust-stdout.txt"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-qualification-20261029/runs/rust-02/attempt-1/logs/actual-tests/stderr.txt",
+      "sha256": "a6a089e54b1e00c1be77f345f878c38a7811b58f7606faf3b5bda2b212c369e2",
+      "retainedCopy": "historical-rust-stderr.txt"
+    }
+  ],
+  "frozenArtifactsVerified": 23,
+  "staticUpstreamManifestFilesRead": 1,
+  "upstreamExecution": false
+}

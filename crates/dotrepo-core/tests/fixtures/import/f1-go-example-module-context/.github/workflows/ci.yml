@@ -1,0 +1,9 @@
+jobs:
+  unit:
+    steps:
+      - run: go test ./...
+  docs:
+    steps:
+      - run: |
+          cd docs
+          echo documentation

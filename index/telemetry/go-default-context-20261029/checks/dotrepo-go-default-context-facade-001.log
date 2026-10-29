@@ -1,0 +1,49 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.05s
+     Running unittests src/lib.rs (target/debug/deps/dotrepo_core-6af6d15045c80b2a)
+
+running 42 tests
+test tests::import_repository::contributing_md_produces_contribdoc_candidates ... ok
+test tests::import_repository::contributing_md_does_not_treat_make_lint_as_build_command ... ok
+test tests::import_repository::declared_package_commands_beat_other_ecosystem_defaults ... ok
+test tests::import_repository::import_repository_accepts_readme_variants_and_preserves_their_paths ... ok
+test tests::import_repository::declared_makefile_beats_ecosystem_default ... ok
+test tests::import_repository::declared_package_commands_beat_cargo_ecosystem_defaults ... ok
+test tests::import_repository::import_repository_bootstraps_native_manifest_from_conventional_files ... ok
+test tests::import_repository::import_repository_enables_generate_only_for_reproducible_surfaces ... ok
+test tests::import_repository::import_repository_ignores_comment_only_rebar_terms ... ok
+test tests::import_repository::import_repository_ignores_comments_and_prefixed_rake_tasks ... ok
+test tests::import_repository::import_repository_ignores_empty_or_invalid_composer_scripts ... ok
+test tests::import_repository::import_repository_ignores_non_maven_xml_named_pom ... ok
+test tests::import_repository::import_repository_extracts_security_from_issue_template ... ok
+test tests::import_repository::import_repository_ignores_comment_only_mix_project_signals ... ok
+test tests::import_repository::import_repository_falls_back_to_workflow_commands_when_manifests_are_absent ... ok
+test tests::import_repository::import_repository_extracts_security_from_contributing_when_no_security_md ... ok
+test tests::import_repository::import_repository_ignores_unsafe_or_incomplete_cmake_workflows ... ok
+test tests::import_repository::import_repository_imports_cargo_workspace_build_and_test_commands ... ok
+test tests::import_repository::import_repository_imports_cmake_workflow_presets ... ok
+test tests::import_repository::import_repository_imports_explicit_dotnet_test_project_commands ... ok
+test tests::import_repository::import_repository_imports_composer_build_and_test_scripts ... ok
+test tests::import_repository::import_repository_imports_explicit_rake_tasks ... ok
+test tests::import_repository::import_repository_imports_mix_project_commands ... ok
+test tests::import_repository::import_repository_imports_go_module_build_and_test_defaults ... ok
+test tests::import_repository::import_repository_imports_maven_build_and_test_defaults ... ok
+test tests::import_repository::import_repository_imports_package_json_commands_with_runner_detection ... ok
+test tests::import_repository::import_repository_marks_overlay_fallbacks_as_inferred ... ok
+test tests::import_repository::import_repository_imports_pyproject_build_and_test_defaults ... ok
+test tests::import_repository::import_repository_imports_rebar_project_commands ... ok
+test tests::import_repository::import_repository_prefers_security_md_over_contributing ... ok
+test tests::import_repository::import_repository_only_builds_non_test_dotnet_project ... ok
+test tests::import_repository::justfile_assignments_do_not_produce_taskscript_candidates ... ok
+test tests::import_repository::import_repository_prefers_primary_ci_workflow_over_release_workflow ... ok
+test tests::import_repository::import_repository_keeps_manifest_commands_imported_when_workflow_agrees ... ok
+test tests::import_repository::justfile_produces_taskscript_candidates ... ok
+test tests::import_repository::import_repository_uses_banner_title_before_donation_and_sponsor_sections ... ok
+test tests::import_repository::import_repository_keeps_richer_surfaces_at_skip ... ok
+test tests::import_repository::makefile_produces_taskscript_candidates ... ok
+test tests::import_repository::makefile_beats_workflow ... ok
+test tests::import_repository::manifest_workflow_agree ... ok
+test tests::import_repository::observed_workflow_beats_ecosystem_default ... ok
+test tests::import_repository::workflow_only_fallback ... ok
+
+test result: ok. 42 passed; 0 failed; 0 ignored; 0 measured; 223 filtered out; finished in 0.05s
+

@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-f05-offline-go-03-eb2c6841d4",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "cd /workspace/repository; cd api && GOWORK=off GOPROXY=off go mod download"
+  ],
+  "startedAt": "2026-10-29T07:36:02.721736+00:00",
+  "elapsedSeconds": 0.07282616593874991,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

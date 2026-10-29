@@ -1,0 +1,437 @@
+//! Refuse conventional Go scalars when acquired CI exposes unresolved scope/setup.
+//! This is a bounded workflow screen, not a YAML interpreter or execution proof.
+use super::super::types::{CommandSourceTier, ImportedCommandCandidate, ImportedFile};
+
+#[derive(Default)]
+pub(super) struct GoContextGuard {
+    scoped: Vec<String>,
+    prepared_test: Vec<String>,
+    unsupported: Vec<String>,
+}
+
+fn line(value: &str) -> Option<(usize, &str)> {
+    let text = value.trim();
+    let mut quote = None;
+    let mut escaped = false;
+    let mut end = text.len();
+    for (index, ch) in text.char_indices() {
+        if escaped {
+            escaped = false;
+            continue;
+        }
+        if quote == Some('"') && ch == '\\' {
+            escaped = true;
+            continue;
+        }
+        if matches!(ch, '\'' | '"') {
+            if quote == Some(ch) {
+                quote = None;
+            } else if quote.is_none() {
+                quote = Some(ch);
+            }
+        } else if ch == '#'
+            && quote.is_none()
+            && (index == 0 || text[..index].ends_with(char::is_whitespace))
+        {
+            end = index;
+            break;
+        }
+    }
+    let text = text[..end].trim_end();
+    (!text.is_empty() && !text.starts_with('#'))
+        .then(|| (value.len() - value.trim_start().len(), text))
+}
+
+// A small structural view of supported workflow mappings. Scalar bodies are
+// data here, including run bodies; only the associated run property reads them.
+#[derive(Clone, Copy)]
+struct Row<'a> {
+    index: usize,
+    indent: usize,
+    text: &'a str,
+}
+
+fn mapping(text: &str) -> Option<(&str, &str)> {
+    let text = text.strip_prefix("- ").unwrap_or(text);
+    let (key, value) = text.split_once(':')?;
+    let key = key.trim();
+    let key = if key.starts_with(['\'', '"']) {
+        let quote = key.chars().next()?;
+        key.strip_prefix(quote)?.strip_suffix(quote)?
+    } else {
+        key
+    };
+    (!key.is_empty()
+        && key
+            .chars()
+            .all(|ch| ch.is_ascii_alphanumeric() || "_-".contains(ch)))
+    .then_some((key, value.trim()))
+}
+
+fn block_scalar(value: &str) -> bool {
+    value.starts_with(['|', '>'])
+        && value[1..]
+            .chars()
+            .all(|ch| matches!(ch, '+' | '-' | '1'..='9'))
+}
+
+fn structural_rows<'a>(lines: &[&'a str]) -> Vec<Row<'a>> {
+    let mut scalar_indent = None;
+    let mut rows = Vec::new();
+    for (index, raw) in lines.iter().enumerate() {
+        let Some((indent, text)) = line(raw) else {
+            continue;
+        };
+        if scalar_indent.is_some_and(|parent| indent > parent) {
+            continue;
+        }
+        scalar_indent = None;
+        if mapping(text).is_some_and(|(_, value)| block_scalar(value)) {
+            scalar_indent = Some(indent + usize::from(text.starts_with("- ")) * 2);
+        }
+        rows.push(Row {
+            index,
+            indent,
+            text,
+        });
+    }
+    rows
+}
+
+fn block_end(rows: &[Row<'_>], start: usize) -> usize {
+    (start + 1..rows.len())
+        .find(|&index| rows[index].indent <= rows[start].indent)
+        .unwrap_or(rows.len())
+}
+
+fn property<'a>(rows: &'a [Row<'a>], indent: usize, key: &str) -> Option<&'a [Row<'a>]> {
+    let start = rows.iter().position(|row| {
+        row.indent + usize::from(row.text.starts_with("- ")) * 2 == indent
+            && mapping(row.text).is_some_and(|(name, _)| name == key)
+    })?;
+    Some(&rows[start..block_end(rows, start)])
+}
+
+fn child<'a>(rows: &'a [Row<'a>], key: &str) -> Option<&'a [Row<'a>]> {
+    let indent = rows.get(1..)?.iter().map(|row| row.indent).min()?;
+    property(&rows[1..], indent, key)
+}
+
+fn nonroot_value(value: &str) -> bool {
+    !matches!(value.trim_matches(['\'', '"']), "." | "./")
+}
+
+fn default_directory(rows: &[Row<'_>], indent: usize) -> Option<bool> {
+    let defaults = property(rows, indent, "defaults")?;
+    let value = mapping(defaults[0].text)?.1;
+    // An inline/aliased default is unsupported, so it cannot establish root cwd.
+    if !value.is_empty() {
+        return Some(true);
+    }
+    let run = child(defaults, "run")?;
+    if !mapping(run[0].text)?.1.is_empty() {
+        return Some(true);
+    }
+    let directory = child(run, "working-directory")?;
+    Some(nonroot_value(mapping(directory[0].text)?.1))
+}
+
+fn run_commands(rows: &[Row<'_>], lines: &[&str], indent: usize) -> (Vec<String>, bool) {
+    let Some(run) = property(rows, indent, "run") else {
+        let unknown_go_property = rows.iter().any(|row| {
+            row.indent + usize::from(row.text.starts_with("- ")) * 2 == indent
+                && mapping(row.text).is_none()
+                && (go_task(row.text).is_some()
+                    || ["- {", "- *", "- &"]
+                        .iter()
+                        .any(|prefix| row.text.starts_with(prefix)))
+        });
+        return (Vec::new(), unknown_go_property);
+    };
+    let value = mapping(run[0].text).expect("run property").1;
+    if value.starts_with(['\'', '"']) {
+        let quote = value.chars().next().expect("quoted value");
+        if value.len() < 2
+            || !value.ends_with(quote)
+            || value[1..value.len() - 1].contains(['\\', '\'', '"'])
+        {
+            return (Vec::new(), true);
+        }
+    }
+    if value.starts_with('>') {
+        // Folded shell programs need YAML folding semantics; line-by-line
+        // inspection cannot establish what command was invoked.
+        return (Vec::new(), true);
+    }
+    let commands = if block_scalar(value) {
+        let start = run[0].index + 1;
+        let end = rows
+            .iter()
+            .find(|row| row.index > run[0].index)
+            .map(|row| row.index)
+            .unwrap_or_else(|| {
+                (start..lines.len())
+                    .find(|&index| {
+                        line(lines[index]).is_some_and(|(level, _)| level <= run[0].indent)
+                    })
+                    .unwrap_or(lines.len())
+            });
+        lines[start..end]
+            .iter()
+            .map(|line| line.trim())
+            .collect::<Vec<_>>()
+    } else if value.starts_with(['*', '{', '[']) || value.contains("${{") {
+        return (Vec::new(), true);
+    } else {
+        vec![value.trim_matches(['\'', '"'])]
+    };
+    let mut output = Vec::new();
+    let mut heredoc: Option<String> = None;
+    let mut unsupported = false;
+    for command in commands {
+        if let Some(delimiter) = &heredoc {
+            if command == delimiter {
+                heredoc = None;
+            }
+            continue;
+        }
+        if command.is_empty() || command.starts_with('#') {
+            continue;
+        }
+        if let Some((_, tail)) = command.split_once("<<") {
+            let token = tail
+                .trim_start_matches('-')
+                .split_whitespace()
+                .next()
+                .unwrap_or("");
+            let delimiter = token.trim_matches(['\'', '"']);
+            if delimiter.is_empty()
+                || !delimiter
+                    .chars()
+                    .all(|ch| ch.is_ascii_alphanumeric() || ch == '_')
+            {
+                unsupported = true;
+                break;
+            }
+            heredoc = Some(delimiter.to_owned());
+        }
+        output.push(command.to_owned());
+    }
+    (output, unsupported || heredoc.is_some())
+}
+
+fn go_task(command: &str) -> Option<bool> {
+    let tokens = command.split_whitespace().collect::<Vec<_>>();
+    if matches!(tokens.first(), Some(&"#" | &"echo" | &"printf")) {
+        return None;
+    }
+    tokens.iter().enumerate().find_map(|(index, token)| {
+        if *token != "go" {
+            return None;
+        }
+        let offset = if tokens.get(index + 1) == Some(&"-C") {
+            3
+        } else if tokens
+            .get(index + 1)
+            .is_some_and(|token| token.starts_with("-C="))
+        {
+            2
+        } else {
+            1
+        };
+        match tokens.get(index + offset) {
+            Some(&"build") => Some(true),
+            Some(&"test") => Some(false),
+            _ => None,
+        }
+    })
+}
+
+fn go_nonroot_flag(command: &str) -> bool {
+    let tokens = command.split_whitespace().collect::<Vec<_>>();
+    tokens
+        .windows(2)
+        .any(|pair| pair[0] == "-C" && !matches!(pair[1], "." | "./"))
+        || tokens.iter().any(|token| {
+            token
+                .strip_prefix("-C=")
+                .is_some_and(|path| !matches!(path, "." | "./"))
+        })
+}
+
+fn service_action(action: &str) -> bool {
+    let action = action.to_ascii_lowercase();
+    [
+        "redis", "postgres", "mysql", "mariadb", "mongodb", "rabbitmq", "kafka",
+    ]
+    .iter()
+    .any(|service| action.contains(&format!("setup-{service}")))
+}
+
+fn service_command(command: &str) -> bool {
+    let command = command
+        .trim()
+        .strip_prefix("sudo ")
+        .unwrap_or(command.trim());
+    command.starts_with("redis-server ")
+        || command == "redis-server"
+        || ((command.starts_with("apt-get install ")
+            || command.starts_with("apt install ")
+            || command.starts_with("brew install "))
+            && command
+                .split_whitespace()
+                .any(|token| matches!(token, "redis" | "redis-server")))
+}
+
+impl GoContextGuard {
+    pub(super) fn inspect(workflows: &[ImportedFile]) -> Self {
+        let mut guard = Self::default();
+        for file in workflows {
+            let lines = file.contents.lines().collect::<Vec<_>>();
+            let rows = structural_rows(&lines);
+            let Some(jobs) = property(&rows, 0, "jobs") else {
+                if lines.iter().any(|text| go_task(text.trim()).is_some()) {
+                    guard.unsupported.push(file.path.clone());
+                }
+                continue;
+            };
+            if !mapping(jobs[0].text).expect("jobs property").1.is_empty() {
+                guard.unsupported.push(file.path.clone());
+                continue;
+            }
+            let workflow_directory = default_directory(&rows, 0);
+            let Some(job_indent) = jobs[1..].iter().map(|row| row.indent).min() else {
+                continue;
+            };
+            let starts = (1..jobs.len())
+                .filter(|&index| jobs[index].indent == job_indent)
+                .collect::<Vec<_>>();
+            for (number, &start) in starts.iter().enumerate() {
+                let job = &jobs[start..starts.get(number + 1).copied().unwrap_or(jobs.len())];
+                if mapping(job[0].text).is_none_or(|(_, value)| !value.is_empty()) {
+                    if !guard.unsupported.contains(&file.path) {
+                        guard.unsupported.push(file.path.clone());
+                    }
+                    continue;
+                }
+                let Some(property_indent) = job[1..].iter().map(|row| row.indent).min() else {
+                    continue;
+                };
+                let Some(steps) = property(&job[1..], property_indent, "steps") else {
+                    if job.iter().any(|row| go_task(row.text).is_some())
+                        && !guard.unsupported.contains(&file.path)
+                    {
+                        guard.unsupported.push(file.path.clone());
+                    }
+                    continue;
+                };
+                if !mapping(steps[0].text).expect("steps property").1.is_empty() {
+                    guard.unsupported.push(file.path.clone());
+                    continue;
+                }
+                let default_directory =
+                    default_directory(&job[1..], property_indent).or(workflow_directory);
+                let mut prepared =
+                    property(&job[1..], property_indent, "services").is_some_and(|value| {
+                        mapping(value[0].text).expect("services property").1 != "{}"
+                    });
+                let Some(step_indent) = steps[1..]
+                    .iter()
+                    .filter(|row| row.text.starts_with("- "))
+                    .map(|row| row.indent)
+                    .min()
+                else {
+                    continue;
+                };
+                let starts = (1..steps.len())
+                    .filter(|&index| {
+                        steps[index].indent == step_indent && steps[index].text.starts_with("- ")
+                    })
+                    .collect::<Vec<_>>();
+                let mut observations = Vec::new();
+                for (number, &start) in starts.iter().enumerate() {
+                    let step =
+                        &steps[start..starts.get(number + 1).copied().unwrap_or(steps.len())];
+                    let indent = step_indent + 2;
+                    let mut nonroot = property(step, indent, "working-directory")
+                        .map(|value| nonroot_value(mapping(value[0].text).expect("cwd property").1))
+                        .or(default_directory)
+                        .unwrap_or(false);
+                    prepared |= property(step, indent, "uses").is_some_and(|value| {
+                        service_action(mapping(value[0].text).expect("uses property").1)
+                    });
+                    let (commands, unsupported) = run_commands(step, &lines, indent);
+                    if unsupported && !guard.unsupported.contains(&file.path) {
+                        guard.unsupported.push(file.path.clone());
+                    }
+                    for command in commands {
+                        prepared |= service_command(&command);
+                        if let Some(path) = command.trim().strip_prefix("cd ") {
+                            nonroot |= nonroot_value(path.trim());
+                        }
+                        if let Some(build) = go_task(&command) {
+                            observations.push((build, nonroot || go_nonroot_flag(&command)));
+                        }
+                    }
+                }
+                for (build, nonroot) in observations {
+                    if nonroot && !guard.scoped.contains(&file.path) {
+                        guard.scoped.push(file.path.clone());
+                    }
+                    if !build && !nonroot && prepared && !guard.prepared_test.contains(&file.path) {
+                        guard.prepared_test.push(file.path.clone());
+                    }
+                }
+            }
+        }
+        guard
+    }
+
+    /// Preserve original candidates for unresolved scoring; gate only scalar selection.
+    pub(super) fn selection_candidates(
+        &self,
+        candidates: &[ImportedCommandCandidate],
+    ) -> (Vec<ImportedCommandCandidate>, [bool; 2]) {
+        let mut filtered = candidates.to_vec();
+        let mut blocked = [false; 2];
+        for candidate in &mut filtered {
+            if !matches!(
+                candidate.source_tier,
+                CommandSourceTier::Workflow | CommandSourceTier::EcosystemDefault
+            ) {
+                continue;
+            }
+            for (index, value) in [&mut candidate.build, &mut candidate.test]
+                .into_iter()
+                .enumerate()
+            {
+                if value
+                    .as_deref()
+                    .is_some_and(|command| go_task(command).is_some())
+                    && (!self.scoped.is_empty()
+                        || !self.unsupported.is_empty()
+                        || (index == 1 && !self.prepared_test.is_empty()))
+                {
+                    *value = None;
+                    blocked[index] = true;
+                }
+            }
+        }
+        (filtered, blocked)
+    }
+
+    pub(super) fn reason(&self, test: bool) -> String {
+        if !self.unsupported.is_empty() {
+            format!("Go workflow execution context has unsupported structure in `{}`; conventional commands cannot establish repository scope/setup", self.unsupported.join("`, `"))
+        } else if !self.scoped.is_empty() {
+            format!("Go workflow component scope is unresolved in `{}`; a conventional root module command cannot establish repository coverage", self.scoped.join("`, `"))
+        } else if test {
+            format!("Go test workflow setup is unresolved in `{}`; the same job declares an external service prerequisite", self.prepared_test.join("`, `"))
+        } else {
+            unreachable!("build guard requires scoped Go workflow evidence")
+        }
+    }
+}
+
+#[cfg(test)]
+mod tests;

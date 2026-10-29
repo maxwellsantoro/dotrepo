@@ -1,0 +1,212 @@
+name: fp-go CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      dryRun:
+        description: 'Dry-Run'
+        default: 'true'
+        required: false
+
+env:
+  DEFAULT_BRANCH: main
+  LATEST_GO_VERSION: 1.25.2 # renovate: datasource=golang-version depName=golang
+  NODE_VERSION: 24
+  DRY_RUN: true
+
+jobs:
+  build-v1:
+    name: Build v1 (Go ${{ matrix.go-version }})
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    strategy:
+      matrix:
+        go-version: ['1.20.x', '1.21.x', '1.22.x', '1.23.x', '1.24.x', '1.25.x', '1.26.x', '1.27.x']
+      fail-fast: false  # Continue with other versions if one fails
+    steps:
+      # full checkout for semantic-release
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Set up Go ${{ matrix.go-version }}
+        uses: actions/setup-go@v7
+        with:
+          go-version: ${{ matrix.go-version }}
+          cache: true  # Enable Go module caching
+      - name: Run tests
+        run: |
+          go mod tidy
+          go test -race -coverprofile=coverage.txt -covermode=atomic -coverpkg=./... ./...
+      
+      - name: Upload coverage to Coveralls
+        continue-on-error: true
+        uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./coverage.txt
+          flag-name: v1-go-${{ matrix.go-version }}
+          parallel: true
+      
+      # - name: Upload coverage to Codecov
+      #   uses: codecov/codecov-action@v5
+      #   with:
+      #     file: ./coverage.txt
+      #     flags: v1,go-${{ matrix.go-version }}
+      #     name: v1-go-${{ matrix.go-version }}
+      #     fail_ci_if_error: false
+      #   env:
+      #     CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+  build-v2:
+    name: Build v2 (Go ${{ matrix.go-version }})
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    strategy:
+      matrix:
+        go-version: ['1.24.x', '1.25.x', '1.26.x', '1.27.x']
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Set up Go ${{ matrix.go-version }}
+        uses: actions/setup-go@v7
+        with:
+          go-version: ${{ matrix.go-version }}
+          cache: true  # Enable Go module caching
+      - name: Run tests
+        run: |
+          cd v2
+          go mod tidy
+          go test -race -coverprofile=coverage.txt -covermode=atomic -coverpkg=./... ./...
+      
+      - name: Upload coverage to Coveralls
+        continue-on-error: true
+        uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./v2/coverage.txt
+          flag-name: v2-go-${{ matrix.go-version }}
+          parallel: true
+      
+      # - name: Upload coverage to Codecov
+      #   uses: codecov/codecov-action@v5
+      #   with:
+      #     file: ./v2/coverage.txt
+      #     flags: v2,go-${{ matrix.go-version }}
+      #     name: v2-go-${{ matrix.go-version }}
+      #     fail_ci_if_error: false
+      #   env:
+      #     CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+  build-gen:
+    name: Build gen/v2 (Go ${{ matrix.go-version }})
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    strategy:
+      matrix:
+        go-version: ['1.26.x', '1.27.x']
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Set up Go ${{ matrix.go-version }}
+        uses: actions/setup-go@v7
+        with:
+          go-version: ${{ matrix.go-version }}
+          cache: true
+      - name: Run tests
+        run: |
+          cd gen/v2
+          go mod tidy
+          go test -race -coverprofile=coverage.txt -covermode=atomic -coverpkg=./... ./...
+
+  coveralls-finish:
+    name: Finish Coveralls
+    permissions: {}
+    needs:
+      - build-v1
+      - build-v2
+      - build-gen
+    runs-on: ubuntu-latest
+    steps:
+      - name: Coveralls Finished
+        continue-on-error: true
+        uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          parallel-finished: true
+
+  release:
+    name: Release
+    needs:
+      - build-v1
+      - build-v2
+      - build-gen
+    if: github.repository == 'IBM/fp-go' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    steps:
+      # full checkout for semantic-release
+      - name: Full checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Set up Go
+        uses: actions/setup-go@v7
+        with:
+          go-version: ${{ env.LATEST_GO_VERSION }}
+          cache: true  # Enable Go module caching
+
+      - name: Determine release mode
+        id: release-mode
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" && "${{ github.event.inputs.dryRun }}" != "true" ]]; then
+            echo "DRY_RUN=false" >> $GITHUB_ENV
+          elif [[ "${{ github.ref }}" == "refs/heads/${{ env.DEFAULT_BRANCH }}" ]]; then
+            echo "DRY_RUN=false" >> $GITHUB_ENV
+          elif [[ "${{ github.ref }}" =~ ^refs/heads/v[0-9]+(\.[0-9]+)?$ ]]; then
+            echo "DRY_RUN=false" >> $GITHUB_ENV
+          fi
+
+      - name: Run semantic release
+        run: |
+          npx -p conventional-changelog-conventionalcommits@9 -p semantic-release semantic-release --dry-run ${{ env.DRY_RUN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Tag gen/v2 with same version
+        if: env.DRY_RUN == 'false'
+        run: |
+          git fetch --tags
+          LATEST_TAG=$(git tag --sort=-creatordate | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | head -1)
+          if [ -z "$LATEST_TAG" ]; then
+            echo "No release tag found, skipping gen/v2 tag"
+            exit 0
+          fi
+          GEN_TAG="gen/${LATEST_TAG}"
+          if git rev-parse "$GEN_TAG" >/dev/null 2>&1; then
+            echo "Tag $GEN_TAG already exists, skipping"
+          else
+            echo "Creating $GEN_TAG"
+            git tag "$GEN_TAG"
+            git push origin "$GEN_TAG"
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

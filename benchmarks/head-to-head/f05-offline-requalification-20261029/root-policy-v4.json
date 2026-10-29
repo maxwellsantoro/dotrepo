@@ -1,0 +1,26 @@
+{
+  "identity": "coordinator-default-rust-outcome-policy-v4",
+  "approvedAt": "2026-10-29T07:25:27.271764+00:00",
+  "state": "approved-default-outcome-semantics-only",
+  "policy": {
+    "unitAssertionFailureStopsDefault": true,
+    "unitCases": 2,
+    "successDocPhaseCases": 0,
+    "assertionFailureExitCode": 101,
+    "requiresOrdinaryLibFailureDiagnostic": true,
+    "compilerSetupUnknownDiagnosticsAreNoncompletion": true,
+    "defaultStopDocPhase": "unexecuted-default-stop; not exercised and not completephasecoverage",
+    "authority": "Coordinator approved bounded default-command outcome semantics before any native attempt; originalrequest asks obtain component test outcome.",
+    "sourceEvidence": [
+      "source-bindings-v4/original-rust-request.md",
+      "source-bindings-v4/historical-rust-stdout.txt",
+      "source-bindings-v4/historical-rust-stderr.txt",
+      "source-bindings-v4/parser-manifest.toml",
+      "source-bindings-v4/logs/cargo-test-help/stdout.txt"
+    ],
+    "behaviorLimit": "A completed default command outcome does not establish all behavior branches, passing tests or an exercised doc phase when defaultstop occurs."
+  },
+  "liveRunAuthorized": false,
+  "cacheOrImageQualified": false,
+  "scopeCommandsResourcesChanged": false
+}

@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "docker",
+    "inspect",
+    "dotrepo-f05-offline-rust-02-38781c3168"
+  ],
+  "startedAt": "2026-10-29T07:35:11.683772+00:00",
+  "elapsedSeconds": 0.161809790879488,
+  "exitCode": 1,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "stderrSha256": "1337ddf2100193826a0736e09db4e6ab5a3005bdf151d839afc40171ac7519cc",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

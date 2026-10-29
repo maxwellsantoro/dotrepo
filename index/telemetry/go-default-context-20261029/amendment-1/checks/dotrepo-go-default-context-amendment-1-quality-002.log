@@ -1,0 +1,10 @@
+   Compiling dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.08s
+     Running tests/import_quality_gate.rs (target/debug/deps/import_quality_gate-0c9f2def4d15fcd0)
+
+running 2 tests
+test imported_context_candidates_are_valid_and_exactly_value_bound ... ok
+test import_quality_gate_matches_checked_in_expectations ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.35s
+

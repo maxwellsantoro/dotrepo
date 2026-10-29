@@ -1,0 +1,29 @@
+{
+  "argv": [
+    "uv",
+    "run",
+    "--offline",
+    "--no-sync",
+    "python",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-requalification-20261029/driver.v5.py",
+    "run",
+    "--task",
+    "rust-02",
+    "--acceptance",
+    "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-acceptance-20261029/acceptance.json",
+    "--output",
+    "/tmp/dotrepo-f05-offline-requalification-rust-02-20261029-3aaa3ea9"
+  ],
+  "startedAt": "2026-10-29T07:34:48.917086+00:00",
+  "elapsedSeconds": 22.747731167124584,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

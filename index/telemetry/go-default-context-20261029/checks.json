@@ -1,0 +1,130 @@
+[
+  {
+    "log": "checks/dotrepo-go-default-context-tests-001.log",
+    "sha256": "bde5d6a86b38c2ffa7e780c0575213438cd08d883d72ff2406a158bf66f7c45f",
+    "tail": [
+      "",
+      "test result: FAILED. 6 passed; 1 failed; 0 ignored; 0 measured; 253 filtered out; finished in 0.02s",
+      "",
+      "error: test failed, to rerun pass `-p dotrepo-core --lib`"
+    ]
+  },
+  {
+    "log": "checks/dotrepo-go-default-context-tests-002.log",
+    "sha256": "7c4089445684df73e554617002686e404428c1a6b53db703f92ffd51a52f0805",
+    "tail": [
+      "test import::commands::context::python_recipe::tests::natural_python_recipe_rejects_wrong_scope_directory_conditions_and_missing_chain ... ok",
+      "",
+      "test result: ok. 58 passed; 0 failed; 0 ignored; 0 measured; 202 filtered out; finished in 0.10s",
+      ""
+    ]
+  },
+  {
+    "log": "checks/dotrepo-go-default-context-tests-003.log",
+    "sha256": "e7d79b35001c9f6c4dc79d19f335eece238490039b79203621bef0e207f2122b",
+    "tail": [
+      "test import::commands::context::python_recipe::tests::natural_python_recipe_rejects_wrong_scope_directory_conditions_and_missing_chain ... ok",
+      "",
+      "test result: ok. 60 passed; 0 failed; 0 ignored; 0 measured; 202 filtered out; finished in 0.10s",
+      ""
+    ]
+  },
+  {
+    "log": "checks/dotrepo-go-default-context-tests-004.log",
+    "sha256": "bcf4546dad2c23302b01edf87a0a88363eb36eb3514737d224550689ef02f645",
+    "tail": [
+      "test import::commands::context::python_recipe::tests::natural_python_recipe_rejects_wrong_scope_directory_conditions_and_missing_chain ... ok",
+      "",
+      "test result: ok. 61 passed; 0 failed; 0 ignored; 0 measured; 202 filtered out; finished in 0.12s",
+      ""
+    ]
+  },
+  {
+    "log": "checks/dotrepo-go-default-context-tests-005.log",
+    "sha256": "689539275f686c4cf99616a4bf92bd8cc545d3ffed75abcdf92e617c7572dcd3",
+    "tail": [
+      "test import::commands::go_context::tests::full_import_f1_go_context_fixture_contracts ... ok",
+      "",
+      "test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 253 filtered out; finished in 0.05s",
+      ""
+    ]
+  },
+  {
+    "log": "checks/dotrepo-go-default-context-tests-006.log",
+    "sha256": "b0628f53b8cefa85e87173c94ca1a70668761f422ad378ee5cd7163b6c85cd04",
+    "tail": [
+      "test import::commands::context::python_recipe::tests::natural_python_recipe_rejects_wrong_scope_directory_conditions_and_missing_chain ... ok",
+      "",
+      "test result: ok. 63 passed; 0 failed; 0 ignored; 0 measured; 202 filtered out; finished in 0.10s",
+      ""
+    ]
+  },
+  {
+    "log": "checks/dotrepo-go-default-context-tests-007.log",
+    "sha256": "f7872b6de6c8c90e1080a4bb6b98f247084fdee9ba045878600ca1bd3278b911",
+    "tail": [
+      "test import::commands::go_context::tests::full_import_f1_go_context_fixture_contracts ... ok",
+      "",
+      "test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 253 filtered out; finished in 0.04s",
+      ""
+    ]
+  },
+  {
+    "log": "checks/dotrepo-go-default-context-fields-001.log",
+    "sha256": "bed1c6f6ff4cdd3077b447e8d09dbf12c200ca05c3f865c5ae4c1924d18083c8",
+    "tail": [
+      "running 0 tests",
+      "",
+      "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 265 filtered out; finished in 0.00s",
+      ""
+    ]
+  },
+  {
+    "log": "checks/dotrepo-go-default-context-escalation-001.log",
+    "sha256": "887ab4ed9fd1b14e757c1378775f55d7a4af8a94b20793621544c6bac4fc0faa",
+    "tail": [
+      "test import::escalation::tests::writeback_gate_can_pass_while_auto_publish_remains_blocked ... ok",
+      "",
+      "test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 255 filtered out; finished in 0.03s",
+      ""
+    ]
+  },
+  {
+    "log": "checks/dotrepo-go-default-context-facade-001.log",
+    "sha256": "c619e1f131ba38495e97b5d84604b5b8c870ec36d9cfed1fcec4916bafb2b12e",
+    "tail": [
+      "test tests::import_repository::workflow_only_fallback ... ok",
+      "",
+      "test result: ok. 42 passed; 0 failed; 0 ignored; 0 measured; 223 filtered out; finished in 0.05s",
+      ""
+    ]
+  },
+  {
+    "log": "checks/dotrepo-go-default-context-quality-001.log",
+    "sha256": "7861f71f14546ef2fb81dbca5515208779c86bbaaada95efa0e55f4582046420",
+    "tail": [
+      "test import_quality_gate_matches_checked_in_expectations ... ok",
+      "",
+      "test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.25s",
+      ""
+    ]
+  },
+  {
+    "log": "checks/dotrepo-go-default-context-clippy-001.log",
+    "sha256": "496ff46cf0dcc0aab603d57be3fb43ddef702ee6843a4547f7f75878d3874dea",
+    "tail": [
+      "    Checking toml v0.8.23",
+      "    Checking dotrepo-schema v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-schema)",
+      "    Checking dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)",
+      "    Finished `dev` profile [unoptimized + debuginfo] target(s) in 7.11s"
+    ]
+  },
+  {
+    "log": "checks/dotrepo-go-default-context-clippy-002.log",
+    "sha256": "a04d5e10d925308e6806b975820dae9da6a22af9951a3a855c328a2cc834591d",
+    "tail": [
+      "    Checking dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)",
+      "    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.07s"
+    ]
+  }
+]

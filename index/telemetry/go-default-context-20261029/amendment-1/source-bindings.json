@@ -1,0 +1,207 @@
+{
+  "baseline": "d76581560e88e92d9a0298c2c7fc94e28c44542d",
+  "observedHead": "4b0d769d424118d063c0fffbb793c422edb88478",
+  "priorAuthorFreezeSha256": "ce4f4f75cdeec09fb083e7ebdfc4e9a1d005633dfe7100e64b695aee6c114e26",
+  "priorImplementationBindingsSha256": "b5952ccca9f35d5cb7298de4bb01870ff0098ab294ad080666e9799b4fd14a09",
+  "priorIndependentReviewFreezeSha256": "c96064782b00d2f3475fe6a5e5d32558a0c3a7dfa48881a97a6f9b565bf6f506",
+  "cliSha256": "42a9f9ed07ecf1b7662e1de2b0edfef257c08e128ec96b4d2684a1597ba7db35",
+  "expectationsCoordinatorIntegratedSha256": "d9e1afa09eae92f3265978f3ffa957ec02170fcb6d27bc4c4249a497f2109e93",
+  "files": [
+    {
+      "path": "crates/dotrepo-core/src/import/commands/mod.rs",
+      "sha256": "5829b372b37a346789fd7ae7130f0eff1023dacef4502e05b07d8fc04927449e",
+      "bytes": 20648,
+      "amendmentChanged": false,
+      "originalSha256": "5829b372b37a346789fd7ae7130f0eff1023dacef4502e05b07d8fc04927449e"
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/commands/go_context.rs",
+      "sha256": "f0563131ab54d1bbd48b6813f6d8266f021c2a66f0650ebf8e8032001b2d7396",
+      "bytes": 16412,
+      "amendmentChanged": true,
+      "originalSha256": "0ed8c7ecabf3e5e49e694d60c92164fcb2ea1a8386e51a62b1fca58224069931"
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/commands/go_context/tests.rs",
+      "sha256": "4dff010c85bbda98437933720b9189b041c067173e6f11ef632519109ba2d2b2",
+      "bytes": 25311,
+      "amendmentChanged": true,
+      "originalSha256": "12d979bcce7c900bafca09558a4822ea0d20f04a6a99971a8254594bad9052db"
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/types.rs",
+      "sha256": "963e6999b47fde6b4b9c8127ee5032bb56b6860e23e1ead2bdc83cd4e2597544",
+      "bytes": 10206,
+      "amendmentChanged": false,
+      "originalSha256": "963e6999b47fde6b4b9c8127ee5032bb56b6860e23e1ead2bdc83cd4e2597544"
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/fields.rs",
+      "sha256": "46fdf08b498a4cfb398e8f61aa96a232105c6ccf2b85545abfe74d56acaf90dd",
+      "bytes": 30210,
+      "amendmentChanged": false,
+      "originalSha256": "46fdf08b498a4cfb398e8f61aa96a232105c6ccf2b85545abfe74d56acaf90dd"
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/mod.rs",
+      "sha256": "c042b2343c40d7897c6fa8e6a56ff73c4d719eb8724a906eb784f02b49bc541a",
+      "bytes": 31736,
+      "amendmentChanged": false,
+      "originalSha256": "c042b2343c40d7897c6fa8e6a56ff73c4d719eb8724a906eb784f02b49bc541a"
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-declared-context/.github/workflows/build.yml",
+      "sha256": "1931d37e0f552e7451472cbc4e75f119a09fc6d8d70819aa29e0481173e4a25c",
+      "bytes": 6616,
+      "amendmentChanged": false,
+      "originalSha256": "1931d37e0f552e7451472cbc4e75f119a09fc6d8d70819aa29e0481173e4a25c"
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-declared-context/.github/workflows/go-test.yml",
+      "sha256": "f6e5dca75defdea9f22c29c189a2ca46b398bc19018be5f41e43055e329fa84d",
+      "bytes": 809,
+      "amendmentChanged": false,
+      "originalSha256": "f6e5dca75defdea9f22c29c189a2ca46b398bc19018be5f41e43055e329fa84d"
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-declared-context/CONTRIBUTING.md",
+      "sha256": "aa0ded1e7e3a9bec27c177a6024585fac5f8ef8be54003be6baea9a14e92ff39",
+      "bytes": 70,
+      "amendmentChanged": false,
+      "originalSha256": "aa0ded1e7e3a9bec27c177a6024585fac5f8ef8be54003be6baea9a14e92ff39"
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-declared-context/README.md",
+      "sha256": "ee04ae774b67ed0d0c88b2df9058f001ca2d3efefa24e7f63038320ecbdd8694",
+      "bytes": 60,
+      "amendmentChanged": false,
+      "originalSha256": "ee04ae774b67ed0d0c88b2df9058f001ca2d3efefa24e7f63038320ecbdd8694"
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-declared-context/go.mod",
+      "sha256": "78018dad8d6f072b258f9b711d5a3ac23fc7403c4cda3ce45d8e076486ebfc07",
+      "bytes": 37,
+      "amendmentChanged": false,
+      "originalSha256": "78018dad8d6f072b258f9b711d5a3ac23fc7403c4cda3ce45d8e076486ebfc07"
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-example-module-context/.github/workflows/ci.yml",
+      "sha256": "376367921d2b626cec57a09daa84be1356faca7a88d4ad128ca4460b238a431d",
+      "bytes": 133,
+      "amendmentChanged": false,
+      "originalSha256": "376367921d2b626cec57a09daa84be1356faca7a88d4ad128ca4460b238a431d"
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-example-module-context/README.md",
+      "sha256": "ee04ae774b67ed0d0c88b2df9058f001ca2d3efefa24e7f63038320ecbdd8694",
+      "bytes": 60,
+      "amendmentChanged": false,
+      "originalSha256": "ee04ae774b67ed0d0c88b2df9058f001ca2d3efefa24e7f63038320ecbdd8694"
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-example-module-context/examples/demo/go.mod",
+      "sha256": "adac0404f03c9fc3799414313e257eae386a392ffa8a7700f5e44fdf1e1d9dfb",
+      "bytes": 34,
+      "amendmentChanged": false,
+      "originalSha256": "adac0404f03c9fc3799414313e257eae386a392ffa8a7700f5e44fdf1e1d9dfb"
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-example-module-context/go.mod",
+      "sha256": "78018dad8d6f072b258f9b711d5a3ac23fc7403c4cda3ce45d8e076486ebfc07",
+      "bytes": 37,
+      "amendmentChanged": false,
+      "originalSha256": "78018dad8d6f072b258f9b711d5a3ac23fc7403c4cda3ce45d8e076486ebfc07"
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-multimodule-context/.github/workflows/build.yml",
+      "sha256": "1931d37e0f552e7451472cbc4e75f119a09fc6d8d70819aa29e0481173e4a25c",
+      "bytes": 6616,
+      "amendmentChanged": false,
+      "originalSha256": "1931d37e0f552e7451472cbc4e75f119a09fc6d8d70819aa29e0481173e4a25c"
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-multimodule-context/README.md",
+      "sha256": "f92d9a6e245607599eedee3a941ffcaf0aadef007d3cbbf6b26a04ee653a433a",
+      "bytes": 10836,
+      "amendmentChanged": false,
+      "originalSha256": "f92d9a6e245607599eedee3a941ffcaf0aadef007d3cbbf6b26a04ee653a433a"
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-multimodule-context/go.mod",
+      "sha256": "d99a7fedebc0034b3ee99bb1e820f0e93660d2e44e6e3b7a5de8252afab23544",
+      "bytes": 489,
+      "amendmentChanged": false,
+      "originalSha256": "d99a7fedebc0034b3ee99bb1e820f0e93660d2e44e6e3b7a5de8252afab23544"
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-service-context/.github/workflows/go-test.yml",
+      "sha256": "f6e5dca75defdea9f22c29c189a2ca46b398bc19018be5f41e43055e329fa84d",
+      "bytes": 809,
+      "amendmentChanged": false,
+      "originalSha256": "f6e5dca75defdea9f22c29c189a2ca46b398bc19018be5f41e43055e329fa84d"
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-service-context/.github/workflows/release-build.yml",
+      "sha256": "1e4c7c2dae8bc6b2286ee87e5055900ef4d08c53608d95213bb4d8b484dd06b8",
+      "bytes": 640,
+      "amendmentChanged": false,
+      "originalSha256": "1e4c7c2dae8bc6b2286ee87e5055900ef4d08c53608d95213bb4d8b484dd06b8"
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-service-context/README.markdown",
+      "sha256": "9fade03f42daf7476a14204e80bb2dd64593bf81f4bedf332d00625a3b6f522d",
+      "bytes": 2294,
+      "amendmentChanged": false,
+      "originalSha256": "9fade03f42daf7476a14204e80bb2dd64593bf81f4bedf332d00625a3b6f522d"
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-service-context/go.mod",
+      "sha256": "f3e99bdde7f6debc48f93a63e4aea3ab921066267fe0fc0780bf888aa4a82b4d",
+      "bytes": 441,
+      "amendmentChanged": false,
+      "originalSha256": "f3e99bdde7f6debc48f93a63e4aea3ab921066267fe0fc0780bf888aa4a82b4d"
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-services-block-context/.github/workflows/ci.yml",
+      "sha256": "80c08c06d8b80138590ef1ae5f76f25a372fbcb2f81684a7af29fc7408dcfcc4",
+      "bytes": 108,
+      "amendmentChanged": false,
+      "originalSha256": "80c08c06d8b80138590ef1ae5f76f25a372fbcb2f81684a7af29fc7408dcfcc4"
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-services-block-context/README.md",
+      "sha256": "ee04ae774b67ed0d0c88b2df9058f001ca2d3efefa24e7f63038320ecbdd8694",
+      "bytes": 60,
+      "amendmentChanged": false,
+      "originalSha256": "ee04ae774b67ed0d0c88b2df9058f001ca2d3efefa24e7f63038320ecbdd8694"
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-services-block-context/go.mod",
+      "sha256": "78018dad8d6f072b258f9b711d5a3ac23fc7403c4cda3ce45d8e076486ebfc07",
+      "bytes": 37,
+      "amendmentChanged": false,
+      "originalSha256": "78018dad8d6f072b258f9b711d5a3ac23fc7403c4cda3ce45d8e076486ebfc07"
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-unrelated-service-context/.github/workflows/ci.yml",
+      "sha256": "84c944703c84ede5e5eba65d7feeb1cefc7e99288bc2db511d890a964eeccf4b",
+      "bytes": 204,
+      "amendmentChanged": false,
+      "originalSha256": "84c944703c84ede5e5eba65d7feeb1cefc7e99288bc2db511d890a964eeccf4b"
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-unrelated-service-context/README.md",
+      "sha256": "ee04ae774b67ed0d0c88b2df9058f001ca2d3efefa24e7f63038320ecbdd8694",
+      "bytes": 60,
+      "amendmentChanged": false,
+      "originalSha256": "ee04ae774b67ed0d0c88b2df9058f001ca2d3efefa24e7f63038320ecbdd8694"
+    },
+    {
+      "path": "crates/dotrepo-core/tests/fixtures/import/f1-go-unrelated-service-context/go.mod",
+      "sha256": "78018dad8d6f072b258f9b711d5a3ac23fc7403c4cda3ce45d8e076486ebfc07",
+      "bytes": 37,
+      "amendmentChanged": false,
+      "originalSha256": "78018dad8d6f072b258f9b711d5a3ac23fc7403c4cda3ce45d8e076486ebfc07"
+    }
+  ]
+}

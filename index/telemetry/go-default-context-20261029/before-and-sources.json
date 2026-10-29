@@ -1,0 +1,87 @@
+{
+  "baseline": "d76581560e88e92d9a0298c2c7fc94e28c44542d",
+  "knownDevelopmentCases": true,
+  "inputs": [
+    {
+      "fixture": "crates/dotrepo-core/tests/fixtures/import/f1-go-multimodule-context/.github/workflows/build.yml",
+      "repository": "IBM/fp-go",
+      "revision": "42e25c64425e2291bd5b281aa852b7a790526204",
+      "upstreamPath": ".github/workflows/build.yml",
+      "sha256": "1931d37e0f552e7451472cbc4e75f119a09fc6d8d70819aa29e0481173e4a25c",
+      "url": "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/.github/workflows/build.yml"
+    },
+    {
+      "fixture": "crates/dotrepo-core/tests/fixtures/import/f1-go-multimodule-context/README.md",
+      "repository": "IBM/fp-go",
+      "revision": "42e25c64425e2291bd5b281aa852b7a790526204",
+      "upstreamPath": "README.md",
+      "sha256": "f92d9a6e245607599eedee3a941ffcaf0aadef007d3cbbf6b26a04ee653a433a",
+      "url": "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/README.md"
+    },
+    {
+      "fixture": "crates/dotrepo-core/tests/fixtures/import/f1-go-multimodule-context/go.mod",
+      "repository": "IBM/fp-go",
+      "revision": "42e25c64425e2291bd5b281aa852b7a790526204",
+      "upstreamPath": "go.mod",
+      "sha256": "d99a7fedebc0034b3ee99bb1e820f0e93660d2e44e6e3b7a5de8252afab23544",
+      "url": "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/go.mod"
+    },
+    {
+      "fixture": "crates/dotrepo-core/tests/fixtures/import/f1-go-service-context/.github/workflows/go-test.yml",
+      "repository": "gomodule/redigo",
+      "revision": "57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "upstreamPath": ".github/workflows/go-test.yml",
+      "sha256": "f6e5dca75defdea9f22c29c189a2ca46b398bc19018be5f41e43055e329fa84d",
+      "url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/.github/workflows/go-test.yml"
+    },
+    {
+      "fixture": "crates/dotrepo-core/tests/fixtures/import/f1-go-service-context/.github/workflows/release-build.yml",
+      "repository": "gomodule/redigo",
+      "revision": "57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "upstreamPath": ".github/workflows/release-build.yml",
+      "sha256": "1e4c7c2dae8bc6b2286ee87e5055900ef4d08c53608d95213bb4d8b484dd06b8",
+      "url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/.github/workflows/release-build.yml"
+    },
+    {
+      "fixture": "crates/dotrepo-core/tests/fixtures/import/f1-go-service-context/README.markdown",
+      "repository": "gomodule/redigo",
+      "revision": "57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "upstreamPath": "README.markdown",
+      "sha256": "9fade03f42daf7476a14204e80bb2dd64593bf81f4bedf332d00625a3b6f522d",
+      "url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/README.markdown"
+    },
+    {
+      "fixture": "crates/dotrepo-core/tests/fixtures/import/f1-go-service-context/go.mod",
+      "repository": "gomodule/redigo",
+      "revision": "57c8b99ccb90c3401bec6e09289081e8b78b3bde",
+      "upstreamPath": "go.mod",
+      "sha256": "f3e99bdde7f6debc48f93a63e4aea3ab921066267fe0fc0780bf888aa4a82b4d",
+      "url": "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/go.mod"
+    }
+  ],
+  "baselineSource": [
+    {
+      "path": "crates/dotrepo-core/src/import/commands/mod.rs",
+      "sha256": "5bf65fdf60db8fe9f3f0eb7a587baf4f956089f4dbc67010a78bb7d4d5e27122"
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/commands/extraction.rs",
+      "sha256": "f58a0ff064a974d014c2bca5b8a1e766ee5479043e0d699e3f72d7c4d0d1f005"
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/commands/policy.rs",
+      "sha256": "e724f6ba741f593760b720ddf541080e758efa32cabf3ade19aed2b4382143f9"
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/fields.rs",
+      "sha256": "a61c840eb9a73fab3d29354dd5cd1e81a069cf92883e40a7b2daca2686a61d02"
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/escalation/deterministic.rs",
+      "sha256": "aabe8fec85cb5b7ad0edac0c0796d3c21dc3bb7b4da0d9294eca274f557c8512"
+    }
+  ],
+  "originalDurabilityReviewFreezeSha256": "a28d40fca2248efd976f70f760534a281789b98e8cccf9f010ab0fca523e91a7",
+  "noUpstreamExecution": true,
+  "noNewAcquisition": true
+}

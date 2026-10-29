@@ -1,0 +1,76 @@
+{
+  "driverSha256": "ed5a3503853981661e636b08e6306f320c68be61c114c3a5d7cac7a386dd82ba",
+  "syntheticOnly": true,
+  "findings": [
+    {
+      "case": "accepted-preflight-archive-error",
+      "resultDirectoryCreated": false,
+      "resultJsonRetained": false,
+      "dockerCalls": 0,
+      "finding": "Input validation failure happens before output/result/try-finally creation; preflight time and failure reason are not retained by driver."
+    },
+    {
+      "case": "rust-unit-terminal-before-default-doc-stage-failure",
+      "stdout": "test link_type::tests::test_link_type_from_pcap_supported ... ok\ntest link_type::tests::test_link_type_from_pcap_unsupported ... ok\n\ntest result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n",
+      "nativeExitCode": 101,
+      "nativeError": null,
+      "stderrClassification": "rustdoc compile/setup failure after unit summary, no terminal doc-stage report",
+      "oracle": {
+        "qualified": true,
+        "reason": "complete component native tests",
+        "expectedTests": [
+          "test_link_type_from_pcap_supported",
+          "test_link_type_from_pcap_unsupported"
+        ],
+        "observedTests": [
+          "test_link_type_from_pcap_supported",
+          "test_link_type_from_pcap_unsupported"
+        ]
+      },
+      "driverTaskOutcomeObserved": true,
+      "finding": "Rust oracle accepts first expected-unit summary without requiring remaining cargo test phases terminal; stderr/phase failure is not scored."
+    },
+    {
+      "case": "full-mocked-driver-post-unit-doc-failure",
+      "result": {
+        "taskId": "rust-02",
+        "preflightSeconds": 0.0006515830755233765,
+        "state": "offline-outcome-observed-pending-independent-review",
+        "startedAt": "2026-10-29T07:18:36.008125+00:00",
+        "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+        "sourceRevision": "ab4bf739d46448436cb68933bb8260ee264449d5",
+        "taskOutcomeObserved": true,
+        "testsPassed": false,
+        "costUsd": null,
+        "costExclusions": [
+          "No metered host/container charge source; dependency preparation retained separately."
+        ],
+        "modelCalls": 0,
+        "indexConsulted": false,
+        "campaignExecuted": false,
+        "offlineSetupSeconds": 1.9168946892023087e-06,
+        "testExitCode": 101,
+        "executionError": null,
+        "oracle": {
+          "qualified": true,
+          "reason": "complete component native tests",
+          "expectedTests": [
+            "test_link_type_from_pcap_supported",
+            "test_link_type_from_pcap_unsupported"
+          ],
+          "observedTests": [
+            "test_link_type_from_pcap_supported",
+            "test_link_type_from_pcap_unsupported"
+          ]
+        },
+        "trackedSourceIntact": true,
+        "elapsedSeconds": 0.0012426660396158695,
+        "cleanupExitCode": 0
+      },
+      "allDockerResponsesSynthetic": true,
+      "finding": "Actual run() state classifies post-unit rustdoc compile failure as complete observed task outcome."
+    }
+  ],
+  "dockerCalls": 0,
+  "upstreamSourceBytesRead": false
+}

@@ -1,0 +1,50 @@
+{
+  "identity": "independent-offline-requalification-v5-regression-review",
+  "inputPlanSha256": "2d44b468d8954b42210cce44ae12c2571a835b8a89154d585a20f4cdbbce90e6",
+  "inputDriverSha256": "bf24973c7fede7d1d379de4cf740f0bba815fcfb580a13f9c29b270def0e4c6d",
+  "actionableRemainingFindings": [],
+  "originalBeforeEvidencePreserved": true,
+  "actualDockerNetworkProviderCalls": 0,
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "aa344401e53c8ab36f58941d40c457b2d31be1274865c5e753135bf15eb7bda2",
+      "bytes": 4983
+    },
+    {
+      "path": "author-controls-rerun.json",
+      "sha256": "2986041d6e30e090fbd58f38ef67f89988b6678f14c9bbd09ebe9127cc1ca964",
+      "bytes": 9813
+    },
+    {
+      "path": "controls.json",
+      "sha256": "5b5c466b6fdbc32fb49c76e33183594eecbf0cd2699233777736a10e8a26f1ce",
+      "bytes": 89162
+    },
+    {
+      "path": "exact-case-regression.json",
+      "sha256": "2efdeca3e5cc095bec9f9f122b2a34d639bd98519baf1efff82c429a1d11e740",
+      "bytes": 3323
+    },
+    {
+      "path": "exact_case_regression.py",
+      "sha256": "2cfc7201abffe40838feba9575b2697f99bcd84f5ebcb6ef7eea88831a2dbb62",
+      "bytes": 1705
+    },
+    {
+      "path": "input-bindings.json",
+      "sha256": "1867cae145030654b5853dcef36246be35dd68dc43d3e74c55ba3660858d8f35",
+      "bytes": 1498
+    },
+    {
+      "path": "metadata.json",
+      "sha256": "a33213bf4d4bf3088838457e075f73249e1e5e477b7fc0ad2e5380bbee69eba3",
+      "bytes": 383
+    },
+    {
+      "path": "review_controls.py",
+      "sha256": "866e14eddf2ce385f74f0e5c401e7239ffc96cb3a08c77fe30727bfdefc6b14a",
+      "bytes": 15777
+    }
+  ]
+}

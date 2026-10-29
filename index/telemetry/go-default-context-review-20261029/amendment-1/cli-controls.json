@@ -1,0 +1,1159 @@
+{
+  "cliSha256": "42a9f9ed07ecf1b7662e1de2b0edfef257c08e128ec96b4d2684a1597ba7db35",
+  "scratch": "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz",
+  "cases": 41,
+  "failedCases": [],
+  "firstPartyImporterOnly": true,
+  "upstreamExecution": false,
+  "providerOrNetworkCalls": 0,
+  "results": [
+    {
+      "case": "root-default",
+      "workflow": "jobs:\n  unit:\n    steps:\n      - run: go test ./...\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/0",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/0/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/0/evidence.md\n- imported from: README.md, go.mod, .github/workflows/ci.yml\n- inferred defaults: repo.description, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Inferred repo.test from .github/workflows/ci.yml as `go test ./...`.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "plain-service",
+      "workflow": "jobs:\n  unit:\n    services:\n      redis:\n        image: redis:7\n    steps:\n      - run: go test -race ./...\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": null
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": null
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/1",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/1/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/1/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "quoted-jobs-double",
+      "workflow": "\"jobs\":\n  unit:\n    services:\n      redis:\n        image: redis:7\n    steps:\n      - run: go test -race ./...\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": null
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": null
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/2",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/2/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/2/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "quoted-jobs-single",
+      "workflow": "'jobs':\n  unit:\n    services:\n      redis:\n        image: redis:7\n    steps:\n      - run: go test -race ./...\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": null
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": null
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/3",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/3/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/3/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "quoted-steps-double",
+      "workflow": "jobs:\n  unit:\n    services:\n      redis:\n        image: redis:7\n    \"steps\":\n      - run: go test -race ./...\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": null
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": null
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/4",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/4/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/4/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "quoted-steps-single",
+      "workflow": "jobs:\n  unit:\n    services:\n      redis:\n        image: redis:7\n    'steps':\n      - run: go test -race ./...\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": null
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": null
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/5",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/5/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/5/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "quoted-services-double",
+      "workflow": "jobs:\n  unit:\n    \"services\":\n      redis:\n        image: redis:7\n    steps:\n      - run: go test -race ./...\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": null
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": null
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/6",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/6/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/6/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "quoted-services-single",
+      "workflow": "jobs:\n  unit:\n    'services':\n      redis:\n        image: redis:7\n    steps:\n      - run: go test -race ./...\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": null
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": null
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/7",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/7/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/7/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "quoted-run-double",
+      "workflow": "jobs:\n  unit:\n    services:\n      redis:\n        image: redis:7\n    steps:\n      - \"run\": go test -race ./...\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": null
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": null
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/8",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/8/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/8/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "quoted-run-single",
+      "workflow": "jobs:\n  unit:\n    services:\n      redis:\n        image: redis:7\n    steps:\n      - 'run': go test -race ./...\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": null
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": null
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/9",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/9/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/9/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "workflow-env-|",
+      "workflow": "env:\n  CONFIG: |\n    working-directory: examples\n    uses: shogo82148/actions-setup-redis@v1\n    services:\n      redis:\n        image: redis:7\n    go test ./...\njobs:\n  unit:\n    steps:\n      - run: go test ./...\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/10",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/10/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/10/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Inferred repo.test from go.mod as `go test ./...`.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "job-env-|",
+      "workflow": "jobs:\n  unit:\n    env:\n      CONFIG: |\n        working-directory: examples\n        uses: shogo82148/actions-setup-redis@v1\n        services:\n          redis:\n            image: redis:7\n        go test ./...\n    steps:\n      - run: go test ./...\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/11",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/11/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/11/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Inferred repo.test from go.mod as `go test ./...`.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "step-name-|",
+      "workflow": "jobs:\n  unit:\n    steps:\n      - name: |\n          working-directory: examples\n          uses: shogo82148/actions-setup-redis@v1\n          services:\n            redis:\n              image: redis:7\n          go test ./...\n        run: go test ./...\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/12",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/12/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/12/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Inferred repo.test from go.mod as `go test ./...`.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "step-env-|",
+      "workflow": "jobs:\n  unit:\n    steps:\n      - env:\n          CONFIG: |\n            working-directory: examples\n            uses: shogo82148/actions-setup-redis@v1\n            services:\n              redis:\n                image: redis:7\n            go test ./...\n        run: go test ./...\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/13",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/13/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/13/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Inferred repo.test from go.mod as `go test ./...`.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "workflow-env-|-",
+      "workflow": "env:\n  CONFIG: |-\n    working-directory: examples\n    uses: shogo82148/actions-setup-redis@v1\n    services:\n      redis:\n        image: redis:7\n    go test ./...\njobs:\n  unit:\n    steps:\n      - run: go test ./...\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/14",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/14/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/14/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Inferred repo.test from go.mod as `go test ./...`.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "job-env-|-",
+      "workflow": "jobs:\n  unit:\n    env:\n      CONFIG: |-\n        working-directory: examples\n        uses: shogo82148/actions-setup-redis@v1\n        services:\n          redis:\n            image: redis:7\n        go test ./...\n    steps:\n      - run: go test ./...\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/15",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/15/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/15/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Inferred repo.test from go.mod as `go test ./...`.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "step-name-|-",
+      "workflow": "jobs:\n  unit:\n    steps:\n      - name: |-\n          working-directory: examples\n          uses: shogo82148/actions-setup-redis@v1\n          services:\n            redis:\n              image: redis:7\n          go test ./...\n        run: go test ./...\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/16",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/16/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/16/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Inferred repo.test from go.mod as `go test ./...`.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "step-env-|-",
+      "workflow": "jobs:\n  unit:\n    steps:\n      - env:\n          CONFIG: |-\n            working-directory: examples\n            uses: shogo82148/actions-setup-redis@v1\n            services:\n              redis:\n                image: redis:7\n            go test ./...\n        run: go test ./...\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/17",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/17/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/17/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Inferred repo.test from go.mod as `go test ./...`.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "workflow-env->",
+      "workflow": "env:\n  CONFIG: >\n    working-directory: examples\n    uses: shogo82148/actions-setup-redis@v1\n    services:\n      redis:\n        image: redis:7\n    go test ./...\njobs:\n  unit:\n    steps:\n      - run: go test ./...\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/18",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/18/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/18/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Inferred repo.test from go.mod as `go test ./...`.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "job-env->",
+      "workflow": "jobs:\n  unit:\n    env:\n      CONFIG: >\n        working-directory: examples\n        uses: shogo82148/actions-setup-redis@v1\n        services:\n          redis:\n            image: redis:7\n        go test ./...\n    steps:\n      - run: go test ./...\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/19",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/19/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/19/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Inferred repo.test from go.mod as `go test ./...`.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "step-name->",
+      "workflow": "jobs:\n  unit:\n    steps:\n      - name: >\n          working-directory: examples\n          uses: shogo82148/actions-setup-redis@v1\n          services:\n            redis:\n              image: redis:7\n          go test ./...\n        run: go test ./...\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/20",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/20/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/20/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Inferred repo.test from go.mod as `go test ./...`.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "step-env->",
+      "workflow": "jobs:\n  unit:\n    steps:\n      - env:\n          CONFIG: >\n            working-directory: examples\n            uses: shogo82148/actions-setup-redis@v1\n            services:\n              redis:\n                image: redis:7\n            go test ./...\n        run: go test ./...\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/21",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/21/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/21/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Inferred repo.test from go.mod as `go test ./...`.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "workflow-env->-",
+      "workflow": "env:\n  CONFIG: >-\n    working-directory: examples\n    uses: shogo82148/actions-setup-redis@v1\n    services:\n      redis:\n        image: redis:7\n    go test ./...\njobs:\n  unit:\n    steps:\n      - run: go test ./...\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/22",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/22/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/22/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Inferred repo.test from go.mod as `go test ./...`.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "job-env->-",
+      "workflow": "jobs:\n  unit:\n    env:\n      CONFIG: >-\n        working-directory: examples\n        uses: shogo82148/actions-setup-redis@v1\n        services:\n          redis:\n            image: redis:7\n        go test ./...\n    steps:\n      - run: go test ./...\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/23",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/23/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/23/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Inferred repo.test from go.mod as `go test ./...`.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "step-name->-",
+      "workflow": "jobs:\n  unit:\n    steps:\n      - name: >-\n          working-directory: examples\n          uses: shogo82148/actions-setup-redis@v1\n          services:\n            redis:\n              image: redis:7\n          go test ./...\n        run: go test ./...\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/24",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/24/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/24/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Inferred repo.test from go.mod as `go test ./...`.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "step-env->-",
+      "workflow": "jobs:\n  unit:\n    steps:\n      - env:\n          CONFIG: >-\n            working-directory: examples\n            uses: shogo82148/actions-setup-redis@v1\n            services:\n              redis:\n                image: redis:7\n            go test ./...\n        run: go test ./...\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/25",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/25/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/25/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Inferred repo.test from go.mod as `go test ./...`.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "step-root-over-job-component",
+      "workflow": "defaults:\n  run:\n    working-directory: v2\njobs:\n  unit:\n    defaults:\n      run:\n        working-directory: nested\n    steps:\n      - run: go test ./...\n        working-directory: .\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/26",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/26/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/26/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Inferred repo.test from go.mod as `go test ./...`.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "job-root-over-workflow-component",
+      "workflow": "defaults:\n  run:\n    working-directory: v2\njobs:\n  unit:\n    defaults:\n      run:\n        working-directory: .\n    steps:\n      - run: go test ./...\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/27",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/27/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/27/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Inferred repo.test from go.mod as `go test ./...`.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "step-component-over-root",
+      "workflow": "defaults:\n  run:\n    working-directory: .\njobs:\n  unit:\n    steps:\n      - working-directory: v2\n        run: go test ./...\n",
+      "expected": {
+        "build": null,
+        "test": null
+      },
+      "observed": {
+        "build": null,
+        "test": null
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/28",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/28/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/28/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Left `repo.build` unset because Go workflow component scope is unresolved in `.github/workflows/ci.yml`; a conventional root module command cannot establish repository coverage.\n- Left `repo.test` unset because Go workflow component scope is unresolved in `.github/workflows/ci.yml`; a conventional root module command cannot establish repository coverage.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "heredoc-data-followed-by-root",
+      "workflow": "jobs:\n  unit:\n    steps:\n      - run: |\n          cat <<'END'\n          working-directory: examples\n          uses: shogo82148/actions-setup-redis@v1\n          services:\n            redis:\n              image: redis:7\n          go test ./...\n          cd v2\n          redis-server --daemonize yes\n          END\n          go test ./...\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/29",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/29/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/29/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Inferred repo.test from go.mod as `go test ./...`.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "heredoc-then-real-component",
+      "workflow": "jobs:\n  unit:\n    steps:\n      - run: |\n          cat <<END\n          cd data\n          END\n          cd v2\n          go test ./...\n",
+      "expected": {
+        "build": null,
+        "test": null
+      },
+      "observed": {
+        "build": null,
+        "test": null
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/30",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/30/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/30/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Left `repo.build` unset because Go workflow component scope is unresolved in `.github/workflows/ci.yml`; a conventional root module command cannot establish repository coverage.\n- Left `repo.test` unset because Go workflow component scope is unresolved in `.github/workflows/ci.yml`; a conventional root module command cannot establish repository coverage.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "heredoc-then-real-service",
+      "workflow": "jobs:\n  unit:\n    steps:\n      - run: |\n          cat <<END\n          cd data\n          END\n          redis-server --daemonize yes\n          go test ./...\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": null
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": null
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/31",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/31/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/31/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description, repo.build\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Left `repo.test` unset because Go test workflow setup is unresolved in `.github/workflows/ci.yml`; the same job declares an external service prerequisite.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "unsupported-flow-jobs",
+      "workflow": "jobs: {unit: {steps: [{run: go test ./...}]}}\n",
+      "expected": {
+        "build": null,
+        "test": null
+      },
+      "observed": {
+        "build": null,
+        "test": null
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/32",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/32/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/32/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Left `repo.build` unset because Go workflow execution context has unsupported structure in `.github/workflows/ci.yml`; conventional commands cannot establish repository scope/setup.\n- Left `repo.test` unset because Go workflow execution context has unsupported structure in `.github/workflows/ci.yml`; conventional commands cannot establish repository scope/setup.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "unsupported-flow-job",
+      "workflow": "jobs:\n  unit: {services: {redis: {image: redis:7}}, steps: [{run: go test -race ./...}]}\n",
+      "expected": {
+        "build": null,
+        "test": null
+      },
+      "observed": {
+        "build": null,
+        "test": null
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/33",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/33/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/33/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Left `repo.build` unset because Go workflow execution context has unsupported structure in `.github/workflows/ci.yml`; conventional commands cannot establish repository scope/setup.\n- Left `repo.test` unset because Go workflow execution context has unsupported structure in `.github/workflows/ci.yml`; conventional commands cannot establish repository scope/setup.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "unsupported-flow-steps",
+      "workflow": "jobs:\n  unit:\n    steps: [{run: go test ./...}]\n",
+      "expected": {
+        "build": null,
+        "test": null
+      },
+      "observed": {
+        "build": null,
+        "test": null
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/34",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/34/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/34/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Left `repo.build` unset because Go workflow execution context has unsupported structure in `.github/workflows/ci.yml`; conventional commands cannot establish repository scope/setup.\n- Left `repo.test` unset because Go workflow execution context has unsupported structure in `.github/workflows/ci.yml`; conventional commands cannot establish repository scope/setup.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "unsupported-flow-individual-step",
+      "workflow": "jobs:\n  unit:\n    services:\n      redis:\n        image: redis:7\n    steps:\n      - {run: go test -race ./...}\n",
+      "expected": {
+        "build": null,
+        "test": null
+      },
+      "observed": {
+        "build": null,
+        "test": null
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/35",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/35/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/35/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Left `repo.build` unset because Go workflow execution context has unsupported structure in `.github/workflows/ci.yml`; conventional commands cannot establish repository scope/setup.\n- Left `repo.test` unset because Go workflow execution context has unsupported structure in `.github/workflows/ci.yml`; conventional commands cannot establish repository scope/setup.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "unsupported-dynamic-run",
+      "workflow": "jobs:\n  unit:\n    steps:\n      - run: ${{ inputs.command }}\n",
+      "expected": {
+        "build": null,
+        "test": null
+      },
+      "observed": {
+        "build": null,
+        "test": null
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/36",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/36/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/36/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Left `repo.build` unset because Go workflow execution context has unsupported structure in `.github/workflows/ci.yml`; conventional commands cannot establish repository scope/setup.\n- Left `repo.test` unset because Go workflow execution context has unsupported structure in `.github/workflows/ci.yml`; conventional commands cannot establish repository scope/setup.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "unsupported-folded-run",
+      "workflow": "jobs:\n  unit:\n    steps:\n      - run: >\n          go\n          test ./...\n",
+      "expected": {
+        "build": null,
+        "test": null
+      },
+      "observed": {
+        "build": null,
+        "test": null
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/37",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/37/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/37/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Left `repo.build` unset because Go workflow execution context has unsupported structure in `.github/workflows/ci.yml`; conventional commands cannot establish repository scope/setup.\n- Left `repo.test` unset because Go workflow execution context has unsupported structure in `.github/workflows/ci.yml`; conventional commands cannot establish repository scope/setup.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "unsupported-unclosed-heredoc",
+      "workflow": "jobs:\n  unit:\n    steps:\n      - run: |\n          cat <<END\n          cd v2\n          go test ./...\n",
+      "expected": {
+        "build": null,
+        "test": null
+      },
+      "observed": {
+        "build": null,
+        "test": null
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/38",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/38/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/38/evidence.md\n- imported from: README.md, go.mod\n- inferred defaults: repo.description\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Left `repo.build` unset because Go workflow execution context has unsupported structure in `.github/workflows/ci.yml`; conventional commands cannot establish repository scope/setup.\n- Left `repo.test` unset because Go workflow execution context has unsupported structure in `.github/workflows/ci.yml`; conventional commands cannot establish repository scope/setup.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "unrelated-service-job",
+      "workflow": "jobs:\n  unit:\n    steps:\n      - run: go test ./...\n  docs:\n    steps:\n      - uses: shogo82148/actions-setup-redis@v1\n      - run: echo documentation\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "pass": true,
+      "contributing": null,
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/39",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/39/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/39/evidence.md\n- imported from: README.md, go.mod, .github/workflows/ci.yml\n- inferred defaults: repo.description, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Inferred repo.build from go.mod as `go build ./...`.\n- Inferred repo.test from .github/workflows/ci.yml as `go test ./...`.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    },
+    {
+      "case": "explicit-maintainer-default-with-service",
+      "workflow": "jobs:\n  unit:\n    services:\n      redis:\n        image: redis:7\n    steps:\n      - run: go test -race ./...\n",
+      "expected": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "observed": {
+        "build": "go build ./...",
+        "test": "go test ./..."
+      },
+      "pass": true,
+      "contributing": "## Build\n\n```sh\ngo build ./...\n```\n\n## Tests\n\n```sh\ngo test ./...\n```\n",
+      "argv": [
+        "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+        "--root",
+        "/tmp/dotrepo-go-context-amendment-review-fvrvw3yz/40",
+        "import",
+        "--mode",
+        "overlay",
+        "--source",
+        "https://example.test/review"
+      ],
+      "exitCode": 0,
+      "stdout": "imported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/40/record.toml\nimported /tmp/dotrepo-go-context-amendment-review-fvrvw3yz/40/evidence.md\n- imported from: README.md, CONTRIBUTING.md, go.mod\n- inferred defaults: repo.description\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "evidence": "# Evidence\n\n- Imported repository name from README.md.\n- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.\n- Imported repo.build from CONTRIBUTING.md as `go build ./...`.\n- Imported repo.test from CONTRIBUTING.md as `go test ./...`.\n- Imported repo.toolchain.min from go.mod as `1.23` (Go).\n- This is an overlay record, not a maintainer-controlled canonical record.\n"
+    }
+  ]
+}

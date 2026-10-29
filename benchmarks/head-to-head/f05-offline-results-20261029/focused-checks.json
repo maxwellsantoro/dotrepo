@@ -1,0 +1,43 @@
+{
+  "identity": "focused-static-results-checks",
+  "checkedAt": "2026-10-29T07:41:46.866246+00:00",
+  "checks": [
+    {
+      "argv": [
+        "uv",
+        "run",
+        "ruff",
+        "check",
+        "--no-cache",
+        "benchmarks/head-to-head/f05-offline-results-20261029"
+      ],
+      "exitCode": 0
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "ruff",
+        "format",
+        "--check",
+        "--no-cache",
+        "benchmarks/head-to-head/f05-offline-results-20261029"
+      ],
+      "exitCode": 0
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-sync",
+        "python",
+        "benchmarks/head-to-head/f05-offline-results-20261029/verify.py",
+        "--output",
+        "benchmarks/head-to-head/f05-offline-results-20261029/checks.json"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "upstreamOrDockerOrProviderCalls": 0
+}

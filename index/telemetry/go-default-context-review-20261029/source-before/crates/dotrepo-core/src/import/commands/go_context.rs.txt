@@ -1,0 +1,279 @@
+//! Refuse conventional Go scalars when acquired CI exposes unresolved scope/setup.
+//! This is a bounded workflow screen, not a YAML interpreter or execution proof.
+use super::super::types::{CommandSourceTier, ImportedCommandCandidate, ImportedFile};
+use super::extraction::extract_workflow_run_commands;
+
+#[derive(Default)]
+pub(super) struct GoContextGuard {
+    scoped: Vec<String>,
+    prepared_test: Vec<String>,
+}
+
+fn line(value: &str) -> Option<(usize, &str)> {
+    let text = value.trim();
+    let mut quote = None;
+    let mut escaped = false;
+    let mut end = text.len();
+    for (index, ch) in text.char_indices() {
+        if escaped {
+            escaped = false;
+            continue;
+        }
+        if quote == Some('"') && ch == '\\' {
+            escaped = true;
+            continue;
+        }
+        if matches!(ch, '\'' | '"') {
+            if quote == Some(ch) {
+                quote = None;
+            } else if quote.is_none() {
+                quote = Some(ch);
+            }
+        } else if ch == '#'
+            && quote.is_none()
+            && (index == 0 || text[..index].ends_with(char::is_whitespace))
+        {
+            end = index;
+            break;
+        }
+    }
+    let text = text[..end].trim_end();
+    (!text.is_empty() && !text.starts_with('#'))
+        .then(|| (value.len() - value.trim_start().len(), text))
+}
+
+fn nonroot_directory(lines: &[&str]) -> bool {
+    lines
+        .iter()
+        .filter_map(|value| line(value))
+        .any(|(_, text)| {
+            text.strip_prefix("- ")
+                .unwrap_or(text)
+                .strip_prefix("working-directory:")
+                .is_some_and(|path| {
+                    let path = path.trim().trim_matches(['\'', '"']);
+                    !matches!(path, "." | "./")
+                })
+        })
+}
+
+fn go_task(command: &str) -> Option<bool> {
+    let tokens = command.split_whitespace().collect::<Vec<_>>();
+    if matches!(tokens.first(), Some(&"#" | &"echo" | &"printf")) {
+        return None;
+    }
+    tokens.iter().enumerate().find_map(|(index, token)| {
+        if *token != "go" {
+            return None;
+        }
+        let offset = if tokens.get(index + 1) == Some(&"-C") {
+            3
+        } else if tokens
+            .get(index + 1)
+            .is_some_and(|token| token.starts_with("-C="))
+        {
+            2
+        } else {
+            1
+        };
+        match tokens.get(index + offset) {
+            Some(&"build") => Some(true),
+            Some(&"test") => Some(false),
+            _ => None,
+        }
+    })
+}
+
+fn go_nonroot_flag(command: &str) -> bool {
+    let tokens = command.split_whitespace().collect::<Vec<_>>();
+    tokens
+        .windows(2)
+        .any(|pair| pair[0] == "-C" && !matches!(pair[1], "." | "./"))
+        || tokens.iter().any(|token| {
+            token
+                .strip_prefix("-C=")
+                .is_some_and(|path| !matches!(path, "." | "./"))
+        })
+}
+
+fn service_setup(lines: &[&str], prefix: &[&str]) -> bool {
+    let property_indent = prefix
+        .first()
+        .and_then(|value| line(value))
+        .map(|(indent, _)| indent + 2);
+    if prefix
+        .iter()
+        .filter_map(|value| line(value))
+        .any(|(indent, text)| {
+            Some(indent) == property_indent
+                && text
+                    .strip_prefix("services:")
+                    .is_some_and(|value| value.trim() != "{}")
+        })
+    {
+        return true;
+    }
+    let action_setup = lines
+        .iter()
+        .filter_map(|value| line(value))
+        .any(|(_, text)| {
+            let text = text.strip_prefix("- ").unwrap_or(text);
+            let Some(action) = text.strip_prefix("uses:") else {
+                return false;
+            };
+            let action = action.trim().to_ascii_lowercase();
+            [
+                "redis", "postgres", "mysql", "mariadb", "mongodb", "rabbitmq", "kafka",
+            ]
+            .iter()
+            .any(|service| action.contains(&format!("setup-{service}")))
+        });
+    action_setup
+        || extract_workflow_run_commands(&lines.join("\n"))
+            .iter()
+            .any(|command| {
+                let command = command
+                    .trim()
+                    .strip_prefix("sudo ")
+                    .unwrap_or(command.trim());
+                command.starts_with("redis-server ")
+                    || command == "redis-server"
+                    || ((command.starts_with("apt-get install ")
+                        || command.starts_with("apt install ")
+                        || command.starts_with("brew install "))
+                        && command
+                            .split_whitespace()
+                            .any(|token| matches!(token, "redis" | "redis-server")))
+            })
+}
+
+impl GoContextGuard {
+    pub(super) fn inspect(workflows: &[ImportedFile]) -> Self {
+        let mut guard = Self::default();
+        for file in workflows {
+            let lines = file.contents.lines().collect::<Vec<_>>();
+            let Some(jobs) = lines
+                .iter()
+                .position(|value| line(value) == Some((0, "jobs:")))
+            else {
+                continue;
+            };
+            let end = (jobs + 1..lines.len())
+                .find(|&i| line(lines[i]).is_some_and(|(indent, _)| indent == 0))
+                .unwrap_or(lines.len());
+            let Some(job_indent) = lines[jobs + 1..end]
+                .iter()
+                .filter_map(|value| line(value))
+                .map(|(indent, _)| indent)
+                .min()
+            else {
+                continue;
+            };
+            let starts = (jobs + 1..end)
+                .filter(|&i| {
+                    line(lines[i])
+                        .is_some_and(|(indent, text)| indent == job_indent && text.ends_with(':'))
+                })
+                .collect::<Vec<_>>();
+            for (number, &start) in starts.iter().enumerate() {
+                let stop = starts.get(number + 1).copied().unwrap_or(end);
+                let job = &lines[start..stop];
+                let Some(steps) = job
+                    .iter()
+                    .position(|value| line(value).is_some_and(|(_, text)| text == "steps:"))
+                else {
+                    continue;
+                };
+                let prefix = &job[..steps];
+                let prepared = service_setup(job, prefix);
+                let default_nonroot =
+                    nonroot_directory(&lines[..jobs]) || nonroot_directory(prefix);
+                let Some(step_indent) = job[steps + 1..]
+                    .iter()
+                    .filter_map(|value| line(value))
+                    .filter(|(_, text)| text.starts_with('-'))
+                    .map(|(indent, _)| indent)
+                    .min()
+                else {
+                    continue;
+                };
+                let step_starts = (steps + 1..job.len())
+                    .filter(|&i| {
+                        line(job[i]).is_some_and(|(indent, text)| {
+                            indent == step_indent && text.starts_with('-')
+                        })
+                    })
+                    .collect::<Vec<_>>();
+                for (number, &step_start) in step_starts.iter().enumerate() {
+                    let step_stop = step_starts.get(number + 1).copied().unwrap_or(job.len());
+                    let step = &job[step_start..step_stop];
+                    let mut nonroot = default_nonroot || nonroot_directory(step);
+                    for command in extract_workflow_run_commands(&step.join("\n")) {
+                        if let Some(path) = command.trim().strip_prefix("cd ") {
+                            // cd . does not undo an earlier directory change.
+                            nonroot |= !matches!(path.trim().trim_matches(['\'', '"']), "." | "./");
+                        }
+                        if let Some(build) = go_task(&command) {
+                            let nonroot = nonroot || go_nonroot_flag(&command);
+                            if nonroot && !guard.scoped.contains(&file.path) {
+                                guard.scoped.push(file.path.clone());
+                            }
+                            if !build
+                                && !nonroot
+                                && prepared
+                                && !guard.prepared_test.contains(&file.path)
+                            {
+                                guard.prepared_test.push(file.path.clone());
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        guard
+    }
+
+    /// Preserve original candidates for unresolved scoring; gate only scalar selection.
+    pub(super) fn selection_candidates(
+        &self,
+        candidates: &[ImportedCommandCandidate],
+    ) -> (Vec<ImportedCommandCandidate>, [bool; 2]) {
+        let mut filtered = candidates.to_vec();
+        let mut blocked = [false; 2];
+        for candidate in &mut filtered {
+            if !matches!(
+                candidate.source_tier,
+                CommandSourceTier::Workflow | CommandSourceTier::EcosystemDefault
+            ) {
+                continue;
+            }
+            for (index, value) in [&mut candidate.build, &mut candidate.test]
+                .into_iter()
+                .enumerate()
+            {
+                if value
+                    .as_deref()
+                    .is_some_and(|command| go_task(command).is_some())
+                    && (!self.scoped.is_empty() || (index == 1 && !self.prepared_test.is_empty()))
+                {
+                    *value = None;
+                    blocked[index] = true;
+                }
+            }
+        }
+        (filtered, blocked)
+    }
+
+    pub(super) fn reason(&self, test: bool) -> String {
+        if !self.scoped.is_empty() {
+            format!("Go workflow component scope is unresolved in `{}`; a conventional root module command cannot establish repository coverage", self.scoped.join("`, `"))
+        } else if test {
+            format!("Go test workflow setup is unresolved in `{}`; the same job declares an external service prerequisite", self.prepared_test.join("`, `"))
+        } else {
+            unreachable!("build guard requires scoped Go workflow evidence")
+        }
+    }
+}
+
+#[cfg(test)]
+mod tests;

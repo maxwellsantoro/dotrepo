@@ -1,0 +1,66 @@
+{
+  "state": "source-only proposal; no preparation or native attempt authorized or executed",
+  "task": {
+    "id": "go-01",
+    "repository": "github.com/microsoft/TypeScript",
+    "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+    "scope": "repository-default test outcome",
+    "startingState": "pre-clone",
+    "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+    "sourceInventorySha256": "96c935c31228fa8e05bb836a93257beeb87ac524e5eb30cdde3c546a1ea4be0e",
+    "sourceCommand": "npx hereby test",
+    "frozenPriorInstrumentedCommand": "GOTESTSUM_JSONFILE=/workspace/go-test-events.jsonl GOFLAGS=\"-p=1 -count=1\" npx hereby test",
+    "cwd": "/workspace/repository",
+    "defaultTaskChain": ["Hereby test alias", "test:tsc", "runTests", "source-owned gotestsum tool", "Go test ./... from tsc module"],
+    "excludedFromRequestedDefaultBySource": ["test:all extension, benchmark, tools and API tasks", "opt-in test:codegen"],
+    "priorOutcome": "unknown; both retained attempts incomplete before full wrapper execution"
+  },
+  "candidateEpoch": {
+    "requiresCoordinatorDecision": true,
+    "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+    "platform": "Linux ARM64 only",
+    "unchangedResourceBounds": {"cpus": 3, "memoryBytes": 4294967296, "memorySwapBytes": 4294967296, "pids": 256, "workspaceTmpfsBytes": 8589934592},
+    "changedResourceCondition": {"oldTMPDIR": "/tmp", "oldTmpfsBytes": 536870912, "proposedTMPDIR": "/workspace/tmp", "reason": "move Go temporary compilation files into existing bounded workspace; no larger outer memory/CPU/VM allocation"},
+    "memoryLimitation": "Workspace is tmpfs: logical 8GiB path quota does not add physical RAM or bypass 4GiB cgroup accounting; source, dependency cache, extracted dependencies, build cache and temporary builds compete for that bound. OOM remains possible.",
+    "otherNewConditions": ["source-free common image replaces prior Node/Go image; retained Node/npm/Go versions match", "separately prepared/audited reusable download cache replaces in-attempt online setup; cache starts fresh per future session"],
+    "resourceEnvironment": {"GOGC": "50", "GOFLAGS": "-p=1 -count=1", "GOMAXPROCS": "3", "TMPDIR": "/workspace/tmp", "GOTOOLCHAIN": "local", "GOENV": "off"},
+    "scopeEnvironmentConstraints": ["No tests/-run filter, no test:all substitution", "Unset CI/TF_BUILD, RACE, NOEMBED, COVERAGE, CONCURRENT_TEST_PROGRAMS, FORCE and unrelated inherited Go/test flags unless an explicit new frozen policy chooses otherwise", "Keep source default embedding and tags; no source/generation edits, no manually supplied gotestsum binary", "Keep nonroot/read-only root/cap-drop/no-new-privileges, no host mounts/socket/credentials, network none throughout source execution"],
+    "executionBudgetDecisionPending": "Source-only proposal does not authorize or enlarge the prior 1200-second collection-plus-test cap; coordinator must freeze the next accepted-attempt timing/resource/output bounds before running. Retain partial/failure receipts on any cap."
+  },
+  "downloadOnlyPreparation": {
+    "authorized": false,
+    "maxSeconds": 900,
+    "maxExpandedCacheBytes": 1073741824,
+    "maxPlainTarBytes": 536870912,
+    "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+    "source": "already acquired exact archive; no new source fetch or reenrollment",
+    "environment": {"HOME": "/workspace/home", "TMPDIR": "/workspace/tmp", "GOPATH": "/workspace/dependency-cache/go", "GOCACHE": "/workspace/go-build", "GOTOOLCHAIN": "local", "GOENV": "off", "NPM_CONFIG_CACHE": "/workspace/dependency-cache/npm-cache", "NPM_CONFIG_USERCONFIG": "/dev/null", "NPM_CONFIG_REGISTRY": "https://registry.npmjs.org", "NPM_CONFIG_AUDIT": "false", "NPM_CONFIG_FUND": "false", "GOPROXY": "https://proxy.golang.org", "GOSUMDB": "sum.golang.org"},
+    "commandsInOrder": [
+      {"cwd": "/workspace/repository", "command": "npm ci --ignore-scripts", "purpose": "populate locked npm content cache only; online lifecycle/source scripts disabled"},
+      {"cwd": "/workspace/repository/tsc", "command": "go mod download", "purpose": "populate source dependencies without compilation/test"},
+      {"cwd": "/workspace/repository/tools", "command": "go mod download", "purpose": "populate source-owned gotestsum tool dependencies without go install/build"}
+    ],
+    "exportOnlyRoots": ["npm-cache/_cacache", "go/pkg/mod"],
+    "excluded": ["checkout/source archive and generated Git metadata", "checkout node_modules and npm workspace links", "Go build/test cache, executables, tools/gotestsum and its hash", "logs, credentials, npm user config, shell histories, task gold/oracles/profiles"],
+    "stopPolicy": "One bounded preparation attempt only after explicit authorization. Continuously enforce deadline/expanded-size and stream-export tar-size caps; refuse non-regular members, unsafe paths, alias matches or incomplete exports. Retain the failure and measured effort; no silent pruning, package selection or quota increase.",
+    "requiredBindings": ["exact image/source/archive/member modes and hashes", "exact plan/script closure/native package manager versions", "all command exit/error/timing/transfer/output receipts", "complete regular-file cache inventory and archive transport hash", "npm lock integrity and Go zip/go.mod h1 audit", "raw/canonical protected-content and source-alias review with explicit legitimate overlaps", "cleanup and owned-container absence", "unknown dollar cost retained null with exclusions"],
+    "flags": {"downloadOnly": false, "buildOutputsExcluded": false, "taskSourceExcluded": false, "credentialsExcluded": false},
+    "flagsMeaning": "All false because no preparation/audit has occurred; no descriptor or runtime admission is changed."
+  },
+  "offlineSetupPrerequisites": [
+    "Verify actual common-image Node24.22.2/npm11.19.1/Go1.27.3 identities against retained receipts; packageManager requires npm11.19.1, Node24 contributor guidance, Go1.27 and Git. Volta pins Node24.20.0 while prior/common image uses24.22.2: supported version-family alternative, not byte-identical Volta environment.",
+    "Restore npm dependencies from cache with a frozen offline normal npm ci policy, allowing source-declared/manager-approved lifecycle behavior offline; alternatively require an explicit source-bound hook-equivalence adjudication before continuing with --ignore-scripts. Three lock entries have install scripts; root/workspace scripts themselves have no install/prepare lifecycle hooks. No hook omission is silently deemed equivalent.",
+    "Actual wrapper compiles/installs gotestsum offline via go install from tools module; tools source/cache completeness must support this phase. No prebuilt task-specific tool enters the cache.",
+    "Full source is regular-only and contains committed test/fixture bytes. No blanket generation command is required by testTsc task dependencies; test:all/build/generate may add unrelated work and network paths. Imported helper initialization/offline dependency closure is still tested by actual wrapper, not proven by the static task graph.",
+    "A successful old npm/go download phase and ~171MB interface receive counters suggest feasibility but do not bound exported/expanded cache size or prove offline completeness."
+  ],
+  "oraclePrerequisites": [
+    "Freeze a new task-specific oracle and source-supported skip/exclusion policy before any native attempt, preserving old oracle and failures unchanged.",
+    "Obtain complete successful native collection under the exact same source/platform/tag/environment as execution: prior cd tsc && go test -json -list . ./... did not complete. Bind full intended package set (including zero-test packages), top-level test/example/fuzz-seed identities and collection exit/errors. Static lexical counts are diagnostic only.",
+    "Observe full npx hereby test wrapper and raw GOTESTSUM_JSONFILE events, including all nested test run/pass/fail/skip actions, complete package terminal states and wrapper exit/errors. Wrapper hides skipped summary text, so console green/summary alone is insufficient.",
+    "Every active intended top-level test must run and terminate pass/fail; unexpected skips at any depth, missing package/test events, wrong scope, listing-only/zero-test stand-ins, collection/setup/tool compile errors, OOM/timeout/truncation and changed tracked bytes are noncompletion/unresolved.",
+    "Source-authored disabled identities and platform/capability conditions require exact identity/reason/source bindings in an approved pre-execution exclusion list. known-disabled-candidates.json contains377 lexical known-failing fourslash candidates, not a complete or approved skip policy; replay default, fuzz-seed predicates and fswatch capability conditions require separate disposition. Never claim excluded behavior was exercised.",
+    "Complete assertion failures can be a valid observed default-command outcome when all required active coverage is terminal and no setup/resource failure remains; record testsPassed=false separately. Full passing outcome requires appropriate zero wrapper exit plus complete active coverage and declared exclusions."
+  ],
+  "qualification": {"cacheQualified": false, "environmentQualified": false, "taskOutcomeObserved": false, "consumerBenefitClaim": false, "campaignExecuted": false, "modelCalls": 0, "newNetworkCalls": 0, "newDaemonCalls": 0}
+}

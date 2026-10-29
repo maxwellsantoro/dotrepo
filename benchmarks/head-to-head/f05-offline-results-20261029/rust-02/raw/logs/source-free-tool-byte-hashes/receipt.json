@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-f05-offline-rust-02-38781c3168",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "cd /workspace/repository; rust_root=$(rustc --print sysroot); sha256sum \"$rust_root/bin/rustc\" \"$rust_root/bin/cargo\" /usr/local/bin/node /usr/local/bin/uv /usr/local/go/bin/go /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/lib/node_modules/npm/package.json"
+  ],
+  "startedAt": "2026-10-29T07:35:02.755071+00:00",
+  "elapsedSeconds": 0.9800950831267983,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "2ebb15980e7c21bc53f0e6edf8933fa2dafef4dac2768a29414f6d9f33eb9c7e",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

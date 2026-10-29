@@ -1,0 +1,221 @@
+{
+  "identity": "three-known-scopes-offline-requalification-actual-v1",
+  "reportedAt": "2026-10-29T07:38:35.724329+00:00",
+  "beforeSha256": "ebe024b00217a705ca8425dda1ab6ed01a86be4fc88b9a92fca589214cc27ff6",
+  "planSha256": "2d44b468d8954b42210cce44ae12c2571a835b8a89154d585a20f4cdbbce90e6",
+  "driverSha256": "bf24973c7fede7d1d379de4cf740f0bba815fcfb580a13f9c29b270def0e4c6d",
+  "oracleSha256": "668242c28d89556d4e23eea384fe418b04ed5f4d26bfd3126298f1a4186db57f",
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "tasks": [
+    {
+      "taskId": "rust-02",
+      "repository": "github.com/GyulyVGC/sniffnet",
+      "revision": "ab4bf739d46448436cb68933bb8260ee264449d5",
+      "scope": "component",
+      "component": "lib/sniffnet-packet-parser",
+      "attempts": 1,
+      "state": "offline-outcome-observed-pending-independent-review",
+      "taskOutcomeObserved": true,
+      "testsPassed": true,
+      "nativeExitCode": 0,
+      "nativeError": null,
+      "oracle": {
+        "qualified": true,
+        "reason": "units and zero-case default doc phase terminal",
+        "processExitCode": 0,
+        "processError": null,
+        "phaseCoverageComplete": true,
+        "unitPhase": {
+          "terminal": true,
+          "exercised": true,
+          "status": "ok",
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0,
+          "measured": 0,
+          "filtered": 0,
+          "cases": [
+            "link_type::tests::test_link_type_from_pcap_supported",
+            "link_type::tests::test_link_type_from_pcap_unsupported"
+          ],
+          "expectedCaseIds": [
+            "link_type::tests::test_link_type_from_pcap_supported",
+            "link_type::tests::test_link_type_from_pcap_unsupported"
+          ]
+        },
+        "docPhase": {
+          "state": "zero-case-phase-terminal",
+          "exercised": true,
+          "terminal": true,
+          "testCases": 0
+        },
+        "summaries": [
+          {
+            "status": "ok",
+            "passed": 2,
+            "failed": 0,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0
+          },
+          {
+            "status": "ok",
+            "passed": 0,
+            "failed": 0,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0
+          }
+        ],
+        "unitMarkerCount": 1,
+        "docMarkerCount": 1,
+        "unitMarkerObserved": true,
+        "docMarkerObserved": true,
+        "unexpectedFailureDiagnostics": []
+      },
+      "preflightSeconds": 1.6114997919648886,
+      "offlineSetupSeconds": 0.7919015409424901,
+      "nativeDiscoverySeconds": null,
+      "nativeTestsSeconds": 6.0606139581650496,
+      "driverWorkSeconds": 22.31162108411081,
+      "cleanupSeconds": 0.33547445805743337,
+      "driverElapsedSeconds": 22.647097167093307,
+      "metadataVerification": {
+        "state": "passed",
+        "elapsedSeconds": 0.018155166879296303,
+        "outsideTaskDeadline": true,
+        "planSha256": "2d44b468d8954b42210cce44ae12c2571a835b8a89154d585a20f4cdbbce90e6"
+      },
+      "totalMeasuredOperatorSeconds": 22.665252333972603,
+      "outerInvocationSeconds": 22.747731167124584,
+      "trackedSourceIntact": true,
+      "ownedContainer": "dotrepo-f05-offline-rust-02-38781c3168",
+      "independentPostCleanupAbsence": true,
+      "sourceArchiveSha256": "862b159c55ee7693faed80c2546aa203cc370e867cf5a206cff5356ab66766d6",
+      "cacheArchiveSha256": "f8ca1fccc8792cc5eb34aad37640268ab339d852de15b10a3cf1d5bcaf5296a8",
+      "resultSha256": "853bc58b6210db1b78c7afc3a664ee82ad80231291f86b15bf4b2923483b801d",
+      "costUsd": null
+    },
+    {
+      "taskId": "typescript-02",
+      "repository": "github.com/OpenHands/OpenHands",
+      "revision": "2875056f93d6eebcd887f64ae557258a7b0b0108",
+      "scope": "component",
+      "component": "bin",
+      "attempts": 1,
+      "state": "offline-outcome-observed-pending-independent-review",
+      "taskOutcomeObserved": true,
+      "testsPassed": true,
+      "nativeExitCode": 0,
+      "nativeError": null,
+      "oracle": {
+        "qualified": true,
+        "reason": "entire launcher suite executed",
+        "expectedTests": [
+          "does not require build/ in --backend-only mode",
+          "shows usage info in --help output"
+        ],
+        "observedTests": [
+          "does not require build/ in --backend-only mode",
+          "shows usage info in --help output"
+        ]
+      },
+      "preflightSeconds": 0.5980951669625938,
+      "offlineSetupSeconds": 28.252802750095725,
+      "nativeDiscoverySeconds": null,
+      "nativeTestsSeconds": 3.298096084035933,
+      "driverWorkSeconds": 39.40223825001158,
+      "cleanupSeconds": 1.6589599999133497,
+      "driverElapsedSeconds": 41.061200332827866,
+      "metadataVerification": {
+        "state": "passed",
+        "elapsedSeconds": 0.02158649987541139,
+        "outsideTaskDeadline": true,
+        "planSha256": "2d44b468d8954b42210cce44ae12c2571a835b8a89154d585a20f4cdbbce90e6"
+      },
+      "totalMeasuredOperatorSeconds": 41.08278683270328,
+      "outerInvocationSeconds": 41.214699167059734,
+      "trackedSourceIntact": true,
+      "ownedContainer": "dotrepo-f05-offline-typescript-02-42be4a14b4",
+      "independentPostCleanupAbsence": true,
+      "sourceArchiveSha256": "818bf33ece0979d198ed6a11daa3e6b838cc4aefba8c3a381c86e8ce2e706f41",
+      "cacheArchiveSha256": "84cfa62ad220509ff1027f2a4e97b88885dbcb4c28bdfe59b620a70224d530dc",
+      "resultSha256": "0bce0eeed97c4ed8e5a8df0bd7953e0bab98e30896dcc04341d8fc597d4cd3d9",
+      "costUsd": null
+    },
+    {
+      "taskId": "go-03",
+      "repository": "github.com/hashicorp/vault",
+      "revision": "352089582444ea84feb03bc97eda97b35729e8ec",
+      "scope": "component",
+      "component": "api",
+      "attempts": 1,
+      "state": "offline-outcome-observed-pending-independent-review",
+      "taskOutcomeObserved": true,
+      "testsPassed": true,
+      "nativeExitCode": 0,
+      "nativeError": null,
+      "oracle": {
+        "qualified": true,
+        "reason": "complete native events",
+        "expectedTopLevelTests": 93,
+        "ranTopLevelTests": 93,
+        "missingTests": [],
+        "skippedTests": [],
+        "packages": [
+          "github.com/hashicorp/vault/api",
+          "github.com/hashicorp/vault/api/cliconfig",
+          "github.com/hashicorp/vault/api/tokenhelper"
+        ],
+        "endedPackages": [
+          "github.com/hashicorp/vault/api",
+          "github.com/hashicorp/vault/api/cliconfig",
+          "github.com/hashicorp/vault/api/tokenhelper"
+        ]
+      },
+      "preflightSeconds": 0.9548558748792857,
+      "offlineSetupSeconds": 0.07330520893447101,
+      "nativeDiscoverySeconds": 18.150113249896094,
+      "nativeTestsSeconds": 72.12953316606581,
+      "driverWorkSeconds": 99.5553586250171,
+      "cleanupSeconds": 0.3989421669393778,
+      "driverElapsedSeconds": 99.95430262479931,
+      "metadataVerification": {
+        "state": "passed",
+        "elapsedSeconds": 0.06754016713239253,
+        "outsideTaskDeadline": true,
+        "planSha256": "2d44b468d8954b42210cce44ae12c2571a835b8a89154d585a20f4cdbbce90e6"
+      },
+      "totalMeasuredOperatorSeconds": 100.0218427919317,
+      "outerInvocationSeconds": 100.33771141595207,
+      "trackedSourceIntact": true,
+      "ownedContainer": "dotrepo-f05-offline-go-03-eb2c6841d4",
+      "independentPostCleanupAbsence": true,
+      "sourceArchiveSha256": "cc7b18c67ce11698d79bfee35fe7afa7f7c8f0ea0dccbdaefd8836cde49f3ba2",
+      "cacheArchiveSha256": "fc8de794f4f9338fcb8be7cc0c4ef8f1a7e736e61b3a4a6bcdb3917cfb7176b8",
+      "resultSha256": "36e0e95ed6057be464d3d91c86bd866bd2a0fac5beefa94cfff2dd0104466ae0",
+      "costUsd": null
+    }
+  ],
+  "verifiedCommandReceipts": 60,
+  "scope": "Three previously successful native scopes on common image/frozen warm caches; one actual serialized attempt each, independently reviewed before and subject to independent result review.",
+  "actualTaskAttempts": 3,
+  "retried": false,
+  "codeCommandsInputsResourcesChanged": false,
+  "all12EnvironmentQualified": false,
+  "agentCampaignExecuted": false,
+  "modelCalls": 0,
+  "indexConsulted": false,
+  "vmChanged": false,
+  "costUsd": null,
+  "costExclusions": [
+    "Host/container dollar meter unavailable; external image/cache preparation retained separately, not charged zero."
+  ],
+  "limits": [
+    "Operator execution qualification, not autonomous72session campaign or consumerbenefit evidence.",
+    "Other9task environments remain unqualified by this packet.",
+    "Npm offline --ignore-scripts setup does not establish ordinary npmci/hook equivalence.",
+    "Source archives do not fabricate Git checkout metadata.",
+    "Zero-case Rust doc phase is process-phase completion, not exercised documentation behavior."
+  ]
+}

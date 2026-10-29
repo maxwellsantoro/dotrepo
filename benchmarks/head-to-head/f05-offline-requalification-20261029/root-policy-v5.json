@@ -1,0 +1,31 @@
+{
+  "identity": "strict-case-identity-successor-to-root-approved-default-phase-policy",
+  "priorPolicySha256": "a64064afdf2da04c1ca37c25d2d639971eb2d3d1b2360d4aa418e77ede81a8ba",
+  "state": "same approved defaultoutcome policy; exactcaseidentity defect corrected within originalscope",
+  "policy": {
+    "unitAssertionFailureStopsDefault": true,
+    "unitCases": 2,
+    "successDocPhaseCases": 0,
+    "assertionFailureExitCode": 101,
+    "requiresOrdinaryLibFailureDiagnostic": true,
+    "compilerSetupUnknownDiagnosticsAreNoncompletion": true,
+    "defaultStopDocPhase": "unexecuted-default-stop; not exercised and not completephasecoverage",
+    "authority": "Coordinator approved bounded default-command outcome semantics before any native attempt; originalrequest asks obtain component test outcome.",
+    "sourceEvidence": [
+      "source-bindings-v4/original-rust-request.md",
+      "source-bindings-v4/historical-rust-stdout.txt",
+      "source-bindings-v4/historical-rust-stderr.txt",
+      "source-bindings-v4/parser-manifest.toml",
+      "source-bindings-v4/logs/cargo-test-help/stdout.txt"
+    ],
+    "behaviorLimit": "A completed default command outcome does not establish all behavior branches, passing tests or an exercised doc phase when defaultstop occurs.",
+    "expectedUnitCaseIds": [
+      "link_type::tests::test_link_type_from_pcap_supported",
+      "link_type::tests::test_link_type_from_pcap_unsupported"
+    ],
+    "identityRule": "Exact full retained native case IDs and cardinality; suffix/basename/prefix matches cannot establish coverage."
+  },
+  "liveRunAuthorized": false,
+  "cacheOrImageQualified": false,
+  "scopeCommandsResourcesChanged": false
+}

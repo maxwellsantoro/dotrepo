@@ -11,6 +11,7 @@ use super::types::{ImportSources, ImportedCommandMetadata, ImportedFile};
 
 mod context;
 mod extraction;
+mod go_context;
 mod policy;
 mod scope;
 
@@ -576,8 +577,10 @@ pub(crate) fn infer_imported_commands(sources: &ImportSources) -> ImportedComman
         }
     }
 
+    let go_guard = go_context::GoContextGuard::inspect(sources.workflow_files);
+    let (selection_candidates, blocked) = go_guard.selection_candidates(&candidates);
     metadata.build = resolve_command_field(
-        &candidates,
+        &selection_candidates,
         "repo.build",
         true,
         &mut metadata.notes,
@@ -585,13 +588,30 @@ pub(crate) fn infer_imported_commands(sources: &ImportSources) -> ImportedComman
         &mut metadata.inferred_fields,
     );
     metadata.test = resolve_command_field(
-        &candidates,
+        &selection_candidates,
         "repo.test",
         false,
         &mut metadata.notes,
         &mut metadata.evidence_bullets,
         &mut metadata.inferred_fields,
     );
+    for (index, (field, selected)) in [
+        ("repo.build", &metadata.build),
+        ("repo.test", &metadata.test),
+    ]
+    .into_iter()
+    .enumerate()
+    {
+        if blocked[index] && selected.is_none() {
+            metadata.blocked_scalar_fields.push(field.to_owned());
+            let note = format!(
+                "Left `{field}` unset because {}.",
+                go_guard.reason(index == 1)
+            );
+            metadata.notes.push(note.clone());
+            metadata.evidence_bullets.push(note);
+        }
+    }
     metadata.candidates = candidates;
     metadata
 }

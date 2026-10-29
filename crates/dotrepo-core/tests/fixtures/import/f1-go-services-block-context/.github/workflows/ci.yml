@@ -1,0 +1,7 @@
+jobs:
+  test:
+    services:
+      redis:
+        image: redis:7
+    steps:
+      - run: go test -race ./...

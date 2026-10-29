@@ -609,6 +609,7 @@ pub fn import_repository_with_options(
         imported_sources,
         inferred_fields,
         command_candidates: ImportCommandCandidates {
+            blocked_scalar_fields: imported_commands.blocked_scalar_fields.clone(),
             candidates: imported_commands
                 .candidates
                 .iter()

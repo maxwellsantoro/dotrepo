@@ -1,0 +1,44 @@
+{
+  "identity": "independent-go-context-amendment-1-review-20261029",
+  "sourceBindingsSha256": "915edafc06a3a88f94af1fa286343183336c1f9de96418b574a451a36e91a7f0",
+  "cliSha256": "42a9f9ed07ecf1b7662e1de2b0edfef257c08e128ec96b4d2684a1597ba7db35",
+  "remainingActionableFindings": 0,
+  "upstreamCodeExecuted": false,
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 4126,
+      "sha256": "741e0ad753542ea3581ae7adae977fac944a680e9a3db5077b282ed1fc1b4db5"
+    },
+    {
+      "path": "checks.json",
+      "bytes": 1385,
+      "sha256": "ecf79e12cfe2d3dc144d25827f07b78c5044b07f372f98ce1e059ca78d73a537"
+    },
+    {
+      "path": "cli-controls.json",
+      "bytes": 67199,
+      "sha256": "abf8ac0e65fb57380a52fd704ed47892ebd2b46ab7a3db783238a1d5afbd8fa2"
+    },
+    {
+      "path": "cli_controls.py",
+      "bytes": 8716,
+      "sha256": "a640a82f0f861efde44a6c751f85c0f2b9cecd745f64464bf987b32a5bbb1fb5"
+    },
+    {
+      "path": "focused-tests.log",
+      "bytes": 36240,
+      "sha256": "778bf650ef7e427795c5128970749aca7d7e3d4bc418c3e1262256d1881f0be7"
+    },
+    {
+      "path": "original-case-retest.json",
+      "bytes": 16186,
+      "sha256": "03a168f593225a35fe6cc4dbb0a5b04dc2cd0c95052d4d2bb57d8a53a7a61b5d"
+    },
+    {
+      "path": "original_case_retest.py",
+      "bytes": 3379,
+      "sha256": "fccb150f951213aa1923e331aa36807ead9cbc8505d6694f4185387623e49585"
+    }
+  ]
+}

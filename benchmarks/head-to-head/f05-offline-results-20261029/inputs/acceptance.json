@@ -1,0 +1,28 @@
+{
+  "state": "accepted-for-three-scope-offline-requalification",
+  "authority": "coordinator /root",
+  "planSha256": "2d44b468d8954b42210cce44ae12c2571a835b8a89154d585a20f4cdbbce90e6",
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "cacheAudits": {
+    "rust-02": {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-acceptance-20261029/rust-02-cache-audit.json",
+      "sha256": "493a926abce0e1f25d696eee1b62cca1a4823cb367452c0a854016228f16dc75"
+    },
+    "typescript-02": {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-acceptance-20261029/typescript-02-cache-audit.json",
+      "sha256": "8e8c96f4cb0dd175ebdb06b0610182d3f74d304b16396875fd76dab231bd1ebf"
+    },
+    "go-03": {
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-offline-acceptance-20261029/go-03-cache-audit.json",
+      "sha256": "a60bd4aeff95179e14ae5951d8c6c941090ec5a928c19b51af1541fd0a7daf96"
+    }
+  },
+  "allowedTasks": [
+    "rust-02",
+    "typescript-02",
+    "go-03"
+  ],
+  "execution": "One serialized attempt per task under frozen v5 command/isolation/deadline; retain every failure and cleanup result. No retry, scope, source, package, network, model, VM or resource change.",
+  "paidCampaignAuthorized": false,
+  "reviewedPolicy": "Normal Rust success includes exact two unit cases and zero-test doc phase. Approved complete unit-assertion default-stop records docs unexecuted; later compile/setup failure cannot qualify."
+}

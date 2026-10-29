@@ -1,0 +1,118 @@
+{
+  "schema": "dotrepo-go-context-association-amendment/v1",
+  "date": "2026-10-29",
+  "priorAuthorFreezeSha256": "ce4f4f75cdeec09fb083e7ebdfc4e9a1d005633dfe7100e64b695aee6c114e26",
+  "sourceBindingsSha256": "915edafc06a3a88f94af1fa286343183336c1f9de96418b574a451a36e91a7f0",
+  "newConfidenceOrStatus": false,
+  "upstreamExecution": false,
+  "networkCalls": 0,
+  "providerCalls": 0,
+  "indexWrites": 0,
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 5661,
+      "sha256": "27bf898c083a8cb114e0adf35be7cb8cad686faf063adeb1eeaf6f246ba8621f"
+    },
+    {
+      "path": "amendment.patch",
+      "bytes": 31190,
+      "sha256": "3088b1f8f01047587e129412dba7dc18c7a0ffb6d35a04c2ce1fdb71850a83da"
+    },
+    {
+      "path": "checks/dotrepo-go-default-context-amendment-1-cli-build-final.log",
+      "bytes": 266,
+      "sha256": "6bf79fd301e2517a20f9eda034ceafb61a29ce64c4b083d8a1431f524a6f5f95"
+    },
+    {
+      "path": "checks/dotrepo-go-default-context-amendment-1-cli-build.log",
+      "bytes": 266,
+      "sha256": "caef18873579452096a1a739ea83d6f580aadf7ab93e51887234eb50ea58542e"
+    },
+    {
+      "path": "checks/dotrepo-go-default-context-amendment-1-clippy-001.log",
+      "bytes": 170,
+      "sha256": "ea041cee44618f6f41769915c8362eb1a629eaeabfda34dd293716704a2bd03b"
+    },
+    {
+      "path": "checks/dotrepo-go-default-context-amendment-1-clippy-002.log",
+      "bytes": 170,
+      "sha256": "40e251fdcfbc6e6ffa019c76815c6775e37373e7b9c880f2d732e15037d887a8"
+    },
+    {
+      "path": "checks/dotrepo-go-default-context-amendment-1-clippy-003.log",
+      "bytes": 170,
+      "sha256": "799125143e788b073e1f0f112cd643109b7918893dda2c538d77fde19a1a5087"
+    },
+    {
+      "path": "checks/dotrepo-go-default-context-amendment-1-quality-001.log",
+      "bytes": 521,
+      "sha256": "fdb8862b15cdb19f54396458d86557aab3a7f01d42990fc7a88db36cdb6b52da"
+    },
+    {
+      "path": "checks/dotrepo-go-default-context-amendment-1-quality-002.log",
+      "bytes": 521,
+      "sha256": "a69a728c895c4a4139da21c05948c1e06bf78bc9b0f21571350c156c8f994121"
+    },
+    {
+      "path": "checks/dotrepo-go-default-context-amendment-1-tests-001.log",
+      "bytes": 847,
+      "sha256": "6e01d068fff837e2ceafc38df8f5553fded4fe61ec9f5524382637eb3de44d6f"
+    },
+    {
+      "path": "checks/dotrepo-go-default-context-amendment-1-tests-002.log",
+      "bytes": 29766,
+      "sha256": "46341adbe40a1b5600e52bd940848c3e096e65f09fe89bf9f421f8830aa78375"
+    },
+    {
+      "path": "checks/dotrepo-go-default-context-amendment-1-tests-003.log",
+      "bytes": 34820,
+      "sha256": "5908cbf492f6fa04fccd8645e486b8e043456bc38a37b9e7282cfd190e6a411f"
+    },
+    {
+      "path": "checks/dotrepo-go-default-context-amendment-1-tests-004.log",
+      "bytes": 31274,
+      "sha256": "2794118398b1c166891900e9d310d8ded43ea82d8c657a989393356ae4a65c37"
+    },
+    {
+      "path": "checks/dotrepo-go-default-context-amendment-1-tests-005.log",
+      "bytes": 36328,
+      "sha256": "da71cccbe77438fdcc257d205f881e97e5b5138aa7a980f51133c5afd19e5bf4"
+    },
+    {
+      "path": "checks/dotrepo-go-default-context-amendment-1-tests-006.log",
+      "bytes": 1805,
+      "sha256": "095001d45221dab9102c227f8f56dd2223591037cee1c641596c63939ff2a7e2"
+    },
+    {
+      "path": "checks/dotrepo-go-default-context-amendment-1-tests-007.log",
+      "bytes": 36328,
+      "sha256": "285aaa894c2ee3fcee769e208b1e78e88f5341ca80ad780e5fb6c7c039316069"
+    },
+    {
+      "path": "checks.json",
+      "bytes": 5904,
+      "sha256": "371b58958100301fb6a0bd69e0dab680a70a286f576619956e26764f84330928"
+    },
+    {
+      "path": "cli-controls.json",
+      "bytes": 16319,
+      "sha256": "3e0da90218d4c4df70bd2801181a70f3db664cc85e807d4c498b8933f3349948"
+    },
+    {
+      "path": "cli_controls.py",
+      "bytes": 3454,
+      "sha256": "46dc9ba1f3761eb7b9a402467142668548b0925d4e7323aa99066f15fd366e9f"
+    },
+    {
+      "path": "escalation-controls.json",
+      "bytes": 5885,
+      "sha256": "97aece8d020bf02d43534bfd89abf8de574d72a2a3422b8b6265d44042727e05"
+    },
+    {
+      "path": "source-bindings.json",
+      "bytes": 10033,
+      "sha256": "915edafc06a3a88f94af1fa286343183336c1f9de96418b574a451a36e91a7f0"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-f05-offline-typescript-02-42be4a14b4",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "cd /workspace/repository; PATH=/workspace/npm-tooling/node_modules/.bin:$PATH npm run test -- __tests__/bin/agent-canvas.test.ts --reporter=json --outputFile=/workspace/vitest.json"
+  ],
+  "startedAt": "2026-10-29T07:35:47.720335+00:00",
+  "elapsedSeconds": 3.298096084035933,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "4112ea92b8c5b9e247efa2f98c852c09a5144dbfb478c63db663d81a9b8abdae",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

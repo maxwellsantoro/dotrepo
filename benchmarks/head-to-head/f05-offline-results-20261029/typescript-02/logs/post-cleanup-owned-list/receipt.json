@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "docker",
+    "ps",
+    "-a",
+    "--filter",
+    "name=dotrepo-f05-offline-typescript-02-42be4a14b4",
+    "--format",
+    "{{.Names}} {{.Status}}"
+  ],
+  "startedAt": "2026-10-29T07:35:53.680010+00:00",
+  "elapsedSeconds": 0.10819741594605148,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

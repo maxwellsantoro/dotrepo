@@ -593,6 +593,14 @@ pub fn build_adjudication_requests(
         if !is_build && !is_test {
             continue;
         }
+        if plan
+            .command_candidates
+            .blocked_scalar_fields
+            .iter()
+            .any(|blocked| blocked == *field)
+        {
+            continue;
+        }
 
         let mut candidates = Vec::new();
         for candidate in &plan.command_candidates.candidates {

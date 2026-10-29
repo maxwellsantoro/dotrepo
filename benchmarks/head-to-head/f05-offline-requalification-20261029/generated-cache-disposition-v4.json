@@ -1,0 +1,30 @@
+{
+  "identity": "v4-generated-cache-inventory-disposition",
+  "checkedAt": "2026-10-29T07:27:05.511455+00:00",
+  "state": "historical manifest accidentally included volatile Ruff cache; original manifest/freeze preserved",
+  "originalManifestSha256": "93ae47c507af82d115e1d29ee196eca03e44638ceeb55d0968a9e3106f1b247e",
+  "entries": [
+    {
+      "path": ".ruff_cache/.gitignore",
+      "frozenSha256": "9e3a60f1e6ec4ae60215c11d54b171392745ec25e9dded433d5bd921363af316",
+      "observedSha256": "9e3a60f1e6ec4ae60215c11d54b171392745ec25e9dded433d5bd921363af316",
+      "changed": false
+    },
+    {
+      "path": ".ruff_cache/0.14.14/17153894268613294756",
+      "frozenSha256": "b33fd4de79f462840970de152e86d2e92e65c794cd08b1e157c834a201065ee1",
+      "observedSha256": "baaf44351c2ba9576df4b544324b7df16aa1e61cde334e8f2ef30b0274c86993",
+      "changed": true
+    },
+    {
+      "path": ".ruff_cache/CACHEDIR.TAG",
+      "frozenSha256": "5953156d7e0c564a427251316eaf26f8870e6483ae2197f916b630e4f93e31ae",
+      "observedSha256": "5953156d7e0c564a427251316eaf26f8870e6483ae2197f916b630e4f93e31ae",
+      "changed": false
+    }
+  ],
+  "substantiveHistoricalFilesUnchanged": 20,
+  "excludedFromV4Evidence": "All .ruff_cache/__pycache__ entries; no effect on driver,oracle,plans,native outcomes or source/cache/image bindings.",
+  "action": "No oldhash/file repaired. Later checks use --no-cache and v4inventory excludes ephemeralcache.",
+  "cacheContentAuthenticityClaim": false
+}

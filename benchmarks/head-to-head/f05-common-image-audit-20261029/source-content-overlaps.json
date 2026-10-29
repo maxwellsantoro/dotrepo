@@ -1,0 +1,331 @@
+{
+  "inventoryBindings": [
+    {
+      "path": "benchmarks/head-to-head/f05-qualification-20261029/go-01-full/inventory.json",
+      "sha256": "96c935c31228fa8e05bb836a93257beeb87ac524e5eb30cdde3c546a1ea4be0e",
+      "regularFiles": 68062
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-qualification-20261029/go-03/inventory.json",
+      "sha256": "0dde9a80e14165d1675227db0842f3c88bda2828dd20506e75d6b4ff5d9fcd74",
+      "regularFiles": 9658
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-qualification-20261029/rust-02-full/inventory.json",
+      "sha256": "e04bbccfff19d356f66981ec9ae7074fe26b44a4d6a76591b70cd8c1c816865c",
+      "regularFiles": 605
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-qualification-20261029/typescript-02/inventory.json",
+      "sha256": "ba57c4fe3c2ae83ae10005b4ff3ed3998d1f94d75d2778163167da69637f78d7",
+      "regularFiles": 2784
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/go-02/inventory.json",
+      "sha256": "821eb8dffedfc4d6f10962e909ce810065bfe2417506cee06f178e56be6718d1",
+      "regularFiles": 401
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/python-01/inventory.json",
+      "sha256": "f3b3c78e90a89434ed77bbf7dc79c9397f9c0b27dc10c5eb0a60296d5b6c89e1",
+      "regularFiles": 128
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/python-02/inventory.json",
+      "sha256": "5da96e82f8e234d7d75d339e89e11381c5bf38115488f2381f445029562fce99",
+      "regularFiles": 30200
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/python-03/inventory.json",
+      "sha256": "db7f542988b53bb874e6bbc0c59fb861b079991f84dfe2b0758ebdaf313fc821",
+      "regularFiles": 981
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/rust-01/inventory.json",
+      "sha256": "081dcf170054432adbb68b80421078584336cfe4a62f2071638ee7cceb7df544",
+      "regularFiles": 1107
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/rust-03/inventory.json",
+      "sha256": "0d7b1b40ac3c53c15a290d1fd8abdeac9733d3039e303c853a0b42572f345744",
+      "regularFiles": 597
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/typescript-01/inventory.json",
+      "sha256": "68297b375bc7b1936fd9af1959f151bc0808e7716bcbb5208896bad08739d966",
+      "regularFiles": 19863
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/typescript-03/inventory.json",
+      "sha256": "54c97403fc95213b2cafb4424583c1255005e61b428cf56045b82e323abc6d3c",
+      "regularFiles": 703
+    }
+  ],
+  "nonemptyMatches": [
+    {
+      "imagePath": "usr/lib/python3.11/LICENSE.txt",
+      "bytes": 13936,
+      "sha256": "3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf",
+      "sourcePaths": [
+        {
+          "inventory": "benchmarks/head-to-head/f05-qualification-next8-20261029/python-02/inventory.json",
+          "sourcePath": "homeassistant/backports/LICENSE.Python"
+        }
+      ],
+      "disposition": "Redistributed Python/Apache license in standard toolchain/system distribution; not task-specific source."
+    },
+    {
+      "imagePath": "usr/local/go/src/cmd/vendor/github.com/google/pprof/LICENSE",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "sourcePaths": [
+        {
+          "inventory": "benchmarks/head-to-head/f05-qualification-next8-20261029/rust-03/inventory.json",
+          "sourcePath": "core/src/layout/DRUID_LICENSE"
+        },
+        {
+          "inventory": "benchmarks/head-to-head/f05-qualification-next8-20261029/typescript-01/inventory.json",
+          "sourcePath": "packages/experimental/subagent-oar/LICENSE-OAR"
+        }
+      ],
+      "disposition": "Redistributed Python/Apache license in standard toolchain/system distribution; not task-specific source."
+    },
+    {
+      "imagePath": "usr/local/go/test/typeparam/issue51219.out",
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+      "sourcePaths": [
+        {
+          "inventory": "benchmarks/head-to-head/f05-qualification-next8-20261029/python-02/inventory.json",
+          "sourcePath": "tests/components/fronius/fixtures/igplus_v2/GetStorageRealtimeData.json"
+        },
+        {
+          "inventory": "benchmarks/head-to-head/f05-qualification-next8-20261029/python-02/inventory.json",
+          "sourcePath": "tests/components/jellyfin/fixtures/auth-login-failure.json"
+        },
+        {
+          "inventory": "benchmarks/head-to-head/f05-qualification-next8-20261029/python-02/inventory.json",
+          "sourcePath": "tests/components/powerwall/fixtures/meters_empty.json"
+        },
+        {
+          "inventory": "benchmarks/head-to-head/f05-qualification-next8-20261029/python-02/inventory.json",
+          "sourcePath": "tests/testing_config/custom_components/test_legacy_state_translations/translations/en.json"
+        },
+        {
+          "inventory": "benchmarks/head-to-head/f05-qualification-next8-20261029/python-02/inventory.json",
+          "sourcePath": "tests/testing_config/custom_components/test_legacy_state_translations_bad_data/translations/en.json"
+        },
+        {
+          "inventory": "benchmarks/head-to-head/f05-qualification-next8-20261029/python-02/inventory.json",
+          "sourcePath": "tests/testing_config/custom_wake_words/bad_config.json"
+        },
+        {
+          "inventory": "benchmarks/head-to-head/f05-qualification-next8-20261029/typescript-01/inventory.json",
+          "sourcePath": "packages/test-support/session-snapshot/tests/fixtures/record-suite/rec-skip/behavior.json"
+        },
+        {
+          "inventory": "benchmarks/head-to-head/f05-qualification-next8-20261029/typescript-01/inventory.json",
+          "sourcePath": "packages/test-support/session-snapshot/tests/fixtures/suite/no-model/behavior.json"
+        }
+      ],
+      "disposition": "Generic empty JSON value (3bytes), independently byte-verified; not task-specific source."
+    },
+    {
+      "imagePath": "usr/local/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/packaging/LICENSE.APACHE",
+      "bytes": 10174,
+      "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+      "sourcePaths": [
+        {
+          "inventory": "benchmarks/head-to-head/f05-qualification-next8-20261029/rust-01/inventory.json",
+          "sourcePath": "LICENSE-APACHE-2.0"
+        },
+        {
+          "inventory": "benchmarks/head-to-head/f05-qualification-next8-20261029/rust-01/inventory.json",
+          "sourcePath": "crates/tauri-build/LICENSE-APACHE-2.0"
+        },
+        {
+          "inventory": "benchmarks/head-to-head/f05-qualification-next8-20261029/rust-01/inventory.json",
+          "sourcePath": "crates/tauri-cli/LICENSE-APACHE-2.0"
+        },
+        {
+          "inventory": "benchmarks/head-to-head/f05-qualification-next8-20261029/rust-01/inventory.json",
+          "sourcePath": "crates/tauri-codegen/LICENSE-APACHE-2.0"
+        },
+        {
+          "inventory": "benchmarks/head-to-head/f05-qualification-next8-20261029/rust-01/inventory.json",
+          "sourcePath": "crates/tauri-macros/LICENSE-APACHE-2.0"
+        },
+        {
+          "inventory": "benchmarks/head-to-head/f05-qualification-next8-20261029/rust-01/inventory.json",
+          "sourcePath": "crates/tauri-runtime-wry/LICENSE-APACHE-2.0"
+        },
+        {
+          "inventory": "benchmarks/head-to-head/f05-qualification-next8-20261029/rust-01/inventory.json",
+          "sourcePath": "crates/tauri-runtime/LICENSE-APACHE-2.0"
+        },
+        {
+          "inventory": "benchmarks/head-to-head/f05-qualification-next8-20261029/rust-01/inventory.json",
+          "sourcePath": "crates/tauri-utils/LICENSE-APACHE-2.0"
+        },
+        {
+          "inventory": "benchmarks/head-to-head/f05-qualification-next8-20261029/rust-01/inventory.json",
+          "sourcePath": "crates/tauri/LICENSE-APACHE-2.0"
+        },
+        {
+          "inventory": "benchmarks/head-to-head/f05-qualification-next8-20261029/rust-01/inventory.json",
+          "sourcePath": "packages/api/LICENSE-APACHE-2.0"
+        },
+        {
+          "inventory": "benchmarks/head-to-head/f05-qualification-next8-20261029/rust-01/inventory.json",
+          "sourcePath": "packages/cli/LICENSE-APACHE-2.0"
+        }
+      ],
+      "disposition": "Redistributed Python/Apache license in standard toolchain/system distribution; not task-specific source."
+    },
+    {
+      "imagePath": "usr/share/common-licenses/Apache-2.0",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "sourcePaths": [
+        {
+          "inventory": "benchmarks/head-to-head/f05-qualification-next8-20261029/rust-03/inventory.json",
+          "sourcePath": "core/src/layout/DRUID_LICENSE"
+        },
+        {
+          "inventory": "benchmarks/head-to-head/f05-qualification-next8-20261029/typescript-01/inventory.json",
+          "sourcePath": "packages/experimental/subagent-oar/LICENSE-OAR"
+        }
+      ],
+      "disposition": "Redistributed Python/Apache license in standard toolchain/system distribution; not task-specific source."
+    },
+    {
+      "imagePath": "usr/share/gcc/python/libstdcxx/__init__.py",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "sourcePaths": [
+        {
+          "inventory": "benchmarks/head-to-head/f05-qualification-next8-20261029/python-02/inventory.json",
+          "sourcePath": "tests/components/cast/fixtures/empty.m3u"
+        },
+        {
+          "inventory": "benchmarks/head-to-head/f05-qualification-next8-20261029/rust-03/inventory.json",
+          "sourcePath": "graphics/src/error.rs"
+        },
+        {
+          "inventory": "benchmarks/head-to-head/f05-qualification-next8-20261029/typescript-01/inventory.json",
+          "sourcePath": "snapshots/web/default-workspace/workspace.expected/.empty"
+        }
+      ],
+      "disposition": "Generic newline (1byte), independently byte-verified; not task-specific source."
+    }
+  ],
+  "emptyImageMembers": [
+    ".dockerenv",
+    "dev/console",
+    "etc/.pwd.lock",
+    "etc/environment",
+    "etc/hostname",
+    "etc/hosts",
+    "etc/resolv.conf",
+    "etc/security/opasswd",
+    "etc/subgid",
+    "etc/subuid",
+    "run/adduser",
+    "usr/lib/python3.11/email/mime/__init__.py",
+    "usr/lib/python3.11/pydoc_data/__init__.py",
+    "usr/lib/python3.11/urllib/__init__.py",
+    "usr/lib/python3/dist-packages/mercurial/cext/__init__.py",
+    "usr/lib/python3/dist-packages/mercurial/cffi/__init__.py",
+    "usr/lib/python3/dist-packages/mercurial/defaultrc/__init__.py",
+    "usr/lib/python3/dist-packages/mercurial/dirstateutils/__init__.py",
+    "usr/lib/python3/dist-packages/mercurial/helptext/__init__.py",
+    "usr/lib/python3/dist-packages/mercurial/helptext/internals/__init__.py",
+    "usr/lib/python3/dist-packages/mercurial/interfaces/__init__.py",
+    "usr/lib/python3/dist-packages/mercurial/pure/__init__.py",
+    "usr/lib/python3/dist-packages/mercurial/templates/__init__.py",
+    "usr/lib/python3/dist-packages/mercurial/templates/atom/__init__.py",
+    "usr/lib/python3/dist-packages/mercurial/templates/coal/__init__.py",
+    "usr/lib/python3/dist-packages/mercurial/templates/gitweb/__init__.py",
+    "usr/lib/python3/dist-packages/mercurial/templates/json/__init__.py",
+    "usr/lib/python3/dist-packages/mercurial/templates/monoblue/__init__.py",
+    "usr/lib/python3/dist-packages/mercurial/templates/paper/__init__.py",
+    "usr/lib/python3/dist-packages/mercurial/templates/raw/__init__.py",
+    "usr/lib/python3/dist-packages/mercurial/templates/rss/__init__.py",
+    "usr/lib/python3/dist-packages/mercurial/templates/spartan/__init__.py",
+    "usr/lib/python3/dist-packages/mercurial/templates/static/__init__.py",
+    "usr/lib/python3/dist-packages/mercurial/thirdparty/__init__.py",
+    "usr/lib/python3/dist-packages/mercurial/thirdparty/zope/__init__.py",
+    "usr/lib/python3/dist-packages/mercurial/upgrade_utils/__init__.py",
+    "usr/lib/python3/dist-packages/mercurial/utils/__init__.py",
+    "usr/local/go/src/cmd/go/internal/imports/testdata/test/tags.txt",
+    "usr/local/go/src/cmd/go/internal/modindex/testdata/ignore_non_source/b.go",
+    "usr/local/go/src/cmd/go/internal/modindex/testdata/ignore_non_source/bar.json",
+    "usr/local/go/src/cmd/go/internal/modindex/testdata/ignore_non_source/baz.log",
+    "usr/local/go/src/cmd/go/internal/modindex/testdata/ignore_non_source/c.c",
+    "usr/local/go/src/cmd/internal/test2json/testdata/empty.test",
+    "usr/local/go/src/go/build/testdata/empty/dummy",
+    "usr/local/go/src/os/testdata/dirfs/a",
+    "usr/local/go/src/os/testdata/dirfs/b",
+    "usr/local/go/src/os/testdata/dirfs/dir/x",
+    "usr/local/go/test/abi/struct_3_string_input.out",
+    "usr/local/go/test/typeparam/issue47740.out",
+    "usr/local/lib/node_modules/npm/.npmrc",
+    "usr/local/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/gyp/generator/__init__.py",
+    "usr/local/lib/node_modules/npm/node_modules/node-gyp/gyp/pylib/packaging/py.typed",
+    "usr/local/lib/node_modules/npm/node_modules/smart-buffer/docs/ROADMAP.md",
+    "usr/share/X11/locale/C/Compose",
+    "usr/share/X11/locale/am_ET.UTF-8/XI18N_OBJS",
+    "usr/share/X11/locale/am_ET.UTF-8/XLC_LOCALE",
+    "usr/share/X11/locale/cs_CZ.UTF-8/XI18N_OBJS",
+    "usr/share/X11/locale/cs_CZ.UTF-8/XLC_LOCALE",
+    "usr/share/X11/locale/el_GR.UTF-8/XI18N_OBJS",
+    "usr/share/X11/locale/el_GR.UTF-8/XLC_LOCALE",
+    "usr/share/X11/locale/fi_FI.UTF-8/XI18N_OBJS",
+    "usr/share/X11/locale/fi_FI.UTF-8/XLC_LOCALE",
+    "usr/share/X11/locale/iscii-dev/Compose",
+    "usr/share/X11/locale/isiri-3342/Compose",
+    "usr/share/X11/locale/iso8859-11/Compose",
+    "usr/share/X11/locale/km_KH.UTF-8/XLC_LOCALE",
+    "usr/share/X11/locale/microsoft-cp1251/Compose",
+    "usr/share/X11/locale/microsoft-cp1255/Compose",
+    "usr/share/X11/locale/microsoft-cp1256/Compose",
+    "usr/share/X11/locale/nokhchi-1/Compose",
+    "usr/share/X11/locale/sr_RS.UTF-8/XLC_LOCALE",
+    "usr/share/X11/locale/tatar-cyr/Compose",
+    "usr/share/X11/locale/th_TH/Compose",
+    "usr/share/X11/locale/tscii-0/Compose",
+    "usr/share/doc/libsvn1/examples/gdb-py/svndbg/__init__.py",
+    "usr/share/mime/icons",
+    "var/cache/apt/archives/lock",
+    "var/cache/debconf/passwords.dat",
+    "var/lib/apt/lists/lock",
+    "var/lib/dpkg/info/libmagickcore-dev.md5sums",
+    "var/lib/dpkg/info/libmagickwand-dev.md5sums",
+    "var/lib/dpkg/info/libncurses5-dev:arm64.md5sums",
+    "var/lib/dpkg/info/libncursesw5-dev:arm64.md5sums",
+    "var/lib/dpkg/lock",
+    "var/lib/dpkg/lock-frontend",
+    "var/lib/dpkg/triggers/Lock",
+    "var/lib/dpkg/triggers/Unincorp",
+    "var/lib/python/python3.11_installed",
+    "var/lib/systemd/deb-systemd-helper-enabled/multi-user.target.wants/e2scrub_reap.service",
+    "var/lib/systemd/deb-systemd-helper-enabled/timers.target.wants/apt-daily-upgrade.timer",
+    "var/lib/systemd/deb-systemd-helper-enabled/timers.target.wants/apt-daily.timer",
+    "var/lib/systemd/deb-systemd-helper-enabled/timers.target.wants/dpkg-db-backup.timer",
+    "var/lib/systemd/deb-systemd-helper-enabled/timers.target.wants/e2scrub_all.timer",
+    "var/lib/systemd/deb-systemd-helper-enabled/timers.target.wants/fstrim.timer",
+    "var/lib/systemd/deb-systemd-user-helper-enabled/sockets.target.wants/dirmngr.socket",
+    "var/lib/systemd/deb-systemd-user-helper-enabled/sockets.target.wants/gpg-agent-browser.socket",
+    "var/lib/systemd/deb-systemd-user-helper-enabled/sockets.target.wants/gpg-agent-extra.socket",
+    "var/lib/systemd/deb-systemd-user-helper-enabled/sockets.target.wants/gpg-agent-ssh.socket",
+    "var/lib/systemd/deb-systemd-user-helper-enabled/sockets.target.wants/gpg-agent.socket",
+    "var/lib/ucf/hashfile.0",
+    "var/lib/ucf/registry.0",
+    "var/log/btmp",
+    "var/log/faillog",
+    "var/log/lastlog",
+    "var/log/wtmp"
+  ],
+  "classificationPending": false,
+  "limitation": "Exact-file hashes only; no substring, semantic or all possible source proof. Empty files and redistributed license/stdlib/distribution files require dispositions, not automatic leakage labels."
+}

@@ -1,0 +1,20 @@
+{
+  "state": "passed-with-explicit-copied-freeze-inventory-disposition",
+  "authorPacketFreezeSha256": "d1f9673dfc4dc69fb4a5aa8f3c3af0c3cfcf58c7de0d94f1e21c08f3fa14a844",
+  "artifactManifestSha256": "62d39f894d6b071a72bcee1f93858fc57964d8172b6e4f59d9ae6bdc3cd2bec5",
+  "listedSubstantiveFilesVerified": 213,
+  "unlistedNonCachePaths": [
+    "FREEZE.json",
+    "artifact-hashes.json",
+    "inputs/FREEZE.json"
+  ],
+  "copiedAcceptanceFreeze": {
+    "path": "inputs/FREEZE.json",
+    "sha256": "0763682faa7f3b1f255ccd518ccf55eab8f4e59b352e1c60ea749d18dbe274d4",
+    "originalByteIdentical": true,
+    "binding": "Original acceptance freeze hash is bound by BEFORE.v2 and independently checked; this review adds the missing copied-path binding.",
+    "qualificationImpact": "none; immutable source packet unchanged"
+  },
+  "otherCopiedAcceptanceInputsByteIdentical": true,
+  "newDockerNetworkUpstreamProviderCalls": 0
+}

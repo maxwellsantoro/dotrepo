@@ -1,0 +1,490 @@
+{
+  "identity": "f05-cache-audit-protected-content-20261029-v1",
+  "files": [
+    {
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/gold/go-01.json",
+      "bytes": 1619,
+      "digests": [
+        "f8d41c73a9bb9b7c8c3b4862277c818475f4cf7db22b3a4045d77125a8260d77",
+        "f9e861f9f091042d82626890b5bd10445226c5f30eaf3563b99f0134e7d8c071"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/gold/go-02.json",
+      "bytes": 1194,
+      "digests": [
+        "ad4946653db0aeabbde5a9948e20cf8a93157b9442e82581e6eb4fce99ea1476",
+        "e43c4062fc455463346d7b66a0f880d3b1651edc783fb7bb493abfc3bf8c9aaa"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/gold/go-03.json",
+      "bytes": 1078,
+      "digests": [
+        "6575049604733c124b58579e7dae9a412fce014bc2fa415e05293a6e94710856",
+        "fc35b27503118ae9a6d50de80855fdf223f5946b35adbe64031fc4b6f383073d"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/gold/python-01.json",
+      "bytes": 779,
+      "digests": [
+        "5c36d2500082e41c5a88f50df37b55608540f9b12381a70b5dd95cf0fd784873",
+        "c7e403762110ae523f07408e5a6646d409d665450b610b573f67540f7dfb3e8e"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/gold/python-02.json",
+      "bytes": 1710,
+      "digests": [
+        "3c9b21a012da8ad3bcc1b335a15ff26d377a13eb9837686b7671ddfa1b58285a",
+        "408796293ba750d3ae45bcd8f1117fdbf87dc4565ade485de45bba14fd9d4e8c"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/gold/python-03.json",
+      "bytes": 1318,
+      "digests": [
+        "de313cd39036ed32ae16b1c90a4f5b5ddf03d7061f5cda0ae041ad38bbee971c",
+        "ed2c6203a4c0d9e92293467590cf121bf4780c45784d8f6f94cc7981ffcc82c1"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/gold/rust-01.json",
+      "bytes": 614,
+      "digests": [
+        "a10e8cabdb6aab502331c40ea181c44ace8d11d9602475e90d77ea575ac67440",
+        "e0227b4be1fe5577cc9987dcad614bcfd6e49b545a16f10e46cb4ab77a433386"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/gold/rust-02.json",
+      "bytes": 828,
+      "digests": [
+        "657ebb9cf8740ff33fa496c745bcb86d128fa9d20bff22c3e8d36f1c1bc64bcc",
+        "79ce4bcefc9ac1b5388f8c2197f64dc662dd40c483ae2f6a4143844293ec259b"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/gold/rust-03.json",
+      "bytes": 1380,
+      "digests": [
+        "8394306eacfc72066fdbe07b060ca6fa3a3297380ece8e5ee0e9e2e2763505fa",
+        "84285976bab2e5eda3801bd05cc8b4e776e92d783e9acc0fd5453dc744d4d98c"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/gold/typescript-01.json",
+      "bytes": 866,
+      "digests": [
+        "09901e47132a1b851a8b5161e99b5a8e47d40b6013121b1a58e52c6ba5120c30",
+        "fe21580008ed159a3cbd51fe8307d9015b30a94a6ecf468edd9df1f3ed901d42"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/gold/typescript-02.json",
+      "bytes": 1927,
+      "digests": [
+        "82c1ff84914b608d97df146d2905042e47f5059a069a434608be097a17307b7e",
+        "f602e25275030590db2269d3082f41cf06316b8a902e2cf241672b365620fd87"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/gold/typescript-03.json",
+      "bytes": 830,
+      "digests": [
+        "3a6fbec62cf052faf598d055709dc86e5c2de612c78b1f6276c74dd4b665b24c",
+        "94008a8ff3178c74b83f272808648f33b2fab26afcea4808a4d01347141b6be5"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/oracles/go-01.json",
+      "bytes": 1481,
+      "digests": [
+        "a3dd95597dd24acb353b0e561144508751755a0ca5addddaa5e16d6a23be19ed",
+        "cdbfd8c5d133706e7da1eb958a428ab6e1572eec9450d9ed1ea4895cff0bc6b0"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/oracles/go-02.json",
+      "bytes": 1808,
+      "digests": [
+        "01f3d1f3602ea237a0b36b936d8fdfabeeef36c6eb0969eaa492f8524e2b39d1",
+        "2928a45a401b6fc3e797f7e36bfb9ae7f983f4121558af4af18b06d515c61e05"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/oracles/go-03.json",
+      "bytes": 1660,
+      "digests": [
+        "902298820f3ac29af16228ba82421575ca01ca1a72ebdc937c2958151154d85a",
+        "ecd112dc67a7fb4c3c2ea17e43ad116d058c6183d4c86962c80a3af4adde9c79"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/oracles/python-01.json",
+      "bytes": 1388,
+      "digests": [
+        "13593a0416f65d3e6006252c2e7e6d21c05d2837d060e3aeb952a36fbe801971",
+        "b6e376a86d49e399e8ba66d9d231f1cf30a9c1bdd33a1d24571eceee2d38950a"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/oracles/python-02.json",
+      "bytes": 1973,
+      "digests": [
+        "28ccd504e8d9bd45e7b85beb1a89990b07b7aa73dd613d57901aea2a3db773d7",
+        "bb9a5a746c7de7e11bbce7014e674053f154c38dee4fdd4f801d942a2621939f"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/oracles/python-03.json",
+      "bytes": 1590,
+      "digests": [
+        "6020d335c55837e085b4e7a16584721dd428783947d0f711b353f78760dc32c1",
+        "a47f3324f9fc462277f0218b00486de23a1c2cadee6c1667d71a7c0b282e9019"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/oracles/rust-01.json",
+      "bytes": 1217,
+      "digests": [
+        "2868ea7c8cf7b6b6d527542537073da2716660783ffd5ac6270cfdf1ef571c03",
+        "8bdc0dba7e3b79029bfb2fe397d0723ce85883a2c99dd6a497301d7164cb6848"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/oracles/rust-02.json",
+      "bytes": 1389,
+      "digests": [
+        "6df575f13e956ac564395eb5d2a55a444844df7dd62f87986782c41c5477d778",
+        "f5d250e390afddf2de263a3506d98d20b31ce14b61ea4ca258e166cb4b25a760"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/oracles/rust-03.json",
+      "bytes": 1131,
+      "digests": [
+        "a2acff4938ac5be85ce50323f2801b8ad5494a35406ec1c2a9d8b1901ed38e15",
+        "e5b9bf328cf6c521692e4084e824999faf7d6143af1a895703f24a7f657a1c13"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/oracles/typescript-01.json",
+      "bytes": 1497,
+      "digests": [
+        "1ffa93dfcfc13766d5e2d4e82af12272472f8c06382ff778c7fed6ca94e06f6d",
+        "dd9c6435023e2dc7c6cec96c9bd473f92280cf997fc3c3ffbb1bb9bedc298e33"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/oracles/typescript-02.json",
+      "bytes": 1582,
+      "digests": [
+        "04eb63f2de1bc4dd97fba1514d5c80948147d19035b62d42bb480ea483c286d5",
+        "6a58711aa7db6661e49854b3bf4b11ccff3a10993fb5e92e9d6ddf9702d785a8"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/curator/oracles/typescript-03.json",
+      "bytes": 1376,
+      "digests": [
+        "7d822e0e20679ea923a8738746c2b2fcf9b0e77e15beaa770ff6271673022c68",
+        "db58b733c5d99711725fa979b6c81e98405b1f4582750a6063cbba360579a608"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-qualification-20261029/oracle.py",
+      "bytes": 5911,
+      "digests": [
+        "1e4f0f3b640df88f315fcbcddf66e9aae179d68e69db7f5da0f4bc948adcb0ab"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/oracle-revision/oracle.py",
+      "bytes": 6112,
+      "digests": [
+        "3b5392c8bf298d692f0ada994a01f5e0a35bde86151d59fd8b420fa050873aa7"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-snapshot-20261029/FREEZE.json",
+      "bytes": 3566,
+      "digests": [
+        "6f4bdb1e3a832cd79814e018f76a97e009f5408de613e15356263bca4ad64352",
+        "890ab009d95d31d0f6010571f9e3154572c2f5cab77d0eb3d99d672a1a27d01d"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-snapshot-20261029/README.md",
+      "bytes": 3189,
+      "digests": [
+        "5c83358a38ae43e2f0bbcdf976858211657001f481571e587df7b5677af6666f"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-snapshot-20261029/collect_profiles.py",
+      "bytes": 5845,
+      "digests": [
+        "2deae0c1129c76685003f8428267538714d3795e6f13c54f56b94daed0e4f0c7"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-snapshot-20261029/files-error.json",
+      "bytes": 17,
+      "digests": [
+        "2938e9f1284180959e33ab1718d0793a72ff6e4cdb8108c34dcd14e69446de5c"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-snapshot-20261029/files-identified.json",
+      "bytes": 804725,
+      "digests": [
+        "01c577870b852aae36b2556ec5df8e66f58f6a21f32c7f0e972ed5eafbaf2c41",
+        "8bb2e80c13d37acd7f8e1d4ec4f5ef516fba5e1312e6a44edde2673a347ba158"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-snapshot-20261029/identified-immutable-fetch.json",
+      "bytes": 2655,
+      "digests": [
+        "4db5952b172de35b11eab23a690336eebc6eedb76b3b6c4292bb9fc631fd8eac",
+        "b4e460a29d44f210cc040a340941a47c284688d03810aac9016aaf7d6fe9c22f"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-snapshot-20261029/initial-immutable-fetch.json",
+      "bytes": 2829,
+      "digests": [
+        "4cc96469b9e7345a8ca59218e7278dc0425e17136d1dfc364faad1e57b8f711d",
+        "92453a5c9fbdc1a21b0ac6914d9632fc8f8b0a704f84adeddecd7b86695d2b3c"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-snapshot-20261029/inventory-error.json",
+      "bytes": 17,
+      "digests": [
+        "2938e9f1284180959e33ab1718d0793a72ff6e4cdb8108c34dcd14e69446de5c"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-snapshot-20261029/inventory-identified.json",
+      "bytes": 448577,
+      "digests": [
+        "0dc4c6ade4a91f7b13ac5b46e57d15ba6c8341a0d9a33acdccab9ea2b3d0e217",
+        "f2a092c72eab8ac67f7316f3171428c33399a8aef19a3d4c45138caa9b697d31"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-snapshot-20261029/meta.json",
+      "bytes": 1291,
+      "digests": [
+        "4c137956d021c69e607f5fd7d96e4fd3878ccbcf92f7b8ecdfdc2a622ebbdba5",
+        "8aff5b62c683b659538bedf0d2d5ff38a9b217e7a79fcf8ef9b6ba208439439a"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-snapshot-20261029/profile-capture/capture.json",
+      "bytes": 1114,
+      "digests": [
+        "0d17079fd43983a04d8816228650502bd5bae5e7dfd53902cb51f91834583d49",
+        "653919bfebab78d55bce6e4c8338f79b616e6271f283d44ca0113d84240e8251"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-snapshot-20261029/profile-capture/go-01.body",
+      "bytes": 4627,
+      "digests": [
+        "41996317d96b634db171a7f224f1e37c3068f992a1d7992dad758c3cbae6ee2d",
+        "a9cc0f244be39614b83d2c77ee2b3b2d122d0712dc9c6f6aae21ea647f14794c"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-snapshot-20261029/profile-capture/go-02.body",
+      "bytes": 0,
+      "digests": [
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-snapshot-20261029/profile-capture/go-03.body",
+      "bytes": 5082,
+      "digests": [
+        "7263c8007a87fab3a46bb4e2780da4277a950bab125070611bd147fb04b7c941",
+        "82f73811f681d01ee134f8fe3e1ded291f9693db69dc2b7a910a556b86c75ab8"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-snapshot-20261029/profile-capture/python-01.body",
+      "bytes": 0,
+      "digests": [
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-snapshot-20261029/profile-capture/python-02.body",
+      "bytes": 0,
+      "digests": [
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-snapshot-20261029/profile-capture/python-03.body",
+      "bytes": 0,
+      "digests": [
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-snapshot-20261029/profile-capture/receipts.json",
+      "bytes": 17805,
+      "digests": [
+        "2417150a3aa610d8c27e2abc5b824431472b9656ec6d9390259b72e03ffd631f",
+        "5b03eeb0b4f8cb5be7c76ed995fe676dbeef194f17e4f238c718680445873b0d"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-snapshot-20261029/profile-capture/responses.json",
+      "bytes": 27811,
+      "digests": [
+        "1853851dda5c8841472428e086b225d1ed08254cc62347db2ff3f303e8b43344",
+        "1a96e603df3d145dbebb3c355f30c7622182e35deca2fb5b05f3580e8eb2b8a6"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-snapshot-20261029/profile-capture/rust-01.body",
+      "bytes": 5128,
+      "digests": [
+        "50654fc164a6c1918bad43f3b3fafd6eac9095241074710f3bf7c995f3e5af41",
+        "966d78080b2a08b6cef9e7797e7157c890c52b1708a3df50328a3d21c9e62c5d"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-snapshot-20261029/profile-capture/rust-02.body",
+      "bytes": 4675,
+      "digests": [
+        "42789822f572979ceebea5fe170b0125007b8097981d5bb0f8cca205731547c8",
+        "5f452b2ef2879ef580027f1634c3a0ffbbde423b9565b588e498ca4f706ab6bf"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-snapshot-20261029/profile-capture/rust-03.body",
+      "bytes": 0,
+      "digests": [
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-snapshot-20261029/profile-capture/typescript-01.body",
+      "bytes": 0,
+      "digests": [
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-snapshot-20261029/profile-capture/typescript-02.body",
+      "bytes": 0,
+      "digests": [
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      ]
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-snapshot-20261029/profile-capture/typescript-03.body",
+      "bytes": 4215,
+      "digests": [
+        "1c7fbf7cd52bc21b7a379168c623207a0213b8a5c7e630b416b0a9c277eae480",
+        "d6feb2ca575f8f6faf64a55d207b7d099616bd117cf16704221be0cc077a0321"
+      ]
+    }
+  ],
+  "digests": [
+    "01c577870b852aae36b2556ec5df8e66f58f6a21f32c7f0e972ed5eafbaf2c41",
+    "01f3d1f3602ea237a0b36b936d8fdfabeeef36c6eb0969eaa492f8524e2b39d1",
+    "04eb63f2de1bc4dd97fba1514d5c80948147d19035b62d42bb480ea483c286d5",
+    "09901e47132a1b851a8b5161e99b5a8e47d40b6013121b1a58e52c6ba5120c30",
+    "0d17079fd43983a04d8816228650502bd5bae5e7dfd53902cb51f91834583d49",
+    "0dc4c6ade4a91f7b13ac5b46e57d15ba6c8341a0d9a33acdccab9ea2b3d0e217",
+    "13593a0416f65d3e6006252c2e7e6d21c05d2837d060e3aeb952a36fbe801971",
+    "1853851dda5c8841472428e086b225d1ed08254cc62347db2ff3f303e8b43344",
+    "1a96e603df3d145dbebb3c355f30c7622182e35deca2fb5b05f3580e8eb2b8a6",
+    "1c7fbf7cd52bc21b7a379168c623207a0213b8a5c7e630b416b0a9c277eae480",
+    "1e4f0f3b640df88f315fcbcddf66e9aae179d68e69db7f5da0f4bc948adcb0ab",
+    "1ffa93dfcfc13766d5e2d4e82af12272472f8c06382ff778c7fed6ca94e06f6d",
+    "2417150a3aa610d8c27e2abc5b824431472b9656ec6d9390259b72e03ffd631f",
+    "2868ea7c8cf7b6b6d527542537073da2716660783ffd5ac6270cfdf1ef571c03",
+    "28ccd504e8d9bd45e7b85beb1a89990b07b7aa73dd613d57901aea2a3db773d7",
+    "2928a45a401b6fc3e797f7e36bfb9ae7f983f4121558af4af18b06d515c61e05",
+    "2938e9f1284180959e33ab1718d0793a72ff6e4cdb8108c34dcd14e69446de5c",
+    "2deae0c1129c76685003f8428267538714d3795e6f13c54f56b94daed0e4f0c7",
+    "3a6fbec62cf052faf598d055709dc86e5c2de612c78b1f6276c74dd4b665b24c",
+    "3b5392c8bf298d692f0ada994a01f5e0a35bde86151d59fd8b420fa050873aa7",
+    "3c9b21a012da8ad3bcc1b335a15ff26d377a13eb9837686b7671ddfa1b58285a",
+    "408796293ba750d3ae45bcd8f1117fdbf87dc4565ade485de45bba14fd9d4e8c",
+    "41996317d96b634db171a7f224f1e37c3068f992a1d7992dad758c3cbae6ee2d",
+    "42789822f572979ceebea5fe170b0125007b8097981d5bb0f8cca205731547c8",
+    "4c137956d021c69e607f5fd7d96e4fd3878ccbcf92f7b8ecdfdc2a622ebbdba5",
+    "4cc96469b9e7345a8ca59218e7278dc0425e17136d1dfc364faad1e57b8f711d",
+    "4db5952b172de35b11eab23a690336eebc6eedb76b3b6c4292bb9fc631fd8eac",
+    "50654fc164a6c1918bad43f3b3fafd6eac9095241074710f3bf7c995f3e5af41",
+    "5b03eeb0b4f8cb5be7c76ed995fe676dbeef194f17e4f238c718680445873b0d",
+    "5c36d2500082e41c5a88f50df37b55608540f9b12381a70b5dd95cf0fd784873",
+    "5c83358a38ae43e2f0bbcdf976858211657001f481571e587df7b5677af6666f",
+    "5f452b2ef2879ef580027f1634c3a0ffbbde423b9565b588e498ca4f706ab6bf",
+    "6020d335c55837e085b4e7a16584721dd428783947d0f711b353f78760dc32c1",
+    "653919bfebab78d55bce6e4c8338f79b616e6271f283d44ca0113d84240e8251",
+    "6575049604733c124b58579e7dae9a412fce014bc2fa415e05293a6e94710856",
+    "657ebb9cf8740ff33fa496c745bcb86d128fa9d20bff22c3e8d36f1c1bc64bcc",
+    "6a58711aa7db6661e49854b3bf4b11ccff3a10993fb5e92e9d6ddf9702d785a8",
+    "6df575f13e956ac564395eb5d2a55a444844df7dd62f87986782c41c5477d778",
+    "6f4bdb1e3a832cd79814e018f76a97e009f5408de613e15356263bca4ad64352",
+    "7263c8007a87fab3a46bb4e2780da4277a950bab125070611bd147fb04b7c941",
+    "79ce4bcefc9ac1b5388f8c2197f64dc662dd40c483ae2f6a4143844293ec259b",
+    "7d822e0e20679ea923a8738746c2b2fcf9b0e77e15beaa770ff6271673022c68",
+    "82c1ff84914b608d97df146d2905042e47f5059a069a434608be097a17307b7e",
+    "82f73811f681d01ee134f8fe3e1ded291f9693db69dc2b7a910a556b86c75ab8",
+    "8394306eacfc72066fdbe07b060ca6fa3a3297380ece8e5ee0e9e2e2763505fa",
+    "84285976bab2e5eda3801bd05cc8b4e776e92d783e9acc0fd5453dc744d4d98c",
+    "890ab009d95d31d0f6010571f9e3154572c2f5cab77d0eb3d99d672a1a27d01d",
+    "8aff5b62c683b659538bedf0d2d5ff38a9b217e7a79fcf8ef9b6ba208439439a",
+    "8bb2e80c13d37acd7f8e1d4ec4f5ef516fba5e1312e6a44edde2673a347ba158",
+    "8bdc0dba7e3b79029bfb2fe397d0723ce85883a2c99dd6a497301d7164cb6848",
+    "902298820f3ac29af16228ba82421575ca01ca1a72ebdc937c2958151154d85a",
+    "92453a5c9fbdc1a21b0ac6914d9632fc8f8b0a704f84adeddecd7b86695d2b3c",
+    "94008a8ff3178c74b83f272808648f33b2fab26afcea4808a4d01347141b6be5",
+    "966d78080b2a08b6cef9e7797e7157c890c52b1708a3df50328a3d21c9e62c5d",
+    "a10e8cabdb6aab502331c40ea181c44ace8d11d9602475e90d77ea575ac67440",
+    "a2acff4938ac5be85ce50323f2801b8ad5494a35406ec1c2a9d8b1901ed38e15",
+    "a3dd95597dd24acb353b0e561144508751755a0ca5addddaa5e16d6a23be19ed",
+    "a47f3324f9fc462277f0218b00486de23a1c2cadee6c1667d71a7c0b282e9019",
+    "a9cc0f244be39614b83d2c77ee2b3b2d122d0712dc9c6f6aae21ea647f14794c",
+    "ad4946653db0aeabbde5a9948e20cf8a93157b9442e82581e6eb4fce99ea1476",
+    "b4e460a29d44f210cc040a340941a47c284688d03810aac9016aaf7d6fe9c22f",
+    "b6e376a86d49e399e8ba66d9d231f1cf30a9c1bdd33a1d24571eceee2d38950a",
+    "bb9a5a746c7de7e11bbce7014e674053f154c38dee4fdd4f801d942a2621939f",
+    "c7e403762110ae523f07408e5a6646d409d665450b610b573f67540f7dfb3e8e",
+    "cdbfd8c5d133706e7da1eb958a428ab6e1572eec9450d9ed1ea4895cff0bc6b0",
+    "d6feb2ca575f8f6faf64a55d207b7d099616bd117cf16704221be0cc077a0321",
+    "db58b733c5d99711725fa979b6c81e98405b1f4582750a6063cbba360579a608",
+    "dd9c6435023e2dc7c6cec96c9bd473f92280cf997fc3c3ffbb1bb9bedc298e33",
+    "de313cd39036ed32ae16b1c90a4f5b5ddf03d7061f5cda0ae041ad38bbee971c",
+    "e0227b4be1fe5577cc9987dcad614bcfd6e49b545a16f10e46cb4ab77a433386",
+    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "e43c4062fc455463346d7b66a0f880d3b1651edc783fb7bb493abfc3bf8c9aaa",
+    "e5b9bf328cf6c521692e4084e824999faf7d6143af1a895703f24a7f657a1c13",
+    "ecd112dc67a7fb4c3c2ea17e43ad116d058c6183d4c86962c80a3af4adde9c79",
+    "ed2c6203a4c0d9e92293467590cf121bf4780c45784d8f6f94cc7981ffcc82c1",
+    "f2a092c72eab8ac67f7316f3171428c33399a8aef19a3d4c45138caa9b697d31",
+    "f5d250e390afddf2de263a3506d98d20b31ce14b61ea4ca258e166cb4b25a760",
+    "f602e25275030590db2269d3082f41cf06316b8a902e2cf241672b365620fd87",
+    "f8d41c73a9bb9b7c8c3b4862277c818475f4cf7db22b3a4045d77125a8260d77",
+    "f9e861f9f091042d82626890b5bd10445226c5f30eaf3563b99f0134e7d8c071",
+    "fc35b27503118ae9a6d50de80855fdf223f5946b35adbe64031fc4b6f383073d",
+    "fe21580008ed159a3cbd51fe8307d9015b30a94a6ecf468edd9df1f3ed901d42"
+  ],
+  "limitations": [
+    "Digest-only exact/raw and canonical-JSON alias checks; not semantic or substring proof.",
+    "Future final access instruction, integration, consumer, policy and scorer artifacts are not yet bound here.",
+    "No source-file blanket deny: common license or empty bytes can occur legitimately."
+  ],
+  "canonicalEncoding": "agent_experiment.encode: indent=2, sort_keys=True, allow_nan=False, trailing newline"
+}

@@ -1,0 +1,2410 @@
+{
+  "syntheticOnly": true,
+  "inputBindings": {
+    "driver.v4.py": "ca4b3743c0785574f406ae81a7eb4cb9857cb22d2019ed31e1188d3013de5355",
+    "oracle_v4.py": "a0846130ba9a00af4597eb17792da4ad9dc40d3ce17350c1af72b4878180b606",
+    "plan.v4.json": "a53d9917f427464544b1b7d4bd0a50a3cd6240db8d0dcd73e72ac89e3b4f7382",
+    "root-policy-v4.json": "a64064afdf2da04c1ca37c25d2d639971eb2d3d1b2360d4aa418e77ede81a8ba"
+  },
+  "unchangedBindings": {
+    "imageId": "unchanged",
+    "environment": "unchanged",
+    "resources": "unchanged",
+    "toolHashCommand": "unchanged",
+    "isolation": "unchanged",
+    "rust-02": "unchanged task/source/cache/commands/offline setup",
+    "typescript-02": "unchanged task/source/cache/commands/offline setup",
+    "go-03": "unchanged task/source/cache/commands/offline setup"
+  },
+  "oracleCases": [
+    {
+      "case": "normal-two-unit-zero-doc-terminal",
+      "expectedQualified": true,
+      "oracle": {
+        "qualified": true,
+        "reason": "units and zero-case default doc phase terminal",
+        "processExitCode": 0,
+        "processError": null,
+        "phaseCoverageComplete": true,
+        "unitPhase": {
+          "terminal": true,
+          "exercised": true,
+          "status": "ok",
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0,
+          "measured": 0,
+          "filtered": 0,
+          "cases": [
+            "test_link_type_from_pcap_supported",
+            "test_link_type_from_pcap_unsupported"
+          ]
+        },
+        "docPhase": {
+          "state": "zero-case-phase-terminal",
+          "exercised": true,
+          "terminal": true,
+          "testCases": 0
+        },
+        "summaries": [
+          {
+            "status": "ok",
+            "passed": 2,
+            "failed": 0,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0
+          },
+          {
+            "status": "ok",
+            "passed": 0,
+            "failed": 0,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0
+          }
+        ],
+        "unitMarkerCount": 1,
+        "docMarkerCount": 1,
+        "unitMarkerObserved": true,
+        "docMarkerObserved": true,
+        "unexpectedFailureDiagnostics": []
+      }
+    },
+    {
+      "case": "terminal-assertion-default-stop",
+      "expectedQualified": true,
+      "oracle": {
+        "qualified": true,
+        "reason": "terminal unit assertion failure is frozen default-command outcome; doc phase unexecuted",
+        "processExitCode": 101,
+        "processError": null,
+        "phaseCoverageComplete": false,
+        "unitPhase": {
+          "terminal": true,
+          "exercised": true,
+          "status": "FAILED",
+          "passed": 1,
+          "failed": 1,
+          "ignored": 0,
+          "measured": 0,
+          "filtered": 0,
+          "cases": [
+            "test_link_type_from_pcap_supported",
+            "test_link_type_from_pcap_unsupported"
+          ]
+        },
+        "docPhase": {
+          "state": "unexecuted-default-stop",
+          "exercised": false,
+          "terminal": false,
+          "testCases": null
+        },
+        "summaries": [
+          {
+            "status": "FAILED",
+            "passed": 1,
+            "failed": 1,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0
+          }
+        ],
+        "unitMarkerCount": 1,
+        "docMarkerCount": 0,
+        "unitMarkerObserved": true,
+        "docMarkerObserved": false,
+        "unexpectedFailureDiagnostics": []
+      }
+    },
+    {
+      "case": "unit-pass-later-doc-compile-failure",
+      "expectedQualified": false,
+      "oracle": {
+        "qualified": false,
+        "reason": "compile/setup/unknown diagnostic prevents complete default outcome",
+        "processExitCode": 101,
+        "processError": null,
+        "phaseCoverageComplete": false,
+        "unitPhase": {
+          "terminal": true,
+          "exercised": true,
+          "status": "ok",
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0,
+          "measured": 0,
+          "filtered": 0,
+          "cases": [
+            "test_link_type_from_pcap_supported",
+            "test_link_type_from_pcap_unsupported"
+          ]
+        },
+        "docPhase": {
+          "state": "unknown",
+          "exercised": false,
+          "terminal": false
+        },
+        "summaries": [
+          {
+            "status": "ok",
+            "passed": 2,
+            "failed": 0,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0
+          }
+        ],
+        "unitMarkerCount": 1,
+        "docMarkerCount": 1,
+        "unitMarkerObserved": true,
+        "docMarkerObserved": true,
+        "unexpectedFailureDiagnostics": [
+          "error: doctest failed, to rerun pass --doc"
+        ]
+      }
+    },
+    {
+      "case": "unit-only-no-doc-terminal",
+      "expectedQualified": false,
+      "oracle": {
+        "qualified": false,
+        "reason": "unit success does not establish remaining default phases/process success",
+        "processExitCode": 0,
+        "processError": null,
+        "phaseCoverageComplete": false,
+        "unitPhase": {
+          "terminal": true,
+          "exercised": true,
+          "status": "ok",
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0,
+          "measured": 0,
+          "filtered": 0,
+          "cases": [
+            "test_link_type_from_pcap_supported",
+            "test_link_type_from_pcap_unsupported"
+          ]
+        },
+        "docPhase": {
+          "state": "missing-or-failed",
+          "exercised": false,
+          "terminal": false,
+          "testCases": null
+        },
+        "summaries": [
+          {
+            "status": "ok",
+            "passed": 2,
+            "failed": 0,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0
+          }
+        ],
+        "unitMarkerCount": 1,
+        "docMarkerCount": 1,
+        "unitMarkerObserved": true,
+        "docMarkerObserved": true,
+        "unexpectedFailureDiagnostics": []
+      }
+    },
+    {
+      "case": "wrong-success-exit",
+      "expectedQualified": false,
+      "oracle": {
+        "qualified": false,
+        "reason": "unit success does not establish remaining default phases/process success",
+        "processExitCode": 101,
+        "processError": null,
+        "phaseCoverageComplete": false,
+        "unitPhase": {
+          "terminal": true,
+          "exercised": true,
+          "status": "ok",
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0,
+          "measured": 0,
+          "filtered": 0,
+          "cases": [
+            "test_link_type_from_pcap_supported",
+            "test_link_type_from_pcap_unsupported"
+          ]
+        },
+        "docPhase": {
+          "state": "missing-or-failed",
+          "exercised": false,
+          "terminal": false,
+          "testCases": null
+        },
+        "summaries": [
+          {
+            "status": "ok",
+            "passed": 2,
+            "failed": 0,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0
+          },
+          {
+            "status": "ok",
+            "passed": 0,
+            "failed": 0,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0
+          }
+        ],
+        "unitMarkerCount": 1,
+        "docMarkerCount": 1,
+        "unitMarkerObserved": true,
+        "docMarkerObserved": true,
+        "unexpectedFailureDiagnostics": []
+      }
+    },
+    {
+      "case": "timeout-after-terminal-output",
+      "expectedQualified": false,
+      "oracle": {
+        "qualified": false,
+        "reason": "native transport/timeout/process identity unresolved",
+        "processExitCode": 0,
+        "processError": "timeout",
+        "phaseCoverageComplete": false,
+        "unitPhase": {
+          "terminal": false
+        },
+        "docPhase": {
+          "state": "unknown",
+          "exercised": false,
+          "terminal": false
+        },
+        "summaries": [
+          {
+            "status": "ok",
+            "passed": 2,
+            "failed": 0,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0
+          },
+          {
+            "status": "ok",
+            "passed": 0,
+            "failed": 0,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0
+          }
+        ],
+        "unitMarkerCount": 1,
+        "docMarkerCount": 1,
+        "unitMarkerObserved": true,
+        "docMarkerObserved": true
+      }
+    },
+    {
+      "case": "bool-exit-identity",
+      "expectedQualified": false,
+      "oracle": {
+        "qualified": false,
+        "reason": "native transport/timeout/process identity unresolved",
+        "processExitCode": false,
+        "processError": null,
+        "phaseCoverageComplete": false,
+        "unitPhase": {
+          "terminal": false
+        },
+        "docPhase": {
+          "state": "unknown",
+          "exercised": false,
+          "terminal": false
+        },
+        "summaries": [
+          {
+            "status": "ok",
+            "passed": 2,
+            "failed": 0,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0
+          },
+          {
+            "status": "ok",
+            "passed": 0,
+            "failed": 0,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0
+          }
+        ],
+        "unitMarkerCount": 1,
+        "docMarkerCount": 1,
+        "unitMarkerObserved": true,
+        "docMarkerObserved": true
+      }
+    },
+    {
+      "case": "missing-unit-marker",
+      "expectedQualified": false,
+      "oracle": {
+        "qualified": false,
+        "reason": "unit scope/terminal report missing",
+        "processExitCode": 0,
+        "processError": null,
+        "phaseCoverageComplete": false,
+        "unitPhase": {
+          "terminal": false
+        },
+        "docPhase": {
+          "state": "unknown",
+          "exercised": false,
+          "terminal": false
+        },
+        "summaries": [
+          {
+            "status": "ok",
+            "passed": 2,
+            "failed": 0,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0
+          },
+          {
+            "status": "ok",
+            "passed": 0,
+            "failed": 0,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0
+          }
+        ],
+        "unitMarkerCount": 0,
+        "docMarkerCount": 1,
+        "unitMarkerObserved": false,
+        "docMarkerObserved": true
+      }
+    },
+    {
+      "case": "duplicate-unit-marker",
+      "expectedQualified": false,
+      "oracle": {
+        "qualified": false,
+        "reason": "unit scope/terminal report missing",
+        "processExitCode": 0,
+        "processError": null,
+        "phaseCoverageComplete": false,
+        "unitPhase": {
+          "terminal": false
+        },
+        "docPhase": {
+          "state": "unknown",
+          "exercised": false,
+          "terminal": false
+        },
+        "summaries": [
+          {
+            "status": "ok",
+            "passed": 2,
+            "failed": 0,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0
+          },
+          {
+            "status": "ok",
+            "passed": 0,
+            "failed": 0,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0
+          }
+        ],
+        "unitMarkerCount": 2,
+        "docMarkerCount": 1,
+        "unitMarkerObserved": true,
+        "docMarkerObserved": true
+      }
+    },
+    {
+      "case": "missing-doc-marker",
+      "expectedQualified": false,
+      "oracle": {
+        "qualified": false,
+        "reason": "unit success does not establish remaining default phases/process success",
+        "processExitCode": 0,
+        "processError": null,
+        "phaseCoverageComplete": false,
+        "unitPhase": {
+          "terminal": true,
+          "exercised": true,
+          "status": "ok",
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0,
+          "measured": 0,
+          "filtered": 0,
+          "cases": [
+            "test_link_type_from_pcap_supported",
+            "test_link_type_from_pcap_unsupported"
+          ]
+        },
+        "docPhase": {
+          "state": "missing-or-failed",
+          "exercised": false,
+          "terminal": false,
+          "testCases": null
+        },
+        "summaries": [
+          {
+            "status": "ok",
+            "passed": 2,
+            "failed": 0,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0
+          },
+          {
+            "status": "ok",
+            "passed": 0,
+            "failed": 0,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0
+          }
+        ],
+        "unitMarkerCount": 1,
+        "docMarkerCount": 0,
+        "unitMarkerObserved": true,
+        "docMarkerObserved": false,
+        "unexpectedFailureDiagnostics": []
+      }
+    },
+    {
+      "case": "doc-not-zero",
+      "expectedQualified": false,
+      "oracle": {
+        "qualified": false,
+        "reason": "unit success does not establish remaining default phases/process success",
+        "processExitCode": 0,
+        "processError": null,
+        "phaseCoverageComplete": false,
+        "unitPhase": {
+          "terminal": true,
+          "exercised": true,
+          "status": "ok",
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0,
+          "measured": 0,
+          "filtered": 0,
+          "cases": [
+            "test_link_type_from_pcap_supported",
+            "test_link_type_from_pcap_unsupported"
+          ]
+        },
+        "docPhase": {
+          "state": "missing-or-failed",
+          "exercised": false,
+          "terminal": false,
+          "testCases": null
+        },
+        "summaries": [
+          {
+            "status": "ok",
+            "passed": 2,
+            "failed": 0,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0
+          },
+          {
+            "status": "ok",
+            "passed": 1,
+            "failed": 0,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0
+          }
+        ],
+        "unitMarkerCount": 1,
+        "docMarkerCount": 1,
+        "unitMarkerObserved": true,
+        "docMarkerObserved": true,
+        "unexpectedFailureDiagnostics": []
+      }
+    },
+    {
+      "case": "unit-filtered",
+      "expectedQualified": false,
+      "oracle": {
+        "qualified": false,
+        "reason": "unit scope/terminal report missing",
+        "processExitCode": 0,
+        "processError": null,
+        "phaseCoverageComplete": false,
+        "unitPhase": {
+          "terminal": false
+        },
+        "docPhase": {
+          "state": "unknown",
+          "exercised": false,
+          "terminal": false
+        },
+        "summaries": [
+          {
+            "status": "ok",
+            "passed": 2,
+            "failed": 0,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 1
+          },
+          {
+            "status": "ok",
+            "passed": 0,
+            "failed": 0,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0
+          }
+        ],
+        "unitMarkerCount": 1,
+        "docMarkerCount": 1,
+        "unitMarkerObserved": true,
+        "docMarkerObserved": true
+      }
+    },
+    {
+      "case": "unit-case-missing",
+      "expectedQualified": false,
+      "oracle": {
+        "qualified": false,
+        "reason": "unit scope/terminal report missing",
+        "processExitCode": 0,
+        "processError": null,
+        "phaseCoverageComplete": false,
+        "unitPhase": {
+          "terminal": false
+        },
+        "docPhase": {
+          "state": "unknown",
+          "exercised": false,
+          "terminal": false
+        },
+        "summaries": [
+          {
+            "status": "ok",
+            "passed": 2,
+            "failed": 0,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0
+          },
+          {
+            "status": "ok",
+            "passed": 0,
+            "failed": 0,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0
+          }
+        ],
+        "unitMarkerCount": 1,
+        "docMarkerCount": 1,
+        "unitMarkerObserved": true,
+        "docMarkerObserved": true
+      }
+    },
+    {
+      "case": "assertion-summary-contradiction",
+      "expectedQualified": false,
+      "oracle": {
+        "qualified": false,
+        "reason": "case terminal states contradict unit summary",
+        "processExitCode": 101,
+        "processError": null,
+        "phaseCoverageComplete": false,
+        "unitPhase": {
+          "terminal": false
+        },
+        "docPhase": {
+          "state": "unknown",
+          "exercised": false,
+          "terminal": false
+        },
+        "summaries": [
+          {
+            "status": "FAILED",
+            "passed": 1,
+            "failed": 1,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0
+          }
+        ],
+        "unitMarkerCount": 1,
+        "docMarkerCount": 0,
+        "unitMarkerObserved": true,
+        "docMarkerObserved": false
+      }
+    },
+    {
+      "case": "assertion-wrong-exit",
+      "expectedQualified": false,
+      "oracle": {
+        "qualified": false,
+        "reason": "unit failure/default-stop policy or remaining phases unresolved",
+        "processExitCode": 1,
+        "processError": null,
+        "phaseCoverageComplete": false,
+        "unitPhase": {
+          "terminal": true,
+          "exercised": true,
+          "status": "FAILED",
+          "passed": 1,
+          "failed": 1,
+          "ignored": 0,
+          "measured": 0,
+          "filtered": 0,
+          "cases": [
+            "test_link_type_from_pcap_supported",
+            "test_link_type_from_pcap_unsupported"
+          ]
+        },
+        "docPhase": {
+          "state": "unknown-after-unit-failure",
+          "exercised": false,
+          "terminal": false,
+          "testCases": null
+        },
+        "summaries": [
+          {
+            "status": "FAILED",
+            "passed": 1,
+            "failed": 1,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0
+          }
+        ],
+        "unitMarkerCount": 1,
+        "docMarkerCount": 0,
+        "unitMarkerObserved": true,
+        "docMarkerObserved": false,
+        "unexpectedFailureDiagnostics": []
+      }
+    },
+    {
+      "case": "assertion-followed-doc-marker",
+      "expectedQualified": false,
+      "oracle": {
+        "qualified": false,
+        "reason": "unit failure/default-stop policy or remaining phases unresolved",
+        "processExitCode": 101,
+        "processError": null,
+        "phaseCoverageComplete": false,
+        "unitPhase": {
+          "terminal": true,
+          "exercised": true,
+          "status": "FAILED",
+          "passed": 1,
+          "failed": 1,
+          "ignored": 0,
+          "measured": 0,
+          "filtered": 0,
+          "cases": [
+            "test_link_type_from_pcap_supported",
+            "test_link_type_from_pcap_unsupported"
+          ]
+        },
+        "docPhase": {
+          "state": "unknown-after-unit-failure",
+          "exercised": false,
+          "terminal": false,
+          "testCases": null
+        },
+        "summaries": [
+          {
+            "status": "FAILED",
+            "passed": 1,
+            "failed": 1,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0
+          }
+        ],
+        "unitMarkerCount": 1,
+        "docMarkerCount": 1,
+        "unitMarkerObserved": true,
+        "docMarkerObserved": true,
+        "unexpectedFailureDiagnostics": []
+      }
+    },
+    {
+      "case": "assertion-compiler-error",
+      "expectedQualified": false,
+      "oracle": {
+        "qualified": false,
+        "reason": "compile/setup/unknown diagnostic prevents complete default outcome",
+        "processExitCode": 101,
+        "processError": null,
+        "phaseCoverageComplete": false,
+        "unitPhase": {
+          "terminal": true,
+          "exercised": true,
+          "status": "FAILED",
+          "passed": 1,
+          "failed": 1,
+          "ignored": 0,
+          "measured": 0,
+          "filtered": 0,
+          "cases": [
+            "test_link_type_from_pcap_supported",
+            "test_link_type_from_pcap_unsupported"
+          ]
+        },
+        "docPhase": {
+          "state": "unknown",
+          "exercised": false,
+          "terminal": false
+        },
+        "summaries": [
+          {
+            "status": "FAILED",
+            "passed": 1,
+            "failed": 1,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0
+          }
+        ],
+        "unitMarkerCount": 1,
+        "docMarkerCount": 0,
+        "unitMarkerObserved": true,
+        "docMarkerObserved": false,
+        "unexpectedFailureDiagnostics": [
+          "error[E0308]: mismatched types"
+        ]
+      }
+    },
+    {
+      "case": "assertion-setup-error",
+      "expectedQualified": false,
+      "oracle": {
+        "qualified": false,
+        "reason": "compile/setup/unknown diagnostic prevents complete default outcome",
+        "processExitCode": 101,
+        "processError": null,
+        "phaseCoverageComplete": false,
+        "unitPhase": {
+          "terminal": true,
+          "exercised": true,
+          "status": "FAILED",
+          "passed": 1,
+          "failed": 1,
+          "ignored": 0,
+          "measured": 0,
+          "filtered": 0,
+          "cases": [
+            "test_link_type_from_pcap_supported",
+            "test_link_type_from_pcap_unsupported"
+          ]
+        },
+        "docPhase": {
+          "state": "unknown",
+          "exercised": false,
+          "terminal": false
+        },
+        "summaries": [
+          {
+            "status": "FAILED",
+            "passed": 1,
+            "failed": 1,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0
+          }
+        ],
+        "unitMarkerCount": 1,
+        "docMarkerCount": 0,
+        "unitMarkerObserved": true,
+        "docMarkerObserved": false,
+        "unexpectedFailureDiagnostics": [
+          "error: failed to run custom build command for pcap"
+        ]
+      }
+    },
+    {
+      "case": "assertion-unknown-diagnostic",
+      "expectedQualified": false,
+      "oracle": {
+        "qualified": false,
+        "reason": "compile/setup/unknown diagnostic prevents complete default outcome",
+        "processExitCode": 101,
+        "processError": null,
+        "phaseCoverageComplete": false,
+        "unitPhase": {
+          "terminal": true,
+          "exercised": true,
+          "status": "FAILED",
+          "passed": 1,
+          "failed": 1,
+          "ignored": 0,
+          "measured": 0,
+          "filtered": 0,
+          "cases": [
+            "test_link_type_from_pcap_supported",
+            "test_link_type_from_pcap_unsupported"
+          ]
+        },
+        "docPhase": {
+          "state": "unknown",
+          "exercised": false,
+          "terminal": false
+        },
+        "summaries": [
+          {
+            "status": "FAILED",
+            "passed": 1,
+            "failed": 1,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0
+          }
+        ],
+        "unitMarkerCount": 1,
+        "docMarkerCount": 0,
+        "unitMarkerObserved": true,
+        "docMarkerObserved": false,
+        "unexpectedFailureDiagnostics": [
+          "error: unknown execution failure"
+        ]
+      }
+    }
+  ],
+  "disabledFailFastPolicyRejected": true,
+  "acceptedPreflightCases": [
+    {
+      "case": "source-hash",
+      "result": {
+        "taskId": "rust-02",
+        "stage": "accepted-source-preflight",
+        "state": "failed-before-native-outcome",
+        "preflightSeconds": 0.001075000036507845,
+        "metadataVerification": {
+          "state": "synthetic metadata pass",
+          "elapsedSeconds": 0.125
+        },
+        "startedAt": "2026-10-29T07:27:13.791513+00:00",
+        "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+        "sourceRevision": "ab4bf739d46448436cb68933bb8260ee264449d5",
+        "sourceArchiveSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cacheArchiveSha256": "8032d13c39f53f584664ed521fedaadbc67ec043c38a8f70a7c1a79b2db6b2a5",
+        "containerCreateAttempted": false,
+        "dockerCalls": 0,
+        "taskOutcomeObserved": false,
+        "testsPassed": null,
+        "costUsd": null,
+        "costExclusions": [
+          "No metered host/container charge source; dependency preparation retained separately."
+        ],
+        "modelCalls": 0,
+        "indexConsulted": false,
+        "campaignExecuted": false,
+        "failureStage": "accepted-source-preflight",
+        "errorType": "ValueError",
+        "error": "archive hash mismatch: /tmp/dotrepo-f05-offline-requalification-v4-independent-j5af_pvh/source-hash/source.tar; expected=0000000000000000000000000000000000000000000000000000000000000000; observed=b05dea3a3b09073adac1766de262d88c8b8d89cc1e007dc0c40fd96b1b8ec1aa",
+        "workElapsedSeconds": 0.00107533298432827,
+        "cleanupAttempted": false,
+        "cleanupExitCode": null,
+        "cleanupReason": "no container creation attempted; no daemon cleanup needed",
+        "cleanupSeconds": 0.0,
+        "elapsedSeconds": 0.0010760831646621227,
+        "totalMeasuredOperatorSeconds": 0.12607608316466212
+      }
+    },
+    {
+      "case": "cache-hash",
+      "result": {
+        "taskId": "rust-02",
+        "stage": "accepted-cache-preflight",
+        "state": "failed-before-native-outcome",
+        "preflightSeconds": 0.0011564581654965878,
+        "metadataVerification": {
+          "state": "synthetic metadata pass",
+          "elapsedSeconds": 0.125
+        },
+        "startedAt": "2026-10-29T07:27:13.794380+00:00",
+        "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+        "sourceRevision": "ab4bf739d46448436cb68933bb8260ee264449d5",
+        "sourceArchiveSha256": "b05dea3a3b09073adac1766de262d88c8b8d89cc1e007dc0c40fd96b1b8ec1aa",
+        "cacheArchiveSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "containerCreateAttempted": false,
+        "dockerCalls": 0,
+        "taskOutcomeObserved": false,
+        "testsPassed": null,
+        "costUsd": null,
+        "costExclusions": [
+          "No metered host/container charge source; dependency preparation retained separately."
+        ],
+        "modelCalls": 0,
+        "indexConsulted": false,
+        "campaignExecuted": false,
+        "failureStage": "accepted-cache-preflight",
+        "errorType": "ValueError",
+        "error": "archive hash mismatch: /tmp/dotrepo-f05-offline-requalification-v4-independent-j5af_pvh/cache-hash/cache.tar; expected=0000000000000000000000000000000000000000000000000000000000000000; observed=8032d13c39f53f584664ed521fedaadbc67ec043c38a8f70a7c1a79b2db6b2a5",
+        "workElapsedSeconds": 0.0011568330228328705,
+        "cleanupAttempted": false,
+        "cleanupExitCode": null,
+        "cleanupReason": "no container creation attempted; no daemon cleanup needed",
+        "cleanupSeconds": 0.0,
+        "elapsedSeconds": 0.0011574160307645798,
+        "totalMeasuredOperatorSeconds": 0.12615741603076458
+      }
+    }
+  ],
+  "fullMockedDriverCases": [
+    {
+      "case": "normal-two-unit-zero-doc-terminal",
+      "result": {
+        "taskId": "rust-02",
+        "stage": "tracked-source-after-tests",
+        "state": "offline-outcome-observed-pending-independent-review",
+        "preflightSeconds": 0.0006662500090897083,
+        "metadataVerification": {
+          "state": "direct API; separate metadata verification timing not supplied",
+          "elapsedSeconds": null
+        },
+        "startedAt": "2026-10-29T07:27:13.796133+00:00",
+        "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+        "sourceRevision": "ab4bf739d46448436cb68933bb8260ee264449d5",
+        "sourceArchiveSha256": "862b159c55ee7693faed80c2546aa203cc370e867cf5a206cff5356ab66766d6",
+        "cacheArchiveSha256": "f8ca1fccc8792cc5eb34aad37640268ab339d852de15b10a3cf1d5bcaf5296a8",
+        "containerCreateAttempted": true,
+        "dockerCalls": 16,
+        "taskOutcomeObserved": true,
+        "testsPassed": true,
+        "costUsd": null,
+        "costExclusions": [
+          "No metered host/container charge source; dependency preparation retained separately."
+        ],
+        "modelCalls": 0,
+        "indexConsulted": false,
+        "campaignExecuted": false,
+        "offlineSetupSeconds": 1.9578728824853897e-06,
+        "testExitCode": 0,
+        "executionError": null,
+        "oracle": {
+          "qualified": true,
+          "reason": "units and zero-case default doc phase terminal",
+          "processExitCode": 0,
+          "processError": null,
+          "phaseCoverageComplete": true,
+          "unitPhase": {
+            "terminal": true,
+            "exercised": true,
+            "status": "ok",
+            "passed": 2,
+            "failed": 0,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0,
+            "cases": [
+              "test_link_type_from_pcap_supported",
+              "test_link_type_from_pcap_unsupported"
+            ]
+          },
+          "docPhase": {
+            "state": "zero-case-phase-terminal",
+            "exercised": true,
+            "terminal": true,
+            "testCases": 0
+          },
+          "summaries": [
+            {
+              "status": "ok",
+              "passed": 2,
+              "failed": 0,
+              "ignored": 0,
+              "measured": 0,
+              "filtered": 0
+            },
+            {
+              "status": "ok",
+              "passed": 0,
+              "failed": 0,
+              "ignored": 0,
+              "measured": 0,
+              "filtered": 0
+            }
+          ],
+          "unitMarkerCount": 1,
+          "docMarkerCount": 1,
+          "unitMarkerObserved": true,
+          "docMarkerObserved": true,
+          "unexpectedFailureDiagnostics": []
+        },
+        "trackedSourceIntact": true,
+        "workElapsedSeconds": 0.0008743330836296082,
+        "cleanupAttempted": true,
+        "cleanupExitCode": 0,
+        "cleanupSeconds": 1.0831281542778015e-06,
+        "elapsedSeconds": 0.0008758751209825277,
+        "totalMeasuredOperatorSeconds": null
+      },
+      "syntheticCalls": [
+        {
+          "label": "image-inspect",
+          "argv": [
+            "docker",
+            "image",
+            "inspect",
+            "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "create",
+          "argv": [
+            "docker",
+            "create",
+            "--name",
+            "dotrepo-f05-offline-rust-02-d6e06f1851",
+            "--pull=never",
+            "--platform=linux/arm64",
+            "--init",
+            "--read-only",
+            "--cap-drop=ALL",
+            "--security-opt=no-new-privileges",
+            "--network=none",
+            "--ipc=private",
+            "--cgroupns=private",
+            "--user=1000:1000",
+            "--workdir=/workspace",
+            "--memory=4g",
+            "--memory-swap=4g",
+            "--cpus=3",
+            "--pids-limit=256",
+            "--ulimit",
+            "nofile=4096:4096",
+            "--tmpfs",
+            "/workspace:rw,exec,nosuid,nodev,size=8g,uid=1000,gid=1000,mode=0700",
+            "--tmpfs",
+            "/tmp:rw,exec,nosuid,nodev,size=512m,uid=1000,gid=1000,mode=0700",
+            "--env",
+            "CARGO_BUILD_JOBS=3",
+            "--env",
+            "CARGO_HOME=/workspace/dependency-cache/cargo",
+            "--env",
+            "CARGO_NET_OFFLINE=true",
+            "--env",
+            "CARGO_TARGET_DIR=/workspace/cargo-target",
+            "--env",
+            "GIT_CONFIG_GLOBAL=/dev/null",
+            "--env",
+            "GIT_CONFIG_NOSYSTEM=1",
+            "--env",
+            "GIT_TERMINAL_PROMPT=0",
+            "--env",
+            "GOCACHE=/workspace/go-build",
+            "--env",
+            "GOENV=off",
+            "--env",
+            "GOMAXPROCS=3",
+            "--env",
+            "GOPATH=/workspace/dependency-cache/go",
+            "--env",
+            "GOPROXY=off",
+            "--env",
+            "GOSUMDB=sum.golang.org",
+            "--env",
+            "GOTOOLCHAIN=local",
+            "--env",
+            "HOME=/workspace/home",
+            "--env",
+            "LANG=C.UTF-8",
+            "--env",
+            "NPM_CONFIG_AUDIT=false",
+            "--env",
+            "NPM_CONFIG_CACHE=/workspace/dependency-cache/npm-cache",
+            "--env",
+            "NPM_CONFIG_FUND=false",
+            "--env",
+            "NPM_CONFIG_OFFLINE=true",
+            "--env",
+            "NPM_CONFIG_USERCONFIG=/dev/null",
+            "--env",
+            "TMPDIR=/workspace/tmp",
+            "--entrypoint=/bin/sh",
+            "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+            "-c",
+            "while :; do sleep 3600; done"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "start",
+          "argv": [
+            "docker",
+            "start",
+            "dotrepo-f05-offline-rust-02-d6e06f1851"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "container-inspect",
+          "argv": [
+            "docker",
+            "inspect",
+            "dotrepo-f05-offline-rust-02-d6e06f1851"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "initialize",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-d6e06f1851",
+            "mkdir",
+            "-p",
+            "/workspace/repository",
+            "/workspace/dependency-cache",
+            "/workspace/home",
+            "/workspace/tmp"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "source-provision",
+          "argv": [
+            "docker",
+            "exec",
+            "-i",
+            "dotrepo-f05-offline-rust-02-d6e06f1851",
+            "tar",
+            "--extract",
+            "--no-same-owner",
+            "--no-same-permissions",
+            "-C",
+            "/workspace/repository"
+          ],
+          "stdinBytes": 32
+        },
+        {
+          "label": "cache-provision",
+          "argv": [
+            "docker",
+            "exec",
+            "-i",
+            "dotrepo-f05-offline-rust-02-d6e06f1851",
+            "tar",
+            "--extract",
+            "--no-same-owner",
+            "--no-same-permissions",
+            "-C",
+            "/workspace/dependency-cache"
+          ],
+          "stdinBytes": 32
+        },
+        {
+          "label": "initial-source-byte-check",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-d6e06f1851",
+            "sha256sum",
+            "--check",
+            "--quiet",
+            "--strict",
+            "-"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "initial-cache-byte-check",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-d6e06f1851",
+            "sha256sum",
+            "--check",
+            "--quiet",
+            "--strict",
+            "-"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "source-free-tool-byte-hashes",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-d6e06f1851",
+            "/bin/sh",
+            "-eu",
+            "-c",
+            "cd /workspace/repository; rust_root=$(rustc --print sysroot); sha256sum \"$rust_root/bin/rustc\" \"$rust_root/bin/cargo\" /usr/local/bin/node /usr/local/bin/uv /usr/local/go/bin/go /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/lib/node_modules/npm/package.json"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "tools-before-setup",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-d6e06f1851",
+            "/bin/sh",
+            "-eu",
+            "-c",
+            "cd /workspace/repository; rustc -vV; cargo --version; dpkg-query -W libpcap-dev libpcap0.8-dev libasound2-dev"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "offline-setup-0",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-d6e06f1851",
+            "/bin/sh",
+            "-eu",
+            "-c",
+            "cd /workspace/repository; cargo fetch --locked --offline --target aarch64-unknown-linux-gnu --manifest-path lib/sniffnet-packet-parser/Cargo.toml"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "tools-after-setup",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-d6e06f1851",
+            "/bin/sh",
+            "-eu",
+            "-c",
+            "cd /workspace/repository; rustc -vV; cargo --version; dpkg-query -W libpcap-dev libpcap0.8-dev libasound2-dev"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "native-tests",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-d6e06f1851",
+            "/bin/sh",
+            "-eu",
+            "-c",
+            "cd /workspace/repository; cargo test --locked --manifest-path lib/sniffnet-packet-parser/Cargo.toml -- --nocapture"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "tracked-source-after-tests",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-d6e06f1851",
+            "sha256sum",
+            "--check",
+            "--quiet",
+            "--strict",
+            "-"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "cleanup",
+          "argv": [
+            "docker",
+            "rm",
+            "-f",
+            "dotrepo-f05-offline-rust-02-d6e06f1851"
+          ],
+          "stdinBytes": 0
+        }
+      ]
+    },
+    {
+      "case": "terminal-assertion-default-stop",
+      "result": {
+        "taskId": "rust-02",
+        "stage": "tracked-source-after-tests",
+        "state": "offline-outcome-observed-pending-independent-review",
+        "preflightSeconds": 0.0007846250664442778,
+        "metadataVerification": {
+          "state": "direct API; separate metadata verification timing not supplied",
+          "elapsedSeconds": null
+        },
+        "startedAt": "2026-10-29T07:27:13.797403+00:00",
+        "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+        "sourceRevision": "ab4bf739d46448436cb68933bb8260ee264449d5",
+        "sourceArchiveSha256": "862b159c55ee7693faed80c2546aa203cc370e867cf5a206cff5356ab66766d6",
+        "cacheArchiveSha256": "f8ca1fccc8792cc5eb34aad37640268ab339d852de15b10a3cf1d5bcaf5296a8",
+        "containerCreateAttempted": true,
+        "dockerCalls": 16,
+        "taskOutcomeObserved": true,
+        "testsPassed": false,
+        "costUsd": null,
+        "costExclusions": [
+          "No metered host/container charge source; dependency preparation retained separately."
+        ],
+        "modelCalls": 0,
+        "indexConsulted": false,
+        "campaignExecuted": false,
+        "offlineSetupSeconds": 1.9168946892023087e-06,
+        "testExitCode": 101,
+        "executionError": null,
+        "oracle": {
+          "qualified": true,
+          "reason": "terminal unit assertion failure is frozen default-command outcome; doc phase unexecuted",
+          "processExitCode": 101,
+          "processError": null,
+          "phaseCoverageComplete": false,
+          "unitPhase": {
+            "terminal": true,
+            "exercised": true,
+            "status": "FAILED",
+            "passed": 1,
+            "failed": 1,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0,
+            "cases": [
+              "test_link_type_from_pcap_supported",
+              "test_link_type_from_pcap_unsupported"
+            ]
+          },
+          "docPhase": {
+            "state": "unexecuted-default-stop",
+            "exercised": false,
+            "terminal": false,
+            "testCases": null
+          },
+          "summaries": [
+            {
+              "status": "FAILED",
+              "passed": 1,
+              "failed": 1,
+              "ignored": 0,
+              "measured": 0,
+              "filtered": 0
+            }
+          ],
+          "unitMarkerCount": 1,
+          "docMarkerCount": 0,
+          "unitMarkerObserved": true,
+          "docMarkerObserved": false,
+          "unexpectedFailureDiagnostics": []
+        },
+        "trackedSourceIntact": true,
+        "workElapsedSeconds": 0.0009391249623149633,
+        "cleanupAttempted": true,
+        "cleanupExitCode": 0,
+        "cleanupSeconds": 1.1657830327749252e-06,
+        "elapsedSeconds": 0.000940707977861166,
+        "totalMeasuredOperatorSeconds": null
+      },
+      "syntheticCalls": [
+        {
+          "label": "image-inspect",
+          "argv": [
+            "docker",
+            "image",
+            "inspect",
+            "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "create",
+          "argv": [
+            "docker",
+            "create",
+            "--name",
+            "dotrepo-f05-offline-rust-02-3ad1bb9ed8",
+            "--pull=never",
+            "--platform=linux/arm64",
+            "--init",
+            "--read-only",
+            "--cap-drop=ALL",
+            "--security-opt=no-new-privileges",
+            "--network=none",
+            "--ipc=private",
+            "--cgroupns=private",
+            "--user=1000:1000",
+            "--workdir=/workspace",
+            "--memory=4g",
+            "--memory-swap=4g",
+            "--cpus=3",
+            "--pids-limit=256",
+            "--ulimit",
+            "nofile=4096:4096",
+            "--tmpfs",
+            "/workspace:rw,exec,nosuid,nodev,size=8g,uid=1000,gid=1000,mode=0700",
+            "--tmpfs",
+            "/tmp:rw,exec,nosuid,nodev,size=512m,uid=1000,gid=1000,mode=0700",
+            "--env",
+            "CARGO_BUILD_JOBS=3",
+            "--env",
+            "CARGO_HOME=/workspace/dependency-cache/cargo",
+            "--env",
+            "CARGO_NET_OFFLINE=true",
+            "--env",
+            "CARGO_TARGET_DIR=/workspace/cargo-target",
+            "--env",
+            "GIT_CONFIG_GLOBAL=/dev/null",
+            "--env",
+            "GIT_CONFIG_NOSYSTEM=1",
+            "--env",
+            "GIT_TERMINAL_PROMPT=0",
+            "--env",
+            "GOCACHE=/workspace/go-build",
+            "--env",
+            "GOENV=off",
+            "--env",
+            "GOMAXPROCS=3",
+            "--env",
+            "GOPATH=/workspace/dependency-cache/go",
+            "--env",
+            "GOPROXY=off",
+            "--env",
+            "GOSUMDB=sum.golang.org",
+            "--env",
+            "GOTOOLCHAIN=local",
+            "--env",
+            "HOME=/workspace/home",
+            "--env",
+            "LANG=C.UTF-8",
+            "--env",
+            "NPM_CONFIG_AUDIT=false",
+            "--env",
+            "NPM_CONFIG_CACHE=/workspace/dependency-cache/npm-cache",
+            "--env",
+            "NPM_CONFIG_FUND=false",
+            "--env",
+            "NPM_CONFIG_OFFLINE=true",
+            "--env",
+            "NPM_CONFIG_USERCONFIG=/dev/null",
+            "--env",
+            "TMPDIR=/workspace/tmp",
+            "--entrypoint=/bin/sh",
+            "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+            "-c",
+            "while :; do sleep 3600; done"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "start",
+          "argv": [
+            "docker",
+            "start",
+            "dotrepo-f05-offline-rust-02-3ad1bb9ed8"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "container-inspect",
+          "argv": [
+            "docker",
+            "inspect",
+            "dotrepo-f05-offline-rust-02-3ad1bb9ed8"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "initialize",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-3ad1bb9ed8",
+            "mkdir",
+            "-p",
+            "/workspace/repository",
+            "/workspace/dependency-cache",
+            "/workspace/home",
+            "/workspace/tmp"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "source-provision",
+          "argv": [
+            "docker",
+            "exec",
+            "-i",
+            "dotrepo-f05-offline-rust-02-3ad1bb9ed8",
+            "tar",
+            "--extract",
+            "--no-same-owner",
+            "--no-same-permissions",
+            "-C",
+            "/workspace/repository"
+          ],
+          "stdinBytes": 32
+        },
+        {
+          "label": "cache-provision",
+          "argv": [
+            "docker",
+            "exec",
+            "-i",
+            "dotrepo-f05-offline-rust-02-3ad1bb9ed8",
+            "tar",
+            "--extract",
+            "--no-same-owner",
+            "--no-same-permissions",
+            "-C",
+            "/workspace/dependency-cache"
+          ],
+          "stdinBytes": 32
+        },
+        {
+          "label": "initial-source-byte-check",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-3ad1bb9ed8",
+            "sha256sum",
+            "--check",
+            "--quiet",
+            "--strict",
+            "-"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "initial-cache-byte-check",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-3ad1bb9ed8",
+            "sha256sum",
+            "--check",
+            "--quiet",
+            "--strict",
+            "-"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "source-free-tool-byte-hashes",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-3ad1bb9ed8",
+            "/bin/sh",
+            "-eu",
+            "-c",
+            "cd /workspace/repository; rust_root=$(rustc --print sysroot); sha256sum \"$rust_root/bin/rustc\" \"$rust_root/bin/cargo\" /usr/local/bin/node /usr/local/bin/uv /usr/local/go/bin/go /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/lib/node_modules/npm/package.json"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "tools-before-setup",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-3ad1bb9ed8",
+            "/bin/sh",
+            "-eu",
+            "-c",
+            "cd /workspace/repository; rustc -vV; cargo --version; dpkg-query -W libpcap-dev libpcap0.8-dev libasound2-dev"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "offline-setup-0",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-3ad1bb9ed8",
+            "/bin/sh",
+            "-eu",
+            "-c",
+            "cd /workspace/repository; cargo fetch --locked --offline --target aarch64-unknown-linux-gnu --manifest-path lib/sniffnet-packet-parser/Cargo.toml"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "tools-after-setup",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-3ad1bb9ed8",
+            "/bin/sh",
+            "-eu",
+            "-c",
+            "cd /workspace/repository; rustc -vV; cargo --version; dpkg-query -W libpcap-dev libpcap0.8-dev libasound2-dev"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "native-tests",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-3ad1bb9ed8",
+            "/bin/sh",
+            "-eu",
+            "-c",
+            "cd /workspace/repository; cargo test --locked --manifest-path lib/sniffnet-packet-parser/Cargo.toml -- --nocapture"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "tracked-source-after-tests",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-3ad1bb9ed8",
+            "sha256sum",
+            "--check",
+            "--quiet",
+            "--strict",
+            "-"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "cleanup",
+          "argv": [
+            "docker",
+            "rm",
+            "-f",
+            "dotrepo-f05-offline-rust-02-3ad1bb9ed8"
+          ],
+          "stdinBytes": 0
+        }
+      ]
+    },
+    {
+      "case": "unit-pass-later-doc-compile-failure",
+      "result": {
+        "taskId": "rust-02",
+        "stage": "tracked-source-after-tests",
+        "state": "incomplete-or-protocol-deviation",
+        "preflightSeconds": 0.0006997918244451284,
+        "metadataVerification": {
+          "state": "direct API; separate metadata verification timing not supplied",
+          "elapsedSeconds": null
+        },
+        "startedAt": "2026-10-29T07:27:13.798527+00:00",
+        "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+        "sourceRevision": "ab4bf739d46448436cb68933bb8260ee264449d5",
+        "sourceArchiveSha256": "862b159c55ee7693faed80c2546aa203cc370e867cf5a206cff5356ab66766d6",
+        "cacheArchiveSha256": "f8ca1fccc8792cc5eb34aad37640268ab339d852de15b10a3cf1d5bcaf5296a8",
+        "containerCreateAttempted": true,
+        "dockerCalls": 16,
+        "taskOutcomeObserved": false,
+        "testsPassed": null,
+        "costUsd": null,
+        "costExclusions": [
+          "No metered host/container charge source; dependency preparation retained separately."
+        ],
+        "modelCalls": 0,
+        "indexConsulted": false,
+        "campaignExecuted": false,
+        "offlineSetupSeconds": 1.5420373529195786e-06,
+        "testExitCode": 101,
+        "executionError": null,
+        "oracle": {
+          "qualified": false,
+          "reason": "compile/setup/unknown diagnostic prevents complete default outcome",
+          "processExitCode": 101,
+          "processError": null,
+          "phaseCoverageComplete": false,
+          "unitPhase": {
+            "terminal": true,
+            "exercised": true,
+            "status": "ok",
+            "passed": 2,
+            "failed": 0,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0,
+            "cases": [
+              "test_link_type_from_pcap_supported",
+              "test_link_type_from_pcap_unsupported"
+            ]
+          },
+          "docPhase": {
+            "state": "unknown",
+            "exercised": false,
+            "terminal": false
+          },
+          "summaries": [
+            {
+              "status": "ok",
+              "passed": 2,
+              "failed": 0,
+              "ignored": 0,
+              "measured": 0,
+              "filtered": 0
+            }
+          ],
+          "unitMarkerCount": 1,
+          "docMarkerCount": 1,
+          "unitMarkerObserved": true,
+          "docMarkerObserved": true,
+          "unexpectedFailureDiagnostics": [
+            "error: doctest failed, to rerun pass --doc"
+          ]
+        },
+        "trackedSourceIntact": true,
+        "workElapsedSeconds": 0.0008333339355885983,
+        "cleanupAttempted": true,
+        "cleanupExitCode": 0,
+        "cleanupSeconds": 1.0421499609947205e-06,
+        "elapsedSeconds": 0.0008346668910235167,
+        "totalMeasuredOperatorSeconds": null
+      },
+      "syntheticCalls": [
+        {
+          "label": "image-inspect",
+          "argv": [
+            "docker",
+            "image",
+            "inspect",
+            "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "create",
+          "argv": [
+            "docker",
+            "create",
+            "--name",
+            "dotrepo-f05-offline-rust-02-0c65d1eb9f",
+            "--pull=never",
+            "--platform=linux/arm64",
+            "--init",
+            "--read-only",
+            "--cap-drop=ALL",
+            "--security-opt=no-new-privileges",
+            "--network=none",
+            "--ipc=private",
+            "--cgroupns=private",
+            "--user=1000:1000",
+            "--workdir=/workspace",
+            "--memory=4g",
+            "--memory-swap=4g",
+            "--cpus=3",
+            "--pids-limit=256",
+            "--ulimit",
+            "nofile=4096:4096",
+            "--tmpfs",
+            "/workspace:rw,exec,nosuid,nodev,size=8g,uid=1000,gid=1000,mode=0700",
+            "--tmpfs",
+            "/tmp:rw,exec,nosuid,nodev,size=512m,uid=1000,gid=1000,mode=0700",
+            "--env",
+            "CARGO_BUILD_JOBS=3",
+            "--env",
+            "CARGO_HOME=/workspace/dependency-cache/cargo",
+            "--env",
+            "CARGO_NET_OFFLINE=true",
+            "--env",
+            "CARGO_TARGET_DIR=/workspace/cargo-target",
+            "--env",
+            "GIT_CONFIG_GLOBAL=/dev/null",
+            "--env",
+            "GIT_CONFIG_NOSYSTEM=1",
+            "--env",
+            "GIT_TERMINAL_PROMPT=0",
+            "--env",
+            "GOCACHE=/workspace/go-build",
+            "--env",
+            "GOENV=off",
+            "--env",
+            "GOMAXPROCS=3",
+            "--env",
+            "GOPATH=/workspace/dependency-cache/go",
+            "--env",
+            "GOPROXY=off",
+            "--env",
+            "GOSUMDB=sum.golang.org",
+            "--env",
+            "GOTOOLCHAIN=local",
+            "--env",
+            "HOME=/workspace/home",
+            "--env",
+            "LANG=C.UTF-8",
+            "--env",
+            "NPM_CONFIG_AUDIT=false",
+            "--env",
+            "NPM_CONFIG_CACHE=/workspace/dependency-cache/npm-cache",
+            "--env",
+            "NPM_CONFIG_FUND=false",
+            "--env",
+            "NPM_CONFIG_OFFLINE=true",
+            "--env",
+            "NPM_CONFIG_USERCONFIG=/dev/null",
+            "--env",
+            "TMPDIR=/workspace/tmp",
+            "--entrypoint=/bin/sh",
+            "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+            "-c",
+            "while :; do sleep 3600; done"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "start",
+          "argv": [
+            "docker",
+            "start",
+            "dotrepo-f05-offline-rust-02-0c65d1eb9f"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "container-inspect",
+          "argv": [
+            "docker",
+            "inspect",
+            "dotrepo-f05-offline-rust-02-0c65d1eb9f"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "initialize",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-0c65d1eb9f",
+            "mkdir",
+            "-p",
+            "/workspace/repository",
+            "/workspace/dependency-cache",
+            "/workspace/home",
+            "/workspace/tmp"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "source-provision",
+          "argv": [
+            "docker",
+            "exec",
+            "-i",
+            "dotrepo-f05-offline-rust-02-0c65d1eb9f",
+            "tar",
+            "--extract",
+            "--no-same-owner",
+            "--no-same-permissions",
+            "-C",
+            "/workspace/repository"
+          ],
+          "stdinBytes": 32
+        },
+        {
+          "label": "cache-provision",
+          "argv": [
+            "docker",
+            "exec",
+            "-i",
+            "dotrepo-f05-offline-rust-02-0c65d1eb9f",
+            "tar",
+            "--extract",
+            "--no-same-owner",
+            "--no-same-permissions",
+            "-C",
+            "/workspace/dependency-cache"
+          ],
+          "stdinBytes": 32
+        },
+        {
+          "label": "initial-source-byte-check",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-0c65d1eb9f",
+            "sha256sum",
+            "--check",
+            "--quiet",
+            "--strict",
+            "-"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "initial-cache-byte-check",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-0c65d1eb9f",
+            "sha256sum",
+            "--check",
+            "--quiet",
+            "--strict",
+            "-"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "source-free-tool-byte-hashes",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-0c65d1eb9f",
+            "/bin/sh",
+            "-eu",
+            "-c",
+            "cd /workspace/repository; rust_root=$(rustc --print sysroot); sha256sum \"$rust_root/bin/rustc\" \"$rust_root/bin/cargo\" /usr/local/bin/node /usr/local/bin/uv /usr/local/go/bin/go /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/lib/node_modules/npm/package.json"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "tools-before-setup",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-0c65d1eb9f",
+            "/bin/sh",
+            "-eu",
+            "-c",
+            "cd /workspace/repository; rustc -vV; cargo --version; dpkg-query -W libpcap-dev libpcap0.8-dev libasound2-dev"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "offline-setup-0",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-0c65d1eb9f",
+            "/bin/sh",
+            "-eu",
+            "-c",
+            "cd /workspace/repository; cargo fetch --locked --offline --target aarch64-unknown-linux-gnu --manifest-path lib/sniffnet-packet-parser/Cargo.toml"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "tools-after-setup",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-0c65d1eb9f",
+            "/bin/sh",
+            "-eu",
+            "-c",
+            "cd /workspace/repository; rustc -vV; cargo --version; dpkg-query -W libpcap-dev libpcap0.8-dev libasound2-dev"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "native-tests",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-0c65d1eb9f",
+            "/bin/sh",
+            "-eu",
+            "-c",
+            "cd /workspace/repository; cargo test --locked --manifest-path lib/sniffnet-packet-parser/Cargo.toml -- --nocapture"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "tracked-source-after-tests",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-0c65d1eb9f",
+            "sha256sum",
+            "--check",
+            "--quiet",
+            "--strict",
+            "-"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "cleanup",
+          "argv": [
+            "docker",
+            "rm",
+            "-f",
+            "dotrepo-f05-offline-rust-02-0c65d1eb9f"
+          ],
+          "stdinBytes": 0
+        }
+      ]
+    },
+    {
+      "case": "cleanup-failed",
+      "result": {
+        "taskId": "rust-02",
+        "stage": "tracked-source-after-tests",
+        "state": "cleanup-unresolved",
+        "preflightSeconds": 0.0006082910113036633,
+        "metadataVerification": {
+          "state": "direct API; separate metadata verification timing not supplied",
+          "elapsedSeconds": null
+        },
+        "startedAt": "2026-10-29T07:27:13.799517+00:00",
+        "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+        "sourceRevision": "ab4bf739d46448436cb68933bb8260ee264449d5",
+        "sourceArchiveSha256": "862b159c55ee7693faed80c2546aa203cc370e867cf5a206cff5356ab66766d6",
+        "cacheArchiveSha256": "f8ca1fccc8792cc5eb34aad37640268ab339d852de15b10a3cf1d5bcaf5296a8",
+        "containerCreateAttempted": true,
+        "dockerCalls": 16,
+        "taskOutcomeObserved": true,
+        "testsPassed": true,
+        "costUsd": null,
+        "costExclusions": [
+          "No metered host/container charge source; dependency preparation retained separately."
+        ],
+        "modelCalls": 0,
+        "indexConsulted": false,
+        "campaignExecuted": false,
+        "offlineSetupSeconds": 1.5830155462026596e-06,
+        "testExitCode": 0,
+        "executionError": null,
+        "oracle": {
+          "qualified": true,
+          "reason": "units and zero-case default doc phase terminal",
+          "processExitCode": 0,
+          "processError": null,
+          "phaseCoverageComplete": true,
+          "unitPhase": {
+            "terminal": true,
+            "exercised": true,
+            "status": "ok",
+            "passed": 2,
+            "failed": 0,
+            "ignored": 0,
+            "measured": 0,
+            "filtered": 0,
+            "cases": [
+              "test_link_type_from_pcap_supported",
+              "test_link_type_from_pcap_unsupported"
+            ]
+          },
+          "docPhase": {
+            "state": "zero-case-phase-terminal",
+            "exercised": true,
+            "terminal": true,
+            "testCases": 0
+          },
+          "summaries": [
+            {
+              "status": "ok",
+              "passed": 2,
+              "failed": 0,
+              "ignored": 0,
+              "measured": 0,
+              "filtered": 0
+            },
+            {
+              "status": "ok",
+              "passed": 0,
+              "failed": 0,
+              "ignored": 0,
+              "measured": 0,
+              "filtered": 0
+            }
+          ],
+          "unitMarkerCount": 1,
+          "docMarkerCount": 1,
+          "unitMarkerObserved": true,
+          "docMarkerObserved": true,
+          "unexpectedFailureDiagnostics": []
+        },
+        "trackedSourceIntact": true,
+        "workElapsedSeconds": 0.0007754159159958363,
+        "cleanupAttempted": true,
+        "cleanupExitCode": 1,
+        "cleanupSeconds": 1.084059476852417e-06,
+        "elapsedSeconds": 0.0007767500355839729,
+        "totalMeasuredOperatorSeconds": null
+      },
+      "syntheticCalls": [
+        {
+          "label": "image-inspect",
+          "argv": [
+            "docker",
+            "image",
+            "inspect",
+            "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "create",
+          "argv": [
+            "docker",
+            "create",
+            "--name",
+            "dotrepo-f05-offline-rust-02-6d9d518355",
+            "--pull=never",
+            "--platform=linux/arm64",
+            "--init",
+            "--read-only",
+            "--cap-drop=ALL",
+            "--security-opt=no-new-privileges",
+            "--network=none",
+            "--ipc=private",
+            "--cgroupns=private",
+            "--user=1000:1000",
+            "--workdir=/workspace",
+            "--memory=4g",
+            "--memory-swap=4g",
+            "--cpus=3",
+            "--pids-limit=256",
+            "--ulimit",
+            "nofile=4096:4096",
+            "--tmpfs",
+            "/workspace:rw,exec,nosuid,nodev,size=8g,uid=1000,gid=1000,mode=0700",
+            "--tmpfs",
+            "/tmp:rw,exec,nosuid,nodev,size=512m,uid=1000,gid=1000,mode=0700",
+            "--env",
+            "CARGO_BUILD_JOBS=3",
+            "--env",
+            "CARGO_HOME=/workspace/dependency-cache/cargo",
+            "--env",
+            "CARGO_NET_OFFLINE=true",
+            "--env",
+            "CARGO_TARGET_DIR=/workspace/cargo-target",
+            "--env",
+            "GIT_CONFIG_GLOBAL=/dev/null",
+            "--env",
+            "GIT_CONFIG_NOSYSTEM=1",
+            "--env",
+            "GIT_TERMINAL_PROMPT=0",
+            "--env",
+            "GOCACHE=/workspace/go-build",
+            "--env",
+            "GOENV=off",
+            "--env",
+            "GOMAXPROCS=3",
+            "--env",
+            "GOPATH=/workspace/dependency-cache/go",
+            "--env",
+            "GOPROXY=off",
+            "--env",
+            "GOSUMDB=sum.golang.org",
+            "--env",
+            "GOTOOLCHAIN=local",
+            "--env",
+            "HOME=/workspace/home",
+            "--env",
+            "LANG=C.UTF-8",
+            "--env",
+            "NPM_CONFIG_AUDIT=false",
+            "--env",
+            "NPM_CONFIG_CACHE=/workspace/dependency-cache/npm-cache",
+            "--env",
+            "NPM_CONFIG_FUND=false",
+            "--env",
+            "NPM_CONFIG_OFFLINE=true",
+            "--env",
+            "NPM_CONFIG_USERCONFIG=/dev/null",
+            "--env",
+            "TMPDIR=/workspace/tmp",
+            "--entrypoint=/bin/sh",
+            "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+            "-c",
+            "while :; do sleep 3600; done"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "start",
+          "argv": [
+            "docker",
+            "start",
+            "dotrepo-f05-offline-rust-02-6d9d518355"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "container-inspect",
+          "argv": [
+            "docker",
+            "inspect",
+            "dotrepo-f05-offline-rust-02-6d9d518355"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "initialize",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-6d9d518355",
+            "mkdir",
+            "-p",
+            "/workspace/repository",
+            "/workspace/dependency-cache",
+            "/workspace/home",
+            "/workspace/tmp"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "source-provision",
+          "argv": [
+            "docker",
+            "exec",
+            "-i",
+            "dotrepo-f05-offline-rust-02-6d9d518355",
+            "tar",
+            "--extract",
+            "--no-same-owner",
+            "--no-same-permissions",
+            "-C",
+            "/workspace/repository"
+          ],
+          "stdinBytes": 32
+        },
+        {
+          "label": "cache-provision",
+          "argv": [
+            "docker",
+            "exec",
+            "-i",
+            "dotrepo-f05-offline-rust-02-6d9d518355",
+            "tar",
+            "--extract",
+            "--no-same-owner",
+            "--no-same-permissions",
+            "-C",
+            "/workspace/dependency-cache"
+          ],
+          "stdinBytes": 32
+        },
+        {
+          "label": "initial-source-byte-check",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-6d9d518355",
+            "sha256sum",
+            "--check",
+            "--quiet",
+            "--strict",
+            "-"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "initial-cache-byte-check",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-6d9d518355",
+            "sha256sum",
+            "--check",
+            "--quiet",
+            "--strict",
+            "-"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "source-free-tool-byte-hashes",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-6d9d518355",
+            "/bin/sh",
+            "-eu",
+            "-c",
+            "cd /workspace/repository; rust_root=$(rustc --print sysroot); sha256sum \"$rust_root/bin/rustc\" \"$rust_root/bin/cargo\" /usr/local/bin/node /usr/local/bin/uv /usr/local/go/bin/go /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/lib/node_modules/npm/package.json"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "tools-before-setup",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-6d9d518355",
+            "/bin/sh",
+            "-eu",
+            "-c",
+            "cd /workspace/repository; rustc -vV; cargo --version; dpkg-query -W libpcap-dev libpcap0.8-dev libasound2-dev"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "offline-setup-0",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-6d9d518355",
+            "/bin/sh",
+            "-eu",
+            "-c",
+            "cd /workspace/repository; cargo fetch --locked --offline --target aarch64-unknown-linux-gnu --manifest-path lib/sniffnet-packet-parser/Cargo.toml"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "tools-after-setup",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-6d9d518355",
+            "/bin/sh",
+            "-eu",
+            "-c",
+            "cd /workspace/repository; rustc -vV; cargo --version; dpkg-query -W libpcap-dev libpcap0.8-dev libasound2-dev"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "native-tests",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-6d9d518355",
+            "/bin/sh",
+            "-eu",
+            "-c",
+            "cd /workspace/repository; cargo test --locked --manifest-path lib/sniffnet-packet-parser/Cargo.toml -- --nocapture"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "tracked-source-after-tests",
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-offline-rust-02-6d9d518355",
+            "sha256sum",
+            "--check",
+            "--quiet",
+            "--strict",
+            "-"
+          ],
+          "stdinBytes": 0
+        },
+        {
+          "label": "cleanup",
+          "argv": [
+            "docker",
+            "rm",
+            "-f",
+            "dotrepo-f05-offline-rust-02-6d9d518355"
+          ],
+          "stdinBytes": 0
+        }
+      ]
+    }
+  ],
+  "actualExternalProcesses": [],
+  "actualDockerCalls": 0,
+  "upstreamExecution": false,
+  "modelCalls": 0,
+  "indexConsulted": false,
+  "actualTaskOutcomes": null
+}

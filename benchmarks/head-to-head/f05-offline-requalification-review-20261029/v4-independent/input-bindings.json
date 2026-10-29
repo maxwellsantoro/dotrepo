@@ -1,0 +1,102 @@
+{
+  "reviewer": "/root/e1_establishment",
+  "author": "/root/f05_harness",
+  "priorContext": "Reviewer has prior F05 curation/runtime development context; separate author from offline-driver v4; not a blind agent or independent second gold curator.",
+  "files": [
+    {
+      "path": "benchmarks/head-to-head/f05-offline-requalification-20261029/driver.v4.py",
+      "bytes": 19875,
+      "sha256": "ca4b3743c0785574f406ae81a7eb4cb9857cb22d2019ed31e1188d3013de5355"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-requalification-20261029/oracle_v4.py",
+      "bytes": 5448,
+      "sha256": "a0846130ba9a00af4597eb17792da4ad9dc40d3ce17350c1af72b4878180b606"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-requalification-20261029/oracle.py",
+      "bytes": 6112,
+      "sha256": "3b5392c8bf298d692f0ada994a01f5e0a35bde86151d59fd8b420fa050873aa7"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-requalification-20261029/controls.v4.py",
+      "bytes": 6441,
+      "sha256": "db0f9ae0c88906683bdaec979bf923c4255cd2cb2142697518d0c33e4c26c346"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-requalification-20261029/controls_amendment_v4.py",
+      "bytes": 9732,
+      "sha256": "b0d6d076315bff76b237359653cf71888740fbe40e3b0af00f6d8a7182372766"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-requalification-20261029/plan.v4.json",
+      "bytes": 27710,
+      "sha256": "a53d9917f427464544b1b7d4bd0a50a3cd6240db8d0dcd73e72ac89e3b4f7382"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-requalification-20261029/plan.v3.json",
+      "bytes": 22661,
+      "sha256": "43a2544d2dbedaaebfbb54302bf4be031f56089bef288cd6a0efd34bec77aa90"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-requalification-20261029/control.py",
+      "bytes": 1675,
+      "sha256": "f4c48a59e66471d4247b25bd2c3704c681999943bc0daae5d6acf544844abb1a"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-requalification-20261029/capture.py",
+      "bytes": 2240,
+      "sha256": "8080a772bbb1e97c89cfb06dd31b5d250003c69ae7e17429d008e17b9f94bbbc"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-requalification-20261029/root-policy-v4.json",
+      "bytes": 1268,
+      "sha256": "a64064afdf2da04c1ca37c25d2d639971eb2d3d1b2360d4aa418e77ede81a8ba"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-requalification-20261029/source-bindings-v4/bindings.json",
+      "bytes": 2106,
+      "sha256": "aeeb8ac22f768468ee9cb418b9eec71491ea5bbdb79e11afd10d667d01284f6b"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-requalification-20261029/source-bindings-v4/historical-rust-stdout.txt",
+      "bytes": 358,
+      "sha256": "d606452a4046247af21809b98d1c434a7c253dabdcfe7af0078d4f89285caed6"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-requalification-20261029/source-bindings-v4/historical-rust-stderr.txt",
+      "bytes": 729,
+      "sha256": "a6a089e54b1e00c1be77f345f878c38a7811b58f7606faf3b5bda2b212c369e2"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-requalification-20261029/source-bindings-v4/parser-manifest.toml",
+      "bytes": 764,
+      "sha256": "3b0a80798ac6377085087cf17efeaad377288ffc20d663e42729d75455f4c921"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-requalification-20261029/source-bindings-v4/original-rust-request.md",
+      "bytes": 483,
+      "sha256": "a59aad6359985d60882c86f0320b37be43a78b1ea8bbd17227c356c2347ab438"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-requalification-20261029/source-bindings-v4/logs/cargo-test-help/stdout.txt",
+      "bytes": 3422,
+      "sha256": "a750301c3a378d70ec9a29386e125e7c5c981387462805442e04b51dcda57502"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-requalification-review-20261029/freeze.json",
+      "bytes": 1633,
+      "sha256": "4dff11c5a0b47ffeeada8b448f11be99004af86ce84761d5a01ac6439d759a54"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-requalification-review-20261029/counterexamples.py",
+      "bytes": 8275,
+      "sha256": "685580916e3b315e295b68d3b6b0e22b53f30aeb536ed54a72e7c992c90ad2fc"
+    },
+    {
+      "path": "benchmarks/head-to-head/f05-offline-requalification-review-20261029/counterexamples.json",
+      "bytes": 3169,
+      "sha256": "dfd72d32015c946b399c22e0c098b251a727e083b5c6548f66e45f8baeba60e2"
+    }
+  ]
+}
