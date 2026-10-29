@@ -1,0 +1,54 @@
+{
+  "actualDaemonCalls": 0,
+  "checks": [
+    {
+      "argv": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-sync",
+        "python",
+        "-B",
+        "benchmarks/head-to-head/f05-image-environment-compatibility-20261029/controls.py",
+        "--output",
+        "benchmarks/head-to-head/f05-image-environment-compatibility-review-20261029/author-replay.json"
+      ],
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "before rejected; after mocked image/create/start/cleanup; no injected Go defaults\n"
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-sync",
+        "python",
+        "-B",
+        "-m",
+        "pytest",
+        "scripts/tests/test_agent_runtime.py",
+        "-q",
+        "-k",
+        "image_environment or frozen_common_image_defaults or image_go_defaults"
+      ],
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "............................................                             [100%]\n44 passed, 123 deselected in 0.09s\n"
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-sync",
+        "python",
+        "-B",
+        "benchmarks/head-to-head/f05-image-environment-compatibility-20261029/verify.py"
+      ],
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "11 packet artifacts and 3 current source bindings match\n"
+    }
+  ]
+}

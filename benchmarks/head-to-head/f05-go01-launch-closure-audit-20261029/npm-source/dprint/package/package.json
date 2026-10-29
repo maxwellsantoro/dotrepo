@@ -1,0 +1,41 @@
+{
+  "name": "dprint",
+  "version": "0.57.4",
+  "description": "Pluggable and configurable code formatting platform written in Rust.",
+  "bin": "bin.cjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dprint/dprint.git"
+  },
+  "keywords": [
+    "code",
+    "formatter"
+  ],
+  "author": "David Sherret",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dprint/dprint/issues"
+  },
+  "homepage": "https://github.com/dprint/dprint#readme",
+  "preferUnplugged": true,
+  "scripts": {
+    "postinstall": "node ./install.cjs"
+  },
+  "optionalDependencies": {
+    "@dprint/win32-x64": "0.57.4",
+    "@dprint/win32-arm64": "0.57.4",
+    "@dprint/darwin-x64": "0.57.4",
+    "@dprint/darwin-arm64": "0.57.4",
+    "@dprint/linux-x64-glibc": "0.57.4",
+    "@dprint/linux-x64-musl": "0.57.4",
+    "@dprint/linux-arm64-glibc": "0.57.4",
+    "@dprint/linux-arm64-musl": "0.57.4",
+    "@dprint/linux-riscv64-glibc": "0.57.4",
+    "@dprint/linux-loong64-glibc": "0.57.4",
+    "@dprint/linux-loong64-musl": "0.57.4",
+    "@dprint/linux-ppc64-glibc": "0.57.4",
+    "@dprint/linux-ppc64-musl": "0.57.4",
+    "@dprint/android-arm64": "0.57.4",
+    "@dprint/android-x64": "0.57.4"
+  }
+}

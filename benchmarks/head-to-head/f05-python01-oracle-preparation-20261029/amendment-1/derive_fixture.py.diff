@@ -1,0 +1,65 @@
+--- original/derive_fixture.py
++++ amendment-1/derive_fixture.py
+@@ -7,18 +7,35 @@
+ from pathlib import Path
+ 
+ HERE = Path(__file__).resolve().parent
+-ROOT = Path("/Users/maxwell/projects/agent/dotrepo")
+-INVENTORY = (
+-    ROOT
+-    / "benchmarks/head-to-head/f05-python01-oracle-decision-20261029/static-test-inventory.json"
++INVENTORY_SHA = "9043b7bf969b82da21b30d606e64727fe1d469ea15846604a23c50dc8abecb60"
++INVENTORY_RELATIVE = (
++    "benchmarks/head-to-head/f05-python01-oracle-decision-20261029/static-test-inventory.json"
+ )
+ 
+ 
+-def derive():
+-    inventory = json.loads(INVENTORY.read_bytes())
++def derive(*, packet=None, repo_root=None, inventory_path=None):
++    packet = HERE if packet is None else Path(packet)
++    retained = packet / "bound-inputs" / INVENTORY_RELATIVE
++    if inventory_path is not None:
++        selected = Path(inventory_path)
++    elif retained.is_file():
++        selected = retained
++    else:
++        candidates = (
++            [Path(repo_root)]
++            if repo_root is not None
++            else [Path.cwd(), *Path.cwd().parents, packet, *packet.parents]
++        )
++        root = next((p for p in candidates if (p / ".git").exists()), None)
++        if root is None:
++            raise ValueError("retained inventory missing; declare --inventory or --repo-root")
++        selected = root / INVENTORY_RELATIVE
++    raw_inventory = selected.read_bytes()
++    assert hashlib.sha256(raw_inventory).hexdigest() == INVENTORY_SHA, "changed source inventory"
++    inventory = json.loads(raw_inventory)
+     cases = []
+     for row in inventory["files"]:
+-        raw = (HERE / "sources" / row["path"]).read_bytes()
++        raw = (packet / "sources" / row["path"]).read_bytes()
+         assert hashlib.sha256(raw).hexdigest() == row["sha256"]
+         tree = ast.parse(raw)
+         declarations = []
+@@ -78,8 +95,18 @@
+ if __name__ == "__main__":
+     parser = argparse.ArgumentParser()
+     parser.add_argument("--output", type=Path, required=True)
++    parser.add_argument("--packet", type=Path, default=HERE)
++    parser.add_argument("--repo-root", type=Path)
++    parser.add_argument("--inventory", type=Path)
+     args = parser.parse_args()
+-    raw = (json.dumps(derive(), indent=2, sort_keys=True) + "\n").encode()
++    raw = (
++        json.dumps(
++            derive(packet=args.packet, repo_root=args.repo_root, inventory_path=args.inventory),
++            indent=2,
++            sort_keys=True,
++        )
++        + "\n"
++    ).encode()
+     with args.output.open("xb") as stream:
+         stream.write(raw)
+     print(

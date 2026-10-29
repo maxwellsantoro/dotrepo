@@ -1,0 +1,91 @@
+{
+  "acceptanceNegatives": [
+    "old-container/setup receipt or setupComplete flag without exact process join",
+    "ignore-scripts/no-npm/missing platform hook witness; mutated lock/config/installed launcher",
+    "preexisting producer+.hash with no prior build provenance; .hash using relative paths/missing LF/changed modules; installed binary absent, linked outside declared path, or unresolved transition",
+    "tinyexec writable .bin/go shadow; changed Node/npm/npx/Hereby resolution or NODE_OPTIONS preload; unknown launcher env transform",
+    "GOENV enabled user config not bound; changed GOROOT/go.env or workspace/module replacements; GOFLAGS filters/tags; TSGO_HEREBY_NOEMBED/RACE/COVERAGE or CI differences not reflected",
+    "post-agent selected file additions/removals/config changes reusing old source map",
+    "separate env command claimed Hereby parent; stale PID/cwd/exe or late witness; derived context mislabeled observed",
+    "missing raw output, cap/deadline/cancellation/error, incomplete after metadata, missing event association or isolation drift",
+    "all true flags/hash-valid arbitrary JSON offered instead of current trace/process/source evidence; source setup/build failure rewritten as task success"
+  ],
+  "actualAdmission": false,
+  "baseCommit": "67e46a9dda666348fb913f1bbca6cbd0259af8e2",
+  "bounds": {
+    "bytes": "Retain existing configured caps, never raise them: metadata<=2MiB/observation, event<=256MiB, total capture<=512MiB absolute helper ceilings; actual subject may be lower. Shell output keeps existing2MiB configured example ceiling. Prospective metadata subcaps: environment<=256KiB,<=512path records,<=4KiB/path,<=16symlink hops; full dependency/source trees summarized by canonical inventory digests with required path records and declared omitted fields. Hash bodies stream under existing deadline; cap failure is incomplete. No exporting build artifacts as cache.",
+    "calls": "Batch new metadata into existing before/after probe slots; no polling/child tracing. At most existing frozen maxRequests per capture (absolute ceiling16, never silently raise configured value); no extra provider/model calls. Setup consumes its existing shell operation and session budget. If required evidence does not fit, mark incomplete; do not add a retry or resource allowance.",
+    "resources": "No increase: existing image, nonroot user, readonly root, network none, private IPC/PID/cgroup, no mounts/grants;3CPU4GiB256PID8GiBworkspace512MiBtmp. Keep exact current session/request wall/tool/cleanup limits; observations spend same remaining deadline, not extra work time."
+  },
+  "campaignAdmitted": false,
+  "costUsd": null,
+  "effectiveContext": {
+    "choice": "Prefer bounded launch source audit; do not add a tracing layer now. If neither launch audit nor an actual task-bound parent witness exists, fail closed.",
+    "derivation": "Observed parent launch env + exact inline assignments; Hereby options/runTests overrides; utils env spread; tinyexec ancestor .bin PATH prefix; gotestsum inherited env and go test -json argv. Linux tests do not inherit goBuildEnv CGO0. Parent Env is not Docker Config.Env unless exact shell/launcher transformations are established.",
+    "goConfiguration": "Require inherited GOENV=off (go env reports empty GOENV path), explicit absolute GOWORK and GOTOOLCHAIN=local for matching context; root go.env still read, so bind audited image/GOROOT identity/defaults. If GOENV not off, bind effective user-config file path/body plus precedence instead of assuming absence. Bind go.work/go.work.sum (absence or exact content), tsc and tools go.mod/go.sum and any actual workspace/module replacements; changed selection-relevant files invalidate old expected map.",
+    "imageVsWritable": "Observed exact image/readonly-root/no extra mounts plus image symlink-chain inventory can bind immutable tools and /usr/local/go/go.env without rehashing entire image each time. /workspace and /tmp remain writable; inspect/type/target/hash/absence along derived launcher/Go/compiler search chains after prior agent operations. Readonly image Go hash alone does not rule out writable PATH shadows.",
+    "inputs": [
+      "GOOS/GOARCH/GOARM64/GOEXPERIMENT/GOROOT/GOTOOLCHAIN/GOENV/GOWORK/GOFLAGS/CGO_ENABLED and CC/CXX; complete parent env hash plus required relevant values and absences",
+      "GOTESTSUM_JSONFILE, other GOTESTSUM_* output controls, TEST_DIRECTORY, CI/TF_BUILD, GODEBUG, TS_TEST_PROGRAM_SINGLE_THREADED, TSGO_BASELINE_TRACKING_DIR; actual argv excludes narrowing/debug/race/coverage flags",
+      "actual TSGO_HEREBY_FORCE/RACE/NOEMBED/CONCURRENT_TEST_PROGRAMS/COVERAGE values or absences; unprefixed names are not substitutes",
+      "PATH, Node process.execPath, NODE_OPTIONS/NODE_PATH, npm_config_* and npm configs; local/ancestor node_modules/.bin go/node/npx/hereby shadows and symlink targets relevant to actual resolution"
+    ],
+    "launchAuditPreferred": "Audit exact installed npm/npx -> local Hereby1.15.2 launch, including npm exec PATH/config/env and Hereby local reexec/load. Require resolved local expected bin; never assume npx fallback/cache installation matches. Bind source files/hashes from the audited immutable image/npm install and lock-bound packages.",
+    "oneParentWitnessAlternative": "If npm launch audit cannot close, one bounded Hereby parent-process environment witness (PID/start identity, /proc cmdline/cwd/exe, NUL environment) within this task operation can replace that unclosed env transformation. It must identify the actual Hereby Node process and be captured before it exits; a separate env command or Docker inspect is insufficient. Do not inject NODE_OPTIONS/preload or change literal task wrapper. This alternative needs its own minimal reviewed association design; it is NOT implemented or presumed available.",
+    "selectionMatch": "Derived Go test flags, target context, package/module/source-file inventory must match retained104-package/5972-ID expectation. Include default release/tool/architecture tags and selected files; source edits to relevant build constraints/config or a newly added selected file must not reuse old registry silently. No added benchmark/wrapper execution; no380-skip policy decision."
+  },
+  "executionAuthorized": false,
+  "fixedSubjects": {
+    "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+    "repository": "github.com/microsoft/typescript",
+    "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac"
+  },
+  "identity": "go01-next-producer-proposal-20261029",
+  "implementationDelta": [
+    "Extend the existing host-owned same-shell capture descriptor/config with a bounded producer-witness subject, setup-operation reference, parent environment/resolution evidence and before/after provenance. No process executor, new task, hidden command permission filter, automatic setup or per-child trace. Keep existing event export and strict adapter hierarchy/skip scoring.",
+    "Combine added file/config/env metadata into existing before/after witness calls. Associate prior successful normal npm setup by the same session/container ID, exact shell trace ordinal, argv/cwd/raw process receipts and setup before/after witness. An agent-selected shell request remains unrestricted by gold; post-run scorer determines matching setup/task.",
+    "Adapter derives (does not label observed) child argv/cwd/env/PATH from retained exact source and observed task inputs. It compares selection with the actual source registry subject, rejects missing/changed joins, and preserves known build/setup failure as incomplete outcome rather than requiring a green baseline."
+  ],
+  "nativeTaskAdmitted": false,
+  "normalNpmSetup": {
+    "after": [
+      "exact exit/error/raw combined output/cap and foreground-hook observations",
+      "installed lock-resolved versions/content and bin target chains for hereby/tinyexec and normal-hook executables; preserve failures/warnings",
+      "before/after package/lock/workspace/config and relevant source bytes; declare allowed installed dependency changes, not generic whole-tree equality"
+    ],
+    "before": [
+      "same-container session/source checkout identity and complete tracked source inventory",
+      "root and packages/* package.json, exact package-lock.json, applicable project/user/global npm config paths, npm_config_* and NODE_OPTIONS/NODE_PATH inputs",
+      "resolved Node/npm/npx symlink chains and image identity; initial installed dependency tree absent or explicit previously reviewed state"
+    ],
+    "candidateExistingSetupCommand": "npm ci --offline --foreground-scripts",
+    "commandQualification": "This is the prior reviewed normal-hook offline setup route, not authority to substitute a new workflow. Final task/setup policy must bind its exact allowed command before execution; no --ignore-scripts/no-npm alternative.",
+    "hookClosure": "Lock marks @vscode/vsce-sign2.1.0, dprint0.57.4 and esbuild0.28.2 hasInstallScript; capture actual platform-eligible hook source/entrypoints and exit observations, not only a successful npm parent or a caller setupComplete flag."
+  },
+  "openRetainedInputs": [
+    "Exact installed image npm/npx launch implementation closure has not been inspected in this read-only assessment. Cached Hereby/tinyexec implementations inspected as data match package-lock integrity, but installed copies still need same-session witnesses. No arbitrary resolved-package presence is assumed.",
+    "Full Hereby local-import side-effect closure and normal npm hook closure need frozen bounded audit; current nine-file historical trace is not all imports. Root package scripts do not by themselves establish all workspace/platform hooks.",
+    "No new same-session normal npm setup, fresh producer transition, task-parent environment, writable shadow/config witnesses, or complete relevant before/after source selection observations exist for this prospective run.",
+    "Existing event capture WITNESS follows symlinks for hash and reports a link marker, not link target/ancestor chain or absence below symlink directories; minimal producer metadata must record actual chain/type/target and resolution, not reinterpret current hash as that proof."
+  ],
+  "oracleQualified": false,
+  "producerBuild": {
+    "limits": "Fresh absence + unchanged inspected build branch + successful awaited install/cache-file transition + source/process/event association is practical operator provenance, not adversarial writer authentication. If task fails before establishing transition, producer join stays incomplete.",
+    "observations": [
+      "pre-task absence/type/ancestor resolution for binary and .hash, exact tools/go.mod+go.sum, unchanged Hereby/utils/tinyexec path",
+      "derived go-install invocation context and resolved Go before task; retain emitted $ go install gotest.tools/gotestsum line as corroboration, not a standalone authenticated build receipt",
+      "post-task regular binary bytes/hash/mode and exact .hash text; matched source/module/config witnesses and event/task process ordering; optionally bounded Go build-info metadata from binary as data if already available, not a new native command"
+    ],
+    "preferredMinimalRoute": "Fresh checkout with tools/gotestsum and tools/gotestsum.hash both absent immediately before full task. Do not delete a supplied cache secretly. Reject a present unproven producer; an optional future reuse path needs a previous same-context observed build receipt, not only hash text.",
+    "sourceAlgorithm": "Hereby resolves tools/gotestsum absolute; sorted absolute tools/go.mod and tools/go.sum path UTF8 bytes followed by each file raw bytes are SHA256 hashed; hash text is lowercase hex plus LF. Match this exact algorithm including absolute cwd. The memoized ensure either reuses matching hash+binary or awaits go install gotest.tools/gotestsum in tools cwd with GOBIN=absolute tools, then writes hash."
+  },
+  "requiredSourceClosure": [
+    "Herebyfile.mjs and all actual local static imports reachable during module loading, especially tools/scripts/gen/utils.mts; root package.json/lock and workspace manifests/config",
+    "installed hereby CLI/find/load/reexec/runner and tinyexec main; exact npm/npx launcher, libnpmexec/@npmcli-run-script environment/PATH resolution entrypoints and directly used helpers",
+    "tools/go.mod/go.sum, tsc/go.mod/go.sum, go.work/go.work.sum; actual selected104-package source population and build constraints tied to existing registry input",
+    "gotestsum1.13.0 cmd/main.go/handler.go/testjson execution and resolved dependency/build-info/source-cache subject",
+    "applicable normal-install package scripts/hook files and npm configuration; immutable Go binary/GOROOT go.env/toolchain selection source/image inventory"
+  ],
+  "state": "prospective-source-plan-open-inputs-not-implemented",
+  "unchangedTask": "GOTESTSUM_JSONFILE=/workspace/go-test-events.jsonl GOFLAGS=\"-p=1 -count=1\" npx hereby test"
+}

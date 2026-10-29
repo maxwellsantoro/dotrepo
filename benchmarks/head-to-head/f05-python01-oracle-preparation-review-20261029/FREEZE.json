@@ -1,0 +1,67 @@
+{
+  "artifacts": {
+    "README.md": {
+      "bytes": 1481,
+      "sha256": "9c650699b87722bbf2a0c00f6463ac63b8804efeccf4663f18a08fd825f6936c"
+    },
+    "author-controls-replay.json": {
+      "bytes": 34204,
+      "sha256": "b2fea305c8a656c69aa18fb0a5ae7c2fc1e16758eb4e4fcc61926b33ed38aebd"
+    },
+    "author-tooling-replays.json": {
+      "bytes": 342,
+      "sha256": "a3c30410571a29aab3f8054433c51221d47f1915c58c1d63f963dd4e109fb06d"
+    },
+    "challenge.json": {
+      "bytes": 6644,
+      "sha256": "57ad2e445889219219eb8520363254043b4b301b2aa393fd0da3cf0cd54c0c0b"
+    },
+    "challenge.py": {
+      "bytes": 3135,
+      "sha256": "d5f66880ee940147fbc5922fe41ee992b2c229ca5b03da2a373d9894f247593d"
+    },
+    "derived-fixture.json": {
+      "bytes": 75025,
+      "sha256": "e141c87f452f021a3a9e7ced5c3bb1b2efc8691a06d925cde0cebdabddf09339"
+    },
+    "development-observations.json": {
+      "bytes": 417,
+      "sha256": "663b483abde9931639154c1193f9e4be4473c7d4747110a86b3dff35621d1dbe"
+    },
+    "diagnostic-controls.py.json": {
+      "bytes": 34204,
+      "sha256": "b2fea305c8a656c69aa18fb0a5ae7c2fc1e16758eb4e4fcc61926b33ed38aebd"
+    },
+    "diagnostic-derive_fixture.py.json": {
+      "bytes": 75025,
+      "sha256": "e141c87f452f021a3a9e7ced5c3bb1b2efc8691a06d925cde0cebdabddf09339"
+    },
+    "integrity-and-reproducibility.json": {
+      "bytes": 6026,
+      "sha256": "8cc552d06cc035608062f055d0fce696ec438c063d1b0733afaa25b3894a4551"
+    },
+    "phase-null-counterexamples.json": {
+      "bytes": 281280,
+      "sha256": "4ca7ffbee7b56cef0529c3699220ea2b7dbf072779e52183bf7108333eeba7a3"
+    },
+    "review.json": {
+      "bytes": 3629,
+      "sha256": "589452e3755951bc1c02bbd12d4d538a3c56952d4a675f19142546d6260ba36e"
+    }
+  },
+  "campaignAdmitted": false,
+  "executionAuthorized": false,
+  "findings": [
+    "F1",
+    "F2"
+  ],
+  "newRuntimeActions": 0,
+  "oracleQualified": false,
+  "state": "independent-python01-oracle-before-review-frozen",
+  "subject": {
+    "authorFreezeSha256": "83d915e7c465d0291fe72d3178826bd91b26d18c299823273d2e0cc11ca98e9f",
+    "oracleSha256": "d891d5f944417dd7bc4f1c3d9be3b4a0990b7ec0f74d719109a9f7b2465a8428",
+    "planSha256": "9c494da0a0fdc2b242089c6f627f0a207041a2227a78955d3232a8ef1bc1dcc0"
+  },
+  "taskOutcomeObserved": false
+}

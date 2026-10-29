@@ -1,0 +1,63 @@
+{
+  "actualAdmission": false,
+  "beforeReviewFreezeSha256": "493079b480bbcb96601dab5f076859071cb3e6d4a2870c48759b97a69d61b9d0",
+  "campaignAdmitted": false,
+  "changes": [
+    {
+      "finding": "F1",
+      "scope": "require active non-null valid phase-result matching exact current phase-start order in root and backend; no other scorer policy changes"
+    },
+    {
+      "finding": "F2",
+      "scope": "retained inventory and20source-file derivation; optional declared/discovered repo-root for matching immutable Git objects; observed WT snapshots separately labelled; full archive audit only when explicitly supplied"
+    }
+  ],
+  "implementation": {
+    "controls.py": {
+      "bytes": 16966,
+      "sha256": "8d079abeb39e8899b591f62bcff49241e979bae4dfd339b945b10991bac8ad68"
+    },
+    "derive_fixture.py": {
+      "bytes": 4633,
+      "sha256": "a7cd940be9c036ec0d44ed50df17f14b51787d91ebafe70e5a2427a84ddf4445"
+    },
+    "guard_controls.py": {
+      "bytes": 5067,
+      "sha256": "c926afd022b5f3fc1736f9be80be4286686b866264a538da08f63343f3672805"
+    },
+    "input-resolution.json": {
+      "bytes": 8655,
+      "sha256": "c53723f279a0ef90a2153527b45afb9c2e9e547bd8f96b69fdef610141ceaef0"
+    },
+    "oracle.py": {
+      "bytes": 21730,
+      "sha256": "d8c7c0772a4cd88b0490aea863cabc8fdc7e2e00293572bb403cfbc0c50f0114"
+    },
+    "portability_controls.py": {
+      "bytes": 6552,
+      "sha256": "3cd5b5e08e0c9e1ef181e8d3a86a92f5673fa44998b4003ccb4a3782f60c10c9"
+    },
+    "synthetic-case-manifest.json": {
+      "bytes": 75025,
+      "sha256": "e141c87f452f021a3a9e7ced5c3bb1b2efc8691a06d925cde0cebdabddf09339"
+    },
+    "verify.py": {
+      "bytes": 6518,
+      "sha256": "bc9bb4bb51d61cd854da126b0c0c510bd9b497d56c1b0cda4053aca2a36f1a17"
+    }
+  },
+  "nativeCollectionOccurred": false,
+  "oracleQualified": false,
+  "packetIdentity": "python01-oracle-preparation-amendment-1",
+  "parentFreezeSha256": "83d915e7c465d0291fe72d3178826bd91b26d18c299823273d2e0cc11ca98e9f",
+  "state": "synthetic-only-phase-state-and-portable-tooling-correction",
+  "taskOutcomeObserved": false,
+  "unchanged": [
+    "original41-artifact closure",
+    "synthetic manifest byte identity e141c87f452f021a3a9e7ced5c3bb1b2efc8691a06d925cde0cebdabddf09339",
+    "source selection/revision/scope",
+    "assertion-only complete failed-outcome policy",
+    "original gold/default unresolved",
+    "actual-mode fail-closed and missing native collection/capture/environment bindings"
+  ]
+}

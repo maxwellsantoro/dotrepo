@@ -1,0 +1,197 @@
+--- original/verify.py
++++ amendment-1/verify.py
+@@ -1,37 +1,169 @@
+-"""Read-only hashes/reconstruction; no source imports or workload execution."""
++"""Portable retained-input audit; optional Git and full archive checks are explicit.
+ 
++Observed working-tree snapshots are not attributed to the declared base commit.
++Only matching historical rows are checked against immutable Git objects. Current
++ROADMAP/runtime contents are deliberately not factual freshness requirements here.
++"""
++
++import argparse
+ import hashlib
++import io
+ import json
+ from pathlib import Path
++import subprocess
++import tarfile
+ 
+ HERE = Path(__file__).resolve().parent
+-ROOT = Path("/Users/maxwell/projects/agent/dotrepo")
++BASE = "5d31296dce2d692c34d05dd2bfcd637e8a7e74ce"
++PARENT_FREEZE_SHA = "83d915e7c465d0291fe72d3178826bd91b26d18c299823273d2e0cc11ca98e9f"
+ 
+ 
+-def verify():
+-    inputs = json.loads((HERE / "source-bindings.json").read_bytes())
+-    for row in inputs["files"]:
+-        path = Path(row["path"])
+-        path = path if path.is_absolute() else ROOT / path
+-        raw = path.read_bytes()
+-        assert hashlib.sha256(raw).hexdigest() == row["sha256"] and len(raw) == row["bytes"], row[
+-            "path"
+-        ]
+-    freeze = json.loads((HERE / "FREEZE.json").read_bytes())
+-    for name, row in freeze["artifacts"].items():
+-        raw = (HERE / name).read_bytes()
+-        assert hashlib.sha256(raw).hexdigest() == row["sha256"] and len(raw) == row["bytes"], name
+-    print(
+-        json.dumps(
+-            {
+-                "allPassed": True,
+-                "boundInputs": len(inputs["files"]),
+-                "artifacts": len(freeze["artifacts"]),
+-                "actualAdmission": False,
+-            }
+-        )
++def sha(raw):
++    return hashlib.sha256(raw).hexdigest()
++
++
++def checked(path, row):
++    raw = path.read_bytes()
++    if len(raw) != row["bytes"] or sha(raw) != row["sha256"]:
++        raise ValueError("changed retained input: " + str(path))
++    return raw
++
++
++def discover_root(declared=None):
++    if declared is not None:
++        root = Path(declared).resolve()
++        if not (root / ".git").exists():
++            raise ValueError("declared repository has no Git metadata")
++        return root
++    return next(
++        (
++            p
++            for p in [Path.cwd(), *Path.cwd().parents, HERE, *HERE.parents]
++            if (p / ".git").exists()
++        ),
++        None,
+     )
+ 
+ 
++def git(root, *args):
++    value = subprocess.run(
++        ["git", "--no-pager", "-C", str(root), *args],
++        stdout=subprocess.PIPE,
++        stderr=subprocess.PIPE,
++        timeout=10,
++        check=False,
++    )
++    if value.returncode:
++        raise ValueError("read-only historical Git lookup failed")
++    return value.stdout
++
++
++def verify(*, packet=None, repo_root=None, no_repository=False, archive=None, parent=None):
++    packet = HERE if packet is None else Path(packet)
++    root = None if no_repository else discover_root(repo_root)
++    raw_parent = (packet / "parent-FREEZE.json").read_bytes()
++    if sha(raw_parent) != PARENT_FREEZE_SHA:
++        raise ValueError("changed original freeze")
++    original = json.loads((packet / "parent-source-bindings.json").read_bytes())
++    resolution = json.loads((packet / "input-resolution.json").read_bytes())
++    originals = {row["path"]: row for row in original["files"]}
++    historical, observed = 0, []
++    for row in resolution["rows"]:
++        old = originals[row.get("path", row.get("originalLocator"))]
++        if row["sha256"] != old["sha256"] or row["bytes"] != old["bytes"]:
++            raise ValueError("input snapshot differs from original binding")
++        if row["resolution"] == "optional-explicit-full-archive":
++            continue
++        checked(packet / row["snapshot"], row)
++        if row["resolution"] == "retained-snapshot-and-matching-git-base":
++            if row["gitCommit"] != BASE:
++                raise ValueError("changed historical base")
++            if root is not None:
++                blob = git(root, "rev-parse", BASE + ":" + row["path"]).decode().strip()
++                if blob != row["gitBlob"]:
++                    raise ValueError("historical Git object mismatch")
++                body = git(root, "cat-file", "blob", blob)
++                if sha(body) != row["sha256"] or len(body) != row["bytes"]:
++                    raise ValueError("historical bytes mismatch")
++            historical += 1
++        elif row["resolution"] == "retained-observed-working-tree-snapshot-not-git-base":
++            observed.append(
++                {"path": row["path"], "sha256": row["sha256"], "attributedToBase": False}
++            )
++        else:
++            raise ValueError("unknown input resolution")
++    archive_result = {
++        "performed": False,
++        "reason": "no --archive supplied; current external archive not audited",
++    }
++    if archive is not None:
++        row = next(
++            r for r in resolution["rows"] if r["resolution"] == "optional-explicit-full-archive"
++        )
++        raw = checked(Path(archive), row)
++        expected = json.loads(
++            (
++                packet
++                / "bound-inputs/benchmarks/head-to-head/f05-qualification-next8-20261029/python-01/inventory.json"
++            ).read_bytes()
++        )["files"]
++        actual = {}
++        with tarfile.open(fileobj=io.BytesIO(raw), mode="r:") as source:
++            for member in source:
++                if not member.isfile() or member.name in actual or member.size > 16 * 1024**2:
++                    raise ValueError("unexpected source archive member")
++                actual[member.name] = sha(source.extractfile(member).read())
++        if actual != expected:
++            raise ValueError("full archive member map changed")
++        archive_result = {
++            "performed": True,
++            "sha256": sha(raw),
++            "files": len(actual),
++            "sourceCodeExecuted": False,
++        }
++    parent_result = {
++        "performed": False,
++        "reason": "original freeze retained; current parent files not requested",
++    }
++    if parent is not None:
++        entries = json.loads(raw_parent)["artifacts"]
++        for name, row in entries.items():
++            checked(Path(parent) / name, row)
++        parent_result = {"performed": True, "artifacts": len(entries)}
++    freeze = json.loads((packet / "FREEZE.json").read_bytes())
++    for name, row in freeze["artifacts"].items():
++        checked(packet / name, row)
++    return {
++        "allPassed": True,
++        "artifacts": len(freeze["artifacts"]),
++        "retainedHistoricalInputs": historical,
++        "historicalGitRecheckPerformed": root is not None,
++        "observedWorkingTreeSnapshots": observed,
++        "fullArchiveAudit": archive_result,
++        "originalParentArtifactAudit": parent_result,
++        "actualAdmission": False,
++    }
++
++
+ if __name__ == "__main__":
+-    verify()
++    parser = argparse.ArgumentParser()
++    parser.add_argument("--packet", type=Path, default=HERE)
++    parser.add_argument("--repo-root", type=Path)
++    parser.add_argument("--no-repository", action="store_true")
++    parser.add_argument("--archive", type=Path)
++    parser.add_argument("--parent", type=Path)
++    args = parser.parse_args()
++    if args.no_repository and args.repo_root is not None:
++        parser.error("--no-repository and --repo-root are mutually exclusive")
++    print(
++        json.dumps(
++            verify(
++                packet=args.packet,
++                repo_root=args.repo_root,
++                no_repository=args.no_repository,
++                archive=args.archive,
++                parent=args.parent,
++            ),
++            sort_keys=True,
++        )
++    )

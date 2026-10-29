@@ -1,0 +1,48 @@
+{
+  "actualAdmission": false,
+  "campaignAdmitted": false,
+  "checks": {
+    "exactIndependentBeforeCasesRawHashesMatched": 3,
+    "explicitArchiveAuditMembers": 128,
+    "historicalGitInputs": 12,
+    "observedWorkingTreeSnapshots": 2,
+    "originalArtifactsUnchanged": 41,
+    "originalSyntheticControls": 73,
+    "phaseStateNegativeControls": 45,
+    "portabilityControls": 8,
+    "retainedSourceTestFiles": 20
+  },
+  "evidence": {
+    "controls.json": "b2fea305c8a656c69aa18fb0a5ae7c2fc1e16758eb4e4fcc61926b33ed38aebd",
+    "development-observations.json": "fada0c3666000689898b7f8d95239f1d25eccd3e37eb9a31146f6119c32032f8",
+    "guard-controls.json": "96b6c94054d03600816b5668c692e752c5a9abfe83539d52aab25eef04fc20b5",
+    "input-resolution.json": "c53723f279a0ef90a2153527b45afb9c2e9e547bd8f96b69fdef610141ceaef0",
+    "parent-integrity.json": "536ae1aa853a5ba2a319528ce86a8db27bebf7e456a044857cc0b7aedf9e2c6e",
+    "portability-controls.json": "1c5f6161df9b2f4786649bcaf71466e822b8c82b7b9880afe2c0b9643cd7beb6"
+  },
+  "findingsAddressed": [
+    "F1",
+    "F2"
+  ],
+  "missingActualGates": [
+    "trusted native collection and dynamic ID/parameter/subTest accounting",
+    "qualified interpreter/dependency/plugin/import-root context",
+    "trusted phase/error observer and host capture/process/source/context join",
+    "independent review and any separately authorized actual preparation/execution"
+  ],
+  "nativeCollectionOccurred": false,
+  "networkDaemonProviderActions": 0,
+  "oracleQualified": false,
+  "outcomePolicy": "Only complete call/subTest builtins.AssertionError outcomes may count as a complete synthetic failed assertion result after required union phases/IDs finish. Other call exceptions remain distinct semantic-error/unresolved; setup/import/collection/resource/interruption/teardown/cleanup/skip/xfail remain noncompletion.",
+  "packetIdentity": "python01-oracle-preparation-amendment-1",
+  "provenanceLimits": [
+    "Original ROADMAP2a9450 and runtimea0f355 were observed working-tree bytes at base HEAD5d3129, not bytes at that commit. Retained exact snapshots do not assert current freshness.",
+    "Ordinary tooling verification omits current external archive audit unless --archive supplied; skipped audits are explicit.",
+    "Temporary relocated control freeze is a test harness manifest, not final author freeze or task evidence.",
+    "Read-only Git commands compare only12 historical rows whose bytes actually match the declared base.",
+    "Source AST slots remain synthetic; no native test collection or source-body execution occurred."
+  ],
+  "sourceOrNativeExecution": false,
+  "state": "author-focused-controls-pass-awaiting-independent-review",
+  "taskOutcomeObserved": false
+}

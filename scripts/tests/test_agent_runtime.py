@@ -694,6 +694,136 @@ def test_unqualified_image_environment_or_volumes_rejected(session, image_config
         runtime.DockerBackend(invoke).provision(request, config, 10)
 
 
+def _common_image():
+    return json.loads(
+        (
+            BENCH
+            / "f05-dependency-preparation-20261029/image-attempt-3/logs/image-inspect/stdout.txt"
+        ).read_bytes()
+    )[0]
+
+
+def test_frozen_common_image_defaults_progress_without_session_overrides(session):
+    request, config, _ = session
+    image = _common_image()
+    assert image["Id"] == (
+        "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092"
+    )
+    assert {"GOTOOLCHAIN=local", "GOENV=off"} <= set(image["Config"]["Env"])
+    request["environment"]["imageDigest"] = image["Id"]
+    config["qualifications"] = dict.fromkeys(runtime.QUALIFICATIONS, True)
+    original_environment = deepcopy(config["environment"])
+    commands = []
+
+    def invoke(argv, **kwargs):
+        commands.append(argv)
+        return {
+            "stdout": json.dumps([image]) if argv[1:3] == ["image", "inspect"] else "fixture-id",
+            "stderr": "",
+            "exitCode": 0,
+            "error": None,
+        }
+
+    backend = runtime.DockerBackend(invoke)
+    result = backend.provision(request, config, 10)
+    assert [argv[1] for argv in commands] == ["image", "create", "start"]
+    created = commands[1]
+    assert image["Id"] in created
+    assert not any(arg.startswith(("GOENV=", "GOTOOLCHAIN=")) for arg in created)
+    assert config["environment"] == original_environment
+    assert not {"GOENV", "GOTOOLCHAIN"} & runtime.ENV_KEYS
+    assert result["readonlyRoot"] is True and result["network"] == "none"
+
+
+@pytest.mark.parametrize(
+    "entry",
+    [
+        "GOENV=/workspace/go-env",
+        "GOENV=",
+        "GOENV=OFF",
+        "GOENV=off ",
+        "GOENV=off=extra",
+        "GOTOOLCHAIN=auto",
+        "GOTOOLCHAIN=go1.27.3",
+        "GOTOOLCHAIN=go1.27.3+auto",
+        "GOTOOLCHAIN=path",
+        "GOTOOLCHAIN=download",
+        "GOTOOLCHAIN=",
+        "GOTOOLCHAIN=local ",
+        "OPENROUTER_API_KEY=fixture-secret",
+        "AWS_SECRET_ACCESS_KEY=fixture-secret",
+        "UNKNOWN=anything",
+    ],
+)
+def test_image_environment_rejects_unqualified_defaults_before_create(session, entry):
+    _assert_image_environment_refused(session, ["PATH=/bin", entry])
+
+
+@pytest.mark.parametrize(
+    "entries",
+    [
+        ["GOENV=off", "GOENV=off"],
+        ["GOENV=off", "GOENV=/workspace/config"],
+        ["GOENV=/workspace/config", "GOENV=off"],
+        ["GOTOOLCHAIN=local", "GOTOOLCHAIN=local"],
+        ["GOTOOLCHAIN=local", "GOTOOLCHAIN=auto"],
+        ["GOTOOLCHAIN=auto", "GOTOOLCHAIN=local"],
+        ["PATH=/bin", "PATH=/usr/bin"],
+        ["GOENV"],
+        ["=off"],
+        ["GOENV =off"],
+        [" GOENV=off"],
+        ["GOENV=off\x00"],
+        ["GOTOOLCHAIN=local\n"],
+        ["PATH=/bin\r"],
+        [7],
+        [None],
+        "GOENV=off",
+        {"GOENV": "off"},
+        {},
+        False,
+    ],
+)
+def test_image_environment_rejects_duplicate_or_malformed_metadata(session, entries):
+    _assert_image_environment_refused(session, entries)
+
+
+def _assert_image_environment_refused(session, entries):
+    request, config, _ = session
+    config["qualifications"] = dict.fromkeys(runtime.QUALIFICATIONS, True)
+    commands = []
+
+    def invoke(argv, **kwargs):
+        commands.append(argv)
+        assert argv[1:3] == ["image", "inspect"]
+        return {
+            "stdout": json.dumps(
+                [{"Id": request["environment"]["imageDigest"], "Config": {"Env": entries}}]
+            ),
+            "stderr": "",
+            "exitCode": 0,
+            "error": None,
+        }
+
+    backend = runtime.DockerBackend(invoke)
+    with pytest.raises(ValueError, match="image.*environment"):
+        backend.provision(request, config, 10)
+    assert len(commands) == 1 and backend.created is False
+
+
+@pytest.mark.parametrize("entries", [None, [], ["PATH=/bin"], ["GOENV=off", "GOTOOLCHAIN=local"]])
+def test_image_environment_preserves_empty_and_qualified_shapes(entries):
+    runtime._validate_image_environment(entries)
+
+
+@pytest.mark.parametrize("key,value", [("GOENV", "off"), ("GOTOOLCHAIN", "local")])
+def test_image_go_defaults_do_not_become_caller_override_permissions(session, key, value):
+    request, config, _ = session
+    config["environment"][key] = value
+    with pytest.raises(ValueError, match="container environment is not allowlisted"):
+        runtime.validate_runtime(config, request)
+
+
 def test_unqualified_live_launch_has_no_docker_or_provider_side_effects(session, tmp_path):
     provider, backend = FakeProvider(response(text="never")), FakeDocker()
     provider.simulation = backend.simulation = False

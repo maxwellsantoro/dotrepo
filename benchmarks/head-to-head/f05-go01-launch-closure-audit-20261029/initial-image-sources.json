@@ -1,0 +1,170 @@
+{
+  "archiveSha256": "d8de699302fac90a58280e0757c22a7aa82a2c40d48d72ab2c8ffc7c933681d6",
+  "archiveBytes": 1937748992,
+  "image": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "archiveHashElapsedSeconds": 1.9055969715118408,
+  "sources": [
+    {
+      "path": "usr/local/bin/node",
+      "archive": "/tmp/dotrepo-f05-common-image-audit-9slpmcbi/filesystem-export.tar",
+      "memberType": "0",
+      "mode": 493,
+      "bytes": 123378856,
+      "target": null
+    },
+    {
+      "path": "usr/local/bin/npm",
+      "archive": "/tmp/dotrepo-f05-common-image-audit-9slpmcbi/filesystem-export.tar",
+      "memberType": "0",
+      "mode": 493,
+      "bytes": 72,
+      "target": null,
+      "sha256": "de0074a6bf7a9f22fc0081ec0b941ef336acc1109c2e45d2ddddb601b3188b63"
+    },
+    {
+      "path": "usr/local/bin/npx",
+      "archive": "/tmp/dotrepo-f05-common-image-audit-9slpmcbi/filesystem-export.tar",
+      "memberType": "0",
+      "mode": 493,
+      "bytes": 72,
+      "target": null,
+      "sha256": "8ef0a506c1aea4a30c46d8a1b2874caa0670ea52b35954cc60709cf22117e07f"
+    },
+    {
+      "path": "usr/local/lib/node_modules/npm/package.json",
+      "archive": "/tmp/dotrepo-f05-common-image-audit-9slpmcbi/filesystem-export.tar",
+      "memberType": "0",
+      "mode": 420,
+      "bytes": 6597,
+      "target": null,
+      "sha256": "f6478d5600180a23f73e4217610c7709a71cedb4ae13f6c3e15ecb457f5d4fd6"
+    },
+    {
+      "path": "usr/local/lib/node_modules/npm/bin/npx-cli.js",
+      "archive": "/tmp/dotrepo-f05-common-image-audit-9slpmcbi/filesystem-export.tar",
+      "memberType": "0",
+      "mode": 493,
+      "bytes": 2921,
+      "target": null,
+      "sha256": "237adf8f3747cad8b9b62fcfd0d9c8d509a64e550337707f55100afcb79e8900"
+    },
+    {
+      "path": "usr/local/lib/node_modules/npm/bin/npm-cli.js",
+      "archive": "/tmp/dotrepo-f05-common-image-audit-9slpmcbi/filesystem-export.tar",
+      "memberType": "0",
+      "mode": 493,
+      "bytes": 54,
+      "target": null,
+      "sha256": "8e5f6f3429f8cdbe693cdc29904e9d5a7b127a494bd15c804bd54c7403bfcbe7"
+    },
+    {
+      "path": "usr/local/lib/node_modules/npm/lib/cli.js",
+      "archive": "/tmp/dotrepo-f05-common-image-audit-9slpmcbi/filesystem-export.tar",
+      "memberType": "0",
+      "mode": 420,
+      "bytes": 407,
+      "target": null,
+      "sha256": "67666f06479f9b0bbc01412c198caadd4287d34d5ed74a02871ea78f186451e7"
+    },
+    {
+      "path": "usr/local/lib/node_modules/npm/lib/cli/entry.js",
+      "archive": "/tmp/dotrepo-f05-common-image-audit-9slpmcbi/filesystem-export.tar",
+      "memberType": "0",
+      "mode": 420,
+      "bytes": 2991,
+      "target": null,
+      "sha256": "667a44c1fa8795fdbba8ad843736ca7f8f24e64511985e9a7060b002123560c6"
+    },
+    {
+      "path": "usr/local/lib/node_modules/npm/lib/cli/validate-engines.js",
+      "archive": "/tmp/dotrepo-f05-common-image-audit-9slpmcbi/filesystem-export.tar",
+      "memberType": "0",
+      "mode": 420,
+      "bytes": 1915,
+      "target": null,
+      "sha256": "eb2770f8aef0656afa06b7512961b30a25636dfaed29cd0d842def07b95eeed7"
+    },
+    {
+      "path": "usr/local/lib/node_modules/npm/lib/npm.js",
+      "archive": "/tmp/dotrepo-f05-common-image-audit-9slpmcbi/filesystem-export.tar",
+      "memberType": "0",
+      "mode": 420,
+      "bytes": 17009,
+      "target": null,
+      "sha256": "dd258b095bff5a0a16636bcc4cb457330624999485f64e1944d57424cbebebea"
+    },
+    {
+      "path": "usr/local/lib/node_modules/npm/lib/commands/exec.js",
+      "archive": "/tmp/dotrepo-f05-common-image-audit-9slpmcbi/filesystem-export.tar",
+      "memberType": "0",
+      "mode": 420,
+      "bytes": 3989,
+      "target": null,
+      "sha256": "f341403051a805d7f970d3c0d19d5d374d20c859aef73330ada18e4f0402949d"
+    },
+    {
+      "path": "usr/local/lib/node_modules/npm/node_modules/libnpmexec/lib/index.js",
+      "archive": "/tmp/dotrepo-f05-common-image-audit-9slpmcbi/filesystem-export.tar",
+      "memberType": "0",
+      "mode": 420,
+      "bytes": 11277,
+      "target": null,
+      "sha256": "d3a229153f10a94127933adbd958c4b650a7c225442c21806fee729bd4784254"
+    },
+    {
+      "path": "usr/local/lib/node_modules/npm/node_modules/libnpmexec/lib/run-script.js",
+      "archive": "/tmp/dotrepo-f05-common-image-audit-9slpmcbi/filesystem-export.tar",
+      "memberType": "0",
+      "mode": 420,
+      "bytes": 1873,
+      "target": null,
+      "sha256": "cf0a7c6462fab3a4818556eedbacd1a6773f924744afb14908bb62a14015ba02"
+    },
+    {
+      "path": "usr/local/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/run-script.js",
+      "archive": "/tmp/dotrepo-f05-common-image-audit-9slpmcbi/filesystem-export.tar",
+      "memberType": "0",
+      "mode": 420,
+      "bytes": 520,
+      "target": null,
+      "sha256": "daceffb5ae860499cc8e0696c8c33ef5d705f62f597974858b6472fcd1215f79"
+    },
+    {
+      "path": "usr/local/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/run-script-pkg.js",
+      "archive": "/tmp/dotrepo-f05-common-image-audit-9slpmcbi/filesystem-export.tar",
+      "memberType": "0",
+      "mode": 420,
+      "bytes": 2977,
+      "target": null,
+      "sha256": "94dea9ff50028869f4f88c4ec5e520d56fa7c2f6cc03422a9f06c44d291a0c34"
+    },
+    {
+      "path": "usr/local/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/make-spawn-args.js",
+      "archive": "/tmp/dotrepo-f05-common-image-audit-9slpmcbi/filesystem-export.tar",
+      "memberType": "0",
+      "mode": 420,
+      "bytes": 1130,
+      "target": null,
+      "sha256": "d1647624f0ce227e5cff1c4570f3e754e0eaaf08041db354102ec2bdbbd721df"
+    },
+    {
+      "path": "usr/local/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/set-path.js",
+      "archive": "/tmp/dotrepo-f05-common-image-audit-9slpmcbi/filesystem-export.tar",
+      "memberType": "0",
+      "mode": 420,
+      "bytes": 1856,
+      "target": null,
+      "sha256": "bc023d0c2d0840074c9e81ac0bda0fed0ef75e64623fa670437a7706d05d3542"
+    },
+    {
+      "path": "usr/local/lib/node_modules/npm/node_modules/@npmcli/config/lib/index.js",
+      "archive": "/tmp/dotrepo-f05-common-image-audit-9slpmcbi/filesystem-export.tar",
+      "memberType": "0",
+      "mode": 420,
+      "bytes": 32085,
+      "target": null,
+      "sha256": "938b85a17fde9f2355497fd4befc9bac45d406fb4afacd8af63322796697ff06"
+    }
+  ],
+  "noDaemonActions": true
+}

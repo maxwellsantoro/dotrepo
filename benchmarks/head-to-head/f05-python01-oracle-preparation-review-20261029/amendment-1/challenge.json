@@ -1,0 +1,304 @@
+{
+  "actualAdmission": false,
+  "cases": [
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": true,
+      "name": "full-semantic-union-pass",
+      "rawFixtureSha256": "97f0f26a60f1d7fad3849ac52b1c8f6cda04915a57343d1ec60a11240abca6b8",
+      "reason": "complete full semantic-union assertion outcome",
+      "testsPassed": true
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": true,
+      "name": "complete-assertion-root-unittest",
+      "rawFixtureSha256": "0c45ea542a98d53be9f7bc64d5d07cb13641b96fc53fe554fbe87bc76a001956",
+      "reason": "complete full semantic-union assertion outcome",
+      "testsPassed": false
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": true,
+      "name": "complete-assertion-backend-pytest",
+      "rawFixtureSha256": "a291ef1afc6c3f9b1cdb9cfaa98074bb80d44233c5ffb3d8e5191875134701f7",
+      "reason": "complete full semantic-union assertion outcome",
+      "testsPassed": false
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": true,
+      "name": "failed-subtest-parent-returns",
+      "rawFixtureSha256": "a7e25e5f739a46545c61712bc7de576fb589c9c0b477aa043647608466b5cbad",
+      "reason": "complete full semantic-union assertion outcome",
+      "testsPassed": false
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "missing-root-unittest-setup-start-null-result",
+      "rawFixtureSha256": "bef159ca04f499e39b0c2db72ca53e7d60ab132fd0859df234fbc577291c68cf",
+      "reason": "phase-result order/schema/unfinished-subtest",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "missing-backend-pytest-setup-start-null-result",
+      "rawFixtureSha256": "6515d549229773eb1e38dc8bf5129141579663187c69e77c758542c9927508ba",
+      "reason": "phase-result order/schema/unfinished-subtest",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "all-phase-starts-absent-and-all-phase-results-null",
+      "rawFixtureSha256": "3a72857a9d410bdabf8502820b9cf8a6618cfe647a3cb68cd16b954819b4d5e4",
+      "reason": "phase-result order/schema/unfinished-subtest",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "bad-result-phase-root-unittest-None",
+      "rawFixtureSha256": "27a1d5e67682990ad8a4228bb2c844a24219cbf3b2427ca4edd115973d8b15d8",
+      "reason": "phase-result order/schema/unfinished-subtest",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "bad-result-phase-root-unittest-False",
+      "rawFixtureSha256": "7a7a0ab4a27f4028bee8b573d163716bcbddf421f7af24d22df539ba2535f870",
+      "reason": "phase-result order/schema/unfinished-subtest",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "bad-result-phase-root-unittest-0",
+      "rawFixtureSha256": "33d3e584a0e077efc996f1681d696dcb418c929e28f0953c239f748c71d04b43",
+      "reason": "phase-result order/schema/unfinished-subtest",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "bad-result-phase-root-unittest-'unknown'",
+      "rawFixtureSha256": "2ec54b8586bfc17422dc82564e08c77a980f791bef0f8b708871a172b95d63ec",
+      "reason": "phase-result order/schema/unfinished-subtest",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "bad-result-phase-root-unittest-[]",
+      "rawFixtureSha256": "8701ecf85f9f7ded4fb7709e1c1b697bad3fcc80e33ce6a054dd9f8436920c92",
+      "reason": "phase-result order/schema/unfinished-subtest",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "missing-start-root-unittest-setup",
+      "rawFixtureSha256": "1ee82ed60450b05027799588a6324da349b64ebd4ea3bc54cd1905d48055d5da",
+      "reason": "phase-result order/schema/unfinished-subtest",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "missing-start-root-unittest-call",
+      "rawFixtureSha256": "d8d4518fc5dd43d28f8ac8ba4f9e2f3b0016ea7aef0e0c7c709d255a8feddb64",
+      "reason": "phase-result order/schema/unfinished-subtest",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "missing-start-root-unittest-teardown",
+      "rawFixtureSha256": "355d8025aa30c721e71f0c976f8ddb528fb265cdb3a85271420d38a7a4da4cad",
+      "reason": "phase-result order/schema/unfinished-subtest",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "missing-start-root-unittest-cleanup",
+      "rawFixtureSha256": "f0ec51f99b72c266fc22bfdc00ae727e8749a3001c3afb132ef4ff3462a8f062",
+      "reason": "phase-result order/schema/unfinished-subtest",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "fixture-assertion-root-unittest-setup",
+      "rawFixtureSha256": "ae39cb3f12806d915d17913ce8f495797de27d60602c6b0118b91ed6a96d00df",
+      "reason": "incomplete-setup-teardown-or-cleanup",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "fixture-assertion-root-unittest-teardown",
+      "rawFixtureSha256": "091160ea0ac4aac3a98d08a816d2667b4a0542c09003b322f42e1b5f8229fd30",
+      "reason": "incomplete-setup-teardown-or-cleanup",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "bad-result-phase-backend-pytest-None",
+      "rawFixtureSha256": "92ada4a2adc7642b466f9874e4d5e6424b261403019b89ccd9b504f07ecaaace",
+      "reason": "phase-result order/schema/unfinished-subtest",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "bad-result-phase-backend-pytest-False",
+      "rawFixtureSha256": "d91c584a8af240e833b66f024cd8d07c3e27bb742c56201f736c765c14e5af12",
+      "reason": "phase-result order/schema/unfinished-subtest",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "bad-result-phase-backend-pytest-0",
+      "rawFixtureSha256": "fcaa38bbecd8b32da5fb3a526f7f66b30c0ebef0154fc6b0221ca9606e09688a",
+      "reason": "phase-result order/schema/unfinished-subtest",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "bad-result-phase-backend-pytest-'cleanup'",
+      "rawFixtureSha256": "91f7cb71d946585e2406a385757fa10e894fec3c6381a09e1e11920337840adc",
+      "reason": "phase-result order/schema/unfinished-subtest",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "bad-result-phase-backend-pytest-[]",
+      "rawFixtureSha256": "e9cce68752d1ca56966753b04c9dc66787029d1f79012f718cde9c9a889c70dc",
+      "reason": "phase-result order/schema/unfinished-subtest",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "missing-start-backend-pytest-setup",
+      "rawFixtureSha256": "bcee49ab2b85243b4b1716f0ee7b07ecb4a32a2cef4bd2972278ccb3e131cd0e",
+      "reason": "phase-result order/schema/unfinished-subtest",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "missing-start-backend-pytest-call",
+      "rawFixtureSha256": "0af1d9af43cd53c14a4b66e281e5536578a807f2783446bee3e2876979155062",
+      "reason": "phase-result order/schema/unfinished-subtest",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "missing-start-backend-pytest-teardown",
+      "rawFixtureSha256": "560b8a9e81c43bb6e3170c6727398fac226fe9e1abc21a665e31ad3bdf270fcf",
+      "reason": "phase-result order/schema/unfinished-subtest",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "fixture-assertion-backend-pytest-setup",
+      "rawFixtureSha256": "25be95d390e38561fadac75a4f7a7e8e0ad4126bc8edcb89374c19c1b53d32bc",
+      "reason": "incomplete-setup-teardown-or-cleanup",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "fixture-assertion-backend-pytest-teardown",
+      "rawFixtureSha256": "850c4c8f6a678c7c4ec85aab79d3eaec321f8bdbf60e60aa6be4fdef19d94426",
+      "reason": "incomplete-setup-teardown-or-cleanup",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "cleanup-error-after-assertion",
+      "rawFixtureSha256": "9c33dfe339107366f61c5ed768b17d7c4e3df415f033b62707d56fa209298cca",
+      "reason": "incomplete-setup-teardown-or-cleanup",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "call-import-error",
+      "rawFixtureSha256": "6959266b15be9d5b3881d3ea5ab74b834bb47b2f1ccc268a9202ce131c931e02",
+      "reason": "complete-call-exception-unresolved",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "unadjudicated-skipped",
+      "rawFixtureSha256": "13f39d207131e41be40181002910efcfc87744f7395ed8c3150191da5533d8fa",
+      "reason": "unadjudicated-skip-xfail-or-xpass",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "unadjudicated-xfail",
+      "rawFixtureSha256": "9239bd60d2cb0d5a8be54c8833f76318367e707c30eab84c7bf879e799d1a2cb",
+      "reason": "unadjudicated-skip-xfail-or-xpass",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "unadjudicated-xpass",
+      "rawFixtureSha256": "d245f1e5c3351f54b4308331c7c91fbadd611bd93c2099b3de8bd8e443b184c0",
+      "reason": "unadjudicated-skip-xfail-or-xpass",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "truncated-process",
+      "rawFixtureSha256": "97f0f26a60f1d7fad3849ac52b1c8f6cda04915a57343d1ec60a11240abca6b8",
+      "reason": "incomplete/error process transport",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "signal-killed",
+      "rawFixtureSha256": "97f0f26a60f1d7fad3849ac52b1c8f6cda04915a57343d1ec60a11240abca6b8",
+      "reason": "incomplete/error process transport",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "missing-backend",
+      "rawFixtureSha256": "f20cf3f89dae477b9f0d65ab1404ba7ee0309baa7f176d9d73ec727e37c609c3",
+      "reason": "run ended before both suites",
+      "testsPassed": null
+    },
+    {
+      "actualModeRefusedSpoofedFlags": true,
+      "candidateOutcomeObserved": false,
+      "name": "duplicate-terminal-result",
+      "rawFixtureSha256": "63a90dc3aa4496300a2b5926637ea98825a2899f2553ba8c53cc51a202da79b3",
+      "reason": "phase-result order/schema/unfinished-subtest",
+      "testsPassed": null
+    }
+  ],
+  "count": 37,
+  "newNativeDaemonNetworkProviderActions": 0,
+  "state": "independent-python01-phase-successor-controls-passed"
+}

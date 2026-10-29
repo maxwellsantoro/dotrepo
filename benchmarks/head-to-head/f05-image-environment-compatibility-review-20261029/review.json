@@ -1,0 +1,50 @@
+{
+  "actualAdmission": false,
+  "actualDaemonCalls": 0,
+  "campaignAdmitted": false,
+  "costUsd": null,
+  "evidence": {
+    "authorArtifactHashesVerified": 11,
+    "authorBeforeAfterMockReplay": "Original rejects after one mock image inspect; successor mock image/create/start/cleanup succeeds.",
+    "boundSourceHashesVerified": 3,
+    "callerOverrideControls": "GOENVoff and GOTOOLCHAINlocal remain rejected in config.environment; exact ENV_KEYS AST unchanged.",
+    "diffCheck": true,
+    "focusedPytestDeselected": 123,
+    "focusedPytestPassed": 44,
+    "independentMockCasesPassed": 42,
+    "isolation": "All other runtime AST unchanged after restoring only original image-env guard/removing new helper/constant. Mock create flags retain none-network/readonly/capdrop/no-new-privileges/private namespaces/no mounts and inject no new Go defaults.",
+    "positives": "Actual b47 metadata, legacy null/empty Env and allowed keys including literal equals values progress; no new real image or daemon observation.",
+    "preCreateNegativeControls": "Wrong safe values, unknown keys, duplicates/conflicts, malformed names/missing equals, control/null/nonstring entries and invalid list shapes all refuse before create.",
+    "retainedImageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+    "retainedImageInheritedValues": {
+      "GOENV": "off",
+      "GOTOOLCHAIN": "local"
+    },
+    "ruffCheck": true,
+    "ruffFormatCheck": true
+  },
+  "executionAuthorized": false,
+  "findings": [],
+  "limits": [
+    "Review is source inspection and owned Python mocks, with earlier F05/source/producer context; not a blind task trial.",
+    "Synthetic qualification flags unlock only fake preflight; no actual daemon, upstream/native command, network, package, provider or model action occurred.",
+    "This fix admits exact inherited image defaults only; it does not certify target dependency availability, effective npm/Hereby child context, source producer provenance, task environment or C1 readiness.",
+    "Historical capture/oracle packets keep their exact older runtime hashes; future subjects/configurations need matching bindings and review.",
+    "No actual container/isolation execution, consumer benefit or campaign outcome is established."
+  ],
+  "nativeTaskAdmitted": false,
+  "oracleQualified": false,
+  "originalDefect": {
+    "beforeRuntimeSha256": "dc585e08f24e1a20da9d9ccdafac4af3f4e10cb8451de7ca3a74c05ecc985fa0",
+    "description": "Old image Env allowlist rejected retained b47 inherited GOENVoff/GOTOOLCHAINlocal before container creation.",
+    "disposition": "Resolved by image-only exact-safe-value validation; no configured override keys added or environment injected."
+  },
+  "state": "independent-image-environment-compatibility-review-passed",
+  "subject": {
+    "authorFreezeSha256": "d1b7e310c20b1a09f2999a1203fe7653a54981a62493ffc62d194121d0fbd408",
+    "imageInspectSha256": "4c6fa72b8b05b95a719110e0f7fa705758c224e253cf8c7cdf881218ea4f1913",
+    "runtimeSha256": "a0f355e2438ebac9dea36a62bd263c1451a51787da840ec64c138d29dddb8473",
+    "testsSha256": "4219b659e65570fbc6a7ad54ab136bcf193f59418b036d08ed37c7237e41cdde"
+  },
+  "taskOutcomeObserved": false
+}

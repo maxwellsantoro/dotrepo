@@ -1,0 +1,116 @@
+{
+  "additionalGoSources": [
+    {
+      "path": "usr/local/go/src/cmd/go/internal/modload/init.go",
+      "sha256": "5040e805a75a74d54efd77dec873d7658e70a4ef1798cb174a7fffdc723f1382",
+      "spans": 2
+    },
+    {
+      "path": "usr/local/go/src/cmd/go/internal/cfg/cfg.go",
+      "sha256": "8eb038ac6df168fe5af971cd768d99dd3c64224273072a4160dcc5f51eacae9d",
+      "spans": 3
+    },
+    {
+      "path": "usr/local/go/go.env",
+      "sha256": "98fcab78e155e9fa0c36b18874add30724d04c2452078117c78618107ebfbc9e",
+      "spans": 1
+    }
+  ],
+  "campaignAdmitted": false,
+  "controlCount": 17,
+  "controls": [
+    {
+      "expectedRole": "installed-dependencies",
+      "matched": true,
+      "path": "node_modules/pkg/index.js"
+    },
+    {
+      "expectedRole": "installed-dependencies",
+      "matched": true,
+      "path": "packages/typescript/node_modules/a"
+    },
+    {
+      "expectedRole": "source-invariant",
+      "matched": true,
+      "path": "tsc/node_modules/a"
+    },
+    {
+      "expectedRole": "source-invariant",
+      "matched": true,
+      "path": "tools/node_modules/a"
+    },
+    {
+      "expectedRole": "source-invariant",
+      "matched": true,
+      "path": "node_modules-other/a"
+    },
+    {
+      "expectedRole": "maintainer-declared-local-test-output",
+      "matched": true,
+      "path": "tsc/testdata/baselines/local/case.js"
+    },
+    {
+      "expectedRole": "source-invariant",
+      "matched": true,
+      "path": "tsc/testdata/baselines/reference/case.js"
+    },
+    {
+      "expectedRole": "source-invariant",
+      "matched": true,
+      "path": "tsc/testdata/baselines/locality/case.js"
+    },
+    {
+      "expectedRole": "fresh-source-owned-producer-output",
+      "matched": true,
+      "path": "tools/gotestsum"
+    },
+    {
+      "expectedRole": "source-invariant",
+      "matched": true,
+      "path": "tools/gotestsum-other"
+    },
+    {
+      "expectedRole": "Go-generated-dependency-integrity-output",
+      "matched": true,
+      "path": "go.work.sum"
+    },
+    {
+      "expectedRole": "source-invariant",
+      "matched": true,
+      "path": "tsc/go.work.sum"
+    },
+    {
+      "case": "added-selected-go",
+      "digestChanged": true
+    },
+    {
+      "case": "added-package",
+      "digestChanged": true
+    },
+    {
+      "case": "removed-source",
+      "digestChanged": true
+    },
+    {
+      "case": "changed-fixture",
+      "digestChanged": true
+    },
+    {
+      "UTF8Order": [
+        "",
+        "😀"
+      ],
+      "case": "BMP-astral-explicit-UTF8-order",
+      "different": true,
+      "wrongUTF16Order": [
+        "😀",
+        ""
+      ]
+    }
+  ],
+  "executionAuthorized": false,
+  "meaning": "Reference checks of contract data/encoding and exclusion boundaries, not tests of a runtime observer (none implemented).",
+  "newNativeDaemonGoNodeNetworkPackageProviderActions": 0,
+  "oracleQualified": false,
+  "state": "contract-data-reference-controls-passed"
+}

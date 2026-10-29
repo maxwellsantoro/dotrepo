@@ -1,0 +1,355 @@
+{
+  "actualDaemonCalls": 0,
+  "callerENVKEYSUnchanged": true,
+  "campaignAdmitted": false,
+  "cases": [
+    {
+      "error": null,
+      "expectedProgression": true,
+      "mockStages": [
+        "image",
+        "create",
+        "start",
+        "rm"
+      ],
+      "name": "retained-b47"
+    },
+    {
+      "error": null,
+      "expectedProgression": true,
+      "mockStages": [
+        "image",
+        "create",
+        "start",
+        "rm"
+      ],
+      "name": "legacy-null"
+    },
+    {
+      "error": null,
+      "expectedProgression": true,
+      "mockStages": [
+        "image",
+        "create",
+        "start",
+        "rm"
+      ],
+      "name": "legacy-empty"
+    },
+    {
+      "error": null,
+      "expectedProgression": true,
+      "mockStages": [
+        "image",
+        "create",
+        "start",
+        "rm"
+      ],
+      "name": "safe-two-defaults"
+    },
+    {
+      "error": null,
+      "expectedProgression": true,
+      "mockStages": [
+        "image",
+        "create",
+        "start",
+        "rm"
+      ],
+      "name": "legacy-allowed-with-equals"
+    },
+    {
+      "error": "image contains nonallowlisted environment",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "wrong-toolchain-'auto'"
+    },
+    {
+      "error": "image contains nonallowlisted environment",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "wrong-toolchain-'path'"
+    },
+    {
+      "error": "image contains nonallowlisted environment",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "wrong-toolchain-'go1.27.3'"
+    },
+    {
+      "error": "malformed image environment entry",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "wrong-toolchain-'local\\n'"
+    },
+    {
+      "error": "image contains nonallowlisted environment",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "wrong-toolchain-'LOCAL'"
+    },
+    {
+      "error": "image contains nonallowlisted environment",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "wrong-toolchain-''"
+    },
+    {
+      "error": "image contains nonallowlisted environment",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "wrong-toolchain-'local=extra'"
+    },
+    {
+      "error": "image contains nonallowlisted environment",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "wrong-goenv-'OFF'"
+    },
+    {
+      "error": "image contains nonallowlisted environment",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "wrong-goenv-''"
+    },
+    {
+      "error": "image contains nonallowlisted environment",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "wrong-goenv-'/workspace/go-env'"
+    },
+    {
+      "error": "malformed image environment entry",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "wrong-goenv-'off\\x00'"
+    },
+    {
+      "error": "image contains nonallowlisted environment",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "wrong-goenv-'off '"
+    },
+    {
+      "error": "image contains nonallowlisted environment",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "wrong-goenv-'off=extra'"
+    },
+    {
+      "error": "duplicate image environment key",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "duplicate-allowed"
+    },
+    {
+      "error": "duplicate image environment key",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "duplicate-safe"
+    },
+    {
+      "error": "duplicate image environment key",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "conflict-safe-first"
+    },
+    {
+      "error": "image contains nonallowlisted environment",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "conflict-safe-last"
+    },
+    {
+      "error": "malformed image environment entry",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "missing-equals"
+    },
+    {
+      "error": "malformed image environment entry",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "empty-name"
+    },
+    {
+      "error": "malformed image environment entry",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "numeric-name"
+    },
+    {
+      "error": "malformed image environment entry",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "space-name"
+    },
+    {
+      "error": "malformed image environment entry",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "non-ascii-name"
+    },
+    {
+      "error": "malformed image environment entry",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "control-allowed-value"
+    },
+    {
+      "error": "malformed image environment entry",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "del-allowed-value"
+    },
+    {
+      "error": "malformed image environment entry",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "null-entry"
+    },
+    {
+      "error": "malformed image environment entry",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "boolean-entry"
+    },
+    {
+      "error": "malformed image environment entry",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "integer-entry"
+    },
+    {
+      "error": "malformed image environment entry",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "list-entry"
+    },
+    {
+      "error": "invalid image environment list",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "nonlist-null-object"
+    },
+    {
+      "error": "invalid image environment list",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "nonlist-false"
+    },
+    {
+      "error": "invalid image environment list",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "nonlist-zero"
+    },
+    {
+      "error": "invalid image environment list",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "nonlist-string"
+    },
+    {
+      "error": "image contains nonallowlisted environment",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "unknown-selector"
+    },
+    {
+      "error": "image contains nonallowlisted environment",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "unknown-preload"
+    },
+    {
+      "error": "image contains nonallowlisted environment",
+      "expectedProgression": false,
+      "mockStages": [
+        "image"
+      ],
+      "name": "unknown-arbitrary"
+    },
+    {
+      "name": "caller-override-GOENV",
+      "refused": true
+    },
+    {
+      "name": "caller-override-GOTOOLCHAIN",
+      "refused": true
+    }
+  ],
+  "count": 42,
+  "executionAuthorized": false,
+  "oracleQualified": false,
+  "state": "independent-image-env-mock-controls-passed",
+  "taskOutcomeObserved": false
+}

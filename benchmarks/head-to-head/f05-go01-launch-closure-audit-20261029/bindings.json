@@ -1,0 +1,79 @@
+{
+  "files": [
+    {
+      "bytes": 715,
+      "path": "/tmp/dotrepo-go01-next-producer-plan-20261029/FREEZE.json",
+      "role": "Prospective producer plan",
+      "sha256": "961c3135dd3fc7751774fce9822f9afd4e72f6103001eafdaac2143e5a7915e1"
+    },
+    {
+      "bytes": 12991,
+      "path": "/tmp/dotrepo-go01-next-producer-plan-20261029/plan.json",
+      "role": "Prospective producer plan",
+      "sha256": "0f84cfe0d90985e5e5fe235b880a9c4d4cc23c8081ee3f25d17f1cf99b5e9192"
+    },
+    {
+      "bytes": 34758,
+      "path": "/tmp/dotrepo-go01-next-producer-plan-20261029/sources.json",
+      "role": "Prospective producer plan",
+      "sha256": "6398b89ba8ba043fd2875acfa11130662dc55517428eaef1fc9b69f992c34472"
+    },
+    {
+      "bytes": 2463,
+      "path": "/tmp/dotrepo-go01-next-producer-plan-20261029/README.md",
+      "role": "Prospective producer plan",
+      "sha256": "765bff63a20b960751f5fa95ffad9fe534800ea07d645d2b9613036e45aa95f7"
+    },
+    {
+      "bytes": 67272,
+      "path": "benchmarks/head-to-head/bench/agent_runtime.py",
+      "role": "Current runtime/config/create owner",
+      "sha256": "dc585e08f24e1a20da9d9ccdafac4af3f4e10cb8451de7ca3a74c05ecc985fa0"
+    },
+    {
+      "bytes": 21684,
+      "path": "benchmarks/head-to-head/bench/event_capture.py",
+      "role": "Current reviewed capture subset/export helper",
+      "sha256": "ffe5b5e27aaca28bceae83aac15bfeb5e83963eef63a3b2f41c97833787b4a12"
+    },
+    {
+      "bytes": 31089,
+      "path": "benchmarks/head-to-head/bench/agent_experiment.py",
+      "role": "Canonical runtime keys and raw artifacts owner",
+      "sha256": "dc65a86d3be4fefe1744b110472736e2804c78433471700a4a81be87735bf290"
+    },
+    {
+      "bytes": 3037,
+      "path": "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-3/amendment-1/FREEZE.json",
+      "role": "Am3 isolation successor",
+      "sha256": "bad0a161c9d84d923e0431dfac39d20dcd03a0d5fe916ce19e56c96e89c8768f"
+    },
+    {
+      "bytes": 2148,
+      "path": "benchmarks/head-to-head/f05-go01-capture-adapter-review-20261029/amendment-1/FREEZE.json",
+      "role": "Independent successor after-review",
+      "sha256": "6024c8791b0e5793e5f931787b9137ea73d19acf5ecfbad996200e9a21c3f154"
+    },
+    {
+      "bytes": 982,
+      "path": "benchmarks/head-to-head/f05-common-image-audit-20261029/export-receipt.json",
+      "role": "Exact never-started b47 export image binding",
+      "sha256": "b02672fbfea225a1e01a9eda141946d10e4b1d61653ba11ac702bc6ef33172d9"
+    },
+    {
+      "bytes": 11033850,
+      "path": "benchmarks/head-to-head/f05-common-image-audit-20261029/inventory.json",
+      "role": "Image member digest inventory",
+      "sha256": "f096a4b8a2346c0332082e2b88b093cc4fb78b2cbaed0b5b5af05d071695f647"
+    },
+    {
+      "bytes": 10700065,
+      "path": "benchmarks/head-to-head/f05-qualification-20261029/go-01-full/inventory.json",
+      "role": "Upstream exact revision source inventory",
+      "sha256": "96c935c31228fa8e05bb836a93257beeb87ac524e5eb30cdde3c546a1ea4be0e"
+    }
+  ],
+  "noRepositoryFilesModified": true,
+  "prospectiveBaseCommit": "67e46a9dda666348fb913f1bbca6cbd0259af8e2",
+  "prospectivePlanFreezeSha256": "961c3135dd3fc7751774fce9822f9afd4e72f6103001eafdaac2143e5a7915e1"
+}

@@ -1,0 +1,58 @@
+{
+  "campaignAdmitted": false,
+  "checks": {
+    "actualModeAlwaysRefuses": true,
+    "authorArtifactsVerified": 41,
+    "authoredSyntheticControlsPassed": 73,
+    "currentBoundInputsMatch": 15,
+    "fixtureByteExactReconstruction": "e141c87f452f021a3a9e7ced5c3bb1b2efc8691a06d925cde0cebdabddf09339",
+    "independentFalseAcceptances": 3,
+    "ruffCheck": true,
+    "ruffFormatCheck": true
+  },
+  "costUsd": null,
+  "executionAuthorized": false,
+  "findings": [
+    {
+      "description": "phase-result accepts activePhaseNone==rowphaseNone without a preceding phase-start, then advances phaseIndex. Removing setup start and nulling result in either suite claims coverage/candidatepass. Removing every phase-start and nulling all result phases also claims complete157case phase coverage/pass.",
+      "id": "F1",
+      "lines": [
+        359,
+        370
+      ],
+      "path": "/tmp/dotrepo-f05-python01-oracle-preparation-20261029/oracle.py",
+      "priority": 2,
+      "reproduction": "challenge.py/.json; phase-null-counterexamples.json retains first2fullresults. All mocks only; actual path staysclosed.",
+      "smallestFix": "Require a valid non-null active phase, exact current index/phase and started phase identity before accepting result; retain missing-phase/error observations and later cases.",
+      "title": "Null result can complete an inactive phase"
+    },
+    {
+      "description": "Both hardcode /Users/maxwell/projects/agent/dotrepo. verify reads every relative row from mutable current checkout and external /tmp source archive unconditionally. Current snapshot does match all15bindings; no current hash failure. ROADMAP2a9450 and runtimea0f355 are observed working-tree subjects differing base5d, so blanket Git-base resolution is also wrong.",
+      "id": "F2",
+      "paths": [
+        "/tmp/dotrepo-f05-python01-oracle-preparation-20261029/derive_fixture.py",
+        "/tmp/dotrepo-f05-python01-oracle-preparation-20261029/verify.py"
+      ],
+      "priority": 2,
+      "smallestFix": "Append successor tools with explicit/discovered repo root, exact retained snapshots for observed rows, per-row base provenance only where hashes actually match, and optional explicit retained archive verification. Preserve original41/hashbindings; do not rewrite historical rows.",
+      "title": "Verifier and derivation bind one absolute checkout and mutable observed rows"
+    }
+  ],
+  "newNativeDaemonNetworkPackageProviderActions": 0,
+  "oracleQualified": false,
+  "positiveAssessment": "Scope preserves root/backend full union and separate print-only diagnostic; source157candidate slots notnativeIDs. Explicit setup/call/teardown/cleanup/subTest/error provenance, complete assertion-failed semantics and skip/xfail/resource/missing behavior are bounded conservative preparation. No runtime command/gold gating implemented.",
+  "remainingActualJoins": [
+    "Native collection/static reconciliation",
+    "Qualified interpreter/dependencies/import roots",
+    "Reviewed native unittest/pytest phase observer",
+    "Trusted same-call raw process/event/source/setup/budget association"
+  ],
+  "reviewerContext": "Prior source-decision author and F05reviewer, not author of thisoracle; knownworkload review, not blind trial.",
+  "state": "independent-python01-oracle-before-review-findings",
+  "subject": {
+    "authorFreezeSha256": "83d915e7c465d0291fe72d3178826bd91b26d18c299823273d2e0cc11ca98e9f",
+    "oracleSha256": "d891d5f944417dd7bc4f1c3d9be3b4a0990b7ec0f74d719109a9f7b2465a8428",
+    "planSha256": "9c494da0a0fdc2b242089c6f627f0a207041a2227a78955d3232a8ef1bc1dcc0"
+  },
+  "taskOutcomeObserved": false
+}

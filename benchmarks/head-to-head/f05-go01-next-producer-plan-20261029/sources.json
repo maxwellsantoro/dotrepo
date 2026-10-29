@@ -1,0 +1,293 @@
+{
+  "baseCommit": "67e46a9dda666348fb913f1bbca6cbd0259af8e2",
+  "repositorySubjects": {
+    "benchmarks/head-to-head/bench/agent_runtime.py": {
+      "bytes": 67272,
+      "sha256": "dc585e08f24e1a20da9d9ccdafac4af3f4e10cb8451de7ca3a74c05ecc985fa0"
+    },
+    "benchmarks/head-to-head/bench/event_capture.py": {
+      "bytes": 21684,
+      "sha256": "ffe5b5e27aaca28bceae83aac15bfeb5e83963eef63a3b2f41c97833787b4a12"
+    },
+    "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-3/amendment-1/FREEZE.json": {
+      "bytes": 3037,
+      "sha256": "bad0a161c9d84d923e0431dfac39d20dcd03a0d5fe916ce19e56c96e89c8768f"
+    },
+    "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-3/amendment-1/adapter.py": {
+      "bytes": 25064,
+      "sha256": "30e3e3cecb357d5f903f42e0532c2f86a5cb16cf6714ddc9c643bcf86e5b70a4"
+    },
+    "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-3/amendment-1/plan.json": {
+      "bytes": 1483,
+      "sha256": "35e7ebee7e26f687bacc8727d9c474bc6fa83dac9887970f8f8fc01b3ad078c2"
+    },
+    "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-3/remaining-joins.json": {
+      "bytes": 2384,
+      "sha256": "963822380b332d79ec531b63b024a1f6d53d31858b5e16bb07c104438e4576ae"
+    },
+    "benchmarks/head-to-head/f05-go01-source-oracle-decision-20261029/FREEZE.json": {
+      "bytes": 662,
+      "sha256": "22e72402f3cadf7f5ea214a546a3dcaf18b968c67da81e9e03427436c4d10ed5"
+    },
+    "benchmarks/head-to-head/f05-go01-source-registry-result-20261029/FREEZE.json": {
+      "bytes": 11167,
+      "sha256": "3a9e3bb1df382a45109dd0a38327c333188cf6faf12d6caf9ecf4bb83689cc8a"
+    }
+  },
+  "retainedUpstreamRevision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+  "scope": "Inert retained bytes/excerpts only; current source/config observations are not new task observations. All excerpts normalize line separators; whole-source hashes bind original bytes.",
+  "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+  "sourceReferences": [
+    {
+      "bytes": 125368,
+      "container": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar",
+      "path": "Herebyfile.mjs",
+      "sha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421",
+      "spans": [
+        {
+          "excerpt": "const isCI = !!process.env.CI || !!process.env.TF_BUILD;\nconst stableThreeComponentVersionPatternSource = String.raw`^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$`;\nconst stableThreeComponentVersionPattern = new RegExp(stableThreeComponentVersionPatternSource);\n\n/** @typedef {import(\"./tools/scripts/gen/utils.mts\").RunOptions} RunOptions */\n\n/**\n * @param {string} command\n * @param {readonly string[]} [args]\n * @param {Omit<RunOptions, \"captureOutput\">} [options]\n */\nfunction runOutput(command, args, options) {\n    return run(command, args, { ...options, captureOutput: true });\n}\n\n/**\n * @param {string} name\n * @param {boolean} defaultValue\n * @returns {boolean}\n */\nfunction parseEnvBoolean(name, defaultValue = false) {\n    name = \"TSGO_HEREBY_\" + name.toUpperCase();\n\n    const value = process.env[name];\n    if (!value) {\n        return defaultValue;\n    }\n    switch (value.toUpperCase()) {\n        case \"1\":\n        case \"TRUE\":\n        case \"YES\":\n        case \"ON\":\n            return true;\n        case \"0\":\n        case \"FALSE\":\n        case \"NO\":\n        case \"OFF\":\n            return false;\n    }\n    throw new Error(`Invalid value for ${name}: ${value}`);\n}\n\nconst { values: rawOptions } = parseArgs({\n    args: process.argv.slice(2),\n    options: {\n        tests: { type: \"string\", short: \"t\" },\n        fix: { type: \"boolean\" },\n        force: { type: \"boolean\", default: parseEnvBoolean(\"FORCE\") },\n        api: { type: \"boolean\" },\n        all: { type: \"boolean\" },\n        debug: { type: \"boolean\" },\n        dirty: { type: \"boolean\" },\n        release: { type: \"boolean\" },\n\n        setPrerelease: { type: \"string\" },\n        forRelease: { type: \"boolean\" },\n        respectGoEnv: { type: \"boolean\" },\n        vscodeTypescriptRelease: { type: \"boolean\" },\n        platform: { type: \"string\" },\n\n        race: { type: \"boolean\", default: parseEnvBoolean(\"RACE\") },\n        noembed: { type: \"boolean\", default: parseEnvBoolean(\"NOEMBED\") },\n        concurrentTestPrograms: { type: \"boolean\", default: parseEnvBoolean(\"CONCURRENT_TEST_PROGRAMS\") },\n        coverage: { type: \"boolean\", default: parseEnvBoolean(\"COVERAGE\") },\n    },\n    strict: false,\n    allowPositionals: true,\n    allowNegative: true,\n});\n",
+          "firstLine": 57,
+          "lastLine": 126
+        },
+        {
+          "excerpt": "    ...(options.noembed ? [\"noembed\"] : []),\n];\n\n/**\n * @param  {...string} extra\n * @returns {string[]}\n */\nfunction goBuildTags(...extra) {\n    const tags = new Set(defaultGoBuildTags.concat(extra));\n    return tags.size ? [`-tags=${[...tags].join(\",\")}`] : [];\n}\n\nconst goBuildFlags = [\n    ...(options.race ? [\"-race\"] : []),\n    // https://github.com/go-delve/delve/blob/62cd2d423c6a85991e49d6a70cc5cb3e97d6ceef/Documentation/usage/dlv_exec.md?plain=1#L12\n    ...(options.debug ? [\"-gcflags=all=-N -l\"] : []),\n];\n\nconst goBuildEnv = {\n    ...(options.race ? {} : { CGO_ENABLED: \"0\" }),\n};",
+          "firstLine": 161,
+          "lastLine": 181
+        },
+        {
+          "excerpt": "function goTestFlags(taskName) {\n    ensureCoverageDirExists();\n    return [\n        ...goBuildFlags,\n        ...goBuildTags(),\n        ...(options.tests ? [`-run=${options.tests}`] : []),\n        // Go 1.27 duplicates promoted AST wrappers, exhausting CI disk under coverage.\n        // Tests strip DWARF when linking; omit it earlier to shrink temporary and cached archives.\n        ...(options.coverage && !options.debug ? [\"-gcflags=all=-dwarf=false\"] : []),\n        ...(options.coverage ? [`-coverprofile=${path.join(coverageDir, \"coverage.\" + taskName + \".out\")}`, \"-coverpkg=./...\"] : []),\n    ];\n}\n\nfunction getGODEBUG() {\n    const key = \"tracebackancestors\";\n    const setting = `${key}=10`;\n    const existing = process.env.GODEBUG ?? \"\";\n    if (!existing) return setting;\n    if (existing.includes(`${key}=`)) return existing;\n    return `${existing},${setting}`;\n}\n\nconst goTestEnv = {\n    GODEBUG: getGODEBUG(),\n    ...(options.concurrentTestPrograms ? { TS_TEST_PROGRAM_SINGLE_THREADED: \"false\" } : {}),\n    // Go test caching takes a long time on Windows.\n    // https://github.com/golang/go/issues/72992\n    ...(process.platform === \"win32\" ? { GOFLAGS: \"-count=1\" } : {}),\n};\n\nconst baselineTrackingEnabled = false && ![\n    options.tests,\n    options.noembed,\n    options.concurrentTestPrograms,\n    options.race,\n    options.dirty,\n].some(Boolean);\n\nconst goTestSumFlags = [\n    \"--format-hide-empty-pkg\",\n    \"--hide-summary\",\n    \"skipped\",\n];",
+          "firstLine": 876,
+          "lastLine": 918
+        },
+        {
+          "excerpt": "function gotestsumArgs(taskName) {\n    return [\n        ...goTestSumFlags,\n        \"--\",\n        ...goTestFlags(taskName),\n    ];\n}\n\n/**\n * @param {string} taskName\n */\nfunction goTest(taskName) {\n    return [\"go\", \"test\"].concat(goTestFlags(taskName));\n}\n\nasync function runTests() {\n    if (!options.dirty) {\n        await rimraf(localBaseline);\n        await fs.promises.mkdir(localBaseline, { recursive: true });\n    }\n\n    // Create a tmp directory for baseline tracking if enabled\n    /** @type {string | undefined} */\n    let trackingDir;\n    /** @type {(() => Promise<void>) | undefined} */\n    let cleanupTracking;\n\n    if (baselineTrackingEnabled) {\n        const tempTrackingDir = fs.mkdtempSync(path.join(os.tmpdir(), \"tsgo-baseline-tracking-\"));\n        trackingDir = tempTrackingDir;\n        cleanupTracking = () => rimraf(tempTrackingDir);\n    }\n\n    try {\n        const testEnv = {\n            ...goTestEnv,\n            ...(trackingDir ? { TSGO_BASELINE_TRACKING_DIR: trackingDir } : {}),\n        };\n        await gotestsumTool.run([...gotestsumArgs(\"tests\"), \"./...\", ...(isCI ? [\"--timeout=45m\"] : [])], {\n            env: testEnv,\n            cwd: \"./tsc\",\n        });",
+          "firstLine": 968,
+          "lastLine": 1009
+        },
+        {
+          "excerpt": "export const testTsc = task({\n    name: \"test:tsc\",\n    description: \"Runs all tests in the tsc module.\",\n    run: runTests,\n});\n\nexport const testExtension = task({\n    name: \"test:extension\",\n    description: \"Runs the VS Code extension tests.\",\n    run: runTestExtension,\n});\n\nexport const test = task({\n    name: \"test\",\n    description: \"Alias for test:tsc.\",\n    dependencies: [testTsc],\n});",
+          "firstLine": 1046,
+          "lastLine": 1062
+        },
+        {
+          "excerpt": "function createCachedTool({ toolPath, globs, build, exclude }) {\n    toolPath = path.resolve(toolPath);\n    const hashPath = toolPath + \".hash\";\n    const files = fs.globSync(globs, { exclude }).filter(file => fs.statSync(file).isFile()).map(file => path.resolve(file));\n    files.sort();\n\n    const ensure = memoize(async () => {\n        const hash = crypto.createHash(\"sha256\");\n        for (const file of files) {\n            hash.update(file);\n            hash.update(fs.readFileSync(file));\n        }\n        const digest = hash.digest(\"hex\") + \"\\n\";\n        if (\n            fs.existsSync(toolPath)\n            && fs.existsSync(hashPath)\n            && fs.readFileSync(hashPath, \"utf8\") === digest\n        ) {\n            return;\n        }\n\n        await build(toolPath);\n        fs.writeFileSync(hashPath, digest);\n    });\n\n    return {\n        ensure,\n        /** @param {string[]} args @param {RunOptions} [options] */\n        run: async (args, options) => {\n            await ensure();\n            return run(toolPath, args, options);\n        },\n    };\n}\n\nconst gotestsumTool = createCachedTool({\n    toolPath: `./tools/gotestsum${process.platform === \"win32\" ? \".exe\" : \"\"}`,\n    globs: [\"./tools/go.mod\", \"./tools/go.sum\"],\n    build: async () => {\n        await run(\"go\", [\"install\", \"gotest.tools/gotestsum\"], {\n            cwd: \"./tools\",\n            env: { GOBIN: path.resolve(\"./tools\") },\n        });\n    },\n});\n",
+          "firstLine": 1173,
+          "lastLine": 1218
+        }
+      ]
+    },
+    {
+      "bytes": 4587,
+      "container": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar",
+      "path": "tools/scripts/gen/utils.mts",
+      "sha256": "5d0c46a19d38bfc283f378a8f3498510af40d68b2994c20c41f1976e4870bd15",
+      "spans": [
+        {
+          "excerpt": "export interface RunOptions {\n    captureOutput?: boolean;\n    cwd?: string;\n    env?: NodeJS.ProcessEnv;\n    signal?: AbortSignal;\n}\n\nexport function formatCommandArg(arg: string) {\n    return arg && /^[\\w@%+=:,./-]+$/.test(arg) ? arg : JSON.stringify(arg);\n}\n\nexport async function run(command: string, args: readonly string[] = [], options: RunOptions = {}) {\n    console.log(\"$ \" + [command, ...args].map(formatCommandArg).join(\" \"));\n    return withFileFingerprintWrites(() =>\n        x(command, args, {\n            throwOnError: true,\n            ...(options.signal ? { signal: options.signal } : {}),\n            nodeOptions: {\n                cwd: options.cwd,\n                env: options.env ? { ...process.env, ...options.env } : undefined,\n                stdio: options.captureOutput ? \"pipe\" : \"inherit\",\n            },\n        })\n    );",
+          "firstLine": 76,
+          "lastLine": 99
+        }
+      ]
+    },
+    {
+      "bytes": 1838,
+      "container": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar",
+      "path": "package.json",
+      "sha256": "2828c1d269bd9c80d634131ec107ac69f1cfc3bf1f98d24c112c825c8acd7902",
+      "spans": [
+        {
+          "excerpt": "{\n    \"name\": \"@typescript/repo\",\n    \"private\": true,\n    \"version\": \"0.0.0\",\n    \"license\": \"Apache-2.0\",\n    \"engines\": {\n        \"node\": \">=22.18\"\n    },\n    \"workspaces\": [\n        \"packages/*\"\n    ],\n    \"scripts\": {\n        \"build\": \"hereby build\",\n        \"build:watch\": \"hereby build:watch\",\n        \"build:watch:debug\": \"hereby build:watch --debug\",\n        \"test\": \"hereby test\",\n        \"lint\": \"hereby lint\",\n        \"format\": \"hereby format\",\n        \"check:format\": \"hereby check:format\",\n        \"generate\": \"hereby generate\",\n        \"tidy\": \"hereby tidy\",\n        \"extension:build\": \"npm run -w native-preview build\",\n        \"extension:watch\": \"npm run -w native-preview watch\",\n        \"setup-hooks\": \"node tools/scripts/link-hooks.mjs\"\n    },\n    \"devDependencies\": {\n        \"@dprint/json\": \"^0.23.0\",\n        \"@dprint/typescript\": \"^0.96.1\",\n        \"@jakebailey/dprint-plugin-gofumpt\": \"^0.0.18\",\n        \"@types/node\": \"^22.20.1\",\n        \"@unicode/unicode-15.1.0\": \"^1.6.17\",\n        \"adm-zip\": \"^0.6.1\",\n        \"chokidar\": \"^5.0.0\",\n        \"dprint\": \"^0.57.4\",\n        \"dprint-plugin-yaml\": \"^0.6.0\",\n        \"hereby\": \"^1.15.2\",\n        \"tar\": \"^7.5.22\",\n        \"tinyexec\": \"^1.3.1\",\n        \"typescript\": \"^6.0.3\"\n    },\n    \"overrides\": {\n        \"@microsoft/applicationinsights-web-basic\": \"3.3.11\",\n        \"@microsoft/1ds-core-js\": \"4.3.11\",\n        \"@microsoft/1ds-post-js\": \"4.3.11\"\n    },\n    \"packageManager\": \"npm@11.19.1+sha512.cedb312b1b7f92421a02cfb68b4194e88f8346651dacd6acc5364a25ef5309d4a32b19616a1ff8aff865e7280c0fa5c0835a99f5cd93368991e2a80ec9da75d2\",\n    \"volta\": {\n        \"node\": \"24.20.0\",\n        \"npm\": \"11.19.1\"\n    },",
+          "firstLine": 1,
+          "lastLine": 50
+        }
+      ]
+    },
+    {
+      "bytes": 33,
+      "container": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar",
+      "path": "go.work",
+      "sha256": "d6c5314b1f983eb6de36253c903ac00aa8e6fecd9512d2adba882b5701ce7d29",
+      "spans": [
+        {
+          "excerpt": "go 1.27\n\nuse (\n\t./tools\n\t./tsc\n)",
+          "firstLine": 1,
+          "lastLine": 6
+        }
+      ]
+    },
+    {
+      "bytes": 1485,
+      "container": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar",
+      "path": "tools/go.mod",
+      "sha256": "968e2374d845585e30ffb1c3b32fbf4b2924dab702cddd91ae33327609d5625b",
+      "spans": [
+        {
+          "excerpt": "module github.com/microsoft/TypeScript/tools\n\ngo 1.27\n\nrequire (\n\tgithub.com/anchore/quill v0.7.1\n\tgithub.com/blacktop/go-macho v1.1.283\n\tgithub.com/golangci/plugin-module-register v0.1.2\n\tgolang.org/x/mod v0.41.0\n\tgolang.org/x/tools v0.50.0\n\tgotest.tools/v3 v3.5.2\n)\n\nrequire (\n\tgithub.com/anchore/go-logger v0.0.0-20251106021608-a5b0513fa9a9 // indirect\n\tgithub.com/anchore/go-macholibre v0.0.0-20250826193721-3cd206ca93aa // indirect\n\tgithub.com/bitfield/gotestdox v0.2.2 // indirect\n\tgithub.com/blacktop/go-dwarf v1.0.14 // indirect\n\tgithub.com/dnephin/pflag v1.0.7 // indirect\n\tgithub.com/fatih/color v1.18.0 // indirect\n\tgithub.com/fsnotify/fsnotify v1.9.0 // indirect\n\tgithub.com/github/smimesign v0.2.0 // indirect\n\tgithub.com/go-restruct/restruct v1.2.0-alpha // indirect\n\tgithub.com/google/go-cmp v0.7.0 // indirect\n\tgithub.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510 // indirect\n\tgithub.com/google/uuid v1.6.0 // indirect\n\tgithub.com/mattn/go-colorable v0.1.14 // indirect\n\tgithub.com/mattn/go-isatty v0.0.20 // indirect\n\tgithub.com/pkg/errors v0.9.1 // indirect\n\tgithub.com/scylladb/go-set v1.0.3-0.20200225121959-cc7b2070d91e // indirect\n\tgolang.org/x/crypto v0.57.0 // indirect\n\tgolang.org/x/sync v0.23.0 // indirect\n\tgolang.org/x/sys v0.48.0 // indirect\n\tgolang.org/x/term v0.46.0 // indirect\n\tgolang.org/x/text v0.42.0 // indirect\n\tgotest.tools/gotestsum v1.13.0 // indirect\n\tsoftware.sslmate.com/src/go-pkcs12 v0.7.2 // indirect\n)\n\ntool gotest.tools/gotestsum",
+          "firstLine": 1,
+          "lastLine": 40
+        }
+      ]
+    },
+    {
+      "bytes": 748,
+      "container": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar",
+      "path": "tsc/go.mod",
+      "sha256": "1e0963224f3096e3e8215acea83c033392c8135e7453b8a9680261baa5c18b25",
+      "spans": [
+        {
+          "excerpt": "module github.com/microsoft/TypeScript/tsc\n\ngo 1.27\n\nrequire (\n\tgithub.com/Microsoft/go-winio v0.6.2\n\tgithub.com/google/go-cmp v0.7.0\n\tgithub.com/klauspost/compress v1.20.0\n\tgithub.com/mackerelio/go-osstat v0.2.8\n\tgithub.com/peter-evans/patience v0.3.0\n\tgithub.com/zeebo/xxh3 v1.1.0\n\tgolang.org/x/sync v0.23.0\n\tgolang.org/x/sys v0.48.0\n\tgolang.org/x/term v0.46.0\n\tgolang.org/x/text v0.42.0\n\tgotest.tools/v3 v3.5.2\n)\n\nrequire (\n\tgithub.com/klauspost/cpuid/v2 v2.2.10 // indirect\n\tgithub.com/matryer/moq v0.7.1 // indirect\n\tgithub.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect\n\tgolang.org/x/mod v0.41.0 // indirect\n\tgolang.org/x/tools v0.50.0 // indirect\n)\n\ntool (\n\tgithub.com/matryer/moq\n\tgolang.org/x/tools/cmd/stringer\n)",
+          "firstLine": 1,
+          "lastLine": 30
+        }
+      ]
+    },
+    {
+      "bytes": 143844,
+      "claims": {
+        "hasInstallScriptPackages": [
+          "node_modules/@vscode/vsce-sign",
+          "node_modules/dprint",
+          "node_modules/esbuild"
+        ],
+        "hereby": {
+          "bin": {
+            "hereby": "bin/hereby.js"
+          },
+          "dev": true,
+          "engines": {
+            "node": ">= 12.20"
+          },
+          "integrity": "sha512-tZCV42uzoqbXc5kvfs9+6xkZa+pgh2AtCRrF1nXeyOwhw+mBjXYRyXX4tokFpQ7NVF2DB1NbE6ZvtQ9X35wpBA==",
+          "license": "MIT",
+          "resolved": "https://registry.npmjs.org/hereby/-/hereby-1.15.2.tgz",
+          "version": "1.15.2"
+        },
+        "tinyexec": {
+          "dev": true,
+          "engines": {
+            "node": ">=18"
+          },
+          "integrity": "sha512-GCvB3aoys96IuDFBMcTB46JOR6mdMtAToqwiW8JlWhsoh1mhHi/xn9ss/Dg7N555GiJyEt2qzoG/NHCwM6h1EA==",
+          "license": "MIT",
+          "resolved": "https://registry.npmjs.org/tinyexec/-/tinyexec-1.3.1.tgz",
+          "version": "1.3.1"
+        }
+      },
+      "container": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar",
+      "path": "package-lock.json",
+      "sha256": "52b6c9bd0a26ef1b0fc27dfbfaa00df6a047cdddd587d07c4f6c1c3345faf5cf"
+    },
+    {
+      "bytes": 17162,
+      "container": "/private/tmp/dotrepo-go01-dependency-download-cache-20261029-1/cache.tar",
+      "path": "go/pkg/mod/gotest.tools/gotestsum@v1.13.0/cmd/main.go",
+      "sha256": "e9dfe9a55bda5917c7a80951e6f56f0d1b55ad5a8439d51f210e56c0e8f41f49",
+      "spans": [
+        {
+          "excerpt": "\t\tusage(os.Stdout, name, flags)\n\t}\n\n\tflags.StringVarP(&opts.format, \"format\", \"f\",\n\t\tlookEnvWithDefault(\"GOTESTSUM_FORMAT\", \"pkgname\"),\n\t\t\"print format of test input\")\n\tflags.BoolVar(&opts.formatOptions.HideEmptyPackages, \"format-hide-empty-pkg\",\n\t\tfalse, \"do not print empty packages in compact formats\")\n\tflags.BoolVar(&opts.formatOptions.UseHiVisibilityIcons, \"format-hivis\",\n\t\tfalse, \"use high visibility characters in some formats\")\n\t_ = flags.MarkHidden(\"format-hivis\")\n\tflags.StringVar(&opts.formatOptions.Icons, \"format-icons\",\n\t\tlookEnvWithDefault(\"GOTESTSUM_FORMAT_ICONS\", \"\"),\n\t\t\"use different icons, see help for options\")\n\tflags.BoolVar(&opts.rawCommand, \"raw-command\", false,\n\t\t\"don't prepend 'go test -json' to the 'go test' command\")\n\tflags.BoolVar(&opts.ignoreNonJSONOutputLines, \"ignore-non-json-output-lines\", false,\n\t\t\"write non-JSON 'go test' output lines to stderr instead of failing\")\n\tflags.Lookup(\"ignore-non-json-output-lines\").Hidden = true\n\tflags.StringVar(&opts.jsonFile, \"jsonfile\",\n\t\tlookEnvWithDefault(\"GOTESTSUM_JSONFILE\", \"\"),\n\t\t\"write all TestEvents to file\")\n\tflags.StringVar(&opts.jsonFileTimingEvents, \"jsonfile-timing-events\",\n\t\tlookEnvWithDefault(\"GOTESTSUM_JSONFILE_TIMING_EVENTS\", \"\"),\n\t\t\"write only the pass, skip, and fail TestEvents to the file\")\n\tflags.BoolVar(&opts.noColor, \"no-color\", defaultNoColor(), \"disable color output\")",
+          "firstLine": 60,
+          "lastLine": 85
+        },
+        {
+          "excerpt": "\tflags.IntVar(&opts.rerunFailsMaxAttempts, \"rerun-fails\", 0,\n\t\t\"rerun failed tests until they all pass, or attempts exceeds maximum. Defaults to max 2 reruns when enabled\")\n\tflags.BoolVar(&opts.rerunFailsAbortOnDataRace, \"rerun-fails-abort-on-data-race\", false,\n\t\t\"do not rerun tests if a data race is detected\")\n\tflags.Lookup(\"rerun-fails\").NoOptDefVal = \"2\"\n\tflags.IntVar(&opts.rerunFailsMaxInitialFailures, \"rerun-fails-max-failures\", 10,\n\t\t\"do not rerun any tests if the initial run has more than this number of failures\")\n\tflags.Var((*stringSlice)(&opts.packages), \"packages\",\n\t\t\"space separated list of package to test\")\n\tflags.StringVar(&opts.rerunFailsReportFile, \"rerun-fails-report\", \"\",\n\t\t\"write a report to the file, of the tests that were rerun\")\n\tflags.BoolVar(&opts.rerunFailsRunRootCases, \"rerun-fails-run-root-test\", false,\n\t\t\"rerun the entire root testcase when any of its subtests fail, instead of only the failed subtest\")\n\n\tflags.BoolVar(&opts.debug, \"debug\", false, \"enabled debug logging\")\n\tflags.BoolVar(&opts.version, \"version\", false, \"show version and exit\")\n\treturn flags, opts",
+          "firstLine": 120,
+          "lastLine": 136
+        },
+        {
+          "excerpt": "\t\treturn fmt.Errorf(\"post run command failed: %w\", err)\n\t}\n\treturn exitErr\n}\n\nfunc goTestCmdArgs(opts *options, rerunOpts rerunOpts) []string {\n\tif opts.rawCommand {\n\t\tvar result []string\n\t\tresult = append(result, opts.args...)\n\t\tresult = append(result, rerunOpts.Args()...)\n\t\treturn result\n\t}\n\n\targs := append([]string{}, opts.args...)\n\tresult := []string{\"go\", \"test\"}\n\n\tif len(args) == 0 {\n\t\tresult = append(result, \"-json\")\n\t\tif rerunOpts.runFlag != \"\" {\n\t\t\tresult = append(result, rerunOpts.runFlag)\n\t\t}\n\t\treturn append(result, cmdArgPackageList(opts, rerunOpts, \"./...\")...)\n\t}\n\n\tif boolArgIndex(\"json\", args) < 0 {\n\t\tresult = append(result, \"-json\")\n\t}\n\n\tif rerunOpts.runFlag != \"\" {\n\t\t// Remove any existing run arg, it needs to be replaced with our new one\n\t\t// and duplicate args are not allowed by 'go test'.\n\t\trunIndex, runIndexEnd := argIndex(\"run\", args)\n\t\tif runIndex >= 0 && runIndexEnd < len(args) {\n\t\t\targs = append(args[:runIndex], args[runIndexEnd+1:]...)\n\t\t}\n\t\tresult = append(result, rerunOpts.runFlag)\n\t}\n\n\tpkgArgIndex := findPkgArgPosition(args)\n\tresult = append(result, args[:pkgArgIndex]...)\n\tresult = append(result, cmdArgPackageList(opts, rerunOpts)...)\n\tresult = append(result, args[pkgArgIndex:]...)\n\treturn result\n}\n\nfunc cmdArgPackageList(opts *options, rerunOpts rerunOpts, defPkgList ...string) []string {\n\tswitch {\n\tcase rerunOpts.pkg != \"\":\n\t\treturn []string{rerunOpts.pkg}\n\tcase len(opts.packages) > 0:\n\t\treturn opts.packages\n\tcase os.Getenv(\"TEST_DIRECTORY\") != \"\":\n\t\treturn []string{os.Getenv(\"TEST_DIRECTORY\")}\n\tdefault:\n\t\treturn defPkgList\n\t}",
+          "firstLine": 340,
+          "lastLine": 395
+        },
+        {
+          "excerpt": "func startGoTest(ctx context.Context, dir string, args []string) (*proc, error) {\n\tif len(args) == 0 {\n\t\treturn nil, errors.New(\"missing command to run\")\n\t}\n\n\tcmd := exec.CommandContext(ctx, args[0], args[1:]...)\n\tcmd.Stdin = os.Stdin\n\tcmd.Dir = dir\n\n\tp := proc{cmd: cmd}\n\tlog.Debugf(\"exec: %s\", cmd.Args)\n\tvar err error\n\tp.stdout, err = cmd.StdoutPipe()\n\tif err != nil {\n\t\treturn nil, err\n\t}\n\tp.stderr, err = cmd.StderrPipe()\n\tif err != nil {\n\t\treturn nil, err\n\t}\n\tif err := cmd.Start(); err != nil {\n\t\treturn nil, fmt.Errorf(\"failed to run %s: %w\", strings.Join(cmd.Args, \" \"), err)\n\t}\n\tlog.Debugf(\"go test pid: %d\", cmd.Process.Pid)\n\n\tctx, cancel := context.WithCancel(ctx)",
+          "firstLine": 445,
+          "lastLine": 470
+        }
+      ]
+    },
+    {
+      "bytes": 12796,
+      "container": "/private/tmp/dotrepo-go01-dependency-download-cache-20261029-1/cache.tar :: npm-cache/_cacache/content-v2/sha512/18/2b/c1ddaa32b3de88b8314131c4c1e3a24e47a99d32d013a2ac225bc2655a1b288759a11e2ff19fdb2cfc383b379e791a227212ddaace81bf3470b033a87510",
+      "npmIntegrity": "sha512-GCvB3aoys96IuDFBMcTB46JOR6mdMtAToqwiW8JlWhsoh1mhHi/xn9ss/Dg7N555GiJyEt2qzoG/NHCwM6h1EA==",
+      "path": "package/dist/main.mjs",
+      "sha256": "3f370502361a75be7a50f915a123d965f6ef9c648a56bf1d5b9e3ae95c20b2f1",
+      "spans": [
+        {
+          "excerpt": "function addNodeBinToPath(cwd, path) {\n\tconst parts = path.value.split(delimiter);\n\tconst nodeBinPaths = [];\n\tlet currentPath = typeof cwd === \"string\" ? cwd : fileURLToPath(cwd, { windows: false });\n\tlet lastPath;\n\tdo {\n\t\tnodeBinPaths.push(resolve(currentPath, \"node_modules\", \".bin\"));\n\t\tlastPath = currentPath;\n\t\tcurrentPath = dirname(currentPath);\n\t} while (currentPath !== lastPath);\n\tnodeBinPaths.push(dirname(process.execPath));\n\tconst newPath = nodeBinPaths.concat(parts).join(delimiter);\n\treturn {\n\t\tkey: path.key,\n\t\tvalue: newPath\n\t};\n}\nfunction computeEnv(cwd, env, nodePath = true) {\n\tconst envWithDefault = {\n\t\t...process.env,\n\t\t...env\n\t};\n\tif (!nodePath) return envWithDefault;\n\tconst envPathInfo = addNodeBinToPath(cwd, getPathFromEnv(envWithDefault));\n\tenvWithDefault[envPathInfo.key] = envPathInfo.value;\n\treturn envWithDefault;",
+          "firstLine": 27,
+          "lastLine": 52
+        },
+        {
+          "excerpt": "/**\n* Normalizes the command and arguments to work cross-platform.\n* On Windows, this basically handles things like shebangs, calling\n* `node_modules/.bin` commands, and escaping meta characters.\n* On other platforms, it just returns the command and arguments as-is.\n*/\nfunction normalizeSpawnCommand(command, args = [], options = {}) {\n\tif (options.shell === true || !isWindows) return {\n\t\tcommand,\n\t\targs,\n\t\toptions\n\t};",
+          "firstLine": 79,
+          "lastLine": 90
+        },
+        {
+          "excerpt": "\tspawn() {\n\t\tconst options = this._options;\n\t\tconst nodeOptions = {\n\t\t\t...defaultNodeOptions,\n\t\t\t...options.nodeOptions\n\t\t};\n\t\tconst cwd$1 = nodeOptions?.cwd ?? cwd();\n\t\tconst signals = [];\n\t\tthis._resetState();\n\t\tif (options.timeout !== void 0) signals.push(AbortSignal.timeout(options.timeout));\n\t\tif (options.signal !== void 0) signals.push(options.signal);\n\t\tif (options.persist === true) nodeOptions.detached = true;\n\t\tif (signals.length > 0) nodeOptions.signal = combineSignals(signals);\n\t\tnodeOptions.env = computeEnv(cwd$1, nodeOptions.env, options.nodePath);\n\t\tconst crossResult = normalizeSpawnCommand(this._command, this._args, nodeOptions);\n\t\tconst handle = spawn(crossResult.command, crossResult.args, crossResult.options);",
+          "firstLine": 308,
+          "lastLine": 323
+        }
+      ]
+    },
+    {
+      "bytes": 45,
+      "container": "/private/tmp/dotrepo-go01-dependency-download-cache-20261029-1/cache.tar :: npm-cache/_cacache/content-v2/sha512/b5/90/95e36bb3a2a6d773992f7ecf7eeb19196bea6087602d091ac5d675dec8ec21c3e9818d7611c975f8b68905a50ecd545d8307535b13a66fb50f57df9c2904",
+      "npmIntegrity": "sha512-tZCV42uzoqbXc5kvfs9+6xkZa+pgh2AtCRrF1nXeyOwhw+mBjXYRyXX4tokFpQ7NVF2DB1NbE6ZvtQ9X35wpBA==",
+      "path": "package/bin/hereby.js",
+      "sha256": "10004a6810ccd94b53c6415e0def30cd99b959a96e7cd779e2436349b4811a83",
+      "spans": [
+        {
+          "excerpt": "#!/usr/bin/env node\nimport \"../dist/cli.js\";",
+          "firstLine": 1,
+          "lastLine": 2
+        }
+      ]
+    },
+    {
+      "bytes": 3383,
+      "container": "/private/tmp/dotrepo-go01-dependency-download-cache-20261029-1/cache.tar :: npm-cache/_cacache/content-v2/sha512/b5/90/95e36bb3a2a6d773992f7ecf7eeb19196bea6087602d091ac5d675dec8ec21c3e9818d7611c975f8b68905a50ecd545d8307535b13a66fb50f57df9c2904",
+      "npmIntegrity": "sha512-tZCV42uzoqbXc5kvfs9+6xkZa+pgh2AtCRrF1nXeyOwhw+mBjXYRyXX4tokFpQ7NVF2DB1NbE6ZvtQ9X35wpBA==",
+      "path": "package/dist/cli/index.js",
+      "sha256": "d3effe31543c89079186a62d10c318d8a913543024dca88aac54318e451bca54",
+      "spans": [
+        {
+          "excerpt": "    }\n}\nasync function mainWorker(d) {\n    var _a;\n    const args = parseArgs(d.argv.slice(2));\n    if (args.help) {\n        d.log(getUsage());\n        return;\n    }\n    const herebyfilePath = path.resolve(d.cwd(), (_a = args.herebyfile) !== null && _a !== void 0 ? _a : findHerebyfile(d.cwd()));\n    if (await reexec(herebyfilePath))\n        return;\n    if (args.version) {\n        d.log(`hereby ${d.version()}`);\n        return;\n    }\n    d.chdir(path.dirname(herebyfilePath));\n    const herebyfile = await loadHerebyfile(herebyfilePath);\n    if (args.printTasks) {",
+          "firstLine": 25,
+          "lastLine": 43
+        }
+      ]
+    },
+    {
+      "bytes": 2824,
+      "container": "/private/tmp/dotrepo-go01-dependency-download-cache-20261029-1/cache.tar :: npm-cache/_cacache/content-v2/sha512/b5/90/95e36bb3a2a6d773992f7ecf7eeb19196bea6087602d091ac5d675dec8ec21c3e9818d7611c975f8b68905a50ecd545d8307535b13a66fb50f57df9c2904",
+      "npmIntegrity": "sha512-tZCV42uzoqbXc5kvfs9+6xkZa+pgh2AtCRrF1nXeyOwhw+mBjXYRyXX4tokFpQ7NVF2DB1NbE6ZvtQ9X35wpBA==",
+      "path": "package/dist/cli/reexec.js",
+      "sha256": "eb0ae263dfa7f8bedc66207ee200056b128df05c831510c5c152b2ba84e684a1",
+      "spans": [
+        {
+          "excerpt": "export async function reexec(herebyfilePath) {\n    // If hereby is installed globally, but run against a Herebyfile in some\n    // other package, that Herebyfile's import will resolve to a different\n    // installation of the hereby package. There's no guarantee that the two\n    // are compatible (in fact, they are guaranteed not to as Task is a class).\n    //\n    // Rather than trying to fix this by messing around with Node's resolution\n    // (which won't work in ESM anyway), instead opt to figure out the location\n    // of hereby as imported by the Herebyfile, and then \"reexec\" it by importing.\n    //\n    // This code used to use `import.meta.resolve` to find `hereby/cli`, but\n    // manually encoding this behavior is faster and avoids the dependency.\n    // If Node ever makes the two-argument form of `import.meta.resolve` unflagged,\n    // we could switch to that.\n    const otherCLI = findUp(path.dirname(herebyfilePath), (dir) => {\n        const p = path.resolve(dir, expectedCLIPath);\n        // This is the typical case; we've walked up and found it in node_modules.\n        if (fs.existsSync(p))\n            return p;\n        // Otherwise, we check to see if we're self-resolving. Realistically,\n        // this only happens when developing hereby itself.\n        //\n        // Technically, this should go before the above check since self-resolution\n        // comes before node_modules resolution, but this could only happen if hereby\n        // happened to depend on itself somehow.\n        const packageJsonPath = path.join(dir, \"package.json\");\n        if (fs.existsSync(packageJsonPath)) {\n            const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, \"utf8\"));\n            if (packageJson.name === \"hereby\") {\n                return path.resolve(dir, distCLIPath);\n            }\n        }\n        return undefined;\n    });\n    if (!otherCLI) {\n        throw new UserError(\"Unable to find hereby; ensure hereby is installed in your package.\");\n    }\n    if (fs.realpathSync(thisCLI) === fs.realpathSync(otherCLI)) {\n        return false;\n    }\n    // Note: calling pathToFileURL is required on Windows to disambiguate URLs\n    // from drive letters.\n    await import(pathToFileURL(otherCLI).toString());\n    return true;\n}",
+          "firstLine": 13,
+          "lastLine": 57
+        }
+      ]
+    },
+    {
+      "bytes": 22272,
+      "container": null,
+      "path": "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/sources/usr/local/go/src/cmd/go/internal/cfg/cfg.go",
+      "sha256": "8eb038ac6df168fe5af971cd768d99dd3c64224273072a4160dcc5f51eacae9d",
+      "spans": [
+        {
+          "excerpt": "func EnvFile() (string, bool, error) {\n\tif file := os.Getenv(\"GOENV\"); file != \"\" {\n\t\tif file == \"off\" {\n\t\t\treturn \"\", false, fmt.Errorf(\"GOENV=off\")\n\t\t}\n\t\treturn file, true, nil\n\t}\n\tdir, err := os.UserConfigDir()\n\tif err != nil {\n\t\treturn \"\", false, err\n\t}\n\tif dir == \"\" {\n\t\treturn \"\", false, fmt.Errorf(\"missing user-config dir\")\n\t}\n\treturn filepath.Join(dir, \"go/env\"), false, nil\n}\n\nfunc initEnvCache() {\n\tenvCache.m = make(map[string]string)\n\tenvCache.goroot = make(map[string]string)\n\tif file, _, _ := EnvFile(); file != \"\" {\n\t\treadEnvFile(file, \"user\")\n\t}\n\tgoroot := findGOROOT(envCache.m[\"GOROOT\"])\n\tif goroot != \"\" {\n\t\treadEnvFile(filepath.Join(goroot, \"go.env\"), \"GOROOT\")\n\t}\n\n\t// Save the goroot for func init calling SetGOROOT,\n\t// and also overwrite anything that might have been in go.env.\n\t// It makes no sense for GOROOT/go.env to specify\n\t// a different GOROOT.\n\tenvCache.m[\"GOROOT\"] = goroot\n}\n\nfunc readEnvFile(file string, source string) {",
+          "firstLine": 344,
+          "lastLine": 379
+        },
+        {
+          "excerpt": "func Getenv(key string) string {\n\tif !CanGetenv(key) {\n\t\tswitch key {\n\t\tcase \"CGO_TEST_ALLOW\", \"CGO_TEST_DISALLOW\", \"CGO_test_ALLOW\", \"CGO_test_DISALLOW\":\n\t\t\t// used by internal/work/security_test.go; allow\n\t\tdefault:\n\t\t\tpanic(\"internal error: invalid Getenv \" + key)\n\t\t}\n\t}\n\tval := os.Getenv(key)\n\tif val != \"\" {\n\t\treturn val\n\t}\n\tenvCache.once.Do(initEnvCache)\n\treturn envCache.m[key]",
+          "firstLine": 428,
+          "lastLine": 442
+        }
+      ]
+    }
+  ]
+}

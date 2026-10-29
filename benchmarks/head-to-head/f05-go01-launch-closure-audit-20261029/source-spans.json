@@ -1,0 +1,266 @@
+{
+  "spans": [
+    {
+      "claim": "PATH-resolved node in fixed image wrapper",
+      "excerpt": "#!/bin/sh\nexec node /usr/local/lib/node_modules/npm/bin/npx-cli.js \"$@\"",
+      "excerptNormalization": "LF display only; retained file bytes/hash preserve original endings",
+      "firstLine": 1,
+      "lastLine": 2,
+      "path": "image-source/usr/local/bin/npx",
+      "sha256": "8ef0a506c1aea4a30c46d8a1b2874caa0670ea52b35954cc60709cf22117e07f"
+    },
+    {
+      "claim": "npx rewrites argv to npm exec",
+      "excerpt": "#!/usr/bin/env node\n\nconst cli = require('../lib/cli.js')\n\n// run the resulting command as `npm exec ...args`\nprocess.argv[1] = require.resolve('./npm-cli.js')\nprocess.argv.splice(2, 0, 'exec')\n\n// TODO: remove the affordances for removed items in npm v9",
+      "excerptNormalization": "LF display only; retained file bytes/hash preserve original endings",
+      "firstLine": 1,
+      "lastLine": 9,
+      "path": "image-source/usr/local/lib/node_modules/npm/bin/npx-cli.js",
+      "sha256": "237adf8f3747cad8b9b62fcfd0d9c8d509a64e550337707f55100afcb79e8900"
+    },
+    {
+      "claim": "npm exec local path/options/config and run-script handoff",
+      "excerpt": "      runPath = process.cwd()\n    } else {\n      // Use the workspace's own node_modules/.bin, not localDir/<name>, since the linked strategy does not symlink workspaces into the root node_modules.\n      localBin = resolve(runPath, 'node_modules', '.bin')\n      // We also need to look for `bin` entries in the workspace package.json\n      // libnpmexec will NOT look in the project root for the bin entry\n      pkgPath = runPath\n    }\n\n    const call = this.npm.config.get('call')\n    let globalPath\n    const {\n      flatOptions,\n      globalBin,\n      globalDir,\n      chalk,\n    } = this.npm\n    const scriptShell = this.npm.config.get('script-shell') || undefined\n    const packages = this.npm.config.get('package')\n    const yes = this.npm.config.get('yes')\n    // --prefix sets both of these to the same thing, meaning the global prefix is invalid (i.e. no lib/node_modules).\n    // This is not a trivial thing to untangle and fix so we work around it here.\n    if (this.npm.localPrefix !== this.npm.globalPrefix) {\n      globalPath = resolve(globalDir, '..')\n    }\n\n    if (call && args.length) {\n      throw this.usageError()\n    }\n\n    // Resolve the install-script policy from the user/global .npmrc layer\n    // only. The RFC requires exec/npx to ignore any project\n    // package.json#allowScripts; CLI flags still apply.\n    const { policy: allowScriptsPolicy } = await resolveAllowScripts(this.npm, {\n      skipProjectConfig: true,\n    })\n\n    return libexec({\n      ...flatOptions,\n      allowScripts: allowScriptsPolicy,\n      // we explicitly set packageLockOnly to false because if it's true when we try to install a missing package, we won't actually install it\n      packageLockOnly: false,\n      // what the user asked to run args[0] is run by default\n      args: [...args], // copy args so they don't get mutated\n      // specify a custom command to be run instead of args[0]\n      call,\n      chalk,\n      // where to look for bins globally, if a file matches call or args[0] it is called\n      globalBin,\n      // where to look for packages globally, if a package matches call or args[0] it is called\n      globalPath,\n      // where to look for bins locally, if a file matches call or args[0] it is called\n      localBin,\n      locationMsg,\n      // packages that need to be installed\n      packages,\n      // path where node_modules is\n      path: this.npm.localPrefix,\n      // where to look for package.json#bin entries first\n      pkgPath,\n      // cwd to run from\n      runPath,\n      scriptShell,\n      yes,\n    })\n  }\n}\n\nmodule.exports = Exec",
+      "excerptNormalization": "LF display only; retained file bytes/hash preserve original endings",
+      "firstLine": 51,
+      "lastLine": 119,
+      "path": "image-source/usr/local/lib/node_modules/npm/lib/commands/exec.js",
+      "sha256": "f341403051a805d7f970d3c0d19d5d374d20c859aef73330ada18e4f0402949d"
+    },
+    {
+      "claim": "Local Hereby bin wins only on witnessed first localFileExists path; otherwise global/cache/install branch",
+      "excerpt": "    scriptShell = isWindows ? process.env.ComSpec || 'cmd' : 'sh',\n    ...flatOptions\n  } = opts\n\n  const binPaths = []\n\n  let pkgPaths = opts.pkgPath\n  if (typeof pkgPaths === 'string') {\n    pkgPaths = [pkgPaths]\n  }\n  if (!pkgPaths) {\n    pkgPaths = ['.']\n  }\n  let yes = opts.yes\n  const run = () => runScript({\n    args,\n    call,\n    flatOptions,\n    locationMsg,\n    path,\n    binPaths,\n    runPath,\n    scriptShell,\n  })\n\n  // interactive mode\n  if (!call && !args.length && !packages.length) {\n    return run()\n  }\n\n  // Look in the local tree too\n  pkgPaths.push(path)\n\n  let needPackageCommandSwap = (args.length > 0) && (packages.length === 0)\n  // If they asked for a command w/o specifying a package, see if there is a\n  // bin that directly matches that name:\n  // - in any local packages (pkgPaths can have workspaces in them or just the root)\n  // - in the local tree (path)\n  // - globally\n  if (needPackageCommandSwap) {\n    // Local packages and local tree\n    for (const p of pkgPaths) {\n      if (await hasPkgBin(p, args[0], flatOptions)) {\n        // we have to install the local package into the npx cache so that its\n        // bin links get set up\n        flatOptions.installLinks = false\n        // self-execution of a local bin, not a directory dep install\n        flatOptions.allowDirectory = 'all'\n        // args[0] will exist when the package is installed\n        packages.push(p)\n        yes = true\n        needPackageCommandSwap = false\n        break\n      }\n    }\n    if (needPackageCommandSwap) {\n      // no bin entry in local packages or in tree, now we look for binPaths\n      const dir = dirname(dirname(localBin))\n      const localBinPath = await localFileExists(dir, args[0], '/')\n      if (localBinPath) {\n        binPaths.push(localBinPath)\n        return await run()\n      } else if (globalPath && await fileExists(`${globalBin}/${args[0]}`)) {\n        binPaths.push(globalBin)\n        return await run()\n      }\n      // We swap out args[0] with the bin from the manifest later\n      packages.push(args[0])\n    }\n  }\n\n  // Resolve any directory specs so that the npx directory is unique to the\n  // resolved directory, not the potentially relative one (i.e. \"npx .\")\n  for (const i in packages) {\n    const pkg = packages[i]\n    const spec = npa(pkg)\n    if (spec.type === 'directory') {\n      packages[i] = spec.fetchSpec\n    }\n  }\n\n  const localArb = new Arborist({ ...flatOptions, path })",
+      "excerptNormalization": "LF display only; retained file bytes/hash preserve original endings",
+      "firstLine": 110,
+      "lastLine": 191,
+      "path": "image-source/usr/local/lib/node_modules/npm/node_modules/libnpmexec/lib/index.js",
+      "sha256": "d3a229153f10a94127933adbd958c4b650a7c225442c21806fee729bd4784254"
+    },
+    {
+      "claim": "Ancestor local .bin stat traversal",
+      "excerpt": "const { resolve } = require('node:path')\nconst { stat } = require('node:fs/promises')\nconst { walkUp } = require('walk-up-path')\n\nconst fileExists = async (file) => {\n  try {\n    const res = await stat(file)\n    return res.isFile()\n  } catch {\n    return false\n  }\n}\n\nconst localFileExists = async (dir, binName, root) => {\n  for (const path of walkUp(dir)) {\n    const binDir = resolve(path, 'node_modules', '.bin')\n\n    if (await fileExists(resolve(binDir, binName))) {\n      return binDir\n    }\n\n    if (path.toLowerCase() === resolve(root).toLowerCase()) {\n      return false\n    }\n  }\n\n  return false\n}\n\nmodule.exports = {\n  fileExists,\n  localFileExists,",
+      "excerptNormalization": "LF display only; retained file bytes/hash preserve original endings",
+      "firstLine": 1,
+      "lastLine": 32,
+      "path": "image-source/usr/local/lib/node_modules/npm/node_modules/libnpmexec/lib/file-exists.js",
+      "sha256": "17a996193ff819d4f46efa4802e111120eb1058bbf8d73a8de12c36073ac3008"
+    },
+    {
+      "claim": "Synthetic npx lifecycle script and package/config propagation",
+      "excerpt": "    }\n  }\n\n  // turn list of args into command string\n  const script = call || args.shift() || scriptShell\n\n  // do the fakey runScript dance\n  // still should work if no package.json in cwd\n  const { content: realPkg } = await pkgJson.normalize(path, { steps: [\n    'binDir',\n    ...pkgJson.normalizeSteps,\n  ] }).catch(() => ({ content: {} }))\n  const pkg = {\n    ...realPkg,\n    scripts: {\n      ...(realPkg.scripts || {}),\n      npx: script,\n    },\n  }\n\n  if (script === scriptShell) {\n    if (!noTTY()) {\n      if (ciInfo.isCI) {\n        return log.warn('exec', 'Interactive mode disabled in CI environment')\n      }\n\n      const { chalk } = flatOptions\n\n      output.standard(`${\n        chalk.reset('\\nEntering npm script environment')\n      }${\n        chalk.reset(locationMsg || ` at location:\\n${chalk.dim(runPath)}`)\n      }${\n        chalk.bold('\\nType \\'exit\\' or ^D when finished\\n')\n      }`)\n    }\n  }\n  return runScript({\n    ...flatOptions,\n    pkg,\n    // we always run in cwd, not --prefix\n    path: runPath,\n    binPaths,\n    event: 'npx',\n    args,\n    stdio: 'inherit',\n    scriptShell,\n  })\n}\n\nmodule.exports = run",
+      "excerptNormalization": "LF display only; retained file bytes/hash preserve original endings",
+      "firstLine": 25,
+      "lastLine": 75,
+      "path": "image-source/usr/local/lib/node_modules/npm/node_modules/libnpmexec/lib/run-script.js",
+      "sha256": "cf0a7c6462fab3a4818556eedbacd1a6773f924744afb14908bb62a14015ba02"
+    },
+    {
+      "claim": "Parent env plus npm lifecycle/package keys",
+      "excerpt": "  const spawnEnv = setPATH(path, binPaths, {\n    // we need to at least save the PATH environment var\n    ...process.env,\n    ...env,\n    npm_package_json: resolve(path, 'package.json'),\n    npm_lifecycle_event: event,\n    npm_lifecycle_script: cmd,\n    npm_config_node_gyp,\n  })\n\n  const spawnOpts = {\n    env: spawnEnv,\n    stdioString,\n    stdio,\n    cwd: path,\n    shell: scriptShell,\n  }\n\n  return [cmd, args, spawnOpts]\n}\n\nmodule.exports = makeSpawnArgs",
+      "excerptNormalization": "LF display only; retained file bytes/hash preserve original endings",
+      "firstLine": 32,
+      "lastLine": 53,
+      "path": "image-source/usr/local/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/make-spawn-args.js",
+      "sha256": "d1647624f0ce227e5cff1c4570f3e754e0eaaf08041db354102ec2bdbbd721df"
+    },
+    {
+      "claim": "Additional binPaths + ancestor .bin + node-gyp + inherited PATH",
+      "excerpt": "const { log } = require('proc-log')\nconst { resolve, dirname, delimiter } = require('path')\n// the path here is relative, even though it does not need to be\n// in order to make the posix tests pass in windows\nconst nodeGypPath = resolve(__dirname, '../lib/node-gyp-bin')\n\n// Windows typically calls its PATH environ 'Path', but this is not\n// guaranteed, nor is it guaranteed to be the only one.  Merge them\n// all together in the order they appear in the object.\nconst setPATH = (projectPath, binPaths, env) => {\n  const PATH = Object.keys(env).filter(p => /^path$/i.test(p) && env[p])\n    .map(p => env[p].split(delimiter))\n    .reduce((set, p) => set.concat(p.filter(concatted => !set.includes(concatted))), [])\n    .join(delimiter)\n\n  const pathArr = []\n  if (binPaths) {\n    for (const bin of binPaths) {\n      if (bin.includes(delimiter)) {\n        const event = env.npm_lifecycle_event\n        const context = event ? `\"${event}\" script` : 'script execution'\n        log.warn('run-script', `Path contains delimiter (\"${delimiter}\"), ${context} may not behave as expected.`)\n      }\n    }\n    pathArr.push(...binPaths)\n  }\n  // unshift the ./node_modules/.bin from every folder\n  // walk up until dirname() does nothing, at the root\n  // XXX we should specify a cwd that we don't go above\n  let p = projectPath\n  let pp\n  do {\n    pathArr.push(resolve(p, 'node_modules', '.bin'))\n    pp = p\n    p = dirname(p)\n  } while (p !== pp)\n  pathArr.push(nodeGypPath, PATH)\n\n  const pathVal = pathArr.join(delimiter)\n\n  // XXX include the node-gyp-bin path somehow?  Probably better for\n  // npm or arborist or whoever to just provide that by putting it in\n  // the PATH environ, since that's preserved anyway.\n  for (const key of Object.keys(env)) {\n    if (/^path$/i.test(key)) {\n      env[key] = pathVal\n    }\n  }\n\n  return env\n}\n\nmodule.exports = setPATH",
+      "excerptNormalization": "LF display only; retained file bytes/hash preserve original endings",
+      "firstLine": 1,
+      "lastLine": 53,
+      "path": "image-source/usr/local/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/set-path.js",
+      "sha256": "bc023d0c2d0840074c9e81ac0bda0fed0ef75e64623fa670437a7706d05d3542"
+    },
+    {
+      "claim": "Built-in/CLI/env/project/user/global configuration load",
+      "excerpt": "  async load () {\n    if (this.loaded) {\n      throw new Error('attempting to load npm config multiple times')\n    }\n\n    // first load the defaults, which sets the global prefix\n    this.loadDefaults()\n\n    // next load the builtin config, as this sets new effective defaults\n    await this.loadBuiltinConfig()\n\n    // cli and env are not async, and can set the prefix, relevant to project\n    this.loadCLI()\n    this.loadEnv()\n\n    // next project config, which can affect userconfig location\n    await this.loadProjectConfig()\n\n    // then user config, which can affect globalconfig location\n    await this.loadUserConfig()\n\n    // last but not least, global config file\n    await this.loadGlobalConfig()\n\n    // set this before calling setEnvs, so that we don't have to share\n    // private attributes, as that module also does a bunch of get operations\n    this.#loaded = true\n\n    // set proper globalPrefix now that everything is loaded\n    this.globalPrefix = this.get('prefix')\n\n    this.setEnvs()\n  }\n",
+      "excerptNormalization": "LF display only; retained file bytes/hash preserve original endings",
+      "firstLine": 241,
+      "lastLine": 274,
+      "path": "image-source/usr/local/lib/node_modules/npm/node_modules/@npmcli/config/lib/index.js",
+      "sha256": "938b85a17fde9f2355497fd4befc9bac45d406fb4afacd8af63322796697ff06"
+    },
+    {
+      "claim": "INIT_CWD HOME npm_config exports NODE_OPTIONS and NODE/npm_node_execpath",
+      "excerpt": "const setEnvs = (config) => {\n  // This ensures that all npm config values that are not the defaults are\n  // shared appropriately with child processes, without false positives.\n  const {\n    env,\n    defaults,\n    definitions,\n    list: [cliConf, envConf],\n  } = config\n\n  env.INIT_CWD = process.cwd()\n\n  // if the key is deprecated, skip it always.\n  // if the key is the default value,\n  //   if the environ is NOT the default value,\n  //     set the environ\n  //   else skip it, it's fine\n  // if the key is NOT the default value,\n  //   if the env is setting it, then leave it (already set)\n  //   otherwise, set the env\n  const cliSet = new Set(Object.keys(cliConf))\n  const envSet = new Set(Object.keys(envConf))\n  for (const key in cliConf) {\n    const { deprecated, envExport = true } = definitions[key] || {}\n    if (deprecated || envExport === false) {\n      continue\n    }\n\n    if (sameConfigValue(defaults[key], cliConf[key])) {\n      // config is the default, if the env thought different, then we\n      // have to set it BACK to the default in the environment.\n      if (!sameConfigValue(envConf[key], cliConf[key])) {\n        setEnv(env, key, cliConf[key])\n      }\n    } else {\n      // config is not the default.  if the env wasn't the one to set\n      // it that way, then we have to put it in the env\n      if (!(envSet.has(key) && !cliSet.has(key))) {\n        setEnv(env, key, cliConf[key])\n      }\n    }\n  }\n\n  // also set some other common nice envs that we want to rely on\n  env.HOME = config.home\n  // TODO this may not be the best away to persist these\n  env.npm_config_global_prefix = config.globalPrefix\n  env.npm_config_local_prefix = config.localPrefix\n  if (cliConf.editor) {\n    env.EDITOR = cliConf.editor\n  }\n\n  // note: this doesn't affect the *current* node process, of course, since\n  // it's already started, but it does affect the options passed to scripts.\n  if (cliConf['node-options']) {\n    env.NODE_OPTIONS = cliConf['node-options']\n  }\n  // the node-gyp bin uses this so we always set it\n  env.npm_config_node_gyp = cliConf['node-gyp']\n  // this doesn't have a full definition so we manually export it here\n  env.npm_config_npm_version = cliConf['npm-version'] || 'unknown'\n  env.npm_execpath = config.npmBin\n  env.NODE = env.npm_node_execpath = config.execPath\n}\n\nmodule.exports = setEnvs",
+      "excerptNormalization": "LF display only; retained file bytes/hash preserve original endings",
+      "firstLine": 48,
+      "lastLine": 113,
+      "path": "image-source/usr/local/lib/node_modules/npm/node_modules/@npmcli/config/lib/set-envs.js",
+      "sha256": "c44cbecae83242cb8e422fb0915c15489764647829f8008bbd2ea89bb0c94975"
+    },
+    {
+      "claim": "Config load and COLOR side effect",
+      "excerpt": "        process.execPath = node\n        this.config.execPath = node\n      }\n    })\n\n    await time.start('npm:load:configload', () => this.config.load())\n\n    // npm --versions\n    if (this.config.get('versions', 'cli')) {\n      this.argv = ['version']\n      this.config.set('usage', false, 'cli')\n    } else {\n      this.argv = [...this.config.parsedArgv.remain]\n    }\n\n    // Remove first argv since that is our command as typed\n    // Note that this might not be the actual name of the command due to aliases, etc.\n    // But we use the raw form of it later in user output so it must be preserved as is.\n    const commandArg = this.argv.shift()\n\n    // This is the actual name of the command that will be run or undefined if deref could not find a match\n    const command = deref(commandArg)\n\n    await this.#display.load({\n      command,\n      loglevel: this.config.get('loglevel'),\n      stdoutColor: this.color,\n      stderrColor: this.logColor,\n      timing: this.config.get('timing'),\n      unicode: this.config.get('unicode'),\n      progress: this.flatOptions.progress,\n      json: this.config.get('json'),\n      heading: this.config.get('heading'),\n    })\n    process.env.COLOR = this.color ? '1' : '0'\n",
+      "excerptNormalization": "LF display only; retained file bytes/hash preserve original endings",
+      "firstLine": 90,
+      "lastLine": 125,
+      "path": "image-source/usr/local/lib/node_modules/npm/lib/npm.js",
+      "sha256": "dd258b095bff5a0a16636bcc4cb457330624999485f64e1944d57424cbebebea"
+    },
+    {
+      "claim": "Normal npm ci reify then lifecycle events",
+      "excerpt": "        'postinstall',\n        'prepublish', // XXX should we remove this finally??\n        'preprepare',\n        'prepare',\n        'postprepare',\n      ]\n      const scriptShell = this.npm.config.get('script-shell') || undefined\n      for (const event of scripts) {\n        await runScript({\n          path: where,\n          args: [],\n          scriptShell,\n          stdio: 'inherit',\n          event,\n        })\n      }\n    }\n    await reifyFinish(this.npm, arb)\n  }\n}\n\nmodule.exports = CI",
+      "excerptNormalization": "LF display only; retained file bytes/hash preserve original endings",
+      "firstLine": 117,
+      "lastLine": 138,
+      "path": "image-source/usr/local/lib/node_modules/npm/lib/commands/ci.js",
+      "sha256": "fb9ed5eb26d841dfcdf8cffaa3c33be3edda6ee27797b5db5ccbfbaba86e4315"
+    },
+    {
+      "claim": "Hereby file resolution/local reexec/chdir/import then selected task",
+      "excerpt": "    }\n}\nasync function mainWorker(d) {\n    var _a;\n    const args = parseArgs(d.argv.slice(2));\n    if (args.help) {\n        d.log(getUsage());\n        return;\n    }\n    const herebyfilePath = path.resolve(d.cwd(), (_a = args.herebyfile) !== null && _a !== void 0 ? _a : findHerebyfile(d.cwd()));\n    if (await reexec(herebyfilePath))\n        return;\n    if (args.version) {\n        d.log(`hereby ${d.version()}`);\n        return;\n    }\n    d.chdir(path.dirname(herebyfilePath));\n    const herebyfile = await loadHerebyfile(herebyfilePath);\n    if (args.printTasks) {\n        const { formatTasks } = await import(\"./formatTasks.js\");\n        d.log(formatTasks(args.printTasks, herebyfile.tasks.values(), herebyfile.defaultTask, d.columns()));\n        return;\n    }\n    const tasks = await selectTasks(d, herebyfile, herebyfilePath, args.run);\n    const taskNames = tasks.map((task) => style.blue(task.options.name)).join(\", \");\n    d.log(`Using ${style.yellow(d.simplifyPath(herebyfilePath))} to run ${taskNames}`);\n    const start = performance.now();\n    const runner = new Runner(d);\n    try {\n        await runner.runTasks(...tasks);\n    }\n    catch {\n        // We will have already printed some message here.\n        // Set the error code and let the process run to completion,",
+      "excerptNormalization": "LF display only; retained file bytes/hash preserve original endings",
+      "firstLine": 25,
+      "lastLine": 58,
+      "path": "npm-source/hereby/package/dist/cli/index.js",
+      "sha256": "d3effe31543c89079186a62d10c318d8a913543024dca88aac54318e451bca54"
+    },
+    {
+      "claim": "Ancestor Hereby package/self resolution and realpath comparison",
+      "excerpt": "    const otherCLI = findUp(path.dirname(herebyfilePath), (dir) => {\n        const p = path.resolve(dir, expectedCLIPath);\n        // This is the typical case; we've walked up and found it in node_modules.\n        if (fs.existsSync(p))\n            return p;\n        // Otherwise, we check to see if we're self-resolving. Realistically,\n        // this only happens when developing hereby itself.\n        //\n        // Technically, this should go before the above check since self-resolution\n        // comes before node_modules resolution, but this could only happen if hereby\n        // happened to depend on itself somehow.\n        const packageJsonPath = path.join(dir, \"package.json\");\n        if (fs.existsSync(packageJsonPath)) {\n            const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, \"utf8\"));\n            if (packageJson.name === \"hereby\") {\n                return path.resolve(dir, distCLIPath);\n            }\n        }\n        return undefined;\n    });\n    if (!otherCLI) {\n        throw new UserError(\"Unable to find hereby; ensure hereby is installed in your package.\");\n    }\n    if (fs.realpathSync(thisCLI) === fs.realpathSync(otherCLI)) {\n        return false;\n    }\n    // Note: calling pathToFileURL is required on Windows to disambiguate URLs\n    // from drive letters.\n    await import(pathToFileURL(otherCLI).toString());\n    return true;\n}\n//# sourceMappingURL=reexec.js.map",
+      "excerptNormalization": "LF display only; retained file bytes/hash preserve original endings",
+      "firstLine": 27,
+      "lastLine": 58,
+      "path": "npm-source/hereby/package/dist/cli/reexec.js",
+      "sha256": "eb0ae263dfa7f8bedc66207ee200056b128df05c831510c5c152b2ba84e684a1"
+    },
+    {
+      "claim": "Discover Herebyfile, import module before task selection",
+      "excerpt": "const herebyfileRegExp = /^herebyfile\\.m?[jt]s$/i;\nexport function findHerebyfile(dir) {\n    const result = findUp(dir, (dir) => {\n        const entries = fs.readdirSync(dir, { withFileTypes: true });\n        const matching = entries.filter((e) => herebyfileRegExp.test(e.name));\n        if (matching.length > 1) {\n            throw new UserError(`Found more than one Herebyfile: ${matching.map((e) => e.name).join(\", \")}`);\n        }\n        if (matching.length === 1) {\n            const candidate = matching[0];\n            if (!candidate.isFile()) {\n                throw new UserError(`${candidate.name} is not a file.`);\n            }\n            return path.join(dir, candidate.name);\n        }\n        if (entries.some((e) => e.name === \"package.json\")) {\n            return false; // TODO: Is this actually desirable? What about monorepos?\n        }\n        return undefined;\n    });\n    if (result) {\n        return result;\n    }\n    throw new UserError(\"Unable to find Herebyfile.\");\n}\nexport async function loadHerebyfile(herebyfilePath) {\n    // Note: calling pathToFileURL is required on Windows to disambiguate URLs\n    // from drive letters.\n    const herebyfile = await import(pathToFileURL(herebyfilePath).toString());\n    const exportedTasks = new Set();\n    let defaultTask;\n    for (const [key, value] of Object.entries(herebyfile)) {\n        if (!(value instanceof Task))\n            continue;\n        if (key === \"default\") {\n            defaultTask = value;\n        }\n        else if (exportedTasks.has(value)) {\n            throw new UserError(`Task \"${style.blue(value.options.name)}\" has been exported twice.`);\n        }\n        else {",
+      "excerptNormalization": "LF display only; retained file bytes/hash preserve original endings",
+      "firstLine": 7,
+      "lastLine": 47,
+      "path": "npm-source/hereby/package/dist/cli/loadHerebyfile.js",
+      "sha256": "e51e3f887f8da9df3cd15b3aa764cf879c95f43e04ecfe26ef523fa47ecd12b0"
+    },
+    {
+      "claim": "Child PATH ancestor node_modules/.bin + dirname execPath and process env merge",
+      "excerpt": "\tlet currentPath = typeof cwd === \"string\" ? cwd : fileURLToPath(cwd, { windows: false });\n\tlet lastPath;\n\tdo {\n\t\tnodeBinPaths.push(resolve(currentPath, \"node_modules\", \".bin\"));\n\t\tlastPath = currentPath;\n\t\tcurrentPath = dirname(currentPath);\n\t} while (currentPath !== lastPath);\n\tnodeBinPaths.push(dirname(process.execPath));\n\tconst newPath = nodeBinPaths.concat(parts).join(delimiter);\n\treturn {\n\t\tkey: path.key,\n\t\tvalue: newPath\n\t};\n}\nfunction computeEnv(cwd, env, nodePath = true) {\n\tconst envWithDefault = {\n\t\t...process.env,\n\t\t...env\n\t};\n\tif (!nodePath) return envWithDefault;\n\tconst envPathInfo = addNodeBinToPath(cwd, getPathFromEnv(envWithDefault));\n\tenvWithDefault[envPathInfo.key] = envPathInfo.value;\n\treturn envWithDefault;\n}\n//#endregion\n//#region src/stream.ts\nconst combineStreams = (streams) => {\n\tlet streamCount = streams.length;\n\tconst combined = new PassThrough();\n\tconst maybeEmitEnd = () => {\n\t\tif (--streamCount === 0) combined.end();\n\t};\n\tfor (const stream of streams) pipeline(stream, combined, { end: false }).then(maybeEmitEnd).catch(maybeEmitEnd);",
+      "excerptNormalization": "LF display only; retained file bytes/hash preserve original endings",
+      "firstLine": 30,
+      "lastLine": 62,
+      "path": "npm-source/tinyexec/package/dist/main.mjs",
+      "sha256": "3f370502361a75be7a50f915a123d965f6ef9c648a56bf1d5b9e3ae95c20b2f1"
+    },
+    {
+      "claim": "Static local/published module imports occur before full task",
+      "excerpt": "import AdmZip from \"adm-zip\";\nimport chokidar from \"chokidar\";\nimport { task as herebyTask } from \"hereby\";\nimport assert from \"node:assert\";\nimport crypto from \"node:crypto\";\nimport fs from \"node:fs\";\nimport { createRequire } from \"node:module\";\nimport os from \"node:os\";\nimport path from \"node:path\";\nimport url from \"node:url\";\nimport {\n    parseArgs,\n    styleText,\n} from \"node:util\";\nimport * as tar from \"tar\";\nimport {\n    x,\n    xSync,\n} from \"tinyexec\";\nimport {\n    enableFileFingerprintCache,\n    invalidateFileFingerprints,\n    run,\n} from \"./tools/scripts/gen/utils.mts\";\nimport {\n    ensureModel as ensureLSPModel,\n    outputs as lspModelOutputs,\n} from \"./tools/scripts/lsp/fetchModel.mts\";\nimport { outputs as encoderOutputs } from \"./tools/scripts/tsc/generate-encoder.ts\";\nimport { outputs as enumOutputs } from \"./tools/scripts/tsc/generate-enums.ts\";\nimport { outputs as goASTOutputs } from \"./tools/scripts/tsc/generate-go-ast.ts\";\nimport { outputs as tsASTOutputs } from \"./tools/scripts/tsc/generate-ts-ast.ts\";\nimport generateUnicodeData, { outputs as unicodeOutputs } from \"./tsc/internal/stringutil/_scripts/generate-unicode-data.mts\";\n\nenableFileFingerprintCache();\n\nif (process.platform === \"win32\") {\n    process.chdir(fs.realpathSync.native(process.cwd()));\n}\n\nconst __filename = url.fileURLToPath(new URL(import.meta.url));\nconst __dirname = path.dirname(__filename);\n\n/** @typedef {import(\"hereby\").TaskOptions & { outputs?: readonly string[] }} TaskOptions */",
+      "excerptNormalization": "LF display only; retained file bytes/hash preserve original endings",
+      "firstLine": 3,
+      "lastLine": 46,
+      "path": "repository-source/Herebyfile.mjs",
+      "sha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421"
+    },
+    {
+      "claim": "CI and TSGO_HEREBY environment-derived options",
+      "excerpt": "const isCI = !!process.env.CI || !!process.env.TF_BUILD;\nconst stableThreeComponentVersionPatternSource = String.raw`^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$`;\nconst stableThreeComponentVersionPattern = new RegExp(stableThreeComponentVersionPatternSource);\n\n/** @typedef {import(\"./tools/scripts/gen/utils.mts\").RunOptions} RunOptions */\n\n/**\n * @param {string} command\n * @param {readonly string[]} [args]\n * @param {Omit<RunOptions, \"captureOutput\">} [options]\n */\nfunction runOutput(command, args, options) {\n    return run(command, args, { ...options, captureOutput: true });\n}\n\n/**\n * @param {string} name\n * @param {boolean} defaultValue\n * @returns {boolean}\n */\nfunction parseEnvBoolean(name, defaultValue = false) {\n    name = \"TSGO_HEREBY_\" + name.toUpperCase();\n\n    const value = process.env[name];\n    if (!value) {\n        return defaultValue;\n    }\n    switch (value.toUpperCase()) {\n        case \"1\":\n        case \"TRUE\":\n        case \"YES\":\n        case \"ON\":\n            return true;\n        case \"0\":\n        case \"FALSE\":\n        case \"NO\":\n        case \"OFF\":\n            return false;\n    }\n    throw new Error(`Invalid value for ${name}: ${value}`);\n}\n\nconst { values: rawOptions } = parseArgs({\n    args: process.argv.slice(2),\n    options: {\n        tests: { type: \"string\", short: \"t\" },\n        fix: { type: \"boolean\" },\n        force: { type: \"boolean\", default: parseEnvBoolean(\"FORCE\") },\n        api: { type: \"boolean\" },\n        all: { type: \"boolean\" },\n        debug: { type: \"boolean\" },\n        dirty: { type: \"boolean\" },\n        release: { type: \"boolean\" },\n\n        setPrerelease: { type: \"string\" },\n        forRelease: { type: \"boolean\" },\n        respectGoEnv: { type: \"boolean\" },\n        vscodeTypescriptRelease: { type: \"boolean\" },\n        platform: { type: \"string\" },\n\n        race: { type: \"boolean\", default: parseEnvBoolean(\"RACE\") },\n        noembed: { type: \"boolean\", default: parseEnvBoolean(\"NOEMBED\") },\n        concurrentTestPrograms: { type: \"boolean\", default: parseEnvBoolean(\"CONCURRENT_TEST_PROGRAMS\") },\n        coverage: { type: \"boolean\", default: parseEnvBoolean(\"COVERAGE\") },\n    },\n    strict: false,\n    allowPositionals: true,\n    allowNegative: true,\n});\n",
+      "excerptNormalization": "LF display only; retained file bytes/hash preserve original endings",
+      "firstLine": 57,
+      "lastLine": 126,
+      "path": "repository-source/Herebyfile.mjs",
+      "sha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421"
+    },
+    {
+      "claim": "Default full gotestsum ./... test route",
+      "excerpt": "async function runTests() {\n    if (!options.dirty) {\n        await rimraf(localBaseline);\n        await fs.promises.mkdir(localBaseline, { recursive: true });\n    }\n\n    // Create a tmp directory for baseline tracking if enabled\n    /** @type {string | undefined} */\n    let trackingDir;\n    /** @type {(() => Promise<void>) | undefined} */\n    let cleanupTracking;\n\n    if (baselineTrackingEnabled) {\n        const tempTrackingDir = fs.mkdtempSync(path.join(os.tmpdir(), \"tsgo-baseline-tracking-\"));\n        trackingDir = tempTrackingDir;\n        cleanupTracking = () => rimraf(tempTrackingDir);\n    }\n\n    try {\n        const testEnv = {\n            ...goTestEnv,\n            ...(trackingDir ? { TSGO_BASELINE_TRACKING_DIR: trackingDir } : {}),\n        };\n        await gotestsumTool.run([...gotestsumArgs(\"tests\"), \"./...\", ...(isCI ? [\"--timeout=45m\"] : [])], {\n            env: testEnv,\n            cwd: \"./tsc\",\n        });",
+      "excerptNormalization": "LF display only; retained file bytes/hash preserve original endings",
+      "firstLine": 983,
+      "lastLine": 1009,
+      "path": "repository-source/Herebyfile.mjs",
+      "sha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421"
+    },
+    {
+      "claim": "test alias to test:tsc",
+      "excerpt": "export const testTsc = task({\n    name: \"test:tsc\",\n    description: \"Runs all tests in the tsc module.\",\n    run: runTests,\n});\n\nexport const testExtension = task({\n    name: \"test:extension\",\n    description: \"Runs the VS Code extension tests.\",\n    run: runTestExtension,\n});\n\nexport const test = task({\n    name: \"test\",\n    description: \"Alias for test:tsc.\",\n    dependencies: [testTsc],\n});",
+      "excerptNormalization": "LF display only; retained file bytes/hash preserve original endings",
+      "firstLine": 1046,
+      "lastLine": 1062,
+      "path": "repository-source/Herebyfile.mjs",
+      "sha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421"
+    },
+    {
+      "claim": "Source-owned cached-tool digest/build/transition",
+      "excerpt": "function createCachedTool({ toolPath, globs, build, exclude }) {\n    toolPath = path.resolve(toolPath);\n    const hashPath = toolPath + \".hash\";\n    const files = fs.globSync(globs, { exclude }).filter(file => fs.statSync(file).isFile()).map(file => path.resolve(file));\n    files.sort();\n\n    const ensure = memoize(async () => {\n        const hash = crypto.createHash(\"sha256\");\n        for (const file of files) {\n            hash.update(file);\n            hash.update(fs.readFileSync(file));\n        }\n        const digest = hash.digest(\"hex\") + \"\\n\";\n        if (\n            fs.existsSync(toolPath)\n            && fs.existsSync(hashPath)\n            && fs.readFileSync(hashPath, \"utf8\") === digest\n        ) {\n            return;\n        }\n\n        await build(toolPath);\n        fs.writeFileSync(hashPath, digest);\n    });\n\n    return {\n        ensure,\n        /** @param {string[]} args @param {RunOptions} [options] */\n        run: async (args, options) => {\n            await ensure();\n            return run(toolPath, args, options);\n        },\n    };\n}\n\nconst gotestsumTool = createCachedTool({\n    toolPath: `./tools/gotestsum${process.platform === \"win32\" ? \".exe\" : \"\"}`,\n    globs: [\"./tools/go.mod\", \"./tools/go.sum\"],\n    build: async () => {\n        await run(\"go\", [\"install\", \"gotest.tools/gotestsum\"], {\n            cwd: \"./tools\",\n            env: { GOBIN: path.resolve(\"./tools\") },\n        });\n    },\n});\n",
+      "excerptNormalization": "LF display only; retained file bytes/hash preserve original endings",
+      "firstLine": 1173,
+      "lastLine": 1218,
+      "path": "repository-source/Herebyfile.mjs",
+      "sha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421"
+    },
+    {
+      "claim": "run merges current parent env with command-specific env",
+      "excerpt": "    return withFileFingerprintWrites(() =>\n        x(command, args, {\n            throwOnError: true,\n            ...(options.signal ? { signal: options.signal } : {}),\n            nodeOptions: {\n                cwd: options.cwd,\n                env: options.env ? { ...process.env, ...options.env } : undefined,\n                stdio: options.captureOutput ? \"pipe\" : \"inherit\",\n            },\n        })\n    );\n}\n\nexport function globInputs(patterns: string[], exclude: string[] = []): string[] {\n    return fs.globSync(patterns, { cwd: repoRoot, exclude }).map(file => path.join(repoRoot, file));\n}\n\nexport function goInputs(): string[] {\n    return [import.meta.filename, ...globInputs([\"go.work\", \"go.work.sum\", \"{tsc,tools}/go.{mod,sum}\"])];",
+      "excerptNormalization": "LF display only; retained file bytes/hash preserve original endings",
+      "firstLine": 89,
+      "lastLine": 107,
+      "path": "repository-source/tools/scripts/gen/utils.mts",
+      "sha256": "5d0c46a19d38bfc283f378a8f3498510af40d68b2994c20c41f1976e4870bd15"
+    },
+    {
+      "claim": "ast.json parsed/validated at module initialization",
+      "excerpt": "function readSchema(): SchemaAPI {\n    const schema = new SchemaAPI(JSON.parse(\n        fs.readFileSync(path.join(ROOT, \"tools/scripts/tsc/ast.json\"), \"utf-8\"),\n    ) as Schema);\n    schema.validate();\n    return schema;\n}\n\nexport let api = readSchema();\n\nexport function reloadSchema(): void {\n    api = readSchema();",
+      "excerptNormalization": "LF display only; retained file bytes/hash preserve original endings",
+      "firstLine": 1264,
+      "lastLine": 1275,
+      "path": "repository-source/tools/scripts/tsc/schema.ts",
+      "sha256": "d7eba663a9da2389bd4762723b5b73974892d93a7a4f0448039f6cfab3d8c30a"
+    },
+    {
+      "claim": "Platform/arch selected optional package copy; fallback if missing",
+      "excerpt": "const IS_WINDOWS = process.platform === 'win32';\n\nasync function main() {\n    const architecture = process.env['npm_config_arch'] ?? process.arch;\n    const target = getTarget(process.platform, architecture);\n\n    if (!target) {\n        throw new Error(`The current platform (${process.platform}) and architecture (${architecture}) is not supported.`);\n    }\n\n    const binDir = path.join(__dirname, '..', 'bin');\n    if (!fs.existsSync(binDir)) {\n        fs.mkdirSync(binDir);\n    }\n\n    const exeName = IS_WINDOWS ? 'vsce-sign.exe' : 'vsce-sign';\n    const subPath = `bin/${exeName}`;\n    const binPath = path.join(binDir, exeName);\n    const pkgName = `@vscode/vsce-sign-${target}`;\n\n    try {\n        setup(pkgName, subPath, binPath);\n    } catch (err) {\n        const version = require(path.join(__dirname, '..', 'package.json')).optionalDependencies[pkgName];\n        if (!version) {\n            throw new Error(`Failed to find version of \"${pkgName}\" in the optionalDependencies of \"@vscode/vsce-sign\"`);\n        }\n        await fallbackSetup(pkgName, subPath, binPath, version);\n    }\n}\n\n/**\n * @param {string} pkgName \n * @param {string} subPath \n * @param {string} binPath \n */\nfunction setup(pkgName, subPath, binPath) {\n    const targetBinPath = require.resolve(`${pkgName}/${subPath}`);\n    fs.copyFileSync(targetBinPath, binPath);",
+      "excerptNormalization": "LF display only; retained file bytes/hash preserve original endings",
+      "firstLine": 17,
+      "lastLine": 55,
+      "path": "npm-source/@vscode/vsce-sign/package/src/postinstall.js",
+      "sha256": "77a408796da2c0b48ad1c9cee6cdb3dd70662f7b2a8c353a61a617106bd0c762"
+    },
+    {
+      "claim": "Normal hook delegates install API then bin replacement",
+      "excerpt": "// @ts-check\n\"use strict\";\n\nconst api = require(\"./install_api.cjs\");\nconst exePath = api.runInstall();\ntry {\n  api.replaceBinEntry(exePath);\n} catch (_err) {\n  // ignore - falls back to bin.cjs\n}",
+      "excerptNormalization": "LF display only; retained file bytes/hash preserve original endings",
+      "firstLine": 1,
+      "lastLine": 10,
+      "path": "npm-source/dprint/package/install.cjs",
+      "sha256": "30c93a4ac2fbb7e35b01c6322c1d64941b847d61ee510ef2ed43962a491a79d8"
+    },
+    {
+      "claim": "Existing target, optional package copy/link or fallback download",
+      "excerpt": "  runInstall() {\n    const dprintFileName = os.platform() === \"win32\" ? \"dprint.exe\" : \"dprint\";\n    const targetExecutablePath = path.join(\n      __dirname,\n      dprintFileName,\n    );\n\n    if (fs.existsSync(targetExecutablePath)) {\n      return targetExecutablePath;\n    }\n\n    const target = getTarget();\n    const sourceExecutablePath = resolveSourceExecutablePath(target, dprintFileName);\n\n    if (sourceExecutablePath == null) {\n      // the @dprint/<target> optional dependency isn't installed (for example\n      // the user ran `npm install --omit=optional`), so download the binary\n      // directly from the registry like esbuild does\n      downloadExecutable(target, dprintFileName, targetExecutablePath);\n      if (os.platform() !== \"win32\") {\n        // chmod +x\n        chmodX(targetExecutablePath);\n      }\n      return targetExecutablePath;\n    }\n\n    try {\n      if (process.env.DPRINT_SIMULATED_READONLY_FILE_SYSTEM === \"1\") {\n        console.warn(\"Simulating readonly file system for testing.\");\n        throw new Error(\"Throwing for testing purposes.\");\n      }\n\n      // in order to make things faster the next time we run and to allow the\n      // dprint vscode extension to easily pick this up, copy the executable\n      // into the dprint package folder\n      hardLinkOrCopy(sourceExecutablePath, targetExecutablePath);\n      if (os.platform() !== \"win32\") {\n        // chmod +x\n        chmodX(targetExecutablePath);\n      }\n      return targetExecutablePath;\n    } catch (err) {\n      // this may fail on readonly file systems... in this case, fall\n      // back to using the resolved package path\n      if (process.env.DPRINT_DEBUG === \"1\") {\n        console.warn(\n          \"Failed to copy executable from \"\n            + sourceExecutablePath + \" to \" + targetExecutablePath\n            + \". Using resolved package path instead.\",\n          err,\n        );\n      }",
+      "excerptNormalization": "LF display only; retained file bytes/hash preserve original endings",
+      "firstLine": 12,
+      "lastLine": 63,
+      "path": "npm-source/dprint/package/install_api.cjs",
+      "sha256": "89da3973a6a467f5b395adfbfeaecb2fe3226c54e17c0b7f54dda71135347328"
+    },
+    {
+      "claim": "Hook rewrites .bin/dprint link",
+      "excerpt": "function replaceBinEntry(exePath) {\n  const binDir = findBinDir();\n  if (binDir === undefined) return;\n\n  const relative = path.relative(binDir, exePath);\n  if (os.platform() === \"win32\") {\n    // rewrite .cmd and .ps1 wrappers to invoke the native binary directly\n    fs.writeFileSync(\n      path.join(binDir, \"dprint.cmd\"),\n      \"@\\\"%~dp0\" + relative + \"\\\" %*\\r\\n\",\n    );\n    fs.writeFileSync(\n      path.join(binDir, \"dprint.ps1\"),\n      \"& \\\"$PSScriptRoot/\" + relative.replace(/\\\\/g, \"/\")\n        + \"\\\" $args\\r\\nexit $LASTEXITCODE\\r\\n\",\n    );\n  } else {\n    // replace symlink to point directly at the native binary\n    const binDprint = path.join(binDir, \"dprint\");\n    fs.unlinkSync(binDprint);\n    fs.symlinkSync(relative, binDprint);\n  }",
+      "excerptNormalization": "LF display only; retained file bytes/hash preserve original endings",
+      "firstLine": 376,
+      "lastLine": 397,
+      "path": "npm-source/dprint/package/install_api.cjs",
+      "sha256": "89da3973a6a467f5b395adfbfeaecb2fe3226c54e17c0b7f54dda71135347328"
+    },
+    {
+      "claim": "ESBUILD_BINARY_PATH override",
+      "excerpt": "// lib/npm/node-platform.ts\nvar fs = require(\"fs\");\nvar os = require(\"os\");\nvar path = require(\"path\");\nvar ESBUILD_BINARY_PATH = process.env.ESBUILD_BINARY_PATH || ESBUILD_BINARY_PATH;\nvar isValidBinaryPath = (x) => !!x && x !== \"/usr/bin/esbuild\";",
+      "excerptNormalization": "LF display only; retained file bytes/hash preserve original endings",
+      "firstLine": 25,
+      "lastLine": 30,
+      "path": "npm-source/esbuild/package/install.js",
+      "sha256": "612294e278914443bdcf81cb17f54afec34dbdd2ebd999a6ee187912320cc315"
+    },
+    {
+      "claim": "Hook bin/lib rewrite/optimization branch",
+      "excerpt": "    } catch {\n      continue;\n    }\n    if (stats.isDirectory()) removeRecursive(entryPath);\n    else fs2.unlinkSync(entryPath);\n  }\n  fs2.rmdirSync(dir);\n}\nfunction applyManualBinaryPathOverride(overridePath) {\n  const pathString = JSON.stringify(overridePath);\n  fs2.writeFileSync(toPath, `#!/usr/bin/env node\nrequire('child_process').execFileSync(${pathString}, process.argv.slice(2), { stdio: 'inherit' });\n`);\n  const libMain = path2.join(__dirname, \"lib\", \"main.js\");\n  const code = fs2.readFileSync(libMain, \"utf8\");\n  fs2.writeFileSync(libMain, `var ESBUILD_BINARY_PATH = ${pathString};\n${code}`);\n}\nfunction maybeOptimizePackage(binPath, isWASM) {\n  if (os2.platform() !== \"win32\" && !isYarn() && !isWASM) {\n    const tempPath = path2.join(__dirname, \"bin-esbuild\");\n    try {\n      fs2.linkSync(binPath, tempPath);\n      fs2.renameSync(tempPath, toPath);\n      isToPathJS = false;\n      fs2.unlinkSync(tempPath);\n    } catch {\n    }\n  }",
+      "excerptNormalization": "LF display only; retained file bytes/hash preserve original endings",
+      "firstLine": 207,
+      "lastLine": 235,
+      "path": "npm-source/esbuild/package/install.js",
+      "sha256": "612294e278914443bdcf81cb17f54afec34dbdd2ebd999a6ee187912320cc315"
+    }
+  ],
+  "state": "inert-source-spans-not-new-runtime-observations"
+}

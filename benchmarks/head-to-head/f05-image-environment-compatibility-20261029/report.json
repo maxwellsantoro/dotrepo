@@ -1,0 +1,35 @@
+{
+  "actualAdmission": false,
+  "actualDaemonCalls": 0,
+  "after": "Same exact retained inspect progresses through owned mock image/create/start/cleanup; no GOENV/GOTOOLCHAIN --env argument added. No actual daemon calls.",
+  "before": "Exact retained b47 inspect Env caused nonallowlisted rejection after one owned mock image-inspect call, before create. Full before source and receipt retained.",
+  "campaignAdmitted": false,
+  "change": "Existing image environment may contain only exact GOTOOLCHAIN=local and GOENV=off in addition to existing ENV_KEYS; caller override keys unchanged. Image values are inherited, never injected by this patch.",
+  "costUsd": null,
+  "executionAuthorized": false,
+  "imageEntryParsing": "Env must be null/list; each item must be string NAME=value with POSIX-style name, no control characters and unique key. Empty/null image Env compatibility retained. Unknown keys and nonexact special values refuse before create.",
+  "limits": [
+    "Offline fake daemon transport only; no actual container or observed task environment",
+    "Synthetic qualification flags in controls are not accepted C1/campaign authority",
+    "Existing frozen capture adapters/hash subjects do not cover changed runtime bytes automatically; future configs/descriptors need new explicit runtime bindings and review",
+    "This compatibility fix neither closes normal npm/producer/effective-context joins nor authorizes a campaign"
+  ],
+  "nativeTaskAdmitted": false,
+  "oracleQualified": false,
+  "preserved": [
+    "Exact frozen image digest check",
+    "Read-only/mount-free/no-network/private namespace/resource/create flags",
+    "No unknown/credential-like image entries",
+    "Unchanged caller ENV_KEYS/validate_runtime restrictions",
+    "Source/cache/qualification/provider/capture gates"
+  ],
+  "state": "mock-verified-common-image-environment-compatibility-not-task-qualification",
+  "taskOutcomeObserved": false,
+  "tests": {
+    "focusedRuntimePassed": 167,
+    "mockBeforeAfter": "pass",
+    "newControls": 42,
+    "ruffCheck": "pass",
+    "ruffFormatCheck": "pass"
+  }
+}

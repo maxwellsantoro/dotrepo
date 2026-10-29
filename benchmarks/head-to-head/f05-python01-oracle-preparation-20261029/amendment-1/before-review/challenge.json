@@ -1,0 +1,184 @@
+{
+  "actualAdmission": false,
+  "cases": [
+    {
+      "actualResult": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": false,
+        "casePhaseReportCoverageComplete": false,
+        "classification": "incomplete-or-unqualified",
+        "frameworkErrors": [],
+        "nativeCollectionOccurred": false,
+        "observedCases": [],
+        "oracleQualified": false,
+        "reason": "actual-native-collection-observer-and-capture-join-unavailable",
+        "remainingJoins": [
+          "complete-native-collection-and-static-source-reconciliation-unavailable",
+          "qualified-interpreter-pytest-plugins-dependency-and-import-root-context-unavailable",
+          "trusted-unittest-phase/subtest-and-pytest-report-observer-unavailable",
+          "same-process/raw-host-capture-source-environment-setup-and-budget-join-unavailable"
+        ],
+        "synthetic": false,
+        "taskId": "python-01",
+        "taskOutcomeObserved": false,
+        "testsPassed": null
+      },
+      "candidateOutcomeObserved": true,
+      "casePhaseReportCoverageComplete": true,
+      "firstObservedCase": {
+        "id": "owned-synthetic::tests/test_local_star_count_fetch.py::FetchStarCountTests.test_fetcher_is_standalone_stdlib_only_and_has_fixed_api::slot-1",
+        "missingPhases": [],
+        "phases": [
+          {
+            "exception": null,
+            "outcome": "passed",
+            "phase": null
+          },
+          {
+            "exception": null,
+            "outcome": "passed",
+            "phase": "call"
+          },
+          {
+            "exception": null,
+            "outcome": "passed",
+            "phase": "teardown"
+          },
+          {
+            "exception": null,
+            "outcome": "passed",
+            "phase": "cleanup"
+          }
+        ],
+        "subtests": [],
+        "suite": "root-unittest"
+      },
+      "name": "missing-root-unittest-setup-start-null-result",
+      "nullPhaseResults": 1,
+      "phaseStartsRemaining": 498,
+      "rawFixtureSha256": "bef159ca04f499e39b0c2db72ca53e7d60ab132fd0859df234fbc577291c68cf",
+      "reason": "complete full semantic-union assertion outcome",
+      "testsPassed": true
+    },
+    {
+      "actualResult": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": false,
+        "casePhaseReportCoverageComplete": false,
+        "classification": "incomplete-or-unqualified",
+        "frameworkErrors": [],
+        "nativeCollectionOccurred": false,
+        "observedCases": [],
+        "oracleQualified": false,
+        "reason": "actual-native-collection-observer-and-capture-join-unavailable",
+        "remainingJoins": [
+          "complete-native-collection-and-static-source-reconciliation-unavailable",
+          "qualified-interpreter-pytest-plugins-dependency-and-import-root-context-unavailable",
+          "trusted-unittest-phase/subtest-and-pytest-report-observer-unavailable",
+          "same-process/raw-host-capture-source-environment-setup-and-budget-join-unavailable"
+        ],
+        "synthetic": false,
+        "taskId": "python-01",
+        "taskOutcomeObserved": false,
+        "testsPassed": null
+      },
+      "candidateOutcomeObserved": true,
+      "casePhaseReportCoverageComplete": true,
+      "firstObservedCase": {
+        "id": "owned-synthetic::tests/test_local_star_count_fetch.py::FetchStarCountTests.test_fetcher_is_standalone_stdlib_only_and_has_fixed_api::slot-1",
+        "missingPhases": [],
+        "phases": [
+          {
+            "exception": null,
+            "outcome": "passed",
+            "phase": "setup"
+          },
+          {
+            "exception": null,
+            "outcome": "passed",
+            "phase": "call"
+          },
+          {
+            "exception": null,
+            "outcome": "passed",
+            "phase": "teardown"
+          },
+          {
+            "exception": null,
+            "outcome": "passed",
+            "phase": "cleanup"
+          }
+        ],
+        "subtests": [],
+        "suite": "root-unittest"
+      },
+      "name": "missing-backend-pytest-setup-start-null-result",
+      "nullPhaseResults": 1,
+      "phaseStartsRemaining": 498,
+      "rawFixtureSha256": "6515d549229773eb1e38dc8bf5129141579663187c69e77c758542c9927508ba",
+      "reason": "complete full semantic-union assertion outcome",
+      "testsPassed": true
+    },
+    {
+      "actualResult": {
+        "campaignAdmitted": false,
+        "candidateOutcomeObserved": false,
+        "casePhaseReportCoverageComplete": false,
+        "classification": "incomplete-or-unqualified",
+        "frameworkErrors": [],
+        "nativeCollectionOccurred": false,
+        "observedCases": [],
+        "oracleQualified": false,
+        "reason": "actual-native-collection-observer-and-capture-join-unavailable",
+        "remainingJoins": [
+          "complete-native-collection-and-static-source-reconciliation-unavailable",
+          "qualified-interpreter-pytest-plugins-dependency-and-import-root-context-unavailable",
+          "trusted-unittest-phase/subtest-and-pytest-report-observer-unavailable",
+          "same-process/raw-host-capture-source-environment-setup-and-budget-join-unavailable"
+        ],
+        "synthetic": false,
+        "taskId": "python-01",
+        "taskOutcomeObserved": false,
+        "testsPassed": null
+      },
+      "candidateOutcomeObserved": true,
+      "casePhaseReportCoverageComplete": true,
+      "firstObservedCase": {
+        "id": "owned-synthetic::tests/test_local_star_count_fetch.py::FetchStarCountTests.test_fetcher_is_standalone_stdlib_only_and_has_fixed_api::slot-1",
+        "missingPhases": [],
+        "phases": [
+          {
+            "exception": null,
+            "outcome": "passed",
+            "phase": null
+          },
+          {
+            "exception": null,
+            "outcome": "passed",
+            "phase": null
+          },
+          {
+            "exception": null,
+            "outcome": "passed",
+            "phase": null
+          },
+          {
+            "exception": null,
+            "outcome": "passed",
+            "phase": null
+          }
+        ],
+        "subtests": [],
+        "suite": "root-unittest"
+      },
+      "name": "all-phase-starts-absent-and-all-phase-results-null",
+      "nullPhaseResults": 499,
+      "phaseStartsRemaining": 0,
+      "rawFixtureSha256": "3a72857a9d410bdabf8502820b9cf8a6618cfe647a3cb68cd16b954819b4d5e4",
+      "reason": "complete full semantic-union assertion outcome",
+      "testsPassed": true
+    }
+  ],
+  "newNativeDaemonNetworkProviderActions": 0,
+  "state": "independent-synthetic-phase-coverage-false-acceptances-reproduced"
+}

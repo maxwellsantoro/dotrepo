@@ -1,0 +1,133 @@
+{
+  "additionalInertGoSource": [
+    {
+      "bytes": 76654,
+      "container": "/tmp/dotrepo-f05-common-image-audit-9slpmcbi/filesystem-export.tar",
+      "path": "usr/local/go/src/cmd/go/internal/modload/init.go",
+      "sha256": "5040e805a75a74d54efd77dec873d7658e70a4ef1798cb174a7fffdc723f1382",
+      "spans": [
+        {
+          "excerpt": "// Most code should use Init and Enabled rather than use this directly.\n// It is exported mainly for Go toolchain switching, which must process\n// the go.work very early at startup.\nfunc (ld *Loader) FindGoWork(wd string) string {\n\tif ld.RootMode == NoRoot {\n\t\treturn \"\"\n\t}\n\n\tswitch gowork := cfg.Getenv(\"GOWORK\"); gowork {\n\tcase \"off\":\n\t\treturn \"\"\n\tcase \"\", \"auto\":\n\t\treturn findWorkspaceFile(wd)\n\tdefault:\n\t\tif !filepath.IsAbs(gowork) {\n\t\t\tbase.Fatalf(\"go: invalid GOWORK: not an absolute path\")\n\t\t}\n\t\treturn gowork\n\t}\n}",
+          "firstLine": 358,
+          "lastLine": 377
+        },
+        {
+          "excerpt": "func findWorkspaceFile(dir string) (root string) {\n\tif dir == \"\" {\n\t\tpanic(\"dir not set\")\n\t}\n\tdir = filepath.Clean(dir)\n\n\t// Look for enclosing go.mod.\n\tfor {\n\t\tf := filepath.Join(dir, \"go.work\")\n\t\tif fi, err := fsys.Stat(f); err == nil && !fi.IsDir() {\n\t\t\treturn f\n\t\t}\n\t\td := filepath.Dir(dir)\n\t\tif d == dir {\n\t\t\tbreak\n\t\t}\n\t\tif d == cfg.GOROOT {\n\t\t\t// As a special case, don't cross GOROOT to find a go.work file.\n\t\t\t// The standard library and commands built in go always use the vendored\n\t\t\t// dependencies, so avoid using a most likely irrelevant go.work file.\n\t\t\treturn \"\"\n\t\t}\n\t\tdir = d\n\t}\n\treturn \"\"\n}",
+          "firstLine": 1734,
+          "lastLine": 1759
+        }
+      ]
+    },
+    {
+      "bytes": 22272,
+      "container": "/tmp/dotrepo-f05-common-image-audit-9slpmcbi/filesystem-export.tar",
+      "path": "usr/local/go/src/cmd/go/internal/cfg/cfg.go",
+      "sha256": "8eb038ac6df168fe5af971cd768d99dd3c64224273072a4160dcc5f51eacae9d",
+      "spans": [
+        {
+          "excerpt": "func defaultContext() build.Context {\n\tctxt := build.Default\n\n\tctxt.JoinPath = filepath.Join // back door to say \"do not use go command\"\n\n\t// Override defaults computed in go/build with defaults\n\t// from go environment configuration file, if known.\n\tctxt.GOPATH, GOPATHChanged = EnvOrAndChanged(\"GOPATH\", gopath(ctxt))\n\tctxt.GOOS = Goos\n\tctxt.GOARCH = Goarch\n\n\t// Clear the GOEXPERIMENT-based tool tags, which we will recompute later.\n\tvar save []string\n\tfor _, tag := range ctxt.ToolTags {\n\t\tif !strings.HasPrefix(tag, \"goexperiment.\") {\n\t\t\tsave = append(save, tag)\n\t\t}\n\t}\n\tctxt.ToolTags = save\n\n\t// The go/build rule for whether cgo is enabled is:\n\t//  1. If $CGO_ENABLED is set, respect it.\n\t//  2. Otherwise, if this is a cross-compile, disable cgo.\n\t//  3. Otherwise, use built-in default for GOOS/GOARCH.\n\t//\n\t// Recreate that logic here with the new GOOS/GOARCH setting.\n\t// We need to run steps 2 and 3 to determine what the default value\n\t// of CgoEnabled would be for computing CGOChanged.\n\tdefaultCgoEnabled := false\n\tif buildcfg.DefaultCGO_ENABLED == \"1\" {\n\t\tdefaultCgoEnabled = true\n\t} else if buildcfg.DefaultCGO_ENABLED == \"0\" {\n\t} else if runtime.GOARCH == ctxt.GOARCH && runtime.GOOS == ctxt.GOOS {\n\t\tdefaultCgoEnabled = platform.CgoSupported(ctxt.GOOS, ctxt.GOARCH)\n\t\t// Use built-in default cgo setting for GOOS/GOARCH.\n\t\t// Note that ctxt.GOOS/GOARCH are derived from the preference list\n\t\t// (1) environment, (2) go/env file, (3) runtime constants,\n\t\t// while go/build.Default.GOOS/GOARCH are derived from the preference list\n\t\t// (1) environment, (2) runtime constants.\n\t\t//\n\t\t// We know ctxt.GOOS/GOARCH == runtime.GOOS/GOARCH;\n\t\t// no matter how that happened, go/build.Default will make the\n\t\t// same decision (either the environment variables are set explicitly\n\t\t// to match the runtime constants, or else they are unset, in which\n\t\t// case go/build falls back to the runtime constants), so\n\t\t// go/build.Default.GOOS/GOARCH == runtime.GOOS/GOARCH.\n\t\t// So ctxt.CgoEnabled (== go/build.Default.CgoEnabled) is correct\n\t\t// as is and can be left unmodified.\n\t\t//\n\t\t// All that said, starting in Go 1.20 we layer one more rule\n\t\t// on top of the go/build decision: if CC is unset and\n\t\t// the default C compiler we'd look for is not in the PATH,\n\t\t// we automatically default cgo to off.\n\t\t// This makes go builds work automatically on systems\n\t\t// without a C compiler installed.\n\t\tif ctxt.CgoEnabled {\n\t\t\tif os.Getenv(\"CC\") == \"\" {\n\t\t\t\tcc := DefaultCC(ctxt.GOOS, ctxt.GOARCH)\n\t\t\t\tif _, err := pathcache.LookPath(cc); err != nil {\n\t\t\t\t\tdefaultCgoEnabled = false\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\tctxt.CgoEnabled = defaultCgoEnabled\n\tif v := Getenv(\"CGO_ENABLED\"); v == \"0\" || v == \"1\" {\n\t\tctxt.CgoEnabled = v[0] == '1'\n\t}\n\tCGOChanged = ctxt.CgoEnabled != defaultCgoEnabled",
+          "firstLine": 116,
+          "lastLine": 184
+        },
+        {
+          "excerpt": "func EnvFile() (string, bool, error) {\n\tif file := os.Getenv(\"GOENV\"); file != \"\" {\n\t\tif file == \"off\" {\n\t\t\treturn \"\", false, fmt.Errorf(\"GOENV=off\")\n\t\t}\n\t\treturn file, true, nil\n\t}\n\tdir, err := os.UserConfigDir()\n\tif err != nil {\n\t\treturn \"\", false, err\n\t}\n\tif dir == \"\" {\n\t\treturn \"\", false, fmt.Errorf(\"missing user-config dir\")\n\t}\n\treturn filepath.Join(dir, \"go/env\"), false, nil\n}\n\nfunc initEnvCache() {\n\tenvCache.m = make(map[string]string)\n\tenvCache.goroot = make(map[string]string)\n\tif file, _, _ := EnvFile(); file != \"\" {\n\t\treadEnvFile(file, \"user\")\n\t}\n\tgoroot := findGOROOT(envCache.m[\"GOROOT\"])\n\tif goroot != \"\" {\n\t\treadEnvFile(filepath.Join(goroot, \"go.env\"), \"GOROOT\")\n\t}\n\n\t// Save the goroot for func init calling SetGOROOT,\n\t// and also overwrite anything that might have been in go.env.\n\t// It makes no sense for GOROOT/go.env to specify\n\t// a different GOROOT.\n\tenvCache.m[\"GOROOT\"] = goroot\n}\n\nfunc readEnvFile(file string, source string) {",
+          "firstLine": 344,
+          "lastLine": 379
+        },
+        {
+          "excerpt": "func Getenv(key string) string {\n\tif !CanGetenv(key) {\n\t\tswitch key {\n\t\tcase \"CGO_TEST_ALLOW\", \"CGO_TEST_DISALLOW\", \"CGO_test_ALLOW\", \"CGO_test_DISALLOW\":\n\t\t\t// used by internal/work/security_test.go; allow\n\t\tdefault:\n\t\t\tpanic(\"internal error: invalid Getenv \" + key)\n\t\t}\n\t}\n\tval := os.Getenv(key)\n\tif val != \"\" {\n\t\treturn val\n\t}\n\tenvCache.once.Do(initEnvCache)\n\treturn envCache.m[key]",
+          "firstLine": 428,
+          "lastLine": 442
+        }
+      ]
+    },
+    {
+      "bytes": 505,
+      "container": "/tmp/dotrepo-f05-common-image-audit-9slpmcbi/filesystem-export.tar",
+      "path": "usr/local/go/go.env",
+      "sha256": "98fcab78e155e9fa0c36b18874add30724d04c2452078117c78618107ebfbc9e",
+      "spans": [
+        {
+          "excerpt": "# This file contains the initial defaults for go command configuration.\n# Values set by 'go env -w' and written to the user's go/env file override these.\n# The environment overrides everything else.\n\n# Use the Go module mirror and checksum database by default.\n# See https://proxy.golang.org for details.\nGOPROXY=https://proxy.golang.org,direct\nGOSUMDB=sum.golang.org\n\n# Automatically download newer toolchains as directed by go.mod files.\n# See https://go.dev/doc/toolchain for details.\nGOTOOLCHAIN=auto",
+          "firstLine": 1,
+          "lastLine": 12
+        }
+      ]
+    }
+  ],
+  "baseCommit": "5d31296dce2d692c34d05dd2bfcd637e8a7e74ce",
+  "boundInputs": [
+    {
+      "bytes": 5043,
+      "path": "/tmp/dotrepo-go01-launch-closure-audit-20261029/report.json",
+      "sha256": "d20f22053c507e81b8cc9f0e1f992add327011865329dafbc103286f952df1fa"
+    },
+    {
+      "bytes": 4664,
+      "path": "/tmp/dotrepo-go01-launch-closure-audit-20261029/route-map.json",
+      "sha256": "cd84f9317a23b4ed3376f29409ba15484a6369ee3ea94d0dc1c6d9353c09359a"
+    },
+    {
+      "bytes": 46051,
+      "path": "/tmp/dotrepo-go01-launch-closure-audit-20261029/source-spans.json",
+      "sha256": "148eb090af21eb61988c908616fc08ce91f55ebdea22dbaca656cb8265ac5531"
+    },
+    {
+      "bytes": 3243,
+      "path": "/tmp/dotrepo-go01-launch-closure-audit-20261029/bindings.json",
+      "sha256": "c552fce4a0d231ef493572ae3af1f4e9ca04883888221da220e6f81322d9c788"
+    },
+    {
+      "bytes": 8147,
+      "path": "/tmp/dotrepo-go01-next-producer-plan-review-20261029/review.json",
+      "sha256": "ef501cd7f68ca4878a2eadfc127191b749ec6b91072fa8c038d2ab1bbfac85ec"
+    },
+    {
+      "bytes": 7542,
+      "path": "/tmp/dotrepo-go01-next-producer-plan-review-20261029/source-verification.json",
+      "sha256": "76809caf92e12187a717698908ab35fd0f71d72458cab6a43ecbd6e5c0342b05"
+    },
+    {
+      "bytes": 67272,
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/bench/agent_runtime.py",
+      "sha256": "dc585e08f24e1a20da9d9ccdafac4af3f4e10cb8451de7ca3a74c05ecc985fa0"
+    },
+    {
+      "bytes": 21684,
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/bench/event_capture.py",
+      "sha256": "ffe5b5e27aaca28bceae83aac15bfeb5e83963eef63a3b2f41c97833787b4a12"
+    },
+    {
+      "bytes": 25064,
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-3/amendment-1/adapter.py",
+      "sha256": "30e3e3cecb357d5f903f42e0532c2f86a5cb16cf6714ddc9c643bcf86e5b70a4"
+    },
+    {
+      "bytes": 3037,
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-3/amendment-1/FREEZE.json",
+      "sha256": "bad0a161c9d84d923e0431dfac39d20dcd03a0d5fe916ce19e56c96e89c8768f"
+    },
+    {
+      "bytes": 2384,
+      "path": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-3/remaining-joins.json",
+      "sha256": "963822380b332d79ec531b63b024a1f6d53d31858b5e16bb07c104438e4576ae"
+    }
+  ],
+  "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+  "oldSourceSubjectsUnchanged": {
+    "benchmarks/head-to-head/bench/agent_runtime.py": true,
+    "benchmarks/head-to-head/bench/event_capture.py": true,
+    "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-3/amendment-1/FREEZE.json": true,
+    "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-3/amendment-1/adapter.py": true,
+    "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-3/amendment-1/plan.json": true,
+    "benchmarks/head-to-head/f05-go01-oracle-preparation-20261029/amendment-3/remaining-joins.json": true,
+    "benchmarks/head-to-head/f05-go01-source-oracle-decision-20261029/FREEZE.json": true,
+    "benchmarks/head-to-head/f05-go01-source-registry-result-20261029/FREEZE.json": true
+  },
+  "predecessors": {
+    "/tmp/dotrepo-go01-launch-closure-audit-20261029/FREEZE.json": "d07c8bd475cd7bf17127358c51c837c4078fe929adeac5b06597a48f6a698a94",
+    "/tmp/dotrepo-go01-next-producer-plan-20261029/FREEZE.json": "961c3135dd3fc7751774fce9822f9afd4e72f6103001eafdaac2143e5a7915e1",
+    "/tmp/dotrepo-go01-next-producer-plan-review-20261029/FREEZE.json": "218ca8151f490e514a4a5fdd96bc15d288616f68dec69c7f2f7026c383bfd715"
+  },
+  "upstreamSourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f"
+}

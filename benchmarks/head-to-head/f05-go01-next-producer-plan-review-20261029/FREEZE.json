@@ -1,0 +1,33 @@
+{
+  "artifacts": {
+    "README.md": {
+      "bytes": 1947,
+      "sha256": "af7713a860fccbcf5e23504846276b706de9a783568b04e2dd85e772d0478e7b"
+    },
+    "development-observation.json": {
+      "bytes": 351,
+      "sha256": "0cbb8bfb1161b58263a1f2cb1f956893eecc16bdb4d7900a23ea707b352f47da"
+    },
+    "review.json": {
+      "bytes": 8147,
+      "sha256": "ef501cd7f68ca4878a2eadfc127191b749ec6b91072fa8c038d2ab1bbfac85ec"
+    },
+    "source-verification.json": {
+      "bytes": 7542,
+      "sha256": "76809caf92e12187a717698908ab35fd0f71d72458cab6a43ecbd6e5c0342b05"
+    }
+  },
+  "campaignAdmitted": false,
+  "decision": "needs-exact-inputs",
+  "executionAuthorized": false,
+  "nativeTaskAdmitted": false,
+  "newRuntimeActions": 0,
+  "oracleQualified": false,
+  "state": "independent-prospective-producer-plan-review-frozen",
+  "subject": {
+    "freezeSha256": "961c3135dd3fc7751774fce9822f9afd4e72f6103001eafdaac2143e5a7915e1",
+    "identity": "go01-next-producer-proposal-20261029",
+    "planSha256": "0f84cfe0d90985e5e5fe235b880a9c4d4cc23c8081ee3f25d17f1cf99b5e9192",
+    "sourcesSha256": "6398b89ba8ba043fd2875acfa11130662dc55517428eaef1fc9b69f992c34472"
+  }
+}

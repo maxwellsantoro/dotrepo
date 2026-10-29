@@ -1,0 +1,87 @@
+{
+  "actualAdmission": false,
+  "commands": [
+    {
+      "argv": [
+        "uv",
+        "run",
+        "python",
+        "-B",
+        "controls.py",
+        "--output",
+        "controls.json"
+      ],
+      "checks": 73,
+      "exitCode": 0
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "python",
+        "-B",
+        "guard_controls.py",
+        "--parent",
+        "<original-packet>",
+        "--output",
+        "guard-controls.json"
+      ],
+      "checks": 45,
+      "exitCode": 0
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "python",
+        "-B",
+        "portability_controls.py",
+        "--repo-root",
+        "<declared-repository>",
+        "--parent",
+        "<original-packet>",
+        "--archive",
+        "<explicit-retained-source.tar>",
+        "--output",
+        "portability-controls.json"
+      ],
+      "checks": 8,
+      "exitCode": 0
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "ruff",
+        "check",
+        "--no-cache",
+        "oracle.py",
+        "controls.py",
+        "guard_controls.py",
+        "derive_fixture.py",
+        "verify.py",
+        "portability_controls.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "ruff",
+        "format",
+        "--check",
+        "--no-cache",
+        "oracle.py",
+        "controls.py",
+        "guard_controls.py",
+        "derive_fixture.py",
+        "verify.py",
+        "portability_controls.py"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "sourceOrNativeExecution": false,
+  "state": "focused-owned-controls-only"
+}

@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- Prepare a full-union Python task phase scorer with explicit synthetic source
+  slots, retaining the original null-phase false acceptance before correcting
+  phase-start validation. Keep native collection and trusted capture unresolved;
+  portable verification binds retained historical and observed inputs separately.
+- Accept the frozen experiment image's inherited `GOENV=off` and
+  `GOTOOLCHAIN=local` without widening caller environment overrides or adding
+  container flags. Reject malformed, duplicate, unknown and unsafe image
+  environment entries before container creation; retain mocked before/after
+  controls separately from actual task qualification.
 - Retain one normal npm setup observation in an offline container for the frozen
   Go-01 task, with source/cache bindings, lifecycle logs, package/bin-link
   observations and cleanup receipts. Preserve the published compiler-payload

@@ -1,0 +1,110 @@
+{
+  "sources": [
+    {
+      "path": "tools/scripts/gen/generatedFile.mts",
+      "area": "repository-source",
+      "container": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar",
+      "sha256": "13340b8675f336f9ef342c8a2f57b3fc3d77f0dcefe064accaf2d5514c5b4215",
+      "bytes": 2901
+    },
+    {
+      "path": "tools/scripts/tsc/schema.ts",
+      "area": "repository-source",
+      "container": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar",
+      "sha256": "d7eba663a9da2389bd4762723b5b73974892d93a7a4f0448039f6cfab3d8c30a",
+      "bytes": 45363
+    },
+    {
+      "path": "tools/scripts/tsc/generate-options.ts",
+      "area": "repository-source",
+      "container": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar",
+      "sha256": "5462d60c90ead72086372712b91b9fd1397015e705a974f290eb8546d48de42a",
+      "bytes": 40452
+    },
+    {
+      "path": "tools/scripts/tsc/options.ts",
+      "area": "repository-source",
+      "container": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar",
+      "sha256": "9bfa4f217b3b957647f42ccb242f6cf08e6d99ab19eabef6dafad6b175ecbf01",
+      "bytes": 100896
+    },
+    {
+      "path": "package/dist/cli.js",
+      "area": "npm-source/hereby",
+      "container": "/private/tmp/dotrepo-go01-dependency-download-cache-20261029-1/cache.tar::npm-cache/_cacache/content-v2/sha512/b5/90/95e36bb3a2a6d773992f7ecf7eeb19196bea6087602d091ac5d675dec8ec21c3e9818d7611c975f8b68905a50ecd545d8307535b13a66fb50f57df9c2904",
+      "sha256": "2db010ee65d343b91cdbc5244e806d108d1ae35488aeae37f2112ff1663edb86",
+      "bytes": 305
+    },
+    {
+      "path": "package/dist/cli/loadHerebyfile.js",
+      "area": "npm-source/hereby",
+      "container": "/private/tmp/dotrepo-go01-dependency-download-cache-20261029-1/cache.tar::npm-cache/_cacache/content-v2/sha512/b5/90/95e36bb3a2a6d773992f7ecf7eeb19196bea6087602d091ac5d675dec8ec21c3e9818d7611c975f8b68905a50ecd545d8307535b13a66fb50f57df9c2904",
+      "sha256": "e51e3f887f8da9df3cd15b3aa764cf879c95f43e04ecfe26ef523fa47ecd12b0",
+      "bytes": 3382
+    },
+    {
+      "path": "package/dist/cli/parseArgs.js",
+      "area": "npm-source/hereby",
+      "container": "/private/tmp/dotrepo-go01-dependency-download-cache-20261029-1/cache.tar::npm-cache/_cacache/content-v2/sha512/b5/90/95e36bb3a2a6d773992f7ecf7eeb19196bea6087602d091ac5d675dec8ec21c3e9818d7611c975f8b68905a50ecd545d8307535b13a66fb50f57df9c2904",
+      "sha256": "bdfdd528af2d6e780913956bd6d69ce925bed87c055b7eda14f7cb69d149abf3",
+      "bytes": 2319
+    },
+    {
+      "path": "package/dist/cli/runner.js",
+      "area": "npm-source/hereby",
+      "container": "/private/tmp/dotrepo-go01-dependency-download-cache-20261029-1/cache.tar::npm-cache/_cacache/content-v2/sha512/b5/90/95e36bb3a2a6d773992f7ecf7eeb19196bea6087602d091ac5d675dec8ec21c3e9818d7611c975f8b68905a50ecd545d8307535b13a66fb50f57df9c2904",
+      "sha256": "860bb1305702095e8dcbf750e6c7f7225abb8dd5a97db576ffdc768f9ebeece2",
+      "bytes": 1962
+    },
+    {
+      "path": "package/dist/cli/utils.js",
+      "area": "npm-source/hereby",
+      "container": "/private/tmp/dotrepo-go01-dependency-download-cache-20261029-1/cache.tar::npm-cache/_cacache/content-v2/sha512/b5/90/95e36bb3a2a6d773992f7ecf7eeb19196bea6087602d091ac5d675dec8ec21c3e9818d7611c975f8b68905a50ecd545d8307535b13a66fb50f57df9c2904",
+      "sha256": "2c0cc6c0f2f5b1bd4fe3699a4ce3c9dc679baa44b59605910282d1277cb464ff",
+      "bytes": 3507
+    },
+    {
+      "path": "package/dist/cli/style.js",
+      "area": "npm-source/hereby",
+      "container": "/private/tmp/dotrepo-go01-dependency-download-cache-20261029-1/cache.tar::npm-cache/_cacache/content-v2/sha512/b5/90/95e36bb3a2a6d773992f7ecf7eeb19196bea6087602d091ac5d675dec8ec21c3e9818d7611c975f8b68905a50ecd545d8307535b13a66fb50f57df9c2904",
+      "sha256": "07238d7e7784c0be9655a42d0371a53c624e1b85b7676b0a6cf1f6c383700760",
+      "bytes": 1300
+    },
+    {
+      "path": "package/dist/index.js",
+      "area": "npm-source/hereby",
+      "container": "/private/tmp/dotrepo-go01-dependency-download-cache-20261029-1/cache.tar::npm-cache/_cacache/content-v2/sha512/b5/90/95e36bb3a2a6d773992f7ecf7eeb19196bea6087602d091ac5d675dec8ec21c3e9818d7611c975f8b68905a50ecd545d8307535b13a66fb50f57df9c2904",
+      "sha256": "bdd91091a228ea8d6becc077d13311602be5bd36be09a33e9f09100113daf2b1",
+      "bytes": 1853
+    },
+    {
+      "path": "package/src/target.js",
+      "area": "npm-source/@vscode/vsce-sign",
+      "container": "/private/tmp/dotrepo-go01-dependency-download-cache-20261029-1/cache.tar::npm-cache/_cacache/content-v2/sha512/f4/04/2ba9aceb0604e0452bb095e2d55d4ac8529858d36fd21428764ca6282d5ff189f24075b961766126c39814ad848f437b11c0db3d8b208c0f5e2c013104ea",
+      "sha256": "4b03b6f1342d16b473596f727bae8bb63a68d8fc9b172f0bbe45aa724cad4178",
+      "bytes": 3061
+    },
+    {
+      "path": "package/src/permissions.js",
+      "area": "npm-source/@vscode/vsce-sign",
+      "container": "/private/tmp/dotrepo-go01-dependency-download-cache-20261029-1/cache.tar::npm-cache/_cacache/content-v2/sha512/f4/04/2ba9aceb0604e0452bb095e2d55d4ac8529858d36fd21428764ca6282d5ff189f24075b961766126c39814ad848f437b11c0db3d8b208c0f5e2c013104ea",
+      "sha256": "ee98958a5cfd1e7153c11518332c086a0200f178ef644e99e566865bf39dc8e8",
+      "bytes": 1191
+    },
+    {
+      "path": "package/install.cjs",
+      "area": "npm-source/dprint",
+      "container": "/private/tmp/dotrepo-go01-dependency-download-cache-20261029-1/cache.tar::npm-cache/_cacache/content-v2/sha512/8a/2a/2b81f26bad5ec30dfed2f4007f779641e7d267e6274c0d0a14ee8e87f66e80bc655a2c03eb19302c9664f0ca491fb7d0986d6cea52b2a398a4fcd0a5a600",
+      "sha256": "30c93a4ac2fbb7e35b01c6322c1d64941b847d61ee510ef2ed43962a491a79d8",
+      "bytes": 197
+    },
+    {
+      "path": "package/bin.cjs",
+      "area": "npm-source/dprint",
+      "container": "/private/tmp/dotrepo-go01-dependency-download-cache-20261029-1/cache.tar::npm-cache/_cacache/content-v2/sha512/8a/2a/2b81f26bad5ec30dfed2f4007f779641e7d267e6274c0d0a14ee8e87f66e80bc655a2c03eb19302c9664f0ca491fb7d0986d6cea52b2a398a4fcd0a5a600",
+      "sha256": "f937afc1e9c45d4fb3e26a9900a96681a8d048e03466648d0ce38c7db4cf4198",
+      "bytes": 1066
+    }
+  ],
+  "scope": "Selected local static import and launcher/hook frontier; no package execution"
+}

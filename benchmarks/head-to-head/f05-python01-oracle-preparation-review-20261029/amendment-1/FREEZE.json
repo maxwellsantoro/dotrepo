@@ -1,0 +1,64 @@
+{
+  "artifacts": {
+    "README.md": {
+      "bytes": 1826,
+      "sha256": "306911ef9e5175483f889c77592693312f1f06b2b3a11ef210e81ad87201663e"
+    },
+    "author-controls-replay.json": {
+      "bytes": 34204,
+      "sha256": "b2fea305c8a656c69aa18fb0a5ae7c2fc1e16758eb4e4fcc61926b33ed38aebd"
+    },
+    "author-guard-controls-replay.json": {
+      "bytes": 985418,
+      "sha256": "96b6c94054d03600816b5668c692e752c5a9abfe83539d52aab25eef04fc20b5"
+    },
+    "author-portability-controls-replay.json": {
+      "bytes": 4945,
+      "sha256": "79a12aa3622060b95af5ce72d79f85335ff798474aa38b0804ffc8df369a86d0"
+    },
+    "author-replay-receipts.json": {
+      "bytes": 2908,
+      "sha256": "d4c90544e3c41c366ccb105ed19eeca02b730c12de9efdbcdf4177780699d327"
+    },
+    "challenge.json": {
+      "bytes": 12388,
+      "sha256": "91a9c0e1360ee56d464981ceb3693520ea8f03c1f9fabc7ee7fcda9bfe4c33f1"
+    },
+    "challenge.py": {
+      "bytes": 5972,
+      "sha256": "50ee927e639a282ce036d4ae14500a7f9aa41bdabb19d6d33f7f4168777ca5b2"
+    },
+    "integrity-and-checks.json": {
+      "bytes": 1827,
+      "sha256": "73418afa45f625dbc21d88224201877ac7a7ad984362e9811d41a2e8a80c30d4"
+    },
+    "portability-challenge.json": {
+      "bytes": 4456,
+      "sha256": "89f0aa276d7fa4df3310480d4feee6b76e5addacc4afecfd570227658fc0b020"
+    },
+    "portability_challenge.py": {
+      "bytes": 6765,
+      "sha256": "d613a179642ab93e692fc2cde942755080fdc20369a3b741d5585d6cbc5cbc6f"
+    },
+    "review.json": {
+      "bytes": 4318,
+      "sha256": "155eeb4e5a9e4fe8702462a9cde3df746dc7c2949f209b1f79e3b34e287f61f9"
+    }
+  },
+  "beforeReviewFreezeSha256": "493079b480bbcb96601dab5f076859071cb3e6d4a2870c48759b97a69d61b9d0",
+  "campaignAdmitted": false,
+  "executionAuthorized": false,
+  "findings": [],
+  "newRuntimeActions": 0,
+  "oracleQualified": false,
+  "state": "independent-python01-oracle-preparation-after-review-frozen",
+  "subject": {
+    "authorFreezeSha256": "994f8d9b6196252b763dbb56756dcb96b5c82b61c000164c71bbad23bdcef893",
+    "deriveSha256": "a7cd940be9c036ec0d44ed50df17f14b51787d91ebafe70e5a2427a84ddf4445",
+    "identity": "python01-oracle-preparation-amendment-1",
+    "oracleSha256": "d8c7c0772a4cd88b0490aea863cabc8fdc7e2e00293572bb403cfbc0c50f0114",
+    "planSha256": "a1326fd1b56cec4ed86940df9cd5a47b1c892abac434b7ee2fd2e6abb5d1af10",
+    "verifySha256": "bc9bb4bb51d61cd854da126b0c0c510bd9b497d56c1b0cda4053aca2a36f1a17"
+  },
+  "taskOutcomeObserved": false
+}

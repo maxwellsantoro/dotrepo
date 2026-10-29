@@ -1,0 +1,66 @@
+{
+  "boundInputs": 11,
+  "campaignAdmitted": false,
+  "executionAuthorized": false,
+  "fullSourceTree": {
+    "bytes": 218783760,
+    "canonicalBytes": 11387678,
+    "canonicalSha256": "3d1bcf462a9d4360bf62d2bdd667f3c6914bf5b76e83e760889459eb179d4941",
+    "implicitDirectoriesIncludingRoot": 724,
+    "note": "Data-only derivation from full regular source tar; no actual checkout observer executed.",
+    "regularFiles": 68062
+  },
+  "nativeTaskAdmitted": false,
+  "newDaemonNativeGoNodeNetworkPackageProviderActions": 0,
+  "oracleQualified": false,
+  "runtimeEnvironmentCompatibility": {
+    "actualImageEnv": [
+      "PATH=/usr/local/cargo/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "RUSTUP_HOME=/usr/local/rustup",
+      "CARGO_HOME=/usr/local/cargo",
+      "GOTOOLCHAIN=local",
+      "GOENV=off"
+    ],
+    "currentProvisionWouldRefuse": true,
+    "currentRuntimeNonAllowlistedImageValues": {
+      "GOENV": "off",
+      "GOTOOLCHAIN": "local"
+    },
+    "imageId": "sha256:b47cd4a5061d271780bab25aa2637c2623dc675bd43380fc80cb65ec44e50092",
+    "imageInspectPath": "/Users/maxwell/projects/agent/dotrepo/benchmarks/head-to-head/f05-dependency-preparation-20261029/image-attempt-3/logs/image-inspect/stdout.txt",
+    "imageInspectSha256": "4c6fa72b8b05b95a719110e0f7fa705758c224e253cf8c7cdf881218ea4f1913",
+    "newlyInjectedConfigValues": false
+  },
+  "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+  "sourceManifest": {
+    "auditedRoutes": 17,
+    "exactBytesHashAndModeMatched": true,
+    "extraWorkspaceModuleManifests": 8,
+    "files": 5326,
+    "packagePaths": 5301
+  },
+  "sourceManifestSha256": "1aa9a9b376e1249cd7f0a26e80e18b2d4eba449d2deca7cb653bb3353677e6fc",
+  "state": "independent-data-closure-and-prerequisite-checks-complete",
+  "verifiedFreezes": [
+    {
+      "artifacts": 4,
+      "path": "/tmp/dotrepo-go01-next-producer-plan-20261029/amendment-1/FREEZE.json",
+      "sha256": "6d7effae1a7c9253c2bb6d3c892182a684b33b63c81146e8d734c02dc55371f7"
+    },
+    {
+      "artifacts": 3,
+      "path": "/tmp/dotrepo-go01-next-producer-plan-20261029/FREEZE.json",
+      "sha256": "961c3135dd3fc7751774fce9822f9afd4e72f6103001eafdaac2143e5a7915e1"
+    },
+    {
+      "artifacts": 4,
+      "path": "/tmp/dotrepo-go01-next-producer-plan-review-20261029/FREEZE.json",
+      "sha256": "218ca8151f490e514a4a5fdd96bc15d288616f68dec69c7f2f7026c383bfd715"
+    },
+    {
+      "artifacts": 90,
+      "path": "/tmp/dotrepo-go01-launch-closure-audit-20261029/FREEZE.json",
+      "sha256": "d07c8bd475cd7bf17127358c51c837c4078fe929adeac5b06597a48f6a698a94"
+    }
+  ]
+}

@@ -1,0 +1,166 @@
+{
+  "actualAdmission": false,
+  "baseCommit": "5d31296dce2d692c34d05dd2bfcd637e8a7e74ce",
+  "boundsAndFairness": {
+    "calls": "No new probe calls: batch new observations in existing witness-before/after. Current no-event setup path uses6aux calls (inspect2,probe2,baseline1,event-metadata1)+chosen-process1; regular-event task uses8aux (same6 plus tar1/final-event-metadata1)+chosen-process1. Selected setup+task pair thus16daemon requests excluding existing provisioning/cleanup, not16new calls. Each remains under its existing configured maxRequests (absolute helper ceiling16); counts/deadlines verified from receipts, not assumed. Intervening shell operations keep their same independent caps and count toward session effort.",
+    "estimatedOldFramingSourceBytes": 840715,
+    "eventsAndProcess": "Unchanged configured event/capture/process caps; helper absolute ceilings256MiBevent/512MiBcapture are NOT new authorization to raise lower frozen settings. Repeated event bytes+tar, metadata, stdin and outputs all count; effective room may be lower than nominal event cap. Preserve raw truncation/deadline/cancellation failures.",
+    "fairness": "Same generic capture/observer source/config and limits in both arms. Host-only expected maps/commands are used posthoc; shell permissions and agent command choice unchanged. Count observation/dependency/source hashing, setup and producer build transport/time as total effort; unknown actual cost null until metered. No source/gold answers in agent-readable observer source.",
+    "metadata": "Single combined before/after payload <=2MiB or lower configured maxMetadataBytes. Compact source rows use host manifest ordinals; env<=64KiB, config raw<=256KiB aggregate, resolution<=128KiB/<=512candidates, summaries/header<=64KiB. Whole-tree canonical rows are streamed internally into digest, never11.4MiB dumped. If combined payload/caps do not fit, record incomplete; do not raise cap.",
+    "resources": "No resource/model/campaign changes: exact image,3CPU4GiB256PID8GiBworkspace512MiBtmp,none-network,readonly root,private isolation,no mounts/grants. All observations/setup/task spend existing session remaining wall time and chosen operation deadline; no extra900s/cleanup allowance is introduced.",
+    "sourceFiles": 5326,
+    "sourceFilesLimit": 10000
+  },
+  "campaignAdmitted": false,
+  "concreteChanges": {
+    "adapter": "Posthoc reference two existing host shell-operation captures (normal setup, full unchanged task), same session/container/source/image/runtime/config with ordered raw receipts. Recheck installed/config/source state at task start after intervening calls. Verify fresh producer transition; derive exact tools-cwd build and tsc-cwd test argv/env/resolution; compare effective selection with source expectation. Preserve all hierarchy/skip/lifecycle gates; no caller-supplied setup/context booleans qualify. Missing closure/refused observation => incomplete/unqualified.",
+    "capture": "Replace/extend existing bounded witness payload, not launcher. Same shell operation and exact command argv continue through current execute callback. Add host-private compact tree/config/path/envelope observations to existing witness-before/witness-after probe slots; keep sourceFiles and event export semantics. Retain raw probe stdout/stderr, exact observer source/config hashes and same operation deadline/accounting. Generic observations run identically for both arms and do not test command identity before execution.",
+    "configuration": "Add a private finite producerWitness spec: source-files.json identity, roots/role exclusions, allowed config candidates/paths/byte caps, resolution candidates/chain bounds and observer hash. Expected commands/map/source hashes/role adjudication stay host-side; no hidden gold or expected tests in agent-readable observer code. This needs no public protocol or generic executor.",
+    "normalSetup": "Candidate existing reviewed route npm ci --offline --foreground-scripts; preserve ordinary hooks. Exact setup acceptance stays prospective and source-scoped. Existing capture can retain its no-event outcome: use validated process/inspect/witness fields for setup, without inventing task event success or demanding an event file for npm."
+  },
+  "costUsd": null,
+  "executionAuthorized": false,
+  "finiteInventory": {
+    "canonicalRows": "Relative path UTF8 without normalization, sorted lexicographically by unsigned UTF8 bytes; duplicate or invalid UTF8 path refuses. Each record is compact UTF8 JSON plus LF with no ASCII escaping: directory[path,\"directory\"], file[path,\"file\",lowercaseSHA256,integerBytes,mode&0111], link[path,\"symlink\",literalTarget]. Root path is \".\". No followed-link recursion, no hardlink/device/socket support. File read uses bounded streaming with before/after stat consistency; observation snapshots are not inter-observation immutability proof.",
+    "initial": "Full regular source archive has68062files/218783760bytes;724implicit directories including root. Exact canonical baseline digest/counts are in source-files.json, not a claim a container observer ran.",
+    "limits": "Per scan <=200000entries,<=2GiB streamed total regular bytes,<=128MiB/file,<=1024UTF8bytes/path,<=16symlink hops for separate resolver; reject limits, mutation errors or unknown types. These are bounded observer limits, not new resources. Installed/source/output scans share these ceilings, existing request/session byte budgets and remaining deadline; no timing success presumed.",
+    "outsideRepository": "HOME/tmp/module/build/npm caches are existing writable environment state, not source-invariant exemptions. Observe the concrete config/resolution inputs there. Do not require equality of ordinary build caches/tmp; do not export them as campaign cache. Any selected Go workspace/replacement/input outside frozen roots needs explicit existing source binding or qualification refuses.",
+    "roles": [
+      {
+        "paths": [
+          "node_modules",
+          "packages/typescript/node_modules",
+          "packages/vscode-typescript/node_modules",
+          "packages/vscode-typescript-nightly/node_modules"
+        ],
+        "role": "installed-dependencies",
+        "setupRule": "creation/content/link/optional-hook changes allowed only as derived from frozen package-lock/workspace/platform/hook setup; installed launcher/hook material requires exact role rows",
+        "taskRule": "whole installed-role canonical digest must match setup-after at task-before and task-after; no wildcard exemption for tsc/node_modules or tools/node_modules"
+      },
+      {
+        "paths": [
+          "tsc/testdata/baselines/local"
+        ],
+        "role": "maintainer-declared-local-test-output",
+        "setupRule": "expected absent",
+        "taskRule": "Hereby reset/create/write allowed; record full role digest/count/bytes; reference baselines and other testdata remain invariant; no narrowed test success inferred"
+      },
+      {
+        "paths": [
+          "tools/gotestsum",
+          "tools/gotestsum.hash"
+        ],
+        "role": "fresh-source-owned-producer-output",
+        "setupRule": "must remain absent",
+        "taskRule": "only exact binary+cache transition accepted through source/cache/process proof; no entire tools-directory exemption"
+      },
+      {
+        "paths": [
+          "go.work.sum"
+        ],
+        "role": "Go-generated-dependency-integrity-output",
+        "setupRule": "initial absence recorded",
+        "taskRule": "creation may be recorded as dynamic integrity data, raw<=256KiB retained; not ignored or called unchanged. It must be tied to unchanged workspace/modules and already-bound module bytes; if dependency/provenance consistency cannot be established, result is unqualified. Updates to go.mod/go.sum remain source changes, not silently legitimate."
+      }
+    ],
+    "sourceInvariant": "Enumerate entire repository current tree, not only old selected paths. Exclude only precisely named role roots below, while retaining their parent directories in the invariant. Initial archive has no role output paths. New source/config/package/testdata outside named roles changes the digest and refuses old expectation. Node_modules is NOT excluded at arbitrary depth."
+  },
+  "gatesBeforeImplementation": [
+    "Independent review of this finite private metadata/role/derivation contract and source-files manifest; no flags/admission change authorized by plan",
+    "Resolve missing source audits below OR explicitly keep affected joins unqualified during generic observer/adapter preparation. Do not label currently conditional closure complete.",
+    "Root separately assigns narrow existing capture/config/adapter files and frozen synthetic controls; Node data-only observer validation would require explicit authorization, as in earlier owned controls. No runtime/daemon/upstream task permission follows."
+  ],
+  "identity": "go01-next-producer-contract-amendment-1",
+  "implementationPresent": false,
+  "launchAndContext": {
+    "configCorrection": "Actual npm11.19.1 config set-envs48\u2013114 exports HOME/npm exports and can set NODE_OPTIONS from config node-options. Bind npm config precedence and resolved script-shell, environment interpolation and effective node-options. Current Docker lack of NODE_OPTIONS is not evidence of child absence. Unexpected/uninspected preload/shell/module path branch is unresolved.",
+    "eagerInputCorrection": "Hereby imports generators before selecting test; schema.ts1264\u20131275 immediately reads tools/scripts/tsc/ast.json, constructs SchemaAPI and validates it. These two files and all17audited repository routes now join fixed sourceFiles. No need to run unused generator bodies. The remaining published initialization/config helper frontier remains explicitly open.",
+    "goDefaults": "Actual process nonempty Go values > user Go env config > GOROOT/go.env > compiled defaults as applicable. GOENV default points to actual user config; do not require off. GOTOOLCHAIN defaultauto is allowed only after deriving no switch from exact go.work/go.mod/toolchain directives and audited image version/config; otherwise unknown. CGO default uses platform/defaults and compiler availability on derived PATH (cfg116\u2013184); no assumed CGO1 or CC/CXX. Compare derived selection-equivalent fields with registry (linux/arm64,Go1.27.3,CGO1,source workspace/flags/tags/selected files), while nonselection cache-path differences stay explicit. Effective mismatch means old expected map cannot qualify, not new environment assignments.",
+    "immutableVsWritable": "Observed readonly exact image/no added mounts/nonroot/capability isolation plus audited image link chains binds immutable root tools/GOROOT config. Freshly inspect all relevant writable workspace/tmp/home candidates and ancestors after agent actions/setup. No entire-image rehash needed; image identity alone cannot rule out .bin shadows.",
+    "options": "Record actual TSGO_HEREBY_FORCE/RACE/NOEMBED/CONCURRENT_TEST_PROGRAMS/COVERAGE values/absence, argv tests/debug/dirty flags, CI/TF_BUILD,GODEBUG,TS_TEST_PROGRAM_SINGLE_THREADED,TSGO_BASELINE_TRACKING_DIR,TEST_DIRECTORY,GOTESTSUM_* and literal GOFLAGS. Unprefixed names are not substitutes. Linux runTests does not use goBuildEnv.CGO_ENABLED=0.",
+    "parentWitnessFallback": "If that audit cannot establish parent env, one task-bound actual Hereby-parent witness may replace ONLY the unclosed npm-to-parent transform. It must bind PID/start/cmdline/cwd/exe/environment to this task operation and be obtained once without polling/retry/per-child tracing. A generic data observer code must contain no task command/test/scope/gold constants; config/expected values remain host-only. No command permission gating. Do not introduce a preload/shim or change wrapper/env silently; any declared instrumentation must preserve original argv/env/behavior except recorded instrumentation, apply identically to both arms and receive separate review. No concrete acceptable parent instrumentation is currently implemented; if unavailable, actual join remains open. A witness before eager module initialization does not prove later imported modules preserve environment; retain the finite initialization assumption/audit.",
+    "paths": "Let R=/workspace/repository,N=dirname(actual Node process.execPath),P=actual Hereby parent PATH after npm. Build install tinyexec PATH = [R/tools/node_modules/.bin,R/node_modules/.bin,/workspace/node_modules/.bin,/node_modules/.bin,N,...P]. Test tinyexec PATH replaces first entry with R/tsc/node_modules/.bin. Preserve order/duplicates per tinyexec; separately derive npm binPaths and all project ancestors before P. Witness go/compiler resolution separately for both cwd paths; no assumption both choose image Go/gcc.",
+    "preferredAudit": "Bounded installed-launch audit remains preferred: close actually used npm config/default flattening/libnpmexec/run-script and Hereby import initialization branches under observed inputs. Exact installed bytes must match retained source/lock identities. Trust fixed builtin Node/image behavior; do not demand every unused dependency function or Go dependency body be audited.",
+    "workspace": "Use actual cfg.Getenv(\"GOWORK\") precedence. If empty/auto, Go1.27.3 FindGoWork and findWorkspaceFile start from actual tools or tsc cwd, stat nearest go.work upward until root, stopping at GOROOT; bind child go.work absence and root content, relevant ancestors if no root match. A child config override/file changes the result. Explicit GOWORK=off or absolute is honored if actually observed, never injected. bind go.work.sum type/content/creation separately."
+  },
+  "missingInputsBeforeActualQualification": [
+    "Actual same-session setup/task/config/installed/process observations are absent; prior containers are historical only.",
+    "Selected npm config entrypoints are retained but complete actually used nopt/INI/default-flattening/resolveAllowScripts/Arborist install lifecycle branches remain uninspected. Current explicit absent/default config observations may reduce this frontier but do not exist yet.",
+    "Hereby static published adm-zip/chokidar/tar initialization frontier remains uninspected; local eager schema+ast input is now identified and fixed. Need finite branch disposition, not exhaustive library function proof.",
+    "Platform hook optional payload/fallback branches need exact expected installation/provenance rows (vsce-sign/dprint/esbuild), derived from frozen sources and actualplatform. Setup cannot be assumed green.",
+    "Actual Go user config, GOROOT defaults and toolchain/compiler resolution may derive context unlike prior registry. Toolchain selection defaults/source/directive closure must be pinned before claiming no switch. No proof-easing environment mutation.",
+    "No implemented/reviewed generic compact observer, its Python-vs-Node Unicode/digest tests, or parent-witness association exists. Resource/time feasibility of scanning current installed/source roots is not measured; failure to fit remains incomplete."
+  ],
+  "nativeTaskAdmitted": false,
+  "oracleQualified": false,
+  "parentCorrection": "Supersedes assumed explicit target Go overrides and incomplete inventory/launch closure only prospectively. Old3artifacts+freeze, audit90 and independent review4 unchanged. Existing oracle am3/isolation successor remains actual fail-closed; no task/380-exclusion/model/provider/permission change.",
+  "phases": {
+    "fullTaskAfter": [
+      "existing raw full-task process and event export/metadata association",
+      "same required source/config/installed dependency rows and invariant digests; declared outputs separately counted",
+      "new producer binary/cache rows or honest failure; go.work.sum dynamic row if created",
+      "retained isolation/cleanup and strict complete event/lifecycle scoring remain separate; no missing after-check becomes true"
+    ],
+    "fullTaskBefore": [
+      "match same-session setup after-state at required package/lock/launcher/config/dependency paths; intervening agent changes detected",
+      "full source/testdata invariant and fixed5326source rows still match selected source context",
+      "actual current base env/npm configs, tools-PATH and tsc-PATH chain rows and Go config/workspace discovery inputs",
+      "fresh event baseline, fresh producer/cache absence; prior observed producer reuse is outside minimal contract"
+    ],
+    "setupAfter": [
+      "raw normal setup process exit/error/caps and current source/config rows",
+      "installed root and workspace dependency role digests; expected local Hereby/tinyexec paths/content/bin chains",
+      "platform-eligible vsce-sign/dprint/esbuild hook branch source and final installed optional payload/bin bytes; no silent skip/script allowlist substitution",
+      "source invariant matches; legitimate installation outputs recorded separately"
+    ],
+    "setupBefore": [
+      "source invariant digest matches original archive; full fixed source rows match",
+      "current admitted npm configs, allowed runtime/base env, Node/npm executable identity/resolution",
+      "installed dependency roots absent/fresh expected prior state; tools/gotestsum/cache absent; output roots recorded"
+    ]
+  },
+  "requiredNegatives": [
+    "npm config node-options injects preload despite initial Config.Env absence; changed script-shell/INI/env interpolation unknown",
+    "schema.ts or ast.json changed/missing before task; uninspected eager side effect replaced by false complete claim",
+    "GOENV/GOWORK/GOTOOLCHAIN/CGO1/CC/CXX asserted from old collection config despite actual ENV_KEYS; automatic GOWORK correctly resolves root and rejects child go.work shadow",
+    "tools/.bin/go differs from tsc/.bin/go; same for compiler; npm local Hereby missing invokes unbound fallback; link ancestor/target swap; executable mode changed",
+    "new selected .go package/file or changed fixture/reference baseline alters invariant; identical old5326source hashes do not pass if addedfiles digest differs",
+    "extra tsc/node_modules ignored by broad node_modules exclusion; generated local baseline wrongly changes reference fixture; unknown source output added after run and retroactively exempted",
+    "forged installed launcher hash but installed dependency digest changed; skipped/ignored normal hook; stale/different-container setup; intermediate agent source/config change",
+    "preexisting gotestsum/cache; source digest uses wrong absolute names/order/missing LF; failed install plus fabricated provenance flag; linked producer escape",
+    "user go/env enables differing tags/toolchain/compiler; default GOROOT/go.env wrongly ignored; created go.work.sum silently omitted instead of retained dynamic data",
+    "Unicode BMP/astral path canonical equivalence, duplicate/type/link/path-escape/hardlink/device and changed-during-read failures; scan/payload limits fail closed",
+    "Config.Env or unrelated env command presented as Hereby parent; stale/unassociated PID; generic helper embeds expected test/task/command or only instruments one arm",
+    "resource/namespace/env drift, truncated events/output, wrong raw hash/order, deadline/cancel/missing after evidence; buildkilled kept incomplete; completed assertion failure scored by unchanged lifecycle rules"
+  ],
+  "rowContract": {
+    "common": "Every payload has private format identity, observer/spec hashes, operation ordinal/tool-call ID, session/container ID, observation role, timestamps/deadline, exact count/byte/hash totals and explicit errors/omissions. Expected facts remain host-side. No credential/host environment read; only admitted container paths/environment. Null/absent/unknown/type-error are distinct.",
+    "configs": "For each admitted candidate: path bytes, lstat type/mode, symlink chain target bytes or explicit absence/error, content SHA/bytes and bounded raw content. Include project/user/global/builtin npm config and user config selectors (home,prefix,userconfig,globalconfig,script-shell,node-options), relevant env interpolation values; Go user config chosen by actual GOENV or Linux XDG_CONFIG_HOME/HOME default and immutable GOROOT/go.env. Derivation resolves any newly selected config path only if within the predeclared inventory/cap, otherwise unresolved. No arbitrary candidate-selected .env reads.",
+    "parentEnvelope": "Retain observed inspect Config.Env and exact /bin/sh -c chosen command/process receipt. A generic data observer may report its own pre-npm inherited env; label it base-launch observation, not actual Hereby env. Derive shell inline assignment and audited npm transformation only when the source/config join closes.",
+    "producer": "Before task: both tools/gotestsum and tools/gotestsum.hash absent at contained paths; exact modules and build-resolution rows. After: regular binary SHA/size/executable bits, exact bounded .hash body, modules unchanged, source-owned transition, process/event association. Raw install log line corroborates only; not sufficient by itself. Failed install/binary absence => incomplete.",
+    "resolution": "For each needed role (initial npm/npx/node, local Hereby, Go install, test Go, selected C/C++ compiler), record source PATH/cwd, candidate search order, each preceding candidate absence/not-executable/type, actual executable mode/hash and full bounded symlink targets through readonly image or writable roots. A hash of a followed link is not a target/ancestor proof. Refuse unsupported absolute/relative config or shell resolution rather than guessing.",
+    "sources": "Ordered full5326-entry sourceFiles manifest is frozen in source-files.json. Output compact rows keyed by manifest ordinal: kind, SHA256, bytes/executable bits as applicable; no omitted source is called observed. Each required source must be regular/nonlink; traversal separately rejects changed ancestors. Existing whole source checksum subset is extended, not relabeled full-tree.",
+    "treeSummary": "For each finite role root retain root identity, canonicalSHA256, entries/regularFiles/symlinks/bytes counts, scan-complete boolean and errors/limits. Complete current enumeration is required; rehashing only expected names is insufficient. Observer must detect new selected Go files/packages, changed testdata/config and link/type substitutions. Host derives expected invariant roots from full source archive; installed/output roots have separate rules."
+  },
+  "runtimeEnvironment": {
+    "allowedConfigKeys": [
+      "PATH",
+      "HOME",
+      "LANG",
+      "LC_ALL",
+      "TZ",
+      "TMPDIR",
+      "CARGO_HOME",
+      "RUSTUP_HOME",
+      "UV_CACHE_DIR",
+      "XDG_CACHE_HOME",
+      "GIT_CONFIG_GLOBAL",
+      "GIT_CONFIG_NOSYSTEM"
+    ],
+    "knownImageDefaults": "Retained /usr/local/go/go.env specifies GOPROXY=https://proxy.golang.org,direct; GOSUMDB=sum.golang.org; GOTOOLCHAIN=auto. None-network remains enforced; configured proxy defaults are not network permission. Actual writable user config can override these. Default GOPATH/module cache may differ from /workspace/dependency-cache/go; do not quietly relocate/seed/export a cache or claim available modules.",
+    "noInjectedProofAids": "Do not add GOENV/GOWORK/GOTOOLCHAIN/CGO_ENABLED/CC/CXX/GOPATH or other assignments to make old collection context true. Literal task supplies only GOFLAGS and GOTESTSUM_JSONFILE. Observe actual allowed runtime values and npm-produced values; inspect user-Go config/defaults/paths. Parent shell environment is not inferred from old collection plan.",
+    "unknowns": "Effective Go selection/toolchain must be derived from observed values/defaults; a mismatch with old registry context is unqualified, not repaired through secret env changes."
+  },
+  "state": "prospective-contract-with-explicit-open-source-inputs",
+  "unchangedTask": "GOTESTSUM_JSONFILE=/workspace/go-test-events.jsonl GOFLAGS=\"-p=1 -count=1\" npx hereby test"
+}
