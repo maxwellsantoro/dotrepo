@@ -9,6 +9,7 @@ use super::deterministic::apply_adjudication_to_import_plan;
 use super::report::{recompute_field_score_summary, ImportEscalationReport};
 
 pub(crate) fn run_model_escalation(
+    root: &std::path::Path,
     plan: &mut ImportPlan,
     field_scores: &mut FieldScoreReport,
     options: &ImportEscalationOptions,
@@ -19,7 +20,40 @@ pub(crate) fn run_model_escalation(
         return;
     }
 
-    let requests = build_adjudication_requests(field_scores, plan);
+    let mut requests = build_adjudication_requests(field_scores, plan);
+    for request in super::super::context_adjudication::requests(root, plan) {
+        if field_scores.scores.iter().any(|score| {
+            score.field == request.field
+                && matches!(
+                    score.confidence,
+                    super::super::FieldConfidence::HighConfidencePresent
+                        | super::super::FieldConfidence::HighConfidenceAbsent
+                )
+        }) {
+            continue;
+        }
+
+        if !field_scores
+            .scores
+            .iter()
+            .any(|score| score.field == request.field)
+        {
+            field_scores.scores.push(super::super::FieldScore {
+                field: request.field.clone(),
+                confidence: super::super::FieldConfidence::Unresolved,
+                source: request
+                    .candidates
+                    .first()
+                    .map(|candidate| candidate.source_path.clone()),
+                value: request
+                    .candidates
+                    .first()
+                    .map(|candidate| candidate.value.clone()),
+                reason: "context candidate awaits source-completeness adjudication".into(),
+            });
+        }
+        requests.push(request);
+    }
     if requests.is_empty() {
         return;
     }
@@ -70,7 +104,20 @@ pub(crate) fn run_model_escalation(
             };
             report.tokens_used += provider_response.tokens_used;
 
-            let result = apply_adjudication_response(&provider_response.response, &request);
+            let result = if super::super::context_adjudication::is_context_field(&request.field)
+                && !super::super::context_adjudication::still_current(root, plan, &request)
+            {
+                super::super::AdjudicationResult {
+                    field: request.field.clone(),
+                    outcome: AdjudicationOutcome::Rejected {
+                        model_value: provider_response.response.value.clone().unwrap_or_default(),
+                        reason: "context tuple/time/source bytes changed after request capture"
+                            .into(),
+                    },
+                }
+            } else {
+                apply_adjudication_response(&provider_response.response, &request)
+            };
             let is_low_confidence =
                 provider_response.response.confidence == AdjudicationModelConfidence::Low;
             // A `Rejected` outcome (model proposed a value outside the

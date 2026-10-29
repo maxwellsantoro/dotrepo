@@ -1,0 +1,45 @@
+{
+  "checks": {
+    "confidenceMismatches": 0,
+    "currentSidecarTestsPassed": 28,
+    "integrity": {
+      "authorAmendment": 12,
+      "originalReview": 23,
+      "parentAuthor": 37
+    },
+    "invalidSelectionsRefused": 5,
+    "original13Context14Integration10EscalationReused": "All Rust paths unchanged; no new Rust calls after Cargo release",
+    "ownedAdapterControls": 9,
+    "ruffCheck": true,
+    "ruffFormatCheck": true
+  },
+  "closedFindings": [
+    {
+      "after": "Low preserved; Medium preserved; High capped to Medium; null Low remains Low",
+      "before": "Explicit Low exact tuple normalized to Medium",
+      "id": "F1",
+      "reproductionSha256": "f1af3e09144f89a0d59fa3b21750dfd03ecf8fc2307bc3f9df9a1c9395c651ba"
+    }
+  ],
+  "consumerBenefitEstablished": false,
+  "executionQualified": false,
+  "findings": [],
+  "limits": [
+    "No external/model/provider/upstream/native task execution.",
+    "Exact source/citation transport does not establish complete setup/platform/backend instruction.",
+    "Materialized-source revision remains unknown.",
+    "Existing call/output/provider-price and input-byte bounds do not create prompt-token/USD pre-call guarantees.",
+    "No scalar command or authority/status promotion; contextual result maximum Medium."
+  ],
+  "runtimeAuthorization": false,
+  "scope": "Independent implementation/candidate source-transport review of original E1 and narrow Python successor. This is not independent semantic completeness or held-out qualification.",
+  "sourceCompletenessEstablished": false,
+  "state": "passed-bounded-independent-review",
+  "subject": {
+    "authorFreezeSha256": "48fd8f53b827d7e00e3c864ab56f6277c118c3ffc8fdd092799c2e167047f7ff",
+    "codeBindingsSha256": "4ca30b919455a6a6e5a3ba22906e715d941dbc01a49def446c039dbae0e3480d",
+    "originalReviewFreezeSha256": "ef30b89bef148197b1df2a20629e9e034895c61139c083421f84050722b1341e",
+    "parentAuthorFreezeSha256": "9cff9fe402a545300eefd17c61afc155b51c2607dcf8ab249c0222aefcaa420e",
+    "sidecarSha256": "b700e597ea4d22a023bc2468de01166885200561ed5d39a15f07842c94af0468"
+  }
+}

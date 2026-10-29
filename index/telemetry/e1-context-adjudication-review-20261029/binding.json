@@ -1,0 +1,84 @@
+{
+  "authorFreezeSha256": "9cff9fe402a545300eefd17c61afc155b51c2607dcf8ab249c0222aefcaa420e",
+  "codeBindingsSha256": "c2ed95546d03945a72b00581c83648598d2f113aabb5e3beca92fae5422a7c0d",
+  "patchSha256": "485911fd0ebdb7abcdfc3453c0293746b9243a494f930b4b874762454a3d76f2",
+  "codeSnapshots": [
+    {
+      "path": "crates/dotrepo-core/src/import/context_adjudication.rs",
+      "sha256": "1c243cfda571fdf1598d03ccb8be63d62f9fbfbed659a9266355fc1a63fc4d3f",
+      "bytes": 17914
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/context_adjudication/tests.rs",
+      "sha256": "806ed9bee89323145e2004601b693d21868b2dec5d748a6d0869d75281bb536f",
+      "bytes": 23977
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/escalation/deterministic.rs",
+      "sha256": "af7bbd5ad6b63fce6fef105fa30ea289b78f84f063abaaec3e0bda0899b9bad2",
+      "bytes": 25216
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/escalation/mod.rs",
+      "sha256": "bfab22cdbbc40bdda236c45f32117a989c289c2368e6dc566bba9a834cd31133",
+      "bytes": 30650
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/escalation/model_ladder.rs",
+      "sha256": "ec57688d2be9a53f70094c23f11af10385246eaba81429a2351a01d19727810e",
+      "bytes": 6531
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/fields.rs",
+      "sha256": "ef1b07721625582621f0680bee540b7621bb7644c82dd8985b6ac8ba6a34cb68",
+      "bytes": 32020
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/mod.rs",
+      "sha256": "cd7db40b036d0e62f29521b044e969c4cf5b6bfaaacad9a9ef834e34cd1c3e19",
+      "bytes": 31910
+    },
+    {
+      "path": "crates/dotrepo-core/src/import/types.rs",
+      "sha256": "34a40f2ebdf155d1dba198548435c5eebbaf969f1699f45c951036369e36640c",
+      "bytes": 11528
+    },
+    {
+      "path": "crates/dotrepo-core/src/lib.rs",
+      "sha256": "3cedc447844bddae21b13548b47810b4b9f9151430458289b3bd348b7db5b117",
+      "bytes": 17667
+    },
+    {
+      "path": "crates/dotrepo-core/tests/adjudication_pipeline.rs",
+      "sha256": "bed8d6e229b3e5f0a93f21df5de25338545671535ba3a697b00b33fd4a2e1e79",
+      "bytes": 11532
+    },
+    {
+      "path": "crates/dotrepo-core/tests/import_escalation_safety.rs",
+      "sha256": "7a905ca20bbbe7c0b57587c813f8f829937c7abcd1c11faad87889812aff1a96",
+      "bytes": 15042
+    },
+    {
+      "path": "crates/dotrepo-crawler/src/adjudication.rs",
+      "sha256": "b1ffdff1e642d7c475e4b3c26f155993ab7844949e868dd9ecdd5e28e54178cd",
+      "bytes": 9894
+    },
+    {
+      "path": "crates/dotrepo-crawler/tests/openrouter_env_escalation.rs",
+      "sha256": "098966afa0dc2a0e82b43f8b972b512581b0349f6b3ef22f0b038b8fa7909d78",
+      "bytes": 10695
+    },
+    {
+      "path": "scripts/adjudication_openrouter_sidecar.py",
+      "sha256": "09c5600bae57fa23d18854061dca78fb5a228253d9d13ebab8b89eb0292d6509",
+      "bytes": 12758
+    },
+    {
+      "path": "scripts/tests/test_openrouter_adjudication.py",
+      "sha256": "38c4595e1b65c199b7e951f35cfba714473959e07c0577f961e5da08d3371c3c",
+      "bytes": 11097
+    }
+  ],
+  "worktree": "/Users/maxwell/.codex/worktrees/e1-context-adjudication/dotrepo",
+  "scope": "Original immutable subject, before sidecar amendment. Current sidecar may change; snapshots match original bindings."
+}

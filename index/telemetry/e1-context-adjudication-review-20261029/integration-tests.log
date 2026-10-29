@@ -1,0 +1,27 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.10s
+     Running tests/adjudication_pipeline.rs (/tmp/dotrepo-e1-context-adjudication-target/debug/deps/adjudication_pipeline-c1bb7e5f17cc1d31)
+
+running 8 tests
+test post_check_maps_null_to_absent ... ok
+test post_check_requires_cited_source_to_support_selected_value ... ok
+test post_check_rejects_response_for_another_field_including_abstention ... ok
+test post_check_rejects_out_of_candidate_value ... ok
+test post_check_accepts_valid_candidate ... ok
+test build_requests_only_includes_unresolved_build_test ... ok
+test apply_results_updates_scores_and_summary ... ok
+test build_requests_empty_when_no_unresolved ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/import_escalation_safety.rs (/tmp/dotrepo-e1-context-adjudication-target/debug/deps/import_escalation_safety-bc63373bbf85d771)
+
+running 6 tests
+test duplicate_values_use_grounded_provenance_from_strongest_source ... ok
+test wrong_field_model_response_preserves_known_test_command ... ok
+test failed_primary_attempt_counts_before_a_successful_second_opinion ... ok
+test plan_application_rejects_mispaired_results_and_ungrounded_values ... ok
+test score_application_does_not_overwrite_an_already_resolved_field ... ok
+test failed_attempts_share_the_cap_across_tiers_and_fields ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+

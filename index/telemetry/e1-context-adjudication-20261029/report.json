@@ -1,0 +1,49 @@
+{
+  "scope": "Known-development source/body adjudication input repair; not completeness qualification",
+  "changedCodePaths": [
+    "crates/dotrepo-core/src/import/context_adjudication.rs",
+    "crates/dotrepo-core/src/import/context_adjudication/tests.rs",
+    "crates/dotrepo-core/src/import/escalation/deterministic.rs",
+    "crates/dotrepo-core/src/import/escalation/mod.rs",
+    "crates/dotrepo-core/src/import/escalation/model_ladder.rs",
+    "crates/dotrepo-core/src/import/fields.rs",
+    "crates/dotrepo-core/src/import/mod.rs",
+    "crates/dotrepo-core/src/import/types.rs",
+    "crates/dotrepo-core/src/lib.rs",
+    "crates/dotrepo-core/tests/adjudication_pipeline.rs",
+    "crates/dotrepo-core/tests/import_escalation_safety.rs",
+    "crates/dotrepo-crawler/src/adjudication.rs",
+    "crates/dotrepo-crawler/tests/openrouter_env_escalation.rs",
+    "scripts/adjudication_openrouter_sidecar.py",
+    "scripts/tests/test_openrouter_adjudication.py"
+  ],
+  "focusedChecks": {
+    "contextUnits": 13,
+    "existingAdjudicationAndSafetyIntegration": 14,
+    "existingEscalation": 10,
+    "crawlerWire": 1,
+    "sidecarIncludingOwnedLoopback": 24,
+    "coreCrawlerClippyAllTargets": "pass",
+    "cargoFmt": "pass",
+    "focusedRuff": "pass"
+  },
+  "admittedInputBoundary": "Only explicit caller/importer imported_sources inventory authorizes source-body reads; containment is additional validation, never candidate path authority.",
+  "sourceBodiesUntrusted": true,
+  "sourceRevision": "explicitly unknown; not inferred from branch head",
+  "confidenceCeiling": "Medium; low-confidence or missing/omitted evidence unresolved",
+  "scalarPriorityPreserved": true,
+  "wholeTupleAndConflictPreserved": true,
+  "perRecordAndBatchCallCaps": "existing owners unchanged",
+  "promptTokenOrTotalDollarGuarantee": false,
+  "externalProviderCalls": 0,
+  "sourceCompletenessQualified": false,
+  "heldOutQualification": false,
+  "consumerBenefitMeasured": false,
+  "recordAuthorityMinted": false,
+  "remainingDependencies": [
+    "independent code review",
+    "coordinator combined gates",
+    "separate semantic/source-completeness assessment",
+    "operator review of larger input-token cost before any actual provider enabling"
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "files": [
+    {
+      "bytes": 1229,
+      "path": "README.md",
+      "sha256": "c0f5a726684fcdd7c3978a1c55f775e87ae8b2b2565bc3f01e70d88c6d4c4f1c"
+    },
+    {
+      "bytes": 3259,
+      "path": "binding.json",
+      "sha256": "19414ef16056bb9cddb7ae4aa48a658e3e7ee21e7008096064865321009dd303"
+    },
+    {
+      "bytes": 7783,
+      "path": "context-tests.log",
+      "sha256": "44f39792b16d3f60d8d42d18f6d333b984c59a5b4df1ac9e8e773a1eeebf6f5c"
+    },
+    {
+      "bytes": 7096,
+      "path": "escalation-tests.log",
+      "sha256": "a85b133a2da6ef66b9228f445a4b4f6d51a5ea30c21c1212cff1124912e41bd2"
+    },
+    {
+      "bytes": 1485,
+      "path": "integration-tests.log",
+      "sha256": "0d22f8116761dc2bb4c6f9be17934917793c63c280ce9daeba7a29de013dd5f7"
+    },
+    {
+      "bytes": 5850,
+      "path": "original-controls.json",
+      "sha256": "c9163fb3c798ac22e3ca4fa081e262c862c78699fadb1a533a750b116922454e"
+    },
+    {
+      "bytes": 23977,
+      "path": "original-source/crates/dotrepo-core/src/import/context_adjudication/tests.rs",
+      "sha256": "806ed9bee89323145e2004601b693d21868b2dec5d748a6d0869d75281bb536f"
+    },
+    {
+      "bytes": 17914,
+      "path": "original-source/crates/dotrepo-core/src/import/context_adjudication.rs",
+      "sha256": "1c243cfda571fdf1598d03ccb8be63d62f9fbfbed659a9266355fc1a63fc4d3f"
+    },
+    {
+      "bytes": 25216,
+      "path": "original-source/crates/dotrepo-core/src/import/escalation/deterministic.rs",
+      "sha256": "af7bbd5ad6b63fce6fef105fa30ea289b78f84f063abaaec3e0bda0899b9bad2"
+    },
+    {
+      "bytes": 30650,
+      "path": "original-source/crates/dotrepo-core/src/import/escalation/mod.rs",
+      "sha256": "bfab22cdbbc40bdda236c45f32117a989c289c2368e6dc566bba9a834cd31133"
+    },
+    {
+      "bytes": 6531,
+      "path": "original-source/crates/dotrepo-core/src/import/escalation/model_ladder.rs",
+      "sha256": "ec57688d2be9a53f70094c23f11af10385246eaba81429a2351a01d19727810e"
+    },
+    {
+      "bytes": 32020,
+      "path": "original-source/crates/dotrepo-core/src/import/fields.rs",
+      "sha256": "ef1b07721625582621f0680bee540b7621bb7644c82dd8985b6ac8ba6a34cb68"
+    },
+    {
+      "bytes": 31910,
+      "path": "original-source/crates/dotrepo-core/src/import/mod.rs",
+      "sha256": "cd7db40b036d0e62f29521b044e969c4cf5b6bfaaacad9a9ef834e34cd1c3e19"
+    },
+    {
+      "bytes": 11528,
+      "path": "original-source/crates/dotrepo-core/src/import/types.rs",
+      "sha256": "34a40f2ebdf155d1dba198548435c5eebbaf969f1699f45c951036369e36640c"
+    },
+    {
+      "bytes": 17667,
+      "path": "original-source/crates/dotrepo-core/src/lib.rs",
+      "sha256": "3cedc447844bddae21b13548b47810b4b9f9151430458289b3bd348b7db5b117"
+    },
+    {
+      "bytes": 11532,
+      "path": "original-source/crates/dotrepo-core/tests/adjudication_pipeline.rs",
+      "sha256": "bed8d6e229b3e5f0a93f21df5de25338545671535ba3a697b00b33fd4a2e1e79"
+    },
+    {
+      "bytes": 15042,
+      "path": "original-source/crates/dotrepo-core/tests/import_escalation_safety.rs",
+      "sha256": "7a905ca20bbbe7c0b57587c813f8f829937c7abcd1c11faad87889812aff1a96"
+    },
+    {
+      "bytes": 9894,
+      "path": "original-source/crates/dotrepo-crawler/src/adjudication.rs",
+      "sha256": "b1ffdff1e642d7c475e4b3c26f155993ab7844949e868dd9ecdd5e28e54178cd"
+    },
+    {
+      "bytes": 10695,
+      "path": "original-source/crates/dotrepo-crawler/tests/openrouter_env_escalation.rs",
+      "sha256": "098966afa0dc2a0e82b43f8b972b512581b0349f6b3ef22f0b038b8fa7909d78"
+    },
+    {
+      "bytes": 12758,
+      "path": "original-source/scripts/adjudication_openrouter_sidecar.py",
+      "sha256": "09c5600bae57fa23d18854061dca78fb5a228253d9d13ebab8b89eb0292d6509"
+    },
+    {
+      "bytes": 11097,
+      "path": "original-source/scripts/tests/test_openrouter_adjudication.py",
+      "sha256": "38c4595e1b65c199b7e951f35cfba714473959e07c0577f961e5da08d3371c3c"
+    },
+    {
+      "bytes": 6366,
+      "path": "report.json",
+      "sha256": "f317f6a3a6375408d514ec705151a06d08e13418e40fecd8cfcec2c51fcec58e"
+    },
+    {
+      "bytes": 3476,
+      "path": "reproduce_confidence.py",
+      "sha256": "26b5de0597c6eb6085c9b586239fc1b2935bdbbca5b004da6761bfd72ce7576c"
+    }
+  ],
+  "state": "frozen-original-review-with-finding"
+}

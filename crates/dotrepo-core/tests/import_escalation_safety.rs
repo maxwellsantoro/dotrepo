@@ -62,6 +62,7 @@ fn wrong_field_model_response_preserves_known_test_command() {
         AdjudicationTier::LocalPrimary,
         vec![AdjudicationProviderResponse {
             response: AdjudicationModelResponse {
+                citations: Vec::new(),
                 field: "repo.test".into(),
                 value: Some("cargo build --workspace".into()),
                 confidence: AdjudicationModelConfidence::High,
@@ -217,11 +218,13 @@ fn duplicate_values_use_grounded_provenance_from_strongest_source() {
         field: "repo.build".into(),
         candidates: vec![
             AdjudicationCandidate {
+                context_evidence: None,
                 value: "cargo build".into(),
                 source_path: ".github/workflows/verify.yml".into(),
                 source_tier: CommandSourceTier::Workflow,
             },
             AdjudicationCandidate {
+                context_evidence: None,
                 value: "cargo build".into(),
                 source_path: "Cargo.toml".into(),
                 source_tier: CommandSourceTier::Manifest,
@@ -341,6 +344,7 @@ fn failed_primary_attempt_counts_before_a_successful_second_opinion() {
         AdjudicationTier::LocalSecondOpinion,
         vec![AdjudicationProviderResponse {
             response: AdjudicationModelResponse {
+                citations: Vec::new(),
                 field: "repo.build".into(),
                 value: Some("cargo build --workspace".into()),
                 confidence: AdjudicationModelConfidence::High,

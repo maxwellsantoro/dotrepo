@@ -78,6 +78,7 @@ fn adjudicate_request_deterministic(
             }
             return apply_adjudication_response(
                 &AdjudicationModelResponse {
+                    citations: Vec::new(),
                     field: request.field.clone(),
                     value: None,
                     confidence: AdjudicationModelConfidence::High,
@@ -125,6 +126,7 @@ fn adjudicate_request_deterministic(
             };
             return apply_adjudication_response(
                 &AdjudicationModelResponse {
+                    citations: Vec::new(),
                     field: request.field.clone(),
                     value: Some(winner.value.clone()),
                     confidence: adjudication_model_confidence(confidence),
@@ -151,6 +153,7 @@ fn adjudicate_request_deterministic(
 
     apply_adjudication_response(
         &AdjudicationModelResponse {
+            citations: Vec::new(),
             field: request.field.clone(),
             value: None,
             confidence: AdjudicationModelConfidence::High,
@@ -216,6 +219,35 @@ pub fn apply_adjudication_to_import_plan(
     escalation_label: &str,
 ) {
     for (request, result) in requests.iter().zip(results.iter()) {
+        if super::super::context_adjudication::is_context_field(&request.field) {
+            if request.field == result.field {
+                if let AdjudicationOutcome::Resolved { value, .. } = &result.outcome {
+                    let current = [
+                        ("build", &plan.manifest.repo.build_candidates),
+                        ("test", &plan.manifest.repo.test_candidates),
+                    ]
+                    .into_iter()
+                    .find_map(|(purpose, candidates)| {
+                        request
+                            .field
+                            .strip_prefix(&format!("repo.{purpose}_candidates."))
+                            .and_then(|index| index.parse::<usize>().ok())
+                            .and_then(|index| candidates.get(index))
+                            .and_then(|candidate| serde_json::to_string(candidate).ok())
+                    });
+                    if current.as_deref() == Some(value.as_str())
+                        && request.candidates.iter().any(|candidate| {
+                            candidate.value == *value && candidate.context_evidence.is_some()
+                        })
+                    {
+                        if let Some(evidence) = &mut plan.evidence_text {
+                            evidence.push_str(&format!("\n- Selected existing exact `{}` after {} context adjudication, at most Medium; source-completeness remains unresolved. No scalar command changed.", request.field, escalation_label));
+                        }
+                    }
+                }
+            }
+            continue;
+        }
         // These helpers are public, so do not assume every result came through
         // the model-response post-check or that callers preserved its pairing.
         if result.field != request.field
