@@ -302,6 +302,7 @@ pub enum CommandSourceTier {
     EcosystemDefault,
 }
 
+#[derive(Default)]
 pub(crate) struct ImportSources<'a> {
     pub(crate) readme: Option<&'a ImportedFile>,
     pub(crate) cargo_toml: Option<&'a ImportedFile>,

@@ -1,0 +1,109 @@
+{
+  "reused": [
+    {
+      "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/CONTRIBUTING.md",
+      "upstreamPath": "CONTRIBUTING.md",
+      "bytes": 13606,
+      "sha256": "eff1a6349d222979e24b860c88e9577f603300af7658a1ac6fca3140992d0d3d",
+      "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/CONTRIBUTING.md"
+    },
+    {
+      "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/README.md",
+      "upstreamPath": "README.md",
+      "bytes": 5547,
+      "sha256": "6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8",
+      "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/README.md"
+    },
+    {
+      "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/conftest.py",
+      "upstreamPath": "conftest.py",
+      "bytes": 4230,
+      "sha256": "36df082dea9e45f405a2b915e16800d7885c700f1580cb97914a6412542b0ba9",
+      "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/conftest.py"
+    },
+    {
+      "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/keras/api/__init__.py",
+      "upstreamPath": "keras/api/__init__.py",
+      "bytes": 2951,
+      "sha256": "3e0df362a6b9bb3e5253858af4ca306107334be94addbee75a14f3c9f9ea7429",
+      "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/api/__init__.py"
+    },
+    {
+      "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/keras/src/__init__.py",
+      "upstreamPath": "keras/src/__init__.py",
+      "bytes": 684,
+      "sha256": "1a2e12ec4882324134dcf6dd18da4575a518c92583b3f15c009f136b3f58d411",
+      "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/src/__init__.py"
+    },
+    {
+      "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/keras/src/losses/losses_test.py",
+      "upstreamPath": "keras/src/losses/losses_test.py",
+      "bytes": 114961,
+      "sha256": "3c8c4fe48d626eb6985b13c41f427836f70c3fb4155087324af1b638a8764547",
+      "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/src/losses/losses_test.py"
+    },
+    {
+      "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/pyproject.toml",
+      "upstreamPath": "pyproject.toml",
+      "bytes": 2883,
+      "sha256": "51ac5db60612a4c92123980826c1010a6d087c7a64b11a580ebc33c21058d326",
+      "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/pyproject.toml"
+    },
+    {
+      "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/requirements-common.txt",
+      "upstreamPath": "requirements-common.txt",
+      "bytes": 498,
+      "sha256": "3df3a2a15e645bc03082648aec06570a4329fdad189e4b326df0be80d6a7615e",
+      "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/requirements-common.txt"
+    },
+    {
+      "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/requirements.txt",
+      "upstreamPath": "requirements.txt",
+      "bytes": 619,
+      "sha256": "f34e2fa7d9bb205afe36e7cb8a0d53f6e3be39d0dc51b38de0619529e4e919b8",
+      "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/requirements.txt"
+    }
+  ],
+  "additional": [
+    {
+      "path": ".github/workflows/actions.yml",
+      "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+      "gitBlobSha": "50bcd14a9bdb7e46136fb3aa8c3e78d05093b571",
+      "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/.github/workflows/actions.yml",
+      "sha256": "ad84280818c4d276d6427a295d48d7547e792994dc28114e352ff4417f357806",
+      "bytes": 1650
+    },
+    {
+      "path": ".github/workflows/cpu_tests.yml",
+      "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+      "gitBlobSha": "7e6de063cb3efd462b9c212ab2b179be6872e1ea",
+      "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/.github/workflows/cpu_tests.yml",
+      "sha256": "c29ad40475b8e8ed2bc144b230fe0d4f2736bfafe1dd2488261cbfc74397fef2",
+      "bytes": 6919
+    },
+    {
+      "path": "keras/src/backend/config.py",
+      "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+      "gitBlobSha": "c7920fe910290b6009bedc9fe4aacb697db4a822",
+      "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/src/backend/config.py",
+      "sha256": "a54307c8326eab51707bb0a87603cf1c209801f2c2a228ac6e3e4396b177bd28",
+      "bytes": 14565
+    },
+    {
+      "path": "keras/src/legacy/saving/legacy_h5_format_test.py",
+      "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+      "gitBlobSha": "c094f19c825420f9584cd56dcc05e9f5ee76ef5e",
+      "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/src/legacy/saving/legacy_h5_format_test.py",
+      "sha256": "ee4f3bc9ae3876a26caf5c11350c53b954f434dc63234deec5be72cf590c8219",
+      "bytes": 22149
+    },
+    {
+      "path": "pip_build.py",
+      "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+      "gitBlobSha": "cef5e0d7ba5572742c3a63db0f5a17c5e60f5bbd",
+      "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/pip_build.py",
+      "sha256": "d7192e9c67e260e98a328b2a88f27076fcc441fdfe889f75961fd79cce8275c3",
+      "bytes": 4464
+    }
+  ]
+}

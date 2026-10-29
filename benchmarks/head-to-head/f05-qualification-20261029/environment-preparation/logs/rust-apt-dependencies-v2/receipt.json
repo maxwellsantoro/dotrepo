@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-f05-prepare-rust2-3a2e8dba75",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "apt-get -o APT::Sandbox::User=root update && apt-get -o APT::Sandbox::User=root --yes --no-install-recommends install libpcap-dev libasound2-dev"
+  ],
+  "startedAt": "2026-10-29T06:03:17.557853+00:00",
+  "elapsedSeconds": 12.427984084002674,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "d244909d26976faf293d84d7a80a7c326e4754ffed570e7acd34fe0b525e53b2",
+  "stderrSha256": "f77216c41aadf6c667ac1a602069951966cea350daab793ffe11ae0de1225ddc",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

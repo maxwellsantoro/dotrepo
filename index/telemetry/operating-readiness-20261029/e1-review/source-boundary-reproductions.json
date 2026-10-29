@@ -1,0 +1,58 @@
+{
+  "observedAt": "2026-10-29T06:17:10.218417+00:00",
+  "binarySha256": "e0a7244b8a4fcd0880354a329e600ac65857c1978997a45981eba5b21f9cd6e6",
+  "runtimeSourceSha256": "2f7b617acc6ba6d206c8671030c11f819a5a81f3ec37d32a13bffd7053ada92a",
+  "noUpstreamExecution": true,
+  "results": [
+    {
+      "case": "baseline",
+      "exitCode": 0,
+      "candidateCount": 0,
+      "candidate": null,
+      "stdout": "imported /var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-review-oj_ndc31/record.toml\nimported /var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-review-oj_ndc31/evidence.md\n- imported from: README.md, pyproject.toml, CONTRIBUTING.md, requirements.txt, requirements-common.txt\n- inferred defaults: repo.name, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "tempRoot": "/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-review-oj_ndc31",
+      "contributingSha256": "eff1a6349d222979e24b860c88e9577f603300af7658a1ac6fca3140992d0d3d"
+    },
+    {
+      "case": "commented-tests",
+      "exitCode": 0,
+      "candidateCount": 0,
+      "candidate": null,
+      "stdout": "imported /var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-review-jj7q2whd/record.toml\nimported /var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-review-jj7q2whd/evidence.md\n- imported from: README.md, pyproject.toml, CONTRIBUTING.md, requirements.txt, requirements-common.txt\n- inferred defaults: repo.name, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "tempRoot": "/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-review-jj7q2whd",
+      "contributingSha256": "462520291325d5d10ee64fa0df65db3256aca2877b881d4930819054d57976e6"
+    },
+    {
+      "case": "indented-tests",
+      "exitCode": 0,
+      "candidateCount": 0,
+      "candidate": null,
+      "stdout": "imported /var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-review-a60xyy_k/record.toml\nimported /var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-review-a60xyy_k/evidence.md\n- imported from: README.md, pyproject.toml, CONTRIBUTING.md, requirements.txt, requirements-common.txt\n- inferred defaults: repo.name, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "tempRoot": "/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-review-a60xyy_k",
+      "contributingSha256": "3611fe981e2f38bf7afe460160a92b74fa8623be843c96a6218f897c8c7ff6d9"
+    },
+    {
+      "case": "fenced-guide",
+      "exitCode": 0,
+      "candidateCount": 0,
+      "candidate": null,
+      "stdout": "imported /var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-review-cp250ay2/record.toml\nimported /var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-review-cp250ay2/evidence.md\n- imported from: README.md, pyproject.toml\n- inferred defaults: repo.name, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "tempRoot": "/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-review-cp250ay2",
+      "contributingSha256": "fc8bbef939203368502360c9a2cb031c3de53c5679672daaee04c2c1d7329b00"
+    },
+    {
+      "case": "external-install-note",
+      "exitCode": 0,
+      "candidateCount": 0,
+      "candidate": null,
+      "stdout": "imported /var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-review-zhe9ml2s/record.toml\nimported /var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-review-zhe9ml2s/evidence.md\n- imported from: README.md, pyproject.toml, CONTRIBUTING.md, requirements.txt, requirements-common.txt\n- inferred defaults: repo.name, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "tempRoot": "/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-review-zhe9ml2s",
+      "contributingSha256": "cc14df227444ff7a38c68b4c0a71536b8c0b3948603c9326d32fa55a2c9b253d"
+    }
+  ]
+}

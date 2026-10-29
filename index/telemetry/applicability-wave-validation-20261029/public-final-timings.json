@@ -1,0 +1,127 @@
+{
+  "schema": "dotrepo-gate-timings/v0",
+  "status": "passed",
+  "elapsedSeconds": 29.174127,
+  "stages": [
+    {
+      "name": "cargo run -p dotrepo-cli -- validate-index",
+      "elapsedSeconds": 1.798629,
+      "status": "passed"
+    },
+    {
+      "name": "cargo run -p dotrepo-cli -- --root . validate",
+      "elapsedSeconds": 0.455288,
+      "status": "passed"
+    },
+    {
+      "name": "cargo test -p dotrepo-core --test import_quality_gate --test public_export_fixture_pack --test public_query_fixture_pack --test public_error_fixture_pack --test public_freshness_semantics --test public_contract_compatibility",
+      "elapsedSeconds": 0.598178,
+      "status": "passed"
+    },
+    {
+      "name": "cargo run -p dotrepo-cli -- public export --index-root index --out-dir /private/tmp/dotrepo-applicability-wave-public-final-20261029/public --base-path / --generated-at 2026-10-29T06:36:36Z --stale-after 2026-10-30T06:36:36Z",
+      "elapsedSeconds": 4.00042,
+      "status": "passed"
+    },
+    {
+      "name": "uv run python scripts/check_public_record_freshness.py --public-root /private/tmp/dotrepo-applicability-wave-public-final-20261029/public --max-stale-or-unknown-rate 0.1 --output-json /private/tmp/dotrepo-applicability-wave-public-final-20261029/public-record-freshness.json",
+      "elapsedSeconds": 0.137085,
+      "status": "passed"
+    },
+    {
+      "name": "uv run python scripts/render_public_pages_landing.py --input /private/tmp/dotrepo-applicability-wave-public-final-20261029/public",
+      "elapsedSeconds": 0.380092,
+      "status": "passed"
+    },
+    {
+      "name": "uv run python scripts/check_public_profile_coverage.py --public-root /private/tmp/dotrepo-applicability-wave-public-final-20261029/public --min-profiles 613 --min-high-signal 0 --min-high-signal-ratio 0.0 --max-conflict-rate 0.0 --max-malformed-profiles 0 --output-json /private/tmp/dotrepo-applicability-wave-public-final-20261029/public-profile-coverage.json --output-md /private/tmp/dotrepo-applicability-wave-public-final-20261029/public-profile-coverage.md --min-signal hasBuild=328 --min-signal hasDocs=165 --min-signal hasLicense=558 --min-signal hasOwnershipSignal=110 --min-signal hasSecurityContact=205 --min-signal hasTest=323",
+      "elapsedSeconds": 0.203286,
+      "status": "passed"
+    },
+    {
+      "name": "uv run python scripts/check_public_quality_dashboard.py --public-root /private/tmp/dotrepo-applicability-wave-public-final-20261029/public --min-profiles 613 --max-generic-field-hits 8 --max-duplicated-description-values 1 --max-duplicate-description-records 2 --max-bad-looking-records 9 --output-json /private/tmp/dotrepo-applicability-wave-public-final-20261029/public-quality-dashboard.json --output-md /private/tmp/dotrepo-applicability-wave-public-final-20261029/public-quality-dashboard.md",
+      "elapsedSeconds": 0.14729,
+      "status": "passed"
+    },
+    {
+      "name": "uv run python scripts/measure_public_policy_coverage.py --public-root /private/tmp/dotrepo-applicability-wave-public-final-20261029/public --output-json /private/tmp/dotrepo-applicability-wave-public-final-20261029/public-policy-coverage.json --output-md /private/tmp/dotrepo-applicability-wave-public-final-20261029/public-policy-coverage.md",
+      "elapsedSeconds": 0.216713,
+      "status": "passed"
+    },
+    {
+      "name": "uv run python scripts/plan_index_growth_tranche.py --candidate-file /Users/maxwell/projects/agent/dotrepo/index/tranche-two-targets.txt --target-count 0 --min-selected 0 --current-high-signal 349 --milestone-high-signal-target 500 --min-planned-high-signal-capacity 349 --output-targets /private/tmp/dotrepo-applicability-wave-public-final-20261029/index-growth-targets.txt --output-json /private/tmp/dotrepo-applicability-wave-public-final-20261029/index-growth-plan.json --output-md /private/tmp/dotrepo-applicability-wave-public-final-20261029/index-growth-plan.md",
+      "elapsedSeconds": 0.097097,
+      "status": "passed"
+    },
+    {
+      "name": "uv run python scripts/build_public_lookup_workload.py --public-root /private/tmp/dotrepo-applicability-wave-public-final-20261029/public --mode research --limit 0 --output /private/tmp/dotrepo-applicability-wave-public-final-20261029/public-lookup-workload.json",
+      "elapsedSeconds": 0.067068,
+      "status": "passed"
+    },
+    {
+      "name": "uv run python scripts/measure_public_lookup_efficiency.py --public-root /private/tmp/dotrepo-applicability-wave-public-final-20261029/public --index-root index --workload /private/tmp/dotrepo-applicability-wave-public-final-20261029/public-lookup-workload.json --generated-at 2026-10-29T06:36:36Z --min-tasks 2452 --min-repositories 613 --min-task-hit-rate 0.47 --min-field-hit-rate 0.71 --max-dotrepo-to-scrape-proxy-ratio 2.43 --output-json /private/tmp/dotrepo-applicability-wave-public-final-20261029/public-lookup-efficiency.json --output-md /private/tmp/dotrepo-applicability-wave-public-final-20261029/public-lookup-efficiency.md --min-intent-hit-rate documentation=0.24 --min-intent-hit-rate execution=0.466 --min-intent-hit-rate overview=0.74 --min-intent-hit-rate security=0.35",
+      "elapsedSeconds": 0.872182,
+      "status": "passed"
+    },
+    {
+      "name": "uv run python scripts/render_public_efficiency_page.py --input /private/tmp/dotrepo-applicability-wave-public-final-20261029/public --benchmark /private/tmp/dotrepo-applicability-wave-public-final-20261029/public-lookup-efficiency.json",
+      "elapsedSeconds": 0.416819,
+      "status": "passed"
+    },
+    {
+      "name": "uv run python scripts/measure_public_factual_accuracy.py --public-root /private/tmp/dotrepo-applicability-wave-public-final-20261029/public --workload scripts/fixtures/public_factual_accuracy_workload.json --generated-at 2026-10-29T06:36:36Z --min-assertions 20 --min-repositories 3 --min-accuracy-rate 1.0 --max-missing-rate 0.0 --max-mismatch-rate 0.0 --output-json /private/tmp/dotrepo-applicability-wave-public-final-20261029/public-factual-accuracy.json --output-md /private/tmp/dotrepo-applicability-wave-public-final-20261029/public-factual-accuracy.md",
+      "elapsedSeconds": 0.054541,
+      "status": "passed"
+    },
+    {
+      "name": "uv run python scripts/measure_public_factual_accuracy.py --public-root /private/tmp/dotrepo-applicability-wave-public-final-20261029/public --workload benchmarks/head-to-head/upstream-2026-10-27/workload.json --min-assertions 119 --min-repositories 31 --min-accuracy-rate 1.0 --max-missing-rate 0 --max-mismatch-rate 0 --output-json /private/tmp/dotrepo-applicability-wave-public-final-20261029/independent-upstream-accuracy.json --output-md /private/tmp/dotrepo-applicability-wave-public-final-20261029/independent-upstream-accuracy.md",
+      "elapsedSeconds": 0.060281,
+      "status": "passed"
+    },
+    {
+      "name": "uv run python scripts/check_release_guidance.py",
+      "elapsedSeconds": 0.059946,
+      "status": "passed"
+    },
+    {
+      "name": "node scripts/check_public_links.mjs /private/tmp/dotrepo-applicability-wave-public-final-20261029/public",
+      "elapsedSeconds": 0.319594,
+      "status": "passed"
+    },
+    {
+      "name": "uv run python scripts/sync_cloudflare_public_snapshot.py --input /private/tmp/dotrepo-applicability-wave-public-final-20261029/public --output /Users/maxwell/projects/agent/dotrepo/cloudflare/hosted-query/public-snapshot",
+      "elapsedSeconds": 5.693608,
+      "status": "passed"
+    },
+    {
+      "name": "uv run python scripts/package_public_export.py --input /private/tmp/dotrepo-applicability-wave-public-final-20261029/public --output-dir /private/tmp/dotrepo-applicability-wave-public-final-20261029/public-bundle",
+      "elapsedSeconds": 1.690819,
+      "status": "passed"
+    },
+    {
+      "name": "npm ci",
+      "elapsedSeconds": 2.852422,
+      "status": "passed"
+    },
+    {
+      "name": "npm test",
+      "elapsedSeconds": 1.687674,
+      "status": "passed"
+    },
+    {
+      "name": "npm run deploy:dry-run",
+      "elapsedSeconds": 4.021429,
+      "status": "passed"
+    },
+    {
+      "name": "verify public metadata and files",
+      "elapsedSeconds": 0.263371,
+      "status": "passed"
+    },
+    {
+      "name": "Cloudflare Worker smoke test",
+      "elapsedSeconds": 2.567173,
+      "status": "passed"
+    }
+  ]
+}

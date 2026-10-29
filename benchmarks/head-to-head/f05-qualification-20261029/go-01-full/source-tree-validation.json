@@ -1,0 +1,13 @@
+{
+  "status": "complete-archive-Git-Merkle-tree-verified",
+  "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+  "actualTreeSha": "0e8e44749de9c275750a56bbca5cde84985fd3d0",
+  "frozenCommitTreeSha": "0e8e44749de9c275750a56bbca5cde84985fd3d0",
+  "frozenCommitMetadataSha256": "873ad8ed7259aef76aeeba5980c5e9a7ffbe647240020ec47440d2f9488ef5a6",
+  "archiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+  "allRegularFileGitBlobsRetained": true,
+  "originalProvenanceSha256": "719ce424577aafed5128b62c088d9f04a2fe49cb89ae0f55e1c2f426bc8eb6a3",
+  "originalGitTreeShaField": "0e8e44749de9c275750a56bbca5cde84985fd3d0",
+  "originalGitTreeShaFieldCorrect": true,
+  "appendOnlyDisposition": "GitHub recursive-tree response sha echoes the requested commit when addressed by commit. Where provenance copied that value under gitTreeSha, this append-only correction supplies the actual tree computed from every archived blob; source bytes/revision/archive identity remain unchanged."
+}

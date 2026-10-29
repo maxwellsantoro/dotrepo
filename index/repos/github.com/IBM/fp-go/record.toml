@@ -24,8 +24,6 @@ languages = [
     "Go",
     "Batchfile",
 ]
-build = "go build ./..."
-test = "go test ./..."
 topics = [
     "functional-programming",
     "go",
@@ -39,6 +37,9 @@ topics = [
 min = "1.20"
 ecosystem = "Go"
 
+[docs]
+root = "https://pkg.go.dev/github.com/IBM/fp-go"
+
 [x.dotrepo.field_evidence."docs.getting_started"]
 checkedAt = "2026-10-27T19:59:34.172486338Z"
 confidence = "high"
@@ -48,13 +49,17 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T19:59:34.172486338Z"
+checkedAt = "2026-10-29T06:14:39.417434Z"
 confidence = "high"
-method = "not_found_in_inspected_sources"
-reason = "no unambiguous documentation declaration detected"
-state = "not_found"
-valueJson = "null"
-
+method = "source_inspection"
+reason = "README explicitly labels pkg.go.dev root-module page API Documentation, with separate V2 documentation. Retain the declared entrypoint without implying v1 command coverage of every module. Exact source-declared URL retained; bounded live target status/redirect/content observations are retained separately in index/telemetry/operating-readiness-20261029/f1-corrections. Target content is mutable and does not establish source-version parity."
+source = "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/README.md"
+sourceRevision = "42e25c64425e2291bd5b281aa852b7a790526204"
+sourceSha256 = "f92d9a6e245607599eedee3a941ffcaf0aadef007d3cbbf6b26a04ee653a433a"
+audit = "index/telemetry/operating-readiness-20261029/f1-source-assessments.json"
+disposition = "missing-source-supported-answer"
+state = "present"
+valueJson = "\"https://pkg.go.dev/github.com/IBM/fp-go\""
 [x.dotrepo.field_evidence."owners.security_contact"]
 checkedAt = "2026-10-27T19:59:34.172486338Z"
 confidence = "high"
@@ -72,14 +77,17 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T19:59:34.172486338Z"
-confidence = "medium"
-method = "inferred"
-reason = "inferred ecosystem default from build-tool metadata"
-source = "go.mod"
-state = "present"
-valueJson = '"go build ./..."'
-
+checkedAt = "2026-10-29T06:14:39.417434Z"
+confidence = "high"
+method = "source_inspection"
+reason = "go build ./... may build root v1, but retained docs/workflows do not declare it as repository-default build. CI separately handles v1/v2/gen-v2; conventional syntax does not establish an aggregate source-owned default. Withheld repository-default scalar; narrower/prepared execution may remain valid. No upstream execution observed."
+source = "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/go.mod"
+sourceRevision = "42e25c64425e2291bd5b281aa852b7a790526204"
+sourceSha256 = "d99a7fedebc0034b3ee99bb1e820f0e93660d2e44e6e3b7a5de8252afab23544"
+audit = "index/telemetry/operating-readiness-20261029/f1-source-assessments.json"
+disposition = "potentially-applicable-insufficient-evidence"
+state = "unresolved"
+valueJson = "null"
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-10-27T19:59:34.172486338Z"
 confidence = "high"
@@ -107,14 +115,17 @@ state = "present"
 valueJson = '"fp-go"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T19:59:34.172486338Z"
-confidence = "medium"
-method = "inferred"
-reason = "inferred ecosystem default from build-tool metadata"
-source = "go.mod"
-state = "present"
-valueJson = '"go test ./..."'
-
+checkedAt = "2026-10-29T06:14:39.417434Z"
+confidence = "high"
+method = "source_inspection"
+reason = "Root go test ./... covers root v1 but omits separate v2 and gen/v2 modules. CI requires distinct module jobs, Go matrices, go mod tidy preparation and race/coverage invocations. Withheld repository-default scalar; narrower/prepared execution may remain valid. No upstream execution observed."
+source = "https://github.com/IBM/fp-go/blob/42e25c64425e2291bd5b281aa852b7a790526204/.github/workflows/build.yml"
+sourceRevision = "42e25c64425e2291bd5b281aa852b7a790526204"
+sourceSha256 = "1931d37e0f552e7451472cbc4e75f119a09fc6d8d70819aa29e0481173e4a25c"
+audit = "index/telemetry/operating-readiness-20261029/f1-source-assessments.json"
+disposition = "contradicted-or-wrong-scope"
+state = "unresolved"
+valueJson = "null"
 [x.github]
 archived = false
 clone_url = "https://github.com/IBM/fp-go.git"

@@ -1,0 +1,341 @@
+{
+  "schema": "dotrepo-e1-completeness-review/v1",
+  "reviewedAt": "2026-10-29T06:31:57.190611+00:00",
+  "repository": "github.com/keras-team/keras",
+  "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+  "classification": "known-exposed-development-diagnostic",
+  "candidateRecord": "benchmarks/head-to-head/e1-development-20261029b/automatic-002/imports/github.com/keras-team/keras/record.toml",
+  "candidateRecordSha256": "c7df30d8ff540cd8cd524d2dc61f811c1a310e36565aa307adfb9748a951384d",
+  "candidateValueBindingMatched": true,
+  "originalBindingCount": 8,
+  "originalBoundFileCount": 5,
+  "originalConfidence": "medium",
+  "overallDisposition": "unresolved-complete-source-instruction",
+  "decision": "Retain source-supported conditional repository-default candidate with completeness unresolved; abstain from complete/high-confidence acceptance. Do not relabel this as a wrong command or a successful task-abstention outcome.",
+  "reason": "Command/root/default intent is explicit, but the captured prerequisite descriptions are not a closed, selected platform/backend/test-coverage route. Required installation helper facts, backend minima/config precedence and conditional test-coverage dependencies are not fully represented in the original candidate evidence.",
+  "findings": [
+    {
+      "id": "command-directory-scope",
+      "disposition": "supported-for-claimed-default-task",
+      "reason": "CONTRIBUTING explicitly owns pytest keras from repository root. Repository scope denotes maintainer local default, not exhaustive execution of every backend/device/integration combination.",
+      "sources": [
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/CONTRIBUTING.md",
+          "upstreamPath": "CONTRIBUTING.md",
+          "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/CONTRIBUTING.md",
+          "sha256": "eff1a6349d222979e24b860c88e9577f603300af7658a1ac6fca3140992d0d3d",
+          "startLine": 202,
+          "endLine": 224,
+          "excerpt": "### Run all tests\n\nYou can run all the tests locally by running the following command in the repo\nroot directory.\n\n```shell\npytest keras\n```\n\nNote that you can skip the Keras applications tests using the\n`SKIP_APPLICATIONS_TESTS` environment variable. This will cut down the testing\ntime significantly.\n\n```shell\nSKIP_APPLICATIONS_TESTS=True pytest keras\n```\n\nTo run all tests using a different backend, you can simply specify it on the\ncommand line.\n\n```shell\nKERAS_BACKEND=jax SKIP_APPLICATIONS_TESTS=True pytest keras\n```"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/pyproject.toml",
+          "upstreamPath": "pyproject.toml",
+          "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/pyproject.toml",
+          "sha256": "51ac5db60612a4c92123980826c1010a6d087c7a64b11a580ebc33c21058d326",
+          "startLine": 48,
+          "endLine": 54,
+          "excerpt": "[tool.setuptools.dynamic]\nversion = {attr = \"keras.src.version.__version__\"}\n\n[tool.setuptools.package-dir]\n\"\" = \".\"\n\"keras\" = \"keras/api\"  # Remap api/ to the root of the package.\n\"keras.src\" = \"keras/src\""
+        }
+      ]
+    },
+    {
+      "id": "platform-python",
+      "disposition": "source-established-with-preserved-disagreement",
+      "reason": "Linux/macOS and Windows WSL2 guidance are explicit. Package minimum is Python>=3.11; guide says3.10. Candidate retains both and uses controlling package minimum. The GPU/conda3.10 example is an optional different route, not another default prerequisite.",
+      "sources": [
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/README.md",
+          "upstreamPath": "README.md",
+          "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/README.md",
+          "sha256": "6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8",
+          "startLine": 43,
+          "endLine": 65,
+          "excerpt": "#### Minimal installation\n\nKeras 3 is compatible with Linux and macOS systems. For Windows users, we recommend using WSL2 to run Keras.\nTo install a local development version:\n\n1. Install dependencies:\n\n```\npip install -r requirements.txt\n```\n\n2. Run installation command from the root directory.\n\n```\npython pip_build.py --install\n```\n\n3. Run API generation script when creating PRs that update `keras_export` public APIs:\n\n```\n./shell/api_gen.sh\n```\n"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/README.md",
+          "upstreamPath": "README.md",
+          "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/README.md",
+          "sha256": "6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8",
+          "startLine": 77,
+          "endLine": 88,
+          "excerpt": "#### Adding GPU support\n\nThe `requirements.txt` file will install a CPU-only version of TensorFlow, JAX, and PyTorch. For GPU support, we also\nprovide a separate `requirements-{backend}-cuda.txt` for TensorFlow, JAX, and PyTorch. These install all CUDA\ndependencies via `pip` and expect a NVIDIA driver to be pre-installed. We recommend a clean Python environment for each\nbackend to avoid CUDA version mismatches. As an example, here is how to create a JAX GPU environment with `conda`:\n\n```shell\nconda create -y -n keras-jax python=3.10\nconda activate keras-jax\npip install -r requirements-jax-cuda.txt\npython pip_build.py --install"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/pyproject.toml",
+          "upstreamPath": "pyproject.toml",
+          "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/pyproject.toml",
+          "sha256": "51ac5db60612a4c92123980826c1010a6d087c7a64b11a580ebc33c21058d326",
+          "startLine": 1,
+          "endLine": 12,
+          "excerpt": "[build-system]\nrequires = [\"setuptools >=61.0\"]\nbuild-backend = \"setuptools.build_meta\"\n\n[project]\nname = \"keras\"\nauthors = [\n    {name = \"Keras team\", email = \"keras-users@googlegroups.com\"},\n]\ndescription = \"Multi-backend Keras\"\nreadme = \"README.md\"\nrequires-python = \">=3.11\""
+        }
+      ]
+    },
+    {
+      "id": "installation-helper-chain",
+      "disposition": "incomplete-candidate-binding",
+      "reason": "Required local-install step calls pip_build.py, absent from the original5-file binding set. This helper invokes python3 -m build and pip3 install --force-reinstall --no-dependencies and rejects an existing tmp_build_dir. Candidate retains README invocation but does not establish aligned python/pip/python3/pip3 interpreters, fresh temporary build state or helper implementation. requirements-common contains build; pyproject declares setuptools>=61.0. No runtime readiness or actual failure inferred.",
+      "sources": [
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/README.md",
+          "upstreamPath": "README.md",
+          "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/README.md",
+          "sha256": "6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8",
+          "startLine": 48,
+          "endLine": 57,
+          "excerpt": "1. Install dependencies:\n\n```\npip install -r requirements.txt\n```\n\n2. Run installation command from the root directory.\n\n```\npython pip_build.py --install"
+        },
+        {
+          "path": "index/telemetry/operating-readiness-20261029/e1-completeness-review/sources/pip_build.py",
+          "upstreamPath": "pip_build.py",
+          "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/pip_build.py",
+          "sha256": "d7192e9c67e260e98a328b2a88f27076fcc441fdfe889f75961fd79cce8275c3",
+          "startLine": 86,
+          "endLine": 105,
+          "excerpt": "def build(root_path, is_nightly=False, rc_index=None):\n    build_directory_path = os.path.join(root_path, build_directory)\n    if os.path.exists(build_directory_path):\n        raise ValueError(f\"Directory already exists: {build_directory_path}\")\n\n    try:\n        copy_source_to_build_directory(root_path)\n\n        from keras.src.version import __version__  # noqa: E402\n\n        export_version_string(__version__, is_nightly, rc_index)\n        return build_and_save_output(root_path, __version__)\n    finally:\n        shutil.rmtree(build_directory)\n\n\ndef build_and_save_output(root_path, __version__):\n    try:\n        subprocess.run([\"python3\", \"-m\", \"build\"], check=True)\n    finally:"
+        },
+        {
+          "path": "index/telemetry/operating-readiness-20261029/e1-completeness-review/sources/pip_build.py",
+          "upstreamPath": "pip_build.py",
+          "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/pip_build.py",
+          "sha256": "d7192e9c67e260e98a328b2a88f27076fcc441fdfe889f75961fd79cce8275c3",
+          "startLine": 128,
+          "endLine": 139,
+          "excerpt": "def install_whl(whl_fpath):\n    print(f\"Installing wheel file: {whl_fpath}\")\n    subprocess.run(\n        [\n            \"pip3\",\n            \"install\",\n            whl_fpath,\n            \"--force-reinstall\",\n            \"--no-dependencies\",\n        ],\n        check=True,\n    )"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/requirements-common.txt",
+          "upstreamPath": "requirements-common.txt",
+          "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/requirements-common.txt",
+          "sha256": "3df3a2a15e645bc03082648aec06570a4329fdad189e4b326df0be80d6a7615e",
+          "startLine": 15,
+          "endLine": 21,
+          "excerpt": "tensorboard-plugin-profile\nrich\nbuild\noptree\npytest\npytest-cov\npytest-xdist"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/pyproject.toml",
+          "upstreamPath": "pyproject.toml",
+          "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/pyproject.toml",
+          "sha256": "51ac5db60612a4c92123980826c1010a6d087c7a64b11a580ebc33c21058d326",
+          "startLine": 1,
+          "endLine": 3,
+          "excerpt": "[build-system]\nrequires = [\"setuptools >=61.0\"]\nbuild-backend = \"setuptools.build_meta\""
+        }
+      ]
+    },
+    {
+      "id": "backend-conditions",
+      "disposition": "partially-established-unresolved-selection",
+      "reason": "Candidate preserves backend selection before import, immutable-after-import condition and OpenVINO inference-only limit. It does not include README backend minimum-version table in its prerequisite text/selected passages, although whole-file README hash already binds those bytes. Backend config supplies TensorFlow default but permits local config and environment override. No exact backend/config/environment was selected or inspected; do not silently convert the JAX example into the mandatory route or OpenVINO into full training coverage.",
+      "sources": [
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/README.md",
+          "upstreamPath": "README.md",
+          "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/README.md",
+          "sha256": "6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8",
+          "startLine": 66,
+          "endLine": 75,
+          "excerpt": "## Backend Compatibility Table\n\nThe following table lists the minimum supported versions of each backend for the latest stable release of Keras (v3.x):\n\n| Backend    | Minimum Supported Version |\n|------------|---------------------------|\n| TensorFlow | 2.16.1                    |\n| JAX        | 0.4.20                    |\n| PyTorch    | 2.6.0                     |\n| OpenVINO   | 2026.2.0                  |"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/README.md",
+          "upstreamPath": "README.md",
+          "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/README.md",
+          "sha256": "6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8",
+          "startLine": 91,
+          "endLine": 113,
+          "excerpt": "## Configuring your backend\n\nYou can export the environment variable `KERAS_BACKEND` or you can edit your local config file at `~/.keras/keras.json`\nto configure your backend. Available backend options are: `\"tensorflow\"`, `\"jax\"`, `\"torch\"`, `\"openvino\"`. Example:\n\n```\nexport KERAS_BACKEND=\"jax\"\n```\n\nIn Colab, you can do:\n\n```python\nimport os\nos.environ[\"KERAS_BACKEND\"] = \"jax\"\n\nimport keras\n```\n\n**Note:** The backend must be configured before importing `keras`, and the backend cannot be changed after\nthe package has been imported.\n\n**Note:** The OpenVINO backend is an inference-only backend, meaning it is designed only for running model\npredictions using `model.predict()` method."
+        },
+        {
+          "path": "index/telemetry/operating-readiness-20261029/e1-completeness-review/sources/keras/src/backend/config.py",
+          "upstreamPath": "keras/src/backend/config.py",
+          "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/src/backend/config.py",
+          "sha256": "a54307c8326eab51707bb0a87603cf1c209801f2c2a228ac6e3e4396b177bd28",
+          "startLine": 15,
+          "endLine": 20,
+          "excerpt": "# Default backend: TensorFlow.\n_BACKEND = \"tensorflow\"\n\nBUILT_IN_BACKENDS = frozenset([\"jax\", \"numpy\", \"tensorflow\", \"torch\"])\n\nPLUGGABLE_BACKENDS = frozenset([\"mlx\", \"openvino\", \"paddle\"])"
+        },
+        {
+          "path": "index/telemetry/operating-readiness-20261029/e1-completeness-review/sources/keras/src/backend/config.py",
+          "upstreamPath": "keras/src/backend/config.py",
+          "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/src/backend/config.py",
+          "sha256": "a54307c8326eab51707bb0a87603cf1c209801f2c2a228ac6e3e4396b177bd28",
+          "startLine": 300,
+          "endLine": 321,
+          "excerpt": "_config_path = os.path.expanduser(os.path.join(_KERAS_DIR, \"keras.json\"))\nif os.path.exists(_config_path):\n    try:\n        with open(_config_path) as f:\n            _config = json.load(f)\n    except ValueError:\n        _config = {}\n    _floatx = _config.get(\"floatx\", floatx())\n    if _floatx not in {\"float16\", \"float32\", \"float64\"}:\n        raise ValueError(\n            \"Invalid `floatx` configuration. \"\n            \"Expected one of {'float16', 'float32', 'float64'}. \"\n            f\"Received: floatx={_floatx}\"\n        )\n    _epsilon = _config.get(\"epsilon\", epsilon())\n    if not isinstance(_epsilon, float):\n        raise ValueError(\n            \"Invalid `epsilon` configuration. \"\n            \"Expected a float. \"\n            f\"Received: epsilon={_epsilon}\"\n        )\n    _backend = _config.get(\"backend\", _BACKEND)"
+        },
+        {
+          "path": "index/telemetry/operating-readiness-20261029/e1-completeness-review/sources/keras/src/backend/config.py",
+          "upstreamPath": "keras/src/backend/config.py",
+          "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/src/backend/config.py",
+          "sha256": "a54307c8326eab51707bb0a87603cf1c209801f2c2a228ac6e3e4396b177bd28",
+          "startLine": 361,
+          "endLine": 365,
+          "excerpt": "# Set backend based on KERAS_BACKEND flag, if applicable.\nif \"KERAS_BACKEND\" in os.environ:\n    _backend = os.environ[\"KERAS_BACKEND\"]\n    if _backend:\n        _BACKEND = _backend"
+        }
+      ]
+    },
+    {
+      "id": "coverage-and-conditional-dependencies",
+      "disposition": "unresolved-complete-coverage-chain",
+      "reason": "Retained conftest outside candidate bindings applies trainability, multiple-device, xdist and pluggable-backend exclusion skips. Additional legacy tests skip without tf_keras; that package is not explicitly named in the local requirements chain, while CPU CI installs it separately. These are conditional coverage qualifications, not proof tf_keras or multiple devices are mandatory to invoke the maintainer default. CPU CI also installs build-essential for Torch Dynamo, runs a backend matrix and additional integration/multi-device commands. Do not silently substitute that aggregate or all CI tooling for the local default.",
+      "sources": [
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/conftest.py",
+          "upstreamPath": "conftest.py",
+          "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/conftest.py",
+          "sha256": "36df082dea9e45f405a2b915e16800d7885c700f1580cb97914a6412542b0ba9",
+          "startLine": 47,
+          "endLine": 69,
+          "excerpt": "            torch.backends.cudnn.allow_tf32 = False\n\n\ndef pytest_collection_modifyitems(config, items):\n    has_multiple_devices = False\n\n    backend_skipped_tests = set()\n    if backend() in PLUGGABLE_BACKENDS:\n        backend_module_file = get_pluggable_backend_module().__file__\n        exclusions_path = os.path.join(\n            # Remove `src/__init__.py`.\n            os.path.dirname(os.path.dirname(backend_module_file)),\n            \"excluded_tests.txt\",\n        )\n        # An installed backend package has no exclusion list.\n        if os.path.exists(exclusions_path):\n            with open(exclusions_path, \"r\") as file:\n                # Exclude empty lines and comments.\n                backend_skipped_tests = {\n                    stripped\n                    for line in file.readlines()\n                    if (stripped := line.strip())\n                    and not stripped.startswith(\"#\")"
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/conftest.py",
+          "upstreamPath": "conftest.py",
+          "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/conftest.py",
+          "sha256": "36df082dea9e45f405a2b915e16800d7885c700f1580cb97914a6412542b0ba9",
+          "startLine": 72,
+          "endLine": 114,
+          "excerpt": "    if backend() == \"jax\":\n        import jax\n\n        has_multiple_devices = jax.device_count() > 1\n    elif backend() == \"torch\":\n        from keras.src.backend.torch import distribution_lib\n\n        has_multiple_devices = distribution_lib.get_device_count() > 1\n\n    requires_trainable_backend = pytest.mark.skipif(\n        not SUPPORTS_GRADIENT,\n        reason=\"Trainer not implemented for this backend.\",\n    )\n    requires_multiple_devices = (\n        None\n        if has_multiple_devices\n        else pytest.mark.skip(reason=\"Requires multiple devices\")\n    )\n    # Distributed tests (e.g. torch.distributed) cannot run under\n    # pytest-xdist workers because process group init deadlocks when\n    # multiple workers attempt to bind to the same port.\n    is_xdist_worker = \"PYTEST_XDIST_WORKER\" in os.environ\n\n    for item in items:\n        if \"requires_trainable_backend\" in item.keywords:\n            item.add_marker(requires_trainable_backend)\n        if requires_multiple_devices and \"multi_device\" in item.keywords:\n            item.add_marker(requires_multiple_devices)\n        if is_xdist_worker and \"no_pytest_xdist\" in item.keywords:\n            item.add_marker(\n                pytest.mark.skip(\n                    reason=\"This test cannot run under pytest-xdist workers\"\n                )\n            )\n\n        # Skip concrete tests listed in the backend specific file.\n        if item.nodeid in backend_skipped_tests:\n            item.add_marker(\n                skip_if_backend(\n                    backend(),\n                    f\"Not supported operation by {backend()} backend\",\n                )\n            )"
+        },
+        {
+          "path": "index/telemetry/operating-readiness-20261029/e1-completeness-review/sources/keras/src/legacy/saving/legacy_h5_format_test.py",
+          "upstreamPath": "keras/src/legacy/saving/legacy_h5_format_test.py",
+          "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/src/legacy/saving/legacy_h5_format_test.py",
+          "sha256": "ee4f3bc9ae3876a26caf5c11350c53b954f434dc63234deec5be72cf590c8219",
+          "startLine": 20,
+          "endLine": 23,
+          "excerpt": "try:\n    import tf_keras\nexcept:\n    tf_keras = None"
+        },
+        {
+          "path": "index/telemetry/operating-readiness-20261029/e1-completeness-review/sources/keras/src/legacy/saving/legacy_h5_format_test.py",
+          "upstreamPath": "keras/src/legacy/saving/legacy_h5_format_test.py",
+          "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/src/legacy/saving/legacy_h5_format_test.py",
+          "sha256": "ee4f3bc9ae3876a26caf5c11350c53b954f434dc63234deec5be72cf590c8219",
+          "startLine": 80,
+          "endLine": 82,
+          "excerpt": "@pytest.mark.requires_trainable_backend\n@pytest.mark.skipif(tf_keras is None, reason=\"Test requires tf_keras\")\nclass LegacyH5WeightsTest(testing.TestCase):"
+        },
+        {
+          "path": "index/telemetry/operating-readiness-20261029/e1-completeness-review/sources/keras/src/legacy/saving/legacy_h5_format_test.py",
+          "upstreamPath": "keras/src/legacy/saving/legacy_h5_format_test.py",
+          "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/keras/src/legacy/saving/legacy_h5_format_test.py",
+          "sha256": "ee4f3bc9ae3876a26caf5c11350c53b954f434dc63234deec5be72cf590c8219",
+          "startLine": 332,
+          "endLine": 334,
+          "excerpt": "@pytest.mark.requires_trainable_backend\n@pytest.mark.skipif(tf_keras is None, reason=\"Test requires tf_keras\")\nclass LegacyH5BackwardsCompatTest(testing.TestCase):"
+        },
+        {
+          "path": "index/telemetry/operating-readiness-20261029/e1-completeness-review/sources/.github/workflows/cpu_tests.yml",
+          "upstreamPath": ".github/workflows/cpu_tests.yml",
+          "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/.github/workflows/cpu_tests.yml",
+          "sha256": "c29ad40475b8e8ed2bc144b230fe0d4f2736bfafe1dd2488261cbfc74397fef2",
+          "startLine": 20,
+          "endLine": 48,
+          "excerpt": "    strategy:\n      fail-fast: false\n      matrix:\n        backend: [tensorflow, jax, torch, numpy]\n        nnx_enabled: [false]\n        include:\n          - backend: jax\n            nnx_enabled: true\n\n    container:\n      image: python:3.11-slim\n\n    name: ${{ format('Run tests on CPU ({0}{1})', matrix.backend, matrix.nnx_enabled && ', NNX' || '') }}\n    runs-on: linux-x86-n4-16\n    timeout-minutes: ${{ inputs.timeout }}\n\n    env:\n      KERAS_HOME: .github/workflows/config/${{ matrix.backend }}\n\n    steps:\n      - name: Install binary dependencies\n        # build-essential is the C++ compiler for Torch Dynamo\n        # curl, git, gpg are for codecov/codecov-action\n        run: |\n          apt-get update\n          apt-get -y install build-essential\n          apt-get -y install curl\n          apt-get -y install git\n          apt-get -y install gnupg"
+        },
+        {
+          "path": "index/telemetry/operating-readiness-20261029/e1-completeness-review/sources/.github/workflows/cpu_tests.yml",
+          "upstreamPath": ".github/workflows/cpu_tests.yml",
+          "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/.github/workflows/cpu_tests.yml",
+          "sha256": "c29ad40475b8e8ed2bc144b230fe0d4f2736bfafe1dd2488261cbfc74397fef2",
+          "startLine": 66,
+          "endLine": 70,
+          "excerpt": "      - name: Install Python dependencies\n        run: |\n          pip install -r requirements.txt\n          pip install --no-deps tf_keras\n          pip uninstall -y keras"
+        },
+        {
+          "path": "index/telemetry/operating-readiness-20261029/e1-completeness-review/sources/.github/workflows/cpu_tests.yml",
+          "upstreamPath": ".github/workflows/cpu_tests.yml",
+          "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/.github/workflows/cpu_tests.yml",
+          "sha256": "c29ad40475b8e8ed2bc144b230fe0d4f2736bfafe1dd2488261cbfc74397fef2",
+          "startLine": 135,
+          "endLine": 160,
+          "excerpt": "      - name: Run Tests\n        if: ${{ matrix.nnx_enabled == false }}\n        run: pytest keras -n 12 --dist loadfile --ignore keras/src/applications --ignore keras/src/wrappers --cov=keras --cov-config=pyproject.toml\n\n      - name: Run Tests Incompatible with pytest-xdist\n        if: ${{ matrix.nnx_enabled == false }}\n        run: pytest keras -m no_pytest_xdist -v --cov=keras --cov-config=pyproject.toml --cov-append\n\n      - name: Run Multi-Device Tests\n        if: ${{ matrix.backend == 'jax' }}\n        run: JAX_NUM_CPU_DEVICES=4 pytest keras -m multi_device --cov=keras --cov-config=pyproject.toml --cov-append\n\n      - name: Run Multi-Process Tests with torchrun\n        if: ${{ matrix.backend == 'torch' }}\n        # On CPU, torch counts one device per process, so the `multi_device`\n        # tests run only under torchrun. torchrun fails when a rank fails, and\n        # `--tee=3` puts the rank in front of each output line. `-x` stops a\n        # failing rank at once, so the other rank does not wait for it in a\n        # collective. The timeout stops all other hangs. Each rank writes its\n        # own coverage file, because two pytest-cov sessions that combine into\n        # one `.coverage` at the same time can corrupt it.\n        timeout-minutes: 10\n        run: |\n          torchrun --nproc_per_node=2 --master_addr=127.0.0.1 --master_port=29500 --tee=3 \\\n            -m coverage run --parallel-mode --source=keras --rcfile=pyproject.toml \\\n            -m pytest keras/src/backend/torch/torch_multi_process_distribution_test.py -m multi_device -x"
+        }
+      ]
+    },
+    {
+      "id": "conditional-api-generation",
+      "disposition": "preserved-conditional-not-default-required",
+      "reason": "README requires shell/api_gen.sh when a PR updates keras_export public APIs. It is not an unconditional prerequisite for the unchanged local pytest task. Candidate preserves the condition; no script inspection was needed to declare it mandatory for this task.",
+      "sources": [
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/README.md",
+          "upstreamPath": "README.md",
+          "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+          "url": "https://github.com/keras-team/keras/blob/7efab4a60f5930fa81b0db15ed4ec6e4925e0c45/README.md",
+          "sha256": "6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8",
+          "startLine": 60,
+          "endLine": 63,
+          "excerpt": "3. Run API generation script when creating PRs that update `keras_export` public APIs:\n\n```\n./shell/api_gen.sh"
+        }
+      ]
+    }
+  ],
+  "sourceSupportedAlternative": {
+    "command": "pytest keras",
+    "workingDirectory": ".",
+    "scope": "repository-default local tests",
+    "status": "conditional recipe, not verified complete alternative",
+    "knownConditions": [
+      "Python>=3.11 controls; preserve weaker guide3.10 statement",
+      "Linux/macOS local route; Windows recommendation WSL2",
+      "Install retained requirements.txt\u2192requirements-common.txt and perform documented local build/install",
+      "Configure chosen supported backend before first Keras import; record selected backend minimum/config precedence",
+      "Preserve default command without SKIP_APPLICATIONS_TESTS=True; declare all naturally occurring skips and optional dependency/device coverage",
+      "Run API generation only if changing exported public APIs; GPU route only if explicitly selected"
+    ],
+    "unresolved": [
+      "Interpreter/pip alias alignment and helper temporary-state requirements",
+      "Selected backend/platform/dependency versions and any necessary system/compiler conditions",
+      "Which conditional skips the requested default outcome permits; tf_keras and device-dependent additional coverage",
+      "No dependency resolution, source collection, command success or installed environment observed"
+    ]
+  },
+  "minimumFutureVerifierRequirements": [
+    "Freeze intended task as documented local default versus broader CI/backend/device coverage; do not infer equivalence.",
+    "Bind exact candidate value, source paths/bytes/line ranges and required install helpers; preserve conditional API/GPU steps rather than making all README commands mandatory.",
+    "Capture chosen platform and backend, package Python minimum, backend minima/config override state, interpreter/tool entrypoint constraints and relevant explicit native dependency setup.",
+    "Review requirements/include/optional-dependency and conftest/test-mark skip conditions against the intended coverage; either retain permitted default skips explicitly or establish required additional prerequisites.",
+    "Keep source confidence separate from environment readiness and execution; installed dependencies/runtime tests need separate bounded qualification and native outcome/oracle receipts.",
+    "A changed complete tuple needs new value-bound assessment; this known diagnostic cannot stand in for fresh held-out qualification."
+  ],
+  "additionalFilesFetched": 5,
+  "additionalBytes": 49747,
+  "inputsReused": 9,
+  "upstreamCodeExecuted": false,
+  "modelCalls": 0,
+  "indexWrites": false,
+  "statusOrConfidencePromoted": false,
+  "limits": [
+    "Bounded one-identity source review;5newfiles, no exhaustive transitive-import or repository test dependency audit.",
+    "No claim all CI dependencies are local default prerequisites. No claim a source recipe guarantees no skips.",
+    "No package install/resolve/native test/network capability experiment was performed.",
+    "Original source gold, candidate, code and frozen packets are unchanged."
+  ]
+}

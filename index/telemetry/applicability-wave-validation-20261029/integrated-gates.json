@@ -1,0 +1,30 @@
+[
+  {
+    "step": "release-gate",
+    "argv": [
+      "uv",
+      "run",
+      "python",
+      "scripts/check_release_gate.py",
+      "--output-root",
+      "/tmp/dotrepo-applicability-wave-release-gate-20261029"
+    ],
+    "exitCode": 0,
+    "elapsedSeconds": 79.5018569168169,
+    "completedAt": "2026-10-29T06:35:06.804934+00:00"
+  },
+  {
+    "step": "operator-gate",
+    "argv": [
+      "uv",
+      "run",
+      "python",
+      "scripts/check_operator_claim_gate.py",
+      "--output-root",
+      "/tmp/dotrepo-applicability-wave-operator-gate-20261029"
+    ],
+    "exitCode": 0,
+    "elapsedSeconds": 8.813198750140145,
+    "completedAt": "2026-10-29T06:35:15.619721+00:00"
+  }
+]

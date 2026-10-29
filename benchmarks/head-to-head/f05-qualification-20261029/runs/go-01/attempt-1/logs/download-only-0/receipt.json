@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-f05-qualification-go-01-8b6989cf73",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "cd /workspace/repository; npm ci --ignore-scripts"
+  ],
+  "startedAt": "2026-10-29T06:13:56.481173+00:00",
+  "elapsedSeconds": 13.94613483408466,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "0933f4d4f938acde75fe2e6980670d95f75466e33a2bcc6eb08db5d3977c5e42",
+  "stderrSha256": "66b052a3fb08c0a91f1da0c77bc87888b8271466430e294241b2b89e8fa91dd4",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

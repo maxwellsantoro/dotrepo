@@ -1,0 +1,19 @@
+{
+  "schema": "dotrepo-f05-profile-capture/v1",
+  "tasksSha256": "0294921cfc3584b8534c0718608f43cdd9a5cd3d3733c2efd024d324b4e31978",
+  "sourceFreezeSha256": "fc756e0d5f8a25cddc9f19ece651b21078a68a1f601febdb8d772208c0a66d41",
+  "collectorSha256": "2deae0c1129c76685003f8428267538714d3795e6f13c54f56b94daed0e4f0c7",
+  "snapshotId": "bb01b134d0a2d7d913ccf3f0f54327a239d9bce24ac7735259a62bb5630cf976",
+  "snapshotMetadataSha256": "8aff5b62c683b659538bedf0d2d5ff38a9b217e7a79fcf8ef9b6ba208439439a",
+  "status": "captured; consumer policy and campaign launch remain unqualified",
+  "profiles": 12,
+  "profileRequests": 12,
+  "profileDecodedBytes": 23727,
+  "selection": "All twelve tasks enrolled before index consultation; no replacement",
+  "limitations": [
+    "Manifest and payload hashes establish internal consistency, not independent authenticity",
+    "Full export identity was not recomputed from every public and private payload",
+    "HTTP decoded bytes exclude transport overhead; preparation costs are unpriced",
+    "Capture contains access-arm data and must never enter source-first tool artifacts"
+  ]
+}

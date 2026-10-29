@@ -1,0 +1,63 @@
+[
+  {
+    "step": "rustfmt-retry",
+    "argv": [
+      "cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exitCode": 0,
+    "elapsedSeconds": 0.6462715840898454
+  },
+  {
+    "step": "clippy-retry",
+    "argv": [
+      "cargo",
+      "clippy",
+      "--workspace",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exitCode": 0,
+    "elapsedSeconds": 1.3451095421332866
+  },
+  {
+    "step": "workspace-tests-retry",
+    "argv": [
+      "cargo",
+      "test",
+      "--workspace"
+    ],
+    "exitCode": 0,
+    "elapsedSeconds": 71.13538587489165
+  },
+  {
+    "step": "alias-fmt",
+    "argv": [
+      "cargo",
+      "fmt",
+      "--manifest-path",
+      "crates/dotrepo/Cargo.toml",
+      "--",
+      "--check"
+    ],
+    "exitCode": 0,
+    "elapsedSeconds": 0.15150679112412035
+  },
+  {
+    "step": "alias-check",
+    "argv": [
+      "cargo",
+      "check",
+      "--locked",
+      "--manifest-path",
+      "crates/dotrepo/Cargo.toml"
+    ],
+    "exitCode": 0,
+    "elapsedSeconds": 3.8777740001678467
+  }
+]

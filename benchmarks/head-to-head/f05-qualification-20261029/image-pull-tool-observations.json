@@ -1,0 +1,28 @@
+[
+  {
+    "image": "node:24-bookworm",
+    "terminalToolResult": {
+      "chunk_id": "1e0d4c",
+      "wall_time_seconds": 0.000003167,
+      "exit_code": 0,
+      "original_token_count": 250,
+      "output": "24-bookworm: Pulling from library/node\n5a8782a51b48: Pulling fs layer\nd4f3c8a27374: Pulling fs layer\n7d9f3d35258f: Pulling fs layer\n3b260f387eb1: Pulling fs layer\n13910f8954dc: Pulling fs layer\n1a9503373184: Pulling fs layer\nf936106b69b9: Pulling fs layer\n9e2782a4701b: Pulling fs layer\n249c4c831042: Download complete\nd4f3c8a27374: Download complete\n13910f8954dc: Download complete\n0e45bc49b43c: Download complete\n5a8782a51b48: Download complete\n7d9f3d35258f: Download complete\n9e2782a4701b: Download complete\nf936106b69b9: Download complete\n1a9503373184: Download complete\n9e2782a4701b: Pull complete\n5a8782a51b48: Pull complete\n3b260f387eb1: Download complete\n7d9f3d35258f: Pull complete\n3b260f387eb1: Pull complete\n13910f8954dc: Pull complete\n1a9503373184: Pull complete\nf936106b69b9: Pull complete\nd4f3c8a27374: Pull complete\nDigest: sha256:e7add2a490bb17d97b485b8641bd88455fff7839ade0f5eba493c3508124d413\nStatus: Downloaded newer image for node:24-bookworm\ndocker.io/library/node:24-bookworm\n"
+    },
+    "totalDownloadElapsedSeconds": null,
+    "downloadBytes": null,
+    "measurementExclusion": "Image pull began through exec_command and completed through write_stdin; full transfer timing/bytes are not measured. Pinned image metadata and terminal output retained."
+  },
+  {
+    "image": "golang:1.27.3-bookworm",
+    "terminalToolResult": {
+      "chunk_id": "67a25d",
+      "wall_time_seconds": 0.000003208,
+      "exit_code": 0,
+      "original_token_count": 199,
+      "output": "7d9f3d35258f: Pulling fs layer\n9e2782a4701b: Pulling fs layer\n5a8782a51b48: Pulling fs layer\ne2e7dba5c307: Pulling fs layer\n315b5f22b5a9: Pulling fs layer\ncaeb699ea75f: Pulling fs layer\n4f4fb700ef54: Pulling fs layer\n7d9f3d35258f: Download complete\n9e2782a4701b: Download complete\n5a8782a51b48: Download complete\n4f4fb700ef54: Already exists\n4f4fb700ef54: Pull complete\ncaeb699ea75f: Download complete\ne2e7dba5c307: Download complete\n48c9adba92bb: Download complete\n84c039dea57d: Download complete\n315b5f22b5a9: Download complete\n315b5f22b5a9: Pull complete\ne2e7dba5c307: Pull complete\ncaeb699ea75f: Pull complete\nDigest: sha256:d9b6a1beb9474adc2a1ce842573639b44b2a0dd49b6669f51d3821baf9ec37c9\nStatus: Downloaded newer image for golang:1.27.3-bookworm\ndocker.io/library/golang:1.27.3-bookworm\n"
+    },
+    "totalDownloadElapsedSeconds": null,
+    "downloadBytes": null,
+    "measurementExclusion": "Image pull began through exec_command and completed through write_stdin; full transfer timing/bytes are not measured. Pinned image metadata and terminal output retained."
+  }
+]

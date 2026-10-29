@@ -1,0 +1,32 @@
+{
+  "classification": "append-only development review disposition",
+  "earlierResult": {
+    "path": "development-results.json",
+    "sha256": "2703b3e9ea9b093c38f7b5411b70b8dcf62d72ebf59bbbbf6098dce8fdbb888b"
+  },
+  "earlierReplayManifest": {
+    "path": "automatic-001/artifact-hashes.json",
+    "sha256": "b577749901eac6e1f2f3193b7b84299b3c14d08667f0486dd6c17351286c4d51"
+  },
+  "reviewFinding": {
+    "originalPath": "index/telemetry/operating-readiness-20261029/e1-review/source-boundary-reproductions-corrected.json",
+    "retainedCopy": "reviewed-source-boundary-findings.json",
+    "sha256": "10d461718a98e9d5cd56baccb036f5bebc3b35266f05aed6dac4e148eeeaac6b"
+  },
+  "findings": [
+    "HTML-commented and four-space-indented declarations could recover a medium candidate.",
+    "A pre-test PostgreSQL installation note outside selected passages could be omitted."
+  ],
+  "corrections": [
+    "Reject HTML-comment-containing documentation and indented selected declaration passages rather than interpreting their Markdown visibility.",
+    "Reject unconsumed test-scoped setup paragraphs using bounded lexical markers, preserving the known exact setup forward reference; no arbitrary NLP completeness claim."
+  ],
+  "newReplay": "automatic-002",
+  "newResults": "development-results-002.json",
+  "actualCliControls": "reviewed-boundaries-001/receipt.json",
+  "controlsPassed": 6,
+  "consumerDirectAcceptedTasks": 0,
+  "highConfidenceAutomaticallyMinted": false,
+  "independentCompletenessVerifierPending": true,
+  "priorResultsRewritten": false
+}

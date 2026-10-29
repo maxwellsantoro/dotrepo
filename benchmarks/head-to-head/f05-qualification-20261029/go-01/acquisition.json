@@ -1,0 +1,62 @@
+{
+  "task": {
+    "id": "go-01",
+    "repository": "github.com/microsoft/TypeScript",
+    "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+    "ecosystem": "Go",
+    "scope": "repository",
+    "startingState": "pre-clone",
+    "component": null,
+    "request": "requests/go-01.md",
+    "gold": "curator/gold/go-01.json",
+    "oracle": "curator/oracles/go-01.json",
+    "enrollmentRationale": "Source has Go workspace modules tsc/tools and maintainer guide explicitly names the default compiler/language-service Go test task."
+  },
+  "startedAt": "2026-10-29T05:56:16.000697+00:00",
+  "archiveCostUsd": null,
+  "costExclusions": [
+    "No metered infrastructure/download dollar receipt is available; elapsed time and bytes retained."
+  ],
+  "indexConsulted": false,
+  "upstreamCodeExecuted": false,
+  "treeDownload": {
+    "url": "https://api.github.com/repos/microsoft/TypeScript/git/trees/25f823dc198a00744b458a7bc6984359f0dd7cac?recursive=1",
+    "finalUrl": "https://api.github.com/repos/microsoft/TypeScript/git/trees/25f823dc198a00744b458a7bc6984359f0dd7cac?recursive=1",
+    "status": 200,
+    "headers": {
+      "Date": "Thu, 29 Oct 2026 05:56:16 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Cache-Control": "public, max-age=86400, s-maxage=86400",
+      "Vary": "Accept,Accept-Encoding, Accept, X-Requested-With",
+      "ETag": "W/\"8738a2dc8b234c37000cebb598bb0bf4cc502bebf250f39a05245384b3fac1e7\"",
+      "Last-Modified": "Thu, 29 Oct 2026 04:47:58 GMT",
+      "X-GitHub-Media-Type": "github.v3; format=json",
+      "x-github-api-version-selected": "2022-11-28",
+      "Access-Control-Expose-Headers": "ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, X-GitHub-SSO, X-GitHub-Request-Id, Deprecation, Sunset, Warning",
+      "Access-Control-Allow-Origin": "*",
+      "Strict-Transport-Security": "max-age=31536000; includeSubdomains; preload",
+      "X-Frame-Options": "deny",
+      "X-Content-Type-Options": "nosniff",
+      "X-XSS-Protection": "0",
+      "Referrer-Policy": "origin-when-cross-origin, strict-origin-when-cross-origin",
+      "Content-Security-Policy": "default-src 'none'",
+      "Server": "github.com",
+      "Accept-Ranges": "bytes",
+      "X-RateLimit-Limit": "60",
+      "X-RateLimit-Remaining": "56",
+      "X-RateLimit-Used": "4",
+      "X-RateLimit-Resource": "core",
+      "X-RateLimit-Reset": "1793256976",
+      "Transfer-Encoding": "chunked",
+      "X-GitHub-Request-Id": "F01E:20E7B9:3FF0E6:D495D4:6AE2E000",
+      "x-github-edge-region": "iad",
+      "connection": "close"
+    },
+    "bytes": 15052312,
+    "elapsedSeconds": 3.5558429590892047,
+    "sha256": "8738a2dc8b234c37000cebb598bb0bf4cc502bebf250f39a05245384b3fac1e7"
+  },
+  "status": "source-acquisition-failed",
+  "error": "AssertionError: recursive Git tree was truncated",
+  "elapsedSeconds": 3.6168779160361737
+}

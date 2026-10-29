@@ -1,6 +1,7 @@
 import copy
 import importlib.util
 from pathlib import Path
+import subprocess
 
 import pytest
 
@@ -115,6 +116,111 @@ def test_landing_skips_deploy_when_public_deploy_disabled(monkeypatch):
     monkeypatch.setattr(landing, "wait_run", lambda *a: waits.append(a))
     landing.land(REPOSITORY, 1, HEAD, BASE)
     assert waits == [(REPOSITORY, 10, HEAD, "public-surface-gate")]
+
+
+@pytest.mark.parametrize("enabled", [True, False])
+def test_explicit_workflow_switch_bypasses_variable_api_and_controls_deploy(monkeypatch, enabled):
+    calls = []
+
+    def api(path, *, method="GET", body=None):
+        calls.append((path, method))
+        assert "/actions/variables/" not in path
+        if path == "repos/example/index":
+            return {"default_branch": "main"}
+        if path.endswith("/pulls/1"):
+            return pull()
+        if "/files?" in path:
+            return [{"filename": "index/repos/github.com/example/demo/record.toml"}]
+        if "/actions/runs?" in path:
+            return {"workflow_runs": []}
+        if path.endswith("/dispatches"):
+            return {"workflow_run_id": 10 if "ci.yml" in path else 20}
+        if "/git/refs/" in path:
+            return {"object": {"sha": HEAD if method == "PATCH" else BASE}}
+        raise AssertionError(path)
+
+    waits = []
+    monkeypatch.setattr(landing, "api", api)
+    monkeypatch.setattr(landing, "wait_run", lambda *args: waits.append(args))
+    receipt = {}
+    landing.land(REPOSITORY, 1, HEAD, BASE, receipt=receipt, deployment_enabled=enabled)
+    assert receipt["publicDeployment"] == {
+        "enabled": enabled,
+        "source": "explicit-cli",
+        "reason": "explicit-true" if enabled else "explicit-false",
+    }
+    assert receipt["status"] == ("published" if enabled else "landed-deployment-disabled")
+    assert receipt["publicationVerified"] is enabled
+    assert any("public-cloudflare" in path for path, _ in calls) is enabled
+    assert len(waits) == (2 if enabled else 1)
+
+
+@pytest.mark.parametrize("value,enabled", [("true", True), ("false", False), ("", False)])
+def test_manual_switch_fallback_retains_variable_decision(monkeypatch, value, enabled):
+    monkeypatch.setattr(landing, "api", lambda path: {"value": value})
+    decision = {}
+    assert (
+        landing.public_deploy_enabled(REPOSITORY, "repos/example/index", decision=decision)
+        is enabled
+    )
+    assert decision["enabled"] is enabled
+    assert decision["source"] == "repository-variable-api"
+    assert decision["reason"] == ("variable-true" if enabled else "variable-not-true")
+
+
+@pytest.mark.parametrize("failure", ["404", "403", "network", "malformed", "invalid-value"])
+def test_manual_switch_resolution_distinguishes_unset_from_error_before_merge(monkeypatch, failure):
+    calls = []
+
+    def api(path, *, method="GET", body=None):
+        calls.append((path, method))
+        if path == "repos/example/index":
+            return {"default_branch": "main"}
+        if path.endswith("/pulls/1"):
+            return pull()
+        if "/actions/variables/" in path:
+            if failure in {"404", "403"}:
+                raise subprocess.CalledProcessError(
+                    1,
+                    ["gh", "api", path],
+                    output='{"status":"' + failure + '"}',
+                    stderr="gh: fixture (HTTP " + failure + ")",
+                )
+            if failure == "network":
+                raise OSError("fixture connection unavailable")
+            return {} if failure == "malformed" else {"value": "perhaps"}
+        if "/files?" in path:
+            return [{"filename": "index/repos/github.com/example/demo/record.toml"}]
+        if path.endswith("/dispatches"):
+            return {"workflow_run_id": 10}
+        if "/actions/runs?" in path:
+            return {"workflow_runs": []}
+        if "/git/refs/" in path:
+            return {"object": {"sha": BASE}}
+        raise AssertionError(path)
+
+    monkeypatch.setattr(landing, "api", api)
+    monkeypatch.setattr(landing, "wait_run", lambda *args: None)
+    receipt = {}
+    if failure == "404":
+        landing.land(REPOSITORY, 1, HEAD, BASE, receipt=receipt)
+        assert receipt["status"] == "landed-deployment-disabled"
+        assert receipt["publicDeployment"] == {
+            "enabled": False,
+            "source": "repository-variable-api",
+            "reason": "repository-variable-unset",
+            "httpStatus": 404,
+        }
+    else:
+        with pytest.raises(RuntimeError, match="refusing to land"):
+            landing.land(REPOSITORY, 1, HEAD, BASE, receipt=receipt)
+        assert not any(method == "PATCH" or path.endswith("/dispatches") for path, method in calls)
+        assert receipt["publicDeployment"]["enabled"] is None
+        assert receipt["publicDeployment"]["reason"] in {
+            "variable-read-error",
+            "invalid-variable-response",
+            "invalid-variable-value",
+        }
 
 
 def test_pending_pull_request_run_is_approved_and_awaited(monkeypatch):

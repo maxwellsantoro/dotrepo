@@ -1,0 +1,27 @@
+   Compiling dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.73s
+     Running unittests src/lib.rs (target/debug/deps/dotrepo_core-6af6d15045c80b2a)
+
+running 4 tests
+test import::commands::context::python_recipe::tests::natural_python_recipe_rejects_even_contained_requirement_symlinks ... ok
+test import::commands::context::python_recipe::tests::natural_python_recipe_recovers_real_source_tuple_with_medium_bound_evidence ... ok
+test import::commands::context::python_recipe::tests::natural_python_recipe_import_preserves_candidate_assessment_without_scalar_promotion ... ok
+test import::commands::context::python_recipe::tests::natural_python_recipe_rejects_wrong_scope_directory_conditions_and_missing_chain ... FAILED
+
+failures:
+
+---- import::commands::context::python_recipe::tests::natural_python_recipe_rejects_wrong_scope_directory_conditions_and_missing_chain stdout ----
+
+thread 'import::commands::context::python_recipe::tests::natural_python_recipe_rejects_wrong_scope_directory_conditions_and_missing_chain' (41341393) panicked at crates/dotrepo-core/src/import/commands/context/python_recipe/tests.rs:260:9:
+README.md: ## Backwards compatibility -> Before testing, this requires PostgreSQL 16.
+
+## Backwards compatibility
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    import::commands::context::python_recipe::tests::natural_python_recipe_rejects_wrong_scope_directory_conditions_and_missing_chain
+
+test result: FAILED. 3 passed; 1 failed; 0 ignored; 0 measured; 248 filtered out; finished in 0.05s
+
+error: test failed, to rerun pass `-p dotrepo-core --lib`

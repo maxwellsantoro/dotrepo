@@ -1,0 +1,15 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.07s
+     Running tests/hosted_query_server_contract.rs (target/debug/deps/hosted_query_server_contract-e38f12ffbc0abee8)
+
+running 4 tests
+dotrepo-public-query listening on 127.0.0.1:65309
+dotrepo-public-query listening on 127.0.0.1:65306
+dotrepo-public-query listening on 127.0.0.1:65307
+dotrepo-public-query listening on 127.0.0.1:49350
+test hosted_query_server_honors_base_path_and_preserves_equal_authority_conflicts ... ok
+test hosted_query_server_serves_batch_profile_and_query_routes ... ok
+test hosted_query_server_matches_checked_in_query_fixtures ... ok
+test hosted_query_server_serves_static_export_and_resolves_emitted_query_template ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.49s
+

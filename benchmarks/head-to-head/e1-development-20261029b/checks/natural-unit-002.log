@@ -1,0 +1,33 @@
+   Compiling dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 10.59s
+     Running unittests src/lib.rs (target/debug/deps/dotrepo_core-6af6d15045c80b2a)
+
+running 4 tests
+test import::commands::context::python_recipe::tests::natural_python_recipe_rejects_even_contained_requirement_symlinks ... ok
+test import::commands::context::python_recipe::tests::natural_python_recipe_recovers_real_source_tuple_with_medium_bound_evidence ... FAILED
+test import::commands::context::python_recipe::tests::natural_python_recipe_import_preserves_candidate_assessment_without_scalar_promotion ... FAILED
+test import::commands::context::python_recipe::tests::natural_python_recipe_rejects_wrong_scope_directory_conditions_and_missing_chain ... ok
+
+failures:
+
+---- import::commands::context::python_recipe::tests::natural_python_recipe_recovers_real_source_tuple_with_medium_bound_evidence stdout ----
+
+thread 'import::commands::context::python_recipe::tests::natural_python_recipe_recovers_real_source_tuple_with_medium_bound_evidence' (41337498) panicked at crates/dotrepo-core/src/import/commands/context/python_recipe/tests.rs:73:46:
+retained Keras recipe
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- import::commands::context::python_recipe::tests::natural_python_recipe_import_preserves_candidate_assessment_without_scalar_promotion stdout ----
+
+thread 'import::commands::context::python_recipe::tests::natural_python_recipe_import_preserves_candidate_assessment_without_scalar_promotion' (41337497) panicked at crates/dotrepo-core/src/import/commands/context/python_recipe/tests.rs:121:5:
+assertion `left == right` failed
+  left: 0
+ right: 1
+
+
+failures:
+    import::commands::context::python_recipe::tests::natural_python_recipe_import_preserves_candidate_assessment_without_scalar_promotion
+    import::commands::context::python_recipe::tests::natural_python_recipe_recovers_real_source_tuple_with_medium_bound_evidence
+
+test result: FAILED. 2 passed; 2 failed; 0 ignored; 0 measured; 248 filtered out; finished in 0.10s
+
+error: test failed, to rerun pass `-p dotrepo-core --lib`

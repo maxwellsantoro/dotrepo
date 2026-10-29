@@ -1,0 +1,9 @@
+
+> @openhands/agent-canvas@1.34.0 test
+> npm run make-i18n && vitest run __tests__/bin/agent-canvas.test.ts --reporter=json --outputFile=/workspace/vitest.json
+
+
+> @openhands/agent-canvas@1.34.0 make-i18n
+> node scripts/make-i18n-translations.cjs
+
+JSON report written to /workspace/vitest.json

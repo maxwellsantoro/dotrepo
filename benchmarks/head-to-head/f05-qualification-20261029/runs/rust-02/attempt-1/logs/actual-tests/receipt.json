@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-f05-qualification-rust-02-cba0008c42",
+    "/bin/sh",
+    "-eu",
+    "-c",
+    "cd /workspace/repository; cargo test --locked --manifest-path lib/sniffnet-packet-parser/Cargo.toml -- --nocapture"
+  ],
+  "startedAt": "2026-10-29T06:12:46.557473+00:00",
+  "elapsedSeconds": 6.760577917098999,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "d606452a4046247af21809b98d1c434a7c253dabdcfe7af0078d4f89285caed6",
+  "stderrSha256": "a6a089e54b1e00c1be77f345f878c38a7811b58f7606faf3b5bda2b212c369e2",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

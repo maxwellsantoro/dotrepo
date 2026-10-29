@@ -1,0 +1,48 @@
+{
+  "task": {
+    "id": "rust-02",
+    "repository": "github.com/GyulyVGC/sniffnet",
+    "revision": "ab4bf739d46448436cb68933bb8260ee264449d5",
+    "ecosystem": "Rust",
+    "scope": "component",
+    "startingState": "local-checkout",
+    "component": "lib/sniffnet-packet-parser",
+    "request": "requests/rust-02.md",
+    "gold": "curator/gold/rust-02.json",
+    "oracle": "curator/oracles/rust-02.json",
+    "enrollmentRationale": "The only non-root workspace member is an owned library with retained unit tests; it is the lexically first eligible component."
+  },
+  "status": "source-acquired",
+  "sourceFiles": 605,
+  "sourceBytes": 114376664,
+  "frozenSourceFilesMatched": [
+    "Cargo.toml",
+    "README.md",
+    "CONTRIBUTING.md",
+    "lib/sniffnet-packet-parser/Cargo.toml",
+    "lib/sniffnet-packet-parser/README.md",
+    "lib/sniffnet-packet-parser/src/lib.rs",
+    "lib/sniffnet-packet-parser/src/protocol.rs",
+    "lib/sniffnet-packet-parser/src/packet.rs",
+    "lib/sniffnet-packet-parser/src/arp_type.rs",
+    "lib/sniffnet-packet-parser/src/headers.rs",
+    "lib/sniffnet-packet-parser/src/icmp_type.rs",
+    "lib/sniffnet-packet-parser/src/igmp_type.rs",
+    "lib/sniffnet-packet-parser/src/link_type.rs",
+    ".github/workflows/rust.yml"
+  ],
+  "missingSubmodules": [],
+  "missingLfsObjects": [],
+  "symlinks": {},
+  "runtimeArchivePath": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/rust-02-full/runtime-source.tar",
+  "runtimeArchiveSha256": "862b159c55ee7693faed80c2546aa203cc370e867cf5a206cff5356ab66766d6",
+  "runtimeArchiveBytes": 114851840,
+  "sourceBundleReady": true,
+  "sourceCostUsd": null,
+  "costExclusions": [
+    "No metered infrastructure/download dollar receipt is available."
+  ],
+  "indexConsulted": false,
+  "upstreamCodeExecuted": false,
+  "appendOnlyDisposition": "Completes the initial codeload/truncated-tree limitation using exact Git objects; original failure retained."
+}

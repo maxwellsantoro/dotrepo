@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Docs</title>
+    <meta name="description" content="A modern editor with a backend written in Rust.
+">
+
+    <link rel="canonical" href="http://abishov.com/xi-editor/docs.html">
+
+    <link rel="shortcut icon" href="/xi-editor/assets/favicon.png"/>
+
+    <!-- Page styles -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- MDL -->
+    <link rel="stylesheet" href="/xi-editor/css/main.css">
+    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.1/material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- Link anchoring -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+</head>
+
+
+<body class="mdl-base">
+<div class="tac-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary tac-header">
+
+    <div class="mdl-layout__header-row tac-logo-row mdl-grid">
+        <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-phone mdl-cell--hide-tablet"></div>
+
+        <form class="header-content mdl-cell mdl-cell--8-col" action="https://www.google.com/search">
+            <!-- Expandable Textfield -->
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable textfield-demo">
+                <label class="mdl-button mdl-js-button mdl-button--icon" for="q">
+                    <i class="material-icons">search</i>
+                </label>
+                <div class="mdl-textfield__expandable-holder">
+                    <input class="mdl-textfield__input" type="text" name="q" id="q"/>
+                    <input type="hidden" name="sitesearch" value="http://abishov.com/xi-editor"/>
+                    <label class="mdl-textfield__label" for="sample-expandable">Expandable Input</label>
+                </div>
+            </div>
+
+            <div class="mdl-layout-spacer"></div>
+
+            <a class="tac-site-title" href="/xi-editor/">
+                <img src="/xi-editor/assets/logo.png"/>
+                <span class="mdl-layout-title tac-title">
+            Xi-Editor
+          </span>
+            </a>
+        </form>
+    </div>
+
+    <div class="mdl-layout__header-row scrollable-header-row mdl-layout--large-screen-only mdl-grid mdl-grid--no-spacing">
+        <div class="mdl-cell--hide-phone mdl-cell--hide-tablet mdl-cell mdl-cell--2-col"></div>
+        <nav class="mdl-navigation tac-tab-navigation mdl-cell mdl-cell--8-col">
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a class="mdl-navigation__link mdl-js-ripple-effect"
+               href="/xi-editor/index.html">Home
+                <div class="mdl-ripple"></div>
+            </a>
+
+            
+            
+            
+            <a class="mdl-navigation__link mdl-js-ripple-effect mdl-navigation__link--current"
+               href="/xi-editor/docs.html">Docs
+                <div class="mdl-ripple"></div>
+            </a>
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a class="mdl-navigation__link mdl-js-ripple-effect"
+               href="/xi-editor/gsoc.html">GSoC
+                <div class="mdl-ripple"></div>
+            </a>
+
+            
+            
+            
+            <a class="mdl-navigation__link mdl-js-ripple-effect"
+               href="/xi-editor/contribute.html">Contribute
+                <div class="mdl-ripple"></div>
+            </a>
+
+            
+            
+            
+            <a class="mdl-navigation__link mdl-js-ripple-effect"
+               href="/xi-editor/building-docs.html">Building Docs
+                <div class="mdl-ripple"></div>
+            </a>
+
+            
+            
+        </nav>
+    </div>
+</header>
+
+    
+
+<div class="mdl-layout__drawer">
+    <nav class="tac-navigation mdl-navigation">
+        
+        
+        
+        
+        
+        
+        
+        
+        <a class="mdl-navigation__link mdl-js-ripple-effect"
+           href="/xi-editor/docs/find.html">Find and Replace
+            <div class="mdl-ripple"></div>
+        </a>
+        
+        
+        
+        <a class="mdl-navigation__link mdl-js-ripple-effect"
+           href="/xi-editor/docs/tracing.html">Tracing
+            <div class="mdl-ripple"></div>
+        </a>
+        
+        
+        
+        <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category"
+           href="/xi-editor/index.html">Home
+            <div class="mdl-ripple"></div>
+        </a>
+        
+        
+        
+        <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category mdl-navigation__link--current"
+           href="/xi-editor/docs.html">Docs
+            <div class="mdl-ripple"></div>
+        </a>
+        
+        
+        
+        <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category2"
+           href="/xi-editor/gsoc-template.html">Proposal template
+            <div class="mdl-ripple"></div>
+        </a>
+        
+        
+        
+        <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category2"
+           href="/xi-editor/docs/frontend-notes.html">Notes on writing front-ends
+            <div class="mdl-ripple"></div>
+        </a>
+        
+        
+        
+        <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category2"
+           href="/xi-editor/docs/frontend-protocol.html">The Frontend Protocol
+            <div class="mdl-ripple"></div>
+        </a>
+        
+        
+        
+        <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category2"
+           href="/xi-editor/docs/plugin.html">Plugin architecture
+            <div class="mdl-ripple"></div>
+        </a>
+        
+        
+        
+        <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category2"
+           href="/xi-editor/docs/config.html">Working with the config system
+            <div class="mdl-ripple"></div>
+        </a>
+        
+        
+        
+        <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category2"
+           href="/xi-editor/docs/crdt.html">CRDT - An approach to async plugins and undo
+            <div class="mdl-ripple"></div>
+        </a>
+        
+        
+        
+        <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category2"
+           href="/xi-editor/docs/crdt-details.html">CRDT - The Xi Text Engine
+            <div class="mdl-ripple"></div>
+        </a>
+        
+        
+        
+        <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category2"
+           href="/xi-editor/docs/fuchsia-ledger-crdts.html">CRDT - Using the Ledger for CRDTs
+            <div class="mdl-ripple"></div>
+        </a>
+        
+        
+        
+        <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category2"
+           href="/xi-editor/docs/rope_science_00.html">Rope science - Introduction
+            <div class="mdl-ripple"></div>
+        </a>
+        
+        
+        
+        <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category2"
+           href="/xi-editor/docs/rope_science_01.html">Rope science, part 1 - MapReduce for text
+            <div class="mdl-ripple"></div>
+        </a>
+        
+        
+        
+        <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category2"
+           href="/xi-editor/docs/rope_science_02.html">Rope science, part 2 - metrics
+            <div class="mdl-ripple"></div>
+        </a>
+        
+        
+        
+        <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category2"
+           href="/xi-editor/docs/rope_science_03.html">Rope science, part 3 - Grapheme cluster boundaries
+            <div class="mdl-ripple"></div>
+        </a>
+        
+        
+        
+        <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category2"
+           href="/xi-editor/docs/rope_science_04.html">Rope science, part 4 - parenthesis matching
+            <div class="mdl-ripple"></div>
+        </a>
+        
+        
+        
+        <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category2"
+           href="/xi-editor/docs/rope_science_05.html">Rope science, part 5 - incremental word wrapping
+            <div class="mdl-ripple"></div>
+        </a>
+        
+        
+        
+        <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category2"
+           href="/xi-editor/docs/rope_science_06.html">Rope science, part 6 - parallel and asynchronous word wrapping
+            <div class="mdl-ripple"></div>
+        </a>
+        
+        
+        
+        <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category2"
+           href="/xi-editor/docs/rope_science_08.html">Rope science, part 8 - CRDTs for concurrent editing
+            <div class="mdl-ripple"></div>
+        </a>
+        
+        
+        
+        <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category2"
+           href="/xi-editor/docs/rope_science_08a.html">Rope science, part 8a - CRDT follow-up
+            <div class="mdl-ripple"></div>
+        </a>
+        
+        
+        
+        <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category2"
+           href="/xi-editor/docs/rope_science_09.html">Rope science, part 9 - CRDT Approach to Async Plugins and Undo
+            <div class="mdl-ripple"></div>
+        </a>
+        
+        
+        
+        <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category2"
+           href="/xi-editor/docs/rope_science_10.html">Rope science, part 10 - designing for a conflict-free world
+            <div class="mdl-ripple"></div>
+        </a>
+        
+        
+        
+        <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category2"
+           href="/xi-editor/docs/rope_science_11.html">Rope science, part 11 - practical syntax highlighting
+            <div class="mdl-ripple"></div>
+        </a>
+        
+        
+        
+        <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category2"
+           href="/xi-editor/docs/rope_science_12.html">Rope science, part 12 - minimal invalidation
+            <div class="mdl-ripple"></div>
+        </a>
+        
+        
+        
+        <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category"
+           href="/xi-editor/gsoc.html">GSoC
+            <div class="mdl-ripple"></div>
+        </a>
+        
+        
+        
+        <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category"
+           href="/xi-editor/contribute.html">Contribute
+            <div class="mdl-ripple"></div>
+        </a>
+        
+        
+        
+        <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category"
+           href="/xi-editor/building-docs.html">Building Docs
+            <div class="mdl-ripple"></div>
+        </a>
+        
+        
+    </nav>
+</div>
+
+    <main class="mdl-layout__content docs-content-wrapper mdl-grid">
+        <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-phone mdl-cell--hide-tablet">
+            
+
+
+<nav class="tac-navigation mdl-navigation">
+    
+
+    
+    
+
+    
+    <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category"
+       href="/xi-editor/docs/frontend-notes.html">Notes on writing front-ends
+        <div class="mdl-ripple"></div>
+    </a>
+    
+    
+
+    
+    <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category"
+       href="/xi-editor/docs/frontend-protocol.html">The Frontend Protocol
+        <div class="mdl-ripple"></div>
+    </a>
+    
+    
+
+    
+    <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category"
+       href="/xi-editor/docs/plugin.html">Plugin architecture
+        <div class="mdl-ripple"></div>
+    </a>
+    
+    
+
+    
+    <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category"
+       href="/xi-editor/docs/config.html">Working with the config system
+        <div class="mdl-ripple"></div>
+    </a>
+    
+    
+
+    
+    <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category"
+       href="/xi-editor/docs/crdt.html">CRDT - An approach to async plugins and undo
+        <div class="mdl-ripple"></div>
+    </a>
+    
+    
+
+    
+    <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category"
+       href="/xi-editor/docs/crdt-details.html">CRDT - The Xi Text Engine
+        <div class="mdl-ripple"></div>
+    </a>
+    
+    
+
+    
+    <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category"
+       href="/xi-editor/docs/fuchsia-ledger-crdts.html">CRDT - Using the Ledger for CRDTs
+        <div class="mdl-ripple"></div>
+    </a>
+    
+    
+
+    
+    <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category"
+       href="/xi-editor/docs/rope_science_00.html">Rope science - Introduction
+        <div class="mdl-ripple"></div>
+    </a>
+    
+    
+
+    
+    <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category"
+       href="/xi-editor/docs/rope_science_01.html">Rope science, part 1 - MapReduce for text
+        <div class="mdl-ripple"></div>
+    </a>
+    
+    
+
+    
+    <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category"
+       href="/xi-editor/docs/rope_science_02.html">Rope science, part 2 - metrics
+        <div class="mdl-ripple"></div>
+    </a>
+    
+    
+
+    
+    <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category"
+       href="/xi-editor/docs/rope_science_03.html">Rope science, part 3 - Grapheme cluster boundaries
+        <div class="mdl-ripple"></div>
+    </a>
+    
+    
+
+    
+    <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category"
+       href="/xi-editor/docs/rope_science_04.html">Rope science, part 4 - parenthesis matching
+        <div class="mdl-ripple"></div>
+    </a>
+    
+    
+
+    
+    <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category"
+       href="/xi-editor/docs/rope_science_05.html">Rope science, part 5 - incremental word wrapping
+        <div class="mdl-ripple"></div>
+    </a>
+    
+    
+
+    
+    <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category"
+       href="/xi-editor/docs/rope_science_06.html">Rope science, part 6 - parallel and asynchronous word wrapping
+        <div class="mdl-ripple"></div>
+    </a>
+    
+    
+
+    
+    <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category"
+       href="/xi-editor/docs/rope_science_08.html">Rope science, part 8 - CRDTs for concurrent editing
+        <div class="mdl-ripple"></div>
+    </a>
+    
+    
+
+    
+    <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category"
+       href="/xi-editor/docs/rope_science_08a.html">Rope science, part 8a - CRDT follow-up
+        <div class="mdl-ripple"></div>
+    </a>
+    
+    
+
+    
+    <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category"
+       href="/xi-editor/docs/rope_science_09.html">Rope science, part 9 - CRDT Approach to Async Plugins and Undo
+        <div class="mdl-ripple"></div>
+    </a>
+    
+    
+
+    
+    <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category"
+       href="/xi-editor/docs/rope_science_10.html">Rope science, part 10 - designing for a conflict-free world
+        <div class="mdl-ripple"></div>
+    </a>
+    
+    
+
+    
+    <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category"
+       href="/xi-editor/docs/rope_science_11.html">Rope science, part 11 - practical syntax highlighting
+        <div class="mdl-ripple"></div>
+    </a>
+    
+    
+
+    
+    <a class="mdl-navigation__link mdl-js-ripple-effect tac-site-nav-category"
+       href="/xi-editor/docs/rope_science_12.html">Rope science, part 12 - minimal invalidation
+        <div class="mdl-ripple"></div>
+    </a>
+    
+    
+</nav>
+
+
+        </div>
+        <div class="docs-content-grid mdl-cell mdl-cell--8-col">
+            <div class="post">
+    <header class="post-header">
+        <h1 class="post-title">Docs</h1>
+    </header>
+
+    <article class="post-content">
+        <h3 id="table-of-contents">Table of Contents:</h3>
+<ul>
+  <li><a href="docs/frontend-notes.html">Notes on writing frontends</a></li>
+  <li><a href="docs/frontend-protocol.html">The Xi Protocol</a></li>
+  <li><a href="docs/plugin.html">Plugin architecture</a></li>
+  <li><a href="docs/config.html">The config system</a></li>
+  <li>CRDT Docs:
+    <ul>
+      <li><a href="docs/crdt.html">The CRDT model</a></li>
+      <li><a href="docs/crdt-details.html">The Xi Text Engine</a></li>
+      <li><a href="docs/fuchsia-ledger-crdts.html">Using the Ledger for CRDTs</a></li>
+    </ul>
+  </li>
+  <li>Rope Science:
+    <ul>
+      <li><a href="docs/rope_science_00.html">Introduction</a></li>
+      <li><a href="docs/rope_science_01.html">01 MapReduce for Text</a></li>
+      <li><a href="docs/rope_science_02.html">02 Metrics</a></li>
+      <li><a href="docs/rope_science_03.html">03 Grapheme Cluster Boundaries</a></li>
+      <li><a href="docs/rope_science_04.html">04 Parenthesis matching</a></li>
+      <li><a href="docs/rope_science_05.html">05 Incremental Word Wrapping</a></li>
+      <li><a href="docs/rope_science_06.html">06 Parallel and Asynchronous Word Wrapping</a></li>
+      <li><a href="docs/rope_science_08.html">08 CRDTs for Concurrent Editing</a></li>
+      <li><a href="docs/rope_science_08a.html">08(a) CRDT Follow-up</a></li>
+      <li><a href="docs/rope_science_09.html">09 CRDT Approach to Async Plugins and Undo</a></li>
+      <li><a href="docs/rope_science_10.html">10 Designing for a Conflict-free World</a></li>
+      <li><a href="docs/rope_science_11.html">11 Practical Syntax Highlighting</a></li>
+      <li><a href="docs/rope_science_12.html">12 Minimal Invalidation</a></li>
+    </ul>
+  </li>
+</ul>
+
+    </article>
+</div>
+
+        </div>
+        <div class="mdl-layout--small-screen-only"><footer class="mdl-mini-footer tac-site-footer">
+    <div class="mdl-mini-footer__left-section">
+        <span>See the <a href="https://github.com/xi-editor/xi-editor">GitHub project.</a></span>
+    </div>
+    <script type="text/javascript">
+        (function () {
+            'use strict';
+
+            anchors.options.placement = 'left';
+            anchors.add('.post-content > h1, .post-content > h2, .post-content > h3, .post-content > h4, .post-content > h5, .post-content > h6');
+        })();
+    </script>
+</footer>
+</div>
+    </main>
+    <div class="mdl-layout--large-screen-only"><footer class="mdl-mini-footer tac-site-footer">
+    <div class="mdl-mini-footer__left-section">
+        <span>See the <a href="https://github.com/xi-editor/xi-editor">GitHub project.</a></span>
+    </div>
+    <script type="text/javascript">
+        (function () {
+            'use strict';
+
+            anchors.options.placement = 'left';
+            anchors.add('.post-content > h1, .post-content > h2, .post-content > h3, .post-content > h4, .post-content > h5, .post-content > h6');
+        })();
+    </script>
+</footer>
+</div>
+</div>
+</body>
+</html>

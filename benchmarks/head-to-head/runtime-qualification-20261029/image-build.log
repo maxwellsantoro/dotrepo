@@ -1,0 +1,46 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 378B 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.14.4-slim@sha256:2ca02f32b4d9d893863367ce07ec1972819f476dd38d8612f2a9cb6a41cbb727
+#2 DONE 0.1s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [dependency 1/1] FROM docker.io/library/python:3.14.4-slim@sha256:2ca02f32b4d9d893863367ce07ec1972819f476dd38d8612f2a9cb6a41cbb727
+#4 resolve docker.io/library/python:3.14.4-slim@sha256:2ca02f32b4d9d893863367ce07ec1972819f476dd38d8612f2a9cb6a41cbb727 0.0s done
+#4 extracting sha256:9ebf9a1d0c9ca1bcb377e9dba38a3fdd3e89cf37164f4245286c24f8cd50a39e
+#4 extracting sha256:9ebf9a1d0c9ca1bcb377e9dba38a3fdd3e89cf37164f4245286c24f8cd50a39e 2.3s done
+#4 DONE 2.4s
+
+#4 [dependency 1/1] FROM docker.io/library/python:3.14.4-slim@sha256:2ca02f32b4d9d893863367ce07ec1972819f476dd38d8612f2a9cb6a41cbb727
+#4 extracting sha256:a31c4e147be7a2f1573503ad599786b283b6922f6ac04af2218e8d28be53c7aa 0.1s done
+#4 DONE 2.5s
+
+#4 [dependency 1/1] FROM docker.io/library/python:3.14.4-slim@sha256:2ca02f32b4d9d893863367ce07ec1972819f476dd38d8612f2a9cb6a41cbb727
+#4 extracting sha256:c76390185799a5a51b77380c8ce003e85bfd208a1aba79c8a46a47070479d8fe
+#4 extracting sha256:c76390185799a5a51b77380c8ce003e85bfd208a1aba79c8a46a47070479d8fe 0.7s done
+#4 DONE 3.3s
+
+#4 [dependency 1/1] FROM docker.io/library/python:3.14.4-slim@sha256:2ca02f32b4d9d893863367ce07ec1972819f476dd38d8612f2a9cb6a41cbb727
+#4 extracting sha256:8e86e5ab3004d041099543681b2fa49706acedfc13bff732e895504879438584 done
+#4 DONE 3.3s
+
+#5 [stage-1 1/1] COPY --from=dependency / /
+#5 DONE 3.4s
+
+#6 exporting to image
+#6 exporting layers
+#6 exporting layers 4.7s done
+#6 exporting manifest sha256:f4b08ac30ff7ae3803f6049f36e54a12e3c0f02e83422c6982f6164d7d0b03d8 done
+#6 exporting config sha256:bdffa52b94744d8243429c7634143dc0295b588b568cf2b9085a84192c321f95 done
+#6 exporting attestation manifest sha256:637469e4988347119df9309077f084701cd93429904a568e9f5a9913319675c6 done
+#6 exporting manifest list sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4 done
+#6 naming to docker.io/library/dotrepo-f05-runtime-control:20261029 done
+#6 unpacking to docker.io/library/dotrepo-f05-runtime-control:20261029
+#6 unpacking to docker.io/library/dotrepo-f05-runtime-control:20261029 2.8s done
+#6 DONE 7.6s

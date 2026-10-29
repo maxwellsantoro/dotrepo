@@ -1,0 +1,192 @@
+{
+  "schema": "dotrepo-f1-audit-cohort-plan/v1",
+  "declaredAt": "2026-10-29T05:56:55.252081+00:00",
+  "baseCommit": "eb43ab20ac0368c4926660ae060347305197f936",
+  "selection": "Exclude all historical and E1/F05 reserved identities before reading records; weighted sample20 seed20261029 using current sampler, sort by descending riskWeight, then first8 with at most2 per language family. No upstream inspection or task outcomes used.",
+  "population": {
+    "allIndexRecords": 615,
+    "eligibleRecords": 423,
+    "protectedIdentities": 523
+  },
+  "protectionInputs": {
+    "benchmarks/head-to-head/experiments/applicability-2026-10-29/screening-reservations.json": "cd91fb903108d426c87fba86704f7e9dc219b54314445a22eeffa618df090850",
+    "index/telemetry/command-withdrawal-diagnostic-20261029/cases.json": "391b3e057b553053bb29de9ada81e689bd0c63b5affb70614a5ef128de2aca2c"
+  },
+  "samplerSha256": "5325bf7cc9f72b9b814a7373d1345bdd1023d74dfb586f52e6c51ad605b6bef2",
+  "selected": [
+    {
+      "identity": "github.com/xi-editor/xi-editor",
+      "languageFamily": "Rust",
+      "status": "verified",
+      "confidence": "high",
+      "riskWeight": 1.9415,
+      "riskFactors": [
+        "missing:build",
+        "missing:test",
+        "missing:security_contact",
+        "missing:docs",
+        "surprising-completeness:low"
+      ],
+      "recordPath": "index/repos/github.com/xi-editor/xi-editor/record.toml",
+      "evidencePath": "index/repos/github.com/xi-editor/xi-editor/evidence.md",
+      "fields": [
+        "repo.build",
+        "repo.test",
+        "docs.root"
+      ],
+      "recordSha256": "f657a38532c23f3ade50164f327bf764bad68f77e332f4ebfa4651c89bf1165c"
+    },
+    {
+      "identity": "github.com/WebKit/WebKit",
+      "languageFamily": "TypeScript / JavaScript",
+      "status": "inferred",
+      "confidence": "medium",
+      "riskWeight": 0.9166,
+      "riskFactors": [
+        "confidence:medium",
+        "missing:build",
+        "missing:test",
+        "missing:security_contact",
+        "missing:license",
+        "missing:docs",
+        "surprising-completeness:low"
+      ],
+      "recordPath": "index/repos/github.com/WebKit/WebKit/record.toml",
+      "evidencePath": "index/repos/github.com/WebKit/WebKit/evidence.md",
+      "fields": [
+        "repo.build",
+        "repo.test",
+        "docs.root"
+      ],
+      "recordSha256": "a2a06f604c154a19a3f77681e45e5e74093868c6b149101b265be21fbba4cbaa"
+    },
+    {
+      "identity": "github.com/IBM/fp-go",
+      "languageFamily": "Go",
+      "status": "inferred",
+      "confidence": "medium",
+      "riskWeight": 0.7462,
+      "riskFactors": [
+        "confidence:medium",
+        "missing:security_contact",
+        "missing:docs"
+      ],
+      "recordPath": "index/repos/github.com/IBM/fp-go/record.toml",
+      "evidencePath": "index/repos/github.com/IBM/fp-go/evidence.md",
+      "fields": [
+        "repo.build",
+        "repo.test",
+        "docs.root"
+      ],
+      "recordSha256": "b282484109501ee0f9e0300b2f76683c935318ee5cc35d8dca137bb2161d9bfb"
+    },
+    {
+      "identity": "github.com/gomodule/redigo",
+      "languageFamily": "Go",
+      "status": "inferred",
+      "confidence": "medium",
+      "riskWeight": 0.6396,
+      "riskFactors": [
+        "confidence:medium",
+        "missing:security_contact"
+      ],
+      "recordPath": "index/repos/github.com/gomodule/redigo/record.toml",
+      "evidencePath": "index/repos/github.com/gomodule/redigo/evidence.md",
+      "fields": [
+        "repo.build",
+        "repo.test",
+        "docs.root"
+      ],
+      "recordSha256": "562717d09d0fcf6ee7707cbb4afc4e19ed9652e662aee58af63d83acc8538151"
+    },
+    {
+      "identity": "github.com/RunaCapital/awesome-oss-alternatives",
+      "languageFamily": "Python",
+      "status": "verified",
+      "confidence": "high",
+      "riskWeight": 0.6268,
+      "riskFactors": [
+        "missing:build",
+        "missing:test",
+        "missing:security_contact",
+        "missing:docs"
+      ],
+      "recordPath": "index/repos/github.com/RunaCapital/awesome-oss-alternatives/record.toml",
+      "evidencePath": "index/repos/github.com/RunaCapital/awesome-oss-alternatives/evidence.md",
+      "fields": [
+        "repo.build",
+        "repo.test",
+        "docs.root"
+      ],
+      "recordSha256": "171cca4a8ea91d4cd8d08057edbddf5e625ff7138ae73715a5f64dd39a3729a4"
+    },
+    {
+      "identity": "github.com/fkxxyz/rime-cloverpinyin",
+      "languageFamily": "Python",
+      "status": "verified",
+      "confidence": "high",
+      "riskWeight": 0.6268,
+      "riskFactors": [
+        "missing:build",
+        "missing:test",
+        "missing:security_contact",
+        "missing:docs"
+      ],
+      "recordPath": "index/repos/github.com/fkxxyz/rime-cloverpinyin/record.toml",
+      "evidencePath": "index/repos/github.com/fkxxyz/rime-cloverpinyin/evidence.md",
+      "fields": [
+        "repo.build",
+        "repo.test",
+        "docs.root"
+      ],
+      "recordSha256": "431522b62d931a9198e343d41e3552c4ebb586fcd46cc55e2b0596c970a8ffd9"
+    },
+    {
+      "identity": "github.com/Visualize-ML/Book4_Power-of-Matrix",
+      "languageFamily": "Other",
+      "status": "inferred",
+      "confidence": "low",
+      "riskWeight": 0.5667,
+      "riskFactors": [
+        "confidence:low",
+        "missing:build",
+        "missing:test",
+        "missing:security_contact",
+        "missing:license",
+        "missing:docs"
+      ],
+      "recordPath": "index/repos/github.com/Visualize-ML/Book4_Power-of-Matrix/record.toml",
+      "evidencePath": "index/repos/github.com/Visualize-ML/Book4_Power-of-Matrix/evidence.md",
+      "fields": [
+        "repo.build",
+        "repo.test",
+        "docs.root"
+      ],
+      "recordSha256": "aaac94417355dfc31cc01b333aff6237ef841bc7dbecd3f3f98163ae33976713"
+    },
+    {
+      "identity": "github.com/fengdu78/lihang-code",
+      "languageFamily": "Other",
+      "status": "verified",
+      "confidence": "high",
+      "riskWeight": 0.5,
+      "riskFactors": [
+        "missing:build",
+        "missing:test",
+        "missing:security_contact",
+        "missing:license",
+        "missing:docs",
+        "surprising-completeness:low"
+      ],
+      "recordPath": "index/repos/github.com/fengdu78/lihang-code/record.toml",
+      "evidencePath": "index/repos/github.com/fengdu78/lihang-code/evidence.md",
+      "fields": [
+        "repo.build",
+        "repo.test",
+        "docs.root"
+      ],
+      "recordSha256": "f38cdba7e3263bbced5b5f0adfdb2de0213a65b96e0428616b8f5dbcd65d0a1a"
+    }
+  ],
+  "state": "declared source-audit cohort; no upstream inspection/provider calls/index writes performed"
+}

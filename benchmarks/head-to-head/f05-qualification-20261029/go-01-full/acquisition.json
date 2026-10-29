@@ -1,0 +1,40 @@
+{
+  "task": {
+    "id": "go-01",
+    "repository": "github.com/microsoft/TypeScript",
+    "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+    "ecosystem": "Go",
+    "scope": "repository",
+    "startingState": "pre-clone",
+    "component": null,
+    "request": "requests/go-01.md",
+    "gold": "curator/gold/go-01.json",
+    "oracle": "curator/oracles/go-01.json",
+    "enrollmentRationale": "Source has Go workspace modules tsc/tools and maintainer guide explicitly names the default compiler/language-service Go test task."
+  },
+  "status": "source-acquired",
+  "sourceFiles": 68062,
+  "sourceBytes": 218783760,
+  "frozenSourceFilesMatched": [
+    "README.md",
+    "CONTRIBUTING.md",
+    "go.work",
+    "package.json",
+    "tsc/go.mod",
+    "Herebyfile.mjs"
+  ],
+  "missingSubmodules": [],
+  "missingLfsObjects": [],
+  "symlinks": {},
+  "runtimeArchivePath": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/runtime-source.tar",
+  "runtimeArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+  "runtimeArchiveBytes": 280422400,
+  "sourceBundleReady": true,
+  "sourceCostUsd": null,
+  "costExclusions": [
+    "No metered infrastructure/download dollar receipt is available."
+  ],
+  "indexConsulted": false,
+  "upstreamCodeExecuted": false,
+  "appendOnlyDisposition": "Completes the initial codeload/truncated-tree limitation using exact Git objects; original failure retained."
+}

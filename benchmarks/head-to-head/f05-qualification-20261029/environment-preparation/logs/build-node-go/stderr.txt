@@ -1,0 +1,26 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load remote build context
+#1 DONE 0.0s
+
+#2 copy /context /
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/sha256:e7add2a490bb17d97b485b8641bd88455fff7839ade0f5eba493c3508124d413
+#3 ...
+
+#4 [internal] load metadata for docker.io/library/sha256:d9b6a1beb9474adc2a1ce842573639b44b2a0dd49b6669f51d3821baf9ec37c9
+#4 ERROR: pull access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed
+
+#3 [internal] load metadata for docker.io/library/sha256:e7add2a490bb17d97b485b8641bd88455fff7839ade0f5eba493c3508124d413
+#3 CANCELED
+------
+ > [internal] load metadata for docker.io/library/sha256:d9b6a1beb9474adc2a1ce842573639b44b2a0dd49b6669f51d3821baf9ec37c9:
+------
+Dockerfile:1
+--------------------
+   1 | >>> FROM sha256:d9b6a1beb9474adc2a1ce842573639b44b2a0dd49b6669f51d3821baf9ec37c9 AS go
+   2 |     FROM sha256:e7add2a490bb17d97b485b8641bd88455fff7839ade0f5eba493c3508124d413
+   3 |     COPY --from=go /usr/local/go /usr/local/go
+--------------------
+ERROR: failed to build: failed to solve: sha256:d9b6a1beb9474adc2a1ce842573639b44b2a0dd49b6669f51d3821baf9ec37c9: failed to resolve source metadata for docker.io/library/sha256:d9b6a1beb9474adc2a1ce842573639b44b2a0dd49b6669f51d3821baf9ec37c9: pull access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed

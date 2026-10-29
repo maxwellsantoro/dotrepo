@@ -21,8 +21,6 @@ homepage = "https://github.com/gomodule/redigo"
 license = "Apache-2.0"
 visibility = "public"
 languages = ["Go"]
-build = "go build ./..."
-test = "go test ./..."
 topics = [
     "go",
     "redis",
@@ -44,14 +42,17 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T17:20:14.16903Z"
+checkedAt = "2026-10-29T06:14:39.417434Z"
 confidence = "high"
-method = "extracted"
-reason = "Explicit documentation link at README.markdown:21: - [API Reference](https://pkg.go.dev/github.com/gomodule/redigo/redis)"
-source = "README.markdown"
+method = "source_inspection"
+reason = "README explicitly labels the existing pkg.go.dev value API Reference and uses the same path for its GoDoc badge and features. Exact source-declared URL retained; bounded live target status/redirect/content observations are retained separately in index/telemetry/operating-readiness-20261029/f1-corrections. Target content is mutable and does not establish source-version parity."
+source = "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/README.markdown"
+sourceRevision = "57c8b99ccb90c3401bec6e09289081e8b78b3bde"
+sourceSha256 = "9fade03f42daf7476a14204e80bb2dd64593bf81f4bedf332d00625a3b6f522d"
+audit = "index/telemetry/operating-readiness-20261029/f1-source-assessments.json"
+disposition = "supported-existing-answer"
 state = "present"
-valueJson = '"https://pkg.go.dev/github.com/gomodule/redigo/redis"'
-
+valueJson = "\"https://pkg.go.dev/github.com/gomodule/redigo/redis\""
 [x.dotrepo.field_evidence."owners.security_contact"]
 checkedAt = "2026-10-27T17:20:14.16903Z"
 confidence = "high"
@@ -69,14 +70,17 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T17:20:14.16903Z"
-confidence = "medium"
-method = "inferred"
-reason = "inferred ecosystem default from build-tool metadata"
-source = "go.mod"
-state = "present"
-valueJson = '"go build ./..."'
-
+checkedAt = "2026-10-29T06:14:39.417434Z"
+confidence = "high"
+method = "source_inspection"
+reason = "README declares go get installation, not a repository-default go build ./... step. Release workflow uses GoReleaser. The original command may build the library but its claimed default is not source-established. Withheld repository-default scalar; narrower/prepared execution may remain valid. No upstream execution observed."
+source = "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/README.markdown"
+sourceRevision = "57c8b99ccb90c3401bec6e09289081e8b78b3bde"
+sourceSha256 = "9fade03f42daf7476a14204e80bb2dd64593bf81f4bedf332d00625a3b6f522d"
+audit = "index/telemetry/operating-readiness-20261029/f1-source-assessments.json"
+disposition = "potentially-applicable-insufficient-evidence"
+state = "unresolved"
+valueJson = "null"
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-10-27T17:20:14.16903Z"
 confidence = "high"
@@ -104,14 +108,17 @@ state = "present"
 valueJson = '"Redigo"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T17:20:14.16903Z"
-confidence = "medium"
-method = "inferred"
-reason = "inferred ecosystem default from build-tool metadata"
-source = "go.mod"
-state = "present"
-valueJson = '"go test ./..."'
-
+checkedAt = "2026-10-29T06:14:39.417434Z"
+confidence = "high"
+method = "source_inspection"
+reason = "CI installs Redis before go test -race ./.... Test helper executes redis-server --version and starts the binary. The bare old scalar can run the same packages with setup, but drops Redis prerequisites and the source-owned race flag. Withheld repository-default scalar; narrower/prepared execution may remain valid. No upstream execution observed."
+source = "https://github.com/gomodule/redigo/blob/57c8b99ccb90c3401bec6e09289081e8b78b3bde/.github/workflows/go-test.yml"
+sourceRevision = "57c8b99ccb90c3401bec6e09289081e8b78b3bde"
+sourceSha256 = "f6e5dca75defdea9f22c29c189a2ca46b398bc19018be5f41e43055e329fa84d"
+audit = "index/telemetry/operating-readiness-20261029/f1-source-assessments.json"
+disposition = "potentially-applicable-insufficient-evidence"
+state = "unresolved"
+valueJson = "null"
 [x.github]
 archived = false
 clone_url = "https://github.com/gomodule/redigo.git"

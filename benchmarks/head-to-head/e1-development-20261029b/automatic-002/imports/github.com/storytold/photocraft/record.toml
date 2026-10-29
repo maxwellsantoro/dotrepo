@@ -1,0 +1,55 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/storytold/photocraft"
+generated_at = "2026-10-29T06:21:28.90044Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md` and `Cargo.toml`. Inferred `repo.build` from `Cargo.toml`. Inferred `repo.test` from `Cargo.toml`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "ArtCraft"
+description = "Image editing; an open-source, clean-room reimplementation of Adobe Photoshop, rebuilt in pure Rust."
+homepage = "https://github.com/storytold/photocraft"
+languages = []
+build = "cargo build --workspace"
+test = "cargo test --workspace"
+topics = []
+
+[repo.toolchain]
+min = "1.95"
+ecosystem = "Rust"
+
+[docs]
+root = "book/"
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/storytold/craft-fonts"
+notes = "Cross-link from README: craft-fonts"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-10-29T06:21:28.90044Z"
+confidence = "high"
+method = "extracted"
+reason = "Explicit documentation link at README.md:327: Developer, architecture, automation, format, and security documentation is maintained in the [PhotoCraft documentation book](book/)."
+source = "README.md"
+state = "present"
+valueJson = '"book/"'

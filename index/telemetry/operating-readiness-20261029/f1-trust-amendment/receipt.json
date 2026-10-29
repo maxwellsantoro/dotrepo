@@ -1,0 +1,24 @@
+{
+  "observedAt": "2026-10-29T06:34:45.155216+00:00",
+  "reason": "Partial corrections cannot retain an unrepeated whole-record verification claim; amends earlier status-preservation decision without rewriting frozen correction receipts.",
+  "records": [
+    {
+      "identity": "github.com/xi-editor/xi-editor",
+      "beforeSha256": "7e2d87e138ac010420f59d275196ad2f2c1d4dc50ce777948afdb90d4f580edd",
+      "afterSha256": "f1c1d3df3c744de5a8365d8890026daaac1063e6ae8a3cd934cafe478c7b0bf5",
+      "statusBefore": "verified",
+      "statusAfter": "imported",
+      "recordAgePreserved": true,
+      "unrelatedParsedValuesPreserved": true
+    },
+    {
+      "identity": "github.com/fkxxyz/rime-cloverpinyin",
+      "beforeSha256": "038db5b6337e4596218b68188f662e293b0df1c4a10c73c050956766cf1e7274",
+      "afterSha256": "7ec8bebc395ae7807b3ccf367ef9da822f82b19b09db40e83080c1d3089cf1d6",
+      "statusBefore": "verified",
+      "statusAfter": "imported",
+      "recordAgePreserved": true,
+      "unrelatedParsedValuesPreserved": true
+    }
+  ]
+}

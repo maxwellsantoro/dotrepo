@@ -1,0 +1,30 @@
+{
+  "name": "dotrepo-f05-qualification-go-01-8b6989cf73",
+  "imageId": "sha256:9f07b849c4603e3ad6b52c00c2dccaaf2054f8b3ec0f4add866ffdd537073c76",
+  "environment": {
+    "HOME": "/workspace/home",
+    "TMPDIR": "/tmp",
+    "CARGO_HOME": "/workspace/cargo",
+    "CARGO_TARGET_DIR": "/workspace/cargo-target",
+    "CARGO_BUILD_JOBS": "3",
+    "GOPATH": "/workspace/go",
+    "GOCACHE": "/workspace/go-build",
+    "GOTOOLCHAIN": "local",
+    "GOENV": "off",
+    "GOMAXPROCS": "3",
+    "GOPROXY": "https://proxy.golang.org",
+    "GOSUMDB": "sum.golang.org",
+    "GIT_CONFIG_GLOBAL": "/dev/null",
+    "GIT_CONFIG_NOSYSTEM": "1",
+    "GIT_TERMINAL_PROMPT": "0",
+    "NPM_CONFIG_CACHE": "/workspace/npm-cache",
+    "NPM_CONFIG_USERCONFIG": "/dev/null",
+    "NPM_CONFIG_REGISTRY": "https://registry.npmjs.org",
+    "NPM_CONFIG_AUDIT": "false",
+    "NPM_CONFIG_FUND": "false",
+    "LANG": "C.UTF-8"
+  },
+  "sourceArchiveSha256": "c583f28324d455b559bb232e7a280581fe874850f805decfb5947febfa91ee0f",
+  "sourceIsGitCheckout": false,
+  "generatedGitMetadata": false
+}

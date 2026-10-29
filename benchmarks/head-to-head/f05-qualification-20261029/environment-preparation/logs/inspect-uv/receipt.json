@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "docker",
+    "image",
+    "inspect",
+    "ghcr.io/astral-sh/uv:latest"
+  ],
+  "startedAt": "2026-10-29T06:06:03.005878+00:00",
+  "elapsedSeconds": 0.1414223329629749,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "fc1215297d21cfaf9a52c28838c65f46b962ec08ae1ad5b41f507e74785a9fae",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

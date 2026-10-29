@@ -1,0 +1,273 @@
+{
+  "identity": "f05-next8-qualification-plan-20261029",
+  "sourceFreezeSha256": "fc756e0d5f8a25cddc9f19ece651b21078a68a1f601febdb8d772208c0a66d41",
+  "tasks": [
+    {
+      "task": {
+        "id": "rust-01",
+        "repository": "github.com/tauri-apps/tauri",
+        "revision": "548a3692f59405aeb239c5b63fa589824eee51e8",
+        "ecosystem": "Rust",
+        "scope": "repository",
+        "startingState": "pre-clone",
+        "component": null,
+        "request": "requests/rust-01.md",
+        "gold": "curator/gold/rust-01.json",
+        "oracle": "curator/oracles/rust-01.json",
+        "enrollmentRationale": "Root workspace and contributor guide establish Rust test intent, but the contributor guide delegates per-package behavior and test-core covers selected packages, not one repository-default full suite."
+      },
+      "originalGoldStatus": "required-abstention",
+      "originalGoldSha256": "e0227b4be1fe5577cc9987dcad614bcfd6e49b545a16f10e46cb4ab77a433386",
+      "originalOracleSha256": "2868ea7c8cf7b6b6d527542537073da2716660783ffd5ac6270cfdf1ef571c03",
+      "intendedCoverageAndOracleGate": "Resolve repository-default workspace/package scope before naming executable oracle; selected test-core workflow is narrower and cannot substitute.",
+      "environmentResourceReview": "Freeze Tauri Linux prerequisite toolchain/GTK-WebKit packages and any headless-display requirements from full pinned source.",
+      "requiredCounterexamples": "Root tests vs a single package/test-core pass; compile-only; ignored or filtered tests; unavailable platform prerequisites.",
+      "sourceLocators": [
+        "sources/github.com/tauri-apps/tauri/Cargo.toml:1-42",
+        "sources/github.com/tauri-apps/tauri/.github/CONTRIBUTING.md:47-104",
+        "sources/github.com/tauri-apps/tauri/.github/workflows/test-core.yml:38-139"
+      ],
+      "state": "plan-only; no acquisition or execution in next tranche"
+    },
+    {
+      "task": {
+        "id": "rust-03",
+        "repository": "github.com/iced-rs/iced",
+        "revision": "cd04b74ca7073766f654535d6e72c452ef749d07",
+        "ecosystem": "Rust",
+        "scope": "repository",
+        "startingState": "local-checkout",
+        "component": null,
+        "request": "requests/rust-03.md",
+        "gold": "curator/gold/rust-03.json",
+        "oracle": "curator/oracles/rust-03.json",
+        "enrollmentRationale": "Root Rust workspace and retained Test workflow establish the repository-wide CI test target."
+      },
+      "originalGoldStatus": "unresolved",
+      "originalGoldSha256": "8394306eacfc72066fdbe07b060ca6fa3a3297380ece8e5ee0e9e2e2763505fa",
+      "originalOracleSha256": "a2acff4938ac5be85ce50323f2801b8ad5494a35406ec1c2a9d8b1901ed38e15",
+      "intendedCoverageAndOracleGate": "Preserve all3 source-declared workspace stages, including explicitly ignored tests and all-features, under a reviewed Linux alternative.",
+      "environmentResourceReview": "Pin Rust selected version and libxkbcommon-dev/libgtk-3-dev; preserve RUSTFLAGS=--deny warnings and ICED_TEST_BACKEND=tiny-skia. Assess headless requirements before execution.",
+      "requiredCounterexamples": "Default-only stage; omit ignored/all-features stages; source-defined unsupported platform vs silently skipped tests.",
+      "sourceLocators": [
+        "sources/github.com/iced-rs/iced/Cargo.toml:147-178",
+        "sources/github.com/iced-rs/iced/.github/workflows/test.yml:1-28"
+      ],
+      "state": "plan-only; no acquisition or execution in next tranche"
+    },
+    {
+      "task": {
+        "id": "python-01",
+        "repository": "github.com/666ghj/MiroFish",
+        "revision": "7657031ac01184afe2cb220f5ee3545573b5e843",
+        "ecosystem": "Python",
+        "scope": "repository",
+        "startingState": "pre-clone",
+        "component": null,
+        "request": "requests/python-01.md",
+        "gold": "curator/gold/python-01.json",
+        "oracle": "curator/oracles/python-01.json",
+        "enrollmentRationale": "Root Python tests and backend Python project/tests establish code and repository test intent."
+      },
+      "originalGoldStatus": "required-abstention",
+      "originalGoldSha256": "5c36d2500082e41c5a88f50df37b55608540f9b12381a70b5dd95cf0fd784873",
+      "originalOracleSha256": "13593a0416f65d3e6006252c2e7e6d21c05d2837d060e3aeb952a36fbe801971",
+      "intendedCoverageAndOracleGate": "Establish full root tests +backend/tests aggregate from exact full source; backend-only/star-script-only coverage is insufficient.",
+      "environmentResourceReview": "Pin source-declared Python/uv/dependencies; distinguish deployment API keys from actual test prerequisites. Resolve wheel/sdist preparation offline execution boundary.",
+      "requiredCounterexamples": "Only backend or one root suite; collect-only; tests skipped because fake credentials or missing dependencies; no paid API calls.",
+      "sourceLocators": [
+        "sources/github.com/666ghj/MiroFish/backend/pyproject.toml:1-56",
+        "sources/github.com/666ghj/MiroFish/README.md:98-122",
+        "sources/github.com/666ghj/MiroFish/package.json:1-21",
+        "sources/github.com/666ghj/MiroFish/tests/test_local_star_count_fetch.py:18-42"
+      ],
+      "state": "plan-only; no acquisition or execution in next tranche"
+    },
+    {
+      "task": {
+        "id": "python-02",
+        "repository": "github.com/home-assistant/core",
+        "revision": "cde3969919b9bd540b2dd75b7aa84a908acbdbfe",
+        "ecosystem": "Python",
+        "scope": "component",
+        "startingState": "local-checkout",
+        "component": "homeassistant",
+        "request": "requests/python-02.md",
+        "gold": "curator/gold/python-02.json",
+        "oracle": "curator/oracles/python-02.json",
+        "enrollmentRationale": "Literal lexical non-root package-path selection: the root manifest establishes the owned primary package homeassistant before narrower subpackages. Package location does not establish a separate component test instruction or component-only coverage."
+      },
+      "originalGoldStatus": "unresolved",
+      "originalGoldSha256": "408796293ba750d3ae45bcd8f1117fdbf87dc4565ade485de45bba14fd9d4e8c",
+      "originalOracleSha256": "bb9a5a746c7de7e11bbce7014e674053f154c38dee4fdd4f801d942a2621939f",
+      "intendedCoverageAndOracleGate": "Resolve primary homeassistant package scope independently; do not replace with Abode or invent equivalence to aggregate product tests. Unresolved scope blocks executable completion claim.",
+      "environmentResourceReview": "Freeze full source and exact Python version/large dependency state; assess all intended integration/service requirements and numeric memory/disk limits before running.",
+      "requiredCounterexamples": "Abode-only or any other single integration pass; product aggregate incorrectly claimed component-equivalent; missing setup incorrectly scored abstention.",
+      "sourceLocators": [
+        "sources/github.com/home-assistant/core/homeassistant/components/3_day_blinds/manifest.json:1-6",
+        "sources/github.com/home-assistant/core/homeassistant/components/abode/manifest.json:1-15",
+        "sources/github.com/home-assistant/core/tests/components/abode/test_init.py:22-46",
+        "sources/github.com/home-assistant/core/AGENTS.md:14-38",
+        "sources/github.com/home-assistant/core/AGENTS.md:27-51",
+        "sources/github.com/home-assistant/core/.vscode/tasks.json:90-114",
+        "sources/github.com/home-assistant/core/script/setup:1-51",
+        "sources/github.com/home-assistant/core/script/bootstrap:1-24",
+        "sources/github.com/home-assistant/core/.python-version:1-1",
+        "sources/github.com/home-assistant/core/pyproject.toml:102-106",
+        "sources/github.com/home-assistant/core/homeassistant/__init__.py:1-1"
+      ],
+      "state": "plan-only; no acquisition or execution in next tranche"
+    },
+    {
+      "task": {
+        "id": "python-03",
+        "repository": "github.com/ytdl-org/youtube-dl",
+        "revision": "956b8c585591b401a543e409accb163eeaaa1193",
+        "ecosystem": "Python",
+        "scope": "component",
+        "startingState": "pre-clone",
+        "component": "youtube_dl",
+        "request": "requests/python-03.md",
+        "gold": "curator/gold/python-03.json",
+        "oracle": "curator/oracles/python-03.json",
+        "enrollmentRationale": "Literal lexical non-root package-path selection: the root manifest establishes the owned primary package youtube_dl before narrower subpackages. Package location does not establish a separate component test instruction or component-only coverage."
+      },
+      "originalGoldStatus": "unresolved",
+      "originalGoldSha256": "ed2c6203a4c0d9e92293467590cf121bf4780c45784d8f6f94cc7981ffcc82c1",
+      "originalOracleSha256": "6020d335c55837e085b4e7a16584721dd428783947d0f711b353f78760dc32c1",
+      "intendedCoverageAndOracleGate": "Resolve primary youtube_dl package coverage independently; do not retarget downloader or equate package location to aggregate tests.",
+      "environmentResourceReview": "Pin compatible source-declared Python through uv and external media-tool versions; adjudicate offline fixtures vs live-download requirements before executing.",
+      "requiredCounterexamples": "Downloader-only success; network-dependent suites omitted without source/platform disposition; listing or zero-test stand-ins.",
+      "sourceLocators": [
+        "sources/github.com/ytdl-org/youtube-dl/setup.py:113-137",
+        "sources/github.com/ytdl-org/youtube-dl/README.md:989-1019",
+        "sources/github.com/ytdl-org/youtube-dl/test/test_downloader_http.py:73-100",
+        "sources/github.com/ytdl-org/youtube-dl/test/test_downloader_external.py:74-81",
+        "sources/github.com/ytdl-org/youtube-dl/youtube_dl/downloader/__init__.py:1-73",
+        "sources/github.com/ytdl-org/youtube-dl/youtube_dl/__init__.py:1-30"
+      ],
+      "state": "plan-only; no acquisition or execution in next tranche"
+    },
+    {
+      "task": {
+        "id": "typescript-01",
+        "repository": "github.com/deepseek-ai/deepseek-harness",
+        "revision": "f3803c96974ad4a94195fb97e5c637e9c2a3afe3",
+        "ecosystem": "JavaScript/TypeScript",
+        "scope": "repository",
+        "startingState": "pre-clone",
+        "component": null,
+        "request": "requests/typescript-01.md",
+        "gold": "curator/gold/typescript-01.json",
+        "oracle": "curator/oracles/typescript-01.json",
+        "enrollmentRationale": "Root workspace manifest and default test script establish a TypeScript project and repository test target."
+      },
+      "originalGoldStatus": "unresolved",
+      "originalGoldSha256": "fe21580008ed159a3cbd51fe8307d9015b30a94a6ecf468edd9df1f3ed901d42",
+      "originalOracleSha256": "dd9c6435023e2dc7c6cec96c9bd473f92280cf997fc3c3ffbb1bb9bedc298e33",
+      "intendedCoverageAndOracleGate": "Preserve root pnpm test native-build wrapper and source-defined complete Linux test selection; bare Vitest bypass is insufficient.",
+      "environmentResourceReview": "Pin Node/type-stripping, exact Corepack/pnpm, compiler/headers and native-addon dependencies. Offline build execution with download-only caches; qualify PowerShell/platform conditions without host access.",
+      "requiredCounterexamples": "Bypassed native build; excluded runtime suites; platform-specific skips treated all-platform success; altered test files.",
+      "sourceLocators": [
+        "sources/github.com/deepseek-ai/deepseek-harness/docs/development.md:9-55",
+        "sources/github.com/deepseek-ai/deepseek-harness/package.json:1-310",
+        "sources/github.com/deepseek-ai/deepseek-harness/native/system/scripts/build.ts:1-92",
+        "sources/github.com/deepseek-ai/deepseek-harness/vitest.config.ts:1-439"
+      ],
+      "state": "plan-only; no acquisition or execution in next tranche"
+    },
+    {
+      "task": {
+        "id": "typescript-03",
+        "repository": "github.com/vuejs/core",
+        "revision": "05db7e807be841e6f343d0237669669b18c89d4d",
+        "ecosystem": "JavaScript/TypeScript",
+        "scope": "repository",
+        "startingState": "local-checkout",
+        "component": null,
+        "request": "requests/typescript-03.md",
+        "gold": "curator/gold/typescript-03.json",
+        "oracle": "curator/oracles/typescript-03.json",
+        "enrollmentRationale": "Root package scripts, contributor test guide and Vitest configuration establish a TypeScript workspace with repository-default tests."
+      },
+      "originalGoldStatus": "unresolved",
+      "originalGoldSha256": "94008a8ff3178c74b83f272808648f33b2fab26afcea4808a4d01347141b6be5",
+      "originalOracleSha256": "7d822e0e20679ea923a8738746c2b2fcf9b0e77e15beaa770ff6271673022c68",
+      "intendedCoverageAndOracleGate": "Preserve run-once default Vitest project set including browser and built-file tests; test-unit or single package cannot substitute.",
+      "environmentResourceReview": "Resolve lts/* to exact Node +pnpm; freeze required built artifacts and browser binaries, headless/sandbox/shared-memory conditions within existing containment or report missing interface.",
+      "requiredCounterexamples": "Unit-only pass; missing browser/built-file stages; watch/list output; skipped browser projects; altered tests.",
+      "sourceLocators": [
+        "sources/github.com/vuejs/core/.github/contributing.md:77-93",
+        "sources/github.com/vuejs/core/.github/contributing.md:209-239",
+        "sources/github.com/vuejs/core/package.json:1-117",
+        "sources/github.com/vuejs/core/vitest.config.ts:1-120",
+        "sources/github.com/vuejs/core/.node-version:1-1"
+      ],
+      "state": "plan-only; no acquisition or execution in next tranche"
+    },
+    {
+      "task": {
+        "id": "go-02",
+        "repository": "github.com/beego/beego",
+        "revision": "939cfde380bb9f15844ad633b84f037f7da21584",
+        "ecosystem": "Go",
+        "scope": "component",
+        "startingState": "local-checkout",
+        "component": "client/cache",
+        "request": "requests/go-02.md",
+        "gold": "curator/gold/go-02.json",
+        "oracle": "curator/oracles/go-02.json",
+        "enrollmentRationale": "Maintainer README names cache as an owned module; package documentation fixes its physical client/cache path and tests exist in it and its memcache/redis/ssdb backends. It is lexical before other client modules and core/server/task paths."
+      },
+      "originalGoldStatus": "required-abstention",
+      "originalGoldSha256": "ad4946653db0aeabbde5a9948e20cf8a93157b9442e82581e6eb4fce99ea1476",
+      "originalOracleSha256": "01f3d1f3602ea237a0b36b936d8fdfabeeef36c6eb0969eaa492f8524e2b39d1",
+      "intendedCoverageAndOracleGate": "Require client/cache plus all backend subpackages, not memory-cache-only. Review source-grounded complete module/package selection.",
+      "environmentResourceReview": "Pin Go and Redis/Memcache/SSDB service binaries/configuration from source. Need bounded loopback-only services inside container or reviewed private isolation; no host Docker socket or privileged Docker.",
+      "requiredCounterexamples": "Only client/cache root pass; unavailable middleware silently skipped; external services or host networking; compile/list stand-ins.",
+      "sourceLocators": [
+        "sources/github.com/beego/beego/README.md:67-80",
+        "sources/github.com/beego/beego/client/cache/cache.go:15-35",
+        "sources/github.com/beego/beego/client/cache/cache_test.go:29-48",
+        "sources/github.com/beego/beego/CONTRIBUTING.md:30-52",
+        "sources/github.com/beego/beego/scripts/test_docker_compose.yaml:1-56",
+        "sources/github.com/beego/beego/.github/workflows/test.yml:1-163",
+        "sources/github.com/beego/beego/client/cache/memcache/memcache_test.go:34-53",
+        "sources/github.com/beego/beego/client/cache/redis/redis_test.go:1-361",
+        "sources/github.com/beego/beego/client/cache/ssdb/ssdb_test.go:1-211",
+        "sources/github.com/beego/beego/go.mod:1-5"
+      ],
+      "state": "plan-only; no acquisition or execution in next tranche"
+    }
+  ],
+  "mustPreserve": [
+    "All12 enrolled task identities, revisions, scopes and starting states.",
+    "No evaluated-index/profile-based inclusion or replacement.",
+    "Unresolved gold remains unresolved; actual task noncompletion does not become correct abstention.",
+    "Oracle/source authority and final task execution are separate from index instruction establishment.",
+    "No model/provider calls; this packet excludes future agent session contexts."
+  ],
+  "proposedSourceBoundsForReview": {
+    "expandedTotalBytes": 2147483648,
+    "filesTotal": 200000,
+    "maximumFileBytes": 134217728,
+    "onLimit": "Retain failure and request resource review; do not truncate source or replace task."
+  },
+  "proposedExecutionBoundsForReview": {
+    "cpus": 3,
+    "memoryBytes": 4294967296,
+    "setupSecondsPerTask": 900,
+    "executionSecondsPerTask": 1200,
+    "sourceExecutionNetwork": "none",
+    "warmCache": "Explicit per-task source-free immutable cache and preparation receipts; never label cold."
+  },
+  "pendingResourceDecisions": [
+    "Primary-package Python coverage and feasibility before executable oracle freeze.",
+    "Large native GUI/browser and integration-service dependency availability under mount-free containment.",
+    "Any larger source/disk/memory/time budget requires a separately recorded approved limit; no silent increase.",
+    "One common source-free image for first4 not yet demonstrated;3 recorded toolchain images currently used."
+  ],
+  "nextTrancheAuthorizedToRun": false,
+  "indexConsulted": false,
+  "modelCalls": 0
+}

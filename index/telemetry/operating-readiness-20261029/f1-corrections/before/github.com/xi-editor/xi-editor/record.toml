@@ -1,0 +1,128 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/xi-editor/xi-editor"
+generated_at = "2026-10-27T17:29:00.11204Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. Ignored component-scoped commands from `rust/Cargo.toml` as repository defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Xi editor"
+description = "A modern editor with a backend written in Rust."
+homepage = "https://xi-editor.io"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Rust",
+    "Python",
+    "C++",
+    "Makefile",
+    "Shell",
+]
+topics = []
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/lapce/lapce"
+notes = "Cross-link from README: the Lapce editor"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-10-27T17:29:00.11204Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-10-27T17:29:00.11204Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-10-27T17:29:00.11204Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-10-27T17:29:00.11204Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-10-27T17:29:00.11204Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no build command sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-10-27T17:29:00.11204Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"A modern editor with a backend written in Rust."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-10-27T17:29:00.11204Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://xi-editor.io"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-10-27T17:29:00.11204Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README title with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"Xi editor"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-10-27T17:29:00.11204Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no test command sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/xi-editor/xi-editor.git"
+default_branch = "master"
+fork = false
+head_sha = "a2dea3059312795c77caadc639df49bf8a7008eb"
+html_url = "https://github.com/xi-editor/xi-editor"
+stars = 19804

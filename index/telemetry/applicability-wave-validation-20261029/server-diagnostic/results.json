@@ -1,0 +1,74 @@
+[
+  {
+    "argv": [
+      "target/debug/dotrepo-public-query",
+      "--index-root",
+      "crates/dotrepo-core/tests/fixtures/public-export/fixture-index",
+      "--bind",
+      "127.0.0.1:59631",
+      "--base-path",
+      "/",
+      "--generated-at",
+      "2026-03-10T18:30:00Z",
+      "--stale-after",
+      "2026-03-11T18:30:00Z"
+    ],
+    "poll": null,
+    "response": "HTTP/1.1 200 OK\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Length: 2\r\nConnection: close\r\n\r\nok",
+    "stderr": "dotrepo-public-query listening on 127.0.0.1:59631\n"
+  },
+  {
+    "argv": [
+      "target/debug/dotrepo-public-query",
+      "--index-root",
+      "crates/dotrepo-core/tests/fixtures/public-export/fixture-index",
+      "--bind",
+      "127.0.0.1:59638",
+      "--base-path",
+      "/",
+      "--generated-at",
+      "2026-03-10T18:30:00Z",
+      "--stale-after",
+      "2026-03-11T18:30:00Z"
+    ],
+    "poll": null,
+    "response": "HTTP/1.1 ",
+    "stderr": "dotrepo-public-query listening on 127.0.0.1:59638\n"
+  },
+  {
+    "argv": [
+      "target/debug/dotrepo-public-query",
+      "--index-root",
+      "crates/dotrepo-core/tests/fixtures/public-export/fixture-index",
+      "--bind",
+      "127.0.0.1:59644",
+      "--base-path",
+      "/",
+      "--generated-at",
+      "2026-03-10T18:30:00Z",
+      "--stale-after",
+      "2026-03-11T18:30:00Z"
+    ],
+    "poll": null,
+    "response": "HTTP/1.1 ",
+    "stderr": "dotrepo-public-query listening on 127.0.0.1:59644\n"
+  },
+  {
+    "argv": [
+      "target/debug/dotrepo-public-query",
+      "--index-root",
+      "crates/dotrepo-core/tests/fixtures/public-export/fixture-index",
+      "--bind",
+      "127.0.0.1:59653",
+      "--base-path",
+      "/",
+      "--generated-at",
+      "2026-03-10T18:30:00Z",
+      "--stale-after",
+      "2026-03-11T18:30:00Z"
+    ],
+    "poll": null,
+    "response": "HTTP/1.1 200 OK\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Length: 2\r\nConnection: close\r\n\r\nok",
+    "stderr": "dotrepo-public-query listening on 127.0.0.1:59653\n"
+  }
+]

@@ -1,0 +1,30 @@
+{
+  "schema": "dotrepo-refresh-receipt/v1",
+  "runId": 40826758533,
+  "runAttempt": 1,
+  "event": "schedule",
+  "startedAt": "2026-10-29T06:01:46Z",
+  "checks": {
+    "batch": "success",
+    "telemetry": "success",
+    "index": "success",
+    "base": "success",
+    "landing": "success"
+  },
+  "budget": {
+    "adjudicationCallBudget": 0,
+    "adjudicationCalls": 0,
+    "tokensUsed": 0,
+    "failed": 0,
+    "crawled": 50
+  },
+  "landing": {
+    "repository": "maxwellsantoro/dotrepo",
+    "pullRequest": 184,
+    "headSha": "53ed7c41baab8d82b1b686143148a2e3c5e6f243",
+    "baseSha": "eb43ab20ac0368c4926660ae060347305197f936",
+    "status": "landed-deployment-disabled",
+    "publicationVerified": false,
+    "ciRunId": 40828059561
+  }
+}

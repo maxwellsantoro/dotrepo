@@ -1,0 +1,533 @@
+{
+  "observedAt": "2026-10-29T06:18:48.737643+00:00",
+  "scope": "Synthetic backend copy controls only; no dependency/task/provider qualification",
+  "driverSha256": "d4f8fed4c818b5b01068964a7fd81d76e250b2ccb5527959b60a610744463331",
+  "runtimeSha256": "d47d18829017b58160c99947bcfb59f3aef6cc4aa7cda0d0fb9f199e06834a22",
+  "cacheArchiveSha256": "c1fcb0061f37c43fd9bf49f5873b8a1769ac062d36d91e02e3f15ea8d4cff4f1",
+  "imageId": "sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4",
+  "providerCalls": 0,
+  "preparationCostUsd": null,
+  "status": "passed",
+  "sessions": [
+    {
+      "container": "dotrepo-f05-42715f52968b4feea2e62a79fba7ca30",
+      "checks": {
+        "preclone-source-absent": true,
+        "fresh-cache-bytes": true,
+        "private-copy-writable": true
+      },
+      "cleanup": {
+        "stdout": "dotrepo-f05-42715f52968b4feea2e62a79fba7ca30\n",
+        "stderr": "",
+        "exitCode": 0,
+        "error": null
+      },
+      "operations": [
+        {
+          "argv": [
+            "docker",
+            "image",
+            "inspect",
+            "sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "[\n    {\n        \"Id\": \"sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4\",\n        \"RepoTags\": [\n            \"dotrepo-f05-runtime-control:20261029\"\n        ],\n        \"RepoDigests\": [\n            \"dotrepo-f05-runtime-control@sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4\"\n        ],\n        \"Comment\": \"buildkit.dockerfile.v0\",\n        \"Created\": \"2026-10-29T06:01:37.380505627Z\",\n        \"Config\": {\n            \"Env\": [\n                \"PATH=/usr/local/bin:/usr/bin:/bin\"\n            ],\n            \"WorkingDir\": \"/\"\n        },\n        \"Architecture\": \"arm64\",\n        \"Os\": \"linux\",\n        \"Size\": 199290736,\n        \"RootFS\": {\n            \"Type\": \"layers\",\n            \"Layers\": [\n                \"sha256:20ab9113af1fc91eb309fc6add9741a83a591ef1632786575dad9316549fb811\"\n            ]\n        },\n        \"Metadata\": {\n            \"LastTagTime\": \"2026-10-29T06:01:42.113770005Z\"\n        },\n        \"Descriptor\": {\n            \"mediaType\": \"application/vnd.oci.image.index.v1+json\",\n            \"digest\": \"sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4\",\n            \"size\": 855\n        },\n        \"Identity\": {\n            \"Build\": [\n                {\n                    \"Ref\": \"v10rqzfmladlc674hwjtyj1ak\",\n                    \"CreatedAt\": \"2026-10-29T06:01:44.956521923Z\"\n                }\n            ]\n        }\n    }\n]\n",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "create",
+            "--name",
+            "dotrepo-f05-42715f52968b4feea2e62a79fba7ca30",
+            "--pull=never",
+            "--read-only",
+            "--cap-drop=ALL",
+            "--security-opt=no-new-privileges",
+            "--network=none",
+            "--ipc=private",
+            "--cgroupns=private",
+            "--user",
+            "1000:1000",
+            "--workdir=/workspace",
+            "--memory",
+            "268435456",
+            "--memory-swap",
+            "268435456",
+            "--cpus",
+            "1",
+            "--pids-limit",
+            "32",
+            "--ulimit",
+            "nofile=1024:1024",
+            "--log-driver=none",
+            "--no-healthcheck",
+            "--tmpfs",
+            "/workspace:rw,exec,nosuid,nodev,size=8388608,uid=1000,gid=1000,mode=0700",
+            "--tmpfs",
+            "/tmp:rw,exec,nosuid,nodev,size=8388608,uid=1000,gid=1000,mode=0700",
+            "--label",
+            "dotrepo.session=cache-control/0",
+            "--env",
+            "HOME=/workspace/.home",
+            "--env",
+            "PATH=/usr/bin:/bin",
+            "--entrypoint=/bin/sh",
+            "sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4",
+            "-c",
+            "while :; do sleep 3600; done"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "5fb8ad549e9aba0b3ff825e4342d5c6e13e23b48355bb9588e77970ab1ba7333\n",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "start",
+            "dotrepo-f05-42715f52968b4feea2e62a79fba7ca30"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "dotrepo-f05-42715f52968b4feea2e62a79fba7ca30\n",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-42715f52968b4feea2e62a79fba7ca30",
+            "/bin/mkdir",
+            "-p",
+            "/workspace/dependency-cache"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "exec",
+            "-i",
+            "dotrepo-f05-42715f52968b4feea2e62a79fba7ca30",
+            "/bin/tar",
+            "--extract",
+            "--no-same-owner",
+            "--no-same-permissions",
+            "--directory=/workspace/dependency-cache"
+          ],
+          "stdinBytes": 10240,
+          "result": {
+            "stdout": "",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-42715f52968b4feea2e62a79fba7ca30",
+            "/bin/sh",
+            "-c",
+            "test ! -e /workspace/repository"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-42715f52968b4feea2e62a79fba7ca30",
+            "/bin/mkdir",
+            "-p",
+            "/workspace/repository"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "exec",
+            "-i",
+            "dotrepo-f05-42715f52968b4feea2e62a79fba7ca30",
+            "/bin/tar",
+            "--extract",
+            "--no-same-owner",
+            "--no-same-permissions",
+            "--directory=/workspace/repository"
+          ],
+          "stdinBytes": 10240,
+          "result": {
+            "stdout": "",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "exec",
+            "--workdir=/workspace/repository",
+            "dotrepo-f05-42715f52968b4feea2e62a79fba7ca30",
+            "/bin/sh",
+            "-c",
+            "cat /workspace/dependency-cache/cargo/registry/cache/owned-control"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "initial-owned-cache\n",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "exec",
+            "--workdir=/workspace/repository",
+            "dotrepo-f05-42715f52968b4feea2e62a79fba7ca30",
+            "/bin/sh",
+            "-c",
+            "printf session-mutation > /workspace/dependency-cache/cargo/registry/cache/owned-control"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "rm",
+            "--force",
+            "--volumes",
+            "dotrepo-f05-42715f52968b4feea2e62a79fba7ca30"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "dotrepo-f05-42715f52968b4feea2e62a79fba7ca30\n",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "container",
+            "inspect",
+            "dotrepo-f05-42715f52968b4feea2e62a79fba7ca30"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "[]\n",
+            "stderr": "Error response from daemon: No such container: dotrepo-f05-42715f52968b4feea2e62a79fba7ca30\n",
+            "exitCode": 1,
+            "error": null
+          }
+        }
+      ],
+      "absence": {
+        "stdout": "[]\n",
+        "stderr": "Error response from daemon: No such container: dotrepo-f05-42715f52968b4feea2e62a79fba7ca30\n",
+        "exitCode": 1,
+        "error": null
+      }
+    },
+    {
+      "container": "dotrepo-f05-29988086427c49518d03ad8b01d93672",
+      "checks": {
+        "preclone-source-absent": true,
+        "fresh-cache-bytes": true,
+        "private-copy-writable": true
+      },
+      "cleanup": {
+        "stdout": "dotrepo-f05-29988086427c49518d03ad8b01d93672\n",
+        "stderr": "",
+        "exitCode": 0,
+        "error": null
+      },
+      "operations": [
+        {
+          "argv": [
+            "docker",
+            "image",
+            "inspect",
+            "sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "[\n    {\n        \"Id\": \"sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4\",\n        \"RepoTags\": [\n            \"dotrepo-f05-runtime-control:20261029\"\n        ],\n        \"RepoDigests\": [\n            \"dotrepo-f05-runtime-control@sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4\"\n        ],\n        \"Comment\": \"buildkit.dockerfile.v0\",\n        \"Created\": \"2026-10-29T06:01:37.380505627Z\",\n        \"Config\": {\n            \"Env\": [\n                \"PATH=/usr/local/bin:/usr/bin:/bin\"\n            ],\n            \"WorkingDir\": \"/\"\n        },\n        \"Architecture\": \"arm64\",\n        \"Os\": \"linux\",\n        \"Size\": 199290736,\n        \"RootFS\": {\n            \"Type\": \"layers\",\n            \"Layers\": [\n                \"sha256:20ab9113af1fc91eb309fc6add9741a83a591ef1632786575dad9316549fb811\"\n            ]\n        },\n        \"Metadata\": {\n            \"LastTagTime\": \"2026-10-29T06:01:42.113770005Z\"\n        },\n        \"Descriptor\": {\n            \"mediaType\": \"application/vnd.oci.image.index.v1+json\",\n            \"digest\": \"sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4\",\n            \"size\": 855\n        },\n        \"Identity\": {\n            \"Build\": [\n                {\n                    \"Ref\": \"v10rqzfmladlc674hwjtyj1ak\",\n                    \"CreatedAt\": \"2026-10-29T06:01:44.956521923Z\"\n                }\n            ]\n        }\n    }\n]\n",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "create",
+            "--name",
+            "dotrepo-f05-29988086427c49518d03ad8b01d93672",
+            "--pull=never",
+            "--read-only",
+            "--cap-drop=ALL",
+            "--security-opt=no-new-privileges",
+            "--network=none",
+            "--ipc=private",
+            "--cgroupns=private",
+            "--user",
+            "1000:1000",
+            "--workdir=/workspace",
+            "--memory",
+            "268435456",
+            "--memory-swap",
+            "268435456",
+            "--cpus",
+            "1",
+            "--pids-limit",
+            "32",
+            "--ulimit",
+            "nofile=1024:1024",
+            "--log-driver=none",
+            "--no-healthcheck",
+            "--tmpfs",
+            "/workspace:rw,exec,nosuid,nodev,size=8388608,uid=1000,gid=1000,mode=0700",
+            "--tmpfs",
+            "/tmp:rw,exec,nosuid,nodev,size=8388608,uid=1000,gid=1000,mode=0700",
+            "--label",
+            "dotrepo.session=cache-control/1",
+            "--env",
+            "HOME=/workspace/.home",
+            "--env",
+            "PATH=/usr/bin:/bin",
+            "--entrypoint=/bin/sh",
+            "sha256:8032a060e0198814ffe1868893bf89bdb02fa79f4de617873f23eb8dd3915af4",
+            "-c",
+            "while :; do sleep 3600; done"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "555b4ce2537fcb3aa2495ceed94a7f176214a1b381e884af85537428b1ee6121\n",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "start",
+            "dotrepo-f05-29988086427c49518d03ad8b01d93672"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "dotrepo-f05-29988086427c49518d03ad8b01d93672\n",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-29988086427c49518d03ad8b01d93672",
+            "/bin/mkdir",
+            "-p",
+            "/workspace/dependency-cache"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "exec",
+            "-i",
+            "dotrepo-f05-29988086427c49518d03ad8b01d93672",
+            "/bin/tar",
+            "--extract",
+            "--no-same-owner",
+            "--no-same-permissions",
+            "--directory=/workspace/dependency-cache"
+          ],
+          "stdinBytes": 10240,
+          "result": {
+            "stdout": "",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-29988086427c49518d03ad8b01d93672",
+            "/bin/sh",
+            "-c",
+            "test ! -e /workspace/repository"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "exec",
+            "dotrepo-f05-29988086427c49518d03ad8b01d93672",
+            "/bin/mkdir",
+            "-p",
+            "/workspace/repository"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "exec",
+            "-i",
+            "dotrepo-f05-29988086427c49518d03ad8b01d93672",
+            "/bin/tar",
+            "--extract",
+            "--no-same-owner",
+            "--no-same-permissions",
+            "--directory=/workspace/repository"
+          ],
+          "stdinBytes": 10240,
+          "result": {
+            "stdout": "",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "exec",
+            "--workdir=/workspace/repository",
+            "dotrepo-f05-29988086427c49518d03ad8b01d93672",
+            "/bin/sh",
+            "-c",
+            "cat /workspace/dependency-cache/cargo/registry/cache/owned-control"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "initial-owned-cache\n",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "exec",
+            "--workdir=/workspace/repository",
+            "dotrepo-f05-29988086427c49518d03ad8b01d93672",
+            "/bin/sh",
+            "-c",
+            "printf session-mutation > /workspace/dependency-cache/cargo/registry/cache/owned-control"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "rm",
+            "--force",
+            "--volumes",
+            "dotrepo-f05-29988086427c49518d03ad8b01d93672"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "dotrepo-f05-29988086427c49518d03ad8b01d93672\n",
+            "stderr": "",
+            "exitCode": 0,
+            "error": null
+          }
+        },
+        {
+          "argv": [
+            "docker",
+            "container",
+            "inspect",
+            "dotrepo-f05-29988086427c49518d03ad8b01d93672"
+          ],
+          "stdinBytes": 0,
+          "result": {
+            "stdout": "[]\n",
+            "stderr": "Error response from daemon: No such container: dotrepo-f05-29988086427c49518d03ad8b01d93672\n",
+            "exitCode": 1,
+            "error": null
+          }
+        }
+      ],
+      "absence": {
+        "stdout": "[]\n",
+        "stderr": "Error response from daemon: No such container: dotrepo-f05-29988086427c49518d03ad8b01d93672\n",
+        "exitCode": 1,
+        "error": null
+      }
+    }
+  ]
+}

@@ -10,13 +10,18 @@ use super::super::types::{ImportSources, ImportedFile};
 use super::extraction::{documented_build_command, documented_test_command};
 use super::policy::{is_setup_only_command, sanitize_import_command};
 
+mod python_recipe;
 #[cfg(test)]
 mod tests;
 
 pub(crate) fn infer_documented_context_candidates(
     root: &Path,
     sources: &ImportSources<'_>,
-) -> (Vec<BuildTestCandidate>, Vec<BuildTestCandidate>) {
+) -> (
+    Vec<BuildTestCandidate>,
+    Vec<BuildTestCandidate>,
+    Vec<(String, toml::Value)>,
+) {
     let mut build = Vec::new();
     let mut test = Vec::new();
     for file in [sources.contributing, sources.readme].into_iter().flatten() {
@@ -27,7 +32,14 @@ pub(crate) fn infer_documented_context_candidates(
             }
         }
     }
-    (build, test)
+    let mut evidence = Vec::new();
+    if let Some((candidate, assessment)) = python_recipe::infer(root, sources) {
+        if !test.contains(&candidate) {
+            evidence.push((format!("repo.test_candidates.{}", test.len()), assessment));
+            test.push(candidate);
+        }
+    }
+    (build, test, evidence)
 }
 
 #[derive(Default)]

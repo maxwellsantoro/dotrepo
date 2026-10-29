@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "docker",
+    "rm",
+    "--force",
+    "--volumes",
+    "dotrepo-f05-qualification-go-01-665c15951f"
+  ],
+  "startedAt": "2026-10-29T06:18:33.923419+00:00",
+  "elapsedSeconds": 1.1480317919049412,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "eac5903b62138b9115089488fb5d30bb3f9b1f07e4d60e48d49f764242b4a45c",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

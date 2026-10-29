@@ -1,0 +1,41 @@
+{
+  "taskId": "rust-02",
+  "sourceRevision": "ab4bf739d46448436cb68933bb8260ee264449d5",
+  "indexConsulted": false,
+  "modelCalls": 0,
+  "costUsd": null,
+  "costExclusions": [
+    "No metered host/container dollar receipt."
+  ],
+  "cacheCondition": "Fresh empty per-task cache, populated by recorded download-only setup; offline execution uses that explicit warm state.",
+  "sourceSupportedInstructionGold": "Original source-only classification unchanged; execution qualification is separately reviewed.",
+  "status": "execution-qualified-pending-independent-review",
+  "startedAt": "2026-10-29T06:12:33.154207+00:00",
+  "setupSeconds": 10.324307624949142,
+  "setupNetworkBytes": {
+    "received": 160022741,
+    "sent": 664685,
+    "basis": "Container interface counters; includes headers and incidental traffic."
+  },
+  "executionSeconds": 6.761224166955799,
+  "testExitCode": 0,
+  "executionError": null,
+  "changedTrackedFiles": [],
+  "trackedSourceIntact": true,
+  "oracle": {
+    "qualified": true,
+    "reason": "complete component native tests",
+    "expectedTests": [
+      "test_link_type_from_pcap_supported",
+      "test_link_type_from_pcap_unsupported"
+    ],
+    "observedTests": [
+      "test_link_type_from_pcap_supported",
+      "test_link_type_from_pcap_unsupported"
+    ]
+  },
+  "taskOutcomeObserved": true,
+  "testsPassed": true,
+  "totalSeconds": 28.02760145906359,
+  "cleanup": 0
+}

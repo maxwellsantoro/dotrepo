@@ -1,0 +1,57 @@
+[
+    {
+        "Id": "sha256:af22a52f5eafef3d78e551599d405c02df61919d18028f0cea8eda93bc9986d0",
+        "RepoTags": [
+            "ghcr.io/astral-sh/uv:latest"
+        ],
+        "RepoDigests": [
+            "ghcr.io/astral-sh/uv@sha256:af22a52f5eafef3d78e551599d405c02df61919d18028f0cea8eda93bc9986d0"
+        ],
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-10-27T00:23:27.46095598Z",
+        "Config": {
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Entrypoint": [
+                "/uv"
+            ],
+            "WorkingDir": "/io",
+            "Labels": {
+                "org.opencontainers.image.created": "2026-10-27T00:16:00.436Z",
+                "org.opencontainers.image.description": "An extremely fast Python package and project manager, written in Rust.",
+                "org.opencontainers.image.licenses": "Apache-2.0",
+                "org.opencontainers.image.revision": "329bf9448afd9f9088d14a4d57fbc61eb454f117",
+                "org.opencontainers.image.source": "https://github.com/astral-sh/uv",
+                "org.opencontainers.image.title": "uv",
+                "org.opencontainers.image.url": "https://github.com/astral-sh/uv",
+                "org.opencontainers.image.version": "0.13.6"
+            }
+        },
+        "Architecture": "arm64",
+        "Os": "linux",
+        "Size": 53521994,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:a65fd6ddcfdc5f145a3f4975dd4b3fc2b1a6c7f926616967ce7abfdaf16487fb",
+                "sha256:31dc6a5f3ea8cb7a357493956481c88c73611275906232dad79ee02e65609752"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-10-29T06:06:02.944141292Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.index.v1+json",
+            "digest": "sha256:af22a52f5eafef3d78e551599d405c02df61919d18028f0cea8eda93bc9986d0",
+            "size": 2195
+        },
+        "Identity": {
+            "Pull": [
+                {
+                    "Repository": "ghcr.io/astral-sh/uv"
+                }
+            ]
+        }
+    }
+]

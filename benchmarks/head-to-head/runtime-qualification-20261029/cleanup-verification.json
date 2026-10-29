@@ -1,0 +1,29 @@
+{
+  "observedAt": "2026-10-29T06:11:06.547397+00:00",
+  "results": [
+    {
+      "receipt": "baseline-invalid-pid-receipt.json",
+      "container": "dotrepo-f05-ecbfcf93886c44a3bca6ae8c7952c723",
+      "exitCode": 1,
+      "stdout": "[]\n",
+      "stderr": "Error response from daemon: No such container: dotrepo-f05-ecbfcf93886c44a3bca6ae8c7952c723\n",
+      "absent": true
+    },
+    {
+      "receipt": "pid-corrected-noexec-receipt.json",
+      "container": "dotrepo-f05-e019729d831b4f679c6b8c33bf2f0421",
+      "exitCode": 1,
+      "stdout": "[]\n",
+      "stderr": "Error response from daemon: No such container: dotrepo-f05-e019729d831b4f679c6b8c33bf2f0421\n",
+      "absent": true
+    },
+    {
+      "receipt": "fixed-exec-receipt.json",
+      "container": "dotrepo-f05-3db856fb272b456393a5464f6042879a",
+      "exitCode": 1,
+      "stdout": "[]\n",
+      "stderr": "Error response from daemon: No such container: dotrepo-f05-3db856fb272b456393a5464f6042879a\n",
+      "absent": true
+    }
+  ]
+}

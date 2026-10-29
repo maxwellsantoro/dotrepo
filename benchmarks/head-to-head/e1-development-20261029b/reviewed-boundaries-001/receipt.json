@@ -1,0 +1,75 @@
+{
+  "classification": "known development boundary controls, not qualification",
+  "cliSha256": "cbcf2969d4999f634e2b885e164981f21d8c04badd60c1ff8e62f66c4a512617",
+  "controlSourceSha256": "b95d33cde1cc4af74ee1b413d5f9d28a41361bf0b14b57eaae97792dbb9ab6d6",
+  "fixtureSourceHashes": {
+    "CONTRIBUTING.md": "eff1a6349d222979e24b860c88e9577f603300af7658a1ac6fca3140992d0d3d",
+    "README.md": "6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8",
+    "pyproject.toml": "51ac5db60612a4c92123980826c1010a6d087c7a64b11a580ebc33c21058d326",
+    "requirements-common.txt": "3df3a2a15e645bc03082648aec06570a4329fdad189e4b326df0be80d6a7615e",
+    "requirements.txt": "f34e2fa7d9bb205afe36e7cb8a0d53f6e3be39d0dc51b38de0619529e4e919b8"
+  },
+  "upstreamCodeExecuted": false,
+  "results": [
+    {
+      "case": "retained-positive",
+      "exitCode": 0,
+      "candidateCount": 1,
+      "expectedCandidateCount": 1,
+      "contributingSha256": "eff1a6349d222979e24b860c88e9577f603300af7658a1ac6fca3140992d0d3d",
+      "recordSha256": "137a69243af1537736d86593015a01eefc23f74f79d7e1a20c7b4cbd0f42141f",
+      "scalarBuildTestUnchanged": true,
+      "result": "passed"
+    },
+    {
+      "case": "html-commented-section",
+      "exitCode": 0,
+      "candidateCount": 0,
+      "expectedCandidateCount": 0,
+      "contributingSha256": "462520291325d5d10ee64fa0df65db3256aca2877b881d4930819054d57976e6",
+      "recordSha256": "9ec6b6425873ce854d23411d7699a79ccb8114b4e76a580c7e4deb663637b2c0",
+      "scalarBuildTestUnchanged": true,
+      "result": "passed"
+    },
+    {
+      "case": "four-space-indented-section",
+      "exitCode": 0,
+      "candidateCount": 0,
+      "expectedCandidateCount": 0,
+      "contributingSha256": "1d7ba6db792294c79257ffa21fcbdcf9733a52e93505d48f73dfdb05a699c372",
+      "recordSha256": "421ccafd9d1e553c59e0e90241bf283a5ac84b455e53f74a531dddbe018917d8",
+      "scalarBuildTestUnchanged": true,
+      "result": "passed"
+    },
+    {
+      "case": "indented-test-fence",
+      "exitCode": 0,
+      "candidateCount": 0,
+      "expectedCandidateCount": 0,
+      "contributingSha256": "fb35e64abbde5681b83983830184f470faa1002b5ea15fc1e3032e2bff0cc4cc",
+      "recordSha256": "6883ed4ffc5d61d52576c9be023e798bcef00476182d9839371edd888e6f1ab3",
+      "scalarBuildTestUnchanged": true,
+      "result": "passed"
+    },
+    {
+      "case": "four-backtick-fenced-guide",
+      "exitCode": 0,
+      "candidateCount": 0,
+      "expectedCandidateCount": 0,
+      "contributingSha256": "fc8bbef939203368502360c9a2cb031c3de53c5679672daaee04c2c1d7329b00",
+      "recordSha256": "6f819535763292b2ab494e572560e15db7b4eaf096edd43477075209082065ec",
+      "scalarBuildTestUnchanged": true,
+      "result": "passed"
+    },
+    {
+      "case": "external-pretest-install",
+      "exitCode": 0,
+      "candidateCount": 0,
+      "expectedCandidateCount": 0,
+      "contributingSha256": "cc14df227444ff7a38c68b4c0a71536b8c0b3948603c9326d32fa55a2c9b253d",
+      "recordSha256": "e0077b379824ef79567525950b6de06372dc8df562fe58fa9a9fc40d2a43258b",
+      "scalarBuildTestUnchanged": true,
+      "result": "passed"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "docker",
+    "build",
+    "--network=none",
+    "--pull=false",
+    "-t",
+    "dotrepo-f05-node-go:20261029",
+    "-"
+  ],
+  "startedAt": "2026-10-29T06:02:01.715809+00:00",
+  "elapsedSeconds": 146.67282254085876,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 10240,
+  "stdinSha256": "dc90b2fd09561906ac0b7150ca4dd596b69953c6ebcc851e823bae780b161b34",
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "c721c80283ed1e5c06d06bbc92376cdcad4cb85c570904234a59c455d0c0ed5f",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

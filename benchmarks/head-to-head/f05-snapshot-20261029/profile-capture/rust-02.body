@@ -1,0 +1,165 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T05:38:16.128053678Z",
+    "snapshotDigest": "e45b6ec2719c2b5d59d4acdfa1aa7e61e749810bbfdd3add2fcda1eb0bf97b33",
+    "staleAfter": "2026-11-05T05:38:16.128053678Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "GyulyVGC",
+    "repo": "sniffnet",
+    "source": "https://github.com/GyulyVGC/sniffnet"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/GyulyVGC/sniffnet/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/GyulyVGC/sniffnet",
+    "generatedAt": "2026-10-27T17:33:52.903987Z",
+    "evidencePath": "repos/github.com/GyulyVGC/sniffnet/evidence.md",
+    "freshnessStatus": "fresh",
+    "ageDays": 1,
+    "staleAfterDays": 30,
+    "sourceRevision": "ab4bf739d46448436cb68933bb8260ee264449d5"
+  },
+  "purpose": "Comfortably monitor your network traffic 🕵️‍♂️",
+  "name": "Sniffnet",
+  "homepage": "https://sniffnet.app",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Rust",
+    "Rich Text Format",
+    "Python",
+    "Makefile",
+    "Shell",
+    "Roff",
+    "Dockerfile"
+  ],
+  "topics": [
+    "networking",
+    "packet-sniffer",
+    "linux",
+    "macos",
+    "packet-capture",
+    "rust",
+    "windows",
+    "security",
+    "utility",
+    "application",
+    "network",
+    "network-monitoring",
+    "pcap",
+    "iced",
+    "gui",
+    "tool",
+    "app",
+    "ipfix",
+    "ip-geolocation",
+    "cybersecurity"
+  ],
+  "execution": {
+    "build": "cargo build --verbose",
+    "test": "cargo test --verbose -- --nocapture"
+  },
+  "docs": {},
+  "ownership": {
+    "securityContact": "security@sniffnet.app"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "medium",
+    "provenance": [
+      "imported",
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "fieldEvidence": {
+    "docs.getting_started": {
+      "checkedAt": "2026-10-27T17:33:52.903987Z",
+      "confidence": "high",
+      "method": "not_found_in_inspected_sources",
+      "reason": "no unambiguous documentation declaration detected",
+      "state": "not_found"
+    },
+    "docs.root": {
+      "checkedAt": "2026-10-27T17:33:52.903987Z",
+      "confidence": "high",
+      "method": "not_found_in_inspected_sources",
+      "reason": "no unambiguous documentation declaration detected",
+      "state": "not_found"
+    },
+    "owners.security_contact": {
+      "checkedAt": "2026-10-27T17:33:52.903987Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "direct email or mailing list",
+      "source": "SECURITY.md",
+      "state": "present"
+    },
+    "owners.team": {
+      "checkedAt": "2026-10-27T17:33:52.903987Z",
+      "confidence": "high",
+      "method": "not_found_in_inspected_sources",
+      "reason": "no single clear team in CODEOWNERS",
+      "state": "not_found"
+    },
+    "repo.build": {
+      "checkedAt": "2026-10-27T17:33:52.903987Z",
+      "confidence": "medium",
+      "method": "inferred",
+      "reason": "from workflow fallback",
+      "source": ".github/workflows/rust.yml",
+      "state": "present"
+    },
+    "repo.description": {
+      "checkedAt": "2026-10-27T17:33:52.903987Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "constrained by GitHub repository metadata",
+      "source": "GitHub API",
+      "state": "present"
+    },
+    "repo.homepage": {
+      "checkedAt": "2026-10-27T17:33:52.903987Z",
+      "confidence": "high",
+      "method": "unspecified",
+      "reason": "set and passes quality check",
+      "state": "present"
+    },
+    "repo.name": {
+      "checkedAt": "2026-10-27T17:33:52.903987Z",
+      "confidence": "high",
+      "method": "extracted",
+      "reason": "extracted from README title with post-cleaners",
+      "source": "README.md",
+      "state": "present"
+    },
+    "repo.test": {
+      "checkedAt": "2026-10-27T17:33:52.903987Z",
+      "confidence": "medium",
+      "method": "inferred",
+      "reason": "from workflow fallback",
+      "source": ".github/workflows/rust.yml",
+      "state": "present"
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/GyulyVGC/sniffnet/profile.json",
+    "repository": "/v0/repos/github.com/GyulyVGC/sniffnet/index.json",
+    "trust": "/v0/repos/github.com/GyulyVGC/sniffnet/trust.json",
+    "queryTemplate": "/v0/repos/github.com/GyulyVGC/sniffnet/query?path={dot_path}",
+    "indexPath": "repos/github.com/GyulyVGC/sniffnet/"
+  }
+}

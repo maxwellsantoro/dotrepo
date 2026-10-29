@@ -1,0 +1,40 @@
+name: go-test
+on:
+  push:
+    tags:
+      - v*
+    branches:
+      - master
+  pull_request:
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        go-version:
+        - '1.21'
+        - '1.22'
+        os:
+        - 'ubuntu-latest'
+        redis:
+        - '7.2'
+        - '7.0'
+        - '6.2'
+        - '6.0'
+    name: Test go ${{ matrix.go-version }} redis ${{ matrix.redis }} on ${{ matrix.os }}
+    steps:
+      - name: Setup redis
+        uses: shogo82148/actions-setup-redis@v1
+        with:
+          redis-version: ${{ matrix.redis }}
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ matrix.go-version }}
+
+      - name: Go Test
+        run: go test -race ./...

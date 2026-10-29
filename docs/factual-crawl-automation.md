@@ -251,6 +251,10 @@ the late exact-base guards still apply. There is no routine human merge tier.
 [`land_autonomous_index.py`](../scripts/land_autonomous_index.py):
 
 1. Requires a same-repository, index-only PR matching expected head and base.
+   Resolves public deployment enablement before landing and retains its boolean,
+   source and reason in `landing.publicDeployment`. The scheduled workflow passes
+   its evaluated repository variable through `--public-deploy-enabled true|false`;
+   it does not require the workflow token to read the variables REST API.
 2. Dispatches CI explicitly, waits for its run, and requires the public gate to
    succeed for that exact commit.
 3. Rechecks the PR/default branch and fast-forwards with `force: false`.
@@ -259,6 +263,13 @@ the late exact-base guards still apply. There is no routine human merge tier.
    for the exact-commit deploy job, actual publication step, and smoke check.
    A disabled switch is recorded as `landed-deployment-disabled`; landing alone
    cannot qualify as publication.
+
+Manual invocations that omit `--public-deploy-enabled` retain the repository
+variables API lookup. A missing variable (HTTP 404) is explicitly recorded as
+unset/disabled. Permission, network, malformed-response and invalid-value errors
+refuse landing before the fast-forward; they are never treated as an operator's
+decision to disable deployment. No additional token permission is required by
+the scheduled path.
 
 Explicit dispatch is necessary because ordinary `GITHUB_TOKEN` pushes do not
 start downstream push workflows. A successful crawl is not publication proof.

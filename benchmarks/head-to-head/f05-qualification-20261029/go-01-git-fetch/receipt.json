@@ -1,0 +1,31 @@
+{
+  "argv": [
+    "git",
+    "-c",
+    "core.hooksPath=/dev/null",
+    "-c",
+    "credential.helper=",
+    "-c",
+    "protocol.allow=never",
+    "-c",
+    "protocol.https.allow=always",
+    "fetch",
+    "--depth=1",
+    "--no-tags",
+    "--no-recurse-submodules",
+    "https://github.com/microsoft/TypeScript.git",
+    "25f823dc198a00744b458a7bc6984359f0dd7cac"
+  ],
+  "cwd": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/objects.git",
+  "environment": {
+    "PATH": "/Users/maxwell/projects/agent/dotrepo/.venv/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/maxwell/.local/bin:/Users/maxwell/.grok/bin:/Users/maxwell/.nvm/versions/node/v25.9.0/bin:/Users/maxwell/.bun/bin:/Users/maxwell/.local/bin:/Users/maxwell/.local/bin:/Users/maxwell/.elan/bin:/opt/homebrew/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/opt/homebrew/bin:/Users/maxwell/.codex/tmp/arg0-macos/codex-arg0VIm78J:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/maxwell/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/maxwell/.local/bin:/Users/maxwell/.grok/bin:/Users/maxwell/.atuin/bin:/Users/maxwell/.nvm/versions/node/v25.9.0/bin:/Users/maxwell/.bun/bin:/Users/maxwell/.elan/bin:/Users/maxwell/.cargo/bin:/Users/maxwell/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS",
+    "HOME": "/tmp/dotrepo-f05-qualification-20261029-tranche-1/go-01-full/empty-home",
+    "GIT_CONFIG_GLOBAL": "/dev/null",
+    "GIT_CONFIG_NOSYSTEM": "1",
+    "GIT_TERMINAL_PROMPT": "0"
+  },
+  "exitCode": 0,
+  "elapsedSeconds": 3.4782601250335574,
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "740742db0a9f91d2b9ae4290ab8f666cdf41a8327616ad6307e783ee6a757b0e"
+}

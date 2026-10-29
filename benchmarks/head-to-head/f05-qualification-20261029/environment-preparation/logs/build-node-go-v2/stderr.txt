@@ -1,0 +1,94 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load remote build context
+#1 DONE 0.0s
+
+#2 copy /context /
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/golang@sha256:d9b6a1beb9474adc2a1ce842573639b44b2a0dd49b6669f51d3821baf9ec37c9
+#3 DONE 0.4s
+
+#4 [internal] load metadata for docker.io/library/node@sha256:e7add2a490bb17d97b485b8641bd88455fff7839ade0f5eba493c3508124d413
+#4 DONE 0.4s
+
+#5 [go 1/1] FROM docker.io/library/golang@sha256:d9b6a1beb9474adc2a1ce842573639b44b2a0dd49b6669f51d3821baf9ec37c9
+#5 resolve docker.io/library/golang@sha256:d9b6a1beb9474adc2a1ce842573639b44b2a0dd49b6669f51d3821baf9ec37c9 0.0s done
+#5 DONE 0.1s
+
+#6 [node 1/1] FROM docker.io/library/node@sha256:e7add2a490bb17d97b485b8641bd88455fff7839ade0f5eba493c3508124d413
+#6 resolve docker.io/library/node@sha256:e7add2a490bb17d97b485b8641bd88455fff7839ade0f5eba493c3508124d413 0.0s done
+#6 DONE 0.1s
+
+#5 [go 1/1] FROM docker.io/library/golang@sha256:d9b6a1beb9474adc2a1ce842573639b44b2a0dd49b6669f51d3821baf9ec37c9
+#5 extracting sha256:9e2782a4701b518d11b63dd3dedcfe1338e448f72cbf5353e854f2501ffd5e62
+#5 extracting sha256:9e2782a4701b518d11b63dd3dedcfe1338e448f72cbf5353e854f2501ffd5e62 3.5s done
+#5 DONE 3.6s
+
+#5 [go 1/1] FROM docker.io/library/golang@sha256:d9b6a1beb9474adc2a1ce842573639b44b2a0dd49b6669f51d3821baf9ec37c9
+#5 extracting sha256:5a8782a51b4859547b9e75033fe9ea76035a0145a516f9599564fbb0a9b01212
+#5 extracting sha256:5a8782a51b4859547b9e75033fe9ea76035a0145a516f9599564fbb0a9b01212 1.2s done
+#5 DONE 4.7s
+
+#5 [go 1/1] FROM docker.io/library/golang@sha256:d9b6a1beb9474adc2a1ce842573639b44b2a0dd49b6669f51d3821baf9ec37c9
+#5 extracting sha256:7d9f3d35258fc5018f37db87b726c6d8be6533cd7f9a10f219d805efa5969df3
+#5 extracting sha256:7d9f3d35258fc5018f37db87b726c6d8be6533cd7f9a10f219d805efa5969df3 3.4s done
+#5 DONE 8.1s
+
+#5 [go 1/1] FROM docker.io/library/golang@sha256:d9b6a1beb9474adc2a1ce842573639b44b2a0dd49b6669f51d3821baf9ec37c9
+#5 extracting sha256:315b5f22b5a9ab1314075691a31dc6e2d107d6548491f36a9e588c7a237b255b
+#5 extracting sha256:315b5f22b5a9ab1314075691a31dc6e2d107d6548491f36a9e588c7a237b255b 4.0s done
+#5 DONE 12.1s
+
+#6 [node 1/1] FROM docker.io/library/node@sha256:e7add2a490bb17d97b485b8641bd88455fff7839ade0f5eba493c3508124d413
+#6 extracting sha256:3b260f387eb11bbf6997b93d3e3cff4926bf492025b84c4ca24dbd282b68eafc
+#6 ...
+
+#5 [go 1/1] FROM docker.io/library/golang@sha256:d9b6a1beb9474adc2a1ce842573639b44b2a0dd49b6669f51d3821baf9ec37c9
+#5 extracting sha256:e2e7dba5c30798b9d70d746d9fb1606b744e5c3baa8015b51dad60cea99c045b
+#5 ...
+
+#6 [node 1/1] FROM docker.io/library/node@sha256:e7add2a490bb17d97b485b8641bd88455fff7839ade0f5eba493c3508124d413
+#6 extracting sha256:3b260f387eb11bbf6997b93d3e3cff4926bf492025b84c4ca24dbd282b68eafc 11.2s done
+#6 DONE 11.3s
+
+#6 [node 1/1] FROM docker.io/library/node@sha256:e7add2a490bb17d97b485b8641bd88455fff7839ade0f5eba493c3508124d413
+#6 extracting sha256:13910f8954dc01c3efb3c0e7f0de4900510d04af7f3d7ffb9279e5f79465306b 0.0s done
+#6 extracting sha256:1a95033731844ccb7bd35ba41b93fa37b2bad8c85957bb29df0bed26bacac1d4
+#6 ...
+
+#5 [go 1/1] FROM docker.io/library/golang@sha256:d9b6a1beb9474adc2a1ce842573639b44b2a0dd49b6669f51d3821baf9ec37c9
+#5 extracting sha256:e2e7dba5c30798b9d70d746d9fb1606b744e5c3baa8015b51dad60cea99c045b 7.9s done
+#5 DONE 20.0s
+
+#5 [go 1/1] FROM docker.io/library/golang@sha256:d9b6a1beb9474adc2a1ce842573639b44b2a0dd49b6669f51d3821baf9ec37c9
+#5 extracting sha256:caeb699ea75faa74b11d6de515d16348a97707dcf12c2069c74df08255edeec7 0.0s done
+#5 extracting sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 0.0s done
+#5 DONE 20.1s
+
+#6 [node 1/1] FROM docker.io/library/node@sha256:e7add2a490bb17d97b485b8641bd88455fff7839ade0f5eba493c3508124d413
+#6 extracting sha256:1a95033731844ccb7bd35ba41b93fa37b2bad8c85957bb29df0bed26bacac1d4 4.8s done
+#6 DONE 16.1s
+
+#6 [node 1/1] FROM docker.io/library/node@sha256:e7add2a490bb17d97b485b8641bd88455fff7839ade0f5eba493c3508124d413
+#6 extracting sha256:f936106b69b96bd1631352a01f479d2aee97a6c5ebfb2651e26009e82ca613a3 0.1s done
+#6 extracting sha256:d4f3c8a273740dfda04db2a9fe6d06e52b1792622e7cf896d018cb79d5d52cfa 0.0s done
+#6 DONE 16.2s
+
+#7 [stage-2 1/2] COPY --from=node / /
+#7 DONE 16.8s
+
+#8 [stage-2 2/2] COPY --from=go /usr/local/go /usr/local/go
+#8 DONE 6.6s
+
+#9 exporting to image
+#9 exporting layers
+#9 exporting layers 65.6s done
+#9 exporting manifest sha256:94cf485b3c1953c748370f98e58fac8e539b305801ecfe2cce181756faa78956 0.0s done
+#9 exporting config sha256:e9f57b312d7db93f9bd683a85dd5b892e98b1cbb8cf31071c05772c5e93d4a0c 0.0s done
+#9 exporting attestation manifest sha256:e33ce641fbf942c14b7d44ec5ea9b47f871ea6daf5f9bf42768ab00ce8e7d9ed done
+#9 exporting manifest list sha256:e89d508aefaecfc8d0163f99be59a3da8785493684393f7a1bf4e659b1043587 done
+#9 naming to docker.io/library/dotrepo-f05-node-go:20261029 done
+#9 unpacking to docker.io/library/dotrepo-f05-node-go:20261029
+#9 unpacking to docker.io/library/dotrepo-f05-node-go:20261029 25.5s done
+#9 DONE 91.2s

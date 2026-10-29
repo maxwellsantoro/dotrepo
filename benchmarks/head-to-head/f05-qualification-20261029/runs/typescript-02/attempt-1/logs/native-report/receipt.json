@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-f05-qualification-typescript-02-994c0fe1ce",
+    "cat",
+    "/workspace/vitest.json"
+  ],
+  "startedAt": "2026-10-29T06:14:39.320851+00:00",
+  "elapsedSeconds": 0.11330358311533928,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "0a57035e434152b3d08a554db2ec539743ef2bac988c7102bb594698897ce7b8",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

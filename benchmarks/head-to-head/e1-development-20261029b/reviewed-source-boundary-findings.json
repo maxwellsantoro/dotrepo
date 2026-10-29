@@ -1,0 +1,136 @@
+{
+  "observedAt": "2026-10-29T06:17:10.218417+00:00",
+  "binarySha256": "e0a7244b8a4fcd0880354a329e600ac65857c1978997a45981eba5b21f9cd6e6",
+  "runtimeSourceSha256": "2f7b617acc6ba6d206c8671030c11f819a5a81f3ec37d32a13bffd7053ada92a",
+  "noUpstreamExecution": true,
+  "results": [
+    {
+      "case": "baseline",
+      "exitCode": 0,
+      "candidateCount": 1,
+      "candidate": {
+        "command": "pytest keras",
+        "ecosystem": "Python",
+        "source": "CONTRIBUTING.md",
+        "context": {
+          "command": "pytest keras",
+          "working_directory": ".",
+          "scope": "repository",
+          "prerequisites": [
+            "Use Python >=3.11 as declared by pyproject.toml; the local setup guide states the weaker minimum 3.10. No runtime was inspected.",
+            "Use the documented local setup route (CONTRIBUTING.md:81-112): To set up your local dev environment, you will need the following tools. 1. [git](https://github.com/) for code repository management. 2. [python](https://www.python.org/) to build and code in Keras. The following commands check the tools above are successfully installed. Note that Keras requires at least Python 3.10 to run. ```shell git --version python --version ``` Clone your forked repo to your local machine. Go to the cloned directory to install the dependencies. ```shell git clone https://github.com/YOUR_GITHUB_USERNAME/keras.git cd keras pip install -r requirements.txt ``` You then need to configure the backend to use, see the [Configuring your backend](https://github.com/keras-team/keras/blob/master/README.md#configuring-your-backend) section of the README. You can also add GPU support to your environment, see the [Adding GPU support](https://github.com/keras-team/keras/blob/master/README.md#adding-gpu-support) section of the README.",
+            "Retain the local installation and platform conditions (README.md:43-65): Keras 3 is compatible with Linux and macOS systems. For Windows users, we recommend using WSL2 to run Keras. To install a local development version: 1. Install dependencies: ``` pip install -r requirements.txt ``` 2. Run installation command from the root directory. ``` python pip_build.py --install ``` 3. Run API generation script when creating PRs that update `keras_export` public APIs: ``` ./shell/api_gen.sh ```",
+            "Configure a backend before imports and retain backend limitations (README.md:91-114): You can export the environment variable `KERAS_BACKEND` or you can edit your local config file at `~/.keras/keras.json` to configure your backend. Available backend options are: `\"tensorflow\"`, `\"jax\"`, `\"torch\"`, `\"openvino\"`. Example: ``` export KERAS_BACKEND=\"jax\" ``` In Colab, you can do: ```python import os os.environ[\"KERAS_BACKEND\"] = \"jax\" import keras ``` **Note:** The backend must be configured before importing `keras`, and the backend cannot be changed after the package has been imported. **Note:** The OpenVINO backend is an inference-only backend, meaning it is designed only for running model predictions using `model.predict()` method.",
+            "Use the documented CPU requirements route; GPU setup is not established by this candidate: The `requirements.txt` file will install a CPU-only version of TensorFlow, JAX, and PyTorch.",
+            "Retain default test coverage and the separately documented optional skip/backend variants (CONTRIBUTING.md:202-224): You can run all the tests locally by running the following command in the repo root directory. ```shell pytest keras ``` Note that you can skip the Keras applications tests using the `SKIP_APPLICATIONS_TESTS` environment variable. This will cut down the testing time significantly. ```shell SKIP_APPLICATIONS_TESTS=True pytest keras ``` To run all tests using a different backend, you can simply specify it on the command line. ```shell KERAS_BACKEND=jax SKIP_APPLICATIONS_TESTS=True pytest keras ```",
+            "Install the complete retained requirements include chain: requirements.txt, requirements-common.txt. Environment markers and index declarations remain source data, not evidence of installed dependencies."
+          ],
+          "source": "CONTRIBUTING.md"
+        }
+      },
+      "stdout": "imported /var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-review-oj_ndc31/record.toml\nimported /var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-review-oj_ndc31/evidence.md\n- imported from: README.md, pyproject.toml, CONTRIBUTING.md, requirements.txt, requirements-common.txt\n- inferred defaults: repo.name, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "tempRoot": "/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-review-oj_ndc31",
+      "contributingSha256": "eff1a6349d222979e24b860c88e9577f603300af7658a1ac6fca3140992d0d3d"
+    },
+    {
+      "case": "commented-tests",
+      "exitCode": 0,
+      "candidateCount": 1,
+      "candidate": {
+        "command": "pytest keras",
+        "ecosystem": "Python",
+        "source": "CONTRIBUTING.md",
+        "context": {
+          "command": "pytest keras",
+          "working_directory": ".",
+          "scope": "repository",
+          "prerequisites": [
+            "Use Python >=3.11 as declared by pyproject.toml; the local setup guide states the weaker minimum 3.10. No runtime was inspected.",
+            "Use the documented local setup route (CONTRIBUTING.md:81-112): To set up your local dev environment, you will need the following tools. 1. [git](https://github.com/) for code repository management. 2. [python](https://www.python.org/) to build and code in Keras. The following commands check the tools above are successfully installed. Note that Keras requires at least Python 3.10 to run. ```shell git --version python --version ``` Clone your forked repo to your local machine. Go to the cloned directory to install the dependencies. ```shell git clone https://github.com/YOUR_GITHUB_USERNAME/keras.git cd keras pip install -r requirements.txt ``` You then need to configure the backend to use, see the [Configuring your backend](https://github.com/keras-team/keras/blob/master/README.md#configuring-your-backend) section of the README. You can also add GPU support to your environment, see the [Adding GPU support](https://github.com/keras-team/keras/blob/master/README.md#adding-gpu-support) section of the README.",
+            "Retain the local installation and platform conditions (README.md:43-65): Keras 3 is compatible with Linux and macOS systems. For Windows users, we recommend using WSL2 to run Keras. To install a local development version: 1. Install dependencies: ``` pip install -r requirements.txt ``` 2. Run installation command from the root directory. ``` python pip_build.py --install ``` 3. Run API generation script when creating PRs that update `keras_export` public APIs: ``` ./shell/api_gen.sh ```",
+            "Configure a backend before imports and retain backend limitations (README.md:91-114): You can export the environment variable `KERAS_BACKEND` or you can edit your local config file at `~/.keras/keras.json` to configure your backend. Available backend options are: `\"tensorflow\"`, `\"jax\"`, `\"torch\"`, `\"openvino\"`. Example: ``` export KERAS_BACKEND=\"jax\" ``` In Colab, you can do: ```python import os os.environ[\"KERAS_BACKEND\"] = \"jax\" import keras ``` **Note:** The backend must be configured before importing `keras`, and the backend cannot be changed after the package has been imported. **Note:** The OpenVINO backend is an inference-only backend, meaning it is designed only for running model predictions using `model.predict()` method.",
+            "Use the documented CPU requirements route; GPU setup is not established by this candidate: The `requirements.txt` file will install a CPU-only version of TensorFlow, JAX, and PyTorch.",
+            "Retain default test coverage and the separately documented optional skip/backend variants (CONTRIBUTING.md:203-226): You can run all the tests locally by running the following command in the repo root directory. ```shell pytest keras ``` Note that you can skip the Keras applications tests using the `SKIP_APPLICATIONS_TESTS` environment variable. This will cut down the testing time significantly. ```shell SKIP_APPLICATIONS_TESTS=True pytest keras ``` To run all tests using a different backend, you can simply specify it on the command line. ```shell KERAS_BACKEND=jax SKIP_APPLICATIONS_TESTS=True pytest keras ``` -->",
+            "Install the complete retained requirements include chain: requirements.txt, requirements-common.txt. Environment markers and index declarations remain source data, not evidence of installed dependencies."
+          ],
+          "source": "CONTRIBUTING.md"
+        }
+      },
+      "stdout": "imported /var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-review-jj7q2whd/record.toml\nimported /var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-review-jj7q2whd/evidence.md\n- imported from: README.md, pyproject.toml, CONTRIBUTING.md, requirements.txt, requirements-common.txt\n- inferred defaults: repo.name, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "tempRoot": "/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-review-jj7q2whd",
+      "contributingSha256": "462520291325d5d10ee64fa0df65db3256aca2877b881d4930819054d57976e6"
+    },
+    {
+      "case": "indented-tests",
+      "exitCode": 0,
+      "candidateCount": 1,
+      "candidate": {
+        "command": "pytest keras",
+        "ecosystem": "Python",
+        "source": "CONTRIBUTING.md",
+        "context": {
+          "command": "pytest keras",
+          "working_directory": ".",
+          "scope": "repository",
+          "prerequisites": [
+            "Use Python >=3.11 as declared by pyproject.toml; the local setup guide states the weaker minimum 3.10. No runtime was inspected.",
+            "Use the documented local setup route (CONTRIBUTING.md:81-112): To set up your local dev environment, you will need the following tools. 1. [git](https://github.com/) for code repository management. 2. [python](https://www.python.org/) to build and code in Keras. The following commands check the tools above are successfully installed. Note that Keras requires at least Python 3.10 to run. ```shell git --version python --version ``` Clone your forked repo to your local machine. Go to the cloned directory to install the dependencies. ```shell git clone https://github.com/YOUR_GITHUB_USERNAME/keras.git cd keras pip install -r requirements.txt ``` You then need to configure the backend to use, see the [Configuring your backend](https://github.com/keras-team/keras/blob/master/README.md#configuring-your-backend) section of the README. You can also add GPU support to your environment, see the [Adding GPU support](https://github.com/keras-team/keras/blob/master/README.md#adding-gpu-support) section of the README.",
+            "Retain the local installation and platform conditions (README.md:43-65): Keras 3 is compatible with Linux and macOS systems. For Windows users, we recommend using WSL2 to run Keras. To install a local development version: 1. Install dependencies: ``` pip install -r requirements.txt ``` 2. Run installation command from the root directory. ``` python pip_build.py --install ``` 3. Run API generation script when creating PRs that update `keras_export` public APIs: ``` ./shell/api_gen.sh ```",
+            "Configure a backend before imports and retain backend limitations (README.md:91-114): You can export the environment variable `KERAS_BACKEND` or you can edit your local config file at `~/.keras/keras.json` to configure your backend. Available backend options are: `\"tensorflow\"`, `\"jax\"`, `\"torch\"`, `\"openvino\"`. Example: ``` export KERAS_BACKEND=\"jax\" ``` In Colab, you can do: ```python import os os.environ[\"KERAS_BACKEND\"] = \"jax\" import keras ``` **Note:** The backend must be configured before importing `keras`, and the backend cannot be changed after the package has been imported. **Note:** The OpenVINO backend is an inference-only backend, meaning it is designed only for running model predictions using `model.predict()` method.",
+            "Use the documented CPU requirements route; GPU setup is not established by this candidate: The `requirements.txt` file will install a CPU-only version of TensorFlow, JAX, and PyTorch.",
+            "Retain default test coverage and the separately documented optional skip/backend variants (CONTRIBUTING.md:202-225): You can run all the tests locally by running the following command in the repo root directory. ```shell pytest keras ``` Note that you can skip the Keras applications tests using the `SKIP_APPLICATIONS_TESTS` environment variable. This will cut down the testing time significantly. ```shell SKIP_APPLICATIONS_TESTS=True pytest keras ``` To run all tests using a different backend, you can simply specify it on the command line. ```shell KERAS_BACKEND=jax SKIP_APPLICATIONS_TESTS=True pytest keras ```",
+            "Install the complete retained requirements include chain: requirements.txt, requirements-common.txt. Environment markers and index declarations remain source data, not evidence of installed dependencies."
+          ],
+          "source": "CONTRIBUTING.md"
+        }
+      },
+      "stdout": "imported /var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-review-a60xyy_k/record.toml\nimported /var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-review-a60xyy_k/evidence.md\n- imported from: README.md, pyproject.toml, CONTRIBUTING.md, requirements.txt, requirements-common.txt\n- inferred defaults: repo.name, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "tempRoot": "/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-review-a60xyy_k",
+      "contributingSha256": "3611fe981e2f38bf7afe460160a92b74fa8623be843c96a6218f897c8c7ff6d9"
+    },
+    {
+      "case": "fenced-guide",
+      "exitCode": 0,
+      "candidateCount": 0,
+      "candidate": null,
+      "stdout": "imported /var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-review-cp250ay2/record.toml\nimported /var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-review-cp250ay2/evidence.md\n- imported from: README.md, pyproject.toml\n- inferred defaults: repo.name, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "tempRoot": "/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-review-cp250ay2",
+      "contributingSha256": "fc8bbef939203368502360c9a2cb031c3de53c5679672daaee04c2c1d7329b00"
+    },
+    {
+      "case": "external-install-note",
+      "exitCode": 0,
+      "candidateCount": 1,
+      "candidate": {
+        "command": "pytest keras",
+        "ecosystem": "Python",
+        "source": "CONTRIBUTING.md",
+        "context": {
+          "command": "pytest keras",
+          "working_directory": ".",
+          "scope": "repository",
+          "prerequisites": [
+            "Use Python >=3.11 as declared by pyproject.toml; the local setup guide states the weaker minimum 3.10. No runtime was inspected.",
+            "Use the documented local setup route (CONTRIBUTING.md:81-112): To set up your local dev environment, you will need the following tools. 1. [git](https://github.com/) for code repository management. 2. [python](https://www.python.org/) to build and code in Keras. The following commands check the tools above are successfully installed. Note that Keras requires at least Python 3.10 to run. ```shell git --version python --version ``` Clone your forked repo to your local machine. Go to the cloned directory to install the dependencies. ```shell git clone https://github.com/YOUR_GITHUB_USERNAME/keras.git cd keras pip install -r requirements.txt ``` You then need to configure the backend to use, see the [Configuring your backend](https://github.com/keras-team/keras/blob/master/README.md#configuring-your-backend) section of the README. You can also add GPU support to your environment, see the [Adding GPU support](https://github.com/keras-team/keras/blob/master/README.md#adding-gpu-support) section of the README.",
+            "Retain the local installation and platform conditions (README.md:43-65): Keras 3 is compatible with Linux and macOS systems. For Windows users, we recommend using WSL2 to run Keras. To install a local development version: 1. Install dependencies: ``` pip install -r requirements.txt ``` 2. Run installation command from the root directory. ``` python pip_build.py --install ``` 3. Run API generation script when creating PRs that update `keras_export` public APIs: ``` ./shell/api_gen.sh ```",
+            "Configure a backend before imports and retain backend limitations (README.md:91-114): You can export the environment variable `KERAS_BACKEND` or you can edit your local config file at `~/.keras/keras.json` to configure your backend. Available backend options are: `\"tensorflow\"`, `\"jax\"`, `\"torch\"`, `\"openvino\"`. Example: ``` export KERAS_BACKEND=\"jax\" ``` In Colab, you can do: ```python import os os.environ[\"KERAS_BACKEND\"] = \"jax\" import keras ``` **Note:** The backend must be configured before importing `keras`, and the backend cannot be changed after the package has been imported. **Note:** The OpenVINO backend is an inference-only backend, meaning it is designed only for running model predictions using `model.predict()` method.",
+            "Use the documented CPU requirements route; GPU setup is not established by this candidate: The `requirements.txt` file will install a CPU-only version of TensorFlow, JAX, and PyTorch.",
+            "Retain default test coverage and the separately documented optional skip/backend variants (CONTRIBUTING.md:204-226): You can run all the tests locally by running the following command in the repo root directory. ```shell pytest keras ``` Note that you can skip the Keras applications tests using the `SKIP_APPLICATIONS_TESTS` environment variable. This will cut down the testing time significantly. ```shell SKIP_APPLICATIONS_TESTS=True pytest keras ``` To run all tests using a different backend, you can simply specify it on the command line. ```shell KERAS_BACKEND=jax SKIP_APPLICATIONS_TESTS=True pytest keras ```",
+            "Install the complete retained requirements include chain: requirements.txt, requirements-common.txt. Environment markers and index declarations remain source data, not evidence of installed dependencies."
+          ],
+          "source": "CONTRIBUTING.md"
+        }
+      },
+      "stdout": "imported /var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-review-zhe9ml2s/record.toml\nimported /var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-review-zhe9ml2s/evidence.md\n- imported from: README.md, pyproject.toml, CONTRIBUTING.md, requirements.txt, requirements-common.txt\n- inferred defaults: repo.name, repo.build, repo.test\n- mode: Overlay\n- status: Inferred\n",
+      "stderr": "",
+      "tempRoot": "/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-review-zhe9ml2s",
+      "contributingSha256": "cc14df227444ff7a38c68b4c0a71536b8c0b3948603c9326d32fa55a2c9b253d"
+    }
+  ],
+  "earlierReportLimitation": "Initial inspector looked for .repo instead of overlay record.toml; counts corrected below from retained actual CLI output manifests.",
+  "correctedAt": "2026-10-29T06:17:18.774563+00:00"
+}

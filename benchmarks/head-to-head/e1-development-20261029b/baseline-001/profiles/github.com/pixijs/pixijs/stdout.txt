@@ -1,0 +1,57 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T06:01:09.235861Z",
+    "snapshotDigest": "a218c8081deec24c213ebdf703cc62663c77bcd1f83bd760ef24e4ded44b70e9"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "pixijs",
+    "repo": "pixijs",
+    "source": "https://github.com/pixijs/pixijs"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/pixijs/pixijs/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/pixijs/pixijs",
+    "generatedAt": "2026-10-29T06:01:09.217974Z",
+    "evidencePath": "repos/github.com/pixijs/pixijs/evidence.md",
+    "freshnessStatus": "fresh",
+    "ageDays": 0,
+    "staleAfterDays": 30
+  },
+  "purpose": "Next-Generation, Fastest HTML5 Creation Engine for the Web",
+  "name": "npm downloads",
+  "homepage": "https://github.com/pixijs/pixijs",
+  "execution": {
+    "build": "npm run build",
+    "test": "npm test"
+  },
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": false,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "imported",
+    "confidence": "medium",
+    "provenance": [
+      "imported"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/pixijs/pixijs/profile.json",
+    "repository": "/v0/repos/github.com/pixijs/pixijs/index.json",
+    "trust": "/v0/repos/github.com/pixijs/pixijs/trust.json",
+    "queryTemplate": "/v0/repos/github.com/pixijs/pixijs/query?path={dot_path}",
+    "indexPath": "repos/github.com/pixijs/pixijs/"
+  }
+}

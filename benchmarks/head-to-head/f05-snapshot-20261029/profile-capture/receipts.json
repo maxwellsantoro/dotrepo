@@ -1,0 +1,361 @@
+[
+  {
+    "taskId": "rust-01",
+    "enrolledRepository": "github.com/tauri-apps/tauri",
+    "canonicalRepository": "github.com/tauri-apps/tauri",
+    "observedAt": "2026-10-29T06:10:44.851338+00:00",
+    "url": "https://dotrepo.org/v0/snapshots/bb01b134d0a2d7d913ccf3f0f54327a239d9bce24ac7735259a62bb5630cf976/repos/github.com/tauri-apps/tauri/profile.json",
+    "requestHeaders": {
+      "User-agent": "dotrepo-f05-snapshot/1.0",
+      "Accept": "application/json"
+    },
+    "status": 200,
+    "headers": {
+      "Date": "Thu, 29 Oct 2026 06:10:44 GMT",
+      "Content-Type": "application/json",
+      "Content-Length": "5128",
+      "Connection": "close",
+      "CF-Cache-Status": "HIT",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "ETag": "\"fbe2630922fb725da90b095e66169abc\"",
+      "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=0OFgq9uMFzGqdMBh4dH%2BNQDYC03lAffzDaR3%2FBrLKDqFr2FF5WU1Ym8SoV2X1YXLsYE%2B3vCaL9H5gNmT%2FQtZUjSBbXYmGPw1UD6yMjuQAW1XlDZHHo017NWa1UA5bw%3D%3D\"}]}",
+      "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "Server": "cloudflare",
+      "CF-RAY": "a52004d5cc3e2dae-EWR",
+      "alt-svc": "h3=\":443\"; ma=86400"
+    },
+    "body": "rust-01.body",
+    "sha256": "966d78080b2a08b6cef9e7797e7157c890c52b1708a3df50328a3d21c9e62c5d",
+    "decodedBytes": 5128,
+    "advertisedLeaf": {
+      "path": "v0/snapshots/bb01b134d0a2d7d913ccf3f0f54327a239d9bce24ac7735259a62bb5630cf976/repos/github.com/tauri-apps/tauri/profile.json",
+      "bytes": 5128,
+      "sha256": "966d78080b2a08b6cef9e7797e7157c890c52b1708a3df50328a3d21c9e62c5d"
+    }
+  },
+  {
+    "taskId": "rust-02",
+    "enrolledRepository": "github.com/GyulyVGC/sniffnet",
+    "canonicalRepository": "github.com/GyulyVGC/sniffnet",
+    "observedAt": "2026-10-29T06:10:44.995362+00:00",
+    "url": "https://dotrepo.org/v0/snapshots/bb01b134d0a2d7d913ccf3f0f54327a239d9bce24ac7735259a62bb5630cf976/repos/github.com/GyulyVGC/sniffnet/profile.json",
+    "requestHeaders": {
+      "User-agent": "dotrepo-f05-snapshot/1.0",
+      "Accept": "application/json"
+    },
+    "status": 200,
+    "headers": {
+      "Date": "Thu, 29 Oct 2026 06:10:44 GMT",
+      "Content-Type": "application/json",
+      "Content-Length": "4675",
+      "Connection": "close",
+      "CF-Cache-Status": "HIT",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "ETag": "\"4deab78d0b7eec4ec9c27a186692b7e7\"",
+      "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=ZTDQ3FBzmjorg9dEaTkIfrIKmDpAWOggf%2FegFq597OW5XRspTEQnWkP5%2FoV7wwSa6HrneFAAKSLwKHj0UgXj2uro92DpZmHE0ARVOYXQfbNvYm8JgjmVg2B2g5lt8A%3D%3D\"}]}",
+      "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "Server": "cloudflare",
+      "CF-RAY": "a52004d69bcac701-EWR",
+      "alt-svc": "h3=\":443\"; ma=86400"
+    },
+    "body": "rust-02.body",
+    "sha256": "42789822f572979ceebea5fe170b0125007b8097981d5bb0f8cca205731547c8",
+    "decodedBytes": 4675,
+    "advertisedLeaf": {
+      "path": "v0/snapshots/bb01b134d0a2d7d913ccf3f0f54327a239d9bce24ac7735259a62bb5630cf976/repos/github.com/GyulyVGC/sniffnet/profile.json",
+      "bytes": 4675,
+      "sha256": "42789822f572979ceebea5fe170b0125007b8097981d5bb0f8cca205731547c8"
+    }
+  },
+  {
+    "taskId": "rust-03",
+    "enrolledRepository": "github.com/iced-rs/iced",
+    "canonicalRepository": "github.com/iced-rs/iced",
+    "observedAt": "2026-10-29T06:10:45.146773+00:00",
+    "url": "https://dotrepo.org/v0/snapshots/bb01b134d0a2d7d913ccf3f0f54327a239d9bce24ac7735259a62bb5630cf976/repos/github.com/iced-rs/iced/profile.json",
+    "requestHeaders": {
+      "User-agent": "dotrepo-f05-snapshot/1.0",
+      "Accept": "application/json"
+    },
+    "status": 404,
+    "headers": {
+      "Date": "Thu, 29 Oct 2026 06:10:45 GMT",
+      "Content-Length": "0",
+      "Connection": "close",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=7uFtui24vWXRoFmuqZ5IdB1DsvUtpUSYNdRPetOzacUJKTikK5yEbY2SGqWU74ky6DSkU97S1DzkSdM1yPoyov6bLQcVT7ZcntHyWRTybKiRGz8IIyCTJD7jHTBi2w%3D%3D\"}]}",
+      "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "Server": "cloudflare",
+      "CF-RAY": "a52004d7684e7c2a-EWR",
+      "alt-svc": "h3=\":443\"; ma=86400"
+    },
+    "body": "rust-03.body",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "decodedBytes": 0,
+    "advertisedLeaf": null
+  },
+  {
+    "taskId": "python-01",
+    "enrolledRepository": "github.com/666ghj/MiroFish",
+    "canonicalRepository": "github.com/666ghj/MiroFish",
+    "observedAt": "2026-10-29T06:10:45.367690+00:00",
+    "url": "https://dotrepo.org/v0/snapshots/bb01b134d0a2d7d913ccf3f0f54327a239d9bce24ac7735259a62bb5630cf976/repos/github.com/666ghj/MiroFish/profile.json",
+    "requestHeaders": {
+      "User-agent": "dotrepo-f05-snapshot/1.0",
+      "Accept": "application/json"
+    },
+    "status": 404,
+    "headers": {
+      "Date": "Thu, 29 Oct 2026 06:10:45 GMT",
+      "Content-Length": "0",
+      "Connection": "close",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=vzZF2ZXWdsmG6WAYMx0u3BO9OzEXC7Fm%2F0PWNOcIujCvNHel8FAj0EjLnrpY3OFFX%2BxyvyubrYdAICMjuMsq0413CiHU7XmCtRtJgjWbJKQJQVw8hnWRnRyabATlKA%3D%3D\"}]}",
+      "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "Server": "cloudflare",
+      "CF-RAY": "a52004d858df41e1-EWR",
+      "alt-svc": "h3=\":443\"; ma=86400"
+    },
+    "body": "python-01.body",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "decodedBytes": 0,
+    "advertisedLeaf": null
+  },
+  {
+    "taskId": "python-02",
+    "enrolledRepository": "github.com/home-assistant/core",
+    "canonicalRepository": "github.com/home-assistant/core",
+    "observedAt": "2026-10-29T06:10:45.526007+00:00",
+    "url": "https://dotrepo.org/v0/snapshots/bb01b134d0a2d7d913ccf3f0f54327a239d9bce24ac7735259a62bb5630cf976/repos/github.com/home-assistant/core/profile.json",
+    "requestHeaders": {
+      "User-agent": "dotrepo-f05-snapshot/1.0",
+      "Accept": "application/json"
+    },
+    "status": 404,
+    "headers": {
+      "Date": "Thu, 29 Oct 2026 06:10:45 GMT",
+      "Content-Length": "0",
+      "Connection": "close",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=SfO0AphiCwTCPtkcY%2FYxTMPA%2FhB%2F7YqFZhMlK26OfwSr4jSAWOCdXP%2FGcgLUyXG5Y63lMiPS4j0cn4F7GhEV%2FmRsRQVvUjNqxQz%2F1vDXFUB%2BomFwRaL7jYbF9De6kA%3D%3D\"}]}",
+      "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "Server": "cloudflare",
+      "CF-RAY": "a52004d9ca5a8cba-EWR",
+      "alt-svc": "h3=\":443\"; ma=86400"
+    },
+    "body": "python-02.body",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "decodedBytes": 0,
+    "advertisedLeaf": null
+  },
+  {
+    "taskId": "python-03",
+    "enrolledRepository": "github.com/ytdl-org/youtube-dl",
+    "canonicalRepository": "github.com/ytdl-org/youtube-dl",
+    "observedAt": "2026-10-29T06:10:45.689036+00:00",
+    "url": "https://dotrepo.org/v0/snapshots/bb01b134d0a2d7d913ccf3f0f54327a239d9bce24ac7735259a62bb5630cf976/repos/github.com/ytdl-org/youtube-dl/profile.json",
+    "requestHeaders": {
+      "User-agent": "dotrepo-f05-snapshot/1.0",
+      "Accept": "application/json"
+    },
+    "status": 404,
+    "headers": {
+      "Date": "Thu, 29 Oct 2026 06:10:45 GMT",
+      "Content-Length": "0",
+      "Connection": "close",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=NFXeXLK4fJ2v0YghZ6mZLnrKbW5gLlg%2FPfdy8XB4z5zpcCScBZwuVmrNz4ArzFgEgNEU0nCnjhFsscfS%2BeCCniqR3%2FLesi9UgNv5I%2BHfV7t%2BBTlqwNP5vVpPkX3UzA%3D%3D\"}]}",
+      "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "Server": "cloudflare",
+      "CF-RAY": "a52004daca75499b-EWR",
+      "alt-svc": "h3=\":443\"; ma=86400"
+    },
+    "body": "python-03.body",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "decodedBytes": 0,
+    "advertisedLeaf": null
+  },
+  {
+    "taskId": "typescript-01",
+    "enrolledRepository": "github.com/deepseek-ai/deepseek-harness",
+    "canonicalRepository": "github.com/deepseek-ai/deepseek-harness",
+    "observedAt": "2026-10-29T06:10:45.828510+00:00",
+    "url": "https://dotrepo.org/v0/snapshots/bb01b134d0a2d7d913ccf3f0f54327a239d9bce24ac7735259a62bb5630cf976/repos/github.com/deepseek-ai/deepseek-harness/profile.json",
+    "requestHeaders": {
+      "User-agent": "dotrepo-f05-snapshot/1.0",
+      "Accept": "application/json"
+    },
+    "status": 404,
+    "headers": {
+      "Date": "Thu, 29 Oct 2026 06:10:45 GMT",
+      "Content-Length": "0",
+      "Connection": "close",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=3CdsvnbZYA%2FwEVukaOGfKSZH96fV9awrMDrtlNPEk9wuCtUBoKeq2bFDRB5%2FUX0AmSuWrLfIUV1ac575DVyY%2B97Y6vZmj8bJFwpeYtJ2ODnujMuPZsPpH9yQ6qtBiQ%3D%3D\"}]}",
+      "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "Server": "cloudflare",
+      "CF-RAY": "a52004dbc9498095-EWR",
+      "alt-svc": "h3=\":443\"; ma=86400"
+    },
+    "body": "typescript-01.body",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "decodedBytes": 0,
+    "advertisedLeaf": null
+  },
+  {
+    "taskId": "typescript-02",
+    "enrolledRepository": "github.com/OpenHands/OpenHands",
+    "canonicalRepository": "github.com/OpenHands/OpenHands",
+    "observedAt": "2026-10-29T06:10:45.984287+00:00",
+    "url": "https://dotrepo.org/v0/snapshots/bb01b134d0a2d7d913ccf3f0f54327a239d9bce24ac7735259a62bb5630cf976/repos/github.com/OpenHands/OpenHands/profile.json",
+    "requestHeaders": {
+      "User-agent": "dotrepo-f05-snapshot/1.0",
+      "Accept": "application/json"
+    },
+    "status": 404,
+    "headers": {
+      "Date": "Thu, 29 Oct 2026 06:10:45 GMT",
+      "Content-Length": "0",
+      "Connection": "close",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=9zYh3bBTAT75BgSbzg0vJi9ndKF8s6gOp3I%2BIjPK5xJQKq8KNzpS3oa3so3Y2b%2BLSE0%2BPkfOdaV6Jx4a3eowXzH2EB26edfPWEDx8U84%2BHPRYx2mXwkJRmHgFCjOrw%3D%3D\"}]}",
+      "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "Server": "cloudflare",
+      "CF-RAY": "a52004dcaad6dcf2-EWR",
+      "alt-svc": "h3=\":443\"; ma=86400"
+    },
+    "body": "typescript-02.body",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "decodedBytes": 0,
+    "advertisedLeaf": null
+  },
+  {
+    "taskId": "typescript-03",
+    "enrolledRepository": "github.com/vuejs/core",
+    "canonicalRepository": "github.com/vuejs/core",
+    "observedAt": "2026-10-29T06:10:46.073642+00:00",
+    "url": "https://dotrepo.org/v0/snapshots/bb01b134d0a2d7d913ccf3f0f54327a239d9bce24ac7735259a62bb5630cf976/repos/github.com/vuejs/core/profile.json",
+    "requestHeaders": {
+      "User-agent": "dotrepo-f05-snapshot/1.0",
+      "Accept": "application/json"
+    },
+    "status": 200,
+    "headers": {
+      "Date": "Thu, 29 Oct 2026 06:10:46 GMT",
+      "Content-Type": "application/json",
+      "Content-Length": "4215",
+      "Connection": "close",
+      "CF-Cache-Status": "HIT",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "ETag": "\"67287745bd0ce515564d4588933a774f\"",
+      "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=QhxJlM0uT%2FYBNL2FU2ZHWbL6SZCmlM6%2FQTvtXhZLid6z%2FQ%2BmNkgppuiIOxMPBOQziiUL%2FdcnGgUdTVZ9xhObgNKuDxRMDwh5zN67mSJhyaZ%2FQOoPpauDe8eAHB6RTQ%3D%3D\"}]}",
+      "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "Server": "cloudflare",
+      "CF-RAY": "a52004ddae9793b9-EWR",
+      "alt-svc": "h3=\":443\"; ma=86400"
+    },
+    "body": "typescript-03.body",
+    "sha256": "d6feb2ca575f8f6faf64a55d207b7d099616bd117cf16704221be0cc077a0321",
+    "decodedBytes": 4215,
+    "advertisedLeaf": {
+      "path": "v0/snapshots/bb01b134d0a2d7d913ccf3f0f54327a239d9bce24ac7735259a62bb5630cf976/repos/github.com/vuejs/core/profile.json",
+      "bytes": 4215,
+      "sha256": "d6feb2ca575f8f6faf64a55d207b7d099616bd117cf16704221be0cc077a0321"
+    }
+  },
+  {
+    "taskId": "go-01",
+    "enrolledRepository": "github.com/microsoft/TypeScript",
+    "canonicalRepository": "github.com/microsoft/TypeScript",
+    "observedAt": "2026-10-29T06:10:46.177071+00:00",
+    "url": "https://dotrepo.org/v0/snapshots/bb01b134d0a2d7d913ccf3f0f54327a239d9bce24ac7735259a62bb5630cf976/repos/github.com/microsoft/TypeScript/profile.json",
+    "requestHeaders": {
+      "User-agent": "dotrepo-f05-snapshot/1.0",
+      "Accept": "application/json"
+    },
+    "status": 200,
+    "headers": {
+      "Date": "Thu, 29 Oct 2026 06:10:46 GMT",
+      "Content-Type": "application/json",
+      "Content-Length": "4627",
+      "Connection": "close",
+      "CF-Cache-Status": "HIT",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "ETag": "\"ab622dd9d0c1d66d0798a76f1c4fa940\"",
+      "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=K9ZmQdUDHtS4Uc6aI%2FM2rNhgu%2BOBKTegbDfwPbVQRG%2FkzgVffphuDmeT5sNj7jU7WBt0OlH7Po7vqRnDtuElVb6NOavVokSrdM81Fwv1ChPBxFPO1HCxO8zogkoYuQ%3D%3D\"}]}",
+      "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "Server": "cloudflare",
+      "CF-RAY": "a52004de19a0e5e2-EWR",
+      "alt-svc": "h3=\":443\"; ma=86400"
+    },
+    "body": "go-01.body",
+    "sha256": "a9cc0f244be39614b83d2c77ee2b3b2d122d0712dc9c6f6aae21ea647f14794c",
+    "decodedBytes": 4627,
+    "advertisedLeaf": {
+      "path": "v0/snapshots/bb01b134d0a2d7d913ccf3f0f54327a239d9bce24ac7735259a62bb5630cf976/repos/github.com/microsoft/TypeScript/profile.json",
+      "bytes": 4627,
+      "sha256": "a9cc0f244be39614b83d2c77ee2b3b2d122d0712dc9c6f6aae21ea647f14794c"
+    }
+  },
+  {
+    "taskId": "go-02",
+    "enrolledRepository": "github.com/beego/beego",
+    "canonicalRepository": "github.com/beego/beego",
+    "observedAt": "2026-10-29T06:10:46.290306+00:00",
+    "url": "https://dotrepo.org/v0/snapshots/bb01b134d0a2d7d913ccf3f0f54327a239d9bce24ac7735259a62bb5630cf976/repos/github.com/beego/beego/profile.json",
+    "requestHeaders": {
+      "User-agent": "dotrepo-f05-snapshot/1.0",
+      "Accept": "application/json"
+    },
+    "status": 404,
+    "headers": {
+      "Date": "Thu, 29 Oct 2026 06:10:46 GMT",
+      "Content-Length": "0",
+      "Connection": "close",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=VnpqO9pGnn0IPHRjsFzhM5%2Btak4YN7N7vVQ4wYGf7oHjik8z2yZtg5Pu8H70gCqVU4nYJun5jCkJgL6NTuKy7GTdZiEEUaev89SEZkm0x5AqY9U5LUepte4QGPz8Gw%3D%3D\"}]}",
+      "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "Server": "cloudflare",
+      "CF-RAY": "a52004decf13cd8b-EWR",
+      "alt-svc": "h3=\":443\"; ma=86400"
+    },
+    "body": "go-02.body",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "decodedBytes": 0,
+    "advertisedLeaf": null
+  },
+  {
+    "taskId": "go-03",
+    "enrolledRepository": "github.com/hashicorp/vault",
+    "canonicalRepository": "github.com/hashicorp/vault",
+    "observedAt": "2026-10-29T06:10:46.372870+00:00",
+    "url": "https://dotrepo.org/v0/snapshots/bb01b134d0a2d7d913ccf3f0f54327a239d9bce24ac7735259a62bb5630cf976/repos/github.com/hashicorp/vault/profile.json",
+    "requestHeaders": {
+      "User-agent": "dotrepo-f05-snapshot/1.0",
+      "Accept": "application/json"
+    },
+    "status": 200,
+    "headers": {
+      "Date": "Thu, 29 Oct 2026 06:10:46 GMT",
+      "Content-Type": "application/json",
+      "Content-Length": "5082",
+      "Connection": "close",
+      "CF-Cache-Status": "HIT",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "ETag": "\"26227fe97382e026d20aa6283bd9bd0a\"",
+      "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=n4SBhjCj5q6zxNAQ6i0eaE6vEwQ9%2F9clSmV4DnH2vFr7fs%2FjRoFONpkaMNdzkW2rGdWZN6LqiPIvdIgDSvcrffsJg8kx7y1gDxxlImdFSGaG%2BnzxckiKoYuCgs%2BnIA%3D%3D\"}]}",
+      "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "Server": "cloudflare",
+      "CF-RAY": "a52004df8e4c4b66-EWR",
+      "alt-svc": "h3=\":443\"; ma=86400"
+    },
+    "body": "go-03.body",
+    "sha256": "7263c8007a87fab3a46bb4e2780da4277a950bab125070611bd147fb04b7c941",
+    "decodedBytes": 5082,
+    "advertisedLeaf": {
+      "path": "v0/snapshots/bb01b134d0a2d7d913ccf3f0f54327a239d9bce24ac7735259a62bb5630cf976/repos/github.com/hashicorp/vault/profile.json",
+      "bytes": 5082,
+      "sha256": "7263c8007a87fab3a46bb4e2780da4277a950bab125070611bd147fb04b7c941"
+    }
+  }
+]

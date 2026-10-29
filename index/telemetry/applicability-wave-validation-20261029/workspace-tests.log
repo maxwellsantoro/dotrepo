@@ -1,0 +1,121 @@
+   Compiling dotrepo-core v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-core)
+   Compiling dotrepo-cli v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-cli)
+   Compiling dotrepo-crawler v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-crawler)
+   Compiling dotrepo-lsp v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-lsp)
+   Compiling dotrepo-mcp v2.0.0-rc.2 (/Users/maxwell/projects/agent/dotrepo/crates/dotrepo-mcp)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 19.22s
+     Running unittests src/lib.rs (target/debug/deps/dotrepo_cli-ccc060291ca8e766)
+
+running 37 tests
+test tests::adopt_overlay_rejects_non_overlay_record ... ok
+test tests::claim_accept_native_requires_homepage_identity ... ok
+test tests::adoption_status_reports_missing_native_onboarding_steps ... ok
+test tests::claim_accept_native_requires_path_or_claim_id ... ok
+test tests::adopt_overlay_refuses_existing_repo_without_force ... ok
+test tests::adopt_overlay_bootstraps_native_manifest ... ok
+test tests::claim_from_native_requires_homepage_identity ... ok
+test tests::adoption_status_reports_ready_native_loop ... ok
+test tests::claim_event_refuses_invalid_transition ... ok
+test tests::claim_init_force_refuses_existing_event_history ... ok
+test tests::claim_event_appends_submitted_history_and_updates_claim_state ... ok
+test tests::claim_init_refuses_existing_claim_dir_without_force ... ok
+test tests::claim_from_native_derives_identity_and_canonical_source ... ok
+test tests::claim_accept_native_records_canonical_handoff_links ... ok
+test tests::format_claim_report_surfaces_handoff_and_events ... ok
+test tests::format_query_value_defaults_to_human_readable_strings ... ok
+test tests::claim_submit_native_requires_homepage_identity ... ok
+test tests::format_query_value_rejects_raw_composite_values ... ok
+test tests::generate_check_refuses_overlay_records ... ok
+test tests::doctor_refuses_overlay_records ... ok
+test tests::format_trust_report_explains_equal_authority_conflicts ... ok
+test tests::generate_refuses_overlay_records ... ok
+test tests::deterministic_public_export_requires_generated_at_for_fixed_stale_after ... ok
+test tests::claim_init_scaffolds_valid_claim_directory ... ok
+test tests::format_trust_report_explains_canonical_handoff_plainly ... ok
+test tests::claim_event_records_canonical_handoff_links ... ok
+test tests::import_refuses_existing_evidence_without_leaving_partial_manifest ... ok
+test tests::query_raw_should_refuse_competing_records ... ok
+test tests::validate_index_allows_warning_only_runs ... ok
+test tests::public_freshness_reuses_snapshot_digest ... ok
+test tests::validate_reports_multiple_diagnostics ... ok
+test tests::write_import_output_refuses_to_clobber_existing_file_without_force ... ok
+test tests::import_writes_overlay_manifest_and_evidence ... ok
+test tests::validate_index_fails_on_structural_errors ... ok
+test tests::public_export_writes_static_repository_and_trust_json ... ok
+test tests::public_export_honors_base_path_in_inventory_links ... ok
+test tests::deterministic_public_export_repeats_byte_for_byte ... ok
+
+test result: ok. 37 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+     Running unittests src/main.rs (target/debug/deps/dotrepo-35cb63d8224a08aa)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/dotrepo-public-query.rs (target/debug/deps/dotrepo_public_query-261edf2f420dbbfc)
+
+running 6 tests
+test tests::route_request_decodes_valid_repository_identity ... ok
+test tests::route_request_decodes_batch_query_with_base_path ... ok
+test tests::route_request_decodes_batch_profiles ... ok
+test tests::route_request_rejects_dot_segments_in_repository_identity ... ok
+test tests::route_request_rejects_batch_without_repositories ... ok
+test tests::resolve_static_path_serves_directory_index ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/ci_command_contract.rs (target/debug/deps/ci_command_contract-f65fd302914bda72)
+
+running 4 tests
+test ci_init_refuses_overlay_records ... ok
+test ci_init_refuses_to_overwrite_without_force ... ok
+test ci_init_writes_pinned_native_repo_workflow ... ok
+test ci_init_matches_checked_in_native_example_workflow ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.33s
+
+     Running tests/claim_command_contract.rs (target/debug/deps/claim_command_contract-968b4a856fcb280e)
+
+running 8 tests
+test claim_command_rejects_absolute_claim_paths ... ok
+test claim_command_reports_superseded_handoff_from_fixture ... ok
+test claim_event_command_rejects_absolute_claim_paths ... ok
+test claim_command_reports_corrected_history_from_fixture ... ok
+test validate_index_rejects_invalid_claim_history ... ok
+test native_claim_commands_execute_derived_claim_path_workflow ... ok
+test claim_commands_execute_documented_operator_workflow ... ok
+test live_seed_overlay_handoff_surfaces_in_public_outputs ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+     Running tests/doctor_command_contract.rs (target/debug/deps/doctor_command_contract-c74db033a26247c6)
+
+running 1 test
+test doctor_json_reports_lossy_generate_recommendations ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/hosted_query_server_contract.rs (target/debug/deps/hosted_query_server_contract-84d2c5f9dc879395)
+
+running 4 tests
+test hosted_query_server_honors_base_path_and_preserves_equal_authority_conflicts ... ok
+test hosted_query_server_serves_batch_profile_and_query_routes ... ok
+test hosted_query_server_serves_static_export_and_resolves_emitted_query_template ... ok
+test hosted_query_server_matches_checked_in_query_fixtures ... FAILED
+
+failures:
+
+---- hosted_query_server_matches_checked_in_query_fixtures stdout ----
+
+thread 'hosted_query_server_matches_checked_in_query_fixtures' (41370539) panicked at crates/dotrepo-cli/tests/hosted_query_server_contract.rs:113:9:
+server did not become ready
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    hosted_query_server_matches_checked_in_query_fixtures
+
+test result: FAILED. 3 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 30.15s
+
+error: test failed, to rerun pass `-p dotrepo-cli --test hosted_query_server_contract`

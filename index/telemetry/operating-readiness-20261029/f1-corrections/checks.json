@@ -1,0 +1,48 @@
+{
+  "checkedAt": "2026-10-29T06:15:26.724025+00:00",
+  "validation": {
+    "command": [
+      "target/debug/dotrepo",
+      "validate-index",
+      "--index-root",
+      "index"
+    ],
+    "binarySha256": "e0a7244b8a4fcd0880354a329e600ac65857c1978997a45981eba5b21f9cd6e6",
+    "exitCode": 0,
+    "stdout": "index valid\n",
+    "stderr": ""
+  },
+  "whitespace": {
+    "command": [
+      "git",
+      "diff",
+      "--check",
+      "--",
+      "four authorized identity directories"
+    ],
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "recordBindings": [
+    {
+      "identity": "github.com/IBM/fp-go",
+      "newRecordSha256Matched": true
+    },
+    {
+      "identity": "github.com/gomodule/redigo",
+      "newRecordSha256Matched": true
+    },
+    {
+      "identity": "github.com/xi-editor/xi-editor",
+      "newRecordSha256Matched": true
+    },
+    {
+      "identity": "github.com/fkxxyz/rime-cloverpinyin",
+      "newRecordSha256Matched": true
+    }
+  ],
+  "sourceFreezeSha256": "779bf4cea196f16ff3f16526e71321367f351fe0a2f5eaeea166099fe8b10d98",
+  "wholeRecordRegeneration": false,
+  "allFrozenSourceFilesVerified": 69
+}

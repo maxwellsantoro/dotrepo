@@ -65,6 +65,35 @@ def bundle_spec(root, files, revision, *, link=None):
     }
 
 
+def cache_spec(root, request, source, files):
+    bundle = bundle_spec(root / "cache", files, request["task"]["revision"])
+    for role in ("archive", "inventory", "provenance"):
+        bundle[role]["path"] = "cache/" + bundle[role]["path"]
+    script = write(root, "download-only.sh", b"# fixture download-only preparation\n")
+    trace = write(root, "preparation-trace.json", {"fixture": "no provider or real download"})
+    preparation = {
+        "imageDigest": request["environment"]["imageDigest"],
+        "revision": request["task"]["revision"],
+        "sourceArchiveSha256": experiment.digest(source.archive),
+        "cacheArchiveSha256": bundle["archive"]["sha256"],
+        "scriptSha256": script["sha256"],
+        "traceSha256": trace["sha256"],
+        "downloadOnly": True,
+        "buildOutputsExcluded": True,
+        "taskSourceExcluded": True,
+        "credentialsExcluded": True,
+        "toolVersions": {"fixture": "not an empirical cache qualification"},
+        "limitations": ["Synthetic cache controls only"],
+        "preparationCostUsd": None,
+    }
+    return {
+        "bundle": bundle,
+        "script": script,
+        "trace": trace,
+        "preparation": write(root, "cache-preparation.json", preparation),
+    }
+
+
 @pytest.fixture
 def session(tmp_path):
     request = {
@@ -131,6 +160,165 @@ def session(tmp_path):
     }
     bundle = runtime.source_bundle(tmp_path, spec, "a" * 40, set(), 1000000)
     return request, config, bundle
+
+
+@pytest.mark.parametrize(
+    "binding", ["imageDigest", "revision", "sourceArchiveSha256", "traceSha256"]
+)
+def test_dependency_cache_rejects_different_preparation_binding(session, tmp_path, binding):
+    request, _, source = session
+    spec = cache_spec(tmp_path, request, source, {"cargo/registry/cache/example.crate": b"crate"})
+    preparation = json.loads((tmp_path / spec["preparation"]["path"]).read_bytes())
+    preparation[binding] = "different"
+    spec["preparation"] = write(tmp_path, "cache-preparation.json", preparation)
+    with pytest.raises(ValueError, match="binding mismatch"):
+        runtime.dependency_cache(tmp_path, spec, request, source, set(), 1000000)
+
+
+@pytest.mark.parametrize("path", ["repository/answer", "cargo-target/test", "node_modules/answer"])
+def test_dependency_cache_rejects_non_download_paths(session, tmp_path, path):
+    request, _, source = session
+    spec = cache_spec(tmp_path, request, source, {path: b"unqualified data"})
+    with pytest.raises(ValueError, match="outside download-cache roots"):
+        runtime.dependency_cache(tmp_path, spec, request, source, set(), 1000000)
+
+
+def test_dependency_cache_rejects_hidden_profile_inside_allowed_path(session, tmp_path):
+    request, _, source = session
+    profile = b'{"hidden":"profile"}'
+    spec = cache_spec(tmp_path, request, source, {"npm-cache/_cacache/answer": profile})
+    with pytest.raises(ValueError, match="hidden/protected"):
+        runtime.dependency_cache(
+            tmp_path, spec, request, source, runtime.content_digests(profile), 1000000
+        )
+
+
+def test_dependency_cache_rejects_task_archive_disguised_as_download(session, tmp_path):
+    request, _, source = session
+    spec = cache_spec(
+        tmp_path, request, source, {"npm-cache/_cacache/source-archive": source.archive}
+    )
+    with pytest.raises(ValueError, match="hidden/protected"):
+        runtime.dependency_cache(tmp_path, spec, request, source, set(), 1000000)
+
+
+def test_failed_cache_audit_refuses_before_copy(session, tmp_path):
+    request, _, source = session
+    spec = cache_spec(tmp_path, request, source, {"cargo/registry/cache/example.crate": b"crate"})
+    preparation = json.loads((tmp_path / spec["preparation"]["path"]).read_bytes())
+    preparation["buildOutputsExcluded"] = False
+    spec["preparation"] = write(tmp_path, "cache-preparation.json", preparation)
+    with pytest.raises(ValueError, match="audit incomplete"):
+        runtime.dependency_cache(tmp_path, spec, request, source, set(), 1000000)
+
+
+def test_dependency_cache_and_source_share_workspace_bound(session, tmp_path):
+    request, _, _ = session
+    source_spec = bundle_spec(tmp_path, {"source.bin": b"s" * 50001}, request["task"]["revision"])
+    source = runtime.source_bundle(tmp_path, source_spec, request["task"]["revision"], set(), 70000)
+    spec = cache_spec(tmp_path, request, source, {"go/pkg/mod/example/data": b"x" * 20000})
+    with pytest.raises(ValueError, match="source and dependency cache exceed"):
+        runtime.dependency_cache(tmp_path, spec, request, source, set(), 70000)
+
+
+def test_cache_conditions_require_explicit_per_task_bindings(session):
+    request, config, _ = session
+    config["dependencyCaches"] = {request["task"]["repository"]: {}}
+    with pytest.raises(ValueError, match="cold sessions"):
+        runtime.validate_runtime(config, request)
+    request["cacheState"] = "frozen-warm"
+    config["dependencyCaches"] = {}
+    with pytest.raises(ValueError, match="per-task"):
+        runtime.validate_runtime(config, request)
+
+
+def test_frozen_warm_seed_precedes_first_paid_request_and_stays_separate(session, tmp_path):
+    request, config, source = session
+    request["cacheState"] = "frozen-warm"
+    spec = cache_spec(tmp_path, request, source, {"cargo/registry/cache/example.crate": b"crate"})
+    config["dependencyCaches"] = {request["task"]["repository"]: spec}
+    source.dependency_cache = runtime.dependency_cache(
+        tmp_path, spec, request, source, set(), 1000000
+    )
+    order = []
+
+    class WarmDocker(FakeDocker):
+        def seed_dependencies(self, bundle, timeout):
+            order.append("seed")
+            assert set(bundle.files) == {"cargo/registry/cache/example.crate"}
+            return {"exitCode": 0, "error": None}
+
+    class OrderedProvider(FakeProvider):
+        def complete(self, messages, tools, timeout):
+            order.append("provider")
+            return super().complete(messages, tools, timeout)
+
+    result = run(session, tmp_path, OrderedProvider(response(text="done")), WarmDocker())
+    assert order == ["seed", "provider"]
+    assert result["status"] == "agent-finished"
+    events = [json.loads(line) for line in (tmp_path / "run/events.jsonl").read_text().splitlines()]
+    cache_event = next(event for event in events if event["kind"] == "dependency-cache")
+    assert cache_event["preparationSha256"] == spec["preparation"]["sha256"]
+    assert result["effort"]["preparationCostUsd"] is None
+
+
+@pytest.mark.parametrize("hidden_cache", [False, True])
+def test_full_freeze_loads_warm_cache_and_rejects_profile_alias_before_launch(
+    campaign, session, tmp_path, hidden_cache
+):
+    path, manifest = campaign
+    task = manifest["tasks"][0]
+    request = deepcopy(session[0])
+    request.update(task=task, environment=manifest["environment"])
+    source_spec = bundle_spec(tmp_path, {"README.md": b"Only upstream source"}, task["revision"])
+    source = runtime.source_bundle(tmp_path, source_spec, task["revision"], set(), 1000000)
+    profile = '{"execution":{"test":"PRIVATE PROFILE ANSWER"}}'
+    contents = b'{ "execution": {"test": "PRIVATE PROFILE ANSWER"} }' if hidden_cache else b"crate"
+    spec = cache_spec(tmp_path, request, source, {"cargo/registry/cache/example.crate": contents})
+    config = deepcopy(session[1])
+    config["sourceBundles"] = {task["repository"]: source_spec}
+    config["dependencyCaches"] = {task["repository"]: spec}
+    manifest["cacheState"] = "frozen-warm"
+    manifest["artifacts"]["runtime"] = write(tmp_path, "runtime.json", config)
+    manifest["artifacts"]["responses"] = write(
+        tmp_path,
+        "responses.json",
+        {
+            "snapshotSha256": manifest["artifacts"]["snapshot"]["sha256"],
+            "profiles": {task["repository"]: {"status": 200, "body": profile}},
+        },
+    )
+    save(campaign)
+    out = tmp_path / "prepared"
+    experiment.prepare(path, out)
+    session_id = f"{task['id']}-r1-source-first"
+    if hidden_cache:
+        with pytest.raises(ValueError, match="aliases hidden/protected"):
+            runtime.load_session(path, out / "assignment.json", session_id)
+    else:
+        loaded = runtime.load_session(path, out / "assignment.json", session_id)
+        assert len(loaded) == 6 and loaded[5] is None
+        assert loaded[2].dependency_cache.files == {"cargo/registry/cache/example.crate": b"crate"}
+
+
+def test_failed_dependency_seed_stops_before_provider_and_cleans(session, tmp_path):
+    request, config, source = session
+    request["cacheState"] = "frozen-warm"
+    spec = cache_spec(tmp_path, request, source, {"cargo/registry/cache/example.crate": b"crate"})
+    config["dependencyCaches"] = {request["task"]["repository"]: spec}
+    source.dependency_cache = runtime.dependency_cache(
+        tmp_path, spec, request, source, set(), 1000000
+    )
+
+    class FailingWarmDocker(FakeDocker):
+        def seed_dependencies(self, bundle, timeout):
+            return {"exitCode": 1, "error": "fixture-copy-failure"}
+
+    provider, backend = FakeProvider(response(text="never")), FailingWarmDocker()
+    result = run(session, tmp_path, provider, backend)
+    assert not provider.requests and backend.cleanups == 1
+    assert result["status"] == "infrastructure-failure"
+    assert "fixture-copy-failure" in (tmp_path / "run/events.jsonl").read_text()
 
 
 def response(
@@ -471,6 +659,13 @@ def test_docker_flags_are_exact_digest_mount_free_and_bounded(session):
     assert "--security-opt=no-new-privileges" in created and "--pull=never" in created
     assert request["environment"]["imageDigest"] in created and "--entrypoint=/bin/sh" in created
     assert "--memory-swap" in created and "--pids-limit" in created and "--cpus" in created
+    assert not any(arg == "--pid" or arg.startswith("--pid=") for arg in created)
+    tmpfs = [created[index + 1] for index, arg in enumerate(created) if arg == "--tmpfs"]
+    assert len(tmpfs) == 2
+    for mount in tmpfs:
+        options = mount.split(":", 1)[1].split(",")
+        assert {"exec", "nosuid", "nodev"} <= set(options)
+        assert "noexec" not in options
     assert not any(
         arg in {"-v", "--volume", "--mount", "--privileged", "--env-file"} for arg in created
     )

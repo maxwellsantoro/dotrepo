@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "dotrepo-f05-prepare-rust2-3a2e8dba75",
+    "dpkg-query",
+    "-W"
+  ],
+  "startedAt": "2026-10-29T06:03:29.987591+00:00",
+  "elapsedSeconds": 0.1709018750116229,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "ae6850d1ebcfb604cc6526e2e30424160d343af39a0d8e97e8cc574b4e577d1e",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

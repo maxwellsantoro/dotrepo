@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "docker",
+    "rm",
+    "--force",
+    "--volumes",
+    "dotrepo-f05-prepare-rust2-3a2e8dba75"
+  ],
+  "startedAt": "2026-10-29T06:03:49.629907+00:00",
+  "elapsedSeconds": 0.6239941660314798,
+  "exitCode": 0,
+  "error": null,
+  "stdinBytes": 0,
+  "stdinSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSha256": "db6ca09d497120473977fd31189626c2abf5429c3e1b6f4450de0568d05708eb",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "costUsd": null,
+  "costExclusions": [
+    "No metered container/host charge source."
+  ]
+}

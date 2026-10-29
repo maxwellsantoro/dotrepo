@@ -1,0 +1,17 @@
+{
+  "arguments": [
+    "/Users/maxwell/projects/agent/dotrepo/target/debug/dotrepo",
+    "--root",
+    "/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/dotrepo-e1-development-b-upv14x18/source/github.com/docker/compose",
+    "import",
+    "--mode",
+    "overlay",
+    "--source",
+    "https://github.com/docker/compose"
+  ],
+  "startedAt": "2026-10-29T06:21:29.023677+00:00",
+  "completedAt": "2026-10-29T06:21:29.052661+00:00",
+  "exitCode": 0,
+  "stdoutSha256": "72a92f0341d8482a19530b2995ccf9d0ae62b7f2212dfa2564c591f0a7ce210e",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}
