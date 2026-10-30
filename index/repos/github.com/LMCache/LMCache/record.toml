@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/LMCache/LMCache"
-generated_at = "2026-10-29T06:07:18.820320624Z"
+generated_at = "2026-10-30T06:05:34.674226873Z"
 
 [record.trust]
 confidence = "medium"
@@ -96,7 +96,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-29T06:07:18.820320624Z"
+checkedAt = "2026-10-30T06:05:34.674226873Z"
 confidence = "low"
 method = "unresolved"
 reason = "conflicting documentation declarations; no target selected"
@@ -105,7 +105,7 @@ state = "unresolved"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-29T06:07:18.820320624Z"
+checkedAt = "2026-10-30T06:05:34.674226873Z"
 confidence = "high"
 method = "extracted"
 reason = 'Explicit documentation link at README.md:12: <a href="https://docs.lmcache.ai/">Documentation</a> |'
@@ -114,7 +114,7 @@ state = "present"
 valueJson = '"https://docs.lmcache.ai/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-29T06:07:18.820320624Z"
+checkedAt = "2026-10-30T06:05:34.674226873Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -123,7 +123,7 @@ state = "present"
 valueJson = '"security@lmcache.ai"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-29T06:07:18.820320624Z"
+checkedAt = "2026-10-30T06:05:34.674226873Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -131,7 +131,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-29T06:07:18.820320624Z"
+checkedAt = "2026-10-30T06:05:34.674226873Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -140,7 +140,7 @@ state = "present"
 valueJson = '"python -m build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-29T06:07:18.820320624Z"
+checkedAt = "2026-10-30T06:05:34.674226873Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -149,7 +149,7 @@ state = "present"
 valueJson = '"LMCache: Supercharge Your LLM with the Fastest KV Cache Layer"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-29T06:07:18.820320624Z"
+checkedAt = "2026-10-30T06:05:34.674226873Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -157,7 +157,7 @@ state = "present"
 valueJson = '"https://lmcache.ai/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-29T06:07:18.820320624Z"
+checkedAt = "2026-10-30T06:05:34.674226873Z"
 confidence = "high"
 method = "inferred"
 reason = "extracted from README title with post-cleaners"
@@ -166,7 +166,7 @@ state = "present"
 valueJson = '"LMCache"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-29T06:07:18.820320624Z"
+checkedAt = "2026-10-30T06:05:34.674226873Z"
 confidence = "medium"
 method = "inferred"
 reason = "from workflow fallback"
@@ -179,6 +179,6 @@ archived = false
 clone_url = "https://github.com/LMCache/LMCache.git"
 default_branch = "dev"
 fork = false
-head_sha = "fa34a708a075543aad183176c6a0d16ba2b7f3b3"
+head_sha = "8a85b8c965b44d33a3e934029b72aabd69bb8035"
 html_url = "https://github.com/LMCache/LMCache"
-stars = 12216
+stars = 12234

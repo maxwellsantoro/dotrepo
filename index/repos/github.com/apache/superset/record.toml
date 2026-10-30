@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/apache/superset"
-generated_at = "2026-10-29T06:11:18.669028575Z"
+generated_at = "2026-10-30T06:07:26.96689572Z"
 
 [record.trust]
 confidence = "medium"
@@ -83,10 +83,10 @@ maintainers = [
 security_contact = "security@superset.apache.org"
 
 [docs]
-root = "https://superset.apache.org/user-docs/"
+root = "https://superset.apache.org"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-29T06:11:18.669028575Z"
+checkedAt = "2026-10-30T06:07:26.96689572Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -94,16 +94,16 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-29T06:11:18.669028575Z"
+checkedAt = "2026-10-30T06:07:26.96689572Z"
 confidence = "high"
 method = "extracted"
-reason = "Explicit documentation link at README.md:55: - **[User Guide](https://superset.apache.org/user-docs/)** — For analysts and business users. Explore data, build charts, create dashboards, and connect databases."
+reason = "Explicit documentation link at README.md:33: [![Documentation](https://img.shields.io/badge/docs-apache.org-blue.svg)](https://superset.apache.org)"
 source = "README.md"
 state = "present"
-valueJson = '"https://superset.apache.org/user-docs/"'
+valueJson = '"https://superset.apache.org"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-29T06:11:18.669028575Z"
+checkedAt = "2026-10-30T06:07:26.96689572Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -112,7 +112,7 @@ state = "present"
 valueJson = '"security@superset.apache.org"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-29T06:11:18.669028575Z"
+checkedAt = "2026-10-30T06:07:26.96689572Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -120,7 +120,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-29T06:11:18.669028575Z"
+checkedAt = "2026-10-30T06:07:26.96689572Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -129,7 +129,7 @@ state = "present"
 valueJson = '"python -m build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-29T06:11:18.669028575Z"
+checkedAt = "2026-10-30T06:07:26.96689572Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -138,7 +138,7 @@ state = "present"
 valueJson = '"Apache Superset is a Data Visualization and Data Exploration Platform"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-29T06:11:18.669028575Z"
+checkedAt = "2026-10-30T06:07:26.96689572Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -146,7 +146,7 @@ state = "present"
 valueJson = '"https://superset.apache.org/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-29T06:11:18.669028575Z"
+checkedAt = "2026-10-30T06:07:26.96689572Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -155,7 +155,7 @@ state = "present"
 valueJson = '"Superset"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-29T06:11:18.669028575Z"
+checkedAt = "2026-10-30T06:07:26.96689572Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -168,6 +168,6 @@ archived = false
 clone_url = "https://github.com/apache/superset.git"
 default_branch = "master"
 fork = false
-head_sha = "2d2e557190f94b4f1d7b826c37797c7be900f9c0"
+head_sha = "4e6d03bf99223e82cd6b5c4c8a3ba806dc24cb83"
 html_url = "https://github.com/apache/superset"
-stars = 75352
+stars = 75365

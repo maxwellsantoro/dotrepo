@@ -1,11 +1,10 @@
 # Evidence
 
-- Imported repository name and docs entry points from README.md.
+- Imported repository name from README.md.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
 - Inferred repo.build from .github/workflows/install-script.yml as `python -m build --wheel`.
 - Inferred repo.test from pyproject.toml as `python -m pytest`.
 - Imported repo.toolchain.min from pyproject.toml as `3.11` (Python).
-- Imported docs.getting_started as `examples/integrations/toolsets-for-claude`. Explicit documentation link at README.md:219: [Quickstart ↗](examples/integrations/toolsets-for-claude) · [Integration docs ↗](https://docs.browser-use.com/open-source/customize/integrations/toolsets-for-claude)
 - Discovered related relation to github.com/browser-use/benchmark from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 

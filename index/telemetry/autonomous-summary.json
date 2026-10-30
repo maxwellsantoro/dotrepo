@@ -13,32 +13,35 @@
     "unknown": 8
   },
   "firstRunAt": "2026-06-29T00:55:19Z",
-  "generatedAt": "2026-10-29T06:14:08Z",
-  "lastRunAt": "2026-10-29T06:14:08Z",
+  "generatedAt": "2026-10-30T06:08:48Z",
+  "lastRunAt": "2026-10-30T06:08:48Z",
   "previousWindowCosts": {
     "adjudicationBudgetUseRate": 0.0,
     "adjudicationCallBudget": 0,
     "adjudicationCalls": 0,
-    "crawled": 350,
+    "crawled": 200,
+    "tokenUsageComplete": true,
     "tokensPerCrawled": 0.0,
-    "tokensUsed": 0
+    "tokensUsed": 0,
+    "tokensUsedKnownSubtotal": 0,
+    "unknownTokenUsageCalls": 0
   },
   "previousWindowRates": {
     "adjudicationRate": 0.0,
     "apiEscalationRate": 0.0,
-    "failureRate": 0.011429,
+    "failureRate": 0.01,
     "secondOpinionRate": 0.0,
     "zeroModelRate": 1.0
   },
   "previousWindowRepositoriesByAdjudicationTier": {
-    "deterministic": 79
+    "deterministic": 47
   },
   "previousWindowRunCount": 3,
   "rates": {
     "adjudicationRate": 0.0,
-    "failureRate": 0.004789781798829164,
-    "promotionRate": 0.6726982437466738,
-    "writeRate": 0.9952102182011708,
+    "failureRate": 0.004665629860031105,
+    "promotionRate": 0.6661482633488854,
+    "writeRate": 0.995334370139969,
     "zeroModelRate": 1.0
   },
   "recentWindowCosts": {
@@ -46,8 +49,11 @@
     "adjudicationCallBudget": 0,
     "adjudicationCalls": 0,
     "crawled": 150,
+    "tokenUsageComplete": true,
     "tokensPerCrawled": 0.0,
-    "tokensUsed": 0
+    "tokensUsed": 0,
+    "tokensUsedKnownSubtotal": 0,
+    "unknownTokenUsageCalls": 0
   },
   "recentWindowRates": {
     "adjudicationRate": 0.0,
@@ -57,7 +63,7 @@
     "zeroModelRate": 1.0
   },
   "recentWindowRepositoriesByAdjudicationTier": {
-    "deterministic": 36
+    "deterministic": 34
   },
   "recentWindowRunCount": 3,
   "recurringFailures": [
@@ -95,26 +101,29 @@
     }
   ],
   "repositoriesByAdjudicationTier": {
-    "deterministic": 419
+    "deterministic": 429
   },
-  "runCount": 38,
+  "runCount": 39,
   "schema": "dotrepo/autonomous-telemetry-summary/v0.1",
   "synthesisFailureClasses": {},
   "totals": {
     "adjudicationCallBudget": 68,
     "adjudicationCalls": 0,
-    "crawled": 1879,
+    "crawled": 1929,
     "discoveryQueued": 0,
     "failed": 9,
-    "promoted": 1264,
+    "promoted": 1285,
     "qualityReprocessQueued": 1538,
     "skipped": 0,
     "synthesisFailed": 0,
     "synthesisRequested": 0,
     "synthesisSucceeded": 0,
+    "tokenUsageComplete": true,
     "tokensUsed": 0,
-    "written": 1870,
-    "zeroModelRuns": 1879
+    "tokensUsedKnownSubtotal": 0,
+    "unknownTokenUsageCalls": 0,
+    "written": 1920,
+    "zeroModelRuns": 1929
   },
   "worstRunRates": {
     "adjudicationRate": 0.0,
