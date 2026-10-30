@@ -1,9 +1,7 @@
 # Evidence
 
-- Imported repository docs entry points from README.md.
 - Imported the security reporting channel from SECURITY.md.
 - Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.
-- Imported docs.root as `https://clickhouse.com/docs/`. Explicit documentation link at README.md:28: * [Documentation](https://clickhouse.com/docs/) provides more in-depth information.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

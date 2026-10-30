@@ -2,17 +2,14 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "imported"
 source = "https://github.com/caddyserver/caddy"
-generated_at = "2026-10-29T06:13:18.483670799Z"
+generated_at = "2026-10-30T06:08:42.276010426Z"
 
 [record.trust]
 confidence = "medium"
-provenance = [
-    "imported",
-    "inferred",
-]
-notes = "Bootstrapped from `README.md`, `.github/SECURITY.md`, `.github/CONTRIBUTING.md`, and `go.mod`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `go.mod`. Inferred `repo.test` from `go.mod`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`, `.github/SECURITY.md`, `.github/CONTRIBUTING.md`, and `go.mod`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because Go workflow execution context has unsupported structure in `.github/workflows/release-proposal.yml`, `.github/workflows/release.yml`; conventional commands cannot establish repository scope/setup. Left `repo.test` unset because Go workflow execution context has unsupported structure in `.github/workflows/release-proposal.yml`, `.github/workflows/release.yml`; conventional commands cannot establish repository scope/setup. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Caddy"
@@ -25,8 +22,6 @@ languages = [
     "HTML",
     "Shell",
 ]
-build = "go build ./..."
-test = "go test ./..."
 topics = [
     "go",
     "web-server",
@@ -53,10 +48,6 @@ ecosystem = "Go"
 maintainers = []
 security_contact = "https://github.com/caddyserver/caddy/security/advisories/new"
 
-[docs]
-root = "https://caddyserver.com/docs/"
-getting_started = "https://caddyserver.com/docs/getting-started"
-
 [relations]
 references = []
 
@@ -73,25 +64,23 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-29T06:13:18.483670799Z"
+checkedAt = "2026-10-30T06:08:42.276010426Z"
 confidence = "high"
-method = "extracted"
-reason = "Explicit documentation link at README.md:168: **We recommend that all users -- regardless of experience level -- do our [Getting Started](https://caddyserver.com/docs/getting-started) guide to become familiar with using Caddy.**"
-source = "README.md"
-state = "present"
-valueJson = '"https://caddyserver.com/docs/getting-started"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-29T06:13:18.483670799Z"
+checkedAt = "2026-10-30T06:08:42.276010426Z"
 confidence = "high"
-method = "extracted"
-reason = 'Explicit documentation link at README.md:17: <a href="https://caddyserver.com/docs/">Documentation</a> ·'
-source = "README.md"
-state = "present"
-valueJson = '"https://caddyserver.com/docs/"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-29T06:13:18.483670799Z"
+checkedAt = "2026-10-30T06:08:42.276010426Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -100,7 +89,7 @@ state = "present"
 valueJson = '"https://github.com/caddyserver/caddy/security/advisories/new"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-29T06:13:18.483670799Z"
+checkedAt = "2026-10-30T06:08:42.276010426Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -108,16 +97,15 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-29T06:13:18.483670799Z"
-confidence = "medium"
-method = "inferred"
-reason = "inferred ecosystem default from build-tool metadata"
-source = "go.mod"
-state = "present"
-valueJson = '"go build ./..."'
+checkedAt = "2026-10-30T06:08:42.276010426Z"
+confidence = "low"
+method = "unresolved"
+reason = "conflicting candidates, no clear winner"
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-29T06:13:18.483670799Z"
+checkedAt = "2026-10-30T06:08:42.276010426Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -126,7 +114,7 @@ state = "present"
 valueJson = '"Fast and extensible multi-platform HTTP/1-2-3 web server with automatic HTTPS"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-29T06:13:18.483670799Z"
+checkedAt = "2026-10-30T06:08:42.276010426Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -134,7 +122,7 @@ state = "present"
 valueJson = '"https://caddyserver.com"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-29T06:13:18.483670799Z"
+checkedAt = "2026-10-30T06:08:42.276010426Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -143,19 +131,18 @@ state = "present"
 valueJson = '"Caddy"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-29T06:13:18.483670799Z"
-confidence = "medium"
-method = "inferred"
-reason = "inferred ecosystem default from build-tool metadata"
-source = "go.mod"
-state = "present"
-valueJson = '"go test ./..."'
+checkedAt = "2026-10-30T06:08:42.276010426Z"
+confidence = "low"
+method = "unresolved"
+reason = "conflicting candidates, no clear winner"
+state = "unresolved"
+valueJson = "null"
 
 [x.github]
 archived = false
 clone_url = "https://github.com/caddyserver/caddy.git"
 default_branch = "master"
 fork = false
-head_sha = "32bba1545989e07368c0977a37652f33d80c8cd4"
+head_sha = "a28f061462ae394b2b488af2692c76f7fe7e9159"
 html_url = "https://github.com/caddyserver/caddy"
-stars = 78527
+stars = 78552

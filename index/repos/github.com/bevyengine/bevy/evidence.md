@@ -6,7 +6,7 @@
 - Inferred repo.build from Cargo.toml as `cargo build --workspace`.
 - Inferred repo.test from Cargo.toml as `cargo test --workspace`.
 - Imported repo.toolchain.min from Cargo.toml as `1.97.1` (Rust).
-- Imported docs.root as `https://bevy.org/learn/quick-start/introduction`. Explicit documentation link at README.md:36: * **[Quick Start Guide](https://bevy.org/learn/quick-start/introduction):** Bevy's official Quick Start Guide. The best place to start learning Bevy.
+- Imported docs.root as `https://docs.rs/bevy/latest/bevy/`. Explicit documentation link at README.md:6: [![Docs](https://docs.rs/bevy/badge.svg)](https://docs.rs/bevy/latest/bevy/)
 - Discovered related relation to github.com/bevyengine/bevy from Cargo.toml repository.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

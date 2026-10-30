@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/actix/actix-web"
-generated_at = "2026-10-28T06:07:03.738846694Z"
+generated_at = "2026-10-30T06:06:40.073731845Z"
 
 [record.trust]
 confidence = "medium"
@@ -43,7 +43,7 @@ min = "1.89"
 ecosystem = "Rust"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-28T06:07:03.738846694Z"
+checkedAt = "2026-10-30T06:06:40.073731845Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -51,7 +51,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-28T06:07:03.738846694Z"
+checkedAt = "2026-10-30T06:06:40.073731845Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -59,7 +59,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-28T06:07:03.738846694Z"
+checkedAt = "2026-10-30T06:06:40.073731845Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -67,7 +67,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-28T06:07:03.738846694Z"
+checkedAt = "2026-10-30T06:06:40.073731845Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -75,7 +75,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-28T06:07:03.738846694Z"
+checkedAt = "2026-10-30T06:06:40.073731845Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -84,7 +84,7 @@ state = "present"
 valueJson = '"cargo build --workspace"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-28T06:07:03.738846694Z"
+checkedAt = "2026-10-30T06:06:40.073731845Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -93,7 +93,7 @@ state = "present"
 valueJson = '"Actix Web is a powerful, pragmatic, and extremely fast web framework for Rust."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-28T06:07:03.738846694Z"
+checkedAt = "2026-10-30T06:06:40.073731845Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -101,7 +101,7 @@ state = "present"
 valueJson = '"https://actix.rs"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-28T06:07:03.738846694Z"
+checkedAt = "2026-10-30T06:06:40.073731845Z"
 confidence = "medium"
 method = "inferred"
 reason = "fell back to directory name or GitHub API"
@@ -110,7 +110,7 @@ state = "present"
 valueJson = '"actix-web"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-28T06:07:03.738846694Z"
+checkedAt = "2026-10-30T06:06:40.073731845Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -123,6 +123,6 @@ archived = false
 clone_url = "https://github.com/actix/actix-web.git"
 default_branch = "main"
 fork = false
-head_sha = "f2876ace89882e44d1b6287c6a4802cdd6a2f580"
+head_sha = "5f4d20906a7e93074558005adc7e161db67fdab8"
 html_url = "https://github.com/actix/actix-web"
-stars = 24892
+stars = 24897
