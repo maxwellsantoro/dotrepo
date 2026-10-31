@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/aws/aws-toolkit-vscode"
-generated_at = "2026-10-29T06:11:56.225985393Z"
+generated_at = "2026-10-31T06:09:44.506806748Z"
 
 [record.trust]
 confidence = "high"
@@ -68,7 +68,7 @@ team = "@aws/aws-toolkits-team"
 security_contact = "http://aws.amazon.com/security/vulnerability-reporting/"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-29T06:11:56.225985393Z"
+checkedAt = "2026-10-31T06:09:44.506806748Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -76,7 +76,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-29T06:11:56.225985393Z"
+checkedAt = "2026-10-31T06:09:44.506806748Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -84,7 +84,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-29T06:11:56.225985393Z"
+checkedAt = "2026-10-31T06:09:44.506806748Z"
 confidence = "high"
 method = "unspecified"
 reason = "actionable security reporting URL"
@@ -92,7 +92,7 @@ state = "present"
 valueJson = '"http://aws.amazon.com/security/vulnerability-reporting/"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-29T06:11:56.225985393Z"
+checkedAt = "2026-10-31T06:09:44.506806748Z"
 confidence = "high"
 method = "unspecified"
 reason = "clear CODEOWNERS team"
@@ -100,7 +100,7 @@ state = "present"
 valueJson = '"@aws/aws-toolkits-team"'
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-29T06:11:56.225985393Z"
+checkedAt = "2026-10-31T06:09:44.506806748Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -109,7 +109,7 @@ state = "present"
 valueJson = '"npm run compile"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-29T06:11:56.225985393Z"
+checkedAt = "2026-10-31T06:09:44.506806748Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -118,7 +118,7 @@ state = "present"
 valueJson = '"Amazon Q, CodeCatalyst, Local Lambda debug, SAM/CFN syntax, ECS Terminal, AWS resources"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-29T06:11:56.225985393Z"
+checkedAt = "2026-10-31T06:09:44.506806748Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -126,7 +126,7 @@ state = "present"
 valueJson = '"https://marketplace.visualstudio.com/items?itemName=AmazonWebServices.amazon-q-vscode"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-29T06:11:56.225985393Z"
+checkedAt = "2026-10-31T06:09:44.506806748Z"
 confidence = "high"
 method = "inferred"
 reason = "extracted from README title with post-cleaners"
@@ -135,7 +135,7 @@ state = "present"
 valueJson = '"aws-toolkit-vscode"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-29T06:11:56.225985393Z"
+checkedAt = "2026-10-31T06:09:44.506806748Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -148,6 +148,6 @@ archived = false
 clone_url = "https://github.com/aws/aws-toolkit-vscode.git"
 default_branch = "master"
 fork = false
-head_sha = "cb404acc346a28e51b3b9fcdd7d6811c6c34b143"
+head_sha = "6e1970a14fa63fe466a2f06ef795da9b61b851a7"
 html_url = "https://github.com/aws/aws-toolkit-vscode"
-stars = 1995
+stars = 1996
