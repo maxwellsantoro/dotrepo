@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/angular/angular"
-generated_at = "2026-10-29T06:10:04.458849525Z"
+generated_at = "2026-10-31T06:08:19.827086523Z"
 
 [record.trust]
 confidence = "high"
@@ -65,7 +65,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-29T06:10:04.458849525Z"
+checkedAt = "2026-10-31T06:08:19.827086523Z"
 confidence = "high"
 method = "extracted"
 reason = "Explicit documentation link at README.md:38: - [Getting Started][quickstart]"
@@ -74,7 +74,7 @@ state = "present"
 valueJson = '"https://angular.dev/tutorials/learn-angular"'
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-29T06:10:04.458849525Z"
+checkedAt = "2026-10-31T06:08:19.827086523Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -82,7 +82,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-29T06:10:04.458849525Z"
+checkedAt = "2026-10-31T06:08:19.827086523Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -91,7 +91,7 @@ state = "present"
 valueJson = '"https://bughunters.google.com/report"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-29T06:10:04.458849525Z"
+checkedAt = "2026-10-31T06:08:19.827086523Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -99,7 +99,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-29T06:10:04.458849525Z"
+checkedAt = "2026-10-31T06:08:19.827086523Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -108,7 +108,7 @@ state = "present"
 valueJson = '"pnpm build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-29T06:10:04.458849525Z"
+checkedAt = "2026-10-31T06:08:19.827086523Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -117,7 +117,7 @@ state = "present"
 valueJson = '"Deliver web apps with confidence 🚀"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-29T06:10:04.458849525Z"
+checkedAt = "2026-10-31T06:08:19.827086523Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -125,7 +125,7 @@ state = "present"
 valueJson = '"https://angular.dev"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-29T06:10:04.458849525Z"
+checkedAt = "2026-10-31T06:08:19.827086523Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -134,7 +134,7 @@ state = "present"
 valueJson = '"Angular"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-29T06:10:04.458849525Z"
+checkedAt = "2026-10-31T06:08:19.827086523Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -147,6 +147,6 @@ archived = false
 clone_url = "https://github.com/angular/angular.git"
 default_branch = "main"
 fork = false
-head_sha = "5d929e57e47bd207f668cb482599357bff18d89e"
+head_sha = "74961c662420ea02a5872bfa1a0ee3284526b887"
 html_url = "https://github.com/angular/angular"
-stars = 101090
+stars = 101083

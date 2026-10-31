@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/astral-sh/ruff"
-generated_at = "2026-10-29T06:11:38.173863032Z"
+generated_at = "2026-10-31T06:09:30.188646426Z"
 
 [record.trust]
 confidence = "medium"
@@ -98,7 +98,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-29T06:11:38.173863032Z"
+checkedAt = "2026-10-31T06:09:30.188646426Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -106,7 +106,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-29T06:11:38.173863032Z"
+checkedAt = "2026-10-31T06:09:30.188646426Z"
 confidence = "high"
 method = "extracted"
 reason = "Explicit documentation link at README.md:12: [**Docs**](https://docs.astral.sh/ruff/) | [**Playground**](https://play.ruff.rs/)"
@@ -115,7 +115,7 @@ state = "present"
 valueJson = '"https://docs.astral.sh/ruff/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-29T06:11:38.173863032Z"
+checkedAt = "2026-10-31T06:09:30.188646426Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -123,7 +123,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-29T06:11:38.173863032Z"
+checkedAt = "2026-10-31T06:09:30.188646426Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -131,7 +131,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-29T06:11:38.173863032Z"
+checkedAt = "2026-10-31T06:09:30.188646426Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -140,7 +140,7 @@ state = "present"
 valueJson = '"cargo build --workspace"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-29T06:11:38.173863032Z"
+checkedAt = "2026-10-31T06:09:30.188646426Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -149,7 +149,7 @@ state = "present"
 valueJson = '"An extremely fast Python linter and code formatter, written in Rust."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-29T06:11:38.173863032Z"
+checkedAt = "2026-10-31T06:09:30.188646426Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -157,7 +157,7 @@ state = "present"
 valueJson = '"https://docs.astral.sh/ruff"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-29T06:11:38.173863032Z"
+checkedAt = "2026-10-31T06:09:30.188646426Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -166,7 +166,7 @@ state = "present"
 valueJson = '"Ruff"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-29T06:11:38.173863032Z"
+checkedAt = "2026-10-31T06:09:30.188646426Z"
 confidence = "low"
 method = "unresolved"
 reason = "intra-tier conflict left field unset during import"
@@ -178,6 +178,6 @@ archived = false
 clone_url = "https://github.com/astral-sh/ruff.git"
 default_branch = "main"
 fork = false
-head_sha = "7cb935d94e5ccdaefd4efee86ba454e8673a3fa6"
+head_sha = "23a16fa018cf3b219c2edc7a2b739881e023a874"
 html_url = "https://github.com/astral-sh/ruff"
-stars = 50346
+stars = 50350

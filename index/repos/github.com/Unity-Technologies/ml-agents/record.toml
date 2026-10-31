@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/Unity-Technologies/ml-agents"
-generated_at = "2026-10-27T17:52:00.751194Z"
+generated_at = "2026-10-31T06:07:31.600020016Z"
 
 [record.trust]
 confidence = "medium"
@@ -45,7 +45,7 @@ maintainers = ["@Unity-Technologies/ml-agents"]
 team = "@Unity-Technologies/ml-agents"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T17:52:00.751194Z"
+checkedAt = "2026-10-31T06:07:31.600020016Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -53,7 +53,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T17:52:00.751194Z"
+checkedAt = "2026-10-31T06:07:31.600020016Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -61,7 +61,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T17:52:00.751194Z"
+checkedAt = "2026-10-31T06:07:31.600020016Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -69,7 +69,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T17:52:00.751194Z"
+checkedAt = "2026-10-31T06:07:31.600020016Z"
 confidence = "high"
 method = "extracted"
 reason = "clear CODEOWNERS team"
@@ -78,7 +78,7 @@ state = "present"
 valueJson = '"@Unity-Technologies/ml-agents"'
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T17:52:00.751194Z"
+checkedAt = "2026-10-31T06:07:31.600020016Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -86,7 +86,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T17:52:00.751194Z"
+checkedAt = "2026-10-31T06:07:31.600020016Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -95,7 +95,7 @@ state = "present"
 valueJson = '"The Unity Machine Learning Agents Toolkit (ML-Agents) is an open-source project that enables games and simulations to serve as environments for training intelligent agents using deep reinforcement learning and imitation learning."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T17:52:00.751194Z"
+checkedAt = "2026-10-31T06:07:31.600020016Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -103,7 +103,7 @@ state = "present"
 valueJson = '"https://unity.com/products/machine-learning-agents"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T17:52:00.751194Z"
+checkedAt = "2026-10-31T06:07:31.600020016Z"
 confidence = "medium"
 method = "inferred"
 reason = "fell back to directory name or GitHub API"
@@ -112,7 +112,7 @@ state = "present"
 valueJson = '"ml-agents"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T17:52:00.751194Z"
+checkedAt = "2026-10-31T06:07:31.600020016Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -124,6 +124,6 @@ archived = false
 clone_url = "https://github.com/Unity-Technologies/ml-agents.git"
 default_branch = "develop"
 fork = false
-head_sha = "d206981a926ff09aa5587dfeb199d5c07bd2f3a6"
+head_sha = "4649106d09088a6135397e0f8ed7015ec600834a"
 html_url = "https://github.com/Unity-Technologies/ml-agents"
-stars = 19800
+stars = 19810

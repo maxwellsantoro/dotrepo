@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/ant-design/ant-design"
-generated_at = "2026-10-29T06:10:12.302460375Z"
+generated_at = "2026-10-31T06:08:27.823507883Z"
 
 [record.trust]
 confidence = "high"
@@ -60,7 +60,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-29T06:10:12.302460375Z"
+checkedAt = "2026-10-31T06:08:27.823507883Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -68,7 +68,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-29T06:10:12.302460375Z"
+checkedAt = "2026-10-31T06:08:27.823507883Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -76,7 +76,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-29T06:10:12.302460375Z"
+checkedAt = "2026-10-31T06:08:27.823507883Z"
 confidence = "high"
 method = "unspecified"
 reason = "explicitly unknown"
@@ -84,7 +84,7 @@ state = "not_found"
 valueJson = '"unknown"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-29T06:10:12.302460375Z"
+checkedAt = "2026-10-31T06:08:27.823507883Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -92,7 +92,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-29T06:10:12.302460375Z"
+checkedAt = "2026-10-31T06:08:27.823507883Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -101,7 +101,7 @@ state = "present"
 valueJson = '"npm run build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-29T06:10:12.302460375Z"
+checkedAt = "2026-10-31T06:08:27.823507883Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -110,7 +110,7 @@ state = "present"
 valueJson = '"An enterprise-class UI design language and React UI library"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-29T06:10:12.302460375Z"
+checkedAt = "2026-10-31T06:08:27.823507883Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -118,7 +118,7 @@ state = "present"
 valueJson = '"https://ant.design"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-29T06:10:12.302460375Z"
+checkedAt = "2026-10-31T06:08:27.823507883Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -127,7 +127,7 @@ state = "present"
 valueJson = '"Ant Design"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-29T06:10:12.302460375Z"
+checkedAt = "2026-10-31T06:08:27.823507883Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -140,6 +140,6 @@ archived = false
 clone_url = "https://github.com/ant-design/ant-design.git"
 default_branch = "master"
 fork = false
-head_sha = "cefe51f5ff14ccae50498c7f082de74808e8c022"
+head_sha = "aab929818837f3ee029a0b500248ad4a5b7d3c9c"
 html_url = "https://github.com/ant-design/ant-design"
-stars = 99978
+stars = 100016

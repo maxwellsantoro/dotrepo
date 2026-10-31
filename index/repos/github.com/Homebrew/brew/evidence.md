@@ -1,8 +1,7 @@
 # Evidence
 
-- Imported repository name and docs entry points from README.md.
+- Imported repository name from README.md.
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates.
-- Imported docs.getting_started as `https://docs.brew.sh/Installation`. Explicit documentation link at README.md:25: Read [installation](https://docs.brew.sh/Installation),
 - Discovered related relation to github.com/sponsors/Homebrew from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
