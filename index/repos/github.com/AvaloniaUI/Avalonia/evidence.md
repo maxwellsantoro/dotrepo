@@ -1,9 +1,8 @@
 # Evidence
 
-- Imported repository name, description, and docs entry points from readme.md.
+- Imported repository name and description from readme.md.
 - Imported the security reporting channel from SECURITY.md.
 - Ignored component-scoped commands from `nukebuild/_build.csproj` as repository defaults.
-- Imported docs.root as `https://docs.avaloniaui.net.`. Explicit documentation link at readme.md:61: Documentation can be found at https://docs.avaloniaui.net.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.name` to `Avalonia` from `GitHub API` after deterministic escalation.
