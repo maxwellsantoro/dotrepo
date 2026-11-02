@@ -1,5 +1,9 @@
 import importlib.util
+import json
 from pathlib import Path
+import subprocess
+
+import pytest
 
 
 SCRIPT = Path(__file__).resolve().parents[1] / "measure_public_lookup_efficiency.py"
@@ -215,3 +219,63 @@ def test_render_markdown_includes_summary_table() -> None:
     assert "## Gates" in markdown
     assert "| minTaskHitRate | 0.5 | 0.0 | pass |" in markdown
     assert "| `orbit-docs-and-owner` | `github.com/example/orbit` | true | - |" in markdown
+
+
+@pytest.mark.parametrize("output_files", [False, True])
+def test_cli_logs_each_failed_gate_even_when_reports_go_to_files(tmp_path, output_files):
+    command = [
+        "uv",
+        "run",
+        "python",
+        str(SCRIPT),
+        "--public-root",
+        str(PUBLIC_ROOT),
+        "--index-root",
+        str(INDEX_ROOT),
+        "--workload",
+        str(WORKLOAD),
+        "--min-task-hit-rate",
+        "0.75",
+        "--max-dotrepo-to-scrape-proxy-ratio",
+        "1.0",
+        "--min-intent-hit-rate",
+        "documentation=0.24",
+    ]
+    output_json, output_md = tmp_path / "report.json", tmp_path / "report.md"
+    if output_files:
+        command.extend(["--output-json", str(output_json), "--output-md", str(output_md)])
+    result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
+    assert result.returncode == 1
+    assert result.stderr.splitlines() == [
+        "public lookup efficiency failed: minTaskHitRate: actual=0.5, required >= 0.75",
+        "public lookup efficiency failed: minIntentHitRate.documentation: actual=None, required >= 0.24",
+        "public lookup efficiency failed: maxDotrepoToScrapeProxyRatio: actual=6.5501, required <= 1.0",
+    ]
+    report = json.loads(output_json.read_text() if output_files else result.stdout)
+    assert not report["passed"]
+    if output_files:
+        assert result.stdout == ""
+        assert "| minTaskHitRate | 0.5 | 0.75 | fail |" in output_md.read_text()
+
+
+def test_cli_success_does_not_log_gate_failures():
+    result = subprocess.run(
+        [
+            "uv",
+            "run",
+            "python",
+            str(SCRIPT),
+            "--public-root",
+            str(PUBLIC_ROOT),
+            "--index-root",
+            str(INDEX_ROOT),
+            "--workload",
+            str(WORKLOAD),
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0
+    assert result.stderr == ""
+    assert json.loads(result.stdout)["passed"]

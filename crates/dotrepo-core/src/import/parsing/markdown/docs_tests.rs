@@ -21,6 +21,61 @@ fn integration_prose_does_not_establish_project_documentation() {
 }
 
 #[test]
+fn refresh_readmes_keep_explicit_documentation_declarations() {
+    // README declarations at the upstream revisions retained by refresh PR #204.
+    // The full paragraph matters: a physical link line alone is not ownership.
+    let cases = [
+        // AvaloniaUI/Avalonia@432480ae82f36f40caf8693e1dfb11d4040404ea
+        ("Avalonia", "### Documentation\nDocumentation can be found at https://docs.avaloniaui.net.\n", "https://docs.avaloniaui.net"),
+        // ClickHouse/ClickHouse@c189bd99fbda59c78489a6734c49397533bdd591
+        ("ClickHouse", "* [Documentation](https://clickhouse.com/docs/) provides more in-depth information.", "https://clickhouse.com/docs/"),
+        // HugoBlox/hugo-theme-academic-cv@d8ef310c786fe1cb3c0104b5c627da1b170cb022
+        ("Academic CV", "- 📚 [**Docs**](https://docs.ownable.dev/?utm_source=github&utm_medium=readme&utm_content=community_academic-cv)", "https://docs.ownable.dev/?utm_source=github&utm_medium=readme&utm_content=community_academic-cv"),
+        // LadybirdBrowser/ladybird@222a19374ec2c74516b62d94da670987185a22c9
+        ("Ladybird", "Code-related documentation can be found in the [documentation](Documentation/) folder.", "Documentation/"),
+        // akaunting/akaunting@a7a5fc790afe01c655ee039aa007b9a824d13af2
+        ("Akaunting", "* [Documentation](https://akaunting.com/hc/docs) - Learn how to use", "https://akaunting.com/hc/docs"),
+    ];
+    for (project, source, expected) in cases {
+        let parsed = docs(source, project);
+        assert_eq!(
+            parsed.root.as_deref(),
+            Some(expected),
+            "{project}: {source}"
+        );
+        let evidence = parsed.root_evidence.expect("source declaration retained");
+        assert_eq!(
+            source.lines().nth(evidence.line - 1),
+            Some(evidence.context.as_str())
+        );
+        assert!(!parsed.root_ambiguous);
+    }
+}
+
+#[test]
+fn descriptive_declarations_still_require_the_whole_project_subject() {
+    for source in [
+        "Other's [Documentation](https://custom.example/manual) provides more in-depth information.",
+        "[Documentation](https://custom.example/manual) provides more in-depth information\nfor Other's integration.",
+        "- [Documentation](https://custom.example/manual) - Learn how to use Other",
+        "- Other integration:\n  [Documentation](https://custom.example/manual) - Learn how to use",
+        "## Documentation\nOther's documentation can be found at https://custom.example/manual.",
+        "## Documentation\nDocumentation can be found at https://custom.example/manual\nfor Other's integration.",
+        "Code-related documentation can be found in the [documentation](Documentation/) folder\nfor Other's integration.",
+        "- 📚 Other's [**Docs**](https://custom.example/manual)",
+        "- 📚 第三方 [**Docs**](https://custom.example/manual)",
+        "- 📚 [**Other Docs**](https://custom.example/manual)",
+    ] {
+        let parsed = docs(source, "Orbit");
+        assert_eq!(parsed.root, None, "{source}");
+        assert_eq!(parsed.getting_started, None, "{source}");
+    }
+    let parsed = docs("- 📚 [**Docs**](https://one.example/manual)\n- 📖 [Documentation](https://two.example/manual)", "Orbit");
+    assert_eq!(parsed.root, None);
+    assert!(parsed.root_ambiguous);
+}
+
+#[test]
 fn quickstart_subject_must_match_the_project() {
     // Exact pinned MinIO README link sentence, referring to the client.
     let source = "Follow the MinIO Client [Quickstart Guide](https://docs.min.io/community/minio-object-store/reference/minio-mc.html#quickstart) for further instructions.";

@@ -117,6 +117,7 @@ fn project_qualified_label(label: &str, labels: &[&str], project: Option<&str>) 
 fn direct_docs_prose(
     text: &str,
     label: &str,
+    url: &str,
     project: Option<&str>,
     documentation_label: bool,
 ) -> bool {
@@ -142,10 +143,23 @@ fn direct_docs_prose(
     {
         return true;
     }
-    let mut subjects = vec!["documentation", "this project's documentation"]
-        .into_iter()
-        .map(str::to_string)
-        .collect::<Vec<_>>();
+    // A complete resource row may explain a generic docs link. Keep the
+    // accepted tails bounded so a dependency/integration qualifier cannot be
+    // dropped from the paragraph to manufacture project ownership.
+    if documentation_label
+        && (text == format!("{label} provides more in-depth information")
+            || text == format!("{label} - learn how to use"))
+    {
+        return true;
+    }
+    let mut subjects = vec![
+        "documentation",
+        "code-related documentation",
+        "this project's documentation",
+    ]
+    .into_iter()
+    .map(str::to_string)
+    .collect::<Vec<_>>();
     if let Some(name) = project {
         let name = name.trim().to_ascii_lowercase();
         if !name.is_empty() {
@@ -153,10 +167,16 @@ fn direct_docs_prose(
             subjects.push(format!("documentation for {name}"));
         }
     }
-    subjects.iter().any(|subject| {
-        text == format!("{subject} is available at {label}")
-            || text == format!("{subject} is available at: {label}")
-            || text == format!("{subject} is at {label}")
+    // A bare URL has no rendered link label. It still needs an entire direct
+    // declaration; merely appearing beneath a docs heading is insufficient.
+    [label, &url.to_ascii_lowercase()].iter().any(|target| {
+        subjects.iter().any(|subject| {
+            text == format!("{subject} is available at {target}")
+                || text == format!("{subject} is available at: {target}")
+                || text == format!("{subject} is at {target}")
+                || text == format!("{subject} can be found at {target}")
+                || text == format!("{subject} can be found in the {target} folder")
+        })
     })
 }
 
@@ -366,7 +386,13 @@ fn docs_navigation(line: &str, links: &[(String, String)]) -> bool {
             true
         }
         _ if bracket_depth > 0 => true,
-        _ => ch.is_whitespace() || "|·•:/-()*".contains(ch),
+        // Decorative Unicode symbols (for example a book icon) do not turn
+        // a docs navigation link into prose. Letters in any language still do.
+        _ => {
+            ch.is_whitespace()
+                || "|·•:/-()*".contains(ch)
+                || (!ch.is_ascii() && !ch.is_alphanumeric() && !ch.is_control())
+        }
     }) && bracket_depth == 0
 }
 
@@ -443,7 +469,9 @@ pub(crate) fn parse_readme_docs_metadata(
         let prefix = lower_line.starts_with("docs:") || lower_line.starts_with("documentation:");
         if links.is_empty() && (docs_intro || prefix) {
             for word in line.split_whitespace() {
-                let url = word.trim_matches(|ch| matches!(ch, '<' | '>' | '`'));
+                let url = word
+                    .trim_matches(|ch| matches!(ch, '<' | '>' | '`'))
+                    .trim_end_matches('.');
                 if url.starts_with("https://") || url.starts_with("http://") {
                     links.push(("Documentation".into(), url.into()));
                 }
@@ -471,7 +499,7 @@ pub(crate) fn parse_readme_docs_metadata(
             if !single_link && !navigation {
                 continue;
             }
-            let label = label.to_ascii_lowercase();
+            let label = strip_wrapping_emphasis(&label).to_ascii_lowercase();
             let start_prefix = docs_prefix_declaration(
                 paragraph,
                 &rendered_line,
@@ -502,11 +530,12 @@ pub(crate) fn parse_readme_docs_metadata(
             // erase an explicitly different documentation/quickstart subject.
             let compatible_label = is_start || is_root || !named_docs_label(&label);
             let direct_prose = single_link
-                && paragraph.link_count == 1
+                && paragraph.link_count <= 1
                 && compatible_label
                 && direct_docs_prose(
                     &paragraph.rendered,
                     &label,
+                    &url,
                     project_name,
                     is_root || is_start,
                 );
