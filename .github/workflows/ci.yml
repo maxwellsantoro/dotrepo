@@ -516,7 +516,7 @@ jobs:
           uv run ruff format --check
           uv run python scripts/check_release_version.py
           uv run python scripts/check_toolchain_manifest_parity.py
-          cargo build --locked -p dotrepo-cli
+          cargo build --locked -p dotrepo-cli -p dotrepo-mcp
           cargo run -p dotrepo-cli -- --root . validate
           uv run pytest --durations=15
 
