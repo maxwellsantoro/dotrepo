@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/alacritty/alacritty"
-generated_at = "2026-10-27T17:54:10.576154Z"
+generated_at = "2026-11-02T06:09:27.326333657Z"
 
 [record.trust]
 confidence = "high"
@@ -46,7 +46,7 @@ min = "1.85.0"
 ecosystem = "Rust"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T17:54:10.576154Z"
+checkedAt = "2026-11-02T06:09:27.326333657Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -54,7 +54,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T17:54:10.576154Z"
+checkedAt = "2026-11-02T06:09:27.326333657Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -62,7 +62,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T17:54:10.576154Z"
+checkedAt = "2026-11-02T06:09:27.326333657Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -70,7 +70,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T17:54:10.576154Z"
+checkedAt = "2026-11-02T06:09:27.326333657Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -78,7 +78,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T17:54:10.576154Z"
+checkedAt = "2026-11-02T06:09:27.326333657Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -87,7 +87,7 @@ state = "present"
 valueJson = '"make all"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T17:54:10.576154Z"
+checkedAt = "2026-11-02T06:09:27.326333657Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -96,7 +96,7 @@ state = "present"
 valueJson = '"A cross-platform, OpenGL terminal emulator."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T17:54:10.576154Z"
+checkedAt = "2026-11-02T06:09:27.326333657Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -104,7 +104,7 @@ state = "present"
 valueJson = '"https://alacritty.org"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T17:54:10.576154Z"
+checkedAt = "2026-11-02T06:09:27.326333657Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -113,7 +113,7 @@ state = "present"
 valueJson = '"Alacritty"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T17:54:10.576154Z"
+checkedAt = "2026-11-02T06:09:27.326333657Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -126,6 +126,6 @@ archived = false
 clone_url = "https://github.com/alacritty/alacritty.git"
 default_branch = "master"
 fork = false
-head_sha = "bbb2cbf9470a6707b1205fbddbdb25109b14e2fd"
+head_sha = "aecf0f600fa840a415b55da5cf34fbeaec39ac32"
 html_url = "https://github.com/alacritty/alacritty"
-stars = 66063
+stars = 66108

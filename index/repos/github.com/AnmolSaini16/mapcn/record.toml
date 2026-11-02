@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/AnmolSaini16/mapcn"
-generated_at = "2026-10-27T17:30:47.42957Z"
+generated_at = "2026-11-02T06:05:29.975209035Z"
 
 [record.trust]
 confidence = "high"
@@ -32,7 +32,7 @@ topics = []
 getting_started = "https://mapcn.dev/docs/installation"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T17:30:47.42957Z"
+checkedAt = "2026-11-02T06:05:29.975209035Z"
 confidence = "high"
 method = "extracted"
 reason = 'Explicit documentation link at README.md:10: <a href="https://mapcn.dev/docs/installation">Installation</a> ·'
@@ -41,7 +41,7 @@ state = "present"
 valueJson = '"https://mapcn.dev/docs/installation"'
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T17:30:47.42957Z"
+checkedAt = "2026-11-02T06:05:29.975209035Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -49,7 +49,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T17:30:47.42957Z"
+checkedAt = "2026-11-02T06:05:29.975209035Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -57,7 +57,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T17:30:47.42957Z"
+checkedAt = "2026-11-02T06:05:29.975209035Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -65,7 +65,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T17:30:47.42957Z"
+checkedAt = "2026-11-02T06:05:29.975209035Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -74,7 +74,7 @@ state = "present"
 valueJson = '"npm run build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T17:30:47.42957Z"
+checkedAt = "2026-11-02T06:05:29.975209035Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -83,7 +83,7 @@ state = "present"
 valueJson = '"Beautiful map components. 100% Free, Zero config, one command setup."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T17:30:47.42957Z"
+checkedAt = "2026-11-02T06:05:29.975209035Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -91,7 +91,7 @@ state = "present"
 valueJson = '"https://mapcn.dev"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T17:30:47.42957Z"
+checkedAt = "2026-11-02T06:05:29.975209035Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -100,7 +100,7 @@ state = "present"
 valueJson = '"mapcn"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T17:30:47.42957Z"
+checkedAt = "2026-11-02T06:05:29.975209035Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -112,6 +112,6 @@ archived = false
 clone_url = "https://github.com/AnmolSaini16/mapcn.git"
 default_branch = "main"
 fork = false
-head_sha = "20c40868d5d39883a18073604d9587fb373af65e"
+head_sha = "57f3e57ac40a50c6dd1e80c876d32b32364b27c6"
 html_url = "https://github.com/AnmolSaini16/mapcn"
-stars = 12336
+stars = 12352
