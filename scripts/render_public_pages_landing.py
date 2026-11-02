@@ -1054,8 +1054,8 @@ def render_repositories_index(inventory: dict, base_path: str) -> str:
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='20' fill='%23141414'/%3E%3C/svg%3E">
-  <title>Repositories · dotrepo</title>
-  <meta name="description" content="Browse and search repositories in the current validated dotrepo public export.">
+  <title>Repositories · DotRepo</title>
+  <meta name="description" content="Browse and search repositories in the current validated DotRepo public export.">
   <style>
     :root {{
       color-scheme: light;
@@ -1495,8 +1495,8 @@ def render_writing_index(base_path: str) -> str:
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='20' fill='%23141414'/%3E%3C/svg%3E">
-  <title>Writing · dotrepo</title>
-  <meta name="description" content="Essays, field reports, and research notes from the dotrepo project.">
+  <title>Writing · DotRepo</title>
+  <meta name="description" content="Essays, field reports, and research notes from the DotRepo project.">
   <style>
     :root {{
       color-scheme: light;
@@ -1709,7 +1709,7 @@ def render_writing_index(base_path: str) -> str:
     {render_site_header(base_path, "writing")}
     <section class="panel hero">
       <p class="eyebrow">Writing</p>
-      <h1>How dotrepo works, and what we’re learning.</h1>
+      <h1>How DotRepo works, and what we’re learning.</h1>
       <p>Essays, research syntheses, and launch notes from dotrepo as the public surface, index, and agent-facing workflows get exercised in the open.</p>
     </section>
     <section class="panel section">
@@ -1736,8 +1736,8 @@ def render_docs_index(base_path: str) -> str:
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='20' fill='%23141414'/%3E%3C/svg%3E">
-  <title>Docs · dotrepo</title>
-  <meta name="description" content="First-party documentation entry for dotrepo: product status, trust model, public surface, maintainer flow, and index growth.">
+  <title>Docs · DotRepo</title>
+  <meta name="description" content="Choose a DotRepo consumer or publisher workflow, with version-specific installation, evidence and fallback rules.">
   <style>
     :root {{
       color-scheme: light;
@@ -1947,14 +1947,14 @@ def render_docs_index(base_path: str) -> str:
     {render_site_header(base_path, "docs")}
     <section class="panel hero">
       <p class="eyebrow">Docs</p>
-      <h1>Get started with dotrepo.</h1>
-      <p>Look up repository facts, connect an agent, or publish a record you maintain.</p>
+      <h1>Get started with DotRepo.</h1>
+      <p>Start with a repository lookup, connect a recurring consumer, or derive a declaration from sources you already maintain.</p>
       <nav class="start-paths" aria-label="Choose a getting-started path">
         <a href="{site_href(base_path, "/")}#lookup"><strong>1. Look up a repository</strong><span>Find facts, sources, and record age. No installation needed.</span></a>
         <a href="{site_href(base_path, "/")}#integrate"><strong>2. Connect your agent</strong><span>Install the MCP server or use the HTTP API.</span></a>
-        <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/maintainer-happy-path.md"><strong>3. Maintain your record</strong><span>Import, validate, and publish a native .repo file.</span></a>
+        <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/maintainer-happy-path.md"><strong>3. Maintain your record</strong><span>Import existing sources, resolve ambiguity, and check drift.</span></a>
       </nav>
-      <p class="version-note">Using a released binary? Check <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/release-compatibility.md">stable vs. development behavior</a>. Repository docs below track main.</p>
+      <p class="version-note">Using a released binary? Check <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/release-compatibility.md">stable, preview and source-only behavior</a>. Repository docs below track main.</p>
     </section>
     {render_docs_cards(base_path)}
     <footer class="footer">
@@ -1983,7 +1983,7 @@ def render_article_page(article: dict, base_path: str) -> str:
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='20' fill='%23141414'/%3E%3C/svg%3E">
-  <title>{title} · dotrepo</title>
+  <title>{title} · DotRepo</title>
   <meta name="description" content="{summary}">
   <style>
     :root {{
@@ -2300,8 +2300,8 @@ def main() -> int:
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='20' fill='%23141414'/%3E%3C/svg%3E">
-  <title>dotrepo</title>
-  <meta name="description" content="Structured repository facts, build and test commands, docs, evidence, and freshness for agents and tools.">
+  <title>DotRepo — repository facts you can trace and reuse</title>
+  <meta name="description" content="Publish repository context from existing sources. Look up facts with evidence and age, then investigate what your task still needs.">
   <style>
     :root {{
       color-scheme: light;
@@ -2824,10 +2824,10 @@ def main() -> int:
     <section class="hero">
       <div class="panel hero__copy">
         <p class="eyebrow">Repository facts for agents and tools</p>
-        <h1>Repository facts your agents can reuse.</h1>
-        <p class="hero__lede">Get structured project metadata, build and test commands,
-          documentation links, and ownership information through HTTP or MCP.
-          Inspect the evidence and record age, then fetch additional source material when needed.</p>
+        <h1>Repository facts you can trace and reuse.</h1>
+        <p class="hero__lede">Start an investigation with what is already known:
+          a project’s purpose, reported commands, docs and owners, with sources and age attached.
+          DotRepo makes that context available through HTTP, MCP and local <code>.repo</code> files.</p>
         <div class="cta-row">
           <a class="cta cta--primary" href="#lookup">Look up a repository</a>
           <a class="cta cta--secondary" href="#integrate">Connect your agent</a>
@@ -2835,9 +2835,12 @@ def main() -> int:
         </div>
         <p>Works with indexed repositories before maintainers adopt <code>.repo</code>.
           Coverage is partial. Metadata helps with orientation; architecture and code changes still require source inspection.</p>
-        <p>Local RepoDigest research extends discovery into source-backed requirement
-          assessment and reusable investigation. Those experimental tools are separate
-          from this public API; end-to-end token and economic savings remain unproved.</p>
+        <p>Publishers derive declarations from existing sources; consumers reuse context
+          and investigate missing, stale or conflicting answers. The aim is less repeated
+          work for both sides, including maintenance and verification.</p>
+        <p><strong>Public draft source:</strong> RepoDigest adds bounded discovery, requirement
+          assessment and reusable investigation. It is separate from released packages and
+          this API. <a href="https://github.com/maxwellsantoro/dotrepo/pull/208">Review the workflow and evidence</a>.</p>
       </div>
       {render_lookup_example(input_dir, inventory, base_path, generated_at)}
     </section>
@@ -2879,12 +2882,16 @@ def main() -> int:
     </section>
 
     <section class="panel section">
-      <h2>One format, three uses</h2>
+      <h2>Publish from existing sources. Investigate with context.</h2>
       <div class="three-up">
-        <article class="feature"><h3>Agents and tools</h3><p>Reuse basic facts across sessions and retrieve additional sources only when the task needs them.</p></article>
-        <article class="feature"><h3>Maintainers</h3><p>Publish an authoritative native record and keep supported documentation blocks consistent with it.</p></article>
-        <article class="feature"><h3>Researchers</h3><p>Orient yourself, find documentation, and compare available project facts with their limitations visible.</p></article>
+        <article class="feature"><h3>Publish from existing sources</h3><p>Import manifests and documentation, review ambiguity, and check drift in supported files. Maintainers control native declarations; observed overlays retain their separate provenance.</p></article>
+        <article class="feature"><h3>Use the evidence you need</h3><p>Use metadata for orientation. Check explicit requirements against scoped source evidence. Treat runtime execution as a separate authorized task.</p></article>
+        <article class="feature"><h3>Keep useful work</h3><p>Retain evidence at its source revision and revisit what changed or remains uncertain. Source identity, correctness and freshness answer different questions.</p></article>
       </div>
+      <p>With <a href="https://pagedigest.org">PageDigest</a>, we are working toward less repeated
+        fetching, parsing, investigation and verification. Lazy Collective is the local
+        coordination project, not a shared deployed runtime. DotPage names PageDigest’s
+        publisher role. <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/workflow-status.md#shared-direction">Roles, delivery status and measured limits</a>.</p>
     </section>
 
     <section class="panel section">

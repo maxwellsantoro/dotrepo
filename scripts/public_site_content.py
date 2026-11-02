@@ -199,7 +199,7 @@ ARTICLES = [
 </ul>
 
 <h2>Where This Feeds Back Into dotrepo</h2>
-<p>The current repo-side synthesis lives in <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/ai-tool-interviews.md">docs/ai-tool-interviews.md</a>, with active direction in the root roadmap. The public site carries this write-up because it remains useful product evidence, even as the implementation moves beyond its March snapshot.</p>
+<p>The <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/archive/ai-tool-interviews.md">archived repo-side synthesis</a> preserves this March interview record. It supplies design hypotheses, not independent adoption or accuracy evidence. Use the <a href="/docs/">current getting-started guide</a> and <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/ROADMAP.md">roadmap</a> for implemented capabilities and priorities.</p>
 <p>If you are building an AI coding tool and want to integrate dotrepo, or if you maintain a popular open-source project and want to correct or replace your overlay record, start at <a href="https://github.com/maxwellsantoro/dotrepo">github.com/maxwellsantoro/dotrepo</a>.</p>
 """,
     },

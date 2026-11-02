@@ -1,6 +1,10 @@
-# dotrepo MCP server
+# DotRepo MCP server
 
-Expose repository facts, trust, import and validation through a stdio Model Context Protocol server.
+Give agents repository facts with evidence and age through a stdio Model Context
+Protocol server. Inspect upstream sources when indexed answers are insufficient.
+Import and validation tools support local declarations; no returned command or
+trust label grants execution permission. RepoDigest experiments are separate
+source tools, not features of this released server.
 
 For production, install the verified stable package:
 

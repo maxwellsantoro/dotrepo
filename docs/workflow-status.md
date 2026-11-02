@@ -1,9 +1,10 @@
 # Workflow delivery and evidence
 
-This source checkout combines public DotRepo contracts and local RepoDigest
-experiments. Source edits, local tests, public deployments and package releases
-are separate events. The November 2 workflow changes are prepared locally;
-they are not in a published package or live service.
+This source checkout combines public DotRepo contracts and experimental RepoDigest
+workflows. Source edits, local tests, public deployments and package releases
+are separate events. The November 2 workflow changes are public draft source in
+[PR208](https://github.com/maxwellsantoro/dotrepo/pull/208); they are not in a
+released package or live service. Check the PR before assuming it has landed.
 
 | Job | Available surface | What it establishes |
 | --- | --- | --- |
@@ -20,11 +21,37 @@ content hashes and exact revisions bind evidence; they do not authenticate an
 independent reviewer's identity or prove semantic correctness. Record age and
 export age remain distinct. Requirement checks do not query current HEAD.
 
-The companion PageDigest repository implements the web adapter and publisher
-generator/Astro path. Its local recurring workflow reports body changes,
-rereading needs and source-bound findings. DotPage is a publisher-facing role,
-not a requirement for another service or a second manually maintained page list.
-A common cross-domain service remains a design option, not completed infrastructure.
+## Shared direction
+
+**Publish what you know. Reuse what still holds. Investigate what changed.**
+
+Publishers and consumers meet in the middle: derive declarations from existing
+sources, preserve the evidence behind useful work, and repeat only the work
+required by changes, uncertainty and the task's assurance needs. Participation
+must help both sides; moving effort onto maintainers is not a net saving.
+
+- **DotRepo** is the existing repository protocol, toolchain and public lookup
+  index. Native declarations and observed overlays retain different authority.
+- **RepoDigest** is the experimental discovery, assessment and reuse workflow
+  in this repository. Preliminary suitability is distinct from a successful run.
+- **PageDigest** is the existing website manifest protocol and publisher/consumer
+  toolchain. Its [draft recurring workflow](https://github.com/maxwellsantoro/pagedigest/pull/2)
+  retains source-bound findings and reports what needs rereading.
+- **DotPage** names that project's publisher role in existing site builds. It is
+  not a separately shipped product or another page catalog to maintain.
+
+**Lazy Collective** is the chosen umbrella and local coordination project,
+not a released common service or runtime. The
+[PageDigest ecosystem guide](https://github.com/maxwellsantoro/pagedigest/blob/main/docs/ecosystem.md)
+owns its website-specific integration and evidence.
+
+Assurance follows the task: metadata can establish a lead; explicit requirements
+need scoped source evidence; execution needs its own environment, checks and
+authorization. Provenance and authenticity do not prove correctness or freshness.
+Unchanged source bytes can preserve a finding's declared dependencies without
+proving its interpretation or external premises. Compare completed results at
+matched quality and freshness, counting publisher, indexer and consumer work,
+fallback and unfinished attempts. General net savings remain unestablished.
 
 ## Latest evidence
 

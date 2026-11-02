@@ -8,7 +8,7 @@ The hosted export can advance independently of client releases.
 
 | Task | Guide |
 | --- | --- |
-| Understand dotrepo and try a lookup | [Project README](../README.md) |
+| Understand DotRepo and try a lookup | [Project README](../README.md) |
 | Install a stable tool or extension | [Installation](install.md), [release compatibility](release-compatibility.md) |
 | Integrate an agent or tool | [Consumer integration](external-consumer-integration.md), [reference client](../examples/external-consumer/README.md) |
 | Try experimental retained source tools | [RepoDigest source cache](experimental-repodigest-source-cache.md) |

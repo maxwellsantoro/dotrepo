@@ -1,8 +1,9 @@
 # External consumer integration
 
-Template for landing a non-operator integration that resolves repository facts
-through dotrepo instead of scraping. Use this when onboarding an agent
-framework, research crawler, IDE extension, or internal tool.
+Use DotRepo as a shared starting point for repository facts, retaining evidence,
+age and conflicts. Inspect upstream when indexed answers are insufficient. This
+guide covers agent frameworks, research crawlers, IDE extensions and internal
+tools; a lookup is orientation, not a suitability or execution guarantee.
 
 ## Prefer hosted lookup before clone
 

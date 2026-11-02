@@ -193,7 +193,7 @@ if __name__ == "__main__":
 
 def test_docs_offer_clear_task_paths_and_version_context():
     rendered = public_pages.render_docs_index("")
-    assert "Get started with dotrepo." in rendered
+    assert "Get started with DotRepo." in rendered
     assert 'aria-label="Choose a getting-started path"' in rendered
     assert "1. Look up a repository" in rendered
     assert "2. Connect your agent" in rendered
@@ -211,7 +211,7 @@ def test_catalog_cap_note_starts_hidden_and_tracks_unshown_results():
 
 def test_writing_avoids_internal_review_labels():
     rendered = public_pages.render_writing_index("")
-    assert "How dotrepo works, and what we’re learning." in rendered
+    assert "How DotRepo works, and what we’re learning." in rendered
     assert "Local review root" not in rendered
 
 
