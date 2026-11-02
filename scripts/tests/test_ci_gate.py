@@ -85,3 +85,27 @@ def test_workflow_gate_always_runs_and_covers_every_scoped_job():
     step = next(step for step in gate["steps"] if "check_ci_gate.py" in step.get("run", ""))
     assert step["env"]["CI_NEEDS"] == "${{ toJSON(needs) }}"
     assert step["run"].startswith("uv run --no-project python ")
+
+
+@pytest.mark.parametrize("job", ["public-surface-gate", "release-gate"])
+def test_failed_public_gates_retain_lookup_reports_and_workload(job):
+    workflow = yaml.safe_load(
+        (Path(__file__).resolve().parents[2] / ".github/workflows/ci.yml").read_text()
+    )
+    upload = next(
+        step
+        for step in workflow["jobs"][job]["steps"]
+        if step.get("with", {}).get("name") == f"{job}-timings"
+    )
+    assert upload["if"] == "always()"
+    from fnmatch import fnmatchcase
+
+    patterns = upload["with"]["path"].splitlines()
+    for artifact in [
+        "timings.json",
+        "timings.md",
+        "public-lookup-workload.json",
+        "public-lookup-efficiency.json",
+        "public-lookup-efficiency.md",
+    ]:
+        assert any(fnmatchcase(f"release-gate/{artifact}", pattern) for pattern in patterns)

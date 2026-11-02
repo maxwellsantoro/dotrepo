@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Recover explicit README documentation declarations lost by the ownership
+  parser: bounded descriptive resource rows, documentation-location prose,
+  and decorated navigation links. Keep third-party qualifiers and conflicting
+  declarations excluded. Print failing lookup thresholds in CI logs and retain
+  lookup reports and workloads alongside gate timings on failure.
 - Preserve unknown adjudication token usage through provider responses, failed
   calls, batch totals and unit-cost reports. Report a nullable complete total,
   known subtotal and completeness instead of treating missing usage as zero;

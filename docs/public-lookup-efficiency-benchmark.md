@@ -55,6 +55,13 @@ The report includes:
 - optional pass/fail gates for workload volume, repository coverage, aggregate
   and per-intent hit rates, and dotrepo-to-scrape-proxy byte ratio
 
+Failed thresholds are printed to stderr with the gate name, actual value, and
+required bound, including when JSON and Markdown reports are written to files.
+The public-surface and complete release CI jobs retain the lookup reports and
+generated workload in their gate-timings artifact even when a gate fails. Use
+the per-task missing fields to trace a coverage regression back to source
+declarations; a missing answer alone is not a reason to lower the baseline.
+
 `scrapeProxyBytes` is intentionally named as a proxy. It is deterministic and
 reviewable in CI, but it is not a live measurement of GitHub HTML/API traffic,
 repository archives, README fetches, dependency manifests, or model context.

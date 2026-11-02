@@ -2,6 +2,7 @@
 
 import argparse
 import json
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Optional
@@ -572,6 +573,14 @@ def main() -> int:
         print(rendered, end="")
     if args.output_md:
         Path(args.output_md).write_text(render_markdown(report))
+    for name, gate in report["gates"].items():
+        if not gate["passed"]:
+            comparison = "<=" if name.startswith("max") else ">="
+            print(
+                f"public lookup efficiency failed: {name}: "
+                f"actual={gate['actual']}, required {comparison} {gate['threshold']}",
+                file=sys.stderr,
+            )
     return 0 if report["passed"] else 1
 
 
