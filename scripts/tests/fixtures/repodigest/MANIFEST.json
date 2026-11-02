@@ -1,0 +1,1582 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "9527870df76538cbbeb011a26fa2206e35ec7fb4",
+  "sourceState": "Local prepared branch; this identifier is provenance, not a public-release claim.",
+  "scope": "Unchanged regression fixture data only. No historical campaign runners are invoked, source code is not executed, and no performance improvement is inferred.",
+  "groups": {
+    "repodigest-multirepo-service-20261029/acquisition-001/python-attrs__cattrs": "Complete pinned source snapshot for discovery and comparison admission.",
+    "repodigest-discovery100-comparison-20261030/acquisition/microsoft__markitdown": "Complete pinned source snapshot for explicit requirement assessment and selection.",
+    "repodigest-multirepo-service-20261029/acquisition-001/sindresorhus__p-limit": "Complete pinned source snapshot for source-cache and immutable store controls.",
+    "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja": "Complete pinned source snapshot for bounded component follow-up.",
+    "repodigest-multirepo-service-20261029/acquisition-001/agronholm__exceptiongroup": "Complete pinned source snapshot for retained consumer-source reuse.",
+    "repodigest-multirepo-service-20261029/consumer-004-minijinja-source-only/source-responses/mitsuhiko/minijinja/minijinja/Cargo.toml": "Exact retained body for the fake HTTP component follow-up control.",
+    "repodigest-multirepo-service-20261029/consumer-004-minijinja-source-only/source-responses/mitsuhiko/minijinja/scripts/use-msrv-lock.sh": "Exact retained body for the fake HTTP dependency follow-up control.",
+    "repodigest-demand-reuse-20261029/consumer-006-p-limit-repodigest/source-responses/sindresorhus/p-limit/.npmrc": "Exact retained body for the fake HTTP cache-miss control.",
+    "repodigest-source-cache-20261030/consumer-004-exceptiongroup-source-cache/events.jsonl": "Unabridged retained consumer event receipt, including unfinished events.",
+    "repodigest-source-cache-20261030/consumer-004-exceptiongroup-source-cache/traffic.json": "Unchanged source traffic receipt bound to the consumer event receipt.",
+    "repodigest-source-cache-20261030/consumer-004-exceptiongroup-source-cache/source-responses/agronholm/exceptiongroup/tests/check_types.py": "Exact retained source body bound to the consumer and traffic receipts.",
+    "digest-exchange-r1-iniconfig-execution-20261029": "Complete compact observed-recipe evidence packet; immutable manifest requires all artifacts. Read as inert data only.",
+    "digest-exchange-observed-recipe-consumer-pilot-20261029/reader-amendment/capsule.json": "Unchanged observed capsule with its original reader and evidence bindings.",
+    "digest-exchange-observed-recipe-consumer-pilot-20261029/reader-amendment/request.json": "Unchanged consumer situation for observed-recipe applicability controls.",
+    "digest-exchange-observed-recipe-prototype-20261029/development-fixture/capsule.json": "Historical preflight capsule retained to verify changed-verifier refusal.",
+    "digest-exchange-observed-recipe-prototype-20261029/development-fixture/capsule.sha256": "Original historical preflight trust anchor; never reanchored."
+  },
+  "fileCount": 259,
+  "retainedBytes": 1869768,
+  "files": [
+    {
+      "path": "digest-exchange-observed-recipe-consumer-pilot-20261029/reader-amendment/capsule.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-observed-recipe-consumer-pilot-20261029/reader-amendment/capsule.json",
+      "bytes": 27975,
+      "sha256": "f1a77a354e95e7560060eec8d2aae8da7dd527f9603d49a6b941b26f47c9be9d"
+    },
+    {
+      "path": "digest-exchange-observed-recipe-consumer-pilot-20261029/reader-amendment/request.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-observed-recipe-consumer-pilot-20261029/reader-amendment/request.json",
+      "bytes": 4095,
+      "sha256": "f7b2b7a5dc95e8793d8a1f8e712eadf67b31b45d2da084936109c5fc21cbc735"
+    },
+    {
+      "path": "digest-exchange-observed-recipe-prototype-20261029/development-fixture/capsule.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-observed-recipe-prototype-20261029/development-fixture/capsule.json",
+      "bytes": 27918,
+      "sha256": "ac68a18326de055821ce089aaf3329a369634583cfddc2daaa7da11e2dcde7f7"
+    },
+    {
+      "path": "digest-exchange-observed-recipe-prototype-20261029/development-fixture/capsule.sha256",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-observed-recipe-prototype-20261029/development-fixture/capsule.sha256",
+      "bytes": 65,
+      "sha256": "635395de5e1b88b2785689d050e5839c0516c2c5b9563f90f07b554f25cd235f"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/ARTIFACTS.sha256",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/ARTIFACTS.sha256",
+      "bytes": 17167,
+      "sha256": "b4942fd51413a3a473d12659be99cc0149a092661335c2672bc0acf65047c95a"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/DECISION.md",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/DECISION.md",
+      "bytes": 4890,
+      "sha256": "e072c3378fba03ebf3abf4719f08cd20f2e23c82d0b5434bd77042b7ebf1cd8e"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/Dockerfile",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/Dockerfile",
+      "bytes": 571,
+      "sha256": "596749e902c0c8a1c55b53c44a08baf89ef79a7f67ba2133a0c863ac43b22ad7"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/FINAL-EVIDENCE-AMENDMENT.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/FINAL-EVIDENCE-AMENDMENT.json",
+      "bytes": 1188,
+      "sha256": "1aae0ec11e987cac7583fce373ae8016622a65674a136010e46816e7fa4f02e7"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/INPUTS.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/INPUTS.json",
+      "bytes": 8100,
+      "sha256": "9a8b56d68ca5d195c503609c8360b2ac90a25c49edbaf797c218e18f4d01de79"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/PREPARATION-AMENDMENT.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/PREPARATION-AMENDMENT.json",
+      "bytes": 895,
+      "sha256": "63a025b4c4831055a132358411554d4a9118c719bf2cbf98f7353b77b03ab4c4"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/README.md",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/README.md",
+      "bytes": 7902,
+      "sha256": "8fa64c9dc2defae1964a7f8daad7ca6de28fbadc153c50df337dca9bc6fcb410"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/SPEC.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/SPEC.json",
+      "bytes": 4281,
+      "sha256": "311575508605bec7b9e48024a16b7f2f2cd6aa2f391de2a2e276877944052d20"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/SPEC.sha256",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/SPEC.sha256",
+      "bytes": 76,
+      "sha256": "6976c4c2d55e051df9c81fbbf5014aeb5924d442f99d87f66fbf9dedc0ffbc0e"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/TRANSFER-AMENDMENT.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/TRANSFER-AMENDMENT.json",
+      "bytes": 415,
+      "sha256": "bf74ad82ad6a714067ee66797ebbb8b242b147d0fd4ed2464fb449473cf80ed8"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/WORK-EXEC-AMENDMENT.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/WORK-EXEC-AMENDMENT.json",
+      "bytes": 1283,
+      "sha256": "1a922324063df3d74fab27cd25f81cf4f3c01424d9ee2d1c49c4ae70f175e571"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/collection-oracle.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/collection-oracle.json",
+      "bytes": 2281,
+      "sha256": "c2b97d436342c80634ac5ff9fce080f243e064ea7ffe677911e9ab24ecfbbd05"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/collection.py",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/collection.py",
+      "bytes": 2576,
+      "sha256": "4dd92e5814c9ef07ab944eecd896be2325038b3e6b594cb4ab5210ad3a7bf26d"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/controller.py",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/controller.py",
+      "bytes": 5866,
+      "sha256": "4049125feb002da6a171b96b886f276dc9d8ad8c1588c88c9523cee24ada267c"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/cost-ledger.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/cost-ledger.json",
+      "bytes": 9491,
+      "sha256": "00cbd306fd090c4a50c08850745ed5dc3089f88bc735d92955f925e0278e930b"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/environment.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/environment.json",
+      "bytes": 10418,
+      "sha256": "71fb5fe8c7d64248847c57266fbd25eff1f0464d0e45b04dc3864d2330cbcd35"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/independent-review.md",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/independent-review.md",
+      "bytes": 6781,
+      "sha256": "9a0d03bfd751dcb2691d70a3b9600d0b983fd5ab847a1d991f42f07c12abab86"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/policy-001/EXPERIMENT-RECIPE.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/policy-001/EXPERIMENT-RECIPE.json",
+      "bytes": 4831,
+      "sha256": "54fcb1e851f98aeff87a84874dbfe663c46b40645c599c7b761a012f727c0199"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/policy-001/high/export.stderr",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/policy-001/high/export.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/policy-001/high/export.stdout",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/policy-001/high/export.stdout",
+      "bytes": 2512,
+      "sha256": "e3969f2fd2f530bb0cadb0390a0447a685349976f5098d121acdc506ddee2ec1"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/policy-001/high/record.toml",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/policy-001/high/record.toml",
+      "bytes": 1608,
+      "sha256": "781c58f03b79896a2f05a0efa6e1126f95e7bc91b3edc7d7a273791305522f60"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/policy-001/high/selection.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/policy-001/high/selection.json",
+      "bytes": 694,
+      "sha256": "37755ac5a6bb6f6fbd8d5eda9d0b1dbb1ea67cdb4b50ba4850b42b1a239d2223"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/policy-001/input-receipt.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/policy-001/input-receipt.json",
+      "bytes": 576,
+      "sha256": "454237f12d60d9550dbd5085f70ca050b0af4946a066ad2f90e6b57d9427a356"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/policy-001/medium/export.stderr",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/policy-001/medium/export.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/policy-001/medium/export.stdout",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/policy-001/medium/export.stdout",
+      "bytes": 2516,
+      "sha256": "c9ea2ccebb77cf65967bf98ebfcd0506b21e876a15e1f81d67635c1b0a151add"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/policy-001/medium/record.toml",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/policy-001/medium/record.toml",
+      "bytes": 1612,
+      "sha256": "b88fcafaa4d0e81f7eb7bd622f9920b1719a37ecf3b6d4903b221b89208fc3c8"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/policy-001/medium/selection.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/policy-001/medium/selection.json",
+      "bytes": 679,
+      "sha256": "6b7c67b1bb981d697929283ad141a9023683f543ef79d51c01fa080a19a83e10"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/policy-001/report.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/policy-001/report.json",
+      "bytes": 1844,
+      "sha256": "9a317c5983781a436a53d8d949d04ef85cf90ee98dbd4294c1ce37539b467367"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/policy_probe.py",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/policy_probe.py",
+      "bytes": 6119,
+      "sha256": "d4ba2ccb16ffdcce515f087925db783d13be502ff4eb207362c9098584551d52"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/preflight/INPUTS-before-exec-mount-fix.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/preflight/INPUTS-before-exec-mount-fix.json",
+      "bytes": 5428,
+      "sha256": "761a5f62113174c568e449d9965c0164fe90757f54a592fe01c7d0c84366110a"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/preflight/INPUTS-before-score-hardening.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/preflight/INPUTS-before-score-hardening.json",
+      "bytes": 4817,
+      "sha256": "e55bcd6d87310ec1190ec741ba7f0aa6c2b8389197520e5953c05f61bfedd051"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/preflight/INPUTS-before-transfer-fix.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/preflight/INPUTS-before-transfer-fix.json",
+      "bytes": 5215,
+      "sha256": "2974a9872d218767b2f8a0e9acb9aafe994be8688ae87af6de4848f606b7e81f"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/preflight/before-final-evidence-Dockerfile.gz",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/preflight/before-final-evidence-Dockerfile.gz",
+      "bytes": 441,
+      "sha256": "7fe47403eefd13f75c8a11afa4195534278b0a35a5c51a639116e77eecb66e25"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/preflight/before-final-evidence-INPUTS.json.gz",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/preflight/before-final-evidence-INPUTS.json.gz",
+      "bytes": 2657,
+      "sha256": "f5458e3f7bcf7854e1bc8821917538ac9c28702432cc78ed95acbc1555dfc15b"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/preflight/before-final-evidence-controller.py.gz",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/preflight/before-final-evidence-controller.py.gz",
+      "bytes": 2051,
+      "sha256": "46c10a266e68405368c80dcb8333549689a89e2c77268a992b9a6a31856dde0a"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/preflight/before-final-evidence-runner.py.gz",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/preflight/before-final-evidence-runner.py.gz",
+      "bytes": 4012,
+      "sha256": "65a3aa55d087f42343c18536483923c322906335c3614365b0490f91bc3b6215"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/preflight/execute-permission-diagnostic.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/preflight/execute-permission-diagnostic.json",
+      "bytes": 626,
+      "sha256": "e7d30e384d91eed27e6accc5e18c32969fd4ba81830933e4930e1b50512ef9af"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/preflight/final-environment.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/preflight/final-environment.json",
+      "bytes": 20731,
+      "sha256": "189f196e01172a8bffe32fa309b9f319ca03ac3df13ba99f21e6791489251e10"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/preflight/network-none-diagnostic.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/preflight/network-none-diagnostic.json",
+      "bytes": 21878,
+      "sha256": "8f56539eb33aa2608baf44c339ebe61fa4763af81f8cbf451a605810a2d40696"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/preflight/runner-before-exec-mount-fix.py.gz",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/preflight/runner-before-exec-mount-fix.py.gz",
+      "bytes": 3867,
+      "sha256": "632eb4fba5e77d3430257bdcd1a38612b4a71e33e6eb728184b6fc6c5271f64c"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/preflight/runner-before-transfer-fix.py.gz",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/preflight/runner-before-transfer-fix.py.gz",
+      "bytes": 3814,
+      "sha256": "acef737c53158c6a667d134cea2696821e61a60f084e7eaa3027dd7a7409ba3d"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/preflight/transfer-diagnostic.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/preflight/transfer-diagnostic.json",
+      "bytes": 650,
+      "sha256": "f893e6713316e8059d737029a0fb7bf55cb7f6a77bdffe5c99e3b353027be077"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/prepare.py",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/prepare.py",
+      "bytes": 5398,
+      "sha256": "5df2f4cc687e7c2bc8ccdca36a60caaa8b0eec9eb441ed581bb334ef6b4a258e"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/review-001-disposition.md",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/review-001-disposition.md",
+      "bytes": 1890,
+      "sha256": "205663fa86d268b248245455df95958fc7e55880427f2465bdaa75a54dda64d2"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/review-provenance.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/review-provenance.json",
+      "bytes": 784,
+      "sha256": "8b1a09627eb42fbdf790a083a1af7c126ea301f35b4ca307b19681e234888320"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-001/input-receipt.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-001/input-receipt.json",
+      "bytes": 5215,
+      "sha256": "2974a9872d218767b2f8a0e9acb9aafe994be8688ae87af6de4848f606b7e81f"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-001/report.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-001/report.json",
+      "bytes": 2136,
+      "sha256": "2fd27c78ccecda5d50768acbf4f2b4d8385aab672d4c6ef82b44124c18cfe7a3"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-001/run-001/container-before.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-001/run-001/container-before.json",
+      "bytes": 5703,
+      "sha256": "e4c3ec2b66e259d2224258ce053e7991f8b67153f7af9c525bf01eebfacedb20"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-001/run-001/result.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-001/run-001/result.json",
+      "bytes": 838,
+      "sha256": "96be5e9ebe3b5822a92588662cfb482206697e0f8338eb44c4a10ca393929385"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-001/run-002/container-before.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-001/run-002/container-before.json",
+      "bytes": 5702,
+      "sha256": "5c1afd78e4bc7a80485f164504cbbedb1400010a2512d9a1f452fe4b9f9898e7"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-001/run-002/result.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-001/run-002/result.json",
+      "bytes": 837,
+      "sha256": "db5e5f8e22a41ce05af1eb1501cdb4ba990482749df2989974e839ac1fd8715d"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-001/timeout-control.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-001/timeout-control.json",
+      "bytes": 741,
+      "sha256": "cbe0061b83087b4396232c64d45ef1f5ec2e1ed9c80a6c90c1ad53c6bf81a5bc"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-002/input-receipt.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-002/input-receipt.json",
+      "bytes": 5428,
+      "sha256": "761a5f62113174c568e449d9965c0164fe90757f54a592fe01c7d0c84366110a"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-002/report.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-002/report.json",
+      "bytes": 2026,
+      "sha256": "763ef141d481598e1e0fc44f836860c8d458370d482e8c969965702215faffaf"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-002/run-001/container-before.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-002/run-001/container-before.json",
+      "bytes": 5702,
+      "sha256": "bf87c76cf022dfdf783db21fb2ebddbe05fdeb9704478b2e5ee8c25e091ed787"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-002/run-001/container-isolated.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-002/run-001/container-isolated.json",
+      "bytes": 5106,
+      "sha256": "6fdb4b7da79525647a9172b47c68059393ee154fe8775aa34018f9a04aaf7077"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-002/run-001/failure.stderr",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-002/run-001/failure.stderr",
+      "bytes": 50,
+      "sha256": "84f1c1170689cb6b6af792a98e625bfea8b61ecda97909390123b993956aa2ee"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-002/run-001/failure.stdout",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-002/run-001/failure.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-002/run-001/result.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-002/run-001/result.json",
+      "bytes": 781,
+      "sha256": "37c45b78b21a91a47b7eb7a43e695ce2f86adf61bbf7e8bb01eb0478019378e6"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-002/run-001/setup-controller.stderr",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-002/run-001/setup-controller.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-002/run-001/setup-controller.stdout",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-002/run-001/setup-controller.stdout",
+      "bytes": 304,
+      "sha256": "536e6c6d5ad567a2bd68cbd0b045ccd8e9ec57c1f6c1b2446b2a114d69dab0f0"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-002/run-001/setup.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-002/run-001/setup.json",
+      "bytes": 356,
+      "sha256": "a48420ad18a3113d96bac006e9694a668c2521afc3ec403653d89937cda613fd"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-002/run-001/setup.log",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-002/run-001/setup.log",
+      "bytes": 511,
+      "sha256": "402a61666fb734e49c228c5fab6ab0f1e7ade132a2270e150c76279c53e0751b"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-002/run-001/test-controller.stderr",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-002/run-001/test-controller.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-002/run-001/test-controller.stdout",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-002/run-001/test-controller.stdout",
+      "bytes": 359,
+      "sha256": "4380d69d2327c73221db209ac8e3edb7f09ce0204682275a9f80e301fb664fb6"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-002/run-001/test.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-002/run-001/test.json",
+      "bytes": 423,
+      "sha256": "a04b3d67f1aafa3d12a54335fc435f0a5ccf6d7bb969b89b2321764ba1909ace"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-002/run-001/test.log",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-002/run-001/test.log",
+      "bytes": 72,
+      "sha256": "f2ef3d819a7f578c3e82c4551013bd179aa1d690057f04fb7810772214b6836c"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-002/run-002/container-before.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-002/run-002/container-before.json",
+      "bytes": 5704,
+      "sha256": "757b1201eb0078088d5e73808908fb45a5ba155a8815c28233d8a7c8fd5fe056"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-002/run-002/container-isolated.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-002/run-002/container-isolated.json",
+      "bytes": 5108,
+      "sha256": "c4b2c4835adb9a369002b135136cccd4e35a046871a97e35f5c7449792e3af22"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-002/run-002/failure.stderr",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-002/run-002/failure.stderr",
+      "bytes": 50,
+      "sha256": "84f1c1170689cb6b6af792a98e625bfea8b61ecda97909390123b993956aa2ee"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-002/run-002/failure.stdout",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-002/run-002/failure.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-002/run-002/result.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-002/run-002/result.json",
+      "bytes": 783,
+      "sha256": "a0639877acd93303cdfcc9b9c899c5c097c638f534b56c3471bd9b83305920bb"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-002/run-002/setup-controller.stderr",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-002/run-002/setup-controller.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-002/run-002/setup-controller.stdout",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-002/run-002/setup-controller.stdout",
+      "bytes": 304,
+      "sha256": "93d9b7692a7a42215256ba77953052434890f8934eb53c45dfbcec09d1fcffeb"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-002/run-002/setup.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-002/run-002/setup.json",
+      "bytes": 356,
+      "sha256": "7d7fd76b44be6d4aa4fed21dc1ad1897663f91fbaead631ae1d8daba7bbaf3cc"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-002/run-002/setup.log",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-002/run-002/setup.log",
+      "bytes": 510,
+      "sha256": "24aadd3a8767f43eb5e63773d5069ade044473af8943d8e8a1a1c58539e4ae4a"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-002/run-002/test-controller.stderr",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-002/run-002/test-controller.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-002/run-002/test-controller.stdout",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-002/run-002/test-controller.stdout",
+      "bytes": 359,
+      "sha256": "fac204500c6314e8e19e9d4ec9f227c8b77b55f5fe4d64e7c3d977c3de7b8ad5"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-002/run-002/test.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-002/run-002/test.json",
+      "bytes": 423,
+      "sha256": "57984499b56b69c729f8961ce5c835202bf43462eb79a32c2ab553a72cf2c9e1"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-002/run-002/test.log",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-002/run-002/test.log",
+      "bytes": 72,
+      "sha256": "f2ef3d819a7f578c3e82c4551013bd179aa1d690057f04fb7810772214b6836c"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-002/timeout-control.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-002/timeout-control.json",
+      "bytes": 741,
+      "sha256": "244288d3f7154b177ff30806fc57066440bcbe9b00099370bf1cf57a309f39a4"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/input-receipt.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/input-receipt.json",
+      "bytes": 5566,
+      "sha256": "a0717476ec600cdec9d3c04fe39fb9a6d98f5465b3c5f291a2a80187fdb312cd"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/report.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/report.json",
+      "bytes": 1918,
+      "sha256": "59ec523c803cb2137b46419fc53e48f1ecf9cd057fb81b779c4f1da5b93423e8"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/run-001/container-before.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/run-001/container-before.json",
+      "bytes": 5709,
+      "sha256": "d227d0daccf3b9e7820a7023a6108719d232cbb62be4b751eae8e7104a732cd2"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/run-001/container-isolated.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/run-001/container-isolated.json",
+      "bytes": 5113,
+      "sha256": "86a72814b7360f290622efa3f43a13078c6184da4d251ed293ec56f9d82e8ce9"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/run-001/probe-after.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/run-001/probe-after.json",
+      "bytes": 2830,
+      "sha256": "091cac75c96bb23ac651b6f71b347d2de35f3574ca23b50df647efbde47d63bb"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/run-001/probe-before.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/run-001/probe-before.json",
+      "bytes": 2830,
+      "sha256": "091cac75c96bb23ac651b6f71b347d2de35f3574ca23b50df647efbde47d63bb"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/run-001/probes.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/run-001/probes.json",
+      "bytes": 6009,
+      "sha256": "a1cdc8c44ab767750d5ed99a88958a4d56cca57c6bfafa48c34ac3246c47d28d"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/run-001/result.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/run-001/result.json",
+      "bytes": 708,
+      "sha256": "124ef91225dc7e17d34e93e107ae8409e66d2eeeed37f7cc39803fa5d17f37c1"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/run-001/results.xml",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/run-001/results.xml",
+      "bytes": 5557,
+      "sha256": "d9c81f8da1d3d5f9bb4a98f28b7e9b2127da6b787bacd6f70d52dc8623b7e9d4"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/run-001/setup-controller.stderr",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/run-001/setup-controller.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/run-001/setup-controller.stdout",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/run-001/setup-controller.stdout",
+      "bytes": 304,
+      "sha256": "ddf4ca550ba5cc77749a6006dbc7f95ba67659cd6ba036daa52647413e49b554"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/run-001/setup.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/run-001/setup.json",
+      "bytes": 356,
+      "sha256": "cb92a200696812accd3c3c5f1077f015b9530283e1bbfa7d2468927f2512ab22"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/run-001/setup.log",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/run-001/setup.log",
+      "bytes": 511,
+      "sha256": "64099c8eb71fc14c3fd8bd64bc242422f5a7ec74da0a7f930a13214a2e6df0a5"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/run-001/test-controller.stderr",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/run-001/test-controller.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/run-001/test-controller.stdout",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/run-001/test-controller.stdout",
+      "bytes": 357,
+      "sha256": "c75ddfefee72118914e53616818fe57a5cc9756b6baaf19b2d2dbbbb7c105773"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/run-001/test.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/run-001/test.json",
+      "bytes": 421,
+      "sha256": "a5133469afaa74acd4c047506e0d22e36906052c95a6bcd65b94b2c919c542a5"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/run-001/test.log",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/run-001/test.log",
+      "bytes": 557,
+      "sha256": "3fb4d3e7be691cb7ddbd4a6d461f78dd4c94eb8330315131e4a8217d1eccad1c"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/run-002/container-before.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/run-002/container-before.json",
+      "bytes": 5709,
+      "sha256": "eff2a050c9a9187b03b9ca519a673eb171b6887f5e1e0a75b985ee9ee8d398c8"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/run-002/container-isolated.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/run-002/container-isolated.json",
+      "bytes": 5113,
+      "sha256": "8024dd069b669f9a5083e4a348e5f1c7e3bdf3f11cb081352cae4dd93d76b1db"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/run-002/probe-after.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/run-002/probe-after.json",
+      "bytes": 2830,
+      "sha256": "091cac75c96bb23ac651b6f71b347d2de35f3574ca23b50df647efbde47d63bb"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/run-002/probe-before.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/run-002/probe-before.json",
+      "bytes": 2830,
+      "sha256": "091cac75c96bb23ac651b6f71b347d2de35f3574ca23b50df647efbde47d63bb"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/run-002/probes.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/run-002/probes.json",
+      "bytes": 6009,
+      "sha256": "a1cdc8c44ab767750d5ed99a88958a4d56cca57c6bfafa48c34ac3246c47d28d"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/run-002/result.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/run-002/result.json",
+      "bytes": 708,
+      "sha256": "96d01e96b1210959f514d860a10c6e6bfb8309282caa2642b45291ba0dee733e"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/run-002/results.xml",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/run-002/results.xml",
+      "bytes": 5557,
+      "sha256": "b6465d5f88bbea8da30e96617c0f490a4e6a2096b2f1c90b16be8fb505b52dc4"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/run-002/setup-controller.stderr",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/run-002/setup-controller.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/run-002/setup-controller.stdout",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/run-002/setup-controller.stdout",
+      "bytes": 304,
+      "sha256": "0423226dc7c3c34ff9a17e27710b70a175996dfb3cd022c2eda7db7e9fb2483d"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/run-002/setup.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/run-002/setup.json",
+      "bytes": 356,
+      "sha256": "cf8fe10f2b63c4b37eca59fa4d23e1a9f3655634b9c1b1a463d6acd775c5de12"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/run-002/setup.log",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/run-002/setup.log",
+      "bytes": 510,
+      "sha256": "22739fdbac16ee375c253727b286adfd32ae14cc7b538a02826615cfb644b5fc"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/run-002/test-controller.stderr",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/run-002/test-controller.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/run-002/test-controller.stdout",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/run-002/test-controller.stdout",
+      "bytes": 358,
+      "sha256": "c4f0bc7fc73a2de2e35b6b9ee62c4ba5f791dbe9d8c50329945691a7eea93ad6"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/run-002/test.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/run-002/test.json",
+      "bytes": 422,
+      "sha256": "4ac826173b952f4568366cfd5b9d37b9f014858bc170832e63e5409de3b242d9"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/run-002/test.log",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/run-002/test.log",
+      "bytes": 557,
+      "sha256": "3fb4d3e7be691cb7ddbd4a6d461f78dd4c94eb8330315131e4a8217d1eccad1c"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-003/timeout-control.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-003/timeout-control.json",
+      "bytes": 740,
+      "sha256": "29a2313d44b11ac88a36324c40d133ffe86c4314d64e8a64bb4a95da21e16f9c"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/input-receipt.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/input-receipt.json",
+      "bytes": 8100,
+      "sha256": "9a8b56d68ca5d195c503609c8360b2ac90a25c49edbaf797c218e18f4d01de79"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/report.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/report.json",
+      "bytes": 1838,
+      "sha256": "0bcbb6f956aa42d53653c1ae4bcebc9945d28182ebae0f4287fe4252e5c6eb1c"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/container-after-test.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/container-after-test.json",
+      "bytes": 5113,
+      "sha256": "95ed92244b835996e606d612f9422ccb28cdd873b23714e9d404049a1de0e7e7"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/container-before-import.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/container-before-import.json",
+      "bytes": 5113,
+      "sha256": "95ed92244b835996e606d612f9422ccb28cdd873b23714e9d404049a1de0e7e7"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/container-before.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/container-before.json",
+      "bytes": 5709,
+      "sha256": "f9077a6c09e84fad3b8fbec4c055f9c16589fe800b3805a598117b040b0a262c"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/container-isolated.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/container-isolated.json",
+      "bytes": 5113,
+      "sha256": "95ed92244b835996e606d612f9422ccb28cdd873b23714e9d404049a1de0e7e7"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/network-after-test.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/network-after-test.json",
+      "bytes": 9719,
+      "sha256": "36fa4dd65ea9a728e901142bfd586a757d8804a05a31fffc23dbcfbef1159d2f"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/network-before-import.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/network-before-import.json",
+      "bytes": 9719,
+      "sha256": "36fa4dd65ea9a728e901142bfd586a757d8804a05a31fffc23dbcfbef1159d2f"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/probe-after.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/probe-after.json",
+      "bytes": 2830,
+      "sha256": "091cac75c96bb23ac651b6f71b347d2de35f3574ca23b50df647efbde47d63bb"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/probe-before.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/probe-before.json",
+      "bytes": 2830,
+      "sha256": "091cac75c96bb23ac651b6f71b347d2de35f3574ca23b50df647efbde47d63bb"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/probes.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/probes.json",
+      "bytes": 6009,
+      "sha256": "a1cdc8c44ab767750d5ed99a88958a4d56cca57c6bfafa48c34ac3246c47d28d"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/result.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/result.json",
+      "bytes": 668,
+      "sha256": "82e828b2ad3b443fb943ef6174c5eac162ac700aba07a3605411239caf74db31"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/results.xml",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/results.xml",
+      "bytes": 5557,
+      "sha256": "d6b255c7363d265e143594a8ce29fe90055a1354a5beac80a59aa2b5fd635955"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/setup-controller.stderr",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/setup-controller.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/setup-controller.stdout",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/setup-controller.stdout",
+      "bytes": 314,
+      "sha256": "0eeb23874cf7b5909a38da1fc7cca987b0e59a6f2f34aa378ccd8c23a205bdab"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/setup.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/setup.json",
+      "bytes": 366,
+      "sha256": "3e04f58145166d5b87ca8b4923e6194463e255264acd7fb808cc8c48b4622f66"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/setup.log",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/setup.log",
+      "bytes": 510,
+      "sha256": "ebe32a157b6d829fe423f9349576b37069250087b3e539db9ec4ff6446c2aeb4"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/test-controller.stderr",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/test-controller.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/test-controller.stdout",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/test-controller.stdout",
+      "bytes": 358,
+      "sha256": "71d0c022534ebb36ab2f1e4e5c298d84070cc7a6ed3731606fc617c70cf99509"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/test.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/test.json",
+      "bytes": 422,
+      "sha256": "0824acc5e6271808b3d5459340520124c172f245a1895dfc61f72c34d103a177"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/test.log",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-001/test.log",
+      "bytes": 557,
+      "sha256": "3fb4d3e7be691cb7ddbd4a6d461f78dd4c94eb8330315131e4a8217d1eccad1c"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/container-after-test.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/container-after-test.json",
+      "bytes": 5111,
+      "sha256": "bf542d08ea79a49792e4fc5ce49877fb4ee7984500a7717451bae6b6ef1a000f"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/container-before-import.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/container-before-import.json",
+      "bytes": 5111,
+      "sha256": "bf542d08ea79a49792e4fc5ce49877fb4ee7984500a7717451bae6b6ef1a000f"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/container-before.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/container-before.json",
+      "bytes": 5707,
+      "sha256": "d7b6203822136030802f273360f728e82bbb8175c99bb750b1153b2af156f6b7"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/container-isolated.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/container-isolated.json",
+      "bytes": 5111,
+      "sha256": "bf542d08ea79a49792e4fc5ce49877fb4ee7984500a7717451bae6b6ef1a000f"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/network-after-test.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/network-after-test.json",
+      "bytes": 9718,
+      "sha256": "f99d0a5bbd1cb4125d5ba24f4597db266704f1c9cb15a3d323b478a6a3f757a7"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/network-before-import.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/network-before-import.json",
+      "bytes": 9718,
+      "sha256": "f99d0a5bbd1cb4125d5ba24f4597db266704f1c9cb15a3d323b478a6a3f757a7"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/probe-after.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/probe-after.json",
+      "bytes": 2830,
+      "sha256": "091cac75c96bb23ac651b6f71b347d2de35f3574ca23b50df647efbde47d63bb"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/probe-before.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/probe-before.json",
+      "bytes": 2830,
+      "sha256": "091cac75c96bb23ac651b6f71b347d2de35f3574ca23b50df647efbde47d63bb"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/probes.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/probes.json",
+      "bytes": 6009,
+      "sha256": "a1cdc8c44ab767750d5ed99a88958a4d56cca57c6bfafa48c34ac3246c47d28d"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/result.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/result.json",
+      "bytes": 666,
+      "sha256": "f44cb8d544199c3b8a6fc6534ef8ff729b6443cecf3cac1d78133072e34d4fbb"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/results.xml",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/results.xml",
+      "bytes": 5557,
+      "sha256": "c3bb3933f4adf358e9f8873942ed8ce43b8683e5308a6fba46f9591bf070ff4f"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/setup-controller.stderr",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/setup-controller.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/setup-controller.stdout",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/setup-controller.stdout",
+      "bytes": 314,
+      "sha256": "545092fdfb310836f306f7e5ad9d2634c1a328b7ee9c6b7d54e6e247abb75d3f"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/setup.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/setup.json",
+      "bytes": 366,
+      "sha256": "75342d326b4e350a5feaa9fc6b916632e85f08bc44db1977d8cbca9ac0de821e"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/setup.log",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/setup.log",
+      "bytes": 510,
+      "sha256": "f37dff7a17dd897fe7aa07c2b13b6834e2cc83d116b111c6c42d98759310f096"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/test-controller.stderr",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/test-controller.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/test-controller.stdout",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/test-controller.stdout",
+      "bytes": 358,
+      "sha256": "c51233ef7b890c758e27030b24543c8a42080ad90f1d9a493e62bf98fecbe4f7"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/test.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/test.json",
+      "bytes": 422,
+      "sha256": "2a78383fb1f64f3a95b562e57e0197bd56bc36288cecc6ffc16e176c832f90bb"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/test.log",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/run-002/test.log",
+      "bytes": 557,
+      "sha256": "3fb4d3e7be691cb7ddbd4a6d461f78dd4c94eb8330315131e4a8217d1eccad1c"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/run-004/timeout-control.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/run-004/timeout-control.json",
+      "bytes": 741,
+      "sha256": "c582c1c5e0d2b00f804945561806bb6b2f99d8fc3b675c50dcd674968b90fdbe"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/runner.py",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/runner.py",
+      "bytes": 16977,
+      "sha256": "7a185972f657d3cfb51362a4b6fef691643b020bd59988dd0c3fd1a8947156fc"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/source-checkout.tar.gz",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/source-checkout.tar.gz",
+      "bytes": 223182,
+      "sha256": "65370ad28e7acbd7b5f4c2927840a99663b494c7cbd320337e6f7d3b1e5f05b7"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/validation.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/validation.json",
+      "bytes": 21919,
+      "sha256": "4156a896cdce0a4fc504e23bce27257a012713861c3622a2cc9aaa81de96b82a"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/validation/ci-scope.json",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/validation/ci-scope.json",
+      "bytes": 19773,
+      "sha256": "e99722dec0da3b6d0536a748404827d69694248164a80843e5b2cad3b91e8b50"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/validation/owned-container-inventory.txt",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/validation/owned-container-inventory.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/validation/r1-execution-focused.log.gz",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/validation/r1-execution-focused.log.gz",
+      "bytes": 52,
+      "sha256": "6565aeb06d8d71144832081b9fb847aeda42e57af3728152b69540a5399e3222"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/validation/r1-execution-full-pytest.log.gz",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/validation/r1-execution-full-pytest.log.gz",
+      "bytes": 1419,
+      "sha256": "c05e482f3f9de0a49b4d209e9e8a355d071f6fcc9350b136854c10187943e69b"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/validation/r1-execution-git-acquisition.log.gz",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/validation/r1-execution-git-acquisition.log.gz",
+      "bytes": 135,
+      "sha256": "03d0afd8392b029a74959c1bacece8ede5fb56d8cc8b6fd84f6313887868871e"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/validation/r1-execution-image-build-002.log.gz",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/validation/r1-execution-image-build-002.log.gz",
+      "bytes": 861,
+      "sha256": "bc5f81e74952f7c7683602624b642fbd4b0c3018ff12ad61d7aca63cbd574c32"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/validation/r1-execution-image-build-003.log.gz",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/validation/r1-execution-image-build-003.log.gz",
+      "bytes": 3568,
+      "sha256": "b0f6ff18d94ddc993465d43b9abf0dfe263aac3e4f4e94fe1fbb15db303b5eb4"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/validation/r1-execution-image-build.log.gz",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/validation/r1-execution-image-build.log.gz",
+      "bytes": 3108,
+      "sha256": "381e7119549ce139a2e69b9a2ec1e29d52664767d90f8c4fc2e766b085de31fa"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/validation/r1-execution-prepare-002.log.gz",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/validation/r1-execution-prepare-002.log.gz",
+      "bytes": 897,
+      "sha256": "9fef03981415aa31a6a4a3a215a932844caf6cddaadf7abab18ce44059f24fd9"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/validation/r1-execution-prepare-003.log.gz",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/validation/r1-execution-prepare-003.log.gz",
+      "bytes": 240,
+      "sha256": "e43adbab9af0a99cda3d6280c866e1428be9439e707567c3a00da4d56c595667"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/validation/r1-execution-prepare.log.gz",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/validation/r1-execution-prepare.log.gz",
+      "bytes": 884,
+      "sha256": "b2e017e8c8b76bc4eec7e1c33e77052a3cbdeb397c3883579ddc9fca8700502d"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/validation/r1-execution-python-image-pull.log.gz",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/validation/r1-execution-python-image-pull.log.gz",
+      "bytes": 282,
+      "sha256": "7e0f7a8adab0e13264b45103bdbbc7c0ee2a24463c5582774a8b11119caeedec"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/validation/r1-execution-run-001.log.gz",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/validation/r1-execution-run-001.log.gz",
+      "bytes": 678,
+      "sha256": "6cd9d1c1232dcd3724e0f04970889f59581f2eda0a7d25e0b737a269865939c7"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/validation/r1-execution-run-002.log.gz",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/validation/r1-execution-run-002.log.gz",
+      "bytes": 651,
+      "sha256": "85e12aa737ef59d889193e06ac41b28a845d748e66f1fd48b47424b220458899"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/validation/r1-execution-run-003.log.gz",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/validation/r1-execution-run-003.log.gz",
+      "bytes": 618,
+      "sha256": "86cbbbe1bb9b2b3de1ebe62333c6111212ca78df51f7f3ad0c0ae440f467cd39"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/validation/r1-execution-run-004.log.gz",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/validation/r1-execution-run-004.log.gz",
+      "bytes": 608,
+      "sha256": "40e27dd04c7efe713d5114111cc87a85aa4a3a5840f99cefb38f07d2ea83e0d4"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/validation/ruff-check.log.gz",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/validation/ruff-check.log.gz",
+      "bytes": 39,
+      "sha256": "7162964741fdb747d7ab27df2d1a1b64fa0636c4b7fe50ea8493de14cb62cbd4"
+    },
+    {
+      "path": "digest-exchange-r1-iniconfig-execution-20261029/validation/ruff-format.log.gz",
+      "sourcePath": "benchmarks/head-to-head/digest-exchange-r1-iniconfig-execution-20261029/validation/ruff-format.log.gz",
+      "bytes": 48,
+      "sha256": "43e61bacfc05ae35059a9b61b194101ebd2e3aa67b4587d1b27b1a6cf93f1b7a"
+    },
+    {
+      "path": "repodigest-demand-reuse-20261029/consumer-006-p-limit-repodigest/source-responses/sindresorhus/p-limit/.npmrc",
+      "sourcePath": "benchmarks/head-to-head/repodigest-demand-reuse-20261029/consumer-006-p-limit-repodigest/source-responses/sindresorhus/p-limit/.npmrc",
+      "bytes": 19,
+      "sha256": "f3fc23758ab91be5f94a8c5eaff433d1ccd6a206cf1d381d332eb63716009337"
+    },
+    {
+      "path": "repodigest-discovery100-comparison-20261030/acquisition/microsoft__markitdown/commit.json",
+      "sourcePath": "benchmarks/head-to-head/repodigest-discovery100-comparison-20261030/acquisition/microsoft__markitdown/commit.json",
+      "bytes": 11704,
+      "sha256": "dcfff61d5e9b947a9c67b8ce2da1756cf821c67149e34ef1fb16f2cf764cff2e"
+    },
+    {
+      "path": "repodigest-discovery100-comparison-20261030/acquisition/microsoft__markitdown/files/README.md",
+      "sourcePath": "benchmarks/head-to-head/repodigest-discovery100-comparison-20261030/acquisition/microsoft__markitdown/files/README.md",
+      "bytes": 21078,
+      "sha256": "cd5ba48d320fedd4f5f2845a97968491b557d39d8afe264eb423d5c6906adf09"
+    },
+    {
+      "path": "repodigest-discovery100-comparison-20261030/acquisition/microsoft__markitdown/files/packages/markitdown-mcp/pyproject.toml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-discovery100-comparison-20261030/acquisition/microsoft__markitdown/files/packages/markitdown-mcp/pyproject.toml",
+      "bytes": 1784,
+      "sha256": "b94d776665df2adf2ae1367d1d023a296ad2af72f14255c106f110d9b1e7f4a8"
+    },
+    {
+      "path": "repodigest-discovery100-comparison-20261030/acquisition/microsoft__markitdown/files/packages/markitdown-ocr/pyproject.toml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-discovery100-comparison-20261030/acquisition/microsoft__markitdown/files/packages/markitdown-ocr/pyproject.toml",
+      "bytes": 1724,
+      "sha256": "3f19e8b5bd1ddbcf4054b609791afaaa69af202fb142a5ad5cc93eb9ea21a75b"
+    },
+    {
+      "path": "repodigest-discovery100-comparison-20261030/acquisition/microsoft__markitdown/files/packages/markitdown-sample-plugin/pyproject.toml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-discovery100-comparison-20261030/acquisition/microsoft__markitdown/files/packages/markitdown-sample-plugin/pyproject.toml",
+      "bytes": 1972,
+      "sha256": "78df414f3f0464ffcd58d91f574a49e6b66dfacbdba09122e09e11ec9ea8803a"
+    },
+    {
+      "path": "repodigest-discovery100-comparison-20261030/acquisition/microsoft__markitdown/files/packages/markitdown/pyproject.toml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-discovery100-comparison-20261030/acquisition/microsoft__markitdown/files/packages/markitdown/pyproject.toml",
+      "bytes": 2980,
+      "sha256": "6b353e793a4277ab121c6c4433b181882bef5dcdad3fc30e65878bd4dd2041f5"
+    },
+    {
+      "path": "repodigest-discovery100-comparison-20261030/acquisition/microsoft__markitdown/snapshot.json",
+      "sourcePath": "benchmarks/head-to-head/repodigest-discovery100-comparison-20261030/acquisition/microsoft__markitdown/snapshot.json",
+      "bytes": 1380,
+      "sha256": "b20750b233d46cdd7cd63611e0d6d4dfaea885ce42c1f78816ea61f3eda7b737"
+    },
+    {
+      "path": "repodigest-discovery100-comparison-20261030/acquisition/microsoft__markitdown/tree.json.gz",
+      "sourcePath": "benchmarks/head-to-head/repodigest-discovery100-comparison-20261030/acquisition/microsoft__markitdown/tree.json.gz",
+      "bytes": 9682,
+      "sha256": "354568268ab0ddd78360dff2521f354790d2544498d2ce728346bdd168faa0a4"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/agronholm__exceptiongroup/commit.json",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/agronholm__exceptiongroup/commit.json",
+      "bytes": 13029,
+      "sha256": "27f286d40623fbec16bb126ac06f4fe778c485aec9e3dd5383ce1ec45e200816"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/agronholm__exceptiongroup/files/.github/workflows/publish.yml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/agronholm__exceptiongroup/files/.github/workflows/publish.yml",
+      "bytes": 1407,
+      "sha256": "4a94f274799b58a2821b2a978c09e577ee6ea57a1d70330451e4af56427a9548"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/agronholm__exceptiongroup/files/.github/workflows/test.yml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/agronholm__exceptiongroup/files/.github/workflows/test.yml",
+      "bytes": 1812,
+      "sha256": "c7078f0dbed56c1af5f6463507d9dc12dae8d516c0d9be17230e75621daf9360"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/agronholm__exceptiongroup/files/README.rst",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/agronholm__exceptiongroup/files/README.rst",
+      "bytes": 6228,
+      "sha256": "cddd03478bf8163b7d3e4f252ab3cc1901a422c75a687ab45a8888a37a6deb86"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/agronholm__exceptiongroup/files/pyproject.toml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/agronholm__exceptiongroup/files/pyproject.toml",
+      "bytes": 2980,
+      "sha256": "ebbcb2cfeb018d5053d2f53fc365e65d7bd28595e840c7685e82e84d504c2186"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/agronholm__exceptiongroup/snapshot.json",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/agronholm__exceptiongroup/snapshot.json",
+      "bytes": 1130,
+      "sha256": "fb3a20aa25a153ecababfb268ec854a3577f9a0b3a32f8b806ae8c2cbcf13710"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/agronholm__exceptiongroup/tree.json",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/agronholm__exceptiongroup/tree.json",
+      "bytes": 8668,
+      "sha256": "02682ce5876506ed453b6b396027b11cd16873f230ed4eb8521afa6f3abfa40b"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/commit.json",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/commit.json",
+      "bytes": 31624,
+      "sha256": "5bc8fd835ea696ee772eacf2870ae06b16c75588762b70cc29bb95fdb0d455b4"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/.github/workflows/build-wheels.yml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/.github/workflows/build-wheels.yml",
+      "bytes": 8254,
+      "sha256": "ab606a675dd6c6f9b0ab1f554d1155fe6fb35a635cb1f1f065c1480b1ce10e5b"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/.github/workflows/clippy.yml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/.github/workflows/clippy.yml",
+      "bytes": 337,
+      "sha256": "3cb19234d707b27f6a406c2fa030138e68d4341cb2fb5a5bafc91f6688e46276"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/.github/workflows/playground.yml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/.github/workflows/playground.yml",
+      "bytes": 1895,
+      "sha256": "1fbf431ed518aeb4e03ab1414e3522688f2ab3be69983fdebc5ef561908f5371"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/.github/workflows/publish-crates.yml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/.github/workflows/publish-crates.yml",
+      "bytes": 576,
+      "sha256": "8a6f042f8067a897b72d62215f66f87aaaf75e178a4513b2a8ccb990f37a2252"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/.github/workflows/publish-npm.yml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/.github/workflows/publish-npm.yml",
+      "bytes": 1266,
+      "sha256": "6481c857bbf20efa60d262dab9431075afdbb6849ffd2d86c932f73573e1bd39"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/.github/workflows/pyright.yml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/.github/workflows/pyright.yml",
+      "bytes": 295,
+      "sha256": "b44dbcd1a357f6fd05048db351788d40224c8d68b1254a48e6929c6dc51094cd"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/.github/workflows/release.yml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/.github/workflows/release.yml",
+      "bytes": 13804,
+      "sha256": "ec69bb1d4838483ae9d116f0d81f3e183988e5f8fd3736c7c93dd575ad61fdb6"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/.github/workflows/rustfmt.yml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/.github/workflows/rustfmt.yml",
+      "bytes": 347,
+      "sha256": "6f8612a080738fb6e3602d0457a24efed09a3de03e475da85df693c75a44431a"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/.github/workflows/tests.yml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/.github/workflows/tests.yml",
+      "bytes": 5723,
+      "sha256": "dbe777389f8c19542b11cafdfd14c53d94ba95a34976a9bc8e6dd7d003e6fc3e"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/CONTRIBUTING.md",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/CONTRIBUTING.md",
+      "bytes": 3607,
+      "sha256": "36fbfd1ac9e7ff97b61de2d4dddd1285ef334dabde6d69eb151a2cf9208090f3"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/Cargo.toml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/Cargo.toml",
+      "bytes": 332,
+      "sha256": "2c8aac2f9ccba2799fe5b598931ee6b6d50d46633e712df95383e1c5fc95a87d"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/Makefile",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/Makefile",
+      "bytes": 3325,
+      "sha256": "f84511652147b0d0fd99d07a619e99cca858eef43335416b2a4bf056a692378e"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/README.md",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/README.md",
+      "bytes": 14037,
+      "sha256": "c6598c068cf372f6bae772907f636b8c19c562d038e0be8497006166429b05f6"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/benchmarks/Cargo.toml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/benchmarks/Cargo.toml",
+      "bytes": 641,
+      "sha256": "c6f2aa269f29b2e1f21701179e1a060ec57cd1cdc9ef58bd8288235208ed471e"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/actix-web-demo/Cargo.toml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/actix-web-demo/Cargo.toml",
+      "bytes": 260,
+      "sha256": "76787f4467fb07952b9c43574c064ac9c583b0443a72c47162c91aa4d562615d"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/autoreload/Cargo.toml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/autoreload/Cargo.toml",
+      "bytes": 236,
+      "sha256": "d843fb7a4f63821d98ef533d3f3b9b2a25d8b7726966ae643c2bd2e382b2ae1e"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/build-script/Cargo.toml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/build-script/Cargo.toml",
+      "bytes": 206,
+      "sha256": "aee269b23fe2195e13ccb0f2bbd04b928aac8a5dfc734add8f7e05b4aa73d839"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/call-block-function/Cargo.toml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/call-block-function/Cargo.toml",
+      "bytes": 245,
+      "sha256": "ac2a623f62b6224b4d6d53db1b5c3adfff8f00fe1f9946122cf78f78a24ea772"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/captured-state/Cargo.toml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/captured-state/Cargo.toml",
+      "bytes": 259,
+      "sha256": "eb86e2d5917c154518bc5234e2bcddae6129525edd392b9e97b1ae4ab28a9681"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/custom-error/Cargo.toml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/custom-error/Cargo.toml",
+      "bytes": 238,
+      "sha256": "c43b8d9e286b99b130c02633502341ee65100a2b47924151bb5f82925786119a"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/custom-loader/Cargo.toml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/custom-loader/Cargo.toml",
+      "bytes": 239,
+      "sha256": "647d2b73547557b0dbec382e1326d0fcf2a82894b82dfacfe5017037477cf21e"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/debug/Cargo.toml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/debug/Cargo.toml",
+      "bytes": 231,
+      "sha256": "fff073e9f07d3aac90a713cb60dbf6ffa4c40c4110f8611d42e78ed61a9ed0d6"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/deserialize/Cargo.toml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/deserialize/Cargo.toml",
+      "bytes": 314,
+      "sha256": "1e6f357dc7f4b148248b5e717b2cfe930c846a5d1298dc4e016c06fb10acca35"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/dsl/Cargo.toml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/dsl/Cargo.toml",
+      "bytes": 248,
+      "sha256": "8a000d37179f29961e85419a3848b74433ee98952e2359dd7b9d5e7933fe83fe"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/dynamic-context/Cargo.toml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/dynamic-context/Cargo.toml",
+      "bytes": 241,
+      "sha256": "33abfc0fb599d56bc301c72de86041040ba145e92aada37c4ca2494ac739488a"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/dynamic-objects/Cargo.toml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/dynamic-objects/Cargo.toml",
+      "bytes": 241,
+      "sha256": "b4ac7e0f4711374b89c046ce19c7c9bfa4abef04554c87623eaa9ae55766bd86"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/embedding/Cargo.toml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/embedding/Cargo.toml",
+      "bytes": 388,
+      "sha256": "dcc0916ef1f58b7c55387dccb845375197f57d12e85fe92d10a9967777b0ef98"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/error/Cargo.toml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/error/Cargo.toml",
+      "bytes": 231,
+      "sha256": "77f766e47a7f56345470552e407b83410ca9e8f39b39c2511ef7f5c107d6bb96"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/expr/Cargo.toml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/expr/Cargo.toml",
+      "bytes": 274,
+      "sha256": "fc1c4d1dcbfbb0071c9d77d8796bba58511ca00c3f1a3116e28a0f02f6302ea8"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/filters/Cargo.toml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/filters/Cargo.toml",
+      "bytes": 233,
+      "sha256": "f98a421651f27117ecc0ce7cbc9a119b90b756e565153f28c45882bfc51ddfe3"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/function-using-async/Cargo.toml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/function-using-async/Cargo.toml",
+      "bytes": 246,
+      "sha256": "59caa6fa82460617d7ce709c2291791c7413804c754913bc4fb96cf8ec9a1dc2"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/generate-yaml/Cargo.toml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/generate-yaml/Cargo.toml",
+      "bytes": 260,
+      "sha256": "362167f202925e1791039d6b17707c5334e1c8970dce3d12b6667dbe1470bdb8"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/hello/Cargo.toml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/hello/Cargo.toml",
+      "bytes": 231,
+      "sha256": "799fbc240d6858d818b851457e2f5bdb77ef977cf0da404e7f627749b40f3796"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/inheritance/Cargo.toml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/inheritance/Cargo.toml",
+      "bytes": 336,
+      "sha256": "48af9dce8250244a432dbff004795a120a200afd6b9ff292ad0c7e92f2390061"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/invalid-value/Cargo.toml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/invalid-value/Cargo.toml",
+      "bytes": 316,
+      "sha256": "9ee110bab7d8e42d502f3bf499fafa95835b6bc1d0f4d46cc265c5a943e7ecfa"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/line-statements/Cargo.toml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/files/examples/line-statements/Cargo.toml",
+      "bytes": 241,
+      "sha256": "1f59cb3546321b69a93bb50422d43bfe25f88124b137083e0099016231eeb425"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/snapshot.json",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/snapshot.json",
+      "bytes": 6752,
+      "sha256": "8a8500f071897be8228db3d20e7010f01f7ca9fb44f18d4bf51dda7d570b274a"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/tree.json",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/mitsuhiko__minijinja/tree.json",
+      "bytes": 338955,
+      "sha256": "82205b55da0250eb92ee072c9d5f03cfa9b33fcbb916ad5909090d99a63228ab"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/python-attrs__cattrs/commit.json",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/python-attrs__cattrs/commit.json",
+      "bytes": 4563,
+      "sha256": "e10e08bcfa1c21a15c8849e6122704653c170048f19a354bb30767b685969aa6"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/python-attrs__cattrs/files/.github/workflows/codspeed.yml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/python-attrs__cattrs/files/.github/workflows/codspeed.yml",
+      "bytes": 1044,
+      "sha256": "d2562d2a27015b46076f9a5f5a3750904666dcdac678afd06d6a7ac5e8287341"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/python-attrs__cattrs/files/.github/workflows/main.yml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/python-attrs__cattrs/files/.github/workflows/main.yml",
+      "bytes": 3668,
+      "sha256": "f4da00036f0579a76b0a1855fe1ab7b4258d7d76c2abf6fe127864ce6ee5a901"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/python-attrs__cattrs/files/.github/workflows/pypi-package.yml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/python-attrs__cattrs/files/.github/workflows/pypi-package.yml",
+      "bytes": 1934,
+      "sha256": "016d8b211b7a8f4416abca33e8eccaceddf67d98a4dc380f93e0d96a0b25a1bb"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/python-attrs__cattrs/files/.github/workflows/zizmor.yml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/python-attrs__cattrs/files/.github/workflows/zizmor.yml",
+      "bytes": 1031,
+      "sha256": "66db51bf2bc1af5d9b14789986ad8acdfb2914cfbf9c38c702a9889165209b79"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/python-attrs__cattrs/files/CONTRIBUTING.md",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/python-attrs__cattrs/files/CONTRIBUTING.md",
+      "bytes": 4191,
+      "sha256": "bf6adf4057f69b8554862d8cae230d407eee71eb4e1be69e9c27119a948a7127"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/python-attrs__cattrs/files/Justfile",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/python-attrs__cattrs/files/Justfile",
+      "bytes": 2004,
+      "sha256": "37146fe4e92d95d463ebadd82668a7208944866478e99f8039eb9954c86bb931"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/python-attrs__cattrs/files/README.md",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/python-attrs__cattrs/files/README.md",
+      "bytes": 6429,
+      "sha256": "d7e1ebd5bc85ef7ede6a05a3422006bad2a45bffdbc615d9053039b1e6e410f7"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/python-attrs__cattrs/files/docs/contributing.md",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/python-attrs__cattrs/files/docs/contributing.md",
+      "bytes": 37,
+      "sha256": "355d0b7f43cfb49bac71b5612a37e1ecfeaad0cd7893c3e9bd219ac76bad28a6"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/python-attrs__cattrs/files/pyproject.toml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/python-attrs__cattrs/files/pyproject.toml",
+      "bytes": 4742,
+      "sha256": "1ca8056b683c12deca03d07c1fd8e55d9407432d8cfb841ae29b649d8e6230bb"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/python-attrs__cattrs/files/uv.lock",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/python-attrs__cattrs/files/uv.lock",
+      "bytes": 409679,
+      "sha256": "266b2931220b5d50538ac6fdf5ae8b7e086f38e5c6d9c9cceed8a18b75c2c812"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/python-attrs__cattrs/snapshot.json",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/python-attrs__cattrs/snapshot.json",
+      "bytes": 2121,
+      "sha256": "41ec678a2d433e75319a365da56f14c90a63b05bfec6df22d436ae5b19560dee"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/python-attrs__cattrs/tree.json",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/python-attrs__cattrs/tree.json",
+      "bytes": 45668,
+      "sha256": "4ef958b2e5ea62bd78873b149b7f0df40c1ec6cebf0b01e23c2489d9ee1db586"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/sindresorhus__p-limit/commit.json",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/sindresorhus__p-limit/commit.json",
+      "bytes": 4304,
+      "sha256": "c6560d30a9a295c2d6951b4f00d9aae4f219d0c38bff08534c600b0cd2b21a4e"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/sindresorhus__p-limit/files/.github/workflows/main.yml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/sindresorhus__p-limit/files/.github/workflows/main.yml",
+      "bytes": 436,
+      "sha256": "b15324485a2f3ff4a3295a59bdc536c4e16d696594b0af7428c5d19731a5c323"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/sindresorhus__p-limit/files/package.json",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/sindresorhus__p-limit/files/package.json",
+      "bytes": 1055,
+      "sha256": "daa6b0d168d7197eccbfef1c678e8f00b79d063129bf48f4ee2db38dc605ca7f"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/sindresorhus__p-limit/files/readme.md",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/sindresorhus__p-limit/files/readme.md",
+      "bytes": 5418,
+      "sha256": "dbe29b10fca55743e35fe2b3d768024cd135d1bac4bd60aee566a5e1f3af294f"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/sindresorhus__p-limit/snapshot.json",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/sindresorhus__p-limit/snapshot.json",
+      "bytes": 946,
+      "sha256": "da6c05192161c2cf873c32750866c0074c248186e34cd75d93aa3d39e9d0079f"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/acquisition-001/sindresorhus__p-limit/tree.json",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/acquisition-001/sindresorhus__p-limit/tree.json",
+      "bytes": 4401,
+      "sha256": "d30d40ac79a25648110895196f136f905f956d576a659bd363898f20f5415ec4"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/consumer-004-minijinja-source-only/source-responses/mitsuhiko/minijinja/minijinja/Cargo.toml",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/consumer-004-minijinja-source-only/source-responses/mitsuhiko/minijinja/minijinja/Cargo.toml",
+      "bytes": 2050,
+      "sha256": "5ef09ff055a6647771d125b9b8912e7a6340cc424e37542d2558e640cb6cef03"
+    },
+    {
+      "path": "repodigest-multirepo-service-20261029/consumer-004-minijinja-source-only/source-responses/mitsuhiko/minijinja/scripts/use-msrv-lock.sh",
+      "sourcePath": "benchmarks/head-to-head/repodigest-multirepo-service-20261029/consumer-004-minijinja-source-only/source-responses/mitsuhiko/minijinja/scripts/use-msrv-lock.sh",
+      "bytes": 996,
+      "sha256": "5b34dc60b2a58ab776b3d3b6f25f905c6c8b258d893d086151a2114736b3b4dd"
+    },
+    {
+      "path": "repodigest-source-cache-20261030/consumer-004-exceptiongroup-source-cache/events.jsonl",
+      "sourcePath": "benchmarks/head-to-head/repodigest-source-cache-20261030/consumer-004-exceptiongroup-source-cache/events.jsonl",
+      "bytes": 26934,
+      "sha256": "c010ab47e8ee82a64a8b32b452e6cf3c360276724021b00412a2c9a1c9dda834"
+    },
+    {
+      "path": "repodigest-source-cache-20261030/consumer-004-exceptiongroup-source-cache/source-responses/agronholm/exceptiongroup/tests/check_types.py",
+      "sourcePath": "benchmarks/head-to-head/repodigest-source-cache-20261030/consumer-004-exceptiongroup-source-cache/source-responses/agronholm/exceptiongroup/tests/check_types.py",
+      "bytes": 1377,
+      "sha256": "5ad640629d648720543ef03feadc2613833de81728a16dfc2ac8d1edddd46e79"
+    },
+    {
+      "path": "repodigest-source-cache-20261030/consumer-004-exceptiongroup-source-cache/traffic.json",
+      "sourcePath": "benchmarks/head-to-head/repodigest-source-cache-20261030/consumer-004-exceptiongroup-source-cache/traffic.json",
+      "bytes": 2326,
+      "sha256": "bdcf2aa93a1261e8732f750ca9c6a543a53a83fe76b8e5ce0849609f1645489f"
+    }
+  ]
+}

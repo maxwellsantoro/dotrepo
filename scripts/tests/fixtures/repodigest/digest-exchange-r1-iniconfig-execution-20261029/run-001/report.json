@@ -1,0 +1,56 @@
+{
+  "assignedRuns": 2,
+  "completedRuns": 2,
+  "passedRuns": 0,
+  "wallSeconds": 2.598748166114092,
+  "runs": [
+    {
+      "repeat": 0,
+      "containerId": "a5da95d6ee96eb466a7a9bd0970a46643a8ef70ee352a67ccf952ee29ab0260a",
+      "pass": false,
+      "failure": "CalledProcessError: Command '['docker', 'exec', '-i', 'a5da95d6ee96eb466a7a9bd0970a46643a8ef70ee352a67ccf952ee29ab0260a', '/bin/tar', '--extract', '--file=-', '--directory=/work', '--no-same-owner']' returned non-zero exit status 2.",
+      "teardown": {
+        "containerId": "a5da95d6ee96eb466a7a9bd0970a46643a8ef70ee352a67ccf952ee29ab0260a",
+        "terminalState": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 137,
+          "Error": "",
+          "StartedAt": "2026-10-29T20:00:49.999649428Z",
+          "FinishedAt": "2026-10-29T20:00:50.248021595Z"
+        },
+        "removed": true
+      }
+    },
+    {
+      "repeat": 1,
+      "containerId": "a150ef0756b52bf9d9297bd77adaca39369167f094a3fc8c9f50c56daa59f286",
+      "pass": false,
+      "failure": "CalledProcessError: Command '['docker', 'exec', '-i', 'a150ef0756b52bf9d9297bd77adaca39369167f094a3fc8c9f50c56daa59f286', '/bin/tar', '--extract', '--file=-', '--directory=/work', '--no-same-owner']' returned non-zero exit status 2.",
+      "teardown": {
+        "containerId": "a150ef0756b52bf9d9297bd77adaca39369167f094a3fc8c9f50c56daa59f286",
+        "terminalState": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 137,
+          "Error": "",
+          "StartedAt": "2026-10-29T20:00:50.51696447Z",
+          "FinishedAt": "2026-10-29T20:00:50.774797095Z"
+        },
+        "removed": true
+      }
+    }
+  ],
+  "claim": "Observed synthesized recipe on pinned Linux arm64 environment; no public instruction qualification or task-benefit claim.",
+  "outcome": "no-go"
+}

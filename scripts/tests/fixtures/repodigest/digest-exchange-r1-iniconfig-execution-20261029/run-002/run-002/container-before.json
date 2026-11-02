@@ -1,0 +1,210 @@
+{
+  "Id": "14fc23330694d25396ad69884b974cc8157edc3dd208b6dc4324f1ac4b3f1939",
+  "Created": "2026-10-29T20:02:29.427892293Z",
+  "Path": "/bin/sleep",
+  "Args": [
+    "infinity"
+  ],
+  "State": {
+    "Status": "running",
+    "Running": true,
+    "Paused": false,
+    "Restarting": false,
+    "OOMKilled": false,
+    "Dead": false,
+    "Pid": 54544,
+    "ExitCode": 0,
+    "Error": "",
+    "StartedAt": "2026-10-29T20:02:29.514785419Z",
+    "FinishedAt": "0001-01-01T00:00:00Z"
+  },
+  "Image": "sha256:ecd4221f3d6715ff954a9cc0dca002bf8a67d3b162664a2876b3f7d72d9e99c6",
+  "ResolvConfPath": "/var/lib/docker/containers/14fc23330694d25396ad69884b974cc8157edc3dd208b6dc4324f1ac4b3f1939/resolv.conf",
+  "HostnamePath": "/var/lib/docker/containers/14fc23330694d25396ad69884b974cc8157edc3dd208b6dc4324f1ac4b3f1939/hostname",
+  "HostsPath": "/var/lib/docker/containers/14fc23330694d25396ad69884b974cc8157edc3dd208b6dc4324f1ac4b3f1939/hosts",
+  "LogPath": "",
+  "Name": "/digest-exchange-iniconfig-5c874a0ca918",
+  "RestartCount": 0,
+  "Driver": "overlayfs",
+  "Platform": "linux",
+  "MountLabel": "",
+  "ProcessLabel": "",
+  "AppArmorProfile": "",
+  "ExecIDs": null,
+  "HostConfig": {
+    "Binds": null,
+    "ContainerIDFile": "",
+    "LogConfig": {
+      "Type": "none",
+      "Config": {}
+    },
+    "NetworkMode": "bridge",
+    "PortBindings": {},
+    "RestartPolicy": {
+      "Name": "no",
+      "MaximumRetryCount": 0
+    },
+    "AutoRemove": false,
+    "VolumeDriver": "",
+    "VolumesFrom": null,
+    "ConsoleSize": [
+      0,
+      0
+    ],
+    "CapAdd": null,
+    "CapDrop": [
+      "ALL"
+    ],
+    "CgroupnsMode": "private",
+    "Dns": null,
+    "DnsOptions": [],
+    "DnsSearch": [],
+    "ExtraHosts": null,
+    "GroupAdd": null,
+    "IpcMode": "private",
+    "Cgroup": "",
+    "Links": null,
+    "OomScoreAdj": 0,
+    "PidMode": "",
+    "Privileged": false,
+    "PublishAllPorts": false,
+    "ReadonlyRootfs": true,
+    "SecurityOpt": [
+      "no-new-privileges"
+    ],
+    "Tmpfs": {
+      "/tmp": "rw,nosuid,noexec,size=64m,uid=1000,gid=1000,mode=0700",
+      "/work": "rw,nosuid,size=384m,uid=1000,gid=1000,mode=0700"
+    },
+    "UTSMode": "",
+    "UsernsMode": "",
+    "ShmSize": 67108864,
+    "Runtime": "runc",
+    "Isolation": "",
+    "CpuShares": 0,
+    "Memory": 805306368,
+    "NanoCpus": 1000000000,
+    "CgroupParent": "",
+    "BlkioWeight": 0,
+    "BlkioWeightDevice": [],
+    "BlkioDeviceReadBps": [],
+    "BlkioDeviceWriteBps": [],
+    "BlkioDeviceReadIOps": [],
+    "BlkioDeviceWriteIOps": [],
+    "CpuPeriod": 0,
+    "CpuQuota": 0,
+    "CpuRealtimePeriod": 0,
+    "CpuRealtimeRuntime": 0,
+    "CpusetCpus": "",
+    "CpusetMems": "",
+    "Devices": [],
+    "DeviceCgroupRules": null,
+    "DeviceRequests": null,
+    "MemoryReservation": 0,
+    "MemorySwap": 805306368,
+    "MemorySwappiness": null,
+    "OomKillDisable": null,
+    "PidsLimit": 64,
+    "Ulimits": null,
+    "CpuCount": 0,
+    "CpuPercent": 0,
+    "IOMaximumIOps": 0,
+    "IOMaximumBandwidth": 0,
+    "MaskedPaths": [
+      "/proc/acpi",
+      "/proc/asound",
+      "/proc/interrupts",
+      "/proc/kcore",
+      "/proc/keys",
+      "/proc/latency_stats",
+      "/proc/sched_debug",
+      "/proc/scsi",
+      "/proc/timer_list",
+      "/proc/timer_stats",
+      "/sys/devices/virtual/powercap",
+      "/sys/firmware"
+    ],
+    "ReadonlyPaths": [
+      "/proc/bus",
+      "/proc/fs",
+      "/proc/irq",
+      "/proc/sys",
+      "/proc/sysrq-trigger"
+    ]
+  },
+  "Storage": {
+    "RootFS": {
+      "Snapshot": {
+        "Name": "overlayfs"
+      }
+    }
+  },
+  "Mounts": [],
+  "Config": {
+    "Hostname": "14fc23330694",
+    "Domainname": "",
+    "User": "1000:1000",
+    "AttachStdin": false,
+    "AttachStdout": true,
+    "AttachStderr": true,
+    "Tty": false,
+    "OpenStdin": false,
+    "StdinOnce": false,
+    "Env": [
+      "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305",
+      "PYTHON_VERSION=3.12.16",
+      "PYTHON_SHA256=b5796915dc45ff745cfb4e990a7e7c93d6f546328a102ce31448d69ebc37575c",
+      "HOME=/work",
+      "UV_CACHE_DIR=/work/uv-cache",
+      "UV_PYTHON_DOWNLOADS=never",
+      "UV_NO_CONFIG=1",
+      "PYTHONDONTWRITEBYTECODE=1"
+    ],
+    "Cmd": [
+      "/bin/sleep",
+      "infinity"
+    ],
+    "Image": "digest-exchange-iniconfig-execution@sha256:ecd4221f3d6715ff954a9cc0dca002bf8a67d3b162664a2876b3f7d72d9e99c6",
+    "Volumes": null,
+    "WorkingDir": "/work",
+    "Entrypoint": null,
+    "Labels": {
+      "digest-exchange.experiment": "digest-exchange-r1-iniconfig-execution-20261029"
+    }
+  },
+  "NetworkSettings": {
+    "SandboxID": "aff80192f925cc0a9f076594b626e1c871f8e0c78a40a4aac4c3197d695b2aa9",
+    "SandboxKey": "/var/run/docker/netns/aff80192f925",
+    "Ports": {},
+    "Networks": {
+      "bridge": {
+        "IPAMConfig": null,
+        "Links": null,
+        "Aliases": null,
+        "DriverOpts": null,
+        "GwPriority": 0,
+        "NetworkID": "76fd9bb84e3442bfd235ae5be917e4968dfbd6dc1ca2c8d5791c9122bb08c612",
+        "EndpointID": "e0279fdf1789cb924cdbca962fca32070c3bcb27b72ecde5f0c195efb6b71ffb",
+        "Gateway": "172.17.0.1",
+        "IPAddress": "172.17.0.2",
+        "MacAddress": "5e:f1:9b:fc:e2:af",
+        "IPPrefixLen": 16,
+        "IPv6Gateway": "",
+        "GlobalIPv6Address": "",
+        "GlobalIPv6PrefixLen": 0,
+        "DNSNames": null
+      }
+    }
+  },
+  "ImageManifestDescriptor": {
+    "mediaType": "application/vnd.oci.image.manifest.v1+json",
+    "digest": "sha256:ee124435d71d3e33b4082a17fefb9d7dbef167fb3ffe4591353d5b995afb369e",
+    "size": 1817,
+    "platform": {
+      "architecture": "arm64",
+      "os": "linux"
+    }
+  }
+}

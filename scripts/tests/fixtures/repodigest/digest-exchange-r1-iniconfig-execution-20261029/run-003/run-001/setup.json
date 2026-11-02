@@ -1,0 +1,19 @@
+{
+  "stage": "setup",
+  "command": [
+    "uv",
+    "sync",
+    "--locked",
+    "--python",
+    "/usr/local/bin/python3.12",
+    "--group",
+    "dev"
+  ],
+  "exitCode": 0,
+  "stopReason": null,
+  "wallSeconds": 1.7541961669921875,
+  "networkInterfaceBytes": 3337979,
+  "observedOutputBytes": 511,
+  "childCpuSeconds": 1.728599,
+  "childMaxRssKiB": 143488
+}

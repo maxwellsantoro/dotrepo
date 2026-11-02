@@ -1,0 +1,90 @@
+{
+  "http": [
+    {
+      "url": "https://raw.githubusercontent.com/agronholm/exceptiongroup/1df36aa5ff9314ced4968e682d15570251576e3b/tests/check_types.py",
+      "responseBodyBytes": 1377,
+      "status": 200,
+      "wallSeconds": 0.12974504195153713
+    }
+  ],
+  "toolCalls": [
+    {
+      "tool": "source.list",
+      "repository": "github.com/agronholm/exceptiongroup",
+      "revision": "1df36aa5ff9314ced4968e682d15570251576e3b",
+      "pattern": "*",
+      "offset": 0,
+      "limit": 100
+    },
+    {
+      "tool": "source.read",
+      "repository": "github.com/agronholm/exceptiongroup",
+      "revision": "1df36aa5ff9314ced4968e682d15570251576e3b",
+      "path": "tests/check_types.py",
+      "start": 1,
+      "end": 120
+    },
+    {
+      "tool": "source.read",
+      "repository": "github.com/agronholm/exceptiongroup",
+      "revision": "1df36aa5ff9314ced4968e682d15570251576e3b",
+      "path": ".github/workflows/test.yml",
+      "start": 1,
+      "end": 120
+    },
+    {
+      "tool": "source.read",
+      "repository": "github.com/agronholm/exceptiongroup",
+      "revision": "1df36aa5ff9314ced4968e682d15570251576e3b",
+      "path": "pyproject.toml",
+      "start": 1,
+      "end": 120
+    },
+    {
+      "tool": "source.read",
+      "repository": "github.com/agronholm/exceptiongroup",
+      "revision": "1df36aa5ff9314ced4968e682d15570251576e3b",
+      "path": "README.rst",
+      "start": 1,
+      "end": 120
+    }
+  ],
+  "retrievals": [
+    {
+      "tool": "source.list",
+      "path": null,
+      "origin": "compiled-source-cache",
+      "outcome": "returned"
+    },
+    {
+      "tool": "source.read",
+      "path": "tests/check_types.py",
+      "origin": "verified-source-http",
+      "outcome": "returned"
+    },
+    {
+      "tool": "source.read",
+      "path": ".github/workflows/test.yml",
+      "origin": "compiled-source-cache",
+      "outcome": "returned"
+    },
+    {
+      "tool": "source.read",
+      "path": "pyproject.toml",
+      "origin": "compiled-source-cache",
+      "outcome": "returned"
+    },
+    {
+      "tool": "source.read",
+      "path": "README.rst",
+      "origin": "compiled-source-cache",
+      "outcome": "returned"
+    }
+  ],
+  "cacheStatistics": {
+    "logicalIndexBytesRead": 3948,
+    "logicalBlobBytesRead": 11020,
+    "indexCacheHits": 8,
+    "blobCacheHits": 3
+  }
+}

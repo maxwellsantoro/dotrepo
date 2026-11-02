@@ -1,0 +1,118 @@
+DOC_FEATURES=json,urlencode,fuel,serde
+TEST_FEATURES=unstable_machinery,builtins,json,urlencode,debug,internal_debug,macros,multi_template,adjacent_loop_items,serde,loop_controls
+
+.PHONY: all
+all: test
+
+.PHONY: build
+build:
+	@cargo build --all
+
+.PHONY: doc
+doc:
+	@cd minijinja; RUSTC_BOOTSTRAP=1 RUSTDOCFLAGS="--cfg=docsrs --html-in-header doc-header.html" cargo doc -p minijinja -p minijinja-contrib --no-deps --features=$(DOC_FEATURES)
+
+.PHONY: test-msrv
+test-msrv:
+	@$(MAKE) run-tests FEATURES=$(TEST_FEATURES)
+	@$(MAKE) run-speedup-tests FEATURES=$(TEST_FEATURES),preserve_order,unicode
+	@echo "CARGO TEST DEFAULT FEATURES WITHOUT SERDE"
+	@cd minijinja; cargo test --lib --tests
+	@cd minijinja; ! cargo tree --edges normal | grep -Eq '(^| )serde v'
+	@echo "CARGO TEST ALL FEATURES"
+	@cd minijinja; cargo test --all-features
+	@$(MAKE) test-cabi
+
+.PHONY: test
+test: test-msrv test-cli test-go
+	@echo "CARGO TEST MINIJINJA-CONTRIB ALL FEATURES"
+	@cd minijinja-contrib; cargo test --all-features
+
+.PHONY: test-rust
+test-rust: test-msrv test-cli
+	@echo "CARGO TEST MINIJINJA-CONTRIB ALL FEATURES"
+	@cd minijinja-contrib; cargo test --all-features
+
+.PHONY: test-go
+test-go:
+	@echo "GO TEST MINIJINJA-GO"
+	@cd minijinja-go; go test -v ./...
+
+.PHONY: test-cabi
+test-cabi:
+	@echo "C TESTS MINIJINJA-CABI"
+	@$(MAKE) -C minijinja-cabi test
+
+.PHONY: wasi-test
+wasi-test:
+	@cd minijinja; cargo test --all-features --target=wasm32-wasip1 -- --nocapture
+
+.PHONY: python-test
+python-test:
+	@make -C minijinja-py
+
+.PHONY: js-test
+js-test:
+	@make -C minijinja-js
+
+.PHONY: python-type-check
+python-type-check:
+	@make -C minijinja-py type-check
+
+.PHONY: snapshot-tests
+snapshot-tests:
+	@cd minijinja; cargo insta test --all-features --review
+
+.PHONY: run-tests
+run-tests:
+	@rustup component add rustfmt 2> /dev/null
+	@echo "CARGO TESTS"
+	@cd minijinja; cargo test --lib --tests --features=json,urlencode,internal_debug,loop_controls
+	@$(MAKE) run-speedup-tests FEATURES=$(FEATURES)
+	@echo "CARGO CHECK NO_DEFAULT_FEATURES"
+	@cd minijinja; cargo check --no-default-features --features=debug
+	@cd minijinja-contrib; cargo test
+
+.PHONY: run-speedup-tests
+run-speedup-tests:
+	@echo "CARGO TEST SPEEDUPS"
+	@cd minijinja; cargo test --lib --tests --no-default-features --features=speedups,$(FEATURES)
+
+.PHONY: test-cli
+test-cli:
+	@cd minijinja-cli; cargo test
+
+.PHONY: check
+check:
+	@echo "check no default features:"
+	@cd minijinja; cargo check --no-default-features
+	@echo "check all features:"
+	@cd minijinja; cargo check --all-features
+	@echo "check macro only:"
+	@cd minijinja; cargo check --no-default-features --features macros
+	@echo "check multi_template only:"
+	@cd minijinja; cargo check --no-default-features --features multi_template
+	@echo "check minijinja-contrib:"
+	@cd minijinja-contrib; cargo check
+	@cd minijinja-contrib; cargo check --all-features
+	@cd minijinja-contrib; cargo check --no-default-features
+
+.PHONY:
+check-cli:
+	@cd minijinja-cli; cargo check --no-default-features
+	@cd minijinja-cli; cargo check
+
+.PHONY: format
+format:
+	@rustup component add rustfmt 2> /dev/null
+	@cargo fmt --all
+
+.PHONY: format-check
+format-check:
+	@rustup component add rustfmt 2> /dev/null
+	@cargo fmt --all -- --check
+
+.PHONY: lint
+lint:
+	@rustup component add clippy 2> /dev/null
+	@cargo clippy --all -- -F clippy::dbg-macro -D warnings

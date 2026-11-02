@@ -1,0 +1,1 @@
+{"stage": "test", "command": ["uv", "run", "--offline", "--no-sync", "--python", "/usr/local/bin/python3.12", "pytest", "testing", "--color=no", "--junitxml=/work/results.xml"], "exitCode": 2, "stopReason": null, "wallSeconds": 0.005648915976053104, "networkInterfaceBytes": 0, "observedOutputBytes": 72, "childCpuSeconds": 0.005437, "childMaxRssKiB": 34632}

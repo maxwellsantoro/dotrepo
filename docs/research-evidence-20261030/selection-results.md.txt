@@ -1,0 +1,196 @@
+# Paired repository-selection consumers: results
+
+The twelve-session experiment does not establish a token-efficiency or net
+economic win. RepoDigest reduced source reading in the two tasks completed by
+both arms, but those sessions used more total native tokens. Seven attempts did
+not deliver a final decision within the retained call budget.
+
+The product implementation remains frozen at `55ae512a`. No consumer retries,
+indexed-repository execution, public-consumer changes or upstream publication
+occurred. This packet adds the experiment and its offline controls only.
+
+## Answer quality across all six pairs
+
+| Natural-language task | Control | RepoDigest |
+| --- | --- | --- |
+| Python HTTP client | Accepted: HTTPX | Accepted: HTTPX |
+| Compact embedded Rust messages | Incomplete | Incomplete |
+| JavaScript build tool | Incomplete | Accepted: esbuild |
+| Local Python columnar data | Incomplete | Incomplete |
+| Browser Markdown preview | Accepted: markdown-it | Accepted: markdown-it |
+| Private local PDF tables | Incomplete | Incomplete |
+
+The independent reviewer accepted all five delivered answers at the declared
+preliminary-selection standard. They grounded their mandatory requirements and
+did not claim runtime success, universal compatibility, privacy proof or XSS
+safety. Three treatment answers and two control answers passed. With one attempt
+per task and arm, this is an observed completion difference, not an estimated
+success-rate improvement.
+
+All seven incomplete sessions reached the observational call budget. They are
+not correct abstentions. In particular, neither arm completed the three tasks
+with important coverage gaps. The study therefore did not demonstrate useful
+abstention under incomplete evidence.
+
+No deeply examined candidate was judged clearly irrelevant: Serde, MarkItDown
+and the alternative build tools were plausible but incomplete leads. This does
+not mean search avoided irrelevant metadata results or unnecessary repeated
+queries.
+
+## The two pairs with accepted answers in both arms
+
+These totals cover HTTPX and markdown-it only. Selecting completed pairs creates
+an outcome-conditioned subset; these are descriptive observations, not a general
+average or a substitute for the seven incomplete outcomes.
+
+| Metric | Control | RepoDigest | Change |
+| --- | ---: | ---: | ---: |
+| Native input + output tokens | 260,178 | 284,429 | +9.3% |
+| Uncached input tokens | 57,019 | 60,916 | +6.8% |
+| Controller elapsed seconds | 57.48 | 55.20 | -4.0% |
+| Started source list/read requests | 20 | 14 | -30.0% |
+| Started source read requests | 14 | 9 | -35.7% |
+| Returned source-result text bytes | 56,825 | 21,892 | -61.5% |
+| Returned numbered-source passage bytes | 38,660 | 10,445 | -73.0% |
+| All returned MCP result text bytes | 76,175 | 70,231 | -7.8% |
+
+The treatment avoided substantial original-source reading, but lookup, key
+discovery, evidence interpretation and final-answer work still counted toward
+the whole-session token counters. HTTPX treatment used fewer uncached inputs;
+markdown-it treatment used more. The small elapsed difference is not a robust
+latency claim.
+
+Native counters were emitted only for the five completed sessions. Seven
+cancelled sessions have no native usage receipt. Whole-study token totals,
+monetary cost and cost per accepted decision remain unknown. Known subtotals
+from unequal numbers of completed sessions must not be compared as arm totals.
+
+Across all twelve attempts, control recorded 129 started MCP calls and
+RepoDigest 128. There were 232 completed calls and 25 pending calls at controller
+stop, including parallel dispatch beyond the 24-call target. The controller
+stopped after observing a 25th start; observed stops contained 25–28 starts.
+Thirty-five completed calls failed. All attempts and failures remain retained.
+
+## How the treatment was used
+
+Only HTTPX and markdown-it treatment sessions called `qualify`. Both discovered
+the keys from the service and mapped the natural-language requirements without
+receiving keys or desired repository names in their initial prompts. Both also
+read original sources. This shows that the explicit interface can be used in
+these cases, not that its interpretation overhead is generally negligible.
+
+The esbuild treatment completed a supported selection without calling
+`qualify`. Its useful assessment keys were on the second component page of
+`describe`; the agent did not request that page and established its answer from
+original sources. Its success cannot be attributed to using those assessment
+claims.
+
+The Rust treatment and both columnar-data attempts exhausted their budgets on
+metadata searches, without reaching source or requirement assessment. Repeated
+queries for projects absent from the cohort consumed calls. Other sessions
+spent calls recovering from invalid limits or supplying a `revision` argument
+to `describe`, whose schema does not accept it. Limits were present in the MCP
+input schemas; the traces do not establish why the model ignored them.
+
+The PDF treatment inspected MarkItDown but never called `qualify` or delivered
+an answer. Its source reads returned missing/refused evidence rather than
+numbered passages. Unknowns did not lead to a finished scoped abstention.
+
+These observations favor small improvements to discovery, stopping behavior,
+argument consistency and component pagination before a larger study. They do
+not justify an automatic requirement interpreter, a new public protocol or an
+expansion of the evidence contract. No such improvements were applied to this
+frozen experiment, and the same cohort was not rerun.
+
+## Scope, costs and evidence limits
+
+Both arms used the same metadata catalog and pinned offline original-source
+cache. Treatment alone added `describe` and `qualify`. Six independently
+authored tasks were frozen before their author saw the catalog or assessment
+keys. HTTPX, esbuild and markdown-it were subsequently added to both arms before
+outcomes to supply straightforward matches: this is task-conditioned cohort
+enrichment, not a random or held-out evaluation.
+
+The resulting catalog has 103 repositories, compiled sources for 100, and
+requirement assessments for four. The three source-coverage misses in the
+original cohort remain. The oracle permits unforeseen source-supported answers
+and does not assert exhaustive absence across the catalog.
+
+All twelve sessions used fresh ephemeral GPT-6 Luna sessions at maximum
+reasoning effort, identical prompts within each pair and equal budgets. Three
+pairs used each arm order. Provider cache state and backend variation were not
+controlled. The source/oracle reviewer also reviewed outcomes; grades were
+saved before role mapping and costs were opened. Blinding was partial because
+returned profile/assessment shapes could suggest the arm.
+
+Consumer publisher requests and bytes were zero in both arms. Returned source
+passage bytes measure investigation over the shared cache, not live GitHub
+traffic. Result-text counts exclude error-message envelopes and unreturned
+pending-call transfer; they are not wire-byte measurements.
+
+New enrollment used 50 metered HTTP requests and 388,337 response-body bytes,
+plus three connector invocations with unknown wire bytes. Eleven new source
+claims were independently reviewed; three prior MarkItDown claims were reused.
+The historical shared fixture ledger records 524 metered requests and
+55,859,923 body bytes plus 205 connector invocations. Its costs are not cleanly
+separated into metadata, common source-cache and treatment-only work. Engineering,
+task authoring, source interpretation, independent review, maintenance, refresh
+and actual provider billing remain unpriced, not zero. No amortization or net
+economic benefit has been established.
+
+Two artifact/accounting limitations are retained explicitly:
+
+- 205 of 206 frozen file hashes match after collection. The sole changed entry
+  is an inadvertently included mutable Ruff cache file, changed during
+  postcollection linting. Actor code, prompts, tasks, oracle, compiled databases
+  and relevant evidence inputs still match. The original freeze manifest was
+  preserved, not repaired after outcomes.
+- Consumer 003's final traffic log contains a source-list flush about 99.5 ms
+  after its controller report snapshot: 13 retrievals rather than 12, and
+  3,400,799 rather than 44,382 logical index bytes. Both raw records remain.
+  These internal cache counters are excluded from conclusions. Controller
+  elapsed/process-group receipts do not establish exact shutdown accounting for
+  the separate MCP server. Pending work and transfer remain partly unknown.
+
+## Retained artifacts and local replay
+
+- [Frozen design and input hashes](COMPARISON-SPEC.json), [tasks](tasks.json),
+  [prompts](prompts.json) and [source oracle](ORACLE.json).
+- [Per-session metrics](RESULTS.json), [quality-linked summary](FINAL-SUMMARY.json)
+  and [cost ledger](COST-LEDGER.json).
+- [Grades saved before unblinding](OUTCOME-REVIEW-BLIND.json),
+  [independent outcome review](independent-outcome-review.txt) and
+  [late-traffic addendum](independent-accounting-addendum.txt).
+- Numbered `consumer-*` directories retain invocations, original event traces,
+  reports, traffic logs and returned source bodies. Missing final answers and
+  missing native counters remain missing.
+- [Final validation and binding audit](CHECKS-FINAL.json).
+
+The two `compiled/*.sqlite.gz` files retain the frozen databases. To materialize
+them locally without acquisition, models or upstream execution:
+
+```bash
+uv run --offline --no-sync python - <<'PY'
+import gzip
+import hashlib
+import json
+from pathlib import Path
+
+root = Path.cwd()
+packet = root / "benchmarks/head-to-head/repodigest-selection-consumers-20261030"
+spec = json.loads((packet / "COMPARISON-SPEC.json").read_text())
+for name in ("paired.sqlite", "source-store.sqlite"):
+    target = packet / "compiled" / name
+    body = gzip.decompress(target.with_suffix(target.suffix + ".gz").read_bytes())
+    assert hashlib.sha256(body).hexdigest() == spec["filesSha256"][str(target.relative_to(root))]
+    if target.exists():
+        assert target.read_bytes() == body
+    else:
+        target.write_bytes(body)
+PY
+uv run --offline --no-sync python benchmarks/head-to-head/repodigest-selection-consumers-20261030/analyze.py
+```
+
+This replays retained accounting, not paid sessions. Existing session directories
+must not be removed to select favorable retries. The earlier discovery negatives,
+p-limit failures, F-05 no-go and PageDigest P1 result remain unchanged.

@@ -1,0 +1,11 @@
+{
+  "agent": "/root/iniconfig_source_review",
+  "authorization": "Explicit user reply: Use one independent reviewer (Recommended)",
+  "scope": "Read-only independent source assessment, then bounded execution evidence review and final amended review by the same agent.",
+  "independentUpstreamExecutions": 0,
+  "reviewIsHumanMaintainerApproval": false,
+  "finalReportSha256": "9a0d03bfd751dcb2691d70a3b9600d0b983fd5ab847a1d991f42f07c12abab86",
+  "acceptedInputsSha256": "9a8b56d68ca5d195c503609c8360b2ac90a25c49edbaf797c218e18f4d01de79",
+  "acceptedReportSha256": "0bcbb6f956aa42d53653c1ae4bcebc9945d28182ebae0f4287fe4252e5c6eb1c",
+  "authorAddendum": "Static-oracle control added after reviewer inspected 28 controls; integrated suite passes 29. Execution inputs remain unchanged."
+}

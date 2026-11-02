@@ -11,6 +11,12 @@ The hosted export can advance independently of client releases.
 | Understand dotrepo and try a lookup | [Project README](../README.md) |
 | Install a stable tool or extension | [Installation](install.md), [release compatibility](release-compatibility.md) |
 | Integrate an agent or tool | [Consumer integration](external-consumer-integration.md), [reference client](../examples/external-consumer/README.md) |
+| Try experimental retained source tools | [RepoDigest source cache](experimental-repodigest-source-cache.md) |
+| Find repositories with compact source-backed profiles | [Experimental RepoDigest discovery](experimental-repodigest-discovery.md) |
+| Compare metadata and source-enriched discovery | [Discovery-100 local comparison](experimental-repodigest-discovery-comparison.md) |
+| Check shortlisted repositories against source assessments | [Experimental requirement assessments](experimental-repodigest-requirements.md) |
+| Finish a bounded preliminary selection or useful unknown | [Experimental decision workflow](experimental-repodigest-selection.md) |
+| Distinguish public delivery, local workflows and measured evidence | [Workflow status](workflow-status.md) |
 | Adopt a native `.repo` | [Maintainer path](maintainer-happy-path.md), [sync boundaries](sync-boundaries.md) |
 | Interpret authority, evidence, or age | [Trust model](trust-model.md), [freshness](public-freshness.md) |
 | Use HTTP/CLI public routes | [Public examples](public-export-examples.md), [architecture](public-surface.md) |
@@ -52,6 +58,11 @@ even where their content overlaps.
 
 Presence, policy acceptance, independently checked correctness, completed tasks,
 and independent adoption are separate evidence levels.
+
+The [latest workflow evidence](workflow-status.md#latest-evidence) includes the
+Discovery-100 negative result, source-cache control, unsuccessful complete coding
+patches, and twelve-session selection study. Local workflow fixes are correctness
+controls and do not replace those frozen observations.
 
 - [Lookup-efficiency methodology](public-lookup-efficiency-benchmark.md): field
   presence, local payload proxy, modeled requests, and consumer-policy coverage

@@ -1,5 +1,9 @@
 # Pinned upstream source fixtures preserve their original bytes, including
 # whitespace. Do not normalize evidence to satisfy patch-style checks.
+# Relocated RepoDigest evidence is byte-bound too; RST section rulers are data,
+# not merge markers. Keep real conflict markers distinguishable in these fixtures.
+scripts/tests/fixtures/repodigest/** -text -whitespace conflict-marker-size=32
+docs/research-evidence-20261030/** -text -whitespace
 crates/dotrepo-core/tests/fixtures/import/docs-source-*/README.md -whitespace
 crates/dotrepo-core/tests/fixtures/import/context-ries-source-excerpt/README.md -whitespace
 benchmarks/head-to-head/e1-qualification-20261029/receipts/** -whitespace

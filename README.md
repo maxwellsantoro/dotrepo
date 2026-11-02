@@ -11,6 +11,13 @@ public index. It gives agents and tools those facts as JSON, through MCP, or fro
 `.repo` file. Each record includes source and trust context so you can decide
 whether to use an answer or inspect upstream.
 
+The local **RepoDigest** experiment extends this into cheap discovery, a bounded
+shortlist and source-backed requirement assessment. It can finish with supported
+preliminary choices or explicit unknowns, and reuse retained source evidence.
+These tools are not in the published MCP package or hosted API. See
+[workflow status and measured limits](docs/workflow-status.md) and the
+[local decision guide](docs/experimental-repodigest-selection.md).
+
 ## Try it: orient yourself in ripgrep
 
 Fetch the indexed profile without installing anything or cloning the repository:
@@ -101,6 +108,11 @@ Use `init` instead of `import` to start from a blank scaffold. The
 [stable maintainer guide](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.4/docs/maintainer-happy-path.md)
 walks through adoption; [sync boundaries](docs/sync-boundaries.md) explain which
 files and regions dotrepo can manage.
+
+For a source checkout, the [publisher helper](docs/maintainer-happy-path.md)
+reviews existing manifests/docs through the importer, reports genuine ambiguity,
+and checks adopted-record drift without overwriting it. Its initial adoption
+mode creates a record only when none exists; no second catalog is required.
 
 ## Limits and evidence
 

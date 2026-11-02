@@ -1,0 +1,192 @@
+[dependency-groups]
+lint = [
+    "ruff>=0.12.2",
+]
+test = [
+    "hypothesis>=6.135.26",
+    "pytest>=8.4.1",
+    "pytest-typing; python_version == '3.14' and implementation_name == 'cpython'",
+    "mypy; python_version == '3.14' and implementation_name == 'cpython'",
+    "pyrefly; python_version == '3.14' and implementation_name == 'cpython'",
+    "pytest-benchmark>=5.1.0",
+    "immutables>=0.21",
+    "coverage>=7.9.2",
+    "pytest-xdist>=3.8.0",
+]
+docs = [
+    "sphinx>=5.3.0",
+    "furo>=2024.1.29",
+    "sphinx-copybutton>=0.5.2",
+    "myst-parser>=1.0.0",
+    "pendulum>=3.1.0",
+    "sphinx-autobuild",
+]
+bench = [
+    "pyperf>=2.6.1",
+]
+
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[tool.mypy]
+strict = true
+
+[tool.pytest]
+addopts = [
+    "-l",
+    "--benchmark-sort=fullname",
+    "--benchmark-warmup=true",
+    "--benchmark-warmup-iterations=5",
+    "--benchmark-group-by=fullname",
+]
+typing_checkers = ["mypy", "pyrefly"]
+typing_pyrefly_preset = "strict"
+
+[project]
+name = "cattrs"
+description = "Composable complex class support for attrs and dataclasses."
+authors = [
+    {name = "Tin Tvrtkovic", email = "tinchester@gmail.com"},
+]
+dependencies = [
+    "attrs>=25.4.0",
+    "typing-extensions>=4.14.0",
+    "exceptiongroup>=1.1.1; python_version < '3.11'",
+]
+requires-python = ">=3.10"
+readme = "README.md"
+license = {text = "MIT"}
+keywords = ["attrs", "serialization", "dataclasses"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    "Typing :: Typed",
+]
+dynamic = ["version"]
+
+[project.urls]
+Homepage = "https://catt.rs"
+Changelog = "https://catt.rs/en/latest/history.html"
+"Bug Tracker" = "https://github.com/python-attrs/cattrs/issues"
+Repository = "https://github.com/python-attrs/cattrs"
+Documentation = "https://catt.rs/en/stable/"
+
+[project.optional-dependencies]
+ujson = [
+    "ujson>=5.10.0",
+]
+orjson = [
+    "orjson>=3.11.3; implementation_name == \"cpython\"",
+]
+msgpack = [
+    "msgpack>=1.0.5",
+]
+pyyaml = [
+    "PyYAML>=6.0",
+]
+tomlkit = [
+    "tomlkit>=0.11.8",
+]
+cbor2 = [
+    "cbor2>=5.4.6",
+]
+bson = [
+    "pymongo>=4.4.0",
+]
+msgspec = [
+    "msgspec>=0.21.1; implementation_name == \"cpython\"",
+]
+tomllib = [
+    "tomli>=1.1.0; python_version < '3.11'",
+    "tomli-w>=1.1.0",
+]
+
+[tool.coverage.run]
+parallel = true
+source_pkgs = ["cattrs", "tests"]
+core = "sysmon"
+patch = ["subprocess"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+skip_empty = true
+exclude_also = [
+    "@overload",
+    "if TYPE_CHECKING:",
+]
+
+[tool.ruff]
+src = ["src", "tests"]
+
+[tool.ruff.per-file-target-version]
+"*_695.py" = "py312"
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle
+    "W",   # pycodestyle
+    "F",   # Pyflakes
+    "UP",  # pyupgrade
+    "N",   # pep8-naming
+    "YTT", # flake8-2020
+    "S",   # flake8-bandit
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "T10", # flake8-debugger
+    "T20", # flake8-print
+    "ISC", # flake8-implicit-str-concat
+    "RET", # flake8-return
+    "SIM", # flake8-simplify
+    "DTZ", # flake8-datetimez
+    "PGH", # pygrep-hooks
+    "PLC", # Pylint
+    "PIE", # flake8-pie
+    "RUF", # ruff
+    "I",   # isort
+]
+ignore = [
+    "E501",   # line length is handled by the formatter
+    "RUF001", # leave my smart characters alone
+    "S101",   # assert
+    "S307",   # hands off my eval
+    "SIM300", # Yoda rocks in asserts
+    "PGH003", # leave my type: ignores alone
+    "B006",   # mutable argument defaults
+    "B905",   # zip strictness, too noisy
+    "DTZ001", # datetimes in tests
+    "DTZ006", # datetimes in tests
+    "UP006",  # We support old typing constructs at runtime
+    "UP007",  # We support old typing constructs at runtime
+    "UP035",  # We support old typing constructs at runtime
+    "UP045",  # We support old typing constructs at runtime
+]
+
+[tool.ruff.lint.pyupgrade]
+# Preserve types, even if a file imports `from __future__ import annotations`.
+keep-runtime-typing = true
+
+[tool.ruff.lint.isort]
+split-on-trailing-comma = false
+
+[tool.ruff.format]
+skip-magic-trailing-comma = true
+
+[tool.hatch.version]
+source = "vcs"
+raw-options = { local_scheme = "no-local-version" }
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/cattr", "src/cattrs"]
+
+[tool.check-wheel-contents]
+toplevel = ["cattr", "cattrs"]

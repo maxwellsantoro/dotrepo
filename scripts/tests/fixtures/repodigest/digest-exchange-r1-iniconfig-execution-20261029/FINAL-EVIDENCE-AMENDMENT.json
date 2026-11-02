@@ -1,0 +1,10 @@
+{
+  "parentRun": "run-003: retained no-go; two observed 54-case successes but missing interface/route evidence",
+  "assignedFreshRuns": 2,
+  "totalMeasuredWallSeconds": 600,
+  "change": "New image adds iproute2 for raw JSON link and all-table IPv4/IPv6 routes. Capture and validate before first upstream import and after tests, with empty Docker Networks, no UP non-loopback links, no non-loopback routes, zero test traffic. Fail closed on missing/malformed observations.",
+  "stricterAcceptance": "Exact statically derived 54 case-name multiset; pinned interpreter binary/version, distribution version and git describe; enforced swap/tmpfs/no-host-binding properties and final overall wall budget.",
+  "unchanged": "Source archive, Git revision/tree, synthesized setup/test commands, per-run budgets, isolation and no public consumer qualification.",
+  "priorFailures": "All 6 assigned earlier runs retained; run-001 transfer x2, run-002 execution permission x2, run-003 network-evidence gate x2. No retroactive passes.",
+  "invalidation": "Image, interpreter, source, recipe, fixture oracle, evidence instrumentation or acceptance change requires a separately attributed assessment."
+}

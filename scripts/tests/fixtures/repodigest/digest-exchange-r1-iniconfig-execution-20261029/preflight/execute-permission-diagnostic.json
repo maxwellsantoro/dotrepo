@@ -1,0 +1,23 @@
+{
+  "workMount": [
+    "tmpfs /work tmpfs rw,nosuid,nodev,noexec,relatime,size=393216k,mode=700,uid=1000,gid=1000 0 0"
+  ],
+  "candidateCodeExecuted": false,
+  "teardown": {
+    "containerId": "cf06efefd4847b5a674dd7e9c25f8d9901aa7d2a93e30bf8cc919f07274e7180",
+    "terminalState": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 137,
+      "Error": "",
+      "StartedAt": "2026-10-29T20:04:12.696040008Z",
+      "FinishedAt": "2026-10-29T20:04:12.9289603Z"
+    },
+    "removed": true
+  }
+}

@@ -1,0 +1,16 @@
+[workspace]
+members = ["minijinja", "examples/*", "benchmarks", "minijinja-*"]
+exclude = ["examples/README.md", "minijinja-go"]
+resolver = "2"
+
+[profile.release]
+strip = true
+
+[profile.dev.package.insta]
+opt-level = 3
+
+# The profile that 'cargo dist' will build with
+[profile.dist]
+inherits = "release"
+lto = "thin"
+panic = "abort"

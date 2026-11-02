@@ -2835,6 +2835,9 @@ def main() -> int:
         </div>
         <p>Works with indexed repositories before maintainers adopt <code>.repo</code>.
           Coverage is partial. Metadata helps with orientation; architecture and code changes still require source inspection.</p>
+        <p>Local RepoDigest research extends discovery into source-backed requirement
+          assessment and reusable investigation. Those experimental tools are separate
+          from this public API; end-to-end token and economic savings remain unproved.</p>
       </div>
       {render_lookup_example(input_dir, inventory, base_path, generated_at)}
     </section>

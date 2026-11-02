@@ -1,0 +1,27 @@
+{
+  "parentSpecSha256": "311575508605bec7b9e48024a16b7f2f2cd6aa2f391de2a2e276877944052d20",
+  "negativeParent": "run-002/report.json",
+  "newReplay": "run-003",
+  "assignedFreshRuns": 2,
+  "budgets": {
+    "imagePreparationWallSeconds": 300,
+    "sourceAcquisitionWallSeconds": 90,
+    "sourceArchiveBytes": 33554432,
+    "runs": 2,
+    "setupWallSecondsPerRun": 180,
+    "testWallSecondsPerRun": 60,
+    "outputBytesPerStage": 1048576,
+    "networkBytesPerSetup": 67108864,
+    "totalMeasuredWallSeconds": 600,
+    "externalProviderCalls": 0
+  },
+  "change": "Explicit exec on the writable /work tmpfs, allowing its virtual-environment console scripts to run. Read-only root, nonroot user, dropped capabilities, no new privileges, quotas, no host mounts and offline test stage remain.",
+  "evidence": "preflight/execute-permission-diagnostic.json records noexec on the original work mount.",
+  "instrumentation": [
+    "Persist pre-test provenance before tests run.",
+    "Keep missing JUnit evidence separate from the actual test exit status."
+  ],
+  "sourceOrRecipeChanged": false,
+  "acceptanceChanged": false,
+  "retention": "All four previous assigned containers and their failures remain retained; do not pool this corrected replay into an unchanged-protocol success rate."
+}

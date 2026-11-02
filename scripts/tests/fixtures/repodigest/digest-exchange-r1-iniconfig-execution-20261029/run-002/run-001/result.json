@@ -1,0 +1,23 @@
+{
+  "repeat": 0,
+  "containerId": "4aa6dbbae0608c46b455388e4458d90cbc43e14efda1e26822a5e961b27ac184",
+  "pass": false,
+  "failure": "CalledProcessError: Command '['docker', 'exec', '4aa6dbbae0608c46b455388e4458d90cbc43e14efda1e26822a5e961b27ac184', 'cat', '/work/results.xml']' returned non-zero exit status 1.",
+  "teardown": {
+    "containerId": "4aa6dbbae0608c46b455388e4458d90cbc43e14efda1e26822a5e961b27ac184",
+    "terminalState": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 137,
+      "Error": "",
+      "StartedAt": "2026-10-29T20:02:24.6088995Z",
+      "FinishedAt": "2026-10-29T20:02:29.288166043Z"
+    },
+    "removed": true
+  }
+}

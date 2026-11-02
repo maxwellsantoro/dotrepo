@@ -1,0 +1,65 @@
+{
+  "outcome": "current-consumer-abstains",
+  "runs": [
+    {
+      "fieldConfidence": "medium",
+      "kind": "honest inferred candidate",
+      "exportExitCode": 0,
+      "exportedEvidence": {
+        "repo.test": {
+          "checkedAt": "2026-10-29T20:14:13.432449Z",
+          "confidence": "medium",
+          "method": "inferred",
+          "source": "EXPERIMENT-RECIPE.json",
+          "state": "present"
+        },
+        "repo.test_context": {
+          "checkedAt": "2026-10-29T20:14:13.432449Z",
+          "confidence": "medium",
+          "method": "inferred",
+          "source": "EXPERIMENT-RECIPE.json",
+          "state": "present"
+        }
+      },
+      "selection": {
+        "instruction": null,
+        "provenance": null,
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ]
+      }
+    },
+    {
+      "fieldConfidence": "high",
+      "kind": "synthetic favorable-confidence diagnostic only",
+      "exportExitCode": 0,
+      "exportedEvidence": {
+        "repo.test": {
+          "checkedAt": "2026-10-29T20:14:13.432449Z",
+          "confidence": "high",
+          "method": "inferred",
+          "source": "EXPERIMENT-RECIPE.json",
+          "state": "present"
+        },
+        "repo.test_context": {
+          "checkedAt": "2026-10-29T20:14:13.432449Z",
+          "confidence": "high",
+          "method": "inferred",
+          "source": "EXPERIMENT-RECIPE.json",
+          "state": "present"
+        }
+      },
+      "selection": {
+        "instruction": null,
+        "provenance": null,
+        "fallbackReasons": [
+          "no-assessed-contextual-instruction"
+        ]
+      }
+    }
+  ],
+  "upstreamExecutions": 0,
+  "networkCalls": 0,
+  "publicIndexWrites": 0,
+  "claim": "Observation is not extraction; current public context also lacks revision/environment bindings."
+}

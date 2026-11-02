@@ -1,0 +1,79 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-10-29T20:14:13.469459Z",
+    "snapshotDigest": "755b995716063392f42c84d7011e8d07799ee677ced2bacc8e265dfd5a269ace"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "pytest-dev",
+    "repo": "iniconfig",
+    "source": "https://github.com/pytest-dev/iniconfig"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/pytest-dev/iniconfig/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/pytest-dev/iniconfig",
+    "generatedAt": "2026-10-29T20:14:13.432449Z",
+    "freshnessStatus": "fresh",
+    "ageDays": 0,
+    "staleAfterDays": 30
+  },
+  "purpose": "Experimentally observed synthesized recipe; temporary diagnostic record.",
+  "name": "iniconfig",
+  "execution": {
+    "test": "uv run --offline --no-sync --python /usr/local/bin/python3.12 pytest testing --color=no --junitxml=/work/results.xml",
+    "testContext": {
+      "command": "uv run --offline --no-sync --python /usr/local/bin/python3.12 pytest testing --color=no --junitxml=/work/results.xml",
+      "workingDirectory": ".",
+      "scope": "repository",
+      "prerequisites": [
+        "uv sync --locked --python /usr/local/bin/python3.12 --group dev"
+      ],
+      "source": "EXPERIMENT-RECIPE.json"
+    }
+  },
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": false,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "medium",
+    "provenance": [
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "fieldEvidence": {
+    "repo.test": {
+      "checkedAt": "2026-10-29T20:14:13.432449Z",
+      "confidence": "medium",
+      "method": "inferred",
+      "source": "EXPERIMENT-RECIPE.json",
+      "state": "present"
+    },
+    "repo.test_context": {
+      "checkedAt": "2026-10-29T20:14:13.432449Z",
+      "confidence": "medium",
+      "method": "inferred",
+      "source": "EXPERIMENT-RECIPE.json",
+      "state": "present"
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/pytest-dev/iniconfig/profile.json",
+    "repository": "/v0/repos/github.com/pytest-dev/iniconfig/index.json",
+    "trust": "/v0/repos/github.com/pytest-dev/iniconfig/trust.json",
+    "queryTemplate": "/v0/repos/github.com/pytest-dev/iniconfig/query?path={dot_path}",
+    "indexPath": "repos/github.com/pytest-dev/iniconfig/"
+  }
+}
