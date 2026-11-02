@@ -2868,7 +2868,7 @@ def main() -> int:
       <p>Restart the client, then ask it to call <code>dotrepo.lookup</code> with
         <code>repositoryUrl: "https://github.com/BurntSushi/ripgrep"</code> and
         <code>path: "repo.test"</code>. The stable server returns a field query with trust context;
-        profile output and newer lookup safeguards require the prerelease source. Stable 1.0.4 includes the contained-write backport; the published RC predates it.</p>
+        profile output and newer lookup safeguards are available in the published 2.0.0-rc.2 preview. Stable 1.0.4 and RC2 include the contained-write protections; RC1 predates them. Choose a version explicitly and use its matching documentation.</p>
       <p><a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/release-compatibility.md">Version-specific behavior and safety limits</a></p>
       <div class="cta-row">
         <a class="cta cta--primary" href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/external-consumer-integration.md">Integration and fallback guide</a>

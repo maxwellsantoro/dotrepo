@@ -192,9 +192,9 @@ milestones describe outcome gates, not a second serial task list.
 | --- | --- |
 | M0: Working protocol/proof surface | Schema, CLI/MCP/LSP, generation, trust, hosted export exist; keep contracts and version boundaries coherent |
 | M1: Autonomous index factory | Crawl, refresh, escalation, telemetry, landing exist; sustain freshness, recovery, cadence, and operating costs |
-| M2: Useful shared semantic cache | Profiles and cache/freshness contracts exist; F2/E2 establish broader quality, C2 measures autonomous task benefit separately from retained operator reuse, and C3 supplies independent-use evidence |
+| M2: Useful shared semantic cache | Profiles, preliminary decisions and source-bound reuse exist locally; establish useful completed decisions, source accuracy and combined work at matched quality/freshness. Independent recurring use remains separate from operator controls and coding-execution evidence |
 | M3: Research substrate | Search, compare, relations, optional synthesis exist; representative calibration follows consumer demand |
-| M4: Ecosystem scale | C3 and measured operating budgets gate G1 and subsequent cohorts |
+| M4: Ecosystem scale | Broader cohorts require observed consumer demand, independent recurring-use evidence and measured operating budgets. These growth gates do not block bounded local workflow improvements |
 | M5: Maintainer adoption | Bootstrap, readiness, CI, claims exist; independent native use and durable handoffs remain separate from overlay coverage |
 | M6: Open metadata standard | Independent conformance, producers/consumers, interoperable indexes, and governance follow demonstrated use |
 
@@ -233,8 +233,9 @@ consumer use justifies them.
 Generate current values from freshness, accuracy, coverage, telemetry, policy,
 and unit-cost reports. Keep each run's snapshot, inputs, commands, costs, and
 outcome artifacts together. Use [the benchmark guide](benchmarks/head-to-head/README.md)
-for paired tasks, [the study and later pilot](docs/consumer-pilot.md), and
-[archived reports](docs/archive/README.md) for history. Do not duplicate live
+for paired tasks, [current workflow evidence](docs/workflow-status.md), and
+[the scoped execution study/pilot](docs/consumer-pilot.md) and
+[archived reports](docs/archive/README.md) for their historical or separate scope. Do not duplicate live
 dashboards or completed inventories here.
 
 The current checkpoint completes local consumer/publisher workflow controls,
@@ -242,7 +243,7 @@ while the separate E1/F-05 [October 29 specifications](benchmarks/head-to-head/e
 retain their original qualification and launch boundaries. Neither needs to show
 an advantage to be informative. A product-benefit claim requires the frozen
 causal comparison, with verification, fallback and maintenance accounted for;
-independent adoption needs C3 evidence. Retain unfavorable data and revise the
+independent adoption needs consenting, independently operated recurring-use evidence. Retain unfavorable data and revise the
 affected packet under a new experiment identity.
 
 The retained repeat closes the original own-project readiness join and supplies

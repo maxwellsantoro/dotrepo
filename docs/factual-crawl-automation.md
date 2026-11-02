@@ -57,8 +57,10 @@ Ambiguous ecosystem commands can remain in additive candidate arrays, with
 primary build/test unset. [RFC 0020](../rfcs/0020-multi-ecosystem-command-candidates.md)
 describes the candidate subset. [RFC 0021](../rfcs/0021-value-bound-execution-context.md)
 adds explicit value-bound context to scalar defaults and candidates. Validation
-and profile export support it; the importer currently leaves context unset.
-Populate context only from inspected directory, scope, prerequisite, and source
+and profile export support it. The importer can retain contextual candidates
+from the RFC's explicitly scoped documentation blocks; general nested-manifest
+context extraction remains deferred. It does not guess scalar context or mint
+verification assessments. Populate context only from inspected directory, scope, prerequisite, and source
 facts. Missing context remains unassessed. Command screening is heuristic, not a
 sandbox or proof of execution.
 Sandbox verification is not a routine implemented crawler stage.

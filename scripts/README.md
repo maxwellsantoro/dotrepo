@@ -37,6 +37,9 @@ and state paths before concurrent execution. Read-only reports can run separatel
 
 | Area | Scripts |
 |------|---------|
+| Local RepoDigest decisions | `repodigest_service.py`, `repodigest_selection.py`, `repodigest_discovery.py`, `repodigest_requirements.py`; [decision guide](../docs/experimental-repodigest-selection.md) |
+| Source-bound reuse | `repodigest_source_cache.py`, `repodigest_source_tools.py`, `repodigest_reuse.py`; [source-cache guide](../docs/experimental-repodigest-source-cache.md) |
+| Publisher setup/update | `publisher_workflow.py`; [maintainer guide](../docs/maintainer-happy-path.md) |
 | Release & packaging | `check_release_gate.py`, `check_release_version.py`, `check_toolchain_manifest_parity.py`, `check_ci_gate.py`, `package_public_export.py`, `package_release_binaries.py`, `package_vscode_extension.py`, `public_site_content.py` |
 | Autonomous index batch | `run_autonomous_index_batch.py`, `adjudication_openrouter_sidecar.py`, `check_autonomous_telemetry_gate.py`, `materialize_regression_fixture.py`, `test_adjudication_env.py` |
 | Review-batch planning | `plan_refresh_review_batches.py`, `plan_seed_review_batches.py`, `plan_index_growth_tranche.py`, `select_review_batch.py`, `render_review_batch_pull_request.py`, `render_seed_review_summary.py`, `render_refresh_plan_summary.py` |
@@ -46,6 +49,10 @@ and state paths before concurrent execution. Read-only reports can run separatel
 | Operator gates and landing | `check_operator_claim_gate.py`, `land_autonomous_index.py`, `refresh_stale_index.py` |
 | Shell helpers | `recrawl-batch.sh`, `use_runner_node22.sh` |
 | Shared modules | `language_family.py` (dominant-language ecosystem classifier), `process_resources.py` (CPU/RSS sampling for crawl subprocesses), `public_site_content.py`, `openrouter_request_policy.py` (model settings, schemas, price limits, and usage preservation) |
+
+The RepoDigest and publisher helpers above are local source workflows, not
+published crate commands; [workflow status](../docs/workflow-status.md) owns
+delivery and evidence limits.
 
 Shared fixtures live under `scripts/fixtures/` and tests under `scripts/tests/`.
 Scripts may import sibling modules from this directory (add `scripts/` to

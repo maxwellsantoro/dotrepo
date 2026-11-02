@@ -20,6 +20,26 @@ Code and tested contracts outrank prose. Use version-matched docs for installed
 binaries; this checkout includes safeguards absent from the pinned stable release.
 Do not describe implementation completion or operator traffic as consumer proof.
 
+## Workflow routing
+
+Check the actual branch and HEAD before choosing work. Relative guides describe
+this checkout; the [workflow status](docs/workflow-status.md) distinguishes public
+interfaces, local experiments and evidence. A folder name does not identify a
+release or the latest draft. Read the owning roadmap before using an older pilot
+or archived packet as a task list.
+
+| Task | Start here |
+| --- | --- |
+| Discover, shortlist and reach a preliminary decision | [Decision workflow](docs/experimental-repodigest-selection.md); `scripts/repodigest_selection.py`, `scripts/repodigest_service.py` |
+| Assess explicit requirements or reuse source-bound findings | [Requirement semantics](docs/experimental-repodigest-requirements.md), [source cache](docs/experimental-repodigest-source-cache.md); `scripts/repodigest_requirements.py` |
+| Derive publisher setup and updates from existing sources | [Maintainer workflow](docs/maintainer-happy-path.md); `scripts/publisher_workflow.py` |
+
+Discovery leads, source-supported preliminary fit and runtime success are distinct.
+Keep supported/contradicted/unknown and scoped none-established outcomes explicit.
+Execution needs its own task, evidence and authorization; a missing execution
+recipe does not prevent factual discovery. Account for publisher/indexer/consumer
+work and unfinished attempts at equivalent output quality and freshness.
+
 ## Commands
 
 All repository Python tooling uses `uv`. Never invoke `python`, `python3`, `pip`,

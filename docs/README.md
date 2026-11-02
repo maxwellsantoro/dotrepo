@@ -27,16 +27,17 @@ The hosted export can advance independently of client releases.
 ## Reading paths (owner first, supporting only as needed)
 
 Most worker time in a cluster is spent deciding what to read. Read the owner
-first; open a supporting doc only for the question in its row. RFCs link into
-several of these files and are immutable, so cluster files keep stable paths
-even where their content overlaps.
+first; open a supporting doc only for the question in its row. Keep linked paths
+stable. Living RFCs and contract docs change through reviewed, versioned edits
+when semantics intentionally change; preserve their history. Frozen experiment
+inputs, results and source captures remain immutable evidence.
 
 | Cluster | Owner (read first) | Supporting (open on demand) |
 | --- | --- | --- |
 | Public surface | [Public architecture](public-surface.md) — capabilities, bounds, wire shape | [Export examples](public-export-examples.md) for routes/CLI equivalents; [export workflow](public-export-workflow.md) for the operator/reviewer loop; [freshness](public-freshness.md) for snapshot vs record age; [API compatibility](public-api-compatibility.md) as the executable contract annex |
 | Maintainer & claims | [Maintainer happy path](maintainer-happy-path.md) — the normal flow | [Claim review workflow](maintainer-claim-review-workflow.md) for executable claim steps (RFCs link here; path is stable); [handoff examples](authority-handoff-examples.md) and [conflict examples](conflict-surfacing-examples.md) are non-normative illustrations |
 | Installation & versions | [Installation](install.md) — commands and pins | [Release compatibility](release-compatibility.md) — which binary a doc set describes; one version fact, owned here |
-| Evaluation | Each benchmark doc owns its metric (lookup, accuracy, search) | [Consumer pilot](consumer-pilot.md) owns adoption evidence levels; do not cite presence metrics as correctness |
+| Evaluation | [Workflow status](workflow-status.md) routes current decision/reuse evidence; each benchmark doc owns its metric | [Consumer pilot](consumer-pilot.md) scopes retained execution studies and independent-use acceptance; do not cite presence metrics as correctness |
 
 ## Develop and operate
 

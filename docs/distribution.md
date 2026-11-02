@@ -91,13 +91,17 @@ framework adopts the reference pattern. The in-repo client is a reference implem
 
 Sustained hosted-API or MCP traffic from **non-operator** consumers, plus a
 growing lookup-miss list that is not empty only because logs were never
-exported. Distribution outranks maintainer-adoption polish until that signal
-exists.
+exported. This is an independent-use signal, not a priority rule or proof of
+net benefit. The [roadmap](../ROADMAP.md#active-execution-order) owns sequencing:
+improve useful consumer decisions and low-maintenance publisher setup together,
+then evaluate both sides' effort. Operator fixtures remain useful local controls
+while independent adoption is unestablished.
 
 ## Evidence handoff
 
-Use [the pilot plan](consumer-pilot.md) for preparation packages, outcome telemetry,
-and adoption/savings acceptance. Use
+Use [current workflow evidence](workflow-status.md) for decision/reuse outcomes
+and [the separately scoped pilot plan](consumer-pilot.md) for execution-pilot
+preparation and independent-use acceptance. Use
 [the integration contract](external-consumer-integration.md) for lookup suitability.
 The reference client reports usable answers, fallback requirements, and lookup
 bytes/latency; the end-to-end harness includes upstream fallback. Neither an

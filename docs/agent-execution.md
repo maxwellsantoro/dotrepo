@@ -15,7 +15,7 @@ duplicating the roadmap in permanent status documents:
 
 | Packet | State | Owner / writable paths | Dependencies | Handoff / checks |
 | --- | --- | --- | --- | --- |
-| F1 example | ready | worker, assigned repository identities | none | dated sources, patch, focused checks |
+| Decision-flow control example | ready | worker, assigned workflow files | pinned source inputs | justified decision/unknown, failed attempts, focused checks |
 
 Use `ready`, `running`, `review`, `done`, or `blocked`, with a concrete reason
 for a blocked dependency. Record evidence, not an agent's confidence. Reassign
@@ -100,8 +100,12 @@ Preparing a pilot does not authorize contacting another project.
 4. Before landing, verify exact head and selected CI jobs, including `ci-gate`.
    Only classifier-authorized skips are acceptable. Workflow configuration is
    separate from actual merge enforcement settings.
-5. Freeze integrated exports/inputs for C2. Evaluate completed tasks and all
-   fallback/maintenance work; implementation tests cannot close C2 or C3.
+5. Freeze inputs for the outcome selected by the current roadmap. Evaluate useful
+   completed decisions or recurring research updates, scoped unknowns, and all
+   fallback/maintenance work. Implementation tests do not establish economic
+   benefit or independent adoption. The retained C2/F-05 execution and C3 pilot
+   protocols apply only when that separate track is explicitly selected; their
+   runtime or participant gates are not prerequisites for preliminary discovery.
 
 All repository Python tooling uses `uv`. Preserve source evidence, historical
 reports, and frozen inputs; add dated evidence. Manual claim authority review
@@ -109,9 +113,12 @@ remains distinct from routine machine-gated generated overlays.
 
 ## Keep the path short
 
-Prepare participation, frozen workloads, and release requirements from the start.
-Once the pilot's inputs/deployment are fixed, collect independent observations
-alongside internal C2 measurement; join completed evidence before growth.
+Prepare the selected workflow's inputs, bounded budget and completion criteria
+early. Improve useful publisher and consumer outcomes together; compare combined
+effort against competent source/cache workflows at equal quality and freshness.
+Independent-use collection and release requirements apply when the owning
+roadmap and the user's authorization select those outcomes. Keep the historical
+execution/pilot track in [its scoped guide](consumer-pilot.md), not a second queue.
 Wait only at documented dependency edges. Workers run focused checks; the
 coordinator owns combined packaging and release gates. Defer unrelated cleanup
 and model changes without task evidence. Maintain adjudication policy in its
