@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/dotnet/aspnetcore"
-generated_at = "2026-10-27T19:52:27.531540641Z"
+generated_at = "2026-11-03T20:41:10.686701705Z"
 
 [record.trust]
 confidence = "high"
@@ -72,10 +72,6 @@ maintainers = [
 ]
 security_contact = "https://msrc.microsoft.com/report/vulnerability/new"
 
-[docs]
-root = "https://github.com/aspnet/Docs"
-getting_started = "https://learn.microsoft.com/aspnet/core/getting-started"
-
 [relations]
 references = []
 
@@ -92,25 +88,23 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T19:52:27.531540641Z"
+checkedAt = "2026-11-03T20:41:10.686701705Z"
 confidence = "high"
-method = "extracted"
-reason = "Explicit documentation link at README.md:12: Follow the [Getting Started](https://learn.microsoft.com/aspnet/core/getting-started) instructions."
-source = "README.md"
-state = "present"
-valueJson = '"https://learn.microsoft.com/aspnet/core/getting-started"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T19:52:27.531540641Z"
+checkedAt = "2026-11-03T20:41:10.686701705Z"
 confidence = "high"
-method = "extracted"
-reason = "Explicit documentation link at README.md:40: * [Documentation](https://github.com/aspnet/Docs) - documentation sources for https://learn.microsoft.com/aspnet/core/"
-source = "README.md"
-state = "present"
-valueJson = '"https://github.com/aspnet/Docs"'
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T19:52:27.531540641Z"
+checkedAt = "2026-11-03T20:41:10.686701705Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -119,7 +113,7 @@ state = "present"
 valueJson = '"https://msrc.microsoft.com/report/vulnerability/new"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T19:52:27.531540641Z"
+checkedAt = "2026-11-03T20:41:10.686701705Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -127,7 +121,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T19:52:27.531540641Z"
+checkedAt = "2026-11-03T20:41:10.686701705Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -136,7 +130,7 @@ state = "present"
 valueJson = '"npm run build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T19:52:27.531540641Z"
+checkedAt = "2026-11-03T20:41:10.686701705Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -145,7 +139,7 @@ state = "present"
 valueJson = '"ASP.NET Core is a cross-platform .NET framework for building modern cloud-based web applications on Windows, Mac, or Linux."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T19:52:27.531540641Z"
+checkedAt = "2026-11-03T20:41:10.686701705Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -153,7 +147,7 @@ state = "present"
 valueJson = '"https://asp.net"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T19:52:27.531540641Z"
+checkedAt = "2026-11-03T20:41:10.686701705Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -162,7 +156,7 @@ state = "present"
 valueJson = '"ASP.NET Core"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T19:52:27.531540641Z"
+checkedAt = "2026-11-03T20:41:10.686701705Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -175,6 +169,6 @@ archived = false
 clone_url = "https://github.com/dotnet/aspnetcore.git"
 default_branch = "main"
 fork = false
-head_sha = "f8bf4a7477a37fc09c9bdbe31b7938003b29b987"
+head_sha = "1d03b662a9b9ddacb6421ea152dad07e0ddc5820"
 html_url = "https://github.com/dotnet/aspnetcore"
-stars = 38499
+stars = 38496

@@ -2,9 +2,9 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "inferred"
 source = "https://github.com/clap-rs/clap"
-generated_at = "2026-10-27T17:22:56.764083Z"
+generated_at = "2026-11-03T20:39:08.113393737Z"
 
 [record.trust]
 confidence = "medium"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `Cargo.toml`, and `CONTRIBUTING.md`. Inferred `repo.build` from `Cargo.toml`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md` and `Cargo.toml`. Inferred `repo.build` from `Cargo.toml`. Inferred `repo.test` from `Cargo.toml`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "clap"
@@ -30,6 +30,7 @@ languages = [
     "Makefile",
 ]
 build = "cargo build --workspace"
+test = "cargo test --workspace"
 topics = [
     "argument-parsing",
     "subcommands",
@@ -46,7 +47,7 @@ min = "1.85"
 ecosystem = "Rust"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T17:22:56.764083Z"
+checkedAt = "2026-11-03T20:39:08.113393737Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -54,7 +55,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T17:22:56.764083Z"
+checkedAt = "2026-11-03T20:39:08.113393737Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -62,7 +63,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T17:22:56.764083Z"
+checkedAt = "2026-11-03T20:39:08.113393737Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -70,7 +71,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T17:22:56.764083Z"
+checkedAt = "2026-11-03T20:39:08.113393737Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -78,7 +79,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T17:22:56.764083Z"
+checkedAt = "2026-11-03T20:39:08.113393737Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -87,7 +88,7 @@ state = "present"
 valueJson = '"cargo build --workspace"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T17:22:56.764083Z"
+checkedAt = "2026-11-03T20:39:08.113393737Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -96,7 +97,7 @@ state = "present"
 valueJson = '"A full featured, fast Command Line Argument Parser for Rust"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T17:22:56.764083Z"
+checkedAt = "2026-11-03T20:39:08.113393737Z"
 confidence = "medium"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -104,7 +105,7 @@ state = "present"
 valueJson = '"docs.rs/clap"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T17:22:56.764083Z"
+checkedAt = "2026-11-03T20:39:08.113393737Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -113,19 +114,19 @@ state = "present"
 valueJson = '"clap"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-29T02:06:09.861151Z"
-confidence = "low"
-method = "source_scope_review"
-reason = "Debug-output diagnostic invocation, not the selected repository-default test procedure."
-source = "CONTRIBUTING.md"
-state = "unresolved"
-valueJson = "null"
+checkedAt = "2026-11-03T20:39:08.113393737Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "Cargo.toml"
+state = "present"
+valueJson = '"cargo test --workspace"'
 
 [x.github]
 archived = false
 clone_url = "https://github.com/clap-rs/clap.git"
 default_branch = "main"
 fork = false
-head_sha = "ccc89b83875474399e9d9d70841163f6319d1a41"
+head_sha = "ec93e71255c0b833a34f50662a3fdb22f53f6ded"
 html_url = "https://github.com/clap-rs/clap"
-stars = 16804
+stars = 16819
