@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/TeamNewPipe/NewPipe"
-generated_at = "2026-11-02T06:08:27.81974856Z"
+generated_at = "2026-11-03T17:41:41.675695466Z"
 
 [record.trust]
 confidence = "medium"
@@ -58,7 +58,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-11-02T06:08:27.81974856Z"
+checkedAt = "2026-11-03T17:41:41.675695466Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -66,7 +66,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-11-02T06:08:27.81974856Z"
+checkedAt = "2026-11-03T17:41:41.675695466Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -74,7 +74,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-11-02T06:08:27.81974856Z"
+checkedAt = "2026-11-03T17:41:41.675695466Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -82,7 +82,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-11-02T06:08:27.81974856Z"
+checkedAt = "2026-11-03T17:41:41.675695466Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -90,7 +90,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-11-02T06:08:27.81974856Z"
+checkedAt = "2026-11-03T17:41:41.675695466Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -99,7 +99,7 @@ state = "present"
 valueJson = '"./gradlew build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-11-02T06:08:27.81974856Z"
+checkedAt = "2026-11-03T17:41:41.675695466Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -108,7 +108,7 @@ state = "present"
 valueJson = '"A libre lightweight streaming front-end for Android."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-11-02T06:08:27.81974856Z"
+checkedAt = "2026-11-03T17:41:41.675695466Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -116,7 +116,7 @@ state = "present"
 valueJson = '"https://newpipe.net"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-11-02T06:08:27.81974856Z"
+checkedAt = "2026-11-03T17:41:41.675695466Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -125,7 +125,7 @@ state = "present"
 valueJson = '"NewPipe"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-11-02T06:08:27.81974856Z"
+checkedAt = "2026-11-03T17:41:41.675695466Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -138,6 +138,6 @@ archived = false
 clone_url = "https://github.com/TeamNewPipe/NewPipe.git"
 default_branch = "dev"
 fork = false
-head_sha = "ca5d1105049060648e698234c2a864f09e5713aa"
+head_sha = "b541f120fb069845030cea23c3b6c2b3a81b72ce"
 html_url = "https://github.com/TeamNewPipe/NewPipe"
-stars = 40398
+stars = 40413

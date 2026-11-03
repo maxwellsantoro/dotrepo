@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/alirezarezvani/claude-skills"
-generated_at = "2026-11-02T06:09:34.967241511Z"
+generated_at = "2026-11-03T17:42:27.135901706Z"
 
 [record.trust]
 confidence = "medium"
@@ -16,7 +16,7 @@ notes = 'Bootstrapped from `README.md`, `SECURITY.md`, and `pyproject.toml`. SEC
 
 [repo]
 name = "claude-skills"
-description = "380 Claude Code skills & agent skills & plugins (30+ Agents, 70+ custom commands, 380+ skills, customizable references, scripts)for Claude Code, Codex, Gemini CLI, Cursor, and 8 more coding agents — engineering, marketing, product, compliance, C-level advisory, research, business operations, commercial & finance, and your daily productivity skills."
+description = "410 Claude Code skills & agent skills & plugins (120+ Agents, custom commands, 410+ skills, customizable references, scripts)for Claude Code, Codex, Gemini CLI, Cursor, and 8 more coding agents — engineering, marketing, product, compliance, C-level advisory, research, business operations, commercial & finance, and your daily productivity skills."
 homepage = "https://alirezarezvani.medium.com/"
 license = "MIT"
 visibility = "public"
@@ -76,7 +76,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-11-02T06:09:34.967241511Z"
+checkedAt = "2026-11-03T17:42:27.135901706Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -84,7 +84,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-11-02T06:09:34.967241511Z"
+checkedAt = "2026-11-03T17:42:27.135901706Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -92,7 +92,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-11-02T06:09:34.967241511Z"
+checkedAt = "2026-11-03T17:42:27.135901706Z"
 confidence = "high"
 method = "unspecified"
 reason = "explicitly unknown"
@@ -100,7 +100,7 @@ state = "not_found"
 valueJson = '"unknown"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-11-02T06:09:34.967241511Z"
+checkedAt = "2026-11-03T17:42:27.135901706Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -108,7 +108,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-11-02T06:09:34.967241511Z"
+checkedAt = "2026-11-03T17:42:27.135901706Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -116,16 +116,16 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-11-02T06:09:34.967241511Z"
+checkedAt = "2026-11-03T17:42:27.135901706Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
 source = "GitHub API"
 state = "present"
-valueJson = '"380 Claude Code skills & agent skills & plugins (30+ Agents, 70+ custom commands, 380+ skills, customizable references, scripts)for Claude Code, Codex, Gemini CLI, Cursor, and 8 more coding agents — engineering, marketing, product, compliance, C-level advisory, research, business operations, commercial & finance, and your daily productivity skills."'
+valueJson = '"410 Claude Code skills & agent skills & plugins (120+ Agents, custom commands, 410+ skills, customizable references, scripts)for Claude Code, Codex, Gemini CLI, Cursor, and 8 more coding agents — engineering, marketing, product, compliance, C-level advisory, research, business operations, commercial & finance, and your daily productivity skills."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-11-02T06:09:34.967241511Z"
+checkedAt = "2026-11-03T17:42:27.135901706Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -133,7 +133,7 @@ state = "present"
 valueJson = '"https://alirezarezvani.medium.com/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-11-02T06:09:34.967241511Z"
+checkedAt = "2026-11-03T17:42:27.135901706Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -142,7 +142,7 @@ state = "present"
 valueJson = '"claude-skills"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-11-02T06:09:34.967241511Z"
+checkedAt = "2026-11-03T17:42:27.135901706Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -155,6 +155,6 @@ archived = false
 clone_url = "https://github.com/alirezarezvani/claude-skills.git"
 default_branch = "main"
 fork = false
-head_sha = "e4a1dc3695908dd5a6c811cc76ab7aa4cf95f2f0"
+head_sha = "c85b17e1fb621ba760478baaacc4fcb9be225e74"
 html_url = "https://github.com/alirezarezvani/claude-skills"
-stars = 29143
+stars = 29225
