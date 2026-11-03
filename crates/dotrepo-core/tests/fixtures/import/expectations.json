@@ -1,5 +1,39 @@
 [
   {
+    "fixture": "docs-html-paragraph-readme",
+    "repo_name": "Orbit",
+    "repo_description": "Small deployment orchestrator.",
+    "overlay_docs_root": "https://orbit.example/manual",
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["Bootstrapped from `README.md`."],
+    "overlay_trust_note_contains": ["Bootstrapped from `README.md`."],
+    "overlay_evidence_contains": ["Imported docs.root as `https://orbit.example/manual`.", "Explicit documentation link at README.md:8:"]
+  },
+  {
+    "fixture": "docs-html-badge-readme",
+    "repo_name": "Orbit",
+    "repo_description": "Small deployment orchestrator.",
+    "overlay_docs_root": "https://orbit.example/manual",
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["Bootstrapped from `README.md`."],
+    "overlay_trust_note_contains": ["Bootstrapped from `README.md`."],
+    "overlay_evidence_contains": ["Imported docs.root as `https://orbit.example/manual`.", "Explicit documentation link at README.md:7:"]
+  },
+  {
     "fixture": "full-signals",
     "repo_name": "Orbit",
     "repo_description": "Fast local-first sync engine.",
@@ -383,6 +417,7 @@
     "fixture": "blockquote-tagline-readme",
     "repo_name": "The Uncompromising Code Formatter",
     "repo_description": "_Black_ is the uncompromising Python code formatter.",
+    "overlay_docs_root": "https://example.com/docs",
     "imported_sources": ["README.md"],
     "inferred_fields": [],
     "maintainers": [],
@@ -393,7 +428,7 @@
     "trust_provenance": ["imported"],
     "native_trust_note_contains": ["Bootstrapped from `README.md`"],
     "overlay_trust_note_contains": ["Bootstrapped from `README.md`", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
-    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
+    "overlay_evidence_contains": ["Imported repository name, description, and docs entry points from README.md.", "Explicit documentation link at README.md:7:", "This is an overlay record, not a maintainer-controlled canonical record."]
   },
   {
     "fixture": "backtick-email-security",

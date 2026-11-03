@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Preserve explicit documentation navigation across separate HTML paragraphs
+  and recognize linked HTML images labeled `Docs` or `Documentation`. Retain
+  the outer URL and source line; keep third-party qualifiers, malformed badges,
+  ambiguous declarations and unsupported command defaults withheld.
+
 - Add the local experimental RepoDigest source store, retained-source tools,
   compact discovery and exact-revision requirement assessments with a bounded
   shortlist/decision flow. Report supported, contradicted and unknown evidence,

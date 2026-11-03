@@ -273,6 +273,42 @@ struct DocsParagraph {
     link_count: usize,
 }
 
+fn html_paragraph_boundary(line: &str) -> bool {
+    // A standalone paragraph tag separates HTML blocks even when the README
+    // has no blank lines. Inline tags, <br>, and lines carrying prose must not
+    // discard the subject or qualifier surrounding a documentation link.
+    if line.eq_ignore_ascii_case("</p>") {
+        return true;
+    }
+    let Some(inner) = line.strip_prefix('<').and_then(|s| s.strip_suffix('>')) else {
+        return false;
+    };
+    let Some(rest) = inner.strip_prefix(['p', 'P']) else {
+        return false;
+    };
+    if rest.is_empty() {
+        return true;
+    }
+    if !rest.starts_with(char::is_whitespace) || rest.trim_end().ends_with('/') {
+        return false;
+    }
+    let mut quote = None;
+    for ch in rest.chars() {
+        if let Some(marker) = quote {
+            if ch == marker {
+                quote = None;
+            }
+        } else {
+            match ch {
+                '\'' | '"' => quote = Some(ch),
+                '<' | '>' => return false,
+                _ => {}
+            }
+        }
+    }
+    quote.is_none()
+}
+
 #[derive(Default)]
 struct DocsParagraphCache {
     current: Option<(std::ops::Range<usize>, DocsParagraph)>,
@@ -302,6 +338,7 @@ impl DocsParagraphCache {
             let boundary = |line: &str| {
                 let line = line.trim();
                 line.is_empty()
+                    || html_paragraph_boundary(line)
                     || line.starts_with('#')
                     || line.starts_with("```")
                     || line.starts_with("~~~")
@@ -711,6 +748,67 @@ fn parse_reference_suffix(remainder: &str, raw_label: &str) -> Option<(String, u
     Some((reference.to_ascii_lowercase(), close + 2))
 }
 
+fn html_badge_attributes<'a>(raw: &'a str, tag: &str) -> Option<HashMap<String, Option<&'a str>>> {
+    // Only the newly admitted image-link form uses this strict, quote-aware
+    // attribute reader. A data-href or quoted title is not a real href/alt;
+    // duplicate and malformed attributes cannot establish a declaration.
+    let raw = raw.trim().strip_prefix('<')?.strip_suffix('>')?;
+    if !raw.get(..tag.len())?.eq_ignore_ascii_case(tag) {
+        return None;
+    }
+    let mut rest = &raw[tag.len()..];
+    if !rest.starts_with(char::is_whitespace) {
+        return None;
+    }
+    let mut attributes = HashMap::new();
+    loop {
+        rest = rest.trim_start();
+        if rest.is_empty() || rest == "/" {
+            break;
+        }
+        let name_end = rest
+            .find(|ch: char| !(ch.is_ascii_alphanumeric() || "-_:".contains(ch)))
+            .unwrap_or(rest.len());
+        if name_end == 0 {
+            return None;
+        }
+        let name = rest[..name_end].to_ascii_lowercase();
+        if attributes.contains_key(&name) {
+            return None;
+        }
+        rest = rest[name_end..].trim_start();
+        let Some(value) = rest.strip_prefix('=') else {
+            attributes.insert(name, None);
+            continue; // Boolean attributes do not label an image.
+        };
+        let value = value.trim_start();
+        let quote = value.chars().next()?;
+        if !matches!(quote, '\'' | '"') {
+            return None;
+        }
+        let end = value[1..].find(quote)? + 1;
+        attributes.insert(name, Some(&value[1..end]));
+        rest = &value[end + 1..];
+        if !rest.is_empty() && rest != "/" && !rest.starts_with(char::is_whitespace) {
+            return None;
+        }
+    }
+    Some(attributes)
+}
+
+fn html_documentation_badge_label(raw: &str) -> Option<String> {
+    // An image's explicit alt text is its link label. Admit only a single
+    // complete image with a generic documentation label, matching Markdown
+    // docs badges; neither image URLs nor data-alt attributes establish it.
+    let attributes = html_badge_attributes(raw, "img")?;
+    let label = attributes.get("alt")?.as_ref()?.trim();
+    matches!(
+        label.to_ascii_lowercase().as_str(),
+        "docs" | "documentation"
+    )
+    .then(|| label.to_string())
+}
+
 fn extract_html_links(line: &str) -> Vec<(String, String)> {
     let mut links = Vec::new();
     let lower = line.to_ascii_lowercase();
@@ -723,17 +821,37 @@ fn extract_html_links(line: &str) -> Vec<(String, String)> {
         let tag_end = anchor_start + tag_end_rel;
         let tag = &line[anchor_start..=tag_end];
         let tag_lower = tag.to_ascii_lowercase();
-        let Some(url) = parse_html_attr(tag, &tag_lower, "href") else {
+        // Searching for "<a" also finds <article>/<aside>. Do not consume
+        // an inner link's closing tag while inspecting a non-anchor wrapper.
+        if !tag_lower[2..].starts_with(char::is_whitespace) && tag_lower != "<a>" {
             idx = tag_end + 1;
             continue;
-        };
+        }
+        let text_url = parse_html_attr(tag, &tag_lower, "href");
+        let badge_attributes = html_badge_attributes(tag, "a");
+        let badge_url = badge_attributes
+            .as_ref()
+            .and_then(|attributes| attributes.get("href"))
+            .and_then(|url| *url);
+        if text_url.is_none() && badge_url.is_none() {
+            idx = tag_end + 1;
+            continue;
+        }
         let Some(close_rel) = lower[tag_end + 1..].find("</a>") else {
             idx = tag_end + 1;
             continue;
         };
         let label_raw = &line[tag_end + 1..tag_end + 1 + close_rel];
         if let Some(label) = normalize_readme_text(label_raw) {
-            links.push((label, url));
+            if let Some(url) = text_url {
+                links.push((label, url));
+            }
+        } else if let Some(label) = html_documentation_badge_label(label_raw) {
+            if let Some(url) = badge_url {
+                if !url.trim().is_empty() {
+                    links.push((label, replace_common_html_entities(url.trim())));
+                }
+            }
         }
         idx = tag_end + 1 + close_rel + "</a>".len();
     }
