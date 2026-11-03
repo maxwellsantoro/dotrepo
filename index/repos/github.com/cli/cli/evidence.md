@@ -3,8 +3,8 @@
 - Imported repository name from README.md.
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@cli/code-reviewers` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
-- Inferred repo.build from go.mod as `go build ./...`.
 - Imported repo.test from Makefile as `make test`.
+- Left `repo.build` unset because Go workflow execution context has unsupported structure in `.github/workflows/dependabot-triage.lock.yml`, `.github/workflows/deployment.yml`; conventional commands cannot establish repository scope/setup.
 - Imported repo.toolchain.min from go.mod as `1.27.0` (Go).
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

@@ -1,10 +1,9 @@
 # Evidence
 
-- Imported repository name and docs entry points from README.md.
+- Imported repository name from README.md.
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates.
 - Imported the security reporting channel from SECURITY.md.
 - Ignored component-scoped commands from `eng/eng.sln` as repository defaults.
-- Imported docs.root as `https://docs.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/compiler-api-model`. Explicit documentation link at README.md:41: Visit [Roslyn Architecture Overview](https://docs.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/compiler-api-model) to get started with Roslyn’s API’s.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.name` to `roslyn` from `GitHub API` after deterministic escalation.
