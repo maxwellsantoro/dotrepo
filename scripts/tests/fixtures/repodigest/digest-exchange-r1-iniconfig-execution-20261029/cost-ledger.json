@@ -1,0 +1,348 @@
+{
+  "publisher": {
+    "trackedSourceBytes": 59012,
+    "sourceArchiveBytes": 223182,
+    "newGitAcquisitions": 1,
+    "gitHttpRequestCount": null,
+    "gitWireResponseBytes": null,
+    "imageAndAptWireBytes": null,
+    "originCpuSeconds": null,
+    "note": "Frozen prior source reused. Full Git history/tag checkout, image pulls and Debian preparation are additional work; full wire/CPU counters unavailable."
+  },
+  "indexer": {
+    "assignedRunsAllProtocols": 8,
+    "acceptedFinalProtocolRuns": 2,
+    "rejectedEarlierAssignedRuns": 6,
+    "protocols": [
+      {
+        "name": "run-001",
+        "assignedRuns": 2,
+        "completedRuns": 2,
+        "passedRuns": 0,
+        "wallSeconds": 2.598748166114092,
+        "outcome": "no-go"
+      },
+      {
+        "name": "run-002",
+        "assignedRuns": 2,
+        "completedRuns": 2,
+        "passedRuns": 0,
+        "wallSeconds": 10.830913458019495,
+        "outcome": "no-go"
+      },
+      {
+        "name": "run-003",
+        "assignedRuns": 2,
+        "completedRuns": 2,
+        "passedRuns": 0,
+        "wallSeconds": 11.230747334193438,
+        "outcome": "no-go"
+      },
+      {
+        "name": "run-004",
+        "assignedRuns": 2,
+        "completedRuns": 2,
+        "passedRuns": 2,
+        "wallSeconds": 12.529546875040978,
+        "outcome": "go-for-this-recipe-only"
+      }
+    ],
+    "observedSetupStages": 6,
+    "setupInterfaceBytesSum": 20103526,
+    "setupChildCpuSecondsSum": 11.680443,
+    "observedTestStageLaunches": 6,
+    "testStagesExitZero": 4,
+    "testInterfaceBytesSum": 0,
+    "oneIndependentReviewerAgent": true,
+    "explicitPaidProviderApiCalls": 0,
+    "reviewAndAuthorModelTokens": null,
+    "reviewAndAuthorCostUsd": null,
+    "imagePreparationCpuSeconds": null,
+    "totalMaintenanceCpuSeconds": null,
+    "stageMetrics": [
+      {
+        "protocol": "run-002",
+        "repeat": "run-001",
+        "stage": "setup",
+        "command": [
+          "uv",
+          "sync",
+          "--locked",
+          "--python",
+          "/usr/local/bin/python3.12",
+          "--group",
+          "dev"
+        ],
+        "exitCode": 0,
+        "stopReason": null,
+        "wallSeconds": 2.5888845839945134,
+        "networkInterfaceBytes": 3410575,
+        "observedOutputBytes": 511,
+        "childCpuSeconds": 2.550831,
+        "childMaxRssKiB": 143772
+      },
+      {
+        "protocol": "run-002",
+        "repeat": "run-001",
+        "stage": "test",
+        "command": [
+          "uv",
+          "run",
+          "--offline",
+          "--no-sync",
+          "--python",
+          "/usr/local/bin/python3.12",
+          "pytest",
+          "testing",
+          "--color=no",
+          "--junitxml=/work/results.xml"
+        ],
+        "exitCode": 2,
+        "stopReason": null,
+        "wallSeconds": 0.028985915996599942,
+        "networkInterfaceBytes": 0,
+        "observedOutputBytes": 72,
+        "childCpuSeconds": 0.029446,
+        "childMaxRssKiB": 34632
+      },
+      {
+        "protocol": "run-002",
+        "repeat": "run-002",
+        "stage": "setup",
+        "command": [
+          "uv",
+          "sync",
+          "--locked",
+          "--python",
+          "/usr/local/bin/python3.12",
+          "--group",
+          "dev"
+        ],
+        "exitCode": 0,
+        "stopReason": null,
+        "wallSeconds": 2.1720055009936914,
+        "networkInterfaceBytes": 3326631,
+        "observedOutputBytes": 510,
+        "childCpuSeconds": 2.137341,
+        "childMaxRssKiB": 144412
+      },
+      {
+        "protocol": "run-002",
+        "repeat": "run-002",
+        "stage": "test",
+        "command": [
+          "uv",
+          "run",
+          "--offline",
+          "--no-sync",
+          "--python",
+          "/usr/local/bin/python3.12",
+          "pytest",
+          "testing",
+          "--color=no",
+          "--junitxml=/work/results.xml"
+        ],
+        "exitCode": 2,
+        "stopReason": null,
+        "wallSeconds": 0.005648915976053104,
+        "networkInterfaceBytes": 0,
+        "observedOutputBytes": 72,
+        "childCpuSeconds": 0.005437,
+        "childMaxRssKiB": 34632
+      },
+      {
+        "protocol": "run-003",
+        "repeat": "run-001",
+        "stage": "setup",
+        "command": [
+          "uv",
+          "sync",
+          "--locked",
+          "--python",
+          "/usr/local/bin/python3.12",
+          "--group",
+          "dev"
+        ],
+        "exitCode": 0,
+        "stopReason": null,
+        "wallSeconds": 1.7541961669921875,
+        "networkInterfaceBytes": 3337979,
+        "observedOutputBytes": 511,
+        "childCpuSeconds": 1.728599,
+        "childMaxRssKiB": 143488
+      },
+      {
+        "protocol": "run-003",
+        "repeat": "run-001",
+        "stage": "test",
+        "command": [
+          "uv",
+          "run",
+          "--offline",
+          "--no-sync",
+          "--python",
+          "/usr/local/bin/python3.12",
+          "pytest",
+          "testing",
+          "--color=no",
+          "--junitxml=/work/results.xml"
+        ],
+        "exitCode": 0,
+        "stopReason": null,
+        "wallSeconds": 0.643355749984039,
+        "networkInterfaceBytes": 0,
+        "observedOutputBytes": 557,
+        "childCpuSeconds": 0.643138,
+        "childMaxRssKiB": 37824
+      },
+      {
+        "protocol": "run-003",
+        "repeat": "run-002",
+        "stage": "setup",
+        "command": [
+          "uv",
+          "sync",
+          "--locked",
+          "--python",
+          "/usr/local/bin/python3.12",
+          "--group",
+          "dev"
+        ],
+        "exitCode": 0,
+        "stopReason": null,
+        "wallSeconds": 1.6656496259965934,
+        "networkInterfaceBytes": 3334753,
+        "observedOutputBytes": 510,
+        "childCpuSeconds": 1.617763,
+        "childMaxRssKiB": 139828
+      },
+      {
+        "protocol": "run-003",
+        "repeat": "run-002",
+        "stage": "test",
+        "command": [
+          "uv",
+          "run",
+          "--offline",
+          "--no-sync",
+          "--python",
+          "/usr/local/bin/python3.12",
+          "pytest",
+          "testing",
+          "--color=no",
+          "--junitxml=/work/results.xml"
+        ],
+        "exitCode": 0,
+        "stopReason": null,
+        "wallSeconds": 0.7283187500142958,
+        "networkInterfaceBytes": 0,
+        "observedOutputBytes": 557,
+        "childCpuSeconds": 0.719185,
+        "childMaxRssKiB": 37820
+      },
+      {
+        "protocol": "run-004",
+        "repeat": "run-001",
+        "stage": "setup",
+        "command": [
+          "uv",
+          "sync",
+          "--locked",
+          "--python",
+          "/usr/local/bin/python3.12",
+          "--group",
+          "dev"
+        ],
+        "exitCode": 0,
+        "stopReason": null,
+        "wallSeconds": 1.8913451679982245,
+        "networkInterfaceBytes": 3342469,
+        "observedOutputBytes": 510,
+        "childCpuSeconds": 1.8699849999999998,
+        "childMaxRssKiB": 140248
+      },
+      {
+        "protocol": "run-004",
+        "repeat": "run-001",
+        "stage": "test",
+        "command": [
+          "uv",
+          "run",
+          "--offline",
+          "--no-sync",
+          "--python",
+          "/usr/local/bin/python3.12",
+          "pytest",
+          "testing",
+          "--color=no",
+          "--junitxml=/work/results.xml"
+        ],
+        "exitCode": 0,
+        "stopReason": null,
+        "wallSeconds": 0.6392600009858143,
+        "networkInterfaceBytes": 0,
+        "observedOutputBytes": 557,
+        "childCpuSeconds": 0.635442,
+        "childMaxRssKiB": 37824
+      },
+      {
+        "protocol": "run-004",
+        "repeat": "run-002",
+        "stage": "setup",
+        "command": [
+          "uv",
+          "sync",
+          "--locked",
+          "--python",
+          "/usr/local/bin/python3.12",
+          "--group",
+          "dev"
+        ],
+        "exitCode": 0,
+        "stopReason": null,
+        "wallSeconds": 1.8080464600061532,
+        "networkInterfaceBytes": 3351119,
+        "observedOutputBytes": 510,
+        "childCpuSeconds": 1.7759239999999998,
+        "childMaxRssKiB": 143304
+      },
+      {
+        "protocol": "run-004",
+        "repeat": "run-002",
+        "stage": "test",
+        "command": [
+          "uv",
+          "run",
+          "--offline",
+          "--no-sync",
+          "--python",
+          "/usr/local/bin/python3.12",
+          "pytest",
+          "testing",
+          "--color=no",
+          "--junitxml=/work/results.xml"
+        ],
+        "exitCode": 0,
+        "stopReason": null,
+        "wallSeconds": 0.7261440010042861,
+        "networkInterfaceBytes": 0,
+        "observedOutputBytes": 557,
+        "childCpuSeconds": 0.720547,
+        "childMaxRssKiB": 37824
+      }
+    ],
+    "note": "Counters include failed measured stages where available. Network interface bytes include protocol traffic, not HTTP decoded bodies. Preflight failures/control containers and image preparation add unallocated work; unknown is not zero."
+  },
+  "consumer": {
+    "policyDiagnosticExports": 2,
+    "policySelections": 2,
+    "qualifiedInstructions": 0,
+    "networkCalls": 0,
+    "upstreamExecutions": 0,
+    "actualUserTaskBenefit": null,
+    "latencySavings": null,
+    "netCostSavings": null,
+    "note": "Offline reference-consumer policy diagnostic only, not autonomous task evaluation or a baseline comparison."
+  },
+  "claim": "Final 2/2 only for amended run-004, with all prior assigned failures retained. No total-cost or net-benefit claim."
+}

@@ -214,8 +214,8 @@ def render_efficiency_page(report: dict, base_path: str, policy_report: dict | N
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='20' fill='%23141414'/%3E%3C/svg%3E">
-  <title>Efficiency · dotrepo</title>
-  <meta name="description" content="Field presence, consumer-policy acceptance, modeled requests, and measured payload sizes for the dotrepo public index.">
+  <title>Efficiency · DotRepo</title>
+  <meta name="description" content="Field presence, consumer-policy acceptance, modeled requests, and measured payload sizes for the DotRepo public index.">
   <style>
     :root {{
       color-scheme: light;

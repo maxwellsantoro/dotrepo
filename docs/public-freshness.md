@@ -111,9 +111,13 @@ lists each exported payload file, excluding `files.json` itself, with:
 - byte length
 - SHA-256 of the emitted file contents
 
-Consumers fetch `meta.json`, follow `paths.files`, and need no further work if
-the snapshot ID is unchanged. When it changes, the file manifest provides
-the exact immutable payload set and hashes.
+Consumers fetch `meta.json` and follow `paths.files`. An unchanged snapshot ID
+can avoid new snapshot-payload acquisition only when the required local results
+are intact, complete and acceptable under the task's freshness policy. Missing
+payloads, failed or pending processing, source-age checks and scheduled audits
+still require work. Snapshot identity does not renew source investigation or
+establish that a derived finding's other premises remain valid. When it changes,
+the file manifest provides the exact immutable payload set and hashes.
 
 The export workflow configures a seven-day `staleAfter` window. Read the actual
 response timestamps and use the public-edge canary to verify pointer, payload,

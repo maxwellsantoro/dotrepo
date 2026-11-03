@@ -1,0 +1,56 @@
+{
+  "assignedRuns": 2,
+  "completedRuns": 2,
+  "passedRuns": 0,
+  "wallSeconds": 10.830913458019495,
+  "runs": [
+    {
+      "repeat": 0,
+      "containerId": "4aa6dbbae0608c46b455388e4458d90cbc43e14efda1e26822a5e961b27ac184",
+      "pass": false,
+      "failure": "CalledProcessError: Command '['docker', 'exec', '4aa6dbbae0608c46b455388e4458d90cbc43e14efda1e26822a5e961b27ac184', 'cat', '/work/results.xml']' returned non-zero exit status 1.",
+      "teardown": {
+        "containerId": "4aa6dbbae0608c46b455388e4458d90cbc43e14efda1e26822a5e961b27ac184",
+        "terminalState": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 137,
+          "Error": "",
+          "StartedAt": "2026-10-29T20:02:24.6088995Z",
+          "FinishedAt": "2026-10-29T20:02:29.288166043Z"
+        },
+        "removed": true
+      }
+    },
+    {
+      "repeat": 1,
+      "containerId": "14fc23330694d25396ad69884b974cc8157edc3dd208b6dc4324f1ac4b3f1939",
+      "pass": false,
+      "failure": "CalledProcessError: Command '['docker', 'exec', '14fc23330694d25396ad69884b974cc8157edc3dd208b6dc4324f1ac4b3f1939', 'cat', '/work/results.xml']' returned non-zero exit status 1.",
+      "teardown": {
+        "containerId": "14fc23330694d25396ad69884b974cc8157edc3dd208b6dc4324f1ac4b3f1939",
+        "terminalState": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 137,
+          "Error": "",
+          "StartedAt": "2026-10-29T20:02:29.514785419Z",
+          "FinishedAt": "2026-10-29T20:02:33.512178212Z"
+        },
+        "removed": true
+      }
+    }
+  ],
+  "claim": "Observed synthesized recipe on pinned Linux arm64 environment; no public instruction qualification or task-benefit claim.",
+  "outcome": "no-go"
+}

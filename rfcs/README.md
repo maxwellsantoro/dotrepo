@@ -37,7 +37,7 @@ treating an RFC's illustrative payload, phase, or command as shipped behavior.
 | [0018: Static serving/freshness](0018-static-public-serving-and-freshness.md) | Accepted | Export-first delivery and shared freshness semantics |
 | [0019: Trust/query wrappers](0019-public-trust-and-query-wrappers.md) | Accepted | Trust, query, and machine-readable errors |
 | [0020: Command candidates](0020-multi-ecosystem-command-candidates.md) | Implemented | Additive ambiguity candidates |
-| [0021: Execution context](0021-value-bound-execution-context.md) | Implemented, extraction deferred | Optional exact-command context, scope, directory, prerequisites, and source |
+| [0021: Execution context](0021-value-bound-execution-context.md) | Implemented; scoped documentation extraction, general nested-manifest extraction deferred | Optional exact-command context, scope, directory, prerequisites, and source |
 
 For practical claim commands, use [the operator workflow](../docs/maintainer-claim-review-workflow.md).
 For public wire compatibility, use [the contract guide](../docs/public-api-compatibility.md)

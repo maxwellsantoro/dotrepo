@@ -1,0 +1,19 @@
+{
+  "candidateCodeExecutedBeforeAmendment": false,
+  "changes": [
+    "Use immutable repository@digest with --pull=never; Docker index digest is distinct from platform config ID.",
+    "Two create calls containing a host bind mount timed out. Docker confirmed both generated container names absent.",
+    "Embed the controller in the read-only image; no host mounts. Source and Git archive transferred through stdin.",
+    "Strengthen preflight evidence checks; no test recipe or acceptance relaxation."
+  ],
+  "failedPreparationNames": [
+    "digest-exchange-iniconfig-d881aea2a41f",
+    "digest-exchange-iniconfig-b73b3f8bd1a0"
+  ],
+  "retainedLogs": [
+    "r1-execution-prepare.log",
+    "r1-execution-prepare-002.log",
+    "r1-execution-prepare-003.log"
+  ],
+  "imageReference": "digest-exchange-iniconfig-execution@sha256:ecd4221f3d6715ff954a9cc0dca002bf8a67d3b162664a2876b3f7d72d9e99c6"
+}

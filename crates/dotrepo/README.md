@@ -1,4 +1,4 @@
-# dotrepo install alias
+# DotRepo install alias
 
 Install the `dotrepo` CLI executable. This alias follows the development release line; the stable CLI package is `dotrepo-cli`.
 

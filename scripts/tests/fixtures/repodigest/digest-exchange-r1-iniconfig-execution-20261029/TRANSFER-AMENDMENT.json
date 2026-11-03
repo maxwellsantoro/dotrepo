@@ -1,0 +1,12 @@
+{
+  "changes": [
+    "Add --gzip to the stdin extraction command.",
+    "Retain raw Docker subprocess stdout/stderr on subsequent failures."
+  ],
+  "beforeCandidateCodeExecuted": true,
+  "retainedFailedRuns": "run-001/report.json",
+  "failedAssignedRuns": 2,
+  "reason": "Confirmed by a dedicated transfer diagnostic: Archive is compressed. Use -z option.",
+  "recipeChanged": false,
+  "newEvaluation": "run-002"
+}

@@ -1,0 +1,16 @@
+Using CPython 3.12.16 interpreter at: /usr/local/bin/python3.12
+Creating virtual environment at: .venv
+Resolved 11 packages in 2ms
+   Building iniconfig @ file:///work/checkout
+Downloading pygments (1.2MiB)
+ Downloaded pygments
+      Built iniconfig @ file:///work/checkout
+Prepared 7 packages in 1.72s
+Installed 7 packages in 10ms
+ + execnet==2.1.1
+ + iniconfig==2.3.2.dev1+ga9e0ad14b (from file:///work/checkout)
+ + packaging==25.0
+ + pluggy==1.6.0
+ + pygments==2.19.2
+ + pytest==8.4.2
+ + pytest-xdist==3.8.0

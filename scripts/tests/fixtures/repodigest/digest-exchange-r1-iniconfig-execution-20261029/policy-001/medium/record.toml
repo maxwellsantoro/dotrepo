@@ -1,0 +1,33 @@
+schema = 'dotrepo/v0.1'
+[record]
+mode = 'overlay'
+status = 'inferred'
+source = 'https://github.com/pytest-dev/iniconfig'
+generated_at = "2026-10-29T20:14:13.432449Z"
+[record.trust]
+confidence = 'medium'
+provenance = ['inferred']
+[repo]
+name = 'iniconfig'
+description = 'Experimentally observed synthesized recipe; temporary diagnostic record.'
+test = "uv run --offline --no-sync --python /usr/local/bin/python3.12 pytest testing --color=no --junitxml=/work/results.xml"
+[repo.test_context]
+command = "uv run --offline --no-sync --python /usr/local/bin/python3.12 pytest testing --color=no --junitxml=/work/results.xml"
+working_directory = "."
+scope = "repository"
+prerequisites = ["uv sync --locked --python /usr/local/bin/python3.12 --group dev"]
+source = "EXPERIMENT-RECIPE.json"
+[x.dotrepo.field_evidence."repo.test"]
+state = 'present'
+method = 'inferred'
+confidence = "medium"
+source = 'EXPERIMENT-RECIPE.json'
+checkedAt = "2026-10-29T20:14:13.432449Z"
+valueJson = "\"uv run --offline --no-sync --python /usr/local/bin/python3.12 pytest testing --color=no --junitxml=/work/results.xml\""
+[x.dotrepo.field_evidence."repo.test_context"]
+state = 'present'
+method = 'inferred'
+confidence = "medium"
+source = 'EXPERIMENT-RECIPE.json'
+checkedAt = "2026-10-29T20:14:13.432449Z"
+valueJson = "{\"command\": \"uv run --offline --no-sync --python /usr/local/bin/python3.12 pytest testing --color=no --junitxml=/work/results.xml\", \"working_directory\": \".\", \"scope\": \"repository\", \"prerequisites\": [\"uv sync --locked --python /usr/local/bin/python3.12 --group dev\"], \"source\": \"EXPERIMENT-RECIPE.json\"}"

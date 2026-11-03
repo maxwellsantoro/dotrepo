@@ -1,0 +1,9 @@
+[package]
+name = "function-using-async"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+minijinja = { version = "3.0.5", path = "../../minijinja" }
+tokio = { version = "1.30.0", features = ["macros", "rt", "rt-multi-thread"] }

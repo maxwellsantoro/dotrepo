@@ -116,8 +116,10 @@ material. It is not a calibrated probability, a guarantee of correctness, human
 review, complete coverage, or a recent upstream check. Record authority, factual
 correctness, completeness, and age must be evaluated separately.
 
-**Unreleased on `main`:** fresh crawler records retain `x.dotrepo.field_evidence`.
-Public profiles produced by this version expose
+The published `2.0.0-rc.2` preview supports retained
+`x.dotrepo.field_evidence`; stable/preview differences are owned by
+[release compatibility](release-compatibility.md). Fresh crawler records can
+retain these assessments. Public profiles produced with this contract expose
 matching entries as `fieldEvidence`, keyed by manifest dot-path. Each contains an
 assessment state, confidence, method, reason, check time, and source where known.
 `not_found` means not found in inspected sources; it is not proof that the fact

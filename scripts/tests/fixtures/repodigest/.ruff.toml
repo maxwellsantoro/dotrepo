@@ -1,0 +1,4 @@
+# This exact directory contains byte-bound source and receipt DATA, including
+# historical Python inputs. Product tooling and tests live outside it. Never
+# lint, format, import, or execute these files as project implementation.
+exclude = ["**"]

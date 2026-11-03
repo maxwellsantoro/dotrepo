@@ -134,7 +134,9 @@ come from the full generated export above, not from these two repositories.
 Authority labels are reported without a minimum verified-count incentive. The
 release still gates profile validity, field completeness, conflicts, generic or
 duplicated content, and factual accuracy. Independent structured metadata adds
-123 exact assertions across 32 preselected repositories. Factual record age has a
+the assertions from the active dated upstream capture; the
+[factual-accuracy guide](public-factual-accuracy-benchmark.md) owns its scope and
+computed counts. The original September capture remains historical evidence. Factual record age has a
 separate hard gate: at most 10% stale or unknown at the gate's current evaluation
 time, with maximum refresh overdue of seven days. Export age is reported
 separately; see [the freshness contract](public-freshness.md#profile-record-policy).

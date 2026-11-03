@@ -1,0 +1,654 @@
+{
+  "container": {
+    "Id": "f16f9243b2d92a6100e78ae573c97a694e7a88616899d99bfe5f04d05163162c",
+    "Created": "2026-10-29T20:13:04.999068629Z",
+    "Path": "/bin/sleep",
+    "Args": [
+      "infinity"
+    ],
+    "State": {
+      "Status": "running",
+      "Running": true,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 56492,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-29T20:13:05.078514046Z",
+      "FinishedAt": "0001-01-01T00:00:00Z"
+    },
+    "Image": "sha256:c7fed9504414bf9f6bc6539b308b761e7711c64331f3359e9b8220186894d2e5",
+    "ResolvConfPath": "/var/lib/docker/containers/f16f9243b2d92a6100e78ae573c97a694e7a88616899d99bfe5f04d05163162c/resolv.conf",
+    "HostnamePath": "/var/lib/docker/containers/f16f9243b2d92a6100e78ae573c97a694e7a88616899d99bfe5f04d05163162c/hostname",
+    "HostsPath": "/var/lib/docker/containers/f16f9243b2d92a6100e78ae573c97a694e7a88616899d99bfe5f04d05163162c/hosts",
+    "LogPath": "",
+    "Name": "/digest-exchange-iniconfig-c65d6855cd52",
+    "RestartCount": 0,
+    "Driver": "overlayfs",
+    "Platform": "linux",
+    "MountLabel": "",
+    "ProcessLabel": "",
+    "AppArmorProfile": "",
+    "ExecIDs": null,
+    "HostConfig": {
+      "Binds": null,
+      "ContainerIDFile": "",
+      "LogConfig": {
+        "Type": "none",
+        "Config": {}
+      },
+      "NetworkMode": "bridge",
+      "PortBindings": {},
+      "RestartPolicy": {
+        "Name": "no",
+        "MaximumRetryCount": 0
+      },
+      "AutoRemove": false,
+      "VolumeDriver": "",
+      "VolumesFrom": null,
+      "ConsoleSize": [
+        0,
+        0
+      ],
+      "CapAdd": null,
+      "CapDrop": [
+        "ALL"
+      ],
+      "CgroupnsMode": "private",
+      "Dns": null,
+      "DnsOptions": [],
+      "DnsSearch": [],
+      "ExtraHosts": null,
+      "GroupAdd": null,
+      "IpcMode": "private",
+      "Cgroup": "",
+      "Links": null,
+      "OomScoreAdj": 0,
+      "PidMode": "",
+      "Privileged": false,
+      "PublishAllPorts": false,
+      "ReadonlyRootfs": true,
+      "SecurityOpt": [
+        "no-new-privileges"
+      ],
+      "Tmpfs": {
+        "/tmp": "rw,nosuid,noexec,size=64m,uid=1000,gid=1000,mode=0700",
+        "/work": "rw,exec,nosuid,size=384m,uid=1000,gid=1000,mode=0700"
+      },
+      "UTSMode": "",
+      "UsernsMode": "",
+      "ShmSize": 67108864,
+      "Runtime": "runc",
+      "Isolation": "",
+      "CpuShares": 0,
+      "Memory": 805306368,
+      "NanoCpus": 1000000000,
+      "CgroupParent": "",
+      "BlkioWeight": 0,
+      "BlkioWeightDevice": [],
+      "BlkioDeviceReadBps": [],
+      "BlkioDeviceWriteBps": [],
+      "BlkioDeviceReadIOps": [],
+      "BlkioDeviceWriteIOps": [],
+      "CpuPeriod": 0,
+      "CpuQuota": 0,
+      "CpuRealtimePeriod": 0,
+      "CpuRealtimeRuntime": 0,
+      "CpusetCpus": "",
+      "CpusetMems": "",
+      "Devices": [],
+      "DeviceCgroupRules": null,
+      "DeviceRequests": null,
+      "MemoryReservation": 0,
+      "MemorySwap": 805306368,
+      "MemorySwappiness": null,
+      "OomKillDisable": null,
+      "PidsLimit": 64,
+      "Ulimits": null,
+      "CpuCount": 0,
+      "CpuPercent": 0,
+      "IOMaximumIOps": 0,
+      "IOMaximumBandwidth": 0,
+      "MaskedPaths": [
+        "/proc/acpi",
+        "/proc/asound",
+        "/proc/interrupts",
+        "/proc/kcore",
+        "/proc/keys",
+        "/proc/latency_stats",
+        "/proc/sched_debug",
+        "/proc/scsi",
+        "/proc/timer_list",
+        "/proc/timer_stats",
+        "/sys/devices/virtual/powercap",
+        "/sys/firmware"
+      ],
+      "ReadonlyPaths": [
+        "/proc/bus",
+        "/proc/fs",
+        "/proc/irq",
+        "/proc/sys",
+        "/proc/sysrq-trigger"
+      ]
+    },
+    "Storage": {
+      "RootFS": {
+        "Snapshot": {
+          "Name": "overlayfs"
+        }
+      }
+    },
+    "Mounts": [],
+    "Config": {
+      "Hostname": "f16f9243b2d9",
+      "Domainname": "",
+      "User": "1000:1000",
+      "AttachStdin": false,
+      "AttachStdout": true,
+      "AttachStderr": true,
+      "Tty": false,
+      "OpenStdin": false,
+      "StdinOnce": false,
+      "Env": [
+        "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "LANG=C.UTF-8",
+        "GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305",
+        "PYTHON_VERSION=3.12.16",
+        "PYTHON_SHA256=b5796915dc45ff745cfb4e990a7e7c93d6f546328a102ce31448d69ebc37575c",
+        "HOME=/work",
+        "UV_CACHE_DIR=/work/uv-cache",
+        "UV_PYTHON_DOWNLOADS=never",
+        "UV_NO_CONFIG=1",
+        "PYTHONDONTWRITEBYTECODE=1"
+      ],
+      "Cmd": [
+        "/bin/sleep",
+        "infinity"
+      ],
+      "Image": "digest-exchange-iniconfig-execution@sha256:c7fed9504414bf9f6bc6539b308b761e7711c64331f3359e9b8220186894d2e5",
+      "Volumes": null,
+      "WorkingDir": "/work",
+      "Entrypoint": null,
+      "Labels": {
+        "digest-exchange.experiment": "digest-exchange-r1-iniconfig-execution-20261029"
+      }
+    },
+    "NetworkSettings": {
+      "SandboxID": "7d04df07dc155b1e7b06c7f4e120601f68849ede9621b1d85bda016855ed5d78",
+      "SandboxKey": "/var/run/docker/netns/7d04df07dc15",
+      "Ports": {},
+      "Networks": {}
+    },
+    "ImageManifestDescriptor": {
+      "mediaType": "application/vnd.oci.image.manifest.v1+json",
+      "digest": "sha256:8651655f21319cfb7e674c3cf9e4e56837d33fd588e7ea8b5d6c0b69db062cae",
+      "size": 1817,
+      "platform": {
+        "architecture": "arm64",
+        "os": "linux"
+      }
+    }
+  },
+  "network": {
+    "links": [
+      {
+        "ifindex": 1,
+        "ifname": "lo",
+        "flags": [
+          "LOOPBACK",
+          "UP",
+          "LOWER_UP"
+        ],
+        "mtu": 65536,
+        "qdisc": "noqueue",
+        "operstate": "UNKNOWN",
+        "linkmode": "DEFAULT",
+        "group": "default",
+        "txqlen": 1000,
+        "link_type": "loopback",
+        "address": "00:00:00:00:00:00",
+        "broadcast": "00:00:00:00:00:00",
+        "promiscuity": 0,
+        "allmulti": 0,
+        "min_mtu": 0,
+        "max_mtu": 0,
+        "inet6_addr_gen_mode": "eui64",
+        "num_tx_queues": 1,
+        "num_rx_queues": 1,
+        "gso_max_size": 65536,
+        "gso_max_segs": 65535,
+        "tso_max_size": 524280,
+        "tso_max_segs": 65535,
+        "gro_max_size": 65536
+      },
+      {
+        "ifindex": 2,
+        "link": null,
+        "ifname": "tunl0",
+        "flags": [
+          "NOARP"
+        ],
+        "mtu": 1480,
+        "qdisc": "noop",
+        "operstate": "DOWN",
+        "linkmode": "DEFAULT",
+        "group": "default",
+        "txqlen": 1000,
+        "link_type": "ipip",
+        "address": "0.0.0.0",
+        "broadcast": "0.0.0.0",
+        "promiscuity": 0,
+        "allmulti": 0,
+        "min_mtu": 0,
+        "max_mtu": 0,
+        "linkinfo": {
+          "info_kind": "ipip",
+          "info_data": {
+            "proto": "any",
+            "remote": "any",
+            "local": "any",
+            "ttl": 0,
+            "pmtudisc": false
+          }
+        },
+        "num_tx_queues": 1,
+        "num_rx_queues": 1,
+        "gso_max_size": 65536,
+        "gso_max_segs": 65535,
+        "tso_max_size": 65536,
+        "tso_max_segs": 65535,
+        "gro_max_size": 65536
+      },
+      {
+        "ifindex": 3,
+        "link": null,
+        "ifname": "gre0",
+        "flags": [
+          "NOARP"
+        ],
+        "mtu": 1476,
+        "qdisc": "noop",
+        "operstate": "DOWN",
+        "linkmode": "DEFAULT",
+        "group": "default",
+        "txqlen": 1000,
+        "link_type": "gre",
+        "address": "0.0.0.0",
+        "broadcast": "0.0.0.0",
+        "promiscuity": 0,
+        "allmulti": 0,
+        "min_mtu": 0,
+        "max_mtu": 0,
+        "linkinfo": {
+          "info_kind": "gre",
+          "info_data": {
+            "remote": "any",
+            "local": "any",
+            "ttl": 0,
+            "pmtudisc": false
+          }
+        },
+        "num_tx_queues": 1,
+        "num_rx_queues": 1,
+        "gso_max_size": 65536,
+        "gso_max_segs": 65535,
+        "tso_max_size": 65536,
+        "tso_max_segs": 65535,
+        "gro_max_size": 65536
+      },
+      {
+        "ifindex": 4,
+        "link": null,
+        "ifname": "gretap0",
+        "flags": [
+          "BROADCAST",
+          "MULTICAST"
+        ],
+        "mtu": 1462,
+        "qdisc": "noop",
+        "operstate": "DOWN",
+        "linkmode": "DEFAULT",
+        "group": "default",
+        "txqlen": 1000,
+        "link_type": "ether",
+        "address": "00:00:00:00:00:00",
+        "broadcast": "ff:ff:ff:ff:ff:ff",
+        "promiscuity": 0,
+        "allmulti": 0,
+        "min_mtu": 68,
+        "max_mtu": 0,
+        "linkinfo": {
+          "info_kind": "gretap",
+          "info_data": {
+            "remote": "any",
+            "local": "any",
+            "ttl": 0,
+            "pmtudisc": false
+          }
+        },
+        "inet6_addr_gen_mode": "eui64",
+        "num_tx_queues": 1,
+        "num_rx_queues": 1,
+        "gso_max_size": 65536,
+        "gso_max_segs": 65535,
+        "tso_max_size": 65536,
+        "tso_max_segs": 65535,
+        "gro_max_size": 65536
+      },
+      {
+        "ifindex": 5,
+        "link": null,
+        "ifname": "erspan0",
+        "flags": [
+          "BROADCAST",
+          "MULTICAST"
+        ],
+        "mtu": 1450,
+        "qdisc": "noop",
+        "operstate": "DOWN",
+        "linkmode": "DEFAULT",
+        "group": "default",
+        "txqlen": 1000,
+        "link_type": "ether",
+        "address": "00:00:00:00:00:00",
+        "broadcast": "ff:ff:ff:ff:ff:ff",
+        "promiscuity": 0,
+        "allmulti": 0,
+        "min_mtu": 68,
+        "max_mtu": 0,
+        "linkinfo": {
+          "info_kind": "erspan",
+          "info_data": {
+            "remote": "any",
+            "local": "any",
+            "ttl": 0,
+            "pmtudisc": false,
+            "okey": "0.0.0.0",
+            "erspan_index": 0,
+            "erspan_ver": 1
+          }
+        },
+        "inet6_addr_gen_mode": "eui64",
+        "num_tx_queues": 1,
+        "num_rx_queues": 1,
+        "gso_max_size": 65536,
+        "gso_max_segs": 65535,
+        "tso_max_size": 65536,
+        "tso_max_segs": 65535,
+        "gro_max_size": 65536
+      },
+      {
+        "ifindex": 6,
+        "link": null,
+        "ifname": "ip_vti0",
+        "flags": [
+          "NOARP"
+        ],
+        "mtu": 1480,
+        "qdisc": "noop",
+        "operstate": "DOWN",
+        "linkmode": "DEFAULT",
+        "group": "default",
+        "txqlen": 1000,
+        "link_type": "ipip",
+        "address": "0.0.0.0",
+        "broadcast": "0.0.0.0",
+        "promiscuity": 0,
+        "allmulti": 0,
+        "min_mtu": 0,
+        "max_mtu": 0,
+        "linkinfo": {
+          "info_kind": "vti",
+          "info_data": {
+            "remote": "any",
+            "local": "any"
+          }
+        },
+        "num_tx_queues": 1,
+        "num_rx_queues": 1,
+        "gso_max_size": 65536,
+        "gso_max_segs": 65535,
+        "tso_max_size": 65536,
+        "tso_max_segs": 65535,
+        "gro_max_size": 65536
+      },
+      {
+        "ifindex": 7,
+        "link": null,
+        "ifname": "ip6_vti0",
+        "flags": [
+          "NOARP"
+        ],
+        "mtu": 1428,
+        "qdisc": "noop",
+        "operstate": "DOWN",
+        "linkmode": "DEFAULT",
+        "group": "default",
+        "txqlen": 1000,
+        "link_type": "tunnel6",
+        "address": "::",
+        "broadcast": "::",
+        "permaddr": "6a95:a5f9:879d::",
+        "promiscuity": 0,
+        "allmulti": 0,
+        "min_mtu": 68,
+        "max_mtu": 65495,
+        "linkinfo": {
+          "info_kind": "vti6",
+          "info_data": {
+            "remote": "any",
+            "local": "any"
+          }
+        },
+        "inet6_addr_gen_mode": "eui64",
+        "num_tx_queues": 1,
+        "num_rx_queues": 1,
+        "gso_max_size": 65536,
+        "gso_max_segs": 65535,
+        "tso_max_size": 65536,
+        "tso_max_segs": 65535,
+        "gro_max_size": 65536
+      },
+      {
+        "ifindex": 8,
+        "link": null,
+        "ifname": "sit0",
+        "flags": [
+          "NOARP"
+        ],
+        "mtu": 1480,
+        "qdisc": "noop",
+        "operstate": "DOWN",
+        "linkmode": "DEFAULT",
+        "group": "default",
+        "txqlen": 1000,
+        "link_type": "sit",
+        "address": "0.0.0.0",
+        "broadcast": "0.0.0.0",
+        "promiscuity": 0,
+        "allmulti": 0,
+        "min_mtu": 1280,
+        "max_mtu": 65555,
+        "linkinfo": {
+          "info_kind": "sit",
+          "info_data": {
+            "proto": "ip6ip",
+            "remote": "any",
+            "local": "any",
+            "ttl": 64,
+            "pmtudisc": false,
+            "prefix": "2002::",
+            "prefixlen": 16
+          }
+        },
+        "inet6_addr_gen_mode": "eui64",
+        "num_tx_queues": 1,
+        "num_rx_queues": 1,
+        "gso_max_size": 65536,
+        "gso_max_segs": 65535,
+        "tso_max_size": 65536,
+        "tso_max_segs": 65535,
+        "gro_max_size": 65536
+      },
+      {
+        "ifindex": 9,
+        "link": null,
+        "ifname": "ip6tnl0",
+        "flags": [
+          "NOARP"
+        ],
+        "mtu": 1452,
+        "qdisc": "noop",
+        "operstate": "DOWN",
+        "linkmode": "DEFAULT",
+        "group": "default",
+        "txqlen": 1000,
+        "link_type": "tunnel6",
+        "address": "::",
+        "broadcast": "::",
+        "permaddr": "42a9:fd74:a429::",
+        "promiscuity": 0,
+        "allmulti": 0,
+        "min_mtu": 68,
+        "max_mtu": 65535,
+        "linkinfo": {
+          "info_kind": "ip6tnl",
+          "info_data": {
+            "proto": "ip6ip6",
+            "remote": "any",
+            "local": "any",
+            "ttl": 0,
+            "encap_limit": 0,
+            "tclass": "0x00",
+            "flowlabel": "0x00000"
+          }
+        },
+        "inet6_addr_gen_mode": "eui64",
+        "num_tx_queues": 1,
+        "num_rx_queues": 1,
+        "gso_max_size": 65536,
+        "gso_max_segs": 65535,
+        "tso_max_size": 65536,
+        "tso_max_segs": 65535,
+        "gro_max_size": 65536
+      },
+      {
+        "ifindex": 10,
+        "link": null,
+        "ifname": "ip6gre0",
+        "flags": [
+          "NOARP"
+        ],
+        "mtu": 1448,
+        "qdisc": "noop",
+        "operstate": "DOWN",
+        "linkmode": "DEFAULT",
+        "group": "default",
+        "txqlen": 1000,
+        "link_type": "gre6",
+        "address": "::",
+        "broadcast": "::",
+        "permaddr": "3651:b824:c7ab::",
+        "promiscuity": 0,
+        "allmulti": 0,
+        "min_mtu": 0,
+        "max_mtu": 0,
+        "linkinfo": {
+          "info_kind": "ip6gre",
+          "info_data": {
+            "remote": "any",
+            "local": "any",
+            "ttl": 0,
+            "encap_limit": 0,
+            "tclass": "0x00",
+            "flowlabel": "0x00000"
+          }
+        },
+        "inet6_addr_gen_mode": "eui64",
+        "num_tx_queues": 1,
+        "num_rx_queues": 1,
+        "gso_max_size": 65536,
+        "gso_max_segs": 65535,
+        "tso_max_size": 65536,
+        "tso_max_segs": 65535,
+        "gro_max_size": 65536
+      }
+    ],
+    "routes4": [
+      {
+        "type": "local",
+        "dst": "127.0.0.0/8",
+        "dev": "lo",
+        "table": "local",
+        "protocol": "kernel",
+        "scope": "host",
+        "prefsrc": "127.0.0.1",
+        "flags": []
+      },
+      {
+        "type": "local",
+        "dst": "127.0.0.1",
+        "dev": "lo",
+        "table": "local",
+        "protocol": "kernel",
+        "scope": "host",
+        "prefsrc": "127.0.0.1",
+        "flags": []
+      },
+      {
+        "type": "broadcast",
+        "dst": "127.255.255.255",
+        "dev": "lo",
+        "table": "local",
+        "protocol": "kernel",
+        "scope": "link",
+        "prefsrc": "127.0.0.1",
+        "flags": []
+      }
+    ],
+    "routes6": [
+      {
+        "type": "local",
+        "dst": "::1",
+        "dev": "lo",
+        "table": "local",
+        "protocol": "kernel",
+        "metric": 0,
+        "flags": [],
+        "pref": "medium"
+      }
+    ],
+    "dockerNetworks": {}
+  },
+  "networkAccepted": true,
+  "interpreter": {
+    "pythonVersion": [
+      3,
+      12,
+      16
+    ],
+    "pythonBinarySha256": "7863a4d5e03fde7791c7f8c2c304cf3522f435e19745364ad18a6b7a0458af57"
+  },
+  "embeddedControllerSha256": "4049125feb002da6a171b96b886f276dc9d8ad8c1588c88c9523cee24ada267c",
+  "packages": "adduser\t3.134\napt\t2.6.1\nbase-files\t12.4+deb12u15\nbase-passwd\t3.6.1\nbash\t5.2.15-2+b13\nbsdutils\t1:2.38.1-5+deb12u3\nca-certificates\t20250419~deb12u2\ncoreutils\t9.1-1\ndash\t0.5.12-2\ndebconf\t1.5.82\ndebian-archive-keyring\t2023.3+deb12u2\ndebianutils\t5.7-0.5~deb12u1\ndiffutils\t1:3.8-4\ndpkg\t1.21.23\ne2fsprogs\t1.47.0-2+b2\nfindutils\t4.9.0-4\ngcc-12-base:arm64\t12.2.0-14+deb12u1\ngit\t1:2.39.5-0+deb12u3\ngit-man\t1:2.39.5-0+deb12u3\ngpgv\t2.2.40-1.1+deb12u2\ngrep\t3.8-5\ngzip\t1.12-1\nhostname\t3.23+nmu1\ninit-system-helpers\t1.65.2+deb12u1\niproute2\t6.1.0-3\nlibacl1:arm64\t2.3.1-3\nlibapt-pkg6.0:arm64\t2.6.1\nlibattr1:arm64\t1:2.5.1-4\nlibaudit-common\t1:3.0.9-1\nlibaudit1:arm64\t1:3.0.9-1\nlibblkid1:arm64\t2.38.1-5+deb12u3\nlibbpf1:arm64\t1:1.1.2-0+deb12u1\nlibbrotli1:arm64\t1.0.9-2+deb12u1\nlibbsd0:arm64\t0.11.7-2\nlibbz2-1.0:arm64\t1.0.8-5+b1\nlibc-bin\t2.36-9+deb12u14\nlibc6:arm64\t2.36-9+deb12u14\nlibcap-ng0:arm64\t0.8.3-1+b3\nlibcap2:arm64\t1:2.66-4+deb12u3+b1\nlibcap2-bin\t1:2.66-4+deb12u3+b1\nlibcom-err2:arm64\t1.47.0-2+b2\nlibcrypt1:arm64\t1:4.4.33-2\nlibcurl3-gnutls:arm64\t7.88.1-10+deb12u15\nlibdb5.3:arm64\t5.3.28+dfsg2-1\nlibdebconfclient0:arm64\t0.270\nlibelf1:arm64\t0.188-2.1\nliberror-perl\t0.17029-2\nlibexpat1:arm64\t2.5.0-1+deb12u5\nlibext2fs2:arm64\t1.47.0-2+b2\nlibffi8:arm64\t3.4.4-1\nlibgcc-s1:arm64\t12.2.0-14+deb12u1\nlibgcrypt20:arm64\t1.10.1-3+deb12u1\nlibgdbm-compat4:arm64\t1.23-3\nlibgdbm6:arm64\t1.23-3\nlibgmp10:arm64\t2:6.2.1+dfsg1-1.1\nlibgnutls30:arm64\t3.7.9-2+deb12u7\nlibgpg-error0:arm64\t1.46-1\nlibgssapi-krb5-2:arm64\t1.20.1-2+deb12u5\nlibhogweed6:arm64\t3.8.1-2\nlibidn2-0:arm64\t2.3.3-1+b1\nlibk5crypto3:arm64\t1.20.1-2+deb12u5\nlibkeyutils1:arm64\t1.6.3-2\nlibkrb5-3:arm64\t1.20.1-2+deb12u5\nlibkrb5support0:arm64\t1.20.1-2+deb12u5\nlibldap-2.5-0:arm64\t2.5.13+dfsg-5\nliblz4-1:arm64\t1.9.4-1\nliblzma5:arm64\t5.4.1-1+deb12u2\nlibmd0:arm64\t1.0.4-2\nlibmnl0:arm64\t1.0.4-3\nlibmount1:arm64\t2.38.1-5+deb12u3\nlibncursesw6:arm64\t6.4-4\nlibnettle8:arm64\t3.8.1-2\nlibnghttp2-14:arm64\t1.52.0-1+deb12u3\nlibnsl2:arm64\t1.3.0-2\nlibp11-kit0:arm64\t0.24.1-2\nlibpam-modules:arm64\t1.5.2-6+deb12u2\nlibpam-modules-bin\t1.5.2-6+deb12u2\nlibpam-runtime\t1.5.2-6+deb12u2\nlibpam0g:arm64\t1.5.2-6+deb12u2\nlibpcre2-8-0:arm64\t10.42-1+deb12u2\nlibperl5.36:arm64\t5.36.0-7+deb12u4\nlibpsl5:arm64\t0.21.2-1\nlibreadline8:arm64\t8.2-1.3\nlibrtmp1:arm64\t2.4+20151223.gitfa8646d.1-2+b2\nlibsasl2-2:arm64\t2.1.28+dfsg-10\nlibsasl2-modules-db:arm64\t2.1.28+dfsg-10\nlibseccomp2:arm64\t2.5.4-1+deb12u1\nlibselinux1:arm64\t3.4-1+b6\nlibsemanage-common\t3.4-1\nlibsemanage2:arm64\t3.4-1+b5\nlibsepol2:arm64\t3.4-2.1\nlibsmartcols1:arm64\t2.38.1-5+deb12u3\nlibsqlite3-0:arm64\t3.40.1-2+deb12u2\nlibss2:arm64\t1.47.0-2+b2\nlibssh2-1:arm64\t1.10.0-3+deb12u1\nlibssl3:arm64\t3.0.22-1~deb12u2\nlibstdc++6:arm64\t12.2.0-14+deb12u1\nlibsystemd0:arm64\t252.39-1~deb12u2\nlibtasn1-6:arm64\t4.19.0-2+deb12u1\nlibtinfo6:arm64\t6.4-4\nlibtirpc-common\t1.3.3+ds-1\nlibtirpc3:arm64\t1.3.3+ds-1\nlibudev1:arm64\t252.39-1~deb12u2\nlibunistring2:arm64\t1.0-2\nlibuuid1:arm64\t2.38.1-5+deb12u3\nlibxtables12:arm64\t1.8.9-2\nlibxxhash0:arm64\t0.8.1-1\nlibzstd1:arm64\t1.5.4+dfsg2-5\nlogin\t1:4.13+dfsg1-1+deb12u2\nlogsave\t1.47.0-2+b2\nmawk\t1.3.4.20200120-3.1\nmount\t2.38.1-5+deb12u3\nncurses-base\t6.4-4\nncurses-bin\t6.4-4\nnetbase\t6.4\nopenssl\t3.0.22-1~deb12u2\npasswd\t1:4.13+dfsg1-1+deb12u2\nperl\t5.36.0-7+deb12u4\nperl-base\t5.36.0-7+deb12u4\nperl-modules-5.36\t5.36.0-7+deb12u4\nreadline-common\t8.2-1.3\nsed\t4.9-1+deb12u1\nsysvinit-utils\t3.06-4\ntar\t1.34+dfsg-1.2+deb12u1\ntzdata\t2026e-0+deb12u1\nusr-is-merged\t37~deb12u1\nutil-linux\t2.38.1-5+deb12u3\nutil-linux-extra\t2.38.1-5+deb12u3\nzlib1g:arm64\t1:1.2.13.dfsg-1\n",
+  "uvVersion": "uv 0.13.6 (aarch64-unknown-linux-musl)",
+  "teardown": {
+    "containerId": "f16f9243b2d92a6100e78ae573c97a694e7a88616899d99bfe5f04d05163162c",
+    "terminalState": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 137,
+      "Error": "",
+      "StartedAt": "2026-10-29T20:13:05.078514046Z",
+      "FinishedAt": "2026-10-29T20:13:06.065066713Z"
+    },
+    "removed": true
+  }
+}

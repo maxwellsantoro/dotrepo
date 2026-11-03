@@ -1,0 +1,174 @@
+[
+  {
+    "system": "Linux",
+    "architecture": "aarch64",
+    "pythonVersion": [
+      3,
+      12,
+      16
+    ],
+    "pythonExecutable": "/work/checkout/.venv/bin/python",
+    "pythonBinarySha256": "7863a4d5e03fde7791c7f8c2c304cf3522f435e19745364ad18a6b7a0458af57",
+    "prefix": "/work/checkout/.venv",
+    "packagePath": "/work/checkout/src/iniconfig/__init__.py",
+    "packageSha256": "bb1c9017eea0053a104bd0703f3d8d13e7b9a854e4a364ee765ad64da7220819",
+    "packageVersion": "2.3.2.dev1+ga9e0ad14b",
+    "directUrl": {
+      "url": "file:///work/checkout",
+      "dir_info": {
+        "editable": true
+      }
+    },
+    "installedPackages": [
+      [
+        "Pygments",
+        "2.19.2"
+      ],
+      [
+        "execnet",
+        "2.1.1"
+      ],
+      [
+        "iniconfig",
+        "2.3.2.dev1+ga9e0ad14b"
+      ],
+      [
+        "packaging",
+        "25.0"
+      ],
+      [
+        "pluggy",
+        "1.6.0"
+      ],
+      [
+        "pytest",
+        "8.4.2"
+      ],
+      [
+        "pytest-xdist",
+        "3.8.0"
+      ]
+    ],
+    "trackedSha256": {
+      "example.ini": "ff70341749445bace38f6892030d707640197130169c810ec4ab4307dd831e6f",
+      "LICENSE": "3409fa91f7ace557894632676656e32264fe5ef7581535725dc9a23774551bd4",
+      "uv.lock": "39ecc453aaa568358eb33ec4395ec84f6e7196a140a88dda3c435227181bdc50",
+      "CHANGELOG": "c587a745177783dd974324a73feb40c91424b84ee4491fd4e248a427c08e7fe8",
+      ".pre-commit-config.yaml": "4c3e762bc024e7e9945a0288cb313d134cf608506472c8a9d7e79dcce796bf62",
+      "pyproject.toml": "38a961dfaf0673c57eba9fb42a13b38738ad9be5c8a0845aa574d3db4e9b97a1",
+      "MANIFEST.in": "734a192af7f7b8c2bfa5ce7ad1ed2c9a880e914076e169548d5bc2ee1a7382d9",
+      ".gitignore": "526c4e37f8e34f67a4988aaadccea0e5553335460b34eae1b835077f886cb2bc",
+      "README.rst": "995404dccb903e74e6a25530d784268257e28bf7899a219176d0f06d8d1cd7db",
+      "testing/conftest.py": "ceae34cc6fdff2b86faafe4a9ee85a502b0da7ec7e62a279f69a6e77d33e5dc2",
+      "testing/test_iniconfig.py": "004ef1d95bb7ae546ffc284dc3f33492f20278bd7811d396a5b73079172de117",
+      ".github/workflows/test.yml": "4cb88f8ee22e48eb306d353775d77562be1331605661739a10983add86e53a04",
+      "src/iniconfig/__init__.py": "bb1c9017eea0053a104bd0703f3d8d13e7b9a854e4a364ee765ad64da7220819",
+      "src/iniconfig/_parse.py": "15824a78105b52aa9ed414ce6ad073967c73be7ea5ae9d991a0df97a6e0cc2e1",
+      "src/iniconfig/py.typed": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/iniconfig/exceptions.py": "9a2a50fda3310fd0af4af156375a135d8e10b919ca00c6757f7b027668c34d4d"
+    },
+    "trackedBytesUnchanged": true,
+    "gitHead": "a9e0ad14bcd0d9d3b68d2b699ce38399cbe64fdd",
+    "gitTree": "44da15d919d8e787f6357e07dbfb58643f7ac64a",
+    "gitDescribe": "v2.3.1-1-ga9e0ad1",
+    "gitTrackedStatus": "",
+    "networkDevices": [
+      "lo",
+      "tunl0",
+      "gre0",
+      "gretap0",
+      "erspan0",
+      "ip_vti0",
+      "ip6_vti0",
+      "sit0",
+      "ip6tnl0",
+      "ip6gre0"
+    ]
+  },
+  {
+    "system": "Linux",
+    "architecture": "aarch64",
+    "pythonVersion": [
+      3,
+      12,
+      16
+    ],
+    "pythonExecutable": "/work/checkout/.venv/bin/python",
+    "pythonBinarySha256": "7863a4d5e03fde7791c7f8c2c304cf3522f435e19745364ad18a6b7a0458af57",
+    "prefix": "/work/checkout/.venv",
+    "packagePath": "/work/checkout/src/iniconfig/__init__.py",
+    "packageSha256": "bb1c9017eea0053a104bd0703f3d8d13e7b9a854e4a364ee765ad64da7220819",
+    "packageVersion": "2.3.2.dev1+ga9e0ad14b",
+    "directUrl": {
+      "url": "file:///work/checkout",
+      "dir_info": {
+        "editable": true
+      }
+    },
+    "installedPackages": [
+      [
+        "Pygments",
+        "2.19.2"
+      ],
+      [
+        "execnet",
+        "2.1.1"
+      ],
+      [
+        "iniconfig",
+        "2.3.2.dev1+ga9e0ad14b"
+      ],
+      [
+        "packaging",
+        "25.0"
+      ],
+      [
+        "pluggy",
+        "1.6.0"
+      ],
+      [
+        "pytest",
+        "8.4.2"
+      ],
+      [
+        "pytest-xdist",
+        "3.8.0"
+      ]
+    ],
+    "trackedSha256": {
+      "example.ini": "ff70341749445bace38f6892030d707640197130169c810ec4ab4307dd831e6f",
+      "LICENSE": "3409fa91f7ace557894632676656e32264fe5ef7581535725dc9a23774551bd4",
+      "uv.lock": "39ecc453aaa568358eb33ec4395ec84f6e7196a140a88dda3c435227181bdc50",
+      "CHANGELOG": "c587a745177783dd974324a73feb40c91424b84ee4491fd4e248a427c08e7fe8",
+      ".pre-commit-config.yaml": "4c3e762bc024e7e9945a0288cb313d134cf608506472c8a9d7e79dcce796bf62",
+      "pyproject.toml": "38a961dfaf0673c57eba9fb42a13b38738ad9be5c8a0845aa574d3db4e9b97a1",
+      "MANIFEST.in": "734a192af7f7b8c2bfa5ce7ad1ed2c9a880e914076e169548d5bc2ee1a7382d9",
+      ".gitignore": "526c4e37f8e34f67a4988aaadccea0e5553335460b34eae1b835077f886cb2bc",
+      "README.rst": "995404dccb903e74e6a25530d784268257e28bf7899a219176d0f06d8d1cd7db",
+      "testing/conftest.py": "ceae34cc6fdff2b86faafe4a9ee85a502b0da7ec7e62a279f69a6e77d33e5dc2",
+      "testing/test_iniconfig.py": "004ef1d95bb7ae546ffc284dc3f33492f20278bd7811d396a5b73079172de117",
+      ".github/workflows/test.yml": "4cb88f8ee22e48eb306d353775d77562be1331605661739a10983add86e53a04",
+      "src/iniconfig/__init__.py": "bb1c9017eea0053a104bd0703f3d8d13e7b9a854e4a364ee765ad64da7220819",
+      "src/iniconfig/_parse.py": "15824a78105b52aa9ed414ce6ad073967c73be7ea5ae9d991a0df97a6e0cc2e1",
+      "src/iniconfig/py.typed": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/iniconfig/exceptions.py": "9a2a50fda3310fd0af4af156375a135d8e10b919ca00c6757f7b027668c34d4d"
+    },
+    "trackedBytesUnchanged": true,
+    "gitHead": "a9e0ad14bcd0d9d3b68d2b699ce38399cbe64fdd",
+    "gitTree": "44da15d919d8e787f6357e07dbfb58643f7ac64a",
+    "gitDescribe": "v2.3.1-1-ga9e0ad1",
+    "gitTrackedStatus": "",
+    "networkDevices": [
+      "lo",
+      "tunl0",
+      "gre0",
+      "gretap0",
+      "erspan0",
+      "ip_vti0",
+      "ip6_vti0",
+      "sit0",
+      "ip6tnl0",
+      "ip6gre0"
+    ]
+  }
+]

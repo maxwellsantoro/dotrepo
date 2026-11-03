@@ -1,15 +1,38 @@
-# dotrepo
+# DotRepo
 
 [![CI](https://github.com/maxwellsantoro/dotrepo/actions/workflows/ci.yml/badge.svg)](https://github.com/maxwellsantoro/dotrepo/actions/workflows/ci.yml)
 [![Latest Release](https://img.shields.io/github/v/release/maxwellsantoro/dotrepo)](https://github.com/maxwellsantoro/dotrepo/releases/latest)
 [![License: MIT](https://img.shields.io/badge/license-MIT-0f766e.svg)](LICENSE)
 
-**Look up a repository's purpose, build and test commands, docs, and owners.**
+**Repository facts you can trace and reuse.**
 
-dotrepo is an open repository metadata protocol with a reference toolchain and
-public index. It gives agents and tools those facts as JSON, through MCP, or from a local
-`.repo` file. Each record includes source and trust context so you can decide
-whether to use an answer or inspect upstream.
+Every new investigation starts with familiar questions: what does this project
+do, where are its docs, who maintains it, and how is it built? DotRepo provides
+an open repository metadata protocol, tools and a public index for those facts.
+Read them as JSON, through MCP, or from a local `.repo` file, with their sources,
+recorded conflicts and age attached.
+
+Publishers derive context from the manifests, CI and documentation they already
+maintain. Consumers use a shared starting point, then inspect sources when the
+answer is missing, stale, conflicting or insufficient. The goal is less repeated
+work for both sides, including the work of keeping metadata useful.
+
+**[Look up a repository](#try-it-orient-yourself-in-ripgrep)** ·
+**[Connect an agent](#connect-your-agent)** ·
+**[Publish from existing sources](#add-a-record-to-your-repository)**
+
+**Experimental:** RepoDigest extends this into metadata-led discovery, bounded
+shortlisting, source-backed requirement assessment and retained findings. Its
+experimental source workflow can reach a justified preliminary choice or an explicit
+unknown; it is not in released packages or the hosted API. Start with
+[delivery status and evidence](docs/workflow-status.md), then the
+[decision guide](docs/experimental-repodigest-selection.md).
+
+Together with [PageDigest](https://pagedigest.org), this is part of **Lazy
+Collective**, the local coordination project for reducing repeated fetching,
+parsing, investigation and verification. It is not a shared deployed service.
+The [four roles and their boundaries](docs/workflow-status.md#shared-direction)
+describe two projects, not four separately released products.
 
 ## Try it: orient yourself in ripgrep
 
@@ -101,6 +124,11 @@ Use `init` instead of `import` to start from a blank scaffold. The
 [stable maintainer guide](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.4/docs/maintainer-happy-path.md)
 walks through adoption; [sync boundaries](docs/sync-boundaries.md) explain which
 files and regions dotrepo can manage.
+
+For a source checkout, the [publisher helper](docs/maintainer-happy-path.md)
+reviews existing manifests/docs through the importer, reports genuine ambiguity,
+and checks adopted-record drift without overwriting it. Its initial adoption
+mode creates a record only when none exists; no second catalog is required.
 
 ## Limits and evidence
 

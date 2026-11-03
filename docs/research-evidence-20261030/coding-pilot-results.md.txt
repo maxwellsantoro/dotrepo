@@ -1,0 +1,122 @@
+# Bounded p-limit coding pilot: retained outcome
+
+The approved corrected pilot is complete. Neither delivered patch passes the
+repository's full test command. Both declaration changes pass the separate
+protected type check. This trial establishes no productive completion or
+RepoDigest efficiency benefit.
+
+## Qualification and execution boundary
+
+The user approved adding `exec` to `/work` only. The corrected attempt reused
+the retained seed image and dependency lock, with no new dependency installation.
+Effective mount receipts establish `/work` executable and `/tmp` still `noexec`
+before each project command. Nonroot identity, resource limits, no host mounts,
+dropped capabilities, read-only root and disconnected test networking remain.
+
+The untouched `npm test` passed, including all 30 AVA tests and tsd. The protected
+red control failed with the six expected declaration/inference diagnostics.
+Independent qualification and harness reviews preceded the complete input freeze
+in `LAUNCH.json`, committed at `65b3841f` before either consumer launched.
+
+Exactly two fresh GPT-6 Luna/max sessions ran, control first, without execution
+tools or test feedback. Both completed within the declared bounds and returned
+valid patch envelopes. Their traces contain no command, file-change or web-search
+events; no remaining process-group members were found. Validation applied the
+exact bound answers only in fresh restricted containers. No retries or repairs
+were made. All six corrected-trial invocations were used. All six corrected
+containers were removed, with independent postflight absence checks retained.
+
+`execution-001` and `diagnostic-001` remain unchanged historical records. Their
+failure and diagnosis are not erased by successful corrected qualification.
+
+## Candidate quality
+
+| Check | Source-cache control | RepoDigest plus same source cache |
+| --- | --- | --- |
+| Full `npm test` | Exit 1 in XO, 14 errors | Exit 1 in XO, 6 errors |
+| AVA/tsd in full candidate run | Not reached | Not reached |
+| Original type tests plus protected oracle, against candidate declaration | Exit 0 | Exit 0 |
+| Complete deliverable ready | No | No |
+
+Both proposals add the appropriate `Iterable<Input> | ArrayLike<Input>` union.
+The protected profile restores the original type-test file and appends the
+operator oracle, so its success does not validate the delivered regression tests.
+The full runs fail on test-file lint rules, an unrelated trailing space in the
+declaration, and missing final newlines. Both README replacements also double
+four existing hard-break backslashes. These are retained quality defects.
+
+Independent source reasoning additionally identifies questionable negative
+assertions expecting length-only objects to be rejected as array-like inputs.
+The delivered tests did not reach tsd, so this is not an observed tsd failure.
+See `candidate-review.txt` for the independent final assessment and exact hashes.
+
+## Observed comparison
+
+| Whole-session measure | Control | RepoDigest |
+| --- | ---: | ---: |
+| Wall seconds | 81.86 | 114.77 |
+| Total input tokens | 81,310 | 119,838 |
+| Cached input tokens | 55,680 | 92,672 |
+| Uncached input tokens | 25,630 | 27,166 |
+| Output tokens | 7,792 | 13,004 |
+| Started/completed MCP calls | 9 / 9 | 11 / 11 |
+| MCP response text bytes | 30,156 | 29,779 |
+| Repository-host requests / response body bytes | 0 / 0 | 0 / 0 |
+
+Uncached input is total input minus cached input. Output and reasoning-output
+counters are retained in the native reports without summing potentially
+overlapping fields. Dollar billing remains unknown.
+
+The treatment made one RepoDigest lookup. It returned no assessed contextual
+instruction, no observed recipe, and no execution permission. The agent then
+investigated through the common source cache. It recovered from a list-limit
+error after requesting 200 results, and the CLI logged a nonfatal model-catalog
+refresh timeout. Neither event was removed or retried. Its reported wall time
+was 40.2% higher, uncached input 6.0% higher and output 66.9% higher. These are
+observations of this ordered pair, not causal effects or population estimates.
+
+The task already identifies the exact mismatch. Both arms have all 16 source
+files in the same offline cache; zero publisher traffic in both arms is not a
+semantic RepoDigest saving. This trial does not test reuse of an applicable
+observed recipe.
+
+## Shared costs and limits
+
+`COMPARISON.json` retains the session counters, candidate resources and linked
+prior/shared costs. The current source-completion preparation made eight requests
+and transferred 14,714 response-body bytes; it also reused previously acquired
+source and admission work. Earlier setup and seed preparation took 74.77 seconds,
+logged 1,133 npm fetch events including 616 tarballs, and received 65,327,649 bytes
+at the container interface. Interface bytes are not HTTP response-body bytes.
+The retained image has a 2,154,833,169-byte cumulative logical size including
+shared base layers, not an exclusive physical storage measurement.
+
+Qualification, failed execution, diagnosis, index/source acquisition, refresh,
+candidate validation, operator/reviewer model use and engineering effort must
+count against reuse savings. Actual billing, complete publisher/dependency body
+accounting, maintenance cost and engineering cost remain unknown. Cgroup CPU,
+memory and PID observations are retained; memory includes writable tmpfs/cache.
+No net economic conclusion follows.
+
+This single task, one pair, fixed order and read-only proposal workflow cannot
+establish average coding quality, causal savings or interactive agent benefit.
+The 50-call guard is an observational cancellation threshold; a 51st attempt
+could start before cancellation. Neither actual session approached it.
+
+## Disposition
+
+Preserve both failed complete patches and both successful protected checks. Do
+not promote either patch, synthesize execution authority, retry this pair, or
+claim a productivity win. Public consumer policy, F-05 launch gates, historical
+observations and PageDigest's unsuccessful P1 result are unchanged.
+
+The next experiment requires a new decision and preregistered scope. A useful
+choice would test whether repository-specific development constraints and a
+bounded validation-feedback step help produce complete acceptable changes.
+Repeating this known mismatch without new useful knowledge would provide little
+evidence about reusable investigation.
+
+Key records: `LAUNCH.json`, `launch-review.txt`,
+`execution-002/independent-qualification-review.txt`, both `consumer-*/report.json`
+and immutable answers, both `execution-002/candidates/*/{full,types}.json`,
+`COMPARISON.json`, `candidate-review.txt`, and `RESULTS-INVENTORY.json`.

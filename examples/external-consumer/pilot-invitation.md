@@ -1,5 +1,10 @@
 # Draft invitation for a consenting external pilot
 
+This retained, unsent template applies to a separately selected **coding/execution
+pilot**. It is not the current discovery or recurring-reuse evaluation plan; use
+the [roadmap](../../ROADMAP.md#active-execution-order) and
+[current workflow guide](../../docs/experimental-repodigest-selection.md) for that.
+
 This is a preparation draft. No recipient, consent, outreach, or participation
 is claimed. An engineer on an external team already using a coding agent is the
 preferred participant; an existing contact reduces coordination overhead.
@@ -37,8 +42,8 @@ preferred participant; an existing contact reduces coordination overhead.
 > before collecting pilot outcomes. Repeated use and any adoption or endorsement
 > claim would need a separate agreement.
 
-Preparation can proceed alongside E1 and the internal F-05 evaluation; neither
-must pass before recruitment preparation. Before sending, identify the proposed
+If this execution pilot is selected, its preparation need not wait for E1 or
+F-05 to pass. The retained template does not schedule that work. Before sending, identify the proposed
 contact, integration, ownership of execution/logs, treatment of confidential
 source data, and observation window. Sending needs separate explicit authorization.
 Participant consent, a compatible deployed integration and a complete new pilot

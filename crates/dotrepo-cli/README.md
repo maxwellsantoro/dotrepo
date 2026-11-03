@@ -1,6 +1,9 @@
-# dotrepo CLI
+# DotRepo CLI
 
-Inspect and maintain repository metadata with the `dotrepo` command. This package also supplies the `dotrepo-public-query` server.
+Inspect and maintain repository metadata with the `dotrepo` command. Records
+retain evidence, trust and freshness context. Inspect upstream when a record is
+missing, stale, conflicting or insufficient for your task. This package also
+supplies the `dotrepo-public-query` server.
 
 For production, install the verified stable package:
 

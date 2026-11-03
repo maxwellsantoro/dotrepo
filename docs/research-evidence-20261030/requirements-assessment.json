@@ -1,0 +1,78 @@
+{
+  "target": {
+    "repository": "github.com/microsoft/markitdown",
+    "revision": "7482c092d9c0074a89803c9fdb63a969e7fe17fc",
+    "component": "packages/markitdown"
+  },
+  "claims": [
+    {
+      "key": "conversion.docx-to-markdown",
+      "value": true,
+      "basis": "publisher-declaration",
+      "reason": "README advertises conversion to Markdown and a DOCX extra activating Word support.",
+      "limitations": "Advertised support with the optional docx dependencies; no execution, output-quality or universal document-compatibility evidence.",
+      "evidence": [
+        {
+          "path": "README.md",
+          "sha256": "cd5ba48d320fedd4f5f2845a97968491b557d39d8afe264eb423d5c6906adf09",
+          "startLine": 9,
+          "endLine": 9
+        },
+        {
+          "path": "README.md",
+          "sha256": "cd5ba48d320fedd4f5f2845a97968491b557d39d8afe264eb423d5c6906adf09",
+          "startLine": 97,
+          "endLine": 97
+        },
+        {
+          "path": "README.md",
+          "sha256": "cd5ba48d320fedd4f5f2845a97968491b557d39d8afe264eb423d5c6906adf09",
+          "startLine": 103,
+          "endLine": 103
+        }
+      ]
+    },
+    {
+      "key": "conversion.pptx-to-markdown",
+      "value": true,
+      "basis": "publisher-declaration",
+      "reason": "README advertises conversion to Markdown and a PPTX extra activating PowerPoint support.",
+      "limitations": "Advertised support with the optional pptx dependencies; no execution, output-quality or universal presentation-compatibility evidence.",
+      "evidence": [
+        {
+          "path": "README.md",
+          "sha256": "cd5ba48d320fedd4f5f2845a97968491b557d39d8afe264eb423d5c6906adf09",
+          "startLine": 9,
+          "endLine": 9
+        },
+        {
+          "path": "README.md",
+          "sha256": "cd5ba48d320fedd4f5f2845a97968491b557d39d8afe264eb423d5c6906adf09",
+          "startLine": 97,
+          "endLine": 97
+        },
+        {
+          "path": "README.md",
+          "sha256": "cd5ba48d320fedd4f5f2845a97968491b557d39d8afe264eb423d5c6906adf09",
+          "startLine": 102,
+          "endLine": 102
+        }
+      ]
+    },
+    {
+      "key": "python.declared-3-9",
+      "value": false,
+      "basis": "source-analysis",
+      "reason": "The package declares requires-python >=3.10,<3.15, excluding Python 3.9.",
+      "limitations": "Declared package compatibility, not an execution result on any interpreter.",
+      "evidence": [
+        {
+          "path": "packages/markitdown/pyproject.toml",
+          "sha256": "6b353e793a4277ab121c6c4433b181882bef5dcdad3fc30e65878bd4dd2041f5",
+          "startLine": 10,
+          "endLine": 10
+        }
+      ]
+    }
+  ]
+}

@@ -1,8 +1,9 @@
 # External consumer integration
 
-Template for landing a non-operator integration that resolves repository facts
-through dotrepo instead of scraping. Use this when onboarding an agent
-framework, research crawler, IDE extension, or internal tool.
+Use DotRepo as a shared starting point for repository facts, retaining evidence,
+age and conflicts. Inspect upstream when indexed answers are insufficient. This
+guide covers agent frameworks, research crawlers, IDE extensions and internal
+tools; a lookup is orientation, not a suitability or execution guarantee.
 
 ## Prefer hosted lookup before clone
 
@@ -51,7 +52,9 @@ Install the **stable** `dotrepo-mcp` binary from the
 [installation guide](./install.md), which owns the current stable version and
 bundle links. See [release compatibility](release-compatibility.md).
 Stable lookup returns summary, trust, snapshot metadata, and optional query;
-profile inclusion and newer target checks described on `main` are unreleased.
+profile inclusion and the newer target checks are available in the published
+`2.0.0-rc.2` preview. See the version matrix for exact scope; later source
+experiments are not added to an installed release by a source merge.
 
 ## Integration acceptance criteria
 

@@ -57,7 +57,7 @@ def publish_discovery(root: Path, base_path: str = "") -> None:
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23116466'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23fbf5e9'/%3E%3C/svg%3E">
   <meta property="og:url" content="{url}">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="dotrepo">
+  <meta property="og:site_name" content="DotRepo">
   <meta property="og:title" content="{title}">
   <meta property="og:description" content="{description}">
   <meta name="twitter:card" content="summary">

@@ -1,6 +1,6 @@
-# dotrepo VS Code extension
+# DotRepo VS Code extension
 
-This is the thin VS Code shell for dotrepo on the current source branch. For
+This is the thin VS Code shell for DotRepo on the current source branch. For
 installed stable binaries, use [release compatibility](../../docs/release-compatibility.md)
 and the version-matched extension guide linked there.
 
@@ -47,8 +47,9 @@ For normal use, install `dotrepo` and `dotrepo-lsp` from the release bundles
 described in [`docs/install.md`](../../docs/install.md), then make those
 binaries available on `PATH`.
 
-The extension itself can also be installed from the tagged `.vsix` release
-asset.
+Install the extension from the tagged `.vsix` release asset. Marketplace and
+Open VSX publication are not part of the current installation path. Source-copy
+updates do not replace an already published VSIX.
 
 ## Local development
 

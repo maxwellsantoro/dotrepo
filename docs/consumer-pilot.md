@@ -1,6 +1,18 @@
 # Consumer evaluation and pilot preparation
 
-The autonomous consumer evaluation follows the frozen October 29
+## Current workflow evaluation
+
+The [roadmap](../ROADMAP.md#active-execution-order) owns current priorities.
+Start with the [bounded preliminary decision workflow](experimental-repodigest-selection.md)
+and [current evidence](workflow-status.md), including useful scoped unknowns,
+source fallback and unfinished attempts. Pair these with publisher setup/update
+controls at equivalent output quality and freshness. A source-supported
+preliminary fit does not require running a build/test task. Local workflow
+validation does not establish independent adoption or net savings.
+
+## Separate execution and external-pilot track
+
+The retained autonomous coding-task design follows the frozen October 29
 [F-05 specification](../benchmarks/head-to-head/experiments/applicability-2026-10-29/f05.md)
 and its [shared experiment boundaries](../benchmarks/head-to-head/experiments/applicability-2026-10-29/README.md).
 F-05 and E1 may proceed concurrently and decide acceptance independently; F-05
@@ -9,9 +21,10 @@ execution and reporting do not require E1 to pass. The
 retains source enrollment and draft gold/oracles; it does not complete the model,
 environment, snapshot, budget, scoring, or isolation freeze needed for execution.
 
-External pilot preparation (C3) can start now alongside that work. Its execution
-requires participant consent, a separate frozen protocol and a compatible deployed
-integration. No participating team, consent, outreach, or independent adoption is
+A separately selected external execution pilot (C3) requires participant consent,
+a separate frozen protocol and a compatible deployed integration. These are
+conditions on that pilot, not an active instruction to recruit or a prerequisite
+for local decision/recurring-reuse work. No participating team, consent, outreach, or independent adoption is
 claimed. The internal F-05 campaign and an external pilot retain separate task
 rosters, freezes and outcome evidence.
 
@@ -114,8 +127,9 @@ independent adoption.
 
 ## Preparation and handoff
 
-Follow the [roadmap](../ROADMAP.md) for start conditions and priority. Prepare
-the external brief, adapter and measurement plan now; consent and the pilot's
+When the execution pilot is separately selected, follow the
+[roadmap](../ROADMAP.md) for start conditions and priority. Prepare its brief,
+adapter and measurement plan within that scope; consent and the pilot's
 execution freeze remain dependencies for collecting participant outcomes:
 
 | Package | Reviewable output | Dependency |
@@ -123,7 +137,7 @@ execution freeze remain dependencies for collecting participant outcomes:
 | Workload and rubric | Frozen tasks selected before checking index coverage; upstream answers and task-success rubric with source/check dates | No consumer deployment required |
 | Integration adapter | Bounded lookup, identity/age/conflict checks, upstream fallback, and outcome telemetry exercised with fixtures | Use the existing [consumer policy](external-consumer-integration.md#positive-command-acceptance) |
 | Measurement harness | Independent source-first and access sessions with frozen assignment, cache state, actual usage, fallback work, and maintenance-cost allocation | Validate compatibility and freeze the rubric before execution |
-| Recruitment package | Unsent invitation, proposed integration, execution/log ownership, data-handling plan and proposed observation window | Preparation can proceed now; sending requires separate explicit authorization |
+| Recruitment package | Unsent invitation, proposed integration, execution/log ownership, data-handling plan and proposed observation window | Prepare only within the selected pilot scope; sending requires separate explicit authorization |
 | Independent pilot execution | Consenting team, compatible deployed integration URL, frozen workload/protocol and retained outcome report | Participant consent and a complete new pilot freeze; no E1 acceptance gate |
 
 The coordinator fixes the workload and policy versions, checks adapter/harness

@@ -1,0 +1,23 @@
+{
+  "expectedTimeout": true,
+  "processesBeforeTermination": "PID                 COMMAND\n56670               /bin/sleep infinity\n56692               /bin/sh -c sleep 300 & echo child=$!; wait\n56698               sleep 300\n",
+  "childObserved": true,
+  "teardown": {
+    "containerId": "c5ae676ec89510c6948efa8db8fff2113165f4cce71bafc056ad46a40829f378",
+    "terminalState": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 137,
+      "Error": "",
+      "StartedAt": "2026-10-29T20:13:06.361363422Z",
+      "FinishedAt": "2026-10-29T20:13:07.558736131Z"
+    },
+    "removed": true
+  },
+  "pass": true
+}

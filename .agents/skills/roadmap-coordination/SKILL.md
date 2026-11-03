@@ -19,8 +19,9 @@ and dependency checks with one agent.
   Use roadmap priority to allocate contested resources and order integration;
   do not serialize independent preparation behind an outcome gate. Before
   dispatch, settle shared contract changes and assign disjoint writable paths.
-  Start elapsed-time/external gates (scheduled-run streaks, operator actions,
-  recruitment) on day zero; they cannot be accelerated later. In one shared
+  Start elapsed-time or external gates early only when the current roadmap
+  selects them and the user has authorized the required actions. Historical
+  pilot packets do not schedule recruitment or block local workflow controls. In one shared
   checkout, only the coordinator switches branches — workers use worktrees or
   hand back diffs for the coordinator to apply (see the execution guide).
   Batch waves by CI scope (prose → Python/workflows → Rust) and run the full

@@ -1,0 +1,23 @@
+{
+  "exitCode": 2,
+  "stdout": "",
+  "stderr": "/bin/tar: Archive is compressed. Use -z option\n/bin/tar: Error is not recoverable: exiting now\n",
+  "candidateCodeExecuted": false,
+  "teardown": {
+    "containerId": "5c481d900bc463dc8ddc920369b264629e28e2eb2a54842136be5bab496e83f9",
+    "terminalState": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 137,
+      "Error": "",
+      "StartedAt": "2026-10-29T20:01:43.7940043Z",
+      "FinishedAt": "2026-10-29T20:01:44.088913634Z"
+    },
+    "removed": true
+  }
+}

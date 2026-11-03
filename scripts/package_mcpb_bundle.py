@@ -89,11 +89,11 @@ def build_manifest(version: str, platform_binaries: dict[str, str]) -> dict:
     return {
         "manifest_version": "0.3",
         "name": "dotrepo-mcp",
-        "display_name": "dotrepo",
+        "display_name": "DotRepo",
         "version": version,
         "description": (
-            "Trust-aware repository metadata: validate, query, and look up "
-            ".repo records and the dotrepo.org public index without scraping."
+            "Repository facts with evidence and age. Validate and query .repo records; "
+            "use upstream sources when indexed answers are insufficient."
         ),
         "author": {"name": "Maxwell Santoro", "url": "https://dotrepo.org"},
         "repository": {
@@ -169,7 +169,7 @@ def main() -> int:
         server["version"] = args.version
         channel = "Preview" if "-" in args.version else "Stable"
         server["description"] = (
-            f"{channel} repository facts with evidence. Choose your release channel at dotrepo.org/docs."
+            f"{channel} repository facts with evidence and age; inspect upstream when answers are insufficient."
         )
         packages = server.get("packages")
         if not isinstance(packages, list) or len(packages) != 1:

@@ -1,0 +1,88 @@
+{
+  "experiment": "digest-exchange-r1-iniconfig-execution-20261029",
+  "base": "2b78922f463b63788ddd400145aebf831f58f4d5",
+  "parentExperiment": "digest-exchange-r1-iniconfig-closure-20261029",
+  "task": {
+    "id": "iniconfig-root-tests",
+    "repository": "github.com/pytest-dev/iniconfig",
+    "revision": "a9e0ad14bcd0d9d3b68d2b699ce38399cbe64fdd",
+    "purpose": "test",
+    "scope": "repository",
+    "component": null,
+    "workingDirectory": ".",
+    "environment": {
+      "os": "linux",
+      "toolchain": "Python 3.12"
+    }
+  },
+  "hypothesis": "An attributed synthesized root-checkout recipe, with exact Git metadata and explicit CPython 3.12 selection, runs the complete pinned iniconfig test suite and proves the intended local package was tested.",
+  "authorization": "User activated keep going until we get stuck / need to review and make decisions after the proposed bounded Linux execution trial. This is the distinct candidate-execution phase, outside acquisition.",
+  "scope": "One previously inspected development task; two fresh Linux arm64 containers. No held-out campaign, task-benefit or cross-platform claim.",
+  "source": "Full public Git history/tags and detached checkout at the fixed commit, acquired without upstream execution. Verify all 16 tracked blobs against the parent frozen source before transfer and after setup/testing.",
+  "environmentPreparation": {
+    "pythonBase": "python@sha256:e697c81897302a4c4333bade000d98038fbb21eb064f8ee1fd42d02ebcd9d337",
+    "uvImage": "ghcr.io/astral-sh/uv@sha256:af22a52f5eafef3d78e551599d405c02df61919d18028f0cea8eda93bc9986d0",
+    "additionalTool": "Debian git package; record final image ID and complete tool/package versions before candidate execution.",
+    "freeze": "Record source archive hash, image identity, controller/runner hashes and commands before the first measured run."
+  },
+  "recipe": {
+    "workingDirectory": "/work/checkout",
+    "scope": "repository",
+    "setup": [
+      "uv",
+      "sync",
+      "--locked",
+      "--python",
+      "/usr/local/bin/python3.12",
+      "--group",
+      "dev"
+    ],
+    "test": [
+      "uv",
+      "run",
+      "--offline",
+      "--no-sync",
+      "--python",
+      "/usr/local/bin/python3.12",
+      "pytest",
+      "testing",
+      "--color=no",
+      "--junitxml=/work/results.xml"
+    ],
+    "method": "synthesized and experimentally observed, not an upstream-extracted CI command"
+  },
+  "isolation": {
+    "cpus": 1,
+    "memoryMiB": 768,
+    "pids": 64,
+    "rootFilesystem": "read-only",
+    "capabilities": "all dropped",
+    "noNewPrivileges": true,
+    "user": "1000:1000",
+    "workTmpfsMiB": 384,
+    "tmpTmpfsMiB": 64,
+    "hostMounts": "Only an owned first-party controller file, read-only; no credentials, socket or home mounts.",
+    "network": "Dependency setup may use network; disconnect before all provenance imports and test execution.",
+    "secrets": "No host environment or credentials forwarded."
+  },
+  "budgets": {
+    "imagePreparationWallSeconds": 300,
+    "sourceAcquisitionWallSeconds": 90,
+    "sourceArchiveBytes": 33554432,
+    "runs": 2,
+    "setupWallSecondsPerRun": 180,
+    "testWallSecondsPerRun": 60,
+    "outputBytesPerStage": 1048576,
+    "networkBytesPerSetup": 67108864,
+    "totalMeasuredWallSeconds": 600,
+    "externalProviderCalls": 0
+  },
+  "acceptance": [
+    "Exact Linux/CPython 3.12 interpreter and distribution path observed; imported package path and all tracked blob hashes match this revision.",
+    "Setup and test exit zero; at least 34 test cases, no failures/errors/skips, and JUnit covers every top-level test definition.",
+    "Original pyproject.toml and uv.lock remain byte-identical.",
+    "The test network is disconnected and hard limits are inspected. Timeout control must prove the container and its child terminate.",
+    "Both assigned fresh runs must satisfy the same conditions. Failed attempts remain in the denominator; any recipe amendment gets a new specification."
+  ],
+  "negativeOutcome": "A failure, wrong package/interpreter/source identity, incomplete test collection, missing execution evidence or failed teardown is no-go. Even two passes establish only this synthesized recipe in this environment, not production consumer eligibility or economic benefit."
+}

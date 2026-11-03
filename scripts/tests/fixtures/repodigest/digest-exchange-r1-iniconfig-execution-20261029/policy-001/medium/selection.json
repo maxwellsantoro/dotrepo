@@ -1,0 +1,28 @@
+{
+  "fieldConfidence": "medium",
+  "kind": "honest inferred candidate",
+  "exportExitCode": 0,
+  "exportedEvidence": {
+    "repo.test": {
+      "checkedAt": "2026-10-29T20:14:13.432449Z",
+      "confidence": "medium",
+      "method": "inferred",
+      "source": "EXPERIMENT-RECIPE.json",
+      "state": "present"
+    },
+    "repo.test_context": {
+      "checkedAt": "2026-10-29T20:14:13.432449Z",
+      "confidence": "medium",
+      "method": "inferred",
+      "source": "EXPERIMENT-RECIPE.json",
+      "state": "present"
+    }
+  },
+  "selection": {
+    "instruction": null,
+    "provenance": null,
+    "fallbackReasons": [
+      "no-assessed-contextual-instruction"
+    ]
+  }
+}

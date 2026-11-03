@@ -1,0 +1,52 @@
+# Cargo binary/interface correction and replay
+
+The original blind run and runtime are retained at commit
+`b4489987acc296bdfcd8d097c38647b1dff9bfe5`, `METHOD.json`, `compiled-001` and
+`evaluation-001`. Its negative result is unchanged.
+
+The original compiler exposed Cargo binary targets as `command-line` interfaces.
+The retained Universal Android Debloater README explicitly describes a GUI,
+demonstrating a semantic overclaim. A target-identity-only caveat was insufficient
+while the fact itself said CLI. Current code stores explicit `[[bin]]` and
+convention-derived `src/main.rs` identities only in full-profile `targetEvidence`
+with value `binary`. Neither adds a CLI kind/interface. Conventional `src/lib.rs`
+remains a derived library interface with manifest/target hashes and Cargo rules.
+
+`METHOD-CORRECTION.json` binds corrected code and `compiled-002` before a separate
+replay using the same cohort, metadata, queries, judgments, ranking and budgets.
+This is a post-outcome defect correction, not a new blind/preregistered study.
+No source acquisition or consumer session was repeated. Both runs remain
+available; no result was selected for advantage.
+
+| Corrected replay | Metadata | RepoDigest |
+| --- | ---: | ---: |
+| Supported pairs found at 5 and 10 | 13 / 13 | 13 / 13 |
+| MRR on supported tasks | 0.962 | 1.000 |
+| Canonical `o200k_base` response tokens | 15,011 | 27,913 |
+| Response bytes | 51,471 | 99,355 |
+| Supported pairs per 1,000 response tokens | 0.866 | 0.466 |
+| Mean candidate bytes | 501 | 621 |
+| Maximum candidate bytes | 699 | 831 |
+
+Treatment still returns 148 leads versus 88. Five treatment orders change after
+false CLI signals are removed. Supported recall and the D02 ranking improvement
+remain the same. Treatment uses 86.0% more response tokens; the quality-per-token
+advantage still fails. The 11,149-token reference-guided source-reading lower
+bound remains identical in both modes. No consumer work savings or final
+correct-refusal result is established.
+
+The corrected store contains 97 source profiles and the same three metadata-only
+fallbacks. Its Rust components retain 10 derived and 16 explicit binary target
+records separately from CLI interfaces. Independent correction review replays
+all 36 results and checks the GUI counterexample; see
+`independent-correction-review.txt`.
+
+The corrected compilation adds 14.99 seconds to earlier build/re-admission costs.
+Additional engineering, review and checks also count; see
+`COST-LEDGER-CORRECTION.json`. Current local examples use `compiled-002`. Replay
+the original run at its recorded commit because the reader refuses older policies.
+
+This task set favors cheap metadata shortlisting followed by selective source
+understanding. Source retrieval selectivity and useful constraint evidence need
+improvement before a paired-agent benefit study. This correction is included in
+the final integrated checks; no public instruction or execution policy changed.

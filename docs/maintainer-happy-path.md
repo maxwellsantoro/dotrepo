@@ -9,6 +9,44 @@ The [native example](../examples/native-minimal/) contains a canonical manifest,
 generated surfaces, and [starter CI](../examples/native-minimal/.github/workflows/dotrepo-check.yml).
 When developing inside dotrepo, replace `dotrepo` with `cargo run -p dotrepo-cli --`.
 
+## Source-first publisher review (local experimental helper)
+
+The local helper derives a fresh candidate from the existing manifests, CI and
+documentation through `dotrepo.import_preview`. It needs no hand-maintained
+catalog and does not run repository code or call a model. This helper is available from
+this source checkout; it is not included in the released CLI.
+
+```bash
+cargo build --locked -p dotrepo-cli -p dotrepo-mcp
+uv run python scripts/publisher_workflow.py --root /path/to/project
+```
+
+The JSON report separates derived facts, inspected source paths, source
+assessments and actual clarifications. Missing optional metadata is not a
+request to invent it. Add `--require-field repo.test` only when a test default is
+needed for this workflow; an unresolved field then asks for a clarification in
+the owning documentation, manifest or CI. Conflicting documentation declarations
+remain explicit. These facts support orientation, not execution qualification.
+
+For first setup, review the candidate and use the same invocation with `--adopt`
+to bootstrap an absent `.repo` through the native importer. The helper refuses
+to overwrite an existing `.repo`. If you do not need native declarations or
+document generation, continue using the source-derived review without adopting
+a second representation.
+
+After ordinary source edits, run the helper again. For an existing `.repo`, its
+`changes` compare the current declaration with the new source-derived value;
+the existing `doctor`, `preview --all` and `generate --check` results appear in
+the same report. A missing derived value is not a deletion request. Preserve
+intentional maintainer overrides, and resolve genuine disagreements in their
+owning sources. Generation and document ownership are separate explicit choices
+in the steps below; this helper never rewrites prose.
+
+`--check` exits 1 for pending adoption, clarification, source/declaration changes
+or a failed native check, 2 for a blocked operation, and 0 for unchanged adopted
+state. The normal review exits 0 even with reported findings, so it can be used
+as an informational CI artifact without imposing a new required check.
+
 ## 1. Bootstrap and review
 
 Choose one starting point:

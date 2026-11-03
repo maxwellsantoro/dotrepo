@@ -1,0 +1,28 @@
+{
+  "repeat": 1,
+  "containerId": "1966e60e31c59963c7d2d5f9f83acc5edb407bb3ad1615a9329de60bb5a86f82",
+  "pass": false,
+  "failure": null,
+  "reasons": [
+    "test-network-not-disconnected"
+  ],
+  "testCases": 54,
+  "testDefinitions": 34,
+  "teardown": {
+    "containerId": "1966e60e31c59963c7d2d5f9f83acc5edb407bb3ad1615a9329de60bb5a86f82",
+    "terminalState": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 137,
+      "Error": "",
+      "StartedAt": "2026-10-29T20:05:11.363366341Z",
+      "FinishedAt": "2026-10-29T20:05:15.833000676Z"
+    },
+    "removed": true
+  }
+}

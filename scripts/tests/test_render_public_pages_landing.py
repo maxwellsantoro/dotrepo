@@ -193,7 +193,7 @@ if __name__ == "__main__":
 
 def test_docs_offer_clear_task_paths_and_version_context():
     rendered = public_pages.render_docs_index("")
-    assert "Get started with dotrepo." in rendered
+    assert "Get started with DotRepo." in rendered
     assert 'aria-label="Choose a getting-started path"' in rendered
     assert "1. Look up a repository" in rendered
     assert "2. Connect your agent" in rendered
@@ -211,7 +211,7 @@ def test_catalog_cap_note_starts_hidden_and_tracks_unshown_results():
 
 def test_writing_avoids_internal_review_labels():
     rendered = public_pages.render_writing_index("")
-    assert "How dotrepo works, and what we’re learning." in rendered
+    assert "How DotRepo works, and what we’re learning." in rendered
     assert "Local review root" not in rendered
 
 
@@ -233,4 +233,7 @@ def test_rendered_install_command_tracks_the_install_guide(tmp_path, monkeypatch
     assert public_pages.stable_mcp_install() in rendered
     assert "cargo install dotrepo-mcp --version 1.0.4 --locked" in rendered
     assert "cargo install dotrepo-mcp --version 1.0.1 --locked" not in rendered
-    assert "Stable 1.0.4 includes the contained-write backport" in rendered
+    assert "published 2.0.0-rc.2 preview" in rendered
+    assert "Stable 1.0.4 and RC2 include the contained-write protections" in rendered
+    assert "RC1 predates them" in rendered
+    assert "the published RC predates it" not in rendered

@@ -147,9 +147,12 @@ Cloudflare and `/dotrepo` review-path exports are both exercised.
 
 `--skip-release-bundle --skip-vsix` selects the lightweight public-only path.
 `--skip-vsix` omits extension packaging only; report that omission and run full
-packaging before declaring release completion. Index-only CI uses the lightweight
-path; toolchain and `docs/` or `rfcs/` changes currently select the full gate through
-[the scope classifier](../.github/workflows/ci.yml).
+packaging before declaring release completion. Required checks follow the
+[scope classifier](../scripts/classify_ci_scope.py) and
+[contributor scope table](../CONTRIBUTING.md#local-checks), not the file extension
+alone. Explicitly owned prose can use the minimal gate; protocol/installation
+docs, RFCs and unknown paths retain broader checks. Mixed changes use the union
+of requirements, and complete release checks include the public checks.
 
 CI uploads the public tree/bundle and applicable install/VSIX artifacts. Full
 release artifacts retain 14 days; lightweight public artifacts retain seven.

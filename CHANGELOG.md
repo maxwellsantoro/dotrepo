@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+- Add the local experimental RepoDigest source store, retained-source tools,
+  compact discovery and exact-revision requirement assessments with a bounded
+  shortlist/decision flow. Report supported, contradicted and unknown evidence,
+  cap page requests, and retain unfinished selection attempts. These source
+  tools do not change the public Rust MCP contract or grant execution authority.
+- Add source-derived publisher preview/adoption/drift tooling using the existing
+  importer, MCP and CLI without overwriting adopted records. Reconcile source
+  documentation and roadmap with discovery, requirement assessment and reuse.
+  Retain compact, verbatim negative-study results with provenance; full research
+  captures remain on their preserved experimental branches.
+
 - Recover explicit README documentation declarations lost by the ownership
   parser: bounded descriptive resource rows, documentation-location prose,
   and decorated navigation links. Keep third-party qualifiers and conflicting

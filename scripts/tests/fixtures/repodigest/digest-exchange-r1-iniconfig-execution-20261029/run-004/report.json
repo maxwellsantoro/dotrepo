@@ -1,0 +1,62 @@
+{
+  "assignedRuns": 2,
+  "completedRuns": 2,
+  "passedRuns": 2,
+  "wallSeconds": 12.529546875040978,
+  "runs": [
+    {
+      "repeat": 0,
+      "containerId": "9ec1d22b2942237f3c14c5d2b5d60255d50770ea97eb0e9bb1517187d9d2b260",
+      "pass": true,
+      "failure": null,
+      "reasons": [],
+      "testCases": 54,
+      "testDefinitions": 34,
+      "teardown": {
+        "containerId": "9ec1d22b2942237f3c14c5d2b5d60255d50770ea97eb0e9bb1517187d9d2b260",
+        "terminalState": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 137,
+          "Error": "",
+          "StartedAt": "2026-10-29T20:13:07.769735172Z",
+          "FinishedAt": "2026-10-29T20:13:13.178188717Z"
+        },
+        "removed": true
+      }
+    },
+    {
+      "repeat": 1,
+      "containerId": "0e351abf98e82b4d51e04939812fd5d075df5f5365b97e095fe7529ac7039dec",
+      "pass": true,
+      "failure": null,
+      "reasons": [],
+      "testCases": 54,
+      "testDefinitions": 34,
+      "teardown": {
+        "containerId": "0e351abf98e82b4d51e04939812fd5d075df5f5365b97e095fe7529ac7039dec",
+        "terminalState": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 137,
+          "Error": "",
+          "StartedAt": "2026-10-29T20:13:13.4867818Z",
+          "FinishedAt": "2026-10-29T20:13:18.676596969Z"
+        },
+        "removed": true
+      }
+    }
+  ],
+  "claim": "Observed synthesized recipe on pinned Linux arm64 environment; no public instruction qualification or task-benefit claim.",
+  "outcome": "go-for-this-recipe-only"
+}
