@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Retry failed crawler GET transmissions within the existing shared three-retry
+  budget, preserving the captured source URL, timeouts and TLS verification.
+  Count attempted requests even without a response and retain the final error
+  cause. Permanent errors and exhausted retries still fail; missing optional
+  files remain distinct from transport and content-decoding failures.
+
 - Preserve explicit documentation navigation across separate HTML paragraphs
   and recognize linked HTML images labeled `Docs` or `Documentation`. Retain
   the outer URL and source line; keep third-party qualifiers, malformed badges,

@@ -1,10 +1,13 @@
+mod http;
+
 use crate::materialize::{ConventionalRepositoryFiles, RepositoryTextFile};
 use crate::{
     CrawlerStateSnapshot, DiscoveredRepository, GitHubRepositorySnapshot, NetworkUsage,
     RefreshCandidate, RepositoryRef, StarBand,
 };
 use anyhow::{anyhow, Context, Result};
-use reqwest::blocking::{Client, Response};
+use http::build_http_client;
+use reqwest::blocking::Client;
 use reqwest::header::{HeaderMap, HeaderName, HeaderValue, ACCEPT, AUTHORIZATION, USER_AGENT};
 use reqwest::{StatusCode, Url};
 use serde::de::DeserializeOwned;
@@ -12,7 +15,6 @@ use serde::Deserialize;
 use std::cell::RefCell;
 use std::collections::BTreeMap;
 use std::path::PathBuf;
-use std::time::Duration;
 
 const GITHUB_API_VERSION: &str = "2022-11-28";
 const README_CANDIDATES: &[&str] = &[
@@ -64,10 +66,6 @@ const SUPPLEMENTAL_ROOT_FILES: &[&str] = &[
     "mvnw",
 ];
 const MAX_WORKFLOW_FILES: usize = 8;
-const GITHUB_HTTP_TIMEOUT: Duration = Duration::from_secs(30);
-const GITHUB_HTTP_CONNECT_TIMEOUT: Duration = Duration::from_secs(10);
-const MAX_RATE_LIMIT_RETRIES: u32 = 3;
-const RATE_LIMIT_RETRY_BASE: Duration = Duration::from_secs(2);
 
 pub(crate) trait GitHubClient {
     fn fetch_repository_head(
@@ -649,78 +647,6 @@ impl HttpGitHubClient {
         }
         Ok(files)
     }
-
-    fn send_with_retry(&self, url: Url) -> Result<Response> {
-        let mut attempt = 0;
-        loop {
-            let response = self
-                .client
-                .get(url.clone())
-                .send()
-                .with_context(|| format!("failed to GET {}", url.as_str()))?;
-
-            // Count every attempt (including rate-limited retries) as real
-            // network traffic. `content_length()` reads the header only, so
-            // this never consumes the body the caller still needs to read.
-            {
-                let mut usage = self.network.borrow_mut();
-                usage.requests += 1;
-                usage.bytes += response.content_length().unwrap_or(0);
-            }
-
-            let status = response.status();
-            if status.is_success() || status == StatusCode::NOT_FOUND {
-                return Ok(response);
-            }
-
-            let is_rate_limited = status == StatusCode::TOO_MANY_REQUESTS
-                || response
-                    .headers()
-                    .get("x-ratelimit-remaining")
-                    .and_then(|value| value.to_str().ok())
-                    == Some("0");
-
-            if !is_rate_limited || attempt >= MAX_RATE_LIMIT_RETRIES {
-                let body = response.text().unwrap_or_default();
-                if is_rate_limited {
-                    return Err(anyhow!(
-                        "GitHub API rate limited after {} retries {}: HTTP {} {}",
-                        attempt,
-                        url,
-                        status.as_u16(),
-                        compact_error_body(&body)
-                    ));
-                }
-                return Err(anyhow!(
-                    "GitHub request failed {}: HTTP {} {}",
-                    url,
-                    status.as_u16(),
-                    compact_error_body(&body)
-                ));
-            }
-
-            let sleep_duration = rate_limit_sleep_duration(&response, attempt);
-            let _ = response.text(); // drain body
-            eprintln!(
-                "dotrepo-crawler: rate limited on {} (attempt {}/{}), sleeping {:.1}s",
-                url.path(),
-                attempt + 1,
-                MAX_RATE_LIMIT_RETRIES,
-                sleep_duration.as_secs_f64()
-            );
-            std::thread::sleep(sleep_duration);
-            attempt += 1;
-        }
-    }
-}
-
-fn build_http_client(headers: HeaderMap) -> Result<Client> {
-    Client::builder()
-        .default_headers(headers)
-        .connect_timeout(GITHUB_HTTP_CONNECT_TIMEOUT)
-        .timeout(GITHUB_HTTP_TIMEOUT)
-        .build()
-        .context("failed to build GitHub HTTP client")
 }
 
 impl GitHubClient for HttpGitHubClient {
@@ -902,37 +828,6 @@ fn github_token() -> Option<String> {
         .or_else(|| std::env::var("GH_TOKEN").ok())
         .map(|token| token.trim().to_string())
         .filter(|token| !token.is_empty())
-}
-
-fn rate_limit_sleep_duration(response: &Response, attempt: u32) -> Duration {
-    let reset_seconds = response
-        .headers()
-        .get("x-ratelimit-reset")
-        .and_then(|value| value.to_str().ok())
-        .and_then(|value| value.parse::<u64>().ok());
-
-    if let Some(reset_epoch) = reset_seconds {
-        let now_epoch = std::time::SystemTime::now()
-            .duration_since(std::time::UNIX_EPOCH)
-            .unwrap_or_default()
-            .as_secs();
-        if reset_epoch > now_epoch {
-            let wait = reset_epoch - now_epoch;
-            return Duration::from_secs(wait.min(120));
-        }
-    }
-
-    let jitter = (attempt as u64 * 37) % 1000;
-    RATE_LIMIT_RETRY_BASE * 2u32.pow(attempt) + Duration::from_millis(jitter)
-}
-
-fn compact_error_body(body: &str) -> String {
-    let compact = body.split_whitespace().collect::<Vec<_>>().join(" ");
-    if compact.is_empty() {
-        "without response body".into()
-    } else {
-        compact
-    }
 }
 
 fn trim_optional(value: Option<String>) -> Option<String> {
