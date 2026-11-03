@@ -28,9 +28,10 @@ unknown; it is not in released packages or the hosted API. Start with
 [delivery status and evidence](docs/workflow-status.md), then the
 [decision guide](docs/experimental-repodigest-selection.md).
 
-Together with [PageDigest](https://pagedigest.org), this is part of **Lazy
-Collective**, the local coordination project for reducing repeated fetching,
-parsing, investigation and verification. It is not a shared deployed service.
+Together with [PageDigest](https://pagedigest.org), this is part of
+[**Lazy Collective**](https://lazycollective.org/): conservation through cooperation,
+reducing repeated fetching, parsing, investigation and verification. Its public
+home connects the projects and their shared purpose; there is no shared deployed service.
 The [four roles and their boundaries](docs/workflow-status.md#shared-direction)
 describe two projects, not four separately released products.
 

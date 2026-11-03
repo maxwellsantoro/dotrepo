@@ -3,7 +3,7 @@
 import html
 from urllib.parse import quote
 
-from public_site_styles import SITE_CHROME
+from public_site_styles import render_site_chrome
 
 
 def repository_href(base_path: str, identity: dict) -> str:
@@ -18,7 +18,6 @@ def render_repository_page(base_path: str, header: str) -> str:
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Repository profile · dotrepo</title>
 <meta name="description" content="Inspect repository facts, execution scope, evidence, age and missing answers.">
-{SITE_CHROME}
 <style>
   a {{ color:var(--accent-strong); text-underline-offset:.2em; }}
   p, dd, code {{ overflow-wrap:anywhere; }}
@@ -41,9 +40,9 @@ def render_repository_page(base_path: str, header: str) -> str:
   pre {{ white-space:pre-wrap; overflow-wrap:anywhere; }}
   [hidden] {{ display:none !important; }}
   @media(max-width:720px) {{ .fact-grid {{ grid-template-columns:1fr; }} .panel {{ padding:22px; }} }}
-</style></head><body><div class="page" data-site-base="{base}">
+</style>{render_site_chrome(base_path)}</head><body><div class="page" data-site-base="{base}">
 {header}
-<main>
+<main id="main" tabindex="-1">
   <section class="panel hero">
     <p class="eyebrow">Repository profile</p>
     <h1 id="repository-title">Inspect a repository.</h1>

@@ -1,5 +1,24 @@
 # Public export workflow
 
+## Visual family
+
+The public renderer vendors Lazy Collective's version 1.0.0 stylesheet from
+`scripts/public_assets/lazy-collective/v1/`; its `UPSTREAM.json` pins the hash.
+The renderer copies these assets into each export and respects the same base
+path as the pages. The static query server serves CSS and JavaScript with browser
+MIME types. There are no remote fonts or shared runtime styling dependencies.
+Product layouts stay in `scripts/public_site_styles.py` and the owning renderers.
+
+Update shared styles through the parent's `design/v1/family.css` and explicit
+`tools/sync_family.py`; verify exact copies before independent child commits.
+After publication, new shared bytes need a new versioned path, preserving old
+paths while referenced. Keep public lookup, evidence, age, catalog pagination,
+documentation URLs and historical article bodies intact. Run the public export
+gate and rendered keyboard/mobile journeys in addition to the repository checks.
+The [umbrella home](https://lazycollective.org/) is live and linked from the
+product pages. Child source delivery and production deployment remain independent;
+verify the current main commit and live export before treating a checkout as deployed.
+
 > Supporting doc: the operator/reviewer loop for the public tree.
 > [Public architecture](public-surface.md) owns capabilities and bounds; read it first.
 

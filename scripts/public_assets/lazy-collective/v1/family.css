@@ -1,0 +1,59 @@
+/* Lazy Collective visual family 1.0.0. Source: design/v1/family.css.
+   Vendored unchanged by the two independent product builds. No remote fonts. */
+:root {
+  --lc-paper: #faf6ed;
+  --lc-paper-deep: #f0e9d9;
+  --lc-ink: #14251f;
+  --lc-muted: #4f6057;
+  --lc-green: #00644f;
+  --lc-green-dark: #004b3b;
+  --lc-ochre: #94600c;
+  --lc-rule: #92aaa0;
+  --lc-wash: #edf1e7;
+  --lc-display: Georgia, "Times New Roman", serif;
+  --lc-body: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --lc-mono: ui-monospace, SFMono-Regular, Consolas, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-padding-top: 24px; }
+body { margin: 0; background: var(--lc-paper); color: var(--lc-ink); font-family: var(--lc-body); line-height: 1.6; }
+[hidden] { display: none !important; }
+img { max-width: 100%; height: auto; }
+a { color: var(--lc-green); text-underline-offset: .2em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+a, button, input, summary { -webkit-tap-highlight-color: transparent; }
+:where(a, button, input, select, textarea, summary):focus-visible { outline: 3px solid var(--lc-green); outline-offset: 5px; }
+h1, h2, h3 { font-family: var(--lc-display); color: var(--lc-ink); text-wrap: balance; }
+button, input, select, textarea { font: inherit; }
+code, pre { font-family: var(--lc-mono); }
+p, li { overflow-wrap: break-word; }
+.lc-shell { width: min(1280px, calc(100% - 96px)); margin-inline: auto; }
+.lc-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 27px 22px; border-bottom: 2px solid var(--lc-green); }
+.lc-wordmark { font: 700 clamp(1.65rem, 2.6vw, 2.5rem)/1.1 var(--lc-display); letter-spacing: -.055em; color: var(--lc-ink); text-decoration: none; white-space: nowrap; }
+.lc-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; }
+.lc-nav a { display: inline-flex; align-items: center; min-height: 44px; color: var(--lc-ink); text-decoration: none; }
+.lc-nav a:hover { text-decoration: underline; }
+.lc-eyebrow { color: var(--lc-green); font-size: .875rem; line-height: 1.4; font-weight: 750; letter-spacing: .09em; text-transform: uppercase; }
+.lc-button { display: inline-flex; justify-content: center; align-items: center; min-height: 48px; padding: 12px 23px; border: 1px solid var(--lc-green); border-radius: 10px; color: #fff; background: var(--lc-green); font-weight: 700; line-height: 1.35; text-decoration: none; cursor: pointer; }
+.lc-button:hover { background: var(--lc-green-dark); text-decoration: none; }
+.lc-button--plain { background: transparent; color: var(--lc-green); }
+.lc-button--plain:hover { background: var(--lc-wash); }
+.lc-family-note { border-top: 1px solid var(--lc-rule); padding-top: 22px; margin-top: 44px; color: var(--lc-muted); font-size: .94rem; }
+.lc-family-note strong { color: var(--lc-ink); }
+.lc-skip { position: fixed; left: 16px; top: 12px; z-index: 100; padding: 12px 18px; background: var(--lc-paper); border: 2px solid var(--lc-green); transform: translateY(-200%); }
+.lc-skip:focus { transform: translateY(0); }
+.lc-visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+@media (max-width: 720px) {
+  .lc-shell { width: calc(100% - 36px); }
+  .lc-header { padding-block: 19px 15px; gap: 12px; flex-wrap: wrap; }
+  .lc-wordmark { font-size: 1.8rem; }
+  .lc-nav { gap: 4px 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+}
+@media print {
+  body { background: #fff; color: #000; }
+  .lc-skip, [data-nav-toggle] { display: none !important; }
+  .lc-shell { width: 100%; }
+}
