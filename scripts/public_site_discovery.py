@@ -76,7 +76,8 @@ def publish_discovery(root: Path, base_path: str = "") -> None:
             raise ValueError(f"generated HTML has no head: {relative}")
         family = (
             '<aside class="family-context" aria-label="Project family">'
-            "A Lazy Collective project. Conservation through cooperation. "
+            'A <a href="https://lazycollective.org/">Lazy Collective</a> project. '
+            "Conservation through cooperation. "
             'Sister project: <a href="https://pagedigest.org/">PageDigest</a> '
             "— website change and reuse.</aside>"
         )

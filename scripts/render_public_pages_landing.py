@@ -2899,8 +2899,9 @@ def main() -> int:
         <article class="feature"><h3>Keep useful work</h3><p>Retain evidence at its source revision and revisit what changed or remains uncertain. Source identity, correctness and freshness answer different questions.</p></article>
       </div>
       <p>With <a href="https://pagedigest.org">PageDigest</a>, we are working toward less repeated
-        fetching, parsing, investigation and verification. Lazy Collective is the local
-        coordination project, not a shared deployed runtime. DotPage names PageDigest’s
+        fetching, parsing, investigation and verification.
+        <a href="https://lazycollective.org/">Lazy Collective</a> brings the shared purpose
+        and project family together. There is no shared deployed runtime. DotPage names PageDigest’s
         publisher role. <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/workflow-status.md#shared-direction">Roles, delivery status and measured limits</a>.</p>
     </section>
 

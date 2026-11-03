@@ -41,8 +41,9 @@ must help both sides; moving effort onto maintainers is not a net saving.
 - **DotPage** names that project's publisher role in existing site builds. It is
   not a separately shipped product or another page catalog to maintain.
 
-**Lazy Collective** is the chosen umbrella and local coordination project,
-not a released common service or runtime. The
+[**Lazy Collective**](https://lazycollective.org/) is the umbrella and coordination
+project. Its public home explains the shared purpose and current projects;
+there is no released common service or runtime. The
 [PageDigest ecosystem guide](https://github.com/maxwellsantoro/pagedigest/blob/main/docs/ecosystem.md)
 owns its website-specific integration and evidence.
 

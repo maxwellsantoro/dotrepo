@@ -15,8 +15,9 @@ After publication, new shared bytes need a new versioned path, preserving old
 paths while referenced. Keep public lookup, evidence, age, catalog pagination,
 documentation URLs and historical article bodies intact. Run the public export
 gate and rendered keyboard/mobile journeys in addition to the repository checks.
-The family is local preparation until a separately approved publication; do not
-add a live umbrella-domain link before its ownership and delivery are verified.
+The [umbrella home](https://lazycollective.org/) is live and linked from the
+product pages. Child source delivery and production deployment remain independent;
+verify the current main commit and live export before treating a checkout as deployed.
 
 > Supporting doc: the operator/reviewer loop for the public tree.
 > [Public architecture](public-surface.md) owns capabilities and bounds; read it first.
