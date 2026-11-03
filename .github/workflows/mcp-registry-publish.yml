@@ -46,7 +46,7 @@ jobs:
           server["version"] = version
           package = server["packages"][0]
           package["identifier"] = (
-              "https://github.com/maxwellsantoro/dotrepo/releases/download/"
+              "https://github.com/lazy-collective/dotrepo/releases/download/"
               f"v{version}/dotrepo-mcp-{version}.mcpb"
           )
           package["version"] = version

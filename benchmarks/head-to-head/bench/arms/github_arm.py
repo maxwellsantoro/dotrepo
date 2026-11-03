@@ -302,7 +302,7 @@ class GitHubArm(Arm):
             headers={
                 "authorization": f"Bearer {api_key}",
                 "content-type": "application/json",
-                "http-referer": "https://github.com/maxwellsantoro/dotrepo",
+                "http-referer": "https://github.com/lazy-collective/dotrepo",
                 "x-title": "dotrepo-head-to-head-benchmark",
             },
             json=model_policy.build_completion_body(model, prompt),

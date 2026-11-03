@@ -36,7 +36,7 @@ def render(root: Path, version: str) -> str:
         + (
             match[1]
             if match[1].startswith(("https://", "http://", "#"))
-            else urljoin("https://github.com/maxwellsantoro/dotrepo/blob/main/", match[1])
+            else urljoin("https://github.com/lazy-collective/dotrepo/blob/main/", match[1])
         )
         + ")",
         changes,
@@ -63,8 +63,8 @@ Install only the packages you need. Platform bundles and the VS Code extension
 are attached below. Verify downloads against their matching checksum files.
 The MCP Registry may show a higher prerelease as latest; choose your version explicitly.
 
-[Installation and release channels](https://github.com/maxwellsantoro/dotrepo/blob/main/docs/install.md)
-· [Version-specific behavior and limits](https://github.com/maxwellsantoro/dotrepo/blob/main/docs/release-compatibility.md)
+[Installation and release channels](https://github.com/lazy-collective/dotrepo/blob/main/docs/install.md)
+· [Version-specific behavior and limits](https://github.com/lazy-collective/dotrepo/blob/main/docs/release-compatibility.md)
 """
 
 

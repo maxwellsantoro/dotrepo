@@ -316,7 +316,7 @@ The in-progress run is omitted until GitHub records its final conclusion.
 
 ```bash
 uv run python scripts/check_refresh_streak.py report \
-  --repository maxwellsantoro/dotrepo \
+  --repository lazy-collective/dotrepo \
   --output /tmp/dotrepo-refresh-streak.json --require-pass
 ```
 

@@ -1,7 +1,7 @@
 # DotRepo
 
-[![CI](https://github.com/maxwellsantoro/dotrepo/actions/workflows/ci.yml/badge.svg)](https://github.com/maxwellsantoro/dotrepo/actions/workflows/ci.yml)
-[![Latest Release](https://img.shields.io/github/v/release/maxwellsantoro/dotrepo)](https://github.com/maxwellsantoro/dotrepo/releases/latest)
+[![CI](https://github.com/lazy-collective/dotrepo/actions/workflows/ci.yml/badge.svg)](https://github.com/lazy-collective/dotrepo/actions/workflows/ci.yml)
+[![Latest Release](https://img.shields.io/github/v/release/lazy-collective/dotrepo)](https://github.com/lazy-collective/dotrepo/releases/latest)
 [![License: MIT](https://img.shields.io/badge/license-MIT-0f766e.svg)](LICENSE)
 
 **Repository facts you can trace and reuse.**
@@ -52,7 +52,7 @@ are data to review, not permission to execute them.
 ## Connect your agent
 
 Install the stable MCP server with a Rust toolchain, or use the
-[stable release bundle](https://github.com/maxwellsantoro/dotrepo/releases/tag/v1.0.4):
+[stable release bundle](https://github.com/lazy-collective/dotrepo/releases/tag/v1.0.4):
 
 ```bash
 cargo install dotrepo-mcp --version 1.0.4 --locked
@@ -82,7 +82,7 @@ See [installation](docs/install.md) for the CLI, LSP, and VS Code extension, and
 and a runnable client.
 
 **Version matters:** production installs use stable `v1.0.4`. The published
-[`v2.0.0-rc.2` preview](https://github.com/maxwellsantoro/dotrepo/releases/tag/v2.0.0-rc.2)
+[`v2.0.0-rc.2` preview](https://github.com/lazy-collective/dotrepo/releases/tag/v2.0.0-rc.2)
 includes retained field assessments, execution contexts, newer MCP target checks,
 and the contained CLI/MCP output writer. Additional instruction-extraction and
 evaluation work in this checkout is recorded under Unreleased in the changelog;
@@ -122,7 +122,7 @@ dotrepo --root <repo> generate --check
 ```
 
 Use `init` instead of `import` to start from a blank scaffold. The
-[stable maintainer guide](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.4/docs/maintainer-happy-path.md)
+[stable maintainer guide](https://github.com/lazy-collective/dotrepo/blob/v1.0.4/docs/maintainer-happy-path.md)
 walks through adoption; [sync boundaries](docs/sync-boundaries.md) explain which
 files and regions dotrepo can manage.
 

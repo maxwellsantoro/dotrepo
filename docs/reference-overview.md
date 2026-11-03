@@ -95,7 +95,7 @@ repository relations are explicit directed links with their own trust context.
 Read exact schema and protocol versions from their owners instead of assuming
 they match the tool version:
 
-- release version: [GitHub releases](https://github.com/maxwellsantoro/dotrepo/releases)
+- release version: [GitHub releases](https://github.com/lazy-collective/dotrepo/releases)
 - manifest schema: the manifest's version and [validation implementation](../crates/dotrepo-core/src/validation.rs)
 - claim schema: [claim implementation](../crates/dotrepo-core/src/claims.rs)
 - MCP negotiation: [MCP implementation](../crates/dotrepo-mcp/src/dispatch.rs)

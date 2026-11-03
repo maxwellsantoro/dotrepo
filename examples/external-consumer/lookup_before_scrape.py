@@ -639,7 +639,7 @@ def fetch_profile(
         url,
         headers={
             "Accept": "application/json",
-            "User-Agent": "dotrepo-external-consumer/0.1 (+https://github.com/maxwellsantoro/dotrepo)",
+            "User-Agent": "dotrepo-external-consumer/0.1 (+https://github.com/lazy-collective/dotrepo)",
         },
         method="GET",
     )

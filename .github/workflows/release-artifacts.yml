@@ -213,7 +213,7 @@ jobs:
           publish_one() {
             local crate="$1"
             shift
-            if curl -fsS -A "dotrepo-release-workflow (github.com/maxwellsantoro/dotrepo)" \
+            if curl -fsS -A "dotrepo-release-workflow (github.com/lazy-collective/dotrepo)" \
               "https://crates.io/api/v1/crates/${crate}/${version}" > /dev/null 2>&1; then
               echo "${crate} ${version} already on crates.io; skipping"
               return 0

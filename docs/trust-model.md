@@ -4,7 +4,7 @@ This page describes the current source branch. Stable `v1.0.4` disables standalo
 promotion writes, but the newer retained field-evidence checks remain absent.
 See [release compatibility](release-compatibility.md)
 for the comparison and
-[the stable trust document](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.4/docs/trust-model.md)
+[the stable trust document](https://github.com/lazy-collective/dotrepo/blob/v1.0.4/docs/trust-model.md)
 for version-matched reference material.
 
 A `.repo` record should not imply that all facts are equally authoritative. Instead, dotrepo should communicate where a record came from, how it was derived, and how much confidence downstream consumers should place in it.

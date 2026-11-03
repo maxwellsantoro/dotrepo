@@ -1,7 +1,7 @@
 # Install
 
 For a stable installation, use the
-[`v1.0.4` release](https://github.com/maxwellsantoro/dotrepo/releases/tag/v1.0.4).
+[`v1.0.4` release](https://github.com/lazy-collective/dotrepo/releases/tag/v1.0.4).
 It provides `dotrepo`, `dotrepo-public-query`, `dotrepo-lsp`, and `dotrepo-mcp`.
 <!-- dotrepo:release-status:start -->
 Stable installs use `1.0.4`; current source is `2.0.0-rc.2` (release candidate).
@@ -18,7 +18,7 @@ Stable 1.0.4 also uses the shared contained writer for repository-derived CLI
 outputs and MCP import; see the compatibility guide for the precise limits.
 The 2.0 line adds retained per-field assessments, execution contexts, and newer
 MCP target checks outside the stable contract. These are available in the
-[`2.0.0-rc.2` preview](https://github.com/maxwellsantoro/dotrepo/releases/tag/v2.0.0-rc.2).
+[`2.0.0-rc.2` preview](https://github.com/lazy-collective/dotrepo/releases/tag/v2.0.0-rc.2).
 Choose a preview explicitly and use its tagged documentation. Unreleased changes
 in this checkout are outside that tag; building them does not update installed
 packages or bundles.
@@ -26,7 +26,7 @@ packages or bundles.
 ## Download a stable bundle
 
 Choose the asset for your platform from the
-[release page](https://github.com/maxwellsantoro/dotrepo/releases/tag/v1.0.4),
+[release page](https://github.com/lazy-collective/dotrepo/releases/tag/v1.0.4),
 verify it against its matching `.sha256` file, extract it, and put the binaries
 from `bin/` on your `PATH`.
 
@@ -63,7 +63,7 @@ For a reproducible stable source build, use a separate checkout of the release
 tag:
 
 ```bash
-git clone --branch v1.0.4 --depth 1 https://github.com/maxwellsantoro/dotrepo.git dotrepo-1.0.4
+git clone --branch v1.0.4 --depth 1 https://github.com/lazy-collective/dotrepo.git dotrepo-1.0.4
 cd dotrepo-1.0.4
 cargo build --locked --release -p dotrepo-cli --bins -p dotrepo-lsp -p dotrepo-mcp
 export PATH="$PWD/target/release:$PATH"
@@ -112,6 +112,6 @@ Install the `.vsix` listed with the matching GitHub release using
 `dotrepo-lsp` on `PATH` by default, so install those binaries too.
 
 See the
-[stable extension guide](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.4/editors/vscode/README.md)
+[stable extension guide](https://github.com/lazy-collective/dotrepo/blob/v1.0.4/editors/vscode/README.md)
 for that release's settings, or the [development guide](../editors/vscode/README.md)
 when loading the extension from this checkout.

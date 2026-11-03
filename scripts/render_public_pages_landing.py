@@ -38,7 +38,7 @@ def stable_mcp_install():
     return f"cargo install dotrepo-mcp --version {commands[0]} --locked"
 
 
-REPO_BLOB_PREFIX = "https://github.com/maxwellsantoro/dotrepo/blob/main/"
+REPO_BLOB_PREFIX = "https://github.com/lazy-collective/dotrepo/blob/main/"
 
 PUBLIC_PAGE_STYLES = """<style>
   h1 { font-size: clamp(2.25rem, 4.6vw, 4rem); line-height: 1.04; letter-spacing: -.045em; max-width: 19ch; }
@@ -83,19 +83,19 @@ DOCS_SECTIONS = [
         "items": [
             {
                 "label": "Project overview",
-                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/README.md",
+                "href": "https://github.com/lazy-collective/dotrepo/blob/main/README.md",
                 "summary": "What dotrepo is, what ships, and the shortest paths for maintainers, contributors, and consumers.",
                 "kind": "Repo doc",
             },
             {
                 "label": "Install",
-                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/docs/install.md",
+                "href": "https://github.com/lazy-collective/dotrepo/blob/main/docs/install.md",
                 "summary": "Platform bundles, MCP and LSP binaries, and the VS Code extension package.",
                 "kind": "Repo doc",
             },
             {
                 "label": "Maintainer happy path",
-                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/docs/maintainer-happy-path.md",
+                "href": "https://github.com/lazy-collective/dotrepo/blob/main/docs/maintainer-happy-path.md",
                 "summary": "The canonical init, import, validate, trust, and generate-check loop for repository owners.",
                 "kind": "Repo doc",
             },
@@ -106,19 +106,19 @@ DOCS_SECTIONS = [
         "items": [
             {
                 "label": "Trust model",
-                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/docs/trust-model.md",
+                "href": "https://github.com/lazy-collective/dotrepo/blob/main/docs/trust-model.md",
                 "summary": "Why provenance, precedence, and conflict visibility matter more than a new file extension.",
                 "kind": "Repo doc",
             },
             {
                 "label": "Roadmap",
-                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/ROADMAP.md",
+                "href": "https://github.com/lazy-collective/dotrepo/blob/main/ROADMAP.md",
                 "summary": "The mission, operating principles, product milestones, and path from protocol to shared research infrastructure.",
                 "kind": "Repo doc",
             },
             {
                 "label": "Public surface architecture",
-                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/docs/public-surface.md",
+                "href": "https://github.com/lazy-collective/dotrepo/blob/main/docs/public-surface.md",
                 "summary": "How the hosted homepage, inventory, summary, trust, and query surfaces are built from one export family.",
                 "kind": "Repo doc",
             },
@@ -141,7 +141,7 @@ DOCS_SECTIONS = [
             },
             {
                 "label": "Public export examples",
-                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/docs/public-export-examples.md",
+                "href": "https://github.com/lazy-collective/dotrepo/blob/main/docs/public-export-examples.md",
                 "summary": "Concrete response examples for inventory, repository summary, trust, and query routes.",
                 "kind": "Repo doc",
             },
@@ -152,19 +152,19 @@ DOCS_SECTIONS = [
         "items": [
             {
                 "label": "Public index",
-                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/index/README.md",
+                "href": "https://github.com/lazy-collective/dotrepo/blob/main/index/README.md",
                 "summary": "Index rules, evidence expectations, autonomous publication, and maintainer handoff.",
                 "kind": "Repo doc",
             },
             {
                 "label": "Crawler and escalation design",
-                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/docs/factual-crawl-automation.md",
+                "href": "https://github.com/lazy-collective/dotrepo/blob/main/docs/factual-crawl-automation.md",
                 "summary": "The deterministic-first pipeline, bounded model escalation, publication gates, and trust semantics.",
                 "kind": "Repo doc",
             },
             {
                 "label": "Maintainer-claim workflow",
-                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/docs/maintainer-claim-review-workflow.md",
+                "href": "https://github.com/lazy-collective/dotrepo/blob/main/docs/maintainer-claim-review-workflow.md",
                 "summary": "The reviewer path for accepted maintainer claims and canonical handoff decisions.",
                 "kind": "Repo doc",
             },
@@ -665,7 +665,7 @@ def render_site_header(base_path: str, active: str | None = None) -> str:
         ("writing", site_href(base_path, "/writing/"), "Writing"),
         ("repositories", site_href(base_path, "/repositories/"), "Repositories"),
         ("efficiency", site_href(base_path, "/efficiency/"), "Efficiency"),
-        ("github", "https://github.com/maxwellsantoro/dotrepo", "GitHub"),
+        ("github", "https://github.com/lazy-collective/dotrepo", "GitHub"),
         ("snapshot", site_href(base_path, "/v0/meta.json"), "Snapshot"),
     ]
     items = []
@@ -1289,7 +1289,7 @@ def render_repositories_index(inventory: dict, base_path: str) -> str:
     <footer class="footer">
       <span>Machine-readable inventory: <a href="{inventory_href}">/v0/repos/index.json</a></span>
       <span>Snapshot: <a href="{site_href(base_path, "/v0/meta.json")}">/v0/meta.json</a></span>
-      <span>Source: <a href="https://github.com/maxwellsantoro/dotrepo">github.com/maxwellsantoro/dotrepo</a></span>
+      <span>Source: <a href="https://github.com/lazy-collective/dotrepo">github.com/lazy-collective/dotrepo</a></span>
     </footer>
   </div>
   <script>
@@ -1726,7 +1726,7 @@ def render_writing_index(base_path: str) -> str:
     <footer class="footer">
       <span>Canonical public origin: <a href="https://dotrepo.org/">dotrepo.org</a></span>
       <span>Explore: <a href="{site_href(base_path, "/")}">homepage</a></span>
-      <span>Source: <a href="https://github.com/maxwellsantoro/dotrepo">github.com/maxwellsantoro/dotrepo</a></span>
+      <span>Source: <a href="https://github.com/lazy-collective/dotrepo">github.com/lazy-collective/dotrepo</a></span>
     </footer>
   </div>
 </body>
@@ -1958,16 +1958,16 @@ def render_docs_index(base_path: str) -> str:
       <nav class="start-paths" aria-label="Choose a getting-started path">
         <a href="{site_href(base_path, "/")}#lookup"><strong>1. Look up a repository</strong><span>Find facts, sources, and record age. No installation needed.</span></a>
         <a href="{site_href(base_path, "/")}#integrate"><strong>2. Connect your agent</strong><span>Install the MCP server or use the HTTP API.</span></a>
-        <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/maintainer-happy-path.md"><strong>3. Maintain your record</strong><span>Import existing sources, resolve ambiguity, and check drift.</span></a>
+        <a href="https://github.com/lazy-collective/dotrepo/blob/main/docs/maintainer-happy-path.md"><strong>3. Maintain your record</strong><span>Import existing sources, resolve ambiguity, and check drift.</span></a>
       </nav>
-      <p class="version-note">Using a released binary? Check <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/release-compatibility.md">stable, preview and source-only behavior</a>. Repository docs below track main.</p>
+      <p class="version-note">Using a released binary? Check <a href="https://github.com/lazy-collective/dotrepo/blob/main/docs/release-compatibility.md">stable, preview and source-only behavior</a>. Repository docs below track main.</p>
     </section>
     {render_docs_cards(base_path)}
     </main>
     <footer class="footer">
       <span>Canonical public origin: <a href="https://dotrepo.org/">dotrepo.org</a></span>
       <span>Live inventory: <a href="{site_href(base_path, "/v0/repos/index.json")}">/v0/repos/index.json</a></span>
-      <span>Source: <a href="https://github.com/maxwellsantoro/dotrepo">github.com/maxwellsantoro/dotrepo</a></span>
+      <span>Source: <a href="https://github.com/lazy-collective/dotrepo">github.com/lazy-collective/dotrepo</a></span>
     </footer>
   </div>
 </body>
@@ -2272,7 +2272,7 @@ def render_article_page(article: dict, base_path: str) -> str:
     </main>
     <footer class="panel article-footer">
       <span><a href="{site_href(base_path, "/writing/")}">Back to writing</a></span>
-      <span><a href="https://github.com/maxwellsantoro/dotrepo">Project source</a></span>
+      <span><a href="https://github.com/lazy-collective/dotrepo">Project source</a></span>
       <span><a href="{site_href(base_path, "/v0/repos/index.json")}">Live public index</a></span>
     </footer>
   </div>
@@ -2841,7 +2841,7 @@ def main() -> int:
         <div class="cta-row">
           <a class="cta cta--primary" href="#lookup">Look up a repository</a>
           <a class="cta cta--secondary" href="#integrate">Connect your agent</a>
-          <a class="cta cta--secondary" href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/maintainer-happy-path.md">Maintain your own record</a>
+          <a class="cta cta--secondary" href="https://github.com/lazy-collective/dotrepo/blob/main/docs/maintainer-happy-path.md">Maintain your own record</a>
         </div>
         <p>Works with indexed repositories before maintainers adopt <code>.repo</code>.
           Coverage is partial. Metadata helps with orientation; architecture and code changes still require source inspection.</p>
@@ -2850,7 +2850,7 @@ def main() -> int:
           work for both sides, including maintenance and verification.</p>
         <p><strong>Experimental source workflow:</strong> RepoDigest adds bounded discovery, requirement
           assessment and reusable investigation. It is separate from released packages and
-          this API. <a href="https://github.com/maxwellsantoro/dotrepo/pull/208">Review the workflow and evidence</a>.</p>
+          this API. <a href="https://github.com/lazy-collective/dotrepo/pull/208">Review the workflow and evidence</a>.</p>
       </div>
       {render_lookup_example(input_dir, inventory, base_path, generated_at)}
     </section>
@@ -2882,9 +2882,9 @@ def main() -> int:
         <code>repositoryUrl: "https://github.com/BurntSushi/ripgrep"</code> and
         <code>path: "repo.test"</code>. The stable server returns a field query with trust context;
         profile output and newer lookup safeguards are available in the published 2.0.0-rc.2 preview. Stable 1.0.4 and RC2 include the contained-write protections; RC1 predates them. Choose a version explicitly and use its matching documentation.</p>
-      <p><a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/release-compatibility.md">Version-specific behavior and safety limits</a></p>
+      <p><a href="https://github.com/lazy-collective/dotrepo/blob/main/docs/release-compatibility.md">Version-specific behavior and safety limits</a></p>
       <div class="cta-row">
-        <a class="cta cta--primary" href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/external-consumer-integration.md">Integration and fallback guide</a>
+        <a class="cta cta--primary" href="https://github.com/lazy-collective/dotrepo/blob/main/docs/external-consumer-integration.md">Integration and fallback guide</a>
         <a class="cta cta--secondary" href="{site_href(base_path, "/efficiency/")}">Coverage and benchmark limitations</a>
       </div>
       <p>Task completeness measures available fields. Independent accuracy tests measure correctness.
@@ -2902,7 +2902,7 @@ def main() -> int:
         fetching, parsing, investigation and verification.
         <a href="https://lazycollective.org/">Lazy Collective</a> brings the shared purpose
         and project family together. There is no shared deployed runtime. DotPage names PageDigest’s
-        publisher role. <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/workflow-status.md#shared-direction">Roles, delivery status and measured limits</a>.</p>
+        publisher role. <a href="https://github.com/lazy-collective/dotrepo/blob/main/docs/workflow-status.md#shared-direction">Roles, delivery status and measured limits</a>.</p>
     </section>
 
     <section class="panel section">
@@ -3022,7 +3022,7 @@ def main() -> int:
     <footer class="footer">
       <span>Canonical public origin: <a href="https://dotrepo.org/">dotrepo.org</a></span>
       <span>Homepage lookup resolves the same hosted surface used by MCP <code>dotrepo.lookup</code>.</span>
-      <span>Source: <a href="https://github.com/maxwellsantoro/dotrepo">github.com/maxwellsantoro/dotrepo</a></span>
+      <span>Source: <a href="https://github.com/lazy-collective/dotrepo">github.com/lazy-collective/dotrepo</a></span>
     </footer>
   </div>
 </body>

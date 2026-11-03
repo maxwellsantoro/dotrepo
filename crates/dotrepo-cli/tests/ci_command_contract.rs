@@ -59,7 +59,7 @@ build = "cargo build --locked"
     let workflow =
         fs::read_to_string(root.join(".github/workflows/dotrepo-check.yml")).expect("workflow");
     assert!(workflow.contains("DOTREPO_VERSION: \"1.2.3\""));
-    assert!(workflow.contains("https://github.com/maxwellsantoro/dotrepo/releases/download/v1.2.3"));
+    assert!(workflow.contains("https://github.com/lazy-collective/dotrepo/releases/download/v1.2.3"));
     assert!(workflow.contains("sha256sum -c"));
     assert!(workflow.contains("dotrepo --root . validate"));
     assert!(workflow.contains("dotrepo --root . query repo.build --raw"));
