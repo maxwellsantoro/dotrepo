@@ -13,13 +13,13 @@
     "unknown": 8
   },
   "firstRunAt": "2026-06-29T00:55:19Z",
-  "generatedAt": "2026-11-02T06:10:40Z",
-  "lastRunAt": "2026-11-02T06:10:40Z",
+  "generatedAt": "2026-11-03T06:08:39Z",
+  "lastRunAt": "2026-11-03T06:08:39Z",
   "previousWindowCosts": {
     "adjudicationBudgetUseRate": 0.0,
     "adjudicationCallBudget": 0,
     "adjudicationCalls": 0,
-    "crawled": 200,
+    "crawled": 150,
     "tokenUsageComplete": true,
     "tokensPerCrawled": 0.0,
     "tokensUsed": 0,
@@ -29,19 +29,19 @@
   "previousWindowRates": {
     "adjudicationRate": 0.0,
     "apiEscalationRate": 0.0,
-    "failureRate": 0.01,
+    "failureRate": 0.0,
     "secondOpinionRate": 0.0,
     "zeroModelRate": 1.0
   },
   "previousWindowRepositoriesByAdjudicationTier": {
-    "deterministic": 47
+    "deterministic": 39
   },
   "previousWindowRunCount": 3,
   "rates": {
     "adjudicationRate": 0.0,
-    "failureRate": 0.004665629860031105,
-    "promotionRate": 0.6666666666666666,
-    "writeRate": 0.995334370139969,
+    "failureRate": 0.004547751389590703,
+    "promotionRate": 0.6604345629105609,
+    "writeRate": 0.9954522486104093,
     "zeroModelRate": 1.0
   },
   "recentWindowCosts": {
@@ -63,7 +63,7 @@
     "zeroModelRate": 1.0
   },
   "recentWindowRepositoriesByAdjudicationTier": {
-    "deterministic": 31
+    "deterministic": 29
   },
   "recentWindowRunCount": 3,
   "recurringFailures": [
@@ -101,18 +101,18 @@
     }
   ],
   "repositoriesByAdjudicationTier": {
-    "deterministic": 426
+    "deterministic": 437
   },
-  "runCount": 39,
+  "runCount": 40,
   "schema": "dotrepo/autonomous-telemetry-summary/v0.1",
   "synthesisFailureClasses": {},
   "totals": {
     "adjudicationCallBudget": 68,
     "adjudicationCalls": 0,
-    "crawled": 1929,
+    "crawled": 1979,
     "discoveryQueued": 0,
     "failed": 9,
-    "promoted": 1286,
+    "promoted": 1307,
     "qualityReprocessQueued": 1538,
     "skipped": 0,
     "synthesisFailed": 0,
@@ -122,8 +122,8 @@
     "tokensUsed": 0,
     "tokensUsedKnownSubtotal": 0,
     "unknownTokenUsageCalls": 0,
-    "written": 1920,
-    "zeroModelRuns": 1929
+    "written": 1970,
+    "zeroModelRuns": 1979
   },
   "worstRunRates": {
     "adjudicationRate": 0.0,
