@@ -24,6 +24,7 @@ materialized trees, telemetry, and index writeback.
 |--------|----------------|
 | `discover.rs` | Candidate discovery and target selection |
 | `github.rs` | GitHub API client and repository snapshots |
+| `github/http.rs` | Bounded GET transport/rate-limit retries and HTTP timeouts |
 | `materialize.rs` | Bounded file materialization into temp roots |
 | `pipeline/` | Crawl orchestration, snapshot merge, field evidence, writeback gate, optional synthesis |
 | `adjudication.rs` | Env-driven model provider wiring |
@@ -66,6 +67,17 @@ The coordinator validates the combined index and owns landing/publication.
 - [`ROADMAP.md`](../../ROADMAP.md) — Milestone 1 factory and Milestone 4 scale gates
 
 ## Refresh and writeback integrity
+
+GET transmissions share at most three retries with rate-limit responses (four
+outer attempts total), retaining the same captured URL and headers. Transport
+backoff is approximately 2, 4 and 8 seconds; the existing rate-reset wait remains
+capped at 120 seconds per retry. Request/connect timeouts remain 30/10 seconds,
+and TLS verification is unchanged. Builder/redirect failures and ordinary
+permanent HTTP errors are not retried. HTTP 404 remains optional-file absence.
+Body-read and JSON-decoding failures after a response arrives still fail without
+retry. Exhaustion retains the final cause and does not become absence or a
+successful crawl. Attempt counters include sends that receive no response;
+received-byte counters remain the Content-Length proxy.
 
 Repository content reads use the captured head commit, and a missing head SHA
 aborts the crawl. Fresh field scores determine promotion to verified; a previous

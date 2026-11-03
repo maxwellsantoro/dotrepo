@@ -29,7 +29,7 @@ above the threshold; counts are diagnostic snapshots, not permanent baselines.
 
 | File | Disposition |
 | --- | --- |
-| `crates/dotrepo-crawler/src/github.rs` | 1,596 lines. Split before the next materialization/API feature: `github/client.rs` for HTTP/auth/rate limits; `discovery.rs` for discovery/refresh candidates; `materialize_paths.rs` for root/monorepo selectors; `types.rs` for DTOs; `mod.rs` preserves client re-exports. |
+| `crates/dotrepo-crawler/src/github.rs` | HTTP retry/timeouts and their fault-injection tests are extracted to `github/http.rs` and `github/http/tests.rs`. Before the next materialization/API feature, finish the split: client/auth setup, discovery/refresh candidates, materialization selectors and DTOs, with the existing facade preserved. |
 | `crates/dotrepo-cli/src/tests.rs` | 1,610 lines, test-only. Split by CLI command domain when adding the next test family. |
 | `crates/dotrepo-core/src/facade_tests/import_repository.rs` | 1,608 lines, test-only. Split evidence, escalation, and assembly domains on the next import-fixture expansion; parsing already has its own module. |
 
