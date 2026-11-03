@@ -4,6 +4,38 @@ use dotrepo_core::{
 use std::path::PathBuf;
 
 #[test]
+fn html_documentation_evidence_remains_value_bound_through_import_and_scoring() {
+    for fixture in ["docs-html-paragraph-readme", "docs-html-badge-readme"] {
+        let root = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+            .join("tests/fixtures/import")
+            .join(fixture);
+        let mut plan = dotrepo_core::import_repository_with_options(
+            &root,
+            ImportMode::Overlay,
+            Some("https://github.com/example/orbit"),
+            &dotrepo_core::ImportOptions {
+                generated_at: Some("2026-11-03T06:08:45Z".into()),
+                ..Default::default()
+            },
+        )
+        .expect("import");
+        let scores = dotrepo_core::score_index_record_for_promotion(&plan.manifest);
+        let score = scores.iter().find(|s| s.field == "docs.root").unwrap();
+        assert_eq!(score.confidence, FieldConfidence::HighConfidencePresent);
+        assert_eq!(score.source.as_deref(), Some("README.md"));
+        assert!(plan
+            .evidence_text
+            .as_ref()
+            .unwrap()
+            .contains("Explicit documentation link at README.md:"));
+        plan.manifest.docs.as_mut().unwrap().root = Some("https://other.example/manual".into());
+        let scores = dotrepo_core::score_index_record_for_promotion(&plan.manifest);
+        let score = scores.iter().find(|s| s.field == "docs.root").unwrap();
+        assert_ne!(score.confidence, FieldConfidence::HighConfidencePresent);
+    }
+}
+
+#[test]
 fn imported_docs_assessments_survive_public_evidence_validation() {
     let root = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
         .join("tests/fixtures/import/docs-third-party-readme");

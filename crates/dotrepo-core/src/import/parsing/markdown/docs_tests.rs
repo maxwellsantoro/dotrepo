@@ -332,3 +332,124 @@ fn a_long_wrapped_paragraph_builds_its_context_only_once() {
     assert_eq!(cache.builds, 1);
     assert_eq!(parse_readme_docs_metadata(&lines, Some("Orbit")).root, None);
 }
+
+#[test]
+fn html_navigation_is_separate_from_adjacent_prose_paragraphs() {
+    // Caddy README@053be179d8602b65d93db6980397c176ecba2f89, lines 13-20.
+    let source = "<h3 align=\"center\">Every site on HTTPS</h3>\n<p align=\"center\">Caddy is an extensible server platform that uses TLS by default.</p>\n<p align=\"center\">\n<a href=\"https://github.com/caddyserver/caddy/releases\">Releases</a> ·\n<a href=\"https://caddyserver.com/docs/\">Documentation</a> ·\n<a href=\"https://caddy.community\">Get Help</a>\n</p>\n<p>Neighboring prose is separate.</p>";
+    let parsed = docs(source, "Caddy");
+    assert_eq!(
+        parsed.root.as_deref(),
+        Some("https://caddyserver.com/docs/")
+    );
+    let evidence = parsed.root_evidence.unwrap();
+    assert_eq!(evidence.line, 5);
+    assert_eq!(source.lines().nth(4), Some(evidence.context.as_str()));
+
+    for tag in ["<p>", "<P ALIGN='center'>", "<p title=\"a > b\">"] {
+        let source = format!(
+            "Unrelated prose.\n{tag}\n[Docs](https://custom.example/manual)\n</p>\nMore prose."
+        );
+        assert_eq!(
+            docs(&source, "Orbit").root.as_deref(),
+            Some("https://custom.example/manual")
+        );
+    }
+}
+
+#[test]
+fn html_wrapping_keeps_third_party_subjects_and_qualifiers() {
+    for source in [
+        "<p>\nOther's integration uses its\n[Documentation](https://other.example/manual)\n</p>",
+        "<p>\n[Documentation](https://other.example/manual)\nfor Other's integration.\n</p>",
+        "<p>Other's integration uses its\n[Documentation](https://other.example/manual)\n</p>",
+        "<p>\n[Documentation](https://other.example/manual)\nfor Other's integration.</p>",
+        "Other's integration uses its\n<br>\n[Documentation](https://other.example/manual)",
+        "Other's integration uses its\n<span>\n[Documentation](https://other.example/manual)\n</span>",
+        "Other's integration uses its\n<p title='unclosed>\n[Documentation](https://other.example/manual)",
+        "Other's integration uses its\n<p>for Other\n[Documentation](https://other.example/manual)",
+        "Other's integration uses its\n<p><span>\n[Documentation](https://other.example/manual)",
+        "Other's integration uses its\n<picture>\n[Documentation](https://other.example/manual)",
+    ] {
+        let parsed = docs(source, "Orbit");
+        assert_eq!(parsed.root, None, "{source}");
+        assert_eq!(parsed.getting_started, None, "{source}");
+    }
+}
+
+#[test]
+fn distinct_html_paragraphs_do_not_resolve_conflicting_declarations() {
+    let source = "<p>\n[Docs](https://one.example/manual)\n</p>\n<p>\n[Documentation](https://two.example/manual)\n</p>";
+    let parsed = docs(source, "Orbit");
+    assert_eq!(parsed.root, None);
+    assert!(parsed.root_ambiguous);
+}
+
+#[test]
+fn explicit_html_documentation_badges_use_the_outer_link() {
+    // browser-use/browser-use@b49a68e4060acb226da8f784194fef301c53a6d7.
+    let source = "<div align=\"center\">\n<a href=\"#demos\"><img src=\"https://media.browser-use.tools/badges/demos\" alt=\"Demos\"></a>\n<img width=\"16\" height=\"1\" alt=\"\">\n<a href=\"https://docs.browser-use.com\"><img src=\"https://media.browser-use.tools/badges/docs\" alt=\"Docs\"></a>\n</div>";
+    let parsed = docs(source, "Browser Use");
+    assert_eq!(parsed.root.as_deref(), Some("https://docs.browser-use.com"));
+    let evidence = parsed.root_evidence.unwrap();
+    assert_eq!(evidence.line, 4);
+    assert_eq!(source.lines().nth(3), Some(evidence.context.as_str()));
+    assert_eq!(
+        docs(
+            "<a href='https://custom.example/manual?a=1&amp;b=2'><img alt='Docs'></a>",
+            "Orbit"
+        )
+        .root
+        .as_deref(),
+        Some("https://custom.example/manual?a=1&b=2")
+    );
+    for tag in ["article", "aside"] {
+        let source =
+            format!("<{tag}><a href='https://custom.example/manual'>Documentation</a></{tag}>");
+        assert_eq!(
+            docs(&source, "Orbit").root.as_deref(),
+            Some("https://custom.example/manual")
+        );
+    }
+    assert_eq!(docs("<a href='https://custom.example/manual'><IMG ALT = 'Documentation' src='badge.svg' /></a>", "Orbit").root.as_deref(), Some("https://custom.example/manual"));
+}
+
+#[test]
+fn html_badges_do_not_invent_labels_or_discard_prose() {
+    for inner in [
+        "<img src='https://docs.example/badge.svg'>",
+        "<img alt='Build' src='https://docs.example/badge.svg'>",
+        "<img data-alt='Docs' src='badge.svg'>",
+        "<img title='alt=\"Docs\"' src='badge.svg'>",
+        "<img alt='Other Docs' src='badge.svg'>",
+        "<img alt='Docs' alt='Other Docs' src='badge.svg'>",
+        "<img alt alt='Docs' src='badge.svg'>",
+        "<img alt='Docs src='badge.svg'>",
+        "<img alt='Docs'><img alt='Other'>",
+        "<img alt='Docs'> for Other",
+    ] {
+        let source = format!("<a href='https://other.example/manual'>{inner}</a>");
+        assert_eq!(docs(&source, "Orbit").root, None, "{source}");
+    }
+    let badge = "<a href='https://other.example/manual'><img src='badge.svg' alt='Docs'></a>";
+    for anchor in [
+        "<a data-href='https://other.example/manual'>",
+        "<a title='href=\"https://other.example/manual\"'>",
+        "<a href href='https://other.example/manual'>",
+        "<a href='https://one.example/manual' href='https://two.example/manual'>",
+        "<aside href='https://other.example/manual'>",
+    ] {
+        let source = format!("{anchor}<img alt='Docs' src='badge.svg'></a>");
+        assert_eq!(docs(&source, "Orbit").root, None, "{source}");
+    }
+    for source in [
+        format!("Other's integration uses its\n{badge}"),
+        format!("{badge}\nfor Other's integration."),
+        format!("- Other integration: {badge}"),
+    ] {
+        assert_eq!(docs(&source, "Orbit").root, None, "{source}");
+    }
+    let parsed = docs(&format!("{badge}\n<a href='https://two.example/manual'><img alt='Documentation' src='badge.svg'></a>"), "Orbit");
+    assert_eq!(parsed.root, None);
+    assert!(parsed.root_ambiguous);
+}
