@@ -19,7 +19,7 @@ const { chromium } = require('playwright');
     const file = path.resolve(root, `.${pathname}`, pathname.endsWith('/') ? 'index.html' : '');
     if (!file.startsWith(root + path.sep)) { res.writeHead(403).end(); return; }
     try {
-      res.setHeader('Content-Type', file.endsWith('.json') ? 'application/json' : file.endsWith('.html') ? 'text/html' : file.endsWith('.js') ? 'text/javascript' : 'application/octet-stream');
+      res.setHeader('Content-Type', file.endsWith('.json') ? 'application/json' : file.endsWith('.html') ? 'text/html' : file.endsWith('.css') ? 'text/css' : /\.(?:m?js)$/.test(file) ? 'text/javascript' : 'application/octet-stream');
       res.end(fs.readFileSync(file));
     } catch { res.writeHead(404).end('Not found'); }
   });

@@ -74,6 +74,14 @@ def publish_discovery(root: Path, base_path: str = "") -> None:
 {END}'''
         if "</head>" not in text:
             raise ValueError(f"generated HTML has no head: {relative}")
+        family = (
+            '<aside class="family-context" aria-label="Project family">'
+            "A Lazy Collective project. Conservation through cooperation. "
+            'Sister project: <a href="https://pagedigest.org/">PageDigest</a> '
+            "— website change and reuse.</aside>"
+        )
+        if 'class="family-context"' not in text:
+            text = text.replace("</body>", family + "\n</body>", 1)
         path.write_text(text.replace("</head>", tags + "\n</head>", 1))
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     sitemap += "".join(f"  <url><loc>{html.escape(url)}</loc></url>\n" for url in urls)

@@ -12,7 +12,7 @@ from urllib.parse import urlparse
 
 from public_site_content import ARTICLES
 from public_site_discovery import publish_discovery
-from public_site_styles import SITE_CHROME
+from public_site_styles import publish_family_assets, render_site_chrome
 from public_repository_page import repository_href, render_repository_page
 from public_product_content import (
     render_record_freshness,
@@ -673,10 +673,11 @@ def render_site_header(base_path: str, active: str | None = None) -> str:
         current = ' aria-current="page"' if active == key else ""
         items.append(f'<a href="{href}"{current}>{label}</a>')
     return """
+    <a class="lc-skip" href="#main">Skip to content</a>
     <header class="nav" aria-label="Top navigation">
       <div class="brand">
-        <a class="brand__mark" href="{home_href}" aria-label="dotrepo — home"><span class="brand__dot" aria-hidden="true"></span><span>repo</span></a>
-        <span class="brand__tag">open metadata protocol</span>
+        <a class="brand__mark" href="{home_href}" aria-label="dotrepo — home">DotRepo</a>
+        <span class="brand__tag">Repository context</span>
       </div>
       <nav class="nav__links" aria-label="Main navigation">
         {items}
@@ -1258,11 +1259,12 @@ def render_repositories_index(inventory: dict, base_path: str) -> str:
     }}
   </style>
   {PUBLIC_PAGE_STYLES}
-  {SITE_CHROME}
+  {render_site_chrome(base_path)}
 </head>
 <body>
   <div class="page">
     {render_site_header(base_path, "repositories")}
+    <main id="main" tabindex="-1">
     <section class="panel hero">
       <p class="eyebrow">Public inventory</p>
       <h1>Find a repository.</h1>
@@ -1283,6 +1285,7 @@ def render_repositories_index(inventory: dict, base_path: str) -> str:
         <p class="catalog-note">JavaScript is required for the searchable catalog. The complete machine-readable inventory is available at <a href="{inventory_href}">/v0/repos/index.json</a>.</p>
       </noscript>
     </section>
+    </main>
     <footer class="footer">
       <span>Machine-readable inventory: <a href="{inventory_href}">/v0/repos/index.json</a></span>
       <span>Snapshot: <a href="{site_href(base_path, "/v0/meta.json")}">/v0/meta.json</a></span>
@@ -1702,11 +1705,12 @@ def render_writing_index(base_path: str) -> str:
     }}
   </style>
   {PUBLIC_PAGE_STYLES}
-  {SITE_CHROME}
+  {render_site_chrome(base_path)}
 </head>
 <body>
   <div class="page">
     {render_site_header(base_path, "writing")}
+    <main id="main" tabindex="-1">
     <section class="panel hero">
       <p class="eyebrow">Writing</p>
       <h1>How DotRepo works, and what we’re learning.</h1>
@@ -1718,6 +1722,7 @@ def render_writing_index(base_path: str) -> str:
         {render_writing_cards(base_path)}
       </div>
     </section>
+    </main>
     <footer class="footer">
       <span>Canonical public origin: <a href="https://dotrepo.org/">dotrepo.org</a></span>
       <span>Explore: <a href="{site_href(base_path, "/")}">homepage</a></span>
@@ -1940,11 +1945,12 @@ def render_docs_index(base_path: str) -> str:
     }}
   </style>
   {PUBLIC_PAGE_STYLES}
-  {SITE_CHROME}
+  {render_site_chrome(base_path)}
 </head>
 <body>
   <div class="page">
     {render_site_header(base_path, "docs")}
+    <main id="main" tabindex="-1">
     <section class="panel hero">
       <p class="eyebrow">Docs</p>
       <h1>Get started with DotRepo.</h1>
@@ -1957,6 +1963,7 @@ def render_docs_index(base_path: str) -> str:
       <p class="version-note">Using a released binary? Check <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/release-compatibility.md">stable, preview and source-only behavior</a>. Repository docs below track main.</p>
     </section>
     {render_docs_cards(base_path)}
+    </main>
     <footer class="footer">
       <span>Canonical public origin: <a href="https://dotrepo.org/">dotrepo.org</a></span>
       <span>Live inventory: <a href="{site_href(base_path, "/v0/repos/index.json")}">/v0/repos/index.json</a></span>
@@ -2243,11 +2250,12 @@ def render_article_page(article: dict, base_path: str) -> str:
     }}
   </style>
   {PUBLIC_PAGE_STYLES}
-  {SITE_CHROME}
+  {render_site_chrome(base_path)}
 </head>
 <body>
   <div class="page">
     {render_site_header(base_path, "writing")}
+    <main id="main" tabindex="-1">
     <article class="panel article-hero">
       <p class="article-kicker">{kicker}</p>
       <h1>{title}</h1>
@@ -2261,6 +2269,7 @@ def render_article_page(article: dict, base_path: str) -> str:
     <section class="panel article-body">
       {article["body_html"]}
     </section>
+    </main>
     <footer class="panel article-footer">
       <span><a href="{site_href(base_path, "/writing/")}">Back to writing</a></span>
       <span><a href="https://github.com/maxwellsantoro/dotrepo">Project source</a></span>
@@ -2814,12 +2823,13 @@ def main() -> int:
     }}
   </style>
   {PUBLIC_PAGE_STYLES}
-  {SITE_CHROME}
+  {render_site_chrome(base_path)}
 </head>
 <body>
   <script id="dotrepo-homepage-snapshot" type="application/json">{homepage_snapshot_state}</script>
   <div class="page">
     {render_site_header(base_path, "home")}
+    <main id="main" tabindex="-1">
 
     <section class="hero">
       <div class="panel hero__copy">
@@ -3007,6 +3017,7 @@ def main() -> int:
       {render_pagedigest_stats_dashboard(stats, base_path)}
     </details>
 
+    </main>
     <footer class="footer">
       <span>Canonical public origin: <a href="https://dotrepo.org/">dotrepo.org</a></span>
       <span>Homepage lookup resolves the same hosted surface used by MCP <code>dotrepo.lookup</code>.</span>
@@ -3017,6 +3028,7 @@ def main() -> int:
 </html>
 """
 
+    publish_family_assets(input_dir)
     write_text(input_dir / "index.html", document)
     write_text(input_dir / "docs" / "index.html", render_docs_index(base_path))
     write_text(

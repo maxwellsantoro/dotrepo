@@ -12,7 +12,7 @@ import html
 import json
 from pathlib import Path
 from public_site_discovery import publish_discovery
-from public_site_styles import SITE_CHROME
+from public_site_styles import render_site_chrome
 
 from measure_public_lookup_efficiency import (
     MAX_BATCH_PATHS,
@@ -342,13 +342,13 @@ def render_efficiency_page(report: dict, base_path: str, policy_report: dict | N
       .coverage-group, .costs {{ break-inside: avoid; }}
     }}
   </style>
-  {SITE_CHROME}
+  {render_site_chrome(base_path)}
 </head>
 <body>
   <div class="page">
     {render_site_header(base_path, active="efficiency")}
 
-    <main>
+    <main id="main" tabindex="-1">
     <section class="hero">
       <h1>What a lookup can answer</h1>
       <p>Start with usable metadata coverage and the need for upstream fallback.

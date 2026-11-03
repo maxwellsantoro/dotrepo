@@ -431,6 +431,8 @@ fn is_safe_relative_path(path: &Path) -> bool {
 fn content_type_for_path(path: &Path) -> &'static str {
     match path.extension().and_then(|ext| ext.to_str()) {
         Some("html") => "text/html; charset=utf-8",
+        Some("css") => "text/css; charset=utf-8",
+        Some("js" | "mjs") => "text/javascript; charset=utf-8",
         Some("json") => "application/json",
         Some("txt") => "text/plain; charset=utf-8",
         Some("md") => "text/markdown; charset=utf-8",
@@ -495,6 +497,22 @@ mod tests {
     use super::*;
     use std::fs;
     use std::time::{SystemTime, UNIX_EPOCH};
+
+    #[test]
+    fn browser_assets_have_stylesheet_and_module_content_types() {
+        assert_eq!(
+            content_type_for_path(Path::new("assets/lazy-collective/v1/family.css")),
+            "text/css; charset=utf-8"
+        );
+        assert_eq!(
+            content_type_for_path(Path::new("assets/repository.js")),
+            "text/javascript; charset=utf-8"
+        );
+        assert_eq!(
+            content_type_for_path(Path::new("unknown.bin")),
+            "application/octet-stream"
+        );
+    }
 
     #[test]
     fn route_request_rejects_dot_segments_in_repository_identity() {
