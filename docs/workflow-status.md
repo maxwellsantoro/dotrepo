@@ -2,9 +2,10 @@
 
 This source checkout combines public DotRepo contracts and experimental RepoDigest
 workflows. Source edits, local tests, public deployments and package releases
-are separate events. The November 2 workflow changes are public draft source in
-[PR208](https://github.com/maxwellsantoro/dotrepo/pull/208); they are not in a
-released package or live service. Check the PR before assuming it has landed.
+are separate events. The November 2 experimental workflows are available from
+this source checkout; they are not in a released package or hosted API.
+[PR208](https://github.com/maxwellsantoro/dotrepo/pull/208) records their
+implementation and validation history.
 
 | Job | Available surface | What it establishes |
 | --- | --- | --- |
@@ -35,7 +36,7 @@ must help both sides; moving effort onto maintainers is not a net saving.
 - **RepoDigest** is the experimental discovery, assessment and reuse workflow
   in this repository. Preliminary suitability is distinct from a successful run.
 - **PageDigest** is the existing website manifest protocol and publisher/consumer
-  toolchain. Its [draft recurring workflow](https://github.com/maxwellsantoro/pagedigest/pull/2)
+  toolchain. Its [experimental recurring workflow](https://github.com/maxwellsantoro/pagedigest/pull/2)
   retains source-bound findings and reports what needs rereading.
 - **DotPage** names that project's publisher role in existing site builds. It is
   not a separately shipped product or another page catalog to maintain.

@@ -23,7 +23,7 @@ work for both sides, including the work of keeping metadata useful.
 
 **Experimental:** RepoDigest extends this into metadata-led discovery, bounded
 shortlisting, source-backed requirement assessment and retained findings. Its
-public draft source can reach a justified preliminary choice or an explicit
+experimental source workflow can reach a justified preliminary choice or an explicit
 unknown; it is not in released packages or the hosted API. Start with
 [delivery status and evidence](docs/workflow-status.md), then the
 [decision guide](docs/experimental-repodigest-selection.md).

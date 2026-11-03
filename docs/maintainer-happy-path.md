@@ -13,8 +13,8 @@ When developing inside dotrepo, replace `dotrepo` with `cargo run -p dotrepo-cli
 
 The local helper derives a fresh candidate from the existing manifests, CI and
 documentation through `dotrepo.import_preview`. It needs no hand-maintained
-catalog and does not run repository code or call a model. This helper is source
-work awaiting publication; it is not included in the released CLI.
+catalog and does not run repository code or call a model. This helper is available from
+this source checkout; it is not included in the released CLI.
 
 ```bash
 cargo build --locked -p dotrepo-cli -p dotrepo-mcp

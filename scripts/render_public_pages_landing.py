@@ -2838,7 +2838,7 @@ def main() -> int:
         <p>Publishers derive declarations from existing sources; consumers reuse context
           and investigate missing, stale or conflicting answers. The aim is less repeated
           work for both sides, including maintenance and verification.</p>
-        <p><strong>Public draft source:</strong> RepoDigest adds bounded discovery, requirement
+        <p><strong>Experimental source workflow:</strong> RepoDigest adds bounded discovery, requirement
           assessment and reusable investigation. It is separate from released packages and
           this API. <a href="https://github.com/maxwellsantoro/dotrepo/pull/208">Review the workflow and evidence</a>.</p>
       </div>
