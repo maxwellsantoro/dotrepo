@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/anthropics/claude-cookbooks"
-generated_at = "2026-11-02T06:09:58.438308179Z"
+generated_at = "2026-11-03T06:06:54.886045103Z"
 
 [record.trust]
 confidence = "medium"
@@ -41,7 +41,7 @@ maintainers = []
 security_contact = "security@anthropic.com"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-11-02T06:09:58.438308179Z"
+checkedAt = "2026-11-03T06:06:54.886045103Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -49,7 +49,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-11-02T06:09:58.438308179Z"
+checkedAt = "2026-11-03T06:06:54.886045103Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -57,7 +57,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-11-02T06:09:58.438308179Z"
+checkedAt = "2026-11-03T06:06:54.886045103Z"
 confidence = "high"
 method = "unspecified"
 reason = "direct email or mailing list"
@@ -65,7 +65,7 @@ state = "present"
 valueJson = '"security@anthropic.com"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-11-02T06:09:58.438308179Z"
+checkedAt = "2026-11-03T06:06:54.886045103Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -73,7 +73,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-11-02T06:09:58.438308179Z"
+checkedAt = "2026-11-03T06:06:54.886045103Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -82,7 +82,7 @@ state = "present"
 valueJson = '"python -m build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-11-02T06:09:58.438308179Z"
+checkedAt = "2026-11-03T06:06:54.886045103Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -91,7 +91,7 @@ state = "present"
 valueJson = '"A collection of notebooks/recipes showcasing some fun and effective ways of using Claude."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-11-02T06:09:58.438308179Z"
+checkedAt = "2026-11-03T06:06:54.886045103Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -99,7 +99,7 @@ state = "present"
 valueJson = '"https://github.com/anthropics/claude-cookbooks"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-11-02T06:09:58.438308179Z"
+checkedAt = "2026-11-03T06:06:54.886045103Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -108,7 +108,7 @@ state = "present"
 valueJson = '"Claude Cookbooks"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-11-02T06:09:58.438308179Z"
+checkedAt = "2026-11-03T06:06:54.886045103Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -121,6 +121,6 @@ archived = false
 clone_url = "https://github.com/anthropics/claude-cookbooks.git"
 default_branch = "main"
 fork = false
-head_sha = "c43f56d0360b9b1f631bd090fd199231d4c880cc"
+head_sha = "785d7a06457b3413727f386b9c470083feb23c49"
 html_url = "https://github.com/anthropics/claude-cookbooks"
-stars = 54074
+stars = 54129

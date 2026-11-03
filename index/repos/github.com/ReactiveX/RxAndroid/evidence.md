@@ -1,9 +1,8 @@
 # Evidence
 
-- Imported repository name and docs entry points from README.md.
+- Imported repository name from README.md.
 - Inferred repo.build from .github/workflows/build.yaml as `./gradlew build`.
 - Inferred repo.test from build.gradle as `./gradlew test`.
-- Imported docs.getting_started as `https://github.com/ReactiveX/RxJava/wiki/Getting-Started`. Explicit documentation link at README.md:68: Further details on building can be found on the RxJava [Getting Started][start] page of the wiki.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
