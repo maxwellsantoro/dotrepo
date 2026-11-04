@@ -17,6 +17,13 @@ contracts outrank prose; installed binaries need [version-matched documentation]
 
 ## Active execution order
 
+The review-follow-up deployment exposed transient R2 REST failures that restarted
+whole 1,000-object batches. The bounded operator repair retries individual objects,
+accounts for attempts on failure, preserves the existing authorization and rolling
+request budget, and commits archive history only after validated payloads succeed.
+Live delivery still requires the normal exact-commit pipeline and smoke checks.
+
+
 The [November 3 measurement review](docs/measurement-review-20261103.md) separates
 moving-catalog diagnostics from a fixed regression cohort. Presence and modeled
 requests do not close the useful-completion or combined-work gates below. The

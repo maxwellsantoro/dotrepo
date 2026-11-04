@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
 import shlex
 import subprocess
@@ -15,6 +16,7 @@ import time
 from pathlib import Path, PurePosixPath
 
 from sync_cloudflare_public_snapshot import load_json, merge_log_documents
+from r2_archive_upload import Uploader
 
 
 IMMUTABLE_CACHE_CONTROL = "public, max-age=31536000, immutable"
@@ -245,6 +247,7 @@ def archive_snapshots(
     *,
     require_complete_history: bool = False,
     upload_concurrency: int = 8,
+    upload_transport: str = "wrangler",
 ) -> int:
     if not 1 <= upload_concurrency <= 20:
         raise ValueError("upload concurrency must be between 1 and 20")
@@ -267,6 +270,31 @@ def archive_snapshots(
         for path in validated_snapshot_files(public_root, entry)
         if "query-input" not in path.relative_to(public_root).parts
     ]
+    if upload_transport == "api":
+        # Same REST endpoint and existing deployment authorization as Wrangler;
+        # retry only the failed object, never an already successful batch.
+        uploader = Uploader(bucket, upload_concurrency)
+        print(
+            f"Uploading {len(payloads)} validated public objects with per-object retries",
+            flush=True,
+        )
+        try:
+            uploader.payloads(payloads, public_root, content_type)
+            uploader.put(
+                "v0/snapshots/log.json",
+                (json.dumps(merged_log, indent=2) + "\n").encode(),
+                "application/json; charset=utf-8",
+                MUTABLE_CACHE_CONTROL,
+            )
+        finally:
+            print(
+                f"R2 PUT attempts including retries/log: {uploader.budget.attempts}; "
+                f"attempted body bytes: {uploader.budget.attempted_body_bytes} (not measured wire bytes)",
+                flush=True,
+            )
+        return len(payloads) + 1
+    if upload_transport != "wrangler":
+        raise ValueError("unknown archive upload transport")
     with tempfile.TemporaryDirectory(prefix="dotrepo-archive-merged-") as temporary:
         merged_root = Path(temporary)
         # Validate all payloads before writing, then bound each retry to one
@@ -337,6 +365,11 @@ def main() -> int:
         wrangler_cwd,
         require_complete_history=args.require_complete_history,
         upload_concurrency=args.upload_concurrency,
+        upload_transport=(
+            "api"
+            if os.environ.get("CLOUDFLARE_API_TOKEN") and os.environ.get("CLOUDFLARE_ACCOUNT_ID")
+            else "wrangler"
+        ),
     )
     print(f"archived {count} snapshot object(s) to R2 bucket {args.bucket}")
     return 0
