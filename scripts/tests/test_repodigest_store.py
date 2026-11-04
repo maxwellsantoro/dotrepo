@@ -277,7 +277,7 @@ def test_stdio_service_has_no_write_or_execution_tool(database):
             "id": 3,
             "method": "tools/call",
             "params": {
-                "name": "repodigest.lookup",
+                "name": "dotrepo.decision.lookup",
                 "arguments": {"repository": REPO, "revision": REV},
             },
         },
@@ -286,6 +286,15 @@ def test_stdio_service_has_no_write_or_execution_tool(database):
             "id": 4,
             "method": "tools/call",
             "params": {"name": "execute", "arguments": {}},
+        },
+        {
+            "jsonrpc": "2.0",
+            "id": 5,
+            "method": "tools/call",
+            "params": {
+                "name": "repodigest.lookup",
+                "arguments": {"repository": REPO, "revision": REV},
+            },
         },
     ]
     done = subprocess.run(
@@ -306,13 +315,15 @@ def test_stdio_service_has_no_write_or_execution_tool(database):
     assert done.returncode == 0, done.stderr
     rows = [json.loads(line) for line in done.stdout.splitlines()]
     assert {t["name"] for t in rows[1]["result"]["tools"]} == {
-        "repodigest.find",
-        "repodigest.describe",
-        "repodigest.lookup",
+        "dotrepo.decision.find",
+        "dotrepo.decision.describe",
+        "dotrepo.decision.lookup",
     }
     result = json.loads(rows[2]["result"]["content"][0]["text"])
     assert result["authorized"] == "not-granted"
     assert rows[3]["error"]["code"] == -32602
+    # Pre-rename tool names still dispatch for retained replays, unadvertised.
+    assert json.loads(rows[4]["result"]["content"][0]["text"]) == result
 
 
 def test_malformed_absolute_tree_path_never_writes_outside_snapshot(tmp_path):

@@ -12,7 +12,7 @@ status = "canonical"
 
 [record.trust]
 confidence = "high"
-provenance = ["declared", "verified"]
+provenance = ["declared", "checked"]
 
 [repo]
 name = "orbit"
@@ -31,7 +31,7 @@ internal_id = "orbit-prod"
     );
     assert_eq!(
         query_manifest(&manifest, "trust.provenance").expect("legacy trust alias works"),
-        "[\n  \"declared\",\n  \"verified\"\n]"
+        "[\n  \"declared\",\n  \"checked\"\n]"
     );
     assert_eq!(
         query_manifest_value(&manifest, "repo.name").expect("value query succeeds"),
@@ -92,7 +92,7 @@ source = "https://example.com/orbit"
 
 [record.trust]
 confidence = "medium"
-provenance = ["imported", "verified"]
+provenance = ["imported", "checked"]
 
 [repo]
 name = "orbit"
@@ -156,7 +156,7 @@ source = "https://github.com/example/orbit"
 
 [record.trust]
 confidence = "medium"
-provenance = ["imported", "verified"]
+provenance = ["imported", "checked"]
 
 [repo]
 name = "orbit"
@@ -329,7 +329,7 @@ source = "https://github.com/example/orbit"
 
 [record.trust]
 confidence = "medium"
-provenance = ["imported", "verified"]
+provenance = ["imported", "checked"]
 
 [repo]
 name = "orbit"
@@ -377,7 +377,7 @@ source = "https://github.com/example/orbit"
 
 [record.trust]
 confidence = "medium"
-provenance = ["imported", "verified"]
+provenance = ["imported", "checked"]
 
 [repo]
 name = "orbit"
@@ -398,7 +398,7 @@ source = "https://github.com/example/orbit"
 
 [record.trust]
 confidence = "medium"
-provenance = ["imported", "verified"]
+provenance = ["imported", "checked"]
 
 [repo]
 name = "orbit"
@@ -449,7 +449,7 @@ source = "https://github.com/example/orbit"
 
 [record.trust]
 confidence = "medium"
-provenance = ["imported", "verified"]
+provenance = ["imported", "checked"]
 
 [repo]
 name = "orbit"

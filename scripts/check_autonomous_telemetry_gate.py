@@ -435,7 +435,7 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
             written >= args.min_written,
         ),
         check(
-            "verified promotion activity",
+            "checked promotion activity",
             promoted,
             f">= {args.min_promoted}",
             promoted >= args.min_promoted,

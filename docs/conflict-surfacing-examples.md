@@ -116,7 +116,7 @@ conflicts:
           "source": "https://github.com/acme/widget",
           "trust": {
             "confidence": "medium",
-            "provenance": ["imported", "verified"]
+            "provenance": ["imported", "checked"]
           }
         }
       }

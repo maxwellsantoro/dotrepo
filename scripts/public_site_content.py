@@ -77,7 +77,7 @@ ARTICLES = [
 </div>
 
 <div class="article-callout">
-  <p><strong>Update:</strong> This article preserves the original interview snapshot. Remote MCP lookup has since shipped, and autonomous evidence gates have replaced routine human review for generated overlays. See the <a href="https://github.com/lazy-collective/dotrepo/blob/main/ROADMAP.md">roadmap</a> for current direction and execution.</p>
+  <p><strong>Update:</strong> This article preserves the original interview snapshot. Remote MCP lookup has since shipped, and autonomous evidence gates have replaced routine human review for generated overlays. See the <a href="https://github.com/lazy-collective/dotrepo/blob/main/ROADMAP.md">roadmap</a> for current direction and execution. The <code>verified</code> status discussed below has since been renamed <code>checked</code>: it means automated checks passed, not that a fact is confirmed.</p>
 </div>
 
 <h2>The Experiment</h2>

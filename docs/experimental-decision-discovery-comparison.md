@@ -21,7 +21,7 @@ uv run --offline --no-sync python scripts/repodigest_discovery_compare.py find -
 
 Both return compact discovery leads. Use `describe --repository
 github.com/clap-rs/clap` with the same index/mode arguments for the full selected
-record. Metadata mode exposes metadata only. RepoDigest mode exposes its full
+record. Metadata mode exposes metadata only. Decision-workflow mode (called RepoDigest when this study ran) exposes its full
 admitted profile when available. Source profile absence remains visible through
 the metadata-only knowledge label; it does not remove a repository from either
 candidate universe. Older source compiler policies require re-admission.

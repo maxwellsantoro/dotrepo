@@ -517,8 +517,8 @@ fn schema_catalog() -> &'static [CatalogEntry] {
             path: "record.status",
             kind: CatalogEntryKind::Value,
             detail: "Status value",
-            documentation: "`verified` means the record carries stronger verification claims than a reviewed overlay.",
-            insert_text: "\"verified\"",
+            documentation: "`checked` means every field passed the automated pipeline checks. It is not human review or a correctness guarantee; `verified` is the accepted legacy spelling.",
+            insert_text: "\"checked\"",
         },
         CatalogEntry {
             path: "record.status",

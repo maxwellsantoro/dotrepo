@@ -1,0 +1,73 @@
+{
+  "name": "lazy-collective-source-status",
+  "version": 1,
+  "description": "Shared source-status vocabulary for retained findings in PageDigest and DotRepo. Source status says whether a finding's declared sources still have the bytes it was bound to; it says nothing about whether the finding is true. Each implementation maps its own conditions onto these inputs: `observed` is null when a source is missing, failed, out of scope, uninspected or served in a different representation; `boundBodyRetained` is false when the bound source body is no longer stored locally.",
+  "owner": "PageDigest test-vectors/source-status/vectors.json; DotRepo vendors an identical copy and the Lazy Collective parent checks the two match.",
+  "sourceRule": "observed null -> unknown; observed differs from bound -> changed; boundBodyRetained false -> unknown; otherwise current",
+  "combineRule": "any changed -> changed; otherwise any unknown -> unknown; otherwise current; no declared sources -> unknown",
+  "cases": [
+    {
+      "name": "single-source-current",
+      "sources": [{"bound": "sha256:aa", "observed": "sha256:aa"}],
+      "expectedSources": ["current"],
+      "expected": "current"
+    },
+    {
+      "name": "single-source-changed",
+      "sources": [{"bound": "sha256:aa", "observed": "sha256:bb"}],
+      "expectedSources": ["changed"],
+      "expected": "changed"
+    },
+    {
+      "name": "single-source-missing",
+      "sources": [{"bound": "sha256:aa", "observed": null}],
+      "expectedSources": ["unknown"],
+      "expected": "unknown"
+    },
+    {
+      "name": "bound-body-no-longer-retained",
+      "sources": [{"bound": "sha256:aa", "observed": "sha256:aa", "boundBodyRetained": false}],
+      "expectedSources": ["unknown"],
+      "expected": "unknown"
+    },
+    {
+      "name": "changed-wins-over-missing-bound-body",
+      "sources": [{"bound": "sha256:aa", "observed": "sha256:bb", "boundBodyRetained": false}],
+      "expectedSources": ["changed"],
+      "expected": "changed"
+    },
+    {
+      "name": "all-sources-current",
+      "sources": [
+        {"bound": "sha256:aa", "observed": "sha256:aa"},
+        {"bound": "sha256:cc", "observed": "sha256:cc"}
+      ],
+      "expectedSources": ["current", "current"],
+      "expected": "current"
+    },
+    {
+      "name": "one-unknown-makes-finding-unknown",
+      "sources": [
+        {"bound": "sha256:aa", "observed": "sha256:aa"},
+        {"bound": "sha256:cc", "observed": null}
+      ],
+      "expectedSources": ["current", "unknown"],
+      "expected": "unknown"
+    },
+    {
+      "name": "changed-wins-over-unknown",
+      "sources": [
+        {"bound": "sha256:aa", "observed": null},
+        {"bound": "sha256:cc", "observed": "sha256:dd"}
+      ],
+      "expectedSources": ["unknown", "changed"],
+      "expected": "changed"
+    },
+    {
+      "name": "no-declared-sources",
+      "sources": [],
+      "expectedSources": [],
+      "expected": "unknown"
+    }
+  ]
+}

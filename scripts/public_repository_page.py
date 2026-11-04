@@ -71,8 +71,8 @@ def render_repository_page(base_path: str, header: str) -> str:
     </section>
     <section id="trust" class="panel"><h2>Trust, age and conflicts</h2>
       <p id="profile-trust"></p><p id="profile-age"></p>
-      <p>Verified means pipeline checks resolved against inspected evidence. It does not imply human review,
-        complete instructions or independent correctness. Export time does not refresh the facts.</p>
+      <p><code>checked</code> means automated pipeline checks passed against inspected evidence, not human
+        review. Export time does not refresh the facts.</p>
       <div id="profile-conflicts"></div>
     </section>
   </div>

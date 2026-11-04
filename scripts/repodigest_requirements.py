@@ -13,6 +13,7 @@ from pathlib import Path
 from repodigest_acquire import canonical, identity, safe_path, sha
 from repodigest_source_cache import Reader
 from repodigest_store import MAX_RECORD, Store, connect_writer
+from source_status import source_state, source_status
 
 MAX_BODY = 32768
 MAX_TARGETS = 4
@@ -29,7 +30,11 @@ CREATE TABLE IF NOT EXISTS requirement_sets(
 
 @lru_cache(maxsize=1)
 def policy_id():
-    return sha(Path(__file__).read_bytes())
+    return sha(
+        Path(__file__).read_bytes()
+        + b"\0"
+        + (Path(__file__).with_name("source_status.py")).read_bytes()
+    )
 
 
 def target(value):
@@ -237,35 +242,32 @@ def load(store, request):
             states, reasons = [], []
             for reference in claim["evidence"]:
                 entry = index["files"].get(reference["path"]) if index else None
+                observed = None
                 if (
                     source_error
                     or not entry
                     or entry.get("mode") not in {"100644", "100755"}
                     or not entry.get("sourceSha256")
                 ):
-                    states.append("unknown")
                     reasons.append(
                         source_error
                         or "declared source missing, uninspected or not regular:"
                         + reference["path"]
                     )
-                elif entry["sourceSha256"] != reference["sha256"]:
-                    states.append("changed")
-                    reasons.append("declared source bytes changed:" + reference["path"])
-                elif not store.db.execute(
-                    "SELECT 1 FROM source_blobs WHERE digest=?", (reference["sha256"],)
-                ).fetchone():
-                    states.append("unknown")
-                    reasons.append("declared source body unavailable:" + reference["path"])
                 else:
-                    states.append("current")
-            status = (
-                "changed"
-                if "changed" in states
-                else "unknown"
-                if "unknown" in states
-                else "current"
-            )
+                    observed = entry["sourceSha256"]
+                retained = bool(
+                    store.db.execute(
+                        "SELECT 1 FROM source_blobs WHERE digest=?", (reference["sha256"],)
+                    ).fetchone()
+                )
+                state = source_state(reference["sha256"], observed, retained)
+                if state == "changed":
+                    reasons.append("declared source bytes changed:" + reference["path"])
+                elif state == "unknown" and observed is not None:
+                    reasons.append("declared source body unavailable:" + reference["path"])
+                states.append(state)
+            status = source_status(states)
             claims.append(
                 {
                     **claim,

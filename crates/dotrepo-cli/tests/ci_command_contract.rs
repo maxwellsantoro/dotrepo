@@ -130,7 +130,7 @@ source = "https://github.com/example/project"
 
 [record.trust]
 confidence = "medium"
-provenance = ["verified"]
+provenance = ["checked"]
 
 [repo]
 name = "project"

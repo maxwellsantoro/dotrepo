@@ -8,7 +8,7 @@ from typing import Any, Optional
 
 
 SCHEMA = "dotrepo-public-profile-coverage/v0"
-HIGH_SIGNAL_STATUSES = {"reviewed", "verified", "canonical"}
+HIGH_SIGNAL_STATUSES = {"reviewed", "checked", "verified", "canonical"}
 HIGH_SIGNAL_CONFIDENCE = {"medium", "high"}
 PROFILE_REQUIRED_KEYS = {
     "apiVersion",

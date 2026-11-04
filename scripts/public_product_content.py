@@ -132,8 +132,8 @@ def render_profile_example(public_root: Path, inventory: dict, base_path: str) -
       <p><strong>{html.escape(label)}</strong> · {html.escape(status)} · {age_text}</p>
       <div class="endpoint-list">{"".join(rows)}</div>
       <p>Record generated: {html.escape(record.get("generatedAt") or "unknown")}.
-      Status: {html.escape(profile.get("trust", {}).get("selectedStatus", "unknown"))}.
-      Verification records pipeline checks, not human review or a guarantee of correctness.</p>
+      Status: {html.escape(profile.get("trust", {}).get("selectedStatus", "unknown"))}
+      (automated pipeline checks; not human review).</p>
       <p>{evidence_link} · <a href="{html.escape(base_path + "/v0/repos/" + label + "/profile.json", quote=True)}">Full profile JSON</a></p>
       </section>'''
 

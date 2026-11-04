@@ -168,7 +168,7 @@ Bundle mode must preserve the project's existing trust discipline.
 Authority still comes from the enclosed records:
 - canonical records stay canonical
 - overlays stay overlays
-- reviewed or verified overlays stay at their own authority level
+- reviewed or checked overlays stay at their own authority level
 
 A bundle should not make an overlay more authoritative merely because it was
 distributed by a trusted party.

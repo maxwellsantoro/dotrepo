@@ -239,7 +239,7 @@ def test_disclosed_argument_limits(database, options):
     reader = store.Store(database)
     with pytest.raises(ValueError):
         reader.find(**({"query": "config"} | options))
-    schema = registry(reader)["repodigest.find"][0]["inputSchema"]["properties"]
+    schema = registry(reader)["dotrepo.decision.find"][0]["inputSchema"]["properties"]
     assert schema["limit"]["maximum"] == 20
     assert schema["language"]["enum"] == list(discovery.LANGUAGES)
     reader.close()
@@ -275,7 +275,7 @@ def test_actual_admission_and_mcp_batch(tmp_path):
             "id": 2,
             "method": "tools/call",
             "params": {
-                "name": "repodigest.find",
+                "name": "dotrepo.decision.find",
                 "arguments": {"query": "serialization", "language": "Python"},
             },
         },

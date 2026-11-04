@@ -2,7 +2,7 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "checked"
 source = "https://github.com/2dust/v2rayN"
 generated_at = "2026-11-03T17:39:20.732894181Z"
 
@@ -10,9 +10,9 @@ generated_at = "2026-11-03T17:39:20.732894181Z"
 confidence = "high"
 provenance = [
     "imported",
-    "verified",
+    "checked",
 ]
-notes = "Bootstrapped from `README.md`. Ignored component-scoped commands from `v2rayN/AmazTool/AmazTool.csproj` as repository defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. Ignored component-scoped commands from `v2rayN/AmazTool/AmazTool.csproj` as repository defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to checked: all fields are honestly resolved."
 
 [repo]
 name = "v2rayN"

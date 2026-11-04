@@ -23,11 +23,11 @@ work for both sides, including the work of keeping metadata useful.
 
 **Experimental:** DotRepo's decision workflow extends this into metadata-led
 discovery, bounded shortlisting, source-backed requirement assessment and
-retained findings (its tools keep the `repodigest.*` names). Its
+retained findings (MCP tools `dotrepo.decision.*`). Its
 experimental source workflow can reach a justified preliminary choice or an explicit
 unknown; it is not in released packages or the hosted API. Start with
 [delivery status and evidence](docs/workflow-status.md), then the
-[decision guide](docs/experimental-repodigest-selection.md).
+[decision guide](docs/experimental-decision-selection.md).
 
 Together with [PageDigest](https://pagedigest.org), this is part of
 [**Lazy Collective**](https://lazycollective.org/): conservation through cooperation,
@@ -103,8 +103,8 @@ Use the
 
 Indexed overlays are generated from public source material, so maintainers do
 not need to adopt dotrepo for their repository to appear. A native `.repo`
-provides maintainer control. Routine generated records are machine-checked;
-`verified` does not mean human-reviewed or correct in every field.
+provides maintainer control. Routine generated records are machine-checked:
+their best status is `checked` (automated checks passed), not human review.
 
 ## Add a record to your repository
 
@@ -136,7 +136,7 @@ mode creates a record only when none exists; no second catalog is required.
 - Metadata supports orientation. Architecture research, suitability decisions,
   debugging, and code changes still require source inspection
 - Coverage, correctness, completeness, and freshness are separate. Records can
-  be incomplete, stale, or wrong even when marked `verified`; retained
+  be incomplete, stale, or wrong even when marked `checked`; retained
   field-level evidence is available only where the producing version and crawl
   saved it. See the [trust model](docs/trust-model.md)
 - The [measurement page](https://dotrepo.org/efficiency/) reports field presence
@@ -144,7 +144,9 @@ mode creates a record only when none exists; no second catalog is required.
   savings
 - The [head-to-head benchmark](benchmarks/head-to-head/) keeps wins and losses
   against a GitHub API + README baseline. Fixing its examples is regression
-  evidence, not proof of generalization
+  evidence, not proof of generalization. Its frozen upstream source excerpts keep their own
+  licenses, not this repository's MIT license; see
+  [third-party notices](benchmarks/THIRD_PARTY_NOTICES.md)
 - Sustained independent consumer adoption remains an open success criterion.
   In-repository clients and AI interviews do not establish external demand
 

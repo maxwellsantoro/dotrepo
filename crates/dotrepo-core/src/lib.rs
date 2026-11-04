@@ -127,9 +127,11 @@ pub use import::{
     VerificationSeverity,
 };
 
+#[allow(deprecated)]
+pub use promotion::promote_to_verified;
 pub use promotion::{
     analyze_index_promotion, apply_index_promotions, guard_against_unjustified_downgrade,
-    promote_to_verified, score_index_record_for_promotion, DowngradeGuardOutcome,
+    promote_to_checked, score_index_record_for_promotion, DowngradeGuardOutcome,
     PromotionAppliedRecord, PromotionApplyReport, PromotionOutcome, PromotionRecordScore,
     PromotionReport, PromotionSummary,
 };
@@ -350,7 +352,20 @@ pub fn load_manifest_document(root: &Path) -> Result<LoadedManifest> {
     load_manifest_file(&path)
 }
 
+/// Explain a `.repo` path that is a directory, most often the workspace state
+/// directory of Google's `repo` tool (AOSP-style checkouts).
+pub(crate) fn manifest_directory_message(path: &Path) -> String {
+    format!(
+        "{} is a directory, not a dotrepo manifest. Google's `repo` tool keeps workspace state in `.repo/`; \
+         run dotrepo with --root set to an individual project repository inside the workspace instead",
+        path.display()
+    )
+}
+
 fn load_manifest_file(path: &Path) -> Result<LoadedManifest> {
+    if path.is_dir() {
+        return Err(anyhow!("{}", manifest_directory_message(path)));
+    }
     let raw = fs::read(path).map_err(|e| anyhow!("failed to read {}: {}", path.display(), e))?;
     let text = std::str::from_utf8(&raw)
         .map_err(|e| anyhow!("failed to decode {} as UTF-8: {}", path.display(), e))?;

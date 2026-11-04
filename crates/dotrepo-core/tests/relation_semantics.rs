@@ -27,12 +27,12 @@ fn record(identity: &str, relation_block: &str) -> String {
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "checked"
 source = "https://{identity}"
 
 [record.trust]
 confidence = "high"
-provenance = ["verified"]
+provenance = ["checked"]
 
 [repo]
 name = "{name}"
@@ -290,8 +290,8 @@ fn exported_relations_use_selected_records_and_preserve_missing_and_self_targets
         source,
         "[relations]\nreferences = [\"github.com/example/superseded-target\"]",
     )
-    .replace("status = \"verified\"", "status = \"imported\"")
-    .replace("provenance = [\"verified\"]", "provenance = [\"imported\"]");
+    .replace("status = \"checked\"", "status = \"imported\"")
+    .replace("provenance = [\"checked\"]", "provenance = [\"imported\"]");
     write_record(&index, source, &root_record);
     let selected_root = index.join("repos").join(source).join("selected");
     fs::create_dir_all(&selected_root).expect("selected record directory");

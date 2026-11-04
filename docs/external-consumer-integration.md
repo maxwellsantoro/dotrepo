@@ -100,7 +100,7 @@ uv run python examples/external-consumer/lookup_before_scrape.py \
 `hit` means an HTTP document was found. `usable` means its identity, record age,
 conflicts, and required fields passed the consumer policy. `fallback_reasons`
 explains rejection. Age is recalculated at request time from `record.generatedAt`;
-neither a newly exported snapshot nor `verified` status resets it. Missing and
+neither a newly exported snapshot nor `checked` status resets it. Missing and
 future timestamps fail closed. Field assessments are retained where available;
 `inferred` means inferred even if the record-wide confidence is high.
 
@@ -114,7 +114,7 @@ and index maintenance and must not be advertised as total task savings.
 The quick query and batch-query wrappers include optional `fieldEvidence` for
 the exact requested value, using the full profile's value/time binding rules.
 An absent assessment means unassessed, even when the selected record says
-`verified` or has high confidence. Apply the same positive acceptance policy;
+`checked` (or legacy `verified`) or has high confidence. Apply the same positive acceptance policy;
 do not infer command correctness from record trust. For execution, fetch the
 full profile and select an assessed contextual instruction as described below.
 

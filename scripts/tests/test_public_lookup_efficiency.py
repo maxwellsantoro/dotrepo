@@ -158,7 +158,7 @@ def test_threshold_gates_mark_report_failed() -> None:
     }
     assert report["gates"]["maxDotrepoToScrapeProxyRatio"] == {
         "threshold": 1.0,
-        "actual": 6.5501,
+        "actual": 6.5554,
         "passed": False,
     }
     assert report["gates"]["minTasks"]["passed"] is False
@@ -281,7 +281,7 @@ def test_cli_logs_each_failed_gate_even_when_reports_go_to_files(tmp_path, outpu
     assert result.stderr.splitlines() == [
         "public lookup efficiency failed: minTaskHitRate: actual=0.5, required >= 0.75",
         "public lookup efficiency failed: minIntentHitRate.documentation: actual=None, required >= 0.24",
-        "public lookup efficiency failed: maxDotrepoToScrapeProxyRatio: actual=6.5501, required <= 1.0",
+        "public lookup efficiency failed: maxDotrepoToScrapeProxyRatio: actual=6.5554, required <= 1.0",
     ]
     report = json.loads(output_json.read_text() if output_files else result.stdout)
     assert not report["passed"]

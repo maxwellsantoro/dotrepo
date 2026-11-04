@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+- **Rename record status and provenance `verified` to `checked`.** The value meant
+  "every field passed automated pipeline checks", never human review or
+  correctness. `verified` remains an accepted input alias in `.repo` files and
+  index records; exports, the hosted API and generated records now emit `checked`.
+  `promote_to_verified` is deprecated in favor of `promote_to_checked`. See
+  [public API compatibility](docs/public-api-compatibility.md#intentional-value-change-verified-is-now-checked-2026-11-03).
+- Rename the experimental decision workflow's MCP tools from `repodigest.*` to
+  `dotrepo.decision.*` (old names still dispatch) and its guides to
+  `docs/experimental-decision-*.md`.
+
 - Retry archive writes per object under a rolling request budget when the existing deployment environment is present; retain failed-attempt counters and keep archive-log publication last.
 
 - Separate full-catalog presence diagnostics from a frozen regression cohort; retain signed payload penalties and explicit measurement limits. The measurement review keeps useful task completion and combined work as the product outcome gates.

@@ -2,7 +2,7 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "checked"
 source = "https://github.com/spf13/cobra"
 generated_at = "2026-10-27T18:29:45.944061Z"
 
@@ -11,9 +11,9 @@ confidence = "high"
 provenance = [
     "imported",
     "inferred",
-    "verified",
+    "checked",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, `Makefile`, and `go.mod`. Filled `repo.name` with inferred defaults. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, `Makefile`, and `go.mod`. Filled `repo.name` with inferred defaults. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to checked: all fields are honestly resolved."
 
 [repo]
 name = "cobra"

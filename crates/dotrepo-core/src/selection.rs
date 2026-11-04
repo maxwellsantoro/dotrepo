@@ -210,7 +210,7 @@ pub(crate) fn candidate_from_document(
 /// Computes the total precedence order for candidate records.
 ///
 /// The documented ladder (docs/trust-model.md and RFC 0004) is:
-/// canonical .repo (native) > canonical mirror/overlay > verified (any mode) >
+/// canonical .repo (native) > canonical mirror/overlay > checked (any mode) >
 /// reviewed > imported > inferred > draft.
 ///
 /// Native only receives a numeric bonus when status == Canonical (7 vs 6).
@@ -225,7 +225,7 @@ fn precedence_rank(manifest: &Manifest) -> u8 {
     match (&manifest.record.mode, &manifest.record.status) {
         (RecordMode::Native, RecordStatus::Canonical) => 7,
         (_, RecordStatus::Canonical) => 6,
-        (_, RecordStatus::Verified) => 5,
+        (_, RecordStatus::Checked) => 5,
         (_, RecordStatus::Reviewed) => 4,
         (_, RecordStatus::Imported) => 3,
         (_, RecordStatus::Inferred) => 2,

@@ -2,7 +2,7 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "checked"
 source = "https://github.com/lettier/3d-game-shaders-for-beginners"
 generated_at = "2026-10-27T18:07:50.580986Z"
 
@@ -11,9 +11,9 @@ confidence = "high"
 provenance = [
     "imported",
     "inferred",
-    "verified",
+    "checked",
 ]
-notes = "Bootstrapped from `README.md`. Filled `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. Filled `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to checked: all fields are honestly resolved."
 
 [repo]
 name = "3D Game Shaders For Beginners"

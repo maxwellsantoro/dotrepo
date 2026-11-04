@@ -11,11 +11,11 @@ The hosted export can advance independently of client releases.
 | Understand DotRepo and try a lookup | [Project README](../README.md) |
 | Install a stable tool or extension | [Installation](install.md), [release compatibility](release-compatibility.md) |
 | Integrate an agent or tool | [Consumer integration](external-consumer-integration.md), [reference client](../examples/external-consumer/README.md) |
-| Try experimental retained source tools | [Decision-workflow source cache](experimental-repodigest-source-cache.md) |
-| Find repositories with compact source-backed profiles | [Experimental decision-workflow discovery](experimental-repodigest-discovery.md) |
-| Compare metadata and source-enriched discovery | [Discovery-100 local comparison](experimental-repodigest-discovery-comparison.md) |
-| Check shortlisted repositories against source assessments | [Experimental requirement assessments](experimental-repodigest-requirements.md) |
-| Finish a bounded preliminary selection or useful unknown | [Experimental decision workflow](experimental-repodigest-selection.md) |
+| Try experimental retained source tools | [Decision-workflow source cache](experimental-decision-source-cache.md) |
+| Find repositories with compact source-backed profiles | [Experimental decision-workflow discovery](experimental-decision-discovery.md) |
+| Compare metadata and source-enriched discovery | [Discovery-100 local comparison](experimental-decision-discovery-comparison.md) |
+| Check shortlisted repositories against source assessments | [Experimental requirement assessments](experimental-decision-requirements.md) |
+| Finish a bounded preliminary selection or useful unknown | [Experimental decision workflow](experimental-decision-selection.md) |
 | Distinguish public delivery, local workflows and measured evidence | [Workflow status](workflow-status.md) |
 | Adopt a native `.repo` | [Maintainer path](maintainer-happy-path.md), [sync boundaries](sync-boundaries.md) |
 | Interpret authority, evidence, or age | [Trust model](trust-model.md), [freshness](public-freshness.md) |

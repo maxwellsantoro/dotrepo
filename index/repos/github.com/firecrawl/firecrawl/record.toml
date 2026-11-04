@@ -2,7 +2,7 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "checked"
 source = "https://github.com/firecrawl/firecrawl"
 generated_at = "2026-10-28T06:10:54.839059554Z"
 
@@ -10,9 +10,9 @@ generated_at = "2026-10-28T06:10:54.839059554Z"
 confidence = "high"
 provenance = [
     "imported",
-    "verified",
+    "checked",
 ]
-notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Ignored component-scoped commands from `apps/rust-sdk/Cargo.toml` as repository defaults. Ignored component-scoped commands from `apps/api/package.json` as repository defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Ignored component-scoped commands from `apps/rust-sdk/Cargo.toml` as repository defaults. Ignored component-scoped commands from `apps/api/package.json` as repository defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to checked: all fields are honestly resolved."
 
 [repo]
 name = "firecrawl"

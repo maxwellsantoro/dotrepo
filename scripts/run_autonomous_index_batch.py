@@ -321,13 +321,14 @@ def identity_from_record_path(index_root: Path, record_path: Path) -> str:
 
 # Shared status ladder used both to rank quality-reprocess candidates and to
 # approximate whether a re-crawl "usefully improved" a record (unit-cost
-# classification proxy: status-ladder advancement, e.g. imported -> verified).
+# classification proxy: status-ladder advancement, e.g. imported -> checked).
 STATUS_ORDER: dict[str, int] = {
     "draft": 0,
     "inferred": 1,
     "imported": 2,
     "reviewed": 3,
-    "verified": 4,
+    "checked": 4,
+    "verified": 4,  # spelling of checked before 2026-11-03
     "canonical": 5,
 }
 
@@ -367,7 +368,7 @@ def classify_unit_cost_category(before_status: str | None, after_status: object)
     """Classify a crawled repository's unit-cost category.
 
     Proxy for "usefully improved": the record's status advanced on the
-    draft -> inferred -> imported -> reviewed -> verified -> canonical
+    draft -> inferred -> imported -> reviewed -> checked -> canonical
     ladder relative to what was on disk before this run's crawl. Repositories
     with no prior record (first factual crawl) or no rank improvement are
     "changed" — real crawl work happened, but there is no completeness gain
@@ -759,7 +760,7 @@ def enrich_telemetry(telemetry: dict, args: argparse.Namespace) -> dict:
             repository = str(crawl.get("repository") or "").strip()
             if repository:
                 failure_fingerprint_repositories.setdefault(fingerprint, set()).add(repository)
-        if crawl.get("recordStatus") == "verified":
+        if crawl.get("recordStatus") in ("checked", "verified"):
             promoted += 1
         synthesis_failure = crawl.get("synthesisFailure") or {}
         if synthesis_failure:

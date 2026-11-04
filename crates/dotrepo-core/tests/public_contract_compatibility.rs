@@ -986,7 +986,7 @@ source = "https://github.com/example/orbit"
 
 [record.trust]
 confidence = "medium"
-provenance = ["verified"]
+provenance = ["checked"]
 
 [repo]
 name = "orbit"
@@ -1006,7 +1006,7 @@ source = "https://github.com/example/orbit"
 
 [record.trust]
 confidence = "medium"
-provenance = ["verified"]
+provenance = ["checked"]
 
 [repo]
 name = "orbit"

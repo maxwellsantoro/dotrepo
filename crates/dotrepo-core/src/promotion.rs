@@ -53,7 +53,7 @@ pub struct DowngradeGuardOutcome {
     /// Retained for API compatibility. Fresh verification is always required,
     /// so prior authority is never restored by this report.
     pub preserved: bool,
-    /// Factual fields that changed since the previous verified record.
+    /// Factual fields that changed since the previous checked record.
     pub regressed_fields: Vec<String>,
 }
 
@@ -63,12 +63,12 @@ fn status_rank(status: &RecordStatus) -> u8 {
         RecordStatus::Imported => 1,
         RecordStatus::Inferred => 2,
         RecordStatus::Reviewed => 3,
-        RecordStatus::Verified => 4,
+        RecordStatus::Checked => 4,
         RecordStatus::Canonical => 5,
     }
 }
 
-/// Report changes when a previously verified overlay receives a lower fresh score.
+/// Report changes when a previously checked overlay receives a lower fresh score.
 /// Previous authority is never evidence for new verification: callers must use
 /// the current field scores to promote a refresh. In particular, canonical
 /// authority cannot be inherited by an autonomously rebuilt overlay.
@@ -77,7 +77,7 @@ pub fn guard_against_unjustified_downgrade(
     fresh: &mut Manifest,
 ) -> Option<DowngradeGuardOutcome> {
     let previous = previous?;
-    if previous.record.status != RecordStatus::Verified
+    if previous.record.status != RecordStatus::Checked
         || status_rank(&fresh.record.status) >= status_rank(&previous.record.status)
     {
         return None;
@@ -117,13 +117,21 @@ pub fn guard_against_unjustified_downgrade(
     })
 }
 
+/// Former name of [`promote_to_checked`]; the status was renamed on 2026-11-03.
+#[deprecated(since = "2.0.0-rc.3", note = "renamed to promote_to_checked")]
 pub fn promote_to_verified(manifest: &mut Manifest, report: &FieldScoreReport) -> PromotionOutcome {
+    promote_to_checked(manifest, report)
+}
+
+/// Promote a record whose fields all passed the automated pipeline checks to
+/// `checked`. This is not human review or a correctness guarantee.
+pub fn promote_to_checked(manifest: &mut Manifest, report: &FieldScoreReport) -> PromotionOutcome {
     let previous_status = match manifest.record.status {
         RecordStatus::Draft => "draft",
         RecordStatus::Imported => "imported",
         RecordStatus::Inferred => "inferred",
         RecordStatus::Reviewed => "reviewed",
-        RecordStatus::Verified => "verified",
+        RecordStatus::Checked => "checked",
         RecordStatus::Canonical => "canonical",
     }
     .to_string();
@@ -152,20 +160,21 @@ pub fn promote_to_verified(manifest: &mut Manifest, report: &FieldScoreReport) -
         };
     }
 
-    manifest.record.status = RecordStatus::Verified;
+    manifest.record.status = RecordStatus::Checked;
 
     // Update trust provenance and confidence
     if let Some(ref mut trust) = manifest.record.trust {
         trust.confidence = Some("high".into());
-        if !trust.provenance.contains(&"verified".to_string()) {
-            trust.provenance.push("verified".into());
+        trust.provenance.retain(|value| value != "verified");
+        if !trust.provenance.contains(&"checked".to_string()) {
+            trust.provenance.push("checked".into());
         }
         let existing_notes = trust.notes.take().unwrap_or_default();
         trust.notes = Some(if existing_notes.is_empty() {
-            "Auto-promoted to verified: all fields are honestly resolved.".to_string()
+            "Auto-promoted to checked: all fields are honestly resolved.".to_string()
         } else {
             format!(
-                "{} Auto-promoted to verified: all fields are honestly resolved.",
+                "{} Auto-promoted to checked: all fields are honestly resolved.",
                 existing_notes
             )
         });
@@ -306,7 +315,7 @@ pub fn analyze_index_promotion(index_root: &Path) -> Result<PromotionReport> {
             dotrepo_schema::RecordStatus::Imported => "imported".to_string(),
             dotrepo_schema::RecordStatus::Inferred => "inferred".to_string(),
             dotrepo_schema::RecordStatus::Reviewed => "reviewed".to_string(),
-            dotrepo_schema::RecordStatus::Verified => "verified".to_string(),
+            dotrepo_schema::RecordStatus::Checked => "checked".to_string(),
             dotrepo_schema::RecordStatus::Canonical => "canonical".to_string(),
         };
 

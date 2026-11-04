@@ -1,6 +1,6 @@
 # Experimental requirement assessments
 
-The local RepoDigest MCP service can use metadata for cheap discovery and
+The local decision-workflow MCP service can use metadata for cheap discovery and
 separately check shortlisted repositories against retained source assessments.
 This experimental path adds no public protocol version and leaves the public
 source-only instruction consumer unchanged.
@@ -16,28 +16,28 @@ uv run --offline --no-sync python scripts/repodigest_service.py \
 ```
 
 The operator supplies a working database admitted through the
-[source-store workflow](experimental-repodigest-source-cache.md); never admit new
+[source-store workflow](experimental-decision-source-cache.md); never admit new
 assessments into a frozen benchmark database. If an independently prepared
 metadata index is available, add `--metadata-index /path/to/discovery-index`.
 The scoped source delivery includes the existing adapter, not the large
 Discovery-100 databases or an automatically populated catalog. Without that
 option, discovery uses the admitted source profiles.
 
-- `repodigest.find` uses names, descriptions, topics and language metadata
+- `dotrepo.decision.find` uses names, descriptions, topics and language metadata
   when `--metadata-index` is supplied. It returns leads and a lexical ranking,
   without a suitability score. Existing source-enriched discovery remains
   available when this option is absent.
-- `repodigest.describe` returns repository evidence and assessment keys from a
+- `dotrepo.decision.describe` returns repository evidence and assessment keys from a
   separate index of assessment-bearing components, independent of manifest
   pagination. Continue that index with `requirementOffset` when
   `requirementKnowledgeNextOffset` is present. Optional `revision` pins an exact
   retained revision and refuses missing evidence instead of substituting HEAD.
-- `repodigest.qualify` checks 1–4 exact repository/revision/component targets
+- `dotrepo.decision.qualify` checks 1–4 exact repository/revision/component targets
   against 1–8 boolean conditions in one request. Responses are capped at 32 KiB;
   a larger result is refused with a request to narrow the comparison.
 - `source.read` provides original passages when the caller needs more context.
 
-The [bounded selection workflow](experimental-repodigest-selection.md) combines
+The [bounded selection workflow](experimental-decision-selection.md) combines
 these primitives into a shortlist, explicit stopping rule and preliminary final
 decision. It retains unfinished attempts separately from completed decisions.
 

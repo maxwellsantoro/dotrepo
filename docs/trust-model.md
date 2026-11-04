@@ -22,9 +22,11 @@ public trust block.
 - **imported**: a record created from existing repo files or platform metadata
 - **inferred**: a record containing heuristically or LLM-derived claims
 - **reviewed**: a record reviewed by a human contributor or curator
-- **verified**: a record whose required fields have been exhaustively resolved
-  against evidence through deterministic checks and, where needed,
-  candidate-constrained model adjudication; human review is not implied
+- **checked**: every required field passed the automated pipeline checks against
+  inspected evidence (deterministic checks and, where needed,
+  candidate-constrained model adjudication). Human review and correctness are
+  not implied. Records written before 2026-11-03 spell this `verified`; tools
+  accept that legacy value and treat it as `checked`
 - **canonical**: a maintainer-controlled in-repo record treated as authoritative for the project
 
 ## Provenance categories
@@ -32,9 +34,10 @@ public trust block.
 - **declared**: stated directly by project maintainers or canonical records
 - **imported**: parsed from source materials such as README, CODEOWNERS, or platform metadata
 - **inferred**: derived from heuristics, code inspection, or LLM interpretation
-- **verified**: confirmed against evidence through deterministic verification,
-  constrained adjudication with post-checks, human review, or explicit
-  maintainer validation
+- **checked**: passed automated checks against inspected evidence (deterministic
+  checks or constrained adjudication with post-checks). Human review is recorded
+  with `reviewed` status and reviewer evidence; maintainer statements are
+  `declared`. Earlier records use the legacy provenance value `verified`
 
 These are reference provenance values, not a closed enum. Tools should preserve unknown provenance strings even if they only interpret the reference vocabulary directly.
 
@@ -45,8 +48,8 @@ Likewise, `record.trust.confidence` uses a reference vocabulary of `low`, `mediu
 - Agents and tools should prefer canonical records when available.
 - Imported and inferred overlays are useful, but should be consumed with awareness of their status.
 - Consumers that specifically require human review should check for `reviewed`
-  status and the recorded reviewer evidence rather than interpreting `verified`
-  provenance or confidence as human approval.
+  status and the recorded reviewer evidence rather than interpreting `checked`
+  (or legacy `verified`) provenance or confidence as human approval.
 - Conflicts between sources should surface explicitly rather than being quietly flattened.
 - Claim and supersede are authority handoff semantics, not a requirement for a full
   productized maintainer workflow before precedence can be defined.
@@ -60,7 +63,7 @@ Likewise, `record.trust.confidence` uses a reference vocabulary of `low`, `mediu
   repository identity surface matches across the canonical upstream path, any overlay
   `record.source`, and any corresponding index path.
 - The default precedence ladder is: canonical native `.repo`, canonical mirror,
-  then verified, reviewed, imported, inferred, and draft records regardless of
+  then checked, reviewed, imported, inferred, and draft records regardless of
   mode. Native mode alone receives no precedence bonus below canonical status.
   The [selection implementation](../crates/dotrepo-core/src/selection.rs) owns
   this order; it is not a required lifecycle progression.
@@ -105,13 +108,13 @@ See [`RFC 0004`](../rfcs/0004-index-and-trust-model.md) for the design contract 
 [`authority-handoff-examples.md`](./authority-handoff-examples.md) for illustrative
 scenarios. Code and tested selection contracts own shipped behavior.
 
-For the autonomous promotion rules that can mint `verified` overlays, see
+For the autonomous promotion rules that can mint `checked` overlays, see
 [`factual-crawl-automation.md`](./factual-crawl-automation.md) and
 [`ROADMAP.md`](../ROADMAP.md).
 
-## Field assessments and the meaning of verified
+## Field assessments and the meaning of checked
 
-`verified` means the pipeline resolved its required checks against inspected
+`checked` means the pipeline resolved its required checks against inspected
 material. It is not a calibrated probability, a guarantee of correctness, human
 review, complete coverage, or a recent upstream check. Record authority, factual
 correctness, completeness, and age must be evaluated separately.
@@ -134,7 +137,7 @@ field assessments do not inherit them from a record-wide high-confidence label.
 ## Standalone promotion differs by release
 
 **Stable `v1.0.1`:** `promotion-report --apply` can change eligible records to
-`verified` and write both the manifest and evidence notes. Its scoring uses
+`verified` (now spelled `checked`) and write both the manifest and evidence notes. Its scoring uses
 manifest values and record-wide provenance; it does not freshly inspect upstream
 sources. A stable-generated `verified` label does not establish that the newer
 per-field checks ran. Omit `--apply` for read-only analysis.
@@ -145,7 +148,7 @@ establish source inspection from a standalone manifest, record-wide provenance,
 or a newly written evidence note. On `main`, read-only promotion analysis uses retained
 assessments bound to the exact field value and record check time; missing or
 invalidated assessments remain unresolved. This analysis is not a fresh check.
-Use the crawler's inspection and verification path to mint `verified` overlays.
+Use the crawler's inspection and verification path to mint `checked` overlays.
 These safeguards do not change already-installed 1.0.1 binaries or retroactively
 recheck older records. Source links and MCP guard differences are in
 [release compatibility](release-compatibility.md).

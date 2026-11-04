@@ -40,14 +40,14 @@ discover or schedule
   -> deterministic verification and field scoring
   -> bounded escalation for unresolved fields
   -> candidate/source/field post-checks and validation
-  -> partial writeback, verified promotion, or abstention
+  -> partial writeback, checked promotion, or abstention
   -> retain telemetry, validate index, gate public export
   -> test exact automation commit, land, deploy, verify
 ```
 
 Missing HEAD or redirected repository identity aborts the crawl. File reads use
 the captured commit; mutable GitHub metadata has separate retrieval context.
-Fresh assessments govern refresh outcomes; a previous verified label cannot
+Fresh assessments govern refresh outcomes; a previous checked label cannot
 preserve facts that no longer pass. Autonomous planning/writeback reject native,
 reviewed, and canonical records.
 

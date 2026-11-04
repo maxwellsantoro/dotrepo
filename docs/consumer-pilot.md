@@ -3,7 +3,7 @@
 ## Current workflow evaluation
 
 The [roadmap](../ROADMAP.md#active-execution-order) owns current priorities.
-Start with the [bounded preliminary decision workflow](experimental-repodigest-selection.md)
+Start with the [bounded preliminary decision workflow](experimental-decision-selection.md)
 and [current evidence](workflow-status.md), including useful scoped unknowns,
 source fallback and unfinished attempts. Pair these with publisher setup/update
 controls at equivalent output quality and freshness. A source-supported

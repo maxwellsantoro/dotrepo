@@ -10,7 +10,7 @@ implementation and validation history.
 | Job | Available surface | What it establishes |
 | --- | --- | --- |
 | Orient or discover | Existing public profiles/search and stable tools | Reported facts, source context and age; no suitability or execution guarantee |
-| Shortlist | Local experimental `repodigest.shortlist` | Up to four leads from three search queries, with visible gaps |
+| Shortlist | Local experimental `dotrepo.decision.shortlist` | Up to four leads from three search queries, with visible gaps |
 | Qualify requirements | Local `describe`, `qualify`, `decide` | Supported, contradicted or unknown source assessments at exact revision/component scope |
 | Inspect original evidence | Local retained `source.list`/`source.read`, optional separately configured HTTP fallback | Bound source bytes and passages; text remains untrusted data |
 | Execute | Separate authorized task environment | A particular run in a particular environment; no lookup tool grants authority |
@@ -37,7 +37,7 @@ There are two products, each with a publisher side and a consumer side:
   Publishers derive a native `.repo` from existing sources; observed overlays
   keep separate authority. Its experimental decision workflow (discovery,
   requirement assessment, reusable findings) lives in this repository; its
-  tools keep the `repodigest.*` names. Preliminary suitability is distinct
+  MCP tools are `dotrepo.decision.*`. Preliminary suitability is distinct
   from a successful run.
 - **PageDigest** is the website manifest protocol and publisher/consumer
   toolchain. Publishers generate the manifest from existing site builds; its
@@ -45,14 +45,23 @@ There are two products, each with a publisher side and a consumer side:
   retains source-bound findings and reports what needs rereading.
 
 Earlier documents called the decision workflow "RepoDigest" and PageDigest's
-publisher side "DotPage"; neither is a separate product.
+publisher side "DotPage"; neither is a separate product. The old
+`repodigest.*` tool names still dispatch so retained replays keep working; the
+internal `scripts/repodigest_*.py` module names are unchanged because retained
+policies and byte-bound fixtures name them.
 
 Retained findings in both projects share one source-status vocabulary:
 `current` (every declared source still has the bound bytes), `changed`
 (a declared source now has different bytes) and `unknown` (a source is missing,
 failed, out of scope or a different representation). PageDigest reports these as
-`usable`, `needs_reread` and `unknown`. The experimental decision workflow now
-reports `sourceStatus` for findings and individual assessments. It checks the
+`usable`, `needs_reread` and `unknown`; both report the shared value as
+`sourceStatus`. The rules are executable: PageDigest's
+[`test-vectors/source-status/vectors.json`](https://github.com/lazy-collective/pagedigest/blob/main/test-vectors/source-status/vectors.json)
+is the definition, vendored here as `scripts/tests/fixtures/source-status-vectors.json`
+and run against `scripts/source_status.py`. Per assessment, `changed` wins over
+`unknown`, which wins over `current`; an assessment with no declared sources is
+`unknown`. The experimental decision workflow reports `sourceStatus` for
+individual assessments and for each requirement. It checks the
 declared dependency hashes against an independently admitted source inventory;
 timestamp-only record updates do not discard unchanged assessments. An older
 assessment may remain source-current at a newly admitted revision when all its
@@ -60,6 +69,14 @@ declared dependencies retain the same bytes. Missing, uninspected, stale or
 unavailable sources remain unknown, and changed sources require another review.
 The original assessed revision is retained. Source status is a separate axis from
 requirement outcomes (`supported`, `contradicted`, `unknown`).
+
+A requirement can have several assessments (for example, from different
+reviewers or revisions). Its requirement-level `sourceStatus` is a rollup, not a
+per-source combination: it is `current` when at least one assessment of that key
+is source-current, because the outcome is computed only from current assessments;
+otherwise `changed` when any assessment has a changed source; otherwise `unknown`.
+Changed or unknown assessments stay visible in `assessments` but never contribute
+a value. Conflicting current values make the outcome `unknown`.
 
 [**Lazy Collective**](https://lazycollective.org/) is the umbrella and coordination
 project. Its public home explains the shared purpose and current projects;
@@ -101,8 +118,8 @@ The November 2 tests are correctness/workflow controls. They are not replacement
 consumer experiments, independent adoption, dollar-cost measurements or a new
 positive economic result. Historical benchmark files remain unchanged.
 
-Start with [bounded selection](experimental-repodigest-selection.md),
-[requirement semantics](experimental-repodigest-requirements.md), and
+Start with [bounded selection](experimental-decision-selection.md),
+[requirement semantics](experimental-decision-requirements.md), and
 [publisher setup/update](maintainer-happy-path.md). The [roadmap](../ROADMAP.md)
 owns next outcome gates; [release compatibility](release-compatibility.md) owns
 published versions.

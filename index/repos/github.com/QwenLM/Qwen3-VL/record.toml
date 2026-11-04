@@ -2,7 +2,7 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "checked"
 source = "https://github.com/QwenLM/Qwen3-VL"
 generated_at = "2026-10-27T17:50:26.08203Z"
 
@@ -10,9 +10,9 @@ generated_at = "2026-10-27T17:50:26.08203Z"
 confidence = "high"
 provenance = [
     "imported",
-    "verified",
+    "checked",
 ]
-notes = "Bootstrapped from `README.md` and `qwen-vl-utils/pyproject.toml`. Ignored component-scoped commands from `qwen-vl-utils/pyproject.toml` as repository defaults. Imported `repo.toolchain.min` from `qwen-vl-utils/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `qwen-vl-utils/pyproject.toml`. Ignored component-scoped commands from `qwen-vl-utils/pyproject.toml` as repository defaults. Imported `repo.toolchain.min` from `qwen-vl-utils/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to checked: all fields are honestly resolved."
 
 [repo]
 name = "Qwen3-VL"

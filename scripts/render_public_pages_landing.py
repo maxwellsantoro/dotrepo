@@ -495,7 +495,7 @@ def load_index_progress(index_root: Path) -> dict:
             languages = []
         language_counts[normalize_language_family(languages)] += 1
         status = record.get("status")
-        if status in {"reviewed", "verified", "canonical"}:
+        if status in {"reviewed", "checked", "verified", "canonical"}:
             reviewed_or_better_count += 1
         if status in {"imported", "inferred"}:
             imported_or_inferred_count += 1
@@ -714,10 +714,10 @@ def render_pagedigest_stats_dashboard(stats: dict, base_path: str) -> str:
     <section class="panel section">
       <h2>PageDigest dogfood</h2>
       <p class="section__intro">
-        dotrepo publishes thousands of small JSON records. PageDigest lets a
-        consumer check the whole covered set first, then fetch only records
-        whose content actually changed. These numbers come from the current
-        export's <a href="{stats_href}"><code>/v0/stats.json</code></a>.
+        For tools that mirror the whole export: one manifest request shows which
+        records changed, so a returning reader fetches only those. Figures come
+        from this export's <a href="{stats_href}"><code>/v0/stats.json</code></a>,
+        not measured reader traffic.
       </p>
       <div class="stat-grid stat-grid--wide">
         <div class="stat">
@@ -730,9 +730,10 @@ def render_pagedigest_stats_dashboard(stats: dict, base_path: str) -> str:
         </div>
         <div class="stat">
           <strong>{fetches_avoided} skippable fetches</strong>
-          <span>Unchanged covered records. Their manifest entry counts as revalidation
-          (<a href="https://github.com/lazy-collective/pagedigest/blob/main/SPEC.md#512-interaction-with-http-caching">SPEC §5.1.2</a>),
-          so a reader holding them makes no request.</span>
+          <span>Unchanged covered records. Each entry's digest matches the record, so
+          it counts as revalidation
+          (<a href="https://github.com/lazy-collective/pagedigest/blob/main/SPEC.md#512-interaction-with-http-caching">SPEC §5.1.2</a>)
+          and a reader holding them makes no request.</span>
         </div>
         <div class="stat">
           <strong>{bytes_avoided} skippable</strong>
@@ -2866,7 +2867,7 @@ def main() -> int:
     <div class="snapshot-strip" aria-label="Current export status">
       <p><strong>{html.escape(str(repository_count))} repositories</strong> · exported {html.escape(generated_at_human)} · partial coverage</p>
       {render_record_freshness(input_dir, inventory, generated_at)}
-      <p>Snapshot revalidation due: {stale_line}. Export time is not the last upstream check.</p>
+      <p>Snapshot revalidation due: {stale_line}.</p>
     </div>
 
     <section class="panel section" id="lookup">
@@ -2914,7 +2915,7 @@ def main() -> int:
     <details class="panel section">
       <summary>How maintainer authority works</summary>
       <p class="section__intro">
-        Maintainers can take authority over a generated overlay. This example preserves the earlier overlay and the accepted claim so consumers can inspect the handoff. A verified overlay means the pipeline resolved its checks; it does not mean human review, complete coverage, or guaranteed correctness.
+        Maintainers can take authority over a generated overlay. This example preserves the earlier overlay and the accepted claim so consumers can inspect the handoff. It is the project author's own repository; no outside maintainer has completed a claim yet.
       </p>
       <div class="api-grid">
         <article class="api-card">

@@ -156,7 +156,7 @@ fn sanitize_plan_command_fields(plan: &mut ImportPlan, context: &str) {
 ///
 /// This gate is intentionally looser than `FieldScoreSummary::eligible_for_auto_publish`:
 /// writeback may persist honestly partial overlays when deterministic verification passes,
-/// even when field scoring still has unresolved entries. Auto-publish to `verified` requires
+/// even when field scoring still has unresolved entries. Auto-publish to `checked` requires
 /// full field resolution instead.
 pub fn autonomous_writeback_eligible(verification: &VerificationReport) -> bool {
     verification.passed

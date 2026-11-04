@@ -598,7 +598,7 @@ source = "https://github.com/acme/widget"
 
 [record.trust]
 confidence = "medium"
-provenance = ["imported", "verified"]
+provenance = ["imported", "checked"]
 
 [repo]
 name = "widget"

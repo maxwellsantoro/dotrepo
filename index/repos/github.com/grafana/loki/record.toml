@@ -2,7 +2,7 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "checked"
 source = "https://github.com/grafana/loki"
 generated_at = "2026-10-27T18:02:56.215516Z"
 
@@ -10,9 +10,9 @@ generated_at = "2026-10-27T18:02:56.215516Z"
 confidence = "high"
 provenance = [
     "imported",
-    "verified",
+    "checked",
 ]
-notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `Makefile`, `CONTRIBUTING.md`, and `go.mod`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@grafana/loki-team` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Imported `repo.build` from `Makefile`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `Makefile`, `CONTRIBUTING.md`, and `go.mod`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@grafana/loki-team` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Imported `repo.build` from `Makefile`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to checked: all fields are honestly resolved."
 
 [repo]
 name = "loki"

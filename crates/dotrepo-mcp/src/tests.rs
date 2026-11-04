@@ -1113,7 +1113,7 @@ status = "canonical"
 
 [record.trust]
 confidence = "high"
-provenance = ["declared", "verified"]
+provenance = ["declared", "checked"]
 notes = "Maintainer-controlled source of truth."
 
 [repo]

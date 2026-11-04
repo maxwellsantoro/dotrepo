@@ -671,7 +671,7 @@ source = "https://github.com/example/orbit"
 
 [record.trust]
 confidence = "medium"
-provenance = ["verified"]
+provenance = ["checked"]
 
 [repo]
 name = "orbit"
@@ -1008,6 +1008,22 @@ description = "Fast local-first sync engine"
 
     let manifest = load_manifest_from_root(&root).expect("manifest loads from record.toml");
     assert_eq!(manifest.repo.name, "orbit");
+
+    fs::remove_dir_all(root).expect("temp dir removed");
+}
+
+#[test]
+fn load_manifest_document_explains_a_repo_tool_workspace_directory() {
+    let root = temp_dir("repo-tool-workspace");
+    fs::create_dir_all(root.join(".repo/manifests")).expect("repo tool state created");
+
+    let error = load_manifest_document(&root).expect_err("a directory is not a manifest");
+    let message = format!("{error:#}");
+    assert!(
+        message.contains("is a directory, not a dotrepo manifest"),
+        "{message}"
+    );
+    assert!(message.contains("Google's `repo` tool"), "{message}");
 
     fs::remove_dir_all(root).expect("temp dir removed");
 }

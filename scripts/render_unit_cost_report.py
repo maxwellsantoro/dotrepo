@@ -14,7 +14,7 @@ category:
   requests are excluded here, so this is not zero total maintenance cost.
 - ``changed``: the repository was re-crawled (fetched, imported, verified)
   but the resulting record did not advance on the draft -> inferred ->
-  imported -> reviewed -> verified -> canonical status ladder relative to
+  imported -> reviewed -> checked -> canonical status ladder relative to
   what was on disk before this run.
 - ``improved``: the repository was re-crawled and its record status
   advanced on that ladder. This historical telemetry label is a status-change
