@@ -1,0 +1,28 @@
+{
+  "observedOn": "2026-11-04",
+  "decision": "User authorized quarantine of all three held groups on 2026-11-04. Their 108 exact source-capture files were removed from this tree after verifying an external preservation archive; original records and Git history are retained. This does not grant rights to historical/private copies.",
+  "closedObservations": [
+    {
+      "upstream": "ComposioHQ/awesome-claude-skills",
+      "revision": "be2a406907dbc61b73e6827ded415c96139d13a2",
+      "correction": "The captured README explicitly declares Apache-2.0 at lines 495\u2013499. Missing root LICENSE did not establish an unlicensed README. Added canonical Apache text and bound the existing declaration. Individual skill exceptions retain their own scope."
+    }
+  ],
+  "quarantinedHolds": [
+    {
+      "upstream": "@vscode/vsce-sign",
+      "version": "2.1.0",
+      "reason": "Exact npm license recovered; its scope-of-license clause lists sharing/publication among restricted actions. Owner must decide public-capture disposition. The notice itself does not clear redistribution."
+    },
+    {
+      "upstream": "666ghj/MiroFish; ultralytics/ultralytics; warpdotdev/warp",
+      "reason": "AGPL texts recovered at captured commits; Warp also has an MIT text. Confirm file-level scope and obligations before a benchmark redistribution decision. No blanket MIT classification."
+    },
+    {
+      "upstream": "hashicorp/vault",
+      "revision": "352089582444ea84feb03bc97eda97b35729e8ec",
+      "reason": "Captured BUSL text includes parameters and an additional-use grant. Owner must assess the proposed redistribution against those exact terms; no generic permissive-license conclusion."
+    }
+  ],
+  "holds": []
+}

@@ -17,6 +17,45 @@ contracts outrank prose; installed binaries need [version-matched documentation]
 
 ## Active execution order
 
+### Org-review repairs — November 4, 2026 (authorized delivery)
+
+The isolated `codex/address-org-review-20261104` checkout under
+`/Users/maxwell/Documents/Codex/2026-11-04/task/address-org-review/dotrepo/`
+starts from PR220's exact publisher-declaration repair. Both captured publisher
+declarations reproduce their stored digests; live correction still requires a
+normal merge/deployment and independent query verification. PR220 has now merged
+as `d22f2205ecd992325c51228a68d2297ede62927f`; deployment verification is tracked
+in the parent acceptance packet.
+
+The read-only [refresh readiness preflight](scripts/check_refresh_readiness.py)
+identified disabled Actions PR creation. After the user's explicit approval,
+GitHub's organization prerequisite and DotRepo's coupled switch are enabled with
+read-only defaults; the other two repositories remain disabled. The preflight
+now passes. It never mutates policy or grants the scheduled token administration
+access. Verify a whole bounded refresh afterward; no unattended streak is
+established by a settings check.
+
+The [captured-revision license audit](benchmarks/third-party-licenses/README.md)
+recovers 46 license/notice texts, binds 52 capture roots / 530 original files,
+and retains all historical source bytes. The owner subsequently authorized quarantining all three held groups. Their 108
+source files are absent from the current tree, with an external hash-verified
+archive, original inventories and Git history preserved. Historical restrictions
+remain explicit; notices or quarantine do not establish legal clearance.
+
+The [decision control](docs/review-outcomes-20261104/README.md) completes supported,
+contradicted and unknown source decisions and retains an unfinished attempt.
+Its same-cache baseline reaches the same narrow Python-declaration conclusion.
+This is a developer-defined, post-exposure fixture using a synthetic reviewed
+assessment; it does not close the independent utility or combined-cost gates.
+The PageDigest companion control likewise retains its unfavorable request/byte
+result. Existing negative studies and export-time churn remain unchanged.
+
+Acceptance: Python suite, Ruff, captured-source/notice hashes, portable control
+replay and the lightweight public/exporter/consumer gate; receipts live in the
+parent packet's `acceptance/` directory. The user has authorized publishing and
+merging the repair branches, deployment verification and the quarantine. Package
+releases remain separate. General growth and model-provider calls are zero.
+
 The review-follow-up deployment exposed transient R2 REST failures that restarted
 whole 1,000-object batches. The bounded operator repair retries individual objects,
 accounts for attempts on failure, preserves the existing authorization and rolling
