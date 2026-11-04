@@ -383,3 +383,21 @@ fn public_export_pagedigest_stats_report_cold_start_fetch_cost() {
         .as_u64()
         .is_some_and(|bytes| bytes > 0));
 }
+
+#[test]
+fn timestamp_only_export_separates_material_and_exact_body_reuse() {
+    let root = expected_root();
+    let mut freshness = sample_public_freshness();
+    freshness.generated_at = "2026-03-10T18:30:01Z".into();
+    let outputs = export_public_index_static(&fixture_index_root(), &root, freshness).unwrap();
+    let (_, stats) = outputs
+        .iter()
+        .find(|(p, _)| p == &root.join("v0/stats.json"))
+        .unwrap();
+    let stats: Value = serde_json::from_str(stats).unwrap();
+    let stats = &stats["pagedigest"];
+    assert_eq!(stats["unchangedRecords"], 10);
+    assert_eq!(stats["fetchesAvoided"], 0);
+    assert_eq!(stats["bytesAvoided"], 0);
+    assert_eq!(stats["recordsNeedingFetch"], 10);
+}

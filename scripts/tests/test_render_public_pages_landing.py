@@ -100,11 +100,14 @@ class PublicPageRendererTests(unittest.TestCase):
             {
                 "pagedigest": {
                     "recordsCovered": 3066,
-                    "recordsNeedingFetch": 31,
-                    "fetchesAvoided": 3035,
+                    "unchangedRecords": 3035,
+                    "byteIdenticalRecords": 0,
+                    "byteIdenticalBytes": 0,
+                    "recordsNeedingFetch": 3066,
+                    "fetchesAvoided": 0,
                     "bytesCovered": 42_500_000,
-                    "bytesAvoided": 41_200_000,
-                    "estimatedTokensAvoided": 9_800_000,
+                    "bytesAvoided": 0,
+                    "estimatedTokensAvoided": 0,
                     "siteRev": 3,
                     "manifestBytes": 850_000,
                     "generated": "2026-07-03T01:15:11Z",
@@ -115,9 +118,9 @@ class PublicPageRendererTests(unittest.TestCase):
 
         self.assertIn("PageDigest dogfood", rendered)
         self.assertIn("3,066 tracked records", rendered)
-        self.assertIn("31 needing fetch", rendered)
-        self.assertIn("3,035 skippable fetches", rendered)
-        self.assertIn("39.3 MB skippable", rendered)
+        self.assertIn("3,035 records with unchanged facts", rendered)
+        self.assertIn("0 byte-identical responses", rendered)
+        self.assertIn("0 responses eligible for manifest revalidation", rendered)
         self.assertNotIn("token-equivalent", rendered)
         self.assertIn("site_rev 3", rendered)
         self.assertIn("/v0/stats.json", rendered)
@@ -125,7 +128,7 @@ class PublicPageRendererTests(unittest.TestCase):
     def test_pagedigest_dashboard_handles_missing_stats(self) -> None:
         rendered = public_pages.render_pagedigest_stats_dashboard({}, "")
 
-        self.assertIn("first stats-bearing", rendered)
+        self.assertIn("no comparison of exact response bodies", rendered)
         self.assertIn("/v0/stats.json", rendered)
 
     def test_health_json_summarizes_public_surface_coherence(self) -> None:

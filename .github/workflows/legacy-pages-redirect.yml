@@ -1,0 +1,43 @@
+name: Retire legacy GitHub Pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/legacy-pages-redirect.yml
+      - docs/legacy-pages/**
+
+permissions:
+  contents: read
+
+concurrency:
+  group: legacy-github-pages
+  cancel-in-progress: false
+
+jobs:
+  redirect:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Stage only the retirement pages
+        run: |
+          mkdir -p "$RUNNER_TEMP/legacy-pages"
+          cp docs/legacy-pages/index.html docs/legacy-pages/404.html "$RUNNER_TEMP/legacy-pages/"
+      - uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
+        with:
+          path: ${{ runner.temp }}/legacy-pages
+      - name: Refuse an outdated main revision
+        run: |
+          current_main="$(git ls-remote origin refs/heads/main | cut -f1)"
+          test "$current_main" = "$GITHUB_SHA"
+      - uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
+        id: deployment

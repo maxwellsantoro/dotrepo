@@ -693,20 +693,12 @@ def build_homepage_snapshot_state(meta: dict, inventory: dict) -> str:
 
 def render_pagedigest_stats_dashboard(stats: dict, base_path: str) -> str:
     pagedigest = stats.get("pagedigest")
-    if not isinstance(pagedigest, dict):
+    if not isinstance(pagedigest, dict) or "byteIdenticalRecords" not in pagedigest:
         return """
     <section class="panel section">
       <h2>PageDigest dogfood</h2>
-      <p class="section__intro">
-        The public stats endpoint is ready for PageDigest economics, but this
-        current public tree was rendered before the first stats-bearing
-        export. Once <code>/v0/stats.json</code> is present, this section will
-        publish records covered, skipped fetches, avoided bytes, and estimated
-        potential transfer savings from the export.
-      </p>
-      <p class="section__note">
-        Contract endpoint: <code>/v0/stats.json</code>.
-      </p>
+      <p>This export has no comparison of exact response bodies with the previous export.</p>
+      <p class="section__note">Contract endpoint: <code>/v0/stats.json</code>.</p>
     </section>
         """.strip()
 
@@ -714,10 +706,9 @@ def render_pagedigest_stats_dashboard(stats: dict, base_path: str) -> str:
     <section class="panel section">
       <h2>PageDigest dogfood</h2>
       <p class="section__intro">
-        For tools that mirror the whole export: one manifest request shows which
-        records changed, so a returning reader fetches only those. Figures come
-        from this export's <a href="{stats_href}"><code>/v0/stats.json</code></a>,
-        not measured reader traffic.
+        A record can keep the same facts while its export timestamp changes the response body.
+        These counts compare the current and previous exports. See the
+        <a href="{stats_href}">export statistics</a> for the underlying counts.
       </p>
       <div class="stat-grid stat-grid--wide">
         <div class="stat">
@@ -725,19 +716,17 @@ def render_pagedigest_stats_dashboard(stats: dict, base_path: str) -> str:
           <span>Records covered by <code>/.well-known/pagedigest.json</code>.</span>
         </div>
         <div class="stat">
-          <strong>{records_needing_fetch} needing fetch</strong>
-          <span>New or changed records in this export cycle.</span>
+          <strong>{unchanged_records} records with unchanged facts</strong>
+          <span>The material content stayed the same across these exports.</span>
         </div>
         <div class="stat">
-          <strong>{fetches_avoided} skippable fetches</strong>
-          <span>Unchanged covered records. Each entry's digest matches the record, so
-          it counts as revalidation
-          (<a href="https://github.com/lazy-collective/pagedigest/blob/main/SPEC.md#512-interaction-with-http-caching">SPEC §5.1.2</a>)
-          and a reader holding them makes no request.</span>
+          <strong>{identical_records} byte-identical responses</strong>
+          <span>{identical_bytes} of {bytes_covered} covered bytes match the previous export.</span>
         </div>
         <div class="stat">
-          <strong>{bytes_avoided} skippable</strong>
-          <span>Unchanged payload bytes this cycle out of {bytes_covered} covered.</span>
+          <strong>{revalidatable} responses eligible for manifest revalidation</strong>
+          <span>A reader needs a retained body matching the digest and an unchanged revision.
+          Actual requests also depend on cache state, freshness deadlines and audits.</span>
         </div>
         <div class="stat">
           <strong>site_rev {site_rev}</strong>
@@ -748,9 +737,10 @@ def render_pagedigest_stats_dashboard(stats: dict, base_path: str) -> str:
     """.format(
         stats_href=site_href(base_path, "/v0/stats.json"),
         records_covered=html.escape(format_count(pagedigest.get("recordsCovered"))),
-        records_needing_fetch=html.escape(format_count(pagedigest.get("recordsNeedingFetch"))),
-        fetches_avoided=html.escape(format_count(pagedigest.get("fetchesAvoided"))),
-        bytes_avoided=html.escape(format_bytes(pagedigest.get("bytesAvoided"))),
+        unchanged_records=html.escape(format_count(pagedigest.get("unchangedRecords"))),
+        identical_records=html.escape(format_count(pagedigest.get("byteIdenticalRecords"))),
+        identical_bytes=html.escape(format_bytes(pagedigest.get("byteIdenticalBytes"))),
+        revalidatable=html.escape(format_count(pagedigest.get("fetchesAvoided"))),
         bytes_covered=html.escape(format_bytes(pagedigest.get("bytesCovered"))),
         site_rev=html.escape(format_count(pagedigest.get("siteRev"))),
         manifest_bytes=html.escape(format_bytes(pagedigest.get("manifestBytes"))),
@@ -3020,9 +3010,8 @@ def main() -> int:
 
     <details class="panel section">
       <summary>Incremental fetching with PageDigest</summary>
-      <p>This export publishes a PageDigest manifest. A reader that kept the previous
-        export can fetch it first and download only changed records. The figures below are
-        computed from the export, not measured reader traffic.</p>
+      <p>Compare this <a href="{site_href(base_path, "/.well-known/pagedigest.json")}">manifest</a>
+        with your cached results to decide which facts to revisit and which bodies need a fetch.</p>
       {render_pagedigest_stats_dashboard(stats, base_path)}
     </details>
 

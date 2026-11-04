@@ -181,13 +181,28 @@ def validate_pagedigest_stats(
         "stats pagedigest record buckets do not add up",
     )
     require(
-        records_needing_fetch == new_records + changed_records,
-        "stats pagedigest recordsNeedingFetch disagrees with new+changed records",
+        records_needing_fetch + fetches_avoided == len(entries),
+        "stats pagedigest fetch buckets do not add up",
     )
-    require(
-        fetches_avoided == unchanged_records,
-        "stats pagedigest fetchesAvoided disagrees with unchanged records",
-    )
+    if "byteIdenticalRecords" in pagedigest or "byteIdenticalBytes" in pagedigest:
+        identical = required_int(
+            pagedigest.get("byteIdenticalRecords"), "invalid byteIdenticalRecords"
+        )
+        identical_bytes = required_int(
+            pagedigest.get("byteIdenticalBytes"), "invalid byteIdenticalBytes"
+        )
+        require(
+            0 <= fetches_avoided <= identical <= len(entries) - new_records,
+            "invalid exact-body counts",
+        )
+        require(0 <= bytes_avoided <= identical_bytes <= bytes_covered, "invalid exact-body bytes")
+        require(identical or identical_bytes == 0, "no identical records can contribute bytes")
+        require(
+            fetches_avoided or bytes_avoided == 0, "no revalidated records can contribute bytes"
+        )
+    else:
+        # Previously published snapshots only counted material equivalence.
+        require(fetches_avoided == unchanged_records, "invalid legacy fetchesAvoided")
     require(bytes_covered >= 0, "stats pagedigest bytesCovered is negative")
     require(bytes_avoided >= 0, "stats pagedigest bytesAvoided is negative")
     require(

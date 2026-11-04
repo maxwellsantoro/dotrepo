@@ -18,7 +18,7 @@
 //! (specification consumers must ignore unknown fields), which makes the
 //! manifest itself the durable revision state for the next export.
 
-use anyhow::{anyhow, Context, Result};
+use anyhow::{Context, Result};
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use std::collections::BTreeMap;
@@ -105,6 +105,21 @@ pub fn build_pagedigest_manifest(
     let base = normalize_public_base_path(base_path)?;
     let covered_url_prefix = format!("{base}/{PAGEDIGEST_COVERED_RELATIVE_PREFIX}");
 
+    // A reader can miss a removal. Seed additions above every revision the previous
+    // export could have issued, including keys absent from its entries. The site
+    // revision carries this bound forward across removals without listing retired URLs.
+    let revision_floor = previous.map_or(0, |prior| {
+        prior
+            .entries
+            .values()
+            .map(|entry| entry.rev)
+            .fold(prior.site_rev, u64::max)
+    });
+    let next_site_rev = || {
+        revision_floor
+            .checked_add(1)
+            .context("pagedigest site_rev overflow")
+    };
     let mut entries = BTreeMap::new();
     let mut changed = false;
     for (path, contents) in outputs {
@@ -120,11 +135,14 @@ pub fn build_pagedigest_manifest(
             Some(prior) if prior.content_digest == content_digest => prior.rev,
             Some(prior) => {
                 changed = true;
-                prior.rev + 1
+                prior
+                    .rev
+                    .checked_add(1)
+                    .context("pagedigest URL rev overflow")?
             }
             None => {
                 changed = true;
-                1
+                next_site_rev()?
             }
         };
         entries.insert(
@@ -148,10 +166,7 @@ pub fn build_pagedigest_manifest(
             let removed = prior.entries.keys().any(|key| !entries.contains_key(key));
             let coverage_changed = prior.coverage.as_ref() != Some(&coverage);
             if changed || removed || coverage_changed {
-                prior
-                    .site_rev
-                    .checked_add(1)
-                    .ok_or_else(|| anyhow!("pagedigest site_rev overflow"))?
+                next_site_rev()?
             } else {
                 prior.site_rev
             }
@@ -304,7 +319,7 @@ mod tests {
         assert_eq!(added.site_rev, previous.site_rev + 1);
         assert_eq!(
             added.entries["/v0/repos/github.com/example/nova/profile.json"].rev,
-            1
+            added.site_rev
         );
         assert_eq!(
             added.entries["/v0/repos/github.com/example/orbit/profile.json"].rev,
@@ -318,6 +333,23 @@ mod tests {
         assert!(!removed
             .entries
             .contains_key("/v0/repos/github.com/example/nova/profile.json"));
+    }
+
+    #[test]
+    fn restored_url_advances_past_the_revision_of_a_reader_that_missed_removal() {
+        let root = PathBuf::from("/export");
+        let key = "/v0/repos/github.com/example/orbit/profile.json";
+        let build = |previous: Option<&PagedigestManifest>, outputs: &[(PathBuf, String)]| {
+            build_pagedigest_manifest(previous, "2026-03-10T18:30:00Z", "/", &root, outputs)
+                .unwrap()
+        };
+        let initial = build(None, &sample_outputs(&root, "t1", "original"));
+        let changed = build(Some(&initial), &sample_outputs(&root, "t2", "changed"));
+        let removed = build(Some(&changed), &[]);
+        let persisted = serde_json::from_str(&serde_json::to_string(&removed).unwrap()).unwrap();
+        let restored = build(Some(&persisted), &sample_outputs(&root, "t3", "restored"));
+        assert!(!removed.entries.contains_key(key));
+        assert!(restored.entries[key].rev > changed.entries[key].rev);
     }
 
     #[test]

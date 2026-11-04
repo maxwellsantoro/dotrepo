@@ -17,6 +17,41 @@ contracts outrank prose; installed binaries need [version-matched documentation]
 
 ## Active execution order
 
+### Vision priorities — November 4, 2026
+
+The next product outcome is a reader finishing a repository decision, returning
+after a change, and reusing justified work. The protocol, public lookup and local
+decision tools already exist. The gap is a dependable path through them and
+evidence that the whole path helps. The ordered packets below own new work;
+the dated repair notes that follow are delivery history.
+
+| Order | Packet and concrete deliverable | Acceptance and decision |
+| --- | --- | --- |
+| 1 | **D1 — A reproducible decision entrypoint.** One versioned source command or locally built artifact starts the existing `dotrepo.decision.*` service with a persistent workspace, walks through one example and explains recovery. Reuse the Python/SQLite service and Rust importer. | A fresh environment can discover → shortlist → describe → qualify → decide, stop, restart and inspect the retained evidence using only the guide. Include an explicit unknown and missing-source recovery. Verify a packaged candidate separately before any release; a source merge does not upgrade installed clients. |
+| 2 | **D2 — Useful decisions across two visits.** Freeze six independently authored questions across at most three already indexed repositories before inspecting their answers. Include factual orientation, a supported/contradicted requirement and an honest no-fit/unknown case. Repeat after one relevant and one irrelevant source change. | Report correct and incorrect assertions, useful completed decisions and every unfinished attempt. Compare metadata + the same source cache against the decision workflow at the same revision/freshness. Reuse unchanged dependencies without renewing inspection age; changed evidence must reopen the affected requirement. Investigate a failure before expanding the roster. |
+| 3 | **D3 — Publication without another maintenance job.** Exercise the existing publisher helper on two representative repository layouts through setup and two ordinary updates. Review derivation, ambiguity and drift from the owning manifests/CI/docs. | Record interventions, elapsed operator effort and unresolved fields. An unchanged update needs no manual recataloging; a genuine disagreement remains visible. Correct the largest observed maintenance burden. D3 can start once D1's entrypoint is stable; it does not wait for a favorable D2 result. |
+| 4 | **D4 — One finding reused by a second reader.** After D2 demonstrates a useful retained decision, prototype a bounded export/import handoff between two isolated workspaces. Carry the claim, requirement/task scope, source references/hashes, assessed revision, assumptions and original observation time. | The recipient evaluates the evidence under its own policy, retains attribution, and detects a changed, missing or conflicting dependency. Compare with giving that reader the same source cache. Transfer is not endorsement, correctness or fresh inspection. Start with files and existing stores; add a shared service only if this exercise demonstrates a need. Coordinate vocabulary with PageDigest without merging their runtimes. |
+| 5 | **D5 — One independently operated recurring workflow.** After D1–D3, prepare a pinned candidate and a bounded adoption guide for an operator who performs the work themselves. D4 is required only for a cross-reader pilot. | Declare scope, freshness, completion criteria and a fixed budget before the pilot. Count acquisition, review, refresh, source fallback, storage, publisher upkeep and unfinished attempts alongside useful outcomes. Separate cold and warm runs. A losing result changes the workload or implementation; it does not authorize index growth. Outreach, paid calls and package publication need their own scope. |
+
+**Next implementable packet: D1.** The source decision service is already built;
+its setup, restart and first useful result need to become a single maintained
+path. D2 determines whether to improve ranking, missing evidence, recovery or
+interaction design. The prior seven unfinished selection attempts make completion
+more urgent than broader discovery or more extracted fields.
+
+**Specific performance question:** keep the publication-only churn case in D2
+and D5. Materially unchanged facts can still produce different response bytes.
+Measure producer/exporter and reader costs before proposing a new representation;
+never recover a headline saving by weakening exact-byte or factual-age checks.
+
+**Deferred:** general catalog growth, new model-provider comparisons, broad
+prose synthesis, extra schemas and a hosted shared-memory service. Existing
+freshness/recovery obligations continue. Address a bounded coverage or extraction
+gap when a completed task demonstrates it; raw repository counts do not select
+the next packet. Independent conformance can be tested within the chosen workload.
+
+### Delivered source and retained review history
+
 ### Org-review repairs — November 4, 2026 (authorized delivery)
 
 The isolated `codex/address-org-review-20261104` checkout under

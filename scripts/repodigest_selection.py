@@ -71,8 +71,9 @@ def knowledge(store, repository, revision, offset=0):
         return result
     try:
         rows = store.db.execute(
-            "SELECT DISTINCT component FROM requirement_sets WHERE repository=? AND revision=? "
-            "AND policy=? ORDER BY component LIMIT ? OFFSET ?",
+            "SELECT v.component FROM versions v WHERE v.identity=? AND v.revision=? "
+            "AND EXISTS (SELECT 1 FROM requirement_sets r WHERE r.repository=v.identity "
+            "AND r.component=v.component AND r.policy=?) ORDER BY v.component LIMIT ? OFFSET ?",
             (repository, revision, assessment.policy_id(), KEY_PAGE + 1, offset),
         ).fetchall()
     except sqlite3.OperationalError as error:

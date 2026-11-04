@@ -95,11 +95,11 @@ audit history.
 
 `/v0/stats.json` is a mutable instrumentation document derived from the
 append-only snapshot log. It exposes the latest snapshot, the retained history,
-and count deltas between adjacent snapshots. It also carries the current
-PageDigest economics block: records covered, records that must be fetched,
-records skipped, covered bytes, avoided bytes, and a coarse token-avoidance
-estimate. Consumers of these metrics should read this document rather than
-scraping individual payload paths. The token estimate is not billed model usage.
+and count deltas between adjacent snapshots. Its PageDigest block counts material
+matches and exact response-body matches separately. Matching a prior response
+digest and revision makes a retained body eligible for manifest revalidation.
+See the [export statistics definitions](public-export-workflow.md)
+for the assumptions and legacy fields. Actual reader traffic requires measurement.
 
 ### `files.json`
 
