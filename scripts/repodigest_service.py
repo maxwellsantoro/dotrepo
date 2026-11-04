@@ -152,7 +152,9 @@ def registry(store, *, opt_in=False, sources=None, requirements=False, metadata=
             return result
 
         tools["dotrepo.decision.describe"] = (tools["dotrepo.decision.describe"][0], describe)
-        tools["dotrepo.decision.describe"][0]["inputSchema"]["properties"]["requirementOffset"] = OFFSET
+        tools["dotrepo.decision.describe"][0]["inputSchema"]["properties"]["requirementOffset"] = (
+            OFFSET
+        )
         tools["dotrepo.decision.qualify"] = (
             definition(
                 "dotrepo.decision.qualify",
@@ -197,7 +199,9 @@ def registry(store, *, opt_in=False, sources=None, requirements=False, metadata=
             lambda **kw: assessment.qualify(store, **kw),
         )
         workflow = selection_flow.Selection(store, tools["dotrepo.decision.find"][1], describe)
-        target_schema = tools["dotrepo.decision.qualify"][0]["inputSchema"]["properties"]["candidates"]
+        target_schema = tools["dotrepo.decision.qualify"][0]["inputSchema"]["properties"][
+            "candidates"
+        ]
         requirements_schema = tools["dotrepo.decision.qualify"][0]["inputSchema"]["properties"][
             "requirements"
         ]
