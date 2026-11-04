@@ -5,7 +5,7 @@
 - Inferred repo.build from pom.xml as `./mvnw package`.
 - Inferred repo.test from pom.xml as `./mvnw test`.
 - Imported docs.root as `https://arthas.aliyun.com/doc/en`. Explicit documentation link at README.md:79: * [User manual](https://arthas.aliyun.com/doc/en)
-- Imported docs.getting_started as `https://arthas.aliyun.com/doc/en/install-detail.html`. Explicit documentation link at README.md:80: * [Installation](https://arthas.aliyun.com/doc/en/install-detail.html)
+- Conflicting documentation declarations in README.md; abstained from docs.getting_started.
 - Discovered related relation to github.com/alibaba/arthas from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
