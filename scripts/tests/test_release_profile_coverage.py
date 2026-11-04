@@ -216,7 +216,7 @@ def test_release_gate_builds_and_measures_research_lookup_workload(
     public_dir = tmp_path / "public"
     output_root = tmp_path / "release-gate"
 
-    build, measure = release_gate.public_lookup_benchmark_commands(
+    build, catalog, reference_build, measure = release_gate.public_lookup_benchmark_commands(
         REPO_ROOT,
         public_dir,
         output_root,
@@ -227,6 +227,10 @@ def test_release_gate_builds_and_measures_research_lookup_workload(
     assert build[build.index("--mode") + 1] == "research"
     assert build[build.index("--limit") + 1] == "0"
     assert str(output_root / "public-lookup-workload.json") in build
+    assert "--min-task-hit-rate" not in catalog
+    assert "--max-dotrepo-to-scrape-proxy-ratio" not in catalog
+    assert "--cohort" in reference_build
+    assert str(output_root / "public-lookup-reference-workload.json") in reference_build
     assert "scripts/measure_public_lookup_efficiency.py" in measure
     assert measure[measure.index("--min-tasks") + 1] == "2452"
     assert measure[measure.index("--min-repositories") + 1] == "613"
@@ -236,8 +240,13 @@ def test_release_gate_builds_and_measures_research_lookup_workload(
     assert "documentation=0.24" in measure
     assert "execution=0.466" in measure
     assert "security=0.35" in measure
-    assert str(output_root / "public-lookup-efficiency.json") in measure
-    assert str(output_root / "public-lookup-efficiency.md") in measure
+    assert str(output_root / "public-lookup-reference-efficiency.json") in measure
+    assert str(output_root / "public-lookup-reference-efficiency.md") in measure
+    assert str(output_root / "public-lookup-efficiency.json") in catalog
+    cohort = json.loads(
+        (REPO_ROOT / "scripts/fixtures/public_lookup_regression_cohort.json").read_text()
+    )
+    assert len(cohort["repositories"]) == len(set(cohort["repositories"])) == 615
 
 
 def test_lookup_efficiency_baseline_is_well_formed() -> None:

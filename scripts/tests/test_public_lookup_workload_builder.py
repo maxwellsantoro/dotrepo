@@ -1,5 +1,6 @@
 import importlib.util
 import json
+import pytest
 from pathlib import Path
 from typing import Optional
 
@@ -9,6 +10,39 @@ SPEC = importlib.util.spec_from_file_location("build_public_lookup_workload", SC
 builder = importlib.util.module_from_spec(SPEC)
 assert SPEC.loader is not None
 SPEC.loader.exec_module(builder)
+
+
+def test_regression_cohort_keeps_missing_repositories_and_ignores_additions(tmp_path):
+    public = tmp_path / "public"
+    write_inventory(public, [("example", "new")])
+    cohort = tmp_path / "cohort.json"
+    cohort.write_text(
+        json.dumps(
+            {
+                "schema": "dotrepo-public-lookup-cohort/v1",
+                "repositories": ["github.com/example/old"],
+            }
+        )
+    )
+    workload = builder.build_workload(public, mode="research", cohort=cohort)
+    assert len(workload["tasks"]) == 4
+    assert {task["repository"] for task in workload["tasks"]} == {"github.com/example/old"}
+    with pytest.raises(SystemExit, match="requires research"):
+        builder.build_workload(public, mode="observed", cohort=cohort)
+    with pytest.raises(SystemExit, match="no limit"):
+        builder.build_workload(public, mode="research", limit=1, cohort=cohort)
+
+
+@pytest.mark.parametrize("identities", [[], ["../../escape"], ["github.com/a/b"] * 2])
+def test_regression_cohort_refuses_invalid_identities(tmp_path, identities):
+    public = tmp_path / "public"
+    write_inventory(public, [("example", "new")])
+    cohort = tmp_path / "cohort.json"
+    cohort.write_text(
+        json.dumps({"schema": "dotrepo-public-lookup-cohort/v1", "repositories": identities})
+    )
+    with pytest.raises(SystemExit, match="invalid frozen"):
+        builder.build_workload(public, mode="research", cohort=cohort)
 
 
 def write_export_profile(

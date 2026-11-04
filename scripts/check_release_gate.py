@@ -296,9 +296,30 @@ def public_lookup_benchmark_commands(
         "--output-md",
         str(output_root / "public-lookup-efficiency.md"),
     ]
+    # The changing full catalog remains visible, including every new partial
+    # record. Presence floors belong to the fixed pre-change regression cohort:
+    # adding an honest partial record must not manufacture an old-answer loss.
+    reference_workload = output_root / "public-lookup-reference-workload.json"
+    reference_build = build_command.copy()
+    reference_build[reference_build.index("--output") + 1] = str(reference_workload)
+    reference_build.extend(["--cohort", str(repo_root / baseline["regressionCohort"])])
+    reference_measure = measure_command.copy()
+    reference_measure[reference_measure.index("--workload") + 1] = str(reference_workload)
+    for option, filename in [
+        ("--output-json", "public-lookup-reference-efficiency.json"),
+        ("--output-md", "public-lookup-reference-efficiency.md"),
+    ]:
+        reference_measure[reference_measure.index(option) + 1] = str(output_root / filename)
     for intent, minimum in sorted((baseline.get("minIntentHitRate") or {}).items()):
-        measure_command.extend(["--min-intent-hit-rate", f"{intent}={minimum}"])
-    return [build_command, measure_command]
+        reference_measure.extend(["--min-intent-hit-rate", f"{intent}={minimum}"])
+    for option in (
+        "--min-task-hit-rate",
+        "--min-field-hit-rate",
+        "--max-dotrepo-to-scrape-proxy-ratio",
+    ):
+        position = measure_command.index(option)
+        del measure_command[position : position + 2]
+    return [build_command, measure_command, reference_build, reference_measure]
 
 
 def public_factual_accuracy_command(

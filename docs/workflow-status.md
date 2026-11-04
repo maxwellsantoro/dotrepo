@@ -51,11 +51,14 @@ Retained findings in both projects share one source-status vocabulary:
 `current` (every declared source still has the bound bytes), `changed`
 (a declared source now has different bytes) and `unknown` (a source is missing,
 failed, out of scope or a different representation). PageDigest reports these as
-`usable`, `needs_reread` and `unknown`. The decision workflow does not yet report
-source status per finding: an assessment becomes unavailable once its record
-binding stops matching, including after freshness-only record changes. Emitting
-the shared status, and keeping assessments bound to source bytes rather than to
-record check times, is open work. Source status is a separate axis from
+`usable`, `needs_reread` and `unknown`. The experimental decision workflow now
+reports `sourceStatus` for findings and individual assessments. It checks the
+declared dependency hashes against an independently admitted source inventory;
+timestamp-only record updates do not discard unchanged assessments. An older
+assessment may remain source-current at a newly admitted revision when all its
+declared dependencies retain the same bytes. Missing, uninspected, stale or
+unavailable sources remain unknown, and changed sources require another review.
+The original assessed revision is retained. Source status is a separate axis from
 requirement outcomes (`supported`, `contradicted`, `unknown`).
 
 [**Lazy Collective**](https://lazycollective.org/) is the umbrella and coordination

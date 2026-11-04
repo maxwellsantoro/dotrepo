@@ -107,5 +107,8 @@ def test_failed_public_gates_retain_lookup_reports_and_workload(job):
         "public-lookup-workload.json",
         "public-lookup-efficiency.json",
         "public-lookup-efficiency.md",
+        "public-lookup-reference-workload.json",
+        "public-lookup-reference-efficiency.json",
+        "public-lookup-reference-efficiency.md",
     ]:
         assert any(fnmatchcase(f"release-gate/{artifact}", pattern) for pattern in patterns)

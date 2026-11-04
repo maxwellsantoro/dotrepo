@@ -1,5 +1,25 @@
 # Factual crawl automation
 
+## Bounded publisher observations
+
+The crawler fetches a root `.repo` at the captured source commit. A structurally
+parsed native v0.1 declaration up to 64KiB is retained verbatim with its SHA-256,
+source revision and declared status under `x.dotrepo.publisher_declaration`.
+The crawler's observed overlay and field evidence remain separate; it does not
+copy a draft's commands into qualified defaults or grant canonical authority.
+Paths and semantics in the declaration remain unassessed in the bounded sparse
+checkout. Oversized, malformed or unsupported declarations are reported, with
+ordinary source fallback retained. Existing native/reviewed/canonical index
+records remain protected from autonomous replacement.
+
+The November 3 user-authorized exception is exactly the three public entries in
+[`review-followup-targets-20261103.txt`](../index/review-followup-targets-20261103.txt).
+It does not reopen general growth or enable model adjudication. The retained
+local packet includes the initial failed native observation (sparse path checks
+were too strict), its repair, the final pinned observations and incomplete
+CPython coverage. A record being indexed does not establish full command
+qualification, freshness of every fact or maintainer acceptance.
+
 This guide describes the current source branch's factual pipeline and operator
 controls. [The roadmap](../ROADMAP.md#active-execution-order) owns product
 sequencing. [Release compatibility](release-compatibility.md) explains safeguards

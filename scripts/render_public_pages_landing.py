@@ -667,7 +667,8 @@ def render_site_header(base_path: str, active: str | None = None) -> str:
         <a class="brand__mark" href="{home_href}" aria-label="dotrepo — home">DotRepo</a>
         <span class="brand__tag">Repository context</span>
       </div>
-      <nav class="nav__links" aria-label="Main navigation">
+      <button class="nav__toggle" type="button" aria-controls="site-navigation" aria-expanded="false" hidden>Menu</button>
+      <nav class="nav__links" id="site-navigation" aria-label="Main navigation">
         {items}
       </nav>
     </header>

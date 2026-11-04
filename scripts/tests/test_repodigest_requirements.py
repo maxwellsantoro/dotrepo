@@ -287,7 +287,7 @@ def test_metadata_front_door_and_scoped_assessment_keys(database):
     reader.close()
 
 
-def test_current_source_binding_change_invalidates_assessment(database):
+def test_record_check_time_does_not_invalidate_unchanged_sources(database):
     path, request, _ = database
     db = sqlite3.connect(path)
     digest, raw = db.execute(
@@ -310,7 +310,98 @@ def test_current_source_binding_change_invalidates_assessment(database):
     finding = requirements.qualify(
         reader, [request], [{"key": "python.declared-3-12", "expected": True}]
     )["candidates"][0]["findings"][0]
-    assert finding["status"] == "unknown" and not finding["assessments"]
+    assert finding["status"] == "supported" and finding["sourceStatus"] == "current"
+    assert finding["assessments"][0]["sourceStatus"] == "current"
+    reader.close()
+
+
+@pytest.mark.parametrize("source_state", ["changed", "unknown"])
+def test_declared_source_status_is_separate_from_requirement_outcome(
+    database, monkeypatch, source_state
+):
+    path, request, _ = database
+    original = requirements.Reader.index
+
+    def changed_index(self, *args):
+        repo, receipt, index, checked = original(self, *args)
+        index = json.loads(json.dumps(index))
+        entry = index["files"]["packages/markitdown/pyproject.toml"]
+        entry["sourceSha256"] = "f" * 64 if source_state == "changed" else None
+        return repo, receipt, index, checked
+
+    monkeypatch.setattr(requirements.Reader, "index", changed_index)
+    reader = store.Store(path)
+    finding = requirements.qualify(
+        reader, [request], [{"key": "python.declared-3-12", "expected": True}]
+    )["candidates"][0]["findings"][0]
+    assert finding["status"] == "unknown"
+    assert finding["sourceStatus"] == source_state
+    assert finding["assessments"][0]["sourceStatus"] == source_state
+    reader.close()
+
+
+def test_missing_retained_body_cannot_support_assessment(database):
+    path, request, _ = database
+    with sqlite3.connect(path) as db:
+        # Simulate loss/corruption of the copied fixture store, outside the
+        # normal immutable admission writer.
+        db.execute("DROP TRIGGER source_blobs_no_delete")
+        db.execute("DELETE FROM source_blobs")
+    reader = store.Store(path)
+    finding = requirements.qualify(
+        reader, [request], [{"key": "python.declared-3-12", "expected": True}]
+    )["candidates"][0]["findings"][0]
+    assert finding["status"] == "unknown" and finding["sourceStatus"] == "unknown"
+    reader.close()
+
+
+def test_new_admitted_revision_reuses_only_unchanged_declared_sources(database):
+    path, request, _ = database
+    newer = {**request, "revision": "b" * 40}
+    # A new commit can retain the same tree. Admit that exact revision's source
+    # inventory independently; the older assessment remains immutable.
+    with sqlite3.connect(path) as db:
+        rows = db.execute(
+            "SELECT v.component,r.body FROM versions v JOIN records r ON r.digest=v.digest WHERE v.identity=? AND v.revision=?",
+            (request["repository"], request["revision"]),
+        ).fetchall()
+        for component, raw in rows:
+            record = json.loads(raw)
+            admission = json.loads(
+                db.execute(
+                    "SELECT body FROM admissions WHERE digest=?", (record["admissionSha256"],)
+                ).fetchone()[0]
+            )
+            index = json.loads(
+                db.execute(
+                    "SELECT body FROM objects WHERE digest=?", (admission["sourceIndexSha256"],)
+                ).fetchone()[0]
+            )
+            index["revision"] = newer["revision"]
+            index_raw = canonical(index)
+            db.execute("INSERT OR IGNORE INTO objects VALUES(?,?)", (sha(index_raw), index_raw))
+            admission.update(revision=newer["revision"], sourceIndexSha256=sha(index_raw))
+            admission_raw = canonical(admission)
+            db.execute(
+                "INSERT OR IGNORE INTO admissions VALUES(?,?)", (sha(admission_raw), admission_raw)
+            )
+            record.update(revision=newer["revision"], admissionSha256=sha(admission_raw))
+            body = canonical(record)
+            db.execute("INSERT INTO records VALUES(?,?)", (sha(body), body))
+            db.execute(
+                "INSERT INTO versions VALUES(?,?,?,?)",
+                (newer["repository"], newer["revision"], component, sha(body)),
+            )
+        db.execute(
+            "UPDATE current SET revision=? WHERE identity=?",
+            (newer["revision"], newer["repository"]),
+        )
+    reader = store.Store(path)
+    finding = requirements.qualify(
+        reader, [newer], [{"key": "python.declared-3-12", "expected": True}]
+    )["candidates"][0]["findings"][0]
+    assert finding["status"] == "supported" and finding["sourceStatus"] == "current"
+    assert finding["assessments"][0]["assessedRevision"] == request["revision"]
     reader.close()
 
 

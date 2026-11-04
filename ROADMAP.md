@@ -17,6 +17,27 @@ contracts outrank prose; installed binaries need [version-matched documentation]
 
 ## Active execution order
 
+The [November 3 measurement review](docs/measurement-review-20261103.md) separates
+moving-catalog diagnostics from a fixed regression cohort. Presence and modeled
+requests do not close the useful-completion or combined-work gates below. The
+retained consumer results still do not establish all-in benefit; prioritize a
+bounded comparison against the same source cache before general growth.
+
+
+### Authorized review follow-up — November 3, 2026
+
+The user authorized completing the remaining shared review items. This packet
+binds requirement assessments to their declared source bytes and reports
+`current` / `changed` / `unknown` independently of requirement outcomes; makes
+publisher `.repo` discovery explicit without silently assigning maintainer
+authority; indexes only `python/cpython`, `lazy-collective/dotrepo` and
+`lazy-collective/pagedigest`; and repairs narrow-screen navigation. The private
+coordination repository is excluded. General index-growth gates remain in place;
+this named three-repository batch is the bounded exception, with no model calls.
+Retain source revisions, incomplete results and validation receipts under the
+November 3 `task/not-done` directory. Shared hosting and umbrella delivery stay
+in the parent coordinator's scope, with separate Git and publication gates.
+
 The current local priority is a usable **discovery → shortlist → requirement
 assessment → preliminary decision** flow, source-bound recurring reuse, and a
 publisher workflow derived from existing source. Execution is a separate outcome.
