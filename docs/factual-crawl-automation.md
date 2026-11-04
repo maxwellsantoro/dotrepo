@@ -310,6 +310,15 @@ After an authorized change, rerun the preflight, then verify a bounded refresh
 through exact-head CI, normal landing, deployment and live checks. A manual run
 does not establish the seven-day unattended streak.
 
+The user subsequently authorized the change. GitHub rejected the repository-only
+PUT with HTTP 409 because the organization policy disabled the coupled switch.
+With separate explicit authorization for that prerequisite, the organization
+switch was enabled with read-only defaults; PageDigest and the private
+coordination repository were explicitly kept disabled, and only DotRepo was
+enabled. No token credential or default write permission changed. Read-after-write
+observations initially lagged; subsequent no-cache reads and the owner preflight
+confirmed the requested state. A whole refresh remains a separate observation.
+
 Dispatches can set `adjudication_call_budget=0` for a deterministic batch: the
 workflow validates the input before setup, skips model sidecars, and disables
 all crawler adjudication endpoints. An empty input retains the configured

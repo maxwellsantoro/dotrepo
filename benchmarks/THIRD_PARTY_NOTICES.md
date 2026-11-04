@@ -11,10 +11,10 @@ at an earlier captured commit.
 
 Original source captures, historical experiment documents and negative results
 remain unchanged. Recovered notices improve traceability; they do not establish
-redistribution permission. Three groups remain on hold in the
+redistribution permission. Three groups have been quarantined from the current tree; the historical reasons remain in the
 [disposition record](third-party-licenses/dispositions.json). In particular,
 VSCE-Sign's exact 2.1.0 license is now present and contains sharing/publication
-restrictions; its public-capture disposition remains an owner decision.
+restrictions; its captured source files are now quarantined by the owner's explicit decision.
 
 Before distributing a benchmark/source-evidence bundle, run:
 
@@ -22,6 +22,7 @@ Before distributing a benchmark/source-evidence bundle, run:
 uv run python scripts/check_benchmark_licenses.py --require-clearance
 ```
 
-An unresolved hold fails that check. Do not remove retained evidence or rewrite
-Git history as an implicit licensing repair; preserve recovery material and obtain
-a concrete owner decision first.
+The check fails on unresolved current-tree holds or reintroduced quarantined
+sources. The original source inventory, notices and Git history remain; the
+verified preservation archive stays outside the repository and public outputs.
+The archived/history copies retain their own restrictions.

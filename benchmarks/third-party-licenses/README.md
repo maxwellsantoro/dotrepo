@@ -62,14 +62,22 @@ Apache-2.0 notice. No frozen benchmark or negative result was rewritten.
 
 ## Disposition and replay
 
-The audit completed notice recovery and byte binding. Public disposition remains
-an owner decision for the three groups in [dispositions.json](dispositions.json):
-VSCE-Sign's recovered
-Microsoft terms contain sharing/publication restrictions; AGPL/Warp file scope;
-and Vault's parameterized BUSL terms. Existing public/history copies remain;
-adding a notice does not resolve those decisions. Preserve a private exact-byte
-archive before any separately authorized removal. No history rewrite or outreach
-is part of this packet.
+The owner authorized quarantine of all three held groups on November 4. The
+108 exact source-capture files named in [quarantine.json](quarantine.json) are now
+absent from this tree. Their original inventory, SHA-256 values and Git history
+remain. The hash-verified preservation archive is held outside this repository
+and all public build outputs; this is current-tree quarantine, not history erasure
+or permission to redistribute historical/private copies.
+
+The retained [disposition record](dispositions.json) keeps the original reasons:
+VSCE-Sign's recovered Microsoft terms, AGPL/Warp file scope, and Vault's captured
+BUSL parameters. These do not become MIT material. Composio's captured README
+expressly declares Apache-2.0 and remains in place with canonical license text.
+
+Affected frozen experiments require restoring the exact archive in a private
+execution copy. Restore original relative paths only after checking the archive
+SHA-256 and each recorded body hash. Never place the archive in a public bundle,
+add it to Git, or silently substitute fixtures into a historical replay.
 
 ```sh
 uv run python scripts/check_benchmark_licenses.py
@@ -77,6 +85,15 @@ uv run python scripts/check_benchmark_licenses.py
 uv run python scripts/check_benchmark_licenses.py --require-clearance
 ```
 
-The first command checks source and notice hashes. The second returns 2 while
-redistribution holds remain. Source/package release boundaries are independent;
-this audit grants no additional rights and publishes nothing.
+The normal check verifies retained source/notice bytes and requires quarantined
+paths to remain absent. `--require-clearance` covers the inventoried current tree;
+historical holds stay visible and are not legal clearance. The separate private
+preservation check is:
+
+```sh
+uv run python scripts/check_benchmark_licenses.py --archive <private>/restricted-captures-preserved.tar.gz
+```
+
+It verifies the archive identity and every member without extracting files. The
+archive is deliberately unavailable to public CI. Source/package releases remain
+independent; this audit grants no additional rights.
