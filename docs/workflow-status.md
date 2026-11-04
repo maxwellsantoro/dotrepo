@@ -1,7 +1,7 @@
 # Workflow delivery and evidence
 
-This source checkout combines public DotRepo contracts and experimental RepoDigest
-workflows. Source edits, local tests, public deployments and package releases
+This source checkout combines public DotRepo contracts and the experimental
+decision workflow. Source edits, local tests, public deployments and package releases
 are separate events. The November 2 experimental workflows are available from
 this source checkout; they are not in a released package or hosted API.
 [PR208](https://github.com/lazy-collective/dotrepo/pull/208) records their
@@ -31,15 +31,32 @@ sources, preserve the evidence behind useful work, and repeat only the work
 required by changes, uncertainty and the task's assurance needs. Participation
 must help both sides; moving effort onto maintainers is not a net saving.
 
-- **DotRepo** is the existing repository protocol, toolchain and public lookup
-  index. Native declarations and observed overlays retain different authority.
-- **RepoDigest** is the experimental discovery, assessment and reuse workflow
-  in this repository. Preliminary suitability is distinct from a successful run.
-- **PageDigest** is the existing website manifest protocol and publisher/consumer
-  toolchain. Its [experimental recurring workflow](https://github.com/lazy-collective/pagedigest/pull/2)
+There are two products, each with a publisher side and a consumer side:
+
+- **DotRepo** is the repository protocol, toolchain and public lookup index.
+  Publishers derive a native `.repo` from existing sources; observed overlays
+  keep separate authority. Its experimental decision workflow (discovery,
+  requirement assessment, reusable findings) lives in this repository; its
+  tools keep the `repodigest.*` names. Preliminary suitability is distinct
+  from a successful run.
+- **PageDigest** is the website manifest protocol and publisher/consumer
+  toolchain. Publishers generate the manifest from existing site builds; its
+  [experimental recurring workflow](https://github.com/lazy-collective/pagedigest/blob/main/docs/recurring-consumer.md)
   retains source-bound findings and reports what needs rereading.
-- **DotPage** names that project's publisher role in existing site builds. It is
-  not a separately shipped product or another page catalog to maintain.
+
+Earlier documents called the decision workflow "RepoDigest" and PageDigest's
+publisher side "DotPage"; neither is a separate product.
+
+Retained findings in both projects share one source-status vocabulary:
+`current` (every declared source still has the bound bytes), `changed`
+(a declared source now has different bytes) and `unknown` (a source is missing,
+failed, out of scope or a different representation). PageDigest reports these as
+`usable`, `needs_reread` and `unknown`. The decision workflow does not yet report
+source status per finding: an assessment becomes unavailable once its record
+binding stops matching, including after freshness-only record changes. Emitting
+the shared status, and keeping assessments bound to source bytes rather than to
+record check times, is open work. Source status is a separate axis from
+requirement outcomes (`supported`, `contradicted`, `unknown`).
 
 [**Lazy Collective**](https://lazycollective.org/) is the umbrella and coordination
 project. Its public home explains the shared purpose and current projects;

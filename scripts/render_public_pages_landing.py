@@ -377,18 +377,6 @@ def format_bytes(value: object) -> str:
     return f"{number:.1f} {unit}"
 
 
-def format_estimated_tokens(value: object) -> str:
-    try:
-        number = int(value)
-    except (TypeError, ValueError):
-        return "unknown"
-    if abs(number) >= 1_000_000:
-        return f"~{number / 1_000_000:.1f}M"
-    if abs(number) >= 1_000:
-        return f"~{number / 1_000:.1f}K"
-    return f"~{number:,}"
-
-
 def is_low_signal_title(title: str) -> bool:
     normalized = title.strip().lower()
     return normalized in {"a project", "sponsors", "project", "repository"}
@@ -740,16 +728,14 @@ def render_pagedigest_stats_dashboard(stats: dict, base_path: str) -> str:
           <span>New or changed records in this export cycle.</span>
         </div>
         <div class="stat">
-          <strong>{fetches_avoided} fetches avoided</strong>
-          <span>Covered records that a PageDigest-aware consumer can skip.</span>
+          <strong>{fetches_avoided} skippable fetches</strong>
+          <span>Unchanged covered records. Their manifest entry counts as revalidation
+          (<a href="https://github.com/lazy-collective/pagedigest/blob/main/SPEC.md#512-interaction-with-http-caching">SPEC §5.1.2</a>),
+          so a reader holding them makes no request.</span>
         </div>
         <div class="stat">
-          <strong>{bytes_avoided} avoided</strong>
-          <span>Payload bytes skipped this cycle out of {bytes_covered} covered.</span>
-        </div>
-        <div class="stat">
-          <strong>{tokens_avoided} token-equivalent bytes</strong>
-          <span>Bytes ÷ 4 estimate; not measured model tokens or task savings.</span>
+          <strong>{bytes_avoided} skippable</strong>
+          <span>Unchanged payload bytes this cycle out of {bytes_covered} covered.</span>
         </div>
         <div class="stat">
           <strong>site_rev {site_rev}</strong>
@@ -764,9 +750,6 @@ def render_pagedigest_stats_dashboard(stats: dict, base_path: str) -> str:
         fetches_avoided=html.escape(format_count(pagedigest.get("fetchesAvoided"))),
         bytes_avoided=html.escape(format_bytes(pagedigest.get("bytesAvoided"))),
         bytes_covered=html.escape(format_bytes(pagedigest.get("bytesCovered"))),
-        tokens_avoided=html.escape(
-            format_estimated_tokens(pagedigest.get("estimatedTokensAvoided"))
-        ),
         site_rev=html.escape(format_count(pagedigest.get("siteRev"))),
         manifest_bytes=html.escape(format_bytes(pagedigest.get("manifestBytes"))),
         generated=html.escape(
@@ -851,6 +834,32 @@ def render_docs_cards(base_path: str) -> str:
             ).strip()
         )
     return "\n    ".join(cards)
+
+
+FEATURED_REPOSITORIES = (
+    "github.com/pydantic/pydantic",
+    "github.com/microsoft/TypeScript",
+    "github.com/neovim/neovim",
+    "github.com/tauri-apps/tauri",
+    "github.com/prettier/prettier",
+    "github.com/vitest-dev/vitest",
+    "github.com/grafana/grafana",
+    "github.com/microsoft/playwright",
+)
+
+
+def featured_inventory(inventory: dict) -> dict:
+    """Order well-known repositories first; the full catalog stays on /repositories/."""
+    entries = inventory.get("repositories", [])
+
+    def label(entry: dict) -> str:
+        identity = entry.get("identity", {})
+        return "/".join(identity.get(key, "") for key in ("host", "owner", "repo"))
+
+    rank = {name: index for index, name in enumerate(FEATURED_REPOSITORIES)}
+    featured = sorted((e for e in entries if label(e) in rank), key=lambda e: rank[label(e)])
+    rest = [e for e in entries if label(e) not in rank]
+    return {**inventory, "repositories": featured + rest}
 
 
 def render_repository_cards(
@@ -2843,14 +2852,12 @@ def main() -> int:
           <a class="cta cta--secondary" href="#integrate">Connect your agent</a>
           <a class="cta cta--secondary" href="https://github.com/lazy-collective/dotrepo/blob/main/docs/maintainer-happy-path.md">Maintain your own record</a>
         </div>
-        <p>Works with indexed repositories before maintainers adopt <code>.repo</code>.
-          Coverage is partial. Metadata helps with orientation; architecture and code changes still require source inspection.</p>
-        <p>Publishers derive declarations from existing sources; consumers reuse context
-          and investigate missing, stale or conflicting answers. The aim is less repeated
-          work for both sides, including maintenance and verification.</p>
-        <p><strong>Experimental source workflow:</strong> RepoDigest adds bounded discovery, requirement
-          assessment and reusable investigation. It is separate from released packages and
-          this API. <a href="https://github.com/lazy-collective/dotrepo/pull/208">Review the workflow and evidence</a>.</p>
+        <p>Works for indexed repositories before maintainers adopt <code>.repo</code>.
+          Coverage is partial: when a field is missing, stale or conflicting, read the source.</p>
+        <p><strong>Experimental:</strong> a decision workflow that checks candidate repositories
+          against explicit requirements and keeps the evidence for reuse. It is in the source
+          repository, not the released tools or this API.
+          <a href="https://github.com/lazy-collective/dotrepo/blob/main/docs/workflow-status.md">Workflow and evidence</a>.</p>
       </div>
       {render_lookup_example(input_dir, inventory, base_path, generated_at)}
     </section>
@@ -2872,23 +2879,22 @@ def main() -> int:
       <h2>Use a profile in your tool</h2>
       <p>Request a profile, check the underlying record age and requested fields,
         and fall back to upstream sources on a miss, stale record, or conflict.</p>
-      <pre><code>curl https://dotrepo.org/v0/repos/github.com/BurntSushi/ripgrep/profile.json</code></pre>
+      <pre><code>curl https://dotrepo.org/v0/repos/github.com/pydantic/pydantic/profile.json</code></pre>
       <h3>Connect over MCP</h3>
       <p>With Rust installed, install the stable server:</p>
       <pre><code>{stable_mcp_install()}</code></pre>
       <p>Add this stdio server to your MCP client’s configuration (the surrounding configuration format may vary):</p>
       <pre><code>{{"mcpServers": {{"dotrepo": {{"command": "dotrepo-mcp", "args": []}}}}}}</code></pre>
       <p>Restart the client, then ask it to call <code>dotrepo.lookup</code> with
-        <code>repositoryUrl: "https://github.com/BurntSushi/ripgrep"</code> and
-        <code>path: "repo.test"</code>. The stable server returns a field query with trust context;
-        profile output and newer lookup safeguards are available in the published 2.0.0-rc.2 preview. Stable 1.0.4 and RC2 include the contained-write protections; RC1 predates them. Choose a version explicitly and use its matching documentation.</p>
-      <p><a href="https://github.com/lazy-collective/dotrepo/blob/main/docs/release-compatibility.md">Version-specific behavior and safety limits</a></p>
+        <code>repositoryUrl: "https://github.com/pydantic/pydantic"</code> and
+        <code>path: "repo.test"</code>. It returns the value with its trust context.
+        The published 2.0.0-rc.2 preview adds full profile output. Stable 1.0.4 and RC2
+        include the contained-write protections; RC1 predates them, so do not use RC1.
+        <a href="https://github.com/lazy-collective/dotrepo/blob/main/docs/release-compatibility.md">Compare versions</a>.</p>
       <div class="cta-row">
         <a class="cta cta--primary" href="https://github.com/lazy-collective/dotrepo/blob/main/docs/external-consumer-integration.md">Integration and fallback guide</a>
         <a class="cta cta--secondary" href="{site_href(base_path, "/efficiency/")}">Coverage and benchmark limitations</a>
       </div>
-      <p>Task completeness measures available fields. Independent accuracy tests measure correctness.
-        Modeled request savings do not measure total agent cost. External adoption remains to be demonstrated.</p>
     </section>
 
     <section class="panel section">
@@ -2898,15 +2904,14 @@ def main() -> int:
         <article class="feature"><h3>Use the evidence you need</h3><p>Use metadata for orientation. Check explicit requirements against scoped source evidence. Treat runtime execution as a separate authorized task.</p></article>
         <article class="feature"><h3>Keep useful work</h3><p>Retain evidence at its source revision and revisit what changed or remains uncertain. Source identity, correctness and freshness answer different questions.</p></article>
       </div>
-      <p>With <a href="https://pagedigest.org">PageDigest</a>, we are working toward less repeated
-        fetching, parsing, investigation and verification.
-        <a href="https://lazycollective.org/">Lazy Collective</a> brings the shared purpose
-        and project family together. There is no shared deployed runtime. DotPage names PageDigest’s
-        publisher role. <a href="https://github.com/lazy-collective/dotrepo/blob/main/docs/workflow-status.md#shared-direction">Roles, delivery status and measured limits</a>.</p>
+      <p>DotRepo and its sister project <a href="https://pagedigest.org">PageDigest</a> are
+        <a href="https://lazycollective.org/">Lazy Collective</a> projects: less repeated
+        fetching, parsing and investigation for publishers and readers alike.
+        <a href="https://github.com/lazy-collective/dotrepo/blob/main/docs/workflow-status.md#shared-direction">How the projects relate</a>.</p>
     </section>
 
-    <section class="panel section">
-      <h2>How maintainer authority works</h2>
+    <details class="panel section">
+      <summary>How maintainer authority works</summary>
       <p class="section__intro">
         Maintainers can take authority over a generated overlay. This example preserves the earlier overlay and the accepted claim so consumers can inspect the handoff. A verified overlay means the pipeline resolved its checks; it does not mean human review, complete coverage, or guaranteed correctness.
       </p>
@@ -2950,10 +2955,10 @@ def main() -> int:
           <p class="api-card__caption">Review path: <code>{html.escape(str(featured_trust["reviewPath"] or "unknown"))}</code> · Evidence path: <code>{html.escape(str(featured_trust["evidencePath"] or "unknown"))}</code></p>
         </article>
       </div>
-    </section>
+    </details>
 
-    <section class="panel section">
-      <h2>Public API</h2>
+    <details class="panel section">
+      <summary>Public API reference</summary>
       <div class="api-grid">
         <article class="api-card">
           <h3>Stable entry points</h3>
@@ -3000,21 +3005,22 @@ def main() -> int:
           <p class="api-card__caption">Full responses also include freshness, repository identity, and navigation links.</p>
         </article>
       </div>
-    </section>
+    </details>
 
     <section class="panel section">
       <h2>Indexed repositories</h2>
-      <p class="section__intro">A small sample from the current export. Use the repository catalog to search the complete index.</p>
+      <p class="section__intro">Well-known projects from the current export. Use the repository catalog to search the complete index.</p>
       <div class="repo-grid">
-        {render_repository_cards(inventory, base_path=base_path, limit=8)}
+        {render_repository_cards(featured_inventory(inventory), base_path=base_path, limit=8)}
       </div>
       <p class="section__note"><a href="{site_href(base_path, "/repositories/")}">Browse all {html.escape(str(repository_count))} repositories</a></p>
     </section>
 
     <details class="panel section">
-      <summary>Optional incremental fetching with PageDigest</summary>
-      <p>PageDigest identifies changed published files. Its figures model a consumer
-        synchronizing the covered set; they are not measured savings from agent tasks.</p>
+      <summary>Incremental fetching with PageDigest</summary>
+      <p>This export publishes a PageDigest manifest. A reader that kept the previous
+        export can fetch it first and download only changed records. The figures below are
+        computed from the export, not measured reader traffic.</p>
       {render_pagedigest_stats_dashboard(stats, base_path)}
     </details>
 

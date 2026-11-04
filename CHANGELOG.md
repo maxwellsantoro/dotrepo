@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- Answer `If-None-Match`/`If-Modified-Since` with 304 for hosted static and
+  repository surfaces, which previously returned full bodies because internal
+  asset reads dropped client validators.
+- Homepage: showcase a well-known repository whose profile answers every field,
+  lead the repository sample with well-known projects, collapse reference
+  sections, report PageDigest-skippable records per PageDigest SPEC §5.1.2, and
+  drop the bytes/4 token estimate. Public copy names two products (DotRepo and
+  PageDigest); decision-workflow tools keep their `repodigest.*` names.
+
 - Retry failed crawler GET transmissions within the existing shared three-retry
   budget, preserving the captured source URL, timeouts and TLS verification.
   Count attempted requests even without a response and retain the final error

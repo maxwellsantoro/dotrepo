@@ -87,6 +87,9 @@ const { chromium } = require('playwright');
         if (route === '/') {
           const config = await page.locator('#integrate pre').nth(2).textContent();
           assert.equal(JSON.parse(config).mcpServers.dotrepo.command, 'dotrepo-mcp');
+          const authority = page.getByText('How maintainer authority works', { exact: true });
+          await authority.click();
+          assert.equal(await authority.locator('..').getAttribute('open'), '');
           const summary = page.getByText('Inspect this export’s selection JSON', { exact: true });
           await summary.click();
           assert.equal(await summary.locator('..').getAttribute('open'), '');

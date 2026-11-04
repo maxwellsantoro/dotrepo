@@ -17,12 +17,13 @@ maintain. Consumers use a shared starting point, then inspect sources when the
 answer is missing, stale, conflicting or insufficient. The goal is less repeated
 work for both sides, including the work of keeping metadata useful.
 
-**[Look up a repository](#try-it-orient-yourself-in-ripgrep)** ·
+**[Look up a repository](#try-it-orient-yourself-in-pydantic)** ·
 **[Connect an agent](#connect-your-agent)** ·
 **[Publish from existing sources](#add-a-record-to-your-repository)**
 
-**Experimental:** RepoDigest extends this into metadata-led discovery, bounded
-shortlisting, source-backed requirement assessment and retained findings. Its
+**Experimental:** DotRepo's decision workflow extends this into metadata-led
+discovery, bounded shortlisting, source-backed requirement assessment and
+retained findings (its tools keep the `repodigest.*` names). Its
 experimental source workflow can reach a justified preliminary choice or an explicit
 unknown; it is not in released packages or the hosted API. Start with
 [delivery status and evidence](docs/workflow-status.md), then the
@@ -31,16 +32,15 @@ unknown; it is not in released packages or the hosted API. Start with
 Together with [PageDigest](https://pagedigest.org), this is part of
 [**Lazy Collective**](https://lazycollective.org/): conservation through cooperation,
 reducing repeated fetching, parsing, investigation and verification. Its public
-home connects the projects and their shared purpose; there is no shared deployed service.
-The [four roles and their boundaries](docs/workflow-status.md#shared-direction)
-describe two projects, not four separately released products.
+home connects the two projects; there is no shared deployed service.
+[How the projects relate](docs/workflow-status.md#shared-direction).
 
-## Try it: orient yourself in ripgrep
+## Try it: orient yourself in pydantic
 
 Fetch the indexed profile without installing anything or cloning the repository:
 
 ```bash
-curl -sS https://dotrepo.org/v0/repos/github.com/BurntSushi/ripgrep/profile.json
+curl -sS https://dotrepo.org/v0/repos/github.com/pydantic/pydantic/profile.json
 ```
 
 The response groups purpose, execution, documentation, and ownership. Check
@@ -72,7 +72,7 @@ Ask the client to call `dotrepo.lookup` with these arguments:
 
 ```json
 {
-  "repositoryUrl": "https://github.com/BurntSushi/ripgrep",
+  "repositoryUrl": "https://github.com/pydantic/pydantic",
   "path": "repo.test"
 }
 ```
