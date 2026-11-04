@@ -350,3 +350,51 @@ def test_archive_read_treats_only_a_missing_object_as_empty(tmp_path: Path, monk
         ),
     )
     assert archive.read_archive_log("archive", tmp_path) == {}
+
+
+def test_api_upload_commits_log_only_after_every_validated_public_payload(tmp_path, monkeypatch):
+    public_root = tmp_path / "public"
+    entry = write_snapshot(public_root)
+    (public_root / "v0/snapshots/log.json").write_text(json.dumps({"entries": [entry]}))
+    monkeypatch.setattr(archive, "read_archive_log", lambda *_: {})
+    calls = []
+
+    class Uploader:
+        def __init__(self, bucket, concurrency):
+            assert bucket == "archive" and concurrency == 8
+            self.budget = type("Budget", (), {"attempts": 3, "attempted_body_bytes": 100})()
+
+        def payloads(self, paths, root, content_type):
+            assert len(paths) == 2 and all("query-input" not in str(path) for path in paths)
+            calls.append("payloads")
+
+        def put(self, key, body, content_type, cache_control):
+            assert calls == ["payloads"]
+            assert key == "v0/snapshots/log.json" and cache_control == "no-cache"
+            assert json.loads(body)["entries"] == [entry]
+            calls.append("log")
+
+    monkeypatch.setattr(archive, "Uploader", Uploader)
+    assert archive.archive_snapshots(public_root, "archive", tmp_path, upload_transport="api") == 3
+    assert calls == ["payloads", "log"]
+
+
+def test_api_partial_failure_never_advertises_snapshot(tmp_path, monkeypatch):
+    public_root = tmp_path / "public"
+    entry = write_snapshot(public_root)
+    (public_root / "v0/snapshots/log.json").write_text(json.dumps({"entries": [entry]}))
+    monkeypatch.setattr(archive, "read_archive_log", lambda *_: {})
+
+    class Uploader:
+        def __init__(self, *_):
+            self.budget = type("Budget", (), {"attempts": 3, "attempted_body_bytes": 100})()
+
+        def payloads(self, *_):
+            raise RuntimeError("transient attempts exhausted")
+
+        def put(self, *_):
+            pytest.fail("partial snapshot must not be advertised")
+
+    monkeypatch.setattr(archive, "Uploader", Uploader)
+    with pytest.raises(RuntimeError, match="exhausted"):
+        archive.archive_snapshots(public_root, "archive", tmp_path, upload_transport="api")

@@ -295,3 +295,26 @@ uv run python scripts/check_release_gate.py --output-root /tmp/dotrepo-cloudflar
   from a validated export snapshot instead.
 - Do not treat the static asset bundle as the historical archive. It is the
   current+previous hot serving layer; R2 is the retention layer.
+
+
+## Archive retry boundary (November 3 follow-up)
+
+With the existing `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` environment,
+archive writes use the same R2 REST endpoint directly, retrying only an affected
+object up to three times. The old Wrangler bulk route remains available for
+local OAuth operation when those environment credentials are absent. No new
+credential, access grant or upload endpoint is introduced.
+
+The direct uploader reserves at most 1,000 PUT attempts per rolling five minutes,
+including retries and the final log. Concurrency stays bounded by the existing
+option. Permanent HTTP refusals stop; redirects cannot forward authorization.
+All public leaves validate before upload, internal query inputs stay excluded,
+and the merged archive log is committed only after every payload succeeds.
+Failures retain attempt and attempted-body-byte counts too; these are PUT
+counters, not total deployment traffic or measured wire bytes. Other account
+activity can still cause a rate refusal; the budget is per uploader process.
+
+This follows three observed HTTP 500 failures in a 1,000-object Wrangler batch.
+The old retry repeated the batch, including successful objects. Initial failed
+publication and rerun receipts remain in the November 3 acceptance directory;
+source/CI success is separate from live publication.

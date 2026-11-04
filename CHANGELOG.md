@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Retry archive writes per object under a rolling request budget when the existing deployment environment is present; retain failed-attempt counters and keep archive-log publication last.
+
 - Separate full-catalog presence diagnostics from a frozen regression cohort; retain signed payload penalties and explicit measurement limits. The measurement review keeps useful task completion and combined work as the product outcome gates.
 
 - Reuse requirement assessments through timestamp-only record changes and
