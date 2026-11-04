@@ -20,12 +20,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/maxwellsantoro/dotrepo"
+    "url": "https://github.com/lazy-collective/dotrepo"
   },
   "bugs": {
-    "url": "https://github.com/maxwellsantoro/dotrepo/issues"
+    "url": "https://github.com/lazy-collective/dotrepo/issues"
   },
-  "homepage": "https://github.com/maxwellsantoro/dotrepo#readme",
+  "homepage": "https://github.com/lazy-collective/dotrepo#readme",
   "scripts": {
     "test": "node --test extension.test.js",
     "build": "esbuild extension.js --bundle --platform=node --format=cjs --external:vscode --minify --outfile=dist/extension.js",

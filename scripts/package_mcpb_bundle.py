@@ -98,7 +98,7 @@ def build_manifest(version: str, platform_binaries: dict[str, str]) -> dict:
         "author": {"name": "Maxwell Santoro", "url": "https://dotrepo.org"},
         "repository": {
             "type": "git",
-            "url": "https://github.com/maxwellsantoro/dotrepo",
+            "url": "https://github.com/lazy-collective/dotrepo",
         },
         "homepage": "https://dotrepo.org",
         "license": "MIT",
@@ -175,7 +175,7 @@ def main() -> int:
         if not isinstance(packages, list) or len(packages) != 1:
             raise SystemExit(f"{server_json_path} must contain exactly one package entry to update")
         packages[0]["identifier"] = (
-            "https://github.com/maxwellsantoro/dotrepo/releases/download/"
+            "https://github.com/lazy-collective/dotrepo/releases/download/"
             f"v{args.version}/{bundle_path.name}"
         )
         packages[0]["version"] = args.version

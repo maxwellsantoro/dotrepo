@@ -30,7 +30,7 @@ ARTICLES = [
         "remain unchanged, and its record-wide verification label is downgraded after this "
         "partial inspection.</p>\n"
         "<p><a "
-        'href="https://github.com/maxwellsantoro/dotrepo/blob/main/index/repos/github.com/astral-sh/uv/evidence.md">The '
+        'href="https://github.com/lazy-collective/dotrepo/blob/main/index/repos/github.com/astral-sh/uv/evidence.md">The '
         "evidence history</a> preserves the earlier extraction and the correction. A newer "
         "field inspection does not imply that every repository fact was refreshed.</p>\n"
         "<h2>Make the failure reproducible</h2>\n"
@@ -39,9 +39,9 @@ ARTICLES = [
         "regression is exercised through the actual importer:</p>\n"
         "<pre><code>cargo test -p dotrepo-core --test import_quality_gate</code></pre>\n"
         "<p><a "
-        'href="https://github.com/maxwellsantoro/dotrepo/blob/main/crates/dotrepo-core/tests/fixtures/import/command-uv-docker/CONTRIBUTING.md">The '
+        'href="https://github.com/lazy-collective/dotrepo/blob/main/crates/dotrepo-core/tests/fixtures/import/command-uv-docker/CONTRIBUTING.md">The '
         "frozen source</a> and <a "
-        'href="https://github.com/maxwellsantoro/dotrepo/blob/main/index/telemetry/public-surface-review-20261028/command-scope-corrections.json">dated '
+        'href="https://github.com/lazy-collective/dotrepo/blob/main/index/telemetry/public-surface-review-20261028/command-scope-corrections.json">dated '
         "correction receipt</a> make the decision inspectable. This is static source "
         "inspection and regression evidence; no upstream build or test was executed.</p>\n"
         "<h2>Use fallback as part of the workflow</h2>\n"
@@ -49,7 +49,7 @@ ARTICLES = [
         "evidence, and consult upstream instructions when the answer is missing or "
         "insufficient. Freshness and confidence cannot replace this check.</p>\n"
         "<p>For a separate worked evaluation, see <a "
-        'href="https://github.com/maxwellsantoro/dotrepo/blob/main/benchmarks/head-to-head/results/own-projects-contextual-2026-10-05/README.md">the '
+        'href="https://github.com/lazy-collective/dotrepo/blob/main/benchmarks/head-to-head/results/own-projects-contextual-2026-10-05/README.md">the '
         "frozen own-project operator study</a>, which retains direct answers and source "
         "fallbacks. Maintainer-operated tasks do not establish independent adoption or "
         "population accuracy.</p>",
@@ -77,7 +77,7 @@ ARTICLES = [
 </div>
 
 <div class="article-callout">
-  <p><strong>Update:</strong> This article preserves the original interview snapshot. Remote MCP lookup has since shipped, and autonomous evidence gates have replaced routine human review for generated overlays. See the <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/ROADMAP.md">roadmap</a> for current direction and execution.</p>
+  <p><strong>Update:</strong> This article preserves the original interview snapshot. Remote MCP lookup has since shipped, and autonomous evidence gates have replaced routine human review for generated overlays. See the <a href="https://github.com/lazy-collective/dotrepo/blob/main/ROADMAP.md">roadmap</a> for current direction and execution.</p>
 </div>
 
 <h2>The Experiment</h2>
@@ -199,8 +199,8 @@ ARTICLES = [
 </ul>
 
 <h2>Where This Feeds Back Into dotrepo</h2>
-<p>The <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/archive/ai-tool-interviews.md">archived repo-side synthesis</a> preserves this March interview record. It supplies design hypotheses, not independent adoption or accuracy evidence. Use the <a href="/docs/">current getting-started guide</a> and <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/ROADMAP.md">roadmap</a> for implemented capabilities and priorities.</p>
-<p>If you are building an AI coding tool and want to integrate dotrepo, or if you maintain a popular open-source project and want to correct or replace your overlay record, start at <a href="https://github.com/maxwellsantoro/dotrepo">github.com/maxwellsantoro/dotrepo</a>.</p>
+<p>The <a href="https://github.com/lazy-collective/dotrepo/blob/main/docs/archive/ai-tool-interviews.md">archived repo-side synthesis</a> preserves this March interview record. It supplies design hypotheses, not independent adoption or accuracy evidence. Use the <a href="/docs/">current getting-started guide</a> and <a href="https://github.com/lazy-collective/dotrepo/blob/main/ROADMAP.md">roadmap</a> for implemented capabilities and priorities.</p>
+<p>If you are building an AI coding tool and want to integrate dotrepo, or if you maintain a popular open-source project and want to correct or replace your overlay record, start at <a href="https://github.com/lazy-collective/dotrepo">github.com/lazy-collective/dotrepo</a>.</p>
 """,
     },
 ]

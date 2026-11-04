@@ -97,7 +97,7 @@ async function start() {
     link(byId('profile-links'),base+'/repositories/','Browse repositories');
     const trail=profile.record.evidencePath;
     if (typeof trail==='string' && trail.split('/').every(s=>/^[a-z0-9_.-]+$/i.test(s) && s!=='.' && s!=='..')) {
-      link(byId('profile-links'),'https://github.com/maxwellsantoro/dotrepo/blob/main/index/'+trail.split('/').map(encodeURIComponent).join('/'),'Record evidence history');
+      link(byId('profile-links'),'https://github.com/lazy-collective/dotrepo/blob/main/index/'+trail.split('/').map(encodeURIComponent).join('/'),'Record evidence history');
     }
     function fact(target, title, value, assessment, context, source) {
       const card=text('article','', 'fact'); card.append(text('h3',title));

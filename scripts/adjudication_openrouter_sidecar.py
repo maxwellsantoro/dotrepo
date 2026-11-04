@@ -170,7 +170,7 @@ def call_openrouter(
         headers={
             "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json",
-            "HTTP-Referer": "https://github.com/maxwellsantoro/dotrepo",
+            "HTTP-Referer": "https://github.com/lazy-collective/dotrepo",
             "X-Title": "dotrepo-adjudication-sidecar",
         },
         method="POST",

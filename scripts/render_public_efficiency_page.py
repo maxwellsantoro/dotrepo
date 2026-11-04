@@ -425,7 +425,7 @@ def render_efficiency_page(report: dict, base_path: str, policy_report: dict | N
         can preserve them too.</p>
       </details>
       <p>Correct abstention and factual accuracy require independently sourced expected answers.
-      The <a href="https://github.com/maxwellsantoro/dotrepo/tree/main/benchmarks/head-to-head">head-to-head benchmark</a>
+      The <a href="https://github.com/lazy-collective/dotrepo/tree/main/benchmarks/head-to-head">head-to-head benchmark</a>
       retains favorable and unfavorable results. Historical fixes do not establish current out-of-sample accuracy.</p>
       <p>Actual task cost must include fallback requests, source bytes, latency, model usage,
       and an allocated share of index maintenance. No measured end-to-end savings claim is made here.</p>
@@ -448,14 +448,14 @@ uv run python scripts/measure_public_lookup_efficiency.py \\
 uv run python scripts/measure_public_policy_coverage.py \\
   --public-root public \\
   --output-json /tmp/policy-coverage.json</pre>
-      <p>Methodology details: <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/public-lookup-efficiency-benchmark.md"><code>docs/public-lookup-efficiency-benchmark.md</code></a></p>
+      <p>Methodology details: <a href="https://github.com/lazy-collective/dotrepo/blob/main/docs/public-lookup-efficiency-benchmark.md"><code>docs/public-lookup-efficiency-benchmark.md</code></a></p>
     </section>
     </main>
 
     <footer class="footer">
       <span>Canonical public origin: <a href="https://dotrepo.org/">dotrepo.org</a></span>
       <span>Raw report: <a href="{raw_href}"><code>/benchmarks/lookup-efficiency.json</code></a></span>
-      <span>Source: <a href="https://github.com/maxwellsantoro/dotrepo">github.com/maxwellsantoro/dotrepo</a></span>
+      <span>Source: <a href="https://github.com/lazy-collective/dotrepo">github.com/lazy-collective/dotrepo</a></span>
     </footer>
   </div>
 </body>

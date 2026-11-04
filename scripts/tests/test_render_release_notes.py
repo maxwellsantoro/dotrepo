@@ -16,7 +16,7 @@ def test_release_notes_select_version_and_explain_channels(tmp_path):
     stable = render(tmp_path, "1.0.4")
     assert "Stable release 1.0.4" in stable and "Contained writes." in stable
     assert "Future changes." not in stable
-    assert "](https://github.com/maxwellsantoro/dotrepo/blob/main/docs/install.md)" in stable
+    assert "](https://github.com/lazy-collective/dotrepo/blob/main/docs/install.md)" in stable
     assert "cargo install dotrepo-mcp --version 1.0.4 --locked" in stable
     preview = render(tmp_path, "2.0.0-rc.2")
     assert "Preview release" in preview and "stable **1.0.4**" in preview

@@ -92,7 +92,7 @@ def render_profile_example(public_root: Path, inventory: dict, base_path: str) -
         )
     evidence = record.get("evidencePath")
     evidence_link = (
-        f'<a href="https://github.com/maxwellsantoro/dotrepo/blob/main/index/{html.escape(evidence, quote=True)}">Inspect supporting evidence</a>'
+        f'<a href="https://github.com/lazy-collective/dotrepo/blob/main/index/{html.escape(evidence, quote=True)}">Inspect supporting evidence</a>'
         if evidence
         else "Supporting evidence unavailable"
     )
@@ -130,7 +130,7 @@ def render_lookup_example(public_root: Path, inventory: dict, base_path: str, no
     )
     evidence = record.get("evidencePath")
     evidence_link = (
-        f'<a href="https://github.com/maxwellsantoro/dotrepo/blob/main/index/{html.escape(evidence, quote=True)}">Source evidence</a>'
+        f'<a href="https://github.com/lazy-collective/dotrepo/blob/main/index/{html.escape(evidence, quote=True)}">Source evidence</a>'
         if evidence
         else "Source evidence unavailable"
     )

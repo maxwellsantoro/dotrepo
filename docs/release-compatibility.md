@@ -1,9 +1,9 @@
 # Release compatibility
 
 Use documentation for the binary you installed. The latest stable release is
-[`v1.0.4`](https://github.com/maxwellsantoro/dotrepo/releases/tag/v1.0.4), built from
+[`v1.0.4`](https://github.com/lazy-collective/dotrepo/releases/tag/v1.0.4), built from
 the `codex/stable-1.0` maintenance line. The published
-[`v2.0.0-rc.2` preview](https://github.com/maxwellsantoro/dotrepo/releases/tag/v2.0.0-rc.2)
+[`v2.0.0-rc.2` preview](https://github.com/lazy-collective/dotrepo/releases/tag/v2.0.0-rc.2)
 includes public Rust API changes and the safety/API improvements below. Final
 2.0.0 remains unreleased. This checkout also contains changes listed under
 Unreleased in the changelog; they are outside the RC2 tag. Source merges do not
@@ -12,13 +12,13 @@ change an existing release bundle or installed crate, including RC1 artifacts.
 ## Version-matched documentation
 
 For stable binaries, start with the tag's
-[maintainer guide](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.4/docs/maintainer-happy-path.md),
-[trust model](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.4/docs/trust-model.md),
-and [MCP contract](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.4/rfcs/0006-mcp-server-contract.md).
+[maintainer guide](https://github.com/lazy-collective/dotrepo/blob/v1.0.4/docs/maintainer-happy-path.md),
+[trust model](https://github.com/lazy-collective/dotrepo/blob/v1.0.4/docs/trust-model.md),
+and [MCP contract](https://github.com/lazy-collective/dotrepo/blob/v1.0.4/rfcs/0006-mcp-server-contract.md).
 The tag's preparation documents retain their prepublication state. The current
 [install guide](install.md) supplies published 1.0.4 pins, and the
-[historical promotion backport](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.2/docs/stable-promotion-backport.md)
-retains the 1.0.2 patch scope. The [1.0.4 boundary contract](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.4/CONTRIBUTING.md#path-containment-limits)
+[historical promotion backport](https://github.com/lazy-collective/dotrepo/blob/v1.0.2/docs/stable-promotion-backport.md)
+retains the 1.0.2 patch scope. The [1.0.4 boundary contract](https://github.com/lazy-collective/dotrepo/blob/v1.0.4/CONTRIBUTING.md#path-containment-limits)
 defines the import and output protections. Publication, crate provenance, asset
 hashes and Linux/macOS install results are retained in
 [the 1.0.4 verification receipt](../index/telemetry/public-surface-review-20261028/release-1.0.4-verification.json).
@@ -82,10 +82,10 @@ or retroactively recheck older records. New verification on `main` goes through
 inspection and verification; retained assessment analysis is not fresh inspection.
 
 Source comparison:
-[1.0.1 promotion](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.1/crates/dotrepo-core/src/promotion.rs),
-[1.0.2 CLI dispatch](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.2/crates/dotrepo-cli/src/commands.rs),
-[RC2 promotion](https://github.com/maxwellsantoro/dotrepo/blob/v2.0.0-rc.2/crates/dotrepo-core/src/promotion.rs), and
-[RC2 regression tests](https://github.com/maxwellsantoro/dotrepo/blob/v2.0.0-rc.2/crates/dotrepo-core/tests/auto_publish.rs).
+[1.0.1 promotion](https://github.com/lazy-collective/dotrepo/blob/v1.0.1/crates/dotrepo-core/src/promotion.rs),
+[1.0.2 CLI dispatch](https://github.com/lazy-collective/dotrepo/blob/v1.0.2/crates/dotrepo-cli/src/commands.rs),
+[RC2 promotion](https://github.com/lazy-collective/dotrepo/blob/v2.0.0-rc.2/crates/dotrepo-core/src/promotion.rs), and
+[RC2 regression tests](https://github.com/lazy-collective/dotrepo/blob/v2.0.0-rc.2/crates/dotrepo-core/tests/auto_publish.rs).
 
 ### MCP network policy
 
@@ -102,10 +102,10 @@ allowlisted stable flow. The snapshot-path guard protects a flow stable lookup
 does not use. Reachability of other targets depends on configuration and inputs.
 
 Source comparison:
-[stable lookup policy](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.4/crates/dotrepo-mcp/src/lookup.rs),
-[stable handler](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.4/crates/dotrepo-mcp/src/handlers.rs),
-[RC2 lookup policy](https://github.com/maxwellsantoro/dotrepo/blob/v2.0.0-rc.2/crates/dotrepo-mcp/src/lookup.rs), and
-[RC2 handler](https://github.com/maxwellsantoro/dotrepo/blob/v2.0.0-rc.2/crates/dotrepo-mcp/src/handlers.rs).
+[stable lookup policy](https://github.com/lazy-collective/dotrepo/blob/v1.0.4/crates/dotrepo-mcp/src/lookup.rs),
+[stable handler](https://github.com/lazy-collective/dotrepo/blob/v1.0.4/crates/dotrepo-mcp/src/handlers.rs),
+[RC2 lookup policy](https://github.com/lazy-collective/dotrepo/blob/v2.0.0-rc.2/crates/dotrepo-mcp/src/lookup.rs), and
+[RC2 handler](https://github.com/lazy-collective/dotrepo/blob/v2.0.0-rc.2/crates/dotrepo-mcp/src/handlers.rs).
 
 ## Installation and release checks
 
