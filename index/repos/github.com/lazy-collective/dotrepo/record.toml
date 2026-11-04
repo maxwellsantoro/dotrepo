@@ -144,7 +144,7 @@ status = "canonical"
 
 [record.trust]
 confidence = "high"
-provenance = ["declared", "checked"]
+provenance = ["declared", "verified"]
 notes = "Maintainer-controlled source of truth for dotrepo."
 
 [repo]
