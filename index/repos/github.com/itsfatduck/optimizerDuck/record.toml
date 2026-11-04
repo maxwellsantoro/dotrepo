@@ -2,7 +2,7 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "checked"
 source = "https://github.com/itsfatduck/optimizerDuck"
 generated_at = "2026-10-27T18:05:23.959248Z"
 
@@ -11,9 +11,9 @@ confidence = "high"
 provenance = [
     "imported",
     "inferred",
-    "verified",
+    "checked",
 ]
-notes = 'Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `.github/SECURITY.md`. Filled `repo.description` with inferred defaults. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Ignored component-scoped commands from `optimizerDuck/optimizerDuck.csproj` as repository defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved.'
+notes = 'Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `.github/SECURITY.md`. Filled `repo.description` with inferred defaults. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Ignored component-scoped commands from `optimizerDuck/optimizerDuck.csproj` as repository defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to checked: all fields are honestly resolved.'
 
 [repo]
 name = "optimizerDuck Banner"

@@ -2,7 +2,7 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "checked"
 source = "https://github.com/mauricecruz/chrome-devtools-zerodarkmatrix-theme"
 generated_at = "2026-10-27T18:09:00.680584Z"
 
@@ -10,9 +10,9 @@ generated_at = "2026-10-27T18:09:00.680584Z"
 confidence = "high"
 provenance = [
     "imported",
-    "verified",
+    "checked",
 ]
-notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to checked: all fields are honestly resolved."
 
 [repo]
 name = "chrome-devtools-zerodarkmatrix-theme"

@@ -830,12 +830,12 @@ fn lint_index_entry(path: PathBuf, manifest: &Manifest, evidence: &str) -> Vec<I
         for provenance in &trust.provenance {
             if !matches!(
                 provenance.as_str(),
-                "declared" | "imported" | "inferred" | "verified"
+                "declared" | "imported" | "inferred" | "checked" | "verified"
             ) {
                 findings.push(index_warning(
                     path.clone(),
                     format!(
-                        "record.trust.provenance includes non-reference value `{}`; preserve it, but prefer declared/imported/inferred/verified in the public index",
+                        "record.trust.provenance includes non-reference value `{}`; preserve it, but prefer declared/imported/inferred/checked in the public index",
                         provenance
                     ),
                 ));
@@ -848,7 +848,11 @@ fn lint_index_entry(path: PathBuf, manifest: &Manifest, evidence: &str) -> Vec<I
             .record
             .trust
             .as_ref()
-            .map(|trust| trust.provenance.iter().any(|value| value == expected))
+            .map(|trust| {
+                trust.provenance.iter().any(|value| {
+                    value == expected || (*expected == "checked" && value == "verified")
+                })
+            })
             .unwrap_or(false);
         if !has_expected {
             findings.push(index_warning(
@@ -870,7 +874,7 @@ fn lint_index_entry(path: PathBuf, manifest: &Manifest, evidence: &str) -> Vec<I
     {
         if matches!(
             keyword.as_str(),
-            "declared" | "imported" | "inferred" | "verified"
+            "declared" | "imported" | "inferred" | "checked" | "verified"
         ) && !evidence_mentions(&evidence_lower, &keyword)
         {
             findings.push(index_warning(
@@ -919,7 +923,7 @@ fn expected_provenance_for_status(
     match status {
         dotrepo_schema::RecordStatus::Imported => &["imported"],
         dotrepo_schema::RecordStatus::Inferred => &["inferred"],
-        dotrepo_schema::RecordStatus::Verified => &["verified"],
+        dotrepo_schema::RecordStatus::Checked => &["checked"],
         dotrepo_schema::RecordStatus::Canonical => &["declared"],
         _ => &[],
     }
@@ -939,7 +943,10 @@ fn validation_error(
 }
 
 fn evidence_mentions(evidence_lower: &str, keyword: &str) -> bool {
+    // Evidence written before the 2026-11-03 rename says `verified`; it is
+    // retained history, so it still documents a `checked` provenance.
     evidence_lower.contains(&keyword.to_lowercase())
+        || (keyword == "checked" && evidence_lower.contains("verified"))
 }
 
 pub(crate) fn index_error(path: PathBuf, message: impl Into<String>) -> IndexFinding {

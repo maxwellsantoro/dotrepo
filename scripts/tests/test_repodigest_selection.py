@@ -35,7 +35,7 @@ def database(selection_source, tmp_path):
 
 def workflow(path, request, find=None):
     store = Store(path)
-    describe = registry(store, requirements=True)["repodigest.describe"][1]
+    describe = registry(store, requirements=True)["dotrepo.decision.describe"][1]
     if find is None:
 
         def find(**kw):
@@ -48,7 +48,7 @@ def test_keys_are_visible_without_manifest_component_pagination(database):
     path, request, _ = database
     store = Store(path)
     tools = registry(store, requirements=True)
-    result = tools["repodigest.describe"][1](repository=request["repository"], limit=1)
+    result = tools["dotrepo.decision.describe"][1](repository=request["repository"], limit=1)
     assert request["component"] not in result["components"]
     assert result["nextOffset"] is not None
     assert result["requirementKnowledge"][0]["component"] == request["component"]
@@ -60,7 +60,7 @@ def test_keys_are_visible_without_manifest_component_pagination(database):
 def test_exact_revision_describe_never_borrows_current_assessments(database):
     path, request, _ = database
     store = Store(path)
-    describe = registry(store, requirements=True)["repodigest.describe"][1]
+    describe = registry(store, requirements=True)["dotrepo.decision.describe"][1]
     result = describe(repository=request["repository"], revision=request["revision"])
     assert result["indexedRevision"] == request["revision"]
     missing = describe(repository=request["repository"], revision="a" * 40)
@@ -73,7 +73,7 @@ def test_exact_revision_describe_never_borrows_current_assessments(database):
         db.execute("UPDATE current SET revision=?", ("a" * 40,))
     db.close()
     store = Store(path)
-    historical = registry(store, requirements=True)["repodigest.describe"][1](
+    historical = registry(store, requirements=True)["dotrepo.decision.describe"][1](
         repository=request["repository"], revision=request["revision"]
     )
     assert historical["indexedRevision"] == request["revision"]
@@ -92,7 +92,7 @@ def test_oversized_limits_are_explicitly_capped_and_bad_types_refuse(database):
             call(limit=value)
     path, request, _ = database
     store = Store(path)
-    described = registry(store, requirements=True)["repodigest.describe"][1](
+    described = registry(store, requirements=True)["dotrepo.decision.describe"][1](
         repository=request["repository"], limit=200
     )
     assert described["limitAdjustment"]["applied"] == 50
@@ -188,21 +188,21 @@ def test_failures_and_invalid_decisions_are_not_dropped(database):
 def test_actual_stdio_shortlist_decide_and_unfinished_accounting(database):
     path, request, _ = database
     calls = [
-        ("repodigest.shortlist", {"queries": ["markitdown"]}),
+        ("dotrepo.decision.shortlist", {"queries": ["markitdown"]}),
         (
-            "repodigest.describe",
+            "dotrepo.decision.describe",
             {"repository": request["repository"], "revision": request["revision"], "limit": 200},
         ),
         (
-            "repodigest.decide",
+            "dotrepo.decision.decide",
             {
                 "selectionId": "selection-1",
                 "candidates": [request],
                 "requirements": [{"key": "python.declared-3-12", "expected": True}],
             },
         ),
-        ("repodigest.shortlist", {"queries": ["unfindablexyz"]}),
-        ("repodigest.selection_status", {}),
+        ("dotrepo.decision.shortlist", {"queries": ["unfindablexyz"]}),
+        ("dotrepo.decision.selection_status", {}),
     ]
     messages = [{"jsonrpc": "2.0", "id": 1, "method": "initialize"}]
     messages.extend(

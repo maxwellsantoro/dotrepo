@@ -1,0 +1,71 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-03-10T18:30:00Z",
+    "snapshotDigest": "a61a87cfcfd180089db19c0804cb22e05350584c8ae62a43342107739cff644c",
+    "staleAfter": "2026-03-11T18:30:00Z"
+  },
+  "fileCount": 12,
+  "files": [
+    {
+      "path": "v0/snapshots/dfc904bd66efa8f86c1781d9df885867a2e49942183523dc128cc6852fec9001/query-input/github.com/example/nova.json",
+      "bytes": 2418,
+      "sha256": "f483c555c8a614c61d87bcf083489eea8d17b6739fb29ade6dd97c31665c5aeb"
+    },
+    {
+      "path": "v0/snapshots/dfc904bd66efa8f86c1781d9df885867a2e49942183523dc128cc6852fec9001/query-input/github.com/example/orbit.json",
+      "bytes": 2255,
+      "sha256": "e833b52b0815f673128302089653ce6dc8386b0a52595083ea72bbc937b4df34"
+    },
+    {
+      "path": "v0/snapshots/dfc904bd66efa8f86c1781d9df885867a2e49942183523dc128cc6852fec9001/repos/github.com/example/nova/index.json",
+      "bytes": 1999,
+      "sha256": "18851a07bf1da37c75c4abf90bb8c1c66d5769a4a08b51b4e127407ebdf66512"
+    },
+    {
+      "path": "v0/snapshots/dfc904bd66efa8f86c1781d9df885867a2e49942183523dc128cc6852fec9001/repos/github.com/example/nova/profile.json",
+      "bytes": 1584,
+      "sha256": "fe63d52700f049d963bee2733f265dfe0a26c65046faa29d9ee6d8084cc57676"
+    },
+    {
+      "path": "v0/snapshots/dfc904bd66efa8f86c1781d9df885867a2e49942183523dc128cc6852fec9001/repos/github.com/example/nova/relations.json",
+      "bytes": 2570,
+      "sha256": "6731f961bf18e807f74c0ea35903e49cc2514b5cc19ef9afaf8bf6e5f704a980"
+    },
+    {
+      "path": "v0/snapshots/dfc904bd66efa8f86c1781d9df885867a2e49942183523dc128cc6852fec9001/repos/github.com/example/nova/trust.json",
+      "bytes": 1828,
+      "sha256": "73dd611cf486c324dfb825cb86d25d2095d9f59454a591b3d7e372286e2f42d3"
+    },
+    {
+      "path": "v0/snapshots/dfc904bd66efa8f86c1781d9df885867a2e49942183523dc128cc6852fec9001/repos/github.com/example/orbit/index.json",
+      "bytes": 1687,
+      "sha256": "ed49c6852863237475e4ec5e26c9a18f8cbfa5be2125a33ced6aefe6d64beffd"
+    },
+    {
+      "path": "v0/snapshots/dfc904bd66efa8f86c1781d9df885867a2e49942183523dc128cc6852fec9001/repos/github.com/example/orbit/profile.json",
+      "bytes": 2619,
+      "sha256": "b5d5e61c7de6ee0b9e97b8b3637082f9bb0a5c7726ca84c153a8421ed9540c3c"
+    },
+    {
+      "path": "v0/snapshots/dfc904bd66efa8f86c1781d9df885867a2e49942183523dc128cc6852fec9001/repos/github.com/example/orbit/relations.json",
+      "bytes": 2557,
+      "sha256": "f35b364674a233ff1c66077d4235f64971c6e58dfbf99e428fdc6306a126d34e"
+    },
+    {
+      "path": "v0/snapshots/dfc904bd66efa8f86c1781d9df885867a2e49942183523dc128cc6852fec9001/repos/github.com/example/orbit/trust.json",
+      "bytes": 1330,
+      "sha256": "a85b7787bbda0a85c13d927ecdad508d39844b9856c946dcd55cbaa9d6931512"
+    },
+    {
+      "path": "v0/snapshots/dfc904bd66efa8f86c1781d9df885867a2e49942183523dc128cc6852fec9001/repos/index.json",
+      "bytes": 1538,
+      "sha256": "ce0a3e5fbbd44cc2a4d6952e6809c42125a81938c4aca69fe669b9b1f2bfa41d"
+    },
+    {
+      "path": "v0/snapshots/dfc904bd66efa8f86c1781d9df885867a2e49942183523dc128cc6852fec9001/repos/search.json",
+      "bytes": 2698,
+      "sha256": "b3c704ddbdd4cd4f406c91cb0d5d6bf9454935276922088a829fe1ba780b7824"
+    }
+  ]
+}

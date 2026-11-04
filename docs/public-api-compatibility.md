@@ -38,6 +38,23 @@ Within `apiVersion = "v0"`:
 That means `v0` may still grow, but it should not silently reshuffle existing
 JSON contracts.
 
+## Intentional value change: `verified` is now `checked` (2026-11-03)
+
+The record status and trust provenance value `verified` is renamed `checked`.
+It never meant human review or correctness, only that every field passed the
+automated pipeline checks, and the old word needed a disclaimer wherever it
+appeared. Field names, links and error codes are unchanged; only this value
+changes, in `recordStatus`, `selectedStatus`, `record.status` and
+`trust.provenance`.
+
+- Exports generated from this change onward emit `checked`.
+- Archived snapshots keep the value they were published with, so a consumer
+  reading history sees both. Treat `verified` and `checked` as the same status.
+- `.repo` files and index records that say `verified` still parse and validate;
+  tools read them as `checked` and write `checked`.
+- The released `dotrepo-mcp` passes hosted JSON through without interpreting
+  this value, so existing installs keep working.
+
 ## Source of truth
 
 The executable compatibility source of truth lives in:

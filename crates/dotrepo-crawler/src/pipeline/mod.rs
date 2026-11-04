@@ -2,7 +2,7 @@
 //!
 //! Split for maintainability:
 //! - [`merge`] — GitHub snapshot field merge and homepage identity guards
-//! - [`writeback_gate`] — verified auto-promotion and downgrade preservation
+//! - [`writeback_gate`] — checked auto-promotion and downgrade preservation
 //! - [`synthesis`] — optional bounded synthesis after factual planning
 
 mod evidence;
@@ -454,7 +454,7 @@ mod tests {
 schema = "dotrepo/v0.1"
 [record]
 mode = "overlay"
-status = "verified"
+status = "checked"
 source = "https://github.com/example/orbit"
 [repo]
 name = "Orbit"
@@ -847,14 +847,14 @@ test = "cargo nextest run"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "checked"
 source = "https://github.com/example/orbit"
 generated_at = "2026-01-01T00:00:00Z"
 
 [record.trust]
 confidence = "high"
-provenance = ["imported", "verified"]
-notes = "Auto-promoted to verified: all fields are honestly resolved."
+provenance = ["imported", "checked"]
+notes = "Auto-promoted to checked: all fields are honestly resolved."
 
 [repo]
 name = "orbit"
@@ -906,21 +906,21 @@ description = "Prior verified description."
         // the previous verified record had no build command at all.
         let manifest = &report.writeback_plan.factual.import_plan.manifest;
         assert!(!report.field_scores.summary.eligible_for_auto_publish);
-        assert_ne!(manifest.record.status, RecordStatus::Verified);
+        assert_ne!(manifest.record.status, RecordStatus::Checked);
         assert!(!manifest
             .record
             .trust
             .as_ref()
             .unwrap()
             .provenance
-            .contains(&"verified".to_string()));
+            .contains(&"checked".to_string()));
         assert!(report
             .writeback_plan
             .factual
             .import_plan
             .evidence_text
             .as_deref()
-            .is_some_and(|text| text.contains("Fresh verification")));
+            .is_some_and(|text| text.contains("Fresh checks")));
 
         fs::remove_dir_all(materialized.temp_root).expect("materialized temp removed");
         fs::remove_dir_all(index_root).expect("index temp removed");

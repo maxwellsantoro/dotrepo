@@ -247,7 +247,7 @@ pub fn record_status_name(status: &dotrepo_schema::RecordStatus) -> &'static str
         dotrepo_schema::RecordStatus::Imported => "imported",
         dotrepo_schema::RecordStatus::Inferred => "inferred",
         dotrepo_schema::RecordStatus::Reviewed => "reviewed",
-        dotrepo_schema::RecordStatus::Verified => "verified",
+        dotrepo_schema::RecordStatus::Checked => "checked",
         dotrepo_schema::RecordStatus::Canonical => "canonical",
     }
 }

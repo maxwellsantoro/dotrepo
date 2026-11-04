@@ -113,7 +113,7 @@ fn status_name(status: &RecordStatus) -> &'static str {
         RecordStatus::Imported => "imported",
         RecordStatus::Inferred => "inferred",
         RecordStatus::Reviewed => "reviewed",
-        RecordStatus::Verified => "verified",
+        RecordStatus::Checked => "checked",
         RecordStatus::Canonical => "canonical",
     }
 }

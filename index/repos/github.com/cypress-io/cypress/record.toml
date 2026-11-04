@@ -2,7 +2,7 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "checked"
 source = "https://github.com/cypress-io/cypress"
 generated_at = "2026-10-28T06:09:17.840387Z"
 
@@ -11,9 +11,9 @@ confidence = "high"
 provenance = [
     "imported",
     "inferred",
-    "verified",
+    "checked",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `package.json`. Filled `repo.name` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@cypress-io/app` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `package.json`. Filled `repo.name` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@cypress-io/app` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to checked: all fields are honestly resolved."
 
 [repo]
 name = "cypress"

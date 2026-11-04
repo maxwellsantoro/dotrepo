@@ -141,8 +141,8 @@ def test_schema_advertises_runtime_page_and_read_bounds():
 
     tools = registry(Stub(), sources=Stub())
     for name, maximum in (
-        ("repodigest.find", 20),
-        ("repodigest.describe", 50),
+        ("dotrepo.decision.find", 20),
+        ("dotrepo.decision.describe", 50),
         ("source.list", 100),
     ):
         value = tools[name][0]["inputSchema"]["properties"]["limit"]

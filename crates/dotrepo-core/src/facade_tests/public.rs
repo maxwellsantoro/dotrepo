@@ -17,7 +17,7 @@ source = "https://github.com/example/orbit"
 
 [record.trust]
 confidence = "medium"
-provenance = ["imported", "verified"]
+provenance = ["imported", "checked"]
 notes = "Reviewed overlay."
 
 [repo]
@@ -93,7 +93,7 @@ source = "https://github.com/example/orbit"
 
 [record.trust]
 confidence = "medium"
-provenance = ["verified"]
+provenance = ["checked"]
 
 [repo]
 name = "orbit"
@@ -113,7 +113,7 @@ source = "https://github.com/example/orbit"
 
 [record.trust]
 confidence = "medium"
-provenance = ["verified"]
+provenance = ["checked"]
 
 [repo]
 name = "orbit"
@@ -200,7 +200,7 @@ source = "https://github.com/example/orbit"
 
 [record.trust]
 confidence = "medium"
-provenance = ["imported", "verified"]
+provenance = ["imported", "checked"]
 
 [repo]
 name = "orbit"
@@ -313,7 +313,7 @@ source = "https://github.com/example/orbit"
 
 [record.trust]
 confidence = "medium"
-provenance = ["verified"]
+provenance = ["checked"]
 
 [repo]
 name = "orbit"
@@ -405,7 +405,7 @@ source = "https://github.com/example/orbit"
 
 [record.trust]
 confidence = "medium"
-provenance = ["verified"]
+provenance = ["checked"]
 
 [repo]
 name = "orbit"
@@ -426,7 +426,7 @@ source = "https://github.com/example/orbit"
 
 [record.trust]
 confidence = "medium"
-provenance = ["verified"]
+provenance = ["checked"]
 
 [repo]
 name = "orbit"

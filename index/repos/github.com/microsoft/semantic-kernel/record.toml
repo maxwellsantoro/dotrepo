@@ -2,7 +2,7 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "checked"
 source = "https://github.com/microsoft/semantic-kernel"
 generated_at = "2026-10-27T17:45:52.2701Z"
 
@@ -10,9 +10,9 @@ generated_at = "2026-10-27T17:45:52.2701Z"
 confidence = "high"
 provenance = [
     "imported",
-    "verified",
+    "checked",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `python/pyproject.toml`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Ignored component-scoped commands from `python/pyproject.toml` as repository defaults. Ignored component-scoped commands from `dotnet/src/SemanticKernel.Abstractions/SemanticKernel.Abstractions.csproj` as repository defaults. Imported `repo.toolchain.min` from `python/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `python/pyproject.toml`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Ignored component-scoped commands from `python/pyproject.toml` as repository defaults. Ignored component-scoped commands from `dotnet/src/SemanticKernel.Abstractions/SemanticKernel.Abstractions.csproj` as repository defaults. Imported `repo.toolchain.min` from `python/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to checked: all fields are honestly resolved."
 
 [repo]
 name = "Semantic Kernel"

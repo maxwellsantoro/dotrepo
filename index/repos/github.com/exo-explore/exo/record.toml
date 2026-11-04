@@ -2,7 +2,7 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "checked"
 source = "https://github.com/exo-explore/exo"
 generated_at = "2026-10-27T17:59:48.098164Z"
 
@@ -11,9 +11,9 @@ confidence = "high"
 provenance = [
     "imported",
     "inferred",
-    "verified",
+    "checked",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `justfile`, and `pyproject.toml`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `justfile`. Imported `repo.test` from `justfile`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `justfile`, and `pyproject.toml`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `justfile`. Imported `repo.test` from `justfile`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to checked: all fields are honestly resolved."
 
 [repo]
 name = "exo"

@@ -207,8 +207,8 @@ def test_unbound_reviews_and_references_are_rejected(database, tmp_path, mutatio
 def test_opt_in_and_actual_mcp(database):
     path, request, _ = database
     reader = store.Store(path)
-    assert "repodigest.qualify" not in registry(reader)
-    assert "repodigest.qualify" in registry(reader, requirements=True)
+    assert "dotrepo.decision.qualify" not in registry(reader)
+    assert "dotrepo.decision.qualify" in registry(reader, requirements=True)
     reader.close()
     messages = [
         {"jsonrpc": "2.0", "id": 1, "method": "initialize"},
@@ -217,7 +217,7 @@ def test_opt_in_and_actual_mcp(database):
             "id": 2,
             "method": "tools/call",
             "params": {
-                "name": "repodigest.describe",
+                "name": "dotrepo.decision.describe",
                 "arguments": {"repository": request["repository"]},
             },
         },
@@ -226,7 +226,7 @@ def test_opt_in_and_actual_mcp(database):
             "id": 3,
             "method": "tools/call",
             "params": {
-                "name": "repodigest.qualify",
+                "name": "dotrepo.decision.qualify",
                 "arguments": {
                     "candidates": [request],
                     "requirements": [{"key": "python.declared-3-12", "expected": True}],
@@ -275,10 +275,10 @@ def test_metadata_front_door_and_scoped_assessment_keys(database):
             return {"metadata": {"repository": repository, "description": "Retained catalog"}}
 
     tools = registry(reader, metadata=Metadata(), requirements=True)
-    schema, find = tools["repodigest.find"]
+    schema, find = tools["dotrepo.decision.find"]
     assert set(schema["inputSchema"]["properties"]) == {"query", "limit", "language"}
     assert find("document conversion")["mode"] == "metadata"
-    described = tools["repodigest.describe"][1]("https://github.com/Microsoft/MarkItDown/")
+    described = tools["dotrepo.decision.describe"][1]("https://github.com/Microsoft/MarkItDown/")
     assert described["metadata"]["repository"] == request["repository"]
     assert any(
         k["component"] == COMPONENT and k["claimKeys"] == ["python.declared-3-12"]

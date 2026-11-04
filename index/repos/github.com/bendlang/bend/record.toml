@@ -2,7 +2,7 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "checked"
 source = "https://github.com/bendlang/bend"
 generated_at = "2026-11-03T17:44:34.876070943Z"
 
@@ -10,9 +10,9 @@ generated_at = "2026-11-03T17:44:34.876070943Z"
 confidence = "high"
 provenance = [
     "imported",
-    "verified",
+    "checked",
 ]
-notes = "Bootstrapped from `README.md` and `tools/bend-fmt-lsp/package.json`. Ignored component-scoped commands from `tools/bend-fmt-lsp/package.json` as repository defaults. Imported `repo.toolchain.min` from `tools/bend-fmt-lsp/package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `tools/bend-fmt-lsp/package.json`. Ignored component-scoped commands from `tools/bend-fmt-lsp/package.json` as repository defaults. Imported `repo.toolchain.min` from `tools/bend-fmt-lsp/package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to checked: all fields are honestly resolved."
 
 [repo]
 name = "Bend"

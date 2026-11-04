@@ -1,6 +1,6 @@
 # Experimental retained source serving
 
-The experimental Python RepoDigest service can expose verified source passages
+The experimental Python decision-workflow service can expose verified source passages
 and a tracked-file inventory alongside its repository facts and investigation
 leads. Ordinary lookup and cached source hits need no model or network request.
 This is an operator opt-in; the public Rust consumer and instruction
@@ -53,7 +53,7 @@ uv run --offline python scripts/repodigest_store.py ingest \
 uv run --offline python scripts/repodigest_service.py \
   --database /path/to/compiled.sqlite --compiled-sources
 
-# Source-cache control: the same source tools, without RepoDigest fact tools.
+# Source-cache control: the same source tools, without decision-workflow fact tools.
 uv run --offline python scripts/repodigest_service.py \
   --database /path/to/compiled.sqlite --compiled-sources --source-only
 ```
@@ -127,6 +127,6 @@ The full comparison packet remains on the preserved experimental branch; the
 locator and verbatim conclusion. A replay of an old
 request trajectory is counterfactual engineering evidence, not a new agent
 productivity measurement. The fresh comparison separates direct HTTP, a shared
-verified source cache, and RepoDigest facts over the same source cache. Acquisition,
+verified source cache, and decision-workflow facts over the same source cache. Acquisition,
 refresh and maintenance costs remain part of the cost boundary; caching benefits
 alone do not establish a benefit from semantic repository knowledge.

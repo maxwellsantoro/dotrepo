@@ -66,7 +66,7 @@ change; it is present in stable 1.0.4 and published RC2. See
 ### Promotion and trust labels
 
 Stable 1.0.2 through 1.0.4 disable standalone promotion writes. Read-only analysis retains the
-older record-wide scoring model; a `verified` record does not prove that the newer
+older record-wide scoring model; a `checked` (formerly `verified`) record does not prove that the newer
 per-field checks ran. Review retained sources and record age for the fact needed.
 These maintenance patches preserve the stable schema and Rust API. Version
 1.0.2 updated four external lock entries and the promotion/command safeguards;

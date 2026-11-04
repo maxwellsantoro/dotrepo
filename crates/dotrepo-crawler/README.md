@@ -80,8 +80,8 @@ successful crawl. Attempt counters include sends that receive no response;
 received-byte counters remain the Content-Length proxy.
 
 Repository content reads use the captured head commit, and a missing head SHA
-aborts the crawl. Fresh field scores determine promotion to verified; a previous
-verified status cannot override lower current confidence. Autonomous planning
+aborts the crawl. Fresh field scores determine promotion to checked; a previous
+checked status cannot override lower current confidence. Autonomous planning
 and writeback reject native, reviewed, and canonical records.
 
 Writeback takes a per-record `.writeback.lock`, stages all artifacts, and backs

@@ -7,7 +7,7 @@ source = "https://github.com/example/nova"
 
 [record.trust]
 confidence = "medium"
-provenance = ["imported", "verified"]
+provenance = ["imported", "checked"]
 notes = "Reviewed overlay awaiting maintainer-controlled canonical handoff."
 
 [repo]

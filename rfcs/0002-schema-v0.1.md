@@ -39,7 +39,8 @@ The v0.1 reference tool accepts `dotrepo/v0.1` exactly. Future tooling should tr
 
 ### `[record]`
 - `mode`: `native` or `overlay`
-- `status`: `draft`, `imported`, `inferred`, `reviewed`, `verified`, or `canonical`
+- `status`: `draft`, `imported`, `inferred`, `reviewed`, `checked`, or `canonical`
+  (`checked` was spelled `verified` before 2026-11-03; that value is still accepted)
 - `source`: optional source locator for overlays
 - `generated_at`: optional timestamp
 - `[record.trust]`: trust metadata attached to the record itself
@@ -114,7 +115,7 @@ Future values may include `merge` or `template:<name>`.
 
 For v0.1, `confidence` remains an open string field. The reference vocabulary is `low`, `medium`, and `high`, but tools should preserve unknown values even if they do not interpret them specially.
 
-`provenance` is also open-ended in v0.1. The reference vocabulary is `declared`, `imported`, `inferred`, and `verified`; consumers may reason about those values but should preserve unknown entries.
+`provenance` is also open-ended in v0.1. The reference vocabulary is `declared`, `imported`, `inferred`, and `checked` (legacy `verified`); consumers may reason about those values but should preserve unknown entries.
 
 ### `[relations]`
 Cross-repository relation namespace. Legacy `references = []` remains valid.

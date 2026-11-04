@@ -67,7 +67,11 @@ pub enum RecordStatus {
     Imported,
     Inferred,
     Reviewed,
-    Verified,
+    /// Every field passed the automated pipeline checks. This is not human
+    /// review or a correctness guarantee. Records written before 2026-11-03
+    /// spell it `verified`; that legacy value is still accepted on input.
+    #[serde(alias = "verified")]
+    Checked,
     Canonical,
 }
 
@@ -594,6 +598,29 @@ provenance = ["declared"]
             .expect("trust normalized under record");
         assert_eq!(trust.confidence.as_deref(), Some("high"));
         assert_eq!(trust.provenance, vec!["declared"]);
+    }
+
+    #[test]
+    fn legacy_verified_status_reads_as_checked_and_renders_as_checked() {
+        let manifest = parse_manifest(
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/example/orbit"
+
+[repo]
+name = "orbit"
+description = "Fast local-first sync engine"
+"#,
+        )
+        .expect("legacy status parses");
+        assert_eq!(manifest.record.status, RecordStatus::Checked);
+        let rendered = render_manifest(&manifest).expect("manifest renders");
+        assert!(rendered.contains("status = \"checked\""), "{rendered}");
+        assert!(!rendered.contains("verified"), "{rendered}");
     }
 
     #[test]

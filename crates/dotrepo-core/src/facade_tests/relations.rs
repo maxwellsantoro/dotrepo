@@ -242,13 +242,13 @@ fn trust_confidence_boost_produces_expected_values_and_search_ranking_uses_it() 
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "checked"
 source = "https://github.com/ex/highconf"
 generated_at = "2026-06-28T00:00:00Z"
 
 [record.trust]
 confidence = "high"
-provenance = ["verified"]
+provenance = ["checked"]
 
 [repo]
 name = "HighConf"

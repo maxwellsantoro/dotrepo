@@ -126,8 +126,14 @@ impl RepositoryWriter {
             }
             let parent = self.directory(relative.parent().unwrap(), true)?;
             let name = relative.file_name().unwrap().to_os_string();
-            let (file, created) = parent.open_output(&name, output.overwrite)
-                .map_err(|error| anyhow!("refused output {}: requires a regular file; if it already exists, request overwrite: {error:#}", output.path.display()))?;
+            let (file, created) = parent.open_output(&name, output.overwrite).map_err(|error| {
+                // Diagnostic only: the refusal above already happened without following the path.
+                if output.path.is_dir() {
+                    anyhow!("{}", crate::manifest_directory_message(&output.path))
+                } else {
+                    anyhow!("refused output {}: requires a regular file; if it already exists, request overwrite: {error:#}", output.path.display())
+                }
+            })?;
             let output = PreparedOutput {
                 parent,
                 name,
@@ -196,7 +202,13 @@ pub fn write_repository_outputs(
                 .collect(),
         )
         .map_err(|error| {
-            anyhow!("output write refused; existing artifacts require {force_hint}: {error:#}")
+            let message = format!("{error:#}");
+            if message.contains("is a directory, not a dotrepo manifest") {
+                // --force cannot replace a directory; do not suggest it.
+                anyhow!("output write refused: {message}")
+            } else {
+                anyhow!("output write refused; existing artifacts require {force_hint}: {message}")
+            }
         })
 }
 

@@ -30,7 +30,7 @@ acted upon), so the formula below encodes plain, inspectable reasoning
 rather than any statistically fitted precision. Every real `record.toml`
 inspected while building this script has exactly one `record.trust.confidence`
 value per `record.status` (`inferred` -> low/medium, `imported` -> medium,
-`verified` -> high) -- there is no separately recorded model tier or
+`checked` -> high) -- there is no separately recorded model tier or
 adjudication tier inside `record.toml` itself (that lives only in run-level
 telemetry, not the per-record artifact), so "model tier" from the roadmap's
 audit-strategy prose is approximated here by `record.status` /
@@ -49,8 +49,8 @@ Per-record risk weight is the sum of:
   to tell the difference. Build/test/security are weighted higher because
   they gate promotion and downstream utility; license/docs are lower-stakes.
 - **Near-promotion-threshold bonus** (+2.0): a record whose status is not
-  yet `verified` but which already has `build`, `test`, and a non-`unknown`
-  `security_contact` present would plausibly flip to `verified` on the next
+  yet `checked` but which already has `build`, `test`, and a non-`unknown`
+  `security_contact` present would plausibly flip to `checked` on the next
   honest-resolution pass. These are exactly the records where an audit
   either confirms the promotion is safe or catches something that should
   not have looked "one field away."
@@ -108,7 +108,8 @@ STATUS_ORDER = {
     "inferred": 1,
     "imported": 2,
     "reviewed": 3,
-    "verified": 4,
+    "checked": 4,
+    "verified": 4,  # spelling of checked before 2026-11-03
     "canonical": 5,
 }
 CONFIDENCE_WEIGHT = {"low": 3.0, "unknown": 3.0, "medium": 1.5, "high": 0.5}
@@ -300,7 +301,7 @@ def risk_factors_and_weight(
             factors.append(f"missing:{field}")
 
     near_promotion = (
-        record["status"] != "verified"
+        record["status"] not in ("checked", "verified")
         and record["buildPresent"]
         and record["testPresent"]
         and record["securityContactPresent"]

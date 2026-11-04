@@ -1,6 +1,6 @@
 use dotrepo_core::{
     analyze_index_promotion, apply_index_promotions, guard_against_unjustified_downgrade,
-    import_repository, promote_to_verified, score_import_fields, verify_import_plan,
+    import_repository, promote_to_checked, score_import_fields, verify_import_plan,
     FieldConfidence, FieldScore, FieldScoreReport, FieldScoreSummary, ImportMode,
 };
 use dotrepo_schema::{Manifest, Owners, Record, RecordMode, RecordStatus, Repo};
@@ -10,13 +10,13 @@ fn make_verified_manifest_with_security_contact() -> Manifest {
     let mut manifest = Manifest::new(
         Record {
             mode: RecordMode::Overlay,
-            status: RecordStatus::Verified,
+            status: RecordStatus::Checked,
             source: Some("https://github.com/example/verified".into()),
             generated_at: None,
             trust: Some(dotrepo_schema::Trust {
                 confidence: Some("high".into()),
-                provenance: vec!["imported".into(), "verified".into()],
-                notes: Some("Auto-promoted to verified: all fields are honestly resolved.".into()),
+                provenance: vec!["imported".into(), "checked".into()],
+                notes: Some("Auto-promoted to checked: all fields are honestly resolved.".into()),
             }),
         },
         Repo {
@@ -148,18 +148,18 @@ fn promote_eligible_manifest_to_verified() {
     let mut manifest = make_imported_manifest();
     let report = make_eligible_report();
 
-    let outcome = promote_to_verified(&mut manifest, &report);
+    let outcome = promote_to_checked(&mut manifest, &report);
 
     assert!(outcome.promoted);
     assert_eq!(outcome.previous_status, "imported");
-    assert_eq!(manifest.record.status, RecordStatus::Verified);
+    assert_eq!(manifest.record.status, RecordStatus::Checked);
     assert!(manifest
         .record
         .trust
         .as_ref()
         .unwrap()
         .provenance
-        .contains(&"verified".to_string()));
+        .contains(&"checked".to_string()));
     assert_eq!(
         manifest
             .record
@@ -177,7 +177,7 @@ fn promote_does_not_promote_unresolved() {
     let mut manifest = make_imported_manifest();
     let report = make_unresolved_report();
 
-    let outcome = promote_to_verified(&mut manifest, &report);
+    let outcome = promote_to_checked(&mut manifest, &report);
 
     assert!(!outcome.promoted);
     assert_eq!(manifest.record.status, RecordStatus::Imported);
@@ -213,7 +213,7 @@ fn promote_does_not_downgrade_reviewed() {
     );
     let report = make_eligible_report();
 
-    let outcome = promote_to_verified(&mut manifest, &report);
+    let outcome = promote_to_checked(&mut manifest, &report);
 
     assert!(!outcome.promoted);
     assert_eq!(outcome.previous_status, "reviewed");
@@ -250,7 +250,7 @@ fn promote_does_not_downgrade_canonical() {
     );
     let report = make_eligible_report();
 
-    let outcome = promote_to_verified(&mut manifest, &report);
+    let outcome = promote_to_checked(&mut manifest, &report);
 
     assert!(!outcome.promoted);
     assert_eq!(manifest.record.status, RecordStatus::Canonical);
@@ -266,7 +266,7 @@ fn promote_preserves_existing_trust_notes() {
     });
     let report = make_eligible_report();
 
-    let outcome = promote_to_verified(&mut manifest, &report);
+    let outcome = promote_to_checked(&mut manifest, &report);
 
     assert!(outcome.promoted);
     let notes = manifest
@@ -278,7 +278,7 @@ fn promote_preserves_existing_trust_notes() {
         .as_deref()
         .unwrap();
     assert!(notes.contains("Bootstrapped from README.md"));
-    assert!(notes.contains("Auto-promoted to verified"));
+    assert!(notes.contains("Auto-promoted to checked"));
 }
 
 #[test]
@@ -308,10 +308,10 @@ fn end_to_end_eligible_repo_promotes() {
     );
 
     let mut manifest = plan.manifest.clone();
-    let outcome = promote_to_verified(&mut manifest, &report);
+    let outcome = promote_to_checked(&mut manifest, &report);
 
     assert!(outcome.promoted);
-    assert_eq!(manifest.record.status, RecordStatus::Verified);
+    assert_eq!(manifest.record.status, RecordStatus::Checked);
 
     fs::remove_dir_all(&root).expect("cleanup");
 }
@@ -343,7 +343,7 @@ fn end_to_end_conflict_repo_does_not_promote() {
     let report = score_import_fields(&plan, &verification);
 
     let mut manifest = plan.manifest.clone();
-    let outcome = promote_to_verified(&mut manifest, &report);
+    let outcome = promote_to_checked(&mut manifest, &report);
 
     assert!(!outcome.promoted);
     assert_eq!(manifest.record.status, plan.manifest.record.status);
@@ -382,7 +382,7 @@ fn promotion_never_rewrites_field_values() {
     let pre_homepage = plan.manifest.repo.homepage.clone();
 
     let mut manifest = plan.manifest.clone();
-    let _ = promote_to_verified(&mut manifest, &report);
+    let _ = promote_to_checked(&mut manifest, &report);
 
     assert_eq!(manifest.repo.name, pre_name, "name must not change");
     assert_eq!(
@@ -422,7 +422,7 @@ fn promotion_preserves_imported_provenance_origins() {
     let mut manifest = plan.manifest.clone();
     let pre_provenance = manifest.record.trust.as_ref().unwrap().provenance.clone();
 
-    let _ = promote_to_verified(&mut manifest, &report);
+    let _ = promote_to_checked(&mut manifest, &report);
 
     let post_provenance = manifest.record.trust.as_ref().unwrap().provenance.clone();
 
@@ -436,8 +436,8 @@ fn promotion_preserves_imported_provenance_origins() {
     }
 
     assert!(
-        post_provenance.contains(&"verified".to_string()),
-        "'verified' should be added to provenance"
+        post_provenance.contains(&"checked".to_string()),
+        "'checked' should be added to provenance"
     );
 
     fs::remove_dir_all(&root).expect("cleanup");
@@ -470,7 +470,7 @@ fn promotion_does_not_upgrade_unresolved_fields() {
     let report = score_import_fields(&plan, &verification);
 
     let mut manifest = plan.manifest.clone();
-    let outcome = promote_to_verified(&mut manifest, &report);
+    let outcome = promote_to_checked(&mut manifest, &report);
 
     assert!(!outcome.promoted);
     assert!(
@@ -507,7 +507,7 @@ fn promotion_only_touches_status_trust_and_evidence_wording() {
 
     let mut manifest = plan.manifest.clone();
 
-    let outcome = promote_to_verified(&mut manifest, &report);
+    let outcome = promote_to_checked(&mut manifest, &report);
     assert!(outcome.promoted);
 
     assert_eq!(manifest.repo.name, plan.manifest.repo.name);
@@ -538,7 +538,7 @@ fn promotion_only_touches_status_trust_and_evidence_wording() {
     assert_eq!(manifest.record.mode, plan.manifest.record.mode);
     assert_eq!(manifest.x, plan.manifest.x);
 
-    assert_eq!(manifest.record.status, RecordStatus::Verified);
+    assert_eq!(manifest.record.status, RecordStatus::Checked);
 
     fs::remove_dir_all(&root).expect("cleanup");
 }
@@ -564,7 +564,7 @@ fn promotion_does_not_change_record_authority_semantics() {
     let report = score_import_fields(&plan, &verification);
 
     let mut manifest = plan.manifest.clone();
-    let _ = promote_to_verified(&mut manifest, &report);
+    let _ = promote_to_checked(&mut manifest, &report);
 
     assert_eq!(
         manifest.record.mode,
@@ -618,12 +618,12 @@ references = []
         r#"schema = "dotrepo/v0.1"
 [record]
 mode = "overlay"
-status = "verified"
+status = "checked"
 source = "https://github.com/example/already-verified"
 
 [record.trust]
 confidence = "high"
-provenance = ["imported", "verified"]
+provenance = ["imported", "checked"]
 
 [repo]
 name = "already-verified"
@@ -708,7 +708,7 @@ status = "imported"
 generated_at = "2026-09-16T00:00:00Z"
 [record.trust]
 confidence = "high"
-provenance = ["imported", "verified"]
+provenance = ["imported", "checked"]
 [repo]
 name = "Example"
 description = "Example"
@@ -929,5 +929,5 @@ fn downgrade_guard_is_a_noop_when_fresh_status_is_not_lower() {
     let outcome = guard_against_unjustified_downgrade(Some(&previous), &mut fresh);
 
     assert!(outcome.is_none());
-    assert_eq!(fresh.record.status, RecordStatus::Verified);
+    assert_eq!(fresh.record.status, RecordStatus::Checked);
 }

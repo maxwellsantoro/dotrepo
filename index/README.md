@@ -141,7 +141,7 @@ telemetry, and failure recovery. Scheduled writeback honors explicit enablement;
 only an explicitly requested local batch may opt in with
 `--skip-automation-enabled-check`.
 
-Writeback eligibility permits validated partial records; promotion to `verified`
+Writeback eligibility permits validated partial records; promotion to `checked`
 requires the stricter fresh-inspection gate. Do not turn manual review into a
 routine generated-record approval tier. Claim review remains a separate
 [authority workflow](../docs/maintainer-claim-review-workflow.md).
@@ -198,9 +198,9 @@ cargo run -p dotrepo-cli -- promotion-report --index-root index --json
 ```
 
 The JSON summary separates `eligibleCount` from `promotionCandidateCount`.
-`eligibleCount` includes already verified records; `promotionCandidateCount`
+`eligibleCount` includes already checked records; `promotionCandidateCount`
 counts eligible draft/imported/inferred records. Fresh crawler verification is
-required to mint verified status; standalone `--apply` is disabled on this branch.
+required to mint checked status; standalone `--apply` is disabled on this branch.
 High-signal counts are advisory, not a release incentive.
 
 ## Growth tranche planning

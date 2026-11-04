@@ -2,7 +2,7 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "checked"
 source = "https://github.com/jasontaylordev/CleanArchitecture"
 generated_at = "2026-10-27T18:05:31.043341Z"
 
@@ -10,9 +10,9 @@ generated_at = "2026-10-27T18:05:31.043341Z"
 confidence = "high"
 provenance = [
     "imported",
-    "verified",
+    "checked",
 ]
-notes = "Bootstrapped from `README.md`. Ignored component-scoped commands from `src/Web/ClientApp-React/package.json` as repository defaults. Ignored component-scoped commands from `src/AppHost/AppHost.csproj` as repository defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. Ignored component-scoped commands from `src/Web/ClientApp-React/package.json` as repository defaults. Ignored component-scoped commands from `src/AppHost/AppHost.csproj` as repository defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to checked: all fields are honestly resolved."
 
 [repo]
 name = "Clean Architecture Solution Template"

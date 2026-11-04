@@ -45,6 +45,23 @@ Retain source revisions, incomplete results and validation receipts under the
 November 3 `task/not-done` directory. Shared hosting and umbrella delivery stay
 in the parent coordinator's scope, with separate Git and publication gates.
 
+### Second review follow-up — November 4, 2026
+
+Naming and shared-contract cleanup, with no new capability claims: record status
+and provenance `verified` is renamed `checked` (legacy input accepted; see
+[public API compatibility](docs/public-api-compatibility.md)); the decision
+workflow's tools are `dotrepo.decision.*` and its guides `experimental-decision-*`;
+the shared source-status rules run from PageDigest's vectors through
+`scripts/source_status.py`; and a `.repo/` directory (Google's `repo` tool) now
+gets a clear error instead of an I/O failure.
+
+Open data-quality item: in mixed-language workspaces the importer can record only
+the root package scripts. For example, `tauri-apps/tauri` records `pnpm build` /
+`pnpm test` but not the Rust workspace's `cargo test`. Measure how often this
+happens with the [factual accuracy benchmark](docs/public-factual-accuracy-benchmark.md)
+before changing import heuristics, and keep partial commands labeled as partial
+rather than inferring a combined command.
+
 The current local priority is a usable **discovery → shortlist → requirement
 assessment → preliminary decision** flow, source-bound recurring reuse, and a
 publisher workflow derived from existing source. Execution is a separate outcome.
@@ -53,7 +70,7 @@ interfaces from local experiments. These source changes are not a deployment.
 
 | Workstream | Implemented locally | Next outcome gate |
 | --- | --- | --- |
-| RepoDigest decision flow | Bounded searches and shortlist, assessment keys independent of component pages, exact-revision describe, explicit page-limit recovery, final supported/none-established decisions and unfinished-attempt accounting | New independently authored tasks must finish with justified decisions or scoped unknowns; compare against metadata plus the same source cache |
+| Decision workflow | Bounded searches and shortlist, assessment keys independent of component pages, exact-revision describe, explicit page-limit recovery, final supported/none-established decisions and unfinished-attempt accounting | New independently authored tasks must finish with justified decisions or scoped unknowns; compare against metadata plus the same source cache |
 | Source reuse | Admission-bound source cache, explicit receipt reuse, source-backed boolean assessments and separate observed recipes | Measure incremental value after verification, acquisition, review, refresh, failed attempts and maintenance |
 | Publisher participation | Source-derived preview, safe first adoption and drift report using existing importer/MCP/CLI | Measure real setup/update effort, duplicate edits and unresolved ambiguity; local fixture success is not adoption |
 | PageDigest companion | Recurring sync/findings and final-build publisher workflows in the sibling repository | Equivalent results/freshness against ordinary HTTP caching; no automatic extension or shared coordinator |
@@ -69,7 +86,7 @@ campaign. Scope independent reviews by changed contract; use the
 The [latest twelve-session selection study](docs/research-evidence-20261030/selection-results.md.txt)
 produced three accepted treatment decisions and two control decisions; seven
 attempts did not finish. The two mutually completed pairs returned less source
-text with RepoDigest but used more native tokens. Missing usage remains unknown.
+text with the decision workflow but used more native tokens. Missing usage remains unknown.
 The cohort was enriched after task authoring, so it is exploratory, not held out.
 The new workflow fixes observed friction; local controls do not rewrite those
 results or establish that a future agent will use the interface successfully.

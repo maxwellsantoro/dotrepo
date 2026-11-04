@@ -435,7 +435,7 @@ status = "canonical"
 
 [record.trust]
 confidence = "high"
-provenance = ["declared", "verified"]
+provenance = ["declared", "checked"]
 notes = "Maintainer-controlled source of truth."
 
 [repo]
@@ -758,7 +758,7 @@ source = "https://github.com/example/orbit"
 
 [record.trust]
 confidence = "medium"
-provenance = ["verified"]
+provenance = ["checked"]
 
 [repo]
 name = "orbit"
@@ -780,7 +780,7 @@ source = "https://github.com/example/orbit"
 
 [record.trust]
 confidence = "medium"
-provenance = ["verified"]
+provenance = ["checked"]
 
 [repo]
 name = "orbit"
@@ -834,7 +834,7 @@ source = "https://github.com/example/orbit"
 
 [record.trust]
 confidence = "medium"
-provenance = ["imported", "verified"]
+provenance = ["imported", "checked"]
 notes = "Reviewed overlay retained for audit history."
 
 [repo]
@@ -855,7 +855,7 @@ description = "Reviewed overlay"
     assert!(rendered.contains("relationship: superseded"));
     assert!(rendered
         .contains("reason: canonical record preferred over lower-authority competing records"));
-    assert!(rendered.contains("provenance: imported, verified"));
+    assert!(rendered.contains("provenance: imported, checked"));
 
     fs::remove_dir_all(root).expect("temp dir removed");
 }
@@ -879,7 +879,7 @@ source = "https://github.com/example/orbit"
 
 [record.trust]
 confidence = "medium"
-provenance = ["verified"]
+provenance = ["checked"]
 
 [repo]
 name = "orbit"
@@ -899,7 +899,7 @@ source = "https://github.com/example/orbit"
 
 [record.trust]
 confidence = "medium"
-provenance = ["verified"]
+provenance = ["checked"]
 
 [repo]
 name = "orbit"
@@ -1041,7 +1041,7 @@ generated_at = "2026-03-10T18:30:00Z"
 
 [record.trust]
 confidence = "medium"
-provenance = ["imported", "verified"]
+provenance = ["imported", "checked"]
 notes = "Reviewed overlay."
 
 [repo]
@@ -1264,7 +1264,7 @@ source = "https://github.com/example/project"
 
 [record.trust]
 confidence = "medium"
-provenance = ["verified"]
+provenance = ["checked"]
 
 [repo]
 name = "project"
@@ -1330,7 +1330,7 @@ source = "https://github.com/example/orbit"
 
 [record.trust]
 confidence = "medium"
-provenance = ["verified"]
+provenance = ["checked"]
 
 [repo]
 name = "orbit"
@@ -1384,7 +1384,7 @@ source = "https://github.com/example/orbit"
 
 [record.trust]
 confidence = "medium"
-provenance = ["verified"]
+provenance = ["checked"]
 
 [repo]
 name = "orbit"
@@ -1435,7 +1435,7 @@ source = "https://github.com/example/orbit"
 
 [record.trust]
 confidence = "medium"
-provenance = ["verified"]
+provenance = ["checked"]
 
 [repo]
 name = "orbit"
@@ -1472,7 +1472,7 @@ source = "https://github.com/example/orbit"
 
 [record.trust]
 confidence = "medium"
-provenance = ["verified"]
+provenance = ["checked"]
 
 [repo]
 name = "orbit"
@@ -1531,7 +1531,7 @@ source = "https://github.com/example/orbit"
 
 [record.trust]
 confidence = "medium"
-provenance = ["verified"]
+provenance = ["checked"]
 
 [repo]
 name = "orbit"

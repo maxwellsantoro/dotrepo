@@ -113,12 +113,12 @@ def build_report(index_root: Path, *, limit: int) -> dict[str, Any]:
             ),
         }
 
-    # Prioritize: missing both build and test, not honest abstention, verified preferred.
+    # Prioritize: missing both build and test, not honest abstention, checked preferred.
     def priority(entry: dict[str, Any]) -> tuple:
         return (
             0 if entry["missingBuild"] and entry["missingTest"] else 1,
             0 if not entry["honestExecutionAbstention"] else 1,
-            0 if entry["status"] == "verified" else 1,
+            0 if entry["status"] in ("checked", "verified") else 1,
             entry["identity"],
         )
 

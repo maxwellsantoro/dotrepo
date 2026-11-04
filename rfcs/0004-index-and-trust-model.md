@@ -102,7 +102,7 @@ default record using this precedence order:
 
 1. maintainer-controlled canonical `.repo`
 2. canonical mirror derived from that `.repo`
-3. verified overlay
+3. checked overlay (legacy spelling `verified`)
 4. reviewed overlay
 5. imported overlay
 6. inferred overlay

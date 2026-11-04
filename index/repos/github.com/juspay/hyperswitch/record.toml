@@ -2,7 +2,7 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "checked"
 source = "https://github.com/juspay/hyperswitch"
 generated_at = "2026-10-27T19:26:26.489169514Z"
 
@@ -10,9 +10,9 @@ generated_at = "2026-10-27T19:26:26.489169514Z"
 confidence = "high"
 provenance = [
     "imported",
-    "verified",
+    "checked",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `Makefile`, and `Cargo.toml`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@juspay/hyperswitch-maintainers` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Ignored component-scoped commands from `cypress-tests/package.json` as repository defaults. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `Makefile`, and `Cargo.toml`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@juspay/hyperswitch-maintainers` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Ignored component-scoped commands from `cypress-tests/package.json` as repository defaults. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to checked: all fields are honestly resolved."
 
 [repo]
 name = "hyperswitch"

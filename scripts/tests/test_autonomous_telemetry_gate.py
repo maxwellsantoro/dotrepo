@@ -207,7 +207,7 @@ def test_evaluate_reports_not_yet_for_insufficient_or_expensive_runs() -> None:
     assert "retained repeated runs" in failed_labels
     assert "processed repository volume" in failed_labels
     assert "direct writeback activity" in failed_labels
-    assert "verified promotion activity" in failed_labels
+    assert "checked promotion activity" in failed_labels
     assert "failure rate" in failed_labels
     assert "worst-run failure rate" in failed_labels
     assert "recent-window failure rate" in failed_labels

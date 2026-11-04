@@ -20,11 +20,12 @@ STATUS_ORDER = {
     "inferred": 1,
     "imported": 2,
     "reviewed": 3,
-    "verified": 4,
+    "checked": 4,
+    "verified": 4,  # spelling of checked before 2026-11-03
     "canonical": 5,
 }
 CONFIDENCE_ORDER = {"low": 0, "medium": 1, "high": 2}
-HIGH_SIGNAL_STATUSES = {"reviewed", "verified", "canonical"}
+HIGH_SIGNAL_STATUSES = {"reviewed", "checked", "verified", "canonical"}
 HIGH_SIGNAL_CONFIDENCE = {"medium", "high"}
 GROWTH_BASELINE = Path("scripts/fixtures/index_growth_tranche_baseline.json")
 

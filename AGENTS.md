@@ -30,8 +30,8 @@ or archived packet as a task list.
 
 | Task | Start here |
 | --- | --- |
-| Discover, shortlist and reach a preliminary decision | [Decision workflow](docs/experimental-repodigest-selection.md); `scripts/repodigest_selection.py`, `scripts/repodigest_service.py` |
-| Assess explicit requirements or reuse source-bound findings | [Requirement semantics](docs/experimental-repodigest-requirements.md), [source cache](docs/experimental-repodigest-source-cache.md); `scripts/repodigest_requirements.py` |
+| Discover, shortlist and reach a preliminary decision | [Decision workflow](docs/experimental-decision-selection.md); `scripts/repodigest_selection.py`, `scripts/repodigest_service.py` |
+| Assess explicit requirements or reuse source-bound findings | [Requirement semantics](docs/experimental-decision-requirements.md), [source cache](docs/experimental-decision-source-cache.md); `scripts/repodigest_requirements.py` |
 | Derive publisher setup and updates from existing sources | [Maintainer workflow](docs/maintainer-happy-path.md); `scripts/publisher_workflow.py` |
 
 Discovery leads, source-supported preliminary fit and runtime success are distinct.
@@ -137,8 +137,8 @@ Read `crates/dotrepo-crawler/README.md` for crawler layout and
   imported, inferred, and draft statuses regardless of mode. Accepted/in-review
   claims break equal-rank ties before lexical manifest path. Native mode alone
   does not outrank an overlay. Preserve conflicts; never silently blend fields.
-- **Trust:** `reviewed` means human review; `verified` means required pipeline
-  checks resolved against inspected evidence. Neither status nor confidence
+- **Trust:** `reviewed` means human review; `checked` (legacy input spelling
+  `verified`) means required pipeline checks resolved against inspected evidence. Neither status nor confidence
   guarantees correctness, completeness, or recent upstream inspection.
 - **Autonomy:** deterministic parsing first, bounded candidate-constrained
   escalation, post-checks, partial publication or abstention. Automation never

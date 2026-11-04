@@ -1,13 +1,13 @@
 # Experimental repository discovery
 
-RepoDigest's local MCP service returns compact repository profiles through
-`repodigest.find`. Agents can compare candidates in one response, then use
-`repodigest.describe` for full profile evidence and `source.read` for selected
+The decision workflow's local MCP service returns compact repository profiles through
+`dotrepo.decision.find`. Agents can compare candidates in one response, then use
+`dotrepo.decision.describe` for full profile evidence and `source.read` for selected
 source passages. Serving uses SQLite and admitted records; it performs no model
 call, network request, source replay or repository execution.
 
 For metadata-first discovery followed by explicit source assessment checks, see
-[experimental requirement assessments](experimental-repodigest-requirements.md).
+[experimental requirement assessments](experimental-decision-requirements.md).
 
 This extends the existing experimental service. It does not introduce a public
 protocol version or change the public instruction consumer. The existing
@@ -68,7 +68,7 @@ are not resolved. A count is not installed size or a portability result.
 {"query":"image conversion", "language":"Rust", "kind":"cli", "limit":10}
 ```
 
-Use these arguments with `repodigest.find`. Optional `interface` accepts
+Use these arguments with `dotrepo.decision.find`. Optional `interface` accepts
 `command-line` or `library`; `kind` accepts `cli` or `library`. Language accepts
 `Python`, `Rust`, `Go` or `JavaScript`. All structured filters must match one
 manifest/component declaration, so a Python component cannot borrow a JavaScript
@@ -94,7 +94,7 @@ examines at most 100 candidate records and stops once it has enough results;
 it does not materialize every matching profile in memory. Invalid or obsolete
 profiles refuse visibly rather than falling back to fetching or model synthesis.
 
-`repodigest.describe` returns the selected repository's full profile alongside
+`dotrepo.decision.describe` returns the selected repository's full profile alongside
 its existing component inventory. Each compiled profile is at most 32 KiB,
 contains at most 16 inspected manifests and records omitted/unreadable manifests.
 README extraction is limited to the first 150 lines and four short passages.
@@ -104,7 +104,7 @@ evaluation. No result grants execution permission.
 ## Admission and refresh
 
 Use the existing `repodigest_store.py ingest` command and service invocation
-described in [retained source serving](experimental-repodigest-source-cache.md).
+described in [retained source serving](experimental-decision-source-cache.md).
 Re-admit trusted snapshots under the new compiler into a new database or an
 operator-managed current store. Historical benchmark databases remain frozen.
 
@@ -125,6 +125,6 @@ savings or net economics. A competent GitHub search and
 selective-inspection baseline, candidate quality and missed relevant projects
 must be evaluated alongside acquisition, refresh and total operating effort.
 
-The completed [fixed-corpus comparison](experimental-repodigest-discovery-comparison.md)
+The completed [fixed-corpus comparison](experimental-decision-discovery-comparison.md)
 used an offline metadata-search baseline over the same 100 candidates. It is a
 metadata baseline, with no claim to measure live GitHub search.

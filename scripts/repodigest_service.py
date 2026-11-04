@@ -42,15 +42,24 @@ OFFSET = {"type": "integer", "minimum": 0, "default": 0}
 REVISION = {"type": "string", "pattern": "^[0-9a-f]{40}$", "minLength": 40, "maxLength": 40}
 
 
+# Tools were named `repodigest.*` before 2026-11-03. Old names still dispatch so
+# retained replays keep working; tools/list advertises only the current names.
+LEGACY_PREFIX, TOOL_PREFIX = "repodigest.", "dotrepo.decision."
+LEGACY_TOOL_NAMES = {
+    LEGACY_PREFIX + name: TOOL_PREFIX + name
+    for name in ("find", "describe", "lookup", "qualify", "shortlist", "decide", "selection_status")
+}
+
+
 def page_limit(maximum, default):
     return {"type": "integer", "minimum": 1, "maximum": maximum, "default": default}
 
 
 def registry(store, *, opt_in=False, sources=None, requirements=False, metadata=None):
     tools = {
-        "repodigest.find": (
+        "dotrepo.decision.find": (
             definition(
-                "repodigest.find",
+                "dotrepo.decision.find",
                 "Find compact repository discovery leads by purpose, keywords and literal README passages. Purpose is publisher text; interfaces label declared or convention-derived targets. Lexical rank is not verified suitability. Filters must match one component; language means manifest ecosystem. Up to 20 profiles, total JSON <=32 KiB; moreCandidates indicates omitted results. Use describe for full evidence, constraints and acquisition time; source.read for original passages. Offline and model-free.",
                 {
                     "query": {"type": "string", "maxLength": MAX_QUERY_LENGTH},
@@ -63,9 +72,9 @@ def registry(store, *, opt_in=False, sources=None, requirements=False, metadata=
             ),
             store.find,
         ),
-        "repodigest.describe": (
+        "dotrepo.decision.describe": (
             definition(
-                "repodigest.describe",
+                "dotrepo.decision.describe",
                 "Get full discovery profile evidence, exact indexed revision and paginated components. Optional revision pins the requested source; an unavailable revision refuses rather than silently using another. Assessment-bearing components are indexed separately from component pagination when enabled.",
                 {
                     "repository": STR,
@@ -77,9 +86,9 @@ def registry(store, *, opt_in=False, sources=None, requirements=False, metadata=
             ),
             lambda repository, **kw: selection_flow.describe(store, repository, **kw),
         ),
-        "repodigest.lookup": (
+        "dotrepo.decision.lookup": (
             definition(
-                "repodigest.lookup",
+                "dotrepo.decision.lookup",
                 "Read revision-bound facts for the declared scope. Retained facts can inform an answer even when instruction is null: a procedure-qualification gap does not invalidate those facts. Use nextInspection and source passage bounds to investigate relevant missing or conflicting context. includeLeads adds partial source passages and opt-in historical observations. Historical facts do not qualify another revision. Nothing authorizes execution.",
                 {
                     "repository": STR,
@@ -108,9 +117,9 @@ def registry(store, *, opt_in=False, sources=None, requirements=False, metadata=
         ),
     }
     if metadata is not None:
-        tools["repodigest.find"] = (
+        tools["dotrepo.decision.find"] = (
             definition(
-                "repodigest.find",
+                "dotrepo.decision.find",
                 "Cheap discovery over retained names, descriptions, topics and language metadata. Returns leads, not suitability decisions. Language filters use the retained metadata list. Use describe and opt-in qualify to inspect shortlisted candidates. Offline and model-free.",
                 {
                     "query": {"type": "string", "maxLength": MAX_QUERY_LENGTH},
@@ -124,7 +133,7 @@ def registry(store, *, opt_in=False, sources=None, requirements=False, metadata=
     if requirements:
         import repodigest_requirements as assessment
 
-        original_describe = tools["repodigest.describe"][1]
+        original_describe = tools["dotrepo.decision.describe"][1]
 
         def describe(repository, requirementOffset=0, **kw):
             result = original_describe(repository, **kw)
@@ -142,11 +151,11 @@ def registry(store, *, opt_in=False, sources=None, requirements=False, metadata=
             )
             return result
 
-        tools["repodigest.describe"] = (tools["repodigest.describe"][0], describe)
-        tools["repodigest.describe"][0]["inputSchema"]["properties"]["requirementOffset"] = OFFSET
-        tools["repodigest.qualify"] = (
+        tools["dotrepo.decision.describe"] = (tools["dotrepo.decision.describe"][0], describe)
+        tools["dotrepo.decision.describe"][0]["inputSchema"]["properties"]["requirementOffset"] = OFFSET
+        tools["dotrepo.decision.qualify"] = (
             definition(
-                "repodigest.qualify",
+                "dotrepo.decision.qualify",
                 "Experimental batch requirement check over trusted-operator admitted, reviewed source assessments. Use describe to discover exact claim keys/scopes; align them with the user's requirements. Returns supported, contradicted or unknown, with source references and limitations. Source silence is unknown; no natural-language inference, execution proof or authorization. Offline and model-free.",
                 {
                     "candidates": {
@@ -187,14 +196,14 @@ def registry(store, *, opt_in=False, sources=None, requirements=False, metadata=
             ),
             lambda **kw: assessment.qualify(store, **kw),
         )
-        workflow = selection_flow.Selection(store, tools["repodigest.find"][1], describe)
-        target_schema = tools["repodigest.qualify"][0]["inputSchema"]["properties"]["candidates"]
-        requirements_schema = tools["repodigest.qualify"][0]["inputSchema"]["properties"][
+        workflow = selection_flow.Selection(store, tools["dotrepo.decision.find"][1], describe)
+        target_schema = tools["dotrepo.decision.qualify"][0]["inputSchema"]["properties"]["candidates"]
+        requirements_schema = tools["dotrepo.decision.qualify"][0]["inputSchema"]["properties"][
             "requirements"
         ]
-        tools["repodigest.shortlist"] = (
+        tools["dotrepo.decision.shortlist"] = (
             definition(
-                "repodigest.shortlist",
+                "dotrepo.decision.shortlist",
                 "Begin bounded selection: 1..3 lexical queries, at most 4 distinct leads, no limit argument needed. Returns revisions and assessment keys across component pages. Reuse selectionId for follow-up; at most 3 distinct searches total and identical queries are reused. An empty shortlist does not prove global absence. Inspect source/qualify for remaining gaps, then finalize with decide even if none can be established.",
                 {
                     "queries": {
@@ -210,9 +219,9 @@ def registry(store, *, opt_in=False, sources=None, requirements=False, metadata=
             ),
             workflow.shortlist,
         )
-        tools["repodigest.decide"] = (
+        tools["dotrepo.decision.decide"] = (
             definition(
-                "repodigest.decide",
+                "dotrepo.decision.decide",
                 "Finish a shortlist with preliminary supported candidates or explicit none-established. Map ALL mandatory requirements, retaining unmapped ones as unknown; no free-text inference. Choose exact component targets from this shortlist. Unknowns and failures remain visible. No best-project ranking, live freshness, runtime proof or execution authority. A completed decision is immutable within this process.",
                 {
                     "selectionId": STR,
@@ -228,16 +237,16 @@ def registry(store, *, opt_in=False, sources=None, requirements=False, metadata=
             ),
             workflow.decide,
         )
-        tools["repodigest.selection_status"] = (
+        tools["dotrepo.decision.selection_status"] = (
             definition(
-                "repodigest.selection_status",
+                "dotrepo.decision.selection_status",
                 "Read the process-local selection ledger, including unfinished attempts and failed searches; optionally retrieve one selection/decision. Export before server exit. Not provider-usage or economic accounting.",
                 {"selectionId": STR},
                 [],
             ),
             workflow.status,
         )
-        for name in ("repodigest.shortlist", "repodigest.decide"):
+        for name in ("dotrepo.decision.shortlist", "dotrepo.decision.decide"):
             tools[name][0]["annotations"]["idempotentHint"] = False
     if sources:
         base = {"repository": STR, "revision": REVISION}
@@ -291,8 +300,8 @@ def registry(store, *, opt_in=False, sources=None, requirements=False, metadata=
                 sources, "network_enabled", True
             )
     for name, maximum in (
-        ("repodigest.find", MAX_FIND_LIMIT),
-        ("repodigest.describe", MAX_DESCRIBE_LIMIT),
+        ("dotrepo.decision.find", MAX_FIND_LIMIT),
+        ("dotrepo.decision.describe", MAX_DESCRIBE_LIMIT),
         ("source.list", MAX_LIST_LIMIT),
     ):
         if name in tools:
@@ -327,7 +336,7 @@ def serve(tools):
                 result = {
                     "protocolVersion": "2025-06-18",
                     "capabilities": {"tools": {}},
-                    "serverInfo": {"name": "repodigest-compiled-experimental", "version": "0.1.0"},
+                    "serverInfo": {"name": "dotrepo-decision-experimental", "version": "0.1.0"},
                 }
             elif not initialized:
                 raise ValueError("initialize first")
@@ -337,7 +346,7 @@ def serve(tools):
                 result = {"tools": [item[0] for item in tools.values()]}
             elif method == "tools/call":
                 params = message["params"]
-                name = params["name"]
+                name = LEGACY_TOOL_NAMES.get(params["name"], params["name"])
                 args = params.get("arguments", {})
                 if name not in tools or not isinstance(args, dict):
                     raise ValueError("invalid tool call")

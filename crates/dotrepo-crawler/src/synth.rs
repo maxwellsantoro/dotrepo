@@ -273,7 +273,7 @@ mod tests {
             r#"schema = "dotrepo/v0.1"
 [record]
 mode = "overlay"
-status = "verified"
+status = "checked"
 source = "https://github.com/example/orbit"
 [repo]
 name = "orbit"

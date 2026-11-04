@@ -196,7 +196,7 @@ def current_high_signal_count(repo_root: Path) -> int:
     count = 0
     for path in (repo_root / "index/repos").glob("*/*/*/record.toml"):
         record = tomllib.loads(path.read_text())["record"]
-        if record.get("status") in {"reviewed", "verified", "canonical"} and record.get(
+        if record.get("status") in {"reviewed", "checked", "verified", "canonical"} and record.get(
             "trust", {}
         ).get("confidence") in {"medium", "high"}:
             count += 1

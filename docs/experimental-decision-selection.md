@@ -5,14 +5,14 @@ or an explicit `none-established`. It builds on the existing source assessment
 reader; it does not interpret natural language requirements or execute projects.
 Use it from a source checkout, not the published `dotrepo-mcp` binary.
 
-Start the service as in [requirement assessments](experimental-repodigest-requirements.md),
+Start the service as in [requirement assessments](experimental-decision-requirements.md),
 with an admitted source store, `--allow-requirement-assessments`, and preferably
 `--metadata-index` for cheap discovery. `--compiled-sources` enables original
 source inspection; it does not authorize HTTP on misses unless separately configured.
 
 ## Complete a decision
 
-1. Call `repodigest.shortlist` with `queries`, a list of 1–3 short search strings,
+1. Call `dotrepo.decision.shortlist` with `queries`, a list of 1–3 short search strings,
    and an optional `language`. It returns a `selectionId` and at most four
    distinct leads. Keep that ID for follow-up queries. The whole selection has
    three distinct search attempts; case/whitespace-equivalent repeats reuse the
@@ -29,7 +29,7 @@ source inspection; it does not authorize HTTP on misses unless separately config
    Natural-language requirements without an aligned key remain unmapped. A
    missing key or source passage is unknown, not false. Source fallback findings
    need their own attribution; a tool does not silently promote them.
-4. Call `repodigest.decide` with the selection ID, 0–4 exact candidate targets,
+4. Call `dotrepo.decision.decide` with the selection ID, 0–4 exact candidate targets,
    mapped `requirements`, and any `unmappedRequirements`. An empty candidate
    list can finish a search with no supported lead. Supported candidates meet
    every mapped condition and have no unmapped mandatory requirements.
@@ -63,7 +63,7 @@ still refuse. `limitAdjustment` reports a cap; pagination retains its meaning.
 
 There are at most 16 selections in a server process. Each retains started/failed
 searches, reused queries, omitted leads and whether it reached a decision.
-`repodigest.selection_status` reports every attempt, including unfinished ones;
+`dotrepo.decision.selection_status` reports every attempt, including unfinished ones;
 pass a selection ID to retrieve its state or immutable final decision. Export
 the ledger before server exit. It is process-local workflow accounting, not a
 durable user history, model-usage meter or correctness grader.

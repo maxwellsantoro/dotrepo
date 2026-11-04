@@ -2,7 +2,7 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "checked"
 source = "https://github.com/nodejs/node"
 generated_at = "2026-10-27T19:28:07.747707278Z"
 
@@ -10,9 +10,9 @@ generated_at = "2026-10-27T19:28:07.747707278Z"
 confidence = "high"
 provenance = [
     "imported",
-    "verified",
+    "checked",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `Makefile`, and `tools/gyp/pyproject.toml`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Ignored component-scoped commands from `deps/amaro/package.json` as repository defaults. Ignored component-scoped commands from `tools/gyp/pyproject.toml` as repository defaults. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `tools/gyp/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `Makefile`, and `tools/gyp/pyproject.toml`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Ignored component-scoped commands from `deps/amaro/package.json` as repository defaults. Ignored component-scoped commands from `tools/gyp/pyproject.toml` as repository defaults. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `tools/gyp/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to checked: all fields are honestly resolved."
 
 [repo]
 name = "Node.js"

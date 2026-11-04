@@ -47,7 +47,7 @@ Outcome:
 # existing index overlay
 [record]
 mode = "overlay"
-status = "verified"
+status = "checked"
 source = "https://github.com/acme/widget"
 ```
 

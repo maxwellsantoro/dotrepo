@@ -2,7 +2,7 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "checked"
 source = "https://github.com/langchain-ai/langchain"
 generated_at = "2026-10-27T17:22:15.318199Z"
 
@@ -10,9 +10,9 @@ generated_at = "2026-10-27T17:22:15.318199Z"
 confidence = "high"
 provenance = [
     "imported",
-    "verified",
+    "checked",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `libs/core/pyproject.toml`. Ignored component-scoped commands from `libs/core/pyproject.toml` as repository defaults. Imported `repo.toolchain.min` from `libs/core/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `libs/core/pyproject.toml`. Ignored component-scoped commands from `libs/core/pyproject.toml` as repository defaults. Imported `repo.toolchain.min` from `libs/core/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to checked: all fields are honestly resolved."
 
 [repo]
 name = "langchain"

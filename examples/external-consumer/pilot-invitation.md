@@ -3,7 +3,7 @@
 This retained, unsent template applies to a separately selected **coding/execution
 pilot**. It is not the current discovery or recurring-reuse evaluation plan; use
 the [roadmap](../../ROADMAP.md#active-execution-order) and
-[current workflow guide](../../docs/experimental-repodigest-selection.md) for that.
+[current workflow guide](../../docs/experimental-decision-selection.md) for that.
 
 This is a preparation draft. No recipient, consent, outreach, or participation
 is claimed. An engineer on an external team already using a coding agent is the

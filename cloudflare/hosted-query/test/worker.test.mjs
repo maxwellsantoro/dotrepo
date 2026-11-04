@@ -1297,7 +1297,7 @@ test("search preserves profile semantics and bounds asset reads independently of
     name: "Library", purpose: "General library", homepage: "https://example.dev",
     license: "MIT", languages: ["Rust"], topics: ["parsing"],
     completeness: { hasBuild: true, hasDocs: true },
-    trust: { selectedStatus: "verified", confidence: "high" }, links: {}
+    trust: { selectedStatus: "checked", confidence: "high" }, links: {}
   }));
   const meta = { ...freshness, paths: { root: "/v0/snapshots/content" } };
   let reads = 0;
