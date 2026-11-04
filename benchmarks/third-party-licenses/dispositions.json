@@ -1,0 +1,10 @@
+{
+  "observedOn": "2026-11-04",
+  "decision": "Preserve original evidence and add exact-revision notices. Hold further redistribution of the named captures pending an owner decision; do not silently delete history or treat recovered notices as permission.",
+  "holds": [
+    {"upstream": "ComposioHQ/awesome-claude-skills", "revision": "be2a406907dbc61b73e6827ded415c96139d13a2", "reason": "Captured commit root contains no LICENSE/COPYING/NOTICE file. No separate permission has been established. Choose private preservation/removal from future public trees or obtain permission."},
+    {"upstream": "@vscode/vsce-sign", "version": "2.1.0", "reason": "Exact npm license recovered; its scope-of-license clause lists sharing/publication among restricted actions. Owner must decide public-capture disposition. The notice itself does not clear redistribution."},
+    {"upstream": "666ghj/MiroFish; ultralytics/ultralytics; warpdotdev/warp", "reason": "AGPL texts recovered at captured commits; Warp also has an MIT text. Confirm file-level scope and obligations before a benchmark redistribution decision. No blanket MIT classification."},
+    {"upstream": "hashicorp/vault", "revision": "352089582444ea84feb03bc97eda97b35729e8ec", "reason": "Captured BUSL text includes parameters and an additional-use grant. Owner must assess the proposed redistribution against those exact terms; no generic permissive-license conclusion."}
+  ]
+}

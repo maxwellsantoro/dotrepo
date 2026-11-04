@@ -285,13 +285,38 @@ also default disabled unless explicitly opted in. The built-in `GITHUB_TOKEN`
 needs contents, pull-request, and actions write permissions; repository Actions
 must be allowed to create PRs.
 
+Before enabling scheduled operation, after an organization transfer, or after a
+PR-creation failure, run the read-only owner preflight with an existing authorized
+GitHub CLI session:
+
+```sh
+uv run python scripts/check_refresh_readiness.py --output-json /tmp/refresh-readiness.json
+```
+
+Exit 0 means the observed prerequisite settings permit this route, 2 identifies a
+disabled prerequisite, and 1 means the check could not establish readiness. This
+is a settings observation, not proof of a completed refresh. The administration
+read API is normally unavailable to the job's `GITHUB_TOKEN`; do not expand that
+token's access to run this owner check.
+
+On November 4, the repository returned `default_workflow_permissions: read` and
+`can_approve_pull_request_reviews: false`. The scheduled run completed its crawl
+but failed PR creation. The concrete proposed owner change preserves the `read`
+default and changes only `can_approve_pull_request_reviews` to `true`. GitHub
+couples PR creation and approval in that switch; this is an access-policy decision,
+not a source-code repair. No setting was changed by the review packet. See
+[GitHub's permissions API](https://docs.github.com/en/rest/actions/permissions#get-default-workflow-permissions-for-a-repository).
+After an authorized change, rerun the preflight, then verify a bounded refresh
+through exact-head CI, normal landing, deployment and live checks. A manual run
+does not establish the seven-day unattended streak.
+
 Dispatches can set `adjudication_call_budget=0` for a deterministic batch: the
 workflow validates the input before setup, skips model sidecars, and disables
 all crawler adjudication endpoints. An empty input retains the configured
 scheduled budget. This does not lower verification or publication requirements.
 
 The workflow retains telemetry and valid partial writes even when repositories
-fail. Strict telemetry, index validation, and the public-surface gate must pass
+fail. Strict telemetry and index validation must pass
 before opening a non-draft automation PR. A checked default-branch preflight
 also requires the original checkout SHA to remain current; a mismatch or API
 failure retains a receipt and refuses PR creation. This narrows the race window;

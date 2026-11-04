@@ -1,0 +1,279 @@
+{
+  "harnessSha256": "3031600b86b9d90b23a051a6b9e8f84958091d16eb9ba04358b1f27aecf7e181",
+  "sourceBase": "6d28f65856b93491b26c55b9885997c5230c1c5b",
+  "kind": "developer-defined offline workflow control after source exposure",
+  "target": {
+    "repository": "github.com/microsoft/markitdown",
+    "revision": "7482c092d9c0074a89803c9fdb63a969e7fe17fc",
+    "component": "packages/markitdown"
+  },
+  "assessment": {
+    "assessmentRecordSha256": "725c66b668bd245303aabbb8637b94d1ef83a0d77333fe5f10eebb0957c5b4dd",
+    "claims": 1,
+    "target": {
+      "repository": "github.com/microsoft/markitdown",
+      "revision": "7482c092d9c0074a89803c9fdb63a969e7fe17fc",
+      "component": "packages/markitdown"
+    }
+  },
+  "setupSeconds": 0.1473120409063995,
+  "baseline": {
+    "requested": "Declared Python 3.12 support, without runtime qualification",
+    "declaration": ">=3.10,<3.15",
+    "answer": "supported",
+    "sourceSha256": "6b353e793a4277ab121c6c4433b181882bef5dcdad3fc30e65878bd4dd2041f5",
+    "sourceReadAccounting": {
+      "logicalIndexBytesRead": 29623,
+      "logicalBlobBytesRead": 2980,
+      "indexCacheHits": 0,
+      "blobCacheHits": 0
+    },
+    "returnedSourceBytes": 2980
+  },
+  "decisions": [
+    {
+      "selectionId": "selection-1",
+      "state": "completed",
+      "disposition": "preliminary-selection",
+      "supportedCandidates": [
+        {
+          "repository": "github.com/microsoft/markitdown",
+          "revision": "7482c092d9c0074a89803c9fdb63a969e7fe17fc",
+          "component": "packages/markitdown"
+        }
+      ],
+      "candidates": [
+        {
+          "repository": "github.com/microsoft/markitdown",
+          "revision": "7482c092d9c0074a89803c9fdb63a969e7fe17fc",
+          "component": "packages/markitdown",
+          "findings": [
+            {
+              "key": "python.declared-3-12",
+              "expected": true,
+              "status": "supported",
+              "sourceStatus": "current",
+              "reason": "reviewed source assessment",
+              "assessments": [
+                {
+                  "basis": "source-analysis",
+                  "evidence": [
+                    {
+                      "endLine": 10,
+                      "excerpt": "requires-python = \">=3.10,<3.15\"",
+                      "excerptTruncated": false,
+                      "path": "packages/markitdown/pyproject.toml",
+                      "sha256": "6b353e793a4277ab121c6c4433b181882bef5dcdad3fc30e65878bd4dd2041f5",
+                      "startLine": 10
+                    }
+                  ],
+                  "key": "python.declared-3-12",
+                  "limitations": "Synthetic test assessment; declaration only, not execution.",
+                  "reason": "3.12 lies within the declared >=3.10,<3.15 range.",
+                  "value": true,
+                  "assessmentRecordSha256": "725c66b668bd245303aabbb8637b94d1ef83a0d77333fe5f10eebb0957c5b4dd",
+                  "reviewer": "synthetic test fixture",
+                  "assessedRevision": "7482c092d9c0074a89803c9fdb63a969e7fe17fc",
+                  "sourceStatus": "current",
+                  "sourceReasons": []
+                }
+              ]
+            }
+          ],
+          "missingEvidence": [],
+          "disposition": "supported"
+        }
+      ],
+      "requirements": [
+        {
+          "key": "python.declared-3-12",
+          "expected": true
+        }
+      ],
+      "unmappedRequirements": [],
+      "noneEstablishedReason": null,
+      "searches": [
+        {
+          "query": "markitdown",
+          "normalized": "markitdown",
+          "state": "completed",
+          "returned": 1,
+          "moreCandidates": false,
+          "refusedCandidates": 0
+        }
+      ],
+      "failures": [],
+      "meaning": "Only the caller-mapped mandatory source requirements were checked. Supported is preliminary source support, not best choice, runtime success, current HEAD, or execution authority. None established applies only to these targets and evidence; it does not prove no suitable project exists.",
+      "sourceFallback": "For unknowns inspect source.list/source.read at the exact revision; a new source conclusion needs its own attributed evidence. Do not repeat exhausted catalog searches.",
+      "authorized": "not-granted"
+    },
+    {
+      "selectionId": "selection-2",
+      "state": "completed",
+      "disposition": "none-established",
+      "supportedCandidates": [],
+      "candidates": [
+        {
+          "repository": "github.com/microsoft/markitdown",
+          "revision": "7482c092d9c0074a89803c9fdb63a969e7fe17fc",
+          "component": "packages/markitdown",
+          "findings": [
+            {
+              "key": "external.libreoffice.required",
+              "expected": false,
+              "status": "unknown",
+              "sourceStatus": "unknown",
+              "reason": "no current scoped assessment; source silence does not establish absence",
+              "assessments": []
+            }
+          ],
+          "missingEvidence": [],
+          "disposition": "unknown"
+        }
+      ],
+      "requirements": [
+        {
+          "key": "external.libreoffice.required",
+          "expected": false
+        }
+      ],
+      "unmappedRequirements": [],
+      "noneEstablishedReason": "insufficient-or-conflicting-evidence",
+      "searches": [
+        {
+          "query": "markitdown",
+          "normalized": "markitdown",
+          "state": "completed",
+          "returned": 1,
+          "moreCandidates": false,
+          "refusedCandidates": 0
+        }
+      ],
+      "failures": [],
+      "meaning": "Only the caller-mapped mandatory source requirements were checked. Supported is preliminary source support, not best choice, runtime success, current HEAD, or execution authority. None established applies only to these targets and evidence; it does not prove no suitable project exists.",
+      "sourceFallback": "For unknowns inspect source.list/source.read at the exact revision; a new source conclusion needs its own attributed evidence. Do not repeat exhausted catalog searches.",
+      "authorized": "not-granted"
+    },
+    {
+      "selectionId": "selection-3",
+      "state": "completed",
+      "disposition": "none-established",
+      "supportedCandidates": [],
+      "candidates": [
+        {
+          "repository": "github.com/microsoft/markitdown",
+          "revision": "7482c092d9c0074a89803c9fdb63a969e7fe17fc",
+          "component": "packages/markitdown",
+          "findings": [
+            {
+              "key": "python.declared-3-12",
+              "expected": false,
+              "status": "contradicted",
+              "sourceStatus": "current",
+              "reason": "reviewed source assessment",
+              "assessments": [
+                {
+                  "basis": "source-analysis",
+                  "evidence": [
+                    {
+                      "endLine": 10,
+                      "excerpt": "requires-python = \">=3.10,<3.15\"",
+                      "excerptTruncated": false,
+                      "path": "packages/markitdown/pyproject.toml",
+                      "sha256": "6b353e793a4277ab121c6c4433b181882bef5dcdad3fc30e65878bd4dd2041f5",
+                      "startLine": 10
+                    }
+                  ],
+                  "key": "python.declared-3-12",
+                  "limitations": "Synthetic test assessment; declaration only, not execution.",
+                  "reason": "3.12 lies within the declared >=3.10,<3.15 range.",
+                  "value": true,
+                  "assessmentRecordSha256": "725c66b668bd245303aabbb8637b94d1ef83a0d77333fe5f10eebb0957c5b4dd",
+                  "reviewer": "synthetic test fixture",
+                  "assessedRevision": "7482c092d9c0074a89803c9fdb63a969e7fe17fc",
+                  "sourceStatus": "current",
+                  "sourceReasons": []
+                }
+              ]
+            }
+          ],
+          "missingEvidence": [],
+          "disposition": "contradicted"
+        }
+      ],
+      "requirements": [
+        {
+          "key": "python.declared-3-12",
+          "expected": false
+        }
+      ],
+      "unmappedRequirements": [],
+      "noneEstablishedReason": "all-targets-contradicted",
+      "searches": [
+        {
+          "query": "markitdown",
+          "normalized": "markitdown",
+          "state": "completed",
+          "returned": 1,
+          "moreCandidates": false,
+          "refusedCandidates": 0
+        }
+      ],
+      "failures": [],
+      "meaning": "Only the caller-mapped mandatory source requirements were checked. Supported is preliminary source support, not best choice, runtime success, current HEAD, or execution authority. None established applies only to these targets and evidence; it does not prove no suitable project exists.",
+      "sourceFallback": "For unknowns inspect source.list/source.read at the exact revision; a new source conclusion needs its own attributed evidence. Do not repeat exhausted catalog searches.",
+      "authorized": "not-granted"
+    }
+  ],
+  "ledger": {
+    "attempts": 4,
+    "completed": 3,
+    "unfinished": [
+      "selection-4"
+    ],
+    "searchCalls": 4,
+    "failedSearchCalls": 0,
+    "meaning": "Process-local workflow accounting. Export before server exit. No model token, wall-time, billing, origin savings, or consumer correctness measurement is inferred."
+  },
+  "calls": [
+    {
+      "tool": "dotrepo.decision.find",
+      "resultBytes": 1421,
+      "elapsedSeconds": 0.0007330409716814756
+    },
+    {
+      "tool": "dotrepo.decision.describe",
+      "resultBytes": 7880,
+      "elapsedSeconds": 0.0014092500787228346
+    },
+    {
+      "tool": "dotrepo.decision.find",
+      "resultBytes": 1421,
+      "elapsedSeconds": 0.0005285828374326229
+    },
+    {
+      "tool": "dotrepo.decision.describe",
+      "resultBytes": 7880,
+      "elapsedSeconds": 0.0014872078318148851
+    },
+    {
+      "tool": "dotrepo.decision.find",
+      "resultBytes": 1421,
+      "elapsedSeconds": 0.0005185420159250498
+    },
+    {
+      "tool": "dotrepo.decision.describe",
+      "resultBytes": 7880,
+      "elapsedSeconds": 0.0014469169545918703
+    },
+    {
+      "tool": "dotrepo.decision.find",
+      "resultBytes": 669,
+      "elapsedSeconds": 0.00015220791101455688
+    }
+  ],
+  "scope": "One preselected retained project; existing synthetic reviewed-assessment fixture. Same retained source cache. Declared Python range only; no source execution, independent task/reviewer, adoption, scale, model calls or savings claim.",
+  "costLimits": "Result bytes and measured control setup are retained. Original acquisition, semantic review and publisher upkeep remain inherited/unallocated; native tokens, human effort and money unmeasured. These controls do not replace negative consumer studies.",
+  "sourceBytes": 2980,
+  "sourceSha256": "6b353e793a4277ab121c6c4433b181882bef5dcdad3fc30e65878bd4dd2041f5"
+}

@@ -17,6 +17,39 @@ contracts outrank prose; installed binaries need [version-matched documentation]
 
 ## Active execution order
 
+### Org-review repairs — November 4, 2026 (local candidate)
+
+The isolated `codex/address-org-review-20261104` checkout under
+`/Users/maxwell/Documents/Codex/2026-11-04/task/address-org-review/dotrepo/`
+starts from PR220's exact publisher-declaration repair. Both captured publisher
+declarations reproduce their stored digests; live correction still requires a
+normal merge/deployment and independent query verification.
+
+The read-only [refresh readiness preflight](scripts/check_refresh_readiness.py)
+confirms Actions PR creation is disabled. It preserves the read-only default in
+its proposed payload and reports the coupled creation/approval switch explicitly.
+Only an owner can authorize that access-policy change; the tool never mutates it
+or grants the scheduled token administration access. Verify a whole bounded
+refresh afterward; no unattended streak is established by a settings check.
+
+The [captured-revision license audit](benchmarks/third-party-licenses/README.md)
+recovers 45 license/notice texts, binds 52 capture roots / 530 original files,
+and retains all historical source bytes. Four groups have explicit public
+redistribution holds. Notices and hash checks do not close those owner decisions.
+
+The [decision control](docs/review-outcomes-20261104/README.md) completes supported,
+contradicted and unknown source decisions and retains an unfinished attempt.
+Its same-cache baseline reaches the same narrow Python-declaration conclusion.
+This is a developer-defined, post-exposure fixture using a synthetic reviewed
+assessment; it does not close the independent utility or combined-cost gates.
+The PageDigest companion control likewise retains its unfavorable request/byte
+result. Existing negative studies and export-time churn remain unchanged.
+
+Acceptance: Python suite, Ruff, captured-source/notice hashes, portable control
+replay and the lightweight public/exporter/consumer gate; receipts live in the
+parent packet's `acceptance/` directory. No package, source or website publication
+is included in this preparation. General growth and provider/model calls are zero.
+
 The review-follow-up deployment exposed transient R2 REST failures that restarted
 whole 1,000-object batches. The bounded operator repair retries individual objects,
 accounts for attempts on failure, preserves the existing authorization and rolling

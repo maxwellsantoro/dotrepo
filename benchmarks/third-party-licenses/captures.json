@@ -1,0 +1,3123 @@
+{
+  "scope": "Tracked source capture directories, repository-source, npm-source and image-source; embedded excerpts in narrative/JSON are not separately inventoried. Existing captures are preserved byte-for-byte. File locations bind material, not legal clearance.",
+  "captures": [
+    {
+      "captureRoot": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/docker/compose",
+      "kind": "repository",
+      "upstream": "docker/compose",
+      "revision": "343bb382d2192b88d84af49971bb5cb99bee268c",
+      "evidence": "benchmarks/ci-evidence/pilot-20261029/plan.json",
+      "files": [
+        {
+          "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/docker/compose/.github/workflows/ci.yml",
+          "sha256": "c59e73dbf1e328c785d8e6de589358d622f6c1964ad223c149f856681fd606b1",
+          "bytes": 14256
+        },
+        {
+          "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/docker/compose/AGENTS.md",
+          "sha256": "2c3364f66a30ea054f3ec3610fa4be37a98e5fc3dbd9654b44f26805c75a236e",
+          "bytes": 3091
+        },
+        {
+          "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/docker/compose/BUILDING.md",
+          "sha256": "68694744374f7b98c6dd284aea8d657267a6f6383e9bd5580f725a3e723a7cd4",
+          "bytes": 2206
+        },
+        {
+          "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/docker/compose/CONTRIBUTING.md",
+          "sha256": "9dfbe9648dbc5a31677bda175a0eb5e577b32d499d6dfaf2fbb09b4a5bd63d1a",
+          "bytes": 18017
+        },
+        {
+          "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/docker/compose/Dockerfile",
+          "sha256": "5f35a0fce55a645e2497f861aba1414f237d532493b4f2bda138c609b28ef44f",
+          "bytes": 7870
+        },
+        {
+          "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/docker/compose/Makefile",
+          "sha256": "927856982fcd81c94dd843743000b8a828baf5af02503d64f7a4c4cc477ac4cc",
+          "bytes": 7050
+        },
+        {
+          "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/docker/compose/README.md",
+          "sha256": "02d853bbccd7d847c65eaea8c07bb14135b3f7904a48abf5898de90d5c75cb8e",
+          "bytes": 3532
+        },
+        {
+          "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/docker/compose/docker-bake.hcl",
+          "sha256": "d8e460f357e8913b41a81458d2c3280f5494368c2f20eaca7ebcb1bdeaeebce5",
+          "bytes": 4836
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/keras-team/keras",
+      "kind": "repository",
+      "upstream": "keras-team/keras",
+      "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+      "evidence": "benchmarks/ci-evidence/pilot-20261029/plan.json",
+      "files": [
+        {
+          "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/keras-team/keras/.github/workflows/actions.yml",
+          "sha256": "ad84280818c4d276d6427a295d48d7547e792994dc28114e352ff4417f357806",
+          "bytes": 1650
+        },
+        {
+          "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/keras-team/keras/.github/workflows/config/jax/keras.json",
+          "sha256": "868f7cc0bfe7494b548ee9b6d0aebb2255528a840f7f1b94723c4d930416d6e4",
+          "bytes": 140
+        },
+        {
+          "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/keras-team/keras/.github/workflows/config/tensorflow/keras.json",
+          "sha256": "15097ddedccd607f99a46bdafe23417e8e82e580ae4e492ad128c7d127cbfd50",
+          "bytes": 121
+        },
+        {
+          "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/keras-team/keras/.github/workflows/config/torch/keras.json",
+          "sha256": "b3c81d0bf76f72bce58df703813c8a87063b8f01e29a4c10cd65a30038ba2352",
+          "bytes": 117
+        },
+        {
+          "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/keras-team/keras/.github/workflows/cpu_tests.yml",
+          "sha256": "c29ad40475b8e8ed2bc144b230fe0d4f2736bfafe1dd2488261cbfc74397fef2",
+          "bytes": 6919
+        },
+        {
+          "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/keras-team/keras/.github/workflows/gpu_tests.yml",
+          "sha256": "6fc16346d13a3e77648fe97b555e499ed04d7e553d598f02d775f7c56561945c",
+          "bytes": 4069
+        },
+        {
+          "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/keras-team/keras/CONTRIBUTING.md",
+          "sha256": "eff1a6349d222979e24b860c88e9577f603300af7658a1ac6fca3140992d0d3d",
+          "bytes": 13606
+        },
+        {
+          "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/keras-team/keras/README.md",
+          "sha256": "6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8",
+          "bytes": 5547
+        },
+        {
+          "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/keras-team/keras/pyproject.toml",
+          "sha256": "51ac5db60612a4c92123980826c1010a6d087c7a64b11a580ebc33c21058d326",
+          "bytes": 2883
+        },
+        {
+          "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/keras-team/keras/requirements-common.txt",
+          "sha256": "3df3a2a15e645bc03082648aec06570a4329fdad189e4b326df0be80d6a7615e",
+          "bytes": 498
+        },
+        {
+          "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/keras-team/keras/requirements-jax-cuda.txt",
+          "sha256": "9e3dd6feb5fbc931c2b60b659421359089bcff75cc0348cace2181843df3c610",
+          "bytes": 247
+        },
+        {
+          "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/keras-team/keras/requirements-tensorflow-cuda.txt",
+          "sha256": "b04883dbf25931c7c2700fd0f0c0d2f7be8c9f28689da680a39f53fcad4d0ab1",
+          "bytes": 268
+        },
+        {
+          "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/keras-team/keras/requirements-torch-cuda.txt",
+          "sha256": "395058aa4facf050ce8c71e2b56e40930871b12966121529a17935ffc2491337",
+          "bytes": 391
+        },
+        {
+          "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/keras-team/keras/requirements.txt",
+          "sha256": "f34e2fa7d9bb205afe36e7cb8a0d53f6e3be39d0dc51b38de0619529e4e919b8",
+          "bytes": 619
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/storytold/photocraft",
+      "kind": "repository",
+      "upstream": "storytold/photocraft",
+      "revision": "5f9b4391874aabc9deb2fcb905267613e4d93ec8",
+      "evidence": "benchmarks/ci-evidence/pilot-20261029/plan.json",
+      "files": [
+        {
+          "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/storytold/photocraft/.cargo/config.toml",
+          "sha256": "c185a2b859850d94af015a9672c1568e1ef73b12612d820f596ef967b835f637",
+          "bytes": 34
+        },
+        {
+          "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/storytold/photocraft/.github/workflows/ci.yml",
+          "sha256": "6e2193555b1a3b99caeb673a48703e8c220b17320497b1ca90ed6e1c69973922",
+          "bytes": 22321
+        },
+        {
+          "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/storytold/photocraft/AGENTS.md",
+          "sha256": "849dcb393d4b20779e0c0f71141fc5b505a181b71f35b497531dbd2e05a6c62a",
+          "bytes": 19338
+        },
+        {
+          "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/storytold/photocraft/Cargo.toml",
+          "sha256": "9e08a93ebf39236315f8aa86a1e129b77c30a17049c1bcbb62a08c19776a85e3",
+          "bytes": 9648
+        },
+        {
+          "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/storytold/photocraft/README.md",
+          "sha256": "620731e78f824f535e75fa39bfb2fef1bb290ac74579f02b58e4c425d1d65377",
+          "bytes": 33536
+        },
+        {
+          "path": "benchmarks/ci-evidence/pilot-20261029/sources/github.com/storytold/photocraft/docs/development.md",
+          "sha256": "ad37558a84aa2f84928eb8b2554988fbed73ca3ac989034fe06bed9603446873",
+          "bytes": 72260
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose",
+      "kind": "repository",
+      "upstream": "docker/compose",
+      "revision": "343bb382d2192b88d84af49971bb5cb99bee268c",
+      "evidence": "benchmarks/ci-evidence/pilot-20261029/plan.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/AGENTS.md",
+          "sha256": "2c3364f66a30ea054f3ec3610fa4be37a98e5fc3dbd9654b44f26805c75a236e",
+          "bytes": 3091
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/BUILDING.md",
+          "sha256": "68694744374f7b98c6dd284aea8d657267a6f6383e9bd5580f725a3e723a7cd4",
+          "bytes": 2206
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/CONTRIBUTING.md",
+          "sha256": "9dfbe9648dbc5a31677bda175a0eb5e577b32d499d6dfaf2fbb09b4a5bd63d1a",
+          "bytes": 18017
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/Dockerfile",
+          "sha256": "5f35a0fce55a645e2497f861aba1414f237d532493b4f2bda138c609b28ef44f",
+          "bytes": 7870
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/Makefile",
+          "sha256": "927856982fcd81c94dd843743000b8a828baf5af02503d64f7a4c4cc477ac4cc",
+          "bytes": 7050
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/README.md",
+          "sha256": "02d853bbccd7d847c65eaea8c07bb14135b3f7904a48abf5898de90d5c75cb8e",
+          "bytes": 3532
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/docker-bake.hcl",
+          "sha256": "d8e460f357e8913b41a81458d2c3280f5494368c2f20eaca7ebcb1bdeaeebce5",
+          "bytes": 4836
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/go.mod",
+          "sha256": "add1d3fc58082dc40ea0ebcc3d2c80b1f4bf99a5452aab2026e8997b511cfb09",
+          "bytes": 6691
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/pkg/api/api.go",
+          "sha256": "317a2470d843493b2c1ed17c7b8140ab35203f5415c224df3a2154b3f3c6603a",
+          "bytes": 32081
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/pkg/compose/apiSocket_test.go",
+          "sha256": "59f26ee95d04a855a27047089929d4cfd77cf52b68f547e3fdb38b139dc1b501",
+          "bytes": 2145
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/relay/README.md",
+          "sha256": "e405fceee8f08bc24d7c9a05cef1d7af9b7f5ab9f3d559fedada46d69f2513d0",
+          "bytes": 2624
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/docker/compose/relay/go.mod",
+          "sha256": "d19203608de73a4b66a822559f9a8460d07a29b2b92c2f4e7665d5ddda9595f9",
+          "bytes": 48
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/golang/go",
+      "kind": "repository",
+      "upstream": "golang/go",
+      "revision": "430d19f07a57ee5ed4e3b1a04b0ab54dd5a24487",
+      "evidence": "benchmarks/head-to-head/e1-qualification-20261029/go/sources.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/golang/go/CONTRIBUTING.md",
+          "sha256": "1244fcb5fbb7f0629bc134e99a90c18e63097a66d034acee0f18eabdd4fb32d9",
+          "bytes": 1337
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/golang/go/README.md",
+          "sha256": "8247b7c5de1e74854aac1a08aa5894444d1d33b4045c70d5cc3367ad0e25c3f3",
+          "bytes": 1454
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/golang/go/doc/README.md",
+          "sha256": "c1bf000e7a873b3afed329c5b9f9c07f7692b1d7fb2bfca2d7600cec8b1d1407",
+          "bytes": 3124
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/golang/go/src/README.vendor",
+          "sha256": "609edcc5e89225798babf6672c3097d950824487756a04725d3c3e9aeaae5edc",
+          "bytes": 3608
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/golang/go/src/all.bash",
+          "sha256": "bbb4df362ad3c52b39e4be6ad82be5c476d360d27faed7d7695e703d7988607e",
+          "bytes": 383
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/golang/go/src/cmd/compile/README.md",
+          "sha256": "019dfb6331c2cac982b9d6695cf59f59b7164e841f69fac200bacf50724d3b2c",
+          "bytes": 18090
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/golang/go/src/cmd/go.mod",
+          "sha256": "4ecc040748718e9b44cb0a3458149280d46d5b751329fd732761363161f8f59c",
+          "bytes": 597
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/golang/go/src/go.mod",
+          "sha256": "7963a76869b68d61117808d4bc74f6d5869d49eb576960a85bc6c27c267a7d7f",
+          "bytes": 236
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/golang/go/src/make.bash",
+          "sha256": "d0da612ae94f9d92d8c0302070eaaa1eb2e2a32709aa567f21737c1f7d01c1ea",
+          "bytes": 7630
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/golang/go/src/run.bash",
+          "sha256": "a62f852277fa572067fd0cf1ef4c045474129312f9a4ff589700ff2e156439db",
+          "bytes": 1943
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/golang/website",
+      "kind": "repository",
+      "upstream": "golang/website",
+      "revision": "b8d34bbe2d9e230cc70ce3e4272dc651f494a188",
+      "evidence": "benchmarks/head-to-head/e1-qualification-20261029/go/sources.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/golang/website/_content/doc/contribute.html",
+          "sha256": "0d36ad35675a6c0256db43154619a60b6609661061713a5930767a40db1388fd",
+          "bytes": 42635
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/golang/website/_content/doc/install/source.html",
+          "sha256": "351bf756f31073cc2ccf7f1ee0eb076572dbc6090b729debce59db3b39a861b7",
+          "bytes": 23605
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/infiniflow/ragflow",
+      "kind": "repository",
+      "upstream": "infiniflow/ragflow",
+      "revision": "9a71c10b090eaca9930df186dd0f9c15ee34a2ce",
+      "evidence": "benchmarks/head-to-head/e1-qualification-20261029/go/sources.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/infiniflow/ragflow/AGENTS.md",
+          "sha256": "ca9570c71572f9d0fa7e5a3b1f963456fa9bef8df5a0910e8cce884cb1b24dc1",
+          "bytes": 15700
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/infiniflow/ragflow/README.md",
+          "sha256": "665333bd40c1f7e32d8ee76d1fafdc574973ecdbc69ccd8ada35af1e3546fde0",
+          "bytes": 17200
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/infiniflow/ragflow/build.sh",
+          "sha256": "ed84e588f484d4756c05f4ded5c02e164750c6c99cc60173a8d58b7088090b6f",
+          "bytes": 65322
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/infiniflow/ragflow/docs/develop/contributing.md",
+          "sha256": "096013d638358bac219bb0bf4b8886ada18cb3358626ae1f723211744a852b7b",
+          "bytes": 2183
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/infiniflow/ragflow/go.mod",
+          "sha256": "2ccf720125223a7acfd3a2f45873b5a0aad5ffd5dd0d8ac877579ab0ac2aa5a2",
+          "bytes": 13376
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/infiniflow/ragflow/internal/admin/default_admin_password_test.go",
+          "sha256": "c2401faeafb3fc302ea84e205f554863195e0bdf37de78bca315e712c40633f8",
+          "bytes": 5569
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/infiniflow/ragflow/internal/development.md",
+          "sha256": "8431e8199ff5255b90942800b4f6db826b44883576ada3da807df66507514670",
+          "bytes": 45597
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/go/sources/github.com/infiniflow/ragflow/tools/scripts/download_dev_deps.py",
+          "sha256": "8d98f21c143c2550ddfa896c888015141b491bd1d37e15839dbe17ac1ee138c6",
+          "bytes": 38055
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/ComposioHQ/awesome-claude-skills",
+      "kind": "repository",
+      "upstream": "ComposioHQ/awesome-claude-skills",
+      "revision": "be2a406907dbc61b73e6827ded415c96139d13a2",
+      "evidence": "benchmarks/head-to-head/e1-qualification-20261029/python/sources.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/ComposioHQ/awesome-claude-skills/README.md",
+          "sha256": "e693f2701840f26fb04c3058d55215f2c6575fff7f1c197ada5b64e2f7ee0c12",
+          "bytes": 40668
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/docling-project/docling",
+      "kind": "repository",
+      "upstream": "docling-project/docling",
+      "revision": "9051777f9e420fa3a37df77425b08f22d0bf5981",
+      "evidence": "benchmarks/head-to-head/e1-qualification-20261029/python/sources.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/docling-project/docling/CONTRIBUTING.md",
+          "sha256": "a7bf72c398dfaf8e73041bbb4f9c53492fafa3a96b7370c02e09557487240ad0",
+          "bytes": 2864
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/docling-project/docling/Makefile",
+          "sha256": "6e62438db5457140fef368c29f3a434cd4ac07a5523d5dae168b5ad463416c13",
+          "bytes": 2753
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/docling-project/docling/README.md",
+          "sha256": "ce605634509dc87d79182131ad001e5fddf6053963b9045b971c6e87e6b9bfa1",
+          "bytes": 8589
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/docling-project/docling/docling/__init__.py",
+          "sha256": "e91015144f62533383d579d01a3f219c6ede99ab09f02d12e343801421bdce89",
+          "bytes": 798
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/docling-project/docling/packages/docling/pyproject.toml",
+          "sha256": "223be1ab56a0cd89e1a6272fdbb33ab17e02b31f0a8942fb9184a8807312efb2",
+          "bytes": 3652
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/docling-project/docling/pyproject.toml",
+          "sha256": "f6c865f36fc4c065c70788980d173dccda251dfb7bfb1c0be9a0f5e47dc52c5b",
+          "bytes": 16345
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/docling-project/docling/tests/conftest.py",
+          "sha256": "e4fd22f707431935359330a17e2566b1a926d75e5a49d31d8be7208aa0c44f78",
+          "bytes": 442
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras",
+      "kind": "repository",
+      "upstream": "keras-team/keras",
+      "revision": "7efab4a60f5930fa81b0db15ed4ec6e4925e0c45",
+      "evidence": "benchmarks/ci-evidence/pilot-20261029/plan.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/CONTRIBUTING.md",
+          "sha256": "eff1a6349d222979e24b860c88e9577f603300af7658a1ac6fca3140992d0d3d",
+          "bytes": 13606
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/README.md",
+          "sha256": "6b91780eb3d4ae0a0e0e1407b2498816a002ddeec7082f6f750dad92b47822c8",
+          "bytes": 5547
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/conftest.py",
+          "sha256": "36df082dea9e45f405a2b915e16800d7885c700f1580cb97914a6412542b0ba9",
+          "bytes": 4230
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/keras/api/__init__.py",
+          "sha256": "3e0df362a6b9bb3e5253858af4ca306107334be94addbee75a14f3c9f9ea7429",
+          "bytes": 2951
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/keras/src/__init__.py",
+          "sha256": "1a2e12ec4882324134dcf6dd18da4575a518c92583b3f15c009f136b3f58d411",
+          "bytes": 684
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/keras/src/losses/losses_test.py",
+          "sha256": "3c8c4fe48d626eb6985b13c41f427836f70c3fb4155087324af1b638a8764547",
+          "bytes": 114961
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/pyproject.toml",
+          "sha256": "51ac5db60612a4c92123980826c1010a6d087c7a64b11a580ebc33c21058d326",
+          "bytes": 2883
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/requirements-common.txt",
+          "sha256": "3df3a2a15e645bc03082648aec06570a4329fdad189e4b326df0be80d6a7615e",
+          "bytes": 498
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/keras-team/keras/requirements.txt",
+          "sha256": "f34e2fa7d9bb205afe36e7cb8a0d53f6e3be39d0dc51b38de0619529e4e919b8",
+          "bytes": 619
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/ultralytics/ultralytics",
+      "kind": "repository",
+      "upstream": "ultralytics/ultralytics",
+      "revision": "922563eab42b778445e55a2edbabb6974eed8e4b",
+      "evidence": "benchmarks/head-to-head/e1-qualification-20261029/python/sources.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/ultralytics/ultralytics/.github/workflows/ci.yml",
+          "sha256": "48fe1abd404a10668991d92173cc4691ed3559982ba5cae6fe6f386be2e022d9",
+          "bytes": 30147
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/ultralytics/ultralytics/AGENTS.md",
+          "sha256": "e042609580ded43949f9c46245ac27f6c8ca92b5eae5aedee100526f4e42030b",
+          "bytes": 13549
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/ultralytics/ultralytics/CONTRIBUTING.md",
+          "sha256": "aab51ff10a0aadb6de1c33338500e2aefbf22bd78b88e963beb01570b22af5e0",
+          "bytes": 21026
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/ultralytics/ultralytics/README.md",
+          "sha256": "c2ea9cef8b2bfd9af7b50e3fd949449dedf6edec0a650c227b999cda62396840",
+          "bytes": 38565
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/ultralytics/ultralytics/pyproject.toml",
+          "sha256": "93ddc8b7dd14943e521dd3db8d0ef80b8bb9a168db8d202bdb5e848ce53f3bd7",
+          "bytes": 12810
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/ultralytics/ultralytics/tests/__init__.py",
+          "sha256": "860adb8c8dddb2393d468f682791d3d24938aa64ecc4624e8a30d62929412589",
+          "bytes": 1512
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/ultralytics/ultralytics/tests/cache_test_assets.py",
+          "sha256": "f556027843fd2a4094df8e4fe8d8e71d77fd3dac41ef4cfebce25f50fd7fcb8c",
+          "bytes": 3558
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/ultralytics/ultralytics/tests/conftest.py",
+          "sha256": "e9218bfcf73337baf1bdfddd4cab6cb20632d86e2bb5cd93f597cb1f3adb2317",
+          "bytes": 5925
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/ultralytics/ultralytics/ultralytics/__init__.py",
+          "sha256": "e636de305080e57472148bae1d8cc85ad0c577d5ee0121e59a01a0acdb523acf",
+          "bytes": 1855
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/ultralytics/ultralytics/ultralytics/py.typed",
+          "sha256": "95aebb28195b8d737effe0df18d71d39c8d8ba6569286fd3930fbc9f9767181e",
+          "bytes": 8
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/storytold/photocraft",
+      "kind": "repository",
+      "upstream": "storytold/photocraft",
+      "revision": "5f9b4391874aabc9deb2fcb905267613e4d93ec8",
+      "evidence": "benchmarks/ci-evidence/pilot-20261029/plan.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/storytold/photocraft/.cargo/config.toml",
+          "sha256": "c185a2b859850d94af015a9672c1568e1ef73b12612d820f596ef967b835f637",
+          "bytes": 34
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/storytold/photocraft/AGENTS.md",
+          "sha256": "849dcb393d4b20779e0c0f71141fc5b505a181b71f35b497531dbd2e05a6c62a",
+          "bytes": 19338
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/storytold/photocraft/Cargo.toml",
+          "sha256": "9e08a93ebf39236315f8aa86a1e129b77c30a17049c1bcbb62a08c19776a85e3",
+          "bytes": 9648
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/storytold/photocraft/README.md",
+          "sha256": "620731e78f824f535e75fa39bfb2fef1bb290ac74579f02b58e4c425d1d65377",
+          "bytes": 33536
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/storytold/photocraft/apps/photocraft/Cargo.toml",
+          "sha256": "e489011fd26b5855ef9167454b321f3e951e2ecc8ac3751eba2320d90f83363b",
+          "bytes": 6043
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/storytold/photocraft/apps/photocraft/src/main.rs",
+          "sha256": "8fb06954e2f6db6983cc7167a6874ba407c5ecc9796d1f6e9596dca081ee9efc",
+          "bytes": 55780
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/storytold/photocraft/docs/development.md",
+          "sha256": "ad37558a84aa2f84928eb8b2554988fbed73ca3ac989034fe06bed9603446873",
+          "bytes": 72260
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/warpdotdev/warp",
+      "kind": "repository",
+      "upstream": "warpdotdev/warp",
+      "revision": "5a55a2aca77339ad75637bed650352369ee7fcb9",
+      "evidence": "benchmarks/head-to-head/e1-qualification-20261029/sources.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/warpdotdev/warp/.cargo/config.toml",
+          "sha256": "28433f6ab539cdad8e18d6905ba1609e9414f238ad3ac1f732339196b94c6fd8",
+          "bytes": 969
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/warpdotdev/warp/AGENTS.md",
+          "sha256": "c547e10474dc98c4e301e8790e5da9258fd3453874f9f11312b88ca59ac11b2f",
+          "bytes": 19758
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/warpdotdev/warp/CONTRIBUTING.md",
+          "sha256": "72f64aa3d8d6202c26c789557306e2ad341185df3ac3eb9024547e40b382e953",
+          "bytes": 17313
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/warpdotdev/warp/Cargo.toml",
+          "sha256": "98a7696ced9fc1bafd76be0fa99d217d642d71894e5b48984d22b6d2d77ac7f0",
+          "bytes": 21835
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/warpdotdev/warp/README.md",
+          "sha256": "9fad485973685dd86187fafd517b02121695a9cf6729c1bb96ad45b19a94b09b",
+          "bytes": 6026
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/warpdotdev/warp/app/Cargo.toml",
+          "sha256": "240691ed0fcfe4f86933061c0a938e0d1b63cba94e5783b1c405a2275b538706",
+          "bytes": 34351
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/warpdotdev/warp/rust-toolchain.toml",
+          "sha256": "8008c4269290b7fb62f8d4cc8b5638cb86298f336721ba9f839110474756e85e",
+          "bytes": 103
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/warpdotdev/warp/script/bootstrap",
+          "sha256": "9ce2067212b456441afc8803b4b944f3067a5654c1e540e5845122b8d16d6127",
+          "bytes": 7109
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/warpdotdev/warp/script/install_cargo_build_deps",
+          "sha256": "202900424979302dfab23e0dca2d6cbec7d552b76f5c6675398542003bc503b0",
+          "bytes": 825
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/warpdotdev/warp/script/install_cargo_test_deps",
+          "sha256": "0a727672a05329b7f9c11c6ea9f9a0426d53442373a6d754dbca48f2293db2b4",
+          "bytes": 576
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/warpdotdev/warp/script/linux/bootstrap",
+          "sha256": "53b2fd3b7228f24821484a9ff7006214d52cb75114a16f2f76a53291cc969de9",
+          "bytes": 767
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/warpdotdev/warp/script/macos/bootstrap",
+          "sha256": "223fbbf61115efdcfe5dc572a04d3c57492553786552c6aa3ac283f2beebf07f",
+          "bytes": 3458
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/warpdotdev/warp/script/presubmit",
+          "sha256": "5295a3577535a66a3258ae3370e9b970ac836111584616254a00790f2e20164a",
+          "bytes": 2381
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/warpdotdev/warp/script/windows/bootstrap.ps1",
+          "sha256": "7f93ee7cdeb72a1d74a1e17eee4f5ec9c3e19dee6287c703862639941905f5fd",
+          "bytes": 11037
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/zellij-org/zellij",
+      "kind": "repository",
+      "upstream": "zellij-org/zellij",
+      "revision": "1f3df933978e00c246553070310175c392fcfe4f",
+      "evidence": "benchmarks/head-to-head/e1-qualification-20261029/sources.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/zellij-org/zellij/.cargo/config.toml",
+          "sha256": "d42813632ce542b468c718473de1a4a6c8f6d302c534717a2f19b7aef10dbc3e",
+          "bytes": 301
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/zellij-org/zellij/CONTRIBUTING.md",
+          "sha256": "2c4575e7a3575609fdde406b8c87f3df53802460dbfb03b4253f4330ab37f63a",
+          "bytes": 12601
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/zellij-org/zellij/Cargo.toml",
+          "sha256": "c02efc9801eefadf579135c968cafe27d2d5e12b86ac5e020ec39fe2130829a2",
+          "bytes": 8638
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/zellij-org/zellij/README.md",
+          "sha256": "b069efb98ef8cec100cc5b32debc1dc4a912f9d57ef11279a261a8a3c9548583",
+          "bytes": 6724
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/zellij-org/zellij/default-plugins/about/Cargo.toml",
+          "sha256": "fb8e9751be70f93df895d6f37cf0f23c6ad55d696c1f82723789dddec467ff8f",
+          "bytes": 228
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/zellij-org/zellij/default-plugins/about/src/keybindings.rs",
+          "sha256": "a3508e89632ddd6e472acc903c96033fe93a1bc3875b19ea7dd2eaf47f5287f3",
+          "bytes": 14406
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/zellij-org/zellij/default-plugins/about/src/main.rs",
+          "sha256": "be43bccfffe92e0a5843128174ca16b10cb04e4745496c6c69906242e2cd4670",
+          "bytes": 27389
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/zellij-org/zellij/default-plugins/about/src/onboarding.rs",
+          "sha256": "968b57113792fdd3bee06e9ffec88afe4714347a40a90c0474684b653ed93852",
+          "bytes": 19380
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/zellij-org/zellij/rust-toolchain.toml",
+          "sha256": "733cf0884a5f62e74d4362b290704b572061e71e9f7989096aef165f99de0fdf",
+          "bytes": 317
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/zellij-org/zellij/xtask/src/build.rs",
+          "sha256": "ae5fcc92076183ff7e1fea0555576ea660933721600af3d00ba7e824a46cc378",
+          "bytes": 11812
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/zellij-org/zellij/xtask/src/main.rs",
+          "sha256": "5e213118f58efae8bd039ff4436dc6fc4e8b4aeaa44472dba764101643b30df3",
+          "bytes": 7625
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/sources/github.com/zellij-org/zellij/xtask/src/test.rs",
+          "sha256": "561daa9a37efaf44ba285aa88669fb9228de402696bb25e310340238b021e0cb",
+          "bytes": 5242
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/Eugeny/tabby",
+      "kind": "repository",
+      "upstream": "Eugeny/tabby",
+      "revision": "467ce8ebfa467fb88cf6d154c9a5891e3d3647f0",
+      "evidence": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/Eugeny/tabby/HACKING.md",
+          "sha256": "8244eec69145ca5e2915e8bc51186e0c125ff9e317563043ed7b82cd78c847bd",
+          "bytes": 4744
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/Eugeny/tabby/README.md",
+          "sha256": "afda31192ba70317f3a167ef9cb7efcd53226e127c503ddd9f6b6d248133a834",
+          "bytes": 62060
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/Eugeny/tabby/package.json",
+          "sha256": "4dec36936e3de66ba0ee3caf78ac5da509704db84e35c835de2c8418be39cc7e",
+          "bytes": 3535
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/Eugeny/tabby/scripts/test-register.mjs",
+          "sha256": "bff57326a660a42540d755520fddf9623abfb3adfe4baae7f47a2738031c00af",
+          "bytes": 311
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/Eugeny/tabby/tabby-electron/package.json",
+          "sha256": "14dffa3f6ab3964acbec3b7fa2297ef8409226be20dd5feef23247f8159c4f56",
+          "bytes": 686
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/Eugeny/tabby/tabby-electron/src/index.ts",
+          "sha256": "8e654fd6f5edbde0ea0cb71782d83fbcf843e27e29eddea34e43f214c387d429",
+          "bytes": 9285
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/RocketChat/Rocket.Chat",
+      "kind": "repository",
+      "upstream": "RocketChat/Rocket.Chat",
+      "revision": "7a174fd05604dac39af95f76ea9db73db2b3ca5f",
+      "evidence": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/RocketChat/Rocket.Chat/README.md",
+          "sha256": "f2846b7430368be25cc9fc1103cf59e82402ff48c1a205b796a7b8ddd60947e3",
+          "bytes": 8913
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/RocketChat/Rocket.Chat/package.json",
+          "sha256": "93e020db15ace951b7b58a948849b12d4875d1d6b0d2b68309c8df5a807fe307",
+          "bytes": 9440
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/agalwood/Motrix",
+      "kind": "repository",
+      "upstream": "agalwood/Motrix",
+      "revision": "6aae74432187f689ffa0c8019f942ee2cb2cf91a",
+      "evidence": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/agalwood/Motrix/AGENTS.md",
+          "sha256": "929cc503e2686806d6f72cc7e88ef46480f2203cb886b2263c1f576ce1391985",
+          "bytes": 694
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/agalwood/Motrix/CLAUDE.md",
+          "sha256": "d101f23fe120744d650994a725b7233396ca8af87ce15317debc63d6d82c48f0",
+          "bytes": 2704
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/agalwood/Motrix/CONTRIBUTING.md",
+          "sha256": "3d44d6983920981a4de26a943c64c76517da635d028ced9fe3d6edc22622244e",
+          "bytes": 9250
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/agalwood/Motrix/README.md",
+          "sha256": "369f356f974b4cc998fe6efee13ae4ebaa00f716808834a9832251819f94bf7e",
+          "bytes": 17508
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/agalwood/Motrix/package.json",
+          "sha256": "31793e4b5760930e664fb2b9a300f2afc356dd61bd7d015fb96e0760fd8b8af6",
+          "bytes": 9775
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/agalwood/Motrix/packages/finalize-fs/Cargo.toml",
+          "sha256": "7afb18a80e067624d04f6452356327c7eda9773b0419efc0c2087d22523b6cee",
+          "bytes": 700
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/agalwood/Motrix/packages/native-host/Cargo.toml",
+          "sha256": "8c1fa5b14a24f9bb73e4f97c9007ce3b1c0a7e29057532fa403adec98e8340b0",
+          "bytes": 1215
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/agalwood/Motrix/packages/native-host/package.json",
+          "sha256": "d4f55d1a16eaed509c01ffd0fcaf2c07915da6344588f780ed7d44ebd50b5524",
+          "bytes": 312
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/agalwood/Motrix/packages/safari-bootstrap/Package.swift",
+          "sha256": "c42af614af3cd6e9b7af4a71c109df3752051ea25c57ceee6d91c8b324a229ce",
+          "bytes": 376
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/agalwood/Motrix/pnpm-workspace.yaml",
+          "sha256": "37a2d1dae6b3cf9fb774b5042ca8e025b4ddb22d6329bbcac0558ba7ca0b0c0d",
+          "bytes": 4241
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/agalwood/Motrix/scripts/ensure-native-abi.mjs",
+          "sha256": "9d1d93b1f8b07665eee0f86b5defe924a3cbea73cd3cc2fd4b39d9cc7775b575",
+          "bytes": 5829
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/agalwood/Motrix/src/core/log-redact.test.ts",
+          "sha256": "f78ca797164723d3377d193b23f49ae1de16f82f20df5468e53aa63843f979c6",
+          "bytes": 22698
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/agalwood/Motrix/tests/setup/build-worker.ts",
+          "sha256": "7eef0608c00024a7fda941f35064d80253b16881de501b5abdbe24b47d5bf2f7",
+          "bytes": 2464
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/agalwood/Motrix/vitest.config.ts",
+          "sha256": "cd37580a83b2a57f651a626670858c3712b2309bab7484081a76edd1a05d8cf1",
+          "bytes": 1459
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/pixijs/pixijs",
+      "kind": "repository",
+      "upstream": "pixijs/pixijs",
+      "revision": "2e8cacbe1ed4ed0fc31d5b59b9895c811ac0e003",
+      "evidence": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/pixijs/pixijs/.configs/jest.config.js",
+          "sha256": "b8fa97316d2cf32578b106ebd7467a717ca9b780c227d9ded35b8fb1df7ef177",
+          "bytes": 1434
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/pixijs/pixijs/.github/CONTRIBUTING.md",
+          "sha256": "0c174f4aa2eae635f24137871297ac6f2b5a3268c67daed80b33591b65c0b897",
+          "bytes": 6441
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/pixijs/pixijs/README.md",
+          "sha256": "b3cb23be81679ac800387f85ed094131addf9226136a2133dbdd7c8922e6e088",
+          "bytes": 5008
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/pixijs/pixijs/examples/package.json",
+          "sha256": "1119028e6be9da2b735f401c3db58623ef22329218da6da24f139813571bc23e",
+          "bytes": 195
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/pixijs/pixijs/package.json",
+          "sha256": "2bb6b7570ca5f4a062609b34fd16fecfa2a76e8c3599c67a5b996a276eabaa32",
+          "bytes": 12404
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/pixijs/pixijs/playground/package.json",
+          "sha256": "6f52ef792a217f5714e38e48706b7c2075b0308e672075e06ed504a8b59c345e",
+          "bytes": 329
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/pixijs/pixijs/scripts/README.md",
+          "sha256": "42edd71adf3f04eed49fe665d1e3c2d73d59d4c25fe7f76f491f619116c2c475",
+          "bytes": 3496
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/pixijs/pixijs/scripts/jest/jest-global-setup.ts",
+          "sha256": "b637d04e4830a80cad7d7a93d5ff54cfc4d1506a42364c4cd27eec4413bd2828",
+          "bytes": 1222
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/pixijs/pixijs/scripts/test.mts",
+          "sha256": "f93cd1f44b5e172e695c25e413620bf653ded7aefec206e93de63a80aecc51d2",
+          "bytes": 4128
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/yangshun/tech-interview-handbook",
+      "kind": "repository",
+      "upstream": "yangshun/tech-interview-handbook",
+      "revision": "e1d28e8886c0b6ff3e50da991ce0e895134ddc59",
+      "evidence": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/yangshun/tech-interview-handbook/CONTRIBUTING.md",
+          "sha256": "5e0bfb974e13f9f5c29e6eb6c2e92ca0bda0e30943bc594d61504826a5ec57ce",
+          "bytes": 427
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/yangshun/tech-interview-handbook/README.md",
+          "sha256": "31b808a2c614995c40005621825f395c8fe822018bc2944194077e2d84db792d",
+          "bytes": 10615
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-qualification-20261029/typescript/sources/github.com/yangshun/tech-interview-handbook/package.json",
+          "sha256": "26e66890735b1c86df7fe99c7b257e32cad9676a7821c044b364e1002c170a9c",
+          "bytes": 698
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/e1-zellij-establishment-source-20261029/sources",
+      "kind": "repository",
+      "upstream": "zellij-org/zellij",
+      "revision": "1f3df933978e00c246553070310175c392fcfe4f",
+      "evidence": "benchmarks/head-to-head/e1-qualification-20261029/sources.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/e1-zellij-establishment-source-20261029/sources/xtask/src/flags.rs.txt",
+          "sha256": "ab0542ae1bad28ee9f56386868e2f1a8eda897c1dc05e0425b8d0933ca3abf78",
+          "bytes": 7486
+        },
+        {
+          "path": "benchmarks/head-to-head/e1-zellij-establishment-source-20261029/sources/xtask/src/metadata.rs.txt",
+          "sha256": "861f4974828c70422a0098676cddab2f3446e5c84241297270d8d9766e998154",
+          "bytes": 7456
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/666ghj/MiroFish",
+      "kind": "repository",
+      "upstream": "666ghj/MiroFish",
+      "revision": "7657031ac01184afe2cb220f5ee3545573b5e843",
+      "evidence": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/666ghj/MiroFish/_commit.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/666ghj/MiroFish/.env.example",
+          "sha256": "18a0153f70a5f29ca0608b3796054b275631a5bfd899fc477a33a369ca7b398e",
+          "bytes": 715
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/666ghj/MiroFish/README.md",
+          "sha256": "5109feef87d494dd77c0eb225486d4278fe3eb61b303574600bcf8c3c339d034",
+          "bytes": 8958
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/666ghj/MiroFish/_commit.json",
+          "sha256": "5d5544cc2a0ca4b64d403e0a2a28f725bbf50691353c9e7dcde094c709612811",
+          "bytes": 88936
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/666ghj/MiroFish/_directory-backend.json",
+          "sha256": "69246f901eb4827e70fbc3d5c185bda9f47d4260271c931c727249d789ae4b73",
+          "bytes": 6250
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/666ghj/MiroFish/_directory-backend_tests.json",
+          "sha256": "3bbf5b5980bffbc4356a67b66a432e3bf3543c6c976ad0c23c532e7d8ed6fd19",
+          "bytes": 20138
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/666ghj/MiroFish/_directory-tests.json",
+          "sha256": "bce0b716eb3e36e5b6a29794617aeb50ab5a30cde2501c402740345a349f3218",
+          "bytes": 2131
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/666ghj/MiroFish/_repository.json",
+          "sha256": "58025c37404a774146f8865577ffb1112e8dd3e2197ec2c05e0eeb559cc44b19",
+          "bytes": 5430
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/666ghj/MiroFish/_root-directory.json",
+          "sha256": "2a116dca4b924d688a60385f6794fb48c7ca9df66440f985095c9252b25f7148",
+          "bytes": 14612
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/666ghj/MiroFish/backend/pyproject.toml",
+          "sha256": "e923fa98056d1b6085ab789993a1d05f31bfc1e8cbbb6b9aa17d49663253c1a2",
+          "bytes": 1080
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/666ghj/MiroFish/package.json",
+          "sha256": "f2b8cc90bc21b0b4990d5192b5e7c09161982760dede52cb743862d908526715",
+          "bytes": 702
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/666ghj/MiroFish/tests/test_local_star_count_fetch.py",
+          "sha256": "f9368e145018b644f28104f15012ccbe99d124647966ee225bd4153f52dbb173",
+          "bytes": 13843
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/GyulyVGC/sniffnet",
+      "kind": "repository",
+      "upstream": "GyulyVGC/sniffnet",
+      "revision": "ab4bf739d46448436cb68933bb8260ee264449d5",
+      "evidence": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/GyulyVGC/sniffnet/_commit.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/GyulyVGC/sniffnet/.github/workflows/rust.yml",
+          "sha256": "86ebf0128d5409254c3c131f4f42d028b0f5a48589277734a1d58c39f539da81",
+          "bytes": 2645
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/GyulyVGC/sniffnet/CONTRIBUTING.md",
+          "sha256": "d18e36057c949d113b008663b6e50049372cbd79874f36910458b397a24ee2b8",
+          "bytes": 2965
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/GyulyVGC/sniffnet/Cargo.toml",
+          "sha256": "407defabb487f3e15b0f10ca650a78b39557f296e6c03b0c7b140c64aa09f5a8",
+          "bytes": 13850
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/GyulyVGC/sniffnet/README.md",
+          "sha256": "1398d3965ace11e083a2dd7cb4e7aad12c5d4d13a988ac81eecfdbda3a14fc45",
+          "bytes": 13303
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/GyulyVGC/sniffnet/_commit.json",
+          "sha256": "7b61868a6639feb85c8d3d2bb80a978851a75be6f81477e2ca93263cf996ebed",
+          "bytes": 22058
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/GyulyVGC/sniffnet/_directory-.github_workflows.json",
+          "sha256": "cc69cda482de3cebd8b6fb58b3ff40f5f2e3305085d280e83425b75e516d3c9b",
+          "bytes": 6117
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/GyulyVGC/sniffnet/_directory-lib_sniffnet-packet-parser_src.json",
+          "sha256": "dccdd61c728ce15b1dbe2e45a24aa2dd6330036e4707a7f3681a5fda62f21d41",
+          "bytes": 8837
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/GyulyVGC/sniffnet/_directory.json",
+          "sha256": "dad80c9101e8314c3c4ea9e12c0b243cb4004e6434fa9c058549897212e01eb7",
+          "bytes": 27170
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/GyulyVGC/sniffnet/_repository.json",
+          "sha256": "48cc8970cd7a65b758c861b5d6573eb19da3b69900b4edb3d5cd962354201270",
+          "bytes": 5493
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/GyulyVGC/sniffnet/lib/sniffnet-packet-parser/Cargo.toml",
+          "sha256": "3b0a80798ac6377085087cf17efeaad377288ffc20d663e42729d75455f4c921",
+          "bytes": 764
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/GyulyVGC/sniffnet/lib/sniffnet-packet-parser/README.md",
+          "sha256": "eb5c07622519eb01c5a879cb8393635a9f37343b6e4164d4a2c83c597b1adde0",
+          "bytes": 326
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/GyulyVGC/sniffnet/lib/sniffnet-packet-parser/src/arp_type.rs",
+          "sha256": "40c632390c9beb01ac44dbbbc71884756898d89593f87598e931ced18d930fd4",
+          "bytes": 823
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/GyulyVGC/sniffnet/lib/sniffnet-packet-parser/src/headers.rs",
+          "sha256": "911b90d0a5269996637260f8b08af237c567b18f841ffd04a078f297271a24e3",
+          "bytes": 3675
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/GyulyVGC/sniffnet/lib/sniffnet-packet-parser/src/icmp_type.rs",
+          "sha256": "5cfc14b72b52a4ad392a373b115aa72d50bf193b8e6cea999a739527281c96ee",
+          "bytes": 12702
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/GyulyVGC/sniffnet/lib/sniffnet-packet-parser/src/igmp_type.rs",
+          "sha256": "909a354e97054dad7cc87b5b7c0cbbeaf9d92e3dbe9533b8a61860d2d4108cd9",
+          "bytes": 2807
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/GyulyVGC/sniffnet/lib/sniffnet-packet-parser/src/lib.rs",
+          "sha256": "6acb52f1e14787180eda62a6ea4bb32901109634b2fb6fb739d94e35cc711b6d",
+          "bytes": 690
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/GyulyVGC/sniffnet/lib/sniffnet-packet-parser/src/link_type.rs",
+          "sha256": "e9904642a7b23d63f7b3e265868a2f26ca766e74af3883640d59824418b20ec3",
+          "bytes": 3051
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/GyulyVGC/sniffnet/lib/sniffnet-packet-parser/src/packet.rs",
+          "sha256": "25477d31995ab889ffd3e35fcb807ec5050aa99a5b1322888096a5ce86516675",
+          "bytes": 8783
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/GyulyVGC/sniffnet/lib/sniffnet-packet-parser/src/protocol.rs",
+          "sha256": "4facc04e89f425fe6b3fa8f5e6b95b793c56716c913ab4af8cc68b9b72a2f8b3",
+          "bytes": 1984
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/OpenHands/OpenHands",
+      "kind": "repository",
+      "upstream": "OpenHands/OpenHands",
+      "revision": "2875056f93d6eebcd887f64ae557258a7b0b0108",
+      "evidence": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/OpenHands/OpenHands/_commit.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/OpenHands/OpenHands/README.md",
+          "sha256": "7e286c5b311d5d6160949f786f336cea4f01b4bee82f62689a146d38160009b8",
+          "bytes": 13268
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/OpenHands/OpenHands/__tests__/bin/agent-canvas.test.ts",
+          "sha256": "4d164cdc40913310baadb76a3fc04031a80bfb6de8cb4698fbefaed2b7c01b10",
+          "bytes": 3922
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/OpenHands/OpenHands/_commit.json",
+          "sha256": "b47e0e66903c2eb6f4c8c79a90f76c4ccfddfc1f22306867ff59e30f06a76cb2",
+          "bytes": 31328
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/OpenHands/OpenHands/_directory-__tests__.json",
+          "sha256": "038fe6203f938fdf097609c21b5e41a0780990f2f5a694b6d42421cc845f0fdd",
+          "bytes": 32475
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/OpenHands/OpenHands/_directory-__tests___bin.json",
+          "sha256": "44bda1150fc8eae46ab85a650443bd97afa3b49888652c498b6aa4844f463ff8",
+          "bytes": 1085
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/OpenHands/OpenHands/_directory-bin.json",
+          "sha256": "d9d53ac9d9cab73861aece66155d7b8060243e1888a776d08c0433aa1308e0c6",
+          "bytes": 997
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/OpenHands/OpenHands/_directory-docs.json",
+          "sha256": "cab6d03cad61b84eea443943b86554ded1a0ae4e135c8db0998f677c417ba9de",
+          "bytes": 8871
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/OpenHands/OpenHands/_directory-src.json",
+          "sha256": "3b7f1bb591ab63f304b05db577e4fdd7c51fd24f1756221e87587a7b580f6ccf",
+          "bytes": 30378
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/OpenHands/OpenHands/_repository.json",
+          "sha256": "8d990f7ace1f901c0ccae8d8a787dd692bd94ccf100d09f3319071bbd65404b6",
+          "bytes": 6432
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/OpenHands/OpenHands/_root-directory.json",
+          "sha256": "0c285ce15c3941f458d1b84a2cba7937da9fcfcdf555173b0457913e37f015d3",
+          "bytes": 49252
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/OpenHands/OpenHands/bin/agent-canvas.mjs",
+          "sha256": "a56c5e00c3b4a6cf0cb5698a7a2939be294221fb02bca61bc95040f610a2dee8",
+          "bytes": 6146
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/OpenHands/OpenHands/docs/CANVAS_EXTENSIONS_TESTING.md",
+          "sha256": "8cf6de592ec77ac8492b573abd9dcfacd60de8f0bc43e64cfec280e27d8fbce8",
+          "bytes": 3692
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/OpenHands/OpenHands/docs/DEVELOPMENT.md",
+          "sha256": "6d20ab80fec02ae10297f3bf40c369e32c41496e70f4b76770f45164b896a794",
+          "bytes": 26106
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/OpenHands/OpenHands/docs/TESTING_MATRIX.md",
+          "sha256": "5a606144c7a85548ddb3692b4d4d05e72224745effc8653089bbcb8ce45a2efb",
+          "bytes": 3316
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/OpenHands/OpenHands/docs/architecture.md",
+          "sha256": "9f806944e4b13f4cc714da3f86f335b5f5bfcdeb49b9cf68ccaced2aaff3f84c",
+          "bytes": 4404
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/OpenHands/OpenHands/package.json",
+          "sha256": "c2c66e43c1fb5e9b089586f9fd2014bf2c83d829d5419e458b954176666c3d48",
+          "bytes": 9778
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/OpenHands/OpenHands/vite.config.ts",
+          "sha256": "5678c862cca55087c477eccd609396c644a2c181d33a4feb7d542c4803d9190d",
+          "bytes": 21271
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/beego/beego",
+      "kind": "repository",
+      "upstream": "beego/beego",
+      "revision": "939cfde380bb9f15844ad633b84f037f7da21584",
+      "evidence": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/beego/beego/_commit.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/beego/beego/.github/workflows/test.yml",
+          "sha256": "fd10fbbb296fe567bf5887aed18c79df69f5292c9e82e3e8eba9ec203074733b",
+          "bytes": 5401
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/beego/beego/CONTRIBUTING.md",
+          "sha256": "7ef643a2a57ff10ac192c07804f361ecac617531f0449a0f43522d65c70b6dc7",
+          "bytes": 3276
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/beego/beego/Makefile",
+          "sha256": "3509262c5f353d2e976612ab4d1be8079be6d3ba6b387868be992e816b35c368",
+          "bytes": 2920
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/beego/beego/README.md",
+          "sha256": "7d725a39b579fdce22974f2493f3c075f919698f7d03f3d580d6d18d0f195b73",
+          "bytes": 3414
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/beego/beego/_commit.json",
+          "sha256": "9b7713b827864754f0db762288988635beff47f8cbfc32e1632cff07617a790a",
+          "bytes": 4244
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/beego/beego/_directory-client.json",
+          "sha256": "5a6d36e97085afdfeb06054ec81d3adcda120873338a2582dcde66b47440cc78",
+          "bytes": 2341
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/beego/beego/_directory-client_cache.json",
+          "sha256": "a418eaed99ec82ad21c0cc4b88e1b0c42ffe5109c2552f85ef13932689df610b",
+          "bytes": 25255
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/beego/beego/_directory-client_cache_memcache.json",
+          "sha256": "4a56e46d07910801a63bc60cf06628047446f751de83c1dc295aaae88586ac20",
+          "bytes": 2062
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/beego/beego/_directory-client_cache_redis.json",
+          "sha256": "f1465df030ff1d6d19a47f605251b946b91ac1bdd3aefcf979d3fb9622290965",
+          "bytes": 1984
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/beego/beego/_directory-client_cache_ssdb.json",
+          "sha256": "a614b7085adeb67139b5650c982701352647eede9517e5a922fa4bd867dacf63",
+          "bytes": 1958
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/beego/beego/_repository.json",
+          "sha256": "829fa2c7bba172b5276c2c45e43a2812163bad72e4c64438f13cd7f03326002c",
+          "bytes": 5935
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/beego/beego/_root-directory.json",
+          "sha256": "f0e38d6bd10cc290bde23ac17165984b35c6481dfbf5b72ddbf7e02fc0369393",
+          "bytes": 16758
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/beego/beego/client/cache/cache.go",
+          "sha256": "e08a32a7359457a83dd319390ab2187d2b61a8b50398fdad4786890abd880eb2",
+          "bytes": 3505
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/beego/beego/client/cache/cache_test.go",
+          "sha256": "0a5daec014a6bc74798ac22b9abbd5d69f9746c4c540ac14bbadc585693a9fc2",
+          "bytes": 6264
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/beego/beego/client/cache/memcache/memcache_test.go",
+          "sha256": "350cc2a54c36ee3bc47c430aba6829a5ab2e14ac1c530aad46fee6c4d8ff9494",
+          "bytes": 6184
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/beego/beego/client/cache/redis/redis_test.go",
+          "sha256": "d6b03f7dc86785f51a5de7abbd3475582d13dbc185649ba1133ce4321363ddbe",
+          "bytes": 8865
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/beego/beego/client/cache/ssdb/ssdb_test.go",
+          "sha256": "96bd026e81fa21ef810f7d5be1bb4d609b8340faaa5f0486e1431bb9363f6925",
+          "bytes": 5491
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/beego/beego/go.mod",
+          "sha256": "b14e12e9c56e852c25c207692da52d116fd06bc22f62e6df131188f547ed2ac2",
+          "bytes": 3919
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/beego/beego/scripts/test_docker_compose.yaml",
+          "sha256": "6cab9365f57eecdcbc6c42ea7bcce382a7ffe149ee1feff399a5e085bad1157d",
+          "bytes": 1250
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/deepseek-ai/deepseek-harness",
+      "kind": "repository",
+      "upstream": "deepseek-ai/deepseek-harness",
+      "revision": "f3803c96974ad4a94195fb97e5c637e9c2a3afe3",
+      "evidence": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/deepseek-ai/deepseek-harness/_commit.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/deepseek-ai/deepseek-harness/CONTRIBUTING.md",
+          "sha256": "9cd02c5b784b4a616cff9421defd688e420b35b7bf466f8908cecd0282a2aab6",
+          "bytes": 1574
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/deepseek-ai/deepseek-harness/Makefile",
+          "sha256": "31d3c908181c6034eb955aad3ba25b50d16d941924f767c6d1be6b46b8201a04",
+          "bytes": 1198
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/deepseek-ai/deepseek-harness/README.md",
+          "sha256": "0f5516be2acde776f05572cbc8c3093c90549afe04ce118e11157d073d5d15f4",
+          "bytes": 2673
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/deepseek-ai/deepseek-harness/_commit.json",
+          "sha256": "70f1419ff8f277279fa150fc4646ae08ae97cab164e0b1f576aa55933948380d",
+          "bytes": 305120
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/deepseek-ai/deepseek-harness/_repository.json",
+          "sha256": "ac639a950ae74e34d835e31de623cbeb91383f6f0af7c9c5b90b27f0405ce840",
+          "bytes": 6829
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/deepseek-ai/deepseek-harness/_root-directory.json",
+          "sha256": "3bd1a74ebce1623895692870c9830813b282b1d18b296462a33dfcf76ad64ad1",
+          "bytes": 60735
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/deepseek-ai/deepseek-harness/docs/development.md",
+          "sha256": "bb06597dfeaf30de75b9d8a9220a4be401e79a71aadc21bc2766bd77eabe3cde",
+          "bytes": 25159
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/deepseek-ai/deepseek-harness/native/system/scripts/build.ts",
+          "sha256": "e2c2a93788dc81e7a0748c121b732faf7c2291aefe15d843e858135dc42e9637",
+          "bytes": 4298
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/deepseek-ai/deepseek-harness/package.json",
+          "sha256": "d0fd7a2084d455b1651815bfbf9034e8b7dfb6571513727bec5d6cbc175a0b45",
+          "bytes": 19936
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/deepseek-ai/deepseek-harness/pnpm-workspace.yaml",
+          "sha256": "eb42731b8f509dd4ee3ae880eae1cde5381a1875a3598fd2fa83d1c1e5e1ef1a",
+          "bytes": 6380
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/deepseek-ai/deepseek-harness/vitest.config.ts",
+          "sha256": "9f83941a2ed74ad903ffef043d65e848b1aa1fb48caf2833ba612f632af7b5ab",
+          "bytes": 25321
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/hashicorp/vault",
+      "kind": "repository",
+      "upstream": "hashicorp/vault",
+      "revision": "352089582444ea84feb03bc97eda97b35729e8ec",
+      "evidence": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/hashicorp/vault/_commit.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/hashicorp/vault/.go-version",
+          "sha256": "55a45ba2851dc159876cb8854f80bf67b9eae781e67ce179708ea2e4f990fcd8",
+          "bytes": 7
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/hashicorp/vault/CONTRIBUTING.md",
+          "sha256": "4a6e1e4036c2cdc23362c787b9a8a3e69247aaf17805ede0feceb70dd3bf18c7",
+          "bytes": 6429
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/hashicorp/vault/Makefile",
+          "sha256": "2ad7ca2f19e0c840fa455e96b80ed5d243dfcbe2e2bde91bb23b4a5cfc709f02",
+          "bytes": 16270
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/hashicorp/vault/README.md",
+          "sha256": "808839850953617c1cfada54bc3e1ce3b9fd12cffeff8d1d73d3eb2220aca815",
+          "bytes": 12557
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/hashicorp/vault/_commit.json",
+          "sha256": "ffef2bf668323b0508859ac16d94231aa44cb74332781f5fdd3fca40313dfbcc",
+          "bytes": 211410
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/hashicorp/vault/_directory-api.json",
+          "sha256": "4e30835e42dfa21dafe488896c40bdedcf7606479ed849e6272bd7021cfb9e9a",
+          "bytes": 77899
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/hashicorp/vault/_repository.json",
+          "sha256": "8b18102f8d773d1d23f08d0ff13ca1724f661332d05f1610dc89a739be8929a5",
+          "bytes": 6753
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/hashicorp/vault/_root-directory.json",
+          "sha256": "d5348b2f18ad2037b37f29954d58a5ec7a611b478e48096935687bbf523a6c5b",
+          "bytes": 49013
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/hashicorp/vault/api/README.md",
+          "sha256": "c57d8b8f1e63912323dcc5224d9b468b62c111e390918a3baf546cedc076f1e5",
+          "bytes": 556
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/hashicorp/vault/api/api_test.go",
+          "sha256": "7437c6bbbe6af95c0bd931e2d272b8366e861b5f2ae0c9d497ff2b2f6d9f12b1",
+          "bytes": 584
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/hashicorp/vault/api/client_test.go",
+          "sha256": "1d47e9a9c667bd3cda413b62d72ac9b51af9af7c58b57800b957d0b4f833e17e",
+          "bytes": 37819
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/hashicorp/vault/api/go.mod",
+          "sha256": "9f90773089010bf2aa3671fdafe82c6e5857e050635a0f4e9c3de0bd8e3ea51b",
+          "bytes": 1610
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/hashicorp/vault/go.mod",
+          "sha256": "2bfc37c13acc700fbf418e2eed3c48fd43843724df40e6f61bd784bc45a76262",
+          "bytes": 32390
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/hashicorp/vault/go.work",
+          "sha256": "06faac3c4d9787f7cf7ba5b3ffec2e72babd01146b11103294323d95925daa3a",
+          "bytes": 247
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/home-assistant/core",
+      "kind": "repository",
+      "upstream": "home-assistant/core",
+      "revision": "cde3969919b9bd540b2dd75b7aa84a908acbdbfe",
+      "evidence": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/home-assistant/core/_commit.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/home-assistant/core/.python-version",
+          "sha256": "4f4c88910b6d485ae689143880e5e81b595a48a51ecb391b2f14feaec106d180",
+          "bytes": 8
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/home-assistant/core/.vscode/tasks.json",
+          "sha256": "721d3e38f179b1c0c542e285bb6339c5870bec29f87970f69802672ab5d7fcbb",
+          "bytes": 6410
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/home-assistant/core/AGENTS.md",
+          "sha256": "2067e1d10c6da85df9856da6e5cbe1346d7d01949ccfbea96ff1b73394a643fa",
+          "bytes": 5708
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/home-assistant/core/CONTRIBUTING.md",
+          "sha256": "83972119569e0704d4af93a09af0db4803f3dfc1e669abe34a8aae30eb843175",
+          "bytes": 1699
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/home-assistant/core/README.rst",
+          "sha256": "7cd3c381536b6d26371f921d730242c6162fc3fa840bf8e9418409f8b482e7cb",
+          "bytes": 1964
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/home-assistant/core/_commit.json",
+          "sha256": "9974dc7e3c0ea7d3e69ce342af2857d8f3be125e7ad150ab433c72748bfe9acb",
+          "bytes": 9127
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/home-assistant/core/_directory-homeassistant_components.json",
+          "sha256": "3d133df2185610c2c5e35c9a12e443f874ee6888c73e9691c91a4c502d98caad",
+          "bytes": 944245
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/home-assistant/core/_directory-homeassistant_components_3_day_blinds.json",
+          "sha256": "dd83e61522cb5ca96f3a44567f2d6550c915fb3dd0d77214385b5bc1051524f9",
+          "bytes": 1179
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/home-assistant/core/_directory-tests_components_abode.json",
+          "sha256": "a0234ddabb1e827359ff4393ca72231e02d4fc144b57ce1390ba807f120628d9",
+          "bytes": 16159
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/home-assistant/core/_repository.json",
+          "sha256": "3567f9b3f495b5fd32650ce91a15b5b9bfb975bb76eca85e4b9653f718a621aa",
+          "bytes": 6690
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/home-assistant/core/_root-directory.json",
+          "sha256": "5321f2cd790ab9b16c01e37bb341ba82ac3791e075edd2aacaea6e6b03f615de",
+          "bytes": 41863
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/home-assistant/core/homeassistant/__init__.py",
+          "sha256": "39665f5ad111591082b1ce76acd905aad19e73ba8cca1d7521ed7babd5b6f884",
+          "bytes": 1766
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/home-assistant/core/homeassistant/components/3_day_blinds/manifest.json",
+          "sha256": "e6f9b0606e6c29e9f747527eba3fee3d216af070d82833d3b61ca1d2cd3b4bfd",
+          "bytes": 125
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/home-assistant/core/homeassistant/components/abode/__init__.py",
+          "sha256": "c6ffa08ddbbf404a206f88e13cb0e6a667953b8061ef450ec48e7931c6aa8014",
+          "bytes": 5883
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/home-assistant/core/homeassistant/components/abode/manifest.json",
+          "sha256": "200a78d650aad202f9ff81f490d29ad90b11fe4127ffbcf6853d8c0cb31e60a8",
+          "bytes": 414
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/home-assistant/core/pyproject.toml",
+          "sha256": "60bc823ebd5fbab24c44b1b7aeed13db1a9d51378f2ddb13bf9d0af2c77c78c7",
+          "bytes": 42457
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/home-assistant/core/requirements_all.txt",
+          "sha256": "3ac7bbc0b4fdcf20c7b178c4fcebf14dbe9cb6b700426ee8930fa8322f8a234b",
+          "bytes": 72158
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/home-assistant/core/requirements_test.txt",
+          "sha256": "cbca7d43b49f697bd18825b412170c10f479fbdab63db99cfbdf63918f44d0aa",
+          "bytes": 1548
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/home-assistant/core/script/bootstrap",
+          "sha256": "c920c9b8347b46abd7dbb12833fb125d393e3a637317405b4c7c2bdf7e2789c4",
+          "bytes": 511
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/home-assistant/core/script/setup",
+          "sha256": "b56bbc608ab81944b3f6507b4cf52dfdac470b9f5312fb3c0bfd9f70810765f0",
+          "bytes": 1012
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/home-assistant/core/tests/components/abode/test_init.py",
+          "sha256": "bbf2aa7213d003efab7566f95a1880405082a52049690261c2b81e65bfedfa04",
+          "bytes": 4254
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/iced-rs/iced",
+      "kind": "repository",
+      "upstream": "iced-rs/iced",
+      "revision": "cd04b74ca7073766f654535d6e72c452ef749d07",
+      "evidence": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/iced-rs/iced/_commit.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/iced-rs/iced/.github/workflows/test.yml",
+          "sha256": "425009e311909cfa967a2f8f57819e9e03b9d68d9789d929261e9c60a72a7ec9",
+          "bytes": 828
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/iced-rs/iced/CONTRIBUTING.md",
+          "sha256": "802768711c4c144040ff62dd60d8a3557c12d512442b15a5ddc710b0d4439010",
+          "bytes": 1726
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/iced-rs/iced/Cargo.toml",
+          "sha256": "f83d488a8b5bbe72605fc550519b25a4de2b812258e0d3d969dbaad216fbc82a",
+          "bytes": 9253
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/iced-rs/iced/README.md",
+          "sha256": "58c0921d4adfa3ec01c0600007e02772599d6efa671320263792f3fe26c6d71d",
+          "bytes": 7212
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/iced-rs/iced/_commit.json",
+          "sha256": "42d7ec6199fbec6905e3528a0e3ce599229a29523c1824c130a9ede5d581d90f",
+          "bytes": 4718
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/iced-rs/iced/_repository.json",
+          "sha256": "f19e08a750a9879698b31f61a16189ce7cf086409113f40659789e1068cac427",
+          "bytes": 6144
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/microsoft/TypeScript",
+      "kind": "repository",
+      "upstream": "microsoft/TypeScript",
+      "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+      "evidence": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/microsoft/TypeScript/_commit.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/microsoft/TypeScript/CONTRIBUTING.md",
+          "sha256": "b45301bb6687e1dfadc253640ee20766aa02a16d9578e92eee8c530b808d4112",
+          "bytes": 9195
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/microsoft/TypeScript/Herebyfile.mjs",
+          "sha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421",
+          "bytes": 125368
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/microsoft/TypeScript/README.md",
+          "sha256": "b43867a1a978a0a3d881b91e50e9807f1f56e3f1dd54d65cad43f471c84e0036",
+          "bytes": 2741
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/microsoft/TypeScript/_commit.json",
+          "sha256": "873ad8ed7259aef76aeeba5980c5e9a7ffbe647240020ec47440d2f9488ef5a6",
+          "bytes": 6104
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/microsoft/TypeScript/_repository.json",
+          "sha256": "cc355de7d9ea5b7891a9c4afbaf2af5394679ea9467ce2da1d1ea5ce370cb343",
+          "bytes": 6738
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/microsoft/TypeScript/_root-directory.json",
+          "sha256": "eff16ff4284ed4e1813c51f75eaaef0ff255e1374858326f745f998f40c52c45",
+          "bytes": 21157
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/microsoft/TypeScript/go.work",
+          "sha256": "d6c5314b1f983eb6de36253c903ac00aa8e6fecd9512d2adba882b5701ce7d29",
+          "bytes": 33
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/microsoft/TypeScript/package.json",
+          "sha256": "2828c1d269bd9c80d634131ec107ac69f1cfc3bf1f98d24c112c825c8acd7902",
+          "bytes": 1838
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/microsoft/TypeScript/tsc/go.mod",
+          "sha256": "1e0963224f3096e3e8215acea83c033392c8135e7453b8a9680261baa5c18b25",
+          "bytes": 748
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/openinterpreter/openinterpreter",
+      "kind": "repository",
+      "upstream": "openinterpreter/openinterpreter",
+      "revision": "ac1fcc8fe57aba51fcc3c79afd57a0883237fe87",
+      "evidence": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/openinterpreter/openinterpreter/_commit.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/openinterpreter/openinterpreter/README.md",
+          "sha256": "8f6c33487eca77769798677d32bce15335d0439f129c9a0413e12e0d9e70ab7a",
+          "bytes": 8364
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/openinterpreter/openinterpreter/_commit.json",
+          "sha256": "1a0755fb8964411019a582e28f71f7c33666ea355ac9e9b3448978133c91c0e5",
+          "bytes": 8962
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/openinterpreter/openinterpreter/_directory.json",
+          "sha256": "7203732cc9399d32e391a913ca00aa36ba8a06ce160678a45f6eecc7f6548913",
+          "bytes": 55741
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/openinterpreter/openinterpreter/_repository.json",
+          "sha256": "df8f16a3118eaa7756a10bb365a33b59171301e88164f13897053c7df02b43ae",
+          "bytes": 7100
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/tauri-apps/tauri",
+      "kind": "repository",
+      "upstream": "tauri-apps/tauri",
+      "revision": "548a3692f59405aeb239c5b63fa589824eee51e8",
+      "evidence": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/tauri-apps/tauri/_commit.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/tauri-apps/tauri/.github/CONTRIBUTING.md",
+          "sha256": "28fc0f28ee0642a903bd62e283429a40f7337891d75ff6d7e7739675400d6123",
+          "bytes": 8196
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/tauri-apps/tauri/.github/workflows/test-core.yml",
+          "sha256": "37c4f7098d4285a3393c1788c704d9ced6eaddaaa4fdcbf77669b3dbc53db4b7",
+          "bytes": 5301
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/tauri-apps/tauri/Cargo.toml",
+          "sha256": "6e04a4e37699cf7d44d35d14fa4f0626bbaea7cde433b81ad8a9adeefe211bc1",
+          "bytes": 2953
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/tauri-apps/tauri/README.md",
+          "sha256": "3aaaf7be9a2f740b105e86a6c569a76968eb982a28a228fbc1f014627c7a10ec",
+          "bytes": 6055
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/tauri-apps/tauri/_commit.json",
+          "sha256": "79db1602ad075e96249aaf5e9c311d13fbfab4a9563db74f79f61df4d9bff9d0",
+          "bytes": 6230
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/tauri-apps/tauri/_directory-.github.json",
+          "sha256": "204fc4980275bc0f14b2afdc3e79d76cd0257220c4d41aee2682d582e2153ce0",
+          "bytes": 10393
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/tauri-apps/tauri/_directory-.github_workflows.json",
+          "sha256": "5d07b4ea3923fcd466db533f3146f5f0f68ecde1c34edc4f00080f4783533eed",
+          "bytes": 25631
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/tauri-apps/tauri/_repository.json",
+          "sha256": "076980a26e214bc14fa981caa8938514e17f312a94c4654a710fc8e909c8c9b4",
+          "bytes": 6441
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/tauri-apps/tauri/_root-directory.json",
+          "sha256": "0b2a0c9a6d27108e819f8f136da06a0ff1cfd04479dffde8583aac79d2bf736d",
+          "bytes": 27933
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/vuejs/core",
+      "kind": "repository",
+      "upstream": "vuejs/core",
+      "revision": "05db7e807be841e6f343d0237669669b18c89d4d",
+      "evidence": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/vuejs/core/_commit.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/vuejs/core/.github/contributing.md",
+          "sha256": "433673810dc21f66c83884a108a45ec5d1192d1964e6f2cefe840bfeb6de9843",
+          "bytes": 19541
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/vuejs/core/.node-version",
+          "sha256": "a784a891ee985530f25d616fa372d1b360fc9d4ef38932ab8dc2f45edfa5b01d",
+          "bytes": 5
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/vuejs/core/README.md",
+          "sha256": "ee86575a4126eb9e9e40f94679f85b9b2f090230924cf984153e1a15563e7ffd",
+          "bytes": 2741
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/vuejs/core/_commit.json",
+          "sha256": "3db7a0adfeb7eea3369902a4c1aba8f6d675a78bfd9112714979ef72f668f912",
+          "bytes": 18770
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/vuejs/core/_directory-packages-private.json",
+          "sha256": "7367be0afa55519011961804b95facfb379b37560073b9469c2a40efb73d4c34",
+          "bytes": 6313
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/vuejs/core/_directory-packages.json",
+          "sha256": "acdec0bed29cce36eb197afe6f708e70f549dbd0c781045d8e39019179839f07",
+          "bytes": 10745
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/vuejs/core/_repository.json",
+          "sha256": "ea70cc5f8fd2bceec4694047ff671903810a7257a967266ec28121d9dcebd573",
+          "bytes": 5953
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/vuejs/core/_root-directory.json",
+          "sha256": "14d4449c8a42370c54460ff0386d25bbe0e6d5e0477eba62e968688ace192dd2",
+          "bytes": 24109
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/vuejs/core/package.json",
+          "sha256": "e55e3b7b508c74dc88e9fae8f445ebfb95052b4c50f8503d9cb17594f802e4d1",
+          "bytes": 5155
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/vuejs/core/pnpm-lock.yaml",
+          "sha256": "13d0f6c58ac31f229387442e42a35a66a700386349ee1b99bdb7e6a2fbc3aadd",
+          "bytes": 201228
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/vuejs/core/pnpm-workspace.yaml",
+          "sha256": "54d0a86d1828707bbfe24214ee584167ce08dc70f6bfccb2fcea748e6f1c8401",
+          "bytes": 862
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/vuejs/core/vitest.config.ts",
+          "sha256": "98db4cc683fa725ef5beb3b19f215d07ffb972cf80650b404221a73aaa03a361",
+          "bytes": 3321
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/ytdl-org/youtube-dl",
+      "kind": "repository",
+      "upstream": "ytdl-org/youtube-dl",
+      "revision": "956b8c585591b401a543e409accb163eeaaa1193",
+      "evidence": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/ytdl-org/youtube-dl/_commit.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/ytdl-org/youtube-dl/CONTRIBUTING.md",
+          "sha256": "b7f4dd2ac304c224b671d4830813bd6b2b8799da8d78f13cf927d4379ebac247",
+          "bytes": 22864
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/ytdl-org/youtube-dl/Makefile",
+          "sha256": "5335edf29074bb04a286c62f93e9cb8505b789982700ca14fb22dafb42986aa4",
+          "bytes": 6235
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/ytdl-org/youtube-dl/README.md",
+          "sha256": "dc249af3a7587ad18dce6d22f6e486ac0af6f91fe1172e7e866bae584e0c73cb",
+          "bytes": 101042
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/ytdl-org/youtube-dl/_commit.json",
+          "sha256": "d18f69e85192667e2e88c6ccc7b07402a78e1e3a4aa17af5aaf1462d27711c8e",
+          "bytes": 4362
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/ytdl-org/youtube-dl/_directory-test.json",
+          "sha256": "caf2ccfef41d9f532bf4830c1fae7f28e2f0c67b85391a0f4ddc46126d3a7108",
+          "bytes": 37160
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/ytdl-org/youtube-dl/_directory-youtube_dl_downloader.json",
+          "sha256": "5b630a680999f5904168798e159c7b1da652157d8ebb90f63f1249f59438b9b6",
+          "bytes": 12605
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/ytdl-org/youtube-dl/_repository.json",
+          "sha256": "043bb273f417422ec6bac6aab5704034d932f9a88df69608b66a1477b1fa2d04",
+          "bytes": 6438
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/ytdl-org/youtube-dl/_root-directory.json",
+          "sha256": "97673f9407e4a2fc3f8f0f95abde9a3daa1b15573932f642c83d18e3937d3665",
+          "bytes": 15975
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/ytdl-org/youtube-dl/setup.cfg",
+          "sha256": "31163434a5ecc554c09cbc8ee56a12e81af3da6360ccf73a88667c8be456b69f",
+          "bytes": 230
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/ytdl-org/youtube-dl/setup.py",
+          "sha256": "b22fbdb4f23e480976e1a5a20b95848c26680b04b796838756241191bd8dfb4d",
+          "bytes": 4621
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/ytdl-org/youtube-dl/test/helper.py",
+          "sha256": "1a71eb39bc2628ef9d6c1fb87c521914d5dd3ccbb17d1cf164be892f789bb055",
+          "bytes": 10843
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/ytdl-org/youtube-dl/test/test_downloader_external.py",
+          "sha256": "4629150db82a4c166a3f3fb2ec5da914de1e97499715941465be4f8d48f89711",
+          "bytes": 9094
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/ytdl-org/youtube-dl/test/test_downloader_http.py",
+          "sha256": "b0b6863e5ef58a5e386a7a1769e04e4e957cd60eb878ed3bffeeb26f61119dad",
+          "bytes": 3383
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/ytdl-org/youtube-dl/tox.ini",
+          "sha256": "75c47b0f9ed2b6ac528d34c6f0579e09de1a4f0809d18397120827a67dde2274",
+          "bytes": 614
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/ytdl-org/youtube-dl/youtube_dl/__init__.py",
+          "sha256": "8ce61cad6c8d3f0e1c3c4c86b672c087dff7eb18395e2e45fc04945f7303832b",
+          "bytes": 20684
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/ytdl-org/youtube-dl/youtube_dl/downloader/__init__.py",
+          "sha256": "5293fc4a269afa201181a3d24eb69977ca6649b0d0eaa433fa7846049277b53a",
+          "bytes": 2031
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-2/sources/usr",
+      "kind": "image-version",
+      "upstream": "golang/go",
+      "revision": "2aae1000ea1d4b28923b96db28acf4e3b99d6aff",
+      "evidence": "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-2/plan.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-2/sources/usr/local/go/src/cmd/go/alldocs.go",
+          "sha256": "09b0d7570c1695acc0ccad5593e3f5c2f888548cfc7f80a49933a19f3514aa69",
+          "bytes": 160461
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-2/sources/usr/local/go/src/cmd/go/internal/cfg/cfg.go",
+          "sha256": "8eb038ac6df168fe5af971cd768d99dd3c64224273072a4160dcc5f51eacae9d",
+          "bytes": 22272
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-2/sources/usr/local/go/src/cmd/go/internal/envcmd/env.go",
+          "sha256": "41e6ac34c8deb9acfdec65cb3ead710df925af85799ec37237a96abc00ed281e",
+          "bytes": 21682
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/sources/usr",
+      "kind": "image-version",
+      "upstream": "golang/go",
+      "revision": "2aae1000ea1d4b28923b96db28acf4e3b99d6aff",
+      "evidence": "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/plan.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/sources/usr/local/go/src/cmd/go/alldocs.go",
+          "sha256": "09b0d7570c1695acc0ccad5593e3f5c2f888548cfc7f80a49933a19f3514aa69",
+          "bytes": 160461
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/sources/usr/local/go/src/cmd/go/internal/cfg/cfg.go",
+          "sha256": "8eb038ac6df168fe5af971cd768d99dd3c64224273072a4160dcc5f51eacae9d",
+          "bytes": 22272
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/sources/usr/local/go/src/cmd/go/internal/envcmd/env.go",
+          "sha256": "41e6ac34c8deb9acfdec65cb3ead710df925af85799ec37237a96abc00ed281e",
+          "bytes": 21682
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/sources/usr/local/go/src/cmd/go/internal/test/test.go",
+          "sha256": "ce0bfdd1686ff4d58fd013848066a27b509d76ada665712fbb2746d101537172",
+          "bytes": 81728
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-collection-driver-20261029/amendment-3/sources/usr/local/go/src/go/build/build.go",
+          "sha256": "a8b066521d73f2b1c1f01d65588483e416deeab9b2139991645da0dc89dd7d49",
+          "bytes": 63670
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/image-source",
+      "kind": "image-version",
+      "upstream": "npm",
+      "revision": "11.19.1",
+      "evidence": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/route-map.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/image-source/usr/local/bin/npm",
+          "sha256": "de0074a6bf7a9f22fc0081ec0b941ef336acc1109c2e45d2ddddb601b3188b63",
+          "bytes": 72
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/image-source/usr/local/bin/npx",
+          "sha256": "8ef0a506c1aea4a30c46d8a1b2874caa0670ea52b35954cc60709cf22117e07f",
+          "bytes": 72
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/@vscode/vsce-sign",
+      "kind": "npm-package",
+      "upstream": "@vscode/vsce-sign",
+      "revision": "2.1.0",
+      "evidence": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/@vscode/vsce-sign/package/package.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/@vscode/vsce-sign/package/package.json",
+          "sha256": "094ee1688ec4c49bbea8762f4f3da35da8fcabd7c416ec9c275359d1700858ee",
+          "bytes": 1035
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/@vscode/vsce-sign/package/src/main.js",
+          "sha256": "0c9307a30aa7dee8aae701cd798dab43cb8801255a91817296f16b6a60d72449",
+          "bytes": 11318
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/@vscode/vsce-sign/package/src/permissions.js",
+          "sha256": "ee98958a5cfd1e7153c11518332c086a0200f178ef644e99e566865bf39dc8e8",
+          "bytes": 1191
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/@vscode/vsce-sign/package/src/postinstall.js",
+          "sha256": "77a408796da2c0b48ad1c9cee6cdb3dd70662f7b2a8c353a61a617106bd0c762",
+          "bytes": 7356
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/@vscode/vsce-sign/package/src/target.js",
+          "sha256": "4b03b6f1342d16b473596f727bae8bb63a68d8fc9b172f0bbe45aa724cad4178",
+          "bytes": 3061
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/dprint",
+      "kind": "npm-package",
+      "upstream": "dprint",
+      "revision": "0.57.4",
+      "evidence": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/dprint/package/package.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/dprint/package/bin.cjs",
+          "sha256": "f937afc1e9c45d4fb3e26a9900a96681a8d048e03466648d0ce38c7db4cf4198",
+          "bytes": 1066
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/dprint/package/install.cjs",
+          "sha256": "30c93a4ac2fbb7e35b01c6322c1d64941b847d61ee510ef2ed43962a491a79d8",
+          "bytes": 197
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/dprint/package/install_api.cjs",
+          "sha256": "89da3973a6a467f5b395adfbfeaecb2fe3226c54e17c0b7f54dda71135347328",
+          "bytes": 15235
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/dprint/package/package.json",
+          "sha256": "ebd6fca3cc17f074848ed33a0be58fbf3bcda62ec6d6e21e73244d4245b9896a",
+          "bytes": 1202
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/esbuild",
+      "kind": "npm-package",
+      "upstream": "esbuild",
+      "revision": "0.28.2",
+      "evidence": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/esbuild/package/package.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/esbuild/package/bin/esbuild",
+          "sha256": "183d6ead2dbc3af51aec767d5395f86fe54fbbc2d2aa8e54feb4e31d76a62f7e",
+          "bytes": 9350
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/esbuild/package/install.js",
+          "sha256": "612294e278914443bdcf81cb17f54afec34dbdd2ebd999a6ee187912320cc315",
+          "bytes": 11773
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/esbuild/package/lib/main.js",
+          "sha256": "61ec0ba144ff93f4bf0e96ad6fab6f430ede0aa13e27ace8063ed63ba416b3cd",
+          "bytes": 97463
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/esbuild/package/package.json",
+          "sha256": "9d0bc453f4e791553c4cc2298ba023b409241fd9801e494741666eb0f6051490",
+          "bytes": 3980
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/hereby",
+      "kind": "npm-package",
+      "upstream": "hereby",
+      "revision": "1.15.2",
+      "evidence": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/hereby/package/package.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/hereby/package/bin/hereby.js",
+          "sha256": "10004a6810ccd94b53c6415e0def30cd99b959a96e7cd779e2436349b4811a83",
+          "bytes": 45
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/hereby/package/dist/cli.js",
+          "sha256": "2db010ee65d343b91cdbc5244e806d108d1ae35488aeae37f2112ff1663edb86",
+          "bytes": 305
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/hereby/package/dist/cli/index.js",
+          "sha256": "d3effe31543c89079186a62d10c318d8a913543024dca88aac54318e451bca54",
+          "bytes": 3383
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/hereby/package/dist/cli/loadHerebyfile.js",
+          "sha256": "e51e3f887f8da9df3cd15b3aa764cf879c95f43e04ecfe26ef523fa47ecd12b0",
+          "bytes": 3382
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/hereby/package/dist/cli/parseArgs.js",
+          "sha256": "bdfdd528af2d6e780913956bd6d69ce925bed87c055b7eda14f7cb69d149abf3",
+          "bytes": 2319
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/hereby/package/dist/cli/reexec.js",
+          "sha256": "eb0ae263dfa7f8bedc66207ee200056b128df05c831510c5c152b2ba84e684a1",
+          "bytes": 2824
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/hereby/package/dist/cli/runner.js",
+          "sha256": "860bb1305702095e8dcbf750e6c7f7225abb8dd5a97db576ffdc768f9ebeece2",
+          "bytes": 1962
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/hereby/package/dist/cli/style.js",
+          "sha256": "07238d7e7784c0be9655a42d0371a53c624e1b85b7676b0a6cf1f6c383700760",
+          "bytes": 1300
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/hereby/package/dist/cli/utils.js",
+          "sha256": "2c0cc6c0f2f5b1bd4fe3699a4ce3c9dc679baa44b59605910282d1277cb464ff",
+          "bytes": 3507
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/hereby/package/dist/index.js",
+          "sha256": "bdd91091a228ea8d6becc077d13311602be5bd36be09a33e9f09100113daf2b1",
+          "bytes": 1853
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/hereby/package/package.json",
+          "sha256": "e10955435b10c8c4fb87b89d8f6404446e655a94370c137845277630e062d717",
+          "bytes": 2074
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/tinyexec",
+      "kind": "npm-package",
+      "upstream": "tinyexec",
+      "revision": "1.3.1",
+      "evidence": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/tinyexec/package/package.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/tinyexec/package/dist/main.mjs",
+          "sha256": "3f370502361a75be7a50f915a123d965f6ef9c648a56bf1d5b9e3ae95c20b2f1",
+          "bytes": 12796
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/npm-source/tinyexec/package/package.json",
+          "sha256": "f6d914909fee06059ce78f6f3390e12b163d900eb109cbbe6482cfddcbca8be7",
+          "bytes": 1511
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/repository-source",
+      "kind": "repository",
+      "upstream": "microsoft/TypeScript",
+      "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+      "evidence": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/microsoft/TypeScript/_commit.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/repository-source/Herebyfile.mjs",
+          "sha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421",
+          "bytes": 125368
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/repository-source/package-lock.json",
+          "sha256": "52b6c9bd0a26ef1b0fc27dfbfaa00df6a047cdddd587d07c4f6c1c3345faf5cf",
+          "bytes": 143844
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/repository-source/package.json",
+          "sha256": "2828c1d269bd9c80d634131ec107ac69f1cfc3bf1f98d24c112c825c8acd7902",
+          "bytes": 1838
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/repository-source/tools/scripts/gen/generatedFile.mts",
+          "sha256": "13340b8675f336f9ef342c8a2f57b3fc3d77f0dcefe064accaf2d5514c5b4215",
+          "bytes": 2901
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/repository-source/tools/scripts/gen/utils.mts",
+          "sha256": "5d0c46a19d38bfc283f378a8f3498510af40d68b2994c20c41f1976e4870bd15",
+          "bytes": 4587
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/repository-source/tools/scripts/lsp/fetchModel.mts",
+          "sha256": "4fb702769440e1574981a62b1c1fd205c2a3cee4f992de9b89442f8ea4aa7b26",
+          "bytes": 2736
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/repository-source/tools/scripts/tsc/ast.json",
+          "sha256": "e811cdb061e7e4bcefbdd982eb08babb2916f4982c3e0fca8d266fbacb2977bb",
+          "bytes": 175469
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/repository-source/tools/scripts/tsc/generate-encoder.ts",
+          "sha256": "a613cc4fcfbf030621b71dfe903b2505a6a0c6882b5224363429336dc892ef32",
+          "bytes": 88725
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/repository-source/tools/scripts/tsc/generate-enums.ts",
+          "sha256": "6ba666c251486b116c234873e667cd19e68aebb621b3004856c05c81d8e2686d",
+          "bytes": 24506
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/repository-source/tools/scripts/tsc/generate-go-ast.ts",
+          "sha256": "95d942098d0619fe1c8d60d963dc215aa5acd53183306ca81bb8355a2dbbbea0",
+          "bytes": 58291
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/repository-source/tools/scripts/tsc/generate-options.ts",
+          "sha256": "5462d60c90ead72086372712b91b9fd1397015e705a974f290eb8546d48de42a",
+          "bytes": 40452
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/repository-source/tools/scripts/tsc/generate-ts-ast.ts",
+          "sha256": "c2413184b6b9d979fa85b994f6e3fd63e7b2509d95675cf94c129257d9e4fd4d",
+          "bytes": 82211
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/repository-source/tools/scripts/tsc/options-model.ts",
+          "sha256": "9a4a193b3d829e012f00222af10591ececef031022ba94d174839bcd8ca43e75",
+          "bytes": 5882
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/repository-source/tools/scripts/tsc/options-schema.ts",
+          "sha256": "49deb0daf2fa85ce42f6af360e84e7f5d184e9bcb5cce54c30b62deb179e175e",
+          "bytes": 11283
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/repository-source/tools/scripts/tsc/options.ts",
+          "sha256": "9bfa4f217b3b957647f42ccb242f6cf08e6d99ab19eabef6dafad6b175ecbf01",
+          "bytes": 100896
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/repository-source/tools/scripts/tsc/schema.ts",
+          "sha256": "d7eba663a9da2389bd4762723b5b73974892d93a7a4f0448039f6cfab3d8c30a",
+          "bytes": 45363
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-launch-closure-audit-20261029/repository-source/tsc/internal/stringutil/_scripts/generate-unicode-data.mts",
+          "sha256": "84576ceb47abd55cb4e090763f6e857bdcb76529fc84b348d3e7f91844c3931c",
+          "bytes": 11170
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-go01-requalification-proposal-20261029/sources",
+      "kind": "repository",
+      "upstream": "microsoft/TypeScript",
+      "revision": "25f823dc198a00744b458a7bc6984359f0dd7cac",
+      "evidence": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/microsoft/TypeScript/_commit.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-go01-requalification-proposal-20261029/sources/CONTRIBUTING.md",
+          "sha256": "b45301bb6687e1dfadc253640ee20766aa02a16d9578e92eee8c530b808d4112",
+          "bytes": 9195
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-requalification-proposal-20261029/sources/Herebyfile.mjs",
+          "sha256": "43d6545fb0b32ac76ac3fc506ba9f349631327ecaf4685c02b314e35f462e421",
+          "bytes": 125368
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-requalification-proposal-20261029/sources/README.md",
+          "sha256": "b43867a1a978a0a3d881b91e50e9807f1f56e3f1dd54d65cad43f471c84e0036",
+          "bytes": 2741
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-requalification-proposal-20261029/sources/go.work",
+          "sha256": "d6c5314b1f983eb6de36253c903ac00aa8e6fecd9512d2adba882b5701ce7d29",
+          "bytes": 33
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-requalification-proposal-20261029/sources/package-lock.json",
+          "sha256": "52b6c9bd0a26ef1b0fc27dfbfaa00df6a047cdddd587d07c4f6c1c3345faf5cf",
+          "bytes": 143844
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-requalification-proposal-20261029/sources/package.json",
+          "sha256": "2828c1d269bd9c80d634131ec107ac69f1cfc3bf1f98d24c112c825c8acd7902",
+          "bytes": 1838
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-requalification-proposal-20261029/sources/packages/typescript/package.json",
+          "sha256": "2ae264680bfa5bad7393d516580f03dd9748ebb0da7a0655c7ed57b697b485fd",
+          "bytes": 3638
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-requalification-proposal-20261029/sources/packages/vscode-typescript-nightly/package.json",
+          "sha256": "18953f8e9f88a5b4a72265f51d6a27d485b3ddf6b3429446a94f8079aa41e914",
+          "bytes": 701
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-requalification-proposal-20261029/sources/packages/vscode-typescript/package.json",
+          "sha256": "72e501c1a9f9d37c707c6915d102893a943ac3e2289c56ce17bf5a98ee25fc3f",
+          "bytes": 17944
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-requalification-proposal-20261029/sources/tools/go.mod",
+          "sha256": "968e2374d845585e30ffb1c3b32fbf4b2924dab702cddd91ae33327609d5625b",
+          "bytes": 1485
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-requalification-proposal-20261029/sources/tools/go.sum",
+          "sha256": "015fd234f9f2211f196e5be01b74f8aa833858b13bd1a2a2e43117059503bcf1",
+          "bytes": 8844
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-requalification-proposal-20261029/sources/tsc/go.mod",
+          "sha256": "1e0963224f3096e3e8215acea83c033392c8135e7453b8a9680261baa5c18b25",
+          "bytes": 748
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-requalification-proposal-20261029/sources/tsc/go.sum",
+          "sha256": "00f7fee0307755fa8b871cd25a68b8c478341bc2b2af8731b2f2fc4da3739eee",
+          "bytes": 2867
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-requalification-proposal-20261029/sources/tsc/internal/fourslash/tests/aliasMergingWithNamespace_test.go",
+          "sha256": "4bc35d615390b3e7821f4242b7f5b0ebf5273d4cb544bad04767e0e9441a188b",
+          "bytes": 540
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-requalification-proposal-20261029/sources/tsc/internal/fourslash/tests/autoImportPackageRootPathTypeModule_test.go",
+          "sha256": "ae289ea4af9c099c79ac306543e8695277abf9dfdffda55b442199f13c6a4745",
+          "bytes": 826
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-requalification-proposal-20261029/sources/tsc/internal/fswatch/fanotify_linux_test.go",
+          "sha256": "f5e1b08aad68b1e9538f14f1d442bf09bc2aee362706d66a5a492024120cb6a9",
+          "bytes": 5824
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-requalification-proposal-20261029/sources/tsc/internal/fswatch/testutil_test.go",
+          "sha256": "ab20fe2b946a1d2e4ddbe585529c6d165251f995bf8a5b733294938a0999ffc0",
+          "bytes": 5838
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-requalification-proposal-20261029/sources/tsc/internal/jsnum/string_test.go",
+          "sha256": "52908d6be0ffb8511e9e4ac5507361dcd60c15c02132fa56ec44e1dad7de1dfe",
+          "bytes": 8520
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-requalification-proposal-20261029/sources/tsc/internal/lsp/replay_test.go",
+          "sha256": "5425fdbb311e388761c33100d343576168a76e41ccc8817a039483569d6902bb",
+          "bytes": 6861
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-requalification-proposal-20261029/sources/tsc/internal/parser/parser_test.go",
+          "sha256": "d6272679167b0560dee59d4d52bf39f1bb9124af152425a86f8f6cae7b6e6658",
+          "bytes": 18248
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-go01-source-registry-20261029/sources/usr",
+      "kind": "image-version",
+      "upstream": "golang/go",
+      "revision": "2aae1000ea1d4b28923b96db28acf4e3b99d6aff",
+      "evidence": "benchmarks/head-to-head/f05-go01-source-registry-20261029/plan.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-go01-source-registry-20261029/sources/usr/local/go/src/cmd/go/internal/load/test.go",
+          "sha256": "390bda50ce1c632b32cca052b58c85f74054f4bec1ba4c68832eca440059f6d8",
+          "bytes": 27414
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-go01-source-registry-20261029/sources/usr/local/go/src/go/doc/example.go",
+          "sha256": "f4b795cd8b968ea48d5363777766b556697c786b808f7f384549fc0abda5a47f",
+          "bytes": 22320
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/amendment-1/sources",
+      "kind": "repository",
+      "upstream": "666ghj/MiroFish",
+      "revision": "7657031ac01184afe2cb220f5ee3545573b5e843",
+      "evidence": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/666ghj/MiroFish/_commit.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/amendment-1/sources/backend/tests/test_llm_json_responses.py",
+          "sha256": "1a82037f2498ac5f80c230159516385089980881f1d9157e6f3ae6d61ff90061",
+          "bytes": 7719
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/amendment-1/sources/backend/tests/test_ontology_api_errors.py",
+          "sha256": "ad5a7b4aebaa320f8fbdbedb6686c81bbad2fe50897d9d5539eea2687568d85f",
+          "bytes": 2364
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/amendment-1/sources/backend/tests/test_ontology_attributes.py",
+          "sha256": "2959000b2f327755bd75cefd24c6c46300c1cae8aeb70ee69f9d07989963c22c",
+          "bytes": 8203
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/amendment-1/sources/backend/tests/test_ontology_generator.py",
+          "sha256": "ca17fe3d212cc7bb6a650dc131f3e30f918a153d32561cfd6165041c9504a590",
+          "bytes": 2457
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/amendment-1/sources/backend/tests/test_openai_chat_compat.py",
+          "sha256": "74beef867a3276a97e82e20be53832154c6d68278e89fbe16de0e75a4bfe8921",
+          "bytes": 3299
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/amendment-1/sources/backend/tests/test_platform_profiles.py",
+          "sha256": "ebbfac88d0ddf5008b2d8e1c1c77e9e3c7b9e386364fffff0aeddca8c3985f6b",
+          "bytes": 2047
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/amendment-1/sources/backend/tests/test_profile_field_normalization.py",
+          "sha256": "6fa99d1c71567f8d02a07a4aab14ed0f7a16b3ec6980e69594596484ca7fe40e",
+          "bytes": 2711
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/amendment-1/sources/backend/tests/test_report_tool_result_sanitizer.py",
+          "sha256": "94f71ce1cee6b6429288ac2771c38e44197e79a6374135166b17297bbf462f57",
+          "bytes": 963
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/amendment-1/sources/backend/tests/test_simulation_prepare_failure.py",
+          "sha256": "9afbfcfafb390c0216064e7bdb45e326039f0a37549987c4bd596773747d10c5",
+          "bytes": 3462
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/amendment-1/sources/backend/tests/test_zep_cloud_contracts.py",
+          "sha256": "6bba5c2d520671e83792951ca9682648ac405ff425d9775ca0233763a715ccca",
+          "bytes": 17117
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/amendment-1/sources/backend/tests/test_zep_cloud_validation_script.py",
+          "sha256": "a3e595b1af1e7dc265d0ae9c111fc79e4a9b4e4d1a1b4ee167b2833d458fd33b",
+          "bytes": 3221
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/amendment-1/sources/backend/tests/test_zep_edge_paging.py",
+          "sha256": "814ea8f03910e4b77fb22d1c74686b8a72c676d5027b441e5918b65cd71989fc",
+          "bytes": 3400
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/amendment-1/sources/backend/tests/test_zep_entity_reader_edges.py",
+          "sha256": "1423b21082d25e29e7e1c01319815f37c40589ebeb1ab4d0bf62d7c084e8ec6f",
+          "bytes": 1229
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/amendment-1/sources/backend/tests/test_zep_graph_lifecycle.py",
+          "sha256": "a698574e2bc8dd3fb7f4f8e19df4c8e09f1bab49f527ba3341c43f3e516b4031",
+          "bytes": 12775
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/amendment-1/sources/backend/tests/test_zep_graph_memory_updater.py",
+          "sha256": "18eb0df889a0fe438a94a8c51d485b0c93eff707f4a579d122169671c08e1ed8",
+          "bytes": 7142
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/amendment-1/sources/backend/tests/test_zep_report_barrier.py",
+          "sha256": "04ebfee7524cf56af246efea54bbc13be43098ef90c85de149df6ab9e1a5c119",
+          "bytes": 8868
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/amendment-1/sources/backend/tests/test_zep_retry_and_client.py",
+          "sha256": "699f9644181100d71cda433d530221fc31436589c36d55628bd75f0a75ed6553",
+          "bytes": 3141
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/amendment-1/sources/backend/tests/test_zep_simulation_barrier.py",
+          "sha256": "77b59039841ea4a1b0873b56051d074fedb336b10283ce3f2ca7d3e392e92bed",
+          "bytes": 15448
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/amendment-1/sources/tests/test_local_star_count_fetch.py",
+          "sha256": "f9368e145018b644f28104f15012ccbe99d124647966ee225bd4153f52dbb173",
+          "bytes": 13843
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/amendment-1/sources/tests/test_local_star_history.py",
+          "sha256": "5d9fb5466b5d121432d9e82869edf91fe41cb1f02b8a6fe704372fb167368d55",
+          "bytes": 35557
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/sources",
+      "kind": "repository",
+      "upstream": "666ghj/MiroFish",
+      "revision": "7657031ac01184afe2cb220f5ee3545573b5e843",
+      "evidence": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/666ghj/MiroFish/_commit.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/sources/backend/app/config.py",
+          "sha256": "a85580b4551724b3c2fff419565c9aa11f6dba1992f5981ed34037a264c2a2f3",
+          "bytes": 2962
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/sources/backend/pyproject.toml",
+          "sha256": "e923fa98056d1b6085ab789993a1d05f31bfc1e8cbbb6b9aa17d49663253c1a2",
+          "bytes": 1080
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/sources/backend/scripts/test_profile_format.py",
+          "sha256": "c60feaff8d5727c7c473d9879742c85c352151b208ec8ff72d48ad9ff9e88f17",
+          "bytes": 5856
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/sources/backend/scripts/validate_zep_cloud_integration.py",
+          "sha256": "baf1b07bb4e23fba44cc66a363880b5be65a29843d870113aa776c6cbaa43ba9",
+          "bytes": 34544
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/sources/backend/tests/test_llm_json_responses.py",
+          "sha256": "1a82037f2498ac5f80c230159516385089980881f1d9157e6f3ae6d61ff90061",
+          "bytes": 7719
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/sources/backend/tests/test_ontology_api_errors.py",
+          "sha256": "ad5a7b4aebaa320f8fbdbedb6686c81bbad2fe50897d9d5539eea2687568d85f",
+          "bytes": 2364
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/sources/backend/tests/test_ontology_attributes.py",
+          "sha256": "2959000b2f327755bd75cefd24c6c46300c1cae8aeb70ee69f9d07989963c22c",
+          "bytes": 8203
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/sources/backend/tests/test_ontology_generator.py",
+          "sha256": "ca17fe3d212cc7bb6a650dc131f3e30f918a153d32561cfd6165041c9504a590",
+          "bytes": 2457
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/sources/backend/tests/test_openai_chat_compat.py",
+          "sha256": "74beef867a3276a97e82e20be53832154c6d68278e89fbe16de0e75a4bfe8921",
+          "bytes": 3299
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/sources/backend/tests/test_platform_profiles.py",
+          "sha256": "ebbfac88d0ddf5008b2d8e1c1c77e9e3c7b9e386364fffff0aeddca8c3985f6b",
+          "bytes": 2047
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/sources/backend/tests/test_profile_field_normalization.py",
+          "sha256": "6fa99d1c71567f8d02a07a4aab14ed0f7a16b3ec6980e69594596484ca7fe40e",
+          "bytes": 2711
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/sources/backend/tests/test_report_tool_result_sanitizer.py",
+          "sha256": "94f71ce1cee6b6429288ac2771c38e44197e79a6374135166b17297bbf462f57",
+          "bytes": 963
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/sources/backend/tests/test_simulation_prepare_failure.py",
+          "sha256": "9afbfcfafb390c0216064e7bdb45e326039f0a37549987c4bd596773747d10c5",
+          "bytes": 3462
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/sources/backend/tests/test_zep_cloud_contracts.py",
+          "sha256": "6bba5c2d520671e83792951ca9682648ac405ff425d9775ca0233763a715ccca",
+          "bytes": 17117
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/sources/backend/tests/test_zep_cloud_validation_script.py",
+          "sha256": "a3e595b1af1e7dc265d0ae9c111fc79e4a9b4e4d1a1b4ee167b2833d458fd33b",
+          "bytes": 3221
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/sources/backend/tests/test_zep_edge_paging.py",
+          "sha256": "814ea8f03910e4b77fb22d1c74686b8a72c676d5027b441e5918b65cd71989fc",
+          "bytes": 3400
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/sources/backend/tests/test_zep_entity_reader_edges.py",
+          "sha256": "1423b21082d25e29e7e1c01319815f37c40589ebeb1ab4d0bf62d7c084e8ec6f",
+          "bytes": 1229
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/sources/backend/tests/test_zep_graph_lifecycle.py",
+          "sha256": "a698574e2bc8dd3fb7f4f8e19df4c8e09f1bab49f527ba3341c43f3e516b4031",
+          "bytes": 12775
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/sources/backend/tests/test_zep_graph_memory_updater.py",
+          "sha256": "18eb0df889a0fe438a94a8c51d485b0c93eff707f4a579d122169671c08e1ed8",
+          "bytes": 7142
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/sources/backend/tests/test_zep_report_barrier.py",
+          "sha256": "04ebfee7524cf56af246efea54bbc13be43098ef90c85de149df6ab9e1a5c119",
+          "bytes": 8868
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/sources/backend/tests/test_zep_retry_and_client.py",
+          "sha256": "699f9644181100d71cda433d530221fc31436589c36d55628bd75f0a75ed6553",
+          "bytes": 3141
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/sources/backend/tests/test_zep_simulation_barrier.py",
+          "sha256": "77b59039841ea4a1b0873b56051d074fedb336b10283ce3f2ca7d3e392e92bed",
+          "bytes": 15448
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/sources/tests/test_local_star_count_fetch.py",
+          "sha256": "f9368e145018b644f28104f15012ccbe99d124647966ee225bd4153f52dbb173",
+          "bytes": 13843
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-python01-oracle-preparation-20261029/sources/tests/test_local_star_history.py",
+          "sha256": "5d9fb5466b5d121432d9e82869edf91fe41cb1f02b8a6fe704372fb167368d55",
+          "bytes": 35557
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-01",
+      "kind": "repository",
+      "upstream": "666ghj/MiroFish",
+      "revision": "7657031ac01184afe2cb220f5ee3545573b5e843",
+      "evidence": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/source-bindings.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-01/.github/workflows/update-star-history.yml",
+          "sha256": "cd63f857c71823963a3d9ef678328478870e2750c3c1f41ac708b1fa7ecec70e",
+          "bytes": 18211
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-01/README.md",
+          "sha256": "5109feef87d494dd77c0eb225486d4278fe3eb61b303574600bcf8c3c339d034",
+          "bytes": 8958
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-01/backend/pyproject.toml",
+          "sha256": "e923fa98056d1b6085ab789993a1d05f31bfc1e8cbbb6b9aa17d49663253c1a2",
+          "bytes": 1080
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-01/backend/scripts/test_profile_format.py",
+          "sha256": "c60feaff8d5727c7c473d9879742c85c352151b208ec8ff72d48ad9ff9e88f17",
+          "bytes": 5856
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-01/backend/tests/test_ontology_generator.py",
+          "sha256": "ca17fe3d212cc7bb6a650dc131f3e30f918a153d32561cfd6165041c9504a590",
+          "bytes": 2457
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-01/backend/tests/test_simulation_prepare_failure.py",
+          "sha256": "9afbfcfafb390c0216064e7bdb45e326039f0a37549987c4bd596773747d10c5",
+          "bytes": 3462
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-01/frontend/package.json",
+          "sha256": "f972113d3cca752acc44f7e63d97fec138b2a34388b173f85f847bf7108fe852",
+          "bytes": 419
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-01/package.json",
+          "sha256": "f2b8cc90bc21b0b4990d5192b5e7c09161982760dede52cb743862d908526715",
+          "bytes": 702
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-01/tests/test_local_star_count_fetch.py",
+          "sha256": "f9368e145018b644f28104f15012ccbe99d124647966ee225bd4153f52dbb173",
+          "bytes": 13843
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-01/tests/test_local_star_history.py",
+          "sha256": "5d9fb5466b5d121432d9e82869edf91fe41cb1f02b8a6fe704372fb167368d55",
+          "bytes": 35557
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-02",
+      "kind": "repository",
+      "upstream": "home-assistant/core",
+      "revision": "cde3969919b9bd540b2dd75b7aa84a908acbdbfe",
+      "evidence": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/source-bindings.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-02/.github/actions/restore-or-build-venv/action.yml",
+          "sha256": "db8dc6fe6b4fca8e545fdb7d62e67587900fba00bbdc58fb53a1918647ee08fe",
+          "bytes": 5104
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-02/.github/workflows/ci.yaml",
+          "sha256": "ea64635b1138a135028789032291fec4fbb57a6ede34c4a132d243137c3c75b5",
+          "bytes": 67496
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-02/.python-version",
+          "sha256": "4f4c88910b6d485ae689143880e5e81b595a48a51ecb391b2f14feaec106d180",
+          "bytes": 8
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-02/AGENTS.md",
+          "sha256": "2067e1d10c6da85df9856da6e5cbe1346d7d01949ccfbea96ff1b73394a643fa",
+          "bytes": 5708
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-02/packages/pytest-home-assistant/pyproject.toml",
+          "sha256": "2baf0f2f02b1af463cd525f82386133734cc87819d3d46cc70fd893e467a839e",
+          "bytes": 1431
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-02/packages/pytest-home-assistant/pytest_homeassistant/bootstrap.py",
+          "sha256": "21b652e6ebd699692ed5ac8218a625fda8dfb6c1c43c2b45caca42fdfa488928",
+          "bytes": 337
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-02/packages/pytest-home-assistant/pytest_homeassistant/plugins.py",
+          "sha256": "ba567c653a3ffeb0448f1b6d89b8b3d5a2c6113ae40340d4c00d818646474992",
+          "bytes": 83632
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-02/pyproject.toml",
+          "sha256": "60bc823ebd5fbab24c44b1b7aeed13db1a9d51378f2ddb13bf9d0af2c77c78c7",
+          "bytes": 42457
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-02/requirements_test.txt",
+          "sha256": "cbca7d43b49f697bd18825b412170c10f479fbdab63db99cfbdf63918f44d0aa",
+          "bytes": 1548
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-02/script/bootstrap",
+          "sha256": "c920c9b8347b46abd7dbb12833fb125d393e3a637317405b4c7c2bdf7e2789c4",
+          "bytes": 511
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-02/script/setup",
+          "sha256": "b56bbc608ab81944b3f6507b4cf52dfdac470b9f5312fb3c0bfd9f70810765f0",
+          "bytes": 1012
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-02/tests/__init__.py",
+          "sha256": "aeaf1eb6f0778915de3377af758757af9a2a3e289c80f6113dfff915ec081e1f",
+          "bytes": 305
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-02/tests/test_core.py",
+          "sha256": "c2031802fc71595f384e10151026540c9f2b17f9f5480d087da7adfe36eb950d",
+          "bytes": 115021
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-03",
+      "kind": "repository",
+      "upstream": "ytdl-org/youtube-dl",
+      "revision": "956b8c585591b401a543e409accb163eeaaa1193",
+      "evidence": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/source-bindings.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-03/.github/workflows/ci.yml",
+          "sha256": "10d0709634aca656e9ff0ed55a7586dee6545d8fa780ef43938550dc94da4455",
+          "bytes": 20832
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-03/CONTRIBUTING.md",
+          "sha256": "b7f4dd2ac304c224b671d4830813bd6b2b8799da8d78f13cf927d4379ebac247",
+          "bytes": 22864
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-03/Makefile",
+          "sha256": "5335edf29074bb04a286c62f93e9cb8505b789982700ca14fb22dafb42986aa4",
+          "bytes": 6235
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-03/devscripts/run_tests.sh",
+          "sha256": "957a422ea5da44d12a69addcc6a27f66c7e68963601c6a299e419e6c8f32cc11",
+          "bytes": 562
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-03/setup.py",
+          "sha256": "b22fbdb4f23e480976e1a5a20b95848c26680b04b796838756241191bd8dfb4d",
+          "bytes": 4621
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-03/test/helper.py",
+          "sha256": "1a71eb39bc2628ef9d6c1fb87c521914d5dd3ccbb17d1cf164be892f789bb055",
+          "bytes": 10843
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-03/test/parameters.json",
+          "sha256": "859ff098d3ea4ade2188afc09d6efab96be479a8c3a6a576f451ccaf55edc685",
+          "bytes": 1052
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-03/test/test_YoutubeDL.py",
+          "sha256": "07f9b1b9506b67b123121c9f9630dfaa90d127354f7135fd6914ddb7cfa79dd6",
+          "bytes": 49179
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-03/test/test_download.py",
+          "sha256": "1c96c9d0727cbf8c01a449bb2bf94f659293040590a6ed7b3c8b6edc825b3fe5",
+          "bytes": 11526
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-03/test/test_downloader_http.py",
+          "sha256": "b0b6863e5ef58a5e386a7a1769e04e4e957cd60eb878ed3bffeeb26f61119dad",
+          "bytes": 3383
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-03/test/test_socks.py",
+          "sha256": "c63a0ccc3396850e82fafc14627f8d7cb2fbdef45cba5254726eeaf129812555",
+          "bytes": 3500
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-03/test/test_utils.py",
+          "sha256": "6c74527100dc8b1d9077e9fdcc6fa6b79c12b4eaf1779420fb097ec22f404d2d",
+          "bytes": 80951
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/python-03/tox.ini",
+          "sha256": "75c47b0f9ed2b6ac528d34c6f0579e09de1a4f0809d18397120827a67dde2274",
+          "bytes": 614
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/rust-01",
+      "kind": "repository",
+      "upstream": "tauri-apps/tauri",
+      "revision": "548a3692f59405aeb239c5b63fa589824eee51e8",
+      "evidence": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/source-bindings.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/rust-01/.github/CONTRIBUTING.md",
+          "sha256": "28fc0f28ee0642a903bd62e283429a40f7337891d75ff6d7e7739675400d6123",
+          "bytes": 8196
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/rust-01/.github/workflows/test-cli-js.yml",
+          "sha256": "796a4cbaeea61fccd5f79a164bf0cc42a9250631466b3de34508ec40c0dec7c2",
+          "bytes": 2004
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/rust-01/.github/workflows/test-cli-rs.yml",
+          "sha256": "06b72994865724d61c5d45065fdb0705ed78d377fbe982126a04335ace4e6dca",
+          "bytes": 2705
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/rust-01/.github/workflows/test-core.yml",
+          "sha256": "37c4f7098d4285a3393c1788c704d9ced6eaddaaa4fdcbf77669b3dbc53db4b7",
+          "bytes": 5301
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/rust-01/Cargo.toml",
+          "sha256": "6e04a4e37699cf7d44d35d14fa4f0626bbaea7cde433b81ad8a9adeefe211bc1",
+          "bytes": 2953
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/rust-01/crates/tauri-schema-worker/package.json",
+          "sha256": "af8bd2de383f9169bda138031912a17ff7174635b5c072662c675ba8875267b8",
+          "bytes": 247
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/rust-01/examples/api/package.json",
+          "sha256": "bb459d5225d42cbaa05c9fd927db4c4eea06562331c811f0146070b19f304341",
+          "bytes": 627
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/rust-01/examples/file-associations/package.json",
+          "sha256": "97dd1852ccce1fecaf6bcdc0880ecba0cf34b34b58dc02251786f1d5119bd85c",
+          "bytes": 204
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/rust-01/examples/resources/package.json",
+          "sha256": "a631bbe4e3c045c42acbb1f302dd58a0d4a23e3277945efa2c5519707d282369",
+          "bytes": 116
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/rust-01/package.json",
+          "sha256": "2d5725b499d90f9360dafa4a7204b95d48caae0f7268dbc1dbf99c22056a1e0d",
+          "bytes": 1333
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/rust-01/packages/api-e2e/package.json",
+          "sha256": "b839c202c824ad58b1af3cc7357f821378122d2f7fa44a442bceccaa1adf5b40",
+          "bytes": 1112
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/rust-01/packages/api/package.json",
+          "sha256": "25e4d15f311d5c7f875f7d56afcc08f6a77483b5ebd3a314c32a30f015c86fa8",
+          "bytes": 1760
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/rust-01/packages/cli/__tests__/template.spec.ts",
+          "sha256": "86ab8db90bd91c8591116303ac9c9bc38e32557d3b18ee7cf79d356e5e7d8f15",
+          "bytes": 2405
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/rust-01/packages/cli/package.json",
+          "sha256": "d9b292bd391da3c43a1a392341ef34eae9fd4bfbd8d089b39c17551bff8911d1",
+          "bytes": 1889
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-qualification-next8-20261029/independent-scope-review/sources/rust-01/pnpm-workspace.yaml",
+          "sha256": "3a9cb62cca5274f755558a9831624b57ef54c7c9dbe428f5795844137d8ff90a",
+          "bytes": 832
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-typescript03-environment-plan-20261029/sources",
+      "kind": "repository",
+      "upstream": "vuejs/core",
+      "revision": "05db7e807be841e6f343d0237669669b18c89d4d",
+      "evidence": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/vuejs/core/_commit.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-20261029/sources/.github/contributing.md",
+          "sha256": "433673810dc21f66c83884a108a45ec5d1192d1964e6f2cefe840bfeb6de9843",
+          "bytes": 19541
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-20261029/sources/.github/workflows/ci.yml",
+          "sha256": "de90c129f8eff66393f4e52c2c7faf344864263327de5324decb70a390d0cd35",
+          "bytes": 1410
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-20261029/sources/.github/workflows/test.yml",
+          "sha256": "e3c271c035e23b87a1351b3459e2c37670322c518bee295a465b5f604b8fe189",
+          "bytes": 3587
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-20261029/sources/.node-version",
+          "sha256": "a784a891ee985530f25d616fa372d1b360fc9d4ef38932ab8dc2f45edfa5b01d",
+          "bytes": 5
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-20261029/sources/package.json",
+          "sha256": "e55e3b7b508c74dc88e9fae8f445ebfb95052b4c50f8503d9cb17594f802e4d1",
+          "bytes": 5155
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-20261029/sources/packages/vue/__tests__/e2e/Transition.spec.ts",
+          "sha256": "485953d57b87e8964c4d65701d6d636ac3f4811875ef1b2f0cbdeb86361bdac2",
+          "bytes": 133173
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-20261029/sources/packages/vue/__tests__/e2e/e2eBrowserUtils.ts",
+          "sha256": "2d0cb3dae05d665d2e53b98b5364b1510abbb65ba4d3c508aed76c92683db795",
+          "bytes": 11752
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-20261029/sources/packages/vue/__tests__/e2e/e2eUtils.ts",
+          "sha256": "ce93fefd0ba26af6ceebdeb276fb4e6112b37a00a92b68ae65321029cd91fb4a",
+          "bytes": 5641
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-20261029/sources/packages/vue/package.json",
+          "sha256": "206e267a523cd5ebbcdfab2ef2a243566cdbdd3d54c3d3bfd422fd64c12d22dc",
+          "bytes": 2795
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-20261029/sources/pnpm-lock.yaml",
+          "sha256": "13d0f6c58ac31f229387442e42a35a66a700386349ee1b99bdb7e6a2fbc3aadd",
+          "bytes": 201228
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-20261029/sources/pnpm-workspace.yaml",
+          "sha256": "54d0a86d1828707bbfe24214ee584167ce08dc70f6bfccb2fcea748e6f1c8401",
+          "bytes": 862
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-20261029/sources/rollup.config.js",
+          "sha256": "aa56adca0bb604d70c463270fa6fac6d32f8ce984a4e3c888f4f0e63091d2de1",
+          "bytes": 11836
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-20261029/sources/scripts/aliases.js",
+          "sha256": "28386214b05ddbf585110f6927d0c6d0cd870c594076633105ec50add3ac73bd",
+          "bytes": 1042
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-20261029/sources/scripts/build.js",
+          "sha256": "ed2d1f50b6f8daeda0aa48ca9c9bcfeb3ea04386f101baa76620e03783068490",
+          "bytes": 6449
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-20261029/sources/scripts/inline-enums.js",
+          "sha256": "ea98e3ddb56cce7e44254f386ab15f3bdeb26a9f87ff1c0ff809b1d7df7048d1",
+          "bytes": 9308
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-20261029/sources/scripts/setup-vitest.ts",
+          "sha256": "6bc3196d8b0d21bdb2f159ea9da42d051038802f1726ab17a6a5d2b3520eb59d",
+          "bytes": 2771
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-20261029/sources/scripts/utils.js",
+          "sha256": "3c65bcc9a67edf9282f80f54369109ca21cebfbba682ace741c07aad01cfb431",
+          "bytes": 2598
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-20261029/sources/vitest.config.ts",
+          "sha256": "98db4cc683fa725ef5beb3b19f215d07ffb972cf80650b404221a73aaa03a361",
+          "bytes": 3321
+        }
+      ]
+    },
+    {
+      "captureRoot": "benchmarks/head-to-head/f05-typescript03-environment-plan-review-20261029/replay/sources",
+      "kind": "repository",
+      "upstream": "vuejs/core",
+      "revision": "05db7e807be841e6f343d0237669669b18c89d4d",
+      "evidence": "benchmarks/head-to-head/f05-agent-tasks-20261029/sources/github.com/vuejs/core/_commit.json",
+      "files": [
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-review-20261029/replay/sources/.github/contributing.md",
+          "sha256": "433673810dc21f66c83884a108a45ec5d1192d1964e6f2cefe840bfeb6de9843",
+          "bytes": 19541
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-review-20261029/replay/sources/.github/workflows/ci.yml",
+          "sha256": "de90c129f8eff66393f4e52c2c7faf344864263327de5324decb70a390d0cd35",
+          "bytes": 1410
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-review-20261029/replay/sources/.github/workflows/test.yml",
+          "sha256": "e3c271c035e23b87a1351b3459e2c37670322c518bee295a465b5f604b8fe189",
+          "bytes": 3587
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-review-20261029/replay/sources/.node-version",
+          "sha256": "a784a891ee985530f25d616fa372d1b360fc9d4ef38932ab8dc2f45edfa5b01d",
+          "bytes": 5
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-review-20261029/replay/sources/package.json",
+          "sha256": "e55e3b7b508c74dc88e9fae8f445ebfb95052b4c50f8503d9cb17594f802e4d1",
+          "bytes": 5155
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-review-20261029/replay/sources/packages/vue/__tests__/e2e/Transition.spec.ts",
+          "sha256": "485953d57b87e8964c4d65701d6d636ac3f4811875ef1b2f0cbdeb86361bdac2",
+          "bytes": 133173
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-review-20261029/replay/sources/packages/vue/__tests__/e2e/e2eBrowserUtils.ts",
+          "sha256": "2d0cb3dae05d665d2e53b98b5364b1510abbb65ba4d3c508aed76c92683db795",
+          "bytes": 11752
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-review-20261029/replay/sources/packages/vue/__tests__/e2e/e2eUtils.ts",
+          "sha256": "ce93fefd0ba26af6ceebdeb276fb4e6112b37a00a92b68ae65321029cd91fb4a",
+          "bytes": 5641
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-review-20261029/replay/sources/packages/vue/package.json",
+          "sha256": "206e267a523cd5ebbcdfab2ef2a243566cdbdd3d54c3d3bfd422fd64c12d22dc",
+          "bytes": 2795
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-review-20261029/replay/sources/pnpm-lock.yaml",
+          "sha256": "13d0f6c58ac31f229387442e42a35a66a700386349ee1b99bdb7e6a2fbc3aadd",
+          "bytes": 201228
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-review-20261029/replay/sources/pnpm-workspace.yaml",
+          "sha256": "54d0a86d1828707bbfe24214ee584167ce08dc70f6bfccb2fcea748e6f1c8401",
+          "bytes": 862
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-review-20261029/replay/sources/rollup.config.js",
+          "sha256": "aa56adca0bb604d70c463270fa6fac6d32f8ce984a4e3c888f4f0e63091d2de1",
+          "bytes": 11836
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-review-20261029/replay/sources/scripts/aliases.js",
+          "sha256": "28386214b05ddbf585110f6927d0c6d0cd870c594076633105ec50add3ac73bd",
+          "bytes": 1042
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-review-20261029/replay/sources/scripts/build.js",
+          "sha256": "ed2d1f50b6f8daeda0aa48ca9c9bcfeb3ea04386f101baa76620e03783068490",
+          "bytes": 6449
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-review-20261029/replay/sources/scripts/inline-enums.js",
+          "sha256": "ea98e3ddb56cce7e44254f386ab15f3bdeb26a9f87ff1c0ff809b1d7df7048d1",
+          "bytes": 9308
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-review-20261029/replay/sources/scripts/setup-vitest.ts",
+          "sha256": "6bc3196d8b0d21bdb2f159ea9da42d051038802f1726ab17a6a5d2b3520eb59d",
+          "bytes": 2771
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-review-20261029/replay/sources/scripts/utils.js",
+          "sha256": "3c65bcc9a67edf9282f80f54369109ca21cebfbba682ace741c07aad01cfb431",
+          "bytes": 2598
+        },
+        {
+          "path": "benchmarks/head-to-head/f05-typescript03-environment-plan-review-20261029/replay/sources/vitest.config.ts",
+          "sha256": "98db4cc683fa725ef5beb3b19f215d07ffb972cf80650b404221a73aaa03a361",
+          "bytes": 3321
+        }
+      ]
+    }
+  ]
+}
