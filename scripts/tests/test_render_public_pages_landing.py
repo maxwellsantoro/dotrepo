@@ -234,4 +234,7 @@ def test_rendered_install_command_tracks_the_install_guide(tmp_path, monkeypatch
     assert "cargo install dotrepo-mcp --version 1.0.4 --locked" in rendered
     assert "cargo install dotrepo-mcp --version 1.0.1 --locked" not in rendered
     assert "release-compatibility.md" in rendered
+    assert "published 2.0.0-rc.2 preview" in rendered
+    assert "Stable 1.0.4 and RC2" in rendered
+    assert "RC1 predates them" in rendered
     assert "the published RC predates it" not in rendered

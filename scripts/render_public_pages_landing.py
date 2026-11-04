@@ -2888,8 +2888,9 @@ def main() -> int:
       <p>Restart the client, then ask it to call <code>dotrepo.lookup</code> with
         <code>repositoryUrl: "https://github.com/pydantic/pydantic"</code> and
         <code>path: "repo.test"</code>. It returns the value with its trust context.
-        A 2.0 preview adds full profile output;
-        <a href="https://github.com/lazy-collective/dotrepo/blob/main/docs/release-compatibility.md">compare versions</a>.</p>
+        The published 2.0.0-rc.2 preview adds full profile output. Stable 1.0.4 and RC2
+        include the contained-write protections; RC1 predates them, so do not use RC1.
+        <a href="https://github.com/lazy-collective/dotrepo/blob/main/docs/release-compatibility.md">Compare versions</a>.</p>
       <div class="cta-row">
         <a class="cta cta--primary" href="https://github.com/lazy-collective/dotrepo/blob/main/docs/external-consumer-integration.md">Integration and fallback guide</a>
         <a class="cta cta--secondary" href="{site_href(base_path, "/efficiency/")}">Coverage and benchmark limitations</a>
