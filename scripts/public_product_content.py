@@ -62,18 +62,50 @@ def render_record_freshness(public_root: Path, inventory: dict, now: str) -> str
       A new export does not refresh the underlying facts.</span></div>"""
 
 
+# Showcase well-known repositories whose exported profile answers every homepage
+# question; fall back to the most complete profile so the example stays real.
+SHOWCASE_REPOSITORIES = (
+    "github.com/pydantic/pydantic",
+    "github.com/microsoft/TypeScript",
+    "github.com/neovim/neovim",
+    "github.com/prettier/prettier",
+)
+
+
+def profile_completeness(profile: dict) -> int:
+    return sum(
+        bool(value)
+        for value in (
+            profile.get("purpose"),
+            profile.get("execution", {}).get("build"),
+            profile.get("execution", {}).get("test"),
+            profile.get("docs", {}).get("root"),
+            profile.get("ownership", {}).get("securityContact"),
+        )
+    )
+
+
+def showcase_profile(candidates: list[dict]) -> dict | None:
+    if not candidates:
+        return None
+
+    def label(profile: dict) -> str:
+        identity = profile.get("identity", {})
+        return "/".join(identity.get(key, "") for key in ("host", "owner", "repo"))
+
+    by_label = {label(p): p for p in candidates}
+    for preferred in SHOWCASE_REPOSITORIES:
+        profile = by_label.get(preferred)
+        if profile is not None and profile_completeness(profile) == 5:
+            return profile
+    return max(candidates, key=profile_completeness)
+
+
 def render_profile_example(public_root: Path, inventory: dict, base_path: str) -> str:
     candidates = list(profiles(public_root, inventory))
     if not candidates:
         return '<section class="panel section"><h2>Profile example</h2><p>No exported profile is available.</p></section>'
-    profile = next(
-        (
-            p
-            for p in candidates
-            if p["identity"]["owner"] == "BurntSushi" and p["identity"]["repo"] == "ripgrep"
-        ),
-        candidates[0],
-    )
+    profile = showcase_profile(candidates)
     identity = profile["identity"]
     label = "/".join(identity[key] for key in ("host", "owner", "repo"))
     record = profile.get("record", {})
@@ -109,15 +141,7 @@ def render_profile_example(public_root: Path, inventory: dict, base_path: str) -
 def render_lookup_example(public_root: Path, inventory: dict, base_path: str, now: str) -> str:
     """Show a real exported command with provenance and age, including honest gaps."""
     candidates = list(profiles(public_root, inventory))
-    profile = next(
-        (
-            p
-            for p in candidates
-            if p.get("identity", {}).get("owner") == "BurntSushi"
-            and p.get("identity", {}).get("repo") == "ripgrep"
-        ),
-        candidates[0] if candidates else None,
-    )
+    profile = showcase_profile(candidates)
     if profile is None:
         return '<aside class="panel lookup-example"><h2>Try a repository lookup</h2><p>No profile is available in this export. Inspect the upstream repository when a lookup misses.</p></aside>'
     identity = profile["identity"]

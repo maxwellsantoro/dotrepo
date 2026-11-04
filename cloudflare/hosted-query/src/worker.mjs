@@ -1173,6 +1173,45 @@ async function buildBatchQueryResponse(env, request, repoParams, paths, freshnes
   };
 }
 
+const NOT_MODIFIED_HEADERS = [
+  "cache-control", "content-location", "date", "etag", "expires", "last-modified", "vary"
+];
+
+function entityTagMatches(header, etag) {
+  const opaque = (tag) => tag.trim().replace(/^W\//, "");
+  const wanted = opaque(etag);
+  return header.split(",").some((tag) => opaque(tag) === "*" || opaque(tag) === wanted);
+}
+
+/**
+ * Answer conditional GET/HEAD requests for responses assembled from internal
+ * asset reads, which do not forward the client's validators (RFC 9110 13.1).
+ */
+export function applyConditionalRequest(request, response) {
+  if (response.status !== 200 || (request.method !== "GET" && request.method !== "HEAD")) {
+    return response;
+  }
+  const etag = response.headers.get("etag");
+  const ifNoneMatch = request.headers.get("if-none-match");
+  let notModified = false;
+  if (ifNoneMatch !== null) {
+    notModified = etag !== null && entityTagMatches(ifNoneMatch, etag);
+  } else {
+    const lastModified = Date.parse(response.headers.get("last-modified") ?? "");
+    const since = Date.parse(request.headers.get("if-modified-since") ?? "");
+    notModified = Number.isFinite(lastModified) && Number.isFinite(since) && lastModified <= since;
+  }
+  if (!notModified) {
+    return response;
+  }
+  const headers = new Headers();
+  for (const name of NOT_MODIFIED_HEADERS) {
+    const value = response.headers.get(name);
+    if (value !== null) headers.set(name, value);
+  }
+  return new Response(null, { status: 304, headers });
+}
+
 function withCacheControl(response, cacheControl) {
   const headers = new Headers(response.headers);
   headers.set("cache-control", cacheControl);
@@ -1291,7 +1330,10 @@ async function serveStaticAsset(request, env, strippedPath) {
     }
   }
 
-  return cacheControl === null ? response : withCacheControl(response, cacheControl);
+  return applyConditionalRequest(
+    request,
+    cacheControl === null ? response : withCacheControl(response, cacheControl)
+  );
 }
 
 export async function handleRequest(request, env) {

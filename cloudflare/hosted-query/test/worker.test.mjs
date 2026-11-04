@@ -928,6 +928,58 @@ test("marks pointer and immutable snapshot responses with distinct cache policie
   assert.equal(snapshot.headers.get("cache-control"), "public, max-age=31536000, immutable");
 });
 
+test("answers conditional requests for repository surfaces read through internal assets", async () => {
+  const files = new Map([
+    [
+      "/v0/meta.json",
+      JSON.stringify({ snapshotDigest: "abc123", paths: { root: "/v0/snapshots/abc123" } })
+    ],
+    ["/v0/snapshots/abc123/repos/github.com/acme/widget/profile.json", "{\"name\":\"widget\"}"]
+  ]);
+  const assets = makeAssets(files);
+  // Internal reads drop client validators, so the asset layer always returns 200.
+  const env = {
+    BASE_PATH: "/",
+    ASSETS: {
+      async fetch(input) {
+        const response = await assets.fetch(input);
+        const headers = new Headers(response.headers);
+        if (response.status === 200) headers.set("etag", "\"profile-v1\"");
+        return new Response(response.body, { status: response.status, headers });
+      }
+    }
+  };
+  const url = "https://example.test/v0/repos/github.com/acme/widget/profile.json";
+
+  const first = await handleRequest(new Request(url), env);
+  assert.equal(first.status, 200);
+  assert.equal(first.headers.get("etag"), "\"profile-v1\"");
+
+  const matching = await handleRequest(
+    new Request(url, { headers: { "if-none-match": "W/\"other\", \"profile-v1\"" } }),
+    env
+  );
+  assert.equal(matching.status, 304);
+  assert.equal(await matching.text(), "");
+  assert.equal(matching.headers.get("etag"), "\"profile-v1\"");
+  assert.equal(matching.headers.get("cache-control"), "no-cache");
+
+  const different = await handleRequest(
+    new Request(url, { headers: { "if-none-match": "\"profile-v0\"" } }),
+    env
+  );
+  assert.equal(different.status, 200);
+  assert.deepEqual(await different.json(), { name: "widget" });
+
+  const missing = await handleRequest(
+    new Request("https://example.test/v0/repos/github.com/acme/absent/profile.json", {
+      headers: { "if-none-match": "*" }
+    }),
+    env
+  );
+  assert.equal(missing.status, 404);
+});
+
 test("falls through to R2 archive for older immutable snapshots", async () => {
   const files = new Map([
     ["/v0/meta.json", "{\"snapshotDigest\":\"current\"}"]
