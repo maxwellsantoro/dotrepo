@@ -297,15 +297,26 @@ fn pagedigest_economics_stats(
     let mut changed_records = 0usize;
     let mut unchanged_records = 0usize;
     let mut bytes_covered = 0usize;
-    let mut bytes_avoided = 0usize;
+    let mut byte_identical_records = 0usize;
+    let mut byte_identical_bytes = 0usize;
+    let mut revalidatable_records = 0usize;
+    let mut revalidatable_bytes = 0usize;
     for (key, entry) in &current.entries {
         let bytes = bytes_by_key.get(key).copied().unwrap_or(0);
         bytes_covered += bytes;
-        match previous.and_then(|manifest| manifest.entries.get(key)) {
+        let prior = previous.and_then(|manifest| manifest.entries.get(key));
+        if let Some(prior) = prior.filter(|prior| prior.digest == entry.digest) {
+            byte_identical_records += 1;
+            byte_identical_bytes += bytes;
+            if prior.rev == entry.rev {
+                revalidatable_records += 1;
+                revalidatable_bytes += bytes;
+            }
+        }
+        match prior {
             None => new_records += 1,
             Some(prior) if prior.content_digest == entry.content_digest => {
                 unchanged_records += 1;
-                bytes_avoided += bytes;
             }
             Some(_) => changed_records += 1,
         }
@@ -319,7 +330,7 @@ fn pagedigest_economics_stats(
                 .count()
         })
         .unwrap_or(0);
-    let records_needing_fetch = new_records + changed_records;
+    let records_needing_fetch = current.entries.len() - revalidatable_records;
     Ok(serde_json::json!({
         "version": current.version,
         "siteRev": current.site_rev,
@@ -331,10 +342,12 @@ fn pagedigest_economics_stats(
         "unchangedRecords": unchanged_records,
         "removedRecords": removed_records,
         "recordsNeedingFetch": records_needing_fetch,
-        "fetchesAvoided": unchanged_records,
+        "byteIdenticalRecords": byte_identical_records,
+        "byteIdenticalBytes": byte_identical_bytes,
+        "fetchesAvoided": revalidatable_records,
         "bytesCovered": bytes_covered,
-        "bytesAvoided": bytes_avoided,
-        "estimatedTokensAvoided": bytes_avoided / 4,
+        "bytesAvoided": revalidatable_bytes,
+        "estimatedTokensAvoided": revalidatable_bytes / 4,
     }))
 }
 

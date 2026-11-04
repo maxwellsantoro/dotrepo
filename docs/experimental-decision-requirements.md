@@ -29,7 +29,9 @@ option, discovery uses the admitted source profiles.
   available when this option is absent.
 - `dotrepo.decision.describe` returns repository evidence and assessment keys from a
   separate index of assessment-bearing components, independent of manifest
-  pagination. Continue that index with `requirementOffset` when
+  pagination. It includes earlier assessments whose declared sources still match
+  at the requested revision. Qualification reports their original assessed revision.
+  Continue that index with `requirementOffset` when
   `requirementKnowledgeNextOffset` is present. Optional `revision` pins an exact
   retained revision and refuses missing evidence instead of substituting HEAD.
 - `dotrepo.decision.qualify` checks 1–4 exact repository/revision/component targets

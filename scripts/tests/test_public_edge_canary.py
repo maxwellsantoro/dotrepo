@@ -83,6 +83,22 @@ def test_validate_pagedigest_stats_accepts_coherent_export_economics() -> None:
     }
 
 
+def test_validate_pagedigest_stats_separates_material_and_byte_matches() -> None:
+    current = stats()
+    current["pagedigest"].update(
+        byteIdenticalRecords=0,
+        byteIdenticalBytes=0,
+        recordsNeedingFetch=3,
+        fetchesAvoided=0,
+        bytesAvoided=0,
+        estimatedTokensAvoided=0,
+    )
+    assert canary.validate_pagedigest_stats(current, manifest())["fetchesAvoided"] == 0
+    current["pagedigest"].update(fetchesAvoided=1, recordsNeedingFetch=2)
+    with pytest.raises(canary.CanaryFailure, match="exact-body counts"):
+        canary.validate_pagedigest_stats(current, manifest())
+
+
 def test_validate_pagedigest_stats_is_optional_until_stats_bearing_export() -> None:
     assert canary.validate_pagedigest_stats({}, manifest()) is None
 

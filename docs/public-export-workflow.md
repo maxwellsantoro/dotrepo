@@ -125,9 +125,15 @@ Important details:
 - `v0/snapshots/log.json` records each published snapshot digest,
   `generatedAt`, repository count, and payload count
 - `v0/stats.json` derives latest/history/delta instrumentation from that log
-  and includes PageDigest economics for the current manifest: records covered,
-  records needing fetch, records skipped, bytes covered, bytes avoided, and a
-  coarse token-avoidance estimate
+  and compares successive manifests. `unchangedRecords` compares material content,
+  while `byteIdenticalRecords` and `byteIdenticalBytes` compare the full response hashes.
+  `fetchesAvoided` and `bytesAvoided` count potential reuse for a complete prior cache
+  only when the digest and URL revision both match. `recordsNeedingFetch` counts the
+  remainder under this policy. `estimatedTokensAvoided` is the legacy byte estimate
+  divided by four. Actual traffic, token use and cost require consumer measurements.
+  Older snapshots without the byte-identical fields counted material matches for
+  these estimates. New or returning URLs receive the next site revision, above
+  every earlier URL revision, even when a reader missed a removal
 - mutable `v0/repos/` and `v0/files.json` copies remain compatibility surfaces;
   the Worker resolves them through the pointer with revalidation required
 - deterministic mode changes freshness timestamps, not response semantics

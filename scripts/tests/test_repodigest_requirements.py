@@ -402,6 +402,14 @@ def test_new_admitted_revision_reuses_only_unchanged_declared_sources(database):
     )["candidates"][0]["findings"][0]
     assert finding["status"] == "supported" and finding["sourceStatus"] == "current"
     assert finding["assessments"][0]["assessedRevision"] == request["revision"]
+    describe = registry(reader, requirements=True)["dotrepo.decision.describe"][1]
+    knowledge = describe(repository=newer["repository"], revision=newer["revision"])[
+        "requirementKnowledge"
+    ]
+    assert any(
+        row["component"] == newer["component"] and finding["key"] in row["claimKeys"]
+        for row in knowledge
+    )
     reader.close()
 
 
