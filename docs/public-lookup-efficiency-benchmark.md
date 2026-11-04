@@ -4,8 +4,12 @@ dotrepo's public index is meant to be a reusable semantic cache: agents should
 look up compact repository facts before cloning, scraping, or asking a model to
 re-interpret the same source material.
 
-The deterministic benchmark harness measures that lookup path against a JSON
-workload of known-repository questions:
+The deterministic harness measures field presence and local artifact sizes.
+It does not measure the objective above or end-to-end task efficiency. See the
+[November 3 measurement review](measurement-review-20261103.md) for the population
+mix failure, counterexamples, consumer evidence and the benefit-evaluation rubric.
+The following command measures a changing-catalog diagnostic; release floors
+apply separately to the frozen regression cohort:
 
 ```bash
 uv run python scripts/build_public_lookup_workload.py \
@@ -18,14 +22,6 @@ uv run python scripts/measure_public_lookup_efficiency.py \
   --public-root public \
   --index-root index \
   --workload /tmp/dotrepo-public-lookup-workload.json \
-  --min-tasks 2452 \
-  --min-repositories 613 \
-  --min-task-hit-rate 0.525 \
-  --min-field-hit-rate 0.734 \
-  --min-intent-hit-rate overview=0.74 \
-  --min-intent-hit-rate execution=0.466 \
-  --min-intent-hit-rate documentation=0.543 \
-  --min-intent-hit-rate security=0.35 \
   --output-json /tmp/dotrepo-lookup-efficiency.json \
   --output-md /tmp/dotrepo-lookup-efficiency.md
 ```
@@ -71,9 +67,14 @@ can cache and reuse.
 
 ## Historical production-export snapshot
 
-The canonical release gate builds the research workload from all exported
-profiles and applies the versioned baseline in
-`scripts/fixtures/public_lookup_efficiency_baseline.json`. The pre-September-refresh result was:
+The canonical release gate reports the research workload from all exported
+profiles. It applies the versioned numeric baseline in
+`scripts/fixtures/public_lookup_efficiency_baseline.json` to a separate frozen
+615-repository cohort from pre-follow-up commit `303ed90a`. The
+`public-lookup-reference-*` artifacts retain that regression control, including
+missing repositories; `public-lookup-*` retains the whole changing catalog.
+No numeric floor was lowered. This post-observation engineering correction is
+not held-out evidence of product benefit. The pre-September-refresh result was:
 
 | Metric | Value |
 | --- | ---: |

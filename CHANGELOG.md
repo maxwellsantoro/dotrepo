@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- Separate full-catalog presence diagnostics from a frozen regression cohort; retain signed payload penalties and explicit measurement limits. The measurement review keeps useful task completion and combined work as the product outcome gates.
+
+- Reuse requirement assessments through timestamp-only record changes and
+  independently admitted revisions whose declared source hashes still match;
+  expose current/changed/unknown source status separately from requirement results.
+- Fetch and retain bounded native `.repo` declarations independently of observed
+  overlays, preserving draft labels and publisher provenance without trust promotion.
+- Add a keyboard-accessible mobile navigation menu with a visible no-JavaScript fallback.
+
 - Answer `If-None-Match`/`If-Modified-Since` with 304 for hosted static and
   repository surfaces, which previously returned full bodies because internal
   asset reads dropped client validators.

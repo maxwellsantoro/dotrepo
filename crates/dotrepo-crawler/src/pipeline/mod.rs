@@ -7,6 +7,7 @@
 
 mod evidence;
 mod merge;
+mod publisher;
 mod synthesis;
 mod writeback_gate;
 
@@ -253,6 +254,13 @@ pub(crate) fn crawl_repository_from_snapshot(
     )?;
 
     evidence::retain_field_evidence(&mut import_plan, &field_scores);
+    publisher::retain_declaration(
+        &materialized.repository_root,
+        &source_url,
+        snapshot.head_sha.as_deref(),
+        &mut import_plan,
+        &mut diagnostics,
+    )?;
     import_plan.manifest_text = render_manifest(&import_plan.manifest)?;
 
     let synthesis_sources = synthesis_sources_from_materialized(materialized);

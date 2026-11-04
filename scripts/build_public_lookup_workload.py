@@ -61,6 +61,11 @@ def parse_args() -> argparse.Namespace:
         ),
     )
     parser.add_argument("--output", required=True, help="Output workload JSON path")
+    parser.add_argument(
+        "--cohort",
+        type=Path,
+        help="Frozen research identities; keep absent repositories in the denominator",
+    )
     return parser.parse_args()
 
 
@@ -121,6 +126,7 @@ def build_workload(
     limit: int = 0,
     min_fields: int = 2,
     mode: str = "observed",
+    cohort: Path | None = None,
 ) -> dict[str, Any]:
     inventory_path = public_root / "v0" / "repos" / "index.json"
     inventory = load_json(inventory_path)
@@ -128,12 +134,34 @@ def build_workload(
     if not isinstance(repositories, list) or not repositories:
         raise SystemExit(f"inventory must contain a non-empty repositories array: {inventory_path}")
 
+    cohort_document = None
+    if cohort is not None:
+        if mode != "research" or limit != 0:
+            raise SystemExit("a frozen cohort requires research mode and no limit")
+        cohort_document = load_json(cohort)
+        identities = cohort_document.get("repositories")
+        if (
+            cohort_document.get("schema") != "dotrepo-public-lookup-cohort/v1"
+            or not isinstance(identities, list)
+            or not identities
+            or any(
+                not isinstance(identity, str)
+                or len(identity.split("/")) != 3
+                or any(part in ("", ".", "..") for part in identity.split("/"))
+                for identity in identities
+            )
+            or len(set(identities)) != len(identities)
+        ):
+            raise SystemExit(f"invalid frozen lookup cohort: {cohort}")
+        selected = sorted(identities)
+    else:
+        selected = sorted(
+            repository_from_identity(entry.get("identity") or {}) for entry in repositories
+        )
+
     tasks = []
     included_repositories = 0
-    for entry in sorted(
-        repositories, key=lambda item: repository_from_identity(item.get("identity") or {})
-    ):
-        repository = repository_from_identity(entry.get("identity") or {})
+    for repository in selected:
         if mode == "research":
             tasks.extend(research_tasks(repository))
         else:
@@ -167,6 +195,7 @@ def build_workload(
             "repositoryCount": len(repositories),
             "includedRepositoryCount": included_repositories,
             "taskCount": len(tasks),
+            **({"regressionCohort": cohort_document} if cohort_document is not None else {}),
         },
         "tasks": tasks,
     }
@@ -183,6 +212,7 @@ def main() -> None:
         limit=args.limit,
         min_fields=args.min_fields,
         mode=args.mode,
+        cohort=args.cohort,
     )
     Path(args.output).write_text(json.dumps(workload, indent=2, sort_keys=True) + "\n")
 

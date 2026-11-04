@@ -103,10 +103,22 @@ approve the SHA256 of the exact input bytes and identify its reviewer.
 
 Admission mechanically verifies source hashes and line bounds against previously
 admitted source, then retains the input, review and compiled record as immutable
-objects. It binds that record to the exact component source record, source policy
-and assessment-reader policy. Changing any binding requires re-admission.
-A requested newer revision does not inherit an older assessment. The service
-makes no live freshness check.
+objects. It preserves the original component/revision and binds interpretation
+to the declared source hashes, source policy and assessment-reader policy.
+Timestamp-only record changes do not invalidate it. At a separately admitted
+new revision, the same scoped assessment can be reused only when every declared
+source remains inspected, retained and byte-identical. The original
+`assessedRevision` remains visible; this is not a claim that the assessment was
+reviewed again. Source status is `current`, `changed` or `unknown`, independently
+of the requirement outcome. Only source-current assessments contribute to
+`supported` or `contradicted`; historical changed/unknown assessments remain
+visible. Admission-policy changes require re-admission, and the service makes
+no live network freshness check. The admitted source observation must still
+satisfy the existing 30-day freshness bound.
+
+Assessment authors must declare every source dependency their interpretation
+needs. Matching those bytes does not prove the interpretation or any external
+premise remains true; undeclared dependencies cannot be checked automatically.
 
 **The trusted operator chooses the reviewer.** The JSON approval does not prove
 semantic entailment, authenticate a reviewer, or establish reviewer independence.
@@ -114,8 +126,9 @@ The operator is responsible for those decisions. An automated independent review
 is not the public protocol's human `reviewed` status. This path does not mint
 public trust labels.
 
-Lookup validates compact record hashes and bindings without reopening the raw
-assessment sources or replaying the importer. It performs no network, model or
+Lookup validates compact record hashes, admitted source-inventory hashes and
+retained-body presence without reopening raw source bodies or replaying the
+importer. Body integrity is checked when source content is read. It performs no network, model or
 upstream execution. Assessment creation, review, refresh and consumer verification
 still have costs and must be included in a future total-work comparison.
 

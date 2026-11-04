@@ -436,11 +436,13 @@ def summarize(
         "bytesSaved": bytes_saved,
         "bytesSavedRatio": safe_ratio(bytes_saved, scrape_proxy_bytes),
         "dotrepoToScrapeProxyRatio": safe_ratio(dotrepo_bytes, scrape_proxy_bytes),
+        "dotrepoMinusScrapeProxyBytes": dotrepo_bytes - scrape_proxy_bytes,
         "uniqueFieldCount": len(fields),
         "dotrepoBatchQueryRequests": dotrepo_batch_query_requests,
         "scrapeProxyRequests": scrape_proxy_requests,
         "requestsSaved": requests_saved,
         "requestReductionRate": safe_ratio(requests_saved, scrape_proxy_requests),
+        "modeledDotrepoMinusProxyRequests": dotrepo_batch_query_requests - scrape_proxy_requests,
         "intentSummaries": intent_summaries,
     }
     gates = build_gates(
@@ -464,12 +466,22 @@ def summarize(
         "summary": summary,
         "gates": gates,
         "passed": all(gate["passed"] for gate in gates.values()),
+        "measurementScope": {
+            "kind": "field-presence-and-local-artifacts",
+            "fixedRegressionCohort": "regressionCohort" in workload.get("source", {}),
+            "independentCorrectnessMeasured": False,
+            "taskCompletionMeasured": False,
+            "endToEndCostMeasured": False,
+        },
         "tasks": tasks,
         "notes": [
             "scrapeProxyBytes uses checked-in record.toml and evidence.md as a deterministic local proxy, not live network scrape bytes",
             "dotrepoBytes counts unique public profile.json and query-input payloads needed by the workload",
             "dotrepoBatchQueryRequests estimates cacheable public batch-query GETs using the documented repository, path, and result limits",
             "scrapeProxyRequests counts unique checked-in record/evidence proxy files, not the larger live scrape request graph",
+            "hit means nonempty fields, including inferred values; it does not apply consumer policy or grade correctness, applicability, freshness, or task success",
+            "the inventory-generated workload excludes unindexed repositories and weights four synthetic field bundles equally; it is not a demand sample",
+            "signed payload/request differences retain penalties; legacy *Saved fields are clamped at zero and must not be interpreted as net benefit",
         ],
     }
 
@@ -495,6 +507,7 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"| bytes saved | {summary['bytesSaved']} |",
         f"| bytes saved ratio | {summary['bytesSavedRatio']} |",
         f"| dotrepo to scrape proxy ratio | {summary['dotrepoToScrapeProxyRatio']} |",
+        f"| dotrepo minus proxy bytes (signed) | {summary['dotrepoMinusScrapeProxyBytes']} |",
         f"| unique fields requested | {summary['uniqueFieldCount']} |",
         f"| dotrepo batch query requests | {summary['dotrepoBatchQueryRequests']} |",
         f"| scrape proxy requests | {summary['scrapeProxyRequests']} |",

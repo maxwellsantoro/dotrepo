@@ -36,6 +36,9 @@ const README_CANDIDATES: &[&str] = &[
 // doc-declared command extraction. `.csproj` / `.sln` are handled in
 // `fetch_dotnet_manifest_files` because their filenames are not fixed.
 const SUPPLEMENTAL_ROOT_FILES: &[&str] = &[
+    // Parsed independently by pipeline::publisher; never merged into observed
+    // facts or promoted into maintainer authority by the crawler.
+    ".repo",
     "Cargo.toml",
     "CONTRIBUTING.md",
     ".github/CONTRIBUTING.md",

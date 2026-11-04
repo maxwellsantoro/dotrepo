@@ -6,6 +6,7 @@ import argparse
 import json
 import re
 import sqlite3
+from datetime import datetime, timezone
 from functools import lru_cache
 from pathlib import Path
 
@@ -177,8 +178,8 @@ def admit(database, assessment_path, review_path):
                     raise ValueError("existing assessment/review corrupt")
                 db.execute("INSERT OR IGNORE INTO objects VALUES(?,?)", (sha(saved), saved))
             count = db.execute(
-                "SELECT COUNT(*) FROM requirement_sets WHERE source_record=? AND policy=?",
-                (root_digest, policy_id()),
+                "SELECT COUNT(*) FROM requirement_sets WHERE repository=? AND component=? AND policy=?",
+                (request["repository"], request["component"], policy_id()),
             ).fetchone()[0]
             if count >= MAX_SETS and not existing:
                 raise ValueError("assessment set limit reached")
@@ -192,11 +193,11 @@ def admit(database, assessment_path, review_path):
 
 
 def load(store, request):
-    root_digest, _ = source_record(store, request)
+    source_record(store, request)
     try:
         rows = store.db.execute(
-            "SELECT digest FROM requirement_sets WHERE repository=? AND revision=? AND component=? AND source_record=? AND policy=? LIMIT ?",
-            (*request.values(), root_digest, policy_id(), MAX_SETS + 1),
+            "SELECT digest,source_record FROM requirement_sets WHERE repository=? AND component=? AND policy=? LIMIT ?",
+            (request["repository"], request["component"], policy_id(), MAX_SETS + 1),
         ).fetchall()
     except sqlite3.OperationalError as error:
         if "no such table" not in str(error):
@@ -204,8 +205,17 @@ def load(store, request):
         rows = []
     if len(rows) > MAX_SETS:
         raise ValueError("assessment set limit exceeded")
+    reader = Reader(store)
+    try:
+        _, _, index, checked_at = reader.index(request["repository"], request["revision"])
+        age = (datetime.now(timezone.utc) - datetime.fromisoformat(checked_at)).total_seconds()
+        if not 0 <= age <= 30 * 86400:
+            raise ValueError("source admission stale or future")
+        source_error = None
+    except (ValueError, KeyError, TypeError) as error:
+        index, source_error = None, str(error)
     claims = []
-    for (digest,) in rows:
+    for digest, root_digest in rows:
         row = store.db.execute("SELECT body FROM objects WHERE digest=?", (digest,)).fetchone()
         if (
             not row
@@ -216,16 +226,56 @@ def load(store, request):
             raise ValueError("assessment record integrity failure")
         capsule = json.loads(row[0])
         if (
-            capsule["target"] != request
+            capsule["target"]["repository"] != request["repository"]
+            or capsule["target"]["component"] != request["component"]
             or capsule["sourceRecordSha256"] != root_digest
             or capsule["sourcePolicySha256"] != store.policy
             or capsule["policySha256"] != policy_id()
         ):
             raise ValueError("assessment binding/policy mismatch")
-        claims.extend(
-            {**c, "assessmentRecordSha256": digest, "reviewer": capsule["reviewer"]}
-            for c in capsule["claims"]
-        )
+        for claim in capsule["claims"]:
+            states, reasons = [], []
+            for reference in claim["evidence"]:
+                entry = index["files"].get(reference["path"]) if index else None
+                if (
+                    source_error
+                    or not entry
+                    or entry.get("mode") not in {"100644", "100755"}
+                    or not entry.get("sourceSha256")
+                ):
+                    states.append("unknown")
+                    reasons.append(
+                        source_error
+                        or "declared source missing, uninspected or not regular:"
+                        + reference["path"]
+                    )
+                elif entry["sourceSha256"] != reference["sha256"]:
+                    states.append("changed")
+                    reasons.append("declared source bytes changed:" + reference["path"])
+                elif not store.db.execute(
+                    "SELECT 1 FROM source_blobs WHERE digest=?", (reference["sha256"],)
+                ).fetchone():
+                    states.append("unknown")
+                    reasons.append("declared source body unavailable:" + reference["path"])
+                else:
+                    states.append("current")
+            status = (
+                "changed"
+                if "changed" in states
+                else "unknown"
+                if "unknown" in states
+                else "current"
+            )
+            claims.append(
+                {
+                    **claim,
+                    "assessmentRecordSha256": digest,
+                    "reviewer": capsule["reviewer"],
+                    "assessedRevision": capsule["target"]["revision"],
+                    "sourceStatus": status,
+                    "sourceReasons": reasons,
+                }
+            )
     return claims
 
 
@@ -233,7 +283,7 @@ def available(store, request):
     try:
         claims = load(store, target(request))
         return {
-            "claimKeys": sorted({c["key"] for c in claims}),
+            "claimKeys": sorted({c["key"] for c in claims if c["sourceStatus"] == "current"}),
             "meaning": "Exact experimental claim keys, not a universal capability vocabulary. Consult qualify for assessments; absence is unknown.",
         }
     except (ValueError, KeyError, TypeError) as error:
@@ -268,7 +318,8 @@ def qualify(store, candidates, requirements):
         findings = []
         for requirement in requirements:
             evidence = [c for c in claims if c["key"] == requirement["key"]]
-            values = {c["value"] for c in evidence}
+            current = [c for c in evidence if c["sourceStatus"] == "current"]
+            values = {c["value"] for c in current}
             status = (
                 "unknown"
                 if len(values) != 1
@@ -280,6 +331,11 @@ def qualify(store, candidates, requirements):
                 {
                     **requirement,
                     "status": status,
+                    "sourceStatus": "current"
+                    if current
+                    else "changed"
+                    if any(c["sourceStatus"] == "changed" for c in evidence)
+                    else "unknown",
                     "reason": "conflicting source assessments"
                     if len(values) > 1
                     else "no current scoped assessment; source silence does not establish absence"

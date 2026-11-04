@@ -1,0 +1,195 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/lazy-collective/dotrepo"
+generated_at = "2026-11-04T02:37:26.462082Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md`, `Cargo.toml`, and `CONTRIBUTING.md`. Inferred `repo.build` from `Cargo.toml`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "DotRepo"
+description = "Repository facts with evidence and age, with tools for publishers and consumers."
+homepage = "https://lazy-collective.github.io/dotrepo/"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Python",
+    "Rust",
+    "JavaScript",
+    "HTML",
+    "TypeScript",
+    "Go",
+    "Makefile",
+    "Shell",
+    "Dockerfile",
+    "Just",
+    "HCL",
+    "PowerShell",
+    "CMake",
+    "CSS",
+    "Batchfile",
+    "Swift",
+]
+build = "cargo build --workspace"
+test = "cargo test --workspace"
+topics = [
+    "ai-agents",
+    "developer-tools",
+    "lsp",
+    "mcp",
+    "protocol",
+    "repository-metadata",
+    "rust-cli",
+    "toml",
+    "metadata",
+    "rust",
+]
+
+[repo.toolchain]
+min = "1.90.0"
+ecosystem = "Rust"
+
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-11-04T02:37:26.462082Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-11-04T02:37:26.462082Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-11-04T02:37:26.462082Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-11-04T02:37:26.462082Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-11-04T02:37:26.462082Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "Cargo.toml"
+state = "present"
+valueJson = '"cargo build --workspace"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-11-04T02:37:26.462082Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Repository facts with evidence and age, with tools for publishers and consumers."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-11-04T02:37:26.462082Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://lazy-collective.github.io/dotrepo/"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-11-04T02:37:26.462082Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README title with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"DotRepo"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-11-04T02:37:26.462082Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "CONTRIBUTING.md"
+state = "present"
+valueJson = '"cargo test --workspace"'
+
+[x.dotrepo.publisher_declaration]
+declared_status = "canonical"
+manifest_toml = """
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "canonical"
+
+[record.trust]
+confidence = "high"
+provenance = ["declared", "verified"]
+notes = "Maintainer-controlled source of truth for dotrepo."
+
+[repo]
+name = "dotrepo"
+description = "Open metadata protocol for software repositories with a Rust toolchain, MCP server, and public index."
+homepage = "https://dotrepo.org/"
+license = "MIT"
+status = "active"
+visibility = "public"
+languages = ["rust", "typescript"]
+build = "cargo build --workspace"
+test = "cargo test --workspace"
+topics = ["repository-metadata", "protocol", "rust-cli", "mcp", "lsp", "ai-agents"]
+
+[repo.toolchain]
+min = "1.90.0"
+ecosystem = "Rust"
+
+[owners]
+maintainers = ["@maxwellsantoro"]
+team = "dotrepo"
+
+[docs]
+root = "docs/"
+getting_started = "README.md"
+architecture = "docs/toolchain-maintainability.md"
+api = "docs/public-surface.md"
+
+[compat.github]
+codeowners = "skip"
+security = "skip"
+contributing = "skip"
+pull_request_template = "skip"
+"""
+meaning = "Exact publisher declaration observed at the captured revision. Kept separate from crawler facts; declared status is not an index trust grant or execution validation."
+revision = "303ed90a6e052a017f0daa87ec776dcc805b3531"
+sha256 = "5e1eb6e7c4d4c27c3552f8f66f4f2d5963763cbb6bc3a83f3c8222e0e2a3e6be"
+source = "https://github.com/lazy-collective/dotrepo"
+validation = "Parsed structure only; referenced paths, command context and semantic correctness are unassessed in the bounded crawl."
+
+[x.github]
+archived = false
+clone_url = "https://github.com/lazy-collective/dotrepo.git"
+default_branch = "main"
+fork = false
+head_sha = "303ed90a6e052a017f0daa87ec776dcc805b3531"
+html_url = "https://github.com/lazy-collective/dotrepo"
+stars = 1

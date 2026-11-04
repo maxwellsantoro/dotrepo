@@ -99,6 +99,38 @@ def test_missing_field_is_not_counted_as_hit(tmp_path: Path) -> None:
     assert report["tasks"][0]["missingFields"] == ["repo.topics"]
 
 
+def test_presence_is_not_correctness_or_freshness_and_payload_penalties_remain_signed(tmp_path):
+    public = tmp_path / "public"
+    profile = public / "v0/repos/github.com/example/orbit/profile.json"
+    query = public / "query-input/github.com/example/orbit.json"
+    for path in (profile, query):
+        path.parent.mkdir(parents=True, exist_ok=True)
+    profile.write_text('{"generatedAt":"1900-01-01T00:00:00Z"}')
+    query.write_text(
+        json.dumps({"selection": {"manifest": {"repo": {"description": "deliberately incorrect"}}}})
+    )
+    workload = tmp_path / "workload.json"
+    workload.write_text(
+        json.dumps(
+            {
+                "tasks": [
+                    {
+                        "id": "scope-counterexample",
+                        "repository": "github.com/example/orbit",
+                        "fields": ["repo.description"],
+                    }
+                ]
+            }
+        )
+    )
+    report = lookup_efficiency.summarize(public, tmp_path / "index", workload)
+    assert report["tasks"][0]["hit"] is True
+    assert report["measurementScope"]["independentCorrectnessMeasured"] is False
+    assert report["measurementScope"]["endToEndCostMeasured"] is False
+    assert report["summary"]["dotrepoMinusScrapeProxyBytes"] > 0
+    assert report["summary"]["bytesSaved"] == 0  # Historical field remains compatible.
+
+
 def test_threshold_gates_mark_report_failed() -> None:
     report = lookup_efficiency.summarize(
         PUBLIC_ROOT,

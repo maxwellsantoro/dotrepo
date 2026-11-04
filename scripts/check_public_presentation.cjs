@@ -52,6 +52,16 @@ const { chromium } = require('playwright');
         assert.equal(await page.locator('meta[name="twitter:card"]').getAttribute('content'), 'summary');
         assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, `Horizontal overflow: ${device} ${route}`);
         assert.equal(await page.locator('.nav__links').evaluate(el => el.scrollWidth > el.clientWidth), false, `Hidden navigation: ${device} ${route}`);
+        if (device === 'mobile') {
+          const menu = page.getByRole('button', { name: 'Menu', exact: true });
+          assert.equal(await page.locator('.nav__links').isVisible(), false);
+          await menu.click();
+          assert.equal(await menu.getAttribute('aria-expanded'), 'true');
+          assert.equal(await page.locator('.nav__links a:visible').count(), 7);
+          await page.keyboard.press('Escape');
+          assert.equal(await menu.getAttribute('aria-expanded'), 'false');
+          assert.equal(await menu.evaluate(el => document.activeElement === el), true);
+        }
         if (route === '/docs/') {
           assert.equal(await page.locator('.start-paths a').count(), 3);
           const bounds = await page.locator('.start-paths a').first().boundingBox();
