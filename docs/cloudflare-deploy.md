@@ -2,6 +2,14 @@
 
 This doc covers how to configure the dotrepo Cloudflare Worker deployment.
 
+The public origin is `https://dotrepo.org/`. The former GitHub Pages export at
+`https://lazy-collective.github.io/dotrepo/` is retired through
+[`legacy-pages-redirect.yml`](../.github/workflows/legacy-pages-redirect.yml).
+That workflow publishes only two explicit retirement pages: the root redirects
+to the current site, while old data paths return 404 with an integration link.
+It does not publish this repository or the old JSON export. The repository's
+GitHub homepage setting should also point to `https://dotrepo.org/`.
+
 Configure these three concerns independently:
 
 - Worker runtime bindings for local `wrangler dev`
