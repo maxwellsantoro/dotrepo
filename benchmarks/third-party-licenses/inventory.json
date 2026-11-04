@@ -329,7 +329,18 @@
         "sha": "74cb751576f9e9af2aedff47e67861ef26db2dc4"
       }
     ],
-    "licenseFiles": []
+    "licenseFiles": [],
+    "declaredLicense": {
+      "expression": "Apache-2.0",
+      "sourcePath": "benchmarks/head-to-head/e1-qualification-20261029/python/sources/github.com/ComposioHQ/awesome-claude-skills/README.md",
+      "sourceSha256": "e693f2701840f26fb04c3058d55215f2c6575fff7f1c197ada5b64e2f7ee0c12",
+      "lines": [
+        495,
+        499
+      ],
+      "scope": "Captured root README declaration; individual skills can have different licenses and were not part of this capture. No root LICENSE file was listed.",
+      "standardText": "standards/Apache-2.0.txt"
+    }
   },
   {
     "repository": "Eugeny/tabby",

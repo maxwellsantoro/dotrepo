@@ -33,8 +33,8 @@ or grants the scheduled token administration access. Verify a whole bounded
 refresh afterward; no unattended streak is established by a settings check.
 
 The [captured-revision license audit](benchmarks/third-party-licenses/README.md)
-recovers 45 license/notice texts, binds 52 capture roots / 530 original files,
-and retains all historical source bytes. Four groups have explicit public
+recovers 46 license/notice texts, binds 52 capture roots / 530 original files,
+and retains all historical source bytes. Three groups have explicit public
 redistribution holds. Notices and hash checks do not close those owner decisions.
 
 The [decision control](docs/review-outcomes-20261104/README.md) completes supported,

@@ -11,7 +11,7 @@ at an earlier captured commit.
 
 Original source captures, historical experiment documents and negative results
 remain unchanged. Recovered notices improve traceability; they do not establish
-redistribution permission. Four groups remain on hold in the
+redistribution permission. Three groups remain on hold in the
 [disposition record](third-party-licenses/dispositions.json). In particular,
 VSCE-Sign's exact 2.1.0 license is now present and contains sharing/publication
 restrictions; its public-capture disposition remains an owner decision.

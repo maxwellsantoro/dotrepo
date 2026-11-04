@@ -31,6 +31,19 @@ def check(root=ROOT):
             if hashlib.sha256(path.read_bytes()).hexdigest() != notice["sha256"]:
                 errors.append(str(path.relative_to(root)))
             licenses += 1
+    for notice in json.loads((audit / "standard-texts.json").read_text()):
+        path = root / notice["path"]
+        if hashlib.sha256(path.read_bytes()).hexdigest() != notice["sha256"]:
+            errors.append(notice["path"])
+        licenses += 1
+    for item in upstream:
+        declaration = item.get("declaredLicense")
+        if (
+            declaration
+            and hashlib.sha256((root / declaration["sourcePath"]).read_bytes()).hexdigest()
+            != declaration["sourceSha256"]
+        ):
+            errors.append(declaration["sourcePath"])
     for capture in captures:
         for source in capture["files"]:
             path = root / source["path"]

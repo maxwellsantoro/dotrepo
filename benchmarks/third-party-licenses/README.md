@@ -6,7 +6,8 @@ Git blob identity, SHA-256 and size of each recovered notice. All 39 GitHub
 license/notice files reproduce their pinned Git blob identities, including
 TypeScript CRLF bytes. `npm/inventory.json` binds six exact package versions to
 registry integrity and recovered licenses; downloads were inspected without
-installation or package execution. The five original npm captures plus the
+installation or package execution. One canonical Apache-2.0 text is also bound
+to the captured Composio README's explicit declaration. The five original npm captures plus the
 image's npm version used 3,075,056 archive bytes.
 
 `captures.json` maps 52 tracked capture roots / 530 retained files to upstream
@@ -16,6 +17,10 @@ against the resolved Go 1.27.3 commit. The two image npm/npx files are short she
 wrappers, not byte-identical npm CLI sources; their image provenance remains
 separate. Embedded excerpts in narrative/JSON are not independently inventoried.
 
+The captured Composio README expressly declares Apache-2.0 (lines 495–499),
+with individual-skill exceptions. The earlier missing-root-file classification
+was wrong; its README hold is closed and canonical Apache text is now included.
+
 The text inventory is a provenance result, not legal clearance. Per-directory,
 per-file, third-party and package exceptions still apply. In particular, the old
 default-branch table missed dual-license texts and the captured OpenInterpreter
@@ -24,7 +29,7 @@ Apache-2.0 notice. No frozen benchmark or negative result was rewritten.
 | Upstream | Captured revision | Recovered root text / observation |
 | --- | --- | --- |
 | `666ghj/MiroFish` | [`7657031ac011`](https://github.com/666ghj/MiroFish/tree/7657031ac01184afe2cb220f5ee3545573b5e843) | [AGPL-3.0 text](666ghj/MiroFish/7657031ac01184afe2cb220f5ee3545573b5e843/LICENSE) |
-| `ComposioHQ/awesome-claude-skills` | [`be2a406907db`](https://github.com/ComposioHQ/awesome-claude-skills/tree/be2a406907dbc61b73e6827ded415c96139d13a2) | [No root license/notice found; hold](inventory.json) |
+| `ComposioHQ/awesome-claude-skills` | [`be2a406907db`](https://github.com/ComposioHQ/awesome-claude-skills/tree/be2a406907dbc61b73e6827ded415c96139d13a2) | [README declares Apache-2.0; canonical text added](inventory.json) |
 | `Eugeny/tabby` | [`467ce8ebfa46`](https://github.com/Eugeny/tabby/tree/467ce8ebfa467fb88cf6d154c9a5891e3d3647f0) | [MIT text](Eugeny/tabby/467ce8ebfa467fb88cf6d154c9a5891e3d3647f0/LICENSE) |
 | `GyulyVGC/sniffnet` | [`ab4bf739d464`](https://github.com/GyulyVGC/sniffnet/tree/ab4bf739d46448436cb68933bb8260ee264449d5) | [Apache-2.0 and MIT texts](GyulyVGC/sniffnet/ab4bf739d46448436cb68933bb8260ee264449d5/LICENSE-APACHE) |
 | `OpenHands/OpenHands` | [`2875056f93d6`](https://github.com/OpenHands/OpenHands/tree/2875056f93d6eebcd887f64ae557258a7b0b0108) | [MIT text](OpenHands/OpenHands/2875056f93d6eebcd887f64ae557258a7b0b0108/LICENSE) |
@@ -58,8 +63,8 @@ Apache-2.0 notice. No frozen benchmark or negative result was rewritten.
 ## Disposition and replay
 
 The audit completed notice recovery and byte binding. Public disposition remains
-an owner decision for the four groups in [dispositions.json](dispositions.json):
-no root license found for the captured Composio revision; VSCE-Sign's recovered
+an owner decision for the three groups in [dispositions.json](dispositions.json):
+VSCE-Sign's recovered
 Microsoft terms contain sharing/publication restrictions; AGPL/Warp file scope;
 and Vault's parameterized BUSL terms. Existing public/history copies remain;
 adding a notice does not resolve those decisions. Preserve a private exact-byte
