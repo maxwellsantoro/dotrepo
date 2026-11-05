@@ -64,7 +64,7 @@ The coordinator validates the combined index and owns landing/publication.
 
 - [`docs/factual-crawl-automation.md`](../../docs/factual-crawl-automation.md) — pipeline design and gates
 - [`index/README.md`](../../index/README.md) — overlay layout and autonomous rules
-- [`ROADMAP.md`](../../ROADMAP.md) — Milestone 1 factory and Milestone 4 scale gates
+- [`ROADMAP.md`](../../ROADMAP.md) — current dependency-ready packets and growth gates
 
 ## Refresh and writeback integrity
 

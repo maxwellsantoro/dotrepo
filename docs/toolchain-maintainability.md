@@ -23,19 +23,21 @@ expand them when extending batch/public APIs.
 
 ## Hotspot dispositions
 
-Every reference-toolchain Rust source above roughly 1,500 lines needs a split
-plan or explicit retain rationale. The October 3 source audit found these three
-above the threshold; counts are diagnostic snapshots, not permanent baselines.
+Use these known boundaries when a selected packet expands the affected code.
+File size is a diagnostic, not a separate refactor gate: split when it removes
+ownership contention or makes the changed behavior easier to verify. Do not
+delay a bounded workflow for unrelated cleanup. The table retains the October 3
+audit's suggested boundaries; inspect the current source before assigning work.
 
 | File | Disposition |
 | --- | --- |
-| `crates/dotrepo-crawler/src/github.rs` | HTTP retry/timeouts and their fault-injection tests are extracted to `github/http.rs` and `github/http/tests.rs`. Before the next materialization/API feature, finish the split: client/auth setup, discovery/refresh candidates, materialization selectors and DTOs, with the existing facade preserved. |
-| `crates/dotrepo-cli/src/tests.rs` | 1,610 lines, test-only. Split by CLI command domain when adding the next test family. |
-| `crates/dotrepo-core/src/facade_tests/import_repository.rs` | 1,608 lines, test-only. Split evidence, escalation, and assembly domains on the next import-fixture expansion; parsing already has its own module. |
+| `crates/dotrepo-crawler/src/github.rs` | HTTP retry/timeouts and their fault-injection tests are extracted to `github/http.rs` and `github/http/tests.rs`. For materialization/API work, consider separate owners for: client/auth setup, discovery/refresh candidates, materialization selectors and DTOs, with the existing facade preserved. |
+| `crates/dotrepo-cli/src/tests.rs` | Test-only; CLI command domains are a natural boundary when adding a new test family. |
+| `crates/dotrepo-core/src/facade_tests/import_repository.rs` | Test-only; evidence, escalation and assembly can be separate domains on an affected import-fixture expansion; parsing has its own module. |
 
 The command orchestrator's unit tests now live in `import/commands/tests.rs`,
-keeping `mod.rs` focused on loading and assembly. `claims.rs` remains near the
-threshold. Check sizes when expanding them; do not rely on former counts.
+keeping `mod.rs` focused on loading and assembly. Check current source when
+expanding a module; do not treat historical sizes as a current inventory.
 Refresh the inventory with:
 
 ```bash
@@ -56,6 +58,6 @@ Facade domains can run independently, for example
 Index size does not establish operational health. Use growth/freshness reports,
 coverage and accuracy gates, risk-weighted audit dispositions, and retained
 unit-cost telemetry. Release floors gate validity, completeness, accuracy, and
-record age; verified/high-signal counts are advisory rather than incentives to
+record age; checked/high-signal counts are advisory rather than incentives to
 inflate authority. See [crawl operations](factual-crawl-automation.md) and
 [measurement interpretation](public-lookup-efficiency-benchmark.md).

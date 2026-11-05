@@ -604,17 +604,13 @@ jobs:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-${{ runner.arch }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
       - name: Install pinned browser test tools
-        # --with-deps runs apt on every invocation; on a browser cache hit the
-        # system dependencies are already installed by the run that populated
-        # the cache, so skip them (this was ~367s of a ~9m job on cache miss
-        # days and a recurring apt cost on hit days).
+        # A cache hit restores browser binaries, never the runner's OS libraries.
+        # Probe this runner and repair once if needed; do not run apt when the
+        # pinned browser can already launch. Presentation QA still must pass.
         run: |
           npm install --prefix "$RUNNER_TEMP/dotrepo-browser" --no-save "playwright@$PLAYWRIGHT_VERSION"
-          if [ "${{ steps.playwright-cache.outputs.cache-hit }}" = "true" ]; then
-            "$RUNNER_TEMP/dotrepo-browser/node_modules/.bin/playwright" install chromium
-          else
-            "$RUNNER_TEMP/dotrepo-browser/node_modules/.bin/playwright" install --with-deps chromium
-          fi
+          "$RUNNER_TEMP/dotrepo-browser/node_modules/.bin/playwright" install chromium
+          NODE_PATH="$RUNNER_TEMP/dotrepo-browser/node_modules" node scripts/ensure_playwright_chromium.cjs
       - name: Verify desktop and mobile public presentation
         run: NODE_PATH="$RUNNER_TEMP/dotrepo-browser/node_modules" node scripts/check_public_presentation.cjs release-gate/public release-gate/browser-qa
       - name: Upload browser screenshots and results

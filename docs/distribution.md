@@ -1,7 +1,8 @@
-# Distribution workstream
+# Distribution operations
 
-Index quality creates value; distribution captures it. This checklist tracks the
-concrete surfaces that make agents and tools check dotrepo before scraping.
+This guide maintains the existing discovery and installation surfaces. It is
+not a separate growth or outreach queue; the [roadmap](../ROADMAP.md) selects
+new consumer, publisher and independent-use work.
 It follows the current source branch; consult
 [release compatibility](release-compatibility.md) for stable binary behavior.
 
@@ -32,10 +33,10 @@ Use the matching tagged documentation for installed binaries.
    Label presence and policy acceptance separately; request reduction is modeled.
    Use complete consumer measurements before claiming token, latency, or net
    cost savings ([methodology](public-lookup-efficiency-benchmark.md)).
-3. **Lookup-miss demand (fixed cadence)** — weekly scheduled workflow
-   `.github/workflows/lookup-miss-demand.yml` (Mondays 07:30 UTC) or manual
-   `workflow_dispatch`. Offline by default (fixture proof); attach a live log
-   artifact and set `log_artifact_name` for real Worker demand.
+3. **Lookup-miss review** — process actual exported logs locally using the
+   command below. `.github/workflows/lookup-miss-demand.yml` is a manual
+   `workflow_dispatch` fixture proof; it collects no live logs and does not run
+   on a schedule. Its artifact is labeled as fixture evidence.
 
    The hosted Worker emits `DOTREPO_LOOKUP_MISS` on **static** repository-surface
    404s for published leaves
@@ -49,19 +50,25 @@ Use the matching tagged documentation for installed binaries.
    ```bash
    # Capture live lines (Cloudflare Logpush, dashboard, or):
    #   cd cloudflare/hosted-query && npx wrangler tail --format pretty
-   # Then standardize outputs under index/telemetry/:
+   # Replace TASK with a unique task/run name and retain the source logs:
    uv run python scripts/export_lookup_miss_demand.py \
-     --input /tmp/lookup-misses.log
+     --input /tmp/lookup-misses.log \
+     --output-dir /tmp/dotrepo-TASK/lookup-miss-review
 
    # Offline proof (fixture):
-   uv run python scripts/export_lookup_miss_demand.py
+   uv run python scripts/export_lookup_miss_demand.py \
+     --input scripts/fixtures/lookup_miss_sample.log \
+     --output-dir /tmp/dotrepo-TASK/lookup-miss-fixture
    ```
 
-   Feed repeated misses into Milestone 4 cohort selection after ecosystem
-   balancing (`scripts/plan_index_growth_tranche.py`).
-4. **External consumer** — land or renew at least one non-operator integration
-   (agent framework, research crawler, or IDE). Template and in-repo reference
-   client: [`docs/external-consumer-integration.md`](./external-consumer-integration.md)
+   Use repeated misses to identify a bounded workflow gap. General cohort
+   growth still requires the roadmap's usefulness, independent-use and cost
+   evidence; `scripts/plan_index_growth_tranche.py` is an operator tool, not
+   automatic permission to expand.
+4. **External consumer** — when D5 is selected and authorized, use a bounded
+   non-operator integration (agent framework, research crawler, or IDE) with
+   stated outcomes and costs. Preparing its guide does not authorize outreach.
+   Template and in-repo reference client: [`docs/external-consumer-integration.md`](./external-consumer-integration.md)
    and [`examples/external-consumer/`](../examples/external-consumer/).
 5. **Version clarity** — public install docs must send production users to
    the current stable release; prerelease installation is an explicit opt-in
@@ -89,10 +96,11 @@ framework adopts the reference pattern. The in-repo client is a reference implem
 
 ## Success signal
 
-Sustained hosted-API or MCP traffic from **non-operator** consumers, plus a
-growing lookup-miss list that is not empty only because logs were never
-exported. This is an independent-use signal, not a priority rule or proof of
-net benefit. The [roadmap](../ROADMAP.md#active-execution-order) owns sequencing:
+Sustained hosted-API or MCP use by **non-operator** consumers with dated task
+outcomes and a declared observation window. Report whether miss collection was
+complete: absent logs mean unknown demand, and zero observed misses do not prove
+complete coverage. Traffic alone does not establish useful work or net benefit.
+The [roadmap](../ROADMAP.md#active-execution-order) owns sequencing:
 improve useful consumer decisions and low-maintenance publisher setup together,
 then evaluate both sides' effort. Operator fixtures remain useful local controls
 while independent adoption is unestablished.

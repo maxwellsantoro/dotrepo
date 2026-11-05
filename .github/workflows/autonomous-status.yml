@@ -27,6 +27,8 @@ jobs:
           uv sync --dev --locked
       - name: Install Rust
         uses: dtolnay/rust-toolchain@4be7066ada62dd38de10e7b70166bc74ed198c30 # stable
+        with:
+          toolchain: stable
       - name: Export public tree and check freshness
         run: |
           cargo run -q -p dotrepo-cli -- public export \

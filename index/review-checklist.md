@@ -34,7 +34,7 @@ that path uses the machine gates in [`ROADMAP.md`](../ROADMAP.md) and
 - The record status and `record.trust.provenance` match the story told in `evidence.md`.
 - Imported claims do not sound maintainer-verified unless the source justifies that wording.
 - Inferred claims are not presented as canonical facts.
-- `verified` records cite fresh pipeline inspection; copied confidence, old labels,
+- `checked` records (legacy `verified`) cite fresh pipeline inspection; copied confidence, old labels,
   or standalone promotion analysis do not establish a new source check.
 - Non-reference trust vocabulary, if present, is preserved deliberately and not introduced casually.
 

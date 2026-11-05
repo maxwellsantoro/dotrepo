@@ -137,9 +137,10 @@ def render_markdown(report: dict[str, Any]) -> str:
     lines.extend(
         [
             "",
-            "Use repeated misses as Milestone 4 cohort candidates after ecosystem-gap "
-            "balancing. Empty reports mean either perfect coverage or no exported Worker "
-            "logs yet — confirm `DOTREPO_LOOKUP_MISS` lines appear in `wrangler tail`.",
+            "Review repeated observed misses for a bounded workflow gap against the "
+            "roadmap's usefulness, independent-use and cost gates. Fixture reports are "
+            "proof only, not live demand. Empty reports do not establish coverage; "
+            "verify log collection and the observation window.",
             "",
         ]
     )

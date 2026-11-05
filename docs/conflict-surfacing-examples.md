@@ -53,7 +53,7 @@ conflicts:
   reason: canonical record preferred over lower-authority competing records
   source: https://github.com/acme/widget
   confidence: medium
-  provenance: imported, verified
+  provenance: imported, checked
   notes: Reviewed overlay retained for audit history.
 ```
 

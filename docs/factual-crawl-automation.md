@@ -91,7 +91,7 @@ The scorer has five dispositions, defined in
 [`import/types.rs`](../crates/dotrepo-core/src/import/types.rs) and applied in
 [`import/fields.rs`](../crates/dotrepo-core/src/import/fields.rs):
 
-| Disposition | Meaning | Verified promotion |
+| Disposition | Meaning | Checked promotion |
 | --- | --- | --- |
 | High-confidence present | Supported value at the pipeline's highest assessment level | Allowed |
 | Medium-confidence present | Plausible value with remaining inference/ambiguity | Blocks |
@@ -115,7 +115,7 @@ Fresh crawls retain value- and timestamp-bound field evidence. Export drops
 assessments that no longer match; legacy high-confidence labels cannot substitute
 for retained evidence. Read-only `promotion-report` uses those assessments;
 standalone `--apply` is disabled on this branch. See
-[trust semantics](trust-model.md#field-assessments-and-the-meaning-of-verified)
+[trust semantics](trust-model.md#field-assessments-and-the-meaning-of-checked)
 for the release distinction, selection precedence, and consumer implications.
 
 ## Model integration and budgets
