@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Retain and export bounded user-authored source findings in a separate immutable
+  local store. Recipients check their own sources and policy, keep original dates
+  and attribution, and record interpretation review separately. No semantic
+  assessment promotion or execution authority is added.
+
 - Add a versioned offline decision command with persistent selection budgets,
   immutable saved tool results, database/policy pinning and restart inspection.
   Keep missing evidence and failed calls visible. This is a source workflow,

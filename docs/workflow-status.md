@@ -14,6 +14,7 @@ implementation and validation history.
 | Qualify requirements | Local `describe`, `qualify`, `decide` | Supported, contradicted or unknown source assessments at exact revision/component scope |
 | Inspect original evidence | Local retained `source.list`/`source.read`, optional separately configured HTTP fallback | Bound source bytes and passages; text remains untrusted data |
 | Retain a decision across restarts | Local [versioned source command](decision-workflow.md) and workspace | Historical tool results and persistent selection budgets, pinned to one admitted database and policy |
+| Hand off a user source interpretation | Local [finding command](decision-findings.md), separate immutable files | Original claim/scope/date and source bindings; recipient checks its own sources and records interpretation review separately |
 | Execute | Separate authorized task environment | A particular run in a particular environment; no lookup tool grants authority |
 | Maintain publisher context | Existing native import/preview/doctor/drift, plus local publisher helper | Source-derived proposals and explicit ambiguity without overwriting adopted records |
 
@@ -24,6 +25,17 @@ independent reviewer's identity or prove semantic correctness. Record age and
 export age remain distinct. Requirement checks do not query current HEAD.
 
 ## Shared direction
+
+The [November 5 D2 comparison](evaluations/d2-results-20261105.md) completed the
+sealed four-visit local workload with independent scoring. Both arms reached
+20/24 fully scoped useful decisions and 140/144 points; no incremental quality
+or total-cost advantage was established. Useful source interpretations remain
+separate from strict semantic qualification. Independent recurring operation
+still requires an available independent operator.
+
+The [D4 two-reader transfer](evaluations/d4-results-20261105.md) is independently
+accepted for one useful D2 finding with original dates and recipient-local checks.
+Both readers completed the same task; no measured total-cost advantage was shown.
 
 **Publish what you know. Reuse what still holds. Investigate what changed.**
 
