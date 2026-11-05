@@ -12,6 +12,7 @@ advance independently.
 | Understand the product or try a lookup | [Project README](../README.md) |
 | Install or integrate a released tool | [Installation](install.md), [consumer integration](external-consumer-integration.md) |
 | Complete an experimental repository decision | [Durable source command](decision-workflow.md), or [MCP selection flow](experimental-decision-selection.md); [requirement assessments](experimental-decision-requirements.md) owns evidence semantics |
+| Retain a user source interpretation for another reader | [Finding handoff](decision-findings.md); original dates, independent recipient policy and separate interpretation review |
 | Retain or inspect source evidence | [Source cache](experimental-decision-source-cache.md) |
 | Derive publisher context and check updates | [Maintainer path](maintainer-happy-path.md) |
 | Select a dependency-ready work packet | [Roadmap](../ROADMAP.md#active-execution-order) |

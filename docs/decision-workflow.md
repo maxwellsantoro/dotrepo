@@ -83,6 +83,19 @@ shapes documented by [bounded selection](experimental-decision-selection.md):
 | `decide` | `selectionId`, exact `candidates`, mapped `requirements` and optional `unmappedRequirements` finalize the decision. |
 | `selection_status` | `{}` lists accounting; `{"selectionId":"selection-1"}` reads one retained selection. |
 
+For a source passage, the request keys are `start` and `end` (inclusive,
+one-based), for example:
+
+```json
+{"repository":"github.com/owner/project","revision":"0000000000000000000000000000000000000000","path":"go.mod","start":1,"end":20}
+```
+
+Replace the identity, revision and path with admitted values. Omitting both
+range keys requests lines 1–100; at most 120 lines and 32 KiB of response are
+allowed. `startLine` is a response field, not a request argument. A rejected
+request remains a failed attempt in the workspace; use the documented arguments
+or an explicitly counted source fallback.
+
 For example, save `{"queries":["markdown"]}` in `./shortlist.json`, then run:
 
 ```sh
