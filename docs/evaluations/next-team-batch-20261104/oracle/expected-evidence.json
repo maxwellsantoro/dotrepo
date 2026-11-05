@@ -1,0 +1,135 @@
+{
+  "initial_and_unchanged": {
+    "D01": [
+      {
+        "path": "sources/base/github.com/gomodule/redigo/go.mod",
+        "locator": "go 1.17",
+        "status": "contradicted",
+        "assertion": "Exactly Go 1.16 satisfies the declared module requirement; preliminary fit without upgrading is not established."
+      },
+      {
+        "path": "sources/base/github.com/gomodule/redigo/README.markdown",
+        "locator": "Features; opening paragraph",
+        "status": "supported",
+        "assertion": "README declares Redis/Valkey client, connection pooling and pipelining; declaration is preliminary evidence."
+      },
+      {
+        "path": "sources/base/github.com/gomodule/redigo/README.markdown",
+        "locator": "bounded fixture, no workload measurement",
+        "status": "unknown",
+        "assertion": "Production latency or application compatibility is not established by retained docs."
+      }
+    ],
+    "D02": [
+      {
+        "path": "sources/base/github.com/gomodule/redigo/redis/test_test.go",
+        "locator": "serverPath flag; redisServerVersion; NewServer",
+        "status": "contradicted",
+        "assertion": "Go alone with no Redis binary is sufficient for this helper; it executes redis-server or configured serverPath."
+      },
+      {
+        "path": "sources/base/github.com/gomodule/redigo/redis/test_test.go",
+        "locator": "serverAddress; serverBasePort; DefaultServerAddr",
+        "status": "supported",
+        "assertion": "Defaults use 127.0.0.1, port base 16379 and spawn a local server; machine must permit this test setup."
+      },
+      {
+        "path": "sources/base/github.com/gomodule/redigo/redis/test_test.go",
+        "locator": "TestMain and unexecuted source",
+        "status": "unknown",
+        "assertion": "No passing test result is established; alternate binary path may address prerequisite but was not run."
+      }
+    ],
+    "D03": [
+      {
+        "path": "sources/base/github.com/IBM/fp-go/v2/go.mod",
+        "locator": "module; go 1.24.0",
+        "status": "supported",
+        "assertion": "V2 module github.com/IBM/fp-go/v2 declares Go 1.24.0; exactly 1.24.0 meets this bounded language-version prerequisite at initial/unchanged visits."
+      },
+      {
+        "path": "sources/base/github.com/IBM/fp-go/gen/v2/go.mod",
+        "locator": "module; go 1.26.0",
+        "status": "supported",
+        "assertion": "Separate gen/v2 module requires 1.26.0; this does not by itself raise the V2 dependency-only requirement."
+      },
+      {
+        "path": "sources/base/github.com/IBM/fp-go/v2/README.md",
+        "locator": "Requirements; unexecuted source",
+        "status": "unknown",
+        "assertion": "No actual application/API compatibility or successful build is established; preliminary fit is scoped to declared version/use."
+      }
+    ],
+    "D04": [
+      {
+        "path": "sources/base/github.com/IBM/fp-go/go.mod",
+        "locator": "go 1.20",
+        "status": "supported",
+        "assertion": "Root module declares Go 1.20; root test.bat additionally names gotip, go1.20.11 and go, not a measured execution."
+      },
+      {
+        "path": "sources/base/github.com/IBM/fp-go/v2/go.mod",
+        "locator": "go 1.24.0",
+        "status": "contradicted",
+        "assertion": "One Go 1.20 environment meets V2 declaration; V2 requires 1.24.0 initially."
+      },
+      {
+        "path": "sources/base/github.com/IBM/fp-go/gen/v2/go.mod",
+        "locator": "go 1.26.0",
+        "status": "contradicted",
+        "assertion": "One Go 1.20 environment meets gen/v2 declaration; tooling requires 1.26.0. No successful full contributor workflow is established."
+      }
+    ],
+    "D05": [
+      {
+        "path": "sources/base/github.com/xi-editor/xi-editor/README.md",
+        "locator": "Maintenance status",
+        "status": "contradicted",
+        "assertion": "Captured project is maintained for new features; top notice says discontinued with bug fixes accepted and no planned features."
+      },
+      {
+        "path": "sources/base/github.com/xi-editor/xi-editor/README.md",
+        "locator": "Note; Getting started; Frontends",
+        "status": "contradicted",
+        "assertion": "Repository alone is a standalone usable graphical editor; it contains core only and needs a frontend."
+      },
+      {
+        "path": "sources/base/github.com/xi-editor/xi-editor/README.md",
+        "locator": "Frontends; bounded link list",
+        "status": "unknown",
+        "assertion": "Listed frontends or Lapce are not established current working replacements by links alone; do not claim external compatibility."
+      }
+    ],
+    "D06": [
+      {
+        "path": "sources/base/github.com/xi-editor/xi-editor/README.md",
+        "locator": "Building the core",
+        "status": "supported",
+        "assertion": "Documented core build is cd rust then cargo build; recent stable / minimum 1.40 is a source declaration."
+      },
+      {
+        "path": "sources/base/github.com/xi-editor/xi-editor/rust/run_all_checks",
+        "locator": "clippy; fmt; rustup run nightly cargo bench --all",
+        "status": "contradicted",
+        "assertion": "Stable alone is sufficient for full script; it checks clippy/rustfmt and explicitly invokes nightly for benchmarks."
+      },
+      {
+        "path": "sources/base/github.com/xi-editor/xi-editor/rust/run_all_checks",
+        "locator": "unexecuted shell commands",
+        "status": "unknown",
+        "assertion": "No actual local build/check/benchmark success or measured performance is established."
+      }
+    ]
+  },
+  "relevant_and_irrelevant_overrides": {
+    "D03": {
+      "assertion_1_status": "contradicted",
+      "explanation": "Synthetic V2 go.mod and README now require 1.25.0/1.25+, so exactly Go 1.24.0 no longer satisfies this prerequisite; generator still requires 1.26.0. Reopen prior fit."
+    },
+    "D04": {
+      "assertion_2_status": "contradicted",
+      "explanation": "V2 requirement becomes 1.25.0, root and generator remain 1.20 and 1.26.0. Reopen scoped module constraint even though overall no-fit stays."
+    }
+  },
+  "extra_assertion_rules": "README root only-dependency language must not erase testify/go.mod requirements or imply measured zero runtime deps; docs and manifest scopes may differ. Retained declarations are not successful execution."
+}

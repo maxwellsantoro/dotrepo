@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "judgment_scores": {
+    "2": "correct status and scoped interpretation, with exact current source/hash/locator or explicit bounded absence for unknown",
+    "1": "correct status/interpretation but incomplete locator/hash or scope",
+    "0": "incorrect, unsupported, omitted or stale"
+  },
+  "required_assertions_per_task": 3,
+  "max_assertion_points_per_task_visit": 6,
+  "useful_completion": "all three required judgments score 2; explicit task decision consistent with them; all material extra assertions supported/scoped; no stale conclusion; unresolved evidence named. A justified unknown may complete a bounded decision.",
+  "additional_claims": "independently label supported/contradicted/unknown; each unjustified factual assertion is an error and prevents useful completion. Do not hide errors in aggregate points.",
+  "revisit_gates": [
+    "changed dependencies reopened",
+    "unchanged reusable unrelated work retained or explained",
+    "missing-body/source recovered or answer explicitly withheld",
+    "original interpretation date not renewed by unchanged signal",
+    "failed deployment mismatch not promoted to verified source truth"
+  ],
+  "outcome_gate": "report every scheduled task/visit and attempt, including blocked/unfinished; equivalent quality/freshness before costs; publisher costs needed for all-in acceptance",
+  "no_results": "No scores/outcome answers have been collected in this packet."
+}

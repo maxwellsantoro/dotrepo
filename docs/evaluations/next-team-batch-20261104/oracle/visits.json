@@ -1,0 +1,71 @@
+{
+  "kind": "synthetic, cumulative local snapshots",
+  "visits": [
+    {
+      "id": "initial",
+      "all_tasks": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06"
+      ],
+      "overlay": {},
+      "cache": "empty, acquire same raw bodies",
+      "audit": "initial full reads"
+    },
+    {
+      "id": "unchanged",
+      "all_tasks": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06"
+      ],
+      "overlay": {},
+      "cache": "retain acquired bodies/notes",
+      "audit_target": "sources/base/github.com/IBM/fp-go/README.md"
+    },
+    {
+      "id": "relevant-change",
+      "all_tasks": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06"
+      ],
+      "overlay": {
+        "sources/base/github.com/IBM/fp-go/v2/go.mod": "sources/relevant/github.com/IBM/fp-go/v2/go.mod",
+        "sources/base/github.com/IBM/fp-go/v2/README.md": "sources/relevant/github.com/IBM/fp-go/v2/README.md"
+      },
+      "reopen": [
+        "D03",
+        "D04"
+      ],
+      "audit_target": "sources/base/github.com/IBM/fp-go/gen/v2/go.mod"
+    },
+    {
+      "id": "irrelevant-change",
+      "all_tasks": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06"
+      ],
+      "inherits": "relevant-change",
+      "overlay": {
+        "sources/base/github.com/xi-editor/xi-editor/README.md": "sources/irrelevant/github.com/xi-editor/xi-editor/README.md"
+      },
+      "expected": "Xi raw hash changed, inspect/rebind relevant notes; same scoped answers. IBM/redigo usable work retained.",
+      "audit_target": "sources/base/github.com/IBM/fp-go/go.mod"
+    }
+  ],
+  "observation_endpoint": "Runner exposes all current file paths/hashes in one catalog, with request/payload bytes counted identically; unchanged catalog does not renew assessment age. Use logical base paths plus current hash in answer bindings."
+}

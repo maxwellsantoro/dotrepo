@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Add a versioned offline decision command with persistent selection budgets,
+  immutable saved tool results, database/policy pinning and restart inspection.
+  Keep missing evidence and failed calls visible. This is a source workflow,
+  separate from released packages and useful-work evaluation.
+
 - **Rename record status and provenance `verified` to `checked`.** The value meant
   "every field passed automated pipeline checks", never human review or
   correctness. `verified` remains an accepted input alias in `.repo` files and

@@ -1,0 +1,35 @@
+{
+  "scope": "Answer only from the current local fixture snapshot; no execution or external lookup. Give three requirement judgments plus a scoped decision, source hash/path/locator and unknowns. Reanswer at every scheduled visit.",
+  "questions": [
+    {
+      "id": "D01",
+      "repository": "github.com/gomodule/redigo",
+      "question": "For a Go 1.16 service needing Redis/Valkey connection pooling and pipelining, is this captured repository a preliminary fit without upgrading Go? State the version constraint, declared capabilities, and whether production latency is established."
+    },
+    {
+      "id": "D02",
+      "repository": "github.com/gomodule/redigo",
+      "question": "A local CI machine has Go but no Redis server binary. Can it run the retained repository test helper unchanged? Identify the missing prerequisite and what is and is not known about success; do not execute code."
+    },
+    {
+      "id": "D03",
+      "repository": "github.com/IBM/fp-go",
+      "question": "A team can use exactly Go 1.24.0 and wants the V2 functional-programming library as a dependency, without contributor generation tooling. Is the captured V2 module a preliminary fit? State the minimum version/module path, distinguish generator requirements, and say whether application compatibility is established."
+    },
+    {
+      "id": "D04",
+      "repository": "github.com/IBM/fp-go",
+      "question": "Plan a contributor environment covering the root module, V2 library and gen/v2 tooling. Is one Go 1.20 installation enough? Give scoped requirements for each module and distinguish declared requirements/test commands from demonstrated execution."
+    },
+    {
+      "id": "D05",
+      "repository": "github.com/xi-editor/xi-editor",
+      "question": "A team wants a maintained standalone graphical text editor with new features. Is this captured repository sufficient by itself? Assess maintenance, core/frontend scope and whether a listed frontend is known to be a current working solution."
+    },
+    {
+      "id": "D06",
+      "repository": "github.com/xi-editor/xi-editor",
+      "question": "Plan to build the core and run the full retained check script using only recent stable Rust. Is stable alone enough for that full script? Identify build location and check prerequisites while keeping declared commands separate from a successful local run."
+    }
+  ]
+}

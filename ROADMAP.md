@@ -13,6 +13,16 @@ owns dispatch and integration. The former long roadmap is preserved in the
 
 ## Active execution order
 
+**November 4 local batch checkpoint:** This branch implements the D1
+[durable source command](docs/decision-workflow.md), pinned to one admitted
+database/policy with restart inspection and explicit missing-source recovery.
+The [D2 packet](docs/evaluations/next-team-batch-20261104/README.md) freezes six
+questions, source fixtures, baseline and scoring before treatment outcomes.
+Local implementation acceptance is recorded in the
+[batch artifacts](/Users/maxwell/Documents/Codex/2026-11-04/task/next-team-batch/acceptance/).
+D2 outcome runs, D3 upkeep costs and downstream usefulness/independent-operation
+joins remain open; a local D1 command does not close them.
+
 **Start D1, D2 preparation and D3 together.** The numbers rank product outcomes;
 they are not a serial work schedule. With one coordinator and three worker slots,
 run these three lanes, then reuse released slots for review and downstream work.
