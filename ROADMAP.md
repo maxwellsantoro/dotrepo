@@ -29,9 +29,10 @@ run D3 on actual repository layouts; do not reimplement accepted D1 or author a
 replacement question set. In a joint four-slot team, reserve one coordinator and
 assign ready evaluation and actual publisher work to the other slots. Refill
 capacity after bounded handoffs. Retain the bounded crawler timeout-fixture
-regressions when broad integration gates run. D1 source integration still needs hosted CI and
-the exact-head merge gate; package release is a separate action outside this
-continuation's implementation scope.
+regressions when broad integration gates run. D1 source integration passed required
+exact-head checks in [PR226](https://github.com/lazy-collective/dotrepo/pull/226),
+merged at `7cc1640c`, and passed main checks and existing website publication.
+Package release is a separate action outside this continuation's scope.
 
 Before selecting fresh work after a restart, reconcile canonical main, open PRs,
 linked worktrees and accepted but unmerged receipts. Verify actual heads and dirty
@@ -42,7 +43,7 @@ instruction does not establish that implementation is missing.
 
 | Packet | Can start now | Wait only for | Done when |
 | --- | --- | --- | --- |
-| **D1 — Reproducible decision entrypoint** | Locally accepted source command and setup/recovery path; preserve it and repair demonstrated failures rather than rebuilding it | Continue from the accepted invocation, workspace layout and saved-result boundary. Hosted CI and exact-head merge checks remain before source integration | A fresh environment discovers → shortlists → describes → qualifies → decides, exits, restarts and inspects the retained result/evidence. Include unknown and missing-source recovery; verify any local package candidate separately. |
+| **D1 — Reproducible decision entrypoint** | Accepted source command and setup/recovery path, merged in PR226; preserve it and repair demonstrated failures rather than rebuilding it | No entrypoint/source-integration prerequisite remains for D2. Use the accepted invocation, workspace and saved-result boundary; package publication remains separate and excluded | A fresh environment discovers → shortlists → describes → qualifies → decides, exits, restarts and inspects the retained result/evidence. Include unknown and missing-source recovery; verify any local package candidate separately. |
 | **D2 — Useful decisions across visits** | Execute the existing sealed packet: six independently authored questions over at most three already indexed repositories and four visits, with its source truth, same-cache baseline and scoring. Use fresh outcome consumers and acceptance contexts; keep oracles, future visits and other arms out of consumer sessions | Run the end-to-end comparison against the accepted D1 interface and a frozen source/policy revision; independent acceptance follows the run | Account for all questions and attempts across initial, unchanged, relevant-change and irrelevant-change visits. Report correct/incorrect assertions, useful decisions, unknowns and unfinished attempts. Changed evidence reopens affected requirements; reuse never renews inspection age. |
 | **D3 — Affordable publisher upkeep** | Run the existing publisher helper on two actual representative repository layouts through setup and two ordinary updates, including ambiguity/drift/recovery cases. Disposable fixture controls are preparation only | No D1 or favorable D2 result is required. Coordinate only if a shared importer or fixture needs changes | Record operator time, interventions, unresolved fields and source/declaration drift. Unchanged updates need no manual recataloging; genuine disagreements remain visible. Feed these costs into D2/D5. |
 | **D4 — One finding handed to a second reader** | Inventory existing stored findings and source bindings; agree with PageDigest on the small test vocabulary, recipient policy and changed/missing/conflicting cases | Implementation uses a frozen D1 persistence/export interface. The usefulness comparison needs an accepted useful D2 finding | Transfer one finding between isolated stores with claim/task scope, source references/hashes, assessed revision, assumptions, attribution and original date. Recipient checks it under its own policy. Compare with sharing the same cached sources alone. |
