@@ -94,7 +94,12 @@ fn run() -> Result<()> {
 
     let listener =
         TcpListener::bind(&cli.bind).with_context(|| format!("failed to bind {}", cli.bind))?;
-    eprintln!("dotrepo-public-query listening on {}", cli.bind);
+    eprintln!(
+        "dotrepo-public-query listening on {}",
+        listener
+            .local_addr()
+            .context("failed to read bound address")?
+    );
 
     for stream in listener.incoming() {
         match stream {

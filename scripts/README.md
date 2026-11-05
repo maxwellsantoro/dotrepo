@@ -38,7 +38,7 @@ and state paths before concurrent execution. Read-only reports can run separatel
 
 | Area | Scripts |
 |------|---------|
-| Local decision workflow | `repodigest_service.py`, `repodigest_selection.py`, `repodigest_discovery.py`, `repodigest_requirements.py`; [decision guide](../docs/experimental-decision-selection.md) |
+| Local decision workflow | `decision_workflow.py` for [durable CLI sessions](../docs/decision-workflow.md); `repodigest_service.py`, `repodigest_selection.py`, `repodigest_discovery.py`, `repodigest_requirements.py` for [MCP decisions](../docs/experimental-decision-selection.md) |
 | Source-bound reuse | `repodigest_source_cache.py`, `repodigest_source_tools.py`, `repodigest_reuse.py`; [source-cache guide](../docs/experimental-decision-source-cache.md) |
 | Publisher setup/update | `publisher_workflow.py`; [maintainer guide](../docs/maintainer-happy-path.md) |
 | Release & packaging | `check_release_gate.py`, `check_release_version.py`, `check_toolchain_manifest_parity.py`, `check_ci_gate.py`, `package_public_export.py`, `package_release_binaries.py`, `package_vscode_extension.py`, `public_site_content.py` |

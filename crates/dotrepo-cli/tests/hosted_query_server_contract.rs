@@ -1,7 +1,7 @@
 use serde_json::Value;
 use std::fs;
 use std::io::{Read, Write};
-use std::net::{TcpListener, TcpStream};
+use std::net::{SocketAddr, TcpStream};
 use std::path::{Path, PathBuf};
 use std::process::{Child, Command, Stdio};
 use std::thread;
@@ -51,27 +51,37 @@ fn read_expected(name: &str) -> Value {
     .expect("expected fixture json parses")
 }
 
-fn unused_addr() -> String {
-    let listener = TcpListener::bind("127.0.0.1:0").expect("ephemeral port available");
-    let addr = listener.local_addr().expect("local addr known");
-    drop(listener);
-    addr.to_string()
-}
-
 struct ServerHandle {
     child: Child,
     addr: String,
+    startup_log: PathBuf,
+}
+
+fn startup_addr(diagnostic: &str) -> Option<SocketAddr> {
+    // A regular-file read may see an eprintln! before its newline/port finishes.
+    // A valid-looking partial port must not become the permanent probe address.
+    diagnostic
+        .split_inclusive('\n')
+        .filter(|line| line.ends_with('\n'))
+        .find_map(|line| {
+            line.trim_end()
+                .strip_prefix("dotrepo-public-query listening on ")
+                .and_then(|address| address.parse().ok())
+        })
 }
 
 impl ServerHandle {
     fn spawn(index_root: &Path, base_path: &str, public_root: Option<&Path>) -> Self {
-        let addr = unused_addr();
+        // Let the server reserve its own port atomically. A parent-side probe
+        // followed by dropping the listener races with other test processes.
+        let startup_log = temp_dir("server-startup").join("stderr.log");
+        let stderr = fs::File::create(&startup_log).expect("startup log opens");
         let mut command = Command::new(server_bin());
         command.args([
             "--index-root",
             index_root.to_str().expect("fixture path is utf-8"),
             "--bind",
-            &addr,
+            "127.0.0.1:0",
             "--base-path",
             base_path,
             "--generated-at",
@@ -87,11 +97,15 @@ impl ServerHandle {
         }
         let child = command
             .stdout(Stdio::null())
-            .stderr(Stdio::inherit())
+            .stderr(Stdio::from(stderr))
             .spawn()
             .expect("server process spawns");
 
-        let mut handle = Self { child, addr };
+        let mut handle = Self {
+            child,
+            addr: String::new(),
+            startup_log,
+        };
         handle.wait_until_ready();
         handle
     }
@@ -103,8 +117,27 @@ impl ServerHandle {
         // Give the child a moment to exec and bind before first probe.
         thread::sleep(Duration::from_millis(100));
         while Instant::now() < deadline {
+            let mut diagnostic = String::new();
+            fs::File::open(&self.startup_log)
+                .expect("startup log readable")
+                .take(4096)
+                .read_to_string(&mut diagnostic)
+                .expect("startup diagnostic readable");
             if let Some(status) = self.child.try_wait().expect("server status readable") {
-                panic!("server exited before readiness: {status}");
+                panic!(
+                    "server exited before readiness: {status}; log: {}; diagnostic: {diagnostic}",
+                    self.startup_log.display(),
+                );
+            }
+            if self.addr.is_empty() {
+                if let Some(address) = startup_addr(&diagnostic) {
+                    assert!(address.ip().is_loopback());
+                    assert_ne!(address.port(), 0, "server reports its concrete bound port");
+                    self.addr = address.to_string();
+                } else {
+                    thread::sleep(Duration::from_millis(10));
+                    continue;
+                }
             }
             if let Some((status, body)) = http_get(&self.addr, "/healthz") {
                 if status == 200 && body.trim() == "ok" {
@@ -125,7 +158,12 @@ impl Drop for ServerHandle {
 }
 
 fn http_get(addr: &str, target: &str) -> Option<(u16, String)> {
-    let mut stream = TcpStream::connect(addr).ok()?;
+    let mut stream =
+        TcpStream::connect_timeout(&addr.parse().ok()?, Duration::from_secs(1)).ok()?;
+    stream.set_read_timeout(Some(Duration::from_secs(1))).ok()?;
+    stream
+        .set_write_timeout(Some(Duration::from_secs(1)))
+        .ok()?;
     write!(
         stream,
         "GET {} HTTP/1.1\r\nHost: {}\r\nConnection: close\r\n\r\n",
@@ -160,6 +198,29 @@ fn temp_dir(label: &str) -> PathBuf {
     ));
     fs::create_dir_all(&path).expect("temp dir created");
     path
+}
+
+#[test]
+fn startup_address_requires_a_complete_diagnostic_line() {
+    let partial = "dotrepo-public-query listening on 127.0.0.1:5";
+    assert_eq!(startup_addr(partial), None);
+    assert_eq!(
+        startup_addr(&format!("{partial}4321\n")),
+        Some("127.0.0.1:54321".parse().unwrap())
+    );
+    assert_eq!(startup_addr("unrelated log\n127.0.0.1:54321\n"), None);
+}
+
+#[test]
+fn hosted_query_servers_report_distinct_kernel_assigned_ports() {
+    let first = ServerHandle::spawn(&fixture_index_root(), "/", None);
+    let second = ServerHandle::spawn(&fixture_index_root(), "/", None);
+    assert_ne!(first.addr, second.addr);
+    for server in [&first, &second] {
+        let (status, body) = http_get(&server.addr, "/healthz").expect("bound server responds");
+        assert_eq!(status, 200);
+        assert_eq!(body.trim(), "ok");
+    }
 }
 
 #[test]

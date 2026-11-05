@@ -13,20 +13,38 @@ owns dispatch and integration. The former long roadmap is preserved in the
 
 ## Active execution order
 
-**Start D1, D2 preparation and D3 together.** The numbers rank product outcomes;
-they are not a serial work schedule. With one coordinator and three worker slots,
-run these three lanes, then reuse released slots for review and downstream work.
-For a joint Lazy Collective team, D1 and PageDigest PD1 take two worker slots;
-use the third for the most valuable independent evaluation/publisher packet.
-Do not start a second coordinator or exceed the available concurrency.
+**November 4 local batch checkpoint:** D1 is locally accepted at
+`fbf0898dbc52f8b4ef61968956886985da4fd5d1`: the
+[durable source command](docs/decision-workflow.md) is pinned to one admitted
+database/policy with restart inspection and explicit missing-source recovery.
+The [D2 packet](docs/evaluations/next-team-batch-20261104/README.md) freezes six
+questions, source fixtures, baseline and scoring before treatment outcomes.
+Local implementation acceptance is recorded in the
+[batch artifacts](/Users/maxwell/Documents/Codex/2026-11-04/task/next-team-batch/acceptance/).
+D2 outcome runs, D3 upkeep costs and downstream usefulness/independent-operation
+joins remain open; a local D1 command does not close them.
+
+**Current dispatch:** Execute D2 from the sealed question/baseline packet and
+run D3 on actual repository layouts; do not reimplement accepted D1 or author a
+replacement question set. In a joint four-slot team, reserve one coordinator and
+assign ready evaluation and actual publisher work to the other slots. Refill
+capacity after bounded handoffs. Retain the bounded crawler timeout-fixture
+regressions when broad integration gates run. D1 source integration still needs hosted CI and
+the exact-head merge gate; package release is a separate action outside this
+continuation's implementation scope.
+
+Before selecting fresh work after a restart, reconcile canonical main, open PRs,
+linked worktrees and accepted but unmerged receipts. Verify actual heads and dirty
+state, then continue the earliest unmet join; a canonical folder or old dispatch
+instruction does not establish that implementation is missing.
 
 ### Ready lanes and joins
 
 | Packet | Can start now | Wait only for | Done when |
 | --- | --- | --- | --- |
-| **D1 — Reproducible decision entrypoint** | One versioned source command or local artifact, setup/recovery guide and bounded persistence design using the existing Python/SQLite service and Rust importer | Coordinator settles the invocation, workspace layout and saved-result boundary before a dependent harness is integrated | A fresh environment discovers → shortlists → describes → qualifies → decides, exits, restarts and inspects the retained result/evidence. Include unknown and missing-source recovery; verify any local package candidate separately. |
-| **D2 — Useful decisions across visits** | Freeze six independently authored questions over at most three already indexed repositories; prepare source truth, same-cache baseline and scoring before looking at treatment answers | Run the end-to-end comparison against the accepted D1 interface and a frozen source/policy revision; independent acceptance follows the run | Account for all questions and attempts across initial, unchanged, relevant-change and irrelevant-change visits. Report correct/incorrect assertions, useful decisions, unknowns and unfinished attempts. Changed evidence reopens affected requirements; reuse never renews inspection age. |
-| **D3 — Affordable publisher upkeep** | Use the existing publisher helper on two representative repository layouts through setup and two ordinary updates; prepare ambiguity/drift/recovery cases | No D1 or favorable D2 result is required. Coordinate only if a shared importer or fixture needs changes | Record operator time, interventions, unresolved fields and source/declaration drift. Unchanged updates need no manual recataloging; genuine disagreements remain visible. Feed these costs into D2/D5. |
+| **D1 — Reproducible decision entrypoint** | Locally accepted source command and setup/recovery path; preserve it and repair demonstrated failures rather than rebuilding it | Continue from the accepted invocation, workspace layout and saved-result boundary. Hosted CI and exact-head merge checks remain before source integration | A fresh environment discovers → shortlists → describes → qualifies → decides, exits, restarts and inspects the retained result/evidence. Include unknown and missing-source recovery; verify any local package candidate separately. |
+| **D2 — Useful decisions across visits** | Execute the existing sealed packet: six independently authored questions over at most three already indexed repositories and four visits, with its source truth, same-cache baseline and scoring. Use fresh outcome consumers and acceptance contexts; keep oracles, future visits and other arms out of consumer sessions | Run the end-to-end comparison against the accepted D1 interface and a frozen source/policy revision; independent acceptance follows the run | Account for all questions and attempts across initial, unchanged, relevant-change and irrelevant-change visits. Report correct/incorrect assertions, useful decisions, unknowns and unfinished attempts. Changed evidence reopens affected requirements; reuse never renews inspection age. |
+| **D3 — Affordable publisher upkeep** | Run the existing publisher helper on two actual representative repository layouts through setup and two ordinary updates, including ambiguity/drift/recovery cases. Disposable fixture controls are preparation only | No D1 or favorable D2 result is required. Coordinate only if a shared importer or fixture needs changes | Record operator time, interventions, unresolved fields and source/declaration drift. Unchanged updates need no manual recataloging; genuine disagreements remain visible. Feed these costs into D2/D5. |
 | **D4 — One finding handed to a second reader** | Inventory existing stored findings and source bindings; agree with PageDigest on the small test vocabulary, recipient policy and changed/missing/conflicting cases | Implementation uses a frozen D1 persistence/export interface. The usefulness comparison needs an accepted useful D2 finding | Transfer one finding between isolated stores with claim/task scope, source references/hashes, assessed revision, assumptions, attribution and original date. Recipient checks it under its own policy. Compare with sharing the same cached sources alone. |
 | **D5 — One independently operated recurring workflow** | Prepare the bounded run protocol, cost ledger, operating guide and unsent participation brief from existing evidence | Real independent operation needs D1 acceptance, D2 useful completion, D3 upkeep evidence and an authorized operator. D4 is required only when findings cross readers | Freeze scope, freshness, completion criteria, finite runs and budget. Count publisher/indexer/consumer work, fallback and unfinished attempts; report losing results. Outreach, spend and package publication must fit the user's authorization. |
 
@@ -44,17 +62,19 @@ overlap before work. Workers may read other lanes; one writer owns a shared file
 
 | Lane | Existing source and likely writable area | Reserved boundary |
 | --- | --- | --- |
-| D1 | `scripts/repodigest_service.py`, `repodigest_selection.py`, `repodigest_store.py`, focused tests and the decision setup/selection guides | Service arguments, persistence shape and packaging/lockfiles have one owner |
-| D2 | A new dated evaluation packet and its harness/fixtures; existing source-cache baseline | Frozen task/answer inputs stay out of treatment sessions. A change author does not independently accept that change or author its held-out result |
+| D1 maintenance | `scripts/decision_workflow.py`, `repodigest_service.py`, `repodigest_selection.py`, `repodigest_store.py`, focused tests and decision guides, only for a demonstrated repair | Service arguments, persistence shape and packaging/lockfiles have one owner |
+| D2 | Existing sealed evaluation inputs remain unchanged; new execution harness/output paths and the existing source-cache baseline | Frozen task/answer inputs stay out of treatment sessions. A change author does not independently accept that change or author its held-out result |
 | D3 | `scripts/publisher_workflow.py`, its tests, publisher fixtures and maintainer guide | Shared Rust importer changes are a separately assigned dependency, not concurrent edits from D1/D3 |
 | D4 | A small export/import adapter and focused recipient-policy tests after the interface join | Shared vocabulary and storage semantics need coordinator agreement; no shared runtime or protocol extension by default |
 | D5 | Dated protocol, operating guide and cost/attempt records | Coordinator owns external actions and release/publication decisions |
 
-**D1 has a real persistence gap.** Source bodies and assessments already persist
-in SQLite, but selection IDs, attempts and final decisions are currently
-process-local ([current bounds](docs/experimental-decision-selection.md#bounds-recovery-and-accounting)).
-Specify what is retained and how restart recovers it before calling the whole
-workflow durable. A startup wrapper alone does not close D1.
+**Durability boundary:** The legacy in-process MCP service alone retains
+process-local selection IDs, attempts and final decisions
+([service bounds](docs/experimental-decision-selection.md#bounds-recovery-and-accounting)).
+The accepted D1 source command persists these across process exit, pins the
+admitted database/policy and supports offline retained-result inspection. The
+legacy bound is not an unresolved gap in that accepted command. Local acceptance
+does not establish installed-release availability or useful-work outcomes.
 
 Freeze interfaces only as far as the next consumer needs them. Integrate a small
 working path first; do not wait for every lane or invent a general framework.

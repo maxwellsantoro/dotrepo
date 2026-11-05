@@ -27,7 +27,8 @@ retained findings (MCP tools `dotrepo.decision.*`). Its
 experimental source workflow can reach a justified preliminary choice or an explicit
 unknown; it is not in released packages or the hosted API. Start with
 [delivery status and evidence](docs/workflow-status.md), then the
-[decision guide](docs/experimental-decision-selection.md).
+[durable source command](docs/decision-workflow.md) or the
+[MCP decision guide](docs/experimental-decision-selection.md).
 
 Together with [PageDigest](https://pagedigest.org), this is part of
 [**Lazy Collective**](https://lazycollective.org/): conservation through cooperation,

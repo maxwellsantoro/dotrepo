@@ -13,6 +13,7 @@ implementation and validation history.
 | Shortlist | Local experimental `dotrepo.decision.shortlist` | Up to four leads from three search queries, with visible gaps |
 | Qualify requirements | Local `describe`, `qualify`, `decide` | Supported, contradicted or unknown source assessments at exact revision/component scope |
 | Inspect original evidence | Local retained `source.list`/`source.read`, optional separately configured HTTP fallback | Bound source bytes and passages; text remains untrusted data |
+| Retain a decision across restarts | Local [versioned source command](decision-workflow.md) and workspace | Historical tool results and persistent selection budgets, pinned to one admitted database and policy |
 | Execute | Separate authorized task environment | A particular run in a particular environment; no lookup tool grants authority |
 | Maintain publisher context | Existing native import/preview/doctor/drift, plus local publisher helper | Source-derived proposals and explicit ambiguity without overwriting adopted records |
 
@@ -93,6 +94,15 @@ matched quality and freshness, counting publisher, indexer and consumer work,
 fallback and unfinished attempts. General net savings remain unestablished.
 
 ## Latest evidence
+
+The November 4 local next-team-batch candidate adds a durable source command
+without changing the existing selection, assessment or source tools. Saved
+results remain inspectable when the source database is missing. Calls refuse a
+different database or policy; an updated admitted catalog starts a new workspace.
+These are historical observations, with no renewed source-inspection age.
+The [frozen D2 preparation](evaluations/next-team-batch-20261104/README.md)
+separates task inputs from the expected evidence. It is preparation, not an
+executed useful-work comparison. Package delivery and independent use remain open.
 
 The linked text files are verbatim compact result documents with
 [original paths, commit identities and hashes](research-evidence-20261030/README.md).

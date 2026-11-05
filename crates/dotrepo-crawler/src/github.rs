@@ -1191,42 +1191,181 @@ fn node_package_json_path_preference(path: &str) -> i32 {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::io::{Read, Write};
-    use std::net::TcpListener;
+    use std::io::{self, Read};
+    use std::net::{SocketAddr, TcpListener, TcpStream};
+    use std::sync::mpsc::{self, Receiver, Sender};
     use std::thread;
     use std::time::{Duration, Instant};
 
+    #[derive(Debug, PartialEq, Eq)]
+    enum HungServerPhase {
+        AwaitingConnection,
+        AwaitingRequest,
+        WithholdingResponse,
+    }
+
+    struct HungRequestServer {
+        address: SocketAddr,
+        cancel: Sender<()>,
+        connected: Receiver<()>,
+        request_received: Receiver<Instant>,
+        handle: Option<thread::JoinHandle<io::Result<HungServerPhase>>>,
+    }
+
+    impl HungRequestServer {
+        fn spawn(lifetime: Duration) -> Self {
+            let listener = TcpListener::bind("127.0.0.1:0").expect("listener binds");
+            let address = listener.local_addr().expect("listener address");
+            listener
+                .set_nonblocking(true)
+                .expect("listener is nonblocking");
+            let (cancel, cancelled) = mpsc::channel();
+            let (connected_tx, connected) = mpsc::channel();
+            let (request_tx, request_received) = mpsc::channel();
+            // Start the deadline before spawning: even a delayed server has a
+            // finite lifetime. Neither accepting nor reading can block cleanup.
+            let deadline = Instant::now() + lifetime;
+            let handle = thread::spawn(move || {
+                let stopped = || {
+                    !matches!(cancelled.try_recv(), Err(mpsc::TryRecvError::Empty))
+                        || Instant::now() >= deadline
+                };
+                let mut stream = loop {
+                    if stopped() {
+                        return Ok(HungServerPhase::AwaitingConnection);
+                    }
+                    match listener.accept() {
+                        Ok((stream, _)) => break stream,
+                        Err(error) if error.kind() == io::ErrorKind::WouldBlock => {
+                            thread::sleep(Duration::from_millis(5));
+                        }
+                        Err(error) => return Err(error),
+                    }
+                };
+                stream.set_nonblocking(true)?;
+                let _ = connected_tx.send(());
+                let mut request = [0_u8; 1024];
+                loop {
+                    if stopped() {
+                        return Ok(HungServerPhase::AwaitingRequest);
+                    }
+                    match stream.read(&mut request) {
+                        Ok(0) => return Ok(HungServerPhase::AwaitingRequest),
+                        Ok(_) => break,
+                        Err(error) if error.kind() == io::ErrorKind::WouldBlock => {
+                            thread::sleep(Duration::from_millis(5));
+                        }
+                        Err(error) => return Err(error),
+                    }
+                }
+                let _ = request_tx.send(Instant::now());
+                // Keep the socket open without responding until the test stops
+                // us or the independent server deadline expires. No write can
+                // block, including when the client has already timed out.
+                while !stopped() {
+                    thread::sleep(Duration::from_millis(5));
+                }
+                Ok(HungServerPhase::WithholdingResponse)
+            });
+            Self {
+                address,
+                cancel,
+                connected,
+                request_received,
+                handle: Some(handle),
+            }
+        }
+
+        fn wait(mut self) -> HungServerPhase {
+            self.handle
+                .take()
+                .expect("server handle exists")
+                .join()
+                .expect("server thread completes")
+                .expect("server socket operations succeed")
+        }
+
+        fn finish(self) -> HungServerPhase {
+            let _ = self.cancel.send(());
+            self.wait()
+        }
+    }
+
+    impl Drop for HungRequestServer {
+        fn drop(&mut self) {
+            // Also clean up during assertion unwinding. Ignore thread errors
+            // here so that cleanup cannot cause a second panic.
+            let _ = self.cancel.send(());
+            if let Some(handle) = self.handle.take() {
+                let _ = handle.join();
+            }
+        }
+    }
+
+    #[test]
+    fn hung_request_server_expires_without_a_client() {
+        let server = HungRequestServer::spawn(Duration::from_millis(100));
+        assert_eq!(server.wait(), HungServerPhase::AwaitingConnection);
+    }
+
+    #[test]
+    fn hung_request_server_cancels_without_a_client() {
+        let server = HungRequestServer::spawn(Duration::from_secs(10));
+        assert_eq!(server.finish(), HungServerPhase::AwaitingConnection);
+    }
+
+    #[test]
+    fn hung_request_server_cleans_up_during_unwind() {
+        let start = Instant::now();
+        let result = std::panic::catch_unwind(|| {
+            let _server = HungRequestServer::spawn(Duration::from_secs(10));
+            panic!("simulated assertion failure before a client connects");
+        });
+        assert!(result.is_err());
+        assert!(start.elapsed() < Duration::from_secs(5));
+    }
+
+    #[test]
+    fn hung_request_server_cancels_an_empty_client() {
+        let server = HungRequestServer::spawn(Duration::from_secs(10));
+        let _client = TcpStream::connect_timeout(&server.address, Duration::from_secs(2))
+            .expect("empty client connects");
+        server
+            .connected
+            .recv_timeout(Duration::from_secs(5))
+            .expect("server accepts empty client");
+        assert_eq!(server.finish(), HungServerPhase::AwaitingRequest);
+    }
+
     #[test]
     fn http_client_times_out_hung_requests() {
-        let listener = TcpListener::bind("127.0.0.1:0").expect("listener binds");
-        let address = listener.local_addr().expect("listener address");
-        let handle = thread::spawn(move || {
-            let (mut stream, _) = listener.accept().expect("client connects");
-            let mut request = [0_u8; 1024];
-            let _ = stream.read(&mut request);
-            thread::sleep(Duration::from_millis(250));
-            let _ = stream.write_all(b"HTTP/1.1 200 OK\r\nContent-Length: 2\r\n\r\n{}");
-        });
-
+        let server = HungRequestServer::spawn(Duration::from_secs(10));
         let client = Client::builder()
-            .timeout(Duration::from_millis(50))
+            .no_proxy()
+            .timeout(Duration::from_secs(1))
             .build()
             .expect("client builds");
-        let url =
-            Url::parse(&format!("http://{address}/repos/example/project")).expect("URL parses");
+        let url = Url::parse(&format!("http://{}/repos/example/project", server.address))
+            .expect("URL parses");
 
         let start = Instant::now();
-        let err = client
+        let result = client
             .get(url.clone())
             .send()
-            .with_context(|| format!("failed to GET {}", url.as_str()))
-            .expect_err("hung request should time out");
-        let elapsed = start.elapsed();
+            .with_context(|| format!("failed to GET {}", url.as_str()));
+        let completed = Instant::now();
+        let received = server.request_received.recv_timeout(Duration::from_secs(2));
+        let phase = server.finish();
+        let err = result.expect_err("hung request should time out");
 
-        assert!(elapsed < Duration::from_secs(1));
+        assert_eq!(phase, HungServerPhase::WithholdingResponse);
+        assert!(received.expect("server receives request bytes") < completed);
+        assert!(completed.duration_since(start) < Duration::from_secs(5));
+        assert!(err
+            .downcast_ref::<reqwest::Error>()
+            .expect("request error is preserved")
+            .is_timeout());
         assert!(err.to_string().contains("failed to GET"));
-
-        handle.join().expect("server thread completes");
     }
 
     #[test]
