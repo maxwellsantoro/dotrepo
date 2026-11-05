@@ -3,7 +3,7 @@
 - Imported repository name from README.md.
 - Imported SECURITY.md, but no explicit contact channel was parsed, so security_contact = "unknown" is intentional.
 - Inferred repo.test from pyproject.toml as `python -m pytest`.
-- Discovered related relation to github.com/Forward-Future/loop-library from README cross-link.
+- Discovered related relation to github.com/vercel-labs/skills from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.name` to `claude-skills` from `GitHub API` after deterministic escalation.

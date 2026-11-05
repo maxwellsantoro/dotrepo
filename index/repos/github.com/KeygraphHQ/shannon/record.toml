@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "checked"
 source = "https://github.com/KeygraphHQ/shannon"
-generated_at = "2026-10-27T17:47:47.974716Z"
+generated_at = "2026-11-05T13:41:48.166599593Z"
 
 [record.trust]
 confidence = "high"
@@ -53,7 +53,7 @@ topics = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T17:47:47.974716Z"
+checkedAt = "2026-11-05T13:41:48.166599593Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -61,7 +61,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T17:47:47.974716Z"
+checkedAt = "2026-11-05T13:41:48.166599593Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -69,7 +69,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T17:47:47.974716Z"
+checkedAt = "2026-11-05T13:41:48.166599593Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -77,7 +77,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T17:47:47.974716Z"
+checkedAt = "2026-11-05T13:41:48.166599593Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -85,7 +85,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T17:47:47.974716Z"
+checkedAt = "2026-11-05T13:41:48.166599593Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -94,7 +94,7 @@ state = "present"
 valueJson = '"pnpm build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T17:47:47.974716Z"
+checkedAt = "2026-11-05T13:41:48.166599593Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -103,7 +103,7 @@ state = "present"
 valueJson = '"Shannon is an AI pentester for web applications and APIs. It analyzes your source code, identifies attack vectors, and executes real exploits to prove vulnerabilities before they reach production."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T17:47:47.974716Z"
+checkedAt = "2026-11-05T13:41:48.166599593Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -111,7 +111,7 @@ state = "present"
 valueJson = '"https://keygraph.io/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T17:47:47.974716Z"
+checkedAt = "2026-11-05T13:41:48.166599593Z"
 confidence = "high"
 method = "inferred"
 reason = "extracted from README title with post-cleaners"
@@ -120,7 +120,7 @@ state = "present"
 valueJson = '"shannon"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T17:47:47.974716Z"
+checkedAt = "2026-11-05T13:41:48.166599593Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -132,6 +132,6 @@ archived = false
 clone_url = "https://github.com/KeygraphHQ/shannon.git"
 default_branch = "main"
 fork = false
-head_sha = "b9744f6cecc5429333873b86a6762f1d70c54fc2"
+head_sha = "8c75a9b5a89ac02b7be8efeca7e129284d37e20f"
 html_url = "https://github.com/KeygraphHQ/shannon"
-stars = 49564
+stars = 51247
