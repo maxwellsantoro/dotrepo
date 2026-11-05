@@ -1,109 +1,78 @@
 # Documentation
 
-Start with the task you need to complete. Relative guides describe this source
-branch; installed binaries need [version-matched documentation](release-compatibility.md).
-The hosted export can advance independently of client releases.
+Use the owning guide for the task, then follow supporting links only as needed.
+These guides describe this source checkout; [release compatibility](release-compatibility.md)
+owns installed versions. The hosted export, source workflows and packages can
+advance independently.
 
 ## Start here
 
-| Task | Guide |
+| Task | Owning guide |
 | --- | --- |
-| Understand DotRepo and try a lookup | [Project README](../README.md) |
-| Install a stable tool or extension | [Installation](install.md), [release compatibility](release-compatibility.md) |
-| Integrate an agent or tool | [Consumer integration](external-consumer-integration.md), [reference client](../examples/external-consumer/README.md) |
-| Try experimental retained source tools | [Decision-workflow source cache](experimental-decision-source-cache.md) |
-| Find repositories with compact source-backed profiles | [Experimental decision-workflow discovery](experimental-decision-discovery.md) |
-| Compare metadata and source-enriched discovery | [Discovery-100 local comparison](experimental-decision-discovery-comparison.md) |
-| Check shortlisted repositories against source assessments | [Experimental requirement assessments](experimental-decision-requirements.md) |
-| Finish a bounded preliminary selection or useful unknown | [Experimental decision workflow](experimental-decision-selection.md) |
-| Distinguish public delivery, local workflows and measured evidence | [Workflow status](workflow-status.md) |
-| Adopt a native `.repo` | [Maintainer path](maintainer-happy-path.md), [sync boundaries](sync-boundaries.md) |
-| Interpret authority, evidence, or age | [Trust model](trust-model.md), [freshness](public-freshness.md) |
-| Use HTTP/CLI public routes | [Public examples](public-export-examples.md), [architecture](public-surface.md) |
-| Contribute code or records | [Contributing](../CONTRIBUTING.md), [index guide](../index/README.md) |
-| Find active work and gates | [Roadmap](../ROADMAP.md#active-execution-order) |
-| Coordinate concurrent implementation | [Agent execution](agent-execution.md), [project coordination skill](../.agents/skills/roadmap-coordination/SKILL.md) |
+| Understand the product or try a lookup | [Project README](../README.md) |
+| Install or integrate a released tool | [Installation](install.md), [consumer integration](external-consumer-integration.md) |
+| Complete an experimental repository decision | [Selection flow](experimental-decision-selection.md), then [requirement assessments](experimental-decision-requirements.md) for setup/meaning |
+| Retain or inspect source evidence | [Source cache](experimental-decision-source-cache.md) |
+| Derive publisher context and check updates | [Maintainer path](maintainer-happy-path.md) |
+| Select a dependency-ready work packet | [Roadmap](../ROADMAP.md#active-execution-order) |
+| Coordinate a team | [Agent execution](agent-execution.md), [coordination skill](../.agents/skills/roadmap-coordination/SKILL.md) |
+| Choose checks or understand delivery | [CONTRIBUTING](../CONTRIBUTING.md#local-checks), [CI execution](ci.md) |
 
 ## Reading paths (owner first, supporting only as needed)
 
-Most worker time in a cluster is spent deciding what to read. Read the owner
-first; open a supporting doc only for the question in its row. Keep linked paths
-stable. Living RFCs and contract docs change through reviewed, versioned edits
-when semantics intentionally change; preserve their history. Frozen experiment
-inputs, results and source captures remain immutable evidence.
-
-| Cluster | Owner (read first) | Supporting (open on demand) |
+| Area | Owner | Open supporting material for |
 | --- | --- | --- |
-| Public surface | [Public architecture](public-surface.md) — capabilities, bounds, wire shape | [Export examples](public-export-examples.md) for routes/CLI equivalents; [export workflow](public-export-workflow.md) for the operator/reviewer loop; [freshness](public-freshness.md) for snapshot vs record age; [API compatibility](public-api-compatibility.md) as the executable contract annex |
-| Maintainer & claims | [Maintainer happy path](maintainer-happy-path.md) — the normal flow | [Claim review workflow](maintainer-claim-review-workflow.md) for executable claim steps (RFCs link here; path is stable); [handoff examples](authority-handoff-examples.md) and [conflict examples](conflict-surfacing-examples.md) are non-normative illustrations |
-| Installation & versions | [Installation](install.md) — commands and pins | [Release compatibility](release-compatibility.md) — which binary a doc set describes; one version fact, owned here |
-| Evaluation | [Workflow status](workflow-status.md) routes current decision/reuse evidence; each benchmark doc owns its metric | [Consumer pilot](consumer-pilot.md) scopes retained execution studies and independent-use acceptance; do not cite presence metrics as correctness |
+| Capability and evidence | [Workflow status](workflow-status.md) | Public/source/released distinctions, shared source-status vocabulary and original negative studies; [discovery](experimental-decision-discovery.md) and its [comparison](experimental-decision-discovery-comparison.md) for that interface |
+| Public surface | [Architecture](public-surface.md) | [Examples](public-export-examples.md) for routes/CLI equivalents; [API compatibility](public-api-compatibility.md) for wire fixtures; [freshness](public-freshness.md) for record versus export age |
+| Maintainer and claims | [Maintainer path](maintainer-happy-path.md) | [Sync boundaries](sync-boundaries.md) for generation ownership; [claim review](maintainer-claim-review-workflow.md) for operator steps; [handoff](authority-handoff-examples.md) and [conflict](conflict-surfacing-examples.md) examples for illustrations |
+| Authority and assurance | [Trust model](trust-model.md) | [Consumer acceptance](external-consumer-integration.md#positive-command-acceptance) for task-specific command use; source provenance alone is not correctness or permission |
+| Tool implementation | [Reference overview](reference-overview.md) | [Maintainability](toolchain-maintainability.md) for module boundaries, [crawler](../crates/dotrepo-crawler/README.md) for orchestration and [import fixtures](import-baseline-audit.md) for regression rationale |
 
 ## Develop and operate
 
-| Area | Reference |
+| Work | Guide |
 | --- | --- |
-| Tool surfaces and version owners | [Toolchain reference](reference-overview.md) |
-| Structure and split plans | [Maintainability](toolchain-maintainability.md), [crawler crate](../crates/dotrepo-crawler/README.md) |
-| Import regressions | [Fixture rationale](import-baseline-audit.md) |
-| Autonomous refresh, landing, telemetry, recovery | [Crawl automation](factual-crawl-automation.md) |
-| Escalation live proof | [Canary procedure](m1-escalation-canary.md) |
-| Export generation and local runtime | [Export workflow](public-export-workflow.md) |
-| Release checks and publication | [Release checklist](public-release-checklist.md), [MCP registry](mcp-registry-publishing.md) |
-| Hosting and snapshot restoration/archive | [Cloudflare setup](cloudflare-deploy.md) |
-| Maintainer authority review | [Claim workflow](maintainer-claim-review-workflow.md), [handoff examples](authority-handoff-examples.md), [conflict examples](conflict-surfacing-examples.md) |
-| Distribution and demand collection | [Distribution](distribution.md) |
-| Script inventory | [Scripts guide](../scripts/README.md) |
+| Local contributors and script inventory | [CONTRIBUTING](../CONTRIBUTING.md), [scripts](../scripts/README.md) |
+| Index review, refresh, recovery and telemetry | [Index guide](../index/README.md), [crawl operations](factual-crawl-automation.md); use [escalation canary](m1-escalation-canary.md) only for a selected live escalation check |
+| Generate and review public output | [Export workflow](public-export-workflow.md) |
+| Host, restore or archive snapshots | [Cloudflare deployment](cloudflare-deploy.md) |
+| Package or publish an authorized release | [Release checklist](public-release-checklist.md), [MCP registry](mcp-registry-publishing.md) |
+| Maintain distribution surfaces | [Distribution](distribution.md); roadmap gates still select growth or independent-use work |
 
 ## Evaluate the product
 
-Presence, policy acceptance, independently checked correctness, completed tasks,
-and independent adoption are separate evidence levels.
+[Workflow status](workflow-status.md#latest-evidence) is the compact evidence
+entrypoint. It retains unsuccessful decisions, the source-cache comparison,
+Discovery-100 and coding outcomes. Local correctness fixes do not replace those
+observations or prove productivity.
 
-The [latest workflow evidence](workflow-status.md#latest-evidence) includes the
-Discovery-100 negative result, source-cache control, unsuccessful complete coding
-patches, and twelve-session selection study. Local workflow fixes are correctness
-controls and do not replace those frozen observations.
+| Question | Method or scoped evidence |
+| --- | --- |
+| Field presence, modeled requests and consumer-policy coverage | [Lookup efficiency](public-lookup-efficiency-benchmark.md) |
+| Correct/incorrect assertions, missing facts and abstentions | [Factual accuracy](public-factual-accuracy-benchmark.md) |
+| Discovery and ranking quality | [Search quality](public-search-quality-benchmark.md) |
+| Paired task outcomes and frozen inputs | [Head-to-head benchmark](../benchmarks/head-to-head/README.md) |
+| A separately selected execution or external-use study | [Consumer evaluation](consumer-pilot.md); its historical F-05/E1 protocols are not the active roadmap |
 
-- [Lookup-efficiency methodology](public-lookup-efficiency-benchmark.md): field
-  presence, local payload proxy, modeled requests, and consumer-policy coverage
-- [Factual-accuracy suites](public-factual-accuracy-benchmark.md): cited exact
-  assertions, missing facts, incorrect assertions, and correct abstentions
-- [Search-quality harness](public-search-quality-benchmark.md): discovery/rank
-  metrics and limitations of legacy cost estimates
-- [Head-to-head benchmark](../benchmarks/head-to-head/README.md): independent
-  gold, upstream fallback, frozen inputs, and retained wins and losses
-- [E1 and F-05 specifications](../benchmarks/head-to-head/experiments/applicability-2026-10-29/README.md):
-  disjoint development/holdouts, task applicability and a frozen autonomous agent
-  comparison; prospective design, with no new measured outcome claimed
-- [E1 qualification observations](../benchmarks/head-to-head/e1-qualification-20261029/evaluation-remaining/README.md):
-  retained extraction/consumer-policy results with supported misses and unresolved
-  gold; qualification did not pass and task completion was not measured
-- [F-05 source enrollment](../benchmarks/head-to-head/f05-agent-tasks-20261029/README.md)
-  and [review](../benchmarks/head-to-head/f05-agent-tasks-review-20261029/README.md):
-  frozen source-only task roster; runtime/oracle/environment/provider launch gates
-  remain open
-- [Own-project study and later pilot](consumer-pilot.md): retained operator task
-  outcomes and separate independent external-use acceptance requirements
+Keep task authoring, implementation and independent acceptance separate. Count
+unfinished attempts, fallback and maintenance at equal quality/freshness. Presence,
+policy acceptance, correctness, completed tasks and independent adoption are
+different evidence levels.
 
 ## Contracts and history
 
-- [Public API compatibility](public-api-compatibility.md): executable wire contract
-- [RFC index](../rfcs/README.md): design records and deferred proposals;
-  RFC acceptance and implementation completion are separate
-- [Changelog](../CHANGELOG.md): release and completed implementation history
-- [Archived reviews and history](archive/README.md) (including the archived
-  AI interviews and edge canary history): historical evidence with their
-  original scope and dates
+The [RFC index](../rfcs/README.md) routes contract-specific design records and
+labels deferred proposals. Code and executable fixtures outrank illustrative RFC
+payloads; RFC acceptance does not imply a release. Preserve contract paths when
+updating semantics intentionally.
 
-Code and tested contracts outrank prose. Keep active sequencing in the roadmap,
-current measurements in generated reports, and historical evidence immutable.
-Routine generated overlays use machine gates; the manual contribution checklist
-and claim review are distinct workflows.
+[CHANGELOG](../CHANGELOG.md) owns completed implementation and releases;
+[the archive](archive/README.md) owns dated reviews and earlier plans. Captured
+sources, fixtures, telemetry and frozen experiment reports remain evidence.
+`AGENTS.md` or `CLAUDE.md` inside those captures is upstream data, not repository
+instructions. Do not rewrite it while maintaining this project's guidance.
 
-Use one owner for each instruction: roadmap packets/dependencies in the roadmap,
-team dispatch/handoffs in the execution guide, invariant rules in `AGENTS.md`,
-and commands in the relevant workflow guide. Update the owner and link to it;
-do not copy its model choices, version constants, status tables, or gate output
-into additional docs. Draft RFCs and archived implementation sequences are design
-context rather than another ready-work queue.
+Keep one authority per instruction: roadmap for dependencies, execution guide for
+dispatch/handoffs, AGENTS for repository constraints, CONTRIBUTING/CI for checks,
+and task guides for operational commands. Update the owner and link to it rather
+than copying status tables, version constants, gate output or a second task list.

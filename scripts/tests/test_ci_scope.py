@@ -26,6 +26,16 @@ def selected(paths):
     [
         (["README.md"], {"minimal-gate"}),
         (["docs/agent-execution.md", "docs/archive/old-review.md"], {"minimal-gate"}),
+        (
+            [
+                "docs/ci.md",
+                ".agents/skills/roadmap-coordination/SKILL.md",
+                ".agents/skills/roadmap-coordination/agents/openai.yaml",
+            ],
+            {"minimal-gate"},
+        ),
+        ([".agents/skills/roadmap-coordination/scripts/run.py"], FULL),
+        ([".agents/skills/new-skill/SKILL.md"], FULL),
         (["scripts/audit_index_sample.py"], {"python-gate"}),
         (["scripts/check_autonomous_refresh_base.py"], {"python-gate"}),
         (["scripts/tests/test_external_consumer_lookup.py"], {"python-gate"}),
@@ -47,6 +57,7 @@ def selected(paths):
         (["cloudflare/hosted-query/src/index.mjs"], {"python-gate", "public-surface-gate"}),
         (["editors/vscode/extension.js"], {"python-gate", "release-gate"}),
         (["scripts/package_release_binaries.py"], {"python-gate", "release-gate"}),
+        (["scripts/ensure_playwright_chromium.cjs"], {"python-gate", "release-gate"}),
         (["scripts/check_operator_claim_gate.py"], {"python-gate", "operator-gate"}),
         (["index/repos/github.com/o/r/record.toml"], {"public-surface-gate"}),
         (
@@ -176,8 +187,12 @@ def test_workflow_scheduling_cache_and_narrow_jobs_preserve_required_checks():
         step for step in release["steps"] if step.get("name") == "Install pinned browser test tools"
     )
     assert '"playwright@$PLAYWRIGHT_VERSION"' in install["run"]
-    assert "install --with-deps chromium" in install["run"]
-    assert "if" not in install  # System dependencies are installed even on a cache hit.
+    assert (
+        '"$RUNNER_TEMP/dotrepo-browser/node_modules/.bin/playwright" install chromium'
+        in install["run"]
+    )
+    assert "node scripts/ensure_playwright_chromium.cjs" in install["run"]
+    assert "if" not in install and "cache-hit" not in install["run"]
     for job in ["release-gate", "public-surface-gate"]:
         timing = next(
             step for step in jobs[job]["steps"] if step.get("name") == "Upload gate timings"

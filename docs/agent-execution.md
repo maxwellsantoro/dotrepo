@@ -1,131 +1,106 @@
 # Coordinated agent execution
 
-Use this workflow when a coordinator and concurrent workers implement
-[roadmap packets](../ROADMAP.md#active-execution-order). For isolated fixes,
-use [AGENTS](../AGENTS.md) and [contributing](../CONTRIBUTING.md) directly.
-The project [coordination skill](../.agents/skills/roadmap-coordination/SKILL.md)
-routes team requests here rather than introducing another policy source.
+Use one coordinator and concurrent workers for an authorized team. The
+[roadmap](../ROADMAP.md#active-execution-order) owns packets and dependency joins;
+[AGENTS](../AGENTS.md) owns repository constraints. For an isolated fix, use
+[CONTRIBUTING](../CONTRIBUTING.md) directly.
 
-## Coordinator
+## Dispatch ready work
 
-Read the current checkout, roadmap, and relevant contracts before dispatch.
-Check existing prerequisite evidence so completed implementation is not assigned
-again. Keep one small packet ledger in the task or run artifacts, rather than
-duplicating the roadmap in permanent status documents:
+Keep a small ledger in the task/run artifacts, not another permanent roadmap:
 
-| Packet | State | Owner / writable paths | Dependencies | Handoff / checks |
+| Packet | State | Owner / writable paths | Waits for | Handoff / evidence |
 | --- | --- | --- | --- | --- |
-| Decision-flow control example | ready | worker, assigned workflow files | pinned source inputs | justified decision/unknown, failed attempts, focused checks |
+| D1 example | ready / running / review / done / blocked | one writer and exact paths | named interface or acceptance receipt | diff, focused checks, remaining limit |
 
-Use `ready`, `running`, `review`, `done`, or `blocked`, with a concrete reason
-for a blocked dependency. Record evidence, not an agent's confidence. Reassign
-ready work when a worker waits on an external dependency. Reserve a coordinator
-slot and use actual available concurrency; with four slots, three workers can
-operate simultaneously.
+Reserve one coordinator slot; with four total slots, at most three workers run.
+Start independent preparation together and rotate freed slots into review or the
+next ready packet. A waiting outcome gate does not block independent fixture,
+baseline or publisher work. For a joint two-project team, keep one shared
+coordinator and respect each repository's validation/publication boundary.
 
-The coordinator owns shared decisions, integration, and final roadmap/docs
-reconciliation. Dispatch bounded changes with reviewable handoffs, rather than
-"finish M4" or "improve all accuracy." Independent evaluation answers belong
-to a separate assignment from implementing the extraction being evaluated.
+The coordinator settles only the shared contract needed by the next dependency:
+arguments, saved-result shape, source-status meaning or fixture ownership. Assign
+one owner for each shared facade, schema, lockfile and expectation file. Workers
+can read the shared checkout but edit only assigned paths. Overlap requires an
+explicit ownership transfer; it is not permission to revert another worker.
 
-## Dispatch contract
-
-Give each worker these fields:
+Use this compact dispatch:
 
 ```text
-Packet and desired behavior:
+Outcome and roadmap packet:
 Base commit / checkout:
-Read first: AGENTS.md plus the shortest relevant contract and source
-Writable files or repository identities:
-Shared files reserved for the coordinator:
-Prerequisites / assumptions supported by evidence:
-Acceptance artifacts and focused checks:
-Budget or external action constraints:
-Handoff destination:
+Read first: shortest owning contract and source
+Writable paths; shared paths reserved:
+Dependency-ready inputs; interface/evidence still required:
+Focused acceptance checks and artifact directory:
+External-action/budget limits:
 ```
 
-One writer owns each file at a time. Workers may read the shared checkout but
-edit only assigned paths. Agree on ownership transfer before touching a shared
-facade, schema, compatibility manifest, workflow, or fixture expectation file.
-The coordinator can apply small shared changes after workers propose their
-deltas. Partition index work by identity; parser-policy changes need one owner
-across those batches.
+Read source and prerequisite receipts before assigning already completed work.
+Workers inherit the user's model configuration. Crawler provider/adjudication
+policy does not assign coding-agent models.
 
-Use isolated worktrees for incompatible dependency states, different release
-lines, or overlapping integration experiments. Start from a declared commit and
-return branch/commit plus patch dependencies. Use `codex/` branches and preserve
-user changes. Isolation does not resolve incompatible contract decisions; agree
-on those before implementation. Never copy generated outputs between release lines.
+## Isolate the work, not the coordination
 
-One checkout has one branch: in a shared workspace, only the coordinator runs
-`git checkout`/branch switches, and workers either state their target branch in
-the handoff for the coordinator to apply or work in their own worktree. Two
-agents switching branches in one checkout will silently move each other's
-commits (observed 2026-10-27); treat any unexpected branch change as a stop
-signal and report it before committing.
+Use worktrees for incompatible dependency states, release lines or overlapping
+experiments. In a shared checkout only the coordinator switches branches and
+integrates commits. An unexpected branch/HEAD change is a stop signal for the
+affected writer, not a reason to reset the workspace.
 
-## Worker handoff
+Assign unique report directories and Python environments. Partition index work
+by repository identity and publisher state by path. Share a Cargo target only
+when one assigned build owner schedules compatible builds; otherwise use an
+isolated target. Locks prevent some corruption, but do not avoid wasted work,
+report overwrites or model-budget contention. [CI execution](ci.md) owns the
+concrete validation schedule and receipt-reuse rules.
 
-Return a concise, reproducible handoff:
+## Keep review independent
+
+Implementation, test authoring and independent acceptance are different roles.
+A change author runs its focused tests and supplies evidence; a fresh reviewer
+checks the contract and the exposing/counterexample cases before acceptance.
+When capacity is full, rotate a finished worker into review rather than creating
+a second coordinator. If independence is unavailable, label the evidence an
+operator/developer control and keep the independent outcome gate open.
+
+For useful-work comparisons, freeze tasks and source truth before inspecting
+treatment answers. Consumers do not receive gold, another arm's transcripts or
+review conclusions. Changing a failed task, rubric or source after exposure
+requires a new experiment identity; preserve the earlier attempt. A reviewer
+cannot call an outcome independent when it authored the change or the expected
+result being accepted.
+
+## Handoff and integrate
+
+Return a bounded handoff:
 
 ```text
-Packet:
-Result and changed files (or branch/commit):
-Sources / frozen inputs / snapshot identity:
-Checks run and outcomes:
-Evidence artifacts and retained failures:
-Unresolved dependency or material limitation:
-Follow-up required before the outcome gate can close:
+Result; changed files or commit; base and patch dependencies:
+Source/fixture identities and observed behavior:
+Focused checks, commands, outcomes and retained failure artifacts:
+Unresolved assumption or outcome dependency:
 ```
 
-Report failed assumptions and the smallest missing contract/evidence promptly;
-continue independent authorized work. Do not edit another worker's files,
-silently change public semantics, rewrite frozen results, or claim an external
-outcome from a local example. Publication, settings changes, and external outreach
-must fit the user's authorization and be concrete and reviewable before execution.
-Preparing a pilot does not authorize contacting another project.
+Report an ownership conflict or failed assumption promptly, then continue any
+independent authorized work. Do not silently change public semantics, edit
+frozen results, or turn a local example into an adoption claim.
 
-## Integrate and validate
+The coordinator reviews each handoff, integrates a small dependency-ready slice
+and checks shared contracts. Workers run narrow checks; the coordinator runs the
+required combined gates from [CONTRIBUTING](../CONTRIBUTING.md#local-checks) once
+per settled integration. Reuse receipts only for unchanged inputs; rerun affected
+checks after a dependent edit. Do not serialize all lanes until an entire wave
+finishes, or run full packaging independently for every worker.
 
-1. Review each handoff against its behavior and evidence. Check for conflicting
-   assumptions, generated files, and authority/version changes. Integrate
-   dependency-ready patches incrementally.
-2. Workers run narrow checks for owned changes. The coordinator checks affected
-   shared contracts, then the required combined gates from
-   [contributing](../CONTRIBUTING.md#local-checks). Schedule shared Cargo builds
-   and outputs to avoid lock contention or overwritten reports.
-3. Keep output roots unique per packet/run. Reuse successful checks for unchanged
-   integrated state; rerun affected checks after dependent edits. Old results do
-   not cover changed patches or newly evaluated age gates.
-4. Before landing, verify exact head and selected CI jobs, including `ci-gate`.
-   Only classifier-authorized skips are acceptable. Workflow configuration is
-   separate from actual merge enforcement settings.
-5. Freeze inputs for the outcome selected by the current roadmap. Evaluate useful
-   completed decisions or recurring research updates, scoped unknowns, and all
-   fallback/maintenance work. Implementation tests do not establish economic
-   benefit or independent adoption. The retained C2/F-05 execution and C3 pilot
-   protocols apply only when that separate track is explicitly selected; their
-   runtime or participant gates are not prerequisites for preliminary discovery.
+Before landing, verify the exact head and selected CI results, including
+`ci-gate`. Only classifier-authorized skips count. Source merge, release,
+deployment, enabled schedules and independent use require separate observations.
+Proceed with actions already authorized by the user; preparation does not grant
+new outreach, spending, publication or access-setting authority.
 
-All repository Python tooling uses `uv`. Preserve source evidence, historical
-reports, and frozen inputs; add dated evidence. Manual claim authority review
-remains distinct from routine machine-gated generated overlays.
-
-## Keep the path short
-
-Prepare the selected workflow's inputs, bounded budget and completion criteria
-early. Improve useful publisher and consumer outcomes together; compare combined
-effort against competent source/cache workflows at equal quality and freshness.
-Independent-use collection and release requirements apply when the owning
-roadmap and the user's authorization select those outcomes. Keep the historical
-execution/pilot track in [its scoped guide](consumer-pilot.md), not a second queue.
-Wait only at documented dependency edges. Workers run focused checks; the
-coordinator owns combined packaging and release gates. Defer unrelated cleanup
-and model changes without task evidence. Maintain adjudication policy in its
-owning source; coding workers inherit the user's configured model unless the
-user requests an assignment.
-
-A packet closes when its bounded acceptance evidence exists. Source merge is
-not publication; local integration is not independent adoption; an enabled
-schedule is not sustained operation. Report remaining outcome dependencies and
-keep ready packets moving.
+A packet closes when its declared acceptance evidence exists. Preserve incomplete
+and losing outcomes, and name the smallest remaining dependency. The historical
+execution/pilot track in [consumer evaluation](consumer-pilot.md) applies only
+when that separate track is selected; it does not block a preliminary source
+choice or local recurring-work control.

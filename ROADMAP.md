@@ -1,373 +1,131 @@
-# dotrepo Roadmap
+# DotRepo roadmap
 
-Make repository understanding reusable infrastructure: extract compact facts,
-preserve their evidence and age, and reuse them across agents, developers, and
-tools. Overlay coverage works before maintainer adoption; API and MCP are the
-primary consumer surfaces.
+Make repository understanding reusable: finish a useful decision, retain its
+evidence and age, and revisit only the work affected by a change. Optimize the
+combined publisher, indexer and consumer effort at declared quality and freshness.
+Repository counts and passing checks do not establish that outcome.
 
-Optimize useful, trustworthy repository knowledge per unit of total cost.
-Repository counts, extracted fields and verification labels are inputs to that
-assessment, not the objective. Preserve reusable investigation, including the
-limits of what was established.
-
-This file owns priorities, dependencies, and completion gates. [README](README.md)
-owns shipped behavior, [CHANGELOG](CHANGELOG.md) owns completed implementation,
-and [the documentation map](docs/README.md) routes detailed work. Code and tested
-contracts outrank prose; installed binaries need [version-matched documentation](docs/release-compatibility.md).
+This file owns priorities and dependency joins. [Workflow status](docs/workflow-status.md)
+owns current capabilities and evidence; [release compatibility](docs/release-compatibility.md)
+owns installed-package boundaries. The [execution guide](docs/agent-execution.md)
+owns dispatch and integration. The former long roadmap is preserved in the
+[November 4 checkpoint](docs/archive/roadmap-before-agent-delivery-20261104.md).
 
 ## Active execution order
 
-### Vision priorities — November 4, 2026
+**Start D1, D2 preparation and D3 together.** The numbers rank product outcomes;
+they are not a serial work schedule. With one coordinator and three worker slots,
+run these three lanes, then reuse released slots for review and downstream work.
+For a joint Lazy Collective team, D1 and PageDigest PD1 take two worker slots;
+use the third for the most valuable independent evaluation/publisher packet.
+Do not start a second coordinator or exceed the available concurrency.
 
-The next product outcome is a reader finishing a repository decision, returning
-after a change, and reusing justified work. The protocol, public lookup and local
-decision tools already exist. The gap is a dependable path through them and
-evidence that the whole path helps. The ordered packets below own new work;
-the dated repair notes that follow are delivery history.
+### Ready lanes and joins
 
-| Order | Packet and concrete deliverable | Acceptance and decision |
+| Packet | Can start now | Wait only for | Done when |
+| --- | --- | --- | --- |
+| **D1 — Reproducible decision entrypoint** | One versioned source command or local artifact, setup/recovery guide and bounded persistence design using the existing Python/SQLite service and Rust importer | Coordinator settles the invocation, workspace layout and saved-result boundary before a dependent harness is integrated | A fresh environment discovers → shortlists → describes → qualifies → decides, exits, restarts and inspects the retained result/evidence. Include unknown and missing-source recovery; verify any local package candidate separately. |
+| **D2 — Useful decisions across visits** | Freeze six independently authored questions over at most three already indexed repositories; prepare source truth, same-cache baseline and scoring before looking at treatment answers | Run the end-to-end comparison against the accepted D1 interface and a frozen source/policy revision; independent acceptance follows the run | Account for all questions and attempts across initial, unchanged, relevant-change and irrelevant-change visits. Report correct/incorrect assertions, useful decisions, unknowns and unfinished attempts. Changed evidence reopens affected requirements; reuse never renews inspection age. |
+| **D3 — Affordable publisher upkeep** | Use the existing publisher helper on two representative repository layouts through setup and two ordinary updates; prepare ambiguity/drift/recovery cases | No D1 or favorable D2 result is required. Coordinate only if a shared importer or fixture needs changes | Record operator time, interventions, unresolved fields and source/declaration drift. Unchanged updates need no manual recataloging; genuine disagreements remain visible. Feed these costs into D2/D5. |
+| **D4 — One finding handed to a second reader** | Inventory existing stored findings and source bindings; agree with PageDigest on the small test vocabulary, recipient policy and changed/missing/conflicting cases | Implementation uses a frozen D1 persistence/export interface. The usefulness comparison needs an accepted useful D2 finding | Transfer one finding between isolated stores with claim/task scope, source references/hashes, assessed revision, assumptions, attribution and original date. Recipient checks it under its own policy. Compare with sharing the same cached sources alone. |
+| **D5 — One independently operated recurring workflow** | Prepare the bounded run protocol, cost ledger, operating guide and unsent participation brief from existing evidence | Real independent operation needs D1 acceptance, D2 useful completion, D3 upkeep evidence and an authorized operator. D4 is required only when findings cross readers | Freeze scope, freshness, completion criteria, finite runs and budget. Count publisher/indexer/consumer work, fallback and unfinished attempts; report losing results. Outreach, spend and package publication must fit the user's authorization. |
+
+Preparation is useful work but cannot close its outcome gate. In particular,
+D4 cases can be designed before a useful finding exists; a synthetic handoff
+does not substitute for that finding. D5 documents do not establish consent or
+independent operation. No favorable economic result is required to report a
+completed, honest comparison.
+
+### Ownership for simultaneous work
+
+These are suggested writable areas, not permission to edit every file in a row.
+The coordinator assigns exact files and test paths in each dispatch and resolves
+overlap before work. Workers may read other lanes; one writer owns a shared file.
+
+| Lane | Existing source and likely writable area | Reserved boundary |
 | --- | --- | --- |
-| 1 | **D1 — A reproducible decision entrypoint.** One versioned source command or locally built artifact starts the existing `dotrepo.decision.*` service with a persistent workspace, walks through one example and explains recovery. Reuse the Python/SQLite service and Rust importer. | A fresh environment can discover → shortlist → describe → qualify → decide, stop, restart and inspect the retained evidence using only the guide. Include an explicit unknown and missing-source recovery. Verify a packaged candidate separately before any release; a source merge does not upgrade installed clients. |
-| 2 | **D2 — Useful decisions across two visits.** Freeze six independently authored questions across at most three already indexed repositories before inspecting their answers. Include factual orientation, a supported/contradicted requirement and an honest no-fit/unknown case. Repeat after one relevant and one irrelevant source change. | Report correct and incorrect assertions, useful completed decisions and every unfinished attempt. Compare metadata + the same source cache against the decision workflow at the same revision/freshness. Reuse unchanged dependencies without renewing inspection age; changed evidence must reopen the affected requirement. Investigate a failure before expanding the roster. |
-| 3 | **D3 — Publication without another maintenance job.** Exercise the existing publisher helper on two representative repository layouts through setup and two ordinary updates. Review derivation, ambiguity and drift from the owning manifests/CI/docs. | Record interventions, elapsed operator effort and unresolved fields. An unchanged update needs no manual recataloging; a genuine disagreement remains visible. Correct the largest observed maintenance burden. D3 can start once D1's entrypoint is stable; it does not wait for a favorable D2 result. |
-| 4 | **D4 — One finding reused by a second reader.** After D2 demonstrates a useful retained decision, prototype a bounded export/import handoff between two isolated workspaces. Carry the claim, requirement/task scope, source references/hashes, assessed revision, assumptions and original observation time. | The recipient evaluates the evidence under its own policy, retains attribution, and detects a changed, missing or conflicting dependency. Compare with giving that reader the same source cache. Transfer is not endorsement, correctness or fresh inspection. Start with files and existing stores; add a shared service only if this exercise demonstrates a need. Coordinate vocabulary with PageDigest without merging their runtimes. |
-| 5 | **D5 — One independently operated recurring workflow.** After D1–D3, prepare a pinned candidate and a bounded adoption guide for an operator who performs the work themselves. D4 is required only for a cross-reader pilot. | Declare scope, freshness, completion criteria and a fixed budget before the pilot. Count acquisition, review, refresh, source fallback, storage, publisher upkeep and unfinished attempts alongside useful outcomes. Separate cold and warm runs. A losing result changes the workload or implementation; it does not authorize index growth. Outreach, paid calls and package publication need their own scope. |
+| D1 | `scripts/repodigest_service.py`, `repodigest_selection.py`, `repodigest_store.py`, focused tests and the decision setup/selection guides | Service arguments, persistence shape and packaging/lockfiles have one owner |
+| D2 | A new dated evaluation packet and its harness/fixtures; existing source-cache baseline | Frozen task/answer inputs stay out of treatment sessions. A change author does not independently accept that change or author its held-out result |
+| D3 | `scripts/publisher_workflow.py`, its tests, publisher fixtures and maintainer guide | Shared Rust importer changes are a separately assigned dependency, not concurrent edits from D1/D3 |
+| D4 | A small export/import adapter and focused recipient-policy tests after the interface join | Shared vocabulary and storage semantics need coordinator agreement; no shared runtime or protocol extension by default |
+| D5 | Dated protocol, operating guide and cost/attempt records | Coordinator owns external actions and release/publication decisions |
 
-**Next implementable packet: D1.** The source decision service is already built;
-its setup, restart and first useful result need to become a single maintained
-path. D2 determines whether to improve ranking, missing evidence, recovery or
-interaction design. The prior seven unfinished selection attempts make completion
-more urgent than broader discovery or more extracted fields.
+**D1 has a real persistence gap.** Source bodies and assessments already persist
+in SQLite, but selection IDs, attempts and final decisions are currently
+process-local ([current bounds](docs/experimental-decision-selection.md#bounds-recovery-and-accounting)).
+Specify what is retained and how restart recovers it before calling the whole
+workflow durable. A startup wrapper alone does not close D1.
 
-**Specific performance question:** keep the publication-only churn case in D2
-and D5. Materially unchanged facts can still produce different response bytes.
-Measure producer/exporter and reader costs before proposing a new representation;
-never recover a headline saving by weakening exact-byte or factual-age checks.
+Freeze interfaces only as far as the next consumer needs them. Integrate a small
+working path first; do not wait for every lane or invent a general framework.
+While a gate runs, workers can prepare the next independent packet in isolated
+outputs. Fix an exposed failure before enlarging its workload.
 
-**Deferred:** general catalog growth, new model-provider comparisons, broad
-prose synthesis, extra schemas and a hosted shared-memory service. Existing
-freshness/recovery obligations continue. Address a bounded coverage or extraction
-gap when a completed task demonstrates it; raw repository counts do not select
-the next packet. Independent conformance can be tested within the chosen workload.
+## Evidence and stopping rules
 
-### Delivered source and retained review history
+- The twelve-session selection study had seven unfinished attempts. Completed
+  pairs reduced source reading but did not establish token or total-cost savings.
+  Discovery-100 retained the same supported recall with 86% more response tokens.
+  These [negative results](docs/workflow-status.md#latest-evidence) stand.
+- D2/D5 compare against metadata plus the **same source cache**, at equal source
+  opportunities, freshness and verification policy. Include acquisition, review,
+  refresh, parsing, serving, local integrity reads and publisher upkeep. Unknown
+  usage/cost stays unknown; bytes divided by four is not billed token use.
+- Include publication-only churn: unchanged material facts can still produce
+  different response bytes. Measure it before changing representation; preserve
+  exact-byte checks, snapshot coherence and factual inspection age.
+- Task authoring, implementation and acceptance have explicit owners. A fresh
+  reviewer validates a changed contract; hidden expected answers and other arms'
+  transcripts never enter consumer sessions. If independence is unavailable,
+  label the result an operator/developer control and leave the independent gate open.
+- Supported preliminary fit, scoped none-established/unknown and successful
+  execution remain different outcomes. Keep incorrect assertions, refusals,
+  incomplete work and failed attempts in the denominator.
+- If matched work loses, simplify the interface or narrow the intended workload.
+  Do not remove hard cases, audits or publisher cost to manufacture a win.
 
-### Org-review repairs — November 4, 2026 (authorized delivery)
+## Continuous reliability and deferred work
 
-The isolated `codex/address-org-review-20261104` checkout under
-`/Users/maxwell/Documents/Codex/2026-11-04/task/address-org-review/dotrepo/`
-starts from PR220's exact publisher-declaration repair. Both captured publisher
-declarations reproduce their stored digests; live correction still requires a
-normal merge/deployment and independent query verification. PR220 has now merged
-as `d22f2205ecd992325c51228a68d2297ede62927f`; deployment verification is tracked
-in the parent acceptance packet.
+Freshness, source integrity, recovery and delivery continue alongside these
+lanes. Collect existing scheduled receipts while implementation proceeds;
+`check_refresh_streak.py` owns the seven-qualified-day control. Elapsed time in
+that control does not block independent product work. An export refresh does
+not inspect upstream sources again.
 
-The read-only [refresh readiness preflight](scripts/check_refresh_readiness.py)
-identified disabled Actions PR creation. After the user's explicit approval,
-GitHub's organization prerequisite and DotRepo's coupled switch are enabled with
-read-only defaults; the other two repositories remain disabled. The preflight
-now passes. It never mutates policy or grants the scheduled token administration
-access. Verify a whole bounded refresh afterward; no unattended streak is
-established by a settings check.
+General catalog growth, additional providers/models, broad prose synthesis,
+bundle/workspace protocols and a shared hosted-memory service remain deferred.
+Reopen a bounded item when a completed workflow exposes its specific need.
+Independent recurring-use and combined-cost evidence precede general growth;
+no repository-count target or old pilot schedule overrides that join.
 
-The [captured-revision license audit](benchmarks/third-party-licenses/README.md)
-recovers 46 license/notice texts, binds 52 capture roots / 530 original files,
-and retains all historical source bytes. The owner subsequently authorized quarantining all three held groups. Their 108
-source files are absent from the current tree, with an external hash-verified
-archive, original inventories and Git history preserved. Historical restrictions
-remain explicit; notices or quarantine do not establish legal clearance.
+For required validation use [CONTRIBUTING](CONTRIBUTING.md#local-checks) and
+[CI execution](docs/ci.md). Workers run focused checks; the coordinator accepts
+the settled integration once per affected scope. Source merge, package release,
+site deployment and independent use are separately recorded events.
 
-The [decision control](docs/review-outcomes-20261104/README.md) completes supported,
-contradicted and unknown source decisions and retains an unfinished attempt.
-Its same-cache baseline reaches the same narrow Python-declaration conclusion.
-This is a developer-defined, post-exposure fixture using a synthetic reviewed
-assessment; it does not close the independent utility or combined-cost gates.
-The PageDigest companion control likewise retains its unfavorable request/byte
-result. Existing negative studies and export-time churn remain unchanged.
+## Historical entrypoints
 
-Acceptance: Python suite, Ruff, captured-source/notice hashes, portable control
-replay and the lightweight public/exporter/consumer gate; receipts live in the
-parent packet's `acceptance/` directory. The user has authorized publishing and
-merging the repair branches, deployment verification and the quarantine. Package
-releases remain separate. General growth and model-provider calls are zero.
+The links below preserve earlier roadmap entrypoints. Their dated text and
+original outcome bounds are in the checkpoint; they are not another ready queue.
 
-The review-follow-up deployment exposed transient R2 REST failures that restarted
-whole 1,000-object batches. The bounded operator repair retries individual objects,
-accounts for attempts on failure, preserves the existing authorization and rolling
-request budget, and commits archive history only after validated payloads succeed.
-Live delivery still requires the normal exact-commit pipeline and smoke checks.
+<a id="vision-priorities--november-4-2026"></a>
+<a id="delivered-source-and-retained-review-history"></a>
+<a id="org-review-repairs--november-4-2026-authorized-delivery"></a>
+<a id="authorized-review-follow-up--november-3-2026"></a>
+<a id="second-review-follow-up--november-4-2026"></a>
 
+[Earlier priorities and delivery observations](docs/archive/roadmap-before-agent-delivery-20261104.md#active-execution-order).
 
-The [November 3 measurement review](docs/measurement-review-20261103.md) separates
-moving-catalog diagnostics from a fixed regression cohort. Presence and modeled
-requests do not close the useful-completion or combined-work gates below. The
-retained consumer results still do not establish all-in benefit; prioritize a
-bounded comparison against the same source cache before general growth.
+<a id="consumer-evidence-and-stopping-rules"></a>
+<a id="operating-and-adoption-gates"></a>
+<a id="quality-and-operating-constraints"></a>
+<a id="partial-knowledge-and-bounded-efficiency-experiments"></a>
 
+[Earlier evidence, operating constraints and scoped experiments](docs/archive/roadmap-before-agent-delivery-20261104.md#consumer-evidence-and-stopping-rules).
 
-### Authorized review follow-up — November 3, 2026
+<a id="product-milestones"></a>
+<a id="growth-after-consumer-proof"></a>
+<a id="evidence-and-completion"></a>
 
-The user authorized completing the remaining shared review items. This packet
-binds requirement assessments to their declared source bytes and reports
-`current` / `changed` / `unknown` independently of requirement outcomes; makes
-publisher `.repo` discovery explicit without silently assigning maintainer
-authority; indexes only `python/cpython`, `lazy-collective/dotrepo` and
-`lazy-collective/pagedigest`; and repairs narrow-screen navigation. The private
-coordination repository is excluded. General index-growth gates remain in place;
-this named three-repository batch is the bounded exception, with no model calls.
-Retain source revisions, incomplete results and validation receipts under the
-November 3 `task/not-done` directory. Shared hosting and umbrella delivery stay
-in the parent coordinator's scope, with separate Git and publication gates.
-
-### Second review follow-up — November 4, 2026
-
-Naming and shared-contract cleanup, with no new capability claims: record status
-and provenance `verified` is renamed `checked` (legacy input accepted; see
-[public API compatibility](docs/public-api-compatibility.md)); the decision
-workflow's tools are `dotrepo.decision.*` and its guides `experimental-decision-*`;
-the shared source-status rules run from PageDigest's vectors through
-`scripts/source_status.py`; and a `.repo/` directory (Google's `repo` tool) now
-gets a clear error instead of an I/O failure.
-
-Open data-quality item: in mixed-language workspaces the importer can record only
-the root package scripts. For example, `tauri-apps/tauri` records `pnpm build` /
-`pnpm test` but not the Rust workspace's `cargo test`. Measure how often this
-happens with the [factual accuracy benchmark](docs/public-factual-accuracy-benchmark.md)
-before changing import heuristics, and keep partial commands labeled as partial
-rather than inferring a combined command.
-
-The current local priority is a usable **discovery → shortlist → requirement
-assessment → preliminary decision** flow, source-bound recurring reuse, and a
-publisher workflow derived from existing source. Execution is a separate outcome.
-The [workflow status and evidence](docs/workflow-status.md) distinguishes released
-interfaces from local experiments. These source changes are not a deployment.
-
-| Workstream | Implemented locally | Next outcome gate |
-| --- | --- | --- |
-| Decision workflow | Bounded searches and shortlist, assessment keys independent of component pages, exact-revision describe, explicit page-limit recovery, final supported/none-established decisions and unfinished-attempt accounting | New independently authored tasks must finish with justified decisions or scoped unknowns; compare against metadata plus the same source cache |
-| Source reuse | Admission-bound source cache, explicit receipt reuse, source-backed boolean assessments and separate observed recipes | Measure incremental value after verification, acquisition, review, refresh, failed attempts and maintenance |
-| Publisher participation | Source-derived preview, safe first adoption and drift report using existing importer/MCP/CLI | Measure real setup/update effort, duplicate edits and unresolved ambiguity; local fixture success is not adoption |
-| PageDigest companion | Recurring sync/findings and final-build publisher workflows in the sibling repository | Equivalent results/freshness against ordinary HTTP caching; no automatic extension or shared coordinator |
-| Public reliability | Existing crawl, CI, history, landing and publication controls | Seven qualified scheduled days with exact-commit publication/smoke receipts; successful implementation or one day does not close the streak |
-
-Run these bounded workflow controls before expanding coverage, introducing a
-requirement interpreter, changing the public protocol, or launching another paid
-campaign. Scope independent reviews by changed contract; use the
-[execution guide](docs/agent-execution.md) when team work is authorized.
-
-### Consumer evidence and stopping rules
-
-The [latest twelve-session selection study](docs/research-evidence-20261030/selection-results.md.txt)
-produced three accepted treatment decisions and two control decisions; seven
-attempts did not finish. The two mutually completed pairs returned less source
-text with the decision workflow but used more native tokens. Missing usage remains unknown.
-The cohort was enriched after task authoring, so it is exploratory, not held out.
-The new workflow fixes observed friction; local controls do not rewrite those
-results or establish that a future agent will use the interface successfully.
-
-The [corrected Discovery-100 comparison](docs/research-evidence-20261030/discovery100-correction.md.txt)
-found no supported recall gain and 86% more response tokens from source-enriched
-search. Prefer cheap metadata discovery and selective evidence inspection.
-The [source-cache pilot](docs/research-evidence-20261030/source-cache-readme.md.txt)
-did not establish an incremental token win from semantic facts over the shared
-cache. The [p-limit pilot](docs/research-evidence-20261030/coding-pilot-results.md.txt)
-delivered no patch passing the full test command. Preserve all failures.
-
-A preliminary choice needs evidence appropriate to its requested requirements.
-It does not require proof of every possible runtime property; it also cannot
-assert an unchecked mandatory property. An exhausted shortlist may close as
-none-established with explicit gaps. It is not a global absence claim.
-
-The existing [F-05 launch no-go](benchmarks/head-to-head/f05-launch-feasibility-20261029/README.md)
-and [E1 qualification result](benchmarks/head-to-head/e1-qualification-20261029/evaluation-remaining/README.md)
-remain intact. Later read-only selection sessions do not qualify that separate
-frozen coding campaign. Reopening it requires a bounded decision on its named
-gaps, rather than another automatic environment-preparation chain.
-
-### Operating and adoption gates
-
-Maintain freshness, source correctness, delivery and recoverability while local
-consumer work proceeds. Use [crawl operations](docs/factual-crawl-automation.md)
-for current reports and `check_refresh_streak.py` for the seven-day gate; do not
-copy historical counts into current-status claims. Refreshing an export is not
-new source inspection. Local branches must be reconciled with current public
-main and platform CI before publication.
-
-Independent recurring use, maintainer adoption and all-in economic benefit remain
-open. Outreach, publication and paid experiments need their own authorized scope.
-First improve the observed workflow, then freeze a new comparison with every
-attempt, including unfinished ones, in its denominator. No scaling multiplier
-or break-even count follows from a microbenchmark or fixture.
-
-The [prior execution roadmap](docs/archive/roadmap-before-workflows-20261102.md)
-preserves the October E1/F-05 packet sequence and source investigations. Historical
-packets remain evidence, not a parallel active task queue.
-
-## Quality and operating constraints
-
-These constraints apply to every packet and cannot be traded away for speed:
-
-- **Accuracy is task-relative.** Judge an answer against requested scope and
-  required context. A correct component command is not automatically a root
-  instruction; an omitted essential prerequisite leaves it incomplete.
-- **Abstention stays informative.** Distinguish unavailable or contradictory
-  evidence, incomplete context, inapplicable scope, stale evidence and
-  parser/model failure. Preserve the source and smallest next verification step
-  when supported, rather than turning uncertainty into a generic command.
-- **Scaling follows demonstrated utility.** Demand comes from lookup misses
-  and repeated investigations. Raw profile, field and verified-record counts
-  cannot substitute for usefulness after verification, fallback and maintenance.
-
-- Parse facts first, then deterministic reconciliation, bounded candidate-constrained
-  adjudication, an independent opinion, and a budgeted tail. Stop with partial
-  publication or abstention when evidence is insufficient. Generated overlays
-  have no routine human approval tier.
-- Preserve authority, conflicts, and evidence. Automation never mints `reviewed`
-  or `canonical`; native mode alone grants no canonical precedence. New verification
-  needs fresh source inspection, not retained status labels.
-- Scalar commands describe repository defaults; component scope belongs on
-  candidates. Absent context stays unassessed. Shell screening and structural
-  validation do not validate execution or grant permission.
-- Record age differs from export age. Retained assessments bind exact values
-  and inspection timestamps; refresh cannot make unrelated facts young.
-- Freeze tasks before inspecting coverage. Report presence, policy acceptance,
-  correctness, completed tasks, and independent use separately. Include cache,
-  fallback, and maintenance work in task-cost comparisons.
-- Preserve unfavorable runs, historical captures, and frozen benchmark results.
-  Correct behavior with new fixtures and dated evidence.
-- Keep the schema compact and factual; synthesis cannot overwrite facts.
-  Coverage does not require native adoption.
-
-Procedures live in [AGENTS](AGENTS.md), [trust semantics](docs/trust-model.md),
-[execution context](rfcs/0021-value-bound-execution-context.md),
-[consumer acceptance](docs/external-consumer-integration.md#positive-command-acceptance),
-and [crawler operations](docs/factual-crawl-automation.md).
-
-Model/provider choices must earn their place through task quality, latency, and
-cost. Use [the request policy](scripts/openrouter_request_policy.py) and
-[dated canaries](docs/m1-escalation-canary.md) rather than copying model IDs into
-every plan. Project adjudication tiers and coding-agent assignments are
-separate decisions. Cache identities bind evidence, field, prompt/policy, and
-model; count failed calls and preserve partial progress. Avoid unchanged work
-before spending additional model or network budget.
-
-### Partial knowledge and bounded efficiency experiments
-
-Keep repository understanding, task guidance and actionable instructions
-distinct. Purpose, structure, documentation and ownership need dated source
-support; command candidates also need attributed scope and context. A qualified
-instruction requires the complete context and task-specific consumer acceptance.
-An investigation lead can remain useful with unresolved context when its source,
-limitation and next verification step are explicit. The local source-cache and
-selection studies now exercise those surfaces. Improve the bounded workflow
-without relaxing instruction selection; measure lead usefulness separately from
-instruction acceptance.
-
-Avoid repeated work unless a relevant dependency changed. Separate repository
-revision, source-blob contents, extractor/policy, inference model/prompt,
-verification policy and export/snapshot identities. Reuse source acquisition
-across extractor changes and unchanged blobs across revisions when sound; never
-renew factual inspection age merely because an artifact was reused. Prefer
-request elimination and tree reuse, then content-addressed intermediates,
-persistent process/client batching, bounded concurrency and incremental export.
-Keep the public format and storage architecture while measuring these changes.
-
-Any further acquisition comparison must use a new frozen scope; Discovery-100
-already retains substantial cold tree costs and incomplete traffic accounting. Retain baseline and revised results
-with identical source opportunities, field dispositions, context/prerequisite
-recovery, incorrect/missing facts, HTTP requests/bytes, wall/CPU time, peak memory
-and refresh-planning cost. Compare equivalent cold/warm conditions and include
-failures and fallback. The proposed 10–15 requests and roughly two seconds per
-recrawl are targets to test, not achieved values; establish the measured baseline
-first. Accept an optimization only without extraction/evidence regressions.
-This experiment does not gate F-05 and authorizes no larger indexing cohort.
-
-Keep production inference pinned while evaluating alternatives. Separate schema
-compatibility, grounded task quality and production eligibility. A recurring,
-versioned evaluation record should bind exact provider/model and API mode,
-prompt/schema, disjoint development/qualification inputs, actual input/output/
-reasoning/cached usage, retries, valid responses, correct/incorrect selections,
-abstentions and cost per supported correct decision and repository including
-escalation/fallback. The requested candidate families are Luna, Terra, Muse Spark
-Contributor, Qwen and GLM; resolve current exact routes, availability and provider
-terms at freeze time rather than treating these names as eligible endpoints.
-Synthetic canaries establish compatibility only. Shadow comparisons cannot
-replace the incumbent before disjoint quality requirements pass; choose the
-cheapest eligible route for each decision class. Contributor-mode evaluation
-requires the declared public-source privacy assumption and checked terms.
-Model comparison does not block deterministic acquisition improvements or F-05.
-The [October 29 comparison inventory](benchmarks/head-to-head/model-comparison-inventory-20261029/README.md)
-binds current code policy and official-source observations separately. It leaves
-exact evaluated routes, account/terms eligibility, frozen budgets and disjoint
-grounded qualification open; advertised prices and synthetic compatibility
-cannot establish cost per correct supported decision.
-
-## Product milestones
-
-Historical implementation lives in the changelog and retained reports. These
-milestones describe outcome gates, not a second serial task list.
-
-| Milestone | Position and remaining proof |
-| --- | --- |
-| M0: Working protocol/proof surface | Schema, CLI/MCP/LSP, generation, trust, hosted export exist; keep contracts and version boundaries coherent |
-| M1: Autonomous index factory | Crawl, refresh, escalation, telemetry, landing exist; sustain freshness, recovery, cadence, and operating costs |
-| M2: Useful shared semantic cache | Profiles, preliminary decisions and source-bound reuse exist locally; establish useful completed decisions, source accuracy and combined work at matched quality/freshness. Independent recurring use remains separate from operator controls and coding-execution evidence |
-| M3: Research substrate | Search, compare, relations, optional synthesis exist; representative calibration follows consumer demand |
-| M4: Ecosystem scale | Broader cohorts require observed consumer demand, independent recurring-use evidence and measured operating budgets. These growth gates do not block bounded local workflow improvements |
-| M5: Maintainer adoption | Bootstrap, readiness, CI, claims exist; independent native use and durable handoffs remain separate from overlay coverage |
-| M6: Open metadata standard | Independent conformance, producers/consumers, interoperable indexes, and governance follow demonstrated use |
-
-### Growth after consumer proof
-
-Grow in 50–100 repository cohorts toward 1,000 maintained profiles. Select demand
-from exported lookup misses and repeated fallbacks; package-registry rankings
-are interim proxies. Balance ecosystems, layouts, and canary needs. Every cohort
-must retain:
-
-- exact-value accuracy, incorrect assertions, missing answers, and correct
-  abstentions by intent and ecosystem
-- failures, quarantine, retries, recovery, and partial-progress safety
-- no more than 10% stale or unknown records under the 30-day policy, and maximum
-  refresh overdue of seven days
-- unchanged-work avoidance and cache hits, including planning costs
-- requests/bytes, materialized files, CPU/accelerator work, peak memory,
-  storage/export/serving cost, and wall time
-- model calls, tokens, costs, and outcomes by tier/provider/task class
-- separate unchanged, changed, improved-record, and monthly maintenance costs
-
-Raise cohort size only while budgets hold. Forecast resources before moving
-toward 10,000 and broader coverage. Measure field improvement separately from
-status promotion; raw counts and verified ratios are not success criteria.
-Start independent conformance before full scale to avoid overfitting the protocol
-to its reference implementation.
-
-The later adoption checkpoint remains ten maintainer-owned native records and
-five accepted overlay-to-native handoffs, with conversion/retention telemetry.
-Claim acceptance differs from canonical publication. Bundle mode, operational
-workspace composition, and generalized prose round-tripping stay deferred until
-consumer use justifies them.
-
-## Evidence and completion
-
-Generate current values from freshness, accuracy, coverage, telemetry, policy,
-and unit-cost reports. Keep each run's snapshot, inputs, commands, costs, and
-outcome artifacts together. Use [the benchmark guide](benchmarks/head-to-head/README.md)
-for paired tasks, [current workflow evidence](docs/workflow-status.md), and
-[the scoped execution study/pilot](docs/consumer-pilot.md) and
-[archived reports](docs/archive/README.md) for their historical or separate scope. Do not duplicate live
-dashboards or completed inventories here.
-
-The current checkpoint completes local consumer/publisher workflow controls,
-while the separate E1/F-05 [October 29 specifications](benchmarks/head-to-head/experiments/applicability-2026-10-29/README.md)
-retain their original qualification and launch boundaries. Neither needs to show
-an advantage to be informative. A product-benefit claim requires the frozen
-causal comparison, with verification, fallback and maintenance accounted for;
-independent adoption needs consenting, independently operated recurring-use evidence. Retain unfavorable data and revise the
-affected packet under a new experiment identity.
-
-The retained repeat closes the original own-project readiness join and supplies
-bounded direct reuse evidence. Broaden source-preserving task/environment evidence
-when useful, freezing every changed input and retaining known coverage. Keep
-independent consent/use and operating-cost gates open before adding a growth
-cohort. Scoped commands remain scoped; successful fallback does not by itself
-satisfy useful-answer or independent-use gates.
+[M0–M6 and earlier growth/adoption checkpoints](docs/archive/roadmap-before-agent-delivery-20261104.md#product-milestones)
+retain their historical meaning. The D1–D5 joins above select current work.

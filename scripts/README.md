@@ -22,8 +22,9 @@ the runtime documented in their respective guides.
   ```
 
 The canonical invocations (with their exact flags) are documented in
-[the contributing guide](../CONTRIBUTING.md), [agent guidance](../AGENTS.md),
-and the task-specific [documentation map](../docs/README.md).
+[the contributing guide](../CONTRIBUTING.md#local-checks) and task-specific
+workflow guides in the [documentation map](../docs/README.md).
+[CI execution](../docs/ci.md) owns scheduling and check-reuse rules.
 
 ## Coordinated use
 

@@ -36,10 +36,13 @@ PROSE = {
     "CLAUDE.md",
     "docs/README.md",
     "docs/agent-execution.md",
+    "docs/ci.md",
     "docs/toolchain-maintainability.md",
     "docs/ai-tool-interviews.md",
     "scripts/README.md",
     "benchmarks/head-to-head/README.md",
+    ".agents/skills/roadmap-coordination/SKILL.md",
+    ".agents/skills/roadmap-coordination/agents/openai.yaml",
 }
 SHARED = {"Cargo.toml", "Cargo.lock", "pyproject.toml", "uv.lock", ".python-version"}
 PUBLIC_SCRIPTS = {
@@ -128,7 +131,10 @@ def jobs_for_path(path: str) -> set[str]:
         return PYTHON.copy()
     if path in {"scripts/check_public_links.mjs", "scripts/public_repository.mjs"}:
         return PUBLIC.copy()
-    if path == "scripts/check_public_presentation.cjs" or path.startswith("editors/"):
+    if path in {
+        "scripts/check_public_presentation.cjs",
+        "scripts/ensure_playwright_chromium.cjs",
+    } or path.startswith("editors/"):
         return RELEASE.copy()
     if path.startswith("cloudflare/"):
         return PUBLIC.copy()

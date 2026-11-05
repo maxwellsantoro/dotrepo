@@ -1,5 +1,5 @@
 #!/usr/bin/env -S uv run python
-"""Export lookup-miss demand for Milestone 4 cohort selection.
+"""Export lookup-miss reports for bounded workflow-gap review.
 
 Wraps ``aggregate_lookup_misses.py`` with a standard output layout so operators
 can run a fixed cadence without re-deriving paths:
@@ -89,8 +89,8 @@ def main() -> int:
     print(f"updated {latest_json}")
     print(f"updated {latest_md}")
     print(
-        "Next: feed repeated misses into scripts/plan_index_growth_tranche.py "
-        "after ecosystem balancing (see docs/distribution.md)."
+        "Review observed misses for a bounded workflow gap (see docs/distribution.md). "
+        "Fixture reports are proof only; they do not establish live demand."
     )
     return 0
 

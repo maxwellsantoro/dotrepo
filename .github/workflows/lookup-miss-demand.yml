@@ -1,21 +1,9 @@
-name: lookup-miss-demand
+name: lookup-miss-fixture-proof
 
-# Weekly (or manual) export of hosted lookup-miss demand signals for M4 cohort
-# selection. Offline by default (fixture); pass live Worker log artifacts via
-# workflow_dispatch inputs when operators export DOTREPO_LOOKUP_MISS lines.
+# Explicit offline proof only. Process real exported Worker logs locally with
+# scripts/export_lookup_miss_demand.py --input; this workflow collects no demand.
 on:
-  schedule:
-    - cron: "30 7 * * 1"
   workflow_dispatch:
-    inputs:
-      log_artifact_name:
-        description: Optional Actions artifact name containing Worker miss logs
-        required: false
-        default: ""
-      top:
-        description: Top-N misses in the report
-        required: false
-        default: "50"
 
 permissions:
   contents: read
@@ -35,45 +23,23 @@ jobs:
         run: |
           uv venv
           uv sync --dev --locked
-      - name: Download optional live miss logs
-        id: logs
-        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.log_artifact_name != '' }}
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
-        with:
-          name: ${{ github.event.inputs.log_artifact_name }}
-          path: lookup-miss-logs
-        continue-on-error: true
-      - name: Export lookup-miss demand report
+      - name: Export fixture proof
         shell: bash
         run: |
           set -euo pipefail
           stamp="$(date -u +%Y%m%d)"
-          mkdir -p lookup-miss-demand
-          inputs=()
-          if [ -d lookup-miss-logs ]; then
-            while IFS= read -r -d '' f; do
-              inputs+=(--input "$f")
-            done < <(find lookup-miss-logs -type f -print0)
-          fi
-          if [ "${#inputs[@]}" -eq 0 ]; then
-            echo "No live miss logs attached; using offline fixture proof path"
-            inputs=(--input scripts/fixtures/lookup_miss_sample.log)
-          fi
+          output="$RUNNER_TEMP/lookup-miss-fixture-proof"
           uv run python scripts/export_lookup_miss_demand.py \
-            "${inputs[@]}" \
-            --output-dir lookup-miss-demand \
+            --input scripts/fixtures/lookup_miss_sample.log \
+            --output-dir "$output" \
             --stamp "$stamp" \
-            --top "${{ github.event.inputs.top || '50' }}"
-          # Keep a stable copy name for the artifact tree
-          cp -f "lookup-miss-demand/lookup-miss-demand-${stamp}.json" \
-            lookup-miss-demand/report.json
-          cp -f "lookup-miss-demand/lookup-miss-demand-${stamp}.md" \
-            lookup-miss-demand/report.md
-      - name: Upload demand report
+            --top 50
+          echo 'Fixture proof only; this artifact contains no observed live demand.' > "$output/README.md"
+      - name: Upload fixture proof
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
-          name: lookup-miss-demand
-          path: lookup-miss-demand/
+          name: lookup-miss-fixture-proof
+          path: ${{ runner.temp }}/lookup-miss-fixture-proof/
           if-no-files-found: error
           retention-days: 30
       - name: Publish step summary
@@ -81,16 +47,17 @@ jobs:
         shell: bash
         run: |
           {
-            echo "# Lookup-miss demand export"
+            echo "# Lookup-miss fixture proof"
             echo
-            if [ -f lookup-miss-demand/report.md ]; then
-              cat lookup-miss-demand/report.md
+            echo "Fixture proof only; no observed live demand."
+            echo
+            if [ -f "$RUNNER_TEMP/lookup-miss-fixture-proof/lookup-miss-demand-latest.md" ]; then
+              cat "$RUNNER_TEMP/lookup-miss-fixture-proof/lookup-miss-demand-latest.md"
             else
               echo "Report not produced"
             fi
             echo
             echo "## Operator notes"
-            echo "- Live path: export Worker \`DOTREPO_LOOKUP_MISS\` lines, upload as an artifact, re-run with \`log_artifact_name\`."
-            echo "- Offline path uses \`scripts/fixtures/lookup_miss_sample.log\` (proof only)."
-            echo "- Feed repeated misses into \`scripts/plan_index_growth_tranche.py\` after ecosystem balancing."
+            echo "- Process real exported Worker logs locally with \`scripts/export_lookup_miss_demand.py --input\`; see \`docs/distribution.md\`."
+            echo "- Fixture uses \`scripts/fixtures/lookup_miss_sample.log\`; it does not justify cohort growth."
           } >> "$GITHUB_STEP_SUMMARY"

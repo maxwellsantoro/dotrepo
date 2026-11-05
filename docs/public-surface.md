@@ -49,11 +49,14 @@ can fall through to a configured R2 archive. The snapshot log is append-only;
 `stats.json` derives history/count deltas and PageDigest instrumentation from it.
 Archive availability depends on operator provisioning.
 
-`/.well-known/pagedigest.json` publishes per-URL change revisions and digests for
-public records. Material-content digests exclude volatile export freshness so
-unchanged facts do not churn revisions. Replacement deploys validate and restore
-prior manifest/snapshot history instead of resetting it. The instrumentation's
-coarse token estimates are not billed usage or measured agent savings.
+`/.well-known/pagedigest.json` publishes per-URL change revisions and exact-body
+digests for public records. Revisions compare material content without volatile
+export freshness; the published digest covers the full serialized body. Unchanged
+facts can therefore retain a revision while export timestamps change the bytes.
+Reuse estimates distinguish material matches from byte-identical responses; see
+[export accounting](public-export-workflow.md#2-deterministic-local-export-from-the-real-index).
+Replacement deploys validate and restore prior manifest/snapshot history instead
+of resetting it. Coarse token estimates are not billed usage or measured agent savings.
 
 See [freshness](public-freshness.md) for cache and retention semantics and
 [Cloudflare deployment](cloudflare-deploy.md) for restoration/archive setup.

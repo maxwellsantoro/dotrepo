@@ -164,5 +164,5 @@ For implementation, start with the [roadmap packets](ROADMAP.md#active-execution
 and [team execution guide](docs/agent-execution.md). [Repository guidance](AGENTS.md)
 owns contracts; generated reports and dated archives own outcome evidence.
 
-Repository Python tooling uses `uv`: run `uv venv`, `uv sync --dev --locked`,
-then invoke scripts and tests through `uv run`.
+Repository Python tooling uses `uv`; [CONTRIBUTING](CONTRIBUTING.md#local-checks)
+owns setup commands and the checks for each change.

@@ -61,7 +61,7 @@ publication and consumer proof requires independent outcomes.
   generated links honor the configured base path.
 - `public-profile-coverage.*` passes the versioned valid-profile, conflict,
   malformed-profile, and completeness-signal floors. Authority/high-signal counts
-  are reported; the current baseline imposes no minimum verified/high-signal floor.
+  are reported; the current baseline imposes no minimum checked/high-signal floor.
 - Record freshness, content-quality dashboard, both cited factual-accuracy suites,
   and lookup volume/presence metrics pass their independent gates.
 - Consumer-policy coverage reports accepted values and fallback reasons separately

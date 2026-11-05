@@ -112,6 +112,8 @@ For the autonomous promotion rules that can mint `checked` overlays, see
 [`factual-crawl-automation.md`](./factual-crawl-automation.md) and
 [`ROADMAP.md`](../ROADMAP.md).
 
+<a id="field-assessments-and-the-meaning-of-verified"></a>
+
 ## Field assessments and the meaning of checked
 
 `checked` means the pipeline resolved its required checks against inspected
