@@ -13,6 +13,29 @@ owns dispatch and integration. The former long roadmap is preserved in the
 
 ## Active execution order
 
+### Savings first — November 6, 2026
+
+The current user priority is **less actual agent work at unchanged quality and
+freshness**, measured against a competent baseline with the same source cache
+and ordinary retained notes. This takes precedence over the earlier dispatch
+below. Prior D2/D4 results remain frozen; the new comparison has its own identity.
+
+| Priority | Next bounded work | Acceptance |
+| --- | --- | --- |
+| **S1 — Accepted selected-finding reuse** | Read-only `recall` combines one finding with existing recipient/source checks. Preserve the accepted implementation and repair demonstrated defects; do not rebuild it. | Independent unchanged, changed, stale, missing/corrupt and scope controls passed. Original dates, full inspection and explicit semantic review remain. Source/package/site delivery are separate. |
+| **S2 — Completed native comparison** | Preserve the [November 6 result](docs/evaluations/native-tokens-20261106.md), including initial work and failed runtime attempts. Both arms passed all five cases. | Initial + return: total tokens fell 11.6%, but uncached input + output rose 23.9%; the joint savings rule failed. Prefer ordinary notes for this measured workload. Same source caches do not ensure equal provider prompt-cache reuse. |
+| **S3 — Next: reduce repeat projection and establish consistent savings** | Improve the caller's one-pass selected-finding projection and explicit dependency/read guidance. Both readers recalled twice; the product's broader second projection outweighed its slightly smaller first response. Preserve complete critical provenance and on-demand detail. | Replay the exposing unchanged/change/stale cases without semantic auto-approval. Then use a new frozen, bounded, counterbalanced native comparison with a working runtime, competent notes and the same source cache. Count initial/setup and every attempt; require complete quality/freshness and the declared reduction in both relevant token measures before promotion. |
+
+S1 and independent S2 preparation were executed in parallel. S3 is the next ready
+packet; its focused projection/guidance work and independent protocol preparation
+can run together. The measured pair is not causal evidence that the interface
+caused the cache or reader-strategy differences. Do not add features, grow the
+catalog or select favorable retries to manufacture a win. Keep publisher/local
+validation/human costs separate and unknown where unmeasured. An independent
+operator, complete human-cost accounting or seven scheduled days is not a
+prerequisite. The coordinator's batch ledger is
+`/Users/maxwell/Documents/Codex/2026-11-06/task/measured-savings/acceptance/ledger.md`.
+
 **November 5 local direction:** The user selected `maxwellsantoro.com` for a
 bounded owner/agent-operated pilot. Follow the [shared pilot plan](/Users/maxwell/projects/lazy-collective/docs/pilots/maxwellsantoro-20261105.md)
 from its latest retained findings, collecting D3 measurements alongside useful D5

@@ -28,6 +28,10 @@ uv run --offline python scripts/decision_findings.py record \
 uv run --offline python scripts/decision_findings.py inspect \
   --store /path/to/sender-findings --sha256 <finding-sha256>
 
+uv run --offline python scripts/decision_findings.py recall \
+  --store /path/to/sender-findings --sha256 <finding-sha256> \
+  --database /path/to/current-compiled.sqlite --policy /path/to/recipient-policy.json
+
 uv run --offline python scripts/decision_findings.py export \
   --store /path/to/sender-findings --sha256 <finding-sha256> \
   --output /path/to/new-envelope.json
@@ -42,6 +46,29 @@ and verifies the explicitly selected local evidence. `inspect` works after
 restart even if the source database is unavailable; it displays a retained
 historical finding, not a new validation. `export` preserves the original finding
 and source dates and adds `exportedAt`. Its output must be a new file.
+
+`recall` is the read-only returning-reader path. Supply a known finding digest
+and the same explicit [recipient policy](#recipient-policy-and-explicit-interpretation-review)
+used by `receive`. It verifies the stored finding and its dependencies against
+the reader's current admitted database, applying the existing source-age,
+representation, full-body integrity and changed/missing-source rules. It emits
+one compact `dotrepo-finding-recall/1` JSON object: the original claim, task scope,
+assumptions, limitations, attribution and dates; original source bindings joined
+with their current checks; aggregate `sourceStatus`; policy and verification
+accounting. It does not export an envelope, write a receipt, fetch sources or
+include unrelated findings, call history or source bodies. Save stdout when a
+retained check receipt is needed.
+
+The separate `checkedAt` records this check; `findingCreatedAt` and every
+`originalObservedAt` remain unchanged. `interpretation.disposition` is always
+`unreviewed`, with scope/time/attribution issues visible even when sources are
+current. A caller must still choose a relevant finding and judge whether its
+meaning and assumptions answer the task. `recall` does not search natural-language
+questions, resolve conflicting interpretations or create semantic assessments.
+Use `inspect` for the stored original and `source.read` for original passages.
+The compact result is limited to 64 KiB; an oversized result refuses without
+truncating the claim or altering storage. This interface reduces required
+bookkeeping steps; actual agent-token savings require the matched evaluation.
 
 Store filenames derive only from locally computed full SHA256 digests:
 `finding-<digest>.json`, `envelope-<digest>.json`, `receipt-<digest>.json`. No sender

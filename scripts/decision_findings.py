@@ -20,6 +20,7 @@ from repodigest_store import Store, stamp
 FORMAT = "lazycollective.finding-handoff/1"
 RECORD_FORMAT = "dotrepo-user-finding/1"
 RECEIPT_FORMAT = "dotrepo-finding-receipt/1"
+RECALL_FORMAT = "dotrepo-finding-recall/1"
 REPRESENTATION = "git-blob:utf-8"
 MEANING = "User source interpretation; no semantic qualification or execution authority."
 MAX_BYTES = 65536
@@ -405,7 +406,7 @@ def record(store, database, finding_path, evidence_root):
     return {"findingSha256": key, "findingPath": str(path), "receiptSha256": receipt_key}
 
 
-def inspect(store, key):
+def load_finding(store, key):
     raw = read_file(local_path(store) / ("finding-" + digest(key) + ".json"))
     if sha(raw) != key:
         raise ValueError("immutable finding integrity failure")
@@ -413,7 +414,11 @@ def inspect(store, key):
     if not isinstance(value, dict) or value.get("format") != RECORD_FORMAT:
         raise ValueError("unsupported finding format")
     validate_finding({k: v for k, v in value.items() if k != "format"})
-    return value
+    return value, len(raw)
+
+
+def inspect(store, key):
+    return load_finding(store, key)[0]
 
 
 def export(store, key, output):
@@ -429,6 +434,76 @@ def export(store, key, output):
     return {"envelopeSha256": sha(raw), "output": str(output), "bytes": len(raw)}
 
 
+def recipient_policy(policy_path):
+    raw = read_file(policy_path)
+    policy = decode(raw)
+    exact(policy, {"id", "taskScope", "maxSourceAgeSeconds"}, "recipient policy")
+    text(policy["id"], "policy id", limit=256)
+    text(policy["taskScope"], "policy taskScope")
+    age = policy["maxSourceAgeSeconds"]
+    # Do not convert arbitrarily large JSON integers to floats.
+    if type(age) not in {int, float} or not 0 <= age <= 31536000:
+        raise ValueError("source age must be finite seconds in 0..31536000")
+    return policy, len(raw)
+
+
+def interpretation_issues(finding, policy):
+    issues = []
+    if finding["taskScope"] != policy["taskScope"]:
+        issues.append("recipient task scope differs; finding cannot establish broader scope")
+    if any(v is None for v in finding["attribution"].values()):
+        issues.append("original attribution is incomplete")
+    if finding["findingCreatedAt"] is None:
+        issues.append("original finding time is unknown")
+    if any(s["originalObservedAt"] is None for s in finding["sources"]):
+        issues.append("original source observation time is unknown")
+    return issues
+
+
+def recall(store, database, key, policy_path):
+    """Check one retained interpretation against own sources without writing state."""
+    finding, finding_bytes = load_finding(store, key)
+    policy, policy_bytes = recipient_policy(policy_path)
+    checked = source_checks(database, finding, max_age=policy["maxSourceAgeSeconds"])
+    result = {
+        **finding,
+        "format": RECALL_FORMAT,
+        "findingSha256": key,
+        "checkedAt": stamp(),
+        "policy": policy,
+        "policySha256": sha(canonical(policy)),
+        "sourceStatus": checked["sourceStatus"],
+        "interpretation": {
+            "disposition": "unreviewed",
+            "issues": interpretation_issues(finding, policy),
+        },
+        "meaning": MEANING,
+        # Join original bindings and their current checks by the source_checks
+        # order. Original revision/hash/dates remain separate from recipient
+        # revision/hash/check time. No source text or unrelated findings enter.
+        "sources": [
+            {**source, **status}
+            for source, status in zip(finding["sources"], checked["sources"], strict=True)
+        ],
+        "verification": {
+            name: checked[name]
+            for name in (
+                "storePolicySha256",
+                "databaseSha256",
+                "storeIntegrityBytesRead",
+                "cacheStatistics",
+            )
+        },
+        "inputBytesRead": {
+            "finding": finding_bytes,
+            "policy": policy_bytes,
+        },
+    }
+    if len(canonical(result)) > MAX_BYTES:
+        raise ValueError("recall result exceeds 64 KiB; use inspect and separate source checks")
+    return result
+
+
 def receive(store, database, envelope_path, policy_path, review_path=None):
     raw = read_file(envelope_path)
     value = decode(raw)
@@ -440,27 +515,10 @@ def receive(store, database, envelope_path, policy_path, review_path=None):
     created = date(finding["findingCreatedAt"], "findingCreatedAt", nullable=True)
     if created is not None and created > exported:
         raise ValueError("export cannot predate original finding")
-    policy_raw = read_file(policy_path)
-    policy = decode(policy_raw)
-    exact(policy, {"id", "taskScope", "maxSourceAgeSeconds"}, "recipient policy")
-    text(policy["id"], "policy id", limit=256)
-    text(policy["taskScope"], "policy taskScope")
-    age = policy["maxSourceAgeSeconds"]
-    # The bounded comparison also rejects nonfinite floats, without converting
-    # arbitrarily large JSON integers to floats.
-    if type(age) not in {int, float} or not 0 <= age <= 31536000:
-        raise ValueError("source age must be finite seconds in 0..31536000")
+    policy, policy_bytes = recipient_policy(policy_path)
     key = sha(raw)
-    checked = source_checks(database, finding, max_age=age)
-    issues = []
-    if finding["taskScope"] != policy["taskScope"]:
-        issues.append("recipient task scope differs; finding cannot establish broader scope")
-    if any(v is None for v in finding["attribution"].values()):
-        issues.append("original attribution is incomplete")
-    if finding["findingCreatedAt"] is None:
-        issues.append("original finding time is unknown")
-    if any(s["originalObservedAt"] is None for s in finding["sources"]):
-        issues.append("original source observation time is unknown")
+    checked = source_checks(database, finding, max_age=policy["maxSourceAgeSeconds"])
+    issues = interpretation_issues(finding, policy)
     interpretation = {"disposition": "unreviewed", "issues": issues}
     review_bytes = 0
     if review_path is not None:
@@ -491,7 +549,7 @@ def receive(store, database, envelope_path, policy_path, review_path=None):
         "policySha256": sha(canonical(policy)),
         "checkedAt": stamp(),
         "interpretation": interpretation,
-        "inputBytesRead": {"envelope": len(raw), "policy": len(policy_raw), "review": review_bytes},
+        "inputBytesRead": {"envelope": len(raw), "policy": policy_bytes, "review": review_bytes},
         "senderEvidenceHandling": "Preserved metadata; locators never dereferenced or authenticated.",
         "meaning": MEANING,
         **checked,
@@ -510,12 +568,12 @@ def receive(store, database, envelope_path, policy_path, review_path=None):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
-    for name in ("record", "inspect", "export", "receive"):
+    for name in ("record", "inspect", "export", "receive", "recall"):
         command = commands.add_parser(name)
         command.add_argument("--store", type=Path, required=True)
-        if name in {"record", "receive"}:
+        if name in {"record", "receive", "recall"}:
             command.add_argument("--database", type=Path, required=True)
-        if name in {"inspect", "export"}:
+        if name in {"inspect", "export", "recall"}:
             command.add_argument("--sha256", required=True)
         if name == "record":
             command.add_argument("--finding", type=Path, required=True)
@@ -524,8 +582,9 @@ def main():
             command.add_argument("--output", type=Path, required=True)
         if name == "receive":
             command.add_argument("--envelope", type=Path, required=True)
-            command.add_argument("--policy", type=Path, required=True)
             command.add_argument("--review", type=Path)
+        if name in {"receive", "recall"}:
+            command.add_argument("--policy", type=Path, required=True)
     args = vars(parser.parse_args())
     command = args.pop("command")
     if "sha256" in args:
@@ -538,7 +597,10 @@ def main():
     except (ValueError, OSError, TypeError, KeyError, sqlite3.Error, RecursionError) as error:
         print(json.dumps({"state": "refused", "error": str(error)}))
         return 1
-    print(json.dumps(result, sort_keys=True))
+    if command == "recall":
+        print(canonical(result).decode("utf-8"))
+    else:
+        print(json.dumps(result, sort_keys=True))
     return 0
 
 
