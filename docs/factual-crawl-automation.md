@@ -371,11 +371,17 @@ The in-progress run is omitted until GitHub records its final conclusion.
 ```bash
 uv run python scripts/check_refresh_streak.py report \
   --repository lazy-collective/dotrepo \
-  --output /tmp/dotrepo-refresh-streak.json --require-pass
+  --output /tmp/dotrepo-refresh-streak.json
 ```
 
-This command only reads GitHub. Enabling a schedule or replaying historical
-receipts cannot manufacture a new seven-day operating window.
+This command only reads GitHub. Under the November 5, 2026 user direction, this
+is ongoing operating-history evidence, not a prerequisite for the owner-operated
+pilot, demonstrated repairs or other bounded product work. Keep the actual
+qualified-day count and failures visible while work continues. Add `--require-pass`
+only when explicitly verifying the seven-day unattended-operation claim; do not
+put it in the pilot's readiness path. Enabling a schedule or replaying historical
+receipts cannot manufacture a new seven-day operating window. Per-run budget,
+freshness, integrity and verified-publication checks remain unchanged.
 
 A nominal 50-record daily capacity is not proof of successful rotation.
 Monitor actual cadence and backlog. Release freshness fails when over 10% of

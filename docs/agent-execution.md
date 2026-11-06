@@ -19,6 +19,11 @@ next ready packet. A waiting outcome gate does not block independent fixture,
 baseline or publisher work. For a joint two-project team, keep one shared
 coordinator and respect each repository's validation/publication boundary.
 
+The [current pilot policy](../ROADMAP.md#active-execution-order) permits bounded
+owner/agent-operated work while complete costs, independent-use evidence and
+scheduled operating history remain open. Those are limits on the corresponding
+claims, not reasons to suspend an authorized useful task or demonstrated repair.
+
 The coordinator settles only the shared contract needed by the next dependency:
 arguments, saved-result shape, source-status meaning or fixture ownership. Assign
 one owner for each shared facade, schema, lockfile and expectation file. Workers
@@ -71,6 +76,27 @@ requires a new experiment identity; preserve the earlier attempt. A reviewer
 cannot call an outcome independent when it authored the change or the expected
 result being accepted.
 
+## Measure before evaluating
+
+Before the first evaluation attempt, declare quality/freshness targets, cost
+metrics, units, collection method and accounting boundaries for publisher,
+indexer and consumer work. Collect available counters from setup onward,
+including failed and unfinished attempts, fallback, audits and recovery. Keep
+requests, bytes, elapsed time, CPU, tokens, money and human attention separate;
+avoid summing overlapping layers. Name unavailable measurements and leave them
+unknown. Do not backfill unmeasured human attention or billed usage from machine
+time, byte estimates or retrospective guesses. A maintainer or implementer may
+supply actual D3 upkeep measurements. Collect available measurements alongside
+the owner/agent-operated D5 pilot; missing human attention, billing or all-in
+costs do not block it. Independent third-party use remains a separate evidence
+track, not a qualification for the owner-operated pilot.
+
+After each comparison, record the product decision and its supporting evidence
+in the owning roadmap: continue, simplify, narrow the intended workload, prefer
+the baseline, or await named evidence. Preserve the original rubric, negatives
+and incomplete outcomes. A decision to await evidence names what would unlock
+it; a losing result does not justify expanding coverage to manufacture a win.
+
 ## Handoff and integrate
 
 Return a bounded handoff:
@@ -93,6 +119,13 @@ per settled integration. Reuse receipts only for unchanged inputs; rerun affecte
 checks after a dependent edit. Do not serialize all lanes until an entire wave
 finishes, or run full packaging independently for every worker.
 
+Before merging related delivery documentation, review roadmap, status,
+dependency and completion wording together. Consolidate related corrections
+where practical to avoid repeated publication cycles. Keep independently useful
+implementation slices small; this is not permission to batch unrelated runtime
+changes or weaken CI, serialized publication, archival-before-promotion,
+source-freshness or exact-byte verification controls.
+
 Before landing, verify the exact head and selected CI results, including
 `ci-gate`. Only classifier-authorized skips count. Source merge, release,
 deployment, enabled schedules and independent use require separate observations.
@@ -104,3 +137,18 @@ and losing outcomes, and name the smallest remaining dependency. The historical
 execution/pilot track in [consumer evaluation](consumer-pilot.md) applies only
 when that separate track is selected; it does not block a preliminary source
 choice or local recurring-work control.
+
+## Review goal closure
+
+Before closing sustained execution, a fresh reviewer compares the original goal
+scope and outcome criteria with accepted evidence, remaining executable work and
+the canonical checkout/handoff map. Review scope and wording before the final
+documentation merge, then confirm its exact identity and required delivery.
+Resolve ready authorized work before using
+an external-dependency stopping condition. Report engineering acceptance,
+demonstrated product benefit and externally dependent outcomes separately; name
+each missing input and what would unlock it. Preparation, developer controls and
+manual retries do not substitute for independent use or qualified scheduled
+history. Those observations do not block owner-operated work under the revised
+pilot scope. Apply the user's actual stopping condition without weakening criteria
+or inventing new work merely to keep agents occupied.

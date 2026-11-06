@@ -13,6 +13,22 @@ owns dispatch and integration. The former long roadmap is preserved in the
 
 ## Active execution order
 
+**November 5 local direction:** The user selected `maxwellsantoro.com` for a
+bounded owner/agent-operated pilot. Follow the [shared pilot plan](/Users/maxwell/projects/lazy-collective/docs/pilots/maxwellsantoro-20261105.md)
+from its accepted first session, collecting D3 measurements alongside useful D5
+work. Missing human or all-in cost measurements and seven scheduled days are evidence limitations,
+not prerequisites to this pilot or its demonstrated repairs. Independent
+third-party operation remains a separate claim to establish later. This updates
+the active execution policy; earlier studies and their outcome limits remain intact.
+
+The pilot's [initial maintenance session is accepted](/Users/maxwell/projects/lazy-collective/docs/pilots/maxwellsantoro-20261105.md#evidence)
+and its two website-description edits were integrated locally at that session.
+Later site work needs its own review and delivery receipts. Reuse the retained
+path on the next real maintenance task after selecting the current source from
+the [shared checkout map](/Users/maxwell/projects/lazy-collective/STATUS.md#checkout-and-capability-map);
+do not repeat the initial setup or comparison.
+The publisher preview's exact binary/provenance limits remain in that receipt.
+
 **November 4 local batch checkpoint:** D1 is locally accepted at
 `fbf0898dbc52f8b4ef61968956886985da4fd5d1`: the
 [durable source command](docs/decision-workflow.md) is pinned to one admitted
@@ -32,11 +48,13 @@ source-only comparison](docs/evaluations/d4-results-20261105.md) are independent
 accepted and merged after exact-head required checks in
 [PR228](https://github.com/lazy-collective/dotrepo/pull/228), `17e70646`.
 Main/publication receipts are tracked separately by the parent coordinator.
-Do not rerun D1 or replace
-the sealed question set. Actual D3 layouts passed engineering and recovery
-controls; human upkeep and combined economics remain unknown. The user confirmed
-that no independent D5 operator is available. Keep that concrete dependency open
-while finishing authorized implementation and delivery. Reserve a coordinator,
+Do not rerun D1 or replace the sealed question set. Actual D3 layouts passed engineering and recovery
+controls; human upkeep and combined economics remain unknown. The authorized
+owner/agent-operated website pilot can continue from its accepted first session
+without an independent operator.
+Collect available costs prospectively and report absent measurements explicitly;
+continue useful pilot work while independent-use and operating-history evidence
+accumulates separately. Reserve a coordinator,
 dispatch independent ready workers together, and refill freed capacity.
 Retain the bounded crawler timeout-fixture
 regressions when broad integration gates run. D1 source integration passed required
@@ -55,15 +73,16 @@ instruction does not establish that implementation is missing.
 | --- | --- | --- | --- |
 | **D1 — Reproducible decision entrypoint** | Accepted source command and setup/recovery path, merged in PR226; preserve it and repair demonstrated failures rather than rebuilding it | No entrypoint/source-integration prerequisite remains for D2. Use the accepted invocation, workspace and saved-result boundary; package publication remains separate and excluded | A fresh environment discovers → shortlists → describes → qualifies → decides, exits, restarts and inspects the retained result/evidence. Include unknown and missing-source recovery; verify any local package candidate separately. |
 | **D2 — Useful decisions across visits** | Completed bounded comparison; preserve the [independent result](docs/evaluations/d2-results-20261105.md), original partial cases and all costs. Source-read request documentation was repaired after the freeze without rescoring | No further primary run required. D4 can use the independently accepted D03 source interpretation; no cost or quality advantage was established | Account for all questions and attempts across initial, unchanged, relevant-change and irrelevant-change visits. Report correct/incorrect assertions, useful decisions, unknowns and unfinished attempts. Changed evidence reopens affected requirements; reuse never renews inspection age. |
-| **D3 — Affordable publisher upkeep** | Actual two-layout setup/update/ambiguity/recovery engineering is independently accepted; preserve the [publisher receipt](/Users/maxwell/Documents/Codex/2026-11-04/task/continuation/acceptance/adapter-publisher-review/publisher-receipt.json), not a rerun queue. Disposable fixture controls remain preparation | Actual operator time/interventions and combined economics remain unmeasured. A maintainer can supply publisher-upkeep measurements; independence is required for D5 recurring operation. No new code defect is established by that missing measurement | Record operator time, interventions, unresolved fields and source/declaration drift. Unchanged updates need no manual recataloging; genuine disagreements remain visible. Feed these costs into D2/D5. |
+| **D3 — Affordable publisher upkeep** | Preserve accepted [publisher engineering](/Users/maxwell/Documents/Codex/2026-11-04/task/continuation/acceptance/adapter-publisher-review/publisher-receipt.json). Measure available setup/update/recovery costs during the authorized website pilot; do not repeat old trials merely to fill missing counters | No complete-cost or independent-operator prerequisite for pilot execution. Human attention and all-in economics remain unknown where unmeasured; a maintainer or implementer can supply direct observations | Record available operator time, interventions, unresolved fields and source/declaration drift with their measurement boundaries. Unchanged updates need no manual recataloging; genuine disagreements remain visible. Complete economic claims require comparable evidence, but missing measurements do not stop D5 work. |
 | **D4 — One finding handed to a second reader** | Independently accepted [useful transfer/comparison](docs/evaluations/d4-results-20261105.md) and repaired adapter, merged in PR228 after required checks | No additional implementation, primary transfer or source-integration run required for this bounded finding. Package/deployment observations remain distinct; no measured total-cost advantage | Transfer one finding between isolated stores with claim/task scope, source references/hashes, assessed revision, assumptions, attribution and original date. Recipient checks it under its own policy. Compare with sharing the same cached sources alone. |
-| **D5 — One independently operated recurring workflow** | Finite protocol, [operating guide](/Users/maxwell/Documents/Codex/2026-11-04/task/continuation/acceptance/pilot-preparation/operating-guide.md), cost ledger and unsent brief are prepared. Preserve them; no repeat preparation packet is ready. User confirmed no independent operator exists | Real independent operation needs D1 acceptance, D2 useful completion, D3 upkeep evidence, an authorized operator and real recurring task/source scope. D4 is required only when findings cross readers | Freeze scope, freshness, completion criteria, finite runs and budget. Count publisher/indexer/consumer work, fallback and unfinished attempts; report losing results. Outreach, spend and package publication must fit the user's authorization. |
+| **D5 — One recurring workflow, owner-operated first** | Continue the selected [website pilot](/Users/maxwell/projects/lazy-collective/docs/pilots/maxwellsantoro-20261105.md) from its accepted initial-session receipt on the next real task; reuse the accepted entrypoints and applicable operating material. Preserve the original independent-pilot protocol as a later evidence track | Authorized task/source scope, usable entrypoints and applicable correctness/recovery checks. Collect D3 costs concurrently; incomplete costs, an absent independent operator and a seven-day streak do not block the owner/agent-operated pilot. D4 applies only when findings cross readers | Freeze scope, freshness, useful outputs, finite runs and budget. Record actual work occasions, available publisher/indexer/consumer costs, fallback and failures. Label owner/agent operation honestly; independent-use or total-economy claims still need their own evidence. Outreach, spend and package publication remain scoped actions. |
 
 Preparation is useful work but cannot close its outcome gate. In particular,
 D4 cases can be designed before a useful finding exists; a synthetic handoff
 does not substitute for that finding. D5 documents do not establish consent or
-independent operation. No favorable economic result is required to report a
-completed, honest comparison.
+independent operation. Useful owner/agent-operated work can proceed and be
+accepted within its declared scope. No favorable or complete economic result is
+required to start it or report an honest bounded comparison.
 
 ### Ownership for simultaneous work
 
@@ -108,7 +127,8 @@ outputs. Fix an exposed failure before enlarging its workload.
 - Task authoring, implementation and acceptance have explicit owners. A fresh
   reviewer validates a changed contract; hidden expected answers and other arms'
   transcripts never enter consumer sessions. If independence is unavailable,
-  label the result an operator/developer control and leave the independent gate open.
+  label the result an operator/developer control, leave independent-use claims open,
+  and continue authorized owner-operated pilot work.
 - Supported preliminary fit, scoped none-established/unknown and successful
   execution remain different outcomes. Keep incorrect assertions, refusals,
   incomplete work and failed attempts in the denominator.
@@ -119,15 +139,19 @@ outputs. Fix an exposed failure before enlarging its workload.
 
 Freshness, source integrity, recovery and delivery continue alongside these
 lanes. Collect existing scheduled receipts while implementation proceeds;
-`check_refresh_streak.py` owns the seven-qualified-day control. Elapsed time in
-that control does not block independent product work. An export refresh does
-not inspect upstream sources again.
+`check_refresh_streak.py` owns the seven-qualified-day operating-history observation.
+Keep its real counts and failed attempts; manual retries do not become scheduled
+days. Its completion is not a go/no-go prerequisite for the pilot, demonstrated
+repairs or other bounded product work. Actual refresh, integrity and publication
+checks still apply to each run. An export refresh does not inspect upstream
+sources again.
 
 General catalog growth, additional providers/models, broad prose synthesis,
 bundle/workspace protocols and a shared hosted-memory service remain deferred.
 Reopen a bounded item when a completed workflow exposes its specific need.
-Independent recurring-use and combined-cost evidence precede general growth;
-no repository-count target or old pilot schedule overrides that join.
+General growth still needs a named workflow's demonstrated limit; missing
+independent-use or complete-cost evidence does not prevent bounded pilot work or
+repairs. No repository-count target or old pilot schedule overrides that scope.
 
 For required validation use [CONTRIBUTING](CONTRIBUTING.md#local-checks) and
 [CI execution](docs/ci.md). Workers run focused checks; the coordinator accepts
