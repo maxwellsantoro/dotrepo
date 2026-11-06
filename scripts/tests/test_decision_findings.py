@@ -191,7 +191,8 @@ def test_cli_restart_dates_export_and_no_overwrite(packet):
     assert packet["database"].read_bytes() == before_database
 
 
-def test_recall_selects_one_finding_preserves_dates_and_writes_nothing(packet, monkeypatch):
+@pytest.mark.parametrize("view", ["full", "compact"])
+def test_recall_selects_one_finding_preserves_dates_and_writes_nothing(packet, monkeypatch, view):
     saved, _, _ = transfer(packet)
     # Original locators are provenance only; recall does not reread their files.
     Path(packet["finding"]["originEvidence"]["locator"]).unlink()
@@ -207,9 +208,11 @@ def test_recall_selects_one_finding_preserves_dates_and_writes_nothing(packet, m
     monkeypatch.setattr(subprocess, "Popen", forbidden)
     monkeypatch.setattr(socket, "socket", forbidden)
     result = findings.recall(
-        packet["store"], packet["database"], saved["findingSha256"], packet["policy"]
+        packet["store"], packet["database"], saved["findingSha256"], packet["policy"], view=view
     )
-    assert result["format"] == findings.RECALL_FORMAT
+    assert result["format"] == (
+        findings.RECALL_FORMAT if view == "full" else findings.COMPACT_RECALL_FORMAT
+    )
     assert result["findingSha256"] == saved["findingSha256"]
     assert result["sourceStatus"] == "current"
     assert result["interpretation"] == {"disposition": "unreviewed", "issues": []}
@@ -219,18 +222,26 @@ def test_recall_selects_one_finding_preserves_dates_and_writes_nothing(packet, m
     for key, value in packet["finding"]["sources"][0].items():
         assert result["sources"][0][key] == value
     assert result["sources"][0]["sourceStatus"] == "current"
+    if view == "compact":
+        assert result["sources"][0]["readAction"] == "no-binding-reread"
     assert "lines" not in result["sources"][0]
     assert result["verification"]["storeIntegrityBytesRead"] == 2 * len(before[packet["database"]])
     assert result["inputBytesRead"]["finding"] == len(Path(saved["findingPath"]).read_bytes())
     assert {p: p.read_bytes() for p in packet["root"].rglob("*") if p.is_file()} == before
 
 
+@pytest.mark.parametrize("view", ["full", "compact"])
 @pytest.mark.parametrize(
     "mutation,expected",
     [
         ("unchanged-new-revision", "current"),
         ("changed", "changed"),
         ("changed-uncached", "changed"),
+        ("changed-stale", "changed"),
+        ("changed-corrupt", "changed"),
+        ("uninspected", "unknown"),
+        ("missing-path", "unknown"),
+        ("unsupported-mode", "unknown"),
         ("missing", "unknown"),
         ("corrupt", "unknown"),
         ("stale", "unknown"),
@@ -238,17 +249,41 @@ def test_recall_selects_one_finding_preserves_dates_and_writes_nothing(packet, m
     ],
 )
 def test_recall_uses_current_recipient_checks_without_rewriting_original(
-    packet, mutation, expected
+    packet, mutation, expected, view
 ):
     saved, _, _ = transfer(packet)
     original = Path(saved["findingPath"]).read_bytes()
     body_sha = packet["finding"]["sources"][0]["sha256"]
-    if mutation in {"unchanged-new-revision", "changed", "changed-uncached"}:
+    if mutation in {
+        "unchanged-new-revision",
+        "changed",
+        "changed-uncached",
+        "changed-stale",
+        "changed-corrupt",
+        "uninspected",
+        "missing-path",
+        "unsupported-mode",
+    }:
         advance_current(
             packet["database"],
-            changed=mutation != "unchanged-new-revision",
-            inspected=mutation != "changed-uncached",
+            changed=mutation.startswith("changed"),
+            inspected=mutation not in {"changed-uncached", "uninspected"},
+            missing_path=mutation == "missing-path",
+            mode="120000" if mutation == "unsupported-mode" else "100644",
         )
+        if mutation == "changed-stale":
+            policy = json.loads(packet["policy"].read_bytes())
+            policy["maxSourceAgeSeconds"] = 0
+            packet["policy"].write_bytes(canonical(policy))
+        elif mutation == "changed-corrupt":
+            with sqlite3.connect(packet["database"]) as db:
+                # Pick the new changed body, not an unrelated cached dependency.
+                row = db.execute(
+                    "SELECT rowid FROM source_blobs WHERE body=?",
+                    (b'{"name":"a different synthetic source"}\n',),
+                ).fetchone()
+                with db.blobopen("source_blobs", "body", row[0]) as blob:
+                    blob.write(b"X")
     elif mutation == "missing":
         with sqlite3.connect(packet["database"]) as db:
             db.execute("DROP TRIGGER source_blobs_no_delete")
@@ -278,6 +313,8 @@ def test_recall_uses_current_recipient_checks_without_rewriting_original(
         packet["database"],
         "--policy",
         packet["policy"],
+        "--view",
+        view,
     )
     assert result["sourceStatus"] == expected
     assert result["interpretation"]["disposition"] == "unreviewed"
@@ -289,28 +326,174 @@ def test_recall_uses_current_recipient_checks_without_rewriting_original(
         == packet["finding"]["sources"][0]["originalObservedAt"]
     )
     assert result["sources"][0]["sha256"] == body_sha
+    if view == "compact":
+        expected_action = (
+            "no-binding-reread"
+            if expected == "current"
+            else "read-current-source"
+            if mutation == "changed"
+            else "validate-or-recover-source"
+        )
+        assert result["sources"][0]["readAction"] == expected_action
+        assert expected_action in result["readGuidance"]
+        if expected_action == "validate-or-recover-source":
+            assert result["sources"][0]["reasons"]
     assert Path(saved["findingPath"]).read_bytes() == original
     assert packet["database"].read_bytes() == before_db
 
 
-def test_recall_refuses_corrupt_selected_finding_and_missing_database(packet):
+def test_compact_recall_gives_mixed_dependency_actions_in_one_check(packet, monkeypatch):
+    # Two declared dependencies survive the projection: one changed, one current.
+    store = Store(packet["database"])
+    try:
+        source_read = Reader(store).read(fixtures.REPO, fixtures.REV, "readme.md", 1, 3)
+    finally:
+        store.close()
+    observation = packet["root"] / "readme-observation.json"
+    observation.write_bytes(
+        canonical(
+            {
+                "tool": "source.read",
+                "state": "completed",
+                "recordedAt": stamp(),
+                "result": source_read,
+            }
+        )
+    )
+    dependency = {
+        **packet["finding"]["sources"][0],
+        "path": "readme.md",
+        "sha256": source_read["sha256"],
+        "originalObservationEvidence": {
+            "locator": str(observation),
+            "sha256": sha(observation.read_bytes()),
+        },
+    }
+    packet["finding"]["sources"].append(dependency)
+    packet["finding"]["findingCreatedAt"] = stamp()
+    save_input(packet)
+    saved, _, _ = transfer(packet)
+    advance_current(packet["database"], changed=True)
+    # An explicit full view has the same default contract.
+    checked_at = stamp()
+    monkeypatch.setattr(findings, "stamp", lambda: checked_at)
+    args = (packet["store"], packet["database"], saved["findingSha256"], packet["policy"])
+    full = findings.recall(*args)
+    assert findings.recall(*args, view="full") == full
+    calls = []
+    original_checks = findings.source_checks
+
+    def count_checks(*args, **kwargs):
+        calls.append(1)
+        return original_checks(*args, **kwargs)
+
+    monkeypatch.setattr(findings, "source_checks", count_checks)
+    compact = findings.recall(*args, view="compact")
+    assert len(calls) == 1
+    assert compact["sourceStatus"] == "changed"
+    assert compact["interpretation"] == {"disposition": "unreviewed", "issues": []}
+    assert [s["readAction"] for s in compact["sources"]] == [
+        "read-current-source",
+        "no-binding-reread",
+    ]
+    for name in set(full) - {"sources", "format"}:
+        assert compact[name] == full[name]
+    for original, checked, projected in zip(
+        packet["finding"]["sources"], full["sources"], compact["sources"], strict=True
+    ):
+        for name, value in original.items():
+            assert projected[name] == value
+        for name in {
+            "sourceStatus",
+            "reasons",
+            "recipientRevision",
+            "recipientSha256",
+            "sourceCheckedAt",
+        }:
+            assert projected[name] == checked[name]
+        assert "recipientGitBlob" not in projected
+        assert checked["recipientGitBlob"]
+    assert "lines" not in compact["sources"][0]
+    # The one actionable payload replaces a second caller-written projection;
+    # this is a request-count control, not evidence of native token savings.
+    assert set(compact["readGuidance"]) == {
+        "interpretation",
+        "read-current-source",
+        "no-binding-reread",
+    }
+
+
+def test_compact_recall_keeps_historical_integrity_issue_and_recovery(packet):
+    saved, _, _ = transfer(packet)
+    advance_current(packet["database"], changed=True)
+    with sqlite3.connect(packet["database"]) as db:
+        db.execute("DROP TRIGGER source_blobs_no_delete")
+        db.execute(
+            "DELETE FROM source_blobs WHERE digest=?", (packet["finding"]["sources"][0]["sha256"],)
+        )
+    result = findings.recall(
+        packet["store"],
+        packet["database"],
+        saved["findingSha256"],
+        packet["policy"],
+        view="compact",
+    )
+    assert result["sourceStatus"] == "changed"
+    assert result["sources"][0]["historicalBindingIssue"]
+    assert result["sources"][0]["readAction"] == "validate-or-recover-source"
+
+
+def test_compact_recall_rereading_old_bytes_does_not_renew_freshness(packet):
+    saved, _, _ = transfer(packet)
+    policy = json.loads(packet["policy"].read_bytes())
+    policy["maxSourceAgeSeconds"] = 0
+    packet["policy"].write_bytes(canonical(policy))
+    before = packet["database"].read_bytes()
+    store = Store(packet["database"])
+    try:
+        reread = Reader(store).read(fixtures.REPO, fixtures.REV, "package.json", 1, 3)
+    finally:
+        store.close()
+    result = findings.recall(
+        packet["store"],
+        packet["database"],
+        saved["findingSha256"],
+        packet["policy"],
+        view="compact",
+    )
+    source = result["sources"][0]
+    assert result["sourceStatus"] == "unknown"
+    assert source["readAction"] == "validate-or-recover-source"
+    assert source["sourceCheckedAt"] == reread["sourceCheckedAt"] == source["originalObservedAt"]
+    assert result["findingCreatedAt"] == packet["finding"]["findingCreatedAt"]
+    assert packet["database"].read_bytes() == before
+
+
+def test_invalid_recall_view_refuses_before_reading_inputs(tmp_path):
+    with pytest.raises(ValueError, match="recall view"):
+        findings.recall(tmp_path, tmp_path, "0" * 64, tmp_path, view="unsupported")
+
+
+@pytest.mark.parametrize("view", ["full", "compact"])
+def test_recall_refuses_corrupt_selected_finding_and_missing_database(packet, view):
     saved, _, _ = transfer(packet)
     original = Path(saved["findingPath"]).read_bytes()
     Path(saved["findingPath"]).write_bytes(original + b" ")
     with pytest.raises(ValueError, match="integrity"):
         findings.recall(
-            packet["store"], packet["database"], saved["findingSha256"], packet["policy"]
+            packet["store"], packet["database"], saved["findingSha256"], packet["policy"], view=view
         )
     Path(saved["findingPath"]).write_bytes(original)
     packet["database"].unlink()
     with pytest.raises(ValueError, match="missing"):
         findings.recall(
-            packet["store"], packet["database"], saved["findingSha256"], packet["policy"]
+            packet["store"], packet["database"], saved["findingSha256"], packet["policy"], view=view
         )
     assert not packet["database"].exists()
 
 
-def test_recall_refuses_oversize_without_truncating_claim_or_original(packet):
+@pytest.mark.parametrize("view", ["full", "compact"])
+def test_recall_refuses_oversize_without_truncating_claim_or_original(packet, view):
     packet["finding"]["claim"]["text"] = "x" * 32000
     packet["finding"]["taskScope"] = "s" * 8000
     packet["finding"]["assumptions"] = ["a" * 8000, "b" * 8000]
@@ -322,7 +505,7 @@ def test_recall_refuses_oversize_without_truncating_claim_or_original(packet):
     before = {p: p.read_bytes() for p in packet["root"].rglob("*") if p.is_file()}
     with pytest.raises(ValueError, match="recall result exceeds"):
         findings.recall(
-            packet["store"], packet["database"], saved["findingSha256"], packet["policy"]
+            packet["store"], packet["database"], saved["findingSha256"], packet["policy"], view=view
         )
     assert {p: p.read_bytes() for p in packet["root"].rglob("*") if p.is_file()} == before
 
@@ -347,8 +530,9 @@ def test_explicit_review_current_conflict_and_immutable_variants(packet):
     assert Path(accepted["envelopePath"]).read_bytes() == original
 
 
+@pytest.mark.parametrize("view", ["full", "compact"])
 @pytest.mark.parametrize("mutation", ["scope", "attribution", "finding-time", "source-time"])
-def test_current_bytes_do_not_accept_unknown_scope_attribution_or_time(packet, mutation):
+def test_current_bytes_do_not_accept_unknown_scope_attribution_or_time(packet, mutation, view):
     if mutation == "attribution":
         packet["finding"]["attribution"]["author"] = None
     elif mutation == "finding-time":
@@ -375,7 +559,7 @@ def test_current_bytes_do_not_accept_unknown_scope_attribution_or_time(packet, m
     assert result["sourceStatus"] == "current"
     assert result["interpretation"]["issues"]
     recalled = findings.recall(
-        packet["store"], packet["database"], saved["findingSha256"], packet["policy"]
+        packet["store"], packet["database"], saved["findingSha256"], packet["policy"], view=view
     )
     assert recalled["interpretation"] == result["interpretation"]
     assert recalled["sourceStatus"] == result["sourceStatus"]

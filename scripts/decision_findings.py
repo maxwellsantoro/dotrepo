@@ -21,6 +21,7 @@ FORMAT = "lazycollective.finding-handoff/1"
 RECORD_FORMAT = "dotrepo-user-finding/1"
 RECEIPT_FORMAT = "dotrepo-finding-receipt/1"
 RECALL_FORMAT = "dotrepo-finding-recall/1"
+COMPACT_RECALL_FORMAT = "dotrepo-finding-recall-compact/1"
 REPRESENTATION = "git-blob:utf-8"
 MEANING = "User source interpretation; no semantic qualification or execution authority."
 MAX_BYTES = 65536
@@ -460,8 +461,70 @@ def interpretation_issues(finding, policy):
     return issues
 
 
-def recall(store, database, key, policy_path):
+def compact_recall(result):
+    """Project already checked dependencies; never replace the source validator."""
+    sources = []
+    for source in result["sources"]:
+        # Anything beyond the known byte-change/range diagnostics requires
+        # recovery or validation first. In particular, a proved change must not
+        # conceal a stale, corrupt or unavailable current body.
+        readable_change_reasons = {
+            "own current admitted Git blob differs from verified historical binding",
+            "own current full body differs",
+            "declared lineRange outside current body",
+        }
+        action = "validate-or-recover-source"
+        if not source.get("historicalBindingIssue"):
+            if source["sourceStatus"] == "current":
+                action = "no-binding-reread"
+            elif (
+                source["sourceStatus"] == "changed"
+                and "bodyBytesVerified" in source
+                and set(source["reasons"]) <= readable_change_reasons
+            ):
+                action = "read-current-source"
+        # Preserve every original field, diagnostic and current body/date
+        # binding. Only low-level verification detail is left to the full view.
+        sources.append(
+            {
+                **{
+                    name: value
+                    for name, value in source.items()
+                    if name
+                    not in {
+                        "admissionSha256",
+                        "recipientGitBlob",
+                        "boundHistoricalGitBlob",
+                        "bodyBytesVerified",
+                    }
+                },
+                "readAction": action,
+            }
+        )
+    guidance = {
+        "no-binding-reread": "Current admitted bytes match; no reread is needed solely to recheck this binding.",
+        "read-current-source": "Read affected evidence at recipientRevision before revising or reusing the interpretation; the original lineRange may no longer apply.",
+        "validate-or-recover-source": "Validate current evidence or recover it through the source admission path. Rereading retained bytes does not renew freshness.",
+    }
+    return {
+        **result,
+        "format": COMPACT_RECALL_FORMAT,
+        "sources": sources,
+        "readGuidance": {
+            "interpretation": "Review scope, assumptions, limitations and conflicts. Binding checks do not approve meaning, cover undeclared dependencies or establish live upstream freshness.",
+            **{
+                name: guidance[name]
+                for name in guidance
+                if any(s["readAction"] == name for s in sources)
+            },
+        },
+    }
+
+
+def recall(store, database, key, policy_path, *, view="full"):
     """Check one retained interpretation against own sources without writing state."""
+    if view not in {"full", "compact"}:
+        raise ValueError("recall view must be full or compact")
     finding, finding_bytes = load_finding(store, key)
     policy, policy_bytes = recipient_policy(policy_path)
     checked = source_checks(database, finding, max_age=policy["maxSourceAgeSeconds"])
@@ -499,6 +562,8 @@ def recall(store, database, key, policy_path):
             "policy": policy_bytes,
         },
     }
+    if view == "compact":
+        result = compact_recall(result)
     if len(canonical(result)) > MAX_BYTES:
         raise ValueError("recall result exceeds 64 KiB; use inspect and separate source checks")
     return result
@@ -585,6 +650,8 @@ def main():
             command.add_argument("--review", type=Path)
         if name in {"receive", "recall"}:
             command.add_argument("--policy", type=Path, required=True)
+        if name == "recall":
+            command.add_argument("--view", choices=("full", "compact"), default="full")
     args = vars(parser.parse_args())
     command = args.pop("command")
     if "sha256" in args:
