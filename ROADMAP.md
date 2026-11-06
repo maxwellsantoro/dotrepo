@@ -24,17 +24,27 @@ below. Prior D2/D4 results remain frozen; the new comparison has its own identit
 | --- | --- | --- |
 | **S1 — Accepted selected-finding reuse** | Read-only `recall` combines one finding with existing recipient/source checks. Preserve the accepted implementation and repair demonstrated defects; do not rebuild it. | Independent unchanged, changed, stale, missing/corrupt and scope controls passed. Original dates, full inspection and explicit semantic review remain. Source/package/site delivery are separate. |
 | **S2 — Completed native comparison** | Preserve the [November 6 result](docs/evaluations/native-tokens-20261106.md), including initial work and failed runtime attempts. Both arms passed all five cases. | Initial + return: total tokens fell 11.6%, but uncached input + output rose 23.9%; the joint savings rule failed. Prefer ordinary notes for this measured workload. Same source caches do not ensure equal provider prompt-cache reuse. |
-| **S3 — Next: reduce repeat projection and establish consistent savings** | Improve the caller's one-pass selected-finding projection and explicit dependency/read guidance. Both readers recalled twice; the product's broader second projection outweighed its slightly smaller first response. Preserve complete critical provenance and on-demand detail. | Replay the exposing unchanged/change/stale cases without semantic auto-approval. Then use a new frozen, bounded, counterbalanced native comparison with a working runtime, competent notes and the same source cache. Count initial/setup and every attempt; require complete quality/freshness and the declared reduction in both relevant token measures before promotion. |
+| **S3 — Accepted guidance; savings rule not met** | Opt-in `recall --view compact` preserves critical provenance and existing validation, adding per-source read/recovery guidance. Preserve the [new counterbalanced result](docs/evaluations/one-pass-reuse-20261106.md) and all original/resumed sessions. | Across both products, all 34 answers passed at unchanged quality/freshness. Primary shared initial + two returns: U −3.41%, total −0.78%; the required 10% U reduction was not reached. Prefer the competent cached-note baseline for this workload. Source/site delivery is tracked separately; no package release. |
+| **S4 — Narrow to useful recurring work** | On the next genuine owner-pilot task, use the preferred ordinary cache/note path and retain the optional finding view where it serves a concrete need. Record actual source/agent work and available upkeep alongside the task. | A new implementation packet needs a demonstrated limit or specific repeated work to eliminate. Freeze that task and a competent same-cache baseline before measuring; retain initial/setup work, all attempts, full quality and freshness. No feature expansion or repeated synthetic trials merely to seek a favorable token result. |
 
-S1 and independent S2 preparation were executed in parallel. S3 is the next ready
-packet; its focused projection/guidance work and independent protocol preparation
-can run together. The measured pair is not causal evidence that the interface
-caused the cache or reader-strategy differences. Do not add features, grow the
-catalog or select favorable retries to manufacture a win. Keep publisher/local
-validation/human costs separate and unknown where unmeasured. An independent
-operator, complete human-cost accounting or seven scheduled days is not a
-prerequisite. The coordinator's batch ledger is
-`/Users/maxwell/Documents/Codex/2026-11-06/task/measured-savings/acceptance/ledger.md`.
+S1 and S2 remain accepted historical work. The November 6 S3 continuation used
+parallel product workers and independent protocol preparation, followed by
+source/runtime review and cost-blind grading before native accounting. All ten
+planned sessions completed; three unstarted sessions resumed with the original
+model/effort explicitly pinned after an external default-model change. Original
+refusals, settings proof and amendments remain visible; no completed run was
+replaced. Neither product met the joint rule (at least 10% lower U and no higher
+total tokens). Provider caching and reader strategy prevent a causal interface
+claim, and the changed initial-note design prevents a causal before/after claim
+against S2. Keep the ordinary baseline preferred for this measured workload.
+
+Do not weaken validators, audits, deadlines or source scope, and do not turn the
+negative result into another speculative feature queue. Continue useful authorized
+owner-pilot work on a genuine next task; incomplete human costs, independent
+adoption and scheduled history remain evidence gaps, not execution prerequisites.
+The [batch record](/Users/maxwell/Documents/Codex/2026-11-06/task/one-pass-reuse/acceptance/report.md)
+separates source/site delivery from demonstrated benefit. Earlier studies and
+unmeasured publisher/human/implementation costs remain intact.
 
 **November 5 local direction:** The user selected `maxwellsantoro.com` for a
 bounded owner/agent-operated pilot. Follow the [shared pilot plan](/Users/maxwell/projects/lazy-collective/docs/pilots/maxwellsantoro-20261105.md)

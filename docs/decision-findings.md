@@ -52,7 +52,7 @@ and the same explicit [recipient policy](#recipient-policy-and-explicit-interpre
 used by `receive`. It verifies the stored finding and its dependencies against
 the reader's current admitted database, applying the existing source-age,
 representation, full-body integrity and changed/missing-source rules. It emits
-one compact `dotrepo-finding-recall/1` JSON object: the original claim, task scope,
+one `dotrepo-finding-recall/1` JSON object: the original claim, task scope,
 assumptions, limitations, attribution and dates; original source bindings joined
 with their current checks; aggregate `sourceStatus`; policy and verification
 accounting. It does not export an envelope, write a receipt, fetch sources or
@@ -66,9 +66,53 @@ current. A caller must still choose a relevant finding and judge whether its
 meaning and assumptions answer the task. `recall` does not search natural-language
 questions, resolve conflicting interpretations or create semantic assessments.
 Use `inspect` for the stored original and `source.read` for original passages.
-The compact result is limited to 64 KiB; an oversized result refuses without
+Either recall view is limited to 64 KiB; an oversized result refuses without
 truncating the claim or altering storage. This interface reduces required
 bookkeeping steps; actual agent-token savings require the matched evaluation.
+
+### One-pass source-read guidance
+
+Add `--view compact` to `recall` for a selected-finding projection with explicit
+dependency actions. The Python signature is
+`recall(store, database, key, policy_path, *, view="full")`. Omitting `--view`, or
+selecting `--view full`, preserves the original full response contract. Compact
+uses `format: "dotrepo-finding-recall-compact/1"` and runs exactly the same source
+and recipient checks once before projecting the result.
+
+The compact view keeps every original finding and source field, including claim,
+scope, assumptions, limitations, attribution, source identities, full-body hashes,
+original dates and evidence locators/hashes. It also retains the current revision,
+current full-body hash and source-check date when available, every status/reason,
+historical binding issue, interpretation issue and aggregate verification/input
+accounting. It omits only each source's admission hash, current/historical Git-blob
+IDs and verified-body byte count. These remain available with `--view full`;
+`inspect` returns the complete stored original. Compact size depends on the
+finding and its diagnostics; the view does not truncate text or promise fewer
+bytes or native tokens for every finding.
+
+Each source has a `readAction`, and `readGuidance` explains the actions present:
+
+| `readAction` | Returning-reader action |
+| --- | --- |
+| `no-binding-reread` | The full current admitted body matches the original hash under the recipient policy. A source reread solely to recheck that binding is unnecessary. Still review the interpretation's scope, assumptions, limitations, attribution and unknowns. |
+| `read-current-source` | Read affected evidence at `recipientRevision` before revising or reusing the interpretation. The old `lineRange` may no longer apply; use the existing `source.read` tool and its bounded line ranges. |
+| `validate-or-recover-source` | Resolve the retained diagnostics through current evidence validation or the existing source admission/recovery path. Missing, corrupt, uninspected, stale or unsupported evidence is not made current by reading retained bytes again. |
+
+A changed dependency with stale, missing or corrupt current evidence requires
+validation/recovery before trusting a current-body read; `changed` never masks
+those reasons. A historical binding integrity issue also requires validation or
+recovery. Decisions are per dependency: an unchanged dependency does not require a
+reread solely because another dependency changed. Aggregate status keeps its
+existing `changed` → `unknown` → `current` precedence and does not replace the
+individual actions. Recovery is advice, not an automatic fetch or database write.
+
+Use the one returned object to judge the finding and choose source reads; save
+stdout if a retained check is needed instead of recalling again just to project
+fields. The action vocabulary concerns source bindings only. It never accepts
+meaning, expands task scope, resolves conflicting findings, covers undeclared
+dependencies, establishes live upstream freshness or renews original dates.
+`interpretation.disposition` remains `unreviewed` for every action. A fresh source
+check alone does not establish a new observation date for the old finding.
 
 Store filenames derive only from locally computed full SHA256 digests:
 `finding-<digest>.json`, `envelope-<digest>.json`, `receipt-<digest>.json`. No sender
