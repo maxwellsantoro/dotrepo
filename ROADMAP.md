@@ -22,14 +22,18 @@ below. Prior D2/D4 results remain frozen; the new comparison has its own identit
 
 | Priority | Next bounded work | Acceptance |
 | --- | --- | --- |
-| **S1 — Task-focused reuse** | Use the existing finding/source machinery to retrieve a selected prior interpretation with current dependency checks and compact evidence. Avoid replaying unrelated call history or asking the agent to reconstruct bindings. Preserve unknowns, conflicts, limitations and original dates; no automatic semantic approval. | Independent checks against unchanged, relevant-change, unrelated-change, stale, missing and corrupt evidence. Full source inspection remains available. No freshness, integrity or quality rule is weakened. |
-| **S2 — Native-token comparison** | Run fresh agents on a bounded repeated task with the same cached sources and equivalent note-taking opportunities. Measure initial work and returns, all attempts, input/cached/output tokens and exposed reasoning usage; retain unavailable fields as unknown. | Independent answer/source scoring precedes cost interpretation. A useful savings claim requires equal completion/correctness/freshness and a declared token reduction; losing or incomplete results remain visible. Token estimates and reduced source bytes are not actual usage. |
-| **S3 — Optimize the observed dominant cost** | Use S2 to select the next change: retrieval/output overhead, repeated interpretation or local verification work. | Keep baseline preference when the product loses. Do not grow the catalog, add frameworks or relax audits to manufacture a favorable result. Include publisher/setup and verification costs separately before claiming combined economics. |
+| **S1 — Accepted selected-finding reuse** | Read-only `recall` combines one finding with existing recipient/source checks. Preserve the accepted implementation and repair demonstrated defects; do not rebuild it. | Independent unchanged, changed, stale, missing/corrupt and scope controls passed. Original dates, full inspection and explicit semantic review remain. Source/package/site delivery are separate. |
+| **S2 — Completed native comparison** | Preserve the [November 6 result](docs/evaluations/native-tokens-20261106.md), including initial work and failed runtime attempts. Both arms passed all five cases. | Initial + return: total tokens fell 11.6%, but uncached input + output rose 23.9%; the joint savings rule failed. Prefer ordinary notes for this measured workload. Same source caches do not ensure equal provider prompt-cache reuse. |
+| **S3 — Next: reduce repeat projection and establish consistent savings** | Improve the caller's one-pass selected-finding projection and explicit dependency/read guidance. Both readers recalled twice; the product's broader second projection outweighed its slightly smaller first response. Preserve complete critical provenance and on-demand detail. | Replay the exposing unchanged/change/stale cases without semantic auto-approval. Then use a new frozen, bounded, counterbalanced native comparison with a working runtime, competent notes and the same source cache. Count initial/setup and every attempt; require complete quality/freshness and the declared reduction in both relevant token measures before promotion. |
 
-S1 implementation and independent S2 protocol preparation run simultaneously;
-agent measurement waits for the reviewed candidate and a frozen protocol. An
-independent operator, complete human-cost accounting or seven scheduled days is
-not a prerequisite. The coordinator's new batch ledger is
+S1 and independent S2 preparation were executed in parallel. S3 is the next ready
+packet; its focused projection/guidance work and independent protocol preparation
+can run together. The measured pair is not causal evidence that the interface
+caused the cache or reader-strategy differences. Do not add features, grow the
+catalog or select favorable retries to manufacture a win. Keep publisher/local
+validation/human costs separate and unknown where unmeasured. An independent
+operator, complete human-cost accounting or seven scheduled days is not a
+prerequisite. The coordinator's batch ledger is
 `/Users/maxwell/Documents/Codex/2026-11-06/task/measured-savings/acceptance/ledger.md`.
 
 **November 5 local direction:** The user selected `maxwellsantoro.com` for a
