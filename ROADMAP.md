@@ -13,6 +13,25 @@ owns dispatch and integration. The former long roadmap is preserved in the
 
 ## Active execution order
 
+### Savings first — November 6, 2026
+
+The current user priority is **less actual agent work at unchanged quality and
+freshness**, measured against a competent baseline with the same source cache
+and ordinary retained notes. This takes precedence over the earlier dispatch
+below. Prior D2/D4 results remain frozen; the new comparison has its own identity.
+
+| Priority | Next bounded work | Acceptance |
+| --- | --- | --- |
+| **S1 — Task-focused reuse** | Use the existing finding/source machinery to retrieve a selected prior interpretation with current dependency checks and compact evidence. Avoid replaying unrelated call history or asking the agent to reconstruct bindings. Preserve unknowns, conflicts, limitations and original dates; no automatic semantic approval. | Independent checks against unchanged, relevant-change, unrelated-change, stale, missing and corrupt evidence. Full source inspection remains available. No freshness, integrity or quality rule is weakened. |
+| **S2 — Native-token comparison** | Run fresh agents on a bounded repeated task with the same cached sources and equivalent note-taking opportunities. Measure initial work and returns, all attempts, input/cached/output tokens and exposed reasoning usage; retain unavailable fields as unknown. | Independent answer/source scoring precedes cost interpretation. A useful savings claim requires equal completion/correctness/freshness and a declared token reduction; losing or incomplete results remain visible. Token estimates and reduced source bytes are not actual usage. |
+| **S3 — Optimize the observed dominant cost** | Use S2 to select the next change: retrieval/output overhead, repeated interpretation or local verification work. | Keep baseline preference when the product loses. Do not grow the catalog, add frameworks or relax audits to manufacture a favorable result. Include publisher/setup and verification costs separately before claiming combined economics. |
+
+S1 implementation and independent S2 protocol preparation run simultaneously;
+agent measurement waits for the reviewed candidate and a frozen protocol. An
+independent operator, complete human-cost accounting or seven scheduled days is
+not a prerequisite. The coordinator's new batch ledger is
+`/Users/maxwell/Documents/Codex/2026-11-06/task/measured-savings/acceptance/ledger.md`.
+
 **November 5 local direction:** The user selected `maxwellsantoro.com` for a
 bounded owner/agent-operated pilot. Follow the [shared pilot plan](/Users/maxwell/projects/lazy-collective/docs/pilots/maxwellsantoro-20261105.md)
 from its latest retained findings, collecting D3 measurements alongside useful D5

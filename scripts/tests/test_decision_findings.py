@@ -191,6 +191,142 @@ def test_cli_restart_dates_export_and_no_overwrite(packet):
     assert packet["database"].read_bytes() == before_database
 
 
+def test_recall_selects_one_finding_preserves_dates_and_writes_nothing(packet, monkeypatch):
+    saved, _, _ = transfer(packet)
+    # Original locators are provenance only; recall does not reread their files.
+    Path(packet["finding"]["originEvidence"]["locator"]).unlink()
+    Path(packet["finding"]["sources"][0]["originalObservationEvidence"]["locator"]).unlink()
+    # Unrelated store entries are never loaded or sent to the returning reader.
+    (packet["store"] / ("finding-" + "0" * 64 + ".json")).write_text("unrelated corrupt entry")
+    before = {p: p.read_bytes() for p in packet["root"].rglob("*") if p.is_file()}
+
+    def forbidden(*args, **kwargs):
+        raise AssertionError("recall must not write, invoke a process, or use network")
+
+    monkeypatch.setattr(findings, "store_file", forbidden)
+    monkeypatch.setattr(subprocess, "Popen", forbidden)
+    monkeypatch.setattr(socket, "socket", forbidden)
+    result = findings.recall(
+        packet["store"], packet["database"], saved["findingSha256"], packet["policy"]
+    )
+    assert result["format"] == findings.RECALL_FORMAT
+    assert result["findingSha256"] == saved["findingSha256"]
+    assert result["sourceStatus"] == "current"
+    assert result["interpretation"] == {"disposition": "unreviewed", "issues": []}
+    assert result["checkedAt"] >= result["findingCreatedAt"]
+    for field in findings.FIELDS - {"sources"}:
+        assert result[field] == packet["finding"][field]
+    for key, value in packet["finding"]["sources"][0].items():
+        assert result["sources"][0][key] == value
+    assert result["sources"][0]["sourceStatus"] == "current"
+    assert "lines" not in result["sources"][0]
+    assert result["verification"]["storeIntegrityBytesRead"] == 2 * len(before[packet["database"]])
+    assert result["inputBytesRead"]["finding"] == len(Path(saved["findingPath"]).read_bytes())
+    assert {p: p.read_bytes() for p in packet["root"].rglob("*") if p.is_file()} == before
+
+
+@pytest.mark.parametrize(
+    "mutation,expected",
+    [
+        ("unchanged-new-revision", "current"),
+        ("changed", "changed"),
+        ("changed-uncached", "changed"),
+        ("missing", "unknown"),
+        ("corrupt", "unknown"),
+        ("stale", "unknown"),
+        ("scope", "current"),
+    ],
+)
+def test_recall_uses_current_recipient_checks_without_rewriting_original(
+    packet, mutation, expected
+):
+    saved, _, _ = transfer(packet)
+    original = Path(saved["findingPath"]).read_bytes()
+    body_sha = packet["finding"]["sources"][0]["sha256"]
+    if mutation in {"unchanged-new-revision", "changed", "changed-uncached"}:
+        advance_current(
+            packet["database"],
+            changed=mutation != "unchanged-new-revision",
+            inspected=mutation != "changed-uncached",
+        )
+    elif mutation == "missing":
+        with sqlite3.connect(packet["database"]) as db:
+            db.execute("DROP TRIGGER source_blobs_no_delete")
+            db.execute("DELETE FROM source_blobs WHERE digest=?", (body_sha,))
+    elif mutation == "corrupt":
+        with sqlite3.connect(packet["database"]) as db:
+            row = db.execute(
+                "SELECT rowid FROM source_blobs WHERE digest=?", (body_sha,)
+            ).fetchone()
+            with db.blobopen("source_blobs", "body", row[0]) as blob:
+                blob.write(b"X")
+    else:
+        policy = json.loads(packet["policy"].read_bytes())
+        if mutation == "stale":
+            policy["maxSourceAgeSeconds"] = 0
+        else:
+            policy["taskScope"] += " Also establish execution safety."
+        packet["policy"].write_bytes(canonical(policy))
+    before_db = packet["database"].read_bytes()
+    result = cli(
+        "recall",
+        "--store",
+        packet["store"],
+        "--sha256",
+        saved["findingSha256"],
+        "--database",
+        packet["database"],
+        "--policy",
+        packet["policy"],
+    )
+    assert result["sourceStatus"] == expected
+    assert result["interpretation"]["disposition"] == "unreviewed"
+    if mutation == "scope":
+        assert "scope differs" in result["interpretation"]["issues"][0]
+    assert result["findingCreatedAt"] == packet["finding"]["findingCreatedAt"]
+    assert (
+        result["sources"][0]["originalObservedAt"]
+        == packet["finding"]["sources"][0]["originalObservedAt"]
+    )
+    assert result["sources"][0]["sha256"] == body_sha
+    assert Path(saved["findingPath"]).read_bytes() == original
+    assert packet["database"].read_bytes() == before_db
+
+
+def test_recall_refuses_corrupt_selected_finding_and_missing_database(packet):
+    saved, _, _ = transfer(packet)
+    original = Path(saved["findingPath"]).read_bytes()
+    Path(saved["findingPath"]).write_bytes(original + b" ")
+    with pytest.raises(ValueError, match="integrity"):
+        findings.recall(
+            packet["store"], packet["database"], saved["findingSha256"], packet["policy"]
+        )
+    Path(saved["findingPath"]).write_bytes(original)
+    packet["database"].unlink()
+    with pytest.raises(ValueError, match="missing"):
+        findings.recall(
+            packet["store"], packet["database"], saved["findingSha256"], packet["policy"]
+        )
+    assert not packet["database"].exists()
+
+
+def test_recall_refuses_oversize_without_truncating_claim_or_original(packet):
+    packet["finding"]["claim"]["text"] = "x" * 32000
+    packet["finding"]["taskScope"] = "s" * 8000
+    packet["finding"]["assumptions"] = ["a" * 8000, "b" * 8000]
+    policy = json.loads(packet["policy"].read_bytes())
+    policy["taskScope"] = packet["finding"]["taskScope"]
+    packet["policy"].write_bytes(canonical(policy))
+    save_input(packet)
+    saved, _, _ = transfer(packet)
+    before = {p: p.read_bytes() for p in packet["root"].rglob("*") if p.is_file()}
+    with pytest.raises(ValueError, match="recall result exceeds"):
+        findings.recall(
+            packet["store"], packet["database"], saved["findingSha256"], packet["policy"]
+        )
+    assert {p: p.read_bytes() for p in packet["root"].rglob("*") if p.is_file()} == before
+
+
 def test_explicit_review_current_conflict_and_immutable_variants(packet):
     _, envelope, exported = transfer(packet)
     unreviewed = receive(packet, envelope)
@@ -230,7 +366,7 @@ def test_current_bytes_do_not_accept_unknown_scope_attribution_or_time(packet, m
             originalObservationEvidence=None,
         )
     save_input(packet)
-    _, envelope, exported = transfer(packet)
+    saved, envelope, exported = transfer(packet)
     if mutation == "scope":
         policy = json.loads(packet["policy"].read_text())
         policy["taskScope"] += " Also prove runtime compatibility."
@@ -238,6 +374,11 @@ def test_current_bytes_do_not_accept_unknown_scope_attribution_or_time(packet, m
     result = receive(packet, envelope)
     assert result["sourceStatus"] == "current"
     assert result["interpretation"]["issues"]
+    recalled = findings.recall(
+        packet["store"], packet["database"], saved["findingSha256"], packet["policy"]
+    )
+    assert recalled["interpretation"] == result["interpretation"]
+    assert recalled["sourceStatus"] == result["sourceStatus"]
     with pytest.raises(ValueError, match="complete scope/time/attribution"):
         receive(packet, envelope, review(packet, envelope, exported))
 
