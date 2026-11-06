@@ -45,6 +45,14 @@ switch a shared checkout's branch or integrate other workers' patches; use
 isolated worktrees when dependency states or experiments conflict. Inherit the
 user's agent model configuration; crawler provider policy is a separate concern.
 The execution guide owns the packet ledger, handoff and review procedure.
+Follow its [measurement and decision rules](docs/agent-execution.md#measure-before-evaluating)
+before evaluations and its [closure review](docs/agent-execution.md#review-goal-closure)
+before ending sustained execution. Keep engineering acceptance, demonstrated
+benefit and externally dependent outcomes distinct.
+Follow the roadmap's current pilot scope: unavailable human/all-in costs,
+independent-use evidence and seven scheduled days do not block authorized
+owner/agent-operated work. Preserve those evidence limits and all applicable
+correctness, freshness and delivery checks.
 
 All repository Python commands use `uv`/`uv run`. External consumer instructions
 and retained upstream examples keep their own scope. `public/`, `release-gate/`,
@@ -108,6 +116,9 @@ or command lists. Keep counts in generated reports and completed work in the
 changelog or a dated archive. Before moving a guide, preserve inbound links and
 historical access. Project skills route to these owners; they do not carry
 another task list, version catalog or model assignment.
+Before merging related delivery documentation, review roadmap, status, dependency
+and completion wording together and consolidate corrections where practical;
+preserve small implementation batches and required publication controls.
 
 Publication, deployment, external contact, spending and settings changes must
 fit the user's current authorization. Existing authorization persists; do not

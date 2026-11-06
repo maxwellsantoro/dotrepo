@@ -24,6 +24,14 @@ coordinator integrates ready slices and owns the combined checks in
 [CI execution](../../../docs/ci.md). Do not repeat full gates per worker or reuse
 receipts whose inputs changed.
 
+Use the execution guide's [measurement and product-decision rules](../../../docs/agent-execution.md#measure-before-evaluating)
+before and after comparisons. Review related delivery wording together before
+merge, and use its [fresh closure review](../../../docs/agent-execution.md#review-goal-closure)
+to distinguish accepted engineering, demonstrated benefit and external inputs.
+Use the roadmap's current owner-operated pilot scope; collect available costs
+while work proceeds. Missing independent-use evidence, complete costs or the
+scheduled-history window limit claims rather than blocking bounded pilot work.
+
 Use the user's configured agent models. Historical pilots, provider policies
 and prepared releases neither assign worker models nor grant external-action
 permission. A source merge, deployed site, useful result and independent use

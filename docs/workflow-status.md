@@ -30,8 +30,12 @@ The [November 5 D2 comparison](evaluations/d2-results-20261105.md) completed the
 sealed four-visit local workload with independent scoring. Both arms reached
 20/24 fully scoped useful decisions and 140/144 points; no incremental quality
 or total-cost advantage was established. Useful source interpretations remain
-separate from strict semantic qualification. Independent recurring operation
-still requires an available independent operator.
+separate from strict semantic qualification. The November 5 user direction now
+selects `maxwellsantoro.com` for a bounded owner/agent-operated pilot; see the
+[current roadmap](../ROADMAP.md#active-execution-order). Collect available upkeep
+and consumer costs during that work. Unmeasured costs and scheduled-history
+duration do not block execution. Independent third-party operation still requires
+its own evidence and is not implied by this pilot.
 
 The [D4 two-reader transfer](evaluations/d4-results-20261105.md) is independently
 accepted for one useful D2 finding with original dates and recipient-local checks.
@@ -114,7 +118,9 @@ different database or policy; an updated admitted catalog starts a new workspace
 These are historical observations, with no renewed source-inspection age.
 The [frozen D2 preparation](evaluations/next-team-batch-20261104/README.md)
 separates task inputs from the expected evidence. It is preparation, not an
-executed useful-work comparison. Package delivery and independent use remain open.
+executed useful-work comparison; the subsequent completed comparison is linked
+under [shared direction](#shared-direction). Package delivery and independent
+use remain open.
 
 The linked text files are verbatim compact result documents with
 [original paths, commit identities and hashes](research-evidence-20261030/README.md).
