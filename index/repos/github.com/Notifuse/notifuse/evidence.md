@@ -1,11 +1,12 @@
 # Evidence
 
-- Imported repository name from README.md.
+- Imported repository name and docs entry points from README.md.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
 - Ignored component-scoped commands from `console/package.json` as repository defaults.
 - Imported repo.build from Makefile as `make build`.
 - Imported repo.test from Makefile as `make test-unit`.
 - Imported repo.toolchain.min from go.mod as `1.26.10` (Go).
+- Imported docs.root as `https://docs.notifuse.com`. Explicit documentation link at README.md:141: - **Documentation**: [docs.notifuse.com](https://docs.notifuse.com)
 - Discovered related relation to github.com/Notifuse/notifuse from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
@@ -18,4 +19,4 @@
 
 ## Auto-promotion
 
-All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to checked status (automated pipeline checks, not human review).

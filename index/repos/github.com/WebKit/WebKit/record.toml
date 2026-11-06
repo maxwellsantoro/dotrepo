@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/WebKit/WebKit"
-generated_at = "2026-11-05T13:44:16.946038282Z"
+generated_at = "2026-11-06T13:24:58.407138861Z"
 
 [record.trust]
 confidence = "medium"
@@ -124,7 +124,7 @@ maintainers = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-11-05T13:44:16.946038282Z"
+checkedAt = "2026-11-06T13:24:58.407138861Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -132,7 +132,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-11-05T13:44:16.946038282Z"
+checkedAt = "2026-11-06T13:24:58.407138861Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -140,7 +140,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-11-05T13:44:16.946038282Z"
+checkedAt = "2026-11-06T13:24:58.407138861Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -148,7 +148,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-11-05T13:44:16.946038282Z"
+checkedAt = "2026-11-06T13:24:58.407138861Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -156,7 +156,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-11-05T13:44:16.946038282Z"
+checkedAt = "2026-11-06T13:24:58.407138861Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -164,7 +164,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-11-05T13:44:16.946038282Z"
+checkedAt = "2026-11-06T13:24:58.407138861Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -173,7 +173,7 @@ state = "present"
 valueJson = '"Home of the WebKit project, the browser engine used by Safari, Mail, App Store and many other applications on macOS, iOS and Linux."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-11-05T13:44:16.946038282Z"
+checkedAt = "2026-11-06T13:24:58.407138861Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -181,7 +181,7 @@ state = "present"
 valueJson = '"https://github.com/WebKit/WebKit"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-11-05T13:44:16.946038282Z"
+checkedAt = "2026-11-06T13:24:58.407138861Z"
 confidence = "medium"
 method = "inferred"
 reason = "fell back to directory name or GitHub API"
@@ -190,7 +190,7 @@ state = "present"
 valueJson = '"WebKit"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-11-05T13:44:16.946038282Z"
+checkedAt = "2026-11-06T13:24:58.407138861Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -202,6 +202,6 @@ archived = false
 clone_url = "https://github.com/WebKit/WebKit.git"
 default_branch = "main"
 fork = false
-head_sha = "cbdfd8b6e36c818c9ba05f6447bc685b1d019d87"
+head_sha = "6bea26d263294fb777243a6cb96c86c68b8037f2"
 html_url = "https://github.com/WebKit/WebKit"
-stars = 10313
+stars = 10316

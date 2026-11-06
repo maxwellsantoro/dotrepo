@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "checked"
 source = "https://github.com/Significant-Gravitas/AutoGPT"
-generated_at = "2026-11-05T13:43:22.092628173Z"
+generated_at = "2026-11-06T13:24:41.308504855Z"
 
 [record.trust]
 confidence = "high"
@@ -64,7 +64,7 @@ team = "@Significant-Gravitas/maintainers"
 security_contact = "security@agpt.co"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-11-05T13:43:22.092628173Z"
+checkedAt = "2026-11-06T13:24:41.308504855Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -72,7 +72,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-11-05T13:43:22.092628173Z"
+checkedAt = "2026-11-06T13:24:41.308504855Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -80,7 +80,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-11-05T13:43:22.092628173Z"
+checkedAt = "2026-11-06T13:24:41.308504855Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -89,7 +89,7 @@ state = "present"
 valueJson = '"security@agpt.co"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-11-05T13:43:22.092628173Z"
+checkedAt = "2026-11-06T13:24:41.308504855Z"
 confidence = "high"
 method = "unspecified"
 reason = "clear CODEOWNERS team"
@@ -97,7 +97,7 @@ state = "present"
 valueJson = '"@Significant-Gravitas/maintainers"'
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-11-05T13:43:22.092628173Z"
+checkedAt = "2026-11-06T13:24:41.308504855Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -105,7 +105,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-11-05T13:43:22.092628173Z"
+checkedAt = "2026-11-06T13:24:41.308504855Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -114,7 +114,7 @@ state = "present"
 valueJson = '"AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-11-05T13:43:22.092628173Z"
+checkedAt = "2026-11-06T13:24:41.308504855Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -122,7 +122,7 @@ state = "present"
 valueJson = '"https://agpt.co"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-11-05T13:43:22.092628173Z"
+checkedAt = "2026-11-06T13:24:41.308504855Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -131,7 +131,7 @@ state = "present"
 valueJson = '"AutoGPT"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-11-05T13:43:22.092628173Z"
+checkedAt = "2026-11-06T13:24:41.308504855Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -143,6 +143,6 @@ archived = false
 clone_url = "https://github.com/Significant-Gravitas/AutoGPT.git"
 default_branch = "master"
 fork = false
-head_sha = "ff7b0a6bb9ed188fa07f565c2bb19ff97d2ad5fc"
+head_sha = "9cb76f9026d388c9bf2e098af2beae1cc864f055"
 html_url = "https://github.com/Significant-Gravitas/AutoGPT"
-stars = 187911
+stars = 187923

@@ -1,9 +1,8 @@
 # Evidence
 
-- Imported repository name from README.md.
+- Inferred fallback values for `repo.name` and `repo.description` because the imported files did not provide enough structured metadata.
 - Inferred repo.build from build.gradle.kts as `./gradlew build`.
 - Inferred repo.test from build.gradle.kts as `./gradlew test`.
-- Discovered related relation to github.com/TeamNewPipe/NewPipeExtractor from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

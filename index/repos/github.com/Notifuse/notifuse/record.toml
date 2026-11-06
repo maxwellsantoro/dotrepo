@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "checked"
 source = "https://github.com/Notifuse/notifuse"
-generated_at = "2026-10-29T06:07:47.014808221Z"
+generated_at = "2026-11-06T13:24:09.569229115Z"
 
 [record.trust]
 confidence = "high"
@@ -63,6 +63,9 @@ ecosystem = "Go"
 maintainers = []
 security_contact = "https://github.com/Notifuse/notifuse/security/advisories/new"
 
+[docs]
+root = "https://docs.notifuse.com"
+
 [relations]
 references = []
 
@@ -79,7 +82,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-29T06:07:47.014808221Z"
+checkedAt = "2026-11-06T13:24:09.569229115Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -87,15 +90,16 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-29T06:07:47.014808221Z"
+checkedAt = "2026-11-06T13:24:09.569229115Z"
 confidence = "high"
-method = "not_found_in_inspected_sources"
-reason = "no unambiguous documentation declaration detected"
-state = "not_found"
-valueJson = "null"
+method = "extracted"
+reason = "Explicit documentation link at README.md:141: - **Documentation**: [docs.notifuse.com](https://docs.notifuse.com)"
+source = "README.md"
+state = "present"
+valueJson = '"https://docs.notifuse.com"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-29T06:07:47.014808221Z"
+checkedAt = "2026-11-06T13:24:09.569229115Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -104,7 +108,7 @@ state = "present"
 valueJson = '"https://github.com/Notifuse/notifuse/security/advisories/new"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-29T06:07:47.014808221Z"
+checkedAt = "2026-11-06T13:24:09.569229115Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -112,7 +116,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-29T06:07:47.014808221Z"
+checkedAt = "2026-11-06T13:24:09.569229115Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -121,7 +125,7 @@ state = "present"
 valueJson = '"make build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-29T06:07:47.014808221Z"
+checkedAt = "2026-11-06T13:24:09.569229115Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -130,7 +134,7 @@ state = "present"
 valueJson = '"Open-source, self-hosted newsletter, email marketing and transactional email platform. Visual MJML editor, Liquid templating, 7 sending providers."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-29T06:07:47.014808221Z"
+checkedAt = "2026-11-06T13:24:09.569229115Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -138,7 +142,7 @@ state = "present"
 valueJson = '"https://www.notifuse.com"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-29T06:07:47.014808221Z"
+checkedAt = "2026-11-06T13:24:09.569229115Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -147,7 +151,7 @@ state = "present"
 valueJson = '"Notifuse"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-29T06:07:47.014808221Z"
+checkedAt = "2026-11-06T13:24:09.569229115Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -160,6 +164,6 @@ archived = false
 clone_url = "https://github.com/Notifuse/notifuse.git"
 default_branch = "main"
 fork = false
-head_sha = "f635aa09c1050c2df1e8f7b7a0dd6e516019b146"
+head_sha = "fb9a92c79e498fb2219f050bd62fb509da94ee7d"
 html_url = "https://github.com/Notifuse/notifuse"
-stars = 2265
+stars = 2273

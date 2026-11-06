@@ -14,4 +14,4 @@
 
 ## Auto-promotion
 
-All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to checked status (automated pipeline checks, not human review).

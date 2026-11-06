@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/LadybirdBrowser/ladybird"
-generated_at = "2026-11-05T13:42:08.709262352Z"
+generated_at = "2026-11-06T13:23:54.79775359Z"
 
 [record.trust]
 confidence = "medium"
@@ -22,8 +22,8 @@ license = "BSD-2-Clause"
 visibility = "public"
 languages = [
     "C++",
-    "HTML",
     "Rust",
+    "HTML",
     "JavaScript",
     "Python",
     "Assembly",
@@ -35,6 +35,7 @@ languages = [
     "WebAssembly",
     "Kotlin",
     "Dockerfile",
+    "Swift",
     "Objective-C",
     "Java",
     "GLSL",
@@ -55,7 +56,7 @@ security_contact = "unknown"
 root = "Documentation/"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-11-05T13:42:08.709262352Z"
+checkedAt = "2026-11-06T13:23:54.79775359Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -63,7 +64,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-11-05T13:42:08.709262352Z"
+checkedAt = "2026-11-06T13:23:54.79775359Z"
 confidence = "high"
 method = "extracted"
 reason = "Explicit documentation link at README.md:40: Code-related documentation can be found in the [documentation](Documentation/) folder."
@@ -72,7 +73,7 @@ state = "present"
 valueJson = '"Documentation/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-11-05T13:42:08.709262352Z"
+checkedAt = "2026-11-06T13:23:54.79775359Z"
 confidence = "high"
 method = "unspecified"
 reason = "explicitly unknown"
@@ -80,7 +81,7 @@ state = "not_found"
 valueJson = '"unknown"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-11-05T13:42:08.709262352Z"
+checkedAt = "2026-11-06T13:23:54.79775359Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -88,7 +89,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-11-05T13:42:08.709262352Z"
+checkedAt = "2026-11-06T13:23:54.79775359Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -97,7 +98,7 @@ state = "present"
 valueJson = '"cargo build --workspace"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-11-05T13:42:08.709262352Z"
+checkedAt = "2026-11-06T13:23:54.79775359Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -106,7 +107,7 @@ state = "present"
 valueJson = '"Truly independent web browser"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-11-05T13:42:08.709262352Z"
+checkedAt = "2026-11-06T13:23:54.79775359Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -114,7 +115,7 @@ state = "present"
 valueJson = '"https://ladybird.org"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-11-05T13:42:08.709262352Z"
+checkedAt = "2026-11-06T13:23:54.79775359Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -123,7 +124,7 @@ state = "present"
 valueJson = '"Ladybird"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-11-05T13:42:08.709262352Z"
+checkedAt = "2026-11-06T13:23:54.79775359Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -136,6 +137,6 @@ archived = false
 clone_url = "https://github.com/LadybirdBrowser/ladybird.git"
 default_branch = "master"
 fork = false
-head_sha = "fea71ed911810649c0a3372dbe29e50fef6a17cd"
+head_sha = "45f78fb36a59c613c291913b02f61cdb142dfb6e"
 html_url = "https://github.com/LadybirdBrowser/ladybird"
-stars = 66854
+stars = 66885
