@@ -15,7 +15,7 @@ owns dispatch and integration. The former long roadmap is preserved in the
 
 **November 5 local direction:** The user selected `maxwellsantoro.com` for a
 bounded owner/agent-operated pilot. Follow the [shared pilot plan](/Users/maxwell/projects/lazy-collective/docs/pilots/maxwellsantoro-20261105.md)
-from its accepted first session, collecting D3 measurements alongside useful D5
+from its latest retained findings, collecting D3 measurements alongside useful D5
 work. Missing human or all-in cost measurements and seven scheduled days are evidence limitations,
 not prerequisites to this pilot or its demonstrated repairs. Independent
 third-party operation remains a separate claim to establish later. This updates
@@ -23,8 +23,9 @@ the active execution policy; earlier studies and their outcome limits remain int
 
 The pilot's [initial maintenance session is accepted](/Users/maxwell/projects/lazy-collective/docs/pilots/maxwellsantoro-20261105.md#evidence)
 and its two website-description edits were integrated locally at that session.
-Later site work needs its own review and delivery receipts. Reuse the retained
-path on the next real maintenance task after selecting the current source from
+The [subsequent real review](/Users/maxwell/projects/lazy-collective/docs/pilots/maxwellsantoro-20261105.md#second-real-review--november-5-2026-local)
+has its own bounded receipt and did not modify or deploy the site. Reuse the
+latest retained findings on the next real maintenance task after selecting the current source from
 the [shared checkout map](/Users/maxwell/projects/lazy-collective/STATUS.md#checkout-and-capability-map);
 do not repeat the initial setup or comparison.
 The publisher preview's exact binary/provenance limits remain in that receipt.
@@ -50,7 +51,7 @@ accepted and merged after exact-head required checks in
 Main/publication receipts are tracked separately by the parent coordinator.
 Do not rerun D1 or replace the sealed question set. Actual D3 layouts passed engineering and recovery
 controls; human upkeep and combined economics remain unknown. The authorized
-owner/agent-operated website pilot can continue from its accepted first session
+owner/agent-operated website pilot can continue from its latest retained findings
 without an independent operator.
 Collect available costs prospectively and report absent measurements explicitly;
 continue useful pilot work while independent-use and operating-history evidence
@@ -75,7 +76,7 @@ instruction does not establish that implementation is missing.
 | **D2 — Useful decisions across visits** | Completed bounded comparison; preserve the [independent result](docs/evaluations/d2-results-20261105.md), original partial cases and all costs. Source-read request documentation was repaired after the freeze without rescoring | No further primary run required. D4 can use the independently accepted D03 source interpretation; no cost or quality advantage was established | Account for all questions and attempts across initial, unchanged, relevant-change and irrelevant-change visits. Report correct/incorrect assertions, useful decisions, unknowns and unfinished attempts. Changed evidence reopens affected requirements; reuse never renews inspection age. |
 | **D3 — Affordable publisher upkeep** | Preserve accepted [publisher engineering](/Users/maxwell/Documents/Codex/2026-11-04/task/continuation/acceptance/adapter-publisher-review/publisher-receipt.json). Measure available setup/update/recovery costs during the authorized website pilot; do not repeat old trials merely to fill missing counters | No complete-cost or independent-operator prerequisite for pilot execution. Human attention and all-in economics remain unknown where unmeasured; a maintainer or implementer can supply direct observations | Record available operator time, interventions, unresolved fields and source/declaration drift with their measurement boundaries. Unchanged updates need no manual recataloging; genuine disagreements remain visible. Complete economic claims require comparable evidence, but missing measurements do not stop D5 work. |
 | **D4 — One finding handed to a second reader** | Independently accepted [useful transfer/comparison](docs/evaluations/d4-results-20261105.md) and repaired adapter, merged in PR228 after required checks | No additional implementation, primary transfer or source-integration run required for this bounded finding. Package/deployment observations remain distinct; no measured total-cost advantage | Transfer one finding between isolated stores with claim/task scope, source references/hashes, assessed revision, assumptions, attribution and original date. Recipient checks it under its own policy. Compare with sharing the same cached sources alone. |
-| **D5 — One recurring workflow, owner-operated first** | Continue the selected [website pilot](/Users/maxwell/projects/lazy-collective/docs/pilots/maxwellsantoro-20261105.md) from its accepted initial-session receipt on the next real task; reuse the accepted entrypoints and applicable operating material. Preserve the original independent-pilot protocol as a later evidence track | Authorized task/source scope, usable entrypoints and applicable correctness/recovery checks. Collect D3 costs concurrently; incomplete costs, an absent independent operator and a seven-day streak do not block the owner/agent-operated pilot. D4 applies only when findings cross readers | Freeze scope, freshness, useful outputs, finite runs and budget. Record actual work occasions, available publisher/indexer/consumer costs, fallback and failures. Label owner/agent operation honestly; independent-use or total-economy claims still need their own evidence. Outreach, spend and package publication remain scoped actions. |
+| **D5 — One recurring workflow, owner-operated first** | Continue the selected [website pilot](/Users/maxwell/projects/lazy-collective/docs/pilots/maxwellsantoro-20261105.md) from its latest retained findings on the next real task; reuse the accepted entrypoints and applicable operating material. Preserve the original independent-pilot protocol as a later evidence track | Authorized task/source scope, usable entrypoints and applicable correctness/recovery checks. Collect D3 costs concurrently; incomplete costs, an absent independent operator and a seven-day streak do not block the owner/agent-operated pilot. D4 applies only when findings cross readers | Freeze scope, freshness, useful outputs, finite runs and budget. Record actual work occasions, available publisher/indexer/consumer costs, fallback and failures. Label owner/agent operation honestly; independent-use or total-economy claims still need their own evidence. Outreach, spend and package publication remain scoped actions. |
 
 Preparation is useful work but cannot close its outcome gate. In particular,
 D4 cases can be designed before a useful finding exists; a synthetic handoff
