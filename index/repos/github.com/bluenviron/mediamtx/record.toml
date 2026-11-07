@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/bluenviron/mediamtx"
-generated_at = "2026-11-06T13:26:44.820552507Z"
+generated_at = "2026-11-07T12:06:56.853424613Z"
 
 [record.trust]
 confidence = "medium"
@@ -65,7 +65,7 @@ security_contact = "https://mediamtx.org/docs/other/security"
 root = "https://mediamtx.org/docs/kickoff/introduction"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-11-06T13:26:44.820552507Z"
+checkedAt = "2026-11-07T12:06:56.853424613Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -73,7 +73,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-11-06T13:26:44.820552507Z"
+checkedAt = "2026-11-07T12:06:56.853424613Z"
 confidence = "high"
 method = "extracted"
 reason = "Explicit documentation link at README.md:24: | [Install](https://mediamtx.org/docs/kickoff/install) | [Documentation](https://mediamtx.org/docs/kickoff/introduction) |"
@@ -82,7 +82,7 @@ state = "present"
 valueJson = '"https://mediamtx.org/docs/kickoff/introduction"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-11-06T13:26:44.820552507Z"
+checkedAt = "2026-11-07T12:06:56.853424613Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -91,7 +91,7 @@ state = "present"
 valueJson = '"https://mediamtx.org/docs/other/security"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-11-06T13:26:44.820552507Z"
+checkedAt = "2026-11-07T12:06:56.853424613Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -99,7 +99,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-11-06T13:26:44.820552507Z"
+checkedAt = "2026-11-07T12:06:56.853424613Z"
 confidence = "low"
 method = "unresolved"
 reason = "conflicting candidates, no clear winner"
@@ -107,7 +107,7 @@ state = "unresolved"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-11-06T13:26:44.820552507Z"
+checkedAt = "2026-11-07T12:06:56.853424613Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -116,7 +116,7 @@ state = "present"
 valueJson = '"Ready-to-use Media-over-QUIC / SRT / WebRTC / RTSP / RTMP / LL-HLS / MPEG-TS / RTP live media server and media proxy that allows to read, publish, proxy, record and playback real-time video and audio streams."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-11-06T13:26:44.820552507Z"
+checkedAt = "2026-11-07T12:06:56.853424613Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -124,7 +124,7 @@ state = "present"
 valueJson = '"https://mediamtx.org"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-11-06T13:26:44.820552507Z"
+checkedAt = "2026-11-07T12:06:56.853424613Z"
 confidence = "high"
 method = "inferred"
 reason = "extracted from README title with post-cleaners"
@@ -133,7 +133,7 @@ state = "present"
 valueJson = '"mediamtx"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-11-06T13:26:44.820552507Z"
+checkedAt = "2026-11-07T12:06:56.853424613Z"
 confidence = "medium"
 method = "inferred"
 reason = "from workflow fallback"
@@ -146,6 +146,6 @@ archived = false
 clone_url = "https://github.com/bluenviron/mediamtx.git"
 default_branch = "main"
 fork = false
-head_sha = "b04cc448bf577d205313faaedaded82e71bacaba"
+head_sha = "ef25331963fb31e3db368e191c573f60d26b1a73"
 html_url = "https://github.com/bluenviron/mediamtx"
-stars = 20631
+stars = 20639

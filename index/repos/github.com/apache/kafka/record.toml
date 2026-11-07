@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/apache/kafka"
-generated_at = "2026-11-06T13:25:39.766035063Z"
+generated_at = "2026-11-07T12:05:38.471475201Z"
 
 [record.trust]
 confidence = "medium"
@@ -59,7 +59,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-11-06T13:25:39.766035063Z"
+checkedAt = "2026-11-07T12:05:38.471475201Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -67,7 +67,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-11-06T13:25:39.766035063Z"
+checkedAt = "2026-11-07T12:05:38.471475201Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -75,7 +75,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-11-06T13:25:39.766035063Z"
+checkedAt = "2026-11-07T12:05:38.471475201Z"
 confidence = "high"
 method = "extracted"
 reason = "direct email or mailing list"
@@ -84,7 +84,7 @@ state = "present"
 valueJson = '"security@kafka.apache.org"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-11-06T13:25:39.766035063Z"
+checkedAt = "2026-11-07T12:05:38.471475201Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -92,7 +92,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-11-06T13:25:39.766035063Z"
+checkedAt = "2026-11-07T12:05:38.471475201Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -101,7 +101,7 @@ state = "present"
 valueJson = '"./gradlew build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-11-06T13:25:39.766035063Z"
+checkedAt = "2026-11-07T12:05:38.471475201Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -110,7 +110,7 @@ state = "present"
 valueJson = '"Apache Kafka - A distributed event streaming platform"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-11-06T13:25:39.766035063Z"
+checkedAt = "2026-11-07T12:05:38.471475201Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -118,7 +118,7 @@ state = "present"
 valueJson = '"https://kafka.apache.org/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-11-06T13:25:39.766035063Z"
+checkedAt = "2026-11-07T12:05:38.471475201Z"
 confidence = "high"
 method = "inferred"
 reason = "extracted from README title with post-cleaners"
@@ -127,7 +127,7 @@ state = "present"
 valueJson = '"kafka"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-11-06T13:25:39.766035063Z"
+checkedAt = "2026-11-07T12:05:38.471475201Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -140,6 +140,6 @@ archived = false
 clone_url = "https://github.com/apache/kafka.git"
 default_branch = "trunk"
 fork = false
-head_sha = "85bcc7780c50de02df3998527e73673cee3c8c89"
+head_sha = "ef6a6c1edb449b41e7804ca67793f638674c87ea"
 html_url = "https://github.com/apache/kafka"
-stars = 34179
+stars = 34190

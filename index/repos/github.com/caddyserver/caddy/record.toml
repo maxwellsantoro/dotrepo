@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/caddyserver/caddy"
-generated_at = "2026-11-06T13:26:58.843272486Z"
+generated_at = "2026-11-07T12:07:09.469379655Z"
 
 [record.trust]
 confidence = "medium"
@@ -67,7 +67,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-11-06T13:26:58.843272486Z"
+checkedAt = "2026-11-07T12:07:09.469379655Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -75,7 +75,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-11-06T13:26:58.843272486Z"
+checkedAt = "2026-11-07T12:07:09.469379655Z"
 confidence = "high"
 method = "extracted"
 reason = 'Explicit documentation link at README.md:17: <a href="https://caddyserver.com/docs/">Documentation</a> ·'
@@ -84,7 +84,7 @@ state = "present"
 valueJson = '"https://caddyserver.com/docs/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-11-06T13:26:58.843272486Z"
+checkedAt = "2026-11-07T12:07:09.469379655Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -93,7 +93,7 @@ state = "present"
 valueJson = '"https://github.com/caddyserver/caddy/security/advisories/new"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-11-06T13:26:58.843272486Z"
+checkedAt = "2026-11-07T12:07:09.469379655Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -101,7 +101,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-11-06T13:26:58.843272486Z"
+checkedAt = "2026-11-07T12:07:09.469379655Z"
 confidence = "low"
 method = "unresolved"
 reason = "conflicting candidates, no clear winner"
@@ -109,7 +109,7 @@ state = "unresolved"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-11-06T13:26:58.843272486Z"
+checkedAt = "2026-11-07T12:07:09.469379655Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -118,7 +118,7 @@ state = "present"
 valueJson = '"Fast and extensible multi-platform HTTP/1-2-3 web server with automatic HTTPS"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-11-06T13:26:58.843272486Z"
+checkedAt = "2026-11-07T12:07:09.469379655Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -126,7 +126,7 @@ state = "present"
 valueJson = '"https://caddyserver.com"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-11-06T13:26:58.843272486Z"
+checkedAt = "2026-11-07T12:07:09.469379655Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -135,7 +135,7 @@ state = "present"
 valueJson = '"Caddy"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-11-06T13:26:58.843272486Z"
+checkedAt = "2026-11-07T12:07:09.469379655Z"
 confidence = "low"
 method = "unresolved"
 reason = "conflicting candidates, no clear winner"
@@ -147,6 +147,6 @@ archived = false
 clone_url = "https://github.com/caddyserver/caddy.git"
 default_branch = "master"
 fork = false
-head_sha = "b3d67c861d0957f68566298227241a171db6e883"
+head_sha = "9b07062e9b0452b4e1fa9e7fec0a4c6d2d175e89"
 html_url = "https://github.com/caddyserver/caddy"
-stars = 78841
+stars = 78864

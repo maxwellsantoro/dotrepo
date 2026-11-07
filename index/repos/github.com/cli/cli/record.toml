@@ -2,17 +2,14 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "imported"
 source = "https://github.com/cli/cli"
-generated_at = "2026-10-29T06:14:08.353795277Z"
+generated_at = "2026-11-07T12:07:40.764378225Z"
 
 [record.trust]
 confidence = "medium"
-provenance = [
-    "imported",
-    "inferred",
-]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `.github/SECURITY.md`, `go.mod`, and `Makefile`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@cli/code-reviewers` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `go.mod`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `.github/SECURITY.md`, `Makefile`, and `go.mod`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@cli/code-reviewers` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.test` from `Makefile`. Left `repo.build` unset because Go workflow execution context has unsupported structure in `.github/workflows/dependabot-triage.lock.yml`, `.github/workflows/deployment.yml`; conventional commands cannot establish repository scope/setup. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "GitHub CLI"
@@ -27,7 +24,6 @@ languages = [
     "PowerShell",
     "Batchfile",
 ]
-build = "go build ./..."
 test = "make test"
 topics = [
     "github-api-v4",
@@ -52,7 +48,7 @@ team = "@cli/code-reviewers"
 security_contact = "https://github.com/cli/cli/security/advisories"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-29T06:14:08.353795277Z"
+checkedAt = "2026-11-07T12:07:40.764378225Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -60,7 +56,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-29T06:14:08.353795277Z"
+checkedAt = "2026-11-07T12:07:40.764378225Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -68,7 +64,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-29T06:14:08.353795277Z"
+checkedAt = "2026-11-07T12:07:40.764378225Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -77,7 +73,7 @@ state = "present"
 valueJson = '"https://github.com/cli/cli/security/advisories"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-29T06:14:08.353795277Z"
+checkedAt = "2026-11-07T12:07:40.764378225Z"
 confidence = "high"
 method = "unspecified"
 reason = "clear CODEOWNERS team"
@@ -85,16 +81,15 @@ state = "present"
 valueJson = '"@cli/code-reviewers"'
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-29T06:14:08.353795277Z"
-confidence = "medium"
-method = "inferred"
-reason = "inferred ecosystem default from build-tool metadata"
-source = "go.mod"
-state = "present"
-valueJson = '"go build ./..."'
+checkedAt = "2026-11-07T12:07:40.764378225Z"
+confidence = "low"
+method = "unresolved"
+reason = "conflicting candidates, no clear winner"
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-29T06:14:08.353795277Z"
+checkedAt = "2026-11-07T12:07:40.764378225Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -103,7 +98,7 @@ state = "present"
 valueJson = '"GitHub’s official command line tool"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-29T06:14:08.353795277Z"
+checkedAt = "2026-11-07T12:07:40.764378225Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -111,7 +106,7 @@ state = "present"
 valueJson = '"https://cli.github.com"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-29T06:14:08.353795277Z"
+checkedAt = "2026-11-07T12:07:40.764378225Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -120,7 +115,7 @@ state = "present"
 valueJson = '"GitHub CLI"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-29T06:14:08.353795277Z"
+checkedAt = "2026-11-07T12:07:40.764378225Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -133,6 +128,6 @@ archived = false
 clone_url = "https://github.com/cli/cli.git"
 default_branch = "trunk"
 fork = false
-head_sha = "f7a06a18a91eef5c0b218b549dab64b86f36f8b9"
+head_sha = "736c68f674113337685e3eb1f908602a03b8f99b"
 html_url = "https://github.com/cli/cli"
-stars = 46790
+stars = 46901

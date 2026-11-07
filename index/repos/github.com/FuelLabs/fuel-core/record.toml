@@ -2,16 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "checked"
 source = "https://github.com/FuelLabs/fuel-core"
-generated_at = "2026-10-27T18:23:19.792396Z"
+generated_at = "2026-11-07T12:03:06.102073177Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
+    "checked",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `CONTRIBUTING.md`, and `Cargo.toml`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. "
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `Makefile`, `CONTRIBUTING.md`, and `Cargo.toml`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Withheld `repo.build` from `CONTRIBUTING.md` because its Cargo selector describes a component, not the repository default. Imported `repo.build` from `Makefile`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to checked: all fields are honestly resolved."
 
 [repo]
 name = "fuel-core"
@@ -26,6 +27,7 @@ languages = [
     "Dockerfile",
     "Makefile",
 ]
+build = "make build"
 test = "cargo test --all-targets"
 topics = [
     "blockchain",
@@ -33,7 +35,7 @@ topics = [
 ]
 
 [repo.toolchain]
-min = "1.94.1"
+min = "1.95.0"
 ecosystem = "Rust"
 
 [owners]
@@ -51,7 +53,7 @@ security_contact = "https://github.com/FuelLabs/fuel-core/security/advisories/ne
 root = "https://docs.rs/fuel-core/"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T18:23:19.792396Z"
+checkedAt = "2026-11-07T12:03:06.102073177Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -59,7 +61,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T18:23:19.792396Z"
+checkedAt = "2026-11-07T12:03:06.102073177Z"
 confidence = "high"
 method = "extracted"
 reason = "Explicit documentation link at README.md:6: [![docs](https://docs.rs/fuel-core/badge.svg)](https://docs.rs/fuel-core/)"
@@ -68,7 +70,7 @@ state = "present"
 valueJson = '"https://docs.rs/fuel-core/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T18:23:19.792396Z"
+checkedAt = "2026-11-07T12:03:06.102073177Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -77,7 +79,7 @@ state = "present"
 valueJson = '"https://github.com/FuelLabs/fuel-core/security/advisories/new"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T18:23:19.792396Z"
+checkedAt = "2026-11-07T12:03:06.102073177Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -85,16 +87,16 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-29T02:06:09.861151Z"
-confidence = "low"
-method = "source_scope_review"
-reason = "Package-specific build with disabled defaults in the Build issues troubleshooting section."
-source = "CONTRIBUTING.md"
-state = "unresolved"
-valueJson = "null"
+checkedAt = "2026-11-07T12:03:06.102073177Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "Makefile"
+state = "present"
+valueJson = '"make build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T18:23:19.792396Z"
+checkedAt = "2026-11-07T12:03:06.102073177Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -103,7 +105,7 @@ state = "present"
 valueJson = '"Rust full node implementation of the Fuel v2 protocol."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T18:23:19.792396Z"
+checkedAt = "2026-11-07T12:03:06.102073177Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -111,7 +113,7 @@ state = "present"
 valueJson = '"https://github.com/FuelLabs/fuel-core"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T18:23:19.792396Z"
+checkedAt = "2026-11-07T12:03:06.102073177Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -120,7 +122,7 @@ state = "present"
 valueJson = '"fuel-core"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T18:23:19.792396Z"
+checkedAt = "2026-11-07T12:03:06.102073177Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -133,6 +135,6 @@ archived = false
 clone_url = "https://github.com/FuelLabs/fuel-core.git"
 default_branch = "master"
 fork = false
-head_sha = "ffd6563763582f8b0d9073a7cc115b57002ee684"
+head_sha = "fec988ebe877c4298e2cc0dcc539dec6d080f00b"
 html_url = "https://github.com/FuelLabs/fuel-core"
-stars = 56783
+stars = 56768

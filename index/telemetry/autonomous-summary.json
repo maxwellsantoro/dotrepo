@@ -15,13 +15,13 @@
     "unknown": 8
   },
   "firstRunAt": "2026-06-29T00:55:19Z",
-  "generatedAt": "2026-11-06T13:27:04Z",
-  "lastRunAt": "2026-11-06T13:27:04Z",
+  "generatedAt": "2026-11-07T12:07:40Z",
+  "lastRunAt": "2026-11-07T12:07:40Z",
   "previousWindowCosts": {
     "adjudicationBudgetUseRate": 0.0,
     "adjudicationCallBudget": 0,
     "adjudicationCalls": 0,
-    "crawled": 150,
+    "crawled": 101,
     "tokenUsageComplete": true,
     "tokensPerCrawled": 0.0,
     "tokensUsed": 0,
@@ -31,26 +31,26 @@
   "previousWindowRates": {
     "adjudicationRate": 0.0,
     "apiEscalationRate": 0.0,
-    "failureRate": 0.006667,
+    "failureRate": 0.009901,
     "secondOpinionRate": 0.0,
     "zeroModelRate": 1.0
   },
   "previousWindowRepositoriesByAdjudicationTier": {
-    "deterministic": 28
+    "deterministic": 17
   },
   "previousWindowRunCount": 3,
   "rates": {
     "adjudicationRate": 0.0,
-    "failureRate": 0.004807692307692308,
-    "promotionRate": 0.6519230769230769,
-    "writeRate": 0.9951923076923077,
+    "failureRate": 0.004694835680751174,
+    "promotionRate": 0.647887323943662,
+    "writeRate": 0.9953051643192489,
     "zeroModelRate": 1.0
   },
   "recentWindowCosts": {
     "adjudicationBudgetUseRate": 0.0,
     "adjudicationCallBudget": 0,
     "adjudicationCalls": 0,
-    "crawled": 101,
+    "crawled": 150,
     "tokenUsageComplete": true,
     "tokensPerCrawled": 0.0,
     "tokensUsed": 0,
@@ -65,7 +65,7 @@
     "zeroModelRate": 1.0
   },
   "recentWindowRepositoriesByAdjudicationTier": {
-    "deterministic": 24
+    "deterministic": 35
   },
   "recentWindowRunCount": 3,
   "recurringFailures": [
@@ -103,18 +103,18 @@
     }
   ],
   "repositoriesByAdjudicationTier": {
-    "deterministic": 460
+    "deterministic": 471
   },
-  "runCount": 43,
+  "runCount": 44,
   "schema": "dotrepo/autonomous-telemetry-summary/v0.1",
   "synthesisFailureClasses": {},
   "totals": {
     "adjudicationCallBudget": 68,
     "adjudicationCalls": 0,
-    "crawled": 2080,
+    "crawled": 2130,
     "discoveryQueued": 0,
     "failed": 10,
-    "promoted": 1356,
+    "promoted": 1380,
     "qualityReprocessQueued": 1538,
     "skipped": 0,
     "synthesisFailed": 0,
@@ -124,8 +124,8 @@
     "tokensUsed": 0,
     "tokensUsedKnownSubtotal": 0,
     "unknownTokenUsageCalls": 0,
-    "written": 2070,
-    "zeroModelRuns": 2080
+    "written": 2120,
+    "zeroModelRuns": 2130
   },
   "worstRunRates": {
     "adjudicationRate": 0.0,

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "checked"
 source = "https://github.com/asgeirtj/system_prompts_leaks"
-generated_at = "2026-11-05T13:46:33.390154079Z"
+generated_at = "2026-11-07T12:05:53.740474247Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a main
 
 [repo]
 name = "System Prompts Leaks"
-description = "Documented system prompts from Anthropic - Claude Fable 5.1, Opus 5.5, Claude Design, Claude Code. OpenAI - ChatGPT GPT-6-Astra, Codex. Google - Gemini 3.8 Flash, 3.1 Pro, Antigravity. xAI - Grok, Grok Bot, Cursor, Kimi and more! Updated regularly."
+description = "Leaked system prompts of ChatGPT, Claude, Gemini and more. The hidden system prompt of every popular chatbot, in full, every version since May 2025. Also Anthropic Claude Code, OpenAI Codex, Google Antigravity, xAI Grok, Meta Muse, Moonshot Kimi, Alibaba Qwen, Z.ai GLM ZCode, MiniMax, Cursor, Perplexity, DeepSeek and 30+ others. Updated daily."
 homepage = "https://github.com/asgeirtj/system_prompts_leaks"
 license = "CC0-1.0"
 visibility = "public"
@@ -52,7 +52,7 @@ topics = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-11-05T13:46:33.390154079Z"
+checkedAt = "2026-11-07T12:05:53.740474247Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -60,7 +60,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-11-05T13:46:33.390154079Z"
+checkedAt = "2026-11-07T12:05:53.740474247Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -68,7 +68,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-11-05T13:46:33.390154079Z"
+checkedAt = "2026-11-07T12:05:53.740474247Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -76,7 +76,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-11-05T13:46:33.390154079Z"
+checkedAt = "2026-11-07T12:05:53.740474247Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -84,7 +84,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-11-05T13:46:33.390154079Z"
+checkedAt = "2026-11-07T12:05:53.740474247Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -92,16 +92,16 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-11-05T13:46:33.390154079Z"
+checkedAt = "2026-11-07T12:05:53.740474247Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
 source = "GitHub API"
 state = "present"
-valueJson = '"Documented system prompts from Anthropic - Claude Fable 5.1, Opus 5.5, Claude Design, Claude Code. OpenAI - ChatGPT GPT-6-Astra, Codex. Google - Gemini 3.8 Flash, 3.1 Pro, Antigravity. xAI - Grok, Grok Bot, Cursor, Kimi and more! Updated regularly."'
+valueJson = '"Leaked system prompts of ChatGPT, Claude, Gemini and more. The hidden system prompt of every popular chatbot, in full, every version since May 2025. Also Anthropic Claude Code, OpenAI Codex, Google Antigravity, xAI Grok, Meta Muse, Moonshot Kimi, Alibaba Qwen, Z.ai GLM ZCode, MiniMax, Cursor, Perplexity, DeepSeek and 30+ others. Updated daily."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-11-05T13:46:33.390154079Z"
+checkedAt = "2026-11-07T12:05:53.740474247Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -109,7 +109,7 @@ state = "present"
 valueJson = '"https://github.com/asgeirtj/system_prompts_leaks"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-11-05T13:46:33.390154079Z"
+checkedAt = "2026-11-07T12:05:53.740474247Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README title with post-cleaners"
@@ -118,7 +118,7 @@ state = "present"
 valueJson = '"System Prompts Leaks"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-11-05T13:46:33.390154079Z"
+checkedAt = "2026-11-07T12:05:53.740474247Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -130,6 +130,6 @@ archived = false
 clone_url = "https://github.com/asgeirtj/system_prompts_leaks.git"
 default_branch = "main"
 fork = false
-head_sha = "bb7bbddf377c8d82c56f533134c6b93f13d245ae"
+head_sha = "41224e64850cce814500be7938999f33047fbf3e"
 html_url = "https://github.com/asgeirtj/system_prompts_leaks"
-stars = 70822
+stars = 70969

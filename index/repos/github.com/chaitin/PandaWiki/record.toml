@@ -4,19 +4,18 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "checked"
 source = "https://github.com/chaitin/PandaWiki"
-generated_at = "2026-10-27T17:56:43.184815Z"
+generated_at = "2026-11-07T12:07:23.132157086Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
-    "inferred",
     "checked",
 ]
-notes = 'Bootstrapped from `README.md` and `SECURITY.md`. Filled `repo.name` with inferred defaults. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Ignored component-scoped commands from `web/package.json` as repository defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to checked: all fields are honestly resolved.'
+notes = 'Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Ignored component-scoped commands from `web/package.json` as repository defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to checked: all fields are honestly resolved.'
 
 [repo]
-name = "PandaWiki"
+name = "PandaWiki SaaS 版"
 description = "PandaWiki 是一款 AI 大模型驱动的开源知识库搭建系统，帮助你快速构建智能化的 产品文档、技术文档、FAQ、博客系统，借助大模型的力量为你提供 AI 创作、AI 问答、AI 搜索等能力。"
 homepage = "https://pandawiki.docs.baizhi.cloud/"
 license = "AGPL-3.0"
@@ -49,7 +48,7 @@ maintainers = []
 security_contact = "unknown"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-10-27T17:56:43.184815Z"
+checkedAt = "2026-11-07T12:07:23.132157086Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -57,7 +56,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-10-27T17:56:43.184815Z"
+checkedAt = "2026-11-07T12:07:23.132157086Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no unambiguous documentation declaration detected"
@@ -65,7 +64,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-10-27T17:56:43.184815Z"
+checkedAt = "2026-11-07T12:07:23.132157086Z"
 confidence = "high"
 method = "unspecified"
 reason = "explicitly unknown"
@@ -73,7 +72,7 @@ state = "not_found"
 valueJson = '"unknown"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-10-27T17:56:43.184815Z"
+checkedAt = "2026-11-07T12:07:23.132157086Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -81,7 +80,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-27T17:56:43.184815Z"
+checkedAt = "2026-11-07T12:07:23.132157086Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -89,7 +88,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-10-27T17:56:43.184815Z"
+checkedAt = "2026-11-07T12:07:23.132157086Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -98,7 +97,7 @@ state = "present"
 valueJson = '"PandaWiki 是一款 AI 大模型驱动的开源知识库搭建系统，帮助你快速构建智能化的 产品文档、技术文档、FAQ、博客系统，借助大模型的力量为你提供 AI 创作、AI 问答、AI 搜索等能力。"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-10-27T17:56:43.184815Z"
+checkedAt = "2026-11-07T12:07:23.132157086Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -106,16 +105,16 @@ state = "present"
 valueJson = '"https://pandawiki.docs.baizhi.cloud/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-27T17:56:43.184815Z"
+checkedAt = "2026-11-07T12:07:23.132157086Z"
 confidence = "high"
-method = "inferred"
+method = "extracted"
 reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
-valueJson = '"PandaWiki"'
+valueJson = '"PandaWiki SaaS 版"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-10-27T17:56:43.184815Z"
+checkedAt = "2026-11-07T12:07:23.132157086Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -127,6 +126,6 @@ archived = false
 clone_url = "https://github.com/chaitin/PandaWiki.git"
 default_branch = "main"
 fork = false
-head_sha = "0b26db72ceb2f0f053a5c48b44546d7a342caacb"
+head_sha = "67e1081053e22a4630da9074b1092b6a7ce33199"
 html_url = "https://github.com/chaitin/PandaWiki"
-stars = 10341
+stars = 10477

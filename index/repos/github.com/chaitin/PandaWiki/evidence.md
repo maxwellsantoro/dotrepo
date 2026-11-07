@@ -1,7 +1,7 @@
 # Evidence
 
+- Imported repository name from README.md.
 - Imported SECURITY.md, but no explicit contact channel was parsed, so security_contact = "unknown" is intentional.
-- Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.
 - Ignored component-scoped commands from `web/package.json` as repository defaults.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
@@ -14,4 +14,4 @@
 
 ## Auto-promotion
 
-All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to checked status (automated pipeline checks, not human review).
